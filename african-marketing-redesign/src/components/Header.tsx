@@ -9,9 +9,9 @@ const NavigationLinks = [
   { name: 'Products', href: '/products', hasMega: true },
   { name: 'Brands', href: '/brands' },
   { name: 'About Us', href: '/about-us', dropdown: [
-    { name: 'Our Team', href: '/our-team' },
-    { name: 'History', href: '/history' },
-    { name: 'Delivery Routes', href: '/delivery-routes' }
+    { name: 'Our Team', href: '/about-us/our-team' },
+    { name: 'History', href: '/about-us/company-history' },
+    { name: 'Delivery Routes', href: '/about-us/delivery-routes' }
   ]},
   { name: 'Customers', href: '/customers' },
   { name: 'Contact / Application', href: '/contact' },
@@ -71,28 +71,17 @@ export default function Header() {
             {NavigationLinks.map((link) => (
               <div 
                 key={link.name}
-                className="relative group"
-                onMouseEnter={() => link.hasMega || link.dropdown ? setActiveMega(link.name) : null}
-                onMouseLeave={() => setActiveMega(null)}
-              >
-                <Link 
-                  href={link.href} 
-                  className="text-sm font-medium text-stone-700 hover:text-brand-700 transition-colors flex items-center gap-1"
-                >
+              <div className="relative group" onMouseEnter={() => link.hasMega || link.dropdown ? setActiveMega(link.name) : null} onMouseLeave={() => setActiveMega(null)}>
+                <Link href={link.href} className="text-sm font-medium text-stone-700 hover:text-brand-700 transition-colors flex items-center gap-1">
                   {link.name}
                   {(link.hasMega || link.dropdown) && <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />}
                 </Link>
 
-                {/* Dropdown Menu */}
                 {link.dropdown && activeMega === link.name && (
-                  <div className="absolute top-full left-0 pt-4 w-48 animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="bg-white border border-stone-100 shadow-xl rounded-xl overflow-hidden py-2">
+                  <div className="absolute top-full text-left left-0 pt-4 w-56 animate-in fade-in slide-in-from-top-2 duration-200">
+                    <div className="bg-white border text-left border-stone-100 shadow-xl rounded-xl overflow-hidden py-2">
                       {link.dropdown.map(item => (
-                        <Link 
-                          key={item.name} 
-                          href={item.href}
-                          className="block px-4 py-2 text-sm text-stone-600 hover:bg-stone-50 hover:text-brand-700 transition-colors"
-                        >
+                        <Link key={item.name} href={item.href} className="block px-4 py-2 text-sm text-stone-600 hover:bg-stone-50 hover:text-brand-700 transition-colors hover:pl-6">
                           {item.name}
                         </Link>
                       ))}
