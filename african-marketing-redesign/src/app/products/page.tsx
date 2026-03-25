@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { PackageSearch, Filter } from 'lucide-react';
 
 const ProductsList = [
@@ -34,11 +35,25 @@ export default function ProductsPage() {
         <div className="w-full lg:w-64 shrink-0">
           <h3 className="font-semibold text-stone-900 mb-6 uppercase tracking-wider text-xs">Categories</h3>
           <ul className="space-y-3 font-medium text-sm text-stone-600">
-            {['All Products', 'Beverages', 'Foods (Ambient)', 'Foods (Chilled)', 'Foods (Frozen)', 'Cleaning', 'Packaging', 'Appliances'].map((cat, i) => (
-              <li key={cat}>
-                <a href="#" className={`block transition-colors hover:text-brand-600 ${i === 0 ? 'text-brand-700 font-semibold' : ''}`}>
-                  {cat}
-                </a>
+            <li>
+              <Link href="/products" className="block transition-colors hover:text-brand-600 text-brand-700 font-semibold">
+                All Products
+              </Link>
+            </li>
+            {[
+              { slug: 'beverages', name: 'Beverages' },
+              { slug: 'foods-ambient', name: 'Foods (Ambient)' },
+              { slug: 'foods-chilled', name: 'Foods (Chilled)' },
+              { slug: 'foods-frozen', name: 'Foods (Frozen)' },
+              { slug: 'foods-fresh', name: 'Foods (Fresh)' },
+              { slug: 'cleaning', name: 'Cleaning' },
+              { slug: 'packaging', name: 'Packaging' },
+              { slug: 'appliances', name: 'Appliances' },
+            ].map((cat) => (
+              <li key={cat.slug}>
+                <Link href={`/products/${cat.slug}`} className="block transition-colors hover:text-brand-600">
+                  {cat.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -47,7 +62,7 @@ export default function ProductsPage() {
         {/* Product Grid */}
         <div className="flex-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {ProductsList.map((product) => (
-            <a 
+            <Link 
               key={product.id}
               href={product.link}
               className="bg-white border border-stone-100 rounded-xl p-4 flex flex-col hover:shadow-xl hover:border-brand-200 transition-all duration-300 group"
@@ -60,7 +75,7 @@ export default function ProductsPage() {
                 {product.name}
               </h3>
               <p className="text-xs text-stone-500 mt-auto pt-4">{product.category}</p>
-            </a>
+            </Link>
           ))}
         </div>
       </div>
