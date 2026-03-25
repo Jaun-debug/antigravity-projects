@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Desert Tracks - Master Component Library</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -233,35 +234,6 @@
         "file": "component_17.html"
     },
     {
-        "id": "component_18",
-        "title": "\u200b\u200b\u200b11-DAY WILDLIFE OF NAMIBIA\u00a0 SELF-DRIVE SAFARI",
-        "tag": "Self-Drive Doc",
-        "desc": "Extracted from SELF-DRIVE ITINERARY / \u200b\u200b\u200b11-DAY WILDLIFE OF NAMIBIA\u00a0 SELF-DRIVE SAFARI.docx",
-        "file": "component_18.html"
-    },
-    {
-        "id": "component_19",
-        "title": "11-DAY SOUTH OF NAMIBIA",
-        "tag": "Self-Drive Doc",
-        "desc": "Extracted from SELF-DRIVE ITINERARY / 11-DAY SOUTH OF NAMIBIA.docx",
-        "file": "component_19.html"
-    },
-    {
-        "id": "component_20",
-        "title": "18 DAY HIDDEN TREASURES OF NAMIBIA SELF-DRIVE SAFARI",
-        "tag": "Self-Drive Doc",
-        "desc": "Extracted from SELF-DRIVE ITINERARY / 18 DAY HIDDEN TREASURES OF NAMIBIA SELF-DRIVE SAFARI.docx",
-        "file": "component_20.html"
-    },
-
-    {
-        "id": "component_23",
-        "title": "17-DAY NAMIBIA, CHOBE & VIC FALLS  SELF-DRIVE SAFARI ",
-        "tag": "Self-Drive Doc",
-        "desc": "Extracted from SELF-DRIVE ITINERARY / 17-DAY NAMIBIA, CHOBE & VIC FALLS  SELF-DRIVE SAFARI .docx",
-        "file": "component_23.html"
-    },
-    {
         "id": "component_24",
         "title": "14-Day Namibia Comfort Safari (Final UX)",
         "tag": "Self-Drive Doc",
@@ -318,55 +290,55 @@
             const container = document.getElementById('navContainer');
             container.innerHTML = '';
             
-            let addedSelfDriveHeader = false;
-            let addedUIHeader = false;
-            let sdFolderList = null;
+            // Helper to generate a folder
+            const buildFolder = (title) => {
+                const details = document.createElement('details');
+                details.open = true;
+                const summary = document.createElement('summary');
+                summary.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: var(--orange); margin: 25px 0 5px 5px; letter-spacing: 2px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: center; user-select: none;";
+                summary.innerHTML = '<svg style="margin-right: 6px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>' + title;
+                const inner = document.createElement('div');
+                inner.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-top: 10px;";
+                details.appendChild(summary);
+                details.appendChild(inner);
+                return { details, inner };
+            };
+
+            const folders = {
+                'Self-Drive Doc': buildFolder('Self-Drive Safaris'),
+                'Guided Doc': buildFolder('Guided Safaris'),
+                'Luxury Doc': buildFolder('Luxury Safaris'),
+                'Fly-In Doc': buildFolder('Fly-In Safaris')
+            };
+
+            const uiToolsContainer = document.createElement('div');
+            const uiHeader = document.createElement('div');
+            uiHeader.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: #888; margin: 10px 0 5px 5px; letter-spacing: 2px; font-weight: 700;";
+            uiHeader.innerText = "Premium UI Tools";
+            uiToolsContainer.appendChild(uiHeader);
+            
+            const layoutContainer = document.createElement('div');
+            layoutContainer.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-top: 10px;";
+            uiToolsContainer.appendChild(layoutContainer);
 
             components.forEach((cmp, idx) => {
-                // Add Folder Categories
-                if (cmp.tag !== 'Self-Drive Doc' && !addedUIHeader) {
-                    const uiHeader = document.createElement('div');
-                    uiHeader.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: #888; margin: 10px 0 5px 5px; letter-spacing: 2px; font-weight: 700;";
-                    uiHeader.innerText = "Premium UI Tools";
-                    container.appendChild(uiHeader);
-                    addedUIHeader = true;
-                } else if (cmp.tag === 'Self-Drive Doc' && !addedSelfDriveHeader) {
-                    const detailsNode = document.createElement('details');
-                    detailsNode.open = true; // Folders start open by default
-
-                    const summaryNode = document.createElement('summary');
-                    summaryNode.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: var(--orange); margin: 25px 0 5px 5px; letter-spacing: 2px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: center; user-select: none;";
-                    summaryNode.innerHTML = `
-                        <svg style="margin-right: 6px;" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
-                        Self-Drive Safaris
-                    `;
-                    
-                    // Create an inner wrapper for the buttons to maintain the grid gap styling
-                    sdFolderList = document.createElement('div');
-                    sdFolderList.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-top: 10px;";
-
-                    detailsNode.appendChild(summaryNode);
-                    detailsNode.appendChild(sdFolderList);
-                    container.appendChild(detailsNode);
-                    addedSelfDriveHeader = true;
-                }
-
                 const el = document.createElement('div');
                 el.className = 'nav-item ' + (idx === activeIndex ? 'active' : '');
                 el.onclick = () => loadComponent(idx);
-                el.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start;">
-                        <span class="nav-item-title">${cmp.title}</span>
-                    </div>
-                `;
+                el.innerHTML = '<div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start;"><span class="nav-item-title">' + cmp.title + '</span></div>';
 
-                // If it belongs to self-drive doc, put it in the expandable folder array! 
-                if (cmp.tag === 'Self-Drive Doc' && sdFolderList) {
-                    sdFolderList.appendChild(el);
+                if (folders[cmp.tag]) {
+                    folders[cmp.tag].inner.appendChild(el);
                 } else {
-                    container.appendChild(el);
+                    layoutContainer.appendChild(el);
                 }
             });
+
+            container.appendChild(uiToolsContainer);
+            container.appendChild(folders['Self-Drive Doc'].details);
+            container.appendChild(folders['Guided Doc'].details);
+            container.appendChild(folders['Luxury Doc'].details);
+            container.appendChild(folders['Fly-In Doc'].details);
         }
 
         
