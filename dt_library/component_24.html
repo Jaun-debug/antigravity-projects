@@ -217,6 +217,7 @@
         }
 
         .lux-title {
+            color: #ffffff !important;
             font-family: 'Playfair Display', serif;
             font-size: clamp(2.5rem, 4vw, 4.5rem);
             font-weight: 400;
@@ -401,54 +402,6 @@
         <div id="lux-bg-top" class="lux-bg-layer"></div>
         <div class="lux-overlay"></div>
         
-        <!-- Interactive Map Widget Overlay (Appears on scroll) -->
-        <div class="lux-interactive-map">
-            <!-- Authentic Namibia Map Background -->
-            <img src="assets/namibia-rustic-map.svg" alt="Namibia Map Route" class="map-bg">
-            
-            <!-- MAP PINS -->
-            <div class="lux-map-pin" data-target="day-1 day-14" style="top: 55%; left: 47%;">
-                <span class="pin-text">1</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Windhoek</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-2" style="top: 70%; left: 55%;">
-                <span class="pin-text">2</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Kalahari</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-3" style="top: 65%; left: 28%;">
-                <span class="pin-text">3</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Sossusvlei</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-5" style="top: 55%; left: 16%;">
-                <span class="pin-text">4</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Swakopmund</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-7" style="top: 38%; left: 20%;">
-                <span class="pin-text">5</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Damaraland</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-9" style="top: 25%; left: 40%;">
-                <span class="pin-text">6</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Etosha South</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-10" style="top: 20%; left: 55%;">
-                <span class="pin-text">7</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">East Etosha</span>
-            </div>
-            <div class="lux-map-pin" data-target="day-12" style="top: 40%; left: 47%;">
-                <span class="pin-text">8</span>
-                <svg class="pin-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14h14M3 8h11M14 8l3 6h4v4h-3M3 8v10h2M16 11v-3M3 8C3 7 4 6 5 6h9l2 2v3"></path><circle cx="7" cy="18" r="2"></circle><circle cx="17" cy="18" r="2"></circle></svg>
-                <span class="pin-label">Otjiwa</span>
-            </div>
-        </div>
-
         <div class="lux-hero-content">
             <div class="lux-tag-small">DESERT TRACKS EXCLUSIVE</div>
             <h1 class="lux-title">14-Day Namibia<br>Comfort Safari</h1>
@@ -653,78 +606,54 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const pins = document.querySelectorAll('.lux-map-pin');
+    // --- SAFE WORDPRESS INITIALIZATION ---
+    function initLuxHeroFade() {
         const dayBlocks = document.querySelectorAll('.lux-day-block');
-        const mapWidget = document.querySelector('.lux-interactive-map');
         const bgBase = document.getElementById('lux-bg-base');
         const bgTop = document.getElementById('lux-bg-top');
-        let scrollTimeout;
-        let currentBgImg = "https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg";
+        
+        if (!dayBlocks.length || !bgBase || !bgTop) return;
 
-        // Auto-show map on scroll, hide when stopped for 2 seconds
-        window.addEventListener('scroll', () => {
-            if (mapWidget && window.innerWidth >= 1024) {
-                // Show map while scrolling
-                mapWidget.classList.add('is-visible');
-                
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(() => {
-                    // Hide map when there is no movement for 2 seconds
-                    mapWidget.classList.remove('is-visible');
-                }, 2000); 
-            }
-        });
+        // Force clear sticky blockers
+        let parentNode = document.querySelector('.lux-container');
+        if (parentNode) parentNode = parentNode.parentElement;
+        while (parentNode && parentNode.tagName !== 'BODY') {
+            parentNode.style.setProperty('overflow', 'visible', 'important');
+            parentNode.style.setProperty('overflow-x', 'visible', 'important');
+            parentNode.style.setProperty('overflow-y', 'visible', 'important');
+            parentNode = parentNode.parentElement;
+        }
 
-        // Setup Intersection Observer to detect which day is currently being viewed
         const observer = new IntersectionObserver((entries) => {
-            // Find ALL intersecting entries, but we only want the one that is currently in view
-            // Actually, we can just process them in order for now.
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const dayId = entry.target.id;
-                    
-                    // Remove active class from all pins
-                    document.querySelectorAll('.lux-map-pin').forEach(p => {
-                        p.classList.remove('is-active');
-                    });
-                    const targetPin = document.querySelector(`.lux-map-pin[data-target~="${entry.target.id}"]`);
-                    if (targetPin) {
-                        targetPin.classList.add('is-active');
-                    }
-
-                    // Handle Background Swap Fade
-                    const newBg = entry.target.getAttribute('data-bg');
-                    if (newBg && newBg !== currentBgImg) {
-                        currentBgImg = newBg;
-                        bgTop.style.backgroundImage = `url('${newBg}')`;
-                        bgTop.style.opacity = '1';
+                    const bgUrl = entry.target.getAttribute('data-bg');
+                    if (bgUrl && bgBase.style.backgroundImage !== `url("${bgUrl}")`) {
+                        bgTop.style.backgroundImage = `url("${bgUrl}")`;
+                        bgTop.style.opacity = 1;
+                        
                         setTimeout(() => {
-                            bgBase.style.backgroundImage = `url('${newBg}')`;
-                            bgTop.style.opacity = '0';
-                        }, 800);
+                            bgBase.style.backgroundImage = `url("${bgUrl}")`;
+                            bgTop.style.opacity = 0;
+                        }, 850);
                     }
                 }
             });
         }, {
             root: null,
-            rootMargin: "-20% 0px -50% 0px", // triggers when block scrolls into upper half of viewport
+            rootMargin: "-20% 0px -60% 0px", 
             threshold: 0
         });
 
+        // Ensure we don't double observe
+        observer.disconnect();
         dayBlocks.forEach(block => observer.observe(block));
-        
-        // Optional: click pin to scroll to that day
-        pins.forEach(pin => {
-            pin.addEventListener('click', () => {
-                const targetIds = pin.getAttribute('data-target').split(' ');
-                const targetEl = document.getElementById(targetIds[0]); // scroll to the first day listed
-                if(targetEl) {
-                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    });
+    }
+    
+    document.addEventListener("DOMContentLoaded", initLuxHeroFade);
+    setTimeout(initLuxHeroFade, 500);
+    setTimeout(initLuxHeroFade, 1500);
+    setTimeout(initLuxHeroFade, 3000);
 </script>
 
 <script async data-explicit-opt-in="true" data-deployment-id="dpl_6PBoQTU3mA7FLoy2PJLMWZQyryfg" src="https://vercel.live/_next-live/feedback/feedback.js"></script>
