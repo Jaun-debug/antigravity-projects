@@ -13,6 +13,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'assets.1.commercebuild.com',
+      },
+      {
+        protocol: 'https',
         hostname: 'assets.3.commercebuild.com',
       }
     ],
