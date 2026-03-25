@@ -1,14 +1,15 @@
+import Image from "next/image";
 import { PackageSearch, Filter } from 'lucide-react';
 
 const ProductsList = [
-  { id: 1, name: 'BEER LAGER CAN 4x6x500ml *DAB', sku: '2210-0013', category: 'Beverages', link: '/products/beverages/beer-lager-dab' },
-  { id: 2, name: 'CABERNET SAUVIGNON 750ml *DE KRANS', sku: '2200-0054', category: 'Beverages', link: '/products/beverages/cab-sauv' },
-  { id: 3, name: 'BH 38 MULTIPURPOSE CLEANER 5ltr *GEOCHEM', sku: '0700-2041', category: 'Cleaning', link: '/products/cleaning/bh-38' },
-  { id: 4, name: 'CHIPS RESTAURANT 10mm 4x2.5kg *MAESTRO', sku: '0515-0196', category: 'Foods (Frozen)', link: '/products/foods-frozen/chips-maestro' },
-  { id: 5, name: 'SPARKLING WINE BRUT CHARDONNAY 750ml *JOHN B', sku: '2200-0057', category: 'Beverages', link: '/products/beverages/sparkling-wine' },
-  { id: 6, name: 'COFFEE MACHINE CAFFEO SOLO ORGANIC SILVER *MELITTA', sku: '0250-0452', category: 'Appliances', link: '/products/appliances/melitta' },
-  { id: 7, name: 'FETA BUCKET 3kg *FAIRVIEW', sku: '2110-1404', category: 'Foods (Chilled)', link: '/products/foods-chilled/feta' },
-  { id: 8, name: 'BIODEGRADABLE BURGER BOX SUGAR CANE 500s', sku: '9000-1540', category: 'Packaging', link: '/products/packaging/burger-box' },
+  { id: 1, name: 'BEER LAGER CAN 4x6x500ml *DAB', sku: '2210-0013', category: 'Beverages', link: '/products/beverages', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/rz_mel_logo_rgb_17.png' },
+  { id: 2, name: 'CABERNET SAUVIGNON 750ml *DE KRANS', sku: '2200-0054', category: 'Beverages', link: '/products/beverages', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/De_Krans_logo_with_Buffalo-removebg-preview.png' },
+  { id: 3, name: 'BH 38 MULTIPURPOSE CLEANER 5ltr *GEOCHEM', sku: '0700-2041', category: 'Cleaning', link: '/products/cleaning', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/kuhne-logo.jpg' },
+  { id: 4, name: 'CHIPS RESTAURANT 10mm 4x2.5kg *MAESTRO', sku: '0515-0196', category: 'Foods (Frozen)', link: '/products/foods-frozen', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/Safari_Logo_2.jpg' },
+  { id: 5, name: 'SPARKLING WINE BRUT CHARDONNAY 750ml *JOHN B', sku: '2200-0057', category: 'Beverages', link: '/products/beverages', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/Robertson--SmallTown-Logo2-9de2f4046f-57d0002fbb35c.jpg' },
+  { id: 6, name: 'COFFEE MACHINE CAFFEO SOLO ORGANIC SILVER *MELITTA', sku: '0250-0452', category: 'Appliances', link: '/products/appliances', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/rz_mel_logo_rgb_17.png' },
+  { id: 7, name: 'FETA BUCKET 3kg *FAIRVIEW', sku: '2110-1404', category: 'Foods (Chilled)', link: '/products/foods-chilled', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/Fairview-logo-d241e00a0c-57cffeea29a79.jpg' },
+  { id: 8, name: 'BIODEGRADABLE BURGER BOX SUGAR CANE 500s', sku: '9000-1540', category: 'Packaging', link: '/products/packaging', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/CLT_BUI_Signet_Neutral_pos.png' },
 ];
 
 export default function ProductsPage() {
@@ -51,8 +52,8 @@ export default function ProductsPage() {
               href={product.link}
               className="bg-white border border-stone-100 rounded-xl p-4 flex flex-col hover:shadow-xl hover:border-brand-200 transition-all duration-300 group"
             >
-              <div className="bg-stone-50 w-full aspect-square rounded-lg mb-4 flex items-center justify-center text-stone-300 group-hover:bg-brand-50 transition-colors">
-                <PackageSearch className="w-12 h-12 opacity-50 text-stone-400 group-hover:text-brand-400 transition-colors" />
+              <div className="bg-white w-full aspect-square rounded-lg mb-4 flex items-center justify-center relative p-4 group-hover:bg-brand-50 transition-colors">
+                <Image src={product.image} alt={product.name} fill className="object-contain p-4 group-hover:scale-105 transition-transform duration-500" />
               </div>
               <span className="text-[0.65rem] font-mono text-stone-400 mb-1">SKU: {product.sku}</span>
               <h3 className="text-sm font-semibold text-stone-900 leading-snug group-hover:text-brand-700 transition-colors line-clamp-2">
