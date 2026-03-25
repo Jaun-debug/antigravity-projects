@@ -71,7 +71,10 @@ export default function Header() {
             {NavigationLinks.map((link) => (
               <div 
                 key={link.name}
-              <div className="relative group" onMouseEnter={() => link.hasMega || link.dropdown ? setActiveMega(link.name) : null} onMouseLeave={() => setActiveMega(null)}>
+                className="relative group" 
+                onMouseEnter={() => link.hasMega || link.dropdown ? setActiveMega(link.name) : null} 
+                onMouseLeave={() => setActiveMega(null)}
+              >
                 <Link href={link.href} className="text-sm font-medium text-stone-700 hover:text-brand-700 transition-colors flex items-center gap-1">
                   {link.name}
                   {(link.hasMega || link.dropdown) && <ChevronDown className="w-4 h-4 opacity-50 transition-transform group-hover:rotate-180" />}
