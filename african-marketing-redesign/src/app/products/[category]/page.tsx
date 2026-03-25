@@ -2,17 +2,7 @@ import Image from "next/image";
 import { PackageSearch, Filter, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 
-// Use same static product list from main products page
-const ProductsList = [
-  { id: 1, name: 'BEER LAGER CAN 4x6x500ml *DAB', sku: '2210-0013', category: 'beverages', link: '/products/beverages', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/rz_mel_logo_rgb_17.png' },
-  { id: 2, name: 'CABERNET SAUVIGNON 750ml *DE KRANS', sku: '2200-0054', category: 'beverages', link: '/products/beverages', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/De_Krans_logo_with_Buffalo-removebg-preview.png' },
-  { id: 3, name: 'BH 38 MULTIPURPOSE CLEANER 5ltr *GEOCHEM', sku: '0700-2041', category: 'cleaning', link: '/products/cleaning', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/kuhne-logo.jpg' },
-  { id: 4, name: 'CHIPS RESTAURANT 10mm 4x2.5kg *MAESTRO', sku: '0515-0196', category: 'foods-frozen', link: '/products/foods-frozen', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/Safari_Logo_2.jpg' },
-  { id: 5, name: 'SPARKLING WINE BRUT CHARDONNAY 750ml *JOHN B', sku: '2200-0057', category: 'beverages', link: '/products/beverages', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/Robertson--SmallTown-Logo2-9de2f4046f-57d0002fbb35c.jpg' },
-  { id: 6, name: 'COFFEE MACHINE CAFFEO SOLO ORGANIC SILVER *MELITTA', sku: '0250-0452', category: 'appliances', link: '/products/appliances', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/rz_mel_logo_rgb_17.png' },
-  { id: 7, name: 'FETA BUCKET 3kg *FAIRVIEW', sku: '2110-1404', category: 'foods-chilled', link: '/products/foods-chilled', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/Fairview-logo-d241e00a0c-57cffeea29a79.jpg' },
-  { id: 8, name: 'BIODEGRADABLE BURGER BOX SUGAR CANE 500s', sku: '9000-1540', category: 'packaging', link: '/products/packaging', image: 'https://assets.3.commercebuild.com/52b4847e965496ec89e8fd0fcab5e850/contents/brand/CLT_BUI_Signet_Neutral_pos.png' },
-];
+import { ProductsList } from '@/data/products';
 
 export async function generateStaticParams() {
   return [
