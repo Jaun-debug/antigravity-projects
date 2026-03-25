@@ -6,14 +6,14 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'www.african-marketing.com',
-        port: '',
-        pathname: '/**',
       },
       {
         protocol: 'https',
         hostname: 'afmar.eu.xmsymphony.com',
-        port: '',
-        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'assets.3.commercebuild.com',
       }
     ],
   },
