@@ -68,7 +68,7 @@
         /* Hero Content */
         .lux-hero-content {
             position: absolute;
-            bottom: 0;
+            bottom: 8vh;
             left: 0;
             padding: 2.5rem;
             color: #ffffff;
@@ -713,119 +713,55 @@
 
     <!-- JS Logic for the Smooth Premium Features -->
     <script>
-        (function() {
-            // Multi-instance safe scope
-            const container = document.getElementById('lux-app-30');
-            if (!container) return;
+    // --- SAFE WORDPRESS INITIALIZATION ---
+    function initLuxHeroFade() {
+        const dayBlocks = document.querySelectorAll('.lux-day-block');
+        const bgBase = document.getElementById('lux-bg-base');
+        const bgTop = document.getElementById('lux-bg-top');
+        
+        if (!dayBlocks.length || !bgBase || !bgTop) return;
 
-            // 1. Initialize Lenis for premium smooth page scrolling up and down
-            const lenis = new Lenis({
-                duration: 1.2,
-                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-                direction: 'vertical',
-                gestureDirection: 'vertical',
-                smooth: true,
-                mouseMultiplier: 1,
-                smoothTouch: false,
-                touchMultiplier: 2,
-            });
+        // Force clear sticky blockers
+        let parentNode = document.querySelector('.lux-container');
+        if (parentNode) parentNode = parentNode.parentElement;
+        while (parentNode && parentNode.tagName !== 'BODY') {
+            parentNode.style.setProperty('overflow', 'visible', 'important');
+            parentNode.style.setProperty('overflow-x', 'visible', 'important');
+            parentNode.style.setProperty('overflow-y', 'visible', 'important');
+            parentNode = parentNode.parentElement;
+        }
 
-            function raf(time) {
-                lenis.raf(time);
-                requestAnimationFrame(raf);
-            }
-            requestAnimationFrame(raf);
-
-            // WP Builder 1-second delay hack
-            setTimeout(() => {
-                // 2. Intersection Observer for the Dynamic Hero Image Roll (True Crossfade)
-                const leftHero = container.querySelector('.lux-left');
-                const luxTitle = container.querySelector('.lux-title');
-                const luxSubtitle = container.querySelector('.lux-subtitle');
-                
-                let currentBg = leftHero.getAttribute('data-default-bg');
-                let activeLayer = 1;
-
-                function doCrossfade(bgUrl, region, subtext) {
-                    if (bgUrl === currentBg) return;
-                    currentBg = bgUrl;
-                    
-                    const oldLayerElement = container.querySelector('.lux-layer-' + activeLayer);
-                    activeLayer = activeLayer === 1 ? 2 : 1;
-                    const newLayerElement = container.querySelector('.lux-layer-' + activeLayer);
-
-                    // Preload image onto the invisible layer, then fade it in smoothly!
-                    if(newLayerElement) {
-                        newLayerElement.style.backgroundImage = `url('${bgUrl}')`;
-                        newLayerElement.classList.add('active');
-                    }
-                    if(oldLayerElement) {
-                        oldLayerElement.classList.remove('active');
-                    }
-
-                    // Fade titles gently
-                    if(luxTitle && luxSubtitle) {
-                        luxTitle.style.opacity = '0';
-                        luxSubtitle.style.opacity = '0';
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const bgUrl = entry.target.getAttribute('data-bg');
+                    if (bgUrl && bgBase.style.backgroundImage !== `url("${bgUrl}")`) {
+                        bgTop.style.backgroundImage = `url("${bgUrl}")`;
+                        bgTop.style.opacity = 1;
                         
                         setTimeout(() => {
-                            luxTitle.innerHTML = region;
-                            luxSubtitle.innerHTML = subtext;
-                            luxTitle.style.opacity = '1';
-                            luxSubtitle.style.opacity = '1';
-                        }, 400);
+                            bgBase.style.backgroundImage = `url("${bgUrl}")`;
+                            bgTop.style.opacity = 0;
+                        }, 850);
                     }
                 }
+            });
+        }, {
+            root: null,
+            rootMargin: "-20% 0px -60% 0px", 
+            threshold: 0
+        });
 
-                const dayObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const bg = entry.target.getAttribute('data-bg');
-                            const region = entry.target.getAttribute('data-region');
-                            if(bg && region) {
-                                doCrossfade(bg, region, "Exploring the breathtaking " + region);
-                            }
-                        }
-                    });
-                }, { rootMargin: '-30% 0px -40% 0px' });
-
-                const introObserver = new IntersectionObserver((entries) => {
-                    if(entries[0].isIntersecting) {
-                        const defaultBg = leftHero.getAttribute('data-default-bg');
-                        const defaultTitle = leftHero.getAttribute('data-default-title');
-                        if(defaultBg && defaultTitle) {
-                            doCrossfade(defaultBg, defaultTitle, "A bespoke luxury journey through legendary landscapes.");
-                        }
-                    }
-                }, { threshold: 0.5 });
-                
-                const introBlock = container.querySelector('.lux-intro');
-                if(introBlock) introObserver.observe(introBlock);
-
-                container.querySelectorAll('.lux-day-block').forEach(block => {
-                    dayObserver.observe(block);
-                });
-
-                // 3. Carousel Logic
-                container.querySelectorAll('.lux-carousel-wrapper').forEach(wrapper => {
-                    const carousel = wrapper.querySelector('.lux-carousel');
-                    const hintBtn = wrapper.querySelector('.lux-scroll-hint');
-                    const images = carousel.querySelectorAll('img');
-                    
-                    if (images.length > 0 && hintBtn) {
-                        hintBtn.addEventListener('click', () => {
-                            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
-                                carousel.scrollTo({ left: 0, behavior: 'smooth' });
-                            } else {
-                                const imgWidth = images[0].clientWidth;
-                                carousel.scrollTo({ left: carousel.scrollLeft + imgWidth + 16, behavior: 'smooth' });
-                            }
-                        });
-                    }
-                });
-            }, 1000); // 1-second delay stabilization
-        })();
-    </script>
+        // Ensure we don't double observe
+        observer.disconnect();
+        dayBlocks.forEach(block => observer.observe(block));
+    }
+    
+    document.addEventListener("DOMContentLoaded", initLuxHeroFade);
+    setTimeout(initLuxHeroFade, 500);
+    setTimeout(initLuxHeroFade, 1500);
+    setTimeout(initLuxHeroFade, 3000);
+</script>
 </body>
 </html>
 
