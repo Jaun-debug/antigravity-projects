@@ -1,0 +1,379 @@
+<style>
+/* ================================================
+   DESERT TRACKS — PREMIUM EDITORIAL FAQ
+   Each open item reveals a stunning image + text
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,300&family=Open+Sans:wght@300;400&display=swap');
+
+.dt-pfaq-wrap {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 90px 40px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.dt-pfaq-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.dt-pfaq-header-left {}
+
+.dt-pfaq-eyebrow {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #c8722a;
+    margin-bottom: 16px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.dt-pfaq-h2 {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(2.2rem, 4vw, 3.2rem) !important;
+    font-weight: 300 !important;
+    color: #1a2b3c !important;
+    line-height: 1.12 !important;
+    margin: 0 !important;
+}
+
+.dt-pfaq-header-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, #e0d8cc, transparent);
+    min-width: 60px;
+    margin-bottom: 10px;
+}
+
+/* ---- ITEMS ---- */
+.dt-pfaq-item {
+    border-top: 1px solid #e5e0d8;
+    overflow: hidden;
+}
+.dt-pfaq-item:last-child {
+    border-bottom: 1px solid #e5e0d8;
+}
+
+/* Question row */
+.dt-pfaq-q {
+    display: grid;
+    grid-template-columns: 56px 1fr 48px;
+    align-items: center;
+    gap: 24px;
+    padding: 30px 0;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+.dt-pfaq-q:hover { opacity: 0.75; }
+
+.dt-pfaq-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #c8722a;
+    letter-spacing: 1px;
+}
+
+.dt-pfaq-q-text {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(1.1rem, 2.2vw, 1.4rem) !important;
+    font-weight: 400 !important;
+    color: #1a2b3c !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+    transition: color 0.3s ease;
+}
+
+.dt-pfaq-item.dt-open .dt-pfaq-q-text {
+    color: #c8722a !important;
+}
+
+/* Plus icon */
+.dt-pfaq-plus {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #c8722a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.35s ease, transform 0.45s ease;
+    flex-shrink: 0;
+    position: relative;
+}
+.dt-pfaq-plus::before,
+.dt-pfaq-plus::after {
+    content: '';
+    position: absolute;
+    background: #c8722a;
+    transition: background 0.3s ease;
+}
+.dt-pfaq-plus::before { width: 14px; height: 1.5px; }
+.dt-pfaq-plus::after  { width: 1.5px; height: 14px; }
+
+.dt-pfaq-item.dt-open .dt-pfaq-plus {
+    background: #c8722a;
+    transform: rotate(45deg);
+}
+.dt-pfaq-item.dt-open .dt-pfaq-plus::before,
+.dt-pfaq-item.dt-open .dt-pfaq-plus::after {
+    background: #ffffff;
+}
+
+/* Answer panel — slides open */
+.dt-pfaq-panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dt-pfaq-item.dt-open .dt-pfaq-panel {
+    max-height: 620px;
+}
+
+/* Inner layout: text left, image right */
+.dt-pfaq-inner {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    padding: 0 0 48px 80px;
+    align-items: start;
+}
+
+.dt-pfaq-body p {
+    font-family: 'Open Sans', sans-serif !important;
+    font-size: 1rem !important;
+    line-height: 1.9 !important;
+    color: #555 !important;
+    margin: 0 0 16px 0 !important;
+    font-weight: 300 !important;
+}
+.dt-pfaq-body p:last-child { margin-bottom: 0 !important; }
+
+/* Two-column list within body */
+.dt-pfaq-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 32px;
+}
+.dt-pfaq-col-label {
+    font-size: 10px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 3px !important;
+    color: #c8722a !important;
+    font-weight: 600 !important;
+    margin: 0 0 12px 0 !important;
+    display: block;
+    font-family: 'Open Sans', sans-serif !important;
+}
+.dt-pfaq-ul {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.dt-pfaq-ul li {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: #555;
+    padding-left: 16px;
+    position: relative;
+    margin-bottom: 5px;
+    font-weight: 300;
+}
+.dt-pfaq-ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 1px;
+    background: #c8722a;
+}
+
+/* Image panel */
+.dt-pfaq-img-wrap {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+}
+.dt-pfaq-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dt-pfaq-item.dt-open .dt-pfaq-img-wrap img {
+    transform: scale(1.04);
+}
+
+/* Caption */
+.dt-pfaq-caption {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #aaa;
+    margin-top: 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .dt-pfaq-wrap { padding: 60px 24px; }
+    .dt-pfaq-q { grid-template-columns: 40px 1fr 40px; gap: 16px; }
+    .dt-pfaq-inner {
+        grid-template-columns: 1fr;
+        padding: 0 0 36px 56px;
+        gap: 28px;
+    }
+    .dt-pfaq-item.dt-open .dt-pfaq-panel { max-height: 900px; }
+    .dt-pfaq-cols { grid-template-columns: 1fr; }
+    .dt-pfaq-img-wrap { height: 220px; }
+}
+</style>
+
+<div class="dt-pfaq-wrap">
+
+    <div class="dt-pfaq-header">
+        <div class="dt-pfaq-header-left">
+            <span class="dt-pfaq-eyebrow">Everything You Need to Know</span>
+            <h2 class="dt-pfaq-h2">Frequently Asked<br><em>Questions</em></h2>
+        </div>
+        <div class="dt-pfaq-header-line"></div>
+    </div>
+
+    <!-- Q1 -->
+    <div class="dt-pfaq-item">
+        <div class="dt-pfaq-q" onclick="dtPfaqToggle(this)">
+            <span class="dt-pfaq-num">01</span>
+            <span class="dt-pfaq-q-text">What is a self-drive safari?</span>
+            <div class="dt-pfaq-plus"></div>
+        </div>
+        <div class="dt-pfaq-panel">
+            <div class="dt-pfaq-inner">
+                <div class="dt-pfaq-body">
+                    <p>A self-drive safari gives you the freedom to explore Africa's wild spaces entirely at your own pace. You travel in your own rental vehicle, stop for photos whenever something extraordinary catches your eye, and experience the open road with nature as your only guide.</p>
+                    <p>There are no rigid schedules, no group dynamics to navigate — just you, the landscape, and Namibia's extraordinary wildlife unfolding at every turn.</p>
+                </div>
+                <div>
+                    <div class="dt-pfaq-img-wrap">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-levi-sossusvlei-1-4.jpg" alt="Self-drive safari Namibia">
+                    </div>
+                    <p class="dt-pfaq-caption">Sossusvlei, Namibia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="dt-pfaq-item">
+        <div class="dt-pfaq-q" onclick="dtPfaqToggle(this)">
+            <span class="dt-pfaq-num">02</span>
+            <span class="dt-pfaq-q-text">Do I need a 4x4 vehicle?</span>
+            <div class="dt-pfaq-plus"></div>
+        </div>
+        <div class="dt-pfaq-panel">
+            <div class="dt-pfaq-inner">
+                <div class="dt-pfaq-body">
+                    <p>For most Namibian routes, a 4x4 is strongly recommended. Gravel roads, sandy tracks, and remote river crossings are beautifully driveable in a properly equipped 4x4 — and far riskier in a standard sedan.</p>
+                    <p>A 4x4 also opens up more remote parks, dramatic viewpoints, and off-the-beaten-path destinations that most travellers simply never reach.</p>
+                </div>
+                <div>
+                    <div class="dt-pfaq-img-wrap">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large-e1759762704657-6-4.jpeg" alt="4x4 vehicle Damaraland">
+                    </div>
+                    <p class="dt-pfaq-caption">Damaraland, Namibia</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="dt-pfaq-item">
+        <div class="dt-pfaq-q" onclick="dtPfaqToggle(this)">
+            <span class="dt-pfaq-num">03</span>
+            <span class="dt-pfaq-q-text">What vehicles does Desert Tracks provide?</span>
+            <div class="dt-pfaq-plus"></div>
+        </div>
+        <div class="dt-pfaq-panel">
+            <div class="dt-pfaq-inner">
+                <div class="dt-pfaq-body">
+                    <p>We partner exclusively with Namibia's most trusted rental suppliers, providing well-maintained, expedition-ready 4x4 vehicles built specifically for the country's toughest conditions.</p>
+                    <p>Every vehicle includes ample luggage and camera storage, comprehensive insurance cover, and 24/7 roadside assistance. Seamless airport handovers and private transfers ensure your journey begins effortlessly — from the moment you land.</p>
+                </div>
+                <div>
+                    <div class="dt-pfaq-img-wrap">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg" alt="Etosha safari vehicle">
+                    </div>
+                    <p class="dt-pfaq-caption">Etosha National Park</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="dt-pfaq-item">
+        <div class="dt-pfaq-q" onclick="dtPfaqToggle(this)">
+            <span class="dt-pfaq-num">04</span>
+            <span class="dt-pfaq-q-text">What is included and excluded in the package?</span>
+            <div class="dt-pfaq-plus"></div>
+        </div>
+        <div class="dt-pfaq-panel">
+            <div class="dt-pfaq-inner">
+                <div class="dt-pfaq-body">
+                    <div class="dt-pfaq-cols">
+                        <div>
+                            <span class="dt-pfaq-col-label">Seamlessly Included</span>
+                            <ul class="dt-pfaq-ul">
+                                <li>Accommodation (standard, comfort, or luxury)</li>
+                                <li>Daily meals as per itinerary</li>
+                                <li>4×4 rental vehicle with insurance & roadside assist</li>
+                                <li>Airport transfers on arrival & departure</li>
+                                <li>Selected activities per itinerary</li>
+                                <li>Digital travel diary, maps & vouchers</li>
+                                <li>24/7 local support throughout your journey</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <span class="dt-pfaq-col-label">Additionally Excluded</span>
+                            <ul class="dt-pfaq-ul">
+                                <li>International flights</li>
+                                <li>Personal travel insurance (mandatory)</li>
+                                <li>Visa costs & applications</li>
+                                <li>Gratuities & personal expenses</li>
+                                <li>Optional activities not in itinerary</li>
+                                <li>Fuel for the rental vehicle</li>
+                                <li>National park entry fees & levies</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="dt-pfaq-img-wrap">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/bagatelle-lodge-kalahari-game-ranch-namibia-guest-room-terrace-at-sunset-4.jpg" alt="Bagatelle Lodge Namibia">
+                    </div>
+                    <p class="dt-pfaq-caption">Bagatelle Lodge, Kalahari</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script data-no-optimize="1">
+function dtPfaqToggle(questionEl) {
+    var item = questionEl.parentElement;
+    var isOpen = item.classList.contains('dt-open');
+    document.querySelectorAll('.dt-pfaq-item.dt-open').forEach(function(el){
+        el.classList.remove('dt-open');
+    });
+    if (!isOpen) { item.classList.add('dt-open'); }
+}
+</script>

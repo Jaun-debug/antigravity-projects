@@ -1,0 +1,454 @@
+<section class="dt-wtg-premium-section" id="dt-when-to-go-wrapper">
+  <!-- Indestructible Tripwire -->
+  <span id="dt-wtg-tripwire" style="display:none;"></span>
+  
+  <style data-no-optimize="1">
+    /* GPU Safeties to prevent Carousel Freezing below it */
+    .dt-wtg-premium-section {
+      position: relative;
+      width: 100%;
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 5rem 1rem;
+      box-sizing: border-box;
+      
+      /* THIS IS CRITICAL: Insert your Solly Levi Image URL here once uploaded */
+      /* Recommended: "Oryx Camelthorn Solly Large.jpeg" from OneDrive */
+      background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_4757_3-scaled.jpg'); 
+      background-size: cover;
+      background-position: center;
+      background-attachment: scroll; /* Do not use fixed, causes Safari bugs! */
+      
+      font-family: inherit;
+      isolation: isolate;
+      transform: translateZ(0); 
+    }
+
+    .dt-wtg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(17, 17, 17, 0.75); /* Dark overlay to make text pop */
+      z-index: 1;
+    }
+
+    .dt-wtg-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      padding: 3rem 2rem;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    }
+
+    .dt-wtg-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .dt-wtg-title {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: #ffffff !important;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin: 0 1.5rem;
+      font-weight: 400;
+      text-shadow: 1px 1px 10px rgba(0,0,0,0.5);
+    }
+    
+    .dt-wtg-line {
+      height: 1px;
+      width: 60px;
+      background-color: #ff6e00;
+    }
+
+    /* 12 Months Circular Navigation */
+    .dt-wtg-months-wrapper {
+      max-width: 850px;
+      margin: 0 auto 3rem auto;
+      overflow-x: auto;
+      padding: 10px 0 1rem 0;
+      scrollbar-width: none;
+    }
+    .dt-wtg-months-wrapper::-webkit-scrollbar { display: none; }
+    
+    .dt-wtg-months {
+      display: flex;
+      justify-content: space-between;
+      min-width: 650px;
+      gap: 0.5rem;
+      padding: 0 1rem;
+    }
+    
+    .dt-wtg-month-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      gap: 12px;
+      outline: none;
+    }
+    
+    .dt-wtg-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: all 0.4s ease;
+    }
+    
+    .dt-wtg-month-btn:hover .dt-wtg-circle {
+      background-color: #ff6e00;
+      border-color: #ff6e00;
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 110, 0, 0.4);
+    }
+    
+    .dt-wtg-indicator {
+      width: 100%;
+      height: 2px;
+      background-color: transparent;
+      transition: background-color 0.3s ease;
+    }
+    
+    .dt-wtg-month-btn.active .dt-wtg-circle {
+      background-color: #ffffff;
+      color: #111111;
+      border-color: #ffffff;
+      box-shadow: 0 0 20px rgba(255,255,255,0.3);
+    }
+    .dt-wtg-month-btn.active .dt-wtg-indicator {
+      background-color: #ff6e00;
+    }
+
+    /* Content Area */
+    .dt-wtg-content {
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      opacity: 1;
+      transform: translateY(0);
+      width: 100%;
+    }
+    .dt-wtg-content.fade-out {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .dt-wtg-month-name {
+      font-family: inherit;
+      font-size: 2.8rem;
+      color: #ff6e00 !important;
+      margin: 0 0 1rem 0;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    /* Stats (Bars) */
+    .dt-wtg-stats {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .dt-wtg-stat-group {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .dt-wtg-bar {
+      height: 4px;
+      width: 40px;
+      border-radius: 2px;
+      background-color: rgba(255,255,255,0.2);
+    }
+    .dt-wtg-stat-text {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #ffffff;
+    }
+    
+    .dt-wtg-temp .dt-wtg-bar { background-color: #ff6e00; width: 50px; }
+    .dt-wtg-rain .dt-wtg-bar { background-color: #4da6ff; width: 65px; }
+
+    .dt-wtg-desc {
+      color: #dddddd;
+      font-size: 1.15rem;
+      line-height: 1.6;
+      max-width: 650px;
+      margin: 0 auto 2.5rem auto;
+      font-weight: 300;
+      letter-spacing: 0.05em;
+    }
+
+    /* Links Area */
+    .dt-wtg-links-container {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .dt-wtg-grid-title {
+      color: #ffffff;
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0.7;
+    }
+
+    .dt-wtg-links-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    @media (max-width: 768px) {
+      .dt-wtg-links-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .dt-wtg-links-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .dt-wtg-direct-link {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.6rem;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      background: rgba(0,0,0,0.2);
+    }
+    .dt-wtg-direct-link:hover {
+      background: #ff6e00;
+      border-color: #ff6e00;
+      color: #ffffff;
+    }
+
+  </style>
+
+  <div class="dt-wtg-overlay"></div>
+
+  <div class="dt-wtg-container" id="dtWtgContentArea">
+    <div class="dt-wtg-header">
+      <div class="dt-wtg-line"></div>
+      <h2 class="dt-wtg-title">When to Go</h2>
+      <div class="dt-wtg-line"></div>
+    </div>
+
+    <!-- The 12 interactive buttons -->
+    <div class="dt-wtg-months-wrapper" id="dtWtgWrapper">
+      <div class="dt-wtg-months" id="dtWtgTabs">
+        <!-- JS injects buttons here -->
+      </div>
+    </div>
+
+    <!-- The changing interactive content -->
+    <div class="dt-wtg-content" id="dtWtgContent">
+      <h3 class="dt-wtg-month-name" id="dtWtgName">March</h3>
+      
+      <div class="dt-wtg-stats">
+        <div class="dt-wtg-stat-group dt-wtg-temp">
+          <div class="dt-wtg-bar" id="dtWtgTempBar"></div>
+          <div class="dt-wtg-stat-text" id="dtWtgTempInfo">27°C</div>
+        </div>
+        <div class="dt-wtg-stat-group dt-wtg-rain">
+          <div class="dt-wtg-bar" id="dtWtgRainBar"></div>
+          <div class="dt-wtg-stat-text" id="dtWtgRainInfo">70 mm</div>
+        </div>
+      </div>
+
+      <p class="dt-wtg-desc" id="dtWtgDesc">Temperatures are ideal in March, with little rainfall and less humidity.</p>
+    </div>
+
+    <!-- NEW: All Direct Month Links Grid -->
+    <div class="dt-wtg-links-container">
+      <div class="dt-wtg-grid-title">Explore Weather By Month</div>
+      <div class="dt-wtg-links-grid" id="dtWtgLinksGrid">
+        <!-- JS injects all 12 links here -->
+      </div>
+    </div>
+
+  </div>
+
+  <script data-no-optimize="1">
+  (function() {
+      // Complete Data
+      var monthsData = [
+          { short: "JAN", name: "January", temp: "18-30 °C", rain: "100 mm", desc: "Hot & stormy, green landscapes, fewer tourists", link: "https://desert-tracks.com/namibia-weather/january/" },
+          { short: "FEB", name: "February", temp: "18-30 °C", rain: "110 mm", desc: "Peak rainy season, lush scenery, great for birding", link: "https://desert-tracks.com/namibia-weather/february/" },
+          { short: "MAR", name: "March",  temp: "16-29 °C", rain: "80 mm",  desc: "Warm, some showers, dramatic skies, still green", link: "https://desert-tracks.com/namibia-weather/march/" },
+          { short: "APR", name: "April",  temp: "14-27 °C", rain: "40 mm",  desc: "Comfortable, mostly dry, excellent photo light", link: "https://desert-tracks.com/namibia-weather/april/" },
+          { short: "MAY", name: "May",    temp: "9-25 °C", rain: "10 mm",   desc: "Dry, clear skies, ideal travel weather", link: "https://desert-tracks.com/namibia-weather/may/" },
+          { short: "JUN", name: "June",   temp: "6-22 °C", rain: "3 mm",   desc: "Cool nights, crisp days, wildlife gathering", link: "https://desert-tracks.com/namibia-weather/june/" },
+          { short: "JUL", name: "July",   temp: "6-21 °C", rain: "1 mm",   desc: "Cold mornings, superb game viewing at waterholes", link: "https://desert-tracks.com/namibia-weather/july/" },
+          { short: "AUG", name: "August", temp: "8-24 °C", rain: "1 mm",   desc: "Dry, sunny, excellent for safaris & starry nights", link: "https://desert-tracks.com/namibia-weather/august/" },
+          { short: "SEP", name: "September", temp: "12-28 °C", rain: "2 mm", desc: "Warm, dry, prime for Etosha game viewing", link: "https://desert-tracks.com/namibia-weather/september/" },
+          { short: "OCT", name: "October",   temp: "15-30 °C", rain: "10 mm", desc: "Hot, wildlife concentrated, great photography", link: "https://desert-tracks.com/namibia-weather/october/" },
+          { short: "NOV", name: "November",  temp: "17-31 °C", rain: "40 mm", desc: "Hot, start of rains, dramatic skies, fewer crowds", link: "https://desert-tracks.com/namibia-weather/november/" },
+          { short: "DEC", name: "December",  temp: "18-32 °C", rain: "60 mm", desc: "Very hot, green season begins, festive travel vibe", link: "https://desert-tracks.com/namibia-weather/december/" }
+      ];
+
+      var wrapper = document.getElementById('dtWtgWrapper');
+      var tabsContainer = document.getElementById('dtWtgTabs');
+      var gridContainer = document.getElementById('dtWtgLinksGrid');
+      
+      var cntArea = document.getElementById('dtWtgContentArea');
+      var cntContainer = document.getElementById('dtWtgContent');
+      var elName = document.getElementById('dtWtgName');
+      var elTempInfo = document.getElementById('dtWtgTempInfo');
+      var elTempBar = document.getElementById('dtWtgTempBar');
+      var elRainInfo = document.getElementById('dtWtgRainInfo');
+      var elRainBar = document.getElementById('dtWtgRainBar');
+      var elDesc = document.getElementById('dtWtgDesc');
+
+      if(!tabsContainer || tabsContainer.getAttribute('data-init') === '1') return;
+      tabsContainer.setAttribute('data-init', '1');
+      
+      // Clear safety
+      tabsContainer.innerHTML = '';
+      if(gridContainer) gridContainer.innerHTML = '';
+
+      var currentActiveIndex = 2; // Default to March
+      var autoPlayInterval = null;
+      var interactionTimeout = null;
+      var fadeTimer = null;
+
+      // Build the 12 tabs dynamically + Build the Links Grid
+      monthsData.forEach(function(month, index) {
+          // 1. The Interactive Circle Button
+          var btn = document.createElement('button');
+          btn.className = 'dt-wtg-month-btn';
+          btn.setAttribute('aria-label', month.name);
+          
+          var circle = document.createElement('div');
+          circle.className = 'dt-wtg-circle';
+          circle.innerText = month.short;
+
+          var indicator = document.createElement('div');
+          indicator.className = 'dt-wtg-indicator';
+
+          btn.appendChild(circle);
+          btn.appendChild(indicator);
+
+          btn.addEventListener('click', function(e) {
+              e.preventDefault();
+              pauseAutoPlay();
+              changeMonth(index);
+          });
+
+          tabsContainer.appendChild(btn);
+
+          // 2. The Direct Grid Link
+          if(gridContainer) {
+              var gridLink = document.createElement('a');
+              gridLink.className = 'dt-wtg-direct-link';
+              gridLink.href = month.link;
+              gridLink.innerText = month.name;
+              gridContainer.appendChild(gridLink);
+          }
+      });
+
+      function getHighNumber(str) {
+          var parts = str.match(/\d+/g);
+          if (!parts) return 0;
+          return parseInt(parts[parts.length - 1]);
+      }
+
+      function changeMonth(index) {
+          currentActiveIndex = index;
+          var data = monthsData[index];
+          var buttons = tabsContainer.querySelectorAll('.dt-wtg-month-btn');
+
+          buttons.forEach(function(btn, i) {
+              if(i === index) btn.classList.add('active');
+              else btn.classList.remove('active');
+          });
+
+          var activeBtn = buttons[index];
+          if (activeBtn && wrapper.offsetWidth < tabsContainer.scrollWidth) {
+              wrapper.scrollTo({
+                  left: activeBtn.offsetLeft - (wrapper.offsetWidth / 2) + (activeBtn.offsetWidth / 2),
+                  behavior: 'smooth'
+              });
+          }
+
+          if (fadeTimer) clearTimeout(fadeTimer);
+          cntContainer.classList.add('fade-out');
+
+          fadeTimer = setTimeout(function() {
+              elName.innerText = data.name;
+              elTempInfo.innerText = data.temp;
+              elRainInfo.innerText = data.rain;
+              elDesc.innerText = data.desc;
+
+              var tNum = getHighNumber(data.temp); 
+              var rNum = getHighNumber(data.rain);
+              
+              var tempWidth = Math.max(30, (tNum / 40) * 80); 
+              elTempBar.style.width = tempWidth + 'px';
+
+              var rainWidth = Math.max(15, (rNum / 120) * 100);
+              elRainBar.style.width = rainWidth + 'px';
+
+              cntContainer.classList.remove('fade-out');
+          }, 300);
+      }
+
+      function startAutoPlay() {
+          if (autoPlayInterval) clearInterval(autoPlayInterval);
+          autoPlayInterval = setInterval(function() {
+              var nextIndex = (currentActiveIndex + 1) % 12;
+              changeMonth(nextIndex);
+          }, 4000); 
+      }
+
+      function pauseAutoPlay() {
+          if (autoPlayInterval) {
+              clearInterval(autoPlayInterval);
+              autoPlayInterval = null;
+          }
+          if (interactionTimeout) clearTimeout(interactionTimeout);
+          interactionTimeout = setTimeout(startAutoPlay, 5000);
+      }
+
+      var interactiveElements = [wrapper, cntArea];
+      interactiveElements.forEach(function(el) {
+          el.addEventListener('mouseenter', pauseAutoPlay);
+          el.addEventListener('mouseleave', pauseAutoPlay); 
+          el.addEventListener('touchstart', pauseAutoPlay, {passive: true});
+          el.addEventListener('touchend', pauseAutoPlay, {passive: true});
+      });
+
+      changeMonth(2);
+      startAutoPlay();
+  })();
+  </script>
+</section>

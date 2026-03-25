@@ -1,0 +1,182 @@
+<style>
+/* 
+==================================================
+PREMIUM CINEMATIC SCROLLING HERO SECTION
+==================================================
+*/
+.dt-cinematic-scroll-section {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%); /* Full bleed override for boxed layouts */
+    height: 150vh; /* Make section tall enough to allow scrolling */
+    background-color: #000;
+    overflow: hidden;
+}
+
+/* 
+  The sticky container holding the image. 
+  It stays pinned to the screen while the user scrolls past the section's height.
+*/
+.dt-cinematic-sticky-wrap {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* The Background Image */
+.dt-cinematic-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('YOUR_IMAGE_URL_HERE'); /* Replaced below */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+/* 
+  The Dynamic Gradient Overlay 
+  We use Javascript to change the opacity of this based on scroll position 
+*/
+.dt-cinematic-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.85) 100%);
+    z-index: 2;
+    opacity: 0; /* Starts completely invisible (light) */
+    transition: opacity 0.1s ease-out; /* Smooth scrubbing */
+}
+
+/* Default state overlay to ensure text is always slightly readable at the start */
+.dt-cinematic-base-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.1); /* Very subtle base darkness */
+    z-index: 1;
+}
+
+/* The Content Container (Text) */
+.dt-cinematic-content {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    padding: 0 40px;
+    color: #ffffff;
+    text-align: center;
+    /* We will animate this moving up slightly as the page scrolls */
+    transform: translateY(30px);
+    transition: transform 0.1s ease-out;
+}
+
+.dt-cinematic-content p {
+    font-family: 'Open Sans', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5); /* Helps legibility immediately */
+    opacity: 0.9;
+}
+
+.dt-cinematic-content p:last-child {
+    margin-bottom: 0;
+}
+
+@media(max-width: 768px) {
+    .dt-cinematic-scroll-section {
+        height: 130vh; /* Slightly shorter scroll on mobile */
+    }
+    .dt-cinematic-content {
+        padding: 0 25px;
+    }
+    .dt-cinematic-content p {
+        font-size: 1.05rem;
+    }
+}
+</style>
+
+<div class="dt-cinematic-scroll-section" id="dtCinematicScroll">
+    <div class="dt-cinematic-sticky-wrap">
+        
+        <!-- The user's elephant image requested -->
+        <div class="dt-cinematic-bg" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/Elephant.jpeg');"></div>
+        <div class="dt-cinematic-base-overlay"></div>
+        
+        <!-- The darkening gradient layer we will animate -->
+        <div class="dt-cinematic-overlay" id="dtCinematicDarkenLayer"></div>
+
+        <div class="dt-cinematic-content" id="dtCinematicTextBox">
+            <p>Since 2010, Desert Tracks has been crafting unforgettable self-drive safari holidays in Namibia. Our passion for this country runs deep — from its rolling desert landscapes and soaring red dunes to the dramatic Skeleton Coast and abundant wildlife, Namibia is a destination that never stops taking your breath away.</p>
+            
+            <p>There's no better way to explore Namibia than in a 4x4. The roads are safe, easy to navigate, and built for adventure. Around every corner you'll find something new — rugged mountains, starlit campsites, or luxury lodges tucked deep in the desert.</p>
+            
+            <p>A Namibia self-drive safari suits both first-timers and seasoned explorers. The country's warm welcome and excellent infrastructure make it easy for beginners, while its vast, untouched landscapes satisfy even the boldest adventurers.</p>
+            
+            <p>At Desert Tracks, we craft itineraries that balance comfort with discovery. You won't spend days on long drives; instead, you'll enjoy activities like rhino tracking, dune climbs, or sunrise hot air ballooning before continuing your journey at a relaxed pace. Whether you're seeking a gentle introduction to African road trips or the freedom to venture into Namibia's wild frontier, your self-drive safari starts here.</p>
+        </div>
+        
+    </div>
+</div>
+
+<script data-no-optimize="1">
+(function() {
+    function initCinematicScroll() {
+        const section = document.getElementById('dtCinematicScroll');
+        const overlay = document.getElementById('dtCinematicDarkenLayer');
+        const txtBox = document.getElementById('dtCinematicTextBox');
+        
+        if(!section || !overlay || !txtBox) return;
+
+        window.addEventListener('scroll', function() {
+            // Get position of the section relative to the viewport
+            const rect = section.getBoundingClientRect();
+            
+            // Calculate how far we've scrolled into the section
+            // ranges roughly from 0 (top of section hits top of screen) 
+            // to 1 (bottom of sticky section is about to scroll up)
+            
+            // We want the effect to start when the top of the section hits the top of the viewport (rect.top = 0)
+            if (rect.top > 0) {
+                // We haven't reached the section yet, ensure it's reset
+                overlay.style.opacity = 0;
+                txtBox.style.transform = 'translateY(30px)';
+                return;
+            }
+
+            // Total scrollable distance inside this section
+            const totalScroll = section.offsetHeight - window.innerHeight;
+            
+            // How far we have scrolled past the start of the section (make it positive)
+            const scrolledDistance = Math.abs(rect.top);
+            
+            // Calculate percentage (0 to 1)
+            let percentage = scrolledDistance / totalScroll;
+            
+            // Cap it between 0 and 1
+            if (percentage < 0) percentage = 0;
+            if (percentage > 1) percentage = 1;
+
+            // Apply opacity to the darkening layer based on scroll progress
+            overlay.style.opacity = percentage;
+
+            // Optional: subtle parallax movement on the text box
+            const textMove = 30 - (percentage * 30); // translates from 30px down to 0px
+            txtBox.style.transform = `translateY(${textMove}px)`;
+        }, { passive: true }); // passive: true helps scrolling performance
+    }
+
+    // Run instantly
+    initCinematicScroll();
+    
+    // Fallbacks for site builders
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initCinematicScroll);
+    }
+    setTimeout(initCinematicScroll, 1000);
+})();
+</script>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Weather Blocks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fcfcfc;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .weather-grid-container {
+            max-width: 1400px;
+            margin: 3rem auto;
+            padding: 0 40px;
+        }
+
+        .weather-grid-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+
+        /* The Exact Luxury Grid CSS from this morning */
+        .dt-luxury-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4 columns for 12 items = 3 rows of 4 */
+            gap: 30px;
+            padding: 20px 0;
+        }
+
+        @media (max-width: 1100px) {
+            .dt-luxury-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            .dt-luxury-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 500px) {
+            .dt-luxury-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .dt-luxury-card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .dt-luxury-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        /* Notice: Removed the image portion since these are weather blocks, 
+           or we can include small placeholder backgrounds if needed. 
+           Let's use the border-bottom design approach. */
+        .dt-luxury-header {
+            width: 100%;
+            height: 12px;
+            background-color: #2c3e50;
+            border-bottom: 3px solid #e2a85e;
+        }
+
+        .dt-luxury-content {
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .dt-luxury-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.4;
+            color: #2c3e50;
+            margin: 0 0 15px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .dt-luxury-subtitle {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 11px;
+            color: #e2a85e;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .dt-luxury-stats {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+        }
+
+        .dt-luxury-stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dt-luxury-stat-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .dt-luxury-stat-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        .dt-luxury-excerpt {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .dt-luxury-btn {
+            display: inline-block;
+            align-self: flex-start;
+            padding: 8px 16px;
+            border: 1px solid #e2a85e;
+            color: #e2a85e;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.3s;
+            margin-top: auto;
+        }
+
+        .dt-luxury-card:hover .dt-luxury-btn {
+            background: #e2a85e;
+            color: #fff;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="weather-grid-container">
+    <h2 class="weather-grid-title">When is the best time to visit Namibia?</h2>
+    
+    <div class="dt-luxury-grid" id="luxuryGrid">
+        <!-- Cards injected via JS here -->
+    </div>
+</div>
+
+<script>
+    const data = [
+        { name: 'January', season: 'Green Season', temp: '18—30°C', rain: '100mm', summary: 'Hot with dramatic afternoon thunderstorms. Landscapes turn vividly green.', url: '/namibia-weather/january/' },
+        { name: 'February', season: 'Green Season', temp: '18—30°C', rain: '110mm', summary: 'Peak green season. Excellent for birdwatching and photography against moody skies.', url: '/namibia-weather/february/' },
+        { name: 'March', season: 'Shoulder', temp: '16—29°C', rain: '80mm', summary: 'Warm days with diminishing rains. Skies begin to clear beautifully.', url: '/namibia-weather/march/' },
+        { name: 'April', season: 'Shoulder', temp: '14—27°C', rain: '40mm', summary: 'Comfortable temperatures, mostly dry, and exceptional light makes this a favored month.', url: '/namibia-weather/april/' },
+        { name: 'May', season: 'Dry Season', temp: '9—25°C', rain: '10mm', summary: 'Sunny, mild days and cooler nights. Fantastic overall travel conditions.', url: '/namibia-weather/may/' },
+        { name: 'June', season: 'Dry Season', temp: '6—22°C', rain: '3mm', summary: 'The chill of winter arrives. Wildlife gathers around the remaining waterholes.', url: '/namibia-weather/june/' },
+        { name: 'July', season: 'Peak Season', temp: '6—21°C', rain: '1mm', summary: 'Very cold mornings but exceptional, highly concentrated game viewing.', url: '/namibia-weather/july/' },
+        { name: 'August', season: 'Peak Season', temp: '8—24°C', rain: '1mm', summary: 'Bone-dry landscapes and warming days. Prime time for Etosha safaris.', url: '/namibia-weather/august/' },
+        { name: 'September', season: 'Peak', temp: '12—28°C', rain: '2mm', summary: 'Warm, dry, and dusty. Predictable water sources guarantee superb wildlife sightings.', url: '/namibia-weather/september/' },
+        { name: 'October', season: 'Shoulder', temp: '15—30°C', rain: '10mm', summary: 'Intense heat builds alongside highly concentrated wildlife action.', url: '/namibia-weather/october/' },
+        { name: 'November', season: 'Shoulder', temp: '17—31°C', rain: '40mm', summary: 'The build-up to the rains. Warm, humid, and brilliant for photography.', url: '/namibia-weather/november/' },
+        { name: 'December', season: 'Green Season', temp: '18—32°C', rain: '60mm', summary: 'Hot summer days accompanied by the very first green shoots of the new season.', url: '/namibia-weather/december/' }
+    ];
+
+    const grid = document.getElementById('luxuryGrid');
+    let html = '';
+    
+    data.forEach(m => {
+        html += `
+            <a href="${m.url}" class="dt-luxury-card">
+                <div class="dt-luxury-header"></div>
+                <div class="dt-luxury-content">
+                    <h3 class="dt-luxury-title">
+                        ${m.name}
+                        <span class="dt-luxury-subtitle">${m.season}</span>
+                    </h3>
+                    
+                    <div class="dt-luxury-stats">
+                        <div class="dt-luxury-stat">
+                            <span class="dt-luxury-stat-label">Avg Temp</span>
+                            <span class="dt-luxury-stat-value">${m.temp}</span>
+                        </div>
+                        <div class="dt-luxury-stat" style="text-align: right;">
+                            <span class="dt-luxury-stat-label">Rainfall</span>
+                            <span class="dt-luxury-stat-value">${m.rain}</span>
+                        </div>
+                    </div>
+
+                    <p class="dt-luxury-excerpt">${m.summary}</p>
+                    <div class="dt-luxury-btn">Weather Info</div>
+                </div>
+            </a>
+        `;
+    });
+    
+    grid.innerHTML = html;
+</script>
+
+</body>
+</html>

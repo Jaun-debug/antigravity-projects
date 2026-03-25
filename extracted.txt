@@ -1,0 +1,200 @@
+  }
+
+  .dew-next-btn,
+  .dew-skip-btn,
+  .dew-submit-btn {
+    width: 220px;
+  }
+
+  .dew-nav-area {
+    bottom: 30px;
+  }
+
+  .dew-referral-buttons {
+    flex-wrap: wrap;
+  }
+
+  .dew-referral-btn {
+    padding: 14px 32px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dew-options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dew-options-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dew-heading {
+    font-size: 22px;
+  }
+
+  .dew-step-container {
+    padding: 74px 10px 150px;
+  }
+
+  .dew-option-btn {
+    padding: 14px 10px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .dew-next-btn,
+  .dew-skip-btn,
+  .dew-submit-btn {
+    width: 180px;
+    font-size: 12px;
+  }
+
+  .dew-calendar-nav {
+    padding: 0 4px;
+  }
+
+  .dew-step-content {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dew-form-group,
+  .dew-form-row,
+  .dew-phone-group,
+  .dew-checkbox-group,
+  .dew-radio-group,
+  .dew-textarea,
+  .dew-referral-section,
+  .dew-newsletter-check,
+  .dew-description,
+  .dew-options-grid,
+  .dew-option-fallback {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .dew-input,
+  .dew-textarea,
+  .dew-phone-input {
+    font-size: 16px !important;
+  }
+
+  .dew-textarea {
+    resize: none;
+  }
+
+  .dew-radio-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dew-referral-section {
+    margin-bottom: 120px;
+  }
+}
+
+/* =============================================
+   FORCE WHITE TEXT - Nuclear override for WordPress/Nicepage
+   ============================================= */
+#enquiry-wizard-root,
+#enquiry-wizard-root *,
+.dew-overlay,
+.dew-overlay *,
+.dew-overlay h1,
+.dew-overlay h2,
+.dew-overlay h3,
+.dew-overlay h4,
+.dew-overlay h5,
+.dew-overlay h6,
+.dew-overlay p,
+.dew-overlay span,
+.dew-overlay div,
+.dew-overlay label,
+.dew-overlay a,
+.dew-overlay li,
+.dew-overlay td,
+.dew-overlay th,
+.dew-overlay input,
+.dew-overlay select,
+.dew-overlay textarea,
+.dew-overlay button,
+.dew-overlay .dew-heading,
+.dew-overlay .dew-subheading,
+.dew-overlay .dew-description,
+.dew-overlay .dew-option-btn,
+.dew-overlay .dew-checkbox-label,
+.dew-overlay .dew-radio-label,
+.dew-overlay .dew-radio-group-label,
+.dew-overlay .dew-newsletter-check,
+.dew-overlay .dew-phone-label,
+.dew-overlay .dew-phone-dropdown-item,
+.dew-overlay .dew-dd-name,
+.dew-overlay .dew-phone-code,
+.dew-overlay .dew-privacy-text,
+.dew-overlay .dew-calendar-month-title,
+.dew-overlay .dew-calendar-nav-btn,
+.dew-overlay .dew-calendar-day-label,
+.dew-overlay .dew-calendar-day,
+.dew-overlay .dew-back-btn,
+.dew-overlay .dew-close-btn,
+.dew-overlay .dew-skip-btn,
+.dew-overlay .dew-step-indicator {
+  color: #ffffff !important;
+}
+
+.dew-overlay .dew-subheading {
+  color: #ff6e00 !important;
+}
+
+.dew-overlay .dew-option-btn.dew-active,
+#enquiry-wizard-root .dew-overlay .dew-option-btn.dew-active,
+.dew-overlay .dew-option-fallback.dew-active,
+#enquiry-wizard-root .dew-overlay .dew-option-fallback.dew-active,
+.dew-overlay .dew-referral-btn.dew-active,
+#enquiry-wizard-root .dew-overlay .dew-referral-btn.dew-active {
+  color: #222222 !important;
+  background: #ffffff !important;
+  border-color: #ff6e00 !important;
+}
+
+.dew-overlay .dew-calendar-day.dew-disabled {
+  color: rgba(255,255,255,0.25) !important;
+}
+
+#enquiry-wizard-root .dew-overlay h2.dew-heading,
+#enquiry-wizard-root .dew-overlay .dew-heading,
+.dew-overlay h2.dew-heading,
+.dew-overlay .dew-heading {
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 32px !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin-bottom: 44px !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}</style> <script type="litespeed/javascript">(function(){'use strict';var SUBMIT_ENDPOINT='https://wizard-inquiry.replit.app/submit';var TOTAL_STEPS=8;function flagEmoji(iso){return iso.toUpperCase().replace(/./g,function(c){return String.fromCodePoint(0x1F1E6-65+c.charCodeAt(0))})}
+        `)})</script> <style>form.fluent_form_8 .wpf_has_custom_css.ff-btn-submit { background-color:rgba(171, 169, 154, 1);border-color:rgba(171, 169, 154, 1);color:#ffffff;border-radius:1px; }form.fluent_form_8 .wpf_has_custom_css.ff-btn-submit:hover { background-color:rgba(255, 255, 255, 1);border-color:rgba(171, 169, 154, 1);color:#ABA99A;border-radius:1px; }</style><script id="wpil-frontend-script-js-extra" type="litespeed/javascript">var wpilFrontend={"ajaxUrl":"/wp-admin/admin-ajax.php","postId":"55","postType":"post","openInternalInNewTab":"0","openExternalInNewTab":"0","disableClicks":"0","openLinksWithJS":"0","trackAllElementClicks":"0","clicksI18n":{"imageNoText":"Image in link: No Text","imageText":"Image Title: ","noText":"No Anchor Text Found"}}</script> <script id="chaty-front-end-js-extra" type="litespeed/javascript">var chaty_settings={"ajax_url":"https://desert-tracks.com/wp-admin/admin-ajax.php","analytics":"0","capture_analytics":"1","token":"9669ac4dd4","chaty_widgets":[{"id":0,"identifier":0,"settings":{"cta_type":"simple-view","cta_body":"","cta_head":"","cta_head_bg_color":"","cta_head_text_color":"","show_close_button":1,"position":"left","custom_position":1,"bottom_spacing":"25","side_spacing":"25","icon_view":"vertical","default_state":"click","cta_text":"","cta_text_color":"#333333","cta_bg_color":"#ffffff","show_cta":"first_click","is_pending_mesg_enabled":"off","pending_mesg_count":"1","pending_mesg_count_color":"#ffffff","pending_mesg_count_bgcolor":"#dd0000","widget_icon":"chat-base","widget_icon_url":"","font_family":"Helvetica","widget_size":"44","custom_widget_size":"44","is_google_analytics_enabled":0,"close_text":"Hide","widget_color":"#A886CD","widget_icon_color":"#ffffff","widget_rgb_color":"168,134,205","has_custom_css":0,"custom_css":"","widget_token":"0957ffa47d","widget_index":"","attention_effect":""},"triggers":{"has_time_delay":0,"time_delay":"0","exit_intent":0,"has_display_after_page_scroll":1,"display_after_page_scroll":"20","auto_hide_widget":0,"hide_after":0,"show_on_pages_rules":[],"time_diff":0,"has_date_scheduling_rules":0,"date_scheduling_rules":{"start_date_time":"","end_date_time":""},"date_scheduling_rules_timezone":0,"day_hours_scheduling_rules_timezone":0,"has_day_hours_scheduling_rules":[],"day_hours_scheduling_rules":[],"day_time_diff":0,"show_on_direct_visit":0,"show_on_referrer_social_network":0,"show_on_referrer_search_engines":0,"show_on_referrer_google_ads":0,"show_on_referrer_urls":[],"has_show_on_specific_referrer_urls":0,"has_traffic_source":0,"has_countries":0,"countries":[],"has_target_rules":0},"channels":[{"channel":"Whatsapp","value":"264818670705","hover_text":"WhatsApp","chatway_position":"","svg_icon":"\u003Csvg width=\"39\" height=\"39\" viewBox=\"0 0 39 39\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"\u003E\u003Ccircle class=\"color-element\" cx=\"19.4395\" cy=\"19.4395\" r=\"19.4395\" fill=\"#49E670\"/\u003E\u003Cpath d=\"M12.9821 10.1115C12.7029 10.7767 11.5862 11.442 10.7486 11.575C10.1902 11.7081 9.35269 11.8411 6.84003 10.7767C3.48981 9.44628 1.39593 6.25317 1.25634 6.12012C1.11674 5.85403 2.13001e-06 4.39053 2.13001e-06 2.92702C2.13001e-06 1.46351 0.83755 0.665231 1.11673 0.399139C1.39592 0.133046 1.8147 1.01506e-06 2.23348 1.01506e-06C2.37307 1.01506e-06 2.51267 1.01506e-06 2.65226 1.01506e-06C2.93144 1.01506e-06 3.21063 -2.02219e-06 3.35022 0.532183C3.62941 1.19741 4.32736 2.66092 4.32736 2.79397C4.46696 2.92702 4.46696 3.19311 4.32736 3.32616C4.18777 3.59225 4.18777 3.59224 3.90858 3.85834C3.76899 3.99138 3.6294 4.12443 3.48981 4.39052C3.35022 4.52357 3.21063 4.78966 3.35022 5.05576C3.48981 5.32185 4.18777 6.38622 5.16491 7.18449C6.42125 8.24886 7.39839 8.51496 7.81717 8.78105C8.09636 8.91409 8.37554 8.9141 8.65472 8.648C8.93391 8.38191 9.21309 7.98277 9.49228 7.58363C9.77146 7.31754 10.0507 7.1845 10.3298 7.31754C10.609 7.45059 12.2841 8.11582 12.5633 8.38191C12.8425 8.51496 13.1217 8.648 13.1217 8.78105C13.1217 8.78105 13.1217 9.44628 12.9821 10.1115Z\" transform=\"translate(12.9597 12.9597)\" fill=\"#FAFAFA\"/\u003E\u003Cpath d=\"M0.196998 23.295L0.131434 23.4862L0.323216 23.4223L5.52771 21.6875C7.4273 22.8471 9.47325 23.4274 11.6637 23.4274C18.134 23.4274 23.4274 18.134 23.4274 11.6637C23.4274 5.19344 18.134 -0.1 11.6637 -0.1C5.19344 -0.1 -0.1 5.19344 -0.1 11.6637C-0.1 13.9996 0.624492 16.3352 1.93021 18.2398L0.196998 23.295ZM5.87658 19.8847L5.84025 19.8665L5.80154 19.8788L2.78138 20.8398L3.73978 17.9646L3.75932 17.906L3.71562 17.8623L3.43104 17.5777C2.27704 15.8437 1.55796 13.8245 1.55796 11.6637C1.55796 6.03288 6.03288 1.55796 11.6637 1.55796C17.2945 1.55796 21.7695 6.03288 21.7695 11.6637C21.7695 17.2945 17.2945 21.7695 11.6637 21.7695C9.64222 21.7695 7.76778 21.1921 6.18227 20.039L6.17557 20.0342L6.16817 20.0305L5.87658 19.8847Z\" transform=\"translate(7.7758 7.77582)\" fill=\"white\" stroke=\"white\" stroke-width=\"0.2\"/\u003E\u003C/svg\u003E","is_desktop":1,"is_mobile":1,"icon_color":"#49E670","icon_rgb_color":"73,230,112","channel_type":"Whatsapp","custom_image_url":"","order":"","pre_set_message":"","is_use_web_version":"1","is_open_new_tab":"1","is_default_open":"0","has_welcome_message":"0","emoji_picker":"1","input_placeholder":"Write your message...","chat_welcome_message":"\u003Cp\u003EHow can I help you? :)\u003C/p\u003E","wp_popup_headline":"Let&#039;s chat on WhatsApp","wp_popup_nickname":"","wp_popup_profile":"","wp_popup_head_bg_color":"#4AA485","qr_code_image_url":"","mail_subject":"","channel_account_type":"personal","contact_form_settings":[],"contact_fields":[],"url":"https://web.whatsapp.com/send?phone=264818670705","mobile_target":"","desktop_target":"_blank","target":"_blank","is_agent":0,"agent_data":[],"header_text":"","header_sub_text":"","header_bg_color":"","header_text_color":"","widget_token":"0957ffa47d","widget_index":"","click_event":"","viber_url":""}]}],"data_analytics_settings":"off","lang":{"whatsapp_label":"WhatsApp Message","hide_whatsapp_form":"Hide WhatsApp Form","emoji_picker":"Show Emojis"},"has_chatway":""}</script> <script type="litespeed/javascript" data-src="https://www.google.com/recaptcha/api.js?render=explicit&amp;ver=6.1.20" id="google-recaptcha-js"></script> <script id="fluent-form-submission-js-extra" type="litespeed/javascript">var fluentFormVars={"ajaxUrl":"https://desert-tracks.com/wp-admin/admin-ajax.php","forms":[],"step_text":"Step %activeStep% of %totalStep% - %stepTitle%","is_rtl":"","date_i18n":{"previousMonth":"Previous Month","nextMonth":"Next Month","months":{"shorthand":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"longhand":["January","February","March","April","May","June","July","August","September","October","November","December"]},"weekdays":{"longhand":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"shorthand":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"]},"daysInMonth":[31,28,31,30,31,30,31,31,30,31,30,31],"rangeSeparator":" to ","weekAbbreviation":"Wk","scrollTitle":"Scroll to increment","toggleTitle":"Click to toggle","amPM":["AM","PM"],"yearAriaLabel":"Year","firstDayOfWeek":1},"pro_version":"","fluentform_version":"6.1.20","force_init":"","stepAnimationDuration":"350","upload_completed_txt":"100% Completed","upload_start_txt":"0% Completed","uploading_txt":"Uploading","choice_js_vars":{"noResultsText":"No results found","loadingText":"Loading...","noChoicesText":"No choices to choose from","itemSelectText":"Press to select","maxItemTextSingular":"Only %%maxItemCount%% option can be added","maxItemTextPlural":"Only %%maxItemCount%% options can be added"},"input_mask_vars":{"clearIfNotMatch":!1},"nonce":"40300d3bbd","file_delete_nonce":"9aa32bfb03","form_id":"8","step_change_focus":"1","has_cleantalk":"","pro_payment_script_compatible":""};var fluentform_submission_messages_8={"file_upload_in_progress":"File upload in progress. Please wait...","javascript_handler_failed":"Javascript handler could not be loaded. Form submission has been failed. Reload the page and try again"};var fluentform_payment_messages_8={"stock_out_message":"This Item is Stock Out","item_label":"Item","price_label":"Price","qty_label":"Qty","line_total_label":"Line Total","sub_total_label":"Sub Total","discount_label":"Discount","total_label":"Total","signup_fee_label":"Signup Fee","trial_label":"Trial","processing_text":"Processing...","confirming_text":"Confirming..."};var fluentform_save_progress_messages_8={"copy_button":"Copy","email_button":"Email","email_placeholder":"Your Email Here","copy_success":"Copied"};var fluentform_address_messages_8={"please_wait":"Please wait ...","location_not_determined":"Could not determine address from location.","address_fetch_failed":"Failed to fetch address from coordinates.","geolocation_failed":"Geolocation failed or was denied.","geolocation_not_supported":"Geolocation is not supported by this browser."};var fluentform_gateway_messages_8={"request_failed":"Request failed. Please try again","payment_failed":"Payment process failed!","no_method_found":"No method found","processing_text":"Processing..."};var fluentform_submission_messages_global={"javascript_handler_failed":"Javascript handler could not be loaded. Form submission has been failed. Reload the page and try again"};var fluentform_address_messages_global={"please_wait":"Please wait ...","location_not_determined":"Could not determine address from location.","address_fetch_failed":"Failed to fetch address from coordinates.","geolocation_failed":"Geolocation failed or was denied.","geolocation_not_supported":"Geolocation is not supported by this browser."}</script> <script id="popup-maker-site-js-extra" type="litespeed/javascript">var pum_vars={"version":"1.21.5","pm_dir_url":"https://desert-tracks.com/wp-content/plugins/popup-maker/","ajaxurl":"https://desert-tracks.com/wp-admin/admin-ajax.php","restapi":"https://desert-tracks.com/wp-json/pum/v1","rest_nonce":null,"default_theme":"5795","debug_mode":"","disable_tracking":"","home_url":"/","message_position":"top","core_sub_forms_enabled":"1","popups":[],"cookie_domain":"","analytics_enabled":"1","analytics_route":"analytics","analytics_api":"https://desert-tracks.com/wp-json/pum/v1"};var pum_sub_vars={"ajaxurl":"https://desert-tracks.com/wp-admin/admin-ajax.php","message_position":"top"};var pum_popups={"pum-5806":{"triggers":[{"type":"click_open","settings":{"cookie_name":"","extra_selectors":".inquiry-btn"}}],"cookies":[],"disable_on_mobile":!1,"disable_on_tablet":!1,"atc_promotion":null,"explain":null,"type_section":null,"theme_id":"5796","size":"xlarge","responsive_min_width":"320px","responsive_max_width":"600px","custom_width":"px","custom_height_auto":!0,"custom_height":"380px","scrollable_content":!1,"animation_type":"slide","animation_speed":"700","animation_origin":"center center","open_sound":"none","custom_sound":"","location":"right bottom","position_top":"100","position_bottom":"10","position_left":"0","position_right":"10","position_from_trigger":!1,"position_fixed":!0,"overlay_disabled":!0,"stackable":!0,"disable_reposition":!1,"zindex":"1999999999","close_button_delay":"0","fi_promotion":null,"close_on_form_submission":!0,"close_on_form_submission_delay":"10000","close_on_overlay_click":!1,"close_on_esc_press":!1,"close_on_f4_press":!1,"disable_form_reopen":!1,"disable_accessibility":!1,"theme_slug":"lightbox","id":5806,"slug":"floating-quick-inquiry-fluent-form"}}</script> <script id="ivory-search-scripts-js-extra" type="litespeed/javascript">var IvorySearchVars={"is_analytics_enabled":"1"}</script> <script data-ccm-injected="1" type="litespeed/javascript" data-src="https://cdn.trustindex.io/loader.js?ver=1" id="trustindex-loader-js-js" data-wp-strategy="async"></script> <style id="fluentform_custom_css_8" type="text/css">.btn-submit {
+    font-weight:700 !important;
+    background-color: transparent !important;
+    border-width: 2px !important;
+}
+
+
+.btn-submit:hover {
+    background-color: white !important;
+    border-color: transparent !important;
+    color: rgba(171, 169, 154, 1) !important;
+}
+
+
+.ff-el-form-control {
+    border-radius: 1px !important;
+}</style> <script type="litespeed/javascript">jQuery(document).ready(function($){function initPicker(){if(typeof flatpickr=='undefined'){return}

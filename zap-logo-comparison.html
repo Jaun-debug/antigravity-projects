@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAP Logo Comparison</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:wght@400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #1a1a1a;
+      font-family: 'Open Sans', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 40px;
+      gap: 60px;
+      min-height: 100vh;
+    }
+    h1 {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .comparison {
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+    }
+    .logo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo-label {
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+    .logo-sublabel {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      text-align: center;
+      line-height: 1.7;
+      max-width: 200px;
+      margin-top: -10px;
+    }
+
+    /* Original logo background */
+    .bg-white { background: #fff; padding: 30px; border-radius: 4px; }
+    .bg-dark  { background: #2c3e2d; padding: 30px; border-radius: 4px; }
+    .bg-sand  { background: #f5f0e8; padding: 30px; border-radius: 4px; }
+
+    /* Divider */
+    .vs {
+      font-size: 11px;
+      letter-spacing: 4px;
+      color: rgba(255,255,255,0.2);
+      padding-top: 120px;
+      text-transform: uppercase;
+    }
+
+    /* Size showcase */
+    .sizes {
+      display: flex;
+      gap: 40px;
+      align-items: flex-end;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .size-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* Color variants */
+    .variants {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+    .variant-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+    .variant-label {
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+    }
+
+    .section-title {
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      align-self: flex-start;
+    }
+    .divider-line {
+      width: 100%;
+      max-width: 900px;
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ZAP Tours &amp; Safaris — Logo Redesign</h1>
+
+  <!-- COMPARISON: ORIGINAL vs REDESIGNED -->
+  <div class="comparison">
+
+    <!-- ORIGINAL -->
+    <div class="logo-card">
+      <span class="logo-label">Original</span>
+      <div class="bg-white">
+        <img src="https://via.placeholder.com/200x200/ffffff/000000?text=Original+Logo" alt="Original" style="display:none;">
+        <!-- Recreating original style: black on white, flat -->
+        <svg width="200" height="200" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#111111" stroke-width="3"/>
+          <circle cx="60" cy="60" r="49" fill="none" stroke="#111111" stroke-width="1"/>
+          <text x="60" y="76" text-anchor="middle" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#111111" letter-spacing="-2">Z</text>
+          <path id="oa" d="M 20,60 A 40,40 0 0,1 100,60" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="9.5" font-weight="700" fill="#111111" letter-spacing="4">
+            <textPath href="#oa" startOffset="18%">ZAP</textPath>
+          </text>
+          <path id="ob" d="M 12,68 A 48,48 0 0,0 108,68" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="7" font-weight="400" fill="#111111" letter-spacing="2.8">
+            <textPath href="#ob" startOffset="8%">TOURS &amp; SAFARIS</textPath>
+          </text>
+          <ellipse cx="22" cy="54" rx="2.5" ry="4" fill="#111111" transform="rotate(-20 22 54)"/>
+          <ellipse cx="18" cy="47" rx="2" ry="3.5" fill="#111111" transform="rotate(-35 18 47)"/>
+          <ellipse cx="17" cy="40" rx="1.8" ry="3" fill="#111111" transform="rotate(-50 17 40)"/>
+          <ellipse cx="19" cy="34" rx="1.5" ry="2.8" fill="#111111" transform="rotate(-65 19 34)"/>
+          <path d="M 24,58 Q 20,50 18,38" stroke="#111111" stroke-width="1.2" fill="none"/>
+          <circle cx="60" cy="20" r="2" fill="#111111"/>
+        </svg>
+      </div>
+      <p class="logo-sublabel">Flat black · single colour<br>as used in original email</p>
+    </div>
+
+    <div class="vs">→</div>
+
+    <!-- REDESIGNED — on dark green -->
+    <div class="logo-card">
+      <span class="logo-label">Redesigned — On Dark</span>
+      <div class="bg-dark">
+        <svg width="200" height="200" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(212,175,55,0.35)" stroke-width="0.8"/>
+          <text x="60" y="75" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="58" font-weight="700" fill="#ffffff" letter-spacing="-2">Z</text>
+          <path id="na" d="M 20,60 A 40,40 0 0,1 100,60" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="9.5" font-weight="600" fill="#d4af37" letter-spacing="4">
+            <textPath href="#na" startOffset="18%">ZAP</textPath>
+          </text>
+          <path id="nb" d="M 12,68 A 48,48 0 0,0 108,68" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="7" font-weight="400" fill="rgba(255,255,255,0.65)" letter-spacing="2.8">
+            <textPath href="#nb" startOffset="8%">TOURS &amp; SAFARIS</textPath>
+          </text>
+          <ellipse cx="22" cy="54" rx="2.5" ry="4" fill="#d4af37" transform="rotate(-20 22 54)"/>
+          <ellipse cx="18" cy="47" rx="2" ry="3.5" fill="#d4af37" transform="rotate(-35 18 47)"/>
+          <ellipse cx="17" cy="40" rx="1.8" ry="3" fill="#d4af37" transform="rotate(-50 17 40)"/>
+          <ellipse cx="19" cy="34" rx="1.5" ry="2.8" fill="#d4af37" transform="rotate(-65 19 34)"/>
+          <path d="M 24,58 Q 20,50 18,38" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+          <circle cx="60" cy="20" r="2.5" fill="#d4af37"/>
+        </svg>
+      </div>
+      <p class="logo-sublabel">Gold + white on forest green<br>used in PDF &amp; email signature</p>
+    </div>
+
+    <!-- REDESIGNED — on white/sand -->
+    <div class="logo-card">
+      <span class="logo-label">Redesigned — On Light</span>
+      <div class="bg-sand">
+        <svg width="200" height="200" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#2c3e2d" stroke-width="2.5"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(44,62,45,0.25)" stroke-width="0.8"/>
+          <text x="60" y="75" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="58" font-weight="700" fill="#2c3e2d" letter-spacing="-2">Z</text>
+          <path id="la" d="M 20,60 A 40,40 0 0,1 100,60" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="9.5" font-weight="600" fill="#2c3e2d" letter-spacing="4">
+            <textPath href="#la" startOffset="18%">ZAP</textPath>
+          </text>
+          <path id="lb" d="M 12,68 A 48,48 0 0,0 108,68" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="7" font-weight="400" fill="#2c3e2d" letter-spacing="2.8">
+            <textPath href="#lb" startOffset="8%">TOURS &amp; SAFARIS</textPath>
+          </text>
+          <ellipse cx="22" cy="54" rx="2.5" ry="4" fill="#b8860b" transform="rotate(-20 22 54)"/>
+          <ellipse cx="18" cy="47" rx="2" ry="3.5" fill="#b8860b" transform="rotate(-35 18 47)"/>
+          <ellipse cx="17" cy="40" rx="1.8" ry="3" fill="#b8860b" transform="rotate(-50 17 40)"/>
+          <ellipse cx="19" cy="34" rx="1.5" ry="2.8" fill="#b8860b" transform="rotate(-65 19 34)"/>
+          <path d="M 24,58 Q 20,50 18,38" stroke="#b8860b" stroke-width="1.2" fill="none"/>
+          <circle cx="60" cy="20" r="2.5" fill="#b8860b"/>
+        </svg>
+      </div>
+      <p class="logo-sublabel">Forest green + gold on sand<br>used in newsletter header</p>
+    </div>
+  </div>
+
+  <hr class="divider-line">
+
+  <!-- SIZE SHOWCASE -->
+  <p class="section-title">Sizes — how it scales</p>
+  <div class="sizes">
+    <div class="size-item">
+      <div class="bg-dark" style="padding:18px;">
+        <svg width="160" height="160" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.8"/>
+          <text x="60" y="75" text-anchor="middle" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#fff" letter-spacing="-2">Z</text>
+          <path id="s1a" d="M 20,60 A 40,40 0 0,1 100,60" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="9.5" font-weight="600" fill="#d4af37" letter-spacing="4"><textPath href="#s1a" startOffset="18%">ZAP</textPath></text>
+          <path id="s1b" d="M 12,68 A 48,48 0 0,0 108,68" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="7" fill="rgba(255,255,255,0.65)" letter-spacing="2.8"><textPath href="#s1b" startOffset="8%">TOURS &amp; SAFARIS</textPath></text>
+          <ellipse cx="22" cy="54" rx="2.5" ry="4" fill="#d4af37" transform="rotate(-20 22 54)"/>
+          <ellipse cx="18" cy="47" rx="2" ry="3.5" fill="#d4af37" transform="rotate(-35 18 47)"/>
+          <ellipse cx="17" cy="40" rx="1.8" ry="3" fill="#d4af37" transform="rotate(-50 17 40)"/>
+          <path d="M 24,58 Q 20,50 18,38" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+          <circle cx="60" cy="20" r="2.5" fill="#d4af37"/>
+        </svg>
+      </div>
+      <span class="size-label">160px · PDF header</span>
+    </div>
+    <div class="size-item">
+      <div class="bg-dark" style="padding:14px;">
+        <svg width="120" height="120" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="0.8"/>
+          <text x="60" y="75" text-anchor="middle" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#fff" letter-spacing="-2">Z</text>
+          <path id="s2a" d="M 20,60 A 40,40 0 0,1 100,60" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="9.5" font-weight="600" fill="#d4af37" letter-spacing="4"><textPath href="#s2a" startOffset="18%">ZAP</textPath></text>
+          <path id="s2b" d="M 12,68 A 48,48 0 0,0 108,68" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="7" fill="rgba(255,255,255,0.65)" letter-spacing="2.8"><textPath href="#s2b" startOffset="8%">TOURS &amp; SAFARIS</textPath></text>
+          <ellipse cx="22" cy="54" rx="2.5" ry="4" fill="#d4af37" transform="rotate(-20 22 54)"/>
+          <ellipse cx="18" cy="47" rx="2" ry="3.5" fill="#d4af37" transform="rotate(-35 18 47)"/>
+          <path d="M 24,58 Q 20,50 18,38" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+          <circle cx="60" cy="20" r="2.5" fill="#d4af37"/>
+        </svg>
+      </div>
+      <span class="size-label">120px · newsletter</span>
+    </div>
+    <div class="size-item">
+      <div class="bg-dark" style="padding:10px;">
+        <svg width="80" height="80" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#d4af37" stroke-width="2.5"/>
+          <text x="60" y="75" text-anchor="middle" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#fff" letter-spacing="-2">Z</text>
+          <path id="s3a" d="M 20,60 A 40,40 0 0,1 100,60" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="9.5" font-weight="600" fill="#d4af37" letter-spacing="4"><textPath href="#s3a" startOffset="18%">ZAP</textPath></text>
+          <path id="s3b" d="M 12,68 A 48,48 0 0,0 108,68" fill="none"/>
+          <text font-family="Arial,sans-serif" font-size="7" fill="rgba(255,255,255,0.65)" letter-spacing="2.8"><textPath href="#s3b" startOffset="8%">TOURS &amp; SAFARIS</textPath></text>
+          <ellipse cx="22" cy="54" rx="2.5" ry="4" fill="#d4af37" transform="rotate(-20 22 54)"/>
+          <path d="M 24,58 Q 20,50 18,38" stroke="#d4af37" stroke-width="1.2" fill="none"/>
+          <circle cx="60" cy="20" r="2" fill="#d4af37"/>
+        </svg>
+      </div>
+      <span class="size-label">80px · email signature</span>
+    </div>
+    <div class="size-item">
+      <div class="bg-dark" style="padding:8px;">
+        <svg width="50" height="50" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#d4af37" stroke-width="3"/>
+          <text x="60" y="75" text-anchor="middle" font-family="Georgia,serif" font-size="58" font-weight="700" fill="#fff" letter-spacing="-2">Z</text>
+          <circle cx="60" cy="20" r="3" fill="#d4af37"/>
+        </svg>
+      </div>
+      <span class="size-label">50px · favicon/icon</span>
+    </div>
+  </div>
+
+  <hr class="divider-line">
+
+  <!-- WHAT CHANGED -->
+  <div style="max-width:700px; text-align:center;">
+    <p style="font-size:10px; letter-spacing:5px; text-transform:uppercase; color:rgba(255,255,255,0.25); margin-bottom:20px;">What was improved</p>
+    <div style="display:flex; gap:24px; text-align:left;">
+      <div style="flex:1; padding:20px; background:rgba(255,255,255,0.04); border-top:2px solid #b8860b;">
+        <p style="font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#b8860b; margin-bottom:8px;">Before</p>
+        <p style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.8;">Flat black monochrome · relies on raster image · blurs when resized · no brand colours · looks dated</p>
+      </div>
+      <div style="flex:1; padding:20px; background:rgba(255,255,255,0.04); border-top:2px solid #2c3e2d;">
+        <p style="font-size:9px; letter-spacing:3px; text-transform:uppercase; color:#d4af37; margin-bottom:8px;">After</p>
+        <p style="font-size:12px; color:rgba(255,255,255,0.5); line-height:1.8;">SVG vector · scales to any size perfectly · forest green + gold brand colours · gold laurel accent · works on dark &amp; light backgrounds</p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,333 @@
+====== PREMIUM TOURS CAROUSEL CODE ======
+
+<style>
+/* 
+=============================================
+PREMIUM TOURS CAROUSEL STYLES
+=============================================
+*/
+:root {
+    --primary: #2c3e50;
+    --accent: #e2a85e;
+    --bg-light: #fcfcfc;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Jost', sans-serif;
+}
+
+.dt-home-section {
+    padding: 5rem 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    font-family: var(--font-body);
+}
+
+.dt-section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    padding: 0 20px;
+}
+
+.dt-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.dt-section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--primary);
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Carousel Layout */
+.dt-carousel-container {
+    position: relative;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.dt-carousel-track {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 20px 5px 60px 5px; /* Bottom padding for hover shadows */
+    margin: -20px -5px; /* Offset padding */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.dt-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+/* The Premium Tour Card */
+.dt-tour-card {
+    flex: 0 0 calc(33.333% - 20px); /* 3 visible on desktop */
+    min-width: 320px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border-radius: 4px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06); 
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    overflow: hidden;
+}
+
+.dt-tour-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.1);
+}
+
+.dt-tour-img-container {
+    width: 100%;
+    height: 240px;
+    overflow: hidden;
+    position: relative;
+}
+
+.dt-tour-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s ease;
+}
+
+.dt-tour-card:hover .dt-tour-img {
+    transform: scale(1.05);
+}
+
+/* Gold line under image */
+.dt-tour-img-container::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s ease;
+}
+
+.dt-tour-card:hover .dt-tour-img-container::after {
+    transform: scaleX(1);
+}
+
+.dt-tour-content {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.dt-tour-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--primary);
+    margin: 0 0 15px 0;
+    line-height: 1.3;
+}
+
+.dt-tour-desc {
+    font-size: 14px;
+    color: #666; 
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+    font-weight: 300;
+    flex-grow: 1;
+}
+
+.dt-tour-link {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--primary);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    transition: color 0.3s ease;
+}
+
+.dt-tour-link svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    fill: currentColor;
+}
+
+.dt-tour-card:hover .dt-tour-link {
+    color: var(--accent);
+}
+
+.dt-tour-card:hover .dt-tour-link svg {
+    transform: translateX(5px);
+}
+
+/* Carousel Navigation Buttons */
+.dt-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    color: var(--primary);
+    transition: all 0.3s ease;
+}
+
+.dt-nav-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+.dt-nav-prev { left: 5px; margin-top: -30px; }
+.dt-nav-next { right: 5px; margin-top: -30px; }
+
+.dt-nav-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* Responsive Controls */
+@media (max-width: 1100px) {
+    .dt-tour-card { flex: 0 0 calc(50% - 15px); } 
+}
+@media (max-width: 768px) {
+    .dt-tour-card { flex: 0 0 85%; } 
+    .dt-nav-btn { display: none; } 
+    .dt-carousel-container { padding: 0 20px; }
+}
+</style>
+
+<div id="premiumToursCarouselApp">
+    <section class="dt-home-section">
+        <div class="dt-section-header">
+            <span class="dt-eyebrow">Discover the Desert</span>
+            <h2 class="dt-section-title">Self-Drive Itineraries</h2>
+        </div>
+
+        <div class="dt-carousel-container">
+            <!-- Navigation Buttons -->
+            <button class="dt-nav-btn dt-nav-prev" id="tourBtnPrev" aria-label="Previous Itinerary">
+                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
+
+            <div class="dt-carousel-track" id="toursTrack">
+                <!-- JavaScript Injects Cards Here -->
+            </div>
+
+            <button class="dt-nav-btn dt-nav-next" id="tourBtnNext" aria-label="Next Itinerary">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </button>
+        </div>
+    </section>
+</div>
+
+<script data-no-optimize="1">
+(function() {
+    const toursData = [
+  {
+    "url": "https://wetu.com/ItineraryOutputs/Discovery/586DF695-7CC0-4F31-9320-C37FFCE334ED",
+    "img": "https://desert-tracks.com/wp-content/uploads/2024/11/Spitzkoppe-Rockarch-sunset.avif",
+    "title": "14 Day Best of Namibia Self-drive Safari",
+    "desc": "Experience Namibia’s highlights in comfort. Drive through deserts, wildlife parks, and coastlines on a 14-day self-drive safari."
+  },
+  {
+    "url": "https://wetu.com/ItineraryOutputs/Discovery/0EB69854-4074-4E8C-AD3A-24D86D356AC3",
+    "img": "https://desert-tracks.com/wp-content/uploads/2025/10/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280.jpg",
+    "title": "17 Day Namibia, Chobe & Vic Falls Self-drive Safari",
+    "desc": "Discover Namibia, Chobe, and Victoria Falls in one epic 17-day self-drive safari filled with wildlife, culture, and natural wonders."
+  },
+  {
+    "url": "https://wetu.com/ItineraryOutputs/Discovery/9F0A92DB-E960-443C-8D36-CDC1DFBDB8BC",
+    "img": "https://desert-tracks.com/wp-content/uploads/2025/04/bc95b679-56fc-4800-b602-5d040fe0cced-png.webp",
+    "title": "11 Day Namibia Wildlife Self-drive Safari",
+    "desc": "Track Namibia’s wildlife on an 11-day self-drive safari, exploring Etosha’s game-rich plains, desert landscapes, and unique cultural encounters."
+  },
+  {
+    "url": "https://wetu.com/Itinerary/Landing/2301846c-353e-4c4b-b373-5ad746b0a1e4",
+    "img": "https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Desert-Rhino-Camp_3-scaled.jpg",
+    "title": "18 Day Hidden Treasures Namibia Self-drive Safari",
+    "desc": "Uncover Namibia’s hidden gems on an 18-day self-drive safari, exploring remote landscapes, wildlife havens, and cultural treasures."
+  },
+  {
+    "url": "https://wetu.com/ItineraryOutputs/Discovery/E6393F53-5A45-4B44-9FB3-3EF19FD4AF52",
+    "img": "https://desert-tracks.com/wp-content/uploads/2025/01/Bagatelle-Lodge-Kalahari-Game-Ranch-Namibia-Chalte-on-dune2.jpg",
+    "title": "11 Day South of Namibia Self-drive Safari",
+    "desc": "Journey through Namibia’s south on an 11-day self-drive safari, visiting deserts, canyons, ghost towns, and wide-open landscapes."
+  },
+  {
+    "url": "https://wetu.com/ItineraryOutputs/Discovery/271FEF76-6606-4AE3-A9AE-D0C4E4B61437",
+    "img": "https://desert-tracks.com/wp-content/uploads/2024/04/Divava.jpg",
+    "title": "18 Day Namibia, Delta, Chobe & Vic Falls Self-drive Safari",
+    "desc": "Journey from Namibia’s deserts to Victoria Falls on an 18-day self-drive safari, filled with wildlife, culture, and unforgettable landscapes."
+  }
+];
+
+    const toursTrack = document.getElementById('toursTrack');
+    if (!toursTrack) return; 
+    
+    let toursHtml = '';
+    
+    toursData.forEach(t => {
+        toursHtml += `
+            <a href="${t.url}" target="_blank" rel="noopener noreferrer" class="dt-tour-card">
+                <div class="dt-tour-img-container">
+                    <img src="${t.img}" alt="${t.title}" class="dt-tour-img">
+                </div>
+                <div class="dt-tour-content">
+                    <h3 class="dt-tour-title">${t.title}</h3>
+                    <p class="dt-tour-desc">${t.desc}</p>
+                    <div class="dt-tour-link">
+                        View Itinerary
+                        <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </div>
+                </div>
+            </a>
+        `;
+    });
+    
+    toursTrack.innerHTML = toursHtml;
+
+    // Carousel scroll logic
+    const tourBtnPrev = document.getElementById('tourBtnPrev');
+    const tourBtnNext = document.getElementById('tourBtnNext');
+
+    if (tourBtnNext && tourBtnPrev) {
+        tourBtnNext.addEventListener('click', () => {
+            const scrollAmount = toursTrack.clientWidth > 768 ? 400 : toursTrack.clientWidth;
+            toursTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+        });
+
+        tourBtnPrev.addEventListener('click', () => {
+            const scrollAmount = toursTrack.clientWidth > 768 ? 400 : toursTrack.clientWidth;
+            toursTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+        });
+    }
+})();
+</script>

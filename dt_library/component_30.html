@@ -1,0 +1,832 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>South of Namibia Self-drive Safari</title>
+    <!-- Font Imports -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            color: #222;
+            background-color: #ffffff;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        *, *::before, *::after {
+            box-sizing: inherit;
+        }
+
+        .lux-container {
+            margin-top: -2px !important;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @media (min-width: 1024px) {
+            .lux-container {
+            margin-top: -2px !important;
+                flex-direction: row;
+                align-items: flex-start; /* CRITICAL FOR STICKY TO WORK IN FLEXBOX */
+            }
+        }
+
+        /* LEFT SIDE: Sticky Hero */
+        .lux-left {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        @media (min-width: 1024px) {
+            .lux-left {
+                width: 50vw;
+                height: calc(100vh - 85px); /* Adjusted to remove the white gap */
+                position: -webkit-sticky;
+                position: sticky;
+                top: 85px; /* Nudged up exactly to meet the menu bar */
+            }
+        }
+
+        .lux-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,0.85) 100%);
+        }
+
+        /* Hero Content */
+        .lux-hero-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            padding: 2.5rem;
+            color: #ffffff;
+            width: 100%;
+        }
+
+        @media (min-width: 1024px) {
+            .lux-hero-content {
+                padding: 4rem 5rem;
+            }
+        }
+
+        /* Interactive Map Widget */
+        .lux-interactive-map {
+            /* Mobile configuration: snaps perfectly to the top screen, pushing header out of sight! */
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: auto; 
+            aspect-ratio: 866 / 702; /* Perfectly matches your screenshot dimensions */
+            background: #ffffff; /* Solid white so opacity lightens the map */
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border: none;
+            border-radius: 16px; 
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            z-index: 999999; 
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px); 
+            transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none; 
+        }
+
+        .lux-interactive-map.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+            pointer-events: auto; /* Enable interaction when open */
+        }
+
+        @media (min-width: 1024px) {
+            .lux-interactive-map {
+                /* Desktop configuration */
+                position: absolute;
+                top: 1.5rem;
+                right: 1.5rem;
+                left: auto;
+                width: 360px; /* Slightly wider to give the map breathing room */
+                height: auto;
+                aspect-ratio: 866 / 702; /* Perfectly matches custom map so zero cropping */
+                z-index: 10;
+                border-radius: 16px;
+                transform: translateX(20px); /* slide in from right */
+                pointer-events: auto;
+            }
+            .lux-interactive-map.is-visible {
+                transform: translateX(0);
+            }
+        }
+
+        .lux-interactive-map img.map-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.70; /* 30% lighter via opacity blending into the white background */
+            mix-blend-mode: normal; 
+            filter: none; 
+            transform: scale(1.03); /* Zooms slightly to cleanly clip off any edge white strips */
+            display: block;
+        }
+
+        /* Map Pins */
+        .lux-map-pin {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background-color: #d87a4d; /* Mark as orange circles */
+            border-radius: 50%;
+            border: 2px solid #ffffff; /* Small white ring to make them pop perfectly */
+            color: #ffffff; /* White numbers inside */
+            font-size: 0.8rem; 
+            font-weight: 600; 
+            text-shadow: none; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15); /* Soft drop shadow */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: translate(-50%, -50%);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            /* Removed the white box-shadow */
+        }
+
+        .lux-map-pin.is-active {
+            background-color: #d87a4d;
+            border-color: #d87a4d;
+            color: #ffffff;
+            transform: translate(-50%, -50%) scale(1.3);
+            box-shadow: 0 0 15px rgba(216, 122, 77, 0.5);
+            z-index: 20;
+        }
+
+        .lux-map-pin .pin-text {
+            display: block;
+        }
+
+        .lux-map-pin .pin-car {
+            display: none;
+            width: 14px;
+            height: 14px;
+        }
+
+        .lux-map-pin.is-active .pin-text {
+            display: none;
+        }
+
+        .lux-map-pin.is-active .pin-car {
+            display: block;
+        }
+
+        .lux-map-pin .pin-label {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-top: 6px;
+            font-size: 0.45rem;
+            color: #111111; /* Dark text for better reading */
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.8s ease 0.2s;
+            font-weight: 300; /* Light weight */
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: none; /* No shadow */
+            pointer-events: none;
+        }
+
+        .lux-map-pin.is-active .pin-label {
+            opacity: 1;
+        }
+
+        /* Text Elements */
+        .lux-tag-small {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 500;
+            color: #e5e5e5;
+            margin-bottom: 1rem;
+        }
+
+        .lux-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+            color: #ffffff !important; /* Force white, override WP Theme blue */
+        }
+
+        .lux-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #cccccc;
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+
+        /* RIGHT SIDE: Scrollable Content */
+        .lux-right {
+            width: 100%;
+            padding: 4rem 2rem 40vh 2rem;
+            background-color: #ffffff;
+        }
+
+        @media (min-width: 1024px) {
+            .lux-right {
+                width: 50vw;
+                padding: 6rem 4rem 40vh 2.5rem;
+            }
+        }
+
+        .lux-welcome-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            color: #888888;
+            margin-bottom: 1.5rem;
+        }
+
+        .lux-intro {
+            font-size: 1.4rem;
+            line-height: 1.7;
+            font-weight: 400;
+            color: #333333;
+            margin-bottom: 5rem;
+            max-width: 45rem;
+        }
+
+        @media (min-width: 1024px) {
+            .lux-intro {
+                font-size: 1.6rem;
+                margin-bottom: 7rem;
+            }
+        }
+
+        
+        .lux-day-location-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .lux-day-location-wrapper {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+        .lux-day-location {
+            margin-bottom: 0 !important;
+        }
+        .lux-view-map-btn {
+            background: none;
+            border: 1px solid #d87a4d;
+            color: #d87a4d;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: all 0.3s;
+        }
+        .lux-view-map-btn:hover {
+            background: #d87a4d;
+            color: #ffffff;
+        }
+        .lux-map-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 32px;
+            height: 32px;
+            background: #ffffff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            color: #333;
+            transition: transform 0.2s;
+        }
+        .lux-map-close:hover {
+            transform: scale(1.1);
+        }
+
+        /* Day Block Styling */
+        .lux-day-block {
+            margin-bottom: 6rem;
+            max-width: 45rem;
+        }
+
+        .lux-day-number-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .lux-day-numeral {
+            font-size: 4rem;
+            font-weight: 300;
+            color: #e6e6e6;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+
+        .lux-day-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: #f0f0f0;
+        }
+
+        .lux-day-location {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-weight: 600;
+            color: #777777;
+            margin: 0 0 0.75rem 0;
+            display: block;
+        }
+
+        .lux-day-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 400;
+            margin: 0 0 1rem 0;
+            color: #111111 !important; /* Force dark gray/black, override WP Theme blue */
+            letter-spacing: 0.02em;
+        }
+
+        .lux-day-desc {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #555555;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Elegant Carousel */
+        .lux-carousel {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            /* Removed the aggressive right-margin bleed so photos fit correctly on screen */
+        }
+
+        .lux-carousel::-webkit-scrollbar {
+            display: none; 
+        }
+
+        .lux-carousel img {
+            flex: 0 0 100%; /* Snap to full width instead of 85% */
+            height: 380px;
+            object-fit: cover;
+            border-radius: 4px;
+            scroll-snap-align: start;
+        }
+
+        @media (min-width: 768px) {
+            .lux-carousel img {
+                height: 480px; /* Slightly taller for better 100% impact */
+            }
+        }
+
+        /* Scroll Hint Arrow */
+        @keyframes flashOrangeRight {
+            0%, 100% { opacity: 1; transform: translateX(0); }
+            50% { opacity: 0.4; transform: translateX(6px); }
+        }
+
+        .lux-scroll-hint {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            margin-top: 0.75rem;
+            color: #d87a4d;
+        }
+        
+        @media (min-width: 1024px) {
+            .lux-scroll-hint {
+                /* Add a tiny bit of left margin to align with the pictures perfectly if desired */
+                margin-left: 0; 
+            }
+        }
+
+        .lux-scroll-hint svg {
+            width: 24px;
+            height: 24px;
+            animation: flashOrangeRight 1.5s infinite ease-in-out;
+        }
+    \n .lux-interactive-map { display: none !important; } \n html { scroll-behavior: smooth; } \n .lux-left { top: 90px !important; height: calc(100vh - 90px) !important; } \n .lux-hero-bg { position: absolute; top:0; left:0; width:100%; height:100%; background-size: cover; background-position: center; transition: opacity 2s ease; opacity: 0; z-index: 0; } \n .lux-hero-bg.active { opacity: 1; } \n .lux-overlay, .lux-hero-content { position: relative; z-index: 2; } \n .lux-title, .lux-subtitle { transition: opacity 0.8s ease; } \n .lux-carousel { scroll-behavior: smooth; } \n
+    </style>
+    <!-- Premium Smooth Scroll Library (Lenis) for luxurious itinerary scrolling -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.34/dist/lenis.min.js"></script>
+</head>
+<body>
+
+    <div class="lux-container" id="lux-app-30">
+        
+        <!-- RIGHT SIDE: Sticky Hero -->
+        <div class="lux-left" data-default-title="11 DAYS<br>South of<br>Namibia Safari" data-default-bg="https://wetu.com/ImageHandler/c1920x1080/Itineraries/68CC8584-DA8B-4229-8369-2F2C40EFB082/dscf4039-enhanced-nr.jpeg">
+            <!-- Crossfade BG Layers! -->
+            <div class="lux-hero-bg active lux-layer-1" style="background-image: url('https://wetu.com/ImageHandler/c1920x1080/Itineraries/68CC8584-DA8B-4229-8369-2F2C40EFB082/dscf4039-enhanced-nr.jpeg');"></div>
+            <div class="lux-hero-bg lux-layer-2" style="background-image: url('https://wetu.com/ImageHandler/c1920x1080/Itineraries/68CC8584-DA8B-4229-8369-2F2C40EFB082/dscf4039-enhanced-nr.jpeg');"></div>
+
+            <div class="lux-overlay"></div>
+            <div class="lux-hero-content">
+                <span class="lux-tag-small">DESERT TRACKS EXCLUSIVE</span>
+                <h1 class="lux-title"><span style="color:var(--orange, #ff6e00); font-weight: 500;">11 DAYS</span><br>South of<br>Namibia Safari</h1>
+                <p class="lux-subtitle">A bespoke luxury journey through legendary landscapes.</p>
+            </div>
+            <div class="lux-interactive-map"></div>
+        </div>
+
+        <!-- LEFT SIDE: Scrollable Feed -->
+        <div class="lux-right">
+            
+            <div class="lux-welcome-tag">Welcome</div>
+            <p class="lux-intro">
+                Prepare for an unforgettable adventure. This exclusive journey takes you through iconic landscapes, blending adventure and ultimate relaxation at every turn.
+            </p>
+
+            
+        <!-- DAY BLOCK 01 -->
+        <div class="lux-day-block" id="day-01" data-day="day-01" data-bg="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_breakfast2.jpg" data-region="Intu Afrika Kalahari Game Reserve">
+            <div class="lux-day-number-row">
+                <span class="lux-day-numeral">01</span>
+                <div class="lux-day-line"></div>
+            </div>
+            
+            <div class="lux-day-location-wrapper">
+                <span class="lux-day-location">INTU AFRIKA KALAHARI GAME RESERVE — CAMELTHORN KALAHARI LODGE</span>
+            </div>
+
+            <h3 class="lux-day-title">Arrival in Intu Afrika Kalahari Game Reserve</h3>
+            <p class="lux-day-desc">
+                Discover the vast, silent majesty of the Kalahari Desert, where red sand dunes glow under endless horizons. Take in the sweeping views and observe unique desert-adapted wildlife roaming freely through the arid bushveld.
+            </p>
+            <div class="lux-carousel-wrapper">
+                <div class="lux-carousel">
+                    <img src="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_table_pool3.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_boma_dinner11.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_pool_evening1.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/intu_africa_063.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/intu_afrika_4018.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_bathroom_21.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_bathroom13.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/20344/camelthorn_patio_chairs2.jpg" alt="Intu Afrika Kalahari Game Reserve - Camelthorn Kalahari Lodge" loading="lazy">
+                        
+                </div>
+                <div class="lux-scroll-hint" style="cursor: pointer;" title="Next Photo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DAY BLOCK 02 -->
+        <div class="lux-day-block" id="day-02" data-day="day-02" data-bg="https://wetu.com/ImageHandler/c1920x1080/4033/roadhouse2_2.jpg" data-region="Fish River Canyon">
+            <div class="lux-day-number-row">
+                <span class="lux-day-numeral">02</span>
+                <div class="lux-day-line"></div>
+            </div>
+            
+            <div class="lux-day-location-wrapper">
+                <span class="lux-day-location">FISH RIVER CANYON — CANYON ROADHOUSE GONDWANA COLLECTION NAMIBIA</span>
+            </div>
+
+            <h3 class="lux-day-title">Arrival in Fish River Canyon</h3>
+            <p class="lux-day-desc">
+                Surrender to the untamed beauty of the African wilderness. Let the rhythm of nature guide your days as you explore breathtaking landscapes, encounter iconic wildlife, and rest in absolute opulent comfort.
+            </p>
+            <div class="lux-carousel-wrapper">
+                <div class="lux-carousel">
+                    <img src="https://wetu.com/ImageHandler/c1920x1080/4033/2017_12_namibia-72772.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/roadhouse18.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/dscf7061.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/dscf7071.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/dscf7020.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/dsc_6820.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/20190314_080229-01.jpeg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/4033/LWH_7860.jpg" alt="Fish River Canyon - Canyon Roadhouse Gondwana Collection Namibia" loading="lazy">
+                        
+                </div>
+                <div class="lux-scroll-hint" style="cursor: pointer;" title="Next Photo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DAY BLOCK 03 -->
+        <div class="lux-day-block" id="day-03" data-day="day-03" data-bg="https://wetu.com/ImageHandler/c1920x1080/68363/1.jpg" data-region="Luderitz">
+            <div class="lux-day-number-row">
+                <span class="lux-day-numeral">03</span>
+                <div class="lux-day-line"></div>
+            </div>
+            
+            <div class="lux-day-location-wrapper">
+                <span class="lux-day-location">LUDERITZ — ALTE VILLA</span>
+            </div>
+
+            <h3 class="lux-day-title">Arrival in Luderitz</h3>
+            <p class="lux-day-desc">
+                Surrender to the untamed beauty of the African wilderness. Let the rhythm of nature guide your days as you explore breathtaking landscapes, encounter iconic wildlife, and rest in absolute opulent comfort.
+            </p>
+            <div class="lux-carousel-wrapper">
+                <div class="lux-carousel">
+                    <img src="https://wetu.com/ImageHandler/c1920x1080/68363/2.jpg" alt="Luderitz - Alte Villa" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/68363/3.jpg" alt="Luderitz - Alte Villa" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/68363/4.jpg" alt="Luderitz - Alte Villa" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/68363/5.jpg" alt="Luderitz - Alte Villa" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/68363/6.jpg" alt="Luderitz - Alte Villa" loading="lazy">
+                        
+                </div>
+                <div class="lux-scroll-hint" style="cursor: pointer;" title="Next Photo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DAY BLOCK 04 -->
+        <div class="lux-day-block" id="day-04" data-day="day-04" data-bg="https://wetu.com/ImageHandler/c1920x1080/235399/20220206_194335.jpg" data-region="Namib">
+            <div class="lux-day-number-row">
+                <span class="lux-day-numeral">04</span>
+                <div class="lux-day-line"></div>
+            </div>
+            
+            <div class="lux-day-location-wrapper">
+                <span class="lux-day-location">NAMIB — AT KRONENHOF LODGE</span>
+            </div>
+
+            <h3 class="lux-day-title">Arrival in Namib</h3>
+            <p class="lux-day-desc">
+                Surrender to the untamed beauty of the African wilderness. Let the rhythm of nature guide your days as you explore breathtaking landscapes, encounter iconic wildlife, and rest in absolute opulent comfort.
+            </p>
+            <div class="lux-carousel-wrapper">
+                <div class="lux-carousel">
+                    <img src="https://wetu.com/ImageHandler/c1920x1080/235399/20220206_193441.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/ds_img_0009_002.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/fr_4.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/img_0341.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/dscn0862.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/img_0766.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/img_0694.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/235399/dscn0898.jpg" alt="Namib - At Kronenhof Lodge" loading="lazy">
+                        
+                </div>
+                <div class="lux-scroll-hint" style="cursor: pointer;" title="Next Photo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DAY BLOCK 05 -->
+        <div class="lux-day-block" id="day-05" data-day="day-05" data-bg="https://wetu.com/ImageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg" data-region="Sossusvlei">
+            <div class="lux-day-number-row">
+                <span class="lux-day-numeral">05</span>
+                <div class="lux-day-line"></div>
+            </div>
+            
+            <div class="lux-day-location-wrapper">
+                <span class="lux-day-location">SOSSUSVLEI — DESERT HOMESTEAD LODGE</span>
+            </div>
+
+            <h3 class="lux-day-title">Arrival in Sossusvlei</h3>
+            <p class="lux-day-desc">
+                Immerse yourself in the surreal beauty of Sossusvlei. Towering crimson dunes contrast starkly against blinding white salt pans. Rise early to climb the iconic Dune 45 and marvel at the hauntingly beautiful, petrified trees of Deadvlei.
+            </p>
+            <div class="lux-carousel-wrapper">
+                <div class="lux-carousel">
+                    <img src="https://wetu.com/ImageHandler/c1920x1080/10515/img_6924.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/img_5262.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/2016_desert_homestead_lodge_reiterhaus_5.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/img_68201.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/img_68961.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/img_68891.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media-0012.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media-62053.jpg" alt="Sossusvlei - Desert Homestead Lodge" loading="lazy">
+                        
+                </div>
+                <div class="lux-scroll-hint" style="cursor: pointer;" title="Next Photo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+        <!-- DAY BLOCK 06 -->
+        <div class="lux-day-block" id="day-06" data-day="day-06" data-bg="https://wetu.com/ImageHandler/c1920x1080/211198/2405_namibia_windhoek--8.jpg" data-region="Windhoek">
+            <div class="lux-day-number-row">
+                <span class="lux-day-numeral">06</span>
+                <div class="lux-day-line"></div>
+            </div>
+            
+            <div class="lux-day-location-wrapper">
+                <span class="lux-day-location">WINDHOEK — THE WINDHOEK LUXURY SUITES</span>
+            </div>
+
+            <h3 class="lux-day-title">Arrival in Windhoek</h3>
+            <p class="lux-day-desc">
+                Experience the vibrant heart of Namibia in Windhoek, a city where modern luxury meets rich history. Settle into your boutique guesthouse and unwind after your travels. Tomorrow, your grand safari begins.
+            </p>
+            <div class="lux-carousel-wrapper">
+                <div class="lux-carousel">
+                    <img src="https://wetu.com/ImageHandler/c1920x1080/211198/the_windhoek_luxury_suites_352.jpeg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/2405_namibia_stellenbosch-1004065_1.jpg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/2405_namibia_windhoek_luxury_suites-000811.jpg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/the_windhoek_luxury_suites_49.jpeg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/the_windhoek_luxury_suites_28.jpeg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/dsc059511.jpg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/wls-_ground_floor_luxury_suite_.jpeg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        <img src="https://wetu.com/ImageHandler/c1920x1080/211198/dsc_0753.jpeg" alt="Windhoek - The Windhoek Luxury Suites" loading="lazy">
+                        
+                </div>
+                <div class="lux-scroll-hint" style="cursor: pointer;" title="Next Photo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        
+            
+            <!-- OUTRO -->
+            <div class="lux-day-block" data-bg="https://wetu.com/ImageHandler/c1920x1080/Itineraries/68CC8584-DA8B-4229-8369-2F2C40EFB082/dscf4039-enhanced-nr.jpeg" data-region="End of Journey">
+                <div class="lux-day-number-row">
+                    <span class="lux-day-numeral">--</span>
+                    <div class="lux-day-line"></div>
+                </div>
+                
+                <div class="lux-day-location-wrapper">
+                    <span class="lux-day-location">DEPARTURE — SAFARI CONCLUSION</span>
+                </div>
+
+                <h3 class="lux-day-title">Departure Bound</h3>
+                <p class="lux-day-desc">
+                    After a breathtaking final morning, make your way back down for your departure. Journey safely and take home an eternity of beautiful memories.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- JS Logic for the Smooth Premium Features -->
+    <script>
+        (function() {
+            // Multi-instance safe scope
+            const container = document.getElementById('lux-app-30');
+            if (!container) return;
+
+            // 1. Initialize Lenis for premium smooth page scrolling up and down
+            const lenis = new Lenis({
+                duration: 1.2,
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                direction: 'vertical',
+                gestureDirection: 'vertical',
+                smooth: true,
+                mouseMultiplier: 1,
+                smoothTouch: false,
+                touchMultiplier: 2,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // WP Builder 1-second delay hack
+            setTimeout(() => {
+                // 2. Intersection Observer for the Dynamic Hero Image Roll (True Crossfade)
+                const leftHero = container.querySelector('.lux-left');
+                const luxTitle = container.querySelector('.lux-title');
+                const luxSubtitle = container.querySelector('.lux-subtitle');
+                
+                let currentBg = leftHero.getAttribute('data-default-bg');
+                let activeLayer = 1;
+
+                function doCrossfade(bgUrl, region, subtext) {
+                    if (bgUrl === currentBg) return;
+                    currentBg = bgUrl;
+                    
+                    const oldLayerElement = container.querySelector('.lux-layer-' + activeLayer);
+                    activeLayer = activeLayer === 1 ? 2 : 1;
+                    const newLayerElement = container.querySelector('.lux-layer-' + activeLayer);
+
+                    // Preload image onto the invisible layer, then fade it in smoothly!
+                    if(newLayerElement) {
+                        newLayerElement.style.backgroundImage = `url('${bgUrl}')`;
+                        newLayerElement.classList.add('active');
+                    }
+                    if(oldLayerElement) {
+                        oldLayerElement.classList.remove('active');
+                    }
+
+                    // Fade titles gently
+                    if(luxTitle && luxSubtitle) {
+                        luxTitle.style.opacity = '0';
+                        luxSubtitle.style.opacity = '0';
+                        
+                        setTimeout(() => {
+                            luxTitle.innerHTML = region;
+                            luxSubtitle.innerHTML = subtext;
+                            luxTitle.style.opacity = '1';
+                            luxSubtitle.style.opacity = '1';
+                        }, 400);
+                    }
+                }
+
+                const dayObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const bg = entry.target.getAttribute('data-bg');
+                            const region = entry.target.getAttribute('data-region');
+                            if(bg && region) {
+                                doCrossfade(bg, region, "Exploring the breathtaking " + region);
+                            }
+                        }
+                    });
+                }, { rootMargin: '-30% 0px -40% 0px' });
+
+                const introObserver = new IntersectionObserver((entries) => {
+                    if(entries[0].isIntersecting) {
+                        const defaultBg = leftHero.getAttribute('data-default-bg');
+                        const defaultTitle = leftHero.getAttribute('data-default-title');
+                        if(defaultBg && defaultTitle) {
+                            doCrossfade(defaultBg, defaultTitle, "A bespoke luxury journey through legendary landscapes.");
+                        }
+                    }
+                }, { threshold: 0.5 });
+                
+                const introBlock = container.querySelector('.lux-intro');
+                if(introBlock) introObserver.observe(introBlock);
+
+                container.querySelectorAll('.lux-day-block').forEach(block => {
+                    dayObserver.observe(block);
+                });
+
+                // 3. Carousel Logic
+                container.querySelectorAll('.lux-carousel-wrapper').forEach(wrapper => {
+                    const carousel = wrapper.querySelector('.lux-carousel');
+                    const hintBtn = wrapper.querySelector('.lux-scroll-hint');
+                    const images = carousel.querySelectorAll('img');
+                    
+                    if (images.length > 0 && hintBtn) {
+                        hintBtn.addEventListener('click', () => {
+                            if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+                                carousel.scrollTo({ left: 0, behavior: 'smooth' });
+                            } else {
+                                const imgWidth = images[0].clientWidth;
+                                carousel.scrollTo({ left: carousel.scrollLeft + imgWidth + 16, behavior: 'smooth' });
+                            }
+                        });
+                    }
+                });
+            }, 1000); // 1-second delay stabilization
+        })();
+    </script>
+</body>
+</html>
+
+    

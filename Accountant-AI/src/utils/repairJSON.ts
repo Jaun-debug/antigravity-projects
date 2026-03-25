@@ -1,0 +1,1 @@
+export function repairJSON(content: string) { try { return JSON.parse(content); } catch (e) { console.warn("Attempting JSON repair..."); const repaired = content + "] }"; try { return JSON.parse(repaired); } catch (e2) { return { listName: "Error parsing JSON (Critical)", transactions: [] }; } } }

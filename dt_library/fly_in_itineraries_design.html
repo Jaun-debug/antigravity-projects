@@ -1,0 +1,236 @@
+<!-- ============================================================
+     DESERT TRACKS – FLY-IN ITINERARIES BLOCK
+     Includes: Sticky Hero, 100% CSS ONLY HOVER (Unblockable)
+     ============================================================ -->
+<section id="dt-sds-split">
+<style>
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  #dt-sds-split {
+    --dt-orange: #ff6e00;
+    --dt-dark:   #1a1a18;
+    --dt-sand:   #f9f9f4;
+    --dt-muted:  #7a746d;
+    --dt-border: #e0d8d0;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--dt-sand);
+    width: 100%;
+    position: relative;
+  }
+
+  /* ── HEADING ─────────────────────────────────────────────── */
+  .dt-is-heading { text-align: center; padding: 72px 40px 52px; }
+  .dt-is-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 400; color: var(--dt-dark);
+    letter-spacing: -0.01em; margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .dt-is-heading p { font-size: 1rem; color: var(--dt-muted); max-width: 480px; margin: 0 auto; }
+  .dt-is-rule { display: block; width: 48px; height: 2px; background: var(--dt-orange); margin: 18px auto 0; }
+
+  /* ── SPLIT LAYOUT ────────────────────────────────────────── */
+  .dt-is-layout { display: flex; align-items: flex-start; width: 100%; padding: 0 0 80px; gap: 0; }
+
+  /* ── LEFT: Sticky hero ───────────────────────────────────── */
+  .dt-is-sticky-col {
+    flex: 0 0 50%; position: sticky; top: 90px; height: calc(100vh - 130px);
+    max-height: 860px; border-radius: 0; overflow: hidden;
+  }
+  .dt-is-sticky-img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover; display: block; opacity: 0; transition: opacity 0.4s ease-in-out;
+  }
+  .default-hero { opacity: 1; z-index: 1; }
+  .hero-hover { z-index: 2; }
+  .dt-is-sticky-badge {
+    position: absolute; z-index: 10; bottom: 28px; left: 28px;
+    background: rgba(26,26,24,0.82); backdrop-filter: blur(10px);
+    color: #fff; font-size: 0.67rem; letter-spacing: 3px; text-transform: uppercase; padding: 10px 20px;
+  }
+
+  /* ── CSS ONLY HOVER LOGIC ───────────────────── */
+  .dt-is-layout:has(.dt-card-1:hover) .hero-1 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-2:hover) .hero-2 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-3:hover) .hero-3 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-4:hover) .hero-4 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-5:hover) .hero-5 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-6:hover) .hero-6 { opacity: 1; }
+
+  /* ── RIGHT: Scrollable cards ─────────────────────────────── */
+  .dt-is-scroll-col { flex: 1; display: flex; flex-direction: column; padding: 0 56px; }
+
+  .dt-is-card {
+    display: flex; align-items: center; gap: 24px; padding: 28px 0;
+    border-bottom: 1px solid var(--dt-border); text-decoration: none;
+    color: inherit; transition: background 0.2s ease; cursor: pointer;
+  }
+  .dt-is-card:first-child { border-top: 1px solid var(--dt-border); }
+  .dt-is-card:hover { background: rgba(255,110,0,0.04); }
+
+  .dt-is-thumb { flex: 0 0 110px; height: 82px; overflow: hidden; border-radius: 2px; }
+  .dt-is-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+  .dt-is-card:hover .dt-is-thumb img { transform: scale(1.08); }
+
+  .dt-is-card-body { flex: 1; min-width: 0; }
+  .dt-is-card-label {
+    font-size: 0.67rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--dt-orange); margin-bottom: 7px; font-weight: 500;
+  }
+  .dt-is-card-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(0.98rem, 1.5vw, 1.18rem);
+    font-weight: 400; color: var(--dt-dark); line-height: 1.35; margin-bottom: 8px;
+  }
+  .dt-is-card-desc {
+    font-size: 0.83rem; color: var(--dt-muted); line-height: 1.55;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .dt-is-card-arrow {
+    flex: 0 0 auto; width: 40px; height: 40px; border: 1px solid var(--dt-border); border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+  }
+  .dt-is-card:hover .dt-is-card-arrow { background: var(--dt-orange); border-color: var(--dt-orange); }
+  .dt-is-card-arrow svg { width: 15px; height: 15px; stroke: var(--dt-muted); fill: none; transition: stroke 0.3s; }
+  .dt-is-card:hover .dt-is-card-arrow svg { stroke: #fff; }
+
+  /* ── MOBILE ──────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .dt-is-layout { flex-direction: column; padding: 0 0 60px; gap: 0; }
+    .dt-is-sticky-col { display: none; }
+    .dt-is-scroll-col { width: 100%; padding: 0 20px; }
+    .dt-is-card { gap: 16px; padding: 22px 0; }
+    .dt-is-thumb { flex: 0 0 90px; height: 70px; }
+    .dt-is-card-arrow { display: none; }
+    .dt-is-heading { padding: 48px 20px 36px; }
+  }
+</style>
+
+<!-- HEADING -->
+<div class="dt-is-heading">
+  <h2>Explore Namibia's Top<br>Fly-In Itineraries</h2>
+  <span class="dt-is-rule"></span>
+</div>
+
+<!-- SPLIT LAYOUT -->
+<div class="dt-is-layout">
+
+  <!-- ══ LEFT: Sticky hero ══ -->
+  <div class="dt-is-sticky-col">
+    <!-- DEFAULT -->
+    <img class="dt-is-sticky-img default-hero" src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="Shipwreck Lodge" />
+    
+    <!-- HOVER LAYERS -->
+    <img class="dt-is-sticky-img hero-hover hero-1" src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-2" src="https://desert-tracks.com/wp-content/uploads/2025/04/Onguma-Camp-Kala-_1-scaled.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-3" src="https://desert-tracks.com/wp-content/uploads/2025/09/01hoanibvalley-tentexterior.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-4" src="https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Little-Kulala_3-scaled.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-5" src="https://desert-tracks.com/wp-content/uploads/2025/09/wildernessserracafema_6.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-6" src="https://desert-tracks.com/wp-content/uploads/2025/09/kipwe1.jpg" alt="" />
+
+    <span class="dt-is-sticky-badge">Desert Tracks · Fly-In Itineraries</span>
+  </div>
+
+  <!-- ══ RIGHT: Scrollable itinerary list ══ -->
+  <div class="dt-is-scroll-col">
+
+    <!-- 1. 7-Day Namibia Desert -->
+    <a class="dt-is-card dt-card-1"
+       href="https://wetu.com/ItineraryOutputs/Discovery/de75c783-8643-4e46-b0d6-114fbcd3f137" target="_blank">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="7-Day Fly-In" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">7 Days · Fly-In Safari</div>
+        <div class="dt-is-card-title">7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari</div>
+        <div class="dt-is-card-desc">Experience Namibia’s highlights in luxury. Fly between Sossusvlei, the Skeleton Coast and Etosha on a seamless 7-day safari of dunes, wildlife and coastlines.</div>
+      </div>
+      <div class="dt-is-card-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <!-- 2. 12-Day Namibia in Style -->
+    <a class="dt-is-card dt-card-2"
+       href="https://wetu.com/ItineraryOutputs/Discovery/4db02e36-a80a-4486-987a-251d707016c0" target="_blank">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Onguma-Camp-Kala-_1-scaled.jpg" alt="12-Day Fly-In" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">12 Days · Luxury Fly-In</div>
+        <div class="dt-is-card-title">12-Day Namibia in Style – Luxury Fly-In Safari</div>
+        <div class="dt-is-card-desc">Fly in style across Namibia. From Sossusvlei’s dunes to the Skeleton Coast, Serra Cafema, Etosha, and Okonjima, this 12-day safari blends luxury and adventure.</div>
+      </div>
+      <div class="dt-is-card-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <!-- 3. 10-Day Highlights of Namibia -->
+    <a class="dt-is-card dt-card-3"
+       href="https://wetu.com/ItineraryOutputs/Discovery/cf8f5ef9-4740-4976-90d5-e644b2e25b4b" target="_blank">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/09/01hoanibvalley-tentexterior.jpg" alt="10-Day Fly-In" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">10 Days · Fly &amp; Drive</div>
+        <div class="dt-is-card-title">10-Day Highlights of Namibia – Luxury Fly-In &amp; Road Safari</div>
+        <div class="dt-is-card-desc">Fly and drive through Namibia’s highlights. From Sossusvlei to the Skeleton Coast, Hoanib Valley, and Etosha, this 10-day safari blends luxury with adventure.</div>
+      </div>
+      <div class="dt-is-card-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <!-- 4. 10-Day Honeymoon -->
+    <a class="dt-is-card dt-card-4"
+       href="https://wetu.com/ItineraryOutputs/Discovery/F959961B-5EA6-43DC-B713-5A2FB0928EB1" target="_blank">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Little-Kulala_3-scaled.jpg" alt="10-Day Honeymoon" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">10 Days · Luxury Fly-In</div>
+        <div class="dt-is-card-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</div>
+        <div class="dt-is-card-desc">A journey made for two. Soar across Namibia’s deserts, coasts, and wildlife reserves on a 10-day honeymoon safari where luxury and romance meet in the wild.</div>
+      </div>
+      <div class="dt-is-card-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <!-- 5. 14-Day Luxury Drive & Fly -->
+    <a class="dt-is-card dt-card-5"
+       href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e" target="_blank">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/09/wildernessserracafema_6.jpg" alt="14-Day Drive and Fly" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">14 Days · Fly &amp; Drive</div>
+        <div class="dt-is-card-title">14-Day Luxury Namibia Drive &amp; Fly Photographic Safari</div>
+        <div class="dt-is-card-desc">Capture Namibia’s beauty from every angle. This 14-day journey combines self-drive and fly-in travel, taking you to dunes, deserts, coasts, and wildlife for the ultimate photographic safari.</div>
+      </div>
+      <div class="dt-is-card-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+    <!-- 6. 8-Day Namibia in Style -->
+    <a class="dt-is-card dt-card-6"
+       href="https://wetu.com/ItineraryOutputs/Discovery/2084D921-60AB-4B0F-8832-E857FD4D0E35" target="_blank">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/09/kipwe1.jpg" alt="8-Day Fly-In" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">8 Days · Luxury Fly-In</div>
+        <div class="dt-is-card-title">8-Day Namibia in Style – Luxury Fly-In Safari</div>
+        <div class="dt-is-card-desc">Discover Namibia in style. This 8-day luxury fly-in safari combines Sossusvlei’s dunes, Damaraland’s rugged beauty, and Etosha’s incredible wildlife.</div>
+      </div>
+      <div class="dt-is-card-arrow">
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </div>
+    </a>
+
+  </div><!-- /.dt-is-scroll-col -->
+</div><!-- /.dt-is-layout -->
+
+</section>

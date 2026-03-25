@@ -1,0 +1,503 @@
+====== PREMIUM SAFARI PAGE CODE ======
+
+<style>
+/* 
+=============================================
+PREMIUM SELF-DRIVE LAYOUT STYLES
+=============================================
+*/
+:root {
+    --primary: #2c3e50;
+    --accent: #e2a85e; /* Golden/Desert Orange */
+    --bg-light: #fcfcfc;
+    --bg-dark: #1a1a24;
+    --text-dark: #333333;
+    --text-light: #777777;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Jost', sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-body);
+    background-color: var(--bg-light);
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://desert-tracks.com/wp-content/uploads/2025/10/self-drivespitzkoppelarge.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Parallax effect */
+}
+.hero-content {
+    z-index: 2;
+    color: #fff;
+    max-width: 800px;
+    padding: 0 20px;
+}
+.hero-eyebrow {
+    font-size: 14px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 20px;
+    display: block;
+    color: var(--accent);
+}
+.hero h1 {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 6vw, 5rem);
+    font-weight: 400;
+    margin: 0 0 30px 0;
+    line-height: 1.1;
+}
+.hero-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-decoration: none;
+    transition: all 0.4s ease;
+}
+.hero-btn:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+/* Intro Section */
+.intro-section {
+    padding: 8rem 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+}
+.intro-text h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--primary);
+    font-weight: 400;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.2;
+}
+.intro-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+.intro-image-wrapper {
+    position: relative;
+}
+.intro-image {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 4px; /* Subtle curve */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+.intro-image-decor {
+    position: absolute;
+    bottom: -30px;
+    left: -30px;
+    width: 60%;
+    height: 300px;
+    background-image: url('https://desert-tracks.com/wp-content/uploads/2024/05/SollyLeviScenery-10.jpg');
+    background-size: cover;
+    background-position: center;
+    border: 10px solid var(--bg-light);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+}
+
+/* Highlights Section - Editorial Zig-Zag Layout */
+.highlights-section {
+    padding: 6rem 5%;
+    background-color: #fff;
+}
+.section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 5rem;
+}
+.section-header h2 {
+    font-family: var(--font-heading);
+    font-size: 2.8rem;
+    color: var(--primary);
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+.section-header p {
+    color: var(--text-light);
+    line-height: 1.6;
+    font-weight: 300;
+}
+
+.highlight-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    margin-bottom: 7rem;
+    align-items: center;
+}
+.highlight-item:nth-child(even) {
+    grid-template-columns: 1fr 1fr;
+    direction: rtl; /* FLIPS the layout cleanly */
+}
+.highlight-item:nth-child(even) > * {
+    direction: ltr; /* Keeps text reading normally */
+}
+.highlight-img-container {
+    overflow: hidden;
+    position: relative;
+    height: 500px;
+}
+.highlight-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.5s ease;
+}
+.highlight-img-container:hover img {
+    transform: scale(1.05); /* Slow elegant zoom */
+}
+.highlight-text {
+    padding: 0 2rem;
+}
+.highlight-text h3 {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--primary);
+    font-weight: 400;
+    margin: 0 0 1rem 0;
+    position: relative;
+    padding-bottom: 15px;
+}
+.highlight-text h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--accent);
+}
+.highlight-text p {
+    color: var(--text-light);
+    line-height: 1.8;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+/* Accordion / FAQ Section */
+.faq-section {
+    padding: 6rem 5%;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.faq-item {
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    padding: 20px 0;
+}
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--primary);
+    font-weight: 500;
+}
+.faq-icon {
+    font-size: 24px;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    color: var(--text-light);
+    line-height: 1.6;
+    font-weight: 300;
+}
+.faq-answer p {
+    padding-top: 15px;
+    margin: 0;
+}
+.faq-item.active .faq-answer {
+    max-height: 300px;
+}
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* Inclusions / Vehicle Setup */
+.logistics-section {
+    padding: 6rem 5%;
+    background-color: var(--primary);
+    color: #fff;
+}
+.logistics-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+.logistic-box h3 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin: 0 0 2rem 0;
+    font-weight: 400;
+}
+.logistic-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.logistic-list li {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 15px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #ddd;
+}
+.logistic-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 600;
+}
+.excludes-list li::before {
+    content: '×';
+    color: #999;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .intro-section {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    .intro-image-decor { display: none; }
+    .highlight-item, .highlight-item:nth-child(even) {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 2rem;
+    }
+    .highlight-img-container {
+        height: 350px;
+    }
+    .logistics-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<div class="dt-premium-self-drive-safari">
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-eyebrow">The Ultimate Freedom</span>
+            <h1>Namibia Self-Drive Safaris</h1>
+            <a href="#explore" class="hero-btn">Explore Your Journey</a>
+        </div>
+    </section>
+
+    <section id="explore" class="intro-section">
+        <div class="intro-text">
+            <h2>Your Journey,<br>Our Expertise</h2>
+            <p>Since 2010, Desert Tracks has been crafting unforgettable self-drive safari holidays in Namibia. Our passion for this country runs deep — from its rolling desert landscapes and soaring red dunes to the dramatic Skeleton Coast and abundant wildlife, Namibia is a destination that never stops taking your breath away.</p>
+            <p>There’s no better way to explore Namibia than in a 4x4. The roads are safe, easy to navigate, and built for adventure. Around every corner you’ll find something new — rugged mountains, starlit campsites, or luxury lodges tucked deep in the desert.</p>
+            <p>Whether you’re seeking a gentle introduction to African road trips or the freedom to venture into Namibia’s wild frontier, your self-drive safari starts here. We craft itineraries that balance comfort with raw discovery.</p>
+        </div>
+        <div class="intro-image-wrapper">
+            <img src="https://desert-tracks.com/wp-content/uploads/2024/12/Aerial-Ellephants.jpeg" alt="Namibia Aerial Safari" class="intro-image">
+            <div class="intro-image-decor"></div>
+        </div>
+    </section>
+
+    <section class="highlights-section">
+        <div class="section-header">
+            <h2>Highlights to Visit</h2>
+            <p>A curated selection of the most magnificent locations you will encounter on your self-drive adventure across Namibia.</p>
+        </div>
+
+        <div class="highlight-item">
+            <div class="highlight-img-container">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sollylevisossusvlei-9-3-2-1-4-2-1.jpeg" alt="Sossusvlei Dunes">
+            </div>
+            <div class="highlight-text">
+                <h3>Sossusvlei Dunes</h3>
+                <p>Namibia's most famous highlight. Towering apricot-colored dunes rise dramatically against clear blue skies. A sunrise climb up Dune 45 or Big Daddy offers views that redefine the concept of vastness, while Deadvlei's ancient, stark acacia trees provide unparalleled photographic moments.</p>
+            </div>
+        </div>
+
+        <div class="highlight-item">
+            <div class="highlight-img-container">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg" alt="Etosha National Park">
+            </div>
+            <div class="highlight-text">
+                <h3>Etosha National Park</h3>
+                <p>One of Africa's greatest wildlife sanctuaries. Park your 4x4 by a waterhole and let the safari come to you. From graceful antelope and towering giraffes to the elusive black rhino and prides of desert-adapted lions, Etosha offers profound, uninterrupted game viewing.</p>
+            </div>
+        </div>
+
+        <div class="highlight-item">
+            <div class="highlight-img-container">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/fish-river-canyon-viola-large-e1759762247457-6-2-1-4-2-1.jpeg" alt="Fish River Canyon">
+            </div>
+            <div class="highlight-text">
+                <h3>Fish River Canyon</h3>
+                <p>As the second largest canyon in the world, the sheer scale of the Fish River Canyon is humbling. Standing on the rim at sunset, watching the plunging ravines change colors from amber to deep purple, is a truly spiritual experience for any self-driver passing through the deep south.</p>
+            </div>
+        </div>
+
+        <div class="highlight-item">
+            <div class="highlight-img-container">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg" alt="Sandwich Harbour">
+            </div>
+            <div class="highlight-text">
+                <h3>Sandwich Harbour</h3>
+                <p>Located south of Walvis Bay, this is where the colossal, restless dunes of the Namib Desert cascade directly into the crashing waves of the Atlantic Ocean. It is a harsh, surreal, and astonishingly beautiful coastal phenomenon only accessible by expert 4x4 navigation.</p>
+            </div>
+        </div>
+
+        <div class="highlight-item">
+            <div class="highlight-img-container">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/solly-levi-kalahari-08-2-1-4-2-1.jpg" alt="Kalahari Desert">
+            </div>
+            <div class="highlight-text">
+                <h3>Kalahari Desert</h3>
+                <p>Far from barren, the Kalahari is a living desert of longitudinal red dunes covered in golden grasses. It pulses with life, from the majestic black-maned lions to foraging meerkats. It's an essential, deeply quiet stop offering profound starry nights.</p>
+            </div>
+        </div>
+
+        <div class="highlight-item">
+            <div class="highlight-img-container">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/solly-levi-himba-5-2-1-4-2-1.jpg" alt="Himba Culture">
+            </div>
+            <div class="highlight-text">
+                <h3>Himba Culture</h3>
+                <p>Venture into the remote Kunene region to interact with the semi-nomadic Himba people. Identifiable by the striking red otjize paste they use on their skin and hair, gaining insight into their enduring, resilient lifestyle is a deeply moving cultural experience.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="logistics-section">
+        <div class="logistics-container">
+            <div class="logistic-box">
+                <h3>Seamlessly Included</h3>
+                <ul class="logistic-list">
+                    <li>Fully Equipped 4x4 Double Cab Vehicle (with roof tents if camping)</li>
+                    <li>Comprehensive Premium Insurance Coverage (Zero Excess options)</li>
+                    <li>Unlimited Kilometers for unrestricted exploration</li>
+                    <li>Cross-Border Permits (if combining with Botswana/Zimbabwe)</li>
+                    <li>Detailed personalized itinerary with route maps</li>
+                    <li>24/7 On-the-ground support and mechanical assistance</li>
+                    <li>All accommodation (lodges) or pre-booked campsites</li>
+                </ul>
+            </div>
+            <div class="logistic-box">
+                <h3 style="color: #999;">Additional Excludes</h3>
+                <ul class="logistic-list excludes-list">
+                    <li>International Flights and Visas</li>
+                    <li>Fuel/Petrol for your vehicle</li>
+                    <li>National Park entry fees (payable directly at gates)</li>
+                    <li>Optional activities not specified in your itinerary</li>
+                    <li>Meals not specified (lunches and dinners on B&B basis)</li>
+                    <li>Personal travel insurance</li>
+                    <li>Gratuities and items of a personal nature</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <div class="section-header" style="margin-bottom: 3rem;">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                How long should I plan for my safari?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>For a comprehensive Namibia self-drive covering the major highlights (Sossusvlei, Swakopmund, Damaraland, and Etosha), we recommend a minimum of 12 to 14 days. If you wish to reach the far south (Fish River Canyon) or the Caprivi Strip, 18 to 21 days is ideal.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                What are the main driving rules in national parks?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>In parks like Etosha, you must stay inside your vehicle at all times unless at a designated fenced rest camp. The speed limit inside the park is 60km/h to protect wildlife. Night driving is strictly prohibited; gates close at sunset and open at sunrise.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                What happens if I get a flat tyre or a mechanical issue?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>All our vehicles come with two spare tyres and the necessary tools. We provide a full briefing on how to change a tyre before you depart. For mechanical issues, our 24/7 backup team is a phone call away and will arrange immediate repairs or a replacement vehicle.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question">
+                Will I have mobile or GPS signal everywhere?
+                <span class="faq-icon">+</span>
+            </div>
+            <div class="faq-answer">
+                <p>Mobile reception is very good in towns, villages, and most lodges. However, while driving between destinations (especially in Damaraland or the deep south), you will lose signal. We provide detailed offline tracks and maps so you never get lost.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script data-no-optimize="1">
+    document.querySelectorAll('.faq-question').forEach(item => {
+        item.addEventListener('click', () => {
+            const parent = item.parentElement;
+            
+            document.querySelectorAll('.faq-item').forEach(faq => {
+                if (faq !== parent) {
+                    faq.classList.remove('active');
+                    faq.querySelector('.faq-icon').innerText = '+';
+                }
+            });
+
+            parent.classList.toggle('active');
+            if (parent.classList.contains('active')) {
+                item.querySelector('.faq-icon').innerText = '×';
+            } else {
+                item.querySelector('.faq-icon').innerText = '+';
+            }
+        });
+    });
+</script>

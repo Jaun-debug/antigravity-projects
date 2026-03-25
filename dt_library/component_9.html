@@ -1,0 +1,46 @@
+<script data-no-optimize="1">
+(function() {
+    // 1. BLOCK ADMIN EMAILS
+    if (window.location.href.indexOf('wp-admin') > -1 || window.location.href.indexOf('np_app') > -1) {
+        return; 
+    }
+
+    var FORMSPREE_ID = 'mreybgra'; 
+    
+    // 2. CLEAN UP THE NAME
+    var rawTitle = document.title || "A Safari Page";
+    var cleanTitle = rawTitle.split('-')[0].split('|')[0].trim(); 
+    
+    var path = window.location.pathname.replace(/\//g, '');
+    var sentKey = 'client_viewed_' + path + '_' + new Date().toISOString().slice(0, 10);
+    
+    // 3. SEND AMAZING EMAIL WITH LOCATION
+    if (!sessionStorage.getItem(sentKey)) {
+        // First grab the country/location data
+        fetch('https://get.geojs.io/v1/ip/geo.json')
+            .then(function(response) { return response.json(); })
+            .then(function(geoData) {
+                var country = geoData.country || "Unknown Country";
+                var city = geoData.city || "Unknown City";
+                var locationString = city + ", " + country;
+                
+                // Now send the Formspree email
+                return fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subject: '🔥 ALERT: Someone in ' + country + ' viewing ' + cleanTitle,
+                        Safari_Name: cleanTitle,
+                        Visitor_Location: locationString,
+                        Page_Link: window.location.href,
+                        Time: new Date().toLocaleString()
+                    })
+                });
+            })
+            .then(function(res) {
+                if (res.ok) sessionStorage.setItem(sentKey, 'true'); 
+            })
+            .catch(function(){}); // Silent fail if adblocker blocks it
+    }
+})();
+</script>

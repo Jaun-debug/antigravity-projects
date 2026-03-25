@@ -1,0 +1,514 @@
+<div class="wilderness-carousel-wrapper" id="desert-tracks-carousel">
+    <!-- Notice the data-no-optimize to stop WordPress from breaking the CSS -->
+    <style data-no-optimize="1">
+        .wilderness-carousel-wrapper {
+            position: relative;
+            /* Force full screen width regardless of Nicepage container */
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            left: 0;
+            overflow: hidden;
+            
+            background-color: #bfa182;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            min-height: 100vh;
+            padding: 5rem 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+        .wd-header {
+            width: 100%;
+            max-width: 80rem;
+            margin: 0 auto 3rem auto;
+            padding: 0 1.5rem;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .wd-subtitle {
+            color: #ffffff !important;
+            font-size: 1.125rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+        }
+        /* Top 4 Names Menu - Wraps perfectly on mobile */
+        .wd-nav {
+            display: flex;
+            flex-wrap: wrap; 
+            justify-content: center;
+            align-items: center;
+            gap: 1rem 1.5rem;
+            background-color: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(4px);
+            padding: 1rem 1.5rem;
+            border-radius: 0.125rem;
+            max-width: 64rem;
+            margin: 0 auto;
+        }
+        .wd-nav button {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.4); 
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s;
+            outline: none;
+            padding: 0.5rem;
+        }
+        /* Lights up bright white when active */
+        .wd-nav button.active, .wd-nav button:hover {
+            color: #ffffff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+        .wd-hero-section {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            perspective: 1000px;
+            touch-action: pan-y; 
+        }
+        @media (min-width: 768px) {
+            .wd-hero-section { height: 65vh; }
+        }
+        .wd-hero-track {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+        }
+        .wd-slide {
+            position: absolute;
+            top: 0;
+            width: 85%;
+            height: 100%;
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                        opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            opacity: 0;
+            transform: scale(0.5);
+            pointer-events: none;
+        }
+        .wd-slide.is-visible {
+            pointer-events: auto;
+        }
+        @media (min-width: 768px) {
+            .wd-slide { width: 70%; }
+        }
+        @keyframes startupZoom {
+            0% { transform: scale(0.9); }
+            100% { transform: scale(1.05); }
+        }
+        .wd-slide img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1);
+            background-color: #a88d71;
+            transform: scale(1);
+        }
+        .wd-slide.is-center img {
+            transform: scale(1.05);
+        }
+        .wd-hero-track.is-starting .wd-slide.is-center img {
+            animation: startupZoom 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        .wd-slide-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        .wd-slide-content {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .wd-slide-title {
+            color: #ffffff !important;
+            font-family: serif;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            white-space: pre-line;
+            text-align: center;
+            line-height: 1.1;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+                        opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            margin: 0;
+            font-weight: normal;
+            text-decoration: none !important;
+        }
+        .wd-bottom-section {
+            width: 100%;
+            max-width: 70%;
+            margin: 2rem auto 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1rem;
+            gap: 1.5rem;
+            box-sizing: border-box;
+        }
+        @media (min-width: 768px) {
+            .wd-bottom-section { flex-direction: row; }
+        }
+        .wd-descriptions {
+            max-width: 28rem;
+            width: 100%;
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+        }
+        .wd-desc-item {
+            position: absolute;
+            inset: 0;
+            transition: all 800ms cubic-bezier(0.25, 1, 0.5, 1);
+            opacity: 0;
+            transform: translateY(2rem);
+            margin: 0;
+            color: #ffffff !important;
+            font-weight: 300;
+            font-size: 1rem;
+            line-height: 1.625;
+            pointer-events: none;
+        }
+        @media (min-width: 768px) {
+            .wd-desc-item { font-size: 1.125rem; }
+        }
+        .wd-desc-item.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .wd-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            border-bottom: 1px solid #a88d71;
+            padding-bottom: 0.5rem;
+        }
+        .wd-controls button {
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            background: none;
+            border: none;
+            color: #d87a4d;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            outline: none;
+            z-index: 50;
+        }
+        .wd-controls button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        .wd-controls button svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    </style>
+
+    <div class="wd-header">
+        <p class="wd-subtitle">CHOOSE HOW YOU WANT TO TRAVEL</p>
+        <div class="wd-nav wd-nav-buttons">
+            <button class="wd-nav-btn">SELF-DRIVE SAFARIS</button>
+            <button class="active wd-nav-btn">FLY-IN SAFARIS</button>
+            <button class="wd-nav-btn">GUIDED SAFARIS</button>
+            <button class="wd-nav-btn">LUXURY SAFARIS</button>
+        </div>
+    </div>
+
+    <!-- 8 HTML slides so Nicepage can display them natively! -->
+    <div class="wd-hero-section wd-hover-target">
+        <div class="wd-hero-track wd-track" id="wd-native-track">
+            
+            <div class="is-visible wd-slide" style="transform: translateX(-85%) scale(0.85); opacity: 0.5; z-index: 10;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large.jpeg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="SELF-DRIVE SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(30%); opacity: 0.6;">SELF-DRIVE<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="is-center is-visible wd-slide" style="transform: translateX(0%) scale(1); opacity: 1; z-index: 20;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2024/05/Fly-In.jpeg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="FLY-IN SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateY(0px); opacity: 1;">FLY-IN<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="is-visible wd-slide" style="transform: translateX(85%) scale(0.85); opacity: 0.5; z-index: 10;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large.jpeg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="GUIDED SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(-30%); opacity: 0.6;">GUIDED<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="wd-slide" style="transform: translateX(170%) scale(0.85); opacity: 0; z-index: 0;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4.jpg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="LUXURY SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(-30%); opacity: 0.6;">LUXURY<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="wd-slide" style="transform: translateX(255%) scale(0.85); opacity: 0; z-index: 0;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large.jpeg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="SELF-DRIVE SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(-30%); opacity: 0.6;">SELF-DRIVE<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="wd-slide" style="transform: translateX(340%) scale(0.85); opacity: 0; z-index: 0;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2024/05/Fly-In.jpeg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="FLY-IN SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(-30%); opacity: 0.6;">FLY-IN<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="wd-slide" style="transform: translateX(-255%) scale(0.85); opacity: 0; z-index: 0;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large.jpeg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="GUIDED SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(-30%); opacity: 0.6;">GUIDED<br>SAFARIS</div>
+                </div>
+            </div>
+
+            <div class="wd-slide" style="transform: translateX(-170%) scale(0.85); opacity: 0; z-index: 0;">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4.jpg" loading="eager" data-no-lazy="1" class="no-lazy skip-lazy" alt="LUXURY SAFARIS" />
+                <div class="wd-slide-overlay"></div>
+                <div class="wd-slide-content">
+                    <div class="wd-slide-title" style="transform: translateX(-30%); opacity: 0.6;">LUXURY<br>SAFARIS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wd-bottom-section">
+        <div class="wd-desc-container wd-descriptions wd-hover-target">
+            <p class="wd-desc-item">Discover Southern Africa with the freedom of self-drive. Navigate epic landscapes at your own pace.</p>
+            <p class="active wd-desc-item">Fly by light aircraft, enjoy stunning aerial views and save time travelling between remote luxury camps.</p>
+            <p class="wd-desc-item">Travel with an expert guide for deeper safari experiences, incredible tracking, and local cultural insights.</p>
+            <p class="wd-desc-item">Safaris curated especially for the esteemed luxury traveller. Opulent lodges and exclusive wildlife encounters.</p>
+        </div>
+        <div class="wd-controls">
+            <button class="wd-btn-prev" aria-label="Previous">
+                <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg>
+            </button>
+            <button class="wd-btn-next" aria-label="Next">
+                <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- data-no-optimize stops LiteSpeed Cache from breaking the autoplay in Incognito -->
+    <script data-no-optimize="1">
+    (function() {
+        var wrapper = document.getElementById('desert-tracks-carousel');
+        if (!wrapper || wrapper.getAttribute('data-script-attached') === 'true') {
+            return; 
+        }
+        wrapper.setAttribute('data-script-attached', 'true');
+
+        // --- EMAIL NOTIFICATION SETTINGS --- //
+        var FORMSPREE_ID = 'YOUR_ID_HERE'; 
+        if (FORMSPREE_ID !== 'YOUR_ID_HERE') {
+            var sentKey = 'safari_view_logged_' + new Date().toISOString().slice(0, 10);
+            if (!sessionStorage.getItem(sentKey)) {
+                fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        subject: 'New Safari Page Visit!',
+                        message: 'A prospective client has opened the Homepage Safari Picker.',
+                        time: new Date().toLocaleString()
+                    })
+                }).then(function() {
+                    sessionStorage.setItem(sentKey, 'true');
+                }).catch(function(){}); // Silent fail
+            }
+        }
+        // ----------------------------------- //
+        
+        var track = document.getElementById('wd-native-track');
+        var navButtons = wrapper.querySelectorAll('.wd-nav-btn');
+        var descriptions = wrapper.querySelectorAll('.wd-desc-item');
+        var btnPrev = wrapper.querySelector('.wd-btn-prev');
+        var btnNext = wrapper.querySelector('.wd-btn-next');
+        var slideElements = Array.from(track.querySelectorAll('.wd-slide'));
+        
+        var DEST_LINKS = [
+            "https://desert-tracks.com/namibia-self-drive-safaris/",
+            "https://desert-tracks.com/fly-in-lux-safaris/",
+            "https://desert-tracks.com/guided-safari-namibia/",
+            "https://desert-tracks.com/namibia-luxury-safaris/"
+        ];
+
+        slideElements.forEach(function(slide, idx) {
+            slide.onclick = function() {
+                var destIdx = idx % DEST_LINKS.length;
+                window.location.href = DEST_LINKS[destIdx];
+            };
+        });
+
+        var activeIndex = 1; // 1 is Fly-in Safaris, matches HTML
+        var numItems = 8;
+        var autoplayTimer;
+
+        function getSlideState(index, active) {
+            var diff = Math.min((index - active + numItems) % numItems, (active - index + numItems) % numItems);
+            var isCenter = diff === 0;
+            var isRight = (index - active + numItems) % numItems === 1;
+            var isLeft = (active - index + numItems) % numItems === 1;
+
+            if (isCenter) return 'center';
+            if (isLeft) return 'left';
+            if (isRight) return 'right';
+            return 'hidden'; 
+        }
+
+        function updateCarousel() {
+            var visualIndex = activeIndex % 4;
+            
+            navButtons.forEach(function(btn, i) {
+                if (i === visualIndex) btn.classList.add('active');
+                else btn.classList.remove('active');
+            });
+
+            descriptions.forEach(function(desc, i) {
+                if (i === visualIndex) desc.classList.add('active');
+                else desc.classList.remove('active');
+            });
+
+            slideElements.forEach(function(slide, i) {
+                var state = getSlideState(i, activeIndex);
+                var title = slide.querySelector('.wd-slide-title');
+
+                slide.className = 'wd-slide';
+                if (title && title.style) {
+                    title.style.transition = 'transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+                }
+
+                if (state === 'center') {
+                    slide.classList.add('is-center', 'is-visible');
+                    slide.style.transform = 'translateX(0%) scale(1)';
+                    slide.style.opacity = '1';
+                    slide.style.zIndex = '20';
+                    if(title) {
+                        title.style.transform = 'translateY(0)';
+                        title.style.opacity = '1';
+                    }
+                } else if (state === 'left') {
+                    slide.classList.add('is-visible');
+                    slide.style.transform = 'translateX(-85%) scale(0.85)';
+                    slide.style.opacity = '0.5';
+                    slide.style.zIndex = '10';
+                    if(title) {
+                        title.style.transform = 'translateX(30%)';
+                        title.style.opacity = '0.6';
+                    }
+                } else if (state === 'right') {
+                    slide.classList.add('is-visible');
+                    slide.style.transform = 'translateX(85%) scale(0.85)';
+                    slide.style.opacity = '0.5';
+                    slide.style.zIndex = '10';
+                    if(title) {
+                        title.style.transform = 'translateX(-30%)';
+                        title.style.opacity = '0.6';
+                    }
+                } else {
+                    var direction = (i - activeIndex + numItems) % numItems < numItems / 2 ? 1 : -1;
+                    slide.style.transform = 'translateX(' + (direction * 170) + '%) scale(0.85)';
+                    slide.style.opacity = '0';
+                    slide.style.zIndex = '0';
+                    if(title) {
+                        title.style.transform = 'translateX(' + (direction * -30) + '%)';
+                        title.style.opacity = '0.6';
+                    }
+                }
+            });
+        }
+
+        function goNext() { activeIndex = (activeIndex + 1) % numItems; updateCarousel(); }
+        function goPrev() { activeIndex = (activeIndex - 1 + numItems) % numItems; updateCarousel(); }
+        function goToCategory(catIndex) {
+            var currentCat = activeIndex % 4;
+            var diff = catIndex - currentCat;
+            activeIndex = (activeIndex + diff + numItems) % numItems;
+            updateCarousel();
+        }
+
+        if(btnNext) btnNext.addEventListener('click', function(e) { e.preventDefault(); resetAutoplay(); goNext(); });
+        if(btnPrev) btnPrev.addEventListener('click', function(e) { e.preventDefault(); resetAutoplay(); goPrev(); });
+
+        navButtons.forEach(function(btn, i) {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                resetAutoplay();
+                goToCategory(i);
+            });
+        });
+
+        // Touch support
+        var touchStartX = 0;
+        var touchEndX = 0;
+
+        track.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; }, {passive: true});
+        track.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 30) { resetAutoplay(); goNext(); }
+            if (touchEndX > touchStartX + 30) { resetAutoplay(); goPrev(); }
+        }, {passive: true});
+
+        // AutoPlay every 2 seconds
+        function startAutoplay() { if (!autoplayTimer) autoplayTimer = setInterval(goNext, 2000); }
+        function pauseAutoplay() { if (autoplayTimer) { clearInterval(autoplayTimer); autoplayTimer = null; } }
+        function resetAutoplay() { pauseAutoplay(); startAutoplay(); }
+
+        var hoverTargets = wrapper.querySelectorAll('.wd-hover-target');
+        hoverTargets.forEach(function(el) {
+            el.addEventListener('mouseenter', pauseAutoplay);
+            el.addEventListener('mouseleave', startAutoplay);
+        });
+
+        // Initialize immediately
+        updateCarousel();
+        startAutoplay();
+    })();
+    </script>
+</div>

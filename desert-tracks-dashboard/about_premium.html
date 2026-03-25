@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Desert Tracks</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: #fcfaf8;
+            /* soft beige background */
+            color: #27272a;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .dt-orange {
+            color: #d87a4d;
+        }
+
+        .bg-dt-orange {
+            background-color: #d87a4d;
+        }
+
+        .border-dt-orange {
+            border-color: #d87a4d;
+        }
+
+        .dt-gold {
+            color: #c8b568;
+        }
+
+        .bg-dt-gold {
+            background-color: #c8b568;
+        }
+
+        .parallax-hero {
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/01/8a84934939a8efa8f238ee1240eb78a4f408b0b7672b1c352d4ed4a51f6b988e857896ea129d16fbc92bfac397cb56d8ac398a73a5843e7aa340f5_1280-3.jpg');
+            /* placeholder for the lion, will try others if missing */
+            /* Using one of the scraped images */
+            background-color: #1a1a1a;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('https://desert-tracks.com/wp-content/uploads/2025/12/deadvalley492kb-scaled-3-1-4-2-5.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-slash;
+            background-size: cover;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .delay-100 {
+            animation-delay: 100ms;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Card Hover Effects */
+        .feature-card {
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-card img {
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .feature-card:hover img {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-dt-orange selection:text-white">
+
+
+    <!-- Parallax Hero Section -->
+    <header
+        class="parallax-hero h-[70vh] md:h-[85vh] w-full flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl pt-20">
+            <h2 class="text-sm md:text-sm tracking-[0.3em] font-bold text-gray-300 uppercase mb-4 fade-in-up">The
+                Journey Begins</h2>
+            <h1
+                class="text-5xl md:text-7xl lg:text-8xl text-white font-medium playfair fade-in-up delay-100 drop-shadow-lg">
+                About Desert Tracks Safaris</h1>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div
+            class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce text-white/70">
+            <span class="text-xs tracking-[0.2em] font-semibold mb-2 uppercase">Discover</span>
+            <i class="ph ph-arrow-down text-xl"></i>
+        </div>
+    </header>
+
+    <!-- Introductory Statement -->
+    <section class="py-24 max-w-5xl mx-auto px-6 text-center">
+        <p class="text-2xl md:text-4xl playfair leading-tight text-gray-800 font-medium tracking-wide">
+            "Namibia, at the heart of Southern Africa, is a land of contrasts and untamed beauty, <br
+                class="hidden md:block" />ready to be discovered with Desert Tracks."
+        </p>
+    </section>
+
+    <!-- Split Content with Images -->
+    <section class="max-w-7xl mx-auto px-6 pb-24 border-b border-gray-200">
+        <div class="flex flex-col md:flex-row gap-16 items-center">
+            <div class="w-full md:w-1/2 relative">
+                <!-- Image cluster -->
+                <div
+                    class="relative w-full aspect-[4/5] rounded-tl-[80px] rounded-br-[80px] overflow-hidden shadow-2xl">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2025/09/wilderness-desert-rhino-camp_3-scaled-5.jpg"
+                        alt="Wilderness Camp" class="w-full h-full object-cover">
+                </div>
+                <div
+                    class="absolute -bottom-10 -right-10 w-2/3 aspect-square border-8 border-[#fcfaf8] shadow-xl z-10 overflow-hidden">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2025/09/ostrich-in-namibia-1024x683-1.jpg"
+                        alt="Wildlife" class="w-full h-full object-cover">
+                </div>
+            </div>
+
+            <div class="w-full md:w-1/2 pt-12 md:pl-10">
+                <h3 class="text-xs uppercase tracking-[0.25em] font-bold dt-orange mb-4">Our Story</h3>
+                <h2 class="text-4xl lg:text-5xl playfair text-gray-900 mb-8 leading-[1.1]">We’re a family-run safari
+                    company driven by a love for Namibia.</h2>
+                <div class="space-y-6 text-gray-600 font-light text-lg leading-relaxed">
+                    <p>
+                        Our passion lies in creating journeys that truly belong to you. Every itinerary is tailor-made
+                        to reflect your style — whether that means an affordable family adventure, a romantic escape, or
+                        a once-in-a-lifetime luxury safari.
+                    </p>
+                    <p>
+                        Step into the heart of Namibia’s soul: the scarlet dunes of the Namib rising into endless skies,
+                        ancient deserts shaped by time, and rocky landscapes that whisper forgotten stories. Along the
+                        way, encounter abundant wildlife, meet warm and welcoming communities, and discover a land that
+                        feels timeless yet alive.
+                    </p>
+                    <p class="font-medium text-gray-800 italic playfair text-2xl">
+                        "At Desert Tracks, our safaris aren’t ordinary tours — they’re personal journeys crafted with
+                        care, designed to stay with you long after your footprints fade from the sand."
+                    </p>
+                </div>
+                <div class="mt-10">
+                    <a href="https://desert-tracks.com/desert-tracks-contact/"
+                        class="group flex items-center gap-3 w-max">
+                        <span
+                            class="bg-gray-900 text-white w-12 h-12 flex items-center justify-center rounded-full group-hover:bg-dt-orange transition-colors shadow-md">
+                            <i class="ph ph-arrow-right text-lg"></i>
+                        </span>
+                        <span
+                            class="text-sm font-bold tracking-widest uppercase text-gray-900 group-hover:dt-orange transition-colors">Start
+                            Your Journey</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three Pillars Feature Section -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h3 class="text-xs uppercase tracking-[0.25em] font-bold dt-orange mb-3">Our Expertise</h3>
+                <h2 class="text-4xl md:text-5xl playfair text-gray-900">What We Offer</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+
+                <!-- Pillar 1 -->
+                <div
+                    class="feature-card bg-[#fcfaf8] border border-gray-100 p-8 rounded-tr-[40px] rounded-bl-[40px] text-center flex flex-col h-full group">
+                    <div
+                        class="w-20 h-20 mx-auto rounded-full bg-orange-50 flex items-center justify-center mb-6 text-dt-orange transition-transform duration-500 group-hover:-translate-y-2">
+                        <i class="ph-light ph-map-trifold text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl playfair text-gray-900 mb-4 font-semibold">Namibia & Botswana Safari Landscapes
+                    </h3>
+                    <p class="text-gray-600 font-light flex-grow leading-relaxed">
+                        From striking desert dunes to lush deltas – discover Southern Africa’s diverse, breathtaking
+                        beauty through meticulously planned routes.
+                    </p>
+                </div>
+
+                <!-- Pillar 2 -->
+                <div
+                    class="feature-card bg-[#fcfaf8] border border-gray-100 p-8 rounded-tl-[40px] rounded-br-[40px] text-center flex flex-col h-full group">
+                    <div
+                        class="w-20 h-20 mx-auto rounded-full bg-orange-50 flex items-center justify-center mb-6 text-dt-orange transition-transform duration-500 group-hover:-translate-y-2">
+                        <i class="ph-light ph-bed text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl playfair text-gray-900 mb-4 font-semibold">Handpicked Safari Lodges & Camps</h3>
+                    <p class="text-gray-600 font-light flex-grow leading-relaxed">
+                        Stay in comfort, style, and authentic character at our carefully selected list of premium lodges
+                        throughout your entire journey.
+                    </p>
+                </div>
+
+                <!-- Pillar 3 -->
+                <div
+                    class="feature-card bg-[#fcfaf8] border border-gray-100 p-8 rounded-tr-[40px] rounded-bl-[40px] text-center flex flex-col h-full group">
+                    <div
+                        class="w-20 h-20 mx-auto rounded-full bg-orange-50 flex items-center justify-center mb-6 text-dt-orange transition-transform duration-500 group-hover:-translate-y-2">
+                        <i class="ph-light ph-binoculars text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl playfair text-gray-900 mb-4 font-semibold">Close-Up Wildlife Experiences</h3>
+                    <p class="text-gray-600 font-light flex-grow leading-relaxed">
+                        Get up close with Africa’s iconic roaming wildlife on expertly guided safaris that respect and
+                        highlight the natural ecosystems.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery / Aesthetic Divider -->
+    <section class="w-full grid grid-cols-2 md:grid-cols-4 aspect-[4/1] md:aspect-[8/2] overflow-hidden">
+        <div class="w-full h-full relative group overflow-hidden">
+            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/mowanimountainsuite-deckwithsunsetlarge.jpeg"
+                alt="Lodge" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+        </div>
+        <div class="w-full h-full relative group overflow-hidden">
+            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/onguma-nature-reserve-scaled-1.jpg"
+                alt="Nature"
+                class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+        </div>
+        <div class="w-full h-full relative group overflow-hidden hidden md:block">
+            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/sollylevisandwich-2-2-1.jpg" alt="Landscape"
+                class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+        </div>
+        <div class="w-full h-full relative group overflow-hidden hidden md:block">
+            <!-- Reuse another image here or a placeholder if scraping missed some -->
+            <img src="https://desert-tracks.com/wp-content/uploads/2025/12/deadvalley492kb-scaled-3-1-4-2-5.jpg"
+                alt="Dunes" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+            <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500"></div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-24 bg-[#18181b] text-white text-center px-6">
+        <h2 class="text-4xl md:text-6xl playfair font-medium mb-6">Ready to Discover Southern Africa?</h2>
+        <p class="text-gray-400 font-light text-lg max-w-2xl mx-auto mb-10">Contact our Safari Experts today to begin
+            planning a journey tailor-made to your vision.</p>
+        <a href="https://desert-tracks.com/desert-tracks-contact/"
+            class="inline-flex items-center justify-center px-8 py-4 bg-dt-orange text-white text-sm font-bold tracking-[0.2em] uppercase rounded-sm hover:bg-white hover:text-gray-900 transition-all duration-300">
+            Enquire Now
+        </a>
+    </section>
+
+</body>
+
+</html>

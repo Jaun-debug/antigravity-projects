@@ -1,0 +1,164 @@
+<div class="destinations-grid-wrapper">
+    <style>
+        .destinations-grid-wrapper {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            left: 0;
+            padding: 6rem 1.5rem;
+            background-color: #ffffff;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            box-sizing: border-box;
+        }
+        .dg-container {
+            max-width: 80rem;
+            margin: 0 auto;
+        }
+        .dg-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .dg-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+            color: #2c2c2c;
+            margin: 0 0 1.5rem 0;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .dg-divider {
+            width: 80px;
+            height: 2px;
+            background-color: #d87a4d;
+            margin: 0 auto;
+        }
+        .dg-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem 2rem;
+        }
+        @media (min-width: 768px) {
+            .dg-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        .dg-item {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none !important;
+            group;
+        }
+        .dg-card {
+            position: relative !important;
+            border-radius: 0.25rem;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 1.5rem;
+            display: block !important;
+        }
+        .dg-card img {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center center !important;
+            transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+            background-color: #e0dcd3;
+            border: none !important;
+        }
+        .dg-item:hover .dg-card img {
+            transform: scale(1.08);
+        }
+        .dg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0) 100%);
+            transition: background 0.5s ease;
+        }
+        .dg-item:hover .dg-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0) 100%);
+        }
+        .dg-card-title {
+            position: absolute;
+            bottom: 2rem;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            color: #ffffff !important;
+            font-family: serif;
+            font-size: 1.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin: 0 !important;
+            text-shadow: 0 4px 10px rgba(0,0,0,0.4);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            z-index: 10;
+        }
+        .dg-item:hover .dg-card-title {
+            transform: translateY(-5px);
+        }
+        .dg-description {
+            text-align: center;
+            color: #555555;
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+            padding: 0 1rem;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+        .dg-item:hover .dg-description {
+            color: #d87a4d;
+        }
+    </style>
+
+    <div class="dg-container">
+        <!-- Header Section -->
+        <div class="dg-header">
+            <h2 class="dg-title">Tailor-Made Namibia, Botswana<br>& East Africa Safaris</h2>
+            <div class="dg-divider"></div>
+        </div>
+
+        <!-- 3-Column Grid -->
+        <div class="dg-grid">
+            
+            <!-- Destination 1: NAMIBIA (User Image) -->
+            <a href="https://desert-tracks.com/namibia-safaris/" class="dg-item">
+                <div class="dg-card">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2025/10/oryx-walking-in-sossusvlei-namibialarge_235kb.jpeg" alt="Namibia Safaris">
+                    <div class="dg-overlay"></div>
+                    <h3 class="dg-card-title">Namibia</h3>
+                </div>
+                <!-- Text Below Image -->
+                <p class="dg-description">Discover Southern Africa with the freedom of self-drive.</p>
+            </a>
+
+            <!-- Destination 2: BOTSWANA (User Image) -->
+            <a href="https://desert-tracks.com/botswana-safaris-and-tours/" class="dg-item">
+                <div class="dg-card">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2025/10/giraffe-botswana.jpeg" alt="Botswana Safaris">
+                    <div class="dg-overlay"></div>
+                    <h3 class="dg-card-title">Botswana</h3>
+                </div>
+                <!-- Text Below Image -->
+                <p class="dg-description">Safaris curated especially for the esteemed luxury traveller.</p>
+            </a>
+
+            <!-- Destination 3: EAST AFRICA (Placeholder) -->
+            <a href="https://desert-tracks.com/tanzania-kenya-zanzibar-safaris/" class="dg-item">
+                <div class="dg-card">
+                    <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="East Africa Safaris">
+                    <div class="dg-overlay"></div>
+                    <h3 class="dg-card-title">East Africa</h3>
+                </div>
+                <!-- Text Below Image -->
+                <p class="dg-description">Experience the Great Migration and vast, iconic plains.</p>
+            </a>
+
+        </div>
+    </div>
+</div>

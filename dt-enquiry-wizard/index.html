@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DT Enquiry Wizard Demo</title>
+    <!-- Mock WordPress styles to simulate a page -->
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            background: #f1f1f1;
+        }
+        .wp-content {
+            max-width: 1200px;
+            margin: 100px auto;
+            padding: 40px;
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        h1 { color: #333; }
+        p { color: #666; font-size: 18px; }
+        .demo-btn {
+            background: #c44f00;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Link to the actual plugin assets -->
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+    <div class="wp-content">
+        <h1>Welcome to Wilderness Destinations</h1>
+        <p>This page simulates a WordPress environment where the enquiry wizard is embedded.</p>
+        <button class="demo-btn" onclick="document.getElementById('enquiry-wizard-root').style.display = 'block';">Launch Enquiry Wizard</button>
+        
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid #eee;">
+        
+        <!-- The Shortcode Output -->
+        <div id="enquiry-wizard-root"></div>
+    </div>
+
+    <!-- The Logic -->
+    <script src="assets/wizard.js"></script>
+    <script>
+        // Override the auto-init if needed or just let it run.
+        // For the demo, we show it immediately
+        window.addEventListener('DOMContentLoaded', () => {
+             // The wizard script auto-runs and attaches to 'enquiry-wizard-root'
+             // We can trigger it to show by setting the active class
+             document.getElementById('enquiry-wizard-root').classList.add('active');
+        });
+    </script>
+</body>
+</html>

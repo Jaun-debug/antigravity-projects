@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Block Weather Design</title>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        .weather-grid-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 20px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .weather-grid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: #2c2825;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 400;
+        }
+
+        .weather-months-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .weather-month-card {
+            background-color: #fcfaf8;
+            border: 1px solid #f0e6dd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .weather-month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .weather-month-header {
+            background-color: #d87a4d;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .weather-month-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .weather-month-season {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background-color: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+
+        .weather-month-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .weather-stat-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            border-bottom: 1px dotted #e0d5cb;
+            padding-bottom: 8px;
+        }
+
+        .weather-stat-label {
+            color: #6a625a;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .weather-stat-value {
+            color: #2c2825;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .weather-month-summary {
+            color: #5a554a;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 15px;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .weather-month-link {
+            color: #d87a4d;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: auto;
+        }
+
+        .weather-month-link::after {
+            content: '→';
+            transition: transform 0.2s;
+        }
+
+        .weather-month-card:hover .weather-month-link::after {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; background-color: #ffffff;">
+
+<div class="weather-grid-container">
+    <h2 class="weather-grid-title">When is the best time to visit Namibia?</h2>
+    
+    <div class="weather-months-grid" id="weatherGrid">
+        <!-- Cards injected via JS here -->
+    </div>
+</div>
+
+<script>
+    const data = [
+        { name: 'January', season: 'Green Season', temp: '18-30°C', rain: 'High / Storms', summary: 'Hot with dramatic afternoon thunderstorms. Landscapes turn vividly green.', url: '/namibia-weather/january/' },
+        { name: 'February', season: 'Green Season', temp: '18-30°C', rain: 'High', summary: 'Peak green season. Excellent for birddwatching and dramatic photography.', url: '/namibia-weather/february/' },
+        { name: 'March', season: 'Shoulder Season', temp: '16-29°C', rain: 'Medium', summary: 'Warm days with diminishing rains. Skies begin to clear beautifully.', url: '/namibia-weather/march/' },
+        { name: 'April', season: 'Shoulder Season', temp: '14-27°C', rain: 'Low', summary: 'Comfortable temperatures, mostly dry, and exceptional, crisp light.', url: '/namibia-weather/april/' },
+        { name: 'May', season: 'Dry Season', temp: '9-25°C', rain: 'None', summary: 'Sunny, mild days and cooler nights. Fantastic overall travel conditions.', url: '/namibia-weather/may/' },
+        { name: 'June', season: 'Dry Season', temp: '6-22°C', rain: 'None', summary: 'Getting colder. Wildlife gathering around dwindling water sources.', url: '/namibia-weather/june/' },
+        { name: 'July', season: 'Peak Season', temp: '6-21°C', rain: 'None', summary: 'Cold mornings but exceptional, highly concentrated game viewing.', url: '/namibia-weather/july/' },
+        { name: 'August', season: 'Peak Season', temp: '8-24°C', rain: 'None', summary: 'Bone dry and warming up. Prime time for Etosha safaris and stargazing.', url: '/namibia-weather/august/' },
+        { name: 'September', season: 'Peak Season', temp: '12-28°C', rain: 'None', summary: 'Warm and dusty. Superb wildlife sightings across the country.', url: '/namibia-weather/september/' },
+        { name: 'October', season: 'Shoulder Season', temp: '15-30°C', rain: 'Low', summary: 'Hotter weather with intense predator action before the rains arrive.', url: '/namibia-weather/october/' },
+        { name: 'November', season: 'Shoulder Season', temp: '17-31°C', rain: 'Medium', summary: 'The dramatic build-up to the rains. Warm, moody, and less crowded.', url: '/namibia-weather/november/' },
+        { name: 'December', season: 'Green Season', temp: '18-32°C', rain: 'Medium', summary: 'Hot summer days accompanied by the very first green shoots of the season.', url: '/namibia-weather/december/' }
+    ];
+
+    const grid = document.getElementById('weatherGrid');
+    let cardsHtml = '';
+    
+    data.forEach(m => {
+        cardsHtml += `
+            <a href="${m.url}" class="weather-month-card">
+                <div class="weather-month-header">
+                    <h3 class="weather-month-name">${m.name}</h3>
+                    <span class="weather-month-season">${m.season}</span>
+                </div>
+                <div class="weather-month-body">
+                    <div class="weather-stat-row">
+                        <span class="weather-stat-label">Avg Temp</span>
+                        <span class="weather-stat-value">${m.temp}</span>
+                    </div>
+                    <div class="weather-stat-row">
+                        <span class="weather-stat-label">Rainfall</span>
+                        <span class="weather-stat-value">${m.rain}</span>
+                    </div>
+                    <p class="weather-month-summary">${m.summary}</p>
+                    <div class="weather-month-link">View Guide</div>
+                </div>
+            </a>
+        `;
+    });
+    
+    grid.innerHTML = cardsHtml;
+</script>
+
+</body>
+</html>

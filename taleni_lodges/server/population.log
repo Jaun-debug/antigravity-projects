@@ -1,0 +1,20 @@
+Starting Image Population Task...
+Target Lodges (Y): 83
+Fatal Script Error: TargetCloseError: Protocol error (Target.setDiscoverTargets): Target closed
+    at CallbackRegistry.clear (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/common/CallbackRegistry.js:75:36)
+    at #onClose (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/Connection.js:155:25)
+    at Socket.<anonymous> (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/node/PipeTransport.js:25:30)
+    at Socket.emit (node:events:520:35)
+    at Pipe.<anonymous> (node:net:346:12) {
+  cause: ProtocolError
+      at <instance_members_initializer> (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/common/CallbackRegistry.js:96:14)
+      at new Callback (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/common/CallbackRegistry.js:100:16)
+      at CallbackRegistry.create (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/common/CallbackRegistry.js:22:26)
+      at Connection._rawSend (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/Connection.js:80:26)
+      at Connection.send (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/Connection.js:74:21)
+      at ChromeTargetManager.initialize (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/ChromeTargetManager.js:86:32)
+      at CdpBrowser._attach (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/Browser.js:70:35)
+      at CdpBrowser._create (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/cdp/Browser.js:23:23)
+      at ChromeLauncher.launch (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/node_modules/puppeteer-core/lib/cjs/puppeteer/node/ProductLauncher.js:133:61)
+      at async run (/Users/jaunhusselmann/.gemini/antigravity/scratch/taleni_lodges/server/complete_image_population.js:28:21)
+}

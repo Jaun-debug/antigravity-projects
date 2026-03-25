@@ -1,0 +1,207 @@
+<!-- PREMIUM FILM CAROUSEL COMPONENT -->
+<!-- Solves the "Stuck at 12" issue by utilizing correct modulo (%) logic for infinite wrapping. -->
+<section class="dt-film-section" id="dt-film-carousel-block">
+  <style>
+    /* User-Provided CSS */
+    .dt-film-section {
+      position: relative;
+      width: 100vw;
+      margin-left: calc(-50vw + 50%);
+      margin-bottom: -40px; /* beat Nicepage section bottom padding */
+      background: #0c0c0c;
+      padding: 70px 0 0 0;
+      overflow: hidden;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .dt-film-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 0 60px 40px 60px;
+    }
+    .dt-film-eyebrow {
+      display: block;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      color: #c8722a;
+      margin-bottom: 12px;
+    }
+    .dt-film-title {
+      font-family: 'Playfair Display', serif !important;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+      font-weight: 300 !important;
+      color: #ffffff !important;
+      margin: 0 !important;
+      line-height: 1.15 !important;
+    }
+    .dt-film-counter {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      color: rgba(255,255,255,0.15);
+      font-style: italic;
+      line-height: 1;
+      user-select: none;
+    }
+    .dt-film-counter span {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.55em;
+      font-style: normal;
+      vertical-align: middle;
+    }
+
+    /* Supplementary CSS for the actual slides and track */
+    .dt-film-slider-wrapper {
+      position: relative;
+      width: 100%;
+      height: 400px; /* Adjust height as needed */
+      overflow: hidden;
+      padding-bottom: 40px;
+    }
+    .dt-film-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .dt-film-slide {
+      flex: 0 0 100%;
+      min-width: 100%;
+      padding: 0 60px;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dt-film-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 4px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+    
+    /* Navigation Arrows */
+    .dt-film-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 50px;
+      height: 50px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+    }
+    .dt-film-nav:hover {
+      background: #c8722a;
+      border-color: #c8722a;
+    }
+    .dt-film-prev { left: 20px; }
+    .dt-film-next { right: 20px; }
+
+    @media (max-width: 768px) {
+      .dt-film-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0 20px 30px 20px;
+        gap: 20px;
+      }
+      .dt-film-slide { padding: 0 20px; }
+      .dt-film-prev { left: 5px; }
+      .dt-film-next { right: 5px; }
+    }
+  </style>
+
+  <!-- HEADER AREA -->
+  <div class="dt-film-header">
+    <div class="dt-film-header-text">
+      <span class="dt-film-eyebrow">Cinematic Journeys</span>
+      <h2 class="dt-film-title">The Wilderness Reel</h2>
+    </div>
+    
+    <!-- THE COUNTER: Automatically updated by JS -->
+    <div class="dt-film-counter" id="dtFilmCounter">
+      01 <span>/ 12</span>
+    </div>
+  </div>
+
+  <!-- SLIDER AREA -->
+  <div class="dt-film-slider-wrapper">
+    <!-- Navigation Buttons -->
+    <div class="dt-film-nav dt-film-prev" id="dtFilmPrev">&#10094;</div>
+    <div class="dt-film-nav dt-film-next" id="dtFilmNext">&#10095;</div>
+
+    <!-- Track & Slides -->
+    <div class="dt-film-track" id="dtFilmTrack">
+      <!-- 12 Placeholder Slides. Replace the image URLs with your Solly Levi Photography / Wetu images -->
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly_4757_3-scaled.jpg" alt="Slide 1"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="Slide 2"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg" alt="Slide 3"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg" alt="Slide 4"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg" alt="Slide 5"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg" alt="Slide 6"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly_scenic_road.jpg" alt="Slide 7"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2025/12/sollylevisossusvlei-9-3-2-1-4-2-1.jpeg" alt="Slide 8"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="Slide 9"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg" alt="Slide 10"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg" alt="Slide 11"></div>
+      <div class="dt-film-slide"><img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg" alt="Slide 12"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // Setup elements
+      const track = document.getElementById('dtFilmTrack');
+      const counter = document.getElementById('dtFilmCounter');
+      const prevBtn = document.getElementById('dtFilmPrev');
+      const nextBtn = document.getElementById('dtFilmNext');
+      
+      if (!track || !counter) return;
+
+      const slides = Array.from(track.children);
+      const totalSlides = slides.length; // Will be 12
+      let currentIndex = 0;
+
+      // Ensure the counter format strings with leading zeros (01, 02)
+      const formatNumber = (num) => num.toString().padStart(2, '0');
+
+      function updateCarousel() {
+        // Move the track container exactly 100% per slide
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+        // Update the counter
+        const currentDisplay = formatNumber(currentIndex + 1);
+        const totalDisplay = formatNumber(totalSlides);
+        counter.innerHTML = `${currentDisplay} <span>/ ${totalDisplay}</span>`;
+      }
+
+      function moveNext() {
+        // THE FIX: Modulo allows us to loop past 12 seamlessly back to 0
+        // e.g. (11 + 1) % 12 = 0
+        currentIndex = (currentIndex + 1) % totalSlides;
+        updateCarousel();
+      }
+
+      function movePrev() {
+        // Modulo math for backwards loops smoothly from 0 back to 11
+        // e.g. (0 - 1 + 12) % 12 = 11
+        currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+      }
+
+      // Attach event listeners
+      if (nextBtn) nextBtn.addEventListener('click', moveNext);
+      if (prevBtn) prevBtn.addEventListener('click', movePrev);
+
+      // Initialize State
+      updateCarousel();
+    });
+  </script>
+</section>

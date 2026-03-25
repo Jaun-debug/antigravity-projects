@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Weather Grid - Desert Tracks</title>
+    <!-- Use the premium fonts from Desert Tracks -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --dt-brand: #d87a4d;
+            --dt-dark: #2c2825;
+            --dt-tan: #f5f2ed;
+            --dt-gray: #6a625a;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #fcfaf8;
+            font-family: 'Inter', sans-serif;
+            color: var(--dt-dark);
+        }
+
+        .luxe-grid-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+
+        .luxe-grid-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .luxe-grid-eyebrow {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--dt-brand);
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .luxe-grid-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 400;
+            color: var(--dt-dark);
+            margin: 0 auto;
+            max-width: 800px;
+            line-height: 1.2;
+        }
+
+        /* The Grid */
+        .luxe-weather-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        /* The Card */
+        .luxe-card {
+            position: relative;
+            background: #ffffff;
+            border: 1px solid rgba(0,0,0,0.04);
+            padding: 20px 15px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            overflow: hidden;
+            min-height: 220px;
+        }
+
+        /* Subtle Inner border to frame content like a painting */
+        .luxe-card::before {
+            content: '';
+            position: absolute;
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid transparent;
+            transition: border-color 0.5s ease;
+            pointer-events: none;
+        }
+
+        .luxe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            border-color: transparent;
+        }
+
+        .luxe-card:hover::before {
+            border-color: rgba(216, 122, 77, 0.15); /* Brand color faint frame */
+        }
+
+        /* Card Content */
+        .luxe-card-month {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin: 0 0 5px 0;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .luxe-card:hover .luxe-card-month {
+            color: var(--dt-brand);
+        }
+
+        .luxe-card-season {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--dt-gray);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .luxe-card-data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }
+
+        .luxe-data-metric {
+            position: relative;
+        }
+
+        .luxe-data-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #999;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        .luxe-data-value {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--dt-dark);
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* Vertical Divider */
+        .luxe-data-divider {
+            width: 1px;
+            height: 20px;
+            background-color: rgba(0,0,0,0.06);
+        }
+
+        .luxe-card-summary {
+            font-size: 0.8rem;
+            line-height: 1.4;
+            color: var(--dt-gray);
+            margin: 0 0 15px 0;
+            flex-grow: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Truncate if too long to keep uniform */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* The "Read More" Button */
+        .luxe-card-action {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--dt-dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: auto;
+            transition: color 0.3s ease;
+        }
+
+        .luxe-card-action span {
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background-color: var(--dt-dark);
+            transition: width 0.3s ease, background-color 0.3s ease;
+        }
+
+        .luxe-card:hover .luxe-card-action {
+            color: var(--dt-brand);
+        }
+
+        .luxe-card:hover .luxe-card-action span {
+            width: 45px;
+            background-color: var(--dt-brand);
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="luxe-grid-container">
+    <div class="luxe-grid-header">
+        <span class="luxe-grid-eyebrow">Namibia by Month</span>
+        <h2 class="luxe-grid-title">A Journey Through the Seasons</h2>
+    </div>
+
+    <div class="luxe-weather-wrapper" id="luxeGrid"></div>
+</div>
+
+<script>
+    const data = [
+        { name: 'January', season: 'Green Season', temp: '18—30°C', rain: 'High', summary: 'Hot with dramatic afternoon thunderstorms. Landscapes turn vividly green causing spectacular contrast.', url: '/namibia-weather/january/' },
+        { name: 'February', season: 'Green Season', temp: '18—30°C', rain: 'High', summary: 'Peak green season. Excellent for birdwatching and photography against moody, stormy skies.', url: '/namibia-weather/february/' },
+        { name: 'March', season: 'Shoulder Season', temp: '16—29°C', rain: 'Med', summary: 'Warm days with diminishing rains. Skies begin to clear beautifully, leaving dust-free air.', url: '/namibia-weather/march/' },
+        { name: 'April', season: 'Shoulder Season', temp: '14—27°C', rain: 'Low', summary: 'Comfortable temperatures, mostly dry, and exceptional light makes this a favored travel month.', url: '/namibia-weather/april/' },
+        { name: 'May', season: 'Dry Season', temp: '9—25°C', rain: 'None', summary: 'Sunny, mild days and cooler nights. Fantastic overall travel conditions for self-drives.', url: '/namibia-weather/may/' },
+        { name: 'June', season: 'Dry Season', temp: '6—22°C', rain: 'None', summary: 'The chill of winter arrives. Vegetation thins, drawing wildlife to remaining waterholes.', url: '/namibia-weather/june/' },
+        { name: 'July', season: 'Peak Season', temp: '6—21°C', rain: 'None', summary: 'Very cold mornings but exceptional, highly concentrated game viewing in the national parks.', url: '/namibia-weather/july/' },
+        { name: 'August', season: 'Peak Season', temp: '8—24°C', rain: 'None', summary: 'Bone-dry landscapes and warming days. Prime time for Etosha safaris and clear stargazing.', url: '/namibia-weather/august/' },
+        { name: 'September', season: 'Peak Season', temp: '12—28°C', rain: 'None', summary: 'Warm, dry, and dusty. Predictable water sources guarantee superb wildlife sightings.', url: '/namibia-weather/september/' },
+        { name: 'October', season: 'Shoulder Season', temp: '15—30°C', rain: 'Low', summary: 'Intense heat builds alongside highly concentrated wildlife action before the rains break.', url: '/namibia-weather/october/' },
+        { name: 'November', season: 'Shoulder Season', temp: '17—31°C', rain: 'Med', summary: 'The dramatic build-up to the rains. Warm, humid, and brilliant for photography.', url: '/namibia-weather/november/' },
+        { name: 'December', season: 'Green Season', temp: '18—32°C', rain: 'Med', summary: 'Hot summer days accompanied by the very first green shoots of the new rainy season.', url: '/namibia-weather/december/' }
+    ];
+
+    const grid = document.getElementById('luxeGrid');
+    let html = '';
+    
+    data.forEach(m => {
+        html += `
+            <a href="${m.url}" class="luxe-card">
+                <h3 class="luxe-card-month">${m.name}</h3>
+                <span class="luxe-card-season">${m.season}</span>
+                
+                <div class="luxe-card-data">
+                    <div class="luxe-data-metric">
+                        <span class="luxe-data-label">Avg Temp</span>
+                        <span class="luxe-data-value">${m.temp}</span>
+                    </div>
+                    <div class="luxe-data-divider"></div>
+                    <div class="luxe-data-metric" style="text-align: right;">
+                        <span class="luxe-data-label">Rainfall</span>
+                        <span class="luxe-data-value">${m.rain}</span>
+                    </div>
+                </div>
+
+                <p class="luxe-card-summary">${m.summary}</p>
+
+                <div class="luxe-card-action">
+                    Explore Month <span></span>
+                </div>
+            </a>
+        `;
+    });
+    
+    grid.innerHTML = html;
+</script>
+
+</body>
+</html>

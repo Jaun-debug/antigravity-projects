@@ -1,0 +1,240 @@
+# BEGIN LSCACHE
+## LITESPEED WP CACHE PLUGIN - Do not edit the contents of this block! ##
+<IfModule LiteSpeed>
+RewriteEngine on
+CacheLookup on
+RewriteRule .* - [E=Cache-Control:no-autoflush]
+RewriteRule litespeed/debug/.*\.log$ - [F,L]
+RewriteRule \.litespeed_conf\.dat - [F,L]
+
+### marker ASYNC start ###
+RewriteCond %{REQUEST_URI} /wp-admin/admin-ajax\.php
+RewriteCond %{QUERY_STRING} action=async_litespeed
+RewriteRule .* - [E=noabort:1]
+### marker ASYNC end ###
+
+### marker MOBILE start ###
+RewriteCond %{HTTP_USER_AGENT} Mobile|Android|Silk/|Kindle|BlackBerry|Opera\ Mini|Opera\ Mobi [NC]
+RewriteRule .* - [E=Cache-Control:vary=%{ENV:LSCACHE_VARY_VALUE}+ismobile]
+### marker MOBILE end ###
+
+### marker WEBP start ###
+RewriteCond %{HTTP_ACCEPT} image/webp [OR]
+RewriteCond %{HTTP_USER_AGENT} iPhone\ OS\ (1[4-9]|[2-9][0-9]) [OR]
+RewriteCond %{HTTP_USER_AGENT} Firefox/([6-9][0-9]|[1-9][0-9]{2,})
+RewriteRule .* - [E=Cache-Control:vary=%{ENV:LSCACHE_VARY_VALUE}+webp]
+### marker WEBP end ###
+
+### marker DROPQS start ###
+CacheKeyModify -qs:fbclid
+CacheKeyModify -qs:gclid
+CacheKeyModify -qs:utm*
+CacheKeyModify -qs:_ga
+### marker DROPQS end ###
+
+</IfModule>
+## LITESPEED WP CACHE PLUGIN - Do not edit the contents of this block! ##
+# END LSCACHE
+# BEGIN NON_LSCACHE
+## LITESPEED WP CACHE PLUGIN - Do not edit the contents of this block! ##
+### marker BROWSER CACHE start ###
+<IfModule mod_expires.c>
+ExpiresActive on
+ExpiresByType application/pdf A31536000
+ExpiresByType image/x-icon A31536000
+ExpiresByType image/vnd.microsoft.icon A31536000
+ExpiresByType image/svg+xml A31536000
+
+ExpiresByType image/jpg A31536000
+ExpiresByType image/jpeg A31536000
+ExpiresByType image/png A31536000
+ExpiresByType image/gif A31536000
+ExpiresByType image/webp A31536000
+ExpiresByType image/avif A31536000
+
+ExpiresByType video/ogg A31536000
+ExpiresByType audio/ogg A31536000
+ExpiresByType video/mp4 A31536000
+ExpiresByType video/webm A31536000
+
+ExpiresByType text/css A31536000
+ExpiresByType text/javascript A31536000
+ExpiresByType application/javascript A31536000
+ExpiresByType application/x-javascript A31536000
+
+ExpiresByType application/x-font-ttf A31536000
+ExpiresByType application/x-font-woff A31536000
+ExpiresByType application/font-woff A31536000
+ExpiresByType application/font-woff2 A31536000
+ExpiresByType application/vnd.ms-fontobject A31536000
+ExpiresByType font/ttf A31536000
+ExpiresByType font/otf A31536000
+ExpiresByType font/woff A31536000
+ExpiresByType font/woff2 A31536000
+
+</IfModule>
+### marker BROWSER CACHE end ###
+
+## LITESPEED WP CACHE PLUGIN - Do not edit the contents of this block! ##
+# END NON_LSCACHE
+
+### BEGIN 301 REDIRECTS (Consolidated & SEO Optimized) ###
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# 1. Query string redirects - consolidated into one rule
+RewriteCond %{QUERY_STRING} ^(p=(2071|31|5163|5156|5261|5267|5210|5203|5169|5148|5122|5080|5047|5043|5039|5016|4988|4926|4902|4892|4868|4815|4734|4675|4595|4507|4454|4410|4379|4348|4255|4247|4230|4156|4100|4014)|live_tour=6390.*)$ [NC]
+RewriteRule ^$ https://desert-tracks.com/ [R=301,L]
+
+# 2. Self-drive safari pages -> Self-Drive Safaris page
+RewriteRule ^self-drive-safaris-namibia/?$ https://desert-tracks.com/namibia-self-drive-safaris/ [R=301,L]
+
+# 3. Luxury & lodge pages -> Luxury Safaris page
+RewriteRule ^luxury-safaris-namibia/?$ https://desert-tracks.com/namibia-luxury-safaris/ [R=301,L]
+RewriteRule ^namibia-luxury-lodges/?$ https://desert-tracks.com/namibia-luxury-safaris/ [R=301,L]
+
+# 4. Fly-in safari pages -> Fly-In Safaris page
+RewriteRule ^fly-in-safaris-namibia/?$ https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+
+# 5. General Namibia safari pages -> Namibia Safaris page
+RewriteRule ^family-safaris-namibia/?$ https://desert-tracks.com/namibia-safaris/ [R=301,L]
+RewriteRule ^namibia-off-the-beaten-track/?$ https://desert-tracks.com/namibia-safaris/ [R=301,L]
+
+# 6. Other destination pages -> correct destination pages
+RewriteRule ^botswana-safaris/?$ https://desert-tracks.com/botswana-safaris-and-tours/ [R=301,L]
+RewriteRule ^east-africa-safaris/?$ https://desert-tracks.com/tanzania-kenya-zanzibar-safaris/ [R=301,L]
+
+# 7. Travel guide posts -> Travel Guide landing page
+RewriteRule ^travel-guide/how-to-plan-a-safari-in-namibia/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/benefits-of-safari-lodges-vs-camping/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/the-ultimate-guide-to-namibia-fly-in-safaris/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/namibias-top-10-safari-lodges/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/safari-travel-tips/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/self-drive-itineraries/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/top-photography-spots-in-namibias-national-parks/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/category/self-drive/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/category/fly-in/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^travel-guide/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 8. Info/guide articles -> Travel Guide
+RewriteRule ^is-wi-fi-in-namibia-available-during-a-safari/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^whale-watching-in-namibia-a-guide-to-spotting-marine-giants-on-the-skeleton-coast/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 9. Date archives -> Travel Guide
+RewriteRule ^2024/01/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^2023/07/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 10. Misc -> Homepage
+RewriteRule ^7250-2/?$ https://desert-tracks.com/ [R=301,L]
+RewriteRule ^home-deutsch/?$ https://desert-tracks.com/ [R=301,L]
+
+# 11. Old Africa Safari / WooCommerce cart URLs -> Destinations page
+RewriteRule ^africa-safari/ https://desert-tracks.com/destinations/ [R=301,L]
+
+# 12. Travel guide share links -> Travel Guide page
+RewriteCond %{QUERY_STRING} share= [NC]
+RewriteRule ^travel-guide/ https://desert-tracks.com/namibia-east-africa-travel-guide/? [R=301,L]
+
+# 13. Old wildlife/conservation page
+RewriteRule ^namibia-wildlife-conservation-efforts/ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 14. Product pages (old WooCommerce) -> Destinations
+RewriteRule ^product/ https://desert-tracks.com/destinations/ [R=301,L]
+
+# 15. Collection pages (old structure) -> matching safari pages
+RewriteRule ^collection/luxury-safaris/?$ https://desert-tracks.com/namibia-luxury-safaris/ [R=301,L]
+RewriteRule ^collection/self-drive-safaris/?$ https://desert-tracks.com/namibia-self-drive-safaris/ [R=301,L]
+RewriteRule ^collection/fly-in-safaris/?$ https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+
+# 16. Old category/type pages -> relevant landing pages
+RewriteRule ^safari-types/?$ https://desert-tracks.com/namibia-safaris/ [R=301,L]
+RewriteRule ^namibia-safari-types/?$ https://desert-tracks.com/namibia-safaris/ [R=301,L]
+RewriteRule ^travel-guide/category/ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^category/ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 17. Botswana luxury safaris -> Botswana page
+RewriteRule ^botswana-luxury-safaris/?$ https://desert-tracks.com/botswana-safaris-and-tours/ [R=301,L]
+
+# 18. Blog archive -> Travel Guide
+RewriteRule ^blog/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 19. Date archives -> Travel Guide
+RewriteRule ^2024/ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# 20. Old blog posts -> Travel Guide
+RewriteRule ^namibia-unveiled-discover-the-mesmerising-tapestry-of-its-diverse-regions/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^interesting-facts-about-the-skeleton-coast-in-namibia/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^dventure-beyond-safaris-thrilling-activities/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^journey-through-time-discovering-historical-land/?$ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+
+# ============================================================
+# >>>>>> RULE 21: OLD SPRINGNEST PAGES <<<<<<
+# ============================================================
+RewriteRule ^activities/ https://desert-tracks.com/destinations/ [R=301,L]
+RewriteRule ^blog/ https://desert-tracks.com/namibia-east-africa-travel-guide/ [R=301,L]
+RewriteRule ^10-day-honey https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+RewriteRule ^12-day-desert https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+RewriteRule ^9-day-sossusvl https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+RewriteRule ^19-day-most-o https://desert-tracks.com/namibia-self-drive-safaris/ [R=301,L]
+RewriteRule ^16-day-self-dri https://desert-tracks.com/namibia-self-drive-safaris/ [R=301,L]
+RewriteRule ^namibia-off-th https://desert-tracks.com/namibia-safaris/ [R=301,L]
+
+# ============================================================
+# >>>>>> RULE 22: FIX DOUBLE-URL MALFORMED LINKS <<<<<<
+# ============================================================
+RewriteRule ^namibia-weather/march/https:/desert-tracks\.com/namibia-weather/february/?$ /namibia-weather/february/ [R=301,L]
+RewriteRule ^namibia-weather/march/https://desert-tracks\.com/namibia-weather/february/?$ /namibia-weather/february/ [R=301,L]
+
+# ============================================================
+# >>>>>> RULE 23: PRUNE USELESS ARCHIVE & SEARCH URLS (410 GONE)
+# ============================================================
+
+# travel guide archives
+RewriteRule ^travel-guide/page/.*$ - [G,L]
+RewriteRule ^travel-guide/category/.*$ - [G,L]
+RewriteRule ^travel-guide/tag/.*$ - [G,L]
+
+# general wordpress archives
+RewriteRule ^category/.*$ - [G,L]
+RewriteRule ^tag/.*$ - [G,L]
+
+# pagination anywhere
+RewriteRule ^(.*/)?page/[0-9]+/?$ - [G,L]
+
+# search pages
+RewriteRule ^search/.*$ - [G,L]
+
+# query string garbage
+RewriteCond %{QUERY_STRING} ^p= [OR]
+RewriteCond %{QUERY_STRING} ^cat= [OR]
+RewriteCond %{QUERY_STRING} ^author=
+RewriteRule ^$ - [G,L]
+
+</IfModule>
+### END 301 REDIRECTS ###
+
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+
+# END WordPress
+
+# BEGIN LiteSpeed
+# The directives (lines) between "BEGIN LiteSpeed" and "END LiteSpeed" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+<IfModule Litespeed>
+	SetEnv noabort 1
+</IfModule>
+# END LiteSpeed

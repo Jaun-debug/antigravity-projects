@@ -1,0 +1,519 @@
+<div class="itinerary-master-page">
+    <style data-no-optimize="1">
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+        .itinerary-master-page {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            box-sizing: border-box;
+            line-height: 1.6;
+            position: relative;
+        }
+        .itinerary-master-page *, .itinerary-master-page *::before, .itinerary-master-page *::after {
+            box-sizing: inherit;
+        }
+        /* Full Width Hero Header */
+        .imp-hero {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            height: 85vh; 
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden; 
+        }
+        .imp-hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            animation: impHeroZoom 10s ease-out forwards; 
+        }
+        @keyframes impHeroZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .imp-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .imp-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            color: #ffffff !important;
+            max-width: 60rem;
+        }
+        .imp-hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.05em;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            color: #ffffff !important; 
+        }
+        .imp-hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin: 0;
+            color: #ffffff !important; 
+        }
+        /* Main Content Layout */
+        .imp-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .imp-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+        @media (min-width: 1024px) {
+            .imp-layout {
+                grid-template-columns: 2fr 1fr; 
+                align-items: stretch; 
+            }
+        }
+        /* Typography & Sections */
+        .imp-section {
+            margin-bottom: 4rem;
+        }
+        .imp-section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 2rem;
+            color: #2c2c2c !important;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .imp-text {
+            color: #555555;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        /* Route Map Styles */
+        .imp-map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #f9f9f4;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .imp-map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+        /* Day-by-Day Accordion */
+        .imp-day {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .imp-day:last-of-type {
+            border-bottom: none;
+        }
+        .imp-day summary {
+            font-family: "Playfair Display", serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .imp-day summary:hover {
+            color: #d87a4d;
+        }
+        .imp-day summary::-webkit-details-marker {
+            display: none; 
+        }
+        .imp-day summary::after {
+            content: '+';
+            font-family: system-ui, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: #d87a4d;
+        }
+        .imp-day[open] summary::after {
+            content: '−';
+        }
+        .imp-day-content {
+            padding-bottom: 2rem;
+            color: #555555;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+        /* ==== THE CAROUSEL STYLES ==== */
+        .imp-day-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            margin: 1rem 0 1.5rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #d87a4d #f0eee9;
+        }
+        .imp-day-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+        .imp-day-carousel::-webkit-scrollbar-track {
+            background: #f0eee9;
+            border-radius: 4px;
+        }
+        .imp-day-carousel::-webkit-scrollbar-thumb {
+            background: #d87a4d;
+            border-radius: 4px;
+        }
+        .imp-day-carousel img {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            scroll-snap-align: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) {
+            .imp-day-carousel img {
+                flex: 0 0 100%; 
+                scroll-snap-align: start;
+            }
+        }
+        .imp-day-meta {
+            margin-top: 1.5rem;
+            background: #f9f9f4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 3px solid #d87a4d;
+        }
+        .imp-day-meta p {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        .imp-day-meta p:last-child {
+            margin: 0;
+        }
+        .imp-day-meta strong {
+            color: #2c2c2c !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        /* Sticky Sidebar FIX */
+        .imp-sidebar-wrapper {
+            position: relative;
+            height: 100%; 
+        }
+        .imp-sidebar {
+            background-color: #f9f9f4;
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            border-top: 4px solid #d87a4d;
+            
+            position: -webkit-sticky;
+            position: sticky;
+            top: 130px; 
+            z-index: 10;
+        }
+        .imp-price {
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            color: #2c2c2c !important;
+            margin: 0 0 0.5rem 0;
+            font-weight: 400;
+        }
+        .imp-price span {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .imp-glance-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        .imp-glance-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+            color: #666;
+        }
+        .imp-glance-list li:last-child {
+            border-bottom: none;
+        }
+        .imp-glance-list strong {
+            font-weight: 500;
+            color: #2c2c2c !important;
+            text-align: right;
+        }
+        .imp-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #d87a4d;
+            color: #ffffff !important;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border-radius: 2px;
+        }
+        .imp-btn:hover {
+            background-color: #be653a;
+        }
+        
+        .imp-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .imp-highlight-tag {
+            background: #f0eee9;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c2c2c !important;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+    </style>
+
+    <div class="imp-hero">
+        <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/12/deadvalley492kb-scaled-3-1-4-2-2-2.jpg" alt="17-Day Namibia, Chobe & Vic Falls Safari" />
+        <div class="imp-hero-overlay"></div>
+        <div class="imp-hero-content">
+            <h1 class="imp-hero-title">17-Day Namibia, Chobe & Vic Falls</h1>
+            <p class="imp-hero-subtitle">Self-Drive Safari</p>
+        </div>
+    </div>
+
+    <div class="imp-container">
+        <div class="imp-layout">
+            
+            <div class="imp-main">
+                <section class="imp-section">
+                    <h2 class="imp-section-title">Overview</h2>
+                    <p class="imp-text">This unforgettable journey takes you through Namibia, Botswana, and Zimbabwe, offering a blend of natural beauty, wildlife, and cultural richness. Start your adventure in Windhoek, then head to Sossusvlei's towering dunes, followed by Swakopmund, where the desert meets the sea.</p>
+                    <p class="imp-text">Experience the dramatic landscapes of Spitzkoppe, the incredible wildlife of Etosha National Park, and the lush river systems in the Caprivi. Finally, cross into Botswana for unbelievable game viewing in Chobe before ending at the majestic Victoria Falls.</p>
+                    <div class="imp-highlights">
+                        <div class="imp-highlight-tag">Windhoek</div>
+                        <div class="imp-highlight-tag">Sossusvlei Dunes</div>
+                        <div class="imp-highlight-tag">Swakopmund</div>
+                        <div class="imp-highlight-tag">Spitzkoppe</div>
+                        <div class="imp-highlight-tag">Etosha National Park</div>
+                        <div class="imp-highlight-tag">Caprivi Strip</div>
+                        <div class="imp-highlight-tag">Chobe National Park</div>
+                        <div class="imp-highlight-tag">Victoria Falls</div>
+                    </div>
+
+                    <div class="imp-map-container">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2025/10/map_17-daynamibiachobevicfallsself-drivesafaricomfort-1.png" alt="17-Day Safari Route Map">
+                    </div>
+                </section>
+
+                <section class="imp-section">
+                    <h2 class="imp-section-title">Itinerary</h2>
+                    
+                    <details class="imp-day" open>
+                        <summary>Day 1-2: Ti Melen Boutique Guesthouse</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Begin your adventure at Ti Melen Boutique Guesthouse in Windhoek, a charming and cozy retreat that blends modern comforts with local Namibian touches. Located in the heart of the capital, this guesthouse offers a peaceful environment to relax and unwind before embarking on your journey into the wild beauty of Namibia.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/timellen_249kb.jpeg" alt="Ti Melen Boutique Guesthouse">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Windhoek, Namibia</p>
+                                <p><a href="https://www.ondili.com/en/lodges-en/ti-melen/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 2-4: Desert Homestead Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Next, head to the stunning Desert Homestead Lodge near Sossusvlei. Nestled in the heart of the Namib Desert, this lodge offers a peaceful and scenic retreat with spectacular views of the red dunes. Enjoy two nights of serene desert beauty, with opportunities to explore the surrounding landscape or simply relax and take in the tranquility.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/deserthomesteadlodgeoutside_256kb.jpeg" alt="Desert Homestead Lodge">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/12/deadvalley492kb-scaled-3-1-4-2-2-2.jpg" alt="Sossusvlei Dead Vlei">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Sossusvlei, Namib Desert</p>
+                                <p><a href="https://www.ondili.com/en/lodges-en/desert-homestead-lodge/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 4-6: Swakopmund Luxury Suites</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Explore the coastal charm of Swakopmund Luxury Suites, where the desert meets the Atlantic Ocean. This luxurious retreat offers a mix of adventure and relaxation, with easy access to the vibrant town of Swakopmund, known for its German colonial architecture and outdoor activities, including sandboarding and quad biking.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/swakopmund-luxury-suites_255kb.jpeg" alt="Swakopmund Luxury Suites">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Swakopmund Coastline</p>
+                                <p><a href="https://www.swakopmundluxurysuites.com" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 6-7: Spitzkoppen Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Discover the breathtaking landscapes of Spitzkoppe, where the towering granite peaks and ancient rock formations create a dramatic setting. Spitzkoppen Lodge is an exclusive escape, offering a serene environment perfect for stargazing, hiking, and appreciating the natural wonders of one of Namibia's most iconic landscapes.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/spitzkoppenlodge_228kb.jpeg" alt="Spitzkoppen Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Spitzkoppe</p>
+                                <p><a href="https://www.spitzkoppenlodge.com" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 7-8: Etosha Safari Camp</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Step into the heart of one of Africa's most famous game reserves, Etosha National Park, at Etosha Safari Camp. This camp provides an authentic safari experience with modern comforts, located just outside the park's southern entrance. Enjoy thrilling game drives and the chance to see elephants, lions, and other wildlife in their natural habitats.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/etoshasafaricamproom_203kb.jpg" alt="Etosha Safari Camp">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Etosha South</p>
+                                <p><a href="https://gondwana-collection.com/accommodation/etosha-safari-camp" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 8-10: Onguma Bush Camp</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Set within the Onguma Nature Reserve, Onguma Bush Camp offers a unique blend of luxury and nature. With a range of game viewing experiences, this camp is ideal for those seeking a deeper connection with the African bush. Spend two nights in this peaceful retreat, where the sounds of nature and the sight of wildlife will leave you enchanted.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/ongumabushcamppool_292kb.jpg" alt="Onguma Bush Camp">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-2-2.jpeg" alt="Onguma Nature Reserve Wildlife">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Onguma Nature Reserve, Etosha East</p>
+                                <p><a href="https://onguma.com/onguma-bush-camp/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 10-12: Shametu River Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Located along the banks of the Zambezi River, Shametu River Lodge offers a tranquil escape surrounded by nature. Enjoy the peaceful atmosphere, where you can unwind and explore the river's diverse wildlife. Whether you're on a boat cruise or simply relaxing by the river, this lodge promises a calming and memorable experience.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/shameturiverlodgeroom_275kb.jpeg" alt="Shametu River Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Zambezi River</p>
+                                <p><a href="https://shameturiverlodge.com" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 12-13: Namushasha River Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Experience the serenity of Namushasha River Lodge, located on the banks of the Kwando River. This peaceful lodge is perfect for birdwatching, river cruises, and exploring the lush wetlands. Its intimate setting provides an ideal base to immerse yourself in the natural beauty of northern Namibia's river systems.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/namushashariverlodgeroom_253kb.jpeg" alt="Namushasha River Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Kwando River</p>
+                                <p><a href="https://gondwana-collection.com/accommodation/namushasha-river-lodge" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 13-15: Chobe Bush Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Cross into Botswana and settle into the comforts of Chobe Bush Lodge, a perfect gateway to the renowned Chobe National Park. With breathtaking views of the Chobe River and its abundant wildlife, this lodge is ideal for safari enthusiasts. Enjoy boat cruises, game drives, and the opportunity to observe elephants, lions, and more in their natural habitat.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/chobebushlodge_253kb.jpeg" alt="Chobe Bush Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Chobe National Park, Botswana</p>
+                                <p><a href="https://www.chobe.com/chobe-bush-lodge.php" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 15-17: Pioneers Victoria Falls</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">End your incredible journey at Pioneers Victoria Falls, a luxurious lodge located just a short distance from the famous Victoria Falls. With its stunning views of the falls and surrounding wilderness, this lodge offers the perfect mix of relaxation and adventure. Enjoy guided tours to witness the majesty of the falls, as well as other exciting activities like boat cruises and cultural excursions.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/pioneersvicfalls_251kb.jpeg" alt="Pioneers Victoria Falls">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Victoria Falls, Zimbabwe</p>
+                                <p><a href="https://www.pioneersvicfalls.com" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                </section>
+            </div>
+
+            <!-- Sticky Sidebar -->
+            <div class="imp-sidebar-wrapper">
+                <aside class="imp-sidebar">
+                    <h3 class="imp-section-title" style="font-size: 1.5rem; margin-bottom: 1rem; border:none; padding:0;">17-Day Safari</h3>
+                    
+                    <ul class="imp-glance-list">
+                        <li>Duration <strong>17 Days / 16 Nights</strong></li>
+                        <li>Type <strong>Self-Drive</strong></li>
+                        <li>Starts <strong>Windhoek</strong></li>
+                        <li>Ends <strong>Victoria Falls</strong></li>
+                        <li>Style <strong>Comfort</strong></li>
+                    </ul>
+                    <a href="#booking-section" class="imp-btn" onclick="document.querySelector('.u-form').scrollIntoView({behavior:'smooth'}); return false;">Enquire Now</a>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</div>

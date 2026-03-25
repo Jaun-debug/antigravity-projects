@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ZAP Tours & Safaris — Windhoek City Experiences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    /* ── SCREEN PREVIEW ── */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #d8d4cc;
+      font-family: 'Open Sans', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      gap: 40px;
+    }
+
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .controls button {
+      background: #2c3e2d;
+      color: #fff;
+      border: none;
+      padding: 10px 28px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+    .controls button:hover { background: #3d5440; }
+
+    /* A4 page */
+    .page {
+      width: 794px;           /* 210mm at 96dpi */
+      min-height: 1123px;     /* 297mm at 96dpi */
+      background: #fff;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.25);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── HEADER BAND — PREMIUM CENTRED ── */
+    .hdr {
+      background: #2c3e2d;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-bottom: 4px solid #d4af37;
+      padding: 0;
+    }
+    /* Top location label */
+    .hdr-location {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 8px;
+      color: rgba(212,175,55,0.65);
+      letter-spacing: 7px;
+      text-transform: uppercase;
+      padding: 14px 0 10px 0;
+    }
+    /* Thin decorative gold rule above name */
+    .hdr-top-rule {
+      width: 260px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(212,175,55,0.5), transparent);
+      margin-bottom: 14px;
+    }
+    /* Logo + brand lockup side by side */
+    .hdr-lockup {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-bottom: 14px;
+    }
+    .hdr-brand {}
+    .hdr-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 1.05;
+      letter-spacing: 1px;
+      margin: 0;
+    }
+    .hdr-sub {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 8.5px;
+      color: rgba(212,175,55,0.7);
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+    /* Thin separator before contact strip */
+    .hdr-sep {
+      width: 100%;
+      height: 1px;
+      background: rgba(212,175,55,0.18);
+    }
+    /* Contact strip */
+    .hdr-contact-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      padding: 8px 48px 10px 48px;
+    }
+    .hdr-contact-strip a {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 9.5px;
+      color: rgba(212,175,55,0.85);
+      text-decoration: none;
+      letter-spacing: 0.5px;
+    }
+    .hdr-contact-strip a:hover { color: #d4af37; }
+    .hdr-contact-strip .dot {
+      font-size: 8px;
+      color: rgba(212,175,55,0.3);
+    }
+    .hdr-contact-strip .loc {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 9.5px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    /* ── HERO IMAGE STRIP ── */
+    .hero-strip {
+      height: 155px;
+      background: linear-gradient(135deg, #2c3e2d 0%, #1e2b1f 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-strip img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.6;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(44,62,45,0.85) 0%, rgba(44,62,45,0.2) 60%, transparent 100%);
+      display: flex;
+      align-items: center;
+      padding: 0 56px;
+    }
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #fff;
+      line-height: 1.15;
+    }
+    .hero-headline em { color: #d4af37; font-style: italic; }
+
+    /* ── BODY ── */
+    .body { flex: 1; display: flex; flex-direction: column; }
+
+    /* INTRO ROW */
+    .intro {
+      padding: 18px 48px 14px 48px;
+      border-bottom: 1px solid #e8e4dc;
+    }
+    .intro p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 12px;
+      line-height: 1.75;
+      color: #555;
+      font-weight: 300;
+    }
+    .intro strong { color: #2c3e2d; font-weight: 600; }
+
+    /* ── MAIN CONTENT GRID ── */
+    .content-grid {
+      display: flex;
+      flex: 1;
+    }
+    .col-left {
+      flex: 1;
+      padding: 18px 20px 18px 48px;
+      border-right: 1px solid #e8e4dc;
+    }
+    .col-right {
+      width: 248px;
+      padding: 18px 28px 18px 20px;
+      background: #f8f5ef;
+    }
+
+    /* Section labels */
+    .section-label {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 9px;
+      color: #b8860b;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #2c3e2d;
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .section-body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 11.5px;
+      line-height: 1.7;
+      color: #666;
+      font-weight: 300;
+      margin-bottom: 10px;
+    }
+
+    /* Price boxes */
+    .price-row { display: flex; gap: 8px; margin: 10px 0 6px 0; }
+    .price-box {
+      flex: 1;
+      padding: 9px 12px;
+      background: #fff;
+      border-top: 3px solid #2c3e2d;
+    }
+    .price-box.gold { border-top-color: #b8860b; }
+    .price-label {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 9px;
+      color: #999;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+    }
+    .price-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: #2c3e2d;
+    }
+    .price-note {
+      font-size: 10.5px;
+      color: #888;
+      font-family: 'Open Sans', sans-serif;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    /* Divider */
+    .div-line { border: none; border-top: 1px solid #ddd; margin: 10px 0; }
+
+    /* Sidebar items */
+    .sidebar-card {
+      padding: 10px 12px;
+      background: #fff;
+      margin-bottom: 10px;
+      border-left: 3px solid #2c3e2d;
+    }
+    .sidebar-card.gold-border { border-left-color: #b8860b; }
+    .sidebar-card-label {
+      font-size: 8.5px;
+      color: #b8860b;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 3px;
+      font-family: 'Open Sans', sans-serif;
+    }
+    .sidebar-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: #2c3e2d;
+      margin-bottom: 4px;
+    }
+    .sidebar-card-body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 10.5px;
+      color: #666;
+      line-height: 1.5;
+    }
+    .sidebar-card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 16px;
+      color: #2c3e2d;
+      margin-top: 4px;
+    }
+    .sidebar-card-price small {
+      font-size: 10px;
+      color: #888;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    /* Includes */
+    .include-list { list-style: none; padding: 0; margin: 0 0 10px 0; }
+    .include-list li {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 11px;
+      color: #555;
+      padding: 3.5px 0;
+      border-bottom: 1px dotted #ddd;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .include-list li::before {
+      content: '✓';
+      color: #2c3e2d;
+      font-weight: 700;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    /* Giving back */
+    .giving-back {
+      background: #2c3e2d;
+      padding: 10px 16px;
+      margin-top: 10px;
+    }
+    .giving-back p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 10.5px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+    .giving-back strong { color: #d4af37; }
+
+    /* ── FOOTER BAND ── */
+    .footer {
+      background: #1e2b1f;
+      padding: 12px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 3px solid #d4af37;
+    }
+    .footer-left p {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 1px;
+    }
+    .footer-cta {
+      background: #d4af37;
+      padding: 8px 20px;
+      text-decoration: none;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      color: #1e2b1f;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body { background: #fff; padding: 0; }
+      .controls { display: none; }
+      .page {
+        width: 210mm;
+        min-height: 297mm;
+        box-shadow: none;
+        margin: 0;
+      }
+      @page { size: A4; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen controls -->
+  <div class="controls">
+    <span style="font-family:'Open Sans',sans-serif; font-size:11px; color:#666; letter-spacing:2px; text-transform:uppercase;">ZAP Tours PDF Preview</span>
+    <button onclick="window.print()">⬇ Download / Print PDF</button>
+  </div>
+
+  <!-- A4 PAGE -->
+  <div class="page">
+
+    <!-- HEADER — PREMIUM CENTRED -->
+    <div class="hdr">
+
+      <!-- Location label -->
+      <p class="hdr-location">· &nbsp; Windhoek &nbsp;·&nbsp; Namibia &nbsp; ·</p>
+
+      <!-- Decorative rule -->
+      <div class="hdr-top-rule"></div>
+
+      <!-- Logo + brand lockup -->
+      <div class="hdr-lockup">
+        <svg width="200" height="155" viewBox="0 0 265 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- Open arc - gold on dark -->
+          <path d="M 50,182 A 90,90 0 1,1 205,118" fill="none" stroke="#d4af37" stroke-width="1.8" stroke-linecap="round"/>
+          <!-- Accent dots -->
+          <circle cx="63" cy="22" r="2.8" fill="#d4af37"/>
+          <circle cx="206" cy="122" r="3" fill="#d4af37"/>
+          <!-- Botanical branch - gold on dark -->
+          <path d="M 10,192 Q 20,154 24,112 Q 28,76 38,46" stroke="#d4af37" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+          <ellipse cx="5" cy="172" rx="7" ry="13" fill="#d4af37" transform="rotate(-28 5 172)"/>
+          <ellipse cx="22" cy="163" rx="7" ry="13" fill="#d4af37" transform="rotate(18 22 163)"/>
+          <ellipse cx="9" cy="144" rx="6.5" ry="12" fill="#d4af37" transform="rotate(-36 9 144)"/>
+          <ellipse cx="24" cy="134" rx="6.5" ry="12" fill="#d4af37" transform="rotate(10 24 134)"/>
+          <ellipse cx="13" cy="116" rx="6" ry="11" fill="#d4af37" transform="rotate(-43 13 116)"/>
+          <ellipse cx="26" cy="107" rx="6" ry="11" fill="#d4af37" transform="rotate(4 26 107)"/>
+          <ellipse cx="18" cy="90" rx="5.5" ry="10" fill="#d4af37" transform="rotate(-48 18 90)"/>
+          <ellipse cx="29" cy="81" rx="5.5" ry="10" fill="#d4af37" transform="rotate(-2 29 81)"/>
+          <ellipse cx="23" cy="65" rx="5" ry="9" fill="#d4af37" transform="rotate(-52 23 65)"/>
+          <ellipse cx="33" cy="57" rx="5" ry="9" fill="#d4af37" transform="rotate(-8 33 57)"/>
+          <ellipse cx="29" cy="46" rx="4.5" ry="8" fill="#d4af37" transform="rotate(-56 29 46)"/>
+          <!-- Large Z - white -->
+          <text x="45" y="172" font-family="Georgia,'Times New Roman',serif" font-size="130" font-weight="700" fill="#ffffff" letter-spacing="-3">Z</text>
+          <!-- A and P - white -->
+          <text x="156" y="140" font-family="Georgia,'Times New Roman',serif" font-size="74" font-weight="700" fill="#ffffff">A</text>
+          <text x="207" y="140" font-family="Georgia,'Times New Roman',serif" font-size="74" font-weight="700" fill="#ffffff">P</text>
+        </svg>
+        <div class="hdr-brand">
+          <h1 class="hdr-name">ZAP Tours &amp; Safaris</h1>
+          <p class="hdr-sub">Windhoek City Experiences</p>
+        </div>
+      </div>
+
+      <!-- Separator -->
+      <div class="hdr-sep"></div>
+
+      <!-- Contact strip -->
+      <div class="hdr-contact-strip">
+        <a href="tel:+264817136836">+264 81 713 6836</a>
+        <span class="dot">◆</span>
+        <a href="mailto:operations@zapnamibia.com">operations@zapnamibia.com</a>
+        <span class="dot">◆</span>
+        <span class="loc">Windhoek, Namibia</span>
+      </div>
+
+    </div>
+
+    <!-- HERO STRIP -->
+    <div class="hero-strip">
+      <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800&q=80" alt="Windhoek Namibia">
+      <div class="hero-overlay">
+        <h2 class="hero-headline">Discover Windhoek,<br><em>the heart of Namibia</em></h2>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <div class="intro">
+      <p>
+        Our <strong>expert local guides</strong> take your clients on a personalised journey through Windhoek's most iconic attractions — from colonial architecture and vibrant markets to scenic viewpoints and cultural highlights.
+        Every tour is <strong>tailored to your clients' time and interests</strong>, bookable on the day of arrival or departure.
+        Refreshments and WiFi included. Groups from 1 to 7 passengers accommodated.
+      </p>
+    </div>
+
+    <!-- CONTENT GRID -->
+    <div class="content-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-left">
+
+        <p class="section-label">Our Flagship Experience</p>
+        <h2 class="section-title">Windhoek City Tour</h2>
+        <p class="section-body">
+          A 3-hour guided exploration of Windhoek's popular attractions, hidden gems and cultural highlights.
+          Comfortable private vehicles or small bus — <strong style="color:#2c3e2d;">tailored to every client's interests.</strong>
+        </p>
+
+        <div class="price-row">
+          <div class="price-box gold">
+            <p class="price-label">Per Person Rate</p>
+            <p class="price-value">N$ 550</p>
+          </div>
+          <div class="price-box">
+            <p class="price-label">Single Rate</p>
+            <p class="price-value">N$ 700</p>
+          </div>
+        </div>
+        <p class="price-note">Rates can be modified for extended tours or additional activities</p>
+
+        <p class="section-label" style="margin-top:4px;">What's Included</p>
+        <ul class="include-list">
+          <li>Expert local guide throughout</li>
+          <li>Private vehicle (up to 4 pax) or small bus (up to 7 pax)</li>
+          <li>Refreshments &amp; WiFi on board</li>
+          <li>Tailor-made routing to suit interests</li>
+          <li>Flexible timing — arrival or departure day</li>
+          <li>Brochures &amp; local recommendations</li>
+        </ul>
+
+        <div class="giving-back">
+          <p>
+            <strong>N$50 from every tour</strong> is donated to <strong>Lebensschule</strong>,
+            a school supporting special needs and previously disadvantaged children of Namibia. 🌿
+          </p>
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div class="col-right">
+
+        <p class="section-label" style="margin-bottom:14px;">Optional Add-Ons</p>
+
+        <div class="sidebar-card gold-border">
+          <p class="sidebar-card-label">Dining Experience</p>
+          <p class="sidebar-card-title">Lunch or Dinner<br>with your Guide</p>
+          <p class="sidebar-card-body">Join your guide at one of Windhoek's top restaurants — during or after the tour. Pax per trip, one way.</p>
+          <p class="sidebar-card-price">N$ 100 <small>/ person</small></p>
+        </div>
+
+        <div class="sidebar-card">
+          <p class="sidebar-card-label">Private Transfer</p>
+          <p class="sidebar-card-title">ZAP Uber<br>City Transport</p>
+          <p class="sidebar-card-body">Private door-to-door transport anywhere in Windhoek. One way.</p>
+          <p class="sidebar-card-price" style="font-size:15px; margin-bottom:4px;">N$ 150 <small>· 1–4 pax</small></p>
+          <p class="sidebar-card-price" style="font-size:15px;">N$ 300 <small>· 4–7 pax</small></p>
+        </div>
+
+        <hr class="div-line">
+
+        <p class="section-label">Groups &amp; Custom Requests</p>
+        <p class="sidebar-card-body" style="font-size:11px; line-height:1.7; color:#666;">
+          Groups larger than 7 passengers are welcome — please inform us at least <strong style="color:#2c3e2d;">one week prior</strong> to allow us to arrange suitable transport.
+        </p>
+
+        <hr class="div-line">
+
+        <p class="section-label">Perfect Timing</p>
+        <p class="sidebar-card-body" style="font-size:11px; line-height:1.7; color:#666;">
+          Tours available on the <strong style="color:#2c3e2d;">day of arrival or day of departure</strong> — ideal for clients transiting through Windhoek before heading to their lodge or safari.
+        </p>
+
+      </div>
+    </div><!-- end content-grid -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="footer-left">
+        <p>Michelle Greyling &nbsp;·&nbsp; ZAP Tours &amp; Safaris &nbsp;·&nbsp; Windhoek, Namibia</p>
+        <p style="margin-top:2px;">+264 81 713 6836 &nbsp;·&nbsp; operations@zapnamibia.com</p>
+      </div>
+      <a href="mailto:operations@zapnamibia.com" class="footer-cta">Book a Tour</a>
+    </div>
+
+  </div><!-- end .page -->
+
+</body>
+</html>

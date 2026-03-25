@@ -1,0 +1,191 @@
+</a></div></div></div><p></p></div></section><section class="u-clearfix u-section-13" id="sec-a997"><div class="u-clearfix u-sheet u-sheet-1"><p class="u-text u-text-default u-text-1"><style>.dt-film-section {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    margin-bottom: -40px; /* beat Nicepage section bottom padding */
+    background: #0c0c0c;
+    padding: 70px 0 0 0;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+}
+.dt-film-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 0 60px 40px 60px;
+}
+.dt-film-eyebrow {
+    display: block;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #c8722a;
+    margin-bottom: 12px;
+}
+.dt-film-title {
+    font-family: 'Playfair Display', serif !important;
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+    font-weight: 300 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+    line-height: 1.15 !important;
+}
+.dt-film-counter {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    color: rgba(255,255,255,0.15);
+    font-style: italic;
+    line-height: 1;
+    user-select: none;
+}
+.dt-film-counter span {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.55em;
+    font-style: normal;
+    vertical-align: middle;
+}
+.dt-film-track-wrap {
+    overflow: hidden;
+    cursor: grab;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.dt-film-track-wrap.dt-dragging { cursor: grabbing; }
+.dt-film-track {
+    display: flex;
+    gap: 14px;
+    padding: 0 60px;
+    will-change: transform;
+}
+.dt-film-card {
+    flex-shrink: 0;
+    position: relative;
+    height: 520px;
+    overflow: hidden;
+}
+.dt-film-card:nth-child(3n+1) { width: 420px; }
+.dt-film-card:nth-child(3n+2) { width: 300px; }
+.dt-film-card:nth-child(3n)   { width: 480px; }
+.dt-film-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dt-film-card:hover img { transform: scale(1.05); }
+.dt-film-caption {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 50px 22px 22px 22px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.dt-film-card:hover .dt-film-caption { opacity: 1; }
+.dt-film-caption-text {
+    font-size: 12px; text-transform: uppercase;
+    letter-spacing: 3px; color: #fff; display: block;
+    font-family: 'Open Sans', sans-serif;
+}
+.dt-film-caption-sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic; font-size: 11px;
+    color: rgba(255,255,255,0.65); display: block; margin-top: 3px;
+}
+.dt-film-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 60px 50px 60px;
+    gap: 20px;
+}
+.dt-film-progress-wrap {
+    flex: 1; height: 1px;
+    background: rgba(255,255,255,0.12); position: relative;
+}
+.dt-film-progress-bar {
+    height: 100%; background: #c8722a;
+    width: 0%; transition: width 0.2s ease;
+}
+.dt-film-arrows { display: flex; gap: 12px; }
+.dt-film-arrow {
+    width: 46px; height: 46px;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50%; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.3s ease, background 0.3s ease;
+    background: transparent;
+}
+.dt-film-arrow:hover { border-color: #c8722a; background: rgba(200,114,42,0.1); }
+.dt-film-arrow svg {
+    width: 16px; height: 16px; fill: none;
+    stroke: #fff; stroke-width: 1.5; transition: stroke 0.3s;
+}
+.dt-film-arrow:hover svg { stroke: #c8722a; }
+.dt-film-arrow.dt-disabled { opacity: 0.25; pointer-events: none; }
+.dt-film-credit {
+    font-size: 10px; text-transform: uppercase;
+    letter-spacing: 3px; color: rgba(255,255,255,0.3); white-space: nowrap;
+}
+@media (max-width: 768px) {
+    .dt-film-header, .dt-film-footer { padding-left: 24px; padding-right: 24px; }
+    .dt-film-track { padding: 0 24px; }
+    .dt-film-card { height: 340px; }
+    .dt-film-card:nth-child(3n+1) { width: 270px; }
+    .dt-film-card:nth-child(3n+2) { width: 210px; }
+    .dt-film-card:nth-child(3n)   { width: 290px; }
+    .dt-film-credit { display: none; }
+}</style></p><div class="dt-film-section"><div class="dt-film-header"><div>
+<span class="dt-film-eyebrow">Photography by Solly Levi</span><h2 class="dt-film-title">Namibia Through<br>
+<em>the Lens</em></h2></div><div class="dt-film-counter" id="dtFilmCounter">12 <span>/ 12</span></div></div><div class="dt-film-track-wrap" id="dtFilmWrap"><div class="dt-film-track" id="dtFilmTrack"><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-dunes-scaled.jpg" alt="Sossusvlei Dunes" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Sossusvlei</span>
+<span class="dt-film-caption-sub">Red dunes of the Namib</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large.jpeg" alt="Lion" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Etosha National Park</span>
+<span class="dt-film-caption-sub">Lion &amp; her cub</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/flamingo-solly-levi8-scaled.jpg" alt="Flamingos" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Swakopmund</span>
+<span class="dt-film-caption-sub">Greater flamingos at dawn</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/rhino-solly-scaled.jpg" alt="Rhino" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Damaraland</span>
+<span class="dt-film-caption-sub">Desert-adapted black rhino</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/giraffe_solly-1.jpeg" alt="Giraffe" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Etosha</span>
+<span class="dt-film-caption-sub">Giraffe at the waterhole</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg" alt="Road" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Namibia</span>
+<span class="dt-film-caption-sub">The open road</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/meerkat_baby_solly_large.jpeg" alt="Meerkat" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Kalahari Desert</span>
+<span class="dt-film-caption-sub">Young meerkat sentinel</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/oryx_group_solly_large.jpeg" alt="Oryx" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Namib Desert</span>
+<span class="dt-film-caption-sub">Gemsbok in the dunes</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="Okavango" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Caprivi Strip</span>
+<span class="dt-film-caption-sub">The Okavango waterways</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136.jpeg" alt="Elephant" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Etosha National Park</span>
+<span class="dt-film-caption-sub">African elephant</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large.jpeg" alt="Damaraland" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Damaraland</span>
+<span class="dt-film-caption-sub">Village life</span></div></div><div class="dt-film-card">
+<img decoding="async" src="https://desert-tracks.com/wp-content/uploads/2026/03/sel-drive_namibia_solly_large.jpeg" alt="Self-drive" loading="lazy"><div class="dt-film-caption">
+<span class="dt-film-caption-text">Namibia</span>
+<span class="dt-film-caption-sub">Self-drive adventure</span></div></div></div></div><div class="dt-film-footer"><div class="dt-film-progress-wrap"><div class="dt-film-progress-bar" id="dtFilmProgress" style="width: 0%;"></div></div>
+<span class="dt-film-credit">© Solly Levi Photography</span><div class="dt-film-arrows"><div class="dt-disabled dt-film-arrow" id="dtFilmPrev" onclick="dtFilmSnap(-1)">
+<svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div><div class="dt-film-arrow" id="dtFilmNext" onclick="dtFilmSnap(1)">
+<svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div></div></div></div> <script type="litespeed/javascript">(function(){var wrap=document.getElementById('dtFilmWrap');var track=document.getElementById('dtFilmTrack');var counter=document.getElementById('dtFilmCounter');var progress=document.getElementById('dtFilmProgress');var prevBtn=document.getElementById('dtFilmPrev');var nextBtn=document.getElementById('dtFilmNext');if(!wrap||!track)return;var cards=Array.prototype.slice.call(track.querySelectorAll('.dt-film-card'));var total=cards.length;var curX=0;var velX=0;var raf=null;var dragging=!1;var startX=0;var startScroll=0;var lastX=0;var lastT=0;function maxScroll(){var tw=cards.reduce(function(s,c){return s+c.offsetWidth+14},0);return-(tw-wrap.offsetWidth+60)}
+function clamp(x){return Math.min(0,Math.max(maxScroll(),x))}
+function applyX(x,instant){curX=clamp(x);track.style.transition=instant?'none':'transform 0.45s cubic-bezier(0.22,1,0.36,1)';track.style.transform='translateX('+curX+'px)';updateUI()}
+function updateUI(){var max=-maxScroll();var pct=max>0?(-curX/max)*100:0;progress.style.width=pct+'%';var pos=-curX,cum=0,nearest=0;cards.forEach(function(c,i){if(Math.abs(cum-pos)<Math.abs((cum-pos)-(-curX-cum)))nearest=i;if(cum+c.offsetWidth/2<pos)nearest=i;cum+=c.offsetWidth+14});var n=Math.min(total-1,nearest);counter.innerHTML=String(n+1).padStart(2,'0')+' <span>/ '+String(total).padStart(2,'0')+'</span>';prevBtn.classList.toggle('dt-disabled',curX>=0);nextBtn.classList.toggle('dt-disabled',curX<=maxScroll())}
+function momentum(){velX*=0.93;if(Math.abs(velX)<0.4){velX=0;return}
+applyX(curX+velX,!0);raf=requestAnimationFrame(momentum)}
+wrap.addEventListener('mousedown',function(e){cancelAnimationFrame(raf);dragging=!0;startX=e.clientX;startScroll=curX;lastX=e.clientX;lastT=Date.now();velX=0;wrap.classList.add('dt-dragging');e.preventDefault()});document.addEventListener('mousemove',function(e){if(!dragging)return;var now=Date.now(),dt=now-lastT;if(dt>0)velX=(e.clientX-lastX)/dt*16;lastX=e.clientX;lastT=now;applyX(startScroll+(e.clientX-startX),!0)});document.addEventListener('mouseup',function(){if(!dragging)return;dragging=!1;wrap.classList.remove('dt-dragging');raf=requestAnimationFrame(momentum)});var touchStartX=0,touchStartY=0,touchStartScroll=0;var touchDir=null;wrap.addEventListener('touchstart',function(e){cancelAnimationFrame(raf);var t=e.touches[0];touchStartX=t.clientX;touchStartY=t.clientY;touchStartScroll=curX;lastX=t.clientX;lastT=Date.now();velX=0;touchDir=null},{passive:!0});wrap.addEventListener('touchmove',function(e){var t=e.touches[0];var dx=t.clientX-touchStartX;var dy=t.clientY-touchStartY;if(!touchDir){touchDir=Math.abs(dx)>Math.abs(dy)?'h':'v'}
+if(touchDir==='h'){e.preventDefault();var now=Date.now(),dt=now-lastT;if(dt>0)velX=(t.clientX-lastX)/dt*16;lastX=t.clientX;lastT=now;applyX(touchStartScroll+dx,!0)}},{passive:!1});wrap.addEventListener('touchend',function(){if(touchDir==='h'){raf=requestAnimationFrame(momentum)}
+touchDir=null},{passive:!0});window.dtFilmSnap=function(dir){cancelAnimationFrame(raf);var pos=-curX,cum=0,nearestIdx=0;cards.forEach(function(c,i){if(cum+c.offsetWidth/2<=pos)nearestIdx=i;cum+=c.offsetWidth+14});var target=Math.max(0,Math.min(total-1,nearestIdx+dir));var tx=0;for(var i=0;i<target;i++)tx+=cards[i].offsetWidth+14;applyX(-tx,!1)};wrap.addEventListener('wheel',function(e){var ax=Math.abs(e.deltaX),ay=Math.abs(e.deltaY);if(ax>ay&&ax>5){e.preventDefault();cancelAnimationFrame(raf);applyX(curX-e.deltaX,!0)}},{passive:!1});updateUI()})()</script> <p></p></div></section></div>

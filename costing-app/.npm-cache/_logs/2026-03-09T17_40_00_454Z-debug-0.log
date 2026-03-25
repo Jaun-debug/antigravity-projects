@@ -1,0 +1,52 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@11.6.2
+2 info using node@v24.13.0
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npmrc
+5 silly config load:file:/Users/jaunhusselmann/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm set cache /Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache
+8 verbose argv "--cache" "/Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache" "set" "cache" "/Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache"
+9 verbose logfile logs-max:10 dir:/Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache/_logs/2026-03-09T17_40_00_454Z-
+10 verbose logfile /Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache/_logs/2026-03-09T17_40_00_454Z-debug-0.log
+11 silly logfile done cleaning log files
+12 info config set "cache" "/Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache"
+13 verbose stack Error: EPERM: operation not permitted, open '/Users/jaunhusselmann/.npmrc'
+13 verbose stack     at async open (node:internal/fs/promises:637:25)
+13 verbose stack     at async writeFile (node:internal/fs/promises:1239:14)
+13 verbose stack     at async Config.save (/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js:793:5)
+13 verbose stack     at async Config.set (/usr/local/lib/node_modules/npm/lib/commands/config.js:194:5)
+13 verbose stack     at async Config.exec (/usr/local/lib/node_modules/npm/lib/commands/config.js:139:9)
+13 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:208:9)
+13 verbose stack     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:67:5)
+14 error code EPERM
+15 error syscall open
+16 error path /Users/jaunhusselmann/.npmrc
+17 error errno -1
+18 error Error: EPERM: operation not permitted, open '/Users/jaunhusselmann/.npmrc'
+18 error     at async open (node:internal/fs/promises:637:25)
+18 error     at async writeFile (node:internal/fs/promises:1239:14)
+18 error     at async Config.save (/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/lib/index.js:793:5)
+18 error     at async Config.set (/usr/local/lib/node_modules/npm/lib/commands/config.js:194:5)
+18 error     at async Config.exec (/usr/local/lib/node_modules/npm/lib/commands/config.js:139:9)
+18 error     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:208:9)
+18 error     at async module.exports (/usr/local/lib/node_modules/npm/lib/cli/entry.js:67:5) {
+18 error   errno: -1,
+18 error   code: 'EPERM',
+18 error   syscall: 'open',
+18 error   path: '/Users/jaunhusselmann/.npmrc'
+18 error }
+19 error
+19 error The operation was rejected by your operating system.
+19 error It is likely you do not have the permissions to access this file as the current user
+19 error
+19 error If you believe this might be a permissions issue, please double-check the
+19 error permissions of the file and its containing directories, or try running
+19 error the command again as root/Administrator.
+20 verbose cwd /Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app
+21 verbose os Darwin 24.6.0
+22 verbose node v24.13.0
+23 verbose npm  v11.6.2
+24 verbose exit -1
+25 verbose code -1
+26 error A complete log of this run can be found in: /Users/jaunhusselmann/.gemini/antigravity/scratch/costing-app/.npm-cache/_logs/2026-03-09T17_40_00_454Z-debug-0.log
