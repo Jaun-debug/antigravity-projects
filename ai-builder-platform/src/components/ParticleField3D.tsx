@@ -66,7 +66,7 @@ class Particle3D {
       // If close (resting), expand the offset multiplier massively so they drift away from each other smoothly!
       let spreadMultiplier = 0.2;
       if (distToCursor < 350) {
-        spreadMultiplier = 1 + ((350 - distToCursor) / 100); // Ramps up to ~4.5x spread when resting
+        spreadMultiplier = 1 + ((350 - distToCursor) / 70); // Ramps up to exactly 6.0x spread when resting
       }
 
       const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier);
