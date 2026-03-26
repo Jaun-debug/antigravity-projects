@@ -67,19 +67,25 @@ function BuilderContent() {
       
       if (!reader) return;
 
+      let buffer = '';
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
         
-        const chunk = decoder.decode(value);
-        const lines = chunk.split('\n\n');
+        buffer += decoder.decode(value, { stream: true });
+        const lines = buffer.split('\n\n'); // Split SSE events
+        
+        // Pop the last element (which might be an incomplete JSON string) back into the buffer
+        buffer = lines.pop() || '';
         
         for (const line of lines) {
           if (line.startsWith('data: ')) {
             try {
               const data = JSON.parse(line.slice(6));
               handleAgentUpdate(data);
-            } catch (e) {}
+            } catch (e) {
+              console.warn("Incomplete SSE format swallowed:", e);
+            }
           }
         }
       }
