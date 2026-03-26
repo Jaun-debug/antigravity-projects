@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ChevronRight, ArrowRight, Menu, X, ArrowUpRight } from 'lucide-react';
 import Image from 'next/image';
+import OLLogo from '../components/Logo';
 
 const NAV_LINKS = ['Group', 'Companies', 'Insights', 'Careers', 'Contact'];
 
@@ -36,8 +37,8 @@ export default function Home() {
       <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex justify-between items-center">
           <div className="flex items-center gap-2">
-            <div className={`text-2xl font-serif font-bold tracking-tight ${isScrolled ? 'text-olgreen' : 'text-white'}`}>
-              Ohlthaver & List
+            <div className={`w-32 lg:w-40 transition-all duration-300`}>
+              <OLLogo lightMode={!isScrolled} />
             </div>
           </div>
           <div className="hidden lg:flex gap-8 items-center">
