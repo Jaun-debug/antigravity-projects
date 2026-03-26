@@ -117,7 +117,7 @@ export function PreviewWindow({ code, isBuilding }: { code: string, isBuilding: 
             }
           }}
           files={{
-            "/App.tsx": code, // Feed the LLM code directly into App.js
+            "/App.tsx": code.replace(/```(?:javascript|typescript|tsx|jsx)?\n/gi, '').replace(/```/g, '').trim(), // Strip AI markdown blocks
             "/index.html": htmlTemplate, // Default for some react templates
             "/public/index.html": htmlTemplate, // Default for CRA templates
             "/styles.css": "body { margin: 0; padding: 0; } #root { min-height: 100vh; background-color: transparent !important; }"

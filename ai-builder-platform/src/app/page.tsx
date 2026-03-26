@@ -59,14 +59,14 @@ export default function Home() {
           ringIdx: ring.id,
           x: startX,
           y: startY,
-          scale: random(0.15, 0.6, offset + 200), // Considerably smaller dots requested by user
+          scale: random(0.6, 1.2, offset + 200), // Adjusted so dots are 2px-3px visible and crisp
           pulseDuration: random(3, 8, offset + 300), 
           delay: random(0, 5, offset + 400),
-          // Assign 3 randomized colors for continuous animated cycling
+          // Assign strictly Google Blue/Ice colors for "organized snow"
           colors: [
-            ['#8AB4F8', '#4285F4', '#1A73E8'][Math.floor(random(0, 3, offset + 500))],
-            ['#669DF6', '#FBBC05', '#EA4335'][Math.floor(random(0, 3, offset + 600))],
-            ['#e8f0fe', '#34A853', '#8AB4F8'][Math.floor(random(0, 3, offset + 700))]
+            ['#e8f0fe', '#d2e3fc', '#8AB4F8'][Math.floor(random(0, 3, offset + 500))],
+            ['#8AB4F8', '#669DF6', '#4285F4'][Math.floor(random(0, 3, offset + 600))],
+            ['#4285F4', '#1A73E8', '#8AB4F8'][Math.floor(random(0, 3, offset + 700))]
           ]
         });
       }
