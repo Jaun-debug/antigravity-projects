@@ -59,32 +59,38 @@ class Particle3D {
   }
 
   update(mouseX: number, mouseY: number) {
-    const reactivity = this.z;
-
     if (mouseX !== -2000) {
-      // Seek unique specific spot around the cursor so they sit loosely as a dense flock
-      const targetX = mouseX + this.mouseOffsetX;
-      const targetY = mouseY + this.mouseOffsetY;
+      const distToCursor = Math.sqrt(Math.pow(mouseX - this.x, 2) + Math.pow(mouseY - this.y, 2));
+      
+      // The magic mechanic: If far away, collapse the offset so they fly as a tight bullet.
+      // If close (resting), expand the offset multiplier massively so they drift away from each other smoothly!
+      let spreadMultiplier = 0.2;
+      if (distToCursor < 350) {
+        spreadMultiplier = 1 + ((350 - distToCursor) / 100); // Ramps up to ~4.5x spread when resting
+      }
+
+      const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier);
+      const targetY = mouseY + (this.mouseOffsetY * spreadMultiplier);
       
       const dx = targetX - this.x;
       const dy = targetY - this.y;
       
-      // Buttery smooth spring physics driving them organically to cursor
-      this.vx += dx * 0.004 * reactivity;
-      this.vy += dy * 0.004 * reactivity;
+      // Unified spring physics - deleted Z-depth reactivity so they ALL move as ONE group, not two!
+      this.vx += dx * 0.006;
+      this.vy += dy * 0.006;
     } else {
       // Return to original initial cluster softly
-      this.vx += (this.originX - this.x) * 0.004 * reactivity;
-      this.vy += (this.originY - this.y) * 0.004 * reactivity;
+      this.vx += (this.originX - this.x) * 0.004;
+      this.vy += (this.originY - this.y) * 0.004;
     }
 
     // High living drift so they vibrate organically while resting
-    this.vx += (Math.random() - 0.5) * 0.15;
-    this.vy += (Math.random() - 0.5) * 0.15;
+    this.vx += (Math.random() - 0.5) * 0.25;
+    this.vy += (Math.random() - 0.5) * 0.25;
 
-    // High friction creates graceful settling
-    this.vx *= 0.88;
-    this.vy *= 0.88;
+    // High friction creates graceful settling and outward drifting
+    this.vx *= 0.86;
+    this.vy *= 0.86;
 
     this.x += this.vx;
     this.y += this.vy;
