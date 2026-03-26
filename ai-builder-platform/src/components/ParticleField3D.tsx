@@ -13,12 +13,15 @@ class Particle3D {
   size: number;
   color: string;
   layer: 'bg' | 'mid' | 'fg';
+  mouseOffsetX: number;
+  mouseOffsetY: number;
+  pulsePhase: number;
+  pulseSpeed: number;
 
   constructor(width: number, height: number, color: string) {
-    // Cluster them tightly in the center, rather than scattering across whole screen
+    // Cluster them tightly in the center logically on load
     const centerX = width / 2;
     const centerY = height / 2;
-    // max radius constrained to the center area
     const maxRadius = Math.min(width, height) * 0.45; 
     const r = Math.pow(Math.random(), 0.5) * maxRadius;
     const theta = Math.random() * 2 * Math.PI;
@@ -29,6 +32,16 @@ class Particle3D {
     this.originY = this.y;
     this.vx = 0;
     this.vy = 0;
+    
+    // Generate individual offset matrix around the cursor so they lie loosely, rather than collapsing
+    const clusterR = Math.pow(Math.random(), 0.5) * 80; // 80px loose blob radius
+    const clusterTheta = Math.random() * 2 * Math.PI;
+    this.mouseOffsetX = clusterR * Math.cos(clusterTheta);
+    this.mouseOffsetY = clusterR * Math.sin(clusterTheta);
+    
+    // Pulse math to make them breathe
+    this.pulsePhase = Math.random() * Math.PI * 2;
+    this.pulseSpeed = Math.random() * 0.05 + 0.01;
     
     // Assign to a layer for distinct depth behaviors
     const rand = Math.random();
@@ -46,50 +59,37 @@ class Particle3D {
   }
 
   update(mouseX: number, mouseY: number) {
-    const dx = mouseX - this.x;
-    const dy = mouseY - this.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-
-    // Background layers react MUCH slower/weaker to the cursor
     const reactivity = this.z;
 
     if (mouseX !== -2000) {
-      // Hollow Ring / Perfect Orbit Physics
-      const angle = Math.atan2(dy, dx);
+      // Seek unique specific spot around the cursor so they sit loosely as a dense flock
+      const targetX = mouseX + this.mouseOffsetX;
+      const targetY = mouseY + this.mouseOffsetY;
       
-      if (dist > 90) {
-        // Drag inward if they are far away from the cursor
-        const pullForce = 150 / (dist + 20);
-        this.vx += Math.cos(angle) * pullForce * 2.5 * reactivity;
-        this.vy += Math.sin(angle) * pullForce * 2.5 * reactivity;
-      } else if (dist < 70) {
-        // Push outwards if they get too close to the center, preventing a crushed dot blob!
-        const pushForce = (70 - dist) / 70;
-        this.vx -= Math.cos(angle) * pushForce * 1.5 * reactivity;
-        this.vy -= Math.sin(angle) * pushForce * 1.5 * reactivity;
-      }
+      const dx = targetX - this.x;
+      const dy = targetY - this.y;
       
-      // Always apply a consistent, graceful orbital rotation wrapping round the ring base
-      const orbitForce = 80 / (dist + 20);
-      this.vx += Math.cos(angle + Math.PI / 2) * orbitForce * 1.2 * reactivity;
-      this.vy += Math.sin(angle + Math.PI / 2) * orbitForce * 1.2 * reactivity;
-      
+      // Buttery smooth spring physics driving them organically to cursor
+      this.vx += dx * 0.004 * reactivity;
+      this.vy += dy * 0.004 * reactivity;
     } else {
-      // Return to original initial cluster only when mouse leaves the window entirely
-      this.vx += (this.originX - this.x) * 0.003 * reactivity;
-      this.vy += (this.originY - this.y) * 0.003 * reactivity;
+      // Return to original initial cluster softly
+      this.vx += (this.originX - this.x) * 0.004 * reactivity;
+      this.vy += (this.originY - this.y) * 0.004 * reactivity;
     }
 
-    // Always float organically (Perlin-style drift)
-    this.vx += (Math.random() - 0.5) * 0.1 * reactivity;
-    this.vy += (Math.random() - 0.5) * 0.1 * reactivity;
+    // High living drift so they vibrate organically while resting
+    this.vx += (Math.random() - 0.5) * 0.15;
+    this.vy += (Math.random() - 0.5) * 0.15;
 
-    // High friction so they rigidly track the cursor without exploding across screen and circle slower
-    this.vx *= 0.85;
-    this.vy *= 0.85;
+    // High friction creates graceful settling
+    this.vx *= 0.88;
+    this.vy *= 0.88;
 
     this.x += this.vx;
     this.y += this.vy;
+    
+    this.pulsePhase += this.pulseSpeed;
   }
 
   draw(ctx: CanvasRenderingContext2D) {
@@ -97,12 +97,11 @@ class Particle3D {
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     
-    // Smooth, deep transparency falloff based on Z depth and origin drift
-    const movementAlpha = Math.min(1, Math.max(0.1, 1 - (Math.abs(this.originX - this.x) / 400)));
-    // Z controls base opacity: 0.15 for bg, 0.4 for mid, 0.9 for fg
-    const baseAlpha = this.z === 1.0 ? 0.9 : (this.z === 0.5 ? 0.35 : 0.12);
+    // Alive breathing opacity pulse natively oscillates between 40% and 100% opacity continuously 
+    const breatheAlpha = Math.sin(this.pulsePhase) * 0.3 + 0.7;
     
-    ctx.globalAlpha = movementAlpha * baseAlpha; 
+    const baseAlpha = this.z === 1.0 ? 0.9 : (this.z === 0.5 ? 0.4 : 0.15);
+    ctx.globalAlpha = breatheAlpha * baseAlpha; 
     
     // Crisp aesthetic - no blurry shadows at all
     ctx.shadowBlur = 0;
