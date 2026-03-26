@@ -53,38 +53,32 @@ class Particle3D {
     // Background layers react MUCH slower/weaker to the cursor
     const reactivity = this.z;
 
-    const minDistance = 150 * reactivity; // Muted, elegant repulsion field
-    const maxDistance = 350 * reactivity; 
-
-    if (dist < minDistance && mouseX !== -2000) {
-      // Elegant, muted pushing force (not violent)
-      const force = Math.pow((minDistance - dist) / minDistance, 2); 
+    if (mouseX !== -2000) {
+      // Absolute Swarm Attraction physics
+      // They follow EXACTLY where the cursor goes!
+      const force = 120 / (dist + 20); // Smooth inverse-distance scaling
       const angle = Math.atan2(dy, dx);
-      this.vx -= Math.cos(angle) * force * 1.2 * reactivity;
-      this.vy -= Math.sin(angle) * force * 1.2 * reactivity;
-    } else if (dist < maxDistance && mouseX !== -2000) {
-      // Extremely delicate structural pull
-      const force = (dist - minDistance) / (maxDistance - minDistance);
-      const angle = Math.atan2(dy, dx);
-      this.vx += Math.cos(angle) * force * 0.05 * reactivity;
-      this.vy += Math.sin(angle) * force * 0.05 * reactivity;
       
-      // Gorgeous, glacially slow fluid orbiting
-      this.vx += Math.cos(angle + Math.PI / 2) * force * 0.15 * reactivity;
-      this.vy += Math.sin(angle + Math.PI / 2) * force * 0.15 * reactivity;
+      // Intense direct pulling velocity
+      this.vx += Math.cos(angle) * force * 3.5 * reactivity;
+      this.vy += Math.sin(angle) * force * 3.5 * reactivity;
+      
+      // Elegant perpendicular orbiting so they don't visibly overlap into one dot
+      this.vx += Math.cos(angle + Math.PI / 2.5) * force * 1.5 * reactivity;
+      this.vy += Math.sin(angle + Math.PI / 2.5) * force * 1.5 * reactivity;
+    } else {
+      // Return to original initial cluster only when mouse leaves the window entirely
+      this.vx += (this.originX - this.x) * 0.003 * reactivity;
+      this.vy += (this.originY - this.y) * 0.003 * reactivity;
     }
 
-    // Almost imperceptible idle organic floating (cinematic slow drift)
-    this.vx += (Math.random() - 0.5) * 0.02 * reactivity;
-    this.vy += (Math.random() - 0.5) * 0.02 * reactivity;
+    // Always float organically (Perlin-style drift)
+    this.vx += (Math.random() - 0.5) * 0.1 * reactivity;
+    this.vy += (Math.random() - 0.5) * 0.1 * reactivity;
 
-    // Extremely slow, graceful magnetic pull back to origin formation
-    this.vx += (this.originX - this.x) * 0.0008 * reactivity;
-    this.vy += (this.originY - this.y) * 0.0008 * reactivity;
-
-    // High friction creates that buttery software feel (no snapping or chaos)
-    this.vx *= 0.95;
-    this.vy *= 0.95;
+    // High friction so they rigidly track the cursor without exploding across screen
+    this.vx *= 0.88;
+    this.vy *= 0.88;
 
     this.x += this.vx;
     this.y += this.vy;
