@@ -62,19 +62,20 @@ class Particle3D {
     if (mouseX !== -2000) {
       const distToCursor = Math.sqrt(Math.pow(mouseX - this.x, 2) + Math.pow(mouseY - this.y, 2));
       
-      // If close (resting), expand the offset multiplier to exactly 2.0x (100% inflation) smoothly!
-      let spreadMultiplier = 0.2;
-      if (distToCursor < 350) {
-        spreadMultiplier = 1 + ((350 - distToCursor) / 350); // Ramps up to exactly 2.0x spread when resting
+      // Calculate global breathing constraint oscillating between 8.0 (800%) and 10.0 (1000%)
+      const timeSlow = Date.now() * 0.0015;
+      const restingSpreadTarget = Math.sin(timeSlow) * 1.0 + 9.0; 
+      
+      let spreadMultiplier = 0.2; // Tiny compressed bullet when chasing mouse rapidly
+      if (distToCursor < 400) {
+        // Smoothly inflate up to the massive 800-1000% breathing target when cursor rests
+        const restFactor = Math.pow((400 - distToCursor) / 400, 1.5); 
+        spreadMultiplier = 0.2 + (restingSpreadTarget - 0.2) * restFactor;
       }
 
-      // Natively transform the swarm from a circle into an organic expanding/contracting oval over time
-      const timeSlow = Date.now() * 0.0008; 
-      const ovalScaleX = Math.sin(timeSlow) * 0.4 + 1.0; // Oscillates slowly from 0.6x to 1.4x
-      const ovalScaleY = Math.cos(timeSlow) * 0.4 + 1.0; // Oscillates slowly from 1.4x to 0.6x
-
-      const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier * ovalScaleX);
-      const targetY = mouseY + (this.mouseOffsetY * spreadMultiplier * ovalScaleY);
+      // The outer dots natively extend exponentially further because their base offsets are scaled mathematically
+      const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier);
+      const targetY = mouseY + (this.mouseOffsetY * spreadMultiplier);
       
       const dx = targetX - this.x;
       const dy = targetY - this.y;
