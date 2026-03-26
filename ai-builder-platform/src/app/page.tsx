@@ -48,10 +48,10 @@ export default function Home() {
     ];
 
     // Massive Antigravity Swirl generating math
-    // 400 particles scattered across an enormous radial field
+    // 400 particles scattered across a tight radial field
     for (let i = 0; i < 400; i++) {
-      // Massive viewport-relative radius
-      const maxRadius = typeof window !== 'undefined' ? window.innerWidth * 0.6 : 1000;
+      // Tighter, denser viewport-relative radius
+      const maxRadius = typeof window !== 'undefined' ? window.innerWidth * 0.35 : 600;
       const radius = Math.pow(random(0, 1, i), 0.5) * maxRadius; 
       const angle = random(0, Math.PI * 2, i + 100);
       
