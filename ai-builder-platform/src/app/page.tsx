@@ -4,7 +4,7 @@ import { ArrowRight, Code2, Sparkles } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 // Helper for generating deterministic random values for static elements
 const random = (min: number, max: number, seed: number) => {
@@ -17,6 +17,20 @@ export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [isInitializing, setIsInitializing] = useState(false);
   const [particles, setParticles] = useState<any[]>([]);
+
+  // Parallax tracking variables
+  const rawMouseX = useMotionValue(0);
+  const rawMouseY = useMotionValue(0);
+  const smoothMouseX = useSpring(rawMouseX, { stiffness: 40, damping: 20 });
+  const smoothMouseY = useSpring(rawMouseY, { stiffness: 40, damping: 20 });
+  
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (typeof window === 'undefined') return;
+    const { clientX, clientY } = e;
+    // Normalize to -50% to +50% range and scale magnitude for effect
+    rawMouseX.set((clientX / window.innerWidth - 0.5) * 80);
+    rawMouseY.set((clientY / window.innerHeight - 0.5) * 80);
+  };
 
   // Generate particles client-side to prevent hydration mismatches
   useEffect(() => {
@@ -45,10 +59,15 @@ export default function Home() {
           ringIdx: ring.id,
           x: startX,
           y: startY,
-          scale: random(0.5, 1.8, offset + 200),
-          pulseDuration: random(2, 6, offset + 300), 
+          scale: random(0.15, 0.6, offset + 200), // Considerably smaller dots requested by user
+          pulseDuration: random(3, 8, offset + 300), 
           delay: random(0, 5, offset + 400),
-          color: ['#8AB4F8', '#669DF6', '#4285F4', '#1A73E8', '#e8f0fe'][Math.floor(random(0, 5, offset + 500))]
+          // Assign 3 randomized colors for continuous animated cycling
+          colors: [
+            ['#8AB4F8', '#4285F4', '#1A73E8'][Math.floor(random(0, 3, offset + 500))],
+            ['#669DF6', '#FBBC05', '#EA4335'][Math.floor(random(0, 3, offset + 600))],
+            ['#e8f0fe', '#34A853', '#8AB4F8'][Math.floor(random(0, 3, offset + 700))]
+          ]
         });
       }
     });
@@ -63,7 +82,10 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen bg-white overflow-hidden relative font-sans text-gray-900 selection:bg-blue-100">
+    <main 
+      onMouseMove={handleMouseMove}
+      className="flex flex-col min-h-screen bg-white overflow-hidden relative font-sans text-gray-900 selection:bg-blue-100"
+    >
       
       {/* Top Navbar matched to layout */}
       <header className="absolute top-0 w-full p-4 md:px-8 py-5 flex justify-between items-center z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -105,43 +127,54 @@ export default function Home() {
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]"></div>
 
           {[
-            { id: 0, rotateDuration: 90, cx: '50%', cy: '35%' },
-            { id: 1, rotateDuration: 60, cx: '25%', cy: '80%' },
-            { id: 2, rotateDuration: 75, cx: '75%', cy: '80%' }
-          ].map((ring) => (
-            <motion.div
-              key={ring.id}
-              className="absolute w-0 h-0"
-              style={{ left: ring.cx, top: ring.cy }}
-              animate={{ rotateZ: 360 }}
-              transition={{ duration: ring.rotateDuration, repeat: Infinity, ease: 'linear' }}
-            >
-              {particles.filter(p => p.ringIdx === ring.id).map((p) => (
-                <motion.div
-                  key={p.id}
-                  className="absolute rounded-full"
-                  style={{
-                    width: `${p.scale * 3}px`,
-                    height: `${p.scale * 3}px`,
-                    backgroundColor: p.color,
-                    left: `${p.x}vw`,
-                    top: `${p.y}vh`,
-                    transform: 'translate(-50%, -50%)'
-                  }}
-                  animate={{
-                    opacity: [0.1, 0.9, 0.1],
-                    scale: [1, p.scale * 1.5, 1],
-                  }}
-                  transition={{
-                    duration: p.pulseDuration,
-                    repeat: Infinity,
-                    delay: p.delay,
-                    ease: "easeInOut"
-                  }}
-                />
-              ))}
-            </motion.div>
-          ))}
+            { id: 0, rotateDuration: 90, cx: '50%', cy: '35%', depth: 1 },
+            { id: 1, rotateDuration: 60, cx: '25%', cy: '80%', depth: 0.5 },
+            { id: 2, rotateDuration: 75, cx: '75%', cy: '80%', depth: -0.5 }
+          ].map((ring) => {
+            // Calculate a dedicated parallax vector specifically for this ring depth using Framer Motion Transform
+            const parallaxX = useTransform(smoothMouseX, x => x * ring.depth);
+            const parallaxY = useTransform(smoothMouseY, y => y * ring.depth);
+
+            return (
+              <motion.div
+                key={ring.id}
+                className="absolute w-0 h-0"
+                style={{ 
+                  left: ring.cx, 
+                  top: ring.cy,
+                  x: parallaxX,
+                  y: parallaxY
+                }}
+                animate={{ rotateZ: 360 }}
+                transition={{ duration: ring.rotateDuration, repeat: Infinity, ease: 'linear' }}
+              >
+                {particles.filter(p => p.ringIdx === ring.id).map((p) => (
+                  <motion.div
+                    key={p.id}
+                    className="absolute rounded-full"
+                    style={{
+                      width: `${p.scale * 3}px`,
+                      height: `${p.scale * 3}px`,
+                      left: `${p.x}vw`,
+                      top: `${p.y}vh`,
+                      transform: 'translate(-50%, -50%)'
+                    }}
+                    animate={{
+                      opacity: [0.1, 0.9, 0.1],
+                      scale: [1, p.scale * 1.5, 1],
+                      backgroundColor: p.colors
+                    }}
+                    transition={{
+                      duration: p.pulseDuration,
+                      repeat: Infinity,
+                      delay: p.delay,
+                      ease: "easeInOut"
+                    }}
+                  />
+                ))}
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Hero Content */}
