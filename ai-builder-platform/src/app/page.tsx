@@ -20,15 +20,44 @@ export default function Home() {
 
   // Generate particles client-side to prevent hydration mismatches
   useEffect(() => {
-    const newParticles = Array.from({ length: 150 }).map((_, i) => ({
-      id: i,
-      x: random(-40, 40, i + 1),
-      y: random(-40, 40, i + 100),
-      scale: random(0.5, 1.5, i + 200),
-      duration: random(3, 8, i + 300),
-      delay: random(0, 5, i + 400),
-      color: ['#4285F4', '#EA4335', '#FBBC05', '#34A853', '#8A2BE2'][Math.floor(random(0, 5, i + 500))]
-    }));
+    const newParticles: any[] = [];
+    
+    // Create 3 massive rings
+    const ringCenters = [
+      { cx: 0, cy: -15 }, // Top center
+      { cx: -25, cy: 30 }, // Bottom Left
+      { cx: 25, cy: 30 }   // Bottom Right
+    ];
+
+    ringCenters.forEach((center, ringIdx) => {
+      // 200 particles per ring
+      for (let i = 0; i < 200; i++) {
+        const offset = i + ringIdx * 200;
+        const baseRadius = 15; // Base radius in VW
+        const thickness = random(-3, 3, offset); // Thickness of the ring
+        const angle = random(0, Math.PI * 2, offset + 100);
+        
+        // Final starting position calculation (torus projection)
+        const radius = baseRadius + thickness;
+        const startX = center.cx + Math.cos(angle) * radius;
+        const startY = center.cy + Math.sin(angle) * (radius * 1.5); // Oval projection for 3D perspective
+
+        newParticles.push({
+          id: offset,
+          ringIdx,
+          angle,
+          radius,
+          thickness,
+          x: startX,
+          y: startY,
+          scale: random(0.5, 1.5, offset + 200),
+          baseDuration: random(8, 15, offset + 300), // Very slow majestic morph
+          delay: random(0, -5, offset + 400),
+          // Gradient of Google blues exactly like screenshot
+          color: ['#8AB4F8', '#669DF6', '#4285F4', '#1A73E8', '#e8f0fe'][Math.floor(random(0, 5, offset + 500))]
+        });
+      }
+    });
     setParticles(newParticles);
   }, []);
 
@@ -75,36 +104,47 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative flex-1 flex flex-col items-center justify-center pt-32 pb-20 px-6 max-w-5xl mx-auto w-full z-10 text-center">
         
-        {/* Animated Background Particles */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center opacity-80 mix-blend-multiply">
-          {particles.map((p) => (
-            <motion.div
-              key={p.id}
-              className="absolute w-[4px] h-[12px] rounded-full"
-              style={{
-                backgroundColor: p.color,
-                rotate: Math.atan2(p.y, p.x) * (180 / Math.PI) + 90
-              }}
-              initial={{
-                x: 0,
-                y: 0,
-                opacity: 0,
-                scale: 0.1
-              }}
-              animate={{
-                x: p.x * 12, // Move outwards physically
-                y: p.y * 12,
-                opacity: [0, 0.8, 0],
-                scale: [0.1, p.scale, 0.1],
-              }}
-              transition={{
-                duration: p.duration,
-                repeat: Infinity,
-                delay: p.delay,
-                ease: "linear"
-              }}
-            />
-          ))}
+        {/* Morphing 3D Torus Particle System */}
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center mix-blend-multiply opacity-90">
+          
+          {/* Black scattered background dots from screenshot */}
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]"></div>
+
+          {particles.map((p) => {
+            // Calculate orbital motion morphing path specifically for that ring
+            const orbitX = Math.cos(p.angle + Math.PI / 4) * (p.radius + (p.thickness * 1.5));
+            const orbitY = Math.sin(p.angle + Math.PI / 4) * (p.radius * 1.5); // keep oval perspective
+
+            const center = p.ringIdx === 0 ? { cx: 0, cy: -15 } : p.ringIdx === 1 ? { cx: -25, cy: 30 } : { cx: 25, cy: 30 };
+
+            return (
+              <motion.div
+                key={p.id}
+                className="absolute rounded-full"
+                style={{
+                  width: `${p.scale * 3}px`,
+                  height: `${p.scale * 3}px`,
+                  backgroundColor: p.color,
+                  left: `calc(50% + ${p.x}vw)`,
+                  top: `calc(50% + ${p.y}vh)`,
+                }}
+                animate={{
+                  // Create a slow, breathing orbital drift morph
+                  x: [0, (orbitX - Math.cos(p.angle) * p.radius) * 0.4, 0],
+                  y: [0, (orbitY - Math.sin(p.angle) * p.radius * 1.5) * 0.4, 0],
+                  opacity: [0.1, 0.9, 0.1],
+                  scale: [1, p.scale * 1.8, 1],
+                  rotateZ: [0, p.angle * 10, 0]
+                }}
+                transition={{
+                  duration: p.baseDuration,
+                  repeat: Infinity,
+                  delay: p.delay,
+                  ease: "easeInOut"
+                }}
+              />
+            );
+          })}
         </div>
 
         {/* Hero Content */}
