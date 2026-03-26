@@ -34,7 +34,7 @@ class Particle3D {
     this.vy = 0;
     
     // Generate individual offset matrix around the cursor so they lie loosely, rather than collapsing
-    const clusterR = Math.pow(Math.random(), 0.5) * 80; // 80px loose blob radius
+    const clusterR = Math.pow(Math.random(), 0.5) * 96; // 96px loose blob radius (20% larger)
     const clusterTheta = Math.random() * 2 * Math.PI;
     this.mouseOffsetX = clusterR * Math.cos(clusterTheta);
     this.mouseOffsetY = clusterR * Math.sin(clusterTheta);
@@ -132,8 +132,8 @@ export default function ParticleField3D() {
       canvas.height = window.innerHeight;
       
       particles = [];
-      // Dense 700 particle swarm
-      const particleCount = window.innerWidth < 768 ? 300 : 700; 
+      // Dense 600 particle swarm
+      const particleCount = window.innerWidth < 768 ? 300 : 600; 
       for (let i = 0; i < particleCount; i++) {
         const color = brightColors[Math.floor(Math.random() * brightColors.length)];
         particles.push(new Particle3D(canvas.width, canvas.height, color));
