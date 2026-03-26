@@ -21,8 +21,9 @@ export default function Home() {
   // Dense tracking blob variables
   const rawMouseX = useMotionValue(0);
   const rawMouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(rawMouseX, { stiffness: 60, damping: 20 });
-  const smoothMouseY = useSpring(rawMouseY, { stiffness: 60, damping: 20 });
+  // Extremely smooth delayed lag reaction
+  const smoothMouseX = useSpring(rawMouseX, { stiffness: 20, damping: 25, mass: 1.5 });
+  const smoothMouseY = useSpring(rawMouseY, { stiffness: 20, damping: 25, mass: 1.5 });
   
   const handleMouseMove = (e: React.MouseEvent) => {
     if (typeof window === 'undefined') return;
@@ -46,10 +47,10 @@ export default function Home() {
       '#FF33CC', '#33FFCC', '#3366FF'
     ];
 
-    // 400 dense colorful dots making up one tight orb
-    for (let i = 0; i < 400; i++) {
-      // Clustered sphere radius math (heavier towards the center)
-      const radius = Math.pow(random(0, 1, i), 0.5) * 140; // 140px max radius sphere
+    // 150 spaced out colorful dots making a fluid swarm
+    for (let i = 0; i < 150; i++) {
+      // Larger, less dense radius
+      const radius = Math.pow(random(0, 1, i), 0.5) * 250; // 250px spaced out sphere
       const angle = random(0, Math.PI * 2, i + 100);
       
       const startX = Math.cos(angle) * radius;
@@ -59,8 +60,8 @@ export default function Home() {
         id: i,
         x: startX,
         y: startY,
-        scale: random(0.5, 1.6, i + 200), // Tiny pixels
-        pulseDuration: random(1.5, 4, i + 300), // Faster pulses
+        scale: random(0.5, 1.8, i + 200), // Slightly more visible
+        pulseDuration: random(1.5, 4, i + 300), 
         delay: random(0, 2, i + 400),
         colors: [
           brightColors[Math.floor(random(0, brightColors.length, i + 500))],
@@ -115,53 +116,52 @@ export default function Home() {
         </div>
       </header>
 
+      {/* Full-width continuous Blob tracking container */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden mix-blend-multiply opacity-90">
+        {/* Tracking Colorful Circle Blob bounded strictly to Window */}
+        <motion.div
+          className="absolute w-0 h-0"
+          style={{ 
+            left: 0, 
+            top: 0,
+            x: smoothMouseX, // Exact viewport cursor x offset
+            y: smoothMouseY  // Exact viewport cursor y offset
+          }}
+          animate={{ rotateZ: 360 }}
+          transition={{ duration: 70, repeat: Infinity, ease: 'linear' }}
+        >
+          {particles.map((p) => (
+            <motion.div
+              key={p.id}
+              className="absolute rounded-full"
+              style={{
+                width: `${p.scale * 3}px`,
+                height: `${p.scale * 3}px`,
+                left: `${p.x}px`,
+                top: `${p.y}px`,
+                transform: 'translate(-50%, -50%)'
+              }}
+              animate={{
+                opacity: [0.1, 1, 0.1], // vivid flashes
+                scale: [1, p.scale * 1.5, 1],
+                backgroundColor: p.colors
+              }}
+              transition={{
+                duration: p.pulseDuration,
+                repeat: Infinity,
+                delay: p.delay,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+        </motion.div>
+      </div>
+
       {/* Hero Section */}
       <div className="relative flex-1 flex flex-col items-center justify-center pt-32 pb-20 px-6 max-w-5xl mx-auto w-full z-10 text-center">
         
-        {/* Morphing 3D Torus Particle System */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center mix-blend-multiply opacity-90">
-          
-          {/* Black scattered background dots from screenshot */}
-          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]"></div>
-
-          {/* Tracking Colorful Circle Blob */}
-          <motion.div
-            className="absolute w-0 h-0"
-            style={{ 
-              left: 0, // Bound mathematically to fixed 0,0 top-left origin
-              top: 0,
-              x: smoothMouseX, // Cursor x offset
-              y: smoothMouseY  // Cursor y offset
-            }}
-            animate={{ rotateZ: 360 }}
-            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
-          >
-            {particles.map((p) => (
-              <motion.div
-                key={p.id}
-                className="absolute rounded-full"
-                style={{
-                  width: `${p.scale * 3}px`,
-                  height: `${p.scale * 3}px`,
-                  left: `${p.x}px`,
-                  top: `${p.y}px`,
-                  transform: 'translate(-50%, -50%)'
-                }}
-                animate={{
-                  opacity: [0.1, 1, 0.1], // vivid flashes
-                  scale: [1, p.scale * 1.5, 1],
-                  backgroundColor: p.colors
-                }}
-                transition={{
-                  duration: p.pulseDuration,
-                  repeat: Infinity,
-                  delay: p.delay,
-                  ease: "easeInOut"
-                }}
-              />
-            ))}
-          </motion.div>
-        </div>
+        {/* Black scattered background dots from screenshot */}
+        <div className="absolute inset-0 pointer-events-none -z-10 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]"></div>
 
         {/* Hero Content */}
         <div className="relative z-10 max-w-4xl">
