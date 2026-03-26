@@ -45,8 +45,7 @@ export async function POST(req: Request) {
           sendUpdate('3', 'done', 'UI/UX layout established. Mobile-first grid initialized.');
 
           sendUpdate('4', 'active', 'Writing Next.js App Router components + Tailwind classes...');
-          const generatedCode = `
-import React from 'react';
+          const generatedCode = `import React from 'react';
 import { motion } from 'framer-motion';
 
 export default function App() {
@@ -63,10 +62,9 @@ export default function App() {
       </p>
     </div>
   );
-}
-          `.trim();
+}`;
           for (let i = 10; i <= generatedCode.length; i += 70) {
-            sendUpdate('4', 'active', \`Generating App component lines...\`, generatedCode.substring(0, i));
+            sendUpdate('4', 'active', `Generating App component lines...`, generatedCode.substring(0, i));
             await delay(100);
           }
           sendUpdate('4', 'done', 'Application code generated perfectly.', generatedCode);
@@ -78,7 +76,7 @@ export default function App() {
           sendUpdate('6', 'active', 'Preparing Vercel build...');
           await delay(1500);
           const mockUrl = "https://aura-simulated-build.vercel.app";
-          sendUpdate('6', 'done', \`Deployment Complete! Live at \${mockUrl}.\`, generatedCode, mockUrl);
+          sendUpdate('6', 'done', `Deployment Complete! Live at ${mockUrl}.`, generatedCode, mockUrl);
 
         } else {
           // --- REAL AURA FLOW STATE LLM PIPELINE ---
@@ -87,16 +85,16 @@ export default function App() {
           sendUpdate('1', 'active', 'Generating product architecture and structural steps via Planner Model...');
           const planRes = await generateText({
             model: plannerModel,
-            prompt: \`You are the Orchestrator Agent. Create a brief architectural summary for: "\${prompt}". Keep it under 2 sentences.\`,
+            prompt: `You are the Orchestrator Agent. Create a brief architectural summary for: "${prompt}". Keep it under 2 sentences.`,
             maxTokens: 100,
           });
-          sendUpdate('1', 'done', \`Plan: \${planRes.text}\`);
+          sendUpdate('1', 'done', `Plan: ${planRes.text}`);
 
           // 2. Research Agent
           sendUpdate('2', 'active', 'Researching premium UI/UX inspirations based on the domain...');
           const researchRes = await generateText({
             model: plannerModel,
-            prompt: \`Based on this plan: "\${planRes.text}", suggest 3 UI/UX recommendations for a premium feel. Format as a bullet list.\`,
+            prompt: `Based on this plan: "${planRes.text}", suggest 3 UI/UX recommendations for a premium feel. Format as a bullet list.`,
             maxTokens: 100,
           });
           sendUpdate('2', 'done', 'Research aggregated successfully.');
@@ -105,20 +103,16 @@ export default function App() {
           sendUpdate('3', 'active', 'Synthesizing layout tokens, padding schemas, and Tailwind config values...');
           const designRes = await generateText({
             model: plannerModel,
-            prompt: \`Draft the Tailwind styling rules for a premium web app matching this logic: \${researchRes.text}. Mention specific colors.\`,
+            prompt: `Draft the Tailwind styling rules for a premium web app matching this logic: ${researchRes.text}. Mention specific colors.`,
             maxTokens: 100,
           });
-          sendUpdate('3', 'done', \`Design System complete: \${designRes.text.substring(0, 100)}...\`);
+          sendUpdate('3', 'done', `Design System complete: ${designRes.text.substring(0, 100)}...`);
 
           // 4. Build Engineer (Streaming Code)
           sendUpdate('4', 'active', 'Engineering the functional Next.js Page component...');
           const codeStream = await streamText({
             model: builderModel,
-            prompt: \`You are an expert Next.js and Tailwind developer. 
-            Requirements: \${prompt}. 
-            Plan: \${planRes.text}.
-            Design: \${designRes.text}.
-            Write exclusively the raw functional 1-file Next.js page code (React component). Do not include markdown codeblocks or explanations, JUST the code starting with 'export default function'. Ensure it incorporates lucide-react icons or framer-motion if relevant. Make it stunning and premium.\`
+            prompt: `You are an expert Next.js and Tailwind developer. Requirements: ${prompt}. Plan: ${planRes.text}. Design: ${designRes.text}. Write exclusively the raw functional 1-file Next.js page code (React component). Do not include markdown codeblocks or explanations, JUST the code starting with export default function. Ensure it incorporates lucide-react icons or framer-motion if relevant. Make it stunning and premium.`
           });
 
           let fullCode = "";
@@ -130,19 +124,19 @@ export default function App() {
 
           // 5. QA/Debug Agent
           sendUpdate('5', 'active', 'Auditing generated code against strict React linting standards...');
-          await delay(1500); // Simulate lint run
+          await delay(1500);
           sendUpdate('5', 'done', 'QA Checks Passed. No syntax or hook violations detected.', fullCode);
 
           // 6. Deployment Agent
           sendUpdate('6', 'active', 'Committing to Vercel build pipeline...');
           await delay(2000); 
           const mockUrl = "https://aura-engine-deployment.vercel.app";
-          sendUpdate('6', 'done', \`Production Ready. Target branch mapped and deployed.\`, fullCode, mockUrl);
+          sendUpdate('6', 'done', `Production Ready. Target branch mapped and deployed.`, fullCode, mockUrl);
         }
 
         controller.close();
       } catch (err: any) {
-        sendUpdate('6', 'error', \`Engine Failure: \${err.message}\`);
+        sendUpdate('6', 'error', `Engine Failure: ${err.message}`);
         controller.error(err);
       }
     }
