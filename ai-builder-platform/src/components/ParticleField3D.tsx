@@ -58,7 +58,7 @@ class Particle3D {
     this.color = color;
   }
 
-  update(mouseX: number, mouseY: number) {
+  update(mouseX: number, mouseY: number, cursorVx: number, cursorVy: number) {
     if (mouseX !== -2000) {
       const distToCursor = Math.sqrt(Math.pow(mouseX - this.x, 2) + Math.pow(mouseY - this.y, 2));
       
@@ -66,16 +66,20 @@ class Particle3D {
       const timeSlow = Date.now() * 0.0015;
       const restingSpreadTarget = Math.sin(timeSlow) * 1.5 + 11.5; 
       
-      let spreadMultiplier = 0.2; // Tiny compressed bullet when chasing mouse rapidly
+      let spreadMultiplier = 0.2; // Tiny compressed bullet when moving
       if (distToCursor < 400) {
-        // Smoothly inflate up to the massive 800-1000% breathing target when cursor rests
+        // Smoothly inflate up to the massive 1000-1300% breathing target when cursor rests
         const restFactor = Math.pow((400 - distToCursor) / 400, 1.5); 
         spreadMultiplier = 0.2 + (restingSpreadTarget - 0.2) * restFactor;
       }
 
+      // PROJECT THE SWARM AHEAD OF THE CURSOR! (as if PUSHING it violently forward)
+      const aheadX = mouseX + cursorVx * 25.0;
+      const aheadY = mouseY + cursorVy * 25.0;
+
       // The outer dots natively extend exponentially further because their base offsets are scaled mathematically
-      const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier);
-      const targetY = mouseY + (this.mouseOffsetY * spreadMultiplier);
+      const targetX = aheadX + (this.mouseOffsetX * spreadMultiplier);
+      const targetY = aheadY + (this.mouseOffsetY * spreadMultiplier);
       
       const dx = targetX - this.x;
       const dy = targetY - this.y;
@@ -137,6 +141,10 @@ export default function ParticleField3D() {
 
     const brightColors = ['#3B82F6', '#8B5CF6', '#F97316', '#EF4444'];
     let mouse = { x: -2000, y: -2000 };
+    let lastMouseX = -2000;
+    let lastMouseY = -2000;
+    let cursorVx = 0;
+    let cursorVy = 0;
 
     const resize = () => {
       canvas.width = window.innerWidth;
@@ -169,10 +177,23 @@ export default function ParticleField3D() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Calculate active cursor velocity pushing vector every frame
+      if (mouse.x !== -2000 && lastMouseX !== -2000) {
+        const dx = mouse.x - lastMouseX;
+        const dy = mouse.y - lastMouseY;
+        // Dampen the velocity so the push is extremely buttery smooth and decays when stopped
+        cursorVx = cursorVx * 0.85 + dx * 0.15;
+        cursorVy = cursorVy * 0.85 + dy * 0.15;
+      }
+      
+      // Because `mouse.x/y` only updates on DOM event, dx/dy will be 0 on resting frames!
+      lastMouseX = mouse.x;
+      lastMouseY = mouse.y;
 
       for (let i = 0; i < particles.length; i++) {
         const p1 = particles[i];
-        p1.update(mouse.x, mouse.y);
+        p1.update(mouse.x, mouse.y, cursorVx, cursorVy);
         p1.draw(ctx);
         
         // Render network lines strictly between particles sharing the SAME exact 3D Layer!
