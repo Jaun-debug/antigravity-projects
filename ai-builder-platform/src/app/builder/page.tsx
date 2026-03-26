@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { Code2, MonitorPlay, History, Play, CheckCircle2, CircleDashed, ServerCog } from "lucide-react";
 import { Sidebar } from "@/components/Sidebar";
 import { CodeViewer } from "@/components/CodeViewer";
@@ -25,6 +25,18 @@ const INITIAL_AGENTS: AgentTask[] = [
 ];
 
 export default function BuilderSpace() {
+  return (
+    <Suspense fallback={
+      <div className="flex h-screen w-full bg-[#05080e] items-center justify-center">
+        <CircleDashed size={32} className="animate-spin text-primary" />
+      </div>
+    }>
+      <BuilderContent />
+    </Suspense>
+  );
+}
+
+function BuilderContent() {
   const searchParams = useSearchParams();
   const prompt = searchParams.get("prompt") || "";
   
@@ -132,7 +144,7 @@ export default function BuilderSpace() {
         {/* Workspace Content */}
         <div className="flex-1 overflow-hidden relative bg-[#0d1218]">
           {activeTab === 'code' && <CodeViewer code={generatedCode} />}
-          {activeTab === 'preview' && <PreviewWindow url={deployedUrl || "about:blank"} isBuilding={isBuilding} />}
+          {activeTab === 'preview' && <PreviewWindow code={generatedCode} isBuilding={isBuilding} />}
           {activeTab === 'logs' && <AgentWorkflow agents={agents} />}
         </div>
       </main>
