@@ -116,11 +116,14 @@ export function PreviewWindow({ code, isBuilding }: { code: string, isBuilding: 
               "framer-motion": "^10.16.4"
             }
           }}
+          options={{
+            externalResources: ["https://cdn.tailwindcss.com"] // Native Sandpack injection for Tailwind CDN
+          }}
           files={{
             "/App.tsx": code.replace(/```(?:javascript|typescript|tsx|jsx)?\n/gi, '').replace(/```/g, '').trim(), // Strip AI markdown blocks
             "/index.html": htmlTemplate, // Default for some react templates
             "/public/index.html": htmlTemplate, // Default for CRA templates
-            "/styles.css": "body { margin: 0; padding: 0; } #root { min-height: 100vh; background-color: transparent !important; }"
+            "/styles.css": "body { margin: 0; padding: 0; font-family: ui-sans-serif, system-ui, sans-serif; } #root { min-height: 100vh; background-color: transparent !important; }"
           }}
         >
           <SandpackLayout style={{ height: "100%", width: "100%", border: 'none', borderRadius: 0 }}>
