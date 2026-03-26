@@ -84,7 +84,7 @@ export default function App() {
           // 1. Planner Agent
           sendUpdate('1', 'active', 'Generating product architecture and structural steps via Planner Model...');
           const planRes = await generateText({
-            model: plannerModel,
+            model: plannerModel as any,
             prompt: `You are the Orchestrator Agent. Create a brief architectural summary for: "${prompt}". Keep it under 2 sentences.`,
             maxTokens: 100,
           });
@@ -93,7 +93,7 @@ export default function App() {
           // 2. Research Agent
           sendUpdate('2', 'active', 'Researching premium UI/UX inspirations based on the domain...');
           const researchRes = await generateText({
-            model: plannerModel,
+            model: plannerModel as any,
             prompt: `Based on this plan: "${planRes.text}", suggest 3 UI/UX recommendations for a premium feel. Format as a bullet list.`,
             maxTokens: 100,
           });
@@ -102,7 +102,7 @@ export default function App() {
           // 3. Design Agent
           sendUpdate('3', 'active', 'Synthesizing layout tokens, padding schemas, and Tailwind config values...');
           const designRes = await generateText({
-            model: plannerModel,
+            model: plannerModel as any,
             prompt: `Draft the Tailwind styling rules for a premium web app matching this logic: ${researchRes.text}. Mention specific colors.`,
             maxTokens: 100,
           });
@@ -111,7 +111,7 @@ export default function App() {
           // 4. Build Engineer (Streaming Code)
           sendUpdate('4', 'active', 'Engineering the functional Next.js Page component...');
           const codeStream = await streamText({
-            model: builderModel,
+            model: builderModel as any,
             prompt: `You are an expert Next.js and Tailwind developer. Requirements: ${prompt}. Plan: ${planRes.text}. Design: ${designRes.text}. Write exclusively the raw functional 1-file Next.js page code (React component). Do not include markdown codeblocks or explanations, JUST the code starting with export default function. Ensure it incorporates lucide-react icons or framer-motion if relevant. Make it stunning and premium.`
           });
 
