@@ -62,15 +62,19 @@ class Particle3D {
     if (mouseX !== -2000) {
       const distToCursor = Math.sqrt(Math.pow(mouseX - this.x, 2) + Math.pow(mouseY - this.y, 2));
       
-      // The magic mechanic: If far away, collapse the offset so they fly as a tight bullet.
-      // If close (resting), expand the offset multiplier massively so they drift away from each other smoothly!
+      // If close (resting), expand the offset multiplier to exactly 2.0x (100% inflation) smoothly!
       let spreadMultiplier = 0.2;
       if (distToCursor < 350) {
-        spreadMultiplier = 1 + ((350 - distToCursor) / 50); // Ramps up to exactly 8.0x spread when resting
+        spreadMultiplier = 1 + ((350 - distToCursor) / 350); // Ramps up to exactly 2.0x spread when resting
       }
 
-      const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier);
-      const targetY = mouseY + (this.mouseOffsetY * spreadMultiplier);
+      // Natively transform the swarm from a circle into an organic expanding/contracting oval over time
+      const timeSlow = Date.now() * 0.0008; 
+      const ovalScaleX = Math.sin(timeSlow) * 0.4 + 1.0; // Oscillates slowly from 0.6x to 1.4x
+      const ovalScaleY = Math.cos(timeSlow) * 0.4 + 1.0; // Oscillates slowly from 1.4x to 0.6x
+
+      const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier * ovalScaleX);
+      const targetY = mouseY + (this.mouseOffsetY * spreadMultiplier * ovalScaleY);
       
       const dx = targetX - this.x;
       const dy = targetY - this.y;
@@ -138,8 +142,8 @@ export default function ParticleField3D() {
       canvas.height = window.innerHeight;
       
       particles = [];
-      // Dense 500 particle swarm
-      const particleCount = window.innerWidth < 768 ? 200 : 500; 
+      // Dense 400 particle swarm
+      const particleCount = window.innerWidth < 768 ? 200 : 400; 
       for (let i = 0; i < particleCount; i++) {
         const color = brightColors[Math.floor(Math.random() * brightColors.length)];
         particles.push(new Particle3D(canvas.width, canvas.height, color));
