@@ -66,7 +66,7 @@ class Particle3D {
       // If close (resting), expand the offset multiplier massively so they drift away from each other smoothly!
       let spreadMultiplier = 0.2;
       if (distToCursor < 350) {
-        spreadMultiplier = 1 + ((350 - distToCursor) / 70); // Ramps up to exactly 6.0x spread when resting
+        spreadMultiplier = 1 + ((350 - distToCursor) / 50); // Ramps up to exactly 8.0x spread when resting
       }
 
       const targetX = mouseX + (this.mouseOffsetX * spreadMultiplier);
@@ -138,8 +138,8 @@ export default function ParticleField3D() {
       canvas.height = window.innerHeight;
       
       particles = [];
-      // Dense 600 particle swarm
-      const particleCount = window.innerWidth < 768 ? 300 : 600; 
+      // Dense 500 particle swarm
+      const particleCount = window.innerWidth < 768 ? 200 : 500; 
       for (let i = 0; i < particleCount; i++) {
         const color = brightColors[Math.floor(Math.random() * brightColors.length)];
         particles.push(new Particle3D(canvas.width, canvas.height, color));
