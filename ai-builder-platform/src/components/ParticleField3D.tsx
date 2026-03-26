@@ -63,9 +63,9 @@ class Particle3D {
       this.vx += Math.cos(angle) * force * 3.5 * reactivity;
       this.vy += Math.sin(angle) * force * 3.5 * reactivity;
       
-      // Elegant perpendicular orbiting so they don't visibly overlap into one dot
-      this.vx += Math.cos(angle + Math.PI / 2.5) * force * 1.5 * reactivity;
-      this.vy += Math.sin(angle + Math.PI / 2.5) * force * 1.5 * reactivity;
+      // Much slower, graceful circling orbit in the end
+      this.vx += Math.cos(angle + Math.PI / 2.5) * force * 0.4 * reactivity;
+      this.vy += Math.sin(angle + Math.PI / 2.5) * force * 0.4 * reactivity;
     } else {
       // Return to original initial cluster only when mouse leaves the window entirely
       this.vx += (this.originX - this.x) * 0.003 * reactivity;
@@ -76,9 +76,9 @@ class Particle3D {
     this.vx += (Math.random() - 0.5) * 0.1 * reactivity;
     this.vy += (Math.random() - 0.5) * 0.1 * reactivity;
 
-    // High friction so they rigidly track the cursor without exploding across screen
-    this.vx *= 0.88;
-    this.vy *= 0.88;
+    // High friction so they rigidly track the cursor without exploding across screen and circle slower
+    this.vx *= 0.85;
+    this.vy *= 0.85;
 
     this.x += this.vx;
     this.y += this.vy;
