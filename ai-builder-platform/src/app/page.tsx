@@ -47,22 +47,29 @@ export default function Home() {
       '#FF33CC', '#33FFCC', '#3366FF'
     ];
 
-    // 150 spaced out colorful dots making a fluid swarm
-    for (let i = 0; i < 150; i++) {
-      // Larger, less dense radius
-      const radius = Math.pow(random(0, 1, i), 0.5) * 250; // 250px spaced out sphere
+    // Massive Antigravity Swirl generating math
+    // 400 particles scattered across an enormous radial field
+    for (let i = 0; i < 400; i++) {
+      // Massive viewport-relative radius
+      const maxRadius = typeof window !== 'undefined' ? window.innerWidth * 0.6 : 1000;
+      const radius = Math.pow(random(0, 1, i), 0.5) * maxRadius; 
       const angle = random(0, Math.PI * 2, i + 100);
       
       const startX = Math.cos(angle) * radius;
       const startY = Math.sin(angle) * radius;
 
+      // Calculate tangent rotation so the "slashes" form a perfect orbital vortex
+      const rotationDeg = (angle * 180) / Math.PI + 90;
+
       newParticles.push({
         id: i,
         x: startX,
         y: startY,
-        scale: random(0.5, 1.8, i + 200), // Slightly more visible
-        pulseDuration: random(1.5, 4, i + 300), 
-        delay: random(0, 2, i + 400),
+        width: random(4, 18, i + 200), // Elongated slashes (Antigravity style)
+        height: random(1, 3, i + 250),
+        rotation: rotationDeg,
+        pulseDuration: random(2, 6, i + 300), 
+        delay: random(0, 3, i + 400),
         colors: [
           brightColors[Math.floor(random(0, brightColors.length, i + 500))],
           brightColors[Math.floor(random(0, brightColors.length, i + 600))],
@@ -133,18 +140,22 @@ export default function Home() {
           {particles.map((p) => (
             <motion.div
               key={p.id}
-              className="absolute rounded-full"
+              className="absolute"
               style={{
-                width: `${p.scale * 3}px`,
-                height: `${p.scale * 3}px`,
+                width: `${p.width}px`,
+                height: `${p.height}px`,
                 left: `${p.x}px`,
                 top: `${p.y}px`,
-                transform: 'translate(-50%, -50%)'
+                // Teardrop shape!
+                borderRadius: '50% 50% 50% 2px',
+                transform: `rotate(${p.rotation}deg)`
               }}
               animate={{
-                opacity: [0.1, 1, 0.1], // vivid flashes
-                scale: [1, p.scale * 1.5, 1],
-                backgroundColor: p.colors
+                opacity: [0.1, 0.9, 0.1], // Vivid glowing
+                backgroundColor: p.colors,
+                // Alive floating wiggle!
+                x: [0, random(-8, 8, p.id * 10), 0], 
+                y: [0, random(-8, 8, p.id * 20), 0]
               }}
               transition={{
                 duration: p.pulseDuration,
