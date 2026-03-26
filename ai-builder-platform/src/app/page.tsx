@@ -18,59 +18,57 @@ export default function Home() {
   const [isInitializing, setIsInitializing] = useState(false);
   const [particles, setParticles] = useState<any[]>([]);
 
-  // Parallax tracking variables
+  // Dense tracking blob variables
   const rawMouseX = useMotionValue(0);
   const rawMouseY = useMotionValue(0);
-  const smoothMouseX = useSpring(rawMouseX, { stiffness: 40, damping: 20 });
-  const smoothMouseY = useSpring(rawMouseY, { stiffness: 40, damping: 20 });
+  const smoothMouseX = useSpring(rawMouseX, { stiffness: 60, damping: 20 });
+  const smoothMouseY = useSpring(rawMouseY, { stiffness: 60, damping: 20 });
   
   const handleMouseMove = (e: React.MouseEvent) => {
     if (typeof window === 'undefined') return;
-    const { clientX, clientY } = e;
-    // Normalize to -50% to +50% range and scale magnitude for effect
-    rawMouseX.set((clientX / window.innerWidth - 0.5) * 80);
-    rawMouseY.set((clientY / window.innerHeight - 0.5) * 80);
+    // Track exact cursor location in pixels
+    rawMouseX.set(e.clientX);
+    rawMouseY.set(e.clientY);
   };
 
-  // Generate particles client-side to prevent hydration mismatches
+  // Generate dynamic tracking blob client-side
   useEffect(() => {
+    // Initial center safely bounded
+    if (typeof window !== 'undefined') {
+      rawMouseX.set(window.innerWidth / 2);
+      rawMouseY.set(window.innerHeight / 2);
+    }
+
     const newParticles: any[] = [];
-    
-    // Create 3 massive rings
-    const ringCenters = [
-      { id: 0, cx: 0, cy: -15, size: 1.2 }, // Top center
-      { id: 1, cx: -25, cy: 30, size: 1.0 }, // Bottom Left
-      { id: 2, cx: 25, cy: 30, size: 1.0 }   // Bottom Right
+    const brightColors = [
+      '#FF3366', '#20D2FF', '#FF9933', 
+      '#00FF99', '#FFFF33', '#B833FF',
+      '#FF33CC', '#33FFCC', '#3366FF'
     ];
 
-    ringCenters.forEach((ring) => {
-      // 200 particles per ring
-      for (let i = 0; i < 200; i++) {
-        const offset = i + ring.id * 200;
-        const radius = random(12, 17, offset); // Thickness of the ring loop
-        const angle = random(0, Math.PI * 2, offset + 100);
-        
-        // Position relative to the center of the ring itself
-        const startX = Math.cos(angle) * radius * ring.size;
-        const startY = Math.sin(angle) * radius * 1.5 * ring.size; // Oval projection
+    // 400 dense colorful dots making up one tight orb
+    for (let i = 0; i < 400; i++) {
+      // Clustered sphere radius math (heavier towards the center)
+      const radius = Math.pow(random(0, 1, i), 0.5) * 140; // 140px max radius sphere
+      const angle = random(0, Math.PI * 2, i + 100);
+      
+      const startX = Math.cos(angle) * radius;
+      const startY = Math.sin(angle) * radius;
 
-        newParticles.push({
-          id: offset,
-          ringIdx: ring.id,
-          x: startX,
-          y: startY,
-          scale: random(0.6, 1.2, offset + 200), // Adjusted so dots are 2px-3px visible and crisp
-          pulseDuration: random(3, 8, offset + 300), 
-          delay: random(0, 5, offset + 400),
-          // Assign strictly Google Blue/Ice colors for "organized snow"
-          colors: [
-            ['#e8f0fe', '#d2e3fc', '#8AB4F8'][Math.floor(random(0, 3, offset + 500))],
-            ['#8AB4F8', '#669DF6', '#4285F4'][Math.floor(random(0, 3, offset + 600))],
-            ['#4285F4', '#1A73E8', '#8AB4F8'][Math.floor(random(0, 3, offset + 700))]
-          ]
-        });
-      }
-    });
+      newParticles.push({
+        id: i,
+        x: startX,
+        y: startY,
+        scale: random(0.5, 1.6, i + 200), // Tiny pixels
+        pulseDuration: random(1.5, 4, i + 300), // Faster pulses
+        delay: random(0, 2, i + 400),
+        colors: [
+          brightColors[Math.floor(random(0, brightColors.length, i + 500))],
+          brightColors[Math.floor(random(0, brightColors.length, i + 600))],
+          brightColors[Math.floor(random(0, brightColors.length, i + 700))]
+        ]
+      });
+    }
     setParticles(newParticles);
   }, []);
 
@@ -126,55 +124,43 @@ export default function Home() {
           {/* Black scattered background dots from screenshot */}
           <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:32px_32px]"></div>
 
-          {[
-            { id: 0, rotateDuration: 90, cx: '50%', cy: '35%', depth: 1 },
-            { id: 1, rotateDuration: 60, cx: '25%', cy: '80%', depth: 0.5 },
-            { id: 2, rotateDuration: 75, cx: '75%', cy: '80%', depth: -0.5 }
-          ].map((ring) => {
-            // Calculate a dedicated parallax vector specifically for this ring depth using Framer Motion Transform
-            const parallaxX = useTransform(smoothMouseX, x => x * ring.depth);
-            const parallaxY = useTransform(smoothMouseY, y => y * ring.depth);
-
-            return (
+          {/* Tracking Colorful Circle Blob */}
+          <motion.div
+            className="absolute w-0 h-0"
+            style={{ 
+              left: 0, // Bound mathematically to fixed 0,0 top-left origin
+              top: 0,
+              x: smoothMouseX, // Cursor x offset
+              y: smoothMouseY  // Cursor y offset
+            }}
+            animate={{ rotateZ: 360 }}
+            transition={{ duration: 40, repeat: Infinity, ease: 'linear' }}
+          >
+            {particles.map((p) => (
               <motion.div
-                key={ring.id}
-                className="absolute w-0 h-0"
-                style={{ 
-                  left: ring.cx, 
-                  top: ring.cy,
-                  x: parallaxX,
-                  y: parallaxY
+                key={p.id}
+                className="absolute rounded-full"
+                style={{
+                  width: `${p.scale * 3}px`,
+                  height: `${p.scale * 3}px`,
+                  left: `${p.x}px`,
+                  top: `${p.y}px`,
+                  transform: 'translate(-50%, -50%)'
                 }}
-                animate={{ rotateZ: 360 }}
-                transition={{ duration: ring.rotateDuration, repeat: Infinity, ease: 'linear' }}
-              >
-                {particles.filter(p => p.ringIdx === ring.id).map((p) => (
-                  <motion.div
-                    key={p.id}
-                    className="absolute rounded-full"
-                    style={{
-                      width: `${p.scale * 3}px`,
-                      height: `${p.scale * 3}px`,
-                      left: `${p.x}vw`,
-                      top: `${p.y}vh`,
-                      transform: 'translate(-50%, -50%)'
-                    }}
-                    animate={{
-                      opacity: [0.1, 0.9, 0.1],
-                      scale: [1, p.scale * 1.5, 1],
-                      backgroundColor: p.colors
-                    }}
-                    transition={{
-                      duration: p.pulseDuration,
-                      repeat: Infinity,
-                      delay: p.delay,
-                      ease: "easeInOut"
-                    }}
-                  />
-                ))}
-              </motion.div>
-            );
-          })}
+                animate={{
+                  opacity: [0.1, 1, 0.1], // vivid flashes
+                  scale: [1, p.scale * 1.5, 1],
+                  backgroundColor: p.colors
+                }}
+                transition={{
+                  duration: p.pulseDuration,
+                  repeat: Infinity,
+                  delay: p.delay,
+                  ease: "easeInOut"
+                }}
+              />
+            ))}
+          </motion.div>
         </div>
 
         {/* Hero Content */}
