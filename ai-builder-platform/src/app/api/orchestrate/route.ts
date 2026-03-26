@@ -112,9 +112,11 @@ export default function App() {
           sendUpdate('4', 'active', 'Engineering the functional Next.js Page component...');
           const codeStream = await streamText({
             model: builderModel as any,
+            maxTokens: 8192,
             prompt: `You are an expert Next.js and Tailwind developer. Requirements: ${prompt}. Plan: ${planRes.text}. Design: ${designRes.text}. 
             Write exclusively the raw functional 1-file Next.js page code (React component). Do not include markdown codeblocks or explanations, JUST the code starting with 'export default function App'. Ensure it incorporates lucide-react icons or framer-motion if relevant. Make it stunning and premium.
-            IMPORTANT: Do NOT hardcode background colors on the outermost container (no bg-white, no bg-black). Set the outermost container to 'bg-transparent text-current' so the user's selected dynamic iframe theme can cleanly bleed through the app logic.`
+            Generate a MASSIVE, fully structurally fleshed out web application component. Give it immense detail, deep UI layers, and hundreds of lines of complex React logic! Don't write simplistic skeletons—make it incredibly long and advanced!
+            IMPORTANT: Do NOT hardcode background colors on the outermost container (no bg-white, no bg-black). Set the outermost container to 'bg-transparent text-current min-h-screen' so the user's selected dynamic iframe theme can cleanly bleed through the app logic.`
           });
 
           let fullCode = "";
