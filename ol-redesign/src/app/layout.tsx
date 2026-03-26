@@ -43,11 +43,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {NAVIGATION.map((item) => (
                 <div key={item.name} className="relative group px-3 py-8">
                   <a href={item.href} className="text-[13px] font-bold uppercase tracking-wider text-[#1c325b] hover:text-[#7cbd36] transition-colors flex items-center gap-1">
-                    {item.name} {item.dropdown?.length > 0 && <ChevronDown size={14} />}
+                    {item.name} {item.dropdown && item.dropdown.length > 0 && <ChevronDown size={14} />}
                   </a>
                   
                   {/* Dropdown Menu */}
-                  {item.dropdown?.length > 0 && (
+                  {item.dropdown && item.dropdown.length > 0 && (
                     <div className="absolute top-[88px] left-0 w-64 bg-white border-t-2 border-[#7cbd36] shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
                       <div className="py-2">
                         {item.dropdown.map((subItem) => (
