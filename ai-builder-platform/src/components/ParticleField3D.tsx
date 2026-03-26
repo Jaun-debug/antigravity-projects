@@ -15,8 +15,16 @@ class Particle3D {
   layer: 'bg' | 'mid' | 'fg';
 
   constructor(width: number, height: number, color: string) {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
+    // Cluster them tightly in the center, rather than scattering across whole screen
+    const centerX = width / 2;
+    const centerY = height / 2;
+    // max radius constrained to the center area
+    const maxRadius = Math.min(width, height) * 0.45; 
+    const r = Math.pow(Math.random(), 0.5) * maxRadius;
+    const theta = Math.random() * 2 * Math.PI;
+    
+    this.x = centerX + r * Math.cos(theta);
+    this.y = centerY + r * Math.sin(theta);
     this.originX = this.x;
     this.originY = this.y;
     this.vx = 0;
@@ -25,16 +33,15 @@ class Particle3D {
     // Assign to a layer for distinct depth behaviors
     const rand = Math.random();
     if (rand < 0.5) {
-      this.z = 0.15; this.layer = 'bg'; // 50% are faint background dust
+      this.z = 0.15; this.layer = 'bg'; 
     } else if (rand < 0.85) {
-      this.z = 0.5; this.layer = 'mid'; // 35% are mid-ground
+      this.z = 0.5; this.layer = 'mid'; 
     } else {
-      this.z = 1.0; this.layer = 'fg';  // 15% are large foreground "hero" elements
+      this.z = 1.0; this.layer = 'fg';  
     }
     
-    // Hyper-exaggerate perspective scaling for Stripe/Apple aesthetic
-    // Foreground dots are prominent, background dots are nearly invisible pixels
-    this.size = (Math.random() * 1.5 + 0.8) * Math.pow(this.z, 1.5) * 3; 
+    // Crisp, small, uniform size regardless of depth
+    this.size = Math.random() * 1.2 + 1.2; 
     this.color = color;
   }
 
@@ -95,13 +102,8 @@ class Particle3D {
     
     ctx.globalAlpha = movementAlpha * baseAlpha; 
     
-    // Only foreground particles get glow to ensure clean aesthetics
-    if (this.z === 1.0) {
-      ctx.shadowBlur = 10;
-      ctx.shadowColor = this.color;
-    } else {
-      ctx.shadowBlur = 0;
-    }
+    // Crisp aesthetic - no blurry shadows at all
+    ctx.shadowBlur = 0;
     
     ctx.fill();
     ctx.closePath();
@@ -129,8 +131,8 @@ export default function ParticleField3D() {
       canvas.height = window.innerHeight;
       
       particles = [];
-      // Massive negative space: only 150 particles!
-      const particleCount = window.innerWidth < 768 ? 60 : 150; 
+      // Dense 700 particle swarm
+      const particleCount = window.innerWidth < 768 ? 300 : 700; 
       for (let i = 0; i < particleCount; i++) {
         const color = brightColors[Math.floor(Math.random() * brightColors.length)];
         particles.push(new Particle3D(canvas.width, canvas.height, color));
