@@ -4,6 +4,8 @@ import { createOpenAI } from '@ai-sdk/openai';
 import { createAnthropic } from '@ai-sdk/anthropic';
 
 export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+export const maxDuration = 300; // Allow 5 minutes for massive AI generation streams
 
 const delay = (ms: number) => new Promise(res => setTimeout(res, ms));
 
