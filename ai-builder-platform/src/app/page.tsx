@@ -36,7 +36,7 @@ export default function Home() {
     e.preventDefault();
     if (!prompt.trim()) return;
     setIsInitializing(true);
-    router.push(\`/builder?prompt=\${encodeURIComponent(prompt)}\`);
+    router.push(`/builder?prompt=${encodeURIComponent(prompt)}`);
   };
 
   return (
@@ -76,26 +76,32 @@ export default function Home() {
       <div className="relative flex-1 flex flex-col items-center justify-center pt-32 pb-20 px-6 max-w-5xl mx-auto w-full z-10 text-center">
         
         {/* Animated Background Particles */}
-        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center opacity-70">
+        <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center opacity-80 mix-blend-multiply">
           {particles.map((p) => (
             <motion.div
               key={p.id}
-              className="absolute w-[4px] h-[10px] rounded-full"
+              className="absolute w-[4px] h-[12px] rounded-full"
               style={{
                 backgroundColor: p.color,
-                left: \`calc(50% + \${p.x}vw)\`,
-                top: \`calc(50% + \${p.y}vh)\`,
-                rotate: Math.atan2(p.y, p.x) * (180 / Math.PI) + 90 // Point outwards constantly!
+                rotate: Math.atan2(p.y, p.x) * (180 / Math.PI) + 90
+              }}
+              initial={{
+                x: 0,
+                y: 0,
+                opacity: 0,
+                scale: 0.1
               }}
               animate={{
-                opacity: [0.1, 0.8, 0.1],
-                scale: [p.scale, p.scale * 1.5, p.scale],
+                x: p.x * 12, // Move outwards physically
+                y: p.y * 12,
+                opacity: [0, 0.8, 0],
+                scale: [0.1, p.scale, 0.1],
               }}
               transition={{
                 duration: p.duration,
                 repeat: Infinity,
                 delay: p.delay,
-                ease: "easeInOut"
+                ease: "linear"
               }}
             />
           ))}
