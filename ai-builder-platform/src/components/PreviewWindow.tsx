@@ -5,12 +5,12 @@ import { Sandpack, SandpackProvider, SandpackLayout, SandpackPreview } from "@co
 import { Monitor, Moon, Sun, Coffee, Cloud } from 'lucide-react';
 
 export function PreviewWindow({ code, isBuilding }: { code: string, isBuilding: boolean }) {
-  const [themeMode, setThemeMode] = useState<'black' | 'white' | 'brown' | 'blue'>('black');
+  const [themeMode, setThemeMode] = useState<'black' | 'white' | 'slate' | 'blue'>('black');
 
   const THEMES = {
     black: '#0a0f16',
     white: '#ffffff',
-    brown: '#eaddd5',
+    slate: '#f1f5f9',
     blue: '#eaf4fd'
   };
 
@@ -79,9 +79,9 @@ export function PreviewWindow({ code, isBuilding }: { code: string, isBuilding: 
             <Sun size={14} />
           </button>
           <button 
-            onClick={() => setThemeMode('brown')} 
-            className={`p-2 rounded-md transition-all duration-200 ${themeMode === 'brown' ? 'bg-[#eaddd5] text-[#4e342e] shadow shadow-black/20' : 'text-gray-500 hover:bg-white/5 hover:text-gray-300'}`} 
-            title="Warm Sand"
+            onClick={() => setThemeMode('slate')} 
+            className={`p-2 rounded-md transition-all duration-200 ${themeMode === 'slate' ? 'bg-[#f1f5f9] text-[#475569] shadow shadow-black/20' : 'text-gray-500 hover:bg-white/5 hover:text-gray-300'}`} 
+            title="Slate Chat Mode"
           >
             <Coffee size={14} />
           </button>

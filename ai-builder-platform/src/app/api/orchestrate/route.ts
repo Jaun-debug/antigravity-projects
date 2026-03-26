@@ -50,14 +50,14 @@ import { motion } from 'framer-motion';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center">
+    <div className="min-h-screen bg-transparent flex flex-col items-center justify-center p-8">
       <motion.h1 
-        initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} 
-        className="text-6xl font-bold bg-gradient-to-r from-blue-500 to-teal-400 bg-clip-text text-transparent"
+        initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} 
+        className="text-5xl font-extrabold tracking-tight"
       >
         ${prompt || "Premium Digital Experience"}
       </motion.h1>
-      <p className="mt-6 text-gray-400 max-w-lg text-center font-light">
+      <p className="mt-4 max-w-lg text-center font-medium opacity-70">
         Aura AI Engine Simulated Result. Add API Keys to generate real app logic.
       </p>
     </div>
@@ -112,7 +112,9 @@ export default function App() {
           sendUpdate('4', 'active', 'Engineering the functional Next.js Page component...');
           const codeStream = await streamText({
             model: builderModel as any,
-            prompt: `You are an expert Next.js and Tailwind developer. Requirements: ${prompt}. Plan: ${planRes.text}. Design: ${designRes.text}. Write exclusively the raw functional 1-file Next.js page code (React component). Do not include markdown codeblocks or explanations, JUST the code starting with export default function. Ensure it incorporates lucide-react icons or framer-motion if relevant. Make it stunning and premium.`
+            prompt: `You are an expert Next.js and Tailwind developer. Requirements: ${prompt}. Plan: ${planRes.text}. Design: ${designRes.text}. 
+            Write exclusively the raw functional 1-file Next.js page code (React component). Do not include markdown codeblocks or explanations, JUST the code starting with 'export default function App'. Ensure it incorporates lucide-react icons or framer-motion if relevant. Make it stunning and premium.
+            IMPORTANT: Do NOT hardcode background colors on the outermost container (no bg-white, no bg-black). Set the outermost container to 'bg-transparent text-current' so the user's selected dynamic iframe theme can cleanly bleed through the app logic.`
           });
 
           let fullCode = "";
