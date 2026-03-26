@@ -18,7 +18,7 @@ class Particle3D {
   pulsePhase: number;
   pulseSpeed: number;
 
-  constructor(width: number, height: number, color: string) {
+  constructor(width: number, height: number, color: string, index: number) {
     // Cluster them tightly in the center logically on load
     const centerX = width / 2;
     const centerY = height / 2;
@@ -33,11 +33,11 @@ class Particle3D {
     this.vx = 0;
     this.vy = 0;
     
-    // Generate individual offset matrix around the cursor so they lie loosely, rather than collapsing
-    const clusterR = Math.pow(Math.random(), 0.5) * 96; // 96px loose blob radius (20% larger)
-    const clusterTheta = Math.random() * 2 * Math.PI;
-    this.mouseOffsetX = clusterR * Math.cos(clusterTheta);
-    this.mouseOffsetY = clusterR * Math.sin(clusterTheta);
+    // Vogel Spiral algorithm: Perfectly exact, equidistant mathematical distribution
+    const goldenAngle = Math.PI * (3 - Math.sqrt(5));
+    const spiralRadius = Math.sqrt(index) * 4.5; // Base spiral radius multiplier
+    this.mouseOffsetX = spiralRadius * Math.cos(index * goldenAngle);
+    this.mouseOffsetY = spiralRadius * Math.sin(index * goldenAngle);
     
     // Pulse math to make them breathe
     this.pulsePhase = Math.random() * Math.PI * 2;
@@ -62,9 +62,9 @@ class Particle3D {
     if (mouseX !== -2000) {
       const distToCursor = Math.sqrt(Math.pow(mouseX - this.x, 2) + Math.pow(mouseY - this.y, 2));
       
-      // Calculate global breathing constraint oscillating between 8.0 (800%) and 10.0 (1000%)
+      // Calculate global breathing constraint oscillating violently between 10.0 (1000%) and 13.0 (1300%)!
       const timeSlow = Date.now() * 0.0015;
-      const restingSpreadTarget = Math.sin(timeSlow) * 1.0 + 9.0; 
+      const restingSpreadTarget = Math.sin(timeSlow) * 1.5 + 11.5; 
       
       let spreadMultiplier = 0.2; // Tiny compressed bullet when chasing mouse rapidly
       if (distToCursor < 400) {
@@ -147,7 +147,7 @@ export default function ParticleField3D() {
       const particleCount = window.innerWidth < 768 ? 200 : 400; 
       for (let i = 0; i < particleCount; i++) {
         const color = brightColors[Math.floor(Math.random() * brightColors.length)];
-        particles.push(new Particle3D(canvas.width, canvas.height, color));
+        particles.push(new Particle3D(canvas.width, canvas.height, color, i));
       }
     };
 
