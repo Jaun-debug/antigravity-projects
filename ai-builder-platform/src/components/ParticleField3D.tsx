@@ -54,18 +54,26 @@ class Particle3D {
     const reactivity = this.z;
 
     if (mouseX !== -2000) {
-      // Absolute Swarm Attraction physics
-      // They follow EXACTLY where the cursor goes!
-      const force = 120 / (dist + 20); // Smooth inverse-distance scaling
+      // Hollow Ring / Perfect Orbit Physics
       const angle = Math.atan2(dy, dx);
       
-      // Intense direct pulling velocity
-      this.vx += Math.cos(angle) * force * 3.5 * reactivity;
-      this.vy += Math.sin(angle) * force * 3.5 * reactivity;
+      if (dist > 90) {
+        // Drag inward if they are far away from the cursor
+        const pullForce = 150 / (dist + 20);
+        this.vx += Math.cos(angle) * pullForce * 2.5 * reactivity;
+        this.vy += Math.sin(angle) * pullForce * 2.5 * reactivity;
+      } else if (dist < 70) {
+        // Push outwards if they get too close to the center, preventing a crushed dot blob!
+        const pushForce = (70 - dist) / 70;
+        this.vx -= Math.cos(angle) * pushForce * 1.5 * reactivity;
+        this.vy -= Math.sin(angle) * pushForce * 1.5 * reactivity;
+      }
       
-      // Much slower, graceful circling orbit in the end
-      this.vx += Math.cos(angle + Math.PI / 2.5) * force * 0.4 * reactivity;
-      this.vy += Math.sin(angle + Math.PI / 2.5) * force * 0.4 * reactivity;
+      // Always apply a consistent, graceful orbital rotation wrapping round the ring base
+      const orbitForce = 80 / (dist + 20);
+      this.vx += Math.cos(angle + Math.PI / 2) * orbitForce * 1.2 * reactivity;
+      this.vy += Math.sin(angle + Math.PI / 2) * orbitForce * 1.2 * reactivity;
+      
     } else {
       // Return to original initial cluster only when mouse leaves the window entirely
       this.vx += (this.originX - this.x) * 0.003 * reactivity;
