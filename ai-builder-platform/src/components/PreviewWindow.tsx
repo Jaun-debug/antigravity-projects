@@ -118,7 +118,9 @@ export function PreviewWindow({ code, isBuilding }: { code: string, isBuilding: 
           }}
           files={{
             "/App.tsx": code, // Feed the LLM code directly into App.js
-            "/public/index.html": htmlTemplate // Attach dynamic Tailwind + Theme bg HTML
+            "/index.html": htmlTemplate, // Default for some react templates
+            "/public/index.html": htmlTemplate, // Default for CRA templates
+            "/styles.css": "body { margin: 0; padding: 0; } #root { min-height: 100vh; background-color: transparent !important; }"
           }}
         >
           <SandpackLayout style={{ height: "100%", width: "100%", border: 'none', borderRadius: 0 }}>
