@@ -1,6 +1,6 @@
 <!-- ============================================================
-     DESERT TRACKS – LUXURY ITINERARIES BLOCK
-     Includes: Sticky Hero, 100% CSS ONLY HOVER (Unblockable)
+     DESERT TRACKS – LUXURY ITINERARIES BLOCK (ALL CORRECT LINKS)
+     Paste <section> below into Nicepage / WordPress Custom HTML
      ============================================================ -->
 <section id="dt-sds-split">
 <style>
@@ -13,8 +13,11 @@
     --dt-border: #e0d8d0;
     font-family: 'DM Sans', sans-serif;
     background: var(--dt-sand);
-    width: 100%;
+    width: 100vw !important;
+    max-width: 100vw !important;
     position: relative;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   /* ── HEADING ─────────────────────────────────────────────── */
@@ -93,6 +96,34 @@
   .dt-is-card-arrow svg { width: 15px; height: 15px; stroke: var(--dt-muted); fill: none; transition: stroke 0.3s; }
   .dt-is-card:hover .dt-is-card-arrow svg { stroke: #fff; }
 
+  /* ── DYNAMIC PRICING STYLING ── */
+  .dt-price-display {
+    display: block;
+    margin-top: 12px;
+  }
+  .dt-price-main {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--dt-dark);
+  }
+  .dt-price-main span {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    margin-left: 4px;
+    font-weight: 400;
+  }
+  .dt-price-sub {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.68rem;
+    color: var(--dt-muted);
+    margin-top: 4px;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
   /* ── MOBILE ──────────────────────────────────────────────── */
   @media (max-width: 900px) {
     .dt-is-layout { flex-direction: column; padding: 0 0 60px; gap: 0; }
@@ -134,8 +165,7 @@
   <div class="dt-is-scroll-col">
 
     <!-- 1. 14-Day Drive & Fly -->
-    <a class="dt-is-card dt-card-1"
-       href="component_31.html" target="_blank">
+    <a class="dt-is-card dt-card-1" href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank">
       <div class="dt-is-thumb">
         <img src="https://desert-tracks.com/wp-content/uploads/2025/10/savuti-lion-in-the-road.jpeg" alt="Savuti lion" loading="lazy" />
       </div>
@@ -143,15 +173,16 @@
         <div class="dt-is-card-label">14 Days · Luxury Safari</div>
         <div class="dt-is-card-title">14-Day Luxury Namibia Drive &amp; Fly Photo Safari</div>
         <div class="dt-is-card-desc">Experience Namibia’s highlights in comfort. Drive through deserts, wildlife parks, and coastlines on a 14-day self-drive safari.</div>
+        <div class="dt-price-display dt-val-7200">
+          <div class="dt-price-main">From €7,200 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
       </div>
-      <div class="dt-is-card-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
     <!-- 2. 14-Day Highlights -->
-    <a class="dt-is-card dt-card-2"
-       href="component_32.html" target="_blank">
+    <a class="dt-is-card dt-card-2" href="https://wetu.com/ItineraryOutputs/Discovery/b02e8a98-0fe9-4d6b-9a85-8fcc81355557?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank">
       <div class="dt-is-thumb">
         <img src="https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg" alt="14 Day Highlights" loading="lazy" />
       </div>
@@ -159,15 +190,16 @@
         <div class="dt-is-card-label">14 Days · Luxury Safari</div>
         <div class="dt-is-card-title">14-Day Luxury Namibia Highlights Self-Drive Safari</div>
         <div class="dt-is-card-desc">Discover Namibia, Chobe, and Victoria Falls in one epic 17-day self-drive safari filled with wildlife, culture, and natural wonders.</div>
+        <div class="dt-price-display dt-val-3450">
+          <div class="dt-price-main">From €3,450 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
       </div>
-      <div class="dt-is-card-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
     <!-- 3. 12-Day Circuit -->
-    <a class="dt-is-card dt-card-3"
-       href="component_33.html" target="_blank">
+    <a class="dt-is-card dt-card-3" href="https://wetu.com/Itinerary/Landing/8d67bdc1-417a-411c-ac60-e312537c8730?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank">
       <div class="dt-is-thumb">
         <img src="https://desert-tracks.com/wp-content/uploads/2025/11/wilderness-desert-rhino-camp_3-scaled-3.jpg" alt="12-Day Circuit" loading="lazy" />
       </div>
@@ -175,15 +207,16 @@
         <div class="dt-is-card-label">12 Days · Luxury Safari</div>
         <div class="dt-is-card-title">12-Day Namibia Self-Drive Luxury Safari Circuit</div>
         <div class="dt-is-card-desc">Uncover Namibia’s hidden gems on an 18-day self-drive safari, exploring remote landscapes, wildlife havens, and cultural treasures.</div>
+        <div class="dt-price-display dt-val-4800">
+          <div class="dt-price-main">From €4,800 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
       </div>
-      <div class="dt-is-card-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
     <!-- 4. 10-Day Honeymoon -->
-    <a class="dt-is-card dt-card-4"
-       href="component_34.html" target="_blank">
+    <a class="dt-is-card dt-card-4" href="https://wetu.com/ItineraryOutputs/Discovery/f959961b-5ea6-43dc-b713-5a2fb0928eb1?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank">
       <div class="dt-is-thumb">
         <img src="https://desert-tracks.com/wp-content/uploads/2025/11/divava-1.jpg" alt="10-Day Honeymoon" loading="lazy" />
       </div>
@@ -191,15 +224,16 @@
         <div class="dt-is-card-label">10 Days · Luxury Fly-In</div>
         <div class="dt-is-card-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</div>
         <div class="dt-is-card-desc">Journey from Namibia’s deserts to Victoria Falls on an 18 -day self-drive safari, filled with wildlife, culture, and unforgettable landscapes.</div>
+        <div class="dt-price-display dt-val-6900">
+          <div class="dt-price-main">From €6,900 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
       </div>
-      <div class="dt-is-card-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
     <!-- 5. 10-Day Ultra-Luxury North -->
-    <a class="dt-is-card dt-card-5"
-       href="component_35.html" target="_blank">
+    <a class="dt-is-card dt-card-5" href="https://wetu.com/ItineraryOutputs/Discovery/487e81b5-4faf-4bdc-88f7-d28a3b229cdf?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank">
       <div class="dt-is-thumb">
         <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bc95b679-56fc-4800-b602-5d040fe0cced-png-1.webp" alt="Ultra-Luxury North" loading="lazy" />
       </div>
@@ -207,15 +241,16 @@
         <div class="dt-is-card-label">10 Days · Ultra-Luxury</div>
         <div class="dt-is-card-title">10-Day Ultra-Luxury Namibia Safari - North Focus</div>
         <div class="dt-is-card-desc">Track Namibia’s wildlife on an 11-day self-drive safari, exploring Etosha’s game-rich plains, desert landscapes, and unique cultural encounters.</div>
+        <div class="dt-price-display dt-val-7500">
+          <div class="dt-price-main">From €7,500 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
       </div>
-      <div class="dt-is-card-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
     <!-- 6. 10-Day Ultra-Luxury South -->
-    <a class="dt-is-card dt-card-6"
-       href="component_36.html" target="_blank">
+    <a class="dt-is-card dt-card-6" href="https://wetu.com/ItineraryOutputs/Discovery/e3ab6f95-cd77-4d07-943b-45d8257dda6c" target="_blank">
       <div class="dt-is-thumb">
         <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bagatelle-lodge-kalahari-game-ranch-namibia-chalte-on-dune2-1.jpg" alt="Ultra-Luxury South" loading="lazy" />
       </div>
@@ -223,13 +258,72 @@
         <div class="dt-is-card-label">10 Days · Ultra-Luxury</div>
         <div class="dt-is-card-title">10-Day Ultra-Luxury Namibia Safari - South Focus</div>
         <div class="dt-is-card-desc">Journey through Namibia’s south on an 11-day self-drive safari, visiting deserts, canyons, ghost towns, and wide-open landscapes.</div>
+        <div class="dt-price-display dt-val-6800">
+          <div class="dt-price-main">From €6,800 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
       </div>
-      <div class="dt-is-card-arrow">
-        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
   </div><!-- /.dt-is-scroll-col -->
 </div><!-- /.dt-is-layout -->
 
+<script>
+  // DYNAMIC PRICING ENGINE (AGGRESSIVE RENDERING)
+  document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+      var rates = { EUR: 1, USD: 1.08, GBP: 0.85, ZAR: 20.5, NAD: 20.5 };
+      var symbols = { EUR: "€", USD: "$", GBP: "£", ZAR: "R", NAD: "N$" };
+      
+      var currency = "EUR"; 
+      var urlParams = new URLSearchParams(window.location.search);
+      var testCurrency = urlParams.get('currency');
+      
+      if (testCurrency && rates[testCurrency.toUpperCase()]) {
+        currency = testCurrency.toUpperCase();
+      } else {
+        try {
+          var tz = Intl.DateTimeFormat().resolvedOptions().timeZone || "";
+          if (tz.indexOf("America/") !== -1) currency = "USD";
+          else if (tz.indexOf("London") !== -1 || tz.indexOf("Belfast") !== -1) currency = "GBP";
+          else if (tz.indexOf("Windhoek") !== -1 || tz.indexOf("Namibia") !== -1) currency = "NAD";
+          else if (tz.indexOf("Johannesburg") !== -1 || tz.indexOf("Africa/") !== -1) currency = "ZAR";
+          else if (tz.indexOf("Europe/") !== -1) currency = "EUR";
+          else {
+            var lang = navigator.language || '';
+            if (lang.indexOf('GB') !== -1) currency = "GBP";
+            else if (lang.indexOf('US') !== -1) currency = "USD";
+            else if (lang.indexOf('ZA') !== -1) currency = "ZAR";
+            else if (lang.indexOf('NA') !== -1) currency = "NAD";
+          }
+        } catch(e) {}
+      }
+
+      // Aggressively re-render to ensure it ALWAYS writes correctly (even if it's Euros!)
+      var priceElements = document.querySelectorAll('.dt-price-display');
+      priceElements.forEach(function(el) {
+        
+        // Securely pull the price from the indestructible class name
+        var match = el.className.match(/dt-val-(\d+)/);
+        var basePrice = match ? parseInt(match[1], 10) : 0;
+        
+        if (basePrice > 0) {
+          var converted = basePrice * (rates[currency] || 1);
+          var rounded = Math.round(converted / 100) * 100;
+          var formatted = rounded.toLocaleString('en-US');
+
+          el.innerHTML = 
+            '<div class="dt-price-main">' +
+                'From ' + (symbols[currency] || "€") + formatted + ' <span>per person sharing</span>' +
+            '</div>' +
+            '<div class="dt-price-sub">' +
+                'Indicative rate based on low season, subject to availability' +
+            '</div>';
+        }
+      });
+      
+    }, 150);
+  });
+</script>
 </section>
