@@ -6,6 +6,9 @@ import { useState, useEffect } from "react";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
+import ParticleField3D from "@/components/ParticleField3D";
+import CursorGlow from "@/components/CursorGlow";
+
 // Helper for generating deterministic random values for static elements
 const random = (min: number, max: number, seed: number) => {
   const x = Math.sin(seed++) * 10000;
@@ -16,69 +19,6 @@ export default function Home() {
   const router = useRouter();
   const [prompt, setPrompt] = useState("");
   const [isInitializing, setIsInitializing] = useState(false);
-  const [particles, setParticles] = useState<any[]>([]);
-
-  // Dense tracking blob variables
-  const rawMouseX = useMotionValue(0);
-  const rawMouseY = useMotionValue(0);
-  // Extremely smooth delayed lag reaction
-  const smoothMouseX = useSpring(rawMouseX, { stiffness: 20, damping: 25, mass: 1.5 });
-  const smoothMouseY = useSpring(rawMouseY, { stiffness: 20, damping: 25, mass: 1.5 });
-  
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (typeof window === 'undefined') return;
-    // Track exact cursor location in pixels
-    rawMouseX.set(e.clientX);
-    rawMouseY.set(e.clientY);
-  };
-
-  // Generate dynamic tracking blob client-side
-  useEffect(() => {
-    // Initial center safely bounded
-    if (typeof window !== 'undefined') {
-      rawMouseX.set(window.innerWidth / 2);
-      rawMouseY.set(window.innerHeight / 2);
-    }
-
-    const newParticles: any[] = [];
-    const brightColors = [
-      '#FF3366', '#20D2FF', '#FF9933', 
-      '#00FF99', '#FFFF33', '#B833FF',
-      '#FF33CC', '#33FFCC', '#3366FF'
-    ];
-
-    // Massive Antigravity Swirl generating math
-    // 400 particles scattered across a tight radial field
-    for (let i = 0; i < 400; i++) {
-      // Tighter, denser viewport-relative radius
-      const maxRadius = typeof window !== 'undefined' ? window.innerWidth * 0.35 : 600;
-      const radius = Math.pow(random(0, 1, i), 0.5) * maxRadius; 
-      const angle = random(0, Math.PI * 2, i + 100);
-      
-      const startX = Math.cos(angle) * radius;
-      const startY = Math.sin(angle) * radius;
-
-      // Calculate tangent rotation so the "slashes" form a perfect orbital vortex
-      const rotationDeg = (angle * 180) / Math.PI + 90;
-
-      newParticles.push({
-        id: i,
-        x: startX,
-        y: startY,
-        width: random(4, 18, i + 200), // Elongated slashes (Antigravity style)
-        height: random(1, 3, i + 250),
-        rotation: rotationDeg,
-        pulseDuration: random(2, 6, i + 300), 
-        delay: random(0, 3, i + 400),
-        colors: [
-          brightColors[Math.floor(random(0, brightColors.length, i + 500))],
-          brightColors[Math.floor(random(0, brightColors.length, i + 600))],
-          brightColors[Math.floor(random(0, brightColors.length, i + 700))]
-        ]
-      });
-    }
-    setParticles(newParticles);
-  }, []);
 
   const handleInitialize = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,10 +28,7 @@ export default function Home() {
   };
 
   return (
-    <main 
-      onMouseMove={handleMouseMove}
-      className="flex flex-col min-h-screen bg-white overflow-hidden relative font-sans text-gray-900 selection:bg-blue-100"
-    >
+    <main className="flex flex-col min-h-screen bg-white overflow-hidden relative font-sans text-gray-900 selection:bg-blue-100">
       
       {/* Top Navbar matched to layout */}
       <header className="absolute top-0 w-full p-4 md:px-8 py-5 flex justify-between items-center z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -123,50 +60,11 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Full-width continuous Blob tracking container */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden mix-blend-multiply opacity-90">
-        {/* Tracking Colorful Circle Blob bounded strictly to Window */}
-        <motion.div
-          className="absolute w-0 h-0"
-          style={{ 
-            left: 0, 
-            top: 0,
-            x: smoothMouseX, // Exact viewport cursor x offset
-            y: smoothMouseY  // Exact viewport cursor y offset
-          }}
-          animate={{ rotateZ: 360 }}
-          transition={{ duration: 70, repeat: Infinity, ease: 'linear' }}
-        >
-          {particles.map((p) => (
-            <motion.div
-              key={p.id}
-              className="absolute"
-              style={{
-                width: `${p.width}px`,
-                height: `${p.height}px`,
-                left: `${p.x}px`,
-                top: `${p.y}px`,
-                // Teardrop shape!
-                borderRadius: '50% 50% 50% 2px',
-                transform: `rotate(${p.rotation}deg)`
-              }}
-              animate={{
-                opacity: [0.1, 0.9, 0.1], // Vivid glowing
-                backgroundColor: p.colors,
-                // Alive floating wiggle!
-                x: [0, random(-8, 8, p.id * 10), 0], 
-                y: [0, random(-8, 8, p.id * 20), 0]
-              }}
-              transition={{
-                duration: p.pulseDuration,
-                repeat: Infinity,
-                delay: p.delay,
-                ease: "easeInOut"
-              }}
-            />
-          ))}
-        </motion.div>
-      </div>
+      {/* Ultra Premium Interactive Canvas Particle Field with Z-Depth and Fluid Orbital Physics */}
+      <ParticleField3D />
+      
+      {/* Cinematic Mouse Following Aura */}
+      <CursorGlow />
 
       {/* Hero Section */}
       <div className="relative flex-1 flex flex-col items-center justify-center pt-32 pb-20 px-6 max-w-5xl mx-auto w-full z-10 text-center">
