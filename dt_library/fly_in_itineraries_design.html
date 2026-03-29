@@ -1,10 +1,11 @@
 <!-- ============================================================
-     DESERT TRACKS – FLY-IN ITINERARIES BLOCK (3 ITEMS)
+     DESERT TRACKS – FLY-IN ITINERARIES BLOCK (6 ITEMS)
      Includes: Sticky Hero, 100% CSS ONLY HOVER & Dynamic Pricing
      ============================================================ -->
-<section id="dt-sds-split">
+<section id="dt-flyin-split">
 <style>
-  #dt-sds-split {
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  #dt-flyin-split {
     --dt-orange: #ff6e00;
     --dt-dark:   #1a1a18;
     --dt-sand:   #f9f9f4;
@@ -18,6 +19,8 @@
     left: 50%;
     transform: translateX(-50%);
   }
+
+  /* ── HEADING ─────────────────────────────────────────────── */
   .dt-is-heading { text-align: center; padding: 72px 40px 52px; }
   .dt-is-heading h2 {
     font-family: 'Playfair Display', serif;
@@ -28,7 +31,11 @@
   }
   .dt-is-heading p { font-size: 1rem; color: var(--dt-muted); max-width: 480px; margin: 0 auto; }
   .dt-is-rule { display: block; width: 48px; height: 2px; background: var(--dt-orange); margin: 18px auto 0; }
+
+  /* ── SPLIT LAYOUT ────────────────────────────────────────── */
   .dt-is-layout { display: flex; align-items: flex-start; width: 100%; padding: 0 0 80px; gap: 0; }
+
+  /* ── LEFT: Sticky hero ───────────────────────────────────── */
   .dt-is-sticky-col {
     flex: 0 0 50%; position: sticky; top: 90px; height: calc(100vh - 130px);
     max-height: 860px; border-radius: 0; overflow: hidden;
@@ -41,15 +48,21 @@
   .hero-hover { z-index: 2; }
   .dt-is-sticky-badge {
     position: absolute; z-index: 10; bottom: 28px; left: 28px;
-    background: rgba(26,26,24,0.82); backdrop-filter: blur(10px);
+    background: rgba(26,26,24,0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
     color: #fff; font-size: 0.67rem; letter-spacing: 3px; text-transform: uppercase; padding: 10px 20px;
   }
 
+  /* ── CSS ONLY HOVER LOGIC ───────────────────── */
   .dt-is-layout:has(.dt-card-1:hover) .hero-1 { opacity: 1; }
   .dt-is-layout:has(.dt-card-2:hover) .hero-2 { opacity: 1; }
   .dt-is-layout:has(.dt-card-3:hover) .hero-3 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-4:hover) .hero-4 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-5:hover) .hero-5 { opacity: 1; }
+  .dt-is-layout:has(.dt-card-6:hover) .hero-6 { opacity: 1; }
 
+  /* ── RIGHT: Scrollable cards ─────────────────────────────── */
   .dt-is-scroll-col { flex: 1; display: flex; flex-direction: column; padding: 0 56px; }
+
   .dt-is-card {
     display: flex; align-items: center; gap: 24px; padding: 28px 0;
     border-bottom: 1px solid var(--dt-border); text-decoration: none;
@@ -57,13 +70,30 @@
   }
   .dt-is-card:first-child { border-top: 1px solid var(--dt-border); }
   .dt-is-card:hover { background: rgba(255,110,0,0.04); }
+
   .dt-is-thumb { flex: 0 0 110px; height: 82px; overflow: hidden; border-radius: 2px; }
   .dt-is-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
   .dt-is-card:hover .dt-is-thumb img { transform: scale(1.08); }
+
   .dt-is-card-body { flex: 1; min-width: 0; }
-  .dt-is-card-label { font-size: 0.67rem; letter-spacing: 2.5px; text-transform: uppercase; color: var(--dt-orange); margin-bottom: 7px; font-weight: 500; }
-  .dt-is-card-title { font-family: 'Playfair Display', serif; font-size: clamp(0.98rem, 1.5vw, 1.18rem); font-weight: 400; color: var(--dt-dark); line-height: 1.35; margin-bottom: 8px; }
-  .dt-is-card-desc { font-size: 0.83rem; color: var(--dt-muted); line-height: 1.55; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .dt-is-card-label {
+    font-size: 0.67rem; letter-spacing: 2.5px; text-transform: uppercase;
+    color: var(--dt-orange); margin-bottom: 7px; font-weight: 500;
+  }
+  .dt-is-card-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(0.98rem, 1.5vw, 1.18rem);
+    font-weight: 400; color: var(--dt-dark); line-height: 1.35; margin-bottom: 6px;
+  }
+  .dt-is-card-desc {
+    font-size: 0.83rem; color: var(--dt-muted); line-height: 1.55; margin-bottom: 6px;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  /* ✨ FLY-IN LIST PRICE STYLE WITH NEW FORMAT ✨ */
+  .dt-price-display { display: block; margin-top: 12px; }
+  .dt-price-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; color: var(--dt-dark); }
+  .dt-price-main span { font-family: 'Open Sans', sans-serif; font-size: 0.8rem; opacity: 0.8; margin-left: 4px; font-weight: 400; }
+  .dt-price-sub { font-family: 'Open Sans', sans-serif; font-size: 0.68rem; color: var(--dt-muted); margin-top: 4px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
 
   .dt-is-card-arrow {
     flex: 0 0 auto; width: 40px; height: 40px; border: 1px solid var(--dt-border); border-radius: 50%;
@@ -73,11 +103,7 @@
   .dt-is-card-arrow svg { width: 15px; height: 15px; stroke: var(--dt-muted); fill: none; transition: stroke 0.3s; }
   .dt-is-card:hover .dt-is-card-arrow svg { stroke: #fff; }
 
-  .dt-price-display { display: block; margin-top: 12px; }
-  .dt-price-main { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 500; color: var(--dt-dark); }
-  .dt-price-main span { font-family: 'Open Sans', sans-serif; font-size: 0.8rem; opacity: 0.8; margin-left: 4px; font-weight: 400; }
-  .dt-price-sub { font-family: 'Open Sans', sans-serif; font-size: 0.68rem; color: var(--dt-muted); margin-top: 4px; opacity: 0.7; text-transform: uppercase; letter-spacing: 1px; }
-
+  /* ── MOBILE ──────────────────────────────────────────────── */
   @media (max-width: 900px) {
     .dt-is-layout { flex-direction: column; padding: 0 0 60px; gap: 0; }
     .dt-is-sticky-col { display: none; }
@@ -89,82 +115,163 @@
   }
 </style>
 
+<!-- HEADING -->
 <div class="dt-is-heading">
-  <h2>Our Premium<br>Fly-In Safaris</h2>
+  <h2>Explore Namibia's Top<br>Fly-In Itineraries</h2>
   <span class="dt-is-rule"></span>
 </div>
 
+<!-- SPLIT LAYOUT -->
 <div class="dt-is-layout">
 
-  <!-- LEFT: Sticky hero -->
+  <!-- ══ LEFT: Sticky hero ══ -->
   <div class="dt-is-sticky-col">
-    <!-- DEFAULT (Using your thatched roof image) -->
-    <img class="dt-is-sticky-img default-hero" src="https://desert-tracks.com/wp-content/uploads/2026/03/woven_lamp_lodge.jpeg" alt="Fly In Safari" />
+    <img class="dt-is-sticky-img default-hero" src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="Namibia Fly In" />
     
-    <!-- HOVER LAYERS -->
-    <img class="dt-is-sticky-img hero-hover hero-1" src="https://desert-tracks.com/wp-content/uploads/2025/11/desert-lodge.jpeg" alt="" />
-    <img class="dt-is-sticky-img hero-hover hero-2" src="https://desert-tracks.com/wp-content/uploads/2026/03/woven_lamp_lodge.jpeg" alt="" />
-    <img class="dt-is-sticky-img hero-hover hero-3" src="https://desert-tracks.com/wp-content/uploads/2025/11/skeleton-coast.jpeg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-1" src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-2" src="https://desert-tracks.com/wp-content/uploads/2025/04/Onguma-Camp-Kala-_1-scaled.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-3" src="https://desert-tracks.com/wp-content/uploads/2025/09/01hoanibvalley-tentexterior.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-4" src="https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Little-Kulala_3-scaled.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-5" src="https://desert-tracks.com/wp-content/uploads/2025/09/wildernessserracafema_6.jpg" alt="" />
+    <img class="dt-is-sticky-img hero-hover hero-6" src="https://desert-tracks.com/wp-content/uploads/2025/09/kipwe1.jpg" alt="" />
 
     <span class="dt-is-sticky-badge">Desert Tracks · Fly-In Itineraries</span>
   </div>
 
-  <!-- RIGHT: Scrollable cards -->
+  <!-- ══ RIGHT: Scrollable itinerary list ══ -->
   <div class="dt-is-scroll-col">
 
-    <!-- 1. 7-Day Namibia Desert, Dune & Wildlife Fly-In -->
-    <a class="dt-is-card dt-card-1" href="https://wetu.com/ItineraryOutputs/Discovery/de75c783-8643-4e46-b0d6-114fbcd3f137" target="_blank">
-      <div class="dt-is-thumb"><img src="https://desert-tracks.com/wp-content/uploads/2025/11/desert-lodge.jpeg" alt="7 Day Fly In" loading="lazy" /></div>
+    <!-- 1. 7-Day Namibia Desert -->
+    <a class="dt-is-card dt-card-1"
+       href="https://wetu.com/ItineraryOutputs/Discovery/de75c783-8643-4e46-b0d6-114fbcd3f137" 
+       target="_blank" rel="noopener noreferrer" 
+       onclick="gtag('event', 'itinerary_click', { 'itinerary_name': '7-Day Namibia Desert Dune' });">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="7-Day Fly-In" loading="lazy" />
+      </div>
       <div class="dt-is-card-body">
         <div class="dt-is-card-label">7 Days · Fly-In Safari</div>
-        <div class="dt-is-card-title">7-Day Namibia Desert, Dune & Wildlife Fly-In Safari</div>
-        <div class="dt-is-card-desc">Fly in uncompromised luxury between Sossusvlei's red dunes, Damaraland's rugged terrain, and Etosha's wildlife.</div>
-        <div class="dt-price-display dt-val-8048">
+        <div class="dt-is-card-title">7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari</div>
+        <div class="dt-is-card-desc">Fly in uncompromised luxury between Sossusvlei’s red dunes, Damaraland’s desert wilds, and the incredible wildlife of Etosha.</div>
+        <div class="dt-price-display dt-fly-val-8048">
           <div class="dt-price-main">From €8,048 <span>per person sharing</span></div>
           <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
         </div>
       </div>
-      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
-    <!-- 2. 12-Day Namibia in Style - Luxury Fly-In -->
-    <a class="dt-is-card dt-card-2" href="https://wetu.com/ItineraryOutputs/Discovery/cf8f5ef9-4740-4976-90d5-e644b2e25b4b" target="_blank">
-      <div class="dt-is-thumb"><img src="https://desert-tracks.com/wp-content/uploads/2026/03/woven_lamp_lodge.jpeg" alt="12 Day Fly In" loading="lazy" /></div>
+    <!-- 2. 12-Day Namibia in Style -->
+    <a class="dt-is-card dt-card-2"
+       href="https://wetu.com/ItineraryOutputs/Discovery/4db02e36-a80a-4486-987a-251d707016c0" 
+       target="_blank" rel="noopener noreferrer"
+       onclick="gtag('event', 'itinerary_click', { 'itinerary_name': '12-Day Namibia in Style' });">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Onguma-Camp-Kala-_1-scaled.jpg" alt="12-Day Fly-In" loading="lazy" />
+      </div>
       <div class="dt-is-card-body">
         <div class="dt-is-card-label">12 Days · Luxury Fly-In</div>
-        <div class="dt-is-card-title">12-Day Namibia in Style - Luxury Fly-In Safari</div>
-        <div class="dt-is-card-desc">The ultimate aerial exploration. Soar effortlessly between bespoke, remote accommodations capturing the heart of Namibia.</div>
-        <div class="dt-price-display dt-val-13902">
+        <div class="dt-is-card-title">12-Day Namibia in Style – Luxury Fly-In Safari</div>
+        <div class="dt-is-card-desc">The ultimate aerial exploration. Soar effortlessly between bespoke, remote camps spanning from the Skeleton Coast to Okavango's wetlands.</div>
+        <div class="dt-price-display dt-fly-val-13902">
           <div class="dt-price-main">From €13,902 <span>per person sharing</span></div>
           <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
         </div>
       </div>
-      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
-    <!-- 3. 10-Day Highlights of Namibia - Luxury Fly-In & Road -->
-    <a class="dt-is-card dt-card-3" href="https://wetu.com/ItineraryOutputs/Discovery/4db02e36-a80a-4486-987a-251d70701630" target="_blank">
-      <div class="dt-is-thumb"><img src="https://desert-tracks.com/wp-content/uploads/2025/11/skeleton-coast.jpeg" alt="10 Day Fly In" loading="lazy" /></div>
+    <!-- 3. 10-Day Highlights of Namibia -->
+    <a class="dt-is-card dt-card-3"
+       href="https://wetu.com/ItineraryOutputs/Discovery/cf8f5ef9-4740-4976-90d5-e644b2e25b4b" 
+       target="_blank" rel="noopener noreferrer"
+       onclick="gtag('event', 'itinerary_click', { 'itinerary_name': '10-Day Highlights of Namibia' });">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/09/01hoanibvalley-tentexterior.jpg" alt="10-Day Road and Fly" loading="lazy" />
+      </div>
       <div class="dt-is-card-body">
-        <div class="dt-is-card-label">10 Days · Fly & Drive</div>
-        <div class="dt-is-card-title">10-Day Highlights of Namibia - Luxury Fly-In & Road Safari</div>
-        <div class="dt-is-card-desc">Journey above the mist-shrouded Skeleton Coast, touching down for an incredible land expedition through iconic terrain.</div>
-        <div class="dt-price-display dt-val-7073">
+        <div class="dt-is-card-label">10 Days · Fly &amp; Drive</div>
+        <div class="dt-is-card-title">10-Day Highlights of Namibia – Luxury Fly-In &amp; Road Safari</div>
+        <div class="dt-is-card-desc">Journey above the mist-shrouded Skeleton Coast, touching down for an unforgettable tier-one wildlife experience in the heart of Etosha.</div>
+        <div class="dt-price-display dt-fly-val-7073">
           <div class="dt-price-main">From €7,073 <span>per person sharing</span></div>
           <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
         </div>
       </div>
-      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
     </a>
 
-  </div>
-</div>
+    <!-- 4. 10-Day Honeymoon -->
+    <a class="dt-is-card dt-card-4"
+       href="https://wetu.com/ItineraryOutputs/Discovery/F959961B-5EA6-43DC-B713-5A2FB0928EB1" 
+       target="_blank" rel="noopener noreferrer"
+       onclick="gtag('event', 'itinerary_click', { 'itinerary_name': '10-Day Honeymoon' });">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Little-Kulala_3-scaled.jpg" alt="10-Day Honeymoon" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">10 Days · Honeymoon Edition</div>
+        <div class="dt-is-card-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</div>
+        <div class="dt-is-card-desc">A meticulously curated, deeply romantic flying adventure, revealing Namibia's most dramatic landscapes specifically tailored for couples.</div>
+        <div class="dt-price-display dt-fly-val-8536">
+          <div class="dt-price-main">From €8,536 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
+      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </a>
+
+    <!-- 5. 14-Day Drive & Fly Photographic -->
+    <a class="dt-is-card dt-card-5"
+       href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e" 
+       target="_blank" rel="noopener noreferrer"
+       onclick="gtag('event', 'itinerary_click', { 'itinerary_name': '14-Day Drive and Fly' });">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/09/wildernessserracafema_6.jpg" alt="14-Day Photo Safari" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">14 Days · Fly &amp; Drive</div>
+        <div class="dt-is-card-title">14-Day Luxury Namibia Drive &amp; Fly Photographic Safari</div>
+        <div class="dt-is-card-desc">An expansive fly-in circuit capturing Namibia's most iconic horizons, blending ultimate comfort with the country's raw natural beauty.</div>
+        <div class="dt-price-display dt-fly-val-11707">
+          <div class="dt-price-main">From €11,707 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
+      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </a>
+
+    <!-- 6. 8-Day Namibia in Style -->
+    <a class="dt-is-card dt-card-6"
+       href="https://wetu.com/ItineraryOutputs/Discovery/2084D921-60AB-4B0F-8832-E857FD4D0E35" 
+       target="_blank" rel="noopener noreferrer"
+       onclick="gtag('event', 'itinerary_click', { 'itinerary_name': '8-Day Namibia in Style' });">
+      <div class="dt-is-thumb">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/09/kipwe1.jpg" alt="8-Day Fly-In" loading="lazy" />
+      </div>
+      <div class="dt-is-card-body">
+        <div class="dt-is-card-label">8 Days · Luxury Fly-In</div>
+        <div class="dt-is-card-title">8-Day Namibia in Style – Luxury Fly-In Safari</div>
+        <div class="dt-is-card-desc">A fast-paced yet exceptionally opulent journey, flying quickly into Namibia’s premier wilderness destinations.</div>
+        <div class="dt-price-display dt-fly-val-6585">
+          <div class="dt-price-main">From €6,585 <span>per person sharing</span></div>
+          <div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>
+        </div>
+      </div>
+      <div class="dt-is-card-arrow"><svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </a>
+
+  </div><!-- /.dt-is-scroll-col -->
+</div><!-- /.dt-is-layout -->
 
 <script>
+  // DYNAMIC PRICING ENGINE
   document.addEventListener("DOMContentLoaded", function() {
     setTimeout(function() {
+      // Exchange rates relative to EUR
       var rates = { EUR: 1, USD: 1.08, GBP: 0.85, ZAR: 20.5, NAD: 20.5 };
       var symbols = { EUR: "€", USD: "$", GBP: "£", ZAR: "R", NAD: "N$" };
+      
       var currency = "EUR"; 
       var urlParams = new URLSearchParams(window.location.search);
       var testCurrency = urlParams.get('currency');
@@ -179,28 +286,26 @@
           else if (tz.indexOf("Windhoek") !== -1 || tz.indexOf("Namibia") !== -1) currency = "NAD";
           else if (tz.indexOf("Johannesburg") !== -1 || tz.indexOf("Africa/") !== -1) currency = "ZAR";
           else if (tz.indexOf("Europe/") !== -1) currency = "EUR";
-          else {
-            var lang = navigator.language || '';
-            if (lang.indexOf('GB') !== -1) currency = "GBP";
-            else if (lang.indexOf('US') !== -1) currency = "USD";
-            else if (lang.indexOf('ZA') !== -1) currency = "ZAR";
-            else if (lang.indexOf('NA') !== -1) currency = "NAD";
-          }
         } catch(e) {}
       }
 
-      var priceElements = document.querySelectorAll('#dt-sds-split .dt-price-display');
+      var priceElements = document.querySelectorAll('#dt-flyin-split .dt-price-display');
       priceElements.forEach(function(el) {
-        var match = el.className.match(/dt-val-(\d+)/);
+        var match = el.className.match(/dt-fly-val-(\d+)/);
         var basePrice = match ? parseInt(match[1], 10) : 0;
         
         if (basePrice > 0) {
           var converted = basePrice * (rates[currency] || 1);
           var rounded = Math.round(converted / 100) * 100;
           var formatted = rounded.toLocaleString('en-US');
+
           el.innerHTML = 
-            '<div class="dt-price-main">From ' + (symbols[currency] || "€") + formatted + ' <span>per person sharing</span></div>' +
-            '<div class="dt-price-sub">Indicative rate based on low season, subject to availability</div>';
+            '<div class="dt-price-main">' +
+                'From ' + (symbols[currency] || "€") + formatted + ' <span>per person sharing</span>' +
+            '</div>' +
+            '<div class="dt-price-sub">' +
+                'Indicative rate based on low season, subject to availability' +
+            '</div>';
         }
       });
     }, 150);
