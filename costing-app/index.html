@@ -158,7 +158,7 @@
             </div>
 
             <!-- Meta Data Row Settings -->
-            <div class="glass p-6 lg:p-8 mb-4 mt-8 rounded-[1.5rem] w-full mx-auto relative overflow-hidden transition-all duration-300">
+            <div class="bg-[#F1EEF4] border border-white/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] p-6 lg:p-8 mb-4 mt-8 rounded-[1.5rem] w-full mx-auto relative overflow-hidden transition-all duration-300">
                 <div class="absolute top-0 right-0 w-64 h-64 bg-[#d87a4d] opacity-[0.03] rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     <div class="flex flex-col gap-2 relative">
@@ -325,11 +325,11 @@
 
             <div class="w-full space-y-8 shrink-0 z-10">
                 <!-- Itinerary Builder -->
-                <div class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 overflow-hidden">
+                <div class="bg-[#F4F5F6] rounded-[1.25rem] shadow-sm border border-[#e5e7e9] overflow-hidden">
                     <div class="flex justify-between items-center p-6 border-b border-gray-50">
                         <h2 class="text-xl font-bold text-gray-900 font-heading">Itinerary Breakdown</h2>
                         <button @click="addDay"
-                            class="bg-gray-900 text-white px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase hover:bg-black transition shadow-sm btn-premium">
+                            class="bg-[#79b4ff] hover:bg-[#63a0ec] text-white px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
                             + Add Day
                         </button>
                     </div>
@@ -356,6 +356,14 @@
                                                 class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
                                                 :class="isPaxValid ? 'border-gray-200 bg-white' : 'border-red-400 bg-red-50 text-red-700'"
                                                 title="Single Pax">
+                                        </div>
+                                    </th>
+                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Child PP
+                                        <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
+                                            <input type="number" v-model.number="childPax" autocomplete="off"
+                                                class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
+                                                :class="isPaxValid ? 'border-gray-200 bg-white' : 'border-red-400 bg-red-50 text-red-700'"
+                                                title="Child Pax">
                                         </div>
                                     </th>
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Vehicle</th>
@@ -451,6 +459,13 @@
                                             class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
                                             singlePax }} Pax Total:
                                             <span class="text-gray-700">{{format(storeTotals.single * singlePax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.child || 0) }}<br>
+                                        <span v-if="childPax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            childPax }} Pax Total:
+                                            <span class="text-gray-700">{{format((storeTotals.child || 0) * childPax)}}</span></span>
                                     </td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.vehicle) }}</td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideFee) }}</td>
@@ -557,7 +572,7 @@
 
                 <!-- Botswana Block Moved Above -->
                 <div
-                    class="flex flex-col gap-4 bg-white p-6 rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.04)] border border-gray-100 border-l-[6px] border-l-dt-orange">
+                    class="flex flex-col gap-4 bg-[#E2F1E8] p-6 rounded-[1.25rem] shadow-sm border border-[#d2e7d9]">
                     <label
                         class="text-sm font-black text-gray-900 uppercase tracking-widest w-full leading-tight flex items-center justify-between">
                         <div class="flex flex-col gap-1 text-[13px]">Botswana Safari
@@ -570,7 +585,7 @@
                                 placeholder="e.g. Under One Botswana...">
                         </div>
                     </label>
-                    <div class="flex gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="relative w-full">
                             <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Sharing PP</span>
                             <currency-input v-model="botswanaDoublePP"
@@ -580,11 +595,11 @@
                         <div class="relative w-full">
                             <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Single PP</span>
                             <currency-input v-model="botswanaSinglePP"
-                                        :custom-class="'w-20 dt-input text-xs text-right'"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
                                         placeholder="0.00"></currency-input>
                         </div>
-                        <div class="flex flex-col">
-                            <label class="text-[9px] uppercase font-bold tracking-wider text-gray-500 mb-1">CHILD PP</label>
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Child PP</span>
                             <currency-input v-model="botswanaChildPP"
                                         :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
                                         placeholder="0.00"></currency-input>
