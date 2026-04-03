@@ -328,6 +328,35 @@
         <div class="flex flex-col gap-6 relative">
 
             <div class="w-full space-y-8 shrink-0 z-10">
+
+                <!-- Pax Groups UI -->
+                <div class="bg-white rounded-2xl shadow-sm border border-[#e5e7e9] p-5">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="font-bold text-gray-800 tracking-wide uppercase text-sm">Passenger Configuration</h3>
+                        <button @click="addGroup" class="px-4 py-1.5 bg-gray-900 border border-gray-900 shadow-sm text-white text-[10px] uppercase font-bold rounded hover:bg-dt-orange hover:border-dt-orange transition-colors">+ Add Group</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div v-for="(g, idx) in paxGroups" :key="g.id" class="bg-gray-50 border text-center border-gray-200 rounded-xl p-4 relative shadow-sm transition-all hover:border-gray-300">
+                            <button v-if="paxGroups.length > 1" @click="removeGroup(idx)" class="absolute top-2 right-2.5 text-gray-400 hover:text-red-500 font-bold transition-colors">✕</button>
+                            <input v-model="g.name" class="font-bold text-sm bg-transparent border-b border-gray-200 outline-none w-3/4 mb-4 pb-1 text-center text-gray-800 focus:border-dt-orange" placeholder="e.g. Group 1" />
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Double</label>
+                                <input type="number" v-model.number="g.double" step="2" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Single</label>
+                                <input type="number" v-model.number="g.single" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Child</label>
+                                <input type="number" v-model.number="g.child" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Itinerary Builder -->
                 <div class="bg-[#F4F5F6] rounded-[1.25rem] shadow-sm border border-[#e5e7e9] overflow-hidden">
                     <div class="flex justify-between items-center p-6 border-b border-gray-50">
@@ -353,30 +382,9 @@
                                     <th class="px-3 py-4 w-[60px] text-center font-bold">Nights</th>
                                     <th class="px-3 py-4 w-48 text-left font-bold">Region & Lodge</th>
                                     <th class="px-3 py-4 w-[90px] text-center font-bold">Pricelist</th>
-                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Double PP
-                                        <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
-                                            <input type="number" v-model.number="doublePax" step="2" min="0" autocomplete="off"
-                                                class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
-                                                :class="isPaxValid ? 'border-gray-200 bg-white' : 'border-red-400 bg-red-50 text-red-700'"
-                                                title="Double Pax (Multiples of 2)">
-                                        </div>
-                                    </th>
-                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Single PP
-                                        <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
-                                            <input type="number" v-model.number="singlePax" autocomplete="off"
-                                                class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
-                                                :class="isPaxValid ? 'border-gray-200 bg-white' : 'border-red-400 bg-red-50 text-red-700'"
-                                                title="Single Pax">
-                                        </div>
-                                    </th>
-                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Child PP
-                                        <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
-                                            <input type="number" v-model.number="childPax" autocomplete="off"
-                                                class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
-                                                :class="isPaxValid ? 'border-gray-200 bg-white' : 'border-red-400 bg-red-50 text-red-700'"
-                                                title="Child Pax">
-                                        </div>
-                                    </th>
+                                                                        <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Double PP</th>
+                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Single PP</th>
+                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Child PP</th>
                                     <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Vehicle</th>
                                     <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Fee</th>
                                     <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Acc.</th>
@@ -640,17 +648,13 @@
                     </div>
 
                     <div class="p-5 space-y-3.5 text-[13px] bg-white">
-                        <div v-if="storeTotals.group > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
-                                class="text-gray-500 font-medium">Double Group <span class="text-[10px] bg-gray-100 px-1 rounded text-gray-400 ml-1">{{doublePax}}x</span></span><span
-                                class="font-bold text-gray-900" :class="{'opacity-50 line-through' : doublePax === 0}">{{ format(storeTotals.group * Math.max(1, doublePax)) }}</span></div>
-                        <div v-if="storeTotals.single > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
-                                class="text-gray-500 font-medium">Single Group <span class="text-[10px] bg-gray-100 px-1 rounded text-gray-400 ml-1">{{singlePax}}x</span></span><span
-                                class="font-bold text-gray-900" :class="{'opacity-50 line-through' : singlePax === 0}">{{ format(storeTotals.single * Math.max(1, singlePax)) }}</span>
-                        </div>
-                        <div v-if="storeTotals.child > 0" class="flex justify-between items-center pb-2 border-b border-gray-100">
-                            <span
-                                class="text-gray-500 font-medium">Child Group <span class="text-[10px] bg-gray-100 px-1 rounded text-gray-400 ml-1">{{childPax}}x</span></span><span
-                                class="font-bold text-gray-900" :class="{'opacity-50 line-through' : childPax === 0}">{{ format(storeTotals.child * Math.max(1, childPax)) }}</span>
+                                                <div v-for="g in paxGroups" :key="g.id" v-show="parseInt(g.double) > 0 || parseInt(g.single) > 0 || parseInt(g.child) > 0" class="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 font-medium">{{ g.name }} 
+                                <span v-if="parseInt(g.double) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.double}}x DBL</span>
+                                <span v-if="parseInt(g.single) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.single}}x SGL</span>
+                                <span v-if="parseInt(g.child) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.child}}x CHD</span>
+                            </span>
+                            <span class="font-bold text-gray-900">{{ format((storeTotals.group * Math.max(0, parseInt(g.double) || 0)) + (storeTotals.single * Math.max(0, parseInt(g.single) || 0)) + (storeTotals.child * Math.max(0, parseInt(g.child) || 0))) }}</span>
                         </div>
                         <div v-if="storeTotals.vehicle > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
                                 class="text-gray-500 font-medium">Vehicle Hire</span><span
@@ -930,10 +934,7 @@
                     regions: regionsDb,
                     arrivalDate: '',
                     globalSeason: 'low',
-                    numPax: 2,
-                    doublePax: 2,
-                    singlePax: 0,
-                    childPax: 0,
+                    paxGroups: [{ id: 1, name: 'Group 1', double: 2, single: 0, child: 0 }],
                     botswanaDoublePP: 0,
                     botswanaSinglePP: 0, botswanaChildPP: 0,
                     fuelDistance: 2000,
@@ -983,6 +984,10 @@
                     });
                     return dates;
                 },
+                doublePax() { return this.paxGroups.reduce((s, g) => s + (parseInt(g.double) || 0), 0); },
+                singlePax() { return this.paxGroups.reduce((s, g) => s + (parseInt(g.single) || 0), 0); },
+                childPax() { return this.paxGroups.reduce((s, g) => s + (parseInt(g.child) || 0), 0); },
+                numPax() { return this.doublePax + this.singlePax + this.childPax; },
                 isPaxValid() {
                     return (Number(this.doublePax || 0) + Number(this.singlePax || 0) + Number(this.childPax || 0)) === Number(this.numPax || 0);
                 },
@@ -1054,8 +1059,11 @@
                 stoTotal() {
                     const t = this.storeTotals;
                     let total = 0;
-                    total += (t.group * Math.max(0, this.doublePax));
-                    total += (t.single * Math.max(0, this.singlePax)) + (t.child * Math.max(0, this.childPax));
+                    this.paxGroups.forEach(g => {
+                        total += (t.group * Math.max(0, parseInt(g.double) || 0));
+                        total += (t.single * Math.max(0, parseInt(g.single) || 0));
+                        total += (t.child * Math.max(0, parseInt(g.child) || 0));
+                    });
                     total += t.vehicle + t.guideFee + t.guideAcc + t.flights;
                     total += this.calculatedFuel + this.extrasTotal;
                     total += this.activitiesTotal;
@@ -1156,6 +1164,13 @@
                         if (!day.child) day.child = rates.child || 0;
                     }
                 },
+                addGroup() {
+                    const maxId = this.paxGroups.reduce((max, g) => Math.max(max, g.id), 0);
+                    this.paxGroups.push({ id: maxId + 1, name: `Group ${maxId + 1}`, double: 2, single: 0, child: 0 });
+                },
+                removeGroup(index) {
+                    this.paxGroups.splice(index, 1);
+                },
                 addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
                 removeDay(index) { this.itinerary.splice(index, 1); },
                 addActivity() { this.activities.push({ name: '', rate: 0, isPerPax: true }); },
@@ -1210,10 +1225,7 @@
                         quoteLabel: this.quoteLabel,
                         agentName: this.agentName,
                         botswanaSupplier: this.botswanaSupplier,
-                        numPax: this.numPax,
-                        doublePax: this.doublePax,
-                        singlePax: this.singlePax,
-                        childPax: this.childPax,
+                        paxGroups: JSON.parse(JSON.stringify(this.paxGroups)),
                         botswanaDoublePP: this.botswanaDoublePP,
                         botswanaSinglePP: this.botswanaSinglePP,
                         fuelDistance: this.fuelDistance,
