@@ -399,9 +399,9 @@
                                         <div v-if="rowDates[index]" class="text-[9px] text-gray-400 font-bold mt-1 tracking-wider uppercase">
                                             {{ new Date(rowDates[index]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }}
                                         </div>
-                                        <div v-if="day.lodge" class="text-[8px] font-black mt-0.5 uppercase tracking-widest" :class="getSeason(index) === 'high' ? 'text-dt-orange' : 'text-blue-400'">
+                                        <button v-if="day.lodge" @click="toggleManualSeason(day, index)" class="text-[8px] font-black mt-0.5 uppercase tracking-widest px-1 py-0.5 rounded cursor-pointer hover:bg-gray-100 border border-transparent hover:border-gray-200 transition-colors w-full" :class="getSeason(index) === 'high' ? 'text-dt-orange' : 'text-blue-400'" title="Click to manually toggle season">
                                             {{ getSeason(index) === 'high' ? 'PEAK' : 'OFF PEAK' }}
-                                        </div>
+                                        </button>
                                     </td>
                                     <td class="px-3 py-2 flex flex-col gap-1 min-w-[200px]">
                                         <select v-model="day.region" @change="day.lodge=''"
@@ -942,8 +942,8 @@
                     currentPdfUrl: null,
                     extras: [],
                     itinerary: [
-                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '' },
-                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '' },
+                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                     ],
                     storedLodgeRates: {}
                 }
@@ -1120,11 +1120,18 @@
                     }
                 },
                 getSeason(index) {
+                    const day = this.itinerary[index];
+                    if (day && day.manualSeason) return day.manualSeason;
                     if (this.arrivalDate && this.rowDates[index]) {
                         const month = this.rowDates[index].getMonth() + 1;
                         return (month >= 7 && month <= 10) ? 'high' : 'low';
                     }
                     return this.globalSeason || 'low';
+                },
+                toggleManualSeason(day, index) {
+                    const current = this.getSeason(index);
+                    day.manualSeason = current === 'high' ? 'low' : 'high';
+                    this.refreshRates();
                 },
                 refreshRates() {
                     this.itinerary.forEach((day, i) => {
@@ -1149,7 +1156,7 @@
                         if (!day.child) day.child = rates.child || 0;
                     }
                 },
-                addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '' }); },
+                addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
                 removeDay(index) { this.itinerary.splice(index, 1); },
                 addActivity() { this.activities.push({ name: '', rate: 0, isPerPax: true }); },
                 removeActivity(index) { this.activities.splice(index, 1); },
