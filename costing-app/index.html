@@ -706,6 +706,10 @@
                                         <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
                                         <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * 1.25) }}</span>
                                     </div>
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
+                                        <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                    </div>
                                     <div class="flex justify-between text-xs mt-3 text-gray-400">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
                                         <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
@@ -815,6 +819,10 @@
                                     <div class="flex justify-between text-sm items-center">
                                         <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
                                         <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * 1.25) }}</span>
+                                    </div>
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
+                                        <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
                                     </div>
                                     <div class="flex justify-between text-xs mt-3 text-gray-400">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
@@ -1056,6 +1064,10 @@
                         return sum + (ext.isPerPax ? (ext.rate * Math.max(1, this.numPax)) : ext.rate);
                     }, 0);
                 },
+                sharedCostsTotal() {
+                    const t = this.storeTotals;
+                    return t.vehicle + t.guideFee + t.guideAcc + t.flights + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
+                },
                 stoTotal() {
                     const t = this.storeTotals;
                     let total = 0;
@@ -1163,6 +1175,18 @@
                         if (!day.single) day.single = rates.single || 0;
                         if (!day.child) day.child = rates.child || 0;
                     }
+                },
+                groupInvoiceCost(g, markupDecimal) {
+                    const t = this.storeTotals;
+                    const gAccommodation = (t.group * Math.max(0, parseInt(g.double) || 0)) +
+                                        (t.single * Math.max(0, parseInt(g.single) || 0)) +
+                                        (t.child * Math.max(0, parseInt(g.child) || 0));
+                    
+                    const gPax = Math.max(0, parseInt(g.double) || 0) + Math.max(0, parseInt(g.single) || 0) + Math.max(0, parseInt(g.child) || 0);
+
+                    const shareOfSharedCosts = gPax > 0 ? (this.sharedCostsTotal / Math.max(1, this.numPax)) * gPax : 0;
+                    
+                    return (gAccommodation + shareOfSharedCosts) * markupDecimal;
                 },
                 addGroup() {
                     const maxId = this.paxGroups.reduce((max, g) => Math.max(max, g.id), 0);
