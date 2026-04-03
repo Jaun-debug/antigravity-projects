@@ -710,11 +710,11 @@
                                         <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
                                         <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
                                     </div>
-                                    <div class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
                                         <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
                                     </div>
-                                    <div v-if="singlePax > 0"
+                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
                                         <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
                                         <span class="text-white">{{ format(perPaxCosting.singleStoPP * 1.25) }}</span>
@@ -730,12 +730,12 @@
                                         class="space-y-2 text-xs my-5 border-b border-white/10 pb-5">
                                         <div class="flex justify-between items-center"><span class="text-gray-400 font-medium">Desert Tracks (25%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.25) }}</span></div>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0"
+                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-2 text-gray-400">
                                         <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
                                         <span class="text-white">&#36;{{ format(botswanaDoublePP * 1.25) }}</span>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
                                         <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
                                         <span class="text-white">&#36;{{ format(botswanaSinglePP * 1.25) }}</span>
@@ -764,11 +764,11 @@
                                         <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
                                         <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format((stoTotal * 1.25) / 0.82) }}</span>
                                     </div>
-                                    <div class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
                                         <span class="text-white">{{ format((perPaxCosting.doubleStoPP * 1.25) / 0.82) }}</span>
                                     </div>
-                                    <div v-if="singlePax > 0"
+                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
                                         <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
                                         <span class="text-white">{{ format((perPaxCosting.singleStoPP * 1.25) / 0.82) }}</span>
@@ -787,12 +787,12 @@
                                         <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Agent (5%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
                                     </div>
 
-                                    <div v-if="botswanaUsdSummary > 0"
+                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-2 text-gray-400">
                                         <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
                                         <span class="text-white">&#36;{{ format((botswanaDoublePP * 1.25) / 0.82) }}</span>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
                                         <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
                                         <span class="text-white">&#36;{{ format((botswanaSinglePP * 1.25) / 0.82) }}</span>
@@ -824,11 +824,11 @@
                                         <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
                                         <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
                                     </div>
-                                    <div class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
                                         <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
                                     </div>
-                                    <div v-if="singlePax > 0"
+                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
                                         <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
                                         <span class="text-white">{{ format(perPaxCosting.singleStoPP * 1.25) }}</span>
@@ -845,12 +845,12 @@
                                         <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
                                         <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Consultant (5%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0"
+                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-2 text-gray-400">
                                         <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
                                         <span class="text-white">&#36;{{ format(botswanaDoublePP * 1.25) }}</span>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
                                         class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
                                         <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
                                         <span class="text-white">&#36;{{ format(botswanaSinglePP * 1.25) }}</span>
