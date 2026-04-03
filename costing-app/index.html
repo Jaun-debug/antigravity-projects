@@ -369,6 +369,7 @@
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Vehicle</th>
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Guide Fee</th>
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Guide Acc.</th>
+                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Flights</th>
                                     <th class="px-2 py-4"></th>
                                 </tr>
                             </thead>
@@ -431,11 +432,13 @@
                                             :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
                                     <td class="px-3 py-2"><currency-input v-model="day.child" :is-disabled="day.isLocked"
                                             :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
-                                    <td class="px-3 py-2"><currency-input v-model="day.vehicle"
+                                    <td class="px-3 py-2"><currency-input v-model="day.vehicle" @blur="propagate(index, 'vehicle', day.vehicle)"
                                             :custom-class="'dt-input text-right'"></currency-input></td>
-                                    <td class="px-3 py-2"><currency-input v-model="day.guideFee"
+                                    <td class="px-3 py-2"><currency-input v-model="day.guideFee" @blur="propagate(index, 'guideFee', day.guideFee)"
                                             :custom-class="'dt-input text-right'"></currency-input></td>
-                                    <td class="px-3 py-2"><currency-input v-model="day.guideAcc"
+                                    <td class="px-3 py-2"><currency-input v-model="day.guideAcc" @blur="propagate(index, 'guideAcc', day.guideAcc)"
+                                            :custom-class="'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.flights"
                                             :custom-class="'dt-input text-right'"></currency-input></td>
                                     <td class="px-2 py-2 text-red-400 hover:text-red-600 cursor-pointer text-center font-bold"
                                         @click="removeDay(index)">✕</td>
@@ -470,6 +473,7 @@
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.vehicle) }}</td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideFee) }}</td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideAcc) }}</td>
+                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.flights) }}</td>
                                     <td></td>
                                 </tr>
                             </tfoot>
@@ -852,6 +856,23 @@
             props: ['modelValue', 'placeholder', 'isDisabled', 'customClass'],
             emits: ['update:modelValue'],
             data() { return { isFocused: false, localVal: '' }; },
+                        watch: {
+                itinerary: {
+                    deep: true,
+                    handler(newVal) {
+                        newVal.forEach(day => {
+                            if (day.lodge) {
+                                if (!this.storedLodgeRates[day.lodge]) {
+                                    this.storedLodgeRates[day.lodge] = { pp: 0, single: 0, child: 0 };
+                                }
+                                if (day.pp > 0) this.storedLodgeRates[day.lodge].pp = day.pp;
+                                if (day.single > 0) this.storedLodgeRates[day.lodge].single = day.single;
+                                if (day.child > 0) this.storedLodgeRates[day.lodge].child = day.child;
+                            }
+                        });
+                    }
+                }
+            },
             computed: {
                 displayValue: {
                     get() {
@@ -914,9 +935,26 @@
                     currentPdfUrl: null,
                     extras: [],
                     itinerary: [
-                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 3264, single: 0, child: 0, vehicle: 2500, guideFee: 0, guideAcc: 0, isLocked: false, lockedBy: '', lockPassword: '' },
-                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 7000, single: 0, child: 0, vehicle: 2500, guideFee: 0, guideAcc: 0, isLocked: false, lockedBy: '', lockPassword: '' },
+                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '' },
+                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '' },
                     ]
+                }
+            },
+                        watch: {
+                itinerary: {
+                    deep: true,
+                    handler(newVal) {
+                        newVal.forEach(day => {
+                            if (day.lodge) {
+                                if (!this.storedLodgeRates[day.lodge]) {
+                                    this.storedLodgeRates[day.lodge] = { pp: 0, single: 0, child: 0 };
+                                }
+                                if (day.pp > 0) this.storedLodgeRates[day.lodge].pp = day.pp;
+                                if (day.single > 0) this.storedLodgeRates[day.lodge].single = day.single;
+                                if (day.child > 0) this.storedLodgeRates[day.lodge].child = day.child;
+                            }
+                        });
+                    }
                 }
             },
             computed: {
@@ -966,13 +1004,13 @@
                     };
                 },
                 storeTotals() {
-                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0;
+                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
                     this.itinerary.forEach(d => {
                         let n = parseInt(d.nights) || 1;
                         group += (d.pp || 0) * n; single += (d.single || 0) * n; child += (d.child || 0) * n;
                         vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n;
                     });
-                    return { group, single, child, vehicle, guideFee, guideAcc };
+                    return { group, single, child, vehicle, guideFee, guideAcc, flights };
                 },
                 uploadedLodges() {
                     return this.itinerary.filter(d => d.attachedPdf && d.lodge).map(d => d.lodge);
@@ -1001,6 +1039,21 @@
                 }
             },
             mounted() {
+                // Global enter-to-jump logic
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const target = e.target;
+                        if (target.tagName.toLowerCase() === 'input' || target.tagName.toLowerCase() === 'textarea') {
+                            e.preventDefault();
+                            const inputs = Array.from(document.querySelectorAll('input:not([disabled]), textarea:not([disabled]), [contenteditable="true"]'));
+                            const index = inputs.indexOf(target);
+                            if (index > -1 && index < inputs.length - 1) {
+                                inputs[index + 1].focus();
+                                if(inputs[index + 1].select) inputs[index + 1].select();
+                            }
+                        }
+                    }
+                });
                 window.addEventListener('message', (event) => {
                     if (event.data && event.data.type === 'SAVE_DT_INVOICE') {
                         const { idx, name, html } = event.data;
@@ -1030,7 +1083,23 @@
                         }
                     }
                 },
-                addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 2500, guideFee: 0, guideAcc: 0, isLocked: false, lockedBy: '', lockPassword: '' }); },
+                               propagate(index, field, value) {
+                    // "once in the fisrt lodge line a vehicle and guide fee was added it must be added automatacly in eache following line"
+                    if (index === 0) {
+                        for (let i = 1; i < this.itinerary.length; i++) {
+                            this.itinerary[i][field] = value;
+                        }
+                    }
+                },
+                onLodgeSelect(day) {
+                    const rates = this.storedLodgeRates[day.lodge];
+                    if (rates) {
+                        if (!day.pp) day.pp = rates.pp || 0;
+                        if (!day.single) day.single = rates.single || 0;
+                        if (!day.child) day.child = rates.child || 0;
+                    }
+                },
+                addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '' }); },
                 removeDay(index) { this.itinerary.splice(index, 1); },
                 addActivity() { this.activities.push({ name: '', rate: 0, isPerPax: true }); },
                 removeActivity(index) { this.activities.splice(index, 1); },
@@ -1148,10 +1217,10 @@
                     const q = this.savedQuotes[index];
                     const format = (val) => Number(val || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0;
+                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
                     q.itinerary.forEach(d => {
                         group += (d.pp || 0); single += (d.single || 0);
-                        vehicle += (d.vehicle || 0); guideFee += (d.guideFee || 0); guideAcc += (d.guideAcc || 0);
+                        vehicle += (d.vehicle || 0); guideFee += (d.guideFee || 0); guideAcc += (d.guideAcc || 0); flights += (d.flights || 0);
                     });
                     const calcFuel = (q.fuelDistance || 0) * (q.fuelType === 'low' ? 3.125 : 4.0);
                     const activitiesTotal = q.activities.reduce((sum, act) => sum + (act.isPerPax ? (act.rate * Math.max(1, q.numPax)) : act.rate), 0);
