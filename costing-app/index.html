@@ -1207,8 +1207,9 @@
 
                     let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
                     q.itinerary.forEach(d => {
-                        group += (d.pp || 0); single += (d.single || 0);
-                        vehicle += (d.vehicle || 0); guideFee += (d.guideFee || 0); guideAcc += (d.guideAcc || 0); flights += (d.flights || 0);
+                        let n = parseInt(d.nights) || 1;
+                        group += (d.pp || 0) * n; single += (d.single || 0) * n; child += (d.child || 0) * n;
+                        vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n; flights += (d.flights || 0) * n;
                     });
                     const calcFuel = (q.fuelDistance || 0) * (q.fuelType === 'low' ? 3.125 : 4.0);
                     const activitiesTotal = q.activities.reduce((sum, act) => sum + (act.isPerPax ? (act.rate * Math.max(1, q.numPax)) : act.rate), 0);
@@ -1218,8 +1219,9 @@
 
                     const doubleStoPP = group + sharedPP;
                     const singleStoPP = group + single + sharedPP;
+                    const childStoPP = child + sharedPP;
 
-                    let stoTotal = (doubleStoPP * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)) + (singleStoPP * Math.max(0, q.singlePax || 0));
+                    let stoTotal = (doubleStoPP * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)) + (singleStoPP * Math.max(0, q.singlePax || 0)) + (childStoPP * Math.max(0, q.childPax || 0));
 
                     const dtTotal = stoTotal * 1.25;
                     const tlTotal = dtTotal / 0.82;
@@ -1497,34 +1499,46 @@
             <th>Cost Component</th>
             <th style="text-align: right;">Total (NAD)</th>
         </tr>
-        <tr>
-            <td style="color: #71717a;">Base Group Accommodation (${Math.max(0, q.numPax)}x)</td>
-            <td style="text-align: right; font-weight: 500;">${format(group * Math.max(0, q.numPax))}</td>
-        </tr>
-        <tr>
+        ${group > 0 ? `<tr>
+            <td style="color: #71717a;">Base Group Accommodation (${Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(group * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax))}</td>
+        </tr>` : ''}
+        ${single > 0 ? `<tr>
             <td style="color: #71717a;">Single Supplements (${Math.max(0, q.singlePax || 0)}x)</td>
             <td style="text-align: right; font-weight: 500;">${format(single * Math.max(0, q.singlePax || 0))}</td>
-        </tr>
-        <tr>
+        </tr>` : ''}
+        ${child > 0 ? `<tr>
+            <td style="color: #71717a;">Child Supplements (${Math.max(0, q.childPax || 0)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(child * Math.max(0, q.childPax || 0))}</td>
+        </tr>` : ''}
+        ${vehicle > 0 ? `<tr>
             <td style="color: #71717a;">Vehicle Hire</td>
             <td style="text-align: right; font-weight: 500;">${format(vehicle)}</td>
-        </tr>
-        <tr>
-            <td style="color: #71717a;">Guide Acc & Fee</td>
-            <td style="text-align: right; font-weight: 500;">${format(guideFee + guideAcc)}</td>
-        </tr>
-        <tr>
+        </tr>` : ''}
+        ${flights > 0 ? `<tr>
+            <td style="color: #71717a;">Flights</td>
+            <td style="text-align: right; font-weight: 500;">${format(flights)}</td>
+        </tr>` : ''}
+        ${guideFee > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Fee</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideFee)}</td>
+        </tr>` : ''}
+        ${guideAcc > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Accommodation</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideAcc)}</td>
+        </tr>` : ''}
+        ${calcFuel > 0 ? `<tr>
             <td style="color: #71717a;">Fuel & Distance (${q.fuelDistance} km)</td>
             <td style="text-align: right; font-weight: 500;">${format(calcFuel)}</td>
-        </tr>
-        <tr>
+        </tr>` : ''}
+        ${activitiesTotal > 0 ? `<tr>
             <td style="color: #71717a;">Activities Total</td>
             <td style="text-align: right; font-weight: 500;">${format(activitiesTotal)}</td>
-        </tr>
-        <tr>
+        </tr>` : ''}
+        ${extTot > 0 ? `<tr>
             <td style="color: #71717a;">Other Extras Total</td>
             <td style="text-align: right; font-weight: 500;">${format(extTot)}</td>
-        </tr>
+        </tr>` : ''}
         ${qBotsTotal > 0 ? `<tr>
             <td style="color: #d87a4d; font-weight: bold;">Botswana STO Base (USD)</td>
             <td style="text-align: right; font-weight: bold; color: #d87a4d;">$${format(qBotsTotal)}</td>
