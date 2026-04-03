@@ -17,7 +17,7 @@
             --primary: #1a1a24;
             --accent: #d87a4d;
             --accent-hover: #e2a85e;
-            --bg-subtle: #f8f7f5;
+            --bg-subtle: #D8D0C5;
         }
 
         body {
@@ -321,9 +321,9 @@
 
         </div>
 
-        <div class="flex flex-col xl:flex-row xl:items-start gap-6 relative">
+        <div class="flex flex-col gap-6 relative">
 
-            <div class="w-full xl:w-[70%] space-y-8 shrink-0 z-10">
+            <div class="w-full space-y-8 shrink-0 z-10">
                 <!-- Itinerary Builder -->
                 <div class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 overflow-hidden">
                     <div class="flex justify-between items-center p-6 border-b border-gray-50">
@@ -358,7 +358,6 @@
                                                 title="Single Pax">
                                         </div>
                                     </th>
-                                    <th class="px-2 py-4 w-[130px] min-w-[130px] text-center font-bold">Price Lock</th>
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Vehicle</th>
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Guide Fee</th>
                                     <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Guide Acc.</th>
@@ -422,17 +421,6 @@
                                             :custom-class="day.isLocked ? 'dt-input text-right font-medium bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right font-medium'"></currency-input></td>
                                     <td class="px-3 py-2"><currency-input v-model="day.single" :is-disabled="day.isLocked"
                                             :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
-                                    <td class="px-2 py-2 text-center text-[10px] min-w-[130px]">
-                                        <div v-if="!day.isLocked" class="flex flex-col gap-1.5 items-center bg-gray-50/80 p-1.5 rounded border border-gray-200/80 shadow-sm">
-                                            <input type="text" v-model="day.lockedBy" placeholder="Your Name" class="w-full text-[10px] border border-gray-300 rounded px-1.5 py-1 outline-none focus:border-dt-orange bg-white shadow-inner font-medium text-gray-700" />
-                                            <input type="password" v-model="day.lockPassword" placeholder="Password" class="w-full text-[10px] border border-gray-300 rounded px-1.5 py-1 outline-none focus:border-dt-orange bg-white shadow-inner" />
-                                            <button @click="lockDay(index)" :disabled="!day.lockedBy || !day.lockPassword" class="w-full bg-dt-orange text-white font-bold py-1.5 rounded shadow-sm disabled:opacity-50 disabled:cursor-not-allowed text-[9px] uppercase tracking-wider transition-all transform hover:-translate-y-0.5 hover:shadow-md active:translate-y-0">Lock</button>
-                                        </div>
-                                        <div v-else class="flex flex-col gap-1 items-center justify-center bg-green-50/80 p-2 rounded border border-green-200 shadow-inner h-full">
-                                            <span class="font-extrabold text-green-700 text-[10px] whitespace-nowrap tracking-wide">🔒 {{ day.lockedBy }}</span>
-                                            <button @click="unlockDay(index)" class="mt-1 text-[9px] text-gray-500 hover:text-red-600 font-bold uppercase tracking-widest transition-colors hover:bg-white px-2 py-0.5 rounded border border-transparent hover:border-red-200">Unlock</button>
-                                        </div>
-                                    </td>
                                     <td class="px-3 py-2"><currency-input v-model="day.vehicle"
                                             :custom-class="'dt-input text-right'"></currency-input></td>
                                     <td class="px-3 py-2"><currency-input v-model="day.guideFee"
@@ -462,7 +450,6 @@
                                             singlePax }} Pax Total:
                                             <span class="text-gray-700">{{format(storeTotals.single * singlePax)}}</span></span>
                                     </td>
-                                    <td></td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.vehicle) }}</td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideFee) }}</td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideAcc) }}</td>
@@ -564,7 +551,7 @@
             </div>
 
             <!-- RIGHT SIDEBAR: FINAL INVOICING -->
-            <div class="w-full xl:w-[32%] relative flex flex-col gap-6 xl:sticky xl:top-4 z-40 pb-8">
+            <div class="w-full relative flex flex-col gap-6 z-40 pb-8">
 
                 <!-- Botswana Block Moved Above -->
                 <div

@@ -1,0 +1,261 @@
+:root {
+  --primary: #8a6c4c;
+  --primary-dark: #6a5036;
+  --secondary: #e6dfd5;
+  --dark: #2c2925;
+  --light: #faf8f5;
+  --white: #ffffff;
+  --border: #dcd3c6;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Jost', sans-serif;
+  --shadow: 0 10px 30px rgba(0,0,0,0.05);
+  --radius: 8px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--light);
+  color: var(--dark);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  left: calc(50% - 20px);
+}
+
+@keyframes pulseBounce {
+  0%, 100% {
+    transform: translate(-50%, 0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(-50%, 10px);
+    opacity: 1;
+  }
+}
+
+.text-center { text-align: center; }
+
+/* Hero Section */
+.hero {
+  position: relative;
+  padding: 120px 20px;
+  background: url('https://i.ibb.co/BKjtMxkt/Screenshot-2026-04-02-at-20-42-58.png') center center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--white);
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  padding: 20px;
+}
+
+.hero-subtitle {
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.hero-title {
+  font-family: var(--font-heading);
+  font-size: 4rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+/* Navigation */
+.lodge-nav {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 25px 0 20px 0;
+  position: sticky;
+  top: 0;
+  background-color: var(--light);
+  z-index: 100;
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+}
+
+.nav-btn {
+  background: var(--white);
+  border: 1px solid var(--border);
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  box-shadow: 0 4px 15px rgba(138, 108, 76, 0.3);
+  transform: scale(1.05);
+}
+
+.nav-btn.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+  box-shadow: 0 4px 15px rgba(138, 108, 76, 0.3);
+}
+
+/* Lodge Card */
+.lodge-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.lodge-header {
+  background-color: var(--secondary);
+  padding: 40px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.lodge-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--dark);
+}
+
+.rates-table-wrap {
+  padding: 40px;
+  overflow-x: auto;
+}
+
+.season-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.season-date {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #777;
+  font-weight: 400;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+
+th, td {
+  padding: 15px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background-color: var(--light);
+  font-weight: 600;
+  color: var(--dark);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:hover {
+  background-color: rgba(230, 223, 213, 0.2);
+}
+
+td:not(:first-child), th:not(:first-child) {
+  text-align: right;
+}
+
+.notes {
+  background: var(--light);
+  padding: 20px;
+  border-left: 4px solid var(--primary);
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 40px 40px;
+}
+
+.extras-section {
+  background-color: var(--dark);
+  color: var(--white);
+  padding: 40px;
+}
+
+.extras-section table th {
+  background-color: rgba(255,255,255,0.05);
+  color: var(--white);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.extras-section table td {
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer {
+  padding: 60px 0;
+  color: #888;
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  .hero-title { font-size: 2.5rem; }
+  .lodge-title { font-size: 1.8rem; }
+  .rates-table-wrap { padding: 20px; }
+  .notes, .extras-section { margin: 0 20px 20px; padding: 20px; }
+}

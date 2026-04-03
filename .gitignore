@@ -2,3 +2,19 @@ node_modules/
 .next/
 .DS_Store
 .vercel/
+
+# Ignore large Python environments
+venv/
+venv_wetu/
+__pycache__/
+
+# Ignore Local Assets and Archives Folders we just made
+_Archives/
+_Images & Moodboards/
+_Loose Components & HTML/
+_Standalone Scripts/
+
+# Ignore secrets and env files
+.env
+.env.local
+.env.*

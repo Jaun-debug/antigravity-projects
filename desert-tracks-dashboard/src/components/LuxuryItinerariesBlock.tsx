@@ -1,0 +1,225 @@
+"use client";
+
+import React from 'react';
+import PriceDisplay from '@/components/ui/PriceDisplay';
+
+export default function LuxuryItinerariesBlock() {
+  return (
+    <section id="dt-sds-split" className="w-full relative bg-[#f9f9f4] font-['DM_Sans']">
+      <style dangerouslySetInnerHTML={{ __html: `
+        /* ── HEADING ─────────────────────────────────────────────── */
+        .dt-is-heading { text-align: center; padding: 72px 40px 52px; }
+        .dt-is-heading h2 {
+          font-family: 'Playfair Display', serif;
+          font-size: clamp(2rem, 4vw, 3.2rem);
+          font-weight: 400; color: #1a1a18;
+          letter-spacing: -0.01em; margin-bottom: 14px;
+        }
+        .dt-is-rule { display: block; width: 48px; height: 2px; background: #ff6e00; margin: 18px auto 0; }
+
+        /* ── SPLIT LAYOUT ────────────────────────────────────────── */
+        .dt-is-layout { display: flex; align-items: flex-start; width: 100%; padding: 0 0 80px; gap: 0; }
+
+        /* ── LEFT: Sticky hero ───────────────────────────────────── */
+        .dt-is-sticky-col {
+          flex: 0 0 50%; position: sticky; top: 90px; height: calc(100vh - 130px);
+          max-height: 860px; border-radius: 0; overflow: hidden;
+        }
+        .dt-is-sticky-img {
+          position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+          object-fit: cover; display: block; opacity: 0; transition: opacity 0.4s ease-in-out;
+        }
+        .default-hero { opacity: 1; z-index: 1; }
+        .hero-hover { z-index: 2; }
+        .dt-is-sticky-badge {
+          position: absolute; z-index: 10; bottom: 28px; left: 28px;
+          background: rgba(26,26,24,0.82); backdrop-filter: blur(10px);
+          color: #fff; font-size: 0.67rem; letter-spacing: 3px; text-transform: uppercase; padding: 10px 20px;
+        }
+
+        /* ── CSS ONLY HOVER LOGIC ───────────────────── */
+        .dt-is-layout:has(.dt-card-1:hover) .hero-1 { opacity: 1; }
+        .dt-is-layout:has(.dt-card-2:hover) .hero-2 { opacity: 1; }
+        .dt-is-layout:has(.dt-card-3:hover) .hero-3 { opacity: 1; }
+        .dt-is-layout:has(.dt-card-4:hover) .hero-4 { opacity: 1; }
+        .dt-is-layout:has(.dt-card-5:hover) .hero-5 { opacity: 1; }
+        .dt-is-layout:has(.dt-card-6:hover) .hero-6 { opacity: 1; }
+
+        /* ── RIGHT: Scrollable cards ─────────────────────────────── */
+        .dt-is-scroll-col { flex: 1; display: flex; flex-direction: column; padding: 0 56px; }
+
+        .dt-is-card {
+          display: flex; align-items: center; gap: 24px; padding: 28px 0;
+          border-bottom: 1px solid #e0d8d0; text-decoration: none;
+          color: inherit; transition: background 0.2s ease; cursor: pointer;
+        }
+        .dt-is-card:first-child { border-top: 1px solid #e0d8d0; }
+        .dt-is-card:hover { background: rgba(255,110,0,0.04); }
+
+        .dt-is-thumb { flex: 0 0 110px; height: 82px; overflow: hidden; border-radius: 2px; }
+        .dt-is-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .dt-is-card:hover .dt-is-thumb img { transform: scale(1.08); }
+
+        .dt-is-card-body { flex: 1; min-width: 0; }
+        .dt-is-card-label {
+          font-size: 0.67rem; letter-spacing: 2.5px; text-transform: uppercase;
+          color: #ff6e00; margin-bottom: 7px; font-weight: 500;
+        }
+        .dt-is-card-title {
+          font-family: 'Playfair Display', serif; font-size: clamp(0.98rem, 1.5vw, 1.18rem);
+          font-weight: 400; color: #1a1a18; line-height: 1.35; margin-bottom: 8px;
+        }
+        .dt-is-card-desc {
+          font-size: 0.83rem; color: #7a746d; line-height: 1.55;
+          display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+        }
+
+        .dt-is-card-arrow {
+          flex: 0 0 auto; width: 40px; height: 40px; border: 1px solid #e0d8d0; border-radius: 50%;
+          display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;
+        }
+        .dt-is-card:hover .dt-is-card-arrow { background: #ff6e00; border-color: #ff6e00; }
+        .dt-is-card-arrow svg { width: 15px; height: 15px; stroke: #7a746d; fill: none; transition: stroke 0.3s; }
+        .dt-is-card:hover .dt-is-card-arrow svg { stroke: #fff; }
+
+        /* ── MOBILE ──────────────────────────────────────────────── */
+        @media (max-width: 900px) {
+          .dt-is-layout { flex-direction: column; padding: 0 0 60px; gap: 0; }
+          .dt-is-sticky-col { display: none; }
+          .dt-is-scroll-col { width: 100%; padding: 0 20px; }
+          .dt-is-card { gap: 16px; padding: 22px 0; }
+          .dt-is-thumb { flex: 0 0 90px; height: 70px; }
+          .dt-is-card-arrow { display: none; }
+          .dt-is-heading { padding: 48px 20px 36px; }
+        }
+      `}} />
+
+      {/* HEADING */}
+      <div className="dt-is-heading">
+        <h2>Explore Namibia's Top Luxury Safari Itineraries</h2>
+        <span className="dt-is-rule"></span>
+      </div>
+
+      {/* SPLIT LAYOUT */}
+      <div className="dt-is-layout">
+
+        {/* ══ LEFT: Sticky hero ══ */}
+        <div className="dt-is-sticky-col">
+          {/* DEFAULT */}
+          <img className="dt-is-sticky-img default-hero" src="https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg" alt="Luxury Safari Default" />
+          
+          {/* HOVER LAYERS */}
+          <img className="dt-is-sticky-img hero-hover hero-1" src="https://desert-tracks.com/wp-content/uploads/2025/10/savuti-lion-in-the-road.jpeg" alt="" />
+          <img className="dt-is-sticky-img hero-hover hero-2" src="https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg" alt="" />
+          <img className="dt-is-sticky-img hero-hover hero-3" src="https://desert-tracks.com/wp-content/uploads/2025/11/wilderness-desert-rhino-camp_3-scaled-3.jpg" alt="" />
+          <img className="dt-is-sticky-img hero-hover hero-4" src="https://desert-tracks.com/wp-content/uploads/2025/11/divava-1.jpg" alt="" />
+          <img className="dt-is-sticky-img hero-hover hero-5" src="https://desert-tracks.com/wp-content/uploads/2025/11/bc95b679-56fc-4800-b602-5d040fe0cced-png-1.webp" alt="" />
+          <img className="dt-is-sticky-img hero-hover hero-6" src="https://desert-tracks.com/wp-content/uploads/2025/11/bagatelle-lodge-kalahari-game-ranch-namibia-chalte-on-dune2-1.jpg" alt="" />
+
+          <span className="dt-is-sticky-badge">Desert Tracks · Luxury Itineraries</span>
+        </div>
+
+        {/* ══ RIGHT: Scrollable itinerary list ══ */}
+        <div className="dt-is-scroll-col">
+
+          {/* 1. 14-Day Drive & Fly */}
+          <a className="dt-is-card dt-card-1" href="component_31.html" target="_blank" rel="noopener noreferrer">
+            <div className="dt-is-thumb">
+              <img src="https://desert-tracks.com/wp-content/uploads/2025/10/savuti-lion-in-the-road.jpeg" alt="Savuti lion" loading="lazy" />
+            </div>
+            <div className="dt-is-card-body">
+              <div className="dt-is-card-label">14 Days · Luxury Safari</div>
+              <div className="dt-is-card-title">14-Day Luxury Namibia Drive &amp; Fly Photo Safari</div>
+              <div className="dt-is-card-desc">Experience Namibia’s highlights in comfort. Drive through deserts, wildlife parks, and coastlines on a 14-day self-drive safari.</div>
+              <PriceDisplay safari="14-Day Namibia Drive & Fly Photographic Safari" basePrice={7200} />
+            </div>
+            <div className="dt-is-card-arrow">
+              <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </a>
+
+          {/* 2. 14-Day Highlights */}
+          <a className="dt-is-card dt-card-2" href="component_32.html" target="_blank" rel="noopener noreferrer">
+            <div className="dt-is-thumb">
+              <img src="https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg" alt="14 Day Highlights" loading="lazy" />
+            </div>
+            <div className="dt-is-card-body">
+              <div className="dt-is-card-label">14 Days · Luxury Safari</div>
+              <div className="dt-is-card-title">14-Day Luxury Namibia Highlights Self-Drive Safari</div>
+              <div className="dt-is-card-desc">Discover Namibia, Chobe, and Victoria Falls in one epic 17-day self-drive safari filled with wildlife, culture, and natural wonders.</div>
+              <PriceDisplay safari="14-Day Namibia Highlights Self-Drive Safari" basePrice={3450} />
+            </div>
+            <div className="dt-is-card-arrow">
+              <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </a>
+
+          {/* 3. 12-Day Circuit */}
+          <a className="dt-is-card dt-card-3" href="component_33.html" target="_blank" rel="noopener noreferrer">
+            <div className="dt-is-thumb">
+              <img src="https://desert-tracks.com/wp-content/uploads/2025/11/wilderness-desert-rhino-camp_3-scaled-3.jpg" alt="12-Day Circuit" loading="lazy" />
+            </div>
+            <div className="dt-is-card-body">
+              <div className="dt-is-card-label">12 Days · Luxury Safari</div>
+              <div className="dt-is-card-title">12-Day Namibia Self-Drive Luxury Safari Circuit</div>
+              <div className="dt-is-card-desc">Uncover Namibia’s hidden gems on an 18-day self-drive safari, exploring remote landscapes, wildlife havens, and cultural treasures.</div>
+              <PriceDisplay safari="12-Day Namibia Self-Drive Luxury Circuit" basePrice={4800} />
+            </div>
+            <div className="dt-is-card-arrow">
+              <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </a>
+
+          {/* 4. 10-Day Honeymoon */}
+          <a className="dt-is-card dt-card-4" href="component_34.html" target="_blank" rel="noopener noreferrer">
+            <div className="dt-is-thumb">
+              <img src="https://desert-tracks.com/wp-content/uploads/2025/11/divava-1.jpg" alt="10-Day Honeymoon" loading="lazy" />
+            </div>
+            <div className="dt-is-card-body">
+              <div className="dt-is-card-label">10 Days · Luxury Fly-In</div>
+              <div className="dt-is-card-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</div>
+              <div className="dt-is-card-desc">Journey from Namibia’s deserts to Victoria Falls on an 18 -day self-drive safari, filled with wildlife, culture, and unforgettable landscapes.</div>
+              <PriceDisplay safari="10-Day Namibia Honeymoon Luxury Fly-In Safari" basePrice={6900} />
+            </div>
+            <div className="dt-is-card-arrow">
+              <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </a>
+
+          {/* 5. 10-Day Ultra-Luxury North */}
+          <a className="dt-is-card dt-card-5" href="component_35.html" target="_blank" rel="noopener noreferrer">
+            <div className="dt-is-thumb">
+              <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bc95b679-56fc-4800-b602-5d040fe0cced-png-1.webp" alt="Ultra-Luxury North" loading="lazy" />
+            </div>
+            <div className="dt-is-card-body">
+              <div className="dt-is-card-label">10 Days · Ultra-Luxury</div>
+              <div className="dt-is-card-title">10-Day Ultra-Luxury Namibia Safari - North Focus</div>
+              <div className="dt-is-card-desc">Track Namibia’s wildlife on an 11-day self-drive safari, exploring Etosha’s game-rich plains, desert landscapes, and unique cultural encounters.</div>
+              <PriceDisplay safari="10-Day Ultra-Luxury Namibia Safari – North Focus" basePrice={7500} />
+            </div>
+            <div className="dt-is-card-arrow">
+              <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </a>
+
+          {/* 6. 10-Day Ultra-Luxury South */}
+          <a className="dt-is-card dt-card-6" href="component_36.html" target="_blank" rel="noopener noreferrer">
+            <div className="dt-is-thumb">
+              <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bagatelle-lodge-kalahari-game-ranch-namibia-chalte-on-dune2-1.jpg" alt="Ultra-Luxury South" loading="lazy" />
+            </div>
+            <div className="dt-is-card-body">
+              <div className="dt-is-card-label">10 Days · Ultra-Luxury</div>
+              <div className="dt-is-card-title">10-Day Ultra-Luxury Namibia Safari - South Focus</div>
+              <div className="dt-is-card-desc">Journey through Namibia’s south on an 11-day self-drive safari, visiting deserts, canyons, ghost towns, and wide-open landscapes.</div>
+              <PriceDisplay safari="10-Day Ultra-Luxury Namibia Safari – South Focus" basePrice={6800} />
+            </div>
+            <div className="dt-is-card-arrow">
+              <svg viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,125 @@
+# 🚨 CRITICAL: Allow XML sitemaps for bots (MUST BE AT TOP)
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{REQUEST_URI} \.xml$ [NC]
+RewriteRule .* - [L]
+</IfModule>
+
+# BEGIN LSCACHE
+## LITESPEED WP CACHE PLUGIN - Do not edit ##
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteRule litespeed/debug/.*\.log$ - [F,L]
+RewriteRule \.litespeed_conf\.dat - [F,L]
+</IfModule>
+
+<IfModule LiteSpeed>
+CacheLookup on
+RewriteRule .* - [E=Cache-Control:no-autoflush]
+
+# ASYNC
+RewriteCond %{REQUEST_URI} /wp-admin/admin-ajax\.php
+RewriteCond %{QUERY_STRING} action=async_litespeed
+RewriteRule .* - [E=noabort:1]
+
+# MOBILE
+RewriteCond %{HTTP_USER_AGENT} Mobile|Android|Silk/|Kindle|BlackBerry|Opera\ Mini|Opera\ Mobi [NC]
+RewriteRule .* - [E=Cache-Control:vary=%{ENV:LSCACHE_VARY_VALUE}+ismobile]
+
+# WEBP
+RewriteCond %{HTTP_ACCEPT} image/webp [OR]
+RewriteCond %{HTTP_USER_AGENT} iPhone\ OS\ (1[4-9]|[2-9][0-9]) [OR]
+RewriteCond %{HTTP_USER_AGENT} Macintosh.*Version/((1[7-9]|[2-9][0-9])|16\.([4-9]|[1-9][0-9])) [OR]
+RewriteCond %{HTTP_USER_AGENT} Firefox/([6-9][0-9]|[1-9][0-9]{2,})
+RewriteRule .* - [E=Cache-Control:vary=%{ENV:LSCACHE_VARY_VALUE}+webp]
+
+# DROP QUERY STRINGS FROM CACHE
+CacheKeyModify -qs:fbclid
+CacheKeyModify -qs:gclid
+CacheKeyModify -qs:utm*
+CacheKeyModify -qs:_ga
+</IfModule>
+# END LSCACHE
+
+
+# BEGIN NON_LSCACHE
+<IfModule mod_expires.c>
+ExpiresActive on
+
+ExpiresByType image/x-icon A31536000
+ExpiresByType image/jpeg A31536000
+ExpiresByType image/png A31536000
+ExpiresByType image/webp A31536000
+ExpiresByType text/css A31536000
+ExpiresByType application/javascript A31536000
+
+</IfModule>
+# END NON_LSCACHE
+
+
+# ================================
+# 🚀 CLEAN SEO REDIRECTS
+# ================================
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# -------------------------------
+# ✅ IMPORTANT PAGE REDIRECTS
+# -------------------------------
+
+RewriteRule ^self-drive-safaris-namibia/?$ https://desert-tracks.com/namibia-self-drive-safaris/ [R=301,L]
+RewriteRule ^luxury-safaris-namibia/?$ https://desert-tracks.com/namibia-luxury-safaris/ [R=301,L]
+RewriteRule ^namibia-luxury-lodges/?$ https://desert-tracks.com/namibia-luxury-safaris/ [R=301,L]
+RewriteRule ^fly-in-safaris-namibia/?$ https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+RewriteRule ^family-safaris-namibia/?$ https://desert-tracks.com/namibia-safaris/ [R=301,L]
+
+RewriteRule ^botswana-safaris/?$ https://desert-tracks.com/botswana-safaris-and-tours/ [R=301,L]
+RewriteRule ^east-africa-safaris/?$ https://desert-tracks.com/tanzania-kenya-zanzibar-safaris/ [R=301,L]
+
+# Old WooCommerce product pages
+RewriteRule ^product/ https://desert-tracks.com/destinations/ [R=301,L]
+
+# Old collection pages
+RewriteRule ^collection/luxury-safaris/?$ https://desert-tracks.com/namibia-luxury-safaris/ [R=301,L]
+RewriteRule ^collection/self-drive-safaris/?$ https://desert-tracks.com/namibia-self-drive-safaris/ [R=301,L]
+RewriteRule ^collection/fly-in-safaris/?$ https://desert-tracks.com/namibia-fly-in-safaris/ [R=301,L]
+
+# -------------------------------
+# ✅ CLEANUP (SEO SAFE)
+# -------------------------------
+
+# Block search pages
+RewriteRule ^search/.*$ - [G,L]
+
+# Redirect ugly WordPress query URLs
+RewriteCond %{QUERY_STRING} (^|&)p= [OR]
+RewriteCond %{QUERY_STRING} (^|&)cat= [OR]
+RewriteCond %{QUERY_STRING} (^|&)author=
+RewriteRule ^(.*)$ https://desert-tracks.com/$1? [R=301,L]
+
+</IfModule>
+
+
+# ================================
+# WORDPRESS CORE (DO NOT TOUCH)
+# ================================
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteBase /
+RewriteRule ^index\.php$ - [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.php [L]
+</IfModule>
+# END WordPress
+
+
+# BEGIN LiteSpeed
+<IfModule Litespeed>
+SetEnv noabort 1
+</IfModule>
+# END LiteSpeed
