@@ -339,10 +339,10 @@
                             <thead class="text-[10px] text-gray-400 uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
                                 <tr>
                                     <th class="px-4 py-4 w-10 font-bold">#</th>
-                                    <th class="px-3 py-4 w-[80px] text-center font-bold">Nights</th>
+                                    <th class="px-3 py-4 w-[60px] text-center font-bold">Nights</th>
                                     <th class="px-3 py-4 w-48 text-left font-bold">Region & Lodge</th>
-                                    <th class="px-3 py-4 w-[110px] text-center font-bold">Pricelist</th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Double PP
+                                    <th class="px-3 py-4 w-[90px] text-center font-bold">Pricelist</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Double PP
                                         <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
                                             <input type="number" v-model.number="doublePax" step="2" min="0" autocomplete="off"
                                                 class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
@@ -350,7 +350,7 @@
                                                 title="Double Pax (Multiples of 2)">
                                         </div>
                                     </th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Single PP
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Single PP
                                         <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
                                             <input type="number" v-model.number="singlePax" autocomplete="off"
                                                 class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
@@ -358,7 +358,7 @@
                                                 title="Single Pax">
                                         </div>
                                     </th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Child PP
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Child PP
                                         <div class="inline-flex flex-col items-center ml-2 relative top-[-2px]">
                                             <input type="number" v-model.number="childPax" autocomplete="off"
                                                 class="w-10 text-center text-xs text-gray-800 font-bold border rounded py-0.5 focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 outline-none transition-all"
@@ -366,10 +366,10 @@
                                                 title="Child Pax">
                                         </div>
                                     </th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Vehicle</th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Guide Fee</th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Guide Acc.</th>
-                                    <th class="px-3 py-4 w-[160px] min-w-[160px] text-right font-bold">Flights</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Vehicle</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Fee</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Acc.</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Flights</th>
                                     <th class="px-2 py-4"></th>
                                 </tr>
                             </thead>
@@ -623,14 +623,14 @@
                     </div>
 
                     <div class="p-5 space-y-3.5 text-[13px] bg-white">
-                        <div v-if="(storeTotals.group * doublePax) > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                        <div v-if="storeTotals.group > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
                                 class="text-gray-500 font-medium">Double Group <span class="text-[10px] bg-gray-100 px-1 rounded text-gray-400 ml-1">{{doublePax}}x</span></span><span
                                 class="font-bold text-gray-900">{{ format(storeTotals.group * doublePax) }}</span></div>
-                        <div v-if="(storeTotals.single * singlePax) > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                        <div v-if="storeTotals.single > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
                                 class="text-gray-500 font-medium">Single Group <span class="text-[10px] bg-gray-100 px-1 rounded text-gray-400 ml-1">{{singlePax}}x</span></span><span
                                 class="font-bold text-gray-900">{{ format(storeTotals.single * singlePax) }}</span>
                         </div>
-                        <div v-if="(storeTotals.child * childPax) > 0" class="flex justify-between items-center pb-2 border-b border-gray-100">
+                        <div v-if="storeTotals.child > 0" class="flex justify-between items-center pb-2 border-b border-gray-100">
                             <span
                                 class="text-gray-500 font-medium">Child Group <span class="text-[10px] bg-gray-100 px-1 rounded text-gray-400 ml-1">{{childPax}}x</span></span><span
                                 class="font-bold text-gray-900">{{ format(storeTotals.child * childPax) }}</span>
