@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safari Costing Engine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-body: #FAF9F6;
+            --bg-card: #F3F1F5;
+            --primary-orange: #d87a4d;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --border: #E5E7EB;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-body);
+            color: var(--text-dark);
+            margin: 0;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        /* Top Bar */
+        .top-nav {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        .btn-dark {
+            background: #111827;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-light {
+            background: #E5E7EB;
+            color: #9CA3AF;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        .header h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin: 0 0 10px 0;
+            color: #111;
+        }
+        .header p {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 2rem;
+        }
+        .tab {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #9CA3AF;
+            padding-bottom: 15px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+        .tab.active {
+            color: #111;
+            border-bottom: 2px solid var(--primary-orange);
+        }
+
+        /* Main Form Card */
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .form-input {
+            padding: 12px 16px;
+            border-radius: 8px;
+            border: 1px solid #fff;
+            background: #fff;
+            font-family: var(--font-sans);
+            font-size: 0.95rem;
+            color: #333;
+            outline: none;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .form-input::placeholder {
+            color: #ccc;
+        }
+
+        .total-pax {
+            margin-top: 10px;
+        }
+        .pax-number {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: #111;
+            border-bottom: 1px solid #D1D5DB;
+            display: inline-block;
+            width: 150px;
+            padding-bottom: 5px;
+        }
+
+        /* Passenger Config */
+        .config-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1000px;
+            margin: 40px auto 20px auto;
+        }
+        .config-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            color: #111;
+            margin: 0;
+        }
+        
+        .config-card {
+            background: #FAFAFA;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            max-width: 300px;
+        }
+        .group-title {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #111;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        .pax-types {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+        .pax-type-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .pax-type-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-light);
+            margin-bottom: 8px;
+        }
+        .pax-type-input {
+            width: 100%;
+            text-align: center;
+            padding: 10px 0;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+            background: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            color: #111;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-nav">
+        <button class="btn-dark">SAVED QUOTES</button>
+        <button class="btn-light">SAVE QUOTE</button>
+    </div>
+
+    <div class="header">
+        <h1>Costing Engine</h1>
+        <p>DESERT TRACKS PREMIUM PRICING</p>
+    </div>
+
+    <div class="tabs">
+        <div class="tab active">DESERT TRACKS</div>
+        <div class="tab">DESERT TRACKS + CONSULTANT</div>
+        <div class="tab">TRAVEL LOCAL</div>
+    </div>
+
+    <div class="card">
+        <div class="form-grid">
+            <div class="form-group">
+                <label class="form-label">CLIENT NAME</label>
+                <input type="text" class="form-input" placeholder="e.g. Smith Family">
+            </div>
+            <div class="form-group">
+                <label class="form-label">QUOTE LABEL</label>
+                <input type="text" class="form-input" placeholder="e.g. Option A">
+            </div>
+            <div class="form-group">
+                <label class="form-label">START DATE 📅</label>
+                <input type="text" class="form-input" placeholder="04/04/2026">
+            </div>
+            <div class="form-group">
+                <label class="form-label">AGENT NAME</label>
+                <input type="text" class="form-input" placeholder="e.g. Jane Doe">
+            </div>
+        </div>
+
+        <div class="form-group total-pax">
+            <label class="form-label">TOTAL PAX</label>
+            <div class="pax-number">2</div>
+        </div>
+    </div>
+
+    <div class="config-header">
+        <h3 class="config-title">PASSENGER CONFIGURATION</h3>
+        <button class="btn-dark" style="font-size:0.65rem;">+ ADD GROUP</button>
+    </div>
+
+    <div style="max-width: 1000px; margin: 0 auto;">
+        <div class="config-card">
+            <h4 class="group-title">Group 1</h4>
+            <div class="pax-types">
+                <div class="pax-type-box">
+                    <label class="pax-type-label">DOUBLE</label>
+                    <input type="text" class="pax-type-input" value="2">
+                </div>
+                <div class="pax-type-box">
+                    <label class="pax-type-label">SINGLE</label>
+                    <input type="text" class="pax-type-input" value="0">
+                </div>
+                <div class="pax-type-box">
+                    <label class="pax-type-label">CHILD</label>
+                    <input type="text" class="pax-type-input" value="0">
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
