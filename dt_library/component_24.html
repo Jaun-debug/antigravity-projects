@@ -592,6 +592,12 @@
             line-height: 1.5;
         }
     
+    
+        /* Extra spacing to separate counter line from picture */
+        .dt-film-footer {
+            padding-top: 2rem !important;
+        }
+
     </style>
 </head>
 <body>
@@ -1337,11 +1343,7 @@
 
         var autoPlayInterval;
         function startAutoPlay() {
-            if (!autoPlayInterval) {
-                // autoPlayInterval = setInterval(function() {
-                    snapTo((activeIndex + 1) % total);
-                }, 3500); 
-            }
+            // JS Autoplay disabled permanently
         }
         function stopAutoPlay() {
             if (autoPlayInterval) {
