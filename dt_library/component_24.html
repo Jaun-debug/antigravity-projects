@@ -537,6 +537,23 @@
             max-width: 600px;
             margin: 0;
         }
+
+        .lux-dest-split { display: flex; gap: 40px; align-items: flex-start; }
+        .lux-dest-featured-img { flex: 1; border-radius: 4px; overflow: hidden; position: sticky; top: 40px; }
+        .lux-dest-featured-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+        .lux-dest-list-wrap { flex: 1; display: flex; flex-direction: column; }
+        .lux-dest-list-wrap h3 { font-size: 0.75rem; letter-spacing: 0.25em; color: #888; font-weight: 600; margin-bottom: 2rem; }
+        .lux-dest-item { display: flex; align-items: center; gap: 20px; padding: 25px 0; border-top: 1px solid #eaeaea; text-decoration: none; color: inherit; }
+        .lux-dest-item:last-child { border-bottom: 1px solid #eaeaea; }
+        .lux-dest-item:hover { opacity: 0.7; }
+        .lux-dest-item img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
+        .lux-dest-item-content { flex: 1; }
+        .lux-dest-item-meta { font-size: 0.7rem; color: #d87a4d; font-weight: 600; letter-spacing: 0.2em; display: block; margin-bottom: 5px; }
+        .lux-dest-item-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 0 0 5px 0; }
+        .lux-dest-item-desc { font-size: 0.9rem; color: #666; margin: 0; }
+        .lux-dest-icon { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 900px) { .lux-dest-split { flex-direction: column; } }
+
 </style>
 </head>
 <body>
@@ -564,9 +581,20 @@
             <p class="lux-intro">Prepare for an unforgettable adventure. This exclusive Namibian journey takes you through the country's most iconic landscapes, blending adventure and relaxation at every turn.</p>
         
         <div class="lux-features-container">
-            <!-- Destinations at a Glance -->
-            <div class="lux-glance-wrap">
-                <div class="lux-glance-title">DESTINATIONS AT A GLANCE</div>
+            <!-- Destinations Split Block -->
+            <div class="lux-dest-split">
+                <div class="lux-dest-featured-img">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg" alt="Namibia Landscapes">
+                </div>
+                <div class="lux-dest-list-wrap">
+                    <h3>DESTINATIONS AT A GLANCE</h3>
+                    <a href="#day-01" class="lux-dest-item"><img src="https://wetu.com/imageHandler/c1920x1080/39414/01__timelen_exterior.jpg?fmt=jpg" alt="Windhoek"><div class="lux-dest-item-content"><span class="lux-dest-item-meta">1 NIGHT • CITY</span><h4 class="lux-dest-item-title">Windhoek</h4><p class="lux-dest-item-desc">A vibrant blend of German colonial architecture and modern African charm.</p></div><div class="lux-dest-icon">&#8594;</div></a>
+                    <a href="#day-02" class="lux-dest-item"><img src="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg" alt="Sossusvlei"><div class="lux-dest-item-content"><span class="lux-dest-item-meta">2 NIGHTS • DESERT</span><h4 class="lux-dest-item-title">Sossusvlei</h4><p class="lux-dest-item-desc">Towering red dunes and the hauntingly beautiful Deadvlei salt pan.</p></div><div class="lux-dest-icon">&#8594;</div></a>
+                    <a href="#day-04" class="lux-dest-item"><img src="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg" alt="Swakopmund"><div class="lux-dest-item-content"><span class="lux-dest-item-meta">2 NIGHTS • COAST</span><h4 class="lux-dest-item-title">Swakopmund</h4><p class="lux-dest-item-desc">Coastal charm, fresh Atlantic breezes, and thrilling desert adventures.</p></div><div class="lux-dest-icon">&#8594;</div></a>
+                    <a href="#day-06" class="lux-dest-item"><img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="Damaraland"><div class="lux-dest-item-content"><span class="lux-dest-item-meta">2 NIGHTS • WILDERNESS</span><h4 class="lux-dest-item-title">Damaraland</h4><p class="lux-dest-item-desc">Rugged ancient landscapes and elusive desert-adapted elephants.</p></div><div class="lux-dest-icon">&#8594;</div></a>
+                    <a href="#day-08" class="lux-dest-item"><img src="https://wetu.com/imageHandler/c1920x1080/10560/etosha_game_drive1.jpg?fmt=jpg" alt="Etosha NP"><div class="lux-dest-item-content"><span class="lux-dest-item-meta">3 NIGHTS • WILDLIFE</span><h4 class="lux-dest-item-title">Etosha National Park</h4><p class="lux-dest-item-desc">World-class safari experiences surrounding a massive, shimmering salt pan.</p></div><div class="lux-dest-icon">&#8594;</div></a>
+                </div>
+            </div>
                 <div class="lux-glance-grid">
                     <div class="lux-glance-item">
                         <img class="lux-glance-img" src="https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg" alt="Windhoek">
@@ -626,7 +654,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">WINDHOEK — TI MELEN BOUTIQUE GUESTHOUSE</span>
-                <h2 class="lux-day-title">Arrival in Windhoek</h2>
+                <h2 class="lux-day-title">Arrival in Windhoek</h3>
                 <p class="lux-day-desc">Experience the charm of Windhoek in a boutique guesthouse blending modern comforts with local warmth. Spend your first night in Namibia surrounded by the intimate atmosphere of Ti Melen, ideal for a peaceful start to your adventure.</p>
             </div>
             
@@ -634,7 +662,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">TI MELEN BOUTIQUE GUESTHOUSE</h2>
+                        <h2 class="dt-film-title">TI MELEN BOUTIQUE GUESTHOUSE</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -680,7 +708,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">KALAHARI DESERT — KALAHARI ANIB LODGE</span>
-                <h2 class="lux-day-title">Journey to the Kalahari</h2>
+                <h2 class="lux-day-title">Journey to the Kalahari</h3>
                 <p class="lux-day-desc">Discover the beauty of the Kalahari at this eco-friendly lodge. The towering red dunes and starry nights set the perfect backdrop for a romantic evening. Enjoy luxurious cuisine and desert exploration before retreating to your cozy room.</p>
             </div>
             
@@ -688,7 +716,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">KALAHARI ANIB LODGE</h2>
+                        <h2 class="dt-film-title">KALAHARI ANIB LODGE</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -734,7 +762,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">SOSSUSVLEI — DESERT HOMESTEAD LODGE</span>
-                <h2 class="lux-day-title">Dunes of Sossusvlei</h2>
+                <h2 class="lux-day-title">Dunes of Sossusvlei</h3>
                 <p class="lux-day-desc">Immerse yourself in the surreal beauty of the Namib Desert. Stay at Desert Homestead, nestled between the red dunes, where you can explore the world's tallest dunes and return to luxury at the lodge for intimate sunset views.</p>
             </div>
             
@@ -742,7 +770,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">DESERT HOMESTEAD LODGE</h2>
+                        <h2 class="dt-film-title">DESERT HOMESTEAD LODGE</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -788,7 +816,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">SWAKOPMUND — SWAKOPMUND GUESTHOUSE</span>
-                <h2 class="lux-day-title">Coastal Charm</h2>
+                <h2 class="lux-day-title">Coastal Charm</h3>
                 <p class="lux-day-desc">Blend adventure with relaxation at this charming guesthouse in Swakopmund, offering easy access to the beach and colonial-style comforts. Explore the unique coastal town with its German heritage, or unwind with a stroll along the ocean.</p>
             </div>
             
@@ -796,7 +824,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">SWAKOPMUND GUESTHOUSE</h2>
+                        <h2 class="dt-film-title">SWAKOPMUND GUESTHOUSE</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -842,7 +870,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">DAMARALAND — LODGE DAMARALAND</span>
-                <h2 class="lux-day-title">Ancient Landscapes</h2>
+                <h2 class="lux-day-title">Ancient Landscapes</h3>
                 <p class="lux-day-desc">In the heart of Damaraland, experience timeless landscapes and ancient rock art. Stay in a comfortable lodge designed to blend with its surroundings, offering exciting excursions to explore the desert's hidden gems.</p>
             </div>
             
@@ -850,7 +878,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">LODGE DAMARALAND</h2>
+                        <h2 class="dt-film-title">LODGE DAMARALAND</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -896,7 +924,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">ETOSHA SOUTH — ETOSHA SAFARI CAMP</span>
-                <h2 class="lux-day-title">Gateway to Wildlife</h2>
+                <h2 class="lux-day-title">Gateway to Wildlife</h3>
                 <p class="lux-day-desc">Set near the southern entrance to Etosha National Park, Etosha Safari Camp gives you access to one of Africa's most celebrated wildlife sanctuaries. Enjoy an evening of delicious meals and sunset views.</p>
             </div>
             
@@ -904,7 +932,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">ETOSHA SAFARI CAMP</h2>
+                        <h2 class="dt-film-title">ETOSHA SAFARI CAMP</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -950,7 +978,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">ETOSHA RESERVE — ONGUMA BUSH CAMP</span>
-                <h2 class="lux-day-title">The Great Salt Pan</h2>
+                <h2 class="lux-day-title">The Great Salt Pan</h3>
                 <p class="lux-day-desc">Enjoy luxurious tented suites at Onguma, a private reserve bordering Etosha National Park. The tranquil setting allows for both thrilling game drives and romantic evenings by the campfire.</p>
             </div>
             
@@ -958,7 +986,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">ONGUMA BUSH CAMP</h2>
+                        <h2 class="dt-film-title">ONGUMA BUSH CAMP</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1004,7 +1032,7 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">OTJIWA NATURE RESERVE — EAGLE'S REST</span>
-                <h2 class="lux-day-title">Journey's End in Luxury</h2>
+                <h2 class="lux-day-title">Journey's End in Luxury</h3>
                 <p class="lux-day-desc">End your Namibian adventure in luxury at Eagle's Rest. Nestled in the peaceful Otjiwa Nature Reserve, the lodge offers exceptional service and the chance to unwind with private bush walks or simply relax.</p>
             </div>
             
@@ -1012,7 +1040,7 @@
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">EAGLE'S REST</h2>
+                        <h2 class="dt-film-title">EAGLE'S REST</h3>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1058,20 +1086,15 @@
                     <div class="lux-day-line"></div>
                 </div>
                 <span class="lux-day-location">WINDHOEK — HOSEA KUTAKO AIRPORT</span>
-                <h2 class="lux-day-title">Departure Bound</h2>
+                <h2 class="lux-day-title">Departure Bound</h3>
                 <p class="lux-day-desc">After a breathtaking final morning in the Otjiwa reserve, make your way back down to the capital for your departure. Journey safely and take home an eternity of memories.</p>
             </div>
         
-        <!-- The Desert Tracks Local Guarantee -->
-        <div class="lux-guarantee">
-            <h3>Plan with Peace of Mind</h3>
-            <p>Desert Tracks was born from a simple idea: travelers deserve authentic, expertly crafted safari experiences designed by locals who know Namibia best. We are a locally based safari architect company driven by passion, expertise, and a deep love for Africa. Avoid the inflated prices of overseas operators and experience true Namibian hospitality from the moment you arrive.</p>
-        </div>
-
+        
         <!-- Verified Trust/Reviews Block -->
         <div class="lux-trust-block">
             <span class="lux-trust-eyebrow">WHAT OUR CLIENTS SAY</span>
-            <h2 class="lux-trust-title">Every journey leaves a story behind.</h2>
+            <h2 class="lux-trust-title">Every journey leaves a story behind.</h3>
             <p class="lux-trust-subtitle">Discover the raw, unfiltered voices of our guests as they share their Desert Tracks adventures across Namibia and Botswana. Their words capture the magic better than we ever could.</p>
             
             <div class="lux-shortcode-wrap">
