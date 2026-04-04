@@ -327,7 +327,8 @@
             justify-content: space-between;
             padding: 20px 40px 40px 40px;
             margin-top: 50px; /* New desktop spacing from pictures */
-            gap: 20px;
+            column-gap: 40px;
+            row-gap: 50px;
         }
         .dt-film-progress-wrap {
             flex: 1; height: 3px;
@@ -542,7 +543,8 @@
         .lux-dest-featured-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
         .lux-dest-list-wrap { flex: 1; display: flex; flex-direction: column; }
         .lux-dest-list-wrap h3 { font-size: 0.75rem; letter-spacing: 0.25em; color: #888; font-weight: 600; margin-bottom: 2rem; }
-        .lux-dest-item { display: flex; align-items: center; gap: 20px; padding: 25px 0; border-top: 1px solid #eaeaea; text-decoration: none; color: inherit; }
+        .lux-dest-item { display: flex; align-items: center; column-gap: 40px;
+            row-gap: 50px; padding: 25px 0; border-top: 1px solid #eaeaea; text-decoration: none; color: inherit; }
         .lux-dest-item:last-child { border-bottom: 1px solid #eaeaea; }
         .lux-dest-item:hover { opacity: 0.7; }
         .lux-dest-item img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
@@ -559,7 +561,8 @@
         .lux-acc-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            column-gap: 40px;
+            row-gap: 50px;
         }
         @media (max-width: 900px) {
             .lux-acc-grid {
