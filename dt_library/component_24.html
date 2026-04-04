@@ -554,7 +554,47 @@
         @media (max-width: 900px) { .lux-dest-split { flex-direction: column; } }
 
 
+        
         /* OVERRIDES FOR DESTINATIONS & ACCOM LISTS */
+        .lux-acc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        @media (max-width: 900px) {
+            .lux-acc-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        @media (max-width: 600px) {
+            .lux-acc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .lux-acc-card {
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            transition: opacity 0.3s ease;
+        }
+        .lux-acc-card img {
+            width: 100%;
+            aspect-ratio: 1/1;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        .lux-acc-card:hover {
+            opacity: 0.8;
+        }
+        .lux-acc-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin: 0 0 5px 0;
+            color: #111;
+        }
+
         .lux-dest-featured-img {
             display: none !important;
         }
