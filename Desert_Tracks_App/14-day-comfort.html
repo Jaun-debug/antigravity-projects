@@ -1400,9 +1400,9 @@
 
 
         <!-- CTA Block -->
-        <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; margin-top: 4rem; margin-bottom: 2rem; text-align: center;">Ready to craft your journey?</h2>
-        <div class="lux-cta-block" style="text-align: center; margin-bottom: 6rem;">
-            <a href="/contact" style="display: inline-block; padding: 18px 40px; background: #d87a4d; color: #fff; text-decoration: none; font-weight: 600; letter-spacing: 0.1em; border-radius: 4px; transition: background 0.3s; box-shadow: 0 4px 15px rgba(216,122,77,0.3);">ENQUIRE NOW</a>
+        <h2 id="dtCtaTitle" style="font-size: 2.5rem; font-family: 'Playfair Display', serif; margin-top: 4rem; margin-bottom: 2rem; text-align: center; opacity: 0; transform: translateY(40px); filter: blur(6px); will-change: opacity, transform, filter;">Ready to craft your journey?</h2>
+        <div class="lux-cta-block" id="dtCtaSection" style="text-align: center; margin-bottom: 6rem;">
+            <a id="dtCtaBtn" href="/contact" style="display: inline-block; padding: 18px 40px; background: #d87a4d; color: #fff; text-decoration: none; font-weight: 600; letter-spacing: 0.1em; border-radius: 4px; transition: background 0.3s, transform 0.4s ease, box-shadow 0.4s ease; box-shadow: 0 4px 15px rgba(216,122,77,0.3); opacity: 0; transform: translateY(40px); filter: blur(6px); will-change: opacity, transform, filter;">ENQUIRE NOW</a>
         </div>
 
         <!-- Verified Trust/Reviews Block -->
@@ -1606,6 +1606,34 @@
     });
 }, 100);
     })();
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" data-no-optimize="1"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" data-no-optimize="1"></script>
+<script data-no-optimize="1">
+(function(){
+    function initCtaReveal(){
+        var section=document.getElementById('dtCtaSection'),
+            title=document.getElementById('dtCtaTitle'),
+            btn=document.getElementById('dtCtaBtn');
+        if(!section||typeof gsap==='undefined'||section.dataset.ready)return;
+        section.dataset.ready='1';
+        gsap.registerPlugin(ScrollTrigger);
+
+        var tl=gsap.timeline({
+            scrollTrigger:{
+                trigger:section,
+                start:'top 90%', 
+                toggleActions: 'play none none none' 
+            }
+        });
+        tl.to(title,{opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1.5})
+          .to(btn,  {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1.5},'-=1.1');
+    }
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCtaReveal);}
+    else{initCtaReveal();}
+    setTimeout(initCtaReveal,800);
+})();
 </script>
 </body>
 </html>
