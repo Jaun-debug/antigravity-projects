@@ -363,10 +363,7 @@
             .dt-film-progress-wrap { order: 1; min-width: 100%; margin-bottom: 10px; height: 4px; }
             .dt-film-arrows { order: 2; margin-left: auto; margin-right: auto; }
             .dt-film-track { padding: 0 20px; }
-            .dt-film-card { height: 320px; }
-            .dt-film-card:nth-child(3n+1) { width: 260px; }
-            .dt-film-card:nth-child(3n+2) { width: 200px; }
-            .dt-film-card:nth-child(3n)   { width: 280px; }
+            .dt-film-card { height: 320px; width: 330px !important; margin-right: 30px; flex-shrink: 0; }
         }
     
         /* ==================================================
@@ -378,6 +375,7 @@
             display: flex;
             flex-direction: column;
             gap: 4rem;
+            padding: 0 4rem;
         }
 
         /* Destinations at a Glance */
@@ -599,16 +597,13 @@
         }
 
         .lux-dest-featured-img {
-            display: none !important;
+            
         }
         .lux-dest-split {
-            display: block !important;
+            
         }
         .lux-dest-list-wrap {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 40px;
-            row-gap: 10px;
+            
         }
         .lux-dest-list-wrap h3 {
             grid-column: 1 / -1; 
@@ -1389,7 +1384,7 @@
         </div>
 
         <h2 style="font-size: 2rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; margin-top:4rem;">Includes / Excludes</h2>
-        <div class="lux-inclusions-grid">
+        <div class="lux-inclusions-grid" style="padding: 0 4rem;">
                 <div class="lux-inc-col">
                     <h4>Fully Inclusive</h4>
                     <ul class="lux-inc-list">
@@ -1417,7 +1412,7 @@
 
 
         <!-- Premium Pricing Block -->
-        <div class="lux-premium-pricing-wrapper" style="margin-top: 5rem; margin-bottom: 5rem; display: flex; flex-wrap: wrap; gap: 40px;">
+        <div class="lux-premium-pricing-wrapper" style="padding: 0 4rem; margin-top: 5rem; margin-bottom: 5rem; display: flex; flex-wrap: wrap; gap: 40px;">
             <!-- Left Side Title -->
             <div style="flex: 1; min-width: 250px;">
                 <div style="display:flex; align-items:center; gap:15px; margin-bottom: 1rem;">
@@ -1582,7 +1577,7 @@
         var startX = 0, startY = 0, startScroll = 0, dragging = false, touchDir = null;
         
         function maxScroll(){
-            var tw = cards.reduce(function(s,c){return s + c.offsetWidth + 14}, 0);
+            var tw = cards.reduce(function(s,c){return s + c.offsetWidth + 30}, 0);
             return -(tw - wrap.offsetWidth + (window.innerWidth <= 768 ? 40 : 80));
         }
         
@@ -1606,7 +1601,7 @@
                     minDist = dist;
                     nearest = i;
                 }
-                cumX += c.offsetWidth + 14;
+                cumX += c.offsetWidth + 30;
             });
             activeIndex = nearest;
             
@@ -1627,7 +1622,7 @@
             activeIndex = Math.max(0, Math.min(total - 1, index));
             var tx = 0;
             for(var i=0; i<activeIndex; i++) {
-                tx += cards[i].offsetWidth + 14;
+                tx += cards[i].offsetWidth + 30;
             }
             applyX(-tx, false);
         }
@@ -1693,7 +1688,7 @@
         }, {passive: true});
         
         if (prevBtn) prevBtn.addEventListener("click", function() { snapTo(activeIndex - 1); resetAutoPlay(); });
-        if (nextBtn) nextBtn.addEventListener("click", function() { snapTo(activeIndex + 1); resetAutoPlay(); });
+        if (nextBtn) nextBtn.addEventListener("click", function() { if (activeIndex >= total - 1) { snapTo(0); } else { snapTo(activeIndex + 1); } resetAutoPlay(); });
         
         snapTo(0);
         
