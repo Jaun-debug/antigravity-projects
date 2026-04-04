@@ -1,296 +1,1788 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Safari Costing Engine</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Desert Tracks Premium Pricing Engine v2</title>
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-body: #FAF9F6;
-            --bg-card: #F3F1F5;
-            --primary-orange: #d87a4d;
-            --text-dark: #1F2937;
-            --text-light: #6B7280;
-            --border: #E5E7EB;
-            --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Inter', sans-serif;
+            --primary: #1a1a24;
+            --accent: #d87a4d;
+            --accent-hover: #e2a85e;
+            --bg-subtle: #ffffff;
         }
 
         body {
-            font-family: var(--font-sans);
-            background-color: var(--bg-body);
-            color: var(--text-dark);
-            margin: 0;
-            padding: 40px;
-            box-sizing: border-box;
+            font-family: 'Jost', sans-serif;
+            background-color: var(--bg-subtle);
+            color: #2c2c2c;
+            background-image: radial-gradient(circle at top right, rgba(216, 122, 77, 0.05), transparent 40%),
+                              radial-gradient(circle at bottom left, rgba(26, 26, 36, 0.05), transparent 40%);
+            background-attachment: fixed;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Top Bar */
-        .top-nav {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-            margin-bottom: 2rem;
-        }
-        .btn-dark {
-            background: #111827;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border: none;
-            cursor: pointer;
-        }
-        .btn-light {
-            background: #E5E7EB;
-            color: #9CA3AF;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border: none;
-            cursor: pointer;
+        h1, h2, h3, h4, .font-heading, .serif-font {
+            font-family: 'Playfair Display', serif;
         }
 
-        /* Header */
-        .header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-        .header h1 {
-            font-family: var(--font-serif);
-            font-size: 3.5rem;
-            font-weight: 400;
-            margin: 0 0 10px 0;
-            color: #111;
-        }
-        .header p {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #333;
-            margin: 0;
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-bottom: 2rem;
+        .dt-orange { color: var(--accent); }
+        .bg-dt-orange { background-color: var(--accent); }
+        .border-dt-orange { border-color: var(--accent); }
+        
+        /* Interactive Elements */
+        .btn-premium {
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .tab {
-            font-size: 0.85rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #9CA3AF;
-            padding-bottom: 15px;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-        }
-        .tab.active {
-            color: #111;
-            border-bottom: 2px solid var(--primary-orange);
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
         }
 
-        /* Main Form Card */
-        .card {
-            background: var(--bg-card);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 2rem;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-label {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-        .form-input {
-            padding: 12px 16px;
+        /* Modernized Inputs */
+        .dt-input {
+            width: 100%;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-            border: 1px solid #fff;
+            padding: 0.6rem 0.75rem;
+            background: rgba(255,255,255,0.7);
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+            color: #2c2c2c;
+            font-weight: 500;
+        }
+
+        .dt-input:hover {
             background: #fff;
-            font-family: var(--font-sans);
-            font-size: 0.95rem;
-            color: #333;
+        }
+
+        .dt-input:focus {
             outline: none;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        .form-input::placeholder {
-            color: #ccc;
-        }
-
-        .total-pax {
-            margin-top: 10px;
-        }
-        .pax-number {
-            font-family: var(--font-serif);
-            font-size: 2rem;
-            color: #111;
-            border-bottom: 1px solid #D1D5DB;
-            display: inline-block;
-            width: 150px;
-            padding-bottom: 5px;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(216, 122, 77, 0.15);
+            background: #fff;
         }
 
-        /* Passenger Config */
-        .config-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1000px;
-            margin: 40px auto 20px auto;
+        .dt-input:disabled {
+            background: #F3F4F6;
+            color: #9CA3AF;
+            cursor: not-allowed;
+            border-color: #E5E7EB;
         }
-        .config-title {
-            font-family: var(--font-serif);
-            font-size: 1.25rem;
-            color: #111;
-            margin: 0;
+
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+        /* Custom Scrollbar for better UX */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E5E7EB; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D1D5DB; }
+
+        .tab-btn {
+            position: relative;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #9ca3af;
+            cursor: pointer;
+            letter-spacing: 2px;
         }
         
-        .config-card {
-            background: #FAFAFA;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px;
-            max-width: 300px;
-        }
-        .group-title {
-            font-size: 0.9rem;
+        .tab-btn.active {
+            color: var(--primary);
             font-weight: 700;
-            color: #111;
-            text-align: center;
-            margin-top: 0;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border);
         }
-        .pax-types {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
+        
+        .tab-btn::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
         }
-        .pax-type-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .pax-type-label {
-            font-size: 0.65rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
-        .pax-type-input {
+
+        .tab-btn.active::after {
             width: 100%;
-            text-align: center;
-            padding: 10px 0;
-            border-radius: 6px;
-            border: 1px solid var(--border);
-            background: #fff;
-            font-weight: 700;
-            font-size: 1rem;
-            color: #111;
-            outline: none;
         }
+
+        [v-cloak] { display: none; }
+    </style>
+</head>
+
+<body class="p-4 md:p-8 min-h-screen">
+    <div id="app" v-cloak class="w-full mx-auto flex flex-col gap-6">
+
+        <!-- Elegant Header Configuration -->
+        <div class="flex flex-col mb-4 bg-transparent -mx-4 md:-mx-8 px-4 md:px-8 mt-0 pt-6 pb-2">
+
+            <div class="text-center mb-10">
+                <h1 class="text-4xl lg:text-5xl font-normal tracking-tight text-[#1a1a24] serif-font drop-shadow-sm mb-3">Costing Engine</h1>
+                <p class="text-dt-orange text-xs md:text-sm font-bold tracking-[0.3em] uppercase">Desert Tracks Premium Pricing</p>
+                <div class="h-[1px] w-32 bg-gradient-to-r from-transparent via-[#d87a4d] to-transparent mx-auto mt-8"></div>
+            </div>
+
+            <!-- Elegant Tabs Full Width -->
+            <div class="flex justify-center gap-8 md:gap-16 px-4 flex-wrap mt-2">
+                <div class="tab-btn text-[10px] md:text-xs uppercase tracking-[0.2em] whitespace-nowrap"
+                    :class="activeTab === 'dt' ? 'active' : ''"
+                    @click="activeTab='dt'">Desert Tracks</div>
+                <div class="tab-btn text-[10px] md:text-xs uppercase tracking-[0.2em] whitespace-nowrap"
+                    :class="activeTab === 'dt_agent' ? 'active' : ''"
+                    @click="activeTab='dt_agent'">Desert Tracks + Consultant</div>
+                <div class="tab-btn text-[10px] md:text-xs uppercase tracking-[0.2em] whitespace-nowrap"
+                    :class="activeTab === 'tl' ? 'active' : ''"
+                    @click="activeTab='tl'">Travel Local</div>
+            </div>
+
+            <!-- Meta Data Row Settings -->
+            <div class="bg-[#F1EEF4] border border-white/60 shadow-[0_10px_40px_rgba(0,0,0,0.03)] p-6 lg:p-8 mb-4 mt-8 rounded-[1.5rem] w-full mx-auto relative overflow-hidden transition-all duration-300">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#d87a4d] opacity-[0.03] rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+                    <div class="flex flex-col gap-2 relative">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Client Name</label>
+                        <input type="text" v-model="clientName" class="dt-input" placeholder="e.g. Smith Family">
+                    </div>
+                    <div class="flex flex-col gap-2 relative">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Quote Label</label>
+                        <input type="text" v-model="quoteLabel" class="dt-input" placeholder="e.g. Option A">
+                    </div>
+                    <div class="flex flex-col gap-2 relative border-r border-transparent md:border-gray-200/40 pr-0 md:pr-4">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Start Date 📅</label>
+                        <input type="date" v-model="arrivalDate" class="dt-input text-gray-600 font-semibold" style="height: 48px;">
+                    </div>
+                    <div class="flex flex-col gap-2 relative border-r border-transparent md:border-gray-200/40 pr-0 md:pr-4">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Agent Name</label>
+                        <input type="text" v-model="agentName" class="dt-input" placeholder="e.g. Jane Doe">
+                    </div>
+                    <div class="flex flex-col gap-2 lg:pl-4 justify-center">
+                        <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Total Pax</label>
+                        <input type="number" v-model.number="numPax" class="w-full text-left font-normal serif-font text-3xl bg-transparent border-0 outline-none focus:ring-0 text-[#1a1a24] p-1 border-b-[1px] border-gray-300 transition-colors focus:border-[#d87a4d]">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Floating Action Tabs (Top Right) -->
+            <div class="fixed top-0 right-4 md:right-8 flex gap-2 z-[60]">
+                <button @click="isQuotesDrawerOpen = true"
+                    class="bg-gray-900 text-white px-5 md:px-6 py-2 md:py-3 rounded-b-xl shadow-lg flex items-center justify-center font-bold tracking-[0.15em] text-[10px] md:text-xs uppercase hover:bg-black transition-transform transform hover:translate-y-1">
+                    SAVED QUOTES
+                </button>
+                <button @click="saveQuote()" :disabled="!canSave"
+                    class="text-white px-5 md:px-6 py-2 md:py-3 rounded-b-xl shadow-lg flex items-center justify-center font-bold tracking-[0.15em] text-[10px] md:text-xs uppercase transition-all transform"
+                    :class="canSave ? 'bg-dt-orange hover:bg-[#b85b30] btn-premium cursor-pointer' : 'bg-gray-300 cursor-not-allowed text-gray-500'">
+                    SAVE QUOTE
+                </button>
+            </div>
+
+            <!-- The actual sliding drawer overlay -->
+            <div v-if="isQuotesDrawerOpen" class="fixed inset-0 bg-black/40 z-[90] transition-opacity backdrop-blur-sm"
+                @click="isQuotesDrawerOpen = false"></div>
+            <div class="fixed right-0 top-0 h-full w-full max-w-[440px] bg-gray-50/95 backdrop-blur-md shadow-2xl z-[100] transform transition-transform duration-300 ease-in-out border-l border-white/40 flex flex-col"
+                :class="isQuotesDrawerOpen ? 'translate-x-0' : 'translate-x-full'">
+
+                <div
+                    class="p-6 bg-white border-b border-gray-100 flex justify-between items-center shadow-sm relative z-10 shrink-0">
+                    <h4 class="font-black text-lg uppercase text-gray-800 tracking-widest flex items-center gap-2">
+                        <span class="w-2 h-2 rounded-full bg-dt-orange animate-pulse"></span>
+                        Your Saved Quotes
+                    </h4>
+                    <button @click="isQuotesDrawerOpen = false"
+                        class="text-gray-400 hover:text-red-500 transition-colors w-8 h-8 flex items-center justify-center rounded-full hover:bg-red-50 text-xl font-bold">✕</button>
+                </div>
+
+                <div class="p-6 flex-1 overflow-y-auto w-full flex flex-col gap-4">
+                    <div v-if="Object.keys(groupedQuotes).length === 0"
+                        class="text-sm font-medium text-gray-400 italic py-3 text-center w-full">
+                        You have not saved any quotes yet. Fill out the configuration and click Save.
+                    </div>
+                    <div v-for="(quotes, agent) in groupedQuotes" :key="agent"
+                        class="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm shrink-0 transition-all cursor-pointer hover:border-dt-orange/30"
+                        @click="expandedAgent = expandedAgent === agent ? null : agent">
+
+                        <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+                            <span class="text-xs font-bold bg-dt-orange text-white px-2 py-1 rounded shadow-sm">{{ agent
+                                || 'Unnamed Agent' }}</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-[10px] text-gray-400 font-bold uppercase">{{
+                                    Object.keys(quotes).length }} Client(s)</span>
+                                <span class="text-gray-400 transform transition-transform"
+                                    :class="expandedAgent === agent ? 'rotate-180' : ''">▼</span>
+                            </div>
+                        </div>
+
+                        <div v-if="expandedAgent === agent"
+                            class="flex flex-col gap-3 max-h-[500px] overflow-y-auto pr-1" @click.stop>
+                            <!-- Admin Password Gate -->
+                            <div v-if="['admin', 'bianca', 'viola'].includes(agent.toLowerCase()) && !unlockedAgents.includes(agent)"
+                                class="flex flex-col gap-2 py-4">
+                                <div class="text-[11px] text-gray-500 font-medium text-center">This agent requires a
+                                    password</div>
+                                <div class="flex gap-2">
+                                    <input type="password" v-model="adminPasswords[agent]" placeholder="Password..."
+                                        class="flex-1 text-xs p-2 rounded-lg border-gray-300 bg-gray-50" @click.stop>
+                                    <button @click.stop="unlockAgent(agent)"
+                                        class="text-[11px] bg-gray-800 text-white px-3 py-2 rounded-lg font-bold hover:bg-black transition-colors">Unlock</button>
+                                </div>
+                            </div>
+
+                            <!-- Quote Cards Grouped By Client -->
+                            <template v-else>
+                                <div v-for="(clientQuotes, clientName) in quotes" :key="clientName"
+                                    class="bg-gray-50 p-2.5 rounded-lg border border-gray-100 flex flex-col gap-2 transition-all">
+                                    <div
+                                        class="flex justify-between items-center px-1 border-b border-gray-200/50 pb-2 mb-1">
+                                        <div
+                                            class="font-extrabold text-gray-800 text-xs tracking-wide uppercase truncate pr-2">
+                                            {{ clientName }}</div>
+                                        <div class="flex items-center gap-2 shrink-0">
+                                            <span
+                                                class="text-[9px] text-gray-500 font-bold px-1.5 py-0.5 bg-white border border-gray-200 rounded shadow-sm">
+                                                {{ clientQuotes.length }} Version{{ clientQuotes.length > 1 ? 's' : ''
+                                                }}
+                                            </span>
+                                            <button @click.stop="deleteAllQuotesForClient(clientQuotes)"
+                                                title="Delete Everything For This Client"
+                                                class="text-red-400 hover:text-red-700 font-bold text-xs bg-red-50 hover:bg-red-100 rounded px-1.5 py-0.5 transition-colors">✕</button>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-1 items-stretch mb-2" v-if="clientQuotes.length > 1">
+                                        <div class="bg-white rounded border border-gray-200 overflow-hidden flex-1 relative"
+                                            @click.stop>
+                                            <select
+                                                class="w-full text-[10px] font-bold text-gray-600 p-1.5 outline-none bg-transparent min-w-0"
+                                                v-model="clientQuotes.selectedQuoteIndex"
+                                                @change="loadQuote(clientQuotes.selectedQuoteIndex)">
+                                                <option :value="undefined" disabled>Select quote version...</option>
+                                                <option v-for="(q, idx) in clientQuotes" :key="q.originalIndex"
+                                                    :value="q.originalIndex">
+                                                    {{ q.quoteLabel || ('Version ' + (clientQuotes.length - idx)) }} ({{
+                                                    new Date(q.timestamp).toLocaleString() }})
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <button
+                                            @click.stop="deleteQuote(clientQuotes.selectedQuoteIndex !== undefined ? clientQuotes.selectedQuoteIndex : clientQuotes[0].originalIndex)"
+                                            title="Delete Selected Version"
+                                            class="px-2 py-1 text-red-500 bg-white border border-gray-200 rounded text-[11px] font-bold shadow-sm hover:!bg-red-500 hover:text-white hover:border-red-600 transition-colors shrink-0">
+                                            ✕
+                                        </button>
+                                    </div>
+                                    <div class="text-[10px] text-gray-500 mb-1" v-else>
+                                        <span v-if="clientQuotes[0].quoteLabel" class="font-bold text-gray-700">{{
+                                            clientQuotes[0].quoteLabel }} - </span>Created: {{ new
+                                        Date(clientQuotes[0].timestamp).toLocaleString() }}
+                                    </div>
+
+                                    <div class="flex gap-2 items-stretch mt-1">
+                                        <button
+                                            @click.stop="loadQuote(clientQuotes.selectedQuoteIndex ?? clientQuotes[0].originalIndex); isQuotesDrawerOpen = false"
+                                            class="flex-1 px-2 py-1.5 bg-blue-50 text-blue-700 border border-blue-200 text-[10px] font-bold tracking-widest rounded shadow-sm hover:bg-blue-100 transition-colors shadow-sm">LOAD</button>
+                                        <button
+                                            @click.stop="exportDocument(clientQuotes.selectedQuoteIndex ?? clientQuotes[0].originalIndex, 'costing')"
+                                            class="flex-1 px-2 py-1.5 bg-[#f4ebd0] text-yellow-900 border border-[#d4c391] text-[10px] font-bold tracking-widest rounded shadow-sm hover:bg-[#ebdcae] transition-colors">COSTING</button>
+                                        <button v-if="clientQuotes.length === 1"
+                                            @click.stop="deleteQuote(clientQuotes[0].originalIndex)"
+                                            title="Delete Version"
+                                            class="px-2.5 py-1 text-red-400 hover:text-white hover:bg-red-500 border border-transparent rounded text-[11px] font-bold transition-colors shadow-sm shrink-0">✕</button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 shrink-0 bg-white border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                    <button @click="saveQuote(); isQuotesDrawerOpen = false" :disabled="!canSave"
+                        class="w-full py-4 rounded-xl text-sm font-black tracking-widest uppercase transition shadow-md flex items-center justify-center gap-2"
+                        :class="canSave ? 'bg-dt-orange hover:bg-orange-600 text-white animate-pulse' : 'bg-gray-200 text-gray-400 cursor-not-allowed'">
+                        + Save Current Quote
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col gap-6 relative">
+
+            <div class="w-full space-y-8 shrink-0 z-10">
+
+                <!-- Pax Groups UI -->
+                <div class="bg-white rounded-2xl shadow-sm border border-[#e5e7e9] p-5">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="font-bold text-gray-800 tracking-wide uppercase text-sm">Passenger Configuration</h3>
+                        <button @click="addGroup" class="px-4 py-1.5 bg-gray-900 border border-gray-900 shadow-sm text-white text-[10px] uppercase font-bold rounded hover:bg-dt-orange hover:border-dt-orange transition-colors">+ Add Group</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div v-for="(g, idx) in paxGroups" :key="g.id" class="bg-gray-50 border text-center border-gray-200 rounded-xl p-4 relative shadow-sm transition-all hover:border-gray-300">
+                            <button v-if="paxGroups.length > 1" @click="removeGroup(idx)" class="absolute top-2 right-2.5 text-gray-400 hover:text-red-500 font-bold transition-colors">✕</button>
+                            <input v-model="g.name" class="font-bold text-sm bg-transparent border-b border-gray-200 outline-none w-3/4 mb-4 pb-1 text-center text-gray-800 focus:border-dt-orange" placeholder="e.g. Group 1" />
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Double</label>
+                                <input type="number" v-model.number="g.double" step="2" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Single</label>
+                                <input type="number" v-model.number="g.single" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Child</label>
+                                <input type="number" v-model.number="g.child" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Itinerary Builder -->
+                <div class="bg-[#F4F5F6] rounded-[1.25rem] shadow-sm border border-[#e5e7e9] overflow-hidden">
+                    <div class="flex justify-between items-center p-6 border-b border-gray-50">
+                        <h2 class="text-xl font-bold text-gray-900 font-heading">Itinerary Breakdown</h2>
+                        
+                        <div class="flex items-center gap-2">
+                            <select v-model="globalSeason" class="text-xs font-bold bg-white border border-gray-200 text-gray-600 rounded-lg px-3 py-2 outline-none focus:border-dt-orange shadow-sm cursor-pointer uppercase tracking-widest">
+                                <option value="low">Off-Peak (Nov - Jun)</option>
+                                <option value="high">Peak (Jul - Oct)</option>
+                            </select>
+                            <button @click="addDay"
+                                class="bg-[#79b4ff] hover:bg-[#63a0ec] text-white px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
+                                + Add Day
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto pb-4">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-[10px] text-gray-400 uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
+                                <tr>
+                                    <th class="px-4 py-4 w-10 font-bold">#</th>
+                                    <th class="px-3 py-4 w-[60px] text-center font-bold">Nights</th>
+                                    <th class="px-3 py-4 w-48 text-left font-bold">Region & Lodge</th>
+                                    <th class="px-3 py-4 w-[90px] text-center font-bold">Pricelist</th>
+                                                                        <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Double PP</th>
+                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Single PP</th>
+                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Child PP</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Vehicle</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Fee</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Acc.</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Flights</th>
+                                    <th class="px-2 py-4"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(day, index) in itinerary" :key="index"
+                                    class="border-b hover:bg-white/80 transition"
+                                    :class="day.attachedPdf ? 'bg-green-100/60 border-green-200' : 'border-gray-100'">
+                                    <td class="px-3 py-2 font-semibold text-gray-400 text-xs text-center">{{ index + 1
+                                        }}</td>
+                                    <td class="px-3 py-2 text-center">
+                                        <div class="flex justify-center">
+                                            <input type="number" v-model.number="day.nights"
+                                                class="w-12 text-center font-bold text-sm bg-gray-50/50 py-1 border outline-none focus:ring-0 rounded-md border-gray-200 focus:border-dt-orange transition-colors"
+                                                min="1" max="99">
+                                        </div>
+                                        <div v-if="rowDates[index]" class="text-[9px] text-gray-400 font-bold mt-1 tracking-wider uppercase">
+                                            {{ new Date(rowDates[index]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }}
+                                        </div>
+                                        <button v-if="day.lodge" @click="toggleManualSeason(day, index)" class="text-[8px] font-black mt-0.5 uppercase tracking-widest px-1 py-0.5 rounded cursor-pointer hover:bg-gray-100 border border-transparent hover:border-gray-200 transition-colors w-full" :class="getSeason(index) === 'high' ? 'text-dt-orange' : 'text-blue-400'" title="Click to manually toggle season">
+                                            {{ getSeason(index) === 'high' ? 'PEAK' : 'OFF PEAK' }}
+                                        </button>
+                                    </td>
+                                    <td class="px-3 py-2 flex flex-col gap-1 min-w-[200px]">
+                                        <select v-model="day.region" @change="day.lodge=''"
+                                            class="dt-input text-xs font-semibold bg-gray-50">
+                                            <option value="">Select Region...</option>
+                                            <option v-for="r in Object.keys(regions)" :key="r" :value="r">{{r}}</option>
+                                        </select>
+                                        <select v-model="day.lodge" :disabled="!day.region"
+                                            @change="handleLodgeChange(day, index)" class="dt-input text-xs font-medium"
+                                            :class="{'text-green-700 bg-green-50 border-green-300 font-bold': day.attachedPdf}">
+                                            <option value="">Select Lodge...</option>
+                                            <option v-for="l in regions[day.region] || []" :key="l" :value="l"
+                                                :class="uploadedLodges.includes(l) ? 'text-green-600 font-bold bg-green-50' : ''">
+                                                {{l}}{{ uploadedLodges.includes(l) ? ' ✓' : '' }}
+                                            </option>
+                                            <option value="__custom__" class="font-bold text-dt-orange">+ Add Custom
+                                                Lodge...</option>
+                                        </select>
+                                    </td>
+                                    <td class="px-2 py-2 text-center text-[10px]">
+                                        <div v-if="!day.attachedPdf">
+                                            <label
+                                                class="block w-full py-1.5 px-1 rounded font-bold uppercase tracking-wider transition-colors border bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200 cursor-pointer">
+                                                Upload ↑
+                                                <input type="file" accept="application/pdf,image/*"
+                                                    @change="uploadRowPricelist($event, index)" class="hidden">
+                                            </label>
+                                        </div>
+                                        <div v-else
+                                            class="flex flex-col gap-1 items-center bg-emerald-50 p-1.5 rounded-md border border-emerald-300 shadow-sm ring-1 ring-emerald-100">
+                                            <span
+                                                class="font-bold text-emerald-800 text-[10px] truncate w-full max-w-[85px]"
+                                                :title="day.attachedPdf.name">✓ {{ day.attachedPdf.name }}</span>
+                                            <div class="flex gap-1 w-full justify-center">
+                                                <button @click="viewPdf(day.attachedPdf.url)"
+                                                    class="font-bold text-blue-700 bg-blue-100 px-2 py-1 rounded hover:bg-blue-200 transition border border-blue-200">VIEW</button>
+                                                <button @click="removeRowPricelist(index)"
+                                                    class="font-bold text-red-600 bg-red-100 px-2 py-1 rounded hover:bg-red-200 transition border border-red-200">✕</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.pp" :is-disabled="day.isLocked"
+                                            :custom-class="day.isLocked ? 'dt-input text-right font-medium bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right font-medium'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.single" :is-disabled="day.isLocked"
+                                            :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.child" :is-disabled="day.isLocked"
+                                            :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.vehicle" @blur="propagate(index, 'vehicle', day.vehicle)"
+                                            :custom-class="'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.guideFee" @blur="propagate(index, 'guideFee', day.guideFee)"
+                                            :custom-class="'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.guideAcc" @blur="propagate(index, 'guideAcc', day.guideAcc)"
+                                            :custom-class="'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.flights"
+                                            :custom-class="'dt-input text-right'"></currency-input></td>
+                                    <td class="px-2 py-2 text-red-400 hover:text-red-600 cursor-pointer text-center font-bold"
+                                        @click="removeDay(index)">✕</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-gray-50/80 font-bold border-t border-gray-100">
+                                <tr>
+                                    <td colspan="4"
+                                        class="px-3 py-4 text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">
+                                        SUBTOTALS:</td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.group) }}<br>
+                                        <span v-if="doublePax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            doublePax }} Pax Total:
+                                            <span class="text-gray-700">{{format(storeTotals.group * doublePax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.single) }}<br>
+                                        <span v-if="singlePax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            singlePax }} Pax Total:
+                                            <span class="text-gray-700">{{format(storeTotals.single * singlePax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.child || 0) }}<br>
+                                        <span v-if="childPax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            childPax }} Pax Total:
+                                            <span class="text-gray-700">{{format((storeTotals.child || 0) * childPax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.vehicle) }}</td>
+                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideFee) }}</td>
+                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideAcc) }}</td>
+                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.flights) }}</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Logistics & Extras -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div
+                        class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                        <div>
+                            <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Fuel & Distance</h2>
+                            <div class="grid grid-cols-2 gap-5">
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Distance (km)</label>
+                                    <input type="number" v-model.number="fuelDistance"
+                                        class="dt-input text-lg font-bold">
+                                </div>
+                                <div class="flex flex-col gap-1.5">
+                                    <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Consume Type</label>
+                                    <select v-model="fuelType" class="dt-input h-full">
+                                        <option value="low">Low (3.125 N$/km)</option>
+                                        <option value="high">High (4.00 N$/km)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="mt-8 pt-5 border-t border-gray-100 flex justify-between items-center bg-[#F9FAFB] p-4 rounded-xl shadow-inner border border-gray-200/50">
+                            <span class="font-bold text-gray-500 uppercase text-[10px] tracking-widest">Calculated
+                                Fuel</span>
+                            <span class="font-black text-2xl text-dt-orange">{{ format(calculatedFuel) }}</span>
+                        </div>
+                    </div>
+
+                    <div
+                        class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-center mb-5">
+                                <h2 class="text-lg font-bold text-gray-900 font-heading">Activities</h2>
+                                <button @click="addActivity"
+                                    class="text-[10px] font-bold text-white bg-gray-900 hover:bg-black px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
+                                    Add</button>
+                            </div>
+                            <div class="space-y-2 max-h-40 overflow-y-auto">
+                                <div v-for="(act, index) in activities" :key="index"
+                                    class="flex gap-2 items-center bg-white p-2 border border-gray-100 rounded-lg">
+                                    <input type="text" v-model="act.name" placeholder="Activity Name"
+                                        class="flex-1 dt-input text-xs">
+                                    <currency-input v-model="act.rate" :custom-class="'w-20 dt-input text-xs text-right'"
+                                        placeholder="0.00"></currency-input>
+                                    <button @click="act.isPerPax = !act.isPerPax"
+                                        class="text-[9px] w-12 font-bold uppercase p-1 rounded transition border"
+                                        :class="act.isPerPax ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-gray-50 text-gray-500 border-gray-200'">{{
+                                        act.isPerPax ? 'PP' : 'FLAT' }}</button>
+                                    <button @click="removeActivity(index)"
+                                        class="text-red-400 hover:text-red-600 font-bold px-1 text-xs">✕</button>
+                                </div>
+                                <div v-if="activities.length === 0"
+                                    class="text-xs text-gray-400 font-medium italic p-2 text-center">No activities
+                                    added.</div>
+                            </div>
+                        </div>
+                        <div class="mt-6 border-t border-gray-100 pt-5">
+                            <div class="flex justify-between items-center mb-5">
+                                <h2 class="text-lg font-bold text-gray-900 font-heading">Other Extras</h2>
+                                <button @click="addExtra"
+                                    class="text-[10px] font-bold text-white bg-gray-900 hover:bg-black px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
+                                    Add</button>
+                            </div>
+                            <div class="space-y-2 max-h-40 overflow-y-auto">
+                                <div v-for="(ext, index) in extras" :key="index"
+                                    class="flex gap-2 items-center bg-white p-2 border border-gray-100 rounded-lg">
+                                    <input type="text" v-model="ext.name" placeholder="Extra Name (e.g. Extra Transfer)"
+                                        class="flex-1 dt-input text-xs font-medium">
+                                    <currency-input v-model="ext.rate"
+                                        :custom-class="'w-20 dt-input text-xs text-right font-medium'"
+                                        placeholder="0.00"></currency-input>
+                                    <button @click="ext.isPerPax = !ext.isPerPax"
+                                        class="text-[9px] w-10 font-bold uppercase p-1 rounded transition border"
+                                        :class="ext.isPerPax ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-gray-50 text-gray-500 border-gray-200'">{{
+                                        ext.isPerPax ? 'PP' : 'FLAT' }}</button>
+                                    <button @click="removeExtra(index)"
+                                        class="text-red-400 hover:text-red-600 font-bold px-1 text-xs">✕</button>
+                                </div>
+                                <div v-if="extras.length === 0"
+                                    class="text-xs text-gray-400 font-medium italic p-2 text-center">No extras added.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uploaded Pricelists Repository Removed: Moved into the Itinerary Rows. -->
+            </div>
+
+            <!-- RIGHT SIDEBAR: FINAL INVOICING -->
+            <div class="w-full relative flex flex-col gap-6 z-40 pb-8">
+
+                <!-- Botswana Block Moved Above -->
+                <div
+                    class="flex flex-col gap-4 bg-[#E2F1E8] p-6 rounded-[1.25rem] shadow-sm border border-[#d2e7d9]">
+                    <label
+                        class="text-sm font-black text-gray-900 uppercase tracking-widest w-full leading-tight flex items-center justify-between">
+                        <div class="flex flex-col gap-1 text-[13px]">Botswana Safari
+                            <span class="text-[10px] text-gray-400 font-bold tracking-widest leading-none">(USD)</span>
+                        </div>
+                        <div class="flex flex-col gap-1 items-end">
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Supplier:</span>
+                            <input type="text" v-model="botswanaSupplier"
+                                class="w-48 font-bold text-[11px] bg-gray-50 border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 placeholder-gray-300 text-gray-800 text-right transition-all"
+                                placeholder="e.g. Under One Botswana...">
+                        </div>
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Sharing PP</span>
+                            <currency-input v-model="botswanaDoublePP"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
+                                        placeholder="0.00"></currency-input>
+                        </div>
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Single PP</span>
+                            <currency-input v-model="botswanaSinglePP"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
+                                        placeholder="0.00"></currency-input>
+                        </div>
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Child PP</span>
+                            <currency-input v-model="botswanaChildPP"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
+                                        placeholder="0.00"></currency-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[1.25rem] shadow-[0_4px_30px_rgb(0,0,0,0.06)] border border-gray-100 overflow-hidden">
+
+                    <div
+                        class="bg-[#1f2937] text-white p-6 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                        <h3 class="font-bold tracking-[0.2em] text-[10px] text-gray-300 uppercase mb-2 relative z-10">
+                            Total STO Configuration <span v-if="clientName" class="text-dt-orange ml-1">- {{ clientName }}</span>
+                        </h3>
+                        <div class="text-4xl font-black tracking-tight relative z-10">{{ format(stoTotal) }}</div>
+                    </div>
+
+                    <div class="p-5 space-y-3.5 text-[13px] bg-white">
+                                                <div v-for="g in paxGroups" :key="g.id" v-show="parseInt(g.double) > 0 || parseInt(g.single) > 0 || parseInt(g.child) > 0" class="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 font-medium">{{ g.name }} 
+                                <span v-if="parseInt(g.double) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.double}}x DBL</span>
+                                <span v-if="parseInt(g.single) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.single}}x SGL</span>
+                                <span v-if="parseInt(g.child) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.child}}x CHD</span>
+                            </span>
+                            <span class="font-bold text-gray-900">{{ format((storeTotals.group * Math.max(0, parseInt(g.double) || 0)) + (storeTotals.single * Math.max(0, parseInt(g.single) || 0)) + (storeTotals.child * Math.max(0, parseInt(g.child) || 0))) }}</span>
+                        </div>
+                        <div v-if="storeTotals.vehicle > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Vehicle Hire</span><span
+                                class="font-bold text-gray-900">{{ format(storeTotals.vehicle) }}</span></div>
+                        <div v-if="storeTotals.flights > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Flights</span><span
+                                class="font-bold text-gray-900">{{ format(storeTotals.flights) }}</span></div>
+                        <div v-if="storeTotals.guideFee > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Guide Fee</span><span
+                                class="font-bold text-gray-900">{{ format(storeTotals.guideFee) }}</span></div>
+                        <div v-if="storeTotals.guideAcc > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Guide Acc</span><span
+                                class="font-bold text-gray-900">{{ format(storeTotals.guideAcc) }}</span></div>
+                        <div v-if="calculatedFuel > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Fuel & Return</span><span
+                                class="font-bold text-gray-900">{{ format(calculatedFuel)
+                                }}</span></div>
+                        <div v-if="activitiesTotal > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Activities</span><span
+                                class="font-bold text-gray-900">{{ format(activitiesTotal) }}</span></div>
+                        <div v-if="extrasTotal > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Other Extras</span><span
+                                class="font-bold text-gray-900">{{ format(extrasTotal) }}</span>
+                        </div>
+                        <div class="flex justify-between pb-1" v-if="botswanaUsdSummary > 0"><span
+                                class="text-yellow-600 font-bold">Botswana STO Base (USD)</span><span
+                                class="font-bold text-yellow-700">&#36;{{ format(botswanaUsdSummary) }}</span></div>
+                    </div>
+
+                    <div class="bg-gray-50/50 p-6 border-t border-gray-100 font-semibold rounded-b-[1.25rem]">
+                        <h4 class="text-center font-black text-[10px] uppercase text-gray-500 tracking-[0.2em] mb-4">
+                            Pricing Options</h4>
+
+                        <!-- TAB: DESERT TRACKS ONLY (25%) -->
+                        <div v-if="activeTab === 'dt'" class="space-y-4 font-normal">
+                            <div class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black p-5 rounded-[1rem] border border-white/10 text-white shadow-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-dt-orange/5 mix-blend-overlay"></div>
+                                <div class="relative z-10">
+                                    <div class="text-[10px] font-black tracking-widest text-[#e8a385] uppercase mb-1">Desert Tracks Direct Booking</div>
+                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">(25% Markup)</div>
+                                    
+                                    <div class="text-4xl font-black text-white mb-1">{{ format(stoTotal * 1.25) }}</div>
+                                    <div class="text-[9px] font-bold text-gray-400 border-b border-white/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-white/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (25%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.25) }}</span></div>
+                                    </div>
+                                    <div class="flex justify-between text-sm items-center">
+                                        <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * 1.25) }}</span>
+                                    </div>
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
+                                        <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                    </div>
+                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
+                                        <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
+                                    </div>
+                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
+                                        <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
+                                        <span class="text-white">{{ format(perPaxCosting.singleStoPP * 1.25) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-sm border-t border-white/10 pt-4 mt-5 items-center">
+                                        <span class="text-gray-300 font-medium tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * 1.25) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="space-y-2 text-xs my-5 border-b border-white/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium">Desert Tracks (25%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.25) }}</span></div>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-2 text-gray-400">
+                                        <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
+                                        <span class="text-white">&#36;{{ format(botswanaDoublePP * 1.25) }}</span>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
+                                        <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
+                                        <span class="text-white">&#36;{{ format(botswanaSinglePP * 1.25) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB: TRAVEL LOCAL (18%) -->
+                        <div v-if="activeTab === 'tl'" class="space-y-4 font-normal">
+                            <div class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black p-5 rounded-[1rem] border border-white/10 text-white shadow-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-[#3B82F6]/5 mix-blend-overlay"></div>
+                                <div class="relative z-10">
+                                    <div class="text-[10px] font-black tracking-widest text-[#93c5fd] uppercase mb-1">Travel Local Invoice</div>
+                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">(18% Markup)</div>
+                                    <div class="text-4xl font-black text-white mb-1">{{ format((stoTotal * 1.25) / 0.82) }}</div>
+                                    <div class="text-[9px] font-bold text-gray-400 border-b border-white/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-white/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Travel Local (18%)</span><span class="text-white font-bold">{{ format(((stoTotal * 1.25) / 0.82) * 0.18) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Agent (5%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                    </div>
+
+                                    <div class="flex justify-between text-sm items-center">
+                                        <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format((stoTotal * 1.25) / 0.82) }}</span>
+                                    </div>
+                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
+                                        <span class="text-white">{{ format((perPaxCosting.doubleStoPP * 1.25) / 0.82) }}</span>
+                                    </div>
+                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
+                                        <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
+                                        <span class="text-white">{{ format((perPaxCosting.singleStoPP * 1.25) / 0.82) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-sm border-t border-white/10 pt-4 mt-5 items-center">
+                                        <span class="text-gray-300 font-medium tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">&#36;{{ format((botswanaUsdSummary * 1.25) / 0.82) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="space-y-2.5 text-xs my-5 border-b border-white/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Travel Local (18%)</span><span class="text-white font-bold">&#36;{{ format(((botswanaUsdSummary * 1.25) / 0.82) * 0.18) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Agent (5%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-2 text-gray-400">
+                                        <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
+                                        <span class="text-white">&#36;{{ format((botswanaDoublePP * 1.25) / 0.82) }}</span>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
+                                        <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
+                                        <span class="text-white">&#36;{{ format((botswanaSinglePP * 1.25) / 0.82) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB: DT + AGENT -->
+                        <div v-if="activeTab === 'dt_agent'" class="space-y-4 font-normal">
+                            <div class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black p-5 rounded-[1rem] border border-white/10 text-white shadow-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-[#A855F7]/5 mix-blend-overlay"></div>
+                                <div class="relative z-10">
+                                    <div class="text-[10px] font-black tracking-widest text-[#d8b4fe] uppercase mb-1">DT + Consultant</div>
+                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">(20% + 5% Markup)</div>
+                                    <div class="text-4xl font-black text-white mb-1">{{ format((stoTotal * 1.25)) }}</div>
+                                    <div class="text-[9px] font-bold text-gray-400 border-b border-white/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-white/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Consultant (5%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                    </div>
+
+                                    <div class="flex justify-between text-sm items-center">
+                                        <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * 1.25) }}</span>
+                                    </div>
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
+                                        <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                    </div>
+                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
+                                        <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
+                                        <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
+                                    </div>
+                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
+                                        <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
+                                        <span class="text-white">{{ format(perPaxCosting.singleStoPP * 1.25) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-sm border-t border-white/10 pt-4 mt-5 items-center">
+                                        <span class="text-gray-300 font-medium tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * 1.25) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="space-y-2.5 text-xs my-5 border-b border-white/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Consultant (5%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-2 text-gray-400">
+                                        <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
+                                        <span class="text-white">&#36;{{ format(botswanaDoublePP * 1.25) }}</span>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
+                                        <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
+                                        <span class="text-white">&#36;{{ format(botswanaSinglePP * 1.25) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Saved Quotes Section Moved To Top Header -->
+
+                </div>
+            </div>
+        </div>
+
+        <!-- PDF Modal -->
+        <div v-if="currentPdfUrl"
+            class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 lg:p-10 backdrop-blur-sm">
+            <div class="bg-white w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+                    <h3 class="font-bold text-gray-800">Pricelist Viewer</h3>
+                    <button @click="currentPdfUrl = null"
+                        class="text-xs text-gray-500 hover:text-red-500 font-bold px-3 py-1.5 bg-white border border-gray-200 rounded-lg shadow-sm">Close
+                        ✕</button>
+                </div>
+                <iframe :src="currentPdfUrl" class="w-full h-full flex-grow border-0"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        const CurrencyInput = {
+            props: ['modelValue', 'placeholder', 'isDisabled', 'customClass'],
+            emits: ['update:modelValue'],
+            data() { return { isFocused: false, localVal: '' }; },
+            computed: {
+                displayValue: {
+                    get() {
+                        if (this.isFocused) return this.localVal;
+                        if (this.modelValue === 0 || this.modelValue === null || this.modelValue === '') return '';
+                        return Number(this.modelValue || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    },
+                    set(val) {
+                        this.localVal = val;
+                        this.$emit('update:modelValue', Number(String(val).replace(/[^0-9.-]/g, '')) || 0);
+                    }
+                }
+            },
+            methods: {
+                handleEnter(e) {
+                    const focusable = Array.from(document.querySelectorAll('input:not([disabled]):not([readonly]), select:not([disabled])'))
+                        .filter(el => el.tabIndex >= 0 && el.getBoundingClientRect().width > 0);
+                    const index = focusable.indexOf(e.target);
+                    if (index > -1 && index + 1 < focusable.length) {
+                        focusable[index + 1].focus();
+                        if (typeof focusable[index + 1].select === 'function') {
+                            focusable[index + 1].select();
+                        }
+                    }
+                }
+            },
+            template: `<input type="text" :class="customClass" :disabled="isDisabled" v-model="displayValue" @focus="isFocused = true; localVal = (modelValue === 0 || modelValue === null || modelValue === '') ? '' : String(modelValue)" @blur="isFocused = false" @keydown.enter.prevent="handleEnter" :placeholder="placeholder || '0.00'"/>`
+        };
+
+        const regionsDb = { "Windhoek": ["Acacia Guesthouse", "Auas Safari Lodge", "Am Weinberg Boutique Hotel", "Arebbusch Travel Lodge", "Avani Windhoek Hotel", "Belvedere Boutique Hotel", "Olive Exclusive", "Olive Grove Guesthouse", "Windhoek Country Club Resort", "Hotel Thule", "River Crossing Lodge", "Safari Court Hotel", "Safari Hotel", "Windhoek Luxury Guesthouse", "Roof of Africa Hotel", "Puccini House", "Londiningi Guesthouse", "Villa Violet Guesthouse", "The Elegant Guesthouse", "GocheGanas Nature Reserve", "Naankuse Lodge", "Duesternbrook Safari Guest Farm", "Droombos", "Heinitzburg Boutique Hotel", "Hohewarte Guestfarm", "Onjala", "Voigtland", "Windhoek Lux Suites", "Casa Blanca Boutique Hotel", "Immanuel Lodge", "Ti Melen Boutique Guesthouse", "Waldeck Namibia", "Zannier Omaanda"], "Sossusvlei": ["Sossusvlei Lodge", "Desert Camp", "Desert Quiver Camp", "Hoodia Lodge", "Moon Mountain Lodge", "Elegant Desert Lodge", "Desert Homestead Lodge", "Desert Homestead Outpost", "Le Mirage Resort & Spa", "Sossus Dune Lodge", "Wolwedans Dunes Lodge", "Kulala Desert Lodge", "Little Kulala", "Sossusvlei Desert Lodge", "Agama River Camp", "Rostock Ritz Desert Lodge", "Solitaire Desert Farm", "Solitaire Camping2go", "Agama Camping", "Sossusvlei Lodge Adventure Camp", "Desert Camp Camping", "Greenfire Desert Lodge", "Kanaan Desert Retreat", "Agama Lodge", "Barkhan Dune Retreat", "Little Sossus Lodge", "Tsauchab River Camp", "Wilderness Kulala Desert Lodge", "Sossus Oasis Campsite", "andBeyond Sossusvlei Desert Lodge", "Namib Outpost", "Elegant Desert Camp", "Desert Whisper", "Namib Dune Star Camp", "The Desert Grace", "Namib Sky Balloon Safaris", "Wolwedans Boulders Camp", "Wolwedans Plains Camp", "Wolwedans Mountain View Suite", "Kwessi Dunes", "Zannier Sonop"], "Etosha": ["Etosha Village", "Etosha Safari Lodge", "Etosha Safari Camp", "Toshari Lodge", "Etosha Gateway", "Halali Resort", "Okaukuejo Resort", "Eagle Tented Lodge", "Epacha Game Lodge", "Bambatsi Guest Farm", "Ombinda Country Lodge", "Etosha Village Camping2go", "Okutala Etosha Lodge", "Little Ongava", "Anderssons At Ongava", "Ongava Tented Camp", "Ongava Lodge", "Etosha Mopane Safari Lodge", "Safari House", "Etosha Oberland Lodge", "Safarihoek Lodge", "Mushara Lodge", "Mushara Outpost", "Mushara Villa", "Mokuti Etosha Lodge", "Onguma Bush Camp", "Onguma Tented Camp", "Onguma Tree Top", "Onguma The Fort", "Etosha King Nehale", "Namutoni Resort", "Mushara Bush Camp", "Onguma Forest Camp", "Villa Mushara", "Ongula Village Homestead Lodge"], "Central Namibia": ["Gabuse Guest House", "Khorab Safari Lodge", "Okonjima Plains Camp", "Okonjima Bush Camp", "Waterberg Plateau Lodge", "Waterberg Wilderness", "Waterberg Valley Lodge", "Mount Etjo Safari Lodge", "Frans Indongo Lodge", "Otjiwa Safari Lodge", "Epako Safari Lodge", "Erongo Plateau Camp", "Okahandja Country Hotel", "Midgard Country Estate", "Minen Hotel", "Uris Safari Lodge", "Tsumeb Guesthouse", "Otjiwarongo Guesthouse", "C'est Si Bon Hotel", "Kamaku Guesthouse", "Hadassa Guesthouse", "Casa Forno Guesthouse", "Tsumeb Guesthouse Garden", "Kupferquelle Resort", "Aloegrove Safari Lodge", "Erongo Rocks", "Gabus Safari Lodge", "Ghaub", "Ohorongo Game and Safari Lodge", "Ai Aiba Rock Painting Lodge", "Desert Dune Safari", "Etusis Lodge", "Evening Shade", "Hohenstein Lodge", "Immenhof Guest Farm", "Kashana Namibia", "Dornhuegel Guestfarm", "Gabus Game Ranch", "Haus Mopanie", "La Rochelle Lodge", "Ohange Lodge", "Okonjima Bush Suite", "Okonjima Luxury Bush Camp", "Okonjima Villa"], "Swakopmund": ["Hansa Hotel", "Strand Hotel Swakopmund", "The Delight Swakopmund", "Swakopmund Hotel", "Beach Hotel Swakopmund", "Pelican Bay Hotel", "Protea Hotel Walvis Bay", "Burning Shore Lodge", "Desert Breeze Lodge", "Hotel Pension A la Mer", "Hotel Zum Kaiser", "Sea Breeze Guesthouse", "Flamingo Villa Boutique Hotel", "Henties Bay Caravan Park", "Atlantic Villa", "Namib Guesthouse", "Organic Stay", "Oyster Box Guesthouse", "The Rez", "Pelican Point Lodge", "Cornerstone Guesthouse", "Swakopmund Sands Hotel", "Brigadoon Boutique Guesthouse"], "Skeleton Coast": ["Shipwreck Lodge", "Terrace Bay Resort", "Torra Bay Campsite", "Cape Cross Lodge", "Wilderness Hoanib Skeleton Coast Camp"], "Damaraland": ["Damaraland Camp", "Mowani Mountain Camp", "Camp Kipwe", "Grootberg Lodge", "Hoada Campsite", "Palmwag Lodge", "Twyfelfontein Country Lodge", "Doro Nawas Camp", "Vingerklip Lodge", "Huab Lodge", "Ugab Terrace Lodge", "Ondjamba Hills", "Khorixas Lodge", "iGowati Country Hotel", "Uis Elephant", "Damara Mopane Lodge", "Spitzkoppen Lodge", "Etendeka Mountain Camp", "Wilderness Doro Nawas", "Wilderness Damaraland Camp", "Wilderness Desert Rhino Camp", "Twyfelfontein Adventure Camp"], "West Etosha": ["Hobatere Lodge"], "Epupa": ["Epupa Camp", "Omarunga Epupa Falls Camp", "Kapika Waterfall Lodge"], "Kaokoland": ["Okahirongo Elephant Lodge", "Okahirongo River Camp", "Khowarib Lodge", "Sesfontein Guesthouse", "Okahirongo Elephant Lodge (Luxury)", "Purros Bush Camp", "Wilderness Serra Cafema", "Hoanib Valley Camp", "Hoanib Elephant Camp"], "Luderitz": ["Luderitz Nest Hotel", "Kairos Cottage", "Island Cottage", "Luderitz Backpackers", "Shark Island Resort", "Alte Villa 2025"], "Kalahari": ["Bagatelle Kalahari Game Ranch", "Kalahari Anib Lodge", "Kalahari Farmhouse", "Camelthorn Kalahari Lodge", "Zebra Kalahari Lodge", "Suricate Tented Kalahari Lodge", "Lapa Lange Game Lodge", "Anib Lodge", "Intu Afrika Camelthorn Lodge", "Zelda Game & Guest Farm", "Kalahari Bush Breaks", "Burgsdorf Guest Farm", "Helmeringhausen Hotel", "Namibgrens Guest Farm", "Gibeon Folk Hotel", "Duwisib Guest Farm", "Africa Safari Lodge", "Auob Country Lodge", "Kalahari Game Lodge", "Harnas Wildlife Foundation", "Terra Rouge Guest Farm", "Guest Farm Kiripotib", "Kalahari Red Dunes Lodge", "Teufelskrallen Lodge"], "Caprivi": ["Tambuti Lodge", "Kayova River Lodge", "Ngandu Safari Lodge", "Mazambala Island Lodge", "Camp Kwando", "Lianshulu Lodge", "Lianshulu Bush Lodge", "Mudumu River Camp", "Namushasha River Camping2go", "Zambezi Mubala Camping2go", "Chobe Savannah Lodge", "Impalila Island Lodge", "Ichingo Chobe River Lodge", "Shametu River Lodge", "Popa Falls Resort", "Nunda River Lodge", "Mahangu Safari Lodge", "Ndhovu Safari Lodge", "Simanya River Lodge", "White Sands Caprivi", "Susuwe Island Lodge", "Chobe River Camp", "Jackalberry Tented Camp", "Nkasa Lupala Tented Lodge", "Zambezi Queen", "Zambezi Mubala Camp", "Zambezi Mubala Lodge", "Ntunda Lodge", "Mango Guesthouse", "Hakusembe River Lodge", "Chobe Princess", "Nkasa Linyanti"], "Canyon": ["Seeheim Hotel", "Garas Park Quivertree", "Garas Park", "Seeheim Hotel (Adventure)", "Bethanie Guesthouse", "Alte Kalkofen Lodge", "Bahnhof Hotel Aus", "Nooishof", "Norotshama River Resort", "Canyon Lodge", "Canyon Roadhouse", "Fish River Lodge", "Canyon Village", "Goibib Mountain Lodge"], "Opuwo": ["Opuwo Country Lodge", "Kaoko Mopane Lodge"], "Botswana": ["Chobe Water Villas", "Camp Kuzuma", "Muchenje Safari Lodge", "Ngoma Safari Lodge", "Chobe Safari Lodge", "Chobe Marina Lodge", "Cresta Mowana Safari Resort & Spa", "Chobe Game Lodge", "Elephant Valley Lodge", "Chobe Elephant Camp"] };
+
+        // Sort all lodges alphabetically globally
+        Object.keys(regionsDb).forEach(region => {
+            regionsDb[region].sort((a, b) => a.localeCompare(b));
+        });
+
+        const app = createApp({
+            data() {
+                return {
+                    activeTab: 'dt',
+                    clientName: '',
+                    quoteLabel: '',
+                    agentName: '',
+                    expandedAgent: null,
+                    isQuotesDrawerOpen: false,
+                    botswanaSupplier: '',
+                    savedQuotes: JSON.parse(localStorage.getItem('dtSavedQuotes') || '[]'),
+                    unlockedAgents: [],
+                    adminPasswords: {},
+                    regions: regionsDb,
+                    arrivalDate: '',
+                    globalSeason: 'low',
+                    paxGroups: [{ id: 1, name: 'Group 1', double: 2, single: 0, child: 0 }],
+                    botswanaDoublePP: 0,
+                    botswanaSinglePP: 0, botswanaChildPP: 0,
+                    fuelDistance: 2000,
+                    fuelType: 'low',
+                    activities: [],
+                    currentPdfUrl: null,
+                    extras: [],
+                    itinerary: [
+                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                    ],
+                    storedLodgeRates: {}
+                }
+            },
+                        watch: {
+                arrivalDate() { this.refreshRates(); },
+                globalSeason() { this.refreshRates(); },
+                itinerary: {
+                    deep: true,
+                    handler(newVal) {
+                        newVal.forEach((day, index) => {
+                            if (day.lodge) {
+                                const season = this.getSeason(index);
+                                if (!this.storedLodgeRates[day.lodge]) {
+                                    this.storedLodgeRates[day.lodge] = { low: { pp: 0, single: 0, child: 0 }, high: { pp: 0, single: 0, child: 0 } };
+                                }
+                                if (!this.storedLodgeRates[day.lodge].low) {
+                                    const old = { ...this.storedLodgeRates[day.lodge] };
+                                    this.storedLodgeRates[day.lodge] = { low: old, high: old };
+                                }
+                                if (day.pp > 0) this.storedLodgeRates[day.lodge][season].pp = day.pp;
+                                if (day.single > 0) this.storedLodgeRates[day.lodge][season].single = day.single;
+                                if (day.child > 0) this.storedLodgeRates[day.lodge][season].child = day.child;
+                            }
+                        });
+                    }
+                }
+            },
+            computed: {
+                rowDates() {
+                    if (!this.arrivalDate) return [];
+                    const dates = [];
+                    let d = new Date(this.arrivalDate);
+                    this.itinerary.forEach((day) => {
+                        dates.push(new Date(d));
+                        d.setDate(d.getDate() + (Number(day.nights) || 1));
+                    });
+                    return dates;
+                },
+                doublePax() { return this.paxGroups.reduce((s, g) => s + (parseInt(g.double) || 0), 0); },
+                singlePax() { return this.paxGroups.reduce((s, g) => s + (parseInt(g.single) || 0), 0); },
+                childPax() { return this.paxGroups.reduce((s, g) => s + (parseInt(g.child) || 0), 0); },
+                numPax() { return this.doublePax + this.singlePax + this.childPax; },
+                isPaxValid() {
+                    return (Number(this.doublePax || 0) + Number(this.singlePax || 0) + Number(this.childPax || 0)) === Number(this.numPax || 0);
+                },
+                canSave() {
+                    return this.agentName.trim() !== '' &&
+                        this.clientName.trim() !== '' &&
+                        this.itinerary.length > 0 &&
+                        this.itinerary[0].lodge.trim() !== '' &&
+                        this.isPaxValid;
+                },
+                botswanaUsdSummary() {
+                    return ((this.botswanaDoublePP || 0) * Math.max(0, this.doublePax)) + ((this.botswanaSinglePP || 0) * Math.max(0, this.singlePax)) + ((this.botswanaChildPP || 0) * Math.max(0, this.childPax));
+                },
+                groupedQuotes() {
+                    return this.savedQuotes.reduce((acc, quote, index) => {
+                        const rawAgent = (quote.agentName || 'Unknown').trim();
+                        // Find existing agent key case-insensitively to combine "jaun" and "JAUN"
+                        let agent = Object.keys(acc).find(k => k.toLowerCase() === rawAgent.toLowerCase());
+                        if (!agent) {
+                            agent = rawAgent.toUpperCase(); // Normalize new visually cleanly
+                            acc[agent] = {};
+                        }
+
+                        const rawClient = (quote.clientName || 'Unnamed').trim();
+                        // Also merge clients case-insensitively
+                        let client = Object.keys(acc[agent]).find(k => k.toLowerCase() === rawClient.toLowerCase());
+                        if (!client) {
+                            client = rawClient;
+                            acc[agent][client] = [];
+                        }
+
+                        acc[agent][client].push({ ...quote, originalIndex: index });
+                        return acc;
+                    }, {});
+                },
+                perPaxCosting() {
+                    const t = this.storeTotals;
+                    const sharedTotal = t.vehicle + t.guideFee + t.guideAcc + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
+                    const sharedPP = sharedTotal / Math.max(1, this.numPax);
+                    return {
+                        sharedPP,
+                        doubleStoPP: t.group + sharedPP,
+                        singleStoPP: t.group + t.single + sharedPP
+                    };
+                },
+                storeTotals() {
+                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
+                    this.itinerary.forEach(d => {
+                        let n = parseInt(d.nights) || 1;
+                        group += (d.pp || 0) * n; single += (d.single || 0) * n; child += (d.child || 0) * n;
+                        vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n; flights += (d.flights || 0) * n;
+                    });
+                    return { group, single, child, vehicle, guideFee, guideAcc, flights };
+                },
+                uploadedLodges() {
+                    return this.itinerary.filter(d => d.attachedPdf && d.lodge).map(d => d.lodge);
+                },
+                calculatedFuel() { return (this.fuelDistance || 0) * (this.fuelType === 'low' ? 3.125 : 4.0); },
+                activitiesTotal() {
+                    return this.activities.reduce((sum, act) => {
+                        return sum + (act.isPerPax ? (act.rate * Math.max(1, this.numPax)) : act.rate);
+                    }, 0);
+                },
+                extrasTotal() {
+                    return this.extras.reduce((sum, ext) => {
+                        return sum + (ext.isPerPax ? (ext.rate * Math.max(1, this.numPax)) : ext.rate);
+                    }, 0);
+                },
+                sharedCostsTotal() {
+                    const t = this.storeTotals;
+                    return t.vehicle + t.guideFee + t.guideAcc + t.flights + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
+                },
+                stoTotal() {
+                    const t = this.storeTotals;
+                    let total = 0;
+                    this.paxGroups.forEach(g => {
+                        total += (t.group * Math.max(0, parseInt(g.double) || 0));
+                        total += (t.single * Math.max(0, parseInt(g.single) || 0));
+                        total += (t.child * Math.max(0, parseInt(g.child) || 0));
+                    });
+                    total += t.vehicle + t.guideFee + t.guideAcc + t.flights;
+                    total += this.calculatedFuel + this.extrasTotal;
+                    total += this.activitiesTotal;
+                    // Note: botswanaUsd is NOT added here anymore to keep it unmixed.
+                    return total;
+                }
+            },
+            mounted() {
+                // Global enter-to-jump logic
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const target = e.target;
+                        if (target.tagName.toLowerCase() === 'input' || target.tagName.toLowerCase() === 'textarea') {
+                            e.preventDefault();
+                            const inputs = Array.from(document.querySelectorAll('input:not([disabled]), textarea:not([disabled]), [contenteditable="true"]'));
+                            const index = inputs.indexOf(target);
+                            if (index > -1 && index < inputs.length - 1) {
+                                inputs[index + 1].focus();
+                                if(inputs[index + 1].select) inputs[index + 1].select();
+                            }
+                        }
+                    }
+                });
+                window.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'SAVE_DT_INVOICE') {
+                        const { idx, name, html } = event.data;
+                        const quote = this.savedQuotes[idx];
+                        if (quote) {
+                            if (!quote.customInvoices) quote.customInvoices = [];
+                            quote.customInvoices.push({ name, html });
+                            localStorage.setItem('dtSavedQuotes', JSON.stringify(this.savedQuotes));
+                            alert('Invoice saved successfully to Costing App!');
+                        }
+                    }
+                });
+            },
+            methods: {
+                handleLodgeChange(day, index) {
+                    if (day.lodge === '__custom__') {
+                        const customName = prompt("Enter the name of the new custom lodge:");
+                        if (customName && customName.trim() !== '') {
+                            const cleanName = customName.trim();
+                            if (!this.regions[day.region].includes(cleanName)) {
+                                this.regions[day.region].push(cleanName);
+                                this.regions[day.region].sort((a, b) => a.localeCompare(b));
+                            }
+                            day.lodge = cleanName;
+                        } else {
+                            day.lodge = '';
+                        }
+                    }
+                    if (day.lodge && day.lodge !== '') {
+                        this.onLodgeSelect(day, index);
+                    }
+                },
+                               propagate(index, field, value) {
+                    // "once in the fisrt lodge line a vehicle and guide fee was added it must be added automatacly in eache following line"
+                    if (index === 0) {
+                        for (let i = 1; i < this.itinerary.length; i++) {
+                            this.itinerary[i][field] = value;
+                        }
+                    }
+                },
+                getSeason(index) {
+                    const day = this.itinerary[index];
+                    if (day && day.manualSeason) return day.manualSeason;
+                    if (this.arrivalDate && this.rowDates[index]) {
+                        const month = this.rowDates[index].getMonth() + 1;
+                        return (month >= 7 && month <= 10) ? 'high' : 'low';
+                    }
+                    return this.globalSeason || 'low';
+                },
+                toggleManualSeason(day, index) {
+                    const current = this.getSeason(index);
+                    day.manualSeason = current === 'high' ? 'low' : 'high';
+                    this.refreshRates();
+                },
+                refreshRates() {
+                    this.itinerary.forEach((day, i) => {
+                        if (day.lodge) {
+                            const season = this.getSeason(i);
+                            const lr = this.storedLodgeRates[day.lodge];
+                            if (lr && lr[season]) {
+                                day.pp = lr[season].pp || 0;
+                                day.single = lr[season].single || 0;
+                                day.child = lr[season].child || 0;
+                            }
+                        }
+                    });
+                },
+                onLodgeSelect(day, index) {
+                    const season = this.getSeason(index);
+                    const lodgeData = this.storedLodgeRates[day.lodge];
+                    if (lodgeData && lodgeData[season]) {
+                        const rates = lodgeData[season];
+                        if (!day.pp) day.pp = rates.pp || 0;
+                        if (!day.single) day.single = rates.single || 0;
+                        if (!day.child) day.child = rates.child || 0;
+                    }
+                },
+                groupInvoiceCost(g, markupDecimal) {
+                    const t = this.storeTotals;
+                    const gAccommodation = (t.group * Math.max(0, parseInt(g.double) || 0)) +
+                                        (t.single * Math.max(0, parseInt(g.single) || 0)) +
+                                        (t.child * Math.max(0, parseInt(g.child) || 0));
+                    
+                    const gPax = Math.max(0, parseInt(g.double) || 0) + Math.max(0, parseInt(g.single) || 0) + Math.max(0, parseInt(g.child) || 0);
+
+                    const shareOfSharedCosts = gPax > 0 ? (this.sharedCostsTotal / Math.max(1, this.numPax)) * gPax : 0;
+                    
+                    return (gAccommodation + shareOfSharedCosts) * markupDecimal;
+                },
+                addGroup() {
+                    const maxId = this.paxGroups.reduce((max, g) => Math.max(max, g.id), 0);
+                    this.paxGroups.push({ id: maxId + 1, name: `Group ${maxId + 1}`, double: 2, single: 0, child: 0 });
+                },
+                removeGroup(index) {
+                    this.paxGroups.splice(index, 1);
+                },
+                addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
+                removeDay(index) { this.itinerary.splice(index, 1); },
+                addActivity() { this.activities.push({ name: '', rate: 0, isPerPax: true }); },
+                removeActivity(index) { this.activities.splice(index, 1); },
+                lockDay(index) {
+                    const day = this.itinerary[index];
+                    if (day.lockedBy && day.lockPassword) {
+                        day.isLocked = true;
+                    }
+                },
+                unlockDay(index) {
+                    const day = this.itinerary[index];
+                    const p = prompt('Enter password to unlock:');
+                    if (p === day.lockPassword || p === 'admin') {
+                        day.isLocked = false;
+                    } else if (p !== null) {
+                        alert('Incorrect password!');
+                    }
+                },
+                addExtra() { this.extras.push({ name: '', rate: 0, isPerPax: false }); },
+                removeExtra(index) { this.extras.splice(index, 1); },
+                uploadRowPricelist(event, index) {
+                    const file = event.target.files[0];
+                    if (!file) return;
+                    const url = URL.createObjectURL(file);
+                    this.itinerary[index].attachedPdf = { name: file.name, url: url };
+                    event.target.value = '';
+                },
+                removeRowPricelist(index) {
+                    this.itinerary[index].attachedPdf = null;
+                },
+                viewPdf(url) {
+                    this.currentPdfUrl = url;
+                },
+                unlockAgent(agent) {
+                    const pass = this.adminPasswords[agent];
+                    const ag = agent.toLowerCase();
+
+                    if ((ag === 'admin' && pass === 'passme9cops') ||
+                        (ag === 'bianca' && pass === 'bianca') ||
+                        (ag === 'viola' && pass === 'viola')) {
+                        this.unlockedAgents.push(agent);
+                    } else {
+                        alert('Incorrect password for ' + agent);
+                    }
+                },
+                saveQuote() {
+                    const quote = {
+                        timestamp: Date.now(),
+                        activeTab: this.activeTab,
+                        clientName: this.clientName,
+                        quoteLabel: this.quoteLabel,
+                        agentName: this.agentName,
+                        botswanaSupplier: this.botswanaSupplier,
+                        paxGroups: JSON.parse(JSON.stringify(this.paxGroups)),
+                        botswanaDoublePP: this.botswanaDoublePP,
+                        botswanaSinglePP: this.botswanaSinglePP,
+                        fuelDistance: this.fuelDistance,
+                        fuelType: this.fuelType,
+                        activities: JSON.parse(JSON.stringify(this.activities)),
+                        extras: JSON.parse(JSON.stringify(this.extras)),
+                        // We strip the transient object urls since they cant be saved locally effectively.
+                        itinerary: this.itinerary.map(day => ({ ...day, attachedPdf: null }))
+                    };
+                    this.savedQuotes.unshift(quote);
+                    localStorage.setItem('dtSavedQuotes', JSON.stringify(this.savedQuotes));
+                    alert('Quote saved successfully for ' + this.agentName);
+                },
+                loadQuote(index) {
+                    if (index === undefined) return;
+                    const quote = this.savedQuotes[index];
+                    if (!quote) return;
+
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    this.activeTab = quote.activeTab || 'dt';
+                    this.clientName = quote.clientName;
+                    this.quoteLabel = quote.quoteLabel || '';
+                    this.agentName = quote.agentName;
+                    this.botswanaSupplier = quote.botswanaSupplier || '';
+                    this.numPax = quote.numPax;
+                    this.doublePax = quote.doublePax !== undefined ? quote.doublePax : quote.numPax;
+                    this.singlePax = quote.singlePax !== undefined ? quote.singlePax : 0;
+                    this.childPax = quote.childPax !== undefined ? quote.childPax : 0;
+                    this.botswanaDoublePP = quote.botswanaDoublePP !== undefined ? quote.botswanaDoublePP : (quote.botswanaUsd || 0);
+                    this.botswanaSinglePP = quote.botswanaSinglePP || 0;
+                    this.fuelDistance = quote.fuelDistance;
+                    this.fuelType = quote.fuelType;
+                    this.activities = quote.activities;
+                    this.extras = Array.isArray(quote.extras) ? quote.extras : [];
+                    this.itinerary = quote.itinerary;
+
+                    this.isQuotesDrawerOpen = false;
+
+                    // Immediately pop open the Costing document as requested
+                    setTimeout(() => {
+                        this.exportDocument(index, 'costing');
+                    }, 150);
+                },
+                downloadCustomInvoice(quoteIndex, invoiceIndex) {
+                    const quote = this.savedQuotes.find(q => q.originalIndex === quoteIndex);
+                    if (!quote || !quote.customInvoices || !quote.customInvoices[invoiceIndex]) return;
+                    const inv = quote.customInvoices[invoiceIndex];
+                    const blob = new Blob([inv.html], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `DT_Invoice_${(inv.name || 'Saved').replace(/\s+/g, '_')}.html`;
+                    a.click();
+                    URL.revokeObjectURL(url);
+                },
+                exportDocument(index, type) {
+                    const q = this.savedQuotes[index];
+                    const format = (val) => Number(val || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
+                    q.itinerary.forEach(d => {
+                        let n = parseInt(d.nights) || 1;
+                        group += (d.pp || 0) * n; single += (d.single || 0) * n; child += (d.child || 0) * n;
+                        vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n; flights += (d.flights || 0) * n;
+                    });
+                    const calcFuel = (q.fuelDistance || 0) * (q.fuelType === 'low' ? 3.125 : 4.0);
+                    const activitiesTotal = q.activities.reduce((sum, act) => sum + (act.isPerPax ? (act.rate * Math.max(1, q.numPax)) : act.rate), 0);
+                    const extTot = Array.isArray(q.extras) ? q.extras.reduce((sum, ext) => sum + (ext.isPerPax ? (ext.rate * Math.max(1, q.numPax)) : ext.rate), 0) : ((q.extras?.guideFood || 0) + (q.extras?.vehicleReturn || 0) + (q.extras?.other || 0));
+                    const sharedTotal = vehicle + guideFee + guideAcc + calcFuel + extTot + activitiesTotal;
+                    const sharedPP = sharedTotal / Math.max(1, q.numPax);
+
+                    const doubleStoPP = group + sharedPP;
+                    const singleStoPP = group + single + sharedPP;
+                    const childStoPP = child + sharedPP;
+
+                    let stoTotal = (doubleStoPP * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)) + (singleStoPP * Math.max(0, q.singlePax || 0)) + (childStoPP * Math.max(0, q.childPax || 0));
+
+                    const dtTotal = stoTotal * 1.25;
+                    const tlTotal = dtTotal / 0.82;
+
+                    const dtNamibianDoublePP = doubleStoPP * 1.25;
+                    const dtNamibianSinglePP = singleStoPP * 1.25;
+                    const tlNamibianDoublePP = dtNamibianDoublePP / 0.82;
+                    const tlNamibianSinglePP = dtNamibianSinglePP / 0.82;
+
+                    const qBotsDoublePP = q.botswanaDoublePP !== undefined ? q.botswanaDoublePP : (q.botswanaUsd || 0);
+                    const qBotsSinglePP = q.botswanaSinglePP || 0;
+                    const qBotsTotal = (qBotsDoublePP * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)) + (qBotsSinglePP * Math.max(0, q.singlePax || 0));
+
+                    const dtBotsTotal = qBotsTotal * 1.25;
+                    const tlBotsTotal = dtBotsTotal / 0.82;
+                    const dtBotsDoublePP = qBotsDoublePP * 1.25;
+                    const dtBotsSinglePP = qBotsSinglePP * 1.25;
+                    const tlBotsDoublePP = dtBotsDoublePP / 0.82;
+                    const tlBotsSinglePP = dtBotsSinglePP / 0.82;
+
+                    const finalTotalNAD = (!q.activeTab || q.activeTab === 'dt' || q.activeTab === 'dt_agent') ? dtTotal : tlTotal;
+                    const finalTotalUSD = (!q.activeTab || q.activeTab === 'dt' || q.activeTab === 'dt_agent') ? dtBotsTotal : tlBotsTotal;
+
+                    const exclAmountNAD = finalTotalNAD / 1.15;
+                    const vatAmountNAD = finalTotalNAD - exclAmountNAD;
+
+                    const totalNights = q.itinerary.reduce((sum, d) => sum + (parseInt(d.nights) || 1), 0);
+                    const totalDays = totalNights + 1;
+
+                    let html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Tracks Estimate - ${q.clientName}</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700&family=Open+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Open Sans', sans-serif; background-color: #f4f4f5; padding: 40px 20px; color: #18181b; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #f4f4f5; padding-bottom: 30px; margin-bottom: 30px; }
+        .logo-text { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #d87a4d; margin: 0; }
+        .sub-logo { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #a1a1aa; font-weight: 600; }
+        .meta-text { font-size: 13px; color: #52525b; line-height: 1.6; }
+        h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #27272a; margin-top: 40px; border-bottom: 1px solid #f4f4f5; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; }
+        th { text-align: left; padding: 12px; background: #fafafa; color: #71717a; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
+        td { padding: 12px; border-bottom: 1px solid #f4f4f5; color: #3f3f46; }
+        .matrix { display: flex; gap: 20px; margin-top: 30px; }
+        .matrix-card { flex: 1; border-radius: 8px; border: 1px solid #e4e4e7; background: #ffffff; overflow: hidden; }
+        .m-section-top { padding: 30px; background: #ffffff; }
+        .m-section-bottom { padding: 30px; background: #fafafa; border-top: 1px dashed #e4e4e7; }
+        .m-title { font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; color: #71717a; margin-bottom: 12px; }
+        .m-val { font-size: 24px; font-weight: 700; color: #18181b; font-family: 'Open Sans', sans-serif;}
+        .m-pp { font-size: 14px; color: #d87a4d; margin-top: 6px; font-weight: 600; font-family: 'Open Sans', sans-serif; }
     </style>
 </head>
 <body>
-
-    <div class="top-nav">
-        <button class="btn-dark">SAVED QUOTES</button>
-        <button class="btn-light">SAVE QUOTE</button>
-    </div>
-
-    <div class="header">
-        <h1>Costing Engine</h1>
-        <p>DESERT TRACKS PREMIUM PRICING</p>
-    </div>
-
-    <div class="tabs">
-        <div class="tab active">DESERT TRACKS</div>
-        <div class="tab">DESERT TRACKS + CONSULTANT</div>
-        <div class="tab">TRAVEL LOCAL</div>
-    </div>
-
-    <div class="card">
-        <div class="form-grid">
-            <div class="form-group">
-                <label class="form-label">CLIENT NAME</label>
-                <input type="text" class="form-input" placeholder="e.g. Smith Family">
-            </div>
-            <div class="form-group">
-                <label class="form-label">QUOTE LABEL</label>
-                <input type="text" class="form-input" placeholder="e.g. Option A">
-            </div>
-            <div class="form-group">
-                <label class="form-label">START DATE 📅</label>
-                <input type="text" class="form-input" placeholder="04/04/2026">
-            </div>
-            <div class="form-group">
-                <label class="form-label">AGENT NAME</label>
-                <input type="text" class="form-input" placeholder="e.g. Jane Doe">
-            </div>
-        </div>
-
-        <div class="form-group total-pax">
-            <label class="form-label">TOTAL PAX</label>
-            <div class="pax-number">2</div>
-        </div>
-    </div>
-
-    <div class="config-header">
-        <h3 class="config-title">PASSENGER CONFIGURATION</h3>
-        <button class="btn-dark" style="font-size:0.65rem;">+ ADD GROUP</button>
-    </div>
-
-    <div style="max-width: 1000px; margin: 0 auto;">
-        <div class="config-card">
-            <h4 class="group-title">Group 1</h4>
-            <div class="pax-types">
-                <div class="pax-type-box">
-                    <label class="pax-type-label">DOUBLE</label>
-                    <input type="text" class="pax-type-input" value="2">
+    <div class="container">
+        <!-- Invoice Header Overrides -->
+        ${type === 'invoice' ? `
+        <div style="display: flex; justify-content: space-between; margin-bottom: 40px; border-bottom: 2px solid #f4f4f5; padding-bottom: 30px;">
+            <div>
+                <h1 class="logo-text">Desert Tracks</h1>
+                <div class="sub-logo" style="margin-bottom: 20px;">BOOKINGS & SAFARIS</div>
+                <div style="font-size: 11px; line-height: 1.6; color: #3f3f46;">
+                    P.O. Box 8241<br>
+                    Swakopmund<br>
+                    Namibia<br>
+                    +264 (0)81 867 0705/6<br><br>
+                    NTB Reg No. TSO01063<br>
+                    Business Reg Nr: 0133975090018<br>
+                    VAT Nr 6033700-01-5<br>
+                    bookings@desert-tracks.com<br><br>
+                    <a href="https://www.desert-tracks.com" style="color: #0284c7; text-decoration: none;">www.desert-tracks.com</a>
                 </div>
-                <div class="pax-type-box">
-                    <label class="pax-type-label">SINGLE</label>
-                    <input type="text" class="pax-type-input" value="0">
+            </div>
+            <div style="width: 320px;">
+                <h2 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-top: 0; text-align: right; color: #18181b;">Pro Forma INVOICE</h2>
+                <div style="font-size: 11px; margin-top: 20px; display: grid; grid-template-columns: 120px 1fr; gap: 8px;">
+                    <div style="color: #71717a;">Invoice No.</div><div style="text-align: right; font-weight: 700;"><span contenteditable="true" style="min-width: 120px; display: inline-block; border-bottom: 1px solid #18181b; outline: none;"></span></div>
+                    <div style="color: #71717a;">Invoice Date:</div><div style="text-align: right; font-weight: 700;">${new Date(Number(q.timestamp) || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                    <div style="color: #71717a;">Client Ref:</div><div style="text-align: right; font-weight: 700;">DT-${(q.timestamp || Date.now()).toString().slice(-6)}</div>
                 </div>
-                <div class="pax-type-box">
-                    <label class="pax-type-label">CHILD</label>
-                    <input type="text" class="pax-type-input" value="0">
+                <div style="font-size: 11px; margin-top: 20px; line-height: 1.6; display: flex; flex-direction: column;">
+                    <strong style="font-size: 12px; margin-bottom: 5px;">CLIENT DETAILS</strong>
+                    <div style="display: grid; grid-template-columns: 70px 1fr; gap: 8px;">
+                        <span style="color: #71717a;">Name:</span><strong style="text-align: right;" contenteditable="true" style="outline: none;">${q.clientName}</strong>
+                        <span style="color: #71717a;">Address:</span><div style="text-align: right;"><span contenteditable="true" style="min-width: 140px; display: inline-block; border-bottom: 1px solid #18181b; outline: none;"></span></div>
+                        <span style="color: #71717a;"></span><div style="text-align: right;"><span contenteditable="true" style="min-width: 140px; display: inline-block; border-bottom: 1px solid #18181b; outline: none;"></span></div>
+                        <span style="color: #71717a;">Contact:</span><div style="text-align: right;"><span contenteditable="true" style="min-width: 140px; display: inline-block; border-bottom: 1px solid #18181b; outline: none;"></span></div>
+                    </div>
                 </div>
             </div>
         </div>
+        ` : `
+        <div class="header">
+            <div>
+                <h1 class="logo-text" contenteditable="true">Desert Tracks</h1>
+                <div class="sub-logo">${type === 'costing' ? 'Premium Costing Estimate' : 'Prepared Itinerary'}</div>
+            </div>
+            <div class="meta-text" style="text-align: right;">
+                <strong>Date:</strong> ${new Date(q.timestamp).toLocaleDateString()}<br>
+                <strong>Ref:</strong> DT-${q.timestamp.toString().slice(-6)}<br>
+                <strong>Agent:</strong> ${q.agentName}
+            </div>
+        </div>
+        <div style="background: #fff8f6; border-left: 4px solid #d87a4d; padding: 15px 20px; margin-bottom: 30px;">
+            <div style="font-size: 12px; color: #d87a4d; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Prepared For</div>
+            <div style="font-size: 20px; font-weight: 600; color: #27272a; margin-top: 4px;">${q.clientName} (${q.numPax} PAX)</div>
+        </div>
+        `}
+
+        ${type === 'invoice' ? `
+        <div style="border: 2px solid #18181b; margin-top: 30px;">
+            <h3 style="text-align: center; margin: 15px 0 10px 0; font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; border-bottom: none;">${totalDays} Day / ${totalNights} Night Namibia Safari</h3>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 0;">
+                <tr style="background-color: #e3d299;">
+                    <th style="padding: 15px 20px; color: #000; font-size: 12px; border-top: 1px solid #18181b; border-bottom: 1px solid #18181b;">Description</th>
+                    <th style="padding: 15px 20px; color: #000; font-size: 12px; border-top: 1px solid #18181b; border-bottom: 1px solid #18181b; text-align: center; border-left: 1px solid #18181b;">Pax</th>
+                    <th style="padding: 15px 20px; color: #000; font-size: 12px; border-top: 1px solid #18181b; border-bottom: 1px solid #18181b; text-align: center; border-left: 1px solid #18181b;">Total</th>
+                    <th style="padding: 15px 20px; color: #000; font-size: 12px; border-top: 1px solid #18181b; border-bottom: 1px solid #18181b; text-align: right; border-left: 1px solid #18181b;">Amount</th>
+                </tr>
+                <tr style="background-color: #f4f4f5;">
+                    <td style="padding: 15px; vertical-align: top;">
+                        <div style="font-weight: 600; font-size: 13px;">Namibia Safari</div>
+                        <div contenteditable="true" style="margin-top: 15px; min-height: 40px; outline: none; border: 1px dashed #ccc; padding: 10px; font-size: 12px; color: #52525b; max-width: 300px; background: white;">Click to add notes...</div>
+                        <div style="margin-top: 80px; font-size: 12px; color: #18181b; padding-bottom: 20px;">Travel Date: <span contenteditable="true" style="border-bottom: 1px solid #18181b; min-width: 140px; display: inline-block;"></span></div>
+                    </td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">${q.numPax}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD / Math.max(1, q.numPax))}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD)}</td>
+                </tr>
+                </tr>
+                <tr style="background-color: #fafafa; border-top: 1px dotted #d4d4d8;">
+                    <td style="padding: 15px; vertical-align: top;">
+                        <div style="font-weight: 500; font-size: 13px; color: #52525b;">Namibia Safari (Single Supplement)</div>
+                        <div contenteditable="true" style="margin-top: 5px; min-height: 20px; outline: none; border: 1px dashed #ccc; padding: 5px 10px; font-size: 11px; color: #71717a; max-width: 300px; background: white;">Click to add notes...</div>
+                    </td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">0</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">NAD 0.00</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b;">NAD 0.00</td>
+                </tr>
+                ${finalTotalUSD > 0 ? `
+                <tr style="background-color: #e5e5e5;">
+                    <td style="padding: 15px; vertical-align: top; border-top: 1px solid #d87a4d;">
+                        <div style="font-weight: 600; font-size: 13px;">${q.botswanaSupplier || 'Botswana Safari'} (USD)</div>
+                    </td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">${q.numPax}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD / Math.max(1, q.numPax))}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD)}</td>
+                </tr>
+                ` : ''}
+                <tr>
+                    <td colspan="2" rowspan="3" style="border-top: 2px solid #d87a4d; padding: 20px; vertical-align: top; border-bottom: 2px solid #18181b;">
+                        <div contenteditable="true" style="min-height: 80px; outline: none; border: 1px dashed #ccc; padding: 10px; font-size: 11px; color: #71717a; max-width: 400px; background: #fafafa; border-radius: 4px;">Click to specify additional terms, banking info, or notes...</div>
+                    </td>
+                    <td style="border-top: 2px solid #d87a4d; padding: 12px 20px; text-align: right; font-size: 12px; border-left: 2px solid #18181b;">Subtotal</td>
+                    <td contenteditable="true" style="border-top: 2px solid #d87a4d; padding: 12px 20px; text-align: right; font-weight: 700; font-size: 12px; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD)}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px 20px; text-align: right; font-size: 12px; border-left: 2px solid #18181b;">Total Vat</td>
+                    <td contenteditable="true" style="padding: 12px 20px; text-align: right; font-weight: 700; font-size: 12px; border-left: 1px solid #18181b;">NAD ${format(vatAmountNAD)}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 12px 20px; text-align: right; font-weight: 700; font-size: 12px; border-left: 2px solid #18181b;">Total exclusive</td>
+                    <td contenteditable="true" style="padding: 12px 20px; text-align: right; font-weight: 700; font-size: 12px; border-left: 1px solid #18181b;">NAD ${format(exclAmountNAD)}</td>
+                </tr>
+                <tr style="background-color: #e3d299;">
+                    <td colspan="2" style="border-bottom: 2px solid #18181b;"></td>
+                    <td style="padding: 12px 15px; text-align: right; font-weight: 700; font-size: 13px; border-top: 1px solid #18181b; border-bottom: 2px solid #18181b; border-left: 2px solid #18181b;">TOTAL</td>
+                    <td contenteditable="true" style="padding: 12px 15px; text-align: right; font-weight: 700; font-size: 13px; border-top: 1px solid #18181b; border-bottom: 2px solid #18181b; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD)}</td>
+                </tr>
+                <tr>
+                    <td colspan="4" style="background-color: #f4f4f5; text-align: center; padding: 15px; font-weight: 600; font-size: 14px;">Thank you - Your business is appreciated!</td>
+                </tr>
+            </table>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', () => {
+                    const parseCurrency = (str) => Number((str || '').replace(/[^0-9.-]+/g, ''));
+                    const formatCurrency = (val) => Number(val).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    
+                    const table = document.querySelector('table');
+                    if(!table) return;
+                    
+                    const rows = Array.from(table.rows);
+                    const subtotalIndex = rows.findIndex(r => r.innerText.includes('Subtotal'));
+                    if(subtotalIndex === -1) return;
+                    
+                    const namibiaRow = rows[1];
+                    const namAmtCell = namibiaRow.cells[namibiaRow.cells.length - 1];
+                    const namPPCell = namibiaRow.cells[namibiaRow.cells.length - 2];
+                    const namPaxCell = namibiaRow.cells[namibiaRow.cells.length - 3];
+                    
+                    const singleRow = rows[2];
+                    const sinAmtCell = singleRow.cells[singleRow.cells.length - 1];
+                    const sinPPCell = singleRow.cells[singleRow.cells.length - 2];
+                    const sinPaxCell = singleRow.cells[singleRow.cells.length - 3];
+                    
+                    const subtotalCell = rows[subtotalIndex].cells[rows[subtotalIndex].cells.length - 1];
+                    const vatCell = rows[subtotalIndex + 1].cells[rows[subtotalIndex + 1].cells.length - 1];
+                    const exclCell = rows[subtotalIndex + 2].cells[rows[subtotalIndex + 2].cells.length - 1];
+                    const totalCell = rows[subtotalIndex + 3].cells[rows[subtotalIndex + 3].cells.length - 1];
+                    
+                    const recalcRow = (source, rowType) => {
+                        let amountCell, ppCell, paxCell;
+                        if (rowType === 'main') {
+                            amountCell = namAmtCell; ppCell = namPPCell; paxCell = namPaxCell;
+                        } else {
+                            amountCell = sinAmtCell; ppCell = sinPPCell; paxCell = sinPaxCell;
+                        }
+                        
+                        let amt = parseCurrency(amountCell.innerText);
+                        const pp = parseCurrency(ppCell.innerText);
+                        const pax = parseInt(paxCell.innerText) || 0;
+                        
+                        // Recalculate cell based on input
+                        if (source === 'pp' || source === 'pax') {
+                            amt = pp * pax;
+                            amountCell.innerText = 'NAD ' + formatCurrency(amt);
+                        } else if (source === 'amount') {
+                            ppCell.innerText = 'NAD ' + formatCurrency(pax > 0 ? amt / pax : 0);
+                        }
+                        
+                        // Update totals
+                        const totalAmt = parseCurrency(namAmtCell.innerText) + parseCurrency(sinAmtCell.innerText);
+                        const exclAmt = totalAmt / 1.15;
+                        const vatAmt = totalAmt - exclAmt;
+                        
+                        subtotalCell.innerText = 'NAD ' + formatCurrency(totalAmt);
+                        vatCell.innerText = 'NAD ' + formatCurrency(vatAmt);
+                        exclCell.innerText = 'NAD ' + formatCurrency(exclAmt);
+                        totalCell.innerText = 'NAD ' + formatCurrency(totalAmt);
+                    };
+                    
+                    namAmtCell.addEventListener('input', () => recalcRow('amount', 'main'));
+                    namPPCell.addEventListener('input', () => recalcRow('pp', 'main'));
+                    namPaxCell.addEventListener('input', () => recalcRow('pax', 'main'));
+                    
+                    sinAmtCell.addEventListener('input', () => recalcRow('amount', 'single'));
+                    sinPPCell.addEventListener('input', () => recalcRow('pp', 'single'));
+                    sinPaxCell.addEventListener('input', () => recalcRow('pax', 'single'));
+                });
+    <\/script>
+
+    </div>
+    ` : `
+    <h3>${totalDays} Day / ${totalNights} Night Itinerary Summary</h3>
+    <table>
+        <tr>
+            <th style="width: 30px;">#</th>
+            <th style="width: 60px; text-align: center;">Nights</th>
+            <th>Region</th>
+            <th>Lodge</th>${type === 'itinerary' ? '' : `<th style="text-align: right;">Sharing PP</th>
+            <th style="text-align: right;">Single PP</th>`}
+        </tr>
+        ${q.itinerary.map((d, i) => `<tr>
+            <td>${i + 1}</td>
+            <td style="text-align: center;">${d.nights || 1}</td>
+            <td>${d.region || '-'}</td>
+            <td style="font-weight: 500;">${d.lodge || '-'}</td>${type === 'itinerary' ? '' : `<td
+                style="text-align: right;">${format(d.pp || 0)}</td>
+            <td style="text-align: right;">${format(d.single || 0)}</td>`}
+        </tr>`).join('')}
+        ${type === 'itinerary' ? '' : `<tr>
+            <td colspan="4" style="text-align: right; font-weight: bold; padding-top: 15px;">Sub Total:</td>
+            <td style="text-align: right; font-weight: bold; padding-top: 15px; color: #d87a4d;">${format(group)}</td>
+            <td style="text-align: right; font-weight: bold; padding-top: 15px; color: #d87a4d;">${format(single)}</td>
+        </tr>`}
+    </table>
+
+    ${type === 'costing' ? `
+    <h3>Cost Breakdown</h3>
+    <table>
+        <tr>
+            <th>Cost Component</th>
+            <th style="text-align: right;">Total (NAD)</th>
+        </tr>
+        ${group > 0 ? `<tr>
+            <td style="color: #71717a;">Base Group Accommodation (${Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(group * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax))}</td>
+        </tr>` : ''}
+        ${single > 0 ? `<tr>
+            <td style="color: #71717a;">Single Supplements (${Math.max(0, q.singlePax || 0)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(single * Math.max(0, q.singlePax || 0))}</td>
+        </tr>` : ''}
+        ${child > 0 ? `<tr>
+            <td style="color: #71717a;">Child Supplements (${Math.max(0, q.childPax || 0)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(child * Math.max(0, q.childPax || 0))}</td>
+        </tr>` : ''}
+        ${vehicle > 0 ? `<tr>
+            <td style="color: #71717a;">Vehicle Hire</td>
+            <td style="text-align: right; font-weight: 500;">${format(vehicle)}</td>
+        </tr>` : ''}
+        ${flights > 0 ? `<tr>
+            <td style="color: #71717a;">Flights</td>
+            <td style="text-align: right; font-weight: 500;">${format(flights)}</td>
+        </tr>` : ''}
+        ${guideFee > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Fee</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideFee)}</td>
+        </tr>` : ''}
+        ${guideAcc > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Accommodation</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideAcc)}</td>
+        </tr>` : ''}
+        ${calcFuel > 0 ? `<tr>
+            <td style="color: #71717a;">Fuel & Distance (${q.fuelDistance} km)</td>
+            <td style="text-align: right; font-weight: 500;">${format(calcFuel)}</td>
+        </tr>` : ''}
+        ${activitiesTotal > 0 ? `<tr>
+            <td style="color: #71717a;">Activities Total</td>
+            <td style="text-align: right; font-weight: 500;">${format(activitiesTotal)}</td>
+        </tr>` : ''}
+        ${extTot > 0 ? `<tr>
+            <td style="color: #71717a;">Other Extras Total</td>
+            <td style="text-align: right; font-weight: 500;">${format(extTot)}</td>
+        </tr>` : ''}
+        ${qBotsTotal > 0 ? `<tr>
+            <td style="color: #d87a4d; font-weight: bold;">Botswana STO Base (USD)</td>
+            <td style="text-align: right; font-weight: bold; color: #d87a4d;">$${format(qBotsTotal)}</td>
+        </tr>` : ''}
+    </table>
+    ` : ''}
+
+
+
+    ${type !== 'itinerary' ? `
+    <h3>Pricing Summary</h3>
+    <div class="matrix">
+        ${(!q.activeTab || q.activeTab === 'dt') ? `
+        <div class="matrix-card">
+            <div class="m-section-top">
+                <div class="m-title">Desert Tracks (25%)</div>
+                <div class="m-val">${format(dtTotal)} NAD Namibia Client Invoice</div>
+                <div class="m-pp">Namibian Double Sharing PP: ${format(dtNamibianDoublePP)}</div>
+                ${(q.singlePax || 0) > 0 ? `<div class="m-pp">Namibian Single PP: ${format(dtNamibianSinglePP)}</div>` :
+                                    ''}
+            </div>
+            ${qBotsTotal > 0 ? `
+            <div class="m-section-bottom">
+                <div class="m-title" style="color: #d87a4d;">${q.botswanaSupplier || 'Botswana'}</div>
+                <div class="m-val">$${format(dtBotsTotal)} USD Botswana Client Invoice</div>
+                <div class="m-pp">Botswana Double Sharing PP: $${format(dtBotsDoublePP)}</div>
+                ${(qBotsSinglePP > 0) ? `<div class="m-pp">Botswana Single PP: $${format(dtBotsSinglePP)}</div>` : ''}
+            </div>` : ''}
+        </div>` : ''}
+
+        ${q.activeTab === 'tl' ? `
+        <div class="matrix-card">
+            <div class="m-section-top">
+                <div class="m-title">Travel Local (18%)</div>
+                <div class="m-val">${format(tlTotal)} NAD Namibia Client Invoice</div>
+                <div class="m-pp">Namibian Double Sharing PP: ${format(tlNamibianDoublePP)}</div>
+                ${(q.singlePax || 0) > 0 ? `<div class="m-pp">Namibian Single PP: ${format(tlNamibianSinglePP)}</div>` :
+                                    ''}
+            </div>
+            ${qBotsTotal > 0 ? `
+            <div class="m-section-bottom">
+                <div class="m-title" style="color: #d87a4d;">${q.botswanaSupplier || 'Botswana'}</div>
+                <div class="m-val">$${format(tlBotsTotal)} USD Botswana Client Invoice</div>
+                <div class="m-pp">Botswana Double Sharing PP: $${format(tlBotsDoublePP)}</div>
+                ${(qBotsSinglePP > 0) ? `<div class="m-pp">Botswana Single PP: $${format(tlBotsSinglePP)}</div>` : ''}
+            </div>` : ''}
+        </div>` : ''}
+
+        ${q.activeTab === 'dt_agent' ? `
+        <div class="matrix-card">
+            <div class="m-section-top">
+                <div class="m-title">Consultant (25% Total)</div>
+                <div class="m-val">${format(dtTotal)} NAD Namibia Client Invoice</div>
+                <div class="m-pp">Namibian Double Sharing PP: ${format(dtNamibianDoublePP)}</div>
+                ${(q.singlePax || 0) > 0 ? `<div class="m-pp">Namibian Single PP: ${format(dtNamibianSinglePP)}</div>` :
+                                    ''}
+                <div style="font-size: 11px; color: #d87a4d; margin-top: 12px; font-weight: bold;">(Includes 20% DT & 5%
+                    Agent Override)</div>
+            </div>
+            ${qBotsTotal > 0 ? `
+            <div class="m-section-bottom">
+                <div class="m-title" style="color: #d87a4d;">${q.botswanaSupplier || 'Botswana'}</div>
+                <div class="m-val">$${format(dtBotsTotal)} USD Botswana Client Invoice</div>
+                <div class="m-pp">Botswana Double Sharing PP: $${format(dtBotsDoublePP)}</div>
+                ${(qBotsSinglePP > 0) ? `<div class="m-pp">Botswana Single PP: $${format(dtBotsSinglePP)}</div>` : ''}
+            </div>` : ''}
+        </div>` : ''}
+    </div>
+    ` : ''}
+    `}
+
+    <!-- Invoice Footers -->
+    ${type === 'invoice' ? `
+    <div
+        style="margin-top: 40px; padding: 20px; background: #fdfbf7; border: 1px solid #e4e4e7; border-radius: 8px; text-align: center;">
+        <div style="font-weight: 600; font-size: 14px;">Thank you - Your business is appreciated!</div>
     </div>
 
+    <div style="margin-top: 40px;">
+        <h4 style="margin: 0 0 15px 0; font-size: 15px; font-weight: 800; text-transform: uppercase; color: #18181b;">
+            Namibia - Banking Details</h4>
+        <div style="font-size: 12px; line-height: 1.8; color: #18181b; font-weight: 600;">
+            STANDARD BANK NAMIBIA LIMITED<br>
+            POST MALL STREET<br>
+            MUTUAL PLATZ - 10005 - WINDHOEK<br>
+            Account Number: 6000 708 1129<br>
+            Universal Code: 087373<br>
+            BIC/Swift/Branch Code: SBNMNANXXXX
+        </div>
+    </div>
+    <button id="dt-save-btn"
+        onclick="this.style.display='none'; const cName = document.querySelector('strong[contenteditable]') ? document.querySelector('strong[contenteditable]').innerText : 'Unknown'; const finalHtml = document.documentElement.outerHTML; this.style.display='block'; if(window.opener) { window.opener.postMessage({type: 'SAVE_DT_INVOICE', idx: ${index}, name: cName, html: finalHtml}, '*'); window.close(); } else { alert('Cannot save downloaded file back to app, you must save it locally.'); }"
+        style="position:fixed; top:20px; right:20px; background:#16a34a; color:white; border:none; padding:10px 20px; border-radius:5px; font-weight:bold; cursor:pointer; z-index:9999; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">SAVE
+        INVOICE</button>
+    ` : ''}
+
+    <div style="margin-top: 50px; text-align: center; font-size: 11px; color: #a1a1aa;">Generated by Desert Tracks
+        Costing Engine</div>
+    </div>
 </body>
+
+</html>`;
+
+                    const newWin = window.open('', '_blank');
+                    if (newWin) {
+                        newWin.document.write(html);
+                        newWin.document.close();
+                        newWin.document.title = `DT_${type.charAt(0).toUpperCase() + type.slice(1)}_${q.clientName.replace(/\s+/g, '_')}`;
+                    } else {
+                        alert("Please enable popups so the document can open in a new tab.");
+                    }
+                },
+                deleteQuote(index) {
+                    setTimeout(() => {
+                        if (confirm('Are you sure you want to delete this quote version?')) {
+                            this.savedQuotes.splice(index, 1);
+                            localStorage.setItem('dtSavedQuotes', JSON.stringify(this.savedQuotes));
+                        }
+                    }, 10);
+                },
+                deleteAllQuotesForClient(clientQuotes) {
+                    setTimeout(() => {
+                        if (confirm('Are you certain you want to delete ALL versions of this quote for this client?')) {
+                            // Extract indexes and sort descending to safely splice from highest to lowest index
+                            const indexes = clientQuotes.map(q => q.originalIndex).sort((a, b) => b - a);
+                            indexes.forEach(idx => {
+                                this.savedQuotes.splice(idx, 1);
+                            });
+                            localStorage.setItem('dtSavedQuotes', JSON.stringify(this.savedQuotes));
+                        }
+                    }, 10);
+                },
+                format(val) { return Number(val || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+            }
+        });
+
+        app.component('currency-input', CurrencyInput);
+        app.mount('#app');
+    </script>
+</body>
+
 </html>
