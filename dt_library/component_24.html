@@ -287,12 +287,16 @@
             vertical-align: middle;
         }
         .dt-film-track-wrap {
-            overflow: hidden;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
             cursor: grab;
             -webkit-user-select: none;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+            scrollbar-width: none;
         }
+        .dt-film-track-wrap::-webkit-scrollbar { display: none; }
         .dt-film-track-wrap.dt-dragging { cursor: grabbing; }
         .dt-film-track {
             display: flex;
@@ -306,6 +310,7 @@
             height: 480px;
             overflow: hidden;
             border-radius: 6px;
+            scroll-snap-align: center;
         }
         /* Make images randomly uneven widths for editorial feel */
         .dt-film-card:nth-child(3n+1) { width: 380px; }
@@ -1725,23 +1730,15 @@
         
         var cards = Array.from(track.querySelectorAll(".dt-film-card"));
         var total = cards.length;
-        var curX = 0, activeIndex = 0;
-        var startX = 0, startY = 0, startScroll = 0, dragging = false, touchDir = null;
-        
-        function maxScroll(){
-            var tw = cards.reduce(function(s,c){return s + c.offsetWidth + 30}, 0);
-            return -(tw - wrap.offsetWidth + (window.innerWidth <= 768 ? 40 : 80));
-        }
-        
-        function clamp(x){ return Math.min(0, Math.max(maxScroll(), x)); }
+        var activeIndex = 0;
         
         function updateUI(){
-            var max = -maxScroll();
-            var pct = max > 0 ? (-curX / max) * 100 : 0;
+            var maxScroll = track.scrollWidth - wrap.offsetWidth;
+            if (maxScroll <= 0) return;
+            var pct = (wrap.scrollLeft / maxScroll) * 100;
             if (progress) progress.style.width = pct + "%";
             
-            // Detect active index safely based on center of viewport
-            var screenCenterPos = -curX + (wrap.offsetWidth / 2);
+            var screenCenterPos = wrap.scrollLeft + (wrap.offsetWidth / 2);
             var cumX = 0;
             var nearest = 0;
             var minDist = Infinity;
@@ -1753,7 +1750,7 @@
                     minDist = dist;
                     nearest = i;
                 }
-                cumX += c.offsetWidth + 30;
+                cumX += c.offsetWidth + 14;
             });
             activeIndex = nearest;
             
@@ -1761,86 +1758,26 @@
                 counter.innerHTML = String(activeIndex+1).padStart(2,"0") + " <span>/ " + String(total).padStart(2,"0") + "</span>";
             }
         }
-        
-        function applyX(x, instant){
-            curX = clamp(x);
-            // Ultra premium slow ease
-            track.style.transition = instant ? "none" : "transform 0.85s cubic-bezier(0.19, 1, 0.22, 1)";
-            track.style.transform = "translateX(" + curX + "px)";
+
+        wrap.addEventListener('scroll', function() {
             updateUI();
-        }
+        }, {passive: true});
 
         function snapTo(index) {
             activeIndex = Math.max(0, Math.min(total - 1, index));
-            var tx = 0;
-            for(var i=0; i<activeIndex; i++) {
-                tx += cards[i].offsetWidth + 30;
-            }
-            applyX(-tx, false);
-        }
-
-        var autoPlayInterval;
-        function startAutoPlay() {
-            // JS Autoplay disabled permanently
-        }
-        function stopAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
+            var targetCard = cards[activeIndex];
+            if (targetCard) {
+                var targetLeft = targetCard.offsetLeft - (wrap.offsetWidth / 2) + (targetCard.offsetWidth / 2);
+                wrap.scrollTo({ left: targetLeft, behavior: 'smooth' });
             }
         }
-        function resetAutoPlay() {
-            stopAutoPlay();
-            startAutoPlay();
-        }
-
-        wrap.addEventListener("mousedown", function(e){
-            stopAutoPlay();
-            dragging = true; startX = e.clientX; startScroll = curX;
-            wrap.classList.add("dt-dragging"); e.preventDefault();
-        });
-        document.addEventListener("mousemove", function(e){
-            if(!dragging) return;
-            applyX(startScroll + (e.clientX - startX), true);
-        });
-        document.addEventListener("mouseup", function(){
-            if(!dragging) return;
-            dragging = false; wrap.classList.remove("dt-dragging");
-            snapTo(activeIndex); // Premium settle
-            startAutoPlay();
-        });
         
-        wrap.addEventListener("touchstart", function(e){
-            stopAutoPlay();
-            var t = e.touches[0]; startX = t.clientX; startY = t.clientY; startScroll = curX;
-            touchDir = null;
-        }, {passive: true});
+        function startAutoPlay() {}
+        function stopAutoPlay() {}
+        function resetAutoPlay() {}
         
-        wrap.addEventListener("touchmove", function(e){
-            var t = e.touches[0], dx = t.clientX - startX, dy = t.clientY - startY;
-            if(!touchDir){
-               if (Math.abs(dx) > Math.abs(dy)) {
-                   touchDir = "h"; // Horizontal swipe -> intercept
-               } else {
-                   touchDir = "v"; // Vertical swipe -> allow page scroll
-               }
-            }
-            if(touchDir === "h"){
-                e.preventDefault();
-                applyX(startScroll + dx, true);
-            }
-        }, {passive: false});
-        
-        wrap.addEventListener("touchend", function(){
-            if(touchDir === "h"){ 
-                snapTo(activeIndex); 
-            } 
-            touchDir = null;
-            startAutoPlay();
-        }, {passive: true});
-        
-        if (prevBtn) prevBtn.addEventListener("click", function() { snapTo(activeIndex - 1); resetAutoPlay(); });
-        if (nextBtn) nextBtn.addEventListener("click", function() { if (activeIndex >= total - 1) { snapTo(0); } else { snapTo(activeIndex + 1); } resetAutoPlay(); });
+        if (prevBtn) prevBtn.addEventListener("click", function() { snapTo(activeIndex - 1); });
+        if (nextBtn) nextBtn.addEventListener("click", function() { if (activeIndex >= total - 1) { snapTo(0); } else { snapTo(activeIndex + 1); } });
         
         snapTo(0);
         
