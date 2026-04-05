@@ -146,8 +146,10 @@
 
         @media (max-width: 1023px) {
             .lux-right { padding: 4rem 0; }
-            .lux-welcome-top { padding: 0 2rem; }
-            .lux-day-block-header { padding: 0 2rem; }
+            .lux-welcome-top { padding: 0 1.25rem; }
+            .lux-day-block-header { padding: 0 1.25rem; }
+            .lux-features-container { padding: 0 1.25rem; }
+            .dt-film-footer { padding: 2rem 1.25rem 0 1.25rem !important; }
         }
 
         .lux-welcome-tag {
@@ -557,19 +559,31 @@
         
         /* OVERRIDES FOR DESTINATIONS & ACCOM LISTS */
         .lux-acc-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            column-gap: 40px;
-            row-gap: 50px;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            column-gap: 30px;
+            padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
         }
-        @media (max-width: 900px) {
-            .lux-acc-grid {
-                grid-template-columns: 1fr 1fr;
-            }
+        .lux-acc-grid::-webkit-scrollbar {
+            height: 6px;
         }
-        @media (max-width: 600px) {
+        .lux-acc-grid::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+        .lux-acc-grid::-webkit-scrollbar-thumb {
+            background: rgba(47, 93, 90, 0.3);
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
             .lux-acc-grid {
-                grid-template-columns: 1fr;
+                column-gap: 20px;
+                margin-right: -1.25rem;
+                padding-right: 1.25rem;
             }
         }
         .lux-acc-card {
@@ -578,6 +592,13 @@
             display: flex;
             flex-direction: column;
             transition: opacity 0.3s ease;
+            flex: 0 0 calc(50% - 15px);
+            scroll-snap-align: start;
+        }
+        @media (max-width: 768px) {
+            .lux-acc-card {
+                flex: 0 0 85%;
+            }
         }
         .lux-acc-card img {
             width: 100%;
@@ -622,10 +643,10 @@
 
     
         .lux-acc-desc {
-            font-size: 0.95rem;
+            font-size: 1.05rem;
             color: #5A6A6A;
             margin-top: 8px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
     
     
@@ -1383,49 +1404,49 @@
                     <a href="#day-01" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/55342/143a4578.jpg?fmt=jpg" alt="Ti Melen Boutique Guesthouse">
                         <h4 class="lux-acc-title">Ti Melen Boutique Guesthouse</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">WINDHOEK</span><br/>A tranquil, modern retreat blending local warmth.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">WINDHOEK</span><br/>A tranquil, modern retreat blending local warmth.</p>
                     </a>
 
                     <a href="#day-02" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg" alt="Kalahari Anib Lodge">
                         <h4 class="lux-acc-title">Kalahari Anib Lodge</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">KALAHARI DESERT</span><br/>Eco-friendly lodge amidst the red dunes of the Kalahari.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">KALAHARI DESERT</span><br/>Eco-friendly lodge amidst the red dunes of the Kalahari.</p>
                     </a>
 
                     <a href="#day-03" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg" alt="Desert Homestead Lodge">
                         <h4 class="lux-acc-title">Desert Homestead Lodge</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">SOSSUSVLEI</span><br/>Intimate luxury set against sweeping desert vistas.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">SOSSUSVLEI</span><br/>Intimate luxury set against sweeping desert vistas.</p>
                     </a>
 
                     <a href="#day-05" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg" alt="Swakopmund Guesthouse">
                         <h4 class="lux-acc-title">Swakopmund Guesthouse</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">SWAKOPMUND</span><br/>Charming colonial-style comfort by the ocean.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">SWAKOPMUND</span><br/>Charming colonial-style comfort by the ocean.</p>
                     </a>
 
                     <a href="#day-07" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="Lodge Damaraland">
                         <h4 class="lux-acc-title">Lodge Damaraland</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">DAMARALAND</span><br/>Secluded luxury immersed in ancient rugged landscapes.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">DAMARALAND</span><br/>Secluded luxury immersed in ancient rugged landscapes.</p>
                     </a>
 
                     <a href="#day-08" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/10560/dsc_7278.jpg?fmt=jpg" alt="Etosha Safari Camp">
                         <h4 class="lux-acc-title">Etosha Safari Camp</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">ETOSHA SOUTH</span><br/>Set near the southern entrance to Etosha National Park.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">ETOSHA SOUTH</span><br/>Set near the southern entrance to Etosha National Park.</p>
                     </a>
 
                     <a href="#day-10" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg" alt="Onguma Bush Camp">
                         <h4 class="lux-acc-title">Onguma Bush Camp</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">ETOSHA RESERVE</span><br/>Luxurious tented suites at Onguma private reserve.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">ETOSHA RESERVE</span><br/>Luxurious tented suites at Onguma private reserve.</p>
                     </a>
 
                     <a href="#day-12" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg" alt="Eagle's Rest">
                         <h4 class="lux-acc-title">Eagle's Rest</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">OTJIWA NATURE RESERVE</span><br/>Exceptional service and private bush walks.</p>
+                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; font-weight:600; color:#7A8A8A;">OTJIWA NATURE RESERVE</span><br/>Exceptional service and private bush walks.</p>
                     </a>
 
                 </div></div>
