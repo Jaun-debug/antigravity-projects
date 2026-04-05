@@ -561,7 +561,32 @@
         @media (max-width: 900px) { .lux-dest-split { flex-direction: column; } }
 
 
-        
+        .flex-scroll-hint {
+            font-size: 0.65rem;
+            color: #d87a4d;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            margin-top: -10px;
+            opacity: 0.9;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .flex-scroll-hint svg {
+            width: 14px; height: 14px;
+            fill: none; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round;
+            animation: swipeAnim 1.5s infinite ease-in-out;
+        }
+        @keyframes swipeAnim {
+            0% { transform: translateX(0); opacity: 0.5; }
+            50% { transform: translateX(5px); opacity: 1; }
+            100% { transform: translateX(0); opacity: 0.5; }
+        }
+
         /* OVERRIDES FOR DESTINATIONS & ACCOM LISTS */
         .lux-acc-grid {
             display: flex;
@@ -581,7 +606,7 @@
             border-radius: 4px;
         }
         .lux-acc-grid::-webkit-scrollbar-thumb {
-            background: rgba(47, 93, 90, 0.3);
+            background: #d87a4d;
             border-radius: 4px;
         }
         @media (max-width: 768px) {
@@ -924,6 +949,10 @@
             <!-- Destinations 3x Grid Block -->
             <div class="lux-acc-grid-container" style="margin-bottom: 4rem;">
                 <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; line-height: 1.2;">Destinations</h2>
+                <div class="flex-scroll-hint">
+                    <span>Swipe to explore</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
                 <div class="lux-acc-grid">
                     <a href="#day-01" class="lux-acc-card">
                         <img src="https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg" alt="Windhoek">
@@ -1404,6 +1433,10 @@
 <div class="lux-features-container">
             <div class="lux-acc-grid-container" style="margin-bottom: 4rem;">
                 <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; line-height: 1.2;">Accommodation Overview</h2>
+                <div class="flex-scroll-hint">
+                    <span>Swipe to explore</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
                 <div class="lux-acc-grid">
                     
                     <a href="#day-01" class="lux-acc-card">
