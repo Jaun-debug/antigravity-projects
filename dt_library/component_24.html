@@ -800,7 +800,43 @@
             line-height: 1.6;
             color: #ccc;
             max-width: 600px;
+        }
+        
+        /* Premium Why this Journey is Special Grid */
+        .lux-why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 4rem;
+            margin-bottom: 6rem;
+        }
+        @media (max-width: 768px) {
+            .lux-why-grid { grid-template-columns: 1fr; gap: 2rem; }
+        }
+        .lux-why-item {
+            border-top: 1px solid rgba(53, 90, 88, 0.2);
+            padding-top: 1.5rem;
+        }
+        .lux-why-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            color: #C9A96A;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .lux-why-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            color: #355A58;
+            margin: 0 0 0.5rem 0;
+            font-weight: 400;
+        }
+        .lux-why-desc {
+            font-size: 0.95rem;
+            color: #5F6F6E;
+            line-height: 1.6;
             margin: 0;
+            font-weight: 300;
         }
 </style>
 </head>
@@ -827,6 +863,33 @@
         <div class="lux-welcome-top">
             <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; line-height: 1.2;">Overview</h2>
             <p class="lux-intro">Prepare for an unforgettable adventure. This exclusive Namibian journey takes you from the rolling red dunes of the Kalahari to the wildlife-rich plains of Etosha, stopping by the dramatic coastlines of Swakopmund. Crafted for the independent traveler, this route guarantees the perfect blend of freedom, comfort, and luxury.</p>
+        </div>
+
+        <div style="margin-top: 4rem;">
+            <h2 style="font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 4vw, 3rem); color: #355A58; font-weight: normal; margin-bottom: 1.5rem;">Why This Journey Is Special</h2>
+            
+            <div class="lux-why-grid">
+                <div class="lux-why-item">
+                    <span class="lux-why-num">01</span>
+                    <h3 class="lux-why-title">Designed by Experts</h3>
+                    <p class="lux-why-desc">Crafted by local Namibia specialists with deep connections to the land.</p>
+                </div>
+                <div class="lux-why-item">
+                    <span class="lux-why-num">02</span>
+                    <h3 class="lux-why-title">Perfect Balance</h3>
+                    <p class="lux-why-desc">An optimal mix of thrilling self-drive exploration and luxury comfort.</p>
+                </div>
+                <div class="lux-why-item">
+                    <span class="lux-why-num">03</span>
+                    <h3 class="lux-why-title">Handpicked Lodges</h3>
+                    <p class="lux-why-desc">Stay exclusively in premium, carefully tested luxury accommodations.</p>
+                </div>
+                <div class="lux-why-item">
+                    <span class="lux-why-num">04</span>
+                    <h3 class="lux-why-title">Fully Customizable</h3>
+                    <p class="lux-why-desc">Flexible itineraries tailored exactly to your travel style & pace.</p>
+                </div>
+            </div>
         </div>
 
         <div class="lux-features-container">
