@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 
-async function sendEmailNotification(fields: Record<string, string>, attachments: any[]) {
+async function sendEmailNotification(fields: Record<string, string>, attachments: { filename: string; content: string }[]) {
     try {
         const htmlContent = `
         <!DOCTYPE html>
@@ -103,14 +103,14 @@ export async function POST(req: NextRequest) {
         }
 
         // 1. Prepare attachments for Resend
-        let attachments: any[] = [];
+        let attachments: { filename: string; content: string }[] = [];
 
         if (files['passportFile']) {
             const buffer = Buffer.from(await files['passportFile'].arrayBuffer());
             const cleanName = files['passportFile'].name.replace(/[^a-zA-Z0-9.\-_]/g, '');
             attachments.push({
                 filename: `passport_${cleanName}`,
-                content: Array.from(buffer)
+                content: buffer.toString('base64')
             });
         }
 
@@ -119,7 +119,7 @@ export async function POST(req: NextRequest) {
             const cleanName = files['licenseFile'].name.replace(/[^a-zA-Z0-9.\-_]/g, '');
             attachments.push({
                 filename: `license_${cleanName}`,
-                content: Array.from(buffer)
+                content: buffer.toString('base64')
             });
         }
 
