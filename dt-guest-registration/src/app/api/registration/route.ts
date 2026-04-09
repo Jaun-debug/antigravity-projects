@@ -1,39 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const WP_API = "https://desert-tracks.com/wp-json/wp/v2";
-const WP_USER = "jaun";
-const WP_PASS = "DaFq lkTq FdJk YB2f E1Cf 0W3E";
-const WP_AUTH = Buffer.from(`${WP_USER}:${WP_PASS}`).toString('base64');
 
-async function uploadToWordPress(file: File, filename: string): Promise<string | null> {
-    try {
-        const arrayBuffer = await file.arrayBuffer();
-        const buffer = Buffer.from(arrayBuffer); // Explicitly convert to Node Buffer
-
-        const res = await fetch(`${WP_API}/media`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${WP_AUTH}`,
-                'Content-Disposition': `attachment; filename="${filename}"`,
-                'Content-Type': file.type || 'image/jpeg',
-            },
-            body: buffer
-        });
-
-        if (!res.ok) {
-            console.error("Failed to upload image:", await res.text());
-            return null;
-        }
-
-        const data = await res.json();
-        return data.source_url;
-    } catch (err) {
-        console.error("WP Upload Error:", err);
-        return null;
-    }
-}
-
-async function sendEmailNotification(fields: Record<string, string>) {
+async function sendEmailNotification(fields: Record<string, string>, attachments: any[]) {
     try {
         const htmlContent = `
         <!DOCTYPE html>
@@ -84,16 +52,8 @@ async function sendEmailNotification(fields: Record<string, string>) {
                     <div class="section-title" style="margin-top: 40px;">Encrypted Documents</div>
                     <div class="images-grid">
                         <div class="image-box">
-                            <span class="label">Passport Scan</span>
-                            ${fields['Passport Photo URL'] && fields['Passport Photo URL'].includes('http')
-                ? `<a href="${fields['Passport Photo URL']}" target="_blank">View Passport Securely</a>`
-                : `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No passport attached</div>`}
-                        </div>
-                        <div class="image-box">
-                            <span class="label">Driver's License</span>
-                            ${fields["Driver's License Photo URL"] && fields["Driver's License Photo URL"].includes('http')
-                ? `<a href="${fields["Driver's License Photo URL"]}" target="_blank">View License Securely</a>`
-                : `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No license attached</div>`}
+                            <span class="label">Documentation attached</span>
+                            <div style="color: #647c87; font-style: italic; margin-top: 10px;">Please check the attachments on this email for the provided Passport and Driver's License files.</div>
                         </div>
                     </div>
                 </div>
@@ -115,7 +75,8 @@ async function sendEmailNotification(fields: Record<string, string>) {
                 from: 'Desert Tracks Registration <onboarding@resend.dev>',
                 to: ['bookings@desert-tracks.com'],
                 subject: `New Guest Registration: ${fields['groupName'] || 'Booking'}`,
-                html: htmlContent
+                html: htmlContent,
+                attachments: attachments
             })
         });
 
@@ -141,55 +102,29 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        // 1. Upload the high-res passport and license to WP Media Library directly securely
-        let passportUrl = "No passport uploaded";
-        let licenseUrl = "No license uploaded";
+        // 1. Prepare attachments for Resend
+        let attachments: any[] = [];
 
         if (files['passportFile']) {
+            const buffer = Buffer.from(await files['passportFile'].arrayBuffer());
             const cleanName = files['passportFile'].name.replace(/[^a-zA-Z0-9.\-_]/g, '');
-            const safeName = `passport_${Date.now()}_${cleanName}`;
-            const url = await uploadToWordPress(files['passportFile'], safeName);
-            if (url) passportUrl = url;
+            attachments.push({
+                filename: `passport_${cleanName}`,
+                content: Array.from(buffer)
+            });
         }
 
         if (files['licenseFile']) {
+            const buffer = Buffer.from(await files['licenseFile'].arrayBuffer());
             const cleanName = files['licenseFile'].name.replace(/[^a-zA-Z0-9.\-_]/g, '');
-            const safeName = `license_${Date.now()}_${cleanName}`;
-            const url = await uploadToWordPress(files['licenseFile'], safeName);
-            if (url) licenseUrl = url;
+            attachments.push({
+                filename: `license_${cleanName}`,
+                content: Array.from(buffer)
+            });
         }
 
-        // Add URLs to fields for the email
-        fields["Passport Photo URL"] = passportUrl;
-        fields["Driver's License Photo URL"] = licenseUrl;
-
-        // 2. Trigger the Email Notification via Resend
-        await sendEmailNotification(fields);
-
-        // 3. Optional: Create a Private/Draft Post in WordPress just as a secure backup!
-        const postContent = `
-        <h2>Client Booking Information</h2>
-        <ul>
-            ${Object.entries(fields).map(([k, v]) => `<li><strong>${k}:</strong> ${v}</li>`).join('')}
-        </ul>
-        <h3>Uploaded Documents</h3>
-        <p><strong>Passport:</strong> <br/><a href="${passportUrl}" target="_blank"><img src="${passportUrl}" style="max-height: 400px;"/></a></p>
-        <p><strong>Driver's License:</strong> <br/><a href="${licenseUrl}" target="_blank"><img src="${licenseUrl}" style="max-height: 400px;"/></a></p>
-        `;
-
-        await fetch(`${WP_API}/posts`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `Basic ${WP_AUTH}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title: `Secure Guest Registration: ${fields['guestName'] || 'Unknown'}`,
-                content: postContent,
-                status: 'private', // Saves as private so only admins can see
-                categories: []
-            })
-        });
+        // 2. Trigger the Email Notification via Resend, passing attachments
+        await sendEmailNotification(fields, attachments);
 
         return NextResponse.json({ success: true, message: "Registration successful" });
 
