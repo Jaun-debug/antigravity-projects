@@ -1,8 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 
 
-async function sendEmailNotification(fields: Record<string, string>, attachments: { filename: string; content: string }[]) {
+async function sendEmailNotification(fields: Record<string, string>, imageList: { name: string; base64: string; type: string }[]) {
     try {
+        
+        let passportHtml = `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No passport attached</div>`;
+        let licenseHtml = `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No license attached</div>`;
+        
+        const passportData = imageList.find(img => img.name === 'passport');
+        if(passportData) {
+            passportHtml = `<img src="data:${passportData.type};base64,${passportData.base64}" style="max-width: 400px; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+        }
+
+        const licenseData = imageList.find(img => img.name === 'license');
+        if(licenseData) {
+            licenseHtml = `<img src="data:${licenseData.type};base64,${licenseData.base64}" style="max-width: 400px; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+        }
+
         const htmlContent = `
         <!DOCTYPE html>
         <html>
@@ -20,8 +34,7 @@ async function sendEmailNotification(fields: Record<string, string>, attachments
                 .label { font-size: 11px; font-weight: bold; color: #647c87; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block; }
                 .value { font-size: 16px; color: #214352; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df; }
                 .images-grid { margin-top: 30px; }
-                .image-box { margin-bottom: 20px; text-align: center; background-color: #FAFAFA; padding: 20px; border: 1px dashed #bfa182; }
-                .image-box a { display: inline-block; padding: 12px 24px; background-color: #214352; color: #ffffff; text-decoration: none; font-size: 12px; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; margin-top: 15px; border-radius: 4px; }
+                .image-box { margin-bottom: 40px; background-color: #FAFAFA; padding: 20px; border: 1px dashed #bfa182; border-radius: 6px; }
                 .footer { background-color: #214352; color: #ffffff; text-align: center; padding: 20px; font-size: 11px; letter-spacing: 1px; }
             </style>
         </head>
@@ -52,8 +65,12 @@ async function sendEmailNotification(fields: Record<string, string>, attachments
                     <div class="section-title" style="margin-top: 40px;">Encrypted Documents</div>
                     <div class="images-grid">
                         <div class="image-box">
-                            <span class="label">Documentation attached</span>
-                            <div style="color: #647c87; font-style: italic; margin-top: 10px;">Please check the attachments on this email for the provided Passport and Driver's License files.</div>
+                            <span class="label" style="margin-bottom: 15px;">Passport Scan</span>
+                            ${passportHtml}
+                        </div>
+                        <div class="image-box">
+                            <span class="label" style="margin-bottom: 15px;">Driver's License</span>
+                            ${licenseHtml}
                         </div>
                     </div>
                 </div>
@@ -75,8 +92,7 @@ async function sendEmailNotification(fields: Record<string, string>, attachments
                 from: 'Desert Tracks Registration <onboarding@resend.dev>',
                 to: ['bookings@desert-tracks.com'],
                 subject: `New Guest Registration: ${fields['groupName'] || 'Booking'}`,
-                html: htmlContent,
-                attachments: attachments
+                html: htmlContent
             })
         });
 
@@ -102,29 +118,29 @@ export async function POST(req: NextRequest) {
             }
         }
 
-        // 1. Prepare attachments for Resend
-        let attachments: { filename: string; content: string }[] = [];
+        // 1. Convert files to Base64 to render directly inside HTML
+        let imageList: { name: string; base64: string; type: string }[] = [];
 
         if (files['passportFile']) {
             const buffer = Buffer.from(await files['passportFile'].arrayBuffer());
-            const cleanName = files['passportFile'].name.replace(/[^a-zA-Z0-9.\-_]/g, '');
-            attachments.push({
-                filename: `passport_${cleanName}`,
-                content: buffer.toString('base64')
+            imageList.push({
+                name: 'passport',
+                base64: buffer.toString('base64'),
+                type: files['passportFile'].type || 'image/jpeg'
             });
         }
 
         if (files['licenseFile']) {
             const buffer = Buffer.from(await files['licenseFile'].arrayBuffer());
-            const cleanName = files['licenseFile'].name.replace(/[^a-zA-Z0-9.\-_]/g, '');
-            attachments.push({
-                filename: `license_${cleanName}`,
-                content: buffer.toString('base64')
+            imageList.push({
+                name: 'license',
+                base64: buffer.toString('base64'),
+                type: files['licenseFile'].type || 'image/jpeg'
             });
         }
 
-        // 2. Trigger the Email Notification via Resend, passing attachments
-        await sendEmailNotification(fields, attachments);
+        // 2. Trigger the Email Notification via Resend, passing base64 images
+        await sendEmailNotification(fields, imageList);
 
         return NextResponse.json({ success: true, message: "Registration successful" });
 
