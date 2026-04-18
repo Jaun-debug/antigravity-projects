@@ -10,7 +10,8 @@
             overflow: hidden;
             
             background-color: #bfa182;
-            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            /* Changed to Open Sans to match body text */
+            font-family: 'Open Sans', Arial, sans-serif;
             min-height: 100vh;
             padding: 5rem 0;
             display: flex;
@@ -29,9 +30,9 @@
         }
         .wd-subtitle {
             color: #ffffff !important;
-            font-size: 1.125rem;
-            font-weight: 300;
-            letter-spacing: 0.2em;
+            font-size: 0.85rem;   /* Made much smaller & elegant */
+            font-weight: 500;
+            letter-spacing: 0.25em; /* Widened tracking for luxury feel */
             text-transform: uppercase;
             margin-bottom: 2rem;
         }
@@ -53,14 +54,15 @@
             background: none;
             border: none;
             color: rgba(255, 255, 255, 0.4); 
-            font-size: 0.875rem;
-            font-weight: 700;
-            letter-spacing: 0.1em;
+            font-size: 0.75rem;   /* Made smaller */
+            font-weight: 600;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             cursor: pointer;
             transition: color 0.3s;
             outline: none;
             padding: 0.5rem;
+            font-family: 'Open Sans', Arial, sans-serif;
         }
         /* Lights up bright white when active */
         .wd-nav button.active, .wd-nav button:hover {
@@ -99,6 +101,7 @@
                         opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
             overflow: hidden;
+            border-radius: 10px; /* NEW: Rounded Corners */
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             opacity: 0;
             transform: scale(0.5);
@@ -146,18 +149,19 @@
         }
         .wd-slide-title {
             color: #ffffff !important;
-            font-family: serif;
-            letter-spacing: 0.2em;
+            font-family: 'Cinzel', serif; /* Changed to Cinzel */
+            letter-spacing: 0.15em;
             text-transform: uppercase;
             white-space: pre-line;
             text-align: center;
             line-height: 1.1;
-            font-size: clamp(2.5rem, 8vw, 6rem);
+            /* Radically reduced the size: Before it was up to 6rem, now max 3rem */
+            font-size: clamp(2rem, 5vw, 3rem); 
             transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
                         opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
             text-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
             margin: 0;
-            font-weight: normal;
+            font-weight: 400;
             text-decoration: none !important;
         }
         .wd-bottom-section {
@@ -191,12 +195,12 @@
             margin: 0;
             color: #ffffff !important;
             font-weight: 300;
-            font-size: 1rem;
+            font-size: 0.9rem; /* Slightly smaller for refinement */
             line-height: 1.625;
             pointer-events: none;
         }
         @media (min-width: 768px) {
-            .wd-desc-item { font-size: 1.125rem; }
+            .wd-desc-item { font-size: 0.95rem; }
         }
         .wd-desc-item.active {
             opacity: 1;
@@ -240,7 +244,7 @@
     </style>
 
     <div class="wd-header">
-        <p class="wd-subtitle">CHOOSE HOW YOU WANT TO TRAVEL</p>
+        <p class="wd-subtitle">CHOOSE YOUR TRAVEL STYLE</p>
         <div class="wd-nav wd-nav-buttons">
             <button class="wd-nav-btn">SELF-DRIVE SAFARIS</button>
             <button class="active wd-nav-btn">FLY-IN SAFARIS</button>
