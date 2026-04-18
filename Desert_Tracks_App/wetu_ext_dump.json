@@ -1,0 +1,615 @@
+{
+  "1": [
+    {
+      "destination_ids": [
+        1548
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Self Drive from Hosea Kutako International Airport [WDH] to Ti Melen Boutique Guesthouse",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Hosea Kutako International Airport [WDH]",
+              "end_content_entity_name": "Ti Melen Boutique Guesthouse",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Ti Melen Boutique Guesthouse",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 55342
+          }
+        ]
+      ],
+      "end_day": 1,
+      "start_day": 1
+    }
+  ],
+  "2": [
+    {
+      "destination_ids": [
+        468
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Ti Melen Boutique Guesthouse",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 55342
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Ti Melen Boutique Guesthouse to Desert Homestead Lodge",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Ti Melen Boutique Guesthouse",
+              "end_content_entity_name": "Desert Homestead Lodge",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Desert Homestead Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 10515
+          }
+        ]
+      ],
+      "end_day": 2,
+      "start_day": 2
+    },
+    {
+      "destination_ids": [
+        468
+      ],
+      "end_day": 3,
+      "start_day": 3
+    }
+  ],
+  "3": [
+    {
+      "destination_ids": [
+        471
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Desert Homestead Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 10515
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Desert Homestead Lodge to Charlie's Guesthouse",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Desert Homestead Lodge",
+              "end_content_entity_name": "Charlie's Guesthouse",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Charlie's Guesthouse",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 341759
+          }
+        ]
+      ],
+      "end_day": 4,
+      "start_day": 4
+    },
+    {
+      "destination_ids": [
+        471
+      ],
+      "end_day": 5,
+      "start_day": 5
+    }
+  ],
+  "4": [
+    {
+      "destination_ids": [
+        1551
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Charlie's Guesthouse",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 341759
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Charlie's Guesthouse to Spitzkoppen Lodge",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Charlie's Guesthouse",
+              "end_content_entity_name": "Spitzkoppen Lodge",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Spitzkoppen Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 101058
+          }
+        ]
+      ],
+      "end_day": 6,
+      "start_day": 6
+    }
+  ],
+  "5": [
+    {
+      "destination_ids": [
+        123643
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Spitzkoppen Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 101058
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Spitzkoppen Lodge to Etosha Safari Camp Gondwana Collection Namibia",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Spitzkoppen Lodge",
+              "end_content_entity_name": "Etosha Safari Camp Gondwana Collection Namibia",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Etosha Safari Camp Gondwana Collection Namibia",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 10560
+          }
+        ]
+      ],
+      "end_day": 7,
+      "start_day": 7
+    }
+  ],
+  "6": [
+    {
+      "destination_ids": [
+        72298
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Etosha Safari Camp Gondwana Collection Namibia",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 10560
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Etosha Safari Camp Gondwana Collection Namibia to Onguma Bush Camp",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Etosha Safari Camp Gondwana Collection Namibia",
+              "end_content_entity_name": "Onguma Bush Camp",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Onguma Bush Camp",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 8717
+          }
+        ]
+      ],
+      "end_day": 8,
+      "start_day": 8
+    },
+    {
+      "destination_ids": [
+        72298
+      ],
+      "end_day": 9,
+      "start_day": 9
+    }
+  ],
+  "7": [
+    {
+      "destination_ids": [
+        374995
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Onguma Bush Camp",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 8717
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Onguma Bush Camp to Shametu River Lodge",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Onguma Bush Camp",
+              "end_content_entity_name": "Shametu River Lodge",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Shametu River Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 68333
+          }
+        ]
+      ],
+      "end_day": 10,
+      "start_day": 10
+    },
+    {
+      "destination_ids": [
+        374995
+      ],
+      "end_day": 11,
+      "start_day": 11
+    }
+  ],
+  "8": [
+    {
+      "destination_ids": [
+        1463
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Shametu River Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 68333
+          }
+        ],
+        [
+          {
+            "label": "Self Drive from Shametu River Lodge to Maun International Airport [MUB]",
+            "subtype": "Selfdrive",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Selfdrive",
+              "start_content_entity_name": "Shametu River Lodge",
+              "end_content_entity_name": "Maun International Airport [MUB]",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Charter Flight from Maun International Airport [MUB] to Khwai Guest House",
+            "subtype": "CharterFlight",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "CharterFlight",
+              "start_content_entity_name": "Maun International Airport [MUB]",
+              "end_content_entity_name": "Khwai Guest House",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Khwai Guest House",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 55741
+          }
+        ]
+      ],
+      "end_day": 12,
+      "start_day": 12
+    },
+    {
+      "destination_ids": [
+        1463
+      ],
+      "end_day": 13,
+      "start_day": 13
+    }
+  ],
+  "9": [
+    {
+      "destination_ids": [
+        1713
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Khwai Guest House",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 55741
+          }
+        ],
+        [
+          {
+            "label": "Charter Flight from Khwai Guest House to Kasane Airport [BBK]",
+            "subtype": "CharterFlight",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "CharterFlight",
+              "start_content_entity_name": "Khwai Guest House",
+              "end_content_entity_name": "Kasane Airport [BBK]",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Transfer from Kasane Airport [BBK] to The Chobe Safari Lodge",
+            "subtype": "Transfer",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Transfer",
+              "start_content_entity_name": "Kasane Airport [BBK]",
+              "end_content_entity_name": "The Chobe Safari Lodge",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to The Chobe Safari Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 19538
+          }
+        ]
+      ],
+      "end_day": 14,
+      "start_day": 14
+    },
+    {
+      "destination_ids": [
+        1713
+      ],
+      "end_day": 15,
+      "start_day": 15
+    }
+  ],
+  "10": [
+    {
+      "destination_ids": [
+        481
+      ],
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from The Chobe Safari Lodge",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 19538
+          }
+        ],
+        [
+          {
+            "label": "Transfer from The Chobe Safari Lodge to Pioneers Victoria Falls",
+            "subtype": "Transfer",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Transfer",
+              "start_content_entity_name": "The Chobe Safari Lodge",
+              "end_content_entity_name": "Pioneers Victoria Falls",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ],
+        [
+          {
+            "label": "Check-in to Pioneers Victoria Falls",
+            "subtype": "Accommodation",
+            "type": "CheckIn",
+            "content_entity_id": 194740
+          }
+        ]
+      ],
+      "end_day": 16,
+      "start_day": 16
+    },
+    {
+      "destination_ids": [
+        481
+      ],
+      "end_day": 17,
+      "start_day": 17
+    }
+  ],
+  "0": [
+    {
+      "element_clusters": [
+        [
+          {
+            "label": "Check-out from Pioneers Victoria Falls",
+            "subtype": "Accommodation",
+            "type": "CheckOut",
+            "content_entity_id": 194740
+          }
+        ],
+        [
+          {
+            "label": "Transfer from Pioneers Victoria Falls to Victoria Falls International Airport [VFA]",
+            "subtype": "Transfer",
+            "type": "Route",
+            "variant": "",
+            "timeline_route": {
+              "mode": "Transfer",
+              "start_content_entity_name": "Pioneers Victoria Falls",
+              "end_content_entity_name": "Victoria Falls International Airport [VFA]",
+              "start_time": "",
+              "end_time": "",
+              "agency": "",
+              "start_terminal": "",
+              "end_terminal": "",
+              "reference_codes": "",
+              "type": "InterLeg",
+              "ticket_class": "",
+              "vehicle": ""
+            }
+          }
+        ]
+      ],
+      "end_day": 18,
+      "start_day": 18
+    }
+  ]
+}

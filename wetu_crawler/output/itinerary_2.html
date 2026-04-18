@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>14-Day Namibia Comfort Safari - Upgraded Film Structure</title>
+    <title>14-Day Luxury Namibia Highlights Self-Drive Safari - Upgraded Film Structure</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -13,8 +13,8 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Inter', sans-serif;
-            color: #355A58;
-            background-color: #ffffff;
+            color: #5A6A6A;
+            background-color: #F5F5F3;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -40,7 +40,7 @@
             position: relative;
             width: 100%;
             height: 60vh;
-            background-color: #F5F3F0; /* Luxury Ivory, NO BLACK */
+            background-color: #F5F5F3; /* Luxury Ivory, NO BLACK */
         }
 
         .lux-bg-layer {
@@ -98,10 +98,10 @@
 
         .lux-tag-small {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.25em;
             font-weight: 500;
-            color: #e5e5e5;
+            color: #ffffff !important;
             margin-bottom: 1rem;
         }
 
@@ -118,7 +118,7 @@
         .lux-subtitle {
             font-size: 1.1rem;
             font-weight: 300;
-            color: #cccccc;
+            color: #ffffff !important;
             margin: 0;
             letter-spacing: 0.02em;
         }
@@ -126,15 +126,23 @@
         /* RIGHT SIDE: Scrollable Content */
         .lux-right {
             width: 100%;
-            padding: 4rem 2rem 10vh 2rem;
-            background: linear-gradient(135deg, #E6DED6 0%, #E9E1D9 100%);
+            padding: 2rem 2rem 2rem 2rem;
+            background: #F5F5F3;
             overflow-x: hidden;
+        }
+
+        .lux-welcome-top {
+            padding-top: 60px;
+        }
+        
+        .lux-right p {
+            margin-bottom: 20px;
         }
 
         @media (min-width: 1024px) {
             .lux-right {
                 width: 50vw;
-                padding: 6rem 0rem 10vh 0rem; /* Handled internal paddings for full width film roll */
+                padding: 6rem 0rem 0rem 0rem; /* Handled internal paddings for full width film roll */
             }
             .lux-welcome-top {
                 padding: 0 4rem 0 2.5rem;
@@ -145,17 +153,19 @@
         }
 
         @media (max-width: 1023px) {
-            .lux-right { padding: 4rem 0; }
-            .lux-welcome-top { padding: 0 2rem; }
-            .lux-day-block-header { padding: 0 2rem; }
+            .lux-right { padding: 0; }
+            .lux-welcome-top { padding: 1.5rem 1.5rem 0 1.5rem; }
+            .lux-day-block-header { padding: 0 0.4rem; }
+            .lux-features-container { padding: 0 0.4rem; }
+            .dt-film-footer { padding: 2rem 0.4rem 0 0.4rem !important; }
         }
 
         .lux-welcome-tag {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.25em;
             font-weight: 600;
-            color: #888888;
+            color: #7A8A8A;
             margin-bottom: 1.5rem;
         }
 
@@ -163,7 +173,7 @@
             font-size: clamp(1rem, 1.5vw, 1.125rem);
             line-height: 1.7;
             font-weight: 300;
-            color: #355A58;
+            color: #5A6A6A;
             margin-bottom: 5rem;
             max-width: 45rem;
         }
@@ -198,27 +208,27 @@
 
         .lux-day-location {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.2em;
             font-weight: 600;
-            color: #777777;
+            color: #7A8A8A;
             margin: 0 0 0.75rem 0;
             display: block;
         }
 
         .lux-day-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 4vw, 3.5rem);
-            font-weight: 400;
+            font-size: clamp(4.5rem, 6vw, 6rem);
+            font-weight: 300;
             margin: 0 0 1rem 0;
-            color: #355A58;
+            color: #1F4F4B !important;
             letter-spacing: 0.02em;
         }
 
         .lux-day-desc {
             font-size: clamp(1rem, 1.5vw, 1.125rem);
             line-height: 1.7;
-            color: #355A58;
+            color: #5A6A6A;
             font-weight: 300;
             margin-bottom: 3.5rem;
             max-width: 45rem;
@@ -230,7 +240,7 @@
         .dt-film-section {
             position: relative;
             width: 100%;
-            background: #F5F3F0;
+            background: #F5F5F3;
             padding: 70px 0 0 0;
             overflow: hidden;
             font-family: 'Open Sans', sans-serif;
@@ -242,7 +252,7 @@
                 /* Pull out slightly to create a stunning full-bleed effect on right side panel */
                 margin-left: 2.5rem;
                 width: calc(100% - 2.5rem);
-                border-radius: 20px 0 0 20px;
+                border-radius: 120px 0 0 20px;
             }
         }
 
@@ -255,16 +265,16 @@
         .dt-film-eyebrow {
             display: block;
             font-size: 10px;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 5px;
             color: #d87a4d; /* Desert Tracks Orange */
             margin-bottom: 12px;
         }
         .dt-film-title {
             font-family: 'Playfair Display', serif !important;
-            font-size: clamp(1.8rem, 3vw, 2.5rem) !important;
+            font-size: clamp(1.5rem, 2.2vw, 2rem) !important;
             font-weight: 300 !important;
-            color: #355A58 !important;
+            color: #1F4F4B !important;
             margin: 0 !important;
             line-height: 1.15 !important;
         }
@@ -285,12 +295,16 @@
             vertical-align: middle;
         }
         .dt-film-track-wrap {
-            overflow: hidden;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
             cursor: grab;
             -webkit-user-select: none;
             user-select: none;
             -webkit-tap-highlight-color: transparent;
+            scrollbar-width: none;
         }
+        .dt-film-track-wrap::-webkit-scrollbar { display: none; }
         .dt-film-track-wrap.dt-dragging { cursor: grabbing; }
         .dt-film-track {
             display: flex;
@@ -303,7 +317,8 @@
             position: relative;
             height: 480px;
             overflow: hidden;
-            border-radius: 6px;
+            border-radius: 10px;
+            scroll-snap-align: center;
         }
         /* Make images randomly uneven widths for editorial feel */
         .dt-film-card:nth-child(3n+1) { width: 380px; }
@@ -317,6 +332,7 @@
             display: block;
             pointer-events: none;
             -webkit-user-drag: none;
+            border-radius: 10px !important;
             transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
         }
         .dt-film-card:hover img { transform: scale(1.05); }
@@ -358,12 +374,27 @@
         
         @media (max-width: 768px) {
             .dt-film-section { border-radius: 0; padding-top: 50px; }
-            .dt-film-header { padding: 0 20px 30px 20px; }
-            .dt-film-footer { padding: 20px 20px 40px 20px; flex-wrap: wrap; }
+            .dt-film-header { padding: 0 0.85rem 30px 0.85rem; }
+            .dt-film-footer { padding: 20px 0.85rem 40px 0.85rem; flex-wrap: wrap; }
             .dt-film-progress-wrap { order: 1; min-width: 100%; margin-bottom: 10px; height: 4px; }
             .dt-film-arrows { order: 2; margin-left: auto; margin-right: auto; }
-            .dt-film-track { padding: 0 20px; }
-            .dt-film-card { height: 320px; width: 330px !important; margin-right: 30px; flex-shrink: 0; }
+            .dt-film-track { padding: 0 0.85rem; }
+            .dt-film-card { 
+                height: 250px; width: 85vw !important; max-width: 360px; margin-right: 20px; flex-shrink: 0; 
+                border-radius: 10px !important; overflow: hidden !important;
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+            }
+            .dt-film-card img { border-radius: 10px !important; }
+            
+            .lux-acc-card img, .lux-dest-item img { 
+                border-radius: 10px !important; 
+                -webkit-border-radius: 10px !important;
+                clip-path: inset(0px round 10px) !important;
+                -webkit-clip-path: inset(0px round 10px) !important;
+                transform: translateZ(0) !important;
+                -webkit-transform: translateZ(0) !important;
+            }
         }
     
         /* ==================================================
@@ -384,7 +415,7 @@
         }
         .lux-glance-title {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.25em;
             font-weight: 600;
             color: #888888;
@@ -407,7 +438,7 @@
             height: 90px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #F5F3F0;
+            border: 2px solid #F5F5F3;
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
         }
@@ -417,7 +448,7 @@
         .lux-glance-name {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #355A58;
+            color: #1F4F4B !important;
             font-family: 'Playfair Display', serif;
         }
 
@@ -436,7 +467,7 @@
         .lux-inc-col h4 {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
-            color: #355A58;
+            color: #1F4F4B !important;
             margin: 0 0 1.5rem 0;
             display: flex;
             align-items: center;
@@ -455,7 +486,7 @@
             align-items: flex-start;
             gap: 12px;
             font-size: 0.95rem;
-            color: #355A58;
+            color: #1F4F4B !important;
             line-height: 1.4;
         }
         .lux-inc-list svg {
@@ -471,27 +502,29 @@
         .lux-trust-block {
             margin-top: 6rem;
             padding-top: 4rem;
+            padding-bottom: 0rem !important;
+            margin-bottom: -1.5rem !important;
             border-top: 1px solid #eee;
             text-align: center;
         }
         .lux-trust-eyebrow {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.25em;
             font-weight: 600;
-            color: #888888;
+            color: #7A8A8A;
             margin-bottom: 1rem;
             display: block;
         }
         .lux-trust-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3rem, 4vw, 3.5rem);
-            color: #355A58;
+            color: #1F4F4B !important;
             margin: 0 0 1rem 0;
         }
         .lux-trust-subtitle {
             font-size: 1.05rem;
-            color: #666;
+            color: #5A6A6A;
             max-width: 600px;
             margin: 0 auto 3rem auto;
             line-height: 1.6;
@@ -507,7 +540,7 @@
 
         /* Local Guarantee Block */
         .lux-guarantee {
-            background-color: #355A58;
+            background-color: #1F4F4B !important;
             color: #fff;
             padding: 4rem 3rem;
             border-radius: 12px;
@@ -537,39 +570,85 @@
         }
 
         .lux-dest-split { display: flex; gap: 40px; align-items: flex-start; }
-        .lux-dest-featured-img { flex: 1; border-radius: 4px; overflow: hidden; position: sticky; top: 40px; }
-        .lux-dest-featured-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+        .lux-dest-featured-img { flex: 1; border-radius: 10px !important; overflow: hidden; position: sticky; top: 40px; transform: translateZ(0); -webkit-transform: translateZ(0); }
+        .lux-dest-featured-img img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border-radius: 10px !important; transform: translateZ(0); -webkit-transform: translateZ(0); }
         .lux-dest-list-wrap { flex: 1; display: flex; flex-direction: column; }
         .lux-dest-list-wrap h3 { font-size: 0.75rem; letter-spacing: 0.25em; color: #888; font-weight: 600; margin-bottom: 2rem; }
         .lux-dest-item { display: flex; align-items: center; column-gap: 40px;
             row-gap: 50px; padding: 25px 0; border-top: 1px solid #eaeaea; text-decoration: none; color: inherit; }
         .lux-dest-item:last-child { border-bottom: 1px solid #eaeaea; }
         .lux-dest-item:hover { opacity: 0.7; }
-        .lux-dest-item img { width: 120px; height: 80px; object-fit: cover; border-radius: 4px; }
+        .lux-dest-item img { width: 120px; height: 80px; object-fit: cover; border-radius: 10px !important; clip-path: inset(0px round 10px) !important; -webkit-clip-path: inset(0px round 10px) !important; transform: translateZ(0); -webkit-transform: translateZ(0); }
         .lux-dest-item-content { flex: 1; }
         .lux-dest-item-meta { font-size: 0.7rem; color: #d87a4d; font-weight: 600; letter-spacing: 0.2em; display: block; margin-bottom: 5px; }
-        .lux-dest-item-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 0 0 5px 0; }
+        .lux-dest-item-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin: 0 0 5px 0; font-weight: 400; }
         .lux-dest-item-desc { font-size: 0.9rem; color: #666; margin: 0; }
         .lux-dest-icon { width: 32px; height: 32px; border-radius: 50%; border: 1px solid #ccc; display: flex; align-items: center; justify-content: center; }
         @media (max-width: 900px) { .lux-dest-split { flex-direction: column; } }
 
 
-        
+        .flex-scroll-hint {
+            font-size: 0.65rem;
+            color: #d87a4d;
+            /* text-transform: uppercase; */
+            letter-spacing: 0.15em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            margin-top: -10px;
+            opacity: 0.9;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .flex-scroll-hint svg {
+            width: 14px; height: 14px;
+            fill: none; stroke: currentColor; stroke-width: 2;
+            stroke-linecap: round; stroke-linejoin: round;
+            animation: swipeAnim 1.5s infinite ease-in-out;
+        }
+        @keyframes swipeAnim {
+            0% { transform: translateX(0); opacity: 0.5; }
+            50% { transform: translateX(5px); opacity: 1; }
+            100% { transform: translateX(0); opacity: 0.5; }
+        }
+
         /* OVERRIDES FOR DESTINATIONS & ACCOM LISTS */
         .lux-acc-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            column-gap: 40px;
-            row-gap: 50px;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            column-gap: 30px;
+            padding-bottom: 20px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #d87a4d rgba(0,0,0,0.05);
         }
-        @media (max-width: 900px) {
+        .lux-acc-grid::-webkit-scrollbar {
+            height: 6px;
+        }
+        .lux-acc-grid::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.05);
+            border-radius: 4px;
+        }
+        .lux-acc-grid::-webkit-scrollbar-thumb {
+            background: #d87a4d;
+            border-radius: 4px;
+        }
+        @media (max-width: 768px) {
             .lux-acc-grid {
-                grid-template-columns: 1fr 1fr;
+                flex-direction: column;
+                margin-right: 0;
+                padding-right: 0;
+                gap: 40px;
             }
-        }
-        @media (max-width: 600px) {
-            .lux-acc-grid {
-                grid-template-columns: 1fr;
+            .lux-acc-card {
+                width: 100% !important;
+                min-width: 100% !important;
+            }
+            .flex-scroll-hint {
+                display: none !important;
             }
         }
         .lux-acc-card {
@@ -578,12 +657,23 @@
             display: flex;
             flex-direction: column;
             transition: opacity 0.3s ease;
+            flex: 0 0 calc(50% - 15px);
+            scroll-snap-align: start;
+        }
+        @media (max-width: 768px) {
+            .lux-acc-card {
+                flex: 0 0 85%;
+            }
         }
         .lux-acc-card img {
             width: 100%;
             aspect-ratio: 16/9;
             object-fit: cover;
-            border-radius: 10px;
+            border-radius: 10px !important;
+            clip-path: inset(0px round 10px) !important;
+            -webkit-clip-path: inset(0px round 10px) !important;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
             margin-bottom: 1rem;
         }
         .lux-acc-card:hover {
@@ -593,7 +683,8 @@
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             margin: 0 0 5px 0;
-            color: #355A58;
+            color: #1F4F4B !important;
+            font-weight: 400;
         }
 
         .lux-dest-featured-img {
@@ -622,10 +713,10 @@
 
     
         .lux-acc-desc {
-            font-size: 0.95rem;
-            color: #666;
+            font-size: 1.05rem;
+            color: #5A6A6A;
             margin-top: 8px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
     
     
@@ -652,7 +743,7 @@
         }
         .lux-glance-title {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.25em;
             font-weight: 600;
             color: #888888;
@@ -675,7 +766,7 @@
             height: 90px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #F5F3F0;
+            border: 2px solid #F5F5F3;
             box-shadow: 0 10px 20px rgba(0,0,0,0.08);
             transition: transform 0.3s ease;
         }
@@ -685,7 +776,7 @@
         .lux-glance-name {
             font-size: 0.85rem;
             font-weight: 600;
-            color: #355A58;
+            color: #1F4F4B !important;
             font-family: 'Playfair Display', serif;
         }
 
@@ -703,7 +794,7 @@
         .lux-inc-col h4 {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
-            color: #355A58;
+            color: #1F4F4B !important;
             margin: 0 0 1.5rem 0;
             display: flex;
             align-items: center;
@@ -722,7 +813,7 @@
             align-items: flex-start;
             gap: 12px;
             font-size: 0.95rem;
-            color: #355A58;
+            color: #1F4F4B !important;
             line-height: 1.4;
         }
         .lux-inc-list svg {
@@ -738,27 +829,29 @@
         .lux-trust-block {
             margin-top: 6rem;
             padding-top: 4rem;
+            padding-bottom: 0rem !important;
+            margin-bottom: -1.5rem !important;
             border-top: 1px solid #eee;
             text-align: center;
         }
         .lux-trust-eyebrow {
             font-size: 0.75rem;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 0.25em;
             font-weight: 600;
-            color: #888888;
+            color: #7A8A8A;
             margin-bottom: 1rem;
             display: block;
         }
         .lux-trust-title {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3rem, 4vw, 3.5rem);
-            color: #355A58;
+            color: #1F4F4B !important;
             margin: 0 0 1rem 0;
         }
         .lux-trust-subtitle {
             font-size: 1.05rem;
-            color: #666;
+            color: #5A6A6A;
             max-width: 600px;
             margin: 0 auto 3rem auto;
             line-height: 1.6;
@@ -774,7 +867,7 @@
 
         /* Local Guarantee Block */
         .lux-guarantee {
-            background-color: #355A58;
+            background-color: #1F4F4B !important;
             color: #fff;
             padding: 4rem 3rem;
             border-radius: 12px;
@@ -800,7 +893,71 @@
             line-height: 1.6;
             color: #ccc;
             max-width: 600px;
+        }
+        
+        /* Highlights Section */
+        .lux-highlights-section {
+            margin-top: 5rem;
+            margin-bottom: 5rem;
+        }
+        .lux-highlights-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 3.5vw, 3rem);
+            color: #1F4F4B !important;
+            text-align: center;
+            font-weight: normal;
+            margin-bottom: 3.5rem;
+        }
+        .lux-highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            column-gap: 3rem;
+            row-gap: 3rem;
+        }
+        @media (max-width: 1024px) {
+            .lux-highlights-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 650px) {
+            .lux-highlights-grid { grid-template-columns: 1fr; }
+        }
+        .lux-highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(47, 79, 79, 0.15);
+        }
+        .lux-highlight-icon {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .lux-highlight-icon svg {
+            width: 100%;
+            height: 100%;
+            stroke: #1F4F4B;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            fill: none;
+        }
+        .lux-highlight-name {
+            font-family: 'Open Sans', 'Helvetica', sans-serif;
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1F4F4B !important;
+            margin: 0 0 0.5rem 0;
+        }
+        .lux-highlight-desc {
+            font-family: 'Open Sans', 'Helvetica', sans-serif;
+            font-size: 0.95rem;
+            color: rgba(47, 79, 79, 0.85);
+            line-height: 1.5;
             margin: 0;
+            font-weight: 400;
         }
 </style>
 </head>
@@ -816,8 +973,11 @@
         
         <div class="lux-hero-content">
             <div class="lux-tag-small">DESERT TRACKS EXCLUSIVE</div>
-            <h1 class="lux-title">14-Day Namibia<br>Comfort Safari</h1>
+            <h1 class="lux-title">10-Day Ultra-Luxury Namibia Safari - North Focus</h1>
             <p class="lux-subtitle">A bespoke self-drive journey through iconic landscapes</p>
+            <div style="margin-top: 2.5rem;">
+                <a href="https://desert-tracks.com/safari-booking/" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 12px; font-weight: 500; /* text-transform: uppercase; */ letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid rgba(255,255,255,0.6); padding: 14px 32px; border-radius: 4px; transition: all 0.3s ease; background: rgba(0,0,0,0.15);" onmouseover="this.style.background='rgba(255,255,255,0.15)'; this.style.borderColor='#fff';" onmouseout="this.style.background='rgba(0,0,0,0.15)'; this.style.borderColor='rgba(255,255,255,0.6)';">Start Your Journey</a>
+            </div>
         </div>
     </div>
 
@@ -825,63 +985,61 @@
     <div class="lux-right">
         
         <div class="lux-welcome-top">
-            <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; line-height: 1.2;">Overview</h2>
-            <p class="lux-intro">Prepare for an unforgettable adventure. This exclusive Namibian journey takes you from the rolling red dunes of the Kalahari to the wildlife-rich plains of Etosha, stopping by the dramatic coastlines of Swakopmund. Crafted for the independent traveler, this route guarantees the perfect blend of freedom, comfort, and luxury.</p>
+            <h2 style="color: #1F4F4B !important; font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem;">Overview</h2>
+            <p class="lux-intro">Prepare for an unforgettable adventure. This route is part of our <a href="https://desert-tracks.com/namibia-luxury-safaris/" style="color: inherit; border-bottom: 1px solid #d87a4d; text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7';" onmouseout="this.style.opacity='1';">exclusive Namibia luxury safaris packages</a>, taking you from the rolling red dunes of the Kalahari to the wildlife-rich plains of Etosha, stopping by the dramatic coastlines of Swakopmund. Crafted for the independent traveler, this guarantees the perfect blend of freedom, comfort, and luxury.</p>
         </div>
 
-        <div class="lux-features-container">
+
+        <div class="lux-features-container" style="margin-top: 80px;">
             <!-- Destinations 3x Grid Block -->
             <div class="lux-acc-grid-container" style="margin-bottom: 4rem;">
-                <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; line-height: 1.2;">Destinations</h2>
+                <h2 style="color: #1F4F4B !important; font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem;">Destinations</h2>
+                <div class="flex-scroll-hint">
+                    <span>Swipe to explore</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+                </div>
                 <div class="lux-acc-grid">
                     <a href="#day-01" class="lux-acc-card">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg" alt="Windhoek">
-                        <h4 class="lux-acc-title">Windhoek</h4>
-                        <p class="lux-acc-desc">A vibrant blend of German colonial architecture and modern African charm.</p>
+                        <img src="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/_DSF7775.jpg?fmt=jpg" alt="Namibia Location">
+                        <h4 class="lux-acc-title">Namibia Location</h4>
+                        <p class="lux-acc-desc">Nights: 2 Basis: FB+ ...</p>
                     </a>
-                    <a href="#day-02" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg" alt="Sossusvlei">
-                        <h4 class="lux-acc-title">Sossusvlei</h4>
-                        <p class="lux-acc-desc">Towering red dunes and the hauntingly beautiful Deadvlei salt pan.</p>
-                    </a>
-                    <a href="#day-04" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg" alt="Swakopmund">
-                        <h4 class="lux-acc-title">Swakopmund</h4>
-                        <p class="lux-acc-desc">Coastal charm, fresh Atlantic breezes, and thrilling desert adventures.</p>
-                    </a>
-                    <a href="#day-06" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="Damaraland">
-                        <h4 class="lux-acc-title">Damaraland</h4>
-                        <p class="lux-acc-desc">Rugged ancient landscapes and elusive desert-adapted elephants.</p>
-                    </a>
-                    <a href="#day-08" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/10560/etosha_game_drive1.jpg?fmt=jpg" alt="Etosha NP">
-                        <h4 class="lux-acc-title">Etosha National Park</h4>
-                        <p class="lux-acc-desc">World-class safari experiences surrounding a massive, shimmering salt pan.</p>
-                    </a>
-                </div>
+</div>
             </div>
                 <!-- Inclusions Block -->
             
+        <section class="dt-cin-hero" id="dtCinHeroTop" style="margin-bottom: 4rem;">
+            <div class="dt-cin-bg" id="dtCinBgTop"></div>
+            <div class="dt-cin-gradient"></div>
+            <div class="dt-cin-vignette"></div>
+            <div class="dt-cin-content">
+                <span class="dt-cin-eyebrow" id="dtCinEyebrowTop">Discover</span>
+                <h2 class="dt-cin-title" id="dtCinTitleTop">Where Will Your<br>Journey Take You?</h2>
+                <p class="dt-cin-desc" id="dtCinDescTop">Explore destinations, experiences, and routes to begin shaping your perfect safari.</p>
+                <a class="dt-cin-cta" id="dtCinCtaTop" href="https://desert-tracks.com/safari-booking/">Start Your Journey</a>
+            </div>
+        </section>
         
-        <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; margin-top: 4rem; margin-bottom: 2rem;">Day-by-Day Itinerary</h2>
+        <h2 style="color: #1F4F4B !important; font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-top: 4rem; margin-bottom: 2rem;">Day-by-Day Itinerary</h2>
+        
+        
         <!-- DAY 01 -->
-        <div class="lux-day-block" id="day-01" data-bg="https://desert-tracks.com/wp-content/uploads/2024/04/Solly-Levi-Sossusvlei-1.jpg">
+        <div class="lux-day-block" id="day-01" data-bg="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/_DSF7775.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">01</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">WINDHOEK — TI MELEN BOUTIQUE GUESTHOUSE</span>
-                <h2 class="lux-day-title">Arrival in Windhoek</h3>
-                <p class="lux-day-desc">Experience the charm of Windhoek in a boutique guesthouse blending modern comforts with local warmth. Spend your first night in Namibia surrounded by the intimate atmosphere of Ti Melen, ideal for a peaceful start to your adventure.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 1</h2>
+                <p class="lux-day-desc">Nights: 2 Basis: FB+ </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">TI MELEN BOUTIQUE GUESTHOUSE</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -889,22 +1047,22 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/55342/143a4578.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/_DSF7775.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/55342/img_4373.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/i-f5Cbjh6-X5.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/55342/img_4408.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/i-nC73T4m-X5.jpeg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/55342/143a4578.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/7498D23C-D054-41B8-890E-342A05379858.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/55342/img_4373.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/gmundner_lodge_pool_area__outside-54.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/55342/img_4408.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/222908/onduli_textures_rgb_v1_web-22.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -920,22 +1078,22 @@
         </div>
 
         <!-- DAY 02 -->
-        <div class="lux-day-block" id="day-02" data-bg="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg">
+        <div class="lux-day-block" id="day-02" data-bg="https://wetu.com/imageHandler/c1920x1080/8723/1733492985650_LOL_Ongava_Venture-Media_LvS-3725.JPG?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">02</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">KALAHARI DESERT — KALAHARI ANIB LODGE</span>
-                <h2 class="lux-day-title">Journey to the Kalahari</h3>
-                <p class="lux-day-desc">Discover the beauty of the Kalahari at this eco-friendly lodge. The towering red dunes and starry nights set the perfect backdrop for a romantic evening. Enjoy luxurious cuisine and desert exploration before retreating to your cozy room.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 3</h2>
+                <p class="lux-day-desc">Nights: 2 Basis: FB </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">KALAHARI ANIB LODGE</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -943,22 +1101,22 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/8723/1733492985650_LOL_Ongava_Venture-Media_LvS-3725.JPG?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/31966/gondwana_collection_-_kalahari_anib_lodge_00018.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/46253/4870.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8819.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/137613/omaanda_-_hut_3_-__zannier_hotels_1.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/ItineraryOutputs/Discovery/static/media/crosshair.3930c9c9d28afa6011453e87cb7b2b79.svg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/31966/gondwana_collection_-_kalahari_anib_lodge_00018.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-istock-856242606.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8819.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-shutterstock-1908413638.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -974,22 +1132,22 @@
         </div>
 
         <!-- DAY 03 -->
-        <div class="lux-day-block" id="day-03" data-bg="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg">
+        <div class="lux-day-block" id="day-03" data-bg="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-shutterstock-1504051055.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">03</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">SOSSUSVLEI — DESERT HOMESTEAD LODGE</span>
-                <h2 class="lux-day-title">Dunes of Sossusvlei</h3>
-                <p class="lux-day-desc">Immerse yourself in the surreal beauty of the Namib Desert. Stay at Desert Homestead, nestled between the red dunes, where you can explore the world's tallest dunes and return to luxury at the lodge for intimate sunset views.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 5</h2>
+                <p class="lux-day-desc">Nights: 2 Basis: HB+ </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">DESERT HOMESTEAD LODGE</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -997,22 +1155,76 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-shutterstock-1504051055.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10515/img_68201.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-istock-826413362.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-shutterstock-1239749656.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37298/central_namibia-shutterstock-1877045860.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10515/img_68201.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a9890.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/gmundner_accommodation_suite_namibia_602.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dt-film-footer">
+                    <div class="dt-film-progress-wrap"><div class="dt-film-progress-bar" style="width: 0%;"></div></div>
+                    <div class="dt-film-arrows">
+                        <div class="dt-film-arrow dt-film-prev-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+                        <div class="dt-film-arrow dt-film-next-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 04 -->
+        <div class="lux-day-block" id="day-04" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/645a9961.jpg?fmt=jpg">
+            <div class="lux-day-block-header">
+                <div class="lux-day-number-row">
+                    <span class="lux-day-numeral">04</span>
+                    <div class="lux-day-line"></div>
+                </div>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 7</h2>
+                <p class="lux-day-desc">Nights: 2 Basis: FB+ </p>
+            </div>
+            
+            <div class="dt-film-section">
+                <div class="dt-film-header">
+                    <div>
+                        <span class="dt-film-eyebrow">Accommodation Profile</span>
+                        <h2 class="dt-film-title">Lodge</h2>
+                    </div>
+                    <div class="dt-film-counter">01 <span>/ 06</span></div>
+                </div>
+                
+                <div class="dt-film-track-wrap">
+                    <div class="dt-film-track">
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a9961.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/gmundner_accommodation_suite_namibia_701.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a0145.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/bushlunch.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/lodge1.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a5711.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -1028,22 +1240,22 @@
         </div>
 
         <!-- DAY 05 -->
-        <div class="lux-day-block" id="day-05" data-bg="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg">
+        <div class="lux-day-block" id="day-05" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/645a8859.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">05</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">SWAKOPMUND — SWAKOPMUND GUESTHOUSE</span>
-                <h2 class="lux-day-title">Coastal Charm</h3>
-                <p class="lux-day-desc">Blend adventure with relaxation at this charming guesthouse in Swakopmund, offering easy access to the beach and colonial-style comforts. Explore the unique coastal town with its German heritage, or unwind with a stroll along the ocean.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 9</h2>
+                <p class="lux-day-desc">Night: 1 Basis: FB+ </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">SWAKOPMUND GUESTHOUSE</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1051,22 +1263,76 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/149035/exterior_24.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a8859.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/149035/marcbass_swakopgh_renew_-_courtyard1.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/dscf0803.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/dscf0811.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/149035/exterior_24.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a6820.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/149035/marcbass_swakopgh_renew_-_courtyard1.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a6413.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a8654.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dt-film-footer">
+                    <div class="dt-film-progress-wrap"><div class="dt-film-progress-bar" style="width: 0%;"></div></div>
+                    <div class="dt-film-arrows">
+                        <div class="dt-film-arrow dt-film-prev-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+                        <div class="dt-film-arrow dt-film-next-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 06 -->
+        <div class="lux-day-block" id="day-06" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/645a6339.jpg?fmt=jpg">
+            <div class="lux-day-block-header">
+                <div class="lux-day-number-row">
+                    <span class="lux-day-numeral">06</span>
+                    <div class="lux-day-line"></div>
+                </div>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 1 - 2</h2>
+                <p class="lux-day-desc">GMUNDNER LODGE • CENTRAL NAMIBIA Day Notes Your journey begins on arrival at Hosea Kutako International Airport, where you’ll be met for a private transfer to Gmundner Lodge. Nestled in peaceful wilderness, the lodge offers a luxurious introduction to Namibia with spacious suites, a serene spa, and refined dining. Spend your days unwinding by the pool, joining guided nature walks, or enjoying sundowners with uninterrupted views. The focus here is relaxation and recalibration after your long flight, setting the tone for a slow-paced safari. Included Selected Activites Excluded Spa Treatments. Horse riding and helicopter rides are for own account </p>
+            </div>
+            
+            <div class="dt-film-section">
+                <div class="dt-film-header">
+                    <div>
+                        <span class="dt-film-eyebrow">Accommodation Profile</span>
+                        <h2 class="dt-film-title">Lodge</h2>
+                    </div>
+                    <div class="dt-film-counter">01 <span>/ 06</span></div>
+                </div>
+                
+                <div class="dt-film-track-wrap">
+                    <div class="dt-film-track">
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a6339.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742996484459_&%2523169;Gmundner_Lodge_GeorgeWaid_101.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a8673.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a9798.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a9882.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a86011.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -1082,22 +1348,22 @@
         </div>
 
         <!-- DAY 07 -->
-        <div class="lux-day-block" id="day-07" data-bg="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg">
+        <div class="lux-day-block" id="day-07" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/1742996544878_&%2523169;Gmundner_Lodge_GeorgeWaid_091.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">07</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">DAMARALAND — LODGE DAMARALAND</span>
-                <h2 class="lux-day-title">Ancient Landscapes</h3>
-                <p class="lux-day-desc">In the heart of Damaraland, experience timeless landscapes and ancient rock art. Stay in a comfortable lodge designed to blend with its surroundings, offering exciting excursions to explore the desert's hidden gems.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 3 - 4</h2>
+                <p class="lux-day-desc">ONDULI RIDGE • TWYFELFONTEIN Day Notes Continue into the dramatic landscapes of Damaraland. Onduli Ridge sits on a private concession with panoramic views of granite outcrops, valleys, and distant mountains. Here, you can track desert-adapted elephants and rhinos with expert guides, explore the UNESCO-listed rock engravings at Twyfelfontein, and enjoy sundowners with one of Namibia’s most iconic backdrops. At night, retractable roofs and outdoor decks allow you to sleep beneath a canopy of stars for a truly unforgettable experience. Included Extend your stay to 3 nights and to take part in the Rhino Trancking Experience </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">LODGE DAMARALAND</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1105,22 +1371,76 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e18011.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742996544878_&%2523169;Gmundner_Lodge_GeorgeWaid_091.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742996566378_&%2523169;Gmundner_Lodge_GeorgeWaid_093.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e18421.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a62661.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e18011.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a6271.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a8596.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e18421.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742996630727_&%2523169;Gmundner_Lodge_GeorgeWaid_252.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dt-film-footer">
+                    <div class="dt-film-progress-wrap"><div class="dt-film-progress-bar" style="width: 0%;"></div></div>
+                    <div class="dt-film-arrows">
+                        <div class="dt-film-arrow dt-film-prev-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+                        <div class="dt-film-arrow dt-film-next-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DAY 08 -->
+        <div class="lux-day-block" id="day-08" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/645a8974.jpg?fmt=jpg">
+            <div class="lux-day-block-header">
+                <div class="lux-day-number-row">
+                    <span class="lux-day-numeral">08</span>
+                    <div class="lux-day-line"></div>
+                </div>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 5 - 6</h2>
+                <p class="lux-day-desc">LITTLE ONGAVA • ONGAVA PRIVATE GAME RESERVE Day Notes Travel north to Etosha’s southern boundary, where Little Ongava offers the most prestigious safari in Namibia. With just three luxurious villas, this lodge promises absolute exclusivity. Each villa comes with a private guide and vehicle for flexible game drives in Etosha, ensuring intimate encounters with elephants, lions, rhinos, and more. Between activities, relax on your deck overlooking the lodge’s busy waterhole while enjoying fine wines and exceptional cuisine. </p>
+            </div>
+            
+            <div class="dt-film-section">
+                <div class="dt-film-header">
+                    <div>
+                        <span class="dt-film-eyebrow">Accommodation Profile</span>
+                        <h2 class="dt-film-title">Lodge</h2>
+                    </div>
+                    <div class="dt-film-counter">01 <span>/ 06</span></div>
+                </div>
+                
+                <div class="dt-film-track-wrap">
+                    <div class="dt-film-track">
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a8974.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/_d7a8274-2.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/_d7a8002.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/_d7a8011.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/_d7a8055.jpg?fmt=jpg" alt="Lodge">
+                        </div>
+                        <div class="dt-film-card">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/l1040656.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -1136,22 +1456,24 @@
         </div>
 
         <!-- DAY 09 -->
-        <div class="lux-day-block" id="day-09" data-bg="https://wetu.com/imageHandler/c1920x1080/10560/etosha_game_drive1.jpg?fmt=jpg">
+        <div class="lux-day-block" id="day-09" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/645a5711_1.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">09</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">ETOSHA SOUTH — ETOSHA SAFARI CAMP</span>
-                <h2 class="lux-day-title">Gateway to Wildlife</h3>
-                <p class="lux-day-desc">Set near the southern entrance to Etosha National Park, Etosha Safari Camp gives you access to one of Africa's most celebrated wildlife sanctuaries. Enjoy an evening of delicious meals and sunset views.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 7 - 8</h2>
+                <p class="lux-day-desc">EPAKO SAFARI LODGE • ERONGO MOUNTAINS Day Notes Drive south into the Erongo region for two nights at Epako Safari Lodge. Nestled in a private reserve, Epako is renowned for its cheetah conservation program and diverse wildlife. Join daily game drives, spot giraffes and antelope against the striking Erongo backdrop, and experience close-up encounters with rehabilitated cheetahs. Afternoons are ideal for quiet relaxation, while clear night skies offer spectacular stargazing opportunities.
+
+  Included Lodge led activites Excluded Spa & Curios are for own account </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">ETOSHA SAFARI CAMP</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1159,22 +1481,22 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10560/dsc_7278.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a5711_1.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10560/etosha_game_drive1.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/dscf0808_1.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/123643/etosha_5.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/dscf0790.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10560/dsc_7278.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742997253867_&%2523169;Gmundner_Lodge_GeorgeWaid_093.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/10560/etosha_game_drive1.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742997174912_&%2523169;Gmundner_Lodge_GeorgeWaid_139.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/123643/etosha_5.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742997182215_&%2523169;Gmundner_Lodge_GeorgeWaid_146.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -1190,22 +1512,22 @@
         </div>
 
         <!-- DAY 10 -->
-        <div class="lux-day-block" id="day-10" data-bg="https://wetu.com/imageHandler/c1920x1080/123643/etosha_5.jpg?fmt=jpg">
+        <div class="lux-day-block" id="day-10" data-bg="https://wetu.com/imageHandler/c1920x1080/298045/1742997188383_&%2523169;Gmundner_Lodge_GeorgeWaid_144.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">10</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">ETOSHA RESERVE — ONGUMA BUSH CAMP</span>
-                <h2 class="lux-day-title">The Great Salt Pan</h3>
-                <p class="lux-day-desc">Enjoy luxurious tented suites at Onguma, a private reserve bordering Etosha National Park. The tranquil setting allows for both thrilling game drives and romantic evenings by the campfire.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 9</h2>
+                <p class="lux-day-desc">ZANNIER OMAANDA • ZANNIER RESERVE Day Notes Return towards Windhoek and spend your final night at Omaanda, a Zannier property that fuses Namibian heritage with world-class luxury. Choose from conservation-driven activities such as rhino or elephant tracking, unwind with a spa treatment, or simply savor the views from your private villa. End your safari with a starlit farewell dinner, a fitting close to your slow-paced luxury journey. </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">ONGUMA BUSH CAMP</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1213,22 +1535,22 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/1742997188383_&%2523169;Gmundner_Lodge_GeorgeWaid_144.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1117.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/298045/645a0985.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/8717/d31g9127.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37924/istock-856472458.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37924/istock-1754428093.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1117.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37924/istock-1762851540.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/8717/d31g9127.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37924/shutterstock_330764948.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -1243,23 +1565,23 @@
             </div>
         </div>
 
-        <!-- DAY 12 -->
-        <div class="lux-day-block" id="day-12" data-bg="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg">
+        <!-- DAY 11 -->
+        <div class="lux-day-block" id="day-11" data-bg="https://wetu.com/imageHandler/c1920x1080/37924/istock-186569201.jpg?fmt=jpg">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
-                    <span class="lux-day-numeral">12</span>
+                    <span class="lux-day-numeral">11</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">OTJIWA NATURE RESERVE — EAGLE'S REST</span>
-                <h2 class="lux-day-title">Journey's End in Luxury</h3>
-                <p class="lux-day-desc">End your Namibian adventure in luxury at Eagle's Rest. Nestled in the peaceful Otjiwa Nature Reserve, the lodge offers exceptional service and the chance to unwind with private bush walks or simply relax.</p>
+                <span class="lux-day-location">Namibia Location — Lodge</span>
+                <h2 class="lux-day-title">Day 10</h2>
+                <p class="lux-day-desc">Day Notes Private transfer to Hosea Kutako International Airport for your onward international flight. </p>
             </div>
             
             <div class="dt-film-section">
                 <div class="dt-film-header">
                     <div>
                         <span class="dt-film-eyebrow">Accommodation Profile</span>
-                        <h2 class="dt-film-title">EAGLE'S REST</h3>
+                        <h2 class="dt-film-title">Lodge</h2>
                     </div>
                     <div class="dt-film-counter">01 <span>/ 06</span></div>
                 </div>
@@ -1267,22 +1589,22 @@
                 <div class="dt-film-track-wrap">
                     <div class="dt-film-track">
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg" alt="Room 1">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37924/istock-186569201.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a0834.jpg?fmt=jpg" alt="Room 2">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/37924/shutterstock_2237930163.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a9305.jpg?fmt=jpg" alt="Room 3">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/222908/onduli_main_05_rgb_v1_web.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg" alt="Room 4">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/222908/onduli_room_21_rgb_v1_web.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a0834.jpg?fmt=jpg" alt="Room 5">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/222908/onduli_room_08_rgb_v1_web.jpg?fmt=jpg" alt="Lodge">
                         </div>
                         <div class="dt-film-card">
-                            <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a9305.jpg?fmt=jpg" alt="Room 6">
+                            <img src="https://wetu.com/imageHandler/c1920x1080/222908/onduli_bathroom_10_rgb_v1_web.jpg?fmt=jpg" alt="Lodge">
                         </div>
                     </div>
                 </div>
@@ -1296,79 +1618,23 @@
                 </div>
             </div>
         </div>
-
-        <!-- DAY 14 -->
-        <div class="lux-day-block" id="day-14" data-bg="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg">
-            <div class="lux-day-block-header">
-                <div class="lux-day-number-row">
-                    <span class="lux-day-numeral">14</span>
-                    <div class="lux-day-line"></div>
+        <!-- Accommodations Grid Block -->
+            <div class="lux-acc-grid-container" style="margin-top: 14rem; margin-bottom: 14rem;">
+                <h2 style="color: #1F4F4B !important; font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem;">Lodge Selection</h2>
+                <div class="flex-scroll-hint">
+                    <span>Swipe to explore</span>
+                    <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
                 </div>
-                <span class="lux-day-location">WINDHOEK — HOSEA KUTAKO AIRPORT</span>
-                <h2 class="lux-day-title">Departure Bound</h3>
-                <p class="lux-day-desc">After a breathtaking final morning in the Otjiwa reserve, make your way back down to the capital for your departure. Journey safely and take home an eternity of memories.</p>
-            </div>
-        
-        
-<div class="lux-features-container">
-            <div class="lux-acc-grid-container" style="margin-bottom: 4rem;">
-                <h2 style="font-size: 2.5rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; line-height: 1.2;">Accommodation Overview</h2>
                 <div class="lux-acc-grid">
-                    
                     <a href="#day-01" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/55342/143a4578.jpg?fmt=jpg" alt="Ti Melen Boutique Guesthouse">
-                        <h4 class="lux-acc-title">Ti Melen Boutique Guesthouse</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">WINDHOEK</span><br/>A tranquil, modern retreat blending local warmth.</p>
+                        <img src="https://wetu.com/imageHandler/c1920x1080/Itineraries/487E81B5-4FAF-4BDC-88F7-D28A3B229CDF/_DSF7775.jpg?fmt=jpg" alt="Lodge">
+                        <h4 class="lux-acc-title">Lodge</h4>
+                        <p class="lux-acc-desc">Namibia Location</p>
                     </a>
-
-                    <a href="#day-02" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg" alt="Kalahari Anib Lodge">
-                        <h4 class="lux-acc-title">Kalahari Anib Lodge</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">KALAHARI DESERT</span><br/>Eco-friendly lodge amidst the red dunes of the Kalahari.</p>
-                    </a>
-
-                    <a href="#day-03" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg" alt="Desert Homestead Lodge">
-                        <h4 class="lux-acc-title">Desert Homestead Lodge</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">SOSSUSVLEI</span><br/>Intimate luxury set against sweeping desert vistas.</p>
-                    </a>
-
-                    <a href="#day-05" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/471/Swakop_3.jpg?fmt=jpg" alt="Swakopmund Guesthouse">
-                        <h4 class="lux-acc-title">Swakopmund Guesthouse</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">SWAKOPMUND</span><br/>Charming colonial-style comfort by the ocean.</p>
-                    </a>
-
-                    <a href="#day-07" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="Lodge Damaraland">
-                        <h4 class="lux-acc-title">Lodge Damaraland</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">DAMARALAND</span><br/>Secluded luxury immersed in ancient rugged landscapes.</p>
-                    </a>
-
-                    <a href="#day-08" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/10560/dsc_7278.jpg?fmt=jpg" alt="Etosha Safari Camp">
-                        <h4 class="lux-acc-title">Etosha Safari Camp</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">ETOSHA SOUTH</span><br/>Set near the southern entrance to Etosha National Park.</p>
-                    </a>
-
-                    <a href="#day-10" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg" alt="Onguma Bush Camp">
-                        <h4 class="lux-acc-title">Onguma Bush Camp</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">ETOSHA RESERVE</span><br/>Luxurious tented suites at Onguma private reserve.</p>
-                    </a>
-
-                    <a href="#day-12" class="lux-acc-card">
-                        <img src="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg" alt="Eagle's Rest">
-                        <h4 class="lux-acc-title">Eagle's Rest</h4>
-                        <p class="lux-acc-desc"><span style="text-transform:uppercase; font-size:0.75rem; letter-spacing:0.1em; font-weight:600; color:#d87a4d;">OTJIWA NATURE RESERVE</span><br/>Exceptional service and private bush walks.</p>
-                    </a>
-
-                </div></div>
+</div>
             </div>
-        </div>
-
-        <div class="lux-padding-wrapper">
-            <h2 style="font-size: 2rem; font-family: 'Playfair Display', serif; font-weight:normal; margin-bottom: 2rem; margin-top:4rem;">Includes / Excludes</h2>
+        <div class="lux-padding-wrapper" style="max-width: 900px; margin: 0 auto; padding-bottom: 2rem;">
+            <h2 style="color: #1F4F4B !important; font-family: 'Playfair Display', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-top: 4rem; margin-bottom: 3rem; text-align: center;">Includes / Excludes</h2>
             <div class="lux-inclusions-grid">
                 <div class="lux-inc-col">
                     <h4>Fully Inclusive</h4>
@@ -1417,7 +1683,7 @@
             inset: -15%;
             width: 130%;
             height: 130%;
-            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/xhki1815.jpeg');
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/namibia_sossusvlei_nightsky.jpeg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -1451,7 +1717,7 @@
             font-family: 'Open Sans', sans-serif !important;
             font-size: 11px !important;
             font-weight: 400 !important;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 7px;
             color: #ffffff !important;
             margin-bottom: 24px;
@@ -1462,7 +1728,7 @@
         }
         .dt-cin-title {
             font-family: 'Playfair Display', serif !important;
-            font-size: clamp(2.2rem, 4vw, 3.8rem) !important;
+            font-size: clamp(36px, 6vw, 45px) !important;
             font-weight: 300 !important;
             line-height: 1.08 !important;
             margin: 0 0 32px 0 !important;
@@ -1491,7 +1757,7 @@
             font-family: 'Open Sans', sans-serif !important;
             font-size: 11px !important;
             font-weight: 400 !important;
-            text-transform: uppercase;
+            /* text-transform: uppercase; */
             letter-spacing: 4px;
             color: #ffffff !important;
             text-decoration: none !important;
@@ -1518,13 +1784,13 @@
         </style>
 
         <section class="dt-cin-hero" id="dtCinHero">
-            <div class="dt-cin-bg" id="dtCinBg"></div>
+            <div class="dt-cin-bg" id="dtCinBg" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4-2.jpg'); inset: 0; width: 100%; height: 100%; transform: scale(1.05);"></div>
             <div class="dt-cin-gradient"></div>
             <div class="dt-cin-vignette"></div>
             <div class="dt-cin-content">
                 <span class="dt-cin-eyebrow" id="dtCinEyebrow">Start Your Journey</span>
-                <h2 class="dt-cin-title" id="dtCinTitle">Book your self-drive<br>safari now</h2>
-                <p class="dt-cin-desc" id="dtCinDesc">Self-drive safaris in Namibia allow travellers to experience Etosha National Park, Sossusvlei, and the Skeleton Coast independently. Enjoy flexible itineraries, scenic drives, and handpicked accommodations tailored to your travel style.</p>
+                <h2 class="dt-cin-title" id="dtCinTitle">Enquire About This Safari</h2>
+                <p class="dt-cin-desc" id="dtCinDesc">Our team will tailor this journey to your travel dates, preferences, and pace — ensuring a seamless and unforgettable Namibian experience.</p>
                 <a class="dt-cin-cta" id="dtCinCta" href="https://desert-tracks.com/safari-booking/">Start Your Journey</a>
             </div>
         </section>
@@ -1533,40 +1799,47 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" data-no-optimize="1"></script>
         <script data-no-optimize="1">
         (function(){
-            function initCinematicHero(){
-                var hero=document.getElementById('dtCinHero'),
-                    bg=document.getElementById('dtCinBg'),
-                    eyebrow=document.getElementById('dtCinEyebrow'),
-                    title=document.getElementById('dtCinTitle'),
-                    desc=document.getElementById('dtCinDesc'),
-                    cta=document.getElementById('dtCinCta');
-                if(!hero||!bg||typeof gsap==='undefined'||hero.dataset.ready)return;
-                hero.dataset.ready='1';
-                gsap.registerPlugin(ScrollTrigger);
-                var mob=window.innerWidth<=768;
+            function initCinematicHeroes(){
+                var heroes = document.querySelectorAll('.dt-cin-hero');
+                if(!heroes.length || typeof gsap==='undefined') return;
+                
+                heroes.forEach(function(hero) {
+                    if (hero.dataset.ready) return;
+                    
+                    var bg = hero.querySelector('.dt-cin-bg'),
+                        eyebrow = hero.querySelector('.dt-cin-eyebrow'),
+                        title = hero.querySelector('.dt-cin-title'),
+                        desc = hero.querySelector('.dt-cin-desc'),
+                        cta = hero.querySelector('.dt-cin-cta');
+                        
+                    if(!bg || !eyebrow || !title || !desc || !cta) return;
+                    hero.dataset.ready='1';
+                    gsap.registerPlugin(ScrollTrigger);
+                    var mob=window.innerWidth<=768;
 
-                gsap.to(bg,{
-                    scale:mob?1.18:1.28,
-                    y:mob?'10%':'18%',
-                    ease:'none',
-                    scrollTrigger:{trigger:hero,start:'top 85%',end:'bottom top',scrub:1.5}
-                });
+                    gsap.to(bg,{
+                        scale:mob?1.18:1.28,
+                        y:mob?'10%':'18%',
+                        ease:'none',
+                        scrollTrigger:{trigger:hero,start:'top 85%',end:'bottom top',scrub:1.5}
+                    });
 
-                gsap.set([eyebrow,title,desc,cta],{opacity:0,y:35,filter:'blur(5px)'});
-                var tl=gsap.timeline({
-                    scrollTrigger:{trigger:hero,start:'top 50%',end:'bottom 10%',scrub:1.5}
+                    gsap.set([eyebrow,title,desc,cta],{opacity:0,y:35,filter:'blur(5px)'});
+                    var tl=gsap.timeline({
+                        scrollTrigger:{trigger:hero,start:'top 50%',end:'bottom 10%',scrub:1.5}
+                    });
+                    tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
+                      .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
+                      .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
+                      .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=2.8')
+                      .to([eyebrow,title,desc,cta],{opacity:1,ease:'none',duration:3})
+                      .to([eyebrow,title,desc,cta],{opacity:0,y:-18,filter:'blur(4px)',ease:'power1.in',duration:3});
                 });
-                tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
-                  .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-                  .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-                  .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=2.8')
-                  .to([eyebrow,title,desc,cta],{opacity:1,ease:'none',duration:3})
-                  .to([eyebrow,title,desc,cta],{opacity:0,y:-18,filter:'blur(4px)',ease:'power1.in',duration:3});
             }
-            if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCinematicHero);}
-            else{initCinematicHero();}
-            setTimeout(initCinematicHero,800);
-            setTimeout(initCinematicHero,2000);
+            if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCinematicHeroes);}
+            else{initCinematicHeroes();}
+            setTimeout(initCinematicHeroes,800);
+            setTimeout(initCinematicHeroes,2000);
         })();
         </script>
 
@@ -1639,23 +1912,15 @@
         
         var cards = Array.from(track.querySelectorAll(".dt-film-card"));
         var total = cards.length;
-        var curX = 0, activeIndex = 0;
-        var startX = 0, startY = 0, startScroll = 0, dragging = false, touchDir = null;
-        
-        function maxScroll(){
-            var tw = cards.reduce(function(s,c){return s + c.offsetWidth + 30}, 0);
-            return -(tw - wrap.offsetWidth + (window.innerWidth <= 768 ? 40 : 80));
-        }
-        
-        function clamp(x){ return Math.min(0, Math.max(maxScroll(), x)); }
+        var activeIndex = 0;
         
         function updateUI(){
-            var max = -maxScroll();
-            var pct = max > 0 ? (-curX / max) * 100 : 0;
+            var maxScroll = track.scrollWidth - wrap.offsetWidth;
+            if (maxScroll <= 0) return;
+            var pct = (wrap.scrollLeft / maxScroll) * 100;
             if (progress) progress.style.width = pct + "%";
             
-            // Detect active index safely based on center of viewport
-            var screenCenterPos = -curX + (wrap.offsetWidth / 2);
+            var screenCenterPos = wrap.scrollLeft + (wrap.offsetWidth / 2);
             var cumX = 0;
             var nearest = 0;
             var minDist = Infinity;
@@ -1667,7 +1932,7 @@
                     minDist = dist;
                     nearest = i;
                 }
-                cumX += c.offsetWidth + 30;
+                cumX += c.offsetWidth + 14;
             });
             activeIndex = nearest;
             
@@ -1675,86 +1940,52 @@
                 counter.innerHTML = String(activeIndex+1).padStart(2,"0") + " <span>/ " + String(total).padStart(2,"0") + "</span>";
             }
         }
-        
-        function applyX(x, instant){
-            curX = clamp(x);
-            // Ultra premium slow ease
-            track.style.transition = instant ? "none" : "transform 0.85s cubic-bezier(0.19, 1, 0.22, 1)";
-            track.style.transform = "translateX(" + curX + "px)";
+
+        wrap.addEventListener('scroll', function() {
             updateUI();
-        }
+        }, {passive: true});
+
+        // Loop back to start if swiped past the end
+        var touchStartX = 0;
+        wrap.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        }, {passive: true});
+
+        wrap.addEventListener('touchend', function(e) {
+            var touchEndX = e.changedTouches[0].clientX;
+            // If at the last card and swiping left (trying to scroll right)
+            if (activeIndex === total - 1 && (touchStartX - touchEndX > 50)) {
+                snapTo(0);
+            }
+        }, {passive: true});
+
+        var lastWheelTime = 0;
+        wrap.addEventListener('wheel', function(e) {
+            var maxScroll = track.scrollWidth - wrap.offsetWidth;
+            if (wrap.scrollLeft >= maxScroll - 5 && e.deltaX > 15) {
+                var now = Date.now();
+                if (now - lastWheelTime > 600) {
+                    lastWheelTime = now;
+                    snapTo(0);
+                }
+            }
+        }, {passive: true});
 
         function snapTo(index) {
             activeIndex = Math.max(0, Math.min(total - 1, index));
-            var tx = 0;
-            for(var i=0; i<activeIndex; i++) {
-                tx += cards[i].offsetWidth + 30;
-            }
-            applyX(-tx, false);
-        }
-
-        var autoPlayInterval;
-        function startAutoPlay() {
-            // JS Autoplay disabled permanently
-        }
-        function stopAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
+            var targetCard = cards[activeIndex];
+            if (targetCard) {
+                var targetLeft = targetCard.offsetLeft - (wrap.offsetWidth / 2) + (targetCard.offsetWidth / 2);
+                wrap.scrollTo({ left: targetLeft, behavior: 'smooth' });
             }
         }
-        function resetAutoPlay() {
-            stopAutoPlay();
-            startAutoPlay();
-        }
-
-        wrap.addEventListener("mousedown", function(e){
-            stopAutoPlay();
-            dragging = true; startX = e.clientX; startScroll = curX;
-            wrap.classList.add("dt-dragging"); e.preventDefault();
-        });
-        document.addEventListener("mousemove", function(e){
-            if(!dragging) return;
-            applyX(startScroll + (e.clientX - startX), true);
-        });
-        document.addEventListener("mouseup", function(){
-            if(!dragging) return;
-            dragging = false; wrap.classList.remove("dt-dragging");
-            snapTo(activeIndex); // Premium settle
-            startAutoPlay();
-        });
         
-        wrap.addEventListener("touchstart", function(e){
-            stopAutoPlay();
-            var t = e.touches[0]; startX = t.clientX; startY = t.clientY; startScroll = curX;
-            touchDir = null;
-        }, {passive: true});
+        function startAutoPlay() {}
+        function stopAutoPlay() {}
+        function resetAutoPlay() {}
         
-        wrap.addEventListener("touchmove", function(e){
-            var t = e.touches[0], dx = t.clientX - startX, dy = t.clientY - startY;
-            if(!touchDir){
-               if (Math.abs(dx) > Math.abs(dy)) {
-                   touchDir = "h"; // Horizontal swipe -> intercept
-               } else {
-                   touchDir = "v"; // Vertical swipe -> allow page scroll
-               }
-            }
-            if(touchDir === "h"){
-                e.preventDefault();
-                applyX(startScroll + dx, true);
-            }
-        }, {passive: false});
-        
-        wrap.addEventListener("touchend", function(){
-            if(touchDir === "h"){ 
-                snapTo(activeIndex); 
-            } 
-            touchDir = null;
-            startAutoPlay();
-        }, {passive: true});
-        
-        if (prevBtn) prevBtn.addEventListener("click", function() { snapTo(activeIndex - 1); resetAutoPlay(); });
-        if (nextBtn) nextBtn.addEventListener("click", function() { if (activeIndex >= total - 1) { snapTo(0); } else { snapTo(activeIndex + 1); } resetAutoPlay(); });
+        if (prevBtn) prevBtn.addEventListener("click", function() { snapTo(activeIndex - 1); });
+        if (nextBtn) nextBtn.addEventListener("click", function() { if (activeIndex >= total - 1) { snapTo(0); } else { snapTo(activeIndex + 1); } });
         
         snapTo(0);
         
