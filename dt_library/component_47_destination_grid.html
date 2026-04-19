@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Destinations Grid</title>
+
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Cinzel for Headlines, Open Sans for CTAs -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================
+           DESERT TRACKS — PREMIUM DESTINATIONS GRID
+           ================================================ */
+        body {
+            background-color: #f7f5f0;
+            margin: 0;
+            padding: 0;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .dt-destinations-section {
+            width: 100%;
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 40px;
+            box-sizing: border-box;
+        }
+
+        .dt-dest-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .dt-dest-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 4 / 3;
+            cursor: pointer;
+            text-decoration: none !important;
+            display: block;
+            background: #123631; /* Deep Green fallback */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            transform: translateZ(0); 
+        }
+
+        /* Background Image Layer */
+        .dt-dest-bg {
+            position: absolute;
+            inset: -5%;
+            width: 110%;
+            height: 110%;
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            z-index: 1;
+        }
+
+        .dt-dest-card:hover .dt-dest-bg {
+            transform: scale(1.05); /* Cinematic slow zoom */
+        }
+
+        /* Luxury Overlay Vignette ensuring white text always pops */
+        .dt-dest-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);
+            transition: background 0.5s ease;
+        }
+
+        .dt-dest-card:hover .dt-dest-overlay {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%);
+        }
+
+        /* Content Container */
+        .dt-dest-content {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* Main Title (Cinzel) */
+        .dt-dest-title {
+            font-family: 'Cinzel', serif !important;
+            font-size: clamp(1.6rem, 2.5vw, 2.2rem) !important;
+            font-weight: 400 !important;
+            color: #ffffff !important;
+            margin: 0 !important;
+            line-height: 1.25 !important;
+            letter-spacing: 0.05em;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .dt-dest-card:hover .dt-dest-title {
+            transform: translateY(-8px);
+        }
+
+        /* Explore Now CTA Feature */
+        .dt-dest-cta {
+            font-family: 'Open Sans', Arial, sans-serif !important;
+            font-size: 0.75rem !important;
+            font-weight: 600 !important;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #C9A24A !important; 
+            margin-top: 16px !important;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .dt-dest-card:hover .dt-dest-cta {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive Grid Adjustments */
+        @media (max-width: 1024px) {
+            .dt-dest-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .dt-dest-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .dt-dest-card {
+                aspect-ratio: 16 / 11;
+            }
+            .dt-destinations-section {
+                padding: 0 24px;
+            }
+            .dt-dest-title { transform: translateY(-8px); }
+            .dt-dest-cta { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- 9 REGIONS HTML STRUCTURE -->
+<section class="dt-destinations-section">
+    <div class="dt-dest-grid">
+        
+        <!-- CARD 1: Sossusvlei -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1549479427-bc0c20188b4a?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Sossusvlei<br>Dunes</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 2: Etosha -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1555502573-0db268716bf6?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Etosha<br>National Park</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 3: Fish River Canyon -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1506462745871-ea78d46db1d4?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Fish River<br>Canyon</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 4: Coastal Swakopmund -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2024/11/Swakopmund.avif')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Coastal<br>Swakopmund</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 5: Skeleton Coast -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1518118014377-ec56d78d4de4?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Skeleton<br>Coast</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 6: Rugged Damaraland -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1510255146811-37ce6afb6c5b?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Rugged<br>Damaraland</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+        
+        <!-- CARD 7: Kalahari Desert -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1685365511394-bb0642fcd620?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Kalahari<br>Desert</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 8: Lush Caprivi -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1600867451296-6e4b8df2acb3?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Lush<br>Caprivi</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+        <!-- CARD 9: Epupa Falls -->
+        <a href="#" class="dt-dest-card">
+            <div class="dt-dest-bg" style="background-image: url('https://images.unsplash.com/photo-1616422201383-7740fc9e6618?auto=format&fit=crop&q=80&w=1200')"></div>
+            <div class="dt-dest-overlay"></div>
+            <div class="dt-dest-content">
+                <h3 class="dt-dest-title">Epupa<br>Falls</h3>
+                <span class="dt-dest-cta">Explore Now</span>
+            </div>
+        </a>
+
+    </div>
+</section>
+
+</body>
+</html>
