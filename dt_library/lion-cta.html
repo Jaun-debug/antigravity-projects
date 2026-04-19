@@ -1,0 +1,140 @@
+<!-- Lion CTA Glassmorphism Block -->
+<style data-no-optimize="1">
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Open+Sans:wght@300;400;600&display=swap');
+
+.dt-glassmorphism-block {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Open Sans', Arial, sans-serif;
+    padding: 3rem 1rem;
+    box-sizing: border-box;
+    background: #0a0a0a;
+}
+
+.dt-glass-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large-1.jpeg');
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: 1;
+    transform: scale(1.05); /* Prevent edge gaps */
+}
+
+.dt-glass-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+    z-index: 2;
+}
+
+.dt-glass-card {
+    position: relative;
+    z-index: 3;
+    background: rgba(255, 255, 255, 0.08); /* VERY transparent white */
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px); 
+    border: 1px solid rgba(255, 255, 255, 0.25); 
+    border-radius: 20px;
+    box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+    padding: 5rem 4rem;
+    max-width: 650px;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: glassFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+@keyframes glassFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.dt-glass-category {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+}
+
+.dt-glass-card h2 {
+    font-family: 'Cinzel', serif !important;
+    font-size: 3.5rem !important;
+    font-weight: 400 !important;
+    margin: 0 0 1.5rem !important;
+    line-height: 1.1 !important;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #fff !important;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.dt-glass-card p {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    font-weight: 300;
+    margin: 0 0 2.5rem;
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.dt-glass-btn {
+    display: inline-block;
+    padding: 16px 40px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: #fff;
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+.dt-glass-btn:hover {
+    background: #fff;
+    color: #0a0a0a;
+    box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+    .dt-glass-card h2 { font-size: 2.8rem !important; }
+    .dt-glass-card { padding: 4rem 3rem; }
+}
+
+@media (max-width: 600px) {
+    .dt-glassmorphism-block { padding: 2rem 1rem; }
+    .dt-glass-card h2 { font-size: 2.2rem !important; }
+    .dt-glass-card { padding: 3rem 2rem; }
+    .dt-glass-btn { padding: 14px 30px; }
+}
+</style>
+
+<div class="dt-glassmorphism-block">
+    <div class="dt-glass-bg"></div>
+    <div class="dt-glass-overlay"></div>
+    <div class="dt-glass-card">
+        <div class="dt-glass-category">Wildlife Highlights</div>
+        <h2>A Legacy In The Wild</h2>
+        <p>Experience the untamed beauty of Africa through the lens of pure luxury. Witness nature's most intimate moments unfold right before your eyes.</p>
+        <a href="https://desert-tracks.com/namibia-safaris/" class="dt-glass-btn">START YOUR JOURNEY</a>
+    </div>
+</div>
