@@ -1,0 +1,240 @@
+<style>
+/* ================================================
+   DESERT TRACKS — PREMIUM FAQ ACCORDION BLOCK
+   ================================================ */
+.dt-faq-section {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+.dt-faq-heading {
+    font-family: 'Cinzel', serif !important;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    font-weight: 400 !important;
+    color: #123631 !important; /* Luxury Deep Green */
+    text-align: center;
+    margin: 0 0 12px 0 !important;
+    letter-spacing: 0.05em;
+}
+.dt-faq-subheading {
+    text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #123631; /* Luxury Deep Green */
+    opacity: 0.7; /* Softened slightly so it plays a supporting role */
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin: 0 0 60px 0;
+}
+/* Each accordion item */
+.dt-faq-item {
+    border-bottom: 1px solid #e5e0d8;
+    padding: 0;
+    overflow: hidden;
+}
+.dt-faq-item:first-of-type {
+    border-top: 1px solid #e5e0d8;
+}
+/* The clickable question row */
+.dt-faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+    cursor: pointer;
+    gap: 20px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.dt-faq-question-text {
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #123631; /* Luxury Deep Green */
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    flex: 1;
+    letter-spacing: 0.05em;
+}
+.dt-faq-item.dt-open .dt-faq-question-text {
+    color: #C9A24A; /* Brand Gold */
+}
+/* The + / × icon */
+.dt-faq-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid #C9A24A; /* Brand Gold */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.4s ease;
+    position: relative;
+}
+.dt-faq-icon::before,
+.dt-faq-icon::after {
+    content: '';
+    position: absolute;
+    background: #C9A24A; /* Brand Gold */
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+/* Horizontal bar */
+.dt-faq-icon::before {
+    width: 12px;
+    height: 1.5px;
+}
+/* Vertical bar */
+.dt-faq-icon::after {
+    width: 1.5px;
+    height: 12px;
+}
+/* When open: rotate vertical bar to 0 (makes it a minus) */
+.dt-faq-item.dt-open .dt-faq-icon {
+    background: #C9A24A; /* Brand Gold */
+    transform: rotate(45deg);
+}
+.dt-faq-item.dt-open .dt-faq-icon::before,
+.dt-faq-item.dt-open .dt-faq-icon::after {
+    background: #ffffff;
+}
+/* The answer panel */
+.dt-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dt-faq-item.dt-open .dt-faq-answer {
+    max-height: 600px;
+}
+.dt-faq-answer-inner {
+    padding: 0 0 28px 0;
+}
+.dt-faq-answer-inner p {
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.85 !important;
+    color: #123631 !important; /* Luxury Deep Green */
+    margin: 0 0 14px 0 !important;
+    font-weight: 300 !important;
+}
+.dt-faq-answer-inner p strong, .dt-faq-answer-inner p b {
+    font-weight: 600;
+    color: #123631; /* Ensures bold text remains the active dark color */
+}
+.dt-faq-answer-inner p:last-child {
+    margin-bottom: 0 !important;
+}
+@media (max-width: 640px) {
+    .dt-faq-section { padding: 60px 24px; }
+    .dt-faq-question-text { font-size: 1.05rem; }
+}
+</style>
+
+<div class="dt-faq-section">
+    <p class="dt-faq-subheading">Everything you need to know</p>
+    <h2 class="dt-faq-heading">Frequently Asked Questions</h2>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What is Namibia’s population?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia has a population of approximately <strong>3.03 million people</strong>, which is remarkably small for a country of its physical size. That low population density is one of the reasons travellers often describe Namibia as feeling vast, open, and wonderfully uncrowded.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">How big is Namibia compared with other countries?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia covers about <strong>824,290 square kilometres</strong>, making it a very large country by global standards. To help picture its scale, it is <strong>about 1.5 times larger than France</strong>, which explains why distances between destinations can be much longer than many first-time visitors expect.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">How many languages are spoken in Namibia?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia is a highly multilingual country. <strong>English is the official language</strong>, but everyday life includes a wide mix of local and regional languages and dialects. The <em>Atlas of Namibia</em> highlights <strong>more than 20 languages and dialects</strong> in use, with Oshiwambo varieties, Khoekhoegowab, Afrikaans, Otjiherero, Rukwangali, German, Setswana, and Silozi among the better-known examples.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Is Namibia safe for travellers?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia is widely considered one of the more manageable destinations in Africa for independent travel, especially because traffic is light and tourist routes are well established. That said, visitors should still use <strong>normal travel precautions</strong>, particularly in cities, around valuables, and after dark. Official travel advice recommends <strong>increased caution</strong> because of crime and health risks, so sensible planning remains important.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What are road conditions like in Namibia?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia is well known for self-drive travel and has a <strong>generally strong road network</strong>. Major routes between key destinations are often sealed, while many scenic and remote stretches are gravel roads that are still in good condition. The main challenge is not usually the road itself, but the <strong>long distances</strong>, possible punctures, limited fuel stops in remote areas, and the need to drive more slowly and carefully on gravel.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Is Namibia a good destination for self-drive holidays?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Yes. Namibia is one of Africa’s classic self-drive destinations because of its open landscapes, relatively light traffic, and strong tourism infrastructure. Travellers who plan realistic distances, carry water, refuel regularly, and avoid driving at night usually find it to be a rewarding and accessible country for a road-based safari.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Why do travellers find Namibia so interesting?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia combines dramatic scale with striking contrast: enormous desert landscapes, Atlantic coastline, wildlife-rich parks, multilingual cultures, and an unusual sense of silence and space. Its low population density and huge distances give the country a rare feeling of remoteness that many travellers find unforgettable.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script data-no-optimize="1">
+function dtToggleFaq(questionEl) {
+    var item = questionEl.parentElement;
+    var isOpen = item.classList.contains('dt-open');
+    /* Close all open items */
+    document.querySelectorAll('.dt-faq-item.dt-open').forEach(function(el) {
+        el.classList.remove('dt-open');
+    });
+    /* Open clicked item (unless it was already open) */
+    if (!isOpen) {
+        item.classList.add('dt-open');
+    }
+}
+</script>
