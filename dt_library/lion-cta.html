@@ -1,21 +1,29 @@
-<!-- Lion CTA Glassmorphism Block -->
 <style data-no-optimize="1">
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Open+Sans:wght@300;400;600&display=swap');
 
 .dt-glassmorphism-block {
     position: relative;
+    /* THE MARGIN CHANGE: this forces the block to perfectly stretch edge-to-edge, breaking out of the container */
     width: 100vw;
     margin-left: calc(-50vw + 50%);
+    
+    /* KILL THE WORDPRESS/NICEPAGE SPACE: This forcefully pulls the Seafoam footer UP to destroy the white gap */
+    margin-bottom: -100px !important;
+    
+    /* Increased height so it forcefully eats the white gap below it */
+    min-height: 650px;
+    
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     font-family: 'Open Sans', Arial, sans-serif;
-    padding: 3rem 1rem;
+    padding: 6rem 1rem; /* Much bolder padding to stretch the background down */
     box-sizing: border-box;
     background: #0a0a0a;
 }
 
+/* Base Image Background */
 .dt-glass-bg {
     position: absolute;
     inset: 0;
@@ -27,6 +35,7 @@
     transform: scale(1.05); /* Prevent edge gaps */
 }
 
+/* Subtle dark gradient overlay so the white text ALWAYS pops */
 .dt-glass-overlay {
     position: absolute;
     inset: 0;
@@ -34,20 +43,25 @@
     z-index: 2;
 }
 
+/* The Glass Card */
 .dt-glass-card {
     position: relative;
     z-index: 3;
+    /* The core Glassmorphism specs: */
     background: rgba(255, 255, 255, 0.08); /* VERY transparent white */
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px); 
     border: 1px solid rgba(255, 255, 255, 0.25); 
     border-radius: 20px;
     box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+    
     padding: 5rem 4rem;
     max-width: 650px;
     width: 100%;
     text-align: center;
     color: #fff;
+    
+    /* Animation hook */
     opacity: 0;
     transform: translateY(20px);
     animation: glassFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -115,22 +129,42 @@
     transform: translateY(-2px);
 }
 
+/* Responsiveness */
 @media (max-width: 900px) {
-    .dt-glass-card h2 { font-size: 2.8rem !important; }
-    .dt-glass-card { padding: 4rem 3rem; }
+    .dt-glass-card h2 {
+        font-size: 2.8rem !important;
+    }
+    .dt-glass-card {
+        padding: 4rem 3rem;
+    }
 }
 
 @media (max-width: 600px) {
-    .dt-glassmorphism-block { padding: 2rem 1rem; }
-    .dt-glass-card h2 { font-size: 2.2rem !important; }
-    .dt-glass-card { padding: 3rem 2rem; }
-    .dt-glass-btn { padding: 14px 30px; }
+    .dt-glassmorphism-block {
+        /* Extra snug for mobile screens */
+        padding: 2rem 1rem; 
+    }
+    .dt-glass-card h2 {
+        font-size: 2.2rem !important;
+    }
+    .dt-glass-card {
+        padding: 3rem 2rem;
+    }
+    .dt-glass-btn {
+        padding: 14px 30px;
+    }
 }
 </style>
 
+<!-- Copy everything inside this block -->
 <div class="dt-glassmorphism-block">
+    <!-- Image Background -->
     <div class="dt-glass-bg"></div>
+    
+    <!-- Darkening Overlay for Contrast -->
     <div class="dt-glass-overlay"></div>
+    
+    <!-- The Glass Card -->
     <div class="dt-glass-card">
         <div class="dt-glass-category">Wildlife Highlights</div>
         <h2>A Legacy In The Wild</h2>
