@@ -27,12 +27,13 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin-bottom: -150px !important; /* Forces Nicepage outer wrapper to brutally swallow the white gap */
+            margin-bottom: 2rem !important; /* Provides breathing room below the final elements on mobile */
         }
 
         @media (min-width: 1024px) {
             .lux-container {
                 flex-direction: row;
+                margin-bottom: -150px !important; /* Forces Nicepage outer wrapper to brutally swallow the white gap on desktop */
             }
         }
 
@@ -1249,6 +1250,12 @@
     </a>
     <div class="dt-jb-divider"></div>
     
+    <a href="#route-map" class="dt-jb-col">
+      <div class="dt-jb-gold">Full Route</div>
+      <div class="dt-jb-grey">Interactive Map</div>
+    </a>
+    <div class="dt-jb-divider"></div>
+    
     <a href="#day-by-day" class="dt-jb-col">
       <div class="dt-jb-gold">Day by Day</div>
       <div class="dt-jb-grey">Full Itinerary</div>
@@ -1275,6 +1282,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 targetEl = document.querySelector('.lux-welcome-top');
             } else if (targetId === '#locations') {
                 targetEl = document.querySelector('.lux-acc-grid-container');
+            } else if (targetId === '#route-map') {
+                targetEl = document.querySelector('#dt-interactive-map-heading');
             } else if (targetId === '#day-by-day') {
                 // The day by day section starts at the "Day-by-Day Itinerary" header or day-01
                 const header = Array.from(document.querySelectorAll('h2')).find(el => el.textContent.includes('Day-by-Day'));
@@ -1367,6 +1376,167 @@ document.addEventListener("DOMContentLoaded", () => {
                         <p class="lux-acc-desc">With its lush green gardens and lavish designer rooms, Windhoek Luxury Suites offers luxur...</p>
                     </a>
                 </div>
+            </div>
+
+            <!-- // ANIMATED ROUTE MAP SECTION // -->
+            <div style="margin-bottom: 4rem; width: 100%;">
+                <h2 id="dt-interactive-map-heading" style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">Interactive Route Map</h2>
+                
+                <!-- Leaflet CSS -->
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+                
+                <style data-no-optimize="1">
+                    .dt-map-container { width: 100%; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+                    #dt-safari-map { width: 100%; height: 550px; background: #F5F5F3; z-index: 1; }
+                    .dt-map-waypoint { background-color: white; color: #1F4F4B; border-radius: 50%; width: 28px !important; height: 28px !important; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #C9A24A; transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease; }
+                    .dt-map-waypoint:hover { transform: scale(1.15); cursor: pointer; }
+                    .dt-car-marker { background-color: #E1C680; border-radius: 50%; width: 36px !important; height: 36px !important; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4); border: 2px solid white; z-index: 1000 !important; }
+                    .dt-car-marker svg { width: 20px; height: 20px; fill: #1F4F4B; transition: transform 0.4s ease; }
+                    .dt-status-banner { position: absolute; background: rgba(255, 255, 255, 0.98); padding: 12px 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 2000; opacity: 0; transform: translate(-50%, -10px); transition: left 0.1s linear, top 0.1s linear, opacity 0.4s ease, transform 0.4s ease; pointer-events: none; border-left: 4px solid #C9A24A; white-space: nowrap; display: flex; flex-direction: row; align-items: center; gap: 15px; min-width: max-content; }
+                    .dt-status-banner.active { opacity: 1; transform: translate(-50%, -40px); }
+                    .dt-status-content-left { display: flex; flex-direction: column; text-align: left; }
+                    .dt-status-eyebrow { font-size: 10px; letter-spacing: 2px; color: #9B6A35; margin-bottom: 2px; font-weight: 600; font-family: 'Open Sans', sans-serif; text-transform: uppercase; }
+                    .dt-status-dest { font-family: 'Cinzel', serif; font-size: 20px; color: #1F4F4B; margin: 0; font-weight: 600; }
+                    .dt-status-lodge { font-size: 13px; color: #666; margin: 0; font-weight: 500; font-family: 'Open Sans', sans-serif; border-left: 1px solid #ddd; padding-left: 15px; }
+                    .leaflet-popup-content-wrapper { border-radius: 6px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); padding: 2px; }
+                    .leaflet-popup-content { font-family: 'Open Sans', sans-serif; font-weight: 600; color: #1F4F4B; margin: 10px 14px; font-size: 14px; text-align: center; }
+
+                    @media (max-width: 1023px) {
+                        .dt-map-container {
+                            width: 100vw !important;
+                            max-width: 100vw !important;
+                            margin-left: calc(-50vw + 50%) !important;
+                            border-radius: 0 !important;
+                        }
+                        .dt-status-banner {
+                            flex-direction: column;
+                            align-items: flex-start;
+                            gap: 5px;
+                            padding: 10px 18px;
+                            white-space: normal;
+                        }
+                        .dt-status-lodge {
+                            border-left: none;
+                            border-top: 1px solid #ddd;
+                            padding-left: 0;
+                            padding-top: 5px;
+                            width: 100%;
+                        }
+                    }
+                </style>
+
+                <div class="dt-map-container" data-no-optimize="1">
+                    <div class="dt-status-banner" id="statusBanner">
+                        <div class="dt-status-content-left">
+                            <div class="dt-status-eyebrow" id="bannerEyebrow">Arriving at</div>
+                            <h3 class="dt-status-dest" id="bannerDest">Windhoek</h3>
+                        </div>
+                        <p class="dt-status-lodge" id="bannerLodge">Omaanda Lodge</p>
+                    </div>
+                    <div id="dt-safari-map"></div>
+                </div>
+
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+                <script data-no-optimize="1">
+                    document.addEventListener("DOMContentLoaded", function() {
+                        const map = L.map('dt-safari-map', { zoomControl: true, scrollWheelZoom: false });
+                        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                            attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ', maxZoom: 18
+                        }).addTo(map);
+
+                        const waypoints = [
+                            { id: '', name: 'Windhoek', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] },
+                            { id: '1', name: 'Kalahari', lodge: 'Camelthorn Kalahari Lodge', nights: '2 NIGHTS', coords: [-24.2831, 17.9333] },
+                            { id: '2', name: 'Fish River Canyon', lodge: 'Canyon Roadhouse', nights: '2 NIGHTS', coords: [-27.5333, 17.7000] },
+                            { id: '3', name: 'Lüderitz', lodge: 'Alte Villa', nights: '2 NIGHTS', coords: [-26.6472, 16.1583] },
+                            { id: '4', name: 'Namib', lodge: 'At Kronenhof Lodge', nights: '1 NIGHT', coords: [-25.4333, 16.4833] },
+                            { id: '5', name: 'Sossusvlei', lodge: 'Desert Homestead Lodge', nights: '2 NIGHTS', coords: [-24.7167, 15.9000] },
+                            { id: '6', name: 'Windhoek (Return)', lodge: 'Windhoek Luxury Suites', nights: '1 NIGHT', coords: [-22.5609, 17.0658] }
+                        ];
+
+                        let jumpToWaypoint = null;
+                        waypoints.forEach((wp, index) => {
+                            if (!wp.id) return;
+                            const icon = L.divIcon({ className: 'dt-map-waypoint-wrap', html: `<div class="dt-map-waypoint">${wp.id}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] });
+                            const marker = L.marker(wp.coords, {icon: icon}).addTo(map);
+                            marker.on('click', () => { if (jumpToWaypoint) jumpToWaypoint(index); });
+                        });
+
+                        const carIcon = L.divIcon({
+                            className: 'dt-car-marker-wrap',
+                            html: `<div class="dt-car-marker"><svg id="dt-car-svg" viewBox="0 0 100 100" fill="#1F4F4B"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#1F4F4B" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#1F4F4B"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><circle cx="28" cy="58" r="6" fill="#E1C680" /><circle cx="72" cy="58" r="6" fill="#E1C680" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#E1C680" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#E1C680" /></svg></div>`,
+                            iconSize: [36, 36], iconAnchor: [18, 18]
+                        });
+                        const movingCar = L.marker(waypoints[0].coords, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
+
+                        async function fetchRealRoadsAndRun() {
+                            const routeSegments = []; let fullRouteCoords = [];
+                            for (let i = 0; i < waypoints.length - 1; i++) {
+                                const wp1 = waypoints[i].coords; const wp2 = waypoints[i+1].coords; let legCoords = [];
+                                try {
+                                    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${wp1[1]},${wp1[0]};${wp2[1]},${wp2[0]}?overview=full&geometries=geojson`);
+                                    const data = await res.json();
+                                    if (data.routes && data.routes.length > 0) { legCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]); }
+                                    else { legCoords = [wp1, wp2]; }
+                                } catch (e) { legCoords = [wp1, wp2]; }
+                                routeSegments.push(legCoords); fullRouteCoords.push(...legCoords);
+                            }
+                            const routeLine = L.polyline(fullRouteCoords, { color: '#1F4F4B', weight: 4, opacity: 0.8, dashArray: "1, 8", lineJoin: 'round', lineCap: 'round' }).addTo(map);
+                            map.fitBounds(routeLine.getBounds(), { padding: [60, 60] });
+
+                            const banner = document.getElementById('statusBanner'); const destEl = document.getElementById('bannerDest'); const lodgeEl = document.getElementById('bannerLodge'); const eyebrowEl = document.getElementById('bannerEyebrow');
+                            function showBanner(waypoint) {
+                                const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng());
+                                banner.style.left = carLocationPixel.x + 'px'; banner.style.top = (carLocationPixel.y - 25) + 'px';
+                                eyebrowEl.innerText = waypoint.nights ? waypoint.nights : "ARRIVING AT";
+                                destEl.innerText = waypoint.name; lodgeEl.innerText = waypoint.lodge ? waypoint.lodge : "";
+                                lodgeEl.style.display = waypoint.lodge ? 'block' : 'none';
+                                banner.classList.add('active');
+                            }
+                            map.on('move', function() { if (banner.classList.contains('active')) { const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng()); banner.style.left = carLocationPixel.x + 'px'; banner.style.top = (carLocationPixel.y - 25) + 'px'; } });
+                            function hideBanner() { banner.classList.remove('active'); }
+
+                            let currentLegIndex = 0; let currentTimeoutId = null; let animationId = null;
+                            jumpToWaypoint = (index) => {
+                                if (animationId) cancelAnimationFrame(animationId); if (currentTimeoutId) clearTimeout(currentTimeoutId);
+                                hideBanner(); currentLegIndex = index >= routeSegments.length ? 0 : index;
+                                movingCar.setLatLng(waypoints[currentLegIndex].coords); showBanner(waypoints[currentLegIndex]);
+                                currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
+                            };
+                            function playLeg() {
+                                if (currentLegIndex >= routeSegments.length) {
+                                    showBanner(waypoints[waypoints.length - 1]);
+                                    currentTimeoutId = setTimeout(() => { hideBanner(); currentLegIndex = 0; movingCar.setLatLng(waypoints[0].coords); currentTimeoutId = setTimeout(playLeg, 1000); }, 5000);
+                                    return;
+                                }
+                                const legCoords = routeSegments[currentLegIndex]; const wpTarget = waypoints[currentLegIndex + 1];
+                                const segmentLengths = []; let totalMeters = 0;
+                                for (let i = 0; i < legCoords.length - 1; i++) { const dist = map.distance(legCoords[i], legCoords[i+1]); segmentLengths.push(dist); totalMeters += dist; }
+                                const durationMs = Math.max(3000, Math.min(8000, totalMeters / 12000));
+                                let startTime = null;
+                                function step(timestamp) {
+                                    if (!startTime) startTime = timestamp; const progress = (timestamp - startTime) / durationMs;
+                                    if (progress >= 1.0) {
+                                        movingCar.setLatLng(legCoords[legCoords.length - 1]); showBanner(wpTarget);
+                                        currentTimeoutId = setTimeout(() => { hideBanner(); currentLegIndex++; currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
+                                        return;
+                                    }
+                                    const targetDist = progress * totalMeters; let currentDist = 0;
+                                    for (let i = 0; i < segmentLengths.length; i++) {
+                                        if (currentDist + segmentLengths[i] >= targetDist) {
+                                            const segProg = segmentLengths[i] === 0 ? 1 : ((targetDist - currentDist) / segmentLengths[i]);
+                                            const lat = legCoords[i][0] + (legCoords[i+1][0] - legCoords[i][0]) * segProg; const lng = legCoords[i][1] + (legCoords[i+1][1] - legCoords[i][1]) * segProg;
+                                            movingCar.setLatLng([lat, lng]); break;
+                                        } currentDist += segmentLengths[i];
+                                    } animationId = requestAnimationFrame(step);
+                                } animationId = requestAnimationFrame(step);
+                            }
+                            showBanner(waypoints[0]);
+                            currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 500); }, 1500);
+                        }
+                        fetchRealRoadsAndRun();
+                    });
+                </script>
             </div>
                 <!-- Inclusions Block -->
             
@@ -1871,7 +2041,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         </style>
 
-        <section class="dt-cin-hero" id="dtCinHero">
+        <section class="dt-cin-hero" id="dtCinHero" style="margin-bottom: 4rem;">
             <div class="dt-cin-bg" id="dtCinBg" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4-2.jpg'); inset: 0; width: 100%; height: 100%; transform: scale(1.05);"></div>
             <div class="dt-cin-gradient"></div>
             <div class="dt-cin-vignette"></div>
@@ -1914,7 +2084,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     gsap.set([eyebrow,title,desc,cta],{opacity:0,y:35,filter:'blur(5px)'});
                     var tl=gsap.timeline({
-                        scrollTrigger:{trigger:hero,start:'top 50%',end:'bottom 10%',scrub:1.5}
+                        scrollTrigger:{
+                            trigger:hero,
+                            start: mob ? 'top 80%' : 'top 50%',
+                            end: mob ? 'bottom top' : 'bottom 10%',
+                            scrub:1.5
+                        }
                     });
                     tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
                       .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
@@ -1984,6 +2159,550 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         </div>
 
+        <!-- ============================================== -->
+        <!-- MORE SAFARIS 3D COVERFLOW -->
+        <!-- ============================================== -->
+        <!-- Swiper CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" data-no-optimize="1" />
+        
+        <style data-no-optimize="1">
+            /* Base Container Styling */
+            .dt-coverflow-wrapper {
+                position: relative;
+                width: 100vw !important;
+                margin-left: calc(-50vw + 50%) !important;
+                background: #F5F5F3; /* Luxury Ivory Background */
+                padding: 100px 0 40px 0; /* Reduced bottom padding */
+                margin-bottom: 0 !important; /* Reset since Lion CTA is now below it */
+                overflow: hidden;
+                font-family: 'Open Sans', sans-serif;
+                border-top: 1px solid rgba(0, 0, 0, 0.05);
+            }
+
+            .dt-coverflow-header {
+                text-align: center;
+                margin-bottom: 60px;
+                padding: 0 20px;
+            }
+
+            .dt-coverflow-eyebrow {
+                display: block;
+                font-size: 11px;
+                letter-spacing: 4px;
+                color: #8b7a66; /* Muted brown */
+                text-transform: uppercase;
+                margin-bottom: 15px;
+                font-weight: 500;
+            }
+
+            .dt-coverflow-title {
+                font-family: 'Cinzel', serif;
+                font-size: clamp(32px, 5vw, 48px);
+                color: #123631; /* Deep Typography Green */
+                font-weight: 400;
+                margin: 0 0 20px 0;
+                letter-spacing: 1px;
+            }
+
+            /* Swiper Container */
+            .swiper.dt-safari-swiper {
+                width: 100%;
+                padding-top: 20px;
+                padding-bottom: 60px;
+            }
+
+            .swiper-slide.dt-coverflow-slide {
+                background-position: center;
+                background-size: cover;
+                width: 320px;
+                height: 460px;
+                border-radius: 16px;
+                overflow: hidden;
+                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+                position: relative;
+                text-decoration: none;
+                display: block;
+                /* Webkit fix for clipping */
+                -webkit-mask-image: -webkit-radial-gradient(white, black);
+            }
+
+            /* Desktop specific slide size */
+            @media (min-width: 768px) {
+                .swiper-slide.dt-coverflow-slide {
+                    width: 380px;
+                    height: 520px;
+                }
+            }
+
+            .dt-coverflow-slide img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+
+            .dt-coverflow-slide:hover img {
+                transform: scale(1.05);
+            }
+
+            /* Gradient Overlay for Text */
+            .dt-slide-gradient {
+                position: absolute;
+                inset: auto 0 0 0;
+                height: 60%;
+                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            /* Slide Content Text */
+            .dt-slide-content {
+                position: absolute;
+                bottom: 30px;
+                left: 30px;
+                right: 30px;
+                z-index: 2;
+                text-align: left;
+                transition: transform 0.4s ease;
+            }
+
+            .dt-slide-days {
+                display: inline-block;
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: 2px;
+                color: #C9A24A;
+                text-transform: uppercase;
+                margin-bottom: 10px;
+                border: 1px solid rgba(201, 162, 74, 0.4);
+                padding: 4px 10px;
+                border-radius: 40px;
+                backdrop-filter: blur(4px);
+            }
+
+            .dt-slide-title {
+                font-family: 'Cinzel', serif;
+                font-size: 24px;
+                color: #ffffff;
+                margin: 0;
+                font-weight: 300;
+                line-height: 1.2;
+            }
+
+            /* Slide Active State Enhancements */
+            .swiper-slide-active .dt-slide-content {
+                transform: translateY(-10px);
+            }
+
+            /* Navigation Arrows & Pagination */
+            .dt-coverflow-controls {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 30px;
+                margin-top: 20px;
+                position: relative;
+                z-index: 10;
+            }
+
+            .dt-prev-btn, .dt-next-btn {
+                width: 48px;
+                height: 48px;
+                border-radius: 50%;
+                background: rgba(18,54,49,0.05);
+                border: 1px solid rgba(18,54,49,0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            }
+
+            .dt-prev-btn:hover, .dt-next-btn:hover {
+                background: rgba(201, 162, 74, 0.15);
+                border-color: #C9A24A;
+            }
+
+            .dt-prev-btn svg, .dt-next-btn svg {
+                width: 18px;
+                height: 18px;
+                stroke: #123631;
+                fill: none;
+                stroke-width: 1.5;
+                transition: stroke 0.3s ease;
+            }
+
+            .dt-prev-btn:hover svg, .dt-next-btn:hover svg {
+                stroke: #C9A24A;
+            }
+
+            /* Pagination Dots */
+            .swiper-pagination.dt-swiper-pagination {
+                position: static !important;
+                width: auto !important;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin: 0 10px;
+            }
+
+            .swiper-pagination-bullet {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: rgba(18,54,49,0.2);
+                opacity: 1;
+                transition: all 0.3s ease;
+                margin: 0 !important;
+            }
+
+            .swiper-pagination-bullet-active {
+                background: #C9A24A;
+                width: 24px;
+                border-radius: 4px;
+            }
+            
+        </style>
+
+        <div class="dt-coverflow-wrapper">
+            <div class="dt-coverflow-header">
+                <span class="dt-coverflow-eyebrow">Continue Exploring</span>
+                <h2 class="dt-coverflow-title">More Extraordinary Journeys</h2>
+            </div>
+
+            <!-- Swiper Container -->
+            <div class="swiper dt-safari-swiper" data-no-optimize="1">
+                <div class="swiper-wrapper">
+                    
+                    <!-- Slide 1 -->
+                    <a href="https://wetu.com/ItineraryOutputs/Discovery/ec95e889-23fe-4ac2-8023-f2cb885d59c7" target="_blank" class="swiper-slide dt-coverflow-slide">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sollylevisossusvlei-9-3-2-1-4-2-1.jpeg" alt="Best of Namibia" loading="lazy">
+                        <div class="dt-slide-gradient"></div>
+                        <div class="dt-slide-content">
+                            <span class="dt-slide-days">14 Days</span>
+                            <h3 class="dt-slide-title">Best of Namibia</h3>
+                        </div>
+                    </a>
+
+                    <!-- Slide 2 -->
+                    <a href="https://wetu.com/ItineraryOutputs/Discovery/0eb69854-4074-4e8c-ad3a-24d86d356ac3" target="_blank" class="swiper-slide dt-coverflow-slide">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="Namibia, Chobe & Vic Falls" loading="lazy">
+                        <div class="dt-slide-gradient"></div>
+                        <div class="dt-slide-content">
+                            <span class="dt-slide-days">17 Days</span>
+                            <h3 class="dt-slide-title">Namibia, Chobe & Vic Falls</h3>
+                        </div>
+                    </a>
+
+                    <!-- Slide 3 -->
+                    <a href="https://wetu.com/ItineraryOutputs/Discovery/fed30fb1-7ce5-4fc8-b519-b5f2d903af33" target="_blank" class="swiper-slide dt-coverflow-slide">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg" alt="Namibia Wildlife" loading="lazy">
+                        <div class="dt-slide-gradient"></div>
+                        <div class="dt-slide-content">
+                            <span class="dt-slide-days">11 Days</span>
+                            <h3 class="dt-slide-title">Namibia Wildlife</h3>
+                        </div>
+                    </a>
+
+                    <!-- Slide 4 -->
+                    <a href="https://wetu.com/ItineraryOutputs/Discovery/2301846c-353e-4c4b-b373-5ad746b0a1e4" target="_blank" class="swiper-slide dt-coverflow-slide">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg" alt="Hidden Treasures" loading="lazy">
+                        <div class="dt-slide-gradient"></div>
+                        <div class="dt-slide-content">
+                            <span class="dt-slide-days">18 Days</span>
+                            <h3 class="dt-slide-title">Hidden Treasures</h3>
+                        </div>
+                    </a>
+
+                    <!-- Slide 5 -->
+                    <a href="https://desert-tracks.com/namibia-self-drive-safaris/11-day-south-of-namibia-self-drive-safari/" target="_blank" class="swiper-slide dt-coverflow-slide">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg" alt="South of Namibia" loading="lazy">
+                        <div class="dt-slide-gradient"></div>
+                        <div class="dt-slide-content">
+                            <span class="dt-slide-days">11 Days</span>
+                            <h3 class="dt-slide-title">South of Namibia</h3>
+                        </div>
+                    </a>
+
+                    <!-- Slide 6 -->
+                    <a href="https://wetu.com/ItineraryOutputs/Discovery/271fef76-6606-4ae3-a9ae-d0c4e4b61437" target="_blank" class="swiper-slide dt-coverflow-slide">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg" alt="Namibia, Delta, Chobe & Vic Falls" loading="lazy">
+                        <div class="dt-slide-gradient"></div>
+                        <div class="dt-slide-content">
+                            <span class="dt-slide-days">18 Days</span>
+                            <h3 class="dt-slide-title">Namibia, Delta & Chobe</h3>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+            
+            <!-- Custom Controls Below Cards -->
+            <div class="dt-coverflow-controls">
+                <div class="dt-prev-btn">
+                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </div>
+                <div class="swiper-pagination dt-swiper-pagination"></div>
+                <div class="dt-next-btn">
+                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </div>
+            </div>
+        </div>
+
+        <!-- Swiper JS CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
+
+        <!-- Initialize Component -->
+        <script data-no-optimize="1">
+            function initSafariCoverflow() {
+                if (typeof Swiper === 'undefined') {
+                    setTimeout(initSafariCoverflow, 100);
+                    return;
+                }
+                
+                var safariSwiper = new Swiper('.dt-safari-swiper', {
+                    effect: 'coverflow',
+                    grabCursor: true,
+                    centeredSlides: true,
+                    loop: true,
+                    speed: 800,
+                    slidesPerView: 'auto',
+                    slideToClickedSlide: true,
+                    coverflowEffect: {
+                        rotate: 15,          // Slide rotate in degrees
+                        stretch: 0,          // Stretch space between slides (in px)
+                        depth: 250,          // Depth offset in px (shadow perspective)
+                        modifier: 1.5,       // Effect multiplier
+                        slideShadows: true,  // Enable slide shadows
+                    },
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                    navigation: {
+                        nextEl: '.dt-next-btn',
+                        prevEl: '.dt-prev-btn',
+                    },
+                    pagination: {
+                        el: '.dt-swiper-pagination',
+                        clickable: true,
+                    },
+                    keyboard: {
+                        enabled: true,
+                    },
+                    mousewheel: {
+                        forceToAxis: true,
+                        releaseOnEdges: true,
+                    }
+                });
+                
+                // Pause Autoplay on Hover
+                var swiperContainer = document.querySelector('.dt-safari-swiper');
+                if(swiperContainer) {
+                    swiperContainer.addEventListener('mouseenter', function() {
+                        safariSwiper.autoplay.stop();
+                    });
+                    swiperContainer.addEventListener('mouseleave', function() {
+                        safariSwiper.autoplay.start();
+                    });
+                }
+                
+                // Prevent clicks opening URL if the slide is not active in the center
+                var slides = document.querySelectorAll('.dt-coverflow-slide');
+                slides.forEach(function(slide) {
+                    slide.addEventListener('click', function(e) {
+                        if (!slide.classList.contains('swiper-slide-active')) {
+                            e.preventDefault();
+                        }
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener("DOMContentLoaded", initSafariCoverflow);
+            } else {
+                initSafariCoverflow();
+            }
+        </script>
+        <!-- ============================================== -->
+        
+        <!-- ============================================== -->
+        <!-- LION CTA -->
+        <!-- ============================================== -->
+        <style data-no-optimize="1">
+        .dt-glassmorphism-block {
+            position: relative;
+            /* THE MARGIN CHANGE: this forces the block to perfectly stretch edge-to-edge, breaking out of the container */
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            
+            /* KILL THE WORDPRESS/NICEPAGE SPACE: This forcefully pulls the Seafoam footer UP to destroy the white gap */
+            margin-bottom: -50px !important;
+            
+            /* Increased height so it forcefully eats the white gap below it */
+            min-height: 650px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Open Sans', Arial, sans-serif;
+            padding: 6rem 1rem; /* Much bolder padding to stretch the background down */
+            box-sizing: border-box;
+            background: #0a0a0a;
+        }
+
+        /* Base Image Background */
+        .dt-glass-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large-1.jpeg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            transform: scale(1.05); /* Prevent edge gaps */
+        }
+
+        /* Subtle dark gradient overlay so the white text ALWAYS pops */
+        .dt-glass-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 2;
+        }
+
+        /* The Glass Card */
+        .dt-glass-card {
+            position: relative;
+            z-index: 3;
+            /* The core Glassmorphism specs: */
+            background: rgba(255, 255, 255, 0.08); /* VERY transparent white */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.25); 
+            border-radius: 20px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+            
+            padding: 5rem 4rem;
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            
+            /* Animation hook */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: glassFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes glassFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dt-glass-category {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        .dt-glass-card h2 {
+            font-family: 'Cinzel', serif !important;
+            font-size: 3.5rem !important;
+            font-weight: 400 !important;
+            margin: 0 0 1.5rem !important;
+            line-height: 1.1 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff !important;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .dt-glass-card p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            font-weight: 300;
+            margin: 0 0 2.5rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .dt-glass-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .dt-glass-btn:hover {
+            background: #fff;
+            color: #0a0a0a;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 900px) {
+            .dt-glass-card h2 {
+                font-size: 2.8rem !important;
+            }
+            .dt-glass-card {
+                padding: 4rem 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dt-glassmorphism-block {
+                /* Extra snug for mobile screens */
+                padding: 2rem 1rem; 
+            }
+            .dt-glass-card h2 {
+                font-size: 2.2rem !important;
+            }
+            .dt-glass-card {
+                padding: 3rem 2rem;
+            }
+            .dt-glass-btn {
+                padding: 14px 30px;
+            }
+        }
+        </style>
+
+        <div class="dt-glassmorphism-block">
+            <!-- Image Background -->
+            <div class="dt-glass-bg"></div>
+            
+            <!-- Darkening Overlay for Contrast -->
+            <div class="dt-glass-overlay"></div>
+            
+            <!-- The Glass Card -->
+            <div class="dt-glass-card">
+                <div class="dt-glass-category">Wildlife Highlights</div>
+                <h2>A Legacy In The Wild</h2>
+                <p>Experience the untamed beauty of Africa through the lens of pure luxury. Witness nature's most intimate moments unfold right before your eyes.</p>
+                <a href="https://desert-tracks.com/namibia-safaris/" class="dt-glass-btn">START YOUR JOURNEY</a>
+            </div>
+        </div>
+        <!-- ============================================== -->
 </div>
     </div>
     
@@ -2262,5 +2981,152 @@ document.addEventListener("DOMContentLoaded", () => {
 <div id="lux-back-to-top" style="position: fixed; bottom: 10vh; right: 4vw; z-index: 99999; background: #1F4F4B; color: #fff; padding: 12px 24px; border-radius: 4px; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.35);" onmouseover="this.style.background='#163B38';" onmouseout="this.style.background='#1F4F4B';">
     Take Me Back To Top
 </div>
+<!-- ========================================== -->
+<!-- LUXURY ITINERARY ACCORDION ENGINE -->
+<!-- ========================================== -->
+<style data-no-optimize="1">
+.lux-day-block {
+    margin-bottom: 5px !important; 
+    border: none; 
+    border-radius: 0px;
+    background: transparent;
+}
+.lux-day-accordion-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #F8F8F6 0%, rgba(248,248,246,0) 100%);
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-bottom: none;
+}
+.lux-day-accordion-trigger:hover {
+    background: linear-gradient(to bottom, #F1F1EF 0%, rgba(241,241,239,0) 100%);
+}
+.lux-day-block.is-open .lux-day-accordion-trigger {
+    border-bottom: none;
+}
+.lux-day-acc-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    color: #123631;
+    font-weight: 500;
+}
+.lux-day-acc-icon {
+    font-size: 24px;
+    color: #1F4F4B;
+    font-weight: 300;
+}
+.lux-day-accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    background: transparent;
+}
+.lux-day-block.is-open .lux-day-accordion-body {
+    grid-template-rows: 1fr;
+}
+.lux-day-accordion-inner {
+    overflow: hidden;
+    padding-top: 1rem; 
+}
+/* Hide redundant location inside open accordion */
+.lux-day-accordion-inner .lux-day-location {
+    display: none !important;
+}
+</style>
+
+<script data-no-optimize="1">
+document.addEventListener("DOMContentLoaded", function() {
+    const dayBlocks = document.querySelectorAll('.lux-day-block');
+    if (!dayBlocks.length) return;
+    
+    dayBlocks.forEach((block, index) => {
+        // Find existing location text (e.g. Kalahari Desert)
+        const locNode = block.querySelector('.lux-day-location');
+        let locText = locNode ? locNode.innerText.split(' — ')[0].trim() : 'Destination';
+        
+        // Find existing lodge name
+        const lodgeNode = block.querySelector('.dt-film-title');
+        let lodgeText = lodgeNode ? lodgeNode.innerText.trim() : '';
+        
+        // Combine them beautifully with brackets
+        let finalTitleHtml = locText;
+        if (lodgeText) {
+            finalTitleHtml += ` <span style="font-size: 0.85em; opacity: 0.6; font-family: 'Open Sans', sans-serif; font-weight: 400;">(${lodgeText})</span>`;
+        }
+        
+        // Wrap everything currently inside block into the Grid inner-wrapper
+        const innerContent = document.createElement('div');
+        innerContent.className = 'lux-day-accordion-inner';
+        while (block.firstChild) {
+            innerContent.appendChild(block.firstChild);
+        }
+        
+        // Wrap the inner inside the Body Grid mechanism
+        const bodyContent = document.createElement('div');
+        bodyContent.className = 'lux-day-accordion-body';
+        bodyContent.appendChild(innerContent);
+        
+        // Create the elegant trigger bar
+        const trigger = document.createElement('div');
+        trigger.className = 'lux-day-accordion-trigger';
+        trigger.innerHTML = `
+            <div class="lux-day-acc-title">${finalTitleHtml}</div>
+            <div class="lux-day-acc-icon">+</div>
+        `;
+        
+        // Append trigger then body back into the block
+        block.appendChild(trigger);
+        block.appendChild(bodyContent);
+        
+        // Setup click logic
+        trigger.addEventListener('click', () => {
+            const isOpen = block.classList.contains('is-open');
+            
+            // Close all
+            document.querySelectorAll('.lux-day-block').forEach(b => {
+                b.classList.remove('is-open');
+                const i = b.querySelector('.lux-day-acc-icon');
+                if (i) i.innerText = '+';
+            });
+            
+            // Toggle
+            if (!isOpen) {
+                block.classList.add('is-open');
+                trigger.querySelector('.lux-day-acc-icon').innerText = '−';
+            }
+            
+            // SMART CAMERA TRACKER (ALWAYS RUNS ON EVERY CROSS CLICK)
+            const stickyWrap = document.querySelector('.lux-sticky-header');
+            // Calculate header height (typically ~120-150px)
+            const offset = stickyWrap ? stickyWrap.offsetHeight + 10 : 150;
+            block.style.scrollMarginTop = offset + 'px';
+            
+            // Stage 1: Instantly order the browser to chase the block before it flies away
+            setTimeout(() => {
+                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+            
+            // Stage 2: Mathematically lock it one final time once the CSS geometry firmly settles 
+            setTimeout(() => {
+                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 750);
+            
+            // IMPORTANT: Since DOM height changes, refresh ScrollTrigger so pinned left sidebar doesn't overlap
+            if (typeof ScrollTrigger !== 'undefined') {
+                setTimeout(() => { ScrollTrigger.refresh(); }, 750);
+            }
+        });
+        
+        // Keep the first one open by default
+        if (index === 0) {
+            block.classList.add('is-open');
+            trigger.querySelector('.lux-day-acc-icon').innerText = '−';
+        }
+    });
+});
+</script>
 </body>
 </html>

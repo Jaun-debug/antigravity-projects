@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Safari Route Map - V2</title>
+    
+    <!-- Leaflet CSS for Interactive maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style data-no-optimize="1">
+        /* Container styling to match Desert Tracks layout */
+        .dt-map-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 60px auto;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        #dt-safari-map {
+            width: 100%;
+            height: 550px;
+            background: #F5F5F3;
+        }
+
+        /* Waypoint Marker Styling */
+        .dt-map-waypoint {
+            background-color: white; /* Outlined appearance */
+            color: #1F4F4B; /* Dark Green text inside */
+            border-radius: 50%;
+            width: 28px !important;
+            height: 28px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Cinzel', serif;
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px solid #C9A24A; /* Gold outline */
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .dt-map-waypoint:hover {
+            transform: scale(1.15);
+            cursor: pointer;
+        }
+
+        /* Side Profile Car Marker */
+        .dt-car-marker {
+            background-color: #E1C680; /* Light Gold */
+            border-radius: 50%;
+            width: 36px !important;
+            height: 36px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            border: 2px solid white;
+            z-index: 1000 !important;
+        }
+
+        .dt-car-marker svg {
+            width: 20px;
+            height: 20px;
+            fill: #1F4F4B;
+            transition: transform 0.4s ease; /* For smooth flipping when changing direction */
+        }
+
+        /* Dynamic Status Banner (Shows current stop) */
+        .dt-status-banner {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 12px 24px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            z-index: 2000;
+            opacity: 0;
+            transform: translate(-50%, -10px); /* Center immediately above the car */
+            transition: left 0.1s linear, top 0.1s linear, opacity 0.4s ease, transform 0.4s ease;
+            pointer-events: none;
+            border-left: 4px solid #C9A24A; /* Gold */
+            white-space: nowrap;
+            /* Layout horizontally */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 15px;
+            min-width: max-content;
+        }
+
+        .dt-status-banner.active {
+            opacity: 1;
+            transform: translate(-50%, -40px); /* Lift up smoothly when active */
+        }
+
+        .dt-status-content-left {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .dt-status-eyebrow {
+            font-size: 10px;
+            letter-spacing: 2px;
+            color: #9B6A35; /* Bronze */
+            margin-bottom: 2px;
+            font-weight: 600;
+            font-family: 'Open Sans', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .dt-status-dest {
+            font-family: 'Cinzel', serif;
+            font-size: 20px;
+            color: #1F4F4B; /* Dark Green */
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .dt-status-lodge {
+            font-size: 13px;
+            color: #666;
+            margin: 0;
+            font-weight: 500;
+            font-family: 'Open Sans', sans-serif;
+            border-left: 1px solid #ddd; /* Subtle divider for horizontal layout */
+            padding-left: 15px;
+        }
+        
+        /* Customizing Leaflet Popups */
+        .leaflet-popup-content-wrapper {
+            border-radius: 6px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            padding: 2px;
+        }
+        .leaflet-popup-content {
+            font-family: 'Open Sans', sans-serif;
+            font-weight: 600;
+            color: #1F4F4B; /* Dark Green */
+            margin: 10px 14px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- MAP COMPONENT BLOCK -->
+<div class="dt-map-container">
+    <!-- Pop-up Banner for Waypoint Infos -->
+    <div class="dt-status-banner" id="statusBanner">
+        <div class="dt-status-content-left">
+            <div class="dt-status-eyebrow" id="bannerEyebrow">Arriving at</div>
+            <h3 class="dt-status-dest" id="bannerDest">Windhoek</h3>
+        </div>
+        <p class="dt-status-lodge" id="bannerLodge">Omaanda Lodge</p>
+    </div>
+
+    <!-- Map Canvas -->
+    <div id="dt-safari-map"></div>
+</div>
+
+<!-- LEAFLET JS SCRIPT -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script data-no-optimize="1">
+    document.addEventListener("DOMContentLoaded", function() {
+        
+        // 1. Initialize Map
+        const map = L.map('dt-safari-map', {
+            zoomControl: true,
+            scrollWheelZoom: false
+        });
+
+        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+            attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+            maxZoom: 18
+        }).addTo(map);
+
+        // 2. Define the Itinerary Stops with Logdes included
+        const waypoints = [
+            { id: '', name: 'Windhoek', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] },
+            { id: '1', name: 'Kalahari', lodge: 'Camelthorn Kalahari Lodge', nights: '2 NIGHTS', coords: [-24.2831, 17.9333] },
+            { id: '2', name: 'Fish River Canyon', lodge: 'Canyon Roadhouse', nights: '2 NIGHTS', coords: [-27.5333, 17.7000] },
+            { id: '3', name: 'Lüderitz', lodge: 'Alte Villa', nights: '2 NIGHTS', coords: [-26.6472, 16.1583] },
+            { id: '4', name: 'Namib', lodge: 'At Kronenhof Lodge', nights: '1 NIGHT', coords: [-25.4333, 16.4833] },
+            { id: '5', name: 'Sossusvlei', lodge: 'Desert Homestead Lodge', nights: '2 NIGHTS', coords: [-24.7167, 15.9000] },
+            { id: '6', name: 'Windhoek (Return)', lodge: 'Windhoek Luxury Suites', nights: '1 NIGHT', coords: [-22.5609, 17.0658] }
+        ];
+
+        let jumpToWaypoint = null; // Will point to route engine
+
+        // Place numbered markers
+        waypoints.forEach((wp, index) => {
+            if (!wp.id) return; // Hide the marker for the final return loop
+            const icon = L.divIcon({
+                className: 'dt-map-waypoint-wrap',
+                html: `<div class="dt-map-waypoint">${wp.id}</div>`,
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            });
+            const marker = L.marker(wp.coords, {icon: icon}).addTo(map);
+            marker.on('click', () => {
+                if (jumpToWaypoint) jumpToWaypoint(index);
+            });
+        });
+
+        // 3. Create the Side Profile Safari Car
+        // Using a 4x4 Land Cruiser-style SVG
+        const carIcon = L.divIcon({
+            className: 'dt-car-marker-wrap',
+            html: `<div class="dt-car-marker">
+                      <!-- Custom Front-Facing Jeep built for Desert Tracks -->
+                      <svg id="dt-car-svg" viewBox="0 0 100 100" fill="#1F4F4B">
+                          <!-- Top Roof / Windshield -->
+                          <path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#1F4F4B" stroke-width="5" />
+                          <!-- Main Body -->
+                          <path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#1F4F4B"/>
+                          <!-- Tires -->
+                          <rect x="8" y="55" width="10" height="25" rx="3" fill="#1F4F4B" />
+                          <rect x="82" y="55" width="10" height="25" rx="3" fill="#1F4F4B" />
+                          <!-- Headlights -->
+                          <circle cx="28" cy="58" r="6" fill="#E1C680" />
+                          <circle cx="72" cy="58" r="6" fill="#E1C680" />
+                          <!-- Grille -->
+                          <rect x="40" y="54" width="2" height="12" rx="1" fill="#E1C680" />
+                          <rect x="45" y="54" width="2" height="12" rx="1" fill="#E1C680" />
+                          <rect x="50" y="54" width="2" height="12" rx="1" fill="#E1C680" />
+                          <rect x="55" y="54" width="2" height="12" rx="1" fill="#E1C680" />
+                          <rect x="60" y="54" width="2" height="12" rx="1" fill="#E1C680" />
+                          <!-- Bumper -->
+                          <rect x="25" y="68" width="6" height="3" rx="1" fill="#E1C680" />
+                          <rect x="69" y="68" width="6" height="3" rx="1" fill="#E1C680" />
+                      </svg>
+                   </div>`,
+            iconSize: [36, 36],
+            iconAnchor: [18, 18]
+        });
+
+        const movingCar = L.marker(waypoints[0].coords, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
+
+        // 4. Fetch the literal physical Roads via OSRM to eliminate "flights"
+        async function fetchRealRoadsAndRun() {
+            const routeSegments = [];
+            let fullRouteCoords = [];
+
+            // We fetch the route leg-by-leg so we can stop the car exactly at each stop
+            for (let i = 0; i < waypoints.length - 1; i++) {
+                const wp1 = waypoints[i].coords;
+                const wp2 = waypoints[i+1].coords;
+                let legCoords = [];
+                
+                try {
+                    // This hits the open road network API to map the driving route
+                    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${wp1[1]},${wp1[0]};${wp2[1]},${wp2[0]}?overview=full&geometries=geojson`);
+                    const data = await res.json();
+                    
+                    if (data.routes && data.routes.length > 0) {
+                        legCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]); // Leaflet wants [lat, lng]
+                    } else {
+                        legCoords = [wp1, wp2]; // Fallback to straight line if API struggles
+                    }
+                } catch (e) {
+                    legCoords = [wp1, wp2];
+                }
+
+                routeSegments.push(legCoords);
+                fullRouteCoords.push(...legCoords);
+            }
+
+            // Draw the complete realistic road trip line
+            const routeLine = L.polyline(fullRouteCoords, {
+                color: '#1F4F4B', // Luxurious Dark Green Route Path to contrast the Seafoam
+                weight: 4,
+                opacity: 0.8,
+                dashArray: "1, 8", // Creates a cool organic road trail
+                lineJoin: 'round',
+                lineCap: 'round'
+            }).addTo(map);
+            
+            map.fitBounds(routeLine.getBounds(), { padding: [60, 60] });
+
+            // 5. Build our Stop-and-Go Animation Engine
+            const banner = document.getElementById('statusBanner');
+            const destEl = document.getElementById('bannerDest');
+            const lodgeEl = document.getElementById('bannerLodge');
+            const eyebrowEl = document.getElementById('bannerEyebrow');
+            let carSvg = null;
+
+            function showBanner(waypoint) {
+                // Dynamically anchor banner directly above the vehicle on the map
+                const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng());
+                banner.style.left = carLocationPixel.x + 'px';
+                banner.style.top = (carLocationPixel.y - 25) + 'px';
+
+                eyebrowEl.innerText = waypoint.nights ? waypoint.nights : "ARRIVING AT";
+                destEl.innerText = waypoint.name;
+                lodgeEl.innerText = waypoint.lodge ? waypoint.lodge : "";
+                
+                // Hide divider & lodge block if no lodge is listed for the waypoint
+                lodgeEl.style.display = waypoint.lodge ? 'block' : 'none';
+
+                banner.classList.add('active');
+            }
+
+            // Sync banner pos if user pans the map while banner is active
+            map.on('move', function() {
+                if (banner.classList.contains('active')) {
+                    const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng());
+                    banner.style.left = carLocationPixel.x + 'px';
+                    banner.style.top = (carLocationPixel.y - 25) + 'px';
+                }
+            });
+
+            function hideBanner() {
+                banner.classList.remove('active');
+            }
+
+            let currentLegIndex = 0;
+            let currentTimeoutId = null;
+            let animationId = null;
+
+            // Global interception method
+            jumpToWaypoint = (index) => {
+                if (animationId) cancelAnimationFrame(animationId);
+                if (currentTimeoutId) clearTimeout(currentTimeoutId);
+                hideBanner();
+                
+                if (index >= routeSegments.length) {
+                    currentLegIndex = 0; 
+                } else {
+                    currentLegIndex = index;
+                }
+                
+                movingCar.setLatLng(waypoints[currentLegIndex].coords);
+                
+                // Show banner immediately as if it just arrived!
+                showBanner(waypoints[currentLegIndex]);
+                
+                currentTimeoutId = setTimeout(() => {
+                    hideBanner();
+                    currentTimeoutId = setTimeout(playLeg, 400);
+                }, 1500);
+            };
+
+            function playLeg() {
+                // Get the car SVG exactly when needed in case DOM wasn't ready
+                if (!carSvg) carSvg = document.getElementById('dt-car-svg');
+
+                if (currentLegIndex >= routeSegments.length) {
+                    // Reached the end! Celebrate and restart after 5 sec
+                    showBanner(waypoints[waypoints.length - 1]);
+                    currentTimeoutId = setTimeout(() => {
+                        hideBanner();
+                        currentLegIndex = 0;
+                        movingCar.setLatLng(waypoints[0].coords); // teleport to start
+                        currentTimeoutId = setTimeout(playLeg, 1000); 
+                    }, 5000);
+                    return;
+                }
+
+                const legCoords = routeSegments[currentLegIndex];
+                const wpTarget = waypoints[currentLegIndex + 1];
+
+                // Front-facing jeep doesn't need flipping horizontally 
+                // as it stays symmetrical on the map.
+
+                // Calculate geography lengths to keep speed constant
+                const segmentLengths = [];
+                let totalMeters = 0;
+                for (let i = 0; i < legCoords.length - 1; i++) {
+                    const dist = map.distance(legCoords[i], legCoords[i+1]); // Meters!
+                    segmentLengths.push(dist);
+                    totalMeters += dist;
+                }
+
+                // Dynamic speed: longer trips take slightly longer, but cap it so it stays punchy
+                // Adjust divisor (12000) to speed up or slow down
+                const durationMs = Math.max(3000, Math.min(8000, totalMeters / 12000));
+                
+                let startTime = null;
+
+                function step(timestamp) {
+                    if (!startTime) startTime = timestamp;
+                    
+                    const progress = (timestamp - startTime) / durationMs;
+                    
+                    // Route complete
+                    if (progress >= 1.0) {
+                        movingCar.setLatLng(legCoords[legCoords.length - 1]);
+                        
+                        // Arrive at lodge! Show the pop-up banner
+                        showBanner(wpTarget);
+                        
+                        // Wait at the lodge for a shorter time (1.5s) before moving on
+                        currentTimeoutId = setTimeout(() => {
+                            hideBanner();
+                            currentLegIndex++;
+                            currentTimeoutId = setTimeout(playLeg, 400); // Tiny pause before wheels roll again
+                        }, 1500); 
+                        return;
+                    }
+
+                    // Compute exactly where the car is on the line right now
+                    const targetDist = progress * totalMeters;
+                    let currentDist = 0;
+                    for (let i = 0; i < segmentLengths.length; i++) {
+                        if (currentDist + segmentLengths[i] >= targetDist) {
+                            const segProg = segmentLengths[i] === 0 ? 1 : ((targetDist - currentDist) / segmentLengths[i]);
+                            const lat = legCoords[i][0] + (legCoords[i+1][0] - legCoords[i][0]) * segProg;
+                            const lng = legCoords[i][1] + (legCoords[i+1][1] - legCoords[i][1]) * segProg;
+                            movingCar.setLatLng([lat, lng]);
+                            break;
+                        }
+                        currentDist += segmentLengths[i];
+                    }
+                    animationId = requestAnimationFrame(step);
+                }
+                
+                animationId = requestAnimationFrame(step);
+            }
+
+            // Start Tour (starts at Day 1)
+            showBanner(waypoints[0]);
+            currentTimeoutId = setTimeout(() => {
+                hideBanner();
+                currentTimeoutId = setTimeout(playLeg, 500);
+            }, 1500); 
+
+        }
+
+        fetchRealRoadsAndRun();
+    });
+</script>
+
+</body>
+</html>

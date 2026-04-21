@@ -1986,6 +1986,182 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </div>
     </div>
+
+        <!-- ============================================== -->
+        <!-- LION CTA -->
+        <!-- ============================================== -->
+        <style data-no-optimize="1">
+        .dt-glassmorphism-block {
+            position: relative;
+            /* THE MARGIN CHANGE: this forces the block to perfectly stretch edge-to-edge, breaking out of the container */
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            
+            /* KILL THE WORDPRESS/NICEPAGE SPACE: This forcefully pulls the Seafoam footer UP to destroy the white gap */
+            margin-bottom: -50px !important;
+            
+            /* Increased height so it forcefully eats the white gap below it */
+            min-height: 650px;
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Open Sans', Arial, sans-serif;
+            padding: 6rem 1rem; /* Much bolder padding to stretch the background down */
+            box-sizing: border-box;
+            background: #0a0a0a;
+        }
+
+        /* Base Image Background */
+        .dt-glass-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large-1.jpeg');
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            transform: scale(1.05); /* Prevent edge gaps */
+        }
+
+        /* Subtle dark gradient overlay so the white text ALWAYS pops */
+        .dt-glass-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 2;
+        }
+
+        /* The Glass Card */
+        .dt-glass-card {
+            position: relative;
+            z-index: 3;
+            /* The core Glassmorphism specs: */
+            background: rgba(255, 255, 255, 0.08); /* VERY transparent white */
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px); 
+            border: 1px solid rgba(255, 255, 255, 0.25); 
+            border-radius: 20px;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.4);
+            
+            padding: 5rem 4rem;
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            color: #fff;
+            
+            /* Animation hook */
+            opacity: 0;
+            transform: translateY(20px);
+            animation: glassFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes glassFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dt-glass-category {
+            font-size: 0.85rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 400;
+        }
+
+        .dt-glass-card h2 {
+            font-family: 'Cinzel', serif !important;
+            font-size: 3.5rem !important;
+            font-weight: 400 !important;
+            margin: 0 0 1.5rem !important;
+            line-height: 1.1 !important;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #fff !important;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .dt-glass-card p {
+            font-size: 1.15rem;
+            line-height: 1.6;
+            font-weight: 300;
+            margin: 0 0 2.5rem;
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .dt-glass-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .dt-glass-btn:hover {
+            background: #fff;
+            color: #0a0a0a;
+            box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Responsiveness */
+        @media (max-width: 900px) {
+            .dt-glass-card h2 {
+                font-size: 2.8rem !important;
+            }
+            .dt-glass-card {
+                padding: 4rem 3rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .dt-glassmorphism-block {
+                /* Extra snug for mobile screens */
+                padding: 2rem 1rem; 
+            }
+            .dt-glass-card h2 {
+                font-size: 2.2rem !important;
+            }
+            .dt-glass-card {
+                padding: 3rem 2rem;
+            }
+            .dt-glass-btn {
+                padding: 14px 30px;
+            }
+        }
+        </style>
+
+        <div class="dt-glassmorphism-block">
+            <!-- Image Background -->
+            <div class="dt-glass-bg"></div>
+            
+            <!-- Darkening Overlay for Contrast -->
+            <div class="dt-glass-overlay"></div>
+            
+            <!-- The Glass Card -->
+            <div class="dt-glass-card">
+                <div class="dt-glass-category">Wildlife Highlights</div>
+                <h2>A Legacy In The Wild</h2>
+                <p>Experience the untamed beauty of Africa through the lens of pure luxury. Witness nature's most intimate moments unfold right before your eyes.</p>
+                <a href="https://desert-tracks.com/namibia-safaris/" class="dt-glass-btn">START YOUR JOURNEY</a>
+            </div>
+        </div>
+        <!-- ============================================== -->
     
 </div>
 
@@ -2262,5 +2438,152 @@ document.addEventListener("DOMContentLoaded", () => {
 <div id="lux-back-to-top" style="position: fixed; bottom: 10vh; right: 4vw; z-index: 99999; background: #1F4F4B; color: #fff; padding: 12px 24px; border-radius: 4px; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.35);" onmouseover="this.style.background='#163B38';" onmouseout="this.style.background='#1F4F4B';">
     Take Me Back To Top
 </div>
+<!-- ========================================== -->
+<!-- LUXURY ITINERARY ACCORDION ENGINE -->
+<!-- ========================================== -->
+<style data-no-optimize="1">
+.lux-day-block {
+    margin-bottom: 5px !important; 
+    border: none; 
+    border-radius: 0px;
+    background: transparent;
+}
+.lux-day-accordion-trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, #F8F8F6 0%, rgba(248,248,246,0) 100%);
+    padding: 20px 25px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    border-bottom: none;
+}
+.lux-day-accordion-trigger:hover {
+    background: linear-gradient(to bottom, #F1F1EF 0%, rgba(241,241,239,0) 100%);
+}
+.lux-day-block.is-open .lux-day-accordion-trigger {
+    border-bottom: none;
+}
+.lux-day-acc-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.15rem;
+    color: #123631;
+    font-weight: 500;
+}
+.lux-day-acc-icon {
+    font-size: 24px;
+    color: #1F4F4B;
+    font-weight: 300;
+}
+.lux-day-accordion-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    background: transparent;
+}
+.lux-day-block.is-open .lux-day-accordion-body {
+    grid-template-rows: 1fr;
+}
+.lux-day-accordion-inner {
+    overflow: hidden;
+    padding-top: 1rem; 
+}
+/* Hide redundant location inside open accordion */
+.lux-day-accordion-inner .lux-day-location {
+    display: none !important;
+}
+</style>
+
+<script data-no-optimize="1">
+document.addEventListener("DOMContentLoaded", function() {
+    const dayBlocks = document.querySelectorAll('.lux-day-block');
+    if (!dayBlocks.length) return;
+    
+    dayBlocks.forEach((block, index) => {
+        // Find existing location text (e.g. Kalahari Desert)
+        const locNode = block.querySelector('.lux-day-location');
+        let locText = locNode ? locNode.innerText.split(' — ')[0].trim() : 'Destination';
+        
+        // Find existing lodge name
+        const lodgeNode = block.querySelector('.dt-film-title');
+        let lodgeText = lodgeNode ? lodgeNode.innerText.trim() : '';
+        
+        // Combine them beautifully with brackets
+        let finalTitleHtml = locText;
+        if (lodgeText) {
+            finalTitleHtml += ` <span style="font-size: 0.85em; opacity: 0.6; font-family: 'Open Sans', sans-serif; font-weight: 400;">(${lodgeText})</span>`;
+        }
+        
+        // Wrap everything currently inside block into the Grid inner-wrapper
+        const innerContent = document.createElement('div');
+        innerContent.className = 'lux-day-accordion-inner';
+        while (block.firstChild) {
+            innerContent.appendChild(block.firstChild);
+        }
+        
+        // Wrap the inner inside the Body Grid mechanism
+        const bodyContent = document.createElement('div');
+        bodyContent.className = 'lux-day-accordion-body';
+        bodyContent.appendChild(innerContent);
+        
+        // Create the elegant trigger bar
+        const trigger = document.createElement('div');
+        trigger.className = 'lux-day-accordion-trigger';
+        trigger.innerHTML = `
+            <div class="lux-day-acc-title">${finalTitleHtml}</div>
+            <div class="lux-day-acc-icon">+</div>
+        `;
+        
+        // Append trigger then body back into the block
+        block.appendChild(trigger);
+        block.appendChild(bodyContent);
+        
+        // Setup click logic
+        trigger.addEventListener('click', () => {
+            const isOpen = block.classList.contains('is-open');
+            
+            // Close all
+            document.querySelectorAll('.lux-day-block').forEach(b => {
+                b.classList.remove('is-open');
+                const i = b.querySelector('.lux-day-acc-icon');
+                if (i) i.innerText = '+';
+            });
+            
+            // Toggle
+            if (!isOpen) {
+                block.classList.add('is-open');
+                trigger.querySelector('.lux-day-acc-icon').innerText = '−';
+            }
+            
+            // SMART CAMERA TRACKER (ALWAYS RUNS ON EVERY CROSS CLICK)
+            const stickyWrap = document.querySelector('.lux-sticky-header');
+            // Calculate header height (typically ~120-150px)
+            const offset = stickyWrap ? stickyWrap.offsetHeight + 10 : 150;
+            block.style.scrollMarginTop = offset + 'px';
+            
+            // Stage 1: Instantly order the browser to chase the block before it flies away
+            setTimeout(() => {
+                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 50);
+            
+            // Stage 2: Mathematically lock it one final time once the CSS geometry firmly settles 
+            setTimeout(() => {
+                block.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 750);
+            
+            // IMPORTANT: Since DOM height changes, refresh ScrollTrigger so pinned left sidebar doesn't overlap
+            if (typeof ScrollTrigger !== 'undefined') {
+                setTimeout(() => { ScrollTrigger.refresh(); }, 750);
+            }
+        });
+        
+        // Keep the first one open by default
+        if (index === 0) {
+            block.classList.add('is-open');
+            trigger.querySelector('.lux-day-acc-icon').innerText = '−';
+        }
+    });
+});
+</script>
 </body>
 </html>
