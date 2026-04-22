@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ondili Rates 2026-2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style data-no-optimize="1">
+        :root {
+            --primary-bg: #f9f6f0; /* Warm Sand */
+            --card-bg: #FFFFFF;
+            --card-light: #FAFAFA;
+            --text-main: #2b2520;
+            --text-muted: #6b5c51;
+            --brand-accent: #c85a17; /* Terracotta / Burnt Orange */
+            --brand-gradient: linear-gradient(135deg, #e37b3b, #c85a17, #9b410d);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-border: 1px solid rgba(200, 90, 23, 0.15);
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body { margin: 0; padding: 0; background-color: var(--primary-bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
+        .wrapper { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+        
+        .header { text-align: center; margin-bottom: 60px; animation: fadeInDown 1s ease forwards; }
+        .header h1 { font-size: 3.5rem; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
+        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+
+        /* GRID SYSTEM */
+        .property-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; }
+        .property-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: var(--glass-border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); cursor: pointer; transition: var(--transition); position: relative; }
+        .property-card:hover { transform: translateY(-8px); border-color: var(--brand-accent); box-shadow: 0 15px 35px rgba(200, 90, 23, 0.1); }
+        .card-image { height: 240px; background-size: cover; background-position: center; position: relative; transition: var(--transition); }
+        .property-card:hover .card-image { transform: scale(1.05); }
+        
+        .card-content { padding: 30px 20px; position: relative; z-index: 2; background: var(--card-bg); }
+        .card-title { font-size: 1.6rem; color: var(--text-main); margin-bottom: 10px; letter-spacing: 1px; }
+        .card-location { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 15px; display: block; }
+        .card-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--brand-accent); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; margin-top: 15px; transition: var(--transition); }
+        .property-card:hover .card-btn { gap: 15px; color: #9b410d; }
+
+        /* DETAIL VIEW */
+        .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 100px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: var(--transition); margin-bottom: 40px; background: transparent; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600;}
+        .back-btn:hover { color: #fff; background: var(--brand-gradient); border-color: transparent; }
+
+        .detail-header { margin-bottom: 40px; display: flex; flex-direction: column; gap: 15px; }
+        .detail-title { font-size: 3.5rem; color: var(--brand-accent); line-height: 1.1; }
+        .intro-text { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 900px; }
+
+        /* MULTI-IMAGE GALLERY */
+        .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
+        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* TABS */
+        .tabs { display: flex; gap: 15px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 10px; }
+        .tab-btn { background: var(--card-bg); border: var(--glass-border); color: var(--text-muted); padding: 15px 30px; border-radius: 8px; cursor: pointer; font-family: var(--font-head); font-size: 1.1rem; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
+        .tab-btn:hover { border-color: var(--brand-accent); color: var(--text-main); }
+        .tab-btn.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        /* CONTENT BLOCKS */
+        .content-block { background: var(--card-bg); border: var(--glass-border); border-radius: 12px; padding: 40px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+        .content-block h3 { color: var(--brand-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(200, 90, 23, 0.3); padding-bottom: 15px; display: inline-block; text-transform: uppercase; }
+        .sub-block { margin-top: 30px; }
+        .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;}
+
+        /* TABLES */
+        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 8px; margin-bottom: 30px;}
+        table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-light); margin-bottom: 0px; }
+        th { font-family: var(--font-head); background: rgba(200, 90, 23, 0.08); color: var(--text-main); font-size: 0.85rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(200, 90, 23, 0.15); }
+        td { padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(200, 90, 23, 0.03); color: var(--text-main); }
+        td strong { color: var(--text-main); font-weight: 600; }
+        
+        /* LISTS & TEXT */
+        .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+        .text-list li { position: relative; padding-left: 25px; margin-bottom: 15px; }
+        .text-list li::before { content: "✦"; color: var(--brand-accent); position: absolute; left: 0; top: 2px; font-size: 1rem; }
+        .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        @media (max-width: 900px) {
+            .lodge-gallery { grid-template-columns: 1fr; }
+            .gallery-img { height: 220px; }
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .detail-title { font-size: 2rem; }
+            th, td { padding: 12px; font-size: 0.85rem; }
+            .content-block { padding: 25px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <div id="main-view">
+            <div class="header">
+                <h1>Ondili Lodges</h1>
+                <p>STO 20 Rates Season 2026/2027</p>
+            </div>
+
+            <div class="property-grid">
+                <div class="property-card" onclick="openProperty('timelen')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Windhoek</span>
+                        <h2 class="card-title">Ti Melen</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('teufelskrallen')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Kalahari</span>
+                        <h2 class="card-title">Teufelskrallen Lodge</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('kalaharired')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Kalahari</span>
+                        <h2 class="card-title">Kalahari Red Dunes Lodge</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('deserthomestead')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Sossusvlei | Namib</span>
+                        <h2 class="card-title">Desert Homestead Lodge</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('namiboutpost')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Sossusvlei | Namib</span>
+                        <h2 class="card-title">Namib Outpost</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('etoshaoberland')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Etosha</span>
+                        <h2 class="card-title">Etosha Oberland Lodge</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('hohenstein')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Erongo</span>
+                        <h2 class="card-title">Hohenstein Lodge</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('twyfelfontein')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <span class="card-location">Damaraland</span>
+                        <h2 class="card-title">Twyfelfontein Adventure Camp</h2>
+                        <span class="card-btn">View Rates ➔</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="detail-view" class="detail-view">
+            <button class="back-btn" onclick="closeProperty()">← Back to Directory</button>
+            
+            <div class="detail-header">
+                <h1 class="detail-title" id="d-title">Property Name</h1>
+                <p class="intro-text" id="d-intro"></p>
+                <div style="color: var(--brand-accent); margin-top: 5px; font-weight: 600;" id="d-location"></div>
+            </div>
+
+            <!-- DYNAMIC 3-IMAGE GALLERY -->
+            <div class="lodge-gallery" id="d-gallery">
+                <!-- Images Injected Here via JS -->
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+                <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
+                <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
+            </div>
+
+            <div id="tab-1" class="tab-content active"></div>
+            <div id="tab-2" class="tab-content"></div>
+            <div id="tab-3" class="tab-content"></div>
+
+        </div>
+    </div>
+
+    <!-- DATA & LOGIC -->
+    <script data-no-optimize="1">
+        const DB = {
+            'timelen': {
+                name: 'Ti Melen',
+                location: 'Windhoek',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/29059/_clb4783.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/29059/1750165818999_Midgard_Museum_01_RGB_v1_web.jpg?fmt=jpg'
+                ],
+                intro: 'Ti Melen Boutique Guesthouse offers a tranquil retreat in Windhoek, providing comfortable luxury before or after your Namibian safari adventure.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>STO Rates (01.03.2026 - 28.02.2027)</h3>
+                        <p class="raw-text">Rates are per person per night and include BED and BREAKFAST, 15% VAT and 2% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>NET RATE</th><th>15% VAT</th><th>2% BED LEVY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Room - per person sharing</strong></td><td>1162.39</td><td>174.36</td><td>23.25</td><td>1360.00</td></tr>
+                                    <tr><td><strong>Room - Single use</strong></td><td>1504.27</td><td>225.64</td><td>30.09</td><td>1760.00</td></tr>
+                                    <tr><td><strong>0 - 3 years sharing with full paying adults*</strong></td><td>-</td><td>-</td><td>-</td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing with 1-2 full paying adults*</strong></td><td>820.51</td><td>123.08</td><td>16.41</td><td>960.00</td></tr>
+                                    <tr><td><strong>13 and older sharing with 2 full paying adults*</strong></td><td>1162.39</td><td>174.36</td><td>23.25</td><td>1360.00</td></tr>
+                                    <tr><td><strong>Tourguide (Guide Room)</strong></td><td>846.16</td><td>126.92</td><td>16.92</td><td>990.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text">*Family Room: A max. of 2 children 12 years or younger or 2 adults can share with 2 adults. Double Room: A max. of 1 child 12 years or younger can share with 2 adults.</p>
+                    </div>
+                `,
+                tab2: `<div class="content-block"><h3>ACTIVITIES</h3><p class="raw-text">Please contact reservations for Windhoek city tours and transfer rates.</p></div>`,
+                tab3: `
+                    <div class="content-block">
+                        <h3>POLICIES</h3>
+                        <ul class="text-list">
+                            <li>All reservations should be confirmed in writing. Provisional reservations will be held for 14 days.</li>
+                            <li>Provisional bookings arriving within 28 days will only be held for 72 hours.</li>
+                            <li>FIT Cancellation: 29 days before 10%, 28 days before 25%, 21 days before 50%, 14 days before 75%, 7 days before 90%, No show 100%.</li>
+                            <li>Check-in at 14h00 and check-out at 10h00.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'teufelskrallen': {
+                name: 'Teufelskrallen Lodge',
+                location: 'Kalahari',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10424/main_building_by_night.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-sunset.jpg?fmt=jpg'
+                ],
+                intro: 'Set upon the sweeping red dunes of the Kalahari, Teufelskrallen Lodge is the perfect introduction to the vast landscapes of Namibia.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates are per person per night and include DINNER, BED and BREAKFAST, 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Tent - per person sharing</strong></td><td>2200.00</td></tr>
+                                    <tr><td><strong>Standard Tent - Single use</strong></td><td>2860.00</td></tr>
+                                    <tr><td><strong>0 - 3 years sharing with full paying adults*</strong></td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing with 1-2 full paying adults*</strong></td><td>1100.00</td></tr>
+                                    <tr><td><strong>13 years and older sharing with 2 full paying adults*</strong></td><td>2200.00</td></tr>
+                                    <tr><td><strong>Tourguide (Guide Room)</strong></td><td>990.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Tent - per person sharing</strong></td><td>1680.00</td></tr>
+                                    <tr><td><strong>Standard Tent - Single use</strong></td><td>2184.00</td></tr>
+                                    <tr><td><strong>0 - 3 years sharing with full paying adults*</strong></td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing with 1-2 full paying adults*</strong></td><td>840.00</td></tr>
+                                    <tr><td><strong>13 years and older sharing with 2 full paying adults*</strong></td><td>1680.00</td></tr>
+                                    <tr><td><strong>Tourguide (Guide Room)</strong></td><td>990.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Morning Nature Drive (approx. 2 hours)</td><td>650.00</td></tr>
+                                    <tr><td>Sundowner Drive (3-4 hours) incl. drinks</td><td>750.00</td></tr>
+                                    <tr><td>Guided Walk (approx. 2 hours)</td><td>650.00</td></tr>
+                                    <tr><td>Lunch (incl. Dessert)</td><td>290.00</td></tr>
+                                    <tr><td>Airstrip Ondili - Farm Gurus</td><td>Free</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            },
+            'kalaharired': {
+                name: 'Kalahari Red Dunes Lodge',
+                location: 'Kalahari',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10477/bath.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10477/room_overview1.jpg?fmt=jpg'
+                ],
+                intro: 'Kalahari Red Dunes Lodge provides a luxury stay in the heart of the Kalahari, featuring the famous Trans Kalahari Walk.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates include FULL BOARD PLUS (accommodation, meals and local drinks), 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Suite - per person sharing</strong></td><td>4800.00</td></tr>
+                                    <tr><td><strong>Suite - Single use</strong></td><td>6240.00</td></tr>
+                                    <tr><td><strong>Superior Suite - per person sharing</strong></td><td>6400.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in suite</strong></td><td>2400.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in superior suite</strong></td><td>3200.00</td></tr>
+                                    <tr><td><strong>13+ years sharing in superior suite</strong></td><td>6400.00</td></tr>
+                                    <tr><td><strong>Tourguide (Meals only)</strong></td><td>1190.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Suite - per person sharing</strong></td><td>3200.00</td></tr>
+                                    <tr><td><strong>Suite - Single use</strong></td><td>4160.00</td></tr>
+                                    <tr><td><strong>Superior Suite - per person sharing</strong></td><td>4800.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in suite</strong></td><td>1600.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in superior suite</strong></td><td>2400.00</td></tr>
+                                    <tr><td><strong>13+ years sharing in superior suite</strong></td><td>4800.00</td></tr>
+                                    <tr><td><strong>Tourguide (Meals only)</strong></td><td>1190.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>TRANS KALAHARI WALK</h3>
+                        <p class="raw-text">Multi-day walking packages.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>PACKAGE</th><th>HIGH SEASON</th><th>LOW SEASON</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>2 Night Package pp sharing (suite)</strong></td><td>10400.00</td><td>8800.00</td></tr>
+                                    <tr><td><strong>2 Night Package single use (suite)</strong></td><td>13520.00</td><td>11440.00</td></tr>
+                                    <tr><td><strong>3 Night Package pp sharing (suite)*</strong></td><td>15200.00</td><td>12000.00</td></tr>
+                                    <tr><td><strong>3 Night Package single use (suite)*</strong></td><td>19760.00</td><td>15600.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <ul class="text-list">
+                            <li>Morning Nature Drive (approx. 2 hours): N$ 650.00</li>
+                            <li>Sundowner Drive (3-4 hours) incl. drinks: N$ 750.00</li>
+                            <li>Guided Walk (approx. 2 hours): N$ 650.00</li>
+                            <li>Airstrip Ondili - Farm Gurus: Free</li>
+                        </ul>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            },
+            'deserthomestead': {
+                name: 'Desert Homestead Lodge',
+                location: 'Sossusvlei | Namib',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/1747/luxury_double_room21.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/1747/standard_room_bathroom.jpg?fmt=jpg'
+                ],
+                intro: 'Famous for its guided horse safaris and beautiful desert landscape, Desert Homestead Lodge provides an authentic, rustic-luxury Sossusvlei experience.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates include DINNER, BED and BREAKFAST, 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Chalet - per person sharing</strong></td><td>2640.00</td></tr>
+                                    <tr><td><strong>Standard Chalet - Single use</strong></td><td>3440.00</td></tr>
+                                    <tr><td><strong>0 - 3 years</strong></td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing</strong></td><td>1320.00</td></tr>
+                                    <tr><td><strong>13+ years sharing</strong></td><td>2640.00</td></tr>
+                                    <tr><td><strong>Tourguide (Guide Room)</strong></td><td>990.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Chalet - per person sharing</strong></td><td>2040.00</td></tr>
+                                    <tr><td><strong>Standard Chalet - Single use</strong></td><td>2552.00</td></tr>
+                                    <tr><td><strong>0 - 3 years</strong></td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing</strong></td><td>1020.00</td></tr>
+                                    <tr><td><strong>13+ years sharing</strong></td><td>2040.00</td></tr>
+                                    <tr><td><strong>Tourguide (Guide Room)</strong></td><td>990.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Sossusvlei Excursion</td><td>1950.00</td></tr>
+                                    <tr><td>Sundowner Drive</td><td>750.00</td></tr>
+                                    <tr><td>Morning Ride (1 hour)</td><td>500.00</td></tr>
+                                    <tr><td>Sundowner Ride</td><td>750.00</td></tr>
+                                    <tr><td>Namib Night - Horse Ride (Sleep out ride)</td><td>4590.00</td></tr>
+                                    <tr><td>Lunch (incl. Dessert)</td><td>290.00</td></tr>
+                                    <tr><td>Airstrip Ondili - Witwater</td><td>Free</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            },
+            'namiboutpost': {
+                name: 'Namib Outpost',
+                location: 'Sossusvlei | Namib',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10525/nc_mokuti_76_v1_2000px.jpg?fmt=jpg'
+                ],
+                intro: 'Elevated luxury in the Namib Desert, offering panoramic views, exceptional privacy, and easy access to the Sossusvlei dunes.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates include FULL BOARD PLUS (accommodation, meals and local drinks), 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Suite - per person sharing</strong></td><td>6720.00</td></tr>
+                                    <tr><td><strong>Suite - Single use</strong></td><td>8760.00</td></tr>
+                                    <tr><td><strong>Superior Suite - per person sharing</strong></td><td>10080.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in Suite</strong></td><td>3360.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in Superior Suite</strong></td><td>5040.00</td></tr>
+                                    <tr><td><strong>13+ years sharing in Suite</strong></td><td>6720.00</td></tr>
+                                    <tr><td><strong>Tourguide (Meals only)</strong></td><td>1190.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Suite - per person sharing</strong></td><td>5520.00</td></tr>
+                                    <tr><td><strong>Suite - Single use</strong></td><td>7200.00</td></tr>
+                                    <tr><td><strong>Superior Suite - per person sharing</strong></td><td>8400.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in Suite</strong></td><td>2760.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in Superior Suite</strong></td><td>4200.00</td></tr>
+                                    <tr><td><strong>13+ years sharing in Suite</strong></td><td>5520.00</td></tr>
+                                    <tr><td><strong>Tourguide (Meals only)</strong></td><td>1190.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Soussusvlei Excursion</td><td>2340.00</td></tr>
+                                    <tr><td>Sundowner Drive</td><td>900.00</td></tr>
+                                    <tr><td>Morning Ride (1 hour)</td><td>600.00</td></tr>
+                                    <tr><td>Sundowner Ride</td><td>900.00</td></tr>
+                                    <tr><td>Namib Night - Horse Ride (Sleep out ride)</td><td>5500.00</td></tr>
+                                    <tr><td>Airstrip Ondili (Witwater)</td><td>Free</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            },
+            'etoshaoberland': {
+                name: 'Etosha Oberland Lodge',
+                location: 'Etosha',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/44110/1753868022963chobebuilding09rgbv1web.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/44110/1753867882906chobedeck03rgbv1web.jpg?fmt=jpg'
+                ],
+                intro: 'Bordering Etosha National Park, Etosha Oberland offers spectacular wildlife viewing, luxurious private chalets, and exceptional service.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates include FULL BOARD PLUS (accommodation, meals and local drinks), 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Suite - per person sharing</strong></td><td>6720.00</td></tr>
+                                    <tr><td><strong>Suite - Single use</strong></td><td>8720.00</td></tr>
+                                    <tr><td><strong>0 - 3 years</strong></td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing</strong></td><td>3360.00</td></tr>
+                                    <tr><td><strong>13+ years sharing</strong></td><td>6720.00</td></tr>
+                                    <tr><td><strong>Tourguide (Meals only)</strong></td><td>1190.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Suite - per person sharing</strong></td><td>5480.00</td></tr>
+                                    <tr><td><strong>Suite - Single use</strong></td><td>7120.00</td></tr>
+                                    <tr><td><strong>0 - 3 years</strong></td><td>Free</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing</strong></td><td>2740.00</td></tr>
+                                    <tr><td><strong>13+ years sharing</strong></td><td>5480.00</td></tr>
+                                    <tr><td><strong>Tourguide (Meals only)</strong></td><td>1190.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Etosha Game Drive (7-8h) incl. Drinks and lunch packs</td><td>1990.00</td></tr>
+                                    <tr><td>Guided Walk</td><td>450.00</td></tr>
+                                    <tr><td>Airstrip Ondili</td><td>Free</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            },
+            'hohenstein': {
+                name: 'Hohenstein Lodge',
+                location: 'Erongo',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10424/main_building_by_night.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-sunset.jpg?fmt=jpg'
+                ],
+                intro: 'Nestled at the foot of the highest peak in the Erongo Mountains, Hohenstein Lodge is a haven for nature lovers and geology enthusiasts.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates include DINNER, BED and BREAKFAST, 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Room - per person sharing</strong></td><td>2320.00</td></tr>
+                                    <tr><td><strong>Room - Single use</strong></td><td>3040.00</td></tr>
+                                    <tr><td><strong>Chalet - per person sharing</strong></td><td>4000.00</td></tr>
+                                    <tr><td><strong>Chalet - Single use</strong></td><td>5600.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in room</strong></td><td>1160.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in chalet</strong></td><td>2000.00</td></tr>
+                                    <tr><td><strong>13+ years sharing in chalet</strong></td><td>4000.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Room - per person sharing</strong></td><td>1840.00</td></tr>
+                                    <tr><td><strong>Room - Single use</strong></td><td>2400.00</td></tr>
+                                    <tr><td><strong>Chalet - per person sharing</strong></td><td>3200.00</td></tr>
+                                    <tr><td><strong>Chalet - Single use</strong></td><td>4400.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in room</strong></td><td>920.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing in chalet</strong></td><td>1600.00</td></tr>
+                                    <tr><td><strong>13+ years sharing in chalet</strong></td><td>3200.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Morning Drive (45-60 min)</td><td>500.00</td></tr>
+                                    <tr><td>Sundowner Drive (ca. 2 hours) incl. drinks</td><td>600.00</td></tr>
+                                    <tr><td>Nature Excursion (3-4 hours)</td><td>800.00</td></tr>
+                                    <tr><td>Guided Walk (60-90 min)</td><td>350.00</td></tr>
+                                    <tr><td>Rockpainting tour with sundowner (ca. 3 hours)</td><td>750.00</td></tr>
+                                    <tr><td>Lunch incl. Dessert</td><td>290.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            },
+            'twyfelfontein': {
+                name: 'Twyfelfontein Adventure Camp',
+                location: 'Damaraland',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10477/bath.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10477/room_overview1.jpg?fmt=jpg'
+                ],
+                intro: 'Situated in the rugged beauty of Damaraland, this adventure camp offers the perfect base for exploring the famous Twyfelfontein rock engravings.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>HIGH SEASON (01.03.2026 - 30.11.2026)</h3>
+                        <p class="raw-text">Rates include DINNER, BED and BREAKFAST, 15% VAT and 1% BED LEVY.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Tent - per person sharing</strong></td><td>2080.00</td></tr>
+                                    <tr><td><strong>Standard Tent - Single use</strong></td><td>2720.00</td></tr>
+                                    <tr><td><strong>Premium Tent - per person sharing</strong></td><td>3360.00</td></tr>
+                                    <tr><td><strong>Premium Tent - Single use</strong></td><td>4368.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing (Standard)</strong></td><td>1040.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing (Premium)</strong></td><td>1680.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <br>
+                        <h3>LOW SEASON (01.12.2026 - 28.02.2027)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Tent - per person sharing</strong></td><td>1800.00</td></tr>
+                                    <tr><td><strong>Standard Tent - Single use</strong></td><td>2360.00</td></tr>
+                                    <tr><td><strong>Premium Tent - per person sharing</strong></td><td>2640.00</td></tr>
+                                    <tr><td><strong>Premium Tent - Single use</strong></td><td>3440.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing (Standard)</strong></td><td>900.00</td></tr>
+                                    <tr><td><strong>4 - 12 years sharing (Premium)</strong></td><td>1320.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>EXTRAS & ACTIVITIES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>GROSS RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Huab River Scenic Drive incl. Light Lunch</td><td>1200.00</td></tr>
+                                    <tr><td>Lunch Rate incl. Dessert</td><td>290.00</td></tr>
+                                    <tr><td>Airstrip Twyfelfontein Country Lodge</td><td>Free</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `<div class="content-block"><h3>POLICIES</h3><p class="raw-text">Standard FIT cancellation policies apply. Check-in at 14h00 and check-out at 10h00.</p></div>`
+            }
+        };
+
+        function openProperty(id) {
+            const data = DB[id];
+            if(!data) return;
+
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            window.scrollTo(0,0);
+
+            document.getElementById('d-title').innerText = data.name;
+            document.getElementById('d-intro').innerText = data.intro;
+            document.getElementById('d-location').innerText = data.location;
+
+            // Load Gallery
+            const gallery = document.getElementById('d-gallery');
+            gallery.innerHTML = '';
+            data.images.forEach(img => {
+                gallery.innerHTML += '<img src="'+img+'" class="gallery-img" />';
+            });
+
+            // Load Tabs
+            document.getElementById('tab-1').innerHTML = data.tab1;
+            document.getElementById('tab-2').innerHTML = data.tab2;
+            document.getElementById('tab-3').innerHTML = data.tab3;
+
+            switchTab(1);
+        }
+
+        function closeProperty() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('main-view').style.display = 'block';
+            window.scrollTo(0,0);
+        }
+
+        function switchTab(num) {
+            for(let i=1; i<=3; i++) {
+                document.getElementById('tab-btn-'+i).classList.remove('active');
+                document.getElementById('tab-'+i).classList.remove('active');
+            }
+            document.getElementById('tab-btn-'+num).classList.add('active');
+            document.getElementById('tab-'+num).classList.add('active');
+        }
+    </script>
+</body>
+</html>
