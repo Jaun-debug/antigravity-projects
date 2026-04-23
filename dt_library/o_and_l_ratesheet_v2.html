@@ -163,6 +163,24 @@
             .tab-content { display: block !important; opacity: 1 !important; page-break-inside: avoid; }
         }
 
+        /* HTML2CANVAS FIXES */
+        body.pdf-mode * {
+            animation: none !important;
+            transition: none !important;
+        }
+        body.pdf-mode .property-grid, body.pdf-mode .detail-view, body.pdf-mode .header {
+            opacity: 1 !important;
+        }
+        body.pdf-mode .header h1 {
+            background: none !important;
+            -webkit-background-clip: initial !important;
+            -webkit-text-fill-color: initial !important;
+            color: var(--gold-accent) !important;
+        }
+        body.pdf-mode .share-toolbar, body.pdf-mode .back-btn {
+            display: none !important;
+        }
+
         @media (max-width: 900px) {
             .lodge-gallery { grid-template-columns: 1fr; }
             .gallery-img { height: 220px; }
@@ -1003,12 +1021,15 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
 
             showToast("Generating PDF...");
             
+            document.body.classList.add('pdf-mode');
+
             // If in detail view, temporarily show all tabs so everything is printed
             if (!isMainView) {
                 document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'block');
             }
             
             html2pdf().set(opt).from(element).save().then(() => {
+                document.body.classList.remove('pdf-mode');
                 // Restore tabs
                 if (!isMainView) {
                     document.querySelectorAll('.tab-content').forEach(c => c.style.display = '');
