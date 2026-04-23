@@ -327,6 +327,17 @@
 
             <div class="sidebar-content">
                 
+                <!-- Preset Profile -->
+                <div class="form-section" style="background: var(--sand); margin: -24px -24px 24px -24px; padding: 24px; border-bottom: 2px solid var(--gold);">
+                    <h3 class="form-title" style="margin-bottom: 12px;"><i class="ph-fill ph-globe"></i> Invoice Type</h3>
+                    <div class="input-group" style="margin-bottom:0;">
+                        <select v-model="activeProfile" @change="switchProfile" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid var(--border); font-family: var(--font-main); font-weight: 600; font-size: 0.95rem; color: var(--dark); background: #fff; cursor: pointer; outline: none;">
+                            <option value="nam">Desert Tracks Inv. NAM</option>
+                            <option value="sa">Desert Tracks Inv. SA</option>
+                        </select>
+                    </div>
+                </div>
+                
                 <!-- Invoice Meta -->
                 <div class="form-section">
                     <h3 class="form-title"><i class="ph-fill ph-file-text"></i> Invoice Details</h3>
@@ -549,12 +560,32 @@
 
         createApp({
             setup() {
+                // State for active profile
+                const activeProfile = ref('nam');
+
+                const profiles = {
+                    nam: {
+                        currency: 'N$',
+                        bankDetails: 'Bank: First National Bank\nAccount Name: Desert Tracks\nAccount No: 1234567890\nBranch Code: 281-174\nSWIFT/BIC: FIRNNANX'
+                    },
+                    sa: {
+                        currency: 'ZAR',
+                        bankDetails: 'Bank: Standard Bank SA\nAccount Name: Desert Tracks SA\nAccount No: [Insert SA Account No]\nBranch Code: [Insert SA Branch]\nSWIFT/BIC: [Insert SA SWIFT]'
+                    }
+                };
+
+                const switchProfile = () => {
+                    const p = profiles[activeProfile.value];
+                    invoice.value.currency = p.currency;
+                    bankDetails.value = p.bankDetails;
+                };
+
                 // Initial State
                 const invoice = ref({
                     number: 'INV-2026-001',
                     date: new Date().toISOString().split('T')[0],
                     dueDate: new Date(Date.now() + 14*86400000).toISOString().split('T')[0],
-                    currency: 'N$'
+                    currency: profiles.nam.currency
                 });
 
                 const company = ref({
@@ -577,7 +608,7 @@
                 const discount = ref(0);
 
                 const notes = ref('Thank you for choosing Desert Tracks.\nPlease quote the invoice number as the payment reference.');
-                const bankDetails = ref('Bank: First National Bank\nAccount Name: Desert Tracks\nAccount No: 1234567890\nBranch Code: 281-174\nSWIFT/BIC: FIRNNANX');
+                const bankDetails = ref(profiles.nam.bankDetails);
 
                 // Computed Properties
                 const subtotal = computed(() => {
@@ -617,6 +648,7 @@
                 };
 
                 return {
+                    activeProfile, switchProfile,
                     invoice, company, client, items, tax, discount, notes, bankDetails,
                     subtotal, taxAmount, grandTotal,
                     addItem, removeItem, formatMoney, formatDate, printInvoice
