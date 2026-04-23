@@ -584,7 +584,7 @@
 
                 const taxAmount = computed(() => {
                     const taxable = subtotal.value - discount.value;
-                    return taxable > 0 ? (taxable * (tax.rate.value / 100)) : 0;
+                    return taxable > 0 ? (taxable * (tax.value.rate / 100)) : 0;
                 });
 
                 const grandTotal = computed(() => {
