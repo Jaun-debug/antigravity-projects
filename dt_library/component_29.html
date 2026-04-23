@@ -465,6 +465,50 @@
             width: 24px;
             height: 24px;
             animation: flashOrangeRight 1.5s infinite ease-in-out;
+        /* ==================================================
+           FULL WIDTH EXPERIMENT OVERRIDES
+           (Delete this block to revert back to 50/50 split)
+        ================================================== */
+        @media (min-width: 1024px) {
+            .lux-left { display: none !important; }
+            .lux-right { width: 100vw !important; padding: 6rem 0 !important; }
+            
+            /* Center the text elements */
+            .lux-welcome-top, 
+            .lux-day-block-header,
+            .lux-features-container,
+            .lux-trust-block {
+                max-width: 1200px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                padding-left: 3rem !important;
+                padding-right: 3rem !important;
+            }
+
+            .lux-intro, .lux-day-desc {
+                max-width: 800px !important;
+            }
+
+            /* Adjust film rolls for full width so they don't look weirdly cut */
+            .dt-film-section, .lux-carousel-wrapper {
+                margin: 0 auto !important;
+                width: calc(100% - 6rem) !important;
+                max-width: 1600px !important;
+                border-radius: 20px !important;
+            }
+            
+            .lux-day-block {
+                max-width: 1600px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+            }
+            .lux-day-number-row, .lux-day-location-wrapper, .lux-day-title, .lux-day-desc {
+                max-width: 1200px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                padding-left: 3rem !important;
+                padding-right: 3rem !important;
+            }
         }
     </style>
     <!-- Premium Smooth Scroll Library (Lenis) for luxurious itinerary scrolling -->
