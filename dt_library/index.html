@@ -425,9 +425,9 @@
             container.innerHTML = '';
             
             // Helper to generate a folder
-            const buildFolder = (title) => {
+            const buildFolder = (title, defaultOpen = false) => {
                 const details = document.createElement('details');
-                details.open = openFolders[title] || false;
+                details.open = openFolders.hasOwnProperty(title) ? openFolders[title] : defaultOpen;
                 details.addEventListener('toggle', (e) => {
                     openFolders[title] = e.target.open;
                 });
@@ -442,22 +442,13 @@
             };
 
             const folders = {
+                'Premium UI Tools': buildFolder('Premium UI Tools', true),
                 'Self-Drive Doc': buildFolder('Self-Drive Safaris'),
                 'Guided Doc': buildFolder('Guided Safaris'),
                 'Luxury Doc': buildFolder('Luxury Safaris'),
                 'Fly-In Doc': buildFolder('Fly-In Safaris'),
                 'Website Blocks Doc': buildFolder('Website Blocks')
             };
-
-            const uiToolsContainer = document.createElement('div');
-            const uiHeader = document.createElement('div');
-            uiHeader.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: #888; margin: 10px 0 5px 5px; letter-spacing: 2px; font-weight: 700;";
-            uiHeader.innerText = "Premium UI Tools";
-            uiToolsContainer.appendChild(uiHeader);
-            
-            const layoutContainer = document.createElement('div');
-            layoutContainer.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-top: 10px;";
-            uiToolsContainer.appendChild(layoutContainer);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
@@ -467,12 +458,14 @@
 
                 if (folders[cmp.tag]) {
                     folders[cmp.tag].inner.appendChild(el);
+                } else if (cmp.tag === 'Premium UI Tools' || cmp.tag === 'Vault Core') {
+                    folders['Premium UI Tools'].inner.appendChild(el);
                 } else {
-                    layoutContainer.appendChild(el);
+                    folders['Premium UI Tools'].inner.appendChild(el); // Fallback
                 }
             });
 
-            container.appendChild(uiToolsContainer);
+            container.appendChild(folders['Premium UI Tools'].details);
             container.appendChild(folders['Self-Drive Doc'].details);
             container.appendChild(folders['Guided Doc'].details);
             container.appendChild(folders['Luxury Doc'].details);
@@ -554,4 +547,4 @@
             
             </body>
 </html>
-<!-- vercel deploy hook trigger 20260423 print fix -->
+<!-- vercel deploy hook trigger 20260423 accordion and 1page fix -->
