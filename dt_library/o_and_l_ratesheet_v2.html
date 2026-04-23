@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O&L Leisure Rates 2026-2028 - Version 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style data-no-optimize="1">
+        :root {
+            --primary-bg: #F5F5F3; /* Ivory Background */
+            --card-bg: #FFFFFF;
+            --card-light: #FAFAFA;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --gold-accent: #C9A24A;
+            --gold-gradient: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-border: 1px solid rgba(201, 162, 74, 0.15); /* Subtle gold border for ivory */
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* SHARE TOOLBAR (STICKY) */
+        .share-toolbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            animation: fadeInDown 0.6s ease forwards;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: #fff;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .share-btn svg { width: 16px; height: 16px; }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+        }
+
+        .share-btn.primary {
+            background: var(--gold-gradient);
+            color: #fff;
+            border: none;
+        }
+        .share-btn.primary:hover {
+            box-shadow: 0 6px 15px rgba(201, 162, 74, 0.4);
+            color: #fff;
+        }
+
+        /* TOAST NOTIFICATION */
+        .toast { position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%); background: var(--text-main); color: #fff; padding: 14px 28px; border-radius: 30px; font-weight: 500; font-size: 0.9rem; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1100; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .toast.show { bottom: 40px; }
+
+        body { margin: 0; padding: 0; background-color: var(--primary-bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
+        .wrapper { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+        
+        .header { text-align: center; margin-bottom: 60px; animation: fadeInDown 1s ease forwards; }
+        .header h1 { font-size: 3.5rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
+        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 15px; }
+        
+        .meta-info { display: inline-flex; gap: 20px; background: #fff; padding: 10px 25px; border-radius: 40px; border: var(--glass-border); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); box-shadow: 0 2px 10px rgba(0,0,0,0.02); justify-content: center; margin-top: 10px;}
+        .meta-info span { font-weight: 600; color: var(--text-main); }
+
+        /* GRID SYSTEM */
+        .property-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; }
+        .property-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: var(--glass-border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); cursor: pointer; transition: var(--transition); position: relative; }
+        .property-card:hover { transform: translateY(-8px); border-color: var(--gold-accent); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+        .card-image { height: 260px; background-size: cover; background-position: center; position: relative; transition: var(--transition); }
+        .property-card:hover .card-image { transform: scale(1.05); }
+        
+        .card-content { padding: 30px 20px; position: relative; z-index: 2; background: var(--card-bg); }
+        .card-title { font-size: 1.6rem; color: var(--text-main); margin-bottom: 10px; letter-spacing: 1px; }
+        .card-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--gold-accent); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; margin-top: 15px; transition: var(--transition); }
+        .property-card:hover .card-btn { gap: 15px; color: #A68435; }
+
+        /* DETAIL VIEW */
+        .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 100px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: var(--transition); margin-bottom: 40px; background: transparent; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600;}
+        .back-btn:hover { color: #fff; background: var(--gold-gradient); border-color: transparent; }
+
+        .detail-header { margin-bottom: 40px; display: flex; flex-direction: column; gap: 15px; }
+        .detail-title { font-size: 3.5rem; color: var(--gold-accent); line-height: 1.1; }
+        .intro-text { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 900px; }
+
+        /* MULTI-IMAGE GALLERY */
+        .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
+        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* TABS */
+        .tabs { display: flex; gap: 15px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 10px; }
+        .tab-btn { background: var(--card-bg); border: var(--glass-border); color: var(--text-muted); padding: 15px 30px; border-radius: 8px; cursor: pointer; font-family: var(--font-head); font-size: 1.1rem; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
+        .tab-btn:hover { border-color: var(--gold-accent); color: var(--text-main); }
+        .tab-btn.active { background: var(--gold-gradient); color: #fff; border-color: transparent; }
+
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        /* CONTENT BLOCKS */
+        .content-block { background: var(--card-bg); border: var(--glass-border); border-radius: 12px; padding: 40px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
+        .content-block h3 { color: var(--gold-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 15px; display: inline-block; }
+        .sub-block { margin-top: 30px; }
+        .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; }
+
+        /* TABLES */
+        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 8px; margin-bottom: 30px;}
+        table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-light); margin-bottom: 0px; }
+        th { font-family: var(--font-head); background: rgba(201, 162, 74, 0.1); color: var(--text-main); font-size: 0.95rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(201, 162, 74, 0.2); }
+        td { padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(201, 162, 74, 0.03); color: var(--text-main); }
+        td strong { color: var(--text-main); font-weight: 600; }
+        
+        /* LISTS & TEXT */
+        .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+        .text-list li { position: relative; padding-left: 25px; margin-bottom: 15px; }
+        .text-list li::before { content: "✦"; color: var(--gold-accent); position: absolute; left: 0; top: 2px; font-size: 1rem; }
+        .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* PRINT MEDIA QUERIES FOR PDF */
+        @media print {
+            .share-toolbar { display: none !important; }
+            .back-btn { display: none !important; }
+            body { background: #fff !important; }
+            .wrapper { padding: 0; max-width: 100%; box-shadow: none; }
+            .content-block { padding: 20px; box-shadow: none; border: 1px solid #eee; break-inside: avoid; margin-bottom: 20px; }
+            .tabs { display: none !important; }
+            .tab-content { display: block !important; opacity: 1 !important; page-break-inside: avoid; }
+        }
+
+        @media (max-width: 900px) {
+            .lodge-gallery { grid-template-columns: 1fr; }
+            .gallery-img { height: 220px; }
+        }
+        @media (max-width: 768px) {
+            .share-toolbar { padding: 10px; justify-content: flex-start; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+            .share-btn { padding: 12px 20px; font-size: 0.8rem; flex-shrink: 0; }
+            .header h1 { font-size: 2.2rem; }
+            .detail-title { font-size: 2rem; }
+            th, td { padding: 12px; font-size: 0.85rem; }
+            .content-block { padding: 25px; }
+            .meta-info { flex-direction: column; gap: 5px; padding: 15px; text-align: left; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SHARE TOOLBAR -->
+    <div class="share-toolbar" id="toolbar">
+        <button class="share-btn primary" onclick="shareWhatsApp()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            WhatsApp Share
+        </button>
+        <button class="share-btn" onclick="shareEmail()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Email
+        </button>
+        <button class="share-btn" onclick="copyLink()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            Copy Link
+        </button>
+        <button class="share-btn" onclick="copyMessage()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Message
+        </button>
+        <button class="share-btn" onclick="downloadPDF()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download PDF
+        </button>
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <div class="wrapper">
+        <div id="main-view">
+            <div class="header">
+                <h1>O&L Leisure Rates</h1>
+                <p>Comprehensive Rate & Policy Directory 2026-2028</p>
+                <div class="meta-info">
+                    <div>Last Updated: <span>23 April 2026</span></div>
+                    <div>Valid Until: <span>31 December 2028</span></div>
+                </div>
+            </div>
+
+            <div class="property-grid">
+                <div class="property-card" onclick="openProperty('strand')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">Strand Hotel Swakopmund</h2><span class="card-btn">View Full Details ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('mokuti')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">Mokuti Etosha Lodge</h2><span class="card-btn">View Full Details ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('midgard')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">Midgard Otjihavera Windhoek</h2><span class="card-btn">View Full Details ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('chobe')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">Chobe Water Villas Zambezi</h2><span class="card-btn">View Full Details ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('divava')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">Divava Okavango</h2><span class="card-btn">View Full Details ➔</span>
+                    </div>
+                </div>
+                <div class="property-card" onclick="openProperty('lemirage')">
+                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg')"></div>
+                    <div class="card-content">
+                        <h2 class="card-title">Le Mirage Sossusvlei</h2><span class="card-btn">View Full Details ➔</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="detail-view" class="detail-view">
+            <button class="back-btn" onclick="closeProperty()">← Back to Directory</button>
+            
+            <div class="detail-header">
+                <h1 class="detail-title" id="d-title">Property Name</h1>
+                <p class="intro-text" id="d-intro"></p>
+                <div style="color: var(--gold-accent); margin-top: 5px; font-weight: 600;" id="d-airport"></div>
+            </div>
+
+            <!-- DYNAMIC 3-IMAGE GALLERY -->
+            <div class="lodge-gallery" id="d-gallery">
+                <!-- Images Injected Here via JS -->
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates & Info</button>
+                <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
+                <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
+            </div>
+
+            <div id="tab-1" class="tab-content active"></div>
+            <div id="tab-2" class="tab-content"></div>
+            <div id="tab-3" class="tab-content"></div>
+
+        </div>
+    </div>
+
+    <!-- DATA & LOGIC -->
+    <script data-no-optimize="1">
+        const DB = {
+            'strand': {
+                name: 'Strand Hotel Swakopmund',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/1747/standard_double_room12.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/1747/standard_room_bathroom.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/1747/luxury_double_room21.jpg?fmt=jpg'
+                ],
+                airport: 'Nearest airport: Walvis Bay, 45 minutes by road. Twice a day flights from Walvis bay to Cape Town and Johannesburg airports. Email for reservations: sales@ol.na',
+                intro: 'Situated on the historical Mole, Strand Hotel invites guests to experience coastal elegance and Namibian charm. With ocean views, stunning rooms and tailored local experiences, it is perfect for families, couples, and travellers seeking a relaxed seaside escape infused with refined hospitality.\nSet between the Atlantic Ocean and the Namib Desert, Swakopmund blends German heritage, coastal charm, and striking natural beauty. It’s a destination where adventure meets relaxation. Strand Hotel Swakopmund enhances the experience with refined oceanfront accommodation, panoramic sea views, and exceptional dining at Brewer & Butcher, Farmhouse Deli, and Ocean Cellar, all delivered with warm, personalised hospitality. Strand Hotel is situated at the Mole in the centre of Swakopmund. 125 rooms, including standard sea view rooms, luxury family rooms, luxury rooms with sea view, luxury family rooms, and junior suites, and a presidential suite.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>STRAND HOTEL SWAKOPMUND: STO20 RATE (01.01.26 - 30.06.2028)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING BB</th><th>SINGLE BB</th><th>1 CHILD 7-13 YRS BB<br>Sharing Adult</th><th>1 CHILD 7-13 YRS BB<br>(Per Child Rate Sgl Interleading)</th><th>2 CHILDREN (Per Child Rate)<br>7-13 YRS BB Dbl Interleading</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Rooms</strong></td><td>3518</td><td>5629</td><td>879</td><td>2638</td><td>2638</td></tr>
+                                    <tr><td><strong>Standard Sea Facing</strong></td><td>3758</td><td>6013</td><td>939</td><td>2818</td><td>2818</td></tr>
+                                    <tr><td><strong>Luxury Rooms</strong></td><td>4222</td><td>6754</td><td>1055</td><td>3166</td><td>3166</td></tr>
+                                    <tr><td><strong>Luxury Sea Facing</strong></td><td>4462</td><td>7138</td><td>1115</td><td>3346</td><td>3346</td></tr>
+                                    <tr><td><strong>Junior Suite</strong></td><td>4573</td><td>7317</td><td>1143</td><td>3430</td><td>3430</td></tr>
+                                    <tr><td><strong>Luxury Suite</strong></td><td>5629</td><td>9005</td><td>1407</td><td>4222</td><td>4222</td></tr>
+                                    <tr><td><strong>Presidential Suite</strong></td><td>8794</td><td>14071</td><td>N/A</td><td>N/A</td><td>N/A</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text">* DBL/Sharing rates are charged at a Per Person rate.<br><strong>Tour guide policy:</strong> Fixed guide rate of N$1600 BB</p>
+
+                        <div class="sub-block">
+                            <h4>STRAND HOTEL SWAKOPMUND: RACK RATE (01.01.26 - 30.06.2028)</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING BB</th><th>SINGLE BB</th><th>1 CHILD 7-13 YRS BB<br>Sharing Adult</th><th>1 CHILD 7-13 YRS BB<br>Sgl Interleading</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Standard Rooms</strong></td><td>4397</td><td>7036</td><td>1099</td><td>3298</td></tr>
+                                        <tr><td><strong>Standard Sea Facing</strong></td><td>4697</td><td>7516</td><td>1174</td><td>3523</td></tr>
+                                        <tr><td><strong>Luxury Rooms</strong></td><td>5277</td><td>8443</td><td>1319</td><td>3958</td></tr>
+                                        <tr><td><strong>Luxury Sea Facing</strong></td><td>5577</td><td>8923</td><td>1394</td><td>4183</td></tr>
+                                        <tr><td><strong>Junior Suite</strong></td><td>5716</td><td>9146</td><td>1429</td><td>4287</td></tr>
+                                        <tr><td><strong>Luxury Suite</strong></td><td>7036</td><td>11257</td><td>1759</td><td>5277</td></tr>
+                                        <tr><td><strong>Presidential Suite</strong></td><td>10993</td><td>17589</td><td>N/A</td><td>N/A</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sub-block">
+                            <h4>ROOM TYPES</h4>
+                            <ul class="text-list">
+                                <li>52 standard rooms - Non sea facing</li>
+                                <li>2 standard family rooms - Non sea facing</li>
+                                <li>2 standard enabled rooms - Non sea facing</li>
+                                <li>20 standard rooms - Sea-facing</li>
+                                <li>8 luxury rooms sleeps 1 child – Non sea facing</li>
+                                <li>10 luxury Family rooms sleeps 2 children</li>
+                                <li>22 luxury sea-facing rooms</li>
+                                <li>6 junior suites - Sea facing</li>
+                                <li>2 luxury suites – Sea facing</li>
+                                <li>1 presidential suite – Sea facing</li>
+                            </ul>
+                            <p class="raw-text">Total no. of rooms: 125<br>There are a total of 125 rooms and suites most of which offer panoramic sea views.<br><br><strong>INCLUDES:</strong> Mini bar, Bed and Breakfast<br><strong>EXCLUDING:</strong> Activities, Lunch and Dinner</p>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>ACTIVITIES</h3>
+                        <p class="raw-text"><strong>EXPERIENCES (Third-Party Providers)</strong><br>Discover Swakopmund and the Namib Desert with the guidance of our knowledgeable reception team. With trusted local partners, we curate personalised itineraries filled with cultural, educational, and adventurous experiences — ensuring you enjoy the very best of the region.<br><br><strong>We assist with:</strong> Car and bicycle hire, Transfer arrangements, Restaurant reservations, Personalised consultations.</p>
+                        <br>
+                        <h4>Let us take care of the details while you explore:</h4>
+                        <ul class="text-list">
+                            <li>Airline re-confirmations</li>
+                            <li>Ballooning & Skydiving</li>
+                            <li>Bird watching tours & Cape Cross seal colony</li>
+                            <li>Messum Crater tour & Fishing excursions</li>
+                            <li>Living Desert Tours</li>
+                            <li>Namib Desert day trips & night walks</li>
+                            <li>Quad biking & Sand boarding</li>
+                            <li>Sandwich Harbour tour</li>
+                            <li>Spitzkoppe mountain day tour</li>
+                            <li>Swakopmund sightseeing (historic and cultural tours)</li>
+                            <li>Walvis Bay sightseeing & Catamaran dolphin/seal tours</li>
+                            <li>Scenic flights over Namib Desert and Atlantic Ocean</li>
+                            <li>Moon-landscape tours</li>
+                            <li>Cultural township tours</li>
+                            <li>Horse and camel riding</li>
+                        </ul>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>CHILDREN POLICIES</h3>
+                        <p class="raw-text">Children of all ages are welcome. They can be accommodated as follows:<br>
+• NOTE: One Cot can be placed in any Luxury Room and in all Junior, Luxury and Presidential Suites<br>
+• Luxury rooms can only accommodate 1 child under the age of 10 and a 2nd child in a cot<br>
+• Junior Suites and Luxury Suites accommodate 2 children up to 10 years and 3rd child in a cot<br>
+• The Standard room and the Presidential Suite are not suitable for sharing with children<br>
+• Children between the ages of 11 – 15 should be booked in their own room separate from their parents or to/in one of our inter-leading, the inter-leading rooms. These are charged 75% of the adult rate<br><br>
+<strong>CHILDREN SHARING PARENTS IN A LUXURY ROOM</strong><br>
+a) In Luxury rooms (8 rooms) = 1 child 6 to 10 years on a sleeper couch<br>
+b) In Luxury rooms (32 rooms) = 1 or 2 children, 3 to 10 years on a sleeper couch<br><br>
+<strong>CHILDREN SHARING PARENTS JUNIOR OR LUXURY SUITE:</strong><br>
+a) In Junior Suites (6 suites) = 1 or 2 children, 3 to 10 years on a sleeper couch<br>
+b) In Luxury Suites (2 suites) = 1 or 2 children, 4 to 10 years on a sleeper couch<br>
+NOTE: No children 3 to 15 years are accommodated in the Presidential Suite as 1 x Standard inter-leading room is available<br><br>
+<strong>CHILDREN IN OWN ROOM INTER-LEADING WITH PARENTS’ ROOM/SUITE</strong><br>
+Inter-leading combinations are available are:<br>
+a) 2 x Junior Suite to Luxury = 2 suites/2 rooms<br>
+b) 2 x Luxury Suite to Standard = 2 suites/2 rooms<br>
+c) 1 x Presidential Suite to Standard = 1 suite/1 room<br><br>
+<strong>THIRD PERSON/ADULT IN ROOM:</strong><br>
+NOTE: Given the configurations of all rooms/suites at the Strand. A 3rd adult is any person 15+ years and for these occupants any of the additional or inter-leading rooms are available. Here the full adult single or double rate will apply.</p>
+                    </div>
+                `
+            },
+            'mokuti': {
+                name: 'Mokuti Etosha Lodge',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10525/1764582271548dji202510011838260443d.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10525/nc_mokuti_76_v1_2000px.jpg?fmt=jpg'
+                ],
+                airport: 'Nearest airport: Ondangwa (approx 2 hours 45 minutes by road), with FlyNamibia flights from Windhoek. Email: sales@ol.na',
+                intro: 'Situated at the eastern gate of Etosha National Park, Mokuti combines modern comfort with true safari adventure. Wake up to wildlife, enjoy world-class dining and unwind in lush surroundings, making it the perfect base for exploring one of Africa’s greatest wildlife reserves.\nMokuti Etosha offers an Africa re-imagined with a contemporary design, safari luxury and iconic Big Four of Etosha. Located just 40 metres from the Von Lindequist Gate (eastern entrance) of Etosha National Park.The lodge features 106 rooms, including Standard, Deluxe and Family Rooms, with eight new Junior Suites and a Presidential Suite set for completion in 2026. Dining includes the main lodge restaurant and the Sky Boma, offering select evening dining and sundowner experiences within walking distance of reception.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>MOKUTI ETOSHA: STO20 (01.01.26 - 30.06.2028)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING BB</th><th>DBL/SHARING DBB</th><th>SINGLE BB</th><th>SINGLE DBB</th><th>1 CHILD 7-13 YRS BB</th><th>1 CHILD 7-13 YRS DBB</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Room</strong></td><td>3518</td><td>3946</td><td>5629</td><td>6057</td><td>879</td><td>986</td></tr>
+                                    <tr><td><strong>Deluxe Room</strong></td><td>4046</td><td>4474</td><td>5629</td><td>6901</td><td>1011</td><td>1118</td></tr>
+                                    <tr><td><strong>Junior Suite</strong></td><td>4573</td><td>5001</td><td>7317</td><td>7745</td><td>1143</td><td>1250</td></tr>
+                                    <tr><td><strong>Presidential Suite</strong></td><td>8794</td><td>9222</td><td>14071</td><td>14499</td><td>2199</td><td>2306</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text">* DBL/Sharing rates are charged at a Per Person rate.<br><strong>Tour guide policy:</strong> Fixed guide rate of N$1800.00 DBB</p>
+                        
+                        <div class="sub-block">
+                            <h4>RACK RATE (01.01.26 - 30.06.2028)</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING BB</th><th>DBL/SHARING DBB</th><th>SINGLE BB</th><th>SINGLE DBB</th><th>1 CHILD 7-13 YRS BB</th><th>1 CHILD 7-13 YRS DBB</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Standard Room</strong></td><td>4397</td><td>4932</td><td>7036</td><td>7571</td><td>1099</td><td>1233</td></tr>
+                                        <tr><td><strong>Deluxe Room</strong></td><td>5057</td><td>5592</td><td>8091</td><td>8626</td><td>1264</td><td>1398</td></tr>
+                                        <tr><td><strong>Junior Suite</strong></td><td>5716</td><td>6251</td><td>9146</td><td>9681</td><td>1429</td><td>1563</td></tr>
+                                        <tr><td><strong>Presidential Suite</strong></td><td>10993</td><td>11528</td><td>17589</td><td>18124</td><td>2748</td><td>2882</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sub-block">
+                            <h4>ROOM TYPES</h4>
+                            <ul class="text-list">
+                                <li>EXISTING: 114 EN-SUITE ROOMS (106 Standard rooms, 8 Family rooms)</li>
+                                <li>NEW FOR 2026: 90 Standard rooms, 16 Deluxe rooms, 8 Junior suites, 1 Presidential suite</li>
+                            </ul>
+                            <p class="raw-text"><strong>INCLUDES:</strong> Mini bar, Includes meals only based on DBB or BB options<br><strong>EXCLUDES:</strong> Activities, Lunch</p>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>ACTIVITY RATES 2026/7/8</h3>
+                        <p class="raw-text">ACTIVITIES ARE SUBJECT TO AVAILABILITY. PRICES MAY VARY. ANY CHANGES IN NATIONAL PARK FEES WILL BE REFLECTED IN OUR RATES ACCORDINGLY.</p>
+                        <div class="table-responsive" style="margin-top:20px;">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Omulilo Spa</strong></td><td>As per treatment</td><td>As per treatment</td><td>As per treatment</td><td>Duration: 30m-1.5h. Limits: Children under 6 allowed for some treatments.</td></tr>
+                                    <tr><td><strong>Hai/tom bush walk</strong></td><td>550</td><td>580</td><td>580</td><td>Time: 08:00 to 09:00. Limits: Max 4 people.</td></tr>
+                                    <tr><td><strong>Snake Show</strong></td><td>445</td><td>480</td><td>480</td><td>Snake show. Duration: 1 hour. Limits: Max 10.</td></tr>
+                                    <tr><td><strong>Mokuti Sundowner</strong></td><td>1010</td><td>1010</td><td>1010</td><td>Duration: 1h 30m. Time: 18:00 to 19:30.</td></tr>
+                                    <tr><td colspan="5" style="background:rgba(201, 162, 74, 0.1);"><strong>NON-PRIVATE GAME DRIVES AM OR PM 4 HOURS (Rate per person)</strong></td></tr>
+                                    <tr><td><strong>AM Etosha Game Drive</strong></td><td>1290</td><td>1380</td><td>1460</td><td>Sunrise till 11H00, includes Entrance Fees & drinks</td></tr>
+                                    <tr><td><strong>PM Etosha Game Drive</strong></td><td>1290</td><td>1380</td><td>1460</td><td>15H00 until sunset, includes Entrance Fees & drinks</td></tr>
+                                    <tr><td><strong>PM Property Night Game Drive (2h)</strong></td><td>580</td><td>580</td><td>580</td><td>Time: 21:00 to 22:30</td></tr>
+                                    <tr><td colspan="5" style="background:rgba(201, 162, 74, 0.1);"><strong>PRIVATE GAME DRIVES AM OR PM 4 HOURS & 8 HOURS (Rate per vehicle)</strong></td></tr>
+                                    <tr><td><strong>9-Seater Open Land Cruiser (4 hours)</strong></td><td>9600</td><td>10300</td><td>10900</td><td>AM: Incl. Entrance Fees & drinks</td></tr>
+                                    <tr><td><strong>9-Seater Open Land Cruiser (8 hours)</strong></td><td>19625</td><td>21600</td><td>23000</td><td>AM: Incl. Entrance Fees & drinks</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>DINING RATES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>DINING</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>SkyBoma Dinner (All inclusive)</strong></td><td>1350</td><td>1350</td><td>1420</td><td>Exclusive bookings only min 30pax in low season. MAX 70pax.</td></tr>
+                                    <tr><td><strong>Private Dinner Service (Pool/Garden)</strong></td><td>330</td><td>355</td><td>380</td><td>Service Fee for arranged set-up</td></tr>
+                                    <tr><td><strong>Breakfast</strong></td><td>420</td><td>465</td><td>465</td><td>Kids 0-5 free. Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Lunch</strong></td><td>450</td><td>500</td><td>500</td><td>Kids 0-5 free. Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Dinner</strong></td><td>650</td><td>770</td><td>770</td><td>Kids 0-5 free. Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Christmas & New Year Dinners</strong></td><td>900</td><td>1030</td><td>1030</td><td>Includes Dec 24, Dec 25, Dec 31.</td></tr>
+                                    <tr><td><strong>Lunch Packs</strong></td><td>240</td><td>270</td><td>280</td><td>To be arranged a day prior</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>CHILDREN ACCOMMODATION AT MOKUTI ETOSHA</h3>
+                        <p class="raw-text">Children of all ages accepted. Cots for infants are available on request.<br>
+At Mokuti Etosha Lodge can be accommodated as follows:<br>
+a) In Standard Rooms (106) = 1 child only, 0 to 2 years (In a cot)<br>
+b) In Luxury Family rooms (8) consisting of a separate Double Room and Lounge sharing a bathroom and separate toilet = (maximum) 2 children: 2 children up to 15 years (sharing sleeper couch)<br><br>
+<strong>CHILDREN SHARING WITH PARENTS/ADULTS ROOM:</strong><br>
+0 to 6 years = complementary<br>
+7 to 13 years = 75% off per person adult sharing BB or DBB Rate<br><br>
+<strong>SINGLE PARENTS/GUARDIAN'S:</strong><br>
+Sharing room with at least one infant or child, pay only the per-adult sharing rate and NOT the single room rate. Children then sharing the room with parent/Guardian pay the applicable (room type) children sharing rates.</p>
+                    </div>
+                `
+            },
+            'midgard': {
+                name: 'Midgard Otjihavera Windhoek',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/29059/_clb4783.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/29059/_clb4637.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/29059/1750165818999_Midgard_Museum_01_RGB_v1_web.jpg?fmt=jpg'
+                ],
+                airport: 'Nearest airport: Hosea Kutako International Airport (approximately 1 hour 45 min by road). Email for reservations: sales@ol.na',
+                intro: 'Just an hour from Windhoek, Midgard offers an escape into nature with hiking trails, mountain views and warm Namibian hospitality. It is ideal for families, groups and travellers looking to slow down and connect with the great outdoors in style.\nMidgard Otjihavera Windhoek is a luxury farm retreat set in the Otjihavera Mountains, just 90 km (about 2 hours) north of Windhoek via the B1. Established in 1937, it combines historic charm with authentic Namibian farm life in a relaxed, family-friendly setting.The lodge offers 84 rooms, including Standard, Deluxe, Family Rooms and one Presidential Suite. On-site activities include horse riding, guided hikes, plains game drives, tenpin bowling, swimming pools, a boma, amphitheatre and conference facilities. Dining is at The Barn, with select fireside evenings at the Bali Boma.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>MIDGARD OTJIHAVERA: STO20 (01.01.26 - 30.06.2028)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING BB</th><th>DBL/SHARING DBB</th><th>SINGLE BB</th><th>SINGLE DBB</th><th>1 CHILD 7-13 YRS BB</th><th>1 CHILD 7-13 YRS DBB</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Standard Room</strong></td><td>2472</td><td>3086</td><td>3956</td><td>4718</td><td>618</td><td>771</td></tr>
+                                    <tr><td><strong>Family Room</strong></td><td>3214</td><td>3902</td><td>5142</td><td>6023</td><td>804</td><td>976</td></tr>
+                                    <tr><td><strong>Junior Suite</strong></td><td>3804</td><td>4551</td><td>6086</td><td>7062</td><td>951</td><td>1138</td></tr>
+                                    <tr><td><strong>Presidential Suite</strong></td><td>4708</td><td>5546</td><td>7533</td><td>8653</td><td>1177</td><td>1386</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text">* DBL/Sharing rates are charged at a Per Person rate.<br><strong>Tour guide policy:</strong> Fixed guide rate of N$1200.00 DBB</p>
+                        
+                        <div class="sub-block">
+                            <h4>RACK RATE (01.01.26 - 30.06.2028)</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING BB</th><th>DBL/SHARING DBB</th><th>SINGLE BB</th><th>SINGLE DBB</th><th>1 CHILD 7-13 YRS BB</th><th>1 CHILD 7-13 YRS DBB</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Standard Room</strong></td><td>3090</td><td>3857</td><td>4945</td><td>5898</td><td>773</td><td>964</td></tr>
+                                        <tr><td><strong>Family Room</strong></td><td>4018</td><td>4878</td><td>6428</td><td>7529</td><td>1005</td><td>1220</td></tr>
+                                        <tr><td><strong>Junior Suite</strong></td><td>4755</td><td>5689</td><td>7608</td><td>8827</td><td>1189</td><td>1422</td></tr>
+                                        <tr><td><strong>Presidential Suite</strong></td><td>5885</td><td>6932</td><td>9416</td><td>10816</td><td>1471</td><td>1733</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sub-block">
+                            <h4>ROOM TYPES</h4>
+                            <ul class="text-list">
+                                <li>61 standard Rooms (10 are inter-leading)</li>
+                                <li>13 family rooms</li>
+                                <li>9 junior suites</li>
+                                <li>1 presidential suite</li>
+                                <li>3 carriages (72 beds in total)</li>
+                            </ul>
+                            <p class="raw-text">Total no. of rooms: 84<br>The rooms have stunning views of the swimming pools, the gardens, the courtyard or the mountains.<br><br><strong>INCLUDES:</strong> Mini bar, Includes meals only based on DBB or BB options<br><strong>EXCLUDES:</strong> Activities, Lunch</p>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>ACTIVITY RATES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Sunrise/Sundown Nature Game Drive</strong></td><td>718 / 934</td><td>760 / 989</td><td>826 / 1075</td><td>3 Hour drive with a stop at the Hilltop including drinks and snacks</td></tr>
+                                    <tr><td><strong>Hilltop Sundowner</strong></td><td>550</td><td>583</td><td>634</td><td>The sundowner trip takes you along the Swakop River directly to our Hilltop.</td></tr>
+                                    <tr><td><strong>Steenbokkie / Gods window Game Drives</strong></td><td>718 / 934</td><td>760 / 989</td><td>826 / 1075</td><td>Specific scenic viewpoints. Includes drinks and snacks.</td></tr>
+                                    <tr><td><strong>Night Drive Under the Stars</strong></td><td>465</td><td>493</td><td>536</td><td>2 Hour drive. Ending with a stunning stargazing.</td></tr>
+                                    <tr><td><strong>Rietdam Birding Walk / Night Walk</strong></td><td>238 / 237</td><td>252 / 251</td><td>274 / 273</td><td>2 Hour Walk / Stargazing with pointers.</td></tr>
+                                    <tr><td><strong>Guided hilltop bush walk</strong></td><td>484</td><td>510</td><td>555</td><td>4-hour activity.</td></tr>
+                                    <tr><td><strong>Horse Riding & Sundowner Baskets</strong></td><td>550</td><td>583</td><td>633</td><td>Enjoy a thrilling safari on horseback.</td></tr>
+                                    <tr><td><strong>Svens Kegelbahn (Skittle Alley)</strong></td><td>389</td><td>428</td><td>428</td><td>Enjoy a fun game at our Skittle Valley.</td></tr>
+                                    <tr><td><strong>Svens Kegelbahn - Exclusive Use</strong></td><td>2014</td><td>2135</td><td>2238</td><td>Exclusive access to the Skittle Alley.</td></tr>
+                                    <tr><td colspan="5" style="background:rgba(201, 162, 74, 0.1);"><strong>FREE ACTIVITIES (No Charge)</strong></td></tr>
+                                    <tr><td colspan="5">Cycling Trails | Midgard 4x4 Experience | Swimming Pools | Tennis Court | Chess board | Auto Museum | Gym | Volker Kids Wagon</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>MIDGARD CHILDREN POLICY</h3>
+                        <p class="raw-text">- Children of all ages accepted.<br>
+- (NOTE: A cot can be placed in any Room)<br>
+- At Midgard Country Estate Children can be accommodated as follows:<br>
+a) In Standard Rooms (36) = 2 adults<br>
+b) In Family rooms (5)= 2 adults and 2 children (up to 15 years)</p>
+
+                        <br><br>
+                        <h3>MIDGARD ACTIVITY TERMS AND CONDITIONS:</h3>
+                        <p class="raw-text">- All Rates include 15% VAT.<br>
+- Guided Nature and Game Drive and Sundowner Drive: Min 2 pax and a maximum of 30 pax<br>
+- Guided Drives are subject to guide availability. Please check prior to booking or arrival.<br>
+- Cancellation Policy for the Private Nature Drive and Sundowner Drive: No cancellation fee will be charged if a private vehicle booking is cancelled 3 days prior to the activity and 100% Cancellation fee will be applicable if a booking is cancelled less than 3 days prior to an activity. No cancellation charges will be charged for bookings made for individual drives.<br>
+- NOTE: The Skittle Alley is open from 10H00 to 23H00 for individual use. Costs are per lane as above or the Exclusive Use price above.<br>
+- NOTE: The Skittle Alley can remain open from 23H00 till 01H00, but then there will be no per lane cost and the Exclusive USE cost will be N$ 1000.00 per hour.<br>
+- All Drive requests, amendments and cancellations must be sent in writing to the O&L reservations department.<br>
+- NOTE: Game at Midgard Country Estate is located in a ± 2000 hectares section and consists of species such as Giraffe, Blue and Black Wildebeest, Oryx, Kudu, Hartebeest, Eland, Warthog, Baboons and smaller antelope species.</p>
+                    </div>
+                `
+            },
+            'chobe': {
+                name: 'Chobe Water Villas Zambezi',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/44110/1753867882906chobedeck03rgbv1web.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/44110/1753868022963chobebuilding09rgbv1web.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/44110/1753868022964chobebuilding10rgbv1web.jpg?fmt=jpg'
+                ],
+                airport: 'Nearest airport: Kasane Airport. Email for reservations: sales@ol.na',
+                intro: 'Perched on the banks of the Chobe River at the confluence of the mighty Zambezi and Chobe Rivers, a place where Africa’s wildlife roams freely and which 50 000+ elephants call home, lies a magical destination. Chobe Water Villas’ 16 exceptional suites, all located over the river’s edge, offer guests a unique experience of nature, while being hosted in luxury, warmth and style. This stunning destination offers an intimate connection with Africa’s wildlife and waterscapes.\nSet on the banks of the Chobe River in Namibia’s Zambezi Region, Chobe Water Villas offers an exclusive, all-suite riverfront experience. Elevated villas provide uninterrupted views of wildlife-rich floodplains, where elephants, buffalo and hippos gather daily. Combining privacy, personalised service and exceptional river safaris, it is a refined gateway to the Chobe ecosystem.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>CHOBE WATER VILLAS ZAMBEZI: STO20 RATE (01.01.26 - 30.06.2028)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING</th><th>SINGLE</th><th>1 CHILD 13-17 YRS Sharing Adult</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>FULL INCLUSIVE</strong></td><td>17644</td><td>28230</td><td>13233</td></tr>
+                                    <tr><td><strong>BED & BREAKFAST</strong></td><td>7378</td><td>11068</td><td>5534</td></tr>
+                                    <tr><td><strong>DINNER,BED & BREAKFAST</strong></td><td>7940</td><td>11629</td><td>5955</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text"><strong>Tour guide policy:</strong> Fixed guide rate of N$6720 DBB</p>
+                        
+                        <div class="sub-block">
+                            <h4>RACK RATE (01.01.26 - 30.06.2028)</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th>ROOM TYPE</th><th>DBL/SHARING</th><th>SINGLE</th><th>1 CHILD 13-17 YRS Sharing Adult</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>FULL INCLUSIVE</strong></td><td>22055</td><td>35288</td><td>16541</td></tr>
+                                        <tr><td><strong>BED & BREAKFAST</strong></td><td>9223</td><td>13835</td><td>6917</td></tr>
+                                        <tr><td><strong>DINNER,BED & BREAKFAST</strong></td><td>9925</td><td>14536</td><td>7444</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sub-block">
+                            <h4>ROOM TYPES</h4>
+                            <ul class="text-list">
+                                <li>FULL INCLUSIVE RATE INCLUDE MEALS,ACTIVITIES AND TRANSFERS</li>
+                                <li>DBB AND BB INCLUDING TRANSFERS AND HIGH TEA. ACTIVITIES ARE AN ADDITIONAL CHARGE</li>
+                            </ul>
+                            <p class="raw-text">Luxury Water Villas<br>Total no. of villas: 16<br>Lounge and bedroom plus terrace area at 85m².<br><br><strong>INCLUDES:</strong> Minibar</p>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>ACTIVITY RATES 2026-2028</h3>
+                        <p class="raw-text">ACTIVITIES ARE SUBJECT TO AVAILABILITY. PRICES MAY VARY. CHANGES IN NATIONAL PARK FEES WILL BE REFLECTED IN RATES ACCORDINGLY.</p>
+                        <div class="table-responsive" style="margin-top:20px;">
+                            <table>
+                                <thead><tr><th>ACTIVITY PER PERSON</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Boat Cruise</strong></td><td>1604</td><td>1360</td><td>1480</td><td>Enjoy a three-hour boat cruise on the Chobe River, gliding between Botswana and Namibia—no immigration required. Includes park fees, beverages, and bottled water, with morning or afternoon departures available. Experience the wild from a new perspective with our River Boat Viewer at Chobe Water Villas, offering up-close views of wildlife along the banks of the Chobe River.</td></tr>
+                                    <tr><td><strong>Game Drive- Chobe National Park</strong></td><td>1604</td><td>1360</td><td>1480</td><td>Begin your day with an unforgettable sunrise journey through Chobe National Park. Watch herds of elephants gather at the river’s edge and encounter diverse wildlife across lush landscapes in open-air vehicles. (Immigration required) Four- to five-hour drive departing at 08:00, including park fees, tea, coffee, rusks (on request), soft drinks, and bottled water</td></tr>
+                                    <tr><td><strong>Kasika Village/Cultural Tour</strong></td><td>600</td><td>510</td><td>555</td><td>A 3-hour Namibian Village Tour to Kasen Village at Kabulabula in the Zambezi. A boat cruise along the Chobe River follows the Namibian shoreline to this typical village built around an ancient Baobab tree. Here the local residents will entertain guests with song and dance. Soft drinks and bottled water are included.</td></tr>
+                                    <tr><td><strong>Fishing Trip</strong></td><td>3000</td><td>2550</td><td>2775</td><td>Specialized and tailored 3-hour fishing charters using custom fishing boats and guidance by river/fishing professionals. This includes soft drinks, bottled water and fishing tackles. Lost/damaged tackle to be paid for. Maximum 3 passengers or rods per boat.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>DINING AND TRANSFER RATES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>TRANSFER / DINING</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Boat Transfer</strong></td><td>301</td><td>255</td><td>280</td></tr>
+                                    <tr><td><strong>Victoria Falls Airport – Kasane (one way)</strong></td><td>1604</td><td>1360</td><td>1480</td></tr>
+                                    <tr><td><strong>Kazungula Border Post- (one way)</strong></td><td>2005</td><td>1700</td><td>1850</td></tr>
+                                    <tr><td><strong>Katima - Kasane (one way)</strong></td><td>3100</td><td>2635</td><td>2870</td></tr>
+                                    <tr><td><strong>Kasane - Livingstone (one way)</strong></td><td>2005</td><td>1700</td><td>1850</td></tr>
+                                    <tr><td><strong>Kasane Airport Transfer</strong></td><td>301</td><td>255</td><td>280</td></tr>
+                                    <tr><td colspan="4" style="background:rgba(201, 162, 74, 0.1);"><strong>DINING & EXTRAS</strong></td></tr>
+                                    <tr><td><strong>Breakfast / Lunch</strong></td><td>602</td><td>510</td><td>555</td></tr>
+                                    <tr><td><strong>High Tea / Mini Bar Food</strong></td><td>401</td><td>340</td><td>370</td></tr>
+                                    <tr><td><strong>Dinner / Mini Bar Beverage</strong></td><td>702</td><td>595</td><td>650</td></tr>
+                                    <tr><td><strong>Butler's Bar / Spa Treatment</strong></td><td>1003</td><td>850</td><td>925</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>CHOBE WATER VILLAS POLICIES</h3>
+                        <p class="raw-text">Due to the design of the Lodge and its location in one of Africa’s foremost wildlife areas it is not suitable for children 12 years and younger.<br>
+Young adults 13 – 17 years are welcome and can be accommodated with their parents in their Water Villa, on a sleeper couch.<br>
+They will be charged 75% of the applicable Adult rate.<br>
+Any person 18 and plus is an adult and such is accommodated in their own Villa paying applicable Adults rates. Children 13-17 may be reserved in their own villa and would then pay full adult rate.</p>
+
+                        <br>
+                        <h3>GAME DRIVE POLICY</h3>
+                        <ul class="text-list">
+                            <li>All Rates include 15% VAT, Park Entrance fees, and the service of one driver/guide.</li>
+                            <li>Children 12 years and older are welcome to make use of all Game Drives and will pay full adult rates.</li>
+                            <li>Children under the age of 12 years are accommodated on Private Game Drives of 4 hours which must be booked in advance and must be always accompanied by a parent/ guardian.</li>
+                            <li>Lunch is not included in the full-day Game Drive Rates. Additional drinks and catering are available and charged separately. Details are available on request.</li>
+                            <li>Cancellation Policy for Private Game Drives: No cancellation fee will be charged if a private vehicle booking is canceled 3 days before the Game Drive or do 100% Cancellation fee will be applicable if a booking is canceled less than 3 days before an activity. No cancellation charges will be charged for bookings made for individual drives.</li>
+                            <li>All Game Drive requests, amendments, and cancellations must be sent in writing to the O&L reservations department.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'divava': {
+                name: 'Divava Okavango',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10477/room_overview1.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10477/bath.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10477/main_building.jpg?fmt=jpg'
+                ],
+                airport: 'Nearest airport is Rundu Airport. Email for reservations: sales@ol.na',
+                intro: 'Situated on the banks of the Okavango River, Divava offers an intimate retreat where luxury meets wilderness. With just 20 thatched chalets overlooking the water, guests are immersed in the soothing sounds of nature while enjoying modern comforts. Discover the nearby Popa Falls, embark on river safaris teeming with hippos and crocodiles or unwind at the tranquil spa. At Divava, every moment is designed to connect you with the beauty and spirit of Namibia’s Kavango region.\nDivava Okavango is a peaceful riverside retreat overlooking the Okavango River in northern Namibia. The lodge offers 20 spacious river-facing chalets, perfect for a relaxing nature escape. Activities include boat cruises, cultural experiences and visits to Popa Falls.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>DIVAVA OKAVANGO STO20 RATES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th colspan="4" style="text-align:center;">01.01.26 - 30.06.2026 (LOW SEASON)</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 6-12YRS DBB (Sharing Adult)</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Luxury Chalets</strong></td><td>3312</td><td>4424</td><td>828</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive" style="margin-top:20px;">
+                            <table>
+                                <thead><tr><th colspan="4" style="text-align:center;">01.07.26 - 30.11.2026 (HIGH SEASON)</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 6-12YRS DBB (Sharing Adult)</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Luxury Chalets</strong></td><td>4044</td><td>5280</td><td>1011</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text">* DBL/Sharing rates are charged at a Per Person rate.<br><strong>Tour guide policy:</strong> Fixed guide rate of N$1065 DBB</p>
+                        
+                        <div class="sub-block">
+                            <h4>RACK RATES</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th colspan="4" style="text-align:center;">01.01.26 - 30.06.2026</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 6-12YRS DBB</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Luxury Chalets</strong></td><td>4140</td><td>5530</td><td>1035</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive" style="margin-top:20px;">
+                                <table>
+                                    <thead><tr><th colspan="4" style="text-align:center;">01.07.26 - 30.11.2026</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 6-12YRS DBB</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Luxury Chalets</strong></td><td>5055</td><td>6600</td><td>1264</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sub-block">
+                            <h4>ROOM TYPES</h4>
+                            <p class="raw-text">Luxury 20 Chalets<br>Total no. of villas: 20<br>Bedroom area includes a 38m² and a front terrace facing the Okavango River.<br><br><strong>INCLUDES:</strong> Meals only based on DBB<br><strong>EXCLUDES:</strong> Activities, Lunch</p>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>ACTIVITY RATES (2026/7/8)</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Buffalo Game Drive</strong></td><td>1345</td><td>1438</td><td>1533</td><td>4 hours Includes snack platter and drinks</td></tr>
+                                    <tr><td><strong>Mahango Game Drive</strong></td><td>1065</td><td>1135</td><td>1210</td><td>3 hours Includes snack platter and drinks</td></tr>
+                                    <tr><td><strong>Boat Cruise</strong></td><td>995</td><td>1061</td><td>1131</td><td>2.5 hours Includes snack platter and drinks</td></tr>
+                                    <tr><td><strong>Traditional Village Tour</strong></td><td>490</td><td>522</td><td>556</td><td>1 hour</td></tr>
+                                    <tr><td><strong>Fishing Tour</strong></td><td>2400</td><td>2560</td><td>2730</td><td>4 hours Includes fishing gear, snacks and drinks</td></tr>
+                                    <tr><td><strong>Fishing Tour</strong></td><td>1200</td><td>1280</td><td>1365</td><td>2 hours Includes fishing gear, snacks and drinks</td></tr>
+                                    <tr><td><strong>Island Lunch/Brunch</strong></td><td>2300</td><td>2450</td><td>2610</td><td>3 hours Min. 2 pax</td></tr>
+                                    <tr><td><strong>Island Lunch/Brunch</strong></td><td>805</td><td>860</td><td>920</td><td>3 hours Surcharge 2 pax and more.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 style="margin-top:30px; margin-bottom: 15px; color: var(--text-main);">EXTERNAL ACTIVITIES</h4>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Helicopter Flight with Half Day Game & Boating in the Delta – 7 hours</strong></td><td>1830</td><td>1830</td><td>N/A</td><td>1 pax Transfer cost – N$2520 Includes packed lunch, soft drinks and water. Passport Required</td></tr>
+                                    <tr><td><strong>Helicopter Flight with Half Day Game & Boating in the Delta – 7 hours</strong></td><td>915</td><td>915</td><td>N/A</td><td>2 pax Transfer cost – N$1260 Includes packed lunch, soft drinks and water. Passport Required</td></tr>
+                                    <tr><td><strong>Helicopter Flight with Half Day Game & Boating in the Delta – 7 hours</strong></td><td>770</td><td>770</td><td>N/A</td><td>3 pax Transfer cost – N$1260 Includes packed lunch, soft drinks and water. Passport Required</td></tr>
+                                    <tr><td><strong>Tsodilo Hills Excursion</strong></td><td>2355</td><td>2355</td><td>N/A</td><td>7 Hours Includes transfer, lunch, soft drinks, water, entrance fees and guided tour to the bushmen paintings Min 2. Pax</td></tr>
+                                    <tr><td><strong>Mokoro Poling</strong></td><td>1585</td><td>1585</td><td>N/A</td><td>4 Hours Includes transfer, guide, drinks and water</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="content-block">
+                        <h3>DINING AND TRANSFER RATES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>DINING / TRANSFERS</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Breakfast</strong></td><td>380</td><td>405</td><td>432</td><td>Kids 0-5 free Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Lunch</strong></td><td>190</td><td>203</td><td>216</td><td>Kids 0-5 free Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Dinner</strong></td><td>550</td><td>586</td><td>625</td><td>Kids 0-5 free Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Breakfast/Lunch Pack</strong></td><td>275</td><td>293</td><td>312</td><td>Kids 0-5 free Children 6-12 50% of adult rates</td></tr>
+                                    <tr><td><strong>Airstrip Transfers</strong></td><td>200</td><td>215</td><td>230</td><td></td></tr>
+                                    <tr><td><strong>Mpacha Airport (Katima Mulilo) Transfer</strong></td><td>2300</td><td>2450</td><td>2610</td><td>Includes water and soft drink</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>DIVAVA CHILDREN POLICY</h3>
+                        <p class="raw-text">Children of all ages are welcome and remain the full responsibility of their parents. Children aged 5 and below are free of charge providing they share with their parents.<br>
+Children between the ages of 6 and 12 are charged special reduced rates, providing they share with their parents.<br>
+Children requiring their own room will be charged full adult rates. Date of birth of the child(ren) to be supplied at the time of making the reservation to qualify for the child policy.<br>
+The child policy does not apply to extras. A single parent sharing with a single or more children (0-5) will be charged the single person rate (per person sharing price plus the single supplement where applicable) plus the child rate which applies to the age category.<br>
+A single parent sharing a single or more children (6-12) will be charged the sharing person rate plus the children rate which apply to the age category. Given the ambiance of the Spa & Wellness Centre, children under the age of 12 years are not allowed within the Spa facilities.<br>
+There is one Camelthorn Room that can accommodate a family of five in two separate rooms sharing a bathroom (two separate rooms). There are a few Oasis rooms that can accommodate one and two extra beds comfortably, thereafter space becomes limited and may affect the comfort we wish to offer. None of the rooms are wheelchair friendly.</p>
+                    </div>
+                `
+            },
+            'lemirage': {
+                name: 'Le Mirage Sossusvlei',
+                images: [
+                    'https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-sunset.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10424/main_building_by_night.jpg?fmt=jpg',
+                    'https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-camelthorn_building_and_restaurant.jpg?fmt=jpg'
+                ],
+                airport: 'Nearest airport: Hosea Kutako International Airport (approximately 4.5–5 hours by road). Charter flights are available to nearby airstrips closer to Sossusvlei. Email for reservations: sales@ol.na',
+                intro: 'Rising from the red sands like a mirage, this iconic desert lodge offers unique architecture, luxury suites and easy access to Sossusvlei’s towering dunes. Guests can enjoy camel rides, desert spa treatments and star-filled nights in one of Namibia’s most magical settings.\nLocated near the iconic dunes of Sossusvlei, Le Mirage is a striking desert oasis inspired by North African architecture. Surrounded by vast open landscapes, the lodge offers 27 elegant rooms, combining luxury, tranquillity and adventure with curated desert experiences and unforgettable sunsets.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>LE MIRAGE SOSSUSVLEI STO20 RATES</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th colspan="4" style="text-align:center;">01.01.26 - 30.06.2026 (LOW SEASON)</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 13-17 YRS (Sharing Adult)</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Camelthorn room</strong></td><td>3096</td><td>4136</td><td>774</td></tr>
+                                    <tr><td><strong>Oasis room</strong></td><td>3420</td><td>4561</td><td>855</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive" style="margin-top:20px;">
+                            <table>
+                                <thead><tr><th colspan="4" style="text-align:center;">01.07.26 - 30.11.2026 (HIGH SEASON)</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 13-17 YRS (Sharing Adult)</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Camelthorn room</strong></td><td>3792</td><td>5012</td><td>948</td></tr>
+                                    <tr><td><strong>Oasis room</strong></td><td>4200</td><td>5540</td><td>1050</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text">* DBL/Sharing rates are charged at a Per Person rate.<br><strong>Tour guide policy:</strong> Fixed guide rate of N$1045 DBB</p>
+                        
+                        <div class="sub-block">
+                            <h4>RACK RATES</h4>
+                            <div class="table-responsive">
+                                <table>
+                                    <thead><tr><th colspan="4" style="text-align:center;">01.01.26 - 30.06.2026</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 13-17 YRS (Sharing Adult)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Camelthorn room</strong></td><td>3870</td><td>5170</td><td>968</td></tr>
+                                        <tr><td><strong>Oasis room</strong></td><td>4275</td><td>5701</td><td>1069</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="table-responsive" style="margin-top:20px;">
+                                <table>
+                                    <thead><tr><th colspan="4" style="text-align:center;">01.07.26 - 30.11.2026</th></tr><tr><th>ROOM TYPE</th><th>DBL/SHARING DBB</th><th>SINGLE DBB</th><th>1 CHILD 13-17 YRS (Sharing Adult)</th></tr></thead>
+                                    <tbody>
+                                        <tr><td><strong>Camelthorn room</strong></td><td>4740</td><td>6265</td><td>1185</td></tr>
+                                        <tr><td><strong>Oasis room</strong></td><td>5250</td><td>6925</td><td>1313</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="sub-block">
+                            <h4>ROOM TYPES</h4>
+                            <p class="raw-text">27 Rooms<br>Total no. of villas: 27<br>Bedroom area includes a 22 to 38m²<br><br><strong>INCLUDES:</strong> Includes meals only based on DBB RATE<br><strong>EXCLUDES:</strong> Activities, Lunch</p>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>ACTIVITY RATES (2026/7/8)</h3>
+                        <p class="raw-text">ACTIVITIES ARE SUBJECT TO AVAILABILITY. PRICES MAY VARY.</p>
+                        <div class="table-responsive" style="margin-top:20px;">
+                            <table>
+                                <thead><tr><th>ACTIVITIES (Child & Guide Policy does not apply)</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Sundowner drive</strong></td><td>555</td><td>592</td><td>632</td><td>1.5 hours (including snack platter & drinks)</td></tr>
+                                    <tr><td><strong>Sossusvlei drive</strong></td><td>2180</td><td>2324</td><td>2478</td><td>6 hours (including entrance fees, water/coffee, tea & snacks)</td></tr>
+                                    <tr><td><strong>Quad biking</strong></td><td>1380</td><td>1471</td><td>1568</td><td>2.5 hours (including soft drinks & water)</td></tr>
+                                    <tr><td><strong>Geluk Airstrip transfers</strong></td><td>190</td><td>203</td><td>216</td><td>2km distance to lodge (inhouse guests free transfer)</td></tr>
+                                    <tr><td><strong>Airstrip transfers</strong></td><td>1210</td><td>1290</td><td>1375</td><td>Sossusvlei/&Beyond – 21 km distance to lodge (water included)</td></tr>
+                                    <tr><td><strong>Airstrip transfers</strong></td><td>1510</td><td>1610</td><td>1716</td><td>Keerweder (Namibrand Reserve) – 45km distance to lodge (water included)</td></tr>
+                                    <tr><td><strong>Hot Air Balloon experience</strong></td><td>9920</td><td>N/A</td><td>N/A</td><td>External provider – including 1km transfer to venue. 4.5 hours – includes breakfast buffet, soft drinks, tea, water and sparkling wine</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h4 style="margin-top:30px; margin-bottom: 15px; color: var(--text-main);">EXTERNAL ACTIVITIES (HELICOPTER FLIGHTS) - Charges in USD</h4>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY</th><th>JULY 2025 - JUNE 2026</th><th>JULY 2026 - JUNE 2027</th><th>JULY 2027 - JUNE 2028</th><th>REMARKS</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>30 min Helicopter Flight</strong></td><td>590</td><td>590</td><td>N/A</td><td>1 pax Transfer cost – N$2520 Passport Required</td></tr>
+                                    <tr><td><strong>30 min Helicopter Flight</strong></td><td>295</td><td>295</td><td>N/A</td><td>2 pax Transfer cost – N$1260 Passport Required</td></tr>
+                                    <tr><td><strong>30 min Helicopter Flight</strong></td><td>235</td><td>235</td><td>N/A</td><td>3 pax Transfer cost – N$1260 Passport Required</td></tr>
+                                    <tr><td><strong>45 min Helicopter Flight</strong></td><td>790</td><td>790</td><td>N/A</td><td>1 pax Transfer cost – N$2520 Passport Required</td></tr>
+                                    <tr><td><strong>45 min Helicopter Flight</strong></td><td>390</td><td>390</td><td>N/A</td><td>2 pax Transfer cost – N$1260 Passport Required</td></tr>
+                                    <tr><td><strong>45 min Helicopter Flight</strong></td><td>315</td><td>315</td><td>N/A</td><td>3 pax Transfer cost – N$1260 Passport Required</td></tr>
+                                    <tr><td><strong>60 min Helicopter Flight</strong></td><td>1230</td><td>1230</td><td>N/A</td><td>1 pax Transfer cost – N$2520 Passport Required</td></tr>
+                                    <tr><td><strong>60 min Helicopter Flight</strong></td><td>615</td><td>615</td><td>N/A</td><td>2 pax Transfer cost – N$1260 Passport Required</td></tr>
+                                    <tr><td><strong>60 min Helicopter Flight</strong></td><td>445</td><td>445</td><td>N/A</td><td>3 pax Transfer cost – N$1260 Passport Required</td></tr>
+                                    <tr><td><strong>Add-On Champagne Experience</strong></td><td>50</td><td>50</td><td>N/A</td><td>Per Person</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>LE MIRAGE CHILDREN POLICY</h3>
+                        <p class="raw-text">Children of all ages are welcome and remain the full responsibility of their parents. Children aged 5 and below are free of charge providing they share with their parents.<br>
+Children between the ages of 6 and 12 are charged special reduced rates, providing they share with their parents. Children requiring their own room will be charged full adult rates. Date of birth of the child(ren) to be supplied at the time of making the reservation to qualify for the child policy. The child policy does not apply to extras.<br>
+A single parent sharing with a single or more children (0-5) will be charged the single person rate (per person sharing price plus the single supplement where applicable) plus the child rate which applies to the age category.<br>
+A single parent sharing a single or more children (6-12) will be charged the sharing person rate plus the children rate which apply to the age category. Given the ambiance of the Spa & Wellness Centre, children under the age of 12 years are not allowed within the Spa facilities.<br>
+An extra bed or stretcher can be accommodated at the entrance of some of the chalets, however, space becomes limited and may affect the comfort that we wish to offer. None of the rooms are wheelchair friendly.</p>
+                    </div>
+                `
+            }
+        };
+
+        const mainView = document.getElementById('main-view');
+        const detailView = document.getElementById('detail-view');
+        
+        /* SHARE LOGIC */
+        function getShareMessage() {
+            return `Hi, please find our latest rates here: ${window.location.href}`;
+        }
+
+        function showToast(msg = "Copied!") {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        function shareWhatsApp() {
+            const text = encodeURIComponent(getShareMessage());
+            window.open(`https://wa.me/?text=${text}`, "_blank");
+        }
+
+        function shareEmail() {
+            let lodgeTitle = "O&L Leisure Rates";
+            if(detailView.style.display === 'block') {
+                lodgeTitle = document.getElementById('d-title').innerText + " Rates";
+            }
+            const subject = encodeURIComponent(`Latest Rates - ${lodgeTitle}`);
+            const body = encodeURIComponent(getShareMessage());
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast("Link Copied!");
+            });
+        }
+
+        function copyMessage() {
+            navigator.clipboard.writeText(getShareMessage()).then(() => {
+                showToast("Message Copied!");
+            });
+        }
+
+        function downloadPDF() {
+            const isMainView = mainView.style.display !== 'none';
+            const element = isMainView ? mainView : detailView;
+            const filename = isMainView ? 'O_and_L_Leisure_Rates.pdf' : `${document.getElementById('d-title').innerText.replace(/\s+/g, '_')}_Rates.pdf`;
+            
+            const opt = {
+                margin:       [10, 10, 10, 10],
+                filename:     filename,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, backgroundColor: '#ffffff' },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            showToast("Generating PDF...");
+            
+            // If in detail view, temporarily show all tabs so everything is printed
+            if (!isMainView) {
+                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'block');
+            }
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                // Restore tabs
+                if (!isMainView) {
+                    document.querySelectorAll('.tab-content').forEach(c => c.style.display = '');
+                }
+            });
+        }
+        
+        function openProperty(propertyKey) {
+            const data = DB[propertyKey];
+            if (!data) return;
+
+            document.getElementById('d-title').innerText = data.name;
+            document.getElementById('d-intro').innerText = data.intro;
+            document.getElementById('d-airport').innerText = data.airport;
+
+            // Load 3-image Gallery
+            const gallery = document.getElementById('d-gallery');
+            gallery.innerHTML = '';
+            data.images.forEach(imgUrl => {
+                const img = document.createElement('img');
+                img.src = imgUrl;
+                img.className = 'gallery-img';
+                img.alt = 'Property Image';
+                gallery.appendChild(img);
+            });
+
+            document.getElementById('tab-1').innerHTML = data.tab1;
+            document.getElementById('tab-2').innerHTML = data.tab2;
+            document.getElementById('tab-3').innerHTML = data.tab3;
+
+            mainView.style.display = 'none';
+            detailView.style.display = 'block';
+            switchTab(1); 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Set URL hash without scrolling
+            history.pushState(null, null, '#' + propertyKey);
+        }
+
+        function closeProperty() {
+            detailView.style.display = 'none';
+            mainView.style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Remove URL hash
+            history.pushState(null, null, window.location.pathname + window.location.search);
+        }
+
+        function switchTab(idx) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(`tab-btn-${idx}`).classList.add('active');
+            document.getElementById(`tab-${idx}`).classList.add('active');
+        }
+
+        // Initialize Hash Routing on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && DB[hash]) {
+                openProperty(hash);
+            }
+        });
+    </script>
+</body>
+</html>
