@@ -280,13 +280,13 @@
             border-top: 1px solid var(--gold);
             font-size: 0.8rem;
         }
-        .inv-notes { flex: 2; }
+        .inv-notes { flex: 1; }
         .inv-notes h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; }
         .inv-notes p { color: var(--muted); line-height: 1.5; white-space: pre-line; }
         
-        .inv-bank { flex: 1; background: transparent; border: 1px solid var(--border); padding: 12px; border-radius: 4px; }
-        .inv-bank h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--dark); letter-spacing: 2px; margin-bottom: 8px; }
-        .inv-bank p { color: var(--muted); line-height: 1.5; font-family: var(--font-main); font-size: 0.75rem; white-space: pre-line;}
+        .inv-bank { flex: 1.5; background: transparent; border: none; padding: 0; }
+        .inv-bank h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--dark); letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; }
+        .inv-bank p { color: var(--muted); line-height: 1.6; font-family: var(--font-main); font-size: 0.8rem; white-space: pre-line;}
 
         /* Controls for editing table */
         .edit-controls { display: flex; gap: 10px; margin-top: 15px; }
@@ -539,13 +539,13 @@
 
                 <!-- Footer -->
                 <div class="inv-footer">
-                    <div class="inv-notes">
-                        <h4>Notes & Terms</h4>
-                        <p>{{ notes }}</p>
-                    </div>
                     <div class="inv-bank">
                         <h4>Payment Details</h4>
                         <p>{{ bankDetails }}</p>
+                    </div>
+                    <div class="inv-notes">
+                        <h4>Notes & Terms</h4>
+                        <p>{{ notes }}</p>
                     </div>
                 </div>
 
@@ -567,7 +567,7 @@
                     nam: {
                         currency: 'N$',
                         bankDetails: 'Bank: STANDARD BANK NAMIBIA LIMITED\nBranch: POST MALL STREET\nMUTUAL PLATZ - 10005 - WINDHOEK\nAccount Number: 6000 708 1129\nUniversal Code: 087373\nBIC/Swift/Branch Code: SBNMNANXXXX',
-                        companyAddress: 'P.O. Box 8241\nSwakopmund\nNamibia\n00264 (0)81 867 0705/6\nNTB Reg No. TSO01063\nBusiness Reg Nr: 0133975090018\nVAT Nr 6033700-01-5\nbookings@desert-tracks.com\nwww.desert-tracks.com'
+                        companyAddress: 'P.O. Box 8241, Swakopmund, Namibia\nTel: +264 (0)81 867 0705/6  |  Email: bookings@desert-tracks.com\nNTB Reg No: TSO01063  |  Business Reg: 0133975090018  |  VAT Nr: 6033700-01-5\nwww.desert-tracks.com'
                     },
                     sa: {
                         currency: 'ZAR',
@@ -584,10 +584,15 @@
                 };
 
                 // Initial State
+                const today = new Date();
+                const localDate = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+                const due = new Date(today.getTime() + 14 * 86400000);
+                const localDueDate = due.getFullYear() + '-' + String(due.getMonth() + 1).padStart(2, '0') + '-' + String(due.getDate()).padStart(2, '0');
+
                 const invoice = ref({
                     number: 'INV-2026-001',
-                    date: new Date().toISOString().split('T')[0],
-                    dueDate: new Date(Date.now() + 14*86400000).toISOString().split('T')[0],
+                    date: localDate,
+                    dueDate: localDueDate,
                     currency: profiles.nam.currency
                 });
 
