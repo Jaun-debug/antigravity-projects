@@ -417,8 +417,9 @@
     }
 ];
 
-        let activeIndex = -1;
+        let activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : -1;
         let openFolders = {};
+        try { if (localStorage.getItem('vault_folders')) { openFolders = JSON.parse(localStorage.getItem('vault_folders')); } } catch(e) {}
 
         function renderNav() {
             const container = document.getElementById('navContainer');
@@ -430,6 +431,7 @@
                 details.open = openFolders.hasOwnProperty(title) ? openFolders[title] : defaultOpen;
                 details.addEventListener('toggle', (e) => {
                     openFolders[title] = e.target.open;
+                    localStorage.setItem('vault_folders', JSON.stringify(openFolders));
                 });
                 const summary = document.createElement('summary');
                 summary.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: #888; margin: 25px 0 5px 5px; letter-spacing: 2px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: center; user-select: none;";
@@ -442,7 +444,7 @@
             };
 
             const folders = {
-                'Premium UI Tools': buildFolder('Premium UI Tools', true),
+                'Premium UI Tools': buildFolder('Premium UI Tools', false),
                 'Self-Drive Doc': buildFolder('Self-Drive Safaris'),
                 'Guided Doc': buildFolder('Guided Safaris'),
                 'Luxury Doc': buildFolder('Luxury Safaris'),
@@ -473,12 +475,12 @@
             container.appendChild(folders['Website Blocks Doc'].details);
         }
 
-        
-
+        let activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
         let preloadedCode = "";
 
         async function loadComponent(idx) {
             activeIndex = idx;
+            localStorage.setItem('vault_active_index', idx);
             const cmp = components[idx];
             
             document.getElementById('headerTitle').innerText = cmp.title;
@@ -547,4 +549,4 @@
             
             </body>
 </html>
-<!-- vercel deploy hook trigger 20260423 accordion and 1page fix -->
+<!-- vercel deploy hook trigger 20260423 final memory fix -->
