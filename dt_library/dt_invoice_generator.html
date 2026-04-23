@@ -191,10 +191,10 @@
         .inv-logo { max-width: 100%; height: auto; max-height: 70px; }
         .inv-logo-text { font-family: var(--font-head); font-size: 2rem; font-weight: 400; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; line-height: 1; }
         
-        .inv-company-details { margin-top: 10px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; white-space: pre-line; }
+        .inv-company-details { margin-top: 25px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; white-space: pre-line; }
 
         .inv-title-area { text-align: right; }
-        .inv-title-area h1 { font-size: 1.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 8px; }
+        .inv-title-area h1 { font-size: 1.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; }
         
         .inv-meta-grid { display: grid; grid-template-columns: auto auto; gap: 6px 20px; text-align: right; font-size: 0.8rem; }
         .inv-meta-label { font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 0.65rem; letter-spacing: 1px; }
@@ -298,12 +298,12 @@
 
         /* Print CSS */
         @media print {
-            html, body { background: #fff !important; height: auto !important; min-height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+            html, body { background: #fff !important; height: auto !important; min-height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
             .sidebar, .print-btn, .no-print { display: none !important; }
             .app-container { display: block !important; height: auto !important; overflow: visible !important; }
             .preview-area { padding: 0 !important; display: block !important; overflow: visible !important; height: auto !important; background: transparent !important; }
-            .invoice-paper { box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; min-height: auto !important; transform: none !important; position: static !important; zoom: 0.90 !important; }
-            @page { margin: 10mm; size: A4 portrait; }
+            .invoice-paper { box-shadow: none !important; padding: 10mm !important; margin: 0 !important; width: 100% !important; min-height: auto !important; transform: none !important; position: static !important; zoom: 0.90 !important; }
+            @page { margin: 0; size: A4 portrait; }
         }
 
         /* Responsive Preview Scale */
