@@ -344,7 +344,7 @@
                     <div class="row-grid">
                         <div class="input-group">
                             <label>Invoice Number</label>
-                            <input type="text" v-model="invoice.number">
+                            <input type="text" v-model="invoice.number" readonly style="background-color: var(--border); cursor: not-allowed; font-weight: 700;">
                         </div>
                         <div class="input-group">
                             <label>Date</label>
@@ -567,7 +567,7 @@
                     nam: {
                         currency: 'N$',
                         bankDetails: 'Bank: STANDARD BANK NAMIBIA LIMITED\nBranch: POST MALL STREET\nMUTUAL PLATZ - 10005 - WINDHOEK\nAccount Number: 6000 708 1129\nUniversal Code: 087373\nBIC/Swift/Branch Code: SBNMNANXXXX',
-                        companyAddress: 'P.O. Box 8241, Swakopmund, Namibia\nTel: +264 (0)81 867 0705/6  |  Email: bookings@desert-tracks.com\nNTB Reg No: TSO01063  |  Business Reg: 0133975090018  |  VAT Nr: 6033700-01-5\nwww.desert-tracks.com'
+                        companyAddress: 'P.O. Box 8241\nSwakopmund\nNamibia\n00264 (0)81 867 0705/6\n\nNTB Reg No. TSO01063\nBusiness Reg Nr: 0133975090018\nVAT Nr 6033700-01-5\nbookings@desert-tracks.com\n\nwww.desert-tracks.com'
                     },
                     sa: {
                         currency: 'ZAR',
@@ -589,8 +589,15 @@
                 const due = new Date(today.getTime() + 14 * 86400000);
                 const localDueDate = due.getFullYear() + '-' + String(due.getMonth() + 1).padStart(2, '0') + '-' + String(due.getDate()).padStart(2, '0');
 
+                // Auto-increment logic
+                let storedNumber = localStorage.getItem('dt_next_invoice_number');
+                if (!storedNumber) {
+                    storedNumber = '1235';
+                    localStorage.setItem('dt_next_invoice_number', storedNumber);
+                }
+
                 const invoice = ref({
-                    number: 'INV-2026-001',
+                    number: storedNumber,
                     date: localDate,
                     dueDate: localDueDate,
                     currency: profiles.nam.currency
@@ -653,6 +660,12 @@
 
                 const printInvoice = () => {
                     window.print();
+                    
+                    // Increment for next time they open the page
+                    const nextNum = parseInt(invoice.value.number, 10) + 1;
+                    if (!isNaN(nextNum)) {
+                        localStorage.setItem('dt_next_invoice_number', nextNum.toString());
+                    }
                 };
 
                 return {
