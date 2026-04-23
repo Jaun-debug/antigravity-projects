@@ -13,12 +13,12 @@
     
     <style data-no-optimize="1">
         :root {
-            --dark: #1a1a18;
-            --muted: #6b635a;
-            --sand: #f9f9f4;
-            --gold: #C9A24A;
-            --gold-light: #D4A94F;
-            --border: #e8e4dc;
+            --dark: #4A433A;
+            --muted: #8E8271;
+            --sand: #f9f8f4;
+            --gold: #A58D66;
+            --gold-light: #C0A983;
+            --border: #D8D2C9;
             --bg: #ece8e1;
             
             --font-main: 'DM Sans', sans-serif;
@@ -169,122 +169,124 @@
             min-height: 297mm;
             background: #fff;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-            padding: 20mm;
+            padding: 12mm 15mm;
             position: relative;
             transform-origin: top center;
         }
 
         /* Invoice Typography */
-        .invoice-paper h1, .invoice-paper h2, .invoice-paper h3 { font-family: var(--font-head); }
+        .invoice-paper h1, .invoice-paper h2, .invoice-paper h3 { font-family: var(--font-head); font-weight: 400; }
         .invoice-paper p, .invoice-paper th, .invoice-paper td { font-family: var(--font-main); }
 
         .inv-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 40px;
-            border-bottom: 2px solid var(--gold);
-            padding-bottom: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 15px;
         }
 
-        .inv-logo-area { max-width: 250px; }
-        .inv-logo { max-width: 100%; height: auto; max-height: 80px; }
-        .inv-logo-text { font-family: var(--font-head); font-size: 2.2rem; font-weight: 700; color: var(--dark); letter-spacing: -0.5px; line-height: 1; }
+        .inv-logo-area { max-width: 300px; }
+        .inv-logo { max-width: 100%; height: auto; max-height: 70px; }
+        .inv-logo-text { font-family: var(--font-head); font-size: 2rem; font-weight: 400; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; line-height: 1; }
         
-        .inv-company-details { margin-top: 15px; font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+        .inv-company-details { margin-top: 10px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
 
         .inv-title-area { text-align: right; }
-        .inv-title-area h1 { font-size: 2.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; }
+        .inv-title-area h1 { font-size: 1.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 8px; }
         
-        .inv-meta-grid { display: grid; grid-template-columns: auto auto; gap: 8px 24px; text-align: right; font-size: 0.9rem; }
-        .inv-meta-label { font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 0.7rem; letter-spacing: 1px; }
+        .inv-meta-grid { display: grid; grid-template-columns: auto auto; gap: 6px 20px; text-align: right; font-size: 0.8rem; }
+        .inv-meta-label { font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 0.65rem; letter-spacing: 1px; }
         .inv-meta-val { font-weight: 500; color: var(--dark); }
 
         /* Bill To & Info */
         .inv-info-row {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
         .inv-bill-to { flex: 1; }
-        .inv-bill-to h3 { font-size: 0.85rem; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; margin-bottom: 10px; }
-        .inv-bill-name { font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 5px; }
-        .inv-bill-address { font-size: 0.9rem; color: var(--muted); line-height: 1.6; white-space: pre-line; }
+        .inv-bill-to h3 { font-size: 0.75rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; font-weight: 600;}
+        .inv-bill-name { font-size: 1.1rem; font-weight: 500; color: var(--dark); margin-bottom: 3px; }
+        .inv-bill-address { font-size: 0.8rem; color: var(--muted); line-height: 1.5; white-space: pre-line; }
 
         /* Items Table */
         .inv-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 40px;
+            margin-bottom: 25px;
         }
         .inv-table th {
             text-align: left;
-            padding: 12px 10px;
-            background: var(--sand);
-            color: var(--dark);
-            font-size: 0.75rem;
+            padding: 8px 10px;
+            background: transparent;
+            color: var(--gold);
+            font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border);
-            border-top: 1px solid var(--border);
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--gold);
+            border-top: 1px solid var(--gold);
         }
         .inv-table td {
-            padding: 16px 10px;
+            padding: 10px 10px;
             border-bottom: 1px solid var(--border);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--dark);
         }
         .inv-table th.right, .inv-table td.right { text-align: right; }
         .inv-table th.center, .inv-table td.center { text-align: center; }
         
-        .item-desc { font-weight: 500; margin-bottom: 4px; }
-        .item-sub { font-size: 0.8rem; color: var(--muted); white-space: pre-line; }
+        .item-desc { font-weight: 600; font-size: 0.85rem; margin-bottom: 3px; color: var(--dark); }
+        .item-sub { font-size: 0.75rem; color: var(--muted); white-space: pre-line; }
 
         /* Totals Area */
         .inv-summary-row {
             display: flex;
             justify-content: flex-end;
-            margin-bottom: 50px;
+            margin-bottom: 30px;
         }
         .inv-totals {
-            width: 350px;
+            width: 300px;
         }
         .total-line {
             display: flex;
             justify-content: space-between;
-            padding: 10px 0;
-            font-size: 0.95rem;
+            padding: 6px 0;
+            font-size: 0.85rem;
             color: var(--muted);
             border-bottom: 1px solid var(--border);
         }
         .total-line.grand-total {
             border-bottom: none;
-            border-top: 2px solid var(--dark);
-            padding-top: 15px;
+            border-top: 1px solid var(--gold);
+            padding-top: 12px;
             margin-top: 5px;
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: var(--dark);
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--gold);
             font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .grand-total .val { color: var(--gold); }
+        .grand-total .val { color: var(--gold); font-weight: 500; font-family: var(--font-main); }
 
         /* Footer Notes & Bank Info */
         .inv-footer {
             display: flex;
             gap: 40px;
             margin-top: auto;
-            padding-top: 40px;
-            border-top: 1px solid var(--border);
-            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid var(--gold);
+            font-size: 0.8rem;
         }
         .inv-notes { flex: 2; }
-        .inv-notes h4 { font-size: 0.75rem; text-transform: uppercase; color: var(--gold); letter-spacing: 1px; margin-bottom: 8px; }
-        .inv-notes p { color: var(--muted); line-height: 1.6; white-space: pre-line; }
+        .inv-notes h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; }
+        .inv-notes p { color: var(--muted); line-height: 1.5; white-space: pre-line; }
         
-        .inv-bank { flex: 1; background: var(--sand); padding: 15px; border-radius: 6px; }
-        .inv-bank h4 { font-size: 0.75rem; text-transform: uppercase; color: var(--dark); letter-spacing: 1px; margin-bottom: 8px; }
-        .inv-bank p { color: var(--muted); line-height: 1.6; font-family: monospace; font-size: 0.8rem; white-space: pre-line;}
+        .inv-bank { flex: 1; background: transparent; border: 1px solid var(--border); padding: 12px; border-radius: 4px; }
+        .inv-bank h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--dark); letter-spacing: 2px; margin-bottom: 8px; }
+        .inv-bank p { color: var(--muted); line-height: 1.5; font-family: var(--font-main); font-size: 0.75rem; white-space: pre-line;}
 
         /* Controls for editing table */
         .edit-controls { display: flex; gap: 10px; margin-top: 15px; }
@@ -301,7 +303,7 @@
             .app-container { display: block; height: auto; overflow: visible; }
             .preview-area { padding: 0; display: block; overflow: visible; }
             .invoice-paper { box-shadow: none; padding: 0; width: 100%; min-height: auto; }
-            @page { margin: 15mm; size: A4; }
+            @page { margin: 10mm; size: A4; }
         }
 
         /* Responsive Preview Scale */
