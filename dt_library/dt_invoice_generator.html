@@ -298,12 +298,12 @@
 
         /* Print CSS */
         @media print {
-            body { background: #fff; }
-            .sidebar { display: none !important; }
-            .app-container { display: block; height: auto; overflow: visible; }
-            .preview-area { padding: 0; display: block; overflow: visible; }
-            .invoice-paper { box-shadow: none; padding: 0; width: 100%; min-height: auto; }
-            @page { margin: 10mm; size: A4; }
+            html, body { background: #fff !important; height: auto !important; min-height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; }
+            .sidebar, .print-btn, .no-print { display: none !important; }
+            .app-container { display: block !important; height: auto !important; overflow: visible !important; }
+            .preview-area { padding: 0 !important; display: block !important; overflow: visible !important; height: auto !important; background: transparent !important; }
+            .invoice-paper { box-shadow: none !important; padding: 0 !important; margin: 0 !important; width: 100% !important; min-height: auto !important; transform: none !important; position: static !important; }
+            @page { margin: 10mm; size: A4 portrait; }
         }
 
         /* Responsive Preview Scale */
@@ -571,7 +571,7 @@
                     },
                     sa: {
                         currency: 'ZAR',
-                        bankDetails: 'Banking Details for ZAR - EFT\n\nACCOUNT NAME - DESERT TRACKS BOOKINGS AND SAFARI (Pty)\nSTANDARD BANK - BUSINESS CURRENT ACCOUNT\nTHIBAULT SQUARE (Corner Hans Strydom, Long St, Cape Town City Centre, 8001, South Africa)\nACCOUNT NUMBER - 070185077\nBRANCH CODE - 051001\nSWIFT ADDRESS - SBZA ZA JJ\n\nKINDLY EMAIL PROOF OF PAYMENT TO bookings@desert-tracks.com',
+                        bankDetails: 'Banking Details for ZAR - EFT\n\nACCOUNT NAME - DESERT TRACKS BOOKINGS AND SAFARI (Pty)\nSTANDARD BANK - BUSINESS CURRENT ACCOUNT\nTHIBAULT SQUARE (Corner Hans Strydom, Long St, Cape Town City Centre, 8001, South Africa)\nACCOUNT NUMBER - 070185077\nBRANCH CODE - 051001\nSWIFT ADDRESS - SBZA ZA JJ',
                         companyAddress: 'DESERT TRACKS BOOKINGS AND SAFARI (Pty) Ltd\n19 EDISON WAY\nUNIT 129 MILLENIUM BUSINESS PARK\nCENTURY CITY - WESTERN CAPE\n7441\n+264 (0)81 867 0705\n\nNTB Reg No. TSO01063\nBusiness Reg No. 2023 / 571033\nbookings@desert-tracks.com\n\nwww.desert-tracks.com'
                     }
                 };
