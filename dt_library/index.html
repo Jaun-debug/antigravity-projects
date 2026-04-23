@@ -489,7 +489,7 @@
             container.appendChild(folders['Website Blocks Doc'].details);
         }
 
-        let activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
+        activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
         let preloadedCode = "";
 
         async function loadComponent(idx) {
