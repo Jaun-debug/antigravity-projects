@@ -232,23 +232,27 @@
                                 <input type="text" id="b-name" class="form-control" placeholder="e.g. John & Jane Doe" required>
                             </div>
                             <div class="form-group">
-                                <label class="form-label">Guide Name (if applicable)</label>
-                                <input type="text" id="b-guide" class="form-control" placeholder="e.g. Peter">
+                                <label class="form-label">Guide Room(s)</label>
+                                <input type="number" id="b-guide" class="form-control" placeholder="0" min="0">
                             </div>
                         </div>
 
                         <div class="grid-2">
                             <div class="form-group">
-                                <label class="form-label">Preferred Dates</label>
-                                <input type="text" id="b-dates" class="form-control" placeholder="e.g. 12-15 Aug 2026" required>
+                                <label class="form-label">Date In</label>
+                                <input type="date" id="b-date-in" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
                             </div>
+                            <div class="form-group">
+                                <label class="form-label">Date Out</label>
+                                <input type="date" id="b-date-out" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
                             <div class="form-group">
                                 <label class="form-label">Arriving From</label>
                                 <input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek / Previous Lodge" required>
                             </div>
-                        </div>
-
-                        <div class="grid-2">
                             <div class="form-group">
                                 <label class="form-label">Departing To</label>
                                 <input type="text" id="b-departing" class="form-control" placeholder="e.g. Swakopmund / Next Lodge" required>
@@ -1005,7 +1009,8 @@
             const status = document.getElementById('b-status').value;
             const name = document.getElementById('b-name').value;
             const guide = document.getElementById('b-guide').value;
-            const dates = document.getElementById('b-dates').value;
+            const dateIn = document.getElementById('b-date-in').value;
+            const dateOut = document.getElementById('b-date-out').value;
             const arriving = document.getElementById('b-arriving').value;
             const departing = document.getElementById('b-departing').value;
             const msg = document.getElementById('b-message').value;
@@ -1015,26 +1020,36 @@
 
             const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
             
-            let body = status.toUpperCase() + ' REQUEST: ' + lodgeName + '\n\n';
-            body += 'AGENT / CONSULTANT EMAIL:\n' + agentEmail + '\n\n';
+            let body = '==================================================\n';
+            body += status.toUpperCase() + ' REQUEST: ' + lodgeName.toUpperCase() + '\n';
+            body += '==================================================\n\n';
             
+            body += 'AGENT / CONSULTANT:\n' + agentEmail + '\n\n';
+            
+            body += '--------------------------------------------------\n';
             body += 'CLIENT DETAILS:\n';
+            body += '--------------------------------------------------\n';
             body += 'Name: ' + name + '\n';
-            if (guide.trim() !== '') {
-                body += 'Guide Name: ' + guide + '\n';
+            if (guide && guide !== '0') {
+                body += 'Guide Rooms: ' + guide + '\n';
             }
-            body += 'Dates: ' + dates + '\n';
+            body += 'Date In: ' + dateIn + '\n';
+            body += 'Date Out: ' + dateOut + '\n';
             body += 'Arriving From: ' + arriving + '\n';
             body += 'Departing To: ' + departing + '\n\n';
             
+            body += '--------------------------------------------------\n';
             body += 'SELECTED ITEMS:\n';
+            body += '--------------------------------------------------\n';
             selectedItems.forEach(item => {
-                body += '- ' + item.qty + 'x ' + item.name + ' (N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + ')\n';
+                body += '[ ' + item.qty + 'x ] ' + item.name + '  (N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + ')\n';
             });
-            body += '\nGRAND TOTAL: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '\n\n';
+            body += '\n--------------------------------------------------\n';
+            body += 'GRAND TOTAL: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '\n';
+            body += '==================================================\n\n';
             
             if (msg.trim() !== '') {
-                body += 'NOTES / SPECIAL REQUIREMENTS:\n' + msg + '\n';
+                body += 'NOTES / SPECIAL REQUIREMENTS:\n' + msg + '\n\n';
             }
             
             // Build the dynamic subject
