@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O&L Leisure Rates 2026-2028 - Version 2</title>
+    <title>O&L Leisure Rates & Booking 2026-2028</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    
     <style data-no-optimize="1">
         :root {
             --primary-bg: #F5F5F3; /* Ivory Background */
@@ -13,105 +15,69 @@
             --card-light: #FAFAFA;
             --text-main: #333333;
             --text-muted: #666666;
-            --gold-accent: #C9A24A;
-            --gold-gradient: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435);
+            --brand-accent: #C9A24A; /* Gold Accent */
+            --brand-gradient: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435);
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --glass-border: 1px solid rgba(201, 162, 74, 0.15); /* Subtle gold border for ivory */
+            --glass-border: 1px solid rgba(201, 162, 74, 0.15);
             --font-head: 'Cinzel', serif;
             --font-body: 'Inter', sans-serif;
         }
-
-        /* SHARE TOOLBAR (STICKY) */
-        .share-toolbar {
-            position: sticky;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-            padding: 12px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            animation: fadeInDown 0.6s ease forwards;
-        }
-
-        .share-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            border-radius: 30px;
-            font-family: var(--font-body);
-            font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            cursor: pointer;
-            border: 1px solid rgba(0,0,0,0.1);
-            background: #fff;
-            color: var(--text-main);
-            transition: var(--transition);
-        }
-
-        .share-btn svg { width: 16px; height: 16px; }
-        
-        .share-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-color: var(--gold-accent);
-            color: var(--gold-accent);
-        }
-
-        .share-btn.primary {
-            background: var(--gold-gradient);
-            color: #fff;
-            border: none;
-        }
-        .share-btn.primary:hover {
-            box-shadow: 0 6px 15px rgba(201, 162, 74, 0.4);
-            color: #fff;
-        }
-
-        /* TOAST NOTIFICATION */
-        .toast { position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%); background: var(--text-main); color: #fff; padding: 14px 28px; border-radius: 30px; font-weight: 500; font-size: 0.9rem; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1100; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        .toast.show { bottom: 40px; }
 
         body { margin: 0; padding: 0; background-color: var(--primary-bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
         h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
         .wrapper { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
         
-        .header { text-align: center; margin-bottom: 60px; animation: fadeInDown 1s ease forwards; }
-        .header h1 { font-size: 3.5rem; background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
-        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; margin-bottom: 15px; }
-        
-        .meta-info { display: inline-flex; gap: 20px; background: #fff; padding: 10px 25px; border-radius: 40px; border: var(--glass-border); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); box-shadow: 0 2px 10px rgba(0,0,0,0.02); justify-content: center; margin-top: 10px;}
-        .meta-info span { font-weight: 600; color: var(--text-main); }
+        .header { text-align: center; margin-bottom: 40px; animation: fadeInDown 1s ease forwards; }
+        .header h1 { font-size: 3.5rem; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
+        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
 
-        /* GRID SYSTEM */
-        .property-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; }
-        .property-card { background: var(--card-bg); border-radius: 12px; overflow: hidden; border: var(--glass-border); box-shadow: 0 4px 20px rgba(0,0,0,0.05); cursor: pointer; transition: var(--transition); position: relative; }
-        .property-card:hover { transform: translateY(-8px); border-color: var(--gold-accent); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        .card-image { height: 260px; background-size: cover; background-position: center; position: relative; transition: var(--transition); }
-        .property-card:hover .card-image { transform: scale(1.05); }
-        
-        .card-content { padding: 30px 20px; position: relative; z-index: 2; background: var(--card-bg); }
-        .card-title { font-size: 1.6rem; color: var(--text-main); margin-bottom: 10px; letter-spacing: 1px; }
-        .card-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--gold-accent); font-weight: 600; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; margin-top: 15px; transition: var(--transition); }
-        .property-card:hover .card-btn { gap: 15px; color: #A68435; }
+        /* SWIPER CAROUSEL */
+        .swiper-container-wrapper { animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; margin-bottom: 60px; position: relative; }
+        .main-swiper { width: 100%; padding-top: 50px; padding-bottom: 50px; }
+        .swiper-slide {
+            width: 360px;
+            height: 520px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+        }
+        .swiper-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+            z-index: 1;
+            transition: var(--transition);
+        }
+        .swiper-slide:hover::after {
+            height: 70%;
+            background: linear-gradient(to top, rgba(201, 162, 74, 0.9) 0%, transparent 100%);
+        }
+        .swiper-card-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            z-index: 2;
+            color: #fff;
+            text-align: left;
+        }
+        .swiper-card-location { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #f9f6f0; opacity: 0.8; margin-bottom: 8px; display: block; }
+        .swiper-card-title { font-size: 1.8rem; font-family: var(--font-head); font-weight: 600; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .swiper-card-btn { display: inline-block; padding: 8px 20px; border: 1px solid rgba(255,255,255,0.4); border-radius: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); backdrop-filter: blur(5px); }
+        .swiper-slide:hover .swiper-card-btn { background: #fff; color: var(--brand-accent); border-color: #fff; }
 
         /* DETAIL VIEW */
-        .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 100px; }
+        .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 120px; }
         .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: var(--transition); margin-bottom: 40px; background: transparent; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600;}
-        .back-btn:hover { color: #fff; background: var(--gold-gradient); border-color: transparent; }
+        .back-btn:hover { color: #fff; background: var(--brand-gradient); border-color: transparent; }
 
         .detail-header { margin-bottom: 40px; display: flex; flex-direction: column; gap: 15px; }
-        .detail-title { font-size: 3.5rem; color: var(--gold-accent); line-height: 1.1; }
+        .detail-title { font-size: 3.5rem; color: var(--brand-accent); line-height: 1.1; }
         .intro-text { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 900px; }
 
         /* MULTI-IMAGE GALLERY */
@@ -121,22 +87,24 @@
         /* TABS */
         .tabs { display: flex; gap: 15px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 10px; }
         .tab-btn { background: var(--card-bg); border: var(--glass-border); color: var(--text-muted); padding: 15px 30px; border-radius: 8px; cursor: pointer; font-family: var(--font-head); font-size: 1.1rem; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
-        .tab-btn:hover { border-color: var(--gold-accent); color: var(--text-main); }
-        .tab-btn.active { background: var(--gold-gradient); color: #fff; border-color: transparent; }
+        .tab-btn:hover { border-color: var(--brand-accent); color: var(--text-main); }
+        .tab-btn.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+        .tab-btn-highlight { border: 1px solid var(--brand-accent); color: var(--brand-accent); }
+        .tab-btn-highlight.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
 
         /* CONTENT BLOCKS */
         .content-block { background: var(--card-bg); border: var(--glass-border); border-radius: 12px; padding: 40px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
-        .content-block h3 { color: var(--gold-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 15px; display: inline-block; }
+        .content-block h3 { color: var(--brand-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 15px; display: inline-block; text-transform: uppercase; }
         .sub-block { margin-top: 30px; }
-        .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; }
+        .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;}
 
         /* TABLES */
         .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 8px; margin-bottom: 30px;}
         table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-light); margin-bottom: 0px; }
-        th { font-family: var(--font-head); background: rgba(201, 162, 74, 0.1); color: var(--text-main); font-size: 0.95rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(201, 162, 74, 0.2); }
+        th { font-family: var(--font-head); background: rgba(201, 162, 74, 0.08); color: var(--text-main); font-size: 0.85rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(201, 162, 74, 0.15); }
         td { padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
         tr:last-child td { border-bottom: none; }
         tr:hover td { background: rgba(201, 162, 74, 0.03); color: var(--text-main); }
@@ -145,167 +113,211 @@
         /* LISTS & TEXT */
         .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
         .text-list li { position: relative; padding-left: 25px; margin-bottom: 15px; }
-        .text-list li::before { content: "✦"; color: var(--gold-accent); position: absolute; left: 0; top: 2px; font-size: 1rem; }
+        .text-list li::before { content: "✦"; color: var(--brand-accent); position: absolute; left: 0; top: 2px; font-size: 1rem; }
         .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+
+        /* BOOKING BAR & FORM */
+        #booking-bar {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            padding: 20px; box-shadow: 0 -10px 30px rgba(0,0,0,0.1); 
+            z-index: 100; text-align: center; border-top: 1px solid rgba(201, 162, 74, 0.2);
+            animation: fadeInUp 0.4s ease;
+        }
+        #booking-total { font-weight: 600; font-size: 1.3rem; margin-right: 30px; color: var(--text-main); font-family: var(--font-head); }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: block; }
+        .form-label.accent { color: var(--brand-accent); }
+        .form-control { width: 100%; padding: 15px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--font-body); font-size: 1rem; background: var(--card-light); transition: var(--transition); box-sizing: border-box; }
+        .form-control:focus { outline: none; border-color: var(--brand-accent); background: #fff; box-shadow: 0 0 0 4px rgba(201, 162, 74, 0.1); }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
 
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-
-        /* PRINT MEDIA QUERIES FOR PDF */
-        @media print {
-            .share-toolbar { display: none !important; }
-            .back-btn { display: none !important; }
-            body { background: #fff !important; }
-            .wrapper { padding: 0; max-width: 100%; box-shadow: none; }
-            .content-block { padding: 20px; box-shadow: none; border: 1px solid #eee; break-inside: avoid; margin-bottom: 20px; }
-            .tabs { display: none !important; }
-            .tab-content { display: block !important; opacity: 1 !important; page-break-inside: avoid; }
-        }
-
-        /* HTML2CANVAS FIXES */
-        body.pdf-mode * {
-            animation: none !important;
-            transition: none !important;
-        }
-        body.pdf-mode .property-grid, body.pdf-mode .detail-view, body.pdf-mode .header {
-            opacity: 1 !important;
-        }
-        body.pdf-mode .header h1 {
-            background: none !important;
-            -webkit-background-clip: initial !important;
-            -webkit-text-fill-color: initial !important;
-            color: var(--gold-accent) !important;
-        }
-        body.pdf-mode .share-toolbar, body.pdf-mode .back-btn {
-            display: none !important;
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         @media (max-width: 900px) {
             .lodge-gallery { grid-template-columns: 1fr; }
             .gallery-img { height: 220px; }
+            .swiper-slide { width: 300px; height: 440px; }
+            .grid-2 { grid-template-columns: 1fr; gap: 0; margin-bottom: 0; }
         }
         @media (max-width: 768px) {
-            .share-toolbar { padding: 10px; justify-content: flex-start; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
-            .share-btn { padding: 12px 20px; font-size: 0.8rem; flex-shrink: 0; }
             .header h1 { font-size: 2.2rem; }
             .detail-title { font-size: 2rem; }
             th, td { padding: 12px; font-size: 0.85rem; }
             .content-block { padding: 25px; }
-            .meta-info { flex-direction: column; gap: 5px; padding: 15px; text-align: left; align-items: flex-start; }
+            #booking-bar { padding: 15px; }
+            #booking-total { font-size: 1.1rem; margin-right: 15px; display: block; margin-bottom: 10px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- SHARE TOOLBAR -->
-    <div class="share-toolbar" id="toolbar">
-        <button class="share-btn primary" onclick="shareWhatsApp()">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-            WhatsApp Share
-        </button>
-        <button class="share-btn" onclick="shareEmail()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-            Email
-        </button>
-        <button class="share-btn" onclick="copyLink()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-            Copy Link
-        </button>
-        <button class="share-btn" onclick="copyMessage()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-            Copy Message
-        </button>
-        <button class="share-btn" onclick="downloadPDF()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-            Download PDF
-        </button>
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary-bg); z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 400px; width: 100%; text-align: center; border: var(--glass-border);">
+            <h2 style="color: var(--brand-accent); font-family: var(--font-head); margin-bottom: 20px;">O&L Leisure Rates</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Please sign in to access the booking engine.</p>
+            <input type="text" id="login-user" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: var(--font-body);">
+            <input type="password" id="login-pass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: var(--font-body);">
+            <button onclick="checkLogin()" style="width: 100%; padding: 15px; background: var(--brand-gradient); color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Access Portal</button>
+            <p id="login-error" style="color: red; font-size: 0.8rem; margin-top: 15px; display: none;">Invalid credentials.</p>
+        </div>
     </div>
-
-    <div class="toast" id="toast">Copied to clipboard!</div>
+    
+    <script data-no-optimize="1">
+        function checkLogin() {
+            const u = document.getElementById('login-user').value;
+            const p = document.getElementById('login-pass').value;
+            if (u === 'jaun' && p === 'passme9cops') {
+                document.getElementById('login-overlay').style.display = 'none';
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+    </script>
 
     <div class="wrapper">
         <div id="main-view">
             <div class="header">
-                <h1>O&L Leisure Rates</h1>
-                <p>Comprehensive Rate & Policy Directory 2026-2028</p>
-                <div class="meta-info">
-                    <div>Last Updated: <span>23 April 2026</span></div>
-                    <div>Valid Until: <span>31 December 2028</span></div>
-                </div>
+                <h1>O&L Leisure</h1>
+                <p>STO 20 Rates Season 2026-2028</p>
             </div>
 
-            <div class="property-grid">
-                <div class="property-card" onclick="openProperty('strand')">
-                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg')"></div>
-                    <div class="card-content">
-                        <h2 class="card-title">Strand Hotel Swakopmund</h2><span class="card-btn">View Full Details ➔</span>
+            <!-- SWIPER CAROUSEL -->
+            <div class="swiper-container-wrapper">
+                <div class="swiper main-swiper">
+                    <div class="swiper-wrapper" id="lodge-slider">
+                        <!-- Slides injected via JS -->
                     </div>
                 </div>
-                <div class="property-card" onclick="openProperty('mokuti')">
-                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg')"></div>
-                    <div class="card-content">
-                        <h2 class="card-title">Mokuti Etosha Lodge</h2><span class="card-btn">View Full Details ➔</span>
-                    </div>
-                </div>
-                <div class="property-card" onclick="openProperty('midgard')">
-                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg')"></div>
-                    <div class="card-content">
-                        <h2 class="card-title">Midgard Otjihavera Windhoek</h2><span class="card-btn">View Full Details ➔</span>
-                    </div>
-                </div>
-                <div class="property-card" onclick="openProperty('chobe')">
-                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg')"></div>
-                    <div class="card-content">
-                        <h2 class="card-title">Chobe Water Villas Zambezi</h2><span class="card-btn">View Full Details ➔</span>
-                    </div>
-                </div>
-                <div class="property-card" onclick="openProperty('divava')">
-                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg')"></div>
-                    <div class="card-content">
-                        <h2 class="card-title">Divava Okavango</h2><span class="card-btn">View Full Details ➔</span>
-                    </div>
-                </div>
-                <div class="property-card" onclick="openProperty('lemirage')">
-                    <div class="card-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg')"></div>
-                    <div class="card-content">
-                        <h2 class="card-title">Le Mirage Sossusvlei</h2><span class="card-btn">View Full Details ➔</span>
-                    </div>
-                </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next" style="color: var(--brand-accent); right: 20px;"></div>
+                <div class="swiper-button-prev" style="color: var(--brand-accent); left: 20px;"></div>
             </div>
         </div>
 
         <div id="detail-view" class="detail-view">
-            <button class="back-btn" onclick="closeProperty()">← Back to Directory</button>
+            <button class="back-btn" onclick="closeProperty()">← Back to Lodges</button>
             
             <div class="detail-header">
                 <h1 class="detail-title" id="d-title">Property Name</h1>
                 <p class="intro-text" id="d-intro"></p>
-                <div style="color: var(--gold-accent); margin-top: 5px; font-weight: 600;" id="d-airport"></div>
-            </div>
-
-            <!-- DYNAMIC 3-IMAGE GALLERY -->
-            <div class="lodge-gallery" id="d-gallery">
-                <!-- Images Injected Here via JS -->
+                <div style="color: var(--brand-accent); margin-top: 5px; font-weight: 600;" id="d-location"></div>
+                <div style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;" id="d-airport"></div>
             </div>
 
             <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates & Info</button>
+                <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
                 <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
                 <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
+                <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
+                <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
             </div>
 
             <div id="tab-1" class="tab-content active"></div>
             <div id="tab-2" class="tab-content"></div>
             <div id="tab-3" class="tab-content"></div>
+            <div id="tab-4" class="tab-content">
+                <div class="content-block">
+                    <h3>Gallery</h3>
+                    <div class="lodge-gallery" id="d-gallery"></div>
+                    <p class="raw-text" id="gallery-placeholder">More photos coming soon...</p>
+                </div>
+            </div>
+            
+            <!-- TAB 5: FINALISE BOOKING -->
+            <div id="tab-5" class="tab-content">
+                <div class="content-block" style="background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                    <h3>Complete Request</h3>
+                    <p class="raw-text" style="margin-bottom: 25px;">Review your selection and finalize your booking details.</p>
+                    
+                    <div id="booking-summary" style="margin-bottom: 30px; background: var(--card-light); padding: 25px; border-radius: 8px; border: var(--glass-border);">
+                        <p style="color: var(--text-muted); margin: 0;">Please select rates or activities from the tabs above to build your booking.</p>
+                    </div>
+                    
+                    <form onsubmit="submitBooking(event)" id="booking-form">
+                        
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label accent">Agent / Consultant Email</label>
+                                <input type="email" id="b-agent-email" class="form-control" placeholder="your.email@desert-tracks.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label accent">Booking Status</label>
+                                <select id="b-status" class="form-control" required style="cursor: pointer;">
+                                    <option value="Provisional Booking">Provisional Booking</option>
+                                    <option value="Confirmed Booking">Confirmed Booking</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px;">
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Client Full Name</label>
+                                <input type="text" id="b-name" class="form-control" placeholder="e.g. John & Jane Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Guide Room(s)</label>
+                                <input type="number" id="b-guide" class="form-control" placeholder="" min="0">
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Date In</label>
+                                <input type="date" id="b-date-in" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Date Out</label>
+                                <input type="date" id="b-date-out" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Arriving From</label>
+                                <input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek / Previous Lodge" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Departing To</label>
+                                <input type="text" id="b-departing" class="form-control" placeholder="e.g. Swakopmund / Next Lodge" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Additional Notes or Special Requirements</label>
+                            <textarea id="b-message" class="form-control" placeholder="Dietary requirements, room preferences, etc." style="height: 120px; resize: vertical;"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="back-btn" style="background: var(--brand-gradient); color: #fff; width: 100%; border: none; padding: 18px; font-size: 1.1rem; justify-content: center; margin-top: 10px; box-shadow: 0 10px 20px rgba(201, 162, 74, 0.2);">Send Booking to Operations</button>
+                    </form>
+                </div>
+            </div>
 
         </div>
     </div>
 
-    <!-- DATA & LOGIC -->
+    <!-- BOOKING BAR -->
+    <div id="booking-bar">
+        <span id="booking-total">Total: N$ 0.00</span>
+        <button onclick="switchTab(5)" class="back-btn" style="background: var(--brand-gradient); color: #fff; margin-bottom: 0; border: none; padding: 12px 30px;">Finalise Booking</button>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <script data-no-optimize="1">
         const DB = {
             'strand': {
+                location: 'Swakopmund',
+                cover: 'https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg',
                 name: 'Strand Hotel Swakopmund',
                 images: [
                     'https://wetu.com/imageHandler/c1920x1080/1747/standard_double_room12.jpg?fmt=jpg',
@@ -421,6 +433,8 @@ NOTE: Given the configurations of all rooms/suites at the Strand. A 3rd adult is
                 `
             },
             'mokuti': {
+                location: 'Etosha',
+                cover: 'https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg',
                 name: 'Mokuti Etosha Lodge',
                 images: [
                     'https://wetu.com/imageHandler/c1920x1080/10525/1764582271548dji202510011838260443d.jpg?fmt=jpg',
@@ -528,6 +542,8 @@ Sharing room with at least one infant or child, pay only the per-adult sharing r
                 `
             },
             'midgard': {
+                location: 'Windhoek',
+                cover: 'https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg',
                 name: 'Midgard Otjihavera Windhoek',
                 images: [
                     'https://wetu.com/imageHandler/c1920x1080/29059/_clb4783.jpg?fmt=jpg',
@@ -626,6 +642,8 @@ b) In Family rooms (5)= 2 adults and 2 children (up to 15 years)</p>
                 `
             },
             'chobe': {
+                location: 'Zambezi',
+                cover: 'https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg',
                 name: 'Chobe Water Villas Zambezi',
                 images: [
                     'https://wetu.com/imageHandler/c1920x1080/44110/1753867882906chobedeck03rgbv1web.jpg?fmt=jpg',
@@ -734,6 +752,8 @@ Any person 18 and plus is an adult and such is accommodated in their own Villa p
                 `
             },
             'divava': {
+                location: 'Okavango',
+                cover: 'https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg',
                 name: 'Divava Okavango',
                 images: [
                     'https://wetu.com/imageHandler/c1920x1080/10477/room_overview1.jpg?fmt=jpg',
@@ -853,6 +873,8 @@ There is one Camelthorn Room that can accommodate a family of five in two separa
                 `
             },
             'lemirage': {
+                location: 'Sossusvlei',
+                cover: 'https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg',
                 name: 'Le Mirage Sossusvlei',
                 images: [
                     'https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-sunset.jpg?fmt=jpg',
@@ -964,134 +986,318 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             }
         };
 
-        const mainView = document.getElementById('main-view');
-        const detailView = document.getElementById('detail-view');
-        
-        /* SHARE LOGIC */
-        function getShareMessage() {
-            return `Hi, please find our latest rates here: ${window.location.href}`;
-        }
-
-        function showToast(msg = "Copied!") {
-            const toast = document.getElementById("toast");
-            toast.innerText = msg;
-            toast.classList.add("show");
-            setTimeout(() => toast.classList.remove("show"), 3000);
-        }
-
-        function shareWhatsApp() {
-            const text = encodeURIComponent(getShareMessage());
-            window.open(`https://wa.me/?text=${text}`, "_blank");
-        }
-
-        function shareEmail() {
-            let lodgeTitle = "O&L Leisure Rates";
-            if(detailView.style.display === 'block') {
-                lodgeTitle = document.getElementById('d-title').innerText + " Rates";
-            }
-            const subject = encodeURIComponent(`Latest Rates - ${lodgeTitle}`);
-            const body = encodeURIComponent(getShareMessage());
-            window.location.href = `mailto:?subject=${subject}&body=${body}`;
-        }
-
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => {
-                showToast("Link Copied!");
-            });
-        }
-
-        function copyMessage() {
-            navigator.clipboard.writeText(getShareMessage()).then(() => {
-                showToast("Message Copied!");
-            });
-        }
-
-        function downloadPDF() {
-            const isMainView = mainView.style.display !== 'none';
-            const element = isMainView ? mainView : detailView;
-            const filename = isMainView ? 'O_and_L_Leisure_Rates.pdf' : `${document.getElementById('d-title').innerText.replace(/\s+/g, '_')}_Rates.pdf`;
+        // Inject Swiper Slides
+        const slider = document.getElementById('lodge-slider');
+        Object.keys(DB).forEach(key => {
+            const data = DB[key];
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.style.backgroundImage = 'url(' + data.cover + ')';
             
-            const opt = {
-                margin:       [10, 10, 10, 10],
-                filename:     filename,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true, backgroundColor: '#ffffff' },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
-            };
+            slide.innerHTML = `
+                <div class="swiper-card-content">
+                    <span class="swiper-card-location">${data.location}</span>
+                    <h2 class="swiper-card-title">${data.name}</h2>
+                    <span class="swiper-card-btn" onclick="openProperty('${key}')">Select Lodge</span>
+                </div>
+            `;
+            slider.appendChild(slide);
+        });
 
-            showToast("Generating PDF...");
-            
-            document.body.classList.add('pdf-mode');
+        // Initialize Swiper
+        const swiper = new Swiper('.main-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            simulateTouch: true,
+            touchRatio: 1.5,
+            resistanceRatio: 0.85,
+            coverflowEffect: {
+                rotate: 15,
+                stretch: 0,
+                depth: 300,
+                modifier: 1,
+                slideShadows: true,
+            },
+            loop: true,
+            slideToClickedSlide: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            mousewheel: {
+                forceToAxis: true,
+            },
+            keyboard: true
+        });
 
-            // If in detail view, temporarily show all tabs so everything is printed
-            if (!isMainView) {
-                document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'block');
-            }
+        function parseTab1(htmlString) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString;
             
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.body.classList.remove('pdf-mode');
-                // Restore tabs
-                if (!isMainView) {
-                    document.querySelectorAll('.tab-content').forEach(c => c.style.display = '');
+            const tables = div.querySelectorAll('table');
+            tables.forEach(table => {
+                const theadTr = table.querySelector('thead tr');
+                if(theadTr) {
+                    const th = document.createElement('th');
+                    th.innerText = 'QTY';
+                    th.style.textAlign = 'center';
+                    theadTr.appendChild(th);
                 }
+                
+                const tbodyTrs = table.querySelectorAll('tbody tr');
+                tbodyTrs.forEach(tr => {
+                    const tds = tr.querySelectorAll('td');
+                    if(tds.length >= 2) {
+                        const lastTd = tds[tds.length - 1];
+                        let priceText = lastTd.innerText.trim().replace(/,/g, '');
+                        let price = parseFloat(priceText);
+                        
+                        if(isNaN(price) && priceText.toLowerCase() === 'free') {
+                            price = 0;
+                        }
+                        
+                        const name = tds[0].innerText.trim();
+                        const newTd = document.createElement('td');
+                        newTd.style.textAlign = 'center';
+                        
+                        if(!isNaN(price)) {
+                            newTd.innerHTML = \`<input type="number" min="0" value="" placeholder="" class="rate-qty" data-name="\${name}" data-price="\${price}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(201, 162, 74, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">\`;
+                        }
+                        tr.appendChild(newTd);
+                    }
+                });
             });
+            return div.innerHTML;
         }
-        
-        function openProperty(propertyKey) {
-            const data = DB[propertyKey];
-            if (!data) return;
+
+        function openProperty(id) {
+            const data = DB[id];
+            if(!data) return;
+
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            window.scrollTo(0,0);
 
             document.getElementById('d-title').innerText = data.name;
             document.getElementById('d-intro').innerText = data.intro;
-            document.getElementById('d-airport').innerText = data.airport;
+            document.getElementById('d-location').innerText = data.location;
+            if (data.airport) {
+                document.getElementById('d-airport').innerText = data.airport;
+            } else {
+                document.getElementById('d-airport').innerText = '';
+            }
 
-            // Load 3-image Gallery
+            // Load Gallery
             const gallery = document.getElementById('d-gallery');
             gallery.innerHTML = '';
-            data.images.forEach(imgUrl => {
-                const img = document.createElement('img');
-                img.src = imgUrl;
-                img.className = 'gallery-img';
-                img.alt = 'Property Image';
-                gallery.appendChild(img);
-            });
+            if (data.images && data.images.length > 0) {
+                data.images.forEach(img => {
+                    gallery.innerHTML += '<img src="'+img+'" class="gallery-img" />';
+                });
+                document.getElementById('gallery-placeholder').style.display = 'none';
+            } else {
+                document.getElementById('gallery-placeholder').style.display = 'block';
+            }
 
-            document.getElementById('tab-1').innerHTML = data.tab1;
-            document.getElementById('tab-2').innerHTML = data.tab2;
+            // Load Tabs
+            document.getElementById('tab-1').innerHTML = parseTab1(data.tab1);
+            document.getElementById('tab-2').innerHTML = parseTab1(data.tab2);
             document.getElementById('tab-3').innerHTML = data.tab3;
-
-            mainView.style.display = 'none';
-            detailView.style.display = 'block';
-            switchTab(1); 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            // Set URL hash without scrolling
-            history.pushState(null, null, '#' + propertyKey);
+            // Prefill Agent Email if exists
+            const savedEmail = localStorage.getItem('dt_agent_email');
+            if (savedEmail) {
+                document.getElementById('b-agent-email').value = savedEmail;
+            }
+
+            // Reset Quantities and Total
+            updateTotal();
+            switchTab(1);
         }
 
         function closeProperty() {
-            detailView.style.display = 'none';
-            mainView.style.display = 'block';
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('main-view').style.display = 'block';
             
-            // Remove URL hash
-            history.pushState(null, null, window.location.pathname + window.location.search);
+            setTimeout(() => {
+                swiper.update();
+            }, 100);
+            window.scrollTo(0,0);
         }
 
-        function switchTab(idx) {
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`tab-btn-${idx}`).classList.add('active');
-            document.getElementById(`tab-${idx}`).classList.add('active');
-        }
-
-        // Initialize Hash Routing on Load
-        window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.replace('#', '');
-            if (hash && DB[hash]) {
-                openProperty(hash);
+        function switchTab(num) {
+            for(let i=1; i<=5; i++) {
+                const btn = document.getElementById('tab-btn-'+i);
+                const tab = document.getElementById('tab-'+i);
+                if(btn) btn.classList.remove('active');
+                if(tab) tab.classList.remove('active');
             }
-        });
+            const activeBtn = document.getElementById('tab-btn-'+num);
+            const activeTab = document.getElementById('tab-'+num);
+            if(activeBtn) activeBtn.classList.add('active');
+            if(activeTab) activeTab.classList.add('active');
+
+            if(num === 5) {
+                renderBookingSummary();
+            }
+        }
+
+        let selectedItems = [];
+
+        function updateTotal() {
+            selectedItems = [];
+            let total = 0;
+            const inputs = document.querySelectorAll('.rate-qty');
+            inputs.forEach(input => {
+                const qty = parseInt(input.value) || 0;
+                if(qty > 0) {
+                    const price = parseFloat(input.dataset.price);
+                    const name = input.dataset.name;
+                    total += qty * price;
+                    selectedItems.push({ name, qty, price, total: qty * price });
+                }
+            });
+            
+            const bb = document.getElementById('booking-bar');
+            if(total > 0) {
+                bb.style.display = 'flex';
+                bb.style.justifyContent = 'center';
+                bb.style.alignItems = 'center';
+                document.getElementById('booking-total').innerText = 'Total: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                bb.style.display = 'none';
+            }
+
+            if(document.getElementById('tab-5').classList.contains('active')) {
+                renderBookingSummary();
+            }
+        }
+
+        function renderBookingSummary() {
+            const summary = document.getElementById('booking-summary');
+            if (selectedItems.length === 0) {
+                summary.innerHTML = '<p style="color: var(--text-muted); margin: 0;">Please select rates or activities from the tabs above to build your booking.</p>';
+                return;
+            }
+
+            let html = '<ul style="list-style:none; padding:0; margin:0;">';
+            selectedItems.forEach(item => {
+                html += '<li style="margin-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; display: flex; justify-content: space-between;">';
+                html += '<span><strong>' + item.qty + 'x</strong> ' + item.name + '</span>';
+                html += '<span style="color: var(--brand-accent); font-weight: 600;">N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '</span>';
+                html += '</li>';
+            });
+            
+            const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
+            html += '<li style="margin-top: 15px; display: flex; justify-content: space-between; font-size: 1.2rem; font-family: var(--font-head); font-weight: 600;">';
+            html += '<span>Grand Total</span>';
+            html += '<span style="color: var(--text-main);">N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '</span>';
+            html += '</li></ul>';
+            
+            summary.innerHTML = html;
+        }
+
+        async function submitBooking(e) {
+            e.preventDefault();
+            
+            const lodgeName = document.getElementById('d-title').innerText;
+            const agentEmail = document.getElementById('b-agent-email').value;
+            const status = document.getElementById('b-status').value;
+            const clientName = document.getElementById('b-name').value;
+            const guideRooms = document.getElementById('b-guide').value || 'None';
+            const dateIn = document.getElementById('b-date-in').value;
+            const dateOut = document.getElementById('b-date-out').value;
+            const arriving = document.getElementById('b-arriving').value;
+            const departing = document.getElementById('b-departing').value;
+            const msg = document.getElementById('b-message').value;
+            
+            if (selectedItems.length === 0) {
+                alert('Please select at least one rate or activity before submitting.');
+                return;
+            }
+
+            localStorage.setItem('dt_agent_email', agentEmail);
+            
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerText;
+            submitBtn.innerHTML = '<span style="display:inline-block; border: 2px solid #fff; border-top: 2px solid transparent; border-radius: 50%; width: 16px; height: 16px; animation: spin 1s linear infinite; margin-right: 10px; vertical-align: middle;"></span> Processing...';
+            submitBtn.disabled = true;
+
+            const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
+
+            let htmlItems = selectedItems.map(item => \`
+                <tr>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>\${item.qty}x</strong> \${item.name}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right; color: #C9A24A;"><strong>N$ \${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
+                </tr>
+            \`).join('');
+
+            const emailHtml = \`
+            <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
+                <div style="background: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435); padding: 30px; text-align: center; color: #fff;">
+                    <h1 style="margin: 0; font-size: 24px; font-family: 'Cinzel', serif;">O&L Leisure Rate Sheet</h1>
+                    <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">New \${status}</p>
+                </div>
+                <div style="padding: 30px; background: #fff;">
+                    <h2 style="color: #333; margin-top: 0; font-size: 20px;">\${lodgeName}</h2>
+                    
+                    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; font-size: 14px;">
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Consultant:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${agentEmail}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Client:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${clientName}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Date In:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${dateIn}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Date Out:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${dateOut}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Arriving From:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${arriving}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Departing To:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${departing}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Guide Rooms:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${guideRooms}</td></tr>
+                    </table>
+
+                    <h3 style="color: #C9A24A; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Requested Rates</h3>
+                    <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; font-size: 14px;">
+                        \${htmlItems}
+                        <tr>
+                            <td style="padding: 15px 12px; font-size: 16px;"><strong>Estimated Total</strong></td>
+                            <td style="padding: 15px 12px; text-align: right; font-size: 16px; color: #333;"><strong>N$ \${total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
+                        </tr>
+                    </table>
+
+                    <div style="background: #f9f9f9; padding: 20px; border-radius: 6px; border-left: 4px solid #C9A24A;">
+                        <strong style="display: block; margin-bottom: 8px; font-size: 14px;">Additional Notes:</strong>
+                        <p style="margin: 0; font-size: 14px; color: #555; white-space: pre-line;">\${msg || 'No additional notes provided.'}</p>
+                    </div>
+                </div>
+            </div>
+            \`;
+
+            try {
+                const response = await fetch('https://desert-tracks.vercel.app/api/send_email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        to: 'bookings@desert-tracks.com',
+                        subject: \`New \${status}: \${lodgeName} - \${clientName}\`,
+                        html: emailHtml
+                    })
+                });
+
+                if (response.ok) {
+                    alert('Booking request sent successfully to bookings@desert-tracks.com!');
+                    closeProperty();
+                    e.target.reset();
+                    updateTotal();
+                } else {
+                    const data = await response.json();
+                    alert('Failed to send booking: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Error submitting booking:', error);
+                alert('Network error. Could not connect to the booking API.');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        }
     </script>
 </body>
 </html>
