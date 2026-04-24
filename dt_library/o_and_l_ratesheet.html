@@ -1063,7 +1063,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                         newTd.style.textAlign = 'center';
                         
                         if(!isNaN(price)) {
-                            newTd.innerHTML = \`<input type="number" min="0" value="" placeholder="" class="rate-qty" data-name="\${name}" data-price="\${price}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(201, 162, 74, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">\`;
+                            newTd.innerHTML = `<input type="number" min="0" value="" placeholder="" class="rate-qty" data-name="${name}" data-price="${price}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(201, 162, 74, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">`;
                         }
                         tr.appendChild(newTd);
                     }
@@ -1227,48 +1227,48 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
 
             const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
 
-            let htmlItems = selectedItems.map(item => \`
+            let htmlItems = selectedItems.map(item => `
                 <tr>
-                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>\${item.qty}x</strong> \${item.name}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right; color: #C9A24A;"><strong>N$ \${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>${item.qty}x</strong> ${item.name}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right; color: #C9A24A;"><strong>N$ ${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
                 </tr>
-            \`).join('');
+            `).join('');
 
-            const emailHtml = \`
+            const emailHtml = `
             <div style="font-family: 'Inter', sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #eee; border-radius: 8px; overflow: hidden;">
                 <div style="background: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435); padding: 30px; text-align: center; color: #fff;">
                     <h1 style="margin: 0; font-size: 24px; font-family: 'Cinzel', serif;">O&L Leisure Rate Sheet</h1>
-                    <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">New \${status}</p>
+                    <p style="margin: 10px 0 0 0; opacity: 0.9; font-size: 14px; text-transform: uppercase; letter-spacing: 1px;">New ${status}</p>
                 </div>
                 <div style="padding: 30px; background: #fff;">
-                    <h2 style="color: #333; margin-top: 0; font-size: 20px;">\${lodgeName}</h2>
+                    <h2 style="color: #333; margin-top: 0; font-size: 20px;">${lodgeName}</h2>
                     
                     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; font-size: 14px;">
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Consultant:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${agentEmail}</td></tr>
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Client:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${clientName}</td></tr>
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Date In:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${dateIn}</td></tr>
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Date Out:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${dateOut}</td></tr>
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Arriving From:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${arriving}</td></tr>
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Departing To:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${departing}</td></tr>
-                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Guide Rooms:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">\${guideRooms}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Consultant:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${agentEmail}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Client:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${clientName}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Date In:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${dateIn}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Date Out:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${dateOut}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Arriving From:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${arriving}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Departing To:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${departing}</td></tr>
+                        <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #666;"><strong>Guide Rooms:</strong></td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">${guideRooms}</td></tr>
                     </table>
 
                     <h3 style="color: #C9A24A; font-size: 16px; margin-bottom: 15px; text-transform: uppercase;">Requested Rates</h3>
                     <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 30px; font-size: 14px;">
-                        \${htmlItems}
+                        ${htmlItems}
                         <tr>
                             <td style="padding: 15px 12px; font-size: 16px;"><strong>Estimated Total</strong></td>
-                            <td style="padding: 15px 12px; text-align: right; font-size: 16px; color: #333;"><strong>N$ \${total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
+                            <td style="padding: 15px 12px; text-align: right; font-size: 16px; color: #333;"><strong>N$ ${total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
                         </tr>
                     </table>
 
                     <div style="background: #f9f9f9; padding: 20px; border-radius: 6px; border-left: 4px solid #C9A24A;">
                         <strong style="display: block; margin-bottom: 8px; font-size: 14px;">Additional Notes:</strong>
-                        <p style="margin: 0; font-size: 14px; color: #555; white-space: pre-line;">\${msg || 'No additional notes provided.'}</p>
+                        <p style="margin: 0; font-size: 14px; color: #555; white-space: pre-line;">${msg || 'No additional notes provided.'}</p>
                     </div>
                 </div>
             </div>
-            \`;
+            `;
 
             try {
                 const response = await fetch('https://desert-tracks.vercel.app/api/send_email', {
@@ -1276,7 +1276,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         to: 'bookings@desert-tracks.com',
-                        subject: \`New \${status}: \${lodgeName} - \${clientName}\`,
+                        subject: `New ${status}: ${lodgeName} - ${clientName}`,
                         html: emailHtml
                     })
                 });
