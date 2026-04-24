@@ -342,11 +342,14 @@
                     let passportHtml = `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No passport attached</div>`;
                     let licenseHtml = `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No license attached</div>`;
                     
+                    const attachments = [];
                     if(guest.passportBase64) {
-                        passportHtml = `<img src="data:${guest.passportType};base64,${guest.passportBase64}" style="max-width: 400px; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+                        attachments.push({ filename: `Guest_${index + 1}_Passport.jpg`, content: guest.passportBase64 });
+                        passportHtml = `<div style="color: #214352; font-weight: bold; margin-top: 10px;">✅ See attached file: Guest_${index + 1}_Passport.jpg</div>`;
                     }
                     if(guest.licenseBase64) {
-                        licenseHtml = `<img src="data:${guest.licenseType};base64,${guest.licenseBase64}" style="max-width: 400px; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+                        attachments.push({ filename: `Guest_${index + 1}_License.jpg`, content: guest.licenseBase64 });
+                        licenseHtml = `<div style="color: #214352; font-weight: bold; margin-top: 10px;">✅ See attached file: Guest_${index + 1}_License.jpg</div>`;
                     }
 
                     const htmlContent = `
@@ -431,7 +434,8 @@
                             from: 'Desert Tracks Registration <onboarding@resend.dev>',
                             to: ['bookings@desert-tracks.com'],
                             subject: `New Guest Registration: ${groupName.value || 'Booking'}`,
-                            html: htmlContent
+                            html: htmlContent,
+                            attachments: attachments.length > 0 ? attachments : undefined
                         })
                     });
 

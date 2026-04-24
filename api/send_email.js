@@ -17,7 +17,8 @@ export default async function handler(req, res) {
                 from: from || 'Registration System <onboarding@resend.dev>',
                 to: to || ['bookings@desert-tracks.com'],
                 subject: subject || 'New Guest Registration',
-                html: html
+                html: html,
+                attachments: req.body.attachments
             })
         });
 
