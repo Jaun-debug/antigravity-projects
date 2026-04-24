@@ -171,8 +171,8 @@
     
     <script data-no-optimize="1">
         function checkLogin() {
-            const u = document.getElementById('login-user').value;
-            const p = document.getElementById('login-pass').value;
+            const u = document.getElementById('login-user').value.trim().toLowerCase();
+            const p = document.getElementById('login-pass').value.trim();
             if (u === 'jaun' && p === 'passme9cops') {
                 document.getElementById('login-overlay').style.display = 'none';
             } else {
