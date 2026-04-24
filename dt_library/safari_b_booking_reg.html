@@ -436,7 +436,8 @@
                     });
 
                     if (!res.ok) {
-                        throw new Error("Failed to send email");
+                        const errorData = await res.json().catch(() => ({}));
+                        throw new Error(errorData.error || `HTTP error ${res.status}`);
                     }
                 };
 
@@ -450,7 +451,7 @@
                         nextTick(() => lucide.createIcons());
                     } catch (err) {
                         console.error(err);
-                        alert("Network error or upload failed. Please try again.");
+                        alert(`Upload failed. Details: ${err.message}`);
                     } finally {
                         submitting.value = false;
                     }
