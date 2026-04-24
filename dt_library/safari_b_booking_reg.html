@@ -422,10 +422,9 @@
                     </html>
                     `;
 
-                    const res = await fetch("https://api.resend.com/emails", {
+                    const res = await fetch("/api/send_email", {
                         method: "POST",
                         headers: {
-                            'Authorization': 'Bearer re_hd2sDeEH_LRMUGke7DF24qGzBJMjidFYk',
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
