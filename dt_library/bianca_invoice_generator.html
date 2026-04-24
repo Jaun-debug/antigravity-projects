@@ -10,6 +10,8 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js" data-no-optimize="1"></script>
     <!-- Phosphor Icons -->
     <script src="https://unpkg.com/@phosphor-icons/web" data-no-optimize="1"></script>
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" data-no-optimize="1"></script>
     
     <style data-no-optimize="1">
         :root {
@@ -669,13 +671,32 @@
                 };
 
                 const printInvoice = () => {
-                    window.print();
+                    const invoiceElement = document.getElementById('invoice');
+                    const filename = `Invoice_${invoice.value.number}.pdf`;
                     
-                    // Increment for next time they open the page
-                    const nextNum = parseInt(invoice.value.number, 10) + 1;
-                    if (!isNaN(nextNum)) {
-                        localStorage.setItem('bianca_next_invoice_number', nextNum.toString().padStart(4, '0'));
-                    }
+                    const originalShadow = invoiceElement.style.boxShadow;
+                    const originalTransform = invoiceElement.style.transform;
+                    invoiceElement.style.boxShadow = 'none';
+                    invoiceElement.style.transform = 'none';
+                    
+                    const opt = {
+                        margin:       0,
+                        filename:     filename,
+                        image:        { type: 'jpeg', quality: 0.98 },
+                        html2canvas:  { scale: 2, useCORS: true },
+                        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                    };
+                    
+                    html2pdf().set(opt).from(invoiceElement).save().then(() => {
+                        invoiceElement.style.boxShadow = originalShadow;
+                        invoiceElement.style.transform = originalTransform;
+                        
+                        // Increment for next time they open the page
+                        const nextNum = parseInt(invoice.value.number, 10) + 1;
+                        if (!isNaN(nextNum)) {
+                            localStorage.setItem('bianca_next_invoice_number', nextNum.toString().padStart(4, '0'));
+                        }
+                    });
                 };
 
                 return {
