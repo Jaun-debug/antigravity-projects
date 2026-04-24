@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Tracks Online Booking Reg</title>
+    <script src="https://cdn.tailwindcss.com" data-no-optimize="1"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" data-no-optimize="1"></script>
+    <script src="https://unpkg.com/lucide@latest" data-no-optimize="1"></script>
+    <style data-no-optimize="1">
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;700&display=swap');
+        body { font-family: 'DM Sans', sans-serif; background-color: #FDFBF7; }
+        h1, h2, h3, .font-serif { font-family: 'Playfair Display', serif; }
+        .spinner { border: 4px solid rgba(255,255,255,0.3); border-radius: 50%; border-top: 4px solid #fff; width: 24px; height: 24px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="pb-24">
+    <div id="app">
+        <!-- Success Screen -->
+        <div v-if="submitted" class="min-h-screen flex items-center justify-center p-6 text-center">
+            <div class="max-w-md bg-white p-8 md:p-12 shadow-2xl rounded-2xl border border-[#ebe6df] flex flex-col items-center">
+                <i data-lucide="check-circle-2" class="w-20 h-20 text-[#214352] mb-6 animate-pulse"></i>
+                <h2 class="text-3xl font-serif text-[#bfa182] uppercase tracking-widest mb-4">Secured</h2>
+                <p class="text-[#647c87] text-lg font-light leading-relaxed">
+                    Your group's registrations and documents have been successfully encrypted and uploaded. We look forward to hosting your African safari.
+                </p>
+            </div>
+        </div>
+
+        <div v-else>
+            <header class="bg-white border-b border-[#ebe6df] py-8 text-center sticky top-0 z-50 shadow-sm">
+                <h1 class="text-2xl md:text-3xl font-serif text-[#214352] tracking-[0.2em] uppercase">Desert Tracks</h1>
+                <p class="text-[#bfa182] text-xs font-bold tracking-widest uppercase mt-2">Secure Guest Registration</p>
+            </header>
+
+            <main class="max-w-4xl mx-auto px-6 mt-12">
+                <form @submit.prevent="handleSubmit" class="space-y-12">
+                    
+                    <!-- Primary Details -->
+                    <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-[#f0ebe3]">
+                        <h2 class="flex items-center gap-3 text-xl font-serif text-[#bfa182] mb-8 uppercase tracking-widest">
+                            <i data-lucide="user" class="w-5 h-5"></i> Booking Reference
+                        </h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Group Name / Booking Ref</label>
+                                <input required v-model="groupName" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="e.g. KRAUS">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Tour Type</label>
+                                <select required v-model="tourType" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors">
+                                    <option>Self-Drive Safari</option>
+                                    <option>Fly-In Safari</option>
+                                    <option>Guided Safari</option>
+                                    <option>Luxury Safari</option>
+                                </select>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Guests Loop -->
+                    <div v-for="(guest, index) in guests" :key="guest.id" class="space-y-12 relative border-l-4 border-[#bfa182] pl-4 md:pl-8 ml-2">
+                        
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-2xl font-serif text-[#214352] tracking-widest uppercase">
+                                Guest {{ index + 1 }}
+                            </h3>
+                            <button v-if="guests.length > 1" type="button" @click="removeGuest(guest.id)" class="text-red-400 hover:text-red-600 flex items-center gap-1 text-sm font-bold uppercase tracking-wider transition-colors">
+                                <i data-lucide="trash-2" class="w-4 h-4"></i> Remove
+                            </button>
+                        </div>
+
+                        <!-- Guest Profile -->
+                        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-[#f0ebe3]">
+                            <h2 class="flex items-center gap-3 text-xl font-serif text-[#bfa182] mb-8 uppercase tracking-widest">
+                                <i data-lucide="file-text" class="w-5 h-5"></i> Guest Profile
+                            </h2>
+
+                            <div class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Full Name & Title</label>
+                                        <input required v-model="guest.guestName" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="e.g. Mr. Sebastian Kraus">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Email Address</label>
+                                        <input required v-model="guest.email" type="email" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="Email">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Residential Address</label>
+                                        <input required v-model="guest.address" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="Home Address">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Date of Birth</label>
+                                        <input required v-model="guest.dob" type="date" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Nationality</label>
+                                        <input required v-model="guest.nationality" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="e.g. German">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Passport Number</label>
+                                        <input required v-model="guest.passportNumber" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Date of Issue (Passport)</label>
+                                        <input required v-model="guest.passportIssue" type="date" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Passport Expiry</label>
+                                        <input required v-model="guest.passportExpiry" type="date" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Place of Issue</label>
+                                        <input required v-model="guest.passportPlace" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="City/Country">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Mobile / WhatsApp Number</label>
+                                        <input required v-model="guest.mobile" type="tel" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="Contact when travelling">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Body Weight (KG)</label>
+                                        <input v-model="guest.weight" type="number" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="For light aircraft transfers">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Travel Insurance Name & Policy #</label>
+                                        <input v-model="guest.insurance" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="Include provider and policy number">
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Flight Details -->
+                        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-[#f0ebe3]">
+                            <h2 class="flex items-center gap-3 text-xl font-serif text-[#bfa182] mb-8 uppercase tracking-widest">
+                                <i data-lucide="plane" class="w-5 h-5"></i> Flight Details
+                            </h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Arrival Flight (Date, Time, Flight No)</label>
+                                    <input v-model="guest.arrivalFlight" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="e.g. 12 May 2026, 14:00, 4Y132">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Departure Flight (Date, Time, Flight No)</label>
+                                    <input v-model="guest.departureFlight" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="e.g. 24 May 2026, 19:00, 4Y133">
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Medical & Dietary -->
+                        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-[#f0ebe3]">
+                            <h2 class="flex items-center gap-3 text-xl font-serif text-[#bfa182] mb-8 uppercase tracking-widest">
+                                <i data-lucide="heart" class="w-5 h-5"></i> Medical & Emergency
+                            </h2>
+                            <div class="space-y-6">
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Dietary Requirements</label>
+                                    <input v-model="guest.dietary" type="text" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="e.g. Vegetarian, Gluten-Free, None">
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Medical Conditions / Allergies</label>
+                                    <textarea v-model="guest.medical" rows="2" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="Please list any allergies or conditions..."></textarea>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-xs font-bold text-[#647c87] tracking-wider uppercase">Next of Kin / Emergency Contact</label>
+                                    <textarea required v-model="guest.emergencyContact" rows="2" class="w-full bg-[#FAFAFA] border border-[#ebe6df] p-3 focus:outline-none focus:border-[#bfa182] transition-colors" placeholder="Name, Relationship, and Contact #"></textarea>
+                                </div>
+                            </div>
+                        </section>
+
+                        <!-- Document Upload -->
+                        <section class="bg-white p-6 md:p-10 rounded-xl shadow-lg border border-[#f0ebe3] ring-2 ring-[#bfa182]/20">
+                            <div class="flex flex-col md:flex-row items-start justify-between mb-8 gap-4">
+                                <div>
+                                    <h2 class="flex items-center gap-3 text-xl font-serif text-[#214352] uppercase tracking-widest mb-2">
+                                        <i data-lucide="camera" class="w-6 h-6 text-[#d87a4d]"></i> Secure Document Capture
+                                    </h2>
+                                    <p class="text-sm text-[#647c87]">Tap below to open your phone's camera and securely snap photos of your documents.</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <!-- Passport -->
+                                <label class="block relative border-2 border-dashed border-[#bfa182] bg-[#FDFBF7] p-8 text-center rounded-lg hover:bg-white transition-colors cursor-pointer">
+                                    <input type="file" required accept="image/*" class="sr-only" @change="e => handleFileUpload(e, guest, 'passport')">
+                                    <div v-if="guest.passportBase64" class="flex flex-col items-center text-[#214352] relative">
+                                        <button type="button" @click.prevent="guest.passportBase64 = null; guest.passportType = null" class="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-1 shadow-md transition-colors" title="Remove Passport">
+                                            <i data-lucide="x" class="w-5 h-5"></i>
+                                        </button>
+                                        <i data-lucide="check-circle-2" class="w-10 h-10 text-green-600 mb-2"></i>
+                                        <span class="font-bold text-sm uppercase tracking-wide">Passport Attached</span>
+                                    </div>
+                                    <div v-else class="flex flex-col items-center justify-center opacity-80 pointer-events-none">
+                                        <i data-lucide="plus-circle" class="w-10 h-10 text-[#bfa182] mb-4"></i>
+                                        <span class="font-bold text-[#bfa182] uppercase tracking-widest text-sm mb-1">Scan Passport</span>
+                                        <span class="text-xs text-[#647c87]">Photo Page</span>
+                                    </div>
+                                </label>
+
+                                <!-- License -->
+                                <label class="block relative border-2 border-dashed border-[#bfa182] bg-[#FDFBF7] p-8 text-center rounded-lg hover:bg-white transition-colors cursor-pointer">
+                                    <input type="file" accept="image/*" class="sr-only" @change="e => handleFileUpload(e, guest, 'license')">
+                                    <div v-if="guest.licenseBase64" class="flex flex-col items-center text-[#214352] relative">
+                                        <button type="button" @click.prevent="guest.licenseBase64 = null; guest.licenseType = null" class="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-1 shadow-md transition-colors" title="Remove License">
+                                            <i data-lucide="x" class="w-5 h-5"></i>
+                                        </button>
+                                        <i data-lucide="check-circle-2" class="w-10 h-10 text-green-600 mb-2"></i>
+                                        <span class="font-bold text-sm uppercase tracking-wide">License Attached</span>
+                                    </div>
+                                    <div v-else class="flex flex-col items-center justify-center opacity-80 pointer-events-none">
+                                        <i data-lucide="plus-circle" class="w-10 h-10 text-[#bfa182] mb-4"></i>
+                                        <span class="font-bold text-[#bfa182] uppercase tracking-widest text-sm mb-1">Driver's License</span>
+                                        <span class="text-xs text-[#647c87]">Only if self-drive</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="pt-4 flex justify-center">
+                        <button type="button" @click="addGuest" class="flex items-center gap-2 bg-[#FDFBF7] border-2 border-[#bfa182] text-[#214352] py-4 px-8 font-bold tracking-widest uppercase text-sm rounded-full hover:bg-[#bfa182] hover:text-white transition-colors">
+                            <i data-lucide="user-plus" class="w-5 h-5"></i> Add Another Guest Profile
+                        </button>
+                    </div>
+
+                    <button :disabled="submitting" type="submit" class="w-full bg-[#214352] text-white py-5 px-8 font-bold tracking-widest uppercase text-lg shadow-xl hover:bg-[#1a3541] transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-12">
+                        <span v-if="submitting"><span class="spinner"></span> Encrypting & Uploading Group...</span>
+                        <span v-else>Submit Registration Group</span>
+                    </button>
+
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, nextTick } = Vue;
+
+        createApp({
+            setup() {
+                const submitting = ref(false);
+                const submitted = ref(false);
+                const groupName = ref("");
+                const tourType = ref("Self-Drive Safari");
+                const nextId = ref(2);
+
+                const getEmptyGuest = (id) => ({
+                    id: id,
+                    guestName: "",
+                    email: "",
+                    address: "",
+                    dob: "",
+                    nationality: "",
+                    passportNumber: "",
+                    passportIssue: "",
+                    passportExpiry: "",
+                    passportPlace: "",
+                    mobile: "",
+                    weight: "",
+                    insurance: "",
+                    arrivalFlight: "",
+                    departureFlight: "",
+                    dietary: "",
+                    medical: "",
+                    emergencyContact: "",
+                    passportBase64: null,
+                    passportType: null,
+                    licenseBase64: null,
+                    licenseType: null
+                });
+
+                const guests = ref([getEmptyGuest("guest-1")]);
+
+                const addGuest = () => {
+                    guests.value.push(getEmptyGuest(`guest-${nextId.value}`));
+                    nextId.value++;
+                    nextTick(() => lucide.createIcons());
+                };
+
+                const removeGuest = (id) => {
+                    if (guests.value.length > 1) {
+                        guests.value = guests.value.filter(g => g.id !== id);
+                    }
+                };
+
+                const compressImage = (file) => {
+                    return new Promise((resolve) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = (event) => {
+                            const img = new Image();
+                            img.src = event.target.result;
+                            img.onload = () => {
+                                const canvas = document.createElement("canvas");
+                                let width = img.width;
+                                let height = img.height;
+                                const maxSize = 1200;
+
+                                if (width > height) {
+                                    if (width > maxSize) {
+                                        height *= maxSize / width;
+                                        width = maxSize;
+                                    }
+                                } else {
+                                    if (height > maxSize) {
+                                        width *= maxSize / height;
+                                        height = maxSize;
+                                    }
+                                }
+
+                                canvas.width = width;
+                                canvas.height = height;
+                                const ctx = canvas.getContext("2d");
+                                ctx.drawImage(img, 0, 0, width, height);
+                                
+                                // Return base64 string directly
+                                const base64String = canvas.toDataURL("image/jpeg", 0.7);
+                                resolve({
+                                    base64: base64String.split(',')[1],
+                                    type: "image/jpeg"
+                                });
+                            };
+                        };
+                    });
+                };
+
+                const handleFileUpload = async (event, guest, type) => {
+                    const file = event.target.files[0];
+                    if (!file) return;
+                    const compressed = await compressImage(file);
+                    if (type === 'passport') {
+                        guest.passportBase64 = compressed.base64;
+                        guest.passportType = compressed.type;
+                    } else {
+                        guest.licenseBase64 = compressed.base64;
+                        guest.licenseType = compressed.type;
+                    }
+                };
+
+                const sendEmail = async (guest, index) => {
+                    let passportHtml = `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No passport attached</div>`;
+                    let licenseHtml = `<div style="color: #647c87; font-style: italic; margin-top: 10px;">No license attached</div>`;
+                    
+                    if(guest.passportBase64) {
+                        passportHtml = `<img src="data:${guest.passportType};base64,${guest.passportBase64}" style="max-width: 400px; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+                    }
+                    if(guest.licenseBase64) {
+                        licenseHtml = `<img src="data:${guest.licenseType};base64,${guest.licenseBase64}" style="max-width: 400px; display: block; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);" />`;
+                    }
+
+                    const htmlContent = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="utf-8">
+                        <style>
+                            body { font-family: 'Arial', sans-serif; background-color: #FDFBF7; padding: 40px 20px; color: #214352; margin: 0; }
+                            .container { max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ebe6df; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(191,161,130,0.1); }
+                            .header { background-color: #ffffff; padding: 40px 30px; text-align: center; border-bottom: 2px solid #bfa182; }
+                            .header h1 { margin: 0; font-family: 'Georgia', serif; font-size: 24px; color: #214352; letter-spacing: 4px; text-transform: uppercase; font-weight: 400; }
+                            .header p { margin: 10px 0 0 0; color: #bfa182; font-size: 11px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase; }
+                            .content { padding: 40px 30px; }
+                            .section-title { font-family: 'Georgia', serif; color: #bfa182; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; }
+                            .data-row { margin-bottom: 20px; }
+                            .label { font-size: 11px; font-weight: bold; color: #647c87; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block; }
+                            .value { font-size: 16px; color: #214352; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df; }
+                            .images-grid { margin-top: 30px; }
+                            .image-box { margin-bottom: 40px; background-color: #FAFAFA; padding: 20px; border: 1px dashed #bfa182; border-radius: 6px; }
+                            .footer { background-color: #214352; color: #ffffff; text-align: center; padding: 20px; font-size: 11px; letter-spacing: 1px; }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="container">
+                            <div class="header">
+                                <h1>Desert Tracks</h1>
+                                <p>Secure Guest Registration</p>
+                            </div>
+                            <div class="content">
+                                <div class="section-title">Booking Details - Guest ${index + 1} of ${guests.value.length}</div>
+                                
+                                <div class="data-row"><span class="label">Group Name</span><div class="value">${groupName.value || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Tour Type</span><div class="value">${tourType.value || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Full Name & Title</span><div class="value">${guest.guestName || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Email Address</span><div class="value">${guest.email || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Residential Address</span><div class="value">${guest.address || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Date of Birth</span><div class="value">${guest.dob || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Nationality</span><div class="value">${guest.nationality || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Passport Number</span><div class="value">${guest.passportNumber || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Passport Issue</span><div class="value">${guest.passportIssue || 'N/A'} (${guest.passportPlace || 'N/A'})</div></div>
+                                <div class="data-row"><span class="label">Passport Expiry</span><div class="value">${guest.passportExpiry || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Mobile Number</span><div class="value">${guest.mobile || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Body Weight (KG)</span><div class="value">${guest.weight || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Travel Insurance</span><div class="value">${guest.insurance || 'N/A'}</div></div>
+                                
+                                <div class="section-title" style="margin-top: 40px;">Flight Details</div>
+                                <div class="data-row"><span class="label">Arrival</span><div class="value">${guest.arrivalFlight || 'N/A'}</div></div>
+                                <div class="data-row"><span class="label">Departure</span><div class="value">${guest.departureFlight || 'N/A'}</div></div>
+
+                                <div class="section-title" style="margin-top: 40px;">Medical & Dietary</div>
+                                <div class="data-row"><span class="label">Dietary Requirements</span><div class="value">${guest.dietary || 'None'}</div></div>
+                                <div class="data-row"><span class="label">Medical Conditions</span><div class="value">${guest.medical || 'None'}</div></div>
+                                <div class="data-row"><span class="label">Emergency Contact</span><div class="value">${guest.emergencyContact || 'N/A'}</div></div>
+
+                                <div class="section-title" style="margin-top: 40px;">Encrypted Documents</div>
+                                <div class="images-grid">
+                                    <div class="image-box">
+                                        <span class="label" style="margin-bottom: 15px;">Passport Scan</span>
+                                        ${passportHtml}
+                                    </div>
+                                    <div class="image-box">
+                                        <span class="label" style="margin-bottom: 15px;">Driver's License</span>
+                                        ${licenseHtml}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer">
+                                &copy; ${new Date().getFullYear()} Desert Tracks Africa | Automated Secure Registration System
+                            </div>
+                        </div>
+                    </body>
+                    </html>
+                    `;
+
+                    const res = await fetch("https://api.resend.com/emails", {
+                        method: "POST",
+                        headers: {
+                            'Authorization': 'Bearer re_hd2sDeEH_LRMUGke7DF24qGzBJMjidFYk',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            from: 'Desert Tracks Registration <onboarding@resend.dev>',
+                            to: ['bookings@desert-tracks.com'],
+                            subject: `New Guest Registration: ${groupName.value || 'Booking'}`,
+                            html: htmlContent
+                        })
+                    });
+
+                    if (!res.ok) {
+                        throw new Error("Failed to send email");
+                    }
+                };
+
+                const handleSubmit = async () => {
+                    submitting.value = true;
+                    try {
+                        for (let i = 0; i < guests.value.length; i++) {
+                            await sendEmail(guests.value[i], i);
+                        }
+                        submitted.value = true;
+                        nextTick(() => lucide.createIcons());
+                    } catch (err) {
+                        console.error(err);
+                        alert("Network error or upload failed. Please try again.");
+                    } finally {
+                        submitting.value = false;
+                    }
+                };
+
+                return {
+                    submitting,
+                    submitted,
+                    groupName,
+                    tourType,
+                    guests,
+                    addGuest,
+                    removeGuest,
+                    handleFileUpload,
+                    handleSubmit
+                };
+            },
+            mounted() {
+                lucide.createIcons();
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
