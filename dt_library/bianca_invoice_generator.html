@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bianca Invoice Generator</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Vue 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js" data-no-optimize="1"></script>
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web" data-no-optimize="1"></script>
+    
+    <style data-no-optimize="1">
+        :root {
+            --dark: #24332a; /* Deep elegant dark green */
+            --muted: #6b7a6f; /* Muted sage green */
+            --sand: #f9f8f4;
+            --gold: #A58D66;
+            --gold-light: #C0A983;
+            --border: #D8D2C9;
+            --bg: #ece8e1;
+            
+            --font-main: 'DM Sans', sans-serif;
+            --font-head: 'Playfair Display', serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: var(--font-main);
+            background: var(--bg);
+            color: var(--dark);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Controls (Hidden on Print) */
+        .sidebar {
+            width: 400px;
+            background: #fff;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+            box-shadow: 2px 0 20px rgba(0,0,0,0.05);
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            background: var(--dark);
+            color: var(--sand);
+            position: sticky;
+            top: 0;
+            z-index: 11;
+        }
+
+        .sidebar-header h2 {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: var(--gold-light);
+        }
+        .sidebar-header p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        .sidebar-content {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .form-section {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 24px;
+        }
+        .form-section:last-child { border-bottom: none; }
+
+        .form-title {
+            font-family: var(--font-head);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-title i { color: var(--gold); }
+
+        .input-group {
+            margin-bottom: 12px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--muted);
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+        .input-group input, .input-group textarea {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: var(--font-main);
+            font-size: 0.9rem;
+            color: var(--dark);
+            background: var(--sand);
+            transition: all 0.2s;
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(201, 162, 74, 0.15);
+        }
+        .input-group textarea { resize: vertical; min-height: 80px; }
+
+        .row-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        /* Print Action */
+        .print-btn {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: #fff;
+            border: none;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            position: sticky;
+            bottom: 0;
+            z-index: 11;
+        }
+        .print-btn:hover { background: var(--dark); }
+
+        /* Preview Area */
+        .preview-area {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        /* The actual A4 Invoice */
+        .invoice-paper {
+            width: 210mm;
+            min-height: 297mm;
+            background: #fff;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            padding: 12mm 15mm;
+            position: relative;
+            transform-origin: top center;
+        }
+
+        /* Invoice Typography */
+        .invoice-paper h1, .invoice-paper h2, .invoice-paper h3 { font-family: var(--font-head); font-weight: 400; }
+        .invoice-paper p, .invoice-paper th, .invoice-paper td { font-family: var(--font-main); }
+
+        .inv-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 15px;
+        }
+
+        .inv-logo-area { max-width: 300px; }
+        .inv-logo { max-width: 100%; height: auto; max-height: 70px; }
+        .inv-logo-text { font-family: var(--font-head); font-size: 2rem; font-weight: 400; color: var(--gold); letter-spacing: 4px; text-transform: uppercase; line-height: 1; }
+        
+        .inv-company-details { margin-top: 25px; font-size: 0.75rem; color: var(--muted); line-height: 1.5; white-space: pre-line; }
+
+        .inv-title-area { text-align: right; }
+        .inv-title-area h1 { font-size: 1.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 25px; }
+        
+        .inv-meta-grid { display: grid; grid-template-columns: auto auto; gap: 6px 20px; text-align: right; font-size: 0.8rem; }
+        .inv-meta-label { font-weight: 700; color: var(--muted); text-transform: uppercase; font-size: 0.65rem; letter-spacing: 1px; }
+        .inv-meta-val { font-weight: 500; color: var(--dark); }
+
+        /* Bill To & Info */
+        .inv-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 25px;
+        }
+        .inv-bill-to { flex: 1; }
+        .inv-bill-to h3 { font-size: 0.75rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; font-weight: 600;}
+        .inv-bill-name { font-size: 1.1rem; font-weight: 500; color: var(--dark); margin-bottom: 3px; }
+        .inv-bill-address { font-size: 0.8rem; color: var(--muted); line-height: 1.5; white-space: pre-line; }
+
+        /* Items Table */
+        .inv-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 25px;
+        }
+        .inv-table th {
+            text-align: left;
+            padding: 8px 10px;
+            background: transparent;
+            color: var(--gold);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 1px solid var(--gold);
+            border-top: 1px solid var(--gold);
+        }
+        .inv-table td {
+            padding: 10px 10px;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            color: var(--dark);
+        }
+        .inv-table th.right, .inv-table td.right { text-align: right; }
+        .inv-table th.center, .inv-table td.center { text-align: center; }
+        
+        .item-desc { font-weight: 600; font-size: 0.85rem; margin-bottom: 3px; color: var(--dark); }
+        .item-sub { font-size: 0.75rem; color: var(--muted); white-space: pre-line; }
+
+        /* Totals Area */
+        .inv-summary-row {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 30px;
+        }
+        .inv-totals {
+            width: 300px;
+        }
+        .total-line {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            font-size: 0.85rem;
+            color: var(--muted);
+            border-bottom: 1px solid var(--border);
+        }
+        .total-line.grand-total {
+            border-bottom: none;
+            border-top: 1px solid var(--gold);
+            padding-top: 12px;
+            margin-top: 5px;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--gold);
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .grand-total .val { color: var(--gold); font-weight: 500; font-family: var(--font-main); }
+
+        /* Footer Notes & Bank Info */
+        .inv-footer {
+            display: flex;
+            gap: 40px;
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--gold);
+            font-size: 0.8rem;
+        }
+        .inv-notes { flex: 1; }
+        .inv-notes h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--gold); letter-spacing: 2px; margin-bottom: 8px; }
+        .inv-notes p { color: var(--muted); line-height: 1.5; white-space: pre-line; }
+        
+        .inv-bank { flex: 1.5; background: transparent; border: none; padding: 0; }
+        .inv-bank h4 { font-size: 0.7rem; text-transform: uppercase; color: var(--dark); letter-spacing: 2px; margin-bottom: 8px; font-weight: 600; }
+        .inv-bank p { color: var(--muted); line-height: 1.6; font-family: var(--font-main); font-size: 0.8rem; white-space: pre-line;}
+
+        /* Controls for editing table */
+        .edit-controls { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-small { padding: 6px 12px; background: var(--sand); border: 1px solid var(--border); border-radius: 4px; cursor: pointer; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; color: var(--dark); transition: 0.2s; }
+        .btn-small:hover { background: var(--dark); color: #fff; }
+        
+        .item-row-edit { background: var(--sand); padding: 15px; border-radius: 6px; margin-bottom: 10px; border: 1px solid var(--border); position: relative; }
+        .remove-row { position: absolute; top: 10px; right: 10px; color: red; cursor: pointer; background: none; border: none; font-size: 1.2rem; }
+
+        /* Print CSS */
+        @media print {
+            html, body { background: #fff !important; height: auto !important; min-height: auto !important; overflow: visible !important; margin: 0 !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .sidebar, .print-btn, .no-print { display: none !important; }
+            .app-container { display: block !important; height: auto !important; overflow: visible !important; }
+            .preview-area { padding: 0 !important; display: block !important; overflow: visible !important; height: auto !important; background: transparent !important; }
+            .invoice-paper { box-shadow: none !important; padding: 10mm !important; margin: 0 !important; width: 100% !important; min-height: auto !important; transform: none !important; position: static !important; zoom: 0.90 !important; }
+            @page { margin: 0; size: A4 portrait; }
+        }
+
+        /* Responsive Preview Scale */
+        @media screen and (max-width: 1400px) {
+            .invoice-paper { transform: scale(0.85); }
+        }
+        @media screen and (max-width: 1100px) {
+            .invoice-paper { transform: scale(0.65); }
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="app-container">
+        
+        <!-- SIDEBAR EDITOR (Hidden on print) -->
+        <div class="sidebar no-print">
+            <div class="sidebar-header">
+                <h2>Invoice Editor</h2>
+                <p>Bianca Invoice Generator</p>
+            </div>
+
+            <div class="sidebar-content">
+                
+                <!-- Preset Profile -->
+                <div class="form-section" style="background: var(--sand); margin: -24px -24px 24px -24px; padding: 24px; border-bottom: 2px solid var(--gold);">
+                    <h3 class="form-title" style="margin-bottom: 12px;"><i class="ph-fill ph-globe"></i> Invoice Type</h3>
+                    <div class="input-group" style="margin-bottom:0;">
+                        <select v-model="activeProfile" @change="switchProfile" style="width: 100%; padding: 12px; border-radius: 6px; border: 1px solid var(--border); font-family: var(--font-main); font-weight: 600; font-size: 0.95rem; color: var(--dark); background: #fff; cursor: pointer; outline: none;">
+                            <option value="safari_b">Safari B (USD)</option>
+                            <option value="bianca_private">Bianca Private (NAM)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Invoice Meta -->
+                <div class="form-section">
+                    <h3 class="form-title"><i class="ph-fill ph-file-text"></i> Invoice Details</h3>
+                    <div class="row-grid">
+                        <div class="input-group">
+                            <label>Invoice Number</label>
+                            <input type="text" v-model="invoice.number" readonly style="background-color: var(--border); cursor: not-allowed; font-weight: 700;">
+                        </div>
+                        <div class="input-group">
+                            <label>Date</label>
+                            <input type="date" v-model="invoice.date">
+                        </div>
+                        <div class="input-group">
+                            <label>Due Date</label>
+                            <input type="date" v-model="invoice.dueDate">
+                        </div>
+                        <div class="input-group">
+                            <label>Currency</label>
+                            <input type="text" v-model="invoice.currency">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Company Details -->
+                <div class="form-section">
+                    <h3 class="form-title"><i class="ph-fill ph-buildings"></i> Company Details</h3>
+                    <div class="input-group">
+                        <label>Company Name / Logo Text</label>
+                        <input type="text" v-model="company.name">
+                    </div>
+                    <div class="input-group">
+                        <label>Logo Image URL (Optional)</label>
+                        <input type="text" v-model="company.logo" placeholder="https://...">
+                    </div>
+                    <div class="input-group">
+                        <label>Company Address & Contact</label>
+                        <textarea v-model="company.address"></textarea>
+                    </div>
+                </div>
+
+                <!-- Client Details -->
+                <div class="form-section">
+                    <h3 class="form-title"><i class="ph-fill ph-user-circle"></i> Bill To</h3>
+                    <div class="input-group">
+                        <label>Client Name / Agency</label>
+                        <input type="text" v-model="client.name">
+                    </div>
+                    <div class="input-group">
+                        <label>Client Address</label>
+                        <textarea v-model="client.address"></textarea>
+                    </div>
+                </div>
+
+                <!-- Line Items -->
+                <div class="form-section">
+                    <h3 class="form-title"><i class="ph-fill ph-list-numbers"></i> Line Items</h3>
+                    
+                    <div v-for="(item, index) in items" :key="index" class="item-row-edit">
+                        <button class="remove-row" @click="removeItem(index)" title="Remove Item"><i class="ph ph-x-circle"></i></button>
+                        <div class="input-group">
+                            <label>Description</label>
+                            <input type="text" v-model="item.desc">
+                        </div>
+                        <div class="input-group">
+                            <label>Details / Subtext</label>
+                            <textarea v-model="item.subdesc" rows="2"></textarea>
+                        </div>
+                        <div class="row-grid">
+                            <div class="input-group">
+                                <label>Qty</label>
+                                <input type="number" v-model.number="item.qty" min="1">
+                            </div>
+                            <div class="input-group">
+                                <label>Unit Price</label>
+                                <input type="number" v-model.number="item.price" step="0.01">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-small" @click="addItem">+ Add Item</button>
+                </div>
+
+                <!-- Financials -->
+                <div class="form-section">
+                    <h3 class="form-title"><i class="ph-fill ph-calculator"></i> Totals & Taxes</h3>
+                    <div class="row-grid">
+                        <div class="input-group">
+                            <label>Tax Name (e.g., VAT 15%)</label>
+                            <input type="text" v-model="tax.name">
+                        </div>
+                        <div class="input-group">
+                            <label>Tax Rate (%)</label>
+                            <input type="number" v-model.number="tax.rate" step="0.1">
+                        </div>
+                        <div class="input-group">
+                            <label>Discount Amount</label>
+                            <input type="number" v-model.number="discount" step="0.01">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer / Bank -->
+                <div class="form-section">
+                    <h3 class="form-title"><i class="ph-fill ph-bank"></i> Footer & Bank Details</h3>
+                    <div class="input-group">
+                        <label>Additional Notes / Terms</label>
+                        <textarea v-model="notes"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label>Bank Details</label>
+                        <textarea v-model="bankDetails"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="print-btn" @click="printInvoice">
+                <i class="ph-bold ph-printer"></i> Print to PDF
+            </button>
+        </div>
+
+        <!-- INVOICE PREVIEW (A4) -->
+        <div class="preview-area">
+            <div class="invoice-paper" id="invoice">
+                
+                <!-- Header -->
+                <div class="inv-header">
+                    <div class="inv-logo-area">
+                        <img v-if="company.logo" :src="company.logo" alt="Logo" class="inv-logo">
+                        <div v-else class="inv-logo-text">{{ company.name }}</div>
+                        <div class="inv-company-details">{{ company.address }}</div>
+                    </div>
+                    <div class="inv-title-area">
+                        <h1>Invoice</h1>
+                        <div class="inv-meta-grid">
+                            <span class="inv-meta-label">Invoice No:</span>
+                            <span class="inv-meta-val">#{{ invoice.number }}</span>
+                            <span class="inv-meta-label">Date:</span>
+                            <span class="inv-meta-val">{{ formatDate(invoice.date) }}</span>
+                            <span class="inv-meta-label">Due Date:</span>
+                            <span class="inv-meta-val">{{ formatDate(invoice.dueDate) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bill To -->
+                <div class="inv-info-row">
+                    <div class="inv-bill-to">
+                        <h3>Billed To</h3>
+                        <div class="inv-bill-name">{{ client.name }}</div>
+                        <div class="inv-bill-address">{{ client.address }}</div>
+                    </div>
+                </div>
+
+                <!-- Items Table -->
+                <table class="inv-table">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th class="center" width="10%">Qty</th>
+                            <th class="right" width="20%">Price</th>
+                            <th class="right" width="20%">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(item, index) in items" :key="index">
+                            <td>
+                                <div class="item-desc">{{ item.desc }}</div>
+                                <div class="item-sub" v-if="item.subdesc">{{ item.subdesc }}</div>
+                            </td>
+                            <td class="center">{{ item.qty }}</td>
+                            <td class="right">{{ formatMoney(item.price) }}</td>
+                            <td class="right">{{ formatMoney(item.qty * item.price) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Totals -->
+                <div class="inv-summary-row">
+                    <div class="inv-totals">
+                        <div class="total-line">
+                            <span class="label">Subtotal:</span>
+                            <span class="val">{{ formatMoney(subtotal) }}</span>
+                        </div>
+                        <div class="total-line" v-if="discount > 0">
+                            <span class="label">Discount:</span>
+                            <span class="val">-{{ formatMoney(discount) }}</span>
+                        </div>
+                        <div class="total-line" v-if="tax.rate > 0">
+                            <span class="label">{{ tax.name }}:</span>
+                            <span class="val">{{ formatMoney(taxAmount) }}</span>
+                        </div>
+                        <div class="total-line grand-total">
+                            <span class="label">Total Due:</span>
+                            <span class="val">{{ formatMoney(grandTotal) }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div class="inv-footer">
+                    <div class="inv-bank">
+                        <h4>Payment Details</h4>
+                        <p>{{ bankDetails }}</p>
+                    </div>
+                    <div class="inv-notes">
+                        <h4>Notes & Terms</h4>
+                        <p>{{ notes }}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- VUE APP LOGIC -->
+    <script data-no-optimize="1">
+        const { createApp, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                // State for active profile
+                const activeProfile = ref('safari_b');
+
+                const profiles = {
+                    safari_b: {
+                        name: 'Travel B Tours and Safaris CC',
+                        currency: 'USD',
+                        taxName: 'SALES TAX (15%)',
+                        bankDetails: 'Account name: Travel B Tours & Safaris CC\nBank name: First National Bank of Namibia\nAddress: Extension 10, Industrial Area, Workshop 5, Einstein Street, Swakopmund, Namibia\nAccount number: 642 7911 6668\nBank code: 280 472\nSwift Code / Iban: FIRNNANX\n\nPlease email proof of payment to: accounts@safari-b.com',
+                        companyAddress: 'Travel B Tours and Safaris CC\nP.O Box 4476\nSwakopmund\nNamibia\n\nCompany Registration No: CC/2022/08701\nVAT Number: 133246481'
+                    },
+                    bianca_private: {
+                        name: 'Bianca Jordaan',
+                        currency: 'N$',
+                        taxName: '',
+                        bankDetails: 'Account name: B.E Jordaan\nBank name: First National Bank of Namibia\nAccount number: 62249756844\nBank code: 280 472\nSwift Code / Iban: FIRNNANX\nAddress: 16 Tobias Hainyeko St, Swakopmund, Namibia\nPostal Address: PO Box 1, Swakopmund, Namibia',
+                        companyAddress: 'Bianca Jordaan\nP.O Box 350\nSwakopmund\nNamibia'
+                    }
+                };
+
+                const switchProfile = () => {
+                    const p = profiles[activeProfile.value];
+                    invoice.value.currency = p.currency;
+                    bankDetails.value = p.bankDetails;
+                    company.value.address = p.companyAddress;
+                    company.value.name = p.name;
+                    tax.value.name = p.taxName;
+                    if (p.taxName === '') {
+                        tax.value.rate = 0;
+                    } else {
+                        tax.value.rate = 15;
+                    }
+                };
+
+                // Initial State
+                const today = new Date();
+                const localDate = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+                const due = new Date(today.getTime() + 14 * 86400000);
+                const localDueDate = due.getFullYear() + '-' + String(due.getMonth() + 1).padStart(2, '0') + '-' + String(due.getDate()).padStart(2, '0');
+
+                // Auto-increment logic
+                let storedNumber = localStorage.getItem('bianca_next_invoice_number');
+                if (!storedNumber) {
+                    storedNumber = '0120';
+                    localStorage.setItem('bianca_next_invoice_number', storedNumber);
+                }
+
+                const invoice = ref({
+                    number: storedNumber,
+                    date: localDate,
+                    dueDate: localDueDate,
+                    currency: profiles.safari_b.currency
+                });
+
+                const company = ref({
+                    name: profiles.safari_b.name,
+                    logo: '', // Leave blank to show text logo, or paste URL
+                    address: profiles.safari_b.companyAddress
+                });
+
+                const client = ref({
+                    name: 'Desert Tracks Bookings & Safaris CC',
+                    address: 'P.O Box 8241\nSwakopmund\nNamibia'
+                });
+
+                const items = ref([
+                    { desc: 'Parsons Commission - Botswana Section', subdesc: 'USD 358.86 = N$ 6,208.42\nParsons x2 - Arrival 30 January 2026', qty: 1, price: 5398.63 }
+                ]);
+
+                const tax = ref({ name: 'SALES TAX (15%)', rate: 15 });
+                const discount = ref(0);
+
+                const notes = ref('With overseas transfers and credit card payments, please note that bank charges are not included in the value of the invoice and should not be deducted from the invoice. Please ensure when transferring funds that your bank includes the safari name and reference number.');
+                const bankDetails = ref(profiles.safari_b.bankDetails);
+
+                // Computed Properties
+                const subtotal = computed(() => {
+                    return items.value.reduce((sum, item) => sum + (item.qty * item.price), 0);
+                });
+
+                const taxAmount = computed(() => {
+                    const taxable = subtotal.value - discount.value;
+                    return taxable > 0 ? (taxable * (tax.value.rate / 100)) : 0;
+                });
+
+                const grandTotal = computed(() => {
+                    return (subtotal.value - discount.value) + taxAmount.value;
+                });
+
+                // Methods
+                const addItem = () => {
+                    items.value.push({ desc: '', subdesc: '', qty: 1, price: 0 });
+                };
+
+                const removeItem = (index) => {
+                    items.value.splice(index, 1);
+                };
+
+                const formatMoney = (amount) => {
+                    return `${invoice.value.currency} ${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                };
+
+                const formatDate = (dateStr) => {
+                    if(!dateStr) return '';
+                    const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                    return new Date(dateStr).toLocaleDateString('en-GB', options);
+                };
+
+                const printInvoice = () => {
+                    window.print();
+                    
+                    // Increment for next time they open the page
+                    const nextNum = parseInt(invoice.value.number, 10) + 1;
+                    if (!isNaN(nextNum)) {
+                        localStorage.setItem('bianca_next_invoice_number', nextNum.toString().padStart(4, '0'));
+                    }
+                };
+
+                return {
+                    activeProfile, switchProfile,
+                    invoice, company, client, items, tax, discount, notes, bankDetails,
+                    subtotal, taxAmount, grandTotal,
+                    addItem, removeItem, formatMoney, formatDate, printInvoice
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
