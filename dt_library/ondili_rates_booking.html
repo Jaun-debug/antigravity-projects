@@ -137,6 +137,7 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         @media (max-width: 900px) {
             .lodge-gallery { grid-template-columns: 1fr; }
@@ -996,13 +997,18 @@
             }, 100);
         }
 
-        function submitBooking(e) {
+        async function submitBooking(e) {
             e.preventDefault();
             
             if (selectedItems.length === 0) {
                 alert('Please select at least one rate or activity to request a booking.');
                 return;
             }
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span style="border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 10px;"></span> Sending Booking...';
+            btn.disabled = true;
 
             const lodgeName = document.getElementById('d-title').innerText;
             const agentEmail = document.getElementById('b-agent-email').value;
@@ -1020,45 +1026,143 @@
 
             const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
             
-            let body = '==================================================\n';
-            body += status.toUpperCase() + ' REQUEST: ' + lodgeName.toUpperCase() + '\n';
-            body += '==================================================\n\n';
-            
-            body += 'AGENT / CONSULTANT:\n' + agentEmail + '\n\n';
-            
-            body += '--------------------------------------------------\n';
-            body += 'CLIENT DETAILS:\n';
-            body += '--------------------------------------------------\n';
-            body += 'Name: ' + name + '\n';
-            if (guide && guide !== '0') {
-                body += 'Guide Rooms: ' + guide + '\n';
-            }
-            body += 'Date In: ' + dateIn + '\n';
-            body += 'Date Out: ' + dateOut + '\n';
-            body += 'Arriving From: ' + arriving + '\n';
-            body += 'Departing To: ' + departing + '\n\n';
-            
-            body += '--------------------------------------------------\n';
-            body += 'SELECTED ITEMS:\n';
-            body += '--------------------------------------------------\n';
+            // Build items HTML
+            let itemsHtml = '';
             selectedItems.forEach(item => {
-                body += '[ ' + item.qty + 'x ] ' + item.name + '  (N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + ')\n';
+                itemsHtml += `
+                    <div style="margin-bottom: 15px; background-color: #FAFAFA; padding: 15px; border: 1px solid #ebe6df; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 14px; color: #214352; line-height: 1.4;"><strong>${item.qty}x</strong> ${item.name}</span>
+                        <span style="font-size: 14px; color: #c85a17; font-weight: bold; white-space: nowrap; margin-left: 15px;">N$ ${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                    </div>
+                `;
             });
-            body += '\n--------------------------------------------------\n';
-            body += 'GRAND TOTAL: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '\n';
-            body += '==================================================\n\n';
+
+            const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+            </head>
+            <body style="font-family: 'Arial', sans-serif; background-color: #FDFBF7; padding: 40px 20px; color: #2b2520; margin: 0;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ebe6df; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(200,90,23,0.1);">
+                    <div style="background-color: #ffffff; padding: 40px 30px; text-align: center; border-bottom: 2px solid #c85a17;">
+                        <h1 style="margin: 0; font-family: 'Georgia', serif; font-size: 24px; color: #c85a17; letter-spacing: 4px; text-transform: uppercase; font-weight: 400;">${lodgeName}</h1>
+                        <p style="margin: 10px 0 0 0; color: #2b2520; font-size: 11px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase;">${status} REQUEST</p>
+                    </div>
+                    <div style="padding: 40px 30px;">
+                        <div style="font-family: 'Georgia', serif; color: #c85a17; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase;">Agent Details</div>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Consultant Email</span>
+                            <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${agentEmail}</div>
+                        </div>
+
+                        <div style="font-family: 'Georgia', serif; color: #c85a17; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px;">Client & Logistics</div>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Client Name</span>
+                            <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${name}</div>
+                        </div>
+                        ${(guide && guide !== '0') ? `
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Guide Rooms Needed</span>
+                            <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${guide}</div>
+                        </div>` : ''}
+                        
+                        <!-- Dates side by side -->
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div style="flex: 1;">
+                                <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Date In</span>
+                                <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${dateIn}</div>
+                            </div>
+                            <div style="flex: 1;">
+                                <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Date Out</span>
+                                <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${dateOut}</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Arriving From</span>
+                            <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${arriving}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5c51; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Departing To</span>
+                            <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${departing}</div>
+                        </div>
+
+                        <div style="font-family: 'Georgia', serif; color: #c85a17; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px;">Selected Items</div>
+                        ${itemsHtml}
+                        
+                        <div style="display: flex; justify-content: space-between; font-family: 'Georgia', serif; font-size: 18px; font-weight: bold; padding: 20px; background-color: #f9f6f0; border: 1px solid #c85a17; color: #c85a17; margin-top: 20px;">
+                            <span>GRAND TOTAL</span>
+                            <span>N$ ${total.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                        </div>
+
+                        ${msg.trim() !== '' ? `
+                        <div style="font-family: 'Georgia', serif; color: #c85a17; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px;">Notes / Special Requirements</div>
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-size: 16px; color: #2b2520; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df; white-space: pre-line; line-height: 1.6;">${msg}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div style="background-color: #2b2520; color: #ffffff; text-align: center; padding: 20px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">
+                        Automated Booking Request | Desert Tracks Library
+                    </div>
+                </div>
+            </body>
+            </html>
+            `;
             
-            if (msg.trim() !== '') {
-                body += 'NOTES / SPECIAL REQUIREMENTS:\n' + msg + '\n\n';
+            try {
+                // Send via the Vercel Email Backend API
+                const res = await fetch("/api/send_email", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        from: 'Desert Tracks Bookings <onboarding@resend.dev>',
+                        to: ['bookings@desert-tracks.com'],
+                        subject: `${status.toUpperCase()} - ${lodgeName} - ${name}`,
+                        html: htmlContent,
+                        reply_to: agentEmail
+                    })
+                });
+
+                if (!res.ok) {
+                    throw new Error('API routing failed');
+                }
+
+                alert('Success! Your beautiful booking request has been securely dispatched to the operations team.');
+                
+            } catch (err) {
+                console.error(err);
+                alert('Warning: Direct API delivery failed. Creating a text-fallback email locally instead.');
+                
+                // Fallback to mailto
+                let fallbackBody = '==================================================\\n';
+                fallbackBody += status.toUpperCase() + ' REQUEST: ' + lodgeName.toUpperCase() + '\\n';
+                fallbackBody += '==================================================\\n\\n';
+                fallbackBody += 'AGENT: ' + agentEmail + '\\n\\n';
+                fallbackBody += 'CLIENT: ' + name + '\\n';
+                if (guide && guide !== '0') fallbackBody += 'Guide Rooms: ' + guide + '\\n';
+                fallbackBody += 'IN: ' + dateIn + ' | OUT: ' + dateOut + '\\n';
+                fallbackBody += 'From: ' + arriving + ' | To: ' + departing + '\\n\\n';
+                
+                selectedItems.forEach(item => {
+                    fallbackBody += '- ' + item.qty + 'x ' + item.name + ' (N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + ')\\n';
+                });
+                
+                fallbackBody += '\\nGRAND TOTAL: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2});
+                
+                if (msg.trim() !== '') {
+                    fallbackBody += '\\n\\nNOTES:\\n' + msg;
+                }
+                
+                const subject = status + ' - ' + lodgeName + ' - ' + name;
+                window.location.href = 'mailto:bookings@desert-tracks.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(fallbackBody);
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
             }
-            
-            // Build the dynamic subject
-            const subject = status + ' - ' + lodgeName + ' - ' + name;
-            
-            // Send via mailto
-            window.location.href = 'mailto:bookings@desert-tracks.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-            
-            alert('Your booking request has been prepared in your email client.');
         }
     </script>
 </body>
