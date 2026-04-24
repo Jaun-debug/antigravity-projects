@@ -183,13 +183,13 @@
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <!-- Passport -->
                                 <label class="block relative border-2 border-dashed border-[#bfa182] bg-[#FDFBF7] p-8 text-center rounded-lg hover:bg-white transition-colors cursor-pointer">
-                                    <input type="file" required accept="image/*" class="sr-only" @change="e => handleFileUpload(e, guest, 'passport')">
-                                    <div v-if="guest.passportBase64" class="flex flex-col items-center text-[#214352] relative">
-                                        <button type="button" @click.prevent="guest.passportBase64 = null; guest.passportType = null" class="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-1 shadow-md transition-colors" title="Remove Passport">
-                                            <i data-lucide="x" class="w-5 h-5"></i>
-                                        </button>
+                                    <input type="file" required accept="image/jpeg, image/png" class="sr-only" @change="e => handleFileUpload(e, guest, 'passport')">
+                                    <div v-if="guest.passportBase64" class="flex flex-col items-center text-[#214352] relative pointer-events-auto">
                                         <i data-lucide="check-circle-2" class="w-10 h-10 text-green-600 mb-2"></i>
-                                        <span class="font-bold text-sm uppercase tracking-wide">Passport Attached</span>
+                                        <span class="font-bold text-sm uppercase tracking-wide text-green-700">Passport Attached</span>
+                                        <button type="button" @click.prevent="guest.passportBase64 = null; guest.passportType = null" class="mt-4 flex items-center justify-center gap-2 text-xs font-bold text-red-500 uppercase tracking-widest border border-red-200 bg-white px-4 py-2 rounded-full hover:bg-red-50 transition-colors">
+                                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Remove & Retake
+                                        </button>
                                     </div>
                                     <div v-else class="flex flex-col items-center justify-center opacity-80 pointer-events-none">
                                         <i data-lucide="plus-circle" class="w-10 h-10 text-[#bfa182] mb-4"></i>
@@ -200,13 +200,13 @@
 
                                 <!-- License -->
                                 <label class="block relative border-2 border-dashed border-[#bfa182] bg-[#FDFBF7] p-8 text-center rounded-lg hover:bg-white transition-colors cursor-pointer">
-                                    <input type="file" accept="image/*" class="sr-only" @change="e => handleFileUpload(e, guest, 'license')">
-                                    <div v-if="guest.licenseBase64" class="flex flex-col items-center text-[#214352] relative">
-                                        <button type="button" @click.prevent="guest.licenseBase64 = null; guest.licenseType = null" class="absolute -top-4 -right-4 bg-red-500 hover:bg-red-600 text-white rounded-full p-1 shadow-md transition-colors" title="Remove License">
-                                            <i data-lucide="x" class="w-5 h-5"></i>
-                                        </button>
+                                    <input type="file" accept="image/jpeg, image/png" class="sr-only" @change="e => handleFileUpload(e, guest, 'license')">
+                                    <div v-if="guest.licenseBase64" class="flex flex-col items-center text-[#214352] relative pointer-events-auto">
                                         <i data-lucide="check-circle-2" class="w-10 h-10 text-green-600 mb-2"></i>
-                                        <span class="font-bold text-sm uppercase tracking-wide">License Attached</span>
+                                        <span class="font-bold text-sm uppercase tracking-wide text-green-700">License Attached</span>
+                                        <button type="button" @click.prevent="guest.licenseBase64 = null; guest.licenseType = null" class="mt-4 flex items-center justify-center gap-2 text-xs font-bold text-red-500 uppercase tracking-widest border border-red-200 bg-white px-4 py-2 rounded-full hover:bg-red-50 transition-colors">
+                                            <i data-lucide="refresh-cw" class="w-4 h-4"></i> Remove & Retake
+                                        </button>
                                     </div>
                                     <div v-else class="flex flex-col items-center justify-center opacity-80 pointer-events-none">
                                         <i data-lucide="plus-circle" class="w-10 h-10 text-[#bfa182] mb-4"></i>
@@ -285,11 +285,13 @@
                 };
 
                 const compressImage = (file) => {
-                    return new Promise((resolve) => {
+                    return new Promise((resolve, reject) => {
                         const reader = new FileReader();
+                        reader.onerror = () => reject(new Error("Failed to read file"));
                         reader.readAsDataURL(file);
                         reader.onload = (event) => {
                             const img = new Image();
+                            img.onerror = () => reject(new Error("Failed to load image. Ensure it's a valid JPEG or PNG."));
                             img.src = event.target.result;
                             img.onload = () => {
                                 const canvas = document.createElement("canvas");
@@ -328,13 +330,19 @@
                 const handleFileUpload = async (event, guest, type) => {
                     const file = event.target.files[0];
                     if (!file) return;
-                    const compressed = await compressImage(file);
-                    if (type === 'passport') {
-                        guest.passportBase64 = compressed.base64;
-                        guest.passportType = compressed.type;
-                    } else {
-                        guest.licenseBase64 = compressed.base64;
-                        guest.licenseType = compressed.type;
+                    try {
+                        const compressed = await compressImage(file);
+                        if (type === 'passport') {
+                            guest.passportBase64 = compressed.base64;
+                            guest.passportType = compressed.type;
+                        } else {
+                            guest.licenseBase64 = compressed.base64;
+                            guest.licenseType = compressed.type;
+                        }
+                    } catch (err) {
+                        console.error("Image processing error:", err);
+                        alert(`Failed to process the image: ${err.message}. Please try again or use a different photo.`);
+                        event.target.value = '';
                     }
                 };
 
