@@ -172,12 +172,15 @@
             </div>
 
             <!-- SWIPER CAROUSEL (Replaces Property Grid) -->
-            <div class="swiper-container-wrapper">
+            <div class="swiper-container-wrapper" style="position: relative;">
                 <div class="swiper main-swiper">
                     <div class="swiper-wrapper" id="lodge-slider">
                         <!-- Slides injected via JS -->
                     </div>
                 </div>
+                <!-- Navigation Arrows -->
+                <div class="swiper-button-next" style="color: var(--brand-accent); right: 20px;"></div>
+                <div class="swiper-button-prev" style="color: var(--brand-accent); left: 20px;"></div>
             </div>
         </div>
 
@@ -750,13 +753,12 @@
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
             slide.style.backgroundImage = 'url(' + data.cover + ')';
-            slide.onclick = () => openProperty(key);
             
             slide.innerHTML = `
                 <div class="swiper-card-content">
                     <span class="swiper-card-location">${data.location}</span>
                     <h2 class="swiper-card-title">${data.name}</h2>
-                    <span class="swiper-card-btn">Select Lodge</span>
+                    <span class="swiper-card-btn" onclick="openProperty('${key}')">Select Lodge</span>
                 </div>
             `;
             slider.appendChild(slide);
@@ -775,7 +777,16 @@
                 modifier: 1,
                 slideShadows: true,
             },
-            loop: true
+            loop: true,
+            slideToClickedSlide: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            mousewheel: {
+                forceToAxis: true,
+            },
+            keyboard: true
         });
 
         function parseTab1(htmlString) {
