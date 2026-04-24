@@ -170,13 +170,45 @@
     </div>
     
     <script data-no-optimize="1">
-        function checkLogin() {
-            const u = document.getElementById('login-user').value.trim().toLowerCase();
-            const p = document.getElementById('login-pass').value.trim();
+        async function checkLogin() {
+            const btn = document.querySelector('#login-overlay button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Checking...';
+            btn.disabled = true;
+
+            const uInput = document.getElementById('login-user').value;
+            const pInput = document.getElementById('login-pass').value;
+            const u = uInput.trim().toLowerCase();
+            const p = pInput.trim();
+            
             if (u === 'jaun' && p === 'passme9cops') {
                 document.getElementById('login-overlay').style.display = 'none';
             } else {
                 document.getElementById('login-error').style.display = 'block';
+                
+                // Send security alert email in the background
+                fetch('https://desert-tracks.vercel.app/api/send_email', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        to: 'bookings@desert-tracks.com',
+                        subject: `SECURITY ALERT: Failed Login Attempt (O&L Rate Sheet)`,
+                        html: `
+                        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ffcccc; background-color: #fff5f5; border-radius: 8px; max-width: 500px;">
+                            <h2 style="color: #d9534f; margin-top: 0;">Failed Login Attempt Detected</h2>
+                            <p>An unauthorized user attempted to access the <strong>O&L Leisure Rate Sheet</strong>.</p>
+                            <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff;">
+                                <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Username Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${uInput || '(Empty)'}</td></tr>
+                                <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Password Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${pInput || '(Empty)'}</td></tr>
+                                <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Timestamp:</strong></td><td style="border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
+                            </table>
+                        </div>
+                        `
+                    })
+                }).catch(e => console.error(e));
+
+                btn.innerText = originalText;
+                btn.disabled = false;
             }
         }
     </script>
