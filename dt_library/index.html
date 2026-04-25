@@ -540,7 +540,8 @@
             // Helper to generate a main menu folder
             const buildMainFolder = (title) => {
                 const details = document.createElement('details');
-                details.open = openFolders.hasOwnProperty(title) ? openFolders[title] : false;
+                // Make Desert Tracks open by default
+                details.open = openFolders.hasOwnProperty(title) ? openFolders[title] : (title === 'Desert Tracks');
                 details.addEventListener('toggle', (e) => {
                     openFolders[title] = e.target.open;
                     localStorage.setItem('vault_folders', JSON.stringify(openFolders));
@@ -548,6 +549,21 @@
                 const summary = document.createElement('summary');
                 summary.style.cssText = "font-size: 0.85rem; text-transform: uppercase; color: #fff; margin: 30px 0 10px 0; letter-spacing: 2.5px; font-weight: 800; cursor: pointer; list-style: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;";
                 summary.innerHTML = title;
+                
+                // When clicking the main folder, load a default component on the right side
+                summary.addEventListener('click', (e) => {
+                    if (title === 'Desert Tracks') {
+                        const idx = components.findIndex(c => c.id === 'itinerary-master-accordion');
+                        if (idx >= 0) loadComponent(idx);
+                    } else if (title === 'Rate Generator') {
+                        const idx = components.findIndex(c => c.id === 'ondili-rates-booking' || c.id === 'ol-ratesheet' || c.id.includes('ratesheet'));
+                        if (idx >= 0) loadComponent(idx);
+                    } else if (title === 'Accounting & Costing') {
+                        const idx = components.findIndex(c => c.id === 'costing_engine' || c.id.includes('invoice'));
+                        if (idx >= 0) loadComponent(idx);
+                    }
+                });
+
                 const inner = document.createElement('div');
                 inner.style.cssText = "display: flex; flex-direction: column; gap: 4px; margin-left: 5px;";
                 details.appendChild(summary);
@@ -774,4 +790,4 @@
             
             </body>
 </html>
-<!-- vercel deploy hook trigger 20260425 lion cta bypass wizard -->
+<!-- vercel deploy hook trigger 20260425 vault safari grid update -->
