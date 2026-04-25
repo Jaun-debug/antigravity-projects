@@ -178,129 +178,141 @@
 
 <script>
 (function(){
-    var carousels = document.querySelectorAll('.dt-film-section');
-    
-    carousels.forEach(function(section) {
-        if (section.dataset.init === 'true') return;
-        section.dataset.init = 'true';
+    function initSafariCarousel() {
+        var carousels = document.querySelectorAll('.dt-film-section');
         
-        var wrap = section.querySelector('.dt-film-track-wrap');
-        var track = section.querySelector('.dt-film-track');
-        var counter = section.querySelector('.dt-film-counter');
-        var progress = section.querySelector('.dt-film-progress-bar');
-        var prevBtn = section.querySelector('.dt-film-prev-btn');
-        var nextBtn = section.querySelector('.dt-film-next-btn');
-        
-        if(!wrap || !track) return;
-        
-        var cards = Array.prototype.slice.call(track.querySelectorAll('.dt-film-card'));
-        var total = cards.length;
-        var curX = 0, velX = 0, raf = null, dragging = !1;
-        var startX = 0, startScroll = 0, lastX = 0, lastT = 0;
-        var activeIndex = 0;
-        
-        function maxScroll(){
-            var tw = cards.reduce(function(s,c){return s+c.offsetWidth+14},0);
-            return -(tw - wrap.offsetWidth + 60);
-        }
-        
-        function clamp(x){ return Math.min(0, Math.max(maxScroll(), x)); }
-        
-        function applyX(x, instant){
-            curX = clamp(x);
-            track.style.transition = instant ? 'none' : 'transform 0.45s cubic-bezier(0.22,1,0.36,1)';
-            track.style.transform = 'translateX(' + curX + 'px)';
-            updateUI();
-        }
-        
-        function updateUI(){
-            var max = -maxScroll();
-            var pct = max > 0 ? (-curX / max) * 100 : 0;
-            if (progress) progress.style.width = pct + '%';
+        carousels.forEach(function(section) {
+            if (section.dataset.init === 'true') return;
+            section.dataset.init = 'true';
             
-            var pos = -curX, cum = 0, nearest = 0;
-            cards.forEach(function(c,i){
-                if(Math.abs(cum-pos) < Math.abs((cum-pos)-(-curX-cum))) nearest = i;
-                if(cum+c.offsetWidth/2 < pos) nearest = i;
-                cum += c.offsetWidth + 14;
+            var wrap = section.querySelector('.dt-film-track-wrap');
+            var track = section.querySelector('.dt-film-track');
+            var counter = section.querySelector('.dt-film-counter');
+            var progress = section.querySelector('.dt-film-progress-bar');
+            var prevBtn = section.querySelector('.dt-film-prev-btn');
+            var nextBtn = section.querySelector('.dt-film-next-btn');
+            
+            if(!wrap || !track) {
+                section.dataset.init = 'false'; // Reset so it tries again
+                return;
+            }
+            
+            var cards = Array.prototype.slice.call(track.querySelectorAll('.dt-film-card'));
+            var total = cards.length;
+            if (total === 0) return;
+
+            var curX = 0, velX = 0, raf = null, dragging = !1;
+            var startX = 0, startScroll = 0, lastX = 0, lastT = 0;
+            var activeIndex = 0;
+            
+            function maxScroll(){
+                var tw = cards.reduce(function(s,c){return s+c.offsetWidth+14},0);
+                return -(tw - wrap.offsetWidth + 60);
+            }
+            
+            function clamp(x){ return Math.min(0, Math.max(maxScroll(), x)); }
+            
+            function applyX(x, instant){
+                curX = clamp(x);
+                track.style.transition = instant ? 'none' : 'transform 0.45s cubic-bezier(0.22,1,0.36,1)';
+                track.style.transform = 'translateX(' + curX + 'px)';
+                updateUI();
+            }
+            
+            function updateUI(){
+                var max = -maxScroll();
+                var pct = max > 0 ? (-curX / max) * 100 : 0;
+                if (progress) progress.style.width = pct + '%';
+                
+                var pos = -curX, cum = 0, nearest = 0;
+                cards.forEach(function(c,i){
+                    if(Math.abs(cum-pos) < Math.abs((cum-pos)-(-curX-cum))) nearest = i;
+                    if(cum+c.offsetWidth/2 < pos) nearest = i;
+                    cum += c.offsetWidth + 14;
+                });
+                
+                if (dragging || Math.abs(velX) > 1) {
+                    // Keep the active index bound strictly inside available cards
+                    activeIndex = Math.min(total-1, Math.max(0, nearest));
+                }
+                
+                if (counter) {
+                    counter.innerHTML = String(activeIndex+1).padStart(2,'0') + ' <span>/ ' + String(total).padStart(2,'0') + '</span>';
+                }
+            }
+            
+            function momentum(){
+                velX *= 0.93;
+                if(Math.abs(velX) < 0.4){ velX = 0; return; }
+                applyX(curX + velX, !0);
+                raf = requestAnimationFrame(momentum);
+            }
+            
+            wrap.addEventListener('mousedown', function(e){
+                cancelAnimationFrame(raf); dragging = !0; startX = e.clientX; startScroll = curX;
+                lastX = e.clientX; lastT = Date.now(); velX = 0; wrap.classList.add('dt-dragging'); e.preventDefault();
+            });
+            document.addEventListener('mousemove', function(e){
+                if(!dragging) return;
+                var now = Date.now(), dt = now - lastT;
+                if(dt > 0) velX = (e.clientX - lastX) / dt * 16;
+                lastX = e.clientX; lastT = now; applyX(startScroll + (e.clientX - startX), !0);
+            });
+            document.addEventListener('mouseup', function(){
+                if(!dragging) return;
+                dragging = !1; wrap.classList.remove('dt-dragging'); raf = requestAnimationFrame(momentum);
             });
             
-            if (dragging || Math.abs(velX) > 1) {
-                // Keep the active index bound strictly inside available cards
-                activeIndex = Math.min(total-1, Math.max(0, nearest));
+            var touchStartX = 0, touchStartY = 0, touchStartScroll = 0, touchDir = null;
+            wrap.addEventListener('touchstart', function(e){
+                cancelAnimationFrame(raf); var t = e.touches[0]; touchStartX = t.clientX; touchStartY = t.clientY;
+                touchStartScroll = curX; lastX = t.clientX; lastT = Date.now(); velX = 0; touchDir = null;
+            }, {passive: !0});
+            wrap.addEventListener('touchmove', function(e){
+                var t = e.touches[0], dx = t.clientX - touchStartX, dy = t.clientY - touchStartY;
+                if(!touchDir){ touchDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v'; }
+                if(touchDir === 'h'){
+                    e.preventDefault(); var now = Date.now(), dt = now - lastT;
+                    if(dt > 0) velX = (t.clientX - lastX) / dt * 16;
+                    lastX = t.clientX; lastT = now; applyX(touchStartScroll + dx, !0);
+                }
+            }, {passive: !1});
+            wrap.addEventListener('touchend', function(){
+                if(touchDir === 'h'){ raf = requestAnimationFrame(momentum); } touchDir = null;
+            }, {passive: !0});
+            
+            function snapDir(dir) {
+                cancelAnimationFrame(raf);
+                activeIndex += dir;
+                
+                // Loop flawlessly to front or back end!
+                if (activeIndex >= total) activeIndex = 0; 
+                else if (activeIndex < 0) activeIndex = total - 1;
+                
+                var tx = 0;
+                for(var i=0; i<activeIndex; i++) {
+                    tx += cards[i].offsetWidth + 14;
+                }
+                applyX(-tx, !1);
             }
             
-            if (counter) {
-                counter.innerHTML = String(activeIndex+1).padStart(2,'0') + ' <span>/ ' + String(total).padStart(2,'0') + '</span>';
-            }
-        }
-        
-        function momentum(){
-            velX *= 0.93;
-            if(Math.abs(velX) < 0.4){ velX = 0; return; }
-            applyX(curX + velX, !0);
-            raf = requestAnimationFrame(momentum);
-        }
-        
-        wrap.addEventListener('mousedown', function(e){
-            cancelAnimationFrame(raf); dragging = !0; startX = e.clientX; startScroll = curX;
-            lastX = e.clientX; lastT = Date.now(); velX = 0; wrap.classList.add('dt-dragging'); e.preventDefault();
-        });
-        document.addEventListener('mousemove', function(e){
-            if(!dragging) return;
-            var now = Date.now(), dt = now - lastT;
-            if(dt > 0) velX = (e.clientX - lastX) / dt * 16;
-            lastX = e.clientX; lastT = now; applyX(startScroll + (e.clientX - startX), !0);
-        });
-        document.addEventListener('mouseup', function(){
-            if(!dragging) return;
-            dragging = !1; wrap.classList.remove('dt-dragging'); raf = requestAnimationFrame(momentum);
-        });
-        
-        var touchStartX = 0, touchStartY = 0, touchStartScroll = 0, touchDir = null;
-        wrap.addEventListener('touchstart', function(e){
-            cancelAnimationFrame(raf); var t = e.touches[0]; touchStartX = t.clientX; touchStartY = t.clientY;
-            touchStartScroll = curX; lastX = t.clientX; lastT = Date.now(); velX = 0; touchDir = null;
-        }, {passive: !0});
-        wrap.addEventListener('touchmove', function(e){
-            var t = e.touches[0], dx = t.clientX - touchStartX, dy = t.clientY - touchStartY;
-            if(!touchDir){ touchDir = Math.abs(dx) > Math.abs(dy) ? 'h' : 'v'; }
-            if(touchDir === 'h'){
-                e.preventDefault(); var now = Date.now(), dt = now - lastT;
-                if(dt > 0) velX = (t.clientX - lastX) / dt * 16;
-                lastX = t.clientX; lastT = now; applyX(touchStartScroll + dx, !0);
-            }
-        }, {passive: !1});
-        wrap.addEventListener('touchend', function(){
-            if(touchDir === 'h'){ raf = requestAnimationFrame(momentum); } touchDir = null;
-        }, {passive: !0});
-        
-        function snapDir(dir) {
-            cancelAnimationFrame(raf);
-            activeIndex += dir;
+            if (prevBtn) prevBtn.addEventListener('click', function() { snapDir(-1); });
+            if (nextBtn) nextBtn.addEventListener('click', function() { snapDir(1); });
             
-            // Loop flawlessly to front or back end!
-            if (activeIndex >= total) activeIndex = 0; 
-            else if (activeIndex < 0) activeIndex = total - 1;
+            wrap.addEventListener('wheel', function(e){
+                var ax = Math.abs(e.deltaX), ay = Math.abs(e.deltaY);
+                if(ax > ay && ax > 5){ e.preventDefault(); cancelAnimationFrame(raf); applyX(curX - e.deltaX, !0); }
+            }, {passive: !1});
             
-            var tx = 0;
-            for(var i=0; i<activeIndex; i++) {
-                tx += cards[i].offsetWidth + 14;
-            }
-            applyX(-tx, !1);
-        }
-        
-        if (prevBtn) prevBtn.addEventListener('click', function() { snapDir(-1); });
-        if (nextBtn) nextBtn.addEventListener('click', function() { snapDir(1); });
-        
-        wrap.addEventListener('wheel', function(e){
-            var ax = Math.abs(e.deltaX), ay = Math.abs(e.deltaY);
-            if(ax > ay && ax > 5){ e.preventDefault(); cancelAnimationFrame(raf); applyX(curX - e.deltaX, !0); }
-        }, {passive: !1});
-        
-        // Final trick: Boot straight into slide Number 1 every time!
-        activeIndex = 0;
-        applyX(0, !1);
-    });
+            // Final trick: Boot straight into slide Number 1 every time!
+            activeIndex = 0;
+            applyX(0, !1);
+        });
+    }
+
+    if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initSafariCarousel);}
+    else{initSafariCarousel();}
+    setTimeout(initSafariCarousel, 800);
+    setTimeout(initSafariCarousel, 2000);
 })();
 </script>

@@ -226,12 +226,19 @@
 
 <script data-no-optimize="1">
 function dtToggleFaq(questionEl) {
-    var item = questionEl.parentElement;
+    var item = questionEl.closest('.dt-faq-item');
+    if (!item) return;
+    
+    var section = item.closest('.dt-faq-section');
     var isOpen = item.classList.contains('dt-open');
-    /* Close all open items */
-    document.querySelectorAll('.dt-faq-item.dt-open').forEach(function(el) {
-        el.classList.remove('dt-open');
-    });
+    
+    /* Close all open items within THIS specific FAQ block only */
+    if (section) {
+        section.querySelectorAll('.dt-faq-item.dt-open').forEach(function(el) {
+            el.classList.remove('dt-open');
+        });
+    }
+    
     /* Open clicked item (unless it was already open) */
     if (!isOpen) {
         item.classList.add('dt-open');
