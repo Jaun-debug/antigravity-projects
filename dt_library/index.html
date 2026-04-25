@@ -478,16 +478,58 @@
                 return { details, inner };
             };
 
-            const folders = {
-                'Self-Drive Doc': buildFolder('Self-Drive Safaris'),
-                'Guided Doc': buildFolder('Guided Safaris'),
-                'Luxury Doc': buildFolder('Luxury Safaris'),
-                'Fly-In Doc': buildFolder('Fly-In Safaris'),
-                'Home Page Blocks': buildFolder('Home Page Blocks', true),
-                'Itineraries': buildFolder('Itineraries'),
-                'Collection Pages': buildFolder('Collection Pages'),
-                'WP Blocks': buildFolder('WP Blocks')
+            const buildSubFolder = (title) => {
+                const details = document.createElement('details');
+                details.open = true;
+                const summary = document.createElement('summary');
+                summary.style.cssText = "font-size: 0.65rem; text-transform: uppercase; color: var(--orange); margin: 10px 0 5px 15px; letter-spacing: 1.5px; font-weight: 600; cursor: pointer; list-style: none;";
+                summary.innerHTML = title;
+                const inner = document.createElement('div');
+                inner.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-left: 15px; margin-bottom: 10px;";
+                details.appendChild(summary);
+                details.appendChild(inner);
+                return { details, inner };
             };
+
+            const folders = {
+                'HOMEPAGE': buildFolder('HOMEPAGE', true),
+                'Self-Drive Safaris': buildFolder('Self-Drive Safaris', false),
+                'Luxury Safaris': buildFolder('Luxury Safaris', false),
+                'Fly-In Safaris': buildFolder('Fly-In Safaris', false),
+                'Guided Safaris': buildFolder('Guided Safaris', false),
+                'Rate Sheet Generator': buildFolder('Rate Sheet Generator', false),
+                'Accounting': buildFolder('Accounting Section', false),
+                'Other WP Blocks': buildFolder('Other WP Blocks', false) // fallback
+            };
+
+            const subFolders = {
+                'HOMEPAGE_ITIN': buildSubFolder('Itinerary Blocks'),
+                'HOMEPAGE_CTA': buildSubFolder('WP Blocks'),
+                'SD_ITIN': buildSubFolder('Itineraries'),
+                'SD_BLOCKS': buildSubFolder('WP Blocks'),
+                'LUX_ITIN': buildSubFolder('Itineraries'),
+                'LUX_BLOCKS': buildSubFolder('WP Blocks'),
+                'FLY_ITIN': buildSubFolder('Itineraries'),
+                'FLY_BLOCKS': buildSubFolder('WP Blocks'),
+                'GUI_ITIN': buildSubFolder('Itineraries'),
+                'GUI_BLOCKS': buildSubFolder('WP Blocks')
+            };
+
+            // Attach subfolders
+            folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_ITIN'].details);
+            folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_CTA'].details);
+
+            folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_ITIN'].details);
+            folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_BLOCKS'].details);
+
+            folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_ITIN'].details);
+            folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_BLOCKS'].details);
+
+            folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_ITIN'].details);
+            folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_BLOCKS'].details);
+
+            folders['Guided Safaris'].inner.appendChild(subFolders['GUI_ITIN'].details);
+            folders['Guided Safaris'].inner.appendChild(subFolders['GUI_BLOCKS'].details);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
@@ -495,29 +537,67 @@
                 el.onclick = () => loadComponent(idx);
                 el.innerHTML = '<div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start;"><span class="nav-item-title">' + cmp.title + '</span></div>';
 
-                let targetTag = cmp.tag;
-                if (targetTag === 'Website Blocks Doc' || targetTag === 'Premium UI Tools') {
-                    if (cmp.id.includes('homepage') || cmp.title.includes('FAQ')) targetTag = 'Home Page Blocks';
-                    else if (cmp.id.includes('itinerary-master')) targetTag = 'Itineraries';
-                    else if (cmp.title.includes('Collection') || (cmp.title.includes('Design') && (cmp.title.includes('Self-Drive') || cmp.title.includes('Luxury') || cmp.title.includes('Fly-In') || cmp.title.includes('Guided')))) targetTag = 'Collection Pages';
-                    else targetTag = 'WP Blocks';
+                let target = folders['Other WP Blocks'].inner; // Default
+
+                // Ratesheets
+                if (cmp.id.includes('ratesheet') || cmp.id === 'ondili-rates-booking' || cmp.title.toLowerCase().includes('rate sheet')) {
+                    target = folders['Rate Sheet Generator'].inner;
+                }
+                // Accounting & Forms
+                else if (cmp.id.includes('invoice') || cmp.id.includes('booking-reg') || cmp.id === 'costing_engine') {
+                    target = folders['Accounting'].inner;
+                }
+                // Homepage
+                else if (cmp.id.includes('itinerary-master')) {
+                    target = subFolders['HOMEPAGE_ITIN'].inner;
+                }
+                else if (cmp.id.includes('homepage') || cmp.title.includes('FAQ') || cmp.id === 'lion-cta' || cmp.id === 'mongoose-hero' || cmp.id === 'solly') {
+                    target = subFolders['HOMEPAGE_CTA'].inner;
+                }
+                // Self-Drive
+                else if (cmp.tag === 'Self-Drive Doc' || cmp.tag === 'Self-Drive Safaris') {
+                    target = subFolders['SD_ITIN'].inner;
+                }
+                else if (cmp.id === 'self-drive-design' || cmp.id === 'component_11') {
+                    target = subFolders['SD_BLOCKS'].inner;
+                }
+                // Luxury
+                else if (cmp.tag === 'Luxury Doc' || cmp.tag === 'Luxury Safaris') {
+                    target = subFolders['LUX_ITIN'].inner;
+                }
+                else if (cmp.id === 'luxury') {
+                    target = subFolders['LUX_BLOCKS'].inner;
+                }
+                // Fly-In
+                else if (cmp.tag === 'Fly-In Doc' || cmp.tag === 'Fly-In Safaris') {
+                    target = subFolders['FLY_ITIN'].inner;
+                }
+                else if (cmp.id === 'flyin') {
+                    target = subFolders['FLY_BLOCKS'].inner;
+                }
+                // Guided
+                else if (cmp.tag === 'Guided Doc' || cmp.tag === 'Guided Safaris') {
+                    target = subFolders['GUI_ITIN'].inner;
+                }
+                else if (cmp.id === 'guided') {
+                    target = subFolders['GUI_BLOCKS'].inner;
+                }
+                // Everything else
+                else {
+                    target = folders['Other WP Blocks'].inner;
                 }
 
-                if (folders[targetTag]) {
-                    folders[targetTag].inner.appendChild(el);
-                } else {
-                    folders['WP Blocks'].inner.appendChild(el); // Fallback
-                }
+                target.appendChild(el);
             });
 
-            container.appendChild(folders['Self-Drive Doc'].details);
-            container.appendChild(folders['Guided Doc'].details);
-            container.appendChild(folders['Luxury Doc'].details);
-            container.appendChild(folders['Fly-In Doc'].details);
-            container.appendChild(folders['Home Page Blocks'].details);
-            container.appendChild(folders['Itineraries'].details);
-            container.appendChild(folders['Collection Pages'].details);
-            container.appendChild(folders['WP Blocks'].details);
+            container.appendChild(folders['HOMEPAGE'].details);
+            container.appendChild(folders['Self-Drive Safaris'].details);
+            container.appendChild(folders['Luxury Safaris'].details);
+            container.appendChild(folders['Fly-In Safaris'].details);
+            container.appendChild(folders['Guided Safaris'].details);
+            container.appendChild(folders['Rate Sheet Generator'].details);
+            container.appendChild(folders['Accounting'].details);
+            container.appendChild(folders['Other WP Blocks'].details);
         }
 
         activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
