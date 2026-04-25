@@ -69,7 +69,7 @@
 </head>
 <body>
     <aside>
-        <div class="brand">
+        <div class="brand" style="cursor: pointer;" onclick="loadComponent(-1)">
             <h1>Master Library</h1>
             <span>Desert Tracks UI Vault</span>
         </div>
@@ -723,12 +723,29 @@
             container.appendChild(mainFolders['Accounting & Costing'].details);
         }
 
-        activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
+        activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : -1;
         let preloadedCode = "";
 
         async function loadComponent(idx) {
             activeIndex = idx;
             localStorage.setItem('vault_active_index', idx);
+            
+            if (idx === -1) {
+                document.getElementById('headerTitle').innerText = "Welcome";
+                document.getElementById('headerDesc').innerText = "Please select a component from the left sidebar.";
+                document.getElementById('urlBar').innerText = "welcome.html";
+                document.getElementById('loader').classList.add('active');
+                
+                renderNav();
+                
+                const timestamp = new Date().getTime();
+                const frame = document.getElementById('previewFrame');
+                frame.src = "welcome.html?v=" + timestamp;
+                frame.onload = () => { setTimeout(() => { document.getElementById('loader').classList.remove('active'); }, 300); };
+                preloadedCode = "<!-- Please select a component to view source code -->";
+                return;
+            }
+            
             const cmp = components[idx];
             
             document.getElementById('headerTitle').innerText = cmp.title;

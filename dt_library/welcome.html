@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Master Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --orange: #ff6e00;
+            --dark: #1a1a18;
+            --font-main: 'DM Sans', sans-serif;
+            --font-head: 'Playfair Display', serif;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: #fff;
+            overflow: hidden;
+            text-align: center;
+            font-family: var(--font-main);
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-brand h1 {
+            font-family: var(--font-head);
+            font-size: 5.5rem; /* Large serif text like screenshot */
+            letter-spacing: 0.5px;
+            margin: 0 0 10px 0;
+            font-weight: 400;
+            line-height: 1.2;
+            text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .welcome-brand span {
+            display: block;
+            font-size: 1.6rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--orange);
+            font-weight: 700;
+            margin-top: 5px;
+        }
+        
+        /* Subtle glow effect behind */
+        .welcome-brand {
+            position: relative;
+        }
+        
+        .welcome-brand::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px; height: 150px;
+            background: rgba(255, 110, 0, 0.05);
+            filter: blur(80px);
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-brand">
+        <h1>Master Library</h1>
+        <span>Desert Tracks UI Vault</span>
+    </div>
+</body>
+</html>
