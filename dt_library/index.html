@@ -460,7 +460,20 @@
             const container = document.getElementById('navContainer');
             container.innerHTML = '';
             
-            // Helper to generate a folder
+            // Helper to generate a main menu folder
+            const buildMainFolder = (title) => {
+                const details = document.createElement('details');
+                details.open = true;
+                const summary = document.createElement('summary');
+                summary.style.cssText = "font-size: 0.85rem; text-transform: uppercase; color: #fff; margin: 30px 0 10px 0; letter-spacing: 2.5px; font-weight: 800; cursor: pointer; list-style: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;";
+                summary.innerHTML = title;
+                const inner = document.createElement('div');
+                inner.style.cssText = "display: flex; flex-direction: column; gap: 4px; margin-left: 5px;";
+                details.appendChild(summary);
+                details.appendChild(inner);
+                return { details, inner };
+            };
+
             const buildFolder = (title, defaultOpen = false) => {
                 const details = document.createElement('details');
                 details.open = openFolders.hasOwnProperty(title) ? openFolders[title] : defaultOpen;
@@ -469,7 +482,7 @@
                     localStorage.setItem('vault_folders', JSON.stringify(openFolders));
                 });
                 const summary = document.createElement('summary');
-                summary.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: #888; margin: 25px 0 5px 5px; letter-spacing: 2px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: center; user-select: none;";
+                summary.style.cssText = "font-size: 0.75rem; text-transform: uppercase; color: #888; margin: 15px 0 5px 10px; letter-spacing: 2px; font-weight: 700; cursor: pointer; list-style: none; display: flex; align-items: center; user-select: none;";
                 summary.innerHTML = title;
                 const inner = document.createElement('div');
                 inner.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-top: 10px;";
@@ -482,13 +495,19 @@
                 const details = document.createElement('details');
                 details.open = true;
                 const summary = document.createElement('summary');
-                summary.style.cssText = "font-size: 0.65rem; text-transform: uppercase; color: var(--orange); margin: 10px 0 5px 15px; letter-spacing: 1.5px; font-weight: 600; cursor: pointer; list-style: none;";
+                summary.style.cssText = "font-size: 0.65rem; text-transform: uppercase; color: var(--orange); margin: 10px 0 5px 25px; letter-spacing: 1.5px; font-weight: 600; cursor: pointer; list-style: none;";
                 summary.innerHTML = title;
                 const inner = document.createElement('div');
-                inner.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-left: 15px; margin-bottom: 10px;";
+                inner.style.cssText = "display: flex; flex-direction: column; gap: 8px; margin-left: 25px; margin-bottom: 10px;";
                 details.appendChild(summary);
                 details.appendChild(inner);
                 return { details, inner };
+            };
+
+            const mainFolders = {
+                'Desert Tracks': buildMainFolder('Desert Tracks'),
+                'Rate Generator': buildMainFolder('Rate Generator'),
+                'Accounting & Costing': buildMainFolder('Accounting & Costing')
             };
 
             const folders = {
@@ -497,9 +516,7 @@
                 'Luxury Safaris': buildFolder('Luxury Safaris', false),
                 'Fly-In Safaris': buildFolder('Fly-In Safaris', false),
                 'Guided Safaris': buildFolder('Guided Safaris', false),
-                'Rate Sheet Generator': buildFolder('Rate Sheet Generator', false),
-                'Accounting': buildFolder('Accounting Section', false),
-                'Other WP Blocks': buildFolder('Other WP Blocks', false) // fallback
+                'General WP Blocks': buildFolder('General WP Blocks', false)
             };
 
             const subFolders = {
@@ -531,21 +548,29 @@
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_ITIN'].details);
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_BLOCKS'].details);
 
+            // Attach folders to Desert Tracks Main Menu
+            mainFolders['Desert Tracks'].inner.appendChild(folders['HOMEPAGE'].details);
+            mainFolders['Desert Tracks'].inner.appendChild(folders['Self-Drive Safaris'].details);
+            mainFolders['Desert Tracks'].inner.appendChild(folders['Luxury Safaris'].details);
+            mainFolders['Desert Tracks'].inner.appendChild(folders['Fly-In Safaris'].details);
+            mainFolders['Desert Tracks'].inner.appendChild(folders['Guided Safaris'].details);
+            mainFolders['Desert Tracks'].inner.appendChild(folders['General WP Blocks'].details);
+
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
                 el.className = 'nav-item ' + (idx === activeIndex ? 'active' : '');
                 el.onclick = () => loadComponent(idx);
                 el.innerHTML = '<div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start;"><span class="nav-item-title">' + cmp.title + '</span></div>';
 
-                let target = folders['Other WP Blocks'].inner; // Default
+                let target = folders['General WP Blocks'].inner; // Default
 
                 // Ratesheets
                 if (cmp.id.includes('ratesheet') || cmp.id === 'ondili-rates-booking' || cmp.title.toLowerCase().includes('rate sheet')) {
-                    target = folders['Rate Sheet Generator'].inner;
+                    target = mainFolders['Rate Generator'].inner;
                 }
                 // Accounting & Forms
                 else if (cmp.id.includes('invoice') || cmp.id.includes('booking-reg') || cmp.id === 'costing_engine') {
-                    target = folders['Accounting'].inner;
+                    target = mainFolders['Accounting & Costing'].inner;
                 }
                 // Homepage
                 else if (cmp.id.includes('itinerary-master')) {
@@ -584,20 +609,15 @@
                 }
                 // Everything else
                 else {
-                    target = folders['Other WP Blocks'].inner;
+                    target = folders['General WP Blocks'].inner;
                 }
 
                 target.appendChild(el);
             });
 
-            container.appendChild(folders['HOMEPAGE'].details);
-            container.appendChild(folders['Self-Drive Safaris'].details);
-            container.appendChild(folders['Luxury Safaris'].details);
-            container.appendChild(folders['Fly-In Safaris'].details);
-            container.appendChild(folders['Guided Safaris'].details);
-            container.appendChild(folders['Rate Sheet Generator'].details);
-            container.appendChild(folders['Accounting'].details);
-            container.appendChild(folders['Other WP Blocks'].details);
+            container.appendChild(mainFolders['Desert Tracks'].details);
+            container.appendChild(mainFolders['Rate Generator'].details);
+            container.appendChild(mainFolders['Accounting & Costing'].details);
         }
 
         activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
