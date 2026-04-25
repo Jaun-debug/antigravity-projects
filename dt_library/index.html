@@ -479,12 +479,14 @@
             };
 
             const folders = {
-                'Premium UI Tools': buildFolder('Premium UI Tools', false),
                 'Self-Drive Doc': buildFolder('Self-Drive Safaris'),
                 'Guided Doc': buildFolder('Guided Safaris'),
                 'Luxury Doc': buildFolder('Luxury Safaris'),
                 'Fly-In Doc': buildFolder('Fly-In Safaris'),
-                'Website Blocks Doc': buildFolder('Website Blocks')
+                'Home Page Blocks': buildFolder('Home Page Blocks', true),
+                'Itineraries': buildFolder('Itineraries'),
+                'Collection Pages': buildFolder('Collection Pages'),
+                'WP Blocks': buildFolder('WP Blocks')
             };
 
             components.forEach((cmp, idx) => {
@@ -493,21 +495,29 @@
                 el.onclick = () => loadComponent(idx);
                 el.innerHTML = '<div style="display:flex; justify-content:space-between; width:100%; align-items:flex-start;"><span class="nav-item-title">' + cmp.title + '</span></div>';
 
-                if (folders[cmp.tag]) {
-                    folders[cmp.tag].inner.appendChild(el);
-                } else if (cmp.tag === 'Premium UI Tools' || cmp.tag === 'Vault Core') {
-                    folders['Premium UI Tools'].inner.appendChild(el);
+                let targetTag = cmp.tag;
+                if (targetTag === 'Website Blocks Doc' || targetTag === 'Premium UI Tools') {
+                    if (cmp.id.includes('homepage') || cmp.title.includes('FAQ')) targetTag = 'Home Page Blocks';
+                    else if (cmp.id.includes('itinerary-master')) targetTag = 'Itineraries';
+                    else if (cmp.title.includes('Collection') || (cmp.title.includes('Design') && (cmp.title.includes('Self-Drive') || cmp.title.includes('Luxury') || cmp.title.includes('Fly-In') || cmp.title.includes('Guided')))) targetTag = 'Collection Pages';
+                    else targetTag = 'WP Blocks';
+                }
+
+                if (folders[targetTag]) {
+                    folders[targetTag].inner.appendChild(el);
                 } else {
-                    folders['Premium UI Tools'].inner.appendChild(el); // Fallback
+                    folders['WP Blocks'].inner.appendChild(el); // Fallback
                 }
             });
 
-            container.appendChild(folders['Premium UI Tools'].details);
             container.appendChild(folders['Self-Drive Doc'].details);
             container.appendChild(folders['Guided Doc'].details);
             container.appendChild(folders['Luxury Doc'].details);
             container.appendChild(folders['Fly-In Doc'].details);
-            container.appendChild(folders['Website Blocks Doc'].details);
+            container.appendChild(folders['Home Page Blocks'].details);
+            container.appendChild(folders['Itineraries'].details);
+            container.appendChild(folders['Collection Pages'].details);
+            container.appendChild(folders['WP Blocks'].details);
         }
 
         activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : 0;
