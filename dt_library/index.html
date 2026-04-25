@@ -116,14 +116,14 @@
         const components = [
     {
         "id": "itinerary-master-accordion",
-        "title": "Master Itinerary (Luxury Accordion Engine)",
+        "title": "Master itinerary full width",
         "tag": "Website Blocks Doc",
         "desc": "The ultimate new gold standard: single-column full width, dynamic smart-tracking accordion tab system.",
         "file": "itinerary_master_full_width.html"
     },
     {
         "id": "itinerary-master-50-50",
-        "title": "Legacy: Master Itinerary 50/50 Split",
+        "title": "Master itinerary 50/50",
         "tag": "Website Blocks Doc",
         "desc": "The master luxurious 50/50 layout with sticky left hero.",
         "file": "itinerary_master_50_50.html"
@@ -605,7 +605,6 @@
             };
 
             const subFolders = {
-                'HOMEPAGE_ITIN': buildSubFolder('HOMEPAGE_ITIN', 'Itinerary Blocks'),
                 'HOMEPAGE_CTA': buildSubFolder('HOMEPAGE_CTA', 'WP Blocks'),
                 'SD_ITIN': buildSubFolder('SD_ITIN', 'Itineraries'),
                 'SD_BLOCKS': buildSubFolder('SD_BLOCKS', 'WP Blocks'),
@@ -619,7 +618,6 @@
 
             // Attach subfolders
             folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_CTA'].details);
-            folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_ITIN'].details);
 
             folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_BLOCKS'].details);
             folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_ITIN'].details);
@@ -658,9 +656,6 @@
                     target = mainFolders['Accounting & Costing'].inner;
                 }
                 // Homepage
-                else if (cmp.id.includes('itinerary-master')) {
-                    target = subFolders['HOMEPAGE_ITIN'].inner;
-                }
                 else if (cmp.id.includes('homepage') || cmp.id === 'component_17' || cmp.tag === 'Homepage CTA') {
                     target = subFolders['HOMEPAGE_CTA'].inner;
                 }
