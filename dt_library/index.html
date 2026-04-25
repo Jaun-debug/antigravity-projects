@@ -206,11 +206,74 @@
         "file": "component_8.html"
     },
     {
-        "id": "component_11",
-        "title": "Fading In And Zooming In Self-drive Page",
-        "tag": "Website Blocks Doc",
-        "desc": "Extracted from fading in and zooming in self-drive page.docx on your Desktop.",
+        "id": "cta-sd-1",
+        "title": "Self-Drive Fading CTA",
+        "tag": "Self-Drive CTA",
+        "desc": "Fading CTA block for Self-Drive Safaris.",
         "file": "component_11.html"
+    },
+    {
+        "id": "cta-sd-2",
+        "title": "Self-Drive Cinematic Hero",
+        "tag": "Self-Drive CTA",
+        "desc": "Cinematic Hero CTA block for Self-Drive Safaris.",
+        "file": "mongoose-hero.html"
+    },
+    {
+        "id": "cta-lux-1",
+        "title": "Luxury Fading CTA",
+        "tag": "Luxury CTA",
+        "desc": "Fading CTA block for Luxury Safaris.",
+        "file": "component_11.html"
+    },
+    {
+        "id": "cta-lux-2",
+        "title": "Luxury Cinematic Hero",
+        "tag": "Luxury CTA",
+        "desc": "Cinematic Hero CTA block for Luxury Safaris.",
+        "file": "mongoose-hero.html"
+    },
+    {
+        "id": "cta-fly-1",
+        "title": "Fly-In Fading CTA",
+        "tag": "Fly-In CTA",
+        "desc": "Fading CTA block for Fly-In Safaris.",
+        "file": "component_11.html"
+    },
+    {
+        "id": "cta-fly-2",
+        "title": "Fly-In Cinematic Hero",
+        "tag": "Fly-In CTA",
+        "desc": "Cinematic Hero CTA block for Fly-In Safaris.",
+        "file": "mongoose-hero.html"
+    },
+    {
+        "id": "cta-gui-1",
+        "title": "Guided Fading CTA",
+        "tag": "Guided CTA",
+        "desc": "Fading CTA block for Guided Safaris.",
+        "file": "component_11.html"
+    },
+    {
+        "id": "cta-gui-2",
+        "title": "Guided Cinematic Hero",
+        "tag": "Guided CTA",
+        "desc": "Cinematic Hero CTA block for Guided Safaris.",
+        "file": "mongoose-hero.html"
+    },
+    {
+        "id": "cta-home-1",
+        "title": "Homepage Fading CTA",
+        "tag": "Homepage CTA",
+        "desc": "Fading CTA block for Homepage.",
+        "file": "component_11.html"
+    },
+    {
+        "id": "cta-home-2",
+        "title": "Homepage Cinematic Hero",
+        "tag": "Homepage CTA",
+        "desc": "Cinematic Hero CTA block for Homepage.",
+        "file": "mongoose-hero.html"
     },
     {
         "id": "component_12",
@@ -218,13 +281,6 @@
         "tag": "Website Blocks Doc",
         "desc": "Extracted from best time to travel anti gravity.docx on your Desktop.",
         "file": "component_12.html"
-    },
-    {
-        "id": "component_13",
-        "title": "New Photo Galery",
-        "tag": "Website Blocks Doc",
-        "desc": "Extracted from NEW PHOTO GALERY.docx on your Desktop.",
-        "file": "component_13.html"
     },
     {
         "id": "component_16",
@@ -449,6 +505,34 @@
         "tag": "Website Blocks Doc",
         "desc": "Digital premium STO rate sheet for Ondili Lodges with Swiper coverflow and booking functionality.",
         "file": "ondili_rates_booking.html"
+    },
+    {
+        "id": "faq-self-drive",
+        "title": "Self-Drive FAQ",
+        "tag": "Self-Drive FAQ",
+        "desc": "FAQ block for Self-Drive Safaris (copied from Homepage).",
+        "file": "component_17.html"
+    },
+    {
+        "id": "faq-luxury",
+        "title": "Luxury FAQ",
+        "tag": "Luxury FAQ",
+        "desc": "FAQ block for Luxury Safaris (copied from Homepage).",
+        "file": "component_17.html"
+    },
+    {
+        "id": "faq-flyin",
+        "title": "Fly-In FAQ",
+        "tag": "Fly-In FAQ",
+        "desc": "FAQ block for Fly-In Safaris (copied from Homepage).",
+        "file": "component_17.html"
+    },
+    {
+        "id": "faq-guided",
+        "title": "Guided FAQ",
+        "tag": "Guided FAQ",
+        "desc": "FAQ block for Guided Safaris (copied from Homepage).",
+        "file": "component_17.html"
     }
 ];
 
@@ -463,7 +547,7 @@
             // Helper to generate a main menu folder
             const buildMainFolder = (title) => {
                 const details = document.createElement('details');
-                details.open = true;
+                details.open = false;
                 const summary = document.createElement('summary');
                 summary.style.cssText = "font-size: 0.85rem; text-transform: uppercase; color: #fff; margin: 30px 0 10px 0; letter-spacing: 2.5px; font-weight: 800; cursor: pointer; list-style: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;";
                 summary.innerHTML = title;
@@ -493,7 +577,7 @@
 
             const buildSubFolder = (title) => {
                 const details = document.createElement('details');
-                details.open = true;
+                details.open = false;
                 const summary = document.createElement('summary');
                 summary.style.cssText = "font-size: 0.65rem; text-transform: uppercase; color: var(--orange); margin: 10px 0 5px 25px; letter-spacing: 1.5px; font-weight: 600; cursor: pointer; list-style: none;";
                 summary.innerHTML = title;
@@ -511,7 +595,7 @@
             };
 
             const folders = {
-                'HOMEPAGE': buildFolder('HOMEPAGE', true),
+                'HOMEPAGE': buildFolder('HOMEPAGE', false),
                 'Self-Drive Safaris': buildFolder('Self-Drive Safaris', false),
                 'Luxury Safaris': buildFolder('Luxury Safaris', false),
                 'Fly-In Safaris': buildFolder('Fly-In Safaris', false),
@@ -524,12 +608,16 @@
                 'HOMEPAGE_CTA': buildSubFolder('WP Blocks'),
                 'SD_ITIN': buildSubFolder('Itineraries'),
                 'SD_BLOCKS': buildSubFolder('WP Blocks'),
+                'SD_FAQ': buildSubFolder('FAQ'),
                 'LUX_ITIN': buildSubFolder('Itineraries'),
                 'LUX_BLOCKS': buildSubFolder('WP Blocks'),
+                'LUX_FAQ': buildSubFolder('FAQ'),
                 'FLY_ITIN': buildSubFolder('Itineraries'),
                 'FLY_BLOCKS': buildSubFolder('WP Blocks'),
+                'FLY_FAQ': buildSubFolder('FAQ'),
                 'GUI_ITIN': buildSubFolder('Itineraries'),
-                'GUI_BLOCKS': buildSubFolder('WP Blocks')
+                'GUI_BLOCKS': buildSubFolder('WP Blocks'),
+                'GUI_FAQ': buildSubFolder('FAQ')
             };
 
             // Attach subfolders
@@ -538,15 +626,19 @@
 
             folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_ITIN'].details);
             folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_BLOCKS'].details);
+            subFolders['SD_BLOCKS'].inner.appendChild(subFolders['SD_FAQ'].details);
 
             folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_ITIN'].details);
             folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_BLOCKS'].details);
+            subFolders['LUX_BLOCKS'].inner.appendChild(subFolders['LUX_FAQ'].details);
 
             folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_ITIN'].details);
             folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_BLOCKS'].details);
+            subFolders['FLY_BLOCKS'].inner.appendChild(subFolders['FLY_FAQ'].details);
 
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_ITIN'].details);
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_BLOCKS'].details);
+            subFolders['GUI_BLOCKS'].inner.appendChild(subFolders['GUI_FAQ'].details);
 
             // Attach folders to Desert Tracks Main Menu
             mainFolders['Desert Tracks'].inner.appendChild(folders['HOMEPAGE'].details);
@@ -576,35 +668,47 @@
                 else if (cmp.id.includes('itinerary-master')) {
                     target = subFolders['HOMEPAGE_ITIN'].inner;
                 }
-                else if (cmp.id.includes('homepage') || cmp.title.includes('FAQ') || cmp.id === 'lion-cta' || cmp.id === 'mongoose-hero' || cmp.id === 'solly') {
+                else if (cmp.id.includes('homepage') || cmp.title.includes('FAQ') || cmp.id === 'lion-cta' || cmp.id === 'mongoose-hero' || cmp.id === 'solly' || cmp.tag === 'Homepage CTA') {
                     target = subFolders['HOMEPAGE_CTA'].inner;
                 }
                 // Self-Drive
+                else if (cmp.tag === 'Self-Drive FAQ') {
+                    target = subFolders['SD_FAQ'].inner;
+                }
                 else if (cmp.tag === 'Self-Drive Doc' || cmp.tag === 'Self-Drive Safaris') {
                     target = subFolders['SD_ITIN'].inner;
                 }
-                else if (cmp.id === 'self-drive-design' || cmp.id === 'component_11') {
+                else if (cmp.id === 'self-drive-design' || cmp.tag === 'Self-Drive CTA') {
                     target = subFolders['SD_BLOCKS'].inner;
                 }
                 // Luxury
+                else if (cmp.tag === 'Luxury FAQ') {
+                    target = subFolders['LUX_FAQ'].inner;
+                }
                 else if (cmp.tag === 'Luxury Doc' || cmp.tag === 'Luxury Safaris') {
                     target = subFolders['LUX_ITIN'].inner;
                 }
-                else if (cmp.id === 'luxury') {
+                else if (cmp.id === 'luxury' || cmp.tag === 'Luxury CTA') {
                     target = subFolders['LUX_BLOCKS'].inner;
                 }
                 // Fly-In
+                else if (cmp.tag === 'Fly-In FAQ') {
+                    target = subFolders['FLY_FAQ'].inner;
+                }
                 else if (cmp.tag === 'Fly-In Doc' || cmp.tag === 'Fly-In Safaris') {
                     target = subFolders['FLY_ITIN'].inner;
                 }
-                else if (cmp.id === 'flyin') {
+                else if (cmp.id === 'flyin' || cmp.tag === 'Fly-In CTA') {
                     target = subFolders['FLY_BLOCKS'].inner;
                 }
                 // Guided
+                else if (cmp.tag === 'Guided FAQ') {
+                    target = subFolders['GUI_FAQ'].inner;
+                }
                 else if (cmp.tag === 'Guided Doc' || cmp.tag === 'Guided Safaris') {
                     target = subFolders['GUI_ITIN'].inner;
                 }
-                else if (cmp.id === 'guided') {
+                else if (cmp.id === 'guided' || cmp.tag === 'Guided CTA') {
                     target = subFolders['GUI_BLOCKS'].inner;
                 }
                 // Everything else
