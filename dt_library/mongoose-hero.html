@@ -117,15 +117,15 @@
 }
 </style>
 
-<section class="dt-cin2-hero" id="dtCin2Hero">
-    <div class="dt-cin2-bg" id="dtCin2Bg"></div>
+<section class="dt-cin2-hero">
+    <div class="dt-cin2-bg"></div>
     <div class="dt-cin2-gradient"></div>
     <div class="dt-cin2-vignette"></div>
     <div class="dt-cin2-content">
-        <span class="dt-cin2-eyebrow" id="dtCin2Eyebrow">Start Your Journey</span>
-        <h2 class="dt-cin2-title" id="dtCin2Title">African Safari Experiences</h2>
-        <p class="dt-cin2-desc" id="dtCin2Desc">Specialising in Namibia and curated journeys across Southern and East Africa, we design bespoke safaris that combine extraordinary landscapes, wildlife, and culture.</p>
-        <a class="dt-cin2-cta" id="dtCin2Cta" href="https://desert-tracks.com/safari-booking/">Start Your Journey</a>
+        <span class="dt-cin2-eyebrow">Start Your Journey</span>
+        <h2 class="dt-cin2-title">African Safari Experiences</h2>
+        <p class="dt-cin2-desc">Specialising in Namibia and curated journeys across Southern and East Africa, we design bespoke safaris that combine extraordinary landscapes, wildlife, and culture.</p>
+        <a class="dt-cin2-cta" href="https://desert-tracks.com/safari-booking/">Start Your Journey</a>
     </div>
 </section>
 
@@ -133,33 +133,40 @@
 <script data-no-optimize="1">
 (function(){
     function initCinematicHero2(){
-        var hero=document.getElementById('dtCin2Hero'),
-            bg=document.getElementById('dtCin2Bg'),
-            eyebrow=document.getElementById('dtCin2Eyebrow'),
-            title=document.getElementById('dtCin2Title'),
-            desc=document.getElementById('dtCin2Desc'),
-            cta=document.getElementById('dtCin2Cta');
-        if(!hero||!bg||typeof gsap==='undefined'||typeof ScrollTrigger==='undefined'||hero.dataset.ready)return;
-        hero.dataset.ready='1';
-        var mob=window.innerWidth<=768;
+        if(typeof gsap==='undefined'||typeof ScrollTrigger==='undefined') return;
 
-        gsap.to(bg,{
-            scale:mob?1.18:1.28,
-            y:mob?'10%':'18%',
-            ease:'none',
-            scrollTrigger:{trigger:hero,start:'top 85%',end:'bottom top',scrub:1.5}
-        });
+        var heroes = document.querySelectorAll('.dt-cin2-hero');
+        heroes.forEach(function(hero) {
+            if(hero.dataset.ready === '1') return;
+            hero.dataset.ready='1';
 
-        gsap.set([eyebrow,title,desc,cta],{opacity:0,y:35,filter:'blur(5px)'});
-        var tl=gsap.timeline({
-            scrollTrigger:{trigger:hero,start:'top 50%',end:'bottom 10%',scrub:1.5}
+            var bg=hero.querySelector('.dt-cin2-bg'),
+                eyebrow=hero.querySelector('.dt-cin2-eyebrow'),
+                title=hero.querySelector('.dt-cin2-title'),
+                desc=hero.querySelector('.dt-cin2-desc'),
+                cta=hero.querySelector('.dt-cin2-cta');
+
+            if(!bg) return;
+            var mob=window.innerWidth<=768;
+
+            gsap.to(bg,{
+                scale:mob?1.18:1.28,
+                y:mob?'10%':'18%',
+                ease:'none',
+                scrollTrigger:{trigger:hero,start:'top 85%',end:'bottom top',scrub:1.5}
+            });
+
+            gsap.set([eyebrow,title,desc,cta],{opacity:0,y:35,filter:'blur(5px)'});
+            var tl=gsap.timeline({
+                scrollTrigger:{trigger:hero,start:'top 50%',end:'bottom 10%',scrub:1.5}
+            });
+            tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
+              .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
+              .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
+              .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=2.8')
+              .to([eyebrow,title,desc,cta],{opacity:1,ease:'none',duration:3})
+              .to([eyebrow,title,desc,cta],{opacity:0,y:-18,filter:'blur(4px)',ease:'power1.in',duration:3});
         });
-        tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
-          .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-          .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-          .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=2.8')
-          .to([eyebrow,title,desc,cta],{opacity:1,ease:'none',duration:3})
-          .to([eyebrow,title,desc,cta],{opacity:0,y:-18,filter:'blur(4px)',ease:'power1.in',duration:3});
     }
     if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCinematicHero2);}
     else{initCinematicHero2();}
