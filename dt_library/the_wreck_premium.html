@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wreck Restaurant | Premium Dining in Swakopmund</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary: #f9f6f0; /* Desert Tracks Ivory / Warm Sand */
+            --accent: #d4af37; /* Gold */
+            --secondary: #c85a17; /* Desert Tracks Dirty Orange / Terracotta */
+            --text-light: #ffffff; /* White text for dark backgrounds */
+            --text-dark: #2b2520;  /* Dark text for light backgrounds */
+            --glass-bg: rgba(249, 246, 240, 0.85);
+            --glass-border: rgba(200, 90, 23, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 100px; /* Accounts for the fixed navbar height */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3%;
+            background: rgba(249, 246, 240, 0.95); /* Desert Tracks Ivory glass */
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        nav.scrolled .logo, nav.scrolled .nav-links a {
+            color: var(--text-dark);
+        }
+
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-light);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            transition: color 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Using real photography from the internet as requested */
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('https://wetu.com/imageHandler/c1920x1080/105859/wreck1.jpg?fmt=jpg') center/cover no-repeat;
+            z-index: -1;
+            transform: scale(1.05);
+            animation: slowZoom 20s infinite alternate;
+        }
+
+        @keyframes slowZoom {
+            from { transform: scale(1); }
+            to { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.5s ease forwards 0.5s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: var(--text-light);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            color: var(--text-dark);
+            border: 1px solid var(--accent);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero .btn {
+            color: var(--text-light);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            transition: all 0.4s ease;
+            z-index: -1;
+        }
+
+        .btn:hover::before {
+            left: 0;
+        }
+
+        .btn:hover {
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* Glassmorphism Section */
+        .section {
+            padding: 6rem 5%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .about-glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            padding: 5rem;
+            border-radius: 2px;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+        }
+
+        /* Split Section */
+        .split-section {
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .split-section.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .split-image {
+            flex: 1;
+            height: 80vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .split-content {
+            flex: 1;
+            padding: 5rem;
+        }
+
+        .split-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .split-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 2rem;
+        }
+
+        /* Wine Menu Styling */
+        #winelist {
+            background: #fffff0; /* Ivory background */
+            color: #233a30;      /* Dark green */
+        }
+
+        #winelist .section-title {
+            color: #233a30;
+        }
+
+        #winelist p {
+            color: #4a5d54 !important;
+        }
+
+        #winelist .wine-category h3 {
+            color: #c98a50;      /* Dirty orange */
+            border-bottom: 1px solid #c98a50;
+        }
+
+        #winelist .wine-name {
+            color: #233a30;
+            font-weight: 600;
+        }
+
+        #winelist .wine-desc {
+            color: #4a5d54;
+        }
+
+        #winelist .wine-price {
+            color: #c98a50;      /* Dirty orange */
+            font-weight: 600;
+        }
+
+        #winelist .btn {
+            border-color: #233a30;
+            color: #233a30;
+        }
+        
+        #winelist .btn:hover {
+            background: #233a30;
+            color: #fffff0;
+        }
+
+        /* Wine Menu */
+        .menu-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .wine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+        }
+
+        .wine-category h3 {
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 0.5rem;
+        }
+
+        .wine-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 1.5rem;
+        }
+
+        .wine-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .wine-name {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+
+        .wine-desc {
+            font-size: 0.9rem;
+            color: #aaa;
+            margin-top: 0.2rem;
+            font-style: italic;
+        }
+
+        .wine-price {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 500;
+            padding-left: 1rem;
+        }
+
+        /* Partners Carousel */
+        .partners-carousel {
+            background: #f9f6f0; /* Desert Tracks Ivory variant */
+            padding: 2rem 0;
+            overflow: hidden;
+            position: relative;
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .partners-track {
+            display: flex;
+            width: max-content;
+            animation: scroll 30s linear infinite;
+        }
+
+        .partners-track:hover {
+            animation-play-state: paused;
+        }
+
+        .partner-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Jost', sans-serif;
+            font-size: 1.1rem;
+            color: #888;
+            margin: 0 4rem;
+            transition: color 0.3s ease;
+        }
+
+        .partner-logo:hover {
+            color: #fff;
+        }
+        
+        .partner-logo b {
+            font-weight: 600;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Footer */
+        footer {
+            background: #f9f6f0; /* Desert Tracks Ivory variant */
+            padding: 5rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: block;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: center;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: #aaa;
+        }
+
+        .info-item i {
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3rem; }
+            .about-glass { padding: 3rem 2rem; }
+            .split-section, .split-section.reverse { flex-direction: column; }
+            .split-image { height: 50vh; width: 100%; }
+            .split-content { padding: 3rem 5%; text-align: center; }
+            .footer-info { flex-direction: column; gap: 2rem; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="#" class="logo">The<span>Wreck</span></a>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#about">The Experience</a>
+            <a href="#cuisine">Cuisine</a>
+            <a href="#winelist">Wine List</a>
+            <a href="#contact">Contact</a>
+            <a href="https://book.nightsbridge.com/18090" target="_blank" style="color: var(--accent);">Book Rooms</a>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <span class="hero-subtitle">Swakopmund, Namibia</span>
+            <h1>Where the Ocean Meets Culinary Excellence</h1>
+            <a href="#contact" class="btn">Reserve a Table</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about-glass">
+            <h2 class="section-title">The Experience</h2>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #ccc; margin-bottom: 2rem;">Our signature restaurant "The Wreck" is situated on the second floor and offers uninterrupted sea-views, beautifully presented delicious food with attentive service in an elegant environment. Do not be disappointed . . . book a table now!</p>
+            <p style="font-size: 1.1rem; line-height: 1.8; color: #aaa; font-style: italic;">What they say about us . . . "Perched along the Namibian Coast, 20 meter from the shore, The Wreck secures top class cuisine in exquisite class surrounds. Unlimited views over the Atlantic; tastefully decorated interior and a intimate romantic setting make for an all round dining experience. Treat your loved one to a special night filled with top class International cuisine, romantic ambiance and breathtaking views at The Wreck Restaurant in Swakopmund."</p>
+        </div>
+    </section>
+
+    <section id="cuisine" class="split-section">
+        <!-- Replace with real images from the internet -->
+        <div class="split-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/105859/wreck3.jpg?fmt=jpg');"></div>
+        <div class="split-content">
+            <h2 class="serif">Our Menu</h2>
+            <p>Mouth watering cuisine, tastefully prepared and served, let our customers speak for us . . . "Our best meal by far in Swakopmund. Wish we had tried this restaurant earlier."</p>
+            <a href="#" class="btn">View Menu</a>
+        </div>
+    </section>
+
+    <section id="winelist" class="section">
+        <div class="menu-container">
+            <h2 class="section-title" style="text-align: center;">Wine Lovers !</h2>
+            <p style="text-align: center; margin-bottom: 4rem; color: #aaa;">The Wreck Restaurant offers a selection of hand picked wines from South Africa's best winelands and cellars. Please browse our winelist for more detail and descriptions. <br><br><a href="https://the-wreck.com/WineListBrochure/mobile/index.html" target="_blank" class="btn">For more information visit The Wreck Website</a></p>
+            
+            <div class="wine-grid">
+                <!-- White Wine -->
+                <div class="wine-category">
+                    <h3 class="serif">White Wines</h3>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Durbanville Hills Sauvignon Blanc</span>
+                            <span class="wine-desc">Crisp, fruity, and refreshing</span>
+                        </div>
+                        <span class="wine-price">N$ 250</span>
+                    </div>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Haute Cabrière Chardonnay Pinot Noir</span>
+                            <span class="wine-desc">Elegant, white peach, zesty</span>
+                        </div>
+                        <span class="wine-price">N$ 310</span>
+                    </div>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Paul Cluver Estate Chardonnay</span>
+                            <span class="wine-desc">Citrus blossom, roasted almonds</span>
+                        </div>
+                        <span class="wine-price">N$ 450</span>
+                    </div>
+                </div>
+
+                <!-- Red Wine -->
+                <div class="wine-category">
+                    <h3 class="serif">Red Wines</h3>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Meerlust Rubicon</span>
+                            <span class="wine-desc">Classic Bordeaux blend, dark fruit, cedar</span>
+                        </div>
+                        <span class="wine-price">N$ 950</span>
+                    </div>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Kanonkop Kadette Pinotage</span>
+                            <span class="wine-desc">Red berries, mocha, spicy undertones</span>
+                        </div>
+                        <span class="wine-price">N$ 340</span>
+                    </div>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Rupert & Rothschild Classique</span>
+                            <span class="wine-desc">Cranberry, dark chocolate, smooth tannins</span>
+                        </div>
+                        <span class="wine-price">N$ 520</span>
+                    </div>
+                </div>
+
+                <!-- Sparkling & MCC -->
+                <div class="wine-category">
+                    <h3 class="serif">Sparkling & MCC</h3>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Pongracz Brut</span>
+                            <span class="wine-desc">Classic yeast and biscuit character</span>
+                        </div>
+                        <span class="wine-price">N$ 380</span>
+                    </div>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Moët & Chandon Impérial</span>
+                            <span class="wine-desc">Vibrant green apple, citrus, brioche</span>
+                        </div>
+                        <span class="wine-price">N$ 1600</span>
+                    </div>
+                </div>
+
+                <!-- Rose -->
+                <div class="wine-category">
+                    <h3 class="serif">Rosé</h3>
+                    <div class="wine-item">
+                        <div class="wine-details">
+                            <span class="wine-name">Boschendal Blanc de Noir</span>
+                            <span class="wine-desc">Strawberry, hints of spice, crisp finish</span>
+                        </div>
+                        <span class="wine-price">N$ 220</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="split-section reverse">
+        <!-- Replace with real images from the internet -->
+        <div class="split-image" style="background-image: url('https://wetu.com/imageHandler/c1920x1080/105859/wreck6.jpg?fmt=jpg');"></div>
+        <div class="split-content">
+            <h2 class="serif">Romantic Ambiance</h2>
+            <p>Whether you're celebrating a special occasion or simply enjoying an evening out, our beautifully appointed interior offers the perfect setting. Let the sound of the crashing waves and the warm candlelight set the mood for a truly magical evening.</p>
+            <a href="https://book.nightsbridge.com/18090" target="_blank" class="btn">Book Rooms</a>
+        </div>
+    </section>
+
+    <section class="partners-carousel">
+        <div class="partners-track">
+            <!-- Set 1 -->
+            <div class="partner-logo"><b>THE WRECK</b> Swakopmund</div>
+            <div class="partner-logo"><b>Tripadvisor</b> Recommended</div>
+            <div class="partner-logo"><b>2020 Travelers</b> Choice</div>
+            <div class="partner-logo"><b>Namibia</b> Tourism</div>
+            <div class="partner-logo"><b>Destination</b> Swakopmund</div>
+            <!-- Set 2 (Duplicated for seamless loop) -->
+            <div class="partner-logo"><b>THE WRECK</b> Swakopmund</div>
+            <div class="partner-logo"><b>Tripadvisor</b> Recommended</div>
+            <div class="partner-logo"><b>2020 Travelers</b> Choice</div>
+            <div class="partner-logo"><b>Namibia</b> Tourism</div>
+            <div class="partner-logo"><b>Destination</b> Swakopmund</div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <a href="#" class="logo footer-logo">The<span>Wreck</span></a>
+        <div class="footer-info" style="flex-wrap: wrap; gap: 3rem; align-items: flex-start; max-width: 1200px; margin-left: auto; margin-right: auto;">
+            <div class="info-item" style="text-align: center;">
+                <i data-lucide="phone"></i>
+                <span style="line-height: 1.8;"><strong>Contact Numbers</strong><br>Tel: +264 64 414500<br>Fax: +264 64 414501<br>Mobile: +264 (0)81 127 3397</span>
+            </div>
+            <div class="info-item" style="text-align: center;">
+                <i data-lucide="map-pin"></i>
+                <span style="line-height: 1.8;"><strong>Physical Address</strong><br>1 Stint Street<br>Vogelstrand<br>Swakopmund</span>
+            </div>
+            <div class="info-item" style="text-align: center;">
+                <i data-lucide="inbox"></i>
+                <span style="line-height: 1.8;"><strong>Postal Address</strong><br>PO Box 79<br>Swakopmund<br>Namibia</span>
+            </div>
+            <div class="info-item" style="text-align: center;">
+                <i data-lucide="globe"></i>
+                <span style="line-height: 1.8;"><strong>Online</strong><br><a href="mailto:reservations@beachlodge.com.na" style="color: #aaa; text-decoration: none;">reservations@beachlodge.com.na</a><br><a href="http://www.beachlodge.com.na" target="_blank" style="color: #aaa; text-decoration: none;">www.beachlodge.com.na</a></span>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 The Wreck Restaurant. Reimagined by Desert Tracks UI.
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
