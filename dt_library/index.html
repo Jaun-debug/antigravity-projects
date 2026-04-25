@@ -536,9 +536,9 @@
     }
 ];
 
-        let activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : -1;
-        let openFolders = {};
-        try { if (localStorage.getItem('vault_folders')) { openFolders = JSON.parse(localStorage.getItem('vault_folders')); } } catch(e) {}
+        let activeIndex = -1; // ALWAYS load Welcome screen by default
+        let openFolders = {}; // ALWAYS load folders closed by default
+        // We still save to localStorage for potential future use, but we start fresh on load.
 
         function renderNav() {
             const container = document.getElementById('navContainer');
@@ -554,21 +554,18 @@
                 summary.style.cssText = "font-size: 0.85rem; text-transform: uppercase; color: #fff; margin: 30px 0 10px 0; letter-spacing: 2.5px; font-weight: 800; cursor: pointer; list-style: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;";
                 summary.innerHTML = title;
                 
-                // When clicking the main folder, toggle it manually, then load component
+                // When clicking the main folder, toggle it manually, then load welcome screen for that category
                 summary.addEventListener('click', (e) => {
                     e.preventDefault();
                     openFolders[title] = !details.open;
                     localStorage.setItem('vault_folders', JSON.stringify(openFolders));
 
                     if (title === 'Desert Tracks') {
-                        const idx = components.findIndex(c => c.id === 'itinerary-master-accordion');
-                        if (idx >= 0) loadComponent(idx); else renderNav();
+                        loadComponent(-1, 'DESERT TRACKS COMPONENTS');
                     } else if (title === 'Rate Generator') {
-                        const idx = components.findIndex(c => c.id === 'ondili-rates-booking' || c.id === 'ol-ratesheet' || c.id.includes('ratesheet'));
-                        if (idx >= 0) loadComponent(idx); else renderNav();
+                        loadComponent(-1, 'RATE GENERATOR');
                     } else if (title === 'Accounting & Costing') {
-                        const idx = components.findIndex(c => c.id === 'costing_engine' || c.id.includes('invoice'));
-                        if (idx >= 0) loadComponent(idx); else renderNav();
+                        loadComponent(-1, 'ACCOUNTING & COSTING');
                     } else {
                         renderNav();
                     }
@@ -726,10 +723,10 @@
             container.appendChild(mainFolders['Accounting & Costing'].details);
         }
 
-        activeIndex = localStorage.getItem('vault_active_index') ? parseInt(localStorage.getItem('vault_active_index')) : -1;
+        // Removed secondary assignment, relying on initial value of -1
         let preloadedCode = "";
 
-        async function loadComponent(idx) {
+        async function loadComponent(idx, welcomeTitle = "DESERT TRACKS UI VAULT") {
             activeIndex = idx;
             localStorage.setItem('vault_active_index', idx);
             
@@ -743,7 +740,7 @@
                 
                 const timestamp = new Date().getTime();
                 const frame = document.getElementById('previewFrame');
-                frame.src = "welcome.html?v=" + timestamp;
+                frame.src = "welcome.html?title=" + encodeURIComponent(welcomeTitle) + "&v=" + timestamp;
                 frame.onload = () => { setTimeout(() => { document.getElementById('loader').classList.remove('active'); }, 300); };
                 preloadedCode = "<!-- Please select a component to view source code -->";
                 return;
@@ -811,10 +808,10 @@
             window.open(cmp.file, '_blank');
         }
 
-        loadComponent(0);
+        loadComponent(activeIndex);
     </script>
 
             
             </body>
 </html>
-<!-- vercel deploy hook trigger 20260425 vault welcome screen update -->
+<!-- vercel deploy hook trigger 20260425 vault folder click screens -->

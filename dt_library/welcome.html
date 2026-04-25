@@ -75,7 +75,15 @@
 <body>
     <div class="welcome-brand">
         <h1>Master Library</h1>
-        <span>Desert Tracks UI Vault</span>
+        <span id="subtitle">Desert Tracks UI Vault</span>
     </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const titleParam = urlParams.get('title');
+        if (titleParam) {
+            document.getElementById('subtitle').innerText = titleParam;
+        }
+    </script>
 </body>
 </html>
