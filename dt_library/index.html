@@ -150,13 +150,6 @@
         "file": "costing_engine.html"
     },
     {
-        "id": "solly",
-        "title": "Solly Levi Photographic Carousel",
-        "tag": "Website Blocks Doc",
-        "desc": "The perfectly modular, infinite loop cinematic GSAP 3D carousel. Unbreakable in Nicepage.",
-        "file": "solly_levi_v2_modular.html"
-    },
-    {
         "id": "homepage-safaris",
         "title": "Homepage Safaris",
         "tag": "Website Blocks Doc",
@@ -192,99 +185,99 @@
         "file": "guided_itineraries_design.html"
     },
     {
-        "id": "component_5",
-        "title": "Dt-ag-single Blog Cape Curtain Design",
+        "id": "component_7",
+        "title": "Blog Master Copy",
         "tag": "Website Blocks Doc",
         "desc": "Extracted from DT-AG-SINGLE BLOG CAPE CURTAIN DESIGN.docx on your Desktop.",
-        "file": "component_5.html"
+        "file": "component_7.html"
     },
     {
         "id": "component_8",
-        "title": "Dt Ag When To Go",
+        "title": "When To Travel To Namibia",
         "tag": "Website Blocks Doc",
         "desc": "Extracted from DT AG WHEN TO GO.docx on your Desktop.",
         "file": "component_8.html"
     },
     {
         "id": "cta-sd-1",
-        "title": "Self-Drive Fading CTA",
+        "title": "Self-Drive Fade CTA 1",
         "tag": "Self-Drive CTA",
-        "desc": "Fading CTA block for Self-Drive Safaris.",
+        "desc": "Fading CTA block 1 for Self-Drive Safaris.",
         "file": "component_11.html"
     },
     {
         "id": "cta-sd-2",
-        "title": "Self-Drive Cinematic Hero",
+        "title": "Self-Drive Fade CTA 2",
         "tag": "Self-Drive CTA",
-        "desc": "Cinematic Hero CTA block for Self-Drive Safaris.",
-        "file": "mongoose-hero.html"
+        "desc": "Fading CTA block 2 for Self-Drive Safaris.",
+        "file": "component_11.html"
     },
     {
         "id": "cta-lux-1",
-        "title": "Luxury Fading CTA",
+        "title": "Luxury Fade CTA 1",
         "tag": "Luxury CTA",
-        "desc": "Fading CTA block for Luxury Safaris.",
+        "desc": "Fading CTA block 1 for Luxury Safaris.",
         "file": "component_11.html"
     },
     {
         "id": "cta-lux-2",
-        "title": "Luxury Cinematic Hero",
+        "title": "Luxury Fade CTA 2",
         "tag": "Luxury CTA",
-        "desc": "Cinematic Hero CTA block for Luxury Safaris.",
-        "file": "mongoose-hero.html"
+        "desc": "Fading CTA block 2 for Luxury Safaris.",
+        "file": "component_11.html"
     },
     {
         "id": "cta-fly-1",
-        "title": "Fly-In Fading CTA",
+        "title": "Fly-In Fade CTA 1",
         "tag": "Fly-In CTA",
-        "desc": "Fading CTA block for Fly-In Safaris.",
+        "desc": "Fading CTA block 1 for Fly-In Safaris.",
         "file": "component_11.html"
     },
     {
         "id": "cta-fly-2",
-        "title": "Fly-In Cinematic Hero",
+        "title": "Fly-In Fade CTA 2",
         "tag": "Fly-In CTA",
-        "desc": "Cinematic Hero CTA block for Fly-In Safaris.",
-        "file": "mongoose-hero.html"
+        "desc": "Fading CTA block 2 for Fly-In Safaris.",
+        "file": "component_11.html"
     },
     {
         "id": "cta-gui-1",
-        "title": "Guided Fading CTA",
+        "title": "Guided Fade CTA 1",
         "tag": "Guided CTA",
-        "desc": "Fading CTA block for Guided Safaris.",
+        "desc": "Fading CTA block 1 for Guided Safaris.",
         "file": "component_11.html"
     },
     {
         "id": "cta-gui-2",
-        "title": "Guided Cinematic Hero",
+        "title": "Guided Fade CTA 2",
         "tag": "Guided CTA",
-        "desc": "Cinematic Hero CTA block for Guided Safaris.",
-        "file": "mongoose-hero.html"
+        "desc": "Fading CTA block 2 for Guided Safaris.",
+        "file": "component_11.html"
     },
     {
         "id": "cta-home-1",
-        "title": "Homepage Fading CTA",
+        "title": "Homepage Fade CTA 1",
         "tag": "Homepage CTA",
-        "desc": "Fading CTA block for Homepage.",
+        "desc": "Fading CTA block 1 for Homepage.",
         "file": "component_11.html"
     },
     {
         "id": "cta-home-2",
-        "title": "Homepage Cinematic Hero",
+        "title": "Homepage Fade CTA 2",
         "tag": "Homepage CTA",
-        "desc": "Cinematic Hero CTA block for Homepage.",
-        "file": "mongoose-hero.html"
+        "desc": "Fading CTA block 2 for Homepage.",
+        "file": "component_11.html"
     },
     {
         "id": "component_12",
-        "title": "Best Time To Travel Anti Gravity",
+        "title": "Best Time To Travel To Namibia",
         "tag": "Website Blocks Doc",
         "desc": "Extracted from best time to travel anti gravity.docx on your Desktop.",
         "file": "component_12.html"
     },
     {
         "id": "component_16",
-        "title": "Wilderness Tour Type",
+        "title": "Safari style carosel",
         "tag": "Website Blocks Doc",
         "desc": "Extracted from WILDERNESS TOUR TYPE.docx on your Desktop.",
         "file": "component_16.html"
@@ -547,7 +540,11 @@
             // Helper to generate a main menu folder
             const buildMainFolder = (title) => {
                 const details = document.createElement('details');
-                details.open = false;
+                details.open = openFolders.hasOwnProperty(title) ? openFolders[title] : false;
+                details.addEventListener('toggle', (e) => {
+                    openFolders[title] = e.target.open;
+                    localStorage.setItem('vault_folders', JSON.stringify(openFolders));
+                });
                 const summary = document.createElement('summary');
                 summary.style.cssText = "font-size: 0.85rem; text-transform: uppercase; color: #fff; margin: 30px 0 10px 0; letter-spacing: 2.5px; font-weight: 800; cursor: pointer; list-style: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 8px;";
                 summary.innerHTML = title;
@@ -575,9 +572,13 @@
                 return { details, inner };
             };
 
-            const buildSubFolder = (title) => {
+            const buildSubFolder = (key, title) => {
                 const details = document.createElement('details');
-                details.open = false;
+                details.open = openFolders.hasOwnProperty(key) ? openFolders[key] : false;
+                details.addEventListener('toggle', (e) => {
+                    openFolders[key] = e.target.open;
+                    localStorage.setItem('vault_folders', JSON.stringify(openFolders));
+                });
                 const summary = document.createElement('summary');
                 summary.style.cssText = "font-size: 0.65rem; text-transform: uppercase; color: var(--orange); margin: 10px 0 5px 25px; letter-spacing: 1.5px; font-weight: 600; cursor: pointer; list-style: none;";
                 summary.innerHTML = title;
@@ -604,41 +605,33 @@
             };
 
             const subFolders = {
-                'HOMEPAGE_ITIN': buildSubFolder('Itinerary Blocks'),
-                'HOMEPAGE_CTA': buildSubFolder('WP Blocks'),
-                'SD_ITIN': buildSubFolder('Itineraries'),
-                'SD_BLOCKS': buildSubFolder('WP Blocks'),
-                'SD_FAQ': buildSubFolder('FAQ'),
-                'LUX_ITIN': buildSubFolder('Itineraries'),
-                'LUX_BLOCKS': buildSubFolder('WP Blocks'),
-                'LUX_FAQ': buildSubFolder('FAQ'),
-                'FLY_ITIN': buildSubFolder('Itineraries'),
-                'FLY_BLOCKS': buildSubFolder('WP Blocks'),
-                'FLY_FAQ': buildSubFolder('FAQ'),
-                'GUI_ITIN': buildSubFolder('Itineraries'),
-                'GUI_BLOCKS': buildSubFolder('WP Blocks'),
-                'GUI_FAQ': buildSubFolder('FAQ')
+                'HOMEPAGE_ITIN': buildSubFolder('HOMEPAGE_ITIN', 'Itinerary Blocks'),
+                'HOMEPAGE_CTA': buildSubFolder('HOMEPAGE_CTA', 'WP Blocks'),
+                'SD_ITIN': buildSubFolder('SD_ITIN', 'Itineraries'),
+                'SD_BLOCKS': buildSubFolder('SD_BLOCKS', 'WP Blocks'),
+                'LUX_ITIN': buildSubFolder('LUX_ITIN', 'Itineraries'),
+                'LUX_BLOCKS': buildSubFolder('LUX_BLOCKS', 'WP Blocks'),
+                'FLY_ITIN': buildSubFolder('FLY_ITIN', 'Itineraries'),
+                'FLY_BLOCKS': buildSubFolder('FLY_BLOCKS', 'WP Blocks'),
+                'GUI_ITIN': buildSubFolder('GUI_ITIN', 'Itineraries'),
+                'GUI_BLOCKS': buildSubFolder('GUI_BLOCKS', 'WP Blocks')
             };
 
             // Attach subfolders
-            folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_ITIN'].details);
             folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_CTA'].details);
+            folders['HOMEPAGE'].inner.appendChild(subFolders['HOMEPAGE_ITIN'].details);
 
-            folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_ITIN'].details);
             folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_BLOCKS'].details);
-            subFolders['SD_BLOCKS'].inner.appendChild(subFolders['SD_FAQ'].details);
+            folders['Self-Drive Safaris'].inner.appendChild(subFolders['SD_ITIN'].details);
 
-            folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_ITIN'].details);
             folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_BLOCKS'].details);
-            subFolders['LUX_BLOCKS'].inner.appendChild(subFolders['LUX_FAQ'].details);
+            folders['Luxury Safaris'].inner.appendChild(subFolders['LUX_ITIN'].details);
 
-            folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_ITIN'].details);
             folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_BLOCKS'].details);
-            subFolders['FLY_BLOCKS'].inner.appendChild(subFolders['FLY_FAQ'].details);
+            folders['Fly-In Safaris'].inner.appendChild(subFolders['FLY_ITIN'].details);
 
-            folders['Guided Safaris'].inner.appendChild(subFolders['GUI_ITIN'].details);
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_BLOCKS'].details);
-            subFolders['GUI_BLOCKS'].inner.appendChild(subFolders['GUI_FAQ'].details);
+            folders['Guided Safaris'].inner.appendChild(subFolders['GUI_ITIN'].details);
 
             // Attach folders to Desert Tracks Main Menu
             mainFolders['Desert Tracks'].inner.appendChild(folders['HOMEPAGE'].details);
@@ -668,48 +661,36 @@
                 else if (cmp.id.includes('itinerary-master')) {
                     target = subFolders['HOMEPAGE_ITIN'].inner;
                 }
-                else if (cmp.id.includes('homepage') || cmp.title.includes('FAQ') || cmp.id === 'lion-cta' || cmp.id === 'mongoose-hero' || cmp.id === 'solly' || cmp.tag === 'Homepage CTA') {
+                else if (cmp.id.includes('homepage') || cmp.id === 'component_17' || cmp.tag === 'Homepage CTA') {
                     target = subFolders['HOMEPAGE_CTA'].inner;
                 }
                 // Self-Drive
-                else if (cmp.tag === 'Self-Drive FAQ') {
-                    target = subFolders['SD_FAQ'].inner;
+                else if (cmp.tag === 'Self-Drive FAQ' || cmp.id === 'self-drive-design' || cmp.tag === 'Self-Drive CTA') {
+                    target = subFolders['SD_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'Self-Drive Doc' || cmp.tag === 'Self-Drive Safaris') {
                     target = subFolders['SD_ITIN'].inner;
                 }
-                else if (cmp.id === 'self-drive-design' || cmp.tag === 'Self-Drive CTA') {
-                    target = subFolders['SD_BLOCKS'].inner;
-                }
                 // Luxury
-                else if (cmp.tag === 'Luxury FAQ') {
-                    target = subFolders['LUX_FAQ'].inner;
+                else if (cmp.tag === 'Luxury FAQ' || cmp.id === 'luxury' || cmp.tag === 'Luxury CTA') {
+                    target = subFolders['LUX_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'Luxury Doc' || cmp.tag === 'Luxury Safaris') {
                     target = subFolders['LUX_ITIN'].inner;
                 }
-                else if (cmp.id === 'luxury' || cmp.tag === 'Luxury CTA') {
-                    target = subFolders['LUX_BLOCKS'].inner;
-                }
                 // Fly-In
-                else if (cmp.tag === 'Fly-In FAQ') {
-                    target = subFolders['FLY_FAQ'].inner;
+                else if (cmp.tag === 'Fly-In FAQ' || cmp.id === 'flyin' || cmp.tag === 'Fly-In CTA') {
+                    target = subFolders['FLY_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'Fly-In Doc' || cmp.tag === 'Fly-In Safaris') {
                     target = subFolders['FLY_ITIN'].inner;
                 }
-                else if (cmp.id === 'flyin' || cmp.tag === 'Fly-In CTA') {
-                    target = subFolders['FLY_BLOCKS'].inner;
-                }
                 // Guided
-                else if (cmp.tag === 'Guided FAQ') {
-                    target = subFolders['GUI_FAQ'].inner;
+                else if (cmp.tag === 'Guided FAQ' || cmp.id === 'guided' || cmp.tag === 'Guided CTA') {
+                    target = subFolders['GUI_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'Guided Doc' || cmp.tag === 'Guided Safaris') {
                     target = subFolders['GUI_ITIN'].inner;
-                }
-                else if (cmp.id === 'guided' || cmp.tag === 'Guided CTA') {
-                    target = subFolders['GUI_BLOCKS'].inner;
                 }
                 // Everything else
                 else {
