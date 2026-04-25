@@ -1,0 +1,901 @@
+<div id="specific-enquiry-wizard-root"></div>
+
+<style data-no-optimize="1">
+/* =============================================
+   DT Specific Safari Enquiry Wizard - Styles
+   Directed for specific self-drive/safari pages
+   ============================================= */
+
+:root {
+  --dew-orange: #ff6e00;
+  --dew-orange-hover: #e06200;
+  --dew-dark-overlay: rgba(25, 22, 16, 0.95);
+  --dew-card-bg: rgba(25, 22, 16, 0.40);
+  --dew-card-bg-hover: rgba(255, 110, 0, 0.25);
+  --dew-card-border: rgba(100, 90, 55, 0.35);
+  --dew-card-active-bg: #ffffff;
+  --dew-card-active-color: #222222;
+  --dew-card-active-border: #ff6e00;
+  --dew-text-white: #ffffff;
+  --dew-text-light: #ffffff;
+  --dew-text-muted: rgba(255, 255, 255, 0.7);
+  --dew-input-bg: rgba(25, 22, 16, 0.20);
+  --dew-input-border: rgba(100, 90, 55, 0.35);
+  --dew-progress-bg: rgba(255, 255, 255, 0.12);
+  --dew-progress-fill: #ff6e00;
+  --dew-close-border: rgba(255, 255, 255, 0.4);
+  --dew-checkbox-border: rgba(255, 255, 255, 0.4);
+  --dew-skip-bg: rgba(55, 50, 34, 0.65);
+  --dew-fallback-border: rgba(190, 130, 50, 0.7);
+  --dew-font-heading: 'Georgia', 'Times New Roman', serif;
+  --dew-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --dew-transition: 0.2s ease;
+  --dew-max-w: 960px;
+  --dew-inner-w: 640px;
+  --dew-r: 6px;
+}
+
+#specific-enquiry-wizard-root *,
+#specific-enquiry-wizard-root *::before,
+#specific-enquiry-wizard-root *::after {
+  box-sizing: border-box;
+}
+
+/* ---- OVERLAY ---- */
+#specific-enquiry-wizard-root .dew-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background: var(--dew-dark-overlay);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: var(--dew-font-heading);
+  color: #ffffff !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+}
+
+#specific-enquiry-wizard-root .dew-overlay[style*="display: flex"],
+#specific-enquiry-wizard-root .dew-overlay.dew-visible {
+  display: flex;
+}
+
+/* ---- CLOSE (X) ---- */
+#specific-enquiry-wizard-root .dew-close-btn {
+  position: fixed;
+  top: 20px;
+  right: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+  background: rgba(25, 22, 16, 0.20) !important;
+  color: #ffffff !important;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000001;
+  transition: background var(--dew-transition), border-color var(--dew-transition);
+  line-height: 1;
+}
+
+#specific-enquiry-wizard-root .dew-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+/* ---- BACK ---- */
+#specific-enquiry-wizard-root .dew-back-btn {
+  position: fixed;
+  top: 26px;
+  left: 26px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: none;
+  color: #ffffff !important;
+  font-size: 12px;
+  font-family: var(--dew-font-body);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 1000001;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity var(--dew-transition);
+}
+
+#specific-enquiry-wizard-root .dew-back-btn:hover { opacity: 0.7; }
+#specific-enquiry-wizard-root .dew-back-btn .dew-back-arrow { font-size: 10px; }
+#specific-enquiry-wizard-root .dew-back-btn.dew-hidden { display: none; }
+
+/* ---- STEP CONTAINER ---- */
+#specific-enquiry-wizard-root .dew-step-container {
+  width: 100%;
+  max-width: var(--dew-max-w);
+  padding: 32px;
+  padding-top: 100px;
+  padding-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+#specific-enquiry-wizard-root .dew-step-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: dewFadeIn 0.3s ease forwards;
+}
+
+@keyframes dewFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- HEADINGS ---- */
+#specific-enquiry-wizard-root .dew-heading {
+  font-family: var(--dew-font-heading) !important;
+  font-size: 32px !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin-bottom: 30px !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+}
+
+#specific-enquiry-wizard-root .dew-subheading {
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  color: #ff6e00 !important;
+  text-align: center;
+  margin-top: -18px;
+  margin-bottom: 18px;
+}
+
+#specific-enquiry-wizard-root .dew-description {
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  color: #ffffff !important;
+  text-align: center;
+  margin-top: -26px;
+  margin-bottom: 34px;
+  line-height: 1.6;
+}
+
+/* ---- OPTION GRIDS / LISTS ---- */
+#specific-enquiry-wizard-root .dew-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+#specific-enquiry-wizard-root .dew-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 16px;
+}
+
+#specific-enquiry-wizard-root .dew-options-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 16px;
+}
+
+/* ---- OPTION BUTTON ---- */
+#specific-enquiry-wizard-root .dew-option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 20px;
+  background: rgba(25, 22, 16, 0.40) !important;
+  border: 1.5px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+  min-height: 52px;
+  outline: none;
+}
+
+#specific-enquiry-wizard-root .dew-option-btn:hover {
+  background: var(--dew-card-bg-hover);
+  border-color: rgba(255, 110, 0, 0.5);
+}
+
+#specific-enquiry-wizard-root .dew-option-btn.dew-active {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border-color: #ff6e00 !important;
+  border-width: 2px;
+}
+
+/* ---- NAV AREA (bottom fixed) ---- */
+#specific-enquiry-wizard-root .dew-nav-area {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000001;
+  pointer-events: auto;
+}
+
+#specific-enquiry-wizard-root .dew-nav-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+/* ---- NEXT BUTTON ---- */
+#specific-enquiry-wizard-root .dew-next-btn {
+  width: 260px;
+  padding: 15px 24px;
+  background: #ff6e00 !important;
+  border: none;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+}
+
+#specific-enquiry-wizard-root .dew-next-btn:hover {
+  background: #e06200 !important;
+}
+
+#specific-enquiry-wizard-root .dew-next-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+#specific-enquiry-wizard-root .dew-submit-btn {
+  width: 260px;
+  padding: 15px 24px;
+  background: #ff6e00 !important;
+  border: none;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+  margin-top: 8px;
+}
+
+#specific-enquiry-wizard-root .dew-submit-btn:hover {
+  background: #e06200 !important;
+}
+
+#specific-enquiry-wizard-root .dew-submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- PROGRESS BAR ---- */
+#specific-enquiry-wizard-root .dew-progress-bar {
+  width: 200px;
+  height: 3px;
+  background: var(--dew-progress-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+#specific-enquiry-wizard-root .dew-progress-fill {
+  height: 100%;
+  background: var(--dew-progress-fill);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* =============================================
+   CHECKBOXES & RADIOS
+   ============================================= */
+#specific-enquiry-wizard-root .dew-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+}
+
+#specific-enquiry-wizard-root .dew-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  color: #ffffff !important;
+  cursor: pointer;
+  user-select: none;
+}
+
+#specific-enquiry-wizard-root .dew-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--dew-checkbox-border);
+  border-radius: 3px;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+}
+
+#specific-enquiry-wizard-root .dew-checkbox:checked {
+  background: #ff6e00 !important;
+  border-color: #ff6e00 !important;
+}
+
+#specific-enquiry-wizard-root .dew-checkbox:checked::after {
+  content: '\2713';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+/* =============================================
+   FORM INPUTS
+   ============================================= */
+#specific-enquiry-wizard-root .dew-form-group {
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 20px;
+}
+
+#specific-enquiry-wizard-root .dew-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 20px;
+}
+
+#specific-enquiry-wizard-root .dew-input {
+  width: 100%;
+  padding: 16px 18px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: 1px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color var(--dew-transition);
+}
+
+#specific-enquiry-wizard-root .dew-textarea {
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  padding: 18px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: 1px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color var(--dew-transition);
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  #specific-enquiry-wizard-root .dew-heading { font-size: 26px; }
+  #specific-enquiry-wizard-root .dew-options-grid { grid-template-columns: 1fr 1fr; }
+  #specific-enquiry-wizard-root .dew-form-row { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+  #specific-enquiry-wizard-root .dew-options-row { grid-template-columns: 1fr 1fr; }
+  #specific-enquiry-wizard-root .dew-heading { font-size: 22px; }
+  #specific-enquiry-wizard-root .dew-option-btn { font-size: 11px; padding: 14px 10px; }
+}
+
+/* OVERRIDES FOR NICEPAGE */
+#specific-enquiry-wizard-root h2.dew-heading,
+.dew-overlay h2.dew-heading {
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 32px !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin-bottom: 44px !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+.dew-overlay .dew-option-btn.dew-active {
+  color: #222222 !important;
+  background: #ffffff !important;
+  border-color: #ff6e00 !important;
+}
+</style>
+
+<script data-no-optimize="1">
+(function () {
+  'use strict';
+
+  var SUBMIT_ENDPOINT = 'https://wizard-inquiry.replit.app/submit';
+  var TOTAL_STEPS = 5; // Stripped down version
+
+  var state = {
+    currentStep: 1,
+    answers: {
+      travelTiming: null,
+      travelCompanion: null,
+      isTradeAgent: false,
+      budget: null,
+      tripDetails: '',
+      email: '',
+      firstName: '',
+      surname: '',
+      phone: ''
+    },
+    stepHistory: [1]
+  };
+
+  var rootEl = null;
+  var overlayEl = null;
+
+  function goToStep(step) {
+    state.currentStep = step;
+    if (state.stepHistory[state.stepHistory.length - 1] !== step) {
+      state.stepHistory.push(step);
+    }
+    render();
+  }
+
+  function goBack() {
+    if (state.stepHistory.length > 1) {
+      state.stepHistory.pop();
+      state.currentStep = state.stepHistory[state.stepHistory.length - 1];
+      render();
+    }
+  }
+
+  function getNextStep(currentStep) {
+    return currentStep + 1; // Simplified flow, no calendar complexity
+  }
+
+  function handleNext() {
+    var next = getNextStep(state.currentStep);
+    if (next <= TOTAL_STEPS) goToStep(next);
+  }
+
+  var OVERLAY_BG = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background-image:url(https://desert-tracks.com/wp-content/uploads/2025/12/deadvalley492kb-scaled-3-1-4-2-5.jpg);background-size:cover;background-position:center center;background-repeat:no-repeat;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#ffffff;';
+  var DARK_LAYER_CSS = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(25,22,16,0.85);z-index:0;pointer-events:none;';
+
+  function closeWizard() {
+    state._wizardOpen = false;
+    if (overlayEl) {
+      overlayEl.style.cssText = 'display:none;' + OVERLAY_BG;
+      overlayEl.innerHTML = '';
+    }
+    if (rootEl) rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
+    document.body.style.overflow = '';
+  }
+
+  function openWizard() {
+    state._wizardOpen = true;
+    state.currentStep = 1;
+    state.stepHistory = [1];
+    state._submitted = false;
+    
+    // Clean the title just like the visitor tracking script
+    var rawTitle = document.title || "This Safari";
+    var cleanTitle = rawTitle.split('-')[0].split('|')[0].trim(); 
+    state._sourceTitle = cleanTitle;
+    
+    if (overlayEl) {
+      if (rootEl) rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:visible;pointer-events:auto;';
+      document.body.style.overflow = 'hidden';
+      overlayEl.style.cssText = 'display:flex;' + OVERLAY_BG;
+      overlayEl.innerHTML = '';
+      
+      var darkLayer = document.createElement('div');
+      darkLayer.style.cssText = DARK_LAYER_CSS;
+      overlayEl.appendChild(darkLayer);
+      
+      render();
+    }
+  }
+
+  function createOptionButton(text, value, currentValue, onClick) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dew-option-btn' + (currentValue === value ? ' dew-active' : '');
+    btn.textContent = text;
+    btn.addEventListener('click', function () { onClick(value); });
+    return btn;
+  }
+
+  /* STEP 1: Timing & Safari Confirmation */
+  function renderStep1() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.innerHTML = 'Enquiring about:<br/><span style="color:#ff6e00; font-size:24px; font-family: sans-serif; letter-spacing: 1px; text-transform: uppercase;">' + state._sourceTitle + '</span><br/><br/>When would you like to travel?';
+    wrapper.appendChild(heading);
+
+    var options = [
+      { label: 'I KNOW EXACTLY WHEN', value: 'exact' },
+      { label: 'I HAVE A ROUGH IDEA', value: 'rough' },
+      { label: 'TELL ME WHEN IS BEST', value: 'flexible' }
+    ];
+    var list = document.createElement('div');
+    list.className = 'dew-options-list';
+    options.forEach(function (opt) {
+      list.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelTiming, function (val) {
+        state.answers.travelTiming = val;
+        render();
+      }));
+    });
+    wrapper.appendChild(list);
+
+    return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.travelTiming } };
+  }
+
+  /* STEP 2: Companion */
+  function renderStep2() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.textContent = 'Who are you travelling with?';
+    wrapper.appendChild(heading);
+
+    var options = [
+      { label: 'COUPLE', value: 'couple' },
+      { label: 'SOLO', value: 'solo' },
+      { label: 'FAMILY', value: 'family' },
+      { label: 'FRIENDS', value: 'friends' }
+    ];
+    var grid = document.createElement('div');
+    grid.className = 'dew-options-row';
+    options.forEach(function (opt) {
+      grid.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelCompanion, function (val) {
+        state.answers.travelCompanion = val;
+        render();
+      }));
+    });
+    wrapper.appendChild(grid);
+    return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.travelCompanion } };
+  }
+
+  /* STEP 3: Budget */
+  function renderStep3() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.textContent = 'What is your travel budget per person?';
+    wrapper.appendChild(heading);
+
+    var options = [
+      { label: 'USD 3K - 7.5K', value: '3k-7.5k' },
+      { label: 'USD 7.5K - 10K', value: '7.5k-10k' },
+      { label: 'USD 10K - 20K', value: '10k-20k' },
+      { label: 'USD 20K - 40K', value: '20k-40k' }
+    ];
+    var list = document.createElement('div');
+    list.className = 'dew-options-list';
+    options.forEach(function (opt) {
+      list.appendChild(createOptionButton(opt.label, opt.value, state.answers.budget, function (val) {
+        state.answers.budget = val;
+        render();
+      }));
+    });
+    wrapper.appendChild(list);
+    return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.budget } };
+  }
+
+  /* STEP 4: Details */
+  function renderStep4() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.textContent = 'Tell us more about your trip (Optional)';
+    wrapper.appendChild(heading);
+
+    var textarea = document.createElement('textarea');
+    textarea.className = 'dew-textarea';
+    textarea.placeholder = 'Would you like to customize this safari? Any specific experiences?';
+    textarea.value = state.answers.tripDetails;
+    textarea.addEventListener('input', function () { state.answers.tripDetails = this.value; });
+    wrapper.appendChild(textarea);
+
+    return { content: wrapper, navOptions: { showNext: true } };
+  }
+
+  /* STEP 5: Contact */
+  function renderStep5() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.textContent = 'Where can we send your trip suggestions?';
+    wrapper.appendChild(heading);
+
+    var emailGroup = document.createElement('div');
+    emailGroup.className = 'dew-form-group';
+    var emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.className = 'dew-input';
+    emailInput.placeholder = 'EMAIL ADDRESS';
+    emailInput.value = state.answers.email;
+    emailInput.addEventListener('input', function () { state.answers.email = this.value; updateSubmitState(); });
+    emailGroup.appendChild(emailInput);
+    wrapper.appendChild(emailGroup);
+
+    var nameRow = document.createElement('div');
+    nameRow.className = 'dew-form-row';
+    var fnInput = document.createElement('input');
+    fnInput.type = 'text';
+    fnInput.className = 'dew-input';
+    fnInput.placeholder = 'FIRST NAME';
+    fnInput.value = state.answers.firstName;
+    fnInput.addEventListener('input', function () { state.answers.firstName = this.value; updateSubmitState(); });
+    nameRow.appendChild(fnInput);
+    
+    var snInput = document.createElement('input');
+    snInput.type = 'text';
+    snInput.className = 'dew-input';
+    snInput.placeholder = 'SURNAME';
+    snInput.value = state.answers.surname;
+    snInput.addEventListener('input', function () { state.answers.surname = this.value; updateSubmitState(); });
+    nameRow.appendChild(snInput);
+    wrapper.appendChild(nameRow);
+
+    var submitDisabled = !state.answers.email || !state.answers.firstName || !state.answers.surname;
+    return { content: wrapper, navOptions: { showSubmit: true, submitDisabled: submitDisabled, onSubmit: handleSubmit } };
+  }
+
+  var submitBtnEl = null;
+  function updateSubmitState() {
+    if (submitBtnEl) {
+      submitBtnEl.disabled = !state.answers.email || !state.answers.firstName || !state.answers.surname;
+    }
+  }
+
+  function renderSuccess() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    wrapper.innerHTML = '<div style="text-align:center; padding:60px 20px;"><div style="font-size:64px; margin-bottom:24px;">\u2713</div><h2 style="font-size:32px; color:#fff; font-family:Georgia, serif;">Thank you!</h2><p style="color:#ddd;">We will contact you regarding this specific safari shortly.</p></div>';
+    return { content: wrapper, navOptions: {} };
+  }
+
+  function handleSubmit() {
+    if (!state.answers.email) return;
+
+    var payload = {
+      sourceUrl: window.location.href,
+      sourcePageTitle: document.title,
+      country: 'Specific Safari Booking',
+      safariType: state._sourceTitle || 'Specific Safari',
+      travelTiming: state.answers.travelTiming,
+      travelCompanion: state.answers.travelCompanion,
+      budget: state.answers.budget,
+      tripDetails: state.answers.tripDetails,
+      email: state.answers.email,
+      firstName: state.answers.firstName,
+      surname: state.answers.surname,
+      phone: '',
+      contactPreference: 'email',
+      newsletter: false,
+      gclid: new URLSearchParams(window.location.search).get('gclid') || '',
+      source: new URLSearchParams(window.location.search).get('gclid') ? 'Google Ads' : 'Direct / Organic'
+    };
+
+    state._submitted = true;
+    render();
+
+    fetch(SUBMIT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function(){});
+    
+    // Try to trigger conversion tag if exists
+    if (window.dataLayer) {
+      window.dataLayer.push({'event': 'specific_safari_enquiry'});
+    }
+  }
+
+  function routeStep() {
+    if (state._submitted) return renderSuccess();
+    switch (state.currentStep) {
+      case 1: return renderStep1();
+      case 2: return renderStep2();
+      case 3: return renderStep3();
+      case 4: return renderStep4();
+      case 5: return renderStep5();
+      default: return renderStep1();
+    }
+  }
+
+  function render() {
+    if (!overlayEl) return;
+    overlayEl.innerHTML = '';
+    
+    var darkLayer = document.createElement('div');
+    darkLayer.style.cssText = DARK_LAYER_CSS;
+    overlayEl.appendChild(darkLayer);
+
+    var closeBtn = document.createElement('button');
+    closeBtn.className = 'dew-close-btn';
+    closeBtn.innerHTML = '&#10005;';
+    closeBtn.addEventListener('click', closeWizard);
+    overlayEl.appendChild(closeBtn);
+
+    var backBtn = document.createElement('button');
+    backBtn.className = 'dew-back-btn' + (state.currentStep === 1 ? ' dew-hidden' : '');
+    backBtn.innerHTML = '&lsaquo; BACK';
+    backBtn.addEventListener('click', goBack);
+    overlayEl.appendChild(backBtn);
+
+    var container = document.createElement('div');
+    container.className = 'dew-step-container';
+
+    var stepResult = routeStep();
+    container.appendChild(stepResult.content);
+    overlayEl.appendChild(container);
+
+    if (stepResult.navOptions && (stepResult.navOptions.showNext || stepResult.navOptions.showSubmit)) {
+      var navArea = document.createElement('div');
+      navArea.className = 'dew-nav-area';
+      var btnsWrap = document.createElement('div');
+      btnsWrap.className = 'dew-nav-buttons';
+      
+      if (stepResult.navOptions.showNext) {
+        var nextBtn = document.createElement('button');
+        nextBtn.className = 'dew-next-btn';
+        nextBtn.textContent = 'NEXT >';
+        nextBtn.disabled = stepResult.navOptions.nextDisabled;
+        nextBtn.addEventListener('click', handleNext);
+        btnsWrap.appendChild(nextBtn);
+      }
+      
+      if (stepResult.navOptions.showSubmit) {
+        var subBtn = document.createElement('button');
+        subBtn.className = 'dew-submit-btn';
+        subBtn.textContent = 'SUBMIT';
+        subBtn.disabled = stepResult.navOptions.submitDisabled;
+        subBtn.addEventListener('click', handleSubmit);
+        btnsWrap.appendChild(subBtn);
+        submitBtnEl = subBtn;
+      }
+      
+      navArea.appendChild(btnsWrap);
+      
+      var barWrap = document.createElement('div');
+      barWrap.className = 'dew-progress-bar';
+      var fill = document.createElement('div');
+      fill.className = 'dew-progress-fill';
+      fill.style.width = ((state.currentStep / TOTAL_STEPS) * 100) + '%';
+      barWrap.appendChild(fill);
+      navArea.appendChild(barWrap);
+      
+      overlayEl.appendChild(navArea);
+    }
+  }
+
+  function init() {
+    rootEl = document.getElementById('specific-enquiry-wizard-root');
+    if (!rootEl) return;
+    rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
+    
+    overlayEl = document.createElement('div');
+    overlayEl.className = 'dew-overlay';
+    overlayEl.style.cssText = 'display:none;' + OVERLAY_BG;
+    rootEl.appendChild(overlayEl);
+
+    document.addEventListener('click', function(e) {
+      if (state._wizardOpen) return;
+      var trigger = e.target.closest('.dt-specific-enquiry-open');
+      if (trigger) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        openWizard();
+      }
+    }, true);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
+})();
+</script>
+
+<!-- FORMSPREE VISITOR TRACKER -->
+<script data-no-optimize="1">
+document.addEventListener('DOMContentLoaded', function() {
+    var FORMSPREE_ID = 'mreybgra';
+    var rawTitle = document.title || "Unknown Safari";
+    var cleanTitle = rawTitle.split('-')[0].split('|')[0].trim();
+    var currentUrl = window.location.href;
+    var pageViews = localStorage.getItem('safari_views_' + FORMSPREE_ID) || 0;
+    pageViews = parseInt(pageViews) + 1;
+    localStorage.setItem('safari_views_' + FORMSPREE_ID, pageViews);
+
+    if (pageViews === 1 || pageViews % 3 === 0) {
+        var formData = new FormData();
+        formData.append('Subject', '🔥 High-Intent Visitor: ' + cleanTitle);
+        formData.append('Safari Viewed', cleanTitle);
+        formData.append('Page URL', currentUrl);
+        formData.append('Total Visits', pageViews);
+
+        fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+            method: 'POST',
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        }).catch(function(error) { console.warn('Tracking silent fail'); });
+    }
+});
+</script>
