@@ -479,6 +479,7 @@
 
   var state = {
     currentStep: 1,
+    clientCountry: 'Unknown Location',
     answers: {
       travelTiming: null,
       travelCompanion: null,
@@ -1064,6 +1065,7 @@
       sourceUrl: window.location.href,
       sourcePageTitle: document.title,
       country: 'Specific Safari Booking',
+      enquiryCountry: state.clientCountry,
       safariType: state._sourceTitle || 'Specific Safari',
       travelTiming: formattedTiming || state.answers.travelTiming,
       travelCompanion: state.answers.travelCompanion,
@@ -1185,6 +1187,15 @@
     overlayEl.className = 'dew-overlay';
     overlayEl.style.cssText = 'display:none;' + OVERLAY_BG;
     rootEl.appendChild(overlayEl);
+
+    // Fetch user location in background
+    fetch('https://get.geojs.io/v1/ip/geo.json')
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data && data.country) {
+          state.clientCountry = data.country + (data.city ? ' (' + data.city + ')' : '');
+        }
+      }).catch(function(){});
 
     document.addEventListener('click', function(e) {
       if (state._wizardOpen) return;
