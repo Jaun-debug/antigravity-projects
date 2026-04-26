@@ -1446,6 +1446,9 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                                 setTimeout(initMap, 100);
                                 return;
                             }
+                            var mapEl = document.getElementById('dt-safari-map');
+                            if (!mapEl || mapEl.classList.contains('leaflet-container') || mapEl._leaflet_id) return;
+                            
                             const map = L.map('dt-safari-map', { zoomControl: true, scrollWheelZoom: false });
                             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
                                 attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ', maxZoom: 18
@@ -3058,6 +3061,9 @@ function initAccordionLogic() {
     if (!dayBlocks.length) return;
     
     dayBlocks.forEach((block, index) => {
+        if (block.dataset.accordionInitialized === 'true') return;
+        block.dataset.accordionInitialized = 'true';
+        
         // Find existing location text (e.g. Kalahari Desert)
         const locNode = block.querySelector('.lux-day-location');
         let locText = locNode ? locNode.innerText.split(' — ')[0].trim() : 'Destination';
