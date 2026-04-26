@@ -115,6 +115,34 @@
     <script>
         const components = [
     {
+        "id": "the-wreck-website",
+        "title": "The Wreck Restaurant",
+        "tag": "Websites",
+        "desc": "Premium redesign of The Wreck Restaurant website.",
+        "file": "the_wreck_premium.html"
+    },
+    {
+        "id": "beach-lodge-website",
+        "title": "Beach Lodge Swakopmund",
+        "tag": "Websites",
+        "desc": "Premium redesign of the Beach Lodge website.",
+        "file": "beach_lodge_premium.html"
+    },
+    {
+        "id": "african-marketing",
+        "title": "African Marketing",
+        "tag": "Websites",
+        "desc": "African Marketing corporate website.",
+        "file": "https://www.african-marketing.com/"
+    },
+    {
+        "id": "ol-leisure",
+        "title": "O&L Leisure",
+        "tag": "Websites",
+        "desc": "O&L Leisure corporate website.",
+        "file": "https://www.ol-leisure.com/"
+    },
+    {
         "id": "specific-safari-wizard",
         "title": "Specific Safari Enquiry Wizard",
         "tag": "Website Blocks Doc",
@@ -722,6 +750,10 @@
                 }
                 else if (cmp.tag === 'Guided Doc' || cmp.tag === 'Guided Safaris') {
                     target = subFolders['GUI_ITIN'].inner;
+                }
+                // Websites
+                else if (cmp.tag === 'Websites') {
+                    target = mainFolders['Websites'].inner;
                 }
                 // Everything else
                 else {
