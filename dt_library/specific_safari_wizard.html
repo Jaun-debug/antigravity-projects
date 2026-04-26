@@ -1,15 +1,10 @@
-<div id="specific-enquiry-wizard-root"></div>
-
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
-<style data-no-optimize="1">
-/* =============================================
-   DT Specific Safari Enquiry Wizard - Styles
-   Directed for specific self-drive/safari pages
-   ============================================= */
+<div id="specific-enquiry-wizard-root"></div>
 
+<style data-no-optimize="1">
 :root {
   --dew-orange: #ff6e00;
   --dew-orange-hover: #e06200;
@@ -45,7 +40,6 @@
   box-sizing: border-box;
 }
 
-/* ---- OVERLAY ---- */
 #specific-enquiry-wizard-root .dew-overlay {
   position: fixed;
   top: 0;
@@ -72,7 +66,6 @@
   display: flex;
 }
 
-/* ---- CLOSE (X) ---- */
 #specific-enquiry-wizard-root .dew-close-btn {
   position: fixed;
   top: 20px;
@@ -98,7 +91,6 @@
   border-color: #fff;
 }
 
-/* ---- BACK ---- */
 #specific-enquiry-wizard-root .dew-back-btn {
   position: fixed;
   top: 26px;
@@ -123,7 +115,6 @@
 #specific-enquiry-wizard-root .dew-back-btn .dew-back-arrow { font-size: 10px; }
 #specific-enquiry-wizard-root .dew-back-btn.dew-hidden { display: none; }
 
-/* ---- STEP CONTAINER ---- */
 #specific-enquiry-wizard-root .dew-step-container {
   width: 100%;
   max-width: var(--dew-max-w);
@@ -152,7 +143,6 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ---- HEADINGS ---- */
 #specific-enquiry-wizard-root .dew-heading {
   font-family: var(--dew-font-heading) !important;
   font-size: 32px !important;
@@ -183,7 +173,6 @@
   line-height: 1.6;
 }
 
-/* ---- OPTION GRIDS / LISTS ---- */
 #specific-enquiry-wizard-root .dew-options-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -210,7 +199,6 @@
   margin-bottom: 16px;
 }
 
-/* ---- OPTION BUTTON ---- */
 #specific-enquiry-wizard-root .dew-option-btn {
   display: flex;
   align-items: center;
@@ -244,7 +232,6 @@
   border-width: 2px;
 }
 
-/* ---- NAV AREA (bottom fixed) ---- */
 #specific-enquiry-wizard-root .dew-nav-area {
   position: fixed;
   bottom: 60px;
@@ -265,7 +252,6 @@
   margin-bottom: 30px;
 }
 
-/* ---- NEXT BUTTON ---- */
 #specific-enquiry-wizard-root .dew-next-btn {
   width: 260px;
   padding: 15px 24px;
@@ -319,7 +305,6 @@
   cursor: not-allowed;
 }
 
-/* ---- PROGRESS BAR ---- */
 #specific-enquiry-wizard-root .dew-progress-bar {
   width: 200px;
   height: 3px;
@@ -335,9 +320,6 @@
   transition: width 0.4s ease;
 }
 
-/* =============================================
-   CHECKBOXES & RADIOS
-   ============================================= */
 #specific-enquiry-wizard-root .dew-checkbox-group {
   display: flex;
   flex-direction: column;
@@ -387,9 +369,6 @@
   font-weight: bold;
 }
 
-/* =============================================
-   FORM INPUTS
-   ============================================= */
 #specific-enquiry-wizard-root .dew-form-group {
   width: 100%;
   max-width: var(--dew-inner-w);
@@ -441,9 +420,6 @@
   margin-top: 8px;
 }
 
-/* =============================================
-   RESPONSIVE
-   ============================================= */
 @media (max-width: 768px) {
   #specific-enquiry-wizard-root .dew-heading { font-size: 26px; }
   #specific-enquiry-wizard-root .dew-options-grid { grid-template-columns: 1fr 1fr; }
@@ -456,7 +432,6 @@
   #specific-enquiry-wizard-root .dew-option-btn { font-size: 11px; padding: 14px 10px; }
 }
 
-/* OVERRIDES FOR NICEPAGE */
 #specific-enquiry-wizard-root h2.dew-heading,
 .dew-overlay h2.dew-heading {
   font-family: 'Georgia', 'Times New Roman', serif !important;
@@ -486,18 +461,18 @@
   'use strict';
 
   var SUBMIT_ENDPOINT = 'https://wizard-inquiry.replit.app/submit';
-  var TOTAL_STEPS = 5; // Stripped down version
+  var TOTAL_STEPS = 5;
 
   var state = {
     currentStep: 1,
     answers: {
-      fromDate: '',
-      toDate: '',
       travelTiming: null,
       travelCompanion: null,
       isTradeAgent: false,
       budget: null,
       tripDetails: '',
+      adults: 2,
+      children: 0,
       email: '',
       firstName: '',
       surname: '',
@@ -526,7 +501,7 @@
   }
 
   function getNextStep(currentStep) {
-    return currentStep + 1; // Simplified flow, no calendar complexity
+    return currentStep + 1;
   }
 
   function handleNext() {
@@ -553,7 +528,6 @@
     state.stepHistory = [1];
     state._submitted = false;
     
-    // Clean the title just like the visitor tracking script
     var rawTitle = document.title || "This Safari";
     var cleanTitle = rawTitle.split('|')[0].trim(); 
     state._sourceTitle = cleanTitle;
@@ -581,7 +555,6 @@
     return btn;
   }
 
-  /* STEP 1: When */
   function renderStep1() {
     var wrapper = document.createElement('div');
     wrapper.className = 'dew-step-content';
@@ -712,7 +685,6 @@
         roughInput.addEventListener('input', function() { 
             state.answers.roughTiming = this.value; 
             if (state.answers.roughTiming.trim() !== '') {
-                // To force re-eval of nav buttons without full render
                 render(); 
             }
         });
@@ -734,7 +706,6 @@
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: nextDisabled } };
   }
 
-  /* STEP 2: Companion */
   function renderStep2() {
     var wrapper = document.createElement('div');
     wrapper.className = 'dew-step-content';
@@ -761,7 +732,6 @@
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.travelCompanion } };
   }
 
-  /* STEP 3: Budget */
   function renderStep3() {
     var wrapper = document.createElement('div');
     wrapper.className = 'dew-step-content';
@@ -788,7 +758,6 @@
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.budget } };
   }
 
-  /* STEP 4: Details */
   function renderStep4() {
     var wrapper = document.createElement('div');
     wrapper.className = 'dew-step-content';
@@ -871,7 +840,6 @@
     return wrapper;
   }
 
-  /* STEP 5: Contact */
   function renderStep5() {
     var wrapper = document.createElement('div');
     wrapper.className = 'dew-step-content';
@@ -1107,15 +1075,13 @@
 <!-- FORMSPREE VISITOR TRACKER (WITH COUNTRY DETECTION) -->
 <script data-no-optimize="1">
 (function() {
-    // 1. BLOCK ADMIN EMAILS
     if (window.location.href.indexOf('wp-admin') > -1 || window.location.href.indexOf('np_app') > -1) {
         return; 
     }
 
-    var FORMSPREE_ID = 'mreybgra'; // User's specific ID
+    var FORMSPREE_ID = 'mreybgra';
     var startTime = new Date();
     
-    // 2. CLEAN UP THE NAME
     var rawTitle = document.title || "Unknown Safari";
     var cleanTitle = rawTitle.split('|')[0].trim(); 
     
@@ -1124,7 +1090,6 @@
     
     if (sessionStorage.getItem(sentKey)) return;
 
-    // Grab geo info early and store it
     var locationString = "Unknown Location";
     var countryName = "Unknown Country";
     fetch('https://get.geojs.io/v1/ip/geo.json')
@@ -1134,14 +1099,12 @@
             locationString = (geoData.city || "Unknown City") + ", " + countryName;
         }).catch(function(){});
 
-    // 3. SEND EMAIL ON LEAVE
     function sendTrackingEmail() {
         if (sessionStorage.getItem(sentKey)) return;
         
         var endTime = new Date();
         var timeSpentMs = endTime - startTime;
-        // Don't send if they bounced in less than 2 seconds
-        if (timeSpentMs < 2000) return; 
+        if (timeSpentMs < 2000) return; // Ignore instant bounces
 
         sessionStorage.setItem(sentKey, 'true');
         
@@ -1149,7 +1112,6 @@
         var seconds = Math.floor((timeSpentMs % 60000) / 1000);
         var timeSpentStr = minutes + "m " + seconds + "s";
         
-        // Use keepalive so the request finishes even if the tab closes
         fetch('https://formspree.io/f/' + FORMSPREE_ID, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
