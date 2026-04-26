@@ -587,78 +587,150 @@
     wrapper.className = 'dew-step-content';
     var heading = document.createElement('h2');
     heading.className = 'dew-heading';
-    heading.innerHTML = 'Enquiring about:<br/><span style="color:#ff6e00; font-size:24px; font-family: sans-serif; letter-spacing: 1px; text-transform: uppercase;">' + state._sourceTitle + '</span><br/><br/>When would you like to travel?';
+    heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#d4af37; font-size:26px; font-family: \'Georgia\', serif; font-weight: normal; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
     wrapper.appendChild(heading);
 
-    var dateGroup = document.createElement('div');
-    dateGroup.className = 'dew-form-row';
-    dateGroup.style.marginBottom = '20px';
+    if (typeof state.answers.adults === 'undefined') state.answers.adults = 2;
+    if (typeof state.answers.children === 'undefined') state.answers.children = 0;
 
-    var fromWrapper = document.createElement('div');
-    fromWrapper.style.width = '100%';
-    fromWrapper.style.gridColumn = '1 / span 2';
-    var fromLabel = document.createElement('div');
-    fromLabel.innerText = 'SELECT DATES';
-    fromLabel.style.color = '#fff';
-    fromLabel.style.fontSize = '12px';
-    fromLabel.style.marginBottom = '6px';
-    var fromInput = document.createElement('input');
-    fromInput.type = 'text'; // Flatpickr works best on text inputs
-    fromInput.className = 'dew-input';
-    fromInput.placeholder = 'Select date range...';
-    // Initialize value if exists
-    if (state.answers.fromDate && state.answers.toDate) {
-        fromInput.value = state.answers.fromDate + ' to ' + state.answers.toDate;
-    }
-    
-    fromWrapper.appendChild(fromLabel);
-    fromWrapper.appendChild(fromInput);
+    var counterRow = document.createElement('div');
+    counterRow.className = 'dew-form-row';
+    counterRow.style.marginBottom = '40px';
+    counterRow.appendChild(createCounter('ADULTS', state.answers.adults, 1, function(val) { state.answers.adults = val; }));
+    counterRow.appendChild(createCounter('CHILDREN (<12)', state.answers.children, 0, function(val) { state.answers.children = val; }));
+    wrapper.appendChild(counterRow);
 
-    dateGroup.appendChild(fromWrapper);
-    wrapper.appendChild(dateGroup);
+    var travelHeading = document.createElement('h2');
+    travelHeading.className = 'dew-heading';
+    travelHeading.style.fontSize = '24px';
+    travelHeading.style.marginBottom = '30px';
+    travelHeading.textContent = 'When would you like to travel?';
+    wrapper.appendChild(travelHeading);
 
-    var dayCountWrapper = document.createElement('div');
-    dayCountWrapper.style.textAlign = 'center';
-    dayCountWrapper.style.minHeight = '30px';
-    dayCountWrapper.style.marginBottom = '10px';
-    
-    function updateDayCount() {
+    if (!state.answers.timingType) state.answers.timingType = 'exact';
+
+    var timingGrid = document.createElement('div');
+    timingGrid.style.display = 'flex';
+    timingGrid.style.flexDirection = 'column';
+    timingGrid.style.gap = '15px';
+    timingGrid.style.width = '100%';
+    timingGrid.style.maxWidth = '400px';
+    timingGrid.style.margin = '0 auto 30px auto';
+
+    var timingOptions = [
+      { label: 'I KNOW EXACTLY WHEN', value: 'exact' },
+      { label: 'I HAVE A ROUGH IDEA', value: 'rough' },
+      { label: 'TELL ME WHEN IS BEST', value: 'best' }
+    ];
+
+    timingOptions.forEach(function(opt) {
+        var btn = createOptionButton(opt.label, opt.value, state.answers.timingType, function(val) {
+            state.answers.timingType = val;
+            render();
+        });
+        btn.style.width = '100%';
+        btn.style.padding = '18px';
+        btn.style.fontSize = '13px';
+        timingGrid.appendChild(btn);
+    });
+    wrapper.appendChild(timingGrid);
+
+    var nextDisabled = true;
+
+    if (state.answers.timingType === 'exact') {
+        var dateGroup = document.createElement('div');
+        dateGroup.className = 'dew-form-row';
+        dateGroup.style.marginBottom = '20px';
+
+        var fromWrapper = document.createElement('div');
+        fromWrapper.style.width = '100%';
+        fromWrapper.style.gridColumn = '1 / span 2';
+        var fromInput = document.createElement('input');
+        fromInput.type = 'text';
+        fromInput.className = 'dew-input';
+        fromInput.placeholder = 'Select date range...';
+        fromInput.style.textAlign = 'center';
+        fromInput.style.fontSize = '14px';
         if (state.answers.fromDate && state.answers.toDate) {
-            var d1 = new Date(state.answers.fromDate);
-            var d2 = new Date(state.answers.toDate);
-            var diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
-            dayCountWrapper.innerHTML = '<span style="color:#ff6e00; font-weight:bold; font-size:18px;">' + diffDays + ' Days Selected</span>';
-        } else {
-            dayCountWrapper.innerHTML = '';
+            fromInput.value = state.answers.fromDate + ' to ' + state.answers.toDate;
         }
-    }
-    updateDayCount();
-    wrapper.appendChild(dayCountWrapper);
+        
+        fromWrapper.appendChild(fromInput);
+        dateGroup.appendChild(fromWrapper);
+        wrapper.appendChild(dateGroup);
 
-    // Initialize Flatpickr after DOM attachment
-    setTimeout(function() {
-        flatpickr(fromInput, {
-            mode: "range",
-            minDate: "today",
-            dateFormat: "Y-m-d",
-            onChange: function(selectedDates, dateStr, instance) {
-                if (selectedDates.length === 2) {
-                    // YYYY-MM-DD
-                    state.answers.fromDate = instance.formatDate(selectedDates[0], "Y-m-d");
-                    state.answers.toDate = instance.formatDate(selectedDates[1], "Y-m-d");
-                    updateDayCount();
-                    // Re-render nav buttons to enable "Next"
-                    render();
-                } else {
-                    state.answers.fromDate = '';
-                    state.answers.toDate = '';
-                    updateDayCount();
+        var dayCountWrapper = document.createElement('div');
+        dayCountWrapper.style.textAlign = 'center';
+        dayCountWrapper.style.minHeight = '30px';
+        dayCountWrapper.style.marginBottom = '10px';
+        
+        function updateDayCount() {
+            if (state.answers.fromDate && state.answers.toDate) {
+                var d1 = new Date(state.answers.fromDate);
+                var d2 = new Date(state.answers.toDate);
+                var diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
+                dayCountWrapper.innerHTML = '<span style="color:#ff6e00; font-weight:bold; font-size:18px;">' + diffDays + ' Days Selected</span>';
+            } else {
+                dayCountWrapper.innerHTML = '';
+            }
+        }
+        updateDayCount();
+        wrapper.appendChild(dayCountWrapper);
+
+        setTimeout(function() {
+            flatpickr(fromInput, {
+                mode: "range",
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                onChange: function(selectedDates, dateStr, instance) {
+                    if (selectedDates.length === 2) {
+                        state.answers.fromDate = instance.formatDate(selectedDates[0], "Y-m-d");
+                        state.answers.toDate = instance.formatDate(selectedDates[1], "Y-m-d");
+                        updateDayCount();
+                        render();
+                    } else {
+                        state.answers.fromDate = '';
+                        state.answers.toDate = '';
+                        updateDayCount();
+                        render();
+                    }
                 }
+            });
+        }, 10);
+
+        nextDisabled = !(state.answers.fromDate && state.answers.toDate);
+    } else if (state.answers.timingType === 'rough') {
+        var roughInput = document.createElement('input');
+        roughInput.type = 'text';
+        roughInput.className = 'dew-input';
+        roughInput.placeholder = 'e.g. Sometime in October 2026';
+        roughInput.value = state.answers.roughTiming || '';
+        roughInput.style.maxWidth = '400px';
+        roughInput.style.margin = '0 auto';
+        roughInput.style.display = 'block';
+        roughInput.style.textAlign = 'center';
+        roughInput.addEventListener('input', function() { 
+            state.answers.roughTiming = this.value; 
+            if (state.answers.roughTiming.trim() !== '') {
+                // To force re-eval of nav buttons without full render
+                render(); 
             }
         });
-    }, 10);
+        wrapper.appendChild(roughInput);
+        nextDisabled = !(state.answers.roughTiming && state.answers.roughTiming.trim() !== '');
+    } else if (state.answers.timingType === 'best') {
+        var bestText = document.createElement('div');
+        bestText.style.color = '#ccc';
+        bestText.style.textAlign = 'center';
+        bestText.style.fontSize = '14px';
+        bestText.style.lineHeight = '1.6';
+        bestText.style.maxWidth = '400px';
+        bestText.style.margin = '0 auto';
+        bestText.innerText = 'Our safari experts will advise you on the best season based on your preferences.';
+        wrapper.appendChild(bestText);
+        nextDisabled = false;
+    }
 
-    var nextDisabled = !(state.answers.fromDate && state.answers.toDate);
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: nextDisabled } };
   }
 
@@ -808,16 +880,6 @@
     heading.textContent = 'Where can we send your trip suggestions?';
     wrapper.appendChild(heading);
 
-    // Initialize counters if not set
-    if (typeof state.answers.adults === 'undefined') state.answers.adults = 2;
-    if (typeof state.answers.children === 'undefined') state.answers.children = 0;
-
-    var counterRow = document.createElement('div');
-    counterRow.className = 'dew-form-row';
-    counterRow.appendChild(createCounter('ADULTS', state.answers.adults, 1, function(val) { state.answers.adults = val; }));
-    counterRow.appendChild(createCounter('CHILDREN (<12)', state.answers.children, 0, function(val) { state.answers.children = val; }));
-    wrapper.appendChild(counterRow);
-
     var nameRow = document.createElement('div');
     nameRow.className = 'dew-form-row';
     var fnInput = document.createElement('input');
@@ -881,11 +943,17 @@
     if (!state.answers.email) return;
 
     var formattedTiming = "";
-    if (state.answers.fromDate && state.answers.toDate) {
-      var d1 = new Date(state.answers.fromDate);
-      var d2 = new Date(state.answers.toDate);
-      var diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
-      formattedTiming = state.answers.fromDate + " to " + state.answers.toDate + " (" + diffDays + " Days)";
+    if (state.answers.timingType === 'exact') {
+        if (state.answers.fromDate && state.answers.toDate) {
+            var d1 = new Date(state.answers.fromDate);
+            var d2 = new Date(state.answers.toDate);
+            var diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
+            formattedTiming = "EXACT DATES: " + state.answers.fromDate + " to " + state.answers.toDate + " (" + diffDays + " Days)";
+        }
+    } else if (state.answers.timingType === 'rough') {
+        formattedTiming = "ROUGH TIMING: " + (state.answers.roughTiming || "Not specified");
+    } else if (state.answers.timingType === 'best') {
+        formattedTiming = "ADVISE ME ON BEST TIME";
     }
 
     var payload = {
