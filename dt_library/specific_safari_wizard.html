@@ -563,20 +563,37 @@
     heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#d4af37; font-size:26px; font-family: \'Georgia\', serif; font-weight: normal; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
     wrapper.appendChild(heading);
 
-    if (typeof state.answers.adults === 'undefined') state.answers.adults = 2;
-    if (typeof state.answers.children === 'undefined') state.answers.children = 0;
-
-    var counterRow = document.createElement('div');
-    counterRow.className = 'dew-form-row';
-    counterRow.style.marginBottom = '40px';
-    counterRow.appendChild(createCounter('ADULTS', state.answers.adults, 1, function(val) { state.answers.adults = val; }));
-    counterRow.appendChild(createCounter('CHILDREN (<12)', state.answers.children, 0, function(val) { state.answers.children = val; }));
-    wrapper.appendChild(counterRow);
-
     var travelHeading = document.createElement('h2');
     travelHeading.className = 'dew-heading';
     travelHeading.style.fontSize = '24px';
     travelHeading.style.marginBottom = '30px';
+    travelHeading.textContent = 'Who are you travelling with?';
+    wrapper.appendChild(travelHeading);
+
+    var options = [
+      { label: 'COUPLE', value: 'couple' },
+      { label: 'SOLO', value: 'solo' },
+      { label: 'FAMILY', value: 'family' },
+      { label: 'FRIENDS', value: 'friends' }
+    ];
+    var grid = document.createElement('div');
+    grid.className = 'dew-options-row';
+    options.forEach(function (opt) {
+      grid.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelCompanion, function (val) {
+        state.answers.travelCompanion = val;
+        render();
+      }));
+    });
+    wrapper.appendChild(grid);
+    return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.travelCompanion } };
+  }
+
+  function renderStep2() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+    
+    var travelHeading = document.createElement('h2');
+    travelHeading.className = 'dew-heading';
     travelHeading.textContent = 'When would you like to travel?';
     wrapper.appendChild(travelHeading);
 
@@ -706,30 +723,76 @@
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: nextDisabled } };
   }
 
-  function renderStep2() {
+  function createCounter(label, value, min, onChange) {
     var wrapper = document.createElement('div');
-    wrapper.className = 'dew-step-content';
-    var heading = document.createElement('h2');
-    heading.className = 'dew-heading';
-    heading.textContent = 'Who are you travelling with?';
-    wrapper.appendChild(heading);
-
-    var options = [
-      { label: 'COUPLE', value: 'couple' },
-      { label: 'SOLO', value: 'solo' },
-      { label: 'FAMILY', value: 'family' },
-      { label: 'FRIENDS', value: 'friends' }
-    ];
-    var grid = document.createElement('div');
-    grid.className = 'dew-options-row';
-    options.forEach(function (opt) {
-      grid.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelCompanion, function (val) {
-        state.answers.travelCompanion = val;
-        render();
-      }));
-    });
-    wrapper.appendChild(grid);
-    return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.travelCompanion } };
+    wrapper.style.display = 'flex';
+    wrapper.style.flexDirection = 'column';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.justifyContent = 'center';
+    wrapper.style.background = 'rgba(25, 22, 16, 0.40)';
+    wrapper.style.border = '1.5px solid rgba(100, 90, 55, 0.35)';
+    wrapper.style.borderRadius = '6px';
+    wrapper.style.padding = '17px 20px';
+    wrapper.style.minHeight = '52px';
+    
+    var title = document.createElement('div');
+    title.innerText = label;
+    title.style.color = '#fff';
+    title.style.fontSize = '12px';
+    title.style.fontWeight = '600';
+    title.style.marginBottom = '10px';
+    title.style.letterSpacing = '2.2px';
+    title.style.textTransform = 'uppercase';
+    
+    var btnWrap = document.createElement('div');
+    btnWrap.style.display = 'flex';
+    btnWrap.style.alignItems = 'center';
+    btnWrap.style.gap = '15px';
+    
+    var btnMinus = document.createElement('button');
+    btnMinus.innerText = '−';
+    btnMinus.style.width = '30px';
+    btnMinus.style.height = '30px';
+    btnMinus.style.borderRadius = '50%';
+    btnMinus.style.border = '1.5px solid rgba(255, 255, 255, 0.4)';
+    btnMinus.style.background = 'transparent';
+    btnMinus.style.color = '#fff';
+    btnMinus.style.fontSize = '18px';
+    btnMinus.style.cursor = 'pointer';
+    btnMinus.style.display = 'flex';
+    btnMinus.style.alignItems = 'center';
+    btnMinus.style.justifyContent = 'center';
+    btnMinus.style.transition = 'all 0.2s ease';
+    btnMinus.onmouseover = function() { this.style.borderColor = '#ff6e00'; this.style.color = '#ff6e00'; };
+    btnMinus.onmouseout = function() { this.style.borderColor = 'rgba(255, 255, 255, 0.4)'; this.style.color = '#fff'; };
+    btnMinus.onclick = function() {
+        if (value > min) { value--; onChange(value); render(); }
+    };
+    
+    var valDisp = document.createElement('div');
+    valDisp.innerText = value;
+    valDisp.style.fontSize = '18px';
+    valDisp.style.fontWeight = 'bold';
+    valDisp.style.color = '#fff';
+    valDisp.style.minWidth = '20px';
+    valDisp.style.textAlign = 'center';
+    
+    var btnPlus = document.createElement('button');
+    btnPlus.innerText = '+';
+    btnPlus.style.cssText = btnMinus.style.cssText;
+    btnPlus.onmouseover = btnMinus.onmouseover;
+    btnPlus.onmouseout = btnMinus.onmouseout;
+    btnPlus.onclick = function() {
+        value++; onChange(value); render();
+    };
+    
+    btnWrap.appendChild(btnMinus);
+    btnWrap.appendChild(valDisp);
+    btnWrap.appendChild(btnPlus);
+    
+    wrapper.appendChild(title);
+    wrapper.appendChild(btnWrap);
+    return wrapper;
   }
 
   function renderStep3() {
@@ -755,6 +818,14 @@
       }));
     });
     wrapper.appendChild(list);
+
+    var counterRow = document.createElement('div');
+    counterRow.className = 'dew-options-row';
+    counterRow.style.marginTop = '4px';
+    counterRow.appendChild(createCounter('ADULTS', state.answers.adults, 1, function(val) { state.answers.adults = val; }));
+    counterRow.appendChild(createCounter('CHILDREN (<12)', state.answers.children, 0, function(val) { state.answers.children = val; }));
+    wrapper.appendChild(counterRow);
+
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.budget } };
   }
 
@@ -774,70 +845,6 @@
     wrapper.appendChild(textarea);
 
     return { content: wrapper, navOptions: { showNext: true } };
-  }
-
-  function createCounter(label, value, min, onChange) {
-    var wrapper = document.createElement('div');
-    wrapper.style.display = 'flex';
-    wrapper.style.flexDirection = 'column';
-    wrapper.style.alignItems = 'center';
-    wrapper.style.background = 'rgba(25, 22, 16, 0.40)';
-    wrapper.style.border = '1px solid rgba(100, 90, 55, 0.35)';
-    wrapper.style.borderRadius = '6px';
-    wrapper.style.padding = '12px 10px';
-    
-    var title = document.createElement('div');
-    title.innerText = label;
-    title.style.color = '#fff';
-    title.style.fontSize = '11px';
-    title.style.marginBottom = '10px';
-    title.style.letterSpacing = '1px';
-    title.style.textTransform = 'uppercase';
-    
-    var btnWrap = document.createElement('div');
-    btnWrap.style.display = 'flex';
-    btnWrap.style.alignItems = 'center';
-    btnWrap.style.gap = '15px';
-    
-    var btnMinus = document.createElement('button');
-    btnMinus.innerText = '−';
-    btnMinus.style.width = '30px';
-    btnMinus.style.height = '30px';
-    btnMinus.style.borderRadius = '50%';
-    btnMinus.style.border = '1px solid #ff6e00';
-    btnMinus.style.background = 'transparent';
-    btnMinus.style.color = '#ff6e00';
-    btnMinus.style.fontSize = '18px';
-    btnMinus.style.cursor = 'pointer';
-    btnMinus.style.display = 'flex';
-    btnMinus.style.alignItems = 'center';
-    btnMinus.style.justifyContent = 'center';
-    btnMinus.onclick = function() {
-        if (value > min) { value--; onChange(value); render(); }
-    };
-    
-    var valDisp = document.createElement('div');
-    valDisp.innerText = value;
-    valDisp.style.fontSize = '18px';
-    valDisp.style.fontWeight = 'bold';
-    valDisp.style.color = '#fff';
-    valDisp.style.minWidth = '20px';
-    valDisp.style.textAlign = 'center';
-    
-    var btnPlus = document.createElement('button');
-    btnPlus.innerText = '+';
-    btnPlus.style.cssText = btnMinus.style.cssText;
-    btnPlus.onclick = function() {
-        value++; onChange(value); render();
-    };
-    
-    btnWrap.appendChild(btnMinus);
-    btnWrap.appendChild(valDisp);
-    btnWrap.appendChild(btnPlus);
-    
-    wrapper.appendChild(title);
-    wrapper.appendChild(btnWrap);
-    return wrapper;
   }
 
   function renderStep5() {
