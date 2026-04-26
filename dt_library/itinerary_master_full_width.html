@@ -3855,12 +3855,19 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         updateDayCount();
         wrapper.appendChild(dayCountWrapper);
 
+        var emailPrompt = document.createElement('div');
+        emailPrompt.style.marginTop = '20px';
+        emailPrompt.style.textAlign = 'center';
+        emailPrompt.innerHTML = '<a href="mailto:bookings@desert-tracks.com" style="color:#ff6e00; text-decoration:none; font-size:14px; font-weight: 500;">Prefer to email? bookings@desert-tracks.com</a>';
+        wrapper.appendChild(emailPrompt);
+
         setTimeout(function() {
             flatpickr(fromInput, {
                 mode: "range",
                 minDate: "today",
                 dateFormat: "Y-m-d",
                 inline: true,
+                showMonths: window.innerWidth > 768 ? 2 : 1,
                 defaultDate: (state.answers.fromDate && state.answers.toDate) ? [state.answers.fromDate, state.answers.toDate] : null,
                 onChange: function(selectedDates, dateStr, instance) {
                     if (selectedDates.length === 2) {
