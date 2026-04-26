@@ -3226,7 +3226,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 999999;
+  z-index: 2147483646;
   background: var(--dew-dark-overlay);
   display: none;
   flex-direction: column;
@@ -3261,7 +3261,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000001;
+  z-index: 2147483647;
   transition: background var(--dew-transition), border-color var(--dew-transition);
   line-height: 1;
 }
@@ -4336,6 +4336,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
   function init() {
     rootEl = document.getElementById('specific-enquiry-wizard-root');
     if (!rootEl) return;
+    document.body.appendChild(rootEl);
     rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
     // Hijack removed to allow "Enquire Now" to navigate to the contact page
     overlayEl = document.createElement('div');
