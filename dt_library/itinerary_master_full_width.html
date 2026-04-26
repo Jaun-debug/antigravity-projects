@@ -3712,7 +3712,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
     state._submitted = false;
     
     var rawTitle = document.title || "This Safari";
-    var cleanTitle = rawTitle.split('|')[0].trim(); 
+    var cleanTitle = rawTitle.split('|')[0].replace(' - Upgraded Film Structure', '').trim(); 
     state._sourceTitle = cleanTitle;
     
     if (overlayEl) {
@@ -3743,7 +3743,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
     wrapper.className = 'dew-step-content';
     var heading = document.createElement('h2');
     heading.className = 'dew-heading';
-    heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#ff6e00; font-size:26px; font-family: \'Georgia\', serif; font-weight: normal; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
+    heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#ff6e00; font-size:26px; font-family: \'Georgia\', serif; font-weight: 300; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
     wrapper.appendChild(heading);
 
     var travelHeading = document.createElement('h2');
