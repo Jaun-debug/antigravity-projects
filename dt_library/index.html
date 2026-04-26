@@ -573,6 +573,10 @@
                         loadComponent(-1, 'RATE GENERATOR');
                     } else if (title === 'Accounting & Costing') {
                         loadComponent(-1, 'ACCOUNTING & COSTING');
+                    } else if (title === 'Antigravity Tools') {
+                        loadComponent(-1, 'ANTIGRAVITY TOOLS');
+                    } else if (title === 'Websites') {
+                        loadComponent(-1, 'WEBSITES');
                     } else {
                         renderNav();
                     }
@@ -622,7 +626,9 @@
             const mainFolders = {
                 'Desert Tracks': buildMainFolder('Desert Tracks'),
                 'Rate Generator': buildMainFolder('Rate Generator'),
-                'Accounting & Costing': buildMainFolder('Accounting & Costing')
+                'Accounting & Costing': buildMainFolder('Accounting & Costing'),
+                'Antigravity Tools': buildMainFolder('Antigravity Tools'),
+                'Websites': buildMainFolder('Websites')
             };
 
             const folders = {
@@ -728,6 +734,8 @@
             container.appendChild(mainFolders['Desert Tracks'].details);
             container.appendChild(mainFolders['Rate Generator'].details);
             container.appendChild(mainFolders['Accounting & Costing'].details);
+            container.appendChild(mainFolders['Antigravity Tools'].details);
+            container.appendChild(mainFolders['Websites'].details);
         }
 
         // Removed secondary assignment, relying on initial value of -1
