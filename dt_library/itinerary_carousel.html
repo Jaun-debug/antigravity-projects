@@ -271,49 +271,56 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
 <script data-no-optimize="1">
-document.addEventListener("DOMContentLoaded", function() {
-    // Check if Swiper is loaded to prevent errors
-    if (typeof Swiper !== 'undefined') {
-        const itinerarySwiper = new Swiper('.itinerary-swiper', {
-            effect: 'coverflow',
-            grabCursor: true,
-            centeredSlides: true,
-            slidesPerView: 'auto',
-            loop: true,
-            initialSlide: 4, // Start on Namibia Wildlife
-            speed: 800,
-            coverflowEffect: {
-                rotate: 0,
-                stretch: 0,
-                depth: 100,
-                modifier: 2,
-                slideShadows: false, // We use custom CSS gradients instead
-            },
-            navigation: {
-                nextEl: '.swiper-button-next-custom',
-                prevEl: '.swiper-button-prev-custom',
-            },
-            pagination: {
-                el: '.swiper-pagination-custom',
-                clickable: true,
-            },
-            autoplay: {
-                delay: 3000,
-                disableOnInteraction: false,
-            },
-            breakpoints: {
-                320: {
-                    coverflowEffect: { depth: 50, modifier: 1 }
+(function() {
+    function initCarousel() {
+        if (typeof Swiper !== 'undefined') {
+            const itinerarySwiper = new Swiper('.itinerary-swiper', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                loop: true,
+                initialSlide: 4, // Start on Namibia Wildlife
+                speed: 800,
+                coverflowEffect: {
+                    rotate: 0,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 2,
+                    slideShadows: false, // We use custom CSS gradients instead
                 },
-                768: {
-                    coverflowEffect: { depth: 100, modifier: 2 }
+                navigation: {
+                    nextEl: '.swiper-button-next-custom',
+                    prevEl: '.swiper-button-prev-custom',
+                },
+                pagination: {
+                    el: '.swiper-pagination-custom',
+                    clickable: true,
+                },
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    320: {
+                        coverflowEffect: { depth: 50, modifier: 1 }
+                    },
+                    768: {
+                        coverflowEffect: { depth: 100, modifier: 2 }
+                    }
                 }
-            }
-        });
-    } else {
-        console.warn('Swiper JS not loaded.');
+            });
+        } else {
+            setTimeout(initCarousel, 100);
+        }
     }
-});
+
+    if (document.readyState === 'loading') {
+        document.addEventListener("DOMContentLoaded", initCarousel);
+    } else {
+        initCarousel();
+    }
+})();
 </script>
 
 </body>

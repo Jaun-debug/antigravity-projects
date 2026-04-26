@@ -1119,7 +1119,7 @@
         <span style="display: block; font-family: 'Open Sans', sans-serif; font-size: 11px; letter-spacing: 4px; margin-bottom: 24px; color: #fff;">DESERT TRACKS EXCLUSIVE</span>
         <h1 style="font-family: 'Cinzel', serif; font-size: clamp(2.1rem, 3.6vw, 3.6rem); margin: 0 0 24px 0; font-weight: normal; line-height: 1.1; color: #fff;">11-Day Safari<br>South of Namibia</h1>
         <p style="font-family: 'Open Sans', sans-serif; font-size: 0.9rem; margin: 0 0 32px 0; color: #fff;">A bespoke self-drive journey through iconic landscapes</p>
-        <a href="#" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Start Your Journey</a>
+        <a href="#" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire About This Safari</a>
         <div style="margin-top: 18px;">
             <span style="font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: 1px; font-size: 1rem; color: #fff;">From N$52,300 <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; margin-left: 4px;">per person sharing</span></span>
         </div>
@@ -1271,7 +1271,8 @@
 </div>
 
 <script data-no-optimize="1">
-document.addEventListener("DOMContentLoaded", () => {
+(function() {
+function initJumpBelt() {
     document.querySelectorAll('.dt-jb-col').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1295,7 +1296,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             if (targetEl) {
-                // Offset by 130px to perfectly clear the sticky header + breathing room right above the word
                 const headerOffset = 130;
                 const elementPosition = targetEl.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -1307,7 +1307,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-});
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initJumpBelt); } else { initJumpBelt(); }
+})();
 </script>
 
 <div class="lux-container">
@@ -1319,7 +1321,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="lux-overlay"></div>
         
         <div class="lux-hero-content" style="display: flex; flex-direction: column; align-items: center;">
-            <a href="#" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire Now</a>
+            <a href="#" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire About This Safari</a>
             <div style="margin-top: 14px;">
                 <span style="font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: 1px; font-size: 0.95rem; color: #fff;">From N$52,300 <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-left: 2px;">per person sharing</span></span>
             </div>
@@ -1438,104 +1440,111 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
                 <script data-no-optimize="1">
-                    document.addEventListener("DOMContentLoaded", function() {
-                        const map = L.map('dt-safari-map', { zoomControl: true, scrollWheelZoom: false });
-                        L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
-                            attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ', maxZoom: 18
-                        }).addTo(map);
-
-                        const waypoints = [
-                            { id: '', name: 'Windhoek', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] },
-                            { id: '1', name: 'Kalahari', lodge: 'Camelthorn Kalahari Lodge', nights: '2 NIGHTS', coords: [-24.2831, 17.9333] },
-                            { id: '2', name: 'Fish River Canyon', lodge: 'Canyon Roadhouse', nights: '2 NIGHTS', coords: [-27.5333, 17.7000] },
-                            { id: '3', name: 'Lüderitz', lodge: 'Alte Villa', nights: '2 NIGHTS', coords: [-26.6472, 16.1583] },
-                            { id: '4', name: 'Namib', lodge: 'At Kronenhof Lodge', nights: '1 NIGHT', coords: [-25.4333, 16.4833] },
-                            { id: '5', name: 'Sossusvlei', lodge: 'Desert Homestead Lodge', nights: '2 NIGHTS', coords: [-24.7167, 15.9000] },
-                            { id: '6', name: 'Windhoek (Return)', lodge: 'Windhoek Luxury Suites', nights: '1 NIGHT', coords: [-22.5609, 17.0658] }
-                        ];
-
-                        let jumpToWaypoint = null;
-                        waypoints.forEach((wp, index) => {
-                            if (!wp.id) return;
-                            const icon = L.divIcon({ className: 'dt-map-waypoint-wrap', html: `<div class="dt-map-waypoint">${wp.id}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] });
-                            const marker = L.marker(wp.coords, {icon: icon}).addTo(map);
-                            marker.on('click', () => { if (jumpToWaypoint) jumpToWaypoint(index); });
-                        });
-
-                        const carIcon = L.divIcon({
-                            className: 'dt-car-marker-wrap',
-                            html: `<div class="dt-car-marker"><svg id="dt-car-svg" viewBox="0 0 100 100" fill="#1F4F4B"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#1F4F4B" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#1F4F4B"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><circle cx="28" cy="58" r="6" fill="#E1C680" /><circle cx="72" cy="58" r="6" fill="#E1C680" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#E1C680" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#E1C680" /></svg></div>`,
-                            iconSize: [36, 36], iconAnchor: [18, 18]
-                        });
-                        const movingCar = L.marker(waypoints[0].coords, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
-
-                        async function fetchRealRoadsAndRun() {
-                            const routeSegments = []; let fullRouteCoords = [];
-                            for (let i = 0; i < waypoints.length - 1; i++) {
-                                const wp1 = waypoints[i].coords; const wp2 = waypoints[i+1].coords; let legCoords = [];
-                                try {
-                                    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${wp1[1]},${wp1[0]};${wp2[1]},${wp2[0]}?overview=full&geometries=geojson`);
-                                    const data = await res.json();
-                                    if (data.routes && data.routes.length > 0) { legCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]); }
-                                    else { legCoords = [wp1, wp2]; }
-                                } catch (e) { legCoords = [wp1, wp2]; }
-                                routeSegments.push(legCoords); fullRouteCoords.push(...legCoords);
+                    (function() {
+                        function initMap() {
+                            if (typeof L === 'undefined') {
+                                setTimeout(initMap, 100);
+                                return;
                             }
-                            const routeLine = L.polyline(fullRouteCoords, { color: '#1F4F4B', weight: 4, opacity: 0.8, dashArray: "1, 8", lineJoin: 'round', lineCap: 'round' }).addTo(map);
-                            map.fitBounds(routeLine.getBounds(), { padding: [60, 60] });
+                            const map = L.map('dt-safari-map', { zoomControl: true, scrollWheelZoom: false });
+                            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+                                attribution: '&copy; Esri &mdash; Esri, DeLorme, NAVTEQ', maxZoom: 18
+                            }).addTo(map);
 
-                            const banner = document.getElementById('statusBanner'); const destEl = document.getElementById('bannerDest'); const lodgeEl = document.getElementById('bannerLodge'); const eyebrowEl = document.getElementById('bannerEyebrow');
-                            function showBanner(waypoint) {
-                                const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng());
-                                banner.style.left = carLocationPixel.x + 'px'; banner.style.top = (carLocationPixel.y - 25) + 'px';
-                                eyebrowEl.innerText = waypoint.nights ? waypoint.nights : "ARRIVING AT";
-                                destEl.innerText = waypoint.name; lodgeEl.innerText = waypoint.lodge ? waypoint.lodge : "";
-                                lodgeEl.style.display = waypoint.lodge ? 'block' : 'none';
-                                banner.classList.add('active');
-                            }
-                            map.on('move', function() { if (banner.classList.contains('active')) { const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng()); banner.style.left = carLocationPixel.x + 'px'; banner.style.top = (carLocationPixel.y - 25) + 'px'; } });
-                            function hideBanner() { banner.classList.remove('active'); }
+                            const waypoints = [
+                                { id: '', name: 'Windhoek', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] },
+                                { id: '1', name: 'Kalahari', lodge: 'Camelthorn Kalahari Lodge', nights: '2 NIGHTS', coords: [-24.2831, 17.9333] },
+                                { id: '2', name: 'Fish River Canyon', lodge: 'Canyon Roadhouse', nights: '2 NIGHTS', coords: [-27.5333, 17.7000] },
+                                { id: '3', name: 'Lüderitz', lodge: 'Alte Villa', nights: '2 NIGHTS', coords: [-26.6472, 16.1583] },
+                                { id: '4', name: 'Namib', lodge: 'At Kronenhof Lodge', nights: '1 NIGHT', coords: [-25.4333, 16.4833] },
+                                { id: '5', name: 'Sossusvlei', lodge: 'Desert Homestead Lodge', nights: '2 NIGHTS', coords: [-24.7167, 15.9000] },
+                                { id: '6', name: 'Windhoek (Return)', lodge: 'Windhoek Luxury Suites', nights: '1 NIGHT', coords: [-22.5609, 17.0658] }
+                            ];
 
-                            let currentLegIndex = 0; let currentTimeoutId = null; let animationId = null;
-                            jumpToWaypoint = (index) => {
-                                if (animationId) cancelAnimationFrame(animationId); if (currentTimeoutId) clearTimeout(currentTimeoutId);
-                                hideBanner(); currentLegIndex = index >= routeSegments.length ? 0 : index;
-                                movingCar.setLatLng(waypoints[currentLegIndex].coords); showBanner(waypoints[currentLegIndex]);
-                                currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
-                            };
-                            function playLeg() {
-                                if (currentLegIndex >= routeSegments.length) {
-                                    showBanner(waypoints[waypoints.length - 1]);
-                                    currentTimeoutId = setTimeout(() => { hideBanner(); currentLegIndex = 0; movingCar.setLatLng(waypoints[0].coords); currentTimeoutId = setTimeout(playLeg, 1000); }, 5000);
-                                    return;
+                            let jumpToWaypoint = null;
+                            waypoints.forEach((wp, index) => {
+                                if (!wp.id) return;
+                                const icon = L.divIcon({ className: 'dt-map-waypoint-wrap', html: `<div class="dt-map-waypoint">${wp.id}</div>`, iconSize: [28, 28], iconAnchor: [14, 14] });
+                                const marker = L.marker(wp.coords, {icon: icon}).addTo(map);
+                                marker.on('click', () => { if (jumpToWaypoint) jumpToWaypoint(index); });
+                            });
+
+                            const carIcon = L.divIcon({
+                                className: 'dt-car-marker-wrap',
+                                html: `<div class="dt-car-marker"><svg id="dt-car-svg" viewBox="0 0 100 100" fill="#1F4F4B"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#1F4F4B" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#1F4F4B"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><circle cx="28" cy="58" r="6" fill="#E1C680" /><circle cx="72" cy="58" r="6" fill="#E1C680" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#E1C680" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#E1C680" /></svg></div>`,
+                                iconSize: [36, 36], iconAnchor: [18, 18]
+                            });
+                            const movingCar = L.marker(waypoints[0].coords, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
+
+                            async function fetchRealRoadsAndRun() {
+                                const routeSegments = []; let fullRouteCoords = [];
+                                for (let i = 0; i < waypoints.length - 1; i++) {
+                                    const wp1 = waypoints[i].coords; const wp2 = waypoints[i+1].coords; let legCoords = [];
+                                    try {
+                                        const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${wp1[1]},${wp1[0]};${wp2[1]},${wp2[0]}?overview=full&geometries=geojson`);
+                                        const data = await res.json();
+                                        if (data.routes && data.routes.length > 0) { legCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]); }
+                                        else { legCoords = [wp1, wp2]; }
+                                    } catch (e) { legCoords = [wp1, wp2]; }
+                                    routeSegments.push(legCoords); fullRouteCoords.push(...legCoords);
                                 }
-                                const legCoords = routeSegments[currentLegIndex]; const wpTarget = waypoints[currentLegIndex + 1];
-                                const segmentLengths = []; let totalMeters = 0;
-                                for (let i = 0; i < legCoords.length - 1; i++) { const dist = map.distance(legCoords[i], legCoords[i+1]); segmentLengths.push(dist); totalMeters += dist; }
-                                const durationMs = Math.max(3000, Math.min(8000, totalMeters / 12000));
-                                let startTime = null;
-                                function step(timestamp) {
-                                    if (!startTime) startTime = timestamp; const progress = (timestamp - startTime) / durationMs;
-                                    if (progress >= 1.0) {
-                                        movingCar.setLatLng(legCoords[legCoords.length - 1]); showBanner(wpTarget);
-                                        currentTimeoutId = setTimeout(() => { hideBanner(); currentLegIndex++; currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
+                                const routeLine = L.polyline(fullRouteCoords, { color: '#1F4F4B', weight: 4, opacity: 0.8, dashArray: "1, 8", lineJoin: 'round', lineCap: 'round' }).addTo(map);
+                                map.fitBounds(routeLine.getBounds(), { padding: [60, 60] });
+
+                                const banner = document.getElementById('statusBanner'); const destEl = document.getElementById('bannerDest'); const lodgeEl = document.getElementById('bannerLodge'); const eyebrowEl = document.getElementById('bannerEyebrow');
+                                function showBanner(waypoint) {
+                                    const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng());
+                                    banner.style.left = carLocationPixel.x + 'px'; banner.style.top = (carLocationPixel.y - 25) + 'px';
+                                    eyebrowEl.innerText = waypoint.nights ? waypoint.nights : "ARRIVING AT";
+                                    destEl.innerText = waypoint.name; lodgeEl.innerText = waypoint.lodge ? waypoint.lodge : "";
+                                    lodgeEl.style.display = waypoint.lodge ? 'block' : 'none';
+                                    banner.classList.add('active');
+                                }
+                                map.on('move', function() { if (banner.classList.contains('active')) { const carLocationPixel = map.latLngToContainerPoint(movingCar.getLatLng()); banner.style.left = carLocationPixel.x + 'px'; banner.style.top = (carLocationPixel.y - 25) + 'px'; } });
+                                function hideBanner() { banner.classList.remove('active'); }
+
+                                let currentLegIndex = 0; let currentTimeoutId = null; let animationId = null;
+                                jumpToWaypoint = (index) => {
+                                    if (animationId) cancelAnimationFrame(animationId); if (currentTimeoutId) clearTimeout(currentTimeoutId);
+                                    hideBanner(); currentLegIndex = index >= routeSegments.length ? 0 : index;
+                                    movingCar.setLatLng(waypoints[currentLegIndex].coords); showBanner(waypoints[currentLegIndex]);
+                                    currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
+                                };
+                                function playLeg() {
+                                    if (currentLegIndex >= routeSegments.length) {
+                                        showBanner(waypoints[waypoints.length - 1]);
+                                        currentTimeoutId = setTimeout(() => { hideBanner(); currentLegIndex = 0; movingCar.setLatLng(waypoints[0].coords); currentTimeoutId = setTimeout(playLeg, 1000); }, 5000);
                                         return;
                                     }
-                                    const targetDist = progress * totalMeters; let currentDist = 0;
-                                    for (let i = 0; i < segmentLengths.length; i++) {
-                                        if (currentDist + segmentLengths[i] >= targetDist) {
-                                            const segProg = segmentLengths[i] === 0 ? 1 : ((targetDist - currentDist) / segmentLengths[i]);
-                                            const lat = legCoords[i][0] + (legCoords[i+1][0] - legCoords[i][0]) * segProg; const lng = legCoords[i][1] + (legCoords[i+1][1] - legCoords[i][1]) * segProg;
-                                            movingCar.setLatLng([lat, lng]); break;
-                                        } currentDist += segmentLengths[i];
+                                    const legCoords = routeSegments[currentLegIndex]; const wpTarget = waypoints[currentLegIndex + 1];
+                                    const segmentLengths = []; let totalMeters = 0;
+                                    for (let i = 0; i < legCoords.length - 1; i++) { const dist = map.distance(legCoords[i], legCoords[i+1]); segmentLengths.push(dist); totalMeters += dist; }
+                                    const durationMs = Math.max(3000, Math.min(8000, totalMeters / 12000));
+                                    let startTime = null;
+                                    function step(timestamp) {
+                                        if (!startTime) startTime = timestamp; const progress = (timestamp - startTime) / durationMs;
+                                        if (progress >= 1.0) {
+                                            movingCar.setLatLng(legCoords[legCoords.length - 1]); showBanner(wpTarget);
+                                            currentTimeoutId = setTimeout(() => { hideBanner(); currentLegIndex++; currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
+                                        } else {
+                                            const targetDist = progress * totalMeters; let currentDist = 0;
+                                            for (let i = 0; i < segmentLengths.length; i++) {
+                                                if (currentDist + segmentLengths[i] >= targetDist) {
+                                                    const segProg = segmentLengths[i] === 0 ? 1 : ((targetDist - currentDist) / segmentLengths[i]);
+                                                    const lat = legCoords[i][0] + (legCoords[i+1][0] - legCoords[i][0]) * segProg; const lng = legCoords[i][1] + (legCoords[i+1][1] - legCoords[i][1]) * segProg;
+                                                    movingCar.setLatLng([lat, lng]); break;
+                                                } currentDist += segmentLengths[i];
+                                            } animationId = requestAnimationFrame(step);
+                                        }
                                     } animationId = requestAnimationFrame(step);
-                                } animationId = requestAnimationFrame(step);
+                                }
+                                showBanner(waypoints[0]);
+                                currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 500); }, 1500);
                             }
-                            showBanner(waypoints[0]);
-                            currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 500); }, 1500);
+                            fetchRealRoadsAndRun();
                         }
-                        fetchRealRoadsAndRun();
-                    });
+                        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMap); } else { initMap(); }
+                    })();
                 </script>
             </div>
                 <!-- Inclusions Block -->
@@ -1548,7 +1557,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="dt-cin-eyebrow" id="dtCinEyebrowTop">Discover</span>
                 <h2 class="dt-cin-title" id="dtCinTitleTop">Where Will Your<br>Journey Take You?</h2>
                 <p class="dt-cin-desc" id="dtCinDescTop">Explore destinations, experiences, and routes to begin shaping your perfect safari.</p>
-                <a class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCtaTop" href="#">Start Your Journey</a>
+                <a class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCtaTop" href="#">Start Planning My Safari</a>
             </div>
         </section>
         
@@ -2049,7 +2058,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <span class="dt-cin-eyebrow" id="dtCinEyebrow">Start Your Journey</span>
                 <h2 class="dt-cin-title" id="dtCinTitle">Enquire About This Safari</h2>
                 <p class="dt-cin-desc" id="dtCinDesc">Our team will tailor this journey to your travel dates, preferences, and pace — ensuring a seamless and unforgettable Namibian experience.</p>
-                <a class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCta" href="#">Start Your Journey</a>
+                <a class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCta" href="#">Start Planning My Safari</a>
             </div>
         </section>
 
@@ -2699,7 +2708,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="dt-glass-category">Wildlife Highlights</div>
                 <h2>A Legacy In The Wild</h2>
                 <p>Experience the untamed beauty of Africa through the lens of pure luxury. Witness nature's most intimate moments unfold right before your eyes.</p>
-                <a href="#" class="dt-glass-btn dt-specific-enquiry-open">START YOUR JOURNEY</a>
+                <a href="#" class="dt-glass-btn dt-specific-enquiry-open">SPEAK TO A SAFARI EXPERT</a>
             </div>
         </div>
         <!-- ============================================== -->
@@ -2796,43 +2805,46 @@ document.addEventListener("DOMContentLoaded", () => {
         requestAnimationFrame(step);
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const backToTopBtn = document.getElementById('lux-back-to-top');
-        if (backToTopBtn) {
-            backToTopBtn.addEventListener('click', () => {
-                smoothScrollToTop(1800);
+    (function() {
+        function initScrollLogic() {
+            const backToTopBtn = document.getElementById('lux-back-to-top');
+            if (backToTopBtn) {
+                backToTopBtn.addEventListener('click', () => {
+                    smoothScrollToTop(1800);
+                });
+            }
+
+            window.addEventListener('scroll', () => {
+                const scrollY = window.scrollY;
+                const heroContent = document.querySelector('.lux-hero-content');
+                
+                // Enquire Block slides in at 20% vertical scroll distance of ENTIRE page
+                if (heroContent) {
+                    if (scrollY > document.documentElement.scrollHeight * 0.2) {
+                        heroContent.classList.add('is-visible');
+                    } else {
+                        heroContent.classList.remove('is-visible');
+                    }
+                }
+
+                // Back to Top Button appears when getting to 20% from the bottom of the page
+                if (backToTopBtn) {
+                    // Total scrollable distance is scrollHeight - windowHeight. 80% marks 20% remaining.
+                    const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
+                    if (scrollY > (totalScrollable * 0.8)) {
+                        backToTopBtn.style.opacity = '1';
+                        backToTopBtn.style.transform = 'translateY(0)';
+                        backToTopBtn.style.pointerEvents = 'auto';
+                    } else {
+                        backToTopBtn.style.opacity = '0';
+                        backToTopBtn.style.transform = 'translateY(20px)';
+                        backToTopBtn.style.pointerEvents = 'none';
+                    }
+                }
             });
         }
-
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const heroContent = document.querySelector('.lux-hero-content');
-            
-            // Enquire Block slides in at 20% vertical scroll distance of ENTIRE page
-            if (heroContent) {
-                if (scrollY > document.documentElement.scrollHeight * 0.2) {
-                    heroContent.classList.add('is-visible');
-                } else {
-                    heroContent.classList.remove('is-visible');
-                }
-            }
-
-            // Back to Top Button appears when getting to 20% from the bottom of the page
-            if (backToTopBtn) {
-                // Total scrollable distance is scrollHeight - windowHeight. 80% marks 20% remaining.
-                const totalScrollable = document.documentElement.scrollHeight - window.innerHeight;
-                if (scrollY > (totalScrollable * 0.8)) {
-                    backToTopBtn.style.opacity = '1';
-                    backToTopBtn.style.transform = 'translateY(0)';
-                    backToTopBtn.style.pointerEvents = 'auto';
-                } else {
-                    backToTopBtn.style.opacity = '0';
-                    backToTopBtn.style.transform = 'translateY(20px)';
-                    backToTopBtn.style.pointerEvents = 'none';
-                }
-            }
-        });
-    });
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initScrollLogic); } else { initScrollLogic(); }
+    })();
 
     // --- SOLLY LEVI CAROUSEL LOGIC ---
     (function(){
@@ -2946,35 +2958,37 @@ document.addEventListener("DOMContentLoaded", () => {
     })();
 
     // --- UNIVERSAL STICKY HEADER SCROLL LOGIC ---
-    let lastScrollY = window.scrollY;
-    let ticking = false;
-    const stickyHeader = document.querySelector('.lux-sticky-header');
+    (function() {
+        let lastScrollY = window.scrollY;
+        let ticking = false;
+        const stickyHeader = document.querySelector('.lux-sticky-header');
 
-    window.addEventListener('scroll', () => {
-        if (!stickyHeader) return;
-        
-        if (!ticking) {
-            window.requestAnimationFrame(() => {
-                // Engage after 30% of page height is scrolled
-                const dropThreshold = document.documentElement.scrollHeight * 0.3;
-                if (window.scrollY > dropThreshold) {
-                    if (window.scrollY > lastScrollY + 2) {
-                        // Scrolling DOWN -> Show premium header over everything
-                        stickyHeader.classList.add('is-visible');
-                    } else if (window.scrollY < lastScrollY - 2) {
-                        // Scrolling UP -> Hide it (revealing the original WP menu)
+        window.addEventListener('scroll', () => {
+            if (!stickyHeader) return;
+            
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    // Engage after 30% of page height is scrolled
+                    const dropThreshold = document.documentElement.scrollHeight * 0.3;
+                    if (window.scrollY > dropThreshold) {
+                        if (window.scrollY > lastScrollY + 2) {
+                            // Scrolling DOWN -> Show premium header over everything
+                            stickyHeader.classList.add('is-visible');
+                        } else if (window.scrollY < lastScrollY - 2) {
+                            // Scrolling UP -> Hide it (revealing the original WP menu)
+                            stickyHeader.classList.remove('is-visible');
+                        }
+                    } else {
+                        // Above 30%, always hide it
                         stickyHeader.classList.remove('is-visible');
                     }
-                } else {
-                    // Above 30%, always hide it
-                    stickyHeader.classList.remove('is-visible');
-                }
-                lastScrollY = window.scrollY;
-                ticking = false;
-            });
-            ticking = true;
-        }
-    }, { passive: true });
+                    lastScrollY = window.scrollY;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    })();
 </script>
 
 
@@ -3038,7 +3052,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </style>
 
 <script data-no-optimize="1">
-document.addEventListener("DOMContentLoaded", function() {
+(function() {
+function initAccordionLogic() {
     const dayBlocks = document.querySelectorAll('.lux-day-block');
     if (!dayBlocks.length) return;
     
@@ -3126,7 +3141,9 @@ document.addEventListener("DOMContentLoaded", function() {
             trigger.querySelector('.lux-day-acc-icon').innerText = '−';
         }
     });
-});
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initAccordionLogic); } else { initAccordionLogic(); }
+})();
 </script>
 
 <!-- ============================================== -->
@@ -3983,38 +4000,60 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     var FORMSPREE_ID = 'mreybgra';
+    var startTime = new Date();
     
     var rawTitle = document.title || "Unknown Safari";
-    var cleanTitle = rawTitle.split('-')[0].split('|')[0].trim(); 
+    var cleanTitle = rawTitle.split('|')[0].trim(); 
     
     var path = window.location.pathname.replace(/\//g, '');
     var sentKey = 'client_viewed_' + path + '_' + new Date().toISOString().slice(0, 10);
     
-    if (!sessionStorage.getItem(sentKey)) {
-        fetch('https://get.geojs.io/v1/ip/geo.json')
-            .then(function(response) { return response.json(); })
-            .then(function(geoData) {
-                var country = geoData.country || "Unknown Country";
-                var city = geoData.city || "Unknown City";
-                var locationString = city + ", " + country;
-                
-                return fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        subject: '🔥 ALERT: Someone in ' + country + ' viewing ' + cleanTitle,
-                        Safari_Name: cleanTitle,
-                        Visitor_Location: locationString,
-                        Page_Link: window.location.href,
-                        Time: new Date().toLocaleString()
-                    })
-                });
+    if (sessionStorage.getItem(sentKey)) return;
+
+    var locationString = "Unknown Location";
+    var countryName = "Unknown Country";
+    fetch('https://get.geojs.io/v1/ip/geo.json')
+        .then(function(res) { return res.json(); })
+        .then(function(geoData) {
+            countryName = geoData.country || "Unknown Country";
+            locationString = (geoData.city || "Unknown City") + ", " + countryName;
+        }).catch(function(){});
+
+    function sendTrackingEmail() {
+        if (sessionStorage.getItem(sentKey)) return;
+        
+        var endTime = new Date();
+        var timeSpentMs = endTime - startTime;
+        if (timeSpentMs < 2000) return; // Ignore instant bounces
+
+        sessionStorage.setItem(sentKey, 'true');
+        
+        var minutes = Math.floor(timeSpentMs / 60000);
+        var seconds = Math.floor((timeSpentMs % 60000) / 1000);
+        var timeSpentStr = minutes + "m " + seconds + "s";
+        
+        fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+                subject: '🔥 ALERT: ' + timeSpentStr + ' spent viewing ' + cleanTitle + ' (' + countryName + ')',
+                Safari_Name: cleanTitle,
+                Time_Spent: timeSpentStr,
+                Visitor_Location: locationString,
+                Page_Link: window.location.href,
+                Time: new Date().toLocaleString()
             })
-            .then(function(res) {
-                if (res.ok) sessionStorage.setItem(sentKey, 'true'); 
-            })
-            .catch(function(){});
+        }).catch(function(){});
     }
+
+    function handleLeave(e) {
+        if (e.type === 'visibilitychange' && document.visibilityState !== 'hidden') return;
+        sendTrackingEmail();
+    }
+    
+    window.addEventListener('visibilitychange', handleLeave);
+    window.addEventListener('pagehide', handleLeave);
 })();
 </script>
 

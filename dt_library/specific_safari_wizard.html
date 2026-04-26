@@ -487,6 +487,8 @@
   var state = {
     currentStep: 1,
     answers: {
+      fromDate: '',
+      toDate: '',
       travelTiming: null,
       travelCompanion: null,
       isTradeAgent: false,
@@ -549,7 +551,7 @@
     
     // Clean the title just like the visitor tracking script
     var rawTitle = document.title || "This Safari";
-    var cleanTitle = rawTitle.split('-')[0].split('|')[0].trim(); 
+    var cleanTitle = rawTitle.split('|')[0].trim(); 
     state._sourceTitle = cleanTitle;
     
     if (overlayEl) {
@@ -575,7 +577,7 @@
     return btn;
   }
 
-  /* STEP 1: Timing & Safari Confirmation */
+  /* STEP 1: When */
   function renderStep1() {
     var wrapper = document.createElement('div');
     wrapper.className = 'dew-step-content';
@@ -584,22 +586,66 @@
     heading.innerHTML = 'Enquiring about:<br/><span style="color:#ff6e00; font-size:24px; font-family: sans-serif; letter-spacing: 1px; text-transform: uppercase;">' + state._sourceTitle + '</span><br/><br/>When would you like to travel?';
     wrapper.appendChild(heading);
 
-    var options = [
-      { label: 'I KNOW EXACTLY WHEN', value: 'exact' },
-      { label: 'I HAVE A ROUGH IDEA', value: 'rough' },
-      { label: 'TELL ME WHEN IS BEST', value: 'flexible' }
-    ];
-    var list = document.createElement('div');
-    list.className = 'dew-options-list';
-    options.forEach(function (opt) {
-      list.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelTiming, function (val) {
-        state.answers.travelTiming = val;
-        render();
-      }));
-    });
-    wrapper.appendChild(list);
+    var dateGroup = document.createElement('div');
+    dateGroup.className = 'dew-form-row';
+    dateGroup.style.marginBottom = '20px';
 
-    return { content: wrapper, navOptions: { showNext: true, nextDisabled: !state.answers.travelTiming } };
+    var fromWrapper = document.createElement('div');
+    fromWrapper.style.width = '100%';
+    var fromLabel = document.createElement('div');
+    fromLabel.innerText = 'START DATE';
+    fromLabel.style.color = '#fff';
+    fromLabel.style.fontSize = '12px';
+    fromLabel.style.marginBottom = '6px';
+    var fromInput = document.createElement('input');
+    fromInput.type = 'date';
+    fromInput.className = 'dew-input';
+    fromInput.value = state.answers.fromDate;
+    fromInput.addEventListener('input', function() { state.answers.fromDate = this.value; render(); });
+    fromWrapper.appendChild(fromLabel);
+    fromWrapper.appendChild(fromInput);
+
+    var toWrapper = document.createElement('div');
+    toWrapper.style.width = '100%';
+    var toLabel = document.createElement('div');
+    toLabel.innerText = 'END DATE';
+    toLabel.style.color = '#fff';
+    toLabel.style.fontSize = '12px';
+    toLabel.style.marginBottom = '6px';
+    var toInput = document.createElement('input');
+    toInput.type = 'date';
+    toInput.className = 'dew-input';
+    toInput.value = state.answers.toDate;
+    toInput.addEventListener('input', function() { state.answers.toDate = this.value; render(); });
+    toWrapper.appendChild(toLabel);
+    toWrapper.appendChild(toInput);
+
+    dateGroup.appendChild(fromWrapper);
+    dateGroup.appendChild(toWrapper);
+    wrapper.appendChild(dateGroup);
+
+    var dayCountWrapper = document.createElement('div');
+    dayCountWrapper.style.textAlign = 'center';
+    dayCountWrapper.style.minHeight = '30px';
+    dayCountWrapper.style.marginBottom = '10px';
+    
+    if (state.answers.fromDate && state.answers.toDate) {
+      var d1 = new Date(state.answers.fromDate);
+      var d2 = new Date(state.answers.toDate);
+      if (d2 >= d1) {
+        var diffTime = Math.abs(d2 - d1);
+        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Inclusive of start day
+        if (!isNaN(diffDays)) {
+           dayCountWrapper.innerHTML = '<span style="color:#ff6e00; font-weight:bold; font-size:18px;">' + diffDays + ' Days Selected</span>';
+        }
+      } else {
+        dayCountWrapper.innerHTML = '<span style="color:#ff3333; font-size:14px;">End date must be after start date</span>';
+      }
+    }
+    wrapper.appendChild(dayCountWrapper);
+
+    var nextDisabled = !(state.answers.fromDate && state.answers.toDate && new Date(state.answers.toDate) >= new Date(state.answers.fromDate));
+    return { content: wrapper, navOptions: { showNext: true, nextDisabled: nextDisabled } };
   }
 
   /* STEP 2: Companion */
@@ -714,14 +760,25 @@
     nameRow.appendChild(snInput);
     wrapper.appendChild(nameRow);
 
-    var submitDisabled = !state.answers.email || !state.answers.firstName || !state.answers.surname;
+    var phoneGroup = document.createElement('div');
+    phoneGroup.className = 'dew-form-group';
+    var phoneInput = document.createElement('input');
+    phoneInput.type = 'tel';
+    phoneInput.className = 'dew-input';
+    phoneInput.placeholder = 'TELEPHONE NUMBER';
+    phoneInput.value = state.answers.phone;
+    phoneInput.addEventListener('input', function () { state.answers.phone = this.value; updateSubmitState(); });
+    phoneGroup.appendChild(phoneInput);
+    wrapper.appendChild(phoneGroup);
+
+    var submitDisabled = !state.answers.email || !state.answers.firstName || !state.answers.surname || !state.answers.phone;
     return { content: wrapper, navOptions: { showSubmit: true, submitDisabled: submitDisabled, onSubmit: handleSubmit } };
   }
 
   var submitBtnEl = null;
   function updateSubmitState() {
     if (submitBtnEl) {
-      submitBtnEl.disabled = !state.answers.email || !state.answers.firstName || !state.answers.surname;
+      submitBtnEl.disabled = !state.answers.email || !state.answers.firstName || !state.answers.surname || !state.answers.phone;
     }
   }
 
@@ -735,19 +792,27 @@
   function handleSubmit() {
     if (!state.answers.email) return;
 
+    var formattedTiming = "";
+    if (state.answers.fromDate && state.answers.toDate) {
+      var d1 = new Date(state.answers.fromDate);
+      var d2 = new Date(state.answers.toDate);
+      var diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
+      formattedTiming = state.answers.fromDate + " to " + state.answers.toDate + " (" + diffDays + " Days)";
+    }
+
     var payload = {
       sourceUrl: window.location.href,
       sourcePageTitle: document.title,
       country: 'Specific Safari Booking',
       safariType: state._sourceTitle || 'Specific Safari',
-      travelTiming: state.answers.travelTiming,
+      travelTiming: formattedTiming || state.answers.travelTiming,
       travelCompanion: state.answers.travelCompanion,
       budget: state.answers.budget,
       tripDetails: state.answers.tripDetails,
       email: state.answers.email,
       firstName: state.answers.firstName,
       surname: state.answers.surname,
-      phone: '',
+      phone: state.answers.phone,
       contactPreference: 'email',
       newsletter: false,
       gclid: new URLSearchParams(window.location.search).get('gclid') || '',
@@ -852,6 +917,14 @@
     if (!rootEl) return;
     rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
     
+    // Hijack native site header "Enquire Now" links to open this specific wizard instead
+    var headerLinks = document.querySelectorAll('header a, .u-header a');
+    headerLinks.forEach(function(link) {
+        if (link.innerText && link.innerText.toUpperCase().trim() === 'ENQUIRE NOW') {
+            link.classList.add('dt-specific-enquiry-open');
+        }
+    });
+    
     overlayEl = document.createElement('div');
     overlayEl.className = 'dew-overlay';
     overlayEl.style.cssText = 'display:none;' + OVERLAY_BG;
@@ -882,41 +955,64 @@
     }
 
     var FORMSPREE_ID = 'mreybgra'; // User's specific ID
+    var startTime = new Date();
     
     // 2. CLEAN UP THE NAME
     var rawTitle = document.title || "Unknown Safari";
-    var cleanTitle = rawTitle.split('-')[0].split('|')[0].trim(); 
+    var cleanTitle = rawTitle.split('|')[0].trim(); 
     
     var path = window.location.pathname.replace(/\//g, '');
     var sentKey = 'client_viewed_' + path + '_' + new Date().toISOString().slice(0, 10);
     
-    // 3. SEND AMAZING EMAIL WITH LOCATION
-    if (!sessionStorage.getItem(sentKey)) {
-        // First grab the country/location data
-        fetch('https://get.geojs.io/v1/ip/geo.json')
-            .then(function(response) { return response.json(); })
-            .then(function(geoData) {
-                var country = geoData.country || "Unknown Country";
-                var city = geoData.city || "Unknown City";
-                var locationString = city + ", " + country;
-                
-                // Now send the Formspree email
-                return fetch('https://formspree.io/f/' + FORMSPREE_ID, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        subject: '🔥 ALERT: Someone in ' + country + ' viewing ' + cleanTitle,
-                        Safari_Name: cleanTitle,
-                        Visitor_Location: locationString,
-                        Page_Link: window.location.href,
-                        Time: new Date().toLocaleString()
-                    })
-                });
+    if (sessionStorage.getItem(sentKey)) return;
+
+    // Grab geo info early and store it
+    var locationString = "Unknown Location";
+    var countryName = "Unknown Country";
+    fetch('https://get.geojs.io/v1/ip/geo.json')
+        .then(function(res) { return res.json(); })
+        .then(function(geoData) {
+            countryName = geoData.country || "Unknown Country";
+            locationString = (geoData.city || "Unknown City") + ", " + countryName;
+        }).catch(function(){});
+
+    // 3. SEND EMAIL ON LEAVE
+    function sendTrackingEmail() {
+        if (sessionStorage.getItem(sentKey)) return;
+        
+        var endTime = new Date();
+        var timeSpentMs = endTime - startTime;
+        // Don't send if they bounced in less than 2 seconds
+        if (timeSpentMs < 2000) return; 
+
+        sessionStorage.setItem(sentKey, 'true');
+        
+        var minutes = Math.floor(timeSpentMs / 60000);
+        var seconds = Math.floor((timeSpentMs % 60000) / 1000);
+        var timeSpentStr = minutes + "m " + seconds + "s";
+        
+        // Use keepalive so the request finishes even if the tab closes
+        fetch('https://formspree.io/f/' + FORMSPREE_ID, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            keepalive: true,
+            body: JSON.stringify({
+                subject: '🔥 ALERT: ' + timeSpentStr + ' spent viewing ' + cleanTitle + ' (' + countryName + ')',
+                Safari_Name: cleanTitle,
+                Time_Spent: timeSpentStr,
+                Visitor_Location: locationString,
+                Page_Link: window.location.href,
+                Time: new Date().toLocaleString()
             })
-            .then(function(res) {
-                if (res.ok) sessionStorage.setItem(sentKey, 'true'); 
-            })
-            .catch(function(){}); // Silent fail if blocked
+        }).catch(function(){});
     }
+
+    function handleLeave(e) {
+        if (e.type === 'visibilitychange' && document.visibilityState !== 'hidden') return;
+        sendTrackingEmail();
+    }
+    
+    window.addEventListener('visibilitychange', handleLeave);
+    window.addEventListener('pagehide', handleLeave);
 })();
 </script>
