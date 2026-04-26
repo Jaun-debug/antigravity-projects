@@ -1,5 +1,9 @@
 <div id="specific-enquiry-wizard-root"></div>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <style data-no-optimize="1">
 /* =============================================
    DT Specific Safari Enquiry Wizard - Styles
@@ -592,36 +596,25 @@
 
     var fromWrapper = document.createElement('div');
     fromWrapper.style.width = '100%';
+    fromWrapper.style.gridColumn = '1 / span 2';
     var fromLabel = document.createElement('div');
-    fromLabel.innerText = 'START DATE';
+    fromLabel.innerText = 'SELECT DATES';
     fromLabel.style.color = '#fff';
     fromLabel.style.fontSize = '12px';
     fromLabel.style.marginBottom = '6px';
     var fromInput = document.createElement('input');
-    fromInput.type = 'date';
+    fromInput.type = 'text'; // Flatpickr works best on text inputs
     fromInput.className = 'dew-input';
-    fromInput.value = state.answers.fromDate;
-    fromInput.addEventListener('input', function() { state.answers.fromDate = this.value; render(); });
+    fromInput.placeholder = 'Select date range...';
+    // Initialize value if exists
+    if (state.answers.fromDate && state.answers.toDate) {
+        fromInput.value = state.answers.fromDate + ' to ' + state.answers.toDate;
+    }
+    
     fromWrapper.appendChild(fromLabel);
     fromWrapper.appendChild(fromInput);
 
-    var toWrapper = document.createElement('div');
-    toWrapper.style.width = '100%';
-    var toLabel = document.createElement('div');
-    toLabel.innerText = 'END DATE';
-    toLabel.style.color = '#fff';
-    toLabel.style.fontSize = '12px';
-    toLabel.style.marginBottom = '6px';
-    var toInput = document.createElement('input');
-    toInput.type = 'date';
-    toInput.className = 'dew-input';
-    toInput.value = state.answers.toDate;
-    toInput.addEventListener('input', function() { state.answers.toDate = this.value; render(); });
-    toWrapper.appendChild(toLabel);
-    toWrapper.appendChild(toInput);
-
     dateGroup.appendChild(fromWrapper);
-    dateGroup.appendChild(toWrapper);
     wrapper.appendChild(dateGroup);
 
     var dayCountWrapper = document.createElement('div');
@@ -629,22 +622,43 @@
     dayCountWrapper.style.minHeight = '30px';
     dayCountWrapper.style.marginBottom = '10px';
     
-    if (state.answers.fromDate && state.answers.toDate) {
-      var d1 = new Date(state.answers.fromDate);
-      var d2 = new Date(state.answers.toDate);
-      if (d2 >= d1) {
-        var diffTime = Math.abs(d2 - d1);
-        var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1; // Inclusive of start day
-        if (!isNaN(diffDays)) {
-           dayCountWrapper.innerHTML = '<span style="color:#ff6e00; font-weight:bold; font-size:18px;">' + diffDays + ' Days Selected</span>';
+    function updateDayCount() {
+        if (state.answers.fromDate && state.answers.toDate) {
+            var d1 = new Date(state.answers.fromDate);
+            var d2 = new Date(state.answers.toDate);
+            var diffDays = Math.ceil(Math.abs(d2 - d1) / (1000 * 60 * 60 * 24)) + 1;
+            dayCountWrapper.innerHTML = '<span style="color:#ff6e00; font-weight:bold; font-size:18px;">' + diffDays + ' Days Selected</span>';
+        } else {
+            dayCountWrapper.innerHTML = '';
         }
-      } else {
-        dayCountWrapper.innerHTML = '<span style="color:#ff3333; font-size:14px;">End date must be after start date</span>';
-      }
     }
+    updateDayCount();
     wrapper.appendChild(dayCountWrapper);
 
-    var nextDisabled = !(state.answers.fromDate && state.answers.toDate && new Date(state.answers.toDate) >= new Date(state.answers.fromDate));
+    // Initialize Flatpickr after DOM attachment
+    setTimeout(function() {
+        flatpickr(fromInput, {
+            mode: "range",
+            minDate: "today",
+            dateFormat: "Y-m-d",
+            onChange: function(selectedDates, dateStr, instance) {
+                if (selectedDates.length === 2) {
+                    // YYYY-MM-DD
+                    state.answers.fromDate = instance.formatDate(selectedDates[0], "Y-m-d");
+                    state.answers.toDate = instance.formatDate(selectedDates[1], "Y-m-d");
+                    updateDayCount();
+                    // Re-render nav buttons to enable "Next"
+                    render();
+                } else {
+                    state.answers.fromDate = '';
+                    state.answers.toDate = '';
+                    updateDayCount();
+                }
+            }
+        });
+    }, 10);
+
+    var nextDisabled = !(state.answers.fromDate && state.answers.toDate);
     return { content: wrapper, navOptions: { showNext: true, nextDisabled: nextDisabled } };
   }
 
@@ -721,6 +735,70 @@
     return { content: wrapper, navOptions: { showNext: true } };
   }
 
+  function createCounter(label, value, min, onChange) {
+    var wrapper = document.createElement('div');
+    wrapper.style.display = 'flex';
+    wrapper.style.flexDirection = 'column';
+    wrapper.style.alignItems = 'center';
+    wrapper.style.background = 'rgba(25, 22, 16, 0.40)';
+    wrapper.style.border = '1px solid rgba(100, 90, 55, 0.35)';
+    wrapper.style.borderRadius = '6px';
+    wrapper.style.padding = '12px 10px';
+    
+    var title = document.createElement('div');
+    title.innerText = label;
+    title.style.color = '#fff';
+    title.style.fontSize = '11px';
+    title.style.marginBottom = '10px';
+    title.style.letterSpacing = '1px';
+    title.style.textTransform = 'uppercase';
+    
+    var btnWrap = document.createElement('div');
+    btnWrap.style.display = 'flex';
+    btnWrap.style.alignItems = 'center';
+    btnWrap.style.gap = '15px';
+    
+    var btnMinus = document.createElement('button');
+    btnMinus.innerText = '−';
+    btnMinus.style.width = '30px';
+    btnMinus.style.height = '30px';
+    btnMinus.style.borderRadius = '50%';
+    btnMinus.style.border = '1px solid #ff6e00';
+    btnMinus.style.background = 'transparent';
+    btnMinus.style.color = '#ff6e00';
+    btnMinus.style.fontSize = '18px';
+    btnMinus.style.cursor = 'pointer';
+    btnMinus.style.display = 'flex';
+    btnMinus.style.alignItems = 'center';
+    btnMinus.style.justifyContent = 'center';
+    btnMinus.onclick = function() {
+        if (value > min) { value--; onChange(value); render(); }
+    };
+    
+    var valDisp = document.createElement('div');
+    valDisp.innerText = value;
+    valDisp.style.fontSize = '18px';
+    valDisp.style.fontWeight = 'bold';
+    valDisp.style.color = '#fff';
+    valDisp.style.minWidth = '20px';
+    valDisp.style.textAlign = 'center';
+    
+    var btnPlus = document.createElement('button');
+    btnPlus.innerText = '+';
+    btnPlus.style.cssText = btnMinus.style.cssText;
+    btnPlus.onclick = function() {
+        value++; onChange(value); render();
+    };
+    
+    btnWrap.appendChild(btnMinus);
+    btnWrap.appendChild(valDisp);
+    btnWrap.appendChild(btnPlus);
+    
+    wrapper.appendChild(title);
+    wrapper.appendChild(btnWrap);
+    return wrapper;
+  }
+
   /* STEP 5: Contact */
   function renderStep5() {
     var wrapper = document.createElement('div');
@@ -730,16 +808,15 @@
     heading.textContent = 'Where can we send your trip suggestions?';
     wrapper.appendChild(heading);
 
-    var emailGroup = document.createElement('div');
-    emailGroup.className = 'dew-form-group';
-    var emailInput = document.createElement('input');
-    emailInput.type = 'email';
-    emailInput.className = 'dew-input';
-    emailInput.placeholder = 'EMAIL ADDRESS';
-    emailInput.value = state.answers.email;
-    emailInput.addEventListener('input', function () { state.answers.email = this.value; updateSubmitState(); });
-    emailGroup.appendChild(emailInput);
-    wrapper.appendChild(emailGroup);
+    // Initialize counters if not set
+    if (typeof state.answers.adults === 'undefined') state.answers.adults = 2;
+    if (typeof state.answers.children === 'undefined') state.answers.children = 0;
+
+    var counterRow = document.createElement('div');
+    counterRow.className = 'dew-form-row';
+    counterRow.appendChild(createCounter('ADULTS', state.answers.adults, 1, function(val) { state.answers.adults = val; }));
+    counterRow.appendChild(createCounter('CHILDREN (<12)', state.answers.children, 0, function(val) { state.answers.children = val; }));
+    wrapper.appendChild(counterRow);
 
     var nameRow = document.createElement('div');
     nameRow.className = 'dew-form-row';
@@ -759,6 +836,17 @@
     snInput.addEventListener('input', function () { state.answers.surname = this.value; updateSubmitState(); });
     nameRow.appendChild(snInput);
     wrapper.appendChild(nameRow);
+
+    var emailGroup = document.createElement('div');
+    emailGroup.className = 'dew-form-group';
+    var emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.className = 'dew-input';
+    emailInput.placeholder = 'EMAIL ADDRESS';
+    emailInput.value = state.answers.email;
+    emailInput.addEventListener('input', function () { state.answers.email = this.value; updateSubmitState(); });
+    emailGroup.appendChild(emailInput);
+    wrapper.appendChild(emailGroup);
 
     var phoneGroup = document.createElement('div');
     phoneGroup.className = 'dew-form-group';
@@ -809,6 +897,8 @@
       travelCompanion: state.answers.travelCompanion,
       budget: state.answers.budget,
       tripDetails: state.answers.tripDetails,
+      adults: state.answers.adults,
+      children: state.answers.children,
       email: state.answers.email,
       firstName: state.answers.firstName,
       surname: state.answers.surname,
