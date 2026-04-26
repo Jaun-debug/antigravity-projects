@@ -3227,7 +3227,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 2147483646;
+  z-index: 2147483646 !important;
   background: var(--dew-dark-overlay);
   display: none;
   flex-direction: column;
@@ -3249,7 +3249,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 
 #specific-enquiry-wizard-root .dew-close-btn {
   position: fixed;
-  top: 20px;
+  top: 100px;
   right: 26px;
   width: 40px;
   height: 40px;
@@ -3262,7 +3262,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2147483647;
+  z-index: 2147483647 !important;
   transition: background var(--dew-transition), border-color var(--dew-transition);
   line-height: 1;
 }
@@ -3741,7 +3741,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
     wrapper.className = 'dew-step-content';
     var heading = document.createElement('h2');
     heading.className = 'dew-heading';
-    heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#d4af37; font-size:26px; font-family: \'Georgia\', serif; font-weight: normal; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
+    heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#ff6e00; font-size:26px; font-family: \'Georgia\', serif; font-weight: normal; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
     wrapper.appendChild(heading);
 
     var travelHeading = document.createElement('h2');
