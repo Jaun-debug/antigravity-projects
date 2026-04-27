@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Safari Loader | Desert Tracks</title>
+    <!-- Preconnect to Google Fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    
+    <style data-no-optimize="1">
+        /* Desert Tracks Luxury Root Variables */
+        :root {
+            --dt-gold: #c5a059;
+            --dt-gold-light: #dfc488;
+            --dt-dark: #121212;
+            --dt-charcoal: #1c1c1c;
+            --dt-text-light: #e0e0e0;
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Jost', sans-serif;
+            --loader-duration: 4s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: #f5f5f5;
+            color: var(--dt-charcoal);
+            /* Prevent scrolling while loader is active */
+            overflow: hidden; 
+        }
+
+        /* 
+         * ----------------------------------------
+         * LOADER OVERLAY
+         * ----------------------------------------
+         */
+        #dt-loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: var(--dt-dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 1;
+            transition: opacity 1s cubic-bezier(0.65, 0, 0.35, 1);
+            /* A subtle noise grain can make the dark background feel premium */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.02'/%3E%3C/svg%3E");
+        }
+
+        /* SVG Animation Wrapper */
+        .elephant-svg-container {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        /* The SVG Element */
+        .elephant-svg-container svg {
+            width: 100%;
+            height: 100%;
+            overflow: visible;
+        }
+
+        .elephant-svg-container svg path {
+            fill: transparent;
+            stroke: var(--dt-gold);
+            stroke-width: 0.8;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            /* Dash array needs to be at least the length of the path (approx 150 for this one) */
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            animation: drawElephant var(--loader-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* Pulsing glow behind the drawing */
+        .elephant-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--dt-gold);
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0;
+            animation: pulseGlow var(--loader-duration) ease-in-out forwards;
+        }
+
+        /* Typography */
+        .loader-brand {
+            font-family: var(--font-heading);
+            color: #ffffff;
+            font-size: 1.5rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUpText 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 1s; /* Start fading in after drawing starts */
+        }
+
+        .loader-subtitle {
+            font-family: var(--font-body);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            margin-top: 0.75rem;
+            font-weight: 300;
+            text-transform: uppercase;
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUpText 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 1.5s;
+        }
+
+        /* 
+         * ----------------------------------------
+         * KEYFRAMES
+         * ----------------------------------------
+         */
+        @keyframes drawElephant {
+            0% {
+                stroke-dashoffset: 200;
+                fill: transparent;
+            }
+            60% {
+                stroke-dashoffset: 0; /* Fully drawn */
+                fill: transparent;
+            }
+            80% {
+                stroke-dashoffset: 0;
+                fill: rgba(197, 160, 89, 0.1); /* Subtle gold fill */
+            }
+            100% {
+                stroke-dashoffset: 0;
+                fill: rgba(197, 160, 89, 0.2);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0% { opacity: 0; }
+            50% { opacity: 0.15; }
+            100% { opacity: 0; }
+        }
+
+        @keyframes fadeUpText {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Utility class to hide the loader */
+        .loader-hidden {
+            opacity: 0 !important;
+            pointer-events: none;
+        }
+
+        /* 
+         * ----------------------------------------
+         * PAGE CONTENT (Mockup)
+         * ----------------------------------------
+         */
+        .page-content {
+            opacity: 0;
+            transform: scale(0.98);
+            transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-content.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .hero-section {
+            height: 100vh;
+            background-color: var(--dt-charcoal);
+            background-image: linear-gradient(rgba(18, 18, 18, 0.4), rgba(18, 18, 18, 0.8)), url('https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=2068&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-heading);
+            font-size: 4rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+            color: var(--dt-gold-light);
+        }
+
+        .hero-content p {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .loader-brand { font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- LUXURY LOADER OVERLAY -->
+    <div id="dt-loader-overlay">
+        <div class="elephant-glow"></div>
+        <div class="elephant-svg-container">
+            <!-- Precise Elephant Path for Line Drawing -->
+            <!-- We use a custom, stylized continuous line path that looks elegant when drawn -->
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Using the path from MDI but adjusted for an elegant draw effect -->
+                <path d="M19.5 15.5a.5.5 0 0 1-.5.5a.5.5 0 0 1-.5-.5v-7c0-1.93-2.07-3.5-4-3.5H6a4 4 0 0 0-4 4v10h4v-4h5v4h4v-4.5a.5.5 0 0 1 .5-.5a.5.5 0 0 1 .5.5V16a3 3 0 0 0 3 3a3 3 0 0 0 3-3v-2h-2.5z" />
+            </svg>
+        </div>
+        <h2 class="loader-brand">Desert Tracks</h2>
+        <p class="loader-subtitle">Preparing your luxury safari</p>
+    </div>
+
+    <!-- MAIN PAGE CONTENT (Hidden until loader finishes) -->
+    <main class="page-content" id="main-content">
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Welcome to the Wild</h1>
+                <p>Experience the untouched beauty of Namibia with our meticulously crafted, high-end safari itineraries.</p>
+            </div>
+        </section>
+    </main>
+
+    <script data-no-optimize="1">
+        document.addEventListener("DOMContentLoaded", () => {
+            const loader = document.getElementById("dt-loader-overlay");
+            const mainContent = document.getElementById("main-content");
+            const body = document.body;
+
+            // Wait for the animation duration (4s) + a small buffer before removing the loader
+            setTimeout(() => {
+                // Fade out loader
+                loader.classList.add("loader-hidden");
+                
+                // Allow scrolling again
+                body.style.overflow = "auto";
+                
+                // Trigger page content enter animation
+                mainContent.classList.add("loaded");
+
+                // Optional: Remove loader from DOM entirely after transition
+                setTimeout(() => {
+                    loader.style.display = 'none';
+                }, 1000); // Matches CSS transition duration
+                
+            }, 3800); // Trigger slightly before the 4s animation fully concludes for smoothness
+        });
+    </script>
+</body>
+</html>
