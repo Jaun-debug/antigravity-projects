@@ -27,13 +27,13 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin-bottom: 2rem !important; /* Provides breathing room below the final elements on mobile */
+            margin-bottom: -60px !important; /* Pull up footer to swallow mobile gap */
         }
 
         @media (min-width: 1024px) {
             .lux-container {
                 flex-direction: row;
-                margin-bottom: -150px !important; /* Forces Nicepage outer wrapper to brutally swallow the white gap on desktop */
+                margin-bottom: -80px !important; /* Fixed overshoot on desktop */
             }
         }
 
@@ -912,7 +912,7 @@
         /* Highlights Section */
         .lux-highlights-section {
             margin-top: 5rem;
-            margin-bottom: 5rem;
+            margin-bottom: 1rem;
         }
         .lux-highlights-title {
             font-family: 'Cinzel', serif;
@@ -980,7 +980,7 @@
             left: 0;
             width: 100%;
             height: 115px;
-            background: rgba(245, 245, 243, 0.95);
+            background: rgba(200, 95, 25, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 2147483647 !important; /* Maximum z-index to paint over the main WP header */
@@ -1013,7 +1013,7 @@
                 font-size: 1.1rem !important;
                 letter-spacing: 0 !important;
             }
-            .lux-sticky-cta {
+            .dt-sticky-cta-new {
                 padding: 10px 18px !important;
                 font-size: 10px !important;
             }
@@ -1030,7 +1030,7 @@
         .lux-sticky-title-main {
             font-family: 'Cinzel', serif;
             font-size: 2.2rem;
-            color: #1F4F4B;
+            color: #ffffff;
             font-weight: 400;
             line-height: 1;
             margin: 0;
@@ -1039,27 +1039,30 @@
             font-family: 'Cinzel', serif;
             font-style: italic;
             font-size: 1.3rem;
-            color: #1F4F4B;
+            color: rgba(255, 255, 255, 0.9);
             text-transform: none;
             letter-spacing: 0;
             margin: 2px 0 0 0;
             font-weight: 400;
         }
-        .lux-sticky-cta {
+        .dt-sticky-cta-new {
             font-family: 'Open Sans', 'Helvetica', sans-serif;
             font-size: 11px;
             font-weight: 500;
-            /* text-transform: uppercase; */
             letter-spacing: 3px;
-            color: #fff !important;
+            color: #ffffff !important;
+            text-transform: uppercase;
             text-decoration: none !important;
-            background: #8CBEAA;
+            background: rgba(200, 95, 25, 0.95);
+            border: 1px solid #ffffff;
             padding: 12px 28px;
             border-radius: 4px;
             transition: background 0.3s ease;
+            cursor: pointer;
         }
-        .lux-sticky-cta:hover {
-            background: #78A593;
+        .dt-sticky-cta-new:hover {
+            background: rgba(170, 75, 20, 0.95);
+            color: #ffffff !important;
         }
 
         /* ==================================================
@@ -1068,7 +1071,7 @@
         ================================================== */
         @media (min-width: 1024px) {
             .lux-left { display: none !important; }
-            .lux-right { width: 100vw !important; padding: 6rem 0 !important; }
+            .lux-right { width: 100vw !important; padding: 6rem 0 1rem 0 !important; }
             
             /* Center the text elements */
             .lux-welcome-top, 
@@ -1093,6 +1096,13 @@
                 max-width: 1600px !important;
                 border-radius: 20px !important;
             }
+        @media (max-width: 768px) {
+            .lux-top-content {
+                padding: 35px 15px !important;
+                border-radius: 12px !important;
+                width: 80% !important;
+                max-width: 80% !important;
+            }
         }
     </style>
 </head>
@@ -1101,10 +1111,10 @@
 <!-- DESKTOP STICKY HEADER -->
 <div class="lux-sticky-header">
     <div class="lux-sticky-title-box">
-        <h3 class="lux-sticky-title-main">Book Your</h3>
-        <span class="lux-sticky-title-sub">11-Day Safari</span>
+        <h3 class="lux-sticky-title-main" style="text-transform: uppercase;">BOOK <span style="text-transform: lowercase; font-style: italic;">your</span></h3>
+        <span class="lux-sticky-title-sub" style="font-style: normal; text-transform: uppercase;">11-DAY SAFARI</span>
     </div>
-    <a href="javascript:void(0);" class="lux-sticky-cta dt-specific-enquiry-open">Enquire Now</a>
+    <button type="button" class="dt-sticky-cta-new dt-specific-enquiry-open">Enquire Now</button>
 </div>
 
 <!-- MOBILE FLOATING ACTION BUTTON REMOVED (Replaced by Universal Sticky Header) -->
@@ -1115,11 +1125,11 @@
     <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.20) 25%, rgba(0,0,0,0.58) 55%, rgba(0,0,0,0.75) 100%);"></div>
     <div style="position: absolute; inset: 0; z-index: 3; background: radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,0.35) 100%); pointer-events: none;"></div>
     
-    <div class="lux-top-content" style="position: relative; z-index: 4; text-align: center; max-width: 820px; padding: 0 40px;">
+    <div class="lux-top-content" style="position: relative; z-index: 4; text-align: center; max-width: 820px; padding: 60px 50px; background: rgba(20, 18, 15, 0.45); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
         <span style="display: block; font-family: 'Open Sans', sans-serif; font-size: 11px; letter-spacing: 4px; margin-bottom: 24px; color: #fff;">DESERT TRACKS EXCLUSIVE</span>
         <h1 style="font-family: 'Cinzel', serif; font-size: clamp(2.1rem, 3.6vw, 3.6rem); margin: 0 0 24px 0; font-weight: normal; line-height: 1.1; color: #fff;">11-Day Safari<br>South of Namibia</h1>
         <p style="font-family: 'Open Sans', sans-serif; font-size: 0.9rem; margin: 0 0 32px 0; color: #fff;">A bespoke self-drive journey through iconic landscapes</p>
-        <a href="javascript:void(0);" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire About This Safari</a>
+        <button type="button" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245; cursor: pointer;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire About This Safari</button>
         <div style="margin-top: 18px;">
             <span style="font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: 1px; font-size: 1rem; color: #fff;">From N$52,300 <span style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; margin-left: 4px;">per person sharing</span></span>
         </div>
@@ -1129,7 +1139,7 @@
 <!-- CONTENT JUMP BELT (Full Width under Hero) -->
 <style data-no-optimize="1">
   #dt-jump-belt-fw {
-    --dt-gold: #C9A24A;
+    --dt-gold: #C85F19;
     --dt-grey: #888888;
     --dt-dark: #123631;
     --dt-sand: #FFFFFF;
@@ -1321,7 +1331,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         <div class="lux-overlay"></div>
         
         <div class="lux-hero-content" style="display: flex; flex-direction: column; align-items: center;">
-            <a href="javascript:void(0);" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire About This Safari</a>
+            <button type="button" class="dt-specific-enquiry-open" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245; cursor: pointer;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire About This Safari</button>
             <div style="margin-top: 14px;">
                 <span style="font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: 1px; font-size: 0.95rem; color: #fff;">From N$52,300 <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-left: 2px;">per person sharing</span></span>
             </div>
@@ -1390,14 +1400,14 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 <style data-no-optimize="1">
                     .dt-map-container { width: 100%; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
                     #dt-safari-map { width: 100%; height: 550px; background: #F5F5F3; z-index: 1; }
-                    .dt-map-waypoint { background-color: white; color: #1F4F4B; border-radius: 50%; width: 28px !important; height: 28px !important; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid #C9A24A; transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease; }
+                    .dt-map-waypoint { background-color: white; color: #1F4F4B; border-radius: 50%; width: 28px !important; height: 28px !important; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid rgba(200, 95, 25, 0.95); transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease; }
                     .dt-map-waypoint:hover { transform: scale(1.15); cursor: pointer; }
-                    .dt-car-marker { background-color: #E1C680; border-radius: 50%; width: 36px !important; height: 36px !important; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4); border: 2px solid white; z-index: 1000 !important; }
-                    .dt-car-marker svg { width: 20px; height: 20px; fill: #1F4F4B; transition: transform 0.4s ease; }
-                    .dt-status-banner { position: absolute; background: rgba(255, 255, 255, 0.98); padding: 12px 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 2000; opacity: 0; transform: translate(-50%, -10px); transition: left 0.1s linear, top 0.1s linear, opacity 0.4s ease, transform 0.4s ease; pointer-events: none; border-left: 4px solid #C9A24A; white-space: nowrap; display: flex; flex-direction: row; align-items: center; gap: 15px; min-width: max-content; }
+                    .dt-car-marker { background-color: #C85F19; border-radius: 50%; width: 36px !important; height: 36px !important; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.4); border: 2px solid white; z-index: 1000 !important; }
+                    .dt-car-marker svg { width: 20px; height: 20px; fill: #ffffff; transition: transform 0.4s ease; }
+                    .dt-status-banner { position: absolute; background: rgba(255, 255, 255, 0.98); padding: 12px 24px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); z-index: 2000; opacity: 0; transform: translate(-50%, -10px); transition: left 0.1s linear, top 0.1s linear, opacity 0.4s ease, transform 0.4s ease; pointer-events: none; border-left: 4px solid rgba(200, 95, 25, 0.95); white-space: nowrap; display: flex; flex-direction: row; align-items: center; gap: 15px; min-width: max-content; }
                     .dt-status-banner.active { opacity: 1; transform: translate(-50%, -40px); }
                     .dt-status-content-left { display: flex; flex-direction: column; text-align: left; }
-                    .dt-status-eyebrow { font-size: 10px; letter-spacing: 2px; color: #9B6A35; margin-bottom: 2px; font-weight: 600; font-family: 'Open Sans', sans-serif; text-transform: uppercase; }
+                    .dt-status-eyebrow { font-size: 10px; letter-spacing: 2px; color: rgba(200, 95, 25, 0.95); margin-bottom: 2px; font-weight: 600; font-family: 'Open Sans', sans-serif; text-transform: uppercase; }
                     .dt-status-dest { font-family: 'Cinzel', serif; font-size: 20px; color: #1F4F4B; margin: 0; font-weight: 600; }
                     .dt-status-lodge { font-size: 13px; color: #666; margin: 0; font-weight: 500; font-family: 'Open Sans', sans-serif; border-left: 1px solid #ddd; padding-left: 15px; }
                     .leaflet-popup-content-wrapper { border-radius: 6px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); padding: 2px; }
@@ -1486,7 +1496,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 
                             const carIcon = L.divIcon({
                                 className: 'dt-car-marker-wrap',
-                                html: `<div class="dt-car-marker"><svg id="dt-car-svg" viewBox="0 0 100 100" fill="#1F4F4B"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#1F4F4B" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#1F4F4B"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#1F4F4B" /><circle cx="28" cy="58" r="6" fill="#E1C680" /><circle cx="72" cy="58" r="6" fill="#E1C680" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#E1C680" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#E1C680" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#E1C680" /></svg></div>`,
+                                html: `<div class="dt-car-marker"><svg id="dt-car-svg" viewBox="0 0 100 100" fill="#ffffff"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#ffffff" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#ffffff"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#ffffff" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#ffffff" /><circle cx="28" cy="58" r="6" fill="#C85F19" /><circle cx="72" cy="58" r="6" fill="#C85F19" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#C85F19" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#C85F19" /></svg></div>`,
                                 iconSize: [36, 36], iconAnchor: [18, 18]
                             });
                             const movingCar = L.marker(waypoints[0].coords, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
@@ -1572,7 +1582,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 <span class="dt-cin-eyebrow" id="dtCinEyebrowTop">Discover</span>
                 <h2 class="dt-cin-title" id="dtCinTitleTop">Where Will Your<br>Journey Take You?</h2>
                 <p class="dt-cin-desc" id="dtCinDescTop">Explore destinations, experiences, and routes to begin shaping your perfect safari.</p>
-                <a class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCtaTop" href="javascript:void(0);">Start Planning My Safari</a>
+                <button type="button" class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCtaTop">Start Planning My Safari</button>
             </div>
         </section>
         
@@ -2050,10 +2060,11 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             transform: translateY(40px);
             filter: blur(6px);
             will-change: opacity, transform, filter;
-            background: #8CBEAA !important;
+            background: rgba(200, 95, 25, 0.95) !important;
+            border-radius: 10px !important;
         }
         .dt-cin-cta:hover {
-            background: #78A593 !important;
+            background: rgba(170, 75, 20, 0.95) !important;
             border-color: transparent !important;
             color: #ffffff !important;
         }
@@ -2065,7 +2076,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         }
         </style>
 
-        <section class="dt-cin-hero" id="dtCinHero" style="margin-bottom: 4rem;">
+        <section class="dt-cin-hero" id="dtCinHero" style="margin-bottom: 0;">
             <div class="dt-cin-bg" id="dtCinBg" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4-2.jpg'); inset: 0; width: 100%; height: 100%; transform: scale(1.05);"></div>
             <div class="dt-cin-gradient"></div>
             <div class="dt-cin-vignette"></div>
@@ -2073,7 +2084,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 <span class="dt-cin-eyebrow" id="dtCinEyebrow">Start Your Journey</span>
                 <h2 class="dt-cin-title" id="dtCinTitle">Enquire About This Safari</h2>
                 <p class="dt-cin-desc" id="dtCinDesc">Our team will tailor this journey to your travel dates, preferences, and pace — ensuring a seamless and unforgettable Namibian experience.</p>
-                <a class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCta" href="javascript:void(0);">Start Planning My Safari</a>
+                <button type="button" class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCta">Start Planning My Safari</button>
             </div>
         </section>
 
@@ -2110,17 +2121,14 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                     var tl=gsap.timeline({
                         scrollTrigger:{
                             trigger:hero,
-                            start: mob ? 'top 80%' : 'top 50%',
-                            end: mob ? 'bottom top' : 'bottom 10%',
-                            scrub:1.5
+                            start: mob ? 'top 85%' : 'top 65%',
+                            toggleActions: 'play none none none'
                         }
                     });
-                    tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
-                      .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-                      .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-                      .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=2.8')
-                      .to([eyebrow,title,desc,cta],{opacity:1,ease:'none',duration:3})
-                      .to([eyebrow,title,desc,cta],{opacity:0,y:-18,filter:'blur(4px)',ease:'power1.in',duration:3});
+                    tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1})
+                      .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1},'-=0.7')
+                      .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1},'-=0.7')
+                      .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1},'-=0.7');
                 });
             }
             if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCinematicHeroes);}
@@ -2296,10 +2304,10 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 font-size: 10px;
                 font-weight: 600;
                 letter-spacing: 2px;
-                color: #C9A24A;
+                color: rgba(200, 95, 25, 0.95);
                 text-transform: uppercase;
                 margin-bottom: 10px;
-                border: 1px solid rgba(201, 162, 74, 0.4);
+                border: 1px solid rgba(200, 95, 25, 0.4);
                 padding: 4px 10px;
                 border-radius: 40px;
                 backdrop-filter: blur(4px);
@@ -2345,8 +2353,8 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             }
 
             .dt-prev-btn:hover, .dt-next-btn:hover {
-                background: rgba(201, 162, 74, 0.15);
-                border-color: #C9A24A;
+                background: rgba(200, 95, 25, 0.15);
+                border-color: rgba(200, 95, 25, 0.95);
             }
 
             .dt-prev-btn svg, .dt-next-btn svg {
@@ -2359,7 +2367,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             }
 
             .dt-prev-btn:hover svg, .dt-next-btn:hover svg {
-                stroke: #C9A24A;
+                stroke: rgba(200, 95, 25, 0.95);
             }
 
             /* Pagination Dots */
@@ -2383,7 +2391,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             }
 
             .swiper-pagination-bullet-active {
-                background: #C9A24A;
+                background: rgba(200, 95, 25, 0.95);
                 width: 24px;
                 border-radius: 4px;
             }
@@ -2658,7 +2666,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             color: rgba(255, 255, 255, 0.95);
         }
 
-        .dt-contact-btn {
+        .dt-lion-contact-btn {
             display: inline-block;
             padding: 16px 40px;
             background: rgba(255, 255, 255, 0.15);
@@ -2677,9 +2685,9 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             cursor: pointer;
         }
 
-        .dt-contact-btn:hover {
+        .dt-lion-contact-btn:hover {
             background: #fff;
-            color: #0a0a0a;
+            color: rgba(200, 95, 25, 0.95);
             box-shadow: 0 8px 32px rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
         }
@@ -2705,7 +2713,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             .dt-glass-card {
                 padding: 3rem 2rem;
             }
-            .dt-contact-btn {
+            .dt-lion-contact-btn {
                 padding: 14px 30px;
             }
         }
@@ -2723,7 +2731,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 <div class="dt-glass-category">Wildlife Highlights</div>
                 <h2>A Legacy In The Wild</h2>
                 <p>Experience the untamed beauty of Africa through the lens of pure luxury. Witness nature's most intimate moments unfold right before your eyes.</p>
-                <a href="https://desert-tracks.com/desert-tracks-contact/" onclick="window.location.href='https://desert-tracks.com/desert-tracks-contact/'; return false;" class="dt-contact-btn">SPEAK TO A SAFARI EXPERT</a>
+                <button type="button" onclick="window.location.href='https://desert-tracks.com/desert-tracks-contact/';" class="dt-lion-contact-btn">SPEAK TO A SAFARI EXPERT</button>
             </div>
         </div>
         <!-- ============================================== -->
@@ -3007,8 +3015,8 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 </script>
 
 
-<div id="lux-back-to-top" style="position: fixed; bottom: 10vh; right: 4vw; z-index: 99999; background: #1F4F4B; color: #fff; padding: 12px 24px; border-radius: 4px; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.35);" onmouseover="this.style.background='#163B38';" onmouseout="this.style.background='#1F4F4B';">
-    Take Me Back To Top
+<div id="lux-back-to-top" style="position: fixed; bottom: 10vh; right: 4vw; z-index: 99999; background: rgba(200, 95, 25, 0.95); color: #fff; padding: 12px 24px; border-radius: 4px; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.35);" onmouseover="this.style.background='rgba(170, 75, 20, 0.95)';" onmouseout="this.style.background='rgba(200, 95, 25, 0.95)';">
+    Back To Top
 </div>
 <!-- ========================================== -->
 <!-- LUXURY ITINERARY ACCORDION ENGINE -->

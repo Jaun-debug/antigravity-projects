@@ -132,7 +132,7 @@
   max-width: var(--dew-max-w);
   padding: 32px;
   padding-top: 100px;
-  padding-bottom: 200px;
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -247,15 +247,14 @@
 }
 
 #specific-enquiry-wizard-root .dew-nav-area {
-  position: fixed;
-  bottom: 60px;
-  left: 0;
+  position: relative;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 1000001;
-  pointer-events: auto;
+  margin-top: auto;
+  padding-top: 40px;
 }
 
 #specific-enquiry-wizard-root .dew-nav-buttons {
@@ -524,8 +523,8 @@
     if (next <= TOTAL_STEPS) goToStep(next);
   }
 
-  var OVERLAY_BG = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background-image:url(https://desert-tracks.com/wp-content/uploads/2025/12/deadvalley492kb-scaled-3-1-4-2-5.jpg);background-size:cover;background-position:center center;background-repeat:no-repeat;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#ffffff;';
-  var DARK_LAYER_CSS = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:0;pointer-events:none;';
+  var OVERLAY_BG = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background-image:url(https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large-1.jpeg);background-size:cover;background-position:center center;background-repeat:no-repeat;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#ffffff;';
+  var DARK_LAYER_CSS = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(25, 22, 16, 0.45);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:0;pointer-events:none;';
 
   function closeWizard() {
     state._wizardOpen = false;
@@ -575,7 +574,7 @@
     wrapper.className = 'dew-step-content';
     var heading = document.createElement('h2');
     heading.className = 'dew-heading';
-    heading.innerHTML = '<span style="font-weight: 300; font-size: 0.6em; color: #ddd; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#ff6e00; font-size:26px; font-family: \'Georgia\', serif; font-weight: 300; letter-spacing: 0.5px;">' + state._sourceTitle + '</span>';
+    heading.innerHTML = '<span style="font-weight: 300 !important; font-size: 0.55em; color: #ddd !important; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#ff6e00 !important; font-size:clamp(18px, 5.5vw, 26px) !important; font-family: \'Georgia\', serif !important; font-weight: 300 !important; letter-spacing: 0.5px !important; line-height: 1.25 !important; display: block; margin-top: 6px;">' + state._sourceTitle + '</span>';
     wrapper.appendChild(heading);
 
     var travelHeading = document.createElement('h2');
@@ -1173,7 +1172,7 @@
       barWrap.appendChild(fill);
       navArea.appendChild(barWrap);
       
-      overlayEl.appendChild(navArea);
+      container.appendChild(navArea);
     }
   }
 

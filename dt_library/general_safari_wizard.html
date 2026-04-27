@@ -1,0 +1,2536 @@
+<div id="enquiry-wizard-root"></div>
+
+<style>
+/* =============================================
+   DT Enquiry Wizard - Styles
+   Wilderness Destinations Enquiry Wizard
+   ============================================= */
+
+:root {
+  --dew-orange: #ff6e00;
+  --dew-orange-hover: #e06200;
+  --dew-dark-overlay: rgba(25, 22, 16, 0.95);
+  --dew-card-bg: rgba(25, 22, 16, 0.40);
+  --dew-card-bg-hover: rgba(255, 110, 0, 0.25);
+  --dew-card-border: rgba(100, 90, 55, 0.35);
+  --dew-card-active-bg: #ffffff;
+  --dew-card-active-color: #222222;
+  --dew-card-active-border: #ff6e00;
+  --dew-text-white: #ffffff;
+  --dew-text-light: #ffffff;
+  --dew-text-muted: rgba(255, 255, 255, 0.7);
+  --dew-input-bg: rgba(25, 22, 16, 0.20);
+  --dew-input-border: rgba(100, 90, 55, 0.35);
+  --dew-progress-bg: rgba(255, 255, 255, 0.12);
+  --dew-progress-fill: #ff6e00;
+  --dew-close-border: rgba(255, 255, 255, 0.4);
+  --dew-checkbox-border: rgba(255, 255, 255, 0.4);
+  --dew-skip-bg: rgba(55, 50, 34, 0.65);
+  --dew-fallback-border: rgba(190, 130, 50, 0.7);
+  --dew-font-heading: 'Georgia', 'Times New Roman', serif;
+  --dew-font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --dew-transition: 0.2s ease;
+  --dew-max-w: 960px;
+  --dew-inner-w: 640px;
+  --dew-r: 6px;
+}
+
+#enquiry-wizard-root *,
+#enquiry-wizard-root *::before,
+#enquiry-wizard-root *::after {
+  box-sizing: border-box;
+}
+
+/* ---- OVERLAY ---- */
+#enquiry-wizard-root .dew-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999999;
+  background: var(--dew-dark-overlay);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
+  font-family: var(--dew-font-heading);
+  color: #ffffff !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  max-width: 100vw;
+}
+
+#enquiry-wizard-root .dew-overlay[style*="display: flex"],
+#enquiry-wizard-root .dew-overlay.dew-visible {
+  display: flex;
+}
+
+/* ---- CLOSE (X) ---- */
+.dew-close-btn {
+  position: fixed;
+  top: 20px;
+  right: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.4) !important;
+  background: rgba(25, 22, 16, 0.20) !important;
+  color: #ffffff !important;
+  font-size: 17px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000001;
+  transition: background var(--dew-transition), border-color var(--dew-transition);
+  line-height: 1;
+}
+
+.dew-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #fff;
+}
+
+/* ---- BACK ---- */
+.dew-back-btn {
+  position: fixed;
+  top: 26px;
+  left: 26px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: none;
+  color: #ffffff !important;
+  font-size: 12px;
+  font-family: var(--dew-font-body);
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  z-index: 1000001;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity var(--dew-transition);
+}
+
+.dew-back-btn:hover { opacity: 0.7; }
+.dew-back-btn .dew-back-arrow { font-size: 10px; }
+.dew-back-btn.dew-hidden { display: none; }
+
+/* ---- STEP CONTAINER ---- */
+.dew-step-container {
+  width: 100%;
+  max-width: var(--dew-max-w);
+  padding: 32px;
+  padding-top: 100px;
+  padding-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 1;
+}
+
+.dew-step-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: dewFadeIn 0.3s ease forwards;
+}
+
+@keyframes dewFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---- HEADINGS ---- */
+.dew-heading {
+  font-family: var(--dew-font-heading) !important;
+  font-size: 32px !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin-bottom: 30px !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+}
+
+.dew-subheading {
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  color: #ff6e00 !important;
+  text-align: center;
+  margin-top: -18px;
+  margin-bottom: 18px;
+}
+
+.dew-description {
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  color: #ffffff !important;
+  text-align: center;
+  margin-top: -26px;
+  margin-bottom: 34px;
+  line-height: 1.6;
+}
+
+/* ---- OPTION GRIDS / LISTS ---- */
+.dew-options-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 14px;
+}
+
+.dew-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 16px;
+}
+
+.dew-options-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 16px;
+}
+
+/* ---- OPTION BUTTON ---- */
+.dew-option-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 17px 20px;
+  background: rgba(25, 22, 16, 0.40) !important;
+  border: 1.5px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+  min-height: 52px;
+  outline: none;
+}
+
+.dew-option-btn:hover {
+  background: var(--dew-card-bg-hover);
+  border-color: rgba(255, 110, 0, 0.5);
+}
+
+.dew-option-btn.dew-active {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border-color: #ff6e00 !important;
+  border-width: 2px;
+}
+
+.dew-option-btn:focus-visible {
+  outline: 2px solid #ff6e00 !important;
+  outline-offset: 2px;
+}
+
+/* ---- FALLBACK BUTTON ---- */
+.dew-option-fallback {
+  width: 100%;
+  padding: 17px 20px;
+  background: rgba(25, 22, 16, 0.40) !important;
+  border: 1.5px solid rgba(190, 130, 50, 0.7) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2.2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+  min-height: 52px;
+  margin-top: 60px;
+}
+
+.dew-option-fallback:hover {
+  background: rgba(255, 110, 0, 0.25);
+  border-color: rgba(255, 110, 0, 0.5);
+}
+
+.dew-option-fallback.dew-active {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border-color: #ff6e00 !important;
+  border-width: 2px;
+}
+
+.dew-option-fallback:focus-visible {
+  outline: 2px solid #ff6e00 !important;
+  outline-offset: 2px;
+}
+
+/* ---- NAV AREA (bottom fixed) ---- */
+.dew-nav-area {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1000001;
+  pointer-events: auto;
+}
+
+.dew-nav-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 30px;
+}
+
+/* ---- SKIP BUTTON ---- */
+.dew-skip-btn {
+  width: 260px;
+  padding: 15px 24px;
+  background: rgba(55, 50, 34, 0.65) !important;
+  border: 1.5px solid rgba(190, 130, 50, 0.7) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+}
+
+.dew-skip-btn:hover {
+  background: rgba(255, 110, 0, 0.15) !important;
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+/* ---- NEXT BUTTON ---- */
+.dew-next-btn {
+  width: 260px;
+  padding: 15px 24px;
+  background: #ff6e00 !important;
+  border: none;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+}
+
+.dew-next-btn:hover {
+  background: #e06200 !important;
+}
+
+.dew-next-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.dew-next-btn:disabled:hover {
+  background: #ff6e00 !important;
+}
+
+/* ---- SUBMIT BUTTON ---- */
+.dew-submit-btn {
+  width: 260px;
+  padding: 15px 24px;
+  background: #ff6e00 !important;
+  border: none;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  text-align: center;
+  margin-top: 8px;
+}
+
+.dew-submit-btn:hover {
+  background: #e06200 !important;
+}
+
+.dew-submit-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ---- PROGRESS BAR ---- */
+.dew-progress-bar {
+  width: 200px;
+  height: 3px;
+  background: var(--dew-progress-bg);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.dew-progress-fill {
+  height: 100%;
+  background: var(--dew-progress-fill);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* =============================================
+   CHECKBOXES
+   ============================================= */
+.dew-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+}
+
+.dew-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  color: #ffffff !important;
+  cursor: pointer;
+  user-select: none;
+}
+
+.dew-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--dew-checkbox-border);
+  border-radius: 3px;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.dew-checkbox:hover {
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+.dew-checkbox:checked {
+  background: #ff6e00 !important;
+  border-color: #ff6e00 !important;
+}
+
+.dew-checkbox:checked::after {
+  content: '\2713';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.dew-checkbox:focus-visible {
+  outline: 2px solid #ff6e00 !important;
+  outline-offset: 2px;
+}
+
+/* =============================================
+   FORM INPUTS (Step 7)
+   ============================================= */
+.dew-form-group {
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 20px;
+}
+
+.dew-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 20px;
+}
+
+.dew-input {
+  width: 100%;
+  padding: 16px 18px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: 1px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color var(--dew-transition);
+}
+
+.dew-input::placeholder {
+  color: rgba(255, 255, 255, 0.85) !important;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+}
+
+.dew-input:hover {
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+.dew-input:focus {
+  border-color: #ff6e00 !important;
+}
+
+.dew-textarea {
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  padding: 18px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: 1px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  letter-spacing: 0.3px;
+  text-transform: none;
+  outline: none;
+  resize: vertical;
+  min-height: 120px;
+  transition: border-color var(--dew-transition);
+  margin-bottom: 0px;
+  margin-top: 8px;
+}
+
+.dew-textarea::placeholder {
+  color: rgba(200, 190, 160, 0.9) !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 12px;
+}
+
+.dew-textarea:hover {
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+.dew-textarea:focus {
+  border-color: #ff6e00 !important;
+}
+
+/* ---- PHONE INPUT ---- */
+.dew-phone-group {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 22px;
+  position: relative;
+}
+
+.dew-phone-flag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 16px 12px;
+  background: var(--dew-input-bg);
+  border: 1px solid var(--dew-input-border);
+  border-right: none;
+  border-radius: var(--dew-r) 0 0 var(--dew-r);
+  color: var(--dew-text-white);
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.dew-phone-flag-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.dew-phone-flag-arrow {
+  font-size: 8px;
+  margin-left: 2px;
+  color: rgba(255,255,255,0.6);
+}
+
+.dew-phone-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  background: rgba(40, 36, 22, 0.97);
+  border: 1px solid rgba(100, 90, 55, 0.5);
+  border-radius: var(--dew-r);
+  z-index: 1000010;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+.dew-phone-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+}
+
+.dew-phone-dropdown-item:hover {
+  background: rgba(255,110,0,0.15);
+}
+
+.dew-phone-dropdown-item.dew-selected {
+  background: rgba(255,110,0,0.25);
+}
+
+.dew-dd-flag {
+  font-size: 18px;
+  min-width: 26px;
+}
+
+.dew-dd-name {
+  flex: 1;
+  color: #ffffff !important;
+}
+
+.dew-dd-code {
+  color: rgba(255,255,255,0.6) !important;
+  font-size: 12px;
+}
+
+.dew-phone-input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dew-phone-label {
+  font-family: var(--dew-font-body);
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.7) !important;
+  padding: 8px 14px 0;
+  background: var(--dew-input-bg);
+  border: 1px solid var(--dew-input-border);
+  border-left: none;
+  border-bottom: none;
+  border-radius: 0 var(--dew-r) 0 0;
+  letter-spacing: 0.5px;
+}
+
+.dew-phone-bottom {
+  display: flex;
+  align-items: center;
+  background: var(--dew-input-bg);
+  border: 1px solid var(--dew-input-border);
+  border-left: none;
+  border-top: none;
+  border-radius: 0 0 var(--dew-r) 0;
+}
+
+.dew-phone-code {
+  color: rgba(255,255,255,0.7) !important;
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  padding-left: 14px;
+  white-space: nowrap;
+}
+
+.dew-phone-input {
+  width: 100%;
+  padding: 4px 14px 12px 6px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: none !important;
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 14px;
+  outline: none;
+}
+
+.dew-phone-group:hover .dew-phone-flag,
+.dew-phone-group:hover .dew-phone-bottom {
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+.dew-phone-bottom:focus-within {
+  border-color: #ff6e00 !important;
+}
+
+/* ---- RADIO GROUP ---- */
+.dew-radio-group {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dew-radio-group-label {
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  color: #ffffff !important;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+
+.dew-radio-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  color: #ffffff !important;
+  cursor: pointer;
+}
+
+.dew-radio {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid var(--dew-checkbox-border);
+  border-radius: 50%;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.dew-radio:hover {
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+.dew-radio:checked {
+  border-color: #ff6e00 !important;
+}
+
+.dew-radio:checked::after {
+  content: '';
+  width: 10px;
+  height: 10px;
+  background: #ff6e00 !important;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.dew-radio:focus-visible {
+  outline: 2px solid #ff6e00 !important;
+  outline-offset: 2px;
+}
+
+/* ---- NEWSLETTER ---- */
+.dew-newsletter-check {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+  margin-bottom: 24px;
+  margin-top: 6px;
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  color: #ffffff !important;
+  cursor: pointer;
+}
+
+/* ---- PRIVACY ---- */
+.dew-privacy-text {
+  font-family: var(--dew-font-body);
+  font-size: 11px;
+  color: var(--dew-text-muted);
+  text-align: center;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.dew-privacy-text a {
+  color: var(--dew-text-light);
+  text-decoration: underline;
+}
+
+/* =============================================
+   CALENDAR (Step 3)
+   ============================================= */
+.dew-calendar-container {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 620px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.dew-calendar-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 620px;
+  margin-bottom: 16px;
+}
+
+.dew-calendar-nav-btn {
+  background: transparent;
+  border: none;
+  color: var(--dew-text-white);
+  font-size: 20px;
+  cursor: pointer;
+  padding: 8px;
+  transition: opacity var(--dew-transition);
+}
+
+.dew-calendar-nav-btn:hover { opacity: 0.7; }
+
+.dew-calendar-month-title {
+  font-family: var(--dew-font-heading);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dew-text-white);
+  text-align: center;
+}
+
+.dew-calendar { flex: 1; }
+
+.dew-calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  margin-bottom: 8px;
+}
+
+.dew-calendar-day-label {
+  font-family: var(--dew-font-body);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--dew-text-muted);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 0;
+}
+
+.dew-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+}
+
+.dew-calendar-day {
+  font-family: var(--dew-font-body);
+  font-size: 13px;
+  color: var(--dew-text-white);
+  text-align: center;
+  padding: 8px 4px;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background var(--dew-transition);
+  position: relative;
+}
+
+.dew-calendar-day:hover { background: rgba(255, 255, 255, 0.1); }
+
+.dew-calendar-day.dew-empty { cursor: default; }
+.dew-calendar-day.dew-empty:hover { background: transparent; }
+
+.dew-calendar-day.dew-today {
+  background: #ff6e00;
+  border-radius: 50%;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.dew-calendar-day.dew-selected { background: rgba(255, 110, 0, 0.3); }
+.dew-calendar-day.dew-range { background: rgba(255, 110, 0, 0.2); }
+
+.dew-calendar-day.dew-range-start {
+  background: #ff6e00;
+  border-radius: 50% 0 0 50%;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.dew-calendar-day.dew-range-end {
+  background: #ff6e00;
+  border-radius: 0 50% 50% 0;
+  color: #ffffff !important;
+  font-weight: 700;
+}
+
+.dew-calendar-day.dew-past {
+  color: var(--dew-text-muted);
+  cursor: not-allowed;
+}
+
+.dew-calendar-day.dew-past:hover { background: transparent; }
+
+/* =============================================
+   REFERRAL (Step 6)
+   ============================================= */
+.dew-referral-section {
+  text-align: center;
+  margin-top: 16px;
+  margin-bottom: 160px;
+  width: 100%;
+  max-width: var(--dew-inner-w);
+}
+
+.dew-referral-heading {
+  font-family: var(--dew-font-heading);
+  font-size: 18px;
+  font-weight: 400;
+  color: #ffffff !important;
+  margin-bottom: 6px;
+}
+
+.dew-referral-optional {
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  color: #ff6e00 !important;
+  margin-bottom: 20px;
+}
+
+.dew-referral-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.dew-referral-btn {
+  padding: 14px 52px;
+  background: rgba(25, 22, 16, 0.20) !important;
+  border: 1.5px solid rgba(100, 90, 55, 0.35) !important;
+  border-radius: var(--dew-r);
+  color: #ffffff !important;
+  font-family: var(--dew-font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all var(--dew-transition);
+  min-width: 120px;
+}
+
+.dew-referral-btn:hover {
+  background: rgba(255, 110, 0, 0.25) !important;
+  border-color: rgba(255, 110, 0, 0.5) !important;
+}
+
+.dew-referral-btn.dew-active {
+  background: #ffffff !important;
+  color: #222222 !important;
+  border-color: #ff6e00 !important;
+  border-width: 2px;
+}
+
+/* =============================================
+   SUCCESS
+   ============================================= */
+.dew-success-message {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.dew-success-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+}
+
+.dew-success-heading {
+  font-family: var(--dew-font-heading);
+  font-size: 32px;
+  color: var(--dew-text-white);
+  margin-bottom: 16px;
+}
+
+.dew-success-text {
+  font-family: var(--dew-font-body);
+  font-size: 16px;
+  color: var(--dew-text-light);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 768px) {
+  .dew-heading {
+    font-size: 26px;
+    margin-bottom: 28px;
+  }
+
+  .dew-options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dew-step-container {
+    padding: 80px 12px 160px;
+    max-width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .dew-close-btn {
+    top: 14px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    font-size: 15px;
+  }
+
+  .dew-back-btn {
+    top: 18px;
+    left: 14px;
+    font-size: 11px;
+  }
+
+  .dew-calendar-container {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .dew-calendar-container > .dew-calendar:last-child {
+    display: none;
+  }
+
+  .dew-calendar-nav .dew-calendar-month-title + .dew-calendar-month-title {
+    display: none;
+  }
+
+  .dew-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .dew-radio-group {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .dew-next-btn,
+  .dew-skip-btn,
+  .dew-submit-btn {
+    width: 220px;
+  }
+
+  .dew-nav-area {
+    bottom: 30px;
+  }
+
+  .dew-referral-buttons {
+    flex-wrap: wrap;
+  }
+
+  .dew-referral-btn {
+    padding: 14px 32px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .dew-options-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dew-options-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dew-heading {
+    font-size: 22px;
+  }
+
+  .dew-step-container {
+    padding: 74px 10px 150px;
+  }
+
+  .dew-option-btn {
+    padding: 14px 10px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .dew-next-btn,
+  .dew-skip-btn,
+  .dew-submit-btn {
+    width: 180px;
+    font-size: 12px;
+  }
+
+  .dew-calendar-nav {
+    padding: 0 4px;
+  }
+
+  .dew-step-content {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .dew-form-group,
+  .dew-form-row,
+  .dew-phone-group,
+  .dew-checkbox-group,
+  .dew-radio-group,
+  .dew-textarea,
+  .dew-referral-section,
+  .dew-newsletter-check,
+  .dew-description,
+  .dew-options-grid,
+  .dew-option-fallback {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .dew-input,
+  .dew-textarea,
+  .dew-phone-input {
+    font-size: 16px !important;
+  }
+
+  .dew-textarea {
+    resize: none;
+  }
+
+  .dew-radio-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .dew-referral-section {
+    margin-bottom: 120px;
+  }
+}
+
+/* =============================================
+   FORCE WHITE TEXT - Nuclear override for WordPress/Nicepage
+   ============================================= */
+#enquiry-wizard-root,
+#enquiry-wizard-root *,
+.dew-overlay,
+.dew-overlay *,
+.dew-overlay h1,
+.dew-overlay h2,
+.dew-overlay h3,
+.dew-overlay h4,
+.dew-overlay h5,
+.dew-overlay h6,
+.dew-overlay p,
+.dew-overlay span,
+.dew-overlay div,
+.dew-overlay label,
+.dew-overlay a,
+.dew-overlay li,
+.dew-overlay td,
+.dew-overlay th,
+.dew-overlay input,
+.dew-overlay select,
+.dew-overlay textarea,
+.dew-overlay button,
+.dew-overlay .dew-heading,
+.dew-overlay .dew-subheading,
+.dew-overlay .dew-description,
+.dew-overlay .dew-option-btn,
+.dew-overlay .dew-checkbox-label,
+.dew-overlay .dew-radio-label,
+.dew-overlay .dew-radio-group-label,
+.dew-overlay .dew-newsletter-check,
+.dew-overlay .dew-phone-label,
+.dew-overlay .dew-phone-dropdown-item,
+.dew-overlay .dew-dd-name,
+.dew-overlay .dew-phone-code,
+.dew-overlay .dew-privacy-text,
+.dew-overlay .dew-calendar-month-title,
+.dew-overlay .dew-calendar-nav-btn,
+.dew-overlay .dew-calendar-day-label,
+.dew-overlay .dew-calendar-day,
+.dew-overlay .dew-back-btn,
+.dew-overlay .dew-close-btn,
+.dew-overlay .dew-skip-btn,
+.dew-overlay .dew-step-indicator {
+  color: #ffffff !important;
+}
+
+.dew-overlay .dew-subheading {
+  color: #ff6e00 !important;
+}
+
+.dew-overlay .dew-option-btn.dew-active,
+#enquiry-wizard-root .dew-overlay .dew-option-btn.dew-active,
+.dew-overlay .dew-option-fallback.dew-active,
+#enquiry-wizard-root .dew-overlay .dew-option-fallback.dew-active,
+.dew-overlay .dew-referral-btn.dew-active,
+#enquiry-wizard-root .dew-overlay .dew-referral-btn.dew-active {
+  color: #222222 !important;
+  background: #ffffff !important;
+  border-color: #ff6e00 !important;
+}
+
+.dew-overlay .dew-calendar-day.dew-disabled {
+  color: rgba(255,255,255,0.25) !important;
+}
+
+#enquiry-wizard-root .dew-overlay h2.dew-heading,
+#enquiry-wizard-root .dew-overlay .dew-heading,
+.dew-overlay h2.dew-heading,
+.dew-overlay .dew-heading {
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 32px !important;
+  font-weight: 400 !important;
+  color: #ffffff !important;
+  text-align: center !important;
+  margin-bottom: 44px !important;
+  line-height: 1.3 !important;
+  margin-top: 0 !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  padding: 0 !important;
+  border: none !important;
+  background: none !important;
+}
+
+</style>
+
+<script>
+/* =============================================
+   DT Enquiry Wizard - JavaScript
+   Wilderness Destinations Enquiry Wizard
+   
+   Component Structure:
+   - WizardApp (global state manager)
+   - WizardOverlay (full-screen overlay)
+   - StepRouter (renders correct step)
+   - Step components (one per step)
+   - OptionButton (reusable selectable button)
+   - NavigationControls (Back / Next / Skip / Submit)
+   - ProgressBar (bottom indicator)
+   ============================================= */
+
+(function () {
+  'use strict';
+
+  /* -----------------------------------------
+     CONFIGURATION
+     ----------------------------------------- */
+  var SUBMIT_ENDPOINT = 'https://wizard-inquiry.replit.app/submit';
+  var TOTAL_STEPS = 8;
+
+
+  function flagEmoji(iso) {
+    return iso.toUpperCase().replace(/./g, function(c) {
+      return String.fromCodePoint(0x1F1E6 - 65 + c.charCodeAt(0));
+    });
+  }
+
+  var COUNTRY_CODES = [
+    { code: '+44', iso: 'GB', name: 'United Kingdom' },
+    { code: '+49', iso: 'DE', name: 'Germany' },
+    { code: '+33', iso: 'FR', name: 'France' },
+    { code: '+31', iso: 'NL', name: 'Netherlands' },
+    { code: '+41', iso: 'CH', name: 'Switzerland' },
+    { code: '+39', iso: 'IT', name: 'Italy' },
+    { code: '+34', iso: 'ES', name: 'Spain' },
+    { code: '+351', iso: 'PT', name: 'Portugal' },
+    { code: '+43', iso: 'AT', name: 'Austria' },
+    { code: '+46', iso: 'SE', name: 'Sweden' },
+    { code: '+47', iso: 'NO', name: 'Norway' },
+    { code: '+45', iso: 'DK', name: 'Denmark' },
+    { code: '+32', iso: 'BE', name: 'Belgium' },
+    { code: '+353', iso: 'IE', name: 'Ireland' },
+    { code: '+48', iso: 'PL', name: 'Poland' },
+    { code: '+1', iso: 'US', name: 'United States' },
+    { code: '+61', iso: 'AU', name: 'Australia' },
+    { code: '+64', iso: 'NZ', name: 'New Zealand' },
+    { code: '+264', iso: 'NA', name: 'Namibia' },
+    { code: '+27', iso: 'ZA', name: 'South Africa' },
+    { code: '+267', iso: 'BW', name: 'Botswana' },
+    { code: '+260', iso: 'ZM', name: 'Zambia' },
+    { code: '+263', iso: 'ZW', name: 'Zimbabwe' },
+    { code: '+258', iso: 'MZ', name: 'Mozambique' },
+    { code: '+255', iso: 'TZ', name: 'Tanzania' },
+    { code: '+254', iso: 'KE', name: 'Kenya' },
+    { code: '+256', iso: 'UG', name: 'Uganda' },
+    { code: '+250', iso: 'RW', name: 'Rwanda' },
+    { code: '+261', iso: 'MG', name: 'Madagascar' },
+    { code: '+230', iso: 'MU', name: 'Mauritius' },
+    { code: '+20', iso: 'EG', name: 'Egypt' },
+    { code: '+234', iso: 'NG', name: 'Nigeria' },
+    { code: '+233', iso: 'GH', name: 'Ghana' },
+    { code: '+212', iso: 'MA', name: 'Morocco' },
+    { code: '+216', iso: 'TN', name: 'Tunisia' },
+    { code: '+86', iso: 'CN', name: 'China' },
+    { code: '+81', iso: 'JP', name: 'Japan' },
+    { code: '+91', iso: 'IN', name: 'India' },
+    { code: '+971', iso: 'AE', name: 'UAE' },
+    { code: '+966', iso: 'SA', name: 'Saudi Arabia' },
+    { code: '+55', iso: 'BR', name: 'Brazil' },
+    { code: '+52', iso: 'MX', name: 'Mexico' },
+    { code: '+7', iso: 'RU', name: 'Russia' },
+    { code: '+90', iso: 'TR', name: 'Turkey' },
+    { code: '+65', iso: 'SG', name: 'Singapore' },
+    { code: '+60', iso: 'MY', name: 'Malaysia' },
+    { code: '+66', iso: 'TH', name: 'Thailand' },
+    { code: '+82', iso: 'KR', name: 'South Korea' },
+    { code: '+852', iso: 'HK', name: 'Hong Kong' },
+    { code: '+63', iso: 'PH', name: 'Philippines' }
+  ];
+
+  function getCountryByCode(dialCode) {
+    for (var i = 0; i < COUNTRY_CODES.length; i++) {
+      if (COUNTRY_CODES[i].code === dialCode) return COUNTRY_CODES[i];
+    }
+    return COUNTRY_CODES[0];
+  }
+
+
+  /* -----------------------------------------
+     STEP DEFINITIONS
+     Step flow:
+     1 - Where would you like to travel? (country)
+     2 - What type of safari? (safari type)
+     3 - When would you like to travel? (timing choice)
+     4 - When would you like to travel? (calendar - only if "I know exactly when")
+     5 - Who are you travelling with? (companions)
+     6 - What is your travel budget per person? (budget)
+     7 - Tell us more about your trip (optional details)
+     8 - Where can we send your trip suggestions? (contact form)
+     ----------------------------------------- */
+
+  /* -----------------------------------------
+     STATE MODEL
+     ----------------------------------------- */
+  var state = {
+    currentStep: 1,
+    answers: {
+      country: null,
+      safariType: null,
+      travelTiming: null,
+      dateRangeStart: null,
+      dateRangeEnd: null,
+      travelCompanion: null,
+      isTradeAgent: false,
+      isMediaEnquiry: false,
+      budget: null,
+      tripDetails: '',
+      referred: null,
+      email: '',
+      firstName: '',
+      surname: '',
+      phoneCode: '+264',
+      phone: '',
+      contactPreference: 'email',
+      newsletter: false
+    },
+    stepHistory: [1]
+  };
+
+  var rootEl = null;
+  var overlayEl = null;
+
+  /* No URL manipulation - wizard is purely overlay-based */
+
+  /* -----------------------------------------
+     NAVIGATION
+     Handles step transitions, back/forward,
+     and URL synchronisation.
+     ----------------------------------------- */
+
+  function goToStep(step) {
+    state.currentStep = step;
+    if (state.stepHistory[state.stepHistory.length - 1] !== step) {
+      state.stepHistory.push(step);
+    }
+    render();
+  }
+
+  function goBack() {
+    if (state.stepHistory.length > 1) {
+      state.stepHistory.pop();
+      state.currentStep = state.stepHistory[state.stepHistory.length - 1];
+      render();
+    }
+  }
+
+  /* Determine the next step based on current step and answers */
+  function getNextStep(currentStep) {
+    /* Step 3 -> Step 4 only if "I know exactly when", else skip to Step 5 */
+    if (currentStep === 3) {
+      if (state.answers.travelTiming === 'exact') {
+        return 4;
+      }
+      return 5;
+    }
+    /* Step 4 (calendar) -> Step 5 */
+    if (currentStep === 4) {
+      return 5;
+    }
+    return currentStep + 1;
+  }
+
+  /* Handle Next button click */
+  function handleNext() {
+    var next = getNextStep(state.currentStep);
+    if (next <= TOTAL_STEPS) {
+      goToStep(next);
+    }
+  }
+
+  var OVERLAY_BG = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background-image:url(https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large-1.jpeg);background-size:cover;background-position:center center;background-repeat:no-repeat;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#ffffff;';
+  var DARK_LAYER_CSS = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(25, 22, 16, 0.45);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:0;pointer-events:none;';
+
+  function addDarkLayer() {
+    var darkLayer = document.createElement('div');
+    darkLayer.className = 'dew-dark-layer';
+    darkLayer.style.cssText = DARK_LAYER_CSS;
+    overlayEl.appendChild(darkLayer);
+  }
+
+  function closeWizard() {
+    state._wizardOpen = false;
+    if (overlayEl) {
+      overlayEl.style.cssText = 'display:none;' + OVERLAY_BG;
+      overlayEl.innerHTML = '';
+    }
+    if (rootEl) {
+      rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
+    }
+    var scrollY = document.body.style.top;
+    document.body.style.overflow = '';
+    document.body.style.overflowX = '';
+    document.body.style.position = '';
+    document.body.style.width = '';
+    document.body.style.top = '';
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.overflowX = '';
+    window.scrollTo(0, parseInt(scrollY || '0') * -1);
+  }
+
+  function openWizard() {
+    state._wizardOpen = true;
+    state.currentStep = 1;
+    state.stepHistory = [1];
+    state._submitted = false;
+    state._sourceUrl = window.location.href;
+    state._sourceTitle = document.title;
+    state._wizardStart = Date.now();
+    state._gclid = new URLSearchParams(window.location.search).get('gclid') || '';
+    if (overlayEl) {
+      if (rootEl) {
+        rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:visible;pointer-events:auto;';
+      }
+      document.body.style.overflow = 'hidden';
+      document.body.style.overflowX = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.width = '100%';
+      document.body.style.top = '-' + window.scrollY + 'px';
+      document.documentElement.style.overflow = 'hidden';
+      document.documentElement.style.overflowX = 'hidden';
+      overlayEl.style.cssText = 'display:flex;' + OVERLAY_BG;
+      overlayEl.innerHTML = '';
+      addDarkLayer();
+      render();
+      window.scrollTo(0, 0);
+    }
+  }
+
+  /* -----------------------------------------
+     OPTION BUTTON COMPONENT
+     Creates a selectable button that acts
+     like a radio button (single selection).
+     ----------------------------------------- */
+  function createOptionButton(text, value, currentValue, onClick, extraClass) {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = (extraClass || 'dew-option-btn') + (currentValue === value ? ' dew-active' : '');
+    btn.textContent = text;
+    btn.setAttribute('role', 'radio');
+    btn.setAttribute('aria-checked', currentValue === value ? 'true' : 'false');
+    btn.addEventListener('click', function () {
+      onClick(value);
+    });
+    return btn;
+  }
+
+  /* -----------------------------------------
+     PROGRESS BAR COMPONENT
+     Shows step progression at the bottom.
+     ----------------------------------------- */
+  function createProgressBar() {
+    var totalStepsForProgress = TOTAL_STEPS;
+    var progress = (state.currentStep / totalStepsForProgress) * 100;
+
+    var bar = document.createElement('div');
+    bar.className = 'dew-progress-bar';
+    var fill = document.createElement('div');
+    fill.className = 'dew-progress-fill';
+    fill.style.width = progress + '%';
+    bar.appendChild(fill);
+    return bar;
+  }
+
+  /* -----------------------------------------
+     NAVIGATION CONTROLS COMPONENT
+     ----------------------------------------- */
+  function createNavArea(options) {
+    var nav = document.createElement('div');
+    nav.className = 'dew-nav-area';
+
+    var btnsWrap = document.createElement('div');
+    btnsWrap.className = 'dew-nav-buttons';
+
+    if (options.showSkip) {
+      var skipBtn = document.createElement('button');
+      skipBtn.type = 'button';
+      skipBtn.className = 'dew-skip-btn';
+      skipBtn.innerHTML = 'SKIP &gt;';
+      skipBtn.addEventListener('click', function () {
+        if (options.onSkip) options.onSkip();
+        else handleNext();
+      });
+      btnsWrap.appendChild(skipBtn);
+    }
+
+    if (options.showNext) {
+      var nextBtn = document.createElement('button');
+      nextBtn.type = 'button';
+      nextBtn.className = 'dew-next-btn';
+      nextBtn.innerHTML = 'NEXT &gt;';
+      nextBtn.disabled = !!options.nextDisabled;
+      nextBtn.addEventListener('click', function () {
+        if (options.onNext) options.onNext();
+        else handleNext();
+      });
+      btnsWrap.appendChild(nextBtn);
+    }
+
+    if (options.showSubmit) {
+      var submitBtn = document.createElement('button');
+      submitBtn.type = 'button';
+      submitBtn.className = 'dew-submit-btn';
+      submitBtn.textContent = 'SUBMIT';
+      submitBtn.disabled = !!options.submitDisabled;
+      submitBtn.addEventListener('click', function () {
+        if (options.onSubmit) options.onSubmit();
+      });
+      btnsWrap.appendChild(submitBtn);
+    }
+
+    nav.appendChild(btnsWrap);
+
+    if (options.privacyText) {
+      var privacyEl = document.createElement('p');
+      privacyEl.className = 'dew-privacy-text';
+      privacyEl.innerHTML = 'All information provided will be processed by Desert Tracks in accordance with our <a href="#" target="_blank">privacy policy</a>.';
+      nav.appendChild(privacyEl);
+    }
+
+    var emailEl = document.createElement('p');
+    emailEl.style.cssText = 'margin:0 0 10px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;font-size:12px;color:rgba(255,255,255,0.55);text-align:center;letter-spacing:0.3px;';
+    emailEl.innerHTML = 'Prefer to email? <a href="mailto:bookings@desert-tracks.com" style="color:rgba(255,255,255,0.75);text-decoration:underline;">bookings@desert-tracks.com</a>';
+    nav.appendChild(emailEl);
+
+    nav.appendChild(createProgressBar());
+    return nav;
+  }
+
+  /* -----------------------------------------
+     CLOSE BUTTON COMPONENT
+     ----------------------------------------- */
+  function createCloseButton() {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dew-close-btn';
+    btn.innerHTML = '&#10005;';
+    btn.setAttribute('aria-label', 'Close enquiry wizard');
+    btn.addEventListener('click', closeWizard);
+    return btn;
+  }
+
+  /* -----------------------------------------
+     BACK BUTTON COMPONENT
+     ----------------------------------------- */
+  function createBackButton() {
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'dew-back-btn' + (state.currentStep === 1 ? ' dew-hidden' : '');
+    btn.innerHTML = '<span class="dew-back-arrow">&lsaquo;</span> BACK';
+    btn.addEventListener('click', goBack);
+    return btn;
+  }
+
+  /* -----------------------------------------
+     STEP 1: Where would you like to travel?
+     Country selection with 8 countries + fallback
+     ----------------------------------------- */
+  function renderStep1() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'Where would you like to travel?';
+    wrapper.appendChild(heading);
+
+    var countries = [
+      'Namibia', 'Botswana', 'Zimbabwe',
+      'South Africa', 'Tanzania', 'Kenya',
+      'Zambia', 'Rwanda'
+    ];
+
+    var grid = document.createElement('div');
+    grid.className = 'dew-options-grid';
+
+    countries.forEach(function (c) {
+      grid.appendChild(createOptionButton(c.toUpperCase(), c, state.answers.country, function (val) {
+        state.answers.country = val;
+        render();
+      }));
+    });
+
+    wrapper.appendChild(grid);
+
+    var fallback = createOptionButton("I HAVEN'T DECIDED YET", 'undecided', state.answers.country, function (val) {
+      state.answers.country = val;
+      render();
+    }, 'dew-option-fallback');
+    wrapper.appendChild(fallback);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        nextDisabled: !state.answers.country
+      }
+    };
+  }
+
+  /* -----------------------------------------
+     STEP 2: What type of safari?
+     Safari type selection (6 options)
+     ----------------------------------------- */
+  function renderStep2() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'What type of safari interests you?';
+    wrapper.appendChild(heading);
+
+    var safariTypes = [
+      'Self-Drive Safari', 'Guided Safari', 'Fly-In Safari',
+      'Luxury Safari', 'Family Safari', 'Honeymoon Safari'
+    ];
+
+    var grid = document.createElement('div');
+    grid.className = 'dew-options-grid';
+
+    safariTypes.forEach(function (s) {
+      grid.appendChild(createOptionButton(s.toUpperCase(), s, state.answers.safariType, function (val) {
+        state.answers.safariType = val;
+        render();
+      }));
+    });
+
+    wrapper.appendChild(grid);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        showSkip: true,
+        nextDisabled: !state.answers.safariType
+      }
+    };
+  }
+
+  /* -----------------------------------------
+     STEP 3: When would you like to travel?
+     Timing selection (3 options)
+     ----------------------------------------- */
+  function renderStep3() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'When would you like to travel?';
+    wrapper.appendChild(heading);
+
+    var options = [
+      { label: 'I KNOW EXACTLY WHEN', value: 'exact' },
+      { label: 'I HAVE A ROUGH IDEA', value: 'rough' },
+      { label: 'TELL ME WHEN IS BEST', value: 'flexible' }
+    ];
+
+    var list = document.createElement('div');
+    list.className = 'dew-options-list';
+
+    options.forEach(function (opt) {
+      list.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelTiming, function (val) {
+        state.answers.travelTiming = val;
+        render();
+      }));
+    });
+
+    wrapper.appendChild(list);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        nextDisabled: !state.answers.travelTiming
+      }
+    };
+  }
+
+  /* -----------------------------------------
+     STEP 4: Calendar date picker
+     Only shown when user selected "I know exactly when"
+     Two-month side-by-side calendar
+     ----------------------------------------- */
+  function renderStep4() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'When would you like to travel?';
+    wrapper.appendChild(heading);
+
+    var now = new Date();
+    var calendarBaseMonth = state._calendarMonth || now.getMonth();
+    var calendarBaseYear = state._calendarYear || now.getFullYear();
+
+    if (!state._calendarMonth && state._calendarMonth !== 0) {
+      state._calendarMonth = calendarBaseMonth;
+      state._calendarYear = calendarBaseYear;
+    }
+
+    var month1 = state._calendarMonth;
+    var year1 = state._calendarYear;
+    var month2 = month1 + 1;
+    var year2 = year1;
+    if (month2 > 11) {
+      month2 = 0;
+      year2 = year1 + 1;
+    }
+
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    var dayLabels = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+
+    var nav = document.createElement('div');
+    nav.className = 'dew-calendar-nav';
+
+    var prevBtn = document.createElement('button');
+    prevBtn.type = 'button';
+    prevBtn.className = 'dew-calendar-nav-btn';
+    prevBtn.innerHTML = '&lsaquo;';
+    prevBtn.addEventListener('click', function () {
+      state._calendarMonth--;
+      if (state._calendarMonth < 0) {
+        state._calendarMonth = 11;
+        state._calendarYear--;
+      }
+      render();
+    });
+
+    var title1 = document.createElement('span');
+    title1.className = 'dew-calendar-month-title';
+    title1.textContent = monthNames[month1] + ' ' + year1;
+
+    var title2 = document.createElement('span');
+    title2.className = 'dew-calendar-month-title';
+    title2.textContent = monthNames[month2] + ' ' + year2;
+
+    var nextBtn = document.createElement('button');
+    nextBtn.type = 'button';
+    nextBtn.className = 'dew-calendar-nav-btn';
+    nextBtn.innerHTML = '&rsaquo;';
+    nextBtn.addEventListener('click', function () {
+      state._calendarMonth++;
+      if (state._calendarMonth > 11) {
+        state._calendarMonth = 0;
+        state._calendarYear++;
+      }
+      render();
+    });
+
+    nav.appendChild(prevBtn);
+    nav.appendChild(title1);
+    nav.appendChild(title2);
+    nav.appendChild(nextBtn);
+    wrapper.appendChild(nav);
+
+    function buildMonth(month, year) {
+      var cal = document.createElement('div');
+      cal.className = 'dew-calendar';
+
+      var header = document.createElement('div');
+      header.className = 'dew-calendar-header';
+      dayLabels.forEach(function (d) {
+        var lbl = document.createElement('div');
+        lbl.className = 'dew-calendar-day-label';
+        lbl.textContent = d;
+        header.appendChild(lbl);
+      });
+      cal.appendChild(header);
+
+      var grid = document.createElement('div');
+      grid.className = 'dew-calendar-grid';
+
+      var firstDay = new Date(year, month, 1).getDay();
+      var startOffset = firstDay === 0 ? 6 : firstDay - 1;
+      var daysInMonth = new Date(year, month + 1, 0).getDate();
+      var today = new Date();
+
+      for (var i = 0; i < startOffset; i++) {
+        var empty = document.createElement('div');
+        empty.className = 'dew-calendar-day dew-empty';
+        grid.appendChild(empty);
+      }
+
+      for (var d = 1; d <= daysInMonth; d++) {
+        var dayEl = document.createElement('div');
+        dayEl.className = 'dew-calendar-day';
+        dayEl.textContent = d;
+
+        var thisDate = new Date(year, month, d);
+
+        if (thisDate.toDateString() === today.toDateString()) {
+          dayEl.classList.add('dew-today');
+        }
+
+        if (thisDate < new Date(today.getFullYear(), today.getMonth(), today.getDate())) {
+          dayEl.classList.add('dew-past');
+        } else {
+          (function (date) {
+            dayEl.addEventListener('click', function () {
+              handleDateClick(date);
+            });
+          })(thisDate);
+        }
+
+        if (state.answers.dateRangeStart && state.answers.dateRangeEnd) {
+          var start = new Date(state.answers.dateRangeStart);
+          var end = new Date(state.answers.dateRangeEnd);
+          if (thisDate.toDateString() === start.toDateString()) {
+            dayEl.classList.add('dew-range-start');
+          } else if (thisDate.toDateString() === end.toDateString()) {
+            dayEl.classList.add('dew-range-end');
+          } else if (thisDate > start && thisDate < end) {
+            dayEl.classList.add('dew-range');
+          }
+        } else if (state.answers.dateRangeStart) {
+          var s = new Date(state.answers.dateRangeStart);
+          if (thisDate.toDateString() === s.toDateString()) {
+            dayEl.classList.add('dew-range-start');
+          }
+        }
+
+        grid.appendChild(dayEl);
+      }
+
+      cal.appendChild(grid);
+      return cal;
+    }
+
+    var container = document.createElement('div');
+    container.className = 'dew-calendar-container';
+    container.appendChild(buildMonth(month1, year1));
+    container.appendChild(buildMonth(month2, year2));
+    wrapper.appendChild(container);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        nextDisabled: !state.answers.dateRangeStart
+      }
+    };
+  }
+
+  function handleDateClick(date) {
+    if (!state.answers.dateRangeStart || (state.answers.dateRangeStart && state.answers.dateRangeEnd)) {
+      state.answers.dateRangeStart = date.toISOString();
+      state.answers.dateRangeEnd = null;
+    } else {
+      var start = new Date(state.answers.dateRangeStart);
+      if (date < start) {
+        state.answers.dateRangeStart = date.toISOString();
+      } else {
+        state.answers.dateRangeEnd = date.toISOString();
+      }
+    }
+    render();
+  }
+
+  /* -----------------------------------------
+     STEP 5: Who are you travelling with?
+     Companion selection + checkboxes
+     ----------------------------------------- */
+  function renderStep5() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'Who are you travelling with?';
+    wrapper.appendChild(heading);
+
+    var options = [
+      { label: 'COUPLE', value: 'couple' },
+      { label: 'SOLO', value: 'solo' },
+      { label: 'FAMILY', value: 'family' },
+      { label: 'FRIENDS', value: 'friends' }
+    ];
+
+    var grid = document.createElement('div');
+    grid.className = 'dew-options-row';
+
+    options.forEach(function (opt) {
+      grid.appendChild(createOptionButton(opt.label, opt.value, state.answers.travelCompanion, function (val) {
+        state.answers.travelCompanion = val;
+        render();
+      }));
+    });
+
+    wrapper.appendChild(grid);
+
+    var checkGroup = document.createElement('div');
+    checkGroup.className = 'dew-checkbox-group';
+
+    var tradeLabel = document.createElement('label');
+    tradeLabel.className = 'dew-checkbox-label';
+    var tradeCheck = document.createElement('input');
+    tradeCheck.type = 'checkbox';
+    tradeCheck.className = 'dew-checkbox';
+    tradeCheck.checked = state.answers.isTradeAgent;
+    tradeCheck.addEventListener('change', function () {
+      state.answers.isTradeAgent = this.checked;
+    });
+    tradeLabel.appendChild(tradeCheck);
+    tradeLabel.appendChild(document.createTextNode("I'm a trade agent enquiring for someone else"));
+    checkGroup.appendChild(tradeLabel);
+
+    wrapper.appendChild(checkGroup);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        nextDisabled: !state.answers.travelCompanion
+      }
+    };
+  }
+
+  /* -----------------------------------------
+     STEP 6: What is your travel budget per person?
+     Budget selection (4 options)
+     ----------------------------------------- */
+  function renderStep6() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'What is your travel budget per person?';
+    wrapper.appendChild(heading);
+
+    var options = [
+      { label: 'USD 3K - 7.5K', value: '3k-7.5k' },
+      { label: 'USD 7.5K - 10K', value: '7.5k-10k' },
+      { label: 'USD 10K - 20K', value: '10k-20k' },
+      { label: 'USD 20K - 40K', value: '20k-40k' }
+    ];
+
+    var list = document.createElement('div');
+    list.className = 'dew-options-list';
+
+    options.forEach(function (opt) {
+      list.appendChild(createOptionButton(opt.label, opt.value, state.answers.budget, function (val) {
+        state.answers.budget = val;
+        render();
+      }));
+    });
+
+    wrapper.appendChild(list);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        nextDisabled: !state.answers.budget
+      }
+    };
+  }
+
+  /* -----------------------------------------
+     STEP 7: Tell us more about your trip
+     Optional text area + referral question
+     ----------------------------------------- */
+  function renderStep7() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'Tell us more about your trip*';
+    wrapper.appendChild(heading);
+
+    var optional = document.createElement('p');
+    optional.className = 'dew-subheading';
+    optional.textContent = '* Optional';
+    wrapper.appendChild(optional);
+
+    var textarea = document.createElement('textarea');
+    textarea.className = 'dew-textarea';
+    textarea.placeholder = 'ARE YOU TRAVELING FOR A SPECIFIC PURPOSE, IS THERE ANYTHING SPECIFIC YOU WOULD LIKE TO EXPERIENCE ETC...';
+    textarea.value = state.answers.tripDetails;
+    textarea.addEventListener('input', function () {
+      state.answers.tripDetails = this.value;
+    });
+    wrapper.appendChild(textarea);
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showNext: true,
+        showSkip: true,
+        nextDisabled: false,
+        onSkip: function () { handleNext(); }
+      }
+    };
+  }
+
+  /* -----------------------------------------
+     STEP 8: Contact form
+     Where can we send your trip suggestions?
+     ----------------------------------------- */
+  function renderStep8() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'Where can we send your trip suggestions?';
+    wrapper.appendChild(heading);
+
+    var desc = document.createElement('p');
+    desc.className = 'dew-description';
+    desc.textContent = 'Our expert Travel Designers will contact you to design your bespoke journey.';
+    wrapper.appendChild(desc);
+
+    var honeypot = document.createElement('input');
+    honeypot.type = 'text';
+    honeypot.name = 'website';
+    honeypot.autocomplete = 'off';
+    honeypot.style.cssText = 'position:absolute;left:-9999px;top:-9999px;opacity:0;height:0;width:0;pointer-events:none;';
+    honeypot.tabIndex = -1;
+    honeypot.addEventListener('input', function() { state._honeypot = this.value; });
+    wrapper.appendChild(honeypot);
+
+    var emailGroup = document.createElement('div');
+    emailGroup.className = 'dew-form-group';
+    var emailInput = document.createElement('input');
+    emailInput.type = 'email';
+    emailInput.className = 'dew-input';
+    emailInput.placeholder = 'EMAIL ADDRESS';
+    emailInput.value = state.answers.email;
+    emailInput.addEventListener('input', function () {
+      state.answers.email = this.value;
+      updateSubmitState();
+    });
+    emailGroup.appendChild(emailInput);
+    wrapper.appendChild(emailGroup);
+
+    var nameRow = document.createElement('div');
+    nameRow.className = 'dew-form-row';
+
+    var fnInput = document.createElement('input');
+    fnInput.type = 'text';
+    fnInput.className = 'dew-input';
+    fnInput.placeholder = 'FIRST NAME';
+    fnInput.value = state.answers.firstName;
+    fnInput.addEventListener('input', function () {
+      state.answers.firstName = this.value;
+      updateSubmitState();
+    });
+    nameRow.appendChild(fnInput);
+
+    var snInput = document.createElement('input');
+    snInput.type = 'text';
+    snInput.className = 'dew-input';
+    snInput.placeholder = 'SURNAME';
+    snInput.value = state.answers.surname;
+    snInput.addEventListener('input', function () {
+      state.answers.surname = this.value;
+      updateSubmitState();
+    });
+    nameRow.appendChild(snInput);
+    wrapper.appendChild(nameRow);
+
+    var phoneGroup = document.createElement('div');
+    phoneGroup.className = 'dew-phone-group';
+
+    var currentCountry = getCountryByCode(state.answers.phoneCode);
+
+    var flagEl = document.createElement('div');
+    flagEl.className = 'dew-phone-flag';
+    flagEl.style.cursor = 'pointer';
+    var flagIcon = document.createElement('span');
+    flagIcon.className = 'dew-phone-flag-icon';
+    flagIcon.textContent = flagEmoji(currentCountry.iso);
+    flagEl.appendChild(flagIcon);
+    var flagArrow = document.createElement('span');
+    flagArrow.className = 'dew-phone-flag-arrow';
+    flagArrow.textContent = '\u25BC';
+    flagEl.appendChild(flagArrow);
+    phoneGroup.appendChild(flagEl);
+
+    var dropdown = document.createElement('div');
+    dropdown.className = 'dew-phone-dropdown';
+    dropdown.style.display = 'none';
+    COUNTRY_CODES.forEach(function (c) {
+      var row = document.createElement('div');
+      row.className = 'dew-phone-dropdown-item';
+      if (c.code === state.answers.phoneCode) row.classList.add('dew-selected');
+      row.innerHTML = '<span class="dew-dd-flag">' + flagEmoji(c.iso) + '</span><span class="dew-dd-name">' + c.name + '</span><span class="dew-dd-code">' + c.code + '</span>';
+      row.addEventListener('click', function (e) {
+        e.stopPropagation();
+        state.answers.phoneCode = c.code;
+        flagIcon.textContent = flagEmoji(c.iso);
+        codeDisplay.textContent = c.code;
+        dropdown.style.display = 'none';
+        dropdown.querySelectorAll('.dew-phone-dropdown-item').forEach(function (r) { r.classList.remove('dew-selected'); });
+        row.classList.add('dew-selected');
+      });
+      dropdown.appendChild(row);
+    });
+    phoneGroup.appendChild(dropdown);
+
+    flagEl.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    });
+    phoneGroup.addEventListener('click', function (e) { e.stopPropagation(); });
+    var closeDropdown = function () { dropdown.style.display = 'none'; };
+    document.removeEventListener('click', window._dewClosePhoneDD);
+    window._dewClosePhoneDD = closeDropdown;
+    document.addEventListener('click', closeDropdown);
+
+    var phoneWrap = document.createElement('div');
+    phoneWrap.className = 'dew-phone-input-wrap';
+    var phoneLabel = document.createElement('div');
+    phoneLabel.className = 'dew-phone-label';
+    phoneLabel.textContent = 'Phone number';
+    phoneWrap.appendChild(phoneLabel);
+    var phoneBottom = document.createElement('div');
+    phoneBottom.className = 'dew-phone-bottom';
+    var codeDisplay = document.createElement('span');
+    codeDisplay.className = 'dew-phone-code';
+    codeDisplay.textContent = state.answers.phoneCode;
+    phoneBottom.appendChild(codeDisplay);
+    var phoneInput = document.createElement('input');
+    phoneInput.type = 'tel';
+    phoneInput.className = 'dew-phone-input';
+    phoneInput.placeholder = '';
+    phoneInput.value = state.answers.phone;
+    phoneInput.addEventListener('input', function () {
+      state.answers.phone = this.value;
+    });
+    phoneBottom.appendChild(phoneInput);
+    phoneWrap.appendChild(phoneBottom);
+    phoneGroup.appendChild(phoneWrap);
+    wrapper.appendChild(phoneGroup);
+
+    var radioGroup = document.createElement('div');
+    radioGroup.className = 'dew-radio-group';
+
+    var radioLabel = document.createElement('span');
+    radioLabel.className = 'dew-radio-group-label';
+    radioLabel.textContent = 'Preferred method of contact';
+    radioGroup.appendChild(radioLabel);
+
+    ['Email', 'Phone', 'Video'].forEach(function (method) {
+      var label = document.createElement('label');
+      label.className = 'dew-radio-label';
+      var radio = document.createElement('input');
+      radio.type = 'radio';
+      radio.name = 'dew-contact-pref';
+      radio.className = 'dew-radio';
+      radio.value = method.toLowerCase();
+      radio.checked = state.answers.contactPreference === method.toLowerCase();
+      radio.addEventListener('change', function () {
+        state.answers.contactPreference = this.value;
+      });
+      label.appendChild(radio);
+      label.appendChild(document.createTextNode(method));
+      radioGroup.appendChild(label);
+    });
+
+    wrapper.appendChild(radioGroup);
+
+    var newsLabel = document.createElement('label');
+    newsLabel.className = 'dew-newsletter-check';
+    var newsCheck = document.createElement('input');
+    newsCheck.type = 'checkbox';
+    newsCheck.className = 'dew-checkbox';
+    newsCheck.checked = state.answers.newsletter;
+    newsCheck.addEventListener('change', function () {
+      state.answers.newsletter = this.checked;
+    });
+    newsLabel.appendChild(newsCheck);
+    newsLabel.appendChild(document.createTextNode('I would like to receive the latest news from Desert Tracks'));
+    wrapper.appendChild(newsLabel);
+
+    var submitDisabled = !state.answers.email || !state.answers.firstName || !state.answers.surname;
+
+    return {
+      content: wrapper,
+      navOptions: {
+        showSubmit: true,
+        submitDisabled: submitDisabled,
+        onSubmit: handleSubmit,
+        privacyText: false
+      }
+    };
+  }
+
+  var submitBtnEl = null;
+
+  function updateSubmitState() {
+    if (submitBtnEl) {
+      submitBtnEl.disabled = !state.answers.email || !state.answers.firstName || !state.answers.surname;
+    }
+  }
+
+  /* -----------------------------------------
+     SUCCESS / THANK YOU SCREEN
+     ----------------------------------------- */
+  function renderSuccess() {
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dew-step-content';
+
+    var success = document.createElement('div');
+    success.className = 'dew-success-message';
+
+    var icon = document.createElement('div');
+    icon.className = 'dew-success-icon';
+    icon.textContent = '\u2713';
+    success.appendChild(icon);
+
+    var heading = document.createElement('h2');
+    heading.className = 'dew-success-heading';
+    heading.style.color = '#ffffff';
+    heading.textContent = 'Thank you for your enquiry!';
+    success.appendChild(heading);
+
+    var text = document.createElement('p');
+    text.className = 'dew-success-text';
+    text.style.color = 'rgba(255,255,255,0.85)';
+    text.textContent = 'One of our expert Travel Designers will be in touch with you shortly to help design your bespoke journey.';
+    success.appendChild(text);
+
+    wrapper.appendChild(success);
+
+    return {
+      content: wrapper,
+      navOptions: {}
+    };
+  }
+
+  /* -----------------------------------------
+     FORM SUBMISSION
+     Sends data via fetch() to the configured
+     endpoint. No page reload.
+     ----------------------------------------- */
+  function handleSubmit() {
+    if (!state.answers.email || !state.answers.firstName || !state.answers.surname) {
+      return;
+    }
+
+    if (state._honeypot) {
+      console.log('DT Wizard: bot detected (honeypot filled)');
+      state._submitted = true;
+      render();
+      return;
+    }
+
+    var elapsed = Date.now() - (state._wizardStart || Date.now());
+    if (elapsed < 5000) {
+      console.log('DT Wizard: bot detected (submitted too fast)');
+      state._submitted = true;
+      render();
+      return;
+    }
+
+    var payload = {
+      sourceUrl: state._sourceUrl || window.location.href,
+      sourcePageTitle: state._sourceTitle || document.title,
+      country: state.answers.country,
+      safariType: state.answers.safariType,
+      travelTiming: state.answers.travelTiming,
+      dateRangeStart: state.answers.dateRangeStart ? new Date(state.answers.dateRangeStart).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null,
+      dateRangeEnd: state.answers.dateRangeEnd ? new Date(state.answers.dateRangeEnd).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) : null,
+      travelCompanion: state.answers.travelCompanion,
+      isTradeAgent: state.answers.isTradeAgent,
+      isMediaEnquiry: state.answers.isMediaEnquiry,
+      budget: state.answers.budget,
+      tripDetails: state.answers.tripDetails,
+      referred: state.answers.referred,
+      email: state.answers.email,
+      firstName: state.answers.firstName,
+      surname: state.answers.surname,
+      phone: state.answers.phoneCode + ' ' + state.answers.phone,
+      contactPreference: state.answers.contactPreference,
+      newsletter: state.answers.newsletter,
+      gclid: state._gclid || '',
+      source: state._gclid ? 'Google Ads' : 'Direct / Organic'
+    };
+
+    state._submitted = true;
+    render();
+
+    fetch(SUBMIT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).catch(function (err) {
+      console.warn('DT Enquiry Wizard: Submission endpoint not available.', err);
+    });
+
+    var leadScore = 0;
+
+    if (state.answers.budget === '20k-40k') leadScore += 6;
+    else if (state.answers.budget === '10k-20k') leadScore += 4;
+    else if (state.answers.budget === '7.5k-10k') leadScore += 2;
+
+    if (state.answers.safariType === 'Fly-In Safari') leadScore += 3;
+    if (state.answers.safariType === 'Luxury Safari') leadScore += 3;
+
+    if (state.answers.travelCompanion === 'couple') leadScore += 2;
+    if (state.answers.travelCompanion === 'family') leadScore += 1;
+
+    if (state.answers.isTradeAgent) leadScore += 3;
+
+    if (state.answers.travelTiming === 'exact') leadScore += 1;
+
+    if (state.answers.country === 'Botswana' || state.answers.country === 'Namibia' || state.answers.country === 'Rwanda') leadScore += 2;
+
+    if (state.answers.tripDetails && state.answers.tripDetails.length > 300) leadScore += 2;
+    else if (state.answers.tripDetails && state.answers.tripDetails.length > 100) leadScore += 1;
+
+    if (state.answers.newsletter) leadScore += 1;
+    if (state.answers.phone && state.answers.phone.length > 5) leadScore += 1;
+
+    var completionSeconds = Math.round((Date.now() - (state._wizardStart || Date.now())) / 1000);
+    var deviceType = /Mobi|Android/i.test(navigator.userAgent) ? 'mobile' : 'desktop';
+
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'wizard_enquiry_submitted',
+      'lead_score': leadScore,
+      'enhanced_conversion_data': {
+        'email': (state.answers.email || '').trim().toLowerCase(),
+        'first_name': state.answers.firstName,
+        'last_name': state.answers.surname,
+        'phone_number': ((state.answers.phoneCode || '') + (state.answers.phone || '')).replace(/\s/g, '')
+      },
+      'safari_country': state.answers.country,
+      'safari_budget': state.answers.budget,
+      'safari_type': state.answers.safariType,
+      'travel_companion': state.answers.travelCompanion,
+      'completion_time_seconds': completionSeconds,
+      'device_type': deviceType,
+      'gclid': state._gclid || '',
+      'estimated_value': (function() { var v = 0; if (state.answers.budget === '3k-7.5k') v = 5000; if (state.answers.budget === '7.5k-10k') v = 8500; if (state.answers.budget === '10k-20k') v = 15000; if (state.answers.budget === '20k-40k') v = 30000; return v; })()
+    });
+
+    var estimatedValue = 0;
+    if (state.answers.budget === '3k-7.5k') estimatedValue = 5000;
+    if (state.answers.budget === '7.5k-10k') estimatedValue = 8500;
+    if (state.answers.budget === '10k-20k') estimatedValue = 15000;
+    if (state.answers.budget === '20k-40k') estimatedValue = 30000;
+
+    if (typeof gtag === 'function') {
+      gtag('set', 'user_data', {
+        'email': (state.answers.email || '').trim().toLowerCase(),
+        'phone_number': ((state.answers.phoneCode || '') + (state.answers.phone || '')).replace(/\s/g, ''),
+        'address': {
+          'first_name': state.answers.firstName,
+          'last_name': state.answers.surname
+        }
+      });
+      gtag('event', 'conversion', {
+        'send_to': 'AW-10780198601/NUe-CPSfz_4bEMmNs5Qo',
+        'value': estimatedValue || leadScore,
+        'currency': 'USD'
+      });
+    }
+    console.log('DT Wizard: conversion fired - leadScore=' + leadScore + ' estimatedValue=$' + estimatedValue + ' budget=' + state.answers.budget + ' gclid=' + (state._gclid || 'none'));
+  }
+
+  /* -----------------------------------------
+     STEP ROUTER
+     Determines which step component to render
+     based on the current step number.
+     ----------------------------------------- */
+  function routeStep() {
+    if (state._submitted) {
+      return renderSuccess();
+    }
+
+    switch (state.currentStep) {
+      case 1: return renderStep1();
+      case 2: return renderStep2();
+      case 3: return renderStep3();
+      case 4: return renderStep4();
+      case 5: return renderStep5();
+      case 6: return renderStep6();
+      case 7: return renderStep7();
+      case 8: return renderStep8();
+      default: return renderStep1();
+    }
+  }
+
+  /* -----------------------------------------
+     MAIN RENDER
+     Clears and rebuilds the overlay content
+     based on current state.
+     ----------------------------------------- */
+  function render() {
+    if (!overlayEl) return;
+
+    overlayEl.innerHTML = '';
+    addDarkLayer();
+
+    overlayEl.appendChild(createCloseButton());
+    overlayEl.appendChild(createBackButton());
+
+    var container = document.createElement('div');
+    container.className = 'dew-step-container';
+
+    var stepResult = routeStep();
+    container.appendChild(stepResult.content);
+
+    overlayEl.appendChild(container);
+
+    if (stepResult.navOptions && (stepResult.navOptions.showNext || stepResult.navOptions.showSubmit || stepResult.navOptions.showSkip)) {
+      var navArea = createNavArea(stepResult.navOptions);
+      container.appendChild(navArea);
+
+      submitBtnEl = navArea.querySelector('.dew-submit-btn');
+    } else if (!state._submitted) {
+      var progressOnly = document.createElement('div');
+      progressOnly.className = 'dew-nav-area';
+      progressOnly.appendChild(createProgressBar());
+      container.appendChild(progressOnly);
+    }
+  }
+
+  /* -----------------------------------------
+     WIZARD APP INIT
+     Mounts the wizard to #enquiry-wizard-root.
+     ----------------------------------------- */
+  function init() {
+    rootEl = document.getElementById('enquiry-wizard-root');
+    if (!rootEl) return;
+
+    rootEl.style.cssText = 'position:absolute;width:0;height:0;overflow:hidden;pointer-events:none;';
+
+    overlayEl = document.createElement('div');
+    overlayEl.className = 'dew-overlay';
+    overlayEl.style.cssText = 'display:none;' + OVERLAY_BG;
+    addDarkLayer();
+    rootEl.appendChild(overlayEl);
+
+    function handleTrigger(e) {
+      if (state._wizardOpen) return;
+
+      var el = e.target.closest('[data-enquiry-trigger], .enquiry-trigger, .dt-enquiry-open, .dt-enquire, .inq');
+      if (el) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        openWizard();
+        return false;
+      }
+
+      var link = e.target.closest('a, button, div');
+      if (link) {
+        var text = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+        if (text === 'enquire now' || text === 'enquiry now' || text === 'enquire' || text === 'make an enquiry' || text === 'start your journey' || text === 'contact') {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          openWizard();
+          return false;
+        }
+        var href = link.getAttribute ? (link.getAttribute('href') || '') : '';
+        if (href.indexOf('desert-tracks-contact') !== -1) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          openWizard();
+          return false;
+        }
+      }
+    }
+
+    document.addEventListener('click', handleTrigger, true);
+    document.addEventListener('touchstart', handleTrigger, { capture: true, passive: false });
+
+    window.dtEnquiryWizard = { open: openWizard, close: closeWizard };
+  }
+
+  /* Mount when DOM is ready */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+
+</script>

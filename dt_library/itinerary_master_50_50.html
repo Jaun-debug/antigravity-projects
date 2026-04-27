@@ -27,12 +27,13 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            margin-bottom: -150px !important; /* Forces Nicepage outer wrapper to brutally swallow the white gap */
+            margin-bottom: -60px !important; /* Pull up footer to swallow mobile gap */
         }
 
         @media (min-width: 1024px) {
             .lux-container {
                 flex-direction: row;
+                margin-bottom: -80px !important; /* Fixed overshoot on desktop */
             }
         }
 
@@ -911,7 +912,7 @@
         /* Highlights Section */
         .lux-highlights-section {
             margin-top: 5rem;
-            margin-bottom: 5rem;
+            margin-bottom: 1rem;
         }
         .lux-highlights-title {
             font-family: 'Cinzel', serif;
@@ -979,7 +980,7 @@
             left: 0;
             width: 100%;
             height: 115px;
-            background: rgba(245, 245, 243, 0.95);
+            background: rgba(200, 95, 25, 0.95);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             z-index: 2147483647 !important; /* Maximum z-index to paint over the main WP header */
@@ -1029,7 +1030,7 @@
         .lux-sticky-title-main {
             font-family: 'Cinzel', serif;
             font-size: 2.2rem;
-            color: #1F4F4B;
+            color: #ffffff;
             font-weight: 400;
             line-height: 1;
             margin: 0;
@@ -1038,7 +1039,7 @@
             font-family: 'Cinzel', serif;
             font-style: italic;
             font-size: 1.3rem;
-            color: #1F4F4B;
+            color: rgba(255, 255, 255, 0.9);
             text-transform: none;
             letter-spacing: 0;
             margin: 2px 0 0 0;
@@ -1048,17 +1049,27 @@
             font-family: 'Open Sans', 'Helvetica', sans-serif;
             font-size: 11px;
             font-weight: 500;
-            /* text-transform: uppercase; */
             letter-spacing: 3px;
-            color: #fff !important;
+            color: #ffffff !important;
+            text-transform: uppercase;
             text-decoration: none !important;
-            background: #8CBEAA;
+            background: rgba(200, 95, 25, 0.95);
+            border: 1px solid #ffffff;
             padding: 12px 28px;
             border-radius: 4px;
             transition: background 0.3s ease;
         }
         .lux-sticky-cta:hover {
-            background: #78A593;
+            background: rgba(170, 75, 20, 0.95);
+            color: #ffffff !important;
+        }
+        @media (max-width: 768px) {
+            .lux-hero-content {
+                padding: 25px 15px !important;
+                border-radius: 12px !important;
+                width: 80% !important;
+                max-width: 80% !important;
+            }
         }
     </style>
 </head>
@@ -1067,8 +1078,8 @@
 <!-- DESKTOP STICKY HEADER -->
 <div class="lux-sticky-header">
     <div class="lux-sticky-title-box">
-        <h3 class="lux-sticky-title-main">Book Your</h3>
-        <span class="lux-sticky-title-sub">11-Day Safari</span>
+        <h3 class="lux-sticky-title-main" style="text-transform: uppercase;">BOOK <span style="text-transform: lowercase; font-style: italic;">your</span></h3>
+        <span class="lux-sticky-title-sub" style="font-style: normal; text-transform: uppercase;">11-DAY SAFARI</span>
     </div>
     <a href="https://desert-tracks.com/safari-booking/" class="lux-sticky-cta">Enquire Now</a>
 </div>
@@ -1276,7 +1287,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div id="lux-bg-top" class="lux-bg-layer"></div>
         <div class="lux-overlay"></div>
         
-        <div class="lux-hero-content" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="lux-hero-content" style="display: flex; flex-direction: column; align-items: center; padding: 40px 30px; background: rgba(20, 18, 15, 0.45); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
             <a href="https://desert-tracks.com/safari-booking/" style="display: inline-block; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 3px; color: #fff !important; text-decoration: none !important; border: 1px solid transparent; padding: 12px 28px; border-radius: 4px; transition: all 0.3s ease; background: #AE8245;" onmouseover="this.style.background='#9B723B';" onmouseout="this.style.background='#AE8245';">Enquire Now</a>
             <div style="margin-top: 14px;">
                 <span style="font-family: 'Inter', sans-serif; font-weight: 300; letter-spacing: 1px; font-size: 0.95rem; color: #fff;">From N$52,300 <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; margin-left: 2px;">per person sharing</span></span>
@@ -1823,10 +1834,11 @@ document.addEventListener("DOMContentLoaded", () => {
             transform: translateY(40px);
             filter: blur(6px);
             will-change: opacity, transform, filter;
-            background: #8CBEAA !important;
+            background: rgba(200, 95, 25, 0.95) !important;
+            border-radius: 10px !important;
         }
         .dt-cin-cta:hover {
-            background: #78A593 !important;
+            background: rgba(170, 75, 20, 0.95) !important;
             border-color: transparent !important;
             color: #ffffff !important;
         }
@@ -1881,14 +1893,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     gsap.set([eyebrow,title,desc,cta],{opacity:0,y:35,filter:'blur(5px)'});
                     var tl=gsap.timeline({
-                        scrollTrigger:{trigger:hero,start:'top 50%',end:'bottom 10%',scrub:1.5}
+                        scrollTrigger:{
+                            trigger:hero,
+                            start: mob ? 'top 85%' : 'top 65%',
+                            toggleActions: 'play none none none'
+                        }
                     });
-                    tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4})
-                      .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-                      .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=3')
-                      .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power1.out',duration:4},'-=2.8')
-                      .to([eyebrow,title,desc,cta],{opacity:1,ease:'none',duration:3})
-                      .to([eyebrow,title,desc,cta],{opacity:0,y:-18,filter:'blur(4px)',ease:'power1.in',duration:3});
+                    tl.to(eyebrow,{opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1})
+                      .to(title,  {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1},'-=0.7')
+                      .to(desc,   {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1},'-=0.7')
+                      .to(cta,    {opacity:1,y:0,filter:'blur(0px)',ease:'power2.out',duration:1},'-=0.7');
                 });
             }
             if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initCinematicHeroes);}
@@ -2228,8 +2242,8 @@ document.addEventListener("DOMContentLoaded", () => {
 </script>
 
 
-<div id="lux-back-to-top" style="position: fixed; bottom: 10vh; right: 4vw; z-index: 99999; background: #1F4F4B; color: #fff; padding: 12px 24px; border-radius: 4px; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.35);" onmouseover="this.style.background='#163B38';" onmouseout="this.style.background='#1F4F4B';">
-    Take Me Back To Top
+<div id="lux-back-to-top" style="position: fixed; bottom: 10vh; right: 4vw; z-index: 99999; background: rgba(200, 95, 25, 0.95); color: #fff; padding: 12px 24px; border-radius: 4px; font-family: 'Open Sans', 'Helvetica', sans-serif; font-size: 11px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; opacity: 0; transform: translateY(20px); pointer-events: none; transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), background 0.3s ease; box-shadow: 0 4px 20px rgba(0,0,0,0.35);" onmouseover="this.style.background='rgba(170, 75, 20, 0.95)';" onmouseout="this.style.background='rgba(200, 95, 25, 0.95)';">
+    Back To Top
 </div>
 </body>
 </html>
