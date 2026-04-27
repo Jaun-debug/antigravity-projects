@@ -1,321 +1,351 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desert Tracks - Itinerary Carousel</title>
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    
-    <style data-no-optimize="1">
-        :root {
-            --primary-bg: #F5F5F3; /* Luxury Ivory Background */
-            --dt-orange: #C9A24A; /* Luxury Gold */
-            --dt-dark: #123631; /* Deep Typography Green */
-            --font-head: 'Cinzel', serif;
-            --font-body: 'Open Sans', Arial, sans-serif;
-            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" data-no-optimize="1" />
+
+<style data-no-optimize="1">
+    /* Base Container Styling */
+    .dt-coverflow-wrapper {
+        position: relative;
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        background: #F5F5F3; /* Luxury Ivory Background */
+        padding: 100px 0 40px 0;
+        margin-bottom: 0 !important;
+        overflow: hidden;
+        font-family: 'Open Sans', sans-serif;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dt-coverflow-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding: 0 20px;
+    }
+
+    .dt-coverflow-eyebrow {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #8b7a66; /* Muted brown */
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+
+    .dt-coverflow-title {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(32px, 5vw, 48px);
+        color: #123631; /* Deep Typography Green */
+        font-weight: 400;
+        margin: 0 0 20px 0;
+        letter-spacing: 1px;
+    }
+
+    /* Swiper Container */
+    .swiper.dt-safari-swiper {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 60px;
+    }
+
+    .swiper-slide.dt-coverflow-slide {
+        background-position: center;
+        background-size: cover;
+        width: 320px;
+        height: 460px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        position: relative;
+        text-decoration: none;
+        display: block;
+        /* Webkit fix for clipping */
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+    }
+
+    /* Desktop specific slide size */
+    @media (min-width: 768px) {
+        .swiper-slide.dt-coverflow-slide {
+            width: 380px;
+            height: 520px;
         }
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--primary-bg);
-            font-family: var(--font-body);
-            -webkit-font-smoothing: antialiased;
-        }
+    .dt-coverflow-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
 
-        .itinerary-carousel-section {
-            width: 100vw;
-            max-width: 100vw;
-            position: relative;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 80px 0 100px 0;
-            background-color: var(--primary-bg);
-            overflow: hidden;
-        }
+    .dt-coverflow-slide:hover img {
+        transform: scale(1.05);
+    }
 
-        /* SWIPER CONTAINER */
-        .swiper-container-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
+    /* Gradient Overlay for Text */
+    .dt-slide-gradient {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 60%;
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
 
-        .itinerary-swiper {
-            width: 100%;
-            padding-top: 50px;
-            padding-bottom: 50px;
-        }
+    /* Slide Content Text */
+    .dt-slide-content {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        z-index: 2;
+        text-align: left;
+        transition: transform 0.4s ease;
+    }
 
-        .swiper-slide {
-            width: 320px;
-            height: 480px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            cursor: pointer;
-            background-size: cover;
-            background-position: center;
-            transition: var(--transition);
-        }
+    .dt-slide-days {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #C9A24A;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        border: 1px solid rgba(201, 162, 74, 0.4);
+        padding: 4px 10px;
+        border-radius: 40px;
+        backdrop-filter: blur(4px);
+    }
 
-        @media (min-width: 768px) {
-            .swiper-slide {
-                width: 380px;
-                height: 560px;
-            }
-        }
+    .dt-slide-title {
+        font-family: 'Cinzel', serif;
+        font-size: 24px;
+        color: #ffffff;
+        margin: 0;
+        font-weight: 300;
+        line-height: 1.2;
+    }
 
-        /* Dark Gradient Overlay */
-        .swiper-slide::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; width: 100%; height: 65%;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-            z-index: 1;
-            transition: var(--transition);
-        }
+    /* Slide Active State Enhancements */
+    .swiper-slide-active .dt-slide-content {
+        transform: translateY(-10px);
+    }
 
-        .swiper-slide:hover::after {
-            height: 75%;
-            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
-        }
+    /* Navigation Arrows & Pagination */
+    .dt-coverflow-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 10;
+    }
 
-        /* CARD CONTENT */
-        .swiper-card-content {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            right: 30px;
-            z-index: 2;
-            color: #fff;
-            text-align: left;
-            transition: var(--transition);
-        }
+    .dt-prev-btn, .dt-next-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(18,54,49,0.05);
+        border: 1px solid rgba(18,54,49,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
 
-        .itinerary-pill {
-            display: inline-block;
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--dt-orange);
-            border: 1px solid rgba(201, 162, 74, 0.5);
-            padding: 6px 12px;
-            border-radius: 30px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            backdrop-filter: blur(4px);
-        }
+    .dt-prev-btn:hover, .dt-next-btn:hover {
+        background: rgba(201, 162, 74, 0.15);
+        border-color: #C9A24A;
+    }
 
-        .itinerary-title {
-            font-size: 1.6rem;
-            font-family: var(--font-head);
-            font-weight: 400;
-            margin: 0;
-            line-height: 1.2;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
+    .dt-prev-btn svg, .dt-next-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke: #123631;
+        fill: none;
+        stroke-width: 1.5;
+        transition: stroke 0.3s ease;
+    }
 
-        @media (min-width: 768px) {
-            .itinerary-title {
-                font-size: 2rem;
-            }
-        }
+    .dt-prev-btn:hover svg, .dt-next-btn:hover svg {
+        stroke: #C9A24A;
+    }
 
-        /* NAVIGATION CONTROLS */
-        .carousel-controls {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            position: relative;
-            z-index: 10;
-        }
+    /* Pagination Dots */
+    .swiper-pagination.dt-swiper-pagination {
+        position: static !important;
+        width: auto !important;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 10px;
+    }
 
-        .swiper-button-prev-custom,
-        .swiper-button-next-custom {
-            width: 44px;
-            height: 44px;
-            border-radius: 50%;
-            border: 1px solid rgba(0,0,0,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            background: transparent;
-            color: var(--dt-dark);
-        }
+    .swiper-pagination-bullet {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(18,54,49,0.2);
+        opacity: 1;
+        transition: all 0.3s ease;
+        margin: 0 !important;
+    }
 
-        .swiper-button-prev-custom:hover,
-        .swiper-button-next-custom:hover {
-            border-color: var(--dt-orange);
-            color: var(--dt-orange);
-            background: rgba(201, 162, 74, 0.05);
-        }
+    .swiper-pagination-bullet-active {
+        background: #C9A24A;
+        width: 24px;
+        border-radius: 4px;
+    }
+</style>
 
-        .swiper-button-prev-custom svg,
-        .swiper-button-next-custom svg {
-            width: 20px;
-            height: 20px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.5;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* PAGINATION DOTS */
-        .swiper-pagination-custom {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .swiper-pagination-bullet {
-            width: 6px;
-            height: 6px;
-            background: rgba(0,0,0,0.2);
-            opacity: 1;
-            margin: 0 !important;
-            transition: var(--transition);
-        }
-
-        .swiper-pagination-bullet-active {
-            width: 20px;
-            border-radius: 10px;
-            background: var(--dt-orange);
-        }
-    </style>
-</head>
-<body>
-
-<section class="itinerary-carousel-section">
-    <div class="swiper-container-wrapper">
-        <div class="swiper itinerary-swiper">
-            <div class="swiper-wrapper">
-                
-                <div class="swiper-slide" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2025/10/savuti-lion-in-the-road.jpeg');" onclick="window.open('https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM.', '_blank')">
-                    <div class="swiper-card-content">
-                        <span class="itinerary-pill">14 Days</span>
-                        <h3 class="itinerary-title">14-Day Luxury Namibia Drive &amp; Fly Photo Safari</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg');" onclick="window.open('https://wetu.com/ItineraryOutputs/Discovery/b02e8a98-0fe9-4d6b-9a85-8fcc81355557?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM.', '_blank')">
-                    <div class="swiper-card-content">
-                        <span class="itinerary-pill">14 Days</span>
-                        <h3 class="itinerary-title">14-Day Luxury Namibia Highlights Self-Drive Safari</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2025/11/wilderness-desert-rhino-camp_3-scaled-3.jpg');" onclick="window.open('https://wetu.com/Itinerary/Landing/8d67bdc1-417a-411c-ac60-e312537c8730?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM.', '_blank')">
-                    <div class="swiper-card-content">
-                        <span class="itinerary-pill">12 Days</span>
-                        <h3 class="itinerary-title">12-Day Namibia Self-Drive Luxury Safari Circuit</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2025/11/divava-1.jpg');" onclick="window.open('https://wetu.com/ItineraryOutputs/Discovery/f959961b-5ea6-43dc-b713-5a2fb0928eb1?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM.', '_blank')">
-                    <div class="swiper-card-content">
-                        <span class="itinerary-pill">10 Days</span>
-                        <h3 class="itinerary-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2025/11/bc95b679-56fc-4800-b602-5d040fe0cced-png-1.webp');" onclick="window.open('https://wetu.com/ItineraryOutputs/Discovery/487e81b5-4faf-4bdc-88f7-d28a3b229cdf?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM.', '_blank')">
-                    <div class="swiper-card-content">
-                        <span class="itinerary-pill">10 Days</span>
-                        <h3 class="itinerary-title">10-Day Ultra-Luxury Namibia Safari - North Focus</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide" style="background-image: url('https://desert-tracks.com/wp-content/uploads/2025/11/bagatelle-lodge-kalahari-game-ranch-namibia-chalte-on-dune2-1.jpg');" onclick="window.open('https://wetu.com/ItineraryOutputs/Discovery/e3ab6f95-cd77-4d07-943b-45d8257dda6c', '_blank')">
-                    <div class="swiper-card-content">
-                        <span class="itinerary-pill">10 Days</span>
-                        <h3 class="itinerary-title">10-Day Ultra-Luxury Namibia Safari - South Focus</h3>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- CONTROLS -->
-        <div class="carousel-controls">
-            <div class="swiper-button-prev-custom">
-                <svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"></path></svg>
-            </div>
-            <div class="swiper-pagination-custom"></div>
-            <div class="swiper-button-next-custom">
-                <svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"></path></svg>
-            </div>
-        </div>
-
+<div class="dt-coverflow-wrapper">
+    <div class="dt-coverflow-header">
+        <span class="dt-coverflow-eyebrow">Continue Exploring</span>
+        <h2 class="dt-coverflow-title">More Luxury Safaris</h2>
     </div>
-</section>
 
-<!-- Swiper JS -->
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Swiper Container -->
+    <div class="swiper dt-safari-swiper" data-no-optimize="1">
+        <div class="swiper-wrapper">
+            <a href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/10/savuti-lion-in-the-road.jpeg" alt="Luxury Namibia Drive &amp; Fly Photo Safari" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">14 Days</span>
+                    <h3 class="dt-slide-title">Luxury Namibia Drive &amp; Fly Photo Safari</h3>
+                </div>
+            </a>
+            <a href="https://wetu.com/ItineraryOutputs/Discovery/b02e8a98-0fe9-4d6b-9a85-8fcc81355557?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg" alt="Luxury Namibia Highlights Self-Drive Safari" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">14 Days</span>
+                    <h3 class="dt-slide-title">Luxury Namibia Highlights Self-Drive Safari</h3>
+                </div>
+            </a>
+            <a href="https://wetu.com/Itinerary/Landing/8d67bdc1-417a-411c-ac60-e312537c8730?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/11/wilderness-desert-rhino-camp_3-scaled-3.jpg" alt="Namibia Self-Drive Luxury Safari Circuit" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">12 Days</span>
+                    <h3 class="dt-slide-title">Namibia Self-Drive Luxury Safari Circuit</h3>
+                </div>
+            </a>
+            <a href="https://wetu.com/ItineraryOutputs/Discovery/f959961b-5ea6-43dc-b713-5a2fb0928eb1?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/11/divava-1.jpg" alt="Namibia Honeymoon Luxury Fly-In Safari" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">10 Days</span>
+                    <h3 class="dt-slide-title">Namibia Honeymoon Luxury Fly-In Safari</h3>
+                </div>
+            </a>
+            <a href="https://wetu.com/ItineraryOutputs/Discovery/487e81b5-4faf-4bdc-88f7-d28a3b229cdf?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bc95b679-56fc-4800-b602-5d040fe0cced-png-1.webp" alt="Ultra-Luxury Namibia Safari - North Focus" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">10 Days</span>
+                    <h3 class="dt-slide-title">Ultra-Luxury Namibia Safari - North Focus</h3>
+                </div>
+            </a>
+            <a href="https://wetu.com/ItineraryOutputs/Discovery/e3ab6f95-cd77-4d07-943b-45d8257dda6c" target="_blank" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bagatelle-lodge-kalahari-game-ranch-namibia-chalte-on-dune2-1.jpg" alt="Ultra-Luxury Namibia Safari - South Focus" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">10 Days</span>
+                    <h3 class="dt-slide-title">Ultra-Luxury Namibia Safari - South Focus</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <!-- Custom Controls Below Cards -->
+    <div class="dt-coverflow-controls">
+        <div class="dt-prev-btn">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </div>
+        <div class="swiper-pagination dt-swiper-pagination"></div>
+        <div class="dt-next-btn">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+    </div>
+</div>
 
+<!-- Swiper JS CDN -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
+
+<!-- Initialize Component -->
 <script data-no-optimize="1">
-(function() {
-    function initCarousel() {
-        if (typeof Swiper !== 'undefined') {
-            const itinerarySwiper = new Swiper('.itinerary-swiper', {
-                effect: 'coverflow',
-                grabCursor: true,
-                centeredSlides: true,
-                slidesPerView: 'auto',
-                loop: true,
-                initialSlide: 1, // Start on the second slide usually
-                speed: 800,
-                coverflowEffect: {
-                    rotate: 0,
-                    stretch: 0,
-                    depth: 100,
-                    modifier: 2,
-                    slideShadows: false, // We use custom CSS gradients instead
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next-custom',
-                    prevEl: '.swiper-button-prev-custom',
-                },
-                pagination: {
-                    el: '.swiper-pagination-custom',
-                    clickable: true,
-                },
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false,
-                },
-                breakpoints: {
-                    320: {
-                        coverflowEffect: { depth: 50, modifier: 1 }
-                    },
-                    768: {
-                        coverflowEffect: { depth: 100, modifier: 2 }
-                    }
+    function initSafariCoverflow_carouselluxury() {
+        if (typeof Swiper === 'undefined') {
+            setTimeout(initSafariCoverflow_carouselluxury, 100);
+            return;
+        }
+        
+        var safariSwiper = new Swiper('.dt-safari-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            loop: true,
+            speed: 800,
+            slidesPerView: 'auto',
+            slideToClickedSlide: true,
+            initialSlide: 1,
+            coverflowEffect: {
+                rotate: 15,          // Slide rotate in degrees
+                stretch: 0,          // Stretch space between slides
+                depth: 250,          // Depth offset
+                modifier: 1.5,       // Effect multiplier
+                slideShadows: true,  // Enable slide shadows
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.dt-next-btn',
+                prevEl: '.dt-prev-btn',
+            },
+            pagination: {
+                el: '.dt-swiper-pagination',
+                clickable: true,
+            },
+            keyboard: {
+                enabled: true,
+            },
+            mousewheel: {
+                forceToAxis: true,
+                releaseOnEdges: true,
+            }
+        });
+        
+        // Pause Autoplay on Hover
+        var swiperContainer = document.querySelector('.dt-safari-swiper');
+        if(swiperContainer) {
+            swiperContainer.addEventListener('mouseenter', function() {
+                safariSwiper.autoplay.stop();
+            });
+            swiperContainer.addEventListener('mouseleave', function() {
+                safariSwiper.autoplay.start();
+            });
+        }
+        
+        // Prevent clicks opening URL if the slide is not active in the center
+        var slides = document.querySelectorAll('.dt-coverflow-slide');
+        slides.forEach(function(slide) {
+            slide.addEventListener('click', function(e) {
+                if (!slide.classList.contains('swiper-slide-active')) {
+                    e.preventDefault();
                 }
             });
-        } else {
-            setTimeout(initCarousel, 100);
-        }
+        });
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener("DOMContentLoaded", initCarousel);
+        document.addEventListener("DOMContentLoaded", initSafariCoverflow_carouselluxury);
     } else {
-        initCarousel();
+        initSafariCoverflow_carouselluxury();
     }
-})();
 </script>
-
-</body>
-</html>
