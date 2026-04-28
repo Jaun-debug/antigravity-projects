@@ -658,8 +658,12 @@
                     openFolders[title] = !details.open;
                     localStorage.setItem('vault_folders', JSON.stringify(openFolders));
 
-                    if (title === 'Desert Tracks') {
-                        loadComponent(-1, 'DESERT TRACKS COMPONENTS');
+                    if (title === 'Namibia') {
+                        loadComponent(-1, 'NAMIBIA COMPONENTS');
+                    } else if (title === 'Botswana') {
+                        loadComponent(-1, 'BOTSWANA COMPONENTS');
+                    } else if (title === 'East Africa') {
+                        loadComponent(-1, 'EAST AFRICA COMPONENTS');
                     } else if (title === 'Rate Generator') {
                         loadComponent(-1, 'RATE GENERATOR');
                     } else if (title === 'Accounting & Costing') {
@@ -715,7 +719,9 @@
             };
 
             const mainFolders = {
-                'Desert Tracks': buildMainFolder('Desert Tracks'),
+                'Namibia': buildMainFolder('Namibia'),
+                'Botswana': buildMainFolder('Botswana'),
+                'East Africa': buildMainFolder('East Africa'),
                 'Rate Generator': buildMainFolder('Rate Generator'),
                 'Accounting & Costing': buildMainFolder('Accounting & Costing'),
                 'Antigravity Tools': buildMainFolder('Antigravity Tools'),
@@ -758,13 +764,13 @@
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_BLOCKS'].details);
             folders['Guided Safaris'].inner.appendChild(subFolders['GUI_ITIN'].details);
 
-            // Attach folders to Desert Tracks Main Menu
-            mainFolders['Desert Tracks'].inner.appendChild(folders['HOMEPAGE'].details);
-            mainFolders['Desert Tracks'].inner.appendChild(folders['Self-Drive Safaris'].details);
-            mainFolders['Desert Tracks'].inner.appendChild(folders['Luxury Safaris'].details);
-            mainFolders['Desert Tracks'].inner.appendChild(folders['Fly-In Safaris'].details);
-            mainFolders['Desert Tracks'].inner.appendChild(folders['Guided Safaris'].details);
-            mainFolders['Desert Tracks'].inner.appendChild(folders['General WP Blocks'].details);
+            // Attach folders to Namibia Main Menu
+            mainFolders['Namibia'].inner.appendChild(folders['HOMEPAGE'].details);
+            mainFolders['Namibia'].inner.appendChild(folders['Self-Drive Safaris'].details);
+            mainFolders['Namibia'].inner.appendChild(folders['Luxury Safaris'].details);
+            mainFolders['Namibia'].inner.appendChild(folders['Fly-In Safaris'].details);
+            mainFolders['Namibia'].inner.appendChild(folders['Guided Safaris'].details);
+            mainFolders['Namibia'].inner.appendChild(folders['General WP Blocks'].details);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
@@ -826,7 +832,9 @@
                 target.appendChild(el);
             });
 
-            container.appendChild(mainFolders['Desert Tracks'].details);
+            container.appendChild(mainFolders['Namibia'].details);
+            container.appendChild(mainFolders['Botswana'].details);
+            container.appendChild(mainFolders['East Africa'].details);
             container.appendChild(mainFolders['Rate Generator'].details);
             container.appendChild(mainFolders['Accounting & Costing'].details);
             container.appendChild(mainFolders['Antigravity Tools'].details);
