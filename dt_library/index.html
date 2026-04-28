@@ -734,7 +734,9 @@
                 'Luxury Safaris': buildFolder('Luxury Safaris', false),
                 'Fly-In Safaris': buildFolder('Fly-In Safaris', false),
                 'Guided Safaris': buildFolder('Guided Safaris', false),
-                'General WP Blocks': buildFolder('General WP Blocks', false)
+                'General WP Blocks': buildFolder('General WP Blocks', false),
+                'Botswana Collection': buildFolder('Collection Page', false),
+                'East Africa Collection': buildFolder('Collection Page', false)
             };
 
             const subFolders = {
@@ -771,6 +773,10 @@
             mainFolders['Namibia'].inner.appendChild(folders['Fly-In Safaris'].details);
             mainFolders['Namibia'].inner.appendChild(folders['Guided Safaris'].details);
             mainFolders['Namibia'].inner.appendChild(folders['General WP Blocks'].details);
+
+            // Attach folders to Botswana and East Africa Main Menus
+            mainFolders['Botswana'].inner.appendChild(folders['Botswana Collection'].details);
+            mainFolders['East Africa'].inner.appendChild(folders['East Africa Collection'].details);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
@@ -819,6 +825,14 @@
                 }
                 else if (cmp.tag === 'Guided Doc' || cmp.tag === 'Guided Safaris') {
                     target = subFolders['GUI_ITIN'].inner;
+                }
+                // Botswana
+                else if (cmp.tag === 'Botswana Collection') {
+                    target = folders['Botswana Collection'].inner;
+                }
+                // East Africa
+                else if (cmp.tag === 'East Africa Collection') {
+                    target = folders['East Africa Collection'].inner;
                 }
                 // Websites
                 else if (cmp.tag === 'Websites') {
