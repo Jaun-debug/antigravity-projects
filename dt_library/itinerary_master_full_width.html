@@ -1104,7 +1104,7 @@
                 max-width: 80% !important;
             }
             .lux-hero-content {
-                bottom: 16vh !important;
+                bottom: 26vh !important;
             }
         }
     </style>
@@ -4371,7 +4371,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 
     document.addEventListener('click', function(e) {
       if (state._wizardOpen) return;
-      var trigger = e.target.closest('.dt-specific-enquiry-open');
+      var trigger = e.target.closest('.dt-specific-enquiry-open, .dt-enquiry-open, a[href*="safari-booking"]');
       if (trigger) {
         e.preventDefault();
         e.stopImmediatePropagation();
