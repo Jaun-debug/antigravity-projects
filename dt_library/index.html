@@ -136,6 +136,13 @@
         "file": "fly_in_safari_intro.html"
     },
     {
+        "id": "guided-intro-text",
+        "title": "Guided Safari Intro Text",
+        "tag": "Guided Doc",
+        "desc": "A premium text block introducing guided safaris with a gold drop cap.",
+        "file": "guided_safari_intro.html"
+    },
+    {
         "id": "elephant-loader",
         "title": "Luxury Safari Loader",
         "tag": "Website Blocks Doc",
@@ -342,8 +349,8 @@
         "id": "cta-gui-1",
         "title": "Guided Fade CTA 1",
         "tag": "Guided CTA",
-        "desc": "Fading CTA block 1 for Guided Safaris.",
-        "file": "component_11.html"
+        "desc": "Fading CTA block 1 specifically tailored for Guided Safaris.",
+        "file": "cta_guided_1.html"
     },
     {
         "id": "cta-gui-2",
@@ -622,8 +629,8 @@
         "id": "faq-guided",
         "title": "Guided FAQ",
         "tag": "Guided FAQ",
-        "desc": "FAQ block for Guided Safaris (copied from Homepage).",
-        "file": "component_17.html"
+        "desc": "FAQ block tailored for Guided Safaris.",
+        "file": "faq_guided.html"
     }
 ];
 
@@ -801,7 +808,7 @@
                     target = subFolders['FLY_ITIN'].inner;
                 }
                 // Guided
-                else if (cmp.tag === 'Guided FAQ' || cmp.id === 'guided' || cmp.tag === 'Guided CTA' || cmp.id === 'carousel_guided') {
+                else if (cmp.tag === 'Guided FAQ' || cmp.id === 'guided' || cmp.tag === 'Guided CTA' || cmp.id === 'carousel_guided' || cmp.id === 'guided-intro-text') {
                     target = subFolders['GUI_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'Guided Doc' || cmp.tag === 'Guided Safaris') {
