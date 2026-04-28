@@ -1,5 +1,6 @@
 "use client";
 
+// Vercel build trigger comment
 export default function GuestRegistration() {
     return (
         <iframe 
