@@ -2502,6 +2502,7 @@
 
       var link = e.target.closest('a, button, div');
       if (link) {
+        if (link.closest('.dt-specific-enquiry-open')) return;
         var text = (link.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
         if (text === 'enquire now' || text === 'enquiry now' || text === 'enquire' || text === 'make an enquiry' || text === 'start your journey' || text === 'contact') {
           e.preventDefault();
