@@ -1,0 +1,247 @@
+<style data-no-optimize="1">
+/* ================================================
+   DESERT TRACKS — PREMIUM FAQ ACCORDION BLOCK
+   ================================================ */
+.dt-faq-section {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+.dt-faq-heading {
+    font-family: 'Cinzel', serif !important;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    font-weight: 400 !important;
+    color: #123631 !important; /* Luxury Deep Green */
+    text-align: center;
+    margin: 0 0 12px 0 !important;
+    letter-spacing: 0.05em;
+}
+.dt-faq-subheading {
+    text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #123631; /* Luxury Deep Green */
+    opacity: 0.7; /* Softened slightly so it plays a supporting role */
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin: 0 0 60px 0;
+}
+/* Each accordion item */
+.dt-faq-item {
+    border-bottom: 1px solid #e5e0d8;
+    padding: 0;
+    overflow: hidden;
+}
+.dt-faq-item:first-of-type {
+    border-top: 1px solid #e5e0d8;
+}
+/* The clickable question row */
+.dt-faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+    cursor: pointer;
+    gap: 20px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.dt-faq-question-text {
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #123631; /* Luxury Deep Green */
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    flex: 1;
+    letter-spacing: 0.05em;
+}
+.dt-faq-item.dt-open .dt-faq-question-text {
+    color: #C9A24A; /* Brand Gold */
+}
+/* The + / × icon */
+.dt-faq-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid #C9A24A; /* Brand Gold */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.4s ease;
+    position: relative;
+}
+.dt-faq-icon::before,
+.dt-faq-icon::after {
+    content: '';
+    position: absolute;
+    background: #C9A24A; /* Brand Gold */
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+/* Horizontal bar */
+.dt-faq-icon::before {
+    width: 12px;
+    height: 1.5px;
+}
+/* Vertical bar */
+.dt-faq-icon::after {
+    width: 1.5px;
+    height: 12px;
+}
+/* When open: rotate vertical bar to 0 (makes it a minus) */
+.dt-faq-item.dt-open .dt-faq-icon {
+    background: #C9A24A; /* Brand Gold */
+    transform: rotate(45deg);
+}
+.dt-faq-item.dt-open .dt-faq-icon::before,
+.dt-faq-item.dt-open .dt-faq-icon::after {
+    background: #ffffff;
+}
+/* The answer panel */
+.dt-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dt-faq-item.dt-open .dt-faq-answer {
+    max-height: 600px;
+}
+.dt-faq-answer-inner {
+    padding: 0 0 28px 0;
+}
+.dt-faq-answer-inner p {
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.85 !important;
+    color: #123631 !important; /* Luxury Deep Green */
+    margin: 0 0 14px 0 !important;
+    font-weight: 300 !important;
+}
+.dt-faq-answer-inner p strong, .dt-faq-answer-inner p b {
+    font-weight: 600;
+    color: #123631; /* Ensures bold text remains the active dark color */
+}
+.dt-faq-answer-inner p:last-child {
+    margin-bottom: 0 !important;
+}
+@media (max-width: 640px) {
+    .dt-faq-section { padding: 60px 24px; }
+    .dt-faq-question-text { font-size: 1.05rem; }
+}
+</style>
+
+<div class="dt-faq-section">
+    <p class="dt-faq-subheading">Everything you need to know</p>
+    <h2 class="dt-faq-heading">Frequently Asked Questions</h2>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Is Namibia safe for a self-drive safari?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Yes, Namibia is considered one of the safest countries in Africa for self-drive travel. The roads are generally well maintained, traffic is minimal, and locals are friendly and helpful. As with any trip, basic precautions are recommended.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Do I need a 4x4 vehicle in Namibia?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>A 4x4 is highly recommended, especially if you are visiting areas like Sossusvlei, Damaraland, or more remote regions. It provides better comfort, safety, and flexibility on gravel roads.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Are the roads difficult to drive?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Most routes are on well-graded gravel roads and are easy to navigate. However, distances are long, and driving speeds should be adjusted accordingly. Careful driving is essential, especially on gravel.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">How far in advance should I book?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>For travel between July and December (peak season), it is best to book 6–12 months in advance, particularly for popular areas like Etosha National Park and Swakopmund.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Can I navigate easily without a guide?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Yes, self-drive in Namibia is very straightforward. With GPS, offline maps, and a detailed itinerary, navigation is simple. You will also receive full route guidance and 24/7 support.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What about fuel stations and supplies?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Fuel stations are available in all major towns, but distances between them can be long. It’s always advisable to refuel regularly and carry water and snacks.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What wildlife can I expect to see?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia offers incredible wildlife viewing, especially in Etosha National Park, where you can see elephants, lions, rhinos, giraffes, and large herds of plains game gathering around waterholes.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script data-no-optimize="1">
+function dtToggleFaq(questionEl) {
+    var item = questionEl.closest('.dt-faq-item');
+    if (!item) return;
+    
+    var section = item.closest('.dt-faq-section');
+    var isOpen = item.classList.contains('dt-open');
+    
+    /* Close all open items within THIS specific FAQ block only */
+    if (section) {
+        section.querySelectorAll('.dt-faq-item.dt-open').forEach(function(el) {
+            el.classList.remove('dt-open');
+        });
+    }
+    
+    /* Open clicked item (unless it was already open) */
+    if (!isOpen) {
+        item.classList.add('dt-open');
+    }
+}
+</script>
