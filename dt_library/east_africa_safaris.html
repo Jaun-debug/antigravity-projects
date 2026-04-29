@@ -1,0 +1,276 @@
+<!-- ============================================================
+     DESERT TRACKS – 3-COLUMN GRID ITINERARIES BLOCK (No Pricing)
+     ============================================================ -->
+<section id="dt-sds-grid">
+<style>
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  #dt-sds-grid {
+    --dt-orange: #C9A24A; /* Refined Gold color for 'Find out more' */
+    --dt-dark:   #123631; /* Deep Typography Green */
+    --dt-sand:   #F5F5F3; /* Luxury Ivory Background */
+    --dt-muted:  #8b7a66; /* Muted brown for meta text */
+    
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: var(--dt-sand);
+    width: 100%;
+    padding: 80px 20px;
+    box-sizing: border-box;
+  }
+
+  .dt-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADING ─────────────────────────────────────────────── */
+  .dt-grid-heading-wrap {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .dt-grid-heading {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--dt-dark);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .dt-grid-sub {
+    font-size: 1.05rem;
+    color: var(--dt-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── GRID LAYOUT ────────────────────────────────────────── */
+  .dt-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    row-gap: 50px;
+  }
+
+  @media (max-width: 900px) {
+    .dt-grid-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dt-grid-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── CARD STYLING ───────────────────────────────────────── */
+  .dt-grid-card {
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+  }
+
+  .dt-gc-img {
+    width: 100%;
+    aspect-ratio: 1.6 / 1;
+    border-radius: 8px; /* Smooth rounded corners */
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Slight elevation */
+  }
+
+  .dt-gc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+  }
+
+  .dt-grid-card:hover .dt-gc-img img {
+    transform: scale(1.05); /* Gentle premium zoom */
+  }
+
+  /* FROSTED BADGE (Like "Popular" pill in screenshot) */
+  .dt-gc-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 2;
+  }
+
+  /* ── CARD CONTENT ───────────────────────────────────────── */
+  .dt-gc-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--dt-muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .dt-gc-title {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--dt-dark);
+    margin-bottom: 16px; /* Extra breathing room */
+    line-height: 1.4;
+    transition: color 0.3s;
+  }
+  
+  .dt-grid-card:hover .dt-gc-title {
+    color: var(--dt-orange); /* Title shifts to gold on hover */
+  }
+
+  /* Descriptions hidden by default to match clean visual screenshot */
+  .dt-gc-desc {
+    display: none; 
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* FIND OUT MORE LINK */
+  .dt-gc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--dt-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(201, 162, 74, 0.4);
+    padding-bottom: 3px;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: all 0.3s;
+  }
+
+  .dt-gc-link svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    transition: transform 0.3s;
+  }
+
+  .dt-grid-card:hover .dt-gc-link {
+    border-bottom-color: var(--dt-orange);
+  }
+
+  .dt-grid-card:hover .dt-gc-link svg {
+    transform: translateX(5px); /* Arrow shoots to the right */
+  }
+</style>
+
+<div class="dt-grid-container">
+  
+  <div class="dt-grid-heading-wrap">
+    <h2 class="dt-grid-heading">Explore East Africa's Top Selling Itineraries</h2>
+    <p class="dt-grid-sub">Handcrafted safaris across East Africa's most iconic landscapes</p>
+  </div>
+
+  <div class="dt-grid-wrapper">
+
+    <!-- 1. 14-Day Best of East Africa -->
+    <a class="dt-grid-card" href="https://wetu.com/ItineraryOutputs/Discovery/ec95e889-23fe-4ac2-8023-f2cb885d59c7" target="_blank">
+      <div class="dt-gc-img">
+        <div class="dt-gc-badge">Popular</div>
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sollylevisossusvlei-9-3-2-1-4-2-1.jpeg" alt="East Africa landscapes" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>14 days</span>
+      </div>
+      <div class="dt-gc-title">Best of East Africa Safari</div>
+      <div class="dt-gc-desc">East Africa's iconic highlights in comfort.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 2. 17-Day East Africa -->
+    <a class="dt-grid-card" href="https://wetu.com/ItineraryOutputs/Discovery/0eb69854-4074-4e8c-ad3a-24d86d356ac3" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="East Africa at sunset" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>17 days</span>
+      </div>
+      <div class="dt-gc-title">East Africa Safari</div>
+      <div class="dt-gc-desc">One epic cross-border journey through East Africa filled with wildlife and wonder.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 3. 11-Day East Africa Wildlife -->
+    <a class="dt-grid-card" href="https://wetu.com/ItineraryOutputs/Discovery/fed30fb1-7ce5-4fc8-b519-b5f2d903af33" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg" alt="East Africa lion" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>11 days</span>
+      </div>
+      <div class="dt-gc-title">East Africa Wildlife Safari</div>
+      <div class="dt-gc-desc">Track East Africa's wildlife on an 11-day safari.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 4. 18-Day Hidden Treasures -->
+    <a class="dt-grid-card" href="https://wetu.com/ItineraryOutputs/Discovery/2301846c-353e-4c4b-b373-5ad746b0a1e4" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg" alt="Dusty East Africa back-road" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>18 days</span>
+      </div>
+      <div class="dt-gc-title">Hidden Treasures of East Africa Safari</div>
+      <div class="dt-gc-desc">Discover East Africa's secret corners.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 5. 11-Day East Africa -->
+    <a class="dt-grid-card" href="https://desert-tracks.com/namibia-self-drive-safaris/11-day-south-of-namibia-self-drive-safari/" target="_blank">
+      <div class="dt-gc-img">
+        <div class="dt-gc-badge" style="background:#123631; color:#fff;">Exclusive</div>
+        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg" alt="East Africa landscapes" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>11 days</span>
+      </div>
+      <div class="dt-gc-title">Explore East Africa Safari</div>
+      <div class="dt-gc-desc">Journey through East Africa on an 11-day safari.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 6. 18-Day East Africa Epic -->
+    <a class="dt-grid-card" href="https://wetu.com/ItineraryOutputs/Discovery/271fef76-6606-4ae3-a9ae-d0c4e4b61437" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg" alt="East Africa elephant" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>18 days</span>
+      </div>
+      <div class="dt-gc-title">East Africa Epic Safari</div>
+      <div class="dt-gc-desc">Journey through East Africa on an 18-day safari, filled with wildlife, culture, and unforgettable landscapes.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+  </div>
+</div>
+</section>
