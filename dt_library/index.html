@@ -115,6 +115,104 @@
     <script>
         const components = [
     {
+        "id": "botswana_safari_intro",
+        "title": "Botswana Safari Intro Text",
+        "tag": "Botswana WP Blocks",
+        "desc": "Botswana Safari Intro Text component.",
+        "file": "botswana_safari_intro.html"
+    },
+    {
+        "id": "east_africa_safari_intro",
+        "title": "East Africa Safari Intro Text",
+        "tag": "East Africa WP Blocks",
+        "desc": "East Africa Safari Intro Text component.",
+        "file": "east_africa_safari_intro.html"
+    },
+    {
+        "id": "carousel_botswana",
+        "title": "Carousel - Botswana",
+        "tag": "Botswana WP Blocks",
+        "desc": "Carousel - Botswana component.",
+        "file": "carousel_botswana.html"
+    },
+    {
+        "id": "carousel_east_africa",
+        "title": "Carousel - East Africa",
+        "tag": "East Africa WP Blocks",
+        "desc": "Carousel - East Africa component.",
+        "file": "carousel_east_africa.html"
+    },
+    {
+        "id": "botswana_itineraries_design",
+        "title": "Botswana Itinerary Design",
+        "tag": "Botswana Itineraries",
+        "desc": "Botswana Itinerary Design component.",
+        "file": "botswana_itineraries_design.html"
+    },
+    {
+        "id": "east_africa_itineraries_design",
+        "title": "East Africa Itinerary Design",
+        "tag": "East Africa Itineraries",
+        "desc": "East Africa Itinerary Design component.",
+        "file": "east_africa_itineraries_design.html"
+    },
+    {
+        "id": "cta_botswana_1",
+        "title": "Botswana Fade CTA 1",
+        "tag": "Botswana WP Blocks",
+        "desc": "Botswana Fade CTA 1 component.",
+        "file": "cta_botswana_1.html"
+    },
+    {
+        "id": "cta_east_africa_1",
+        "title": "East Africa Fade CTA 1",
+        "tag": "East Africa WP Blocks",
+        "desc": "East Africa Fade CTA 1 component.",
+        "file": "cta_east_africa_1.html"
+    },
+    {
+        "id": "cta_botswana_2",
+        "title": "Botswana Fade CTA 2",
+        "tag": "Botswana WP Blocks",
+        "desc": "Botswana Fade CTA 2 component.",
+        "file": "cta_botswana_2.html"
+    },
+    {
+        "id": "cta_east_africa_2",
+        "title": "East Africa Fade CTA 2",
+        "tag": "East Africa WP Blocks",
+        "desc": "East Africa Fade CTA 2 component.",
+        "file": "cta_east_africa_2.html"
+    },
+    {
+        "id": "faq_botswana",
+        "title": "Botswana FAQ",
+        "tag": "Botswana WP Blocks",
+        "desc": "Botswana FAQ component.",
+        "file": "faq_botswana.html"
+    },
+    {
+        "id": "faq_east_africa",
+        "title": "East Africa FAQ",
+        "tag": "East Africa WP Blocks",
+        "desc": "East Africa FAQ component.",
+        "file": "faq_east_africa.html"
+    },
+    {
+        "id": "botswana_best_time",
+        "title": "Botswana Best Time to Travel",
+        "tag": "Botswana WP Blocks",
+        "desc": "Botswana Best Time to Travel component.",
+        "file": "botswana_best_time.html"
+    },
+    {
+        "id": "east_africa_best_time",
+        "title": "East Africa Best Time to Travel",
+        "tag": "East Africa WP Blocks",
+        "desc": "East Africa Best Time to Travel component.",
+        "file": "east_africa_best_time.html"
+    },
+    {
         "id": "self-drive-intro-text",
         "title": "Self-Drive Safari Intro Text",
         "tag": "Self-Drive Doc",
@@ -736,7 +834,11 @@
                 'Guided Safaris': buildFolder('Guided Safaris', false),
                 'General WP Blocks': buildFolder('General WP Blocks', false),
                 'Botswana Collection': buildFolder('Collection Page', false),
-                'East Africa Collection': buildFolder('Collection Page', false)
+                'Botswana WP Blocks': buildFolder('WP Blocks', false),
+                'Botswana Itineraries': buildFolder('Itineraries', false),
+                'East Africa Collection': buildFolder('Collection Page', false),
+                'East Africa WP Blocks': buildFolder('WP Blocks', false),
+                'East Africa Itineraries': buildFolder('Itineraries', false)
             };
 
             const subFolders = {
@@ -776,7 +878,12 @@
 
             // Attach folders to Botswana and East Africa Main Menus
             mainFolders['Botswana'].inner.appendChild(folders['Botswana Collection'].details);
+            mainFolders['Botswana'].inner.appendChild(folders['Botswana WP Blocks'].details);
+            mainFolders['Botswana'].inner.appendChild(folders['Botswana Itineraries'].details);
+            
             mainFolders['East Africa'].inner.appendChild(folders['East Africa Collection'].details);
+            mainFolders['East Africa'].inner.appendChild(folders['East Africa WP Blocks'].details);
+            mainFolders['East Africa'].inner.appendChild(folders['East Africa Itineraries'].details);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
@@ -830,9 +937,21 @@
                 else if (cmp.tag === 'Botswana Collection') {
                     target = folders['Botswana Collection'].inner;
                 }
+                else if (cmp.tag === 'Botswana WP Blocks' || cmp.title.startsWith('Botswana Fade CTA') || cmp.title.startsWith('Botswana Safari Intro') || cmp.title.startsWith('Carousel - Botswana') || cmp.title.startsWith('Botswana FAQ') || cmp.title.startsWith('Botswana Best Time')) {
+                    target = folders['Botswana WP Blocks'].inner;
+                }
+                else if (cmp.tag === 'Botswana Doc' || cmp.title.includes('Botswana Itinerary Design')) {
+                    target = folders['Botswana Itineraries'].inner;
+                }
                 // East Africa
                 else if (cmp.tag === 'East Africa Collection') {
                     target = folders['East Africa Collection'].inner;
+                }
+                else if (cmp.tag === 'East Africa WP Blocks' || cmp.title.startsWith('East Africa Fade CTA') || cmp.title.startsWith('East Africa Safari Intro') || cmp.title.startsWith('Carousel - East Africa') || cmp.title.startsWith('East Africa FAQ') || cmp.title.startsWith('East Africa Best Time')) {
+                    target = folders['East Africa WP Blocks'].inner;
+                }
+                else if (cmp.tag === 'East Africa Doc' || cmp.title.includes('East Africa Itinerary Design')) {
+                    target = folders['East Africa Itineraries'].inner;
                 }
                 // Websites
                 else if (cmp.tag === 'Websites') {

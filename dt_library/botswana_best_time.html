@@ -1,0 +1,117 @@
+<style data-no-optimize="1">
+/* ================================================
+   DESERT TRACKS — BEST TIME TO TRAVEL BLOCK
+   ================================================ */
+.dt-best-time-section {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: #ffffff;
+}
+.dt-bt-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+.dt-bt-eyebrow {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #8b7a66; /* Muted brown */
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.dt-bt-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: #123631; /* Deep Typography Green */
+    font-weight: 400;
+    margin: 0 0 20px 0;
+    letter-spacing: 1px;
+}
+.dt-bt-intro {
+    font-size: 1.05rem;
+    color: #4a4a4a;
+    line-height: 1.8;
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+}
+
+.dt-bt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.dt-bt-card {
+    background: #F5F5F3; /* Luxury Ivory */
+    padding: 40px;
+    border-radius: 8px;
+    border-top: 4px solid #C85F19; /* Desert Tracks Gold */
+}
+
+.dt-bt-card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #123631;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+}
+
+.dt-bt-card-months {
+    font-weight: 600;
+    color: #C85F19;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.dt-bt-card-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #4a4a4a;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .dt-bt-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .dt-best-time-section {
+        padding: 60px 20px;
+    }
+    .dt-bt-card {
+        padding: 30px 20px;
+    }
+}
+</style>
+
+<div class="dt-best-time-section">
+    <div class="dt-bt-header">
+        <span class="dt-bt-eyebrow">Plan Your Journey</span>
+        <h2 class="dt-bt-title">Best Time to Visit Botswana</h2>
+        <p class="dt-bt-intro">Botswana offers incredible wildlife experiences year-round, but the environment changes dramatically with the seasons. Depending on what you want to see, different times of the year offer unique advantages.</p>
+    </div>
+
+    <div class="dt-bt-grid">
+        <div class="dt-bt-card">
+            <h3 class="dt-bt-card-title">The Dry Season</h3>
+            <span class="dt-bt-card-months">May to October</span>
+            <p class="dt-bt-card-desc">Considered the best time for traditional wildlife viewing. As water holes dry up, animals congregate in large numbers around permanent water sources like the Chobe River and the Okavango Delta. The weather is generally sunny and dry, though nights can be chilly from June to August. This is also when the Okavango Delta floodwaters typically peak.</p>
+        </div>
+        
+        <div class="dt-bt-card" style="border-top-color: #8b7a66;">
+            <h3 class="dt-bt-card-title">The Green Season</h3>
+            <span class="dt-bt-card-months">November to April</span>
+            <p class="dt-bt-card-desc">The summer rains transform the arid landscapes into lush, green paradises. This is the calving season for many herbivores, which in turn attracts predators. It's the ultimate time for bird watching as migratory species return. While some areas might become inaccessible due to mud, the dramatic skies and vibrant scenery make it a photographer's dream.</p>
+        </div>
+    </div>
+</div>
