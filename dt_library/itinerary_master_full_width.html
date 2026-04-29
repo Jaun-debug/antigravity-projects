@@ -1962,7 +1962,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 
 
         <!-- CTA Block -->
-        <style>
+        <style data-no-optimize="1">
         .dt-cin-hero {
             position: relative;
             width: 100vw;
@@ -2632,15 +2632,9 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             /* Animation hook */
             opacity: 0;
             transform: translateY(20px);
-            animation: glassFadeIn 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        @keyframes glassFadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+
 
         .dt-glass-category {
             font-size: 0.85rem;
@@ -2739,6 +2733,25 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 <button type="button" onclick="window.location.href='https://desert-tracks.com/desert-tracks-contact/';" class="dt-lion-contact-btn">SPEAK TO A SAFARI EXPERT</button>
             </div>
         </div>
+        <!-- END LION CTA -->
+        <script data-no-optimize="1">
+        document.addEventListener("DOMContentLoaded", function() {
+            if(typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                gsap.registerPlugin(ScrollTrigger);
+                gsap.to('.dt-glass-card', {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: '.dt-glassmorphism-block',
+                        start: 'top 85%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            }
+        });
+        </script>
         <!-- ============================================== -->
 </div>
     </div>
