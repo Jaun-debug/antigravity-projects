@@ -320,12 +320,7 @@
   margin-top: 10px;
 }
 
-@media (min-width: 769px) {
-  .dt-drawer-item.has-submenu:hover .dt-submenu {
-    max-height: 300px;
-    margin-top: 10px;
-  }
-}
+
 
 .dt-submenu::before {
   content: "";
@@ -763,27 +758,13 @@ body.dt-search-is-open {
     (function(item) {
       var toggle = item.querySelector('.dt-submenu-toggle');
       
-      item.onmouseenter = function() {
-        if (isDesktop()) {
-          openSubmenu(item);
-        }
-      };
-      
-      item.onmouseleave = function() {
-        if (isDesktop()) {
-          closeSubmenu(item);
-        }
-      };
-      
       if (toggle) {
         toggle.onclick = function(e) {
-          if (!isDesktop()) {
-            e.preventDefault();
-            if (item.classList.contains('is-open')) {
-              closeSubmenu(item);
-            } else {
-              openSubmenu(item);
-            }
+          e.preventDefault();
+          if (item.classList.contains('is-open')) {
+            closeSubmenu(item);
+          } else {
+            openSubmenu(item);
           }
         };
       }
