@@ -534,6 +534,69 @@
         /* ==================================================
            NEW ITINERARY FEATURES (Inclusions, Trust, Overview)
         ================================================== */
+        .lux-film-swiper {
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            padding-bottom: 20px;
+        }
+        .lux-film-swiper::-webkit-scrollbar {
+            display: none;
+        }
+        .lux-film-swiper .swiper-wrapper {
+            display: flex;
+            gap: 14px;
+            padding: 0 40px;
+        }
+        .lux-film-slide {
+            flex-shrink: 0;
+            position: relative;
+            height: 480px;
+            overflow: hidden;
+            border-radius: 10px;
+            scroll-snap-align: center;
+        }
+        .lux-film-slide:nth-child(3n+1) { width: 380px; }
+        .lux-film-slide:nth-child(3n+2) { width: 280px; }
+        .lux-film-slide:nth-child(3n) { width: 440px; }
+        .lux-film-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px !important;
+            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .lux-film-slide:hover img {
+            transform: scale(1.05);
+        }
+        @media (max-width: 768px) {
+            .lux-film-swiper .swiper-wrapper { padding: 0 0.85rem; }
+            .lux-film-slide {
+                height: 250px;
+                width: 85vw !important;
+                max-width: 360px;
+                margin-right: 20px;
+            }
+        }
+        
+        .lux-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .lux-feature svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            color: #AE8245;
+        }
+        .lux-feature span {
+            font-size: 0.95rem;
+            color: #5A6A6A;
+            font-weight: 500;
+        }
+
         .lux-features-container {
             margin-top: 3rem;
             margin-bottom: 5rem;
