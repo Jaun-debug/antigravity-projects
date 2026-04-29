@@ -833,12 +833,8 @@
                 'Fly-In Safaris': buildFolder('Fly-In Safaris', false),
                 'Guided Safaris': buildFolder('Guided Safaris', false),
                 'General WP Blocks': buildFolder('General WP Blocks', false),
-                'Botswana Collection': buildFolder('Collection Page', false),
-                'Botswana WP Blocks': buildFolder('WP Blocks', false),
-                'Botswana Itineraries': buildFolder('Itineraries', false),
-                'East Africa Collection': buildFolder('Collection Page', false),
-                'East Africa WP Blocks': buildFolder('WP Blocks', false),
-                'East Africa Itineraries': buildFolder('Itineraries', false)
+                'Botswana Safaris': buildFolder('Botswana Safaris', false),
+                'East Africa Safaris': buildFolder('East Africa Safaris', false)
             };
 
             const subFolders = {
@@ -850,7 +846,11 @@
                 'FLY_ITIN': buildSubFolder('FLY_ITIN', 'Itineraries'),
                 'FLY_BLOCKS': buildSubFolder('FLY_BLOCKS', 'WP Blocks'),
                 'GUI_ITIN': buildSubFolder('GUI_ITIN', 'Itineraries'),
-                'GUI_BLOCKS': buildSubFolder('GUI_BLOCKS', 'WP Blocks')
+                'GUI_BLOCKS': buildSubFolder('GUI_BLOCKS', 'WP Blocks'),
+                'BOT_BLOCKS': buildSubFolder('BOT_BLOCKS', 'WP Blocks'),
+                'BOT_ITIN': buildSubFolder('BOT_ITIN', 'Itineraries'),
+                'EA_BLOCKS': buildSubFolder('EA_BLOCKS', 'WP Blocks'),
+                'EA_ITIN': buildSubFolder('EA_ITIN', 'Itineraries')
             };
 
             // Attach subfolders
@@ -877,13 +877,13 @@
             mainFolders['Namibia'].inner.appendChild(folders['General WP Blocks'].details);
 
             // Attach folders to Botswana and East Africa Main Menus
-            mainFolders['Botswana'].inner.appendChild(folders['Botswana Collection'].details);
-            mainFolders['Botswana'].inner.appendChild(folders['Botswana WP Blocks'].details);
-            mainFolders['Botswana'].inner.appendChild(folders['Botswana Itineraries'].details);
+            folders['Botswana Safaris'].inner.appendChild(subFolders['BOT_BLOCKS'].details);
+            folders['Botswana Safaris'].inner.appendChild(subFolders['BOT_ITIN'].details);
+            mainFolders['Botswana'].inner.appendChild(folders['Botswana Safaris'].details);
             
-            mainFolders['East Africa'].inner.appendChild(folders['East Africa Collection'].details);
-            mainFolders['East Africa'].inner.appendChild(folders['East Africa WP Blocks'].details);
-            mainFolders['East Africa'].inner.appendChild(folders['East Africa Itineraries'].details);
+            folders['East Africa Safaris'].inner.appendChild(subFolders['EA_BLOCKS'].details);
+            folders['East Africa Safaris'].inner.appendChild(subFolders['EA_ITIN'].details);
+            mainFolders['East Africa'].inner.appendChild(folders['East Africa Safaris'].details);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
@@ -934,24 +934,18 @@
                     target = subFolders['GUI_ITIN'].inner;
                 }
                 // Botswana
-                else if (cmp.tag === 'Botswana Collection') {
-                    target = folders['Botswana Collection'].inner;
-                }
                 else if (cmp.tag === 'Botswana WP Blocks' || cmp.title.startsWith('Botswana Fade CTA') || cmp.title.startsWith('Botswana Safari Intro') || cmp.title.startsWith('Carousel - Botswana') || cmp.title.startsWith('Botswana FAQ') || cmp.title.startsWith('Botswana Best Time')) {
-                    target = folders['Botswana WP Blocks'].inner;
+                    target = subFolders['BOT_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'Botswana Doc' || cmp.title.includes('Botswana Itinerary Design')) {
-                    target = folders['Botswana Itineraries'].inner;
+                    target = subFolders['BOT_ITIN'].inner;
                 }
                 // East Africa
-                else if (cmp.tag === 'East Africa Collection') {
-                    target = folders['East Africa Collection'].inner;
-                }
                 else if (cmp.tag === 'East Africa WP Blocks' || cmp.title.startsWith('East Africa Fade CTA') || cmp.title.startsWith('East Africa Safari Intro') || cmp.title.startsWith('Carousel - East Africa') || cmp.title.startsWith('East Africa FAQ') || cmp.title.startsWith('East Africa Best Time')) {
-                    target = folders['East Africa WP Blocks'].inner;
+                    target = subFolders['EA_BLOCKS'].inner;
                 }
                 else if (cmp.tag === 'East Africa Doc' || cmp.title.includes('East Africa Itinerary Design')) {
-                    target = folders['East Africa Itineraries'].inner;
+                    target = subFolders['EA_ITIN'].inner;
                 }
                 // Websites
                 else if (cmp.tag === 'Websites') {
