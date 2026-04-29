@@ -242,6 +242,7 @@
             color: #d87a4d;
             line-height: 1;
             letter-spacing: -0.05em;
+            font-family: 'Open Sans', sans-serif !important;
         }
 
         .lux-day-line {
@@ -3723,13 +3724,7 @@
                         // Engage after 30% of page height is scrolled
                         const dropThreshold = document.documentElement.scrollHeight * 0.3;
                         if (window.scrollY > dropThreshold) {
-                            if (window.scrollY > lastScrollY + 2) {
-                                // Scrolling DOWN -> Show premium header over everything
-                                stickyHeader.classList.add('is-visible');
-                            } else if (window.scrollY < lastScrollY - 2) {
-                                // Scrolling UP -> Hide it (revealing the original WP menu)
-                                stickyHeader.classList.remove('is-visible');
-                            }
+                            stickyHeader.classList.add('is-visible');
                         } else {
                             // Above 30%, always hide it
                             stickyHeader.classList.remove('is-visible');
