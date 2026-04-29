@@ -832,9 +832,7 @@
                 'Luxury Safaris': buildFolder('Luxury Safaris', false),
                 'Fly-In Safaris': buildFolder('Fly-In Safaris', false),
                 'Guided Safaris': buildFolder('Guided Safaris', false),
-                'General WP Blocks': buildFolder('General WP Blocks', false),
-                'Botswana Safaris': buildFolder('Botswana Safaris', false),
-                'East Africa Safaris': buildFolder('East Africa Safaris', false)
+                'General WP Blocks': buildFolder('General WP Blocks', false)
             };
 
             const subFolders = {
@@ -877,13 +875,11 @@
             mainFolders['Namibia'].inner.appendChild(folders['General WP Blocks'].details);
 
             // Attach folders to Botswana and East Africa Main Menus
-            folders['Botswana Safaris'].inner.appendChild(subFolders['BOT_BLOCKS'].details);
-            folders['Botswana Safaris'].inner.appendChild(subFolders['BOT_ITIN'].details);
-            mainFolders['Botswana'].inner.appendChild(folders['Botswana Safaris'].details);
+            mainFolders['Botswana'].inner.appendChild(subFolders['BOT_BLOCKS'].details);
+            mainFolders['Botswana'].inner.appendChild(subFolders['BOT_ITIN'].details);
             
-            folders['East Africa Safaris'].inner.appendChild(subFolders['EA_BLOCKS'].details);
-            folders['East Africa Safaris'].inner.appendChild(subFolders['EA_ITIN'].details);
-            mainFolders['East Africa'].inner.appendChild(folders['East Africa Safaris'].details);
+            mainFolders['East Africa'].inner.appendChild(subFolders['EA_BLOCKS'].details);
+            mainFolders['East Africa'].inner.appendChild(subFolders['EA_ITIN'].details);
 
             components.forEach((cmp, idx) => {
                 const el = document.createElement('div');
