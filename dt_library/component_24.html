@@ -2033,7 +2033,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
 
-        <div class="lux-padding-wrapper" style="max-width: 900px; margin: 0 auto; padding-bottom: 2rem;">
+        <div id="dt-includes-section" class="lux-padding-wrapper" style="max-width: 900px; margin: 0 auto; padding-bottom: 2rem;">
             <h2 style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-top: 4rem; margin-bottom: 3rem; text-align: center;">Includes / Excludes</h2>
             <div class="lux-inclusions-grid">
                 <div class="lux-inc-col">
@@ -3123,13 +3123,26 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    // Engage after 30% of page height is scrolled
-                    const dropThreshold = document.documentElement.scrollHeight * 0.3;
-                    if (window.scrollY > dropThreshold) {
-                        stickyHeader.classList.add('is-visible');
+                    // Engage at Includes Section, hide at Coverflow
+                    const includesSection = document.getElementById('dt-includes-section');
+                    const coverflowSection = document.querySelector('.dt-coverflow-wrapper');
+                    
+                    if (includesSection && coverflowSection) {
+                        const startY = includesSection.offsetTop - (window.innerHeight * 0.7);
+                        const endY = coverflowSection.offsetTop - window.innerHeight;
+                        
+                        if (window.scrollY > startY && window.scrollY < endY) {
+                            stickyHeader.classList.add('is-visible');
+                        } else {
+                            stickyHeader.classList.remove('is-visible');
+                        }
                     } else {
-                        // Above 30%, always hide it
-                        stickyHeader.classList.remove('is-visible');
+                        const dropThreshold = document.documentElement.scrollHeight * 0.3;
+                        if (window.scrollY > dropThreshold) {
+                            stickyHeader.classList.add('is-visible');
+                        } else {
+                            stickyHeader.classList.remove('is-visible');
+                        }
                     }
                     lastScrollY = window.scrollY;
                     ticking = false;
