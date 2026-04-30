@@ -1495,14 +1495,14 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                             }).addTo(map);
 
                                                         const waypoints = [
-                                { id: '1', name: "Windhoek", lodge: "Ti Melen Boutique Guesthouse", nights: "", coords: [-22.56, 17.065] },
-                                { id: '2', name: "Kalahari", lodge: "Kalahari Anib Lodge Gondwana Collection Namibia", nights: "", coords: [-23.16, 18.016] },
-                                { id: '3', name: "Sossusvlei", lodge: "Desert Homestead Lodge", nights: "", coords: [-24.729, 15.352] },
-                                { id: '5', name: "Swakopmund", lodge: "Swakopmund Guesthouse", nights: "", coords: [-22.679, 14.527] },
-                                { id: '7', name: "Damaraland", lodge: "Lodge Damaraland", nights: "", coords: [-20.803, 14.939] },
-                                { id: '9', name: "Etosha South", lodge: "Etosha Safari Camp Gondwana Collection Namibia", nights: "", coords: [-19.336, 15.939] },
-                                { id: '10', name: "Onguma", lodge: "Onguma Bush Camp", nights: "", coords: [-18.784, 17.039] },
-                                { id: '12', name: "Otjiwa", lodge: "Otjiwa Collection - Eagle's Rest", nights: "", coords: [-20.505, 16.326] },
+                                { id: '', name: "Windhoek", lodge: "Ti Melen Boutique Guesthouse", nights: "", coords: [-22.56, 17.065] },
+                                { id: '1', name: "Kalahari", lodge: "Kalahari Anib Lodge Gondwana Collection Namibia", nights: "", coords: [-23.16, 18.016] },
+                                { id: '2', name: "Sossusvlei", lodge: "Desert Homestead Lodge", nights: "", coords: [-24.729, 15.352] },
+                                { id: '3', name: "Swakopmund", lodge: "Swakopmund Guesthouse", nights: "", coords: [-22.679, 14.527] },
+                                { id: '4', name: "Damaraland", lodge: "Lodge Damaraland", nights: "", coords: [-20.803, 14.939] },
+                                { id: '5', name: "Etosha South", lodge: "Etosha Safari Camp Gondwana Collection Namibia", nights: "", coords: [-19.336, 15.939] },
+                                { id: '6', name: "Onguma", lodge: "Onguma Bush Camp", nights: "", coords: [-18.784, 17.039] },
+                                { id: '7', name: "Otjiwa", lodge: "Otjiwa Collection - Eagle's Rest", nights: "", coords: [-20.505, 16.326] },
                             ];
 
                             let jumpToWaypoint = null;
@@ -1550,7 +1550,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                                 let currentLegIndex = 0; let currentTimeoutId = null; let animationId = null;
                                 jumpToWaypoint = (index) => {
                                     if (animationId) cancelAnimationFrame(animationId); if (currentTimeoutId) clearTimeout(currentTimeoutId);
-                                    hideBanner(); currentLegIndex = index >= routeSegments.length ? 0 : index;
+                                    hideBanner(); currentLegIndex = index;
                                     movingCar.setLatLng(waypoints[currentLegIndex].coords); showBanner(waypoints[currentLegIndex]);
                                     currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
                                 };

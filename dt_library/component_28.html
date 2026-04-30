@@ -1515,18 +1515,18 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                             }).addTo(map);
 
                                                         const waypoints = [
-                                { id: '1', name: "Windhoek", lodge: "The Weinberg Windhoek Gondwana Collection Namibia", nights: "", coords: [-22.56, 17.065] },
-                                { id: '2', name: "Kalahari", lodge: "Bagatelle Boutique Farmhouse", nights: "", coords: [-23.16, 18.016] },
-                                { id: '3', name: "Fish River Canyon", lodge: "Fish River Lodge", nights: "", coords: [-27.625, 17.817] },
-                                { id: '4', name: "Lüderitz", lodge: "Alte Villa", nights: "", coords: [-26.648, 15.159] },
-                                { id: '6', name: "Sossusvlei", lodge: "Hoodia Desert Lodge", nights: "", coords: [-24.729, 15.352] },
-                                { id: '8', name: "Swakopmund", lodge: "Strand Hotel Swakopmund", nights: "", coords: [-22.679, 14.527] },
-                                { id: '10', name: "Twyfelfontein", lodge: "Camp Kipwe", nights: "", coords: [-20.573, 14.372] },
-                                { id: '11', name: "Opuwo", lodge: "Opuwo Country Lodge", nights: "", coords: [-18.06, 13.84] },
-                                { id: '12', name: "Epupa Falls", lodge: "Omarunga Epupa-Falls Camp Gondwana Collection Namibia", nights: "", coords: [-17.0, 13.245] },
-                                { id: '14', name: "Etosha West", lodge: "Dolomite Resort", nights: "", coords: [-19.0, 14.41] },
-                                { id: '15', name: "Etosha South", lodge: "Etosha Oberland Lodge", nights: "", coords: [-19.336, 15.939] },
-                                { id: '17', name: "Windhoek", lodge: "Okapuka Safari Lodge Gondwana Collection Namibia", nights: "", coords: [-22.56, 17.065] },
+                                { id: '', name: "Windhoek", lodge: "The Weinberg Windhoek Gondwana Collection Namibia", nights: "", coords: [-22.56, 17.065] },
+                                { id: '1', name: "Kalahari", lodge: "Bagatelle Boutique Farmhouse", nights: "", coords: [-23.16, 18.016] },
+                                { id: '2', name: "Fish River Canyon", lodge: "Fish River Lodge", nights: "", coords: [-27.625, 17.817] },
+                                { id: '3', name: "Lüderitz", lodge: "Alte Villa", nights: "", coords: [-26.648, 15.159] },
+                                { id: '4', name: "Sossusvlei", lodge: "Hoodia Desert Lodge", nights: "", coords: [-24.729, 15.352] },
+                                { id: '5', name: "Swakopmund", lodge: "Strand Hotel Swakopmund", nights: "", coords: [-22.679, 14.527] },
+                                { id: '6', name: "Twyfelfontein", lodge: "Camp Kipwe", nights: "", coords: [-20.573, 14.372] },
+                                { id: '7', name: "Opuwo", lodge: "Opuwo Country Lodge", nights: "", coords: [-18.06, 13.84] },
+                                { id: '8', name: "Epupa Falls", lodge: "Omarunga Epupa-Falls Camp Gondwana Collection Namibia", nights: "", coords: [-17.0, 13.245] },
+                                { id: '9', name: "Etosha West", lodge: "Dolomite Resort", nights: "", coords: [-19.0, 14.41] },
+                                { id: '10', name: "Etosha South", lodge: "Etosha Oberland Lodge", nights: "", coords: [-19.336, 15.939] },
+                                { id: '11', name: "Windhoek", lodge: "Okapuka Safari Lodge Gondwana Collection Namibia", nights: "", coords: [-22.56, 17.065] },
                             ];
 
                             let jumpToWaypoint = null;
@@ -1574,7 +1574,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                                 let currentLegIndex = 0; let currentTimeoutId = null; let animationId = null;
                                 jumpToWaypoint = (index) => {
                                     if (animationId) cancelAnimationFrame(animationId); if (currentTimeoutId) clearTimeout(currentTimeoutId);
-                                    hideBanner(); currentLegIndex = index >= routeSegments.length ? 0 : index;
+                                    hideBanner(); currentLegIndex = index;
                                     movingCar.setLatLng(waypoints[currentLegIndex].coords); showBanner(waypoints[currentLegIndex]);
                                     currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
                                 };

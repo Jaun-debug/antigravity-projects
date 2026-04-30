@@ -1505,16 +1505,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                             }).addTo(map);
 
                                                         const waypoints = [
-                                { id: '1', name: "Windhoek", lodge: "The Weinberg Windhoek Gondwana Collection Namibia", nights: "", coords: [-22.56, 17.065] },
-                                { id: '2', name: "Sesriem", lodge: "Namib Outpost", nights: "", coords: [-24.729, 15.352] },
-                                { id: '4', name: "Swakopmund", lodge: "Strand Hotel Swakopmund", nights: "", coords: [-22.679, 14.527] },
-                                { id: '6', name: "Spitzkoppe", lodge: "Spitzkoppen Lodge", nights: "", coords: [-21.825, 15.183] },
-                                { id: '7', name: "Etosha South", lodge: "Etosha Oberland Lodge", nights: "", coords: [-19.336, 15.939] },
-                                { id: '8', name: "Onguma", lodge: "Onguma The Fort", nights: "", coords: [-18.784, 17.039] },
-                                { id: '10', name: "Divundu", lodge: "Divava Okavango Resort & Spa", nights: "", coords: [-18.093, 21.536] },
-                                { id: '12', name: "Okavango Delta", lodge: "Kanana", nights: "", coords: [-19.294, 22.915] },
-                                { id: '14', name: "Chobe River", lodge: "Chobe Game Lodge", nights: "", coords: [-17.828, 25.048] },
-                                { id: '16', name: "Victoria Falls", lodge: "Old Drift Lodge", nights: "", coords: [-17.924, 25.856] },
+                                { id: '', name: "Windhoek", lodge: "The Weinberg Windhoek Gondwana Collection Namibia", nights: "", coords: [-22.56, 17.065] },
+                                { id: '1', name: "Sesriem", lodge: "Namib Outpost", nights: "", coords: [-24.729, 15.352] },
+                                { id: '2', name: "Swakopmund", lodge: "Strand Hotel Swakopmund", nights: "", coords: [-22.679, 14.527] },
+                                { id: '3', name: "Spitzkoppe", lodge: "Spitzkoppen Lodge", nights: "", coords: [-21.825, 15.183] },
+                                { id: '4', name: "Etosha South", lodge: "Etosha Oberland Lodge", nights: "", coords: [-19.336, 15.939] },
+                                { id: '5', name: "Onguma", lodge: "Onguma The Fort", nights: "", coords: [-18.784, 17.039] },
+                                { id: '6', name: "Divundu", lodge: "Divava Okavango Resort & Spa", nights: "", coords: [-18.093, 21.536] },
+                                { id: '7', name: "Okavango Delta", lodge: "Kanana", nights: "", coords: [-19.294, 22.915] },
+                                { id: '8', name: "Chobe River", lodge: "Chobe Game Lodge", nights: "", coords: [-17.828, 25.048] },
+                                { id: '9', name: "Victoria Falls", lodge: "Old Drift Lodge", nights: "", coords: [-17.924, 25.856] },
                             ];
 
                             let jumpToWaypoint = null;
@@ -1562,7 +1562,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                                 let currentLegIndex = 0; let currentTimeoutId = null; let animationId = null;
                                 jumpToWaypoint = (index) => {
                                     if (animationId) cancelAnimationFrame(animationId); if (currentTimeoutId) clearTimeout(currentTimeoutId);
-                                    hideBanner(); currentLegIndex = index >= routeSegments.length ? 0 : index;
+                                    hideBanner(); currentLegIndex = index;
                                     movingCar.setLatLng(waypoints[currentLegIndex].coords); showBanner(waypoints[currentLegIndex]);
                                     currentTimeoutId = setTimeout(() => { hideBanner(); currentTimeoutId = setTimeout(playLeg, 400); }, 1500);
                                 };
