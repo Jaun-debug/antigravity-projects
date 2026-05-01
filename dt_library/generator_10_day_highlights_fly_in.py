@@ -1,9 +1,9 @@
 import json
 import re
 
-json_path = "/Users/jaunhusselmann/Downloads/7-Day Namibia Desert, Dune & Wildlife Fly-In Safari.json"
+json_path = "/Users/jaunhusselmann/Downloads/10-Day Highlights of Namibia – Luxury Fly-In & Road Safari.json"
 template_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/11_day_namibia_wildlife_safari.html"
-output_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/7_day_namibia_desert_dune_wildlife_fly_in_safari.html"
+output_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/10_day_highlights_of_namibia_luxury_fly_in_safari.html"
 
 with open(json_path, 'r') as f:
     data = json.load(f)
@@ -12,18 +12,18 @@ with open(template_path, 'r') as f:
     html = f.read()
 
 # 1. Replace titles and hero strings
-html = html.replace("<title>11-Day Namibia Wildlife Safari</title>", "<title>7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari</title>")
-html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', 'data-default-title="7-Day Namibia Desert,<br>Dune & Wildlife Safari"')
-html = html.replace('11-Day Namibia<br>Wildlife Safari', '7-Day Namibia Desert,<br>Dune & Wildlife Safari')
+html = html.replace("<title>11-Day Namibia Wildlife Safari</title>", "<title>10-Day Highlights Of Namibia \u2013 Luxury Fly-In &amp; Road Safari</title>")
+html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', 'data-default-title="10-Day Highlights Of Namibia<br>Luxury Fly-In Safari"')
+html = html.replace('11-Day Namibia<br>Wildlife Safari', '10-Day Highlights Of Namibia<br>Luxury Fly-In Safari')
 
 # 2. Hero Backgrounds
-html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-94973656.jpg?fmt=jpg')
+html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/278309/hoanibriver-istock-625896194_1.jpg?fmt=jpg')
 
 # 3. Subtitle and Intro
-html = html.replace('A bespoke self-drive journey through iconic landscapes', 'A breathtaking aerial journey over Namibia’s most dramatic and remote landscapes.')
+html = html.replace('A bespoke self-drive journey through iconic landscapes', 'A spectacular aerial and overland adventure through Namibia’s greatest contrasts.')
 
 intro_old = "Discover Namibia at your own pace while staying at some of the country’s most exceptional lodges. From the dramatic red dunes of Sossusvlei to the stark beauty of Damaraland and the prolific wildlife of Etosha National Park, this carefully curated journey balances the freedom of independent travel with the reassurance of premium hospitality. With luxury accommodation, hand-picked experiences, and our bespoke navigation app to guide you, every detail is considered."
-intro_new = "Take to the skies for a breathtaking 7-day fly-in safari that captures the very essence of Namibia. Soar over the towering red dunes of Sossusvlei, trace the hauntingly beautiful and desolate Skeleton Coast, and touch down in the game-rich plains of Etosha. This curated journey combines spectacular aerial perspectives with world-class ground experiences, offering you exclusive access to remote wilderness areas, premium luxury accommodation, and unforgettable wildlife encounters—all while maximizing your time in this vast and remarkable country."
+intro_new = "Combining the thrill of low-level scenic flights with rugged overland exploration, this 10-day luxury safari delivers Namibia’s absolute highlights. From the iconic red dunes of Sossusvlei to the desolate shipwreck-strewn Skeleton Coast, and deep into the wildlife-rich Hoanib River valley before concluding at the pristine Onguma Nature Reserve. With premium luxury lodges, breathtaking aerial perspectives, and exclusive wildlife encounters, this journey captures the wild heart of Namibia."
 html = html.replace(intro_old, intro_new)
 
 # 4. Glance Items (Destinations)
@@ -47,10 +47,11 @@ html = re.sub(r'<div class="lux-acc-grid">.*?</div>\s+</div>\s+<!-- // ANIMATED 
 # 5. Waypoints
 waypoints_str = '''                                const waypoints = [
                                     { id: '', name: 'Arrival', lodge: 'Windhoek', nights: 'START', coords: [-22.5609, 17.0658] },
-                                    { id: '1', name: 'Sossusvlei', lodge: 'Dead Valley Lodge', nights: '2 NIGHTS', coords: [-24.47, 15.80] },
+                                    { id: '1', name: 'Sossusvlei', lodge: 'Wilderness Kulala Desert Lodge', nights: '2 NIGHTS', coords: [-24.81, 15.63] },
                                     { id: '2', name: 'Skeleton Coast', lodge: 'Shipwreck Lodge', nights: '2 NIGHTS', coords: [-19.16, 12.56] },
-                                    { id: '3', name: 'Onguma / Etosha East', lodge: 'Onguma The Fort', nights: '2 NIGHTS', coords: [-18.73, 17.04] },
-                                    { id: '4', name: 'Departure', lodge: 'Hosea Kutako Airport', nights: 'DEPART', coords: [-22.48, 17.47] }
+                                    { id: '3', name: 'Hoanib River', lodge: 'Hoanib Valley Camp', nights: '2 NIGHTS', coords: [-19.26, 13.56] },
+                                    { id: '4', name: 'Onguma / Etosha East', lodge: 'Onguma The Fort', nights: '3 NIGHTS', coords: [-18.73, 17.04] },
+                                    { id: '5', name: 'Departure', lodge: 'Hosea Kutako Airport', nights: 'DEPART', coords: [-22.48, 17.47] }
                                 ];'''
 html = re.sub(r'const waypoints = \[.*?\];', waypoints_str, html, flags=re.DOTALL)
 
@@ -154,19 +155,12 @@ new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-containe
 
 html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', new_lodge_selection, html, flags=re.DOTALL)
 
-with open(output_path, 'w') as f:
-    f.write(html)
-
 # 8. Replace car icon with plane icon
 car_svg = '<svg id="dt-car-svg" viewBox="0 0 100 100" fill="#ffffff"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#ffffff" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#ffffff"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#ffffff" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#ffffff" /><circle cx="28" cy="58" r="6" fill="#C85F19" /><circle cx="72" cy="58" r="6" fill="#C85F19" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#C85F19" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#C85F19" /></svg>'
-plane_svg = '<svg id="dt-car-svg" viewBox="0 0 24 24" fill="#ffffff" style="transform: rotate(45deg);"><path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z"/></svg>'
-
-with open(output_path, 'r') as f:
-    html = f.read()
-
+plane_svg = '<svg id="dt-car-svg" viewBox="0 0 24 24" width="100%" height="100%" fill="#ffffff" style="transform: rotate(45deg);"><path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2,1.5V22l3.5-1l3.5,1v-1.5L13,19v-5.5L21,16z"/></svg>'
 html = html.replace(car_svg, plane_svg)
 
 with open(output_path, 'w') as f:
     f.write(html)
 
-print("Generated 7_day_namibia_desert_dune_wildlife_fly_in_safari.html successfully!")
+print("Generated 10_day_highlights_of_namibia_luxury_fly_in_safari.html successfully!")
