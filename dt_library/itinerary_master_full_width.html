@@ -1608,8 +1608,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </section>
         
-        <h2 style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 300; font-size: clamp(32px, 5vw, 42px); line-height: 1.2; letter-spacing: 0.05em; margin-top: 4rem; margin-bottom: 2rem; text-transform: uppercase;">Day-By-Day Itinerary</h2>
-        <div style="width: 100%; height: 1px; background-color: #eee; margin-bottom: 2rem;"></div>
+        <h2 style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 300; font-size: clamp(24px, 4vw, 32px); line-height: 1.2; letter-spacing: 0.05em; margin-top: 4rem; margin-bottom: 0rem; text-transform: uppercase;">Day-By-Day Itinerary</h2>
         
         <!-- DAY 01 -->
         <div class="lux-day-block" id="day-01" data-bg="https://wetu.com/imageHandler/c1920x1080/257973/intu_afrika_kalahari_game_reserve-istock-13177826271.jpg?fmt=jpg" data-region="Kalahari Desert">
@@ -3122,19 +3121,9 @@ function initAccordionLogic() {
         
         // If Nicepage already wrapped it, just ensure we attach the click logic
         if (!trigger) {
-            // Find existing location text (e.g. Kalahari Desert)
+            // Find existing location text
             const locNode = block.querySelector('.lux-day-location');
-            let locText = locNode ? locNode.innerText.split(' — ')[0].trim() : 'Destination';
-            
-            // Find existing lodge name
-            const lodgeNode = block.querySelector('.dt-film-title');
-            let lodgeText = lodgeNode ? lodgeNode.innerText.trim() : '';
-            
-            // Combine them beautifully with brackets
-            let finalTitleHtml = locText;
-            if (lodgeText) {
-                finalTitleHtml += ` <span style="font-size: 0.85em; opacity: 0.6; font-family: 'Open Sans', sans-serif; font-weight: 400;">(${lodgeText})</span>`;
-            }
+            let finalTitleHtml = locNode ? locNode.innerHTML : 'Destination';
             
             // Wrap everything currently inside block into the Grid inner-wrapper
             const innerContent = document.createElement('div');
