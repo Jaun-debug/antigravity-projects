@@ -1,7 +1,7 @@
 import json
 import re
 
-json_path = "/tmp/data.json"
+json_path = "/Users/jaunhusselmann/Downloads/wetu-487e81b5-4faf-4bdc-88f7-d28a3b229cdf?_gl=1*1jhizaq*_gcl_au*ODY4OTAxNjY5LjE3NzYzMzM3MjA..json"
 template_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/11_day_namibia_wildlife_safari.html"
 output_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/10_day_ultra_luxury_namibia_safari_north_focus.html"
 
