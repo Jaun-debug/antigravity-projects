@@ -20,7 +20,7 @@ html = html.replace('11-Day Namibia<br>Wildlife Safari', '10-Day Namibia Honeymo
 html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/1519/17_little_kulala_red_sand_dunes_0374.jpg?fmt=jpg')
 
 # 3. Subtitle and Intro
-html = html.replace('A bespoke self-drive journey through iconic landscapes', 'An unforgettable, deeply romantic fly-in journey through Namibia’s most breathtaking landscapes.')
+html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', 'An unforgettable, deeply romantic fly-in journey through Namibia’s most breathtaking landscapes.', html, flags=re.DOTALL)
 
 intro_old = "Discover Namibia at your own pace while staying at some of the country’s most exceptional lodges. From the dramatic red dunes of Sossusvlei to the stark beauty of Damaraland and the prolific wildlife of Etosha National Park, this carefully curated journey balances the freedom of independent travel with the reassurance of premium hospitality. With luxury accommodation, hand-picked experiences, and our bespoke navigation app to guide you, every detail is considered."
 intro_new = "Celebrate your love in absolute exclusivity with this 10-day luxury fly-in honeymoon. Soaring over vast desert expanses, you will seamlessly connect Namibia’s most romantic and remote destinations—from the towering red dunes of Sossusvlei to the wild, rugged beauty of Damaraland and the thriving wildlife sanctuaries bordering Etosha. With spectacular aerial views, deeply private luxury suites, and world-class hospitality, this is the ultimate romantic escape."

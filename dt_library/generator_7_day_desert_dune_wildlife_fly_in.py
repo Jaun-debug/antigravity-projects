@@ -20,7 +20,7 @@ html = html.replace('11-Day Namibia<br>Wildlife Safari', '7-Day Namibia Desert,<
 html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-94973656.jpg?fmt=jpg')
 
 # 3. Subtitle and Intro
-html = html.replace('A bespoke self-drive journey through iconic landscapes', 'A breathtaking aerial journey over Namibia’s most dramatic and remote landscapes.')
+html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', 'A breathtaking aerial journey over Namibia’s most dramatic and remote landscapes.', html, flags=re.DOTALL)
 
 intro_old = "Discover Namibia at your own pace while staying at some of the country’s most exceptional lodges. From the dramatic red dunes of Sossusvlei to the stark beauty of Damaraland and the prolific wildlife of Etosha National Park, this carefully curated journey balances the freedom of independent travel with the reassurance of premium hospitality. With luxury accommodation, hand-picked experiences, and our bespoke navigation app to guide you, every detail is considered."
 intro_new = "Take to the skies for a breathtaking 7-day fly-in safari that captures the very essence of Namibia. Soar over the towering red dunes of Sossusvlei, trace the hauntingly beautiful and desolate Skeleton Coast, and touch down in the game-rich plains of Etosha. This curated journey combines spectacular aerial perspectives with world-class ground experiences, offering you exclusive access to remote wilderness areas, premium luxury accommodation, and unforgettable wildlife encounters—all while maximizing your time in this vast and remarkable country."

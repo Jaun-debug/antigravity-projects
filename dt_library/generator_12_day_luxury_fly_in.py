@@ -20,7 +20,7 @@ html = html.replace('11-Day Namibia<br>Wildlife Safari', '12-Day Namibia In Styl
 html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/94631/hartmannvalley-shutterstock_1601943580_1.jpg?fmt=jpg')
 
 # 3. Subtitle and Intro
-html = html.replace('A bespoke self-drive journey through iconic landscapes', 'An opulent aerial journey to Namibia’s most remote and breathtaking destinations.')
+html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', 'An opulent aerial journey to Namibia’s most remote and breathtaking destinations.', html, flags=re.DOTALL)
 
 intro_old = "Discover Namibia at your own pace while staying at some of the country’s most exceptional lodges. From the dramatic red dunes of Sossusvlei to the stark beauty of Damaraland and the prolific wildlife of Etosha National Park, this carefully curated journey balances the freedom of independent travel with the reassurance of premium hospitality. With luxury accommodation, hand-picked experiences, and our bespoke navigation app to guide you, every detail is considered."
 intro_new = "Experience the absolute pinnacle of luxury travel with this 12-day fly-in safari, designed for those who seek uncompromising exclusivity. Soar across vast desert expanses, landing in some of the most remote and dramatic landscapes on Earth—from the hauntingly beautiful Skeleton Coast and the ancient Hartmann Valley to the wildlife-rich plains of Etosha. With spectacular aerial views, deeply private luxury suites, and world-class hospitality, this is Namibia presented in unmatched style."

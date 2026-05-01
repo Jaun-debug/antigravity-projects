@@ -20,7 +20,7 @@ html = html.replace('11-Day Namibia<br>Wildlife Safari', '10-Day Highlights Of N
 html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/278309/hoanibriver-istock-625896194_1.jpg?fmt=jpg')
 
 # 3. Subtitle and Intro
-html = html.replace('A bespoke self-drive journey through iconic landscapes', 'A spectacular aerial and overland adventure through Namibia’s greatest contrasts.')
+html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', 'A spectacular aerial and overland adventure through Namibia’s greatest contrasts.', html, flags=re.DOTALL)
 
 intro_old = "Discover Namibia at your own pace while staying at some of the country’s most exceptional lodges. From the dramatic red dunes of Sossusvlei to the stark beauty of Damaraland and the prolific wildlife of Etosha National Park, this carefully curated journey balances the freedom of independent travel with the reassurance of premium hospitality. With luxury accommodation, hand-picked experiences, and our bespoke navigation app to guide you, every detail is considered."
 intro_new = "Combining the thrill of low-level scenic flights with rugged overland exploration, this 10-day luxury safari delivers Namibia’s absolute highlights. From the iconic red dunes of Sossusvlei to the desolate shipwreck-strewn Skeleton Coast, and deep into the wildlife-rich Hoanib River valley before concluding at the pristine Onguma Nature Reserve. With premium luxury lodges, breathtaking aerial perspectives, and exclusive wildlife encounters, this journey captures the wild heart of Namibia."
