@@ -233,7 +233,7 @@
 
         .lux-day-title {
             font-family: 'Cinzel', serif !important;
-            font-size: clamp(36px, 6vw, 46px) !important;
+            font-size: clamp(32px, 5vw, 42px) !important;
             font-weight: 300 !important;
             margin: 0 0 1rem 0 !important;
             color: #1F4F4B !important;
@@ -1508,6 +1508,21 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                             });
                             const movingCar = L.marker(waypoints[0].coords, { icon: carIcon, zIndexOffset: 1000 }).addTo(map);
 
+                            function getCurvePoints(p1, p2) {
+                                const points = [];
+                                const midPoint = [ (p1[0] + p2[0])/2, (p1[1] + p2[1])/2 ];
+                                const dx = p2[0] - p1[0]; const dy = p2[1] - p1[1];
+                                const factor = 0.15; 
+                                const controlPoint = [ midPoint[0] - dy * factor, midPoint[1] + dx * factor ];
+                                for (let t = 0; t <= 1; t += 0.05) {
+                                    points.push([
+                                        (1-t)*(1-t)*p1[0] + 2*(1-t)*t*controlPoint[0] + t*t*p2[0],
+                                        (1-t)*(1-t)*p1[1] + 2*(1-t)*t*controlPoint[1] + t*t*p2[1]
+                                    ]);
+                                }
+                                return points;
+                            }
+
                             async function fetchRealRoadsAndRun() {
                                 const routeSegments = []; let fullRouteCoords = [];
                                 for (let i = 0; i < waypoints.length - 1; i++) {
@@ -1516,8 +1531,8 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                                         const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${wp1[1]},${wp1[0]};${wp2[1]},${wp2[0]}?overview=full&geometries=geojson`);
                                         const data = await res.json();
                                         if (data.routes && data.routes.length > 0) { legCoords = data.routes[0].geometry.coordinates.map(c => [c[1], c[0]]); }
-                                        else { legCoords = [wp1, wp2]; }
-                                    } catch (e) { legCoords = [wp1, wp2]; }
+                                        else { legCoords = getCurvePoints(wp1, wp2); }
+                                    } catch (e) { legCoords = getCurvePoints(wp1, wp2); }
                                     routeSegments.push(legCoords); fullRouteCoords.push(...legCoords);
                                 }
                                 const routeLine = L.polyline(fullRouteCoords, { color: '#1F4F4B', weight: 4, opacity: 0.8, dashArray: "1, 8", lineJoin: 'round', lineCap: 'round' }).addTo(map);
