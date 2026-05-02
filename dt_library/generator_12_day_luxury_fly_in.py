@@ -137,34 +137,36 @@ for i, item in enumerate(data['itinerary']):
 html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', lambda m: day_blocks, html, flags=re.DOTALL)
 
 # 7. Bottom Carousel (Lodge Selection)
-bottom_carousel_html = '''
-                        <a href="https://wetu.com/ItineraryOutputs/Discovery/de75c783-8643-4e46-b0d6-114fbcd3f137" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari">
-                            <h4 class="lux-acc-title">7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari</h4>
-                        </a>
-                        <a href="https://wetu.com/ItineraryOutputs/Discovery/4db02e36-a80a-4486-987a-251d707016c0" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Onguma-Camp-Kala-_1-scaled.jpg" alt="12-Day Namibia in Style – Luxury Fly-In Safari">
-                            <h4 class="lux-acc-title">12-Day Namibia in Style – Luxury Fly-In Safari</h4>
-                        </a>
-                        <a href="https://wetu.com/ItineraryOutputs/Discovery/cf8f5ef9-4740-4976-90d5-e644b2e25b4b" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/01hoanibvalley-tentexterior.jpg" alt="10-Day Highlights of Namibia – Luxury Fly-In & Road Safari">
-                            <h4 class="lux-acc-title">10-Day Highlights of Namibia – Luxury Fly-In & Road Safari</h4>
-                        </a>
-                        <a href="https://wetu.com/ItineraryOutputs/Discovery/F959961B-5EA6-43DC-B713-5A2FB0928EB1" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Little-Kulala_3-scaled.jpg" alt="10-Day Namibia Honeymoon Luxury Fly-In Safari">
-                            <h4 class="lux-acc-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</h4>
-                        </a>
-                        <a href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/wildernessserracafema_6.jpg" alt="14-Day Luxury Namibia Drive &amp; Fly Photographic Safari">
-                            <h4 class="lux-acc-title">14-Day Luxury Namibia Drive &amp; Fly Photographic Safari</h4>
-                        </a>
-                        <a href="https://wetu.com/ItineraryOutputs/Discovery/2084D921-60AB-4B0F-8832-E857FD4D0E35" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/kipwe1.jpg" alt="8-Day Namibia in Style – Luxury Fly-In Safari">
-                            <h4 class="lux-acc-title">8-Day Namibia in Style – Luxury Fly-In Safari</h4>
-                        </a>
-'''
+lodge_carousel_html = ""
+for item in data.get('bottom_carousel', []):
+    acc = item.get('accommodation', '')
+    img_acc = item.get('image', '')
+    lodge_carousel_html += f'''                        <a href="#" target="_blank" class="lux-acc-card">
+                            <img src="{img_acc}" alt="{acc}">
+                            <h4 class="lux-acc-title">{acc}</h4>
+                        </a>\n'''
+
+# 8. More Safaris Carousel
+more_safaris_html = '''
+                        <a href="https://wetu.com/ItineraryOutputs/Discovery/de75c783-8643-4e46-b0d6-114fbcd3f137" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2024/08/Shipwreck-Lodge.jpg" alt="7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari">\n                            <h4 class="lux-acc-title">7-Day Namibia Desert, Dune &amp; Wildlife Fly-In Safari</h4>\n                        </a>\n                        <a href="https://wetu.com/ItineraryOutputs/Discovery/4db02e36-a80a-4486-987a-251d707016c0" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Onguma-Camp-Kala-_1-scaled.jpg" alt="12-Day Namibia in Style – Luxury Fly-In Safari">\n                            <h4 class="lux-acc-title">12-Day Namibia in Style – Luxury Fly-In Safari</h4>\n                        </a>\n                        <a href="https://wetu.com/ItineraryOutputs/Discovery/cf8f5ef9-4740-4976-90d5-e644b2e25b4b" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/01hoanibvalley-tentexterior.jpg" alt="10-Day Highlights of Namibia – Luxury Fly-In & Road Safari">\n                            <h4 class="lux-acc-title">10-Day Highlights of Namibia – Luxury Fly-In & Road Safari</h4>\n                        </a>\n                        <a href="https://wetu.com/ItineraryOutputs/Discovery/F959961B-5EA6-43DC-B713-5A2FB0928EB1" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/04/Wilderness-Little-Kulala_3-scaled.jpg" alt="10-Day Namibia Honeymoon Luxury Fly-In Safari">\n                            <h4 class="lux-acc-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</h4>\n                        </a>\n                        <a href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/wildernessserracafema_6.jpg" alt="14-Day Luxury Namibia Drive &amp; Fly Photographic Safari">\n                            <h4 class="lux-acc-title">14-Day Luxury Namibia Drive &amp; Fly Photographic Safari</h4>\n                        </a>\n                        <a href="https://wetu.com/ItineraryOutputs/Discovery/2084D921-60AB-4B0F-8832-E857FD4D0E35" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/09/kipwe1.jpg" alt="8-Day Namibia in Style – Luxury Fly-In Safari">\n                            <h4 class="lux-acc-title">8-Day Namibia in Style – Luxury Fly-In Safari</h4>\n                        </a>\n'''
 
 new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-container"
+                    style="margin-bottom: 4rem; padding-top: 2rem;">
+                    <h2
+                        style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
+                        Lodge Selection</h2>
+                    <div class="flex-scroll-hint">
+                        <span>Swipe to explore</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </div>
+                    <div class="lux-acc-grid">
+{lodge_carousel_html}                    </div>
+                </div>
+
+                <div id="more-safaris" class="lux-acc-grid-container"
                     style="margin-bottom: 4rem; padding-top: 2rem;">
                     <h2
                         style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
@@ -177,10 +179,10 @@ new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-containe
                         </svg>
                     </div>
                     <div class="lux-acc-grid">
-{bottom_carousel_html}                    </div>
+{more_safaris_html}                    </div>
                 </div>\n\n                '''
 
-html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', lambda m: new_lodge_selection, html, flags=re.DOTALL)
+html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', new_lodge_selection, html, flags=re.DOTALL)
 
 # 8. Replace car icon with plane icon
 car_svg = '<svg id="dt-car-svg" viewBox="0 0 100 100" fill="#ffffff"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#ffffff" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#ffffff"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#ffffff" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#ffffff" /><circle cx="28" cy="58" r="6" fill="#C85F19" /><circle cx="72" cy="58" r="6" fill="#C85F19" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#C85F19" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#C85F19" /></svg>'

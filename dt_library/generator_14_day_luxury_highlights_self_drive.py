@@ -138,34 +138,36 @@ for i, item in enumerate(data['itinerary']):
 html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', day_blocks, html, flags=re.DOTALL)
 
 # 7. Bottom Carousel (Lodge Selection)
-bottom_carousel_html = '''
-                        <a href="https://desert-tracks.com/18-days-hidden-treasures-of-namibia-safari/" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large.jpeg" alt="Hidden Treasures Of Namibia">
-                            <h4 class="lux-acc-title">Hidden Treasures Of Namibia</h4>
-                        </a>
-                        <a href="https://desert-tracks.com/11-days-south-of-namibia-safari/" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/sossuvlei_221kb.jpg" alt="South of Namibia">
-                            <h4 class="lux-acc-title">South of Namibia</h4>
-                        </a>
-                        <a href="https://desert-tracks.com/18-days-namibia-delta-chobe-vic-falls-safari/" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-2.jpg" alt="Namibia, Delta &amp; Chobe">
-                            <h4 class="lux-acc-title">Namibia, Delta &amp; Chobe</h4>
-                        </a>
-                        <a href="https://desert-tracks.com/14-days-namibia-comfort-safari/" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4.jpg" alt="Best of Namibia">
-                            <h4 class="lux-acc-title">Best of Namibia</h4>
-                        </a>
-                        <a href="https://desert-tracks.com/11-days-wildlife-of-namibia-safari/" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large.jpeg" alt="Namibia Wildlife">
-                            <h4 class="lux-acc-title">Namibia Wildlife</h4>
-                        </a>
-                        <a href="https://desert-tracks.com/17-days-namibia-chobe-vic-falls-safari/" target="_blank" class="lux-acc-card">
-                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/divava-1.jpg" alt="Namibia, Chobe &amp; Vic Falls">
-                            <h4 class="lux-acc-title">Namibia, Chobe &amp; Vic Falls</h4>
-                        </a>
-'''
+lodge_carousel_html = ""
+for item in data.get('bottom_carousel', []):
+    acc = item.get('accommodation', '')
+    img_acc = item.get('image', '')
+    lodge_carousel_html += f'''                        <a href="#" target="_blank" class="lux-acc-card">
+                            <img src="{img_acc}" alt="{acc}">
+                            <h4 class="lux-acc-title">{acc}</h4>
+                        </a>\n'''
+
+# 8. More Safaris Carousel
+more_safaris_html = '''
+                        <a href="https://desert-tracks.com/18-days-hidden-treasures-of-namibia-safari/" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large.jpeg" alt="Hidden Treasures Of Namibia">\n                            <h4 class="lux-acc-title">Hidden Treasures Of Namibia</h4>\n                        </a>\n                        <a href="https://desert-tracks.com/11-days-south-of-namibia-safari/" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/sossuvlei_221kb.jpg" alt="South of Namibia">\n                            <h4 class="lux-acc-title">South of Namibia</h4>\n                        </a>\n                        <a href="https://desert-tracks.com/18-days-namibia-delta-chobe-vic-falls-safari/" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-2.jpg" alt="Namibia, Delta &amp; Chobe">\n                            <h4 class="lux-acc-title">Namibia, Delta &amp; Chobe</h4>\n                        </a>\n                        <a href="https://desert-tracks.com/14-days-namibia-comfort-safari/" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4.jpg" alt="Best of Namibia">\n                            <h4 class="lux-acc-title">Best of Namibia</h4>\n                        </a>\n                        <a href="https://desert-tracks.com/11-days-wildlife-of-namibia-safari/" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large.jpeg" alt="Namibia Wildlife">\n                            <h4 class="lux-acc-title">Namibia Wildlife</h4>\n                        </a>\n                        <a href="https://desert-tracks.com/17-days-namibia-chobe-vic-falls-safari/" target="_blank" class="lux-acc-card">\n                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/divava-1.jpg" alt="Namibia, Chobe &amp; Vic Falls">\n                            <h4 class="lux-acc-title">Namibia, Chobe &amp; Vic Falls</h4>\n                        </a>\n'''
 
 new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-container"
+                    style="margin-bottom: 4rem; padding-top: 2rem;">
+                    <h2
+                        style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
+                        Lodge Selection</h2>
+                    <div class="flex-scroll-hint">
+                        <span>Swipe to explore</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </div>
+                    <div class="lux-acc-grid">
+{lodge_carousel_html}                    </div>
+                </div>
+
+                <div id="more-safaris" class="lux-acc-grid-container"
                     style="margin-bottom: 4rem; padding-top: 2rem;">
                     <h2
                         style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
@@ -178,7 +180,7 @@ new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-containe
                         </svg>
                     </div>
                     <div class="lux-acc-grid">
-{bottom_carousel_html}                    </div>
+{more_safaris_html}                    </div>
                 </div>\n\n                '''
 
 html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', new_lodge_selection, html, flags=re.DOTALL)

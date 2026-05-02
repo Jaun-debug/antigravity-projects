@@ -63,18 +63,79 @@ for gen in gens:
     with open(gen, 'r') as f:
         content = f.read()
 
-    # Change the title
-    content = content.replace("Lodge Selection</h2>", f"{config['title']}</h2>")
-
-    # Change the loop to a static string
-    loop_pattern = r"bottom_carousel_html\s*=\s*\"\"\nfor item in data\.get\('bottom_carousel', \[\]\):.*?</a>\\n'''"
-    new_loop = f"bottom_carousel_html = '''\\n{items_html}'''"
+    # We need to find the block starting with # X. Bottom Carousel and replace it completely
+    # First, let's find the current block. It might be # 6 or # 7.
+    # It might start with `# 7. Bottom Carousel` or `# 6. Bottom Carousel`
+    pattern = r"(# \d+\. Bottom Carousel.*?)(?=# \d+\. |with open|html = html\.replace\(car_svg)"
     
-    new_content = re.sub(loop_pattern, new_loop, content, flags=re.DOTALL)
+    match = re.search(pattern, content, flags=re.DOTALL)
+    if not match:
+        print(f"Could not find Bottom Carousel block in {gen}")
+        continue
+        
+    old_block = match.group(1)
+    
+    # We will replace the entire old block with our new proper block that does BOTH
+    # We need to preserve the number (e.g. # 7.)
+    num_match = re.search(r"# (\d+)\. Bottom Carousel", old_block)
+    num = num_match.group(1) if num_match else "7"
+    
+    new_block = f'''# {num}. Bottom Carousel (Lodge Selection)
+lodge_carousel_html = ""
+for item in data.get('bottom_carousel', []):
+    acc = item.get('accommodation', '')
+    img_acc = item.get('image', '')
+    lodge_carousel_html += f\'\'\'                        <a href="#" target="_blank" class="lux-acc-card">
+                            <img src="{{img_acc}}" alt="{{acc}}">
+                            <h4 class="lux-acc-title">{{acc}}</h4>
+                        </a>\\n\'\'\'
+
+# {int(num)+1}. More Safaris Carousel
+more_safaris_html = \'\'\'
+{items_html}\'\'\'
+
+new_lodge_selection = f\'\'\'<div id="lodge-selection" class="lux-acc-grid-container"
+                    style="margin-bottom: 4rem; padding-top: 2rem;">
+                    <h2
+                        style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
+                        Lodge Selection</h2>
+                    <div class="flex-scroll-hint">
+                        <span>Swipe to explore</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </div>
+                    <div class="lux-acc-grid">
+{{lodge_carousel_html}}                    </div>
+                </div>
+
+                <div id="more-safaris" class="lux-acc-grid-container"
+                    style="margin-bottom: 4rem; padding-top: 2rem;">
+                    <h2
+                        style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
+                        {config['title']}</h2>
+                    <div class="flex-scroll-hint">
+                        <span>Swipe to explore</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </div>
+                    <div class="lux-acc-grid">
+{{more_safaris_html}}                    </div>
+                </div>\\n\\n                \'\'\'
+
+html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', new_lodge_selection, html, flags=re.DOTALL)
+
+'''
+    
+    new_content = content.replace(old_block, new_block)
     
     if new_content != content:
         with open(gen, 'w') as f:
             f.write(new_content)
-        print(f"Updated {gen} with {config['title']}")
+        print(f"Updated {gen} with BOTH Lodge Selection and {config['title']}")
     else:
-        print(f"Skipped {gen} (already updated or pattern mismatch)")
+        print(f"Skipped {gen} (no changes made)")
+
