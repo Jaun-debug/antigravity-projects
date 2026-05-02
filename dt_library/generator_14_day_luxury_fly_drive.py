@@ -124,20 +124,38 @@ for i, item in enumerate(data['itinerary']):
 html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', day_blocks, html, flags=re.DOTALL)
 
 # 7. Bottom Carousel (Lodge Selection)
-bottom_carousel_html = ""
-for item in data.get('bottom_carousel', []):
-    acc = item.get('accommodation', '')
-    img = item.get('image', '')
-    bottom_carousel_html += f'''                        <a href="#" target="_blank" class="lux-acc-card">
-                            <img src="{img}" alt="{acc}">
-                            <h4 class="lux-acc-title">{acc}</h4>
-                        </a>\n'''
+bottom_carousel_html = '''
+                        <a href="https://wetu.com/ItineraryOutputs/Discovery/d957f35f-76c0-4276-899d-ba04411b5e9e?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="lux-acc-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2025/10/savuti-lion-in-the-road.jpeg" alt="14-Day Luxury Namibia Drive &amp; Fly Photo Safari">
+                            <h4 class="lux-acc-title">14-Day Luxury Namibia Drive &amp; Fly Photo Safari</h4>
+                        </a>
+                        <a href="https://wetu.com/ItineraryOutputs/Discovery/b02e8a98-0fe9-4d6b-9a85-8fcc81355557?_gl=1*1abd97m*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="lux-acc-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2025/11/29c1a07ebd3fcf987a8cbfce29564ecda4c8c2cb01656ab89e940f236d2c438275cdee4f5a503b6939a5008af8e8e5445682ea5a966bd418fb17bd_1280-1.jpg" alt="14-Day Luxury Namibia Highlights Self-Drive Safari">
+                            <h4 class="lux-acc-title">14-Day Luxury Namibia Highlights Self-Drive Safari</h4>
+                        </a>
+                        <a href="https://wetu.com/Itinerary/Landing/8d67bdc1-417a-411c-ac60-e312537c8730?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="lux-acc-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2025/11/wilderness-desert-rhino-camp_3-scaled-3.jpg" alt="12-Day Namibia Self-Drive Luxury Safari Circuit">
+                            <h4 class="lux-acc-title">12-Day Namibia Self-Drive Luxury Safari Circuit</h4>
+                        </a>
+                        <a href="https://wetu.com/ItineraryOutputs/Discovery/f959961b-5ea6-43dc-b713-5a2fb0928eb1?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="lux-acc-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2025/11/divava-1.jpg" alt="10-Day Namibia Honeymoon Luxury Fly-In Safari">
+                            <h4 class="lux-acc-title">10-Day Namibia Honeymoon Luxury Fly-In Safari</h4>
+                        </a>
+                        <a href="https://wetu.com/ItineraryOutputs/Discovery/487e81b5-4faf-4bdc-88f7-d28a3b229cdf?_gl=1*269is8*_gcl_au*ODU3NTYzNTQ2LjE3NzM3Mzg5MDM." target="_blank" class="lux-acc-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bc95b679-56fc-4800-b602-5d040fe0cced-png-1.webp" alt="10-Day Ultra-Luxury Namibia Safari - North Focus">
+                            <h4 class="lux-acc-title">10-Day Ultra-Luxury Namibia Safari - North Focus</h4>
+                        </a>
+                        <a href="https://wetu.com/ItineraryOutputs/Discovery/e3ab6f95-cd77-4d07-943b-45d8257dda6c" target="_blank" class="lux-acc-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2025/11/bagatelle-lodge-kalahari-game-ranch-namibia-chalte-on-dune2-1.jpg" alt="10-Day Ultra-Luxury Namibia Safari - South Focus">
+                            <h4 class="lux-acc-title">10-Day Ultra-Luxury Namibia Safari - South Focus</h4>
+                        </a>
+'''
 
 new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-container"
                     style="margin-bottom: 4rem; padding-top: 2rem;">
                     <h2
                         style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
-                        Lodge Selection</h2>
+                        More Luxury Safaris</h2>
                     <div class="flex-scroll-hint">
                         <span>Swipe to explore</span>
                         <svg viewBox="0 0 24 24">
