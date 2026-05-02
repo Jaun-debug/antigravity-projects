@@ -16,14 +16,14 @@ html = html.replace("<title>11-Day Namibia Wildlife Safari</title>", "<title>10-
 html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', 'data-default-title="10-Day Ultra-Luxury<br>Namibia Safari - North Focus"')
 html = html.replace('11-Day Namibia<br>Wildlife Safari', '10-Day Ultra-Luxury<br>Namibia Safari - North Focus')
 
-        # HERO IMAGE REPLACEMENT
-        try:
-            # For the single-job scripts, data is parsed directly. For multi-job it's in the loop.
-            # We assume 'data' is the loaded JSON object in context.
-            hero_img = data.get('top_carousel', [{'image': 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg'}])[0].get('image', 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg')
-            html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', hero_img)
-        except Exception as e:
-            print("Hero image replace failed:", e)
+# HERO IMAGE REPLACEMENT
+try:
+    # For the single-job scripts, data is parsed directly. For multi-job it's in the loop.
+    # We assume 'data' is the loaded JSON object in context.
+    hero_img = data.get('top_carousel', [{'image': 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg'}])[0].get('image', 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg')
+    html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', hero_img)
+except Exception as e:
+    print("Hero image replace failed:", e)
 
 # 2. Hero Backgrounds
 html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', 'https://wetu.com/imageHandler/c1920x1080/298045/gmundner_lodge_pool_area__outside-54.jpg?fmt=jpg')

@@ -51,14 +51,14 @@ for job in jobs:
         html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', f'data-default-title="{job["html_title"]}"')
         html = html.replace('11-Day Namibia<br>Wildlife Safari', job["html_title"])
 
-        # HERO IMAGE REPLACEMENT
-        try:
-            # For the single-job scripts, data is parsed directly. For multi-job it's in the loop.
-            # We assume 'data' is the loaded JSON object in context.
-            hero_img = data.get('top_carousel', [{'image': 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg'}])[0].get('image', 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg')
-            html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', hero_img)
-        except Exception as e:
-            print("Hero image replace failed:", e)
+# HERO IMAGE REPLACEMENT
+try:
+    # For the single-job scripts, data is parsed directly. For multi-job it's in the loop.
+    # We assume 'data' is the loaded JSON object in context.
+    hero_img = data.get('top_carousel', [{'image': 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg'}])[0].get('image', 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg')
+    html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', hero_img)
+except Exception as e:
+    print("Hero image replace failed:", e)
 
         # 2. Subtitle and Intro
         html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', lambda m: job["subtitle"], html, flags=re.DOTALL)
