@@ -6,7 +6,7 @@ template_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/11_day_nam
 jobs = [
     {
         "json_path": "/Users/jaunhusselmann/Downloads/2025 11-DAY JUST A QUICK VISIT (LUXURY) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/11_day_just_a_quick_visit_luxury_guided_safari.html",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_37.html",
         "title": "11-Day Just A Quick Visit – Luxury Guided Safari",
         "html_title": "11-Day Just A Quick Visit<br>Luxury Guided Safari",
         "subtitle": "An expert-led journey through Namibia’s highlights in absolute comfort.",
@@ -14,7 +14,7 @@ jobs = [
     },
     {
         "json_path": "/Users/jaunhusselmann/Downloads/2025 16-DAY NAM, CHOBE & VIC FALLS (LUXURY) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/16_day_namibia_chobe_vic_falls_luxury_guided_safari.html",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_38.html",
         "title": "16-Day Namibia, Chobe & Vic Falls – Luxury Guided Safari",
         "html_title": "16-Day Namibia, Chobe & Vic Falls<br>Luxury Guided Safari",
         "subtitle": "A grand guided safari across three countries featuring spectacular wildlife.",
@@ -22,7 +22,7 @@ jobs = [
     },
     {
         "json_path": "/Users/jaunhusselmann/Downloads/2025 16-DAY NAMIBIA AT A GLANCE (LUXURY) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/16_day_namibia_at_a_glance_luxury_guided_safari.html",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_39.html",
         "title": "16-Day Namibia At A Glance – Luxury Guided Safari",
         "html_title": "16-Day Namibia At A Glance<br>Luxury Guided Safari",
         "subtitle": "A comprehensive luxury guided exploration of Namibia's contrasting landscapes.",
@@ -30,7 +30,7 @@ jobs = [
     },
     {
         "json_path": "/Users/jaunhusselmann/Downloads/16-DAY NAM, DELTA, CHOBE & VIC FALLS (STANDARD) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/16_day_nam_delta_chobe_vic_falls_standard_guided_safari.html",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_40.html",
         "title": "16-Day Nam, Delta, Chobe & Vic Falls – Standard Guided Safari",
         "html_title": "16-Day Nam, Delta, Chobe & Vic Falls<br>Standard Guided Safari",
         "subtitle": "An epic overland adventure connecting the Namib Desert to the roar of Victoria Falls.",
