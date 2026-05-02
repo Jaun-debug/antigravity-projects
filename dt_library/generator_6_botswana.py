@@ -67,6 +67,15 @@ for job in jobs:
         html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', f'data-default-title="{job["html_title"]}"')
         html = html.replace('11-Day Namibia<br>Wildlife Safari', job["html_title"])
 
+        # HERO IMAGE REPLACEMENT
+        try:
+            # For the single-job scripts, data is parsed directly. For multi-job it's in the loop.
+            # We assume 'data' is the loaded JSON object in context.
+            hero_img = data.get('top_carousel', [{'image': 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg'}])[0].get('image', 'https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg')
+            html = html.replace('https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg', hero_img)
+        except Exception as e:
+            print("Hero image replace failed:", e)
+
         # 2. Subtitle and Intro
         html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', lambda m: job["subtitle"], html, flags=re.DOTALL)
 
@@ -233,21 +242,32 @@ for job in jobs:
 
         html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', lambda m: day_blocks, html, flags=re.DOTALL)
 
-        # 6. Bottom Carousel (Lodge Selection)
+        # 6. Bottom Carousel (More Safaris)
         bottom_carousel_html = ""
-        for item in data.get('bottom_carousel', []):
-            acc = item.get('accommodation', '')
-            img = item.get('image', '')
-            bottom_carousel_html += f'''                        <a href="#" target="_blank" class="lux-acc-card">
-                            <img src="{img}" alt="{acc}">
-                            <h4 class="lux-acc-title">{acc}</h4>
+        for other_job in jobs:
+            if other_job['output_path'] != job['output_path']:
+                title_plain = other_job['title']
+                # Try to get the first image from that job's JSON
+                img = other_job['bg']
+                try:
+                    with open(other_job['json_path'], 'r') as f_other:
+                        other_data = json.load(f_other)
+                        if other_data.get('top_carousel'):
+                            img = other_data['top_carousel'][0].get('image', img)
+                except:
+                    pass
+                    
+                file_name = other_job['output_path'].split('/')[-1]
+                bottom_carousel_html += f'''                        <a href="{file_name}" target="_self" class="lux-acc-card">
+                            <img src="{img}" alt="{title_plain}">
+                            <h4 class="lux-acc-title">{title_plain}</h4>
                         </a>\n'''
 
         new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-container"
                             style="margin-bottom: 4rem; padding-top: 2rem;">
                             <h2
                                 style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
-                                Lodge Selection</h2>
+                                More Botswana Safaris</h2>
                             <div class="flex-scroll-hint">
                                 <span>Swipe to explore</span>
                                 <svg viewBox="0 0 24 24">
