@@ -37,6 +37,62 @@
             }
         }
 
+        
+        /* ==================================================
+           DAY BLOCK ACCORDION
+        ================================================== */
+        .lux-day-accordion-header {
+            background: linear-gradient(to left, #EAE8DF, #F5F4F0);
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+        .lux-day-accordion-header:hover {
+            opacity: 0.9;
+        }
+        .lux-day-accordion-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #123631;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .lux-day-accordion-title span {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #7A8A8A;
+            letter-spacing: 1px;
+            margin-left: 10px;
+            text-transform: none;
+        }
+        .lux-day-accordion-icon {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #123631;
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+        .lux-day-accordion-content {
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+            max-height: 10000px; /* Open by default */
+            opacity: 1;
+        }
+        .lux-day-block.is-closed .lux-day-accordion-content {
+            max-height: 0;
+            opacity: 0;
+        }
+        .lux-day-block.is-closed .lux-day-accordion-icon {
+            transform: rotate(45deg); /* + to - */
+        }
+
         /* LEFT SIDE: Sticky Hero */
         .lux-left {
             position: relative;
@@ -1626,7 +1682,13 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         <!-- DAY 01 -->
         <div class="lux-day-block" id="day-01" data-bg="https://wetu.com/imageHandler/c1920x1080/55342/143a4578.jpg?fmt=jpg" data-region="Windhoek">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Windhoek <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Ti Melen Boutique Guesthouse)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Windhoek <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Ti Melen Boutique Guesthouse)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">01</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1677,9 +1739,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 02 -->
+            </div>
         <div class="lux-day-block" id="day-02" data-bg="https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg" data-region="Kalahari">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Kalahari <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Kalahari Anib Lodge Gondwana Collection Namibia)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Kalahari <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Kalahari Anib Lodge Gondwana Collection Namibia)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">02</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1730,9 +1799,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 03 -->
+            </div>
         <div class="lux-day-block" id="day-03" data-bg="https://wetu.com/imageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg?fmt=jpg" data-region="Sossusvlei">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Sossusvlei <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Desert Homestead Lodge)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Sossusvlei <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Desert Homestead Lodge)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">03</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1783,9 +1859,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 04 -->
+            </div>
         <div class="lux-day-block" id="day-04" data-bg="https://wetu.com/imageHandler/c1920x1080/149035/exterior_24.jpg?fmt=jpg" data-region="Swakopmund">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Swakopmund <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Swakopmund Guesthouse)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Swakopmund <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Swakopmund Guesthouse)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">04</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1836,9 +1919,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 05 -->
+            </div>
         <div class="lux-day-block" id="day-05" data-bg="https://wetu.com/imageHandler/c1920x1080/312689/img_e18011.jpg?fmt=jpg" data-region="Damaraland">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Damaraland <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Lodge Damaraland)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Damaraland <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Lodge Damaraland)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">05</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1889,9 +1979,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 06 -->
+            </div>
         <div class="lux-day-block" id="day-06" data-bg="https://wetu.com/imageHandler/c1920x1080/10560/1777362878686dscf0638.jpg?fmt=jpg" data-region="Etosha South">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Etosha South <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Etosha Safari Camp Gondwana Collection Namibia)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Etosha South <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Etosha Safari Camp Gondwana Collection Namibia)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">06</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1942,9 +2039,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 07 -->
+            </div>
         <div class="lux-day-block" id="day-07" data-bg="https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg" data-region="Onguma">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Onguma <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Onguma Bush Camp)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Onguma <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Onguma Bush Camp)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">07</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -1995,9 +2099,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 08 -->
+            </div>
         <div class="lux-day-block" id="day-08" data-bg="https://wetu.com/imageHandler/c1920x1080/29061/2s3a1677.jpg?fmt=jpg" data-region="Otjiwa">
             <div class="lux-day-block-header">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">Otjiwa <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Otjiwa Collection - Eagle's Rest)</span></span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">Otjiwa <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Otjiwa Collection - Eagle's Rest)</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">08</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -2048,9 +2159,16 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             </div>
         </div>
         <!-- DAY 09 Departure -->
+            </div>
         <div class="lux-day-block" id="day-09" data-bg="" data-region="Departure">
             <div class="lux-day-block-header" style="border-bottom: none; padding-bottom: 0; margin-bottom: 0;">
-                <span class="lux-day-location" style="font-family: 'Cinzel', serif; font-style: normal; font-size: 1.1rem; letter-spacing: 1.5px; font-weight: 400; color: #1F4F4B; text-transform: uppercase; margin-bottom: 2rem; display: block;">DEPARTURE</span>
+                
+            <div class="lux-day-accordion-header">
+                <div class="lux-day-accordion-title">DEPARTURE</div>
+                <div class="lux-day-accordion-icon">&minus;</div>
+            </div>
+            <div class="lux-day-accordion-content">
+
                 <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                     <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">09</span>
                     <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
@@ -2326,6 +2444,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         </div>
 
         <!-- Verified Trust/Reviews Block -->
+            </div>
         <div class="lux-trust-block">
             <span class="lux-trust-eyebrow">WHAT OUR CLIENTS SAY</span>
             <h2 class="lux-trust-title">Every journey leaves a story behind.</h3>
@@ -4603,5 +4722,33 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 })();
 </script>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const headers = document.querySelectorAll('.lux-day-accordion-header');
+            headers.forEach(header => {
+                header.addEventListener('click', function() {
+                    const block = this.closest('.lux-day-block');
+                    const icon = this.querySelector('.lux-day-accordion-icon');
+                    
+                    if (block.classList.contains('is-closed')) {
+                        // Open it
+                        block.classList.remove('is-closed');
+                        icon.innerHTML = '&minus;';
+                    } else {
+                        // Close it
+                        block.classList.add('is-closed');
+                        icon.innerHTML = '&#43;';
+                    }
+                    
+                    // Trigger ScrollTrigger refresh if necessary
+                    if (window.ScrollTrigger) {
+                        setTimeout(() => ScrollTrigger.refresh(), 500);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
