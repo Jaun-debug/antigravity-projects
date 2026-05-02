@@ -47,6 +47,64 @@
             }
         }
 
+        
+        /* ==================================================
+           DAY BLOCK ACCORDION
+        ================================================== */
+        .lux-day-accordion-header {
+            background: linear-gradient(to left, #EAE8DF, #F5F4F0);
+            padding: 20px 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            user-select: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        .lux-day-accordion-header:hover {
+            opacity: 0.9;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+        .lux-day-accordion-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #123631;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        .lux-day-accordion-title span {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 0.9rem;
+            color: #7A8A8A;
+            letter-spacing: 1px;
+            margin-left: 10px;
+            text-transform: none;
+        }
+        .lux-day-accordion-icon {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #123631;
+            transition: transform 0.3s ease;
+            line-height: 1;
+        }
+        .lux-day-accordion-content {
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+            max-height: 10000px; /* Open by default */
+            opacity: 1;
+        }
+        .lux-day-block.is-closed .lux-day-accordion-content {
+            max-height: 0;
+            opacity: 0;
+        }
+        .lux-day-block.is-closed .lux-day-accordion-icon {
+            transform: rotate(45deg); /* + to - */
+        }
+
         /* LEFT SIDE: Sticky Hero */
         .lux-left {
             position: relative;
@@ -5264,7 +5322,47 @@
         })();
     </script>
 
+
+    <script data-no-optimize="1">
+        document.addEventListener('DOMContentLoaded', function() {
+            // Function to initialize accordions
+            function initAccordions() {
+                const headers = document.querySelectorAll('.lux-day-accordion-header');
+                headers.forEach(header => {
+                    // Prevent multiple event listeners
+                    if(header.dataset.accInit === 'true') return;
+                    header.dataset.accInit = 'true';
+                    
+                    header.addEventListener('click', function() {
+                        const block = this.closest('.lux-day-block');
+                        const icon = this.querySelector('.lux-day-accordion-icon');
+                        
+                        if (block.classList.contains('is-closed')) {
+                            // Open it
+                            block.classList.remove('is-closed');
+                            icon.innerHTML = '&minus;';
+                        } else {
+                            // Close it
+                            block.classList.add('is-closed');
+                            icon.innerHTML = '&#43;';
+                        }
+                        
+                        // Trigger ScrollTrigger refresh if necessary
+                        if (window.ScrollTrigger) {
+                            setTimeout(() => ScrollTrigger.refresh(), 500);
+                        }
+                    });
+                });
+            }
+            
+            // Run immediately
+            initAccordions();
+            // Also run after a short delay to ensure dynamically injected HTML is caught
+            setTimeout(initAccordions, 1500);
+        });
+    </script>
 </body>
+
 
 </html>
 https://desert-tracks.com/namibia-self-drive-safaris/11-day-wildlife-of-namibia-self-drive-safari/
