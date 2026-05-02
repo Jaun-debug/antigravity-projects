@@ -95,48 +95,49 @@ for i, item in enumerate(data['itinerary']):
         slides = prev_slides
                                 
     total = str(len(data['itinerary'])).zfill(2)
+    lodge_str = f" <span style=\\"font-family: 'Open Sans', sans-serif; opacity: 0.6; font-size: 0.85em; font-weight: 400; letter-spacing: 1px;\\">({lodge_name})</span>" if lodge_name else ""
     
     day_block = f'''                <!-- DAY {day_num} -->
                 <div class="lux-day-block" id="day-{day_num}"
                     data-bg="{bg}"
                     data-region="{acc_name}">
-                    <div class="lux-day-block-header">
-                        <div class="lux-day-accordion-header">
-                            <div class="lux-day-accordion-title">{acc_name} <span style="font-family: 'Open Sans', sans-serif; color: #7A8A8A; font-size: 0.9rem; letter-spacing: 1px;">(Accommodation Details)</span></div>
-                            <div class="lux-day-accordion-icon">&minus;</div>
-                        </div>
-                        <div class="lux-day-accordion-content">
+                    <div class="lux-day-accordion-header">
+                        <div class="lux-day-accordion-title" style="text-transform: uppercase;">DESTINATION{lodge_str}</div>
+                        <div class="lux-day-accordion-icon">&minus;</div>
+                    </div>
+                    <div class="lux-day-accordion-content">
+                        <div class="lux-day-block-header">
                             <div class="lux-day-number-row" style="display: flex; align-items: center; margin-bottom: 1.5rem;">
                                 <span class="lux-day-numeral" style="font-family: 'Open Sans', sans-serif; font-weight: 300; font-size: clamp(3rem, 5vw, 4rem); color: #d87a4d; line-height: 1; letter-spacing: -0.02em;">{day_num}</span>
                                 <div class="lux-day-line" style="flex-grow: 1; height: 1px; background-color: rgba(216, 122, 77, 0.3); margin-left: 20px;"></div>
                             </div>
                             <h2 class="lux-day-title" style="font-family: 'Cinzel', serif; font-size: clamp(24px, 4vw, 32px); font-weight: 300; color: #1F4F4B; text-transform: uppercase; margin-bottom: 1.5rem; letter-spacing: 0.05em;">{item.get('day', f'Day {day_num}')}</h2>
                             <p class="lux-day-desc" style="font-family: 'Open Sans', sans-serif; font-size: clamp(1rem, 1.5vw, 1.125rem); line-height: 1.7; color: #5A6A6A; font-weight: 300; margin-bottom: 3.5rem; max-width: 45rem;">{item.get('description', '')}</p>
-                    </div>
-
-                    <div class="dt-film-section">
-                        <div class="dt-film-header">
-                            <div>
-                                <span class="dt-film-eyebrow">Accommodation Profile</span>
-                                <h2 class="dt-film-title">{acc_name}</h2>
-                            </div>
-                            <div class="dt-film-counter">{day_num} <span>/ {total}</span></div>
-                        </div>
-                        
-                        <div class="dt-film-track-wrap">
-                            <div class="dt-film-track">
-{slides}                            </div>
                         </div>
 
-                        <div class="dt-film-footer">
-                            <div class="dt-film-progress-wrap"><div class="dt-film-progress-bar" style="width: 0%;"></div></div>
-                            <div class="dt-film-arrows">
-                                <div class="dt-film-arrow dt-film-prev-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
-                                <div class="dt-film-arrow dt-film-next-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+                        <div class="dt-film-section">
+                            <div class="dt-film-header">
+                                <div>
+                                    <span class="dt-film-eyebrow">Accommodation Profile</span>
+                                    <h2 class="dt-film-title">{acc_name}</h2>
+                                </div>
+                                <div class="dt-film-counter">{day_num} <span>/ {total}</span></div>
+                            </div>
+                            
+                            <div class="dt-film-track-wrap">
+                                <div class="dt-film-track">
+{slides}                                </div>
+                            </div>
+
+                            <div class="dt-film-footer">
+                                <div class="dt-film-progress-wrap"><div class="dt-film-progress-bar" style="width: 0%;"></div></div>
+                                <div class="dt-film-arrows">
+                                    <div class="dt-film-arrow dt-film-prev-btn"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg></div>
+                                    <div class="dt-film-arrow dt-film-next-btn"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div> <!-- End lux-day-accordion-content -->
+                    </div> <!-- End lux-day-accordion-content -->
                 </div>\n\n'''
     day_blocks += day_block
 
