@@ -75,14 +75,64 @@ for job in jobs:
             lambda m: f'<div class="lux-acc-grid">\n{glance_html}                    </div>\n                </div>\n\n                <!-- // ANIMATED ROUTE MAP SECTION // -->', 
             html, flags=re.DOTALL)
 
-        # 4. Waypoints (just dummy for now, Wetu JSON doesn't provide coords easily)
-        waypoints_str = '''                                const waypoints = [
-                                    { id: '', name: 'Start', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] },
-                                    { id: '1', name: 'Desert', lodge: 'Lodge', nights: '2 NIGHTS', coords: [-24.81, 15.82] },
-                                    { id: '2', name: 'Coast', lodge: 'Lodge', nights: '2 NIGHTS', coords: [-22.68, 14.52] },
-                                    { id: '3', name: 'Wildlife', lodge: 'Lodge', nights: '2 NIGHTS', coords: [-19.33, 15.90] },
-                                    { id: '4', name: 'End', lodge: 'Departure', nights: 'DEPART', coords: [-22.48, 17.47] }
-                                ];'''
+        # 4. Waypoints (Dynamic based on destinations)
+        COORDS_DB = {
+            "Windhoek": [-22.5609, 17.0658],
+            "Sossusvlei": [-24.81, 15.82],
+            "Swakopmund": [-22.68, 14.52],
+            "Damaraland": [-20.57, 14.37],
+            "Twyfelfontein": [-20.57, 14.37],
+            "Etosha": [-19.33, 15.90],
+            "Etosha South": [-19.33, 15.90],
+            "Etosha East": [-18.73, 17.04],
+            "Okonjima": [-20.85, 16.64],
+            "Waterberg": [-20.51, 17.24],
+            "Kalahari": [-24.28, 18.06],
+            "Fish River Canyon": [-27.61, 17.58],
+            "Luderitz": [-26.65, 15.16],
+            "Namib Desert": [-24.81, 15.82],
+            "Skeleton Coast": [-19.16, 12.56],
+            "Caprivi": [-17.48, 24.28],
+            "Zambezi Region": [-17.48, 24.28],
+            "Chobe": [-17.80, 25.15],
+            "Kasane": [-17.80, 25.15],
+            "Victoria Falls": [-17.92, 25.85],
+            "Okavango Delta": [-19.28, 22.69],
+            "Maun": [-19.98, 23.42],
+            "Namib-Naukluft Park": [-24.81, 15.82]
+        }
+
+        # Calculate nights automatically
+        dest_nights = {}
+        for item in data.get('itinerary', []):
+            dest = item.get('destination', '')
+            if dest:
+                dest_nights[dest] = dest_nights.get(dest, 0) + 1
+
+        waypoints_arr = []
+        # Add start
+        waypoints_arr.append("                                    { id: '', name: 'Start', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] }")
+        
+        idx = 1
+        for item in data.get('top_carousel', []):
+            dest = item.get('destination', '')
+            nights = dest_nights.get(dest, 1)
+            night_str = "1 NIGHT" if nights == 1 else f"{nights} NIGHTS"
+            
+            # Find coords
+            coords = [-22.56, 17.06] # Default
+            for key, val in COORDS_DB.items():
+                if key.lower() in dest.lower():
+                    coords = val
+                    break
+                    
+            waypoints_arr.append(f"                                    {{ id: '{idx}', name: '{dest}', lodge: 'Guided Safari', nights: '{night_str}', coords: {coords} }}")
+            idx += 1
+            
+        # Add end
+        waypoints_arr.append(f"                                    {{ id: '{idx}', name: 'End', lodge: 'Departure', nights: 'DEPART', coords: [-22.48, 17.47] }}")
+
+        waypoints_str = "                                const waypoints = [\n" + ",\n".join(waypoints_arr) + "\n                                ];"
         html = re.sub(r'const waypoints = \[.*?\];', lambda m: waypoints_str, html, flags=re.DOTALL)
 
         # 5. Day Blocks
