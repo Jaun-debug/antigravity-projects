@@ -94,6 +94,7 @@ for job in jobs:
             "Tarangire": [-3.85, 36.10],
             "Manyara": [-3.53, 35.85],
             "Zanzibar": [-6.16, 39.19],
+            "Dongwe": [-6.23, 39.54],
             "Dar es Salaam": [-6.79, 39.20],
             "Dar": [-6.79, 39.20],
             "Ruaha": [-7.66, 34.88],
@@ -102,6 +103,7 @@ for job in jobs:
             "Amboseli": [-2.65, 37.26],
             "Lake Nakuru": [-0.36, 36.08],
             "Nakuru": [-0.36, 36.08],
+            "Ol Pejeta": [0.01, 36.93],
             "Arusha": [-3.37, 36.68],
             "Kilimanjaro": [-3.06, 37.35]
         }
