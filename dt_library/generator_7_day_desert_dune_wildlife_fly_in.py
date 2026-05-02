@@ -92,7 +92,27 @@ for i, item in enumerate(data['itinerary']):
     total = str(len(data['itinerary'])).zfill(2)
     
     # Handle the "Day 1 - 3" string from Wetu JSON
-    raw_day_str = item.get('day', f'Day {day_num}')
+    # Calculate consecutive days without overlap
+    # We parse the day string from Wetu which looks like "Day 2 - 5"
+    # It means you check in on Day 2, and check out on Day 5 (3 nights).
+    # So the stay is Day 2, 3, 4. So we should show "Day 2 - 4".
+    raw_wetu_day = item.get('day', f'Day {day_num}')
+    day_match = re.search(r'Day\s+(\d+)(?:\s*-\s*(\d+))?', raw_wetu_day, re.IGNORECASE)
+    if day_match:
+    start_day = int(day_match.group(1))
+    end_day = int(day_match.group(2)) if day_match.group(2) else start_day
+
+    # If they check out on end_day, the last full day of the stay is end_day - 1
+    if end_day > start_day:
+    stay_end = end_day - 1
+    if stay_end > start_day:
+    raw_day_str = f"Day {start_day} - {stay_end}"
+    else:
+    raw_day_str = f"Day {start_day}"
+    else:
+    raw_day_str = f"Day {start_day}"
+    else:
+    raw_day_str = raw_wetu_day
     
     day_block = f'''                <!-- DAY {day_num} -->
                 <div class="lux-day-block" id="day-{day_num}"
