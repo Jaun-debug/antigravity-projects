@@ -173,7 +173,7 @@
     {
         "id": "east_africa_itineraries_design",
         "title": "East Africa Itinerary Design",
-        "tag": "East Africa Itineraries",
+        "tag": "East Africa WP Blocks",
         "desc": "East Africa Itinerary Design component.",
         "file": "east_africa_itineraries_design.html"
     },
@@ -806,6 +806,34 @@
         "tag": "Botswana Doc",
         "desc": "A short but spectacular superior getaway to Victoria Falls and Chobe.",
         "file": "botswana_itinerary_6.html"
+    },
+    {
+        "id": "east_africa_itinerary_1",
+        "title": "13-Day East Africa Safari",
+        "tag": "East Africa Doc",
+        "desc": "An unforgettable journey through the iconic landscapes of East Africa.",
+        "file": "east_africa_itinerary_1.html"
+    },
+    {
+        "id": "east_africa_itinerary_2",
+        "title": "10-Day Tanzania Safari & Beach Escape",
+        "tag": "East Africa Doc",
+        "desc": "A perfect blend of wild encounters and pristine island relaxation.",
+        "file": "east_africa_itinerary_2.html"
+    },
+    {
+        "id": "east_africa_itinerary_3",
+        "title": "9-Day Kenya Fly-Drive Circuit",
+        "tag": "East Africa Doc",
+        "desc": "A magnificent exploration of Kenya's legendary wildlife reserves.",
+        "file": "east_africa_itinerary_3.html"
+    },
+    {
+        "id": "east_africa_itinerary_4",
+        "title": "8-Day Southern Tanzania Signature Safari",
+        "tag": "East Africa Doc",
+        "desc": "Discover the untouched wilderness and remote beauty of Southern Tanzania.",
+        "file": "east_africa_itinerary_4.html"
     }
 ];
 
@@ -1014,10 +1042,10 @@
                     target = subFolders['BOT_ITIN'].inner;
                 }
                 // East Africa
-                else if (cmp.tag === 'East Africa WP Blocks' || cmp.title.startsWith('East Africa Fade CTA') || cmp.title.startsWith('East Africa Safari Intro') || cmp.title.startsWith('Carousel - East Africa') || cmp.title.startsWith('East Africa FAQ') || cmp.title.startsWith('East Africa Best Time')) {
+                else if (cmp.tag === 'East Africa WP Blocks' || cmp.title.includes('East Africa Itinerary Design') || cmp.title.startsWith('East Africa Fade CTA') || cmp.title.startsWith('East Africa Safari Intro') || cmp.title.startsWith('Carousel - East Africa') || cmp.title.startsWith('East Africa FAQ') || cmp.title.startsWith('East Africa Best Time')) {
                     target = subFolders['EA_BLOCKS'].inner;
                 }
-                else if (cmp.tag === 'East Africa Doc' || cmp.title.includes('East Africa Itinerary Design')) {
+                else if (cmp.tag === 'East Africa Doc' || cmp.tag === 'East Africa Itineraries') {
                     target = subFolders['EA_ITIN'].inner;
                 }
                 // Websites
