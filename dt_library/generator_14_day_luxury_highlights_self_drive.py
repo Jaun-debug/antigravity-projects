@@ -3,7 +3,7 @@ import re
 
 json_path = "/Users/jaunhusselmann/Downloads/14-Day Luxury Namibia Highlights Self-Drive Safari.json"
 template_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/11_day_namibia_wildlife_safari.html"
-output_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/14_day_luxury_namibia_highlights_self_drive_safari.html"
+output_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_24.html"
 
 with open(json_path, 'r') as f:
     data = json.load(f)
@@ -12,9 +12,9 @@ with open(template_path, 'r') as f:
     html = f.read()
 
 # 1. Replace titles and hero strings
-html = html.replace("<title>11-Day Namibia Wildlife Safari</title>", "<title>14-Day Luxury Namibia Highlights Self-Drive Safari</title>")
-html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', 'data-default-title="14-Day Luxury Highlights<br>Self-Drive Safari"')
-html = html.replace('11-Day Namibia<br>Wildlife Safari', '14-Day Luxury Highlights<br>Self-Drive Safari')
+html = html.replace("<title>11-Day Namibia Wildlife Safari</title>", "<title>14-Day Namibia Comfort Safari</title>")
+html = html.replace('data-default-title="11-Day Namibia<br>Wildlife Safari"', 'data-default-title="14-Day Namibia<br>Comfort Safari"')
+html = html.replace('11-Day Namibia<br>Wildlife Safari', '14-Day Namibia<br>Comfort Safari')
 
 # HERO IMAGE REPLACEMENT
 try:
@@ -186,7 +186,7 @@ new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-containe
                         </svg>
                     </div>
                     <div class="lux-acc-grid">
-{lodge_carousel_html}                    </div>
+{bottom_carousel_html}                    </div>
                 </div>
 
                 <div id="more-safaris" class="lux-acc-grid-container"
@@ -214,4 +214,4 @@ html = re.sub(r'<div class="swiper-wrapper">.*?</div>\s+</div>\s+<!-- Custom Con
 with open(output_path, 'w') as f:
     f.write(html)
 
-print("Generated 14_day_luxury_namibia_highlights_self_drive_safari.html successfully!")
+print("Generated component_24.html successfully!")
