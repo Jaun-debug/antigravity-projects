@@ -166,7 +166,7 @@
     {
         "id": "botswana_itineraries_design",
         "title": "Botswana Itinerary Design",
-        "tag": "Botswana Itineraries",
+        "tag": "Botswana WP Blocks",
         "desc": "Botswana Itinerary Design component.",
         "file": "botswana_itineraries_design.html"
     },
@@ -764,6 +764,48 @@
         "tag": "Websites",
         "desc": "Premium redesign of Blu Flamingo Tours & Transfers website.",
         "file": "bluflamingotours_premium.html"
+    },
+    {
+        "id": "botswana_itinerary_1",
+        "title": "11-Day Botswana Desert and Delta – Standard Option D",
+        "tag": "Botswana Doc",
+        "desc": "An epic standard journey through Botswana's desert and delta landscapes.",
+        "file": "botswana_itinerary_1.html"
+    },
+    {
+        "id": "botswana_itinerary_2",
+        "title": "9-Day Botswana Focus Safari",
+        "tag": "Botswana Doc",
+        "desc": "A concentrated exploration of Botswana's premier wildlife regions.",
+        "file": "botswana_itinerary_2.html"
+    },
+    {
+        "id": "botswana_itinerary_3",
+        "title": "11-Day Botswana Safari Experience (Superior)",
+        "tag": "Botswana Doc",
+        "desc": "A superior level safari adventure deep into the heart of Botswana.",
+        "file": "botswana_itinerary_3.html"
+    },
+    {
+        "id": "botswana_itinerary_4",
+        "title": "10-Day Botswana Delta Explorer Deluxe",
+        "tag": "Botswana Doc",
+        "desc": "A deluxe exploration of the Okavango Delta's hidden channels and wildlife.",
+        "file": "botswana_itinerary_4.html"
+    },
+    {
+        "id": "botswana_itinerary_5",
+        "title": "10-Day Vic Falls - Caprivi - Delta Premier Explorer",
+        "tag": "Botswana Doc",
+        "desc": "A premier journey from the thundering Victoria Falls through Caprivi to the Delta.",
+        "file": "botswana_itinerary_5.html"
+    },
+    {
+        "id": "botswana_itinerary_6",
+        "title": "5-Day Victoria Falls & Chobe Getaway (Superior)",
+        "tag": "Botswana Doc",
+        "desc": "A short but spectacular superior getaway to Victoria Falls and Chobe.",
+        "file": "botswana_itinerary_6.html"
     }
 ];
 
@@ -965,10 +1007,10 @@
                     target = subFolders['GUI_ITIN'].inner;
                 }
                 // Botswana
-                else if (cmp.tag === 'Botswana WP Blocks' || cmp.title.startsWith('Botswana Fade CTA') || cmp.title.startsWith('Botswana Safari Intro') || cmp.title.startsWith('Carousel - Botswana') || cmp.title.startsWith('Botswana FAQ') || cmp.title.startsWith('Botswana Best Time')) {
+                else if (cmp.tag === 'Botswana WP Blocks' || cmp.title.includes('Botswana Itinerary Design') || cmp.title.startsWith('Botswana Fade CTA') || cmp.title.startsWith('Botswana Safari Intro') || cmp.title.startsWith('Carousel - Botswana') || cmp.title.startsWith('Botswana FAQ') || cmp.title.startsWith('Botswana Best Time')) {
                     target = subFolders['BOT_BLOCKS'].inner;
                 }
-                else if (cmp.tag === 'Botswana Doc' || cmp.title.includes('Botswana Itinerary Design')) {
+                else if (cmp.tag === 'Botswana Doc' || cmp.tag === 'Botswana Itineraries') {
                     target = subFolders['BOT_ITIN'].inner;
                 }
                 // East Africa

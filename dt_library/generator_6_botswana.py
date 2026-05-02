@@ -5,35 +5,51 @@ template_path = "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/11_day_nam
 
 jobs = [
     {
-        "json_path": "/Users/jaunhusselmann/Downloads/2025 11-DAY JUST A QUICK VISIT (LUXURY) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_37.html",
-        "title": "11-Day Just A Quick Visit – Luxury Guided Safari",
-        "html_title": "11-Day Just A Quick Visit<br>Luxury Guided Safari",
-        "subtitle": "An expert-led journey through Namibia’s highlights in absolute comfort.",
+        "json_path": "/Users/jaunhusselmann/Downloads/11-DAY BOTWANA DESERT AND DELTA (STANDARD OPTION D).json",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/botswana_itinerary_1.html",
+        "title": "11-Day Botswana Desert and Delta – Standard Option D",
+        "html_title": "11-Day Botswana<br>Desert and Delta",
+        "subtitle": "An epic standard journey through Botswana's desert and delta landscapes.",
         "bg": "https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg"
     },
     {
-        "json_path": "/Users/jaunhusselmann/Downloads/2025 16-DAY NAM, CHOBE & VIC FALLS (LUXURY) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_38.html",
-        "title": "16-Day Namibia, Chobe & Vic Falls – Luxury Guided Safari",
-        "html_title": "16-Day Namibia, Chobe & Vic Falls<br>Luxury Guided Safari",
-        "subtitle": "A grand guided safari across three countries featuring spectacular wildlife.",
+        "json_path": "/Users/jaunhusselmann/Downloads/9 Day Botswana Focus.json",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/botswana_itinerary_2.html",
+        "title": "9-Day Botswana Focus Safari",
+        "html_title": "9-Day Botswana<br>Focus Safari",
+        "subtitle": "A concentrated exploration of Botswana's premier wildlife regions.",
         "bg": "https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg"
     },
     {
-        "json_path": "/Users/jaunhusselmann/Downloads/2025 16-DAY NAMIBIA AT A GLANCE (LUXURY) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_39.html",
-        "title": "16-Day Namibia At A Glance – Luxury Guided Safari",
-        "html_title": "16-Day Namibia At A Glance<br>Luxury Guided Safari",
-        "subtitle": "A comprehensive luxury guided exploration of Namibia's contrasting landscapes.",
+        "json_path": "/Users/jaunhusselmann/Downloads/2025 11-Day Botswana Safari Experience (Superior).json",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/botswana_itinerary_3.html",
+        "title": "11-Day Botswana Safari Experience (Superior)",
+        "html_title": "11-Day Botswana<br>Safari Experience",
+        "subtitle": "A superior level safari adventure deep into the heart of Botswana.",
         "bg": "https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg"
     },
     {
-        "json_path": "/Users/jaunhusselmann/Downloads/16-DAY NAM, DELTA, CHOBE & VIC FALLS (STANDARD) G.json",
-        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/component_40.html",
-        "title": "16-Day Nam, Delta, Chobe & Vic Falls – Standard Guided Safari",
-        "html_title": "16-Day Nam, Delta, Chobe & Vic Falls<br>Standard Guided Safari",
-        "subtitle": "An epic overland adventure connecting the Namib Desert to the roar of Victoria Falls.",
+        "json_path": "/Users/jaunhusselmann/Downloads/10 Day Botswana Delta Explorer Deluxe.json",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/botswana_itinerary_4.html",
+        "title": "10-Day Botswana Delta Explorer Deluxe",
+        "html_title": "10-Day Botswana<br>Delta Explorer",
+        "subtitle": "A deluxe exploration of the Okavango Delta's hidden channels and wildlife.",
+        "bg": "https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg"
+    },
+    {
+        "json_path": "/Users/jaunhusselmann/Downloads/10-Day Vic Falls - Caprivi - Delta Premier Explorer.json",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/botswana_itinerary_5.html",
+        "title": "10-Day Vic Falls - Caprivi - Delta Premier Explorer",
+        "html_title": "10-Day Vic Falls, Caprivi<br>& Delta Explorer",
+        "subtitle": "A premier journey from the thundering Victoria Falls through Caprivi to the Delta.",
+        "bg": "https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg"
+    },
+    {
+        "json_path": "/Users/jaunhusselmann/Downloads/2025 5-Day Victoria Falls & Chobe Getaway (Superior).json",
+        "output_path": "/Users/jaunhusselmann/Desktop/AG Projects/dt_library/botswana_itinerary_6.html",
+        "title": "5-Day Victoria Falls & Chobe Getaway (Superior)",
+        "html_title": "5-Day Victoria Falls<br>& Chobe Getaway",
+        "subtitle": "A short but spectacular superior getaway to Victoria Falls and Chobe.",
         "bg": "https://wetu.com/imageHandler/c1920x1080/469/etosha_national_park-istock-925720816.jpg?fmt=jpg"
     }
 ]
@@ -55,7 +71,7 @@ for job in jobs:
         html = re.sub(r'A\s*bespoke self-drive journey through iconic landscapes', lambda m: job["subtitle"], html, flags=re.DOTALL)
 
         intro_old = "Discover Namibia at your own pace while staying at some of the country’s most exceptional lodges. From the dramatic red dunes of Sossusvlei to the stark beauty of Damaraland and the prolific wildlife of Etosha National Park, this carefully curated journey balances the freedom of independent travel with the reassurance of premium hospitality. With luxury accommodation, hand-picked experiences, and our bespoke navigation app to guide you, every detail is considered."
-        intro_new = "Embark on an unforgettable guided safari where every detail is taken care of. With a professional guide leading the way, you’ll uncover hidden gems, experience extraordinary wildlife encounters, and stay at carefully selected accommodations. From striking desert landscapes to lush wildlife sanctuaries, this immersive journey blends expert knowledge with premium comfort, ensuring a seamless and enriching adventure."
+        intro_new = "Embark on an unforgettable Botswana safari where the wild beauty of nature is matched only by exceptional comfort. From the winding waterways of the Okavango Delta to the dense wildlife of Chobe National Park and the awe-inspiring roar of Victoria Falls, this carefully curated journey immerses you in one of Africa's most pristine environments. With hand-picked luxury accommodations and expert guides, every detail is considered to bring you the adventure of a lifetime."
         html = html.replace(intro_old, intro_new)
 
         # 3. Glance Items (Destinations)
@@ -100,8 +116,14 @@ for job in jobs:
             "Kasane": [-17.80, 25.15],
             "Victoria Falls": [-17.92, 25.85],
             "Okavango Delta": [-19.28, 22.69],
+            "Okavango": [-19.28, 22.69],
             "Moremi": [-19.33, 23.00],
             "Maun": [-19.98, 23.42],
+            "Makgadikgadi": [-20.72, 25.33],
+            "Nxai Pan": [-19.88, 24.78],
+            "Savuti": [-18.56, 24.06],
+            "Linyanti": [-18.26, 23.94],
+            "Central Kalahari": [-21.89, 23.68],
             "Namib-Naukluft Park": [-24.81, 15.82]
         }
 
@@ -114,7 +136,7 @@ for job in jobs:
 
         waypoints_arr = []
         # Add start
-        waypoints_arr.append("                                    { id: '', name: 'Start', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] }")
+        waypoints_arr.append("                                    { id: '', name: 'Start', lodge: 'Arrival', nights: 'START', coords: [-19.98, 23.42] }") # Default start for Botswana is often Maun or Vic Falls
         
         idx = 1
         for item in data.get('top_carousel', []):
@@ -123,24 +145,24 @@ for job in jobs:
             night_str = "1 NIGHT" if nights == 1 else f"{nights} NIGHTS"
             
             # Find coords
-            coords = [-22.56, 17.06] # Default
+            coords = [-19.98, 23.42] # Default Maun
             for key, val in COORDS_DB.items():
                 if key.lower() in dest.lower():
                     coords = val
                     break
                     
-            waypoints_arr.append(f"                                    {{ id: '{idx}', name: '{dest}', lodge: 'Guided Safari', nights: '{night_str}', coords: {coords} }}")
+            waypoints_arr.append(f"                                    {{ id: '{idx}', name: '{dest}', lodge: 'Botswana Safari', nights: '{night_str}', coords: {coords} }}")
             idx += 1
             
         # Add end
-        waypoints_arr.append(f"                                    {{ id: '{idx}', name: 'End', lodge: 'Departure', nights: 'DEPART', coords: [-22.48, 17.47] }}")
+        waypoints_arr.append(f"                                    {{ id: '{idx}', name: 'End', lodge: 'Departure', nights: 'DEPART', coords: [-17.92, 25.85] }}")
 
         waypoints_str = "                                const waypoints = [\n" + ",\n".join(waypoints_arr) + "\n                                ];"
         html = re.sub(r'const waypoints = \[.*?\];', lambda m: waypoints_str, html, flags=re.DOTALL)
 
         # 5. Day Blocks
         day_blocks = ""
-        prev_acc_name = "Guided Lodge"
+        prev_acc_name = "Lodge"
         prev_bg = ""
         prev_slides = ""
 
