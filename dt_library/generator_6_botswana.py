@@ -243,16 +243,33 @@ for job in jobs:
         html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', lambda m: day_blocks, html, flags=re.DOTALL)
 
         # 6. Bottom Carousel (Lodge Selection)
-        lodge_carousel_html = ""
-        for item in data.get('bottom_carousel', []):
-            acc = item.get('accommodation', '')
-            img_acc = item.get('image', '')
-            lodge_carousel_html += f'''                        <a href="#" target="_blank" class="lux-acc-card">
-                            <img src="{img_acc}" alt="{acc}">
+bottom_carousel_html = ""
+for item in data.get('bottom_carousel', []):
+    acc = item.get('accommodation', '')
+    img = item.get('image', '')
+    bottom_carousel_html += f'''                        <a href="#" target="_blank" class="lux-acc-card">
+                            <img src="{img}" alt="{acc}">
                             <h4 class="lux-acc-title">{acc}</h4>
                         </a>\n'''
 
-        # 7. More Safaris Carousel
+new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-container"
+                    style="margin-bottom: 4rem; padding-top: 2rem;">
+                    <h2
+                        style="color: #1F4F4B !important; font-family: 'Cinzel', serif; font-weight: 400; font-size: clamp(36px, 6vw, 46px); line-height: 1.2; letter-spacing: 0.3px; margin-bottom: 2rem; text-transform: uppercase;">
+                        Lodge Selection</h2>
+                    <div class="flex-scroll-hint">
+                        <span>Swipe to explore</span>
+                        <svg viewBox="0 0 24 24">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </div>
+                    <div class="lux-acc-grid">
+{bottom_carousel_html}                    </div>
+                </div>\n\n                '''
+
+html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', new_lodge_selection, html, flags=re.DOTALL)
+# 7. More Safaris Carousel
         more_safaris_html = ""
         for other_job in jobs:
             if other_job['output_path'] != job['output_path']:
