@@ -40,9 +40,8 @@ for i, item in enumerate(data.get('top_carousel', [])):
                         </a>\n'''
                         
 html = re.sub(r'<div class="lux-acc-grid">.*?</div>\s+</div>\s+<!-- // ANIMATED ROUTE MAP SECTION // -->', 
-    f'<div class="lux-acc-grid">\n{glance_html}                    </div>\n                </div>\n\n                <!-- // ANIMATED ROUTE MAP SECTION // -->', 
+    lambda m: f'<div class="lux-acc-grid">\n{glance_html}                    </div>\n                </div>\n\n                <!-- // ANIMATED ROUTE MAP SECTION // -->', 
     html, flags=re.DOTALL)
-
 
 # 5. Waypoints
 waypoints_str = '''                                const waypoints = [
@@ -54,7 +53,7 @@ waypoints_str = '''                                const waypoints = [
                                     { id: '5', name: 'Okonjima', lodge: 'Okonjima African Villa', nights: '1 NIGHT', coords: [-20.85, 16.64] },
                                     { id: '6', name: 'Departure', lodge: 'Hosea Kutako Airport', nights: 'DEPART', coords: [-22.48, 17.47] }
                                 ];'''
-html = re.sub(r'const waypoints = \[.*?\];', waypoints_str, html, flags=re.DOTALL)
+html = re.sub(r'const waypoints = \[.*?\];', lambda m: waypoints_str, html, flags=re.DOTALL)
 
 # 6. Day Blocks
 day_blocks = ""
@@ -126,7 +125,7 @@ for i, item in enumerate(data['itinerary']):
                 </div>\n\n'''
     day_blocks += day_block
 
-html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', day_blocks, html, flags=re.DOTALL)
+html = re.sub(r'<!-- DAY 01 -->.*?(?=<div class="lux-padding-wrapper" style="max-width: 900px;)', lambda m: day_blocks, html, flags=re.DOTALL)
 
 # 7. Bottom Carousel (Lodge Selection)
 bottom_carousel_html = ""
@@ -154,7 +153,7 @@ new_lodge_selection = f'''<div id="lodge-selection" class="lux-acc-grid-containe
 {bottom_carousel_html}                    </div>
                 </div>\n\n                '''
 
-html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', new_lodge_selection, html, flags=re.DOTALL)
+html = re.sub(r'<div id="lodge-selection" class="lux-acc-grid-container".*?(?=<!-- Verified Trust/Reviews Block -->)', lambda m: new_lodge_selection, html, flags=re.DOTALL)
 
 # 8. Replace car icon with plane icon
 car_svg = '<svg id="dt-car-svg" viewBox="0 0 100 100" fill="#ffffff"><path d="M 28 20 L 72 20 A 2 2 0 0 1 74 22 L 78 45 L 22 45 L 26 22 A 2 2 0 0 1 28 20" fill="none" stroke="#ffffff" stroke-width="5" /><path d="M 18 45 L 82 45 Q 85 45 86 48 L 88 56 L 88 75 L 12 75 L 12 56 L 14 48 Q 15 45 18 45" fill="#ffffff"/><rect x="8" y="55" width="10" height="25" rx="3" fill="#ffffff" /><rect x="82" y="55" width="10" height="25" rx="3" fill="#ffffff" /><circle cx="28" cy="58" r="6" fill="#C85F19" /><circle cx="72" cy="58" r="6" fill="#C85F19" /><rect x="40" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="45" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="50" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="55" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="60" y="54" width="2" height="12" rx="1" fill="#C85F19" /><rect x="25" y="68" width="6" height="3" rx="1" fill="#C85F19" /><rect x="69" y="68" width="6" height="3" rx="1" fill="#C85F19" /></svg>'
