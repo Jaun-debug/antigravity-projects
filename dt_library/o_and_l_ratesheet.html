@@ -4,32 +4,70 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O&L Leisure Rates & Booking 2026-2028</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    
+    <!-- Custom Calendar Styles (Replaces Flatpickr) -->
     <style data-no-optimize="1">
         :root {
-            --primary-bg: #F5F5F3; /* Ivory Background */
-            --card-bg: #FFFFFF;
-            --card-light: #FAFAFA;
-            --text-main: #333333;
-            --text-muted: #666666;
-            --brand-accent: #C9A24A; /* Gold Accent */
-            --brand-gradient: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435);
+            --primary-bg: #fdfbfb;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-light: rgba(255, 255, 255, 0.4);
+            --text-main: #222222;
+            --text-muted: #555555;
+            --brand-accent: #DEC698; /* O&L Tan Accent */
+            --brand-gradient: #DEC698;
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --glass-border: 1px solid rgba(201, 162, 74, 0.15);
-            --font-head: 'Cinzel', serif;
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+            --font-head: 'Montserrat', sans-serif;
             --font-body: 'Inter', sans-serif;
         }
 
-        body { margin: 0; padding: 0; background-color: var(--primary-bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
-        .wrapper { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+        /* Custom Calendar Base Styles */
+        .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin-top: 10px; margin: 0 auto; }
+        .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin-bottom: 16px; margin: 0 auto; }
+        .dew-calendar-nav-btn { background: transparent; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; }
+        .dew-calendar-nav-btn:hover { opacity: 0.6; }
+        .dew-calendar-month-title { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: var(--text-main); text-align: center; width: 300px; }
+        .dew-calendar { flex: 1; max-width: 300px; width: 100%; }
+        .dew-calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin-bottom: 8px; }
+        .dew-calendar-day-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+        .dew-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+        .dew-calendar-day { font-family: var(--font-body); font-size: 14px; color: var(--text-main); text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; position: relative; border-radius: 0; }
+        .dew-calendar-day:hover { background: rgba(0,0,0,0.05); }
+        .dew-calendar-day.dew-empty { cursor: default; }
+        .dew-calendar-day.dew-empty:hover { background: transparent; }
+        .dew-calendar-day.dew-today { background: var(--brand-accent); border-radius: 50%; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-selected { background: rgba(222, 198, 152, 0.4); }
+        .dew-calendar-day.dew-range { background: rgba(222, 198, 152, 0.25); }
+        .dew-calendar-day.dew-range-start { background: var(--brand-accent); border-radius: 50% 0 0 50%; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-range-end { background: var(--brand-accent); border-radius: 0 50% 50% 0; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-past { color: var(--text-muted); cursor: not-allowed; opacity: 0.4; }
+        .dew-calendar-day.dew-past:hover { background: transparent; }
+        @media(max-width: 768px) {
+            .dew-calendar-container { flex-direction: column; gap: 24px; align-items: center; }
+            .dew-calendar-container > .dew-calendar:last-child { display: none; }
+            .dew-calendar-nav .dew-calendar-month-title:nth-of-type(2) { display: none; }
+            .dew-calendar-month-title { width: 100%; }
+        }
+
+        @keyframes pulseTab {
+            0% { background: var(--card-light); border-color: transparent; color: var(--text-main); }
+            50% { background: rgba(222, 198, 152, 0.2); border-color: var(--brand-accent); color: var(--text-main); }
+            100% { background: var(--card-light); border-color: transparent; color: var(--text-main); }
+        }
+        .flash-tab {
+            animation: pulseTab 2s infinite ease-in-out;
+            color: var(--text-main) !important;
+        }
+
+        body { margin: 0; padding: 0; background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); background-attachment: fixed; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 500; margin: 0; }
+        .wrapper { max-width: 1700px; margin: 0 auto; padding: 30px 20px; }
         
         .header { text-align: center; margin-bottom: 40px; animation: fadeInDown 1s ease forwards; }
-        .header h1 { font-size: 3.5rem; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
-        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+        .header h1 { font-size: 3.5rem; color: var(--text-main); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
 
         /* SWIPER CAROUSEL */
         .swiper-container-wrapper { animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; margin-bottom: 60px; position: relative; }
@@ -37,7 +75,7 @@
         .swiper-slide {
             width: 360px;
             height: 520px;
-            border-radius: 16px;
+            border-radius: 10px;
             overflow: hidden;
             position: relative;
             box-shadow: 0 15px 35px rgba(0,0,0,0.15);
@@ -67,48 +105,48 @@
             text-align: left;
         }
         .swiper-card-location { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #f9f6f0; opacity: 0.8; margin-bottom: 8px; display: block; }
-        .swiper-card-title { font-size: 1.8rem; font-family: var(--font-head); font-weight: 600; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .swiper-card-btn { display: inline-block; padding: 8px 20px; border: 1px solid rgba(255,255,255,0.4); border-radius: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); backdrop-filter: blur(5px); }
+        .swiper-card-title { font-size: 1.8rem; font-family: var(--font-head); font-weight: 500; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .swiper-card-btn { display: inline-block; padding: 10px 24px; border: 1px solid rgba(255,255,255,0.6); border-radius: 10px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); backdrop-filter: blur(5px); font-family: var(--font-head); font-weight: 500; }
         .swiper-slide:hover .swiper-card-btn { background: #fff; color: var(--brand-accent); border-color: #fff; }
 
         /* DETAIL VIEW */
         .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 120px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: var(--transition); margin-bottom: 40px; background: transparent; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600;}
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-bottom: 20px; background: transparent; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; font-weight: 500;}
         .back-btn:hover { color: #fff; background: var(--brand-gradient); border-color: transparent; }
 
-        .detail-header { margin-bottom: 40px; display: flex; flex-direction: column; gap: 15px; }
-        .detail-title { font-size: 3.5rem; color: var(--brand-accent); line-height: 1.1; }
-        .intro-text { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 900px; }
+        .detail-header { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .detail-title { font-size: 3rem; color: var(--brand-accent); line-height: 1.1; }
+        .intro-text { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; max-width: 100%; }
 
         /* MULTI-IMAGE GALLERY */
         .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
-        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
         /* TABS */
-        .tabs { display: flex; gap: 15px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 10px; }
-        .tab-btn { background: var(--card-bg); border: var(--glass-border); color: var(--text-muted); padding: 15px 30px; border-radius: 8px; cursor: pointer; font-family: var(--font-head); font-size: 1.1rem; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
-        .tab-btn:hover { border-color: var(--brand-accent); color: var(--text-main); }
-        .tab-btn.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
-        .tab-btn-highlight { border: 1px solid var(--brand-accent); color: var(--brand-accent); }
-        .tab-btn-highlight.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+        .tabs { display: flex; gap: 12px; margin-bottom: 25px; overflow-x: auto; padding: 15px 20px; position: sticky; top: 20px; z-index: 90; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: var(--glass-border); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+        .tab-btn { background: var(--brand-gradient); border: 1px solid transparent; color: #ffffff; padding: 14px 28px; border-radius: 10px; cursor: pointer; font-family: var(--font-head); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); white-space: nowrap; font-weight: 500; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
+        .tab-btn:hover { opacity: 0.9; }
+        .tab-btn.active { background: var(--card-bg); color: var(--text-main); border-color: var(--brand-accent); }
+        .tab-btn-highlight { background: var(--card-bg); border: 1px solid var(--brand-accent); color: var(--brand-accent); }
+        .tab-btn-highlight.active { background: var(--card-bg); color: var(--text-main); border-color: var(--text-main); }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
 
         /* CONTENT BLOCKS */
-        .content-block { background: var(--card-bg); border: var(--glass-border); border-radius: 12px; padding: 40px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
-        .content-block h3 { color: var(--brand-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 15px; display: inline-block; text-transform: uppercase; }
+        .content-block { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: var(--glass-border); border-radius: 15px; padding: 35px 40px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
+        .content-block h3 { color: var(--brand-accent); font-size: 1.6rem; margin-bottom: 15px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 10px; display: inline-block; text-transform: uppercase; }
         .sub-block { margin-top: 30px; }
         .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;}
 
         /* TABLES */
-        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 8px; margin-bottom: 30px;}
-        table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-light); margin-bottom: 0px; }
-        th { font-family: var(--font-head); background: rgba(201, 162, 74, 0.08); color: var(--text-main); font-size: 0.85rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(201, 162, 74, 0.15); }
+        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 12px; margin-bottom: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: transparent; margin-bottom: 0px; }
+        th { font-family: var(--font-head); background: rgba(201, 162, 74, 0.08); color: var(--text-main); font-size: 0.85rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 500; border-bottom: 1px solid rgba(201, 162, 74, 0.15); }
         td { padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
         tr:last-child td { border-bottom: none; }
         tr:hover td { background: rgba(201, 162, 74, 0.03); color: var(--text-main); }
-        td strong { color: var(--text-main); font-weight: 600; }
+        td strong { color: var(--text-main); font-weight: 500; }
         
         /* LISTS & TEXT */
         .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
@@ -119,17 +157,17 @@
         /* BOOKING BAR & FORM */
         #booking-bar {
             display: none; position: fixed; bottom: 0; left: 0; width: 100%; 
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            background: rgba(222, 198, 152, 0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
             padding: 20px; box-shadow: 0 -10px 30px rgba(0,0,0,0.1); 
             z-index: 100; text-align: center; border-top: 1px solid rgba(201, 162, 74, 0.2);
             animation: fadeInUp 0.4s ease;
         }
-        #booking-total { font-weight: 600; font-size: 1.3rem; margin-right: 30px; color: var(--text-main); font-family: var(--font-head); }
+        #booking-total { font-weight: 500; font-size: 1.3rem; margin-right: 30px; color: var(--text-main); font-family: var(--font-head); }
         
         .form-group { margin-bottom: 20px; }
-        .form-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: block; }
+        .form-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; display: block; }
         .form-label.accent { color: var(--brand-accent); }
-        .form-control { width: 100%; padding: 15px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--font-body); font-size: 1rem; background: var(--card-light); transition: var(--transition); box-sizing: border-box; }
+        .form-control { width: 100%; padding: 15px; border: 1px solid rgba(0,0,0,0.1); border-radius: 10px; font-family: var(--font-body); font-size: 1rem; background: var(--card-light); transition: var(--transition); box-sizing: border-box; }
         .form-control:focus { outline: none; border-color: var(--brand-accent); background: #fff; box-shadow: 0 0 0 4px rgba(201, 162, 74, 0.1); }
         
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
@@ -159,12 +197,12 @@
 
     <!-- LOGIN OVERLAY -->
     <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--primary-bg); z-index: 9999; display: flex; align-items: center; justify-content: center;">
-        <div style="background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 400px; width: 100%; text-align: center; border: var(--glass-border);">
+        <div style="background: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 400px; width: 100%; text-align: center; border: var(--glass-border);">
             <h2 style="color: var(--brand-accent); font-family: var(--font-head); margin-bottom: 20px;">O&L Leisure Rates</h2>
             <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Please sign in to access the booking engine.</p>
-            <input type="text" id="login-user" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: var(--font-body);">
-            <input type="password" id="login-pass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-family: var(--font-body);">
-            <button onclick="checkLogin()" style="width: 100%; padding: 15px; background: var(--brand-gradient); color: #fff; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s;">Access Portal</button>
+            <input type="text" id="login-user" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: var(--font-body);" onkeydown="if(event.key === 'Enter') checkLogin()">
+            <input type="password" id="login-pass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: var(--font-body);" onkeydown="if(event.key === 'Enter') checkLogin()">
+            <button onclick="checkLogin()" style="width: 100%; padding: 15px; background: var(--brand-gradient); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; font-family: var(--font-head);">Access Portal</button>
             <p id="login-error" style="color: red; font-size: 0.8rem; margin-top: 15px; display: none;">Invalid credentials.</p>
         </div>
     </div>
@@ -181,13 +219,76 @@
             const u = uInput.trim().toLowerCase();
             const p = pInput.trim();
             
-            if (u === 'jaun' && p === 'passme9cops') {
+            const isValid = 
+                (u === 'jaun' && p === 'passme9cops') ||
+                ((u === 'sto 15' || u === 'sto15') && p === '1515') ||
+                ((u === 'sto 20' || u === 'sto20') && p === '2020') ||
+                ((u === 'o&l admin' || u === 'o&ladmin') && p === '0000');
+            
+            if (isValid) {
+                if (u === 'jaun') {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.getElementById('main-view').style.display = 'none';
+                    document.getElementById('detail-view').style.display = 'none';
+                    if(document.getElementById('admin-view')) document.getElementById('admin-view').style.display = 'none';
+                    document.getElementById('super-admin-view').style.display = 'block';
+                    return;
+                }
+                
+                if (p === '0000') {
+                    document.getElementById('login-overlay').style.display = 'none';
+                    document.getElementById('main-view').style.display = 'none';
+                    document.getElementById('detail-view').style.display = 'none';
+                    document.getElementById('admin-view').style.display = 'flex';
+                    return; // Stop execution here, no need to replace STO text on the regular views
+                }
+
+                let rateText = 'STO 20';
+                if (p === '1515') rateText = 'STO 15';
+                
+                // Update text across the page
+                document.querySelectorAll('h1, h2, h3, h4, p, span').forEach(el => {
+                    // Only update elements that don't have children (to avoid corrupting HTML)
+                    if (el.children.length === 0) {
+                        if (el.innerHTML.includes('STO20')) {
+                            el.innerHTML = el.innerHTML.replace(/STO20/g, rateText.replace(' ', ''));
+                        }
+                        if (el.innerHTML.includes('STO 20')) {
+                            el.innerHTML = el.innerHTML.replace(/STO 20/g, rateText);
+                        }
+                    } else {
+                        // If they have children, try to update text nodes only, or just do innerHTML safely if we know it's fine.
+                        // Actually, replacing STO20 is safe if it's just text.
+                        if (el.innerHTML.includes('STO20')) {
+                            el.innerHTML = el.innerHTML.replace(/STO20/g, rateText.replace(' ', ''));
+                        }
+                        if (el.innerHTML.includes('STO 20')) {
+                            el.innerHTML = el.innerHTML.replace(/STO 20/g, rateText);
+                        }
+                    }
+                });
+
+                // Update text inside the DB object so when a property is opened later, it has the correct text
+                if (typeof DB !== 'undefined') {
+                    for (let key in DB) {
+                        if (DB[key].tab1) {
+                            DB[key].tab1 = DB[key].tab1.replace(/STO20/g, rateText.replace(' ', '')).replace(/STO 20/g, rateText);
+                        }
+                        if (DB[key].tab2) {
+                            DB[key].tab2 = DB[key].tab2.replace(/STO20/g, rateText.replace(' ', '')).replace(/STO 20/g, rateText);
+                        }
+                        if (DB[key].tab3) {
+                            DB[key].tab3 = DB[key].tab3.replace(/STO20/g, rateText.replace(' ', '')).replace(/STO 20/g, rateText);
+                        }
+                    }
+                }
+
                 document.getElementById('login-overlay').style.display = 'none';
             } else {
                 document.getElementById('login-error').style.display = 'block';
                 
                 // Send security alert email in the background
-                fetch('https://desert-tracks.vercel.app/api/send_email', {
+                fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -233,10 +334,236 @@
             </div>
         </div>
 
-        <div id="detail-view" class="detail-view">
-            <button class="back-btn" onclick="closeProperty()">← Back to Lodges</button>
+        <div id="super-admin-view" style="display: none; padding-bottom: 50px;">
+            <div class="header" style="margin-bottom: 40px;">
+                <h1>System Administration</h1>
+                <p>MASTER DATA CONFIGURATION</p>
+            </div>
             
+            <div class="content-block" style="max-width: 800px; margin: 0 auto; text-align: left;">
+                <h3 style="margin-bottom: 20px;">Ratesheet Compiler (CSV to HTML)</h3>
+                <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">Upload a master CSV rate sheet to automatically update the pricing databases. The system will compile a new static HTML file with the updated math, which you can then download and sync to the Vault.</p>
+                
+                <div style="background: rgba(201, 162, 74, 0.05); border: 1px dashed rgba(201, 162, 74, 0.5); padding: 40px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
+                    <input type="file" id="csv-upload" accept=".csv" style="display: none;">
+                    <label for="csv-upload" style="background: var(--brand-gradient); color: #fff; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; display: inline-block;">Select CSV File</label>
+                    <p id="csv-filename" style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;">No file selected</p>
+                </div>
+
+                <div class="grid-2" style="margin-bottom: 30px;">
+                    <div class="form-group">
+                        <label class="form-label">Target Rate Tier</label>
+                        <select id="csv-tier" class="form-control" style="appearance: auto; cursor: pointer;">
+                            <option value="STO 15">Update STO 15 Rates</option>
+                            <option value="STO 20">Update STO 20 Rates</option>
+                            <option value="RACK">Update RACK Rates</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="alert('System awaiting CSV template mapping. Please provide an example CSV to your developer to finalize the parser logic before compilation.');" class="tab-btn" style="width: 100%; font-size: 1.1rem; padding: 18px; background: #2c3e50; border-color: transparent;">Process CSV & Download HTML</button>
+            </div>
+        </div>
+
+        <div id="admin-view" style="display: none; min-height: 80vh; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin: 20px auto; max-width: 1200px;">
+            <div style="width: 260px; background: #f8f9fa; border-right: 1px solid rgba(0,0,0,0.05); padding: 30px 20px; flex-shrink: 0;">
+                <h2 style="font-size: 1.2rem; margin-bottom: 5px; color: var(--text-main);">O&L CORPORATE</h2>
+                <p style="font-size: 0.8rem; color: var(--brand-accent); margin-bottom: 30px; text-transform: uppercase; letter-spacing: 1px;">Admin Dashboard</p>
+                <ul style="list-style: none; padding: 0; margin: 0;" id="admin-sidebar-nav">
+                    <li onclick="switchAdminTab('nav-clients')" id="tab-nav-clients" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600; background: rgba(201,162,74,0.1); color: var(--brand-accent);">O&L Clients & Logins</li>
+                    <li onclick="switchAdminTab('nav-create')" id="tab-nav-create" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: 0.2s;" onmouseover="this.style.color='var(--brand-accent)'" onmouseout="if(this.style.background === '') this.style.color='var(--text-muted)'">Client Credentials</li>
+                    <li onclick="switchAdminTab('nav-rates')" id="tab-nav-rates" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: 0.2s;" onmouseover="this.style.color='var(--brand-accent)'" onmouseout="if(this.style.background === '') this.style.color='var(--text-muted)'">STO Rate Sheets</li>
+                    <li onclick="switchAdminTab('nav-upload')" id="tab-nav-upload" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: 0.2s;" onmouseover="this.style.color='var(--brand-accent)'" onmouseout="if(this.style.background === '') this.style.color='var(--text-muted)'">Create New STO Sheet</li>
+                </ul>
+            </div>
+            <div style="flex: 1; padding: 40px; overflow-y: auto;">
+                
+                <!-- TAB: CLIENTS -->
+                <div id="nav-clients" style="display: block;">
+                    <div class="content-block" style="max-width: 1000px; margin: 0 auto; box-shadow: none; padding: 0;">
+                        <h3 style="margin-bottom: 20px;">O&L Active Clients Dashboard</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>Credentials</th>
+                                        <th>STO Rate</th>
+                                        <th>Total Logins</th>
+                                        <th style="text-align: right;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-clients-tbody">
+                                    <tr>
+                                        <td><strong>Sense of Africa</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">info@senseofafrica.com<br>Tel: +264 61 222 333</span></td>
+                                        <td>
+                                            <div style="margin-bottom: 12px;">
+                                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Username</div>
+                                                <input type="text" value="sto 15" style="background: transparent; border: none; border-bottom: 1px solid rgba(201,162,74,0.3); font-weight: 300; font-family: var(--font-head); font-size: 1.2rem; color: var(--brand-accent); width: 140px; outline: none; padding: 2px 0; transition: 0.3s;" onfocus="this.style.borderBottom='1px solid var(--brand-accent)'" onblur="this.style.borderBottom='1px solid rgba(201,162,74,0.3)'">
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Password</div>
+                                                <input type="text" value="1515" style="background: transparent; border: none; border-bottom: 1px solid rgba(201,162,74,0.3); font-weight: 300; font-family: var(--font-head); font-size: 1.2rem; color: var(--brand-accent); width: 140px; outline: none; padding: 2px 0; transition: 0.3s;" onfocus="this.style.borderBottom='1px solid var(--brand-accent)'" onblur="this.style.borderBottom='1px solid rgba(201,162,74,0.3)'">
+                                            </div>
+                                        </td>
+                                        <td><span style="background: rgba(201, 162, 74, 0.1); padding: 6px 15px; border-radius: 20px; color: var(--brand-accent); font-weight: 500; font-size: 0.8rem; display: inline-block; white-space: nowrap; border: 1px solid rgba(201, 162, 74, 0.2);">STO 15</span></td>
+                                        <td><strong style="color: var(--brand-accent); font-size: 1.3rem;">42</strong></td>
+                                        <td style="text-align: right;"><button onclick="if(confirm('Are you sure you want to delete this client?')) this.closest('tr').remove();" style="background: transparent; border: 1px solid #d9534f; color: #d9534f; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;">Delete</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Wilderness Safaris</strong><br><span style="font-size: 0.8rem; color: var(--text-muted);">reservations@wilderness.co.za<br>Tel: +27 11 282 0000</span></td>
+                                        <td>
+                                            <div style="margin-bottom: 12px;">
+                                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Username</div>
+                                                <input type="text" value="sto 20" style="background: transparent; border: none; border-bottom: 1px solid rgba(201,162,74,0.3); font-weight: 300; font-family: var(--font-head); font-size: 1.2rem; color: var(--brand-accent); width: 140px; outline: none; padding: 2px 0; transition: 0.3s;" onfocus="this.style.borderBottom='1px solid var(--brand-accent)'" onblur="this.style.borderBottom='1px solid rgba(201,162,74,0.3)'">
+                                            </div>
+                                            <div>
+                                                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Password</div>
+                                                <input type="text" value="2020" style="background: transparent; border: none; border-bottom: 1px solid rgba(201,162,74,0.3); font-weight: 300; font-family: var(--font-head); font-size: 1.2rem; color: var(--brand-accent); width: 140px; outline: none; padding: 2px 0; transition: 0.3s;" onfocus="this.style.borderBottom='1px solid var(--brand-accent)'" onblur="this.style.borderBottom='1px solid rgba(201,162,74,0.3)'">
+                                            </div>
+                                        </td>
+                                        <td><span style="background: rgba(201, 162, 74, 0.1); padding: 6px 15px; border-radius: 20px; color: var(--brand-accent); font-weight: 500; font-size: 0.8rem; display: inline-block; white-space: nowrap; border: 1px solid rgba(201, 162, 74, 0.2);">STO 20</span></td>
+                                        <td><strong style="color: var(--brand-accent); font-size: 1.3rem;">18</strong></td>
+                                        <td style="text-align: right;"><button onclick="if(confirm('Are you sure you want to delete this client?')) this.closest('tr').remove();" style="background: transparent; border: 1px solid #d9534f; color: #d9534f; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;">Delete</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: CREATE CLIENT -->
+                <div id="nav-create" style="display: none;">
+                    <div class="content-block" style="max-width: 1000px; margin: 0 auto; box-shadow: none; padding: 0;">
+                        <h3 style="margin-bottom: 20px;">Client Credentials</h3>
+                        <form id="admin-client-form" onsubmit="handleCreateClient(event)">
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label class="form-label">Company Name</label>
+                                    <input type="text" id="ac-company" class="form-control" placeholder="Enter company name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Email Address</label>
+                                    <input type="email" id="ac-email" class="form-control" placeholder="company@email.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Telephone Number</label>
+                                    <input type="text" id="ac-tel" class="form-control" placeholder="+264 ..." required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">PO Box</label>
+                                    <input type="text" id="ac-po" class="form-control" placeholder="P.O. Box ..." required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Physical Address</label>
+                                <input type="text" id="ac-phys" class="form-control" placeholder="Street address" required>
+                            </div>
+                            
+                            <h4 style="margin: 30px 0 15px; color: var(--text-main); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px;">Access Credentials & Rates</h4>
+                            
+                            <div class="grid-2">
+                                <div class="form-group">
+                                    <label class="form-label">Assign Username</label>
+                                    <input type="text" id="ac-user" class="form-control" placeholder="e.g. sto15" required>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label">Assign Password</label>
+                                    <input type="text" id="ac-pass" class="form-control" placeholder="e.g. 1515" required>
+                                </div>
+                            </div>
+                            <div class="form-group" style="max-width: 50%;">
+                                <label class="form-label">STO Rate Access Level</label>
+                                <select id="ac-rate" class="form-control" required style="appearance: auto; cursor: pointer;">
+                                    <option value="STO 15">STO 15</option>
+                                    <option value="STO 20">STO 20</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="tab-btn" style="width: 100%; margin-top: 20px; font-size: 1.1rem; padding: 18px;">Create Client Profile</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- TAB: VIEW RATES -->
+                <div id="nav-rates" style="display: none;">
+                    <div class="content-block" style="max-width: 1000px; margin: 0 auto; box-shadow: none; padding: 0;">
+                        <h3 style="margin-bottom: 20px;">Active STO Rate Sheets</h3>
+                        <div class="grid-2">
+                            <div style="background: #fff; padding: 30px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
+                                <h4 style="font-size: 1.2rem; color: var(--brand-accent); margin-bottom: 10px;">STO 15</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Currently assigned to 1 active client</p>
+                                <button class="tab-btn" style="width: 100%;" onclick="alert('Viewing STO 15 Rates inside the visual editor...');">View / Edit STO 15</button>
+                            </div>
+                            <div style="background: #fff; padding: 30px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); text-align: center;">
+                                <h4 style="font-size: 1.2rem; color: var(--brand-accent); margin-bottom: 10px;">STO 20</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 20px;">Currently assigned to 1 active client</p>
+                                <button class="tab-btn" style="width: 100%;" onclick="alert('Viewing STO 20 Rates inside the visual editor...');">View / Edit STO 20</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB: UPLOAD -->
+                <div id="nav-upload" style="display: none;">
+                    <div class="content-block" style="max-width: 1000px; margin: 0 auto; box-shadow: none; padding: 0;">
+                        <h3 style="margin-bottom: 20px;">Create New STO Rate Sheet</h3>
+                        <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">Upload a master CSV rate sheet to automatically update the pricing databases. The system will compile a new static HTML file with the updated math.</p>
+                        
+                        <div style="background: rgba(201, 162, 74, 0.05); border: 1px dashed rgba(201, 162, 74, 0.5); padding: 40px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
+                            <input type="file" id="o-csv-upload" accept=".csv" style="display: none;">
+                            <label for="o-csv-upload" style="background: var(--brand-gradient); color: #fff; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; display: inline-block;">Select CSV File</label>
+                            <p id="o-csv-filename" style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;">No file selected</p>
+                        </div>
+
+                        <div class="grid-2" style="margin-bottom: 30px;">
+                            <div class="form-group">
+                                <label class="form-label">Target Rate Tier</label>
+                                <select id="o-csv-tier" class="form-control" style="appearance: auto; cursor: pointer;">
+                                    <option value="STO 15">Update STO 15 Rates</option>
+                                    <option value="STO 20">Update STO 20 Rates</option>
+                                    <option value="RACK">Update RACK Rates</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button onclick="alert('System awaiting CSV template mapping.');" class="tab-btn" style="width: 100%; font-size: 1.1rem; padding: 18px; background: #2c3e50; border-color: transparent;">Process CSV & Download HTML</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function switchAdminTab(tabId) {
+                // Hide all tabs
+                document.getElementById('nav-clients').style.display = 'none';
+                document.getElementById('nav-create').style.display = 'none';
+                document.getElementById('nav-rates').style.display = 'none';
+                document.getElementById('nav-upload').style.display = 'none';
+                
+                // Show selected tab
+                document.getElementById(tabId).style.display = 'block';
+                
+                // Reset nav styles
+                const navs = ['tab-nav-clients', 'tab-nav-create', 'tab-nav-rates', 'tab-nav-upload'];
+                navs.forEach(n => {
+                    const el = document.getElementById(n);
+                    el.style.background = 'transparent';
+                    el.style.color = 'var(--text-muted)';
+                    el.style.fontWeight = '500';
+                });
+                
+                // Set active style
+                const activeEl = document.getElementById('tab-' + tabId);
+                activeEl.style.background = 'rgba(201,162,74,0.1)';
+                activeEl.style.color = 'var(--brand-accent)';
+                activeEl.style.fontWeight = '600';
+            }
+        </script>
+
+        <div id="detail-view" class="detail-view">
             <div class="detail-header">
+                <button class="back-btn" onclick="closeProperty()" style="margin-bottom: 20px;">← Back to Lodges</button>
                 <h1 class="detail-title" id="d-title">Property Name</h1>
                 <p class="intro-text" id="d-intro"></p>
                 <div style="color: var(--brand-accent); margin-top: 5px; font-weight: 600;" id="d-location"></div>
@@ -249,6 +576,16 @@
                 <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
                 <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
                 <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+            </div>
+
+            <div class="global-dates" id="global-dates-ui" style="margin-top: 25px; margin-bottom: 25px; display: block; text-align: center; background: var(--card-light); padding: 30px; border-radius: 10px; border: var(--glass-border);">
+                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: var(--text-main); font-weight: 500;">When would you like to travel?</h3>
+                <div id="inline-calendar" style="margin: 0 auto;"></div>
+                
+                <div style="font-family: var(--font-head); color: var(--text-main); font-weight: 600; font-size: 1.1rem; text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); width: 100%; margin-top: 20px;">
+                    <span id="nights-count" style="font-size: 1.8rem; color: var(--brand-accent);">1</span>
+                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-left: 5px;">Nights Selected</span>
+                </div>
             </div>
 
             <div id="tab-1" class="tab-content active"></div>
@@ -301,16 +638,9 @@
                             </div>
                         </div>
 
-                        <div class="grid-2">
-                            <div class="form-group">
-                                <label class="form-label">Date In</label>
-                                <input type="date" id="b-date-in" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Date Out</label>
-                                <input type="date" id="b-date-out" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
-                            </div>
-                        </div>
+                        <!-- Hidden Date Fields (Populated by the Custom Calendar) -->
+                        <input type="hidden" id="b-date-in" required>
+                        <input type="hidden" id="b-date-out" required>
 
                         <div class="grid-2">
                             <div class="form-group">
@@ -337,13 +667,15 @@
     </div>
 
     <!-- BOOKING BAR -->
-    <div id="booking-bar">
+    <div id="booking-bar" onclick="switchTab(5)" style="cursor: pointer;" title="Click to Finalise Booking">
         <span id="booking-total">Total: N$ 0.00</span>
-        <button onclick="switchTab(5)" class="back-btn" style="background: var(--brand-gradient); color: #fff; margin-bottom: 0; border: none; padding: 12px 30px;">Finalise Booking</button>
     </div>
 
     <!-- Swiper JS -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/rangePlugin.js"></script>
     
     <script data-no-optimize="1">
         const DB = {
@@ -1064,40 +1396,223 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             keyboard: true
         });
 
-        function parseTab1(htmlString) {
+        let calendarState = {
+            month: new Date().getMonth(),
+            year: new Date().getFullYear(),
+            rangeStart: null,
+            rangeEnd: null
+        };
+
+        function calculateNights() {
+            let din = '';
+            let dout = '';
+            let nights = 1;
+
+            if (calendarState.rangeStart) {
+                const d1 = new Date(calendarState.rangeStart.getTime() - (calendarState.rangeStart.getTimezoneOffset() * 60000));
+                din = d1.toISOString().split('T')[0];
+            }
+            
+            if (calendarState.rangeStart && calendarState.rangeEnd) {
+                const d2 = new Date(calendarState.rangeEnd.getTime() - (calendarState.rangeEnd.getTimezoneOffset() * 60000));
+                dout = d2.toISOString().split('T')[0];
+                
+                const diffTime = calendarState.rangeEnd - calendarState.rangeStart;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                nights = diffDays > 0 ? diffDays : 1;
+            }
+            
+            document.getElementById('b-date-in').value = din;
+            document.getElementById('b-date-out').value = dout;
+            document.getElementById('nights-count').innerText = nights;
+            
+            updateTotal(); // recalculate everything if dates change
+        }
+
+        function renderCustomCalendar() {
+            const root = document.getElementById('inline-calendar');
+            if (!root) return;
+            root.innerHTML = '';
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayLabels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']; // Sunday first
+
+            let m1 = calendarState.month;
+            let y1 = calendarState.year;
+            let m2 = m1 + 1;
+            let y2 = y1;
+            if (m2 > 11) { m2 = 0; y2 = y1 + 1; }
+
+            const nav = document.createElement('div');
+            nav.className = 'dew-calendar-nav';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'dew-calendar-nav-btn';
+            prevBtn.innerHTML = '&lsaquo;';
+            prevBtn.onclick = () => {
+                calendarState.month--;
+                if (calendarState.month < 0) { calendarState.month = 11; calendarState.year--; }
+                renderCustomCalendar();
+            };
+
+            const t1 = document.createElement('span');
+            t1.className = 'dew-calendar-month-title';
+            t1.textContent = `${monthNames[m1]} ${y1}`;
+
+            const t2 = document.createElement('span');
+            t2.className = 'dew-calendar-month-title';
+            t2.textContent = `${monthNames[m2]} ${y2}`;
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'dew-calendar-nav-btn';
+            nextBtn.innerHTML = '&rsaquo;';
+            nextBtn.onclick = () => {
+                calendarState.month++;
+                if (calendarState.month > 11) { calendarState.month = 0; calendarState.year++; }
+                renderCustomCalendar();
+            };
+
+            nav.append(prevBtn, t1, t2, nextBtn);
+            root.appendChild(nav);
+
+            function buildMonth(month, year) {
+                const cal = document.createElement('div');
+                cal.className = 'dew-calendar';
+
+                const header = document.createElement('div');
+                header.className = 'dew-calendar-header';
+                dayLabels.forEach(d => {
+                    const lbl = document.createElement('div');
+                    lbl.className = 'dew-calendar-day-label';
+                    lbl.textContent = d;
+                    header.appendChild(lbl);
+                });
+                cal.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'dew-calendar-grid';
+
+                const firstDay = new Date(year, month, 1).getDay(); // Sunday = 0
+                const startOffset = firstDay; 
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const today = new Date();
+                today.setHours(0,0,0,0);
+
+                for (let i = 0; i < startOffset; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'dew-calendar-day dew-empty';
+                    grid.appendChild(empty);
+                }
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dayEl = document.createElement('div');
+                    dayEl.className = 'dew-calendar-day';
+                    dayEl.textContent = d;
+
+                    const thisDate = new Date(year, month, d);
+
+                    if (thisDate < today) {
+                        dayEl.classList.add('dew-past');
+                    } else {
+                        dayEl.onclick = () => handleDateSelection(thisDate);
+                        
+                        if (thisDate.getTime() === today.getTime()) {
+                            dayEl.classList.add('dew-today');
+                        }
+
+                        if (calendarState.rangeStart && calendarState.rangeEnd) {
+                            if (thisDate.getTime() === calendarState.rangeStart.getTime()) {
+                                dayEl.classList.add('dew-range-start');
+                            } else if (thisDate.getTime() === calendarState.rangeEnd.getTime()) {
+                                dayEl.classList.add('dew-range-end');
+                            } else if (thisDate > calendarState.rangeStart && thisDate < calendarState.rangeEnd) {
+                                dayEl.classList.add('dew-range');
+                            }
+                        } else if (calendarState.rangeStart) {
+                            if (thisDate.getTime() === calendarState.rangeStart.getTime()) {
+                                dayEl.classList.add('dew-range-start');
+                                dayEl.style.borderRadius = '50%'; // Make it fully round if no end date yet
+                            }
+                        }
+                    }
+                    grid.appendChild(dayEl);
+                }
+                cal.appendChild(grid);
+                return cal;
+            }
+
+            const container = document.createElement('div');
+            container.className = 'dew-calendar-container';
+            container.appendChild(buildMonth(m1, y1));
+            container.appendChild(buildMonth(m2, y2));
+            root.appendChild(container);
+        }
+
+        function handleDateSelection(date) {
+            // If both are set, or clicking on already selected start, reset
+            if ((calendarState.rangeStart && calendarState.rangeEnd) || 
+                (calendarState.rangeStart && calendarState.rangeStart.getTime() === date.getTime())) {
+                calendarState.rangeStart = date;
+                calendarState.rangeEnd = null;
+            } else if (!calendarState.rangeStart) {
+                calendarState.rangeStart = date;
+            } else {
+                if (date < calendarState.rangeStart) {
+                    calendarState.rangeStart = date;
+                } else {
+                    calendarState.rangeEnd = date;
+                }
+            }
+            renderCustomCalendar();
+            calculateNights();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCustomCalendar();
+            calculateNights();
+        });
+
+        function parseTab1(htmlString, isAccommodation = true) {
             const div = document.createElement('div');
             div.innerHTML = htmlString;
             
             const tables = div.querySelectorAll('table');
             tables.forEach(table => {
                 const theadTr = table.querySelector('thead tr');
-                if(theadTr) {
-                    const th = document.createElement('th');
-                    th.innerText = 'QTY';
-                    th.style.textAlign = 'center';
-                    theadTr.appendChild(th);
+                const headers = [];
+                if (theadTr) {
+                    const ths = theadTr.querySelectorAll('th');
+                    ths.forEach(th => headers.push(th.innerText.trim()));
                 }
                 
                 const tbodyTrs = table.querySelectorAll('tbody tr');
                 tbodyTrs.forEach(tr => {
                     const tds = tr.querySelectorAll('td');
                     if(tds.length >= 2) {
-                        const lastTd = tds[tds.length - 1];
-                        let priceText = lastTd.innerText.trim().replace(/,/g, '');
-                        let price = parseFloat(priceText);
+                        const rowName = tds[0].innerText.trim();
                         
-                        if(isNaN(price) && priceText.toLowerCase() === 'free') {
-                            price = 0;
+                        for(let i=1; i<tds.length; i++) {
+                            const td = tds[i];
+                            let priceText = td.innerText.trim().replace(/,/g, '');
+                            let price = parseFloat(priceText);
+                            
+                            if(isNaN(price) && priceText.toLowerCase() === 'free') {
+                                price = 0;
+                            }
+                            
+                            if(!isNaN(price)) {
+                                const colName = headers[i] || '';
+                                const fullName = colName ? `${rowName} - ${colName}` : rowName;
+                                const originalContent = td.innerHTML;
+                                
+                                td.innerHTML = `
+                                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 15px; min-width: 120px;">
+                                        <span>${originalContent}</span>
+                                        <input type="number" min="0" value="" placeholder="Qty" class="rate-qty" data-name="${fullName}" data-price="${price}" data-is-accomm="${isAccommodation}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(201, 162, 74, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 500; text-align: center; outline: none; box-sizing: border-box;">
+                                    </div>
+                                `;
+                            }
                         }
-                        
-                        const name = tds[0].innerText.trim();
-                        const newTd = document.createElement('td');
-                        newTd.style.textAlign = 'center';
-                        
-                        if(!isNaN(price)) {
-                            newTd.innerHTML = `<input type="number" min="0" value="" placeholder="" class="rate-qty" data-name="${name}" data-price="${price}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(201, 162, 74, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">`;
-                        }
-                        tr.appendChild(newTd);
                     }
                 });
             });
@@ -1134,8 +1649,8 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             }
 
             // Load Tabs
-            document.getElementById('tab-1').innerHTML = parseTab1(data.tab1);
-            document.getElementById('tab-2').innerHTML = parseTab1(data.tab2);
+            document.getElementById('tab-1').innerHTML = parseTab1(data.tab1, true);
+            document.getElementById('tab-2').innerHTML = parseTab1(data.tab2, false);
             document.getElementById('tab-3').innerHTML = data.tab3;
             
             // Prefill Agent Email if exists
@@ -1160,6 +1675,15 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
         }
 
         function switchTab(num) {
+            if(num === 5) {
+                const din = document.getElementById('b-date-in').value;
+                const dout = document.getElementById('b-date-out').value;
+                if (!din || !dout) {
+                    alert("Please select your Date In and Date Out range first.");
+                    return;
+                }
+            }
+
             for(let i=1; i<=5; i++) {
                 const btn = document.getElementById('tab-btn-'+i);
                 const tab = document.getElementById('tab-'+i);
@@ -1168,8 +1692,16 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             }
             const activeBtn = document.getElementById('tab-btn-'+num);
             const activeTab = document.getElementById('tab-'+num);
-            if(activeBtn) activeBtn.classList.add('active');
+            if(activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('flash-tab');
+            }
             if(activeTab) activeTab.classList.add('active');
+
+            const datesUI = document.getElementById('global-dates-ui');
+            if(datesUI) {
+                datesUI.style.display = (num === 1) ? 'block' : 'none';
+            }
 
             if(num === 5) {
                 renderBookingSummary();
@@ -1181,14 +1713,26 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
         function updateTotal() {
             selectedItems = [];
             let total = 0;
+            const nights = parseInt(document.getElementById('nights-count').innerText) || 1;
+            
             const inputs = document.querySelectorAll('.rate-qty');
             inputs.forEach(input => {
                 const qty = parseInt(input.value) || 0;
                 if(qty > 0) {
                     const price = parseFloat(input.dataset.price);
                     const name = input.dataset.name;
-                    total += qty * price;
-                    selectedItems.push({ name, qty, price, total: qty * price });
+                    const isAccomm = input.dataset.isAccomm === 'true';
+                    
+                    const multiplier = isAccomm ? nights : 1;
+                    const itemTotal = qty * price * multiplier;
+                    
+                    total += itemTotal;
+                    
+                    const desc = isAccomm 
+                        ? `${name} (${nights} night${nights > 1 ? 's' : ''})` 
+                        : `${name}`;
+                        
+                    selectedItems.push({ name: desc, qty, price, total: itemTotal });
                 }
             });
             
@@ -1200,6 +1744,18 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                 document.getElementById('booking-total').innerText = 'Total: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             } else {
                 bb.style.display = 'none';
+            }
+
+            // Flash the Finalise Booking tab if ready
+            const tabBtn5 = document.getElementById('tab-btn-5');
+            const din = document.getElementById('b-date-in').value;
+            const dout = document.getElementById('b-date-out').value;
+            if(tabBtn5) {
+                if(total > 0 && din && dout && !tabBtn5.classList.contains('active')) {
+                    tabBtn5.classList.add('flash-tab');
+                } else {
+                    tabBtn5.classList.remove('flash-tab');
+                }
             }
 
             if(document.getElementById('tab-5').classList.contains('active')) {
@@ -1217,15 +1773,41 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             let html = '<ul style="list-style:none; padding:0; margin:0;">';
             selectedItems.forEach(item => {
                 html += '<li style="margin-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; display: flex; justify-content: space-between;">';
-                html += '<span><strong>' + item.qty + 'x</strong> ' + item.name + '</span>';
+                html += '<span><strong>' + item.qty + ' pax</strong> ' + item.name + '</span>';
                 html += '<span style="color: var(--brand-accent); font-weight: 600;">N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '</span>';
                 html += '</li>';
             });
             
             const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
-            html += '<li style="margin-top: 15px; display: flex; justify-content: space-between; font-size: 1.2rem; font-family: var(--font-head); font-weight: 600;">';
+            html += '<li style="margin-top: 15px; display: flex; flex-direction: column; gap: 8px;">';
+            html += '<div style="display: flex; justify-content: space-between; font-size: 1.2rem; font-family: var(--font-head); font-weight: 600;">';
             html += '<span>Grand Total</span>';
             html += '<span style="color: var(--text-main);">N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '</span>';
+            html += '</div>';
+            
+            const lodgeName = document.getElementById('d-title') ? document.getElementById('d-title').innerText : '';
+            const dateIn = document.getElementById('b-date-in') ? document.getElementById('b-date-in').value : '';
+            const dateOut = document.getElementById('b-date-out') ? document.getElementById('b-date-out').value : '';
+            if (lodgeName || (dateIn && dateOut)) {
+                html += '<div style="font-size: 0.85rem; color: var(--text-muted); padding-top: 8px; border-top: 1px solid rgba(0,0,0,0.05);">';
+                if (lodgeName) {
+                    html += '<div style="margin-bottom: 3px;"><strong>Property:</strong> ' + lodgeName + '</div>';
+                }
+                if (dateIn && dateOut) {
+                    let dateStr = dateIn + ' to ' + dateOut;
+                    try {
+                        const [y1, m1, d1] = dateIn.split('-');
+                        const [y2, m2, d2] = dateOut.split('-');
+                        const dt1 = new Date(y1, parseInt(m1)-1, d1);
+                        const dt2 = new Date(y2, parseInt(m2)-1, d2);
+                        const nights = Math.round((dt2 - dt1) / (1000 * 60 * 60 * 24));
+                        dateStr = `${d1}-${m1}-${y1.slice(2)} to ${d2}-${m2}-${y2.slice(2)} (${nights} Night${nights !== 1 ? 's' : ''})`;
+                    } catch(e) {}
+                    html += '<div><strong>Dates:</strong> ' + dateStr + '</div>';
+                }
+                html += '</div>';
+            }
+            
             html += '</li></ul>';
             
             summary.innerHTML = html;
@@ -1261,7 +1843,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
 
             let htmlItems = selectedItems.map(item => `
                 <tr>
-                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>${item.qty}x</strong> ${item.name}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #eee;"><strong>${item.qty} pax</strong> ${item.name}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #eee; text-align: right; color: #C9A24A;"><strong>N$ ${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</strong></td>
                 </tr>
             `).join('');
@@ -1303,7 +1885,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             `;
 
             try {
-                const response = await fetch('https://desert-tracks.vercel.app/api/send_email', {
+                const response = await fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -1329,6 +1911,46 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                 submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
             }
+        }
+        
+        // CSV Upload UI Listener
+        document.getElementById('csv-upload').addEventListener('change', function(e) {
+            const fileName = e.target.files[0] ? e.target.files[0].name : 'No file selected';
+            document.getElementById('csv-filename').innerText = fileName;
+        });
+
+        function handleCreateClient(event) {
+            event.preventDefault(); 
+            const company = document.getElementById('ac-company').value;
+            const email = document.getElementById('ac-email').value;
+            const tel = document.getElementById('ac-tel').value;
+            const user = document.getElementById('ac-user').value;
+            const pass = document.getElementById('ac-pass').value;
+            const rate = document.getElementById('ac-rate').value;
+            
+            const tbody = document.getElementById('admin-clients-tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><strong>${company}</strong><br><span style='font-size: 0.8rem; color: var(--text-muted);'>${email}<br>Tel: ${tel}</span></td>
+                <td>
+                    <div style="margin-bottom: 12px;">
+                        <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Username</div>
+                        <input type="text" value="${user}" style="background: transparent; border: none; border-bottom: 1px solid rgba(201,162,74,0.3); font-weight: 300; font-family: var(--font-head); font-size: 1.2rem; color: var(--brand-accent); width: 140px; outline: none; padding: 2px 0; transition: 0.3s;" onfocus="this.style.borderBottom='1px solid var(--brand-accent)'" onblur="this.style.borderBottom='1px solid rgba(201,162,74,0.3)'">
+                    </div>
+                    <div>
+                        <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 2px;">Password</div>
+                        <input type="text" value="${pass}" style="background: transparent; border: none; border-bottom: 1px solid rgba(201,162,74,0.3); font-weight: 300; font-family: var(--font-head); font-size: 1.2rem; color: var(--brand-accent); width: 140px; outline: none; padding: 2px 0; transition: 0.3s;" onfocus="this.style.borderBottom='1px solid var(--brand-accent)'" onblur="this.style.borderBottom='1px solid rgba(201,162,74,0.3)'">
+                    </div>
+                </td>
+                <td><span style='background: rgba(201, 162, 74, 0.1); padding: 6px 15px; border-radius: 20px; color: var(--brand-accent); font-weight: 500; font-size: 0.8rem; display: inline-block; white-space: nowrap; border: 1px solid rgba(201, 162, 74, 0.2);'>${rate}</span></td>
+                <td><strong style='color: var(--brand-accent); font-size: 1.3rem;'>0</strong></td>
+                <td style='text-align: right;'><button onclick='if(confirm(\`Are you sure you want to delete this client?\`)) this.closest(\`tr\`).remove();' style='background: transparent; border: 1px solid #d9534f; color: #d9534f; padding: 6px 12px; border-radius: 5px; cursor: pointer; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: 0.2s;'>Delete</button></td>
+            `;
+            tbody.prepend(newRow);
+            
+            alert('Client Profile Created Successfully!'); 
+            document.getElementById('admin-client-form').reset();
+            switchAdminTab('nav-clients');
         }
     </script>
 </body>

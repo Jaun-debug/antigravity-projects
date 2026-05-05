@@ -95,7 +95,8 @@ for i, item in enumerate(data['itinerary']):
         slides = prev_slides
                                 
     total = str(len(data['itinerary'])).zfill(2)
-    lodge_str = f" <span style=\\"font-family: 'Open Sans', sans-serif; opacity: 0.6; font-size: 0.85em; font-weight: 400; letter-spacing: 1px;\\">({lodge_name})</span>" if lodge_name else ""
+    font_fam = "'Open Sans', sans-serif"
+    lodge_str = f' <span style="font-family: {font_fam}; opacity: 0.6; font-size: 0.85em; font-weight: 400; letter-spacing: 1px;">({lodge_name})</span>' if lodge_name else ""
     
     day_block = f'''                <!-- DAY {day_num} -->
                 <div class="lux-day-block" id="day-{day_num}"
