@@ -373,7 +373,6 @@
                     <li onclick="switchAdminTab('nav-clients')" id="tab-nav-clients" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 600; background: rgba(201,162,74,0.1); color: var(--brand-accent);">O&L Clients & Logins</li>
                     <li onclick="switchAdminTab('nav-create')" id="tab-nav-create" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: 0.2s;" onmouseover="this.style.color='var(--brand-accent)'" onmouseout="if(this.style.background === '') this.style.color='var(--text-muted)'">Client Credentials</li>
                     <li onclick="switchAdminTab('nav-rates')" id="tab-nav-rates" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: 0.2s;" onmouseover="this.style.color='var(--brand-accent)'" onmouseout="if(this.style.background === '') this.style.color='var(--text-muted)'">STO Rate Sheets</li>
-                    <li onclick="switchAdminTab('nav-upload')" id="tab-nav-upload" style="padding: 12px 15px; margin-bottom: 5px; border-radius: 6px; cursor: pointer; font-size: 0.9rem; font-weight: 500; color: var(--text-muted); transition: 0.2s;" onmouseover="this.style.color='var(--brand-accent)'" onmouseout="if(this.style.background === '') this.style.color='var(--text-muted)'">Create New STO Sheet</li>
                 </ul>
             </div>
             <div style="flex: 1; padding: 40px; overflow-y: auto;">
@@ -504,32 +503,6 @@
                     </div>
                 </div>
 
-                <!-- TAB: UPLOAD -->
-                <div id="nav-upload" style="display: none;">
-                    <div class="content-block" style="max-width: 1000px; margin: 0 auto; box-shadow: none; padding: 0;">
-                        <h3 style="margin-bottom: 20px;">Create New STO Rate Sheet</h3>
-                        <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.6;">Upload a master CSV rate sheet to automatically update the pricing databases. The system will compile a new static HTML file with the updated math.</p>
-                        
-                        <div style="background: rgba(201, 162, 74, 0.05); border: 1px dashed rgba(201, 162, 74, 0.5); padding: 40px; border-radius: 10px; text-align: center; margin-bottom: 30px;">
-                            <input type="file" id="o-csv-upload" accept=".csv" style="display: none;">
-                            <label for="o-csv-upload" style="background: var(--brand-gradient); color: #fff; padding: 12px 25px; border-radius: 5px; cursor: pointer; font-weight: bold; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; display: inline-block;">Select CSV File</label>
-                            <p id="o-csv-filename" style="margin-top: 15px; color: var(--text-muted); font-size: 0.9rem;">No file selected</p>
-                        </div>
-
-                        <div class="grid-2" style="margin-bottom: 30px;">
-                            <div class="form-group">
-                                <label class="form-label">Target Rate Tier</label>
-                                <select id="o-csv-tier" class="form-control" style="appearance: auto; cursor: pointer;">
-                                    <option value="STO 15">Update STO 15 Rates</option>
-                                    <option value="STO 20">Update STO 20 Rates</option>
-                                    <option value="RACK">Update RACK Rates</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <button onclick="alert('System awaiting CSV template mapping.');" class="tab-btn" style="width: 100%; font-size: 1.1rem; padding: 18px; background: #2c3e50; border-color: transparent;">Process CSV & Download HTML</button>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -539,13 +512,12 @@
                 document.getElementById('nav-clients').style.display = 'none';
                 document.getElementById('nav-create').style.display = 'none';
                 document.getElementById('nav-rates').style.display = 'none';
-                document.getElementById('nav-upload').style.display = 'none';
                 
                 // Show selected tab
                 document.getElementById(tabId).style.display = 'block';
                 
                 // Reset nav styles
-                const navs = ['tab-nav-clients', 'tab-nav-create', 'tab-nav-rates', 'tab-nav-upload'];
+                const navs = ['tab-nav-clients', 'tab-nav-create', 'tab-nav-rates'];
                 navs.forEach(n => {
                     const el = document.getElementById(n);
                     el.style.background = 'transparent';
