@@ -61,7 +61,21 @@
             color: var(--text-main) !important;
         }
 
-        body { margin: 0; padding: 0; background: url('https://desert-tracks.com/wp-content/uploads/2026/03/namibia_sossusvlei_nightsky.jpeg') no-repeat center center fixed; background-size: cover; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body { margin: 0; padding: 0; background: #000; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://desert-tracks.com/wp-content/uploads/2026/03/namibia_sossusvlei_nightsky.jpeg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            animation: subtleZoom 60s alternate infinite linear;
+            will-change: transform;
+        }
+        @keyframes subtleZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
         h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 500; margin: 0; }
         .wrapper { max-width: 1700px; margin: 0 auto; padding: 30px 20px; }
         
@@ -1349,7 +1363,12 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             simulateTouch: true,
             touchRatio: 0.8,
             resistanceRatio: 0.85,
-            speed: 1000,
+            speed: 1200,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+                pauseOnMouseEnter: true
+            },
             freeMode: {
                 enabled: true,
                 sticky: true,
