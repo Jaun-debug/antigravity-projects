@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?i)^(www\\.)?namibiarates\\.com$"
+        }
+      ],
+      "destination": "/dt_library/namibia_agent_portal.html"
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "(?i)^(www\\.)?namibiarates\\.com$"
+        }
+      ],
+      "destination": "/dt_library/$1"
+    }
+  ]
+}
