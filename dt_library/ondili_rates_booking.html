@@ -1273,7 +1273,7 @@
 
             const opt = {
                 margin: 0.5,
-                filename: \`Ondili_\${prop.name.replace(/\\s+/g, '_')}_Rates.pdf\`,
+                filename: `Ondili_${prop.name.replace(/\s+/g, '_')}_Rates.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }

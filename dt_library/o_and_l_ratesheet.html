@@ -1472,8 +1472,8 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             loop: true,
             slideToClickedSlide: true,
             navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-prev',
+                prevEl: '.swiper-button-next',
             },
             mousewheel: {
                 forceToAxis: true,
@@ -2038,8 +2038,10 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             alert('Client Profile Created Successfully!'); 
             document.getElementById('admin-client-form').reset();
             switchAdminTab('nav-clients');
-            // PDF DOWNLOAD LOGIC
-            window.downloadGroupPDF = function() {
+        });
+
+        // PDF DOWNLOAD LOGIC
+        window.downloadGroupPDF = function() {
                 let btn = document.querySelector('button[onclick="downloadGroupPDF()"]');
                 let originalText = btn.innerText;
                 btn.innerText = "⏳ Generating Group PDF...";
@@ -2146,7 +2148,6 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     btn.innerText = originalText;
                 });
             };
-        }
     </script>
 </body>
 </html>
