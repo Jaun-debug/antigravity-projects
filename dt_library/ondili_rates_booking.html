@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" data-no-optimize="1"></script>
     <style data-no-optimize="1">
         :root {
             --primary-bg: #f9f6f0; /* Warm Sand */
@@ -163,6 +163,10 @@
                 <h1>Ondili Lodges</h1>
                 <p>STO 20 Rates Season 2026/2027</p>
             </div>
+            
+            <div style="text-align: center; margin-bottom: 40px;">
+                <button class="tab-btn" onclick="downloadGroupPDF()" style="border: 1px solid rgba(200,90,23,0.4); background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">📄 Download Group PDF</button>
+            </div>
 
             <!-- SWIPER CAROUSEL (Replaces Property Grid) -->
             <div class="swiper-container-wrapper">
@@ -187,6 +191,10 @@
             </div>
 
             <div class="lodge-gallery" id="d-gallery"></div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="tab-btn" onclick="downloadLodgePDF()" style="border: 1px solid rgba(200,90,23,0.4); background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">📄 Download Lodge PDF</button>
+            </div>
 
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
@@ -811,6 +819,7 @@
             simulateTouch: true,
             touchRatio: 1.5,
             resistanceRatio: 0.85,
+            autoplay: { delay: 2500, disableOnInteraction: false },
             coverflowEffect: {
                 rotate: 15,
                 stretch: 0,
@@ -870,9 +879,11 @@
             return div.innerHTML;
         }
 
+        let currentLodgeId = null;
         function openProperty(id) {
             const data = DB[id];
             if(!data) return;
+            currentLodgeId = id;
 
             document.getElementById('main-view').style.display = 'none';
             document.getElementById('detail-view').style.display = 'block';
@@ -1164,6 +1175,114 @@
                 btn.disabled = false;
             }
         }
+        // PDF DOWNLOAD LOGIC
+        window.downloadGroupPDF = function() {
+            let btn = document.querySelector('button[onclick="downloadGroupPDF()"]');
+            let originalText = btn.innerText;
+            btn.innerText = "⏳ Generating Group PDF...";
+            
+            let html = `<div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                <h1 style="color: #111; text-align: center; border-bottom: 2px solid #c85a17; padding-bottom: 20px; margin-bottom: 5px;">Ondili Lodges Group Rates</h1>
+                <p style="color: #666; text-align: center; margin-top: 0; margin-bottom: 40px;">STO 20 Rates Season 2026-2027</p>
+            `;
+            
+            for (const key in DB) {
+                const prop = DB[key];
+                html += `
+                <div style="margin-bottom: 50px; page-break-inside: avoid;">
+                    <h2 style="color: #111; background: #f9f9f9; padding: 15px; border-left: 5px solid #c85a17; margin-bottom: 20px;">${prop.name} <span style="font-size:14px; color:#666; font-weight:normal;">(${prop.location})</span></h2>
+                    <div style="font-size: 13px; line-height: 1.6; padding: 0 10px;">
+                        ${prop.tab1.replace(/class="accent"/g, 'style="color: #c85a17; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}
+                    </div>
+                </div>`;
+            }
+            html += `</div>`;
+            
+            let container = document.createElement('div');
+            container.innerHTML = html;
+            
+            container.querySelectorAll('.raw-text, h3, h4, p, table, th, td').forEach(el => {
+                el.style.color = '#333';
+                el.style.textShadow = 'none';
+                if (el.tagName === 'TH' || el.tagName === 'TD') {
+                    el.style.borderColor = '#ddd';
+                }
+            });
+
+            const opt = {
+                margin: 0.5,
+                filename: 'Ondili_Lodges_Group_Rates.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(container).save().then(() => {
+                btn.innerText = originalText;
+            });
+        };
+
+        window.downloadLodgePDF = function() {
+            if(!currentLodgeId || !DB[currentLodgeId]) return;
+            
+            let btn = document.querySelector('button[onclick="downloadLodgePDF()"]');
+            let originalText = btn.innerText;
+            btn.innerText = "⏳ Generating Lodge PDF...";
+            
+            const prop = DB[currentLodgeId];
+            let html = `
+            <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                <h1 style="color: #111; border-bottom: 2px solid #c85a17; padding-bottom: 10px; margin-bottom: 5px;">${prop.name}</h1>
+                <p style="color: #666; margin-top: 0; margin-bottom: 20px;"><strong>Location:</strong> ${prop.location}</p>
+                
+                <div style="font-size: 14px; line-height: 1.6; margin-bottom: 40px; background: #f9f9f9; padding: 20px; border-left: 5px solid #ccc;">
+                    ${prop.intro}
+                </div>
+                
+                <div style="margin-bottom: 40px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Accommodation Rates</h2>
+                    <div style="font-size: 13px;">${prop.tab1.replace(/class="accent"/g, 'style="color: #c85a17; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
+                </div>
+                
+                <div style="margin-bottom: 40px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Activities</h2>
+                    <div style="font-size: 13px;">${prop.tab2}</div>
+                </div>
+                
+                <div style="margin-bottom: 40px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Policies & Info</h2>
+                    <div style="font-size: 13px;">${prop.tab3}</div>
+                </div>
+            </div>`;
+            
+            let container = document.createElement('div');
+            container.innerHTML = html;
+            
+            container.querySelectorAll('.raw-text, h3, h4, p, table, th, td, span, strong').forEach(el => {
+                if (el.style.color && (el.style.color.includes('fff') || el.style.color.includes('white'))) {
+                    el.style.color = '#333';
+                }
+                if (el.tagName === 'H3' || el.tagName === 'H4') {
+                    el.style.color = '#111';
+                }
+                el.style.textShadow = 'none';
+                if (el.tagName === 'TH' || el.tagName === 'TD') {
+                    el.style.borderColor = '#ddd';
+                }
+            });
+
+            const opt = {
+                margin: 0.5,
+                filename: \`Ondili_\${prop.name.replace(/\\s+/g, '_')}_Rates.pdf\`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(container).save().then(() => {
+                btn.innerText = originalText;
+            });
+        };
     </script>
 </body>
 </html>
