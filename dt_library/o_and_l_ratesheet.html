@@ -267,27 +267,34 @@
                 let rateText = 'STO 20';
                 if (p === '1515') {
                     rateText = 'STO 15';
-                    
-                    // Send email notification for STO 15 access
-                    fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            to: 'bookings@desert-tracks.com',
-                            subject: `NOTIFICATION: O&L Rate Sheet Accessed (STO 15)`,
-                            html: `
-                            <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #cce5ff; background-color: #f8faff; border-radius: 8px; max-width: 500px;">
-                                <h2 style="color: #004085; margin-top: 0;">Successful Login Detected</h2>
-                                <p>A user successfully accessed the <strong>O&L Leisure Rate Sheet</strong>.</p>
-                                <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff;">
-                                    <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Access Level:</strong></td><td style="border-bottom: 1px solid #eee;">STO 15</td></tr>
-                                    <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Username Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${uInput || '(Empty)'}</td></tr>
-                                    <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Timestamp:</strong></td><td style="border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
-                                </table>
-                            </div>
-                            `
-                        })
-                    }).catch(e => console.error(e));
+                    // Send email notification for STO 15 access with geolocation
+                    const sendNotification = (locationStr) => {
+                        fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                to: 'bookings@desert-tracks.com',
+                                subject: `NOTIFICATION: O&L Rate Sheet Accessed (STO 15)`,
+                                html: `
+                                <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #cce5ff; background-color: #f8faff; border-radius: 8px; max-width: 500px;">
+                                    <h2 style="color: #004085; margin-top: 0;">Successful Login Detected</h2>
+                                    <p>A user successfully accessed the <strong>O&L Leisure Rate Sheet</strong>.</p>
+                                    <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff;">
+                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Access Level:</strong></td><td style="border-bottom: 1px solid #eee;">STO 15</td></tr>
+                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Username Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${uInput || '(Empty)'}</td></tr>
+                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Location:</strong></td><td style="border-bottom: 1px solid #eee;">${locationStr}</td></tr>
+                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Timestamp:</strong></td><td style="border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
+                                    </table>
+                                </div>
+                                `
+                            })
+                        }).catch(e => console.error(e));
+                    };
+
+                    fetch('https://ipapi.co/json/')
+                        .then(res => res.json())
+                        .then(data => sendNotification(data.city ? `${data.city}, ${data.region}, ${data.country_name} (IP: ${data.ip})` : 'Unknown Location'))
+                        .catch(err => sendNotification('Unknown (Geolocation failed)'));
                 }
                 
                 // Update text across the page
