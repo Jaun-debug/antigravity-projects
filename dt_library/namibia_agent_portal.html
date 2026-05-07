@@ -84,6 +84,22 @@
             color: var(--brand-accent);
         }
 
+        .nav-link.active {
+            color: var(--brand-accent);
+            border-bottom: 2px solid var(--brand-accent);
+            padding-bottom: 4px;
+        }
+
+        .tab-pane {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .nav-btn {
             background: transparent;
             border: 1px solid var(--brand-accent);
@@ -284,10 +300,10 @@
     <header class="main-header">
         <a href="#" class="header-logo">Namibia Rates</a>
         <nav class="nav-links">
-            <a href="#" class="nav-link">Travel Blog</a>
-            <a href="#" class="nav-link" onclick="openLogin('Agent Portal')">Agent Sign In</a>
-            <a href="#" class="nav-link">Sign Up</a>
-            <a href="#" class="nav-btn" onclick="openLogin('Supplier Portal')">Supplier Sign In</a>
+            <a href="#" class="nav-link active" onclick="switchTab('accommodation', this)">Accommodation Rates</a>
+            <a href="#" class="nav-link" onclick="switchTab('vehicle', this)">Vehicle Rental</a>
+            <a href="#" class="nav-link" onclick="switchTab('activities', this)">Activities</a>
+            <a href="#" class="nav-btn" onclick="openLogin('Agent Portal')">Agent Sign In</a>
         </nav>
     </header>
 
@@ -296,8 +312,11 @@
     </div>
 
     <div class="container">
-        <div class="intro-box">
-            <h2>Namibia Master Agent Portal</h2>
+        
+        <!-- ACCOMMODATION TAB -->
+        <div id="tab-accommodation" class="tab-pane" style="display: block;">
+            <div class="intro-box">
+                <h2>Namibia Master Agent Portal</h2>
             <p>Welcome to the centralized trade hub. Select a region below to view the luxury lodges and properties. Clicking on a property will open your dedicated, pre-negotiated STO ratesheet for immediate booking capabilities.</p>
             
             <div style="margin-top: 30px; position: relative; max-width: 600px; margin-left: auto; margin-right: auto;">
@@ -761,6 +780,32 @@
             <div class="swiper-button-next" style="color: var(--brand-accent); right: 0px;"></div>
             <div class="swiper-button-prev" style="color: var(--brand-accent); left: 0px;"></div>
         </div>
+        </div> <!-- End Accommodation Tab -->
+
+        <!-- VEHICLE RENTAL TAB -->
+        <div id="tab-vehicle" class="tab-pane">
+            <div class="intro-box">
+                <h2>Vehicle Rental</h2>
+                <p>Access our premium fleet of 4x4 vehicles specially equipped for Namibian terrain. Contact your supplier for live availability.</p>
+            </div>
+            <!-- Placeholder for future vehicle content -->
+            <div style="text-align: center; padding: 50px; color: var(--text-muted); background: var(--glass-bg); border-radius: 12px; border: var(--glass-border);">
+                <p>Vehicle rental rates and inventory coming soon.</p>
+            </div>
+        </div>
+
+        <!-- ACTIVITIES TAB -->
+        <div id="tab-activities" class="tab-pane">
+            <div class="intro-box">
+                <h2>Activities & Excursions</h2>
+                <p>Pre-book signature experiences across Namibia, from balloon safaris over Sossusvlei to catamaran cruises in Walvis Bay.</p>
+            </div>
+            <!-- Placeholder for future activities content -->
+            <div style="text-align: center; padding: 50px; color: var(--text-muted); background: var(--glass-bg); border-radius: 12px; border: var(--glass-border);">
+                <p>Activities database and schedules coming soon.</p>
+            </div>
+        </div>
+
     </div>
 
     <!-- UNIVERSAL LOGIN MODAL (Hidden by default) -->
@@ -830,6 +875,28 @@
 
         function closeLogin() {
             document.getElementById('agent-login-modal').style.display = 'none';
+        }
+
+        function switchTab(tabId, el) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-pane').forEach(tab => {
+                tab.style.display = 'none';
+            });
+            // Show selected tab
+            document.getElementById('tab-' + tabId).style.display = 'block';
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            if (el) {
+                el.classList.add('active');
+            }
+            
+            // Update Swiper layout if returning to accommodation
+            if (tabId === 'accommodation' && regionSwiper) {
+                setTimeout(() => regionSwiper.update(), 50);
+            }
         }
 
         function filterLodges() {
