@@ -265,7 +265,30 @@
                 }
 
                 let rateText = 'STO 20';
-                if (p === '1515') rateText = 'STO 15';
+                if (p === '1515') {
+                    rateText = 'STO 15';
+                    
+                    // Send email notification for STO 15 access
+                    fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            to: 'bookings@desert-tracks.com',
+                            subject: `NOTIFICATION: O&L Rate Sheet Accessed (STO 15)`,
+                            html: `
+                            <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #cce5ff; background-color: #f8faff; border-radius: 8px; max-width: 500px;">
+                                <h2 style="color: #004085; margin-top: 0;">Successful Login Detected</h2>
+                                <p>A user successfully accessed the <strong>O&L Leisure Rate Sheet</strong>.</p>
+                                <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff;">
+                                    <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Access Level:</strong></td><td style="border-bottom: 1px solid #eee;">STO 15</td></tr>
+                                    <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Username Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${uInput || '(Empty)'}</td></tr>
+                                    <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Timestamp:</strong></td><td style="border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
+                                </table>
+                            </div>
+                            `
+                        })
+                    }).catch(e => console.error(e));
+                }
                 
                 // Update text across the page
                 document.querySelectorAll('h1, h2, h3, h4, p, span').forEach(el => {
@@ -340,6 +363,9 @@
             <div class="header">
                 <h1>O&L Leisure</h1>
                 <p>STO 20 Rates Season 2026-2028</p>
+                <div style="margin-top: 20px;">
+                    <button class="tab-btn" onclick="alert('Group PDF download will be available shortly.');" style="border: 1px solid rgba(255,255,255,0.4); background: rgba(0,0,0,0.4);">📄 Download Group PDF</button>
+                </div>
             </div>
 
             <!-- SWIPER CAROUSEL -->
@@ -568,6 +594,7 @@
                 <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
                 <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
                 <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
+                <button class="tab-btn" onclick="alert('Lodge PDF download will be available shortly.');" style="border: 1px solid rgba(255,255,255,0.3);">📄 Download Lodge PDF</button>
                 <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
             </div>
 
