@@ -23,6 +23,13 @@
             --font-body: 'Inter', sans-serif;
         }
 
+        /* Calendar / Flatpickr overrides for night sky background */
+        .flatpickr-calendar { background: transparent !important; box-shadow: none !important; border: none !important; }
+        .flatpickr-month, .flatpickr-weekday, .flatpickr-day, .flatpickr-current-month .flatpickr-monthDropdown-months { color: #ffffff !important; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .flatpickr-day.flatpickr-disabled, .flatpickr-day.flatpickr-disabled:hover { color: rgba(255,255,255,0.3) !important; }
+        .flatpickr-day:hover { background: rgba(255,255,255,0.2) !important; color: #fff !important; }
+        .flatpickr-day.selected { background: var(--brand-gradient) !important; color: #222 !important; border: none !important; }
+
         /* Custom Calendar Base Styles */
         .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin-top: 10px; margin: 0 auto; }
         .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin-bottom: 16px; margin: 0 auto; }
@@ -149,7 +156,7 @@
 
         /* CONTENT BLOCKS */
         .content-block { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: var(--glass-border); border-radius: 15px; padding: 35px 40px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
-        .content-block h3 { color: var(--brand-accent); font-size: 1.6rem; margin-bottom: 15px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 10px; display: inline-block; text-transform: uppercase; }
+        .content-block h3 { color: #000000; font-size: 1.6rem; margin-bottom: 15px; border-bottom: 1px solid rgba(201, 162, 74, 0.3); padding-bottom: 10px; display: inline-block; text-transform: uppercase; }
         .sub-block { margin-top: 30px; }
         .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;}
 
@@ -565,7 +572,7 @@
             </div>
 
             <div class="global-dates" id="global-dates-ui" style="margin-top: 25px; margin-bottom: 25px; display: block; text-align: center; background: var(--card-light); padding: 30px; border-radius: 10px; border: var(--glass-border);">
-                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: var(--text-main); font-weight: 500;">When would you like to travel?</h3>
+                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: #ffffff; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.6);">When would you like to travel?</h3>
                 <div id="inline-calendar" style="margin: 0 auto;"></div>
                 
                 <div style="font-family: var(--font-head); color: var(--text-main); font-weight: 600; font-size: 1.1rem; text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); width: 100%; margin-top: 20px;">
@@ -1363,9 +1370,9 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             simulateTouch: true,
             touchRatio: 0.8,
             resistanceRatio: 0.85,
-            speed: 500,
+            speed: 1200,
             autoplay: {
-                delay: 500,
+                delay: 3500,
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true
             },
