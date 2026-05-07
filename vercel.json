@@ -5,20 +5,40 @@
       "has": [
         {
           "type": "host",
-          "value": "(?i)^(www\\.)?namibiarates\\.com$"
+          "value": "namibiarates.com"
         }
       ],
       "destination": "/dt_library/namibia_agent_portal.html"
     },
     {
-      "source": "/(.*)",
+      "source": "/:path+",
       "has": [
         {
           "type": "host",
-          "value": "(?i)^(www\\.)?namibiarates\\.com$"
+          "value": "namibiarates.com"
         }
       ],
-      "destination": "/dt_library/$1"
+      "destination": "/dt_library/:path"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.namibiarates.com"
+        }
+      ],
+      "destination": "/dt_library/namibia_agent_portal.html"
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.namibiarates.com"
+        }
+      ],
+      "destination": "/dt_library/:path"
     }
   ]
 }
