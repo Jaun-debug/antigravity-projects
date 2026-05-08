@@ -2023,27 +2023,23 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             tbody.prepend(newRow);
             
             alert('Client Profile Created Successfully!'); 
-            document.getElementById('admin-client-form').reset();
-            switchAdminTab('nav-clients');
-        }
-
-        // PDF DOWNLOAD LOGIC
+            do        // PDF DOWNLOAD LOGIC
         window.downloadGroupPDF = function() {
                 let btn = document.querySelector('button[onclick="downloadGroupPDF()"]');
                 let originalText = btn.innerText;
                 btn.innerText = "⏳ Generating Group PDF...";
                 
-                let html = `<div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
-                    <h1 style="color: #111; text-align: center; border-bottom: 2px solid #DEC698; padding-bottom: 20px; margin-bottom: 5px;">O&L Leisure Group Rates</h1>
-                    <p style="color: #666; text-align: center; margin-top: 0; margin-bottom: 40px;">STO Rates Season 2026-2028</p>
+                let html = `<div style="padding: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                    <h1 style="color: #111; text-align: center; border-bottom: 2px solid #DEC698; padding-bottom: 10px; margin-bottom: 5px; font-size: 18px;">O&L Leisure Group Rates</h1>
+                    <p style="color: #666; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 12px;">STO Rates Season 2026-2028</p>
                 `;
                 
                 for (const key in DB) {
                     const prop = DB[key];
                     html += `
-                    <div style="margin-bottom: 50px; page-break-inside: avoid;">
-                        <h2 style="color: #111; background: #f9f9f9; padding: 15px; border-left: 5px solid #DEC698; margin-bottom: 20px;">${prop.name} <span style="font-size:14px; color:#666; font-weight:normal;">(${prop.location})</span></h2>
-                        <div style="font-size: 13px; line-height: 1.6; padding: 0 10px;">
+                    <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                        <h2 style="color: #111; background: #f9f9f9; padding: 10px; border-left: 5px solid #DEC698; margin-bottom: 15px; font-size: 15px;">${prop.name} <span style="font-size:12px; color:#666; font-weight:normal;">(${prop.location})</span></h2>
+                        <div style="font-size: 10px; line-height: 1.5; padding: 0 5px;">
                             ${prop.tab1.replace(/class="accent"/g, 'style="color: #DEC698; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}
                         </div>
                     </div>`;
@@ -2056,7 +2052,14 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                 container.querySelectorAll('.raw-text, h3, h4, p, table, th, td').forEach(el => {
                     el.style.color = '#333';
                     el.style.textShadow = 'none';
+                    if (el.tagName === 'H3' || el.tagName === 'H4') {
+                        el.style.fontSize = el.tagName === 'H3' ? '12px' : '11px';
+                        el.style.marginBottom = '6px';
+                        el.style.marginTop = '15px';
+                    }
                     if (el.tagName === 'TH' || el.tagName === 'TD') {
+                        el.style.padding = '4px 6px';
+                        el.style.fontSize = '9px';
                         el.style.borderColor = '#ddd';
                     }
                 });
@@ -2083,27 +2086,27 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                 
                 const prop = DB[currentLodgeId];
                 let html = `
-                <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
-                    <h1 style="color: #111; border-bottom: 2px solid #DEC698; padding-bottom: 10px; margin-bottom: 5px;">${prop.name}</h1>
-                    <p style="color: #666; margin-top: 0; margin-bottom: 20px;"><strong>Location:</strong> ${prop.location} ${prop.airport ? ' | <strong>Airport:</strong> ' + prop.airport : ''}</p>
+                <div style="padding: 20px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                    <h1 style="color: #111; border-bottom: 2px solid #DEC698; padding-bottom: 10px; margin-bottom: 5px; font-size: 18px;">${prop.name}</h1>
+                    <p style="color: #666; margin-top: 0; margin-bottom: 15px; font-size: 11px;"><strong>Location:</strong> ${prop.location} ${prop.airport ? ' | <strong>Airport:</strong> ' + prop.airport : ''}</p>
                     
-                    <div style="font-size: 14px; line-height: 1.6; margin-bottom: 40px; background: #f9f9f9; padding: 20px; border-left: 5px solid #ccc;">
+                    <div style="font-size: 10px; line-height: 1.5; margin-bottom: 25px; background: #f9f9f9; padding: 15px; border-left: 5px solid #ccc;">
                         ${prop.intro}
                     </div>
                     
-                    <div style="margin-bottom: 40px; page-break-inside: avoid;">
-                        <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Accommodation Rates</h2>
-                        <div style="font-size: 13px;">${prop.tab1.replace(/class="accent"/g, 'style="color: #DEC698; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
+                    <div style="margin-bottom: 25px; page-break-inside: avoid;">
+                        <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; font-size: 14px;">Accommodation Rates</h2>
+                        <div style="font-size: 10px;">${prop.tab1.replace(/class="accent"/g, 'style="color: #DEC698; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
                     </div>
                     
-                    <div style="margin-bottom: 40px; page-break-inside: avoid;">
-                        <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Activities</h2>
-                        <div style="font-size: 13px;">${prop.tab2}</div>
+                    <div style="margin-bottom: 25px; page-break-inside: avoid;">
+                        <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; font-size: 14px;">Activities</h2>
+                        <div style="font-size: 10px;">${prop.tab2}</div>
                     </div>
                     
-                    <div style="margin-bottom: 40px; page-break-inside: avoid;">
-                        <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Policies & Info</h2>
-                        <div style="font-size: 13px;">${prop.tab3}</div>
+                    <div style="margin-bottom: 25px; page-break-inside: avoid;">
+                        <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; margin-bottom: 10px; font-size: 14px;">Policies & Info</h2>
+                        <div style="font-size: 10px;">${prop.tab3}</div>
                     </div>
                 </div>`;
                 
@@ -2116,16 +2119,21 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     }
                     if (el.tagName === 'H3' || el.tagName === 'H4') {
                         el.style.color = '#111';
+                        el.style.fontSize = el.tagName === 'H3' ? '12px' : '11px';
+                        el.style.marginBottom = '6px';
+                        el.style.marginTop = '15px';
                     }
-                    el.style.textShadow = 'none';
                     if (el.tagName === 'TH' || el.tagName === 'TD') {
+                        el.style.padding = '4px 6px';
+                        el.style.fontSize = '9px';
                         el.style.borderColor = '#ddd';
                     }
+                    el.style.textShadow = 'none';
                 });
 
                 const opt = {
                     margin: 0.5,
-                    filename: `OL_Leisure_${prop.name.replace(/\s+/g, '_')}_Rates.pdf`,
+                    filename: \`OL_Leisure_\${prop.name.replace(/\\s+/g, '_')}_Rates.pdf\`,
                     image: { type: 'jpeg', quality: 0.98 },
                     html2canvas: { scale: 2, useCORS: true },
                     jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
