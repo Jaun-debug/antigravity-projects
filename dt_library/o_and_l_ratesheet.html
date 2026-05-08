@@ -2023,7 +2023,11 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             tbody.prepend(newRow);
             
             alert('Client Profile Created Successfully!'); 
-            do        // PDF DOWNLOAD LOGIC
+            document.getElementById('admin-client-form').reset();
+            switchAdminTab('nav-clients');
+        }
+
+        // PDF DOWNLOAD LOGIC
         window.downloadGroupPDF = function() {
                 let btn = document.querySelector('button[onclick="downloadGroupPDF()"]');
                 let originalText = btn.innerText;
