@@ -1560,17 +1560,17 @@
             let originalText = btn.innerText;
             btn.innerText = "⏳ Generating Group PDF...";
             
-            let html = `<div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
-                <h1 style="color: #111; text-align: center; border-bottom: 2px solid #c85a17; padding-bottom: 20px; margin-bottom: 5px;">Ondili Lodges Group Rates</h1>
-                <p style="color: #666; text-align: center; margin-top: 0; margin-bottom: 40px;">STO 20 Rates Season 2026-2027</p>
+            let html = `<div style="padding: 30px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                <h1 style="color: #111; text-align: center; border-bottom: 2px solid #c85a17; padding-bottom: 15px; margin-bottom: 5px; font-size: 22px;">Ondili Lodges Group Rates</h1>
+                <p style="color: #666; text-align: center; margin-top: 0; margin-bottom: 30px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;">STO 20 Rates Season 2026-2027</p>
             `;
             
             for (const key in DB) {
                 const prop = DB[key];
                 html += `
-                <div style="margin-bottom: 50px; page-break-inside: avoid;">
-                    <h2 style="color: #111; background: #f9f9f9; padding: 15px; border-left: 5px solid #c85a17; margin-bottom: 20px;">${prop.name} <span style="font-size:14px; color:#666; font-weight:normal;">(${prop.location})</span></h2>
-                    <div style="font-size: 13px; line-height: 1.6; padding: 0 10px;">
+                <div style="margin-bottom: 40px; page-break-inside: avoid;">
+                    <h2 style="color: #111; background: #f9f9f9; padding: 10px 15px; border-left: 4px solid #c85a17; margin-bottom: 15px; font-size: 16px;">${prop.name} <span style="font-size:12px; color:#666; font-weight:normal;">(${prop.location})</span></h2>
+                    <div style="font-size: 10px; line-height: 1.5; padding: 0 10px;">
                         ${prop.tab1.replace(/class="accent"/g, 'style="color: #c85a17; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}
                     </div>
                 </div>`;
@@ -1583,8 +1583,34 @@
             container.querySelectorAll('.raw-text, h3, h4, p, table, th, td').forEach(el => {
                 el.style.color = '#333';
                 el.style.textShadow = 'none';
-                if (el.tagName === 'TH' || el.tagName === 'TD') {
+                if (el.tagName === 'H3') {
+                    el.style.color = '#c85a17';
+                    el.style.fontSize = '12px';
+                    el.style.marginTop = '15px';
+                    el.style.marginBottom = '8px';
+                    el.style.borderBottom = '1px solid #eee';
+                    el.style.paddingBottom = '4px';
+                }
+                if (el.tagName === 'H4') {
+                    el.style.color = '#111';
+                    el.style.fontSize = '11px';
+                    el.style.marginTop = '10px';
+                    el.style.marginBottom = '5px';
+                }
+                if (el.tagName === 'TH') {
                     el.style.borderColor = '#ddd';
+                    el.style.padding = '6px';
+                    el.style.fontSize = '9px';
+                    el.style.backgroundColor = '#f9f9f9';
+                }
+                if (el.tagName === 'TD') {
+                    el.style.borderColor = '#ddd';
+                    el.style.padding = '6px';
+                    el.style.fontSize = '10px';
+                }
+                if (el.tagName === 'P' || el.classList.contains('raw-text')) {
+                    el.style.margin = '5px 0';
+                    el.style.fontSize = '10px';
                 }
             });
 
@@ -1610,27 +1636,27 @@
             
             const prop = DB[currentLodgeId];
             let html = `
-            <div style="padding: 40px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
-                <h1 style="color: #111; border-bottom: 2px solid #c85a17; padding-bottom: 10px; margin-bottom: 5px;">${prop.name}</h1>
-                <p style="color: #666; margin-top: 0; margin-bottom: 20px;"><strong>Location:</strong> ${prop.location}</p>
+            <div style="padding: 30px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                <h1 style="color: #111; border-bottom: 2px solid #c85a17; padding-bottom: 10px; margin-bottom: 5px; font-size: 20px;">${prop.name}</h1>
+                <p style="color: #666; margin-top: 0; margin-bottom: 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;"><strong>Location:</strong> ${prop.location}</p>
                 
-                <div style="font-size: 14px; line-height: 1.6; margin-bottom: 40px; background: #f9f9f9; padding: 20px; border-left: 5px solid #ccc;">
+                <div style="font-size: 11px; line-height: 1.5; margin-bottom: 30px; background: #f9f9f9; padding: 15px; border-left: 4px solid #ccc;">
                     ${prop.intro}
                 </div>
                 
-                <div style="margin-bottom: 40px; page-break-inside: avoid;">
-                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Accommodation Rates</h2>
-                    <div style="font-size: 13px;">${prop.tab1.replace(/class="accent"/g, 'style="color: #c85a17; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
+                <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Accommodation Rates</h2>
+                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab1.replace(/class="accent"/g, 'style="color: #c85a17; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
                 </div>
                 
-                <div style="margin-bottom: 40px; page-break-inside: avoid;">
-                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Activities</h2>
-                    <div style="font-size: 13px;">${prop.tab2}</div>
+                <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Activities</h2>
+                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab2}</div>
                 </div>
                 
-                <div style="margin-bottom: 40px; page-break-inside: avoid;">
-                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px;">Policies & Info</h2>
-                    <div style="font-size: 13px;">${prop.tab3}</div>
+                <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Policies & Info</h2>
+                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab3}</div>
                 </div>
             </div>`;
             
@@ -1641,12 +1667,35 @@
                 if (el.style.color && (el.style.color.includes('fff') || el.style.color.includes('white'))) {
                     el.style.color = '#333';
                 }
-                if (el.tagName === 'H3' || el.tagName === 'H4') {
+                if (el.tagName === 'H3') {
+                    el.style.color = '#c85a17';
+                    el.style.fontSize = '12px';
+                    el.style.marginTop = '15px';
+                    el.style.marginBottom = '8px';
+                    el.style.borderBottom = '1px solid #eee';
+                    el.style.paddingBottom = '4px';
+                }
+                if (el.tagName === 'H4') {
                     el.style.color = '#111';
+                    el.style.fontSize = '11px';
+                    el.style.marginTop = '10px';
+                    el.style.marginBottom = '5px';
                 }
                 el.style.textShadow = 'none';
-                if (el.tagName === 'TH' || el.tagName === 'TD') {
+                if (el.tagName === 'TH') {
                     el.style.borderColor = '#ddd';
+                    el.style.padding = '6px';
+                    el.style.fontSize = '9px';
+                    el.style.backgroundColor = '#f9f9f9';
+                }
+                if (el.tagName === 'TD') {
+                    el.style.borderColor = '#ddd';
+                    el.style.padding = '6px';
+                    el.style.fontSize = '10px';
+                }
+                if (el.tagName === 'P' || el.classList.contains('raw-text')) {
+                    el.style.margin = '5px 0';
+                    el.style.fontSize = '10px';
                 }
             });
 
