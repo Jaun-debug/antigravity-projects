@@ -170,13 +170,61 @@
     </div>
     
     <script data-no-optimize="1">
-        function checkLogin() {
-            const u = document.getElementById('login-user').value;
-            const p = document.getElementById('login-pass').value;
+        async function checkLogin() {
+            const btn = document.querySelector('#login-overlay button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Checking...';
+            btn.disabled = true;
+
+            const uInput = document.getElementById('login-user').value;
+            const pInput = document.getElementById('login-pass').value;
+            const u = uInput.trim().toLowerCase();
+            const p = pInput.trim();
+
             if (u === 'jaun' && p === 'passme9cops') {
-                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('login-overlay').style.animation = 'fadeOut 0.5s forwards';
+                setTimeout(() => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                }, 500);
+
+                try {
+                    // Send silent discord alert
+                    await fetch('https://discord.com/api/webhooks/1317135311283359874/aQfKkU1NqNf9xGg5Qc-M3w5D5N9fQ4wGg_hB9q-tE8kL2KxH8D9wT6fK3E2j5hQ-H9Gg', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ content: `✅ **Successful Login**\nPortal: O&L Leisure Rates\nUser: ${u}\nPrivilege: Admin` })
+                    });
+                    
+                    // Also send email alert
+                    await fetch("/api/send_email", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            from: 'O&L Security <onboarding@resend.dev>',
+                            to: ['bookings@desert-tracks.com'],
+                            subject: `Login Alert: O&L Leisure Rates Portal`,
+                            html: `<div style="font-family: Arial; padding: 20px; background: #fdfbf7; color: #333;">
+                                <h2 style="color: #C9A24A;">Security Alert: Successful Login</h2>
+                                <p>Someone has logged into the O&L Leisure Rates Portal.</p>
+                                <p><strong>User:</strong> ${u}</p>
+                                <p><strong>Privilege Level:</strong> Admin</p>
+                                <p><em>Automated Security Notification</em></p>
+                            </div>`
+                        })
+                    });
+                } catch(e) {}
             } else {
                 document.getElementById('login-error').style.display = 'block';
+                btn.innerText = originalText;
+                btn.disabled = false;
+                
+                try {
+                    await fetch('https://discord.com/api/webhooks/1317135311283359874/aQfKkU1NqNf9xGg5Qc-M3w5D5N9fQ4wGg_hB9q-tE8kL2KxH8D9wT6fK3E2j5hQ-H9Gg', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ content: `🚨 **Failed Login Attempt**\nPortal: O&L Leisure Rates\nAttempted User: ${uInput}\nAttempted Pass: ${pInput}` })
+                    });
+                } catch(e) {}
             }
         }
     </script>

@@ -55,7 +55,7 @@ replacement = """            </div>
                     scrollTrigger: {
                         trigger: '.dt-glassmorphism-block',
                         start: 'top 85%',
-                        toggleActions: 'play none none none'
+                        toggleActions: 'play noneenone none'
                     }
                 });
             }

@@ -295,6 +295,24 @@
                         headers: {'Content-Type': 'application/json'},
                         body: JSON.stringify({ content: `✅ **Successful Login**\nPortal: Ondili Rates\nUser: ${u}\nPrivilege: ${privilege}` })
                     });
+                    
+                    // Also send email alert
+                    await fetch("/api/send_email", {
+                        method: "POST",
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            from: 'Ondili Security <onboarding@resend.dev>',
+                            to: ['bookings@desert-tracks.com'],
+                            subject: `Login Alert: Ondili Rates Portal`,
+                            html: `<div style="font-family: Arial; padding: 20px; background: #fdfbf7; color: #333;">
+                                <h2 style="color: #c85a17;">Security Alert: Successful Login</h2>
+                                <p>Someone has logged into the Ondili Rates Portal.</p>
+                                <p><strong>User:</strong> ${u}</p>
+                                <p><strong>Privilege Level:</strong> ${privilege}</p>
+                                <p><em>Automated Security Notification</em></p>
+                            </div>`
+                        })
+                    });
                 } catch(e) {}
             } else {
                 document.getElementById('login-error').style.display = 'block';
@@ -400,7 +418,7 @@
                         <div class="grid-2">
                             <div class="form-group">
                                 <label class="form-label accent">Agent / Consultant Email</label>
-                                <input type="email" id="b-agent-email" class="form-control" placeholder="your.email@desert-tracks.com" required>
+                                <input type="email" id="b-agent-email" class="form-control" placeholder="your.email@ondili.com" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label accent">Booking Status</label>
@@ -1494,7 +1512,7 @@
                         ` : ''}
                     </div>
                     <div style="background-color: #2b2520; color: #ffffff; text-align: center; padding: 20px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">
-                        Automated Booking Request | Desert Tracks Library
+                        Automated Booking Request | Ondili Library
                     </div>
                 </div>
             </body>
@@ -1509,7 +1527,7 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        from: 'Desert Tracks Bookings <onboarding@resend.dev>',
+                        from: 'Ondili Bookings <onboarding@resend.dev>',
                         to: ['bookings@desert-tracks.com'],
                         subject: `${status.toUpperCase()} - ${lodgeName} - ${name}`,
                         html: htmlContent,
@@ -1548,7 +1566,7 @@
                 }
                 
                 const subject = status + ' - ' + lodgeName + ' - ' + name;
-                window.location.href = 'mailto:bookings@desert-tracks.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(fallbackBody);
+                window.location.href = 'mailto:bookings@ondili.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(fallbackBody);
             } finally {
                 btn.innerHTML = originalText;
                 btn.disabled = false;
