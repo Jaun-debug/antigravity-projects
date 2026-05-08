@@ -34,23 +34,23 @@
         /* Custom Calendar Base Styles */
         .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin-top: 10px; margin: 0 auto; }
         .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin-bottom: 16px; margin: 0 auto; }
-        .dew-calendar-nav-btn { background: transparent; border: none; color: #ffffff; font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar-nav-btn { background: transparent; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; }
         .dew-calendar-nav-btn:hover { opacity: 0.6; }
-        .dew-calendar-month-title { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: #ffffff; text-align: center; width: 300px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar-month-title { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: var(--text-main); text-align: center; width: 300px; }
         .dew-calendar { flex: 1; max-width: 300px; width: 100%; }
         .dew-calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin-bottom: 8px; }
-        .dew-calendar-day-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar-day-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
         .dew-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
-        .dew-calendar-day { font-family: var(--font-body); font-size: 14px; color: #ffffff; text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; position: relative; border-radius: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
-        .dew-calendar-day:hover { background: rgba(255,255,255,0.1); }
+        .dew-calendar-day { font-family: var(--font-body); font-size: 14px; color: var(--text-main); text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; position: relative; border-radius: 0; }
+        .dew-calendar-day:hover { background: rgba(0,0,0,0.05); }
         .dew-calendar-day.dew-empty { cursor: default; }
         .dew-calendar-day.dew-empty:hover { background: transparent; }
-        .dew-calendar-day.dew-today { background: var(--brand-accent); border-radius: 50%; color: #ffffff !important; font-weight: 700; text-shadow: none; }
+        .dew-calendar-day.dew-today { background: var(--brand-accent); border-radius: 50%; color: #ffffff !important; font-weight: 700; }
         .dew-calendar-day.dew-selected { background: rgba(222, 198, 152, 0.4); }
         .dew-calendar-day.dew-range { background: rgba(222, 198, 152, 0.25); }
-        .dew-calendar-day.dew-range-start { background: var(--brand-accent); border-radius: 50% 0 0 50%; color: #ffffff !important; font-weight: 700; text-shadow: none; }
-        .dew-calendar-day.dew-range-end { background: var(--brand-accent); border-radius: 0 50% 50% 0; color: #ffffff !important; font-weight: 700; text-shadow: none; }
-        .dew-calendar-day.dew-past { color: rgba(255,255,255,0.4); cursor: not-allowed; opacity: 0.4; text-shadow: none; }
+        .dew-calendar-day.dew-range-start { background: var(--brand-accent); border-radius: 50% 0 0 50%; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-range-end { background: var(--brand-accent); border-radius: 0 50% 50% 0; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-past { color: rgba(0,0,0,0.2); cursor: not-allowed; opacity: 0.5; }
         .dew-calendar-day.dew-past:hover { background: transparent; }
         @media(max-width: 768px) {
             .dew-calendar-container { flex-direction: column; gap: 24px; align-items: center; }
@@ -69,27 +69,14 @@
             color: var(--text-main) !important;
         }
 
-        body { margin: 0; padding: 0; background: #000; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(15, 15, 18, 0.8), rgba(15, 15, 18, 0.85)), url('https://desert-tracks.com/wp-content/uploads/2026/03/namibia_sossusvlei_nightsky.jpeg') no-repeat center center;
-            background-size: cover;
-            z-index: -1;
-            animation: subtleZoom 15s alternate infinite linear;
-            will-change: transform;
-        }
-        @keyframes subtleZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.15); }
-        }
+        body { margin: 0; padding: 0; background: #FDFBF7; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        
         h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 500; margin: 0; }
         .wrapper { max-width: 1700px; margin: 0 auto; padding: 30px 20px; }
         
         .header { text-align: center; margin-bottom: 40px; animation: fadeInDown 1s ease forwards; }
-        .header h1 { font-size: 3.5rem; color: #ffffff; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
-        .header p { color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .header h1 { font-size: 3.5rem; color: var(--brand-accent); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
+        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 500; }
 
         /* SWIPER CAROUSEL */
         .swiper-container-wrapper { animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; margin-bottom: 60px; position: relative; }
@@ -133,24 +120,24 @@
 
         /* DETAIL VIEW */
         .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 120px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.5); padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-bottom: 20px; background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; font-weight: 500;}
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-main); border: 1px solid rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-bottom: 20px; background: rgba(255,255,255,0.5); backdrop-filter: blur(5px); font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; font-weight: 600;}
         .back-btn:hover { color: #fff; background: var(--brand-gradient); border-color: transparent; }
 
         .detail-header { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
-        .detail-title { font-size: 3rem; color: var(--brand-accent); line-height: 1.1; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
-        .intro-text { color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; line-height: 1.6; max-width: 100%; text-shadow: 0 2px 10px rgba(0,0,0,0.5); background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .detail-title { font-size: 3rem; color: var(--brand-accent); line-height: 1.1; }
+        .intro-text { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; max-width: 100%; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); }
 
         /* MULTI-IMAGE GALLERY */
         .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
         .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
         /* TABS */
-        .tabs { display: flex; gap: 12px; margin-bottom: 25px; overflow-x: auto; padding: 15px 20px; position: sticky; top: 20px; z-index: 90; background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: var(--glass-border); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-        .tab-btn { background: rgba(0,0,0,0.6); border: 1px solid transparent; color: #ffffff !important; padding: 14px 28px; border-radius: 10px; cursor: pointer; font-family: var(--font-head); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02); text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
-        .tab-btn:hover { background: rgba(0,0,0,0.8); }
-        .tab-btn.active { background: var(--brand-gradient); border-color: var(--brand-accent); }
-        .tab-btn-highlight { background: var(--brand-gradient); border: 1px solid var(--brand-accent); }
-        .tab-btn-highlight.active { background: var(--brand-gradient); border-color: #ffffff; }
+        .tabs { display: flex; gap: 12px; margin-bottom: 25px; overflow-x: auto; padding: 15px 20px; position: sticky; top: 20px; z-index: 90; background: rgba(255,255,255,0.8); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(0,0,0,0.05); border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .tab-btn { background: rgba(255,255,255,0.8); border: 1px solid rgba(0,0,0,0.1); color: var(--text-main) !important; padding: 14px 28px; border-radius: 10px; cursor: pointer; font-family: var(--font-head); font-size: 0.95rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02); }
+        .tab-btn:hover { background: #fff; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transform: translateY(-2px); }
+        .tab-btn.active { background: var(--brand-gradient); border-color: transparent; color: #fff !important; }
+        .tab-btn-highlight { background: var(--brand-gradient); border: 1px solid transparent; color: #fff !important; }
+        .tab-btn-highlight.active { background: var(--brand-gradient); border-color: #ffffff; color: #fff !important; }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
@@ -218,7 +205,7 @@
 <body>
 
     <!-- LOGIN OVERLAY -->
-    <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4-3.jpg') no-repeat center center; background-size: cover; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+    <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #FDFBF7; z-index: 9999; display: flex; align-items: center; justify-content: center;">
         <div style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 40px; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-width: 400px; width: 100%; text-align: center; border: var(--glass-border);">
             <h2 style="color: var(--brand-accent); font-family: var(--font-head); margin-bottom: 20px;">O&L Leisure Rates</h2>
             <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Please sign in to access the booking engine.</p>
@@ -374,7 +361,7 @@
             </div>
             
             <div style="text-align: center; margin-bottom: 40px;">
-                <button class="tab-btn" onclick="downloadGroupPDF()" style="border: 1px solid rgba(255,255,255,0.4); background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">📄 Download Group PDF</button>
+                <button class="tab-btn" onclick="downloadGroupPDF()">📄 Download Group PDF</button>
             </div>
 
             <!-- SWIPER CAROUSEL -->
@@ -595,11 +582,11 @@
                 <h1 class="detail-title" id="d-title">Property Name</h1>
                 <p class="intro-text" id="d-intro"></p>
                 <div style="color: var(--brand-accent); margin-top: 5px; font-weight: 600;" id="d-location"></div>
-                <div style="color: #ffffff; text-shadow: 0 1px 4px rgba(0,0,0,0.8); font-size: 0.9rem; margin-top: 15px; margin-bottom: 15px; background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); display: inline-block;" id="d-airport"></div>
+                <div style="color: var(--text-main); font-size: 0.9rem; margin-top: 15px; margin-bottom: 15px; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 12px 20px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); display: inline-block;" id="d-airport"></div>
             </div>
 
             <div style="text-align: center; margin: 30px 0;">
-                <button class="tab-btn" onclick="downloadLodgePDF()" style="border: 1px solid rgba(255,255,255,0.4); background: rgba(0,0,0,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">📄 Download Lodge PDF</button>
+                <button class="tab-btn" onclick="downloadLodgePDF()">📄 Download Lodge PDF</button>
             </div>
 
             <div class="tabs">
@@ -610,13 +597,13 @@
                 <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
             </div>
 
-            <div class="global-dates" id="global-dates-ui" style="margin-top: 25px; margin-bottom: 25px; display: block; text-align: center; background: var(--card-light); padding: 30px; border-radius: 10px; border: var(--glass-border);">
-                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: #ffffff; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.6);">When would you like to travel?</h3>
+            <div class="global-dates" id="global-dates-ui" style="margin-top: 25px; margin-bottom: 25px; display: block; text-align: center; background: rgba(255,255,255,0.7); padding: 30px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: var(--text-main); font-weight: 600;">When would you like to travel?</h3>
                 <div id="inline-calendar" style="margin: 0 auto;"></div>
                 
-                <div style="font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; margin-top: 20px;">
+                <div style="font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); width: 100%; margin-top: 20px;">
                     <span id="nights-count" style="font-size: 1.8rem; color: var(--brand-accent);">1</span>
-                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.9); margin-left: 5px; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Nights Selected</span>
+                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-left: 5px;">Nights Selected</span>
                 </div>
             </div>
 
