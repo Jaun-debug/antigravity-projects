@@ -6,30 +6,45 @@
     <title>Ondili Rates & Booking 2026-2027</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" data-no-optimize="1"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" data-no-optimize="1"></script>
     <style data-no-optimize="1">
         :root {
-            --primary-bg: #f9f6f0; /* Warm Sand */
-            --card-bg: #FFFFFF;
-            --card-light: #FAFAFA;
+            --primary-bg: #000;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-light: rgba(255, 255, 255, 0.4);
             --text-main: #2b2520;
             --text-muted: #6b5c51;
             --brand-accent: #c85a17; /* Terracotta / Burnt Orange */
             --brand-gradient: linear-gradient(135deg, #e37b3b, #c85a17, #9b410d);
             --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --glass-border: 1px solid rgba(200, 90, 23, 0.15);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
             --font-head: 'Cinzel', serif;
             --font-body: 'Inter', sans-serif;
         }
 
-        body { margin: 0; padding: 0; background-color: var(--primary-bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body { margin: 0; padding: 0; background: #000; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://desert-tracks.com/wp-content/uploads/2026/03/c83fa5da-e4f1-40db-97af-18c4d6da7bb2-scaled.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            animation: subtleZoom 15s alternate infinite linear;
+            will-change: transform;
+        }
+        @keyframes subtleZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+        
         h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
-        .wrapper { max-width: 1400px; margin: 0 auto; padding: 60px 20px; }
+        .wrapper { max-width: 1700px; margin: 0 auto; padding: 30px 20px; }
         
         .header { text-align: center; margin-bottom: 40px; animation: fadeInDown 1s ease forwards; }
-        .header h1 { font-size: 3.5rem; background: var(--brand-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; letter-spacing: 2px; }
-        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+        .header h1 { font-size: 3.5rem; color: #ffffff; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
+        .header p { color: rgba(255, 255, 255, 0.9); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
 
         /* SWIPER CAROUSEL (Replacing Property Grid) */
         .swiper-container-wrapper { animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; margin-bottom: 60px; position: relative; }
@@ -68,42 +83,82 @@
         }
         .swiper-card-location { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #f9f6f0; opacity: 0.8; margin-bottom: 8px; display: block; }
         .swiper-card-title { font-size: 1.8rem; font-family: var(--font-head); font-weight: 600; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
-        .swiper-card-btn { display: inline-block; padding: 8px 20px; border: 1px solid rgba(255,255,255,0.4); border-radius: 30px; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; transition: var(--transition); backdrop-filter: blur(5px); }
-        .swiper-slide:hover .swiper-card-btn { background: #fff; color: var(--brand-accent); border-color: #fff; }
+        
+        /* APPLE GLASS PILL BUTTONS */
+        .glass-pill-btn, .swiper-card-btn { 
+            display: inline-flex; 
+            align-items: center;
+            padding: 12px 24px; 
+            border: 1px solid rgba(255,255,255,0.15); 
+            border-radius: 40px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            transition: var(--transition); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(30, 30, 30, 0.65);
+            color: #ffffff;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+        .glass-pill-btn:hover, .swiper-card-btn:hover { 
+            background: rgba(50, 50, 50, 0.8); 
+            border-color: rgba(255,255,255,0.4); 
+            transform: translateY(-2px);
+        }
+        .glass-pill-btn .divider, .swiper-card-btn .divider {
+            color: rgba(255,255,255,0.2);
+            margin: 0 12px;
+            font-weight: 300;
+        }
+        .glass-pill-btn .icon, .swiper-card-btn .icon {
+            margin-left: 12px;
+            font-size: 1rem;
+        }
+        
+        .glass-pill-btn.dark-text {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            border-color: rgba(0,0,0,0.1);
+        }
+        .glass-pill-btn.dark-text .divider { color: rgba(0,0,0,0.2); }
+        .glass-pill-btn.dark-text:hover { background: #fff; border-color: rgba(0,0,0,0.2); }
 
         /* DETAIL VIEW */
         .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 120px; }
-        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-muted); border: 1px solid var(--text-muted); padding: 10px 20px; border-radius: 30px; cursor: pointer; transition: var(--transition); margin-bottom: 40px; background: transparent; font-family: var(--font-body); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; font-weight: 600;}
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: rgba(255, 255, 255, 0.9); border: 1px solid rgba(255, 255, 255, 0.5); padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-bottom: 20px; background: rgba(0,0,0,0.2); backdrop-filter: blur(5px); font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; font-weight: 500;}
         .back-btn:hover { color: #fff; background: var(--brand-gradient); border-color: transparent; }
 
-        .detail-header { margin-bottom: 40px; display: flex; flex-direction: column; gap: 15px; }
-        .detail-title { font-size: 3.5rem; color: var(--brand-accent); line-height: 1.1; }
-        .intro-text { color: var(--text-muted); font-size: 1rem; line-height: 1.8; max-width: 900px; }
+        .detail-header { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .detail-title { font-size: 3rem; color: var(--brand-accent); line-height: 1.1; text-shadow: 0 4px 15px rgba(0,0,0,0.6); }
+        .intro-text { color: rgba(255, 255, 255, 0.9); font-size: 0.95rem; line-height: 1.6; max-width: 100%; text-shadow: 0 2px 10px rgba(0,0,0,0.5); background: rgba(0,0,0,0.4); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 20px; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.1); }
 
         /* MULTI-IMAGE GALLERY */
         .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
-        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
         /* TABS */
-        .tabs { display: flex; gap: 15px; margin-bottom: 40px; overflow-x: auto; padding-bottom: 10px; }
-        .tab-btn { background: var(--card-bg); border: var(--glass-border); color: var(--text-muted); padding: 15px 30px; border-radius: 8px; cursor: pointer; font-family: var(--font-head); font-size: 1.1rem; transition: var(--transition); white-space: nowrap; font-weight: 600; box-shadow: 0 2px 10px rgba(0,0,0,0.02);}
-        .tab-btn:hover { border-color: var(--brand-accent); color: var(--text-main); }
-        .tab-btn.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
-        .tab-btn-highlight { border: 1px solid var(--brand-accent); color: var(--brand-accent); }
-        .tab-btn-highlight.active { background: var(--brand-gradient); color: #fff; border-color: transparent; }
+        .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; border-bottom: none; justify-content: center; background: rgba(0,0,0,0.4); padding: 10px; border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); position: sticky; top: 20px; z-index: 90; }
+        .tab-btn { flex: 1; min-width: 150px; background: rgba(0,0,0,0.6); color: #ffffff; border: 1px solid rgba(255,255,255,0.1); padding: 15px 25px; cursor: pointer; border-radius: 10px; transition: var(--transition); font-weight: 600; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .tab-btn:hover { background: rgba(255,255,255,0.1); color: #ffffff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        .tab-btn.active { background: var(--brand-accent); color: #ffffff; border: none; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transform: translateY(-3px); text-shadow: none; }
+        .tab-btn-highlight { background: var(--brand-gradient); border: none; color: #fff; font-weight: 700; box-shadow: 0 0 15px rgba(200, 90, 23, 0.4); }
 
         .tab-content { display: none; animation: fadeIn 0.4s ease; }
         .tab-content.active { display: block; }
 
         /* CONTENT BLOCKS */
-        .content-block { background: var(--card-bg); border: var(--glass-border); border-radius: 12px; padding: 40px; margin-bottom: 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); }
-        .content-block h3 { color: var(--brand-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(200, 90, 23, 0.3); padding-bottom: 15px; display: inline-block; text-transform: uppercase; }
+        .content-block { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: var(--glass-border); border-radius: 15px; padding: 35px 40px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
+        .content-block h3 { color: #000000; font-size: 1.6rem; margin-bottom: 15px; border-bottom: 1px solid rgba(200, 90, 23, 0.3); padding-bottom: 10px; display: inline-block; text-transform: uppercase; }
         .sub-block { margin-top: 30px; }
         .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;}
 
         /* TABLES */
-        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 8px; margin-bottom: 30px;}
-        table { width: 100%; border-collapse: collapse; text-align: left; background: var(--card-light); margin-bottom: 0px; }
+        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 12px; margin-bottom: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: transparent; margin-bottom: 0px; }
         th { font-family: var(--font-head); background: rgba(200, 90, 23, 0.08); color: var(--text-main); font-size: 0.85rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(200, 90, 23, 0.15); }
         td { padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
         tr:last-child td { border-bottom: none; }
@@ -119,7 +174,7 @@
         /* BOOKING BAR & FORM */
         #booking-bar {
             display: none; position: fixed; bottom: 0; left: 0; width: 100%; 
-            background: rgba(255,255,255,0.95); backdrop-filter: blur(10px);
+            background: rgba(200, 90, 23, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             padding: 20px; box-shadow: 0 -10px 30px rgba(0,0,0,0.1); 
             z-index: 100; text-align: center; border-top: 1px solid rgba(200, 90, 23, 0.2);
             animation: fadeInUp 0.4s ease;
@@ -137,7 +192,36 @@
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Custom Calendar Base Styles */
+        .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin-top: 10px; margin: 0 auto; }
+        .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin-bottom: 16px; margin: 0 auto; }
+        .dew-calendar-nav-btn { background: transparent; border: none; color: #ffffff; font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar-nav-btn:hover { opacity: 0.6; }
+        .dew-calendar-month-title { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: #ffffff; text-align: center; width: 300px; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar { flex: 1; max-width: 300px; width: 100%; }
+        .dew-calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin-bottom: 8px; }
+        .dew-calendar-day-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.8); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+        .dew-calendar-day { font-family: var(--font-body); font-size: 14px; color: #ffffff; text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; position: relative; border-radius: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+        .dew-calendar-day:hover { background: rgba(255,255,255,0.1); }
+        .dew-calendar-day.dew-empty { cursor: default; }
+        .dew-calendar-day.dew-empty:hover { background: transparent; }
+        .dew-calendar-day.dew-today { background: var(--brand-accent); border-radius: 50%; color: #ffffff !important; font-weight: 700; text-shadow: none; }
+        .dew-calendar-day.dew-selected { background: rgba(200, 90, 23, 0.4); }
+        .dew-calendar-day.dew-range { background: rgba(200, 90, 23, 0.25); }
+        .dew-calendar-day.dew-range-start { background: var(--brand-accent); border-radius: 50% 0 0 50%; color: #ffffff !important; font-weight: 700; text-shadow: none; }
+        .dew-calendar-day.dew-range-end { background: var(--brand-accent); border-radius: 0 50% 50% 0; color: #ffffff !important; font-weight: 700; text-shadow: none; }
+        .dew-calendar-day.dew-past { color: rgba(255,255,255,0.4); cursor: not-allowed; opacity: 0.4; text-shadow: none; }
+        .dew-calendar-day.dew-past:hover { background: transparent; }
+        @media(max-width: 768px) {
+            .dew-calendar-container { flex-direction: column; gap: 24px; align-items: center; }
+            .dew-calendar-container > .dew-calendar:last-child { display: none; }
+            .dew-calendar-nav .dew-calendar-month-title:nth-of-type(2) { display: none; }
+            .dew-calendar-month-title { width: 100%; }
+        }
 
         @media (max-width: 900px) {
             .lodge-gallery { grid-template-columns: 1fr; }
@@ -157,6 +241,77 @@
 </head>
 <body>
 
+    <!-- LOGIN OVERLAY -->
+    <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://desert-tracks.com/wp-content/uploads/2026/03/c83fa5da-e4f1-40db-97af-18c4d6da7bb2-scaled.jpg') no-repeat center center; background-size: cover; z-index: 9999; display: flex; align-items: center; justify-content: center;">
+        <div style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 40px; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-width: 400px; width: 100%; text-align: center; border: var(--glass-border);">
+            <h2 style="color: var(--brand-accent); font-family: var(--font-head); margin-bottom: 20px;">Ondili Rates</h2>
+            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Please sign in to access the booking engine.</p>
+            <input type="text" id="login-user" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: var(--font-body);" onkeydown="if(event.key === 'Enter') checkLogin()">
+            <input type="password" id="login-pass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: var(--font-body);" onkeydown="if(event.key === 'Enter') checkLogin()">
+            <button onclick="checkLogin()" style="width: 100%; padding: 15px; background: var(--brand-gradient); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; font-family: var(--font-head);">Access Portal</button>
+            <p id="login-error" style="color: red; font-size: 0.8rem; margin-top: 15px; display: none;">Invalid credentials.</p>
+        </div>
+    </div>
+    
+    <script data-no-optimize="1">
+        async function checkLogin() {
+            const btn = document.querySelector('#login-overlay button');
+            const originalText = btn.innerText;
+            btn.innerText = 'Checking...';
+            btn.disabled = true;
+
+            const uInput = document.getElementById('login-user').value;
+            const pInput = document.getElementById('login-pass').value;
+            const u = uInput.trim().toLowerCase();
+            const p = pInput.trim();
+            
+            const isValid = 
+                (u === 'jaun' && p === 'passme9cops') ||
+                ((u === 'sto 15' || u === 'sto15') && p === '1515') ||
+                ((u === 'sto 20' || u === 'sto20') && p === '2020') ||
+                ((u === 'ondili admin' || u === 'ondiliadmin') && p === '0000');
+            
+            if (isValid) {
+                // Determine privilege level
+                let privilege = 'STO 20';
+                if (u.includes('15') || p === '1515') privilege = 'STO 15';
+                if (u.includes('admin') || p === '0000' || u === 'jaun') privilege = 'Admin';
+
+                // Update UI based on privilege
+                const subtitle = document.querySelector('.header p');
+                if(subtitle) {
+                    subtitle.innerText = `${privilege} Rates Season 2026/2027`;
+                }
+
+                document.getElementById('login-overlay').style.animation = 'fadeOut 0.5s forwards';
+                setTimeout(() => {
+                    document.getElementById('login-overlay').style.display = 'none';
+                }, 500);
+
+                // Send silent discord alert
+                try {
+                    await fetch('https://discord.com/api/webhooks/1317135311283359874/aQfKkU1NqNf9xGg5Qc-M3w5D5N9fQ4wGg_hB9q-tE8kL2KxH8D9wT6fK3E2j5hQ-H9Gg', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ content: `✅ **Successful Login**\nPortal: Ondili Rates\nUser: ${u}\nPrivilege: ${privilege}` })
+                    });
+                } catch(e) {}
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+                btn.innerText = originalText;
+                btn.disabled = false;
+                
+                try {
+                    await fetch('https://discord.com/api/webhooks/1317135311283359874/aQfKkU1NqNf9xGg5Qc-M3w5D5N9fQ4wGg_hB9q-tE8kL2KxH8D9wT6fK3E2j5hQ-H9Gg', {
+                        method: 'POST',
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({ content: `🚨 **Failed Login Attempt**\nPortal: Ondili Rates\nAttempted User: ${uInput}\nAttempted Pass: ${pInput}` })
+                    });
+                } catch(e) {}
+            }
+        }
+    </script>
+
     <div class="wrapper">
         <div id="main-view">
             <div class="header">
@@ -165,7 +320,9 @@
             </div>
             
             <div style="text-align: center; margin-bottom: 40px;">
-                <button class="tab-btn" onclick="downloadGroupPDF()" style="border: 1px solid rgba(200,90,23,0.4); background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">📄 Download Group PDF</button>
+                <button class="glass-pill-btn dark-text" onclick="downloadGroupPDF()">
+                    Ondili <span class="divider">|</span> Download Group PDF <span class="icon">▷</span>
+                </button>
             </div>
 
             <!-- SWIPER CAROUSEL (Replaces Property Grid) -->
@@ -182,7 +339,9 @@
         </div>
 
         <div id="detail-view" class="detail-view">
-            <button class="back-btn" onclick="closeProperty()">← Back to Lodges</button>
+            <button class="glass-pill-btn dark-text" onclick="closeProperty()" style="margin-bottom: 40px;">
+                <span class="icon" style="margin-left:0; margin-right: 12px; transform: scaleX(-1); display: inline-block;">▷</span> Back <span class="divider">|</span> Lodges
+            </button>
             
             <div class="detail-header">
                 <h1 class="detail-title" id="d-title">Property Name</h1>
@@ -190,25 +349,44 @@
                 <div style="color: var(--brand-accent); margin-top: 5px; font-weight: 600;" id="d-location"></div>
             </div>
 
-            <div class="lodge-gallery" id="d-gallery"></div>
-
             <div style="text-align: center; margin: 30px 0;">
-                <button class="tab-btn" onclick="downloadLodgePDF()" style="border: 1px solid rgba(200,90,23,0.4); background: rgba(255,255,255,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);">📄 Download Lodge PDF</button>
+                <button class="glass-pill-btn dark-text" onclick="downloadLodgePDF()">
+                    Lodge <span class="divider">|</span> Download PDF <span class="icon">▷</span>
+                </button>
             </div>
 
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
                 <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
                 <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
-                <button class="tab-btn tab-btn-highlight" onclick="switchTab(4)" id="tab-btn-4">Finalise Booking</button>
+                <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Image Gallery</button>
+                <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+            </div>
+
+            <div class="global-dates" id="global-dates-ui" style="margin-top: 25px; margin-bottom: 25px; display: block; text-align: center; background: var(--card-light); padding: 30px; border-radius: 10px; border: var(--glass-border);">
+                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: #ffffff; font-weight: 500; text-shadow: 0 2px 10px rgba(0,0,0,0.6);">When would you like to travel?</h3>
+                <div id="inline-calendar" style="margin: 0 auto;"></div>
+                
+                <div style="font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; text-align: center; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); width: 100%; margin-top: 20px;">
+                    <span id="nights-count" style="font-size: 1.8rem; color: var(--brand-accent);">1</span>
+                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.9); margin-left: 5px; text-shadow: 0 1px 4px rgba(0,0,0,0.8);">Nights Selected</span>
+                </div>
             </div>
 
             <div id="tab-1" class="tab-content active"></div>
             <div id="tab-2" class="tab-content"></div>
             <div id="tab-3" class="tab-content"></div>
             
-            <!-- TAB 4: FINALISE BOOKING -->
+            <!-- TAB 4: IMAGE GALLERY -->
             <div id="tab-4" class="tab-content">
+                <div class="content-block">
+                    <h3>Property Gallery</h3>
+                    <div class="lodge-gallery" id="d-gallery"></div>
+                </div>
+            </div>
+            
+            <!-- TAB 5: FINALISE BOOKING -->
+            <div id="tab-5" class="tab-content">
                 <div class="content-block" style="background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
                     <h3>Complete Request</h3>
                     <p class="raw-text" style="margin-bottom: 25px;">Review your selection and finalize your booking details.</p>
@@ -246,16 +424,9 @@
                             </div>
                         </div>
 
-                        <div class="grid-2">
-                            <div class="form-group">
-                                <label class="form-label">Date In</label>
-                                <input type="date" id="b-date-in" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label">Date Out</label>
-                                <input type="date" id="b-date-out" class="form-control" required style="font-family: var(--font-body); color: var(--text-main);">
-                            </div>
-                        </div>
+                        <!-- Hidden Date Fields (Populated by the Custom Calendar) -->
+                        <input type="hidden" id="b-date-in" required>
+                        <input type="hidden" id="b-date-out" required>
 
                         <div class="grid-2">
                             <div class="form-group">
@@ -284,11 +455,13 @@
     <!-- BOOKING BAR -->
     <div id="booking-bar">
         <span id="booking-total">Total: N$ 0.00</span>
-        <button onclick="openBookingTab()" class="back-btn" style="background: var(--brand-gradient); color: #fff; margin-bottom: 0; border: none; padding: 12px 30px;">Finalise Booking</button>
+        <button onclick="openBookingTab()" class="glass-pill-btn" style="background: var(--brand-gradient); color: #fff; margin-bottom: 0; border: none;">
+            Booking <span class="divider" style="color: rgba(255,255,255,0.5);">|</span> Finalise <span class="icon">▷</span>
+        </button>
     </div>
 
     <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
     
     <script data-no-optimize="1">
         const DB = {
@@ -802,9 +975,12 @@
             
             slide.innerHTML = `
                 <div class="swiper-card-content">
-                    <span class="swiper-card-location">${data.location}</span>
                     <h2 class="swiper-card-title">${data.name}</h2>
-                    <span class="swiper-card-btn" onclick="openProperty('${key}')">Select Lodge</span>
+                    <span class="swiper-card-btn" onclick="openProperty('${key}')">
+                        <span style="color: rgba(255,255,255,0.8);">${data.location}</span> 
+                        <span class="divider">|</span> 
+                        Explore <span class="icon">▷</span>
+                    </span>
                 </div>
             `;
             slider.appendChild(slide);
@@ -839,7 +1015,184 @@
             keyboard: true
         });
 
-        function parseTab1(htmlString) {
+        let calendarState = {
+            month: new Date().getMonth(),
+            year: new Date().getFullYear(),
+            rangeStart: null,
+            rangeEnd: null
+        };
+
+        function calculateNights() {
+            let din = '';
+            let dout = '';
+            let nights = 1;
+
+            if (calendarState.rangeStart) {
+                const d1 = new Date(calendarState.rangeStart.getTime() - (calendarState.rangeStart.getTimezoneOffset() * 60000));
+                din = d1.toISOString().split('T')[0];
+            }
+            
+            if (calendarState.rangeStart && calendarState.rangeEnd) {
+                const d2 = new Date(calendarState.rangeEnd.getTime() - (calendarState.rangeEnd.getTimezoneOffset() * 60000));
+                dout = d2.toISOString().split('T')[0];
+                
+                const diffTime = calendarState.rangeEnd - calendarState.rangeStart;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                nights = diffDays > 0 ? diffDays : 1;
+            }
+            
+            document.getElementById('b-date-in').value = din;
+            document.getElementById('b-date-out').value = dout;
+            
+            const nc = document.getElementById('nights-count');
+            if (nc) nc.innerText = nights;
+            
+            updateTotal(); // recalculate everything if dates change
+        }
+
+        function renderCustomCalendar() {
+            const root = document.getElementById('inline-calendar');
+            if (!root) return;
+            root.innerHTML = '';
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayLabels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
+            let m1 = calendarState.month;
+            let y1 = calendarState.year;
+            let m2 = m1 + 1;
+            let y2 = y1;
+            if (m2 > 11) { m2 = 0; y2 = y1 + 1; }
+
+            const nav = document.createElement('div');
+            nav.className = 'dew-calendar-nav';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'dew-calendar-nav-btn';
+            prevBtn.innerHTML = '&lsaquo;';
+            prevBtn.onclick = () => {
+                calendarState.month--;
+                if (calendarState.month < 0) { calendarState.month = 11; calendarState.year--; }
+                renderCustomCalendar();
+            };
+
+            const t1 = document.createElement('span');
+            t1.className = 'dew-calendar-month-title';
+            t1.textContent = `${monthNames[m1]} ${y1}`;
+
+            const t2 = document.createElement('span');
+            t2.className = 'dew-calendar-month-title';
+            t2.textContent = `${monthNames[m2]} ${y2}`;
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'dew-calendar-nav-btn';
+            nextBtn.innerHTML = '&rsaquo;';
+            nextBtn.onclick = () => {
+                calendarState.month++;
+                if (calendarState.month > 11) { calendarState.month = 0; calendarState.year++; }
+                renderCustomCalendar();
+            };
+
+            nav.append(prevBtn, t1, t2, nextBtn);
+            root.appendChild(nav);
+
+            function buildMonth(month, year) {
+                const cal = document.createElement('div');
+                cal.className = 'dew-calendar';
+
+                const header = document.createElement('div');
+                header.className = 'dew-calendar-header';
+                dayLabels.forEach(d => {
+                    const lbl = document.createElement('div');
+                    lbl.className = 'dew-calendar-day-label';
+                    lbl.textContent = d;
+                    header.appendChild(lbl);
+                });
+                cal.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'dew-calendar-grid';
+
+                const firstDay = new Date(year, month, 1).getDay();
+                const startOffset = firstDay; 
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const today = new Date();
+                today.setHours(0,0,0,0);
+
+                for (let i = 0; i < startOffset; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'dew-calendar-day dew-empty';
+                    grid.appendChild(empty);
+                }
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dayEl = document.createElement('div');
+                    dayEl.className = 'dew-calendar-day';
+                    dayEl.textContent = d;
+
+                    const thisDate = new Date(year, month, d);
+
+                    if (thisDate < today) {
+                        dayEl.classList.add('dew-past');
+                    } else {
+                        dayEl.onclick = () => handleDateSelection(thisDate);
+                        
+                        if (thisDate.getTime() === today.getTime()) {
+                            dayEl.classList.add('dew-today');
+                        }
+
+                        if (calendarState.rangeStart && calendarState.rangeEnd) {
+                            if (thisDate.getTime() === calendarState.rangeStart.getTime()) {
+                                dayEl.classList.add('dew-range-start');
+                            } else if (thisDate.getTime() === calendarState.rangeEnd.getTime()) {
+                                dayEl.classList.add('dew-range-end');
+                            } else if (thisDate > calendarState.rangeStart && thisDate < calendarState.rangeEnd) {
+                                dayEl.classList.add('dew-range');
+                            }
+                        } else if (calendarState.rangeStart) {
+                            if (thisDate.getTime() === calendarState.rangeStart.getTime()) {
+                                dayEl.classList.add('dew-range-start');
+                                dayEl.style.borderRadius = '50%';
+                            }
+                        }
+                    }
+                    grid.appendChild(dayEl);
+                }
+                cal.appendChild(grid);
+                return cal;
+            }
+
+            const container = document.createElement('div');
+            container.className = 'dew-calendar-container';
+            container.appendChild(buildMonth(m1, y1));
+            container.appendChild(buildMonth(m2, y2));
+            root.appendChild(container);
+        }
+
+        function handleDateSelection(date) {
+            if ((calendarState.rangeStart && calendarState.rangeEnd) || 
+                (calendarState.rangeStart && calendarState.rangeStart.getTime() === date.getTime())) {
+                calendarState.rangeStart = date;
+                calendarState.rangeEnd = null;
+            } else if (!calendarState.rangeStart) {
+                calendarState.rangeStart = date;
+            } else {
+                if (date < calendarState.rangeStart) {
+                    calendarState.rangeStart = date;
+                } else {
+                    calendarState.rangeEnd = date;
+                }
+            }
+            renderCustomCalendar();
+            calculateNights();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCustomCalendar();
+            calculateNights();
+        });
+
+        function parseTab1(htmlString, isAccommodation = true) {
             const div = document.createElement('div');
             div.innerHTML = htmlString;
             
@@ -870,7 +1223,7 @@
                         newTd.style.textAlign = 'center';
                         
                         if(!isNaN(price)) {
-                            newTd.innerHTML = `<input type="number" min="0" value="0" class="rate-qty" data-name="${name}" data-price="${price}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(200, 90, 23, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">`;
+                            newTd.innerHTML = `<input type="number" min="0" value="0" class="rate-qty" data-name="${name}" data-price="${price}" data-is-accomm="${isAccommodation}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(200, 90, 23, 0.3); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">`;
                         }
                         tr.appendChild(newTd);
                     }
@@ -901,7 +1254,9 @@
             });
 
             // Load Tabs
-            document.getElementById('tab-1').innerHTML = parseTab1(data.tab1);
+            document.getElementById('tab-1').innerHTML = parseTab1(data.tab1, true);
+            if(data.tab2) document.getElementById('tab-2').innerHTML = parseTab1(data.tab2, false);
+            if(data.tab3) document.getElementById('tab-3').innerHTML = data.tab3;
             
             // Prefill Agent Email if exists
             const savedEmail = localStorage.getItem('dt_agent_email');
@@ -926,7 +1281,16 @@
         }
 
         function switchTab(num) {
-            for(let i=1; i<=4; i++) {
+            if(num === 5) {
+                const din = document.getElementById('b-date-in').value;
+                const dout = document.getElementById('b-date-out').value;
+                if (!din || !dout) {
+                    alert("Please select your Date In and Date Out range first.");
+                    return;
+                }
+            }
+
+            for(let i=1; i<=5; i++) {
                 const btn = document.getElementById('tab-btn-'+i);
                 const tab = document.getElementById('tab-'+i);
                 if(btn) btn.classList.remove('active');
@@ -937,7 +1301,12 @@
             if(activeBtn) activeBtn.classList.add('active');
             if(activeTab) activeTab.classList.add('active');
 
-            if(num === 4) {
+            const datesUI = document.getElementById('global-dates-ui');
+            if(datesUI) {
+                datesUI.style.display = (num === 1) ? 'block' : 'none';
+            }
+
+            if(num === 5) {
                 renderBookingSummary();
             }
         }
@@ -948,14 +1317,24 @@
         function updateTotal() {
             selectedItems = [];
             let total = 0;
+            const nc = document.getElementById('nights-count');
+            const nights = nc ? (parseInt(nc.innerText) || 1) : 1;
+
             const inputs = document.querySelectorAll('.rate-qty');
             inputs.forEach(input => {
                 const qty = parseInt(input.value) || 0;
                 if(qty > 0) {
                     const price = parseFloat(input.dataset.price);
                     const name = input.dataset.name;
-                    total += qty * price;
-                    selectedItems.push({ name, qty, price, total: qty * price });
+                    const isAccomm = input.dataset.isAccomm === "true";
+                    
+                    let lineTotal = qty * price;
+                    if(isAccomm) {
+                        lineTotal = lineTotal * nights;
+                    }
+                    
+                    total += lineTotal;
+                    selectedItems.push({ name, qty, price, total: lineTotal, isAccomm });
                 }
             });
             
@@ -969,8 +1348,8 @@
                 bb.style.display = 'none';
             }
 
-            // Live update the summary if tab 4 is open
-            if(document.getElementById('tab-4').classList.contains('active')) {
+            // Live update the summary if tab 5 is open
+            if(document.getElementById('tab-5').classList.contains('active')) {
                 renderBookingSummary();
             }
         }
@@ -1000,9 +1379,9 @@
         }
 
         function openBookingTab() {
-            switchTab(4);
+            switchTab(5);
             setTimeout(() => {
-                const tab = document.getElementById('tab-4');
+                const tab = document.getElementById('tab-5');
                 const offset = tab.getBoundingClientRect().top + window.scrollY - 100;
                 window.scrollTo({ top: offset, behavior: 'smooth' });
             }, 100);
