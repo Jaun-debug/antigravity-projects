@@ -3224,45 +3224,19 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
     letter-spacing: 1px;
 }
 .lux-day-acc-icon {
-    width: 14px;
-    height: 14px;
-    position: relative;
+    font-size: 14px;
+    font-weight: 300;
     color: #1F4F4B;
     transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transform-origin: center;
-    font-size: 0 !important; /* Hides text so we can use pure CSS lines */
+    line-height: 1;
 }
 @media (max-width: 768px) {
     .lux-day-acc-icon {
-        width: 12px;
-        height: 12px;
+        font-size: 12px;
     }
-}
-.lux-day-acc-icon::before,
-.lux-day-acc-icon::after {
-    content: '';
-    position: absolute;
-    background-color: currentColor;
-    border-radius: 2px;
-    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
-}
-.lux-day-acc-icon::before {
-    width: 100%;
-    height: 2px;
-}
-.lux-day-acc-icon::after {
-    height: 100%;
-    width: 2px;
-}
-.lux-day-block.is-open .lux-day-acc-icon {
-    transform: rotate(180deg);
-}
-.lux-day-block.is-open .lux-day-acc-icon::after {
-    transform: scaleY(0);
-    opacity: 0;
 }
 .lux-day-accordion-body {
     display: grid;
