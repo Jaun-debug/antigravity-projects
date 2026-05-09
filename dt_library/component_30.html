@@ -17,6 +17,7 @@
             background-color: #F5F5F3;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
         }
 
         *, *::before, *::after {
@@ -26,7 +27,7 @@
         .lux-container {
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
+            min-height: 100svh;
             margin-bottom: -60px !important; /* Pull up footer to swallow mobile gap */
         }
 
@@ -69,7 +70,7 @@
             .lux-left {
                 display: block; /* Show on desktop */
                 width: 50vw;
-                height: 100vh;
+                height: 100svh;
                 position: sticky;
                 top: 0;
                 overflow: hidden;
@@ -250,64 +251,55 @@
         }
 
         /* ==================================================
-           FILM ROLL LOGIC (Adapted from Solly Levi code)
+           APP-STYLE LODGE CAROUSEL (Light Theme)
         ================================================== */
         .dt-film-section {
             position: relative;
             width: 100%;
-            background: #F5F5F3;
-            padding: 70px 0 0 0;
+            background: transparent;
+            padding: 30px 0 0 0;
             overflow: hidden;
-            font-family: 'Open Sans', sans-serif;
-            border-radius: 8px; /* Slightly contained for right side */
+            font-family: 'Courier New', Courier, monospace;
+            border-radius: 8px;
         }
         
         @media (min-width: 1024px) {
             .dt-film-section {
-                /* Pull out slightly to create a stunning full-bleed effect on right side panel */
                 margin-left: 2.5rem;
                 width: calc(100% - 2.5rem);
-                border-radius: 120px 0 0 20px;
             }
         }
 
         .dt-film-header {
             display: flex;
-            align-items: flex-end;
+            align-items: baseline;
             justify-content: space-between;
-            padding: 0 60px 40px 40px;
+            padding: 0 40px 20px 40px;
         }
         .dt-film-eyebrow {
             display: block;
-            font-size: 10px;
-            /* text-transform: uppercase; */
-            letter-spacing: 5px;
-            color: #d87a4d; /* Desert Tracks Orange */
-            margin-bottom: 12px;
+            font-size: 12px;
+            letter-spacing: 2px;
+            color: #7a7a7a;
+            margin-bottom: 6px;
         }
         .dt-film-title {
             font-family: 'Cinzel', serif !important;
-            font-size: clamp(1.5rem, 2.2vw, 2rem) !important;
-            font-weight: 300 !important;
-            color: #1F4F4B !important;
+            font-size: clamp(20px, 3vw, 26px) !important;
+            font-weight: 400 !important;
+            color: #123631 !important;
             margin: 0 !important;
-            line-height: 1.15 !important;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
         .dt-film-counter {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(2rem, 3.5vw, 3rem);
-            color: rgba(0,0,0,0.15);
-            font-style: italic;
-            line-height: 1;
-            user-select: none;
-            -webkit-user-select: none;
-            white-space: nowrap;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            color: #123631;
+            font-weight: 300;
         }
         .dt-film-counter span {
-            color: rgba(0,0,0,0.4);
-            font-size: 0.55em;
-            font-style: normal;
-            vertical-align: middle;
+            color: #7a7a7a;
         }
         .dt-film-track-wrap {
             overflow-x: auto;
@@ -316,29 +308,44 @@
             cursor: grab;
             -webkit-user-select: none;
             user-select: none;
-            -webkit-tap-highlight-color: transparent;
             scrollbar-width: none;
         }
         .dt-film-track-wrap::-webkit-scrollbar { display: none; }
         .dt-film-track-wrap.dt-dragging { cursor: grabbing; }
         .dt-film-track {
             display: flex;
-            gap: 14px;
+            gap: 20px;
             padding: 0 40px;
             will-change: transform;
         }
+        
         .dt-film-card {
             flex-shrink: 0;
             position: relative;
-            height: 480px;
-            overflow: hidden;
-            border-radius: 10px;
+            height: auto;
+            border-radius: 0;
             scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            width: 260px !important;
         }
-        /* Make images randomly uneven widths for editorial feel */
-        .dt-film-card:nth-child(3n+1) { width: 380px; }
-        .dt-film-card:nth-child(3n+2) { width: 280px; }
-        .dt-film-card:nth-child(3n)   { width: 440px; }
+        
+        @media (min-width: 768px) {
+            .dt-film-card { width: 320px !important; }
+        }
+        
+        /* Inner Image Wrapper */
+        .dt-film-img-wrap {
+            width: 100%;
+            height: 260px;
+            border-radius: 24px !important;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        
+        @media (min-width: 768px) {
+            .dt-film-img-wrap { height: 320px; }
+        }
         
         .dt-film-card img {
             width: 100%;
@@ -347,68 +354,161 @@
             display: block;
             pointer-events: none;
             -webkit-user-drag: none;
-            border-radius: 10px !important;
-            transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
+        
         .dt-film-card:hover img { transform: scale(1.05); }
         
-        .dt-film-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px 40px 40px 40px;
-            margin-top: 50px; /* New desktop spacing from pictures */
-            column-gap: 40px;
-            row-gap: 50px;
+        /* Text appended below image */
+        .dt-film-label {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            color: #123631;
+            margin: 0 0 6px 0;
+            padding-left: 5px;
+            font-weight: 400;
         }
-        .dt-film-progress-wrap {
-            flex: 1; height: 3px;
-            background: rgba(0,0,0,0.1); position: relative;
-            border-radius: 3px;
-            overflow: hidden;
+        .dt-film-sub {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 13px;
+            color: #7a7a7a;
+            padding-left: 5px;
         }
-        .dt-film-progress-bar {
-            height: 100%; background: #d87a4d;
-            width: 0%; transition: width 0.3s ease;
-        }
-        .dt-film-arrows { display: flex; gap: 12px; }
-        .dt-film-arrow {
-            width: 46px; height: 46px;
-            border: 1px solid rgba(0,0,0,0.15);
-            border-radius: 50%; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
-            transition: border-color 0.3s ease, background 0.3s ease;
-            background: transparent;
-        }
-        .dt-film-arrow:hover { border-color: #d87a4d; background: rgba(216,122,77,0.1); }
-        .dt-film-arrow svg {
-            width: 16px; height: 16px; fill: none;
-            stroke: #111; stroke-width: 1.5; transition: stroke 0.3s;
-        }
-        .dt-film-arrow:hover svg { stroke: #d87a4d; }
         
-        @media (max-width: 768px) {
-            .dt-film-section { border-radius: 0; padding-top: 50px; }
-            .dt-film-header { padding: 0 0.85rem 30px 0.85rem; }
-            .dt-film-footer { padding: 20px 0.85rem 40px 0.85rem; flex-wrap: wrap; }
-            .dt-film-progress-wrap { order: 1; min-width: 100%; margin-bottom: 10px; height: 4px; }
-            .dt-film-arrows { order: 2; margin-left: auto; margin-right: auto; }
-            .dt-film-track { padding: 0 0.85rem; }
-            .dt-film-card { 
-                height: 250px; width: 85vw !important; max-width: 360px; margin-right: 20px; flex-shrink: 0; 
-                border-radius: 10px !important; overflow: hidden !important;
-                transform: translateZ(0);
-                -webkit-transform: translateZ(0);
-            }
-            .dt-film-card img { border-radius: 10px !important; }
+        /* Hide the old progress bar footer since we use the scrollbar/swipe */
+        .dt-film-footer {
+            display: none !important;
+        }
+        
+        /* NEW GALLERY STYLES (Porsche Screenshot Match) */
+        .dt-gallery-wrap {
+            padding: 0 40px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        .dt-gallery-main {
+            width: 100%;
+            height: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 0;
+            background: #e9e9e9;
+            border: 6px solid #ffffff;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            z-index: 1;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
+        }
+        .dt-gallery-main img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            transition: opacity 0.4s ease;
+            border-radius: inherit;
+        }
+        .dt-gallery-thumbs {
+            display: flex;
+            justify-content: center;
+            padding: 20px 20px 20px 20px;
+            margin-top: -65px;
+            position: relative;
+            z-index: 2;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        .dt-gallery-thumbs::-webkit-scrollbar { display: none; }
+        
+        /* Centering trick for scrollable flex containers */
+        .dt-gallery-thumbs::before, .dt-gallery-thumbs::after {
+            content: '';
+            margin: auto;
+        }
+
+        .dt-gallery-thumb {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 4px solid #ffffff !important; /* Always white */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            position: relative;
             
-            .lux-acc-card img, .lux-dest-item img { 
-                border-radius: 10px !important; 
-                -webkit-border-radius: 10px !important;
-                clip-path: inset(0px round 10px) !important;
-                -webkit-clip-path: inset(0px round 10px) !important;
-                transform: translateZ(0) !important;
-                -webkit-transform: translateZ(0) !important;
+            /* Stacked tightly by default */
+            margin-left: -45px; 
+        }
+        
+        .dt-gallery-thumb:first-child {
+            margin-left: 0;
+        }
+        
+        /* Default Stacked Alternating Rotation */
+        .dt-gallery-thumb:nth-child(even) { transform: rotate(8deg) translateY(3px); }
+        .dt-gallery-thumb:nth-child(odd) { transform: rotate(-8deg) translateY(-3px); }
+
+        .dt-gallery-thumb.active {
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+            z-index: 10 !important;
+        }
+        
+        /* HOVER: Expanding Stack Effect (Desktop Only) */
+        @media (hover: hover) {
+            /* When the container is hovered, spread them out */
+            .dt-gallery-thumbs:hover .dt-gallery-thumb {
+                margin-left: 8px; /* Spread gap */
+                transform: rotate(0deg) translateY(0) scale(1); /* Straighten */
+            }
+            .dt-gallery-thumbs:hover .dt-gallery-thumb:first-child {
+                margin-left: 0;
+            }
+            
+            /* When spread out, individual items pop on hover */
+            .dt-gallery-thumbs:hover .dt-gallery-thumb:hover {
+                transform: translateY(-10px) scale(1.1);
+                z-index: 20 !important;
+            }
+            
+            /* The active item stays slightly popped when spread */
+            .dt-gallery-thumbs:hover .dt-gallery-thumb.active {
+                transform: translateY(-8px) scale(1.05);
+            }
+        }
+
+        .dt-gallery-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .dt-gallery-wrap { 
+                width: 100% !important;
+                margin-left: 0 !important;
+                padding: 0 !important;
+            }
+            .dt-gallery-main { 
+                height: 320px; 
+                border-radius: 12px !important; 
+                border: 4px solid #ffffff !important; 
+                width: 100% !important;
+            }
+            .dt-gallery-thumbs { margin-top: -40px; padding-left: 20px; }
+            .dt-gallery-thumb { width: 70px; height: 70px; border-radius: 12px; border-width: 3px; margin-left: -20px; }
+            .dt-gallery-thumb:first-child { margin-left: 0; }
+            
+            .dt-film-section { border-radius: 0; padding-top: 20px; }
+            .dt-film-header { padding: 0 20px 20px 20px; }
+            .dt-film-track { padding: 0 20px; }
+            .dt-film-card { 
+                width: 85vw !important; max-width: 400px;
+            }
+            .dt-film-img-wrap {
+                height: auto; aspect-ratio: 1 / 1; max-height: 400px;
             }
         }
     
@@ -992,8 +1092,8 @@
             border-bottom: 1px solid rgba(0,0,0,0.05);
             -webkit-transform: translateY(-100%);
             transform: translateY(-100%);
-            -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            -webkit-transition: -webkit-transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
             will-change: transform;
         }
         @media (max-width: 768px) {
@@ -1126,8 +1226,8 @@
 <!-- MOBILE FLOATING ACTION BUTTON REMOVED (Replaced by Universal Sticky Header) -->
 
 <!-- TOP FULL WIDTH HERO WITHOUT FADING TICK -->
-<div class="lux-top-hero" style="position: relative; width: 100vw; margin-left: calc(-50vw + 50%); margin-top: -30px; height: calc(100vh + 30px); overflow: hidden; background: #0a0a0a; display: flex; align-items: center; justify-content: center;">
-    <div style="background-image: url('https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg'); position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1;"></div>
+<div class="lux-top-hero" style="position: relative; width: 100vw; margin-left: calc(-50vw + 50%); margin-top: -30px; height: calc(100svh + 30px); overflow: hidden; background: #0a0a0a; display: flex; align-items: center; justify-content: center;">
+    <div style="background-image: url('https://wetu.com/imageHandler/c1920x1080/37314/namib-shutterstock-2103238025.jpg?fmt=jpg'); position: absolute; inset: 0; width: 100%; height: 100%; background-size: cover; background-position: center; z-index: 1;"></div>
     <div style="position: absolute; inset: 0; z-index: 2; background: linear-gradient(180deg, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.20) 25%, rgba(0,0,0,0.58) 55%, rgba(0,0,0,0.75) 100%);"></div>
     <div style="position: absolute; inset: 0; z-index: 3; background: radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,0.35) 100%); pointer-events: none;"></div>
     
@@ -1303,7 +1403,7 @@ function initJumpBelt() {
                 targetEl = document.querySelector('#dt-interactive-map-heading');
             } else if (targetId === '#day-by-day') {
                 // The day by day section starts at the "Day-by-Day Itinerary" header or day-01
-                const header = Array.from(document.querySelectorAll('h2')).find(el => el.textContent.includes('Day-by-Day'));
+                const header = Array.from(document.querySelectorAll('h2')).find(el => el.textContent.toLowerCase().includes('day-by-day'));
                 targetEl = header || document.querySelector('#day-01');
             } else if (targetId === '#lodges') {
                 targetEl = document.querySelector('#lodge-selection');
@@ -1315,11 +1415,28 @@ function initJumpBelt() {
                 const headerOffset = 130;
                 const elementPosition = targetEl.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                // Custom Slow Smooth Scroll Function
+                const startY = window.pageYOffset;
+                const distanceY = offsetPosition - startY;
+                let startTime = null;
+                const duration = 1200; // 1.2 seconds, much slower and smoother
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
+                function easeInOutQuad(time, start, distance, duration) {
+                    time /= duration / 2;
+                    if (time < 1) return distance / 2 * time * time + start;
+                    time--;
+                    return -distance / 2 * (time * (time - 2) - 1) + start;
+                }
+
+                function animation(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const timeElapsed = currentTime - startTime;
+                    const run = easeInOutQuad(timeElapsed, startY, distanceY, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) requestAnimationFrame(animation);
+                }
+
+                requestAnimationFrame(animation);
             }
         });
     });
@@ -1376,7 +1493,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                     <a href="#day-03" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-507074842.jpg?fmt=jpg" alt="Luderitz">
                         <h4 class="lux-acc-title">Luderitz</h4>
-                        <p class="lux-acc-desc">Alte Villa is located in Lüderitz, Namibia. Activities including fishing, hiking, and wind...</p>
+                        <p class="lux-acc-desc">Alte Villa is located in Luderitz, Namibia. Activities including fishing, hiking, and wind...</p>
                     </a>
                     <a href="#day-04" class="lux-acc-card">
                         <img src="https://wetu.com/imageHandler/c1920x1080/37314/namib-shutterstock-2103238025.jpg?fmt=jpg" alt="Namib">
@@ -1404,7 +1521,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
                 
                 <style data-no-optimize="1">
-                    .dt-map-container { width: 100%; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+                    .dt-map-container { width: 100%; max-width: 1000px; margin: 0 auto; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.1); transform: translateZ(0); -webkit-transform: translateZ(0); }
                     #dt-safari-map { width: 100%; height: 550px; background: #F5F5F3; z-index: 1; }
                     .dt-map-waypoint { background-color: white; color: #1F4F4B; border-radius: 50%; width: 28px !important; height: 28px !important; display: flex; align-items: center; justify-content: center; font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600; box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid rgba(200, 95, 25, 0.95); transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease; }
                     .dt-map-waypoint:hover { transform: scale(1.15); cursor: pointer; }
@@ -1421,10 +1538,10 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 
                     @media (max-width: 1023px) {
                         .dt-map-container {
-                            width: 100vw !important;
-                            max-width: 100vw !important;
-                            margin-left: calc(-50vw + 50%) !important;
-                            border-radius: 0 !important;
+                            width: 100% !important;
+                            max-width: 100% !important;
+                            margin-left: 0 !important;
+                            border-radius: 16px !important;
                         }
                         .dt-status-banner {
                             flex-direction: column;
@@ -1486,7 +1603,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                                 { id: '', name: 'Windhoek', lodge: 'Arrival', nights: 'START', coords: [-22.5609, 17.0658] },
                                 { id: '1', name: 'Kalahari', lodge: 'Camelthorn Kalahari Lodge', nights: '2 NIGHTS', coords: [-24.2831, 17.9333] },
                                 { id: '2', name: 'Fish River Canyon', lodge: 'Canyon Roadhouse', nights: '2 NIGHTS', coords: [-27.5333, 17.7000] },
-                                { id: '3', name: 'Lüderitz', lodge: 'Alte Villa', nights: '2 NIGHTS', coords: [-26.6472, 16.1583] },
+                                { id: '3', name: 'Luderitz', lodge: 'Alte Villa', nights: '2 NIGHTS', coords: [-26.6472, 16.1583] },
                                 { id: '4', name: 'Namib', lodge: 'At Kronenhof Lodge', nights: '1 NIGHT', coords: [-25.4333, 16.4833] },
                                 { id: '5', name: 'Sossusvlei', lodge: 'Desert Homestead Lodge', nights: '2 NIGHTS', coords: [-24.7167, 15.9000] },
                                 { id: '6', name: 'Windhoek (Return)', lodge: 'Windhoek Luxury Suites', nights: '1 NIGHT', coords: [-22.5609, 17.0658] }
@@ -1616,7 +1733,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                     <span class="lux-day-numeral">01</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">Kalahari Desert — Intu Afrika Kalahari Game Reserve</span>
+                <span class="lux-day-location">Kalahari Desert - Intu Afrika Kalahari Game Reserve</span>
                 <h2 class="lux-day-title">Day 1 - 3</h2>
                 <p class="lux-day-desc">Your Namibia self-drive safari begins as you arrive and head into the iconic Kalahari Desert, where rolling red dunes and open savannah landscapes set the tone for your journey. Settle into your lodge and ease into the rhythm of the desert.<br><br>Over the next two days, explore this vast reserve known for meerkats, oryx, springbok, and giraffe, while enjoying optional guided Bushman walks, quad biking, and nature drives. Evenings are best spent under endless African skies, with classic sundowners and stargazing experiences.</p>
             </div>
@@ -1672,7 +1789,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 </div>
                 <span class="lux-day-location">Fish River Canyon</span>
                 <h2 class="lux-day-title">Day 3 - 5</h2>
-                <p class="lux-day-desc">Travel south to one of Namibia’s most dramatic natural landmarks, the Fish River Canyon, the second-largest canyon in the world. The drive itself showcases remote desert scenery and wide open landscapes.<br><br>Spend your time exploring scenic viewpoints such as Hobas, taking in panoramic canyon views, or relaxing at the nearby Ai-Ais hot springs. For active travellers, optional hiking trails, scenic flights, and nature drives offer deeper exploration of this rugged region.</p>
+                <p class="lux-day-desc">Travel south to one of Namibia's most dramatic natural landmarks, the Fish River Canyon, the second-largest canyon in the world. The drive itself showcases remote desert scenery and wide open landscapes.<br><br>Spend your time exploring scenic viewpoints such as Hobas, taking in panoramic canyon views, or relaxing at the nearby Ai-Ais hot springs. For active travellers, optional hiking trails, scenic flights, and nature drives offer deeper exploration of this rugged region.</p>
             </div>
             
             <div class="dt-film-section">
@@ -1718,15 +1835,15 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         </div>
 
         <!-- DAY 03 -->
-        <div class="lux-day-block" id="day-03" data-bg="https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-507074842.jpg?fmt=jpg" data-region="Lüderitz">
+        <div class="lux-day-block" id="day-03" data-bg="https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-507074842.jpg?fmt=jpg" data-region="Luderitz">
             <div class="lux-day-block-header">
                 <div class="lux-day-number-row">
                     <span class="lux-day-numeral">03</span>
                     <div class="lux-day-line"></div>
                 </div>
-                <span class="lux-day-location">Lüderitz & Kolmanskop</span>
+                <span class="lux-day-location">Luderitz & Kolmanskop</span>
                 <h2 class="lux-day-title">Day 5 - 7</h2>
-                <p class="lux-day-desc">Continue to the coastal town of Lüderitz, where German colonial charm meets the wild Atlantic coastline. The colourful buildings, Art Nouveau architecture, and ocean views create a unique atmosphere unlike anywhere else in Namibia.<br><br>A highlight here is visiting Kolmanskop Ghost Town, where abandoned buildings are slowly being reclaimed by desert sand—perfect for photography and history lovers. Along the coast, spot flamingos, seals, and penguins, or simply enjoy the quiet coastal setting.</p>
+                <p class="lux-day-desc">Continue to the coastal town of Luderitz, where German colonial charm meets the wild Atlantic coastline. The colourful buildings, Art Nouveau architecture, and ocean views create a unique atmosphere unlike anywhere else in Namibia.<br><br>A highlight here is visiting Kolmanskop Ghost Town, where abandoned buildings are slowly being reclaimed by desert sand - perfect for photography and history lovers. Along the coast, spot flamingos, seals, and penguins, or simply enjoy the quiet coastal setting.</p>
             </div>
             
             <div class="dt-film-section">
@@ -1834,7 +1951,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 </div>
                 <span class="lux-day-location">Sossusvlei & Namib-Naukluft Park</span>
                 <h2 class="lux-day-title">Day 8 - 10</h2>
-                <p class="lux-day-desc">Arrive in the world-famous Sossusvlei, home to Namibia’s iconic red dunes and one of the country’s top safari highlights. Early mornings are ideal for visiting Deadvlei, climbing Big Daddy dune, and capturing the dramatic desert light.<br><br>This region is rich in desert-adapted wildlife and offers optional activities such as hot air balloon safaris, scenic flights, and guided excursions. The combination of towering dunes, white clay pans, and endless desert views creates a truly unforgettable experience.</p>
+                <p class="lux-day-desc">Arrive in the world-famous Sossusvlei, home to Namibia's iconic red dunes and one of the country's top safari highlights. Early mornings are ideal for visiting Deadvlei, climbing Big Daddy dune, and capturing the dramatic desert light.<br><br>This region is rich in desert-adapted wildlife and offers optional activities such as hot air balloon safaris, scenic flights, and guided excursions. The combination of towering dunes, white clay pans, and endless desert views creates a truly unforgettable experience.</p>
             </div>
             
             <div class="dt-film-section">
@@ -1888,7 +2005,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 </div>
                 <span class="lux-day-location">Windhoek</span>
                 <h2 class="lux-day-title">Day 10 - 11</h2>
-                <p class="lux-day-desc">Return to Windhoek, Namibia’s capital city, for your final evening. After days in remote wilderness, enjoy the comfort of the city with its mix of modern amenities, German-influenced culture, and excellent restaurants.<br><br>This is the perfect time to unwind, reflect on your journey, and enjoy a final dinner—recommended at well-known spots like Stellenbosch Wine Bar or Butcher’s Block.</p>
+                <p class="lux-day-desc">Return to Windhoek, Namibia's capital city, for your final evening. After days in remote wilderness, enjoy the comfort of the city with its mix of modern amenities, German-influenced culture, and excellent restaurants.<br><br>This is the perfect time to unwind, reflect on your journey, and enjoy a final dinner - recommended at well-known spots like Stellenbosch Wine Bar or Butcher's Block.</p>
             </div>
             
             <div class="dt-film-section">
@@ -1942,7 +2059,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 </div>
                 <span class="lux-day-location">Departure</span>
                 <h2 class="lux-day-title">Day 11</h2>
-                <p class="lux-day-desc">After breakfast, your Namibia self-drive safari comes to an end as you make your way to Hosea Kutako International Airport for your onward journey, taking with you unforgettable memories of Namibia’s deserts, coastlines, and vast open landscapes.</p>
+                <p class="lux-day-desc">After breakfast, your Namibia self-drive safari comes to an end as you make your way to Hosea Kutako International Airport for your onward journey, taking with you unforgettable memories of Namibia's deserts, coastlines, and vast open landscapes.</p>
             </div>
         </div>
 
@@ -1983,7 +2100,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             position: relative;
             width: 100vw;
             margin-left: calc(-50vw + 50%);
-            height: 100vh;
+            height: 100svh;
             min-height: 600px;
             overflow: hidden;
             display: flex;
@@ -2104,7 +2221,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
             <div class="dt-cin-content">
                 <span class="dt-cin-eyebrow" id="dtCinEyebrow">Start Your Journey</span>
                 <h2 class="dt-cin-title" id="dtCinTitle">Enquire About This Safari</h2>
-                <p class="dt-cin-desc" id="dtCinDesc">Our team will tailor this journey to your travel dates, preferences, and pace — ensuring a seamless and unforgettable Namibian experience.</p>
+                <p class="dt-cin-desc" id="dtCinDesc">Our team will tailor this journey to your travel dates, preferences, and pace - ensuring a seamless and unforgettable Namibian experience.</p>
                 <a href="#enquire" class="dt-cin-cta dt-specific-enquiry-open" id="dtCinCta">Start Planning My Safari</a>
             </div>
         </section>
@@ -2215,370 +2332,381 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         <!-- ============================================== -->
         <!-- MORE SAFARIS 3D COVERFLOW -->
         <!-- ============================================== -->
-        <!-- Swiper CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" data-no-optimize="1" />
-        
-        <style data-no-optimize="1">
-            /* Base Container Styling */
-            .dt-coverflow-wrapper {
-                position: relative;
-                width: 100vw !important;
-                margin-left: calc(-50vw + 50%) !important;
-                background: #F5F5F3; /* Luxury Ivory Background */
-                padding: 100px 0 40px 0; /* Reduced bottom padding */
-                margin-bottom: 0 !important; /* Reset since Lion CTA is now below it */
-                overflow: hidden;
-                font-family: 'Open Sans', sans-serif;
-                border-top: 1px solid rgba(0, 0, 0, 0.05);
-            }
+                <!-- Swiper CSS -->
+                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+                    data-no-optimize="1" />
 
-            .dt-coverflow-header {
-                text-align: center;
-                margin-bottom: 60px;
-                padding: 0 20px;
-            }
-
-            .dt-coverflow-eyebrow {
-                display: block;
-                font-size: 11px;
-                letter-spacing: 4px;
-                color: #8b7a66; /* Muted brown */
-                text-transform: uppercase;
-                margin-bottom: 15px;
-                font-weight: 500;
-            }
-
-            .dt-coverflow-title {
-                font-family: 'Cinzel', serif;
-                font-size: clamp(32px, 5vw, 48px);
-                color: #123631; /* Deep Typography Green */
-                font-weight: 400;
-                margin: 0 0 20px 0;
-                letter-spacing: 1px;
-            }
-
-            /* Swiper Container */
-            .swiper.dt-safari-swiper {
-                width: 100%;
-                padding-top: 20px;
-                padding-bottom: 60px;
-            }
-
-            .swiper-slide.dt-coverflow-slide {
-                background-position: center;
-                background-size: cover;
-                width: 320px;
-                height: 460px;
-                border-radius: 16px;
-                overflow: hidden;
-                box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
-                position: relative;
-                text-decoration: none;
-                display: block;
-                /* Webkit fix for clipping */
-                -webkit-mask-image: -webkit-radial-gradient(white, black);
-            }
-
-            /* Desktop specific slide size */
-            @media (min-width: 768px) {
-                .swiper-slide.dt-coverflow-slide {
-                    width: 380px;
-                    height: 520px;
-                }
-            }
-
-            .dt-coverflow-slide img {
-                display: block;
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-            }
-
-            .dt-coverflow-slide:hover img {
-                transform: scale(1.05);
-            }
-
-            /* Gradient Overlay for Text */
-            .dt-slide-gradient {
-                position: absolute;
-                inset: auto 0 0 0;
-                height: 60%;
-                background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-                z-index: 1;
-                pointer-events: none;
-            }
-
-            /* Slide Content Text */
-            .dt-slide-content {
-                position: absolute;
-                bottom: 30px;
-                left: 30px;
-                right: 30px;
-                z-index: 2;
-                text-align: left;
-                transition: transform 0.4s ease;
-            }
-
-            .dt-slide-days {
-                display: inline-block;
-                font-size: 10px;
-                font-weight: 600;
-                letter-spacing: 2px;
-                color: #ffffff;
-                text-transform: uppercase;
-                margin-bottom: 10px;
-                border: 1px solid rgba(255, 255, 255, 0.4);
-                padding: 4px 10px;
-                border-radius: 40px;
-                backdrop-filter: blur(4px);
-            }
-
-            .dt-slide-title {
-                font-family: 'Cinzel', serif;
-                font-size: 24px;
-                color: #ffffff;
-                margin: 0;
-                font-weight: 300;
-                line-height: 1.2;
-            }
-
-            /* Slide Active State Enhancements */
-            .swiper-slide-active .dt-slide-content {
-                transform: translateY(-10px);
-            }
-
-            /* Navigation Arrows & Pagination */
-            .dt-coverflow-controls {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 30px;
-                margin-top: 20px;
-                position: relative;
-                z-index: 10;
-            }
-
-            .dt-prev-btn, .dt-next-btn {
-                width: 48px;
-                height: 48px;
-                border-radius: 50%;
-                background: rgba(18,54,49,0.05);
-                border: 1px solid rgba(18,54,49,0.1);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            }
-
-            .dt-prev-btn:hover, .dt-next-btn:hover {
-                background: rgba(200, 95, 25, 0.15);
-                border-color: rgba(200, 95, 25, 0.95);
-            }
-
-            .dt-prev-btn svg, .dt-next-btn svg {
-                width: 18px;
-                height: 18px;
-                stroke: #123631;
-                fill: none;
-                stroke-width: 1.5;
-                transition: stroke 0.3s ease;
-            }
-
-            .dt-prev-btn:hover svg, .dt-next-btn:hover svg {
-                stroke: rgba(200, 95, 25, 0.95);
-            }
-
-            /* Pagination Dots */
-            .swiper-pagination.dt-swiper-pagination {
-                position: static !important;
-                width: auto !important;
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                margin: 0 10px;
-            }
-
-            .swiper-pagination-bullet {
-                width: 6px;
-                height: 6px;
-                border-radius: 50%;
-                background: rgba(18,54,49,0.2);
-                opacity: 1;
-                transition: all 0.3s ease;
-                margin: 0 !important;
-            }
-
-            .swiper-pagination-bullet-active {
-                background: rgba(200, 95, 25, 0.95);
-                width: 24px;
-                border-radius: 4px;
-            }
-            
-        </style>
-
-        <div class="dt-coverflow-wrapper">
-            <div class="dt-coverflow-header">
-                <span class="dt-coverflow-eyebrow">Continue Exploring</span>
-                <h2 class="dt-coverflow-title">More Extraordinary Journeys</h2>
-            </div>
-
-            <!-- Swiper Container -->
-            <div class="swiper dt-safari-swiper" data-no-optimize="1">
-                <div class="swiper-wrapper">
-                    
-                    <!-- Slide 1 -->
-                    <a href="https://wetu.com/ItineraryOutputs/Discovery/ec95e889-23fe-4ac2-8023-f2cb885d59c7" target="_blank" class="swiper-slide dt-coverflow-slide">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sollylevisossusvlei-9-3-2-1-4-2-1.jpeg" alt="Best of Namibia" loading="lazy">
-                        <div class="dt-slide-gradient"></div>
-                        <div class="dt-slide-content">
-                            <span class="dt-slide-days">14 Days</span>
-                            <h3 class="dt-slide-title">Best of Namibia</h3>
-                        </div>
-                    </a>
-
-                    <!-- Slide 2 -->
-                    <a href="https://wetu.com/ItineraryOutputs/Discovery/0eb69854-4074-4e8c-ad3a-24d86d356ac3" target="_blank" class="swiper-slide dt-coverflow-slide">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="Namibia, Chobe & Vic Falls" loading="lazy">
-                        <div class="dt-slide-gradient"></div>
-                        <div class="dt-slide-content">
-                            <span class="dt-slide-days">17 Days</span>
-                            <h3 class="dt-slide-title">Namibia, Chobe & Vic Falls</h3>
-                        </div>
-                    </a>
-
-                    <!-- Slide 3 -->
-                    <a href="https://wetu.com/ItineraryOutputs/Discovery/fed30fb1-7ce5-4fc8-b519-b5f2d903af33" target="_blank" class="swiper-slide dt-coverflow-slide">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg" alt="Namibia Wildlife" loading="lazy">
-                        <div class="dt-slide-gradient"></div>
-                        <div class="dt-slide-content">
-                            <span class="dt-slide-days">11 Days</span>
-                            <h3 class="dt-slide-title">Namibia Wildlife</h3>
-                        </div>
-                    </a>
-
-                    <!-- Slide 4 -->
-                    <a href="https://wetu.com/ItineraryOutputs/Discovery/2301846c-353e-4c4b-b373-5ad746b0a1e4" target="_blank" class="swiper-slide dt-coverflow-slide">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg" alt="Hidden Treasures" loading="lazy">
-                        <div class="dt-slide-gradient"></div>
-                        <div class="dt-slide-content">
-                            <span class="dt-slide-days">18 Days</span>
-                            <h3 class="dt-slide-title">Hidden Treasures</h3>
-                        </div>
-                    </a>
-
-                    <!-- Slide 5 -->
-                    <a href="https://desert-tracks.com/namibia-self-drive-safaris/11-day-south-of-namibia-self-drive-safari/" target="_blank" class="swiper-slide dt-coverflow-slide">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg" alt="South of Namibia" loading="lazy">
-                        <div class="dt-slide-gradient"></div>
-                        <div class="dt-slide-content">
-                            <span class="dt-slide-days">11 Days</span>
-                            <h3 class="dt-slide-title">South of Namibia</h3>
-                        </div>
-                    </a>
-
-                    <!-- Slide 6 -->
-                    <a href="https://wetu.com/ItineraryOutputs/Discovery/271fef76-6606-4ae3-a9ae-d0c4e4b61437" target="_blank" class="swiper-slide dt-coverflow-slide">
-                        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg" alt="Namibia, Delta, Chobe & Vic Falls" loading="lazy">
-                        <div class="dt-slide-gradient"></div>
-                        <div class="dt-slide-content">
-                            <span class="dt-slide-days">18 Days</span>
-                            <h3 class="dt-slide-title">Namibia, Delta & Chobe</h3>
-                        </div>
-                    </a>
-
-                </div>
-            </div>
-            
-            <!-- Custom Controls Below Cards -->
-            <div class="dt-coverflow-controls">
-                <div class="dt-prev-btn">
-                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-                </div>
-                <div class="swiper-pagination dt-swiper-pagination"></div>
-                <div class="dt-next-btn">
-                    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                </div>
-            </div>
-        </div>
-
-        <!-- Swiper JS CDN -->
-        <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
-
-        <!-- Initialize Component -->
-        <script data-no-optimize="1">
-            function initSafariCoverflow() {
-                if (typeof Swiper === 'undefined') {
-                    setTimeout(initSafariCoverflow, 100);
-                    return;
-                }
-                
-                var safariSwiper = new Swiper('.dt-safari-swiper', {
-                    effect: 'coverflow',
-                    grabCursor: true,
-                    centeredSlides: true,
-                    loop: true,
-                    speed: 800,
-                    slidesPerView: 'auto',
-                    slideToClickedSlide: true,
-                    coverflowEffect: {
-                        rotate: 15,          // Slide rotate in degrees
-                        stretch: 0,          // Stretch space between slides (in px)
-                        depth: 250,          // Depth offset in px (shadow perspective)
-                        modifier: 1.5,       // Effect multiplier
-                        slideShadows: true,  // Enable slide shadows
-                    },
-                    autoplay: {
-                        delay: 4000,
-                        disableOnInteraction: false,
-                    },
-                    navigation: {
-                        nextEl: '.dt-next-btn',
-                        prevEl: '.dt-prev-btn',
-                    },
-                    pagination: {
-                        el: '.dt-swiper-pagination',
-                        clickable: true,
-                    },
-                    keyboard: {
-                        enabled: true,
-                    },
-                    mousewheel: {
-                        forceToAxis: true,
-                        releaseOnEdges: true,
+                <style data-no-optimize="1">
+                    /* Base Container Styling */
+                    .dt-coverflow-wrapper {
+                        position: relative;
+                        width: 100vw !important;
+                        margin-left: calc(-50vw + 50%) !important;
+                        background: #F5F5F3;
+                        /* Luxury Ivory Background */
+                        padding: 100px 0 40px 0;
+                        /* Reduced bottom padding */
+                        margin-bottom: 0 !important;
+                        /* Reset since Lion CTA is now below it */
+                        overflow: hidden;
+                        font-family: 'Open Sans', sans-serif;
+                        border-top: 1px solid rgba(0, 0, 0, 0.05);
                     }
-                });
-                
-                // Pause Autoplay on Hover
-                var swiperContainer = document.querySelector('.dt-safari-swiper');
-                if(swiperContainer) {
-                    swiperContainer.addEventListener('mouseenter', function() {
-                        safariSwiper.autoplay.stop();
-                    });
-                    swiperContainer.addEventListener('mouseleave', function() {
-                        safariSwiper.autoplay.start();
-                    });
-                }
-                
-                // Prevent clicks opening URL if the slide is not active in the center
-                var slides = document.querySelectorAll('.dt-coverflow-slide');
-                slides.forEach(function(slide) {
-                    slide.addEventListener('click', function(e) {
-                        if (!slide.classList.contains('swiper-slide-active')) {
-                            e.preventDefault();
-                        }
-                    });
-                });
-            }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener("DOMContentLoaded", initSafariCoverflow);
-            } else {
-                initSafariCoverflow();
-            }
-        </script>
+                    .dt-coverflow-header {
+                        text-align: center;
+                        margin-bottom: 60px;
+                        padding: 0 20px;
+                    }
+
+                    .dt-coverflow-eyebrow {
+                        display: block;
+                        font-size: 11px;
+                        letter-spacing: 4px;
+                        color: #8b7a66;
+                        /* Muted brown */
+                        text-transform: uppercase;
+                        margin-bottom: 15px;
+                        font-weight: 500;
+                    }
+
+                    .dt-coverflow-title {
+                        font-family: 'Cinzel', serif;
+                        font-size: clamp(32px, 5vw, 48px);
+                        color: #123631;
+                        /* Deep Typography Green */
+                        font-weight: 400;
+                        margin: 0 0 20px 0;
+                        letter-spacing: 1px;
+                    }
+
+                    /* Swiper Container */
+                    .swiper.dt-safari-swiper {
+                        width: 100%;
+                        padding-top: 20px;
+                        padding-bottom: 60px;
+                    }
+
+                    .swiper-slide.dt-coverflow-slide {
+                        background-position: center;
+                        background-size: cover;
+                        width: 320px;
+                        height: 460px;
+                        border-radius: 16px;
+                        overflow: hidden;
+                        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+                        position: relative;
+                        text-decoration: none;
+                        display: block;
+                        /* Webkit fix for clipping */
+                        -webkit-mask-image: -webkit-radial-gradient(white, black);
+                    }
+
+                    /* Desktop specific slide size */
+                    @media (min-width: 768px) {
+                        .swiper-slide.dt-coverflow-slide {
+                            width: 380px;
+                            height: 520px;
+                        }
+                    }
+
+                    .dt-coverflow-slide img {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+                    }
+
+                    .dt-coverflow-slide:hover img {
+                        transform: scale(1.05);
+                    }
+
+                    /* Gradient Overlay for Text */
+                    .dt-slide-gradient {
+                        position: absolute;
+                        inset: auto 0 0 0;
+                        height: 60%;
+                        background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
+                        z-index: 1;
+                        pointer-events: none;
+                    }
+
+                    /* Slide Content Text */
+                    .dt-slide-content {
+                        position: absolute;
+                        bottom: 30px;
+                        left: 30px;
+                        right: 30px;
+                        z-index: 2;
+                        text-align: left;
+                        transition: transform 0.4s ease;
+                    }
+
+                    .dt-slide-days {
+                        display: inline-block;
+                        font-size: 10px;
+                        font-weight: 600;
+                        letter-spacing: 2px;
+                        color: #ffffff;
+                        text-transform: uppercase;
+                        margin-bottom: 10px;
+                        border: 1px solid rgba(255, 255, 255, 0.4);
+                        padding: 4px 10px;
+                        border-radius: 40px;
+                        backdrop-filter: blur(4px);
+                    }
+
+                    .dt-slide-title {
+                        font-family: 'Cinzel', serif;
+                        font-size: 24px;
+                        color: #ffffff;
+                        margin: 0;
+                        font-weight: 300;
+                        line-height: 1.2;
+                    }
+
+                    /* Slide Active State Enhancements */
+                    .swiper-slide-active .dt-slide-content {
+                        transform: translateY(-10px);
+                    }
+
+                    /* Navigation Arrows & Pagination */
+                    .dt-coverflow-controls {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 30px;
+                        margin-top: 20px;
+                        position: relative;
+                        z-index: 10;
+                    }
+
+                    .dt-prev-btn,
+                    .dt-next-btn {
+                        width: 48px;
+                        height: 48px;
+                        border-radius: 50%;
+                        background: rgba(18, 54, 49, 0.05);
+                        border: 1px solid rgba(18, 54, 49, 0.1);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+                    }
+
+                    .dt-prev-btn:hover,
+                    .dt-next-btn:hover {
+                        background: rgba(200, 95, 25, 0.15);
+                        border-color: rgba(200, 95, 25, 0.95);
+                    }
+
+                    .dt-prev-btn svg,
+                    .dt-next-btn svg {
+                        width: 18px;
+                        height: 18px;
+                        stroke: #123631;
+                        fill: none;
+                        stroke-width: 1.5;
+                        transition: stroke 0.3s ease;
+                    }
+
+                    .dt-prev-btn:hover svg,
+                    .dt-next-btn:hover svg {
+                        stroke: rgba(200, 95, 25, 0.95);
+                    }
+
+                    /* Pagination Dots */
+                    .swiper-pagination.dt-swiper-pagination {
+                        position: static !important;
+                        width: auto !important;
+                        display: flex;
+                        align-items: center;
+                        gap: 8px;
+                        margin: 0 10px;
+                    }
+
+                    .swiper-pagination-bullet {
+                        width: 6px;
+                        height: 6px;
+                        border-radius: 50%;
+                        background: rgba(18, 54, 49, 0.2);
+                        opacity: 1;
+                        transition: all 0.3s ease;
+                        margin: 0 !important;
+                    }
+
+                    .swiper-pagination-bullet-active {
+                        background: rgba(200, 95, 25, 0.95);
+                        width: 24px;
+                        border-radius: 4px;
+                    }
+                </style>
+
+                <div class="dt-coverflow-wrapper">
+                    <div class="dt-coverflow-header">
+                        <span class="dt-coverflow-eyebrow">Continue Exploring</span>
+                        <h2 class="dt-coverflow-title">More Extraordinary Journeys</h2>
+                    </div>
+
+                    <!-- Swiper Container -->
+                    <div class="swiper dt-safari-swiper" data-no-optimize="1">
+                        <div class="swiper-wrapper">
+
+                            <!-- Slide 1 -->
+                            <a href="https://wetu.com/ItineraryOutputs/Discovery/ec95e889-23fe-4ac2-8023-f2cb885d59c7"
+                                target="_blank" class="swiper-slide dt-coverflow-slide">
+                                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sollylevisossusvlei-9-3-2-1-4-2-1.jpeg"
+                                    alt="Best of Namibia" loading="lazy">
+                                <div class="dt-slide-gradient"></div>
+                                <div class="dt-slide-content">
+                                    <span class="dt-slide-days">14 Days</span>
+                                    <h3 class="dt-slide-title">Best of Namibia</h3>
+                                </div>
+                            </a>
+
+                            <!-- Slide 2 -->
+                            <a href="https://wetu.com/ItineraryOutputs/Discovery/0eb69854-4074-4e8c-ad3a-24d86d356ac3"
+                                target="_blank" class="swiper-slide dt-coverflow-slide">
+                                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg"
+                                    alt="Namibia, Chobe & Vic Falls" loading="lazy">
+                                <div class="dt-slide-gradient"></div>
+                                <div class="dt-slide-content">
+                                    <span class="dt-slide-days">17 Days</span>
+                                    <h3 class="dt-slide-title">Namibia, Chobe & Vic Falls</h3>
+                                </div>
+                            </a>
+
+                            <!-- Slide 3 -->
+                            <a href="https://wetu.com/ItineraryOutputs/Discovery/fed30fb1-7ce5-4fc8-b519-b5f2d903af33"
+                                target="_blank" class="swiper-slide dt-coverflow-slide">
+                                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/lion-etosha-solly-e1759761980869-1228x1536-3-1-4-2-1.jpeg"
+                                    alt="Namibia Wildlife" loading="lazy">
+                                <div class="dt-slide-gradient"></div>
+                                <div class="dt-slide-content">
+                                    <span class="dt-slide-days">11 Days</span>
+                                    <h3 class="dt-slide-title">Namibia Wildlife</h3>
+                                </div>
+                            </a>
+
+                            <!-- Slide 4 -->
+                            <a href="https://wetu.com/ItineraryOutputs/Discovery/2301846c-353e-4c4b-b373-5ad746b0a1e4"
+                                target="_blank" class="swiper-slide dt-coverflow-slide">
+                                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/dusty_road_solly_large.jpeg"
+                                    alt="Hidden Treasures" loading="lazy">
+                                <div class="dt-slide-gradient"></div>
+                                <div class="dt-slide-content">
+                                    <span class="dt-slide-days">18 Days</span>
+                                    <h3 class="dt-slide-title">Hidden Treasures</h3>
+                                </div>
+                            </a>
+
+                            <!-- Slide 5 -->
+                            <a href="https://desert-tracks.com/namibia-self-drive-safaris/11-day-south-of-namibia-self-drive-safari/"
+                                target="_blank" class="swiper-slide dt-coverflow-slide">
+                                <img src="https://desert-tracks.com/wp-content/uploads/2025/12/sandwich-harbour-dune-solly-large-e1759761508838-4-2-1-4-2-1.jpeg"
+                                    alt="South of Namibia" loading="lazy">
+                                <div class="dt-slide-gradient"></div>
+                                <div class="dt-slide-content">
+                                    <span class="dt-slide-days">11 Days</span>
+                                    <h3 class="dt-slide-title">South of Namibia</h3>
+                                </div>
+                            </a>
+
+                            <!-- Slide 6 -->
+                            <a href="https://wetu.com/ItineraryOutputs/Discovery/271fef76-6606-4ae3-a9ae-d0c4e4b61437"
+                                target="_blank" class="swiper-slide dt-coverflow-slide">
+                                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg"
+                                    alt="Namibia, Delta, Chobe & Vic Falls" loading="lazy">
+                                <div class="dt-slide-gradient"></div>
+                                <div class="dt-slide-content">
+                                    <span class="dt-slide-days">18 Days</span>
+                                    <h3 class="dt-slide-title">Namibia, Delta & Chobe</h3>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <!-- Custom Controls Below Cards -->
+                    <div class="dt-coverflow-controls">
+                        <div class="dt-prev-btn">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </div>
+                        <div class="swiper-pagination dt-swiper-pagination"></div>
+                        <div class="dt-next-btn">
+                            <svg viewBox="0 0 24 24">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Swiper JS CDN -->
+                <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
+
+                <!-- Initialize Component -->
+                <script data-no-optimize="1">
+                    function initSafariCoverflow() {
+                        if (typeof Swiper === 'undefined') {
+                            setTimeout(initSafariCoverflow, 100);
+                            return;
+                        }
+
+                        var safariSwiper = new Swiper('.dt-safari-swiper', {
+                            effect: 'coverflow',
+                            grabCursor: true,
+                            centeredSlides: true,
+                            loop: true,
+                            speed: 800,
+                            slidesPerView: 'auto',
+                            slideToClickedSlide: true,
+                            coverflowEffect: {
+                                rotate: 15,          // Slide rotate in degrees
+                                stretch: 0,          // Stretch space between slides (in px)
+                                depth: 250,          // Depth offset in px (shadow perspective)
+                                modifier: 1.5,       // Effect multiplier
+                                slideShadows: true,  // Enable slide shadows
+                            },
+                            autoplay: false,
+                            navigation: {
+                                nextEl: '.dt-next-btn',
+                                prevEl: '.dt-prev-btn',
+                            },
+                            pagination: {
+                                el: '.dt-swiper-pagination',
+                                clickable: true,
+                            },
+                            keyboard: {
+                                enabled: true,
+                            },
+                            mousewheel: {
+                                forceToAxis: true,
+                                releaseOnEdges: true,
+                            }
+                        });
+
+                        // Prevent clicks opening URL if the slide is not active in the center
+                        var slides = document.querySelectorAll('.dt-coverflow-slide');
+                        slides.forEach(function (slide) {
+                            slide.addEventListener('click', function (e) {
+                                if (!slide.classList.contains('swiper-slide-active')) {
+                                    e.preventDefault();
+                                }
+                            });
+                        });
+                    }
+
+                    if (document.readyState === 'loading') {
+                        document.addEventListener("DOMContentLoaded", initSafariCoverflow);
+                    } else {
+                        initSafariCoverflow();
+                    }
+                </script>
         <!-- ============================================== -->
         
         <!-- ============================================== -->
@@ -2795,6 +2923,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         
         if (!dayBlocks.length || !bgBase || !bgTop) return;
 
+        let heroFadeTimeout = null;
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2825,7 +2954,8 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                         bgTop.style.backgroundImage = `url("${bgUrl}")`;
                         bgTop.style.opacity = 1;
                         
-                        setTimeout(() => {
+                        if (heroFadeTimeout) clearTimeout(heroFadeTimeout);
+                        heroFadeTimeout = setTimeout(() => {
                             bgBase.style.backgroundImage = `url("${bgUrl}")`;
                             bgTop.style.opacity = 0;
                         }, 850);
@@ -2908,132 +3038,136 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
         // Using a short timeout to ensure DOM is ready
         setTimeout(function(){
     var carousels = document.querySelectorAll(".dt-film-section");
-    carousels.forEach(function(section) {
+    carousels.forEach(function(section, index) {
         if (section.dataset.init === "true") return;
         section.dataset.init = "true";
         
         var wrap = section.querySelector(".dt-film-track-wrap");
         var track = section.querySelector(".dt-film-track");
         var counter = section.querySelector(".dt-film-counter");
-        var progress = section.querySelector(".dt-film-progress-bar");
-        var prevBtn = section.querySelector(".dt-film-prev-btn");
-        var nextBtn = section.querySelector(".dt-film-next-btn");
         
         if(!wrap || !track) return;
         
         var cards = Array.from(track.querySelectorAll(".dt-film-card"));
-        var total = cards.length;
-        var activeIndex = 0;
         
-        function updateUI(){
-            var maxScroll = track.scrollWidth - wrap.offsetWidth;
-            if (maxScroll <= 0) return;
-            var pct = (wrap.scrollLeft / maxScroll) * 100;
-            if (progress) progress.style.width = pct + "%";
-            
-            var screenCenterPos = wrap.scrollLeft + (wrap.offsetWidth / 2);
-            var cumX = 0;
-            var nearest = 0;
-            var minDist = Infinity;
-            
-            cards.forEach(function(c, i){
-                var cardCenter = cumX + (c.offsetWidth / 2);
-                var dist = Math.abs(screenCenterPos - cardCenter);
-                if(dist < minDist) {
-                    minDist = dist;
-                    nearest = i;
-                }
-                cumX += c.offsetWidth + 14;
-            });
-            activeIndex = nearest;
-            
-            if (counter) {
-                counter.innerHTML = String(activeIndex+1).padStart(2,"0") + " <span>/ " + String(total).padStart(2,"0") + "</span>";
+        // Hide the original scrolling track entirely
+        wrap.style.display = 'none';
+        if (counter) counter.style.display = 'none';
+        
+        // Prevent Duplicate Gallery Bugs in Builders
+        var existingGallery = section.querySelector('.dt-gallery-wrap');
+        if (existingGallery) existingGallery.remove();
+        
+        // Build the new Main Image + Thumbnails Gallery layout
+        var galleryWrap = document.createElement('div');
+        galleryWrap.className = 'dt-gallery-wrap';
+        
+        var mainImgCont = document.createElement('div');
+        mainImgCont.className = 'dt-gallery-main';
+        
+        var mainImg = document.createElement('img');
+        
+        var firstImg = cards[0].querySelector('img');
+        if(firstImg) {
+            mainImg.src = firstImg.src;
+            mainImg.alt = firstImg.alt;
+        }
+        mainImgCont.appendChild(mainImg);
+        
+        var thumbGrid = document.createElement('div');
+        thumbGrid.className = 'dt-gallery-thumbs';
+        
+        cards.forEach(function(c, i) {
+            var img = c.querySelector('img');
+            if(img) {
+                var thumb = document.createElement('div');
+                thumb.className = 'dt-gallery-thumb' + (i === 0 ? ' active' : '');
+                var thumbImg = document.createElement('img');
+                thumbImg.src = img.src;
+                thumb.appendChild(thumbImg);
+                
+                thumb.addEventListener('click', function() {
+                    // Smooth swap logic
+                    mainImg.style.opacity = 0;
+                    setTimeout(function() {
+                        mainImg.src = img.src;
+                        mainImg.style.opacity = 1;
+                    }, 200);
+                    
+                    // Update active state
+                    var allThumbs = thumbGrid.querySelectorAll('.dt-gallery-thumb');
+                    allThumbs.forEach(function(t) { t.classList.remove('active'); });
+                    thumb.classList.add('active');
+                });
+                thumbGrid.appendChild(thumb);
             }
+        });
+        
+        galleryWrap.appendChild(mainImgCont);
+        galleryWrap.appendChild(thumbGrid);
+        
+        // Insert right after the header
+        var header = section.querySelector('.dt-film-header');
+        if(header) {
+            header.parentNode.insertBefore(galleryWrap, header.nextSibling);
+        } else {
+            section.insertBefore(galleryWrap, wrap);
         }
 
-        wrap.addEventListener('scroll', function() {
-            updateUI();
-        }, {passive: true});
-
-        // Loop back to start if swiped past the end
-        var touchStartX = 0;
-        wrap.addEventListener('touchstart', function(e) {
-            touchStartX = e.touches[0].clientX;
-        }, {passive: true});
-
-        wrap.addEventListener('touchend', function(e) {
-            var touchEndX = e.changedTouches[0].clientX;
-            // If at the last card and swiping left (trying to scroll right)
-            if (activeIndex === total - 1 && (touchStartX - touchEndX > 50)) {
-                snapTo(0);
-            }
-        }, {passive: true});
-
-        var lastWheelTime = 0;
-        wrap.addEventListener('wheel', function(e) {
-            var maxScroll = track.scrollWidth - wrap.offsetWidth;
-            if (wrap.scrollLeft >= maxScroll - 5 && e.deltaX > 15) {
-                var now = Date.now();
-                if (now - lastWheelTime > 600) {
-                    lastWheelTime = now;
-                    snapTo(0);
-                }
-            }
-        }, {passive: true});
-
-        function snapTo(index) {
-            activeIndex = Math.max(0, Math.min(total - 1, index));
-            var targetCard = cards[activeIndex];
-            if (targetCard) {
-                var targetLeft = targetCard.offsetLeft - (wrap.offsetWidth / 2) + (targetCard.offsetWidth / 2);
-                wrap.scrollTo({ left: targetLeft, behavior: 'smooth' });
-            }
-        }
-        
-        function startAutoPlay() {}
-        function stopAutoPlay() {}
-        function resetAutoPlay() {}
-        
-        if (prevBtn) prevBtn.addEventListener("click", function() { snapTo(activeIndex - 1); });
-        if (nextBtn) nextBtn.addEventListener("click", function() { if (activeIndex >= total - 1) { snapTo(0); } else { snapTo(activeIndex + 1); } });
-        
-        snapTo(0);
-        
-        var observer = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    startAutoPlay();
-                } else {
-                    stopAutoPlay();
-                }
-            });
-        }, { threshold: 0.3 });
-        observer.observe(section);
     });
-}, 100);
+        }, 100);
     })();
 
     // --- UNIVERSAL STICKY HEADER SCROLL LOGIC ---
     (function() {
-        let lastScrollY = window.scrollY;
         let ticking = false;
         const stickyHeader = document.querySelector('.lux-sticky-header');
+        
+        let targetStart = null;
+        let targetEnd = null;
+
+        function findTargets() {
+            const allEls = document.querySelectorAll('h1, h2, h3, h4, h5, h6, span, div, p');
+            for (let i = 0; i < allEls.length; i++) {
+                let el = allEls[i];
+                let txt = (el.innerText || el.textContent || '').trim();
+                // Find elements containing the text, but ensure they aren't huge wrapper containers
+                if (txt.length > 0 && txt.length < 80) {
+                    if (txt.includes('INCLUDES / EXCLUDES')) targetStart = el;
+                    if (txt.includes('WHAT OUR CLIENTS SAY') || txt.includes('EVERY JOURNEY LEAVES')) targetEnd = el;
+                }
+            }
+        }
+
+        // Run once immediately, and a few times later to catch builder lazy-loads
+        findTargets();
+        setTimeout(findTargets, 1000);
+        setTimeout(findTargets, 3000);
 
         window.addEventListener('scroll', () => {
             if (!stickyHeader) return;
             
             if (!ticking) {
                 window.requestAnimationFrame(() => {
-                    // Engage after 30% of page height is scrolled
-                    const dropThreshold = document.documentElement.scrollHeight * 0.3;
-                    if (window.scrollY > dropThreshold) {
+                    // Fallbacks if text blocks are not found
+                    let startY = document.documentElement.scrollHeight * 0.2; 
+                    let endY = document.documentElement.scrollHeight * 0.95; 
+                    
+                    if (targetStart) {
+                        // Drop in when INCLUDES is near the top of the viewport
+                        startY = window.scrollY + targetStart.getBoundingClientRect().top - (window.innerHeight * 0.3);
+                    }
+                    if (targetEnd) {
+                        // Slide out when CLIENTS SAY is near the top of the viewport
+                        endY = window.scrollY + targetEnd.getBoundingClientRect().top - (window.innerHeight * 0.3);
+                    }
+
+                    if (window.scrollY >= startY && window.scrollY <= endY) {
                         stickyHeader.classList.add('is-visible');
                     } else {
-                        // Above 30%, always hide it
                         stickyHeader.classList.remove('is-visible');
                     }
-                    lastScrollY = window.scrollY;
+                    
                     ticking = false;
                 });
                 ticking = true;
@@ -3051,31 +3185,35 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
 <!-- ========================================== -->
 <style data-no-optimize="1">
 .lux-day-block {
-    margin-bottom: 0 !important; 
+    margin-bottom: 1.5rem !important; 
     border: none; 
-    border-radius: 0px;
+    border-radius: 8px;
     background: transparent;
-    border-top: 1px solid rgba(0,0,0,0.06);
     overflow: hidden;
 }
 .lux-day-block:last-child {
-    border-bottom: 1px solid rgba(0,0,0,0.06);
+    border-bottom: none;
 }
 .lux-day-accordion-trigger {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
-    padding: 24px 0;
+    background: linear-gradient(135deg, #FDFDFB 0%, #EAE8DF 100%);
+    padding: 24px 30px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: none;
+    transition: all 0.3s ease;
     border-bottom: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
 }
 .lux-day-accordion-trigger:hover {
-    background: transparent;
+    background: linear-gradient(135deg, #F5F4F0 0%, #E2E0D5 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
 }
 .lux-day-block.is-open .lux-day-accordion-trigger {
     border-bottom: none;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 .lux-day-acc-title {
     font-family: 'Cinzel', serif;
@@ -3086,14 +3224,50 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
     letter-spacing: 1px;
 }
 .lux-day-acc-icon {
-    font-size: 24px;
+    width: 14px;
+    height: 14px;
+    position: relative;
     color: #1F4F4B;
-    font-weight: 300;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+    font-size: 0 !important; /* Hides text so we can use pure CSS lines */
+}
+@media (max-width: 768px) {
+    .lux-day-acc-icon {
+        width: 12px;
+        height: 12px;
+    }
+}
+.lux-day-acc-icon::before,
+.lux-day-acc-icon::after {
+    content: '';
+    position: absolute;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease;
+}
+.lux-day-acc-icon::before {
+    width: 100%;
+    height: 2px;
+}
+.lux-day-acc-icon::after {
+    height: 100%;
+    width: 2px;
+}
+.lux-day-block.is-open .lux-day-acc-icon {
+    transform: rotate(180deg);
+}
+.lux-day-block.is-open .lux-day-acc-icon::after {
+    transform: scaleY(0);
+    opacity: 0;
 }
 .lux-day-accordion-body {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows 0.7s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: grid-template-rows 2.1s cubic-bezier(0.25, 1, 0.5, 1);
     background: transparent;
 }
 .lux-day-block.is-open .lux-day-accordion-body {
@@ -3148,11 +3322,9 @@ function initAccordionLogic() {
             block.appendChild(trigger);
             block.appendChild(bodyContent);
             
-            // Keep the first one open by default initially
-            if (index === 0) {
-                block.classList.add('is-open');
-                trigger.querySelector('.lux-day-acc-icon').innerText = '−';
-            }
+            // Keep ALL days open by default initially
+            block.classList.add('is-open');
+            trigger.querySelector('.lux-day-acc-icon').innerText = '-';
         }
 
         // Prevent double binding if script runs twice
@@ -3163,17 +3335,12 @@ function initAccordionLogic() {
         trigger.addEventListener('click', () => {
             const isOpen = block.classList.contains('is-open');
             
-            // Close all
-            document.querySelectorAll('.lux-day-block').forEach(b => {
-                b.classList.remove('is-open');
-                const i = b.querySelector('.lux-day-acc-icon');
-                if (i) i.innerText = '+';
-            });
-            
-            // Toggle
-            if (!isOpen) {
+            if (isOpen) {
+                block.classList.remove('is-open');
+                trigger.querySelector('.lux-day-acc-icon').innerText = '+';
+            } else {
                 block.classList.add('is-open');
-                trigger.querySelector('.lux-day-acc-icon').innerText = '−';
+                trigger.querySelector('.lux-day-acc-icon').innerText = '-';
             }
             
             // SMART CAMERA TRACKER REMOVED AS REQUESTED
@@ -3331,7 +3498,7 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
+  min-height: 100svh;
   justify-content: flex-start;
   position: relative;
   z-index: 1;
