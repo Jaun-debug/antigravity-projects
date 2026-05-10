@@ -3278,11 +3278,11 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                     
                     if (targetStart) {
                         // Drop in when INCLUDES is near the top of the viewport
-                        startY = window.scrollY + targetStart.getBoundingClientRect().top - (window.innerHeight * 0.3);
+                        startY = window.scrollY + targetStart.getBoundingClientRect().top - (window.innerHeight * 0.5);
                     }
                     if (targetEnd) {
                         // Slide out when CLIENTS SAY is near the top of the viewport
-                        endY = window.scrollY + targetEnd.getBoundingClientRect().top - (window.innerHeight * 0.3);
+                        endY = window.scrollY + targetEnd.getBoundingClientRect().top - (window.innerHeight * 0.5);
                     }
 
                     if (window.scrollY >= startY && window.scrollY <= endY) {
