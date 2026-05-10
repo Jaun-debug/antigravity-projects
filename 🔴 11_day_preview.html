@@ -3133,8 +3133,8 @@ if (document.readyState === 'loading') { document.addEventListener('DOMContentLo
                 let txt = (el.innerText || el.textContent || '').trim();
                 // Find elements containing the text, but ensure they aren't huge wrapper containers
                 if (txt.length > 0 && txt.length < 80) {
-                    if (txt.includes('INCLUDES / EXCLUDES')) targetStart = el;
-                    if (txt.includes('WHAT OUR CLIENTS SAY') || txt.includes('EVERY JOURNEY LEAVES')) targetEnd = el;
+                    if (txt.includes('Day-By-Day Itinerary')) targetStart = el;
+                    if (txt.includes('Lodge Selection')) targetEnd = el;
                 }
             }
         }
