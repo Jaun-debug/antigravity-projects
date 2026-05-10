@@ -294,11 +294,11 @@
                     <p class="text-gray-500 mb-6 text-sm font-medium">Please upload the official pricelist for <br><span class="text-gray-800 font-bold">{{ itinerary[activeUploadIndex].lodge || 'this property' }}</span> to continue.</p>
                     
                     <div class="bg-dt-orange/5 border border-dashed border-dt-orange/50 p-8 rounded-xl text-center mb-4 transition-all hover:bg-dt-orange/10 cursor-pointer relative">
-                        <input type="file" accept="application/pdf,image/*" @change="handleModalUpload($event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <input type="file" accept="application/pdf,image/*,text/html,.html" @change="handleModalUpload($event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                         <label class="bg-gradient-to-r from-[#E6C27A] via-[#C9A24A] to-[#A68435] text-white px-6 py-3 rounded-lg font-bold uppercase text-sm tracking-widest inline-block shadow-md pointer-events-none">
                             Select File
                         </label>
-                        <p class="mt-4 text-gray-500 text-xs font-medium tracking-wide">Supported: PDF, JPG, PNG</p>
+                        <p class="mt-4 text-gray-500 text-xs font-medium tracking-wide">Supported: PDF, JPG, PNG, HTML</p>
                     </div>
                 </div>
             </div>
@@ -1340,7 +1340,13 @@
                 handleModalUpload(event) {
                     const file = event.target.files[0];
                     if (!file || this.activeUploadIndex === null) return;
-                    const url = URL.createObjectURL(file);
+                    
+                    // Create object URL and append parameters to hide native PDF viewer chrome
+                    let url = URL.createObjectURL(file);
+                    if (file.type === 'application/pdf') {
+                        url = url + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+                    }
+                    
                     this.itinerary[this.activeUploadIndex].attachedPdf = { name: file.name, url: url };
                     this.closeUploadModal();
                     event.target.value = '';
@@ -1349,7 +1355,12 @@
                 uploadRowPricelist(event, index) {
                     const file = event.target.files[0];
                     if (!file) return;
-                    const url = URL.createObjectURL(file);
+                    
+                    let url = URL.createObjectURL(file);
+                    if (file.type === 'application/pdf') {
+                        url = url + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
+                    }
+                    
                     this.itinerary[index].attachedPdf = { name: file.name, url: url };
                     event.target.value = '';
                 },
