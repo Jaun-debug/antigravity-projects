@@ -286,6 +286,23 @@
 
 
 
+            <!-- Upload Overlay Modal -->
+            <div v-if="activeUploadIndex !== null" class="fixed inset-0 bg-black/40 z-[9999] transition-opacity backdrop-blur-sm flex items-center justify-center">
+                <div class="bg-white/90 backdrop-blur-md p-10 rounded-2xl shadow-[0_10px_40px_rgba(0,0,0,0.3)] max-w-[450px] w-full text-center border border-white/50 relative">
+                    <button @click="closeUploadModal" class="absolute top-4 right-5 text-gray-400 hover:text-red-500 text-2xl font-bold transition-colors">✕</button>
+                    <h2 class="text-dt-orange font-heading text-2xl mb-4 font-bold">Pricelist Uploader</h2>
+                    <p class="text-gray-500 mb-6 text-sm font-medium">Please upload the official pricelist for <br><span class="text-gray-800 font-bold">{{ itinerary[activeUploadIndex].lodge || 'this property' }}</span> to continue.</p>
+                    
+                    <div class="bg-dt-orange/5 border border-dashed border-dt-orange/50 p-8 rounded-xl text-center mb-4 transition-all hover:bg-dt-orange/10 cursor-pointer relative">
+                        <input type="file" accept="application/pdf,image/*" @change="handleModalUpload($event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <label class="bg-gradient-to-r from-[#E6C27A] via-[#C9A24A] to-[#A68435] text-white px-6 py-3 rounded-lg font-bold uppercase text-sm tracking-widest inline-block shadow-md pointer-events-none">
+                            Select File
+                        </label>
+                        <p class="mt-4 text-gray-500 text-xs font-medium tracking-wide">Supported: PDF, JPG, PNG</p>
+                    </div>
+                </div>
+            </div>
+
             <!-- The actual sliding drawer overlay -->
             <div v-if="isQuotesDrawerOpen" class="fixed inset-0 bg-black/40 z-[90] transition-opacity backdrop-blur-sm"
                 @click="isQuotesDrawerOpen = false"></div>
@@ -517,12 +534,10 @@
                                     </td>
                                     <td class="px-2 py-2 text-center text-[10px]">
                                         <div v-if="!day.attachedPdf">
-                                            <label
+                                            <button @click="openUploadModal(index)"
                                                 class="block w-full py-1.5 px-1 rounded font-bold uppercase tracking-wider transition-colors border bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200 cursor-pointer">
                                                 Upload ↑
-                                                <input type="file" accept="application/pdf,image/*"
-                                                    @change="uploadRowPricelist($event, index)" class="hidden">
-                                            </label>
+                                            </button>
                                         </div>
                                         <div v-else
                                             class="flex flex-col gap-1 items-center bg-emerald-50 p-1.5 rounded-md border border-emerald-300 shadow-sm ring-1 ring-emerald-100">
@@ -1040,6 +1055,7 @@
                         { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                         { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                     ],
+                    activeUploadIndex: null,
                     storedLodgeRates: {}
                 }
             },
@@ -1314,6 +1330,22 @@
                 },
                 addExtra() { this.extras.push({ name: '', rate: 0, isPerPax: false }); },
                 removeExtra(index) { this.extras.splice(index, 1); },
+                
+                openUploadModal(index) {
+                    this.activeUploadIndex = index;
+                },
+                closeUploadModal() {
+                    this.activeUploadIndex = null;
+                },
+                handleModalUpload(event) {
+                    const file = event.target.files[0];
+                    if (!file || this.activeUploadIndex === null) return;
+                    const url = URL.createObjectURL(file);
+                    this.itinerary[this.activeUploadIndex].attachedPdf = { name: file.name, url: url };
+                    this.closeUploadModal();
+                    event.target.value = '';
+                },
+                
                 uploadRowPricelist(event, index) {
                     const file = event.target.files[0];
                     if (!file) return;
