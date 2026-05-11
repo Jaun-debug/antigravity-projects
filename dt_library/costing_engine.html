@@ -294,7 +294,7 @@
                     <p class="text-gray-500 mb-6 text-sm font-medium">Please upload the official pricelist for <br><span class="text-gray-800 font-bold">{{ itinerary[activeUploadIndex].lodge || 'this property' }}</span> to continue.</p>
                     
                     <div class="bg-dt-orange/5 border border-dashed border-dt-orange/50 p-8 rounded-xl text-center mb-4 transition-all hover:bg-dt-orange/10 cursor-pointer relative">
-                        <input type="file" accept="application/pdf,image/*,text/html,.html" @change="handleModalUpload($event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+                        <input type="file" :key="activeUploadIndex" accept="application/pdf,image/*,text/html,.html" @change="handleModalUpload($event)" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
                         <label class="bg-gradient-to-r from-[#E6C27A] via-[#C9A24A] to-[#A68435] text-white px-6 py-3 rounded-lg font-bold uppercase text-sm tracking-widest inline-block shadow-md pointer-events-none">
                             Select File
                         </label>
@@ -498,7 +498,7 @@
                             <tbody>
                                 <tr v-for="(day, index) in itinerary" :key="index"
                                     class="border-b hover:bg-white/80 transition"
-                                    :class="day.attachedPdf ? 'bg-green-100/60 border-green-200' : 'border-gray-100'">
+                                    :class="uploadedLodgeFiles[day.lodge] ? 'bg-green-100/60 border-green-200' : 'border-gray-100'">
                                     <td class="px-3 py-2 font-semibold text-gray-400 text-xs text-center">{{ index + 1
                                         }}</td>
                                     <td class="px-3 py-2 text-center">
@@ -522,7 +522,7 @@
                                         </select>
                                         <select v-model="day.lodge" :disabled="!day.region"
                                             @change="handleLodgeChange(day, index)" class="dt-input text-xs font-medium"
-                                            :class="{'text-green-700 bg-green-50 border-green-300 font-bold': day.attachedPdf}">
+                                            :class="{'text-green-700 bg-green-50 border-green-300 font-bold': uploadedLodgeFiles[day.lodge]}">
                                             <option value="">Select Lodge...</option>
                                             <option v-for="l in regions[day.region] || []" :key="l" :value="l"
                                                 :class="uploadedLodges.includes(l) ? 'text-green-600 font-bold bg-green-50' : ''">
@@ -533,7 +533,10 @@
                                         </select>
                                     </td>
                                     <td class="px-2 py-2 text-center text-[10px]">
-                                        <div v-if="!day.attachedPdf">
+                                        <div v-if="!day.lodge" class="text-[10px] text-center text-gray-400 font-bold uppercase tracking-wider py-1">
+                                            Select Lodge
+                                        </div>
+                                        <div v-else-if="!uploadedLodgeFiles[day.lodge]">
                                             <button @click="openUploadModal(index)"
                                                 class="block w-full py-1.5 px-1 rounded font-bold uppercase tracking-wider transition-colors border bg-gray-100 text-gray-500 border-gray-200 hover:bg-gray-200 cursor-pointer">
                                                 Upload ↑
@@ -543,9 +546,9 @@
                                             class="flex flex-col gap-1 items-center bg-emerald-50 p-1.5 rounded-md border border-emerald-300 shadow-sm ring-1 ring-emerald-100">
                                             <span
                                                 class="font-bold text-emerald-800 text-[10px] truncate w-full max-w-[85px]"
-                                                :title="day.attachedPdf.name">✓ {{ day.attachedPdf.name }}</span>
+                                                :title="uploadedLodgeFiles[day.lodge].name">✓ {{ uploadedLodgeFiles[day.lodge].name }}</span>
                                             <div class="flex gap-1 w-full justify-center">
-                                                <button @click="viewPdf(day.attachedPdf.url)"
+                                                <button @click="viewPdf(uploadedLodgeFiles[day.lodge].url)"
                                                     class="font-bold text-blue-700 bg-blue-100 px-2 py-1 rounded hover:bg-blue-200 transition border border-blue-200">VIEW</button>
                                                 <button @click="removeRowPricelist(index)"
                                                     class="font-bold text-red-600 bg-red-100 px-2 py-1 rounded hover:bg-red-200 transition border border-red-200">✕</button>
@@ -977,7 +980,7 @@
                         class="text-xs text-gray-500 hover:text-red-500 font-bold px-3 py-1.5 bg-white border border-gray-200 rounded-lg shadow-sm">Close
                         ✕</button>
                 </div>
-                <iframe :src="currentPdfUrl" class="w-full h-full flex-grow border-0"></iframe>
+                <iframe :key="currentPdfUrl" :src="currentPdfUrl" class="w-full h-full flex-grow border-0"></iframe>
             </div>
         </div>
 
@@ -1052,11 +1055,12 @@
                     currentPdfUrl: null,
                     extras: [],
                     itinerary: [
-                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
-                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                     ],
                     activeUploadIndex: null,
-                    storedLodgeRates: {}
+                    storedLodgeRates: {},
+                    uploadedLodgeFiles: {}
                 }
             },
                         watch: {
@@ -1165,7 +1169,7 @@
                     return { group, single, child, vehicle, guideFee, guideAcc, flights };
                 },
                 uploadedLodges() {
-                    return this.itinerary.filter(d => d.attachedPdf && d.lodge).map(d => d.lodge);
+                    return Object.keys(this.uploadedLodgeFiles);
                 },
                 calculatedFuel() { return (this.fuelDistance || 0) * (this.fuelType === 'low' ? 3.125 : 4.0); },
                 activitiesTotal() {
@@ -1309,7 +1313,7 @@
                 removeGroup(index) {
                     this.paxGroups.splice(index, 1);
                 },
-                addDay() { this.itinerary.push({ region: '', lodge: '', attachedPdf: null, nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
+                addDay() { this.itinerary.push({ region: '', lodge: '', nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
                 removeDay(index) { this.itinerary.splice(index, 1); },
                 addActivity() { this.activities.push({ name: '', rate: 0, isPerPax: true }); },
                 removeActivity(index) { this.activities.splice(index, 1); },
@@ -1347,7 +1351,10 @@
                         url = url + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
                     }
                     
-                    this.itinerary[this.activeUploadIndex].attachedPdf = { name: file.name, url: url };
+                    const lodge = this.itinerary[this.activeUploadIndex].lodge;
+                    if (lodge) {
+                        this.uploadedLodgeFiles[lodge] = { name: file.name, url: url };
+                    }
                     this.closeUploadModal();
                     event.target.value = '';
                 },
@@ -1361,11 +1368,17 @@
                         url = url + '#toolbar=0&navpanes=0&scrollbar=0&view=FitH';
                     }
                     
-                    this.itinerary[index].attachedPdf = { name: file.name, url: url };
+                    const lodge = this.itinerary[index].lodge;
+                    if (lodge) {
+                        this.uploadedLodgeFiles[lodge] = { name: file.name, url: url };
+                    }
                     event.target.value = '';
                 },
                 removeRowPricelist(index) {
-                    this.itinerary[index].attachedPdf = null;
+                    const lodge = this.itinerary[index].lodge;
+                    if (lodge) {
+                        delete this.uploadedLodgeFiles[lodge];
+                    }
                 },
                 viewPdf(url) {
                     this.currentPdfUrl = url;
@@ -1398,7 +1411,7 @@
                         activities: JSON.parse(JSON.stringify(this.activities)),
                         extras: JSON.parse(JSON.stringify(this.extras)),
                         // We strip the transient object urls since they cant be saved locally effectively.
-                        itinerary: this.itinerary.map(day => ({ ...day, attachedPdf: null }))
+                        itinerary: this.itinerary.map(day => ({ ...day }))
                     };
                     this.savedQuotes.unshift(quote);
                     localStorage.setItem('dtSavedQuotes', JSON.stringify(this.savedQuotes));
