@@ -487,10 +487,12 @@
                                     <td class="px-3 py-2 font-semibold text-gray-400 text-xs text-center">{{ index + 1
                                         }}</td>
                                     <td class="px-3 py-2 text-center">
-                                        <div class="flex justify-center">
+                                        <div class="flex items-center justify-center gap-1">
+                                            <button @click="day.nights > 1 ? day.nights-- : null" class="w-5 h-6 flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 rounded text-gray-500 font-bold leading-none text-xs transition-colors">-</button>
                                             <input type="number" v-model.number="day.nights"
-                                                class="w-12 text-center font-bold text-sm bg-gray-50/50 py-1 border outline-none focus:ring-0 rounded-md border-gray-200 focus:border-dt-orange transition-colors"
+                                                class="w-8 text-center font-bold text-sm bg-transparent py-1 border-b-2 border-transparent outline-none focus:ring-0 focus:border-dt-orange transition-colors hide-arrows"
                                                 min="1" max="99">
+                                            <button @click="day.nights++" class="w-5 h-6 flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 rounded text-gray-500 font-bold leading-none text-xs transition-colors">+</button>
                                         </div>
                                         <div v-if="rowDates[index]" class="text-[9px] text-gray-400 font-bold mt-1 tracking-wider uppercase">
                                             {{ new Date(rowDates[index]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }}
@@ -1016,6 +1018,21 @@
 
         const app = createApp({
             data() {
+                let initialRegions = JSON.parse(JSON.stringify(regionsDb));
+                try {
+                    const customLodges = JSON.parse(localStorage.getItem('dtCustomLodges') || '{}');
+                    for (const region in customLodges) {
+                        if (initialRegions[region]) {
+                            customLodges[region].forEach(lodge => {
+                                if (!initialRegions[region].includes(lodge)) {
+                                    initialRegions[region].push(lodge);
+                                }
+                            });
+                            initialRegions[region].sort((a, b) => a.localeCompare(b));
+                        }
+                    }
+                } catch(e) {}
+
                 return {
                     activeSection: 'step-1-client',
                     activeTab: 'dt',
@@ -1028,7 +1045,7 @@
                     savedQuotes: JSON.parse(localStorage.getItem('dtSavedQuotes') || '[]'),
                     unlockedAgents: [],
                     adminPasswords: {},
-                    regions: regionsDb,
+                    regions: initialRegions,
                     arrivalDate: '',
                     globalSeason: 'low',
                     paxGroups: [{ id: 1, name: 'Group 1', double: 2, single: 0, child: 0 }],
@@ -1044,7 +1061,7 @@
                         { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                     ],
                     activeUploadIndex: null,
-                    storedLodgeRates: {},
+                    storedLodgeRates: JSON.parse(localStorage.getItem('dtStoredLodgeRates') || '{}'),
                     uploadedLodgeFiles: {}
                 }
             },
@@ -1069,6 +1086,7 @@
                                 if (day.child > 0) this.storedLodgeRates[day.lodge][season].child = day.child;
                             }
                         });
+                        localStorage.setItem('dtStoredLodgeRates', JSON.stringify(this.storedLodgeRates));
                     }
                 }
             },
@@ -1224,6 +1242,15 @@
                             if (!this.regions[day.region].includes(cleanName)) {
                                 this.regions[day.region].push(cleanName);
                                 this.regions[day.region].sort((a, b) => a.localeCompare(b));
+                                
+                                try {
+                                    const customLodges = JSON.parse(localStorage.getItem('dtCustomLodges') || '{}');
+                                    if (!customLodges[day.region]) customLodges[day.region] = [];
+                                    if (!customLodges[day.region].includes(cleanName)) {
+                                        customLodges[day.region].push(cleanName);
+                                        localStorage.setItem('dtCustomLodges', JSON.stringify(customLodges));
+                                    }
+                                } catch(e) {}
                             }
                             day.lodge = cleanName;
                         } else {
@@ -1274,9 +1301,13 @@
                     const lodgeData = this.storedLodgeRates[day.lodge];
                     if (lodgeData && lodgeData[season]) {
                         const rates = lodgeData[season];
-                        if (!day.pp) day.pp = rates.pp || 0;
-                        if (!day.single) day.single = rates.single || 0;
-                        if (!day.child) day.child = rates.child || 0;
+                        day.pp = rates.pp || 0;
+                        day.single = rates.single || 0;
+                        day.child = rates.child || 0;
+                    } else {
+                        day.pp = 0;
+                        day.single = 0;
+                        day.child = 0;
                     }
                 },
                 groupInvoiceCost(g, markupDecimal) {
@@ -1452,6 +1483,11 @@
                 exportDocument(index, type) {
                     const q = this.savedQuotes[index];
                     const format = (val) => Number(val || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                    
+                    const qDoublePax = q.paxGroups ? q.paxGroups.reduce((s, g) => s + (parseInt(g.double) || 0), 0) : (q.doublePax !== undefined ? q.doublePax : (q.numPax || 2));
+                    const qSinglePax = q.paxGroups ? q.paxGroups.reduce((s, g) => s + (parseInt(g.single) || 0), 0) : (q.singlePax || 0);
+                    const qChildPax = q.paxGroups ? q.paxGroups.reduce((s, g) => s + (parseInt(g.child) || 0), 0) : (q.childPax || 0);
+                    const qNumPax = qDoublePax + qSinglePax + qChildPax || (q.numPax || 2);
 
                     let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
                     q.itinerary.forEach(d => {
@@ -1460,16 +1496,16 @@
                         vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n; flights += (d.flights || 0) * n;
                     });
                     const calcFuel = (q.fuelDistance || 0) * (q.fuelType === 'low' ? 3.125 : 4.0);
-                    const activitiesTotal = q.activities.reduce((sum, act) => sum + (act.isPerPax ? (act.rate * Math.max(1, q.numPax)) : act.rate), 0);
-                    const extTot = Array.isArray(q.extras) ? q.extras.reduce((sum, ext) => sum + (ext.isPerPax ? (ext.rate * Math.max(1, q.numPax)) : ext.rate), 0) : ((q.extras?.guideFood || 0) + (q.extras?.vehicleReturn || 0) + (q.extras?.other || 0));
+                    const activitiesTotal = q.activities.reduce((sum, act) => sum + (act.isPerPax ? (act.rate * Math.max(1, qNumPax)) : act.rate), 0);
+                    const extTot = Array.isArray(q.extras) ? q.extras.reduce((sum, ext) => sum + (ext.isPerPax ? (ext.rate * Math.max(1, qNumPax)) : ext.rate), 0) : ((q.extras?.guideFood || 0) + (q.extras?.vehicleReturn || 0) + (q.extras?.other || 0));
                     const sharedTotal = vehicle + guideFee + guideAcc + calcFuel + extTot + activitiesTotal;
-                    const sharedPP = sharedTotal / Math.max(1, q.numPax);
+                    const sharedPP = sharedTotal / Math.max(1, qNumPax);
 
                     const doubleStoPP = group + sharedPP;
                     const singleStoPP = group + single + sharedPP;
                     const childStoPP = child + sharedPP;
 
-                    let stoTotal = (doubleStoPP * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)) + (singleStoPP * Math.max(0, q.singlePax || 0)) + (childStoPP * Math.max(0, q.childPax || 0));
+                    let stoTotal = (doubleStoPP * Math.max(0, qDoublePax)) + (singleStoPP * Math.max(0, qSinglePax)) + (childStoPP * Math.max(0, qChildPax));
 
                     const dtTotal = stoTotal * 1.25;
                     const tlTotal = dtTotal / 0.82;
@@ -1481,7 +1517,7 @@
 
                     const qBotsDoublePP = q.botswanaDoublePP !== undefined ? q.botswanaDoublePP : (q.botswanaUsd || 0);
                     const qBotsSinglePP = q.botswanaSinglePP || 0;
-                    const qBotsTotal = (qBotsDoublePP * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)) + (qBotsSinglePP * Math.max(0, q.singlePax || 0));
+                    const qBotsTotal = (qBotsDoublePP * Math.max(0, qDoublePax)) + (qBotsSinglePP * Math.max(0, qSinglePax));
 
                     const dtBotsTotal = qBotsTotal * 1.25;
                     const tlBotsTotal = dtBotsTotal / 0.82;
@@ -1577,7 +1613,7 @@
         </div>
         <div style="background: #fff8f6; border-left: 4px solid #d87a4d; padding: 15px 20px; margin-bottom: 30px;">
             <div style="font-size: 12px; color: #d87a4d; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Prepared For</div>
-            <div style="font-size: 20px; font-weight: 600; color: #27272a; margin-top: 4px;">${q.clientName} (${q.numPax} PAX)</div>
+            <div style="font-size: 20px; font-weight: 600; color: #27272a; margin-top: 4px;">${q.clientName} (${qNumPax} PAX)</div>
         </div>
         `}
 
@@ -1597,8 +1633,8 @@
                         <div contenteditable="true" style="margin-top: 15px; min-height: 40px; outline: none; border: 1px dashed #ccc; padding: 10px; font-size: 12px; color: #52525b; max-width: 300px; background: white;">Click to add notes...</div>
                         <div style="margin-top: 80px; font-size: 12px; color: #18181b; padding-bottom: 20px;">Travel Date: <span contenteditable="true" style="border-bottom: 1px solid #18181b; min-width: 140px; display: inline-block;"></span></div>
                     </td>
-                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">${q.numPax}</td>
-                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD / Math.max(1, q.numPax))}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">${qNumPax}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD / Math.max(1, qNumPax))}</td>
                     <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD)}</td>
                 </tr>
                 </tr>
@@ -1616,8 +1652,8 @@
                     <td style="padding: 15px; vertical-align: top; border-top: 1px solid #d87a4d;">
                         <div style="font-weight: 600; font-size: 13px;">${q.botswanaSupplier || 'Botswana Safari'} (USD)</div>
                     </td>
-                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">${q.numPax}</td>
-                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD / Math.max(1, q.numPax))}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">${qNumPax}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD / Math.max(1, qNumPax))}</td>
                     <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD)}</td>
                 </tr>
                 ` : ''}
@@ -1748,16 +1784,16 @@
             <th style="text-align: right;">Total (NAD)</th>
         </tr>
         ${group > 0 ? `<tr>
-            <td style="color: #71717a;">Base Group Accommodation (${Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax)}x)</td>
-            <td style="text-align: right; font-weight: 500;">${format(group * Math.max(0, q.doublePax !== undefined ? q.doublePax : q.numPax))}</td>
+            <td style="color: #71717a;">Base Group Accommodation (${Math.max(0, qDoublePax)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(group * Math.max(0, qDoublePax))}</td>
         </tr>` : ''}
         ${single > 0 ? `<tr>
-            <td style="color: #71717a;">Single Supplements (${Math.max(0, q.singlePax || 0)}x)</td>
-            <td style="text-align: right; font-weight: 500;">${format(single * Math.max(0, q.singlePax || 0))}</td>
+            <td style="color: #71717a;">Single Supplements (${Math.max(0, qSinglePax)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(single * Math.max(0, qSinglePax))}</td>
         </tr>` : ''}
         ${child > 0 ? `<tr>
-            <td style="color: #71717a;">Child Supplements (${Math.max(0, q.childPax || 0)}x)</td>
-            <td style="text-align: right; font-weight: 500;">${format(child * Math.max(0, q.childPax || 0))}</td>
+            <td style="color: #71717a;">Child Supplements (${Math.max(0, qChildPax)}x)</td>
+            <td style="text-align: right; font-weight: 500;">${format(child * Math.max(0, qChildPax))}</td>
         </tr>` : ''}
         ${vehicle > 0 ? `<tr>
             <td style="color: #71717a;">Vehicle Hire</td>
@@ -1805,8 +1841,7 @@
                 <div class="m-title">Desert Tracks (25%)</div>
                 <div class="m-val">${format(dtTotal)} NAD Namibia Client Invoice</div>
                 <div class="m-pp">Namibian Double Sharing PP: ${format(dtNamibianDoublePP)}</div>
-                ${(q.singlePax || 0) > 0 ? `<div class="m-pp">Namibian Single PP: ${format(dtNamibianSinglePP)}</div>` :
-                                    ''}
+                ${(qSinglePax > 0) ? `<div class="m-pp">Namibian Single PP: ${format(dtNamibianSinglePP)}</div>` : ''}
             </div>
             ${qBotsTotal > 0 ? `
             <div class="m-section-bottom">
