@@ -137,8 +137,48 @@
 </head>
 
 <body class="p-4 md:p-8 min-h-screen bg-[#F5F5F3]">
-    <div id="app" v-cloak class="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-8 items-start">
+    <div id="app" v-cloak class="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-8 items-start relative">
     
+        <!-- FLOATING CONTROL CENTER -->
+        <div class="fixed top-6 right-8 z-[100] flex flex-col gap-3 pointer-events-none items-end">
+            <!-- ROW 1: LIVE SUMMARY PILLS -->
+            <div class="flex gap-2">
+                <div class="bg-white/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-200/50 rounded-full p-1.5 flex items-center pointer-events-auto">
+                    <div class="px-5 py-1.5 flex items-center gap-3 border-r border-gray-100">
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">STO</span>
+                        <span class="text-sm font-bold text-gray-900">N$ {{ format(stoTotal) }}</span>
+                    </div>
+                    <div class="px-5 py-1.5 flex items-center gap-3 border-r border-gray-100">
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">DT Rack</span>
+                        <span class="text-sm font-black text-dt-orange">N$ {{ format(stoTotal * 1.25) }}</span>
+                    </div>
+                    <div class="px-5 py-1.5 flex items-center gap-3">
+                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">TL Rack</span>
+                        <span class="text-sm font-bold text-gray-900">N$ {{ format((stoTotal * 1.25) / 0.82) }}</span>
+                    </div>
+                </div>
+                
+                <div v-if="botswanaUsdSummary > 0" class="bg-blue-50/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-blue-100/50 rounded-full p-1.5 flex items-center pointer-events-auto">
+                    <div class="px-5 py-1.5 flex items-center gap-3">
+                        <span class="text-[9px] font-black text-blue-400 uppercase tracking-widest">Botswana</span>
+                        <span class="text-sm font-bold text-blue-700">US$ {{ format(botswanaUsdSummary) }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ROW 2: SAVE ACTIONS PILL -->
+            <div class="bg-white/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-200/50 rounded-full p-1.5 flex gap-2 pointer-events-auto">
+                <button @click="isQuotesDrawerOpen = true"
+                    class="px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all text-gray-600 hover:bg-gray-100 flex items-center gap-2">
+                    📂 Saved Quotes
+                </button>
+                <button @click="saveQuote()" :disabled="!canSave"
+                    class="px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-md flex items-center gap-2"
+                    :class="canSave ? 'bg-[#1a1a24] text-white hover:bg-black hover:-translate-y-0.5' : 'bg-gray-200 text-gray-400 cursor-not-allowed'">
+                    💾 Save Quote
+                </button>
+            </div>
+        </div>
         <!-- LEFT SIDEBAR -->
         <div class="w-full lg:w-[280px] shrink-0 sticky top-8 z-50">
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 flex flex-col gap-6 h-[calc(100vh-4rem)]">
@@ -200,49 +240,52 @@
                                 {{ isCompleted['step-4-fuel'] && activeSection !== 'step-4-fuel' ? '✓' : '4' }}
                             </span> Fuel & Distance
                         </a>
+                        <a href="#step-flights" @click.prevent="scrollTo('step-flights')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
+                           :class="activeSection === 'step-flights' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                            <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
+                                  :class="activeSection === 'step-flights' ? 'border-white/30 text-white' : (isCompleted['step-flights'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                {{ isCompleted['step-flights'] && activeSection !== 'step-flights' ? '✓' : '5' }}
+                            </span> Flights
+                        </a>
+                        <a href="#step-guided-costs" @click.prevent="scrollTo('step-guided-costs')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
+                           :class="activeSection === 'step-guided-costs' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                            <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
+                                  :class="activeSection === 'step-guided-costs' ? 'border-white/30 text-white' : (isCompleted['step-guided-costs'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                {{ isCompleted['step-guided-costs'] && activeSection !== 'step-guided-costs' ? '✓' : '6' }}
+                            </span> Guided Costs
+                        </a>
                         <a href="#step-5-activities" @click.prevent="scrollTo('step-5-activities')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
                            :class="activeSection === 'step-5-activities' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
                                   :class="activeSection === 'step-5-activities' ? 'border-white/30 text-white' : (isCompleted['step-5-activities'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
-                                {{ isCompleted['step-5-activities'] && activeSection !== 'step-5-activities' ? '✓' : '5' }}
+                                {{ isCompleted['step-5-activities'] && activeSection !== 'step-5-activities' ? '✓' : '7' }}
                             </span> Activities
                         </a>
                         <a href="#step-6-extras" @click.prevent="scrollTo('step-6-extras')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
                            :class="activeSection === 'step-6-extras' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
                                   :class="activeSection === 'step-6-extras' ? 'border-white/30 text-white' : (isCompleted['step-6-extras'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
-                                {{ isCompleted['step-6-extras'] && activeSection !== 'step-6-extras' ? '✓' : '6' }}
+                                {{ isCompleted['step-6-extras'] && activeSection !== 'step-6-extras' ? '✓' : '8' }}
                             </span> Extras
                         </a>
                         <a href="#step-7-botswana" @click.prevent="scrollTo('step-7-botswana')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
                            :class="activeSection === 'step-7-botswana' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
                                   :class="activeSection === 'step-7-botswana' ? 'border-white/30 text-white' : (isCompleted['step-7-botswana'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
-                                {{ isCompleted['step-7-botswana'] && activeSection !== 'step-7-botswana' ? '✓' : '7' }}
+                                {{ isCompleted['step-7-botswana'] && activeSection !== 'step-7-botswana' ? '✓' : '9' }}
                             </span> Botswana / Add-ons
                         </a>
                         <a href="#step-8-pricing" @click.prevent="scrollTo('step-8-pricing')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
                            :class="activeSection === 'step-8-pricing' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
                                   :class="activeSection === 'step-8-pricing' ? 'border-white/30 text-white' : (isCompleted['step-8-pricing'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
-                                {{ isCompleted['step-8-pricing'] && activeSection !== 'step-8-pricing' ? '✓' : '8' }}
+                                {{ isCompleted['step-8-pricing'] && activeSection !== 'step-8-pricing' ? '✓' : '10' }}
                             </span> Final Pricing
                         </a>
                     </nav>
                 </div>
 
-                <!-- 3. Save Actions -->
-                <div class="mt-auto pt-4 border-t border-gray-100 flex flex-col gap-3">
-                    <button @click="saveQuote()" :disabled="!canSave"
-                        class="w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all shadow-md flex justify-center items-center gap-2"
-                        :class="canSave ? 'bg-[#1a1a24] text-white hover:bg-black hover:-translate-y-0.5' : 'bg-gray-200 text-gray-400 cursor-not-allowed'">
-                        💾 Save Quote
-                    </button>
-                    <button @click="isQuotesDrawerOpen = true"
-                        class="w-full py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border-2 border-gray-200 text-gray-700 hover:border-gray-300 hover:bg-gray-50 hover:-translate-y-0.5 flex justify-center items-center gap-2">
-                        📂 Saved Quotes
-                    </button>
-                </div>
+                <!-- EMPTY DIV TO MAINTAIN SIDEBAR SPACING IF NEEDED, OR COMPLETELY REMOVED -->
 
             </div>
         </div>
@@ -455,10 +498,6 @@
                                 <option value="low">Off-Peak (Nov - Jun)</option>
                                 <option value="high">Peak (Jul - Oct)</option>
                             </select>
-                            <button @click="addDay"
-                                class="bg-[#79b4ff] hover:bg-[#63a0ec] text-white px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
-                                + Add Day
-                            </button>
                         </div>
                     </div>
 
@@ -474,9 +513,6 @@
                                     <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Single PP</th>
                                     <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Child PP</th>
                                     <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Vehicle</th>
-                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Fee</th>
-                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Acc.</th>
-                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Flights</th>
                                     <th class="px-2 py-4"></th>
                                 </tr>
                             </thead>
@@ -550,21 +586,21 @@
                                             :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
                                     <td class="px-3 py-2"><currency-input v-model="day.vehicle" @blur="propagate(index, 'vehicle', day.vehicle)"
                                             :custom-class="'dt-input text-right'"></currency-input></td>
-                                    <td class="px-3 py-2"><currency-input v-model="day.guideFee" @blur="propagate(index, 'guideFee', day.guideFee)"
-                                            :custom-class="'dt-input text-right'"></currency-input></td>
-                                    <td class="px-3 py-2"><currency-input v-model="day.guideAcc" @blur="propagate(index, 'guideAcc', day.guideAcc)"
-                                            :custom-class="'dt-input text-right'"></currency-input></td>
-                                    <td class="px-3 py-2"><currency-input v-model="day.flights"
-                                            :custom-class="'dt-input text-right'"></currency-input></td>
                                     <td class="px-2 py-2 text-red-400 hover:text-red-600 cursor-pointer text-center font-bold"
                                         @click="removeDay(index)">✕</td>
                                 </tr>
                             </tbody>
                             <tfoot class="bg-gray-50/80 font-bold border-t border-gray-100">
                                 <tr>
-                                    <td colspan="4"
-                                        class="px-3 py-4 text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">
-                                        SUBTOTALS:</td>
+                                    <td colspan="4" class="px-3 py-4">
+                                        <div class="flex items-center justify-between w-full">
+                                            <button @click="addDay"
+                                                class="bg-[#79b4ff] hover:bg-[#63a0ec] text-white px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
+                                                + Add Day
+                                            </button>
+                                            <span class="text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">SUBTOTALS:</span>
+                                        </div>
+                                    </td>
                                     <td class="px-3 py-4 text-right">
                                         {{ format(storeTotals.group) }}<br>
                                         <span v-if="doublePax > 0"
@@ -587,9 +623,6 @@
                                             <span class="text-gray-700">{{format((storeTotals.child || 0) * childPax)}}</span></span>
                                     </td>
                                     <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.vehicle) }}</td>
-                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideFee) }}</td>
-                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.guideAcc) }}</td>
-                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.flights) }}</td>
                                     <td></td>
                                 </tr>
                             </tfoot>
@@ -622,6 +655,62 @@
                         <span class="font-bold text-gray-500 uppercase text-[10px] tracking-widest">Calculated
                             Fuel</span>
                         <span class="font-black text-2xl text-dt-orange">{{ format(calculatedFuel) }}</span>
+                    </div>
+                </div>
+
+                <!-- NEW FLIGHTS SECTION -->
+                <div id="step-flights" v-show="activeSection === 'step-flights'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Flights</h2>
+                        <div class="flex flex-col gap-1.5 w-1/2">
+                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Total Flight Cost</label>
+                            <currency-input v-model="globalFlights" :custom-class="'dt-input text-lg font-bold'" placeholder="0.00"></currency-input>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW GUIDED COSTS SECTION -->
+                <div id="step-guided-costs" v-show="activeSection === 'step-guided-costs'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Guided Costs</h2>
+                        <div class="overflow-x-auto pb-4">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-[10px] text-gray-400 uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
+                                    <tr>
+                                        <th class="px-3 py-4 font-bold">#</th>
+                                        <th class="px-3 py-4 font-bold min-w-[200px]">Lodge</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Rate</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Acc.</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Meals</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Drinks</th>
+                                        <th class="px-3 py-4 w-[100px] min-w-[100px] text-right font-bold">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(day, index) in itinerary" :key="index" class="border-b hover:bg-white/80 transition border-gray-100">
+                                        <td class="px-3 py-2 font-semibold text-gray-400 text-xs">{{ index + 1 }}</td>
+                                        <td class="px-3 py-2 text-xs font-bold text-gray-700">
+                                            <div v-if="day.lodge">{{ day.lodge }}</div>
+                                            <div v-else class="text-gray-400 italic">No Lodge Selected</div>
+                                            <div class="text-[9px] text-gray-400 uppercase tracking-wider font-normal">{{ day.nights }} Night(s)</div>
+                                        </td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideRate" @blur="propagate(index, 'guideRate', day.guideRate)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideAcc" @blur="propagate(index, 'guideAcc', day.guideAcc)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideMeals" @blur="propagate(index, 'guideMeals', day.guideMeals)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideDrinks" @blur="propagate(index, 'guideDrinks', day.guideDrinks)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2 text-right font-bold text-dt-orange">{{ format(((day.guideRate||0) + (day.guideFee||0) + (day.guideAcc||0) + (day.guideMeals||0) + (day.guideDrinks||0)) * (day.nights||1)) }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50/80 font-bold border-t border-gray-100">
+                                    <tr>
+                                        <td colspan="6" class="px-3 py-4 text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">TOTAL GUIDED COSTS:</td>
+                                        <td class="px-3 py-4 text-right text-gray-700 text-lg">{{ format(storeTotals.guidedCostsTotal) }}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
@@ -753,12 +842,10 @@
                         <div v-if="storeTotals.flights > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
                                 class="text-gray-500 font-medium">Flights</span><span
                                 class="font-bold text-gray-900">{{ format(storeTotals.flights) }}</span></div>
-                        <div v-if="storeTotals.guideFee > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
-                                class="text-gray-500 font-medium">Guide Fee</span><span
-                                class="font-bold text-gray-900">{{ format(storeTotals.guideFee) }}</span></div>
-                        <div v-if="storeTotals.guideAcc > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
-                                class="text-gray-500 font-medium">Guide Acc</span><span
-                                class="font-bold text-gray-900">{{ format(storeTotals.guideAcc) }}</span></div>
+                        <div v-if="storeTotals.guideRate > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Rate</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideRate) }}</span></div>
+                        <div v-if="storeTotals.guideAcc > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Acc</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideAcc) }}</span></div>
+                        <div v-if="storeTotals.guideMeals > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Meals</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideMeals) }}</span></div>
+                        <div v-if="storeTotals.guideDrinks > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Drinks</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideDrinks) }}</span></div>
                         <div v-if="calculatedFuel > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
                                 class="text-gray-500 font-medium">Fuel & Return</span><span
                                 class="font-bold text-gray-900">{{ format(calculatedFuel)
@@ -1051,14 +1138,15 @@
                     paxGroups: [{ id: 1, name: 'Group 1', double: 2, single: 0, child: 0 }],
                     botswanaDoublePP: 0,
                     botswanaSinglePP: 0, botswanaChildPP: 0,
-                    fuelDistance: 2000,
+                    fuelDistance: 0,
                     fuelType: 'low',
+                    globalFlights: 0,
                     activities: [],
                     currentPdfUrl: null,
                     extras: [],
                     itinerary: [
-                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
-                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideFee: 0, guideAcc: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                        { region: 'Windhoek', lodge: 'Acacia Guesthouse', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideRate: 0, guideAcc: 0, guideMeals: 0, guideDrinks: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
+                        { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideRate: 0, guideAcc: 0, guideMeals: 0, guideDrinks: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                     ],
                     activeUploadIndex: null,
                     storedLodgeRates: JSON.parse(localStorage.getItem('dtStoredLodgeRates') || '{}'),
@@ -1114,6 +1202,8 @@
                         'step-2-pax': this.paxGroups.length > 0 && this.numPax > 0,
                         'step-3-itinerary': this.itinerary.length > 0,
                         'step-4-fuel': this.calculatedFuel > 0 || this.fuelDistance > 0,
+                        'step-flights': this.globalFlights > 0,
+                        'step-guided-costs': this.itinerary.some(d => d.guideRate > 0 || d.guideFee > 0 || d.guideAcc > 0 || d.guideMeals > 0 || d.guideDrinks > 0),
                         'step-5-activities': this.activities.length > 0,
                         'step-6-extras': this.extras.length > 0,
                         'step-7-botswana': this.botswanaDoublePP > 0 || this.botswanaSinglePP > 0,
@@ -1154,7 +1244,7 @@
                 },
                 perPaxCosting() {
                     const t = this.storeTotals;
-                    const sharedTotal = t.vehicle + t.guideFee + t.guideAcc + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
+                    const sharedTotal = t.vehicle + (t.guidedCostsTotal || 0) + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
                     const sharedPP = sharedTotal / Math.max(1, this.numPax);
                     return {
                         sharedPP,
@@ -1163,13 +1253,22 @@
                     };
                 },
                 storeTotals() {
-                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
+                    let group = 0, single = 0, child = 0, vehicle = 0, guideRate = 0, guideAcc = 0, guideMeals = 0, guideDrinks = 0;
                     this.itinerary.forEach(d => {
                         let n = parseInt(d.nights) || 1;
                         group += (d.pp || 0) * n; single += (d.single || 0) * n; child += (d.child || 0) * n;
-                        vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n; flights += (d.flights || 0) * n;
+                        vehicle += (d.vehicle || 0) * n;
+                        guideRate += ((d.guideRate || 0) + (d.guideFee || 0)) * n;
+                        guideAcc += (d.guideAcc || 0) * n;
+                        guideMeals += (d.guideMeals || 0) * n;
+                        guideDrinks += (d.guideDrinks || 0) * n;
                     });
-                    return { group, single, child, vehicle, guideFee, guideAcc, flights };
+                    return { 
+                        group, single, child, vehicle, 
+                        guideRate, guideAcc, guideMeals, guideDrinks,
+                        guidedCostsTotal: guideRate + guideAcc + guideMeals + guideDrinks,
+                        flights: this.globalFlights || 0
+                    };
                 },
                 uploadedLodges() {
                     return Object.keys(this.uploadedLodgeFiles);
@@ -1187,7 +1286,7 @@
                 },
                 sharedCostsTotal() {
                     const t = this.storeTotals;
-                    return t.vehicle + t.guideFee + t.guideAcc + t.flights + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
+                    return t.vehicle + (t.guidedCostsTotal || 0) + (t.flights || 0) + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
                 },
                 stoTotal() {
                     const t = this.storeTotals;
@@ -1197,7 +1296,7 @@
                         total += (t.single * Math.max(0, parseInt(g.single) || 0));
                         total += (t.child * Math.max(0, parseInt(g.child) || 0));
                     });
-                    total += t.vehicle + t.guideFee + t.guideAcc + t.flights;
+                    total += t.vehicle + (t.guidedCostsTotal || 0) + (t.flights || 0);
                     total += this.calculatedFuel + this.extrasTotal;
                     total += this.activitiesTotal;
                     // Note: botswanaUsd is NOT added here anymore to keep it unmixed.
@@ -1329,7 +1428,7 @@
                 removeGroup(index) {
                     this.paxGroups.splice(index, 1);
                 },
-                addDay() { this.itinerary.push({ region: '', lodge: '', nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideFee: this.itinerary.length > 0 ? this.itinerary[0].guideFee : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
+                addDay() { this.itinerary.push({ region: '', lodge: '', nights: 1, pp: 0, single: 0, child: 0, vehicle: this.itinerary.length > 0 ? this.itinerary[0].vehicle : 0, guideRate: this.itinerary.length > 0 ? (this.itinerary[0].guideRate || this.itinerary[0].guideFee || 0) : 0, guideAcc: this.itinerary.length > 0 ? this.itinerary[0].guideAcc : 0, guideMeals: this.itinerary.length > 0 ? this.itinerary[0].guideMeals : 0, guideDrinks: this.itinerary.length > 0 ? this.itinerary[0].guideDrinks : 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null }); },
                 removeDay(index) { this.itinerary.splice(index, 1); },
                 addActivity() { this.activities.push({ name: '', rate: 0, isPerPax: true }); },
                 removeActivity(index) { this.activities.splice(index, 1); },
@@ -1489,16 +1588,22 @@
                     const qChildPax = q.paxGroups ? q.paxGroups.reduce((s, g) => s + (parseInt(g.child) || 0), 0) : (q.childPax || 0);
                     const qNumPax = qDoublePax + qSinglePax + qChildPax || (q.numPax || 2);
 
-                    let group = 0, single = 0, child = 0, vehicle = 0, guideFee = 0, guideAcc = 0, flights = 0;
+                    let group = 0, single = 0, child = 0, vehicle = 0, guideRate = 0, guideAcc = 0, guideMeals = 0, guideDrinks = 0, flights = q.globalFlights || 0;
                     q.itinerary.forEach(d => {
                         let n = parseInt(d.nights) || 1;
                         group += (d.pp || 0) * n; single += (d.single || 0) * n; child += (d.child || 0) * n;
-                        vehicle += (d.vehicle || 0) * n; guideFee += (d.guideFee || 0) * n; guideAcc += (d.guideAcc || 0) * n; flights += (d.flights || 0) * n;
+                        vehicle += (d.vehicle || 0) * n; 
+                        guideRate += ((d.guideRate || 0) + (d.guideFee || 0)) * n; 
+                        guideAcc += (d.guideAcc || 0) * n; 
+                        guideMeals += (d.guideMeals || 0) * n; 
+                        guideDrinks += (d.guideDrinks || 0) * n; 
+                        flights += (d.flights || 0) * n;
                     });
                     const calcFuel = (q.fuelDistance || 0) * (q.fuelType === 'low' ? 3.125 : 4.0);
                     const activitiesTotal = q.activities.reduce((sum, act) => sum + (act.isPerPax ? (act.rate * Math.max(1, qNumPax)) : act.rate), 0);
                     const extTot = Array.isArray(q.extras) ? q.extras.reduce((sum, ext) => sum + (ext.isPerPax ? (ext.rate * Math.max(1, qNumPax)) : ext.rate), 0) : ((q.extras?.guideFood || 0) + (q.extras?.vehicleReturn || 0) + (q.extras?.other || 0));
-                    const sharedTotal = vehicle + guideFee + guideAcc + calcFuel + extTot + activitiesTotal;
+                    const guidedCostsTotal = guideRate + guideAcc + guideMeals + guideDrinks;
+                    const sharedTotal = vehicle + guidedCostsTotal + calcFuel + extTot + activitiesTotal;
                     const sharedPP = sharedTotal / Math.max(1, qNumPax);
 
                     const doubleStoPP = group + sharedPP;
@@ -1803,13 +1908,21 @@
             <td style="color: #71717a;">Flights</td>
             <td style="text-align: right; font-weight: 500;">${format(flights)}</td>
         </tr>` : ''}
-        ${guideFee > 0 ? `<tr>
-            <td style="color: #71717a;">Guide Fee</td>
-            <td style="text-align: right; font-weight: 500;">${format(guideFee)}</td>
+        ${guideRate > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Rate</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideRate)}</td>
         </tr>` : ''}
         ${guideAcc > 0 ? `<tr>
             <td style="color: #71717a;">Guide Accommodation</td>
             <td style="text-align: right; font-weight: 500;">${format(guideAcc)}</td>
+        </tr>` : ''}
+        ${guideMeals > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Meals</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideMeals)}</td>
+        </tr>` : ''}
+        ${guideDrinks > 0 ? `<tr>
+            <td style="color: #71717a;">Guide Drinks</td>
+            <td style="text-align: right; font-weight: 500;">${format(guideDrinks)}</td>
         </tr>` : ''}
         ${calcFuel > 0 ? `<tr>
             <td style="color: #71717a;">Fuel & Distance (${q.fuelDistance} km)</td>
