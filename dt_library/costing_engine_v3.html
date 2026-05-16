@@ -2073,7 +2073,7 @@
                     }
                 },
                 viewPdf(url) {
-                    this.currentPdfUrl = url;
+                    window.open(url, '_blank');
                 },
                 unlockAgent(agent) {
                     const pass = this.adminPasswords[agent];
