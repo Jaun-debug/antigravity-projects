@@ -9,15 +9,31 @@
     <script data-no-optimize="1" src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <!-- Tailwind CSS -->
     <script data-no-optimize="1" src="https://cdn.tailwindcss.com"></script>
+    <script data-no-optimize="1">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dt-gold': '#9B6A35',
+                        'dt-gold-hover': '#7D552A',
+                        'dt-seafoam': '#8CB5A3',
+                        'dt-seafoam-hover': '#7BA090',
+                        'dt-seafoam-dark': '#1F4F4B',
+                        'dt-ivory': '#F5F5F3'
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style data-no-optimize="1">
         :root {
-            --primary: #1a1a24;
-            --accent: #d87a4d;
-            --accent-hover: #e2a85e;
-            --bg-subtle: #ffffff;
+            --primary: #1F4F4B;
+            --accent: #9B6A35;
+            --accent-hover: #7D552A;
+            --bg-subtle: #F5F5F3;
         }
 
         html {
@@ -25,17 +41,16 @@
         }
 
         body {
-            font-family: 'Jost', sans-serif;
+            font-family: 'Open Sans', sans-serif;
             background-color: var(--bg-subtle);
             color: #2c2c2c;
-            background-image: radial-gradient(circle at top right, rgba(216, 122, 77, 0.05), transparent 40%),
-                              radial-gradient(circle at bottom left, rgba(26, 26, 36, 0.05), transparent 40%);
+            background-image: none;
             background-attachment: fixed;
             -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4, .font-heading, .serif-font {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Cinzel', serif;
         }
 
         .glass {
@@ -46,9 +61,9 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
         }
 
-        .dt-orange { color: var(--accent); }
-        .bg-dt-orange { background-color: var(--accent); }
-        .border-dt-orange { border-color: var(--accent); }
+        .dt-gold { color: var(--accent); }
+        .bg-dt-gold { background-color: var(--accent); }
+        .border-dt-gold { border-color: var(--accent); }
         
         /* Interactive Elements */
         .btn-premium {
@@ -140,29 +155,31 @@
     <div id="app" v-cloak class="w-full max-w-[1600px] mx-auto flex flex-col lg:flex-row gap-8 items-start relative">
     
         <!-- FLOATING CONTROL CENTER -->
-        <div class="fixed top-6 right-8 z-[100] flex flex-col gap-3 pointer-events-none items-end">
+        <div class="fixed top-16 right-8 z-[100] flex flex-col gap-3 pointer-events-none items-end">
             <!-- ROW 1: LIVE SUMMARY PILLS -->
-            <div class="flex gap-2">
-                <div class="bg-white/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-200/50 rounded-full p-1.5 flex items-center pointer-events-auto">
-                    <div class="px-5 py-1.5 flex items-center gap-3 border-r border-gray-100">
-                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">STO</span>
-                        <span class="text-sm font-bold text-gray-900">N$ {{ format(stoTotal) }}</span>
-                    </div>
-                    <div class="px-5 py-1.5 flex items-center gap-3 border-r border-gray-100">
-                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">DT Rack</span>
-                        <span class="text-sm font-black text-dt-orange">N$ {{ format(stoTotal * 1.25) }}</span>
-                    </div>
-                    <div class="px-5 py-1.5 flex items-center gap-3">
-                        <span class="text-[9px] font-black text-gray-400 uppercase tracking-widest">TL Rack</span>
-                        <span class="text-sm font-bold text-gray-900">N$ {{ format((stoTotal * 1.25) / 0.82) }}</span>
-                    </div>
+            <div class="bg-white/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-gray-200/50 rounded-full p-1.5 flex items-center pointer-events-auto">
+                <div class="px-5 py-1.5 flex items-center gap-3 border-r border-gray-100">
+                    <span class="text-[9px] font-black text-[#1F4F4B] uppercase tracking-widest">STO</span>
+                    <span class="text-sm font-bold text-gray-900">N$ {{ format(stoTotal) }}</span>
                 </div>
-                
-                <div v-if="botswanaUsdSummary > 0" class="bg-blue-50/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-blue-100/50 rounded-full p-1.5 flex items-center pointer-events-auto">
-                    <div class="px-5 py-1.5 flex items-center gap-3">
-                        <span class="text-[9px] font-black text-blue-400 uppercase tracking-widest">Botswana</span>
-                        <span class="text-sm font-bold text-blue-700">US$ {{ format(botswanaUsdSummary) }}</span>
-                    </div>
+                <div class="px-5 py-1.5 flex items-center gap-3 border-r border-gray-100">
+                    <span class="text-[9px] font-black text-[#1F4F4B] uppercase tracking-widest">DT Rack</span>
+                    <span class="text-sm font-black text-dt-gold">N$ {{ format(stoTotal * dtMarkupMultiplier) }}</span>
+                </div>
+                <div class="px-5 py-1.5 flex items-center gap-3">
+                    <span class="text-[9px] font-black text-[#1F4F4B] uppercase tracking-widest">TL Rack</span>
+                    <span class="text-sm font-bold text-gray-900">N$ {{ format((stoTotal * dtMarkupMultiplier) * (tlMarkupMultiplier / dtMarkupMultiplier)) }}</span>
+                </div>
+            </div>
+            
+            <div v-if="botswanaUsdSummary > 0" class="bg-blue-50/90 backdrop-blur-md shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-blue-100/50 rounded-full p-1.5 flex items-center pointer-events-auto">
+                <div class="px-5 py-1.5 flex items-center gap-3 border-r border-blue-100/50">
+                    <span class="text-[9px] font-black text-blue-400 uppercase tracking-widest">BW STO</span>
+                    <span class="text-sm font-bold text-blue-700">US$ {{ format(botswanaUsdSummary) }}</span>
+                </div>
+                <div class="px-5 py-1.5 flex items-center gap-3">
+                    <span class="text-[9px] font-black text-blue-400 uppercase tracking-widest">BW DT RACK</span>
+                    <span class="text-sm font-bold text-blue-700">US$ {{ format(botswanaUsdSummary * dtMarkupMultiplier) }}</span>
                 </div>
             </div>
 
@@ -174,7 +191,7 @@
                 </button>
                 <button @click="saveQuote()" :disabled="!canSave"
                     class="px-6 py-2.5 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all shadow-md flex items-center gap-2"
-                    :class="canSave ? 'bg-[#1a1a24] text-white hover:bg-black hover:-translate-y-0.5' : 'bg-gray-200 text-gray-400 cursor-not-allowed'">
+                    :class="canSave ? 'bg-dt-seafoam text-black hover:bg-dt-seafoam-hover hover:-translate-y-0.5' : 'bg-dt-seafoam/40 text-black/60 cursor-not-allowed'">
                     💾 Save Quote
                 </button>
             </div>
@@ -185,100 +202,100 @@
                 
                 <!-- 1. Costing Mode Switcher -->
                 <div class="flex flex-col gap-2">
-                    <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1 mb-1">Costing Mode</h3>
+                    <h3 class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1 mb-1">Costing Mode</h3>
                     <div class="flex flex-col gap-2">
                         <button @click="activeTab='dt'" 
-                            :class="activeTab === 'dt' ? 'bg-[#1F4F4B] text-white shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
+                            :class="activeTab === 'dt' ? 'bg-dt-seafoam text-black shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
                             class="w-full py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-left flex justify-between items-center">
                             <span>Desert Tracks</span>
-                            <span v-if="activeTab === 'dt'" class="w-2 h-2 rounded-full bg-[#C9A24A]"></span>
+                            <span v-if="activeTab === 'dt'" class="w-2 h-2 rounded-full bg-black"></span>
                         </button>
                         <button @click="activeTab='dt_agent'" 
-                            :class="activeTab === 'dt_agent' ? 'bg-[#1F4F4B] text-white shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
+                            :class="activeTab === 'dt_agent' ? 'bg-dt-seafoam text-black shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
                             class="w-full py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-left flex justify-between items-center">
                             <span>DT + Consultant</span>
-                            <span v-if="activeTab === 'dt_agent'" class="w-2 h-2 rounded-full bg-[#C9A24A]"></span>
+                            <span v-if="activeTab === 'dt_agent'" class="w-2 h-2 rounded-full bg-black"></span>
                         </button>
                         <button @click="activeTab='tl'" 
-                            :class="activeTab === 'tl' ? 'bg-[#1F4F4B] text-white shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
+                            :class="activeTab === 'tl' ? 'bg-dt-seafoam text-black shadow-md' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'"
                             class="w-full py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider transition-all text-left flex justify-between items-center">
                             <span>Travel Local</span>
-                            <span v-if="activeTab === 'tl'" class="w-2 h-2 rounded-full bg-[#C9A24A]"></span>
+                            <span v-if="activeTab === 'tl'" class="w-2 h-2 rounded-full bg-black"></span>
                         </button>
                     </div>
                 </div>
 
                 <!-- 2. Quote Navigation -->
                 <div class="flex-1 overflow-y-auto pr-1">
-                    <h3 class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1 mb-3">Quote Flow</h3>
+                    <h3 class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1 mb-3">Quote Flow</h3>
                     <nav class="flex flex-col gap-1">
                         <a href="#step-1-client" @click.prevent="scrollTo('step-1-client')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-1-client' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-1-client' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-1-client' ? 'border-white/30 text-white' : (isCompleted['step-1-client'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-1-client' ? 'border-black/30 text-black' : (isCompleted['step-1-client'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-1-client'] && activeSection !== 'step-1-client' ? '✓' : '1' }}
                             </span> Client Details
                         </a>
                         <a href="#step-2-pax" @click.prevent="scrollTo('step-2-pax')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-2-pax' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-2-pax' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-2-pax' ? 'border-white/30 text-white' : (isCompleted['step-2-pax'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-2-pax' ? 'border-black/30 text-black' : (isCompleted['step-2-pax'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-2-pax'] && activeSection !== 'step-2-pax' ? '✓' : '2' }}
                             </span> Passenger Config
                         </a>
                         <a href="#step-3-itinerary" @click.prevent="scrollTo('step-3-itinerary')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-3-itinerary' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-3-itinerary' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-3-itinerary' ? 'border-white/30 text-white' : (isCompleted['step-3-itinerary'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-3-itinerary' ? 'border-black/30 text-black' : (isCompleted['step-3-itinerary'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-3-itinerary'] && activeSection !== 'step-3-itinerary' ? '✓' : '3' }}
                             </span> Itinerary Builder
                         </a>
                         <a href="#step-4-fuel" @click.prevent="scrollTo('step-4-fuel')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-4-fuel' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-4-fuel' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-4-fuel' ? 'border-white/30 text-white' : (isCompleted['step-4-fuel'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-4-fuel' ? 'border-black/30 text-black' : (isCompleted['step-4-fuel'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-4-fuel'] && activeSection !== 'step-4-fuel' ? '✓' : '4' }}
                             </span> Fuel & Distance
                         </a>
                         <a href="#step-flights" @click.prevent="scrollTo('step-flights')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-flights' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-flights' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-flights' ? 'border-white/30 text-white' : (isCompleted['step-flights'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-flights' ? 'border-black/30 text-black' : (isCompleted['step-flights'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-flights'] && activeSection !== 'step-flights' ? '✓' : '5' }}
                             </span> Flights
                         </a>
                         <a href="#step-guided-costs" @click.prevent="scrollTo('step-guided-costs')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-guided-costs' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-guided-costs' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-guided-costs' ? 'border-white/30 text-white' : (isCompleted['step-guided-costs'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-guided-costs' ? 'border-black/30 text-black' : (isCompleted['step-guided-costs'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-guided-costs'] && activeSection !== 'step-guided-costs' ? '✓' : '6' }}
                             </span> Guided Costs
                         </a>
                         <a href="#step-5-activities" @click.prevent="scrollTo('step-5-activities')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-5-activities' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-5-activities' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-5-activities' ? 'border-white/30 text-white' : (isCompleted['step-5-activities'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-5-activities' ? 'border-black/30 text-black' : (isCompleted['step-5-activities'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-5-activities'] && activeSection !== 'step-5-activities' ? '✓' : '7' }}
                             </span> Activities
                         </a>
                         <a href="#step-6-extras" @click.prevent="scrollTo('step-6-extras')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-6-extras' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-6-extras' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-6-extras' ? 'border-white/30 text-white' : (isCompleted['step-6-extras'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-6-extras' ? 'border-black/30 text-black' : (isCompleted['step-6-extras'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-6-extras'] && activeSection !== 'step-6-extras' ? '✓' : '8' }}
                             </span> Extras
                         </a>
                         <a href="#step-7-botswana" @click.prevent="scrollTo('step-7-botswana')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-7-botswana' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-7-botswana' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-7-botswana' ? 'border-white/30 text-white' : (isCompleted['step-7-botswana'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-7-botswana' ? 'border-black/30 text-black' : (isCompleted['step-7-botswana'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-7-botswana'] && activeSection !== 'step-7-botswana' ? '✓' : '9' }}
                             </span> Botswana / Add-ons
                         </a>
                         <a href="#step-8-pricing" @click.prevent="scrollTo('step-8-pricing')" class="py-2 px-3 text-xs font-semibold rounded-lg transition-colors flex items-center gap-3"
-                           :class="activeSection === 'step-8-pricing' ? 'bg-[#1F4F4B] text-white shadow-md' : 'text-gray-600 hover:bg-gray-50'">
+                           :class="activeSection === 'step-8-pricing' ? 'bg-dt-seafoam text-black shadow-md' : 'text-gray-600 hover:bg-gray-50'">
                             <span class="w-5 h-5 rounded-full border flex items-center justify-center text-[9px] transition-colors"
-                                  :class="activeSection === 'step-8-pricing' ? 'border-white/30 text-white' : (isCompleted['step-8-pricing'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
+                                  :class="activeSection === 'step-8-pricing' ? 'border-black/30 text-black' : (isCompleted['step-8-pricing'] ? 'bg-green-100 border-green-500 text-green-600' : 'bg-white border-gray-300 text-gray-400')">
                                 {{ isCompleted['step-8-pricing'] && activeSection !== 'step-8-pricing' ? '✓' : '10' }}
                             </span> Final Pricing
                         </a>
@@ -294,15 +311,15 @@
         <div class="flex-1 flex flex-col gap-8 min-w-0">
 
             <div class="text-center lg:text-left mb-2">
-                <h1 class="text-4xl lg:text-5xl font-normal tracking-tight text-[#1a1a24] serif-font drop-shadow-sm mb-3">Costing Engine</h1>
-                <p class="text-dt-orange text-xs md:text-sm font-bold tracking-[0.3em] uppercase">Desert Tracks Premium Pricing</p>
-                <div class="h-[1px] w-full max-w-md bg-gradient-to-r from-[#d87a4d] to-transparent mt-8 hidden lg:block"></div>
-                <div class="h-[1px] w-32 bg-gradient-to-r from-transparent via-[#d87a4d] to-transparent mx-auto mt-8 block lg:hidden"></div>
+                <h1 class="text-4xl lg:text-5xl font-normal tracking-tight text-[#1F4F4B] serif-font drop-shadow-sm mb-3">Costing Engine</h1>
+                <p class="text-dt-gold text-xs md:text-sm font-bold tracking-[0.3em] uppercase">Desert Tracks Premium Pricing</p>
+                <div class="h-[1px] w-full max-w-md bg-gradient-to-r from-[#9B6A35] to-transparent mt-8 hidden lg:block"></div>
+                <div class="h-[1px] w-32 bg-gradient-to-r from-transparent via-[#9B6A35] to-transparent mx-auto mt-8 block lg:hidden"></div>
             </div>
 
             <!-- Meta Data Row Settings -->
             <div id="step-1-client" v-show="activeSection === 'step-1-client'" class="bg-white border border-gray-100 shadow-[0_10px_40px_rgba(0,0,0,0.02)] p-6 lg:p-8 rounded-[1.5rem] w-full relative overflow-hidden transition-all duration-300">
-                <div class="absolute top-0 right-0 w-64 h-64 bg-[#d87a4d] opacity-[0.03] rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+                <div class="absolute top-0 right-0 w-64 h-64 bg-[#9B6A35] opacity-[0.03] rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
                     <div class="flex flex-col gap-2 relative">
                         <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Client Name</label>
@@ -322,7 +339,7 @@
                     </div>
                     <div class="flex flex-col gap-2 lg:pl-4 justify-center">
                         <label class="text-[10px] font-bold text-gray-500 uppercase tracking-[0.2em] pl-1">Total Pax</label>
-                        <input type="number" v-model.number="numPax" class="w-full text-left font-normal serif-font text-3xl bg-transparent border-0 outline-none focus:ring-0 text-[#1a1a24] p-1 border-b-[1px] border-gray-300 transition-colors focus:border-[#d87a4d]">
+                        <input type="number" v-model.number="numPax" class="w-full text-left font-normal serif-font text-3xl bg-transparent border-0 outline-none focus:ring-0 text-[#1F4F4B] p-1 border-b-[1px] border-gray-300 transition-colors focus:border-[#9B6A35]">
                     </div>
                 </div>
             </div>
@@ -340,7 +357,7 @@
                 <div
                     class="p-6 bg-white border-b border-gray-100 flex justify-between items-center shadow-sm relative z-10 shrink-0">
                     <h4 class="font-black text-lg uppercase text-gray-800 tracking-widest flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-dt-orange animate-pulse"></span>
+                        <span class="w-2 h-2 rounded-full bg-dt-gold animate-pulse"></span>
                         Your Saved Quotes
                     </h4>
                     <button @click="isQuotesDrawerOpen = false"
@@ -353,11 +370,11 @@
                         You have not saved any quotes yet. Fill out the configuration and click Save.
                     </div>
                     <div v-for="(quotes, agent) in groupedQuotes" :key="agent"
-                        class="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm shrink-0 transition-all cursor-pointer hover:border-dt-orange/30"
+                        class="flex flex-col gap-3 bg-white p-4 rounded-xl border border-gray-200 shadow-sm shrink-0 transition-all cursor-pointer hover:border-dt-gold/30"
                         @click="expandedAgent = expandedAgent === agent ? null : agent">
 
                         <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-                            <span class="text-xs font-bold bg-dt-orange text-white px-2 py-1 rounded shadow-sm">{{ agent
+                            <span class="text-xs font-bold bg-dt-gold text-black px-2 py-1 rounded shadow-sm">{{ agent
                                 || 'Unnamed Agent' }}</span>
                             <div class="flex items-center gap-2">
                                 <span class="text-[10px] text-gray-400 font-bold uppercase">{{
@@ -378,7 +395,7 @@
                                     <input type="password" v-model="adminPasswords[agent]" placeholder="Password..."
                                         class="flex-1 text-xs p-2 rounded-lg border-gray-300 bg-gray-50" @click.stop>
                                     <button @click.stop="unlockAgent(agent)"
-                                        class="text-[11px] bg-gray-800 text-white px-3 py-2 rounded-lg font-bold hover:bg-black transition-colors">Unlock</button>
+                                        class="text-[11px] bg-gray-800 text-black px-3 py-2 rounded-lg font-bold hover:bg-black transition-colors">Unlock</button>
                                 </div>
                             </div>
 
@@ -420,7 +437,7 @@
                                         <button
                                             @click.stop="deleteQuote(clientQuotes.selectedQuoteIndex !== undefined ? clientQuotes.selectedQuoteIndex : clientQuotes[0].originalIndex)"
                                             title="Delete Selected Version"
-                                            class="px-2 py-1 text-red-500 bg-white border border-gray-200 rounded text-[11px] font-bold shadow-sm hover:!bg-red-500 hover:text-white hover:border-red-600 transition-colors shrink-0">
+                                            class="px-2 py-1 text-red-500 bg-white border border-gray-200 rounded text-[11px] font-bold shadow-sm hover:!bg-red-500 hover:text-black hover:border-red-600 transition-colors shrink-0">
                                             ✕
                                         </button>
                                     </div>
@@ -440,7 +457,7 @@
                                         <button v-if="clientQuotes.length === 1"
                                             @click.stop="deleteQuote(clientQuotes[0].originalIndex)"
                                             title="Delete Version"
-                                            class="px-2.5 py-1 text-red-400 hover:text-white hover:bg-red-500 border border-transparent rounded text-[11px] font-bold transition-colors shadow-sm shrink-0">✕</button>
+                                            class="px-2.5 py-1 text-red-400 hover:text-black hover:bg-red-500 border border-transparent rounded text-[11px] font-bold transition-colors shadow-sm shrink-0">✕</button>
                                     </div>
                                 </div>
                             </template>
@@ -451,7 +468,7 @@
                 <div class="p-6 shrink-0 bg-white border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
                     <button @click="saveQuote(); isQuotesDrawerOpen = false" :disabled="!canSave"
                         class="w-full py-4 rounded-xl text-sm font-black tracking-widest uppercase transition shadow-md flex items-center justify-center gap-2"
-                        :class="canSave ? 'bg-dt-orange hover:bg-orange-600 text-white animate-pulse' : 'bg-gray-200 text-gray-400 cursor-not-allowed'">
+                        :class="canSave ? 'bg-dt-seafoam hover:bg-dt-seafoam-hover text-black' : 'bg-dt-seafoam/40 text-black/60 cursor-not-allowed'">
                         + Save Current Quote
                     </button>
                 </div>
@@ -464,12 +481,12 @@
                 <div id="step-2-pax" v-show="activeSection === 'step-2-pax'" class="bg-white rounded-[1.25rem] shadow-sm border border-gray-100 p-6">
                     <div class="flex justify-between items-center mb-5">
                         <h3 class="font-bold text-gray-800 tracking-wide uppercase text-sm">Passenger Configuration</h3>
-                        <button @click="addGroup" class="px-4 py-1.5 bg-gray-900 border border-gray-900 shadow-sm text-white text-[10px] uppercase font-bold rounded hover:bg-dt-orange hover:border-dt-orange transition-colors">+ Add Group</button>
+                        <button @click="addGroup" class="px-4 py-1.5 bg-dt-seafoam border border-dt-seafoam shadow-sm text-black text-[10px] uppercase font-bold rounded hover:bg-dt-seafoam-hover hover:border-dt-seafoam-hover transition-colors">+ Add Group</button>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div v-for="(g, idx) in paxGroups" :key="g.id" class="bg-gray-50 border text-center border-gray-200 rounded-xl p-4 relative shadow-sm transition-all hover:border-gray-300">
                             <button v-if="paxGroups.length > 1" @click="removeGroup(idx)" class="absolute top-2 right-2.5 text-gray-400 hover:text-red-500 font-bold transition-colors">✕</button>
-                            <input v-model="g.name" class="font-bold text-sm bg-transparent border-b border-gray-200 outline-none w-3/4 mb-4 pb-1 text-center text-gray-800 focus:border-dt-orange" placeholder="e.g. Group 1" />
+                            <input v-model="g.name" class="font-bold text-sm bg-transparent border-b border-gray-200 outline-none w-3/4 mb-4 pb-1 text-center text-gray-800 focus:border-dt-gold" placeholder="e.g. Group 1" />
                             <div class="grid grid-cols-3 gap-2">
                                 <div>
                                 <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Double</label>
@@ -494,7 +511,7 @@
                         <h2 class="text-xl font-bold text-gray-900 font-heading">Itinerary Breakdown</h2>
                         
                         <div class="flex items-center gap-2">
-                            <select v-model="globalSeason" class="text-xs font-bold bg-white border border-gray-200 text-gray-600 rounded-lg px-3 py-2 outline-none focus:border-dt-orange shadow-sm cursor-pointer uppercase tracking-widest">
+                            <select v-model="globalSeason" class="text-xs font-bold bg-white border border-gray-200 text-gray-600 rounded-lg px-3 py-2 outline-none focus:border-dt-gold shadow-sm cursor-pointer uppercase tracking-widest">
                                 <option value="low">Off-Peak (Nov - Jun)</option>
                                 <option value="high">Peak (Jul - Oct)</option>
                             </select>
@@ -503,7 +520,7 @@
 
                     <div class="overflow-x-auto pb-4">
                         <table class="w-full text-sm text-left">
-                            <thead class="text-[10px] text-gray-400 uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
+                            <thead class="text-[10px] text-[#1F4F4B] uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
                                 <tr>
                                     <th class="px-4 py-4 w-10 font-bold">#</th>
                                     <th class="px-3 py-4 w-[60px] text-center font-bold">Nights</th>
@@ -526,14 +543,14 @@
                                         <div class="flex items-center justify-center gap-1">
                                             <button @click="day.nights > 1 ? day.nights-- : null" class="w-5 h-6 flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 rounded text-gray-500 font-bold leading-none text-xs transition-colors">-</button>
                                             <input type="number" v-model.number="day.nights"
-                                                class="w-8 text-center font-bold text-sm bg-transparent py-1 border-b-2 border-transparent outline-none focus:ring-0 focus:border-dt-orange transition-colors hide-arrows"
+                                                class="w-8 text-center font-bold text-sm bg-transparent py-1 border-b-2 border-transparent outline-none focus:ring-0 focus:border-dt-gold transition-colors hide-arrows"
                                                 min="1" max="99">
                                             <button @click="day.nights++" class="w-5 h-6 flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 rounded text-gray-500 font-bold leading-none text-xs transition-colors">+</button>
                                         </div>
                                         <div v-if="rowDates[index]" class="text-[9px] text-gray-400 font-bold mt-1 tracking-wider uppercase">
                                             {{ new Date(rowDates[index]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }}
                                         </div>
-                                        <button v-if="day.lodge" @click="toggleManualSeason(day, index)" class="text-[8px] font-black mt-0.5 uppercase tracking-widest px-1 py-0.5 rounded cursor-pointer hover:bg-gray-100 border border-transparent hover:border-gray-200 transition-colors w-full" :class="getSeason(index) === 'high' ? 'text-dt-orange' : 'text-blue-400'" title="Click to manually toggle season">
+                                        <button v-if="day.lodge" @click="toggleManualSeason(day, index)" class="text-[8px] font-black mt-0.5 uppercase tracking-widest px-1 py-0.5 rounded cursor-pointer hover:bg-gray-100 border border-transparent hover:border-gray-200 transition-colors w-full" :class="getSeason(index) === 'high' ? 'text-dt-gold' : 'text-blue-400'" title="Click to manually toggle season">
                                             {{ getSeason(index) === 'high' ? 'PEAK' : 'OFF PEAK' }}
                                         </button>
                                     </td>
@@ -551,7 +568,7 @@
                                                 :class="uploadedLodges.includes(l) ? 'text-green-600 font-bold bg-green-50' : ''">
                                                 {{l}}{{ uploadedLodges.includes(l) ? ' ✓' : '' }}
                                             </option>
-                                            <option value="__custom__" class="font-bold text-dt-orange">+ Add Custom
+                                            <option value="__custom__" class="font-bold text-dt-gold">+ Add Custom
                                                 Lodge...</option>
                                         </select>
                                     </td>
@@ -595,7 +612,7 @@
                                     <td colspan="4" class="px-3 py-4">
                                         <div class="flex items-center justify-between w-full">
                                             <button @click="addDay"
-                                                class="bg-[#79b4ff] hover:bg-[#63a0ec] text-white px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
+                                                class="bg-dt-seafoam hover:bg-dt-seafoam-hover text-black px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
                                                 + Add Day
                                             </button>
                                             <span class="text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">SUBTOTALS:</span>
@@ -637,12 +654,12 @@
                         <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Fuel & Distance</h2>
                         <div class="grid grid-cols-2 gap-5">
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Distance (km)</label>
+                                <label class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1">Distance (km)</label>
                                 <input type="number" v-model.number="fuelDistance"
                                     class="dt-input text-lg font-bold">
                             </div>
                             <div class="flex flex-col gap-1.5">
-                                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Consume Type</label>
+                                <label class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1">Consume Type</label>
                                 <select v-model="fuelType" class="dt-input h-full">
                                     <option value="low">Low (3.125 N$/km)</option>
                                     <option value="high">High (4.00 N$/km)</option>
@@ -654,7 +671,7 @@
                         class="mt-8 pt-5 border-t border-gray-100 flex justify-between items-center bg-[#F9FAFB] p-4 rounded-xl shadow-inner border border-gray-200/50">
                         <span class="font-bold text-gray-500 uppercase text-[10px] tracking-widest">Calculated
                             Fuel</span>
-                        <span class="font-black text-2xl text-dt-orange">{{ format(calculatedFuel) }}</span>
+                        <span class="font-black text-2xl text-dt-gold">{{ format(calculatedFuel) }}</span>
                     </div>
                 </div>
 
@@ -664,7 +681,7 @@
                     <div>
                         <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Flights</h2>
                         <div class="flex flex-col gap-1.5 w-1/2">
-                            <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1">Total Flight Cost</label>
+                            <label class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1">Total Flight Cost</label>
                             <currency-input v-model="globalFlights" :custom-class="'dt-input text-lg font-bold'" placeholder="0.00"></currency-input>
                         </div>
                     </div>
@@ -677,7 +694,7 @@
                         <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Guided Costs</h2>
                         <div class="overflow-x-auto pb-4">
                             <table class="w-full text-sm text-left">
-                                <thead class="text-[10px] text-gray-400 uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
+                                <thead class="text-[10px] text-[#1F4F4B] uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
                                     <tr>
                                         <th class="px-3 py-4 font-bold">#</th>
                                         <th class="px-3 py-4 font-bold min-w-[200px]">Lodge</th>
@@ -700,7 +717,7 @@
                                         <td class="px-3 py-2"><currency-input v-model="day.guideAcc" @blur="propagate(index, 'guideAcc', day.guideAcc)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
                                         <td class="px-3 py-2"><currency-input v-model="day.guideMeals" @blur="propagate(index, 'guideMeals', day.guideMeals)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
                                         <td class="px-3 py-2"><currency-input v-model="day.guideDrinks" @blur="propagate(index, 'guideDrinks', day.guideDrinks)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
-                                        <td class="px-3 py-2 text-right font-bold text-dt-orange">{{ format(((day.guideRate||0) + (day.guideFee||0) + (day.guideAcc||0) + (day.guideMeals||0) + (day.guideDrinks||0)) * (day.nights||1)) }}</td>
+                                        <td class="px-3 py-2 text-right font-bold text-dt-gold">{{ format(((day.guideRate||0) + (day.guideFee||0) + (day.guideAcc||0) + (day.guideMeals||0) + (day.guideDrinks||0)) * (day.nights||1)) }}</td>
                                     </tr>
                                 </tbody>
                                 <tfoot class="bg-gray-50/80 font-bold border-t border-gray-100">
@@ -720,7 +737,7 @@
                         <div class="flex justify-between items-center mb-5">
                             <h2 class="text-lg font-bold text-gray-900 font-heading">Activities</h2>
                             <button @click="addActivity"
-                                class="text-[10px] font-bold text-white bg-gray-900 hover:bg-black px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
+                                class="text-[10px] font-bold text-black bg-dt-seafoam hover:bg-dt-seafoam-hover px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
                                 Add</button>
                         </div>
                         <div class="space-y-2 max-h-[400px] overflow-y-auto">
@@ -738,7 +755,7 @@
                                     class="text-red-400 hover:text-red-600 font-bold px-1 text-xs">✕</button>
                             </div>
                             <div v-if="activities.length === 0"
-                                class="text-xs text-gray-400 font-medium italic p-2 text-center">No activities
+                                class="text-xs text-[#1F4F4B] font-medium italic p-2 text-center">No activities
                                 added.</div>
                         </div>
                     </div>
@@ -749,7 +766,7 @@
                     <div class="flex justify-between items-center mb-5">
                         <h2 class="text-lg font-bold text-gray-900 font-heading">Other Extras</h2>
                         <button @click="addExtra"
-                            class="text-[10px] font-bold text-white bg-gray-900 hover:bg-black px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
+                            class="text-[10px] font-bold text-black bg-dt-seafoam hover:bg-dt-seafoam-hover px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
                             Add</button>
                     </div>
                     <div class="space-y-2 max-h-[400px] overflow-y-auto">
@@ -768,7 +785,7 @@
                                 class="text-red-400 hover:text-red-600 font-bold px-1 text-xs">✕</button>
                         </div>
                         <div v-if="extras.length === 0"
-                            class="text-xs text-gray-400 font-medium italic p-2 text-center">No extras added.
+                            class="text-xs text-[#1F4F4B] font-medium italic p-2 text-center">No extras added.
                         </div>
                     </div>
                 </div>
@@ -790,7 +807,7 @@
                         <div class="flex flex-col gap-1 items-end">
                             <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Supplier:</span>
                             <input type="text" v-model="botswanaSupplier"
-                                class="w-48 font-bold text-[11px] bg-gray-50 border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-dt-orange focus:ring-1 focus:ring-dt-orange/30 placeholder-gray-300 text-gray-800 text-right transition-all"
+                                class="w-48 font-bold text-[11px] bg-gray-50 border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-dt-gold focus:ring-1 focus:ring-dt-gold/30 placeholder-gray-300 text-gray-800 text-right transition-all"
                                 placeholder="e.g. Under One Botswana...">
                         </div>
                     </label>
@@ -798,19 +815,19 @@
                         <div class="relative w-full">
                             <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Sharing PP</span>
                             <currency-input v-model="botswanaDoublePP"
-                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-gold focus:ring-2 focus:ring-dt-gold/20 text-right transition-all'"
                                         placeholder="0.00"></currency-input>
                         </div>
                         <div class="relative w-full">
                             <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Single PP</span>
                             <currency-input v-model="botswanaSinglePP"
-                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-gold focus:ring-2 focus:ring-dt-gold/20 text-right transition-all'"
                                         placeholder="0.00"></currency-input>
                         </div>
                         <div class="relative w-full">
                             <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Child PP</span>
                             <currency-input v-model="botswanaChildPP"
-                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-orange focus:ring-2 focus:ring-dt-orange/20 text-right transition-all'"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-gold focus:ring-2 focus:ring-dt-gold/20 text-right transition-all'"
                                         placeholder="0.00"></currency-input>
                         </div>
                     </div>
@@ -819,12 +836,12 @@
                 <div id="step-8-pricing" v-show="activeSection === 'step-8-pricing'" class="bg-white rounded-[1.25rem] shadow-[0_4px_30px_rgb(0,0,0,0.06)] border border-gray-100 overflow-hidden">
 
                     <div
-                        class="bg-[#1f2937] text-white p-6 text-center relative overflow-hidden">
+                        class="bg-dt-seafoam text-[#1F4F4B] p-6 text-center relative overflow-hidden">
                         <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
-                        <h3 class="font-bold tracking-[0.2em] text-[10px] text-gray-300 uppercase mb-2 relative z-10">
-                            Total STO Configuration <span v-if="clientName" class="text-dt-orange ml-1">- {{ clientName }}</span>
+                        <h3 class="font-bold tracking-[0.2em] text-[10px] text-[#1F4F4B] uppercase mb-2 relative z-10">
+                            Total STO Configuration <span v-if="clientName" class="text-dt-gold ml-1">- {{ clientName }}</span>
                         </h3>
-                        <div class="text-4xl font-black tracking-tight relative z-10">{{ format(stoTotal) }}</div>
+                        <div class="text-4xl font-black tracking-tight text-black relative z-10">{{ format(stoTotal) }}</div>
                     </div>
 
                     <div class="p-5 space-y-3.5 text-[13px] bg-white">
@@ -868,55 +885,55 @@
 
                         <!-- TAB: DESERT TRACKS ONLY (25%) -->
                         <div v-if="activeTab === 'dt'" class="space-y-4 font-normal">
-                            <div class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black p-5 rounded-[1rem] border border-white/10 text-white shadow-xl relative overflow-hidden">
-                                <div class="absolute inset-0 bg-dt-orange/5 mix-blend-overlay"></div>
+                            <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-dt-gold/5 mix-blend-overlay"></div>
                                 <div class="relative z-10">
-                                    <div class="text-[10px] font-black tracking-widest text-[#e8a385] uppercase mb-1">Desert Tracks Direct Booking</div>
-                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">(25% Markup)</div>
+                                    <div class="text-[10px] font-black tracking-widest text-[#1F4F4B] uppercase mb-1">Desert Tracks Direct Booking</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">({{ markups.dt }}% Markup)</div>
                                     
-                                    <div class="text-4xl font-black text-white mb-1">{{ format(stoTotal * 1.25) }}</div>
-                                    <div class="text-[9px] font-bold text-gray-400 border-b border-white/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+                                    <div class="text-4xl font-black text-black mb-1">{{ format(stoTotal * dtMarkupMultiplier) }}</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
 
-                                    <div class="space-y-2.5 text-xs mb-5 border-b border-white/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (25%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.25) }}</span></div>
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks <input type="number" v-model.number="markups.dt" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">{{ format(stoTotal * (markups.dt / 100)) }}</span></div>
                                     </div>
                                     <div class="flex justify-between text-sm items-center">
-                                        <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
-                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * 1.25) }}</span>
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * dtMarkupMultiplier) }}</span>
                                     </div>
-                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
-                                        <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, dtMarkupMultiplier)) }}</span>
                                     </div>
-                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
-                                        <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
+                                        <span class="text-black">{{ format(perPaxCosting.doubleStoPP * dtMarkupMultiplier) }}</span>
                                     </div>
-                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
+                                    <div v-if="singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4">
                                         <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
-                                        <span class="text-white">{{ format(perPaxCosting.singleStoPP * 1.25) }}</span>
+                                        <span class="text-black">{{ format(perPaxCosting.singleStoPP * dtMarkupMultiplier) }}</span>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
-                                        class="flex justify-between text-sm border-t border-white/10 pt-4 mt-5 items-center">
-                                        <span class="text-gray-300 font-medium tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
-                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * 1.25) }}</span>
+                                        class="flex justify-between text-sm border-t border-[#1F4F4B]/10 pt-4 mt-5 items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * dtMarkupMultiplier) }}</span>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
-                                        class="space-y-2 text-xs my-5 border-b border-white/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium">Desert Tracks (25%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.25) }}</span></div>
+                                        class="space-y-2 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium">Desert Tracks <input type="number" v-model.number="markups.dt" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.dt / 100)) }}</span></div>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-2 text-gray-400">
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
-                                        <span class="text-white">&#36;{{ format(botswanaDoublePP * 1.25) }}</span>
+                                        <span class="text-black">&#36;{{ format(botswanaDoublePP * dtMarkupMultiplier) }}</span>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-3">
                                         <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
-                                        <span class="text-white">&#36;{{ format(botswanaSinglePP * 1.25) }}</span>
+                                        <span class="text-black">&#36;{{ format(botswanaSinglePP * dtMarkupMultiplier) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -924,56 +941,600 @@
 
                         <!-- TAB: TRAVEL LOCAL (18%) -->
                         <div v-if="activeTab === 'tl'" class="space-y-4 font-normal">
-                            <div class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black p-5 rounded-[1rem] border border-white/10 text-white shadow-xl relative overflow-hidden">
+                            <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
                                 <div class="absolute inset-0 bg-[#3B82F6]/5 mix-blend-overlay"></div>
                                 <div class="relative z-10">
-                                    <div class="text-[10px] font-black tracking-widest text-[#93c5fd] uppercase mb-1">Travel Local Invoice</div>
-                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">(18% Markup)</div>
-                                    <div class="text-4xl font-black text-white mb-1">{{ format((stoTotal * 1.25) / 0.82) }}</div>
-                                    <div class="text-[9px] font-bold text-gray-400 border-b border-white/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+                                    <div class="text-[10px] font-black tracking-widest text-[#1F4F4B] uppercase mb-1">Travel Local Invoice</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">({{ markups.tl_margin }}% Markup)</div>
+                                    <div class="text-4xl font-black text-black mb-1">{{ format((stoTotal * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
 
-                                    <div class="space-y-2.5 text-xs mb-5 border-b border-white/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Travel Local (18%)</span><span class="text-white font-bold">{{ format(((stoTotal * 1.25) / 0.82) * 0.18) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Agent (5%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Travel Local <input type="number" v-model.number="markups.tl_margin" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">{{ format(((stoTotal * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) * (markups.tl_margin / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks <input type="number" v-model.number="markups.agent_dt" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">{{ format(stoTotal * (markups.agent_dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent <input type="number" v-model.number="markups.agent_consultant" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">{{ format(stoTotal * (markups.agent_consultant / 100)) }}</span></div>
                                     </div>
 
                                     <div class="flex justify-between text-sm items-center">
-                                        <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
-                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format((stoTotal * 1.25) / 0.82) }}</span>
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">{{ format((stoTotal * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</span>
                                     </div>
-                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
-                                        <span class="text-white">{{ format((perPaxCosting.doubleStoPP * 1.25) / 0.82) }}</span>
+                                        <span class="text-black">{{ format((perPaxCosting.doubleStoPP * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</span>
                                     </div>
-                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
+                                    <div v-if="singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4">
                                         <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
-                                        <span class="text-white">{{ format((perPaxCosting.singleStoPP * 1.25) / 0.82) }}</span>
+                                        <span class="text-black">{{ format((perPaxCosting.singleStoPP * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</span>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
-                                        class="flex justify-between text-sm border-t border-white/10 pt-4 mt-5 items-center">
-                                        <span class="text-gray-300 font-medium tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
-                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">&#36;{{ format((botswanaUsdSummary * 1.25) / 0.82) }}</span>
+                                        class="flex justify-between text-sm border-t border-[#1F4F4B]/10 pt-4 mt-5 items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">&#36;{{ format((botswanaUsdSummary * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</span>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
-                                        class="space-y-2.5 text-xs my-5 border-b border-white/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Travel Local (18%)</span><span class="text-white font-bold">&#36;{{ format(((botswanaUsdSummary * 1.25) / 0.82) * 0.18) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Agent (5%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                        class="space-y-2.5 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Travel Local <input type="number" v-model.number="markups.tl_margin" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">&#36;{{ format(((botswanaUsdSummary * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) * (markups.tl_margin / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks <input type="number" v-model.number="markups.agent_dt" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.agent_dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent <input type="number" v-model.number="markups.agent_consultant" class="w-10 ml-2 px-1 text-center border border-[#1F4F4B]/20 rounded bg-white text-black text-xs" />%</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.agent_consultant / 100)) }}</span></div>
                                     </div>
 
-                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-2 text-gray-400">
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
-                                        <span class="text-white">&#36;{{ format((botswanaDoublePP * 1.25) / 0.82) }}</span>
+                                        <span class="text-black">&#36;{{ format((botswanaDoublePP * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</span>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-3">
                                         <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
-                                        <span class="text-white">&#36;{{ format((botswanaSinglePP * 1.25) / 0.82) }}</span>
+                                        <span class="text-black">&#36;{{ format((botswanaSinglePP * dtAgentMarkupMultiplier) * (tlMarkupMultiplier / dtAgentMarkupMultiplier)) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        exportDocument(clientQuotes.selectedQuoteIndex ?? clientQuotes[0].originalIndex, 'costing')"
+                                            class="flex-1 px-2 py-1.5 bg-[#f4ebd0] text-yellow-900 border border-[#d4c391] text-[10px] font-bold tracking-widest rounded shadow-sm hover:bg-[#ebdcae] transition-colors">COSTING</button>
+                                        <button v-if="clientQuotes.length === 1"
+                                            @click.stop="deleteQuote(clientQuotes[0].originalIndex)"
+                                            title="Delete Version"
+                                            class="px-2.5 py-1 text-red-400 hover:text-black hover:bg-red-500 border border-transparent rounded text-[11px] font-bold transition-colors shadow-sm shrink-0">✕</button>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 shrink-0 bg-white border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)]">
+                    <button @click="saveQuote(); isQuotesDrawerOpen = false" :disabled="!canSave"
+                        class="w-full py-4 rounded-xl text-sm font-black tracking-widest uppercase transition shadow-md flex items-center justify-center gap-2"
+                        :class="canSave ? 'bg-dt-seafoam hover:bg-dt-seafoam-hover text-black' : 'bg-dt-seafoam/40 text-black/60 cursor-not-allowed'">
+                        + Save Current Quote
+                    </button>
+                </div>
+            </div>
+
+            <!-- Remaining App Content is now directly inside MAIN CONTENT -->
+            <div class="w-full space-y-8 shrink-0 z-10">
+
+                <!-- Pax Groups UI -->
+                <div id="step-2-pax" v-show="activeSection === 'step-2-pax'" class="bg-white rounded-[1.25rem] shadow-sm border border-gray-100 p-6">
+                    <div class="flex justify-between items-center mb-5">
+                        <h3 class="font-bold text-gray-800 tracking-wide uppercase text-sm">Passenger Configuration</h3>
+                        <button @click="addGroup" class="px-4 py-1.5 bg-dt-seafoam border border-dt-seafoam shadow-sm text-black text-[10px] uppercase font-bold rounded hover:bg-dt-seafoam-hover hover:border-dt-seafoam-hover transition-colors">+ Add Group</button>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <div v-for="(g, idx) in paxGroups" :key="g.id" class="bg-gray-50 border text-center border-gray-200 rounded-xl p-4 relative shadow-sm transition-all hover:border-gray-300">
+                            <button v-if="paxGroups.length > 1" @click="removeGroup(idx)" class="absolute top-2 right-2.5 text-gray-400 hover:text-red-500 font-bold transition-colors">✕</button>
+                            <input v-model="g.name" class="font-bold text-sm bg-transparent border-b border-gray-200 outline-none w-3/4 mb-4 pb-1 text-center text-gray-800 focus:border-dt-gold" placeholder="e.g. Group 1" />
+                            <div class="grid grid-cols-3 gap-2">
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Double</label>
+                                <input type="number" v-model.number="g.double" step="2" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Single</label>
+                                <input type="number" v-model.number="g.single" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                                <div>
+                                <label class="text-[9px] uppercase font-bold tracking-wider text-gray-400 mb-1.5 block">Child</label>
+                                <input type="number" v-model.number="g.child" class="w-full dt-input text-center font-bold px-1 py-1.5 text-sm bg-white shadow-sm border border-gray-100 rounded" min="0" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Itinerary Builder -->
+                <div id="step-3-itinerary" v-show="activeSection === 'step-3-itinerary'" class="bg-[#F4F5F6] rounded-[1.25rem] shadow-sm border border-[#e5e7e9] overflow-hidden">
+                    <div class="flex justify-between items-center p-6 border-b border-gray-50">
+                        <h2 class="text-xl font-bold text-gray-900 font-heading">Itinerary Breakdown</h2>
+                        
+                        <div class="flex items-center gap-2">
+                            <select v-model="globalSeason" class="text-xs font-bold bg-white border border-gray-200 text-gray-600 rounded-lg px-3 py-2 outline-none focus:border-dt-gold shadow-sm cursor-pointer uppercase tracking-widest">
+                                <option value="low">Off-Peak (Nov - Jun)</option>
+                                <option value="high">Peak (Jul - Oct)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="overflow-x-auto pb-4">
+                        <table class="w-full text-sm text-left">
+                            <thead class="text-[10px] text-[#1F4F4B] uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
+                                <tr>
+                                    <th class="px-4 py-4 w-10 font-bold">#</th>
+                                    <th class="px-3 py-4 w-[60px] text-center font-bold">Nights</th>
+                                    <th class="px-3 py-4 w-48 text-left font-bold">Region & Lodge</th>
+                                    <th class="px-3 py-4 w-[90px] text-center font-bold">Pricelist</th>
+                                                                        <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Double PP</th>
+                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Single PP</th>
+                                    <th class="px-3 py-4 w-[130px] min-w-[130px] text-right font-bold">Child PP</th>
+                                    <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Vehicle</th>
+                                    <th class="px-2 py-4"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(day, index) in itinerary" :key="index"
+                                    class="border-b hover:bg-white/80 transition"
+                                    :class="uploadedLodgeFiles[day.lodge] ? 'bg-green-100/60 border-green-200' : 'border-gray-100'">
+                                    <td class="px-3 py-2 font-semibold text-gray-400 text-xs text-center">{{ index + 1
+                                        }}</td>
+                                    <td class="px-3 py-2 text-center">
+                                        <div class="flex items-center justify-center gap-1">
+                                            <button @click="day.nights > 1 ? day.nights-- : null" class="w-5 h-6 flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 rounded text-gray-500 font-bold leading-none text-xs transition-colors">-</button>
+                                            <input type="number" v-model.number="day.nights"
+                                                class="w-8 text-center font-bold text-sm bg-transparent py-1 border-b-2 border-transparent outline-none focus:ring-0 focus:border-dt-gold transition-colors hide-arrows"
+                                                min="1" max="99">
+                                            <button @click="day.nights++" class="w-5 h-6 flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-100 rounded text-gray-500 font-bold leading-none text-xs transition-colors">+</button>
+                                        </div>
+                                        <div v-if="rowDates[index]" class="text-[9px] text-gray-400 font-bold mt-1 tracking-wider uppercase">
+                                            {{ new Date(rowDates[index]).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) }}
+                                        </div>
+                                        <button v-if="day.lodge" @click="toggleManualSeason(day, index)" class="text-[8px] font-black mt-0.5 uppercase tracking-widest px-1 py-0.5 rounded cursor-pointer hover:bg-gray-100 border border-transparent hover:border-gray-200 transition-colors w-full" :class="getSeason(index) === 'high' ? 'text-dt-gold' : 'text-blue-400'" title="Click to manually toggle season">
+                                            {{ getSeason(index) === 'high' ? 'PEAK' : 'OFF PEAK' }}
+                                        </button>
+                                    </td>
+                                    <td class="px-3 py-2 flex flex-col gap-1 min-w-[200px]">
+                                        <select v-model="day.region" @change="day.lodge=''"
+                                            class="dt-input text-xs font-semibold bg-gray-50">
+                                            <option value="">Select Region...</option>
+                                            <option v-for="r in Object.keys(regions)" :key="r" :value="r">{{r}}</option>
+                                        </select>
+                                        <select v-model="day.lodge" :disabled="!day.region"
+                                            @change="handleLodgeChange(day, index)" class="dt-input text-xs font-medium"
+                                            :class="{'text-green-700 bg-green-50 border-green-300 font-bold': uploadedLodgeFiles[day.lodge]}">
+                                            <option value="">Select Lodge...</option>
+                                            <option v-for="l in regions[day.region] || []" :key="l" :value="l"
+                                                :class="uploadedLodges.includes(l) ? 'text-green-600 font-bold bg-green-50' : ''">
+                                                {{l}}{{ uploadedLodges.includes(l) ? ' ✓' : '' }}
+                                            </option>
+                                            <option value="__custom__" class="font-bold text-dt-gold">+ Add Custom
+                                                Lodge...</option>
+                                        </select>
+                                    </td>
+                                    <td class="px-2 py-2 text-center text-[10px]">
+                                        <div v-if="!day.lodge" class="text-[10px] text-center text-gray-400 font-bold uppercase tracking-wider py-1">
+                                            Select Lodge
+                                        </div>
+                                        <div v-else-if="!uploadedLodgeFiles[day.lodge]" class="relative group cursor-pointer block w-full py-1.5 px-1 rounded border bg-gray-100 border-gray-200 hover:bg-gray-200 transition-colors">
+                                            <input type="file" :key="day.lodge + '_' + index" @change="uploadRowPricelist($event, index)" accept="application/pdf,image/*,text/html,.html" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" title="Click to upload pricelist">
+                                            <div class="font-bold uppercase tracking-wider text-gray-500 text-center pointer-events-none">
+                                                Upload ↑
+                                            </div>
+                                        </div>
+                                        <div v-else
+                                            class="flex flex-col gap-1 items-center bg-emerald-50 p-1.5 rounded-md border border-emerald-300 shadow-sm ring-1 ring-emerald-100">
+                                            <span
+                                                class="font-bold text-emerald-800 text-[10px] truncate w-full max-w-[85px]"
+                                                :title="uploadedLodgeFiles[day.lodge].name">✓ {{ uploadedLodgeFiles[day.lodge].name }}</span>
+                                            <div class="flex gap-1 w-full justify-center">
+                                                <button @click="viewPdf(uploadedLodgeFiles[day.lodge].url)"
+                                                    class="font-bold text-blue-700 bg-blue-100 px-2 py-1 rounded hover:bg-blue-200 transition border border-blue-200">VIEW</button>
+                                                <button @click="removeRowPricelist(index)"
+                                                    class="font-bold text-red-600 bg-red-100 px-2 py-1 rounded hover:bg-red-200 transition border border-red-200">✕</button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.pp" :is-disabled="day.isLocked"
+                                            :custom-class="day.isLocked ? 'dt-input text-right font-medium bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right font-medium'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.single" :is-disabled="day.isLocked"
+                                            :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.child" :is-disabled="day.isLocked"
+                                            :custom-class="day.isLocked ? 'dt-input text-right bg-gray-100/50 opacity-80 cursor-not-allowed' : 'dt-input text-right'"></currency-input></td>
+                                    <td class="px-3 py-2"><currency-input v-model="day.vehicle" @blur="propagate(index, 'vehicle', day.vehicle)"
+                                            :custom-class="'dt-input text-right'"></currency-input></td>
+                                    <td class="px-2 py-2 text-red-400 hover:text-red-600 cursor-pointer text-center font-bold"
+                                        @click="removeDay(index)">✕</td>
+                                </tr>
+                            </tbody>
+                            <tfoot class="bg-gray-50/80 font-bold border-t border-gray-100">
+                                <tr>
+                                    <td colspan="4" class="px-3 py-4">
+                                        <div class="flex items-center justify-between w-full">
+                                            <button @click="addDay"
+                                                class="bg-dt-seafoam hover:bg-dt-seafoam-hover text-black px-4 py-2 rounded-lg text-xs font-bold tracking-widest uppercase transition shadow-sm btn-premium">
+                                                + Add Day
+                                            </button>
+                                            <span class="text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">SUBTOTALS:</span>
+                                        </div>
+                                    </td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.group) }}<br>
+                                        <span v-if="doublePax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            doublePax }} Pax Total:
+                                            <span class="text-gray-700">{{format(storeTotals.group * doublePax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.single) }}<br>
+                                        <span v-if="singlePax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            singlePax }} Pax Total:
+                                            <span class="text-gray-700">{{format(storeTotals.single * singlePax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right">
+                                        {{ format(storeTotals.child || 0) }}<br>
+                                        <span v-if="childPax > 0"
+                                            class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">{{
+                                            childPax }} Pax Total:
+                                            <span class="text-gray-700">{{format((storeTotals.child || 0) * childPax)}}</span></span>
+                                    </td>
+                                    <td class="px-3 py-4 text-right text-gray-700">{{ format(storeTotals.vehicle) }}</td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Logistics & Extras -->
+                <div id="step-4-fuel" v-show="activeSection === 'step-4-fuel'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Fuel & Distance</h2>
+                        <div class="grid grid-cols-2 gap-5">
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1">Distance (km)</label>
+                                <input type="number" v-model.number="fuelDistance"
+                                    class="dt-input text-lg font-bold">
+                            </div>
+                            <div class="flex flex-col gap-1.5">
+                                <label class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1">Consume Type</label>
+                                <select v-model="fuelType" class="dt-input h-full">
+                                    <option value="low">Low (3.125 N$/km)</option>
+                                    <option value="high">High (4.00 N$/km)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="mt-8 pt-5 border-t border-gray-100 flex justify-between items-center bg-[#F9FAFB] p-4 rounded-xl shadow-inner border border-gray-200/50">
+                        <span class="font-bold text-gray-500 uppercase text-[10px] tracking-widest">Calculated
+                            Fuel</span>
+                        <span class="font-black text-2xl text-dt-gold">{{ format(calculatedFuel) }}</span>
+                    </div>
+                </div>
+
+                <!-- NEW FLIGHTS SECTION -->
+                <div id="step-flights" v-show="activeSection === 'step-flights'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Flights</h2>
+                        <div class="flex flex-col gap-1.5 w-1/2">
+                            <label class="text-[10px] font-bold text-[#1F4F4B] uppercase tracking-widest pl-1">Total Flight Cost</label>
+                            <currency-input v-model="globalFlights" :custom-class="'dt-input text-lg font-bold'" placeholder="0.00"></currency-input>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NEW GUIDED COSTS SECTION -->
+                <div id="step-guided-costs" v-show="activeSection === 'step-guided-costs'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div>
+                        <h2 class="text-lg font-bold text-gray-900 mb-6 font-heading">Guided Costs</h2>
+                        <div class="overflow-x-auto pb-4">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-[10px] text-[#1F4F4B] uppercase tracking-widest bg-gray-50/50 border-b border-gray-100">
+                                    <tr>
+                                        <th class="px-3 py-4 font-bold">#</th>
+                                        <th class="px-3 py-4 font-bold min-w-[200px]">Lodge</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Rate</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Guide Acc.</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Meals</th>
+                                        <th class="px-3 py-4 w-[110px] min-w-[110px] text-right font-bold">Drinks</th>
+                                        <th class="px-3 py-4 w-[100px] min-w-[100px] text-right font-bold">Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(day, index) in itinerary" :key="index" class="border-b hover:bg-white/80 transition border-gray-100">
+                                        <td class="px-3 py-2 font-semibold text-gray-400 text-xs">{{ index + 1 }}</td>
+                                        <td class="px-3 py-2 text-xs font-bold text-gray-700">
+                                            <div v-if="day.lodge">{{ day.lodge }}</div>
+                                            <div v-else class="text-gray-400 italic">No Lodge Selected</div>
+                                            <div class="text-[9px] text-gray-400 uppercase tracking-wider font-normal">{{ day.nights }} Night(s)</div>
+                                        </td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideRate" @blur="propagate(index, 'guideRate', day.guideRate)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideAcc" @blur="propagate(index, 'guideAcc', day.guideAcc)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideMeals" @blur="propagate(index, 'guideMeals', day.guideMeals)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2"><currency-input v-model="day.guideDrinks" @blur="propagate(index, 'guideDrinks', day.guideDrinks)" :custom-class="'dt-input text-right text-xs'"></currency-input></td>
+                                        <td class="px-3 py-2 text-right font-bold text-dt-gold">{{ format(((day.guideRate||0) + (day.guideFee||0) + (day.guideAcc||0) + (day.guideMeals||0) + (day.guideDrinks||0)) * (day.nights||1)) }}</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot class="bg-gray-50/80 font-bold border-t border-gray-100">
+                                    <tr>
+                                        <td colspan="6" class="px-3 py-4 text-right text-[11px] font-black uppercase text-gray-400 tracking-[0.15em]">TOTAL GUIDED COSTS:</td>
+                                        <td class="px-3 py-4 text-right text-gray-700 text-lg">{{ format(storeTotals.guidedCostsTotal) }}</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-5-activities" v-show="activeSection === 'step-5-activities'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-center mb-5">
+                            <h2 class="text-lg font-bold text-gray-900 font-heading">Activities</h2>
+                            <button @click="addActivity"
+                                class="text-[10px] font-bold text-black bg-dt-seafoam hover:bg-dt-seafoam-hover px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
+                                Add</button>
+                        </div>
+                        <div class="space-y-2 max-h-[400px] overflow-y-auto">
+                            <div v-for="(act, index) in activities" :key="index"
+                                class="flex gap-2 items-center bg-white p-2 border border-gray-100 rounded-lg">
+                                <input type="text" v-model="act.name" placeholder="Activity Name"
+                                    class="flex-1 dt-input text-xs">
+                                <currency-input v-model="act.rate" :custom-class="'w-24 dt-input text-xs text-right'"
+                                    placeholder="0.00"></currency-input>
+                                <button @click="act.isPerPax = !act.isPerPax"
+                                    class="text-[9px] w-12 font-bold uppercase p-1 rounded transition border"
+                                    :class="act.isPerPax ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-gray-50 text-gray-500 border-gray-200'">{{
+                                    act.isPerPax ? 'PP' : 'FLAT' }}</button>
+                                <button @click="removeActivity(index)"
+                                    class="text-red-400 hover:text-red-600 font-bold px-1 text-xs">✕</button>
+                            </div>
+                            <div v-if="activities.length === 0"
+                                class="text-xs text-[#1F4F4B] font-medium italic p-2 text-center">No activities
+                                added.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-6-extras" v-show="activeSection === 'step-6-extras'"
+                    class="bg-white rounded-[1.25rem] shadow-[0_4px_20px_rgb(0,0,0,0.03)] border border-gray-100 p-6 flex flex-col justify-between">
+                    <div class="flex justify-between items-center mb-5">
+                        <h2 class="text-lg font-bold text-gray-900 font-heading">Other Extras</h2>
+                        <button @click="addExtra"
+                            class="text-[10px] font-bold text-black bg-dt-seafoam hover:bg-dt-seafoam-hover px-3 py-1.5 rounded uppercase tracking-wider btn-premium">+
+                            Add</button>
+                    </div>
+                    <div class="space-y-2 max-h-[400px] overflow-y-auto">
+                        <div v-for="(ext, index) in extras" :key="index"
+                            class="flex gap-2 items-center bg-white p-2 border border-gray-100 rounded-lg">
+                            <input type="text" v-model="ext.name" placeholder="Extra Name (e.g. Extra Transfer)"
+                                class="flex-1 dt-input text-xs font-medium">
+                            <currency-input v-model="ext.rate"
+                                :custom-class="'w-24 dt-input text-xs text-right font-medium'"
+                                placeholder="0.00"></currency-input>
+                            <button @click="ext.isPerPax = !ext.isPerPax"
+                                class="text-[9px] w-10 font-bold uppercase p-1 rounded transition border"
+                                :class="ext.isPerPax ? 'bg-blue-50 text-blue-600 border-blue-200' : 'bg-gray-50 text-gray-500 border-gray-200'">{{
+                                ext.isPerPax ? 'PP' : 'FLAT' }}</button>
+                            <button @click="removeExtra(index)"
+                                class="text-red-400 hover:text-red-600 font-bold px-1 text-xs">✕</button>
+                        </div>
+                        <div v-if="extras.length === 0"
+                            class="text-xs text-[#1F4F4B] font-medium italic p-2 text-center">No extras added.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uploaded Pricelists Repository Removed: Moved into the Itinerary Rows. -->
+            </div>
+
+            <!-- RIGHT SIDEBAR: FINAL INVOICING -->
+            <div class="w-full relative flex flex-col gap-6 z-40 pb-8">
+
+                <!-- Botswana Block Moved Above -->
+                <div id="step-7-botswana" v-show="activeSection === 'step-7-botswana'"
+                    class="flex flex-col gap-4 bg-[#E2F1E8] p-6 rounded-[1.25rem] shadow-sm border border-[#d2e7d9]">
+                    <label
+                        class="text-sm font-black text-gray-900 uppercase tracking-widest w-full leading-tight flex items-center justify-between">
+                        <div class="flex flex-col gap-1 text-[13px]">Botswana Safari
+                            <span class="text-[10px] text-gray-400 font-bold tracking-widest leading-none">(USD)</span>
+                        </div>
+                        <div class="flex flex-col gap-1 items-end">
+                            <span class="text-[9px] text-gray-400 font-bold uppercase tracking-widest">Supplier:</span>
+                            <input type="text" v-model="botswanaSupplier"
+                                class="w-48 font-bold text-[11px] bg-gray-50 border border-gray-200 rounded px-2 py-1 focus:outline-none focus:border-dt-gold focus:ring-1 focus:ring-dt-gold/30 placeholder-gray-300 text-gray-800 text-right transition-all"
+                                placeholder="e.g. Under One Botswana...">
+                        </div>
+                    </label>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Sharing PP</span>
+                            <currency-input v-model="botswanaDoublePP"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-gold focus:ring-2 focus:ring-dt-gold/20 text-right transition-all'"
+                                        placeholder="0.00"></currency-input>
+                        </div>
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Single PP</span>
+                            <currency-input v-model="botswanaSinglePP"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-gold focus:ring-2 focus:ring-dt-gold/20 text-right transition-all'"
+                                        placeholder="0.00"></currency-input>
+                        </div>
+                        <div class="relative w-full">
+                            <span class="absolute left-3 top-2 text-[9px] text-gray-400 font-bold uppercase tracking-widest">Child PP</span>
+                            <currency-input v-model="botswanaChildPP"
+                                        :custom-class="'w-full pl-3 pr-4 pt-7 pb-2.5 font-black text-xl bg-[#F9FAFB] rounded-xl text-gray-900 border border-gray-200 outline-none focus:border-dt-gold focus:ring-2 focus:ring-dt-gold/20 text-right transition-all'"
+                                        placeholder="0.00"></currency-input>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="step-8-pricing" v-show="activeSection === 'step-8-pricing'" class="bg-white rounded-[1.25rem] shadow-[0_4px_30px_rgb(0,0,0,0.06)] border border-gray-100 overflow-hidden">
+
+                    <div
+                        class="bg-dt-seafoam text-[#1F4F4B] p-6 text-center relative overflow-hidden">
+                        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
+                        <h3 class="font-bold tracking-[0.2em] text-[10px] text-[#1F4F4B] uppercase mb-2 relative z-10">
+                            Total STO Configuration <span v-if="clientName" class="text-dt-gold ml-1">- {{ clientName }}</span>
+                        </h3>
+                        <div class="text-4xl font-black tracking-tight text-black relative z-10">{{ format(stoTotal) }}</div>
+                    </div>
+
+                    <div class="p-5 space-y-3.5 text-[13px] bg-white">
+                                                <div v-for="g in paxGroups" :key="g.id" v-show="parseInt(g.double) > 0 || parseInt(g.single) > 0 || parseInt(g.child) > 0" class="flex justify-between items-center border-b border-gray-100 pb-2">
+                            <span class="text-gray-500 font-medium">{{ g.name }} 
+                                <span v-if="parseInt(g.double) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.double}}x DBL</span>
+                                <span v-if="parseInt(g.single) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.single}}x SGL</span>
+                                <span v-if="parseInt(g.child) > 0" class="text-[10px] bg-gray-100 px-1 rounded text-gray-500 ml-1 font-bold">{{g.child}}x CHD</span>
+                            </span>
+                            <span class="font-bold text-gray-900">{{ format((storeTotals.group * Math.max(0, parseInt(g.double) || 0)) + (storeTotals.single * Math.max(0, parseInt(g.single) || 0)) + (storeTotals.child * Math.max(0, parseInt(g.child) || 0))) }}</span>
+                        </div>
+                        <div v-if="storeTotals.vehicle > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Vehicle Hire</span><span
+                                class="font-bold text-gray-900">{{ format(storeTotals.vehicle) }}</span></div>
+                        <div v-if="storeTotals.flights > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Flights</span><span
+                                class="font-bold text-gray-900">{{ format(storeTotals.flights) }}</span></div>
+                        <div v-if="storeTotals.guideRate > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Rate</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideRate) }}</span></div>
+                        <div v-if="storeTotals.guideAcc > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Acc</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideAcc) }}</span></div>
+                        <div v-if="storeTotals.guideMeals > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Meals</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideMeals) }}</span></div>
+                        <div v-if="storeTotals.guideDrinks > 0" class="flex justify-between border-b border-gray-100 pb-2"><span class="text-gray-500 font-medium">Guide Drinks</span><span class="font-bold text-gray-900">{{ format(storeTotals.guideDrinks) }}</span></div>
+                        <div v-if="calculatedFuel > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Fuel & Return</span><span
+                                class="font-bold text-gray-900">{{ format(calculatedFuel)
+                                }}</span></div>
+                        <div v-if="activitiesTotal > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Activities</span><span
+                                class="font-bold text-gray-900">{{ format(activitiesTotal) }}</span></div>
+                        <div v-if="extrasTotal > 0" class="flex justify-between border-b border-gray-100 pb-2"><span
+                                class="text-gray-500 font-medium">Other Extras</span><span
+                                class="font-bold text-gray-900">{{ format(extrasTotal) }}</span>
+                        </div>
+                        <div class="flex justify-between pb-1" v-if="botswanaUsdSummary > 0"><span
+                                class="text-yellow-600 font-bold">Botswana STO Base (USD)</span><span
+                                class="font-bold text-yellow-700">&#36;{{ format(botswanaUsdSummary) }}</span></div>
+                    </div>
+
+                    <div class="bg-gray-50/50 p-6 border-t border-gray-100 font-semibold rounded-b-[1.25rem]">
+                        <h4 class="text-center font-black text-[10px] uppercase text-gray-500 tracking-[0.2em] mb-4">
+                            Pricing Options</h4>
+
+                        <!-- TAB: DESERT TRACKS ONLY (25%) -->
+                        <div v-if="activeTab === 'dt'" class="space-y-4 font-normal">
+                            <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-dt-gold/5 mix-blend-overlay"></div>
+                                <div class="relative z-10">
+                                    <div class="text-[10px] font-black tracking-widest text-[#1F4F4B] uppercase mb-1">Desert Tracks Direct Booking</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">(25% Markup)</div>
+                                    
+                                    <div class="text-4xl font-black text-black mb-1">{{ format(stoTotal * this.dtMarkupMultiplier) }}</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (25%)</span><span class="text-black font-bold">{{ format(stoTotal * (this.markups.dt / 100)) }}</span></div>
+                                    </div>
+                                    <div class="flex justify-between text-sm items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * this.dtMarkupMultiplier) }}</span>
+                                    </div>
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
+                                        <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
+                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
+                                        <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
+                                        <span class="text-black">{{ format(perPaxCosting.doubleStoPP * this.dtMarkupMultiplier) }}</span>
+                                    </div>
+                                    <div v-if="singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4">
+                                        <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
+                                        <span class="text-black">{{ format(perPaxCosting.singleStoPP * this.dtMarkupMultiplier) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-sm border-t border-[#1F4F4B]/10 pt-4 mt-5 items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * this.dtMarkupMultiplier) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="space-y-2 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium">Desert Tracks (25%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (this.markups.dt / 100)) }}</span></div>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
+                                        <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
+                                        <span class="text-black">&#36;{{ format(botswanaDoublePP * this.dtMarkupMultiplier) }}</span>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-3">
+                                        <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
+                                        <span class="text-black">&#36;{{ format(botswanaSinglePP * this.dtMarkupMultiplier) }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- TAB: TRAVEL LOCAL (18%) -->
+                        <div v-if="activeTab === 'tl'" class="space-y-4 font-normal">
+                            <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
+                                <div class="absolute inset-0 bg-[#3B82F6]/5 mix-blend-overlay"></div>
+                                <div class="relative z-10">
+                                    <div class="text-[10px] font-black tracking-widest text-[#1F4F4B] uppercase mb-1">Travel Local Invoice</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">(18% Markup)</div>
+                                    <div class="text-4xl font-black text-black mb-1">{{ format((stoTotal * this.dtMarkupMultiplier) / 0.82) }}</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Travel Local (18%)</span><span class="text-black font-bold">{{ format(((stoTotal * this.dtMarkupMultiplier) / 0.82) * 0.18) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent (5%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                    </div>
+
+                                    <div class="flex justify-between text-sm items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">{{ format((stoTotal * this.dtMarkupMultiplier) / 0.82) }}</span>
+                                    </div>
+                                    <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
+                                        <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
+                                        <span class="text-black">{{ format((perPaxCosting.doubleStoPP * this.dtMarkupMultiplier) / 0.82) }}</span>
+                                    </div>
+                                    <div v-if="singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4">
+                                        <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
+                                        <span class="text-black">{{ format((perPaxCosting.singleStoPP * this.dtMarkupMultiplier) / 0.82) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-sm border-t border-[#1F4F4B]/10 pt-4 mt-5 items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">&#36;{{ format((botswanaUsdSummary * this.dtMarkupMultiplier) / 0.82) }}</span>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="space-y-2.5 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Travel Local (18%)</span><span class="text-black font-bold">&#36;{{ format(((botswanaUsdSummary * this.dtMarkupMultiplier) / 0.82) * 0.18) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent (5%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                    </div>
+
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
+                                        <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
+                                        <span class="text-black">&#36;{{ format((botswanaDoublePP * this.dtMarkupMultiplier) / 0.82) }}</span>
+                                    </div>
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-3">
+                                        <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
+                                        <span class="text-black">&#36;{{ format((botswanaSinglePP * this.dtMarkupMultiplier) / 0.82) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -981,57 +1542,57 @@
 
                         <!-- TAB: DT + AGENT -->
                         <div v-if="activeTab === 'dt_agent'" class="space-y-4 font-normal">
-                            <div class="bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-gray-800 via-gray-900 to-black p-5 rounded-[1rem] border border-white/10 text-white shadow-xl relative overflow-hidden">
+                            <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
                                 <div class="absolute inset-0 bg-[#A855F7]/5 mix-blend-overlay"></div>
                                 <div class="relative z-10">
-                                    <div class="text-[10px] font-black tracking-widest text-[#d8b4fe] uppercase mb-1">DT + Consultant</div>
-                                    <div class="text-[9px] font-bold text-gray-400 uppercase tracking-widest mb-3">(20% + 5% Markup)</div>
-                                    <div class="text-4xl font-black text-white mb-1">{{ format((stoTotal * 1.25)) }}</div>
-                                    <div class="text-[9px] font-bold text-gray-400 border-b border-white/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
+                                    <div class="text-[10px] font-black tracking-widest text-[#1F4F4B] uppercase mb-1">DT + Consultant</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">(20% + 5% Markup)</div>
+                                    <div class="text-4xl font-black text-black mb-1">{{ format((stoTotal * this.dtMarkupMultiplier)) }}</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
 
-                                    <div class="space-y-2.5 text-xs mb-5 border-b border-white/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Consultant (5%)</span><span class="text-white font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                    <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Consultant (5%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.05) }}</span></div>
                                     </div>
 
                                     <div class="flex justify-between text-sm items-center">
-                                        <span class="text-gray-300 font-medium tracking-wide">Namibian ZAR/NAD Portion</span>
-                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * 1.25) }}</span>
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Namibian ZAR/NAD Portion</span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">{{ format(stoTotal * this.dtMarkupMultiplier) }}</span>
                                     </div>
-                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
-                                        <span class="text-dt-orange font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
                                     </div>
-                                    <div v-if="paxGroups.length <= 1" class="flex justify-between text-xs mt-3 text-gray-400">
+                                    <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
-                                        <span class="text-white">{{ format(perPaxCosting.doubleStoPP * 1.25) }}</span>
+                                        <span class="text-black">{{ format(perPaxCosting.doubleStoPP * this.dtMarkupMultiplier) }}</span>
                                     </div>
-                                    <div v-if="singlePax > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-4">
+                                    <div v-if="singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4">
                                         <span class="font-medium tracking-wide">Namibian Single Traveler PP</span>
-                                        <span class="text-white">{{ format(perPaxCosting.singleStoPP * 1.25) }}</span>
+                                        <span class="text-black">{{ format(perPaxCosting.singleStoPP * this.dtMarkupMultiplier) }}</span>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
-                                        class="flex justify-between text-sm border-t border-white/10 pt-4 mt-5 items-center">
-                                        <span class="text-gray-300 font-medium tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
-                                        <span class="font-bold text-white bg-white/10 border border-white/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * 1.25) }}</span>
+                                        class="flex justify-between text-sm border-t border-[#1F4F4B]/10 pt-4 mt-5 items-center">
+                                        <span class="text-[#1F4F4B] font-black tracking-wide">Botswana USD Portion <span class="text-[10px] text-gray-500">(inc markup)</span></span>
+                                        <span class="font-bold text-dt-gold bg-[#D1E1DA] border border-[#1F4F4B]/10 px-2 py-1 rounded text-xs">&#36;{{ format(botswanaUsdSummary * this.dtMarkupMultiplier) }}</span>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
-                                        class="space-y-2.5 text-xs my-5 border-b border-white/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-gray-400 font-medium tracking-wide">Consultant (5%)</span><span class="text-white font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                        class="space-y-2.5 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Consultant (5%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-2 text-gray-400">
+                                    <div v-if="botswanaUsdSummary > 0"
+                                        class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Botswana Double Sharing PP</span>
-                                        <span class="text-white">&#36;{{ format(botswanaDoublePP * 1.25) }}</span>
+                                        <span class="text-black">&#36;{{ format(botswanaDoublePP * this.dtMarkupMultiplier) }}</span>
                                     </div>
-                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0 && paxGroups.length <= 1"
-                                        class="flex justify-between text-xs mt-1.5 mb-2 text-gray-400 border-b border-white/10 pb-3">
+                                    <div v-if="botswanaUsdSummary > 0 && singlePax > 0"
+                                        class="flex justify-between text-xs mt-1.5 mb-2 text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-3">
                                         <span class="font-medium tracking-wide">Botswana Single Traveler PP</span>
-                                        <span class="text-white">&#36;{{ format(botswanaSinglePP * 1.25) }}</span>
+                                        <span class="text-black">&#36;{{ format(botswanaSinglePP * this.dtMarkupMultiplier) }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -1140,10 +1701,16 @@
                     botswanaSinglePP: 0, botswanaChildPP: 0,
                     fuelDistance: 0,
                     fuelType: 'low',
+                    markups: {
+                        dt: 20,
+                        agent_dt: 20,
+                        agent_consultant: 5,
+                        tl_margin: 18
+                    },
                     globalFlights: 0,
-                    activities: [],
+                    activities: [{ name: '', rate: 0, isPerPax: true }],
                     currentPdfUrl: null,
-                    extras: [],
+                    extras: [{ name: '', rate: 0, isPerPax: false }],
                     itinerary: [
                         { region: 'Windhoek', lodge: 'Acacia Guesthouse', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideRate: 0, guideAcc: 0, guideMeals: 0, guideDrinks: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
                         { region: 'Sossusvlei', lodge: 'Sossusvlei Lodge', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideRate: 0, guideAcc: 0, guideMeals: 0, guideDrinks: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
@@ -1612,11 +2179,11 @@
 
                     let stoTotal = (doubleStoPP * Math.max(0, qDoublePax)) + (singleStoPP * Math.max(0, qSinglePax)) + (childStoPP * Math.max(0, qChildPax));
 
-                    const dtTotal = stoTotal * 1.25;
+                    const dtTotal = stoTotal * this.dtMarkupMultiplier;
                     const tlTotal = dtTotal / 0.82;
 
-                    const dtNamibianDoublePP = doubleStoPP * 1.25;
-                    const dtNamibianSinglePP = singleStoPP * 1.25;
+                    const dtNamibianDoublePP = doubleStoPP * this.dtMarkupMultiplier;
+                    const dtNamibianSinglePP = singleStoPP * this.dtMarkupMultiplier;
                     const tlNamibianDoublePP = dtNamibianDoublePP / 0.82;
                     const tlNamibianSinglePP = dtNamibianSinglePP / 0.82;
 
@@ -1624,10 +2191,10 @@
                     const qBotsSinglePP = q.botswanaSinglePP || 0;
                     const qBotsTotal = (qBotsDoublePP * Math.max(0, qDoublePax)) + (qBotsSinglePP * Math.max(0, qSinglePax));
 
-                    const dtBotsTotal = qBotsTotal * 1.25;
+                    const dtBotsTotal = qBotsTotal * this.dtMarkupMultiplier;
                     const tlBotsTotal = dtBotsTotal / 0.82;
-                    const dtBotsDoublePP = qBotsDoublePP * 1.25;
-                    const dtBotsSinglePP = qBotsSinglePP * 1.25;
+                    const dtBotsDoublePP = qBotsDoublePP * this.dtMarkupMultiplier;
+                    const dtBotsSinglePP = qBotsSinglePP * this.dtMarkupMultiplier;
                     const tlBotsDoublePP = dtBotsDoublePP / 0.82;
                     const tlBotsSinglePP = dtBotsSinglePP / 0.82;
 
@@ -1650,10 +2217,10 @@
         body { font-family: 'Open Sans', sans-serif; background-color: #f4f4f5; padding: 40px 20px; color: #18181b; }
         .container { max-width: 800px; margin: 0 auto; background: white; padding: 50px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
         .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #f4f4f5; padding-bottom: 30px; margin-bottom: 30px; }
-        .logo-text { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #d87a4d; margin: 0; }
+        .logo-text { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #9B6A35; margin: 0; }
         .sub-logo { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #a1a1aa; font-weight: 600; }
         .meta-text { font-size: 13px; color: #52525b; line-height: 1.6; }
-        h3 { font-family: 'Playfair Display', serif; font-size: 20px; color: #27272a; margin-top: 40px; border-bottom: 1px solid #f4f4f5; padding-bottom: 10px; }
+        h3 { font-family: 'Cinzel', serif; font-size: 20px; color: #27272a; margin-top: 40px; border-bottom: 1px solid #f4f4f5; padding-bottom: 10px; }
         table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 20px; }
         th { text-align: left; padding: 12px; background: #fafafa; color: #71717a; font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 1px; }
         td { padding: 12px; border-bottom: 1px solid #f4f4f5; color: #3f3f46; }
@@ -1663,7 +2230,7 @@
         .m-section-bottom { padding: 30px; background: #fafafa; border-top: 1px dashed #e4e4e7; }
         .m-title { font-size: 11px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; color: #71717a; margin-bottom: 12px; }
         .m-val { font-size: 24px; font-weight: 700; color: #18181b; font-family: 'Open Sans', sans-serif;}
-        .m-pp { font-size: 14px; color: #d87a4d; margin-top: 6px; font-weight: 600; font-family: 'Open Sans', sans-serif; }
+        .m-pp { font-size: 14px; color: #9B6A35; margin-top: 6px; font-weight: 600; font-family: 'Open Sans', sans-serif; }
     </style>
 </head>
 <body>
@@ -1687,7 +2254,7 @@
                 </div>
             </div>
             <div style="width: 320px;">
-                <h2 style="font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; margin-top: 0; text-align: right; color: #18181b;">Pro Forma INVOICE</h2>
+                <h2 style="font-family: 'Cinzel', serif; font-size: 20px; font-weight: 700; margin-top: 0; text-align: right; color: #18181b;">Pro Forma INVOICE</h2>
                 <div style="font-size: 11px; margin-top: 20px; display: grid; grid-template-columns: 120px 1fr; gap: 8px;">
                     <div style="color: #71717a;">Invoice No.</div><div style="text-align: right; font-weight: 700;"><span contenteditable="true" style="min-width: 120px; display: inline-block; border-bottom: 1px solid #18181b; outline: none;"></span></div>
                     <div style="color: #71717a;">Invoice Date:</div><div style="text-align: right; font-weight: 700;">${new Date(Number(q.timestamp) || Date.now()).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
@@ -1716,15 +2283,15 @@
                 <strong>Agent:</strong> ${q.agentName}
             </div>
         </div>
-        <div style="background: #fff8f6; border-left: 4px solid #d87a4d; padding: 15px 20px; margin-bottom: 30px;">
-            <div style="font-size: 12px; color: #d87a4d; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Prepared For</div>
+        <div style="background: #fff8f6; border-left: 4px solid #9B6A35; padding: 15px 20px; margin-bottom: 30px;">
+            <div style="font-size: 12px; color: #9B6A35; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">Prepared For</div>
             <div style="font-size: 20px; font-weight: 600; color: #27272a; margin-top: 4px;">${q.clientName} (${qNumPax} PAX)</div>
         </div>
         `}
 
         ${type === 'invoice' ? `
         <div style="border: 2px solid #18181b; margin-top: 30px;">
-            <h3 style="text-align: center; margin: 15px 0 10px 0; font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; border-bottom: none;">${totalDays} Day / ${totalNights} Night Namibia Safari</h3>
+            <h3 style="text-align: center; margin: 15px 0 10px 0; font-family: 'Cinzel', serif; font-size: 16px; font-weight: 700; border-bottom: none;">${totalDays} Day / ${totalNights} Night Namibia Safari</h3>
             <table style="width: 100%; border-collapse: collapse; margin-top: 0;">
                 <tr style="background-color: #e3d299;">
                     <th style="padding: 15px 20px; color: #000; font-size: 12px; border-top: 1px solid #18181b; border-bottom: 1px solid #18181b;">Description</th>
@@ -1754,20 +2321,20 @@
                 </tr>
                 ${finalTotalUSD > 0 ? `
                 <tr style="background-color: #e5e5e5;">
-                    <td style="padding: 15px; vertical-align: top; border-top: 1px solid #d87a4d;">
+                    <td style="padding: 15px; vertical-align: top; border-top: 1px solid #9B6A35;">
                         <div style="font-weight: 600; font-size: 13px;">${q.botswanaSupplier || 'Botswana Safari'} (USD)</div>
                     </td>
-                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">${qNumPax}</td>
-                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD / Math.max(1, qNumPax))}</td>
-                    <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #d87a4d;">$${format(finalTotalUSD)}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #9B6A35;">${qNumPax}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: center; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #9B6A35;">$${format(finalTotalUSD / Math.max(1, qNumPax))}</td>
+                    <td contenteditable="true" style="padding: 15px; text-align: right; vertical-align: top; border-left: 1px solid #18181b; border-top: 1px solid #9B6A35;">$${format(finalTotalUSD)}</td>
                 </tr>
                 ` : ''}
                 <tr>
-                    <td colspan="2" rowspan="3" style="border-top: 2px solid #d87a4d; padding: 20px; vertical-align: top; border-bottom: 2px solid #18181b;">
+                    <td colspan="2" rowspan="3" style="border-top: 2px solid #9B6A35; padding: 20px; vertical-align: top; border-bottom: 2px solid #18181b;">
                         <div contenteditable="true" style="min-height: 80px; outline: none; border: 1px dashed #ccc; padding: 10px; font-size: 11px; color: #71717a; max-width: 400px; background: #fafafa; border-radius: 4px;">Click to specify additional terms, banking info, or notes...</div>
                     </td>
-                    <td style="border-top: 2px solid #d87a4d; padding: 12px 20px; text-align: right; font-size: 12px; border-left: 2px solid #18181b;">Subtotal</td>
-                    <td contenteditable="true" style="border-top: 2px solid #d87a4d; padding: 12px 20px; text-align: right; font-weight: 700; font-size: 12px; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD)}</td>
+                    <td style="border-top: 2px solid #9B6A35; padding: 12px 20px; text-align: right; font-size: 12px; border-left: 2px solid #18181b;">Subtotal</td>
+                    <td contenteditable="true" style="border-top: 2px solid #9B6A35; padding: 12px 20px; text-align: right; font-weight: 700; font-size: 12px; border-left: 1px solid #18181b;">NAD ${format(finalTotalNAD)}</td>
                 </tr>
                 <tr>
                     <td style="padding: 12px 20px; text-align: right; font-size: 12px; border-left: 2px solid #18181b;">Total Vat</td>
@@ -1876,8 +2443,8 @@
         </tr>`).join('')}
         ${type === 'itinerary' ? '' : `<tr>
             <td colspan="4" style="text-align: right; font-weight: bold; padding-top: 15px;">Sub Total:</td>
-            <td style="text-align: right; font-weight: bold; padding-top: 15px; color: #d87a4d;">${format(group)}</td>
-            <td style="text-align: right; font-weight: bold; padding-top: 15px; color: #d87a4d;">${format(single)}</td>
+            <td style="text-align: right; font-weight: bold; padding-top: 15px; color: #9B6A35;">${format(group)}</td>
+            <td style="text-align: right; font-weight: bold; padding-top: 15px; color: #9B6A35;">${format(single)}</td>
         </tr>`}
     </table>
 
@@ -1937,8 +2504,8 @@
             <td style="text-align: right; font-weight: 500;">${format(extTot)}</td>
         </tr>` : ''}
         ${qBotsTotal > 0 ? `<tr>
-            <td style="color: #d87a4d; font-weight: bold;">Botswana STO Base (USD)</td>
-            <td style="text-align: right; font-weight: bold; color: #d87a4d;">$${format(qBotsTotal)}</td>
+            <td style="color: #9B6A35; font-weight: bold;">Botswana STO Base (USD)</td>
+            <td style="text-align: right; font-weight: bold; color: #9B6A35;">$${format(qBotsTotal)}</td>
         </tr>` : ''}
     </table>
     ` : ''}
@@ -1958,7 +2525,7 @@
             </div>
             ${qBotsTotal > 0 ? `
             <div class="m-section-bottom">
-                <div class="m-title" style="color: #d87a4d;">${q.botswanaSupplier || 'Botswana'}</div>
+                <div class="m-title" style="color: #9B6A35;">${q.botswanaSupplier || 'Botswana'}</div>
                 <div class="m-val">$${format(dtBotsTotal)} USD Botswana Client Invoice</div>
                 <div class="m-pp">Botswana Double Sharing PP: $${format(dtBotsDoublePP)}</div>
                 ${(qBotsSinglePP > 0) ? `<div class="m-pp">Botswana Single PP: $${format(dtBotsSinglePP)}</div>` : ''}
@@ -1976,7 +2543,7 @@
             </div>
             ${qBotsTotal > 0 ? `
             <div class="m-section-bottom">
-                <div class="m-title" style="color: #d87a4d;">${q.botswanaSupplier || 'Botswana'}</div>
+                <div class="m-title" style="color: #9B6A35;">${q.botswanaSupplier || 'Botswana'}</div>
                 <div class="m-val">$${format(tlBotsTotal)} USD Botswana Client Invoice</div>
                 <div class="m-pp">Botswana Double Sharing PP: $${format(tlBotsDoublePP)}</div>
                 ${(qBotsSinglePP > 0) ? `<div class="m-pp">Botswana Single PP: $${format(tlBotsSinglePP)}</div>` : ''}
@@ -1991,12 +2558,12 @@
                 <div class="m-pp">Namibian Double Sharing PP: ${format(dtNamibianDoublePP)}</div>
                 ${(q.singlePax || 0) > 0 ? `<div class="m-pp">Namibian Single PP: ${format(dtNamibianSinglePP)}</div>` :
                                     ''}
-                <div style="font-size: 11px; color: #d87a4d; margin-top: 12px; font-weight: bold;">(Includes 20% DT & 5%
+                <div style="font-size: 11px; color: #9B6A35; margin-top: 12px; font-weight: bold;">(Includes 20% DT & 5%
                     Agent Override)</div>
             </div>
             ${qBotsTotal > 0 ? `
             <div class="m-section-bottom">
-                <div class="m-title" style="color: #d87a4d;">${q.botswanaSupplier || 'Botswana'}</div>
+                <div class="m-title" style="color: #9B6A35;">${q.botswanaSupplier || 'Botswana'}</div>
                 <div class="m-val">$${format(dtBotsTotal)} USD Botswana Client Invoice</div>
                 <div class="m-pp">Botswana Double Sharing PP: $${format(dtBotsDoublePP)}</div>
                 ${(qBotsSinglePP > 0) ? `<div class="m-pp">Botswana Single PP: $${format(dtBotsSinglePP)}</div>` : ''}
