@@ -883,7 +883,7 @@
                         <h4 class="text-center font-black text-[10px] uppercase text-gray-500 tracking-[0.2em] mb-4">
                             Pricing Options</h4>
 
-                        <!-- TAB: DESERT TRACKS ONLY (25%) -->
+                        <!-- TAB: DESERT TRACKS ONLY ({{markups.dt}}%) -->
                         <div v-if="activeTab === 'dt'" class="space-y-4 font-normal">
                             <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
                                 <div class="absolute inset-0 bg-dt-gold/5 mix-blend-overlay"></div>
@@ -1427,19 +1427,19 @@
                         <h4 class="text-center font-black text-[10px] uppercase text-gray-500 tracking-[0.2em] mb-4">
                             Pricing Options</h4>
 
-                        <!-- TAB: DESERT TRACKS ONLY (25%) -->
+                        <!-- TAB: DESERT TRACKS ONLY ({{markups.dt}}%) -->
                         <div v-if="activeTab === 'dt'" class="space-y-4 font-normal">
                             <div class="bg-dt-seafoam p-5 rounded-[1rem] border border-[#1F4F4B]/10 text-black shadow-xl relative overflow-hidden">
                                 <div class="absolute inset-0 bg-dt-gold/5 mix-blend-overlay"></div>
                                 <div class="relative z-10">
                                     <div class="text-[10px] font-black tracking-widest text-[#1F4F4B] uppercase mb-1">Desert Tracks Direct Booking</div>
-                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">(25% Markup)</div>
+                                    <div class="text-[9px] font-bold text-[#1F4F4B] uppercase tracking-widest mb-3">({{markups.dt}}% Markup)</div>
                                     
                                     <div class="text-4xl font-black text-black mb-1">{{ format(stoTotal * dtMarkupMultiplier) }}</div>
                                     <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
 
                                     <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (25%)</span><span class="text-black font-bold">{{ format(stoTotal * (this.markups.dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks ({{markups.dt}}%)</span><span class="text-black font-bold">{{ format(stoTotal * (markups.dt / 100)) }}</span></div>
                                     </div>
                                     <div class="flex justify-between text-sm items-center">
                                         <span class="text-[#1F4F4B] font-black tracking-wide">Namibian ZAR/NAD Portion</span>
@@ -1447,7 +1447,7 @@
                                     </div>
                                     <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
-                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, dtMarkupMultiplier)) }}</span>
                                     </div>
                                     <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
@@ -1467,7 +1467,7 @@
 
                                     <div v-if="botswanaUsdSummary > 0"
                                         class="space-y-2 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium">Desert Tracks (25%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (this.markups.dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium">Desert Tracks ({{markups.dt}}%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.dt / 100)) }}</span></div>
                                     </div>
                                     <div v-if="botswanaUsdSummary > 0"
                                         class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
@@ -1495,8 +1495,8 @@
 
                                     <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
                                         <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Travel Local (18%)</span><span class="text-black font-bold">{{ format(((stoTotal * dtMarkupMultiplier) / 0.82) * 0.18) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent (5%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks ({{markups.agent_dt}}%)</span><span class="text-black font-bold">{{ format(stoTotal * (markups.agent_dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent (5%)</span><span class="text-black font-bold">{{ format(stoTotal * (markups.agent_consultant / 100)) }}</span></div>
                                     </div>
 
                                     <div class="flex justify-between text-sm items-center">
@@ -1522,8 +1522,8 @@
                                     <div v-if="botswanaUsdSummary > 0"
                                         class="space-y-2.5 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
                                         <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Travel Local (18%)</span><span class="text-black font-bold">&#36;{{ format(((botswanaUsdSummary * dtMarkupMultiplier) / 0.82) * 0.18) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent (5%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks ({{markups.agent_dt}}%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.agent_dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Agent (5%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.agent_consultant / 100)) }}</span></div>
                                     </div>
 
                                     <div v-if="botswanaUsdSummary > 0"
@@ -1551,8 +1551,8 @@
                                     <div class="text-[9px] font-bold text-[#1F4F4B] border-b border-[#1F4F4B]/10 pb-4 mb-4 uppercase tracking-[0.2em]">Total Client Invoice</div>
 
                                     <div class="space-y-2.5 text-xs mb-5 border-b border-[#1F4F4B]/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Consultant (5%)</span><span class="text-black font-bold">{{ format(stoTotal * 0.05) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks ({{markups.agent_dt}}%)</span><span class="text-black font-bold">{{ format(stoTotal * (markups.agent_dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Consultant ({{markups.agent_consultant}}%)</span><span class="text-black font-bold">{{ format(stoTotal * (markups.agent_consultant / 100)) }}</span></div>
                                     </div>
 
                                     <div class="flex justify-between text-sm items-center">
@@ -1561,7 +1561,7 @@
                                     </div>
                                     <div v-for="g in paxGroups" :key="g.id" v-show="(parseInt(g.double)||0)+(parseInt(g.single)||0)+(parseInt(g.child)||0) > 0" class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">{{g.name}} Total <span class="text-[9px] ml-1">(inc. Vehicle/Guide Share)</span></span>
-                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, 1.25)) }}</span>
+                                        <span class="text-dt-gold font-bold">{{ format(groupInvoiceCost(g, dtMarkupMultiplier)) }}</span>
                                     </div>
                                     <div class="flex justify-between text-xs mt-3 text-[#1F4F4B]">
                                         <span class="font-medium tracking-wide">Namibian Double Sharing PP</span>
@@ -1581,8 +1581,8 @@
 
                                     <div v-if="botswanaUsdSummary > 0"
                                         class="space-y-2.5 text-xs my-5 border-b border-[#1F4F4B]/10 pb-5">
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks (20%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.20) }}</span></div>
-                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Consultant (5%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * 0.05) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Desert Tracks ({{markups.agent_dt}}%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.agent_dt / 100)) }}</span></div>
+                                        <div class="flex justify-between items-center"><span class="text-[#1F4F4B] font-medium tracking-wide">Consultant ({{markups.agent_consultant}}%)</span><span class="text-black font-bold">&#36;{{ format(botswanaUsdSummary * (markups.agent_consultant / 100)) }}</span></div>
                                     </div>
                                     <div v-if="botswanaUsdSummary > 0"
                                         class="flex justify-between text-xs mt-2 text-[#1F4F4B]">
@@ -1854,6 +1854,16 @@
                 sharedCostsTotal() {
                     const t = this.storeTotals;
                     return t.vehicle + (t.guidedCostsTotal || 0) + (t.flights || 0) + this.calculatedFuel + this.extrasTotal + this.activitiesTotal;
+                },
+
+                dtMarkupMultiplier() {
+                    return 1 + (Number(this.markups.dt) / 100);
+                },
+                dtAgentMarkupMultiplier() {
+                    return 1 + (Number(this.markups.agent_dt) / 100);
+                },
+                tlMarkupMultiplier() {
+                    return 1 + (Number(this.markups.tl_margin) / 100);
                 },
                 stoTotal() {
                     const t = this.storeTotals;
@@ -2518,7 +2528,7 @@
         ${(!q.activeTab || q.activeTab === 'dt') ? `
         <div class="matrix-card">
             <div class="m-section-top">
-                <div class="m-title">Desert Tracks (25%)</div>
+                <div class="m-title">Desert Tracks ({{markups.dt}}%)</div>
                 <div class="m-val">${format(dtTotal)} NAD Namibia Client Invoice</div>
                 <div class="m-pp">Namibian Double Sharing PP: ${format(dtNamibianDoublePP)}</div>
                 ${(qSinglePax > 0) ? `<div class="m-pp">Namibian Single PP: ${format(dtNamibianSinglePP)}</div>` : ''}
