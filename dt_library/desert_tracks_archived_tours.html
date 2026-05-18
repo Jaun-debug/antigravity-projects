@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Tracks | Archived Tours</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style data-no-optimize="1">
+        /* Scoped Container to protect WordPress globals */
+        .dt-archive-container {
+            --dt-gold: #9B6A35;
+            --dt-dark: #1a1410;
+            --dt-seafoam: #8CB5A3;
+            --dt-dark-green: #1F4F4B;
+            --dt-sand: #faf8f5;
+            --dt-text: #2a1f14;
+            --dt-light: #ffffff;
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--dt-sand);
+            color: var(--dt-text);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Header */
+        .dt-archive-container .archive-hero {
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/dji_0572-1-scaled.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 20px 120px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .dt-archive-container .archive-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 20, 16, 0.65); /* Dark overlay to make text pop */
+        }
+        
+        .dt-archive-container .archive-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dt-archive-container .archive-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--dt-gold);
+            z-index: 2;
+        }
+
+        .dt-archive-container .archive-subtitle {
+            font-size: 0.85rem !important;
+            color: #ffffff !important;
+            text-transform: uppercase !important;
+            letter-spacing: 4px !important;
+            margin-bottom: 15px !important;
+            font-weight: 500 !important;
+        }
+
+        .dt-archive-container .archive-title {
+            font-family: 'Cinzel', serif !important;
+            font-size: 3.5rem !important;
+            color: #ffffff !important;
+            margin: 0 !important;
+            letter-spacing: 2px !important;
+            font-weight: 400 !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+        }
+
+        /* Content Wrapper */
+        .dt-archive-container .archive-wrapper {
+            max-width: 1200px;
+            margin: 60px auto 100px;
+            padding: 0 20px;
+        }
+
+        /* Accordion Item */
+        .dt-archive-container .archive-item {
+            background: var(--dt-light);
+            margin-bottom: 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .dt-archive-container .archive-item:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+
+        .dt-archive-container .archive-item.active {
+            border-left: 3px solid var(--dt-gold);
+            margin-bottom: 40px;
+        }
+
+        .dt-archive-container .archive-year-trigger {
+            padding: 30px 40px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            background: #fdfdfc;
+        }
+
+        .dt-archive-container .year-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--dt-dark-green);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: color 0.3s;
+        }
+
+        .dt-archive-container .year-title span {
+            color: var(--dt-gold);
+            font-size: 1.2rem;
+        }
+
+        .dt-archive-container .archive-year-trigger:hover .year-title {
+            color: var(--dt-gold);
+        }
+
+        .dt-archive-container .archive-icon {
+            font-size: 1.5rem;
+            color: var(--dt-gold);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 300;
+        }
+
+        .dt-archive-container .archive-item.active .archive-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Answer Content */
+        .dt-archive-container .archive-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--dt-sand);
+        }
+
+        .dt-archive-container .archive-content-inner {
+            padding: 30px 40px 40px 40px;
+        }
+
+        /* Tour Grid */
+        .dt-archive-container .tour-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .dt-archive-container .tour-card {
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.04);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dt-archive-container .tour-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .dt-archive-container .tour-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 2px solid var(--dt-gold);
+        }
+
+        .dt-archive-container .tour-details {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dt-archive-container .tour-meta {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--dt-seafoam);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .dt-archive-container .tour-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            color: var(--dt-dark);
+            margin: 0 0 15px 0;
+            line-height: 1.3;
+        }
+
+        .dt-archive-container .tour-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .dt-archive-container .tour-link {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--dt-dark-green);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.3s;
+        }
+
+        .dt-archive-container .tour-link::after {
+            content: '→';
+            font-size: 1.1rem;
+            transition: transform 0.3s;
+        }
+
+        .dt-archive-container .tour-link:hover {
+            color: var(--dt-gold);
+        }
+        
+        .dt-archive-container .tour-link:hover::after {
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            .dt-archive-container .archive-title { font-size: 2.5rem !important; }
+            .dt-archive-container .archive-year-trigger { padding: 20px; }
+            .dt-archive-container .archive-content-inner { padding: 20px; }
+            .dt-archive-container .year-title { font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dt-archive-container">
+    
+    <!-- Hero Section -->
+    <header class="archive-hero">
+        <div class="archive-hero-content">
+            <div class="archive-subtitle">The Vault</div>
+            <h1 class="archive-title">Archived Tours</h1>
+        </div>
+    </header>
+
+    <!-- Archive Content -->
+    <div class="archive-wrapper">
+
+        <!-- Year 2023 -->
+        <div class="archive-item">
+            <div class="archive-year-trigger">
+                <h2 class="year-title"><span>✦</span> 2023 Archives</h2>
+                <div class="archive-icon">+</div>
+            </div>
+            <div class="archive-content">
+                <div class="archive-content-inner">
+                    <div class="tour-grid">
+                        
+                        <div class="tour-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/oryx_group_solly_large.jpeg" alt="Namibia Safari" class="tour-image">
+                            <div class="tour-details">
+                                <div class="tour-meta">14 Days • Self Drive</div>
+                                <h3 class="tour-name">The Great Namibian Circuit</h3>
+                                <p class="tour-desc">A comprehensive two-week journey covering the towering dunes of Sossusvlei, the coastal charm of Swakopmund, and the abundant wildlife of Etosha.</p>
+                                <a href="#" class="tour-link">View Itinerary</a>
+                            </div>
+                        </div>
+
+                        <div class="tour-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/dji_0572-scaled.jpg" alt="Coastal Safari" class="tour-image">
+                            <div class="tour-details">
+                                <div class="tour-meta">10 Days • Guided Safari</div>
+                                <h3 class="tour-name">Dunes & Coast Expedition</h3>
+                                <p class="tour-desc">An exclusive guided tour focusing on the dramatic landscapes where the Namib Desert meets the cold Atlantic Ocean.</p>
+                                <a href="#" class="tour-link">View Itinerary</a>
+                            </div>
+                        </div>
+
+                        <div class="tour-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/img_7426.jpg" alt="Desert Safari" class="tour-image">
+                            <div class="tour-details">
+                                <div class="tour-meta">8 Days • Fly-In Safari</div>
+                                <h3 class="tour-name">Luxury Southern Desert</h3>
+                                <p class="tour-desc">A premium fly-in experience showcasing the rugged beauty of the south, including the Fish River Canyon and NamibRand Nature Reserve.</p>
+                                <a href="#" class="tour-link">View Itinerary</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year 2022 -->
+        <div class="archive-item">
+            <div class="archive-year-trigger">
+                <h2 class="year-title"><span>✦</span> 2022 Archives</h2>
+                <div class="archive-icon">+</div>
+            </div>
+            <div class="archive-content">
+                <div class="archive-content-inner">
+                    <div class="tour-grid">
+                        
+                        <div class="tour-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/solly-levi-sossusvlei-1-5.jpg" alt="Sossusvlei" class="tour-image">
+                            <div class="tour-details">
+                                <div class="tour-meta">12 Days • Self Drive</div>
+                                <h3 class="tour-name">Classic Namibia Explorer</h3>
+                                <p class="tour-desc">Our flagship self-drive route from 2022, optimized for first-time visitors wanting to experience the absolute highlights of the country.</p>
+                                <a href="#" class="tour-link">View Itinerary</a>
+                            </div>
+                        </div>
+
+                        <div class="tour-card">
+                            <img src="https://desert-tracks.com/wp-content/uploads/2026/03/swakopmund-4-1.jpg" alt="Swakopmund" class="tour-image">
+                            <div class="tour-details">
+                                <div class="tour-meta">7 Days • Guided Safari</div>
+                                <h3 class="tour-name">Skeleton Coast Adventure</h3>
+                                <p class="tour-desc">A thrilling guided expedition venturing up the notorious Skeleton Coast, discovering shipwrecks and desert-adapted wildlife.</p>
+                                <a href="#" class="tour-link">View Itinerary</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Accordion Script -->
+<script data-no-optimize="1">
+    document.addEventListener("DOMContentLoaded", () => {
+        const archiveItems = document.querySelectorAll('.archive-item');
+
+        archiveItems.forEach(item => {
+            const trigger = item.querySelector('.archive-year-trigger');
+            const content = item.querySelector('.archive-content');
+
+            trigger.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all other items
+                archiveItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.archive-content').style.maxHeight = null;
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
+                    // Set max height dynamically to actual content height for smooth transition
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
