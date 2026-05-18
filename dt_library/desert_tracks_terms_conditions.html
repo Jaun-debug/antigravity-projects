@@ -151,6 +151,7 @@
 
         .dt-terms-container .term-section {
             margin-bottom: 50px;
+            scroll-margin-top: 120px; /* Accounts for WordPress sticky headers */
         }
 
         .dt-terms-container .term-section:last-child {
@@ -394,8 +395,8 @@
                 const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    // Account for any fixed headers if present in WordPress
-                    const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 50;
+                    // Account for WordPress fixed headers + admin bar (approx 120px)
+                    const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 120;
                     
                     window.scrollTo({
                         top: offsetTop,
