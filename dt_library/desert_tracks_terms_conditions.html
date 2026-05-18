@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Tracks | Terms & Conditions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style data-no-optimize="1">
+        /* Scoped Container to protect WordPress globals */
+        .dt-terms-container {
+            --dt-gold: #9B6A35;
+            --dt-dark: #1a1410;
+            --dt-seafoam: #8CB5A3;
+            --dt-dark-green: #1F4F4B;
+            --dt-sand: #faf8f5;
+            --dt-text: #2a1f14;
+            --dt-light: #ffffff;
+            --dt-border: #e6dfd5;
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--dt-sand);
+            color: var(--dt-text);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        /* Hero Header */
+        .dt-terms-container .terms-hero {
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/oryx_group_solly_large.jpeg');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 20px 140px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .dt-terms-container .terms-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 20, 16, 0.6);
+        }
+        
+        .dt-terms-container .terms-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .dt-terms-container .terms-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--dt-gold);
+            z-index: 2;
+        }
+
+        .dt-terms-container .terms-subtitle {
+            font-size: 0.85rem !important;
+            color: #ffffff !important;
+            text-transform: uppercase !important;
+            letter-spacing: 4px !important;
+            margin-bottom: 15px !important;
+            font-weight: 500 !important;
+        }
+
+        .dt-terms-container .terms-title {
+            font-family: 'Cinzel', serif !important;
+            font-size: 3.5rem !important;
+            color: #ffffff !important;
+            margin: 0 !important;
+            letter-spacing: 2px !important;
+            font-weight: 400 !important;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5) !important;
+        }
+
+        /* Layout */
+        .dt-terms-container .terms-wrapper {
+            max-width: 1200px;
+            margin: 60px auto 100px;
+            padding: 0 20px;
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        /* Sidebar Navigation */
+        .dt-terms-container .terms-sidebar {
+            flex: 0 0 300px;
+            position: sticky;
+            top: 100px;
+            background: var(--dt-light);
+            padding: 40px 30px;
+            border-radius: 4px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.03);
+            border-top: 3px solid var(--dt-gold);
+        }
+
+        .dt-terms-container .sidebar-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            color: var(--dt-dark-green);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--dt-border);
+        }
+
+        .dt-terms-container .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dt-terms-container .sidebar-nav li a {
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: block;
+            line-height: 1.4;
+        }
+
+        .dt-terms-container .sidebar-nav li a:hover {
+            color: var(--dt-gold);
+            transform: translateX(5px);
+        }
+
+        /* Content Area */
+        .dt-terms-container .terms-content {
+            flex: 1;
+            background: var(--dt-light);
+            padding: 60px 80px;
+            border-radius: 4px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.03);
+        }
+
+        .dt-terms-container .intro-text {
+            font-size: 1.1rem;
+            color: var(--dt-dark-green);
+            font-weight: 500;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--dt-border);
+        }
+
+        .dt-terms-container .term-section {
+            margin-bottom: 50px;
+        }
+
+        .dt-terms-container .term-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .dt-terms-container .term-heading {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--dt-dark);
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .dt-terms-container .term-heading span {
+            color: var(--dt-gold);
+            font-size: 1.2rem;
+        }
+
+        .dt-terms-container .term-text {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .dt-terms-container .term-text:last-child {
+            margin-bottom: 0;
+        }
+
+        .dt-terms-container .term-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: #faf8f5;
+        }
+
+        .dt-terms-container .term-table th,
+        .dt-terms-container .term-table td {
+            padding: 15px 20px;
+            border: 1px solid var(--dt-border);
+            text-align: left;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .dt-terms-container .term-table th {
+            background: var(--dt-dark-green);
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dt-terms-container .terms-wrapper {
+                flex-direction: column;
+            }
+            .dt-terms-container .terms-sidebar {
+                position: relative;
+                top: 0;
+                width: 100%;
+                flex: none;
+            }
+            .dt-terms-container .terms-content {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dt-terms-container .terms-title { font-size: 2.5rem !important; }
+            .dt-terms-container .terms-content { padding: 30px 20px; }
+            .dt-terms-container .term-heading { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dt-terms-container">
+    
+    <!-- Hero Section -->
+    <header class="terms-hero">
+        <div class="terms-hero-content">
+            <div class="terms-subtitle">Legal & Policies</div>
+            <h1 class="terms-title">Terms & Conditions</h1>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="terms-wrapper">
+        
+        <!-- Sidebar Navigation -->
+        <aside class="terms-sidebar">
+            <h3 class="sidebar-title">Table of Contents</h3>
+            <ul class="sidebar-nav">
+                <li><a href="#contract">1. Contract</a></li>
+                <li><a href="#booking">2. How To Book</a></li>
+                <li><a href="#payment">3. How To Pay</a></li>
+                <li><a href="#cancellation">4. Our Cancellation Policy</a></li>
+                <li><a href="#changes-policy">5. Our Changes Policy</a></li>
+                <li><a href="#price-changes">6. Price Changes</a></li>
+                <li><a href="#itinerary-changes">7. Changes To Itineraries</a></li>
+                <li><a href="#responsibility">8. Responsibility & Liability</a></li>
+                <li><a href="#obligations">9. Client's Obligations</a></li>
+                <li><a href="#health">10. Health & Personal Safety</a></li>
+                <li><a href="#baggage">11. Baggage</a></li>
+                <li><a href="#airline-car">12. Airline & Car Hire Clause</a></li>
+            </ul>
+        </aside>
+
+        <!-- Legal Content -->
+        <main class="terms-content">
+            
+            <div class="intro-text">
+                How it all works: terms and conditions for booking your tour with Desert Tracks Bookings & Safaris CC.
+            </div>
+
+            <section id="contract" class="term-section">
+                <h2 class="term-heading"><span>1.</span> Contract</h2>
+                <p class="term-text">The contract will become effective as from the date the invoice is completed and the deposit, referred to in Clause 2.1, is received by Desert Tracks Bookings and Safaris cc (hereinafter known as the Company).</p>
+                <p class="term-text">The contract is subject to the Namibian Law.</p>
+                <p class="term-text">Any person making a reservation as per Clause 8.4 accepts the terms and conditions of this agreement set out hereunder.</p>
+            </section>
+
+            <section id="booking" class="term-section">
+                <h2 class="term-heading"><span>2.</span> How to Book</h2>
+                <p class="term-text">A deposit is required to confirm any reservation and is to be done by the agent or client (see Clause 8.1) in writing or by e-mail.</p>
+                <p class="term-text">The Company must receive the balance of the contract price no later than 42 days (6 weeks) prior to departure.</p>
+                <p class="term-text">If the Company does not receive the full contract price 42 days (6 weeks) before the departure date, the Company may cancel the reservation and retain whatever deposit or other funds it has already received from the client or his agent.</p>
+            </section>
+
+            <section id="payment" class="term-section">
+                <h2 class="term-heading"><span>3.</span> How to Pay</h2>
+                <p class="term-text">The payment options will be provided upon confirmation of a booking.</p>
+            </section>
+
+            <section id="cancellation" class="term-section">
+                <h2 class="term-heading"><span>4.</span> Our Cancellation Policy</h2>
+                <p class="term-text">Any cancellation of a confirmed booking must be done in writing (email) to the Company whereupon cancellation charges as per Clause 4.2 will apply.</p>
+                <p class="term-text">The following cancellation fees (as a percentage of the fully quoted price) are applicable to any cancelled travel:</p>
+                
+                <table class="term-table">
+                    <thead>
+                        <tr>
+                            <th>Notice from Date of Travel</th>
+                            <th>Cancellation Fee</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>42 days or more</td>
+                            <td>20%</td>
+                        </tr>
+                        <tr>
+                            <td>29 – 41 days</td>
+                            <td>50%</td>
+                        </tr>
+                        <tr>
+                            <td>15 – 28 days</td>
+                            <td>75%</td>
+                        </tr>
+                        <tr>
+                            <td>0 – 14 days</td>
+                            <td>100%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <p class="term-text"><strong>Please note:</strong> the notice period is calculated from the date of cancellation to the start date of the tour/safari booking.</p>
+                <p class="term-text">No refund will be made by the Company if, for any reason, inclusions or parts of the tour cannot be carried out / or utilised. These would include all facets such as meals, game drives, accommodation etc. This would also apply to any client who has booked a tour but fails to undertake the tour for any reason.</p>
+            </section>
+
+            <section id="changes-policy" class="term-section">
+                <h2 class="term-heading"><span>5.</span> Our Changes Policy</h2>
+                <p class="term-text">If a booking is changed to an earlier date than originally reserved, the Company will endeavour to change it. If the booking is for a later date, charges as per Clause 4.2 could apply.</p>
+            </section>
+
+            <section id="price-changes" class="term-section">
+                <h2 class="term-heading"><span>6.</span> Price Changes</h2>
+                <p class="term-text">The Company reserves the right to increase the price of any tour prior to departure due to factors beyond the control of the Company, such as, without being limited to, an increase in fuel prices, new Government legislation, accommodation price increases, fluctuations in exchange rates, etc.</p>
+                <p class="term-text">If the Company announces an increase in the tour price in terms of this Clause, such additional amount must be paid to the Company before the departure of such tour or else the Company shall have the right to cancel the tour and the charges in Clause 4.2 will apply.</p>
+            </section>
+
+            <section id="itinerary-changes" class="term-section">
+                <h2 class="term-heading"><span>7.</span> Changes to Itineraries</h2>
+                <p class="term-text">The Company shall at any time have the right, in its entire discretion, to alter the terms of the booking in relation to the route, timetable, itinerary and accommodation. The Company shall, however, make every effort to offer the client an alternative tour of a comparable standard. Should the alternative be of a lesser standard, the client will be refunded the difference, but should there be an increase, the client shall have the right to either reject the alternative and obtain a refund of the relevant portion of the original contract sum, or to accept the alternative and pay the increased cost. In the event of the client rejecting the alternative tour and claiming a refund, such rejection will be treated as a cancellation and the refund will be calculated according to Clause 4.2 hereof. The client shall have no claim against the Company for any damages arising out of the alternative booking.</p>
+            </section>
+
+            <section id="responsibility" class="term-section">
+                <h2 class="term-heading"><span>8.</span> Responsibility and Liability</h2>
+                <p class="term-text">Neither the Company nor any person acting for, through and on behalf of the Company shall be liable for any loss or damage whatsoever arising from any cause whatsoever and without restricting the generality of the aforegoing shall particularly not be responsible for the loss or damage arising from any errors or omissions contained in its brochure or other literature, late or non-confirmation or acceptance or bookings, loss or damage caused by delays, sickness, injury or death, whether occasioned by negligence or not.</p>
+                <p class="term-text">The Company shall have the right at any time at its sole discretion, to cancel or the remainder thereof or to make an alteration in the route, accommodation price or other details. This would include any event of any tour being rendered impossible, illegal or inadvisable by weather, avalanches, strike, war, government or other interference or due to any other cause whatsoever. The extra expenses incurred as a result thereof shall be the responsibility of the client.</p>
+                <p class="term-text">The Company may at its discretion and without liability or cost to itself at any time cancel, or terminate, a client’s booking and in particular, without limiting the generality of the aforegoing, it shall be entitled to do so in the event of illness or the illegal or incompatible behaviour of any client undertaking the tour, who shall in such circumstances not be entitled to any refund.</p>
+                <p class="term-text">Any person making a reservation with the Company (refer to Clause 1.1) warrants that he or she has the necessary authority to enter into this contract on behalf of the person or persons included in such a booking. The person making the reservation shall be liable for the total amount due to the Company.</p>
+            </section>
+
+            <section id="obligations" class="term-section">
+                <h2 class="term-heading"><span>9.</span> Client’s Obligations</h2>
+                <p class="term-text">It is the onus and responsibility of the client to obtain the necessary comprehensive insurance before departure for any possible cancellations, medical expenses, protection of personal property and money.</p>
+                <p class="term-text">The onus is upon the client to ensure that passports and visas are valid for the duration of the safari. The Company cannot be held liable for any necessary visas or other travel documents not held by clients. In the event of a client not having the necessary documentation to enter any area or country the Company shall reserve the right to leave the client at the point of entry of such area or country. In such an event, the Company will not be held responsible to the client for further travel arrangements.</p>
+                <p class="term-text">The onus is upon the client to ensure that the SARS-CoV-2 PCR tests are done prior to commencement of the safari and valid on arrival in accordance to the requirements of the country of intended travel and for the airline with which the client will travel. The same applies for any necessary testing for departure. The costs of any such COVID testing will be for the clients own account. While The Company can assist with arrangements for testing in-country, The Company will not be held responsible to the client for such arrangements and with regards to return time of test results.</p>
+                <p class="term-text">Should the client need to undergo mandatory quarantine once in-country with regards to the SARS-CoV-2 virus, either on arrival as called for by the authorities or due to testing positive once in-country, this will be at the clients own expense.</p>
+            </section>
+
+            <section id="health" class="term-section">
+                <h2 class="term-heading"><span>10.</span> Health and Personal Safety</h2>
+                <p class="term-text">The client shall be reasonably fit to undertake the tour.</p>
+                <p class="term-text">Anti-malaria precautions should be commenced prior to tour departure. A medical doctor should be consulted for advice.</p>
+                <p class="term-text">Tours offered by the Company cover a wide spectrum of the African wilds and neither the Company, its employees or agents can be held responsible for any injury or other related incidents whilst on the tour / safari.</p>
+                <p class="term-text">The Company cannot be held responsible for any client who falls ill or contracts the SARS-CoV-2 virus while in-country. The client accepts that travel is at own risk.</p>
+            </section>
+
+            <section id="baggage" class="term-section">
+                <h2 class="term-heading"><span>11.</span> Baggage</h2>
+                <p class="term-text">Clients are limited to one soft sports type bag per person with a maximum weight of 20 kilograms. This includes photographic equipment and hand luggage.</p>
+                <p class="term-text">Due to the rugged terrain, the Company cannot be held responsible for damage or loss of any personal items including bags, contents of bags or photographic and related equipment. Due to extremely dusty conditions, please ensure all bags are dust proof.</p>
+            </section>
+
+            <section id="airline-car" class="term-section">
+                <h2 class="term-heading"><span>12.</span> Airline and Car Hire Clause</h2>
+                <p class="term-text">The Company will act as the agent of the client when booking the client with a car hire company, an airline or air charter service. The client therefore contracts with the car hire company, airline or charter service and not with the Company.</p>
+                <p class="term-text">Charter flights are normally operated by smaller type aircraft such as Cessna 210. Luggage is strictly limited to 10-15 kgs (depending on terms of particular airline used) per person in soft hold all type bags. Due to the desert heat, it is not safe to overload aircraft thus this limit needs to be strictly controlled.</p>
+            </section>
+
+        </main>
+    </div>
+
+</div>
+
+<!-- Smooth Scroll Script for Sidebar -->
+<script data-no-optimize="1">
+    document.addEventListener('DOMContentLoaded', () => {
+        const links = document.querySelectorAll('.sidebar-nav a');
+        
+        links.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    // Account for any fixed headers if present in WordPress
+                    const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 50;
+                    
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
