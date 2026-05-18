@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Tracks | Frequently Asked Questions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style data-no-optimize="1">
+        :root {
+            --dt-gold: #9B6A35;
+            --dt-dark: #1a1410;
+            --dt-seafoam: #8CB5A3;
+            --dt-dark-green: #1F4F4B;
+            --dt-sand: #faf8f5;
+            --dt-text: #2a1f14;
+            --dt-light: #ffffff;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--dt-sand);
+            color: var(--dt-text);
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Hero Header */
+        .faq-hero {
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly-levi-sossusvlei-1-5.jpg');
+            background-size: cover;
+            background-position: center;
+            padding: 190px 20px 140px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .faq-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(26, 20, 16, 0.55); /* Dark overlay to make text pop */
+        }
+        
+        .faq-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .faq-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--dt-gold);
+            z-index: 2;
+        }
+
+        .faq-subtitle {
+            font-size: 0.85rem;
+            color: var(--dt-light);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .faq-title {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--dt-light);
+            margin: 0;
+            letter-spacing: 2px;
+            font-weight: 400;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Content Wrapper */
+        .faq-wrapper {
+            max-width: 900px;
+            margin: 60px auto 100px;
+            padding: 0 20px;
+        }
+
+        /* Category Header */
+        .faq-category {
+            margin-bottom: 60px;
+        }
+
+        .category-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            color: var(--dt-dark-green);
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(155, 106, 53, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .category-title span {
+            color: var(--dt-gold);
+            font-size: 1.2rem;
+        }
+
+        /* Accordion Item */
+        .faq-item {
+            background: var(--dt-light);
+            margin-bottom: 15px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            transform: translateY(-2px);
+        }
+
+        .faq-item.active {
+            border-left: 3px solid var(--dt-gold);
+        }
+
+        .faq-question {
+            padding: 24px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: var(--dt-dark);
+            transition: color 0.3s;
+        }
+
+        .faq-question:hover {
+            color: var(--dt-gold);
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            color: var(--dt-gold);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 300;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        /* Answer Content */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #faf8f5;
+        }
+
+        .faq-answer-inner {
+            padding: 0 30px 24px 30px;
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .faq-answer-inner p { margin-top: 0; margin-bottom: 15px; }
+        .faq-answer-inner p:last-child { margin-bottom: 0; }
+        .faq-answer-inner ul { margin-top: 0; padding-left: 20px; }
+        .faq-answer-inner li { margin-bottom: 8px; }
+        .faq-answer-inner h4 { color: var(--dt-dark-green); font-family: 'Cinzel', serif; margin: 20px 0 10px; font-size: 1.1rem; }
+
+        @media (max-width: 768px) {
+            .faq-title { font-size: 2.5rem; }
+            .faq-question { padding: 20px; font-size: 1rem; }
+            .faq-answer-inner { padding: 0 20px 20px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <header class="faq-hero">
+        <div class="faq-hero-content">
+            <div class="faq-subtitle">Travel Information</div>
+            <h1 class="faq-title">Frequently Asked Questions</h1>
+        </div>
+    </header>
+
+    <!-- FAQ Content -->
+    <div class="faq-wrapper">
+
+        <!-- Category 1 -->
+        <div class="faq-category">
+            <h2 class="category-title"><span>✦</span> Planning & Booking</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Which time of year is best to travel to Namibia? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Namibia is in effect, an all-year-round destination. Yes, we do have a rainy season but being mostly desert, rain is sporadic with heavy rainfall only really experienced in the north and north-east of the country (usually from December through April).</p>
+                        <p>The dry season (May-November) is better for viewing wildlife as animals congregate at waterholes and the bush is less dense. The rest of the year is great for scenery, bird watching and general photography as well as wildlife sightings. It’s hot in the summer (December to February) and cooler the rest of the year.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Namibia: Climate & Weather Breakdown <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Here is an indication of the different times of the year and what to expect:</p>
+                        <h4>Dry Season: May to October (Winter)</h4>
+                        <ul>
+                            <li><strong>MAY:</strong> Rains have ceased and therefore scenery is lovely and green. During the day temperatures are moderate (24 - 28ºC / 75-82ºF). Evenings and nights are pleasant but cool.</li>
+                            <li><strong>JUNE:</strong> Falling just before winter, it starts getting colder in the evenings/nights, dropping to 10ºC / 50ºF (or colder in the southern desert). Days remain pleasant (20 - 24ºC / 68 - 75ºF).</li>
+                            <li><strong>JULY & AUGUST:</strong> Usually the coldest months. Average days are 21 - 25ºC / 70 - 77ºF. At night it drops to around 7ºC / 45ºF and can fall below freezing in the south and north.</li>
+                            <li><strong>SEPTEMBER & OCTOBER:</strong> Daytime temperatures warm up slightly, but skies remain clear. During October it gets even drier and daytime temperatures can get quite hot.</li>
+                        </ul>
+                        <h4>Summer: November to April</h4>
+                        <ul>
+                            <li><strong>NOVEMBER:</strong> It starts to really warm up. Daytime temperatures can rise to 30ºC / 86ºF (higher in the south and north). Clouds often seen in afternoons, but rain isn't common yet.</li>
+                            <li><strong>DECEMBER:</strong> A hot month with the first rains starting. When it rains it cools off, making for pleasant temperatures.</li>
+                            <li><strong>JANUARY & FEBRUARY:</strong> The hottest summer months. It can get extremely hot and humid averaging 30 - 35ºC / 86 - 95ºF, often reaching 40ºC / 104ºF. Downpours are common in the afternoons.</li>
+                            <li><strong>MARCH & APRIL:</strong> Rainfall is less and usually stops completely by the end of April. Daytime temperatures cool down slightly to around 25 - 30ºC / 77 - 86ºF.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">How does the weather influence a safari? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>While a safari holiday can be had at any time of year, it is worth noting that seasonality will impact the type of experience you’re likely to have as well as the cost of your safari.</p>
+                        <p>During the dry season, the wildlife tends to congregate around the few remaining watering holes. Vegetation at this time is sparse making the animals easier to spot. The wet season is abundant both in vegetation and wildlife, as this is the birthing season – which means predators come out in force to prey on vulnerable newborns.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Do your tours include international airfare? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Travellers arrive from all over the world to begin our tours and it is not possible to include international airfare in our prices.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I book extra nights of hotel accommodation? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Yes, in most cases we can arrange additional accommodation at our starting or ending hotels. If we are unable to provide you with the extra nights, we will give you the name of a hotel you can contact directly. Please also note that extra accommodations must be booked at least 30 days before start of safari.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Visas & Passports <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Desert Tracks does not arrange VISAS and therefore this will be your own responsibility and arrangement. You can have a look at the following link for more information regarding visa requirements: <a href="https://www.visahq.com/" target="_blank">VisaHQ</a>.</p>
+                        <p>Please check on the internet or with the Embassy whether you require a VISA to be arranged in advance or whether you can obtain it at point of entry. In some cases, it can take up to 3 months for Visas to be issued so please do not leave this to the last minute.</p>
+                        <p><strong>NB: Passports need to be valid for at least 6 months from date of departure/ the date you end your holiday.</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Traveling with Minors <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>The Namibia, Botswana and South African Governments have introduced requirements for minors travelling through all ports of entry. All minors will be required to produce certified copies of unabridged birth certificates in addition to their valid passports.</p>
+                        <p>In the event that one parent is not travelling with the child, the other parent’s affidavit consenting to such travel should be availed. An affidavit will not be required if the father’s name does not appear on the child’s birth certificate.</p>
+                        <p>Minors younger than 18 years traveling to Namibia must have an unabridged birth certificate. In addition, when traveling:</p>
+                        <ul>
+                            <li><strong>With an adult who is not their biological parent:</strong> an affidavit from their parents giving consent is required.</li>
+                            <li><strong>With an adult other than a parent/legal guardian:</strong> copies of their legal guardians/parents' passports or documents of identity are required.</li>
+                            <li><strong>With a parent:</strong> an affidavit from the other parent giving consent for the minor to travel is required. A death certificate should be provided if one parent is deceased.</li>
+                            <li><strong>Unaccompanied:</strong> an affidavit from their parents/legal guardians consenting their travel, plus identity documents of the receiving person are required.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Insurance <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Personal / holiday insurance is for your own arrangement, and we highly recommend that you ensure you have the necessary comprehensive cover before traveling.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 2 -->
+        <div class="faq-category">
+            <h2 class="category-title"><span>✦</span> Health & Safety</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Health & Medical Information <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <h4>Vaccinations</h4>
+                        <p>Namibia does not require any specific vaccinations; however, you may need to show that you have been vaccinated against Yellow Fever if you will be travelling from or via a Yellow Fever Risk country. Namibia is a malaria risk country; however, this is mostly in the northern parts of the country. We recommend that you consult your local physician with regards to malaria prophylaxis.</p>
+                        <h4>Water</h4>
+                        <p>Generally, throughout Namibia, water is safe to drink, however bottled water is also readily available. Water is a scarce commodity, so please use it sparingly.</p>
+                        <h4>Dietary Requirements & Medical Conditions</h4>
+                        <p>If you have any specific dietary requirements, please advise this on booking your tour. Any medical conditions you may have needs to be noted prior to arrival. If you will be travelling with medication, it is best to have this properly labelled and keep it on you at all times.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is Namibia safe for travel? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Namibia is a safe country for travel with a low crime rate, however we always recommend that you take precautions where necessary and be aware of your surroundings.</p>
+                        <ul>
+                            <li>Keep the vehicle locked at all times</li>
+                            <li>Do not leave valuables in the vehicle</li>
+                            <li>Use the safes supplied at the lodges</li>
+                            <li>In the streets, do not carry valuables visibly on your person</li>
+                            <li>Do not carry large sums of cash on you</li>
+                        </ul>
+                        <p>We also do not recommend you travel before sunrise or after sunset due to animal activity and reduced visibility.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">What to Pack <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Usually, the days are hot, but the nights can be cool. For this reason, pack for both seasons and think about dressing in layers. Some tips on what to pack:</p>
+                        <ul>
+                            <li>A good quality pair of sunglasses and sunblock</li>
+                            <li>Comfortable walking shoes (closed shoes)</li>
+                            <li>Swimming costume</li>
+                            <li>Wind breaker / anorak / parka for cold evenings</li>
+                            <li>Camera with extra battery, extra card, and binoculars</li>
+                            <li>A good flashlight and basic medical kit</li>
+                        </ul>
+                        <p>It is important to note that certain light aircraft transfer flights will have a smaller and stricter luggage limit. Please note, all laundry in camp is done by hand and dried outdoors. Out of respect to local culture and customs, we do not wash underwear.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 3 -->
+        <div class="faq-category">
+            <h2 class="category-title"><span>✦</span> Money & Logistics</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Currency <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>The currency in Namibia is the Namibian Dollar (N$). This has a fixed exchange rate to the South African Rand (ZAR) of 1:1. South African Rand (ZAR) are accepted throughout Namibia, but the Namibian Dollar (N$) is not accepted in South Africa.</p>
+                        <p>If you will be visiting neighbouring countries: In Botswana you will pay in Botswana Pula (BWP) or US Dollars. In Zimbabwe you will pay in US Dollars.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Credit Cards & Cash on Tour <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Credit cards (Visa & MasterCard) are widely accepted throughout Namibia and most lodges will accept credit cards for payments of extras. We do however recommend that you have cash with you at all times to pay for extras and fuel should the credit card machines be offline.</p>
+                        <p>NB: As an indication we suggest that you have roughly ZAR 500 – ZAR 1000 (per person) on you at all times.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Tipping Guidelines <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Tipping in Namibia is voluntary and discretionary. Here is a guideline:</p>
+                        <ul>
+                            <li><strong>Restaurants/Bars:</strong> 10%-15%</li>
+                            <li><strong>Porters:</strong> ZAR 10 – ZAR 20</li>
+                            <li><strong>Car Guards & Petrol Attendants:</strong> ZAR 2 – ZAR 5</li>
+                            <li><strong>Lodge Staff:</strong> ZAR 30 – ZAR 50 per guest per day</li>
+                            <li><strong>Guides (Activities):</strong> ZAR 100 – ZAR 250 per guest</li>
+                            <li><strong>Guides (Private):</strong> ZAR 100 – ZAR 300 per day</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Tax (VAT) <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>All products and services in Namibia are priced to include VAT (value added tax) of 15%.</p>
+                        <p>You can look to reclaim VAT on purchases at the Windhoek International Airport, Eros Airport and Walvis Bay Airport.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Key Deposits <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Some lodges and hotels will request a key deposit be paid on arrival when handing over the key to your room/s. This will have to be paid in cash as it will be refunded to you when the key is returned on checking out.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Check-in / Check-out Times <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Take note of the standard check-in and check-out times at the lodges and plan your travelling days accordingly. Check-in is usually from 14:00pm and check-out is usually around 10:00/11:00am. Should you arrive early or depart late, you will need to arrange this with reception accordingly.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Flight Check-in Times & Arrivals <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Check-in for international flights will be 2 hours prior to your departure flight time. For domestic flights, this is usually only 1 hour, however we always recommend being there 2 hours in advance.</p>
+                        <p>Please be aware that on arrival at international airports, transfers are usually arranged for 45 minutes after your flight arrival time to allow adequate time for you to disembark the aircraft, to go through customs and immigration and to collect your luggage.</p>
+                        <p>For private charter and scheduled flights, check-in times will be specified, however this will usually be 1 hour in advance of the estimated time of departure.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category 4 -->
+        <div class="faq-category">
+            <h2 class="category-title"><span>✦</span> Self-Drive & Transport</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">Vehicle Details & Driving Rules <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>In Namibia we drive on the left-hand side of the road. We always recommend a 4x4 vehicle. Many areas require a vehicle with high clearance and these vehicles handle the gravel roads better. Vehicles are manual or automatic.</p>
+                        <p><strong>Speed Limits:</strong></p>
+                        <ul>
+                            <li>60 km/h on a public road within an urban area</li>
+                            <li>100 km/h on gravel roads (we recommend not exceeding 80 km/h for safety)</li>
+                            <li>120 km/h on tarred roads/freeways</li>
+                        </ul>
+                        <p><strong>Driver's Licenses:</strong> Must be valid for the duration of travel, and either an International Driving Permit/License, or an Apostille Translated to English.</p>
+                        <p><strong>NB:</strong> At all times when driving during the day, you need to switch on your head lamps on dipped beam or daytime running lights.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Petrol Stations & Fuel <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>When travelling in Namibia, you will not have to pump your own fuel. All fuel stations will have attendants who will do this for you. Almost all towns have fuel stations. Refuel as often as possible. Keep cash on hand for small town stations.</p>
+                        <p>Fuel costs fluctuate but as an indication, you can budget on the fuel prices (petrol and diesel) costing between ZAR 12 and ZAR 15 per litre.</p>
+                        <p><strong>Fuel Calculation:</strong> On average you can work on about 8kms per litre. A Double Cab has a 75L tank, and a Fortuner SUV has an 80L tank.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How to calculate travel times <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Namibia is a vast country, with much to see and do along the way between destinations. It is less about the destination itself and more about the journey to get there.</p>
+                        <ul>
+                            <li><strong>Tarred roads:</strong> Divide distance by 80 km/h (includes stops)</li>
+                            <li><strong>Gravel roads:</strong> Divide distance by 60 km/h (includes stops and road conditions)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Category 5 -->
+        <div class="faq-category">
+            <h2 class="category-title"><span>✦</span> General Information</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">National Parks & Park Entry Fees <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Take note that park entry gates open at sunrise and close at sunset.</p>
+                        <p>Entry fees need to be paid for each day entering or for each day you will be inside the park. These fees can often be paid for all at once, but make sure you then keep your slip on hand as proof.</p>
+                        <p><strong>NB:</strong> All National Parks restrict the use of plastic bags in the parks and therefore no plastic shopping bags will be allowed into the parks on entry.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Where is the Skeleton Coast? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>The whole Namibian coastline is generally known as the Skeleton Coast stretching from as far south as Luderitz all the way up to the Angolan Border in the north. This name has a number of meanings from the whale skeletons left on the beaches centuries ago, to the actual shipwrecks found along the coast.</p>
+                        <p>However, we advise including specific areas and activities to give you a real Skeleton Coast experience:</p>
+                        <ul>
+                            <li>Go on a Sandwich Harbour 4x4 excursion to see where the dunes meet the sea, from Swakopmund or Walvis Bay.</li>
+                            <li>Take a scenic flight over the coast to see the harsh but beautiful landscapes.</li>
+                            <li>Enjoy a Living Desert Tour into the dunes close to Swakopmund.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Mobile Network, Coverage & WiFi <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Roaming is expensive, so it is a good idea to make use of a local sim card. MTC has the best coverage throughout Namibia, but there are areas with little to no reception. The dialling code is +264.</p>
+                        <p>Almost all lodges offer WIFI connection at the main reception area, but not necessarily in the rooms. Connections can be slow.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Electrical Adaptors <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>In Namibia the common power plugs and sockets are of type D and M (3 round pins, as in South Africa). The standard voltage is 220 V. The best adaptor to get would be a type D adaptor, which can be purchased in Windhoek.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can you fly a drone in Namibia? <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>In order to fly and operate a drone within Namibia you must obtain written authorization from the Namibia Civil Aviation Authority (NCAA), and the Ministry of Environment and Tourism (MET) if you plan to fly in a National Park.</p>
+                        <p>Foreign nationals to Namibia must submit applications for permission to fly recreationally at least 60 calendar days before and commercially at least 120 days before the intended flight.</p>
+                        <p><strong>Rules that must be adhered to:</strong></p>
+                        <ul>
+                            <li>Do not fly over 45 metres (150ft) above any surface</li>
+                            <li>Do not fly overpopulated areas including towns and cities</li>
+                            <li>You may not fly within published controlled airspace or zone</li>
+                            <li>Do not fly within 5 nautical miles (10km) radius of any airfield</li>
+                            <li>Do not fly a drone from a moving vehicle</li>
+                            <li>You may not fly over private property without consent</li>
+                            <li>You may not fly near or over military, police or prison facilities</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Wetu App – TravelKey <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>We recommend you download the app called TravelKey. This allows travellers to carry their itinerary with them while they travel, even while offline.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Public Holidays <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p>Where a public holiday falls on a Sunday, Monday will then usually be declared a public holiday. During public holidays and often on weekends, limited shops are open and usually only until 12:00 / 13:00pm.</p>
+                        <p>Public holidays: New Year’s Day, Independence Day, Good Friday, Easter Monday, Worker’s Day, Cassinga Day, Ascension Day, Africa Day, Heroes’ Day, Human Rights Day, Christmas Day, Boxing Day.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Time Zone & Language <span class="faq-icon">+</span></div>
+                <div class="faq-answer">
+                    <div class="faq-answer-inner">
+                        <p><strong>Time Zone:</strong> Namibia uses the same offset as Central Africa Time Zone, which is GMT + 2 hours. Since 2018, Namibia no longer uses Daylight Savings Time in the winter months.</p>
+                        <p><strong>Language:</strong> The official language in Namibia is English, however German and Afrikaans are also widely used and there are numerous African languages and dialects spoken throughout the country since Namibia can be divided into at least 11 ethnic groups.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Accordion Script -->
+    <script data-no-optimize="1">
+        document.addEventListener("DOMContentLoaded", () => {
+            const faqItems = document.querySelectorAll('.faq-item');
+
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+
+                question.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                    });
+
+                    // Toggle current item
+                    if (!isActive) {
+                        item.classList.add('active');
+                        // Set max height dynamically to actual content height for smooth transition
+                        answer.style.maxHeight = answer.scrollHeight + "px";
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
