@@ -1131,7 +1131,7 @@
         function getFilePath(file) {
             if (file.startsWith('http')) return file;
             if (window.location.pathname === '/' || window.location.pathname === '') {
-                return 'dt_library/' + file;
+                return file;
             }
             return file;
         }

@@ -1605,19 +1605,7 @@
                 </div>
             </div>
 
-        <!-- PDF Modal -->
-        <div v-if="currentPdfUrl"
-            class="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4 lg:p-10 backdrop-blur-sm">
-            <div class="bg-white w-full max-w-5xl h-full rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-                <div class="p-4 border-b border-gray-100 flex justify-between items-center bg-gray-50">
-                    <h3 class="font-bold text-gray-800">Pricelist Viewer</h3>
-                    <button @click="currentPdfUrl = null"
-                        class="text-xs text-gray-500 hover:text-red-500 font-bold px-3 py-1.5 bg-white border border-gray-200 rounded-lg shadow-sm">Close
-                        ✕</button>
-                </div>
-                <iframe :key="currentPdfUrl" :src="currentPdfUrl" class="w-full h-full flex-grow border-0"></iframe>
-            </div>
-        </div>
+
 
     </div>
 
@@ -1709,7 +1697,7 @@
                     },
                     globalFlights: 0,
                     activities: [{ name: '', rate: 0, isPerPax: true }],
-                    currentPdfUrl: null,
+
                     extras: [{ name: '', rate: 0, isPerPax: false }],
                     itinerary: [
                         { region: 'Windhoek', lodge: 'Acacia Guesthouse', nights: 1, pp: 0, single: 0, child: 0, vehicle: 0, guideRate: 0, guideAcc: 0, guideMeals: 0, guideDrinks: 0, flights: 0, isLocked: false, lockedBy: '', lockPassword: '', manualSeason: null },
