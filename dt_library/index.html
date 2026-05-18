@@ -1128,6 +1128,14 @@
         // Removed secondary assignment, relying on initial value of -1
         let preloadedCode = "";
 
+        function getFilePath(file) {
+            if (file.startsWith('http')) return file;
+            if (window.location.pathname === '/' || window.location.pathname === '') {
+                return 'dt_library/' + file;
+            }
+            return file;
+        }
+
         async function loadComponent(idx, welcomeTitle = "DESERT TRACKS UI VAULT") {
             activeIndex = idx;
             localStorage.setItem('vault_active_index', idx);
@@ -1142,13 +1150,15 @@
                 
                 const timestamp = new Date().getTime();
                 const frame = document.getElementById('previewFrame');
-                frame.src = "welcome.html?title=" + encodeURIComponent(welcomeTitle) + "&v=" + timestamp;
+                const welcomePath = getFilePath("welcome.html");
+                frame.src = welcomePath + "?title=" + encodeURIComponent(welcomeTitle) + "&v=" + timestamp;
                 frame.onload = () => { setTimeout(() => { document.getElementById('loader').classList.remove('active'); }, 300); };
                 preloadedCode = "<!-- Please select a component to view source code -->";
                 return;
             }
             
             const cmp = components[idx];
+            const resolvedFile = getFilePath(cmp.file);
             
             document.getElementById('headerTitle').innerText = cmp.title;
             document.getElementById('headerDesc').innerText = cmp.desc;
@@ -1159,11 +1169,11 @@
             
             const timestamp = new Date().getTime();
             const frame = document.getElementById('previewFrame');
-            frame.src = cmp.file + "?v=" + timestamp;
+            frame.src = resolvedFile + "?v=" + timestamp;
             frame.onload = () => { setTimeout(() => { document.getElementById('loader').classList.remove('active'); }, 300); };
             
             try {
-                const res = await fetch(cmp.file + "?v=" + timestamp);
+                const res = await fetch(resolvedFile + "?v=" + timestamp);
                 preloadedCode = await res.text();
             } catch(e) {
                 console.error("Failed to preload code");
@@ -1207,7 +1217,7 @@
         function viewSource() {
             if (activeIndex < 0) return;
             const cmp = components[activeIndex];
-            window.open(cmp.file, '_blank');
+            window.open(getFilePath(cmp.file), '_blank');
         }
 
         function filterComponents() {
