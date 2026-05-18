@@ -383,11 +383,17 @@
 
 </div>
 
-<!-- Smooth Scroll Script for Sidebar -->
+<!-- Premium Smooth Scroll Script for Sidebar -->
 <script data-no-optimize="1">
     document.addEventListener('DOMContentLoaded', () => {
         const links = document.querySelectorAll('.sidebar-nav a');
         
+        // Easing function for premium slow slide (easeInOutQuart)
+        function easeInOutQuart(time, from, distance, duration) {
+            if ((time /= duration / 2) < 1) return distance / 2 * time * time * time * time + from;
+            return -distance / 2 * ((time -= 2) * time * time * time - 2) + from;
+        }
+
         links.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -395,13 +401,24 @@
                 const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    // Account for WordPress fixed headers + admin bar (approx 120px)
-                    const offsetTop = targetElement.getBoundingClientRect().top + window.pageYOffset - 120;
+                    const headerOffset = 100; // Adjust this if you need more/less space below your WordPress header
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
                     
-                    window.scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    });
+                    const startPosition = window.pageYOffset;
+                    const distance = offsetPosition - startPosition;
+                    const duration = 1000; // 1000ms = 1 second slow glide
+                    let start = null;
+
+                    function animation(currentTime) {
+                        if (start === null) start = currentTime;
+                        const timeElapsed = currentTime - start;
+                        const run = easeInOutQuart(timeElapsed, startPosition, distance, duration);
+                        window.scrollTo(0, run);
+                        if (timeElapsed < duration) requestAnimationFrame(animation);
+                    }
+                    
+                    requestAnimationFrame(animation);
                 }
             });
         });
