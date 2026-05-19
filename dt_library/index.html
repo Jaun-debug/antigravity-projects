@@ -1130,7 +1130,21 @@
 
         function getFilePath(file) {
             if (file.startsWith('http')) return file;
-            return file;
+            
+            // If the URL shows /dt_library/, we are being accessed directly
+            if (window.location.pathname.includes('/dt_library/')) {
+                return file;
+            }
+            
+            // If the user accesses the root '/', Vercel handles it via vercel.json rewrite (if repo root)
+            // or natively (if dt_library is root). We check the hostname to determine which project this is.
+            if (window.location.hostname.includes('website-codes-vert') || window.location.hostname.includes('website-vault')) {
+                // website-vault has dt_library as its root directory
+                return file;
+            } else {
+                // antigravity-projects (and others) have the repo as root directory
+                return 'dt_library/' + file;
+            }
         }
 
         async function loadComponent(idx, welcomeTitle = "DESERT TRACKS UI VAULT") {
