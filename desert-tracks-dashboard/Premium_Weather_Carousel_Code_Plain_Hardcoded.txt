@@ -1,0 +1,609 @@
+====== PREMIUM WEATHER CAROUSEL CODE ======
+
+<style>
+/* 
+=============================================
+PREMIUM WEATHER CAROUSEL STYLES
+=============================================
+*/
+.dt-home-section {
+    padding: 5rem 0;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.dt-section-header {
+    text-align: center;
+    margin-bottom: 3.5rem;
+    padding: 0 20px;
+}
+
+.dt-eyebrow {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #e2a85e;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.dt-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: #2c3e50;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Carousel Layout */
+.dt-carousel-container {
+    position: relative;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.dt-carousel-track {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding: 20px 5px 60px 5px;
+    margin: -20px -5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.dt-carousel-track::-webkit-scrollbar {
+    display: none;
+}
+
+.dt-card {
+    flex: 0 0 calc(25% - 18.75px);
+    min-width: 250px;
+    scroll-snap-align: start;
+    background: #ffffff;
+    border-radius: 2px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.dt-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #e2a85e;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.dt-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.dt-card:hover::before {
+    transform: scaleX(1);
+}
+
+.dt-card-inner {
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.dt-card-month {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: #2c3e50;
+    margin: 0 0 5px 0;
+    letter-spacing: 0.5px;
+}
+
+.dt-card-season {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 10px;
+    color: #e2a85e;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.dt-card-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+}
+
+.dt-data-block {
+    display: flex;
+    flex-direction: column;
+}
+
+.dt-data-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #a3a3a3;
+    margin-bottom: 4px;
+}
+
+.dt-data-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #2c3e50;
+    font-variant-numeric: lining-nums;
+}
+
+.dt-data-divider {
+    width: 1px;
+    height: 25px;
+    background-color: rgba(0,0,0,0.04);
+}
+
+.dt-card-desc {
+    font-size: 13px;
+    color: #6a6a6a;
+    line-height: 1.6;
+    margin: 0 0 25px 0;
+    font-weight: 300;
+    flex-grow: 1;
+}
+
+.dt-card-link {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    color: #2c3e50;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    margin-top: auto;
+    transition: color 0.3s ease;
+}
+
+.dt-card-link svg {
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+    stroke: #e2a85e; /* Distinctly orange arrows for the "Explore Guide" links */
+}
+
+.dt-card:hover .dt-card-link {
+    color: #e2a85e;
+}
+
+.dt-card:hover .dt-card-link svg {
+    transform: translateX(5px);
+}
+
+.dt-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    color: #e2a85e; /* Changed default arrow color to Orange */
+    transition: all 0.3s ease;
+}
+
+.dt-nav-btn:hover {
+    background: #e2a85e;
+    color: #ffffff; /* White arrow inside an orange circle on hover */
+    border-color: #e2a85e;
+}
+
+.dt-nav-prev {
+    left: 10px;
+    margin-top: -30px; 
+}
+
+.dt-nav-next {
+    right: 10px;
+    margin-top: -30px;
+}
+
+.dt-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+@media (max-width: 1100px) {
+    .dt-card { flex: 0 0 calc(33.333% - 17px); }
+}
+@media (max-width: 850px) {
+    .dt-card { flex: 0 0 calc(50% - 13px); }
+}
+@media (max-width: 550px) {
+    .dt-card { 
+        flex: 0 0 85%; 
+        scroll-snap-align: center; /* Center snap on mobile */
+    }
+    .dt-carousel-track {
+        padding: 20px 7.5% 60px 7.5%; /* Correct offsets to center 85% card */
+        margin: -20px -7.5%;
+        gap: 15px;
+    }
+    .dt-carousel-container { 
+        padding: 0; 
+    }
+    .dt-nav-btn { 
+        width: 36px;
+        height: 36px;
+        margin-top: -40px;
+        opacity: 0.9;
+    }
+    .dt-nav-prev { left: 5px; }
+    .dt-nav-next { right: 5px; }
+    .dt-nav-btn svg { width: 16px; height: 16px; }
+}
+</style>
+
+<div id="premiumWeatherCarouselApp">
+    <section class="dt-home-section">
+        <div class="dt-section-header">
+            <span class="dt-eyebrow">A Journey Through the Seasons</span>
+            <h2 class="dt-section-title">When to visit Namibia</h2>
+        </div>
+
+        <div class="dt-carousel-container">
+            <button class="dt-nav-btn dt-nav-prev" id="btnPrev" aria-label="Previous Month">
+                <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+            </button>
+
+            <div class="dt-carousel-track" id="weatherTrack">
+                <a href="https://desert-tracks.com/namibia-weather/january/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">January</h3>
+                        <span class="dt-card-season">Green Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">18—30°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">100mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Hot with dramatic afternoon thunderstorms. Landscapes turn vividly green causing spectacular contrast.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/february/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">February</h3>
+                        <span class="dt-card-season">Green Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">18—30°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">110mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Peak green season. Excellent for birdwatching and photography against moody, stormy skies.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/march/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">March</h3>
+                        <span class="dt-card-season">Shoulder Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">16—29°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">80mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Warm days with diminishing rains. Skies begin to clear beautifully, leaving dust-free air.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/april/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">April</h3>
+                        <span class="dt-card-season">Shoulder Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">14—27°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">40mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Comfortable temperatures, mostly dry, and exceptional light makes this a highly favored travel month.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/may/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">May</h3>
+                        <span class="dt-card-season">Dry Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">9—25°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">10mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Sunny, mild days and cooler nights. Fantastic overall travel conditions for exploring the country.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/june/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">June</h3>
+                        <span class="dt-card-season">Dry Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">6—22°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">3mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">The chill of winter arrives. Vegetation thins, drawing wildlife to the remaining waterholes.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/july/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">July</h3>
+                        <span class="dt-card-season">Peak Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">6—21°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">1mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Very cold mornings but exceptional, highly concentrated game viewing in the national parks.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/august/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">August</h3>
+                        <span class="dt-card-season">Peak Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">8—24°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">1mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Bone-dry landscapes and warming days. Prime time for Etosha safaris and clear stargazing.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/september/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">September</h3>
+                        <span class="dt-card-season">Peak Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">12—28°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">2mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Warm, dry, and dusty. Predictable water sources guarantee superb, uninterrupted wildlife sightings.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/october/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">October</h3>
+                        <span class="dt-card-season">Shoulder Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">15—30°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">10mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Intense heat builds alongside highly concentrated wildlife action before the rains break.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/november/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">November</h3>
+                        <span class="dt-card-season">Shoulder Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">17—31°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">40mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">The dramatic build-up to the rains. Warm, humid, dynamic skies, and brilliant for photography.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://desert-tracks.com/namibia-weather/december/" class="dt-card">
+                    <div class="dt-card-inner">
+                        <h3 class="dt-card-month">December</h3>
+                        <span class="dt-card-season">Green Season</span>
+                        <div class="dt-card-data">
+                            <div class="dt-data-block">
+                                <span class="dt-data-label">Avg Temp</span>
+                                <span class="dt-data-value">18—32°C</span>
+                            </div>
+                            <div class="dt-data-divider"></div>
+                            <div class="dt-data-block" style="text-align: right;">
+                                <span class="dt-data-label">Rainfall</span>
+                                <span class="dt-data-value">60mm</span>
+                            </div>
+                        </div>
+                        <p class="dt-card-desc">Hot summer days accompanied by the very first green shoots of the new rainy season.</p>
+                        <div class="dt-card-link">
+                            Explore Guide
+                            <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <button class="dt-nav-btn dt-nav-next" id="btnNext" aria-label="Next Month">
+                <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </button>
+        </div>
+    </section>
+</div>
+
+<script data-no-optimize="1">
+(function() {
+    function initWeatherCarousels() {
+        // Find all instances in case it's placed multiple times
+        const carousels = document.querySelectorAll('#premiumWeatherCarouselApp');
+        
+        carousels.forEach(container => {
+            // Prevent double initialization
+            if (container.dataset.initialized) return;
+            
+            const track = container.querySelector('.dt-carousel-track');
+            const btnPrev = container.querySelector('.dt-nav-prev');
+            const btnNext = container.querySelector('.dt-nav-next');
+            
+            if (track && btnNext && btnPrev) {
+                // Use onclick to override any builder interference
+                btnNext.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const scrollAmount = track.clientWidth > 768 ? 345 : track.clientWidth;
+                    track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+                };
+
+                btnPrev.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const scrollAmount = track.clientWidth > 768 ? 345 : track.clientWidth;
+                    track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+                };
+                
+                container.dataset.initialized = 'true';
+            }
+        });
+    }
+
+    // 1. Run instantly (best for HTML blocks)
+    initWeatherCarousels();
+    
+    // 2. Run when DOM is ready (standard fallback)
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWeatherCarousels);
+    }
+    
+    // 3. WordPress/Theme Builder delay hacks (fixes issues where themes reload DOM)
+    setTimeout(initWeatherCarousels, 1000);
+    setTimeout(initWeatherCarousels, 2500);
+})();
+</script>

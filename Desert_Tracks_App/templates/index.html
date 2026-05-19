@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WETU Image Extractor Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --surface-color: rgba(30, 41, 59, 0.7);
+            --primary-color: #d4af37; /* Gold accent */
+            --primary-hover: #bda030;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
+            color: var(--text-color);
+            font-family: 'Outfit', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5rem;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-weight: 300;
+            font-size: 1.1rem;
+        }
+
+        .extract-card {
+            background: var(--surface-color);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .extract-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .input-group {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        input[type="url"] {
+            flex: 1;
+            padding: 15px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="url"]:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+        }
+
+        button {
+            padding: 15px 30px;
+            background: var(--primary-color);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+        }
+
+        button:active {
+            transform: scale(0.98);
+        }
+
+        button:disabled {
+            background: var(--text-muted);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(0,0,0,0.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .btn-text {
+            display: inline-block;
+        }
+
+        #error-message {
+            color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            margin-top: 20px;
+            display: none;
+        }
+
+        /* Results Area */
+        .results-section {
+            margin-top: 50px;
+            display: none;
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .results-header h2 {
+            font-weight: 400;
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        .count-badge {
+            background: var(--primary-color);
+            color: #000;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: rgba(0,0,0,0.2);
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid var(--border-color);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .image-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.2);
+        }
+
+        .image-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .copy-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .image-card:hover .copy-overlay {
+            opacity: 1;
+        }
+
+        .copied-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary-color);
+            color: #000;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 1000;
+        }
+
+        .copied-toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Desert Tracks Engine</h1>
+            <p class="subtitle">Extract all high-resolution imagery from any WETU itinerary, instantly.</p>
+        </header>
+
+        <div class="extract-card">
+            <form id="extract-form">
+                <div class="input-group">
+                    <input type="url" id="wetu-url" placeholder="Paste WETU Itinerary URL here (e.g., https://wetu.com/...)" required>
+                    <button type="submit" id="submit-btn">
+                        <span class="btn-text">Extract Images</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </form>
+            <div id="error-message"></div>
+        </div>
+
+        <div class="results-section" id="results">
+            <div class="results-header">
+                <h2 id="itinerary-title">Found Images</h2>
+                <span class="count-badge" id="image-count">0 Images</span>
+            </div>
+            
+            <!-- Added a 'Copy All URLs' button for convenience -->
+            <button id="copy-all-btn" style="margin-bottom: 20px; background: rgba(255,255,255,0.1); color: white; border: 1px solid var(--border-color);">
+                Copy All Image URLs to Clipboard
+            </button>
+
+            <div class="image-grid" id="image-grid">
+                <!-- Images will be rendered here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="copied-toast" id="toast">Copied to clipboard!</div>
+
+    <script>
+        const form = document.getElementById('extract-form');
+        const urlInput = document.getElementById('wetu-url');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.querySelector('.btn-text');
+        const spinner = document.querySelector('.spinner');
+        const errorMsg = document.getElementById('error-message');
+        const resultsSection = document.getElementById('results');
+        const titleEl = document.getElementById('itinerary-title');
+        const countEl = document.getElementById('image-count');
+        const imageGrid = document.getElementById('image-grid');
+        const toast = document.getElementById('toast');
+        const copyAllBtn = document.getElementById('copy-all-btn');
+
+        let allUrls = [];
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const url = urlInput.value.trim();
+            if(!url) return;
+
+            // UI Loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+            errorMsg.style.display = 'none';
+            resultsSection.style.display = 'none';
+            imageGrid.innerHTML = '';
+            allUrls = [];
+
+            try {
+                const response = await fetch('/api/extract', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url })
+                });
+
+                const data = await response.json();
+
+                if(!response.ok) {
+                    throw new Error(data.error || 'Something went wrong');
+                }
+
+                if(!data.images || data.images.length === 0) {
+                    throw new Error('No images found in this itinerary.');
+                }
+
+                // Render Results
+                titleEl.textContent = data.title || "WETU Itinerary";
+                countEl.textContent = `${data.count} Images Found`;
+                allUrls = [];
+
+                if (data.groups && data.groups.length > 0) {
+                    data.groups.forEach(group => {
+                        const groupTitle = document.createElement('h3');
+                        groupTitle.style.width = '100%';
+                        groupTitle.style.borderBottom = '1px solid rgba(255,255,255,0.1)';
+                        groupTitle.style.paddingBottom = '10px';
+                        groupTitle.style.marginTop = '40px';
+                        groupTitle.style.color = '#d4af37';
+                        groupTitle.textContent = `${group.type}: ${group.name}`;
+                        imageGrid.appendChild(groupTitle);
+                        
+                        group.images.forEach(imgUrl => {
+                            allUrls.push(imgUrl);
+                            
+                            const card = document.createElement('div');
+                            card.className = 'image-card';
+                            card.onclick = () => copyToClipboard(imgUrl, card);
+
+                            const img = document.createElement('img');
+                            img.src = imgUrl;
+                            img.loading = 'lazy';
+                            img.alt = 'Itinerary Image';
+
+                            const overlay = document.createElement('div');
+                            overlay.className = 'copy-overlay';
+                            overlay.innerText = 'Click to Copy URL';
+
+                            card.appendChild(img);
+                            card.appendChild(overlay);
+                            imageGrid.appendChild(card);
+                        });
+                    });
+                } else {
+                    allUrls = data.images;
+                    data.images.forEach(imgUrl => {
+                        const card = document.createElement('div');
+                        card.className = 'image-card';
+                        card.onclick = () => copyToClipboard(imgUrl, card);
+
+                        const img = document.createElement('img');
+                        img.src = imgUrl;
+                        img.loading = 'lazy';
+                        img.alt = 'Itinerary Image';
+
+                        const overlay = document.createElement('div');
+                        overlay.className = 'copy-overlay';
+                        overlay.innerText = 'Click to Copy URL';
+
+                        card.appendChild(img);
+                        card.appendChild(overlay);
+                        imageGrid.appendChild(card);
+                    });
+                }
+
+                resultsSection.style.display = 'block';
+
+            } catch (err) {
+                errorMsg.textContent = err.message;
+                errorMsg.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline-block';
+                spinner.style.display = 'none';
+            }
+        });
+
+        copyAllBtn.addEventListener('click', () => {
+            if(allUrls.length > 0) {
+                const text = allUrls.join('\n');
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast("All URLs copied!");
+                });
+            }
+        });
+
+        function copyToClipboard(text, card) {
+            navigator.clipboard.writeText(text).then(() => {
+                const overlay = card.querySelector('.copy-overlay');
+                const originalText = overlay.innerText;
+                overlay.innerText = 'Copied!';
+                overlay.style.backgroundColor = 'rgba(212, 175, 55, 0.8)'; // Gold flash
+                overlay.style.color = 'black';
+                
+                showToast("URL Copied!");
+
+                setTimeout(() => {
+                    overlay.innerText = originalText;
+                    overlay.style.backgroundColor = 'rgba(0,0,0,0.6)';
+                    overlay.style.color = 'white';
+                }, 1500);
+            });
+        }
+
+        function showToast(msg) {
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+    </script>
+</body>
+</html>

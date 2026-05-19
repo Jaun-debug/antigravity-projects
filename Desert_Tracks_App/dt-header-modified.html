@@ -1,0 +1,792 @@
+<!-- DESERT TRACKS HEADER -->
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* 
+  Colors Breakdown:
+  Gold: #AE8245
+  Dark Gold Hover: #9B723B
+  Ivory Background: #F5F5F3
+  Seafoam Green (CTA): #1F4F4B
+  Dark Seafoam (CTA Hover): #163B38
+*/
+:root {
+  --dt-bg: rgba(245, 245, 243, 0.95);
+  --dt-solid-bg: #F5F5F3; 
+  --dt-gold: #9B6A35;
+  --dt-gold-hover: #7D552A;
+  --dt-seafoam: #8CB5A3;
+  --dt-seafoam-hover: #7BA090;
+}
+
+#dtHeaderWrapper,
+#dtHeaderWrapper * {
+  font-family: "Open Sans", sans-serif !important;
+  font-weight: 400 !important;
+}
+
+#dtHeaderWrapper a.dt-nav-link[href*="about"],
+#dtHeaderWrapper a.dt-nav-link[href*="namibia-east-africa-travel-guide"] {
+  color: var(--dt-gold) !important;
+  transition: color 0.3s ease;
+}
+
+#dtHeaderWrapper a.dt-nav-link[href*="about"]:hover,
+#dtHeaderWrapper a.dt-nav-link[href*="namibia-east-africa-travel-guide"]:hover {
+  color: var(--dt-gold-hover) !important;
+}
+
+.dt-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+}
+
+.dt-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 60px; /* Doubled header size padding */
+  background: var(--dt-bg);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03); /* Subtle premium shadow */
+}
+
+@supports not (backdrop-filter: blur(8px)) {
+  .dt-header-bar {
+    background: var(--dt-solid-bg);
+  }
+}
+
+.dt-nav-link { 
+  font-size: 12px !important; 
+  color: var(--dt-gold) !important;
+  letter-spacing: 1px;
+}
+.dt-left-group { display: flex; align-items: center; gap: 55px; }
+
+.dt-menu-toggle { 
+  background: none; 
+  border: none; 
+  cursor: pointer; 
+  display: flex; 
+  align-items: center;
+  padding: 10px;
+  margin: -10px;
+  z-index: 10001;
+  position: relative;
+}
+
+.dt-hamburger {
+  width: 26px;
+  height: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.dt-hamburger-line {
+  width: 26px;
+  height: 2px;
+  background: var(--dt-gold);
+  display: block;
+  transform-origin: center;
+  transition: transform 0.8s ease, opacity 0.6s ease, background-color 0.3s ease;
+  pointer-events: none;
+}
+
+.dt-menu-toggle:hover .dt-hamburger-line {
+  background-color: var(--dt-gold-hover);
+}
+
+.dt-menu-toggle.is-active .dt-hamburger-top {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.dt-menu-toggle.is-active .dt-hamburger-middle {
+  opacity: 0;
+}
+
+.dt-menu-toggle.is-active .dt-hamburger-bottom {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+.dt-dropdown { position: relative; }
+.dt-dropdown-toggle {
+  background: none;
+  border: none;
+  color: var(--dt-gold);
+  font-size: 12px !important;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  letter-spacing: 1px;
+}
+.dt-dropdown-toggle:hover { color: var(--dt-gold-hover); }
+
+.dt-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--dt-solid-bg);
+  display: none;
+  flex-direction: column;
+  padding: 12px 0;
+  min-width: 200px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.08); /* Soft drop shadow */
+  border: 1px solid rgba(174,130,69,0.1); 
+  z-index: 9999;
+}
+.dt-dropdown-menu a {
+  color: var(--dt-gold);
+  padding: 10px 20px;
+  display: block;
+  text-decoration: none;
+  font-size: 12px !important;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  letter-spacing: 1px;
+}
+.dt-dropdown-menu a:hover {
+  background: rgba(174,130,69,0.05); /* Soft gold wrap */
+  color: var(--dt-gold-hover);
+}
+.dt-dropdown:hover .dt-dropdown-menu { display: flex; }
+
+#dtHeaderWrapper .dt-emblem-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+#dtHeaderWrapper .dt-emblem-wrap:hover {
+  opacity: 0.85;
+}
+#dtHeaderWrapper .dt-emblem-text {
+  font-family: 'Cinzel', serif !important;
+  font-size: 30px !important; /* Decreased logo size by 30% */
+  font-weight: 400 !important; /* Regular weight to match screenshot */
+  font-style: normal !important; /* Removed italic to match screenshot */
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--dt-gold);
+  line-height: 1;
+}
+#dtHeaderWrapper .dt-emblem-sub {
+  font-family: 'Open Sans', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 300 !important;
+  letter-spacing: 5px;
+  color: var(--dt-gold);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+.dt-right-group { display: flex; align-items: center; gap: 35px; }
+
+.dt-search-btn {
+  background: none;
+  border: none;
+  color: var(--dt-gold);
+  cursor: pointer;
+  padding: 8px;
+  margin: -8px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dt-search-btn:hover {
+  color: var(--dt-gold-hover);
+}
+
+.dt-enquire {
+  background: var(--dt-seafoam);
+  color: #fff !important;
+  padding: 14px 34px;
+  text-decoration: none;
+  font-size: 11px !important;
+  font-weight: 300 !important; /* Lighter font to match screenshot */
+  letter-spacing: 5px; /* Wider spacing to match screenshot */
+  text-transform: uppercase;
+  display: inline-block;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.dt-enquire:hover {
+  background: var(--dt-seafoam-hover);
+  color: #fff !important;
+}
+
+/* OVERLAYS & DRAWERS - Updated to Ivory Tone */
+.dt-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 9999;
+  transition: background-color 0.8s ease, opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+.dt-menu-overlay.is-open {
+  background: rgba(0,0,0,0.4); /* Darkened backdrop */
+  visibility: visible;
+  opacity: 1;
+  transition: background-color 0.8s ease, opacity 0.8s ease, visibility 0s linear 0s;
+}
+
+.dt-drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--dt-solid-bg) !important;
+  color: var(--dt-gold);
+  transform: translateX(-100%);
+  transition: transform 1s ease;
+  padding: 80px 60px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 10000;
+  box-shadow: 10px 0 30px rgba(0,0,0,0.1);
+}
+
+.dt-menu-overlay.is-open .dt-drawer {
+  transform: translateX(0);
+}
+
+.dt-menu-close {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  background: none;
+  border: none;
+  color: var(--dt-gold);
+  font-size: 42px;
+  cursor: pointer;
+  font-weight: 300 !important;
+  transition: color 0.2s ease;
+  padding: 10px;
+  line-height: 1;
+}
+
+.dt-menu-close:hover {
+  color: var(--dt-gold-hover);
+}
+
+.dt-drawer-nav { width: 100%; margin-top: 40px; }
+.dt-drawer-nav ul { list-style: none; padding: 0; margin: 0; width: 100%; }
+
+.dt-drawer-item {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(174,130,69,0.15); /* Gold lines */
+}
+.dt-drawer-item:last-child { border-bottom: none; }
+
+.dt-drawer-item > a {
+  color: var(--dt-gold);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.dt-drawer-item > a:hover {
+  color: var(--dt-gold-hover);
+}
+
+.dt-submenu {
+  max-height: 0;
+  overflow: hidden;
+  list-style: none;
+  margin: 0 0 0 15px;
+  padding-left: 0;
+  position: relative;
+  transition: max-height 1.5s ease, margin-top 1.5s ease;
+}
+
+.dt-drawer-item.is-open .dt-submenu {
+  max-height: 300px;
+  margin-top: 10px;
+}
+
+@media (min-width: 769px) {
+  .dt-drawer-item.has-submenu:hover .dt-submenu {
+    max-height: 300px;
+    margin-top: 10px;
+  }
+}
+
+.dt-submenu::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--dt-seafoam);
+}
+.dt-submenu li {
+  margin: 8px 0 8px 25px;
+}
+.dt-submenu a {
+  font-size: 14px !important;
+  color: rgba(174,130,69,0.85);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  letter-spacing: 0.5px;
+}
+.dt-submenu a:hover {
+  color: var(--dt-gold-hover);
+}
+
+.dt-submenu-toggle {
+  font-size: 14px !important;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  background: none;
+  border: none;
+  color: var(--dt-gold);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  padding: 0;
+}
+.dt-submenu-toggle:hover {
+  color: var(--dt-gold-hover);
+}
+
+/* SEARCH OVERLAY */
+.dt-search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(245, 245, 243, 0.98); /* Solid Ivory Background */
+  visibility: hidden;
+  opacity: 0;
+  z-index: 99998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.dt-search-overlay.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.5s ease, visibility 0s linear 0s;
+}
+
+.dt-search-container {
+  width: 90%;
+  max-width: 700px;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.dt-search-overlay.is-open .dt-search-container {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.dt-search-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  background: none;
+  border: none;
+  color: var(--dt-gold);
+  font-size: 48px;
+  cursor: pointer;
+  font-weight: 300 !important;
+  transition: color 0.3s ease;
+  padding: 10px;
+  line-height: 1;
+}
+
+.dt-search-close:hover {
+  color: var(--dt-gold-hover);
+}
+
+.dt-search-title {
+  color: var(--dt-gold);
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.dt-search-form {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid var(--dt-gold);
+}
+
+.dt-search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--dt-gold);
+  font-size: 24px;
+  padding: 15px 0;
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 300;
+}
+
+.dt-search-input::placeholder {
+  color: rgba(174,130,69,0.5); /* Faded Gold Text */
+}
+
+.dt-search-submit {
+  background: none;
+  border: none;
+  color: var(--dt-gold);
+  cursor: pointer;
+  padding: 15px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dt-search-submit:hover {
+  color: var(--dt-gold-hover);
+}
+
+@media (max-width:768px) {
+  .dt-header-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 18px 25px;
+  }
+  #dtHeaderWrapper .dt-emblem-text { font-size: 22px !important; }
+  #dtHeaderWrapper .dt-emblem-sub { font-size: 9px !important; letter-spacing: 4px; margin-top: 4px; }
+  .dt-emblem { order: 1; }
+  .dt-left-group { order: 2; margin-left: auto; }
+  .dt-right-group,
+  .dt-left-group .dt-nav-link,
+  .dt-dropdown { display: none; }
+  .dt-drawer { padding: 60px 25px; }
+  .dt-menu-close {
+    font-size: 36px;
+    top: 16px;
+    right: 20px;
+  }
+  .dt-search-close {
+    font-size: 36px;
+    top: 16px;
+    right: 20px;
+  }
+  .dt-search-input {
+    font-size: 18px;
+  }
+}
+
+body.dt-menu-is-open,
+body.dt-search-is-open {
+  overflow: hidden !important;
+  position: fixed !important;
+  width: 100% !important;
+}
+</style>
+
+<div id="dtHeaderWrapper">
+<header class="dt-header">
+  <div class="dt-header-bar">
+    <div class="dt-left-group">
+      <button type="button" class="dt-menu-toggle" id="dtMenuToggle" aria-label="Open Menu">
+        <span class="dt-hamburger">
+          <span class="dt-hamburger-line dt-hamburger-top"></span>
+          <span class="dt-hamburger-line dt-hamburger-middle"></span>
+          <span class="dt-hamburger-line dt-hamburger-bottom"></span>
+        </span>
+      </button>
+
+      <div class="dt-dropdown">
+        <button class="dt-nav-link dt-dropdown-toggle" style="font-size:12px;">SAFARIS <span style="color: var(--dt-seafoam);">▾</span></button>
+        <div class="dt-dropdown-menu">
+          <a style="font-size:12px;" href="https://desert-tracks.com/namibia-self-drive-safaris/">Self-Drive Safaris</a>
+          <a style="font-size:12px;" href="https://desert-tracks.com/namibia-luxury-safaris/">Luxury Safaris</a>
+          <a style="font-size:12px;" href="https://desert-tracks.com/namibia-fly-in-safaris/">Fly-In Safaris</a>
+          <a style="font-size:12px;" href="https://desert-tracks.com/namibia-guided-safaris/">Guided Safaris</a>
+        </div>
+      </div>
+
+      <a href="https://desert-tracks.com/about/" class="dt-nav-link" style="font-size:12px;">ABOUT</a>
+    </div>
+
+    <!-- TEXT LOGO WITH SUBTITLE -->
+    <a href="https://desert-tracks.com/" class="dt-emblem dt-emblem-wrap">
+      <span class="dt-emblem-text">Desert Tracks</span>
+      <span class="dt-emblem-sub">AFRICAN SAFARIS</span>
+    </a>
+
+    <div class="dt-right-group">
+      <a href="https://desert-tracks.com/namibia-east-africa-travel-guide/" class="dt-nav-link" style="font-size:12px;">TRAVEL BLOGS</a>
+      <a href="https://desert-tracks.com/desert-tracks-contact/" class="dt-enquire" style="font-size:12px;">ENQUIRE NOW</a>
+      <button type="button" class="dt-search-btn" id="dtSearchBtn" aria-label="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- MENU OVERLAY -->
+  <div class="dt-menu-overlay" id="dtMenuOverlay">
+    <aside class="dt-drawer" id="dtDrawer">
+      <button type="button" class="dt-menu-close" id="dtMenuClose" aria-label="Close Menu">&times;</button>
+      <nav class="dt-drawer-nav">
+        <ul>
+          <li class="dt-drawer-item has-submenu" id="dtSubmenu1">
+            <button type="button" class="dt-submenu-toggle" style="font-size:14px;">NAMIBIA SAFARIS <span style="color: var(--dt-seafoam);">▾</span></button>
+            <ul class="dt-submenu">
+              <li><a style="font-size:14px;" href="https://desert-tracks.com/namibia-self-drive-safaris/">Self-Drive Safaris</a></li>
+              <li><a style="font-size:14px;" href="https://desert-tracks.com/namibia-luxury-safaris/">Luxury Safaris</a></li>
+              <li><a style="font-size:14px;" href="https://desert-tracks.com/namibia-fly-in-safaris/">Fly-In Safaris</a></li>
+              <li><a style="font-size:14px;" href="https://desert-tracks.com/namibia-guided-safaris/">Guided Safaris</a></li>
+            </ul>
+          </li>
+
+          <li class="dt-drawer-item has-submenu" id="dtSubmenu2">
+            <button type="button" class="dt-submenu-toggle" style="font-size:14px;">DESTINATIONS <span style="color: var(--dt-seafoam);">▾</span></button>
+            <ul class="dt-submenu">
+              <li><a style="font-size:14px;" href="https://desert-tracks.com/namibia-safaris/">Namibia</a></li>
+              <li><a style="font-size:14px;" href="https://desert-tracks.com/botswana-safaris-and-tours/">Botswana</a></li>
+            </ul>
+          </li>
+
+          <li class="dt-drawer-item"><a style="font-size:14px;" href="https://desert-tracks.com/about/">ABOUT</a></li>
+          <li class="dt-drawer-item"><a style="font-size:14px;" href="https://desert-tracks.com/namibia-east-africa-travel-guide/">TRAVEL JOURNAL</a></li>
+          <li class="dt-drawer-item"><a style="font-size:14px;" href="https://desert-tracks.com/desert-tracks-contact/">ENQUIRE NOW</a></li>
+        </ul>
+      </nav>
+    </aside>
+  </div>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="dt-search-overlay" id="dtSearchOverlay">
+    <button type="button" class="dt-search-close" id="dtSearchClose" aria-label="Close Search">&times;</button>
+    <div class="dt-search-container">
+      <p class="dt-search-title">Search Desert Tracks</p>
+      <form class="dt-search-form" action="https://desert-tracks.com/" method="get">
+        <input type="text" class="dt-search-input" id="dtSearchInput" name="s" placeholder="Search safaris, destinations..." autocomplete="off" required>
+        <button type="submit" class="dt-search-submit" aria-label="Submit Search">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
+</div>
+
+<script>
+(function() {
+  var menuToggle = document.getElementById('dtMenuToggle');
+  var menuOverlay = document.getElementById('dtMenuOverlay');
+  var menuClose = document.getElementById('dtMenuClose');
+  var searchBtn = document.getElementById('dtSearchBtn');
+  var searchOverlay = document.getElementById('dtSearchOverlay');
+  var searchClose = document.getElementById('dtSearchClose');
+  var searchInput = document.getElementById('dtSearchInput');
+  var submenuToggles = document.querySelectorAll('.dt-submenu-toggle');
+  var submenuItems = document.querySelectorAll('.dt-drawer-item.has-submenu');
+  var submenu1 = document.getElementById('dtSubmenu1');
+  var submenu2 = document.getElementById('dtSubmenu2');
+  var scrollPos = 0;
+  var autoOpenTimer1 = null;
+  var autoOpenTimer2 = null;
+
+  function isDesktop() {
+    return window.innerWidth > 768;
+  }
+
+  function openSubmenu(item) {
+    var toggle = item.querySelector('.dt-submenu-toggle');
+    item.classList.add('is-open');
+    if (toggle) toggle.innerHTML = toggle.innerHTML.replace('▾', '▲');
+  }
+
+  function closeSubmenu(item) {
+    var toggle = item.querySelector('.dt-submenu-toggle');
+    item.classList.remove('is-open');
+    if (toggle) toggle.innerHTML = toggle.innerHTML.replace('▲', '▾');
+  }
+
+  function closeAllSubmenus() {
+    submenuItems.forEach(function(item) {
+      closeSubmenu(item);
+    });
+  }
+
+  function clearAutoOpenTimers() {
+    if (autoOpenTimer1) { clearTimeout(autoOpenTimer1); autoOpenTimer1 = null; }
+    if (autoOpenTimer2) { clearTimeout(autoOpenTimer2); autoOpenTimer2 = null; }
+  }
+
+  function openMenu() {
+    if (menuOverlay.classList.contains('is-open')) return;
+    scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    document.body.classList.add('dt-menu-is-open');
+    document.body.style.top = '-' + scrollPos + 'px';
+    menuOverlay.classList.add('is-open');
+    menuToggle.classList.add('is-active');
+
+    autoOpenTimer1 = setTimeout(function() {
+      if (submenu1) openSubmenu(submenu1);
+    }, 1000);
+
+    autoOpenTimer2 = setTimeout(function() {
+      if (submenu2) openSubmenu(submenu2);
+    }, 2000);
+  }
+
+  function closeMenu() {
+    clearAutoOpenTimers();
+    menuOverlay.classList.remove('is-open');
+    menuToggle.classList.remove('is-active');
+    document.body.classList.remove('dt-menu-is-open');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollPos);
+    closeAllSubmenus();
+  }
+
+  function openSearch() {
+    scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+    document.body.classList.add('dt-search-is-open');
+    document.body.style.top = '-' + scrollPos + 'px';
+    searchOverlay.classList.add('is-open');
+    setTimeout(function() { 
+      if (searchInput) searchInput.focus(); 
+    }, 400);
+  }
+
+  function closeSearch() {
+    searchOverlay.classList.remove('is-open');
+    document.body.classList.remove('dt-search-is-open');
+    document.body.style.top = '';
+    window.scrollTo(0, scrollPos);
+    if (searchInput) searchInput.value = '';
+  }
+
+  if (menuToggle) {
+    menuToggle.onmouseenter = function() {
+      if (isDesktop()) {
+        openMenu();
+      }
+    };
+
+    menuToggle.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (menuOverlay.classList.contains('is-open')) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    };
+  }
+
+  if (menuClose) {
+    menuClose.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMenu();
+    };
+  }
+
+  if (menuOverlay) {
+    menuOverlay.onclick = function(e) {
+      if (e.target === menuOverlay) {
+        closeMenu();
+      }
+    };
+  }
+
+  if (searchBtn) {
+    searchBtn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openSearch();
+    };
+  }
+
+  if (searchClose) {
+    searchClose.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeSearch();
+    };
+  }
+
+  if (searchOverlay) {
+    searchOverlay.onclick = function(e) {
+      if (e.target === searchOverlay) {
+        closeSearch();
+      }
+    };
+  }
+
+  document.onkeydown = function(e) {
+    if (e.key === 'Escape') {
+      if (menuOverlay && menuOverlay.classList.contains('is-open')) {
+        closeMenu();
+      }
+      if (searchOverlay && searchOverlay.classList.contains('is-open')) {
+        closeSearch();
+      }
+    }
+  };
+
+  for (var i = 0; i < submenuItems.length; i++) {
+    (function(item) {
+      var toggle = item.querySelector('.dt-submenu-toggle');
+      
+      item.onmouseenter = function() {
+        if (isDesktop()) {
+          openSubmenu(item);
+        }
+      };
+      
+      item.onmouseleave = function() {
+        if (isDesktop()) {
+          closeSubmenu(item);
+        }
+      };
+      
+      if (toggle) {
+        toggle.onclick = function(e) {
+          if (!isDesktop()) {
+            e.preventDefault();
+            if (item.classList.contains('is-open')) {
+              closeSubmenu(item);
+            } else {
+              openSubmenu(item);
+            }
+          }
+        };
+      }
+    })(submenuItems[i]);
+  }
+})();
+</script>
