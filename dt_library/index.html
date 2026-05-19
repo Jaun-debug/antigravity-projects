@@ -1128,26 +1128,38 @@
         // Removed secondary assignment, relying on initial value of -1
         let preloadedCode = "";
 
-        function getFilePath(file) {
+        async function getWorkingPath(file, timestamp) {
             if (file.startsWith('http')) return file;
-            return file;
+            
+            // If accessed directly via /dt_library/ path locally or directly
+            if (window.location.pathname.includes('/dt_library/')) {
+                return file;
+            }
+            
+            let path1 = file;
+            let path2 = 'dt_library/' + file;
+            
+            try {
+                let res = await fetch(path1 + "?v=" + timestamp, {method: 'HEAD'});
+                if (res.ok) return path1;
+            } catch(e) {}
+            
+            return path2; // Fallback to dt_library/
         }
 
         async function loadComponent(idx, welcomeTitle = "DESERT TRACKS UI VAULT") {
-            activeIndex = idx;
-            localStorage.setItem('vault_active_index', idx);
+            const timestamp = new Date().getTime();
             
-            if (idx === -1) {
-                document.getElementById('headerTitle').innerText = "Welcome";
-                document.getElementById('headerDesc').innerText = "Please select a component from the left sidebar.";
-                document.getElementById('urlBar').innerText = "welcome.html";
+            if (idx < 0) {
+                document.getElementById('headerTitle').innerText = 'Welcome';
+                document.getElementById('headerDesc').innerText = 'Please select a component from the left sidebar.';
+                document.getElementById('urlBar').innerText = '';
                 document.getElementById('loader').classList.add('active');
                 
                 renderNav();
                 
-                const timestamp = new Date().getTime();
+                const welcomePath = await getWorkingPath("welcome.html", timestamp);
                 const frame = document.getElementById('previewFrame');
-                const welcomePath = getFilePath("welcome.html");
                 frame.src = welcomePath + "?title=" + encodeURIComponent(welcomeTitle) + "&v=" + timestamp;
                 frame.onload = () => { setTimeout(() => { document.getElementById('loader').classList.remove('active'); }, 300); };
                 preloadedCode = "<!-- Please select a component to view source code -->";
@@ -1155,7 +1167,7 @@
             }
             
             const cmp = components[idx];
-            const resolvedFile = getFilePath(cmp.file);
+            const resolvedFile = await getWorkingPath(cmp.file, timestamp);
             
             document.getElementById('headerTitle').innerText = cmp.title;
             document.getElementById('headerDesc').innerText = cmp.desc;
@@ -1164,7 +1176,6 @@
             
             renderNav();
             
-            const timestamp = new Date().getTime();
             const frame = document.getElementById('previewFrame');
             frame.src = resolvedFile + "?v=" + timestamp;
             frame.onload = () => { setTimeout(() => { document.getElementById('loader').classList.remove('active'); }, 300); };
