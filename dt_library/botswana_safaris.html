@@ -1,0 +1,304 @@
+<!-- ============================================================
+     DESERT TRACKS – 3-COLUMN GRID ITINERARIES BLOCK (No Pricing)
+     ============================================================ -->
+<section id="dt-sds-grid">
+<style>
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  #dt-sds-grid {
+    --dt-orange: #C9A24A; /* Refined Gold color for 'Find out more' */
+    --dt-dark:   #123631; /* Deep Typography Green */
+    --dt-sand:   #F5F5F3; /* Luxury Ivory Background */
+    --dt-muted:  #8b7a66; /* Muted brown for meta text */
+    
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: var(--dt-sand);
+    width: 100%;
+    padding: 80px 20px;
+    box-sizing: border-box;
+  }
+
+  .dt-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* ── HEADING ─────────────────────────────────────────────── */
+  .dt-grid-heading-wrap {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .dt-grid-heading {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--dt-dark);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .dt-grid-sub {
+    font-size: 1.05rem;
+    color: var(--dt-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  /* ── GRID LAYOUT ────────────────────────────────────────── */
+  .dt-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    row-gap: 50px;
+  }
+
+  @media (max-width: 900px) {
+    .dt-grid-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dt-grid-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ── CARD STYLING ───────────────────────────────────────── */
+  .dt-grid-card {
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+  }
+
+  .dt-gc-img {
+    width: 100%;
+    aspect-ratio: 1.6 / 1;
+    border-radius: 8px; /* Smooth rounded corners */
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); /* Slight elevation */
+  }
+
+  .dt-gc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+  }
+
+  .dt-grid-card:hover .dt-gc-img img {
+    transform: scale(1.05); /* Gentle premium zoom */
+  }
+
+  /* FROSTED BADGE (Like "Popular" pill in screenshot) */
+  .dt-gc-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    z-index: 2;
+  }
+
+  /* ── CARD CONTENT ───────────────────────────────────────── */
+  .dt-gc-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--dt-muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .dt-gc-title {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--dt-dark);
+    margin-bottom: 16px; /* Extra breathing room */
+    line-height: 1.4;
+    transition: color 0.3s;
+  }
+  
+  .dt-grid-card:hover .dt-gc-title {
+    color: var(--dt-orange); /* Title shifts to gold on hover */
+  }
+
+  /* Descriptions hidden by default to match clean visual screenshot */
+  .dt-gc-desc {
+    display: none; 
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  /* FIND OUT MORE LINK */
+  .dt-gc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--dt-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(201, 162, 74, 0.4);
+    padding-bottom: 3px;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: all 0.3s;
+  }
+
+  .dt-gc-link svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    transition: transform 0.3s;
+  }
+
+  .dt-grid-card:hover .dt-gc-link {
+    border-bottom-color: var(--dt-orange);
+  }
+
+  .dt-grid-card:hover .dt-gc-link svg {
+    transform: translateX(5px); /* Arrow shoots to the right */
+  }
+</style>
+
+<div class="dt-grid-container">
+  
+  <div class="dt-grid-heading-wrap">
+    <h2 class="dt-grid-heading">Explore Our Top Selling Itineraries</h2>
+    <p class="dt-grid-sub">Handcrafted safaris across Botswana's most iconic landscapes</p>
+  </div>
+
+  <div class="dt-grid-wrapper">
+
+    <!-- 1. 5-Day Victoria Falls & Chobe Luxury Safari Experience -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Landing/aacd65be-ccc0-464f-b63c-24de73c64242" target="_blank">
+      <div class="dt-gc-img">
+        <div class="dt-gc-badge">Popular</div>
+        <img src="https://wetu.com/imageHandler/c1920x1080/49844/vicfallszam-istock-472180323_9.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>5 days</span>
+      </div>
+      <div class="dt-gc-title">5-Day Victoria Falls & Chobe Luxury Safari Experience</div>
+      <div class="dt-gc-desc">Experience two of Southern Africa’s natural icons in style on a 5-day journey that blends adventure and elegance. Discover the majestic Victoria Falls and the wildlife-rich Chobe National Park through exclusive river cruises, game drives, and refined safari lodges.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 2. 11-Day Botswana Safari Experience – Superior -->
+    <a class="dt-grid-card" href="https://wetu.com/ItineraryOutputs/Discovery/6307165B-4D0C-431F-9F60-915C24086E72" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://wetu.com/imageHandler/c1920x1080/187698/kasane_forest_reserve-istock-843389490.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>11 days</span>
+      </div>
+      <div class="dt-gc-title">11-Day Botswana Safari Experience – Superior</div>
+      <div class="dt-gc-desc">Experience the best of Botswana on an 11-day journey through Victoria Falls, Chobe, Nogatsaa, and the Okavango Delta. Combining luxury and adventure, this curated safari features exclusive lodges, expert guides, and unforgettable encounters amid Africa’s most breathtaking landscapes.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 3. 11-Day Luxury Botswana Desert & Delta Safari -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Landing/b4c0080e-ba1e-4b59-959b-e9926575b40f" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://wetu.com/imageHandler/c1920x1080/163436/nogatsaa_-_chobe_national_park-istock-1176994552.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>11 days</span>
+      </div>
+      <div class="dt-gc-title">11-Day Luxury Botswana Desert & Delta Safari</div>
+      <div class="dt-gc-desc">Explore Botswana’s most iconic landscapes on an 11-day journey from Victoria Falls to Chobe, the Okavango Delta, and Makgadikgadi. Enjoy a seamless blend of luxury and adventure with exclusive lodges, expert guides, and unforgettable wildlife experiences.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 4. 10-Day Luxury Vic Falls, Chobe & Delta Safari / Premier -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Overview/02c218e5-d801-4b1d-9e7f-aeadb1be5938" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://wetu.com/imageHandler/c1920x1080/479/istock-648362800.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>10 days</span>
+      </div>
+      <div class="dt-gc-title">10-Day Luxury Vic Falls, Chobe & Delta Safari / Premier</div>
+      <div class="dt-gc-desc">Experience Southern Africa’s highlights on a 10-day journey from Victoria Falls to Chobe and the Okavango Delta. Choose between Standard or Premier routes, both offering luxury lodges, diverse wildlife, and unforgettable safari adventures.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 5. 10-Day Luxury Botswana Delta Explorer Safari -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Overview/796f6636-f991-44e3-ae41-15b2b6e6a7ea" target="_blank">
+      <div class="dt-gc-img">
+        <div class="dt-gc-badge" style="background:#123631; color:#fff;">Exclusive</div>
+        <img src="https://wetu.com/imageHandler/c1920x1080/9829/waterberry_lodge_from_the_river2.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>10 days</span>
+      </div>
+      <div class="dt-gc-title">10-Day Luxury Botswana Delta Explorer Safari</div>
+      <div class="dt-gc-desc">Discover Botswana’s untamed beauty on a 10-day deluxe journey through Linyanti, Khwai, and the Okavango Delta. Experience a seamless blend of adventure and elegance with exclusive lodges, guided safaris, and unforgettable encounters in Africa’s most pristine wilderness.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 6. 10-Day Botswana Classic or Delta Explorer Safari -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Overview/796f6636-f991-44e3-ae41-15b2b6e6a7ea" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://wetu.com/imageHandler/c1920x1080/124315/_a743743-tlouwana.jpeg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>10 days</span>
+      </div>
+      <div class="dt-gc-title">10-Day Botswana Classic or Delta Explorer Safari</div>
+      <div class="dt-gc-desc">Discover Botswana’s wild beauty on a 10-day journey through Linyanti and Khwai, with the choice of Deception Valley (Classic) or the Okavango Delta (Deluxe). Enjoy luxury lodges, expert guides, and unforgettable wildlife encounters.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 7. 9-Day Botswana Focus Luxury Safari Adventure -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Landing/91683b5b-d601-4be1-923c-cffa64f337f3" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://wetu.com/imageHandler/c1920x1080/112552/nogatsaa_pans_24.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>9 days</span>
+      </div>
+      <div class="dt-gc-title">9-Day Botswana Focus Luxury Safari Adventure</div>
+      <div class="dt-gc-desc">Experience Southern Africa’s highlights on a 9-day fly-in or guided safari through Victoria Falls, Chobe, and the Okavango Delta. Choose between Standard or Superior options, each offering exceptional lodges, expert guides, and unforgettable wildlife encounters in Botswana’s most iconic landscapes.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- 8. 7 Day Botswana Three Rivers Safari adventure -->
+    <a class="dt-grid-card" href="https://wetu.com/Itinerary/Landing/12a70faa-0104-4897-9e99-34ebc673835c" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://wetu.com/imageHandler/c1920x1080/10173/heronryybstorks_kan_5499.jpg?fmt=jpg" alt="Botswana Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>Botswana Safaris</span>
+        <span>7 days</span>
+      </div>
+      <div class="dt-gc-title">7-Day Botswana Three Rivers Safari Adventure</div>
+      <div class="dt-gc-desc">Experience the best of Southern Africa on a 7-day journey through Victoria Falls, Chobe National Park, and Botswana’s Khwai or Okavango Delta. Choose between Standard or Superior options, featuring handpicked lodges, expert guides, and unforgettable wildlife encounters across three extraordinary river ecosystems.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+  </div>
+</div>
+</section>

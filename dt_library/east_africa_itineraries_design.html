@@ -1,0 +1,195 @@
+<!-- ============================================================
+     DESERT TRACKS – EAST AFRICA ITINERARIES BLOCK (Grid Layout)
+     ============================================================ -->
+<section id="dt-sds-grid">
+<style data-no-optimize="1">
+  /* ── TOKENS ─────────────────────────────────────────────── */
+  #dt-sds-grid {
+    --dt-orange: #C9A24A; /* Refined Gold color for 'Find out more' */
+    --dt-dark:   #123631; /* Deep Typography Green */
+    --dt-sand:   #F5F5F3; /* Luxury Ivory Background */
+    --dt-muted:  #8b7a66; /* Muted brown for meta text */
+    
+    font-family: 'Open Sans', Arial, sans-serif;
+    background: var(--dt-sand);
+    width: 100%;
+    padding: 80px 20px;
+    box-sizing: border-box;
+  }
+
+  .dt-grid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .dt-grid-heading-wrap {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .dt-grid-heading {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--dt-dark);
+    margin-bottom: 12px;
+    font-weight: 400;
+  }
+
+  .dt-grid-sub {
+    font-size: 1.05rem;
+    color: var(--dt-muted);
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .dt-grid-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 30px;
+    row-gap: 50px;
+  }
+
+  @media (max-width: 900px) {
+    .dt-grid-wrapper {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .dt-grid-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dt-grid-card {
+    text-decoration: none !important;
+    display: flex;
+    flex-direction: column;
+    color: inherit;
+  }
+
+  .dt-gc-img {
+    width: 100%;
+    aspect-ratio: 1.6 / 1;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+    position: relative;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  }
+
+  .dt-gc-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+    display: block;
+  }
+
+  .dt-grid-card:hover .dt-gc-img img {
+    transform: scale(1.05);
+  }
+
+  .dt-gc-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--dt-muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+
+  .dt-gc-title {
+    font-family: 'Open Sans', Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--dt-dark);
+    margin-bottom: 16px;
+    line-height: 1.4;
+    transition: color 0.3s;
+  }
+  
+  .dt-grid-card:hover .dt-gc-title {
+    color: var(--dt-orange);
+  }
+
+  .dt-gc-desc {
+    display: none; 
+    font-size: 0.9rem;
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .dt-gc-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--dt-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(201, 162, 74, 0.4);
+    padding-bottom: 3px;
+    margin-top: auto;
+    align-self: flex-start;
+    transition: all 0.3s;
+  }
+
+  .dt-gc-link svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    transition: transform 0.3s;
+  }
+
+  .dt-grid-card:hover .dt-gc-link {
+    border-bottom-color: var(--dt-orange);
+  }
+
+  .dt-grid-card:hover .dt-gc-link svg {
+    transform: translateX(5px);
+  }
+</style>
+
+<div class="dt-grid-container">
+  
+  <div class="dt-grid-heading-wrap">
+    <h2 class="dt-grid-heading">Explore East Africa's Top Itineraries</h2>
+    <p class="dt-grid-sub">Handcrafted safaris across East Africa's most iconic landscapes</p>
+  </div>
+
+  <div class="dt-grid-wrapper">
+
+    <!-- Placeholder East Africa Itinerary 1 -->
+    <a class="dt-grid-card" href="#" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/okavango_solly_large.jpeg" alt="East Africa Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>TBD days</span>
+      </div>
+      <div class="dt-gc-title">Best of East Africa Safari</div>
+      <div class="dt-gc-desc">Experience East Africa's highlights in comfort.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+    <!-- Placeholder East Africa Itinerary 2 -->
+    <a class="dt-grid-card" href="#" target="_blank">
+      <div class="dt-gc-img">
+        <img src="https://desert-tracks.com/wp-content/uploads/2026/03/elephant-springbok-etosha-solly-large-e1759762664136-4.jpeg" alt="East Africa Safari" loading="lazy" />
+      </div>
+      <div class="dt-gc-meta">
+        <span>East Africa Safaris</span>
+        <span>TBD days</span>
+      </div>
+      <div class="dt-gc-title">East Africa Wildlife Safari</div>
+      <div class="dt-gc-desc">Discover East Africa's wildlife and natural wonders.</div>
+      <div class="dt-gc-link">Find out more <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+    </a>
+
+  </div>
+</div>
+</section>

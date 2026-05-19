@@ -1,0 +1,459 @@
+<div class="itinerary-master-page">
+    <style data-no-optimize="1">
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+        .itinerary-master-page {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            box-sizing: border-box;
+            line-height: 1.6;
+            position: relative;
+        }
+        .itinerary-master-page *, .itinerary-master-page *::before, .itinerary-master-page *::after {
+            box-sizing: inherit;
+        }
+        /* Full Width Hero Header */
+        .imp-hero {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            height: 85vh; 
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden; 
+        }
+        .imp-hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            animation: impHeroZoom 10s ease-out forwards; 
+        }
+        @keyframes impHeroZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .imp-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .imp-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            color: #ffffff !important;
+            max-width: 65rem;
+        }
+        .imp-hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 400;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.05em;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            color: #ffffff !important; 
+        }
+        .imp-hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin: 0;
+            color: #ffffff !important; 
+        }
+        /* Main Content Layout */
+        .imp-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .imp-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+        @media (min-width: 1024px) {
+            .imp-layout {
+                grid-template-columns: 2fr 1fr; 
+                align-items: stretch; 
+            }
+        }
+        /* Typography & Sections */
+        .imp-section {
+            margin-bottom: 4rem;
+        }
+        .imp-section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 2rem;
+            color: #2c2c2c !important;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .imp-text {
+            color: #555555;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        /* Route Map Styles */
+        .imp-map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #f9f9f4;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .imp-map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+        /* Day-by-Day Accordion */
+        .imp-day {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .imp-day:last-of-type {
+            border-bottom: none;
+        }
+        .imp-day summary {
+            font-family: "Playfair Display", serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .imp-day summary:hover {
+            color: #d87a4d;
+        }
+        .imp-day summary::-webkit-details-marker {
+            display: none; 
+        }
+        .imp-day summary::after {
+            content: '+';
+            font-family: system-ui, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: #d87a4d;
+        }
+        .imp-day[open] summary::after {
+            content: '−';
+        }
+        .imp-day-content {
+            padding-bottom: 2rem;
+            color: #555555;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+        /* ==== THE CAROUSEL STYLES ==== */
+        .imp-day-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            margin: 1rem 0 1.5rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #d87a4d #f0eee9;
+        }
+        .imp-day-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+        .imp-day-carousel::-webkit-scrollbar-track {
+            background: #f0eee9;
+            border-radius: 4px;
+        }
+        .imp-day-carousel::-webkit-scrollbar-thumb {
+            background: #d87a4d;
+            border-radius: 4px;
+        }
+        .imp-day-carousel img {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            scroll-snap-align: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) {
+            .imp-day-carousel img {
+                flex: 0 0 100%; 
+                scroll-snap-align: start;
+            }
+        }
+        .imp-day-meta {
+            margin-top: 1.5rem;
+            background: #f9f9f4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 3px solid #d87a4d;
+        }
+        .imp-day-meta p {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        .imp-day-meta p:last-child {
+            margin: 0;
+        }
+        .imp-day-meta strong {
+            color: #2c2c2c !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        /* Sticky Sidebar FIX */
+        .imp-sidebar-wrapper {
+            position: relative;
+            height: 100%; 
+        }
+        .imp-sidebar {
+            background-color: #f9f9f4;
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            border-top: 4px solid #d87a4d;
+            
+            position: -webkit-sticky;
+            position: sticky;
+            top: 130px; 
+            z-index: 10;
+        }
+        .imp-price {
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            color: #2c2c2c !important;
+            margin: 0 0 0.5rem 0;
+            font-weight: 400;
+        }
+        .imp-price span {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .imp-glance-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        .imp-glance-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+            color: #666;
+        }
+        .imp-glance-list li:last-child {
+            border-bottom: none;
+        }
+        .imp-glance-list strong {
+            font-weight: 500;
+            color: #2c2c2c !important;
+            text-align: right;
+        }
+        .imp-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #d87a4d;
+            color: #ffffff !important;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border-radius: 2px;
+        }
+        .imp-btn:hover {
+            background-color: #be653a;
+        }
+        
+        .imp-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .imp-highlight-tag {
+            background: #f0eee9;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c2c2c !important;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+    </style>
+
+    <div class="imp-hero">
+        <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/intu_afrika_kalahari_game_reserve-istock-6224169981.jpg" alt="11-Day South of Namibia Safari" />
+        <div class="imp-hero-overlay"></div>
+        <div class="imp-hero-content">
+            <h1 class="imp-hero-title">11-Day South of Namibia</h1>
+            <p class="imp-hero-subtitle">Self-Drive Safari</p>
+        </div>
+    </div>
+
+    <div class="imp-container">
+        <div class="imp-layout">
+            
+            <div class="imp-main">
+                <section class="imp-section">
+                    <h2 class="imp-section-title">Overview</h2>
+                    <p class="imp-text">This 11-day tour takes you through Namibia's diverse landscapes, from the Kalahari Desert to the iconic dunes of Sossusvlei. Start at Camelthorn Kalahari Lodge in the Intu Afrika Game Reserve, where you can enjoy game drives and explore the desert's wildlife. Then, head to Fish River Canyon for stunning views and a stay at Canyon Roadhouse, before visiting Luderitz and the coastal Alte Villa.</p>
+                    <p class="imp-text">Explore the historic town and nearby ghost towns before heading into the Namib Desert to stay at At Kronenhof Lodge. Next, visit Desert Homestead Lodge near Sossusvlei to explore the famous dunes, followed by a relaxing stay in Windhoek at The Windhoek Luxury Suites. This itinerary offers a perfect mix of adventure, wildlife, and relaxation, showcasing Namibia's natural beauty and cultural richness.</p>
+                    <div class="imp-highlights">
+                        <div class="imp-highlight-tag">Windhoek</div>
+                        <div class="imp-highlight-tag">Kalahari Desert</div>
+                        <div class="imp-highlight-tag">Fish River Canyon</div>
+                        <div class="imp-highlight-tag">Luderitz</div>
+                        <div class="imp-highlight-tag">Namib Desert</div>
+                        <div class="imp-highlight-tag">Sossusvlei Dunes</div>
+                    </div>
+
+                    <div class="imp-map-container">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2025/11/map_11-daysouthofnamibaself-drivesafari.png" alt="11-Day South Safari Route Map">
+                    </div>
+                </section>
+
+                <section class="imp-section">
+                    <h2 class="imp-section-title">Itinerary</h2>
+                    
+                    <details class="imp-day" open>
+                        <summary>Day 1-3: Camelthorn Kalahari Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Your adventure begins at Camelthorn Kalahari Lodge, located in the Intu Afrika Kalahari Game Reserve. This lodge offers a unique opportunity to experience the vast Kalahari Desert, with guided game drives and the chance to spot desert wildlife like springbok and oryx. Relax in the comfortable accommodations after a day of exploring the stunning desert landscapes.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/camelthorn_patio_chairs2.webp" alt="Camelthorn Kalahari Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Intu Afrika Kalahari Game Reserve</p>
+                                <p><a href="http://www.intu-afrika.com/camelthorn.html" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 3-5: Canyon Roadhouse</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Next, head to Canyon Roadhouse, located near the breathtaking Fish River Canyon. The rustic charm of this lodge complements the dramatic scenery of one of the world's largest canyons. Spend your days exploring the canyon's awe-inspiring views and the surrounding desert, and unwind at the cozy lodge in the evenings.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/canyonroadhouseroom_252kb.jpg" alt="Canyon Roadhouse">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Fish River Canyon</p>
+                                <p><a href="https://gondwana-collection.com/accommodation/canyon-roadhouse" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 5-7: Alte Villa</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Continue your journey to the peaceful Alte Villa in Luderitz, where you'll experience a tranquil stay surrounded by the beauty of the Namibian coast. Explore the town's colonial architecture and the nearby ghost town of Kolmanskop, or simply enjoy the serene environment at the lodge, perfect for relaxation and reflection.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/altevilla_152kb.webp" alt="Alte Villa Luderitz">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Luderitz / Kolmanskop</p>
+                                <p><a href="https://altevilla.na" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 7-8: At Kronenhof Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Your next stop is At Kronenhof Lodge, nestled in the Namib Desert. This luxurious lodge offers stunning views of the desert landscape and a peaceful retreat. Enjoy a guided excursion through the desert, or simply relax in the comfort of the lodge, surrounded by the beauty of the Namibian dunes.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/atkronenhoflodge_127kb.webp" alt="At Kronenhof Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Namib Desert</p>
+                                <p><a href="https://www.kronenhof.com.na/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 8-10: Desert Homestead Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Head to Desert Homestead Lodge near Sossusvlei, where you'll stay amidst the iconic red dunes of the Namib Desert. The lodge offers a perfect blend of luxury and nature, with opportunities to explore the surrounding dunes and enjoy the tranquility of the desert. Experience the awe-inspiring Sossusvlei dunes at sunrise for an unforgettable adventure.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/deserthomesteadlodge.webp" alt="Desert Homestead Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Sossusvlei / Namib Desert</p>
+                                <p><a href="https://www.ondili.com/en/lodges-en/desert-homestead-lodge/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 10-11: The Windhoek Luxury Suites</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Conclude your tour in Windhoek at The Windhoek Luxury Suites, offering a relaxing and comfortable end to your journey. This luxurious suite provides easy access to explore the capital city, where you can discover local markets, restaurants, and cultural sites. Enjoy the final moments of your trip in the heart of Namibia before heading home.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/windhoekluxurysuites.webp" alt="The Windhoek Luxury Suites">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Windhoek, Namibia</p>
+                                <p><a href="https://thewindhoek.com" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                </section>
+            </div>
+
+            <!-- Sticky Sidebar -->
+            <div class="imp-sidebar-wrapper">
+                <aside class="imp-sidebar">
+                    <h3 class="imp-section-title" style="font-size: 1.5rem; margin-bottom: 1rem; border:none; padding:0;">11-Day Safari</h3>
+                    
+                    <ul class="imp-glance-list">
+                        <li>Duration <strong>11 Days / 10 Nights</strong></li>
+                        <li>Type <strong>Self-Drive</strong></li>
+                        <li>Starts <strong>Windhoek</strong></li>
+                        <li>Ends <strong>Windhoek</strong></li>
+                        <li>Style <strong>Comfort</strong></li>
+                    </ul>
+                    <a href="#booking-section" class="imp-btn" onclick="document.querySelector('.u-form').scrollIntoView({behavior:'smooth'}); return false;">Enquire Now</a>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium FAQ Section</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ================================================
+           DESERT TRACKS — PREMIUM FAQ ACCORDION BLOCK
+           ================================================ */
+        body {
+            background-color: #f9f8f6;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dt-faq-section {
+            width: 100%;
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 40px;
+            box-sizing: border-box;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.04);
+        }
+
+        .dt-faq-heading {
+            font-family: 'Cinzel', serif !important;
+            font-size: clamp(2rem, 4vw, 2.8rem) !important;
+            font-weight: 400 !important;
+            color: #123631 !important; /* Brand Deep Green */
+            text-align: center;
+            margin: 0 0 12px 0 !important;
+            line-height: 1.2;
+        }
+
+        .dt-faq-subheading {
+            text-align: center;
+            font-family: 'Open Sans', sans-serif !important;
+            font-size: 0.85rem !important;
+            color: #C9A24A !important; /* Brand Gold */
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin: 0 0 50px 0 !important;
+            font-weight: 600;
+        }
+
+        /* Essential Info Blocks (Included / Excluded layout logic if needed) */
+        .dt-faq-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        /* Each accordion item */
+        .dt-faq-item {
+            border-bottom: 1px solid #e5e0d8;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .dt-faq-item:first-of-type {
+            border-top: 1px solid #e5e0d8;
+        }
+
+        .dt-faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            padding: 24px 0;
+            font-family: 'Cinzel', serif !important;
+            font-size: 1.25rem !important;
+            color: #123631 !important; /* Deep Green */
+            font-weight: 600 !important;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+            line-height: 1.4;
+        }
+
+        .dt-faq-question:hover {
+            color: #C9A24A !important;
+        }
+
+        /* Plus/Minus Icon */
+        .dt-faq-icon {
+            position: relative;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            margin-left: 20px;
+        }
+        
+        .dt-faq-icon::before,
+        .dt-faq-icon::after {
+            content: '';
+            position: absolute;
+            background-color: #C9A24A; /* Brand Gold */
+            transition: transform 0.3s ease;
+        }
+
+        .dt-faq-icon::before {
+            top: 7px;
+            left: 0;
+            width: 16px;
+            height: 2px;
+        }
+
+        .dt-faq-icon::after {
+            top: 0;
+            left: 7px;
+            width: 2px;
+            height: 16px;
+        }
+
+        /* Active State Animation */
+        .dt-faq-item.is-active .dt-faq-icon::after {
+            transform: rotate(90deg);
+            opacity: 0;
+        }
+
+        .dt-faq-answer-wrapper {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .dt-faq-answer {
+            padding: 0 0 30px 0;
+            font-family: 'Open Sans', sans-serif !important;
+            font-size: 0.95rem !important;
+            color: #4a4a4a !important; /* Elegant dark grey for body text */
+            line-height: 1.8 !important;
+        }
+
+        .dt-faq-answer p {
+            margin: 0 0 15px 0 !important;
+        }
+        
+        .dt-faq-answer p:last-child {
+            margin-bottom: 0 !important;
+        }
+
+        .dt-faq-answer strong {
+            color: #123631 !important;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .dt-faq-columns {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .dt-faq-section {
+                padding: 30px 20px;
+            }
+            .dt-faq-question {
+                font-size: 1.15rem !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<section class="dt-faq-section">
+    <h2 class="dt-faq-heading">Frequently Asked Questions</h2>
+    <div class="dt-faq-subheading">Essential Travel Information</div>
+
+    <!-- FAQ Item 1 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>What is Namibia’s population?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>Namibia has a population of approximately <strong>3.03 million people</strong>, which is remarkably small for a country of its physical size. That low population density is one of the reasons travellers often describe Namibia as feeling vast, open, and wonderfully uncrowded.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Item 2 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>How big is Namibia compared with other countries?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>Namibia covers about <strong>824,290 square kilometres</strong>, making it a very large country by global standards. To help picture its scale, it is <strong>about 1.5 times larger than France</strong>, which explains why distances between destinations can be much longer than many first-time visitors expect.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Item 3 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>How many languages are spoken in Namibia?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>Namibia is a highly multilingual country. <strong>English is the official language</strong>, but everyday life includes a wide mix of local and regional languages and dialects. There are <strong>more than 20 languages and dialects</strong> spoken, making it a culturally rich and continuously fascinating place to explore.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Item 4 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>Is Namibia a safe country for travellers?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>Yes, Namibia is consistently ranked as <strong>one of the safest and most politically stable countries in Africa</strong>. Violent crime against tourists is extremely rare. However, just like anywhere in the world, basic common-sense precautions are advised, such as not leaving valuables visible in unoccupied vehicles.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Item 5 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>What are the road conditions like for self-driving?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>The majority of the country is connected by <strong>well-maintained gravel roads</strong> rather than tar. While these are beautifully scenic, they require careful driving. We highly recommend renting a <strong>4x4 or high-clearance vehicle</strong> for comfort and safety, and adhering to the gravel speed limit of 80 km/h.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Item 6 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>When is the best time to visit?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>Namibia is a year-round destination, but the dry winter months from <strong>May to October</strong> are generally considered the best time for game viewing. During this time, wildlife congregates around permanent water sources, making animals much easier to spot, and the daytime temperatures are incredibly comfortable.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Item 7 -->
+    <div class="dt-faq-item">
+        <button class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span>Why is Namibia such a unique travel destination?</span>
+            <span class="dt-faq-icon"></span>
+        </button>
+        <div class="dt-faq-answer-wrapper">
+            <div class="dt-faq-answer">
+                <p>Namibia offers the <strong>luxurious scale of untouchable nature</strong>. It's not just about standard safari drives; it’s about watching the sun rise over the towering red dunes of Sossusvlei, exploring the desolate shipwreck-strewn Skeleton Coast, and waking up to absolute silence in private wilderness reserves. It defines high-end, uncrowded exploration.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- Toggle Script data-no-optimize="1" for LiteSpeed compatibility -->
+<script data-no-optimize="1">
+    window.dtToggleFaq = function(button) {
+        // Find the parent item
+        const item = button.closest('.dt-faq-item');
+        const answerWrapper = item.querySelector('.dt-faq-answer-wrapper');
+        const answerInner = item.querySelector('.dt-faq-answer');
+        
+        // Close all other open items
+        const allItems = document.querySelectorAll('.dt-faq-item.is-active');
+        allItems.forEach(activeItem => {
+            if(activeItem !== item) {
+                activeItem.classList.remove('is-active');
+                activeItem.querySelector('.dt-faq-answer-wrapper').style.maxHeight = null;
+            }
+        });
+
+        // Toggle current item
+        if (item.classList.contains('is-active')) {
+            item.classList.remove('is-active');
+            answerWrapper.style.maxHeight = null;
+        } else {
+            item.classList.add('is-active');
+            answerWrapper.style.maxHeight = answerInner.scrollHeight + "px";
+        }
+    }
+</script>
+
+</body>
+</html>

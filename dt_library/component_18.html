@@ -1,0 +1,460 @@
+<div class="itinerary-master-page">
+    <style data-no-optimize="1">
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600&display=swap');
+
+        .itinerary-master-page {
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            box-sizing: border-box;
+            line-height: 1.6;
+            position: relative;
+        }
+        .itinerary-master-page *, .itinerary-master-page *::before, .itinerary-master-page *::after {
+            box-sizing: inherit;
+        }
+        /* Full Width Hero Header */
+        .imp-hero {
+            position: relative;
+            width: 100vw;
+            margin-left: calc(-50vw + 50%);
+            height: 85vh; 
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden; 
+        }
+        .imp-hero img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            animation: impHeroZoom 10s ease-out forwards; 
+        }
+        @keyframes impHeroZoom {
+            0% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .imp-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+        .imp-hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 2rem;
+            color: #ffffff !important;
+            max-width: 65rem;
+        }
+        .imp-hero-title {
+            font-family: "Playfair Display", serif;
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 400;
+            margin: 0 0 1rem 0;
+            letter-spacing: 0.05em;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            text-transform: uppercase;
+            color: #ffffff !important; 
+        }
+        .imp-hero-subtitle {
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin: 0;
+            color: #ffffff !important; 
+        }
+        /* Main Content Layout */
+        .imp-container {
+            max-width: 80rem;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .imp-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+        }
+        @media (min-width: 1024px) {
+            .imp-layout {
+                grid-template-columns: 2fr 1fr; 
+                align-items: stretch; 
+            }
+        }
+        /* Typography & Sections */
+        .imp-section {
+            margin-bottom: 4rem;
+        }
+        .imp-section-title {
+            font-family: "Playfair Display", serif;
+            font-size: 2rem;
+            color: #2c2c2c !important;
+            border-bottom: 1px solid #e5e5e5;
+            padding-bottom: 1rem;
+            margin-bottom: 2rem;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+        .imp-text {
+            color: #555555;
+            font-weight: 300;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        /* Route Map Styles */
+        .imp-map-container {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            background: #f9f9f4;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .imp-map-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 4px;
+        }
+        /* Day-by-Day Accordion */
+        .imp-day {
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .imp-day:last-of-type {
+            border-bottom: none;
+        }
+        .imp-day summary {
+            font-family: "Playfair Display", serif;
+            font-size: 1.35rem;
+            font-weight: 500;
+            color: #2c2c2c;
+            padding: 1.5rem 0;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+        .imp-day summary:hover {
+            color: #d87a4d;
+        }
+        .imp-day summary::-webkit-details-marker {
+            display: none; 
+        }
+        .imp-day summary::after {
+            content: '+';
+            font-family: system-ui, sans-serif;
+            font-size: 1.75rem;
+            font-weight: 300;
+            color: #d87a4d;
+        }
+        .imp-day[open] summary::after {
+            content: '−';
+        }
+        .imp-day-content {
+            padding-bottom: 2rem;
+            color: #555555;
+            font-weight: 300;
+            font-size: 1.05rem;
+        }
+        /* ==== THE CAROUSEL STYLES ==== */
+        .imp-day-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 1rem;
+            padding-bottom: 1rem;
+            margin: 1rem 0 1.5rem 0;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #d87a4d #f0eee9;
+        }
+        .imp-day-carousel::-webkit-scrollbar {
+            height: 6px;
+        }
+        .imp-day-carousel::-webkit-scrollbar-track {
+            background: #f0eee9;
+            border-radius: 4px;
+        }
+        .imp-day-carousel::-webkit-scrollbar-thumb {
+            background: #d87a4d;
+            border-radius: 4px;
+        }
+        .imp-day-carousel img {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            scroll-snap-align: center;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        @media (min-width: 768px) {
+            .imp-day-carousel img {
+                flex: 0 0 100%; 
+                scroll-snap-align: start;
+            }
+        }
+        .imp-day-meta {
+            margin-top: 1.5rem;
+            background: #f9f9f4;
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 3px solid #d87a4d;
+        }
+        .imp-day-meta p {
+            margin: 0 0 0.5rem 0;
+            font-size: 0.95rem;
+        }
+        .imp-day-meta p:last-child {
+            margin: 0;
+        }
+        .imp-day-meta strong {
+            color: #2c2c2c !important;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+        /* Sticky Sidebar FIX */
+        .imp-sidebar-wrapper {
+            position: relative;
+            height: 100%; 
+        }
+        .imp-sidebar {
+            background-color: #f9f9f4;
+            padding: 2.5rem 2rem;
+            border-radius: 4px;
+            border-top: 4px solid #d87a4d;
+            
+            position: -webkit-sticky;
+            position: sticky;
+            top: 130px; 
+            z-index: 10;
+        }
+        .imp-price {
+            font-family: "Playfair Display", serif;
+            font-size: 2.5rem;
+            color: #2c2c2c !important;
+            margin: 0 0 0.5rem 0;
+            font-weight: 400;
+        }
+        .imp-price span {
+            font-family: ui-sans-serif, system-ui, sans-serif;
+            font-size: 1rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .imp-glance-list {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        .imp-glance-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+            color: #666;
+        }
+        .imp-glance-list li:last-child {
+            border-bottom: none;
+        }
+        .imp-glance-list strong {
+            font-weight: 500;
+            color: #2c2c2c !important;
+            text-align: right;
+        }
+        .imp-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: #d87a4d;
+            color: #ffffff !important;
+            padding: 1.25rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            border-radius: 2px;
+        }
+        .imp-btn:hover {
+            background-color: #be653a;
+        }
+        
+        .imp-highlights {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .imp-highlight-tag {
+            background: #f0eee9;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #2c2c2c !important;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+    </style>
+
+    <div class="imp-hero">
+        <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/waterbergplateauheropic_357kb.webp" alt="11-Day Wildlife of Namibia Safari" />
+        <div class="imp-hero-overlay"></div>
+        <div class="imp-hero-content">
+            <h1 class="imp-hero-title">11-Day Wildlife of Namibia</h1>
+            <p class="imp-hero-subtitle">Self-Drive Safari</p>
+        </div>
+    </div>
+
+    <div class="imp-container">
+        <div class="imp-layout">
+            
+            <div class="imp-main">
+                <section class="imp-section">
+                    <h2 class="imp-section-title">Overview</h2>
+                    <p class="imp-text">This 11-day tour takes you through Namibia's diverse landscapes, offering a mix of luxury, adventure, and wildlife. Start in Windhoek at Ti Melen Boutique Guesthouse, then head to Le Mirage Resort & Spa near Sossusvlei to explore the famous dunes. After that, visit Swakopmund Luxury Suites, where you can enjoy beachside charm and adventure activities like dune boarding. Your journey continues with Twyfelfontein Adventure Camp, where you'll discover ancient rock engravings and the beauty of Damaraland.</p>
+                    <p class="imp-text">The tour moves on to Okutala Etosha Lodge for thrilling game drives and wildlife encounters in Etosha National Park. Finally, relax at Waterberg Plateau Lodge, set in the lush Waterberg Plateau National Park, offering stunning views and a chance to explore the park's rich wildlife. This carefully designed itinerary provides the perfect balance of relaxation and adventure across Namibia's most iconic destinations.</p>
+                    <div class="imp-highlights">
+                        <div class="imp-highlight-tag">Windhoek</div>
+                        <div class="imp-highlight-tag">Sossusvlei Dunes</div>
+                        <div class="imp-highlight-tag">Swakopmund</div>
+                        <div class="imp-highlight-tag">Damaraland</div>
+                        <div class="imp-highlight-tag">Twyfelfontein</div>
+                        <div class="imp-highlight-tag">Etosha National Park</div>
+                        <div class="imp-highlight-tag">Waterberg Plateau</div>
+                    </div>
+
+                    <div class="imp-map-container">
+                        <img src="https://desert-tracks.com/wp-content/uploads/2025/11/map_11-daywildlifeofnamibiaself-drivesafari.png" alt="11-Day Safari Route Map">
+                    </div>
+                </section>
+
+                <section class="imp-section">
+                    <h2 class="imp-section-title">Itinerary</h2>
+                    
+                    <details class="imp-day" open>
+                        <summary>Day 1-2: Ti Melen Boutique Guesthouse</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Begin your adventure at Ti Melen Boutique Guesthouse in Windhoek, the capital of Namibia. This cozy, welcoming guesthouse offers the perfect start to your journey, with a peaceful atmosphere and excellent service. It's the ideal place to relax and recharge before setting off on your Namibian exploration.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/timellen_249kb.jpeg" alt="Ti Melen Boutique Guesthouse">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Windhoek, Namibia</p>
+                                <p><a href="https://www.ondili.com/en/lodges-en/ti-melen/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 2-4: Le Mirage Resort & Spa</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Next, head to the luxurious Le Mirage Resort & Spa near Sossusvlei, where you'll enjoy incredible desert views and world-class amenities. The resort offers a relaxing blend of comfort and adventure, with opportunities to explore the iconic dunes of Sossusvlei and enjoy spa treatments to unwind in the peaceful desert surroundings.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/pool_1.webp" alt="Le Mirage Resort & Spa">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Sossusvlei, Namib Desert</p>
+                                <p><a href="https://www.mirage-lodge.com/en/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 4-6: Swakopmund Luxury Suites</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Travel to Swakopmund and stay at the Swakopmund Luxury Suites, where modern comfort meets the charm of this coastal town. With stunning ocean views and a central location, this is the perfect base to explore Swakopmund's historic sites, sandy beaches, and thrilling adventure activities such as quad biking and dune boarding.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/10/swakopmund-luxury-suites_255kb.jpeg" alt="Swakopmund Luxury Suites">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Swakopmund Coast</p>
+                                <p><a href="https://www.swakopmundluxurysuites.com" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 6-7: Twyfelfontein Adventure Camp</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">After Swakopmund, head to the remote Twyfelfontein Adventure Camp, nestled in the heart of Namibia's Damaraland region. Surrounded by stunning landscapes, this camp offers an authentic experience with guided tours to explore the ancient rock engravings and the unique desert-adapted wildlife that call this region home.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/twyfelfontein-adventure-camp-print-08042023-010.webp" alt="Twyfelfontein Adventure Camp">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Twyfelfontein / Damaraland</p>
+                                <p><a href="https://www.ondili.com/en/lodges-en/twyfelfontein-adventure-camp/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 7-9: Okutala Etosha Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Next, visit Okutala Etosha Lodge, located just outside Etosha National Park, where you'll enjoy fantastic wildlife viewing and a tranquil lodge experience. This comfortable lodge provides excellent opportunities for game drives and close encounters with Africa's iconic animals, all within the stunning backdrop of the Etosha region.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/okutala-etosha-lodge-standard-room.webp" alt="Okutala Etosha Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Etosha National Park</p>
+                                <p><a href="https://okutala.com/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                    <details class="imp-day">
+                        <summary>Day 9-11: Waterberg Plateau Lodge</summary>
+                        <div class="imp-day-content">
+                            <p class="imp-text">Conclude your journey at Waterberg Plateau Lodge, set within the striking Waterberg Plateau National Park. This beautiful lodge offers scenic views, hiking trails, and the chance to see a variety of wildlife. The lush, green landscape provides a refreshing contrast to the desert scenes earlier in your journey, making for a relaxing and scenic final stop.</p>
+                            <div class="imp-day-carousel">
+                                <img loading="lazy" src="https://desert-tracks.com/wp-content/uploads/2025/11/chalets_view_mountain_wpl_12-03_dropbox.webp" alt="Waterberg Plateau Lodge">
+                            </div>
+                            <div class="imp-day-meta">
+                                <p><strong>Region:</strong> Waterberg Plateau</p>
+                                <p><a href="https://waterberg-wilderness.com/waterberg-plateau-lodge/" target="_blank" style="color:#d87a4d; text-decoration:none;">View Lodge &rarr;</a></p>
+                            </div>
+                        </div>
+                    </details>
+
+                </section>
+            </div>
+
+            <!-- Sticky Sidebar -->
+            <div class="imp-sidebar-wrapper">
+                <aside class="imp-sidebar">
+                    <h3 class="imp-section-title" style="font-size: 1.5rem; margin-bottom: 1rem; border:none; padding:0;">11-Day Safari</h3>
+                    
+                    <ul class="imp-glance-list">
+                        <li>Duration <strong>11 Days / 10 Nights</strong></li>
+                        <li>Type <strong>Self-Drive</strong></li>
+                        <li>Starts <strong>Windhoek</strong></li>
+                        <li>Ends <strong>Windhoek</strong></li>
+                        <li>Style <strong>Comfort / Luxury</strong></li>
+                    </ul>
+                    <a href="#booking-section" class="imp-btn" onclick="document.querySelector('.u-form').scrollIntoView({behavior:'smooth'}); return false;">Enquire Now</a>
+                </aside>
+            </div>
+
+        </div>
+    </div>
+</div>

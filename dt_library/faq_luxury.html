@@ -1,0 +1,248 @@
+<style data-no-optimize="1">
+/* ================================================
+   DESERT TRACKS — PREMIUM FAQ ACCORDION BLOCK
+   ================================================ */
+.dt-faq-section {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', Arial, sans-serif;
+}
+.dt-faq-heading {
+    font-family: 'Cinzel', serif !important;
+    font-size: clamp(1.5rem, 3vw, 2.2rem) !important;
+    font-weight: 400 !important;
+    color: #123631 !important; /* Luxury Deep Green */
+    text-align: center;
+    margin: 0 0 12px 0 !important;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+.dt-faq-subheading {
+    text-align: center;
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    color: #123631; /* Luxury Deep Green */
+    opacity: 0.7; /* Softened slightly so it plays a supporting role */
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin: 0 0 60px 0;
+}
+/* Each accordion item */
+.dt-faq-item {
+    border-bottom: 1px solid #e5e0d8;
+    padding: 0;
+    overflow: hidden;
+}
+.dt-faq-item:first-of-type {
+    border-top: 1px solid #e5e0d8;
+}
+/* The clickable question row */
+.dt-faq-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 26px 0;
+    cursor: pointer;
+    gap: 20px;
+    -webkit-user-select: none;
+    user-select: none;
+}
+.dt-faq-question-text {
+    font-family: 'Cinzel', serif !important;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #123631; /* Luxury Deep Green */
+    line-height: 1.4;
+    transition: color 0.3s ease;
+    flex: 1;
+    letter-spacing: 0.05em;
+}
+.dt-faq-item.dt-open .dt-faq-question-text {
+    color: #C9A24A; /* Brand Gold */
+}
+/* The + / × icon */
+.dt-faq-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    border: 1px solid #C9A24A; /* Brand Gold */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, transform 0.4s ease;
+    position: relative;
+}
+.dt-faq-icon::before,
+.dt-faq-icon::after {
+    content: '';
+    position: absolute;
+    background: #C9A24A; /* Brand Gold */
+    transition: opacity 0.3s ease, transform 0.4s ease;
+}
+/* Horizontal bar */
+.dt-faq-icon::before {
+    width: 12px;
+    height: 1.5px;
+}
+/* Vertical bar */
+.dt-faq-icon::after {
+    width: 1.5px;
+    height: 12px;
+}
+/* When open: rotate vertical bar to 0 (makes it a minus) */
+.dt-faq-item.dt-open .dt-faq-icon {
+    background: #C9A24A; /* Brand Gold */
+    transform: rotate(45deg);
+}
+.dt-faq-item.dt-open .dt-faq-icon::before,
+.dt-faq-item.dt-open .dt-faq-icon::after {
+    background: #ffffff;
+}
+/* The answer panel */
+.dt-faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dt-faq-item.dt-open .dt-faq-answer {
+    max-height: 600px;
+}
+.dt-faq-answer-inner {
+    padding: 0 0 28px 0;
+}
+.dt-faq-answer-inner p {
+    font-family: 'Open Sans', Arial, sans-serif !important;
+    font-size: 0.95rem !important;
+    line-height: 1.85 !important;
+    color: #123631 !important; /* Luxury Deep Green */
+    margin: 0 0 14px 0 !important;
+    font-weight: 300 !important;
+}
+.dt-faq-answer-inner p strong, .dt-faq-answer-inner p b {
+    font-weight: 600;
+    color: #123631; /* Ensures bold text remains the active dark color */
+}
+.dt-faq-answer-inner p:last-child {
+    margin-bottom: 0 !important;
+}
+@media (max-width: 640px) {
+    .dt-faq-section { padding: 60px 24px; }
+    .dt-faq-question-text { font-size: 1.05rem; }
+}
+</style>
+
+<div class="dt-faq-section">
+    <p class="dt-faq-subheading">Everything you need to know</p>
+    <h2 class="dt-faq-heading">Frequently Asked Questions About Namibia Luxury Safaris</h2>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What defines a luxury safari in Namibia?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>A luxury safari in Namibia is all about exclusivity, comfort, and personalised service. Expect high-end lodges in remote locations, exceptional guiding, gourmet dining, and carefully curated experiences in nature.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">When is the best time to travel?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Namibia is a year-round destination, but the dry season (May to October) is ideal for wildlife viewing, especially in Etosha National Park. The green season (November to April) offers dramatic landscapes and fewer travellers.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">How do you travel between destinations?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Luxury safaris often include light aircraft flights between lodges, reducing long driving times and offering spectacular aerial views of areas like Sossusvlei and the Skeleton Coast.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What type of accommodation can I expect?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>You can expect boutique lodges and luxury camps with spacious suites, private decks, plunge pools, and stunning views — often located in exclusive concessions or private reserves.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Is Namibia suitable for a luxury safari compared to other African destinations?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Absolutely. Namibia stands out for its vast open spaces, low visitor density, and unique desert landscapes, offering a more private and tranquil luxury experience compared to busier safari destinations.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">Are luxury safaris suitable for families?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Yes, many lodges in Namibia welcome families and offer tailored activities for children, although some properties have age restrictions due to their remote and tranquil setting.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="dt-faq-item">
+        <div class="dt-faq-question" onclick="dtToggleFaq(this)">
+            <span class="dt-faq-question-text">What wildlife can I expect on a luxury safari?</span>
+            <div class="dt-faq-icon"></div>
+        </div>
+        <div class="dt-faq-answer">
+            <div class="dt-faq-answer-inner">
+                <p>Wildlife viewing is excellent, particularly in Etosha National Park, where you may see elephants, lions, rhinos, giraffes, and a variety of plains game, often from exclusive viewpoints or guided experiences.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script data-no-optimize="1">
+function dtToggleFaq(questionEl) {
+    var item = questionEl.closest('.dt-faq-item');
+    if (!item) return;
+    
+    var section = item.closest('.dt-faq-section');
+    var isOpen = item.classList.contains('dt-open');
+    
+    /* Close all open items within THIS specific FAQ block only */
+    if (section) {
+        section.querySelectorAll('.dt-faq-item.dt-open').forEach(function(el) {
+            el.classList.remove('dt-open');
+        });
+    }
+    
+    /* Open clicked item (unless it was already open) */
+    if (!isOpen) {
+        item.classList.add('dt-open');
+    }
+}
+</script>

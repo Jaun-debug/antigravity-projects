@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Lodge Rate Sheet</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- html2pdf for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style data-no-optimize="1">
+        :root {
+            --primary-bg: #F5F5F3; /* Ivory Background */
+            --card-bg: #FFFFFF;
+            --card-light: #FAFAFA;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --gold-accent: #C9A24A;
+            --gold-gradient: linear-gradient(135deg, #E6C27A, #C9A24A, #A68435);
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-border: 1px solid rgba(201, 162, 74, 0.2);
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+            --btn-bg: rgba(201, 162, 74, 0.1);
+            --btn-hover: rgba(201, 162, 74, 0.2);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body { 
+            background-color: var(--primary-bg); 
+            color: var(--text-main); 
+            font-family: var(--font-body); 
+            -webkit-font-smoothing: antialiased; 
+            padding-bottom: 60px;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
+
+        /* SHARE TOOLBAR (STICKY) */
+        .share-toolbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            animation: fadeInDown 0.6s ease forwards;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 30px;
+            font-family: var(--font-body);
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: #fff;
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+
+        .share-btn svg { width: 16px; height: 16px; }
+        
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: var(--gold-accent);
+            color: var(--gold-accent);
+        }
+
+        .share-btn.primary {
+            background: var(--gold-gradient);
+            color: #fff;
+            border: none;
+        }
+        .share-btn.primary:hover {
+            box-shadow: 0 6px 15px rgba(201, 162, 74, 0.4);
+            color: #fff;
+        }
+
+        /* MAIN CONTENT */
+        .wrapper { max-width: 1200px; margin: 0 auto; padding: 50px 20px; animation: fadeIn 0.8s ease forwards; }
+        
+        /* HEADER SECTION */
+        .lodge-header { text-align: center; margin-bottom: 50px; }
+        .logo-container { margin-bottom: 20px; display: inline-block; }
+        .lodge-logo { max-height: 100px; max-width: 250px; object-fit: contain; }
+        
+        .lodge-title { font-size: 3.5rem; color: var(--gold-accent); line-height: 1.1; margin-bottom: 10px; }
+        
+        .meta-info {
+            display: inline-flex;
+            gap: 20px;
+            background: #fff;
+            padding: 12px 25px;
+            border-radius: 40px;
+            border: var(--glass-border);
+            margin-top: 20px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .meta-info span { font-weight: 600; color: var(--text-main); }
+
+        .intro-text { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 30px auto 0; }
+
+        /* GALLERY */
+        .lodge-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin-bottom: 50px; }
+        .gallery-img { width: 100%; height: 350px; object-fit: cover; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.06); transition: var(--transition); }
+        .gallery-img:hover { transform: scale(1.02); }
+
+        /* CONTENT BLOCKS & TABLES */
+        .content-block { background: var(--card-bg); border: var(--glass-border); border-radius: 16px; padding: 45px; margin-bottom: 40px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+        .content-block h3 { color: var(--gold-accent); font-size: 1.8rem; margin-bottom: 25px; border-bottom: 1px solid rgba(201, 162, 74, 0.2); padding-bottom: 15px; display: inline-block; }
+        
+        .table-responsive { width: 100%; overflow-x: auto; border: 1px solid rgba(0,0,0,0.05); border-radius: 12px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: #fff; min-width: 600px; }
+        th { font-family: var(--font-head); background: var(--card-light); color: var(--gold-accent); font-size: 0.95rem; padding: 20px 25px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; border-bottom: 2px solid rgba(201, 162, 74, 0.2); white-space: nowrap; }
+        td { padding: 20px 25px; border-bottom: 1px solid rgba(0,0,0,0.04); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; vertical-align: middle; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--primary-bg); color: var(--text-main); }
+        td strong { color: var(--text-main); font-weight: 600; }
+        
+        /* LISTS & TEXT */
+        .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+        .text-list li { position: relative; padding-left: 28px; margin-bottom: 15px; }
+        .text-list li::before { content: "✦"; color: var(--gold-accent); position: absolute; left: 0; top: 2px; font-size: 1.1rem; }
+        .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.8; font-size: 1rem; margin-bottom: 20px;}
+
+        /* TOAST NOTIFICATION */
+        .toast { position: fixed; bottom: -80px; left: 50%; transform: translateX(-50%); background: var(--text-main); color: #fff; padding: 14px 28px; border-radius: 30px; font-weight: 500; font-size: 0.9rem; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; letter-spacing: 1px; display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .toast.show { bottom: 40px; }
+
+        /* ANIMATIONS */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* PRINT STYLES FOR PDF */
+        @media print {
+            body { background: #fff !important; }
+            .share-toolbar { display: none !important; }
+            .wrapper { padding: 0; max-width: 100%; box-shadow: none; }
+            .content-block { padding: 20px; box-shadow: none; border: 1px solid #eee; break-inside: avoid; margin-bottom: 20px; }
+            .gallery-img { height: 250px; }
+            .lodge-title { font-size: 2.5rem; }
+            .table-responsive { overflow: visible !important; }
+            table { min-width: 100%; border: 1px solid #eee; }
+            td, th { padding: 12px; }
+            tr { break-inside: avoid; }
+        }
+
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .share-toolbar { padding: 10px; justify-content: flex-start; overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+            .share-btn { padding: 12px 20px; font-size: 0.8rem; flex-shrink: 0; }
+            
+            .lodge-title { font-size: 2.2rem; }
+            .gallery-img { height: 250px; }
+            .content-block { padding: 25px 20px; }
+            th, td { padding: 15px; font-size: 0.85rem; }
+            
+            .meta-info { flex-direction: column; gap: 10px; text-align: left; align-items: flex-start; border-radius: 12px; padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SHARE TOOLBAR -->
+    <div class="share-toolbar" id="toolbar">
+        <button class="share-btn primary" onclick="shareWhatsApp()">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+            WhatsApp Share
+        </button>
+        <button class="share-btn" onclick="shareEmail()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            Email
+        </button>
+        <button class="share-btn" onclick="copyLink()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            Copy Link
+        </button>
+        <button class="share-btn" onclick="copyMessage()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            Copy Message
+        </button>
+        <button class="share-btn" onclick="downloadPDF()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Download PDF
+        </button>
+    </div>
+
+    <!-- PRINTABLE RATE SHEET -->
+    <div class="wrapper" id="printable-area">
+        
+        <div class="lodge-header">
+            <div class="logo-container" id="logo-container">
+                <!-- Logo injected via JS -->
+            </div>
+            <h1 class="lodge-title" id="lodge-name">Loading...</h1>
+            <div class="meta-info">
+                <div>Last Updated: <span id="last-updated">...</span></div>
+                <div>Valid Until: <span id="valid-until">...</span></div>
+            </div>
+            <p class="intro-text" id="lodge-intro">...</p>
+        </div>
+
+        <!-- 3-IMAGE GALLERY -->
+        <div class="lodge-gallery" id="lodge-gallery">
+            <!-- Images Injected Here -->
+        </div>
+
+        <!-- ACCOMMODATION RATES -->
+        <div class="content-block">
+            <h3>Accommodation Rates</h3>
+            <p class="raw-text" id="accommodation-notes"></p>
+            <div class="table-responsive">
+                <table id="rates-table">
+                    <thead>
+                        <tr id="rates-header">
+                            <!-- Headers Injected via JS -->
+                        </tr>
+                    </thead>
+                    <tbody id="rates-body">
+                        <!-- Rows Injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+            <div id="room-types-desc" class="raw-text" style="margin-top: 25px; border-left: 3px solid var(--gold-accent); padding-left: 20px;">
+                <!-- Room info injected via JS -->
+            </div>
+        </div>
+
+        <!-- ACTIVITIES -->
+        <div class="content-block" id="activities-block">
+            <h3>Activities & Extras</h3>
+            <div class="table-responsive">
+                <table id="activities-table">
+                    <thead>
+                        <tr>
+                            <th>Activity</th>
+                            <th>Rate (NAD)</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activities-body">
+                        <!-- Rows Injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- POLICIES -->
+        <div class="content-block" style="margin-bottom: 0;">
+            <h3>Policies & Information</h3>
+            <ul class="text-list" id="policies-list">
+                <!-- Policies Injected via JS -->
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <!-- TEMPLATE DATA CONFIGURATION -->
+    <script data-no-optimize="1">
+        /* =========================================================
+           LODGE CONFIGURATION DATA
+           Easily change this object to reuse the template for any lodge
+           ========================================================= */
+        const lodgeData = {
+            logoUrl: "https://www.deserttracks.com/wp-content/uploads/2024/01/Desert-Tracks-Logo-Dark.png", // Leave empty string to hide
+            lodgeName: "Premium Safari Lodge",
+            lastUpdated: "23 April 2026",
+            validUntil: "31 December 2027",
+            introText: "Set deep within the pristine wilderness of Namibia, this exclusive lodge offers unparalleled luxury and an authentic connection to nature. Featuring elegantly appointed suites, world-class dining, and exceptional wildlife encounters, it is the perfect retreat for discerning travellers.",
+            
+            // High-resolution gallery images (preferably landscape)
+            images: [
+                "https://wetu.com/imageHandler/c1920x1080/10525/1764582271548dji202510011838260443d.jpg?fmt=jpg",
+                "https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg?fmt=jpg",
+                "https://wetu.com/imageHandler/c1920x1080/10477/main_building.jpg?fmt=jpg"
+            ],
+            
+            // Accommodation Rates Setup
+            ratesTableHeaders: ["Room Type", "DBL/Sharing (BB)", "Single (BB)", "Child 7-13 Yrs (Sharing)"],
+            ratesTableRows: [
+                ["Luxury Suite", "N$ 4,500", "N$ 6,800", "N$ 1,200"],
+                ["Premium River Tent", "N$ 5,800", "N$ 8,500", "N$ 1,500"],
+                ["Family Villa (Sleeps 4)", "N$ 12,000", "-", "-"]
+            ],
+            accommodationNotes: "Rates are quoted in Namibian Dollars (NAD) per person per night.\nDBL/Sharing rates are charged at a Per Person rate.\nGuide Rate: N$ 1,500 DBB per night.",
+            roomTypesDesc: "<strong>INCLUDES:</strong> Accommodation, Breakfast, Dinner, and 15% VAT.\n<strong>EXCLUDES:</strong> Premium beverages, laundry, conservation fees, and guided activities.",
+            
+            // Activities Table setup
+            activitiesTableRows: [
+                ["Morning Game Drive", "N$ 1,200", "3 hours. Includes drinks & snacks."],
+                ["River Boat Cruise", "N$ 950", "2.5 hours. Sunset departure available."],
+                ["Guided Bush Walk", "N$ 600", "1.5 hours. Max 6 guests per guide."],
+                ["Private Vehicle Hire", "N$ 8,500", "Half-day exclusive use (up to 6 pax)."]
+            ],
+
+            // Policies
+            policies: [
+                "Children of all ages are welcome. Children aged 0-6 stay free of charge when sharing with parents.",
+                "Check-in time is from 14:00, and check-out is by 10:00.",
+                "A 20% non-refundable deposit is required to secure the reservation.",
+                "Full payment is due 30 days prior to arrival.",
+                "Cancellations within 14 days of arrival incur a 100% cancellation fee."
+            ]
+        };
+
+        /* =========================================================
+           APPLICATION LOGIC & INJECTION
+           ========================================================= */
+        document.addEventListener("DOMContentLoaded", () => {
+            // Inject Branding
+            if(lodgeData.logoUrl) {
+                document.getElementById("logo-container").innerHTML = `<img src="${lodgeData.logoUrl}" class="lodge-logo" alt="${lodgeData.lodgeName} Logo">`;
+            }
+            document.getElementById("lodge-name").innerText = lodgeData.lodgeName;
+            document.title = lodgeData.lodgeName + " - Rates";
+            
+            document.getElementById("last-updated").innerText = lodgeData.lastUpdated;
+            document.getElementById("valid-until").innerText = lodgeData.validUntil;
+            document.getElementById("lodge-intro").innerText = lodgeData.introText;
+
+            // Inject Gallery
+            const gallery = document.getElementById("lodge-gallery");
+            lodgeData.images.forEach(img => {
+                gallery.innerHTML += `<img src="${img}" class="gallery-img" alt="Lodge View">`;
+            });
+
+            // Inject Accommodation Rates
+            document.getElementById("accommodation-notes").innerText = lodgeData.accommodationNotes;
+            document.getElementById("room-types-desc").innerHTML = lodgeData.roomTypesDesc.replace(/\n/g, '<br>');
+            
+            const ratesHead = document.getElementById("rates-header");
+            lodgeData.ratesTableHeaders.forEach(th => {
+                ratesHead.innerHTML += `<th>${th}</th>`;
+            });
+
+            const ratesBody = document.getElementById("rates-body");
+            lodgeData.ratesTableRows.forEach(row => {
+                let tr = "<tr>";
+                row.forEach((cell, idx) => {
+                    tr += idx === 0 ? `<td><strong>${cell}</strong></td>` : `<td>${cell}</td>`;
+                });
+                tr += "</tr>";
+                ratesBody.innerHTML += tr;
+            });
+
+            // Inject Activities
+            const actBody = document.getElementById("activities-body");
+            if(lodgeData.activitiesTableRows.length > 0) {
+                lodgeData.activitiesTableRows.forEach(row => {
+                    actBody.innerHTML += `<tr><td><strong>${row[0]}</strong></td><td>${row[1]}</td><td>${row[2]}</td></tr>`;
+                });
+            } else {
+                document.getElementById("activities-block").style.display = "none";
+            }
+
+            // Inject Policies
+            const polList = document.getElementById("policies-list");
+            lodgeData.policies.forEach(pol => {
+                polList.innerHTML += `<li>${pol}</li>`;
+            });
+        });
+
+        /* =========================================================
+           SHARING LOGIC
+           ========================================================= */
+        function getShareMessage() {
+            return `Hi, please find our latest rates here: ${window.location.href}`;
+        }
+
+        function showToast(msg = "Copied!") {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        function shareWhatsApp() {
+            const text = encodeURIComponent(getShareMessage());
+            window.open(`https://wa.me/?text=${text}`, "_blank");
+        }
+
+        function shareEmail() {
+            const subject = encodeURIComponent(`Latest Rates - ${lodgeData.lodgeName}`);
+            const body = encodeURIComponent(getShareMessage());
+            window.location.href = `mailto:?subject=${subject}&body=${body}`;
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast("Link Copied!");
+            });
+        }
+
+        function copyMessage() {
+            navigator.clipboard.writeText(getShareMessage()).then(() => {
+                showToast("Message Copied!");
+            });
+        }
+
+        /* =========================================================
+           PDF GENERATION LOGIC
+           ========================================================= */
+        function downloadPDF() {
+            const element = document.getElementById('printable-area');
+            const opt = {
+                margin:       [10, 10, 10, 10], // top, left, bottom, right
+                filename:     `${lodgeData.lodgeName.replace(/\s+/g, '_')}_Rates.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Show toast and add temporary class for PDF rendering
+            showToast("Generating PDF...");
+            document.body.style.backgroundColor = "#fff";
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                document.body.style.backgroundColor = ""; // Reset
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!-- Swiper CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" data-no-optimize="1" />
+
+<style data-no-optimize="1">
+    /* Base Container Styling */
+    .dt-coverflow-wrapper {
+        position: relative;
+        width: 100vw !important;
+        margin-left: calc(-50vw + 50%) !important;
+        background: #F5F5F3; /* Luxury Ivory Background */
+        padding: 100px 0 40px 0;
+        margin-bottom: 0 !important;
+        overflow: hidden;
+        font-family: 'Open Sans', sans-serif;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .dt-coverflow-header {
+        text-align: center;
+        margin-bottom: 60px;
+        padding: 0 20px;
+    }
+
+    .dt-coverflow-eyebrow {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 4px;
+        color: #8b7a66; /* Muted brown */
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-weight: 500;
+    }
+
+    .dt-coverflow-title {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(32px, 5vw, 48px);
+        color: #123631; /* Deep Typography Green */
+        font-weight: 400;
+        margin: 0 0 20px 0;
+        letter-spacing: 1px;
+    }
+
+    /* Swiper Container */
+    .swiper.dt-safari-swiper {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 60px;
+    }
+
+    .swiper-slide.dt-coverflow-slide {
+        background-position: center;
+        background-size: cover;
+        width: 320px;
+        height: 460px;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+        position: relative;
+        text-decoration: none;
+        display: block;
+        /* Webkit fix for clipping */
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+    }
+
+    @media (min-width: 768px) {
+        .swiper-slide.dt-coverflow-slide {
+            width: 380px;
+            height: 520px;
+        }
+    }
+
+    .dt-coverflow-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .dt-coverflow-slide:hover img {
+        transform: scale(1.05);
+    }
+
+    .dt-slide-gradient {
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 60%;
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    .dt-slide-content {
+        position: absolute;
+        bottom: 30px;
+        left: 30px;
+        right: 30px;
+        z-index: 2;
+        text-align: left;
+        transition: transform 0.4s ease;
+    }
+
+    .dt-slide-days {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        color: #ffffff;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 4px 10px;
+        border-radius: 40px;
+        backdrop-filter: blur(4px);
+    }
+
+    .dt-slide-title {
+        font-family: 'Cinzel', serif;
+        font-size: 24px;
+        color: #ffffff;
+        margin: 0;
+        font-weight: 300;
+        line-height: 1.2;
+    }
+
+    .swiper-slide-active .dt-slide-content {
+        transform: translateY(-10px);
+    }
+
+    .dt-coverflow-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .dt-prev-btn, .dt-next-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(18,54,49,0.05);
+        border: 1px solid rgba(18,54,49,0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .dt-prev-btn:hover, .dt-next-btn:hover {
+        background: rgba(200, 95, 25, 0.15);
+        border-color: #C85F19;
+    }
+
+    .dt-prev-btn svg, .dt-next-btn svg {
+        width: 18px;
+        height: 18px;
+        stroke: #123631;
+        fill: none;
+        stroke-width: 1.5;
+        transition: stroke 0.3s ease;
+    }
+
+    .dt-prev-btn:hover svg, .dt-next-btn:hover svg {
+        stroke: #C85F19;
+    }
+
+    .swiper-pagination.dt-swiper-pagination {
+        position: static !important;
+        width: auto !important;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin: 0 10px;
+    }
+
+    .swiper-pagination-bullet {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(18,54,49,0.2);
+        opacity: 1;
+        transition: all 0.3s ease;
+        margin: 0 !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: #C85F19;
+        width: 24px;
+        border-radius: 4px;
+    }
+</style>
+
+<div class="dt-coverflow-wrapper">
+    <div class="dt-coverflow-header">
+        <span class="dt-coverflow-eyebrow">Continue Exploring</span>
+        <h2 class="dt-coverflow-title">More East Africa Safaris</h2>
+    </div>
+
+    <div class="swiper dt-safari-swiper" data-no-optimize="1">
+        <div class="swiper-wrapper">
+            <!-- Placeholder for East Africa Safari 1 -->
+            <a href="#" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2026/03/donkey-cart-solly-damaraland-large.jpeg" alt="East Africa Safari 1" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">TBD Days</span>
+                    <h3 class="dt-slide-title">East Africa Safari 1</h3>
+                </div>
+            </a>
+            <!-- Placeholder for East Africa Safari 2 -->
+            <a href="#" class="swiper-slide dt-coverflow-slide">
+                <img src="https://desert-tracks.com/wp-content/uploads/2025/10/sossuvlei_221kb.jpg" alt="East Africa Safari 2" loading="lazy">
+                <div class="dt-slide-gradient"></div>
+                <div class="dt-slide-content">
+                    <span class="dt-slide-days">TBD Days</span>
+                    <h3 class="dt-slide-title">East Africa Safari 2</h3>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div class="dt-coverflow-controls">
+        <div class="dt-prev-btn">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        </div>
+        <div class="swiper-pagination dt-swiper-pagination"></div>
+        <div class="dt-next-btn">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
+<script data-no-optimize="1">
+    function initSafariCoverflow_carouseleastafrica() {
+        if (typeof Swiper === 'undefined') {
+            setTimeout(initSafariCoverflow_carouseleastafrica, 100);
+            return;
+        }
+        
+        var safariSwiper = new Swiper('.dt-safari-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            loop: true,
+            speed: 800,
+            slidesPerView: 'auto',
+            slideToClickedSlide: true,
+            initialSlide: 1,
+            coverflowEffect: {
+                rotate: 15,
+                stretch: 0,
+                depth: 250,
+                modifier: 1.5,
+                slideShadows: true,
+            },
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            navigation: {
+                nextEl: '.dt-next-btn',
+                prevEl: '.dt-prev-btn',
+            },
+            pagination: {
+                el: '.dt-swiper-pagination',
+                clickable: true,
+            },
+            keyboard: {
+                enabled: true,
+            },
+            mousewheel: {
+                forceToAxis: true,
+                releaseOnEdges: true,
+            }
+        });
+        
+        var swiperContainer = document.querySelector('.dt-safari-swiper');
+        if(swiperContainer) {
+            swiperContainer.addEventListener('mouseenter', function() {
+                safariSwiper.autoplay.stop();
+            });
+            swiperContainer.addEventListener('mouseleave', function() {
+                safariSwiper.autoplay.start();
+            });
+        }
+        
+        var slides = document.querySelectorAll('.dt-coverflow-slide');
+        slides.forEach(function(slide) {
+            slide.addEventListener('click', function(e) {
+                if (!slide.classList.contains('swiper-slide-active')) {
+                    e.preventDefault();
+                }
+            });
+        });
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener("DOMContentLoaded", initSafariCoverflow_carouseleastafrica);
+    } else {
+        initSafariCoverflow_carouseleastafrica();
+    }
+</script>
