@@ -37,3 +37,6 @@ extracted_leads/
 
 # Ignore extracted emails
 extracted_leads/
+
+# Ignore massive zip backups
+*.zip
