@@ -1,0 +1,24 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "namibiarates.com"
+        }
+      ],
+      "destination": "/namibia_agent_portal.html"
+    },
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.namibiarates.com"
+        }
+      ],
+      "destination": "/namibia_agent_portal.html"
+    }
+  ]
+}
