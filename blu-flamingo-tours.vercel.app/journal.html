@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blu Flamingo | Journal & News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style data-no-optimize="1">
+        :root {
+            --blu-dark: #0a192f;
+            --blu-accent: #0077b6;
+            --sand-light: #f4f1eb;
+            --sand-dark: #d4cbb8;
+            --text-light: #ffffff;
+            --text-dark: #1a1a1a;
+            --gold: #d4af37;
+            --font-head: 'Cinzel', serif;
+            --font-body: 'DM Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--sand-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.4s ease;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links li a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links li a:hover, .nav-links li a.active {
+            color: var(--gold);
+        }
+
+        .nav-links li a:hover::after, .nav-links li a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .blog-hero {
+            height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: url('https://desert-tracks.com/wp-content/uploads/2026/03/swakopmund-4-1.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-top: 80px;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 25, 47, 0.7);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .hero-title {
+            font-family: var(--font-head);
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 3px;
+        }
+
+        .hero-subtitle {
+            color: var(--gold);
+            font-size: 1rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+        }
+
+        /* Blog Section */
+        .blog-section {
+            padding: 80px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .blog-image-wrapper {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-meta {
+            font-size: 0.8rem;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .blog-title {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--blu-dark);
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .blog-title a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .blog-title a:hover {
+            color: var(--gold);
+        }
+
+        .blog-excerpt {
+            color: #666;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            font-family: var(--font-head);
+            font-size: 0.9rem;
+            color: var(--blu-dark);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .read-more:hover {
+            color: var(--gold);
+        }
+
+        .read-more::after {
+            content: '→';
+            font-size: 1.2rem;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: #050c17;
+            padding: 30px;
+            text-align: center;
+            color: #888;
+            font-size: 0.85rem;
+            margin-top: auto;
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 2px;
+            background-color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hamburger { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 250px;
+                background-color: var(--blu-dark);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: right 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            }
+            .nav-links.active { right: 0; }
+            .hamburger.active .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+            .hamburger.active .bar:nth-child(2) { opacity: 0; }
+            .hamburger.active .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <a href="bluflamingotours_premium.html" class="logo">Blu Flamingo</a>
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="bluflamingotours_premium.html">Home</a></li>
+            <li><a href="bluflamingotours_premium.html#sandwich-harbour">Services</a></li>
+            <li><a href="bluflamingotours_premium.html#gallery">Gallery</a></li>
+            <li><a href="bluflamingotours_blog.html" class="active">Journal</a></li>
+            <li><a href="bluflamingotours_premium.html#contact">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <header class="blog-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">The Journal</h1>
+            <div class="hero-subtitle">Stories from the Coast</div>
+        </div>
+    </header>
+
+    <section class="blog-section">
+        <div class="blog-grid">
+            
+            <article class="blog-card">
+                <div class="blog-image-wrapper">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2026/03/dji_0572-scaled.jpg" alt="Sandwich Harbour" class="blog-image">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">Destination Guide</div>
+                    <h2 class="blog-title"><a href="#">Exploring Sandwich Harbour</a></h2>
+                    <p class="blog-excerpt">Discover the magic of where the rolling dunes of the Namib Desert plunge directly into the cold Atlantic Ocean. A photographer's paradise.</p>
+                    <a href="#" class="read-more">Read Story</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image-wrapper">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2026/03/skeleton-surfing-4-1.webp" alt="Skeleton Coast" class="blog-image">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">Travel Tips</div>
+                    <h2 class="blog-title"><a href="#">Surviving the Skeleton Coast</a></h2>
+                    <p class="blog-excerpt">Everything you need to know before embarking on an adventure up Namibia's infamous Skeleton Coast, from weather patterns to essential gear.</p>
+                    <a href="#" class="read-more">Read Story</a>
+                </div>
+            </article>
+
+            <article class="blog-card">
+                <div class="blog-image-wrapper">
+                    <img src="https://desert-tracks.com/wp-content/uploads/2026/03/oryx_group_solly_large.jpeg" alt="Oryx in Desert" class="blog-image">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">Wildlife</div>
+                    <h2 class="blog-title"><a href="#">Desert Adapted Wildlife</a></h2>
+                    <p class="blog-excerpt">How do animals survive in one of the oldest deserts in the world? We take a closer look at the remarkable Oryx and other desert-adapted species.</p>
+                    <a href="#" class="read-more">Read Story</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 by Blu Flamingo Tours and Transfers.</p>
+    </footer>
+
+    <script data-no-optimize="1">
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
