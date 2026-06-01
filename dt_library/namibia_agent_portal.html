@@ -3457,16 +3457,7 @@
             }
         }
 
-        function navigateToRegion(index) {
-            switchTab('accommodation', document.getElementById('nav-accommodation'));
-            if (regionSwiper) {
-                regionSwiper.slideTo(index);
-            }
-            const wrapper = document.querySelector('.swiper-container-wrapper');
-            if (wrapper) {
-                wrapper.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-        }
+        // Duplicate navigateToRegion removed. Navigation is handled dynamically by hash router below.
 
         function openVehicleRates(supplierId) {
             if (currentYear === '2027') {
@@ -5229,42 +5220,42 @@
             
             if (r.includes('sossusvlei') || r.includes('namib')) {
                 if (l.includes('camp') || l.includes('camping')) {
-                    return 'https://images.unsplash.com/photo-1506535772-451407b4e3e9?auto=format&fit=crop&w=800&q=80';
+                    return 'https://images.unsplash.com/photo-1506535772-451407b4e3e9?auto=format&fit=crop&w=1200&q=80';
                 }
-                return 'https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('etosha')) {
                 if (l.includes('camp') || l.includes('camping')) {
-                    return 'https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?auto=format&fit=crop&w=800&q=80';
+                    return 'https://images.unsplash.com/photo-1518156677180-95a2893f3e9f?auto=format&fit=crop&w=1200&q=80';
                 }
-                return 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1456926631375-92c8ce872def?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('damaraland') || r.includes('twyfelfontein') || r.includes('brandberg')) {
-                return 'https://images.unsplash.com/photo-1602525963773-518ee55d774e?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('swakopmund') || r.includes('coast') || r.includes('walvis')) {
-                return 'https://images.unsplash.com/photo-1473116763269-25541077c683?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('windhoek')) {
-                return 'https://images.unsplash.com/photo-1549693578-d683be217e58?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('kalahari')) {
-                return 'https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('kaokoveld') || r.includes('kunene') || r.includes('epupa')) {
-                return 'https://images.unsplash.com/photo-1502126324834-38f8e02d7160?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1502126324834-38f8e02d7160?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('caprivi') || r.includes('zambezi') || r.includes('river')) {
-                return 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&w=1200&q=80';
             }
             
             if (l.includes('camp') || l.includes('camping')) {
-                return 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=1200&q=80';
             }
             if (l.includes('guest') || l.includes('farm') || l.includes('house')) {
-                return 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&q=80';
+                return 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80';
             }
-            return 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=800&q=80';
+            return 'https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=80';
         }
 
         function parseLodgesFromDOM() {
@@ -5318,7 +5309,34 @@
             });
         }
 
-        function navigateToRegion(regionName) {
+        const regionIndexMap = [
+            "Sossusvlei & Namib",
+            "Etosha National Park",
+            "Swakopmund & Walvis Bay",
+            "Windhoek & Central",
+            "Damaraland",
+            "Kaokoveld & Kunene",
+            "Twyfelfontein",
+            "Brandberg & Spitzkoppe",
+            "Erongo & Omaruru",
+            "Kalahari Desert",
+            "Luderitz & South",
+            "Caprivi & Chobe",
+            "Fish River Canyon",
+            "Waterberg Plateau",
+            "Kalahari & Mariental",
+            "Skeleton Coast",
+            "Otjiwarongo & Waterberg",
+            "Okonjima & Central North"
+        ];
+
+        function navigateToRegion(val) {
+            let regionName = val;
+            if (typeof val === 'number') {
+                regionName = regionIndexMap[val] || val;
+            } else if (typeof val === 'string' && !isNaN(val)) {
+                regionName = regionIndexMap[parseInt(val)] || val;
+            }
             window.location.hash = `region/${encodeURIComponent(regionName)}`;
         }
 
@@ -5334,6 +5352,10 @@
             if (hash.startsWith('#region/')) {
                 // Force accommodation tab pane active
                 switchTab('accommodation', document.getElementById('nav-accommodation'));
+                
+                // Hide main big hero to resolve cut-off issues
+                const mainHero = document.querySelector('.hero');
+                if (mainHero) mainHero.style.display = 'none';
                 
                 // Hide regular lists & Swiper structures
                 const introBox = accommodationPane.querySelector('.intro-box');
@@ -5351,6 +5373,10 @@
                 const regionName = decodeURIComponent(hash.substring(8));
                 renderRegionPage(regionName);
             } else {
+                // Show main big hero again
+                const mainHero = document.querySelector('.hero');
+                if (mainHero) mainHero.style.display = 'flex';
+                
                 // Standard home/swiper active views
                 const regionPageView = document.getElementById('region-page-view');
                 if (regionPageView) {
