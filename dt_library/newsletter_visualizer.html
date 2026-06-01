@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desert Tracks Newsletter Visualizer</title>
+    
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121e;
+            --bg-tertiary: #1a1a2e;
+            --accent-gold: #e2a85e;
+            --accent-gold-hover: #f5c285;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --border-color: rgba(226, 168, 94, 0.15);
+            --border-hover: rgba(226, 168, 94, 0.35);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.5);
+            --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.7);
+            --sidebar-width: 380px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            z-index: 10;
+            box-shadow: 4px 0 25px rgba(0,0,0,0.5);
+        }
+
+        .sidebar-header {
+            padding: 30px 25px 20px 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .brand-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-gold);
+            background: rgba(226, 168, 94, 0.1);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(226, 168, 94, 0.2);
+            margin-bottom: 12px;
+        }
+
+        .sidebar-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .sidebar-subtitle {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 5px;
+        }
+
+        .newsletter-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 15px;
+        }
+
+        .newsletter-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .newsletter-list::-webkit-scrollbar-thumb {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .newsletter-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--accent-gold);
+            transform: scaleY(0);
+            transition: var(--transition);
+            transform-origin: bottom;
+        }
+
+        .newsletter-item:hover {
+            background: rgba(226, 168, 94, 0.04);
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+
+        .newsletter-item.active {
+            background: rgba(226, 168, 94, 0.08);
+            border-color: var(--accent-gold);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .newsletter-item.active::before {
+            transform: scaleY(1);
+        }
+
+        .item-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .item-tag {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            border: 1px solid rgba(226, 168, 94, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .item-tag.latest {
+            color: #10b981;
+            border-color: rgba(16, 185, 129, 0.3);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .item-date {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .item-name {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .item-desc {
+            font-size: 12px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 11px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Main Workspace Styling */
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: var(--bg-primary);
+        }
+
+        /* Top Navigation/Bar */
+        .workspace-header {
+            height: 80px;
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            z-index: 5;
+        }
+
+        .active-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .active-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .active-details {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Toggle Button Group */
+        .toggle-group {
+            background-color: var(--bg-tertiary);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 4px;
+            border-radius: 8px;
+            display: flex;
+            gap: 2px;
+        }
+
+        .toggle-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .toggle-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .toggle-btn.active {
+            background-color: var(--accent-gold);
+            color: var(--bg-primary);
+            font-weight: 600;
+        }
+
+        .action-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 10px 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-primary);
+            box-shadow: 0 0 15px rgba(226, 168, 94, 0.3);
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            background-color: var(--bg-primary);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            overflow: hidden;
+        }
+
+        /* Preview Iframe Wrapper */
+        .preview-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .preview-iframe-wrapper {
+            background-color: #ffffff;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: var(--transition);
+            position: relative;
+            display: block;
+        }
+
+        /* Viewport States */
+        .view-desktop {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+        }
+
+        .view-mobile {
+            width: 375px;
+            height: 667px;
+            border-radius: 30px;
+            border: 12px solid #1a1a24;
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05), var(--shadow-md);
+        }
+
+        .preview-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Code Viewer Section */
+        .code-container {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #050508;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            overflow: hidden;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .code-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-family: 'Fira Code', monospace;
+        }
+
+        .copy-btn {
+            background: rgba(226, 168, 94, 0.1);
+            border: 1px solid rgba(226, 168, 94, 0.3);
+            color: var(--accent-gold);
+            font-size: 12px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-gold);
+            color: var(--bg-primary);
+        }
+
+        .code-content {
+            flex: 1;
+            overflow: auto;
+            margin: 0;
+            border-radius: 8px;
+        }
+
+        .code-content pre {
+            margin: 0;
+            padding: 0;
+        }
+
+        .code-content code {
+            font-family: 'Fira Code', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #d1d5db;
+            white-space: pre;
+        }
+
+        /* Micro animations */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <span class="brand-badge">Desert Tracks</span>
+            <h1 class="sidebar-title">Newsletter Hub</h1>
+            <p class="sidebar-subtitle">Interactive visualizer for our premium Mailchimp campaigns</p>
+        </div>
+        
+        <div class="newsletter-list" id="newsletterList">
+            <!-- Items loaded dynamically -->
+        </div>
+        
+        <div class="sidebar-footer">
+            Desert Tracks &copy; 2026<br>
+            Designed for flawless email client render
+        </div>
+    </div>
+
+    <!-- WORKSPACE -->
+    <div class="workspace">
+        <!-- Workspace Top Bar -->
+        <div class="workspace-header">
+            <div class="active-info">
+                <div class="active-title" id="activeTitle">Loading...</div>
+                <div class="active-details" id="activeDetails">Loading description...</div>
+            </div>
+            
+            <div class="controls">
+                <!-- Preview / Code Toggle -->
+                <div class="toggle-group">
+                    <button class="toggle-btn active" id="viewPreviewBtn" onclick="setViewMode('preview')">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        Preview
+                    </button>
+                    <button class="toggle-btn" id="viewCodeBtn" onclick="setViewMode('code')">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 18l6-6-6-6M8 6L2 12l6 6"></path></svg>
+                        HTML Code
+                    </button>
+                </div>
+
+                <!-- Desktop / Mobile Viewport Toggle -->
+                <div class="toggle-group" id="viewportToggleGroup">
+                    <button class="toggle-btn active" id="vpDesktopBtn" onclick="setViewport('desktop')">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                        Desktop
+                    </button>
+                    <button class="toggle-btn" id="vpMobileBtn" onclick="setViewport('mobile')">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                        Mobile
+                    </button>
+                </div>
+                
+                <!-- Open in New Tab -->
+                <button class="action-btn" id="openTabBtn" onclick="openInNewTab()">
+                    <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3"></path></svg>
+                    Open Tab
+                </button>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- PREVIEW VIEW -->
+            <div class="preview-container" id="previewContainer">
+                <div class="preview-iframe-wrapper view-desktop" id="iframeWrapper">
+                    <iframe class="preview-iframe" id="previewIframe" src=""></iframe>
+                </div>
+            </div>
+
+            <!-- CODE VIEW -->
+            <div class="code-container" id="codeContainer">
+                <div class="code-header">
+                    <div class="code-title" id="codeFilename">filename.html</div>
+                    <button class="copy-btn" id="copyBtn" onclick="copyCode()">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        <span id="copyBtnText">Copy HTML</span>
+                    </button>
+                </div>
+                <div class="code-content">
+                    <pre><code id="codeBlock">Loading source...</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Data & Interactive Logic -->
+    <script>
+        const newsletters = [
+            {
+                id: '5_live_b2b_mailchimp',
+                name: 'B2B Live Campaign (Mailchimp)',
+                path: 'newsletters/5_live_b2b_mailchimp.html',
+                tag: 'Last Deploy',
+                tagClass: 'latest',
+                date: 'Apr 9, 2026',
+                audience: 'Trade & Travel Agents (DMC Partner Networks)',
+                desc: 'Highly customized production-ready campaign deployed to Mailchimp. Features live Swakopmund links, personalized list-manage tags, and custom image layout optimized for 2026 ground partnerships.',
+                features: 'Skeleton Coast Surfing hero image, live profile & unsubscribe URL structures, 2026 copyright tags, Swakopmund post office contact info.'
+            },
+            {
+                id: '4_dmc_b2b',
+                name: 'DMC B2B Partner Template',
+                path: 'newsletters/4_dmc_b2b.html',
+                tag: 'Template',
+                tagClass: '',
+                date: 'May 16, 2026',
+                audience: 'Trade Agents (B2B FIT Focus)',
+                desc: 'Premium structural template optimized for trade partnerships. Focuses on independence routes, preferred lodge rates (like Mokuti Etosha), and custom white-label ground logistics.',
+                features: 'Dark footer, editorial drop-cap start, Georgia & Verdana font pairings, high-resolution scenic road hero, custom trade access panels.'
+            },
+            {
+                id: '3_high_end_landscape',
+                name: 'Premium Editorial Landscape',
+                path: 'newsletters/3_high_end_landscape.html',
+                tag: 'Premium',
+                tagClass: '',
+                date: 'May 16, 2026',
+                audience: 'B2C VIP Travelers (High-Net-Worth)',
+                desc: 'Exquisite editorial-style layout built for maximum visual impact. Implements advanced responsive email resets and elegant beige background themes to mimic a physical luxury magazine.',
+                features: 'Warm cream canvas (#f2f0ec), Google Fonts import (Playfair Display & Jost), dramatic "Beyond the Horizon" spacing, Sandwich Harbour dune meet sea photography.'
+            },
+            {
+                id: '2_premium_brand',
+                name: 'Premium Customer Brand',
+                path: 'newsletters/2_premium_brand.html',
+                tag: 'Brand',
+                tagClass: '',
+                date: 'May 16, 2026',
+                audience: 'General Subscribers / VIP B2C',
+                desc: 'Sophisticated customer newsletter focused on the ultimate Namibian self-drive routes, World-class Etosha safari highlights, and elite desert lodge accommodations.',
+                features: 'Dual column responsive experience panels, customizable FNAME merge tags, elegant Jost typography, subtle drop shadows, custom Oryx icon crest.'
+            },
+            {
+                id: '1_basic_specials',
+                name: 'Standard Specials Newsletter',
+                path: 'newsletters/1_basic_specials.html',
+                tag: 'Classic',
+                tagClass: '',
+                date: 'May 16, 2026',
+                audience: 'Consumer Deals list',
+                desc: 'Classic boxed specials layout designed for standard email clients. Directly highlights 2026 Sossusvlei Desert escapes, Etosha wildlife private night drives, and Remote Himba culture visits.',
+                features: 'Teal email outer background (#94c9c4), high contrast black bordered sections, bold call-to-actions, straightforward 600px main container structure.'
+            }
+        ];
+
+        let selectedId = '5_live_b2b_mailchimp';
+        let currentViewMode = 'preview'; // 'preview' or 'code'
+        let currentViewport = 'desktop'; // 'desktop' or 'mobile'
+        let rawHtmlCache = {};
+
+        // Render Sidebar List
+        function renderSidebar() {
+            const listContainer = document.getElementById('newsletterList');
+            listContainer.innerHTML = '';
+            
+            newsletters.forEach(item => {
+                const isSelected = item.id === selectedId;
+                const div = document.createElement('div');
+                div.className = `newsletter-item ${isSelected ? 'active' : ''}`;
+                div.onclick = () => selectNewsletter(item.id);
+                
+                div.innerHTML = `
+                    <div class="item-meta">
+                        <span class="item-tag ${item.tagClass}">${item.tag}</span>
+                        <span class="item-date">${item.date}</span>
+                    </div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-desc">${item.desc.substring(0, 85)}...</div>
+                `;
+                listContainer.appendChild(div);
+            });
+        }
+
+        // Handle Newsletter Selection
+        function selectNewsletter(id) {
+            selectedId = id;
+            renderSidebar();
+            
+            const newsletter = newsletters.find(n => n.id === id);
+            if (!newsletter) return;
+            
+            // Update workspace top bar info
+            document.getElementById('activeTitle').innerText = newsletter.name;
+            document.getElementById('activeDetails').innerHTML = `<strong>Audience:</strong> ${newsletter.audience} | <strong>Highlighted Features:</strong> ${newsletter.features}`;
+            
+            // Update iframe source
+            const iframe = document.getElementById('previewIframe');
+            iframe.src = newsletter.path;
+            
+            // Update code view
+            fetchSourceCode(newsletter.path, newsletter.id);
+        }
+
+        // Fetch Raw Source Code
+        async function fetchSourceCode(path, id) {
+            const codeBlock = document.getElementById('codeBlock');
+            const codeFilename = document.getElementById('codeFilename');
+            codeFilename.innerText = path;
+            
+            if (rawHtmlCache[id]) {
+                codeBlock.innerText = rawHtmlCache[id];
+                return;
+            }
+            
+            codeBlock.innerText = "Loading source code...";
+            try {
+                const response = await fetch(path);
+                if (response.ok) {
+                    const text = await response.text();
+                    rawHtmlCache[id] = text;
+                    codeBlock.innerText = text;
+                } else {
+                    codeBlock.innerText = "Error: Could not load newsletter source code.";
+                }
+            } catch (err) {
+                codeBlock.innerText = "Error loading code: " + err.message;
+            }
+        }
+
+        // View Mode Control (Preview vs Code)
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            
+            const previewContainer = document.getElementById('previewContainer');
+            const codeContainer = document.getElementById('codeContainer');
+            const viewPreviewBtn = document.getElementById('viewPreviewBtn');
+            const viewCodeBtn = document.getElementById('viewCodeBtn');
+            const viewportToggleGroup = document.getElementById('viewportToggleGroup');
+            
+            if (mode === 'preview') {
+                previewContainer.style.display = 'flex';
+                codeContainer.style.display = 'none';
+                viewPreviewBtn.classList.add('active');
+                viewCodeBtn.classList.remove('active');
+                viewportToggleGroup.style.display = 'flex';
+            } else {
+                previewContainer.style.display = 'none';
+                codeContainer.style.display = 'flex';
+                viewPreviewBtn.classList.remove('active');
+                viewCodeBtn.classList.add('active');
+                viewportToggleGroup.style.display = 'none';
+            }
+        }
+
+        // Viewport Control (Desktop vs Mobile)
+        function setViewport(viewport) {
+            currentViewport = viewport;
+            
+            const iframeWrapper = document.getElementById('iframeWrapper');
+            const vpDesktopBtn = document.getElementById('vpDesktopBtn');
+            const vpMobileBtn = document.getElementById('vpMobileBtn');
+            
+            if (viewport === 'desktop') {
+                iframeWrapper.className = 'preview-iframe-wrapper view-desktop';
+                vpDesktopBtn.classList.add('active');
+                vpMobileBtn.classList.remove('active');
+            } else {
+                iframeWrapper.className = 'preview-iframe-wrapper view-mobile';
+                vpDesktopBtn.classList.remove('active');
+                vpMobileBtn.classList.add('active');
+            }
+        }
+
+        // Open in New Tab
+        function openInNewTab() {
+            const newsletter = newsletters.find(n => n.id === selectedId);
+            if (newsletter) {
+                window.open(newsletter.path, '_blank');
+            }
+        }
+
+        // Copy Code to Clipboard
+        function copyCode() {
+            const codeText = document.getElementById('codeBlock').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+            const copyBtnText = document.getElementById('copyBtnText');
+            
+            navigator.clipboard.writeText(codeText).then(() => {
+                copyBtnText.innerText = "Copied!";
+                copyBtn.classList.add('pulse');
+                
+                setTimeout(() => {
+                    copyBtnText.innerText = "Copy HTML";
+                    copyBtn.classList.remove('pulse');
+                }, 2000);
+            }).catch(err => {
+                alert("Failed to copy code: " + err);
+            });
+        }
+
+        // Initialize App
+        window.addEventListener('DOMContentLoaded', () => {
+            selectNewsletter(selectedId);
+        });
+    </script>
+</body>
+</html>
