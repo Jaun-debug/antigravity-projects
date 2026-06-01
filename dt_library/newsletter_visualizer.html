@@ -524,11 +524,33 @@
     <script>
         const newsletters = [
             {
+                id: '7_june_2026_b2b',
+                name: 'June 2026 B2B Campaign (New)',
+                path: 'newsletters/7_june_2026_b2b.html',
+                tag: 'New B2B',
+                tagClass: 'latest',
+                date: 'Jun 1, 2026',
+                audience: 'Travel Agencies / DMC Trade Partners',
+                desc: 'Highly professional winter kickoff brief. Focuses on seasonal FIT white-label fleet coordination, Damaraland dry riverbed routing, and securing Mokuti Etosha trade rates before the peak rush.',
+                features: 'Dark slate wrapper, stone-bg sections, simple elegant text-based header, text left / image right stack panels, high resolution media-pool safari photography.'
+            },
+            {
+                id: '6_june_2026',
+                name: 'June 2026 Campaign (New)',
+                path: 'newsletters/6_june_2026.html',
+                tag: 'New Design',
+                tagClass: 'latest',
+                date: 'Jun 1, 2026',
+                audience: 'General Subscribers / VIP direct (B2C Focus)',
+                desc: 'A gorgeous editorial newsletter showcasing June as Namibia\'s dry season sweet spot. Highlighting Etosha\'s waterhole wildlife gathers, crystal clear Sossusvlei stargazing, and Walvis Bay\'s seal & whale migrations.',
+                features: 'Elegant off-black footer, Google Fonts (Playfair Display & Jost), absolute live media-pool images, beautifully optimized layout for both desktop and mobile email clients.'
+            },
+            {
                 id: '5_live_b2b_mailchimp',
                 name: 'B2B Live Campaign (Mailchimp)',
                 path: 'newsletters/5_live_b2b_mailchimp.html',
-                tag: 'Last Deploy',
-                tagClass: 'latest',
+                tag: 'Campaign',
+                tagClass: '',
                 date: 'Apr 9, 2026',
                 audience: 'Trade & Travel Agents (DMC Partner Networks)',
                 desc: 'Highly customized production-ready campaign deployed to Mailchimp. Features live Swakopmund links, personalized list-manage tags, and custom image layout optimized for 2026 ground partnerships.',
@@ -580,7 +602,7 @@
             }
         ];
 
-        let selectedId = '5_live_b2b_mailchimp';
+        let selectedId = '7_june_2026_b2b';
         let currentViewMode = 'preview'; // 'preview' or 'code'
         let currentViewport = 'desktop'; // 'desktop' or 'mobile'
         let rawHtmlCache = {};
