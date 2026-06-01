@@ -4659,6 +4659,58 @@
             ]
         };
 
+        function getLodgeRateSheetUrl(lodgeName) {
+            if (!lodgeName) return null;
+            const nameLower = lodgeName.toLowerCase().trim();
+            
+            // Vehicles mapping
+            if (nameLower.includes('car rental') || nameLower.includes('nts') || nameLower.includes('vehicle') || nameLower.includes('hilux') || nameLower.includes('safari car') || nameLower.includes('4x4')) {
+                return 'vehicle_rates.html';
+            }
+
+            const findInMap = (mapObj) => {
+                for (const key of Object.keys(mapObj)) {
+                    if (key.toLowerCase().trim() === nameLower) {
+                        return mapObj[key];
+                    }
+                }
+                return null;
+            };
+
+            let url = findInMap(olMap) || 
+                      findInMap(ondiliMap) || 
+                      findInMap(jnMap) || 
+                      findInMap(logufaMap) || 
+                      findInMap(musharaMap) || 
+                      findInMap(gondwanaMap) || 
+                      findInMap(individualMap);
+            
+            if (url) return url;
+            
+            // Loose / substring mapping fallback
+            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, gondwanaMap, individualMap];
+            for (const mapObj of maps) {
+                for (const key of Object.keys(mapObj)) {
+                    const keyLower = key.toLowerCase().trim();
+                    if (nameLower.includes(keyLower) || keyLower.includes(nameLower)) {
+                        return mapObj[key];
+                    }
+                }
+            }
+
+            // Opuwo Country Lodge is in individual_rates.html#opuwocountry
+            if (nameLower.includes('opuwo')) {
+                return 'individual_rates.html#opuwocountry';
+            }
+            if (nameLower.includes('hobatere')) {
+                return 'individual_rates.html#hobatere';
+            }
+
+            // Fallback to individual_rates.html with a safe hash
+            const sanitizedHash = nameLower.replace(/[^a-z0-9]/g, '');
+            return `individual_rates.html#${sanitizedHash}`;
+        }
+
         function openLogin(lodgeName) {
             if (lodgeName === 'List Your Property') {
                 openListPropertyWorkspace();
@@ -4690,6 +4742,13 @@
                     document.getElementById('agent-login-error-msg').style.display = 'none';
                     document.getElementById('agent-login-modal').style.display = 'flex';
                 }
+                return;
+            }
+
+            // Redirect straight to direct ratesheet
+            const url = getLodgeRateSheetUrl(lodgeName);
+            if (url) {
+                window.open(url, '_blank');
                 return;
             }
 
@@ -4985,6 +5044,12 @@
         }
 
         function handleLodgeClick(lodgeName) {
+            const url = getLodgeRateSheetUrl(lodgeName);
+            if (url) {
+                window.open(url, '_blank');
+                return;
+            }
+
             loadB2BNetworkState();
             const listing = b2bNetworkState.approvedListings.find(l => l.companyName.toLowerCase() === lodgeName.toLowerCase());
             

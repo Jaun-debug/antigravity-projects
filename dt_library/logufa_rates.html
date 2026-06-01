@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGUFA Group Rates & Booking 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" data-no-optimize="1"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" data-no-optimize="1"></script>
+    <style data-no-optimize="1">
+        :root {
+            --primary-bg: #000;
+            --card-bg: rgba(255, 255, 255, 0.7);
+            --card-light: rgba(255, 255, 255, 0.4);
+            --text-main: #2d2522;
+            --text-muted: #6b5e59;
+            --brand-accent: #b85827; /* Sunset Terracotta */
+            --brand-gradient: linear-gradient(135deg, #cc6b36, #b85827, #85370f);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.6);
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body { margin: 0; padding: 0; background: #FAF7F5; color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 600; margin: 0; }
+        .wrapper { max-width: 1700px; margin: 0 auto; padding: 30px 20px; }
+        
+        .header { text-align: center; margin-bottom: 40px; animation: fadeInDown 1s ease forwards; }
+        .header h1 { font-size: 3.5rem; color: var(--brand-accent); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; }
+        .header p { color: var(--text-muted); font-size: 1.1rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 600; }
+
+        /* SWIPER CAROUSEL */
+        .swiper-container-wrapper { animation: fadeInUp 1s ease forwards; animation-delay: 0.2s; opacity: 0; margin-bottom: 60px; position: relative; }
+        .main-swiper { width: 100%; padding-top: 50px; padding-bottom: 50px; }
+        .swiper-slide {
+            width: 360px;
+            height: 520px;
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            cursor: pointer;
+            background-size: cover;
+            background-position: center;
+        }
+        .swiper-slide::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+            z-index: 1;
+            transition: var(--transition);
+        }
+        .swiper-slide:hover::after {
+            height: 70%;
+            background: linear-gradient(to top, rgba(184, 88, 39, 0.9) 0%, transparent 100%);
+        }
+        .swiper-card-content {
+            position: absolute;
+            bottom: 30px;
+            left: 30px;
+            right: 30px;
+            z-index: 2;
+            color: #fff;
+            text-align: left;
+        }
+        .swiper-card-location { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: #f9f6f0; opacity: 0.8; margin-bottom: 8px; display: block; }
+        .swiper-card-title { font-size: 1.8rem; font-family: var(--font-head); font-weight: 600; margin: 0 0 15px 0; line-height: 1.2; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        
+        /* APPLE GLASS PILL BUTTONS */
+        .glass-pill-btn, .swiper-card-btn { 
+            display: inline-flex; 
+            align-items: center;
+            padding: 12px 24px; 
+            border: 1px solid rgba(255,255,255,0.15); 
+            border-radius: 40px; 
+            font-size: 0.85rem; 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            transition: var(--transition); 
+            backdrop-filter: blur(15px); 
+            -webkit-backdrop-filter: blur(15px);
+            background: rgba(30, 30, 30, 0.65);
+            color: #ffffff;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-weight: 600;
+        }
+        .glass-pill-btn:hover, .swiper-card-btn:hover { 
+            background: rgba(50, 50, 50, 0.8); 
+            border-color: rgba(255,255,255,0.4); 
+            transform: translateY(-2px);
+        }
+        .glass-pill-btn .divider, .swiper-card-btn .divider {
+            color: rgba(255,255,255,0.2);
+            margin: 0 12px;
+            font-weight: 300;
+        }
+        .glass-pill-btn .icon, .swiper-card-btn .icon {
+            margin-left: 12px;
+            font-size: 1rem;
+        }
+        
+        .glass-pill-btn.dark-text {
+            background: rgba(255, 255, 255, 0.8);
+            color: var(--text-main);
+            border-color: rgba(0,0,0,0.1);
+        }
+        .glass-pill-btn.dark-text .divider { color: rgba(0,0,0,0.2); }
+        .glass-pill-btn.dark-text:hover { background: #fff; border-color: rgba(0,0,0,0.2); }
+
+        /* DETAIL VIEW */
+        .detail-view { display: none; opacity: 0; animation: fadeIn 0.5s ease forwards; padding-bottom: 120px; }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--text-main); border: 1px solid rgba(0,0,0,0.2); padding: 10px 20px; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-bottom: 20px; background: rgba(255,255,255,0.5); backdrop-filter: blur(5px); font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8rem; font-weight: 600;}
+        .back-btn:hover { color: #fff; background: var(--brand-gradient); border-color: transparent; }
+
+        .detail-header { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .detail-title { font-size: 3rem; color: var(--brand-accent); line-height: 1.1; }
+        .intro-text { color: var(--text-main); font-size: 0.95rem; line-height: 1.6; max-width: 100%; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 20px; border-radius: 12px; border: 1px solid rgba(0,0,0,0.05); }
+
+        /* MULTI-IMAGE GALLERY */
+        .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 40px; }
+        .gallery-img { width: 100%; height: 280px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* TABS */
+        .tabs { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; border-bottom: none; justify-content: center; background: rgba(255,255,255,0.7); padding: 10px; border-radius: 12px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(0,0,0,0.05); position: sticky; top: 20px; z-index: 90; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .tab-btn { flex: 1; min-width: 150px; background: rgba(255,255,255,0.8); color: var(--text-main); border: 1px solid rgba(0,0,0,0.1); padding: 15px 25px; cursor: pointer; border-radius: 10px; transition: var(--transition); font-weight: 600; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .tab-btn:hover { background: #fff; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .tab-btn.active { background: var(--brand-accent); color: #ffffff; border: none; box-shadow: 0 10px 20px rgba(0,0,0,0.2); transform: translateY(-3px); text-shadow: none; }
+        .tab-btn-highlight { background: var(--brand-gradient); border: none; color: #fff; font-weight: 700; box-shadow: 0 0 15px rgba(184, 88, 39, 0.4); }
+
+        .tab-content { display: none; animation: fadeIn 0.4s ease; }
+        .tab-content.active { display: block; }
+
+        /* CONTENT BLOCKS */
+        .content-block { background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: var(--glass-border); border-radius: 15px; padding: 35px 40px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.04); }
+        .content-block h3 { color: #000000; font-size: 1.6rem; margin-bottom: 15px; border-bottom: 1px solid rgba(184, 88, 39, 0.3); padding-bottom: 10px; display: inline-block; text-transform: uppercase; }
+        .sub-block { margin-top: 30px; }
+        .sub-block h4 { color: var(--text-main); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 1px; text-transform: uppercase;}
+
+        /* TABLES */
+        .table-responsive { width: 100%; overflow-x: auto; border: var(--glass-border); border-radius: 12px; margin-bottom: 30px; background: rgba(255, 255, 255, 0.4); backdrop-filter: blur(10px); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: transparent; margin-bottom: 0px; }
+        th { font-family: var(--font-head); background: rgba(184, 88, 39, 0.08); color: var(--text-main); font-size: 0.85rem; padding: 18px 20px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid rgba(184, 88, 39, 0.15); }
+        td { padding: 18px 20px; border-bottom: 1px solid rgba(0,0,0,0.05); color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: rgba(184, 88, 39, 0.03); color: var(--text-main); }
+        td strong { color: var(--text-main); font-weight: 600; }
+        
+        /* LISTS & TEXT */
+        .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+        .text-list li { position: relative; padding-left: 25px; margin-bottom: 15px; }
+        .text-list li::before { content: "✦"; color: var(--brand-accent); position: absolute; left: 0; top: 2px; font-size: 1rem; }
+        .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.8; font-size: 1rem; }
+
+        /* BOOKING BAR & FORM */
+        #booking-bar {
+            display: none; position: fixed; bottom: 0; left: 0; width: 100%; 
+            background: rgba(184, 88, 39, 0.2); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+            padding: 20px; box-shadow: 0 -10px 30px rgba(0,0,0,0.1); 
+            z-index: 100; text-align: center; border-top: 1px solid rgba(184, 88, 39, 0.2);
+            animation: fadeInUp 0.4s ease;
+        }
+        #booking-total { font-weight: 600; font-size: 1.3rem; margin-right: 30px; color: var(--text-main); font-family: var(--font-head); }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 600; margin-bottom: 8px; display: block; }
+        .form-label.accent { color: var(--brand-accent); }
+        .form-control { width: 100%; padding: 15px; border: 1px solid rgba(0,0,0,0.1); border-radius: 8px; font-family: var(--font-body); font-size: 1rem; background: var(--card-light); transition: var(--transition); box-sizing: border-box; }
+        .form-control:focus { outline: none; border-color: var(--brand-accent); background: #fff; box-shadow: 0 0 0 4px rgba(184, 88, 39, 0.1); }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Custom Calendar Base Styles */
+        .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin-top: 10px; margin: 0 auto; }
+        .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin-bottom: 16px; margin: 0 auto; }
+        .dew-calendar-nav-btn { background: transparent; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; }
+        .dew-calendar-nav-btn:hover { opacity: 0.6; }
+        .dew-calendar-month-title { font-family: var(--font-head); font-size: 16px; font-weight: 600; color: var(--text-main); text-align: center; width: 300px; }
+        .dew-calendar { flex: 1; max-width: 300px; width: 100%; }
+        .dew-calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; margin-bottom: 8px; }
+        .dew-calendar-day-label { font-family: var(--font-body); font-size: 11px; font-weight: 600; color: var(--text-muted); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+        .dew-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; }
+        .dew-calendar-day { font-family: var(--font-body); font-size: 14px; color: var(--text-main); text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; position: relative; border-radius: 0; }
+        .dew-calendar-day:hover { background: rgba(0,0,0,0.05); }
+        .dew-calendar-day.dew-empty { cursor: default; }
+        .dew-calendar-day.dew-empty:hover { background: transparent; }
+        .dew-calendar-day.dew-today { background: var(--brand-accent); border-radius: 50%; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-selected { background: rgba(184, 88, 39, 0.4); }
+        .dew-calendar-day.dew-range { background: rgba(184, 88, 39, 0.25); }
+        .dew-calendar-day.dew-range-start { background: var(--brand-accent); border-radius: 50% 0 0 50%; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-range-end { background: var(--brand-accent); border-radius: 0 50% 50% 0; color: #ffffff !important; font-weight: 700; }
+        .dew-calendar-day.dew-past { color: rgba(0,0,0,0.2); cursor: not-allowed; opacity: 0.5; }
+        .dew-calendar-day.dew-past:hover { background: transparent; }
+        
+        @media(max-width: 768px) {
+            .dew-calendar-container { flex-direction: column; gap: 24px; align-items: center; }
+            .dew-calendar-container > .dew-calendar:last-child { display: none; }
+            .dew-calendar-nav .dew-calendar-month-title:nth-of-type(2) { display: none; }
+            .dew-calendar-month-title { width: 100%; }
+        }
+        @media (max-width: 900px) {
+            .lodge-gallery { grid-template-columns: 1fr; }
+            .gallery-img { height: 220px; }
+            .swiper-slide { width: 300px; height: 440px; }
+            .grid-2 { grid-template-columns: 1fr; gap: 0; margin-bottom: 0; }
+        }
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.2rem; }
+            .detail-title { font-size: 2rem; }
+            th, td { padding: 12px; font-size: 0.85rem; }
+            .content-block { padding: 25px; }
+            #booking-bar { padding: 15px; }
+            #booking-total { font-size: 1.1rem; margin-right: 15px; display: block; margin-bottom: 10px; }
+        }
+
+        /* Login lock bypassed - display none by default */
+        #login-overlay { display: none; }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="header">
+            <h1>LOGUFA</h1>
+            <p>STO 15/20 Rates Season 2026</p>
+        </div>
+
+        <!-- MAIN VIEW (CAROUSEL) -->
+        <div id="main-view">
+            <div class="swiper-container-wrapper">
+                <div class="swiper main-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Koiimasis -->
+                        <div class="swiper-slide" onclick="openProperty('koiimasis')" style="background-image: url('https://images.unsplash.com/photo-1547471080-7fc2caa6f56c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                            <div class="swiper-card-content">
+                                <span class="swiper-card-location">Tiras Mountains</span>
+                                <h2 class="swiper-card-title">Koiimasis Farmlodge</h2>
+                                <span class="swiper-card-btn">Rates <span class="divider">|</span> Explore <span class="icon">▷</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Kalahari Bush Breaks -->
+                        <div class="swiper-slide" onclick="openProperty('kalahari')" style="background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                            <div class="swiper-card-content">
+                                <span class="swiper-card-location">Kalahari</span>
+                                <h2 class="swiper-card-title">Kalahari Bush Breaks</h2>
+                                <span class="swiper-card-btn">Rates <span class="divider">|</span> Explore <span class="icon">▷</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Spitzkoppen Lodge -->
+                        <div class="swiper-slide" onclick="openProperty('spitzkoppen')" style="background-image: url('https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                            <div class="swiper-card-content">
+                                <span class="swiper-card-location">Spitzkoppe</span>
+                                <h2 class="swiper-card-title">Spitzkoppen Lodge</h2>
+                                <span class="swiper-card-btn">Rates <span class="divider">|</span> Explore <span class="icon">▷</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Spitzkoppe Cabin Camp -->
+                        <div class="swiper-slide" onclick="openProperty('cabincamp')" style="background-image: url('https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                            <div class="swiper-card-content">
+                                <span class="swiper-card-location">Spitzkoppe</span>
+                                <h2 class="swiper-card-title">Spitzkoppe Cabin Camp</h2>
+                                <span class="swiper-card-btn">Rates <span class="divider">|</span> Explore <span class="icon">▷</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Spitzkoppe Restcamp -->
+                        <div class="swiper-slide" onclick="openProperty('restcamp')" style="background-image: url('https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                            <div class="swiper-card-content">
+                                <span class="swiper-card-location">Spitzkoppe</span>
+                                <h2 class="swiper-card-title">Spitzkoppe Restcamp</h2>
+                                <span class="swiper-card-btn">Rates <span class="divider">|</span> Explore <span class="icon">▷</span></span>
+                            </div>
+                        </div>
+
+                        <!-- Forgotten Valley -->
+                        <div class="swiper-slide" onclick="openProperty('forgottenvalley')" style="background-image: url('https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                            <div class="swiper-card-content">
+                                <span class="swiper-card-location">Orupupa Conservancy</span>
+                                <h2 class="swiper-card-title">Forgotten Valley</h2>
+                                <span class="swiper-card-btn">Rates <span class="divider">|</span> Explore <span class="icon">▷</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DETAIL VIEW -->
+        <div id="detail-view" class="detail-view">
+            <div class="back-btn" onclick="closeProperty()">← Back to Lodges</div>
+            
+            <div class="detail-header">
+                <h1 class="detail-title" id="d-title">Property Name</h1>
+                <p class="intro-text" id="d-intro"></p>
+                <div style="color: var(--brand-accent); margin-top: 5px; font-weight: 600;" id="d-location"></div>
+            </div>
+
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="glass-pill-btn dark-text" onclick="downloadLodgePDF()">
+                    Lodge <span class="divider">|</span> Download PDF <span class="icon">▷</span>
+                </button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+                <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
+                <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
+                <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Image Gallery</button>
+                <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+            </div>
+
+            <!-- INLINE CALENDAR DATE SELECTOR -->
+            <div class="global-dates" id="global-dates-ui" style="margin-top: 25px; margin-bottom: 25px; display: block; text-align: center; background: rgba(255,255,255,0.7); padding: 30px; border-radius: 10px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+                <h3 style="margin-bottom: 25px; font-size: 1.6rem; color: var(--text-main); font-weight: 600;">When would you like to travel?</h3>
+                <div id="inline-calendar" style="margin: 0 auto;"></div>
+                
+                <div style="font-family: var(--font-head); font-weight: 600; font-size: 1.1rem; text-align: center; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); width: 100%; margin-top: 20px;">
+                    <span id="nights-count" style="font-size: 1.8rem; color: var(--brand-accent);">1</span>
+                    <span style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-left: 5px;">Nights Selected</span>
+                </div>
+            </div>
+
+            <div id="tab-1" class="tab-content active"></div>
+            <div id="tab-2" class="tab-content"></div>
+            <div id="tab-3" class="tab-content"></div>
+            
+            <!-- TAB 4: IMAGE GALLERY -->
+            <div id="tab-4" class="tab-content">
+                <div class="content-block">
+                    <h3>Property Gallery</h3>
+                    <div class="lodge-gallery" id="d-gallery"></div>
+                </div>
+            </div>
+            
+            <!-- TAB 5: FINALISE BOOKING -->
+            <div id="tab-5" class="tab-content">
+                <div class="content-block" style="background: #fff; box-shadow: 0 10px 40px rgba(0,0,0,0.08);">
+                    <h3>Complete Request</h3>
+                    <p class="raw-text" style="margin-bottom: 25px;">Review your selection and finalize your booking details.</p>
+                    
+                    <div id="booking-summary" style="margin-bottom: 30px; background: var(--card-light); padding: 25px; border-radius: 8px; border: var(--glass-border);">
+                        <p style="color: var(--text-muted); margin: 0;">Please select rates or activities from the tabs above to build your booking.</p>
+                    </div>
+                    
+                    <form onsubmit="submitBooking(event)" id="booking-form">
+                        
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label accent">Agent / Consultant Email</label>
+                                <input type="email" id="b-agent-email" class="form-control" placeholder="agent@agency.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label accent">Booking Status</label>
+                                <select id="b-status" class="form-control" required style="cursor: pointer;">
+                                    <option value="Provisional Booking">Provisional Booking</option>
+                                    <option value="Confirmed Booking">Confirmed Booking</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <hr style="border: none; border-top: 1px solid rgba(0,0,0,0.05); margin-bottom: 20px;">
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Lead Guest Name</label>
+                                <input type="text" id="b-name" class="form-control" placeholder="John Doe" required>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Tour Guide Accommodation?</label>
+                                <select id="b-guide" class="form-control" style="cursor: pointer;">
+                                    <option value="No">No Guide Accommodation Required</option>
+                                    <option value="Yes (Guide Room DBB)">Yes (Guide Room DBB)</option>
+                                    <option value="Yes (Guide Room FB)">Yes (Guide Room FB)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Check-In Date</label>
+                                <input type="date" id="b-date-in" class="form-control" required readonly>
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Check-Out Date</label>
+                                <input type="date" id="b-date-out" class="form-control" required readonly>
+                            </div>
+                        </div>
+
+                        <div class="grid-2">
+                            <div class="form-group">
+                                <label class="form-label">Arriving From</label>
+                                <input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Departing To</label>
+                                <input type="text" id="b-departing" class="form-control" placeholder="e.g. Swakopmund">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Special Requests / Comments</label>
+                            <textarea id="b-message" class="form-control" rows="4" placeholder="Mention dietary requirements, children's ages, room sharing configurations..."></textarea>
+                        </div>
+
+                        <button type="submit" class="glass-pill-btn" style="width: 100%; border-radius: 8px; justify-content: center; background: var(--brand-gradient); margin-top: 15px;">Send Reservation Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- STICKY BOOKING FLOATING BAR -->
+    <div id="booking-bar">
+        <span id="booking-total">Total: N$ 0.00</span>
+        <button class="glass-pill-btn dark-text" onclick="openBookingTab()">View Booking Summary <span class="divider">|</span> <span class="icon">→</span></button>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" data-no-optimize="1"></script>
+    
+    <script data-no-optimize="1">
+        const DB = {
+            'koiimasis': {
+                name: 'Koiimasis Farmlodge',
+                location: 'Tiras Mountains',
+                cover: 'https://images.unsplash.com/photo-1547471080-7fc2caa6f56c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                images: [
+                    'https://images.unsplash.com/photo-1547471080-7fc2caa6f56c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                intro: 'Set amidst the spectacular red granite fields of the Tiras Mountains, Koiimasis Fest-Inn-Fels Farmlodge offers a unique escape into nature, surrounded by dramatic rock formations, ancient canyons, and vast desert landscapes under starry night skies.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>LODGE RATES 2026</h3>
+                        <p class="raw-text">Rates are in NAD per person per night (pppn) and include dinner and breakfast (DBB), 15% VAT and 1% tourism levy.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE & OCCUPANCY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Per Person Sharing - DBB</strong></td><td>2745.50</td></tr>
+                                    <tr><td><strong>Single Person - DBB</strong></td><td>3723.00</td></tr>
+                                    <tr><td><strong>Children 02-12 (Own Room) - DBB</strong></td><td>2473.50</td></tr>
+                                    <tr><td><strong>Children 02-12 (Sharing with adults) - DBB</strong></td><td>1428.00</td></tr>
+                                    <tr><td><strong>Tour Guide - DBB</strong></td><td>2910.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>Extras & Activities</h3>
+                        <p class="raw-text">Meals and excursions bookable at the lodge.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>MEALS / SERVICES</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Lunch (Per person)</td><td>240.00</td></tr>
+                                    <tr><td>Lunch Pack (Per person)</td><td>240.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>Reservation Policies & Information</h3>
+                        <ul class="text-list">
+                            <li><strong>Valid Season:</strong> 1 November 2025 - 31 October 2026.</li>
+                            <li><strong>Booking Service:</strong> Managed by Lodge and Guestfarm Reservations cc (reservations@logufa.com).</li>
+                            <li><strong>Lodge Closure:</strong> Koiimasis Fest-Inn-Fels is closed on 23 and 24 December 2025 / 2026.</li>
+                            <li><strong>Meal Inclusion:</strong> Rates are in NAD, dinner and breakfast included (DBB). VAT (15%) and Levy (1%) are fully included.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'kalahari': {
+                name: 'Kalahari Bush Breaks',
+                location: 'Kalahari',
+                cover: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                images: [
+                    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1549488344-1f9b8d2bd1f3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1534062140445-564b73273867?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                intro: 'Surround yourself with the sweeping red sand dunes and ancient acacia trees of the Kalahari Desert. Kalahari Bush Breaks offers a tranquil retreat where you can witness spectacular African sunrises, enjoy game drives to view desert wildlife, and relax in comfortable African-inspired chalets.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>LODGE RATES 2026</h3>
+                        <p class="raw-text">Rates are in NAD per person per night (pppn) and include dinner and breakfast (DBB), 15% VAT and 1% tourism levy.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE & OCCUPANCY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Per Person Sharing - DBB</strong></td><td>2720.00</td></tr>
+                                    <tr><td><strong>Single Person - DBB</strong></td><td>4080.00</td></tr>
+                                    <tr><td><strong>Children 02-12 (Max 2 in family room) - DBB</strong></td><td>1360.00</td></tr>
+                                    <tr><td><strong>Tour Guide - DBB</strong></td><td>1650.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h3>Campsite (Self-Catering)</h3>
+                        <p class="raw-text">Camping pitches are self-catering and priced per person per night (pppn).</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>CAMPSITE PITCH</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Kalahari Campsite Pitch (Self-Catering pppn)</strong></td><td>270.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>Meals & Dining Extras</h3>
+                        <p class="raw-text">Extras for campsites or day guests.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>DINING EXTRA</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Dinner (Adult)</td><td>550.00</td></tr>
+                                    <tr><td>Dinner (Child 2-11)</td><td>380.00</td></tr>
+                                    <tr><td>Breakfast (Adult)</td><td>350.00</td></tr>
+                                    <tr><td>Lunch Pack (Per person)</td><td>280.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>Reservation Policies & Information</h3>
+                        <ul class="text-list">
+                            <li><strong>Valid Season:</strong> 1 November 2025 - 31 October 2026.</li>
+                            <li><strong>Booking Service:</strong> Managed by Lodge and Guestfarm Reservations cc (reservations@logufa.com).</li>
+                            <li><strong>Meal Inclusion:</strong> DBB rates include dinner and breakfast, 15% VAT, and 1% tourism levy.</li>
+                            <li><strong>Campsites:</strong> Campsites are strictly self-catering. Dining extras (Dinner, Breakfast) can be pre-booked at the lodge.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'spitzkoppen': {
+                name: 'Spitzkoppen Lodge',
+                location: 'Spitzkoppe',
+                cover: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                images: [
+                    'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1547471080-7fc2caa6f56c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                intro: 'Nestled inside the granite gates of the iconic Spitzkoppe mountain, Spitzkoppen Lodge is an ultra-premium property designed to blend into the giant boulders. It offers absolute luxury, a breath-taking infinity pool reflecting the volcanic peaks, and guided rock art exploration.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>LODGE RATES 2026</h3>
+                        <p class="raw-text">Rates are in NAD per person per night (pppn) and include dinner and breakfast (DBB), 15% VAT and 1% tourism levy.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE & OCCUPANCY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Per Person Sharing - DBB</strong></td><td>5525.00</td></tr>
+                                    <tr><td><strong>Single Person - DBB</strong></td><td>8075.00</td></tr>
+                                    <tr><td><strong>Children 06-11 (Sharing with adults) - DBB</strong></td><td>2550.00</td></tr>
+                                    <tr><td><strong>Children 06-11 (Own Room) - DBB</strong></td><td>3995.00</td></tr>
+                                    <tr><td><strong>Tour Guide - DBB</strong></td><td>2400.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text"><strong>SPECIAL PROMOTION:</strong> Guests staying 2 nights or more receive a complimentary guided tour to the Small Bushman's Paradise, the Zebra Pool, Rock Arch, and the Golden Snake Painting (including lunch on the second day!).</p>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>Spitzkoppe Excursions & Activities</h3>
+                        <p class="raw-text">Activities can only be booked on arrival at the lodge by the guests. Non-commissionable.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY Excursion</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Guided Walk Chain Tour (Per person)</td><td>410.00</td></tr>
+                                    <tr><td>Guided Drive (4 Stop Excursion pp)</td><td>410.00</td></tr>
+                                    <tr><td>Top-Up Sunset Drive (Added to drive pp)</td><td>240.00</td></tr>
+                                    <tr><td>Guided Cycling Tour (Per person)</td><td>550.00</td></tr>
+                                    <tr><td>Mountain Hike (Per person)</td><td>690.00</td></tr>
+                                    <tr><td>Lunch (Standard dining)</td><td>370.00</td></tr>
+                                    <tr><td>Lunch Pack (Per person)</td><td>240.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>Reservation Policies & Information</h3>
+                        <ul class="text-list">
+                            <li><strong>Valid Season:</strong> 1 November 2025 - 31 October 2026.</li>
+                            <li><strong>Booking Service:</strong> Managed by Lodge and Guestfarm Reservations cc (reservations@logufa.com).</li>
+                            <li><strong>Lodge Closure:</strong> Closed on 23, 24, 25, 26, 31 December and 1 January.</li>
+                            <li><strong>Age Limitation:</strong> Strictly NO children under 6 years permitted at Spitzkoppen Lodge!</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'cabincamp': {
+                name: 'Spitzkoppe Cabin Camp',
+                location: 'Spitzkoppe',
+                cover: 'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                images: [
+                    'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                intro: 'Spitzkoppe Cabin Camp offers comfortable wooden cabins nestled among the granite boulders, providing an excellent self-catering option. Enjoy panoramic views of the Spitzkoppe peak, private braai facilities, and communal bathrooms with full community Rest Camp permit entry included in the rates.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>CABIN STO RATES 2026</h3>
+                        <p class="raw-text">Rates are in NAD per person per night (pppn), self-catering only. Includes VAT and 2% tourism levy.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ROOM TYPE & OCCUPANCY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Per Person Sharing (Self-Catering)</strong></td><td>1275.00</td></tr>
+                                    <tr><td><strong>Single Person (Self-Catering)</strong></td><td>2380.00</td></tr>
+                                    <tr><td><strong>Children 0-2 (Own Cot)</strong></td><td>0.00</td></tr>
+                                    <tr><td><strong>Children 3-12 (Sharing with adults - max 3)</strong></td><td>637.50</td></tr>
+                                    <tr><td><strong>Children 3-12 (Own Room - 1st child)</strong></td><td>1275.00</td></tr>
+                                    <tr><td><strong>Children 3-12 (Own Room - 2nd/3rd child)</strong></td><td>637.50</td></tr>
+                                    <tr><td><strong>Tour Guide (Single)</strong></td><td>1750.00</td></tr>
+                                    <tr><td><strong>Tour Guide (Sharing)</strong></td><td>880.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>Camp Service Extras</h3>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>SERVICE EXTRA</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Scullery/Cutlery Usage Fee (Per 2 pax per stay)</td><td>50.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>Reservation Policies & Information</h3>
+                        <ul class="text-list">
+                            <li><strong>Valid Season:</strong> 1 November 2025 - 31 October 2026.</li>
+                            <li><strong>Self-Catering Only:</strong> Rates are strictly self-catering. No restaurant facilities exist at the Cabin Camp.</li>
+                            <li><strong>Permits:</strong> Entry permits to the Spitzkoppe Community Rest Camp are fully included in the Cabin Camp rates.</li>
+                            <li><strong>Amenities:</strong> Bed linen is provided in all cabins, but guests must bring their own towels. Communal bathrooms are used.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'restcamp': {
+                name: 'Spitzkoppe Restcamp',
+                location: 'Spitzkoppe',
+                cover: 'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                images: [
+                    'https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1510312305653-8ed496efae75?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                intro: 'The Spitzkoppe Community Restcamp offers spectacular camping spots situated under the massive boulders. Camp under the stars, climb the rock arch, and enjoy the raw beauty of Damaraland. Perfect for self-drive adventurers seeking an authentic wilderness camping experience.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>COMMUNITY CAMPING RATES 2026</h3>
+                        <p class="raw-text">Rates are per person per night (pppn), self-catering camping pitches. Includes 15% VAT and Rest Camp permits.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>CAMPING PITCH & OCCUPANCY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Adult Campsite Pitch (Self-Catering pppn)</strong></td><td>270.00</td></tr>
+                                    <tr><td><strong>Child 4-11 Campsite Pitch (Self-Catering pppn)</strong></td><td>180.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>Day Visitor Excursions</h3>
+                        <p class="raw-text">Day visitor entry permits for guests not staying overnight.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>DAY VISITOR PERMIT</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Day Visitor (Adult)</td><td>170.00</td></tr>
+                                    <tr><td>Day Visitor (Child 4-11)</td><td>110.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>Camp Rules & Information</h3>
+                        <ul class="text-list">
+                            <li><strong>Valid Season:</strong> 1 November 2025 - 31 October 2026.</li>
+                            <li><strong>Max Occupancy:</strong> Maximum of 8 adults permitted per campsite pitch.</li>
+                            <li><strong>Permits:</strong> Restcamp permits are fully included in the overnight camping rates.</li>
+                            <li><strong>Self-Catering:</strong> Self-catering camping only. Guests must be fully self-sufficient.</li>
+                        </ul>
+                    </div>
+                `
+            },
+            'forgottenvalley': {
+                name: 'Forgotten Valley',
+                location: 'Orupupa Conservancy',
+                cover: 'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                images: [
+                    'https://images.unsplash.com/photo-1472396961693-142e6e269027?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1547471080-7fc2caa6f56c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+                    'https://images.unsplash.com/photo-1516426122078-c23e76319801?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+                ],
+                intro: 'Tucked deep in the rugged valleys of the Orupupa Conservancy, Ekoto Self-Catering Camp (Forgotten Valley) is a hidden sanctuary of 6 luxury stone-and-wood chalets. Completely off-grid, it offers high-end wilderness comfort, a stunning pool, and a unique self-catering experience requiring a 4x4 vehicle to access.',
+                tab1: `
+                    <div class="content-block">
+                        <h3>CHALET RATES 2026</h3>
+                        <p class="raw-text">Rates are in NAD per night, self-catering only. Includes 15% VAT and 2% tourism levy.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>CHALET TYPE & OCCUPANCY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td><strong>Per Person Sharing (Self-Catering)</strong></td><td>2360.00</td></tr>
+                                    <tr><td><strong>Single Person (Self-Catering)</strong></td><td>4720.00</td></tr>
+                                    <tr><td><strong>Child (6-12 Years sharing)</strong></td><td>680.00</td></tr>
+                                    <tr><td><strong>Child (0-5 Years sharing)</strong></td><td>0.00</td></tr>
+                                    <tr><td><strong>Tour Guide</strong></td><td>1000.00</td></tr>
+                                    <tr><td><strong>Exclusive Use (All 6 chalets - Max 12 pax)</strong></td><td>28320.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p class="raw-text"><strong>Conservancy Levy Note:</strong> An additional compulsory conservancy levy of NAD 250.00 per person applies (supplementary to overnight rate; only for adults, not for children under 13 or guides).</p>
+                    </div>
+                `,
+                tab2: `
+                    <div class="content-block">
+                        <h3>Ekoto Excursions & Extras</h3>
+                        <p class="raw-text">Activities must be pre-booked and are non-commissionable.</p>
+                        <div class="table-responsive">
+                            <table>
+                                <thead><tr><th>ACTIVITY / COMPULSORY LEVY</th><th>STO RATE</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Compulsory Conservancy Levy (Per Adult per stay)</td><td>250.00</td></tr>
+                                    <tr><td>Guided Hike pp (2-4 hours, min 2 pax)</td><td>350.00</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `,
+                tab3: `
+                    <div class="content-block">
+                        <h3>Important Camp Information</h3>
+                        <ul class="text-list">
+                            <li><strong>Valid Season:</strong> 1 November 2025 - 31 October 2026.</li>
+                            <li><strong>Self-Catering only:</strong> There is NO restaurant. Each chalet includes a fully equipped kitchenette (fridge, 2 gas burners, kettle, cutlery & crockery) and outdoor patio gas braai.</li>
+                            <li><strong>Access Requirement:</strong> Access to the Ekoto Camp strictly requires a **4x4 vehicle**!</li>
+                            <li><strong>Zero Coverage:</strong> There is NO Wi-Fi, cell phone coverage, or credit card facilities (cash only at the local camp shop).</li>
+                            <li><strong>Payment & Deposits:</strong> For exclusive use bookings, a 15% non-refundable deposit is required. Full payment is required 30 days prior to arrival for all reservations.</li>
+                            <li><strong>Check-in:</strong> Check-in is from 13h00, and check-out is strictly at 10h00.</li>
+                        </ul>
+                    </div>
+                `
+            }
+        };
+
+        // SWIPER INITIALIZATION
+        let swiper = new Swiper('.main-swiper', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 15,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            loop: true,
+            slideToClickedSlide: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            mousewheel: {
+                forceToAxis: true,
+            },
+            keyboard: true
+        });
+
+        // CALENDAR STATE
+        let calendarState = {
+            month: new Date().getMonth(),
+            year: new Date().getFullYear(),
+            rangeStart: null,
+            rangeEnd: null
+        };
+
+        function calculateNights() {
+            let din = '';
+            let dout = '';
+            let nights = 1;
+
+            if (calendarState.rangeStart) {
+                const d1 = new Date(calendarState.rangeStart.getTime() - (calendarState.rangeStart.getTimezoneOffset() * 60000));
+                din = d1.toISOString().split('T')[0];
+            }
+            
+            if (calendarState.rangeStart && calendarState.rangeEnd) {
+                const d2 = new Date(calendarState.rangeEnd.getTime() - (calendarState.rangeEnd.getTimezoneOffset() * 60000));
+                dout = d2.toISOString().split('T')[0];
+                
+                const diffTime = calendarState.rangeEnd - calendarState.rangeStart;
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                nights = diffDays > 0 ? diffDays : 1;
+            }
+            
+            document.getElementById('b-date-in').value = din;
+            document.getElementById('b-date-out').value = dout;
+            
+            const nc = document.getElementById('nights-count');
+            if (nc) nc.innerText = nights;
+            
+            updateTotal();
+        }
+
+        function renderCustomCalendar() {
+            const root = document.getElementById('inline-calendar');
+            if (!root) return;
+            root.innerHTML = '';
+
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            const dayLabels = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
+
+            let m1 = calendarState.month;
+            let y1 = calendarState.year;
+            let m2 = m1 + 1;
+            let y2 = y1;
+            if (m2 > 11) { m2 = 0; y2 = y1 + 1; }
+
+            const nav = document.createElement('div');
+            nav.className = 'dew-calendar-nav';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'dew-calendar-nav-btn';
+            prevBtn.innerHTML = '&lsaquo;';
+            prevBtn.onclick = () => {
+                calendarState.month--;
+                if (calendarState.month < 0) { calendarState.month = 11; calendarState.year--; }
+                renderCustomCalendar();
+            };
+
+            const t1 = document.createElement('span');
+            t1.className = 'dew-calendar-month-title';
+            t1.textContent = `${monthNames[m1]} ${y1}`;
+
+            const t2 = document.createElement('span');
+            t2.className = 'dew-calendar-month-title';
+            t2.textContent = `${monthNames[m2]} ${y2}`;
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'dew-calendar-nav-btn';
+            nextBtn.innerHTML = '&rsaquo;';
+            nextBtn.onclick = () => {
+                calendarState.month++;
+                if (calendarState.month > 11) { calendarState.month = 0; calendarState.year++; }
+                renderCustomCalendar();
+            };
+
+            nav.append(prevBtn, t1, t2, nextBtn);
+            root.appendChild(nav);
+
+            function buildMonth(month, year) {
+                const cal = document.createElement('div');
+                cal.className = 'dew-calendar';
+
+                const header = document.createElement('div');
+                header.className = 'dew-calendar-header';
+                dayLabels.forEach(d => {
+                    const lbl = document.createElement('div');
+                    lbl.className = 'dew-calendar-day-label';
+                    lbl.textContent = d;
+                    header.appendChild(lbl);
+                });
+                cal.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'dew-calendar-grid';
+
+                const firstDay = new Date(year, month, 1).getDay();
+                const startOffset = firstDay; 
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                const today = new Date();
+                today.setHours(0,0,0,0);
+
+                for (let i = 0; i < startOffset; i++) {
+                    const empty = document.createElement('div');
+                    empty.className = 'dew-calendar-day dew-empty';
+                    grid.appendChild(empty);
+                }
+
+                for (let d = 1; d <= daysInMonth; d++) {
+                    const dayEl = document.createElement('div');
+                    dayEl.className = 'dew-calendar-day';
+                    dayEl.textContent = d;
+
+                    const thisDate = new Date(year, month, d);
+
+                    if (thisDate < today) {
+                        dayEl.classList.add('dew-past');
+                    } else {
+                        dayEl.onclick = () => handleDateSelection(thisDate);
+                        
+                        if (thisDate.getTime() === today.getTime()) {
+                            dayEl.classList.add('dew-today');
+                        }
+
+                        if (calendarState.rangeStart && calendarState.rangeEnd) {
+                            if (thisDate.getTime() === calendarState.rangeStart.getTime()) {
+                                dayEl.classList.add('dew-range-start');
+                            } else if (thisDate.getTime() === calendarState.rangeEnd.getTime()) {
+                                dayEl.classList.add('dew-range-end');
+                            } else if (thisDate > calendarState.rangeStart && thisDate < calendarState.rangeEnd) {
+                                dayEl.classList.add('dew-range');
+                            }
+                        } else if (calendarState.rangeStart) {
+                            if (thisDate.getTime() === calendarState.rangeStart.getTime()) {
+                                dayEl.classList.add('dew-range-start');
+                                dayEl.style.borderRadius = '50%';
+                            }
+                        }
+                    }
+                    grid.appendChild(dayEl);
+                }
+                cal.appendChild(grid);
+                return cal;
+            }
+
+            const container = document.createElement('div');
+            container.className = 'dew-calendar-container';
+            container.appendChild(buildMonth(m1, y1));
+            container.appendChild(buildMonth(m2, y2));
+            root.appendChild(container);
+        }
+
+        function handleDateSelection(date) {
+            if ((calendarState.rangeStart && calendarState.rangeEnd) || 
+                (calendarState.rangeStart && calendarState.rangeStart.getTime() === date.getTime())) {
+                calendarState.rangeStart = date;
+                calendarState.rangeEnd = null;
+            } else if (!calendarState.rangeStart) {
+                calendarState.rangeStart = date;
+            } else {
+                if (date < calendarState.rangeStart) {
+                    calendarState.rangeStart = date;
+                } else {
+                    calendarState.rangeEnd = date;
+                }
+            }
+            renderCustomCalendar();
+            calculateNights();
+        }
+
+        // RATES TABLE PARSER
+        function parseTab1(htmlString, isAccommodation = true) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString;
+            
+            const tables = div.querySelectorAll('table');
+            tables.forEach(table => {
+                const theadTr = table.querySelector('thead tr');
+                if(theadTr) {
+                    const th = document.createElement('th');
+                    th.innerText = 'QTY';
+                    th.style.textAlign = 'center';
+                    theadTr.appendChild(th);
+                }
+                
+                const tbodyTrs = table.querySelectorAll('tbody tr');
+                tbodyTrs.forEach(tr => {
+                    const tds = tr.querySelectorAll('td');
+                    if(tds.length >= 2) {
+                        const lastTd = tds[tds.length - 1];
+                        let priceText = lastTd.innerText.trim().replace(/,/g, '');
+                        let price = parseFloat(priceText);
+                        
+                        if(isNaN(price) && priceText.toLowerCase() === 'free') {
+                            price = 0;
+                        }
+                        
+                        const name = tds[0].innerText.trim();
+                        const newTd = document.createElement('td');
+                        newTd.style.textAlign = 'center';
+                        
+                        if(!isNaN(price)) {
+                            // If name contains campsite, exclusive, visitor, levy, package or transfer, set data-is-accomm to false!
+                            const nameLower = name.toLowerCase();
+                            const isFlat = nameLower.includes('package') || 
+                                           nameLower.includes('transfer') || 
+                                           nameLower.includes('campsite') || 
+                                           nameLower.includes('exclusive') || 
+                                           nameLower.includes('visitor') || 
+                                           nameLower.includes('permit') || 
+                                           nameLower.includes('levy');
+                            const actualIsAccomm = isFlat ? false : isAccommodation;
+                            
+                            newTd.innerHTML = `<input type="number" min="0" value="0" class="rate-qty" data-name="${name}" data-price="${price}" data-is-accomm="${actualIsAccomm}" onchange="updateTotal()" style="width: 70px; padding: 8px; border: 1px solid rgba(184, 88, 39, 0.4); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 600; text-align: center; outline: none;">`;
+                        }
+                        tr.appendChild(newTd);
+                    }
+                });
+            });
+            return div.innerHTML;
+        }
+
+        let currentLodgeId = null;
+
+        function openProperty(id) {
+            const data = DB[id];
+            if(!data) return;
+            currentLodgeId = id;
+
+            document.getElementById('main-view').style.display = 'none';
+            document.getElementById('detail-view').style.display = 'block';
+            window.scrollTo(0,0);
+
+            document.getElementById('d-title').innerText = data.name;
+            document.getElementById('d-intro').innerText = data.intro;
+            document.getElementById('d-location').innerText = data.location;
+
+            // Load Gallery
+            const gallery = document.getElementById('d-gallery');
+            gallery.innerHTML = '';
+            data.images.forEach(img => {
+                gallery.innerHTML += '<img src="'+img+'" class="gallery-img" />';
+            });
+
+            // Load Tabs
+            document.getElementById('tab-1').innerHTML = parseTab1(data.tab1, true);
+            if(data.tab2) document.getElementById('tab-2').innerHTML = parseTab1(data.tab2, false);
+            if(data.tab3) document.getElementById('tab-3').innerHTML = data.tab3;
+            
+            // Prefill Agent Email if exists
+            const savedEmail = localStorage.getItem('dt_agent_email');
+            if (savedEmail) {
+                document.getElementById('b-agent-email').value = savedEmail;
+            }
+
+            // Reset Calendar
+            calendarState.rangeStart = new Date();
+            calendarState.rangeEnd = new Date();
+            calendarState.rangeEnd.setDate(calendarState.rangeStart.getDate() + 1);
+            renderCustomCalendar();
+            calculateNights();
+            switchTab(1);
+        }
+
+        function closeProperty() {
+            document.getElementById('detail-view').style.display = 'none';
+            document.getElementById('main-view').style.display = 'block';
+            
+            // Refresh hash and swiper state
+            window.location.hash = '';
+            setTimeout(() => {
+                swiper.update();
+            }, 100);
+            window.scrollTo(0,0);
+        }
+
+        function switchTab(num) {
+            // Hide all tab panes
+            document.querySelectorAll('.tab-content').forEach(pane => {
+                pane.classList.remove('active');
+            });
+            // Deactivate all tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            const activeBtn = document.getElementById('tab-btn-'+num);
+            const activeTab = document.getElementById('tab-'+num);
+            if(activeBtn) activeBtn.classList.add('active');
+            if(activeTab) activeTab.classList.add('active');
+
+            const datesUI = document.getElementById('global-dates-ui');
+            if(datesUI) {
+                datesUI.style.display = (num === 1) ? 'block' : 'none';
+            }
+
+            if(num === 5) {
+                renderBookingSummary();
+            }
+        }
+
+        // BOOKING LOGIC CALCULATIONS
+        let selectedItems = [];
+
+        function updateTotal() {
+            selectedItems = [];
+            let total = 0;
+            const nc = document.getElementById('nights-count');
+            const nights = nc ? (parseInt(nc.innerText) || 1) : 1;
+
+            const inputs = document.querySelectorAll('.rate-qty');
+            inputs.forEach(input => {
+                const qty = parseInt(input.value) || 0;
+                if(qty > 0) {
+                    const price = parseFloat(input.dataset.price);
+                    const name = input.dataset.name;
+                    const isAccomm = input.dataset.isAccomm === "true";
+                    
+                    let lineTotal = qty * price;
+                    if(isAccomm) {
+                        lineTotal = lineTotal * nights;
+                    }
+                    
+                    total += lineTotal;
+                    selectedItems.push({ name, qty, price, total: lineTotal, isAccomm });
+                }
+            });
+            
+            const bb = document.getElementById('booking-bar');
+            if(total > 0) {
+                bb.style.display = 'flex';
+                bb.style.justifyContent = 'center';
+                bb.style.alignItems = 'center';
+                document.getElementById('booking-total').innerText = 'Total: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            } else {
+                bb.style.display = 'none';
+            }
+
+            if(document.getElementById('tab-5').classList.contains('active')) {
+                renderBookingSummary();
+            }
+        }
+
+        function renderBookingSummary() {
+            const summary = document.getElementById('booking-summary');
+            if (selectedItems.length === 0) {
+                summary.innerHTML = '<p style="color: var(--text-muted); margin: 0;">Please select rates or activities from the tabs above to build your booking.</p>';
+                return;
+            }
+
+            let html = '<ul style="list-style:none; padding:0; margin:0;">';
+            selectedItems.forEach(item => {
+                html += '<li style="margin-bottom: 10px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; display: flex; justify-content: space-between;">';
+                html += '<span><strong>' + item.qty + 'x</strong> ' + item.name + '</span>';
+                html += '<span style="color: var(--brand-accent); font-weight: 600;">N$ ' + item.total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '</span>';
+                html += '</li>';
+            });
+            
+            const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
+            html += '<li style="margin-top: 15px; display: flex; justify-content: space-between; font-size: 1.2rem; font-family: var(--font-head); font-weight: 600;">';
+            html += '<span>Grand Total</span>';
+            html += '<span style="color: var(--text-main);">N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '</span>';
+            html += '</li></ul>';
+            
+            summary.innerHTML = html;
+        }
+
+        function openBookingTab() {
+            switchTab(5);
+            setTimeout(() => {
+                const tab = document.getElementById('tab-5');
+                const offset = tab.getBoundingClientRect().top + window.scrollY - 100;
+                window.scrollTo({ top: offset, behavior: 'smooth' });
+            }, 100);
+        }
+
+        async function submitBooking(e) {
+            e.preventDefault();
+            
+            if (selectedItems.length === 0) {
+                alert('Please select at least one rate or activity to request a booking.');
+                return;
+            }
+
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span style="border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid #fff; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; display: inline-block; vertical-align: middle; margin-right: 10px;"></span> Sending Booking...';
+            btn.disabled = true;
+
+            const lodgeName = document.getElementById('d-title').innerText;
+            const agentEmail = document.getElementById('b-agent-email').value;
+            const status = document.getElementById('b-status').value;
+            const name = document.getElementById('b-name').value;
+            const guide = document.getElementById('b-guide').value;
+            const dateIn = document.getElementById('b-date-in').value;
+            const dateOut = document.getElementById('b-date-out').value;
+            const arriving = document.getElementById('b-arriving').value;
+            const departing = document.getElementById('b-departing').value;
+            const msg = document.getElementById('b-message').value;
+            
+            localStorage.setItem('dt_agent_email', agentEmail);
+
+            const total = selectedItems.reduce((acc, item) => acc + item.total, 0);
+            
+            // Build items HTML
+            let itemsHtml = '';
+            selectedItems.forEach(item => {
+                itemsHtml += `
+                    <div style="margin-bottom: 15px; background-color: #FAFAFA; padding: 15px; border: 1px solid #ebe6df; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 14px; color: #2d2522; line-height: 1.4;"><strong>${item.qty}x</strong> ${item.name}</span>
+                        <span style="font-size: 14px; color: #b85827; font-weight: bold; white-space: nowrap; margin-left: 15px;">N$ ${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                    </div>
+                `;
+            });
+
+            const htmlContent = `
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset="utf-8">
+            </head>
+            <body style="font-family: 'Arial', sans-serif; background-color: #FAF7F5; padding: 40px 20px; color: #2d2522; margin: 0;">
+                <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border: 1px solid #ebe6df; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(184,88,39,0.15);">
+                    <div style="background-color: #ffffff; padding: 40px 30px; text-align: center; border-bottom: 2px solid #b85827;">
+                        <h1 style="margin: 0; font-family: 'Georgia', serif; font-size: 24px; color: #b85827; letter-spacing: 4px; text-transform: uppercase; font-weight: 400;">${lodgeName}</h1>
+                        <p style="margin: 10px 0 0 0; color: #2d2522; font-size: 11px; font-weight: bold; letter-spacing: 3px; text-transform: uppercase;">${status} REQUEST</p>
+                    </div>
+                    <div style="padding: 40px 30px;">
+                        <div style="font-family: 'Georgia', serif; color: #b85827; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase;">Agent Details</div>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Consultant Email</span>
+                            <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${agentEmail}</div>
+                        </div>
+
+                        <div style="font-family: 'Georgia', serif; color: #b85827; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px;">Client & Logistics</div>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Client Name</span>
+                            <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${name}</div>
+                        </div>
+                        ${(guide && guide !== 'No') ? `
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Guide Rooms Needed</span>
+                            <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${guide}</div>
+                        </div>` : ''}
+                        
+                        <!-- Dates side by side -->
+                        <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                            <div style="flex: 1;">
+                                <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Date In</span>
+                                <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${dateIn}</div>
+                            </div>
+                            <div style="flex: 1;">
+                                <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Date Out</span>
+                                <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${dateOut}</div>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Arriving From</span>
+                            <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${arriving}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <span style="font-size: 11px; font-weight: bold; color: #6b5e59; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px; display: block;">Departing To</span>
+                            <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df;">${departing}</div>
+                        </div>
+
+                        <div style="font-family: 'Georgia', serif; color: #b85827; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px;">Selected Items</div>
+                        ${itemsHtml}
+                        
+                        <div style="display: flex; justify-content: space-between; font-family: 'Georgia', serif; font-size: 18px; font-weight: bold; padding: 20px; background-color: #FAF7F5; border: 1px solid #b85827; color: #b85827; margin-top: 20px;">
+                            <span>GRAND TOTAL</span>
+                            <span>N$ ${total.toLocaleString('en-US', {minimumFractionDigits: 2})}</span>
+                        </div>
+
+                        ${msg.trim() !== '' ? `
+                        <div style="font-family: 'Georgia', serif; color: #b85827; font-size: 18px; margin-bottom: 25px; border-bottom: 1px solid #f0ebe3; padding-bottom: 15px; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px;">Notes / Special Requirements</div>
+                        <div style="margin-bottom: 20px;">
+                            <div style="font-size: 16px; color: #2d2522; margin: 0; padding: 12px 15px; background-color: #FAFAFA; border: 1px solid #ebe6df; white-space: pre-line; line-height: 1.6;">${msg}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div style="background-color: #2d2522; color: #ffffff; text-align: center; padding: 20px; font-size: 11px; letter-spacing: 1px; text-transform: uppercase;">
+                        Automated Booking Request | LOGUFA Library
+                    </div>
+                </div>
+            </body>
+            </html>
+            `;
+
+            try {
+                const res = await fetch("/api/send_email", {
+                    method: "POST",
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        from: 'LOGUFA Bookings <onboarding@resend.dev>',
+                        to: ['jaun@desert-tracks.com'],
+                        bcc: ['bookings@desert-tracks.com'],
+                        subject: `${status.toUpperCase()} - ${lodgeName} - ${name}`,
+                        html: htmlContent,
+                        reply_to: agentEmail
+                    })
+                });
+                
+                if (res.ok) {
+                    alert('Success! Your LOGUFA booking request has been submitted to reservations. An email summary was dispatched.');
+                    document.querySelectorAll('.rate-qty').forEach(x => x.value = 0);
+                    calendarState.rangeStart = new Date();
+                    calendarState.rangeEnd = new Date();
+                    calendarState.rangeEnd.setDate(calendarState.rangeStart.getDate() + 1);
+                    renderCustomCalendar();
+                    calculateNights();
+                    updateTotal();
+                    closeProperty();
+                } else {
+                    throw new Error('Server responded with failure code.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Warning: Direct API delivery failed. Creating a text-fallback email locally instead.');
+                
+                // Fallback to mailto
+                let fallbackBody = '==================================================\n';
+                fallbackBody += status.toUpperCase() + ' REQUEST: ' + lodgeName.toUpperCase() + '\n';
+                fallbackBody += '==================================================\n\n';
+                fallbackBody += 'AGENT: ' + agentEmail + '\n\n';
+                fallbackBody += 'CLIENT: ' + name + '\n';
+                if (guide && guide !== 'No') fallbackBody += 'Guide Rooms: ' + guide + '\n';
+                fallbackBody += 'Check In: ' + dateIn + '\n';
+                fallbackBody += 'Check Out: ' + dateOut + '\n';
+                fallbackBody += 'Arriving From: ' + arriving + '\n';
+                fallbackBody += 'Departing To: ' + departing + '\n\n';
+                
+                fallbackBody += 'SELECTED ITEMS:\n';
+                selectedItems.forEach(item => {
+                    fallbackBody += `- ${item.qty}x ${item.name}: N$ ${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}\n`;
+                });
+                fallbackBody += '\nGRAND TOTAL: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '\n\n';
+                
+                if (msg.trim() !== '') {
+                    fallbackBody += 'NOTES:\n' + msg + '\n';
+                }
+                
+                const mailtoUrl = `mailto:jaun@desert-tracks.com?bcc=bookings@desert-tracks.com&subject=${encodeURIComponent(status.toUpperCase() + ' - ' + lodgeName + ' - ' + name)}&body=${encodeURIComponent(fallbackBody)}`;
+                window.location.href = mailtoUrl;
+
+                document.querySelectorAll('.rate-qty').forEach(x => x.value = 0);
+                calendarState.rangeStart = new Date();
+                calendarState.rangeEnd = new Date();
+                calendarState.rangeEnd.setDate(calendarState.rangeStart.getDate() + 1);
+                renderCustomCalendar();
+                calculateNights();
+                updateTotal();
+                closeProperty();
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        }
+
+        // PDF EXPORT HANDLER
+        window.downloadLodgePDF = function() {
+            if(!currentLodgeId || !DB[currentLodgeId]) return;
+            
+            let btn = document.querySelector('button[onclick="downloadLodgePDF()"]');
+            let originalText = btn.innerText;
+            btn.innerText = "⏳ Generating Lodge PDF...";
+            
+            const prop = DB[currentLodgeId];
+            let html = `
+            <div style="padding: 30px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
+                <h1 style="color: #111; border-bottom: 2px solid #b85827; padding-bottom: 10px; margin-bottom: 5px; font-size: 20px;">${prop.name}</h1>
+                <p style="color: #666; margin-top: 0; margin-bottom: 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;"><strong>Location:</strong> ${prop.location}</p>
+                
+                <div style="font-size: 11px; line-height: 1.5; margin-bottom: 30px; background: #f9f9f9; padding: 15px; border-left: 4px solid #ccc;">
+                    ${prop.intro}
+                </div>
+                
+                <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Accommodation Rates</h2>
+                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab1.replace(/class="accent"/g, 'style="color: #b85827; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
+                </div>
+                
+                <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Activities</h2>
+                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab2}</div>
+                </div>
+                
+                <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Policies & Info</h2>
+                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab3}</div>
+                </div>
+            </div>`;
+            
+            let container = document.createElement('div');
+            container.innerHTML = html;
+            
+            container.querySelectorAll('.raw-text, h3, h4, p, table, th, td, span, strong').forEach(el => {
+                if (el.style.color && (el.style.color.includes('fff') || el.style.color.includes('white'))) {
+                    el.style.color = '#333';
+                }
+                if (el.tagName === 'H3') {
+                    el.style.color = '#b85827';
+                    el.style.fontSize = '12px';
+                    el.style.marginTop = '15px';
+                    el.style.marginBottom = '8px';
+                    el.style.borderBottom = '1px solid #eee';
+                    el.style.paddingBottom = '4px';
+                }
+                if (el.tagName === 'H4') {
+                    el.style.color = '#111';
+                    el.style.fontSize = '11px';
+                    el.style.marginTop = '10px';
+                    el.style.marginBottom = '5px';
+                }
+                el.style.textShadow = 'none';
+                if (el.tagName === 'TH') {
+                    el.style.borderColor = '#ddd';
+                    el.style.padding = '6px';
+                    el.style.fontSize = '9px';
+                    el.style.backgroundColor = '#f9f9f9';
+                }
+                if (el.tagName === 'TD') {
+                    el.style.borderColor = '#ddd';
+                    el.style.padding = '6px';
+                    el.style.fontSize = '10px';
+                }
+                if (el.tagName === 'P' || el.classList.contains('raw-text')) {
+                    el.style.margin = '5px 0';
+                    el.style.fontSize = '10px';
+                }
+            });
+
+            const opt = {
+                margin: 0.5,
+                filename: `LOGUFA_${prop.name.replace(/\s+/g, '_')}_Rates_2026.pdf`,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(container).save().then(() => {
+                btn.innerText = originalText;
+            });
+        };
+
+        // AUTO-OPEN ACCORDING TO HASH
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && DB[hash]) {
+                openProperty(hash);
+            } else {
+                renderCustomCalendar();
+            }
+        });
+    </script>
+</body>
+</html>
