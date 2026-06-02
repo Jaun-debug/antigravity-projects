@@ -5552,6 +5552,53 @@
             }
         }
 
+        function checkHasRates(lodgeName) {
+            if (!lodgeName) return false;
+            const nameLower = lodgeName.toLowerCase().trim();
+            
+            // Check dynamic approved B2B network listings
+            if (typeof b2bNetworkState !== 'undefined' && b2bNetworkState.approvedListings) {
+                if (b2bNetworkState.approvedListings.some(l => l.companyName.toLowerCase() === nameLower)) {
+                    return true;
+                }
+            }
+
+            const inMap = (mapObj) => {
+                for (const key of Object.keys(mapObj)) {
+                    if (key.toLowerCase().trim() === nameLower) return true;
+                }
+                return false;
+            };
+            
+            const inMapLoose = (mapObj) => {
+                for (const key of Object.keys(mapObj)) {
+                    const keyLower = key.toLowerCase().trim();
+                    if (nameLower.includes(keyLower) || keyLower.includes(nameLower)) return true;
+                }
+                return false;
+            };
+
+            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, individualMap];
+            
+            for (const mapObj of maps) {
+                if (inMap(mapObj)) return true;
+            }
+            
+            for (const mapObj of maps) {
+                if (inMapLoose(mapObj)) return true;
+            }
+            
+            if (nameLower.includes('opuwo') || nameLower.includes('hobatere')) {
+                return true;
+            }
+            
+            if (nameLower.includes('car rental') || nameLower.includes('nts') || nameLower.includes('vehicle') || nameLower.includes('hilux') || nameLower.includes('safari car') || nameLower.includes('4x4')) {
+                return true;
+            }
+            
+            return false;
+        }
+
         function renderRegionPage(regionName) {
             // Normalize regionName for perfect compatibility with manual entries and deep links
             let normalizedRegion = regionName;
@@ -5631,14 +5678,19 @@
                 card.className = 'b2b-lodge-card';
                 card.setAttribute('data-lodge-name', lodge.name);
                 
+                const hasRates = checkHasRates(lodge.name);
+                
                 card.innerHTML = `
                     <div class="b2b-lodge-card-img" style="background-image: url('${lodge.image}');"></div>
                     <div class="b2b-lodge-card-content">
-                        <h4 class="lodge-card-title">${lodge.name}</h4>
-                        <p class="lodge-card-description">${lodge.description}</p>
+                        <h4 class="lodge-card-title">
+                            \${lodge.name}
+                            \${hasRates ? '<span class="rates-green-dot" title="Rates staged & active"></span>' : ''}
+                        </h4>
+                        <p class="lodge-card-description">\${lodge.description}</p>
                         <div class="b2b-lodge-card-footer">
-                            <span class="b2b-category-badge lodge">${lodge.category}</span>
-                            <button class="lodge-btn-primary" onclick="handleLodgeClick('${lodge.name.replace(/'/g, "\\'")}')">View Rates</button>
+                            <span class="b2b-category-badge lodge">\${lodge.category}</span>
+                            <button class="lodge-btn-primary" onclick="handleLodgeClick('\${lodge.name.replace(/'/g, "\\\\'")}')">View Rates</button>
                         </div>
                     </div>
                 `;
