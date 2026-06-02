@@ -249,6 +249,13 @@
             pointer-events: none;
         }
 
+        .dropdown-menu.clicked {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
         /* Show on Hover */
         .nav-item-dropdown:hover .dropdown-menu {
             display: flex;
@@ -513,57 +520,57 @@
         <!-- Navigation Links and Dropdowns on the Right -->
         <nav class="nav-links">
             <!-- Accommodation dropdown -->
-            <div class="nav-item-dropdown">
+            <div class="nav-item-dropdown" onmouseleave="this.querySelector('.dropdown-menu').classList.remove('clicked')">
                 <a href="#" class="nav-link active dropdown-toggle" id="nav-accommodation" onclick="switchTab('accommodation', this); return false;">Accommodation ▾</a>
                 <div class="dropdown-menu">
                     <div class="dropdown-column">
-                        <a href="#" onclick="navigateToRegion(0)">Sossusvlei & Namib</a>
-                        <a href="#" onclick="navigateToRegion(1)">Etosha National Park</a>
-                        <a href="#" onclick="navigateToRegion(2)">Swakopmund & Walvis Bay</a>
-                        <a href="#" onclick="navigateToRegion(3)">Windhoek & Central</a>
-                        <a href="#" onclick="navigateToRegion(4)">Damaraland</a>
-                        <a href="#" onclick="navigateToRegion(5)">Kaokoveld & Kunene</a>
-                        <a href="#" onclick="navigateToRegion(6)">Twyfelfontein</a>
-                        <a href="#" onclick="navigateToRegion(7)">Brandberg & Spitzkoppe</a>
-                        <a href="#" onclick="navigateToRegion(8)">Erongo & Omaruru</a>
+                        <a href="#" onclick="navigateToRegion(0); return false;">Sossusvlei & Namib</a>
+                        <a href="#" onclick="navigateToRegion(1); return false;">Etosha National Park</a>
+                        <a href="#" onclick="navigateToRegion(2); return false;">Swakopmund & Walvis Bay</a>
+                        <a href="#" onclick="navigateToRegion(3); return false;">Windhoek & Central</a>
+                        <a href="#" onclick="navigateToRegion(4); return false;">Damaraland</a>
+                        <a href="#" onclick="navigateToRegion(5); return false;">Kaokoveld & Kunene</a>
+                        <a href="#" onclick="navigateToRegion(6); return false;">Twyfelfontein</a>
+                        <a href="#" onclick="navigateToRegion(7); return false;">Brandberg & Spitzkoppe</a>
+                        <a href="#" onclick="navigateToRegion(8); return false;">Erongo & Omaruru</a>
                     </div>
                     <div class="dropdown-column">
-                        <a href="#" onclick="navigateToRegion(9)">Kalahari Desert</a>
-                        <a href="#" onclick="navigateToRegion(10)">Luderitz & South</a>
-                        <a href="#" onclick="navigateToRegion(11)">Caprivi & Chobe</a>
-                        <a href="#" onclick="navigateToRegion(12)">Fish River Canyon</a>
-                        <a href="#" onclick="navigateToRegion(13)">Waterberg Plateau</a>
-                        <a href="#" onclick="navigateToRegion(14)">Kalahari & Mariental</a>
-                        <a href="#" onclick="navigateToRegion(15)">Skeleton Coast</a>
-                        <a href="#" onclick="navigateToRegion(16)">Otjiwarongo & Waterberg</a>
-                        <a href="#" onclick="navigateToRegion(17)">Okonjima & Central North</a>
+                        <a href="#" onclick="navigateToRegion(9); return false;">Kalahari Desert</a>
+                        <a href="#" onclick="navigateToRegion(10); return false;">Luderitz & South</a>
+                        <a href="#" onclick="navigateToRegion(11); return false;">Caprivi & Chobe</a>
+                        <a href="#" onclick="navigateToRegion(12); return false;">Fish River Canyon</a>
+                        <a href="#" onclick="navigateToRegion(13); return false;">Waterberg Plateau</a>
+                        <a href="#" onclick="navigateToRegion(14); return false;">Kalahari & Mariental</a>
+                        <a href="#" onclick="navigateToRegion(15); return false;">Skeleton Coast</a>
+                        <a href="#" onclick="navigateToRegion(16); return false;">Otjiwarongo & Waterberg</a>
+                        <a href="#" onclick="navigateToRegion(17); return false;">Okonjima & Central North</a>
                     </div>
                 </div>
             </div>
 
             <!-- Vehicles dropdown -->
-            <div class="nav-item-dropdown">
+            <div class="nav-item-dropdown" onmouseleave="this.querySelector('.dropdown-menu').classList.remove('clicked')">
                 <a href="#" class="nav-link dropdown-toggle" id="nav-vehicle" onclick="switchTab('vehicle', this); return false;">Vehicles ▾</a>
                 <div class="dropdown-menu single-column">
-                    <a href="#" onclick="openVehicleRates('nts')">Namibia Tours & Safaris</a>
-                    <a href="#" onclick="openVehicleRates('ncr')">Namibia Car Rental</a>
-                    <a href="#" onclick="openVehicleRates('nrcr')">Namib Roos Car Rentals</a>
-                    <a href="#" onclick="openVehicleRates('zaris')">Zaris Safaris</a>
-                    <a href="#" onclick="openVehicleRates('sanga')">Sanga Group Travel</a>
-                    <a href="#" onclick="openVehicleRates('zap')">Zap Car Rental</a>
-                    <a href="#" onclick="openVehicleRates('suricate')">Suricate Safaris</a>
+                    <a href="#" onclick="openVehicleRates('nts'); return false;">Namibia Tours & Safaris</a>
+                    <a href="#" onclick="openVehicleRates('ncr'); return false;">Namibia Car Rental</a>
+                    <a href="#" onclick="openVehicleRates('nrcr'); return false;">Namib Roos Car Rentals</a>
+                    <a href="#" onclick="openVehicleRates('zaris'); return false;">Zaris Safaris</a>
+                    <a href="#" onclick="openVehicleRates('sanga'); return false;">Sanga Group Travel</a>
+                    <a href="#" onclick="openVehicleRates('zap'); return false;">Zap Car Rental</a>
+                    <a href="#" onclick="openVehicleRates('suricate'); return false;">Suricate Safaris</a>
                 </div>
             </div>
 
             <!-- Activities dropdown -->
-            <div class="nav-item-dropdown">
+            <div class="nav-item-dropdown" onmouseleave="this.querySelector('.dropdown-menu').classList.remove('clicked')">
                 <a href="#" class="nav-link dropdown-toggle" id="nav-activities" onclick="switchTab('activities', this); return false;">Activities ▾</a>
                 <div class="dropdown-menu single-column">
-                    <a href="#" onclick="openActivityRates('molamola')">Mola Mola Safaris</a>
-                    <a href="#" onclick="openActivityRates('namibsky')">Namib Sky Ballooning</a>
-                    <a href="#" onclick="openActivityRates('bogenfels')">Bogenfels Tours</a>
-                    <a href="#" onclick="openActivityRates('alteraction')">Alter Action Sandboarding</a>
-                    <a href="#" onclick="openActivityRates('desert')">Desert Explorers</a>
+                    <a href="#" onclick="openActivityRates('molamola'); return false;">Mola Mola Safaris</a>
+                    <a href="#" onclick="openActivityRates('namibsky'); return false;">Namib Sky Ballooning</a>
+                    <a href="#" onclick="openActivityRates('bogenfels'); return false;">Bogenfels Tours</a>
+                    <a href="#" onclick="openActivityRates('alteraction'); return false;">Alter Action Sandboarding</a>
+                    <a href="#" onclick="openActivityRates('desert'); return false;">Desert Explorers</a>
                 </div>
             </div>
             
@@ -1802,6 +1809,7 @@
             display: none;
             width: 100%;
             flex-direction: column;
+            position: relative;
             animation: regionFadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
 
@@ -1811,18 +1819,23 @@
         }
 
         .region-hero {
-            width: 100%;
-            height: 380px;
-            border-radius: 12px;
-            overflow: hidden;
-            position: relative;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 35px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            width: 100vw !important;
+            position: relative !important;
+            left: 50% !important;
+            right: 50% !important;
+            margin-left: -50vw !important;
+            margin-right: -50vw !important;
+            margin-top: -60px !important;
+            height: 600px !important; /* Extremely large hero pictures for stunning premium visual impact! */
+            border-radius: 0 !important; /* Touch-to-edge full width exactly like the screenshot */
+            overflow: hidden !important;
+            background-size: cover !important;
+            background-position: center !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            margin-bottom: 45px !important;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important;
         }
 
         .region-hero::before {
@@ -1832,13 +1845,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.65) 100%);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%);
             z-index: 1;
         }
 
         .region-hero h1 {
             font-family: var(--font-head);
-            font-size: 3.5rem;
+            font-size: 3.8rem;
             color: #fff;
             text-align: center;
             text-transform: uppercase;
@@ -1850,26 +1863,36 @@
         }
 
         .back-nav-btn {
+            position: absolute;
+            top: -35px; /* Floats elegantly on top of the hero banner */
+            left: 20px;
+            z-index: 10;
             display: inline-flex;
             align-items: center;
             gap: 8px;
             font-family: var(--font-head);
             text-transform: uppercase;
-            font-size: 0.8rem;
+            font-size: 0.72rem;
             letter-spacing: 1.5px;
-            color: var(--brand-accent);
+            color: #ffffff;
+            background: rgba(60, 53, 48, 0.6); /* Warm dark translucent background */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 18px;
+            border-radius: 30px;
             cursor: pointer;
-            transition: 0.3s ease;
-            margin-bottom: 25px;
-            background: transparent;
-            border: none;
-            padding: 5px 0;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
             outline: none;
         }
 
         .back-nav-btn:hover {
-            color: var(--brand-green);
+            color: #ffffff;
+            background: var(--brand-accent);
+            border-color: transparent;
             transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(164, 130, 86, 0.3);
         }
 
         .region-lodges-grid {
@@ -3460,6 +3483,8 @@
         // Duplicate navigateToRegion removed. Navigation is handled dynamically by hash router below.
 
         function openVehicleRates(supplierId) {
+            // Instantly hide open dropdown menus
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('clicked'));
             if (currentYear === '2027') {
                 showToast(`Showing 2026 vehicle rates for ${supplierId.toUpperCase()} as fallback. 2027 rates pending.`, 'warning');
                 setTimeout(() => {
@@ -3471,6 +3496,8 @@
         }
 
         function openActivityRates(activityId) {
+            // Instantly hide open dropdown menus
+            document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('clicked'));
             if (currentYear === '2027') {
                 showToast(`Showing 2026 activity rates for ${activityId.toUpperCase()} as fallback. 2027 rates pending.`, 'warning');
                 setTimeout(() => {
@@ -5287,7 +5314,8 @@
                 if (l.includes('camp') || l.includes('camping')) {
                     return 'https://images.unsplash.com/photo-1506535772-451407b4e3e9?auto=format&fit=crop&w=1200&q=80';
                 }
-                return 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80';
+                // High-resolution orange desert dunes background for Sossusvlei (replaces foggy forest)
+                return 'https://images.unsplash.com/photo-1547234935-80c7145ec969?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('etosha')) {
                 if (l.includes('camp') || l.includes('camping')) {
@@ -5305,7 +5333,8 @@
                 return 'https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('kalahari')) {
-                return 'https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80';
+                // Beautiful reddish dunes landscape background for Kalahari (replaces foggy forest)
+                return 'https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?auto=format&fit=crop&w=1200&q=80';
             }
             if (r.includes('kaokoveld') || r.includes('kunene') || r.includes('epupa')) {
                 return 'https://images.unsplash.com/photo-1502126324834-38f8e02d7160?auto=format&fit=crop&w=1200&q=80';
@@ -5375,24 +5404,24 @@
         }
 
         const regionIndexMap = [
-            "Sossusvlei & Namib",
-            "Etosha National Park",
-            "Swakopmund & Walvis Bay",
-            "Windhoek & Central",
-            "Damaraland",
-            "Kaokoveld & Kunene",
-            "Twyfelfontein",
-            "Brandberg & Spitzkoppe",
-            "Erongo & Omaruru",
-            "Kalahari Desert",
-            "Luderitz & South",
-            "Caprivi & Chobe",
-            "Fish River Canyon",
-            "Waterberg Plateau",
-            "Kalahari & Mariental",
-            "Skeleton Coast",
-            "Otjiwarongo & Waterberg",
-            "Okonjima & Central North"
+            "Sossusvlei & Namib",         // 0 -> Sossusvlei & Namib
+            "Etosha National Park",       // 1 -> Etosha National Park
+            "Swakopmund",                 // 2 -> Swakopmund
+            "Windhoek",                   // 3 -> Windhoek
+            "Damaraland",                 // 4 -> Damaraland
+            "Kaokoland",                  // 5 -> Kaokoland
+            "Damaraland",                 // 6 -> Twyfelfontein (fallback to Damaraland)
+            "Damaraland",                 // 7 -> Brandberg & Spitzkoppe (fallback to Damaraland)
+            "Central Namibia",            // 8 -> Erongo & Omaruru (fallback to Central Namibia)
+            "Kalahari",                   // 9 -> Kalahari
+            "Luderitz",                   // 10 -> Luderitz
+            "Zambezi & Caprivi",          // 11 -> Zambezi & Caprivi
+            "Fish River Canyon",          // 12 -> Fish River Canyon
+            "Central Namibia",            // 13 -> Waterberg Plateau (fallback to Central Namibia)
+            "Kalahari",                   // 14 -> Kalahari & Mariental (fallback to Kalahari)
+            "Skeleton Coast",             // 15 -> Skeleton Coast
+            "Central Namibia",            // 16 -> Otjiwarongo & Waterberg (fallback to Central Namibia)
+            "Central Namibia"             // 17 -> Okonjima & Central North (fallback to Central Namibia)
         ];
 
         function navigateToRegion(val) {
@@ -5402,6 +5431,13 @@
             } else if (typeof val === 'string' && !isNaN(val)) {
                 regionName = regionIndexMap[parseInt(val)] || val;
             }
+
+            // Instantly hide open dropdown menu to avoid overlay blocking the screen
+            const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+            dropdownMenus.forEach(menu => {
+                menu.classList.add('clicked');
+            });
+
             window.location.hash = `region/${encodeURIComponent(regionName)}`;
         }
 
@@ -5432,7 +5468,7 @@
                 const regionPageView = document.getElementById('region-page-view');
                 if (regionPageView) {
                     regionPageView.style.display = 'flex';
-                    regionPageView.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    window.scrollTo({ top: 0, behavior: 'auto' });
                 }
                 
                 const regionName = decodeURIComponent(hash.substring(8));
@@ -5453,6 +5489,8 @@
                 if (introBox) introBox.style.display = 'block';
                 if (swiperWrapper) swiperWrapper.style.display = 'block';
                 
+                window.scrollTo({ top: 0, behavior: 'auto' });
+                
                 if (regionSwiper && typeof regionSwiper.update === 'function') {
                     setTimeout(() => regionSwiper.update(), 50);
                 }
@@ -5460,22 +5498,43 @@
         }
 
         function renderRegionPage(regionName) {
+            // Normalize regionName for perfect compatibility with manual entries and deep links
+            let normalizedRegion = regionName;
+            const normMap = {
+                "Kaokoveld & Kunene": "Kaokoland",
+                "Swakopmund & Walvis Bay": "Swakopmund",
+                "Windhoek & Central": "Windhoek",
+                "Twyfelfontein": "Damaraland",
+                "Brandberg & Spitzkoppe": "Damaraland",
+                "Erongo & Omaruru": "Central Namibia",
+                "Kalahari Desert": "Kalahari",
+                "Luderitz & South": "Luderitz",
+                "Caprivi & Chobe": "Zambezi & Caprivi",
+                "Waterberg Plateau": "Central Namibia",
+                "Kalahari & Mariental": "Kalahari",
+                "Otjiwarongo & Waterberg": "Central Namibia",
+                "Okonjima & Central North": "Central Namibia"
+            };
+            if (normMap[regionName]) {
+                normalizedRegion = normMap[regionName];
+            }
+
             const heroBg = document.getElementById('region-hero-bg');
             const heroTitle = document.getElementById('region-hero-title');
-            if (heroTitle) heroTitle.innerText = regionName;
+            if (heroTitle) heroTitle.innerText = normalizedRegion.toUpperCase();
             
             if (heroBg) {
-                heroBg.style.backgroundImage = `url('${getLodgeImage('', regionName)}')`;
+                heroBg.style.backgroundImage = `url('${getLodgeImage('', normalizedRegion)}')`;
             }
             
-            // Gather standard lodges matched to regionName
-            const staticLodges = lodgesDatabase.filter(l => l.region === regionName);
+            // Gather standard lodges matched to normalizedRegion
+            const staticLodges = lodgesDatabase.filter(l => l.region === normalizedRegion);
             
             // Retrieve dynamic B2B network listings
             loadB2BNetworkState();
             const b2bListings = b2bNetworkState.approvedListings.filter(l => {
-                return l.region.toLowerCase().includes(regionName.toLowerCase()) || 
-                       regionName.toLowerCase().includes(l.region.toLowerCase());
+                return l.region.toLowerCase().includes(normalizedRegion.toLowerCase()) || 
+                       normalizedRegion.toLowerCase().includes(l.region.toLowerCase());
             });
             
             const container = document.getElementById('region-lodges-container');
