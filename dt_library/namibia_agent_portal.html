@@ -3595,18 +3595,16 @@
                 if (is2027) {
                     hasRateSheet = (lodgeName === 'Waldeck Lodge' || lodgeName === 'Cornerstone Guesthouse');
                 } else {
-                    hasRateSheet = !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
+                    hasRateSheet = checkHasRates(lodgeName);
                 }
                 
                 const originalBtn = item.querySelector('button');
                 if (hasRateSheet) {
                     const tick = document.createElement('span');
-                    tick.className = 'premium-tick';
-                    tick.innerHTML = ' •';
-                    tick.style.color = 'var(--brand-green)';
-                    tick.style.marginLeft = '6px';
-                    tick.style.fontSize = '1.4rem';
-                    tick.style.fontWeight = 'bold';
+                    tick.className = 'premium-tick rates-green-dot';
+                    tick.style.marginLeft = '8px';
+                    tick.style.marginRight = '4px';
+                    tick.style.display = 'inline-block';
                     tick.style.verticalAlign = 'middle';
                     tick.title = 'Premium Ratesheet Loaded';
                     
@@ -5578,7 +5576,7 @@
                 return false;
             };
 
-            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, individualMap];
+            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, gondwanaMap, individualMap];
             
             for (const mapObj of maps) {
                 if (inMap(mapObj)) return true;
@@ -5684,13 +5682,13 @@
                     <div class="b2b-lodge-card-img" style="background-image: url('${lodge.image}');"></div>
                     <div class="b2b-lodge-card-content">
                         <h4 class="lodge-card-title">
-                            \${lodge.name}
-                            \${hasRates ? '<span class="rates-green-dot" title="Rates staged & active"></span>' : ''}
+                            ${lodge.name}
+                            ${hasRates ? '<span class="rates-green-dot" title="Rates staged & active"></span>' : ''}
                         </h4>
-                        <p class="lodge-card-description">\${lodge.description}</p>
+                        <p class="lodge-card-description">${lodge.description}</p>
                         <div class="b2b-lodge-card-footer">
-                            <span class="b2b-category-badge lodge">\${lodge.category}</span>
-                            <button class="lodge-btn-primary" onclick="handleLodgeClick('\${lodge.name.replace(/'/g, "\\\\'")}')">View Rates</button>
+                            <span class="b2b-category-badge lodge">${lodge.category}</span>
+                            <button class="lodge-btn-primary" onclick="handleLodgeClick('${lodge.name.replace(/'/g, "\\\\'")}')">View Rates</button>
                         </div>
                     </div>
                 `;

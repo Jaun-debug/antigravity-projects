@@ -1579,7 +1579,11 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             const currentHash = window.location.hash.substring(1);
             if (currentHash) {
                 setTimeout(function() {
-                    applyPremiumDecorations(currentHash);
+                    if (typeof openProperty === 'function') {
+                        openProperty(currentHash);
+                    } else {
+                        applyPremiumDecorations(currentHash);
+                    }
                 }, 100);
             }
         })();

@@ -242,7 +242,11 @@ injection_code = """
             const currentHash = window.location.hash.substring(1);
             if (currentHash) {
                 setTimeout(function() {
-                    applyPremiumDecorations(currentHash);
+                    if (typeof openProperty === 'function') {
+                        openProperty(currentHash);
+                    } else {
+                        applyPremiumDecorations(currentHash);
+                    }
                 }, 100);
             }
         })();
