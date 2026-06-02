@@ -1951,6 +1951,45 @@
             font-weight: 500;
             margin: 0 0 10px 0;
             line-height: 1.3;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .rates-green-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #2ec866;
+            border-radius: 50%;
+            box-shadow: 0 0 8px rgba(46, 200, 102, 0.8);
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .rates-green-dot::after {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border: 1px solid #2ec866;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+            opacity: 0;
+        }
+
+        @keyframes pulse-green {
+            0% {
+                transform: scale(0.8);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
         }
 
         .b2b-lodge-card p {
