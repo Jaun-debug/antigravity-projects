@@ -38,7 +38,7 @@ injection_code = """
 
                 overlay.innerHTML = `
                     <div style="background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 45px; border-radius: 16px; box-shadow: 0 15px 45px rgba(0,0,0,0.25); max-width: 420px; width: 90%; text-align: center; border: 1px solid rgba(255,255,255,0.45); box-sizing: border-box;">
-                        <h2 style="color: rgb(164, 130, 86); font-family: 'Cinzel', serif; font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">${titleText}</h2>
+                        <h2 style="color: rgb(164, 130, 86); font-family: 'Cinzel', serif; font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">\${titleText}</h2>
                         <p style="color: #666; margin: 0 0 15px 0; font-size: 0.9rem; font-family: 'Jost', sans-serif; letter-spacing: 0.5px;">Please sign in to access the booking engine.</p>
                         <p style="color: rgb(201, 108, 40); margin: 0 0 25px 0; font-size: 0.82rem; font-family: 'Jost', sans-serif; font-style: italic; font-weight: 500;">(For the moment, to enter just press Enter)</p>
                         
@@ -258,19 +258,14 @@ for path in files_to_patch:
         
         # Check if old override exists and clean it out
         if "DYNAMIC PREMIUM RATESHEET LAYOUT OVERRIDE" in content:
-            # We want to split content at the comment and rebuild it cleanly
-            parts = content.split("<!-- DYNAMIC PREMIUM RATESHEET LAYOUT OVERRIDE")
-            header_part = parts[0]
-            # Find the closing html part
-            footer_part = parts[1].split("</html>")[1] if "</html>" in parts[1] else ""
-            content = header_part.strip() + "\\n" + footer_part.strip()
-            # If </html> was removed, make sure it is in footer
-            if not content.endswith("</html>"):
-                content += "\\n</html>"
+            # We want to split content at the comment and keep only the part before it
+            content = content.split("<!-- DYNAMIC PREMIUM RATESHEET LAYOUT OVERRIDE")[0].strip()
+            # Append closing tags back
+            content += "\n</body>\n</html>"
         
         # Now inject the new code cleanly right before </body>
         if "</body>" in content:
-            patched_content = content.replace("</body>", injection_code + "\\n</body>")
+            patched_content = content.replace("</body>", injection_code + "\n</body>")
             with open(path, "w", encoding="utf-8") as f:
                 f.write(patched_content)
             print(f"Successfully repatched {path}!")

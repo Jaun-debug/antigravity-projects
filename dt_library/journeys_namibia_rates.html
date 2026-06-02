@@ -1370,7 +1370,7 @@
                         Automated Booking Request | Journeys Namibia Library
                     </div>
                 </div>
-            
+
     <!-- DYNAMIC PREMIUM RATESHEET LAYOUT OVERRIDE (MATCHING SCREENSHOT 3 / ACTIVITY_RATES.HTML) -->
     <script>
         (function() {
@@ -1398,7 +1398,7 @@
 
                 overlay.innerHTML = `
                     <div style="background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 45px; border-radius: 16px; box-shadow: 0 15px 45px rgba(0,0,0,0.25); max-width: 420px; width: 90%; text-align: center; border: 1px solid rgba(255,255,255,0.45); box-sizing: border-box;">
-                        <h2 style="color: rgb(164, 130, 86); font-family: 'Cinzel', serif; font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">${titleText}</h2>
+                        <h2 style="color: rgb(164, 130, 86); font-family: 'Cinzel', serif; font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">\${titleText}</h2>
                         <p style="color: #666; margin: 0 0 15px 0; font-size: 0.9rem; font-family: 'Jost', sans-serif; letter-spacing: 0.5px;">Please sign in to access the booking engine.</p>
                         <p style="color: rgb(201, 108, 40); margin: 0 0 25px 0; font-size: 0.82rem; font-family: 'Jost', sans-serif; font-style: italic; font-weight: 500;">(For the moment, to enter just press Enter)</p>
                         
@@ -1607,173 +1607,6 @@
             }
         })();
     </script>
-\n</body>
-            </html>
-            `;
 
-            try {
-                const res = await fetch("/api/send_email", {
-                    method: "POST",
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        from: 'Journeys Namibia Bookings <onboarding@resend.dev>',
-                        to: ['jaun@desert-tracks.com'],
-                        bcc: ['bookings@desert-tracks.com'],
-                        subject: `${status.toUpperCase()} - ${lodgeName} - ${name}`,
-                        html: htmlContent,
-                        reply_to: agentEmail
-                    })
-                });
-                
-                if (res.ok) {
-                    alert('Success! Your Journeys Namibia booking request has been submitted to reservations. An email summary was dispatched.');
-                    document.querySelectorAll('.rate-qty').forEach(x => x.value = 0);
-                    calendarState.rangeStart = new Date();
-                    calendarState.rangeEnd = new Date();
-                    calendarState.rangeEnd.setDate(calendarState.rangeStart.getDate() + 1);
-                    renderCustomCalendar();
-                    calculateNights();
-                    updateTotal();
-                    closeProperty();
-                } else {
-                    throw new Error('Server responded with failure code.');
-                }
-            } catch (err) {
-                console.error(err);
-                alert('Warning: Direct API delivery failed. Creating a text-fallback email locally instead.');
-                
-                // Fallback to mailto
-                let fallbackBody = '==================================================\n';
-                fallbackBody += status.toUpperCase() + ' REQUEST: ' + lodgeName.toUpperCase() + '\n';
-                fallbackBody += '==================================================\n\n';
-                fallbackBody += 'AGENT: ' + agentEmail + '\n\n';
-                fallbackBody += 'CLIENT: ' + name + '\n';
-                if (guide && guide !== 'No') fallbackBody += 'Guide Rooms: ' + guide + '\n';
-                fallbackBody += 'Check In: ' + dateIn + '\n';
-                fallbackBody += 'Check Out: ' + dateOut + '\n';
-                fallbackBody += 'Arriving From: ' + arriving + '\n';
-                fallbackBody += 'Departing To: ' + departing + '\n\n';
-                
-                fallbackBody += 'SELECTED ITEMS:\n';
-                selectedItems.forEach(item => {
-                    fallbackBody += `- ${item.qty}x ${item.name}: N$ ${item.total.toLocaleString('en-US', {minimumFractionDigits: 2})}\n`;
-                });
-                fallbackBody += '\nGRAND TOTAL: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits: 2}) + '\n\n';
-                
-                if (msg.trim() !== '') {
-                    fallbackBody += 'NOTES:\n' + msg + '\n';
-                }
-                
-                const mailtoUrl = `mailto:jaun@desert-tracks.com?bcc=bookings@desert-tracks.com&subject=${encodeURIComponent(status.toUpperCase() + ' - ' + lodgeName + ' - ' + name)}&body=${encodeURIComponent(fallbackBody)}`;
-                window.location.href = mailtoUrl;
-
-                document.querySelectorAll('.rate-qty').forEach(x => x.value = 0);
-                calendarState.rangeStart = new Date();
-                calendarState.rangeEnd = new Date();
-                calendarState.rangeEnd.setDate(calendarState.rangeStart.getDate() + 1);
-                renderCustomCalendar();
-                calculateNights();
-                updateTotal();
-                closeProperty();
-            } finally {
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            }
-        }
-
-        // PDF EXPORT HANDLER
-        window.downloadLodgePDF = function() {
-            if(!currentLodgeId || !DB[currentLodgeId]) return;
-            
-            let btn = document.querySelector('button[onclick="downloadLodgePDF()"]');
-            let originalText = btn.innerText;
-            btn.innerText = "⏳ Generating Lodge PDF...";
-            
-            const prop = DB[currentLodgeId];
-            let html = `
-            <div style="padding: 30px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; background: #fff;">
-                <h1 style="color: #111; border-bottom: 2px solid #526e56; padding-bottom: 10px; margin-bottom: 5px; font-size: 20px;">${prop.name}</h1>
-                <p style="color: #666; margin-top: 0; margin-bottom: 20px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px;"><strong>Location:</strong> ${prop.location}</p>
-                
-                <div style="font-size: 11px; line-height: 1.5; margin-bottom: 30px; background: #f9f9f9; padding: 15px; border-left: 4px solid #ccc;">
-                    ${prop.intro}
-                </div>
-                
-                <div style="margin-bottom: 30px; page-break-inside: avoid;">
-                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Accommodation Rates</h2>
-                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab1.replace(/class="accent"/g, 'style="color: #526e56; font-weight: bold;"').replace(/style="[^"]*color:\s*#ffffff[^"]*"/ig, 'style="color:#333"').replace(/color:\s*#fff/ig, 'color:#333')}</div>
-                </div>
-                
-                <div style="margin-bottom: 30px; page-break-inside: avoid;">
-                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Activities</h2>
-                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab2}</div>
-                </div>
-                
-                <div style="margin-bottom: 30px; page-break-inside: avoid;">
-                    <h2 style="color: #111; border-bottom: 1px solid #ccc; padding-bottom: 5px; font-size: 14px; margin-bottom: 10px;">Policies & Info</h2>
-                    <div style="font-size: 10px; line-height: 1.5;">${prop.tab3}</div>
-                </div>
-            </div>`;
-            
-            let container = document.createElement('div');
-            container.innerHTML = html;
-            
-            container.querySelectorAll('.raw-text, h3, h4, p, table, th, td, span, strong').forEach(el => {
-                if (el.style.color && (el.style.color.includes('fff') || el.style.color.includes('white'))) {
-                    el.style.color = '#333';
-                }
-                if (el.tagName === 'H3') {
-                    el.style.color = '#526e56';
-                    el.style.fontSize = '12px';
-                    el.style.marginTop = '15px';
-                    el.style.marginBottom = '8px';
-                    el.style.borderBottom = '1px solid #eee';
-                    el.style.paddingBottom = '4px';
-                }
-                if (el.tagName === 'H4') {
-                    el.style.color = '#111';
-                    el.style.fontSize = '11px';
-                    el.style.marginTop = '10px';
-                    el.style.marginBottom = '5px';
-                }
-                el.style.textShadow = 'none';
-                if (el.tagName === 'TH') {
-                    el.style.borderColor = '#ddd';
-                    el.style.padding = '6px';
-                    el.style.fontSize = '9px';
-                    el.style.backgroundColor = '#f9f9f9';
-                }
-                if (el.tagName === 'TD') {
-                    el.style.borderColor = '#ddd';
-                    el.style.padding = '6px';
-                    el.style.fontSize = '10px';
-                }
-                if (el.tagName === 'P' || el.classList.contains('raw-text')) {
-                    el.style.margin = '5px 0';
-                    el.style.fontSize = '10px';
-                }
-            });
-
-            const opt = {
-                margin: 0.5,
-                filename: `Journeys_${prop.name.replace(/\s+/g, '_')}_Rates_2026.pdf`,
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            
-            html2pdf().set(opt).from(container).save().then(() => {
-                btn.innerText = originalText;
-            });
-        };
-
-        // AUTO-OPEN ACCORDING TO HASH
-        window.addEventListener('DOMContentLoaded', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash && DB[hash]) {
-                openProperty(hash);
-            } else {
-                renderCustomCalendar();
-            }
-        });
-    </script>\n\n</html>
+</body>
+</html>
