@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAMIBIA VEHICLE RENTAL - Pre-Negotiated STO Rates 2026/2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" data-no-optimize="1"></script>
+    <style data-no-optimize="1">
+        :root {
+            --primary-bg: #eae9e6; /* Soft Warm-Grey */
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-main: #3c3530; /* Warm Dark Charcoal */
+            --text-muted: #7d756e; /* Warm Earthy Muted */
+            --brand-accent: #a48256; /* Warm Gold Accent */
+            --brand-green: #87a996; /* Eucalyptus Sage Green */
+            --brand-charcoal: #3c3530;
+            --brand-gradient: linear-gradient(135deg, #eae9e6, #a48256, #87a996);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-border: 1px solid rgba(164, 130, 86, 0.15);
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: var(--primary-bg); 
+            color: var(--text-main); 
+            font-family: var(--font-body); 
+            -webkit-font-smoothing: antialiased; 
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; margin: 0; }
+        
+        .wrapper { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.8rem; color: var(--brand-charcoal); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
+        .header p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; border-top: 1px solid rgba(164, 130, 86, 0.3); border-bottom: 1px solid rgba(164, 130, 86, 0.3); display: inline-block; padding: 6px 20px; margin-top: 5px; }
+
+        .season-selector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .toggle-btn {
+            padding: 12px 28px;
+            border: 1px solid rgba(164, 130, 86, 0.25);
+            background: transparent;
+            color: var(--brand-charcoal);
+            font-weight: 400;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-head);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .toggle-btn.active {
+            background: var(--brand-green);
+            border-color: var(--brand-green);
+            color: #fff;
+            font-weight: 400;
+            box-shadow: 0 4px 15px rgba(135, 169, 150, 0.25);
+        }
+
+        /* SUPPLIER TABS */
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(164, 130, 86, 0.15);
+            padding-bottom: 15px;
+        }
+
+        .tab-link {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(164, 130, 86, 0.15);
+            color: var(--text-muted);
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-link:hover {
+            background: #fff;
+            border-color: var(--brand-accent);
+            color: var(--brand-accent);
+            transform: translateY(-2px);
+        }
+
+        .tab-link.active {
+            background: var(--brand-green);
+            border-color: var(--brand-green);
+            color: #fff;
+            font-weight: 400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(135, 169, 150, 0.25);
+        }
+
+        /* RATE CARD AND VIEWS */
+        .rate-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: var(--glass-border);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            margin-bottom: 40px;
+            display: none;
+        }
+
+        .rate-card.active {
+            display: block;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .supplier-info {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .supplier-info { grid-template-columns: 1fr; }
+        }
+
+        .supplier-details h2 { font-size: 2rem; color: var(--brand-charcoal); margin-bottom: 15px; font-weight: 400; }
+        .supplier-details p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; font-weight: 300; }
+
+        .supplier-quick-spec {
+            background: rgba(164, 130, 86, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px dashed rgba(164, 130, 86, 0.25);
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(164, 130, 86, 0.15);
+            font-size: 0.85rem;
+        }
+        .spec-item:last-child { border-bottom: none; }
+        .spec-label { font-weight: 400; color: var(--brand-charcoal); }
+        .spec-value { color: var(--text-muted); font-weight: 300; }
+
+        /* DATA TABLE */
+        .table-responsive { width: 100%; overflow-x: auto; margin-bottom: 30px; border-radius: 8px; border: 1px solid rgba(164, 130, 86, 0.15); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: #fff; font-size: 0.9rem; }
+        th { background: var(--brand-charcoal); color: #fff; padding: 15px 20px; font-family: var(--font-head); font-weight: 400; letter-spacing: 1px; }
+        td { padding: 15px 20px; border-bottom: 1px solid rgba(164, 130, 86, 0.1); color: var(--text-main); font-weight: 300; }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background: rgba(164, 130, 86, 0.02); }
+
+        .price-highlight { font-weight: 400; color: var(--brand-accent); }
+
+        /* BUTTONS */
+        .actions-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+        
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: var(--brand-green);
+            color: #fff;
+            font-family: var(--font-head);
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-action:hover {
+            background: var(--brand-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(164, 130, 86, 0.25);
+        }
+
+        /* INCLUSIONS EXCLUSIONS GRID */
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            background: rgba(255,255,255,0.5);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(164, 130, 86, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .terms-grid { grid-template-columns: 1fr; }
+        }
+
+        .terms-col h3 { font-size: 1.2rem; color: var(--brand-charcoal); margin-bottom: 15px; border-bottom: 2px solid var(--brand-accent); padding-bottom: 8px; font-weight: 400; }
+        .terms-col ul { padding-left: 20px; margin: 0; }
+        .terms-col li { margin-bottom: 8px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; font-weight: 300; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--brand-accent);
+            border: 1px solid rgba(164, 130, 86, 0.25);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(5px);
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            background: var(--brand-accent);
+            border-color: transparent;
+        }
+
+        /* print styles */
+        @media print {
+            body { background: #fff; color: #000; }
+            .wrapper { padding: 0; }
+            .back-btn, .tabs-container, .season-selector, .actions-bar { display: none !important; }
+            .rate-card { display: none !important; }
+            .rate-card.active { display: block !important; border: none; box-shadow: none; padding: 0; margin-bottom: 50px; page-break-after: avoid; }
+            th { background: #555 !important; color: #fff !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper" id="print-area">
+        
+        <div class="back-btn" onclick="goBackToPortal()">← Back to Portal</div>
+
+        <header class="header">
+            <h1>Vehicle Rental Services</h1>
+            <p>PRE-NEGOTIATED STO CONTRACT RATES 2026/2027</p>
+        </header>
+
+        <!-- SEASON SELECTOR -->
+        <div class="season-selector">
+            <button class="toggle-btn active" id="btn-low" onclick="setSeason('low')">Low Season (Jan - Jun)</button>
+            <button class="toggle-btn" id="btn-high" onclick="setSeason('high')">High Season (Jul - Dec)</button>
+        </div>
+
+        <!-- SUPPLIER TABS -->
+        <div class="tabs-container">
+            <button class="tab-link active" onclick="switchSupplier('nts', this)">Namibia Tours & Safaris (NTS)</button>
+            <button class="tab-link" onclick="switchSupplier('ncr', this)">Namibia Car Rental</button>
+            <button class="tab-link" onclick="switchSupplier('nrcr', this)">Namib Roos Car Rentals</button>
+            <button class="tab-link" onclick="switchSupplier('zaris', this)">Zaris Safaris</button>
+            <button class="tab-link" onclick="switchSupplier('sanga', this)">Sanga Group Travel</button>
+            <button class="tab-link" onclick="switchSupplier('zap', this)">Zap Car Rental</button>
+            <button class="tab-link" onclick="switchSupplier('suricate', this)">Suricate Safaris</button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- NTS RATES -->
+        <!-- ============================================== -->
+        <div class="rate-card active" id="supplier-nts">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Namibia Tours & Safaris (NTS)</h2>
+                    <p>Pre-negotiated STO NETT rates valid across the NTS fleet of executive Safari 4x4 off-road models and standard 4x4 SUVs. Highly suited for custom guided tours or premium self-drive adventures.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% Built-in STO NETT</span></div>
+                    <div class="spec-item"><span class="spec-label">Depots</span><span class="spec-value">Windhoek, Swakopmund</span></div>
+                    <div class="spec-item"><span class="spec-label">Min Age Limit</span><span class="spec-value">23 Years</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle Category & Description</th>
+                            <th>Rental Duration (1 - 14 Days)</th>
+                            <th>Rental Duration (15+ Days)</th>
+                            <th>Standard Excess Liability</th>
+                        </tr>
+                    </thead>
+                    <tbody class="season-view low-season">
+                        <tr><td><strong>SUV 4x4</strong> (Toyota Fortuner or similar)</td><td class="price-highlight">N$ 1,650.00 / day</td><td>N$ 1,510.00 / day</td><td>Zero (Included)</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto</strong></td><td class="price-highlight">N$ 2,160.00 / day</td><td>N$ 1,940.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual</strong></td><td class="price-highlight">N$ 3,260.00 / day</td><td>N$ 2,930.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,360.00 / day</td><td>N$ 2,130.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,550.00 / day</td><td>N$ 2,325.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,870.00 / day</td><td>N$ 2,590.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (4 Pax Camping)</strong></td><td class="price-highlight">N$ 3,065.00 / day</td><td>N$ 2,760.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 6/7-Seater</strong> (4-Window Seats)</td><td class="price-highlight">N$ 3,440.00 / day</td><td>N$ 3,100.00 / day</td><td>N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 9-Seater</strong> (6-Window Seats)</td><td class="price-highlight">N$ 3,870.00 / day</td><td>N$ 3,490.00 / day</td><td>N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 11-Seater</strong> (8 Window Seats)</td><td class="price-highlight">N$ 4,260.00 / day</td><td>N$ 3,870.00 / day</td><td>N$ 14,000.00</td></tr>
+                    </tbody>
+                    <tbody class="season-view high-season" style="display: none;">
+                        <tr><td><strong>SUV 4x4</strong> (Toyota Fortuner or similar)</td><td class="price-highlight">N$ 1,865.00 / day</td><td>N$ 1,690.00 / day</td><td>Zero (Included)</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto</strong></td><td class="price-highlight">N$ 2,520.00 / day</td><td>N$ 2,230.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual</strong></td><td class="price-highlight">N$ 3,745.00 / day</td><td>N$ 3,370.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,710.00 / day</td><td>N$ 2,420.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,905.00 / day</td><td>N$ 2,620.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (2 Pax Camping)</strong></td><td class="price-highlight">N$ 3,300.00 / day</td><td>N$ 2,980.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (4 Pax Camping)</strong></td><td class="price-highlight">N$ 3,520.00 / day</td><td>N$ 3,170.00 / day</td><td>N$ 7,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 6/7-Seater</strong> (4-Window Seats)</td><td class="price-highlight">N$ 3,970.00 / day</td><td>N$ 3,585.00 / day</td><td>N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 9-Seater</strong> (6-Window Seats)</td><td class="price-highlight">N$ 4,505.00 / day</td><td>N$ 4,065.00 / day</td><td>N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 11-Seater</strong> (8 Window Seats)</td><td class="price-highlight">N$ 4,890.00 / day</td><td>N$ 4,460.00 / day</td><td>N$ 14,000.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="terms-grid">
+                <div class="terms-col">
+                    <h3>Inclusions</h3>
+                    <ul>
+                        <li>Unlimited Mileage</li>
+                        <li>Standard Collision & Theft Cover</li>
+                        <li>24/7 Emergency Medical Response (EVAC)</li>
+                        <li>2nd Spare Tyre (Subject to Model)</li>
+                        <li>Free Airport Transfers (Complimentary)</li>
+                    </ul>
+                </div>
+                <div class="terms-col">
+                    <h3>One-Way / Delivery Fees</h3>
+                    <ul>
+                        <li>Swakopmund Delivery: N$ 4,840.00</li>
+                        <li>Etosha / Mokuti Delivery: N$ 8,160.00</li>
+                        <li>Sossusvlei / Twyfelfontein Delivery: N$ 14,520.00</li>
+                        <li>Kasane (Botswana) Dropoff: N$ 21,300.00</li>
+                        <li>Victoria Falls Dropoff: N$ 23,820.00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- NCR RATES -->
+        <!-- ============================================== -->
+        <div class="rate-card" id="supplier-ncr">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Namibia Car Rental</h2>
+                    <p>Standard and fully equipped off-road vehicles. NCR features progressive discount matrices based on duration and an optional Zero Excess package.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% STO SADC Rate</span></div>
+                    <div class="spec-item"><span class="spec-label">Depots</span><span class="spec-value">Windhoek Main Hub</span></div>
+                    <div class="spec-item"><span class="spec-label">Support</span><span class="spec-value">24-Hour Roadside Support</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle Category</th>
+                            <th>5 - 7 Days</th>
+                            <th>8 - 14 Days</th>
+                            <th>15+ Days</th>
+                            <th>Waiver Option (Super Cover)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="season-view low-season">
+                        <tr><td><strong>4x4 Jeep</strong> (2 adults)</td><td class="price-highlight">N$ 1,086.00</td><td>N$ 1,005.00</td><td>N$ 950.00</td><td>+ N$ 250.00 / day</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong> (4 adults)</td><td class="price-highlight">N$ 2,467.00</td><td>N$ 2,282.00</td><td>N$ 2,159.00</td><td>+ N$ 550.00 / day</td></tr>
+                        <tr><td><strong>Group K Toyota Hilux 4x4 Double Cab</strong></td><td class="price-highlight">N$ 2,240.00</td><td>N$ 2,072.00</td><td>N$ 1,960.00</td><td>+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,416.00</td><td>N$ 2,248.00</td><td>N$ 2,136.00</td><td>+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,496.00</td><td>N$ 2,328.00</td><td>N$ 2,216.00</td><td>+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Group O Land Cruiser 79 Series 4x4 Camping</strong></td><td class="price-highlight">N$ 2,936.00</td><td>N$ 2,741.00</td><td>N$ 2,611.00</td><td>+ N$ 300.00 / day</td></tr>
+                    </tbody>
+                    <tbody class="season-view high-season" style="display: none;">
+                        <tr><td><strong>4x4 Jeep</strong> (2 adults)</td><td class="price-highlight">N$ 1,262.00</td><td>N$ 1,181.00</td><td>N$ 1,126.00</td><td>+ N$ 250.00 / day</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong> (4 adults)</td><td class="price-highlight">N$ 2,896.00</td><td>N$ 2,704.00</td><td>N$ 2,576.00</td><td>+ N$ 550.00 / day</td></tr>
+                        <tr><td><strong>Group K Toyota Hilux 4x4 Double Cab</strong></td><td class="price-highlight">N$ 2,576.00</td><td>N$ 2,396.00</td><td>N$ 2,276.00</td><td>+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,896.00</td><td>N$ 2,704.00</td><td>N$ 2,576.00</td><td>+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,896.00</td><td>N$ 2,704.00</td><td>N$ 2,576.00</td><td>+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Group O Land Cruiser 79 Series 4x4 Camping</strong></td><td class="price-highlight">N$ 3,300.00</td><td>N$ 2,980.00</td><td>N$ 2,870.00</td><td>+ N$ 300.00 / day</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="terms-grid">
+                <div class="terms-col">
+                    <h3>Add-on Accessories</h3>
+                    <ul>
+                        <li>Baby / Child Seat: N$ 500.00 / rental</li>
+                        <li>12V Electric Fridge: N$ 110.00 / day</li>
+                        <li>GPS with Tracks4Africa: N$ 100.00 / day</li>
+                        <li>Sand Tracks / Mats: N$ 850.00 / rental</li>
+                        <li>Satellite Phone: N$ 170.00 / day</li>
+                    </ul>
+                </div>
+                <div class="terms-col">
+                    <h3>Inclusions & Policies</h3>
+                    <ul>
+                        <li>Cross Border Permits (SA, Botswana): N$ 750.00</li>
+                        <li>complimentary Windhoek International Airport transfers</li>
+                        <li>Standard excess liabilities blocked on guest cards</li>
+                        <li>Late/early delivery fee: N$ 450.00</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- NAMIB ROOS -->
+        <!-- ============================================== -->
+        <div class="rate-card" id="supplier-nrcr">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Namib Roos Car Rentals</h2>
+                    <p>Renowned for exceptionally rugged 4x4 Toyota Hiluxes and Ford Ranger Double Cabs, fully prepared to take on the harsh coastal dunes of Namibia.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% STO Negotiated</span></div>
+                    <div class="spec-item"><span class="spec-label">Windscreen Waiver</span><span class="spec-value">Yes, included in Super Cover</span></div>
+                    <div class="spec-item"><span class="spec-label">Tire Surcharge</span><span class="spec-value">N$ 260.00 / day</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle Model & Equipment</th>
+                            <th>Low Season (Jan - Jun)</th>
+                            <th>High Season (Jul - Dec)</th>
+                            <th>Standard Excess Liability</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 2,076.00 / day</td><td>N$ 2,292.00 / day</td><td>N$ 75,000.00</td></tr>
+                        <tr><td><strong>Toyota Hilux 2.4 4x4 Double Cab</strong></td><td class="price-highlight">N$ 1,596.00 / day</td><td>N$ 1,800.00 / day</td><td>N$ 75,000.00</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 Double Cab (2 Pax Camping)</strong></td><td class="price-highlight">N$ 1,696.00 / day</td><td>N$ 1,900.00 / day</td><td>N$ 75,000.00</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 Double Cab (4 Pax Camping)</strong></td><td class="price-highlight">N$ 1,800.00 / day</td><td>N$ 2,004.00 / day</td><td>N$ 75,000.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="terms-grid">
+                <div class="terms-col">
+                    <h3>Excess Reductions</h3>
+                    <ul>
+                        <li><strong>Standard Cover:</strong> Excess N$ 75,000.00</li>
+                        <li><strong>Reduced Excess (N$ 10,000.00):</strong> + N$ 360.00 / day (covers 1 tire, 1 windscreen)</li>
+                        <li><strong>Zero Excess Option:</strong> + N$ 556.00 / day (covers 2 tires, 1 windscreen)</li>
+                    </ul>
+                </div>
+                <div class="terms-col">
+                    <h3>Equipment Rental</h3>
+                    <ul>
+                        <li>2-Way Radio: N$ 70.00 / day</li>
+                        <li>Hardshell Roof Tent (1.5m): N$ 150.00 / day</li>
+                        <li>Gas Bottle (3kg): N$ 180.00 / trip</li>
+                        <li>Camping Chair: N$ 38.00 / day</li>
+                        <li>Camping Table: N$ 60.00 / day</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- ZARIS SAFARIS -->
+        <!-- ============================================== -->
+        <div class="rate-card" id="supplier-zaris">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Zaris Safaris</h2>
+                    <p>Supplying luxury Fortuner and heavy-duty Land Cruiser models designed for safe, robust family safaris.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% STO</span></div>
+                    <div class="spec-item"><span class="spec-label">Fuel Deposit</span><span class="spec-value">N$ 4,000.00 (Blocked)</span></div>
+                    <div class="spec-item"><span class="spec-label">Cross Border Permit</span><span class="spec-value">N$ 500.00</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle Model & Spec</th>
+                            <th>Low Season (1-14 Days)</th>
+                            <th>Low Season (15+ Days)</th>
+                            <th>High Season (1-14 Days)</th>
+                            <th>High Season (15+ Days)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 2,060.00</td><td>N$ 1,996.00</td><td>N$ 2,416.00</td><td>N$ 2,384.00</td></tr>
+                        <tr><td><strong>Toyota Hilux D/C 4x4 Fully Equipped</strong></td><td class="price-highlight">N$ 2,236.00</td><td>N$ 2,164.00</td><td>N$ 3,020.00</td><td>N$ 2,988.00</td></tr>
+                        <tr><td><strong>Toyota Land Cruiser D/C 4x4 Fully Equipped</strong></td><td class="price-highlight">N$ 2,640.00</td><td>N$ 2,552.00</td><td>N$ 3,412.00</td><td>N$ 3,376.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="terms-grid">
+                <div class="terms-col">
+                    <h3>Fully Equipped Inclusions</h3>
+                    <ul>
+                        <li>1x Camping Fridge / 12V Freezer</li>
+                        <li>2x Rooftop Tents with mattresses</li>
+                        <li>4x Duvets, Pillows, and Sleeping sheets</li>
+                        <li>Complete kitchen utensil box for up to 4 pax</li>
+                        <li>Foldable wash basin, gas bottle + cooker top</li>
+                    </ul>
+                </div>
+                <div class="terms-col">
+                    <h3>Cancellation Policy</h3>
+                    <ul>
+                        <li>60 - 31 Days prior: 15% non-refundable deposit lost</li>
+                        <li>30 - 16 Days prior: 50% cancellation fee</li>
+                        <li>15 - 11 Days prior: 75% cancellation fee</li>
+                        <li>10 Days or less / No-show: 100% cancellation fee</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SANGA -->
+        <!-- ============================================== -->
+        <div class="rate-card" id="supplier-sanga">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Sanga Group Travel Solutions</h2>
+                    <p>Designed for larger group safaris. Featuring large custom off-road Land Cruisers and Hino off-road safari trucks with experienced private drivers.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Vehicle Type</span><span class="spec-value">Heavy-Duty Group Transit</span></div>
+                    <div class="spec-item"><span class="spec-label">Driver Rate</span><span class="spec-value">N$ 650.00 to N$ 850.00 / day</span></div>
+                    <div class="spec-item"><span class="spec-label">Inclusions</span><span class="spec-value">Vehicle Wash, Unlimited Kms</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Heavy Duty Group Vehicle</th>
+                            <th>Low Season STO Rate</th>
+                            <th>High Season STO Rate</th>
+                            <th>Car Wash Fee (Daily)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Land Cruiser 9-Seater</strong> (Custom Safari chassis)</td><td class="price-highlight">N$ 4,505.00 / day</td><td>N$ 4,700.00 / day</td><td>N$ 65.00</td></tr>
+                        <tr><td><strong>Iveco 4x4 14-Seater</strong> (Off-road group bus)</td><td class="price-highlight">N$ 6,475.00 / day</td><td>N$ 6,780.00 / day</td><td>N$ 80.00</td></tr>
+                        <tr><td><strong>13-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight">N$ 5,980.00 / day</td><td>N$ 5,980.00 / day</td><td>N$ 80.00</td></tr>
+                        <tr><td><strong>18-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight">N$ 6,355.00 / day</td><td>N$ 6,680.00 / day</td><td>N$ 80.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="terms-grid">
+                <div class="terms-col">
+                    <h3>Guided Policies</h3>
+                    <ul>
+                        <li>Private driver is mandatory for all Sanga bookings</li>
+                        <li>Driver meals and accommodation to be arranged on-tour</li>
+                        <li>Unlimited mileage inside Namibia</li>
+                    </ul>
+                </div>
+                <div class="terms-col">
+                    <h3>Cross-Border Charges</h3>
+                    <ul>
+                        <li>Cross-border permit fee: N$ 850.00</li>
+                        <li>Allowed countries: South Africa, Botswana, Zimbabwe</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- ZAP -->
+        <!-- ============================================== -->
+        <div class="rate-card" id="supplier-zap">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Zap Car Rental</h2>
+                    <p>Clean, reliable standard rental options featuring Ford Everests, Hiluxes, and custom stretch Cruisers.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">STO Surcharge</span><span class="spec-value">Less 20% on RACK</span></div>
+                    <div class="spec-item"><span class="spec-label">Spare Tyres</span><span class="spec-value">2 Tyres Included</span></div>
+                    <div class="spec-item"><span class="spec-label">Translators</span><span class="spec-value">On-Demand German / French</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle Category</th>
+                            <th>Low Season STO Rate</th>
+                            <th>High Season STO Rate</th>
+                            <th>Low Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 2,460.00</td><td>N$ 2,760.00</td><td>N$ 2,580.00</td><td>N$ 2,880.00</td></tr>
+                        <tr><td><strong>Toyota Hilux Double Cab 4x4</strong></td><td class="price-highlight">N$ 2,460.00</td><td>N$ 2,760.00</td><td>N$ 2,580.00</td><td>N$ 2,880.00</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (Fully Camping Equipped)</strong></td><td class="price-highlight">N$ 2,740.00</td><td>N$ 3,440.00</td><td>N$ 3,288.00</td><td>N$ 4,128.00</td></tr>
+                        <tr><td><strong>Toyota Land Cruiser Double Cab 4x4</strong></td><td class="price-highlight">N$ 2,810.00</td><td>N$ 3,110.00</td><td>N$ 2,930.00</td><td>N$ 3,230.00</td></tr>
+                        <tr><td><strong>Toyota Landcruiser Stretch Safari (9-Seater)</strong></td><td class="price-highlight">N$ 3,910.00</td><td>N$ 4,210.00</td><td>N$ 3,940.00</td><td>N$ 4,240.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SURICATE -->
+        <!-- ============================================== -->
+        <div class="rate-card" id="supplier-suricate">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Suricate Safaris</h2>
+                    <p>Reliable double cabs with high-clearance GD6 motors. Ideal for couples seeking budget-friendly camping equipment packages.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">STO Commissions</span><span class="spec-value">Up to 20% Net SADC</span></div>
+                    <div class="spec-item"><span class="spec-label">Depot</span><span class="spec-value">Windhoek Central</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Vehicle & Camping Package (2025/2026 Fallback)</th>
+                            <th>6 - 14 Days</th>
+                            <th>15+ Days</th>
+                            <th>Waiver Option (Zero Excess)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Toyota Hilux GD6 D/C Standard</strong></td><td class="price-highlight">N$ 1,642.00</td><td>N$ 1,534.00</td><td>+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux GD6 D/C (2 Pax Camping)</strong></td><td class="price-highlight">N$ 1,869.00</td><td>N$ 1,802.00</td><td>+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux GD6 D/C (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,027.00</td><td>N$ 1,896.00</td><td>+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 1,857.00</td><td>N$ 1,534.00</td><td>+ N$ 590.00 / day</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ACTIONS BAR -->
+        <div class="actions-bar">
+            <button class="btn-action" onclick="window.close()">Close Document</button>
+            <button class="btn-action" onclick="printRateSheet()">Print Rate Sheet (PDF)</button>
+        </div>
+
+    </div>
+
+    <script data-no-optimize="1">
+        let activeSeason = 'low';
+        let activeSupplier = 'nts';
+
+        function setSeason(season) {
+            activeSeason = season;
+            document.getElementById('btn-low').classList.toggle('active', season === 'low');
+            document.getElementById('btn-high').classList.toggle('active', season === 'high');
+
+            document.querySelectorAll('.low-season').forEach(el => el.style.display = (season === 'low' ? '' : 'none'));
+            document.querySelectorAll('.high-season').forEach(el => el.style.display = (season === 'high' ? '' : 'none'));
+        }
+
+        function switchSupplier(supplierId, btn) {
+            activeSupplier = supplierId;
+            document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            document.querySelectorAll('.rate-card').forEach(el => el.classList.remove('active'));
+            document.getElementById('supplier-' + supplierId).classList.add('active');
+            
+            // update URL hash
+            window.location.hash = supplierId;
+        }
+
+        function printRateSheet() {
+            const element = document.getElementById('print-area');
+            const opt = {
+                margin:       10,
+                filename:     `namibia_vehicle_rates_${activeSupplier}_2026.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+            html2pdf().from(element).save();
+        }
+
+        function goBackToPortal() {
+            if (window.opener || (document.referrer && document.referrer.includes('namibia_agent_portal.html')) || window.history.length <= 2) {
+                window.close();
+                setTimeout(() => {
+                    window.location.href = 'namibia_agent_portal.html';
+                }, 100);
+            } else {
+                window.location.href = 'namibia_agent_portal.html';
+            }
+        }
+
+        // Initialize based on URL hash
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const supplierId = hash.substring(1);
+                const matchedTab = Array.from(document.querySelectorAll('.tab-link')).find(btn => {
+                    return btn.getAttribute('onclick').includes(`'${supplierId}'`);
+                });
+                if (matchedTab) {
+                    switchSupplier(supplierId, matchedTab);
+                }
+                
+                // Hide tabs container if opened directly with a hash
+                const tabsContainer = document.querySelector('.tabs-container');
+                if (tabsContainer) {
+                    tabsContainer.style.display = 'none';
+                }
+            }
+
+            // Adjust back button text based on entry context
+            const backBtn = document.querySelector('.back-btn');
+            if (backBtn) {
+                if (window.opener || (document.referrer && document.referrer.includes('namibia_agent_portal.html')) || window.history.length <= 2) {
+                    backBtn.innerText = '← Close & Return to Portal';
+                } else {
+                    backBtn.innerText = '← Back to Portal';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
