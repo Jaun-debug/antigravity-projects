@@ -3298,7 +3298,9 @@
             'Twyfelfontein Adventure Camp': 'ondili_rates_booking.html#twyfelfontein',
             'Hohenstein Lodge': 'ondili_rates_booking.html#hohenstein',
             'Kalahari Red Dunes Lodge': 'ondili_rates_booking.html#kalaharired',
-            'Teufelskrallen Lodge': 'ondili_rates_booking.html#teufelskrallen'
+            'Teufelskrallen Lodge': 'ondili_rates_booking.html#teufelskrallen',
+            'Etosha Oberland Lodge': 'ondili_rates_booking.html#etoshaoberland',
+            'Timelen': 'ondili_rates_booking.html#timelen'
         };
         const jnMap = {
             'Fish River Lodge': 'journeys_namibia_rates.html#fishriver',
@@ -3320,43 +3322,9 @@
             'Mushara Bush Camp': 'mushara_rates.html#musharabush',
             'Villa Mushara': 'mushara_rates.html#villamushara'
         };
-        const gondwanaMap = {
-            'Okapuka Safari Lodge': 'gondwana_rates.html#okapuka',
-            'The Weinberg': 'gondwana_rates.html#weinberg',
-            'The Weinberg Urban Pod': 'gondwana_rates.html#weinberg_pod',
-            'Kalahari Anib Lodge': 'gondwana_rates.html#kalahari_anib',
-            'Kalahari Camping2go': 'gondwana_rates.html#kalahari_camping2go',
-            'Reverie Kalahari Pod': 'gondwana_rates.html#kalahari_pod',
-            'Kalahari Farmhouse': 'gondwana_rates.html#kalahari_farmhouse',
-            'Canyon Lodge': 'gondwana_rates.html#canyon_lodge',
-            'Canyon Village': 'gondwana_rates.html#canyon_village',
-            'Canyon Roadhouse': 'gondwana_rates.html#canyon_roadhouse',
-            'Namib Desert Lodge': 'gondwana_rates.html#namib_desert',
-            'Namib Desert Camping2go': 'gondwana_rates.html#namib_camping2go',
-            'Namib Dune Star Camp': 'gondwana_rates.html#namib_dunestar',
-            'The Desert Grace': 'gondwana_rates.html#desert_grace',
-            'Desert Whisper': 'gondwana_rates.html#desert_whisper',
-            'The Delight Swakopmund': 'gondwana_rates.html#delight',
-            'The Pearls Beach Pods': 'gondwana_rates.html#pearls',
-            'Damara Mopane Lodge': 'gondwana_rates.html#damara_mopane',
-            'Palmwag Lodge': 'gondwana_rates.html#palmwag_lodge',
-            'Palmwag Camping2go': 'gondwana_rates.html#palmwag_camping2go',
-            'Palmwag Under-Canvas Sleep-Out': 'gondwana_rates.html#palmwag_sleepout',
-            'Omarunga Epupa-Falls Camp': 'gondwana_rates.html#omarunga',
-            'Etosha Safari Lodge': 'gondwana_rates.html#etosha_safari_lodge',
-            'The Ekipa Etosha Pod': 'gondwana_rates.html#etosha_pod',
-            'Etosha Safari Camp': 'gondwana_rates.html#etosha_safari_camp',
-            'Etosha Safari Camping2go': 'gondwana_rates.html#etosha_camping2go',
-            'Etosha King Nehale': 'gondwana_rates.html#etosha_king_nehale',
-            'Hakusembe River Lodge': 'gondwana_rates.html#hakusembe_lodge',
-            'Hakusembe Camping2go': 'gondwana_rates.html#hakusembe_camping2go',
-            'Namushasha River Lodge': 'gondwana_rates.html#namushasha_lodge',
-            'Namushasha River Camping2go': 'gondwana_rates.html#namushasha_camping2go',
-            'Namushasha River Villa': 'gondwana_rates.html#namushasha_villa',
-            'Zambezi Mubala Camp': 'gondwana_rates.html#zambezi_mubala_camp',
-            'Zambezi Mubala Lodge': 'gondwana_rates.html#zambezi_mubala_lodge',
-            'Chobe River Camp': 'gondwana_rates.html#chobe_river'
-        };
+        // gondwanaMap intentionally empty — gondwana_rates.html not yet available.
+        // These lodges will show "Rates coming soon" toast when clicked.
+        const gondwanaMap = {};
         const individualMap = {
             'Ababis Guest Farm': 'individual_rates.html#ababis',
             'Africa Safari Lodge': 'individual_rates.html#africasafari',
@@ -3409,7 +3377,19 @@
             'Ongava Tented Camp': 'individual_rates.html#ongavatented',
             'Ongava Research Centre': 'individual_rates.html#ongavaresearch',
             'Little Ongava': 'individual_rates.html#littleongava',
-            'Anderssons at Ongava': 'individual_rates.html#anderssonsongava'
+            'Anderssons at Ongava': 'individual_rates.html#anderssonsongava',
+            'Kaoko Mopane Lodge': 'individual_rates.html#kaoko',
+            'Kaoko Mopane Lodge & Camping': 'individual_rates.html#kaoko',
+            'Moon Mountain Lodge': 'individual_rates.html#moonmountain',
+            'Namib Guesthouse': 'individual_rates.html#namibguesthouse',
+            'Nooishof': 'individual_rates.html#nooishof',
+            'Ohorongo Safari Lodge': 'individual_rates.html#ohorongo',
+            'Ohorongo Game and Safari Lodge': 'individual_rates.html#ohorongo',
+            'Okonjima': 'individual_rates.html#okonjima',
+            'Okonjima Nature Reserve': 'individual_rates.html#okonjima',
+            'Okonjima Plains Camp': 'individual_rates.html#okonjima',
+            'Okonjima Bush Camp': 'individual_rates.html#okonjima',
+            'Okonjima African Villa': 'individual_rates.html#okonjima'
         };
 
         // Year State Management
@@ -4720,17 +4700,6 @@
                       findInMap(individualMap);
             
             if (url) return url;
-            
-            // Loose / substring mapping fallback
-            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, gondwanaMap, individualMap];
-            for (const mapObj of maps) {
-                for (const key of Object.keys(mapObj)) {
-                    const keyLower = key.toLowerCase().trim();
-                    if (nameLower.includes(keyLower) || keyLower.includes(nameLower)) {
-                        return mapObj[key];
-                    }
-                }
-            }
 
             // Opuwo Country Lodge is in individual_rates.html#opuwocountry
             if (nameLower.includes('opuwo')) {
