@@ -522,29 +522,15 @@
             <!-- Accommodation dropdown -->
             <div class="nav-item-dropdown" onmouseleave="this.querySelector('.dropdown-menu').classList.remove('clicked')">
                 <a href="#" class="nav-link active dropdown-toggle" id="nav-accommodation" onclick="switchTab('accommodation', this); return false;">Accommodation ▾</a>
-                <div class="dropdown-menu">
-                    <div class="dropdown-column">
-                        <a href="#" onclick="navigateToRegion(0); return false;">Sossusvlei & Namib</a>
-                        <a href="#" onclick="navigateToRegion(1); return false;">Etosha National Park</a>
-                        <a href="#" onclick="navigateToRegion(2); return false;">Swakopmund & Walvis Bay</a>
-                        <a href="#" onclick="navigateToRegion(3); return false;">Windhoek & Central</a>
-                        <a href="#" onclick="navigateToRegion(4); return false;">Damaraland</a>
-                        <a href="#" onclick="navigateToRegion(5); return false;">Kaokoveld & Kunene</a>
-                        <a href="#" onclick="navigateToRegion(6); return false;">Twyfelfontein</a>
-                        <a href="#" onclick="navigateToRegion(7); return false;">Brandberg & Spitzkoppe</a>
-                        <a href="#" onclick="navigateToRegion(8); return false;">Erongo & Omaruru</a>
-                    </div>
-                    <div class="dropdown-column">
-                        <a href="#" onclick="navigateToRegion(9); return false;">Kalahari Desert</a>
-                        <a href="#" onclick="navigateToRegion(10); return false;">Luderitz & South</a>
-                        <a href="#" onclick="navigateToRegion(11); return false;">Caprivi & Chobe</a>
-                        <a href="#" onclick="navigateToRegion(12); return false;">Fish River Canyon</a>
-                        <a href="#" onclick="navigateToRegion(13); return false;">Waterberg Plateau</a>
-                        <a href="#" onclick="navigateToRegion(14); return false;">Kalahari & Mariental</a>
-                        <a href="#" onclick="navigateToRegion(15); return false;">Skeleton Coast</a>
-                        <a href="#" onclick="navigateToRegion(16); return false;">Otjiwarongo & Waterberg</a>
-                        <a href="#" onclick="navigateToRegion(17); return false;">Okonjima & Central North</a>
-                    </div>
+                <div class="dropdown-menu single-column">
+                    <a href="#" onclick="navigateToRegion('Sossusvlei & Namib'); return false;">Sossusvlei & Namib</a>
+                    <a href="#" onclick="navigateToRegion('Damaraland'); return false;">Damaraland</a>
+                    <a href="#" onclick="navigateToRegion('Central Namibia'); return false;">Central Namibia</a>
+                    <a href="#" onclick="navigateToRegion('Swakopmund'); return false;">Swakopmund</a>
+                    <a href="#" onclick="navigateToRegion('Kalahari'); return false;">Kalahari</a>
+                    <a href="#" onclick="navigateToRegion('South Etosha'); return false;">South Etosha</a>
+                    <a href="#" onclick="navigateToRegion('East Etosha'); return false;">East Etosha</a>
+                    <a href="#" onclick="navigateToRegion('Windhoek'); return false;">Windhoek</a>
                 </div>
             </div>
 
@@ -615,108 +601,16 @@
         <div class="swiper-container-wrapper">
             <div class="swiper region-swiper">
                 <div class="swiper-wrapper">
-            
             <!-- REGION 1 -->
             <div class="region-card swiper-slide">
                 <div class="region-image" style="background-image: url('images/regions/sossusvlei.jpg');">
                     <h3>Sossusvlei & Namib</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Sossusvlei Lodge')">Sossusvlei Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Camp')">Desert Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Quiver Camp')">Desert Quiver Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hoodia Lodge')">Hoodia Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Moon Mountain Lodge')">Moon Mountain Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Elegant Desert Lodge')">Elegant Desert Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Desert Homestead Lodge')">Desert Homestead Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Desert Homestead Outpost')">Desert Homestead Outpost<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Le Mirage Resort & Spa')">Le Mirage Resort & Spa<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sossus Dune Lodge')">Sossus Dune Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wolwedans Dunes Lodge')">Wolwedans Dunes Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kulala Desert Lodge')">Kulala Desert Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Little Kulala')">Little Kulala<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sossusvlei Desert Lodge')">Sossusvlei Desert Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Agama River Camp')">Agama River Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Rostock Ritz Desert Lodge')">Rostock Ritz Desert Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Solitaire Desert Farm')">Solitaire Desert Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Solitaire Camping2go')">Solitaire Camping2go<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Agama Camping')">Agama Camping<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sossusvlei Lodge Adventure Camp')">Sossusvlei Lodge Adventure Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Camp Camping')">Desert Camp Camping<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Greenfire Desert Lodge')">Greenfire Desert Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kanaan Desert Retreat')">Kanaan Desert Retreat<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Agama Lodge')">Agama Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Barkhan Dune Retreat')">Barkhan Dune Retreat<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ababis Guest Farm')">Ababis Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Little Sossus Lodge')">Little Sossus Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Tsauchab River Camp')">Tsauchab River Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wilderness Kulala Desert Lodge')">Wilderness Kulala Desert Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sossus Oasis Campsite')">Sossus Oasis Campsite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('andBeyond Sossusvlei Desert Lodge')">andBeyond Sossusvlei Desert Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Namib Outpost')">Namib Outpost<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Elegant Desert Camp')">Elegant Desert Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Whisper')">Desert Whisper<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Namib Dune Star Camp')">Namib Dune Star Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('The Desert Grace')">The Desert Grace<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Namib Sky Balloon Safaris')">Namib Sky Balloon Safaris<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wolwedans Boulders Camp')">Wolwedans Boulders Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wolwedans Plains Camp')">Wolwedans Plains Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wolwedans Mountain View Suite')">Wolwedans Mountain View Suite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kwessi Dunes')">Kwessi Dunes<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zannier Sonop')">Zannier Sonop<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 2 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/etosha.jpg');">
-                    <h3>Etosha National Park</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Etosha Gateway')">Etosha Gateway<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Halali Resort')">Halali Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Etosha King Nehale')">Etosha King Nehale<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 3 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/caprivi.jpg');">
-                    <h3>Zambezi & Caprivi</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Tambuti Lodge')">Tambuti Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kayova River Lodge')">Kayova River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ngandu Safari Lodge')">Ngandu Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mazambala Island Lodge')">Mazambala Island Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Camp Kwando')">Camp Kwando<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Lianshulu Lodge')">Lianshulu Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Lianshulu Bush Lodge')">Lianshulu Bush Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mudumu River Camp')">Mudumu River Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Namushasha River Camping2go')">Namushasha River Camping2go<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zambezi Mubala Camping2go')">Zambezi Mubala Camping2go<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Chobe Savannah Lodge')">Chobe Savannah Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Impalila Island Lodge')">Impalila Island Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ichingo Chobe River Lodge')">Ichingo Chobe River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Shametu River Lodge')">Shametu River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Popa Falls Resort')">Popa Falls Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Nunda River Lodge')">Nunda River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mahangu Safari Lodge')">Mahangu Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ndhovu Safari Lodge')">Ndhovu Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Simanya River Lodge')">Simanya River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('White Sands Caprivi')">White Sands Caprivi<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Susuwe Island Lodge')">Susuwe Island Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Chobe River Camp')">Chobe River Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Jackalberry Tented Camp')">Jackalberry Tented Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Nkasa Lupala Tented Lodge')">Nkasa Lupala Tented Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zambezi Queen')">Zambezi Queen<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zambezi Mubala Camp')">Zambezi Mubala Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zambezi Mubala Lodge')">Zambezi Mubala Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ntunda Lodge')">Ntunda Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mango Guesthouse')">Mango Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hakusembe River Lodge')">Hakusembe River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Chobe Princess')">Chobe Princess<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Nkasa Linyanti')">Nkasa Linyanti<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -726,29 +620,6 @@
                     <h3>Damaraland</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Damaraland Camp')">Damaraland Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mowani Mountain Camp')">Mowani Mountain Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Camp Kipwe')">Camp Kipwe<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Grootberg Lodge')">Grootberg Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hoada Campsite')">Hoada Campsite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Palmwag Lodge')">Palmwag Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Twyfelfontein Country Lodge')">Twyfelfontein Country Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Doro Nawas Camp')">Doro Nawas Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Vingerklip Lodge')">Vingerklip Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Huab Lodge')">Huab Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ugab Terrace Lodge')">Ugab Terrace Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ondjamba Hills')">Ondjamba Hills<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Khorixas Lodge')">Khorixas Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('iGowati Country Hotel')">iGowati Country Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Uis Elephant')">Uis Elephant<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Damara Mopane Lodge')">Damara Mopane Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Spitzkoppen Lodge')">Spitzkoppen Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Spitzkoppe Cabin Camp')">Spitzkoppe Cabin Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Spitzkoppe Restcamp')">Spitzkoppe Restcamp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Etendeka Mountain Camp')">Etendeka Mountain Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wilderness Doro Nawas')">Wilderness Doro Nawas<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wilderness Damaraland Camp')">Wilderness Damaraland Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wilderness Desert Rhino Camp')">Wilderness Desert Rhino Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Twyfelfontein Adventure Camp')">Twyfelfontein Adventure Camp<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
@@ -759,51 +630,8 @@
                     <h3>Central Namibia</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Gabuse Guest House')">Gabuse Guest House<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Khorab Safari Lodge')">Khorab Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okonjima Plains Camp')">Okonjima Plains Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okonjima Bush Camp')">Okonjima Bush Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Waterberg Plateau Lodge')">Waterberg Plateau Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Waterberg Wilderness')">Waterberg Wilderness<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Waterberg Valley Lodge')">Waterberg Valley Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mount Etjo Safari Lodge')">Mount Etjo Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Frans Indongo Lodge')">Frans Indongo Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Otjiwa Safari Lodge')">Otjiwa Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Epako Safari Lodge')">Epako Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Erongo Plateau Camp')">Erongo Plateau Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okahandja Country Hotel')">Okahandja Country Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Midgard Country Estate')">Midgard Country Estate<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Minen Hotel')">Minen Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Uris Safari Lodge')">Uris Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Tsumeb Guesthouse')">Tsumeb Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Otjiwarongo Guesthouse')">Otjiwarongo Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('C\'est Si Bon Hotel')">C'est Si Bon Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kamaku Guesthouse')">Kamaku Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hadassa Guesthouse')">Hadassa Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Casa Forno Guesthouse')">Casa Forno Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Tsumeb Guesthouse Garden')">Tsumeb Guesthouse Garden<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kupferquelle Resort')">Kupferquelle Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Aloegrove Safari Lodge')">Aloegrove Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Erongo Rocks')">Erongo Rocks<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ondudu Safari Lodge')">Ondudu Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Gabus Safari Lodge')">Gabus Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ghaub')">Ghaub<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ohorongo Game and Safari Lodge')">Ohorongo Game and Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ai Aiba Rock Painting Lodge')">Ai Aiba Rock Painting Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Dune Safari')">Desert Dune Safari<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Etusis Lodge')">Etusis Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Evening Shade')">Evening Shade<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Hohenstein Lodge')">Hohenstein Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Immenhof Guest Farm')">Immenhof Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kashana Namibia')">Kashana Namibia<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Dornhuegel Guestfarm')">Dornhuegel Guestfarm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Gabus Game Ranch')">Gabus Game Ranch<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Haus Mopanie')">Haus Mopanie<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('La Rochelle Lodge')">La Rochelle Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ohange Lodge')">Ohange Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okonjima Bush Suite')">Okonjima Bush Suite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okonjima Luxury Bush Camp')">Okonjima Luxury Bush Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okonjima Villa')">Okonjima Villa<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -813,100 +641,7 @@
                     <h3>Swakopmund</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Hansa Hotel')">Hansa Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Strand Hotel Swakopmund')">Strand Hotel Swakopmund<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('The Delight Swakopmund')">The Delight Swakopmund<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Swakopmund Hotel')">Swakopmund Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Beach Hotel Swakopmund')">Beach Hotel Swakopmund<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Pelican Bay Hotel')">Pelican Bay Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Protea Hotel Walvis Bay')">Protea Hotel Walvis Bay<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Burning Shore Lodge')">Burning Shore Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Breeze Lodge')">Desert Breeze Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hotel Pension A la Mer')">Hotel Pension A la Mer<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hotel Zum Kaiser')">Hotel Zum Kaiser<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sea Breeze Guesthouse')">Sea Breeze Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Flamingo Villa Boutique Hotel')">Flamingo Villa Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Henties Bay Caravan Park')">Henties Bay Caravan Park<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Atlantic Villa')">Atlantic Villa<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Namib Guesthouse')">Namib Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Organic Stay')">Organic Stay<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Oyster Box Guesthouse')">Oyster Box Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('The Rez')">The Rez<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Pelican Point Lodge')">Pelican Point Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Cornerstone Guesthouse')">Cornerstone Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Beach Lodge')">Beach Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Swakopmund Sands Hotel')">Swakopmund Sands Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Brigadoon Boutique Guesthouse')">Brigadoon Boutique Guesthouse<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 7 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/sossusvlei.jpg');">
-                    <h3>Skeleton Coast</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Shipwreck Lodge')">Shipwreck Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Terrace Bay Resort')">Terrace Bay Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Torra Bay Campsite')">Torra Bay Campsite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Cape Cross Lodge')">Cape Cross Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wilderness Hoanib Skeleton Coast Camp')">Wilderness Hoanib Skeleton Coast Camp<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 8 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/etosha.jpg');">
-                    <h3>West Etosha</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Hobatere Lodge')">Hobatere Lodge<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 9 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/caprivi.jpg');">
-                    <h3>Epupa</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Epupa Camp')">Epupa Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Omarunga Epupa Falls Camp')">Omarunga Epupa Falls Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kapika Waterfall Lodge')">Kapika Waterfall Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Epupa Falls Lodge')">Epupa Falls Lodge<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 10 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/damaraland.jpg');">
-                    <h3>Kaokoland</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Okahirongo Elephant Lodge')">Okahirongo Elephant Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okahirongo River Camp')">Okahirongo River Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Khowarib Lodge')">Khowarib Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sesfontein Guesthouse')">Sesfontein Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Okahirongo Elephant Lodge (Luxury)')">Okahirongo Elephant Lodge (Luxury)<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Purros Bush Camp')">Purros Bush Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Wilderness Serra Cafema')">Wilderness Serra Cafema<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hoanib Valley Camp')">Hoanib Valley Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hoanib Elephant Camp')">Hoanib Elephant Camp<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 11 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/south.jpg');">
-                    <h3>Luderitz</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Luderitz Nest Hotel')">Luderitz Nest Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kairos Cottage')">Kairos Cottage<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Island Cottage')">Island Cottage<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Luderitz Backpackers')">Luderitz Backpackers<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Shark Island Resort')">Shark Island Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Alte Villa 2025')">Alte Villa 2025<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -916,83 +651,8 @@
                     <h3>Kalahari</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Bagatelle Kalahari Game Ranch')">Bagatelle Kalahari Game Ranch<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kalahari Anib Lodge')">Kalahari Anib Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kalahari Farmhouse')">Kalahari Farmhouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Camelthorn Kalahari Lodge')">Camelthorn Kalahari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zebra Kalahari Lodge')">Zebra Kalahari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Suricate Tented Kalahari Lodge')">Suricate Tented Kalahari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Lapa Lange Game Lodge')">Lapa Lange Game Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Anib Lodge')">Anib Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Intu Afrika Camelthorn Lodge')">Intu Afrika Camelthorn Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Zelda Game & Guest Farm')">Zelda Game & Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kalahari Bush Breaks')">Kalahari Bush Breaks<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Burgsdorf Guest Farm')">Burgsdorf Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Helmeringhausen Hotel')">Helmeringhausen Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Namibgrens Guest Farm')">Namibgrens Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Gibeon Folk Hotel')">Gibeon Folk Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Duwisib Guest Farm')">Duwisib Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Africa Safari Lodge')">Africa Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Auob Country Lodge')">Auob Country Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kalahari Game Lodge')">Kalahari Game Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Harnas Wildlife Foundation')">Harnas Wildlife Foundation<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Terra Rouge Guest Farm')">Terra Rouge Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Guest Farm Kiripotib')">Guest Farm Kiripotib<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Kalahari Red Dunes Lodge')">Kalahari Red Dunes Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Teufelskrallen Lodge')">Teufelskrallen Lodge<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 13 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/south.jpg');">
-                    <h3>Fish River Canyon</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Seeheim Hotel')">Seeheim Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Garas Park Quivertree')">Garas Park Quivertree<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Garas Park')">Garas Park<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Seeheim Hotel (Adventure)')">Seeheim Hotel (Adventure)<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Bethanie Guesthouse')">Bethanie Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Alte Kalkofen Lodge')">Alte Kalkofen Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Bahnhof Hotel Aus')">Bahnhof Hotel Aus<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Nooishof')">Nooishof<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Norotshama River Resort')">Norotshama River Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Canyon Lodge')">Canyon Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Canyon Roadhouse')">Canyon Roadhouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Fish River Lodge')">Fish River Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Koiimasis Fest-Inn-Fels Farmlodge')">Koiimasis Fest-Inn-Fels Farmlodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Canyon Village')">Canyon Village<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Goibib Mountain Lodge')">Goibib Mountain Lodge<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 14 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/damaraland.jpg');">
-                    <h3>Opuwo</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Opuwo Country Lodge')">Opuwo Country Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Kaoko Mopane Lodge')">Kaoko Mopane Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Forgotten Valley (Ekoto Camp)')">Forgotten Valley (Ekoto Camp)<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
-            <!-- REGION 15 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/caprivi.jpg');">
-                    <h3>Botswana</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Chobe Game Lodge')">
-                        Chobe Game Lodge
-                        <button class="lodge-btn">Rates</button>
-                    </div>
-                    <div class="lodge-item" onclick="openLogin('Camp Okavango')">
-                        Camp Okavango
-                        <button class="lodge-btn">Rates</button>
-                    </div>
                 </div>
             </div>
 
@@ -1002,16 +662,7 @@
                     <h3>South Etosha</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Taleni Etosha Village')">Taleni Etosha Village<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Toshari Lodge')">Toshari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Epacha Game Lodge & Spa')">Epacha Game Lodge & Spa<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Eagle Tented Lodge & Spa')">Eagle Tented Lodge & Spa<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ongava Lodge')">Ongava Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ongava Tented Camp')">Ongava Tented Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ongava Research Centre')">Ongava Research Centre<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Little Ongava')">Little Ongava<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Anderssons at Ongava')">Anderssons at Ongava<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Eldorado Guest Farm')">Eldorado Guest Farm<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Etosha Oberland Lodge')">Etosha Oberland Lodge<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -1021,21 +672,7 @@
                     <h3>East Etosha</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Onguma The Fort')">Onguma The Fort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Onguma Bush Camp')">Onguma Bush Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Onguma Tented Camp')">Onguma Tented Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Onguma Tree Top Camp')">Onguma Tree Top Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Onguma Camp Kala')">Onguma Camp Kala<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Onguma Leadwood Campsite')">Onguma Leadwood Campsite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Onguma Tamboti Campsite')">Onguma Tamboti Campsite<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mushara Lodge')">Mushara Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mushara Outpost')">Mushara Outpost<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Mushara Bush Camp')">Mushara Bush Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Villa Mushara')">Villa Mushara<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Emanya at Etosha')">Emanya at Etosha<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Mokuti Etosha')">Mokuti Etosha<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Sachsenheim Guestfarm')">Sachsenheim Guestfarm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Namutoni Resort')">Namutoni Resort<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -1045,40 +682,10 @@
                     <h3>Windhoek</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Am Weinberg Boutique Hotel')">Am Weinberg Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('The Weinberg Windhoek')">The Weinberg Windhoek<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hotel Thule')">Hotel Thule<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Arebbusch Travel Lodge')">Arebbusch Travel Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Galton House')">Galton House<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hilton Windhoek')">Hilton Windhoek<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Olive Grove Guesthouse')">Olive Grove Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('The Olive Exclusive')">The Olive Exclusive<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Tenbergen Pension Hotel')">Tenbergen Pension Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Windhoek Country Club Resort')">Windhoek Country Club Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Avani Windhoek Hotel & Casino')">Avani Windhoek Hotel & Casino<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('River Crossing Lodge')">River Crossing Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Utopia Boutique Hotel')">Utopia Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Town Lodge Windhoek')">Town Lodge Windhoek<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Safari Court Hotel')">Safari Court Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hotel Safari')">Hotel Safari<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Protea Hotel by Marriott Windhoek Furstenhof')">Protea Hotel by Marriott Windhoek Furstenhof<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Protea Hotel Thuringerhof')">Protea Hotel Thuringerhof<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('GocheGanas Nature Reserve')">GocheGanas Nature Reserve<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Naankuse Lodge')">Naankuse Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Omaanda')">Omaanda<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('N/a’an ku sê Lodge')">N/a’an ku sê Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Voigtland Guesthouse')">Voigtland Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ondekaremba Guest Farm')">Ondekaremba Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Auas Safari Lodge')">Auas Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Droombos Estate')">Droombos Estate<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Heinitzburg Boutique Hotel')">Heinitzburg Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hohewarte Guestfarm')">Hohewarte Guestfarm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Belvedere Boutique Hotel')">Belvedere Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Waldeck Lodge')">Waldeck Lodge<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Timelen')">Timelen<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
-
-                </div>
+            </div>
             </div>
             <!-- Navigation Arrows -->
             <div class="swiper-button-next" style="color: var(--brand-accent); right: 0px;"></div>
@@ -1274,14 +881,9 @@
                 <input type="text" id="agent-username-input" placeholder="e.g. ultimate" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(164, 130, 86, 0.3); font-weight: 300; font-family: var(--font-body); font-size: 1.15rem; color: var(--text-main); outline: none; padding: 5px 0; transition: 0.3s;" onfocus="this.style.borderColor='var(--brand-accent)';" onblur="this.style.borderColor='rgba(164, 130, 86, 0.3)';" onkeydown="if(event.key === 'Enter') submitAgentLogin()">
             </div>
             
-            <div style="margin-bottom: 25px; text-align: left;">
-                <div style="font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 5px; font-weight: 500;">Password</div>
-                <input type="password" id="agent-password-input" placeholder="••••••••" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(164, 130, 86, 0.3); font-weight: 300; font-family: var(--font-body); font-size: 1.15rem; color: var(--text-main); outline: none; padding: 5px 0; transition: 0.3s;" onfocus="this.style.borderColor='var(--brand-accent)';" onblur="this.style.borderColor='rgba(164, 130, 86, 0.3)';" onkeydown="if(event.key === 'Enter') submitAgentLogin()">
-            </div>
-
             <!-- Testing Credentials Helper Tooltip -->
             <div style="background: rgba(135, 169, 150, 0.08); border: 1px dashed rgba(135, 169, 150, 0.3); border-radius: 5px; padding: 12px; margin-bottom: 25px; text-align: left; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; font-family: var(--font-body);">
-                <span style="font-weight: 600; color: var(--brand-green); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; font-size: 0.7rem;">Quick Tester Logins (No password needed!):</span>
+                <span style="font-weight: 600; color: var(--brand-green); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; font-size: 0.7rem;">Quick Tester Logins:</span>
                 <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px;">
                     <button type="button" onclick="document.getElementById('agent-username-input').value='ultimate'; submitAgentLogin();" style="padding: 4px 8px; font-size: 0.68rem; font-family: var(--font-head); background: #709380; color: #fff; border: 1px solid #709380; border-radius: 4px; cursor: pointer; transition: 0.3s; line-height: 1.4;">Ultimate Safaris</button>
                     <button type="button" onclick="document.getElementById('agent-username-input').value='sense'; submitAgentLogin();" style="padding: 4px 8px; font-size: 0.68rem; font-family: var(--font-head); background: #709380; color: #fff; border: 1px solid #709380; border-radius: 4px; cursor: pointer; transition: 0.3s; line-height: 1.4;">Sense of Africa</button>
@@ -1676,15 +1278,19 @@
                         <div style="margin-bottom: 20px;">
                             <select id="agent-enterprise-select" class="agent-rates-select" onchange="renderAgentRatesTable()">
                                 <optgroup label="Luxury Accommodation Lodges">
-                                    <option value="Chobe River Lodge" selected>Chobe River Lodge (Caprivi & Chobe)</option>
-                                    <option value="Sossusvlei Lodge">Sossusvlei Lodge (Sossusvlei & Namib)</option>
-                                    <option value="Desert Camp">Desert Camp (Sossusvlei & Namib)</option>
-                                    <option value="Desert Quiver Camp">Desert Quiver Camp (Sossusvlei & Namib)</option>
-                                    <option value="Hoodia Lodge">Hoodia Lodge (Sossusvlei & Namib)</option>
-                                    <option value="Moon Mountain Lodge">Moon Mountain Lodge (Sossusvlei & Namib)</option>
-                                    <option value="Elegant Desert Lodge">Elegant Desert Lodge (Sossusvlei & Namib)</option>
-                                    <option value="Desert Whisper">Desert Whisper (Sossusvlei & Namib Exclusive)</option>
-                                    <option value="The Desert Grace">The Desert Grace (Sossusvlei & Namib)</option>
+                                    <option value="Desert Homestead Lodge" selected>Desert Homestead Lodge (Sossusvlei & Namib)</option>
+                                    <option value="Desert Homestead Outpost">Desert Homestead Outpost (Sossusvlei & Namib)</option>
+                                    <option value="Namib Outpost">Namib Outpost (Sossusvlei & Namib)</option>
+                                    <option value="Le Mirage Resort & Spa">Le Mirage Resort & Spa (Sossusvlei & Namib)</option>
+                                    <option value="Strand Hotel Swakopmund">Strand Hotel Swakopmund (Swakopmund)</option>
+                                    <option value="Twyfelfontein Adventure Camp">Twyfelfontein Adventure Camp (Damaraland)</option>
+                                    <option value="Midgard Country Estate">Midgard Country Estate (Central Namibia)</option>
+                                    <option value="Hohenstein Lodge">Hohenstein Lodge (Central Namibia)</option>
+                                    <option value="Kalahari Red Dunes Lodge">Kalahari Red Dunes Lodge (Kalahari)</option>
+                                    <option value="Teufelskrallen Lodge">Teufelskrallen Lodge (Kalahari)</option>
+                                    <option value="Etosha Oberland Lodge">Etosha Oberland Lodge (South Etosha)</option>
+                                    <option value="Mokuti Etosha">Mokuti Etosha (East Etosha)</option>
+                                    <option value="Timelen">Timelen (Windhoek)</option>
                                 </optgroup>
                                 <optgroup label="Car Rental / Vehicles">
                                     <option value="Namibia Car Rental">Namibia Car Rental (Windhoek)</option>
@@ -1951,45 +1557,6 @@
             font-weight: 500;
             margin: 0 0 10px 0;
             line-height: 1.3;
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .rates-green-dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            background-color: #2ec866;
-            border-radius: 50%;
-            box-shadow: 0 0 8px rgba(46, 200, 102, 0.8);
-            position: relative;
-            flex-shrink: 0;
-        }
-        
-        .rates-green-dot::after {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border: 1px solid #2ec866;
-            border-radius: 50%;
-            animation: pulse-green 2s infinite;
-            opacity: 0;
-        }
-
-        @keyframes pulse-green {
-            0% {
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-            100% {
-                transform: scale(1.6);
-                opacity: 0;
-            }
         }
 
         .b2b-lodge-card p {
@@ -3325,10 +2892,10 @@
 
         // Global Property Mapping Arrays
         const olMap = {
-            'Strand Hotel Swakopmund': 'o_and_l_ratesheet.html#strand',
+            'Strand Hotel Swakopmund': 'o_and_l_ratesheet_v2.html',
             'Mokuti Etosha': 'o_and_l_ratesheet.html#mokuti',
             'Midgard Country Estate': 'o_and_l_ratesheet.html#midgard',
-            'Le Mirage Resort & Spa': 'o_and_l_ratesheet.html#lemirage'
+            'Le Mirage Resort & Spa': 'le_mirage_ratesheet.html'
         };
         const ondiliMap = {
             'Desert Homestead Lodge': 'ondili_rates_booking.html#deserthomestead',
@@ -3337,135 +2904,17 @@
             'Twyfelfontein Adventure Camp': 'ondili_rates_booking.html#twyfelfontein',
             'Hohenstein Lodge': 'ondili_rates_booking.html#hohenstein',
             'Kalahari Red Dunes Lodge': 'ondili_rates_booking.html#kalaharired',
-            'Teufelskrallen Lodge': 'ondili_rates_booking.html#teufelskrallen'
+            'Teufelskrallen Lodge': 'ondili_rates_booking.html#teufelskrallen',
+            'Etosha Oberland Lodge': 'ondili_rates_booking.html#etoshaoberland',
+            'Timelen': 'ondili_rates_booking.html#timelen'
         };
-        const jnMap = {
-            'Fish River Lodge': 'journeys_namibia_rates.html#fishriver',
-            'Grootberg Lodge': 'journeys_namibia_rates.html#grootberg',
-            'Hoada Campsite': 'journeys_namibia_rates.html#hoada',
-            'Ondudu Safari Lodge': 'journeys_namibia_rates.html#ondudu'
-        };
-        const logufaMap = {
-            'Koiimasis Fest-Inn-Fels Farmlodge': 'logufa_rates.html#koiimasis',
-            'Kalahari Bush Breaks': 'logufa_rates.html#kalahari',
-            'Spitzkoppen Lodge': 'logufa_rates.html#spitzkoppen',
-            'Spitzkoppe Cabin Camp': 'logufa_rates.html#cabincamp',
-            'Spitzkoppe Restcamp': 'logufa_rates.html#restcamp',
-            'Forgotten Valley (Ekoto Camp)': 'logufa_rates.html#forgottenvalley'
-        };
-        const musharaMap = {
-            'Mushara Lodge': 'mushara_rates.html#musharalodge',
-            'Mushara Outpost': 'mushara_rates.html#musharaoutpost',
-            'Mushara Bush Camp': 'mushara_rates.html#musharabush',
-            'Villa Mushara': 'mushara_rates.html#villamushara'
-        };
-        const gondwanaMap = {
-            'Okapuka Safari Lodge': 'gondwana_rates.html#okapuka',
-            'The Weinberg': 'gondwana_rates.html#weinberg',
-            'The Weinberg Urban Pod': 'gondwana_rates.html#weinberg_pod',
-            'Kalahari Anib Lodge': 'gondwana_rates.html#kalahari_anib',
-            'Kalahari Camping2go': 'gondwana_rates.html#kalahari_camping2go',
-            'Reverie Kalahari Pod': 'gondwana_rates.html#kalahari_pod',
-            'Kalahari Farmhouse': 'gondwana_rates.html#kalahari_farmhouse',
-            'Canyon Lodge': 'gondwana_rates.html#canyon_lodge',
-            'Canyon Village': 'gondwana_rates.html#canyon_village',
-            'Canyon Roadhouse': 'gondwana_rates.html#canyon_roadhouse',
-            'Namib Desert Lodge': 'gondwana_rates.html#namib_desert',
-            'Namib Desert Camping2go': 'gondwana_rates.html#namib_camping2go',
-            'Namib Dune Star Camp': 'gondwana_rates.html#namib_dunestar',
-            'The Desert Grace': 'gondwana_rates.html#desert_grace',
-            'Desert Whisper': 'gondwana_rates.html#desert_whisper',
-            'The Delight Swakopmund': 'gondwana_rates.html#delight',
-            'The Pearls Beach Pods': 'gondwana_rates.html#pearls',
-            'Damara Mopane Lodge': 'gondwana_rates.html#damara_mopane',
-            'Palmwag Lodge': 'gondwana_rates.html#palmwag_lodge',
-            'Palmwag Camping2go': 'gondwana_rates.html#palmwag_camping2go',
-            'Palmwag Under-Canvas Sleep-Out': 'gondwana_rates.html#palmwag_sleepout',
-            'Omarunga Epupa-Falls Camp': 'gondwana_rates.html#omarunga',
-            'Etosha Safari Lodge': 'gondwana_rates.html#etosha_safari_lodge',
-            'The Ekipa Etosha Pod': 'gondwana_rates.html#etosha_pod',
-            'Etosha Safari Camp': 'gondwana_rates.html#etosha_safari_camp',
-            'Etosha Safari Camping2go': 'gondwana_rates.html#etosha_camping2go',
-            'Etosha King Nehale': 'gondwana_rates.html#etosha_king_nehale',
-            'Hakusembe River Lodge': 'gondwana_rates.html#hakusembe_lodge',
-            'Hakusembe Camping2go': 'gondwana_rates.html#hakusembe_camping2go',
-            'Namushasha River Lodge': 'gondwana_rates.html#namushasha_lodge',
-            'Namushasha River Camping2go': 'gondwana_rates.html#namushasha_camping2go',
-            'Namushasha River Villa': 'gondwana_rates.html#namushasha_villa',
-            'Zambezi Mubala Camp': 'gondwana_rates.html#zambezi_mubala_camp',
-            'Zambezi Mubala Lodge': 'gondwana_rates.html#zambezi_mubala_lodge',
-            'Chobe River Camp': 'gondwana_rates.html#chobe_river'
-        };
-        const individualMap = {
-            'Ababis Guest Farm': 'individual_rates.html#ababis',
-            'Africa Safari Lodge': 'individual_rates.html#africasafari',
-            'Agama Lodge': 'individual_rates.html#agama',
-            'Agama River Camp': 'individual_rates.html#agama',
-            'Agama Camping': 'individual_rates.html#agama',
-            'Aloegrove Safari Lodge': 'individual_rates.html#aloegrove',
-            'Alte Kalkofen Lodge': 'individual_rates.html#altekalkofen',
-            'Alte Villa 2025': 'individual_rates.html#altevilla',
-            'Atlantic Villa': 'individual_rates.html#atlanticvilla',
-            'Auas Safari Lodge': 'individual_rates.html#auas',
-            'Bahnhof Hotel Aus': 'individual_rates.html#bahnhofaus',
-            'Barkhan Dune Retreat': 'individual_rates.html#barkhan',
-            'Beach Hotel Swakopmund': 'individual_rates.html#beachhotel',
-            'Beach Lodge': 'individual_rates.html#beachlodge',
-            'Belvedere Boutique Hotel': 'individual_rates.html#belvedere',
-            'Camp Kwando': 'individual_rates.html#campkwando',
-            'Cornerstone Guesthouse': 'individual_rates.html#cornerstone',
-            'Droombos Estate & Simanya River Lodge': 'individual_rates.html#droombos',
-            'Droombos Estate': 'individual_rates.html#droombos',
-            'Droombos': 'individual_rates.html#droombos',
-            'Simanya River Lodge': 'individual_rates.html#droombos',
-            'Emanya at Etosha': 'individual_rates.html#emanya',
-            'Epacha Game Lodge & Spa': 'individual_rates.html#epacha',
-            'Eagle Tented Lodge & Spa': 'individual_rates.html#epacha',
-            'Epako Safari Lodge': 'individual_rates.html#epako',
-            'Epako Safari Lodge & Spa': 'individual_rates.html#epako',
-            'Epupa Falls Lodge': 'individual_rates.html#epupafalls',
-            'Erongo Rocks': 'individual_rates.html#erongorocks',
-            'Erongo Rocks nature & camp': 'individual_rates.html#erongorocks',
-            'Flamingo Villa Boutique Hotel': 'individual_rates.html#flamingovillas',
-            'Flamingo Villas Boutique Hotel': 'individual_rates.html#flamingovillas',
-            'Gabus Safari Lodge': 'individual_rates.html#gabus',
-            'Gabuse Guest House': 'individual_rates.html#gabus',
-            'Gabus Game Ranch': 'individual_rates.html#gabus',
-            'Ghaub': 'individual_rates.html#ghaub',
-            'Ghaub Nature Reserve & Farm': 'individual_rates.html#ghaub',
-            'Waterberg Wilderness': 'individual_rates.html#ghaub',
-            'Waterberg Plateau Lodge': 'individual_rates.html#ghaub',
-            'Waterberg Valley Lodge': 'individual_rates.html#ghaub',
-            'Hansa Hotel': 'individual_rates.html#hansahotel',
-            'Hansa Hotel Swakopmund': 'individual_rates.html#hansahotel',
-            'Heinitzburg Boutique Hotel': 'individual_rates.html#heinitzburg',
-            'Hohewarte Guestfarm': 'individual_rates.html#hohewarte',
-            'Hotel Thule': 'individual_rates.html#hotelthule',
-            'Kalahari Game Lodge': 'individual_rates.html#kalaharigame',
-            'Kamaku Guesthouse': 'individual_rates.html#kamaku',
-            'Waldeck Lodge': 'individual_rates.html#waldeck',
-            'Ongava Lodge': 'individual_rates.html#ongavalodge',
-            'Ongava Tented Camp': 'individual_rates.html#ongavatented',
-            'Ongava Research Centre': 'individual_rates.html#ongavaresearch',
-            'Little Ongava': 'individual_rates.html#littleongava',
-            'Anderssons at Ongava': 'individual_rates.html#anderssonsongava',
-            'Namib Guesthouse': 'individual_rates.html#namibguesthouse',
-            'Little Sossus Lodge': 'individual_rates.html#littlesossus',
-            'Ohorongo Game and Safari Lodge': 'individual_rates.html#ohorongo',
-            'Kaoko Mopane Lodge': 'individual_rates.html#kaokomopane',
-            'Moon Mountain Lodge': 'individual_rates.html#moonmountain',
-            'Nooishof': 'individual_rates.html#nooishof',
-            'Lüderitz Nest Hotel': 'individual_rates.html#luderitznest',
-            'Nest Hotel': 'individual_rates.html#luderitznest',
-            'Okonjima Plains Camp': 'individual_rates.html#okonjima',
-            'Okonjima Bush Camp': 'individual_rates.html#okonjima',
-            'Okonjima Bush Suite': 'individual_rates.html#okonjima',
-            'Okonjima Luxury Bush Camp': 'individual_rates.html#okonjima',
-            'Okonjima Villa': 'individual_rates.html#okonjima',
-            'Lianshulu Lodge': 'individual_rates.html#lianshulu',
-            'Lianshulu Bush Lodge': 'individual_rates.html#lianshulu',
-            'Norotshama River Resort': 'individual_rates.html#norotshama'
-        };
+        const jnMap = {};
+        const logufaMap = {};
+        const musharaMap = {};
+        // gondwanaMap intentionally empty — gondwana_rates.html not yet available.
+        // These lodges will show "Rates coming soon" toast when clicked.
+        const gondwanaMap = {};
+        const individualMap = {};
 
         // Year State Management
         let currentYear = '2026';
@@ -3595,16 +3044,18 @@
                 if (is2027) {
                     hasRateSheet = (lodgeName === 'Waldeck Lodge' || lodgeName === 'Cornerstone Guesthouse');
                 } else {
-                    hasRateSheet = checkHasRates(lodgeName);
+                    hasRateSheet = !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
                 }
                 
                 const originalBtn = item.querySelector('button');
                 if (hasRateSheet) {
                     const tick = document.createElement('span');
-                    tick.className = 'premium-tick rates-green-dot';
-                    tick.style.marginLeft = '8px';
-                    tick.style.marginRight = '4px';
-                    tick.style.display = 'inline-block';
+                    tick.className = 'premium-tick';
+                    tick.innerHTML = ' •';
+                    tick.style.color = 'var(--brand-green)';
+                    tick.style.marginLeft = '6px';
+                    tick.style.fontSize = '1.4rem';
+                    tick.style.fontWeight = 'bold';
                     tick.style.verticalAlign = 'middle';
                     tick.title = 'Premium Ratesheet Loaded';
                     
@@ -4739,6 +4190,13 @@
             ]
         };
 
+        function lodgeHasRateSheet(lodgeName) {
+            if (!lodgeName) return false;
+            const n = lodgeName.toLowerCase().trim();
+            if (n.includes('car rental') || n.includes('nts') || n.includes('vehicle') || n.includes('hilux') || n.includes('safari car') || n.includes('4x4')) return true;
+            return !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
+        }
+
         function getLodgeRateSheetUrl(lodgeName) {
             if (!lodgeName) return null;
             const nameLower = lodgeName.toLowerCase().trim();
@@ -4766,17 +4224,6 @@
                       findInMap(individualMap);
             
             if (url) return url;
-            
-            // Loose / substring mapping fallback
-            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, gondwanaMap, individualMap];
-            for (const mapObj of maps) {
-                for (const key of Object.keys(mapObj)) {
-                    const keyLower = key.toLowerCase().trim();
-                    if (nameLower.includes(keyLower) || keyLower.includes(nameLower)) {
-                        return mapObj[key];
-                    }
-                }
-            }
 
             // Opuwo Country Lodge is in individual_rates.html#opuwocountry
             if (nameLower.includes('opuwo')) {
@@ -4786,9 +4233,7 @@
                 return 'individual_rates.html#hobatere';
             }
 
-            // Fallback to individual_rates.html with a safe hash
-            const sanitizedHash = nameLower.replace(/[^a-z0-9]/g, '');
-            return `individual_rates.html#${sanitizedHash}`;
+            return null;
         }
 
         function openLogin(lodgeName) {
@@ -4818,7 +4263,6 @@
                 } else {
                     document.getElementById('modal-lodge-name').innerText = 'Agent Sign In';
                     document.getElementById('agent-username-input').value = '';
-                    document.getElementById('agent-password-input').value = '';
                     document.getElementById('agent-login-error-msg').style.display = 'none';
                     document.getElementById('agent-login-modal').style.display = 'flex';
                 }
@@ -4839,7 +4283,6 @@
                 pendingAgentLodge = lodgeName;
                 document.getElementById('modal-lodge-name').innerText = lodgeName;
                 document.getElementById('agent-username-input').value = '';
-                document.getElementById('agent-password-input').value = '';
                 document.getElementById('agent-login-error-msg').style.display = 'none';
                 document.getElementById('agent-login-modal').style.display = 'flex';
             }
@@ -5138,7 +4581,7 @@
                 // which dynamically styles itself for agents showing their custom 30% / 25% / etc. STO rates.
                 openPublicRatesViewer(listing.companyName);
             } else {
-                openLogin(lodgeName);
+                showToast(`Rates for ${lodgeName} are coming soon. Please contact us for pricing.`, 'info');
             }
         }
 
@@ -5550,53 +4993,6 @@
             }
         }
 
-        function checkHasRates(lodgeName) {
-            if (!lodgeName) return false;
-            const nameLower = lodgeName.toLowerCase().trim();
-            
-            // Check dynamic approved B2B network listings
-            if (typeof b2bNetworkState !== 'undefined' && b2bNetworkState.approvedListings) {
-                if (b2bNetworkState.approvedListings.some(l => l.companyName.toLowerCase() === nameLower)) {
-                    return true;
-                }
-            }
-
-            const inMap = (mapObj) => {
-                for (const key of Object.keys(mapObj)) {
-                    if (key.toLowerCase().trim() === nameLower) return true;
-                }
-                return false;
-            };
-            
-            const inMapLoose = (mapObj) => {
-                for (const key of Object.keys(mapObj)) {
-                    const keyLower = key.toLowerCase().trim();
-                    if (nameLower.includes(keyLower) || keyLower.includes(nameLower)) return true;
-                }
-                return false;
-            };
-
-            const maps = [olMap, ondiliMap, jnMap, logufaMap, musharaMap, gondwanaMap, individualMap];
-            
-            for (const mapObj of maps) {
-                if (inMap(mapObj)) return true;
-            }
-            
-            for (const mapObj of maps) {
-                if (inMapLoose(mapObj)) return true;
-            }
-            
-            if (nameLower.includes('opuwo') || nameLower.includes('hobatere')) {
-                return true;
-            }
-            
-            if (nameLower.includes('car rental') || nameLower.includes('nts') || nameLower.includes('vehicle') || nameLower.includes('hilux') || nameLower.includes('safari car') || nameLower.includes('4x4')) {
-                return true;
-            }
-            
-            return false;
-        }
-
         function renderRegionPage(regionName) {
             // Normalize regionName for perfect compatibility with manual entries and deep links
             let normalizedRegion = regionName;
@@ -5676,19 +5072,16 @@
                 card.className = 'b2b-lodge-card';
                 card.setAttribute('data-lodge-name', lodge.name);
                 
-                const hasRates = checkHasRates(lodge.name);
-                
+                const hasRates = lodgeHasRateSheet(lodge.name) || lodge.isB2B;
+                const rateDot = hasRates ? '<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-green);margin-left:7px;vertical-align:middle;" title="Ratesheet available"></span>' : '';
                 card.innerHTML = `
                     <div class="b2b-lodge-card-img" style="background-image: url('${lodge.image}');"></div>
                     <div class="b2b-lodge-card-content">
-                        <h4 class="lodge-card-title">
-                            ${lodge.name}
-                            ${hasRates ? '<span class="rates-green-dot" title="Rates staged & active"></span>' : ''}
-                        </h4>
+                        <h4 class="lodge-card-title">${lodge.name}${rateDot}</h4>
                         <p class="lodge-card-description">${lodge.description}</p>
                         <div class="b2b-lodge-card-footer">
                             <span class="b2b-category-badge lodge">${lodge.category}</span>
-                            <button class="lodge-btn-primary" onclick="handleLodgeClick('${lodge.name.replace(/'/g, "\\\\'")}')">View Rates</button>
+                            <button class="lodge-btn-primary" onclick="handleLodgeClick('${lodge.name.replace(/'/g, "\\'")}')">View Rates</button>
                         </div>
                     </div>
                 `;

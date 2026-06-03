@@ -204,155 +204,6 @@
 </head>
 <body>
 
-    <!-- LOGIN OVERLAY -->
-    <div id="login-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4-3.jpg') center/cover no-repeat; z-index: 9999; display: flex; align-items: center; justify-content: center;">
-        <div style="background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 40px; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); max-width: 400px; width: 100%; text-align: center; border: var(--glass-border);">
-            <h2 style="color: var(--brand-accent); font-family: var(--font-head); margin-bottom: 20px;">O&L Leisure Rates</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px; font-size: 0.9rem;">Please sign in to access the booking engine.</p>
-            <input type="text" id="login-user" placeholder="Username" style="width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: var(--font-body);" onkeydown="if(event.key === 'Enter') checkLogin()">
-            <input type="password" id="login-pass" placeholder="Password" style="width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 10px; box-sizing: border-box; font-family: var(--font-body);" onkeydown="if(event.key === 'Enter') checkLogin()">
-            <button onclick="checkLogin()" style="width: 100%; padding: 15px; background: var(--brand-gradient); color: #fff; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: 0.3s; font-family: var(--font-head);">Access Portal</button>
-            <p id="login-error" style="color: red; font-size: 0.8rem; margin-top: 15px; display: none;">Invalid credentials.</p>
-        </div>
-    </div>
-    
-    <script data-no-optimize="1">
-        async function checkLogin() {
-            const btn = document.querySelector('#login-overlay button');
-            const originalText = btn.innerText;
-            btn.innerText = 'Checking...';
-            btn.disabled = true;
-
-            const uInput = document.getElementById('login-user').value;
-            const pInput = document.getElementById('login-pass').value;
-            const u = uInput.trim().toLowerCase();
-            const p = pInput.trim();
-            
-            const isValid = 
-                (u === 'jaun' && p === 'passme9cops') ||
-                ((u === 'sto 15' || u === 'sto15') && p === '1515') ||
-                ((u === 'sto 20' || u === 'sto20') && p === '2020') ||
-                ((u === 'o&l admin' || u === 'o&ladmin') && p === '0000');
-            
-            if (isValid) {
-                if (u === 'jaun') {
-                    document.getElementById('login-overlay').style.display = 'none';
-                    document.getElementById('main-view').style.display = 'none';
-                    document.getElementById('detail-view').style.display = 'none';
-                    if(document.getElementById('admin-view')) document.getElementById('admin-view').style.display = 'none';
-                    document.getElementById('super-admin-view').style.display = 'block';
-                    return;
-                }
-                
-                if (p === '0000') {
-                    document.getElementById('login-overlay').style.display = 'none';
-                    document.getElementById('main-view').style.display = 'none';
-                    document.getElementById('detail-view').style.display = 'none';
-                    document.getElementById('admin-view').style.display = 'flex';
-                    return; // Stop execution here, no need to replace STO text on the regular views
-                }
-
-                let rateText = 'STO 20';
-                if (p === '1515') {
-                    rateText = 'STO 15';
-                    // Send email notification for STO 15 access with geolocation
-                    const sendNotification = (locationStr) => {
-                        fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                                to: 'bookings@desert-tracks.com',
-                                subject: `NOTIFICATION: O&L Rate Sheet Accessed (STO 15)`,
-                                html: `
-                                <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #cce5ff; background-color: #f8faff; border-radius: 8px; max-width: 500px;">
-                                    <h2 style="color: #004085; margin-top: 0;">Successful Login Detected</h2>
-                                    <p>A user successfully accessed the <strong>O&L Leisure Rate Sheet</strong>.</p>
-                                    <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff;">
-                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Access Level:</strong></td><td style="border-bottom: 1px solid #eee;">STO 15</td></tr>
-                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Username Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${uInput || '(Empty)'}</td></tr>
-                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Location:</strong></td><td style="border-bottom: 1px solid #eee;">${locationStr}</td></tr>
-                                        <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Timestamp:</strong></td><td style="border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
-                                    </table>
-                                </div>
-                                `
-                            })
-                        }).catch(e => console.error(e));
-                    };
-
-                    fetch('https://ipapi.co/json/')
-                        .then(res => res.json())
-                        .then(data => sendNotification(data.city ? `${data.city}, ${data.region}, ${data.country_name} (IP: ${data.ip})` : 'Unknown Location'))
-                        .catch(err => sendNotification('Unknown (Geolocation failed)'));
-                }
-                
-                // Update text across the page
-                document.querySelectorAll('h1, h2, h3, h4, p, span').forEach(el => {
-                    // Only update elements that don't have children (to avoid corrupting HTML)
-                    if (el.children.length === 0) {
-                        if (el.innerHTML.includes('STO20')) {
-                            el.innerHTML = el.innerHTML.replace(/STO20/g, rateText.replace(' ', ''));
-                        }
-                        if (el.innerHTML.includes('STO 20')) {
-                            el.innerHTML = el.innerHTML.replace(/STO 20/g, rateText);
-                        }
-                    } else {
-                        // If they have children, try to update text nodes only, or just do innerHTML safely if we know it's fine.
-                        // Actually, replacing STO20 is safe if it's just text.
-                        if (el.innerHTML.includes('STO20')) {
-                            el.innerHTML = el.innerHTML.replace(/STO20/g, rateText.replace(' ', ''));
-                        }
-                        if (el.innerHTML.includes('STO 20')) {
-                            el.innerHTML = el.innerHTML.replace(/STO 20/g, rateText);
-                        }
-                    }
-                });
-
-                // Update text inside the DB object so when a property is opened later, it has the correct text
-                if (typeof DB !== 'undefined') {
-                    for (let key in DB) {
-                        if (DB[key].tab1) {
-                            DB[key].tab1 = DB[key].tab1.replace(/STO20/g, rateText.replace(' ', '')).replace(/STO 20/g, rateText);
-                        }
-                        if (DB[key].tab2) {
-                            DB[key].tab2 = DB[key].tab2.replace(/STO20/g, rateText.replace(' ', '')).replace(/STO 20/g, rateText);
-                        }
-                        if (DB[key].tab3) {
-                            DB[key].tab3 = DB[key].tab3.replace(/STO20/g, rateText.replace(' ', '')).replace(/STO 20/g, rateText);
-                        }
-                    }
-                }
-
-                document.getElementById('login-overlay').style.display = 'none';
-            } else {
-                document.getElementById('login-error').style.display = 'block';
-                
-                // Send security alert email in the background
-                fetch('https://antigravity-projects-eight.vercel.app/api/send_email', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        to: 'bookings@desert-tracks.com',
-                        subject: `SECURITY ALERT: Failed Login Attempt (O&L Rate Sheet)`,
-                        html: `
-                        <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ffcccc; background-color: #fff5f5; border-radius: 8px; max-width: 500px;">
-                            <h2 style="color: #d9534f; margin-top: 0;">Failed Login Attempt Detected</h2>
-                            <p>An unauthorized user attempted to access the <strong>O&L Leisure Rate Sheet</strong>.</p>
-                            <table cellpadding="8" cellspacing="0" style="width: 100%; border-collapse: collapse; margin-top: 15px; background: #fff;">
-                                <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Username Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${uInput || '(Empty)'}</td></tr>
-                                <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Password Typed:</strong></td><td style="border-bottom: 1px solid #eee;">${pInput || '(Empty)'}</td></tr>
-                                <tr><td style="border-bottom: 1px solid #eee; color: #666;"><strong>Timestamp:</strong></td><td style="border-bottom: 1px solid #eee;">${new Date().toLocaleString()}</td></tr>
-                            </table>
-                        </div>
-                        `
-                    })
-                }).catch(e => console.error(e));
-
-                btn.innerText = originalText;
-                btn.disabled = false;
-            }
-        }
-    </script>
-
     <div class="wrapper">
         <div id="main-view">
             <div class="header">
@@ -1416,13 +1267,14 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             const data = DB[key];
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
+            slide.dataset.property = key;
             slide.style.backgroundImage = 'url(' + data.cover + ')';
-            
+
             slide.innerHTML = `
                 <div class="swiper-card-content">
                     <span class="swiper-card-location">${data.location}</span>
                     <h2 class="swiper-card-title">${data.name}</h2>
-                    <span class="swiper-card-btn" onclick="openProperty('${key}')">Select Lodge</span>
+                    <span class="swiper-card-btn">Select Lodge</span>
                 </div>
             `;
             slider.appendChild(slide);
@@ -1465,7 +1317,15 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             mousewheel: {
                 forceToAxis: true,
             },
-            keyboard: true
+            keyboard: true,
+            on: {
+                click: function(swiper, event) {
+                    const slide = event.target.closest('.swiper-slide');
+                    if (slide && slide.dataset.property) {
+                        openProperty(slide.dataset.property);
+                    }
+                }
+            }
         });
 
         let calendarState = {
@@ -1640,8 +1500,13 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            renderCustomCalendar();
-            calculateNights();
+            const hash = window.location.hash.substring(1);
+            if (hash && DB[hash]) {
+                openProperty(hash);
+            } else {
+                renderCustomCalendar();
+                calculateNights();
+            }
         });
 
         function parseTab1(htmlString, isAccommodation = true) {
@@ -2152,73 +2017,6 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
     <!-- DYNAMIC PREMIUM RATESHEET LAYOUT OVERRIDE (MATCHING SCREENSHOT 3 / ACTIVITY_RATES.HTML) -->
     <script>
         (function() {
-            // 1. Inject Premium Login Overlay
-            function injectLoginOverlay() {
-                // Remove any existing login overlays to avoid conflicts
-                const oldOverlay = document.getElementById('login-overlay');
-                if (oldOverlay) oldOverlay.remove();
-
-                const titleText = document.title ? document.title.replace('2026/2027', '').replace('STO Rates', '').replace('EXPERIENCES', '').replace('NAMIBIA', '').trim() : 'Lodge Experiences';
-
-                const overlay = document.createElement('div');
-                overlay.id = 'login-overlay';
-                overlay.style.position = 'fixed';
-                overlay.style.top = '0';
-                overlay.style.left = '0';
-                overlay.style.width = '100%';
-                overlay.style.height = '100%';
-                overlay.style.background = "url('https://desert-tracks.com/wp-content/uploads/2026/03/solly_5112_4-3.jpg') center/cover no-repeat";
-                overlay.style.zIndex = '99999';
-                overlay.style.display = 'flex';
-                overlay.style.alignItems = 'center';
-                overlay.style.justifyContent = 'center';
-                overlay.style.fontFamily = "'Jost', sans-serif";
-
-                overlay.innerHTML = `
-                    <div style="background: rgba(255, 255, 255, 0.82); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); padding: 45px; border-radius: 16px; box-shadow: 0 15px 45px rgba(0,0,0,0.25); max-width: 420px; width: 90%; text-align: center; border: 1px solid rgba(255,255,255,0.45); box-sizing: border-box;">
-                        <h2 style="color: rgb(164, 130, 86); font-family: 'Cinzel', serif; font-size: 1.8rem; margin: 0 0 10px 0; font-weight: 500; text-transform: uppercase; letter-spacing: 1px;">\${titleText}</h2>
-                        <p style="color: #666; margin: 0 0 15px 0; font-size: 0.9rem; font-family: 'Jost', sans-serif; letter-spacing: 0.5px;">Please sign in to access the booking engine.</p>
-                        <p style="color: rgb(201, 108, 40); margin: 0 0 25px 0; font-size: 0.82rem; font-family: 'Jost', sans-serif; font-style: italic; font-weight: 500;">(For the moment, to enter just press Enter)</p>
-                        
-                        <input type="text" id="override-login-user" placeholder="Username" style="width: 100%; padding: 14px 20px; margin-bottom: 15px; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; box-sizing: border-box; font-family: 'Jost', sans-serif; font-size: 0.95rem; background: rgba(255,255,255,0.6); outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='rgb(164, 130, 86)'" onblur="this.style.borderColor='rgba(0,0,0,0.08)'">
-                        <input type="password" id="override-login-pass" placeholder="Password" style="width: 100%; padding: 14px 20px; margin-bottom: 25px; border: 1px solid rgba(0,0,0,0.08); border-radius: 8px; box-sizing: border-box; font-family: 'Jost', sans-serif; font-size: 0.95rem; background: rgba(255,255,255,0.6); outline: none; transition: border-color 0.3s;" onfocus="this.style.borderColor='rgb(164, 130, 86)'" onblur="this.style.borderColor='rgba(0,0,0,0.08)'">
-                        
-                        <button id="override-login-btn" style="width: 100%; padding: 16px; background: rgb(210, 180, 140); color: #fff; border: none; border-radius: 8px; font-weight: 600; font-size: 0.9rem; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s; font-family: 'Cinzel', serif; box-shadow: 0 4px 15px rgba(210,180,140,0.3);">Access Portal</button>
-                    </div>
-                `;
-
-                document.body.appendChild(overlay);
-
-                // Add styling link for Google Fonts if not present
-                if (!document.getElementById('premium-login-fonts')) {
-                    const fontLink = document.createElement('link');
-                    fontLink.id = 'premium-login-fonts';
-                    fontLink.rel = 'stylesheet';
-                    fontLink.href = 'https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap';
-                    document.head.appendChild(fontLink);
-                }
-
-                // Close overlay logic
-                const dismissOverlay = () => {
-                    overlay.style.transition = 'opacity 0.4s ease';
-                    overlay.style.opacity = '0';
-                    setTimeout(() => {
-                        overlay.remove();
-                    }, 400);
-                };
-
-                const uInput = document.getElementById('override-login-user');
-                const pInput = document.getElementById('override-login-pass');
-                const loginBtn = document.getElementById('override-login-btn');
-
-                if (uInput) uInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') dismissOverlay(); });
-                if (pInput) pInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') dismissOverlay(); });
-                if (loginBtn) loginBtn.addEventListener('click', dismissOverlay);
-            }
-
-            // Call overlay injection on load
-            injectLoginOverlay();
-
             function applyPremiumDecorations(id) {
                 if (!window.location.hash) return;
                 
@@ -2243,25 +2041,26 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     }
                 });
 
-                // 3. Keep Tab navigation, dates selection, and booking bars visible and gorgeous!
+                // 3. Hide Tabs Navigation & Booking UI elements
                 const tabsBar = document.querySelector('.tabs');
-                if (tabsBar) {
-                    tabsBar.style.display = 'flex';
-                    tabsBar.style.justifyContent = 'center';
-                    tabsBar.style.marginBottom = '25px';
-                }
+                if (tabsBar) tabsBar.style.display = 'none';
 
                 const datesUi = document.getElementById('global-dates-ui');
-                if (datesUi) {
-                    datesUi.style.display = 'block';
-                }
+                if (datesUi) datesUi.style.display = 'none';
 
                 const bookingBar = document.getElementById('booking-bar');
-                if (bookingBar) {
-                    bookingBar.style.display = 'flex';
-                }
+                if (bookingBar) bookingBar.style.display = 'none';
 
-                // 4. Structure detail-header to side-by-side spec layout exactly like Screenshot 3!
+                // 4. Force display all content tabs consecutively (Accommodation, Activities, Policies)
+                const tab1 = document.getElementById('tab-1');
+                const tab2 = document.getElementById('tab-2');
+                const tab3 = document.getElementById('tab-3');
+                
+                if (tab1) { tab1.style.display = 'block'; tab1.style.opacity = '1'; }
+                if (tab2) { tab2.style.display = 'block'; tab2.style.opacity = '1'; }
+                if (tab3) { tab3.style.display = 'block'; tab3.style.opacity = '1'; }
+
+                // 5. Structure detail-header to side-by-side spec layout exactly like Screenshot 3!
                 const detailHeader = document.querySelector('.detail-header');
                 if (detailHeader && !document.getElementById('spec-location')) {
                     detailHeader.style.display = 'grid';
@@ -2320,7 +2119,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     specBox.innerHTML = `
                         <h3 style="font-family: var(--font-head); font-size: 1.1rem; color: var(--brand-charcoal); margin: 0 0 20px 0; text-transform: uppercase; letter-spacing: 1px; font-weight: 400; border-bottom: 1px solid rgba(164,130,86,0.15); padding-bottom: 10px;">Quick Specs</h3>
                         <div class="spec-item" style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(164, 130, 86, 0.15); font-size: 0.85rem;"><span class="spec-label" style="font-weight: 400; color: var(--brand-charcoal);">Commission Model</span><span class="spec-value" style="color: var(--text-muted); font-weight: 300;">20% Built-in STO</span></div>
-                        <div class="spec-item" style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(164, 130, 86, 0.15); font-size: 0.85rem;"><span class="spec-label" style="font-weight: 400; color: var(--brand-charcoal);">Location</span><span class="spec-value" id="spec-location" style="color: var(--text-muted); font-weight: 300;">\${locationText}</span></div>
+                        <div class="spec-item" style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(164, 130, 86, 0.15); font-size: 0.85rem;"><span class="spec-label" style="font-weight: 400; color: var(--brand-charcoal);">Location</span><span class="spec-value" id="spec-location" style="color: var(--text-muted); font-weight: 300;">${locationText}</span></div>
                         <div class="spec-item" style="display: flex; justify-content: space-between; padding: 10px 0; border-bottom: none; font-size: 0.85rem;"><span class="spec-label" style="font-weight: 400; color: var(--brand-charcoal);">Rates Basis</span><span class="spec-value" style="color: var(--text-muted); font-weight: 300;">Dinner, Bed & Breakfast</span></div>
                     `;
                     
@@ -2334,7 +2133,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     detailHeader.appendChild(specBox);
                 }
 
-                // 5. Style Section Titles
+                // 6. Style Section Titles
                 const h3Els = document.querySelectorAll('.tab-content h3');
                 h3Els.forEach(el => {
                     el.style.fontSize = '1.3rem';
@@ -2347,7 +2146,7 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
                     el.style.marginTop = '35px';
                 });
 
-                // 6. Update Back Button to Portal close tab style
+                // 7. Update Back Button to Portal close tab style
                 const backBtn = document.querySelector('.back-btn');
                 if (backBtn) {
                     backBtn.innerText = '← Close & Return to Portal';
@@ -2380,15 +2179,10 @@ An extra bed or stretcher can be accommodated at the entrance of some of the cha
             const currentHash = window.location.hash.substring(1);
             if (currentHash) {
                 setTimeout(function() {
-                    if (typeof openProperty === 'function') {
-                        openProperty(currentHash);
-                    } else {
-                        applyPremiumDecorations(currentHash);
-                    }
+                    applyPremiumDecorations(currentHash);
                 }, 100);
             }
         })();
     </script>
-
 </body>
 </html>
