@@ -1,0 +1,1318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolwedans Collection — Rates &amp; Booking 2026–2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F5EFEB;
+            --card-bg: #FFFFFF;
+            --text-main: #3C3530;
+            --text-muted: #8C827A;
+            --gold: #C29F72;
+            --gold-light: rgba(194, 159, 114, 0.12);
+            --seafoam: #6A8E82;
+            --seafoam-light: rgba(106, 142, 130, 0.12);
+            --border: rgba(194, 159, 114, 0.2);
+            --font-head: 'Cormorant Garamond', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; background: var(--bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); font-weight: 400; margin: 0; }
+
+        /* ── HERO HEADER ── */
+        .site-hero { position: relative; text-align: center; padding: 80px 20px 60px; overflow: hidden; }
+        .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: inline-block; margin: 0 auto 28px; }
+        .hero-display {
+            font-family: var(--font-head);
+            font-size: clamp(4.5rem, 10vw, 10rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            background-image: url('https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: block;
+            margin-bottom: 0;
+            user-select: none;
+        }
+        .hero-rule { width: 50px; height: 1px; background: var(--gold); margin: 28px auto; }
+        .hero-tagline { font-family: var(--font-head); font-size: clamp(1.2rem, 2.5vw, 2rem); font-style: italic; font-weight: 300; color: var(--text-main); letter-spacing: 0.5px; margin-bottom: 12px; }
+        .hero-sub { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase; color: var(--text-muted); }
+        .header-rule { width: 60px; height: 1px; background: var(--gold); margin: 22px auto 0; }
+
+        /* ── LODGE GRID ── */
+        .lodge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1300px; margin: 0 auto; padding: 40px 30px 80px; }
+
+        /* ── LODGE CARD ── */
+        .lodge-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 24px rgba(44, 40, 36, 0.06); }
+        .lodge-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(44, 40, 36, 0.13); }
+        .lodge-card-img-wrap { overflow: hidden; height: 240px; background: #d8d3cb; }
+        .lodge-card-img { width: 100%; height: 240px; object-fit: cover; display: block; transition: var(--transition); }
+        .lodge-card:hover .lodge-card-img { transform: scale(1.03); }
+        .lodge-card-body { padding: 24px 26px 20px; }
+        .lodge-card-location { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: block; }
+        .lodge-card-name { font-family: var(--font-head); font-size: 1.65rem; font-weight: 400; color: var(--text-main); line-height: 1.15; margin-bottom: 10px; }
+        .lodge-card-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--seafoam); display: inline-block; margin-bottom: 12px; }
+        .lodge-card-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .lodge-card-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 18px; }
+        .lodge-card-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .btn-lodge { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 9px 18px; border: 1px solid rgba(44,40,36,0.2); border-radius: 6px; background: transparent; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+        .btn-lodge:hover { border-color: var(--text-main); color: var(--text-main); }
+        .btn-rates { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 9px 22px; border: 1px solid var(--gold); border-radius: 6px; background: transparent; color: var(--gold); cursor: pointer; transition: var(--transition); }
+        .btn-rates:hover { background: var(--gold); color: #fff; }
+
+        /* ── DETAIL VIEW ── */
+        .detail-view { display: none; max-width: 1200px; margin: 0 auto; padding: 40px 30px 120px; animation: fadeIn 0.4s ease; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border); padding: 10px 22px; border-radius: 30px; cursor: pointer; transition: var(--transition); background: transparent; margin-bottom: 40px; }
+        .back-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        .detail-hero { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 40px; align-items: start; }
+        .detail-title { font-size: clamp(2rem, 4vw, 3.5rem); font-weight: 300; color: var(--text-main); line-height: 1.1; margin-bottom: 6px; }
+        .detail-location { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--seafoam); font-weight: 500; margin-bottom: 16px; display: block; }
+        .detail-intro { font-size: 0.9rem; line-height: 1.85; color: var(--text-muted); font-weight: 300; white-space: pre-line; }
+        .detail-airport { font-size: 0.8rem; color: var(--text-muted); margin-top: 14px; padding: 12px 16px; border-left: 2px solid var(--seafoam); background: var(--seafoam-light); border-radius: 0 6px 6px 0; line-height: 1.6; }
+
+        .spec-card { background: var(--card-bg); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
+        .spec-card-title { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; display: block; }
+        .spec-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.82rem; }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-label { color: var(--text-main); font-weight: 400; }
+        .spec-value { color: var(--text-muted); font-weight: 300; text-align: right; }
+
+        /* ── TABS ── */
+        .tabs { display: flex; gap: 8px; margin-bottom: 32px; overflow-x: auto; padding: 14px 16px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); position: sticky; top: 16px; z-index: 90; box-shadow: 0 4px 20px rgba(44, 40, 36, 0.06); }
+        .tab-btn { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 11px 22px; border-radius: 8px; border: 1px solid transparent; background: transparent; color: var(--text-muted); cursor: pointer; transition: var(--transition); white-space: nowrap; font-weight: 500; }
+        .tab-btn:hover { color: var(--text-main); background: var(--gold-light); }
+        .tab-btn.active { background: var(--text-main); color: #fff; border-color: transparent; }
+        .tab-btn-highlight { border-color: var(--border); color: var(--text-muted); opacity: 0.5; cursor: not-allowed; }
+        .tab-btn-highlight.ready { border-color: var(--seafoam); color: var(--seafoam); opacity: 1; cursor: pointer; animation: tabPulse 1.8s ease-in-out infinite; }
+        .tab-btn-highlight.active { background: var(--seafoam); color: #fff; border-color: transparent; opacity: 1; animation: none; cursor: pointer; }
+        @keyframes tabPulse {
+            0%, 100% { border-color: var(--seafoam); color: var(--seafoam); box-shadow: none; }
+            50% { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px rgba(184,149,106,0.35); }
+        }
+        .tab-content { display: none; animation: fadeIn 0.35s ease; }
+        .tab-content.active { display: block; }
+
+        /* ── GALLERY ── */
+        .lodge-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 30px; }
+        .gallery-img { width: 100%; height: 240px; object-fit: cover; border-radius: 10px; }
+
+        /* ── CONTENT BLOCKS ── */
+        .content-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 36px 40px; margin-bottom: 24px; }
+        .content-block h3 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 400; color: var(--text-main); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); letter-spacing: 1px; }
+        .sub-block { margin-top: 28px; }
+        .sub-block h4 { font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; font-weight: 500; }
+
+        /* ── TABLES ── */
+        .table-responsive { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 24px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { font-family: var(--font-body); background: var(--gold-light); color: var(--text-main); font-size: 0.68rem; padding: 14px 18px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid var(--border); }
+        td { padding: 14px 18px; border-bottom: 1px solid rgba(44, 40, 36, 0.05); color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--gold-light); color: var(--text-main); }
+        td strong { color: var(--text-main); font-weight: 500; }
+        .table-highlight td { background: var(--seafoam-light); }
+
+        /* ── LISTS ── */
+        .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.9; font-size: 0.9rem; }
+        .text-list li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+        .text-list li::before { content: "—"; color: var(--gold); position: absolute; left: 0; font-weight: 300; }
+        .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.85; font-size: 0.9rem; }
+
+        /* ── BOOKING BAR ── */
+        #booking-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(245, 239, 235, 0.95); backdrop-filter: blur(12px); padding: 18px 30px; box-shadow: 0 -8px 30px rgba(44, 40, 36, 0.1); z-index: 100; text-align: center; border-top: 1px solid var(--border); animation: fadeInUp 0.3s ease; }
+        #booking-total { font-family: var(--font-head); font-size: 1.4rem; font-weight: 400; color: var(--text-main); margin-right: 24px; }
+        .btn-finalise { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px; background: var(--text-main); color: #fff; border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: var(--transition); animation: barBtnPulse 1.8s ease-in-out infinite; }
+        .btn-finalise:hover { background: var(--gold); animation: none; }
+        @keyframes barBtnPulse {
+            0%, 100% { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px rgba(184, 149, 106, 0.4); }
+            50% { background: var(--seafoam); border-color: var(--seafoam); box-shadow: 0 0 18px rgba(123, 169, 154, 0.5); }
+        }
+
+        /* ── FORM ── */
+        .form-group { margin-bottom: 18px; }
+        .form-label { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; display: block; }
+        .form-label.accent { color: var(--gold); }
+        .form-label.seafoam { color: var(--seafoam); }
+        .form-control { width: 100%; padding: 13px 16px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 0.9rem; background: var(--bg); color: var(--text-main); transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--gold); background: #fff; box-shadow: 0 0 0 3px var(--gold-light); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+        .btn-submit { width: 100%; font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; padding: 16px; background: var(--text-main); color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-top: 10px; font-weight: 500; }
+        .btn-submit:hover { background: var(--gold); }
+
+        /* ── RATE QTY INPUT ── */
+        .rate-qty { width: 64px; padding: 7px; border: 1px solid var(--border); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 500; text-align: center; outline: none; font-family: var(--font-body); font-size: 0.9rem; }
+        .rate-qty:focus { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-light); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ── CALENDAR ── */
+        .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin: 10px auto 0; }
+        .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin: 0 auto 16px; }
+        .dew-calendar-nav-btn { background: transparent; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; }
+        .dew-calendar-nav-btn:hover { opacity: 0.5; }
+        .dew-calendar-month-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 400; color: var(--text-main); text-align: center; width: 300px; letter-spacing: 1px; }
+        .dew-calendar { flex: 1; max-width: 300px; width: 100%; }
+        .dew-calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 8px; }
+        .dew-calendar-day-label { font-family: var(--font-body); font-size: 10px; font-weight: 600; color: var(--text-muted); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+        .dew-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+        .dew-calendar-day { font-family: var(--font-body); font-size: 13px; color: var(--text-main); text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; border-radius: 0; }
+        .dew-calendar-day:hover { background: var(--gold-light); }
+        .dew-calendar-day.dew-empty { cursor: default; }
+        .dew-calendar-day.dew-empty:hover { background: transparent; }
+        .dew-calendar-day.dew-today { background: var(--seafoam); border-radius: 50%; color: #fff !important; font-weight: 600; }
+        .dew-calendar-day.dew-selected { background: var(--gold-light); }
+        .dew-calendar-day.dew-range { background: rgba(194, 159, 114, 0.12); }
+        .dew-calendar-day.dew-range-start { background: var(--gold); border-radius: 50% 0 0 50%; color: #fff !important; font-weight: 600; }
+        .dew-calendar-day.dew-range-end { background: var(--gold); border-radius: 0 50% 50% 0; color: #fff !important; font-weight: 600; }
+        .dew-calendar-day.dew-past { color: rgba(60, 53, 48, 0.2); cursor: not-allowed; }
+        .dew-calendar-day.dew-past:hover { background: transparent; }
+        @media(max-width: 768px) {
+            .dew-calendar-container { flex-direction: column; gap: 20px; align-items: center; }
+            .dew-calendar-container > .dew-calendar:last-child { display: none; }
+            .dew-calendar-nav .dew-calendar-month-title:nth-of-type(2) { display: none; }
+            .dew-calendar-month-title { width: 100%; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) { .lodge-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 768px) {
+            .lodge-grid { grid-template-columns: 1fr; padding: 20px; }
+            .detail-hero { grid-template-columns: 1fr; }
+            .lodge-gallery { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .detail-view { padding: 20px 16px 100px; }
+            .content-block { padding: 22px; }
+            #booking-total { display: block; margin-right: 0; margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MAIN VIEW -->
+<div id="main-view">
+    <div class="site-hero">
+        <div class="hero-dot"></div>
+        <span class="hero-display">Wolwedans</span>
+        <span class="hero-display">Collection</span>
+        <div class="hero-rule"></div>
+        <p class="hero-tagline">Simply out of this world. NamibRand Safaris.</p>
+        <p class="hero-sub">STO 20 Rates &middot; Season 2026–2027</p>
+    </div>
+
+    <div class="lodge-grid" id="lodge-grid">
+        <!-- Cards injected by JS -->
+    </div>
+</div>
+
+<!-- DETAIL VIEW -->
+<div id="detail-view" class="detail-view">
+    <button class="back-btn" onclick="closeProperty()">← All Lodges</button>
+
+    <div class="detail-hero">
+        <div>
+            <span class="detail-location" id="d-location"></span>
+            <h1 class="detail-title" id="d-title"></h1>
+            <p class="detail-intro" id="d-intro"></p>
+
+        </div>
+        <div class="spec-card">
+            <span class="spec-card-title">Quick Specs</span>
+            <div class="spec-row"><span class="spec-label">Commission</span><span class="spec-value">20% Built-in STO</span></div>
+            <div class="spec-row"><span class="spec-label">Location</span><span class="spec-value" id="spec-location">—</span></div>
+            <div class="spec-row"><span class="spec-label">Rate Period</span><span class="spec-value">11.01.26 – 31.03.27</span></div>
+            <div class="spec-row"><span class="spec-label">Contact</span><span class="spec-value">reservations@wolwedans.com</span></div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+        <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities &amp; Extras</button>
+        <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies &amp; Info</button>
+        <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
+        <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active">
+        <!-- CALENDAR -->
+        <div id="global-dates-ui" style="margin-bottom:28px;background:var(--card-bg);padding:32px;border-radius:12px;border:1px solid var(--border);text-align:center;">
+            <h3 style="font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--text-main);margin-bottom:6px;letter-spacing:1px;">When would you like to travel?</h3>
+            <p style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;">Select your check-in and check-out dates</p>
+            <div id="inline-calendar"></div>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+                <span id="nights-count" style="font-family:var(--font-head);font-size:2rem;color:var(--gold);">1</span>
+                <span style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-left:8px;">Night(s) Selected</span>
+            </div>
+        </div>
+    </div>
+    <div id="tab-2" class="tab-content"></div>
+    <div id="tab-3" class="tab-content"></div>
+
+    <div id="tab-4" class="tab-content">
+        <div class="content-block">
+            <h3>Gallery</h3>
+            <div class="lodge-gallery" id="d-gallery"></div>
+            <p class="raw-text" id="gallery-placeholder" style="display:none;">More photos coming soon.</p>
+        </div>
+    </div>
+
+    <div id="tab-5" class="tab-content">
+        <div class="content-block">
+            <h3>Finalise Booking</h3>
+            <p class="raw-text" style="margin-bottom:24px;">Review your selection and complete the booking request below.</p>
+
+            <div id="booking-summary" style="margin-bottom:28px;background:var(--bg);padding:22px;border-radius:10px;border:1px solid var(--border);">
+                <p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates or activities from the tabs above to build your booking.</p>
+            </div>
+
+            <form onsubmit="submitBooking(event)" id="booking-form">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label accent">Agent / Consultant Email</label>
+                        <input type="email" id="b-agent-email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label accent">Booking Status</label>
+                        <select id="b-status" class="form-control" required style="cursor:pointer;">
+                            <option value="Provisional Booking">Provisional Booking</option>
+                            <option value="Confirmed Booking">Confirmed Booking</option>
+                        </select>
+                    </div>
+                </div>
+                <hr style="border:none;border-top:1px solid var(--border);margin-bottom:18px;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Client Full Name</label>
+                        <input type="text" id="b-name" class="form-control" placeholder="e.g. John & Jane Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Guide Room(s)</label>
+                        <input type="number" id="b-guide" class="form-control" placeholder="0" min="0">
+                    </div>
+                </div>
+                <input type="hidden" id="b-date-in" required>
+                <input type="hidden" id="b-date-out" required>
+                <div class="form-group" style="background:var(--bg);padding:14px 16px;border-radius:8px;border:1px solid var(--border);">
+                    <span class="form-label" style="display:block;margin-bottom:4px;">Travel Dates</span>
+                    <span id="b-dates-display" style="font-family:var(--font-head);font-size:1.1rem;color:var(--text-muted);">Select dates from the calendar above</span>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Arriving From</label>
+                        <input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Departing To</label>
+                        <input type="text" id="b-departing" class="form-control" placeholder="e.g. Next Lodge" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Additional Notes</label>
+                    <textarea id="b-message" class="form-control" placeholder="Dietary requirements, room preferences, special requests..." style="height:110px;resize:vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Booking to Operations</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- BOOKING BAR -->
+<div id="booking-bar">
+    <div style="display:inline-block;text-align:right;margin-right:24px;vertical-align:middle;">
+        <span id="booking-total" style="display:block;">Total: N$ 0.00</span>
+        <span id="booking-breakdown" style="display:block;font-family:var(--font-body);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.5px;margin-top:2px;"></span>
+    </div>
+    <button class="btn-finalise" onclick="switchTab(5)">Finalise Booking</button>
+</div>
+
+<script>
+const DB = {
+    'dunes': {
+        location: 'NamibRand Nature Reserve',
+        cover: 'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg',
+        name: 'Wolwedans Desert Lodge (Dunes Lodge)',
+        shortDesc: `Panoramic desert views from a high-altitude plateau — canvas-and-wood chalets, luxury pools, and organic dining under clear stars.`,
+        images: [
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/02.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/03.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/04.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/05.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/06.jpg'
+        ],
+        airport: 'Nearest airstrip: Wolwedans Airstrip (10-minute transfer). Scheduled and charter flights from Windhoek/Swakopmund.',
+        intro: `Perched on a high-altitude dunes plateau, Wolwedans Desert Lodge (formerly Dunes Lodge) offers panoramic desert views that stretch to the horizon. Styled with canvas-and-wood structures that capture the romance of safari, it features 9 standard tents, 1 family tent, and the exclusive Desert Suite. Fully off-grid, it combines premium luxury with environmental sensitivity.\n\n*Please note: The Desert Lodge is closed during the Green Season (11 January – 31 March).*`,
+        tab1: `<div class="content-block">
+            <h3>STO20 Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Rates are in NAD per person per night (pppn), including all meals, house drinks, and activities. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Occupancy</th>
+                            <th>High Season (01 Apr - 31 Mar) STO 20%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standard Tent — Sharing (per person)</strong></td>
+                            <td>11,920</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard Tent — Single (supplement 40%)</strong></td>
+                            <td>16,688</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Child (7–14 yrs) sharing with 2 adults</strong></td>
+                            <td>3,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Desert Suite (Base Rate: 4 guests)</strong></td>
+                            <td>47,680</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Desert Suite — Additional Child (7–17 yrs)</strong></td>
+                            <td>3,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="raw-text">* Minimum stay: 2 nights. Guide rate includes the sustainability levy.</p>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Published rack rates in NAD per person per night (pppn). Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Occupancy</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standard Tent — Sharing (per person)</strong></td>
+                            <td>14,900</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard Tent — Single (supplement 40%)</strong></td>
+                            <td>20,860</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Child (7–14 yrs) sharing with 2 adults</strong></td>
+                            <td>3,750</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Desert Suite (Base Rate: 4 guests)</strong></td>
+                            <td>59,600</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Desert Suite — Additional Child (7–17 yrs)</strong></td>
+                            <td>3,750</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities & Excursions</h3>
+            <p class="raw-text">All signature drives and walks are fully included in the accommodation rate. Special activities and conservation adoptions are commissionable as specified below.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>STO Rate (N$)</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Morning & Afternoon Scenic Drives (3h)</td><td>Included</td><td>Sunrise & Sundowner stops</td></tr>
+                        <tr><td>Quiet Desert Immersion (Solitude) (45m)</td><td>Included</td><td>Quiet Parks International site</td></tr>
+                        <tr><td>Interpretive Bushman Walk (3h)</td><td>Included</td><td>With local guide</td></tr>
+                        <tr><td>Heart & Home Village Backstage Tour</td><td>Included</td><td>Empowerment & sustainability projects</td></tr>
+                        <tr><td>E-Biking morning/evening ride (2h)</td><td>Included</td><td>Through dunes</td></tr>
+                        <tr><td>Star Bed setup</td><td>Included</td><td>Sleep under NamibRand sky</td></tr>
+                        <tr><td>Full-day E-Bike ride with picnic (6h)</td><td>2,500</td><td>Min 2 / Max 6 pax</td></tr>
+                        <tr><td>Horse Riding morning trail (2h)</td><td>850</td><td>Departing from village</td></tr>
+                        <tr><td>Horse Riding sunset trail (3h)</td><td>1,250</td><td>Includes drinks in dunes</td></tr>
+                        <tr><td>Horse Riding full day ride (6h)</td><td>2,500</td><td>Includes picnic lunch</td></tr>
+                        <tr><td>Desert Sleepout (Dinner hamper + Coffee)</td><td>2,500</td><td>Min 2 / Max 10 pax</td></tr>
+                        <tr><td>Desert Sleepout (Meals in camp + Coffee)</td><td>2,150</td><td>Min 2 / Max 10 pax</td></tr>
+                        <tr><td>Special Dune Breakfast</td><td>1,500</td><td>First 2 guests (NAD 200 thereafter)</td></tr>
+                        <tr><td>Dinner Under the Stars</td><td>1,850</td><td>First 2 guests (NAD 350 thereafter)</td></tr>
+                        <tr><td>Adopt & Plant a Tree</td><td>5,500</td><td>Proceeds to Horticulture Project</td></tr>
+                        <tr><td>Adopt a Fairy Circle</td><td>1,250</td><td>Proceeds to Nature Reserve</td></tr>
+                        <tr><td>Adopt a Silo Shingle Tile</td><td>2,000</td><td>Proceeds to Rural Revive Maltahohe</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Reservation Policies</h3>
+            <ul class="text-list">
+                <li><strong>Sustainability Levy (Compulsory & Nett):</strong> NAD 1,600 per adult/night, NAD 800 per child (17 & under)/night. Added automatically.</li>
+                <li><strong>Single Supplement:</strong> A 40% surcharge of the adult per person sharing rate applies.</li>
+                <li><strong>Age Policy:</strong> Children aged 7 and above are welcome. Tents allow max 1 extra child sharing with parents.</li>
+                <li><strong>Minimum Stay:</strong> Strictly 2 nights.</li>
+                <li><strong>Cancellation Terms:</strong>
+                    <br>• 46+ days prior to arrival: Forfeit 20% Commitment Fee.
+                    <br>• 45–30 days prior to arrival: 50% of total reservation value.
+                    <br>• 29 days or less: 100% of total reservation value.
+                </li>
+            </ul>
+        </div>`
+    },
+    'dune': {
+        location: 'NamibRand Nature Reserve',
+        cover: 'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/02.jpg',
+        name: 'Wolwedans Dune Camp',
+        shortDesc: `Intimate canvas-and-wood camp perched atop a red sand dune — classic wilderness style, outdoor showers, and stars.`,
+        images: [
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/02.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/03.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/04.jpg'
+        ],
+        airport: 'Nearest airstrip: Wolwedans Airstrip (10-minute transfer). Scheduled and charter flights from Windhoek/Swakopmund.',
+        intro: `Perched on a high dune, Wolwedans Dune Camp offers a close-to-nature desert experience. Comprising 6 standard tents and 1 family suite, it features private decks, en-suite bathrooms with outdoor showers, and stunning vistas of the red dunes. Fully off-grid, it is the perfect location for travellers seeking stillness and adventure.`,
+        tab1: `<div class="content-block">
+            <h3>STO20 Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Rates are in NAD per person per night (pppn), including all meals, house drinks, and activities. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Occupancy</th>
+                            <th>Green Season (11 Jan - 31 Mar) STO 20%</th>
+                            <th>High Season (01 Apr - 31 Mar) STO 20%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standard Tent — Sharing (per person)</strong></td>
+                            <td>10,840</td>
+                            <td>11,920</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard Tent — Single (supplement 40%)</strong></td>
+                            <td>15,176</td>
+                            <td>16,688</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Child (7–14 yrs) sharing with parents</strong></td>
+                            <td>2,720</td>
+                            <td>3,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dune Family Suite (Base Rate: 4 guests)</strong></td>
+                            <td>43,360</td>
+                            <td>47,680</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dune Family Suite — Additional Child (7–17 yrs)</strong></td>
+                            <td>2,720</td>
+                            <td>3,000</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="raw-text">* Minimum stay: 2 nights. Guide rate includes the sustainability levy.</p>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Published rack rates in NAD per person per night (pppn). Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Occupancy</th>
+                            <th>Green Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standard Tent — Sharing (per person)</strong></td>
+                            <td>13,550</td>
+                            <td>14,900</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard Tent — Single (supplement 40%)</strong></td>
+                            <td>18,970</td>
+                            <td>20,860</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Child (7–14 yrs) sharing with parents</strong></td>
+                            <td>3,400</td>
+                            <td>3,750</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dune Family Suite (Base Rate: 4 guests)</strong></td>
+                            <td>54,200</td>
+                            <td>59,600</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dune Family Suite — Additional Child (7–17 yrs)</strong></td>
+                            <td>3,400</td>
+                            <td>3,750</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities & Excursions</h3>
+            <p class="raw-text">All signature drives and walks are fully included in the accommodation rate. Special activities and conservation adoptions are commissionable as specified below.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>STO Rate (N$)</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Morning & Afternoon Scenic Drives (3h)</td><td>Included</td><td>Sunrise & Sundowner stops</td></tr>
+                        <tr><td>Quiet Desert Immersion (Solitude) (45m)</td><td>Included</td><td>Quiet Parks International site</td></tr>
+                        <tr><td>Interpretive Bushman Walk (3h)</td><td>Included</td><td>With local guide</td></tr>
+                        <tr><td>Heart & Home Village Backstage Tour</td><td>Included</td><td>Empowerment & sustainability projects</td></tr>
+                        <tr><td>E-Biking morning/evening ride (2h)</td><td>Included</td><td>Through dunes</td></tr>
+                        <tr><td>Star Bed setup</td><td>Included</td><td>Sleep under NamibRand sky</td></tr>
+                        <tr><td>Full-day E-Bike ride with picnic (6h)</td><td>2,500</td><td>Min 2 / Max 6 pax</td></tr>
+                        <tr><td>Horse Riding morning trail (2h)</td><td>850</td><td>Departing from village</td></tr>
+                        <tr><td>Horse Riding sunset trail (3h)</td><td>1,250</td><td>Includes drinks in dunes</td></tr>
+                        <tr><td>Horse Riding full day ride (6h)</td><td>2,500</td><td>Includes picnic lunch</td></tr>
+                        <tr><td>Desert Sleepout (Dinner hamper + Coffee)</td><td>2,500</td><td>Min 2 / Max 10 pax</td></tr>
+                        <tr><td>Desert Sleepout (Meals in camp + Coffee)</td><td>2,150</td><td>Min 2 / Max 10 pax</td></tr>
+                        <tr><td>Special Dune Breakfast</td><td>1,500</td><td>First 2 guests (NAD 200 thereafter)</td></tr>
+                        <tr><td>Dinner Under the Stars</td><td>1,850</td><td>First 2 guests (NAD 350 thereafter)</td></tr>
+                        <tr><td>Adopt & Plant a Tree</td><td>5,500</td><td>Proceeds to Horticulture Project</td></tr>
+                        <tr><td>Adopt a Fairy Circle</td><td>1,250</td><td>Proceeds to Nature Reserve</td></tr>
+                        <tr><td>Adopt a Silo Shingle Tile</td><td>2,000</td><td>Proceeds to Rural Revive Maltahohe</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Reservation Policies</h3>
+            <ul class="text-list">
+                <li><strong>Sustainability Levy (Compulsory & Nett):</strong> NAD 1,600 per adult/night, NAD 800 per child (17 & under)/night. Added automatically.</li>
+                <li><strong>Single Supplement:</strong> A 40% surcharge of the adult per person sharing rate applies.</li>
+                <li><strong>Age Policy:</strong> Children aged 7 and above are welcome. Tents allow max 1 extra child sharing with parents.</li>
+                <li><strong>Minimum Stay:</strong> Strictly 2 nights.</li>
+                <li><strong>Cancellation Terms:</strong> Standard Wolwedans policy applies.</li>
+            </ul>
+        </div>`
+    },
+    'mountain': {
+        location: 'NamibRand Nature Reserve',
+        cover: 'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/03.jpg',
+        name: 'Wolwedans Mountain View Suite',
+        shortDesc: `Ultimate romantic hideaway for two — private pool, spacious lounge, star bed, private chef, and private guide.`,
+        images: [
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/03.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/04.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/05.jpg'
+        ],
+        airport: 'Nearest airstrip: Wolwedans Airstrip (10-minute transfer). Scheduled and charter flights from Windhoek/Swakopmund.',
+        intro: `Nestled in the dunes near the Dunes Lodge, the Mountain View Suite provides an exclusive retreat for up to 2 adults. This romantic, ultra-luxury chalet features a private swimming pool, a spacious lounge, an open fireplace, and a roll-out Star Bed on the deck. Includes a private chef, host, and private guide/vehicle for all excursions.`,
+        tab1: `<div class="content-block">
+            <h3>STO20 Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Rates are in NAD per suite per night, including all meals, private chef service, house drinks, and private activities. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Suite Occupancy</th>
+                            <th>Green Season (11 Jan - 31 Mar) STO 20%</th>
+                            <th>High Season (01 Apr - 31 Mar) STO 20%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mountain View Suite (Base Rate: 2 guests)</strong></td>
+                            <td>28,480</td>
+                            <td>33,520</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="raw-text">* Minimum stay: 2 nights. Guide rate includes the sustainability levy.</p>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Published rack rates in NAD per suite per night. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Suite Occupancy</th>
+                            <th>Green Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Mountain View Suite (Base Rate: 2 guests)</strong></td>
+                            <td>35,600</td>
+                            <td>41,900</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities & Excursions</h3>
+            <p class="raw-text">All activities are private and fully included. Special dinners and conservation adoptions are commissionable as specified below.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>STO Rate (N$)</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Private Scenic Drives & Walks</td><td>Included</td><td>With dedicated private guide</td></tr>
+                        <tr><td>Quiet Desert Immersion (Solitude)</td><td>Included</td><td>Private spots</td></tr>
+                        <tr><td>Star Bed setup</td><td>Included</td><td>On private suite deck</td></tr>
+                        <tr><td>Dune Breakfast / Dinner in Dunes</td><td>Included</td><td>Prepared by private chef</td></tr>
+                        <tr><td>Adopt & Plant a Tree</td><td>5,500</td><td>Proceeds to Horticulture Project</td></tr>
+                        <tr><td>Adopt a Fairy Circle</td><td>1,250</td><td>Proceeds to Nature Reserve</td></tr>
+                        <tr><td>Adopt a Silo Shingle Tile</td><td>2,000</td><td>Proceeds to Rural Revive Maltahohe</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Reservation Policies</h3>
+            <ul class="text-list">
+                <li><strong>Sustainability Levy (Compulsory & Nett):</strong> NAD 1,600 per adult/night. Added automatically (N$3,200/night for the suite).</li>
+                <li><strong>Age Policy:</strong> Adults only (18+ years). No children allowed.</li>
+                <li><strong>Minimum Stay:</strong> Strictly 2 nights.</li>
+                <li><strong>Cancellation Terms:</strong> Standard Wolwedans policy applies.</li>
+            </ul>
+        </div>`
+    },
+    'plains': {
+        location: 'NamibRand Nature Reserve',
+        cover: 'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/04.jpg',
+        name: 'Wolwedans Plains Camp',
+        shortDesc: `Exclusive-use luxury villa for families or small groups — sleeps up to 8 adults and 2 children, private pool, and chef.`,
+        images: [
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/04.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/05.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/06.jpg'
+        ],
+        airport: 'Nearest airstrip: Wolwedans Airstrip (10-minute transfer). Scheduled and charter flights from Windhoek/Swakopmund.',
+        intro: `Located on the plains of the reserve, Plains Camp is an exclusive-use villa offering space, peace, and wilderness luxury. Comprising 4 en-suite tents (king beds) and an adaptable children's room, it sleeps up to 8 adults and 2 children. Includes a private chef, private host, and a dedicated guide and vehicle for all safaris. Welcomes children of all ages.`,
+        tab1: `<div class="content-block">
+            <h3>STO20 Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Rates are in NAD per night, including all meals, private chef service, house drinks, and private activities. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Villa Occupancy</th>
+                            <th>Green Season (11 Jan - 31 Mar) STO 20%</th>
+                            <th>High Season (01 Apr - 31 Mar) STO 20%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Plains Camp Villa (Base Rate: 4 guests)</strong></td>
+                            <td>56,960</td>
+                            <td>67,040</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional Adult (18+ yrs)</strong></td>
+                            <td>14,240</td>
+                            <td>16,760</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional Child (17 yrs & under)</strong></td>
+                            <td>3,560</td>
+                            <td>4,200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="raw-text">* Minimum stay: 2 nights. Guide rate includes the sustainability levy. Villa sleeps max 8 adults and 2 children.</p>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Published rack rates in NAD per night. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Villa Occupancy</th>
+                            <th>Green Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Plains Camp Villa (Base Rate: 4 guests)</strong></td>
+                            <td>71,200</td>
+                            <td>83,800</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional Adult (18+ yrs)</strong></td>
+                            <td>17,800</td>
+                            <td>20,950</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Additional Child (17 yrs & under)</strong></td>
+                            <td>4,450</td>
+                            <td>5,250</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities & Excursions</h3>
+            <p class="raw-text">All activities are private and fully included. Special family adventures and conservation adoptions are commissionable as specified below.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>STO Rate (N$)</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Private Scenic Drives & Walks</td><td>Included</td><td>With dedicated guide</td></tr>
+                        <tr><td>Family Treasure Hunt & Drumming</td><td>Included</td><td>Led by Happiness Coordinator</td></tr>
+                        <tr><td>Star Bed setup</td><td>Included</td><td>On private decks</td></tr>
+                        <tr><td>Adopt & Plant a Tree</td><td>5,500</td><td>Proceeds to Horticulture Project</td></tr>
+                        <tr><td>Adopt a Fairy Circle</td><td>1,250</td><td>Proceeds to Nature Reserve</td></tr>
+                        <tr><td>Adopt a Silo Shingle Tile</td><td>2,000</td><td>Proceeds to Rural Revive Maltahohe</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Reservation Policies</h3>
+            <ul class="text-list">
+                <li><strong>Sustainability Levy (Compulsory & Nett):</strong> NAD 1,600 per adult/night, NAD 800 per child (17 & under)/night. Added automatically.</li>
+                <li><strong>Age Policy:</strong> Children of all ages welcome (exclusive-use villa).</li>
+                <li><strong>Minimum Stay:</strong> Strictly 2 nights.</li>
+                <li><strong>Cancellation Terms:</strong> Standard Wolwedans policy applies.</li>
+            </ul>
+        </div>`
+    },
+    'boulders': {
+        location: 'NamibRand Nature Reserve',
+        cover: 'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/05.jpg',
+        name: 'Wolwedans Boulders Camp',
+        shortDesc: `Ultra-exclusive tented camp nestled in massive granite outcrops — individual tents in Green Season, exclusive-use in High Season.`,
+        images: [
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/05.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/06.jpg',
+            'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg'
+        ],
+        airport: 'Nearest airstrip: Boulders Airstrip (5-minute transfer). Scheduled and charter flights from Windhoek/Swakopmund.',
+        intro: `Nestled among massive granite boulders in the far south of the reserve, Boulders Camp is the most remote property in the Wolwedans Collection. Comprising 5 standard tents, it features private decks overlooking the vast plains. Individual bookings are allowed in the Green Season (11 Jan – 31 Mar & 16 Nov – 31 Mar). During High Season (1 Apr – 15 Nov), Boulders Camp is available as an exclusive-use property only.`,
+        tab1: `<div class="content-block">
+            <h3>STO20 Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Rates are in NAD, including all meals, house drinks, and activities. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Occupancy</th>
+                            <th>Green Season STO 20% (11 Jan - 31 Mar / 16 Nov - 31 Mar)</th>
+                            <th>High Season STO 20% (01 Apr - 15 Nov)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standard Tent — Sharing (per person)</strong></td>
+                            <td>16,760</td>
+                            <td>EXCLUSIVE USE ONLY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard Tent — Single (supplement 40%)</strong></td>
+                            <td>23,464</td>
+                            <td>EXCLUSIVE USE ONLY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Child (7–14 yrs) sharing with parents</strong></td>
+                            <td>4,200</td>
+                            <td>EXCLUSIVE USE ONLY</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Exclusive Use Base (6 guests)</strong></td>
+                            <td>88,560</td>
+                            <td>100,560</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exclusive Use Additional Adult (18+ yrs)</strong></td>
+                            <td>14,760</td>
+                            <td>16,760</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exclusive Use Additional Child (17 & under)</strong></td>
+                            <td>3,680</td>
+                            <td>4,200</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="raw-text">* Minimum stay: 2 nights. Guide rate includes the sustainability levy. High Season (1 Apr - 15 Nov) is strictly exclusive-use.</p>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 11.01.2026 to 31.03.2027</h3>
+            <p class="raw-text">Published rack rates in NAD. Excludes Sustainability Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Occupancy</th>
+                            <th>Green Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Standard Tent — Sharing (per person)</strong></td>
+                            <td>20,950</td>
+                            <td>EXCLUSIVE USE ONLY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard Tent — Single (supplement 40%)</strong></td>
+                            <td>29,330</td>
+                            <td>EXCLUSIVE USE ONLY</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Child (7–14 yrs) sharing with parents</strong></td>
+                            <td>5,250</td>
+                            <td>EXCLUSIVE USE ONLY</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Exclusive Use Base (6 guests)</strong></td>
+                            <td>110,700</td>
+                            <td>125,700</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exclusive Use Additional Adult (18+ yrs)</strong></td>
+                            <td>18,450</td>
+                            <td>20,950</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Exclusive Use Additional Child (17 & under)</strong></td>
+                            <td>4,600</td>
+                            <td>5,250</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Tour Guide Room (Wolwedans Village)</strong></td>
+                            <td>2,500</td>
+                            <td>2,500</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities & Excursions</h3>
+            <p class="raw-text">All scenic drives, guided walks, and transfers are fully included. Please note that Boulders Camp does not offer horse riding, sleepouts, or star beds due to the remote distance from the main village.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>STO Rate (N$)</th>
+                            <th>Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>Morning & Afternoon Scenic Drives (3h)</td><td>Included</td><td>With local guide</td></tr>
+                        <tr><td>Quiet Desert Immersion (Solitude) (45m)</td><td>Included</td><td>Private rock-view spots</td></tr>
+                        <tr><td>Interpretive Bushman Walk (3h)</td><td>Included</td><td>Explore granite boulders</td></tr>
+                        <tr><td>Adopt & Plant a Tree</td><td>5,500</td><td>Proceeds to Horticulture Project</td></tr>
+                        <tr><td>Adopt a Fairy Circle</td><td>1,250</td><td>Proceeds to Nature Reserve</td></tr>
+                        <tr><td>Adopt a Silo Shingle Tile</td><td>2,000</td><td>Proceeds to Rural Revive Maltahohe</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Reservation Policies</h3>
+            <ul class="text-list">
+                <li><strong>Sustainability Levy (Compulsory & Nett):</strong> NAD 1,600 per adult/night, NAD 800 per child (17 & under)/night. Added automatically.</li>
+                <li><strong>Single Supplement:</strong> A 40% surcharge of the adult per person sharing rate applies.</li>
+                <li><strong>Age Policy:</strong> Children aged 7 and above are welcome. Tents allow max 1 extra child sharing with parents.</li>
+                <li><strong>Minimum Stay:</strong> Strictly 2 nights.</li>
+                <li><strong>Cancellation Terms:</strong> Standard Wolwedans policy applies.</li>
+            </ul>
+        </div>`
+    }
+};
+
+const grid = document.getElementById("lodge-grid");
+Object.keys(DB).forEach(key => {
+    const d = DB[key];
+    const card = document.createElement("div");
+    card.className = "lodge-card";
+    card.innerHTML = `<div class="lodge-card-img-wrap"><img src="${d.cover}" class="lodge-card-img" alt="${d.name}"></div><div class="lodge-card-body"><span class="lodge-card-location">${d.location}</span><h2 class="lodge-card-name">${d.name}</h2><span class="lodge-card-dot"></span><p class="lodge-card-desc">${d.shortDesc}</p><hr class="lodge-card-divider"><div class="lodge-card-actions"><button class="btn-lodge" onclick="openProperty('${key}')">Lodge</button><button class="btn-rates" onclick="openProperty('${key}');setTimeout(()=>switchTab(1),200)">View Rates</button></div></div>`;
+    grid.appendChild(card);
+});
+
+let activePropertyId = '';
+
+function parseTab1(htmlString) {
+    const div = document.createElement("div");
+    div.innerHTML = htmlString;
+    div.querySelectorAll("table").forEach(table => {
+        const tbody = table.querySelector("tbody"); if (!tbody) return;
+        const firstRow = [...tbody.querySelectorAll("tr")].find(tr => tr.querySelectorAll("td").length > 1); if (!firstRow) return;
+        const cells = [...firstRow.querySelectorAll("td")];
+        const priceCols = [];
+        cells.forEach((td, idx) => {
+            if (idx === 0 || td.hasAttribute("colspan")) return;
+            const val = td.innerText.trim().replace(/,/g,"");
+            if (val !== "N/A" && val !== "" && val.toLowerCase() !== "free" && !isNaN(parseFloat(val)) && val.toLowerCase() !== "exclusive use only") priceCols.push(idx);
+        });
+        if (!priceCols.length) return;
+        const theadRows = table.querySelectorAll("thead tr");
+        const lastHead = theadRows[theadRows.length - 1];
+        const headThs = lastHead ? [...lastHead.querySelectorAll("th")] : [];
+        [...priceCols].reverse().forEach(idx => {
+            const th = headThs[idx]; if (!th) return;
+            const qth = document.createElement("th"); qth.innerText = "QTY"; qth.style.cssText = "text-align:center;width:60px;font-size:0.65rem;"; th.after(qth);
+        });
+        tbody.querySelectorAll("tr").forEach(tr => {
+            const tds = [...tr.querySelectorAll("td")]; if (tds.length <= 1) return;
+            const roomName = tds[0] ? tds[0].innerText.trim() : "";
+            [...priceCols].reverse().forEach(idx => {
+                const td = tds[idx]; if (!td) return;
+                const val = td.innerText.trim().replace(/,/g,""); const price = parseFloat(val);
+                const colLabel = headThs[idx] ? headThs[idx].innerText.trim() : "";
+                const label = roomName + " — " + colLabel;
+                const qtyTd = document.createElement("td"); qtyTd.style.textAlign = "center";
+                
+                let levy = 1600;
+                if (label.toLowerCase().includes("child")) {
+                    levy = 800;
+                } else if (label.toLowerCase().includes("guide")) {
+                    levy = 0;
+                } else if (label.toLowerCase().includes("suite") || label.toLowerCase().includes("base rate") || label.toLowerCase().includes("villa") || label.toLowerCase().includes("exclusive use")) {
+                    if (label.toLowerCase().includes("desert") || label.toLowerCase().includes("dune") || label.toLowerCase().includes("plains")) {
+                        levy = 6400; // 4 adults base
+                    } else if (label.toLowerCase().includes("mountain")) {
+                        levy = 3200; // 2 adults base
+                    } else if (label.toLowerCase().includes("boulders")) {
+                        levy = 9600; // 6 adults base
+                    }
+                }
+                
+                if (!isNaN(price)) {
+                    qtyTd.innerHTML = `<input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${price}" data-levy="${levy}" oninput="updateTotal()" style="width:58px;padding:6px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;">`;
+                } else {
+                    qtyTd.innerHTML = ``;
+                }
+                td.after(qtyTd);
+            });
+        });
+    });
+    return div.innerHTML;
+}
+
+let calendarState = { month: new Date().getMonth(), year: new Date().getFullYear(), rangeStart: null, rangeEnd: null };
+
+function calculateNights() {
+    let din="", dout="", nights=1;
+    if(calendarState.rangeStart){const d1=new Date(calendarState.rangeStart.getTime()-calendarState.rangeStart.getTimezoneOffset()*60000);din=d1.toISOString().split("T")[0];}
+    if(calendarState.rangeStart&&calendarState.rangeEnd){const d2=new Date(calendarState.rangeEnd.getTime()-calendarState.rangeEnd.getTimezoneOffset()*60000);dout=d2.toISOString().split("T")[0];const diff=Math.ceil((calendarState.rangeEnd-calendarState.rangeStart)/(1000*60*60*24));nights=diff>0?diff:1;}
+    document.getElementById("b-date-in").value=din;document.getElementById("b-date-out").value=dout;
+    document.getElementById("nights-count").innerText=nights;
+    const disp=document.getElementById("b-dates-display");
+    if(disp){if(din&&dout)disp.innerText=din+"  →  "+dout+"  ("+nights+" night"+(nights>1?"s":"")+")";else if(din)disp.innerText=din+"  →  Select check-out date";else disp.innerText="Select dates from the calendar above";}
+    updateTotal();
+}
+
+function renderCustomCalendar() {
+    const root=document.getElementById("inline-calendar");if(!root)return;root.innerHTML="";
+    const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const dayLabels=["Su","Mo","Tu","We","Th","Fr","Sa"];
+    let m1=calendarState.month, y1=calendarState.year, m2=m1+1, y2=y1;
+    if(m2>11){m2=0;y2=y1+1;}
+    const nav=document.createElement("div");nav.className="dew-calendar-nav";
+    const prevBtn=document.createElement("button");prevBtn.className="dew-calendar-nav-btn";prevBtn.innerHTML="&lsaquo;";
+    prevBtn.onclick=()=>{calendarState.month--;if(calendarState.month<0){calendarState.month=11;calendarState.year--;}renderCustomCalendar();};
+    const t1=document.createElement("span");t1.className="dew-calendar-month-title";t1.textContent=monthNames[m1]+" "+y1;
+    const t2=document.createElement("span");t2.className="dew-calendar-month-title";t2.textContent=monthNames[m2]+" "+y2;
+    const nextBtn=document.createElement("button");nextBtn.className="dew-calendar-nav-btn";nextBtn.innerHTML="&rsaquo;";
+    nextBtn.onclick=()=>{calendarState.month++;if(calendarState.month>11){calendarState.month=0;calendarState.year++;}renderCustomCalendar();};
+    nav.append(prevBtn,t1,t2,nextBtn);root.appendChild(nav);
+    
+    function buildMonth(month, year){
+        const cal=document.createElement("div");cal.className="dew-calendar";
+        const header=document.createElement("div");header.className="dew-calendar-header";
+        dayLabels.forEach(d=>{const l=document.createElement("div");l.className="dew-calendar-day-label";l.textContent=d;header.appendChild(l);});
+        cal.appendChild(header);
+        const gridEl=document.createElement("div");gridEl.className="dew-calendar-grid";
+        const firstDay=new Date(year,month,1).getDay();const daysInMonth=new Date(year,month+1,0).getDate();
+        const today=new Date();today.setHours(0,0,0,0);
+        for(let i=0;i<firstDay;i++){const e=document.createElement("div");e.className="dew-calendar-day dew-empty";gridEl.appendChild(e);}
+        for(let d=1;d<=daysInMonth;d++){
+            const dayEl=document.createElement("div");dayEl.className="dew-calendar-day";dayEl.textContent=d;
+            const thisDate=new Date(year,month,d);
+            
+            const isDesertLodgeClosed = (activePropertyId === 'dunes' && thisDate >= new Date(2026, 0, 11) && thisDate <= new Date(2026, 2, 31));
+            
+            if(thisDate<today) {
+                dayEl.classList.add("dew-past");
+            } else if (isDesertLodgeClosed) {
+                dayEl.classList.add("dew-past");
+                dayEl.title = "Desert Lodge is closed during Green Season";
+                dayEl.style.textDecoration = "line-through";
+                dayEl.style.color = "rgba(180, 50, 50, 0.4)";
+            } else {
+                if(thisDate.toDateString()===today.toDateString())dayEl.classList.add("dew-today");
+                if(calendarState.rangeStart&&thisDate.toDateString()===calendarState.rangeStart.toDateString())dayEl.classList.add("dew-range-start");
+                else if(calendarState.rangeEnd&&thisDate.toDateString()===calendarState.rangeEnd.toDateString())dayEl.classList.add("dew-range-end");
+                else if(calendarState.rangeStart&&calendarState.rangeEnd&&thisDate>calendarState.rangeStart&&thisDate<calendarState.rangeEnd)dayEl.classList.add("dew-range");
+                
+                dayEl.onclick=()=>{
+                    if(!calendarState.rangeStart||(calendarState.rangeStart&&calendarState.rangeEnd)){calendarState.rangeStart=thisDate;calendarState.rangeEnd=null;}
+                    else{if(thisDate>calendarState.rangeStart)calendarState.rangeEnd=thisDate;else{calendarState.rangeEnd=calendarState.rangeStart;calendarState.rangeStart=thisDate;}}
+                    renderCustomCalendar();calculateNights();
+                };
+            }
+            gridEl.appendChild(dayEl);
+        }
+        cal.appendChild(gridEl);return cal;
+    }
+    const container=document.createElement("div");container.className="dew-calendar-container";
+    container.appendChild(buildMonth(m1,y1));container.appendChild(buildMonth(m2,y2));root.appendChild(container);
+}
+
+function openProperty(id) {
+    const d=DB[id];if(!d)return;
+    if (window.location.hash !== '#' + id) {
+        window.location.hash = id;
+    }
+    activePropertyId = id;
+    document.getElementById("main-view").style.display="none";
+    document.getElementById("detail-view").style.display="block";
+    window.scrollTo(0,0);
+    document.getElementById("d-title").innerText=d.name;
+    document.getElementById("d-intro").innerText=d.intro;
+    document.getElementById("d-location").innerText=d.location;
+    document.getElementById("spec-location").innerText=d.location;
+    const gallery=document.getElementById("d-gallery");gallery.innerHTML="";
+    if(d.images)d.images.forEach(src=>{gallery.innerHTML+=`<img src="${src}" class="gallery-img">`;});
+    const calendarBlock=document.getElementById("global-dates-ui");calendarBlock.style.display="block";
+    document.getElementById("tab-1").innerHTML=parseTab1(d.tab1);document.getElementById("tab-1").prepend(calendarBlock);
+    document.getElementById("tab-2").innerHTML=parseTab1(d.tab2);document.getElementById("tab-3").innerHTML=d.tab3;
+    document.querySelectorAll(".rate-qty").forEach(el=>el.addEventListener("input",updateTotal));
+    const saved=localStorage.getItem("dt_agent_email");if(saved)document.getElementById("b-agent-email").value=saved;
+    
+    calendarState={month: new Date().getMonth(), year: new Date().getFullYear(), rangeStart: null, rangeEnd: null};
+    selectedItems=[];const finalBtn=document.getElementById("tab-btn-5");if(finalBtn)finalBtn.classList.remove("ready","active");
+    renderCustomCalendar();calculateNights();updateTotal();switchTab(1);
+}
+
+function closeProperty(){
+    if (window.location.hash !== "") {
+        window.location.hash = "";
+    }
+    document.getElementById("detail-view").style.display="none";
+    document.getElementById("main-view").style.display="block";
+    window.scrollTo(0,0);
+    activePropertyId = '';
+}
+
+window.addEventListener("hashchange", () => {
+    const id = window.location.hash.replace('#', '').toLowerCase();
+    if (id && DB[id]) {
+        openProperty(id);
+    } else if (!id) {
+        closeProperty();
+    }
+});
+
+window.addEventListener("load", () => {
+    const id = window.location.hash.replace('#', '').toLowerCase();
+    if (id && DB[id]) {
+        openProperty(id);
+    }
+});
+
+function switchTab(num){
+    if(num===5&&!document.getElementById("tab-btn-5").classList.contains("ready")){updateTotal();if(!document.getElementById("tab-btn-5").classList.contains("ready"))return;}
+    for(let i=1;i<=5;i++){document.getElementById("tab-btn-"+i)?.classList.remove("active");document.getElementById("tab-"+i)?.classList.remove("active");}
+    document.getElementById("tab-btn-"+num)?.classList.add("active");document.getElementById("tab-"+num)?.classList.add("active");
+    if(num===5)renderBookingSummary();
+}
+
+let selectedItems=[];
+function updateTotal(){
+    selectedItems=[];let totalAccom=0;let totalLevy=0;
+    const nights=parseInt(document.getElementById("nights-count")?.innerText)||1;
+    document.querySelectorAll(".rate-qty").forEach(el=>{
+        const qty=parseInt(el.value)||0;
+        if(qty>0){
+            const price=parseFloat(el.dataset.price);
+            const levy=parseFloat(el.dataset.levy)||0;
+            const name=el.dataset.name;
+            const lineAccom=qty*price*nights;
+            const lineLevy=qty*levy*nights;
+            totalAccom+=lineAccom;
+            totalLevy+=lineLevy;
+            selectedItems.push({name,qty,price,levy,nights,total:lineAccom});
+        }
+    });
+    const grandTotal=totalAccom+totalLevy;
+    const bar=document.getElementById("booking-bar");const finalBtn=document.getElementById("tab-btn-5");
+    if(grandTotal>0){
+        bar.style.display="block";
+        document.getElementById("booking-total").innerText="Total: N$ "+grandTotal.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});
+        const brkEl=document.getElementById("booking-breakdown");
+        if(brkEl){
+            if(totalLevy>0)brkEl.innerText="Accommodation N$ "+totalAccom.toLocaleString("en-US",{minimumFractionDigits:2})+"  +  Levy N$ "+totalLevy.toLocaleString("en-US",{minimumFractionDigits:2});
+            else brkEl.innerText="";
+        }
+        if(finalBtn)finalBtn.classList.add("ready");
+    }
+    else{bar.style.display="none";if(finalBtn)finalBtn.classList.remove("ready");}
+    if(document.getElementById("tab-5")?.classList.contains("active"))renderBookingSummary();
+}
+
+function renderBookingSummary(){
+    const summary=document.getElementById("booking-summary");if(!summary)return;
+    if(!selectedItems.length){summary.innerHTML='<p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates from the tabs above to build your booking.</p>';return;}
+    let html='<ul style="list-style:none;padding:0;margin:0;">';
+    let totalAccom = 0;
+    let totalLevy = 0;
+    selectedItems.forEach(item=>{
+        const lineAccom = item.qty * item.price * item.nights;
+        const lineLevy = item.qty * (item.levy || 0) * item.nights;
+        totalAccom += lineAccom;
+        totalLevy += lineLevy;
+        html+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem;">
+            <span><strong>${item.qty}&times;</strong> ${item.name} <span style="color:var(--text-muted);font-size:0.8rem;">&times; ${item.nights} night${item.nights>1?"s":""}</span></span>
+            <span style="color:var(--text-main);font-weight:500;">N$ ${lineAccom.toLocaleString("en-US",{minimumFractionDigits:2})}</span>
+        </li>`;
+    });
+    if (totalLevy > 0) {
+        html+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem;color:var(--seafoam);">
+            <span><strong>Compulsory Sustainability Levy</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(Non-commissionable)</span></span>
+            <span style="font-weight:500;color:var(--seafoam);">N$ ${totalLevy.toLocaleString("en-US",{minimumFractionDigits:2})}</span>
+        </li>`;
+    }
+    const grandTotal = totalAccom + totalLevy;
+    html+=`<li style="display:flex;justify-content:space-between;margin-top:14px;font-family:var(--font-head);font-size:1.3rem;">
+        <span>Grand Total</span><span>N$ ${grandTotal.toLocaleString("en-US",{minimumFractionDigits:2})}</span>
+    </li></ul>`;
+    summary.innerHTML=html;
+}
+
+async function submitBooking(e){
+    e.preventDefault();
+    if(!selectedItems.length){alert("Please select at least one rate before submitting.");return;}
+    const lodgeName=document.getElementById("d-title").innerText,agentEmail=document.getElementById("b-agent-email").value,status=document.getElementById("b-status").value,clientName=document.getElementById("b-name").value,guideRooms=document.getElementById("b-guide").value||"None",dateIn=document.getElementById("b-date-in").value,dateOut=document.getElementById("b-date-out").value,arriving=document.getElementById("b-arriving").value,departing=document.getElementById("b-departing").value,msg=document.getElementById("b-message").value;
+    localStorage.setItem("dt_agent_email",agentEmail);
+    const btn=e.target.querySelector("button[type=submit]");
+    btn.innerHTML='<span style="display:inline-block;border:2px solid #fff;border-top-color:transparent;border-radius:50%;width:14px;height:14px;animation:spin 1s linear infinite;margin-right:8px;vertical-align:middle;"></span>Sending...';btn.disabled=true;
+    
+    let totalAccom = 0;
+    let totalLevy = 0;
+    const htmlItems = selectedItems.map(item => {
+        const lineAccom = item.qty * item.price * item.nights;
+        const lineLevy = item.qty * (item.levy || 0) * item.nights;
+        totalAccom += lineAccom;
+        totalLevy += lineLevy;
+        return `<tr><td style="padding:10px;border-bottom:1px solid #eee;"><strong>${item.qty}&times;</strong> ${item.name} &times; ${item.nights} night${item.nights>1?"s":""}</td><td style="padding:10px;border-bottom:1px solid #eee;text-align:right;color:#B8956A;"><strong>N$ ${lineAccom.toLocaleString("en-US",{minimumFractionDigits:2})}</strong></td></tr>`;
+    }).join("");
+    
+    if (totalLevy > 0) {
+        htmlItems += `<tr><td style="padding:10px;border-bottom:1px solid #eee;color:#6A8E82;"><strong>Compulsory Sustainability Levy</strong> (Non-commissionable)</td><td style="padding:10px;border-bottom:1px solid #eee;text-align:right;color:#6A8E82;"><strong>N$ ${totalLevy.toLocaleString("en-US",{minimumFractionDigits:2})}</strong></td></tr>`;
+    }
+    
+    const grandTotal = totalAccom + totalLevy;
+    const emailHtml=`<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden;"><div style="background:#3C3530;padding:32px;text-align:center;color:#fff;"><p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#C29F72;">Wolwedans Collection Rate Portal</p><h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300;">${lodgeName}</h1><p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#6A8E82;">New ${status}</p></div><div style="padding:32px;background:#fff;"><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-size:14px;"><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${agentEmail}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Client</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${clientName}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Date In</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateIn}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Date Out</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateOut}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Arriving From</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${arriving}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Departing To</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${departing}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#8C827A;">Guide Rooms</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${guideRooms}</td></tr></table><p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#C29F72;margin-bottom:12px;">Requested Rates</p><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px;">${htmlItems}<tr><td style="padding:14px 10px;font-size:16px;font-family:Georgia,serif;"><strong>Estimated Total</strong></td><td style="padding:14px 10px;text-align:right;font-size:16px;"><strong>N$ ${grandTotal.toLocaleString("en-US",{minimumFractionDigits:2})}</strong></td></tr></table><div style="background:#f9f7f4;padding:18px;border-radius:8px;border-left:3px solid #6A8E82;"><p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8C827A;">Notes</p><p style="margin:0;font-size:14px;color:#555;white-space:pre-line;">${msg||"No additional notes."}</p></div></div></div>`;
+    
+    try {
+        const res=await fetch("https://desert-tracks.vercel.app/api/send_email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({to:"bookings@desert-tracks.com",subject:`New ${status}: ${lodgeName} — ${clientName}`,html:emailHtml})});
+        if(res.ok){alert("Booking request sent to bookings@desert-tracks.com");closeProperty();e.target.reset();selectedItems=[];updateTotal();}
+        else{const data=await res.json();alert("Failed: "+(data.error||"Unknown error"));}
+    } catch(err) {
+        alert("Network error. Please try again.");
+    } finally {
+        btn.innerHTML="Send Booking to Operations";btn.disabled=false;
+    }
+}
+
+document.addEventListener("keydown",function(e){if(e.key==="Enter"&&e.target.classList.contains("rate-qty")){e.preventDefault();const inputs=[...document.querySelectorAll(".rate-qty")];const idx=inputs.indexOf(e.target);if(idx>=0&&idx<inputs.length-1)inputs[idx+1].focus();}});
+const savedEmail=localStorage.getItem("dt_agent_email");if(savedEmail){const el=document.getElementById("b-agent-email");if(el)el.value=savedEmail;}
+</script>
+
+</body>
+</html>

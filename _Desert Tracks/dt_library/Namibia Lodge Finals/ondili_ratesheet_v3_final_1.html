@@ -40,6 +40,7 @@
         .hero-rule { width: 50px; height: 1px; background: var(--gold); margin: 28px auto; }
         .hero-tagline { font-family: var(--font-head); font-size: clamp(1.2rem,2.5vw,2rem); font-style: italic; font-weight: 300; color: var(--text-main); margin-bottom: 12px; }
         .hero-sub { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase; color: var(--text-muted); }
+        .header-rule { width: 60px; height: 1px; background: var(--gold); margin: 22px auto 0; }
 
         /* ── LODGE GRID ── */
         .lodge-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 24px; max-width: 1400px; margin: 0 auto; padding: 40px 30px 80px; }
@@ -199,8 +200,6 @@
             <div class="spec-row"><span class="spec-label">Contact</span><span class="spec-value">res@ondili.com</span></div>
         </div>
     </div>
-
-    <div class="lodge-gallery" id="d-gallery"></div>
 
     <div class="tabs">
         <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
@@ -531,13 +530,11 @@ function openProperty(id) {
     document.getElementById('d-intro').innerText = d.intro;
     document.getElementById('d-location').innerText = d.location;
     document.getElementById('spec-location').innerText = d.location;
-    const gallery = document.getElementById('d-gallery');
-    gallery.innerHTML = '';
-    if(d.images) d.images.slice(0,3).forEach(src => { gallery.innerHTML += `<img src="${src}" class="gallery-img">`; });
     const galleryFull = document.getElementById('d-gallery-full');
     galleryFull.innerHTML = '';
     if(d.images) d.images.forEach(src => { galleryFull.innerHTML += `<img src="${src}" class="gallery-img">`; });
     const calendarBlock = document.getElementById('global-dates-ui');
+    calendarBlock.style.display = 'block';
     document.getElementById('tab-1').innerHTML = parseTab1(d.tab1);
     document.getElementById('tab-1').prepend(calendarBlock);
     document.getElementById('tab-2').innerHTML = parseTab1(d.tab2);
@@ -546,7 +543,11 @@ function openProperty(id) {
     const saved = localStorage.getItem('dt_agent_email');
     if(saved) document.getElementById('b-agent-email').value = saved;
     calendarState = { month: new Date().getMonth(), year: new Date().getFullYear(), rangeStart: null, rangeEnd: null };
-    renderCustomCalendar(); calculateNights(); updateTotal(); switchTab(1);
+    renderCustomCalendar(); calculateNights();
+    selectedItems = [];
+    const finalBtn = document.getElementById('tab-btn-5');
+    if(finalBtn) { finalBtn.classList.remove('ready','active'); }
+    updateTotal(); switchTab(1);
 }
 
 function closeProperty() {

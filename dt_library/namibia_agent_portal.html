@@ -633,6 +633,7 @@
                     <div class="lodge-item" onclick="openLogin('Le Mirage Resort & Spa')">Le Mirage Resort & Spa<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Sossus Dune Lodge')">Sossus Dune Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Wolwedans Dunes Lodge')">Wolwedans Dunes Lodge<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Wolwedans Dune Camp')">Wolwedans Dune Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Kulala Desert Lodge')">Kulala Desert Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Little Kulala')">Little Kulala<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Sossusvlei Desert Lodge')">Sossusvlei Desert Lodge<button class="lodge-btn">Rates</button></div>
@@ -729,6 +730,7 @@
                     <div class="lodge-item" onclick="openLogin('Damaraland Camp')">Damaraland Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Mowani Mountain Camp')">Mowani Mountain Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Camp Kipwe')">Camp Kipwe<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Mowani Campsite')">Mowani Campsite<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Grootberg Lodge')">Grootberg Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Hoada Campsite')">Hoada Campsite<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Palmwag Lodge')">Palmwag Lodge<button class="lodge-btn">Rates</button></div>
@@ -750,6 +752,7 @@
                     <div class="lodge-item" onclick="openLogin('Wilderness Damaraland Camp')">Wilderness Damaraland Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Wilderness Desert Rhino Camp')">Wilderness Desert Rhino Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Twyfelfontein Adventure Camp')">Twyfelfontein Adventure Camp<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Lodge Damaraland')">Lodge Damaraland<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -836,6 +839,7 @@
                     <div class="lodge-item" onclick="openLogin('Cornerstone Guesthouse')">Cornerstone Guesthouse<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Beach Lodge')">Beach Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Swakopmund Sands Hotel')">Swakopmund Sands Hotel<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Driftwood Guesthouse')">Driftwood Guesthouse<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Brigadoon Boutique Guesthouse')">Brigadoon Boutique Guesthouse<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
@@ -3325,6 +3329,27 @@
         // gondwanaMap intentionally empty — gondwana_rates.html not yet available.
         // These lodges will show "Rates coming soon" toast when clicked.
         const gondwanaMap = {};
+        const wolwedansMap = {
+            'Wolwedans Dunes Lodge': '../_Desert Tracks/dt_library/Namibia Lodge Finals/wolwedans_ratesheet_v3.html#dunes',
+            'Wolwedans Desert Lodge (Dunes Lodge)': '../_Desert Tracks/dt_library/Namibia Lodge Finals/wolwedans_ratesheet_v3.html#dunes',
+            'Wolwedans Dune Camp': '../_Desert Tracks/dt_library/Namibia Lodge Finals/wolwedans_ratesheet_v3.html#dune',
+            'Wolwedans Mountain View Suite': '../_Desert Tracks/dt_library/Namibia Lodge Finals/wolwedans_ratesheet_v3.html#mountain',
+            'Wolwedans Plains Camp': '../_Desert Tracks/dt_library/Namibia Lodge Finals/wolwedans_ratesheet_v3.html#plains',
+            'Wolwedans Boulders Camp': '../_Desert Tracks/dt_library/Namibia Lodge Finals/wolwedans_ratesheet_v3.html#boulders'
+        };
+        const chiwaniMap = {
+            'Camp Kipwe': '../_Desert Tracks/dt_library/Namibia Lodge Finals/chiwani_ratesheet_v3.html#kipwe',
+            'Mowani Mountain Camp': '../_Desert Tracks/dt_library/Namibia Lodge Finals/chiwani_ratesheet_v3.html#mowani',
+            'Mowani Campsite': '../_Desert Tracks/dt_library/Namibia Lodge Finals/chiwani_ratesheet_v3.html#campsite'
+        };
+        const quiverMap = {
+            'Toshari Lodge': '../_Desert Tracks/dt_library/Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#toshari',
+            'Swakopmund Sands Hotel': '../_Desert Tracks/dt_library/Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#swakopmundsands',
+            'Swakopmund Sands': '../_Desert Tracks/dt_library/Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#swakopmundsands',
+            'Lodge Damaraland': '../_Desert Tracks/dt_library/Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#damaraland',
+            'Olive Grove Guesthouse': '../_Desert Tracks/dt_library/Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#olivegrove',
+            'Driftwood Guesthouse': '../_Desert Tracks/dt_library/Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#driftwood'
+        };
         const individualMap = {
             'Ababis Guest Farm': 'individual_rates.html#ababis',
             'Africa Safari Lodge': 'individual_rates.html#africasafari',
@@ -3518,9 +3543,9 @@
                 
                 let hasRateSheet = false;
                 if (is2027) {
-                    hasRateSheet = (lodgeName === 'Waldeck Lodge' || lodgeName === 'Cornerstone Guesthouse');
+                    hasRateSheet = (lodgeName === 'Waldeck Lodge' || lodgeName === 'Cornerstone Guesthouse' || !!wolwedansMap[lodgeName]);
                 } else {
-                    hasRateSheet = !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
+                    hasRateSheet = !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
                 }
                 
                 const originalBtn = item.querySelector('button');
@@ -4670,7 +4695,7 @@
             if (!lodgeName) return false;
             const n = lodgeName.toLowerCase().trim();
             if (n.includes('car rental') || n.includes('nts') || n.includes('vehicle') || n.includes('hilux') || n.includes('safari car') || n.includes('4x4')) return true;
-            return !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
+            return !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
         }
 
         function getLodgeRateSheetUrl(lodgeName) {
@@ -4697,7 +4722,10 @@
                       findInMap(logufaMap) || 
                       findInMap(musharaMap) || 
                       findInMap(gondwanaMap) || 
-                      findInMap(individualMap);
+                      findInMap(individualMap) ||
+                      findInMap(wolwedansMap) ||
+                      findInMap(chiwaniMap) ||
+                      findInMap(quiverMap);
             
             if (url) return url;
 

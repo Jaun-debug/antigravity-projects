@@ -611,6 +611,11 @@
                     <div class="lodge-item" onclick="openLogin('Desert Homestead Outpost')">Desert Homestead Outpost<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Le Mirage Resort & Spa')">Le Mirage Resort & Spa<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Namib Outpost')">Namib Outpost<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Wolwedans Dunes Lodge')">Wolwedans Dunes Lodge<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Wolwedans Dune Camp')">Wolwedans Dune Camp<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Wolwedans Plains Camp')">Wolwedans Plains Camp<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Wolwedans Mountain View Suite')">Wolwedans Mountain View Suite<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Wolwedans Boulders Camp')">Wolwedans Boulders Camp<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -620,7 +625,11 @@
                     <h3>Damaraland</h3>
                 </div>
                 <div class="lodge-list">
+                    <div class="lodge-item" onclick="openLogin('Camp Kipwe')">Camp Kipwe<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Mowani Mountain Camp')">Mowani Mountain Camp<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Mowani Campsite')">Mowani Campsite<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Twyfelfontein Adventure Camp')">Twyfelfontein Adventure Camp<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Lodge Damaraland')">Lodge Damaraland<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -642,6 +651,8 @@
                 </div>
                 <div class="lodge-list">
                     <div class="lodge-item" onclick="openLogin('Strand Hotel Swakopmund')">Strand Hotel Swakopmund<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Swakopmund Sands')">Swakopmund Sands<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Driftwood Guesthouse')">Driftwood Guesthouse<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -663,6 +674,7 @@
                 </div>
                 <div class="lodge-list">
                     <div class="lodge-item" onclick="openLogin('Etosha Oberland Lodge')">Etosha Oberland Lodge<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Toshari Lodge')">Toshari Lodge<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
@@ -683,6 +695,7 @@
                 </div>
                 <div class="lodge-list">
                     <div class="lodge-item" onclick="openLogin('Timelen')">Timelen<button class="lodge-btn">Rates</button></div>
+                    <div class="lodge-item" onclick="openLogin('Olive Grove Guesthouse')">Olive Grove Guesthouse<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
             </div>
@@ -2914,6 +2927,27 @@
         // gondwanaMap intentionally empty — gondwana_rates.html not yet available.
         // These lodges will show "Rates coming soon" toast when clicked.
         const gondwanaMap = {};
+        const wolwedansMap = {
+            'Wolwedans Dunes Lodge': '../Namibia Lodge Finals/wolwedans_ratesheet_v3.html#dunes',
+            'Wolwedans Desert Lodge (Dunes Lodge)': '../Namibia Lodge Finals/wolwedans_ratesheet_v3.html#dunes',
+            'Wolwedans Dune Camp': '../Namibia Lodge Finals/wolwedans_ratesheet_v3.html#dune',
+            'Wolwedans Mountain View Suite': '../Namibia Lodge Finals/wolwedans_ratesheet_v3.html#mountain',
+            'Wolwedans Plains Camp': '../Namibia Lodge Finals/wolwedans_ratesheet_v3.html#plains',
+            'Wolwedans Boulders Camp': '../Namibia Lodge Finals/wolwedans_ratesheet_v3.html#boulders'
+        };
+        const chiwaniMap = {
+            'Camp Kipwe': '../Namibia Lodge Finals/chiwani_ratesheet_v3.html#kipwe',
+            'Mowani Mountain Camp': '../Namibia Lodge Finals/chiwani_ratesheet_v3.html#mowani',
+            'Mowani Campsite': '../Namibia Lodge Finals/chiwani_ratesheet_v3.html#campsite'
+        };
+        const quiverMap = {
+            'Toshari Lodge': '../Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#toshari',
+            'Swakopmund Sands Hotel': '../Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#swakopmundsands',
+            'Swakopmund Sands': '../Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#swakopmundsands',
+            'Lodge Damaraland': '../Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#damaraland',
+            'Olive Grove Guesthouse': '../Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#olivegrove',
+            'Driftwood Guesthouse': '../Namibia Lodge Finals/quiver_and_co_ratesheet_v3.html#driftwood'
+        };
         const individualMap = {};
 
         // Year State Management
@@ -3042,9 +3076,9 @@
                 
                 let hasRateSheet = false;
                 if (is2027) {
-                    hasRateSheet = (lodgeName === 'Waldeck Lodge' || lodgeName === 'Cornerstone Guesthouse');
+                    hasRateSheet = (lodgeName === 'Waldeck Lodge' || lodgeName === 'Cornerstone Guesthouse' || !!wolwedansMap[lodgeName]);
                 } else {
-                    hasRateSheet = !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
+                    hasRateSheet = !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
                 }
                 
                 const originalBtn = item.querySelector('button');
@@ -4194,7 +4228,7 @@
             if (!lodgeName) return false;
             const n = lodgeName.toLowerCase().trim();
             if (n.includes('car rental') || n.includes('nts') || n.includes('vehicle') || n.includes('hilux') || n.includes('safari car') || n.includes('4x4')) return true;
-            return !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName]);
+            return !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
         }
 
         function getLodgeRateSheetUrl(lodgeName) {
@@ -4221,7 +4255,10 @@
                       findInMap(logufaMap) || 
                       findInMap(musharaMap) || 
                       findInMap(gondwanaMap) || 
-                      findInMap(individualMap);
+                      findInMap(individualMap) ||
+                      findInMap(wolwedansMap) ||
+                      findInMap(chiwaniMap) ||
+                      findInMap(quiverMap);
             
             if (url) return url;
 
