@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lodge Damaraland — Desert Tracks</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Inter:wght@400;500;600;700&family=Open+Sans:wght@400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+<link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;background:#f5efe4}
+  body{margin:0;font-family:'Inter',system-ui,sans-serif;background:#f7f1e8;color:#123631;-webkit-font-smoothing:antialiased;line-height:1.5}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1152px;margin:0 auto;padding:0 24px}
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(247,241,232,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid rgba(174,130,69,.2);padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+  .topbar .brand{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;letter-spacing:.02em;color:#123631}
+  .topbar .back{color:#C85F19;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:opacity .2s}
+  .topbar .back:hover{opacity:.8}
+  .hero{position:relative;width:100vw;margin-left:calc(-50vw + 50%);height:100svh;min-height:600px;overflow:hidden;background:#0a0a0a;display:flex;align-items:center;justify-content:center}
+  .hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
+  .hero::before{content:"";position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(0,0,0,.08) 0%,rgba(0,0,0,.20) 25%,rgba(0,0,0,.58) 55%,rgba(0,0,0,.75) 100%)}
+  .hero::after{content:"";position:absolute;inset:0;z-index:3;background:radial-gradient(ellipse at center,rgba(0,0,0,0) 55%,rgba(0,0,0,.35) 100%);pointer-events:none}
+  .hero .glass{position:relative;z-index:4;text-align:center;max-width:820px;margin:0 24px;padding:60px 50px;background:rgba(20,18,15,.45);backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);border:1px solid rgba(255,255,255,.15);border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.3)}
+  @media(max-width:640px){.hero .glass{padding:40px 28px;margin:0 16px}}
+  .hero .eyebrow{display:block;font-family:'Open Sans',sans-serif;font-size:11px;letter-spacing:4px;margin-bottom:24px;color:#fff;text-transform:uppercase}
+  .hero h1{font-family:'Cinzel',serif;color:#fff;font-weight:400;font-size:clamp(2.1rem,3.6vw,3.6rem);line-height:1.1;margin:0 0 24px 0;text-transform:uppercase;letter-spacing:.02em}
+  .hero .tag{font-family:'Open Sans',sans-serif;font-size:.95rem;color:#fff;margin:0 0 32px 0;letter-spacing:.02em;line-height:1.5}
+  .hero .cta{display:inline-block;font-family:'Open Sans','Helvetica',sans-serif;font-size:11px;font-weight:500;letter-spacing:3px;color:#fff;border:1px solid transparent;padding:14px 32px;border-radius:4px;transition:background .3s ease;background:#AE8245;cursor:pointer;text-transform:uppercase;text-decoration:none}
+  .hero .cta:hover{background:#9B723B}
+  .main{padding:80px 24px;max-width:1152px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:64px}
+  @media(min-width:1024px){.main{grid-template-columns:repeat(12,1fr);padding:96px 24px}}
+  .col-left{display:flex;flex-direction:column;gap:64px}
+  @media(min-width:1024px){.col-left{grid-column:span 8}}
+  .col-right{display:flex;flex-direction:column;gap:48px}
+  @media(min-width:1024px){.col-right{grid-column:span 4}}
+  .intro p.lead{font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,24px);line-height:1.5;color:#123631;margin-bottom:24px}
+  .intro p{color:rgba(18,54,49,.78);font-size:17px;line-height:1.7;margin-bottom:18px}
+  .intro p:last-child{margin-bottom:0}
+  .h2{font-family:'Playfair Display',serif;font-size:30px;color:#123631;margin-bottom:32px;display:flex;align-items:center;gap:16px;font-weight:500}
+  .h2 .rule{display:block;flex:1;height:1px;background:rgba(174,130,69,.3)}
+  .highlights{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:640px){.highlights{grid-template-columns:1fr 1fr}}
+  .highlight{display:flex;align-items:flex-start;gap:16px;padding:24px;background:rgba(255,255,255,.5);border:1px solid rgba(174,130,69,.2);border-radius:10px}
+  .highlight .icon{flex-shrink:0;color:#C85F19}
+  .highlight .text{font-weight:500;color:#123631}
+  .suites{display:flex;flex-direction:column;gap:32px}
+  .suite{display:flex;flex-direction:column;gap:24px;background:rgba(255,255,255,.4);padding:24px;border-radius:14px;border:1px solid rgba(174,130,69,.1)}
+  @media(min-width:768px){.suite{flex-direction:row;gap:32px;align-items:stretch}}
+  .suite img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:10px}
+  @media(min-width:768px){.suite img{width:33%}}
+  .suite .body{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .suite .count{font-size:12px;font-weight:600;letter-spacing:.18em;color:#AE8245;text-transform:uppercase;margin-bottom:8px}
+  .suite h3{font-family:'Playfair Display',serif;font-size:24px;color:#123631;margin-bottom:14px;font-weight:500}
+  .suite p{color:rgba(18,54,49,.7);margin-bottom:20px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+  .tag-pill{font-size:12px;padding:6px 12px;background:rgba(18,54,49,.05);color:#123631;border-radius:999px;border:1px solid rgba(18,54,49,.1)}
+  .map{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:1px solid rgba(174,130,69,.3);box-shadow:0 10px 30px rgba(18,54,49,.1)}
+  .map img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.85;mix-blend-mode:multiply}
+  .exp{background:#f5efe4;color:#123631;padding:32px;border-radius:18px;border:1px solid rgba(174,130,69,.25)}
+  .exp h3{font-family:'Playfair Display',serif;font-size:24px;margin-bottom:24px;color:#AE8245;font-weight:500;letter-spacing:.01em}
+  .exp .pills{display:flex;flex-wrap:wrap;gap:8px}
+  .exp .pill{font-size:14px;padding:8px 16px;background:#8CB5A3;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:5px;cursor:default;letter-spacing:.04em}
+  .feat h3{font-family:'Playfair Display',serif;font-size:24px;color:#123631;border-bottom:1px solid rgba(174,130,69,.2);padding-bottom:16px;margin-bottom:24px;font-weight:500}
+  .feat .list{display:flex;flex-direction:column;gap:8px}
+  .feat .item{display:flex;gap:16px;padding:12px;margin:0 -12px;border-radius:10px;transition:background .2s}
+  .feat .item:hover{background:rgba(255,255,255,.5)}
+  .feat .item img{width:80px;height:80px;object-fit:cover;border-radius:6px;box-shadow:0 2px 6px rgba(0,0,0,.06);flex-shrink:0}
+  .feat .item .meta{display:flex;flex-direction:column;justify-content:center}
+  .feat .item .days{font-size:11px;font-weight:700;letter-spacing:.14em;color:#C85F19;text-transform:uppercase;margin-bottom:4px}
+  .feat .item .ttl{font-family:'Playfair Display',serif;font-weight:500;color:#123631;line-height:1.3;font-size:15px}
+  .feat .item:hover .ttl{color:#C85F19}
+  .gallery-section{max-width:1600px;margin:0 auto;padding:0 24px 96px}
+  .gallery-section .h2{justify-content:center;text-align:center}
+  .gallery-section .h2 .rule{display:none}
+  .info-block{max-width:1100px;margin:0 auto;padding:0 24px 96px}
+  .info-block .h2{justify-content:center;text-align:center;margin-bottom:32px}
+  .info-block .h2 .rule{display:none}
+  .info-grid{display:flex;flex-direction:column;gap:24px}
+  .info-item{background:rgba(255,255,255,.6);border:1px solid rgba(174,130,69,.18);border-radius:12px;padding:24px 28px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  .info-label{font-size:12px;font-weight:700;letter-spacing:.14em;color:#C85F19;text-transform:uppercase;margin-bottom:10px}
+  .info-content{color:#3a3a36;font-size:15px;line-height:1.7}
+  .info-content.split{column-count:2;column-gap:32px}
+  @media(max-width:640px){.info-content.split{column-count:1}}
+  .gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+  @media(min-width:768px){.gallery{grid-template-columns:repeat(4,1fr)}}
+  .gallery .cell{overflow:hidden;border-radius:12px;aspect-ratio:4/3}
+  .gallery .cell img{width:100%;height:100%;object-fit:cover;transition:transform .7s ease}
+  .gallery .cell:hover img{transform:scale(1.05)}
+  .gallery.gallery-2{grid-template-columns:1fr;grid-template-rows:auto;height:auto;min-height:0}
+  @media(min-width:768px){.gallery.gallery-2{grid-template-columns:repeat(2,1fr);grid-template-rows:1fr;height:60vh;min-height:480px}}
+  .footer{background:#f5efe4;color:#123631;padding:80px 24px;text-align:center;margin:0;border-top:1px solid rgba(174,130,69,.2)}
+  .footer .inner{max-width:640px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+  .footer h2{font-family:'Playfair Display',serif;font-size:clamp(32px,4.4vw,48px);font-weight:500;color:#AE8245 !important;margin:0;letter-spacing:.01em}
+  .footer p{color:#123631;font-size:18px}
+  .footer .ctas{display:flex;flex-direction:column;gap:16px;justify-content:center;margin-top:8px}
+  @media(min-width:640px){.footer .ctas{flex-direction:row}}
+  .btn{padding:16px 32px;font-weight:500;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .2s,border-color .2s,color .2s;font-size:15px}
+  .btn-primary{background:#C85F19;color:#fff}
+  .btn-primary:hover{background:#ff6e00}
+  .btn-ghost{background:transparent;border:1px solid #123631;color:#123631}
+  .btn-ghost:hover{background:#123631;color:#fff}
+  .ic-sm{width:16px;height:16px;stroke-width:2}
+  .ic-md{width:24px;height:24px;stroke-width:2}
+</style>
+</head>
+<body>
+<section class="hero">
+  <img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e18011.jpg?fmt=jpg" alt="Lodge Damaraland — on the Arid Eden Route in central Damaraland">
+  <div class="glass">
+    <span class="eyebrow">Desert Tracks Lodge</span>
+    <h1>Lodge Damaraland</h1>
+    <p class="tag">Stylish lodge on the Arid Eden Route — rhino tracking, elephants &amp; Himba cultural visits</p>
+    <button type="button" class="cta dt-lodge-book-open">Book a Room</button>
+  </div>
+</section>
+<main class="main">
+  <div class="col-left">
+    <section class="intro">
+      <p class="lead">At Lodge Damaraland every day begins with adventure — track desert-adapted elephants through ancient riverbeds, sip locally crafted gins on the Gin &amp; Geology sunset walk, or set out on full-day rhino tracking for an unforgettable wildlife encounter.</p>
+      <p>Guests can enjoy traditional hair-braiding, unwind in the tranquil onsite spa, or visit a nearby Himba village for a meaningful cultural experience. Conveniently located near the Petrified Forest and Twyfelfontein, the lodge blends stylish architecture with carefully curated interiors.</p>
+      <p>Cool off in the pool, relax with a massage using authentic African spa products, then gather around the Boma Fire with a sundowner before dinner in the restaurant. A bar with panoramic views, free Wi-Fi and well-appointed air-conditioned rooms complete the picture.</p>
+    </section>
+    <section>
+      <h2 class="h2">Why we love it<span class="rule"></span></h2>
+      <div class="highlights">
+        <div class="highlight">
+          <span class="icon"><svg class="ic-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="10" r="3"/><path d="M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7z"/></svg></span>
+          <span class="text">Desert-adapted elephant &amp; rhino tracking</span>
+        </div>
+        <div class="highlight">
+          <span class="icon"><svg class="ic-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.5 1.5M17.5 17.5L19 19M5 19l1.5-1.5M17.5 6.5L19 5"/></svg></span>
+          <span class="text">Himba village cultural visits</span>
+        </div>
+        <div class="highlight">
+          <span class="icon"><svg class="ic-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22V8a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v14"/><path d="M2 14h20"/><path d="M6 18v4M18 18v4"/></svg></span>
+          <span class="text">Onsite spa, pool &amp; Boma fire dining</span>
+        </div>
+        <div class="highlight">
+          <span class="icon"><svg class="ic-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L4 7v6c0 5 3.5 9 8 11 4.5-2 8-6 8-11V7l-8-5z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span class="text">Near Petrified Forest &amp; Twyfelfontein</span>
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2 class="h2">The Chalets<span class="rule"></span></h2>
+      <div class="suites">
+        <article class="suite">
+          <img src="https://wetu.com/imageHandler/c1920x1080/312689/dsc_51361.jpg?fmt=jpg" alt="Lodge Damaraland — Suite">
+          <div class="body">
+            <div class="count">Suite</div>
+            <h3>Suite</h3>
+            <p>Air-conditioned rooms with private bathroom, dressing gowns, hairdryer, tea/coffee facilities and bathrobes. Fan, mosquito nets, lounge area, fridge, safe and complimentary Wi-Fi. Secure 24-hour parking close to your room.</p>
+            <div class="tags">
+              <span class="tag-pill">Air conditioning</span>
+              <span class="tag-pill">Dressing gowns</span>
+              <span class="tag-pill">Mosquito nets</span>
+              <span class="tag-pill">Verandah</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+  <aside class="col-right">
+    <div class="map">
+      <img src="https://wetu.com/imageHandler/c1920x1080/312689/wozde81901.jpg?fmt=jpg" alt="">
+    </div>
+    <div class="exp">
+      <h3>Things to do nearby</h3>
+      <div class="pills">
+        <span class="pill">Desert-adapted elephant tracking</span>
+        <span class="pill">Full-day rhino tracking</span>
+        <span class="pill">Himba village visit</span>
+        <span class="pill">Petrified Forest</span>
+        <span class="pill">Twyfelfontein rock art</span>
+        <span class="pill">Gin &amp; Geology sunset walk</span>
+      </div>
+    </div>
+    <div class="feat">
+      <h3>Featured in these safaris</h3>
+      <div class="list">
+        <a class="item" href="/library/itineraries/namibia-comfort-safari/index.html">
+          <img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e17181.jpg?fmt=jpg" alt="">
+          <div class="meta">
+            <span class="days">14 days</span>
+            <span class="ttl">Comfort Safari</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </aside>
+</main>
+<section class="info-block">
+  <h2 class="h2">Information<span class="rule"></span></h2>
+  <div class="info-grid">
+    <div class="info-item">
+      <div class="info-label">Description</div>
+      <div class="info-content">At Lodge Damaraland, every day begins with adventure. Track desert‑adapted elephants through ancient riverbeds, sip locally crafted gins on our Gin &amp; Geology sunset walk, or set out on full‑day rhino tracking for an unforgettable wildlife encounter. Guests can enjoy traditional hair‑braiding, unwind in our tranquil onsite spa, or visit a nearby Himba village for a meaningful cultural experience. Conveniently located near the Petrified Forest and Twyfelfontein, the lodge blends stylish architecture with carefully curated interiors and personalised service. Stay in air‑conditioned comfort with sweeping mountain views along the Arid Eden Route. After exploring, cool off in our beautiful pool or relax with a massage using authentic African spa products. Evenings invite you to gather around the Boma Fire with a sundowner before enjoying delicious meals in our restaurant. The lodge offers free WiFi, a bar with panoramic views, and well‑appointed rooms featuring private bathrooms, toiletries, hairdryers, tea and coffee facilities, and bathrobes. For peace of mind, secure 24‑hour parking is provided close to your room.</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Spoken Languages</div>
+      <div class="info-content">Afrikaans · English · German</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Property Facilities</div>
+      <div class="info-content">Accept Credit Cards · Activity Desk · Air conditioner · Bar · Communal Dining · Credit Card Facilities · Eco Friendly · Guided Tours · Internet Access (Complimentary) · Kiddies Pool / Splash Pool · Malaria Free · Mobile Connectivity · Outdoor Pool / Pool Deck · Parking · Pool · Restaurant · Secure Parking · Spa · Travel Desk · Vegetarian</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Room Facilities</div>
+      <div class="info-content split">Air Conditioning · Bath Towels · Complimentary Wi-Fi · Dressing Gowns · Electrical Outlets · En Suite Bathroom · Ensuite · Fan · Fridge · Hairdryer · Hand Towels · Heater · Internet Access (Complimentary) · Laundry Service (Available) · Lounge Area · Mosquito Nets · Mosquito Netting · Safe · Shower · Tea / Coffee · Twin Bed · Vanity Cabinet · Verandah · Wardrobe</div>
+    </div>
+  </div>
+</section>
+<section class="gallery-section">
+  <h2 class="h2">Gallery</h2>
+  <div class="gallery" style="justify-content:center">
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/img_e18161.jpg?fmt=jpg" alt="Lodge Damaraland — view 1"></div>
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/lodgedamaraland48.jpg?fmt=jpg" alt="Lodge Damaraland — view 2"></div>
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/dsc_4868.jpg?fmt=jpg" alt="Lodge Damaraland — view 3"></div>
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/lodgedamaraland22.jpg?fmt=jpg" alt="Lodge Damaraland — view 4"></div>
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/lodgedamaraland309.jpg?fmt=jpg" alt="Lodge Damaraland — view 5"></div>
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/lodgedamaraland282.jpg?fmt=jpg" alt="Lodge Damaraland — view 6"></div>
+    <div class="cell"><img src="https://wetu.com/imageHandler/c1920x1080/312689/lodgedamaraland31.jpg?fmt=jpg" alt="Lodge Damaraland — view 7"></div>
+  </div>
+</section>
+<footer class="footer">
+  <div class="inner">
+    <h2>Lodge Damaraland</h2>
+    <p>Let our experts add Lodge Damaraland to your Namibia journey.</p>
+    <div class="ctas">
+      <button type="button" class="btn btn-primary dt-lodge-book-open" style="border:none;font:inherit;cursor:pointer">
+        Book a Room
+        <svg class="ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+      <a class="btn btn-ghost" href="https://desert-tracks.com/desert-tracks-contact/">Speak to a Safari Expert</a>
+    </div>
+  </div>
+</footer>
+<!-- LODGE BOOKING WIZARD -->
+<div id="dt-lodge-wizard-root"></div>
+<style>
+  #dt-lodge-wizard-root *,#dt-lodge-wizard-root *::before,#dt-lodge-wizard-root *::after{box-sizing:border-box}
+  #dt-lodge-wizard-root .lw-overlay{position:fixed;inset:0;z-index:2147483646;display:none;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#fff;font-family:'Open Sans',sans-serif;background-image:url(https://wetu.com/imageHandler/c1920x1080/312689/img_e18421.jpg?fmt=jpg);background-size:cover;background-position:center}
+  #dt-lodge-wizard-root .lw-overlay.lw-open{display:flex}
+  #dt-lodge-wizard-root .lw-veil{position:fixed;inset:0;background:rgba(25,22,16,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:0;pointer-events:none}
+  #dt-lodge-wizard-root .lw-close{position:fixed;top:20px;right:24px;width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:rgba(25,22,16,.2);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2147483647;line-height:1}
+  #dt-lodge-wizard-root .lw-close:hover{background:rgba(255,255,255,.1);border-color:#fff}
+  #dt-lodge-wizard-root .lw-back{position:fixed;top:26px;left:26px;background:rgba(25,22,16,.2);border:none;color:#fff;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;cursor:pointer;z-index:2147483647;padding:6px 10px}
+  #dt-lodge-wizard-root .lw-back.lw-hide{display:none}
+  #dt-lodge-wizard-root .lw-step{width:100%;max-width:960px;padding:100px 32px 40px;display:flex;flex-direction:column;align-items:center;min-height:100vh;position:relative;z-index:1}
+  #dt-lodge-wizard-root .lw-content{width:100%;display:flex;flex-direction:column;align-items:center;animation:lwIn .3s ease forwards}
+  @keyframes lwIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  #dt-lodge-wizard-root .lw-h{font-family:'Playfair Display',Georgia,serif;font-size:32px;font-weight:400;color:#fff;text-align:center;margin:0 0 30px;line-height:1.3}
+  #dt-lodge-wizard-root .lw-sub{font-family:'Open Sans',sans-serif;font-size:13px;color:#AE8245;text-align:center;margin:-18px 0 18px;letter-spacing:2px;text-transform:uppercase}
+  #dt-lodge-wizard-root .lw-row{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;width:100%;max-width:640px;margin-bottom:16px}
+  #dt-lodge-wizard-root .lw-list{display:flex;flex-direction:column;gap:10px;width:100%;max-width:640px;margin-bottom:16px}
+  #dt-lodge-wizard-root .lw-opt{display:flex;align-items:center;justify-content:center;padding:17px 20px;background:rgba(25,22,16,.4);border:1.5px solid rgba(100,90,55,.35);border-radius:6px;color:#fff;font-family:'Open Sans',sans-serif;font-size:12px;font-weight:300;letter-spacing:2.2px;text-transform:uppercase;cursor:pointer;transition:all .2s ease;min-height:52px;text-align:center}
+  #dt-lodge-wizard-root .lw-opt:hover{background:rgba(174,130,69,.25);border-color:rgba(174,130,69,.6)}
+  #dt-lodge-wizard-root .lw-opt.lw-active{background:#fff;color:#222;border-color:#AE8245;border-width:2px}
+  #dt-lodge-wizard-root .lw-counter{display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(25,22,16,.4);border:1.5px solid rgba(100,90,55,.35);border-radius:6px;padding:17px 20px;min-height:52px}
+  #dt-lodge-wizard-root .lw-counter-label{color:#fff;font-size:12px;font-weight:600;margin-bottom:10px;letter-spacing:2.2px;text-transform:uppercase}
+  #dt-lodge-wizard-root .lw-counter-row{display:flex;align-items:center;gap:15px}
+  #dt-lodge-wizard-root .lw-counter-btn{width:30px;height:30px;border-radius:50%;border:1.5px solid rgba(255,255,255,.4);background:transparent;color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  #dt-lodge-wizard-root .lw-counter-btn:hover{border-color:#AE8245;color:#AE8245}
+  #dt-lodge-wizard-root .lw-counter-val{font-size:18px;font-weight:bold;color:#fff;min-width:20px;text-align:center}
+  #dt-lodge-wizard-root .lw-input,#dt-lodge-wizard-root .lw-textarea{width:100%;padding:16px 18px;background:rgba(25,22,16,.2);border:1px solid rgba(100,90,55,.35);border-radius:6px;color:#fff;font-family:'Open Sans',sans-serif;font-size:13px;letter-spacing:1.2px;outline:none}
+  #dt-lodge-wizard-root .lw-input::placeholder,#dt-lodge-wizard-root .lw-textarea::placeholder{color:rgba(255,255,255,.55)}
+  #dt-lodge-wizard-root .lw-input{text-transform:uppercase;font-weight:600}
+  #dt-lodge-wizard-root .lw-textarea{min-height:120px;resize:vertical;font-size:14px;letter-spacing:.3px;text-transform:none;font-weight:400}
+  #dt-lodge-wizard-root .lw-form-group{width:100%;max-width:640px;margin-bottom:16px}
+  #dt-lodge-wizard-root .lw-form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:640px;margin-bottom:16px}
+  #dt-lodge-wizard-root .lw-nav{display:flex;flex-direction:column;align-items:center;gap:14px;margin:30px 0;width:100%}
+  #dt-lodge-wizard-root .lw-next,#dt-lodge-wizard-root .lw-submit{width:260px;padding:15px 24px;background:#AE8245;border:none;border-radius:6px;color:#fff;font-family:'Open Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:background .2s}
+  #dt-lodge-wizard-root .lw-next:hover,#dt-lodge-wizard-root .lw-submit:hover{background:#9B723B}
+  #dt-lodge-wizard-root .lw-next:disabled,#dt-lodge-wizard-root .lw-submit:disabled{opacity:.4;cursor:not-allowed}
+  #dt-lodge-wizard-root .lw-progress{width:200px;height:3px;background:rgba(255,255,255,.12);border-radius:2px;overflow:hidden}
+  #dt-lodge-wizard-root .lw-progress-fill{height:100%;background:#AE8245;border-radius:2px;transition:width .4s ease}
+  body.lw-open .flatpickr-calendar{background:transparent!important;box-shadow:none!important;border:none!important;margin:0 auto!important}
+  body.lw-open .flatpickr-months .flatpickr-month{background:transparent!important;color:#fff!important;fill:#fff!important}
+  body.lw-open .flatpickr-current-month .flatpickr-monthDropdown-months{background:#222!important}
+  body.lw-open .flatpickr-weekday{background:transparent!important;color:#fff!important}
+  body.lw-open .flatpickr-day{color:#fff!important;background:transparent!important;border-color:transparent!important}
+  body.lw-open .flatpickr-day.selected,body.lw-open .flatpickr-day.startRange,body.lw-open .flatpickr-day.endRange,body.lw-open .flatpickr-day.today{background:#AE8245!important;border-color:#AE8245!important;color:#fff!important}
+  body.lw-open .flatpickr-day.inRange{background:rgba(174,130,69,.25)!important;border-color:transparent!important;box-shadow:-5px 0 0 rgba(174,130,69,.25),5px 0 0 rgba(174,130,69,.25)!important}
+  @media(max-width:768px){#dt-lodge-wizard-root .lw-h{font-size:24px}#dt-lodge-wizard-root .lw-row{grid-template-columns:1fr 1fr}#dt-lodge-wizard-root .lw-form-row{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  'use strict';
+  var SUBMIT_ENDPOINT='https://mastervault.replit.app/api/submit-enquiry';
+  var LODGE_NAME = "Lodge Damaraland";
+  var TOTAL=5;
+  var state={step:1,history:[1],submitted:false,country:'Unknown',answers:{party:null,adults:2,children:0,timing:null,fromDate:'',toDate:'',roughTiming:'',roomType:null,notes:'',firstName:'',surname:'',email:'',phone:'',contactPref:'email'}};
+  var rootEl,overlayEl;
+  function openWiz(){state.step=1;state.history=[1];state.submitted=false;document.body.classList.add('lw-open');document.body.style.overflow='hidden';overlayEl.classList.add('lw-open');render();}
+  function closeWiz(){overlayEl.classList.remove('lw-open');document.body.classList.remove('lw-open');document.body.style.overflow='';overlayEl.innerHTML='';}
+  function goBack(){if(state.history.length>1){state.history.pop();state.step=state.history[state.history.length-1];render();}}
+  function next(){var n=state.step+1;if(n<=TOTAL){state.step=n;state.history.push(n);render();}}
+  function opt(text,val,cur,onClick){var b=document.createElement('button');b.type='button';b.className='lw-opt'+(cur===val?' lw-active':'');b.textContent=text;b.addEventListener('click',function(){onClick(val);});return b;}
+  function counter(label,val,min,onChange){var w=document.createElement('div');w.className='lw-counter';var t=document.createElement('div');t.className='lw-counter-label';t.textContent=label;w.appendChild(t);var r=document.createElement('div');r.className='lw-counter-row';var m=document.createElement('button');m.type='button';m.className='lw-counter-btn';m.textContent='−';m.onclick=function(){if(val>min){val--;onChange(val);render();}};var v=document.createElement('div');v.className='lw-counter-val';v.textContent=val;var p=document.createElement('button');p.type='button';p.className='lw-counter-btn';p.textContent='+';p.onclick=function(){val++;onChange(val);render();};r.appendChild(m);r.appendChild(v);r.appendChild(p);w.appendChild(r);return w;}
+  function step1(){var w=document.createElement('div');w.className='lw-content';var sub=document.createElement('div');sub.className='lw-sub';sub.textContent='Booking a room at';w.appendChild(sub);var h=document.createElement('h2');h.className='lw-h';h.textContent=LODGE_NAME;w.appendChild(h);var h2=document.createElement('h2');h2.className='lw-h';h2.style.fontSize='22px';h2.style.marginBottom='24px';h2.textContent='Who will be staying?';w.appendChild(h2);var row=document.createElement('div');row.className='lw-row';[['COUPLE','couple'],['SOLO','solo'],['FAMILY','family'],['FRIENDS','friends']].forEach(function(o){row.appendChild(opt(o[0],o[1],state.answers.party,function(v){state.answers.party=v;render();}));});w.appendChild(row);var cr=document.createElement('div');cr.className='lw-row';cr.style.marginTop='4px';cr.appendChild(counter('ADULTS',state.answers.adults,1,function(v){state.answers.adults=v;}));cr.appendChild(counter('CHILDREN (<12)',state.answers.children,0,function(v){state.answers.children=v;}));w.appendChild(cr);return{content:w,nav:{next:true,disabled:!state.answers.party}};}
+  function step2(){var w=document.createElement('div');w.className='lw-content';var h=document.createElement('h2');h.className='lw-h';h.textContent='When would you like to stay?';w.appendChild(h);var list=document.createElement('div');list.className='lw-list';[['I HAVE EXACT DATES','exact'],['I HAVE A ROUGH IDEA','rough'],['ADVISE ME ON BEST TIME','best']].forEach(function(o){var b=opt(o[0],o[1],state.answers.timing,function(v){state.answers.timing=v;render();});b.style.padding='18px';list.appendChild(b);});w.appendChild(list);return{content:w,nav:{next:true,disabled:!state.answers.timing}};}
+  function step3(){var w=document.createElement('div');w.className='lw-content';var h=document.createElement('h2');h.className='lw-h';h.textContent=state.answers.timing==='exact'?'Pick your check-in & check-out':'Tell us your timing';w.appendChild(h);var disabled=true;if(state.answers.timing==='exact'){var fp=document.createElement('input');fp.type='text';fp.className='lw-input';fp.style.display='none';w.appendChild(fp);var nights=document.createElement('div');nights.style.cssText='text-align:center;min-height:30px;margin:10px 0;color:#AE8245;font-weight:bold;font-size:18px';function upd(){if(state.answers.fromDate&&state.answers.toDate){var d1=new Date(state.answers.fromDate),d2=new Date(state.answers.toDate),n=Math.max(1,Math.ceil(Math.abs(d2-d1)/(1000*60*60*24)));nights.textContent=n+' Night'+(n===1?'':'s')+' Selected';}else nights.textContent='';}upd();w.appendChild(nights);setTimeout(function(){if(typeof flatpickr==='undefined')return;flatpickr(fp,{mode:'range',minDate:'today',dateFormat:'Y-m-d',inline:true,showMonths:window.innerWidth>768?2:1,defaultDate:(state.answers.fromDate&&state.answers.toDate)?[state.answers.fromDate,state.answers.toDate]:null,onChange:function(sel,_s,inst){if(sel.length===2){state.answers.fromDate=inst.formatDate(sel[0],'Y-m-d');state.answers.toDate=inst.formatDate(sel[1],'Y-m-d');upd();var nb=document.querySelector('#dt-lodge-wizard-root .lw-next');if(nb)nb.disabled=false;}else{state.answers.fromDate='';state.answers.toDate='';upd();var nb=document.querySelector('#dt-lodge-wizard-root .lw-next');if(nb)nb.disabled=true;}}});},10);disabled=!(state.answers.fromDate&&state.answers.toDate);}else if(state.answers.timing==='rough'){var ri=document.createElement('input');ri.type='text';ri.className='lw-input';ri.placeholder='e.g. Mid-October 2026, 4 nights';ri.value=state.answers.roughTiming||'';ri.style.cssText+=';max-width:480px;margin:0 auto;display:block;text-align:center';ri.addEventListener('input',function(){state.answers.roughTiming=this.value;var nb=document.querySelector('#dt-lodge-wizard-root .lw-next');if(nb)nb.disabled=!this.value.trim();});w.appendChild(ri);disabled=!(state.answers.roughTiming&&state.answers.roughTiming.trim());}else{var msg=document.createElement('div');msg.style.cssText='color:#fff;text-align:center;font-size:14px;line-height:1.6;max-width:440px;margin:0 auto';msg.textContent='Our team will recommend the best season for your stay based on weather, light and the experiences you want to build around it — wildlife, scenery, photography, or simply quiet downtime.';w.appendChild(msg);disabled=false;}return{content:w,nav:{next:true,disabled:disabled}};}
+  function step4(){var w=document.createElement('div');w.className='lw-content';var h=document.createElement('h2');h.className='lw-h';h.textContent='Room preference';w.appendChild(h);var list=document.createElement('div');list.className='lw-list';[['SUITE','suite'],['ADVISE ME','advise']].forEach(function(o){list.appendChild(opt(o[0],o[1],state.answers.roomType,function(v){state.answers.roomType=v;render();}));});w.appendChild(list);var nh=document.createElement('h2');nh.className='lw-h';nh.style.fontSize='20px';nh.style.margin='24px 0 12px';nh.textContent='Special requests (optional)';w.appendChild(nh);var ta=document.createElement('textarea');ta.className='lw-textarea';ta.style.maxWidth='640px';ta.placeholder='Anniversary, dietary requirements, accessibility, late arrival, transfers, special excursions…';ta.value=state.answers.notes||'';ta.addEventListener('input',function(){state.answers.notes=this.value;});w.appendChild(ta);return{content:w,nav:{next:true,disabled:!state.answers.roomType}};}
+  function step5(){var w=document.createElement('div');w.className='lw-content';var h=document.createElement('h2');h.className='lw-h';h.style.marginBottom='10px';h.textContent='Where can we send your booking confirmation?';w.appendChild(h);var s=document.createElement('div');s.style.cssText='color:#fff;font-size:15px;text-align:center;margin-bottom:30px';s.textContent='Our team will confirm availability and finalise your booking within 24 hours.';w.appendChild(s);var nameRow=document.createElement('div');nameRow.className='lw-form-row';var fn=document.createElement('input');fn.type='text';fn.className='lw-input';fn.placeholder='FIRST NAME';fn.value=state.answers.firstName;fn.addEventListener('input',function(){state.answers.firstName=this.value;updSubmit();});nameRow.appendChild(fn);var sn=document.createElement('input');sn.type='text';sn.className='lw-input';sn.placeholder='SURNAME';sn.value=state.answers.surname;sn.addEventListener('input',function(){state.answers.surname=this.value;updSubmit();});nameRow.appendChild(sn);w.appendChild(nameRow);var eg=document.createElement('div');eg.className='lw-form-group';var em=document.createElement('input');em.type='email';em.className='lw-input';em.placeholder='EMAIL ADDRESS';em.value=state.answers.email;em.addEventListener('input',function(){state.answers.email=this.value;updSubmit();});eg.appendChild(em);w.appendChild(eg);var pg=document.createElement('div');pg.className='lw-form-group';var ph=document.createElement('input');ph.type='tel';ph.className='lw-input';ph.placeholder='TELEPHONE / WHATSAPP';ph.value=state.answers.phone;ph.addEventListener('input',function(){state.answers.phone=this.value;updSubmit();});pg.appendChild(ph);w.appendChild(pg);var pref=document.createElement('div');pref.style.cssText='display:flex;align-items:center;justify-content:flex-start;width:100%;max-width:640px;margin:8px 0 20px;gap:18px;flex-wrap:wrap;color:#fff;font-size:14px';var pl=document.createElement('div');pl.textContent='Preferred contact method:';pref.appendChild(pl);['email','phone','whatsapp'].forEach(function(c){var lab=document.createElement('label');lab.style.cssText='display:flex;align-items:center;gap:6px;cursor:pointer;text-transform:capitalize';var rb=document.createElement('input');rb.type='radio';rb.name='lwpref';rb.value=c;if(state.answers.contactPref===c)rb.checked=true;rb.addEventListener('change',function(){state.answers.contactPref=c;});lab.appendChild(rb);lab.appendChild(document.createTextNode(c));pref.appendChild(lab);});w.appendChild(pref);return{content:w,nav:{submit:true,disabled:!state.answers.email||!state.answers.firstName||!state.answers.surname||!state.answers.phone}};}
+  var submitBtnEl=null;
+  function updSubmit(){if(submitBtnEl)submitBtnEl.disabled=!state.answers.email||!state.answers.firstName||!state.answers.surname||!state.answers.phone;}
+  function success(){var w=document.createElement('div');w.className='lw-content';w.innerHTML='<div style="text-align:center;padding:60px 20px"><div style="font-size:64px;margin-bottom:24px;color:#AE8245">✓</div><h2 class="lw-h">Booking request received</h2><p style="color:#fff;font-size:15px;max-width:480px;margin:0 auto;line-height:1.6">Thank you. We will confirm availability for your stay at '+LODGE_NAME+' and reply within 24 hours.</p></div>';return{content:w,nav:{}};}
+  function submit(){
+    if(!state.answers.email)return;
+    var timing='';
+    if(state.answers.timing==='exact'&&state.answers.fromDate&&state.answers.toDate){var d1=new Date(state.answers.fromDate),d2=new Date(state.answers.toDate),n=Math.max(1,Math.ceil(Math.abs(d2-d1)/(1000*60*60*24)));timing='EXACT: '+state.answers.fromDate+' to '+state.answers.toDate+' ('+n+' nights)';}
+    else if(state.answers.timing==='rough')timing='ROUGH: '+(state.answers.roughTiming||'');
+    else if(state.answers.timing==='best')timing='ADVISE ON BEST TIME';
+    var payload={formSource:'lodge',sourceUrl:location.href,sourcePageTitle:document.title,country:'Lodge Room Booking',enquiryCountry:state.country,lodgeName:LODGE_NAME,roomPreference:state.answers.roomType||'not specified',travelTiming:timing,travelCompanion:state.answers.party,tripDetails:'ROOM TYPE: '+(state.answers.roomType||'not specified')+'\nSPECIAL REQUESTS: '+(state.answers.notes||'none'),adults:state.answers.adults,children:state.answers.children,email:state.answers.email,firstName:state.answers.firstName,surname:state.answers.surname,phone:state.answers.phone,contactPreference:state.answers.contactPref,newsletter:false,gclid:new URLSearchParams(location.search).get('gclid')||'',source:(window.__dtTrafficSource?window.__dtTrafficSource():(new URLSearchParams(window.location.search).get('gclid')?'Google Ads':'Direct / Organic'))};
+    state.submitted=true;render();
+    fetch(SUBMIT_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){});
+    if(window.dataLayer)window.dataLayer.push({event:'lodge_room_booking',lodge:LODGE_NAME});
+  }
+  function route(){if(state.submitted)return success();switch(state.step){case 1:return step1();case 2:return step2();case 3:return step3();case 4:return step4();case 5:return step5();default:return step1();}}
+  function render(){
+    if(!overlayEl)return;
+    overlayEl.innerHTML='';
+    var veil=document.createElement('div');veil.className='lw-veil';overlayEl.appendChild(veil);
+    var cb=document.createElement('button');cb.className='lw-close';cb.innerHTML='&#10005;';cb.onclick=closeWiz;overlayEl.appendChild(cb);
+    var bb=document.createElement('button');bb.className='lw-back'+(state.step===1||state.submitted?' lw-hide':'');bb.innerHTML='&lsaquo; BACK';bb.onclick=goBack;overlayEl.appendChild(bb);
+    var c=document.createElement('div');c.className='lw-step';
+    var r=route();c.appendChild(r.content);
+    if(r.nav&&(r.nav.next||r.nav.submit)){
+      var nav=document.createElement('div');nav.className='lw-nav';
+      if(r.nav.next){var nb=document.createElement('button');nb.className='lw-next';nb.textContent='NEXT ›';nb.disabled=!!r.nav.disabled;nb.onclick=next;nav.appendChild(nb);}
+      if(r.nav.submit){var sb=document.createElement('button');sb.className='lw-submit';sb.textContent='SUBMIT BOOKING REQUEST';sb.disabled=!!r.nav.disabled;sb.onclick=submit;nav.appendChild(sb);submitBtnEl=sb;}
+      var bar=document.createElement('div');bar.className='lw-progress';var fill=document.createElement('div');fill.className='lw-progress-fill';fill.style.width=((state.step/TOTAL)*100)+'%';bar.appendChild(fill);nav.appendChild(bar);
+      c.appendChild(nav);
+    }
+    overlayEl.appendChild(c);
+  }
+  function init(){
+    rootEl=document.getElementById('dt-lodge-wizard-root');if(!rootEl)return;
+    overlayEl=document.createElement('div');overlayEl.className='lw-overlay';rootEl.appendChild(overlayEl);
+    fetch('https://get.geojs.io/v1/ip/geo.json').then(function(r){return r.json();}).then(function(d){if(d&&d.country)state.country=d.country+(d.city?' ('+d.city+')':'');}).catch(function(){});
+    document.addEventListener('click',function(e){var t=e.target.closest('.dt-lodge-book-open');if(!t)return;e.preventDefault();openWiz();},true);
+    document.addEventListener('keydown',function(e){if(e.key==='Escape'&&overlayEl.classList.contains('lw-open'))closeWiz();});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<!-- DESERT TRACKS VISITOR TRACKER -->
+<script>
+(function(){
+  // Marketing attribution detector — shared with the enquiry wizard via window.__dtTrafficSource.
+  function trafficSource(){
+    try {
+      const p = new URLSearchParams(window.location.search);
+      const gAds = p.get("gclid") || p.get("gbraid") || p.get("wbraid");
+      const msclkid = p.get("msclkid");
+      const fbclid = p.get("fbclid");
+      const src = (p.get("utm_source") || "").trim();
+      const med = (p.get("utm_medium") || "").trim().toLowerCase();
+      const camp = (p.get("utm_campaign") || "").trim();
+      const paid = /^(cpc|ppc|paid|paidsearch|paid_social|display|banner)/.test(med);
+      let label = "";
+      if (gAds) label = "Google Ads (paid)";
+      else if (msclkid) label = "Microsoft Ads (paid)";
+      else if (src && paid) label = src + " (paid)";
+      else if (src) label = src + (med ? " / " + med : "");
+      else if (paid) label = "Paid";
+      else if (fbclid) label = "Social (Meta)";
+      else {
+        const ref = document.referrer || "";
+        if (!ref) label = "Direct";
+        else {
+          let h = "";
+          try { h = new URL(ref).hostname.replace(/^www\./, ""); } catch (e) { h = ""; }
+          const self = window.location.hostname.replace(/^www\./, "");
+          if (h === self) label = "Internal";
+          else if (/(^|\.)google\./.test(h)) label = "Organic (Google)";
+          else if (/(^|\.)(bing|yahoo|duckduckgo|ecosia|yandex)\./.test(h)) label = "Organic (search)";
+          else if (/(^|\.)(facebook|instagram|linkedin|pinterest|youtube)\.|^t\.co$|^lnkd\.in$/.test(h)) label = "Social";
+          else label = "Referral" + (h ? " (" + h + ")" : "");
+        }
+      }
+      if (camp) label += " · " + camp;
+      return label || "Unknown";
+    } catch (e) { return "Unknown"; }
+  }
+  window.__dtTrafficSource = trafficSource;
+  const TRACKER_URL = "https://mastervault.replit.app/api/track-visit";
+  const MIN_TIME_MS = 30000;
+  // Skip tracking on Replit dev/preview domains (only fire on production)
+  if (/\.replit\.dev$/i.test(window.location.hostname) || /\.picard\.replit\.dev$/i.test(window.location.hostname) || window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
+  const start = Date.now();
+  let sent = false;
+  let clientLocation = "Unknown Location";
+  let clientCountry = "Unknown Country";
+  function safariName() {
+    let t = (document.title || "").trim();
+    t = t.split("|")[0].split(" – ")[0].split(" — ")[0].trim();
+    return t || "Unknown Safari";
+  }
+  function fmtTime(ms) {
+    const s = Math.round(ms/1000);
+    if (s < 60) return s + "s";
+    const m = Math.floor(s/60), r = s%60;
+    return m + "m " + r + "s";
+  }
+  function send(reason) {
+    if (sent) return;
+    const elapsed = Date.now() - start;
+    if (elapsed < MIN_TIME_MS) return;
+    try {
+      const k = "dt_tracked_" + safariName() + "_" + new Date().toISOString().slice(0,10);
+      if (sessionStorage.getItem(k)) { sent = true; return; }
+      sessionStorage.setItem(k, "1");
+    } catch(e){}
+    sent = true;
+    const payload = JSON.stringify({
+      safari_name: safariName(),
+      time_spent: fmtTime(elapsed),
+      seconds: Math.round(elapsed / 1000),
+      visitor_location: clientLocation,
+      country: clientCountry,
+      source: trafficSource(),
+      page_link: window.location.href,
+      timestamp: new Date().toLocaleString(),
+      reason: reason
+    });
+    try {
+      const blob = new Blob([payload], { type: "text/plain" });
+      if (navigator.sendBeacon && navigator.sendBeacon(TRACKER_URL, blob)) return;
+    } catch(e){}
+    fetch(TRACKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain" },
+      body: payload,
+      keepalive: true
+    }).catch(function(){});
+  }
+  fetch("https://get.geojs.io/v1/ip/geo.json")
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      if (d) {
+        clientCountry = d.country || clientCountry;
+        clientLocation = (d.city ? d.city + ", " : "") + (d.region ? d.region + ", " : "") + (d.country || "");
+      }
+    }).catch(function(){});
+  document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "hidden") send("hidden"); });
+  window.addEventListener("pagehide", function(){ send("pagehide"); });
+  window.addEventListener("beforeunload", function(){ send("beforeunload"); });
+})();
+</script>
+</body>
+</html>

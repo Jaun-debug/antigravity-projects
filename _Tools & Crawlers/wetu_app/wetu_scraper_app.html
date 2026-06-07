@@ -1,0 +1,2151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wetu Scraper — Desert Tracks</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  /* Desert Tracks brand palette */
+  --bg:#ECEAE3;
+  --card:#F5F2EB;
+  --card-border:#D5CEBC;
+  --accent-text:#9B7830;    /* gold  */
+  --accent-photos:#6BAA98;  /* seafoam */
+  --input-bg:#E8E4DA;
+  --input-border:#C8C0AC;
+  --text:#2E2418;
+  --text-sec:#5A4A35;
+  --text-muted:#8A7860;
+  --success-bg:#EAF5F0;
+  --success-border:#A0D0C0;
+  --error-bg:#F5EAEA;
+  --error-border:#D0A0A0;
+}
+html,body{min-height:100vh;font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text)}
+
+/* ── HEADER ── */
+.header{
+  border-bottom:1px solid var(--card-border);
+  padding:20px 40px;display:flex;align-items:center;justify-content:space-between;
+}
+.header-brand{display:flex;align-items:center;gap:14px}
+.brand-mark{
+  width:36px;height:36px;border-radius:8px;background:rgba(155,120,48,.12);
+  border:1px solid rgba(155,120,48,.25);display:flex;align-items:center;justify-content:center;
+}
+.brand-mark svg{width:18px;height:18px;stroke:#9B7830;fill:none;stroke-width:1.5}
+.brand-name{font-family:'Playfair Display',serif;font-size:17px;color:#9B7830;letter-spacing:.2px}
+.brand-sub{font-size:11px;color:var(--text-muted);letter-spacing:.5px;margin-top:1px}
+
+.server-pill{
+  display:flex;align-items:center;gap:7px;
+  background:rgba(0,0,0,.05);border:1px solid var(--card-border);
+  border-radius:20px;padding:6px 14px;font-size:11px;color:var(--text-muted);
+}
+.server-dot{width:7px;height:7px;border-radius:50%;background:#333;flex-shrink:0;transition:background .3s}
+.server-dot.online{background:#4CAF50}
+.server-dot.offline{background:#D97060}
+
+/* ── MAIN GRID ── */
+.main{padding:8px 40px 56px;display:block;max-width:820px;margin:0 auto}
+@media(max-width:760px){.main{padding:8px 16px 40px}}
+/* Tabbed layout — show one section at a time.
+   Uses :not(.tab-active) for higher specificity so it wins over the
+   .section-card{display:flex} rule defined later in the stylesheet. */
+.section-card:not(.tab-active){display:none !important}
+/* Tab bar */
+.tabbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:26px 16px 0;max-width:960px;margin:0 auto}
+.tabbar .tab{font-family:inherit;font-size:12.5px;font-weight:600;letter-spacing:.2px;
+  padding:9px 17px;border-radius:999px;cursor:pointer;background:var(--card);
+  border:1px solid var(--card-border);color:var(--text-sec);transition:all .15s;white-space:nowrap}
+.tabbar .tab:hover{border-color:rgba(201,154,46,.45);color:var(--text)}
+.tabbar .tab.active{background:#C99A2E;border-color:#C99A2E;color:#fff;box-shadow:0 2px 8px rgba(201,154,46,.3)}
+
+/* ── SECTION CARD ── */
+.section-card{
+  background:var(--card);border:1px solid var(--card-border);border-radius:16px;
+  overflow:hidden;display:flex;flex-direction:column;
+}
+
+.card-top{padding:28px 28px 24px;border-bottom:1px solid var(--card-border)}
+
+.card-icon{
+  width:48px;height:48px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:16px;
+}
+.card-icon svg{width:22px;height:22px;fill:none;stroke-width:1.5}
+
+.section-text .card-icon{background:rgba(155,120,48,.1);border:1px solid rgba(155,120,48,.2)}
+.section-text .card-icon svg{stroke:#9B7830}
+.section-photos .card-icon{background:rgba(107,170,152,.15);border:1px solid rgba(107,170,152,.3)}
+.section-photos .card-icon svg{stroke:#6BAA98}
+
+.card-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:6px}
+.section-text  .card-title{color:#7A5C18}
+.section-photos .card-title{color:#3D7D6A}
+.card-desc{font-size:12.5px;color:var(--text-sec);line-height:1.65}
+
+/* ── INPUT AREA ── */
+.card-body{padding:24px 28px;display:flex;flex-direction:column;gap:14px}
+
+.url-label{font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);font-weight:500}
+
+.url-input{
+  width:100%;background:var(--input-bg);border:1px solid var(--input-border);
+  border-radius:10px;padding:12px 16px;color:var(--text);font-size:13px;
+  outline:none;transition:border-color .15s;font-family:inherit;
+  resize:none;
+}
+.url-input:focus{border-color:rgba(196,146,42,.35)}
+.url-input::placeholder{color:var(--text-muted)}
+.section-photos .url-input:focus{border-color:rgba(74,158,138,.35)}
+
+.scrape-btn{
+  padding:13px 20px;border-radius:10px;border:none;font-size:13px;font-weight:600;
+  cursor:pointer;transition:opacity .15s,transform .1s;letter-spacing:.3px;
+  font-family:inherit;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.scrape-btn:active{transform:scale(.98)}
+.scrape-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.section-text  .scrape-btn{background:#9B7830;color:#FFF8EC}
+.section-text  .scrape-btn:hover:not(:disabled){background:#7A5C18}
+.section-photos .scrape-btn{background:#6BAA98;color:#F5FFF9}
+.section-photos .scrape-btn:hover:not(:disabled){background:#4D9080}
+
+/* ── PROGRESS ── */
+.progress-area{display:none;padding:18px;background:rgba(0,0,0,.04);border-radius:10px;border:1px solid rgba(0,0,0,.08)}
+.progress-area.visible{display:block}
+.spinner-row{display:flex;align-items:center;gap:12px}
+.spinner{
+  width:18px;height:18px;border-radius:50%;border:2px solid rgba(255,255,255,.1);
+  flex-shrink:0;animation:spin .7s linear infinite;
+}
+.section-text  .spinner{border-top-color:#9B7830}
+.section-photos .spinner{border-top-color:#6BAA98}
+@keyframes spin{to{transform:rotate(360deg)}}
+.progress-msg{font-size:12.5px;color:var(--text-sec)}
+
+/* ── RESULT BANNER ── */
+.result-area{display:none;border-radius:10px;border:1px solid var(--success-border);background:var(--success-bg);padding:16px 18px}
+.result-area.visible{display:block}
+.result-area.error{border-color:var(--error-border);background:var(--error-bg)}
+
+.result-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.result-label{font-size:10px;letter-spacing:.8px;text-transform:uppercase;font-weight:600;margin-bottom:4px}
+.section-text  .result-label{color:#7A5C18}
+.section-photos .result-label{color:#3D7D6A}
+.result-area.error .result-label{color:#D97060}
+.result-summary{font-size:13px;color:var(--text-sec);line-height:1.5}
+
+.dl-btn{
+  flex-shrink:0;display:flex;align-items:center;gap:6px;padding:9px 16px;
+  border-radius:8px;border:1px solid;font-size:12px;font-weight:600;cursor:pointer;
+  text-decoration:none;font-family:inherit;transition:opacity .15s;letter-spacing:.2px;
+  white-space:nowrap;
+}
+.dl-btn:hover{opacity:.8}
+.section-text  .dl-btn{background:rgba(155,120,48,.1);border-color:rgba(155,120,48,.3);color:#7A5C18}
+.section-photos .dl-btn{background:rgba(107,170,152,.1);border-color:rgba(107,170,152,.3);color:#3D7D6A}
+.dl-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* ── PREVIEW PANEL ── */
+.preview-panel{display:none;flex-direction:column;gap:0;border-top:1px solid var(--card-border);margin-top:0}
+.preview-panel.visible{display:flex}
+
+.preview-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 28px;cursor:pointer;user-select:none;
+}
+.preview-header:hover{background:rgba(255,255,255,.02)}
+.preview-title{font-size:11px;letter-spacing:.7px;text-transform:uppercase;font-weight:600}
+.section-text  .preview-title{color:rgba(122,92,24,.7)}
+.section-photos .preview-title{color:rgba(61,125,106,.7)}
+.preview-toggle{width:18px;height:18px;stroke:var(--text-muted);fill:none;stroke-width:2;transition:transform .2s}
+.preview-toggle.open{transform:rotate(180deg)}
+
+.preview-body{
+  overflow:hidden;max-height:0;transition:max-height .35s ease;
+  display:flex;flex-direction:column;gap:1px;
+}
+.preview-body.open{max-height:9999px}
+
+/* ── TEXT STOP CARDS ── */
+.stop-card{
+  border-top:1px solid rgba(255,255,255,.04);
+  padding:18px 28px;
+}
+.stop-card:first-child{border-top:none}
+.stop-day{
+  font-size:10px;letter-spacing:.7px;text-transform:uppercase;font-weight:600;
+  margin-bottom:5px;
+}
+.section-text .stop-day{color:rgba(122,92,24,.7)}
+.section-photos .stop-day{color:rgba(61,125,106,.7)}
+.stop-name{
+  font-family:'Playfair Display',serif;font-size:16px;font-weight:400;
+  color:var(--text);margin-bottom:10px;line-height:1.3;
+}
+.stop-field{margin-bottom:8px}
+.stop-field-label{font-size:10px;letter-spacing:.6px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:3px}
+.stop-field-value{font-size:12.5px;color:var(--text-sec);line-height:1.6;white-space:pre-wrap}
+.stop-field-value.clamped{
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+}
+.expand-btn{
+  font-size:11px;color:var(--text-muted);cursor:pointer;margin-top:4px;
+  background:none;border:none;padding:0;font-family:inherit;
+}
+.expand-btn:hover{color:var(--text-sec)}
+
+.stop-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
+.stop-meta-item{
+  font-size:11px;color:var(--text-muted);
+  display:flex;align-items:center;gap:5px;
+}
+.stop-meta-item svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:1.8;flex-shrink:0}
+
+/* ── PHOTO GRID ── */
+.stop-photo-count{font-size:11px;color:var(--text-muted);margin-bottom:10px}
+.photo-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));
+  gap:6px;
+}
+.photo-thumb{
+  aspect-ratio:1;border-radius:6px;object-fit:cover;width:100%;
+  cursor:pointer;transition:transform .15s,opacity .15s;
+  background:rgba(255,255,255,.05);
+}
+.photo-thumb:hover{transform:scale(1.04);opacity:.9}
+.photo-thumb-more{
+  aspect-ratio:1;border-radius:6px;background:rgba(255,255,255,.05);
+  border:1px dashed rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:11px;color:var(--text-muted);cursor:default;
+}
+
+/* ── BOTH CARD (full-width) ── */
+.section-both{
+  grid-column:1 / -1;
+  background:var(--card);
+  border:1px solid var(--card-border);
+}
+.section-both .card-icon{background:rgba(155,120,48,.1);border:1px solid rgba(155,120,48,.2)}
+.section-both .card-icon svg{stroke:#9B7830}
+.section-both .card-title{color:#7A5C18}
+.section-both .url-input:focus{border-color:rgba(155,120,48,.4)}
+.section-both .scrape-btn{background:#6BAA98;color:#F5FFF9}
+.section-both .scrape-btn:hover:not(:disabled){background:#4D9080}
+.section-both .spinner{border-top-color:#6BAA98}
+.section-both .result-label{color:#3D7D6A}
+.section-both .dl-btn{background:rgba(107,170,152,.1);border-color:rgba(107,170,152,.3);color:#3D7D6A}
+.section-both .preview-title{color:rgba(61,125,106,.7)}
+.section-both .stop-day{color:rgba(61,125,106,.7)}
+.section-both .card-body{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+.section-both .url-label{grid-column:1/-1}
+.section-both .url-input{grid-column:1/-1}
+.section-both .scrape-btn{grid-column:1/-1}
+.section-both .progress-area{grid-column:1/-1}
+.section-both .result-area{grid-column:1/-1}
+.both-note{font-size:11.5px;color:var(--text-muted);line-height:1.6;grid-column:1/-1;
+  padding:10px 14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.05)}
+.both-note strong{color:var(--text-sec)}
+
+/* ── CREATOR CARD ── */
+.section-creator{
+  grid-column: 1 / -1;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-top:3px solid #C99A2E;
+}
+.section-creator .card-icon{background:rgba(201,154,46,.12);border:1px solid rgba(201,154,46,.28)}
+.section-creator .card-icon svg{stroke:#C99A2E}
+.section-creator .card-title{color:#8A6A1E}
+.section-creator .scrape-btn{background:#C99A2E;color:#fff}
+.section-creator .scrape-btn:hover:not(:disabled){background:#A87F1F}
+.section-creator .result-label{color:#8A6A1E}
+.section-creator .url-input:focus{border-color:rgba(201,154,46,.45)}
+.creator-note{font-size:11.5px;color:var(--text-muted);line-height:1.6;
+  padding:10px 14px;background:rgba(0,0,0,.04);border-radius:8px;border:1px solid rgba(0,0,0,.07)}
+.creator-note strong{color:var(--text-sec)}
+.creator-list{font-size:12px;color:var(--text-muted);line-height:1.8;
+  padding:10px 14px;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid var(--card-border)}
+.creator-list b{color:var(--text-sec);font-weight:600}
+.creator-divider{display:flex;align-items:center;text-align:center;color:var(--text-muted);
+  font-size:10.5px;text-transform:uppercase;letter-spacing:.9px;margin:8px 0 2px}
+.creator-divider::before,.creator-divider::after{content:"";flex:1;height:1px;background:var(--card-border)}
+.creator-divider span{padding:0 12px}
+
+/* ── ACCOMMODATION CARD ── */
+.section-accom{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-top:3px solid #6BAA98;
+}
+.section-accom .card-icon{background:rgba(107,170,152,.12);border:1px solid rgba(107,170,152,.25)}
+.section-accom .card-icon svg{stroke:#6BAA98}
+.section-accom .card-title{color:#3D7D6A}
+.section-accom .scrape-btn{background:#6BAA98;color:#F5FFF9}
+.section-accom .scrape-btn:hover:not(:disabled){background:#4D9080}
+.section-accom .spinner{border-top-color:#6BAA98}
+.section-accom .result-label{color:#3D7D6A}
+.section-accom .dl-btn{background:rgba(107,170,152,.1);border-color:rgba(107,170,152,.3);color:#3D7D6A}
+.section-accom .url-input:focus{border-color:rgba(107,170,152,.4)}
+.url-textarea{
+  width:100%;background:var(--input-bg);border:1px solid var(--input-border);
+  border-radius:10px;padding:12px 16px;color:var(--text);font-size:12.5px;
+  outline:none;transition:border-color .15s;font-family:inherit;
+  resize:vertical;min-height:90px;line-height:1.6;
+}
+.url-textarea:focus{border-color:rgba(107,170,152,.4)}
+.url-textarea::placeholder{color:var(--text-muted)}
+.accom-note{font-size:11.5px;color:var(--text-muted);line-height:1.6;
+  padding:10px 14px;background:rgba(0,0,0,.04);border-radius:8px;border:1px solid rgba(0,0,0,.07);margin-top:-4px}
+.accom-note strong{color:var(--text-sec)}
+
+/* Accommodation preview */
+.accom-lodge{border-top:1px solid var(--card-border);padding:20px 28px}
+.accom-lodge:first-child{border-top:none}
+.lodge-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);margin-bottom:4px}
+.lodge-meta{font-size:11.5px;color:var(--text-muted);margin-bottom:16px}
+.lodge-tab-label{
+  font-size:10px;letter-spacing:.8px;text-transform:uppercase;font-weight:600;
+  color:#3D7D6A;margin:16px 0 8px;padding-bottom:4px;
+  border-bottom:1px solid rgba(107,170,152,.2);
+}
+.lodge-room{margin-bottom:12px}
+.lodge-room-name{font-size:13px;font-weight:600;color:var(--text-sec);margin-bottom:6px}
+.lodge-room-desc{font-size:12px;color:var(--text-muted);margin-bottom:6px;line-height:1.5}
+.lodge-info-block{font-size:12.5px;color:var(--text-sec);line-height:1.7;white-space:pre-wrap}
+.lodge-act{font-size:12.5px;color:var(--text-sec);padding:5px 0;border-bottom:1px solid rgba(0,0,0,.05)}
+.lodge-act:last-child{border-bottom:none}
+.lodge-act-name{font-weight:600;margin-bottom:2px}
+.lodge-act-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+
+/* ── NIGHTSBRIDGE CARD ── */
+.section-nb{
+  grid-column: 1 / -1;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-top:3px solid #2D6BB5;
+}
+.section-nb .card-icon{background:rgba(45,107,181,.1);border:1px solid rgba(45,107,181,.25)}
+.section-nb .card-icon svg{stroke:#2D6BB5}
+.section-nb .card-title{color:#1A4A8A}
+.section-nb .scrape-btn{background:#2D6BB5;color:#fff}
+.section-nb .scrape-btn:hover:not(:disabled){background:#1A4A8A}
+.section-nb .spinner{border-top-color:#2D6BB5}
+.section-nb .result-label{color:#1A4A8A}
+.section-nb .dl-btn{background:rgba(45,107,181,.08);border-color:rgba(45,107,181,.3);color:#1A4A8A}
+
+/* NightsBridge form grid */
+.nb-form{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0}
+@media(max-width:760px){.nb-form{grid-template-columns:1fr}}
+.nb-form-row{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+@media(max-width:760px){.nb-form-row{grid-template-columns:1fr 1fr}}
+.nb-label{font-size:11px;color:var(--text-muted);letter-spacing:.4px;text-transform:uppercase;margin-bottom:5px;font-weight:500}
+.nb-input{
+  width:100%;background:var(--input-bg);border:1px solid var(--input-border);
+  border-radius:10px;padding:10px 14px;color:var(--text);font-size:13px;
+  outline:none;transition:border-color .15s;font-family:inherit;
+}
+.nb-input:focus{border-color:rgba(45,107,181,.45)}
+.nb-input::placeholder{color:var(--text-muted)}
+.nb-pwd-row{display:flex;gap:8px;align-items:center}
+.nb-pwd-row .nb-input{flex:1}
+.nb-save-btn{
+  flex-shrink:0;padding:10px 14px;border-radius:10px;font-size:12px;cursor:pointer;
+  background:rgba(45,107,181,.1);border:1px solid rgba(45,107,181,.25);color:#1A4A8A;
+  white-space:nowrap;transition:background .15s;
+}
+.nb-save-btn:hover{background:rgba(45,107,181,.18)}
+.nb-cred-note{grid-column:1/-1;font-size:11px;color:var(--text-muted);line-height:1.6;
+  padding:8px 12px;background:rgba(45,107,181,.04);border-radius:8px;
+  border:1px solid rgba(45,107,181,.1);}
+
+/* NightsBridge availability result table */
+.nb-avail-wrap{overflow-x:auto;margin-top:4px}
+.nb-prop-name{font-family:'Playfair Display',serif;font-size:18px;color:var(--text);margin-bottom:3px}
+.nb-prop-loc{font-size:12px;color:var(--text-muted);margin-bottom:14px}
+.nb-prop-desc{font-size:12.5px;color:var(--text-sec);line-height:1.6;margin-bottom:14px}
+.nb-table{width:100%;border-collapse:collapse;font-size:12.5px;min-width:500px}
+.nb-table th{
+  background:rgba(45,107,181,.08);color:#1A4A8A;font-weight:600;
+  padding:8px 12px;text-align:left;border-bottom:2px solid rgba(45,107,181,.2);
+  white-space:nowrap;
+}
+.nb-table td{padding:7px 12px;border-bottom:1px solid var(--card-border);vertical-align:middle}
+.nb-table tr:last-child td{border-bottom:none}
+.nb-table .room-name{font-weight:600;color:var(--text)}
+.nb-avail-cell{text-align:center;font-size:12px;font-weight:600}
+.nb-avail-cell.nb-avail{color:#3D7D6A}
+.nb-avail-cell.nb-sold{color:#C0392B;opacity:.8}
+.nb-avail-cell.nb-nodata{color:var(--text-muted);font-weight:400}
+.nb-rate{font-size:11px;color:var(--text-muted);font-weight:400;display:block;margin-top:1px}
+.nb-section-break{border-top:2px solid rgba(45,107,181,.15)}
+
+/* ── REGION SEARCH CARD ── */
+.section-nb-regions{
+  grid-column:1/-1;
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-top:3px solid #6B4FBB;
+}
+.section-nb-regions .card-icon{background:rgba(107,79,187,.1);border:1px solid rgba(107,79,187,.25)}
+.section-nb-regions .card-icon svg{stroke:#6B4FBB}
+.section-nb-regions .card-title{color:#4A2E9A}
+.section-nb-regions .scrape-btn{background:#6B4FBB;color:#fff}
+.section-nb-regions .scrape-btn:hover:not(:disabled){background:#4A2E9A}
+.section-nb-regions .spinner{border-top-color:#6B4FBB}
+
+/* Region rows */
+.nb-region-row{
+  display:grid;
+  grid-template-columns:2fr 140px 80px 120px 36px;
+  gap:10px;align-items:end;
+  padding:10px 0;
+  border-bottom:1px solid var(--card-border);
+}
+.nb-region-row:last-child{border-bottom:none}
+@media(max-width:760px){.nb-region-row{grid-template-columns:1fr 1fr 80px 36px}}
+.nb-region-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(107,79,187,.15);color:#4A2E9A;
+  font-size:11px;font-weight:700;flex-shrink:0;margin-right:8px;
+}
+.nb-region-name-wrap{display:flex;align-items:center}
+.nb-checkout-display{
+  font-size:12px;color:var(--text-muted);padding:10px 0 10px 4px;
+  line-height:1;white-space:nowrap;
+}
+.nb-checkout-display strong{color:var(--text-sec);font-weight:600}
+.nb-remove-btn{
+  align-self:flex-end;padding:9px;border-radius:8px;font-size:14px;cursor:pointer;
+  background:rgba(200,0,0,.07);border:1px solid rgba(200,0,0,.15);color:#C03030;
+  line-height:1;transition:background .15s;
+}
+.nb-remove-btn:hover{background:rgba(200,0,0,.15)}
+.nb-add-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 16px;border-radius:10px;font-size:13px;cursor:pointer;
+  background:rgba(107,79,187,.08);border:1px solid rgba(107,79,187,.25);
+  color:#4A2E9A;transition:background .15s;margin-top:10px;
+}
+.nb-add-btn:hover{background:rgba(107,79,187,.16)}
+.nb-add-btn:disabled{opacity:.4;cursor:not-allowed}
+.nb-cred-strip{
+  display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  padding:16px 0;border-top:1px solid var(--card-border);margin-top:8px;
+}
+@media(max-width:760px){.nb-cred-strip{grid-template-columns:1fr}}
+
+/* Region results */
+.nb-region-result{margin-bottom:24px;padding-bottom:24px;border-bottom:2px solid rgba(107,79,187,.15)}
+.nb-region-result:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.nb-region-header{
+  display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap;
+}
+.nb-region-name{font-family:'Playfair Display',serif;font-size:19px;color:#4A2E9A}
+.nb-region-dates{font-size:12.5px;color:var(--text-muted)}
+.nb-region-badge{
+  font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;
+  background:rgba(61,125,106,.12);color:#3D7D6A;border:1px solid rgba(61,125,106,.25);
+}
+.nb-region-badge.none{background:rgba(192,57,43,.08);color:#C03030;border-color:rgba(192,57,43,.2)}
+.nb-lodge-card{
+  background:var(--bg);border:1px solid var(--card-border);
+  border-radius:10px;padding:14px 16px;margin-bottom:10px;
+}
+.nb-lodge-card.unavail{opacity:.55}
+.nb-lodge-header{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.nb-lodge-avail-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.nb-lodge-avail-dot.yes{background:#3D7D6A}
+.nb-lodge-avail-dot.no{background:#C03030}
+.nb-lodge-title{font-weight:600;font-size:14px;color:var(--text)}
+.nb-lodge-loc{font-size:11.5px;color:var(--text-muted);margin-left:auto}
+.nb-room-rows{display:flex;flex-direction:column;gap:4px}
+.nb-room-row{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.nb-room-label{color:var(--text-sec);min-width:160px}
+.nb-room-dates{display:flex;gap:6px;flex-wrap:wrap}
+.nb-date-chip{
+  font-size:11px;padding:2px 7px;border-radius:6px;font-weight:600;white-space:nowrap;
+}
+.nb-date-chip.avail{background:rgba(61,125,106,.12);color:#3D7D6A}
+.nb-date-chip.sold{background:rgba(192,57,43,.1);color:#C03030}
+.nb-show-unavail{
+  font-size:12px;color:var(--text-muted);cursor:pointer;margin-top:8px;
+  text-decoration:underline;text-underline-offset:2px;
+}
+.nb-show-unavail:hover{color:var(--text-sec)}
+
+/* ── LIGHTBOX ── */
+.lightbox{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.92);align-items:center;justify-content:center;
+}
+.lightbox.open{display:flex}
+.lightbox img{max-width:90vw;max-height:90vh;border-radius:8px;object-fit:contain}
+.lightbox-close{
+  position:fixed;top:20px;right:26px;font-size:28px;color:#fff;cursor:pointer;
+  background:none;border:none;line-height:1;opacity:.7;
+}
+.lightbox-close:hover{opacity:1}
+.lightbox-nav{
+  position:fixed;top:50%;transform:translateY(-50%);
+  background:rgba(255,255,255,.1);border:none;border-radius:50%;
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#fff;font-size:20px;
+}
+.lightbox-nav:hover{background:rgba(255,255,255,.2)}
+#lb-prev{left:16px}
+#lb-next{right:16px}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+    </div>
+    <div>
+      <div class="brand-name">Desert Tracks — Wetu Scraper</div>
+      <div class="brand-sub">ITINERARY DATA EXTRACTOR</div>
+    </div>
+  </div>
+  <div class="server-pill">
+    <div class="server-dot" id="server-dot"></div>
+    <span id="server-label">Checking server…</span>
+  </div>
+</header>
+
+<nav class="tabbar">
+  <button class="tab" data-target="section-creator"    onclick="showTab(this)">✦ Creator</button>
+  <button class="tab" data-target="section-accom"      onclick="showTab(this)">Accommodation</button>
+  <button class="tab" data-target="section-text"       onclick="showTab(this)">Day Text</button>
+  <button class="tab" data-target="section-photos"     onclick="showTab(this)">Day Photos</button>
+  <button class="tab" data-target="section-both"       onclick="showTab(this)">Text + Photos</button>
+  <button class="tab" data-target="section-nb-regions" onclick="showTab(this)">NB Regions</button>
+  <button class="tab" data-target="section-nb"         onclick="showTab(this)">NB Lodge</button>
+</nav>
+
+<div class="main">
+
+  <!-- ── SECTION 0: WETU ITINERARY CREATOR ── -->
+  <div class="section-card section-creator">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+      </div>
+      <div class="card-title">Wetu Itinerary Creator</div>
+      <div class="card-desc">Builds sample itineraries in your Wetu Builder automatically — each stop's lodge, nights, and destination filled in. A Chrome window opens; log into Wetu and it does the rest.</div>
+    </div>
+    <div class="card-body" style="display:flex;flex-direction:column;gap:14px">
+      <div class="creator-note">When you click <strong>Launch Creator</strong>, a Chrome window opens on the Wetu login page. <strong>Log in</strong> — as soon as the Builder dashboard appears it starts creating on its own. Leave that window alone until it finishes.</div>
+      <div class="url-label">Which to create <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">(blank = all, or e.g. 2,4)</span></div>
+      <input class="url-input" id="creator-only" type="text" placeholder="all" spellcheck="false">
+      <div class="creator-list" id="creator-list">Loading itineraries…</div>
+      <button class="scrape-btn" id="creator-btn" onclick="runCreator()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        Launch Creator
+      </button>
+      <div class="result-area" id="creator-result">
+        <div class="result-top">
+          <div>
+            <div class="result-label" id="creator-result-label">Launched</div>
+            <div class="result-summary" id="creator-result-summary"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="creator-divider"><span>or build your own</span></div>
+      <div class="url-label">Itinerary name</div>
+      <input class="url-input" id="creator-custom-name" type="text" placeholder="e.g. 12-Day Namibia Highlights" spellcheck="false">
+      <div class="url-label">Lodges <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">(one per line — “Lodge name, nights”)</span></div>
+      <textarea class="url-textarea" id="creator-custom-stops" spellcheck="false"
+        placeholder="Olive Grove Guesthouse, 1&#10;Okonjima, 2&#10;Camp Moremi, 3&#10;Chobe Game Lodge, 2"></textarea>
+      <button class="scrape-btn" id="creator-custom-btn" onclick="runCreatorCustom()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14"/><path d="M5 12h14"/></svg>
+        Build Custom Itinerary
+      </button>
+    </div>
+  </div>
+
+  <!-- ── SECTION 4 (moved to top): ACCOMMODATION DETAILS ── -->
+  <div class="section-card section-accom">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+      </div>
+      <div class="card-title">Accommodation Details</div>
+      <div class="card-desc">Rooms (photos by type), Restaurants (photos + name), Activities &amp; Services (text), and Information. Empty tabs skipped. Multiple lodges supported.</div>
+    </div>
+    <div class="card-body" style="display:flex;flex-direction:column;gap:14px">
+      <div class="url-label">Wetu URLs <span style="font-weight:400;text-transform:none;letter-spacing:0;font-size:10px">(one per line)</span></div>
+      <textarea class="url-textarea" id="accom-urls"
+        placeholder="https://wetu.com/ItineraryOutputs/Discovery/…&#10;https://wetu.com/ItineraryOutputs/Discovery/…"
+        spellcheck="false"></textarea>
+      <button class="scrape-btn" id="accom-btn" onclick="runAccomScrape()">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></svg>
+        Scrape Accommodations
+      </button>
+      <div class="progress-area" id="accom-progress">
+        <div class="spinner-row">
+          <div class="spinner" style="border-top-color:#6BAA98"></div>
+          <div class="progress-msg" id="accom-msg">Starting…</div>
+        </div>
+      </div>
+      <div class="result-area" id="accom-result">
+        <div class="result-top">
+          <div>
+            <div class="result-label" id="accom-result-label">Done</div>
+            <div class="result-summary" id="accom-result-summary"></div>
+          </div>
+          <a class="dl-btn" id="accom-dl" href="#" download>
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download JSON
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="preview-panel" id="accom-preview">
+      <div class="preview-header" onclick="togglePreview('accom')">
+        <span class="preview-title" style="color:rgba(61,125,106,.7)">Preview Results</span>
+        <svg class="preview-toggle" id="accom-toggle-icon" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+      </div>
+      <div class="preview-body open" id="accom-preview-body"></div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 1: TEXT ── -->
+  <div class="section-card section-text">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+      </div>
+      <div class="card-title">Day-by-Day Text</div>
+      <div class="card-desc">Extracts each stop's destination name, description, accommodation, meals, highlights, and notes. No photos.</div>
+    </div>
+    <div class="card-body">
+      <div class="url-label">Wetu Itinerary URL</div>
+      <input class="url-input" id="text-url" type="url"
+        placeholder="https://wetu.com/ItineraryOutputs/Discovery/…"
+        autocomplete="off" spellcheck="false">
+      <button class="scrape-btn" id="text-btn" onclick="runScrape('text')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+        Scrape Text
+      </button>
+      <div class="progress-area" id="text-progress">
+        <div class="spinner-row">
+          <div class="spinner"></div>
+          <div class="progress-msg" id="text-msg">Starting…</div>
+        </div>
+      </div>
+      <div class="result-area" id="text-result">
+        <div class="result-top">
+          <div>
+            <div class="result-label" id="text-result-label">Done</div>
+            <div class="result-summary" id="text-result-summary"></div>
+          </div>
+          <a class="dl-btn" id="text-dl" href="#" download>
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download JSON
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Preview panel -->
+    <div class="preview-panel" id="text-preview">
+      <div class="preview-header" onclick="togglePreview('text')">
+        <span class="preview-title">Preview Results</span>
+        <svg class="preview-toggle" id="text-toggle-icon" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+      </div>
+      <div class="preview-body open" id="text-preview-body">
+        <!-- Stop cards injected here -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SECTION 2: PHOTOS ── -->
+  <div class="section-card section-photos">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+      </div>
+      <div class="card-title">Day-by-Day Photos</div>
+      <div class="card-desc">Extracts every unique photo URL for each stop — no duplicates, grouped by destination. No text content.</div>
+    </div>
+    <div class="card-body">
+      <div class="url-label">Wetu Itinerary URL</div>
+      <input class="url-input" id="photos-url" type="url"
+        placeholder="https://wetu.com/ItineraryOutputs/Discovery/…"
+        autocomplete="off" spellcheck="false">
+      <button class="scrape-btn" id="photos-btn" onclick="runScrape('photos')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21,15 16,10 5,21"/></svg>
+        Scrape Photos
+      </button>
+      <div class="progress-area" id="photos-progress">
+        <div class="spinner-row">
+          <div class="spinner"></div>
+          <div class="progress-msg" id="photos-msg">Starting…</div>
+        </div>
+      </div>
+      <div class="result-area" id="photos-result">
+        <div class="result-top">
+          <div>
+            <div class="result-label" id="photos-result-label">Done</div>
+            <div class="result-summary" id="photos-result-summary"></div>
+          </div>
+          <a class="dl-btn" id="photos-dl" href="#" download>
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download JSON
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Preview panel -->
+    <div class="preview-panel" id="photos-preview">
+      <div class="preview-header" onclick="togglePreview('photos')">
+        <span class="preview-title">Preview Results</span>
+        <svg class="preview-toggle" id="photos-toggle-icon" viewBox="0 0 24 24"><polyline points="6,9 12,15 18,9"/></svg>
+      </div>
+      <div class="preview-body open" id="photos-preview-body">
+        <!-- Stop photo grids injected here -->
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── SECTION 3: BOTH (full-width) ── -->
+  <div class="section-card section-both">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><rect x="3" y="3" width="7" height="7" rx="1" transform="translate(9,9)"/><circle cx="17.5" cy="17.5" r="1"/></svg>
+      </div>
+      <div class="card-title">Text + Photos Combined</div>
+      <div class="card-desc">Runs both scrapers in one go and downloads a single JSON file — every stop with its full text details AND all photo URLs together.</div>
+    </div>
+    <div class="card-body">
+      <div class="url-label">Wetu Itinerary URL</div>
+      <input class="url-input" id="both-url" type="url"
+        placeholder="https://wetu.com/ItineraryOutputs/Discovery/…"
+        autocomplete="off" spellcheck="false">
+      <div class="both-note">⚡ Runs in a <strong>single browser session</strong> — same speed as one scrape. Text and photos are extracted together then merged into one file.</div>
+      <button class="scrape-btn" id="both-btn" onclick="runScrape('both')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Scrape &amp; Download Combined JSON
+      </button>
+      <div class="progress-area" id="both-progress">
+        <div class="spinner-row">
+          <div class="spinner"></div>
+          <div class="progress-msg" id="both-msg">Starting…</div>
+        </div>
+      </div>
+      <div class="result-area" id="both-result">
+        <div class="result-top">
+          <div>
+            <div class="result-label" id="both-result-label">Done</div>
+            <div class="result-summary" id="both-result-summary"></div>
+          </div>
+          <a class="dl-btn" id="both-dl" href="#" download>
+            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Combined JSON
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── NIGHTSBRIDGE REGION AVAILABILITY ── -->
+  <div class="section-card section-nb-regions">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      </div>
+      <div class="card-title">NightsBridge — Region Availability Search</div>
+      <div class="card-desc">Search up to 5 regions at once. For each region set the area name and how many nights — the scraper finds every available lodge and shows you which room types are open on your dates.</div>
+    </div>
+    <div class="card-body">
+
+      <!-- Region rows -->
+      <div style="padding:20px 28px 0">
+        <div id="nbr-region-rows"></div>
+        <button class="nb-add-btn" id="nbr-add-btn" onclick="nbrAddRegion()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Region
+        </button>
+      </div>
+
+      <!-- Credentials strip (shared with single-lodge card) -->
+      <div style="padding:0 28px">
+        <div class="nb-cred-strip">
+          <div>
+            <div class="nb-label">NightsBridge Email</div>
+            <input class="nb-input" id="nbr-email" type="email" placeholder="your@email.com" value="Bookings@desert-tracks.com">
+          </div>
+          <div>
+            <div class="nb-label">Password</div>
+            <div class="nb-pwd-row">
+              <input class="nb-input" id="nbr-password" type="password" placeholder="Enter password…">
+              <button class="nb-save-btn" onclick="nbrSavePassword(this)">Save</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Guests / Rooms inline -->
+        <div style="display:flex;gap:12px;margin-bottom:16px">
+          <div style="flex:0 0 100px">
+            <div class="nb-label">Guests</div>
+            <select class="nb-input" id="nbr-guests">
+              <option>1</option><option selected>2</option><option>3</option>
+              <option>4</option><option>5</option><option>6</option>
+            </select>
+          </div>
+          <div style="flex:0 0 100px">
+            <div class="nb-label">Rooms</div>
+            <select class="nb-input" id="nbr-rooms">
+              <option selected>1</option><option>2</option><option>3</option><option>4</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search button -->
+      <div style="padding:0 28px 18px">
+        <button class="scrape-btn" id="nbr-btn" onclick="runNBRegionScrape()" style="background:#6B4FBB;color:#fff;width:100%">
+          Search All Regions on NightsBridge
+        </button>
+      </div>
+
+      <div class="progress-area" id="nbr-progress" style="margin:0 28px 12px">
+        <div class="spinner" style="border-top-color:#6B4FBB"></div>
+        <span class="progress-msg" id="nbr-msg">Connecting…</span>
+      </div>
+
+      <!-- Result bar -->
+      <div class="result-area" id="nbr-result" style="margin:0 28px">
+        <div class="result-label" id="nbr-result-label" style="color:#4A2E9A"></div>
+        <div class="result-summary" id="nbr-result-summary"></div>
+        <a class="dl-btn" id="nbr-dl" download style="background:rgba(107,79,187,.08);border-color:rgba(107,79,187,.25);color:#4A2E9A">↓ Download JSON</a>
+      </div>
+
+      <!-- Preview -->
+      <div class="preview-panel" id="nbr-preview" style="margin:0 28px 28px">
+        <div class="preview-title" style="color:rgba(74,46,154,.7)">Results by Region</div>
+        <div id="nbr-preview-body"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── NIGHTSBRIDGE AVAILABILITY ── -->
+  <div class="section-card section-nb">
+    <div class="card-top">
+      <div class="card-icon">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      </div>
+      <div class="card-title">NightsBridge Availability</div>
+      <div class="card-desc">Check lodge availability and rates directly from NightsBridge for Agents. Enter the lodge name and your travel dates — the scraper logs in and returns a room-by-room availability grid.</div>
+    </div>
+    <div class="card-body">
+
+      <!-- Credentials -->
+      <div class="nb-form" style="padding:20px 28px 0;border-bottom:1px solid var(--card-border);padding-bottom:18px">
+        <div>
+          <div class="nb-label">NightsBridge Email</div>
+          <input class="nb-input" id="nb-email" type="email" placeholder="your@email.com" value="Bookings@desert-tracks.com">
+        </div>
+        <div>
+          <div class="nb-label">Password <span style="color:var(--text-muted);font-weight:400;text-transform:none;letter-spacing:0">(saved permanently)</span></div>
+          <div class="nb-pwd-row">
+            <input class="nb-input" id="nb-password" type="password" placeholder="Enter password…">
+            <button class="nb-save-btn" onclick="nbSavePassword()">Save</button>
+          </div>
+        </div>
+        <div class="nb-cred-note">
+          🔒 Your password is saved permanently on your computer — never sent anywhere except NightsBridge itself. Click <strong>Save</strong> once and it will be pre-filled every time you open this app.
+        </div>
+      </div>
+
+      <!-- Search form -->
+      <div style="padding:20px 28px 0">
+        <div class="nb-form">
+          <div style="grid-column:1/-1">
+            <div class="nb-label">Lodge / Establishment Name</div>
+            <input class="nb-input" id="nb-lodge" type="text" placeholder="e.g. Camp Moremi">
+          </div>
+          <div>
+            <div class="nb-label">Check-in Date</div>
+            <input class="nb-input" id="nb-checkin" type="date">
+          </div>
+          <div>
+            <div class="nb-label">Check-out Date</div>
+            <input class="nb-input" id="nb-checkout" type="date">
+          </div>
+          <div>
+            <div class="nb-label">Guests</div>
+            <select class="nb-input" id="nb-guests">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
+          </div>
+          <div>
+            <div class="nb-label">Rooms</div>
+            <select class="nb-input" id="nb-rooms">
+              <option value="1" selected>1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Button + progress -->
+      <div style="padding:18px 28px 0">
+        <button class="scrape-btn" id="nb-btn" onclick="runNBScrape()" style="background:#2D6BB5;color:#fff;width:100%">
+          Check Availability on NightsBridge
+        </button>
+      </div>
+
+      <div class="progress-area" id="nb-progress" style="margin:12px 28px 0">
+        <div class="spinner" style="border-top-color:#2D6BB5"></div>
+        <span class="progress-msg" id="nb-msg">Connecting to NightsBridge…</span>
+      </div>
+
+      <!-- Result -->
+      <div class="result-area" id="nb-result" style="margin:0 28px">
+        <div class="result-label" id="nb-result-label" style="color:#1A4A8A"></div>
+        <div class="result-summary" id="nb-result-summary"></div>
+        <a class="dl-btn" id="nb-dl" download style="background:rgba(45,107,181,.08);border-color:rgba(45,107,181,.3);color:#1A4A8A">
+          ↓ Download JSON
+        </a>
+      </div>
+
+      <!-- Availability preview -->
+      <div class="preview-panel" id="nb-preview" style="margin:0 28px 28px">
+        <div class="preview-title" style="color:rgba(26,74,138,.7)">Availability Results</div>
+        <div id="nb-preview-body"></div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- ── LIGHTBOX ── -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <button class="lightbox-nav" id="lb-prev" onclick="lbNav(-1,event)">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox-nav" id="lb-next" onclick="lbNav(1,event)">&#8250;</button>
+</div>
+
+<script>
+const SERVER = 'http://localhost:5050';
+
+const MSGS = {
+  text: [
+    'Launching browser…',
+    'Opening itinerary page…',
+    'Waiting for content to load…',
+    'Reading destination text…',
+    'Extracting descriptions and notes…',
+    'Finishing up…',
+  ],
+  photos: [
+    'Launching browser…',
+    'Opening itinerary page…',
+    'Scrolling to load all images…',
+    'Scanning photo URLs…',
+    'Removing duplicates…',
+    'Grouping by destination…',
+    'Finishing up…',
+  ],
+  both: [
+    'Launching browser…',
+    'Scraping text content…',
+    'Reading destination details…',
+    'Now scraping photos…',
+    'Collecting all image URLs…',
+    'Removing duplicate photos…',
+    'Merging text and photos per stop…',
+    'Almost done…',
+  ],
+};
+
+let timers = { text: null, photos: null, both: null };
+
+// Lightbox state
+let lbPhotos = [];
+let lbIndex  = 0;
+
+// ── Server health ─────────────────────────────────────────────────────────────
+async function checkServer() {
+  const dot   = document.getElementById('server-dot');
+  const label = document.getElementById('server-label');
+  try {
+    const r = await fetch(SERVER + '/api/health', { signal: AbortSignal.timeout(2500) });
+    if (r.ok) {
+      dot.className     = 'server-dot online';
+      label.textContent = 'Server online';
+      return true;
+    }
+  } catch {}
+  dot.className     = 'server-dot offline';
+  label.textContent = 'Server offline — run python server.py';
+  return false;
+}
+checkServer();
+setInterval(checkServer, 15000);
+loadCreatorList();
+
+// ── Tabs ───────────────────────────────────────────────────────────────────
+function showTab(btn){
+  const target = btn.getAttribute('data-target');
+  document.querySelectorAll('.section-card').forEach(c => c.classList.remove('tab-active'));
+  document.querySelectorAll('.tabbar .tab').forEach(t => t.classList.remove('active'));
+  const card = document.querySelector('.' + target);
+  if (card) card.classList.add('tab-active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+// Open the first tab (Creator) on load
+(function initTabs(){
+  const first = document.querySelector('.tabbar .tab');
+  if (first) showTab(first);
+})();
+
+// ── Preview toggle ─────────────────────────────────────────────────────────────
+function togglePreview(mode) {
+  const body = document.getElementById(mode + '-preview-body');
+  const icon = document.getElementById(mode + '-toggle-icon');
+  body.classList.toggle('open');
+  icon.classList.toggle('open');
+}
+
+// ── Render text preview ────────────────────────────────────────────────────────
+function renderTextPreview(data) {
+  const stops = data.stops || [];
+  if (!stops.length) return '<div class="stop-card"><div class="result-summary">No stops found in the data.</div></div>';
+
+  return stops.map((stop, idx) => {
+    const day  = stop.day  || stop.day_label   || `Stop ${idx + 1}`;
+    const name = stop.destination || stop.name || stop.title || 'Unnamed Stop';
+
+    // Gather text fields
+    const fields = [];
+    if (stop.description)   fields.push({ label: 'Description',     value: stop.description });
+    if (stop.highlights)    fields.push({ label: 'Highlights',      value: Array.isArray(stop.highlights) ? stop.highlights.join('\n') : stop.highlights });
+    if (stop.accommodation) fields.push({ label: 'Accommodation',   value: stop.accommodation });
+    if (stop.meals)         fields.push({ label: 'Meals',           value: Array.isArray(stop.meals) ? stop.meals.join(', ') : stop.meals });
+    if (stop.notes)         fields.push({ label: 'Notes',           value: stop.notes });
+    if (stop.activities)    fields.push({ label: 'Activities',      value: Array.isArray(stop.activities) ? stop.activities.join('\n') : stop.activities });
+
+    // If no known fields, dump any string values
+    if (!fields.length) {
+      Object.entries(stop).forEach(([k, v]) => {
+        if (typeof v === 'string' && v.length > 2 && !['day','day_label','name','title','destination'].includes(k)) {
+          fields.push({ label: k.replace(/_/g,' '), value: v });
+        }
+      });
+    }
+
+    const id = `stop-${idx}`;
+    const fieldHtml = fields.map((f, fi) => {
+      const fid = `${id}-f${fi}`;
+      const long = f.value.length > 300;
+      return `
+        <div class="stop-field">
+          <div class="stop-field-label">${esc(f.label)}</div>
+          <div class="stop-field-value ${long ? 'clamped' : ''}" id="${fid}">${esc(f.value)}</div>
+          ${long ? `<button class="expand-btn" onclick="expandField('${fid}',this)">Show more ↓</button>` : ''}
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="stop-card">
+        <div class="stop-day">${esc(day)}</div>
+        <div class="stop-name">${esc(name)}</div>
+        ${fieldHtml || '<div class="stop-field-value" style="color:var(--text-muted);font-size:12px">No text content extracted for this stop.</div>'}
+      </div>`;
+  }).join('');
+}
+
+// ── Render photos preview ──────────────────────────────────────────────────────
+function renderPhotosPreview(data) {
+  const stops = data.stops || [];
+  if (!stops.length) return '<div class="stop-card"><div class="result-summary">No stops found in the data.</div></div>';
+
+  // Collect all photos globally for lightbox
+  lbPhotos = [];
+  stops.forEach(s => { (s.photos || []).forEach(p => lbPhotos.push(p)); });
+
+  let globalIdx = 0;
+  return stops.map((stop, idx) => {
+    const day    = stop.day  || stop.day_label   || `Stop ${idx + 1}`;
+    const name   = stop.destination || stop.name || stop.title || 'Unnamed Stop';
+    const photos = stop.photos || [];
+    const count  = photos.length;
+
+    const THUMB_LIMIT = 12;
+    const shown  = photos.slice(0, THUMB_LIMIT);
+    const extra  = count - shown.length;
+
+    const thumbs = shown.map((url, ti) => {
+      const gi = globalIdx + ti;
+      return `<img class="photo-thumb" src="${esc(url)}" alt="Photo ${ti+1}"
+                loading="lazy" onerror="this.style.display='none'"
+                onclick="openLightbox(${gi})">`;
+    }).join('');
+    globalIdx += photos.length;
+
+    const moreHtml = extra > 0
+      ? `<div class="photo-thumb-more">+${extra} more</div>`
+      : '';
+
+    return `
+      <div class="stop-card">
+        <div class="stop-day">${esc(day)}</div>
+        <div class="stop-name">${esc(name)}</div>
+        <div class="stop-photo-count">${count} photo${count !== 1 ? 's' : ''}</div>
+        ${count ? `<div class="photo-grid">${thumbs}${moreHtml}</div>` : '<div class="stop-field-value" style="color:var(--text-muted);font-size:12px">No photos found for this stop.</div>'}
+      </div>`;
+  }).join('');
+}
+
+// ── Field expander ─────────────────────────────────────────────────────────────
+function expandField(id, btn) {
+  const el = document.getElementById(id);
+  el.classList.remove('clamped');
+  btn.style.display = 'none';
+}
+
+// ── Lightbox ───────────────────────────────────────────────────────────────────
+function openLightbox(idx) {
+  lbIndex = idx;
+  document.getElementById('lb-img').src = lbPhotos[lbIndex];
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(e) {
+  if (e && e.target !== e.currentTarget && e.target.id !== 'lightbox') return;
+  document.getElementById('lightbox').classList.remove('open');
+}
+function lbNav(dir, e) {
+  e.stopPropagation();
+  lbIndex = (lbIndex + dir + lbPhotos.length) % lbPhotos.length;
+  document.getElementById('lb-img').src = lbPhotos[lbIndex];
+}
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lightbox').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbNav(1, { stopPropagation: ()=>{} });
+  if (e.key === 'ArrowLeft')  lbNav(-1, { stopPropagation: ()=>{} });
+  if (e.key === 'Escape')     document.getElementById('lightbox').classList.remove('open');
+});
+
+// ── HTML escape ────────────────────────────────────────────────────────────────
+function esc(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Scrape ────────────────────────────────────────────────────────────────────
+async function runScrape(mode) {
+  const urlEl      = document.getElementById(mode + '-url');
+  const btn        = document.getElementById(mode + '-btn');
+  const progressEl = document.getElementById(mode + '-progress');
+  const resultEl   = document.getElementById(mode + '-result');
+  const msgEl      = document.getElementById(mode + '-msg');
+  const labelEl    = document.getElementById(mode + '-result-label');
+  const summaryEl  = document.getElementById(mode + '-result-summary');
+  const dlEl       = document.getElementById(mode + '-dl');
+  const previewEl  = document.getElementById(mode + '-preview');
+  const previewBodyEl = document.getElementById(mode + '-preview-body');
+
+  const url = urlEl.value.trim();
+  if (!url) { urlEl.focus(); return; }
+
+  const online = await checkServer();
+  if (!online) {
+    showError(mode, 'Server is offline. Open a terminal and run: python server.py');
+    return;
+  }
+
+  // Reset
+  resultEl.className = 'result-area';
+  if (previewEl)     previewEl.className   = 'preview-panel';
+  if (previewBodyEl) previewBodyEl.innerHTML = '';
+  progressEl.classList.add('visible');
+  btn.disabled  = true;
+  urlEl.disabled = true;
+
+  // Cycle through progress messages
+  let i = 0;
+  const msgs = MSGS[mode];
+  msgEl.textContent = msgs[0];
+  clearInterval(timers[mode]);
+  timers[mode] = setInterval(() => {
+    i = Math.min(i + 1, msgs.length - 1);
+    msgEl.textContent = msgs[i];
+  }, 5000);
+
+  try {
+    const resp = await fetch(`${SERVER}/api/scrape/${mode}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ url }),
+    });
+
+    clearInterval(timers[mode]);
+    progressEl.classList.remove('visible');
+
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Scrape failed.');
+
+    // Build summary text
+    let summary = '';
+    if (mode === 'text') {
+      const n = data.stops?.length || data.stop_count || 0;
+      summary = `${n} stop${n !== 1 ? 's' : ''} extracted`;
+      if (data.itinerary_title) summary = `"${data.itinerary_title}" — ${summary}`;
+    } else if (mode === 'photos') {
+      const n = data.total_unique_photos || data.all_photos?.length || 0;
+      const s = data.stops?.length || 0;
+      summary = `${n} unique photo${n !== 1 ? 's' : ''} across ${s} stop${s !== 1 ? 's' : ''}`;
+    } else {
+      // both
+      const s = data.stop_count || data.stops?.length || 0;
+      const p = data.total_photos || 0;
+      summary = `${s} stop${s !== 1 ? 's' : ''} — ${p} photos merged into one file`;
+      if (data.itinerary_title) summary = `"${data.itinerary_title}" — ${summary}`;
+    }
+
+    // Build download blob
+    const json    = JSON.stringify(data, null, 2);
+    const blob    = new Blob([json], { type: 'application/json' });
+    const blobUrl = URL.createObjectURL(blob);
+    const ts      = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+    const fname   = `itinerary_${mode}_${ts}.json`;
+
+    labelEl.textContent   = '✓ Complete';
+    summaryEl.textContent = summary;
+    dlEl.href             = blobUrl;
+    dlEl.download         = fname;
+    resultEl.className    = 'result-area visible';
+
+    // Render inline preview (text and photos sections only — both has no preview panel)
+    if (previewBodyEl && previewEl) {
+      previewBodyEl.innerHTML = mode === 'text'
+        ? renderTextPreview(data)
+        : renderPhotosPreview(data);
+      previewEl.classList.add('visible');
+    }
+
+  } catch(err) {
+    clearInterval(timers[mode]);
+    progressEl.classList.remove('visible');
+    showError(mode, err.message);
+  } finally {
+    btn.disabled   = false;
+    urlEl.disabled = false;
+  }
+}
+
+function showError(mode, msg) {
+  const resultEl  = document.getElementById(mode + '-result');
+  const labelEl   = document.getElementById(mode + '-result-label');
+  const summaryEl = document.getElementById(mode + '-result-summary');
+  const dlEl      = document.getElementById(mode + '-dl');
+  labelEl.textContent   = '✕ Error';
+  summaryEl.textContent = msg;
+  dlEl.style.display    = 'none';
+  resultEl.className    = 'result-area visible error';
+  setTimeout(() => dlEl.style.display = '', 100);
+}
+
+// Allow Enter key to trigger scrape
+document.getElementById('text-url').addEventListener('keydown',   e => { if(e.key==='Enter') runScrape('text'); });
+document.getElementById('photos-url').addEventListener('keydown', e => { if(e.key==='Enter') runScrape('photos'); });
+document.getElementById('both-url').addEventListener('keydown',   e => { if(e.key==='Enter') runScrape('both'); });
+
+// ── Accommodation scraper ─────────────────────────────────────────────────────
+const ACCOM_MSGS = [
+  'Launching browser…',
+  'Loading itinerary page…',
+  'Calling Wetu API…',
+  'Reading room types…',
+  'Reading restaurants…',
+  'Reading activities…',
+  'Reading property information…',
+  'Finishing up…',
+];
+let accomTimer = null;
+
+// ── Itinerary Creator ──────────────────────────────────────────────────────
+async function loadCreatorList() {
+  const el = document.getElementById('creator-list');
+  if (!el) return;
+  try {
+    const resp = await fetch(`${SERVER}/api/creator/list`);
+    const data = await resp.json();
+    const items = data.itineraries || [];
+    if (!items.length) { el.textContent = 'No built-in itineraries found.'; return; }
+    el.innerHTML = items.map(it =>
+      `<div><b>${it.index}.</b> ${it.name} <span style="opacity:.65">(${it.stops} stops)</span></div>`
+    ).join('');
+  } catch (e) {
+    el.textContent = 'Start the server (python3 server.py) to see the itinerary list.';
+  }
+}
+
+async function runCreator() {
+  const onlyEl    = document.getElementById('creator-only');
+  const btn       = document.getElementById('creator-btn');
+  const resultEl  = document.getElementById('creator-result');
+  const labelEl   = document.getElementById('creator-result-label');
+  const summaryEl = document.getElementById('creator-result-summary');
+
+  const online = await checkServer();
+  if (!online) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent = '✕ Error';
+    summaryEl.textContent = 'Server is offline. Run python3 server.py in your terminal.';
+    return;
+  }
+
+  const only = (onlyEl.value || '').trim().toLowerCase();
+  const payload = (only && only !== 'all') ? { only } : {};
+
+  btn.disabled = true;
+  resultEl.className = 'result-area';
+  try {
+    const resp = await fetch(`${SERVER}/api/create-itineraries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Launch failed.');
+    labelEl.textContent = '✓ Launched';
+    summaryEl.textContent = data.message || 'Chrome is opening — log into Wetu.';
+    resultEl.className = 'result-area visible';
+  } catch (err) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent = '✕ Error';
+    summaryEl.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function runCreatorCustom() {
+  const nameEl    = document.getElementById('creator-custom-name');
+  const stopsEl   = document.getElementById('creator-custom-stops');
+  const btn       = document.getElementById('creator-custom-btn');
+  const resultEl  = document.getElementById('creator-result');
+  const labelEl   = document.getElementById('creator-result-label');
+  const summaryEl = document.getElementById('creator-result-summary');
+
+  // Parse "Lodge name, nights" lines into [name, nights] pairs.
+  const stops = [];
+  (stopsEl.value || '').split('\n').forEach(line => {
+    const t = line.trim();
+    if (!t) return;
+    const m = t.match(/^(.*?)[,;\t]\s*(\d+)\s*$/);
+    if (m) stops.push([m[1].trim(), parseInt(m[2], 10)]);
+    else   stops.push([t, 1]);              // no number → 1 night
+  });
+
+  if (!stops.length) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent = '✕ Error';
+    summaryEl.textContent = 'Add at least one lodge (one per line).';
+    return;
+  }
+
+  const online = await checkServer();
+  if (!online) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent = '✕ Error';
+    summaryEl.textContent = 'Server is offline. Run python3 server.py in your terminal.';
+    return;
+  }
+
+  const payload = { custom: { name: (nameEl.value || '').trim() || 'Custom Itinerary', stops } };
+
+  btn.disabled = true;
+  resultEl.className = 'result-area';
+  try {
+    const resp = await fetch(`${SERVER}/api/create-itineraries`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Launch failed.');
+    labelEl.textContent = '✓ Launched';
+    summaryEl.textContent = data.message || 'Chrome is opening — log into Wetu.';
+    resultEl.className = 'result-area visible';
+  } catch (err) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent = '✕ Error';
+    summaryEl.textContent = err.message;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+async function runAccomScrape() {
+  const urlsEl    = document.getElementById('accom-urls');
+  const btn       = document.getElementById('accom-btn');
+  const progressEl= document.getElementById('accom-progress');
+  const resultEl  = document.getElementById('accom-result');
+  const msgEl     = document.getElementById('accom-msg');
+  const labelEl   = document.getElementById('accom-result-label');
+  const summaryEl = document.getElementById('accom-result-summary');
+  const dlEl      = document.getElementById('accom-dl');
+  const previewEl = document.getElementById('accom-preview');
+  const previewBodyEl = document.getElementById('accom-preview-body');
+
+  const urls = urlsEl.value.trim();
+  if (!urls) { urlsEl.focus(); return; }
+
+  const online = await checkServer();
+  if (!online) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent = '✕ Error';
+    summaryEl.textContent = 'Server is offline. Run python3 server.py in your terminal.';
+    return;
+  }
+
+  // Reset
+  resultEl.className    = 'result-area';
+  previewEl.className   = 'preview-panel';
+  previewBodyEl.innerHTML = '';
+  progressEl.classList.add('visible');
+  btn.disabled = true; urlsEl.disabled = true;
+
+  let i = 0;
+  msgEl.textContent = ACCOM_MSGS[0];
+  clearInterval(accomTimer);
+  accomTimer = setInterval(() => {
+    i = Math.min(i + 1, ACCOM_MSGS.length - 1);
+    msgEl.textContent = ACCOM_MSGS[i];
+  }, 5000);
+
+  try {
+    const resp = await fetch(`${SERVER}/api/scrape/accommodation`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ urls }),
+    });
+    clearInterval(accomTimer);
+    progressEl.classList.remove('visible');
+
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Scrape failed.');
+
+    const n = data.accommodation_count || data.accommodations?.length || 0;
+    const summary = `${n} lodge${n !== 1 ? 's' : ''} scraped`;
+
+    const json    = JSON.stringify(data, null, 2);
+    const blob    = new Blob([json], { type: 'application/json' });
+    const ts      = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+    labelEl.textContent   = '✓ Complete';
+    summaryEl.textContent = summary;
+    dlEl.href     = URL.createObjectURL(blob);
+    dlEl.download = `accommodation_details_${ts}.json`;
+    resultEl.className = 'result-area visible';
+
+    previewBodyEl.innerHTML = renderAccomPreview(data);
+    previewEl.classList.add('visible');
+
+  } catch(err) {
+    clearInterval(accomTimer);
+    progressEl.classList.remove('visible');
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent   = '✕ Error';
+    summaryEl.textContent = err.message;
+    dlEl.style.display = 'none';
+    setTimeout(() => dlEl.style.display = '', 100);
+  } finally {
+    btn.disabled = false; urlsEl.disabled = false;
+  }
+}
+
+function renderAccomPreview(data) {
+  const accoms = data.accommodations || [];
+  if (!accoms.length) return '<div class="accom-lodge"><div style="color:var(--text-muted);font-size:13px">No accommodations found.</div></div>';
+
+  // Add photos to global lightbox pool for this scraper too
+  accoms.forEach(a => {
+    (a.destination_photos || []).forEach(p => lbPhotos.push(p));
+    (a.gallery_photos || []).forEach(p => lbPhotos.push(p));
+    (a.rooms || []).forEach(r => (r.photos || []).forEach(p => lbPhotos.push(p)));
+    (a.restaurants || []).forEach(r => (r.photos || []).forEach(p => lbPhotos.push(p)));
+  });
+
+  return accoms.map(a => {
+    let html = `
+      <div class="accom-lodge">
+        <div class="lodge-name">${esc(a.name)}</div>
+        <div class="lodge-meta">${esc(a.destination || '')}${a.nights ? ` &bull; ${a.nights} night${a.nights !== 1 ? 's' : ''}` : ''}${a.start_date ? ` &bull; ${esc(a.start_date)} – ${esc(a.end_date || '')}` : ''}</div>`;
+
+    // Destination — day text + photos
+    if (a.destination_text || (a.destination_photos && a.destination_photos.length)) {
+      html += `<div class="lodge-tab-label">📍 Destination</div>`;
+      if (a.destination_text) html += `<div class="lodge-info-block">${esc(a.destination_text)}</div>`;
+      if (a.destination_info) html += `<div class="lodge-info-block" style="margin-top:8px">${esc(a.destination_info)}</div>`;
+      if (a.destination_photos && a.destination_photos.length) {
+        html += `<div class="photo-grid" style="grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:5px;margin-top:10px">`;
+        a.destination_photos.forEach(url => {
+          const gi = lbPhotos.indexOf(url);
+          html += `<img class="photo-thumb" src="${esc(url)}" loading="lazy" onerror="this.style.display='none'" onclick="openLightbox(${gi >= 0 ? gi : 0})">`;
+        });
+        html += `</div>`;
+      }
+    }
+
+    // Rooms
+    if (a.rooms && a.rooms.length) {
+      html += `<div class="lodge-tab-label">🛏 Rooms</div>`;
+      a.rooms.forEach(r => {
+        html += `<div class="lodge-room">`;
+        if (r.name) html += `<div class="lodge-room-name">${esc(r.name)}${r.photo_count ? ` <span style="font-weight:400;color:var(--text-muted);font-size:11px">(${r.photo_count} photos)</span>` : ''}</div>`;
+        if (r.description) html += `<div class="lodge-room-desc">${esc(r.description)}</div>`;
+        if (r.photos && r.photos.length) {
+          const shown = r.photos.slice(0, 6);
+          html += `<div class="photo-grid" style="grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:5px">`;
+          shown.forEach((url, ti) => {
+            const gi = lbPhotos.indexOf(url);
+            html += `<img class="photo-thumb" src="${esc(url)}" loading="lazy" onerror="this.style.display='none'" onclick="openLightbox(${gi >= 0 ? gi : 0})">`;
+          });
+          if (r.photos.length > 6) html += `<div class="photo-thumb-more">+${r.photos.length - 6}</div>`;
+          html += `</div>`;
+        }
+        html += `</div>`;
+      });
+    }
+
+    // Restaurants
+    if (a.restaurants && a.restaurants.length) {
+      html += `<div class="lodge-tab-label">🍽 Restaurants</div>`;
+      a.restaurants.forEach(r => {
+        html += `<div class="lodge-room">`;
+        if (r.name) html += `<div class="lodge-room-name">${esc(r.name)}${r.photo_count ? ` <span style="font-weight:400;color:var(--text-muted);font-size:11px">(${r.photo_count} photos)</span>` : ''}</div>`;
+        if (r.description) html += `<div class="lodge-room-desc">${esc(r.description)}</div>`;
+        if (r.photos && r.photos.length) {
+          const shown = r.photos.slice(0, 6);
+          html += `<div class="photo-grid" style="grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:5px">`;
+          shown.forEach((url, ti) => {
+            const gi = lbPhotos.indexOf(url);
+            html += `<img class="photo-thumb" src="${esc(url)}" loading="lazy" onerror="this.style.display='none'" onclick="openLightbox(${gi >= 0 ? gi : 0})">`;
+          });
+          if (r.photos.length > 6) html += `<div class="photo-thumb-more">+${r.photos.length - 6}</div>`;
+          html += `</div>`;
+        }
+        html += `</div>`;
+      });
+    }
+
+    // Activities
+    if (a.activities && a.activities.length) {
+      html += `<div class="lodge-tab-label">⚡ Activities &amp; Services</div>`;
+      a.activities.forEach(act => {
+        html += `<div class="lodge-act">`;
+        if (act.name) html += `<div class="lodge-act-name">${esc(act.name)}</div>`;
+        if (act.description) html += `<div class="lodge-act-desc">${esc(act.description)}</div>`;
+        html += `</div>`;
+      });
+    }
+
+    // Information
+    if (a.information) {
+      const inf = a.information;
+      html += `<div class="lodge-tab-label">ℹ Information</div>`;
+      if (inf.description) html += `<div class="lodge-room-desc" style="margin-bottom:10px">${esc(inf.description)}</div>`;
+      const facts = [];
+      if (inf.rating)        facts.push(`Rating: ${inf.rating}`);
+      if (inf.room_count)    facts.push(`Rooms: ${inf.room_count}`);
+      if (inf.check_in)      facts.push(`Check-in: ${inf.check_in}`);
+      if (inf.check_out)     facts.push(`Check-out: ${inf.check_out}`);
+      if (inf.spoken_languages?.length) facts.push(`Languages: ${inf.spoken_languages.join(', ')}`);
+      if (facts.length) html += `<div class="lodge-info-block">${facts.map(esc).join('\n')}</div>`;
+      if (inf.special_interests?.length) html += `<div class="lodge-room-desc" style="margin-top:6px"><strong>Interests:</strong> ${esc(inf.special_interests.join(', '))}</div>`;
+      if (inf.property_facilities?.length) html += `<div class="lodge-room-desc"><strong>Property:</strong> ${esc(inf.property_facilities.join(', '))}</div>`;
+      if (inf.room_facilities?.length) html += `<div class="lodge-room-desc"><strong>Room:</strong> ${esc(inf.room_facilities.join(', '))}</div>`;
+      if (inf.general_info) html += `<div class="lodge-room-desc" style="margin-top:6px">${esc(inf.general_info)}</div>`;
+    }
+
+    html += `</div>`;
+    return html;
+  }).join('');
+}
+
+// ── NightsBridge credential helpers ──────────────────────────────────────────
+
+async function _loadNBCreds() {
+  try {
+    const r = await fetch(`${SERVER}/api/nb-creds`);
+    if (r.ok) return await r.json();
+  } catch {}
+  return null;
+}
+
+async function _saveNBCreds(email, password) {
+  try {
+    await fetch(`${SERVER}/api/nb-creds`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+    // Also keep in localStorage as fallback
+    localStorage.setItem('nb_password', password);
+    localStorage.setItem('nb_email', email);
+  } catch {}
+}
+
+// ── NightsBridge Region Search ────────────────────────────────────────────────
+
+(async function nbrInit() {
+  // Add rows — nbrAddRegion handles cascading dates automatically
+  nbrAddRegion();
+  nbrAddRegion();
+  // Load saved credentials from server
+  const creds = await _loadNBCreds();
+  if (creds) {
+    if (creds.email)    document.getElementById('nbr-email').value    = creds.email;
+    if (creds.password) document.getElementById('nbr-password').value = creds.password;
+  } else {
+    // Fallback to localStorage
+    const pw = localStorage.getItem('nb_password');
+    if (pw) document.getElementById('nbr-password').value = pw;
+  }
+})();
+
+async function nbrSavePassword(btn) {
+  const email = document.getElementById('nbr-email').value.trim();
+  const pw    = document.getElementById('nbr-password').value.trim();
+  if (!pw) return;
+  await _saveNBCreds(email, pw);
+  // Also sync to single-lodge card
+  const otherPw    = document.getElementById('nb-password');
+  const otherEmail = document.getElementById('nb-email');
+  if (otherPw    && !otherPw.value)    otherPw.value    = pw;
+  if (otherEmail && !otherEmail.value) otherEmail.value = email;
+  btn.textContent = 'Saved ✓';
+  setTimeout(() => btn.textContent = 'Save', 2000);
+}
+
+function nbrAddRegion() {
+  const container = document.getElementById('nbr-region-rows');
+  if (container.children.length >= 5) return;
+
+  const idx = container.children.length + 1;
+  const row = document.createElement('div');
+  row.className = 'nb-region-row';
+
+  // Default check-in = previous row's check-out, or today if first row
+  const prevRows = container.children;
+  let defDate;
+  if (prevRows.length > 0) {
+    const lastRow = prevRows[prevRows.length - 1];
+    defDate = lastRow.querySelector('.nbr-checkout-val')?.textContent.trim();
+    if (!defDate || defDate === '—') defDate = new Date().toISOString().slice(0,10);
+  } else {
+    defDate = new Date().toISOString().slice(0,10);
+  }
+
+  row.innerHTML = `
+    <div class="nb-region-name-wrap">
+      <span class="nb-region-num">${idx}</span>
+      <div style="flex:1">
+        <div class="nb-label">Region / Area</div>
+        <input class="nb-input" type="text" placeholder="e.g. Chobe National Park">
+      </div>
+    </div>
+    <div>
+      <div class="nb-label">Check-in</div>
+      <input class="nb-input nbr-checkin" type="date" value="${defDate}" onchange="nbrCalcCheckout(this)">
+    </div>
+    <div>
+      <div class="nb-label">Nights</div>
+      <input class="nb-input nbr-nights" type="number" min="1" max="60" value="2"
+             oninput="nbrCalcCheckout(this.closest('.nb-region-row').querySelector('.nbr-checkin'))">
+    </div>
+    <div class="nb-checkout-display">
+      <div class="nb-label">Check-out</div>
+      <strong class="nbr-checkout-val">—</strong>
+    </div>
+    <button class="nb-remove-btn" onclick="nbrRemoveRegion(this)">×</button>
+  `;
+  container.appendChild(row);
+  nbrCalcCheckout(row.querySelector('.nbr-checkin'));
+  nbrUpdateNumbers();
+
+  const addBtn = document.getElementById('nbr-add-btn');
+  if (container.children.length >= 5) addBtn.disabled = true;
+}
+
+function nbrRemoveRegion(btn) {
+  btn.closest('.nb-region-row').remove();
+  nbrUpdateNumbers();
+  document.getElementById('nbr-add-btn').disabled = false;
+}
+
+function nbrCalcCheckout(dateInput) {
+  if (!dateInput || !dateInput.value) return;
+  const row    = dateInput.closest('.nb-region-row');
+  const nights = parseInt(row.querySelector('.nbr-nights').value) || 1;
+  const ci     = new Date(dateInput.value);
+  if (!isNaN(ci)) {
+    const co = new Date(ci);
+    co.setDate(co.getDate() + nights);
+    const coStr = co.toISOString().slice(0,10);
+
+    const label = row.querySelector('.nbr-checkout-val');
+    if (label) label.textContent = coStr;
+    const hidden = row.querySelector('.nbr-checkout-hidden');
+    if (hidden) hidden.value = coStr;
+
+    // Cascade: next region's check-in = this region's check-out
+    const nextRow = row.nextElementSibling;
+    if (nextRow && nextRow.classList.contains('nb-region-row')) {
+      const nextCheckin = nextRow.querySelector('.nbr-checkin');
+      if (nextCheckin) {
+        nextCheckin.value = coStr;
+        nbrCalcCheckout(nextCheckin); // cascade down the chain
+      }
+    }
+  }
+}
+
+function nbrUpdateNumbers() {
+  document.querySelectorAll('.nb-region-row').forEach((row, i) => {
+    const num = row.querySelector('.nb-region-num');
+    if (num) num.textContent = i + 1;
+  });
+}
+
+const NBR_MSGS = [
+  'Launching browser…',
+  'Logging into NightsBridge…',
+  'Searching region 1…',
+  'Searching region 2…',
+  'Searching region 3…',
+  'Parsing availability results…',
+  'Almost done…',
+];
+let nbrTimer = null;
+
+async function runNBRegionScrape() {
+  const email    = document.getElementById('nbr-email').value.trim();
+  const password = document.getElementById('nbr-password').value.trim();
+  const guests   = document.getElementById('nbr-guests').value;
+  const rooms    = document.getElementById('nbr-rooms').value;
+
+  if (!email || !password) { alert('Enter your NightsBridge email and password first.'); return; }
+
+  // Collect region rows
+  const regions = [];
+  document.querySelectorAll('.nb-region-row').forEach(row => {
+    const name    = row.querySelector('input[type="text"]')?.value.trim();
+    const ci      = row.querySelector('.nbr-checkin')?.value;
+    const coVal   = row.querySelector('.nbr-checkout-val')?.textContent.trim();
+    const nights  = row.querySelector('.nbr-nights')?.value;
+    if (!name || !ci) return;
+    // Calculate check_out from check_in + nights
+    let check_out = coVal && coVal !== '—' ? coVal : '';
+    if (!check_out && ci && nights) {
+      const d = new Date(ci); d.setDate(d.getDate() + parseInt(nights));
+      check_out = d.toISOString().slice(0,10);
+    }
+    if (name && ci && check_out) regions.push({ region: name, check_in: ci, check_out });
+  });
+
+  if (!regions.length) { alert('Add at least one region with a name and check-in date.'); return; }
+
+  const online = await checkServer();
+  if (!online) { alert('Server offline — run python3 server.py first.'); return; }
+
+  const btn        = document.getElementById('nbr-btn');
+  const progressEl = document.getElementById('nbr-progress');
+  const resultEl   = document.getElementById('nbr-result');
+  const msgEl      = document.getElementById('nbr-msg');
+  const labelEl    = document.getElementById('nbr-result-label');
+  const summaryEl  = document.getElementById('nbr-result-summary');
+  const dlEl       = document.getElementById('nbr-dl');
+  const previewEl  = document.getElementById('nbr-preview');
+  const previewBodyEl = document.getElementById('nbr-preview-body');
+
+  resultEl.className = 'result-area';
+  previewEl.className = 'preview-panel';
+  previewBodyEl.innerHTML = '';
+  progressEl.classList.add('visible');
+  btn.disabled = true;
+
+  let mi = 0;
+  msgEl.textContent = NBR_MSGS[0];
+  clearInterval(nbrTimer);
+  nbrTimer = setInterval(() => {
+    mi = Math.min(mi + 1, NBR_MSGS.length - 1);
+    // Personalise with region name
+    let msg = NBR_MSGS[mi];
+    if (mi >= 2 && mi - 2 < regions.length) msg = `Searching: ${regions[mi-2].region}…`;
+    msgEl.textContent = msg;
+  }, 8000);
+
+  try {
+    const resp = await fetch(`${SERVER}/api/scrape/nb-regions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, guests: +guests, rooms: +rooms, regions }),
+    });
+    clearInterval(nbrTimer);
+    progressEl.classList.remove('visible');
+
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Scrape failed.');
+
+    const totalLodges    = (data.regions || []).reduce((s, r) => s + (r.lodge_count || 0), 0);
+    const totalAvailable = (data.regions || []).reduce((s, r) => s + (r.available_count || 0), 0);
+    const summary = `${data.region_count} region${data.region_count !== 1 ? 's' : ''} — ${totalAvailable} of ${totalLodges} lodges available`;
+
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const ts   = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+    labelEl.textContent   = '✓ Complete';
+    summaryEl.textContent = summary;
+    dlEl.href     = URL.createObjectURL(blob);
+    dlEl.download = `nb_regions_${ts}.json`;
+    resultEl.className = 'result-area visible';
+
+    previewBodyEl.innerHTML = renderNBRegionResults(data);
+    previewEl.classList.add('visible');
+
+  } catch(err) {
+    clearInterval(nbrTimer);
+    progressEl.classList.remove('visible');
+    resultEl.className    = 'result-area visible error';
+    labelEl.textContent   = '✕ Error';
+    summaryEl.textContent = err.message;
+    dlEl.style.display = 'none';
+    setTimeout(() => dlEl.style.display = '', 100);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderNBRegionResults(data) {
+  const regionsData = data.regions || [];
+  if (!regionsData.length) return '<div style="padding:12px;color:var(--text-muted);font-size:13px">No results.</div>';
+
+  return regionsData.map((reg, ri) => {
+    const props    = reg.properties || [];
+    const available = props.filter(p => p.has_availability);
+    const unavail   = props.filter(p => !p.has_availability);
+
+    const badge = available.length
+      ? `<span class="nb-region-badge">${available.length} available</span>`
+      : `<span class="nb-region-badge none">None available</span>`;
+
+    // Build lodge cards — available ones first
+    const lodgeCards = [...available, ...unavail].map(prop => {
+      const roomRows = (prop.room_types || []).map(rt => {
+        const chips = (rt.availability || []).map(a => {
+          const cls = a.available ? 'avail' : 'sold';
+          const label = a.available
+            ? `${a.date}${a.single_rate ? ' R'+a.single_rate.toLocaleString() : ''}`
+            : `${a.date} Sold`;
+          return `<span class="nb-date-chip ${cls}">${esc(label)}</span>`;
+        }).join('');
+        return `<div class="nb-room-row">
+          <span class="nb-room-label">${esc(rt.room_type || 'Room')}</span>
+          <div class="nb-room-dates">${chips}</div>
+        </div>`;
+      }).join('');
+
+      const dot  = prop.has_availability ? 'yes' : 'no';
+      const fade = prop.has_availability ? '' : ' unavail';
+      return `
+        <div class="nb-lodge-card${fade}">
+          <div class="nb-lodge-header">
+            <div class="nb-lodge-avail-dot ${dot}"></div>
+            <div class="nb-lodge-title">${esc(prop.name || 'Unknown Lodge')}</div>
+            ${prop.location ? `<div class="nb-lodge-loc">📍 ${esc(prop.location)}</div>` : ''}
+          </div>
+          ${roomRows
+            ? `<div class="nb-room-rows">${roomRows}</div>`
+            : `<div style="font-size:12px;color:var(--text-muted)">No room data parsed.</div>`}
+        </div>`;
+    }).join('');
+
+    const unavailToggleId = `nbr-unavail-${ri}`;
+    const unavailSection  = unavail.length && available.length
+      ? `<div class="nb-show-unavail" onclick="
+            const s=document.getElementById('${unavailToggleId}');
+            s.style.display=s.style.display==='none'?'block':'none';
+            this.textContent=s.style.display==='none'?'Show ${unavail.length} fully booked lodge${unavail.length!==1?'s':''}…':'Hide fully booked lodges';
+         ">Show ${unavail.length} fully booked lodge${unavail.length!==1?'s':''}…</div>
+         <div id="${unavailToggleId}" style="display:none">
+           ${unavail.map(prop => `
+             <div class="nb-lodge-card unavail">
+               <div class="nb-lodge-header">
+                 <div class="nb-lodge-avail-dot no"></div>
+                 <div class="nb-lodge-title">${esc(prop.name||'Unknown')}</div>
+                 ${prop.location?`<div class="nb-lodge-loc">📍 ${esc(prop.location)}</div>`:''}
+               </div>
+               <div style="font-size:12px;color:#C03030">Fully booked for these dates</div>
+             </div>`).join('')}
+         </div>`
+      : '';
+
+    return `
+      <div class="nb-region-result">
+        <div class="nb-region-header">
+          <div class="nb-region-name">${esc(reg.region)}</div>
+          <div class="nb-region-dates">${esc(reg.check_in)} → ${esc(reg.check_out)}</div>
+          ${badge}
+        </div>
+        ${available.length
+          ? available.map(prop => `
+            <div class="nb-lodge-card">
+              <div class="nb-lodge-header">
+                <div class="nb-lodge-avail-dot yes"></div>
+                <div class="nb-lodge-title">${esc(prop.name||'Unknown Lodge')}</div>
+                ${prop.location?`<div class="nb-lodge-loc">📍 ${esc(prop.location)}</div>`:''}
+              </div>
+              <div class="nb-room-rows">
+                ${(prop.room_types||[]).map(rt=>`
+                  <div class="nb-room-row">
+                    <span class="nb-room-label">${esc(rt.room_type||'Room')}</span>
+                    <div class="nb-room-dates">
+                      ${(rt.availability||[]).map(a=>{
+                        const cls=a.available?'avail':'sold';
+                        const lbl=a.available
+                          ?`${a.date}${a.single_rate?' R'+a.single_rate.toLocaleString():''}`
+                          :`${a.date} Sold`;
+                        return `<span class="nb-date-chip ${cls}">${esc(lbl)}</span>`;
+                      }).join('')}
+                    </div>
+                  </div>`).join('')}
+              </div>
+            </div>`).join('')
+          : `<div style="color:var(--text-muted);font-size:13px;padding:8px 0">No available lodges found in this region for these dates.</div>`}
+        ${unavailSection}
+      </div>`;
+  }).join('');
+}
+
+// ── NightsBridge scraper ───────────────────────────────────────────────────────
+
+// Restore saved credentials on load
+(async function nbInit() {
+  // Set default dates: today → today+1
+  const today = new Date();
+  const fmt = d => d.toISOString().slice(0,10);
+  document.getElementById('nb-checkin').value  = fmt(today);
+  const tom = new Date(today); tom.setDate(tom.getDate()+1);
+  document.getElementById('nb-checkout').value = fmt(tom);
+  // Load saved credentials from server
+  const creds = await _loadNBCreds();
+  if (creds) {
+    if (creds.email)    document.getElementById('nb-email').value    = creds.email;
+    if (creds.password) document.getElementById('nb-password').value = creds.password;
+  } else {
+    // Fallback to localStorage
+    const pw = localStorage.getItem('nb_password');
+    if (pw) document.getElementById('nb-password').value = pw;
+  }
+})();
+
+async function nbSavePassword() {
+  const email = document.getElementById('nb-email').value.trim();
+  const pw    = document.getElementById('nb-password').value.trim();
+  if (!pw) return;
+  await _saveNBCreds(email, pw);
+  // Also sync to region card
+  const otherPw    = document.getElementById('nbr-password');
+  const otherEmail = document.getElementById('nbr-email');
+  if (otherPw    && !otherPw.value)    otherPw.value    = pw;
+  if (otherEmail && !otherEmail.value) otherEmail.value = email;
+  const btn = document.querySelector('#nb-password').closest('.nb-pwd-row').querySelector('.nb-save-btn');
+  if (btn) { btn.textContent = 'Saved ✓'; setTimeout(() => btn.textContent = 'Save', 2000); }
+}
+
+const NB_MSGS = [
+  'Launching browser…',
+  'Logging into NightsBridge…',
+  'Filling search form…',
+  'Waiting for availability results…',
+  'Reading room types…',
+  'Parsing availability grid…',
+  'Finishing up…',
+];
+let nbTimer = null;
+
+async function runNBScrape() {
+  const email    = document.getElementById('nb-email').value.trim();
+  const password = document.getElementById('nb-password').value.trim();
+  const lodge    = document.getElementById('nb-lodge').value.trim();
+  const checkIn  = document.getElementById('nb-checkin').value;
+  const checkOut = document.getElementById('nb-checkout').value;
+  const guests   = document.getElementById('nb-guests').value;
+  const rooms    = document.getElementById('nb-rooms').value;
+
+  const btn        = document.getElementById('nb-btn');
+  const progressEl = document.getElementById('nb-progress');
+  const resultEl   = document.getElementById('nb-result');
+  const msgEl      = document.getElementById('nb-msg');
+  const labelEl    = document.getElementById('nb-result-label');
+  const summaryEl  = document.getElementById('nb-result-summary');
+  const dlEl       = document.getElementById('nb-dl');
+  const previewEl  = document.getElementById('nb-preview');
+  const previewBodyEl = document.getElementById('nb-preview-body');
+
+  if (!email)    { alert('Please enter your NightsBridge email.');    return; }
+  if (!password) { alert('Please enter your NightsBridge password.'); return; }
+  if (!lodge)    { document.getElementById('nb-lodge').focus();       return; }
+  if (!checkIn || !checkOut) { alert('Please select check-in and check-out dates.'); return; }
+
+  const online = await checkServer();
+  if (!online) {
+    resultEl.className = 'result-area visible error';
+    labelEl.textContent   = '✕ Error';
+    summaryEl.textContent = 'Server is offline. Run python3 server.py in your terminal.';
+    return;
+  }
+
+  // Reset UI
+  resultEl.className      = 'result-area';
+  previewEl.className     = 'preview-panel';
+  previewBodyEl.innerHTML = '';
+  progressEl.classList.add('visible');
+  btn.disabled = true;
+
+  let i = 0;
+  msgEl.textContent = NB_MSGS[0];
+  clearInterval(nbTimer);
+  nbTimer = setInterval(() => {
+    i = Math.min(i + 1, NB_MSGS.length - 1);
+    msgEl.textContent = NB_MSGS[i];
+  }, 6000);
+
+  try {
+    const resp = await fetch(`${SERVER}/api/scrape/nightsbridge`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password, lodge_name: lodge, check_in: checkIn, check_out: checkOut, guests: +guests, rooms: +rooms }),
+    });
+    clearInterval(nbTimer);
+    progressEl.classList.remove('visible');
+
+    const data = await resp.json();
+    if (!resp.ok || data.error) throw new Error(data.error || 'Scrape failed.');
+
+    const n       = data.result_count || data.properties?.length || 0;
+    const summary = `${n} property result${n !== 1 ? 's' : ''} found`;
+
+    const json  = JSON.stringify(data, null, 2);
+    const blob  = new Blob([json], { type: 'application/json' });
+    const ts    = new Date().toISOString().slice(0,19).replace(/[:T]/g,'-');
+    labelEl.textContent   = '✓ Complete';
+    summaryEl.textContent = summary;
+    dlEl.href     = URL.createObjectURL(blob);
+    dlEl.download = `nightsbridge_availability_${ts}.json`;
+    resultEl.className = 'result-area visible';
+
+    previewBodyEl.innerHTML = renderNBPreview(data);
+    previewEl.classList.add('visible');
+
+  } catch(err) {
+    clearInterval(nbTimer);
+    progressEl.classList.remove('visible');
+    resultEl.className    = 'result-area visible error';
+    labelEl.textContent   = '✕ Error';
+    summaryEl.textContent = err.message;
+    dlEl.style.display = 'none';
+    setTimeout(() => dlEl.style.display = '', 100);
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+function renderNBPreview(data) {
+  const props = data.properties || [];
+  if (!props.length) {
+    return '<div style="padding:16px;color:var(--text-muted);font-size:13px">No availability results found. Try a different lodge name or date range.</div>';
+  }
+
+  return props.map((prop, pi) => {
+    const roomTypes = prop.room_types || [];
+
+    // Collect all unique dates across room types
+    const allDates = [];
+    const seenDates = new Set();
+    roomTypes.forEach(rt => {
+      (rt.availability || []).forEach(a => {
+        if (!seenDates.has(a.date)) { seenDates.add(a.date); allDates.push(a.date); }
+      });
+    });
+
+    // Build table
+    let tableHtml = '';
+    if (allDates.length && roomTypes.length) {
+      const headerCols = allDates.map(d =>
+        `<th style="min-width:80px;font-size:11px;text-align:center">${esc(d)}</th>`
+      ).join('');
+
+      const bodyRows = roomTypes.map((rt, ri) => {
+        const availMap = {};
+        (rt.availability || []).forEach(a => { availMap[a.date] = a; });
+
+        const cells = allDates.map(d => {
+          const a = availMap[d];
+          if (!a) return `<td class="nb-avail-cell nb-nodata">—</td>`;
+          if (!a.available) return `<td class="nb-avail-cell nb-sold">✕<br><span class="nb-rate">Sold</span></td>`;
+          const sr = a.single_rate ? `R${a.single_rate.toLocaleString()}` : '';
+          const dr = a.double_rate ? `R${a.double_rate.toLocaleString()}` : '';
+          const rateStr = [sr, dr].filter(Boolean).join(' / ');
+          return `<td class="nb-avail-cell nb-avail">✓<br><span class="nb-rate">${esc(rateStr)}</span></td>`;
+        }).join('');
+
+        const sep = ri > 0 ? ' class="nb-section-break"' : '';
+        return `<tr${sep}><td class="room-name">${esc(rt.room_type || 'Room')}</td>${cells}</tr>`;
+      }).join('');
+
+      tableHtml = `
+        <div class="nb-avail-wrap">
+          <table class="nb-table">
+            <thead><tr>
+              <th>Room Type</th>${headerCols}
+            </tr></thead>
+            <tbody>${bodyRows}</tbody>
+          </table>
+        </div>`;
+    } else {
+      tableHtml = `<div style="color:var(--text-muted);font-size:12.5px;padding:8px 0">No room availability data parsed — the lodge may not be on NightsBridge or the name didn't match.</div>`;
+    }
+
+    return `
+      <div style="padding:${pi > 0 ? '20px 0 0' : '8px 0 0'}${pi < props.length - 1 ? ';border-bottom:1px solid var(--card-border);padding-bottom:20px' : ''}">
+        <div class="nb-prop-name">${esc(prop.name || 'Property')}</div>
+        ${prop.location ? `<div class="nb-prop-loc">📍 ${esc(prop.location)}</div>` : ''}
+        ${prop.description ? `<div class="nb-prop-desc">${esc(prop.description.slice(0, 300))}${prop.description.length > 300 ? '…' : ''}</div>` : ''}
+        ${tableHtml}
+        <div style="font-size:11px;color:var(--text-muted);margin-top:8px">
+          ✓ Available &nbsp;|&nbsp; ✕ Sold &nbsp;|&nbsp; Rates shown: single / double (ZAR)
+        </div>
+      </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>

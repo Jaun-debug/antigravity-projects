@@ -1,0 +1,12 @@
+{
+  "scraped_at": "2026-06-06T14:34:31.173897",
+  "platform": "NightsBridge",
+  "lodge_name_query": "lodge damaraland",
+  "check_in": "2026-06-10",
+  "check_out": "2026-06-12",
+  "guests": 2,
+  "rooms": 1,
+  "result_count": 0,
+  "properties": [],
+  "error": "Locator.fill: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"input[placeholder*=\\\"stablishment\\\" i], input[placeholder*=\\\"property name\\\" i]\").first\n"
+}

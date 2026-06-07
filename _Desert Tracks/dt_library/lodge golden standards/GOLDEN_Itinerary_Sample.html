@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+            color: #5A6A6A;
+            background-color: #F5F5F3;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+        *, *::before, *::after { box-sizing: inherit; }
+        .lux-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100svh;
+            margin-bottom: -60px !important;
+        }
+        @media (min-width: 1024px) {
+            .lux-container { flex-direction: row; margin-bottom: -80px !important; }
+        }
+        .lux-left {
+            position: relative;
+            width: 100%;
+            height: 60vh;
+            background-color: #F5F5F3;
+            display: none;
+        }
+        .lux-bg-layer {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: opacity 0.8s ease;
+        }
+        #lux-bg-base {
+            background-image: url('https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg');
+            z-index: 1;
+        }
+        #lux-bg-top { opacity: 0; z-index: 2; }
+        @media (min-width: 1024px) {
+            .lux-left {
+                display: block;
+                width: 50vw;
+                height: 100svh;
+                position: sticky;
+                top: 0;
+                overflow: hidden;
+            }
+        }
+        .lux-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 20%, rgba(0,0,0,0.85) 100%);
+            z-index: 5;
+            pointer-events: none;
+        }
+        .lux-hero-content {
+            position: absolute;
+            bottom: 8vh;
+            left: 0;
+            padding: 2.5rem;
+            color: #ffffff;
+            width: 100%;
+            z-index: 10;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.8s ease;
+        }
+        .lux-hero-content.is-visible { opacity: 1; pointer-events: auto; }
+        @media (min-width: 1024px) { .lux-hero-content { padding: 4rem 5rem; } }
+        .lux-tag-small {
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            font-weight: 500;
+            color: #ffffff !important;
+            margin-bottom: 1rem;
+        }
+        .lux-title {
+            color: #ffffff !important;
+            font-family: 'Cinzel', serif;
+            font-size: clamp(2.5rem, 4vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin: 0 0 1rem 0;
+            letter-spacing: -0.02em;
+        }
+        .lux-subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: #ffffff !important;
+            margin: 0;
+            letter-spacing: 0.02em;
+        }
+        .lux-right {
+            width: 100%;
+            padding: 2rem 2rem 2rem 2rem;
+            background: #F5F5F3;
+            overflow-x: hidden;
+        }
+        .lux-welcome-top { padding-top: 60px; }
+        .lux-right p { margin-bottom: 20px; }
+        @media (min-width: 1024px) {
+            .lux-right { width: 50vw; padding: 6rem 0rem 0rem 0rem; }
+            .lux-welcome-top { padding: 0 4rem 0 2.5rem; }
+            .lux-day-block-header { padding: 0 4rem 0 2.5rem; }
+        }
+        @media (max-width: 1023px) {
+            .lux-right { padding: 0; }
+            .lux-welcome-top { padding: 1.5rem 1.5rem 0 1.5rem; }
+            .lux-day-block-header { padding: 0 0.4rem; }
+            .lux-features-container { padding: 0 0.4rem; }
+            .dt-film-footer { padding: 2rem 0.4rem 0 0.4rem !important; }
+        }
+        .lux-welcome-tag {
+            font-size: 0.75rem;
+            letter-spacing: 0.25em;
+            font-weight: 600;
+            color: #7A8A8A;
+            margin-bottom: 1.5rem;
+        }
+        .lux-intro {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            line-height: 1.7;
+            font-weight: 300;
+            color: #5A6A6A;
+            margin-bottom: 5rem;
+            max-width: 45rem;
+        }
+        .lux-day-block { margin-bottom: 8rem; width: 100%; }
+        .lux-day-number-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 45rem;
+        }
+        .lux-day-numeral {
+            font-size: 4rem;
+            font-weight: 300;
+            color: #d87a4d;
+            line-height: 1;
+            letter-spacing: -0.05em;
+            font-family: 'Open Sans', sans-serif !important;
+        }
+        .lux-day-line {
+            flex-grow: 1;
+            height: 1px;
+            background-color: rgba(216, 122, 77, 0.4);
+        }
+        .lux-day-location {
+            font-family: 'Cinzel', serif;
+            font-style: italic;
+            font-size: 1.4rem;
+            letter-spacing: 0;
+            font-weight: 400;
+            color: #AE8245;
+            margin: 0 0 0.75rem 0;
+            display: block;
+        }
+        .lux-day-title {
+            font-family: 'Cinzel', serif;
+            font-size: clamp(24px, 4vw, 32px);
+            font-weight: 300;
+            margin: 0 0 1rem 0;
+            color: #1F4F4B !important;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+        .lux-day-desc {
+            font-size: clamp(1rem, 1.5vw, 1.125rem);
+            line-height: 1.7;
+            color: #5A6A6A;
+            font-weight: 300;
+            margin-bottom: 3.5rem;
+            max-width: 45rem;
+        }
