@@ -4798,11 +4798,79 @@
             "Waldeck Lodge": "ratesheets/waldeck_namibia_ratesheet_v3.html"
         };
 
+        // Group rate sheets (multi-lodge; deep-linked via ?lodge=KEY). Checked after singles.
+        const groupRateSheetMap = {
+            "Camp Kipwe": "ratesheets/chiwani_ratesheet_v3.html?lodge=kipwe",
+            "Mowani Mountain Camp": "ratesheets/chiwani_ratesheet_v3.html?lodge=mowani",
+            "Mowani Campsite": "ratesheets/chiwani_ratesheet_v3.html?lodge=campsite",
+            "The Weinberg Windhoek": "ratesheets/gondwana_ratesheet_v3.html?lodge=weinberg",
+            "Canyon Lodge": "ratesheets/gondwana_ratesheet_v3.html?lodge=canyonlodge",
+            "Canyon Village": "ratesheets/gondwana_ratesheet_v3.html?lodge=canyonvillage",
+            "The Desert Grace": "ratesheets/gondwana_ratesheet_v3.html?lodge=desertgrace",
+            "The Delight Swakopmund": "ratesheets/gondwana_ratesheet_v3.html?lodge=thedelight",
+            "Kalahari Anib Lodge": "ratesheets/gondwana_ratesheet_v3.html?lodge=kalaharianib",
+            "Kalahari Farmhouse": "ratesheets/gondwana_ratesheet_v3.html?lodge=kalaharifarm",
+            "Namib Dune Star Camp": "ratesheets/gondwana_ratesheet_v3.html?lodge=namibdunestar",
+            "Desert Whisper": "ratesheets/gondwana_ratesheet_v3.html?lodge=desertwhisper",
+            "Damara Mopane Lodge": "ratesheets/gondwana_ratesheet_v3.html?lodge=damaramopane",
+            "Palmwag Lodge": "ratesheets/gondwana_ratesheet_v3.html?lodge=palmwag",
+            "Omarunga Epupa Falls Camp": "ratesheets/gondwana_ratesheet_v3.html?lodge=omarunga",
+            "Hakusembe River Lodge": "ratesheets/gondwana_ratesheet_v3.html?lodge=hakusembe",
+            "Namushasha River Camping2go": "ratesheets/gondwana_ratesheet_v3.html?lodge=namushasha",
+            "Canyon Roadhouse": "ratesheets/gondwana_ratesheet_v3.html?lodge=canyonroadhouse",
+            "Zambezi Mubala Camp": "ratesheets/gondwana_ratesheet_v3.html?lodge=zambezimubalac",
+            "Zambezi Mubala Lodge": "ratesheets/gondwana_ratesheet_v3.html?lodge=zambezimubalal",
+            "Chobe River Camp": "ratesheets/gondwana_ratesheet_v3.html?lodge=choberivercamp",
+            "Etosha King Nehale": "ratesheets/gondwana_ratesheet_v3.html?lodge=etoshakingnehale",
+            "Fish River Lodge": "ratesheets/journeys_namibia_ratesheet_v3_3.html?lodge=fishriver",
+            "Grootberg Lodge": "ratesheets/journeys_namibia_ratesheet_v3_3.html?lodge=grootberg",
+            "Hoada Campsite": "ratesheets/journeys_namibia_ratesheet_v3_3.html?lodge=hoada",
+            "Ondudu Safari Lodge": "ratesheets/journeys_namibia_ratesheet_v3_3.html?lodge=ondudu",
+            "Kalahari Bush Breaks": "ratesheets/logufa_ratesheet_v3.html?lodge=kalahari",
+            "Spitzkoppen Lodge": "ratesheets/logufa_ratesheet_v3.html?lodge=spitzkoppen",
+            "Spitzkoppe Cabin Camp": "ratesheets/logufa_ratesheet_v3.html?lodge=cabincamp",
+            "Spitzkoppe Restcamp": "ratesheets/logufa_ratesheet_v3.html?lodge=restcamp",
+            "Mushara Lodge": "ratesheets/mushara_ratesheet_v3.html?lodge=musharalodge",
+            "Mushara Outpost": "ratesheets/mushara_ratesheet_v3.html?lodge=musharaoutpost",
+            "Mushara Bush Camp": "ratesheets/mushara_ratesheet_v3.html?lodge=musharabush",
+            "Villa Mushara": "ratesheets/mushara_ratesheet_v3.html?lodge=villamushara",
+            "Hoanib Valley Camp": "ratesheets/natural_selection_ratesheet_v1_4.html?lodge=hoanibvalley",
+            "Shipwreck Lodge": "ratesheets/natural_selection_ratesheet_v1_4.html?lodge=shipwreck",
+            "Hoanib Elephant Camp": "ratesheets/natural_selection_ratesheet_v1_4.html?lodge=hoanibel",
+            "Kwessi Dunes": "ratesheets/natural_selection_ratesheet_v1_4.html?lodge=kwessidunes",
+            "Nkasa Linyanti": "ratesheets/natural_selection_ratesheet_v1_4.html?lodge=nkasalinyanti",
+            "Khorixas Lodge": "ratesheets/nwr_ratesheet_v1.html?lodge=khorixas",
+            "Halali Resort": "ratesheets/nwr_ratesheet_v1.html?lodge=halali",
+            "Namutoni Resort": "ratesheets/nwr_ratesheet_v1.html?lodge=namutoni",
+            "Popa Falls Resort": "ratesheets/nwr_ratesheet_v1.html?lodge=popafalls",
+            "Sossus Dune Lodge": "ratesheets/nwr_ratesheet_v1.html?lodge=sossusdunelodge",
+            "Terrace Bay Resort": "ratesheets/nwr_ratesheet_v1.html?lodge=terracebay",
+            "Strand Hotel Swakopmund": "ratesheets/o_and_l_ratesheet_v3.html?lodge=strand",
+            "Mokuti Etosha": "ratesheets/o_and_l_ratesheet_v3.html?lodge=mokuti",
+            "Midgard Country Estate": "ratesheets/o_and_l_ratesheet_v3.html?lodge=midgard",
+            "Le Mirage Resort & Spa": "ratesheets/o_and_l_ratesheet_v3.html?lodge=lemirage",
+            "Teufelskrallen Lodge": "ratesheets/ondili_ratesheet_v3_final_1.html?lodge=teufelskrallen",
+            "Kalahari Red Dunes Lodge": "ratesheets/ondili_ratesheet_v3_final_1.html?lodge=kalaharired",
+            "Desert Homestead Lodge": "ratesheets/ondili_ratesheet_v3_final_1.html?lodge=deserthomestead",
+            "Hohenstein Lodge": "ratesheets/ondili_ratesheet_v3_final_1.html?lodge=hohenstein",
+            "Twyfelfontein Adventure Camp": "ratesheets/ondili_ratesheet_v3_final_1.html?lodge=twyfelfontein",
+            "Ongava Tented Camp": "ratesheets/ongava_ratesheet_v3.html?lodge=tentedcamp",
+            "Ongava Lodge": "ratesheets/ongava_ratesheet_v3.html?lodge=ongavalodge",
+            "Anderssons at Ongava": "ratesheets/ongava_ratesheet_v3.html?lodge=anderssons",
+            "Little Ongava": "ratesheets/ongava_ratesheet_v3.html?lodge=littleongava",
+            "Wolwedans Dunes Lodge": "ratesheets/wolwedans_ratesheet_v3.html?lodge=dunes",
+            "Wolwedans Dune Camp": "ratesheets/wolwedans_ratesheet_v3.html?lodge=dune",
+            "Wolwedans Mountain View Suite": "ratesheets/wolwedans_ratesheet_v3.html?lodge=mountain",
+            "Wolwedans Plains Camp": "ratesheets/wolwedans_ratesheet_v3.html?lodge=plains",
+            "Wolwedans Boulders Camp": "ratesheets/wolwedans_ratesheet_v3.html?lodge=boulders"
+        };
+
+
         function lodgeHasRateSheet(lodgeName) {
             if (!lodgeName) return false;
             const n = lodgeName.toLowerCase().trim();
             if (n.includes('car rental') || n.includes('nts') || n.includes('vehicle') || n.includes('hilux') || n.includes('safari car') || n.includes('4x4')) return true;
-            return !!(singleRateSheetMap[lodgeName] || olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
+            return !!(singleRateSheetMap[lodgeName] || groupRateSheetMap[lodgeName] || olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
         }
 
         function getLodgeRateSheetUrl(lodgeName) {
@@ -4816,6 +4884,7 @@
 
             // Single-lodge dedicated rate sheets take priority
             if (singleRateSheetMap[lodgeName]) return singleRateSheetMap[lodgeName];
+            if (typeof groupRateSheetMap !== 'undefined' && groupRateSheetMap[lodgeName]) return groupRateSheetMap[lodgeName];
 
             const findInMap = (mapObj) => {
                 for (const key of Object.keys(mapObj)) {

@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O&L Leisure — Rates & Booking 2026–2028</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <style>
+        :root {
+            --bg: #EEEAE3;
+            --card-bg: #FFFFFF;
+            --text-main: #2C2824;
+            --text-muted: #7A7269;
+            --gold: #B8956A;
+            --gold-light: rgba(184,149,106,0.12);
+            --seafoam: #7BA99A;
+            --seafoam-light: rgba(123,169,154,0.12);
+            --border: rgba(184,149,106,0.2);
+            --font-head: 'Cormorant Garamond', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; background: var(--bg); color: var(--text-main); font-family: var(--font-body); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+        h1,h2,h3,h4,h5 { font-family: var(--font-head); font-weight: 400; margin: 0; }
+
+        /* ── HERO HEADER ── */
+        .site-hero { position: relative; text-align: center; padding: 80px 20px 60px; overflow: hidden; }
+        .hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); display: inline-block; margin: 0 auto 28px; }
+        .hero-display {
+            font-family: var(--font-head);
+            font-size: clamp(5rem, 11vw, 11rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            background-image: url('https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg');
+            background-size: cover;
+            background-position: center 30%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            display: block;
+            margin-bottom: 0;
+            user-select: none;
+        }
+        .hero-rule { width: 50px; height: 1px; background: var(--gold); margin: 28px auto; }
+        .hero-tagline { font-family: var(--font-head); font-size: clamp(1.2rem,2.5vw,2rem); font-style: italic; font-weight: 300; color: var(--text-main); letter-spacing: 0.5px; margin-bottom: 12px; }
+        .hero-sub { font-family: var(--font-body); font-size: 0.68rem; letter-spacing: 5px; text-transform: uppercase; color: var(--text-muted); }
+        .header-rule { width: 60px; height: 1px; background: var(--gold); margin: 22px auto 0; }
+
+        /* ── LODGE GRID ── */
+        .lodge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1300px; margin: 0 auto; padding: 40px 30px 80px; }
+
+        /* ── LODGE CARD ── */
+        .lodge-card { background: var(--card-bg); border-radius: var(--radius); overflow: hidden; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 24px rgba(44,40,36,0.06); }
+        .lodge-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(44,40,36,0.13); }
+        .lodge-card-img { width: 100%; height: 240px; object-fit: cover; display: block; transition: var(--transition); }
+        .lodge-card:hover .lodge-card-img { transform: scale(1.03); }
+        .lodge-card-img-wrap { overflow: hidden; height: 240px; background: #d8d3cb; }
+        .lodge-card-img-wrap img { transition: var(--transition); }
+        .lodge-card-img-wrap img[src=""] { display: none; }
+        .lodge-card-body { padding: 24px 26px 20px; }
+        .lodge-card-location { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; display: block; }
+        .lodge-card-name { font-family: var(--font-head); font-size: 1.65rem; font-weight: 400; color: var(--text-main); line-height: 1.15; margin-bottom: 10px; }
+        .lodge-card-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--seafoam); display: inline-block; margin-bottom: 12px; }
+        .lodge-card-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.7; font-weight: 300; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .lodge-card-divider { border: none; border-top: 1px solid var(--border); margin: 0 0 18px; }
+        .lodge-card-actions { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+        .btn-lodge { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 9px 18px; border: 1px solid rgba(44,40,36,0.2); border-radius: 6px; background: transparent; color: var(--text-muted); cursor: pointer; transition: var(--transition); }
+        .btn-lodge:hover { border-color: var(--text-main); color: var(--text-main); }
+        .btn-rates { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 9px 22px; border: 1px solid var(--gold); border-radius: 6px; background: transparent; color: var(--gold); cursor: pointer; transition: var(--transition); }
+        .btn-rates:hover { background: var(--gold); color: #fff; }
+
+        /* ── DETAIL VIEW ── */
+        .detail-view { display: none; max-width: 1200px; margin: 0 auto; padding: 40px 30px 120px; animation: fadeIn 0.4s ease; }
+        .back-btn { display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); border: 1px solid var(--border); padding: 10px 22px; border-radius: 30px; cursor: pointer; transition: var(--transition); background: transparent; margin-bottom: 40px; }
+        .back-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+        .detail-hero { display: grid; grid-template-columns: 2fr 1fr; gap: 30px; margin-bottom: 40px; align-items: start; }
+        .detail-title { font-size: clamp(2rem,4vw,3.5rem); font-weight: 300; color: var(--text-main); line-height: 1.1; margin-bottom: 6px; }
+        .detail-location { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 4px; text-transform: uppercase; color: var(--seafoam); font-weight: 500; margin-bottom: 16px; display: block; }
+        .detail-intro { font-size: 0.9rem; line-height: 1.85; color: var(--text-muted); font-weight: 300; white-space: pre-line; }
+        .detail-airport { font-size: 0.8rem; color: var(--text-muted); margin-top: 14px; padding: 12px 16px; border-left: 2px solid var(--seafoam); background: var(--seafoam-light); border-radius: 0 6px 6px 0; line-height: 1.6; }
+
+        .spec-card { background: var(--card-bg); border-radius: 12px; padding: 28px; border: 1px solid var(--border); }
+        .spec-card-title { font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: var(--text-muted); border-bottom: 1px solid var(--border); padding-bottom: 12px; margin-bottom: 16px; display: block; }
+        .spec-row { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid rgba(0,0,0,0.04); font-size: 0.82rem; }
+        .spec-row:last-child { border-bottom: none; }
+        .spec-label { color: var(--text-main); font-weight: 400; }
+        .spec-value { color: var(--text-muted); font-weight: 300; text-align: right; }
+
+        /* ── TABS ── */
+        .tabs { display: flex; gap: 8px; margin-bottom: 32px; overflow-x: auto; padding: 14px 16px; background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border); position: sticky; top: 16px; z-index: 90; box-shadow: 0 4px 20px rgba(44,40,36,0.06); }
+        .tab-btn { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 11px 22px; border-radius: 8px; border: 1px solid transparent; background: transparent; color: var(--text-muted); cursor: pointer; transition: var(--transition); white-space: nowrap; font-weight: 500; }
+        .tab-btn:hover { color: var(--text-main); background: var(--gold-light); }
+        .tab-btn.active { background: var(--text-main); color: #fff; border-color: transparent; }
+        .tab-btn-highlight { border-color: var(--border); color: var(--text-muted); opacity: 0.5; cursor: not-allowed; }
+        .tab-btn-highlight.ready { border-color: var(--seafoam); color: var(--seafoam); opacity: 1; cursor: pointer; animation: tabPulse 1.8s ease-in-out infinite; }
+        .tab-btn-highlight.active { background: var(--seafoam); color: #fff; border-color: transparent; opacity: 1; animation: none; cursor: pointer; }
+        @keyframes tabPulse {
+            0%, 100% { border-color: var(--seafoam); color: var(--seafoam); box-shadow: none; }
+            50% { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px rgba(184,149,106,0.35); }
+        }
+        .tab-content { display: none; animation: fadeIn 0.35s ease; }
+        .tab-content.active { display: block; }
+
+        /* ── GALLERY ── */
+        .lodge-gallery { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 30px; }
+        .gallery-img { width: 100%; height: 240px; object-fit: cover; border-radius: 10px; }
+
+        /* ── CONTENT BLOCKS ── */
+        .content-block { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 36px 40px; margin-bottom: 24px; }
+        .content-block h3 { font-family: var(--font-head); font-size: 1.5rem; font-weight: 400; color: var(--text-main); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); letter-spacing: 1px; }
+        .sub-block { margin-top: 28px; }
+        .sub-block h4 { font-family: var(--font-body); font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; font-weight: 500; }
+
+        /* ── TABLES ── */
+        .table-responsive { width: 100%; overflow-x: auto; border: 1px solid var(--border); border-radius: 10px; margin-bottom: 24px; }
+        table { width: 100%; border-collapse: collapse; text-align: left; }
+        th { font-family: var(--font-body); background: var(--gold-light); color: var(--text-main); font-size: 0.68rem; padding: 14px 18px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; border-bottom: 1px solid var(--border); }
+        td { padding: 14px 18px; border-bottom: 1px solid rgba(44,40,36,0.05); color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: var(--gold-light); color: var(--text-main); }
+        td strong { color: var(--text-main); font-weight: 500; }
+        .table-highlight td { background: var(--seafoam-light); }
+
+        /* ── LISTS ── */
+        .text-list { list-style: none; padding: 0; color: var(--text-muted); line-height: 1.9; font-size: 0.9rem; }
+        .text-list li { position: relative; padding-left: 22px; margin-bottom: 10px; }
+        .text-list li::before { content: "—"; color: var(--gold); position: absolute; left: 0; font-weight: 300; }
+        .raw-text { white-space: pre-line; color: var(--text-muted); line-height: 1.85; font-size: 0.9rem; }
+
+        /* ── BOOKING BAR ── */
+        #booking-bar { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(238,234,227,0.95); backdrop-filter: blur(12px); padding: 18px 30px; box-shadow: 0 -8px 30px rgba(44,40,36,0.1); z-index: 100; text-align: center; border-top: 1px solid var(--border); animation: fadeInUp 0.3s ease; }
+        #booking-total { font-family: var(--font-head); font-size: 1.4rem; font-weight: 400; color: var(--text-main); margin-right: 24px; }
+        .btn-finalise { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; padding: 12px 28px; background: var(--text-main); color: #fff; border: 2px solid transparent; border-radius: 8px; cursor: pointer; transition: var(--transition); animation: barBtnPulse 1.8s ease-in-out infinite; }
+        .btn-finalise:hover { background: var(--gold); animation: none; }
+        @keyframes barBtnPulse {
+            0%, 100% { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px rgba(184,149,106,0.4); }
+            50% { background: var(--seafoam); border-color: var(--seafoam); box-shadow: 0 0 18px rgba(123,169,154,0.5); }
+        }
+
+        /* ── FORM ── */
+        .form-group { margin-bottom: 18px; }
+        .form-label { font-family: var(--font-body); font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; margin-bottom: 8px; display: block; }
+        .form-label.accent { color: var(--gold); }
+        .form-label.seafoam { color: var(--seafoam); }
+        .form-control { width: 100%; padding: 13px 16px; border: 1px solid var(--border); border-radius: 8px; font-family: var(--font-body); font-size: 0.9rem; background: var(--bg); color: var(--text-main); transition: var(--transition); }
+        .form-control:focus { outline: none; border-color: var(--gold); background: #fff; box-shadow: 0 0 0 3px var(--gold-light); }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-bottom: 18px; }
+        .btn-submit { width: 100%; font-family: var(--font-body); font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; padding: 16px; background: var(--text-main); color: #fff; border: none; border-radius: 10px; cursor: pointer; transition: var(--transition); margin-top: 10px; font-weight: 500; }
+        .btn-submit:hover { background: var(--gold); }
+
+        /* ── RATE QTY INPUT ── */
+        .rate-qty { width: 64px; padding: 7px; border: 1px solid var(--border); border-radius: 6px; background: #fff; color: var(--text-main); font-weight: 500; text-align: center; outline: none; font-family: var(--font-body); font-size: 0.9rem; }
+        .rate-qty:focus { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold-light); }
+
+        /* ── ANIMATIONS ── */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* ── CALENDAR ── */
+        .dew-calendar-container { display: flex; gap: 40px; width: 100%; max-width: 650px; justify-content: center; margin: 10px auto 0; }
+        .dew-calendar-nav { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: 650px; margin: 0 auto 16px; }
+        .dew-calendar-nav-btn { background: transparent; border: none; color: var(--text-main); font-size: 20px; cursor: pointer; padding: 8px; transition: opacity 0.2s; }
+        .dew-calendar-nav-btn:hover { opacity: 0.5; }
+        .dew-calendar-month-title { font-family: var(--font-head); font-size: 1.1rem; font-weight: 400; color: var(--text-main); text-align: center; width: 300px; letter-spacing: 1px; }
+        .dew-calendar { flex: 1; max-width: 300px; width: 100%; }
+        .dew-calendar-header { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 8px; }
+        .dew-calendar-day-label { font-family: var(--font-body); font-size: 10px; font-weight: 600; color: var(--text-muted); text-align: center; text-transform: uppercase; letter-spacing: 1px; padding: 4px 0; }
+        .dew-calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); }
+        .dew-calendar-day { font-family: var(--font-body); font-size: 13px; color: var(--text-main); text-align: center; padding: 8px 4px; cursor: pointer; transition: background 0.2s; border-radius: 0; }
+        .dew-calendar-day:hover { background: var(--gold-light); }
+        .dew-calendar-day.dew-empty { cursor: default; }
+        .dew-calendar-day.dew-empty:hover { background: transparent; }
+        .dew-calendar-day.dew-today { background: var(--seafoam); border-radius: 50%; color: #fff !important; font-weight: 600; }
+        .dew-calendar-day.dew-selected { background: var(--gold-light); }
+        .dew-calendar-day.dew-range { background: rgba(184,149,106,0.12); }
+        .dew-calendar-day.dew-range-start { background: var(--gold); border-radius: 50% 0 0 50%; color: #fff !important; font-weight: 600; }
+        .dew-calendar-day.dew-range-end { background: var(--gold); border-radius: 0 50% 50% 0; color: #fff !important; font-weight: 600; }
+        .dew-calendar-day.dew-past { color: rgba(44,40,36,0.2); cursor: not-allowed; }
+        .dew-calendar-day.dew-past:hover { background: transparent; }
+        @media(max-width: 768px) {
+            .dew-calendar-container { flex-direction: column; gap: 20px; align-items: center; }
+            .dew-calendar-container > .dew-calendar:last-child { display: none; }
+            .dew-calendar-nav .dew-calendar-month-title:nth-of-type(2) { display: none; }
+            .dew-calendar-month-title { width: 100%; }
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 1100px) { .lodge-grid { grid-template-columns: repeat(2,1fr); } }
+        @media (max-width: 768px) {
+            .lodge-grid { grid-template-columns: 1fr; padding: 20px; }
+            .detail-hero { grid-template-columns: 1fr; }
+            .lodge-gallery { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .detail-view { padding: 20px 16px 100px; }
+            .content-block { padding: 22px; }
+            #booking-total { display: block; margin-right: 0; margin-bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- MAIN VIEW -->
+<div id="main-view">
+    <div class="site-hero">
+        <div class="hero-dot"></div>
+        <span class="hero-display">O&L</span>
+        <span class="hero-display">Leisure</span>
+        <div class="hero-rule"></div>
+        <p class="hero-tagline">Extraordinary properties. Authentic Namibia.</p>
+        <p class="hero-sub">STO 20 Rates &middot; Season 2026–2028</p>
+    </div>
+
+    <div class="lodge-grid" id="lodge-grid">
+        <!-- Cards injected by JS -->
+    </div>
+</div>
+
+<!-- DETAIL VIEW -->
+<div id="detail-view" class="detail-view">
+    <button class="back-btn" onclick="closeProperty()">← All Lodges</button>
+
+    <div class="detail-hero">
+        <div>
+            <span class="detail-location" id="d-location"></span>
+            <h1 class="detail-title" id="d-title"></h1>
+            <p class="detail-intro" id="d-intro"></p>
+            <div class="detail-airport" id="d-airport"></div>
+        </div>
+        <div class="spec-card">
+            <span class="spec-card-title">Quick Specs</span>
+            <div class="spec-row"><span class="spec-label">Commission</span><span class="spec-value">20% Built-in STO</span></div>
+            <div class="spec-row"><span class="spec-label">Location</span><span class="spec-value" id="spec-location">—</span></div>
+            <div class="spec-row"><span class="spec-label">Rate Period</span><span class="spec-value">01.01.26 – 30.06.28</span></div>
+            <div class="spec-row"><span class="spec-label">Contact</span><span class="spec-value">sales@ol.na</span></div>
+        </div>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+        <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
+        <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
+        <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
+        <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+    </div>
+
+    <div id="tab-1" class="tab-content active">
+        <!-- CALENDAR -->
+        <div id="global-dates-ui" style="margin-bottom:28px;background:var(--card-bg);padding:32px;border-radius:12px;border:1px solid var(--border);text-align:center;">
+            <h3 style="font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--text-main);margin-bottom:6px;letter-spacing:1px;">When would you like to travel?</h3>
+            <p style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;">Select your check-in and check-out dates</p>
+            <div id="inline-calendar"></div>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+                <span id="nights-count" style="font-family:var(--font-head);font-size:2rem;color:var(--gold);">1</span>
+                <span style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-left:8px;">Night(s) Selected</span>
+            </div>
+        </div>
+    </div>
+    <div id="tab-2" class="tab-content"></div>
+    <div id="tab-3" class="tab-content"></div>
+
+    <div id="tab-4" class="tab-content">
+        <div class="content-block">
+            <h3>Gallery</h3>
+            <div class="lodge-gallery" id="d-gallery"></div>
+            <p class="raw-text" id="gallery-placeholder" style="display:none;">More photos coming soon.</p>
+        </div>
+    </div>
+
+    <div id="tab-5" class="tab-content">
+        <div class="content-block">
+            <h3>Finalise Booking</h3>
+            <p class="raw-text" style="margin-bottom:24px;">Review your selection and complete the booking request below.</p>
+
+            <div id="booking-summary" style="margin-bottom:28px;background:var(--bg);padding:22px;border-radius:10px;border:1px solid var(--border);">
+                <p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates or activities from the tabs above to build your booking.</p>
+            </div>
+
+            <form onsubmit="submitBooking(event)" id="booking-form">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label accent">Agent / Consultant Email</label>
+                        <input type="email" id="b-agent-email" class="form-control" placeholder="your@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label accent">Booking Status</label>
+                        <select id="b-status" class="form-control" required style="cursor:pointer;">
+                            <option value="Provisional Booking">Provisional Booking</option>
+                            <option value="Confirmed Booking">Confirmed Booking</option>
+                        </select>
+                    </div>
+                </div>
+                <hr style="border:none;border-top:1px solid var(--border);margin-bottom:18px;">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Client Full Name</label>
+                        <input type="text" id="b-name" class="form-control" placeholder="e.g. John & Jane Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Guide Room(s)</label>
+                        <input type="number" id="b-guide" class="form-control" placeholder="0" min="0">
+                    </div>
+                </div>
+                <input type="hidden" id="b-date-in" required>
+                <input type="hidden" id="b-date-out" required>
+                <div class="form-group" style="background:var(--bg);padding:14px 16px;border-radius:8px;border:1px solid var(--border);">
+                    <span class="form-label" style="display:block;margin-bottom:4px;">Travel Dates</span>
+                    <span id="b-dates-display" style="font-family:var(--font-head);font-size:1.1rem;color:var(--text-muted);">Select dates from the calendar above</span>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label class="form-label">Arriving From</label>
+                        <input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Departing To</label>
+                        <input type="text" id="b-departing" class="form-control" placeholder="e.g. Next Lodge" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Additional Notes</label>
+                    <textarea id="b-message" class="form-control" placeholder="Dietary requirements, room preferences, special requests..." style="height:110px;resize:vertical;"></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Send Booking to Operations</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- BOOKING BAR -->
+<div id="booking-bar">
+    <span id="booking-total">Total: N$ 0.00</span>
+    <button class="btn-finalise" onclick="switchTab(5)">Finalise Booking</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+const DB = {
+    'strand': {
+        location: 'Swakopmund',
+        cover: 'https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg',
+        name: 'Strand Hotel Swakopmund',
+        shortDesc: `Oceanfront elegance on the historic Mole — panoramic sea views, world-class dining, and refined coastal hospitality in the heart of Swakopmund.`,
+        images: ['https://wetu.com/imageHandler/c1920x1080/1747/standard_double_room12.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/1747/standard_room_bathroom.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/1747/luxury_double_room21.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/471/1776243203221shutterstock64485631-cropped.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/471/1776243203243shutterstock1102989359-cropped.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/471/1776243203238shutterstock174109883-cropped.jpg?fmt=jpg'],
+        airport: 'Nearest airport: Walvis Bay, 45 minutes by road. Twice daily flights to Cape Town and Johannesburg. Email: sales@ol.na',
+        intro: `Situated on the historical Mole, Strand Hotel invites guests to experience coastal elegance and Namibian charm. With ocean views, stunning rooms and tailored local experiences, it is perfect for families, couples, and travellers seeking a relaxed seaside escape infused with refined hospitality.\n\nSet between the Atlantic Ocean and the Namib Desert, Swakopmund blends German heritage, coastal charm, and striking natural beauty. Strand Hotel enhances the experience with refined oceanfront accommodation, panoramic sea views, and exceptional dining at Brewer & Butcher, Farmhouse Deli, and Ocean Cellar. 125 rooms, including standard sea view rooms, luxury family rooms, luxury rooms with sea view, junior suites, and a presidential suite.`,
+        tab1: `<div class="content-block"><h3>STO20 Rate — 01.01.26 to 30.06.2028</h3><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing BB</th><th>Single BB</th><th>1 Child 7–13 Yrs BB<br>Sharing Adult</th><th>1 Child 7–13 Yrs BB<br>Sgl Interleading</th></tr></thead><tbody><tr><td><strong>Standard Rooms</strong></td><td>3,518</td><td>5,629</td><td>879</td><td>2,638</td></tr><tr><td><strong>Standard Sea Facing</strong></td><td>3,758</td><td>6,013</td><td>939</td><td>2,818</td></tr><tr><td><strong>Luxury Rooms</strong></td><td>4,222</td><td>6,754</td><td>1,055</td><td>3,166</td></tr><tr><td><strong>Luxury Sea Facing</strong></td><td>4,462</td><td>7,138</td><td>1,115</td><td>3,346</td></tr><tr><td><strong>Junior Suite</strong></td><td>4,573</td><td>7,317</td><td>1,143</td><td>3,430</td></tr><tr><td><strong>Luxury Suite</strong></td><td>5,629</td><td>9,005</td><td>1,407</td><td>4,222</td></tr><tr><td><strong>Presidential Suite</strong></td><td>8,794</td><td>14,071</td><td>N/A</td><td>N/A</td></tr></tbody></table></div><p class="raw-text">* DBL/Sharing rates are per person. <strong>Tour guide:</strong> Fixed rate of N$1,600 BB</p><div class="sub-block"><h4>Rack Rate — 01.01.26 to 30.06.2028</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing BB</th><th>Single BB</th><th>1 Child 7–13 Yrs BB<br>Sharing Adult</th><th>1 Child 7–13 Yrs BB<br>Sgl Interleading</th></tr></thead><tbody><tr><td><strong>Standard Rooms</strong></td><td>4,397</td><td>7,036</td><td>1,099</td><td>3,298</td></tr><tr><td><strong>Standard Sea Facing</strong></td><td>4,697</td><td>7,516</td><td>1,174</td><td>3,523</td></tr><tr><td><strong>Luxury Rooms</strong></td><td>5,277</td><td>8,443</td><td>1,319</td><td>3,958</td></tr><tr><td><strong>Luxury Sea Facing</strong></td><td>5,577</td><td>8,923</td><td>1,394</td><td>4,183</td></tr><tr><td><strong>Junior Suite</strong></td><td>5,716</td><td>9,146</td><td>1,429</td><td>4,287</td></tr><tr><td><strong>Luxury Suite</strong></td><td>7,036</td><td>11,257</td><td>1,759</td><td>5,277</td></tr><tr><td><strong>Presidential Suite</strong></td><td>10,993</td><td>17,589</td><td>N/A</td><td>N/A</td></tr></tbody></table></div></div><div class="sub-block"><h4>Room Types</h4><ul class="text-list"><li>52 standard rooms — Non sea facing</li><li>2 standard family rooms — Non sea facing</li><li>2 standard enabled rooms — Non sea facing</li><li>20 standard rooms — Sea-facing</li><li>8 luxury rooms (sleeps 1 child) — Non sea facing</li><li>10 luxury family rooms (sleeps 2 children)</li><li>22 luxury sea-facing rooms</li><li>6 junior suites — Sea facing</li><li>2 luxury suites — Sea facing</li><li>1 presidential suite — Sea facing</li></ul><p class="raw-text">Total rooms: 125<br><strong>Includes:</strong> Mini bar, Bed and Breakfast<br><strong>Excludes:</strong> Activities, Lunch and Dinner</p></div></div>`,
+        tab2: `<div class="content-block"><h3>Activities</h3><p class="raw-text"><strong>Experiences — Third-Party Providers</strong><br>Discover Swakopmund and the Namib Desert with the guidance of our knowledgeable reception team. With trusted local partners, we curate personalised itineraries filled with cultural, educational, and adventurous experiences.<br><br><strong>We assist with:</strong> Car and bicycle hire · Transfer arrangements · Restaurant reservations · Personalised consultations.</p><br><ul class="text-list"><li>Airline re-confirmations</li><li>Ballooning &amp; Skydiving</li><li>Bird watching tours &amp; Cape Cross seal colony</li><li>Messum Crater tour &amp; Fishing excursions</li><li>Living Desert Tours</li><li>Namib Desert day trips &amp; night walks</li><li>Quad biking &amp; Sand boarding</li><li>Sandwich Harbour tour</li><li>Spitzkoppe mountain day tour</li><li>Swakopmund sightseeing (historic and cultural tours)</li><li>Walvis Bay sightseeing &amp; Catamaran dolphin/seal tours</li><li>Scenic flights over Namib Desert and Atlantic Ocean</li><li>Moon-landscape tours · Cultural township tours · Horse and camel riding</li></ul></div>`,
+        tab3: `<div class="content-block"><h3>Children Policies</h3><p class="raw-text">Children of all ages are welcome.<br><br>• One cot can be placed in any Luxury Room and in all Junior, Luxury and Presidential Suites<br>• Luxury rooms can only accommodate 1 child under 10 and a 2nd child in a cot<br>• Junior &amp; Luxury Suites accommodate 2 children up to 10 years and a 3rd child in a cot<br>• Standard rooms and Presidential Suite are not suitable for sharing with children<br>• Children 11–15 must be booked in their own or inter-leading room at 75% of adult rate<br><br><strong>Inter-leading combinations:</strong><br>a) 2 × Junior Suite to Luxury<br>b) 2 × Luxury Suite to Standard<br>c) 1 × Presidential Suite to Standard<br><br><strong>Third person/adult:</strong> Any person 15+ in additional or inter-leading rooms pays full adult single or double rate.</p></div>`
+    },
+    'mokuti': {
+        location: 'Etosha',
+        cover: 'https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg',
+        name: 'Mokuti Etosha Lodge',
+        shortDesc: `Gateway to Etosha — 40 metres from Von Lindequist Gate, with safari luxury, the Sky Boma, and the Big Four on your doorstep.`,
+        images: ['https://wetu.com/imageHandler/c1920x1080/10525/1764582271548dji202510011838260443d.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/10525/nc_mokuti_76_v1_2000px.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_1769304110.jpg?fmt=jpg'],
+        airport: 'Nearest airport: Ondangwa (approx 2 hours 45 minutes by road), FlyNamibia flights from Windhoek. Email: sales@ol.na',
+        intro: `Situated at the eastern gate of Etosha National Park, Mokuti combines modern comfort with true safari adventure. Wake up to wildlife, enjoy world-class dining and unwind in lush surroundings — the perfect base for exploring one of Africa's greatest wildlife reserves.\n\nMokuti Etosha offers an Africa re-imagined with contemporary design and safari luxury. Located just 40 metres from the Von Lindequist Gate. The lodge features 106 rooms including Standard, Deluxe and Family Rooms, with eight new Junior Suites and a Presidential Suite set for completion in 2026.`,
+        tab1: `<div class="content-block"><h3>STO20 Rate — 01.01.26 to 30.06.2028</h3><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing BB</th><th>DBL/Sharing DBB</th><th>Single BB</th><th>Single DBB</th><th>1 Child 7–13 BB</th><th>1 Child 7–13 DBB</th></tr></thead><tbody><tr><td><strong>Standard Room</strong></td><td>3,518</td><td>3,946</td><td>5,629</td><td>6,057</td><td>879</td><td>986</td></tr><tr><td><strong>Deluxe Room</strong></td><td>4,046</td><td>4,474</td><td>5,629</td><td>6,901</td><td>1,011</td><td>1,118</td></tr><tr><td><strong>Junior Suite</strong></td><td>4,573</td><td>5,001</td><td>7,317</td><td>7,745</td><td>1,143</td><td>1,250</td></tr><tr><td><strong>Presidential Suite</strong></td><td>8,794</td><td>9,222</td><td>14,071</td><td>14,499</td><td>2,199</td><td>2,306</td></tr></tbody></table></div><p class="raw-text">* Per person rate. <strong>Tour guide:</strong> N$1,800 DBB fixed rate.</p><div class="sub-block"><h4>Rack Rate</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing BB</th><th>DBL/Sharing DBB</th><th>Single BB</th><th>Single DBB</th><th>1 Child 7–13 BB</th><th>1 Child 7–13 DBB</th></tr></thead><tbody><tr><td><strong>Standard Room</strong></td><td>4,397</td><td>4,932</td><td>7,036</td><td>7,571</td><td>1,099</td><td>1,233</td></tr><tr><td><strong>Deluxe Room</strong></td><td>5,057</td><td>5,592</td><td>8,091</td><td>8,626</td><td>1,264</td><td>1,398</td></tr><tr><td><strong>Junior Suite</strong></td><td>5,716</td><td>6,251</td><td>9,146</td><td>9,681</td><td>1,429</td><td>1,563</td></tr><tr><td><strong>Presidential Suite</strong></td><td>10,993</td><td>11,528</td><td>17,589</td><td>18,124</td><td>2,748</td><td>2,882</td></tr></tbody></table></div></div><div class="sub-block"><h4>Room Types</h4><ul class="text-list"><li>Existing: 114 en-suite rooms (106 Standard, 8 Family)</li><li>New for 2026: 90 Standard, 16 Deluxe, 8 Junior Suites, 1 Presidential Suite</li></ul><p class="raw-text"><strong>Includes:</strong> Minibar, meals on DBB or BB basis<br><strong>Excludes:</strong> Activities, Lunch</p></div></div>`,
+        tab2: `<div class="content-block"><h3>Activity Rates 2026/7/8</h3><p class="raw-text" style="margin-bottom:16px;">Activities subject to availability. National Park fee changes will be reflected accordingly.</p><div class="table-responsive"><table><thead><tr><th>Activity</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Omulilo Spa</strong></td><td colspan="3">As per treatment</td><td>30min–1.5h. Children under 6 for some treatments.</td></tr><tr><td><strong>Hai/Tom Bush Walk</strong></td><td>550</td><td>580</td><td>580</td><td>08:00–09:00. Max 4 people.</td></tr><tr><td><strong>Snake Show</strong></td><td>445</td><td>480</td><td>480</td><td>1 hour. Max 10 pax.</td></tr><tr><td><strong>Mokuti Sundowner</strong></td><td>1,010</td><td>1,010</td><td>1,010</td><td>1h 30min. 18:00–19:30.</td></tr><tr class="table-highlight"><td colspan="5"><strong>Non-Private Game Drives AM or PM — 4 Hours (per person)</strong></td></tr><tr><td><strong>AM Etosha Game Drive</strong></td><td>1,290</td><td>1,380</td><td>1,460</td><td>Sunrise till 11:00. Entrance fees &amp; drinks included.</td></tr><tr><td><strong>PM Etosha Game Drive</strong></td><td>1,290</td><td>1,380</td><td>1,460</td><td>15:00 till sunset. Entrance fees &amp; drinks included.</td></tr><tr><td><strong>PM Night Game Drive (2h)</strong></td><td>580</td><td>580</td><td>580</td><td>21:00–22:30</td></tr><tr class="table-highlight"><td colspan="5"><strong>Private Game Drives — Per Vehicle</strong></td></tr><tr><td><strong>9-Seater Land Cruiser (4 hours)</strong></td><td>9,600</td><td>10,300</td><td>10,900</td><td>Incl. entrance fees &amp; drinks</td></tr><tr><td><strong>9-Seater Land Cruiser (8 hours)</strong></td><td>19,625</td><td>21,600</td><td>23,000</td><td>Incl. entrance fees &amp; drinks</td></tr></tbody></table></div></div><div class="content-block"><h3>Dining Rates</h3><div class="table-responsive"><table><thead><tr><th>Dining</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>SkyBoma Dinner (All Inclusive)</strong></td><td>1,350</td><td>1,350</td><td>1,420</td><td>Exclusive. Min 30pax low season. Max 70pax.</td></tr><tr><td><strong>Private Dinner Service</strong></td><td>330</td><td>355</td><td>380</td><td>Service fee for pool/garden set-up.</td></tr><tr><td><strong>Breakfast</strong></td><td>420</td><td>465</td><td>465</td><td>Kids 0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Lunch</strong></td><td>450</td><td>500</td><td>500</td><td>Kids 0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Dinner</strong></td><td>650</td><td>770</td><td>770</td><td>Kids 0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Christmas &amp; New Year Dinners</strong></td><td>900</td><td>1,030</td><td>1,030</td><td>Dec 24, 25, 31.</td></tr><tr><td><strong>Lunch Packs</strong></td><td>240</td><td>270</td><td>280</td><td>Arrange a day prior.</td></tr></tbody></table></div></div>`,
+        tab3: `<div class="content-block"><h3>Children Policy</h3><p class="raw-text">Children of all ages accepted. Cots for infants on request.<br><br>a) Standard Rooms (106) = 1 child only, 0–2 years in a cot<br>b) Luxury Family rooms (8) = 2 children up to 15 years on sleeper couch<br><br><strong>Children sharing with parents:</strong><br>0–6 years = complimentary<br>7–13 years = 75% of adult sharing BB or DBB rate<br><br><strong>Single parents</strong> sharing with one or more infants pay only the per-adult sharing rate (not single supplement). Children sharing pay applicable children's rates.</p></div>`
+    },
+    'midgard': {
+        location: 'Windhoek',
+        cover: 'https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg',
+        name: 'Midgard Otjihavera Windhoek',
+        shortDesc: `A luxury farm retreat in the Otjihavera Mountains — horse riding, game drives, guided hikes, and historic charm just 90km from Windhoek.`,
+        images: ['https://wetu.com/imageHandler/c1920x1080/29059/_clb4783.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/29059/_clb4637.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/29059/1750165818999_Midgard_Museum_01_RGB_v1_web.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/1581/okahandja-shutterstock-625369454.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/1581/okahandja-istock-1180404403.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/1581/okahandja-istock-1326138053.jpg?fmt=jpg'],
+        airport: 'Nearest airport: Hosea Kutako International Airport (approximately 1 hour 45 min by road). Email: sales@ol.na',
+        intro: `Just an hour from Windhoek, Midgard offers an escape into nature with hiking trails, mountain views and warm Namibian hospitality. Ideal for families, groups and travellers looking to slow down and connect with the great outdoors in style.\n\nMidgard Otjihavera is a luxury farm retreat established in 1937, combining historic charm with authentic Namibian farm life. 84 rooms including Standard, Deluxe, Family Rooms and a Presidential Suite. Activities include horse riding, guided hikes, game drives, tenpin bowling, swimming pools, boma, amphitheatre and conference facilities.`,
+        tab1: `<div class="content-block"><h3>STO20 Rate — 01.01.26 to 30.06.2028</h3><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing BB</th><th>DBL/Sharing DBB</th><th>Single BB</th><th>Single DBB</th><th>1 Child 7–13 BB</th><th>1 Child 7–13 DBB</th></tr></thead><tbody><tr><td><strong>Standard Room</strong></td><td>2,472</td><td>3,086</td><td>3,956</td><td>4,718</td><td>618</td><td>771</td></tr><tr><td><strong>Family Room</strong></td><td>3,214</td><td>3,902</td><td>5,142</td><td>6,023</td><td>804</td><td>976</td></tr><tr><td><strong>Junior Suite</strong></td><td>3,804</td><td>4,551</td><td>6,086</td><td>7,062</td><td>951</td><td>1,138</td></tr><tr><td><strong>Presidential Suite</strong></td><td>4,708</td><td>5,546</td><td>7,533</td><td>8,653</td><td>1,177</td><td>1,386</td></tr></tbody></table></div><p class="raw-text">* Per person rate. <strong>Tour guide:</strong> N$1,200 DBB fixed rate.</p><div class="sub-block"><h4>Rack Rate</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing BB</th><th>DBL/Sharing DBB</th><th>Single BB</th><th>Single DBB</th><th>1 Child 7–13 BB</th><th>1 Child 7–13 DBB</th></tr></thead><tbody><tr><td><strong>Standard Room</strong></td><td>3,090</td><td>3,857</td><td>4,945</td><td>5,898</td><td>773</td><td>964</td></tr><tr><td><strong>Family Room</strong></td><td>4,018</td><td>4,878</td><td>6,428</td><td>7,529</td><td>1,005</td><td>1,220</td></tr><tr><td><strong>Junior Suite</strong></td><td>4,755</td><td>5,689</td><td>7,608</td><td>8,827</td><td>1,189</td><td>1,422</td></tr><tr><td><strong>Presidential Suite</strong></td><td>5,885</td><td>6,932</td><td>9,416</td><td>10,816</td><td>1,471</td><td>1,733</td></tr></tbody></table></div></div><div class="sub-block"><h4>Room Types</h4><ul class="text-list"><li>61 standard rooms (10 inter-leading)</li><li>13 family rooms · 9 junior suites · 1 presidential suite</li><li>3 carriages (72 beds total)</li></ul><p class="raw-text">Total rooms: 84<br><strong>Includes:</strong> Minibar, meals on DBB or BB basis<br><strong>Excludes:</strong> Activities, Lunch</p></div></div>`,
+        tab2: `<div class="content-block"><h3>Activity Rates</h3><div class="table-responsive"><table><thead><tr><th>Activity</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Sunrise/Sundown Nature Game Drive</strong></td><td>718 / 934</td><td>760 / 989</td><td>826 / 1,075</td><td>3h drive with Hilltop stop. Drinks &amp; snacks included.</td></tr><tr><td><strong>Hilltop Sundowner</strong></td><td>550</td><td>583</td><td>634</td><td>Along the Swakop River to the Hilltop.</td></tr><tr><td><strong>Steenbokkie / Gods Window Game Drive</strong></td><td>718 / 934</td><td>760 / 989</td><td>826 / 1,075</td><td>Scenic viewpoints. Drinks &amp; snacks included.</td></tr><tr><td><strong>Night Drive Under the Stars</strong></td><td>465</td><td>493</td><td>536</td><td>2h drive with stargazing.</td></tr><tr><td><strong>Rietdam Birding / Night Walk</strong></td><td>238 / 237</td><td>252 / 251</td><td>274 / 273</td><td>2h walk / stargazing.</td></tr><tr><td><strong>Guided Hilltop Bush Walk</strong></td><td>484</td><td>510</td><td>555</td><td>4-hour activity.</td></tr><tr><td><strong>Horse Riding &amp; Sundowner Baskets</strong></td><td>550</td><td>583</td><td>633</td><td>Safari on horseback.</td></tr><tr><td><strong>Svens Kegelbahn (Skittle Alley)</strong></td><td>389</td><td>428</td><td>428</td><td>Per lane. Open 10:00–23:00.</td></tr><tr><td><strong>Skittle Alley — Exclusive Use</strong></td><td>2,014</td><td>2,135</td><td>2,238</td><td>Exclusive access.</td></tr><tr class="table-highlight"><td colspan="5"><strong>Free Activities</strong> — Cycling · 4x4 Experience · Pools · Tennis · Chess · Auto Museum · Gym · Kids Wagon</td></tr></tbody></table></div></div>`,
+        tab3: `<div class="content-block"><h3>Children Policy</h3><p class="raw-text">Children of all ages accepted. A cot can be placed in any room.<br><br>a) Standard Rooms = 2 adults<br>b) Family rooms = 2 adults and 2 children (up to 15 years)</p></div><div class="content-block"><h3>Activity Terms &amp; Conditions</h3><p class="raw-text">All rates include 15% VAT.<br>Game Drives: Min 2 pax, max 30 pax.<br>Cancellation policy: No fee if cancelled 3+ days prior. 100% fee if cancelled within 3 days.<br>Skittle Alley: Open 10:00–23:00 for individual use. After 23:00: N$1,000/hour exclusive use.<br>All requests and cancellations must be submitted in writing to O&amp;L reservations.<br>Game at Midgard includes Giraffe, Wildebeest, Oryx, Kudu, Hartebeest, Eland, Warthog, Baboon and smaller antelope.</p></div>`
+    },
+    'chobe': {
+        location: 'Zambezi',
+        cover: 'https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg',
+        name: 'Chobe Water Villas Zambezi',
+        shortDesc: `16 exclusive over-water suites at the confluence of the Chobe and Zambezi Rivers — where 50,000+ elephants roam and every view is extraordinary.`,
+        images: ['https://wetu.com/imageHandler/c1920x1080/44110/1753867882906chobedeck03rgbv1web.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/44110/1753868022963chobebuilding09rgbv1web.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/44110/1753868022964chobebuilding10rgbv1web.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/165408/chobe_river_front_namibia-shutterstock-1270219822.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/165408/chobe_river_front_namibia-shutterstock-768381226.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/165408/chobe_river_front_namibia-shutterstock-768370801.jpg?fmt=jpg'],
+        airport: 'Nearest airport: Kasane Airport. Email: sales@ol.na',
+        intro: `Perched on the banks of the Chobe River at the confluence of the mighty Zambezi and Chobe Rivers — where 50,000+ elephants call home. Chobe Water Villas' 16 exceptional suites, all located over the river's edge, offer guests a unique experience of nature while being hosted in luxury, warmth and style.\n\nSet in Namibia's Zambezi Region, elevated villas provide uninterrupted views of wildlife-rich floodplains, where elephants, buffalo and hippos gather daily. Combining privacy, personalised service and exceptional river safaris, it is a refined gateway to the Chobe ecosystem.`,
+        tab1: `<div class="content-block"><h3>STO20 Rate — 01.01.26 to 30.06.2028</h3><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing</th><th>Single</th><th>1 Child 13–17 Yrs<br>Sharing Adult</th></tr></thead><tbody><tr><td><strong>Full Inclusive</strong></td><td>17,644</td><td>28,230</td><td>13,233</td></tr><tr><td><strong>Bed &amp; Breakfast</strong></td><td>7,378</td><td>11,068</td><td>5,534</td></tr><tr><td><strong>Dinner, Bed &amp; Breakfast</strong></td><td>7,940</td><td>11,629</td><td>5,955</td></tr></tbody></table></div><p class="raw-text"><strong>Tour guide:</strong> N$6,720 DBB fixed rate.</p><div class="sub-block"><h4>Rack Rate</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing</th><th>Single</th><th>1 Child 13–17 Yrs Sharing Adult</th></tr></thead><tbody><tr><td><strong>Full Inclusive</strong></td><td>22,055</td><td>35,288</td><td>16,541</td></tr><tr><td><strong>Bed &amp; Breakfast</strong></td><td>9,223</td><td>13,835</td><td>6,917</td></tr><tr><td><strong>Dinner, Bed &amp; Breakfast</strong></td><td>9,925</td><td>14,536</td><td>7,444</td></tr></tbody></table></div></div><div class="sub-block"><h4>Rate Inclusions</h4><ul class="text-list"><li><strong>Full Inclusive</strong> — Meals, activities and transfers</li><li><strong>DBB &amp; BB</strong> — Includes transfers and high tea. Activities charged separately.</li></ul><p class="raw-text">Luxury Water Villas · 16 villas · Lounge, bedroom and terrace at 85m²<br><strong>Includes:</strong> Minibar</p></div></div>`,
+        tab2: `<div class="content-block"><h3>Activity Rates 2026–2028</h3><p class="raw-text" style="margin-bottom:16px;">Activities subject to availability. Park fee changes will be reflected accordingly.</p><div class="table-responsive"><table><thead><tr><th>Activity (per person)</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Boat Cruise</strong></td><td>1,604</td><td>1,360</td><td>1,480</td><td>3h cruise on Chobe River. Incl. park fees &amp; beverages. AM or PM.</td></tr><tr><td><strong>Game Drive — Chobe NP</strong></td><td>1,604</td><td>1,360</td><td>1,480</td><td>4–5h sunrise drive. Incl. park fees, drinks &amp; snacks. Immigration required.</td></tr><tr><td><strong>Kasika Village Cultural Tour</strong></td><td>600</td><td>510</td><td>555</td><td>3h boat cruise to Kasen Village. Song, dance &amp; drinks included.</td></tr><tr><td><strong>Fishing Trip</strong></td><td>3,000</td><td>2,550</td><td>2,775</td><td>3h charter. Gear, drinks &amp; water included. Max 3 rods per boat.</td></tr></tbody></table></div></div><div class="content-block"><h3>Dining &amp; Transfer Rates</h3><div class="table-responsive"><table><thead><tr><th>Transfer / Dining</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th></tr></thead><tbody><tr><td><strong>Boat Transfer</strong></td><td>301</td><td>255</td><td>280</td></tr><tr><td><strong>Victoria Falls Airport – Kasane (one way)</strong></td><td>1,604</td><td>1,360</td><td>1,480</td></tr><tr><td><strong>Kazungula Border Post (one way)</strong></td><td>2,005</td><td>1,700</td><td>1,850</td></tr><tr><td><strong>Katima – Kasane (one way)</strong></td><td>3,100</td><td>2,635</td><td>2,870</td></tr><tr><td><strong>Kasane – Livingstone (one way)</strong></td><td>2,005</td><td>1,700</td><td>1,850</td></tr><tr><td><strong>Kasane Airport Transfer</strong></td><td>301</td><td>255</td><td>280</td></tr><tr class="table-highlight"><td colspan="4"><strong>Dining &amp; Extras</strong></td></tr><tr><td><strong>Breakfast / Lunch</strong></td><td>602</td><td>510</td><td>555</td></tr><tr><td><strong>High Tea / Mini Bar Food</strong></td><td>401</td><td>340</td><td>370</td></tr><tr><td><strong>Dinner / Mini Bar Beverage</strong></td><td>702</td><td>595</td><td>650</td></tr><tr><td><strong>Butler's Bar / Spa Treatment</strong></td><td>1,003</td><td>850</td><td>925</td></tr></tbody></table></div></div>`,
+        tab3: `<div class="content-block"><h3>Children &amp; Game Drive Policy</h3><p class="raw-text">Due to the lodge's location in a foremost wildlife area, children 12 and younger are not accommodated.<br><br>Young adults 13–17 are welcome and can stay with parents in their Water Villa on a sleeper couch at 75% of the applicable adult rate.<br><br>Any person 18+ is an adult and pays full adult rates. Children 13–17 in their own villa pay full adult rates.<br><br><strong>Game Drive Policy:</strong><br>All rates include 15% VAT, park entrance fees and one driver/guide.<br>Children 12+ welcome on all game drives at full adult rates.<br>Children under 12 accommodated on private 4-hour drives, booked in advance, parent/guardian required.<br>Cancellation: No fee if cancelled 3+ days prior. 100% fee within 3 days.<br>All requests and cancellations must be submitted in writing to O&amp;L reservations.</p></div>`
+    },
+    'divava': {
+        location: 'Okavango',
+        cover: 'https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg',
+        name: 'Divava Okavango',
+        shortDesc: `20 thatched river-facing chalets on the Okavango River — boat cruises, Popa Falls, river safaris with hippos, and a tranquil riverside spa.`,
+        images: ['https://wetu.com/imageHandler/c1920x1080/10477/room_overview1.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/10477/bath.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/10477/main_building.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/218386/divundu_-artush-123rf40323660.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/218386/divundu_-owencarnes-123rf3991271.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/218386/divundu_-estivillml-123rf27096917.jpg?fmt=jpg'],
+        airport: 'Nearest airport: Rundu Airport. Email: sales@ol.na',
+        intro: `Situated on the banks of the Okavango River, Divava offers an intimate retreat where luxury meets wilderness. With just 20 thatched chalets overlooking the water, guests are immersed in the soothing sounds of nature while enjoying modern comforts.\n\nDiscover the nearby Popa Falls, embark on river safaris teeming with hippos and crocodiles, or unwind at the tranquil spa. Every moment at Divava is designed to connect you with the beauty and spirit of Namibia's Kavango region.`,
+        tab1: `<div class="content-block"><h3>STO20 Rates — Divava Okavango</h3><div class="sub-block"><h4>Low Season — 01.01.26 to 30.06.2026</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 6–12 Yrs DBB<br>Sharing Adult</th></tr></thead><tbody><tr><td><strong>Luxury Chalets</strong></td><td>3,312</td><td>4,424</td><td>828</td></tr></tbody></table></div></div><div class="sub-block"><h4>High Season — 01.07.26 to 30.11.2026</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 6–12 Yrs DBB<br>Sharing Adult</th></tr></thead><tbody><tr><td><strong>Luxury Chalets</strong></td><td>4,044</td><td>5,280</td><td>1,011</td></tr></tbody></table></div></div><p class="raw-text">* Per person rate. <strong>Tour guide:</strong> N$1,065 DBB fixed rate.</p><div class="sub-block"><h4>Rack Rates</h4><div class="table-responsive"><table><thead><tr><th colspan="4" style="text-align:center">Low Season — 01.01.26 to 30.06.2026</th></tr><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 6–12 DBB</th></tr></thead><tbody><tr><td><strong>Luxury Chalets</strong></td><td>4,140</td><td>5,530</td><td>1,035</td></tr></tbody></table></div><div class="table-responsive" style="margin-top:12px;"><table><thead><tr><th colspan="4" style="text-align:center">High Season — 01.07.26 to 30.11.2026</th></tr><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 6–12 DBB</th></tr></thead><tbody><tr><td><strong>Luxury Chalets</strong></td><td>5,055</td><td>6,600</td><td>1,264</td></tr></tbody></table></div></div><div class="sub-block"><h4>Room Types</h4><p class="raw-text">20 Luxury Chalets · 38m² bedroom plus front terrace facing Okavango River<br><strong>Includes:</strong> Meals on DBB basis<br><strong>Excludes:</strong> Activities, Lunch</p></div></div>`,
+        tab2: `<div class="content-block"><h3>Activity Rates 2026/7/8</h3><div class="table-responsive"><table><thead><tr><th>Activity</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Buffalo Game Drive</strong></td><td>1,345</td><td>1,438</td><td>1,533</td><td>4h. Snack platter &amp; drinks.</td></tr><tr><td><strong>Mahango Game Drive</strong></td><td>1,065</td><td>1,135</td><td>1,210</td><td>3h. Snack platter &amp; drinks.</td></tr><tr><td><strong>Boat Cruise</strong></td><td>995</td><td>1,061</td><td>1,131</td><td>2.5h. Snack platter &amp; drinks.</td></tr><tr><td><strong>Traditional Village Tour</strong></td><td>490</td><td>522</td><td>556</td><td>1 hour.</td></tr><tr><td><strong>Fishing Tour (4h)</strong></td><td>2,400</td><td>2,560</td><td>2,730</td><td>Gear, snacks &amp; drinks.</td></tr><tr><td><strong>Fishing Tour (2h)</strong></td><td>1,200</td><td>1,280</td><td>1,365</td><td>Gear, snacks &amp; drinks.</td></tr><tr><td><strong>Island Lunch/Brunch (min 2 pax)</strong></td><td>2,300</td><td>2,450</td><td>2,610</td><td>3h</td></tr><tr><td><strong>Island Lunch/Brunch Surcharge</strong></td><td>805</td><td>860</td><td>920</td><td>3h per additional pax</td></tr></tbody></table></div><h4 style="margin-top:24px; margin-bottom:14px;">External Activities</h4><div class="table-responsive"><table><thead><tr><th>Activity</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Helicopter + Half Day Delta (1 pax)</strong></td><td>1,830</td><td>1,830</td><td>N/A</td><td>7h. Transfer N$2,520. Lunch &amp; drinks. Passport req.</td></tr><tr><td><strong>Helicopter + Half Day Delta (2 pax)</strong></td><td>915</td><td>915</td><td>N/A</td><td>7h. Transfer N$1,260. Lunch &amp; drinks. Passport req.</td></tr><tr><td><strong>Helicopter + Half Day Delta (3 pax)</strong></td><td>770</td><td>770</td><td>N/A</td><td>7h. Transfer N$1,260. Lunch &amp; drinks. Passport req.</td></tr><tr><td><strong>Tsodilo Hills Excursion</strong></td><td>2,355</td><td>2,355</td><td>N/A</td><td>7h. Transfer, lunch, entrance &amp; guided tour. Min 2 pax.</td></tr><tr><td><strong>Mokoro Poling</strong></td><td>1,585</td><td>1,585</td><td>N/A</td><td>4h. Transfer, guide, drinks &amp; water.</td></tr></tbody></table></div></div><div class="content-block"><h3>Dining &amp; Transfer Rates</h3><div class="table-responsive"><table><thead><tr><th>Dining / Transfer</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Breakfast</strong></td><td>380</td><td>405</td><td>432</td><td>0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Lunch</strong></td><td>190</td><td>203</td><td>216</td><td>0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Dinner</strong></td><td>550</td><td>586</td><td>625</td><td>0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Breakfast/Lunch Pack</strong></td><td>275</td><td>293</td><td>312</td><td>0–5 free. 6–12 at 50%.</td></tr><tr><td><strong>Airstrip Transfers</strong></td><td>200</td><td>215</td><td>230</td><td></td></tr><tr><td><strong>Mpacha Airport (Katima Mulilo)</strong></td><td>2,300</td><td>2,450</td><td>2,610</td><td>Water &amp; soft drink included.</td></tr></tbody></table></div></div>`,
+        tab3: `<div class="content-block"><h3>Children Policy</h3><p class="raw-text">Children of all ages are welcome and remain the full responsibility of their parents.<br><br>Children 5 and below: free of charge sharing with parents.<br>Children 6–12: special reduced rates sharing with parents.<br>Children requiring their own room: charged full adult rates.<br><br>Single parent with one child (0–5): charged per-adult sharing rate + single supplement + applicable child rate.<br>Single parent with one child (6–12): charged sharing rate + applicable child rate.<br><br>Note: Children under 12 are not permitted within the Spa &amp; Wellness Centre.<br>There is one Camelthorn Room accommodating a family of five across two rooms sharing a bathroom. None of the rooms are wheelchair friendly.</p></div>`
+    },
+    'lemirage': {
+        location: 'Sossusvlei',
+        cover: 'https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg',
+        name: 'Le Mirage Sossusvlei',
+        shortDesc: `Rising from the red sands — North African inspired architecture, camel rides, desert spa treatments and star-filled nights at the iconic dunes of Sossusvlei.`,
+        images: ['https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-sunset.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/10424/main_building_by_night.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/10424/le-mirage-resort-and-spa-sossusvlei-south-camelthorn_building_and_restaurant.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/468/Namib%201%201.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/468/DeadVlei21.jpg?fmt=jpg','https://wetu.com/imageHandler/c1920x1080/468/Namib%201%204.jpg?fmt=jpg'],
+        airport: 'Nearest airport: Hosea Kutako International Airport (approx 4.5–5 hours). Charter flights available to nearby airstrips. Email: sales@ol.na',
+        intro: `Rising from the red sands like a mirage, this iconic desert lodge offers unique architecture, luxury suites and easy access to Sossusvlei's towering dunes. Guests can enjoy camel rides, desert spa treatments and star-filled nights in one of Namibia's most magical settings.\n\nLocated near the iconic dunes of Sossusvlei, Le Mirage is a striking desert oasis inspired by North African architecture. Surrounded by vast open landscapes, the lodge offers 27 elegant rooms, combining luxury, tranquillity and adventure with curated desert experiences and unforgettable sunsets.`,
+        tab1: `<div class="content-block"><h3>STO20 Rates — Le Mirage Sossusvlei</h3><div class="sub-block"><h4>Low Season — 01.01.26 to 30.06.2026</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 13–17 Yrs<br>Sharing Adult</th></tr></thead><tbody><tr><td><strong>Camelthorn Room</strong></td><td>3,096</td><td>4,136</td><td>774</td></tr><tr><td><strong>Oasis Room</strong></td><td>3,420</td><td>4,561</td><td>855</td></tr></tbody></table></div></div><div class="sub-block"><h4>High Season — 01.07.26 to 30.11.2026</h4><div class="table-responsive"><table><thead><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 13–17 Yrs<br>Sharing Adult</th></tr></thead><tbody><tr><td><strong>Camelthorn Room</strong></td><td>3,792</td><td>5,012</td><td>948</td></tr><tr><td><strong>Oasis Room</strong></td><td>4,200</td><td>5,540</td><td>1,050</td></tr></tbody></table></div></div><p class="raw-text">* Per person rate. <strong>Tour guide:</strong> N$1,045 DBB fixed rate.</p><div class="sub-block"><h4>Rack Rates</h4><div class="table-responsive"><table><thead><tr><th colspan="4" style="text-align:center">Low Season</th></tr><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 13–17</th></tr></thead><tbody><tr><td><strong>Camelthorn Room</strong></td><td>3,870</td><td>5,170</td><td>968</td></tr><tr><td><strong>Oasis Room</strong></td><td>4,275</td><td>5,701</td><td>1,069</td></tr></tbody></table></div><div class="table-responsive" style="margin-top:12px;"><table><thead><tr><th colspan="4" style="text-align:center">High Season</th></tr><tr><th>Room Type</th><th>DBL/Sharing DBB</th><th>Single DBB</th><th>1 Child 13–17</th></tr></thead><tbody><tr><td><strong>Camelthorn Room</strong></td><td>4,740</td><td>6,265</td><td>1,185</td></tr><tr><td><strong>Oasis Room</strong></td><td>5,250</td><td>6,925</td><td>1,313</td></tr></tbody></table></div></div><div class="sub-block"><h4>Room Types</h4><p class="raw-text">27 Rooms · 22–38m² bedroom area<br><strong>Includes:</strong> Meals on DBB basis<br><strong>Excludes:</strong> Activities, Lunch</p></div></div>`,
+        tab2: `<div class="content-block"><h3>Activity Rates 2026/7/8</h3><p class="raw-text" style="margin-bottom:16px;">Activities subject to availability. Child &amp; guide policy does not apply to activities.</p><div class="table-responsive"><table><thead><tr><th>Activity</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>Sundowner Drive</strong></td><td>555</td><td>592</td><td>632</td><td>1.5h. Snack platter &amp; drinks.</td></tr><tr><td><strong>Sossusvlei Drive</strong></td><td>2,180</td><td>2,324</td><td>2,478</td><td>6h. Entrance fees, water, coffee, tea &amp; snacks.</td></tr><tr><td><strong>Quad Biking</strong></td><td>1,380</td><td>1,471</td><td>1,568</td><td>2.5h. Soft drinks &amp; water.</td></tr><tr><td><strong>Geluk Airstrip Transfer</strong></td><td>190</td><td>203</td><td>216</td><td>2km. Free for in-house guests.</td></tr><tr><td><strong>Airstrip Transfer — Sossusvlei</strong></td><td>1,210</td><td>1,290</td><td>1,375</td><td>21km. Water included.</td></tr><tr><td><strong>Airstrip Transfer — Keerweder</strong></td><td>1,510</td><td>1,610</td><td>1,716</td><td>45km. Water included.</td></tr><tr><td><strong>Hot Air Balloon Experience</strong></td><td>9,920</td><td>N/A</td><td>N/A</td><td>4.5h. Breakfast buffet, drinks &amp; sparkling wine. External provider.</td></tr></tbody></table></div><h4 style="margin-top:24px;margin-bottom:14px;">Helicopter Flights — Charges in USD</h4><div class="table-responsive"><table><thead><tr><th>Activity</th><th>Jul 2025 – Jun 2026</th><th>Jul 2026 – Jun 2027</th><th>Jul 2027 – Jun 2028</th><th>Remarks</th></tr></thead><tbody><tr><td><strong>30 min (1 pax)</strong></td><td>$590</td><td>$590</td><td>N/A</td><td>Transfer N$2,520. Passport req.</td></tr><tr><td><strong>30 min (2 pax)</strong></td><td>$295</td><td>$295</td><td>N/A</td><td>Transfer N$1,260. Passport req.</td></tr><tr><td><strong>30 min (3 pax)</strong></td><td>$235</td><td>$235</td><td>N/A</td><td>Transfer N$1,260. Passport req.</td></tr><tr><td><strong>45 min (1 pax)</strong></td><td>$790</td><td>$790</td><td>N/A</td><td>Transfer N$2,520.</td></tr><tr><td><strong>45 min (2 pax)</strong></td><td>$390</td><td>$390</td><td>N/A</td><td>Transfer N$1,260.</td></tr><tr><td><strong>45 min (3 pax)</strong></td><td>$315</td><td>$315</td><td>N/A</td><td>Transfer N$1,260.</td></tr><tr><td><strong>60 min (1 pax)</strong></td><td>$1,230</td><td>$1,230</td><td>N/A</td><td>Transfer N$2,520.</td></tr><tr><td><strong>60 min (2 pax)</strong></td><td>$615</td><td>$615</td><td>N/A</td><td>Transfer N$1,260.</td></tr><tr><td><strong>60 min (3 pax)</strong></td><td>$445</td><td>$445</td><td>N/A</td><td>Transfer N$1,260.</td></tr><tr><td><strong>Add-On Champagne</strong></td><td>$50</td><td>$50</td><td>N/A</td><td>Per person.</td></tr></tbody></table></div></div>`,
+        tab3: `<div class="content-block"><h3>Children Policy</h3><p class="raw-text">Children of all ages are welcome and remain the full responsibility of their parents.<br><br>Children 5 and below: free of charge sharing with parents.<br>Children 6–12: special reduced rates sharing with parents.<br>Children requiring their own room: charged full adult rates.<br><br>Note: Children under 12 are not permitted within the Spa &amp; Wellness Centre.<br>An extra bed can be accommodated at the entrance of some chalets. None of the rooms are wheelchair friendly.</p></div>`
+    }
+};
+
+// ── BUILD LODGE CARDS ──
+const grid = document.getElementById('lodge-grid');
+Object.keys(DB).forEach(key => {
+    const d = DB[key];
+    const card = document.createElement('div');
+    card.className = 'lodge-card';
+    card.innerHTML = `
+        <div class="lodge-card-img-wrap">
+            <img src="${d.cover}" class="lodge-card-img" alt="${d.name}">
+        </div>
+        <div class="lodge-card-body">
+            <span class="lodge-card-location">${d.location}</span>
+            <h2 class="lodge-card-name">${d.name}</h2>
+            <span class="lodge-card-dot"></span>
+            <p class="lodge-card-desc">${d.shortDesc}</p>
+            <hr class="lodge-card-divider">
+            <div class="lodge-card-actions">
+                <button class="btn-lodge" onclick="openProperty('${key}')">Lodge</button>
+                <button class="btn-rates" onclick="openProperty('${key}'); setTimeout(()=>switchTab(1),200)">View Rates</button>
+            </div>
+        </div>`;
+    grid.appendChild(card);
+});
+
+// ── CALENDAR ──
+let calendarState = { month: new Date().getMonth(), year: new Date().getFullYear(), rangeStart: null, rangeEnd: null };
+
+function calculateNights() {
+    let din = '', dout = '', nights = 1;
+    if (calendarState.rangeStart) {
+        const d1 = new Date(calendarState.rangeStart.getTime() - calendarState.rangeStart.getTimezoneOffset()*60000);
+        din = d1.toISOString().split('T')[0];
+    }
+    if (calendarState.rangeStart && calendarState.rangeEnd) {
+        const d2 = new Date(calendarState.rangeEnd.getTime() - calendarState.rangeEnd.getTimezoneOffset()*60000);
+        dout = d2.toISOString().split('T')[0];
+        const diff = Math.ceil((calendarState.rangeEnd - calendarState.rangeStart) / (1000*60*60*24));
+        nights = diff > 0 ? diff : 1;
+    }
+    document.getElementById('b-date-in').value = din;
+    document.getElementById('b-date-out').value = dout;
+    document.getElementById('nights-count').innerText = nights;
+    const disp = document.getElementById('b-dates-display');
+    if (disp) {
+        if (din && dout) disp.innerText = din + '  →  ' + dout + '  (' + nights + ' night' + (nights>1?'s':'') + ')';
+        else if (din) disp.innerText = din + '  →  Select check-out date';
+        else disp.innerText = 'Select dates from the calendar above';
+    }
+    updateTotal();
+}
+
+function renderCustomCalendar() {
+    const root = document.getElementById('inline-calendar');
+    if (!root) return;
+    root.innerHTML = '';
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const dayLabels = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+    let m1 = calendarState.month, y1 = calendarState.year;
+    let m2 = m1+1, y2 = y1;
+    if (m2 > 11) { m2 = 0; y2 = y1+1; }
+
+    const nav = document.createElement('div'); nav.className = 'dew-calendar-nav';
+    const prevBtn = document.createElement('button'); prevBtn.className = 'dew-calendar-nav-btn'; prevBtn.innerHTML = '&lsaquo;';
+    prevBtn.onclick = () => { calendarState.month--; if(calendarState.month<0){calendarState.month=11;calendarState.year--;} renderCustomCalendar(); };
+    const t1 = document.createElement('span'); t1.className = 'dew-calendar-month-title'; t1.textContent = monthNames[m1]+' '+y1;
+    const t2 = document.createElement('span'); t2.className = 'dew-calendar-month-title'; t2.textContent = monthNames[m2]+' '+y2;
+    const nextBtn = document.createElement('button'); nextBtn.className = 'dew-calendar-nav-btn'; nextBtn.innerHTML = '&rsaquo;';
+    nextBtn.onclick = () => { calendarState.month++; if(calendarState.month>11){calendarState.month=0;calendarState.year++;} renderCustomCalendar(); };
+    nav.append(prevBtn, t1, t2, nextBtn);
+    root.appendChild(nav);
+
+    function buildMonth(month, year) {
+        const cal = document.createElement('div'); cal.className = 'dew-calendar';
+        const header = document.createElement('div'); header.className = 'dew-calendar-header';
+        dayLabels.forEach(d => { const l = document.createElement('div'); l.className='dew-calendar-day-label'; l.textContent=d; header.appendChild(l); });
+        cal.appendChild(header);
+        const grid = document.createElement('div'); grid.className = 'dew-calendar-grid';
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month+1, 0).getDate();
+        const today = new Date(); today.setHours(0,0,0,0);
+        for (let i=0; i<firstDay; i++) { const e=document.createElement('div'); e.className='dew-calendar-day dew-empty'; grid.appendChild(e); }
+        for (let d=1; d<=daysInMonth; d++) {
+            const dayEl = document.createElement('div'); dayEl.className='dew-calendar-day'; dayEl.textContent=d;
+            const thisDate = new Date(year, month, d);
+            if (thisDate < today) { dayEl.classList.add('dew-past'); }
+            else {
+                if (thisDate.toDateString()===today.toDateString()) dayEl.classList.add('dew-today');
+                if (calendarState.rangeStart && thisDate.toDateString()===calendarState.rangeStart.toDateString()) dayEl.classList.add('dew-range-start');
+                else if (calendarState.rangeEnd && thisDate.toDateString()===calendarState.rangeEnd.toDateString()) dayEl.classList.add('dew-range-end');
+                else if (calendarState.rangeStart && calendarState.rangeEnd && thisDate>calendarState.rangeStart && thisDate<calendarState.rangeEnd) dayEl.classList.add('dew-range');
+                dayEl.onclick = () => {
+                    if (!calendarState.rangeStart || (calendarState.rangeStart && calendarState.rangeEnd)) {
+                        calendarState.rangeStart = thisDate; calendarState.rangeEnd = null;
+                    } else {
+                        if (thisDate > calendarState.rangeStart) calendarState.rangeEnd = thisDate;
+                        else { calendarState.rangeEnd = calendarState.rangeStart; calendarState.rangeStart = thisDate; }
+                    }
+                    renderCustomCalendar(); calculateNights();
+                };
+            }
+            grid.appendChild(dayEl);
+        }
+        cal.appendChild(grid); return cal;
+    }
+    const container = document.createElement('div'); container.className='dew-calendar-container';
+    container.appendChild(buildMonth(m1, y1)); container.appendChild(buildMonth(m2, y2));
+    root.appendChild(container);
+}
+
+// ── PARSE RATE TABLES — add QTY input after every price column ──
+function parseTab1(htmlString) {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString;
+
+    div.querySelectorAll('table').forEach(table => {
+        const tbody = table.querySelector('tbody');
+        if (!tbody) return;
+
+        // Identify price columns from first real data row
+        const firstRow = [...tbody.querySelectorAll('tr')].find(tr => tr.querySelectorAll('td').length > 1);
+        if (!firstRow) return;
+        const cells = [...firstRow.querySelectorAll('td')];
+        const priceCols = [];
+        cells.forEach((td, idx) => {
+            if (idx === 0 || td.hasAttribute('colspan')) return;
+            const val = td.innerText.trim().replace(/,/g, '');
+            if (val !== 'N/A' && val !== '' && !isNaN(parseFloat(val))) priceCols.push(idx);
+        });
+        if (!priceCols.length) return;
+
+        // Get header labels for naming inputs
+        const theadRows = table.querySelectorAll('thead tr');
+        const lastHead = theadRows[theadRows.length - 1];
+        const headThs = lastHead ? [...lastHead.querySelectorAll('th')] : [];
+
+        // Add QTY header after each price column header (use .after() — inserts correctly)
+        // Process in reverse so indices stay valid as we insert
+        [...priceCols].reverse().forEach(idx => {
+            const th = headThs[idx];
+            if (!th) return;
+            const qth = document.createElement('th');
+            qth.innerText = 'QTY';
+            qth.style.cssText = 'text-align:center;width:60px;font-size:0.65rem;';
+            th.after(qth);
+        });
+
+        // Add QTY input after each price td in every data row (reverse order too)
+        tbody.querySelectorAll('tr').forEach(tr => {
+            const tds = [...tr.querySelectorAll('td')];
+            if (tds.length <= 1) return;
+            const roomName = tds[0] ? tds[0].innerText.trim() : '';
+
+            [...priceCols].reverse().forEach(idx => {
+                const td = tds[idx];
+                if (!td) return;
+                const val = td.innerText.trim().replace(/,/g, '');
+                const price = parseFloat(val);
+                const colLabel = headThs[idx] ? headThs[idx].innerText.trim() : '';
+                const label = roomName + ' — ' + colLabel;
+                const qtyTd = document.createElement('td');
+                qtyTd.style.textAlign = 'center';
+                if (!isNaN(price)) {
+                    qtyTd.innerHTML = `<input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${price}" onchange="updateTotal()" style="width:58px;padding:6px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;">`;
+                }
+                td.after(qtyTd);
+            });
+        });
+    });
+
+    return div.innerHTML;
+}
+
+// ── OPEN / CLOSE PROPERTY ──
+function openProperty(id) {
+    const d = DB[id];
+    if (!d) return;
+    document.getElementById('main-view').style.display = 'none';
+    const dv = document.getElementById('detail-view');
+    dv.style.display = 'block';
+    window.scrollTo(0,0);
+
+    document.getElementById('d-title').innerText = d.name;
+    document.getElementById('d-intro').innerText = d.intro;
+    document.getElementById('d-location').innerText = d.location;
+    document.getElementById('d-airport').innerText = d.airport;
+    document.getElementById('spec-location').innerText = d.location;
+
+    // Gallery
+    const gallery = document.getElementById('d-gallery');
+    gallery.innerHTML = '';
+    if (d.images && d.images.length) {
+        d.images.forEach(src => { gallery.innerHTML += `<img src="${src}" class="gallery-img">`; });
+        document.getElementById('gallery-placeholder').style.display = 'none';
+    } else {
+        document.getElementById('gallery-placeholder').style.display = 'block';
+    }
+
+    // Tabs — tab-1 keeps the calendar, append rates after it
+    const calendarBlock = document.getElementById('global-dates-ui');
+    document.getElementById('tab-1').innerHTML = parseTab1(d.tab1);
+    document.getElementById('tab-1').prepend(calendarBlock);
+    document.getElementById('tab-2').innerHTML = parseTab1(d.tab2);
+    document.getElementById('tab-3').innerHTML = d.tab3;
+
+    // Re-attach QTY listeners
+    document.querySelectorAll('.rate-qty').forEach(el => el.addEventListener('change', updateTotal));
+
+    const saved = localStorage.getItem('dt_agent_email');
+    if (saved) document.getElementById('b-agent-email').value = saved;
+
+    calendarState = { month: new Date().getMonth(), year: new Date().getFullYear(), rangeStart: null, rangeEnd: null };
+    renderCustomCalendar();
+    calculateNights();
+    updateTotal();
+    switchTab(1);
+}
+
+function closeProperty() {
+    document.getElementById('detail-view').style.display = 'none';
+    document.getElementById('main-view').style.display = 'block';
+    window.scrollTo(0,0);
+}
+
+// ── TABS ──
+function switchTab(num) {
+    if (num === 5 && !document.getElementById('tab-btn-5').classList.contains('ready')) return;
+    for (let i = 1; i <= 5; i++) {
+        document.getElementById('tab-btn-' + i)?.classList.remove('active');
+        document.getElementById('tab-' + i)?.classList.remove('active');
+    }
+    document.getElementById('tab-btn-' + num)?.classList.add('active');
+    document.getElementById('tab-' + num)?.classList.add('active');
+    if (num === 5) renderBookingSummary();
+
+const _tabsEl=document.querySelector('.tabs');const _tabContent=document.getElementById('tab-'+num);if(_tabsEl&&_tabContent){requestAnimationFrame(()=>{const _scrollY=_tabContent.getBoundingClientRect().top+window.pageYOffset-_tabsEl.offsetHeight-32;window.scrollTo({top:_scrollY,behavior:'smooth'});});}
+}
+
+// ── TOTALS ──
+let selectedItems = [];
+
+function updateTotal() {
+    selectedItems = [];
+    let total = 0;
+    const nights = parseInt(document.getElementById('nights-count')?.innerText) || 1;
+    document.querySelectorAll('.rate-qty').forEach(el => {
+        const qty = parseInt(el.value) || 0;
+        if (qty > 0) {
+            const price = parseFloat(el.dataset.price);
+            const name = el.dataset.name;
+            const lineTotal = qty * price * nights;
+            total += lineTotal;
+            selectedItems.push({ name, qty, price, nights, total: lineTotal });
+        }
+    });
+    const bar = document.getElementById('booking-bar');
+    const finalBtn = document.getElementById('tab-btn-5');
+    if (total > 0) {
+        bar.style.display = 'block';
+        document.getElementById('booking-total').innerText = 'Total: N$ ' + total.toLocaleString('en-US', {minimumFractionDigits:2, maximumFractionDigits:2});
+        if (finalBtn) finalBtn.classList.add('ready');
+    } else {
+        bar.style.display = 'none';
+        if (finalBtn) finalBtn.classList.remove('ready');
+    }
+    if (document.getElementById('tab-5')?.classList.contains('active')) renderBookingSummary();
+}
+
+function renderBookingSummary() {
+    const summary = document.getElementById('booking-summary');
+    if (!selectedItems.length) {
+        summary.innerHTML = '<p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates from the tabs above to build your booking.</p>';
+        return;
+    }
+    let html = '<ul style="list-style:none;padding:0;margin:0;">';
+    selectedItems.forEach(item => {
+        html += `<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem;">
+            <span><strong>${item.qty}×</strong> ${item.name} <span style="color:var(--text-muted);font-size:0.8rem;">× ${item.nights} night${item.nights>1?'s':''}</span></span>
+            <span style="color:var(--gold);font-weight:500;">N$ ${item.total.toLocaleString('en-US',{minimumFractionDigits:2})}</span></li>`;
+    });
+    const total = selectedItems.reduce((a,i) => a + i.total, 0);
+    html += `<li style="display:flex;justify-content:space-between;margin-top:14px;font-family:var(--font-head);font-size:1.3rem;">
+        <span>Grand Total</span>
+        <span>N$ ${total.toLocaleString('en-US',{minimumFractionDigits:2})}</span></li></ul>`;
+    summary.innerHTML = html;
+}
+
+// ── SUBMIT BOOKING ──
+async function submitBooking(e) {
+    e.preventDefault();
+    if (!selectedItems.length) { alert('Please select at least one rate before submitting.'); return; }
+
+    const lodgeName = document.getElementById('d-title').innerText;
+    const agentEmail = document.getElementById('b-agent-email').value;
+    const status = document.getElementById('b-status').value;
+    const clientName = document.getElementById('b-name').value;
+    const guideRooms = document.getElementById('b-guide').value || 'None';
+    const dateIn = document.getElementById('b-date-in').value;
+    const dateOut = document.getElementById('b-date-out').value;
+    const arriving = document.getElementById('b-arriving').value;
+    const departing = document.getElementById('b-departing').value;
+    const msg = document.getElementById('b-message').value;
+
+    localStorage.setItem('dt_agent_email', agentEmail);
+
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.innerHTML = '<span style="display:inline-block;border:2px solid #fff;border-top-color:transparent;border-radius:50%;width:14px;height:14px;animation:spin 1s linear infinite;margin-right:8px;vertical-align:middle;"></span>Sending…';
+    btn.disabled = true;
+
+    const total = selectedItems.reduce((a,i) => a + i.total, 0);
+    const htmlItems = selectedItems.map(item => `<tr><td style="padding:10px;border-bottom:1px solid #eee;"><strong>${item.qty}×</strong> ${item.name}</td><td style="padding:10px;border-bottom:1px solid #eee;text-align:right;color:#B8956A;"><strong>N$ ${item.total.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr>`).join('');
+
+    const emailHtml = `<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden;">
+        <div style="background:#2C2824;padding:32px;text-align:center;color:#fff;">
+            <p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A;">O&L Leisure Rate Portal</p>
+            <h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300;">${lodgeName}</h1>
+            <p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7BA99A;">New ${status}</p>
+        </div>
+        <div style="padding:32px;background:#fff;">
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-size:14px;">
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${agentEmail}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Client</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${clientName}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Date In</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateIn}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Date Out</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateOut}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Arriving From</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${arriving}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Departing To</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${departing}</td></tr>
+                <tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Guide Rooms</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${guideRooms}</td></tr>
+            </table>
+            <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8956A;margin-bottom:12px;">Requested Rates</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px;">${htmlItems}
+                <tr><td style="padding:14px 10px;font-size:16px;font-family:Georgia,serif;"><strong>Estimated Total</strong></td><td style="padding:14px 10px;text-align:right;font-size:16px;"><strong>N$ ${total.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr>
+            </table>
+            <div style="background:#f9f7f4;padding:18px;border-radius:8px;border-left:3px solid #7BA99A;">
+                <p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269;">Notes</p>
+                <p style="margin:0;font-size:14px;color:#555;white-space:pre-line;">${msg || 'No additional notes.'}</p>
+            </div>
+        </div>
+    </div>`;
+
+    try {
+        const res = await fetch('https://desert-tracks.vercel.app/api/send_email', {
+            method: 'POST',
+            headers: {'Content-Type':'application/json'},
+            body: JSON.stringify({ to:'bookings@desert-tracks.com', subject:`New ${status}: ${lodgeName} — ${clientName}`, html: emailHtml })
+        });
+        if (res.ok) {
+            alert('Booking request sent to bookings@desert-tracks.com');
+            closeProperty();
+            e.target.reset();
+            selectedItems = [];
+            updateTotal();
+        } else {
+            const data = await res.json();
+            alert('Failed: ' + (data.error || 'Unknown error'));
+        }
+    } catch (err) {
+        alert('Network error. Please try again.');
+    } finally {
+        btn.innerHTML = 'Send Booking to Operations';
+        btn.disabled = false;
+    }
+}
+
+// Enter key jumps to next rate-qty input
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' && e.target.classList.contains('rate-qty')) {
+        e.preventDefault();
+        const inputs = [...document.querySelectorAll('.rate-qty')];
+        const idx = inputs.indexOf(e.target);
+        if (idx >= 0 && idx < inputs.length - 1) inputs[idx + 1].focus();
+    }
+});
+</script>
+
+<script>
+(function(){
+  function go(){
+    try{
+      var k=new URLSearchParams(window.location.search).get('lodge');
+      if(k && typeof DB!=='undefined' && DB[k] && typeof openProperty==='function'){
+        openProperty(k);
+        if(typeof switchTab==='function'){ setTimeout(function(){ try{switchTab(1);}catch(e){} },250); }
+      }
+    }catch(e){}
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',go); } else { go(); }
+})();
+</script>
+</body>
+</html>
