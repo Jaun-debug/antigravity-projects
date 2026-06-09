@@ -4744,11 +4744,65 @@
             ]
         };
 
+        // Single-lodge rate sheets (deployed in /ratesheets/). Checked first by getLodgeRateSheetUrl.
+        const singleRateSheetMap = {
+            "Camp Kwando": "ratesheets/camp_kwando_ratesheet_v3.html",
+            "White Sands Caprivi": "ratesheets/white_sands_ratesheet_v3.html",
+            "Epako Safari Lodge": "ratesheets/epako_safari_lodge_ratesheet_v3.html",
+            "Erongo Rocks": "ratesheets/erongo_rocks_ratesheet_v3.html",
+            "Nooishof": "ratesheets/nooishof_ratesheet_v3.html",
+            "Ohorongo Game and Safari Lodge": "ratesheets/ohorongo_safari_lodge_ratesheet_v3.html",
+            "Uis Elephant": "ratesheets/uis_elephant_ratesheet_v3.html",
+            "Vingerklip Lodge": "ratesheets/vingerklip_lodge_ratesheet_v3.html",
+            "Emanya at Etosha": "ratesheets/emanya_at_etosha_ratesheet_v3.html",
+            "Onguma Bush Camp": "ratesheets/onguma_ratesheet_v3.html",
+            "Epacha Game Lodge & Spa": "ratesheets/epacha_game_lodge_ratesheet_v3.html",
+            "Simanya River Lodge": "ratesheets/simanya_river_lodge_ratesheet_v3.html",
+            "Africa Safari Lodge": "ratesheets/africa_safari_lodge_ratesheet_v3.html",
+            "Barkhan Dune Retreat": "ratesheets/barkhan_dune_retreat_ratesheet_v3.html",
+            "Kalahari Game Lodge": "ratesheets/kalahari_game_lodge_ratesheet_v3.html",
+            "Epupa Falls Lodge": "ratesheets/epupa_falls_lodge_ratesheet_v3.html",
+            "Kaoko Mopane Lodge": "ratesheets/kaoko_mopane_lodge_ratesheet_v3.html",
+            "Opuwo Country Lodge": "ratesheets/opuwo_country_lodge_ratesheet_v3.html",
+            "Sesfontein Guesthouse": "ratesheets/sesfontein_guesthouse_ratesheet_v3.html",
+            "Alte Villa 2025": "ratesheets/alte_villa_ratesheet_v3.html",
+            "Luderitz Nest Hotel": "ratesheets/luderitz_nest_hotel_ratesheet_v3.html",
+            "Ababis Guest Farm": "ratesheets/ababis_ratesheet_v3.html",
+            "Little Sossus Lodge": "ratesheets/little_sossus_lodge_ratesheet_v3.html",
+            "Moon Mountain Lodge": "ratesheets/moon_mountain_lodge_ratesheet_v3.html",
+            "Namib Outpost": "ratesheets/namib_outpost_ratesheet_v3.html",
+            "Rostock Ritz Desert Lodge": "ratesheets/rostock_ritz_ratesheet_v3.html",
+            "Tsauchab River Camp": "ratesheets/tsauchab_river_camp_ratesheet_v3.html",
+            "Alte Kalkofen Lodge": "ratesheets/alte_kalkofen_ratesheet_v3.html",
+            "Atlantic Villa": "ratesheets/atlantic_villa_ratesheet_v3.html",
+            "Cornerstone Guesthouse": "ratesheets/cornerstone_guesthouse_ratesheet_v3.html",
+            "Flamingo Villa Boutique Hotel": "ratesheets/flamingo_villas_ratesheet_v3.html",
+            "Namib Guesthouse": "ratesheets/namib_guesthouse_ratesheet_v3.html",
+            "Organic Stay": "ratesheets/organic_stay_ratesheet_v3.html",
+            "Oyster Box Guesthouse": "ratesheets/oyster_box_guesthouse_ratesheet_v3.html",
+            "The Rez": "ratesheets/the_rez_ratesheet_v3.html",
+            "Aloegrove Safari Lodge": "ratesheets/aloegrove_ratesheet_v3.html",
+            "Gabus Safari Lodge": "ratesheets/gabus_safari_lodge_ratesheet_v3.html",
+            "Ghaub": "ratesheets/ghaub_nature_reserve_ratesheet_v3.html",
+            "Kamaku Guesthouse": "ratesheets/kamaku_guesthouse_ratesheet_v3.html",
+            "Okonjima Villa": "ratesheets/okonjima_ratesheet_v3.html",
+            "Waterberg Wilderness": "ratesheets/waterberg_wilderness_ratesheet_v3.html",
+            "Auas Safari Lodge": "ratesheets/auas_safari_lodge_ratesheet_v3.html",
+            "Belvedere Boutique Hotel": "ratesheets/belvedere_ratesheet_v3.html",
+            "Droombos Estate": "ratesheets/droombos_estate_ratesheet_v3.html",
+            "Heinitzburg Boutique Hotel": "ratesheets/heinitzburg_ratesheet_v3.html",
+            "Hohewarte Guestfarm": "ratesheets/hohewarte_guestfarm_ratesheet_v3.html",
+            "Hotel Thule": "ratesheets/hotel_thule_ratesheet_v3.html",
+            "The Olive Exclusive": "ratesheets/olive_exclusive_ratesheet_v3.html",
+            "Voigtland Guesthouse": "ratesheets/voigtland_ratesheet_v3.html",
+            "Waldeck Lodge": "ratesheets/waldeck_namibia_ratesheet_v3.html"
+        };
+
         function lodgeHasRateSheet(lodgeName) {
             if (!lodgeName) return false;
             const n = lodgeName.toLowerCase().trim();
             if (n.includes('car rental') || n.includes('nts') || n.includes('vehicle') || n.includes('hilux') || n.includes('safari car') || n.includes('4x4')) return true;
-            return !!(olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
+            return !!(singleRateSheetMap[lodgeName] || olMap[lodgeName] || ondiliMap[lodgeName] || jnMap[lodgeName] || logufaMap[lodgeName] || musharaMap[lodgeName] || gondwanaMap[lodgeName] || individualMap[lodgeName] || wolwedansMap[lodgeName] || chiwaniMap[lodgeName]);
         }
 
         function getLodgeRateSheetUrl(lodgeName) {
@@ -4759,6 +4813,9 @@
             if (nameLower.includes('car rental') || nameLower.includes('nts') || nameLower.includes('vehicle') || nameLower.includes('hilux') || nameLower.includes('safari car') || nameLower.includes('4x4')) {
                 return 'vehicle_rates.html';
             }
+
+            // Single-lodge dedicated rate sheets take priority
+            if (singleRateSheetMap[lodgeName]) return singleRateSheetMap[lodgeName];
 
             const findInMap = (mapObj) => {
                 for (const key of Object.keys(mapObj)) {
