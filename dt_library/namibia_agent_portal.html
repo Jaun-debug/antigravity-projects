@@ -4,7 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Namibia Trade Resources | Master Agent Portal</title>
-    
+
+    <!-- SEO / Social Sharing -->
+    <meta name="description" content="The Namibia Master Agent Portal — a centralized trade hub for luxury lodges, vehicles and activities, with pre-negotiated STO rates for immediate booking.">
+    <meta name="theme-color" content="#3c3530">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://namibiarates.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Namibia Rates">
+    <meta property="og:title" content="Namibia Master Agent Portal | Trade Rates">
+    <meta property="og:description" content="Centralized trade hub for luxury Namibian lodges, vehicles and activities with pre-negotiated STO rates.">
+    <meta property="og:url" content="https://namibiarates.com/">
+    <meta property="og:image" content="https://namibiarates.com/images/hero/front_hero.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Namibia Master Agent Portal | Trade Rates">
+    <meta name="twitter:description" content="Centralized trade hub for luxury Namibian lodges, vehicles and activities with pre-negotiated STO rates.">
+    <meta name="twitter:image" content="https://namibiarates.com/images/hero/front_hero.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="images/hero/front_hero.jpg">
+
     <!-- Premium Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -55,7 +79,7 @@
 
         /* HEADER NAVIGATION */
         .main-header {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -317,15 +341,28 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            overflow: hidden;
+        }
+
+        /* Subtle overlay guarantees title legibility over any hero image */
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(43,43,43,0.25) 0%, rgba(43,43,43,0.15) 45%, rgba(43,43,43,0.55) 100%);
+            pointer-events: none;
         }
 
         .hero h1 {
+            position: relative;
+            z-index: 1;
             font-family: var(--font-head);
-            font-size: 4.5rem;
+            font-size: clamp(2.4rem, 8vw, 4.5rem);
             color: #ffffff;
             font-weight: 400;
             letter-spacing: 3px;
             text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            padding: 0 20px;
         }
 
         /* MAIN CONTENT */
@@ -363,21 +400,22 @@
             margin: 0 auto;
         }
 
-        /* SWIPER CAROUSEL */
-        .swiper-container-wrapper { position: relative; margin-top: 40px; padding: 0 40px;}
-        .region-swiper { width: 100%; padding-top: 30px; padding-bottom: 50px; }
-        
-        .swiper-button-next, .swiper-button-prev {
-            z-index: 100 !important;
-            transform: translate3d(0, 0, 10px);
-            pointer-events: auto !important;
-            cursor: pointer !important;
+        /* REGION EDITORIAL GRID */
+        .swiper-container-wrapper { position: relative; margin-top: 50px; padding: 0 40px; }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            align-items: stretch;
         }
 
-        .swiper-slide {
-            width: 360px;
-            height: 550px;
-            border-radius: 12px;
+        @media (max-width: 1024px) {
+            .region-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        }
+        @media (max-width: 640px) {
+            .swiper-container-wrapper { padding: 0 20px; }
+            .region-grid { grid-template-columns: 1fr; gap: 22px; }
         }
 
         .region-card {
@@ -399,31 +437,48 @@
         }
 
         .region-image {
-            height: 200px;
-            background-color: #eee;
+            height: 380px;
+            background-color: #3c3530;
             background-size: cover;
             background-position: center;
             position: relative;
+            transition: transform 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .region-card:hover .region-image {
+            transform: scale(1.05);
+        }
+
+        /* Keyboard focus visibility (premium-subtle, mouse users unaffected) */
+        :focus-visible {
+            outline: 2px solid var(--brand-accent);
+            outline-offset: 3px;
+            border-radius: 3px;
         }
 
         .region-image::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.25) 100%);
         }
 
         .region-card h3 {
             position: absolute;
-            bottom: 20px;
-            left: 20px;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 24px;
             color: #fff;
             font-family: var(--font-head);
-            font-size: 1.5rem;
+            font-size: 1.85rem;
             font-weight: 500;
+            line-height: 1.3;
             z-index: 2;
             letter-spacing: 1px;
+            text-shadow: 0 2px 18px rgba(0,0,0,0.55);
         }
 
         .lodge-list {
@@ -499,19 +554,69 @@
                 gap: 15px;
             }
         }
+
+        /* LIVE LODGE SEARCH SUGGESTIONS */
+        .lodge-suggest-box {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border: 1px solid rgba(164, 130, 86, 0.2);
+            border-radius: 8px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+            max-height: 320px;
+            overflow-y: auto;
+            z-index: 1200;
+            text-align: left;
+        }
+        .lodge-suggest-box.open { display: block; }
+        .lodge-suggest-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            color: var(--text-main);
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            transition: background 0.15s ease;
+        }
+        .lodge-suggest-item:last-child { border-bottom: none; }
+        .lodge-suggest-item:hover, .lodge-suggest-item.active {
+            background: rgba(164, 130, 86, 0.08);
+            color: var(--brand-accent);
+        }
+        .lodge-suggest-item .ls-region {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            white-space: nowrap;
+        }
+        .lodge-suggest-item b { color: var(--brand-accent); font-weight: 600; }
+        .lodge-suggest-empty {
+            padding: 14px 20px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
 
     <header class="main-header">
         <!-- Logo Block on the Left -->
-        <a href="#" class="header-logo-block" onclick="window.location.reload();">
+        <a href="#" class="header-logo-block" onclick="navigateToHome(); window.scrollTo({top:0, behavior:'smooth'}); return false;">
             <span class="logo-main">Namibia Rates</span>
             <span class="logo-sub">Trade Rates Portal</span>
         </a>
 
         <!-- Hamburger Icon (Hidden on desktop, shown on mobile/tablet) -->
-        <button class="burger-menu-btn" title="Menu" onclick="document.getElementById('tab-accommodation').scrollIntoView({behavior: 'smooth'});">
+        <button class="burger-menu-btn" type="button" aria-label="Open menu" title="Menu" onclick="document.getElementById('tab-accommodation').scrollIntoView({behavior: 'smooth'});">
             <span></span>
             <span></span>
             <span></span>
@@ -524,26 +629,25 @@
                 <a href="#" class="nav-link active dropdown-toggle" id="nav-accommodation" onclick="switchTab('accommodation', this); return false;">Accommodation ▾</a>
                 <div class="dropdown-menu">
                     <div class="dropdown-column">
-                        <a href="#" onclick="navigateToRegion(0); return false;">Sossusvlei & Namib</a>
-                        <a href="#" onclick="navigateToRegion(1); return false;">Etosha National Park</a>
-                        <a href="#" onclick="navigateToRegion(2); return false;">Swakopmund & Walvis Bay</a>
-                        <a href="#" onclick="navigateToRegion(3); return false;">Windhoek & Central</a>
-                        <a href="#" onclick="navigateToRegion(4); return false;">Damaraland</a>
-                        <a href="#" onclick="navigateToRegion(5); return false;">Kaokoveld & Kunene</a>
-                        <a href="#" onclick="navigateToRegion(6); return false;">Twyfelfontein</a>
-                        <a href="#" onclick="navigateToRegion(7); return false;">Brandberg & Spitzkoppe</a>
-                        <a href="#" onclick="navigateToRegion(8); return false;">Erongo & Omaruru</a>
+                        <a href="#" onclick="navigateToRegion('Sossusvlei & Namib'); return false;">Sossusvlei & Namib</a>
+                        <a href="#" onclick="navigateToRegion('Swakopmund'); return false;">Swakopmund</a>
+                        <a href="#" onclick="navigateToRegion('Skeleton Coast'); return false;">Skeleton Coast</a>
+                        <a href="#" onclick="navigateToRegion('Damaraland'); return false;">Damaraland</a>
+                        <a href="#" onclick="navigateToRegion('Kaokoland'); return false;">Kaokoland</a>
+                        <a href="#" onclick="navigateToRegion('Epupa'); return false;">Epupa</a>
+                        <a href="#" onclick="navigateToRegion('Opuwo'); return false;">Opuwo</a>
+                        <a href="#" onclick="navigateToRegion('West Etosha'); return false;">West Etosha</a>
+                        <a href="#" onclick="navigateToRegion('South Etosha'); return false;">South Etosha</a>
                     </div>
                     <div class="dropdown-column">
-                        <a href="#" onclick="navigateToRegion(9); return false;">Kalahari Desert</a>
-                        <a href="#" onclick="navigateToRegion(10); return false;">Luderitz & South</a>
-                        <a href="#" onclick="navigateToRegion(11); return false;">Caprivi & Chobe</a>
-                        <a href="#" onclick="navigateToRegion(12); return false;">Fish River Canyon</a>
-                        <a href="#" onclick="navigateToRegion(13); return false;">Waterberg Plateau</a>
-                        <a href="#" onclick="navigateToRegion(14); return false;">Kalahari & Mariental</a>
-                        <a href="#" onclick="navigateToRegion(15); return false;">Skeleton Coast</a>
-                        <a href="#" onclick="navigateToRegion(16); return false;">Otjiwarongo & Waterberg</a>
-                        <a href="#" onclick="navigateToRegion(17); return false;">Okonjima & Central North</a>
+                        <a href="#" onclick="navigateToRegion('East Etosha'); return false;">East Etosha</a>
+                        <a href="#" onclick="navigateToRegion('Central Namibia'); return false;">Central Namibia</a>
+                        <a href="#" onclick="navigateToRegion('Windhoek'); return false;">Windhoek</a>
+                        <a href="#" onclick="navigateToRegion('Kalahari'); return false;">Kalahari</a>
+                        <a href="#" onclick="navigateToRegion('Fish River Canyon'); return false;">Fish River Canyon</a>
+                        <a href="#" onclick="navigateToRegion('Luderitz'); return false;">Luderitz</a>
+                        <a href="#" onclick="navigateToRegion('Zambezi & Caprivi'); return false;">Zambezi & Caprivi</a>
+                        <a href="#" onclick="navigateToRegion('Botswana'); return false;">Botswana</a>
                     </div>
                 </div>
             </div>
@@ -576,7 +680,7 @@
             
             <a href="#" class="nav-link" id="nav-list-property" onclick="openLogin('List Your Property')" style="margin-right: 10px;">List Your Property</a>
             <button class="enquire-now-btn" onclick="openLogin('Agent Portal')">Agent Sign In</button>
-            <button class="search-icon-btn" onclick="document.getElementById('lodge-search').scrollIntoView({behavior: 'smooth', block: 'center'}); document.getElementById('lodge-search').focus();" title="Search for lodges...">
+            <button class="search-icon-btn" type="button" aria-label="Search for lodges" onclick="document.getElementById('lodge-search').scrollIntoView({behavior: 'smooth', block: 'center'}); document.getElementById('lodge-search').focus();" title="Search for lodges...">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="8"></circle>
                     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -603,21 +707,21 @@
             </div>
             
             <div class="search-grid">
-                <div>
-                    <input type="text" id="lodge-search" onkeyup="filterLodges()" onkeydown="if(event.key === 'Enter') handleLodgeSearchEnter()" placeholder="Search for a specific lodge or camp..." style="width: 100%; padding: 15px 25px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.1); font-family: var(--font-body); font-size: 1.05rem; color: var(--text-main); outline: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='var(--brand-accent)'; this.style.boxShadow='0 8px 25px rgba(201,108,40,0.15)';">
+                <div style="position: relative;">
+                    <input type="text" id="lodge-search" autocomplete="off" aria-label="Search for a specific lodge or camp" onkeyup="filterLodges(); showLodgeSuggestions(this.value)" onkeydown="if(event.key === 'Enter') { hideLodgeSuggestions(); handleLodgeSearchEnter(); }" onblur="setTimeout(hideLodgeSuggestions, 180)" placeholder="Search for a specific lodge or camp..." style="width: 100%; padding: 15px 25px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.1); font-family: var(--font-body); font-size: 1.05rem; color: var(--text-main); outline: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='var(--brand-accent)'; this.style.boxShadow='0 8px 25px rgba(201,108,40,0.15)'; showLodgeSuggestions(this.value);">
+                    <div id="lodge-suggestions" class="lodge-suggest-box"></div>
                 </div>
                 <div>
-                    <input type="text" id="region-search" onkeyup="filterRegions()" onkeydown="if(event.key === 'Enter') handleRegionSearchEnter()" placeholder="Search by region (e.g. Etosha, Namib)..." style="width: 100%; padding: 15px 25px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.1); font-family: var(--font-body); font-size: 1.05rem; color: var(--text-main); outline: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='var(--brand-accent)'; this.style.boxShadow='0 8px 25px rgba(201,108,40,0.15)';">
+                    <input type="text" id="region-search" aria-label="Search by region, for example Etosha or Namib" onkeyup="filterRegions()" onkeydown="if(event.key === 'Enter') handleRegionSearchEnter()" placeholder="Search by region (e.g. Etosha, Namib)..." style="width: 100%; padding: 15px 25px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.1); font-family: var(--font-body); font-size: 1.05rem; color: var(--text-main); outline: none; transition: all 0.3s ease; box-shadow: 0 5px 15px rgba(0,0,0,0.05);" onfocus="this.style.borderColor='var(--brand-accent)'; this.style.boxShadow='0 8px 25px rgba(201,108,40,0.15)';">
                 </div>
             </div>
         </div>
 
         <div class="swiper-container-wrapper">
-            <div class="swiper region-swiper">
-                <div class="swiper-wrapper">
-            
+            <div class="region-grid">
+
             <!-- REGION 1 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/sossusvlei.jpg');">
                     <h3>Sossusvlei & Namib</h3>
                 </div>
@@ -668,20 +772,8 @@
                 </div>
             </div>
 
-            <!-- REGION 2 -->
-            <div class="region-card swiper-slide">
-                <div class="region-image" style="background-image: url('images/regions/etosha.jpg');">
-                    <h3>Etosha National Park</h3>
-                </div>
-                <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Etosha Gateway')">Etosha Gateway<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Halali Resort')">Halali Resort<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Etosha King Nehale')">Etosha King Nehale<button class="lodge-btn">Rates</button></div>
-                </div>
-            </div>
-
             <!-- REGION 3 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/caprivi.jpg');">
                     <h3>Zambezi & Caprivi</h3>
                 </div>
@@ -722,7 +814,7 @@
             </div>
 
             <!-- REGION 4 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/damaraland.jpg');">
                     <h3>Damaraland</h3>
                 </div>
@@ -757,12 +849,11 @@
             </div>
 
             <!-- REGION 5 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/windhoek.jpg');">
                     <h3>Central Namibia</h3>
                 </div>
                 <div class="lodge-list">
-                    <div class="lodge-item" onclick="openLogin('Gabuse Guest House')">Gabuse Guest House<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Khorab Safari Lodge')">Khorab Safari Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Okonjima Plains Camp')">Okonjima Plains Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Okonjima Bush Camp')">Okonjima Bush Camp<button class="lodge-btn">Rates</button></div>
@@ -778,13 +869,9 @@
                     <div class="lodge-item" onclick="openLogin('Midgard Country Estate')">Midgard Country Estate<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Minen Hotel')">Minen Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Uris Safari Lodge')">Uris Safari Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Tsumeb Guesthouse')">Tsumeb Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Otjiwarongo Guesthouse')">Otjiwarongo Guesthouse<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('C\'est Si Bon Hotel')">C'est Si Bon Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Kamaku Guesthouse')">Kamaku Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Hadassa Guesthouse')">Hadassa Guesthouse<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Casa Forno Guesthouse')">Casa Forno Guesthouse<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Tsumeb Guesthouse Garden')">Tsumeb Guesthouse Garden<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Kupferquelle Resort')">Kupferquelle Resort<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Aloegrove Safari Lodge')">Aloegrove Safari Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Erongo Rocks')">Erongo Rocks<button class="lodge-btn">Rates</button></div>
@@ -793,7 +880,6 @@
                     <div class="lodge-item" onclick="openLogin('Ghaub')">Ghaub<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Ohorongo Game and Safari Lodge')">Ohorongo Game and Safari Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Ai Aiba Rock Painting Lodge')">Ai Aiba Rock Painting Lodge<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Desert Dune Safari')">Desert Dune Safari<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Etusis Lodge')">Etusis Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Evening Shade')">Evening Shade<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Hohenstein Lodge')">Hohenstein Lodge<button class="lodge-btn">Rates</button></div>
@@ -811,7 +897,7 @@
             </div>
 
             <!-- REGION 6 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/coast.jpg');">
                     <h3>Swakopmund</h3>
                 </div>
@@ -829,7 +915,6 @@
                     <div class="lodge-item" onclick="openLogin('Hotel Zum Kaiser')">Hotel Zum Kaiser<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Sea Breeze Guesthouse')">Sea Breeze Guesthouse<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Flamingo Villa Boutique Hotel')">Flamingo Villa Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Henties Bay Caravan Park')">Henties Bay Caravan Park<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Atlantic Villa')">Atlantic Villa<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Namib Guesthouse')">Namib Guesthouse<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Organic Stay')">Organic Stay<button class="lodge-btn">Rates</button></div>
@@ -845,7 +930,7 @@
             </div>
 
             <!-- REGION 7 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/sossusvlei.jpg');">
                     <h3>Skeleton Coast</h3>
                 </div>
@@ -859,7 +944,7 @@
             </div>
 
             <!-- REGION 8 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/etosha.jpg');">
                     <h3>West Etosha</h3>
                 </div>
@@ -869,7 +954,7 @@
             </div>
 
             <!-- REGION 9 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/caprivi.jpg');">
                     <h3>Epupa</h3>
                 </div>
@@ -882,7 +967,7 @@
             </div>
 
             <!-- REGION 10 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/damaraland.jpg');">
                     <h3>Kaokoland</h3>
                 </div>
@@ -900,7 +985,7 @@
             </div>
 
             <!-- REGION 11 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/south.jpg');">
                     <h3>Luderitz</h3>
                 </div>
@@ -909,13 +994,12 @@
                     <div class="lodge-item" onclick="openLogin('Kairos Cottage')">Kairos Cottage<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Island Cottage')">Island Cottage<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Luderitz Backpackers')">Luderitz Backpackers<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Shark Island Resort')">Shark Island Resort<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Alte Villa 2025')">Alte Villa 2025<button class="lodge-btn">Rates</button></div>
                 </div>
             </div>
 
             <!-- REGION 12 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/kalahari.jpg');">
                     <h3>Kalahari</h3>
                 </div>
@@ -934,7 +1018,6 @@
                     <div class="lodge-item" onclick="openLogin('Burgsdorf Guest Farm')">Burgsdorf Guest Farm<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Helmeringhausen Hotel')">Helmeringhausen Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Namibgrens Guest Farm')">Namibgrens Guest Farm<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Gibeon Folk Hotel')">Gibeon Folk Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Duwisib Guest Farm')">Duwisib Guest Farm<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Africa Safari Lodge')">Africa Safari Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Auob Country Lodge')">Auob Country Lodge<button class="lodge-btn">Rates</button></div>
@@ -948,7 +1031,7 @@
             </div>
 
             <!-- REGION 13 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/south.jpg');">
                     <h3>Fish River Canyon</h3>
                 </div>
@@ -972,7 +1055,7 @@
             </div>
 
             <!-- REGION 14 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/damaraland.jpg');">
                     <h3>Opuwo</h3>
                 </div>
@@ -984,7 +1067,7 @@
             </div>
 
             <!-- REGION 15 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/caprivi.jpg');">
                     <h3>Botswana</h3>
                 </div>
@@ -1001,18 +1084,18 @@
             </div>
 
             <!-- REGION 16 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/etosha.jpg');">
                     <h3>South Etosha</h3>
                 </div>
                 <div class="lodge-list">
+                    <div class="lodge-item" onclick="openLogin('Halali Resort')">Halali Resort<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Taleni Etosha Village')">Taleni Etosha Village<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Toshari Lodge')">Toshari Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Epacha Game Lodge & Spa')">Epacha Game Lodge & Spa<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Eagle Tented Lodge & Spa')">Eagle Tented Lodge & Spa<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Ongava Lodge')">Ongava Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Ongava Tented Camp')">Ongava Tented Camp<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Ongava Research Centre')">Ongava Research Centre<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Little Ongava')">Little Ongava<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Anderssons at Ongava')">Anderssons at Ongava<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Eldorado Guest Farm')">Eldorado Guest Farm<button class="lodge-btn">Rates</button></div>
@@ -1020,11 +1103,12 @@
             </div>
 
             <!-- REGION 17 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/etosha.jpg');">
                     <h3>East Etosha</h3>
                 </div>
                 <div class="lodge-list">
+                    <div class="lodge-item" onclick="openLogin('Etosha King Nehale')">Etosha King Nehale<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Onguma The Fort')">Onguma The Fort<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Onguma Bush Camp')">Onguma Bush Camp<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Onguma Tented Camp')">Onguma Tented Camp<button class="lodge-btn">Rates</button></div>
@@ -1044,7 +1128,7 @@
             </div>
 
             <!-- REGION 18 -->
-            <div class="region-card swiper-slide">
+            <div class="region-card">
                 <div class="region-image" style="background-image: url('images/regions/windhoek.jpg');">
                     <h3>Windhoek</h3>
                 </div>
@@ -1062,13 +1146,11 @@
                     <div class="lodge-item" onclick="openLogin('Avani Windhoek Hotel & Casino')">Avani Windhoek Hotel & Casino<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('River Crossing Lodge')">River Crossing Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Utopia Boutique Hotel')">Utopia Boutique Hotel<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Town Lodge Windhoek')">Town Lodge Windhoek<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Safari Court Hotel')">Safari Court Hotel<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Hotel Safari')">Hotel Safari<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Protea Hotel by Marriott Windhoek Furstenhof')">Protea Hotel by Marriott Windhoek Furstenhof<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Protea Hotel Thuringerhof')">Protea Hotel Thuringerhof<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('GocheGanas Nature Reserve')">GocheGanas Nature Reserve<button class="lodge-btn">Rates</button></div>
-                    <div class="lodge-item" onclick="openLogin('Naankuse Lodge')">Naankuse Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Omaanda')">Omaanda<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('N/a’an ku sê Lodge')">N/a’an ku sê Lodge<button class="lodge-btn">Rates</button></div>
                     <div class="lodge-item" onclick="openLogin('Voigtland Guesthouse')">Voigtland Guesthouse<button class="lodge-btn">Rates</button></div>
@@ -1082,11 +1164,7 @@
                 </div>
             </div>
 
-                </div>
             </div>
-            <!-- Navigation Arrows -->
-            <div class="swiper-button-next" style="color: var(--brand-accent); right: 0px;"></div>
-            <div class="swiper-button-prev" style="color: var(--brand-accent); left: 0px;"></div>
         </div>
 
         <!-- DYNAMIC SINGLE REGION DETAIL PAGE VIEW -->
@@ -1854,6 +1932,12 @@
         }
 
         .region-hero h1 {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            margin: 0;
             font-family: var(--font-head);
             font-size: 3.8rem;
             color: #fff;
@@ -3253,40 +3337,9 @@
 
 
     <script data-no-optimize="1">
-        let regionSwiper;
-        
-        document.addEventListener('DOMContentLoaded', () => {
-            const slideCount = document.querySelectorAll('.region-card').length;
-            const middleIndex = Math.floor(slideCount / 2);
-
-            regionSwiper = new Swiper('.region-swiper', {
-                effect: 'coverflow',
-                grabCursor: true,
-                centeredSlides: true,
-                slidesPerView: 'auto',
-                initialSlide: middleIndex,
-                simulateTouch: true,
-                touchRatio: 1.5,
-                resistanceRatio: 0.85,
-                coverflowEffect: {
-                    rotate: 15,
-                    stretch: 0,
-                    depth: 300,
-                    modifier: 1,
-                    slideShadows: false,
-                },
-                loop: false,
-                slideToClickedSlide: true,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                mousewheel: {
-                    forceToAxis: true,
-                },
-                keyboard: true
-            });
-        });
+        // Regions now render as an editorial grid (carousel retired).
+        // regionSwiper kept as null so existing guarded calls (slideTo/update) safely no-op.
+        let regionSwiper = null;
 
         // Global Property Mapping Arrays
         const olMap = {
@@ -5308,7 +5361,456 @@
             return `A luxury safari lodge situated in ${regionName}, offering breath-taking wilderness views, immersive activities, and premium comforts.`;
         }
 
+        // Auto-generated from Wetu JSON (all Namibia + Botswana; precise unique matching)
+        const regionImageMap = {
+            "Sossusvlei & Namib": "https://wetu.com/imageHandler/c1920x1080/468/1779964248133_shutterstock_2498662927-cropped.jpg?fmt=jpg",
+            "Zambezi & Caprivi": "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-istock-5255684771.jpg?fmt=jpg",
+            "Damaraland": "https://wetu.com/imageHandler/c1920x1080/37924/shutterstock_2237930163.jpg?fmt=jpg",
+            "Central Namibia": "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-1684710619.jpg?fmt=jpg",
+            "Swakopmund": "https://wetu.com/imageHandler/c1920x1080/471/1779105178059_istock-1131225700-cropped.jpg?fmt=jpg",
+            "Skeleton Coast": "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-94973656.jpg?fmt=jpg",
+            "West Etosha": "https://wetu.com/imageHandler/c1920x1080/48367/istock-10775319201.jpg?fmt=jpg",
+            "Epupa": "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-istock-470944390.jpg?fmt=jpg",
+            "Kaokoland": "https://wetu.com/imageHandler/c1920x1080/747/kunene-shutterstock-110246102.jpg?fmt=jpg",
+            "Luderitz": "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-507074842.jpg?fmt=jpg",
+            "Kalahari": "https://wetu.com/imageHandler/c1920x1080/52159/kalahari_namibia-shutterstock-2044728560.jpg?fmt=jpg",
+            "Fish River Canyon": "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-506653007.jpg?fmt=jpg",
+            "Opuwo": "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-brytta-istock-1266105290.jpg?fmt=jpg",
+            "Botswana": "https://wetu.com/imageHandler/c1920x1080/479/istock-648362800.jpg?fmt=jpg",
+            "South Etosha": "https://wetu.com/imageHandler/c1920x1080/123643/etosha_5.jpg?fmt=jpg",
+            "East Etosha": "https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg",
+            "Windhoek": "https://wetu.com/imageHandler/c1920x1080/1548/windhoek.jpg?fmt=jpg"
+        };
+
+        const regionPhotosMap = {
+            "Sossusvlei & Namib": [
+                        "https://wetu.com/imageHandler/c1920x1080/468/1779964248133_shutterstock_2498662927-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/468/1779965357069_shutterstock_2249894977-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/468/1779966152571_istock-2219490020-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/468/1779964248125_istock-530427909-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/468/1779964248132_shutterstock_1811159827-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/468/1779964248132_shutterstock_1628675203-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1492/1739431795142_iStock-1611548490.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1492/1739431896880_iStock-1317536673.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1492/1739431911447_shutterstock_2401879297.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1492/1739431911448_shutterstock_2528902535.jpg?fmt=jpg"
+            ],
+            "Zambezi & Caprivi": [
+                        "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-istock-5255684771.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-shutterstock-5233150991.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-istock-4911463401.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-shutterstock-14412063471.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-istock-4591970431.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-shutterstock-14418194541.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/218386/divundu_-artush-123rf40323660.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/218386/divundu_-owencarnes-123rf3991271.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/218386/divundu_-estivillml-123rf27096917.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/218386/divundu_-hecke-123rf119756982.jpg?fmt=jpg"
+            ],
+            "Damaraland": [
+                        "https://wetu.com/imageHandler/c1920x1080/37924/shutterstock_2237930163.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37924/istock-186569201.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37924/istock-1762851540.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37924/istock-856472458.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37924/istock-1754428093.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/37924/shutterstock_330764948.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1620/palmwag-istock-466867612.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1620/palmwag-istock-503419952.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1620/palmwag-istock-466333544.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1620/palmwag-istock-503325842.jpg?fmt=jpg"
+            ],
+            "Central Namibia": [
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-1684710619.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-506741029.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-1520231456.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-256889509.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-1764748988.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-1765559204.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-istock-1296506467.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-379221094.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-150565049.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48368/erongo_mountains-shutterstock-1901064793.jpg?fmt=jpg"
+            ],
+            "Swakopmund": [
+                        "https://wetu.com/imageHandler/c1920x1080/471/1776243203221shutterstock64485631-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/471/1776243203243shutterstock1102989359-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/471/1779105178059_istock-1131225700-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/471/1776244539780shutterstock1749660185-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/471/1776243203240shutterstock190369190-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/471/1779105693546_istock-2250138429-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1555/1762159491726istock-654167438-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1555/1762159491727istock-1137480190-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1555/1762159491719istock-537018603-cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1555/walvis_bay-istock-1330084555.jpg?fmt=jpg"
+            ],
+            "Skeleton Coast": [
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-94973656.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-1313232645.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-504179820.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-174687541.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-94975018.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-shutterstock-174257795.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-484339254.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-94973661.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-1166050911.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/470/skeleton_coast-istock-154282690.jpg?fmt=jpg"
+            ],
+            "West Etosha": [
+                        "https://wetu.com/imageHandler/c1920x1080/48367/istock-10775319201.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48367/shutterstock_11895380861.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48367/istock-5163760391.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48367/istock-9021687161.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48367/istock-1773797671.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48367/istock-8388955641.jpg?fmt=jpg"
+            ],
+            "Epupa": [
+                        "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-istock-470944390.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-istock-471052630.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-istock-495240971.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-istock-150931700.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-istock-1253442373.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1629/epupa_falls-shutterstock-1838209246.jpg?fmt=jpg"
+            ],
+            "Kaokoland": [
+                        "https://wetu.com/imageHandler/c1920x1080/747/kunene-shutterstock-110246102.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/747/kunene-shutterstock-1324409681.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/747/kunene-istock-1147939598.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/747/kunene-shutterstock-1696369930.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/747/kunene-shutterstock-1801224829.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/747/kunene-istock-1281584116.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1623/sesfontein-istock-1282665075.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1623/sesfontein-istock-1282665627.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1623/sesfontein-istock-1282663306.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1623/sesfontein-istock-1280337394.jpg?fmt=jpg"
+            ],
+            "Luderitz": [
+                        "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-507074842.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-147315587.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-114439653.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-114449034.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-670274104.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/473/luderitz-istock-174951107.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/350228/shutterstock_713857303.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/350228/shutterstock_111184850.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/350228/shutterstock_1619313415.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/350228/shutterstock_1219317760.jpg?fmt=jpg"
+            ],
+            "Kalahari": [
+                        "https://wetu.com/imageHandler/c1920x1080/52159/kalahari_namibia-shutterstock-2044728560.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/52159/kalahari_namibia-shutterstock-2119631171.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/52159/kalahari_namibia-shutterstock-1706195353.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/52159/kalahari_namibia-istock-1296492842.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/52159/1768825632217shutterstock1849133428cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/52159/1768826674281istock-614878040cropped.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/52159/kalahari_namibia-shutterstock-2095575364.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/257973/intu_afrika_kalahari_game_reserve-istock-13177826271.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/257973/intu_afrika_kalahari_game_reserve-shutterstock-1957440559.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/257973/intu_afrika_kalahari_game_reserve-istock-10060887661.jpg?fmt=jpg"
+            ],
+            "Fish River Canyon": [
+                        "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-506653007.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-136901445.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-652338692.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-610541690.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-185867082.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/472/fish_river_canyon-istock-639206242.jpg?fmt=jpg"
+            ],
+            "Opuwo": [
+                        "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-brytta-istock-1266105290.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-_claudio_soldi-shutterstock_1154061973.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-_2630ben-shutterstock_380448217.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-r.m._nunes-istock-1334866620.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-brytta-_istock-1265218476.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1634/opuwo_-gaston_piccinetti-shutterstock_1395647999.jpg?fmt=jpg"
+            ],
+            "Botswana": [
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-648362800.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-1436675927.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-148484081.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-1072693370.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-184920482.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-1553467715.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-480880222.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-96367887.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-139735741.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/479/istock-484346610.jpg?fmt=jpg"
+            ],
+            "South Etosha": [
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_5.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_10.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_9.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_8.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_11.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_6.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/123643/etosha_7.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1602/oevans-8859-413.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1602/oevans-5605.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1602/oevans-3327.jpg?fmt=jpg"
+            ],
+            "East Etosha": [
+                        "https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_1769304110.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_724941703.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_2477278045.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_iStock-1171567802.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/72298/onguma_waterhole_1969.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/72298/onguma_wildlife_1180.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/72298/onguma_game_drives_1068.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/72298/game_drives_at_onguma_1285.jpg?fmt=jpg"
+            ],
+            "Windhoek": [
+                        "https://wetu.com/imageHandler/c1920x1080/1548/windhoek.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1548/windhoek_5.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1548/windhoek_3.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1548/windhoek_1.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1548/windhoek_21.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/1548/windhoek21.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/139884/greater_windhoek_-marcpo-_istock-481666538.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/139884/greater_windhoek_-leamus-_istock-841253396.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/139884/greater_windhoek_-atosan-_istock-1224371200.jpg?fmt=jpg",
+                        "https://wetu.com/imageHandler/c1920x1080/139884/greater_windhoek_-simoneemanphotography-_istock-850897624.jpg?fmt=jpg"
+            ]
+        };
+
+        const lodgeImageMap = {
+            "Ababis Guest Farm": "https://wetu.com/imageHandler/c1920x1080/49099/1733156321134_image-(1).jpeg?fmt=jpg",
+            "Africa Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/29160/1734934343971_Intro-asl.jpeg?fmt=jpg",
+            "Agama Lodge": "https://wetu.com/imageHandler/c1920x1080/27404/1777649135060agama-general-gallery-2.jpg?fmt=jpg",
+            "Ai Aiba Rock Painting Lodge": "https://wetu.com/imageHandler/c1920x1080/10519/1777272480089dsc07471.jpg?fmt=jpg",
+            "Aloegrove Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/56506/2013-05-07__diego.jpg?fmt=jpg",
+            "Alte Kalkofen Lodge": "https://wetu.com/imageHandler/c1920x1080/29700/1779468261372_759214.jpg?fmt=jpg",
+            "Alte Villa 2025": "https://wetu.com/imageHandler/c1920x1080/68363/1777545379837alte-villa-klippenweg-viewjpg.jpg?fmt=jpg",
+            "Anderssons at Ongava": "https://wetu.com/imageHandler/c1920x1080/8004/anderssons_05-19_-94srgb__dana_allen.jpg?fmt=jpg",
+            "Kalahari Anib Lodge": "https://wetu.com/imageHandler/c1920x1080/31966/anib2016-8826.jpg?fmt=jpg",
+            "Arebbusch Travel Lodge": "https://wetu.com/imageHandler/c1920x1080/28135/1777633823955arebbusch-travel-lodge-quality-overnight-bed-and-breakfast-accommodation-restaurant-and-pizzeria-and-conference-and-function-facilities-in-windhoek.jpg?fmt=jpg",
+            "Atlantic Villa": "https://wetu.com/imageHandler/c1920x1080/32745/a-vila__2016_17.jpg?fmt=jpg",
+            "Auas Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/34177/auas_mountains_and_impala.jpg?fmt=jpg",
+            "Auob Country Lodge": "https://wetu.com/imageHandler/c1920x1080/10514/1740141708461_Auob-Lodge--11-09-2024-(6.1).jpeg?fmt=jpg",
+            "Avani Windhoek Hotel & Casino": "https://wetu.com/imageHandler/c1920x1080/1544/1780562959173_avani_windhoek_hotel_and_casino_exterior_view_hero_image_building_at_night_with_purple_lights--1-.jpg?fmt=jpg",
+            "Bagatelle Kalahari Game Ranch": "https://wetu.com/imageHandler/c1920x1080/20404/dscf2589.jpg?fmt=jpg",
+            "Bahnhof Hotel Aus": "https://wetu.com/imageHandler/c1920x1080/48135/facade.jpg?fmt=jpg",
+            "Barkhan Dune Retreat": "https://wetu.com/imageHandler/c1920x1080/10491/1779090519443_panorama_01.jpg?fmt=jpg",
+            "Beach Hotel Swakopmund": "https://wetu.com/imageHandler/c1920x1080/20376/ext5.jpg?fmt=jpg",
+            "Beach Lodge": "https://wetu.com/imageHandler/c1920x1080/295356/2.jpg?fmt=jpg",
+            "Belvedere Boutique Hotel": "https://wetu.com/imageHandler/c1920x1080/43779/1738333183921_8433-resize.jpg?fmt=jpg",
+            "Brigadoon Boutique Guesthouse": "https://wetu.com/imageHandler/c1920x1080/297084/brigadoon-boutique-gueasthouse-print-12042023-010.jpg?fmt=jpg",
+            "Burgsdorf Guest Farm": "https://wetu.com/imageHandler/c1920x1080/149917/5.jpg?fmt=jpg",
+            "Burning Shore Lodge": "https://wetu.com/imageHandler/c1920x1080/16116/DSC_8022.jpg?fmt=jpg",
+            "Camelthorn Kalahari Lodge": "https://wetu.com/imageHandler/c1920x1080/20344/1778079030577__dsc8914.jpg?fmt=jpg",
+            "Camp Kipwe": "https://wetu.com/imageHandler/c1920x1080/10498/camp_kipwe_-_aerial_view_1.jpg?fmt=jpg",
+            "Camp Kwando": "https://wetu.com/imageHandler/c1920x1080/19533/1.jpg?fmt=jpg",
+            "Camp Okavango": "https://wetu.com/imageHandler/c1920x1080/10099/1732260849229_1727442045_1700166832_Camp-Okavango---Main-Area-2023-31.jpg?fmt=jpg",
+            "Canyon Village": "https://wetu.com/imageHandler/c1920x1080/1703/swimm.jpg?fmt=jpg",
+            "Canyon Roadhouse": "https://wetu.com/imageHandler/c1920x1080/4033/roadhouse2_2.jpg?fmt=jpg",
+            "Cape Cross Lodge": "https://wetu.com/imageHandler/c1920x1080/10506/1763402311312lodgeentrance1.jpg?fmt=jpg",
+            "Casa Forno Guesthouse": "https://wetu.com/imageHandler/c1920x1080/60145/casafor1.jpg?fmt=jpg",
+            "Chobe Game Lodge": "https://wetu.com/imageHandler/c1920x1080/9828/cgl-jun18-decks-10.jpg?fmt=jpg",
+            "Chobe Princess": "https://wetu.com/imageHandler/c1920x1080/26641/chobe_princess_at_serondela_mooring_12.jpg?fmt=jpg",
+            "Chobe River Camp": "https://wetu.com/imageHandler/c1920x1080/28492/chobe_.jpg?fmt=jpg",
+            "Chobe Savannah Lodge": "https://wetu.com/imageHandler/c1920x1080/19538/1762871606060riverside-breakfast-1.jpg?fmt=jpg",
+            "Cornerstone Guesthouse": "https://wetu.com/imageHandler/c1920x1080/21613/Garden 1.11.2008 0091.jpg?fmt=jpg",
+            "Damara Mopane Lodge": "https://wetu.com/imageHandler/c1920x1080/24085/damara_mopane9.jpg?fmt=jpg",
+            "Lodge Damaraland": "https://wetu.com/imageHandler/c1920x1080/312689/img_e18011.jpg?fmt=jpg",
+            "Desert Camp": "https://wetu.com/imageHandler/c1920x1080/10481/1772538188158desertcampunitmain.jpg?fmt=jpg",
+            "Desert Homestead Lodge": "https://wetu.com/imageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg?fmt=jpg",
+            "Desert Quiver Camp": "https://wetu.com/imageHandler/c1920x1080/54152/dqc_layout.jpg?fmt=jpg",
+            "Desert Whisper": "https://wetu.com/imageHandler/c1920x1080/192014/desert-whisper-layout.jpg?fmt=jpg",
+            "Dornhuegel Guestfarm": "https://wetu.com/imageHandler/c1920x1080/35787/dornhugel_guestfarm-resdest-namibia-grootfontein-north-east-sunrise.jpg?fmt=jpg",
+            "Wilderness Doro Nawas": "https://wetu.com/imageHandler/c1920x1080/1637/1758190151287doronawas-namibia07-25n-rix20.jpg?fmt=jpg",
+            "Driftwood Guesthouse": "https://wetu.com/imageHandler/c1920x1080/104036/driftwood-11.jpg?fmt=jpg",
+            "Droombos Estate": "https://wetu.com/imageHandler/c1920x1080/394757/1743159060003_4.jpg?fmt=jpg",
+            "Duwisib Guest Farm": "https://wetu.com/imageHandler/c1920x1080/18614/2.png?fmt=jpg",
+            "Elegant Desert Lodge": "https://wetu.com/imageHandler/c1920x1080/21614/0831.jpg?fmt=jpg",
+            "Emanya at Etosha": "https://wetu.com/imageHandler/c1920x1080/32748/1732879182778_EMANYA_0046_201012_Emanya_395davidrogers-1024x681.png?fmt=jpg",
+            "Epacha Game Lodge & Spa": "https://wetu.com/imageHandler/c1920x1080/10465/epacha_2018_0001.jpg?fmt=jpg",
+            "Epako Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/46253/4870.jpg?fmt=jpg",
+            "Omarunga Epupa Falls Camp": "https://wetu.com/imageHandler/c1920x1080/34701/omarunga-scenery21.jpg?fmt=jpg",
+            "Erongo Plateau Camp": "https://wetu.com/imageHandler/c1920x1080/37259/camp2.jpg?fmt=jpg",
+            "Erongo Rocks": "https://wetu.com/imageHandler/c1920x1080/186518/1759854836212resizecomimg8264-1-.jpeg?fmt=jpg",
+            "Etendeka Mountain Camp": "https://wetu.com/imageHandler/c1920x1080/20352/img_e8397.jpg?fmt=jpg",
+            "Etosha King Nehale": "https://wetu.com/imageHandler/c1920x1080/197575/dsc_1336-hdr_ekn_boma24.jpg?fmt=jpg",
+            "Etusis Lodge": "https://wetu.com/imageHandler/c1920x1080/27393/_k2r2094.jpg?fmt=jpg",
+            "Evening Shade": "https://wetu.com/imageHandler/c1920x1080/68250/img_9415_img_9415_hdr.jpeg?fmt=jpg",
+            "Fish River Lodge": "https://wetu.com/imageHandler/c1920x1080/21616/1759400018062mg3394-panorama.jpg?fmt=jpg",
+            "Forgotten Valley (Ekoto Camp)": "https://wetu.com/imageHandler/c1920x1080/406772/1761301431593dusk-property-and-landscape-11.jpg?fmt=jpg",
+            "Frans Indongo Lodge": "https://wetu.com/imageHandler/c1920x1080/15438/04.jpg?fmt=jpg",
+            "Galton House": "https://wetu.com/imageHandler/c1920x1080/28333/galton-house.jpg?fmt=jpg",
+            "Garas Park": "https://wetu.com/imageHandler/c1920x1080/51322/garasp2.jpg?fmt=jpg",
+            "Ghaub": "https://wetu.com/imageHandler/c1920x1080/94535/campsite_02_pitch_table_view_gb_16-02_dropbox.jpg?fmt=jpg",
+            "GocheGanas Nature Reserve": "https://wetu.com/imageHandler/c1920x1080/135496/1779276530386_gocheganas_fauna_008.jpg?fmt=jpg",
+            "Goibib Mountain Lodge": "https://wetu.com/imageHandler/c1920x1080/4085/goibib_guest_farm_property-building.jpg?fmt=jpg",
+            "Greenfire Desert Lodge": "https://wetu.com/imageHandler/c1920x1080/35642/drifters_swakopmund_lodge.jpg?fmt=jpg",
+            "Grootberg Lodge": "https://wetu.com/imageHandler/c1920x1080/26228/1749024647398_IMG_1460.jpg?fmt=jpg",
+            "Guest Farm Kiripotib": "https://wetu.com/imageHandler/c1920x1080/29701/img_7049opt2.jpeg?fmt=jpg",
+            "Hakusembe River Lodge": "https://wetu.com/imageHandler/c1920x1080/10483/hakusembe3.jpg?fmt=jpg",
+            "Halali Resort": "https://wetu.com/imageHandler/c1920x1080/1589/nwr-halali-camp-honeymoon-suite-046-1024x683.jpg?fmt=jpg",
+            "Hansa Hotel": "https://wetu.com/imageHandler/c1920x1080/1527/6.jpg?fmt=jpg",
+            "Harnas Wildlife Foundation": "https://wetu.com/imageHandler/c1920x1080/57705/1780566357377_901392_27c506d76ccf474cbcb6486b147dc338-mv2.jpg?fmt=jpg",
+            "Haus Mopanie": "https://wetu.com/imageHandler/c1920x1080/179309/front_of_haus_mopanie_32.jpg?fmt=jpg",
+            "Heinitzburg Boutique Hotel": "https://wetu.com/imageHandler/c1920x1080/15431/1747919269014_Castle-Garden-Terrace-Night.jpeg?fmt=jpg",
+            "Helmeringhausen Hotel": "https://wetu.com/imageHandler/c1920x1080/46485/11.jpg?fmt=jpg",
+            "Hilton Windhoek": "https://wetu.com/imageHandler/c1920x1080/24636/1750429309274_wdhhihi-property-exterior3-2-.jpg?fmt=jpg",
+            "Hoada Campsite": "https://wetu.com/imageHandler/c1920x1080/32863/1759838738137184129--1-.jpg?fmt=jpg",
+            "Hoanib Elephant Camp": "https://wetu.com/imageHandler/c1920x1080/405636/1751449376420_Nam_Hoanib-Elephant-Camp_Main-Area-view-from-pool2.jpeg?fmt=jpg",
+            "Hoanib Valley Camp": "https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg",
+            "Hobatere Lodge": "https://wetu.com/imageHandler/c1920x1080/10417/amazing_planet_filip_kulisev_elephant3.jpg?fmt=jpg",
+            "Hohenstein Lodge": "https://wetu.com/imageHandler/c1920x1080/10419/1751631887718_Pool-and-Scenery-Hohenstein-Lodge(1).jpg?fmt=jpg",
+            "Hohewarte Guestfarm": "https://wetu.com/imageHandler/c1920x1080/56520/hohewarte_gf_2_2016_04_12_06_36_50_utc.jpg?fmt=jpg",
+            "Hoodia Lodge": "https://wetu.com/imageHandler/c1920x1080/20160/hdl_19_rgb_v1.jpg?fmt=jpg",
+            "Hotel Pension A la Mer": "https://wetu.com/imageHandler/c1920x1080/19536/1775133830600gal-hotel-1.jpg?fmt=jpg",
+            "Hotel Thule": "https://wetu.com/imageHandler/c1920x1080/34676/1775052872569arial.png?fmt=jpg",
+            "Hotel Zum Kaiser": "https://wetu.com/imageHandler/c1920x1080/26808/hzk_frontview1.jpg?fmt=jpg",
+            "Huab Lodge": "https://wetu.com/imageHandler/c1920x1080/20370/huab_lodge_main_area_7.jpg?fmt=jpg",
+            "Ichingo Chobe River Lodge": "https://wetu.com/imageHandler/c1920x1080/24650/ichingo_chobe_river_lodge_exterior_andrew_morgan_9849.jpg?fmt=jpg",
+            "Immenhof Guest Farm": "https://wetu.com/imageHandler/c1920x1080/43318/Pool_New.JPG?fmt=jpg",
+            "Island Cottage": "https://wetu.com/imageHandler/c1920x1080/10527/72a1ae_bb34d5b426dd496a9f22f9869b862cf9mv2.jpg?fmt=jpg",
+            "Jackalberry Tented Camp": "https://wetu.com/imageHandler/c1920x1080/62180/jackalberry-tower.jpg?fmt=jpg",
+            "Kalahari Bush Breaks": "https://wetu.com/imageHandler/c1920x1080/24263/1733131043525_2.jpg?fmt=jpg",
+            "Kalahari Farmhouse": "https://wetu.com/imageHandler/c1920x1080/24194/view_of_the_rooms.jpg?fmt=jpg",
+            "Zebra Kalahari Lodge": "https://wetu.com/imageHandler/c1920x1080/26227/1778059741075_e3q1mj4e.jpeg?fmt=jpg",
+            "Kalahari Red Dunes Lodge": "https://wetu.com/imageHandler/c1920x1080/24103/img_3653.jpg?fmt=jpg",
+            "Kamaku Guesthouse": "https://wetu.com/imageHandler/c1920x1080/56522/dsc_5821_1280x915.jpg?fmt=jpg",
+            "Kaoko Mopane Lodge": "https://wetu.com/imageHandler/c1920x1080/28970/dji_0036.jpg?fmt=jpg",
+            "Kapika Waterfall Lodge": "https://wetu.com/imageHandler/c1920x1080/34677/1733676837440_entrance_kwl04d6b3d.jpg?fmt=jpg",
+            "Kashana Namibia": "https://wetu.com/imageHandler/c1920x1080/27394/Kashana-Namibia-Lodge-Guesthouse-Resdest-Omaruru-Erongo-DeluxeBungalowExterior2.jpg?fmt=jpg",
+            "Kayova River Lodge": "https://wetu.com/imageHandler/c1920x1080/68288/ds5a1325.jpg?fmt=jpg",
+            "Khowarib Lodge": "https://wetu.com/imageHandler/c1920x1080/28955/Khowarib_Lodge_from_cave.jpg?fmt=jpg",
+            "Wilderness Kulala Desert Lodge": "https://wetu.com/imageHandler/c1920x1080/1520/1738592251695_KulalaDL_MainAreas_0724_TC_082.jpg?fmt=jpg",
+            "Kupferquelle Resort": "https://wetu.com/imageHandler/c1920x1080/32749/1.jpg?fmt=jpg",
+            "Kwessi Dunes": "https://wetu.com/imageHandler/c1920x1080/202780/1772625306108namibiakwessi-dunesaerial-2.jpg?fmt=jpg",
+            "La Rochelle Lodge": "https://wetu.com/imageHandler/c1920x1080/56526/175887678941313-4.jpg?fmt=jpg",
+            "Lapa Lange Game Lodge": "https://wetu.com/imageHandler/c1920x1080/37212/01a_aerial_view3.jpg?fmt=jpg",
+            "Le Mirage Resort & Spa": "https://wetu.com/imageHandler/c1920x1080/10424/20-oasis-building.jpg?fmt=jpg",
+            "Lianshulu Bush Lodge": "https://wetu.com/imageHandler/c1920x1080/46791/1779285752711_lianshulu-lodge-and-lianshulu-bush-lodge15.jpg?fmt=jpg",
+            "Lianshulu Lodge": "https://wetu.com/imageHandler/c1920x1080/10996/1744805650959_6-(1).jpg?fmt=jpg",
+            "Little Kulala": "https://wetu.com/imageHandler/c1920x1080/1519/17_little_kulala_red_sand_dunes_0374.jpg?fmt=jpg",
+            "Ongava Lodge": "https://wetu.com/imageHandler/c1920x1080/8002/oevans-3344-1511.jpg?fmt=jpg",
+            "Little Sossus Lodge": "https://wetu.com/imageHandler/c1920x1080/10513/1749725312888_Screenshot-2025-06-12-124640.png?fmt=jpg",
+            "Luderitz Backpackers": "https://wetu.com/imageHandler/c1920x1080/89703/dsc_14872.jpg?fmt=jpg",
+            "Luderitz Nest Hotel": "https://wetu.com/imageHandler/c1920x1080/10408/17678883594722024-lnh-jetty-at-night-primary.jpg?fmt=jpg",
+            "Mahangu Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/10412/1732879406961_30.jpg?fmt=jpg",
+            "Mango Guesthouse": "https://wetu.com/imageHandler/c1920x1080/125327/img_4123_img_4123_hdr.jpeg?fmt=jpg",
+            "Mazambala Island Lodge": "https://wetu.com/imageHandler/c1920x1080/11145/3.jpg?fmt=jpg",
+            "Midgard Country Estate": "https://wetu.com/imageHandler/c1920x1080/29059/midgard_112.jpg?fmt=jpg",
+            "Minen Hotel": "https://wetu.com/imageHandler/c1920x1080/46794/1741702941577_7-1.jpg?fmt=jpg",
+            "Mokuti Etosha": "https://wetu.com/imageHandler/c1920x1080/10525/_clb8317.jpg?fmt=jpg",
+            "Moon Mountain Lodge": "https://wetu.com/imageHandler/c1920x1080/33551/1740838386767_Panoramc-2.jpg?fmt=jpg",
+            "Mount Etjo Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/39216/bedroomcompr.jpg?fmt=jpg",
+            "Mowani Campsite": "https://wetu.com/imageHandler/c1920x1080/59508/2.jpg?fmt=jpg",
+            "Mowani Mountain Camp": "https://wetu.com/imageHandler/c1920x1080/15393/201204_mowani_1223.jpg?fmt=jpg",
+            "Mushara Bush Camp": "https://wetu.com/imageHandler/c1920x1080/20477/0_mushara_bush_camp_tented_bungalows_51.jpg?fmt=jpg",
+            "Villa Mushara": "https://wetu.com/imageHandler/c1920x1080/37413/0_villa_mushara_4.jpg?fmt=jpg",
+            "Mushara Outpost": "https://wetu.com/imageHandler/c1920x1080/8722/0_mushara_outpost_-_exteriour_1_-_copy.jpg?fmt=jpg",
+            "Namib Dune Star Camp": "https://wetu.com/imageHandler/c1920x1080/39214/namib_dune_star_camp19.jpg?fmt=jpg",
+            "Namib Guesthouse": "https://wetu.com/imageHandler/c1920x1080/181182/namib_camping2go_11.jpg?fmt=jpg",
+            "Namib Outpost": "https://wetu.com/imageHandler/c1920x1080/50215/namib-outpost-print-01042023-012.jpg?fmt=jpg",
+            "Namib Sky Balloon Safaris": "https://wetu.com/imageHandler/c1920x1080/24373/namib_sky_balloon_safaris_40.jpg?fmt=jpg",
+            "Namibgrens Guest Farm": "https://wetu.com/imageHandler/c1920x1080/10398/2.jpg?fmt=jpg",
+            "Namushasha River Camping2go": "https://wetu.com/imageHandler/c1920x1080/213177/main_buildings-0890.jpg?fmt=jpg",
+            "Namutoni Resort": "https://wetu.com/imageHandler/c1920x1080/1593/screenshot_2024-09-18_105927.png?fmt=jpg",
+            "Ndhovu Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/10411/ndhovu_37_lodge.jpg?fmt=jpg",
+            "Ngandu Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/10407/swimming_pool.jpg?fmt=jpg",
+            "Nkasa Linyanti": "https://wetu.com/imageHandler/c1920x1080/405628/1780312765844_namibia_nkasa-linyanti_camp-exterior-2.jpg?fmt=jpg",
+            "Nkasa Lupala Tented Lodge": "https://wetu.com/imageHandler/c1920x1080/27397/1744623359673_2025-More-Nkasa-update-Photos-(2).jpg?fmt=jpg",
+            "Nooishof": "https://wetu.com/imageHandler/c1920x1080/341888/nooishof_-_sinclair_nature_reserve_111.jpg?fmt=jpg",
+            "Norotshama River Resort": "https://wetu.com/imageHandler/c1920x1080/11014/17756332767012norotshama-184-1920w.jpg?fmt=jpg",
+            "Ntunda Lodge": "https://wetu.com/imageHandler/c1920x1080/197540/img_21141.jpeg?fmt=jpg",
+            "Nunda River Lodge": "https://wetu.com/imageHandler/c1920x1080/10448/dji_0520.jpg?fmt=jpg",
+            "Ohange Lodge": "https://wetu.com/imageHandler/c1920x1080/27395/ohange-namibia-lodge-resdest-otavi-tsumeb-mainbuilding3.jpg?fmt=jpg",
+            "Ohorongo Game and Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/266558/ohorongo_june24_lowres_1-95.jpg?fmt=jpg",
+            "Okahandja Country Hotel": "https://wetu.com/imageHandler/c1920x1080/10568/11.jpg?fmt=jpg",
+            "Okahirongo Elephant Lodge": "https://wetu.com/imageHandler/c1920x1080/15331/imgonline-com-ua-compresstosize-fz8kvjlkv5uc.jpg?fmt=jpg",
+            "Okonjima Luxury Bush Camp": "https://wetu.com/imageHandler/c1920x1080/8726/okonjima_nature_reserve_-_photo_credit_yasinkirsch_7.jpeg?fmt=jpg",
+            "Okonjima Bush Suite": "https://wetu.com/imageHandler/c1920x1080/46848/okonjima_bush_suite_namibia_3.jpg?fmt=jpg",
+            "Okonjima Plains Camp": "https://wetu.com/imageHandler/c1920x1080/8727/catalogue_okonjima_plains_camp_veranda_-_picture_crew10_2.jpg?fmt=jpg",
+            "Okonjima Villa": "https://wetu.com/imageHandler/c1920x1080/20476/1779612729888_okonjima---african-villa---may-2026--leopardeyephotography--12-.jpg?fmt=jpg",
+            "Olive Grove Guesthouse": "https://wetu.com/imageHandler/c1920x1080/8005/olive_grove-39.jpg?fmt=jpg",
+            "Omaanda": "https://wetu.com/imageHandler/c1920x1080/137613/omaanda_-_hut_3_-__zannier_hotels_1.jpg?fmt=jpg",
+            "Ondekaremba Guest Farm": "https://wetu.com/imageHandler/c1920x1080/32780/1767701700316ondekaremba-desktop.jpg?fmt=jpg",
+            "Ondjamba Hills": "https://wetu.com/imageHandler/c1920x1080/329877/ohl-1.jpg?fmt=jpg",
+            "Ondudu Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/249634/175990701902320250717071056.jpg?fmt=jpg",
+            "Onguma Bush Camp": "https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg",
+            "Onguma Camp Kala": "https://wetu.com/imageHandler/c1920x1080/285579/onguma_camp_kala_frontal_view_2.jpg?fmt=jpg",
+            "Onguma Leadwood Campsite": "https://wetu.com/imageHandler/c1920x1080/115364/6616778.jpg?fmt=jpg",
+            "Onguma Tamboti Campsite": "https://wetu.com/imageHandler/c1920x1080/42562/201604_aoba_0615.jpg?fmt=jpg",
+            "Onguma Tented Camp": "https://wetu.com/imageHandler/c1920x1080/8718/onguma_tented_camp_waterhole_view.jpg?fmt=jpg",
+            "Onguma The Fort": "https://wetu.com/imageHandler/c1920x1080/8716/201807_onguma_608.jpg?fmt=jpg",
+            "Opuwo Country Lodge": "https://wetu.com/imageHandler/c1920x1080/28950/20220804_192246.jpg?fmt=jpg",
+            "Organic Stay": "https://wetu.com/imageHandler/c1920x1080/32751/5j8a1268.jpg?fmt=jpg",
+            "Oyster Box Guesthouse": "https://wetu.com/imageHandler/c1920x1080/56540/1742289131507_Screenshot-2025-03-18-111148.png?fmt=jpg",
+            "Palmwag Lodge": "https://wetu.com/imageHandler/c1920x1080/1622/dsc_7815.jpg?fmt=jpg",
+            "Pelican Point Lodge": "https://wetu.com/imageHandler/c1920x1080/32346/Arial View of Pelican Point Lodge.jpg?fmt=jpg",
+            "Popa Falls Resort": "https://wetu.com/imageHandler/c1920x1080/10456/Popa-Falls.jpg?fmt=jpg",
+            "Protea Hotel Walvis Bay": "https://wetu.com/imageHandler/c1920x1080/418788/1762351372350pr-wvbwa-hotel-exterior-28456classic-hor.jpg?fmt=jpg",
+            "Protea Hotel by Marriott Windhoek Furstenhof": "https://wetu.com/imageHandler/c1920x1080/16066/DSC_7405.jpg?fmt=jpg",
+            "River Crossing Lodge": "https://wetu.com/imageHandler/c1920x1080/21619/17733062458053.JPG?fmt=jpg",
+            "Rostock Ritz Desert Lodge": "https://wetu.com/imageHandler/c1920x1080/28282/honeymoon_suite_1.jpg?fmt=jpg",
+            "Sachsenheim Guestfarm": "https://wetu.com/imageHandler/c1920x1080/46482/1735893728865_6dacf0_d102d7bee3c740b8b18c398a6ea48016~mv2.jpg?fmt=jpg",
+            "Sea Breeze Guesthouse": "https://wetu.com/imageHandler/c1920x1080/31287/17732352651871.jpg?fmt=jpg",
+            "Seeheim Hotel": "https://wetu.com/imageHandler/c1920x1080/56272/see3.jpg?fmt=jpg",
+            "Sesfontein Guesthouse": "https://wetu.com/imageHandler/c1920x1080/114408/1741690033704_Sesfontein_breakfast-table.jpg?fmt=jpg",
+            "Shametu River Lodge": "https://wetu.com/imageHandler/c1920x1080/68333/home_0003_header.jpg?fmt=jpg",
+            "Shipwreck Lodge": "https://wetu.com/imageHandler/c1920x1080/76469/1769586034571alexanderheinrichs--26-.jpg?fmt=jpg",
+            "Simanya River Lodge": "https://wetu.com/imageHandler/c1920x1080/76943/1769662922313dji202506160126160015d.jpg?fmt=jpg",
+            "Sossus Dune Lodge": "https://wetu.com/imageHandler/c1920x1080/1498/screenshot_2024-09-23_091205.png?fmt=jpg",
+            "Sossus Oasis Campsite": "https://wetu.com/imageHandler/c1920x1080/32186/1767346241953socsnewcampsite.jpg?fmt=jpg",
+            "andBeyond Sossusvlei Desert Lodge": "https://wetu.com/imageHandler/c1920x1080/1518/arrival-area-andbeyond-sossusvlei.jpg?fmt=jpg",
+            "Spitzkoppe Cabin Camp": "https://wetu.com/imageHandler/c1920x1080/331931/d69fa0_10799dc01ad545a09d37c3ce56e7b8a1mv2.jpg?fmt=jpg",
+            "Spitzkoppe Restcamp": "https://wetu.com/imageHandler/c1920x1080/10566/1769514212980stampsspitzkoppe-16.png?fmt=jpg",
+            "Spitzkoppen Lodge": "https://wetu.com/imageHandler/c1920x1080/101058/1.jpeg?fmt=jpg",
+            "Strand Hotel Swakopmund": "https://wetu.com/imageHandler/c1920x1080/1747/_hab4490.jpg?fmt=jpg",
+            "Suricate Tented Kalahari Lodge": "https://wetu.com/imageHandler/c1920x1080/34570/1778068014402__dsc7162.jpg?fmt=jpg",
+            "Swakopmund Hotel": "https://wetu.com/imageHandler/c1920x1080/149035/exterior_24.jpg?fmt=jpg",
+            "Taleni Etosha Village": "https://wetu.com/imageHandler/c1920x1080/10516/EV_Reception.jpg?fmt=jpg",
+            "Tambuti Lodge": "https://wetu.com/imageHandler/c1920x1080/10429/arial_view_2.jpg?fmt=jpg",
+            "Terra Rouge Guest Farm": "https://wetu.com/imageHandler/c1920x1080/10430/cottage.JPG?fmt=jpg",
+            "Terrace Bay Resort": "https://wetu.com/imageHandler/c1920x1080/1612/1.jpg?fmt=jpg",
+            "Teufelskrallen Lodge": "https://wetu.com/imageHandler/c1920x1080/46547/img_5012.jpg?fmt=jpg",
+            "The Delight Swakopmund": "https://wetu.com/imageHandler/c1920x1080/52092/the_delight_exteriour_1.jpg?fmt=jpg",
+            "The Desert Grace": "https://wetu.com/imageHandler/c1920x1080/136175/1777017023167kimberley--29-.jpg?fmt=jpg",
+            "The Olive Exclusive": "https://wetu.com/imageHandler/c1920x1080/29284/18_lba_olive_exc.jpg?fmt=jpg",
+            "The Rez": "https://wetu.com/imageHandler/c1920x1080/122538/room21.jpg?fmt=jpg",
+            "The Weinberg Windhoek": "https://wetu.com/imageHandler/c1920x1080/143053/awbh_hotel_courtyard_lrg1.jpg?fmt=jpg",
+            "Torra Bay Campsite": "https://wetu.com/imageHandler/c1920x1080/1611/1.jpg?fmt=jpg",
+            "Toshari Lodge": "https://wetu.com/imageHandler/c1920x1080/10559/toshari-14.jpg?fmt=jpg",
+            "Tsauchab River Camp": "https://wetu.com/imageHandler/c1920x1080/10439/176526561485894621a3207a9fdd73246ada3f863297aeea4e1-mv2.jpg?fmt=jpg",
+            "Twyfelfontein Adventure Camp": "https://wetu.com/imageHandler/c1920x1080/203468/twyfelfontein-adventure-camp-print-08042023-007.jpg?fmt=jpg",
+            "Twyfelfontein Country Lodge": "https://wetu.com/imageHandler/c1920x1080/1563/bungalows_exterior_7.jpg?fmt=jpg",
+            "Ugab Terrace Lodge": "https://wetu.com/imageHandler/c1920x1080/26809/11.jpg?fmt=jpg",
+            "Uis Elephant": "https://wetu.com/imageHandler/c1920x1080/176197/exterior_04.jpg?fmt=jpg",
+            "Uris Safari Lodge": "https://wetu.com/imageHandler/c1920x1080/31685/Uris Safari Lodge Chalets.png?fmt=jpg",
+            "Vingerklip Lodge": "https://wetu.com/imageHandler/c1920x1080/10570/vklip_full_size--10.jpg?fmt=jpg",
+            "Voigtland Guesthouse": "https://wetu.com/imageHandler/c1920x1080/39402/1752816656255_Screenshot-2025-07-18-072058.png?fmt=jpg",
+            "Waldeck Lodge": "https://wetu.com/imageHandler/c1920x1080/397308/1750929970753_Waldeck-Namibia-(66).jpg?fmt=jpg",
+            "Waterberg Plateau Lodge": "https://wetu.com/imageHandler/c1920x1080/1644/chalets_view_mountain_wpl_12-03_dropbox.jpg?fmt=jpg",
+            "Waterberg Valley Lodge": "https://wetu.com/imageHandler/c1920x1080/47467/chalet_outside_path_view_wvl_14-08_dropbox1.jpg?fmt=jpg",
+            "Waterberg Wilderness": "https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg",
+            "White Sands Caprivi": "https://wetu.com/imageHandler/c1920x1080/193294/1772108312800day-4-00162305-still003.png?fmt=jpg",
+            "Wilderness Desert Rhino Camp": "https://wetu.com/imageHandler/c1920x1080/8725/desertrhino-07-24-1062.jpg?fmt=jpg",
+            "Wilderness Hoanib Skeleton Coast Camp": "https://wetu.com/imageHandler/c1920x1080/28944/1741354188743_Final-Hoanib-40.jpg?fmt=jpg",
+            "Wilderness Serra Cafema": "https://wetu.com/imageHandler/c1920x1080/1618/final_serra_cafema-51_resize1.jpg?fmt=jpg",
+            "Windhoek Country Club Resort": "https://wetu.com/imageHandler/c1920x1080/13976/windhoek_exterior_007.jpg?fmt=jpg",
+            "Wolwedans Boulders Camp": "https://wetu.com/imageHandler/c1920x1080/19816/1736853643566_WOLWEDANS-COLLECTION---Boulders-Camp---Fairy-Circles-and-tent-F.jpg?fmt=jpg",
+            "Wolwedans Dune Camp": "https://wetu.com/imageHandler/c1920x1080/10601/1736924264106_WOLWEDANS-COLLECTION---Dune-Camp---Main-area-at-sunset.jpg?fmt=jpg",
+            "Wolwedans Mountain View Suite": "https://wetu.com/imageHandler/c1920x1080/49086/mountain_view_suite_-_wolwedans_-_10.jpg?fmt=jpg",
+            "Wolwedans Plains Camp": "https://wetu.com/imageHandler/c1920x1080/19817/wolwedans_-_landscapes_0.jpg?fmt=jpg",
+            "Zambezi Mubala Camp": "https://wetu.com/imageHandler/c1920x1080/146055/dsc_46491.jpg?fmt=jpg",
+            "Zambezi Mubala Lodge": "https://wetu.com/imageHandler/c1920x1080/109094/mbz-0026.jpg?fmt=jpg",
+            "Zambezi Queen": "https://wetu.com/imageHandler/c1920x1080/16243/1748436089391_ZQC_ZQ_Exterior_277.jpg?fmt=jpg",
+            "Zannier Sonop": "https://wetu.com/imageHandler/c1920x1080/137615/sonop_-_bathroom_2_-__tibo_for_zannier_hotels_-_tibodhermy.jpg?fmt=jpg",
+            "Zelda Game & Guest Farm": "https://wetu.com/imageHandler/c1920x1080/34718/547752_434094376713747_72781908_n.jpg?fmt=jpg",
+            "iGowati Country Hotel": "https://wetu.com/imageHandler/c1920x1080/10414/1738490111918_116338666_103645378113599_3079077148619558571_n.jpg?fmt=jpg"
+        };
+
         function getLodgeImage(lodgeName, regionName) {
+            if (typeof lodgeImageMap !== 'undefined' && lodgeImageMap[lodgeName]) return lodgeImageMap[lodgeName];
+            if (lodgeName && typeof regionPhotosMap !== 'undefined' && regionPhotosMap[regionName] && regionPhotosMap[regionName].length) {
+                const pool = regionPhotosMap[regionName];
+                let hsh = 0; for (let i = 0; i < lodgeName.length; i++) hsh = (hsh * 31 + lodgeName.charCodeAt(i)) >>> 0;
+                return pool[hsh % pool.length];
+            }
+            if (typeof regionImageMap !== 'undefined' && regionImageMap[regionName]) return regionImageMap[regionName];
             const r = regionName.toLowerCase();
             const l = lodgeName.toLowerCase();
             
@@ -5364,7 +5866,12 @@
                 if (!titleEl) return;
                 
                 const regionName = titleEl.innerText.trim();
-                
+
+                // Apply real region photo from Wetu data
+                if (imgEl && typeof regionImageMap !== 'undefined' && regionImageMap[regionName]) {
+                    imgEl.style.backgroundImage = "url('" + regionImageMap[regionName] + "')";
+                }
+
                 const lodgeItems = card.querySelectorAll('.lodge-item');
                 lodgeItems.forEach(item => {
                     const clone = item.cloneNode(true);
@@ -5397,7 +5904,6 @@
                 const infoDiv = document.createElement('div');
                 infoDiv.className = 'region-card-info';
                 infoDiv.innerHTML = `
-                    <h3>${regionName}</h3>
                     <span class="lodge-count">${lodgeItems.length} Lodges & Camps Available</span>
                     <button class="explore-btn" onclick="navigateToRegion('${regionName.replace(/'/g, "\\'")}')">Explore Region</button>
                 `;
@@ -6080,6 +6586,47 @@
             }
         }
 
+        function showLodgeSuggestions(q) {
+            const box = document.getElementById('lodge-suggestions');
+            if (!box) return;
+            q = (q || '').trim().toLowerCase();
+            if (q.length < 2) { hideLodgeSuggestions(); return; }
+            const seen = new Set();
+            const matches = [];
+            for (const l of lodgesDatabase) {
+                const lname = l.name.toLowerCase();
+                if (lname.includes(q) && !seen.has(lname)) {
+                    seen.add(lname);
+                    matches.push(l);
+                    if (matches.length >= 8) break;
+                }
+            }
+            if (matches.length === 0) {
+                box.innerHTML = '<div class="lodge-suggest-empty">No lodges match &ldquo;' + q + '&rdquo;</div>';
+                box.classList.add('open');
+                return;
+            }
+            box.innerHTML = matches.map(l => {
+                const idx = l.name.toLowerCase().indexOf(q);
+                const hl = l.name.substring(0, idx) + '<b>' + l.name.substring(idx, idx + q.length) + '</b>' + l.name.substring(idx + q.length);
+                const safe = l.name.replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+                return '<div class="lodge-suggest-item" onmousedown="selectLodgeSuggestion(\'' + safe + '\')"><span>' + hl + '</span><span class="ls-region">' + l.region + '</span></div>';
+            }).join('');
+            box.classList.add('open');
+        }
+
+        function hideLodgeSuggestions() {
+            const b = document.getElementById('lodge-suggestions');
+            if (b) { b.classList.remove('open'); b.innerHTML = ''; }
+        }
+
+        function selectLodgeSuggestion(name) {
+            const inp = document.getElementById('lodge-search');
+            if (inp) inp.value = name;
+            hideLodgeSuggestions();
+            handleLodgeSearchEnter();
+        }
+
         function filterRegions() {
             // Clear lodge search when searching by region
             const lodgeSearchInput = document.getElementById('lodge-search');
@@ -6143,6 +6690,130 @@
             }
         }
     </script>
+
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+        <style data-no-optimize="1">
+            .site-footer {
+                background: var(--text-main);
+                color: rgba(255, 255, 255, 0.75);
+                padding: 60px 50px 30px;
+                font-family: var(--font-body);
+                font-weight: 300;
+            }
+            .footer-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1.4fr 1fr 1fr;
+                gap: 40px;
+                padding-bottom: 40px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            .footer-brand .footer-logo {
+                font-family: var(--font-head);
+                font-size: 1.4rem;
+                color: var(--brand-accent);
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                font-weight: 500;
+                display: block;
+                margin-bottom: 6px;
+            }
+            .footer-brand .footer-sub {
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 4px;
+                color: rgba(255, 255, 255, 0.5);
+                display: block;
+                margin-bottom: 18px;
+            }
+            .footer-brand p {
+                font-size: 0.9rem;
+                line-height: 1.7;
+                max-width: 360px;
+                color: rgba(255, 255, 255, 0.6);
+            }
+            .footer-col h4 {
+                font-family: var(--font-head);
+                font-size: 0.8rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #fff;
+                font-weight: 400;
+                margin-bottom: 18px;
+            }
+            .footer-col a, .footer-col button.footer-line, .footer-col span.footer-line {
+                display: block;
+                width: 100%;
+                color: rgba(255, 255, 255, 0.65);
+                text-decoration: none;
+                font-size: 0.88rem;
+                margin-bottom: 12px;
+                transition: color 0.3s ease;
+                cursor: pointer;
+                background: none;
+                border: none;
+                border-radius: 0;
+                padding: 0;
+                text-align: left;
+                font-family: var(--font-body);
+                font-weight: 300;
+                letter-spacing: 0.3px;
+                -webkit-appearance: none;
+                appearance: none;
+                box-shadow: none;
+            }
+            .footer-col a:hover, .footer-col button.footer-line:hover {
+                color: var(--brand-accent);
+            }
+            .footer-bottom {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding-top: 25px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 12px;
+                font-size: 0.78rem;
+                color: rgba(255, 255, 255, 0.45);
+                letter-spacing: 0.5px;
+            }
+            .footer-bottom .footer-credit { color: rgba(255, 255, 255, 0.6); }
+            .footer-bottom .footer-credit strong { color: var(--brand-accent); font-weight: 500; }
+            @media (max-width: 768px) {
+                .site-footer { padding: 45px 30px 25px; }
+                .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+                .footer-bottom { flex-direction: column; align-items: flex-start; }
+            }
+        </style>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-logo">Namibia Rates</span>
+                <span class="footer-sub">Trade Rates Portal</span>
+                <p>The centralized trade hub for luxury Namibian lodges, vehicles and activities — pre-negotiated STO rates for authorized travel partners.</p>
+            </div>
+            <nav class="footer-col" aria-label="Explore">
+                <h4>Explore</h4>
+                <button type="button" class="footer-line" onclick="switchTab('accommodation', document.getElementById('nav-accommodation'))">Accommodation</button>
+                <button type="button" class="footer-line" onclick="switchTab('vehicle', document.getElementById('nav-vehicle'))">Vehicles</button>
+                <button type="button" class="footer-line" onclick="switchTab('activities', document.getElementById('nav-activities'))">Activities</button>
+                <button type="button" class="footer-line" onclick="openLogin('List Your Property')">List Your Property</button>
+            </nav>
+            <nav class="footer-col" aria-label="Trade Access">
+                <h4>Trade Access</h4>
+                <button type="button" class="footer-line" onclick="openLogin('Agent Portal')">Agent Sign In</button>
+                <a href="mailto:info@namibiarates.com">info@namibiarates.com</a>
+                <span class="footer-line" style="cursor:default;">Pre-negotiated STO rates</span>
+            </nav>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; <span id="footer-year">2026</span> Namibia Rates. All rights reserved.</span>
+            <span class="footer-credit">Trade Rates Portal &mdash; Authorized Partners Only</span>
+        </div>
+        <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
+    </footer>
 
 </body>
 </html>

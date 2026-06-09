@@ -310,13 +310,46 @@ def api_create_itineraries():
     if not CREATOR_FILE.exists():
         return jsonify({"error": "wetu_creator.py not found next to server.py."}), 500
 
-    body   = request.get_json(force=True, silent=True) or {}
-    only   = (body.get("only") or "").strip()
-    custom = body.get("custom") or None
+    body    = request.get_json(force=True, silent=True) or {}
+    only    = (body.get("only") or "").strip()
+    custom  = body.get("custom") or None
+    customs = body.get("customs") or None   # list of {name, stops} -> one login
 
     args = [sys.executable, str(CREATOR_FILE), "--auto"]
 
-    if custom and custom.get("stops"):
+    def _clean_stops(raw):
+        out = []
+        for s in (raw or []):
+            if isinstance(s, (list, tuple)) and s and str(s[0]).strip():
+                lodge = str(s[0]).strip()
+                try:
+                    nights = int(s[1]) if len(s) > 1 else 1
+                except (ValueError, TypeError):
+                    nights = 1
+                out.append([lodge, max(1, nights)])
+        return out
+
+    if customs and isinstance(customs, list):
+        # Build several brand-new itineraries back-to-back in ONE login.
+        itins = []
+        for c in customs:
+            if not isinstance(c, dict):
+                continue
+            stops = _clean_stops(c.get("stops"))
+            if stops:
+                itins.append({"name": (c.get("name") or "Custom Itinerary").strip(),
+                              "stops": stops})
+        if not itins:
+            return jsonify({"error": "No valid itineraries provided."}), 400
+        custom_file = SCRIPT_DIR / "wetu_custom_itinerary.json"
+        custom_file.write_text(json.dumps(itins), encoding="utf-8")
+        args += ["--custom", str(custom_file)]
+        total = sum(len(i["stops"]) for i in itins)
+        names = ", ".join(f"“{i['name']}”" for i in itins)
+        launch_msg = (f"Chrome is opening. Log into Wetu ONCE — it will build "
+                      f"{len(itins)} itineraries ({names}; {total} stops total) "
+                      f"automatically, one after another.")
+    elif custom and custom.get("stops"):
         # Build a brand-new itinerary from the user's own lodges.
         name = (custom.get("name") or "Custom Itinerary").strip()
         stops = []
