@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/namibia_agent_portal.html" }
+  ]
+}
