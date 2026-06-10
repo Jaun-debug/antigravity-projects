@@ -4919,7 +4919,16 @@
             return null;
         }
 
+        // === Clean SEO URL routing (new /accommodation/ structure) ===
+        const accommodationPageMap = {
+            'Camp Kwando': '/accommodation/camp-kwando/'
+        };
+        const regionPageMap = {
+            'Zambezi & Caprivi': '/caprivi-accommodation/'
+        };
+
         function openLogin(lodgeName) {
+            if (accommodationPageMap[lodgeName]) { window.location.href = accommodationPageMap[lodgeName]; return; }
             if (lodgeName === 'List Your Property') {
                 openListPropertyWorkspace();
                 // Set up event listener on client dropzone for file drop bulk qualification
@@ -6065,6 +6074,8 @@
             } else if (typeof val === 'string' && !isNaN(val)) {
                 regionName = regionIndexMap[parseInt(val)] || val;
             }
+
+            if (regionPageMap[regionName]) { window.location.href = regionPageMap[regionName]; return; }
 
             // Instantly hide open dropdown menu to avoid overlay blocking the screen
             const dropdownMenus = document.querySelectorAll('.dropdown-menu');
