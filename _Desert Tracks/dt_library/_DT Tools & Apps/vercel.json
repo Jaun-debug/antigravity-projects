@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/", "has": [{ "type": "host", "value": "desert-tracks-welcome.com" }], "destination": "/dt_booking_reg.html" },
+    { "source": "/", "has": [{ "type": "host", "value": "www.desert-tracks-welcome.com" }], "destination": "/dt_booking_reg.html" }
+  ]
+}
