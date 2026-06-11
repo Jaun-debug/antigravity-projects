@@ -117,7 +117,7 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
-      <div style="margin-top:10px"><button class="btn" id="agent-btn" onclick="openLogin()">Agent Sign In · View STO</button></div>
+      <div style="margin-top:10px"><button class="btn" id="agent-btn" onclick="agentBtn()">Sign in on homepage to view STO</button></div>
     </div>
   </div>
   <div id="rate-tables"></div>
@@ -164,23 +164,6 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
 
 <footer>&copy; <span id="yr">2026</span> Namibia Rates · Trade Rates Portal — Authorized Partners Only · <a href="mailto:info@namibiarates.com">info@namibiarates.com</a></footer>
 
-<!-- Agent login modal -->
-<div class="modal" id="login-modal">
-  <div class="modal-box">
-    <h3>Agent Sign In</h3>
-    <p>Authorised partners only. Enter your credentials to view net STO rates.</p>
-    <label>Username</label>
-    <input type="text" id="in-user" autocomplete="off" placeholder="Username">
-    <label>Password</label>
-    <input type="password" id="in-pass" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
-    <div class="modal-err" id="login-err"></div>
-    <div class="modal-actions">
-      <button class="btn solid" style="flex:1" onclick="doLogin()">Sign in</button>
-      <button class="btn" onclick="closeLogin()">Cancel</button>
-    </div>
-  </div>
-</div>
-
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 
@@ -211,27 +194,45 @@ function renderRates(model, isSto){
   });
   document.getElementById('rate-tables').innerHTML=html;
 }
-renderRates(RACK,false);
+var LODGE='camp-kwando', TOKEN_KEY='nr_agent_token';
 
-function openLogin(){document.getElementById('login-modal').classList.add('open');document.getElementById('in-user').focus();}
-function closeLogin(){document.getElementById('login-modal').classList.remove('open');document.getElementById('login-err').textContent='';}
+// Show public rack rates (signed-out state).
+function showRack(){
+  renderRates(RACK,false);
+  var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
+  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('agent-btn').textContent='Sign in on homepage to view STO';
+}
 
-function doLogin(){
-  var err=document.getElementById('login-err'); err.textContent='Checking…';
+// Show net STO (signed-in state) using the rates returned by the server.
+function showSto(d){
+  renderRates(d,true);
+  var b=document.getElementById('mode-badge'); b.textContent='Net STO · '+d.commission; b.classList.add('sto');
+  document.getElementById('rate-sub').textContent=d.note+' · Valid '+d.validity;
+  document.getElementById('agent-btn').textContent='Sign out';
+}
+
+// On load: if a homepage session token exists, fetch STO automatically — no login here.
+function applySession(){
+  var token=localStorage.getItem(TOKEN_KEY);
+  if(!token){ showRack(); return; }
   fetch('/api/sto',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({username:document.getElementById('in-user').value,password:document.getElementById('in-pass').value,lodge:'camp-kwando'})})
+    body:JSON.stringify({token:token,lodge:LODGE})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(res){
-    if(!res.ok){ err.textContent=(res.j&&res.j.error)||'Sign in failed.'; return; }
-    var d=res.j.rates;
-    renderRates(d,true);
-    var b=document.getElementById('mode-badge'); b.textContent='Net STO · '+d.commission; b.classList.add('sto');
-    document.getElementById('rate-sub').textContent=d.note+' · Valid '+d.validity;
-    document.getElementById('agent-btn').textContent='Signed in · Showing STO';
-    closeLogin();
+    if(res.ok && res.j && res.j.rates){ showSto(res.j.rates); }
+    else { localStorage.removeItem(TOKEN_KEY); showRack(); }   // stale/invalid session
   })
-  .catch(function(){ err.textContent='Network error — is the site deployed?'; });
+  .catch(function(){ showRack(); });
 }
+
+// Button: signed in -> sign out; signed out -> go to homepage to sign in.
+function agentBtn(){
+  if(localStorage.getItem(TOKEN_KEY)){ localStorage.removeItem(TOKEN_KEY); showRack(); }
+  else { window.location.href='/#agent'; }
+}
+
+applySession();
 </script>
 </body>
 </html>

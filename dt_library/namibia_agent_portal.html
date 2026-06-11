@@ -3802,6 +3802,11 @@
                     loggedInAgent = null;
                 }
             }
+
+            // If a lodge page sent the agent here to sign in (link to /#agent), open the login.
+            if (window.location.hash === '#agent' && !loggedInAgent) {
+                setTimeout(() => openLogin('Agent Portal'), 150);
+            }
         });
 
         // State for List Your Property Rates Dashboard
@@ -4989,7 +4994,25 @@
         function submitAgentLogin() {
             let username = document.getElementById('agent-username-input').value.trim().toLowerCase();
             const errorEl = document.getElementById('agent-login-error-msg');
-            
+
+            // --- Secure session bridge ---------------------------------------------------
+            // Validate the entered credentials against the server (/api/sto). On success the
+            // server returns a session token which we store; every lodge page reads it and
+            // shows that agent's net STO automatically — so they only sign in here, once.
+            (function(){
+                const u = document.getElementById('agent-username-input').value.trim();
+                const p = document.getElementById('agent-password-input').value;
+                fetch('/api/sto', {method:'POST', headers:{'Content-Type':'application/json'},
+                    body: JSON.stringify({username:u, password:p})})
+                  .then(function(r){ return r.ok ? r.json() : null; })
+                  .then(function(j){
+                      if (j && j.token) { localStorage.setItem('nr_agent_token', j.token); }
+                      else { localStorage.removeItem('nr_agent_token'); }
+                  })
+                  .catch(function(){});
+            })();
+            // -----------------------------------------------------------------------------
+
             // Allow blank login to automatically default to ultimate safaris
             if (!username) {
                 username = 'ultimate';
@@ -6321,6 +6344,7 @@
         function logoutAgent() {
             loggedInAgent = null;
             localStorage.removeItem('namibia_rates_logged_in_agent');
+            localStorage.removeItem('nr_agent_token');   // end the secure lodge-page session too
             closeAgentWorkspace();
             checkAgentActiveContracts(); // Clear green B2B highlights in public view
             showToast('Logged out of Agent Workspace.', 'info');

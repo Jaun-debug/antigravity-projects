@@ -1,11 +1,25 @@
-// Vercel Serverless Function — returns NET STO rates only after a valid agent login.
-// The STO numbers and the password live here, server-side. They are NEVER sent to a
-// browser that hasn't authenticated, and are not present in any public page source.
+// Vercel Serverless Function — agent auth + NET STO rates.
 //
-// SET THESE IN VERCEL → Project Settings → Environment Variables:
+// SINGLE SIGN-IN MODEL:
+//   1. Agent signs in once (homepage header) with username + password.
+//      -> POST { username, password }            -> { ok, token }
+//   2. The browser stores that token and every lodge page sends it back:
+//      -> POST { token, lodge: "<slug>" }         -> { ok, token, lodge, rates }
+//   The STO numbers and the password live here, server-side. They are NEVER
+//   sent to a browser that hasn't authenticated, and are not in any page source.
+//
+// SET THESE IN VERCEL → Project Settings → Environments → Production:
 //   AGENT_USER  = desert tracks
 //   AGENT_PASS  = passme9cops
-// (Keeping them in env vars means they are not in the Git repo either.)
+//
+// The session token is derived from AGENT_PASS, so it is not a separate secret
+// and it automatically invalidates every session if you ever change the password.
+
+const crypto = require('crypto');
+
+function sessionToken(pass) {
+  return crypto.createHash('sha256').update('nr-agent-session|' + pass).digest('hex').slice(0, 40);
+}
 
 const STO_DB = {
   'camp-kwando': {
@@ -44,7 +58,9 @@ module.exports = (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
+
   const body = req.body || {};
+  const token = String(body.token || '');
   const user = String(body.username || '').trim().toLowerCase();
   const pass = String(body.password || '');
   const lodge = String(body.lodge || '').trim();
@@ -55,12 +71,29 @@ module.exports = (req, res) => {
   if (!VALID_USER || !VALID_PASS) {
     return res.status(500).json({ error: 'Login not configured. Set AGENT_USER and AGENT_PASS in Vercel.' });
   }
-  if (user !== VALID_USER || pass !== VALID_PASS) {
+
+  const validToken = sessionToken(VALID_PASS);
+
+  // Authenticate by an existing session token OR by username + password.
+  const authedByToken = token && token === validToken;
+  const authedByCreds = user && user === VALID_USER && pass === VALID_PASS;
+
+  if (!authedByToken && !authedByCreds) {
     return res.status(401).json({ error: 'Invalid agent credentials.' });
   }
-  const data = STO_DB[lodge];
-  if (!data) {
-    return res.status(404).json({ error: 'Lodge not found.' });
+
+  // Always hand back the session token so the browser can stay signed in.
+  const out = { ok: true, token: validToken };
+
+  // If a lodge was requested, include its net STO rates.
+  if (lodge) {
+    const data = STO_DB[lodge];
+    if (!data) {
+      return res.status(404).json({ error: 'Lodge not found.' });
+    }
+    out.lodge = lodge;
+    out.rates = data;
   }
-  return res.status(200).json({ ok: true, lodge, rates: data });
+
+  return res.status(200).json(out);
 };
