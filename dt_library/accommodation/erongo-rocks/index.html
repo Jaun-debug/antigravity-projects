@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Erongo Rocks | Namibia Rates</title>
+<meta name="description" content="Erongo Rocks — published rack rates. Trade partners sign in for net STO rates.">
+<style>
+:root{--ink:#2C2824;--muted:#7A7269;--gold:#B8956A;--line:#e7e2da;--bg:#f7f5f1;}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff}
+header{display:flex;justify-content:space-between;align-items:center;padding:18px 28px;border-bottom:1px solid var(--line)}
+.logo{font-family:Georgia,serif;letter-spacing:3px;font-size:1.1rem}.logo small{display:block;font-size:.55rem;letter-spacing:3px;color:var(--muted);text-transform:uppercase}
+a.home{color:var(--gold);text-decoration:none;font-size:.8rem;letter-spacing:1px}
+.wrap{max-width:880px;margin:0 auto;padding:32px 28px}
+.crumbs{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+h1{font-family:Georgia,serif;font-weight:300;font-size:clamp(2rem,5vw,3rem);margin:0 0 6px}
+.sub{color:var(--muted);font-size:.85rem;margin-bottom:8px}
+.badge{display:inline-block;background:var(--bg);border:1px solid var(--line);border-radius:20px;padding:5px 14px;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+table{width:100%;border-collapse:collapse;margin:18px 0}caption{text-align:left;font-weight:600;padding:8px 0;color:var(--gold);font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);font-size:.9rem}th:last-child,td:last-child{text-align:right}
+thead th{font-size:.7rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.cta{margin-top:30px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px}
+.cta h3{margin:0 0 8px;font-family:Georgia,serif;font-weight:400}
+.btn{display:inline-block;margin-top:10px;background:var(--ink);color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:.85rem;letter-spacing:1px}
+.btn.gold{background:var(--gold)}
+footer{border-top:1px solid var(--line);padding:22px 28px;color:var(--muted);font-size:.75rem;text-align:center}
+</style></head><body>
+<header><div class="logo">NAMIBIA RATES<small>Trade Rates Portal</small></div><a class="home" href="/">← All lodges</a></header>
+<div class="wrap">
+  <div class="crumbs">Home · Accommodation · Erongo Rocks</div>
+  <h1>Erongo Rocks</h1>
+  <div class="sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+  <span class="badge">Rack Rates</span>
+  <table><caption>Rack Rates</caption><thead><tr><th>Type</th><th>Rack (N$)</th></tr></thead><tbody>
+  <tr><td>Per person sharing</td><td>N$ 1,020</td></tr>
+<tr><td>Single</td><td>N$ 1,140</td></tr>
+<tr><td>Per person per night</td><td>N$ 462</td></tr>
+<tr><td>Guided Rock Art Hike (2 hr)</td><td>N$ 462</td></tr>
+<tr><td>Dinner</td><td>N$ 528</td></tr>
+<tr><td>Breakfast</td><td>N$ 198</td></tr>
+<tr><td>Conservation Levy (pp/night)</td><td>N$ 18</td></tr>
+  </tbody></table>
+  <div class="cta" id="cta">
+    <h3>Trade partner?</h3>
+    <p class="sub" id="cta-text">Sign in on the homepage to view and book your contracted net STO rate for this property.</p>
+    <a class="btn" id="cta-btn" href="/#agent">Agent sign in</a>
+  </div>
+</div>
+<footer>&copy; <span id="yr"></span> Namibia Rates · Trade Rates Portal — Authorised Partners Only · <a href="mailto:info@namibiarates.com" style="color:var(--gold)">info@namibiarates.com</a></footer>
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+// If a homepage session exists, surface the bookable STO sheet for this lodge.
+if(localStorage.getItem('nr_agent_token')){
+  document.getElementById('cta-text').textContent='You are signed in. Open your bookable net STO rate sheet for this property.';
+  var b=document.getElementById('cta-btn'); b.textContent='View & book your STO rate →'; b.className='btn gold'; b.href='/ratesheets/erongo_rocks_ratesheet_v3.html';
+}
+</script>
+</body></html>
