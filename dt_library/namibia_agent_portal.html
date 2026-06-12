@@ -5400,8 +5400,11 @@
         }
 
         function handleLodgeClick(lodgeName) {
+            // Prefer the deployed public rack page if one exists.
+            if (accommodationPageMap[lodgeName]) { window.location.href = accommodationPageMap[lodgeName]; return; }
             const url = getLodgeRateSheetUrl(lodgeName);
-            if (url) {
+            const dead = /individual_rates\.html|logufa_rates\.html|ondili_rates_booking\.html|quiver_and_co|vehicle_rates\.html|activity_rates\.html|\.\.\/|_Desert Tracks/i;
+            if (url && !dead.test(url)) {
                 window.open(url, '_blank');
                 return;
             }
