@@ -1,5 +1,1180 @@
 {
+  "redirects": [
+    {
+      "source": "/accommodation/ababis-guest-farm",
+      "destination": "/sossusvlei-accommodation/ababis-guest-farm/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/africa-safari-lodge",
+      "destination": "/kalahari-accommodation/africa-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/aloegrove-safari-lodge",
+      "destination": "/central-namibia-accommodation/aloegrove-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/alte-kalkofen-lodge",
+      "destination": "/fish-river-canyon-accommodation/alte-kalkofen-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/alte-villa-2025",
+      "destination": "/luderitz-accommodation/alte-villa-2025/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/anderssons-at-ongava",
+      "destination": "/south-etosha-accommodation/anderssons-at-ongava/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/atlantic-villa",
+      "destination": "/swakopmund-accommodation/atlantic-villa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/auas-safari-lodge",
+      "destination": "/windhoek-accommodation/auas-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/bahnhof-hotel-aus",
+      "destination": "/fish-river-canyon-accommodation/bahnhof-hotel-aus/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/barkhan-dune-retreat",
+      "destination": "/sossusvlei-accommodation/barkhan-dune-retreat/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/beach-hotel-swakopmund",
+      "destination": "/swakopmund-accommodation/beach-hotel-swakopmund/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/beach-lodge",
+      "destination": "/swakopmund-accommodation/beach-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/belvedere-boutique-hotel",
+      "destination": "/windhoek-accommodation/belvedere-boutique-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/camp-kipwe",
+      "destination": "/damaraland-accommodation/camp-kipwe/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/camp-kwando",
+      "destination": "/caprivi-accommodation/camp-kwando/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/canyon-lodge",
+      "destination": "/fish-river-canyon-accommodation/canyon-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/canyon-roadhouse",
+      "destination": "/fish-river-canyon-accommodation/canyon-roadhouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/canyon-village",
+      "destination": "/fish-river-canyon-accommodation/canyon-village/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/chobe-river-camp",
+      "destination": "/caprivi-accommodation/chobe-river-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/cornerstone-guesthouse",
+      "destination": "/swakopmund-accommodation/cornerstone-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/damara-mopane-lodge",
+      "destination": "/damaraland-accommodation/damara-mopane-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/desert-homestead-lodge",
+      "destination": "/sossusvlei-accommodation/desert-homestead-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/desert-whisper",
+      "destination": "/sossusvlei-accommodation/desert-whisper/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/droombos-estate",
+      "destination": "/windhoek-accommodation/droombos-estate/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/emanya-at-etosha",
+      "destination": "/east-etosha-accommodation/emanya-at-etosha/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/epacha-game-lodge-spa",
+      "destination": "/south-etosha-accommodation/epacha-game-lodge-spa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/epako-safari-lodge",
+      "destination": "/central-namibia-accommodation/epako-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/epupa-falls-lodge",
+      "destination": "/epupa-accommodation/epupa-falls-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/erongo-rocks",
+      "destination": "/central-namibia-accommodation/erongo-rocks/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/etosha-king-nehale",
+      "destination": "/east-etosha-accommodation/etosha-king-nehale/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/fish-river-lodge",
+      "destination": "/fish-river-canyon-accommodation/fish-river-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/flamingo-villa-boutique-hotel",
+      "destination": "/swakopmund-accommodation/flamingo-villa-boutique-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/forgotten-valley",
+      "destination": "/opuwo-accommodation/forgotten-valley/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/gabus-game-ranch",
+      "destination": "/central-namibia-accommodation/gabus-game-ranch/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/gabus-safari-lodge",
+      "destination": "/central-namibia-accommodation/gabus-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ghaub",
+      "destination": "/central-namibia-accommodation/ghaub/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/grootberg-lodge",
+      "destination": "/damaraland-accommodation/grootberg-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hakusembe-river-lodge",
+      "destination": "/caprivi-accommodation/hakusembe-river-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/halali-resort",
+      "destination": "/south-etosha-accommodation/halali-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hansa-hotel",
+      "destination": "/swakopmund-accommodation/hansa-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/heinitzburg-boutique-hotel",
+      "destination": "/windhoek-accommodation/heinitzburg-boutique-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hoada-campsite",
+      "destination": "/damaraland-accommodation/hoada-campsite/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hohenstein-lodge",
+      "destination": "/central-namibia-accommodation/hohenstein-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hohewarte-guestfarm",
+      "destination": "/windhoek-accommodation/hohewarte-guestfarm/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hotel-thule",
+      "destination": "/windhoek-accommodation/hotel-thule/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-anib-lodge",
+      "destination": "/kalahari-accommodation/kalahari-anib-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-bush-breaks",
+      "destination": "/kalahari-accommodation/kalahari-bush-breaks/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-farmhouse",
+      "destination": "/kalahari-accommodation/kalahari-farmhouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-game-lodge",
+      "destination": "/kalahari-accommodation/kalahari-game-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-red-dunes-lodge",
+      "destination": "/kalahari-accommodation/kalahari-red-dunes-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kamaku-guesthouse",
+      "destination": "/central-namibia-accommodation/kamaku-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kaoko-mopane-lodge",
+      "destination": "/opuwo-accommodation/kaoko-mopane-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/khorixas-lodge",
+      "destination": "/damaraland-accommodation/khorixas-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/koiimasis",
+      "destination": "/fish-river-canyon-accommodation/koiimasis/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/le-mirage-resort-spa",
+      "destination": "/sossusvlei-accommodation/le-mirage-resort-spa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/little-ongava",
+      "destination": "/south-etosha-accommodation/little-ongava/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/little-sossus-lodge",
+      "destination": "/sossusvlei-accommodation/little-sossus-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/luderitz-nest-hotel",
+      "destination": "/luderitz-accommodation/luderitz-nest-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/midgard-country-estate",
+      "destination": "/central-namibia-accommodation/midgard-country-estate/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mokuti-etosha",
+      "destination": "/east-etosha-accommodation/mokuti-etosha/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/moon-mountain-lodge",
+      "destination": "/sossusvlei-accommodation/moon-mountain-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mowani-campsite",
+      "destination": "/damaraland-accommodation/mowani-campsite/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mowani-mountain-camp",
+      "destination": "/damaraland-accommodation/mowani-mountain-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mushara-bush-camp",
+      "destination": "/east-etosha-accommodation/mushara-bush-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mushara-lodge",
+      "destination": "/east-etosha-accommodation/mushara-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mushara-outpost",
+      "destination": "/east-etosha-accommodation/mushara-outpost/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namib-dune-star-camp",
+      "destination": "/sossusvlei-accommodation/namib-dune-star-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namib-guesthouse",
+      "destination": "/swakopmund-accommodation/namib-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namib-outpost",
+      "destination": "/sossusvlei-accommodation/namib-outpost/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namushasha-river-camping2go",
+      "destination": "/caprivi-accommodation/namushasha-river-camping2go/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namutoni-resort",
+      "destination": "/east-etosha-accommodation/namutoni-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/nooishof",
+      "destination": "/fish-river-canyon-accommodation/nooishof/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ohorongo-game-and-safari-lodge",
+      "destination": "/central-namibia-accommodation/ohorongo-game-and-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/okonjima-bush-camp",
+      "destination": "/central-namibia-accommodation/okonjima-bush-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/okonjima-plains-camp",
+      "destination": "/central-namibia-accommodation/okonjima-plains-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/okonjima-villa",
+      "destination": "/central-namibia-accommodation/okonjima-villa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/omarunga-epupa-falls-camp",
+      "destination": "/epupa-accommodation/omarunga-epupa-falls-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ondudu-safari-lodge",
+      "destination": "/central-namibia-accommodation/ondudu-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ongava-lodge",
+      "destination": "/south-etosha-accommodation/ongava-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ongava-tented-camp",
+      "destination": "/south-etosha-accommodation/ongava-tented-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/onguma-bush-camp",
+      "destination": "/east-etosha-accommodation/onguma-bush-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/opuwo-country-lodge",
+      "destination": "/opuwo-accommodation/opuwo-country-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/organic-stay",
+      "destination": "/swakopmund-accommodation/organic-stay/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/oyster-box-guesthouse",
+      "destination": "/swakopmund-accommodation/oyster-box-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/palmwag-lodge",
+      "destination": "/damaraland-accommodation/palmwag-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/popa-falls-resort",
+      "destination": "/caprivi-accommodation/popa-falls-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/rostock-ritz-desert-lodge",
+      "destination": "/sossusvlei-accommodation/rostock-ritz-desert-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/sesfontein-guesthouse",
+      "destination": "/kaokoland-accommodation/sesfontein-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/simanya-river-lodge",
+      "destination": "/caprivi-accommodation/simanya-river-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/sossus-dune-lodge",
+      "destination": "/sossusvlei-accommodation/sossus-dune-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/spitzkoppe-cabin-camp",
+      "destination": "/damaraland-accommodation/spitzkoppe-cabin-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/spitzkoppe-restcamp",
+      "destination": "/damaraland-accommodation/spitzkoppe-restcamp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/spitzkoppen-lodge",
+      "destination": "/damaraland-accommodation/spitzkoppen-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/strand-hotel-swakopmund",
+      "destination": "/swakopmund-accommodation/strand-hotel-swakopmund/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/terrace-bay-resort",
+      "destination": "/skeleton-coast-accommodation/terrace-bay-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/teufelskrallen-lodge",
+      "destination": "/kalahari-accommodation/teufelskrallen-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-delight-swakopmund",
+      "destination": "/swakopmund-accommodation/the-delight-swakopmund/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-desert-grace",
+      "destination": "/sossusvlei-accommodation/the-desert-grace/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-olive-exclusive",
+      "destination": "/windhoek-accommodation/the-olive-exclusive/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-rez",
+      "destination": "/swakopmund-accommodation/the-rez/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-weinberg-windhoek",
+      "destination": "/windhoek-accommodation/the-weinberg-windhoek/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/tsauchab-river-camp",
+      "destination": "/sossusvlei-accommodation/tsauchab-river-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/twyfelfontein-adventure-camp",
+      "destination": "/damaraland-accommodation/twyfelfontein-adventure-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/uis-elephant",
+      "destination": "/damaraland-accommodation/uis-elephant/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/villa-mushara",
+      "destination": "/east-etosha-accommodation/villa-mushara/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/vingerklip-lodge",
+      "destination": "/damaraland-accommodation/vingerklip-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/voigtland-guesthouse",
+      "destination": "/windhoek-accommodation/voigtland-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/waldeck-lodge",
+      "destination": "/windhoek-accommodation/waldeck-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/waterberg-wilderness",
+      "destination": "/central-namibia-accommodation/waterberg-wilderness/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/white-sands-caprivi",
+      "destination": "/caprivi-accommodation/white-sands-caprivi/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-boulders-camp",
+      "destination": "/sossusvlei-accommodation/wolwedans-boulders-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-dune-camp",
+      "destination": "/sossusvlei-accommodation/wolwedans-dune-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-dunes-lodge",
+      "destination": "/sossusvlei-accommodation/wolwedans-dunes-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-mountain-view-suite",
+      "destination": "/sossusvlei-accommodation/wolwedans-mountain-view-suite/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-plains-camp",
+      "destination": "/sossusvlei-accommodation/wolwedans-plains-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/zambezi-mubala-camp",
+      "destination": "/caprivi-accommodation/zambezi-mubala-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/zambezi-mubala-lodge",
+      "destination": "/caprivi-accommodation/zambezi-mubala-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ababis-guest-farm/",
+      "destination": "/sossusvlei-accommodation/ababis-guest-farm/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/africa-safari-lodge/",
+      "destination": "/kalahari-accommodation/africa-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/aloegrove-safari-lodge/",
+      "destination": "/central-namibia-accommodation/aloegrove-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/alte-kalkofen-lodge/",
+      "destination": "/fish-river-canyon-accommodation/alte-kalkofen-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/alte-villa-2025/",
+      "destination": "/luderitz-accommodation/alte-villa-2025/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/anderssons-at-ongava/",
+      "destination": "/south-etosha-accommodation/anderssons-at-ongava/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/atlantic-villa/",
+      "destination": "/swakopmund-accommodation/atlantic-villa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/auas-safari-lodge/",
+      "destination": "/windhoek-accommodation/auas-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/bahnhof-hotel-aus/",
+      "destination": "/fish-river-canyon-accommodation/bahnhof-hotel-aus/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/barkhan-dune-retreat/",
+      "destination": "/sossusvlei-accommodation/barkhan-dune-retreat/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/beach-hotel-swakopmund/",
+      "destination": "/swakopmund-accommodation/beach-hotel-swakopmund/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/beach-lodge/",
+      "destination": "/swakopmund-accommodation/beach-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/belvedere-boutique-hotel/",
+      "destination": "/windhoek-accommodation/belvedere-boutique-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/camp-kipwe/",
+      "destination": "/damaraland-accommodation/camp-kipwe/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/camp-kwando/",
+      "destination": "/caprivi-accommodation/camp-kwando/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/canyon-lodge/",
+      "destination": "/fish-river-canyon-accommodation/canyon-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/canyon-roadhouse/",
+      "destination": "/fish-river-canyon-accommodation/canyon-roadhouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/canyon-village/",
+      "destination": "/fish-river-canyon-accommodation/canyon-village/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/chobe-river-camp/",
+      "destination": "/caprivi-accommodation/chobe-river-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/cornerstone-guesthouse/",
+      "destination": "/swakopmund-accommodation/cornerstone-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/damara-mopane-lodge/",
+      "destination": "/damaraland-accommodation/damara-mopane-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/desert-homestead-lodge/",
+      "destination": "/sossusvlei-accommodation/desert-homestead-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/desert-whisper/",
+      "destination": "/sossusvlei-accommodation/desert-whisper/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/droombos-estate/",
+      "destination": "/windhoek-accommodation/droombos-estate/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/emanya-at-etosha/",
+      "destination": "/east-etosha-accommodation/emanya-at-etosha/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/epacha-game-lodge-spa/",
+      "destination": "/south-etosha-accommodation/epacha-game-lodge-spa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/epako-safari-lodge/",
+      "destination": "/central-namibia-accommodation/epako-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/epupa-falls-lodge/",
+      "destination": "/epupa-accommodation/epupa-falls-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/erongo-rocks/",
+      "destination": "/central-namibia-accommodation/erongo-rocks/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/etosha-king-nehale/",
+      "destination": "/east-etosha-accommodation/etosha-king-nehale/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/fish-river-lodge/",
+      "destination": "/fish-river-canyon-accommodation/fish-river-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/flamingo-villa-boutique-hotel/",
+      "destination": "/swakopmund-accommodation/flamingo-villa-boutique-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/forgotten-valley/",
+      "destination": "/opuwo-accommodation/forgotten-valley/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/gabus-game-ranch/",
+      "destination": "/central-namibia-accommodation/gabus-game-ranch/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/gabus-safari-lodge/",
+      "destination": "/central-namibia-accommodation/gabus-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ghaub/",
+      "destination": "/central-namibia-accommodation/ghaub/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/grootberg-lodge/",
+      "destination": "/damaraland-accommodation/grootberg-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hakusembe-river-lodge/",
+      "destination": "/caprivi-accommodation/hakusembe-river-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/halali-resort/",
+      "destination": "/south-etosha-accommodation/halali-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hansa-hotel/",
+      "destination": "/swakopmund-accommodation/hansa-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/heinitzburg-boutique-hotel/",
+      "destination": "/windhoek-accommodation/heinitzburg-boutique-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hoada-campsite/",
+      "destination": "/damaraland-accommodation/hoada-campsite/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hohenstein-lodge/",
+      "destination": "/central-namibia-accommodation/hohenstein-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hohewarte-guestfarm/",
+      "destination": "/windhoek-accommodation/hohewarte-guestfarm/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/hotel-thule/",
+      "destination": "/windhoek-accommodation/hotel-thule/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-anib-lodge/",
+      "destination": "/kalahari-accommodation/kalahari-anib-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-bush-breaks/",
+      "destination": "/kalahari-accommodation/kalahari-bush-breaks/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-farmhouse/",
+      "destination": "/kalahari-accommodation/kalahari-farmhouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-game-lodge/",
+      "destination": "/kalahari-accommodation/kalahari-game-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kalahari-red-dunes-lodge/",
+      "destination": "/kalahari-accommodation/kalahari-red-dunes-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kamaku-guesthouse/",
+      "destination": "/central-namibia-accommodation/kamaku-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/kaoko-mopane-lodge/",
+      "destination": "/opuwo-accommodation/kaoko-mopane-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/khorixas-lodge/",
+      "destination": "/damaraland-accommodation/khorixas-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/koiimasis/",
+      "destination": "/fish-river-canyon-accommodation/koiimasis/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/le-mirage-resort-spa/",
+      "destination": "/sossusvlei-accommodation/le-mirage-resort-spa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/little-ongava/",
+      "destination": "/south-etosha-accommodation/little-ongava/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/little-sossus-lodge/",
+      "destination": "/sossusvlei-accommodation/little-sossus-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/luderitz-nest-hotel/",
+      "destination": "/luderitz-accommodation/luderitz-nest-hotel/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/midgard-country-estate/",
+      "destination": "/central-namibia-accommodation/midgard-country-estate/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mokuti-etosha/",
+      "destination": "/east-etosha-accommodation/mokuti-etosha/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/moon-mountain-lodge/",
+      "destination": "/sossusvlei-accommodation/moon-mountain-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mowani-campsite/",
+      "destination": "/damaraland-accommodation/mowani-campsite/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mowani-mountain-camp/",
+      "destination": "/damaraland-accommodation/mowani-mountain-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mushara-bush-camp/",
+      "destination": "/east-etosha-accommodation/mushara-bush-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mushara-lodge/",
+      "destination": "/east-etosha-accommodation/mushara-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/mushara-outpost/",
+      "destination": "/east-etosha-accommodation/mushara-outpost/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namib-dune-star-camp/",
+      "destination": "/sossusvlei-accommodation/namib-dune-star-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namib-guesthouse/",
+      "destination": "/swakopmund-accommodation/namib-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namib-outpost/",
+      "destination": "/sossusvlei-accommodation/namib-outpost/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namushasha-river-camping2go/",
+      "destination": "/caprivi-accommodation/namushasha-river-camping2go/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/namutoni-resort/",
+      "destination": "/east-etosha-accommodation/namutoni-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/nooishof/",
+      "destination": "/fish-river-canyon-accommodation/nooishof/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ohorongo-game-and-safari-lodge/",
+      "destination": "/central-namibia-accommodation/ohorongo-game-and-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/okonjima-bush-camp/",
+      "destination": "/central-namibia-accommodation/okonjima-bush-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/okonjima-plains-camp/",
+      "destination": "/central-namibia-accommodation/okonjima-plains-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/okonjima-villa/",
+      "destination": "/central-namibia-accommodation/okonjima-villa/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/omarunga-epupa-falls-camp/",
+      "destination": "/epupa-accommodation/omarunga-epupa-falls-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ondudu-safari-lodge/",
+      "destination": "/central-namibia-accommodation/ondudu-safari-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ongava-lodge/",
+      "destination": "/south-etosha-accommodation/ongava-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/ongava-tented-camp/",
+      "destination": "/south-etosha-accommodation/ongava-tented-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/onguma-bush-camp/",
+      "destination": "/east-etosha-accommodation/onguma-bush-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/opuwo-country-lodge/",
+      "destination": "/opuwo-accommodation/opuwo-country-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/organic-stay/",
+      "destination": "/swakopmund-accommodation/organic-stay/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/oyster-box-guesthouse/",
+      "destination": "/swakopmund-accommodation/oyster-box-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/palmwag-lodge/",
+      "destination": "/damaraland-accommodation/palmwag-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/popa-falls-resort/",
+      "destination": "/caprivi-accommodation/popa-falls-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/rostock-ritz-desert-lodge/",
+      "destination": "/sossusvlei-accommodation/rostock-ritz-desert-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/sesfontein-guesthouse/",
+      "destination": "/kaokoland-accommodation/sesfontein-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/simanya-river-lodge/",
+      "destination": "/caprivi-accommodation/simanya-river-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/sossus-dune-lodge/",
+      "destination": "/sossusvlei-accommodation/sossus-dune-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/spitzkoppe-cabin-camp/",
+      "destination": "/damaraland-accommodation/spitzkoppe-cabin-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/spitzkoppe-restcamp/",
+      "destination": "/damaraland-accommodation/spitzkoppe-restcamp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/spitzkoppen-lodge/",
+      "destination": "/damaraland-accommodation/spitzkoppen-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/strand-hotel-swakopmund/",
+      "destination": "/swakopmund-accommodation/strand-hotel-swakopmund/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/terrace-bay-resort/",
+      "destination": "/skeleton-coast-accommodation/terrace-bay-resort/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/teufelskrallen-lodge/",
+      "destination": "/kalahari-accommodation/teufelskrallen-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-delight-swakopmund/",
+      "destination": "/swakopmund-accommodation/the-delight-swakopmund/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-desert-grace/",
+      "destination": "/sossusvlei-accommodation/the-desert-grace/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-olive-exclusive/",
+      "destination": "/windhoek-accommodation/the-olive-exclusive/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-rez/",
+      "destination": "/swakopmund-accommodation/the-rez/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/the-weinberg-windhoek/",
+      "destination": "/windhoek-accommodation/the-weinberg-windhoek/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/tsauchab-river-camp/",
+      "destination": "/sossusvlei-accommodation/tsauchab-river-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/twyfelfontein-adventure-camp/",
+      "destination": "/damaraland-accommodation/twyfelfontein-adventure-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/uis-elephant/",
+      "destination": "/damaraland-accommodation/uis-elephant/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/villa-mushara/",
+      "destination": "/east-etosha-accommodation/villa-mushara/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/vingerklip-lodge/",
+      "destination": "/damaraland-accommodation/vingerklip-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/voigtland-guesthouse/",
+      "destination": "/windhoek-accommodation/voigtland-guesthouse/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/waldeck-lodge/",
+      "destination": "/windhoek-accommodation/waldeck-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/waterberg-wilderness/",
+      "destination": "/central-namibia-accommodation/waterberg-wilderness/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/white-sands-caprivi/",
+      "destination": "/caprivi-accommodation/white-sands-caprivi/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-boulders-camp/",
+      "destination": "/sossusvlei-accommodation/wolwedans-boulders-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-dune-camp/",
+      "destination": "/sossusvlei-accommodation/wolwedans-dune-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-dunes-lodge/",
+      "destination": "/sossusvlei-accommodation/wolwedans-dunes-lodge/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-mountain-view-suite/",
+      "destination": "/sossusvlei-accommodation/wolwedans-mountain-view-suite/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/wolwedans-plains-camp/",
+      "destination": "/sossusvlei-accommodation/wolwedans-plains-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/zambezi-mubala-camp/",
+      "destination": "/caprivi-accommodation/zambezi-mubala-camp/",
+      "permanent": true
+    },
+    {
+      "source": "/accommodation/zambezi-mubala-lodge/",
+      "destination": "/caprivi-accommodation/zambezi-mubala-lodge/",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/", "destination": "/namibia_agent_portal.html" }
+    {
+      "source": "/",
+      "destination": "/namibia_agent_portal.html"
+    }
   ]
 }
