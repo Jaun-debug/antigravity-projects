@@ -349,6 +349,88 @@ const STO_DB = {
         ['Guide (per night, nett)', '2,500']
       ]}
     ]
+  },
+'droombos-estate': {
+    name: 'Droombos Estate & Simanya River Lodge', commission: '20% STO', currency: 'N$', validity: '2026',
+    note: 'All rates in Namibian Dollar, incl. VAT & Tourism Levy. Net STO rates.',
+    sections: [
+      { title: 'Rates (per person, per night)', rows: [
+        ['Droombos Distinctive Room (Sharing) - B&B (Low Season)', '4,449'],
+        ['Droombos Distinctive Room (Sharing) - B&B (High Season)', '4,894'],
+        ['Droombos Distinctive Room (Single) - B&B (Low Season)', '5,121'],
+        ['Droombos Distinctive Room (Single) - B&B (High Season)', '5,633'],
+        ['Droombos Luxury Room (Sharing) - B&B (Low Season)', '2,759'],
+        ['Droombos Luxury Room (Sharing) - B&B (High Season)', '3,035'],
+        ['Droombos Luxury Room (Single) - B&B (Low Season)', '3,146'],
+        ['Droombos Luxury Room (Single) - B&B (High Season)', '3,461'],
+        ['Droombos Standard Room (Sharing) - B&B (Low Season)', '1,355'],
+        ['Droombos Standard Room (Sharing) - B&B (High Season)', '1,491'],
+        ['Droombos Standard Room (Single) - B&B (Low Season)', '1,549'],
+        ['Droombos Standard Room (Single) - B&B (High Season)', '1,704'],
+        ['Droombos Vineyard Glamping (Sharing) - B&B (Low Season)', '700'],
+        ['Droombos Vineyard Glamping (Sharing) - B&B (High Season)', '880'],
+        ['Droombos Campsite (Sharing) - RO (Low Season)', '400'],
+        ['Droombos Campsite (Sharing) - RO (High Season)', '480'],
+        ['Simanya Standard Chalet (Sharing) - DBB (Low Season)', '2,904'],
+        ['Simanya Standard Chalet (Sharing) - DBB (High Season)', '3,049.20'],
+        ['Simanya Standard Chalet (Single) - DBB (Low Season)', '3,505.92'],
+        ['Simanya Standard Chalet (Single) - DBB (High Season)', '3,681.22'],
+        ['Simanya Luxury Chalet (Sharing) - DBB (Low Season)', '4,488'],
+        ['Simanya Luxury Chalet (Sharing) - DBB (High Season)', '4,712.40'],
+        ['Simanya Luxury Chalet (Single) - DBB (Low Season)', '5,192'],
+        ['Simanya Luxury Chalet (Single) - DBB (High Season)', '5,451.60'],
+        ['Simanya Campsite (Sharing) - RO (Low Season)', '350'],
+        ['Simanya Campsite (Sharing) - RO (High Season)', '420'],
+        ['Tour Guide Room (Droombos) - B&B (Low Season)', '1,200'],
+        ['Tour Guide Room (Droombos) - B&B (High Season)', '1,200'],
+        ['Tour Guide Room (Simanya) - DBB (Low Season)', '1,110'],
+        ['Tour Guide Room (Simanya) - DBB (High Season)', '1,110']
+      ]}
+    ]
+  },
+  'emanya-at-etosha': {
+    name: 'Emanya at Etosha', commission: '25% STO', currency: 'N$', validity: '2026',
+    note: 'All rates in Namibian Dollar, incl. VAT & Tourism Levy. Net STO rates.',
+    sections: [
+      { title: 'Rates (per person, per night)', rows: [
+        ['Standard Chalet (Sharing) - B&B (Low Season)', '1,477.50'],
+        ['Standard Chalet (Sharing) - B&B (High Season)', '1,875'],
+        ['Standard Chalet (Single) - B&B (Low Season)', '2,325'],
+        ['Standard Chalet (Single) - B&B (High Season)', '3,000'],
+        ['Standard Chalet (Sharing) - DBB (Low Season)', '1,856.25'],
+        ['Standard Chalet (Sharing) - DBB (High Season)', '2,257.50'],
+        ['Standard Chalet (Single) - DBB (Low Season)', '2,970'],
+        ['Standard Chalet (Single) - DBB (High Season)', '3,210'],
+        ['Children 4-11 sharing - B&B (Low Season)', '877.50'],
+        ['Children 4-11 sharing - B&B (High Season)', '1,125'],
+        ['Children 4-11 sharing - DBB (Low Season)', '1,113.75'],
+        ['Children 4-11 sharing - DBB (High Season)', '1,350'],
+        ['Tour Guide Room - DBB (Low Season)', '880'],
+        ['Tour Guide Room - DBB (High Season)', '880']
+      ]}
+    ]
+  },
+  'namib-guesthouse': {
+    name: 'Namib Guesthouse', commission: '20% STO', currency: 'N$', validity: '2026',
+    note: 'All rates in Namibian Dollar, incl. VAT & Tourism Levy. Net STO rates.',
+    sections: [
+      { title: 'Rates (per person, per night)', rows: [
+        ['Single Room (Low Season)', '1,120'],
+        ['Single Room (High Season)', '1,440'],
+        ['Luxury Single Room (Low Season)', '1,280'],
+        ['Luxury Single Room (High Season)', '1,600'],
+        ['Double Room (pp sharing) (Low Season)', '1,040'],
+        ['Double Room (pp sharing) (High Season)', '1,160'],
+        ['Luxury Double (pp sharing) (Low Season)', '1,160'],
+        ['Luxury Double (pp sharing) (High Season)', '1,360'],
+        ['Family Suite (pp sharing) (Low Season)', '1,160'],
+        ['Family Suite (pp sharing) (High Season)', '1,360'],
+        ['Child 7–12 yrs (per child) (Low Season)', '600'],
+        ['Child 7–12 yrs (per child) (High Season)', '600'],
+        ['Tour Guide (Low Season)', '700'],
+        ['Tour Guide (High Season)', '700']
+      ]}
+    ]
   }
 };
 
