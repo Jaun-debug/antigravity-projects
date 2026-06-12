@@ -37,21 +37,21 @@ a{color:inherit;text-decoration:none;}
 section{padding:50px 0;}
 .lead{font-size:1.1rem;max-width:780px;margin:0 auto;text-align:center;color:var(--text-main);}
 h2{font-family:var(--font-head);color:var(--brand-accent);font-weight:500;font-size:1.5rem;margin-bottom:18px;}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
-.card{background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.05);transition:.3s;border:1px solid rgba(0,0,0,.03);display:block;}
-.card:hover{transform:translateY(-4px);box-shadow:0 14px 34px rgba(164,130,86,.18);}
-.card .img{height:160px;background:#cfc8be center/cover no-repeat;}
+
+
+
+
 .card .
-.card h3{font-family:var(--font-head);font-weight:500;color:var(--text-main);font-size:1.1rem;}
-.card p{font-size:.84rem;color:var(--text-muted);margin-top:4px;}
-.card .go{display:inline-block;margin-top:10px;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--brand-accent);}
+
+
+
 .more{margin-top:34px;background:var(--sand);border-radius:10px;padding:24px 26px;}
 .more h3{font-family:var(--font-head);font-weight:500;color:var(--brand-accent);margin-bottom:10px;}
 .more ul{columns:3;column-gap:28px;list-style:none;font-size:.9rem;color:var(--text-muted);}
 .more li{padding:4px 0;}
 footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;padding:30px;font-size:.82rem;}
 footer a:hover{color:var(--brand-accent);}
-@media(max-width:760px){.grid{grid-template-columns:1fr;}.more ul{columns:1;}}
+
 
 .main-header{position:fixed;top:0;left:0;width:100%;padding:14px 50px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(234,233,230,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(164,130,86,.15);box-shadow:0 4px 25px rgba(0,0,0,.04);}
 .header-logo-block{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;}
@@ -72,6 +72,20 @@ footer a:hover{color:var(--brand-accent);}
 .dropdown-menu a:hover{background:rgba(164,130,86,.1);color:var(--brand-accent);}
 body{padding-top:74px;}
 @media(max-width:900px){.main-header{padding:12px 20px;}.nav-links{gap:14px;}.nav-link,.nav-item-dropdown{display:none;}}
+
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.05);transition:.4s ease;border:1px solid rgba(0,0,0,.03);display:flex;flex-direction:column;text-decoration:none;}
+.card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(164,130,86,.18);border-color:rgba(164,130,86,.3);}
+.card .img{height:320px;background:#3c3530 center/cover no-repeat;position:relative;transition:transform .7s cubic-bezier(.2,.8,.2,1);}
+.card:hover .img{transform:scale(1.04);}
+.card .img::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,rgba(0,0,0,.12) 45%,rgba(0,0,0,.28) 100%);}
+.card .img h3{position:absolute;inset:0;margin:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 22px;color:#fff;font-family:var(--font-head);font-size:1.7rem;font-weight:500;line-height:1.3;z-index:2;letter-spacing:1px;text-shadow:0 2px 18px rgba(0,0,0,.55);}
+.card .body{padding:22px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:14px;}
+.card .body p{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);margin:0;}
+.card .go{display:inline-block;padding:10px 26px;border:1px solid var(--brand-accent);color:var(--brand-accent);font-family:var(--font-head);text-transform:uppercase;font-size:.72rem;letter-spacing:1.5px;border-radius:4px;transition:.3s;}
+.card:hover .go{background:var(--brand-accent);color:#fff;}
+@media(max-width:760px){.grid{grid-template-columns:1fr;}.card .img{height:240px;}}
 
 </style>
 </head>
@@ -100,8 +114,8 @@ body{padding-top:74px;}
 <section style="padding-top:0"><div class="wrap">
   <h2>Featured lodges</h2>
   <div class="grid">
-    <a class="card" href="#"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/9828/cgl-jun18-decks-10.jpg?fmt=jpg')"></div><div class="body"><h3>Chobe Game Lodge</h3><p>Botswana</p><span class="go">Page in progress</span></div></a>
-    <a class="card" href="#"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/10099/1732260849229_1727442045_1700166832_Camp-Okavango---Main-Area-2023-31.jpg?fmt=jpg')"></div><div class="body"><h3>Camp Okavango</h3><p>Botswana</p><span class="go">Page in progress</span></div></a>
+    <a class="card" href="#"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/9828/cgl-jun18-decks-10.jpg?fmt=jpg')"><h3>Chobe Game Lodge</h3></div><div class="body"><p>Botswana</p><span class="go">Page in progress</span></div></a>
+    <a class="card" href="#"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/10099/1732260849229_1727442045_1700166832_Camp-Okavango---Main-Area-2023-31.jpg?fmt=jpg')"><h3>Camp Okavango</h3></div><div class="body"><p>Botswana</p><span class="go">Page in progress</span></div></a>
   </div>
 
   <div class="more">
