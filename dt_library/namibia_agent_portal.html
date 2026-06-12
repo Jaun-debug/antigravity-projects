@@ -1361,16 +1361,6 @@
                 <input type="password" id="agent-password-input" placeholder="••••••••" style="width: 100%; background: transparent; border: none; border-bottom: 1px solid rgba(164, 130, 86, 0.3); font-weight: 300; font-family: var(--font-body); font-size: 1.15rem; color: var(--text-main); outline: none; padding: 5px 0; transition: 0.3s;" onfocus="this.style.borderColor='var(--brand-accent)';" onblur="this.style.borderColor='rgba(164, 130, 86, 0.3)';" onkeydown="if(event.key === 'Enter') submitAgentLogin()">
             </div>
 
-            <!-- Testing Credentials Helper Tooltip -->
-            <div style="background: rgba(135, 169, 150, 0.08); border: 1px dashed rgba(135, 169, 150, 0.3); border-radius: 5px; padding: 12px; margin-bottom: 25px; text-align: left; font-size: 0.75rem; color: var(--text-muted); line-height: 1.5; font-family: var(--font-body);">
-                <span style="font-weight: 600; color: var(--brand-green); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 6px; font-size: 0.7rem;">Quick Tester Logins (No password needed!):</span>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 5px;">
-                    <button type="button" onclick="document.getElementById('agent-username-input').value='ultimate'; submitAgentLogin();" style="padding: 4px 8px; font-size: 0.68rem; font-family: var(--font-head); background: #709380; color: #fff; border: 1px solid #709380; border-radius: 4px; cursor: pointer; transition: 0.3s; line-height: 1.4;">Ultimate Safaris</button>
-                    <button type="button" onclick="document.getElementById('agent-username-input').value='sense'; submitAgentLogin();" style="padding: 4px 8px; font-size: 0.68rem; font-family: var(--font-head); background: #709380; color: #fff; border: 1px solid #709380; border-radius: 4px; cursor: pointer; transition: 0.3s; line-height: 1.4;">Sense of Africa</button>
-                    <button type="button" onclick="document.getElementById('agent-username-input').value='discover'; submitAgentLogin();" style="padding: 4px 8px; font-size: 0.68rem; font-family: var(--font-head); background: #709380; color: #fff; border: 1px solid #709380; border-radius: 4px; cursor: pointer; transition: 0.3s; line-height: 1.4;">Discover Africa</button>
-                    <button type="button" onclick="document.getElementById('agent-username-input').value='admin'; submitAgentLogin();" style="padding: 4px 8px; font-size: 0.68rem; font-family: var(--font-head); background: #a48256; color: #fff; border: 1px solid #a48256; border-radius: 4px; cursor: pointer; transition: 0.3s; line-height: 1.4;">🔑 Admin Console</button>
-                </div>
-            </div>
 
             <button onclick="submitAgentLogin()" style="width: 100%; padding: 16px; background: linear-gradient(135deg, #a8c3b4 0%, #709380 100%); color: #fff; border: none; border-radius: 5px; font-family: var(--font-head); font-weight: 400; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(112, 147, 128, 0.3);" onhover="this.style.transform='translateY(-1px)';" onactive="this.style.transform='translateY(0px)';">Access Workspace</button>
         </div>
@@ -5093,12 +5083,14 @@
             // of a 404.
             const url = getLodgeRateSheetUrl(lodgeName);
             const dead = /individual_rates\.html|logufa_rates\.html|ondili_rates_booking\.html|quiver_and_co|vehicle_rates\.html|activity_rates\.html|\.\.\/|_Desert Tracks/i;
-            if (url && !dead.test(url)) {
+            // Only a SIGNED-IN agent may open a gated STO sheet. A public visitor must NEVER be
+            // sent to a gated sheet (that bounces to the login). Public -> the rates notice.
+            if (loggedInAgent && url && !dead.test(url)) {
                 window.open(url, '_blank');
                 return;
             }
 
-            // No deployed rate sheet for this lodge -> "Rates to follow" (public) / "contact the lodge" (agent).
+            // Public, or no deployed sheet -> "Rates to follow" / "contact the lodge". No login prompt.
             showContactSupplier(lodgeName);
         }
 
@@ -5408,7 +5400,8 @@
             if (accommodationPageMap[lodgeName]) { window.location.href = accommodationPageMap[lodgeName]; return; }
             const url = getLodgeRateSheetUrl(lodgeName);
             const dead = /individual_rates\.html|logufa_rates\.html|ondili_rates_booking\.html|quiver_and_co|vehicle_rates\.html|activity_rates\.html|\.\.\/|_Desert Tracks/i;
-            if (url && !dead.test(url)) {
+            // Public visitors never reach a gated sheet (no login prompt); only signed-in agents do.
+            if (loggedInAgent && url && !dead.test(url)) {
                 window.open(url, '_blank');
                 return;
             }
