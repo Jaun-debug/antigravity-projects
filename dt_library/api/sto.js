@@ -51,6 +51,19 @@ const STO_DB = {
         ['Bird Cruise (mornings only)', '552']
       ]}
     ]
+  },
+  'epako-safari-lodge': {
+    name: 'Epako Safari Lodge', commission: '20% STO', currency: 'N$', validity: '2026',
+    note: 'All rates in Namibian Dollar, incl. VAT & Tourism Levy. Net STO rates.',
+    sections: [
+      { title: 'Rates (per person, per night)', rows: [
+        ['Deluxe Room (Sharing pp) - DBB', '7,120'],
+        ['Deluxe Room (Single) - DBB', '10,720'],
+        ['Junior Suite (Sharing pp) - DBB', '9,720'],
+        ['Junior Suite (Single) - DBB', '14,240'],
+        ['Tour Guide Room - DBB', '2,190']
+      ]}
+    ]
   }
 };
 
