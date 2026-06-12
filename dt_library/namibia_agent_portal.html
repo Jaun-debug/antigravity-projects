@@ -3793,6 +3793,12 @@
             if (wantAgent && !loggedInAgent) {
                 setTimeout(() => openLogin('Agent Portal'), 150);
             }
+
+            // A region page "more lodges" link can deep-link a specific lodge: /?lodge=<Name>
+            const lodgeParam = new URLSearchParams(window.location.search).get('lodge');
+            if (lodgeParam) {
+                setTimeout(() => { try { openLogin(lodgeParam); } catch(e){} }, 250);
+            }
         });
 
         // State for List Your Property Rates Dashboard
