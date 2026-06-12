@@ -4923,6 +4923,11 @@
         // === Clean SEO URL routing (new /accommodation/ structure) ===
         const accommodationPageMap = {
             'Camp Kwando': '/accommodation/camp-kwando/',
+            'Beach Lodge': '/accommodation/beach-lodge/',
+            'Beach Hotel Swakopmund': '/accommodation/beach-hotel-swakopmund/',
+            'Bahnhof Hotel Aus': '/accommodation/bahnhof-hotel-aus/',
+            'Hansa Hotel': '/accommodation/hansa-hotel/',
+            'Gabus Game Ranch': '/accommodation/gabus-game-ranch/',
             'White Sands Caprivi': '/accommodation/white-sands-caprivi/',
             'Epako Safari Lodge': '/accommodation/epako-safari-lodge/',
             'Erongo Rocks': '/accommodation/erongo-rocks/',
@@ -5078,14 +5083,18 @@
             }
 
             // Direct bookable rate sheet (these live under /ratesheets/ and are gated).
-            // Ignore the legacy individual_rates.html / vehicle_rates.html which aren't deployed.
+            // BULLETPROOF: only navigate to a sheet we know is actually deployed. Any legacy /
+            // vault / wrong-filename target (individual_rates, logufa_rates, ondili_rates_booking,
+            // quiver_and_co, vehicle/activity, ../ vault paths) is dead -> show the notice instead
+            // of a 404.
             const url = getLodgeRateSheetUrl(lodgeName);
-            if (url && !url.includes('individual_rates.html') && !url.startsWith('vehicle_rates.html')) {
+            const dead = /individual_rates\.html|logufa_rates\.html|ondili_rates_booking\.html|quiver_and_co|vehicle_rates\.html|activity_rates\.html|\.\.\/|_Desert Tracks/i;
+            if (url && !dead.test(url)) {
                 window.open(url, '_blank');
                 return;
             }
 
-            // No contracted rate sheet for this lodge -> show a contact-supplier notice.
+            // No deployed rate sheet for this lodge -> "Rates to follow" (public) / "contact the lodge" (agent).
             showContactSupplier(lodgeName);
         }
 
