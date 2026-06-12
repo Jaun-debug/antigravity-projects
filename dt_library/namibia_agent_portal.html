@@ -5114,77 +5114,44 @@
         }
 
         function submitAgentLogin() {
-            let username = document.getElementById('agent-username-input').value.trim().toLowerCase();
+            const username = document.getElementById('agent-username-input').value.trim();
+            const password = document.getElementById('agent-password-input').value;
             const errorEl = document.getElementById('agent-login-error-msg');
+            errorEl.style.display = 'none';
+            errorEl.textContent = '';
 
-            // --- Secure session bridge ---------------------------------------------------
-            // Validate the entered credentials against the server (/api/sto). On success the
-            // server returns a session token which we store; every lodge page reads it and
-            // shows that agent's net STO automatically — so they only sign in here, once.
-            (function(){
-                const u = document.getElementById('agent-username-input').value.trim();
-                const p = document.getElementById('agent-password-input').value;
-                fetch('/api/sto', {method:'POST', headers:{'Content-Type':'application/json'},
-                    body: JSON.stringify({username:u, password:p})})
-                  .then(function(r){ return r.ok ? r.json() : null; })
-                  .then(function(j){
-                      if (j && j.token) {
-                          localStorage.setItem('nr_agent_token', j.token);
-                          // cookie lets the Edge middleware unlock the bookable STO sheets
-                          document.cookie = 'nr_session=' + encodeURIComponent(j.token) + '; path=/; max-age=2592000; SameSite=Lax';
-                      } else {
-                          localStorage.removeItem('nr_agent_token');
-                          document.cookie = 'nr_session=; path=/; max-age=0; SameSite=Lax';
-                      }
-                  })
-                  .catch(function(){});
-            })();
-            // -----------------------------------------------------------------------------
-
-            // Allow blank login to automatically default to ultimate safaris
-            if (!username) {
-                username = 'ultimate';
-            }
-
-            if (username === 'admin') {
-                loggedInAgent = {
-                    username: 'admin',
-                    name: 'Platform Administrator',
-                    stoTier: '0',
-                    contact: 'Administrator',
-                    email: 'admin@namibiarates.com',
-                    isAdmin: true
-                };
-                localStorage.setItem('namibia_rates_logged_in_agent', JSON.stringify(loggedInAgent));
-                closeLogin();
-                showToast("Logged in as Administrator", "success");
-                openManagementApprovalModal();
-                checkAgentActiveContracts(); // refresh green highlights
-                return;
-            }
-
-            const activeUser = agentCredentials[username] || agentCredentials['ultimate'];
-            loggedInAgent = {
-                username: username in agentCredentials ? username : 'ultimate',
-                ...activeUser
-            };
-            
-            // Save session in localStorage
-            localStorage.setItem('namibia_rates_logged_in_agent', JSON.stringify(loggedInAgent));
-            
-            closeLogin();
-            showToast('Signed in — your contracted STO rates are now unlocked on every lodge page.', 'success');
-
-            // If the agent was trying to open a specific lodge, take them straight to it.
-            if (pendingAgentLodge && accommodationPageMap[pendingAgentLodge]) {
-                const dest = accommodationPageMap[pendingAgentLodge];
-                pendingAgentLodge = null;
-                setTimeout(() => { window.location.href = dest; }, 600);
-            }
-            pendingAgentLodge = null;
-
-            // Refresh contract visual highlights in public view
-            checkAgentActiveContracts();
+            // SERVER-ONLY login. The ONLY valid credentials are the ones set in Vercel
+            // (AGENT_USER / AGENT_PASS = "desert tracks" / "passme9cops"). No client-side
+            // bypass, no demo agents. On success we store the session token + cookie and go
+            // STRAIGHT to the rate sheet so the agent sees their net STO immediately.
+            fetch('/api/sto', {method:'POST', headers:{'Content-Type':'application/json'},
+                body: JSON.stringify({username:username, password:password})})
+              .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
+              .then(function(res){
+                  if (res.ok && res.j && res.j.token) {
+                      localStorage.setItem('nr_agent_token', res.j.token);
+                      // cookie lets the Edge middleware unlock the bookable STO sheets
+                      document.cookie = 'nr_session=' + encodeURIComponent(res.j.token) + '; path=/; max-age=2592000; SameSite=Lax';
+                      loggedInAgent = { username:'desert tracks', name:'Desert Tracks', company:'Desert Tracks' };
+                      localStorage.setItem('namibia_rates_logged_in_agent', JSON.stringify(loggedInAgent));
+                      closeLogin();
+                      showToast('Signed in — your contracted STO rates are now unlocked.', 'success');
+                      if (typeof checkAgentActiveContracts === 'function') { checkAgentActiveContracts(); }
+                      // Go straight to the rate sheet: the lodge they clicked, else Camp Kwando.
+                      const dest = (pendingAgentLodge && accommodationPageMap[pendingAgentLodge])
+                          ? accommodationPageMap[pendingAgentLodge]
+                          : (accommodationPageMap['Camp Kwando'] || null);
+                      pendingAgentLodge = null;
+                      if (dest) { setTimeout(function(){ window.location.href = dest; }, 500); }
+                  } else {
+                      errorEl.textContent = (res.j && res.j.error) ? res.j.error : 'Invalid credentials.';
+                      errorEl.style.display = 'block';
+                  }
+              })
+              .catch(function(){
+                  errorEl.textContent = 'Network error — please try again.';
+                  errorEl.style.display = 'block';
+              });
         }
 
         // ==========================================
