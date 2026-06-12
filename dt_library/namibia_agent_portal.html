@@ -3786,21 +3786,14 @@
             loadB2BNetworkState();
             setTimeout(initB2BNetworkListings, 100);
             
-            // Restore agent login session if exists
-            const savedAgent = localStorage.getItem('namibia_rates_logged_in_agent');
-            if (savedAgent) {
-                try {
-                    loggedInAgent = JSON.parse(savedAgent);
-                    // Also restore itinerary list if saved
-                    const savedItin = localStorage.getItem('namibia_rates_agent_itinerary');
-                    if (savedItin) {
-                        agentItinerary = JSON.parse(savedItin);
-                    }
-                    // Highlight active B2B contracts
-                    setTimeout(checkAgentActiveContracts, 300);
-                } catch(e) {
-                    loggedInAgent = null;
-                }
+            // Restore agent session from the SECURE token only — never a stale demo object.
+            // Purge any old client-side demo session (this is what used to reopen the workspace).
+            localStorage.removeItem('namibia_rates_logged_in_agent');
+            if (localStorage.getItem('nr_agent_token')) {
+                loggedInAgent = { username:'desert tracks', name:'Desert Tracks', company:'Desert Tracks' };
+                setTimeout(checkAgentActiveContracts, 300);
+            } else {
+                loggedInAgent = null;
             }
 
             // If a lodge page / gated sheet sent the agent here to sign in, open the login.
@@ -5065,7 +5058,9 @@
             if (lodgeName === 'Agent Portal') {
                 pendingAgentLodge = null;
                 if (loggedInAgent) {
-                    openAgentWorkspace();
+                    // Already signed in -> go STRAIGHT to the rate sheet (no workspace).
+                    var goDest = accommodationPageMap['Camp Kwando'];
+                    if (goDest) { window.location.href = goDest; }
                 } else {
                     document.getElementById('modal-lodge-name').innerText = 'Agent Sign In';
                     document.getElementById('agent-username-input').value = '';
@@ -6391,6 +6386,7 @@
         });
 
         function openAgentWorkspace(initialLodge) {
+            return; // RETIRED: Partner Agent Workspace removed — agents go straight to rate sheets.
             if (!loggedInAgent) return;
             
             // Set header profile details
