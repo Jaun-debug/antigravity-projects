@@ -66,6 +66,8 @@ footer a:hover{color:var(--brand-accent);}
 .nav-item-dropdown{position:relative;display:inline-block;}
 .dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(246,245,242,.98);backdrop-filter:blur(25px);border:1px solid rgba(164,130,86,.18);box-shadow:0 10px 40px rgba(0,0,0,.08);border-radius:8px;padding:18px;z-index:1100;gap:18px;min-width:240px;}
 .nav-item-dropdown:hover .dropdown-menu{display:flex;}
+.nav-item-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
+.dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
 .dropdown-column{display:flex;flex-direction:column;gap:6px;min-width:200px;}
 .dropdown-menu.single-column{flex-direction:column;min-width:240px;gap:6px;}
 .dropdown-menu a{color:var(--text-main);text-decoration:none;font-size:.82rem;padding:7px 11px;border-radius:5px;transition:.2s;}

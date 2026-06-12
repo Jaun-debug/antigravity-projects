@@ -99,15 +99,42 @@ input.qty:focus{border-color:var(--brand-accent);box-shadow:0 0 0 2px rgba(164,1
 #booking-bar .bk-total{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;}
 #booking-bar .btn.solid{animation:none;}
 @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;}.info-grid{grid-template-columns:1fr;}.gallery img{height:180px;}}
+
+.main-header{position:fixed;top:0;left:0;width:100%;padding:14px 50px;display:flex;justify-content:space-between;align-items:center;z-index:100;background:rgba(234,233,230,.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(164,130,86,.15);box-shadow:0 4px 25px rgba(0,0,0,.04);}
+.header-logo-block{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;}
+.logo-main{font-family:var(--font-head);font-size:1.5rem;color:var(--brand-accent);text-transform:uppercase;letter-spacing:3px;line-height:1.1;font-weight:500;}
+.logo-sub{font-family:var(--font-body);font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:4px;margin-top:5px;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-link{color:var(--text-main);text-decoration:none;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;transition:color .3s;cursor:pointer;}
+.nav-link:hover{color:var(--brand-accent);}
+.enquire-now-btn{background:var(--brand-green);border:1px solid var(--brand-green);color:#fff;padding:9px 22px;border-radius:5px;cursor:pointer;font-family:var(--font-head);font-size:.8rem;letter-spacing:1px;text-transform:uppercase;transition:all .3s;}
+.enquire-now-btn:hover{background:var(--brand-accent);border-color:var(--brand-accent);}
+.search-icon-btn{background:none;border:none;cursor:pointer;color:var(--brand-accent);padding:5px;display:flex;align-items:center;}
+.nav-item-dropdown{position:relative;display:inline-block;}
+.dropdown-menu{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%) translateY(8px);background:rgba(246,245,242,.98);backdrop-filter:blur(25px);border:1px solid rgba(164,130,86,.18);box-shadow:0 10px 40px rgba(0,0,0,.08);border-radius:8px;padding:18px;z-index:1100;gap:18px;min-width:240px;}
+.nav-item-dropdown:hover .dropdown-menu{display:flex;}
+.dropdown-column{display:flex;flex-direction:column;gap:6px;min-width:200px;}
+.dropdown-menu.single-column{flex-direction:column;min-width:240px;gap:6px;}
+.dropdown-menu a{color:var(--text-main);text-decoration:none;font-size:.82rem;padding:7px 11px;border-radius:5px;transition:.2s;}
+.dropdown-menu a:hover{background:rgba(164,130,86,.1);color:var(--brand-accent);}
+.nav-item-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
+.dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
+body{padding-top:74px;}
+@media(max-width:900px){.main-header{padding:12px 20px;}.nav-links{gap:14px;}.nav-link,.nav-item-dropdown{display:none;}}
+
 </style>
 </head>
 <body>
-<header class="site">
-  <a class="logo" href="/">Namibia Rates<small>Trade Rates Portal</small></a>
-  <div style="display:flex;align-items:center;gap:18px">
-    <div class="crumbs"><a href="/">Home</a> · <a href="/sossusvlei-accommodation/">Sossusvlei & Namib Accommodation</a> · Ababis Guest Farm</div>
-    <button class="hdr-agent" id="hdr-agent" onclick="agentBtn()">Agent Sign In</button>
-  </div>
+<header class="main-header">
+  <a href="/" class="header-logo-block"><span class="logo-main">Namibia Rates</span><span class="logo-sub">Trade Rates Portal</span></a>
+  <nav class="nav-links">
+    <div class="nav-item-dropdown"><a class="nav-link">Accommodation &#9662;</a><div class="dropdown-menu"><div class="dropdown-column"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a></div><div class="dropdown-column"><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div>
+    <div class="nav-item-dropdown"><a class="nav-link" href="/">Vehicles &#9662;</a><div class="dropdown-menu single-column"><a href="/">Vehicle rates &#8594; open portal</a></div></div>
+    <div class="nav-item-dropdown"><a class="nav-link" href="/">Activities &#9662;</a><div class="dropdown-menu single-column"><a href="/">Activity rates &#8594; open portal</a></div></div>
+    <a href="/" class="nav-link">List Your Property</a>
+    <button class="enquire-now-btn" id="hdr-agent" onclick="if(typeof agentBtn===&#39;function&#39;){agentBtn()}else{location.href=&#39;/#agent&#39;}">Agent Sign In</button>
+    <button class="search-icon-btn" aria-label="Search" onclick="location.href='/'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
+  </nav>
 </header>
 
 <div class="hero">
@@ -317,5 +344,6 @@ function submitLogin(){
 
 applySession();
 </script>
+<script>(function(){var b=document.getElementById('hdr-agent');if(!b)return;if(typeof agentBtn!=='function'){if(localStorage.getItem('nr_agent_token')){b.textContent='Sign Out';b.onclick=function(){localStorage.removeItem('nr_agent_token');document.cookie='nr_session=; path=/; max-age=0; SameSite=Lax';location.reload();};}}})();</script>
 </body>
 </html>
