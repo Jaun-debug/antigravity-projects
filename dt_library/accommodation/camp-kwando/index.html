@@ -47,6 +47,8 @@ header.site{position:sticky;top:0;z-index:50;display:flex;justify-content:space-
 .logo small{display:block;font-family:var(--font-body);font-size:.55rem;letter-spacing:3px;color:var(--text-muted);}
 .crumbs{font-size:.78rem;color:var(--text-muted);letter-spacing:.5px;}
 .crumbs a{text-decoration:none;color:var(--text-muted);}.crumbs a:hover{color:var(--brand-accent);}
+.hdr-agent{cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:1.5px;font-size:.7rem;padding:8px 16px;border-radius:5px;border:1px solid var(--brand-accent);background:transparent;color:var(--brand-accent);white-space:nowrap;transition:.25s;}
+.hdr-agent:hover{background:var(--brand-accent);color:#fff;}
 .hero{position:relative;height:62vh;min-height:420px;background:#2b2b2b url('https://wetu.com/imageHandler/c1920x1080/37307/kwando_river-istock-5255684771.jpg?fmt=jpg') center/cover no-repeat;display:flex;align-items:flex-end;}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.65));}
 .hero-inner{position:relative;z-index:2;color:#fff;padding:0 28px 46px;max-width:1080px;margin:0 auto;width:100%;}
@@ -94,7 +96,10 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
 <body>
 <header class="site">
   <a class="logo" href="/">Namibia Rates<small>Trade Rates Portal</small></a>
-  <div class="crumbs"><a href="/">Home</a> · <a href="/caprivi-accommodation/">Caprivi Accommodation</a> · Camp Kwando</div>
+  <div style="display:flex;align-items:center;gap:18px">
+    <div class="crumbs"><a href="/">Home</a> · <a href="/caprivi-accommodation/">Caprivi Accommodation</a> · Camp Kwando</div>
+    <button class="hdr-agent" id="hdr-agent" onclick="agentBtn()">Agent Sign In</button>
+  </div>
 </header>
 
 <div class="hero">
@@ -117,7 +122,6 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
-      <div style="margin-top:10px"><button class="btn" id="agent-btn" onclick="agentBtn()">Sign in on homepage to view STO</button></div>
     </div>
   </div>
   <div id="rate-tables"></div>
@@ -164,6 +168,22 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
 
 <footer>&copy; <span id="yr">2026</span> Namibia Rates · Trade Rates Portal — Authorized Partners Only · <a href="mailto:info@namibiarates.com">info@namibiarates.com</a></footer>
 
+<div class="modal" id="login-modal">
+  <div class="modal-box">
+    <h3>Agent Sign In</h3>
+    <p>Trade partners only — sign in to view your contracted rates.</p>
+    <label>Username</label>
+    <input id="login-user" type="text" autocomplete="username" onkeydown="if(event.key==='Enter')submitLogin()">
+    <label>Password</label>
+    <input id="login-pass" type="password" autocomplete="current-password" onkeydown="if(event.key==='Enter')submitLogin()">
+    <div class="modal-err" id="login-err"></div>
+    <div class="modal-actions">
+      <button class="btn" style="flex:1" onclick="closeLoginModal()">Cancel</button>
+      <button class="btn solid" style="flex:1" onclick="submitLogin()">Sign In</button>
+    </div>
+  </div>
+</div>
+
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 
@@ -196,12 +216,17 @@ function renderRates(model, isSto){
 }
 var LODGE='camp-kwando', TOKEN_KEY='nr_agent_token';
 
+function setHdrBtn(signedIn){
+  var h=document.getElementById('hdr-agent');
+  if(h){ h.textContent = signedIn ? 'Sign out' : 'Agent Sign In'; }
+}
+
 // Show public rack rates (signed-out state).
 function showRack(){
   renderRates(RACK,false);
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
   document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
-  document.getElementById('agent-btn').textContent='Sign in on homepage to view STO';
+  setHdrBtn(false);
 }
 
 // Show net STO (signed-in state) using the rates returned by the server.
@@ -209,10 +234,10 @@ function showSto(d){
   renderRates(d,true);
   var b=document.getElementById('mode-badge'); b.textContent='Net STO · '+d.commission; b.classList.add('sto');
   document.getElementById('rate-sub').textContent=d.note+' · Valid '+d.validity;
-  document.getElementById('agent-btn').textContent='Sign out';
+  setHdrBtn(true);
 }
 
-// On load: if a homepage session token exists, fetch STO automatically — no login here.
+// On load: if a session token exists, fetch STO automatically.
 function applySession(){
   var token=localStorage.getItem(TOKEN_KEY);
   if(!token){ showRack(); return; }
@@ -226,10 +251,38 @@ function applySession(){
   .catch(function(){ showRack(); });
 }
 
-// Button: signed in -> sign out; signed out -> go to homepage to sign in.
+// Header button: signed in -> sign out; signed out -> open the login modal.
 function agentBtn(){
   if(localStorage.getItem(TOKEN_KEY)){ localStorage.removeItem(TOKEN_KEY); showRack(); }
-  else { window.location.href='/#agent'; }
+  else { openLoginModal(); }
+}
+function openLoginModal(){
+  document.getElementById('login-err').textContent='';
+  document.getElementById('login-user').value='';
+  document.getElementById('login-pass').value='';
+  document.getElementById('login-modal').classList.add('open');
+  document.getElementById('login-user').focus();
+}
+function closeLoginModal(){ document.getElementById('login-modal').classList.remove('open'); }
+
+// Sign in -> validate against /api/sto -> go STRAIGHT to the STO rate sheet.
+function submitLogin(){
+  var u=document.getElementById('login-user').value.trim();
+  var p=document.getElementById('login-pass').value;
+  var err=document.getElementById('login-err'); err.textContent='Signing in…';
+  fetch('/api/sto',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({username:u,password:p,lodge:LODGE})})
+  .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
+  .then(function(res){
+    if(res.ok && res.j && res.j.token){
+      localStorage.setItem(TOKEN_KEY,res.j.token);
+      closeLoginModal();
+      if(res.j.rates){ showSto(res.j.rates); } else { applySession(); }
+    } else {
+      err.textContent=(res.j && res.j.error) ? res.j.error : 'Sign in failed.';
+    }
+  })
+  .catch(function(){ err.textContent='Network error — please try again.'; });
 }
 
 applySession();
