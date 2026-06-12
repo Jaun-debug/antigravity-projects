@@ -31,7 +31,31 @@ body{padding-top:74px;}
 @media(max-width:900px){.main-header{padding:12px 20px;}.nav-links{gap:14px;}.nav-link,.nav-item-dropdown{display:none;}}
 
 .region-back{max-width:1080px;margin:0 auto;padding:16px 28px 0;}.region-back a{color:var(--brand-accent);text-decoration:none;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);transition:.2s;}.region-back a:hover{color:var(--text-main);}
-</style></head><body>
+
+:root{--brand-accent:#a48256;--brand-green:#87a996;--text-main:#3c3530;--text-muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--font-head:'Cinzel',serif;--font-body:'Jost',sans-serif;}
+body{background:var(--bg)!important;color:var(--text-main)!important;font-family:var(--font-body)!important;font-weight:300;}
+.wrap{max-width:1080px!important;margin:0 auto!important;padding:46px 28px!important;}
+.crumbs{display:none!important;}
+.wrap h1,.wrap h2{font-family:var(--font-head)!important;color:var(--brand-accent)!important;font-weight:500!important;font-size:1.7rem!important;margin-bottom:6px!important;}
+.sub{color:var(--text-muted)!important;font-size:.9rem!important;margin-bottom:14px!important;}
+.badge{display:inline-block!important;background:rgba(164,130,86,.12)!important;color:var(--brand-accent)!important;border:none!important;border-radius:4px!important;padding:5px 12px!important;font-size:.7rem!important;text-transform:uppercase!important;letter-spacing:1.5px!important;}
+table{width:100%!important;border-collapse:collapse!important;margin:18px 0 4px!important;background:var(--sand)!important;border-radius:8px!important;overflow:hidden!important;}
+caption{text-align:left!important;font-family:var(--font-head)!important;font-size:1rem!important;color:var(--text-main)!important;padding:16px 16px 6px!important;}
+th{background:rgba(164,130,86,.08)!important;color:var(--text-muted)!important;text-transform:uppercase!important;font-size:.72rem!important;letter-spacing:1px!important;font-weight:500!important;padding:12px 16px!important;text-align:left!important;border:none!important;}
+td{padding:12px 16px!important;font-size:.92rem!important;border-bottom:1px solid rgba(0,0,0,.05)!important;color:var(--text-main)!important;}
+td:not(:first-child),th:not(:first-child){text-align:right!important;}
+.cta{background:var(--text-main)!important;color:#fff!important;border-radius:12px!important;padding:38px!important;text-align:center!important;margin-top:30px!important;border:none!important;}
+.cta h2,.cta h3{color:#fff!important;font-family:var(--font-head)!important;font-weight:400!important;}
+.cta p,.cta .sub{color:rgba(255,255,255,.7)!important;}
+.cta .btn,.cta a.btn{background:var(--brand-green)!important;border:none!important;color:#fff!important;}
+.hero{position:relative;height:44vh;min-height:300px;background:#2b2b2b center/cover no-repeat;display:flex;align-items:flex-end;}
+.hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.12),rgba(0,0,0,.6));}
+.hero-inner{position:relative;z-index:2;color:#fff;padding:0 28px 44px;max-width:1080px;margin:0 auto;width:100%;}
+.hero .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:.72rem;color:#e8dcc8;}
+.hero h1{color:#fff!important;font-family:var(--font-head)!important;font-size:clamp(2.1rem,6vw,3.4rem)!important;font-weight:500!important;margin:6px 0!important;text-shadow:0 3px 20px rgba(0,0,0,.45);}
+
+</style><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+</head><body>
 <header class="main-header">
   <a href="/" class="header-logo-block"><span class="logo-main">Namibia Rates</span><span class="logo-sub">Trade Rates Portal</span></a>
   <nav class="nav-links">
@@ -44,7 +68,8 @@ body{padding-top:74px;}
   </nav>
 </header>
 <div class="region-back"><a href="/kalahari-accommodation/">&#8592; Back to Kalahari Accommodation</a></div>
-<div class="wrap"><div class="crumbs">Home · Accommodation · Kalahari Red Dunes Lodge</div><h1>Kalahari Red Dunes Lodge</h1><div class="sub">Published rack rates · per person, per night · N$ incl. VAT &amp; levy</div><span class="badge">Rack Rates</span>
+<div class="hero" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/24103/img_3653.jpg?fmt=jpg')"><div class="hero-inner"><div class="eyebrow">Kalahari</div><h1>Kalahari Red Dunes Lodge</h1></div></div>
+<div class="wrap"><div class="crumbs">Home · Accommodation · Kalahari Red Dunes Lodge</div><h2>Rates</h2><div class="sub">Published rack rates · per person, per night · N$ incl. VAT &amp; levy</div><span class="badge">Rack Rates</span>
 <table><thead><tr><th>Room Type</th><th>Gross Rate (N$)</th></tr></thead><tbody><tr><td><strong>Suite — per person sharing</strong></td><td>4,800.00</td></tr><tr><td><strong>Suite — Single use</strong></td><td>6,240.00</td></tr><tr><td><strong>Superior Suite — per person sharing</strong></td><td>6,400.00</td></tr><tr><td><strong>4–12 years sharing in Suite</strong></td><td>2,400.00</td></tr><tr><td><strong>4–12 years sharing in Superior Suite</strong></td><td>3,200.00</td></tr><tr><td><strong>13+ years sharing in Superior Suite</strong></td><td>6,400.00</td></tr><tr><td><strong>Tour Guide (Meals only)</strong></td><td>1,190.00</td></tr></tbody></table>
 <div class="cta" id="cta"><h3>Trade partner?</h3><p class="sub" id="cta-text">Sign in on the homepage to view and book your contracted net STO rate for this property.</p><a class="btn" id="cta-btn" href="/#agent">Agent sign in</a></div>
 </div><footer>&copy; <span id="yr"></span> Namibia Rates · Trade Rates Portal — Authorised Partners Only · <a href="mailto:info@namibiarates.com" style="color:var(--gold)">info@namibiarates.com</a></footer>
