@@ -90,6 +90,14 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
 .modal-box input:focus{border-color:var(--brand-accent);}
 .modal-err{color:#c0392b;font-size:.82rem;margin-top:12px;min-height:1em;}
 .modal-actions{display:flex;gap:10px;margin-top:22px;}
+/* bookable (agent) view */
+.qty-col{width:90px;text-align:center;}
+input.qty{width:66px;padding:7px;border:1px solid rgba(0,0,0,.18);border-radius:6px;text-align:center;font-family:var(--font-body);font-size:.92rem;outline:none;background:#fff;}
+input.qty:focus{border-color:var(--brand-accent);box-shadow:0 0 0 2px rgba(164,130,86,.15);}
+#booking-bar{display:none;position:fixed;bottom:0;left:0;width:100%;background:rgba(60,53,48,.97);backdrop-filter:blur(10px);color:#fff;padding:14px 28px;z-index:120;align-items:center;gap:20px;box-shadow:0 -6px 24px rgba(0,0,0,.25);}
+#booking-bar .bk-count{color:rgba(255,255,255,.65);font-size:.85rem;margin-right:auto;}
+#booking-bar .bk-total{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;}
+#booking-bar .btn.solid{animation:none;}
 @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;}.info-grid{grid-template-columns:1fr;}.gallery img{height:180px;}}
 </style>
 </head>
@@ -168,6 +176,24 @@ footer{background:var(--text-main);color:rgba(255,255,255,.6);text-align:center;
 
 <footer>&copy; <span id="yr">2026</span> Namibia Rates · Trade Rates Portal — Authorized Partners Only · <a href="mailto:info@namibiarates.com">info@namibiarates.com</a></footer>
 
+<div id="booking-bar">
+  <span class="bk-count" id="booking-count"></span>
+  <span class="bk-total">Total: <strong id="booking-total"></strong></span>
+  <button class="btn solid" onclick="openBooking()">Finalise Booking</button>
+</div>
+
+<div class="modal" id="booking-modal">
+  <div class="modal-box" style="max-width:600px">
+    <h3>Finalise Booking</h3>
+    <p>Review your selection — these are your net STO rates.</p>
+    <div id="booking-body"></div>
+    <div class="modal-actions">
+      <button class="btn" style="flex:1" onclick="closeBooking()">Back</button>
+      <button class="btn solid" style="flex:1" onclick="sendBooking()">Send Booking Request</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal" id="login-modal">
   <div class="modal-box">
     <h3>Agent Sign In</h3>
@@ -208,11 +234,53 @@ var RACK = {
 function renderRates(model, isSto){
   var html='';
   model.sections.forEach(function(s){
-    html+='<table><caption>'+s.title+'</caption><thead><tr><th>Type</th><th>'+(isSto?'STO (N$)':'Rack (N$)')+'</th></tr></thead><tbody>';
-    s.rows.forEach(function(r){ html+='<tr><td>'+r[0]+'</td><td>N$ '+r[1]+'</td></tr>'; });
+    html+='<table><caption>'+s.title+'</caption><thead><tr><th>Type</th><th>'+(isSto?'STO (N$)':'Rack (N$)')+'</th>'+(isSto?'<th class="qty-col">Qty</th>':'')+'</tr></thead><tbody>';
+    s.rows.forEach(function(r){
+      var pnum=String(r[1]).replace(/[^0-9.]/g,'');
+      var nm=String(r[0]).replace(/"/g,'&quot;');
+      html+='<tr><td>'+r[0]+'</td><td>N$ '+r[1]+'</td>'
+        +(isSto?'<td class="qty-col"><input type="number" min="0" inputmode="numeric" class="qty" data-name="'+nm+'" data-price="'+pnum+'" oninput="recalcBooking()"></td>':'')
+        +'</tr>';
+    });
     html+='</tbody></table>';
   });
   document.getElementById('rate-tables').innerHTML=html;
+  if(isSto){ recalcBooking(); } else { hideBookingBar(); }
+}
+
+// --- Bookable agent view: quantity boxes -> running total -> Finalise Booking ---
+function fmtN(n){ return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function recalcBooking(){
+  var inputs=document.querySelectorAll('#rate-tables input.qty');
+  var total=0, count=0;
+  inputs.forEach(function(i){ var q=parseInt(i.value,10)||0; if(q>0){ total+=q*(parseFloat(i.dataset.price)||0); count+=q; } });
+  var bar=document.getElementById('booking-bar'); if(!bar) return;
+  if(count>0){
+    bar.style.display='flex';
+    document.getElementById('booking-total').textContent='N$ '+fmtN(total);
+    document.getElementById('booking-count').textContent=count+' item'+(count>1?'s':'')+' selected';
+  } else { bar.style.display='none'; }
+}
+function hideBookingBar(){ var b=document.getElementById('booking-bar'); if(b){ b.style.display='none'; } }
+function openBooking(){
+  var inputs=document.querySelectorAll('#rate-tables input.qty');
+  var lines=[], total=0;
+  inputs.forEach(function(i){ var q=parseInt(i.value,10)||0; if(q>0){ var p=parseFloat(i.dataset.price)||0; var lt=q*p; total+=lt; lines.push({name:i.dataset.name,qty:q,price:p,lt:lt}); } });
+  if(!lines.length){ return; }
+  var html='<table style="width:100%"><thead><tr><th>Item</th><th style="text-align:center">Qty</th><th style="text-align:right">STO</th><th style="text-align:right">Line total</th></tr></thead><tbody>';
+  lines.forEach(function(l){ html+='<tr><td>'+l.name+'</td><td style="text-align:center">'+l.qty+'</td><td style="text-align:right">N$ '+fmtN(l.price)+'</td><td style="text-align:right">N$ '+fmtN(l.lt)+'</td></tr>'; });
+  html+='</tbody></table><p style="text-align:right;font-weight:600;margin-top:14px;font-size:1.05rem">Grand total (net STO): N$ '+fmtN(total)+'</p>';
+  document.getElementById('booking-body').innerHTML=html;
+  window._bk={lines:lines,total:total};
+  document.getElementById('booking-modal').classList.add('open');
+}
+function closeBooking(){ document.getElementById('booking-modal').classList.remove('open'); }
+function sendBooking(){
+  var bk=window._bk; if(!bk||!bk.lines.length) return;
+  var body='CAMP KWANDO - NET STO BOOKING REQUEST (Desert Tracks)%0D%0A%0D%0A';
+  bk.lines.forEach(function(l){ body+=l.qty+' x '+l.name+'  @ N$ '+fmtN(l.price)+'  = N$ '+fmtN(l.lt)+'%0D%0A'; });
+  body+='%0D%0AGRAND TOTAL (net STO): N$ '+fmtN(bk.total)+'%0D%0A';
+  window.location.href='mailto:info@namibiarates.com?subject=Camp%20Kwando%20-%20STO%20Booking%20Request&body='+body;
 }
 var LODGE='camp-kwando', TOKEN_KEY='nr_agent_token';
 
