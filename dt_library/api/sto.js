@@ -431,6 +431,14 @@ const STO_DB = {
         ['Tour Guide (High Season)', '700']
       ]}
     ]
+  },
+'strand-hotel-swakopmund': {
+    name: 'Strand Hotel Swakopmund', commission: '20% STO', currency: 'N$', validity: '2026',
+    note: 'Net STO rates, incl. VAT & levy.', cols: ["Room Type","DBL/Sharing BB","Single BB","1 Child 7–13 Yrs BB  Adult","1 Child 7–13 Yrs BB  Interleading"], rows: [["Standard Rooms","3,518","5,629","879","2,638"],["Standard Sea Facing","3,758","6,013","939","2,818"],["Luxury Rooms","4,222","6,754","1,055","3,166"],["Luxury Sea Facing","4,462","7,138","1,115","3,346"],["Junior Suite","4,573","7,317","1,143","3,430"],["Luxury Suite","5,629","9,005","1,407","4,222"],["Presidential Suite","8,794","14,071","N/A","N/A"]]
+  },
+  'midgard-country-estate': {
+    name: 'Midgard Country Estate', commission: '20% STO', currency: 'N$', validity: '2026',
+    note: 'Net STO rates, incl. VAT & levy.', cols: ["Room Type","DBL/Sharing BB","DBL/Sharing DBB","Single BB","Single DBB","1 Child 7–13 BB","1 Child 7–13 DBB"], rows: [["Standard Room","2,472","3,086","3,956","4,718","618","771"],["Family Room","3,214","3,902","5,142","6,023","804","976"],["Junior Suite","3,804","4,551","6,086","7,062","951","1,138"],["Presidential Suite","4,708","5,546","7,533","8,653","1,177","1,386"]]
   }
 };
 
