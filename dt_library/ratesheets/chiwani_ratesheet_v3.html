@@ -2344,20 +2344,5 @@ window.addEventListener('load', () => {
         <span style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-left:8px;">Night(s) Selected</span>
     </div>
 </div>
-
-<script>
-(function(){
-  function go(){
-    try{
-      var k=new URLSearchParams(window.location.search).get('lodge');
-      if(k && typeof DB!=='undefined' && DB[k] && typeof openProperty==='function'){
-        openProperty(k);
-        if(typeof switchTab==='function'){ setTimeout(function(){ try{switchTab(1);}catch(e){} },250); }
-      }
-    }catch(e){}
-  }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded',go); } else { go(); }
-})();
-</script>
 </body>
 </html>
