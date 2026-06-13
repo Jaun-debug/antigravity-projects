@@ -8,7 +8,7 @@ h1{font-family:Georgia,serif;font-weight:300;font-size:clamp(2rem,5vw,3rem);marg
 table{width:100%;border-collapse:collapse;margin:16px 0}th,td{text-align:left;padding:9px 11px;border-bottom:1px solid var(--line);font-size:.85rem}th{font-size:.66rem;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}td:not(:first-child),th:not(:first-child){text-align:right}
 .cta{margin-top:30px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:24px}.cta h3{margin:0 0 8px;font-family:Georgia,serif;font-weight:400}.btn{display:inline-block;margin-top:10px;background:var(--ink);color:#fff;text-decoration:none;padding:11px 20px;border-radius:8px;font-size:.85rem}.btn.gold{background:var(--gold)}
 footer{border-top:1px solid var(--line);padding:22px 28px;color:var(--muted);font-size:.75rem;text-align:center}
-.main-header{position:fixed;top:0;left:0;width:100%;padding:14px 50px;display:flex;justify-content:space-between;align-items:center;z-index:9999;background:rgba(234,233,230,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(164,130,86,.15);box-shadow:0 4px 25px rgba(0,0,0,.04);}
+.main-header{position:fixed;top:28px;left:0;width:100%;padding:14px 50px;display:flex;justify-content:space-between;align-items:center;z-index:9999;background:rgba(234,233,230,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(164,130,86,.15);box-shadow:0 4px 25px rgba(0,0,0,.04);}
 .header-logo-block{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;}
 .logo-main{font-family:var(--font-head);font-size:1.5rem;color:var(--brand-accent);text-transform:uppercase;letter-spacing:3px;line-height:1.1;font-weight:500;}
 .logo-sub{font-family:var(--font-body);font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:4px;margin-top:5px;}
@@ -27,7 +27,7 @@ footer{border-top:1px solid var(--line);padding:22px 28px;color:var(--muted);fon
 .dropdown-menu a:hover{background:rgba(164,130,86,.1);color:var(--brand-accent);}
 .nav-item-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
 .dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
-body{padding-top:74px;}
+body{padding-top:102px;}
 @media(max-width:900px){.main-header{padding:12px 20px;}.nav-links{gap:14px;}.nav-link,.nav-item-dropdown{display:none;}}
 
 .region-back{max-width:1080px;margin:0 auto;padding:16px 28px 0;}.region-back a{color:var(--brand-accent);text-decoration:none;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);transition:.2s;}.region-back a:hover{color:var(--text-main);}
@@ -59,8 +59,13 @@ td:not(:first-child),th:not(:first-child){text-align:right!important;}
 .region-back a{color:var(--brand-green)!important;letter-spacing:1.5px!important;font-weight:400!important;}
 .region-back a:hover{color:var(--brand-accent)!important;}
 
+
+/* lodge gallery */
+.lodge-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px;}
+.lodge-gallery img{width:100%;height:230px;object-fit:cover;border-radius:8px;display:block;}
 </style><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 </head><body>
+<style>#uc-belt{position:fixed;top:0;left:0;right:0;height:28px;line-height:28px;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.3px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 14px;}@media(max-width:600px){#uc-belt{font-size:10px;}}</style><div id="uc-belt">&#9888; Under construction &mdash; accommodation, vehicle &amp; activity rates shown are provisional and not yet bookable.</div>
 <header class="main-header">
   <a href="/" class="header-logo-block"><span class="logo-main">Namibia Rates</span><span class="logo-sub">Trade Rates Portal</span></a>
   <nav class="nav-links">
@@ -76,9 +81,18 @@ td:not(:first-child),th:not(:first-child){text-align:right!important;}
 <div class="hero" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/1498/screenshot_2024-09-23_091205.png?fmt=jpg')"><div class="hero-inner"><div class="eyebrow">Sossusvlei &amp; Namib</div><h1>Sossus Dune Lodge</h1></div></div>
 <div class="wrap"><div class="crumbs">Home · Accommodation · Sossus Dune Lodge</div><h2>Rates</h2><div class="sub">Published rack rates · per person, per night · N$ incl. VAT &amp; levy</div><span class="badge">Rack Rates</span>
 <table><thead><tr><th>Unit</th><th>Qualifier</th><th>Low PPS (N$)</th><th>Low Single (N$)</th><th>High PPS (N$)</th><th>High Single (N$)</th></tr></thead><tbody><tr><td><strong>Dune chalet (2 beds)</strong></td><td>DBB</td><td>4,030</td><td>4,400</td><td>7,000</td><td>7,380</td></tr><tr><td><strong>Honeymoon chalet (double bed)</strong></td><td>DBB</td><td>4,590</td><td>4,960</td><td>7,730</td><td>8,110</td></tr></tbody></table>
+
+<section style="padding-top:0"><div class="wrap">
+  <h2>Gallery</h2><div class="sub">Sossus Dune Lodge</div>
+  <div class="lodge-gallery">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg?fmt=jpg" alt="Sossus Dune Lodge" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10515/img_6924.jpg?fmt=jpg" alt="Sossus Dune Lodge" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10515/img_5262.jpg?fmt=jpg" alt="Sossus Dune Lodge" loading="lazy">
+  </div>
+</div></section>
 <div class="cta" id="cta"><h3>Trade partner?</h3><p class="sub" id="cta-text">Sign in on the homepage to view and book your contracted net STO rate for this property.</p><a class="btn" id="cta-btn" href="/#agent">Agent sign in</a></div>
 </div><footer>&copy; <span id="yr"></span> Namibia Rates · Trade Rates Portal — Authorised Partners Only · <a href="mailto:info@namibiarates.com" style="color:var(--gold)">info@namibiarates.com</a></footer>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();
 if(localStorage.getItem('nr_agent_token')){document.getElementById('cta-text').textContent='You are signed in. Open your bookable net STO rate sheet for this property.';var b=document.getElementById('cta-btn');b.textContent='View & book your STO rate →';b.className='btn gold';b.href='/ratesheets/nwr_ratesheet_v1.html?lodge=sossusdunelodge';}</script><script>(function(){var b=document.getElementById('hdr-agent');if(!b)return;if(typeof agentBtn!=='function'){if(localStorage.getItem('nr_agent_token')){b.textContent='Sign Out';b.onclick=function(){localStorage.removeItem('nr_agent_token');document.cookie='nr_session=; path=/; max-age=0; SameSite=Lax';location.reload();};}}})();</script>
-<style>body{padding-bottom:60px!important;}#uc-banner{position:fixed;left:0;right:0;bottom:0;z-index:2147483647;background:#b3261e;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:700;letter-spacing:.3px;line-height:1.35;text-align:center;padding:11px 18px;box-shadow:0 -3px 14px rgba(0,0,0,.28);animation:ucpulse 1.4s ease-in-out infinite;}@keyframes ucpulse{0%,100%{background:#b3261e;color:#fff;}50%{background:#f0b400;color:#1a1a1a;}}@media(max-width:600px){#uc-banner{font-size:12px;padding:9px 11px;}}</style><div id="uc-banner" role="alert">&#9888; SITE UNDER CONSTRUCTION &mdash; All rates shown are provisional and for testing only. Please do NOT use, quote or book on these rates until further notice.</div>
+
 </body></html>
