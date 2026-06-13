@@ -1,9 +1,12 @@
-// Vercel Edge Middleware — gates the bookable net-STO rate sheets.
+// Vercel Edge Middleware — TEMPORARILY DISABLED (agent gate removed on request).
 //
-// Only a signed-in agent (valid session cookie) may load anything under /ratesheets/.
-// Everyone else is redirected to the homepage to sign in, so net STO rates are never
-// served to the public. The session token is derived from AGENT_PASS, exactly as in
-// api/sto.js, so the two always agree and rotate together if the password changes.
+// The /ratesheets/ STO pages are openly accessible for the moment while the site is
+// under construction (rates shown are fictitious sample rates). To RE-ENABLE the gate,
+// restore the previous version (saved) or set ENABLE_GATE below to true.
+//
+// Previous gated logic is preserved in version control / backup.
+
+const ENABLE_GATE = false;
 
 export const config = { matcher: '/ratesheets/:path*' };
 
@@ -13,16 +16,15 @@ async function sessionToken(pass) {
 }
 
 export default async function middleware(request) {
+  if (!ENABLE_GATE) return;   // gate disabled -> allow everyone through
+
   const pass = process.env.AGENT_PASS || '';
   const origin = new URL(request.url).origin;
   const denied = Response.redirect(origin + '/?agent=1', 302);
-
-  if (!pass) return denied;   // misconfigured -> fail closed (never leak STO)
-
+  if (!pass) return denied;
   const cookie = request.headers.get('cookie') || '';
   const m = cookie.match(/(?:^|;\s*)nr_session=([^;]+)/);
   const token = m ? decodeURIComponent(m[1]) : '';
-
-  if (token && token === (await sessionToken(pass))) return;  // valid session -> allow
+  if (token && token === (await sessionToken(pass))) return;
   return denied;
 }
