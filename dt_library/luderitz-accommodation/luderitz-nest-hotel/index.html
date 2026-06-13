@@ -74,6 +74,10 @@ td:not(:first-child),th:not(:first-child){text-align:right!important;}
 .region-back a{color:var(--brand-green)!important;letter-spacing:1.5px!important;font-weight:400!important;}
 .region-back a:hover{color:var(--brand-accent)!important;}
 
+
+/* lodge gallery */
+.lodge-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:16px;}
+.lodge-gallery img{width:100%;height:230px;object-fit:cover;border-radius:8px;display:block;}
 </style><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 </head><body>
 <style>#uc-belt{position:fixed;top:0;left:0;right:0;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2px;line-height:1.4;text-align:center;padding:7px 16px;}@media(max-width:600px){#uc-belt{font-size:10px;padding:6px 12px;}}</style><div id="uc-belt">&#9888; Site under construction &mdash; all rates shown are fictitious sample rates, not live or bookable and provided for testing only. They must not be used or relied upon for quotations or holiday planning. No liability is accepted for any use of these rates.</div><script>(function(){function f(){var b=document.getElementById("uc-belt");if(!b)return;var bh=b.offsetHeight;var hd=document.querySelector(".main-header");if(hd){hd.style.top=bh+"px";}var pt=parseInt(getComputedStyle(document.body).paddingTop)||0;if(pt>=50&&hd){document.body.style.paddingTop=(bh+hd.offsetHeight)+"px";}}window.addEventListener("load",f);window.addEventListener("resize",f);if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);})();</script>
@@ -96,7 +100,19 @@ td:not(:first-child),th:not(:first-child){text-align:right!important;}
   <div class="sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
   <span class="badge">Rack Rates</span>
   <table><thead><tr><th>Room Type</th><th>pp Sharing (N$)</th><th>Single (N$)</th><th>Child (N$)</th></tr></thead><tbody><tr><td><strong>Comfort Room</strong></td><td>N$ 7,720</td><td>N$ 2,960</td><td>&ndash;</td></tr><tr><td><strong>Comfort /</strong></td><td>N$ 4,760</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Deluxe</strong></td><td>&ndash;</td><td>N$ 3,630</td><td>&ndash;</td></tr><tr><td><strong>Deluxe /</strong></td><td>N$ 5,810</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Breakfast</strong></td><td>&ndash;</td><td>&ndash;</td><td>N$ 282</td></tr><tr><td><strong>Lunch</strong></td><td>&ndash;</td><td>&ndash;</td><td>N$ 424</td></tr><tr><td><strong>Dinner</strong></td><td>&ndash;</td><td>&ndash;</td><td>N$ 553</td></tr><tr><td><strong>Suite</strong></td><td>N$ 9,650</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Breakfast — adult</strong></td><td>N$ 400</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Lunch — adult</strong></td><td>N$ 600</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Dinner — adult</strong></td><td>N$ 776</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Lunchpack</strong></td><td>N$ 376</td><td>&ndash;</td><td>&ndash;</td></tr></tbody></table>
-  <div class="cta" id="cta">
+  
+<section style="padding-top:0"><div class="wrap">
+  <h2>Gallery</h2><div class="sub">Lüderitz Nest Hotel</div>
+  <div class="lodge-gallery">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10408/17678883594722024-lnh-jetty-at-night-primary.jpg?fmt=jpg" alt="Lüderitz Nest Hotel" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10408/17689249594822025-lnh-pool-area-aerial-primary.jpg?fmt=jpg" alt="Lüderitz Nest Hotel" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10408/2023_lnh_outdoor_heated_pool_-_silver_jubilee_ppp2.jpg?fmt=jpg" alt="Lüderitz Nest Hotel" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10408/17682301953362025-lnh---jetty-aerial-primary.jpg?fmt=jpg" alt="Lüderitz Nest Hotel" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10408/17682337465312018-lnh-jetty---beach.jpg?fmt=jpg" alt="Lüderitz Nest Hotel" loading="lazy">
+    <img src="https://wetu.com/imageHandler/c1920x1080/10408/17689249594832025-lnh-private-beach-primary.jpg?fmt=jpg" alt="Lüderitz Nest Hotel" loading="lazy">
+  </div>
+</div></section>
+<div class="cta" id="cta">
     <h3>Trade partner?</h3>
     <p class="sub" id="cta-text">Sign in on the homepage to view and book your contracted net STO rate for this property.</p>
     <a class="btn" id="cta-btn" href="/#agent">Agent sign in</a>
