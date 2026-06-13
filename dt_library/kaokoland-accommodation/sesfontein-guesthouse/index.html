@@ -164,4 +164,32 @@ if(localStorage.getItem('nr_agent_token')){
 </script>
 <script>(function(){var b=document.getElementById('hdr-agent');if(!b)return;if(typeof agentBtn!=='function'){if(localStorage.getItem('nr_agent_token')){b.textContent='Sign Out';b.onclick=function(){localStorage.removeItem('nr_agent_token');document.cookie='nr_session=; path=/; max-age=0; SameSite=Lax';location.reload();};}}})();</script>
 
+<script>/* inline STO toggle */(function(){
+  var TK='nr_agent_token';var token=localStorage.getItem(TK);if(!token)return;
+  var m=location.pathname.match(/-accommodation\/([^\/]+)\/?$/);if(!m)return;var slug=m[1];
+  var wrap=document.querySelector('.wrap')||document;
+  var rackTables=[].slice.call(wrap.querySelectorAll('table'));if(!rackTables.length)return;
+  var first=rackTables[0],last=rackTables[rackTables.length-1];
+  fetch('/api/sto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:token,lodge:slug})})
+  .then(function(r){return r.ok?r.json():null;}).then(function(j){
+    if(!j||!j.rates)return;var d=j.rates;var cur=d.currency||'N$';var html='';
+    if(d.cols&&d.rows){html='<table><thead><tr>'+d.cols.map(function(c){return '<th>'+c+'</th>';}).join('')+'</tr></thead><tbody>'+d.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+c+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table>';}
+    else if(d.sections){html='<table><thead><tr><th>Rate Type</th><th>Net STO ('+cur+')</th></tr></thead><tbody>';d.sections.forEach(function(s){html+='<tr><td colspan="2" style="font-weight:600;background:rgba(135,169,150,.14);color:#3c3530;">'+s.title+'</td></tr>';s.rows.forEach(function(row){html+='<tr><td>'+row[0]+'</td><td>'+row[1]+'</td></tr>';});});html+='</tbody></table>';}
+    else return;
+    var sto=document.createElement('div');sto.id='sto-table-wrap';sto.innerHTML=html;last.parentNode.insertBefore(sto,last.nextSibling);
+    var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:14px 0 4px;';
+    bar.innerHTML='<button id="t-rack" type="button"></button><button id="t-sto" type="button"></button>';
+    first.parentNode.insertBefore(bar,first);
+    var bRack=bar.querySelector('#t-rack'),bSto=bar.querySelector('#t-sto');
+    bRack.textContent='Rack rates';bSto.textContent='Net STO rates';
+    var base='padding:7px 16px;border-radius:5px;border:1px solid var(--brand-accent);cursor:pointer;font-family:var(--font-body);font-size:.74rem;letter-spacing:1px;text-transform:uppercase;transition:.2s;';
+    var on='background:var(--brand-green);color:#fff;border-color:var(--brand-green);';var off='background:transparent;color:var(--brand-accent);';
+    var badge=document.querySelector('.badge'),sub=document.querySelector('.sub');
+    function set(s){sto.style.display=s?'block':'none';rackTables.forEach(function(t){t.style.display=s?'none':'';});
+      bRack.style.cssText=base+(s?off:on);bSto.style.cssText=base+(s?on:off);
+      if(badge)badge.textContent=s?('Net STO Rates'+(d.commission?(' · '+d.commission):'')):'Rack Rates';
+      if(sub)sub.textContent=s?('Net trade STO'+(d.validity?(' · '+d.validity):'')+' · '+cur+' incl. VAT & levy'):('Published rates · '+cur+' incl. VAT & levy');}
+    bRack.onclick=function(){set(false);};bSto.onclick=function(){set(true);};set(true);
+  }).catch(function(){});
+})();</script>
 </body></html>
