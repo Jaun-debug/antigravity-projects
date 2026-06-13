@@ -111,7 +111,8 @@ body{padding-top:102px;}
 .card .img{position:relative;}
 .card .rate-badge{position:absolute;top:12px;right:12px;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.93);color:#3c3530;font-family:var(--font-body);font-size:.6rem;letter-spacing:1.2px;text-transform:uppercase;padding:5px 10px;border-radius:20px;z-index:3;box-shadow:0 2px 8px rgba(0,0,0,.12);}
 .rate-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-green);}
-.more a.has-rates::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--brand-green);margin-right:9px;vertical-align:middle;box-shadow:0 0 0 2px rgba(135,169,150,.25);}
+.more a::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:transparent;margin-right:9px;vertical-align:middle;}
+.more a.has-rates::before{background:var(--brand-green);box-shadow:0 0 0 2px rgba(135,169,150,.25);}
 </style>
 </head>
 <body>
