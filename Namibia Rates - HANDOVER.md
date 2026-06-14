@@ -1,111 +1,129 @@
 # Namibia Rates — Project Handover
 
-*Paste this into a new chat to resume. Last updated: 10 June 2026.*
+*Paste this into a new chat to resume. Last updated: 12 June 2026.*
 
 ---
 
 ## 0. How to use this
-You're continuing work on the **Namibia Rates** trade website and its sibling sites. Read the
-"Current status" and "Next steps" sections, then ask me where I'd like to continue. The most
-load-bearing section is **§3 Infrastructure** — getting a Vercel Root Directory wrong took several
-sites offline once already, so treat that map as the source of truth.
+You're continuing the build of the **per-agent trade rate engine** on namibiarates.com.
+Read §3 (Architecture), §5 (Status) and §6 (Next steps), then ask me where to continue.
+Repo: `~/Desktop/AG Projects` (branch `main`, GitHub: Jaun-debug/antigravity-projects).
+The live trade portal deploys from the **`dt_library`** folder (Vercel project `dt_library`,
+Root Directory `dt_library`, serves namibiarates.com + dtlibrary.vercel.app).
 
----
+> ⚠️ **The whole site is currently in "under construction" mode: the rates shown are
+> FICTITIOUS sample rates, and the STO gate is TEMPORARILY DISABLED** (see §3.2). Re-enable
+> the gate before real rates go live.
 
-## 1. What this project is
-- **namibiarates.com** — a B2B trade portal for Namibian lodges, vehicles & activities. Single-page
-  app (`namibia_agent_portal.html`) with region cards, lodge search, and per-lodge rate-sheets.
-- It lives inside a **monorepo** (`github.com/Jaun-debug/antigravity-projects`, branch `main`) that
-  also holds several *other* sites (a "vault" of tools, a guest-registration app, etc.). Each site is
-  a separate Vercel project pointed at its own folder in that one repo.
+## 1. The goal (what the engine does)
+Two views of every lodge:
+- **Public (no login):** RACK rates only. Net STO must never appear in public page source.
+- **Agent (login required):** signs in ONCE on the homepage; from then on every lodge they
+  have a contract with opens the BOOKABLE sheet at their net STO rate. Lodges with no
+  contract show a "contact the supplier for your special contracted rate" notice.
+- Right now there is ONE agent: **Desert Tracks (Jaun)**, contracted with every lodge that has
+  a rate sheet. Credentials: username `desert tracks`, password `passme9cops`.
 
-## 2. What's DONE and LIVE (namibiarates.com)
-- Full redesign: editorial **grid** (replaced the carousel), bigger region tiles with centred names,
-  sticky header, premium footer (info@namibiarates.com, no "Desert Tracks"), SEO meta + OG tags.
-- **Regions cleaned to 17** (removed "Etosha National Park"; kept West/South/East Etosha). Accommodation
-  dropdown rebuilt to match (no duplicate Waterberg/Kalahari).
-- **Real photos** wired from the Wetu JSON: 263 lodges show their own photo; rest use a varied region
-  photo (no duplicates, no wrong-lodge photos). Region tiles use real destination photos.
-- **Live lodge search** dropdown (substring match, any part of the name).
-- **Rate-sheets connected:** 50 single-lodge sheets + 11 group sheets (with `?lodge=KEY` deep-linking)
-  copied into `dt_library/ratesheets/` and wired via `singleRateSheetMap` / `groupRateSheetMap`. ~113
-  lodges open a real rate-sheet.
-- **Logo = home button**, vehicle/activity links fixed.
-- Everything is pushed to `main` and auto-deploys (see §3).
+## 2. Rate math (VERIFIED — important)
+- **rack = STO ÷ (1 − STO%)**. Confirmed on sheets printing both: Wolwedans STO 11,920 vs
+  Rack 14,900 (= ÷0.80); Chiwani ÷0.85. For 20% STO, rack = STO ÷ 0.8 = ×1.25.
+- The numbers originally on the site were **STO (net)**, NOT rack — confirmed.
+- User's chosen fallback for lodges that state **no %**: **STO × 1.20** ("+20%").
+- Oddballs to confirm: Africa Safari Lodge ("STO 40% non-commissionable" → ×1.667, probably
+  wrong), NWR ("at NWR discretion", rack-based), Belvedere ("rack less 10%").
 
-## 3. INFRASTRUCTURE — the source of truth (read this!)
-Monorepo: **github.com/Jaun-debug/antigravity-projects**, branch **main**.
-The fix that made namibiarates.com deploy: we **connected the repo to Vercel** + set the **Root
-Directory** per project. THE GOLDEN RULE: **each Vercel project's Root Directory must point at its own
-folder in the repo.** Wrong root = wrong site or 404.
+## 3. ARCHITECTURE — how it's built (source of truth)
+Safe model chosen: **gate the existing bookable STO sheets; serve separate public rack pages.**
+Net STO numbers were NOT edited inside the 61 sheets (no mispricing risk) — the sheets are
+simply locked, and rack pages are generated separately. Key files (under `dt_library/`):
 
-| URL | Vercel project | Root Directory | In git? |
-|---|---|---|---|
-| **namibiarates.com** | `dt_library` | `dt_library` | yes |
-| **www.namibiarates.com** + `antigravity-projects-eight.vercel.app` | `antigravity-projects` | repo root | yes |
-| **website-codes-vert.vercel.app** (Master Library / invoice gens / costing) | `website-vault` | `_Desert Tracks/dt_library/_DT Tools & Apps` | yes |
-| **desert-tracks-welcome.com** (guest booking reg) | `dt-guest-registration` | *(see §5 — in progress)* | the Next.js app is **gitignored**; static `dt_booking_reg.html` lives in the vault folder |
+### 3.1
+1. **`api/sto.js`** — serverless function. Issues a session token =
+   `sha256('nr-agent-session|' + AGENT_PASS)` (40 hex chars). Accepts `{username,password}` →
+   `{ok,token}`; or `{token,lodge}` → `{ok,token,lodge,rates}`. Validates against env vars.
+   (Holds Camp Kwando STO as legacy demo data; real STO for other lodges lives in the gated sheets.)
 
-**Folders that ARE in git:** `dt_library`, `_Desert Tracks/Desert_Tracks_App`,
-`_Desert Tracks/desert-tracks-dashboard`, `_Desert Tracks/dt_library` (incl. `_DT Tools & Apps`).
-**Folders that are GITIGNORED (CLI-deployed only):** `dt-guest-registration`, `costing-app`,
-`desert-dinner-netlify`, `dt-enquiry-wizard`. For these, git builds FAIL ("root directory does not
-exist") — fix them with **Instant Rollback + Disconnect Git**, not a Root Directory.
+2. **`middleware.js`** — Vercel Edge Middleware gating `/ratesheets/:path*`. Reads cookie
+   `nr_session`, recomputes the expected token from `AGENT_PASS` and compares. Valid → allow;
+   else → redirect to `/?agent=1`. **Fails closed.**
 
-## 4. The Vercel incident (context, now ~resolved)
-Connecting the shared repo to Git made *every* project that touches it auto-build from `main`. Projects
-with the wrong/blank Root Directory then served the wrong site or 404'd. Recovery per project:
-- **In-git project, wrong root** → set Root Directory to its folder, redeploy. (Fixed **website-vault**
-  this way → `_Desert Tracks/dt_library/_DT Tools & Apps`.)
-- **Gitignored/CLI project** → Disconnect Git + Instant Rollback to a pre-incident deployment.
+3. **`namibia_agent_portal.html`** — the live portal:
+   - `accommodationPageMap` = **108 entries** (lodge → `/accommodation/<slug>/`). `openLogin()`
+     checks it first, so a lodge click routes to its public rack page.
+   - `submitAgentLogin()` secure bridge: POSTs creds to `/api/sto`; on success sets
+     `localStorage['nr_agent_token']` + cookie `nr_session`. Login is QUIET (toast, no workspace
+     popup); redirects to a pending lodge if any.
+   - `logoutAgent()` clears token + cookie. On load, opens sign-in if URL has `#agent`/`?agent=1`.
+   - `openLogin()` fallthrough ignores legacy non-deployed `individual_rates.html` /
+     `vehicle_rates.html` and calls `showContactSupplier(lodgeName)` (a modal).
+   - Camp Kwando repointed to `/accommodation/camp-kwando/`.
 
-## 5. IN PROGRESS — pick up here
-**(a) desert-tracks-welcome.com (guest booking reg):**
-The real app is gitignored. Plan agreed: serve the static `dt_booking_reg.html` (which IS in the vault
-folder) at that domain. I created `_Desert Tracks/dt_library/_DT Tools & Apps/vercel.json` with a
-**host-based rewrite**: requests to desert-tracks-welcome.com → `/dt_booking_reg.html`; the vault's own
-URL still shows the Master Library. **To finish:** on the `dt-guest-registration` project → set
-**Framework = Other**, **Root Directory = `_Desert Tracks/dt_library/_DT Tools & Apps`**, Save, push the
-new vercel.json, Redeploy. (User to confirm whether the page should be `dt_booking_reg.html`,
-`safari_b_booking_reg.html`, or `welcome.html`.)
+4. **`accommodation/<slug>/index.html`** — 108 public RACK pages (slug = kebab of name):
+   - 49 single-lodge (rack from extracted STO: stated % → ÷(1−%); unknown → ×1.20).
+   - Camp Kwando — bespoke (real Wetu photos; contact card: Lodge tel +264 81 209 9033,
+     Reservations +264 81 149 1435, P.O. Box 8016 Kongola; inline STO via /api/sto when logged in).
+   - 58 group lodges: **17 "lifted"** (real embedded rack tables from the sheet's JS `DB` object,
+     e.g. O&L/Strand) + **41 "+20%"** (STO × 1.20).
+   - Each page: rack table(s) + "Rack Rates" badge + CTA → "View & book your STO rate →"
+     (links to gated `/ratesheets/<file>`) when a session token exists.
 
-**(b) Still to check:** costing-app, dt-enquiry-wizard, desert-dinner — verify each loads; if broken and
-gitignored, use Disconnect Git + Rollback.
+5. **Bookable STO sheets** = `ratesheets/*.html` (61 files, unchanged), gated by middleware.
+   Group files hold multiple properties keyed by `?lodge=KEY` (see `groupRateSheetMap`).
 
-## 6. BIGGER ROADMAP (the real direction — not yet built)
-Move from the single-page portal to a proper **SEO + multi-agent platform**. Full spec in
-**`Namibia Rates - Trade Platform Architecture.md`** (in this folder). Summary:
-- **Public SEO pages:** `/accommodation/<lodge-slug>/` (rack rates, schema.org, ≤60-char title /
-  ≤160-char description — enforced) and region pages `/<region>-accommodation/`. Generate them from the
-  Wetu JSON, don't hand-build. Prototype done: `dt_library/accommodation/camp-kwando/` +
-  `dt_library/caprivi-accommodation/`.
-- **Private trade engine:** agents **self-register**, lodge owners drag them into one of **4 STO tier
-  boxes (15/20/25/30%)**, agent **signs a lodge contract**, then ONE homepage login shows that agent
-  their tier rate on every page — or *"Ratesheet update to follow — contact supplier"* if not assigned.
-  Rack is public; net STO is server-side & per-agent (genuinely private, not derivable).
-- **Stack:** Vercel (have it) + **Supabase free tier** (auth + Postgres). Cost ≈ $0 to start, ~$25/mo
-  ceiling at scale. **Phase 1 built**, waiting on user: see `_Namibia_Backend/SETUP.md` (create the
-  Supabase project, run `schema.sql` + `seed_camp_kwando.sql`, add `SUPABASE_URL`/`SUPABASE_ANON_KEY`
-  in Vercel, set `AGENT_USER`/`AGENT_PASS`, then send me the Project URL).
+### 3.2 ⚠️ GATE CURRENTLY DISABLED
+`middleware.js` now has `const ENABLE_GATE = false;` at the top and returns early, so
+**/ratesheets/ STO pages are openly accessible right now** (intentional — sample/fictitious
+rates during construction). To re-enable privacy: set `ENABLE_GATE = true` (the full gated
+logic is still in the file below that line).
 
-## 7. Open decisions for the user
-1. Region slug convention (`/caprivi-accommodation/` vs `/zambezi-accommodation/`).
-2. Contract wording (per-lodge or one master template).
-3. Which file desert-tracks-welcome.com should serve (`dt_booking_reg.html` default).
-4. Generate all ~300 lodge pages now, or finish the infra/backend first.
+## 4. Vercel config (DONE)
+- Project `dt_library`, Root Directory `dt_library`, Production = namibiarates.com.
+- Env vars SET in Production: `AGENT_USER = desert tracks`, `AGENT_PASS = passme9cops`.
+  (Redeploy after any env change.)
 
-## 8. Key files & folders (repo = ~/Desktop/AG Projects)
-- `dt_library/namibia_agent_portal.html` — the live portal (deploy file for namibiarates.com).
-- `dt_library/ratesheets/` — 50 single + 11 group rate-sheets (deployed).
-- `dt_library/accommodation/camp-kwando/`, `dt_library/caprivi-accommodation/` — SEO prototype.
-- `dt_library/api/sto.js` — prototype rate backend (will be replaced by Supabase engine).
-- `_Namibia_Backend/` — Supabase schema, seed, rate engine, SETUP.md (Phase 1).
-- `Namibia Rates - Trade Platform Architecture.md` — full architecture spec.
-- `_Desert Tracks/dt_library/_DT Tools & Apps/` — the vault (Master Library, invoice/booking/costing).
+## 5. CURRENT STATUS
+**Live (pushed):** middleware.js (now gate-disabled), api/sto.js, portal w/ the 50-entry map,
+49 single-lodge rack pages, Camp Kwando. Gate was confirmed working earlier before being disabled.
 
-## 9. Working rules / how I operate
-- I edit files in the repo; **you push via GitHub Desktop** (commit → Push origin). Pushes auto-deploy.
-- I can't run `git push` or operate Vercel/Supabase for you (browser/account actions) — I give exact
-  steps, you click.
-- Net STO rates & passwords stay server-side (env vars / backend), never in public page source.
-- Previews are local copies in the outputs folder; nothing goes live until you push.
+**Built locally, may still need pushing — confirm with `git status`:**
+- `namibia_agent_portal.html` with the 108-entry map + Beach-Lodge fix + contact-supplier modal.
+- the 58 group rack pages under `accommodation/`.
+
+**Held back — do NOT push (expose STO):** `dt_library/vehicle_rates.html`,
+`dt_library/activity_rates.html` (restored from vault, parked).
+
+**Review artifact:** `Namibia_Rate_Review.xlsx` (AG Projects root) — Summary + All-rates tabs,
+779 rows, rack as a live formula. User to double-check numbers.
+
+## 6. NEXT STEPS (pick up here)
+1. **Push the latest batch** (108-map portal + 58 group pages). Test: Strand → rack page;
+   Beach Lodge → "contact supplier" modal.
+2. **5 Natural Selection lodges** uncovered (`natural_selection_ratesheet_v1_4.html` keys:
+   hoanibvalley, shipwreck, hoanibel, kwessidunes, nkasalinyanti) — different structure, need a
+   dedicated extractor → rack pages. Until then they show "contact supplier".
+3. **Rate verification** — review `Namibia_Rate_Review.xlsx`. The 41 "+20%" group pages are
+   marginally low where a real tier is stated (e.g. Gondwana 20/25% should be ÷0.8 / ÷0.75).
+4. **Confirm oddballs:** Africa Safari (40%), NWR (discretion), Belvedere (10%).
+5. **vehicle_rates.html / activity_rates.html** — decide: gate, convert to rack, or drop.
+6. **Re-enable the gate** (§3.2) once real rates replace the sample rates.
+7. **Legacy cleanup (optional):** the portal's old client-side `agentCredentials` prototype
+   still defaults a blank login to 'ultimate' and the sign-in modal shows tester logins
+   ("Ultimate Safaris / Sense of Africa / Discover Africa / Admin Console"). Only the real
+   `desert tracks` / `passme9cops` login sets the secure cookie. Consider removing the testers.
+
+## 7. Working rules / how I operate
+- I edit files in the repo; **you push via GitHub Desktop** (commit → Push origin → auto-deploys).
+- I cannot run git push or operate Vercel — I give exact steps, you click.
+- Net STO stays server-side / behind the gate, never in public page source (once gate re-enabled).
+- The workspace bash mount **cannot delete files** — overwrite instead; Read/Write/Edit work fine.
+- Slug convention: lodge name → lowercased, non-alphanumeric → hyphen ("Strand Hotel Swakopmund"
+  → `strand-hotel-swakopmund`).
+
+## 8. Quick test script (after deploy)
+1. (With gate ENABLED) Incognito: open `namibiarates.com/ratesheets/camp_kwando_ratesheet_v3.html`
+   → should REDIRECT to `/?agent=1`, NOT show STO. ✅ = gate works. (Currently gate is OFF, so it
+   will just show the sheet.)
+2. Click a lodge (Epako, Strand) → public RACK page.
+3. Homepage → Agent Sign In → `desert tracks` / `passme9cops` → "Signed in" toast (no popup).
+4. Re-open the `/ratesheets/...` URL → loads the bookable STO sheet.
+5. Sign out → (with gate on) sheet is gated again.
