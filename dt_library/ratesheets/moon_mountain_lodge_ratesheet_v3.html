@@ -163,6 +163,7 @@ td strong{color:var(--text-main);font-weight:500}
 </style>
 </head>
 <body>
+<button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
 
 <!-- MAIN (CARD) VIEW -->
 <div id="main-view" class="main-view">
@@ -523,5 +524,29 @@ document.addEventListener('keydown',function(e){
   }
 });
 </script>
+<style>
+.burger-menu-btn{position:fixed;top:16px;right:18px;z-index:9999;display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:11px 9px;background:rgba(255,255,255,.92);border:1px solid var(--gold-light,rgba(184,149,106,.25));border-radius:9px;box-shadow:0 4px 16px rgba(0,0,0,.10);cursor:pointer;}
+.burger-menu-btn span{display:block;width:100%;height:2px;background:var(--gold,#B8956A);transition:transform .3s,opacity .2s;}
+.burger-menu-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger-menu-btn.active span:nth-child(2){opacity:0;}
+.burger-menu-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#mm-backdrop{position:fixed;inset:0;background:rgba(44,40,36,.45);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:99999;}
+#mm-backdrop.open{opacity:1;visibility:visible;}
+#mobile-menu{position:fixed;top:0;left:0;height:100%;width:min(420px,100%);background:#F5F3EF;transform:translateX(-100%);transition:transform .45s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:18px 26px 40px;overflow-y:auto;z-index:100000;box-shadow:6px 0 40px rgba(0,0,0,.16);}
+#mobile-menu.open{transform:translateX(0);}
+#mobile-menu .mm-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,149,106,.22);padding-bottom:16px;}
+#mobile-menu .mm-logo{font-family:var(--font-head,serif);color:var(--gold,#B8956A);letter-spacing:3px;text-transform:uppercase;font-size:1.15rem;}
+#mobile-menu .mm-close{background:none;border:none;font-size:2rem;color:var(--gold,#B8956A);cursor:pointer;line-height:1;}
+#mobile-menu .mm-section{border-bottom:1px solid rgba(184,149,106,.14);}
+#mobile-menu .mm-head{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;text-align:left;font-family:var(--font-head,serif);color:var(--gold,#B8956A);font-weight:500;font-size:16px;padding:16px 2px 12px;cursor:pointer;}
+#mobile-menu .mm-arrow{color:var(--seafoam,#7BA99A);font-size:14px;transition:transform .3s;}
+#mobile-menu .mm-section.collapsed .mm-arrow{transform:rotate(-90deg);}
+#mobile-menu .mm-body{overflow:hidden;max-height:1400px;opacity:1;transition:max-height .5s cubic-bezier(.22,1,.36,1),opacity .4s ease;}
+#mobile-menu .mm-section.collapsed .mm-body{max-height:0;opacity:0;}
+#mobile-menu a{display:block;padding:10px 2px;color:var(--text-main,#2C2824);text-decoration:none;font-size:14px;border-bottom:1px solid rgba(0,0,0,.05);}
+#mobile-menu .mm-regions{columns:2;column-gap:18px;}
+#mobile-menu .mm-listprop{width:100%;margin-top:24px;background:transparent;color:var(--gold,#B8956A);border:1px solid var(--gold,#B8956A);padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+#mobile-menu .mm-signin{width:100%;margin-top:12px;background:var(--seafoam,#7BA99A);color:#fff;border:none;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+</style><div id="mm-backdrop" onclick="closeMobileMenu()"></div><div id="mobile-menu" role="dialog" aria-label="Menu"><div class="mm-top"><span class="mm-logo">Namibia Rates</span><button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><div class="mm-regions"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Vehicle rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Activity rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Home &amp; search</a></div></div><button class="mm-listprop" type="button" onclick="location.href='/'">List Your Property</button><button class="mm-signin" id="mm-agent" type="button">Agent Sign In</button></div><script>function toggleMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){var o=m.classList.toggle("open");if(b)b.classList.toggle("active",o);if(k)k.classList.toggle("open",o);document.body.style.overflow=o?"hidden":"";}}function closeMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){m.classList.remove("open");if(b)b.classList.remove("active");if(k)k.classList.remove("open");document.body.style.overflow="";}}function toggleSection(btn){var s=btn.closest(".mm-section");if(s)s.classList.toggle("collapsed");}(function(){var a=document.getElementById("mm-agent");if(!a)return;if(sessionStorage.getItem("nr_agent_token")){a.textContent="Sign Out";a.onclick=function(){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.href="/";};}else{a.onclick=function(){location.href="/#agent";};}})();</script>
 </body>
 </html>
