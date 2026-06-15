@@ -256,14 +256,19 @@
         }
         #mobile-menu .mm-logo { font-family: var(--font-head); color: #AE8245; letter-spacing: 3px; text-transform: uppercase; font-size: 1.15rem; }
         #mobile-menu .mm-close { background: none; border: none; font-size: 2rem; line-height: 1; color: #AE8245; cursor: pointer; padding: 0 6px; }
-        /* Section headers carry the seafoam chevron; sections stay unfolded */
-        #mobile-menu h4 {
-            display: flex; align-items: center; gap: 8px;
+        /* Accordion section headers (start open, collapse on tap) */
+        #mobile-menu .mm-section { border-bottom: 1px solid rgba(174,130,69,.12); }
+        #mobile-menu .mm-head {
+            display: flex; align-items: center; justify-content: space-between; gap: 8px;
+            width: 100%; background: none; border: none; cursor: pointer; text-align: left;
             font-family: var(--font-head); color: #AE8245; font-weight: 500;
             text-transform: none; letter-spacing: .5px; font-size: 16px;
-            margin: 20px 0 6px;
+            padding: 16px 2px 12px;
         }
-        #mobile-menu h4 .mm-arrow { color: #8CB5A3; font-size: 14px; line-height: 1; }
+        #mobile-menu .mm-head .mm-arrow { color: #8CB5A3; font-size: 14px; line-height: 1; transition: transform .3s ease; }
+        #mobile-menu .mm-section.collapsed .mm-head .mm-arrow { transform: rotate(-90deg); }
+        #mobile-menu .mm-body { overflow: hidden; max-height: 1400px; transition: max-height .4s ease; }
+        #mobile-menu .mm-section.collapsed .mm-body { max-height: 0; }
         /* Menu links: gold, 14px, not uppercase — matching Desert Tracks */
         #mobile-menu a {
             display: block; padding: 10px 2px;
@@ -749,38 +754,55 @@
             <span class="mm-logo">Namibia Rates</span>
             <button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button>
         </div>
-        <h4>Accommodation <span class="mm-arrow">&#9662;</span></h4>
-        <div class="mm-regions">
-            <a href="#" onclick="navigateToRegion('Sossusvlei &amp; Namib'); closeMobileMenu(); return false;">Sossusvlei &amp; Namib</a>
-            <a href="#" onclick="navigateToRegion('Swakopmund'); closeMobileMenu(); return false;">Swakopmund</a>
-            <a href="#" onclick="navigateToRegion('Skeleton Coast'); closeMobileMenu(); return false;">Skeleton Coast</a>
-            <a href="#" onclick="navigateToRegion('Damaraland'); closeMobileMenu(); return false;">Damaraland</a>
-            <a href="#" onclick="navigateToRegion('Kaokoland'); closeMobileMenu(); return false;">Kaokoland</a>
-            <a href="#" onclick="navigateToRegion('Epupa'); closeMobileMenu(); return false;">Epupa</a>
-            <a href="#" onclick="navigateToRegion('Opuwo'); closeMobileMenu(); return false;">Opuwo</a>
-            <a href="#" onclick="navigateToRegion('West Etosha'); closeMobileMenu(); return false;">West Etosha</a>
-            <a href="#" onclick="navigateToRegion('South Etosha'); closeMobileMenu(); return false;">South Etosha</a>
-            <a href="#" onclick="navigateToRegion('East Etosha'); closeMobileMenu(); return false;">East Etosha</a>
-            <a href="#" onclick="navigateToRegion('Central Namibia'); closeMobileMenu(); return false;">Central Namibia</a>
-            <a href="#" onclick="navigateToRegion('Windhoek'); closeMobileMenu(); return false;">Windhoek</a>
-            <a href="#" onclick="navigateToRegion('Kalahari'); closeMobileMenu(); return false;">Kalahari</a>
-            <a href="#" onclick="navigateToRegion('Fish River Canyon'); closeMobileMenu(); return false;">Fish River Canyon</a>
-            <a href="#" onclick="navigateToRegion('Luderitz'); closeMobileMenu(); return false;">Luderitz</a>
-            <a href="#" onclick="navigateToRegion('Zambezi &amp; Caprivi'); closeMobileMenu(); return false;">Zambezi &amp; Caprivi</a>
-            <a href="#" onclick="navigateToRegion('Botswana'); closeMobileMenu(); return false;">Botswana</a>
+        <div class="mm-section">
+          <button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button>
+          <div class="mm-body">
+            <div class="mm-regions">
+              <a href="#" onclick="navigateToRegion('Sossusvlei &amp; Namib'); closeMobileMenu(); return false;">Sossusvlei &amp; Namib</a>
+              <a href="#" onclick="navigateToRegion('Swakopmund'); closeMobileMenu(); return false;">Swakopmund</a>
+              <a href="#" onclick="navigateToRegion('Skeleton Coast'); closeMobileMenu(); return false;">Skeleton Coast</a>
+              <a href="#" onclick="navigateToRegion('Damaraland'); closeMobileMenu(); return false;">Damaraland</a>
+              <a href="#" onclick="navigateToRegion('Kaokoland'); closeMobileMenu(); return false;">Kaokoland</a>
+              <a href="#" onclick="navigateToRegion('Epupa'); closeMobileMenu(); return false;">Epupa</a>
+              <a href="#" onclick="navigateToRegion('Opuwo'); closeMobileMenu(); return false;">Opuwo</a>
+              <a href="#" onclick="navigateToRegion('West Etosha'); closeMobileMenu(); return false;">West Etosha</a>
+              <a href="#" onclick="navigateToRegion('South Etosha'); closeMobileMenu(); return false;">South Etosha</a>
+              <a href="#" onclick="navigateToRegion('East Etosha'); closeMobileMenu(); return false;">East Etosha</a>
+              <a href="#" onclick="navigateToRegion('Central Namibia'); closeMobileMenu(); return false;">Central Namibia</a>
+              <a href="#" onclick="navigateToRegion('Windhoek'); closeMobileMenu(); return false;">Windhoek</a>
+              <a href="#" onclick="navigateToRegion('Kalahari'); closeMobileMenu(); return false;">Kalahari</a>
+              <a href="#" onclick="navigateToRegion('Fish River Canyon'); closeMobileMenu(); return false;">Fish River Canyon</a>
+              <a href="#" onclick="navigateToRegion('Luderitz'); closeMobileMenu(); return false;">Luderitz</a>
+              <a href="#" onclick="navigateToRegion('Zambezi &amp; Caprivi'); closeMobileMenu(); return false;">Zambezi &amp; Caprivi</a>
+              <a href="#" onclick="navigateToRegion('Botswana'); closeMobileMenu(); return false;">Botswana</a>
+            </div>
+          </div>
         </div>
-        <h4>Vehicles <span class="mm-arrow">&#9662;</span></h4>
-        <a href="#" onclick="switchTab('vehicle', document.getElementById('nav-vehicle')); closeMobileMenu(); return false;">Vehicle rates</a>
-        <h4>Activities <span class="mm-arrow">&#9662;</span></h4>
-        <a href="#" onclick="switchTab('activities', document.getElementById('nav-activities')); closeMobileMenu(); return false;">Activity rates</a>
-        <h4>More <span class="mm-arrow">&#9662;</span></h4>
-        <a href="#" onclick="document.getElementById('lodge-search').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('lodge-search').focus(); closeMobileMenu(); return false;">Search lodges</a>
-        <a href="#" onclick="openLogin('List Your Property'); closeMobileMenu(); return false;">List Your Property</a>
+        <div class="mm-section">
+          <button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button>
+          <div class="mm-body">
+            <a href="#" onclick="switchTab('vehicle', document.getElementById('nav-vehicle')); closeMobileMenu(); return false;">Vehicle rates</a>
+          </div>
+        </div>
+        <div class="mm-section">
+          <button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button>
+          <div class="mm-body">
+            <a href="#" onclick="switchTab('activities', document.getElementById('nav-activities')); closeMobileMenu(); return false;">Activity rates</a>
+          </div>
+        </div>
+        <div class="mm-section">
+          <button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button>
+          <div class="mm-body">
+            <a href="#" onclick="document.getElementById('lodge-search').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('lodge-search').focus(); closeMobileMenu(); return false;">Search lodges</a>
+            <a href="#" onclick="openLogin('List Your Property'); closeMobileMenu(); return false;">List Your Property</a>
+          </div>
+        </div>
         <button class="mm-signin" type="button" onclick="openLogin('Agent Portal'); closeMobileMenu();">Agent Sign In</button>
     </div>
     <script>
         function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ var open=m.classList.toggle('open'); if(b)b.classList.toggle('active',open); document.body.style.overflow=open?'hidden':''; } }
         function closeMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ m.classList.remove('open'); if(b)b.classList.remove('active'); document.body.style.overflow=''; } }
+        function toggleSection(btn){ var s=btn.closest('.mm-section'); if(s) s.classList.toggle('collapsed'); }
     </script>
 
     <div class="hero">
