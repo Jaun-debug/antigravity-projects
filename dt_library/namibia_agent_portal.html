@@ -221,6 +221,7 @@
                 width: 24px;
                 padding: 5px 0;
                 transition: opacity 0.3s ease;
+                order: 3;
             }
             .burger-menu-btn span {
                 display: block;
@@ -228,7 +229,36 @@
                 height: 2px;
                 background-color: var(--brand-accent);
             }
+            /* Hide the overflowing desktop nav on mobile; the burger opens the menu instead */
+            .nav-links { display: none !important; }
         }
+
+        /* ===== Mobile slide-in menu ===== */
+        #mobile-menu {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 100000;
+            background: #f6f5f2;
+            flex-direction: column;
+            padding: 22px 26px 40px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+        #mobile-menu.open { display: flex; }
+        #mobile-menu .mm-top {
+            display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid rgba(164,130,86,.2); padding-bottom: 16px; margin-bottom: 8px;
+        }
+        #mobile-menu .mm-logo { font-family: var(--font-head); color: var(--brand-accent); letter-spacing: 3px; text-transform: uppercase; font-size: 1.15rem; }
+        #mobile-menu .mm-close { background: none; border: none; font-size: 2rem; line-height: 1; color: var(--text-main); cursor: pointer; padding: 0 6px; }
+        #mobile-menu h4 { font-family: var(--font-head); color: var(--brand-accent); text-transform: uppercase; letter-spacing: 2px; font-size: .78rem; margin: 20px 0 6px; }
+        #mobile-menu a { display: block; padding: 11px 4px; color: var(--text-main); text-decoration: none; font-size: .98rem; border-bottom: 1px solid rgba(0,0,0,.06); }
+        #mobile-menu a:active, #mobile-menu a:hover { color: var(--brand-accent); }
+        #mobile-menu .mm-regions { columns: 2; column-gap: 18px; }
+        #mobile-menu .mm-regions a { break-inside: avoid; }
+        #mobile-menu .mm-signin { width: 100%; margin-top: 24px; background: var(--brand-green); color: #fff; border: none; padding: 14px; border-radius: 6px; font-family: var(--font-head); text-transform: uppercase; letter-spacing: 1px; font-size: .9rem; cursor: pointer; }
+        @media (min-width: 851px) { #mobile-menu { display: none !important; } }
 
         .search-icon-btn {
             background: none;
@@ -619,7 +649,7 @@
         </a>
 
         <!-- Hamburger Icon (Hidden on desktop, shown on mobile/tablet) -->
-        <button class="burger-menu-btn" type="button" aria-label="Open menu" title="Menu" onclick="document.getElementById('tab-accommodation').scrollIntoView({behavior: 'smooth'});">
+        <button class="burger-menu-btn" type="button" aria-label="Open menu" title="Menu" onclick="toggleMobileMenu()">
             <span></span>
             <span></span>
             <span></span>
@@ -691,6 +721,46 @@
             </button>
         </nav>
     </header>
+
+    <!-- Mobile slide-in menu -->
+    <div id="mobile-menu" role="dialog" aria-label="Menu">
+        <div class="mm-top">
+            <span class="mm-logo">Namibia Rates</span>
+            <button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button>
+        </div>
+        <h4>Accommodation</h4>
+        <div class="mm-regions">
+            <a href="#" onclick="navigateToRegion('Sossusvlei &amp; Namib'); closeMobileMenu(); return false;">Sossusvlei &amp; Namib</a>
+            <a href="#" onclick="navigateToRegion('Swakopmund'); closeMobileMenu(); return false;">Swakopmund</a>
+            <a href="#" onclick="navigateToRegion('Skeleton Coast'); closeMobileMenu(); return false;">Skeleton Coast</a>
+            <a href="#" onclick="navigateToRegion('Damaraland'); closeMobileMenu(); return false;">Damaraland</a>
+            <a href="#" onclick="navigateToRegion('Kaokoland'); closeMobileMenu(); return false;">Kaokoland</a>
+            <a href="#" onclick="navigateToRegion('Epupa'); closeMobileMenu(); return false;">Epupa</a>
+            <a href="#" onclick="navigateToRegion('Opuwo'); closeMobileMenu(); return false;">Opuwo</a>
+            <a href="#" onclick="navigateToRegion('West Etosha'); closeMobileMenu(); return false;">West Etosha</a>
+            <a href="#" onclick="navigateToRegion('South Etosha'); closeMobileMenu(); return false;">South Etosha</a>
+            <a href="#" onclick="navigateToRegion('East Etosha'); closeMobileMenu(); return false;">East Etosha</a>
+            <a href="#" onclick="navigateToRegion('Central Namibia'); closeMobileMenu(); return false;">Central Namibia</a>
+            <a href="#" onclick="navigateToRegion('Windhoek'); closeMobileMenu(); return false;">Windhoek</a>
+            <a href="#" onclick="navigateToRegion('Kalahari'); closeMobileMenu(); return false;">Kalahari</a>
+            <a href="#" onclick="navigateToRegion('Fish River Canyon'); closeMobileMenu(); return false;">Fish River Canyon</a>
+            <a href="#" onclick="navigateToRegion('Luderitz'); closeMobileMenu(); return false;">Luderitz</a>
+            <a href="#" onclick="navigateToRegion('Zambezi &amp; Caprivi'); closeMobileMenu(); return false;">Zambezi &amp; Caprivi</a>
+            <a href="#" onclick="navigateToRegion('Botswana'); closeMobileMenu(); return false;">Botswana</a>
+        </div>
+        <h4>Vehicles</h4>
+        <a href="#" onclick="switchTab('vehicle', document.getElementById('nav-vehicle')); closeMobileMenu(); return false;">Vehicle rates</a>
+        <h4>Activities</h4>
+        <a href="#" onclick="switchTab('activities', document.getElementById('nav-activities')); closeMobileMenu(); return false;">Activity rates</a>
+        <h4>More</h4>
+        <a href="#" onclick="document.getElementById('lodge-search').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('lodge-search').focus(); closeMobileMenu(); return false;">Search lodges</a>
+        <a href="#" onclick="openLogin('List Your Property'); closeMobileMenu(); return false;">List Your Property</a>
+        <button class="mm-signin" type="button" onclick="openLogin('Agent Portal'); closeMobileMenu();">Agent Sign In</button>
+    </div>
+    <script>
+        function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'); if(m){ m.classList.toggle('open'); document.body.style.overflow=m.classList.contains('open')?'hidden':''; } }
+        function closeMobileMenu(){ var m=document.getElementById('mobile-menu'); if(m){ m.classList.remove('open'); document.body.style.overflow=''; } }
+    </script>
 
     <div class="hero">
         <h1>Namibia Rates</h1>
