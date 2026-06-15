@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flamingo Villas Boutique Hotel — Rates 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>:root{--hero-bg:url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600&q=80')}
+:root{
+  --bg:#EEEAE3; --card-bg:#FFFFFF; --text-main:#2C2824; --text-muted:#7A7269;
+  --gold:#B8956A; --gold-light:rgba(184,149,106,0.12);
+  --seafoam:#7BA99A; --seafoam-light:rgba(123,169,154,0.12);
+  --red:#8B1A1A;
+  --border:rgba(184,149,106,0.2);
+  --font-head:'Cormorant Garamond',serif; --font-body:'Inter',sans-serif;
+  --transition:all .35s cubic-bezier(.25,.46,.45,.94); --radius:16px;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:0;background:var(--bg);color:var(--text-main);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,h5{font-family:var(--font-head);font-weight:400;margin:0}
+
+/* SINGLE CARD MAIN VIEW */
+.main-view{padding:60px 20px 80px}
+.card-stage{max-width:880px;margin:0 auto}
+.lodge-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:var(--transition);box-shadow:0 4px 24px rgba(44,40,36,0.06)}
+.lodge-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(44,40,36,0.13)}
+.lodge-card-img-wrap{overflow:hidden;height:520px;background:#d8d3cb}
+.lodge-card-img{width:100%;height:100%;object-fit:cover;display:block;transition:var(--transition)}
+.lodge-card:hover .lodge-card-img{transform:scale(1.03)}
+.lodge-card-body{padding:36px 44px 32px}
+.lodge-card-location{font-family:var(--font-body);font-size:.7rem;letter-spacing:5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px;display:block}
+.lodge-card-name{font-family:var(--font-head);font-size:2.6rem;font-weight:400;color:var(--text-main);line-height:1.1;margin-bottom:14px}
+.lodge-card-dot{width:9px;height:9px;border-radius:50%;background:var(--seafoam);display:inline-block;margin-bottom:18px}
+.lodge-card-desc{font-size:1rem;color:var(--text-muted);line-height:1.75;font-weight:300;margin-bottom:28px}
+.lodge-card-divider{border:none;border-top:1px solid var(--border);margin:0 0 24px}
+.lodge-card-actions{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.btn-lodge{font-family:var(--font-body);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;padding:13px 28px;border:1px solid rgba(44,40,36,.2);border-radius:6px;background:transparent;color:var(--text-muted);cursor:pointer;transition:var(--transition)}
+.btn-lodge:hover{border-color:var(--text-main);color:var(--text-main)}
+.btn-rates{font-family:var(--font-body);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;padding:13px 32px;border:1px solid var(--gold);border-radius:6px;background:transparent;color:var(--gold);cursor:pointer;transition:var(--transition)}
+.btn-rates:hover{background:var(--gold);color:#fff}
+.btn-rates.flash{animation:btnFlash 1s ease-in-out 3}
+@keyframes btnFlash{0%,100%{background:transparent;color:var(--gold);box-shadow:0 0 0 0 rgba(184,149,106,.4)}50%{background:var(--gold);color:#fff;box-shadow:0 0 0 10px rgba(184,149,106,0)}}
+
+/* DETAIL VIEW */
+.detail-view{display:none;animation:fadeIn .4s ease}
+.back-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);border:1px solid var(--border);padding:10px 22px;border-radius:30px;cursor:pointer;transition:var(--transition);background:transparent;margin-bottom:32px}
+.back-btn:hover{border-color:var(--gold);color:var(--gold)}
+
+/* HERO */
+.site-hero{position:relative;text-align:center;padding:70px 20px 40px;overflow:hidden}
+.hero-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;margin:0 auto 22px}
+.hero-display{font-family:var(--font-head);font-size:clamp(4rem,10vw,9rem);font-weight:300;font-style:italic;line-height:.95;letter-spacing:-1.5px;background-image:var(--hero-bg);background-size:cover;background-position:center 35%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;display:block;user-select:none}
+.hero-rule{width:50px;height:1px;background:var(--gold);margin:22px auto}
+.hero-tagline{font-family:var(--font-head);font-size:clamp(1.1rem,2.3vw,1.8rem);font-style:italic;font-weight:300;color:var(--text-main);letter-spacing:.5px;margin-bottom:14px}
+.hero-sub{font-family:var(--font-body);font-size:.66rem;letter-spacing:5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:18px}
+.hero-intro{max-width:680px;margin:18px auto 0;font-family:var(--font-body);font-size:.95rem;color:var(--text-muted);font-weight:300;line-height:1.7}
+.hero-scroll{display:inline-flex;flex-direction:column;align-items:center;gap:14px;margin-top:42px;cursor:pointer;background:transparent;border:none;padding:0;font-family:inherit}
+.scroll-label{font-family:var(--font-body);font-size:.58rem;letter-spacing:5px;text-transform:uppercase;color:var(--text-muted);font-weight:500;transition:color .3s}
+.scroll-arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:14px;line-height:1;background:transparent;animation:bounceDown 2.2s ease-in-out infinite;transition:background .3s,color .3s,border-color .3s}
+.hero-scroll:hover .scroll-label{color:var(--gold)}
+.hero-scroll:hover .scroll-arrow{background:var(--gold);color:#fff;animation-play-state:paused}
+@keyframes bounceDown{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* MAIN WRAP */
+.wrap{max-width:1200px;margin:0 auto;padding:0 30px 120px}
+
+/* HERO STRIP (intro + specs) */
+.intro-grid{display:grid;grid-template-columns:2fr 1fr;gap:30px;margin-bottom:36px;align-items:start}
+.intro-block{padding:0}
+.intro-loc{font-family:var(--font-body);font-size:.66rem;letter-spacing:4px;text-transform:uppercase;color:var(--seafoam);font-weight:500;margin-bottom:14px;display:block}
+.intro-text{font-size:.92rem;line-height:1.85;color:var(--text-muted);font-weight:300;white-space:pre-line}
+.spec-card{background:var(--card-bg);border-radius:12px;padding:26px;border:1px solid var(--border)}
+.spec-card-title{font-family:var(--font-body);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:14px;display:block}
+.spec-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.82rem}
+.spec-row:last-child{border-bottom:none}
+.spec-label{color:var(--text-main);font-weight:400}
+.spec-value{color:var(--text-muted);font-weight:300;text-align:right}
+
+/* TABS */
+.tabs{display:flex;gap:8px;margin-bottom:30px;overflow-x:auto;padding:14px 16px;background:var(--card-bg);border-radius:12px;border:1px solid var(--border);position:sticky;top:16px;z-index:90;box-shadow:0 4px 20px rgba(44,40,36,.06)}
+.tab-btn{font-family:var(--font-body);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:11px 22px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-muted);cursor:pointer;transition:var(--transition);white-space:nowrap;font-weight:500}
+.tab-btn:hover{color:var(--text-main);background:var(--gold-light)}
+.tab-btn.active{background:var(--text-main);color:#fff}
+.tab-btn-hl{border-color:var(--border);color:var(--text-muted);opacity:.55;cursor:not-allowed}
+.tab-btn-hl.ready{border-color:var(--seafoam);color:var(--seafoam);opacity:1;cursor:pointer;animation:tabPulse 1.8s ease-in-out infinite}
+.tab-btn-hl.active{background:var(--seafoam);color:#fff;border-color:transparent;opacity:1;animation:none;cursor:pointer}
+@keyframes tabPulse{0%,100%{border-color:var(--seafoam);color:var(--seafoam);box-shadow:none}50%{border-color:var(--gold);color:var(--gold);box-shadow:0 0 14px rgba(184,149,106,.35)}}
+.tab-content{display:none;animation:fadeIn .35s ease}
+.tab-content.active{display:block}
+
+/* BLOCKS */
+.block{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:32px 36px;margin-bottom:22px}
+.block h3{font-family:var(--font-head);font-size:1.5rem;font-weight:400;color:var(--text-main);margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);letter-spacing:1px}
+.sub-block{margin-top:26px}
+.sub-block h4{font-family:var(--font-body);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:500}
+
+/* TABLE */
+.table-wrap{width:100%;overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin-bottom:20px}
+table{width:100%;border-collapse:collapse;text-align:left}
+th{font-family:var(--font-body);background:var(--gold-light);color:var(--text-main);font-size:.66rem;padding:13px 16px;text-transform:uppercase;letter-spacing:1px;font-weight:600;border-bottom:1px solid var(--border)}
+td{padding:13px 16px;border-bottom:1px solid rgba(44,40,36,.05);color:var(--text-muted);font-size:.88rem;line-height:1.5}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--gold-light);color:var(--text-main)}
+td strong{color:var(--text-main);font-weight:500}
+
+/* LISTS */
+.t-list{list-style:none;padding:0;color:var(--text-muted);line-height:1.9;font-size:.9rem}
+.t-list li{position:relative;padding-left:22px;margin-bottom:8px}
+.t-list li::before{content:"—";color:var(--gold);position:absolute;left:0}
+.raw{white-space:pre-line;color:var(--text-muted);line-height:1.85;font-size:.9rem}
+
+/* QTY INPUT */
+.qty{width:64px;padding:7px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;font-family:var(--font-body);font-size:.9rem}
+.qty:focus{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-light)}
+
+/* BOOKING BAR */
+#booking-bar{display:none;position:fixed;bottom:0;left:0;width:100%;background:rgba(238,234,227,.96);backdrop-filter:blur(12px);padding:16px 30px;box-shadow:0 -8px 30px rgba(44,40,36,.1);z-index:100;text-align:center;border-top:1px solid var(--border);animation:fadeInUp .3s ease}
+#booking-total{font-family:var(--font-head);font-size:1.4rem;font-weight:400;color:var(--text-main);margin-right:22px}
+.btn-finalise{font-family:var(--font-body);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;background:var(--text-main);color:#fff;border:2px solid transparent;border-radius:8px;cursor:pointer;transition:var(--transition);animation:barBtnPulse 1.8s ease-in-out infinite}
+.btn-finalise:hover{background:var(--gold);animation:none}
+@keyframes barBtnPulse{0%,100%{background:var(--gold);border-color:var(--gold);box-shadow:0 0 12px rgba(184,149,106,.4)}50%{background:var(--seafoam);border-color:var(--seafoam);box-shadow:0 0 18px rgba(123,169,154,.5)}}
+
+/* FORM */
+.form-group{margin-bottom:18px}
+.form-label{font-family:var(--font-body);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:8px;display:block}
+.form-label.accent{color:var(--gold)}
+.form-control{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:.9rem;background:var(--bg);color:var(--text-main);transition:var(--transition)}
+.form-control:focus{outline:none;border-color:var(--gold);background:#fff;box-shadow:0 0 0 3px var(--gold-light)}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+.btn-submit{width:100%;font-family:var(--font-body);font-size:.72rem;letter-spacing:3px;text-transform:uppercase;padding:16px;background:var(--text-main);color:#fff;border:none;border-radius:10px;cursor:pointer;transition:var(--transition);margin-top:10px;font-weight:500}
+.btn-submit:hover{background:var(--gold)}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* CALENDAR */
+.cal-wrap{display:flex;gap:40px;max-width:650px;justify-content:center;margin:10px auto 0}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:650px;margin:0 auto 14px}
+.cal-nav-btn{background:transparent;border:none;color:var(--text-main);font-size:20px;cursor:pointer;padding:8px}
+.cal-nav-btn:hover{opacity:.5}
+.cal-month-title{font-family:var(--font-head);font-size:1.1rem;color:var(--text-main);text-align:center;width:300px;letter-spacing:1px}
+.cal{flex:1;max-width:300px;width:100%}
+.cal-head{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px}
+.cal-day-lbl{font-family:var(--font-body);font-size:10px;font-weight:600;color:var(--text-muted);text-align:center;text-transform:uppercase;letter-spacing:1px;padding:4px 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr)}
+.cal-day{font-family:var(--font-body);font-size:13px;color:var(--text-main);text-align:center;padding:8px 4px;cursor:pointer;transition:background .2s}
+.cal-day:hover{background:var(--gold-light)}
+.cal-day.empty{cursor:default}.cal-day.empty:hover{background:transparent}
+.cal-day.today{background:var(--seafoam);border-radius:50%;color:#fff!important;font-weight:600}
+.cal-day.range{background:rgba(184,149,106,.12)}
+.cal-day.range-start{background:var(--gold);border-radius:50% 0 0 50%;color:#fff!important;font-weight:600}
+.cal-day.range-end{background:var(--gold);border-radius:0 50% 50% 0;color:#fff!important;font-weight:600}
+.cal-day.past{color:rgba(44,40,36,.2);cursor:not-allowed}.cal-day.past:hover{background:transparent}
+@media(max-width:768px){.cal-wrap{flex-direction:column;gap:18px;align-items:center}.cal-wrap > .cal:last-child{display:none}.cal-nav .cal-month-title:nth-of-type(2){display:none}.cal-month-title{width:100%}}
+
+@media(max-width:768px){
+  .intro-grid{grid-template-columns:1fr}
+  .grid-2{grid-template-columns:1fr}
+  .wrap{padding:0 16px 100px}
+  .block{padding:22px}
+  #booking-total{display:block;margin-right:0;margin-bottom:10px}
+}
+</style>
+</head>
+<body>
+<button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+
+<!-- MAIN (CARD) VIEW -->
+<div id="main-view" class="main-view">
+  <div class="site-hero">
+  <div class="hero-dot"></div>
+  <span class="hero-display">Flamingo</span>
+<span class="hero-display">Villas</span>
+  <div class="hero-rule"></div>
+  <p class="hero-tagline">Boutique hotel on the Walvis Bay lagoon.</p>
+  <p class="hero-sub">STO 20% — Season 2026</p>
+  <p class="hero-intro">A boutique hotel in Meersig, Walvis Bay — four room categories from Comfort Double/Twin through to the Flamingo Suite, most with balconies and lagoon views.</p>
+  <button class="hero-scroll" onclick="scrollToCardCTA()">
+    <span class="scroll-label">View Rates</span>
+    <span class="scroll-arrow">↓</span>
+  </button>
+</div>
+  <div class="card-stage" id="lodge-card-anchor">
+    <div class="lodge-card" onclick="openRates()">
+      <div class="lodge-card-img-wrap"><img class="lodge-card-img" src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1600&q=80" alt="Flamingo Villas Boutique Hotel"></div>
+      <div class="lodge-card-body">
+        <span class="lodge-card-location">WALVIS BAY</span>
+        <h2 class="lodge-card-name">Flamingo Villas Boutique Hotel</h2>
+        <span class="lodge-card-dot"></span>
+        <p class="lodge-card-desc">A boutique hotel in Meersig, Walvis Bay — four room categories from Comfort Double/Twin through to the Flamingo Suite, most with balconies and lagoon views.</p>
+        <hr class="lodge-card-divider">
+        <div class="lodge-card-actions">
+          <button class="btn-lodge" onclick="event.stopPropagation();openRates()">Lodge</button>
+          <button class="btn-rates" id="card-view-rates" onclick="event.stopPropagation();openRates()">View Rates</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL VIEW -->
+<div id="detail-view" class="detail-view">
+
+<div class="wrap" style="padding-top:40px">
+  <button class="back-btn" onclick="closeRates()">← Back to Lodge</button>
+
+  <div class="intro-grid">
+    <div class="intro-block">
+      <span class="intro-loc">WALVIS BAY</span>
+      <h1 style="font-size:clamp(2rem,4vw,3.2rem);font-weight:300;font-family:var(--font-head);color:var(--text-main);line-height:1.1;margin-bottom:14px">Flamingo Villas Boutique Hotel</h1>
+      <p class="intro-text">Flamingo Villas is a boutique hotel in Meersig, Walvis Bay — well placed for the flamingo lagoon, Pelican Point and Sandwich Harbour, and an easy 30-minute hop from Swakopmund. Four room categories — Comfort, Superior, Deluxe and the Flamingo Suite — most with balconies and lagoon or dune views.</p>
+    </div>
+    <div class="spec-card">
+      <span class="spec-card-title">Quick Specs</span>
+      <div class="spec-row"><span class="spec-label">Commission</span><span class="spec-value">STO 20% (built-in)</span></div>
+<div class="spec-row"><span class="spec-label">Location</span><span class="spec-value">Walvis Bay, Namibia</span></div>
+<div class="spec-row"><span class="spec-label">Validity</span><span class="spec-value">01.01.2026 – 31.12.2026</span></div>
+<div class="spec-row"><span class="spec-label">Currency</span><span class="spec-value">N$ (incl. VAT &amp; Levy)</span></div>
+<div class="spec-row"><span class="spec-label">Contact</span><span class="spec-value">reservations@flamingovillana.com</span></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" id="tab-btn-1" onclick="switchTab(1)">Accommodation Rates</button>
+    <button class="tab-btn" id="tab-btn-2" onclick="switchTab(2)">Activities &amp; Extras</button>
+    <button class="tab-btn" id="tab-btn-3" onclick="switchTab(3)">Policies &amp; Info</button>
+    <button class="tab-btn" id="tab-btn-4" onclick="switchTab(4)">Gallery</button>
+    <button class="tab-btn tab-btn-hl" id="tab-btn-5" onclick="switchTab(5)">Finalise Booking</button>
+  </div>
+
+  <div id="tab-1" class="tab-content active">
+    <div class="block" style="text-align:center">
+      <h3 style="border:none;padding:0;margin-bottom:6px">When would you like to travel?</h3>
+      <p style="font-family:var(--font-body);font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:20px">Select check-in and check-out</p>
+      <div id="cal-root"></div>
+      <div style="margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+        <span id="nights" style="font-family:var(--font-head);font-size:2rem;color:var(--gold)">1</span>
+        <span style="font-family:var(--font-body);font-size:.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-left:8px">Night(s) Selected</span>
+      </div>
+    </div>
+    <div class="block">
+<h3>Accommodation Rates — STO 20% 2026</h3>
+<p class="raw" style="margin-bottom:16px">Valid 01 Jan – 31 Dec 2026. Bed &amp; Breakfast. Rates per room per night. Children 0–6 yrs: no charge sharing with adults.</p>
+<div class="sub-block"><h4>Comfort Double / Twin Room — B&amp;B (per room)</h4>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th style="text-align:right">Rate (N$)</th><th style="text-align:right;width:90px">Qty</th></tr></thead><tbody><tr><td><strong>Single per room</strong></td><td style="text-align:right">N$ 2,484.00</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Single per room" data-price="2484.0"></td></tr>
+<tr><td><strong>Double per room</strong></td><td style="text-align:right">N$ 3,312.00</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Double per room" data-price="3312.0"></td></tr>
+<tr><td><strong>Children 7–12 yrs sharing</strong></td><td style="text-align:right">N$ 1,242.40</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Children 7–12 yrs sharing" data-price="1242.4"></td></tr></tbody></table></div></div>
+<div class="sub-block"><h4>Superior Double Room with Balcony — B&amp;B (per room)</h4>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th style="text-align:right">Rate (N$)</th><th style="text-align:right;width:90px">Qty</th></tr></thead><tbody><tr><td><strong>Single per room</strong></td><td style="text-align:right">N$ 3,060.00</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Single per room" data-price="3060.0"></td></tr>
+<tr><td><strong>Double per room</strong></td><td style="text-align:right">N$ 4,391.20</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Double per room" data-price="4391.2"></td></tr>
+<tr><td><strong>Children 7–12 yrs sharing</strong></td><td style="text-align:right">N$ 1,476.80</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Children 7–12 yrs sharing" data-price="1476.8"></td></tr></tbody></table></div></div>
+<div class="sub-block"><h4>Deluxe Double Room with Balcony — B&amp;B (per room)</h4>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th style="text-align:right">Rate (N$)</th><th style="text-align:right;width:90px">Qty</th></tr></thead><tbody><tr><td><strong>Single per room</strong></td><td style="text-align:right">N$ 3,451.20</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Single per room" data-price="3451.2"></td></tr>
+<tr><td><strong>Double per room</strong></td><td style="text-align:right">N$ 5,144.00</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Double per room" data-price="5144.0"></td></tr>
+<tr><td><strong>Children 7–12 yrs sharing</strong></td><td style="text-align:right">N$ 1,507.20</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Children 7–12 yrs sharing" data-price="1507.2"></td></tr></tbody></table></div></div>
+<div class="sub-block"><h4>Flamingo Suite with Balcony — B&amp;B (per room)</h4>
+<div class="table-wrap"><table><thead><tr><th>Type</th><th style="text-align:right">Rate (N$)</th><th style="text-align:right;width:90px">Qty</th></tr></thead><tbody><tr><td><strong>Single per room</strong></td><td style="text-align:right">N$ 4,673.60</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Single per room" data-price="4673.6"></td></tr>
+<tr><td><strong>Double per room</strong></td><td style="text-align:right">N$ 5,535.20</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Double per room" data-price="5535.2"></td></tr>
+<tr><td><strong>Children 7–12 yrs sharing</strong></td><td style="text-align:right">N$ 1,631.20</td><td style="text-align:right"><input type="number" min="0" value="" placeholder="" class="qty" data-name="Children 7–12 yrs sharing" data-price="1631.2"></td></tr></tbody></table></div></div>
+</div>
+  </div>
+
+  <div id="tab-2" class="tab-content"><div class="block">
+<h3>Property &amp; Activities</h3>
+<div class="sub-block"><h4>About Flamingo Villas</h4>
+<ul class="t-list">
+<li>Boutique hotel in Meersig, Walvis Bay — close to the lagoon and Pelican Point.</li>
+<li>Four room categories from Comfort Double/Twin to the Flamingo Suite — most with balconies.</li>
+<li>Lagoon and dune views from upper-floor rooms.</li>
+<li>Easy 30-minute hop from Swakopmund.</li>
+</ul></div>
+<div class="sub-block"><h4>Nearby (booked directly with operators)</h4>
+<ul class="t-list">
+<li>Walvis Bay marine cruises &amp; flamingo lagoon kayaking.</li>
+<li>Sandwich Harbour 4x4 day excursions.</li>
+<li>Pelican Point Cape fur seal &amp; dolphin trips.</li>
+<li>Swakopmund day trip — Mole, jetty, old town.</li>
+</ul></div>
+</div></div>
+  <div id="tab-3" class="tab-content"><div class="block">
+<h3>Policies &amp; Information</h3>
+<div class="sub-block"><h4>Cancellation Policy</h4>
+<ul class="t-list">
+<li>More than 30 days prior to arrival: 10%</li>
+<li>More than 7 days prior to arrival: 50%</li>
+<li>Less than 7 days prior to arrival: 100%</li>
+</ul></div>
+<div class="sub-block"><h4>Children Policy</h4>
+<ul class="t-list">
+<li>Children 0–6 yrs sharing with adults: no charge.</li>
+<li>Children 7–12 yrs sharing with adults: child rate applies (see rates).</li>
+</ul></div>
+<div class="sub-block"><h4>Contact</h4>
+<ul class="t-list">
+<li>Address: 30 Kovambo Nujoma Drive, Meersig, Walvis Bay</li>
+<li>Tel: 064 205 631 · Cell: 081 162 3688</li>
+<li>Email: reservations@flamingovillana.com</li>
+</ul></div>
+</div></div>
+
+  <div id="tab-4" class="tab-content">
+    <div class="block"><h3>Gallery</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px"><p class="raw">Gallery images coming soon.</p></div>
+    </div>
+  </div>
+
+  <div id="tab-5" class="tab-content">
+    <div class="block">
+      <h3>Finalise Booking</h3>
+      <p class="raw" style="margin-bottom:24px">Review your selection and complete the booking request below.</p>
+      <div id="booking-summary" style="margin-bottom:28px;background:var(--bg);padding:22px;border-radius:10px;border:1px solid var(--border)">
+        <p style="color:var(--text-muted);margin:0;font-size:.88rem">Select rates from the tabs above to build your booking.</p>
+      </div>
+      <form onsubmit="submitBooking(event)" id="booking-form">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label accent">Agent / Consultant Email</label>
+            <input type="email" id="b-agent-email" class="form-control" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label accent">Booking Status</label>
+            <select id="b-status" class="form-control" required style="cursor:pointer">
+              <option value="Provisional Booking">Provisional Booking</option>
+              <option value="Confirmed Booking">Confirmed Booking</option>
+            </select>
+          </div>
+        </div>
+        <hr style="border:none;border-top:1px solid var(--border);margin-bottom:18px">
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Client Full Name</label>
+            <input type="text" id="b-name" class="form-control" placeholder="e.g. John &amp; Jane Doe" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Pax</label>
+            <input type="number" id="b-pax" class="form-control" placeholder="2" min="1">
+          </div>
+        </div>
+        <input type="hidden" id="b-date-in" required>
+        <input type="hidden" id="b-date-out" required>
+        <div class="form-group" style="background:var(--bg);padding:14px 16px;border-radius:8px;border:1px solid var(--border)">
+          <span class="form-label" style="display:block;margin-bottom:4px">Travel Dates</span>
+          <span id="b-dates-display" style="font-family:var(--font-head);font-size:1.1rem;color:var(--text-muted)">Select dates from the calendar above</span>
+        </div>
+        <div class="grid-2">
+          <div class="form-group">
+            <label class="form-label">Arriving From</label>
+            <input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Departing To</label>
+            <input type="text" id="b-departing" class="form-control" placeholder="e.g. Next Lodge" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Additional Notes</label>
+          <textarea id="b-message" class="form-control" placeholder="Dietary requirements, room preferences, special requests..." style="height:110px;resize:vertical"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Send Booking to Operations</button>
+      </form>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<div id="booking-bar">
+  <span id="booking-total"></span>
+  <button class="btn-finalise" onclick="goFinalise()">Finalise Booking</button>
+</div>
+
+<script>
+// ── VIEW SWITCH ──
+function openRates(){document.getElementById('main-view').style.display='none';document.getElementById('detail-view').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
+function closeRates(){document.getElementById('detail-view').style.display='none';document.getElementById('main-view').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
+function scrollToCardCTA(){
+  const btn=document.getElementById('card-view-rates');if(!btn)return;
+  btn.scrollIntoView({behavior:'smooth',block:'center'});
+  setTimeout(()=>{btn.classList.remove('flash');void btn.offsetWidth;btn.classList.add('flash');setTimeout(()=>btn.classList.remove('flash'),3200)},520);
+}
+
+// ── TABS ──
+function switchTab(n){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(c=>c.classList.remove('active'));
+  document.getElementById('tab-btn-'+n).classList.add('active');
+  document.getElementById('tab-'+n).classList.add('active');
+  // scroll the active tab content to just below the sticky tabs
+  requestAnimationFrame(()=>{
+    const tabsEl=document.querySelector('.tabs');
+    const content=document.getElementById('tab-'+n);
+    if(!tabsEl||!content)return;
+    const tabsH=tabsEl.offsetHeight;
+    const y=content.getBoundingClientRect().top+window.pageYOffset-tabsH-32;
+    window.scrollTo({top:y,behavior:'smooth'});
+  });
+}
+
+// ── CALENDAR ──
+let calMonth=new Date().getMonth(),calYear=new Date().getFullYear(),checkIn=null,checkOut=null;
+function buildCal(){
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const days=['S','M','T','W','T','F','S'];
+  const root=document.getElementById('cal-root');if(!root)return;
+  root.innerHTML='';
+  const nav=document.createElement('div');nav.className='cal-nav';
+  nav.innerHTML=`<button class="cal-nav-btn" onclick="navCal(-1)">‹</button><div class="cal-month-title">${months[calMonth]} ${calYear}</div><div class="cal-month-title">${months[(calMonth+1)%12]} ${(calMonth+1)>11?calYear+1:calYear}</div><button class="cal-nav-btn" onclick="navCal(1)">›</button>`;
+  root.appendChild(nav);
+  const w=document.createElement('div');w.className='cal-wrap';
+  [0,1].forEach(off=>{
+    const m=(calMonth+off)%12,y=(calMonth+off)>11?calYear+1:calYear;
+    const c=document.createElement('div');c.className='cal';
+    const head=document.createElement('div');head.className='cal-head';
+    days.forEach(d=>{const e=document.createElement('div');e.className='cal-day-lbl';e.textContent=d;head.appendChild(e)});
+    c.appendChild(head);
+    const grid=document.createElement('div');grid.className='cal-grid';
+    const first=new Date(y,m,1).getDay();const ndays=new Date(y,m+1,0).getDate();
+    for(let i=0;i<first;i++){const e=document.createElement('div');e.className='cal-day empty';grid.appendChild(e)}
+    for(let d=1;d<=ndays;d++){
+      const e=document.createElement('div');e.className='cal-day';e.textContent=d;
+      const date=new Date(y,m,d);date.setHours(0,0,0,0);
+      const today=new Date();today.setHours(0,0,0,0);
+      if(date<today){e.classList.add('past');}else{
+        if(date.getTime()===today.getTime())e.classList.add('today');
+        if(checkIn && date.getTime()===checkIn.getTime())e.classList.add('range-start');
+        if(checkOut && date.getTime()===checkOut.getTime())e.classList.add('range-end');
+        if(checkIn && checkOut && date>checkIn && date<checkOut)e.classList.add('range');
+        e.onclick=()=>selectDate(date);
+      }
+      grid.appendChild(e);
+    }
+    c.appendChild(grid);w.appendChild(c);
+  });
+  root.appendChild(w);
+}
+function navCal(dir){calMonth+=dir;if(calMonth<0){calMonth=11;calYear--}if(calMonth>11){calMonth=0;calYear++}buildCal()}
+function fmtDate(d){return d.toISOString().split('T')[0]}
+function selectDate(d){
+  if(!checkIn||checkOut){checkIn=d;checkOut=null}
+  else if(d>checkIn){checkOut=d}
+  else{checkIn=d;checkOut=null}
+  const nights=checkIn&&checkOut?Math.round((checkOut-checkIn)/86400000):1;
+  document.getElementById('nights').textContent=nights;
+  const di=document.getElementById('b-date-in');const dout=document.getElementById('b-date-out');const disp=document.getElementById('b-dates-display');
+  if(checkIn)di.value=fmtDate(checkIn);if(checkOut)dout.value=fmtDate(checkOut);
+  if(disp){if(checkIn&&checkOut)disp.innerText=fmtDate(checkIn)+'  →  '+fmtDate(checkOut)+'  ('+nights+' night'+(nights>1?'s':'')+')';else disp.innerText='Select dates from the calendar above'}
+  buildCal();updateTotal();
+}
+
+// ── BOOKING ──
+let selectedItems=[];
+function updateTotal(){
+  selectedItems=[];let total=0;
+  const nights=checkIn&&checkOut?Math.round((checkOut-checkIn)/86400000):1;
+  document.querySelectorAll('.qty').forEach(i=>{
+    const q=parseFloat(i.value)||0;const p=parseFloat(i.dataset.price)||0;
+    if(q>0){const t=q*p*nights;total+=t;selectedItems.push({qty:q,name:i.dataset.name,price:p,nights,total:t})}
+  });
+  const bar=document.getElementById('booking-bar');
+  const hasItems=selectedItems.length>0;const hasDates=!!(checkIn&&checkOut);
+  if(hasItems){bar.style.display='block';document.getElementById('booking-total').textContent='Total: N$ '+total.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})}else{bar.style.display='none'}
+  if(hasItems && hasDates){document.getElementById('tab-btn-5').classList.add('ready')}else{document.getElementById('tab-btn-5').classList.remove('ready')}
+  renderBookingSummary();
+}
+function renderBookingSummary(){
+  const sum=document.getElementById('booking-summary');if(!sum)return;
+  if(!selectedItems.length){sum.innerHTML='<p style="color:var(--text-muted);margin:0;font-size:.88rem">Select rates from the tabs above to build your booking.</p>';return}
+  let h='<ul style="list-style:none;padding:0;margin:0">';
+  selectedItems.forEach(it=>{h+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:.88rem"><span><strong>${it.qty}×</strong> ${it.name} <span style="color:var(--text-muted);font-size:.8rem">× ${it.nights} night${it.nights>1?'s':''}</span></span><span style="color:var(--gold);font-weight:500">N$ ${it.total.toLocaleString('en-US',{minimumFractionDigits:2})}</span></li>`});
+  const total=selectedItems.reduce((a,i)=>a+i.total,0);
+  h+=`<li style="display:flex;justify-content:space-between;margin-top:14px;font-family:var(--font-head);font-size:1.3rem"><span>Grand Total</span><span>N$ ${total.toLocaleString('en-US',{minimumFractionDigits:2})}</span></li></ul>`;
+  sum.innerHTML=h;
+}
+function goFinalise(){switchTab(5)}
+async function submitBooking(e){
+  e.preventDefault();
+  if(!selectedItems.length){alert('Please select at least one rate before submitting.');return}
+  const lodgeName=document.title.split(' — ')[0];
+  const agentEmail=document.getElementById('b-agent-email').value;
+  const status=document.getElementById('b-status').value;
+  const clientName=document.getElementById('b-name').value;
+  const pax=document.getElementById('b-pax').value||'—';
+  const dateIn=document.getElementById('b-date-in').value;
+  const dateOut=document.getElementById('b-date-out').value;
+  const arriving=document.getElementById('b-arriving').value;
+  const departing=document.getElementById('b-departing').value;
+  const msg=document.getElementById('b-message').value;
+  localStorage.setItem('dt_agent_email',agentEmail);
+  const btn=e.target.querySelector('button[type="submit"]');
+  btn.innerHTML='<span style="display:inline-block;border:2px solid #fff;border-top-color:transparent;border-radius:50%;width:14px;height:14px;animation:spin 1s linear infinite;margin-right:8px;vertical-align:middle"></span>Sending…';
+  btn.disabled=true;
+  const total=selectedItems.reduce((a,i)=>a+i.total,0);
+  const htmlItems=selectedItems.map(it=>`<tr><td style="padding:10px;border-bottom:1px solid #eee"><strong>${it.qty}×</strong> ${it.name}</td><td style="padding:10px;border-bottom:1px solid #eee;text-align:right;color:#B8956A"><strong>N$ ${it.total.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr>`).join('');
+  const emailHtml=`<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden"><div style="background:#2C2824;padding:32px;text-align:center;color:#fff"><p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A">Desert Tracks Rate Portal</p><h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300">${lodgeName}</h1><p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7BA99A">New ${status}</p></div><div style="padding:32px;background:#fff"><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-size:14px"><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${agentEmail}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Client</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${clientName}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Pax</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${pax}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Date In</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${dateIn}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Date Out</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${dateOut}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Arriving From</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${arriving}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Departing To</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">${departing}</td></tr></table><p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8956A;margin-bottom:12px">Requested Rates</p><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px">${htmlItems}<tr><td style="padding:14px 10px;font-size:16px;font-family:Georgia,serif"><strong>Estimated Total</strong></td><td style="padding:14px 10px;text-align:right;font-size:16px"><strong>N$ ${total.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr></table><div style="background:#f9f7f4;padding:18px;border-radius:8px;border-left:3px solid #7BA99A"><p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269">Notes</p><p style="margin:0;font-size:14px;color:#555;white-space:pre-line">${msg||'No additional notes.'}</p></div></div></div>`;
+  try{
+    const res=await fetch('https://desert-tracks.vercel.app/api/send_email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:'bookings@desert-tracks.com',subject:`New ${status}: ${lodgeName} — ${clientName}`,html:emailHtml})});
+    if(res.ok){alert('Booking request sent to bookings@desert-tracks.com');closeRates();e.target.reset();document.querySelectorAll('.qty').forEach(i=>{i.value=''});selectedItems=[];updateTotal()}
+    else{const data=await res.json();alert('Failed: '+(data.error||'Unknown error'))}
+  }catch(err){alert('Network error. Please try again.')}
+  finally{btn.innerHTML='Send Booking to Operations';btn.disabled=false}
+}
+document.addEventListener('DOMContentLoaded',()=>{buildCal();updateTotal();
+  document.querySelectorAll('.qty').forEach(i=>i.addEventListener('input',updateTotal));
+  const savedEmail=localStorage.getItem('dt_agent_email');if(savedEmail){const el=document.getElementById('b-agent-email');if(el)el.value=savedEmail}
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Enter'&&e.target.classList.contains('qty')){
+    e.preventDefault();
+    const inputs=[...document.querySelectorAll('.qty')];
+    const idx=inputs.indexOf(e.target);
+    if(idx>=0&&idx<inputs.length-1)inputs[idx+1].focus();
+  }
+});
+</script>
+<style>
+.burger-menu-btn{position:fixed;top:16px;right:18px;z-index:9999;display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:11px 9px;background:rgba(255,255,255,.92);border:1px solid var(--gold-light,rgba(184,149,106,.25));border-radius:9px;box-shadow:0 4px 16px rgba(0,0,0,.10);cursor:pointer;}
+.burger-menu-btn span{display:block;width:100%;height:2px;background:var(--gold,#B8956A);transition:transform .3s,opacity .2s;}
+.burger-menu-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger-menu-btn.active span:nth-child(2){opacity:0;}
+.burger-menu-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#mm-backdrop{position:fixed;inset:0;background:rgba(44,40,36,.45);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:99999;}
+#mm-backdrop.open{opacity:1;visibility:visible;}
+#mobile-menu{position:fixed;top:0;left:0;height:100%;width:min(420px,100%);background:#F5F3EF;transform:translateX(-100%);transition:transform .45s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:18px 26px 40px;overflow-y:auto;z-index:100000;box-shadow:6px 0 40px rgba(0,0,0,.16);}
+#mobile-menu.open{transform:translateX(0);}
+#mobile-menu .mm-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,149,106,.22);padding-bottom:16px;}
+#mobile-menu .mm-logo{font-family:var(--font-head,serif);color:var(--gold,#B8956A);letter-spacing:3px;text-transform:uppercase;font-size:1.15rem;}
+#mobile-menu .mm-close{background:none;border:none;font-size:2rem;color:var(--gold,#B8956A);cursor:pointer;line-height:1;}
+#mobile-menu .mm-section{border-bottom:1px solid rgba(184,149,106,.14);}
+#mobile-menu .mm-head{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;text-align:left;font-family:var(--font-head,serif);color:var(--gold,#B8956A);font-weight:500;font-size:16px;padding:16px 2px 12px;cursor:pointer;}
+#mobile-menu .mm-arrow{color:var(--seafoam,#7BA99A);font-size:14px;transition:transform .3s;}
+#mobile-menu .mm-section.collapsed .mm-arrow{transform:rotate(-90deg);}
+#mobile-menu .mm-body{overflow:hidden;max-height:1400px;opacity:1;transition:max-height .5s cubic-bezier(.22,1,.36,1),opacity .4s ease;}
+#mobile-menu .mm-section.collapsed .mm-body{max-height:0;opacity:0;}
+#mobile-menu a{display:block;padding:10px 2px;color:var(--text-main,#2C2824);text-decoration:none;font-size:14px;border-bottom:1px solid rgba(0,0,0,.05);}
+#mobile-menu .mm-regions{columns:2;column-gap:18px;}
+#mobile-menu .mm-listprop{width:100%;margin-top:24px;background:transparent;color:var(--gold,#B8956A);border:1px solid var(--gold,#B8956A);padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+#mobile-menu .mm-signin{width:100%;margin-top:12px;background:var(--seafoam,#7BA99A);color:#fff;border:none;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+</style><div id="mm-backdrop" onclick="closeMobileMenu()"></div><div id="mobile-menu" role="dialog" aria-label="Menu"><div class="mm-top"><span class="mm-logo">Namibia Rates</span><button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><div class="mm-regions"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Vehicle rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Activity rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Home &amp; search</a></div></div><button class="mm-listprop" type="button" onclick="location.href='/'">List Your Property</button><button class="mm-signin" id="mm-agent" type="button">Agent Sign In</button></div><script>function toggleMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){var o=m.classList.toggle("open");if(b)b.classList.toggle("active",o);if(k)k.classList.toggle("open",o);document.body.style.overflow=o?"hidden":"";}}function closeMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){m.classList.remove("open");if(b)b.classList.remove("active");if(k)k.classList.remove("open");document.body.style.overflow="";}}function toggleSection(btn){var s=btn.closest(".mm-section");if(s)s.classList.toggle("collapsed");}(function(){var a=document.getElementById("mm-agent");if(!a)return;if(sessionStorage.getItem("nr_agent_token")){a.textContent="Sign Out";a.onclick=function(){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.href="/";};}else{a.onclick=function(){location.href="/#agent";};}})();</script>
+</body>
+</html>

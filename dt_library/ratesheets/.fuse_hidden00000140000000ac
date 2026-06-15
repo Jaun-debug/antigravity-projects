@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Selection Namibia -- Rates and Booking 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root{--bg:#EEEAE3;--card-bg:#FFFFFF;--text-main:#2C2824;--text-muted:#7A7269;--gold:#B8956A;--gold-light:rgba(184,149,106,0.12);--seafoam:#7BA99A;--seafoam-light:rgba(123,169,154,0.12);--border:rgba(184,149,106,0.2);--font-head:"Cormorant Garamond",serif;--font-body:"Inter",sans-serif;--transition:all 0.35s cubic-bezier(0.25,0.46,0.45,0.94);--radius:16px;}
+        *{box-sizing:border-box;}body{margin:0;padding:0;background:var(--bg);color:var(--text-main);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+        h1,h2,h3,h4,h5{font-family:var(--font-head);font-weight:400;margin:0;}
+        .site-hero{text-align:center;padding:80px 20px 50px;}
+        .hero-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block;margin:0 auto 28px;}
+        .hero-display{font-family:var(--font-head);font-size:clamp(4rem,9vw,9rem);font-weight:300;font-style:italic;line-height:0.9;letter-spacing:-2px;background-image:url("https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg");background-size:cover;background-position:center 40%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:var(--text-main);display:block;margin-bottom:0;user-select:none;}
+        .hero-rule{width:50px;height:1px;background:var(--gold);margin:24px auto;}
+        .hero-tagline{font-family:var(--font-head);font-size:clamp(1rem,2vw,1.6rem);font-style:italic;font-weight:300;color:var(--text-main);letter-spacing:0.5px;margin-bottom:10px;}
+        .hero-sub{font-family:var(--font-body);font-size:0.68rem;letter-spacing:5px;text-transform:uppercase;color:var(--text-muted);}
+        .tier-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:20px 30px 40px;max-width:1200px;margin:0 auto;}
+        .tier-pill{font-family:var(--font-body);font-size:0.62rem;letter-spacing:2px;text-transform:uppercase;padding:8px 16px;border:1px solid var(--border);border-radius:20px;background:var(--card-bg);color:var(--text-muted);cursor:pointer;transition:var(--transition);}
+        .tier-pill:hover,.tier-pill.active{background:var(--text-main);color:#fff;border-color:var(--text-main);}
+        .tier-section{max-width:1400px;margin:0 auto;padding:0 30px 60px;}
+        .tier-title{font-family:var(--font-head);font-size:clamp(1.8rem,3vw,2.8rem);font-weight:300;color:var(--text-main);text-align:center;margin-bottom:6px;letter-spacing:1px;}
+        .tier-sub{font-family:var(--font-body);font-size:0.62rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted);text-align:center;margin-bottom:32px;}
+        .lodge-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+        .lodge-grid.cols3{grid-template-columns:repeat(3,1fr);}
+        .lodge-grid.cols2{grid-template-columns:repeat(2,1fr);}
+        .lodge-grid.cols1{grid-template-columns:1fr;max-width:500px;margin:0 auto;}
+        .lodge-card{background:var(--card-bg);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:var(--transition);box-shadow:0 4px 24px rgba(44,40,36,0.06);}
+        .lodge-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(44,40,36,0.12);}
+        .lodge-card-img-wrap{overflow:hidden;height:180px;background:#d8d3cb;}
+        .lodge-card-img{width:100%;height:180px;object-fit:cover;display:block;transition:var(--transition);}
+        .lodge-card:hover .lodge-card-img{transform:scale(1.04);}
+        .lodge-card-body{padding:18px 20px 16px;}
+        .lodge-card-tier{font-family:var(--font-body);font-size:0.55rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;display:block;font-weight:600;}
+        .lodge-card-location{font-family:var(--font-body);font-size:0.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;display:block;}
+        .lodge-card-name{font-family:var(--font-head);font-size:1.3rem;font-weight:400;color:var(--text-main);line-height:1.2;margin-bottom:6px;}
+        .lodge-card-dot{width:6px;height:6px;border-radius:50%;background:var(--seafoam);display:inline-block;margin-bottom:8px;}
+        .lodge-card-desc{font-size:0.78rem;color:var(--text-muted);line-height:1.6;font-weight:300;margin-bottom:14px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+        .lodge-card-divider{border:none;border-top:1px solid var(--border);margin:0 0 12px;}
+        .lodge-card-actions{display:flex;justify-content:space-between;align-items:center;gap:6px;}
+        .btn-lodge{font-family:var(--font-body);font-size:0.58rem;letter-spacing:2px;text-transform:uppercase;padding:7px 12px;border:1px solid rgba(44,40,36,0.2);border-radius:6px;background:transparent;color:var(--text-muted);cursor:pointer;transition:var(--transition);}
+        .btn-lodge:hover{border-color:var(--text-main);color:var(--text-main);}
+        .btn-rates{font-family:var(--font-body);font-size:0.58rem;letter-spacing:2px;text-transform:uppercase;padding:7px 14px;border:1px solid var(--gold);border-radius:6px;background:transparent;color:var(--gold);cursor:pointer;transition:var(--transition);}
+        .btn-rates:hover{background:var(--gold);color:#fff;}
+        .detail-view{display:none;max-width:1200px;margin:0 auto;padding:40px 30px 120px;animation:fadeIn 0.4s ease;}
+        .back-btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-body);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);border:1px solid var(--border);padding:10px 22px;border-radius:30px;cursor:pointer;transition:var(--transition);background:transparent;margin-bottom:40px;}
+        .back-btn:hover{border-color:var(--gold);color:var(--gold);}
+        .detail-hero{display:grid;grid-template-columns:2fr 1fr;gap:30px;margin-bottom:40px;align-items:start;}
+        .detail-title{font-size:clamp(2rem,4vw,3.5rem);font-weight:300;color:var(--text-main);line-height:1.1;margin-bottom:6px;}
+        .detail-tier-badge{display:inline-block;font-family:var(--font-body);font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold);padding:4px 12px;border-radius:20px;margin-bottom:10px;font-weight:600;}
+        .detail-location{font-family:var(--font-body);font-size:0.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--seafoam);font-weight:500;margin-bottom:16px;display:block;}
+        .detail-intro{font-size:0.9rem;line-height:1.85;color:var(--text-muted);font-weight:300;white-space:pre-line;}
+        .spec-card{background:var(--card-bg);border-radius:12px;padding:28px;border:1px solid var(--border);}
+        .spec-card-title{font-family:var(--font-body);font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);border-bottom:1px solid var(--border);padding-bottom:12px;margin-bottom:16px;display:block;}
+        .spec-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:0.82rem;}
+        .spec-row:last-child{border-bottom:none;}
+        .spec-label{color:var(--text-main);font-weight:400;}
+        .spec-value{color:var(--text-muted);font-weight:300;text-align:right;max-width:55%;}
+        .tabs{display:flex;gap:8px;margin-bottom:32px;overflow-x:auto;padding:14px 16px;background:var(--card-bg);border-radius:12px;border:1px solid var(--border);position:sticky;top:16px;z-index:90;box-shadow:0 4px 20px rgba(44,40,36,0.06);}
+        .tab-btn{font-family:var(--font-body);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;padding:11px 22px;border-radius:8px;border:1px solid transparent;background:transparent;color:var(--text-muted);cursor:pointer;transition:var(--transition);white-space:nowrap;font-weight:500;}
+        .tab-btn:hover{color:var(--text-main);background:var(--gold-light);}
+        .tab-btn.active{background:var(--text-main);color:#fff;border-color:transparent;}
+        .tab-btn-highlight{border-color:var(--border);color:var(--text-muted);opacity:0.5;cursor:not-allowed;}
+        .tab-btn-highlight.ready{border-color:var(--seafoam);color:var(--seafoam);opacity:1;cursor:pointer;animation:tabPulse 1.8s ease-in-out infinite;}
+        .tab-btn-highlight.active{background:var(--seafoam);color:#fff;border-color:transparent;opacity:1;animation:none;cursor:pointer;}
+        @keyframes tabPulse{0%,100%{border-color:var(--seafoam);color:var(--seafoam);}50%{border-color:var(--gold);color:var(--gold);box-shadow:0 0 14px rgba(184,149,106,0.35);}}
+        .tab-content{display:none;animation:fadeIn 0.35s ease;}
+        .tab-content.active{display:block;}
+        .lodge-gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:30px;}
+        .gallery-img{width:100%;height:220px;object-fit:cover;border-radius:10px;}
+        .content-block{background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:36px 40px;margin-bottom:24px;}
+        .content-block h3{font-family:var(--font-head);font-size:1.5rem;font-weight:400;color:var(--text-main);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);letter-spacing:1px;}
+        .sub-block{margin-top:28px;}
+        .sub-block h4{font-family:var(--font-body);font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;font-weight:500;}
+        .table-responsive{width:100%;overflow-x:auto;border:1px solid var(--border);border-radius:10px;margin-bottom:24px;}
+        table{width:100%;border-collapse:collapse;text-align:left;}
+        th{font-family:var(--font-body);background:var(--gold-light);color:var(--text-main);font-size:0.65rem;padding:10px 12px;text-transform:uppercase;letter-spacing:1px;font-weight:600;border-bottom:1px solid var(--border);}
+        td{padding:10px 12px;border-bottom:1px solid rgba(44,40,36,0.05);color:var(--text-muted);font-size:0.85rem;line-height:1.5;}
+        tr:last-child td{border-bottom:none;}
+        tr:hover td{background:var(--gold-light);color:var(--text-main);}
+        td strong{color:var(--text-main);font-weight:500;}
+        .td-season{background:rgba(184,149,106,0.06);font-weight:500;color:var(--text-main);font-size:0.78rem;}
+        .ccr-row td{background:var(--seafoam-light);color:var(--seafoam);font-weight:600;}
+        .text-list{list-style:none;padding:0;color:var(--text-muted);line-height:1.9;font-size:0.9rem;}
+        .text-list li{position:relative;padding-left:22px;margin-bottom:10px;}
+        .text-list li::before{content:"--";color:var(--gold);position:absolute;left:0;font-weight:300;}
+        .raw-text{white-space:pre-line;color:var(--text-muted);line-height:1.85;font-size:0.9rem;}
+        .ccr-notice{background:var(--seafoam-light);border:1px solid rgba(123,169,154,0.3);border-radius:10px;padding:16px 20px;margin-bottom:20px;font-size:0.85rem;color:var(--text-main);}
+        .ccr-notice strong{color:var(--seafoam);}
+        /* SEASON SELECTOR */
+        .season-selector{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px;}
+        .season-btn{font-family:var(--font-body);font-size:0.6rem;letter-spacing:2px;text-transform:uppercase;padding:7px 14px;border:1px solid var(--border);border-radius:20px;background:var(--card-bg);color:var(--text-muted);cursor:pointer;transition:var(--transition);}
+        .season-btn.active{background:var(--gold);color:#fff;border-color:var(--gold);}
+        /* CALENDAR */
+        .dew-calendar-container{display:flex;gap:40px;width:100%;max-width:650px;justify-content:center;margin:10px auto 0;}
+        .dew-calendar-nav{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:650px;margin:0 auto 16px;}
+        .dew-calendar-nav-btn{background:transparent;border:none;color:var(--text-main);font-size:20px;cursor:pointer;padding:8px;}
+        .dew-calendar-month-title{font-family:var(--font-head);font-size:1.1rem;font-weight:400;color:var(--text-main);text-align:center;width:300px;letter-spacing:1px;}
+        .dew-calendar{flex:1;max-width:300px;width:100%;}
+        .dew-calendar-header{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:8px;}
+        .dew-calendar-day-label{font-family:var(--font-body);font-size:10px;font-weight:600;color:var(--text-muted);text-align:center;text-transform:uppercase;letter-spacing:1px;padding:4px 0;}
+        .dew-calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);}
+        .dew-calendar-day{font-family:var(--font-body);font-size:13px;color:var(--text-main);text-align:center;padding:8px 4px;cursor:pointer;transition:background 0.2s;}
+        .dew-calendar-day:hover{background:var(--gold-light);}
+        .dew-calendar-day.dew-empty{cursor:default;}.dew-calendar-day.dew-empty:hover{background:transparent;}
+        .dew-calendar-day.dew-today{background:var(--seafoam);border-radius:50%;color:#fff!important;font-weight:600;}
+        .dew-calendar-day.dew-range-start{background:var(--gold);border-radius:50% 0 0 50%;color:#fff!important;font-weight:600;}
+        .dew-calendar-day.dew-range-end{background:var(--gold);border-radius:0 50% 50% 0;color:#fff!important;font-weight:600;}
+        .dew-calendar-day.dew-range{background:rgba(184,149,106,0.12);}
+        .dew-calendar-day.dew-past{color:rgba(44,40,36,0.2);cursor:not-allowed;}.dew-calendar-day.dew-past:hover{background:transparent;}
+        @media(max-width:768px){.dew-calendar-container{flex-direction:column;gap:20px;align-items:center;}.dew-calendar-container>.dew-calendar:last-child{display:none;}}
+        #booking-bar{display:none;position:fixed;bottom:0;left:0;width:100%;background:rgba(238,234,227,0.95);backdrop-filter:blur(12px);padding:18px 30px;box-shadow:0 -8px 30px rgba(44,40,36,0.1);z-index:100;text-align:center;border-top:1px solid var(--border);}
+        #booking-total{font-family:var(--font-head);font-size:1.4rem;font-weight:400;color:var(--text-main);margin-right:24px;}
+        .btn-finalise{font-family:var(--font-body);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;padding:12px 28px;background:var(--gold);color:#fff;border:2px solid transparent;border-radius:8px;cursor:pointer;animation:barBtnPulse 1.8s ease-in-out infinite;}
+        @keyframes barBtnPulse{0%,100%{background:var(--gold);box-shadow:0 0 12px rgba(184,149,106,0.4);}50%{background:var(--seafoam);box-shadow:0 0 18px rgba(123,169,154,0.5);}}
+        .form-group{margin-bottom:18px;}
+        .form-label{font-family:var(--font-body);font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:8px;display:block;}
+        .form-label.accent{color:var(--gold);}
+        .form-control{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:0.9rem;background:var(--bg);color:var(--text-main);}
+        .form-control:focus{outline:none;border-color:var(--gold);background:#fff;}
+        .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+        .btn-submit{width:100%;font-family:var(--font-body);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;padding:16px;background:var(--text-main);color:#fff;border:none;border-radius:10px;cursor:pointer;margin-top:10px;}
+        .btn-submit:hover{background:var(--gold);}
+        .rate-qty{width:58px;padding:6px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;font-family:var(--font-body);font-size:0.9rem;}
+        @keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+        @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+        @media(max-width:1200px){.lodge-grid{grid-template-columns:repeat(3,1fr);}}
+        @media(max-width:900px){.lodge-grid,.lodge-grid.cols3,.lodge-grid.cols2{grid-template-columns:repeat(2,1fr);}.detail-hero{grid-template-columns:1fr;}.lodge-gallery{grid-template-columns:1fr;}}
+        @media(max-width:600px){.lodge-grid{grid-template-columns:1fr;}.grid-2{grid-template-columns:1fr;}.detail-view{padding:16px 16px 100px;}.content-block{padding:22px;}.tier-section{padding:0 16px 40px;}}
+    </style>
+<style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
+<body>
+<button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+<div id="main-view">
+    <div class="site-hero"><a class="grp-back" href="/">&#8592; Back to Home Page</a>
+        <div class="hero-dot"></div>
+        <span class="hero-display">Natural</span>
+        <span class="hero-display">Selection</span>
+        <div class="hero-rule"></div>
+        <p class="hero-tagline">Safaris of Character.</p>
+        <p class="hero-sub">Nett 20% Rates &middot; Namibia 2026</p>
+    </div>
+    
+    <div id="all-cards"></div>
+</div>
+<div id="detail-view" class="detail-view">
+    <button class="back-btn" onclick="closeProperty()">&#8592; All Camps</button>
+    <div class="detail-hero">
+        <div>
+            <span class="detail-tier-badge" id="d-tier-badge"></span>
+            <span class="detail-location" id="d-location"></span>
+            <h1 class="detail-title" id="d-title"></h1>
+            <p class="detail-intro" id="d-intro"></p>
+        </div>
+        <div class="spec-card">
+            <span class="spec-card-title">Quick Specs</span>
+            <div class="spec-row"><span class="spec-label">Nett Rate</span><span class="spec-value">20% (non-commissionable)</span></div>
+            <div class="spec-row"><span class="spec-label">CCR Fee</span><span class="spec-value">+N$650 pppn (mandatory)</span></div>
+            <div class="spec-row"><span class="spec-label">Location</span><span class="spec-value" id="spec-location">--</span></div>
+            <div class="spec-row"><span class="spec-label">Pilot/Guide Rate</span><span class="spec-value">N$3,585 pppn</span></div>
+            <div class="spec-row"><span class="spec-label">Contact</span><span class="spec-value">resnam@naturalselection.travel</span></div>
+        </div>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Rates by Season</button>
+        <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Inclusions &amp; Notes</button>
+        <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies &amp; Info</button>
+        <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
+        <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+    </div>
+    <div id="tab-1" class="tab-content active"></div>
+    <div id="tab-2" class="tab-content"></div>
+    <div id="tab-3" class="tab-content"></div>
+    <div id="tab-4" class="tab-content"><div class="content-block"><h3>Gallery</h3><div class="lodge-gallery" id="d-gallery-full"></div></div></div>
+    <div id="tab-5" class="tab-content">
+        <div class="content-block">
+            <h3>Finalise Booking</h3>
+            <div id="booking-summary" style="margin-bottom:28px;background:var(--bg);padding:22px;border-radius:10px;border:1px solid var(--border);"><p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates from the tabs above to build your booking.</p></div>
+            <form onsubmit="submitBooking(event)">
+                <div class="grid-2">
+                    <div class="form-group"><label class="form-label accent">Agent / Consultant Email</label><input type="email" id="b-agent-email" class="form-control" placeholder="your@email.com" required></div>
+                    <div class="form-group"><label class="form-label accent">Booking Status</label><select id="b-status" class="form-control" required style="cursor:pointer;"><option value="Provisional Booking">Provisional Booking</option><option value="Confirmed Booking">Confirmed Booking</option></select></div>
+                </div>
+                <hr style="border:none;border-top:1px solid var(--border);margin-bottom:18px;">
+                <div class="grid-2">
+                    <div class="form-group"><label class="form-label">Client Full Name</label><input type="text" id="b-name" class="form-control" placeholder="e.g. John and Jane Doe" required></div>
+                    <div class="form-group"><label class="form-label">Guide Room(s)</label><input type="number" id="b-guide" class="form-control" placeholder="0" min="0"></div>
+                </div>
+                <input type="hidden" id="b-date-in" required>
+                <input type="hidden" id="b-date-out" required>
+                <div class="form-group" style="background:var(--bg);padding:14px 16px;border-radius:8px;border:1px solid var(--border);">
+                    <span class="form-label" style="display:block;margin-bottom:4px;">Travel Dates</span>
+                    <span id="b-dates-display" style="font-family:var(--font-head);font-size:1.1rem;color:var(--text-muted);">Select dates from the calendar above</span>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group"><label class="form-label">Arriving From</label><input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek" required></div>
+                    <div class="form-group"><label class="form-label">Departing To</label><input type="text" id="b-departing" class="form-control" placeholder="e.g. Next Camp" required></div>
+                </div>
+                <div class="form-group"><label class="form-label">Additional Notes</label><textarea id="b-message" class="form-control" placeholder="Children ages, private vehicle required, specialist guide, dietary needs..." style="height:110px;resize:vertical;"></textarea></div>
+                <button type="submit" class="btn-submit">Send Booking to Operations</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="booking-bar">
+    <span id="booking-total">Total: N$ 0.00</span>
+    <button class="btn-finalise" onclick="switchTab(5)">Finalise Booking</button>
+</div>
+<div id="global-dates-ui" style="display:none;margin-bottom:28px;background:var(--card-bg);padding:32px;border-radius:12px;border:1px solid var(--border);text-align:center;">
+    <h3 style="font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--text-main);margin-bottom:6px;letter-spacing:1px;">When would you like to travel?</h3>
+    <p style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;">Select your check-in and check-out dates</p>
+    <div id="inline-calendar"></div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <span id="nights-count" style="font-family:var(--font-head);font-size:2rem;color:var(--gold);">1</span>
+        <span style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-left:8px;">Night(s) Selected</span>
+    </div>
+</div>
+<script>
+const TIERS={classic:"Classic Camps",explorer:"Explorer Camps",exclusive:"Exclusive Use"};
+
+// Season helper
+function getSeason(dateStr){
+  if(!dateStr)return null;
+  const d=new Date(dateStr);const m=d.getMonth()+1;const day=d.getDate();
+  // Green: 10 Jan - 31 Mar
+  if((m===1&&day>=10)||m===2||m===3)return "green";
+  // Shoulder: 1-30 Apr, 1-30 Jun, 1 Nov - 19 Dec
+  if(m===4||(m===6)||(m===11)||(m===12&&day<=19))return "shoulder";
+  // Shoulder High: 1-31 May
+  if(m===5)return "shoulderhigh";
+  // Peak: 1 Jul - 31 Aug
+  if(m===7||m===8)return "peak";
+  // High: 1 Sep - 31 Oct, 20 Dec - 9 Jan
+  if(m===9||m===10||(m===12&&day>=20)||(m===1&&day<=9))return "high";
+  return "shoulder";
+}
+
+const SEASONS={
+  green:{label:"Green Season",dates:"10 Jan -- 31 Mar"},
+  shoulder:{label:"Shoulder Season",dates:"1-30 Apr | 1-30 Jun | 1 Nov -- 19 Dec"},
+  shoulderhigh:{label:"Shoulder High Season",dates:"1 -- 31 May"},
+  high:{label:"High Season",dates:"1 Sep -- 31 Oct | 20 Dec -- 9 Jan"},
+  peak:{label:"Peak Season",dates:"1 Jul -- 31 Aug"}
+};
+
+const DB={
+  hoanibvalley:{name:"Hoanib Valley Camp",tier:"classic",location:"Hoanib, Palmwag Concession",cover:"https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_1769304110.jpg?fmt=jpg"],shortDesc:"Remote classic camp in the Hoanib floodplain -- desert-adapted elephant, giraffe, lion and iconic desert landscapes.",intro:"Hoanib Valley Camp is nestled in the dramatic Hoanib River floodplain in the remote Palmwag Concession. Famous for desert-adapted elephant, desert lion, and Hartmann mountain zebra. Fully inclusive with multi-day discounts.",rooms:"1 Family + 5 Doubles/Twins",basis:"Fully Inclusive",rates:{green:{ps:[12796,11517,10877],ss:[0,0,0]},shoulder:{ps:[15036,13533,12781],ss:[6034,5431,5129]},shoulderhigh:{ps:[16316,15500,14685],ss:[6548,6220,5893]},high:{ps:[18036,17134,16233],ss:[7238,6876,6514]},peak:{ps:[20796,19756,19756],ss:[8346,7928,7928]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>Fully Inclusive:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory, added to accommodation rate, non-vatable.</li><li><strong>Single Supplement Waiver:</strong> Green Season (10 Jan-31 Mar) and Shoulder Season (1 Nov-19 Dec).</li><li><strong>Pilot/Guide Rate:</strong> N$3,585 pppn year-round.</li><li><strong>Private Vehicle:</strong> Available per night. Parties of 6-7 guests receive a private vehicle at no charge. Families with children 9 and younger must book a private vehicle.</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>Long Stay Discounts:</strong> 6-7 nights: 10% Green and Shoulder / 5% Shoulder High and High / 5% Peak. 8+ nights: 15% Green and Shoulder / 10% Shoulder High and High / 5% Peak.</li><li><strong>Stay 3 Pay 2 Offer:</strong> Book 3 nights here in combination with 3+ nights at any other Natural Selection Namibia property and get 3 nights for price of 2 (excluding Peak Season).</li><li><strong>Special Transfer Note:</strong> Transfers depart Fort Sesfontein at 15h00 and depart camp to Fort Sesfontein at 09h00. Deviation incurs a private transfer cost of N$8,985 per vehicle each way.</li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  shipwreck:{name:"Shipwreck Lodge",tier:"classic",location:"Skeleton Coast National Park",cover:"https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_1769304110.jpg?fmt=jpg"],shortDesc:"Iconic lodge on the Skeleton Coast -- dramatic dune landscape, shipwrecks, brown hyena, Cape fur seals, and desert-adapted wildlife.",intro:"Shipwreck Lodge on the Skeleton Coast National Park is one of Namibia most iconic destinations. Dramatic dune-top chalets with views over the wild Atlantic coast. Famous for brown hyena, Cape fur seal colonies, and the eerie beauty of the Skeleton Coast.",rooms:"2 Family + 8 Doubles/Twins",basis:"Fully Inclusive",rates:{green:{ps:[14396],ss:[5760]},shoulder:{ps:[17916],ss:[7168]},shoulderhigh:{ps:[19276],ss:[7712]},high:{ps:[21516],ss:[8608]},peak:{ps:[24156],ss:[9664]}},singleRate:true,tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>Fully Inclusive:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory, added to accommodation rate.</li><li><strong>Pilot/Guide Rate:</strong> N$3,045 pppn (Shipwreck specific rate).</li><li><strong>No long stay discount or Stay 3 Pay 2 offer applies at Shipwreck Lodge.</strong></li><li><strong>Single Supplement:</strong> Applies year-round -- no waiver seasons.</li><li><strong>Transfer:</strong> Mowe Bay to Shipwreck Lodge -- included. Departs Mowe Bay at 11h00 and 15h00. Departs Shipwreck Lodge for Mowe Bay at 09h00.</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>No Honeymoon Special or long stay discount applies at Shipwreck Lodge.</strong></li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  hoanibel:{name:"Hoanib Elephant Camp",tier:"classic",location:"Hoanib, Palmwag Concession",cover:"https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_1769304110.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/48365/1739437470637_shutterstock_1769304110.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg?fmt=jpg"],shortDesc:"Premier Hoanib camp -- bigger rooms, elevated experience, desert-adapted elephant, and the magic of the Palmwag Concession.",intro:"Hoanib Elephant Camp offers a slightly more spacious and elevated experience in the Hoanib floodplain, alongside Hoanib Valley Camp. Desert-adapted elephant, desert lion, and the wilderness of the Palmwag Concession. Closed during Green Season.",rooms:"2 Family + 8 Doubles/Twins",basis:"Fully Inclusive",rates:{green:{ps:["Closed"],ss:[""]},shoulder:{ps:[16540,14886,14059],ss:[6638,5974,5642]},shoulderhigh:{ps:[17948,17050,16154],ss:[7203,6842,6483]},high:{ps:[19836,18844,17853],ss:[7960,7562,7165]},peak:{ps:[22876,21732,21732],ss:[9180,8721,8721]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>Fully Inclusive:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory, added to accommodation rate.</li><li><strong>Closed:</strong> Green Season (10 Jan -- 31 Mar).</li><li><strong>Single Supplement Waiver:</strong> Shoulder Season (1 Nov -- 19 Dec) only.</li><li><strong>Pilot/Guide Rate:</strong> N$3,585 pppn year-round.</li><li><strong>Stay 3 Pay 2 Offer:</strong> Book 3 nights here in combination with 3+ nights at any other Natural Selection Namibia property and get 3 nights for price of 2 (excluding Peak Season).</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>Long Stay Discounts:</strong> 6-7 nights: 10% Green and Shoulder / 5% Shoulder High and High / 5% Peak. 8+ nights: 15% Green and Shoulder / 10% Shoulder High and High / 5% Peak.</li><li><strong>Transfer:</strong> Fort Sesfontein transfers depart at 15h00 (to camp) and 09h00 (to Fort Sesfontein). Deviation: N$8,985 per vehicle each way.</li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  kwessidunes:{name:"Kwessi Dunes",tier:"classic",location:"NamibRand Nature Reserve",cover:"https://wetu.com/imageHandler/c1920x1080/10515/img_6924.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/10515/img_6924.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/10515/img_5262.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/10515/ondili_desert_homestead_venture_media--23.jpg?fmt=jpg"],shortDesc:"Intimate NamibRand camp -- star-gazing, Sossusvlei excursion, under-the-stars sleep-out, and no single supplement in green season.",intro:"Kwessi Dunes sits in the vast NamibRand Nature Reserve. Intimate and remote, it offers a Sossusvlei excursion, night-under-the-stars sleep-out (stay 2+ nights), and some of Namibia finest star-gazing. No single supplement during Green Season.",rooms:"2 Family + 10 Doubles/Twins",basis:"Fully Inclusive",rates:{green:{ps:[8676,7809,7374],ss:[0,0,0]},shoulder:{ps:[9996,8997,8497],ss:[4011,3611,3410]},shoulderhigh:{ps:[11716,11130,10545],ss:[4702,4467,4232]},high:{ps:[14756,14018,13281],ss:[5922,5626,5330]},peak:{ps:[16396,15576,15576],ss:[6580,6251,6251]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>Fully Inclusive:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory.</li><li><strong>Single Supplement Waiver:</strong> Green Season (10 Jan-31 Mar) and Shoulder Season (1 Nov-19 Dec).</li><li><strong>Under the Stars Sleep-Out:</strong> Available on a stay of 2+ nights (max 16 guests).</li><li><strong>Sossusvlei Excursion:</strong> N$3,145 pp. Stay 3+ nights and receive complimentary.</li><li><strong>Transfers:</strong> Within 50km radius N$785 pp one way. Beyond 50km contact reservations.</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>Long Stay Discounts apply.</strong></li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  nkasalinyanti:{name:"Nkasa Linyanti",tier:"classic",location:"Nkasa Rupara National Park, Zambezi",cover:"https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/44110/1753868022963chobebuilding09rgbv1web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/44110/1753867882905chobedeck01rgbv1web.jpg?fmt=jpg"],shortDesc:"Premier Namibia wetland camp in Nkasa Rupara National Park -- elephant, buffalo, hippo, lechwe and exceptional birding.",intro:"Nkasa Linyanti is located in the remote Nkasa Rupara National Park in Namibia Zambezi region. Excellent wildlife including large elephant herds, buffalo, hippo, sitatunga, and some of the finest birding in southern Africa. Access by FlyNamibia charter.",rooms:"6 Doubles/Twins",basis:"Fully Inclusive",rates:{green:{ps:["Closed"],ss:[""]},shoulder:{ps:[8396,7557,7137],ss:[3369,3033,2864]},shoulderhigh:{ps:[10436,9914,9393],ss:[4188,3979,3769]},high:{ps:[12472,11849,11225],ss:[5005,4740,4505]},peak:{ps:[13396,12726,12726],ss:[5376,5107,5107]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>Fully Inclusive:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory.</li><li><strong>Closed:</strong> Green Season (10 Jan -- 31 Mar).</li><li><strong>Single Supplement Waiver:</strong> Shoulder Season (1 Nov -- 19 Dec).</li><li><strong>Access:</strong> Via FlyNamibia from Katima Mulilo (Mon/Wed/Fri) or vehicle transfer via Caprivi Adventures.</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>Long Stay Discounts apply.</strong></li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  safarihoek:{name:"Safarihoek Lodge",tier:"explorer",location:"Etosha Heights Private Reserve",cover:"https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_21_rgb_v1_web.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_21_rgb_v1_web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_16_rgb_v1_web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_07_rgb_v1_web.jpg?fmt=jpg"],shortDesc:"Etosha Heights explorer lodge -- DBB or Fully Inclusive, Luxury or Classic rooms, guided bush walks and game drives.",intro:"Safarihoek Lodge sits on the private Etosha Heights Private Reserve bordering Etosha National Park. Available on a DBB or Fully Inclusive basis, with Luxury or Classic room categories. Excellent guided game drives and bush walks on the private reserve.",rooms:"1 Family + 8 Luxury and 2 Classic Doubles/Twins",basis:"DBB or Fully Inclusive",rates:{green:{luxury_dbb:[5196,4677,4417],classic_dbb:[4636,4173,3941],luxury_fi:[7156,6441,6082],classic_fi:[5812,5231,4940],ss:[0,0,0]},shoulder:{luxury_dbb:[6028,5426,5124],classic_dbb:[5400,4860,4590],luxury_fi:[8196,7377,6966],classic_fi:[6908,6218,5872],ss_luxury_dbb:[2419,2177,2056],ss_classic_dbb:[2167,1950,1842],ss_luxury_fi:[3289,2960,2796],ss_classic_fi:[2772,2495,2356]},shoulderhigh:{luxury_dbb:[6380,6061,5742],classic_dbb:[5716,5430,5145],luxury_fi:[8700,8265,7830],classic_fi:[7324,6958,6592],ss_luxury_dbb:[2560,2432,2304],ss_classic_dbb:[2294,2179,2065],ss_luxury_fi:[3491,3317,3142],ss_classic_fi:[2939,2792,2645]},high:{luxury_dbb:[6860,6517,6174],classic_dbb:[6140,5833,5526],luxury_fi:[9100,8645,8190],classic_fi:[7436,7064,6693],ss_luxury_dbb:[2753,2615,2478],ss_classic_dbb:[2464,2341,2218],ss_luxury_fi:[3652,3469,3287],ss_classic_fi:[2984,2835,2686]},peak:{luxury_dbb:[7560,7182,7182],classic_dbb:[6796,6456,6456],luxury_fi:[10212,9702,9702],classic_fi:[8316,7900,7900],ss_luxury_dbb:[3034,2882,2882],ss_classic_dbb:[2727,2591,2591],ss_luxury_fi:[4098,3893,3893],ss_classic_fi:[3337,3170,3170]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>DBB Rate:</strong> Accommodation, dinner, bed and breakfast. Activities charged separately (see below).</li><li><strong>Fully Inclusive Rate:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory.</li><li><strong>Single Supplement Waiver:</strong> Green Season (10 Jan-31 Mar) and Shoulder Season (1 Nov-19 Dec).</li><li><strong>Activities (DBB guests):</strong> Morning, afternoon or evening game drive: N$1,150 per drive. Bush walk 1-3hrs: N$730. Bush walk 3hrs+: N$1,150.</li><li><strong>Pilot/Guide Rate:</strong> N$3,585 pppn year-round.</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>Private Vehicle:</strong> Parties of 6-7 guests receive private vehicle at no charge. Families with children 9 and younger must book and pay for a private vehicle.</li><li><strong>Long Stay Discounts apply.</strong></li><li><strong>Honeymoon Special:</strong> One spouse receives 50% off nightly accommodation rate, valid all year, up to 12 months from marriage. Proof required.</li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  etoshamountain:{name:"Etosha Mountain Lodge",tier:"explorer",location:"Etosha Heights Private Reserve",cover:"https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_16_rgb_v1_web.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_16_rgb_v1_web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_21_rgb_v1_web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_07_rgb_v1_web.jpg?fmt=jpg"],shortDesc:"Explorer lodge on Etosha Heights -- DBB or Fully Inclusive, guided game drives and bush walks on a private reserve.",intro:"Etosha Mountain Lodge sits on the Etosha Heights Private Reserve with spectacular mountain views. Available on a DBB or Fully Inclusive basis. Guided game drives and interpretive bush walks on the private reserve.",rooms:"1 Family + 8 Doubles/Twins",basis:"DBB or Fully Inclusive",rates:{green:{dbb:[3516,3165,2989],fi:[5860,5274,4981],ss:[0,0,0]},shoulder:{dbb:[4476,4029,3805],fi:[6868,6182,5838],ss_dbb:[1796,1617,1527],ss_fi:[2756,2481,2343]},shoulderhigh:{dbb:[4916,4670,4425],fi:[7500,7125,6750],ss_dbb:[1973,1874,1776],ss_fi:[3010,2859,2709]},high:{dbb:[5180,4921,4662],fi:[7796,7406,7017],ss_dbb:[2079,1975,1871],ss_fi:[3129,2972,2816]},peak:{dbb:[5876,5582,5582],fi:[8636,8204,8204],ss_dbb:[2358,2240,2240],ss_fi:[3466,3292,3292]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>DBB Rate:</strong> Accommodation, dinner, bed and breakfast. Activities charged separately.</li><li><strong>Fully Inclusive Rate:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory.</li><li><strong>Single Supplement Waiver:</strong> Green Season (10 Jan-31 Mar) and Shoulder Season (1 Nov-19 Dec).</li><li><strong>Activities (DBB guests):</strong> Morning, afternoon or evening game drive: N$1,150 per drive. Bush walk 1-3hrs: N$730. Bush walk 3hrs+: N$1,150.</li><li><strong>Pilot/Guide Rate:</strong> N$3,585 pppn year-round.</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Child Policy:</strong> 0-5 years free; 6-18 years charged at 50% of adult sharing rate.</li><li><strong>Long Stay Discounts apply.</strong></li><li><strong>Honeymoon Special applies.</strong></li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`},
+  safarihouse:{name:"Safari House",tier:"exclusive",location:"Etosha Heights Private Reserve",cover:"https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_07_rgb_v1_web.jpg?fmt=jpg",images:["https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_07_rgb_v1_web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_21_rgb_v1_web.jpg?fmt=jpg","https://wetu.com/imageHandler/c1920x1080/201088/ondili_etosha_16_rgb_v1_web.jpg?fmt=jpg"],shortDesc:"Exclusive-use farmhouse on Etosha Heights -- 3 en-suite bedrooms, private guide and vehicle, chef, pool, and total flexibility.",intro:"Safari House is an exclusive-use classic Namibian farmhouse on Etosha Heights Private Reserve. Three en-suite bedrooms, fully equipped kitchen, dining room, lounge, large veranda with braai, fire pit, and swimming pool. Private guide, vehicle, and chef included. Priced per unit per night.",rooms:"3 Doubles/Twins en-suite (Exclusive Use)",basis:"Fully Inclusive -- Per Unit Per Night",rates:{green:{unit:[29300,26370,24905]},shoulder:{unit:[34340,30906,29189]},shoulderhigh:{unit:[37500,35625,33750]},high:{unit:[38980,37031,35082]},peak:{unit:[43180,41021,41021]}},tab2:`<div class="content-block"><h3>Inclusions and Notes</h3><ul class="text-list"><li><strong>Fully Inclusive:</strong> Accommodation, all meals and beverages, Wi-Fi, guest laundry, daily activities, airstrip transfers, guiding, park entry fees, and VAT.</li><li><strong>Private guide, vehicle, and chef included</strong> for maximum flexibility.</li><li><strong>Exclusions:</strong> Premium brand drinks, gratuities, and personal travel insurance.</li><li><strong>CCR Fee:</strong> N$650 pppn -- mandatory, added per person per night.</li><li><strong>Pilot/Guide Rate:</strong> N$3,585 pppn year-round.</li><li><strong>Rates are per unit per night</strong> (not per person).</li></ul></div>`,tab3:`<div class="content-block"><h3>Policies and Info</h3><ul class="text-list"><li><strong>Exclusive use only</strong> -- cannot be booked on a per-room basis.</li><li><strong>Child Policy:</strong> 0-5 years free of CCR; 6-18 years charged at 50% adult rate.</li><li><strong>Honeymoon Special does not apply to Safari House.</strong></li><li><strong>Long Stay Discounts apply.</strong></li><li><strong>Contact:</strong> resnam@naturalselection.travel | +264 61 22 5616</li></ul></div>`}
+};
+
+function rateTable(id){
+  const d=DB[id];if(!d)return "";
+  const r=d.rates;
+  const nightLabels=["1-5 Night Rate","6-7 Night Rate","8+ Night Rate"];
+  const seasonKeys=["green","shoulder","shoulderhigh","high","peak"];
+  const seasonLabels={green:"Green Season<br><small>10 Jan-31 Mar</small>",shoulder:"Shoulder Season<br><small>1-30 Apr | 1-30 Jun<br>1 Nov-19 Dec</small>",shoulderhigh:"Shoulder High<br><small>1-31 May</small>",high:"High Season<br><small>1 Sep-31 Oct<br>20 Dec-9 Jan</small>",peak:"Peak Season<br><small>1 Jul-31 Aug</small>"};
+
+  let html=`<div class="ccr-notice"><strong>CCR Fee: +N$650 pppn</strong> must be added to all nightly accommodation rates. This is mandatory, non-vatable, and separately itemised.</div>`;
+
+  // Detect camp type
+  if(id==="safarihouse"){
+    // Per unit per night
+    html+=`<div class="table-responsive"><table><thead><tr><th>Night Tier</th>`;
+    seasonKeys.forEach(s=>{html+=`<th>${seasonLabels[s]}</th>`;});
+    html+=`</tr></thead><tbody>`;
+    nightLabels.forEach((nl,i)=>{
+      html+=`<tr><td class="td-season"><strong>${nl}</strong></td>`;
+      seasonKeys.forEach(s=>{
+        const v=r[s]&&r[s].unit&&r[s].unit[i]!==undefined?r[s].unit[i]:"--";
+        if(v!=="--"){
+          const label="Safari House -- "+nl+" -- "+SEASONS[s].label+" -- Per Unit";
+          html+=`<td>N$ ${Number(v).toLocaleString()}<br><input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${v}" onchange="updateTotal()" style="width:52px;padding:5px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;margin-top:6px;font-size:0.82rem;"></td>`;
+        } else {html+=`<td>--</td>`;}
+      });
+      html+=`</tr>`;
+    });
+    html+=`</tbody></table></div><p class="raw-text" style="font-size:0.8rem;color:var(--text-muted);">Rates are per unit per night (exclusive use). CCR fee of N$650 pppn added separately.</p>`;
+    return html;
+  }
+
+  if(id==="safarihoek"){
+    // Complex -- 4 rate types per season
+    const rateTypes=[
+      {key:"luxury_dbb",label:"Luxury Room -- DBB Per Person Sharing"},
+      {key:"classic_dbb",label:"Classic Room -- DBB Per Person Sharing"},
+      {key:"luxury_fi",label:"Luxury Room -- Fully Inclusive Per Person Sharing"},
+      {key:"classic_fi",label:"Classic Room -- Fully Inclusive Per Person Sharing"}
+    ];
+    rateTypes.forEach(rt=>{
+      html+=`<div class="sub-block"><h4>${rt.label}</h4><div class="table-responsive"><table><thead><tr><th>Night Tier</th>`;
+      seasonKeys.forEach(s=>{html+=`<th>${seasonLabels[s]}</th>`;});
+      html+=`<th>Single Supp</th></tr></thead><tbody>`;
+      nightLabels.forEach((nl,i)=>{
+        html+=`<tr><td class="td-season"><strong>${nl}</strong></td>`;
+        seasonKeys.forEach(s=>{
+          const v=r[s]&&r[s][rt.key]&&r[s][rt.key][i]!==undefined?r[s][rt.key][i]:"--";
+          const closed=v==="Closed";
+          if(closed){html+=`<td><em>Closed</em></td>`;}
+          else if(v!=="--"){
+            const label=d.name+" -- "+rt.label+" -- "+nl+" -- "+SEASONS[s].label;
+            html+=`<td>N$ ${Number(v).toLocaleString()}<br><input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${v}" onchange="updateTotal()" style="width:52px;padding:5px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;margin-top:6px;font-size:0.82rem;"></td>`;
+          } else {html+=`<td>--</td>`;}
+        });
+        // Single supplement (use green=0, others from shoulder)
+        const ssKey="ss_"+rt.key;
+        let ssVals=[];
+        seasonKeys.forEach(s=>{
+          if(s==="green")ssVals.push("Waived");
+          else ssVals.push(r[s]&&r[s][ssKey]&&r[s][ssKey][i]!==undefined?"N$ "+Number(r[s][ssKey][i]).toLocaleString():"--");
+        });
+        html+=`<td style="font-size:0.78rem;color:var(--text-muted);">See seasons</td>`;
+        html+=`</tr>`;
+      });
+      html+=`</tbody></table></div></div>`;
+    });
+    return html;
+  }
+
+  if(id==="etoshamountain"){
+    const rateTypes=[
+      {key:"dbb",ss:"ss_dbb",label:"Dinner, Bed and Breakfast -- Per Person Sharing"},
+      {key:"fi",ss:"ss_fi",label:"Fully Inclusive -- Per Person Sharing"}
+    ];
+    rateTypes.forEach(rt=>{
+      html+=`<div class="sub-block"><h4>${rt.label}</h4><div class="table-responsive"><table><thead><tr><th>Night Tier</th>`;
+      seasonKeys.forEach(s=>{html+=`<th>${seasonLabels[s]}</th>`;});
+      html+=`</tr></thead><tbody>`;
+      nightLabels.forEach((nl,i)=>{
+        html+=`<tr><td class="td-season"><strong>${nl}</strong></td>`;
+        seasonKeys.forEach(s=>{
+          const v=r[s]&&r[s][rt.key]&&r[s][rt.key][i]!==undefined?r[s][rt.key][i]:"--";
+          if(v!=="--"){
+            const label=d.name+" -- "+rt.label+" -- "+nl+" -- "+SEASONS[s].label;
+            html+=`<td>N$ ${Number(v).toLocaleString()}<br><input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${v}" onchange="updateTotal()" style="width:52px;padding:5px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;margin-top:6px;font-size:0.82rem;"></td>`;
+          } else {html+=`<td>--</td>`;}
+        });
+        html+=`</tr>`;
+      });
+      // Single supplement row
+      html+=`<tr style="background:rgba(184,149,106,0.05);"><td style="font-size:0.78rem;color:var(--text-muted);font-style:italic;">Single Supplement</td>`;
+      seasonKeys.forEach(s=>{
+        if(s==="green"){html+=`<td style="font-size:0.78rem;color:var(--seafoam);">Waived</td>`;}
+        else{
+          const ssArr=r[s]&&r[s][rt.ss]?r[s][rt.ss]:[];
+          html+=`<td style="font-size:0.78rem;color:var(--text-muted);">N$ ${ssArr[0]?Number(ssArr[0]).toLocaleString():"--"} -- N$ ${ssArr[2]?Number(ssArr[2]).toLocaleString():"--"}</td>`;
+        }
+      });
+      html+=`</tr></tbody></table></div></div>`;
+    });
+    return html;
+  }
+
+  // Standard Classic camps (ps = per person sharing, ss = single supplement)
+  const showNightTiers=r.green&&r.green.ps&&r.green.ps.length>1;
+  html+=`<div class="table-responsive"><table><thead><tr><th>Night Tier</th>`;
+  seasonKeys.forEach(s=>{html+=`<th>${seasonLabels[s]}</th>`;});
+  html+=`</tr></thead><tbody>`;
+
+  const tiers=showNightTiers?nightLabels:["Per Night Rate"];
+  tiers.forEach((nl,i)=>{
+    html+=`<tr><td class="td-season"><strong>${nl}</strong><br><small style="color:var(--text-muted);font-weight:300;">Per Person Sharing</small></td>`;
+    seasonKeys.forEach(s=>{
+      const arr=r[s]&&r[s].ps?r[s].ps:[];
+      const v=arr[i]!==undefined?arr[i]:arr[0];
+      const closed=v==="Closed";
+      if(closed){html+=`<td><em>Closed</em></td>`;}
+      else if(v!==undefined&&v!=="--"){
+        const label=d.name+" -- "+nl+" -- "+SEASONS[s].label+" -- Per Person Sharing";
+        html+=`<td>N$ ${Number(v).toLocaleString()}<br><input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${v}" onchange="updateTotal()" style="width:52px;padding:5px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;margin-top:6px;font-size:0.82rem;"></td>`;
+      } else {html+=`<td>--</td>`;}
+    });
+    html+=`</tr>`;
+    // Single supplement row
+    html+=`<tr><td style="font-size:0.78rem;color:var(--text-muted);padding-top:4px;padding-bottom:12px;font-style:italic;">Single Supplement</td>`;
+    seasonKeys.forEach(s=>{
+      const arr=r[s]&&r[s].ss?r[s].ss:[];
+      const v=arr[i]!==undefined?arr[i]:arr[0];
+      const closed=r[s]&&r[s].ps&&r[s].ps[0]==="Closed";
+      if(closed){html+=`<td>--</td>`;}
+      else if(v===0||v==="0"){html+=`<td style="color:var(--seafoam);font-size:0.82rem;">Waived</td>`;}
+      else{html+=`<td style="font-size:0.82rem;color:var(--text-muted);">+N$ ${v!==undefined&&v!=="--"?Number(v).toLocaleString():"--"}</td>`;}
+    });
+    html+=`</tr>`;
+  });
+  // CCR row
+  html+=`<tr class="ccr-row"><td colspan="${1+seasonKeys.length}">CCR Fee (mandatory, add to rate): +N$650 pppn all seasons</td></tr>`;
+  // Private Vehicle row
+  html+=`<tr><td class="td-season"><strong>Private Vehicle</strong><br><small style="color:var(--text-muted);font-weight:300;">Per vehicle per night</small></td>`;
+  const pvRates={green:8795,shoulder:9875,shoulderhigh:9875,high:12095,peak:12095};
+  seasonKeys.forEach(s=>{html+=`<td>N$ ${Number(pvRates[s]).toLocaleString()}</td>`;});
+  html+=`</tr></tbody></table></div>`;
+  return html;
+}
+
+function buildCards(filter){
+  const container=document.getElementById("all-cards");container.innerHTML="";
+  const tiers=filter==="all"?Object.keys(TIERS):[filter];
+  tiers.forEach(tier=>{
+    const props=Object.keys(DB).filter(k=>DB[k].tier===tier);if(!props.length)return;
+    const section=document.createElement("div");section.className="tier-section";
+    section.innerHTML=`<h2 class="tier-title">${TIERS[tier]}</h2><p class="tier-sub">Natural Selection Namibia &middot; Nett 20%</p>`;
+    const cols=props.length===1?"cols1":props.length===2?"cols2":props.length===3?"cols3":"";
+    const grid=document.createElement("div");grid.className="lodge-grid "+cols;
+    props.forEach(key=>{
+      const d=DB[key];const card=document.createElement("div");card.className="lodge-card";
+      card.innerHTML=`<div class="lodge-card-img-wrap"><img src="${d.cover}" class="lodge-card-img" alt="${d.name}" loading="lazy"></div><div class="lodge-card-body"><span class="lodge-card-tier">${TIERS[d.tier]}</span><span class="lodge-card-location">${d.location}</span><h2 class="lodge-card-name">${d.name}</h2><span class="lodge-card-dot"></span><p class="lodge-card-desc">${d.shortDesc}</p><hr class="lodge-card-divider"><div class="lodge-card-actions"><button class="btn-lodge" onclick="openProperty('${key}')">Camp Info</button><button class="btn-rates" onclick="openProperty('${key}');setTimeout(()=>switchTab(1),200)">View Rates</button></div></div>`;
+      grid.appendChild(card);
+    });
+    section.appendChild(grid);container.appendChild(section);
+  });
+}
+
+function filterTier(tier,el){
+  document.querySelectorAll(".tier-pill").forEach(p=>p.classList.remove("active"));
+  el.classList.add("active");buildCards(tier);
+}
+
+let calendarState={month:new Date().getMonth(),year:new Date().getFullYear(),rangeStart:null,rangeEnd:null};
+
+function calculateNights(){
+  let din="",dout="",nights=1;
+  if(calendarState.rangeStart){const d1=new Date(calendarState.rangeStart.getTime()-calendarState.rangeStart.getTimezoneOffset()*60000);din=d1.toISOString().split("T")[0];}
+  if(calendarState.rangeStart&&calendarState.rangeEnd){const d2=new Date(calendarState.rangeEnd.getTime()-calendarState.rangeEnd.getTimezoneOffset()*60000);dout=d2.toISOString().split("T")[0];const diff=Math.ceil((calendarState.rangeEnd-calendarState.rangeStart)/(1000*60*60*24));nights=diff>0?diff:1;}
+  document.getElementById("b-date-in").value=din;document.getElementById("b-date-out").value=dout;
+  document.getElementById("nights-count").innerText=nights;
+  const disp=document.getElementById("b-dates-display");
+  if(disp){if(din&&dout)disp.innerText=din+" to "+dout+" ("+nights+" night"+(nights>1?"s":"")+")";else if(din)disp.innerText=din+" to Select check-out date";else disp.innerText="Select dates from the calendar above";}
+  updateTotal();
+}
+
+function renderCustomCalendar(){
+  const root=document.getElementById("inline-calendar");if(!root)return;root.innerHTML="";
+  const monthNames=["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const dayLabels=["Su","Mo","Tu","We","Th","Fr","Sa"];
+  let m1=calendarState.month,y1=calendarState.year,m2=m1+1,y2=y1;
+  if(m2>11){m2=0;y2=y1+1;}
+  const nav=document.createElement("div");nav.className="dew-calendar-nav";
+  const prevBtn=document.createElement("button");prevBtn.className="dew-calendar-nav-btn";prevBtn.innerHTML="&lsaquo;";
+  prevBtn.onclick=()=>{calendarState.month--;if(calendarState.month<0){calendarState.month=11;calendarState.year--;}renderCustomCalendar();};
+  const t1=document.createElement("span");t1.className="dew-calendar-month-title";t1.textContent=monthNames[m1]+" "+y1;
+  const t2=document.createElement("span");t2.className="dew-calendar-month-title";t2.textContent=monthNames[m2]+" "+y2;
+  const nextBtn=document.createElement("button");nextBtn.className="dew-calendar-nav-btn";nextBtn.innerHTML="&rsaquo;";
+  nextBtn.onclick=()=>{calendarState.month++;if(calendarState.month>11){calendarState.month=0;calendarState.year++;}renderCustomCalendar();};
+  nav.append(prevBtn,t1,t2,nextBtn);root.appendChild(nav);
+  function buildMonth(month,year){
+    const cal=document.createElement("div");cal.className="dew-calendar";
+    const header=document.createElement("div");header.className="dew-calendar-header";
+    dayLabels.forEach(d=>{const l=document.createElement("div");l.className="dew-calendar-day-label";l.textContent=d;header.appendChild(l);});
+    cal.appendChild(header);
+    const gridEl=document.createElement("div");gridEl.className="dew-calendar-grid";
+    const firstDay=new Date(year,month,1).getDay();const daysInMonth=new Date(year,month+1,0).getDate();
+    const today=new Date();today.setHours(0,0,0,0);
+    for(let i=0;i<firstDay;i++){const e=document.createElement("div");e.className="dew-calendar-day dew-empty";gridEl.appendChild(e);}
+    for(let d=1;d<=daysInMonth;d++){
+      const dayEl=document.createElement("div");dayEl.className="dew-calendar-day";dayEl.textContent=d;
+      const thisDate=new Date(year,month,d);
+      if(thisDate<today)dayEl.classList.add("dew-past");
+      else{
+        if(thisDate.toDateString()===today.toDateString())dayEl.classList.add("dew-today");
+        if(calendarState.rangeStart&&thisDate.toDateString()===calendarState.rangeStart.toDateString())dayEl.classList.add("dew-range-start");
+        else if(calendarState.rangeEnd&&thisDate.toDateString()===calendarState.rangeEnd.toDateString())dayEl.classList.add("dew-range-end");
+        else if(calendarState.rangeStart&&calendarState.rangeEnd&&thisDate>calendarState.rangeStart&&thisDate<calendarState.rangeEnd)dayEl.classList.add("dew-range");
+        dayEl.onclick=()=>{
+          if(!calendarState.rangeStart||(calendarState.rangeStart&&calendarState.rangeEnd)){calendarState.rangeStart=thisDate;calendarState.rangeEnd=null;}
+          else{if(thisDate>calendarState.rangeStart)calendarState.rangeEnd=thisDate;else{calendarState.rangeEnd=calendarState.rangeStart;calendarState.rangeStart=thisDate;}}
+          renderCustomCalendar();calculateNights();
+        };
+      }
+      gridEl.appendChild(dayEl);
+    }
+    cal.appendChild(gridEl);return cal;
+  }
+  const container=document.createElement("div");container.className="dew-calendar-container";
+  container.appendChild(buildMonth(m1,y1));container.appendChild(buildMonth(m2,y2));root.appendChild(container);
+}
+
+function openProperty(id){
+  const d=DB[id];if(!d)return;
+  document.getElementById("main-view").style.display="none";
+  document.getElementById("detail-view").style.display="block";
+  window.scrollTo(0,0);
+  document.getElementById("d-title").innerText=d.name;
+  document.getElementById("d-intro").innerText=d.intro;
+  document.getElementById("d-location").innerText=d.location;
+  document.getElementById("d-tier-badge").innerText=TIERS[d.tier];
+  document.getElementById("spec-location").innerText=d.location;
+  const gf=document.getElementById("d-gallery-full");gf.innerHTML="";
+  if(d.images)d.images.forEach(src=>{gf.innerHTML+=`<img src="${src}" class="gallery-img" loading="lazy">`;});
+  const cb=document.getElementById("global-dates-ui");cb.style.display="block";
+  const t1=document.getElementById("tab-1");
+  t1.innerHTML=`<div class="content-block"><h3>Seasonal Rates</h3>${rateTable(id)}</div>`;
+  t1.prepend(cb);
+  document.getElementById("tab-2").innerHTML=d.tab2;
+  document.getElementById("tab-3").innerHTML=d.tab3;
+  const saved=localStorage.getItem("dt_agent_email");if(saved)document.getElementById("b-agent-email").value=saved;
+  calendarState={month:new Date().getMonth(),year:new Date().getFullYear(),rangeStart:null,rangeEnd:null};
+  selectedItems=[];const fb=document.getElementById("tab-btn-5");if(fb)fb.classList.remove("ready","active");
+  renderCustomCalendar();calculateNights();updateTotal();switchTab(1);
+}
+
+function closeProperty(){document.getElementById("detail-view").style.display="none";document.getElementById("main-view").style.display="block";window.scrollTo(0,0);}
+
+function switchTab(num){
+  if(num===5&&!document.getElementById("tab-btn-5").classList.contains("ready"))return;
+  for(let i=1;i<=5;i++){document.getElementById("tab-btn-"+i)?.classList.remove("active");document.getElementById("tab-"+i)?.classList.remove("active");}
+  document.getElementById("tab-btn-"+num)?.classList.add("active");document.getElementById("tab-"+num)?.classList.add("active");
+  if(num===5)renderBookingSummary();
+
+const _tabsEl=document.querySelector('.tabs');const _tabContent=document.getElementById('tab-'+num);if(_tabsEl&&_tabContent){requestAnimationFrame(()=>{const _scrollY=_tabContent.getBoundingClientRect().top+window.pageYOffset-_tabsEl.offsetHeight-32;window.scrollTo({top:_scrollY,behavior:'smooth'});});}
+}
+
+let selectedItems=[];
+function updateTotal(){
+  selectedItems=[];let total=0;
+  const nights=parseInt(document.getElementById("nights-count")?.innerText)||1;
+  document.querySelectorAll(".rate-qty").forEach(el=>{
+    const qty=parseInt(el.value)||0;
+    if(qty>0){const price=parseFloat(el.dataset.price);const name=el.dataset.name;const lineTotal=qty*price*nights;total+=lineTotal;selectedItems.push({name,qty,price,nights,total:lineTotal});}
+  });
+  const bar=document.getElementById("booking-bar");const fb=document.getElementById("tab-btn-5");
+  if(total>0){bar.style.display="block";document.getElementById("booking-total").innerText="Total: N$ "+total.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:2});if(fb)fb.classList.add("ready");}
+  else{bar.style.display="none";if(fb)fb.classList.remove("ready");}
+  if(document.getElementById("tab-5")?.classList.contains("active"))renderBookingSummary();
+}
+
+function renderBookingSummary(){
+  const summary=document.getElementById("booking-summary");if(!summary)return;
+  if(!selectedItems.length){summary.innerHTML="<p style='color:var(--text-muted);margin:0;font-size:0.88rem;'>Select rates from the tabs above to build your booking.</p>";return;}
+  let html="<ul style='list-style:none;padding:0;margin:0;'>";
+  selectedItems.forEach(item=>{html+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem;"><span><strong>${item.qty}x</strong> ${item.name} x ${item.nights} night${item.nights>1?"s":""}</span><span style="color:var(--gold);font-weight:500;">N$ ${item.total.toLocaleString("en-US",{minimumFractionDigits:2})}</span></li>`;});
+  const total=selectedItems.reduce((a,i)=>a+i.total,0);
+  html+=`<li style="display:flex;justify-content:space-between;margin-top:14px;font-family:var(--font-head);font-size:1.3rem;"><span>Subtotal (excl. CCR)</span><span>N$ ${total.toLocaleString("en-US",{minimumFractionDigits:2})}</span></li>`;
+  html+=`<li style="padding:8px 0;color:var(--seafoam);font-size:0.82rem;">Remember to add CCR fee of N$650 pppn to your invoice.</li>`;
+  html+="</ul>";
+  summary.innerHTML=html;
+}
+
+async function submitBooking(e){
+  e.preventDefault();
+  const lodgeName=document.getElementById("d-title").innerText,agentEmail=document.getElementById("b-agent-email").value,status=document.getElementById("b-status").value,clientName=document.getElementById("b-name").value,guideRooms=document.getElementById("b-guide").value||"None",dateIn=document.getElementById("b-date-in").value,dateOut=document.getElementById("b-date-out").value,arriving=document.getElementById("b-arriving").value,departing=document.getElementById("b-departing").value,msg=document.getElementById("b-message").value;
+  localStorage.setItem("dt_agent_email",agentEmail);
+  const btn=e.target.querySelector("button[type=submit]");
+  btn.innerHTML="<span style='display:inline-block;border:2px solid #fff;border-top-color:transparent;border-radius:50%;width:14px;height:14px;animation:spin 1s linear infinite;margin-right:8px;vertical-align:middle;'></span>Sending...";btn.disabled=true;
+  const season=getSeason(dateIn);const seasonLabel=season?SEASONS[season].label:"--";
+  const nights=document.getElementById("nights-count").innerText;
+  const emailHtml=`<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden;"><div style="background:#2C2824;padding:32px;text-align:center;color:#fff;"><p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A;">Natural Selection Rate Portal</p><h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300;">${lodgeName}</h1><p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7BA99A;">New ${status}</p></div><div style="padding:32px;background:#fff;"><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-size:14px;"><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${agentEmail}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Client</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${clientName}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Date In</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateIn}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Date Out</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateOut}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Nights</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${nights}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Season</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${seasonLabel}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Arriving From</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${arriving}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Departing To</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${departing}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269;">Guide Rooms</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${guideRooms}</td></tr></table><div style="background:#f0faf8;padding:14px;border-radius:8px;border-left:3px solid #7BA99A;margin-bottom:18px;font-size:13px;color:#2C2824;"><strong>Note:</strong> CCR fee of N$650 pppn must be added to all nett accommodation rates.</div><div style="background:#f9f7f4;padding:18px;border-radius:8px;border-left:3px solid #7BA99A;"><p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269;">Notes</p><p style="margin:0;font-size:14px;color:#555;white-space:pre-line;">${msg||"No additional notes."}</p></div></div></div>`;
+  try{
+    const res=await fetch("https://desert-tracks.vercel.app/api/send_email",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({to:"bookings@desert-tracks.com",subject:`New ${status}: ${lodgeName} (Natural Selection) -- ${clientName}`,html:emailHtml})});
+    if(res.ok){alert("Booking request sent to bookings@desert-tracks.com");closeProperty();e.target.reset();selectedItems=[];updateTotal();}
+    else{const data=await res.json();alert("Failed: "+(data.error||"Unknown error"));}
+  }catch(err){alert("Network error. Please try again.");}
+  finally{btn.innerHTML="Send Booking to Operations";btn.disabled=false;}
+}
+
+const savedEmail=localStorage.getItem("dt_agent_email");if(savedEmail){const el=document.getElementById("b-agent-email");if(el)el.value=savedEmail;}
+buildCards("all");
+</script>
+<style>
+.burger-menu-btn{position:fixed;top:16px;right:18px;z-index:9999;display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:11px 9px;background:rgba(255,255,255,.92);border:1px solid var(--gold-light,rgba(184,149,106,.25));border-radius:9px;box-shadow:0 4px 16px rgba(0,0,0,.10);cursor:pointer;}
+.burger-menu-btn span{display:block;width:100%;height:2px;background:var(--gold,#B8956A);transition:transform .3s,opacity .2s;}
+.burger-menu-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger-menu-btn.active span:nth-child(2){opacity:0;}
+.burger-menu-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#mm-backdrop{position:fixed;inset:0;background:rgba(44,40,36,.45);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:99999;}
+#mm-backdrop.open{opacity:1;visibility:visible;}
+#mobile-menu{position:fixed;top:0;left:0;height:100%;width:min(420px,100%);background:#F5F3EF;transform:translateX(-100%);transition:transform .45s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:18px 26px 40px;overflow-y:auto;z-index:100000;box-shadow:6px 0 40px rgba(0,0,0,.16);}
+#mobile-menu.open{transform:translateX(0);}
+#mobile-menu .mm-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,149,106,.22);padding-bottom:16px;}
+#mobile-menu .mm-logo{font-family:var(--font-head,serif);color:var(--gold,#B8956A);letter-spacing:3px;text-transform:uppercase;font-size:1.15rem;}
+#mobile-menu .mm-close{background:none;border:none;font-size:2rem;color:var(--gold,#B8956A);cursor:pointer;line-height:1;}
+#mobile-menu .mm-section{border-bottom:1px solid rgba(184,149,106,.14);}
+#mobile-menu .mm-head{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;text-align:left;font-family:var(--font-head,serif);color:var(--gold,#B8956A);font-weight:500;font-size:16px;padding:16px 2px 12px;cursor:pointer;}
+#mobile-menu .mm-arrow{color:var(--seafoam,#7BA99A);font-size:14px;transition:transform .3s;}
+#mobile-menu .mm-section.collapsed .mm-arrow{transform:rotate(-90deg);}
+#mobile-menu .mm-body{overflow:hidden;max-height:1400px;opacity:1;transition:max-height .5s cubic-bezier(.22,1,.36,1),opacity .4s ease;}
+#mobile-menu .mm-section.collapsed .mm-body{max-height:0;opacity:0;}
+#mobile-menu a{display:block;padding:10px 2px;color:var(--text-main,#2C2824);text-decoration:none;font-size:14px;border-bottom:1px solid rgba(0,0,0,.05);}
+#mobile-menu .mm-regions{columns:2;column-gap:18px;}
+#mobile-menu .mm-listprop{width:100%;margin-top:24px;background:transparent;color:var(--gold,#B8956A);border:1px solid var(--gold,#B8956A);padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+#mobile-menu .mm-signin{width:100%;margin-top:12px;background:var(--seafoam,#7BA99A);color:#fff;border:none;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+</style><div id="mm-backdrop" onclick="closeMobileMenu()"></div><div id="mobile-menu" role="dialog" aria-label="Menu"><div class="mm-top"><span class="mm-logo">Namibia Rates</span><button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><div class="mm-regions"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Vehicle rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Activity rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Home &amp; search</a></div></div><button class="mm-listprop" type="button" onclick="location.href='/'">List Your Property</button><button class="mm-signin" id="mm-agent" type="button">Agent Sign In</button></div><script>function toggleMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){var o=m.classList.toggle("open");if(b)b.classList.toggle("active",o);if(k)k.classList.toggle("open",o);document.body.style.overflow=o?"hidden":"";}}function closeMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){m.classList.remove("open");if(b)b.classList.remove("active");if(k)k.classList.remove("open");document.body.style.overflow="";}}function toggleSection(btn){var s=btn.closest(".mm-section");if(s)s.classList.toggle("collapsed");}(function(){var a=document.getElementById("mm-agent");if(!a)return;if(sessionStorage.getItem("nr_agent_token")){a.textContent="Sign Out";a.onclick=function(){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.href="/";};}else{a.onclick=function(){location.href="/#agent";};}})();</script>
+</body>
+</html>

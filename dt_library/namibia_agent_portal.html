@@ -818,7 +818,7 @@
         <button class="mm-signin" type="button" onclick="openLogin('Agent Portal'); closeMobileMenu();">Agent Sign In</button>
     </div>
     <script>
-        function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ var open=m.classList.toggle('open'); if(b)b.classList.toggle('active',open); document.body.style.overflow=open?'hidden':''; } }
+        function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ var open=m.classList.toggle('open');if(open){m.querySelectorAll('.mm-section').forEach(function(s){s.classList.remove('collapsed');});} if(b)b.classList.toggle('active',open); document.body.style.overflow=open?'hidden':''; } }
         function closeMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ m.classList.remove('open'); if(b)b.classList.remove('active'); document.body.style.overflow=''; } }
         function toggleSection(btn){ var s=btn.closest('.mm-section'); if(s) s.classList.toggle('collapsed'); }
     </script>
