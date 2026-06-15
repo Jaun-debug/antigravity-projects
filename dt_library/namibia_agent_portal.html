@@ -3782,7 +3782,7 @@
             // Restore agent session from the SECURE token only — never a stale demo object.
             // Purge any old client-side demo session (this is what used to reopen the workspace).
             localStorage.removeItem('namibia_rates_logged_in_agent');
-            if (localStorage.getItem('nr_agent_token')) {
+            if (sessionStorage.getItem('nr_agent_token')) {
                 loggedInAgent = { username:'desert tracks', name:'Desert Tracks', company:'Desert Tracks' };
                 setTimeout(checkAgentActiveContracts, 300);
             } else {
@@ -5097,7 +5097,7 @@
                 pendingAgentLodge = null;
                 if (loggedInAgent) {
                     // Already signed in -> sign out, stay on the site (no workspace, no redirect).
-                    localStorage.removeItem('nr_agent_token');
+                    sessionStorage.removeItem('nr_agent_token');
                     localStorage.removeItem('namibia_rates_logged_in_agent');
                     document.cookie = 'nr_session=; path=/; max-age=0; SameSite=Lax';
                     loggedInAgent = null;
@@ -5179,10 +5179,10 @@
               .then(function(r){ return r.json().then(function(j){ return {ok:r.ok, j:j}; }); })
               .then(function(res){
                   if (res.ok && res.j && res.j.token) {
-                      localStorage.setItem('nr_agent_token', res.j.token);
+                      sessionStorage.setItem('nr_agent_token', res.j.token);
                       try { var _gl = document.getElementById('nav-grouplodges'); if (_gl) _gl.style.display = ''; } catch(e){}
                       // cookie lets the Edge middleware unlock the bookable STO sheets
-                      document.cookie = 'nr_session=' + encodeURIComponent(res.j.token) + '; path=/; max-age=2592000; SameSite=Lax';
+                      document.cookie = 'nr_session=' + encodeURIComponent(res.j.token) + '; path=/; SameSite=Lax';
                       loggedInAgent = { username:'desert tracks', name:'Desert Tracks', company:'Desert Tracks' };
                       closeLogin();
                       showToast('Signed in — click any lodge you have a rate sheet for to view your STO rates.', 'success');
@@ -6500,7 +6500,7 @@
         function logoutAgent() {
             loggedInAgent = null;
             localStorage.removeItem('namibia_rates_logged_in_agent');
-            localStorage.removeItem('nr_agent_token');   // end the secure lodge-page session too
+            sessionStorage.removeItem('nr_agent_token');   // end the secure lodge-page session too
             try { var _gl2 = document.getElementById('nav-grouplodges'); if (_gl2) _gl2.style.display = 'none'; } catch(e){}
             document.cookie = 'nr_session=; path=/; max-age=0; SameSite=Lax';
             closeAgentWorkspace();
@@ -7134,6 +7134,6 @@
         <script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
     </footer>
 
-<script>/* group-lodges visibility */(function(){function s(){try{var e=document.getElementById("nav-grouplodges");if(e)e.style.display=localStorage.getItem("nr_agent_token")?"":"none";}catch(_){}}if(document.readyState!=="loading")s();else document.addEventListener("DOMContentLoaded",s);})();</script>
+<script>/* group-lodges visibility */(function(){function s(){try{var e=document.getElementById("nav-grouplodges");if(e)e.style.display=sessionStorage.getItem("nr_agent_token")?"":"none";}catch(_){}}if(document.readyState!=="loading")s();else document.addEventListener("DOMContentLoaded",s);})();</script>
 </body>
 </html>
