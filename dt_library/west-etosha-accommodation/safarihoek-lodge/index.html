@@ -264,7 +264,7 @@ function openBooking(){
 function closeBooking(){ document.getElementById('booking-modal').classList.remove('open'); }
 function sendBooking(){
   var bk=window._bk; if(!bk||!bk.lines.length) return;
-  var body='SAFARIHOEK LODGE - NET STO BOOKING REQUEST (Desert Tracks)%0D%0A%0D%0A';
+  var body='SAFARIHOEK LODGE - NET STO BOOKING REQUEST (Namibia Rates)%0D%0A%0D%0A';
   bk.lines.forEach(function(l){ body+=l.qty+' x '+l.name+'  @ N$ '+fmtN(l.price)+'  = N$ '+fmtN(l.lt)+'%0D%0A'; });
   body+='%0D%0AGRAND TOTAL (net STO): N$ '+fmtN(bk.total)+'%0D%0A';
   window.location.href='mailto:info@namibiarates.com?subject=Safarihoek%20Lodge%20-%20STO%20Booking%20Request&body='+body;

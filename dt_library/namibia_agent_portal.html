@@ -3914,7 +3914,7 @@
             // Purge any old client-side demo session (this is what used to reopen the workspace).
             localStorage.removeItem('namibia_rates_logged_in_agent');
             if (sessionStorage.getItem('nr_agent_token')) {
-                loggedInAgent = { username:'desert tracks', name:'Desert Tracks', company:'Desert Tracks' };
+                loggedInAgent = { username:'desert tracks', name:'Namibia Rates', company:'Namibia Rates' };
                 setTimeout(checkAgentActiveContracts, 300);
             } else {
                 loggedInAgent = null;
@@ -5314,7 +5314,7 @@
                       try { var _gl = document.getElementById('nav-grouplodges'); if (_gl) _gl.style.display = ''; } catch(e){}
                       // cookie lets the Edge middleware unlock the bookable STO sheets
                       document.cookie = 'nr_session=' + encodeURIComponent(res.j.token) + '; path=/; SameSite=Lax';
-                      loggedInAgent = { username:'desert tracks', name:'Desert Tracks', company:'Desert Tracks' };
+                      loggedInAgent = { username:'desert tracks', name:'Namibia Rates', company:'Namibia Rates' };
                       closeLogin();
                       showToast('Signed in — click any lodge you have a rate sheet for to view your STO rates.', 'success');
                       if (typeof checkAgentActiveContracts === 'function') { checkAgentActiveContracts(); }

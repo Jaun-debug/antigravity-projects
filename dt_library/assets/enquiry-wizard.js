@@ -2,7 +2,7 @@
 (function () {
   function addLink(href) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = href; document.head.appendChild(l); }
   addLink('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css');
-  addLink('https://npmcdn.com/flatpickr/dist/themes/dark.css');
+  addLink('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap');
   addLink('/assets/enquiry-wizard.css');
   var s = document.createElement('script'); s.src = 'https://cdn.jsdelivr.net/npm/flatpickr'; document.head.appendChild(s);
 })();
@@ -11,7 +11,7 @@
 (function () {
   'use strict';
   var SUBMIT_ENDPOINT = 'https://wizard-inquiry.replit.app/submit';
-  var TOTAL_STEPS = 6;
+  var TOTAL_STEPS = 5;
   var state = {
     currentStep: 1,
     clientCountry: 'Unknown Location',
@@ -37,8 +37,8 @@
   }
   function getNextStep(currentStep) { return currentStep + 1; }
   function handleNext() { var next = getNextStep(state.currentStep); if (next <= TOTAL_STEPS) goToStep(next); }
-  var OVERLAY_BG = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background-image:url(https://desert-tracks.com/wp-content/uploads/2026/03/solly-lion-and-cub-large-1.jpeg);background-size:cover;background-position:center center;background-repeat:no-repeat;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#ffffff;';
-  var DARK_LAYER_CSS = 'position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(25, 22, 16, 0.45);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);z-index:0;pointer-events:none;';
+  var OVERLAY_BG = 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:999999;background:#eae9e6;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;overflow-x:hidden;color:#3c3530;';
+  var DARK_LAYER_CSS = 'position:fixed;top:0;left:0;width:100%;height:100%;background:transparent;z-index:0;pointer-events:none;';
   function closeWizard() {
     state._wizardOpen = false;
     document.body.classList.remove('dt-specific-open');
@@ -73,7 +73,7 @@
   function renderStep1() {
     var wrapper = document.createElement('div'); wrapper.className = 'dew-step-content';
     var heading = document.createElement('h2'); heading.className = 'dew-heading';
-    heading.innerHTML = '<span style="font-weight: 300 !important; font-size: 0.55em; color: #ddd !important; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#a48256 !important; font-size:clamp(18px, 5.5vw, 26px) !important; font-family: \'Georgia\', serif !important; font-weight: 300 !important; letter-spacing: 0.5px !important; line-height: 1.25 !important; display: block; margin-top: 6px;">' + state._sourceTitle + '</span>';
+    heading.innerHTML = '<span style="font-weight: 400 !important; font-size: 0.55em; color: #7d756e !important; letter-spacing: 2px;">ENQUIRING ABOUT:</span><br/><span style="color:#a48256 !important; font-size:clamp(18px, 5.5vw, 26px) !important; font-family: \'Cinzel\', serif !important; font-weight: 500 !important; letter-spacing: 0.5px !important; line-height: 1.25 !important; display: block; margin-top: 6px;">' + state._sourceTitle + '</span>';
     wrapper.appendChild(heading);
     var travelHeading = document.createElement('h2'); travelHeading.className = 'dew-heading';
     travelHeading.style.fontSize = '24px'; travelHeading.style.marginBottom = '30px';
@@ -144,7 +144,7 @@
       wrapper.appendChild(roughInput);
       nextDisabled = !(state.answers.roughTiming && state.answers.roughTiming.trim() !== '');
     } else if (state.answers.timingType === 'best') {
-      var bestText = document.createElement('div'); bestText.style.color = '#ccc'; bestText.style.textAlign = 'center'; bestText.style.fontSize = '14px'; bestText.style.lineHeight = '1.6'; bestText.style.maxWidth = '400px'; bestText.style.margin = '0 auto';
+      var bestText = document.createElement('div'); bestText.style.color = '#7d756e'; bestText.style.textAlign = 'center'; bestText.style.fontSize = '14px'; bestText.style.lineHeight = '1.6'; bestText.style.maxWidth = '400px'; bestText.style.margin = '0 auto';
       bestText.innerText = 'Our safari experts will advise you on the best season based on your preferences.'; wrapper.appendChild(bestText);
       nextDisabled = false;
     }
@@ -153,15 +153,15 @@
   function createCounter(label, value, min, onChange) {
     var wrapper = document.createElement('div');
     wrapper.style.display = 'flex'; wrapper.style.flexDirection = 'column'; wrapper.style.alignItems = 'center'; wrapper.style.justifyContent = 'center';
-    wrapper.style.background = 'rgba(25, 22, 16, 0.40)'; wrapper.style.border = '1.5px solid rgba(100, 90, 55, 0.35)'; wrapper.style.borderRadius = '6px'; wrapper.style.padding = '17px 20px'; wrapper.style.minHeight = '52px';
-    var title = document.createElement('div'); title.innerText = label; title.style.color = '#fff'; title.style.fontSize = '12px'; title.style.fontWeight = '600'; title.style.marginBottom = '10px'; title.style.letterSpacing = '2.2px'; title.style.textTransform = 'uppercase';
+    wrapper.style.background = '#ffffff'; wrapper.style.border = '1.5px solid rgba(164, 130, 86, 0.30)'; wrapper.style.borderRadius = '6px'; wrapper.style.padding = '17px 20px'; wrapper.style.minHeight = '52px';
+    var title = document.createElement('div'); title.innerText = label; title.style.color = '#7d756e'; title.style.fontSize = '12px'; title.style.fontWeight = '600'; title.style.marginBottom = '10px'; title.style.letterSpacing = '2.2px'; title.style.textTransform = 'uppercase';
     var btnWrap = document.createElement('div'); btnWrap.style.display = 'flex'; btnWrap.style.alignItems = 'center'; btnWrap.style.gap = '15px';
     var btnMinus = document.createElement('button'); btnMinus.innerText = '−';
-    btnMinus.style.width = '30px'; btnMinus.style.height = '30px'; btnMinus.style.borderRadius = '50%'; btnMinus.style.border = '1.5px solid rgba(255, 255, 255, 0.4)'; btnMinus.style.background = 'transparent'; btnMinus.style.color = '#fff'; btnMinus.style.fontSize = '18px'; btnMinus.style.cursor = 'pointer'; btnMinus.style.display = 'flex'; btnMinus.style.alignItems = 'center'; btnMinus.style.justifyContent = 'center'; btnMinus.style.transition = 'all 0.2s ease';
+    btnMinus.style.width = '30px'; btnMinus.style.height = '30px'; btnMinus.style.borderRadius = '50%'; btnMinus.style.border = '1.5px solid rgba(164, 130, 86, 0.45)'; btnMinus.style.background = 'transparent'; btnMinus.style.color = '#3c3530'; btnMinus.style.fontSize = '18px'; btnMinus.style.cursor = 'pointer'; btnMinus.style.display = 'flex'; btnMinus.style.alignItems = 'center'; btnMinus.style.justifyContent = 'center'; btnMinus.style.transition = 'all 0.2s ease';
     btnMinus.onmouseover = function() { this.style.borderColor = '#a48256'; this.style.color = '#a48256'; };
-    btnMinus.onmouseout = function() { this.style.borderColor = 'rgba(255, 255, 255, 0.4)'; this.style.color = '#fff'; };
+    btnMinus.onmouseout = function() { this.style.borderColor = 'rgba(164, 130, 86, 0.45)'; this.style.color = '#3c3530'; };
     btnMinus.onclick = function() { if (value > min) { value--; onChange(value); render(); } };
-    var valDisp = document.createElement('div'); valDisp.innerText = value; valDisp.style.fontSize = '18px'; valDisp.style.fontWeight = 'bold'; valDisp.style.color = '#fff'; valDisp.style.minWidth = '20px'; valDisp.style.textAlign = 'center';
+    var valDisp = document.createElement('div'); valDisp.innerText = value; valDisp.style.fontSize = '18px'; valDisp.style.fontWeight = 'bold'; valDisp.style.color = '#3c3530'; valDisp.style.minWidth = '20px'; valDisp.style.textAlign = 'center';
     var btnPlus = document.createElement('button'); btnPlus.innerText = '+'; btnPlus.style.cssText = btnMinus.style.cssText; btnPlus.onmouseover = btnMinus.onmouseover; btnPlus.onmouseout = btnMinus.onmouseout;
     btnPlus.onclick = function() { value++; onChange(value); render(); };
     btnWrap.appendChild(btnMinus); btnWrap.appendChild(valDisp); btnWrap.appendChild(btnPlus);
@@ -188,8 +188,8 @@
   function renderStep6() {
     var wrapper = document.createElement('div'); wrapper.className = 'dew-step-content';
     var heading = document.createElement('h2'); heading.className = 'dew-heading'; heading.textContent = 'Where can we send your trip suggestions?'; heading.style.marginBottom = '10px'; wrapper.appendChild(heading);
-    var subText = document.createElement('div'); subText.style.color = '#fff'; subText.style.fontSize = '15px'; subText.style.textAlign = 'center'; subText.style.marginBottom = '30px'; subText.style.fontFamily = 'var(--dew-font-body)';
-    subText.textContent = 'Our expert Travel Designers will contact you to design your bespoke journey.'; wrapper.appendChild(subText);
+    var subText = document.createElement('div'); subText.style.color = '#7d756e'; subText.style.fontSize = '15px'; subText.style.textAlign = 'center'; subText.style.marginBottom = '30px'; subText.style.fontFamily = 'var(--dew-font-body)';
+    subText.textContent = 'Our team will contact you to help design your journey.'; wrapper.appendChild(subText);
     var nameRow = document.createElement('div'); nameRow.className = 'dew-form-row';
     var fnInput = document.createElement('input'); fnInput.type = 'text'; fnInput.className = 'dew-input'; fnInput.placeholder = 'FIRST NAME'; fnInput.value = state.answers.firstName;
     fnInput.addEventListener('input', function () { state.answers.firstName = this.value; updateSubmitState(); }); nameRow.appendChild(fnInput);
@@ -203,21 +203,21 @@
     phoneInput.addEventListener('input', function () { state.answers.phone = this.value; updateSubmitState(); }); phoneGroup.appendChild(phoneInput); wrapper.appendChild(phoneGroup);
     if (!state.answers.contactPreference) state.answers.contactPreference = 'email';
     var prefGroup = document.createElement('div'); prefGroup.style.display = 'flex'; prefGroup.style.alignItems = 'center'; prefGroup.style.justifyContent = 'flex-start'; prefGroup.style.width = '100%'; prefGroup.style.maxWidth = 'var(--dew-inner-w)'; prefGroup.style.marginTop = '15px'; prefGroup.style.marginBottom = '25px'; prefGroup.style.gap = '20px'; prefGroup.style.flexWrap = 'wrap';
-    var prefLabel = document.createElement('div'); prefLabel.textContent = 'Preferred method of contact'; prefLabel.style.color = '#fff'; prefLabel.style.fontSize = '14px'; prefLabel.style.marginRight = '10px'; prefLabel.style.fontFamily = 'var(--dew-font-body)'; prefGroup.appendChild(prefLabel);
+    var prefLabel = document.createElement('div'); prefLabel.textContent = 'Preferred method of contact'; prefLabel.style.color = '#3c3530'; prefLabel.style.fontSize = '14px'; prefLabel.style.marginRight = '10px'; prefLabel.style.fontFamily = 'var(--dew-font-body)'; prefGroup.appendChild(prefLabel);
     var contactOptions = [ { label: 'Email', value: 'email' }, { label: 'Phone', value: 'phone' }, { label: 'WhatsApp', value: 'whatsapp' } ];
     contactOptions.forEach(function(opt) {
-      var optWrap = document.createElement('div'); optWrap.style.display = 'flex'; optWrap.style.alignItems = 'center'; optWrap.style.gap = '10px'; optWrap.style.cursor = 'pointer'; optWrap.style.color = '#fff'; optWrap.style.fontSize = '14px'; optWrap.style.fontFamily = 'var(--dew-font-body)';
-      var radioWrap = document.createElement('div'); radioWrap.style.width = '22px'; radioWrap.style.height = '22px'; radioWrap.style.borderRadius = '50%'; radioWrap.style.border = '2px solid ' + (state.answers.contactPreference === opt.value ? '#a48256' : 'rgba(255, 255, 255, 0.4)'); radioWrap.style.display = 'flex'; radioWrap.style.alignItems = 'center'; radioWrap.style.justifyContent = 'center';
+      var optWrap = document.createElement('div'); optWrap.style.display = 'flex'; optWrap.style.alignItems = 'center'; optWrap.style.gap = '10px'; optWrap.style.cursor = 'pointer'; optWrap.style.color = '#3c3530'; optWrap.style.fontSize = '14px'; optWrap.style.fontFamily = 'var(--dew-font-body)';
+      var radioWrap = document.createElement('div'); radioWrap.style.width = '22px'; radioWrap.style.height = '22px'; radioWrap.style.borderRadius = '50%'; radioWrap.style.border = '2px solid ' + (state.answers.contactPreference === opt.value ? '#a48256' : 'rgba(0, 0, 0, 0.28)'); radioWrap.style.display = 'flex'; radioWrap.style.alignItems = 'center'; radioWrap.style.justifyContent = 'center';
       if (state.answers.contactPreference === opt.value) { var dot = document.createElement('div'); dot.style.width = '10px'; dot.style.height = '10px'; dot.style.borderRadius = '50%'; dot.style.backgroundColor = '#a48256'; radioWrap.appendChild(dot); }
       optWrap.onclick = function() { state.answers.contactPreference = opt.value; render(); };
       optWrap.appendChild(radioWrap); optWrap.appendChild(document.createTextNode(opt.label)); prefGroup.appendChild(optWrap);
     });
     wrapper.appendChild(prefGroup);
     if (typeof state.answers.newsletter === 'undefined') state.answers.newsletter = false;
-    var newsGroup = document.createElement('label'); newsGroup.style.display = 'flex'; newsGroup.style.alignItems = 'center'; newsGroup.style.gap = '12px'; newsGroup.style.width = '100%'; newsGroup.style.maxWidth = 'var(--dew-inner-w)'; newsGroup.style.cursor = 'pointer'; newsGroup.style.marginBottom = '20px'; newsGroup.style.color = '#fff'; newsGroup.style.fontSize = '14px'; newsGroup.style.fontFamily = 'var(--dew-font-body)';
+    var newsGroup = document.createElement('label'); newsGroup.style.display = 'flex'; newsGroup.style.alignItems = 'center'; newsGroup.style.gap = '12px'; newsGroup.style.width = '100%'; newsGroup.style.maxWidth = 'var(--dew-inner-w)'; newsGroup.style.cursor = 'pointer'; newsGroup.style.marginBottom = '20px'; newsGroup.style.color = '#3c3530'; newsGroup.style.fontSize = '14px'; newsGroup.style.fontFamily = 'var(--dew-font-body)';
     var check = document.createElement('input'); check.type = 'checkbox'; check.className = 'dew-checkbox'; check.checked = state.answers.newsletter;
     check.addEventListener('change', function() { state.answers.newsletter = this.checked; }); newsGroup.appendChild(check);
-    newsGroup.appendChild(document.createTextNode('I would like to receive the latest news from Desert Tracks')); wrapper.appendChild(newsGroup);
+    newsGroup.appendChild(document.createTextNode('I would like to receive the latest news from Namibia Rates')); wrapper.appendChild(newsGroup);
     var submitDisabled = !state.answers.email || !state.answers.firstName || !state.answers.surname || !state.answers.phone;
     return { content: wrapper, navOptions: { showSubmit: true, submitDisabled: submitDisabled, onSubmit: handleSubmit } };
   }
@@ -225,7 +225,7 @@
   function updateSubmitState() { if (submitBtnEl) { submitBtnEl.disabled = !state.answers.email || !state.answers.firstName || !state.answers.surname || !state.answers.phone; } }
   function renderSuccess() {
     var wrapper = document.createElement('div'); wrapper.className = 'dew-step-content';
-    wrapper.innerHTML = '<div style="text-align:center; padding:60px 20px;"><div style="font-size:64px; margin-bottom:24px;">✓</div><h2 style="font-size:32px; color:#fff; font-family:Georgia, serif;">Thank you!</h2><p style="color:#ddd;">We will contact you regarding this specific safari shortly.</p></div>';
+    wrapper.innerHTML = '<div style="text-align:center; padding:60px 20px;"><div style="font-size:64px; margin-bottom:24px; color:#87a996;">✓</div><h2 style="font-size:32px; color:#a48256; font-family:Cinzel, serif;">Thank you!</h2><p style="color:#7d756e;">We will contact you regarding this enquiry shortly.</p></div>';
     return { content: wrapper, navOptions: {} };
   }
   function handleSubmit() {
@@ -274,7 +274,7 @@
     if (state._submitted) return renderSuccess();
     switch (state.currentStep) {
       case 1: return renderStep1(); case 2: return renderStep2(); case 3: return renderStep3();
-      case 4: return renderStep4(); case 5: return renderStep5(); case 6: return renderStep6(); default: return renderStep1();
+      case 4: return renderStep5(); case 5: return renderStep6(); default: return renderStep1();
     }
   }
   function render() {
