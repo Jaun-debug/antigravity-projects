@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root{--brand-accent:#a48256;--brand-green:#87a996;--text-main:#3c3530;--text-muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--line:rgba(164,130,86,.22);--font-head:'Cinzel',serif;--font-body:'Jost',sans-serif;
---t15:#7d9b8a;--t20:#c08a4e;--t25:#9d6b8e;}
+--t15:#7d9b8a;--t20:#c08a4e;--t25:#9d6b8e;--t30:#5b8aa6;}
 *{margin:0;padding:0;box-sizing:border-box;}
 body{font-family:var(--font-body);background:var(--bg);color:var(--text-main);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;}
 .cbanner{background:#efe9dd;color:#6b5b3e;font-size:.74rem;text-align:center;padding:8px 16px;border-bottom:1px solid var(--line);}
@@ -52,12 +52,11 @@ textarea{height:90px;resize:vertical;}
 .btn:disabled{opacity:.5;cursor:not-allowed;}
 .btn.sm{padding:8px 16px;font-size:.68rem;}
 /* tier boxes */
-.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
-@media(max-width:640px){.tiers{grid-template-columns:1fr;}}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px;}
 .tier{border:2px dashed var(--line);border-radius:12px;padding:16px;background:#fff;transition:.2s;min-height:150px;}
 .tier h3{font-family:var(--font-head);font-size:1rem;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:4px;}
 .tier .dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
-.tier.t15 .dot{background:var(--t15);} .tier.t20 .dot{background:var(--t20);} .tier.t25 .dot{background:var(--t25);}
+.tier.t15 .dot{background:var(--t15);} .tier.t20 .dot{background:var(--t20);} .tier.t25 .dot{background:var(--t25);} .tier.t30 .dot{background:var(--t30);}
 .tier small{color:var(--text-muted);font-size:.74rem;display:block;margin-bottom:10px;}
 .tier.drag{border-color:var(--brand-green);background:#f0f7f3;}
 .tier .filechip{display:flex;align-items:center;gap:8px;background:rgba(135,169,150,.14);border-radius:7px;padding:7px 10px;font-size:.8rem;margin-top:8px;word-break:break-all;}
@@ -80,13 +79,16 @@ textarea{height:90px;resize:vertical;}
 .assigned{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:34px;}
 .assigned .agent{font-size:.78rem;padding:5px 10px;}
 .empty-hint{color:var(--text-muted);font-size:.76rem;font-style:italic;}
+.viewcust{background:none;border:none;color:var(--brand-accent);font-size:.7rem;text-transform:uppercase;letter-spacing:.8px;cursor:pointer;padding:6px 0 2px;display:flex;align-items:center;gap:7px;font-family:var(--font-body);}
+.viewcust .cnt{background:rgba(164,130,86,.16);color:var(--brand-accent);border-radius:99px;padding:1px 8px;font-size:.7rem;font-weight:500;}
+.assigned.collapsed{display:none;}
 /* preview */
 .preview{margin-top:8px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fff, #faf8f4);padding:18px;}
 .preview h3{font-family:var(--font-head);font-size:1rem;font-weight:600;margin-bottom:4px;}
 .preview .pv-result{margin-top:14px;padding:16px;border-radius:10px;background:#fff;border:1px solid var(--line);display:none;}
 .preview .pv-result.on{display:block;animation:fade .3s ease;}
 .pv-band{display:inline-block;font-family:var(--font-head);font-weight:600;color:#fff;border-radius:99px;padding:4px 14px;font-size:.85rem;letter-spacing:1px;}
-.pv-band.t15{background:var(--t15);}.pv-band.t20{background:var(--t20);}.pv-band.t25{background:var(--t25);}
+.pv-band.t15{background:var(--t15);}.pv-band.t20{background:var(--t20);}.pv-band.t25{background:var(--t25);}.pv-band.t30{background:var(--t30);}
 .pv-none{color:#b9542f;}
 .review-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem;}
 .review-row .k{color:var(--text-muted);}.review-row .v{text-align:right;}
@@ -160,23 +162,7 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
     <!-- STEP 2: rate tiers -->
     <div class="step" data-step="2">
       <h2>Load your rate sheets</h2><p class="sub">Add a rate sheet for each STO tier. Agents you assign to a tier will see that sheet when they sign in.</p>
-      <div class="tiers">
-        <div class="tier t15" id="tierbox-15">
-          <h3><span class="dot"></span>15% STO</h3><small>Standard trade rate</small>
-          <label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile('15',this)"></label>
-          <div id="files-15"></div>
-        </div>
-        <div class="tier t20" id="tierbox-20">
-          <h3><span class="dot"></span>20% STO</h3><small>Preferred partner rate</small>
-          <label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile('20',this)"></label>
-          <div id="files-20"></div>
-        </div>
-        <div class="tier t25" id="tierbox-25">
-          <h3><span class="dot"></span>25% STO</h3><small>Top / key account rate</small>
-          <label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile('25',this)"></label>
-          <div id="files-25"></div>
-        </div>
-      </div>
+      <div class="tiers" id="tiers-upload"></div>
       <div class="note">Tip: you only need a sheet for the tiers you actually offer. You can change these any time after logging in.</div>
       <div class="err" id="e2"></div>
     </div>
@@ -196,20 +182,7 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
           <div class="chips" id="agent-pool"><span class="empty-hint" id="pool-hint">No agents yet — add one above.</span></div>
         </div>
 
-        <div class="tiers">
-          <div class="tier t15" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,'15')">
-            <h3><span class="dot"></span>15% STO</h3><small>Drop agents here</small>
-            <div class="assigned" id="band-15"></div>
-          </div>
-          <div class="tier t20" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,'20')">
-            <h3><span class="dot"></span>20% STO</h3><small>Drop agents here</small>
-            <div class="assigned" id="band-20"></div>
-          </div>
-          <div class="tier t25" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,'25')">
-            <h3><span class="dot"></span>25% STO</h3><small>Drop agents here</small>
-            <div class="assigned" id="band-25"></div>
-          </div>
-        </div>
+        <div class="tiers" id="tiers-assign"></div>
 
         <div class="preview">
           <h3>Preview: what an agent sees on sign-in</h3>
@@ -240,9 +213,28 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
 var TOTAL=3, step=1, mode='reg';
-var files={'15':null,'20':null,'25':null};
+/* tier config — change these numbers / add/remove to alter the rate boxes everywhere */
+var TIERS=['15','20','25','30'];
+var TIER_DESC={'15':'Standard trade rate','20':'Preferred partner rate','25':'Key account rate','30':'Top / strategic rate'};
+var files={}; TIERS.forEach(function(t){files[t]=null;});
 var agents=[];            // {id,name,email,band}
 var dragId=null, nextId=1;
+
+/* build the rate boxes for step 2 (upload) and step 3 (assign) from TIERS */
+function buildTiers(){
+  document.getElementById('tiers-upload').innerHTML=TIERS.map(function(t){
+    return '<div class="tier t'+t+'" id="tierbox-'+t+'"><h3><span class="dot"></span>'+t+'% STO</h3><small>'+TIER_DESC[t]+'</small>'
+      +'<label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile(\''+t+'\',this)"></label>'
+      +'<div id="files-'+t+'"></div></div>';
+  }).join('');
+  document.getElementById('tiers-assign').innerHTML=TIERS.map(function(t){
+    return '<div class="tier t'+t+'" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,\''+t+'\')">'
+      +'<h3><span class="dot"></span>'+t+'% STO</h3>'
+      +'<button type="button" class="viewcust" onclick="toggleCust(\''+t+'\')">View '+t+'% customers <span class="cnt" id="cnt-'+t+'">0</span></button>'
+      +'<div class="assigned" id="band-'+t+'"></div></div>';
+  }).join('');
+}
+function toggleCust(t){ document.getElementById('band-'+t).classList.toggle('collapsed'); }
 
 /* ---------- step nav ---------- */
 function show(){
@@ -317,11 +309,12 @@ function renderAgents(){
   var unassigned=agents.filter(function(a){return !a.band;});
   pool.innerHTML = unassigned.length ? unassigned.map(function(a){return agentChip(a);}).join('')
     : '<span class="empty-hint">No unassigned agents — drag one back here to unassign.</span>';
-  ['15','20','25'].forEach(function(b){
+  TIERS.forEach(function(b){
     var box=document.getElementById('band-'+b);
     var inb=agents.filter(function(a){return a.band===b;});
     box.innerHTML = inb.length ? inb.map(function(a){return agentChip(a,true);}).join('')
-      : '<span class="empty-hint">—</span>';
+      : '<span class="empty-hint">No customers yet — drag agents here.</span>';
+    var cnt=document.getElementById('cnt-'+b); if(cnt)cnt.textContent=inb.length;
   });
 }
 function dragStart(ev,id){ dragId=id; ev.dataTransfer.effectAllowed='move'; var t=ev.target.closest('.agent'); if(t)t.classList.add('dragging'); }
@@ -363,7 +356,7 @@ function submitWiz(){
     ? [['Property',val('f-name')],['Type',val('f-type')],['Region',val('f-region')],['Contact',val('f-contact')],
        ['Email',val('f-email')],['Phone',val('f-phone')],['Username',val('f-user')],['Password',val('f-pass')]]
     : [['Mode','Existing lodge owner login'],['Username',val('l-user')]];
-  var tierRows=['15','20','25'].map(function(b){return [b+'% sheet', files[b]||'—'];});
+  var tierRows=TIERS.map(function(b){return [b+'% sheet', files[b]||'—'];});
   var agentRows=agents.map(function(a){return [a.name+(a.email?' ('+a.email+')':''), a.band?a.band+'% STO':'unassigned'];});
 
   function tbl(title,rows){ if(!rows.length)return '';
@@ -386,6 +379,6 @@ function finishDone(){
   document.getElementById('done').classList.add('active');
   window.scrollTo(0,0);
 }
-show(); renderAgents();
+show(); buildTiers(); renderAgents();
 </script>
 </body></html>
