@@ -1,0 +1,391 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Supplier Portal | Namibia Rates</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Namibia Rates supplier portal — register your lodge, load your STO rate tiers and assign agents to rate bands.">
+<link rel="canonical" href="https://namibiarates.com/supplier-portal/">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--brand-accent:#a48256;--brand-green:#87a996;--text-main:#3c3530;--text-muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--line:rgba(164,130,86,.22);--font-head:'Cinzel',serif;--font-body:'Jost',sans-serif;
+--t15:#7d9b8a;--t20:#c08a4e;--t25:#9d6b8e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-main);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.cbanner{background:#efe9dd;color:#6b5b3e;font-size:.74rem;text-align:center;padding:8px 16px;border-bottom:1px solid var(--line);}
+header.site{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;background:var(--sand);border-bottom:1px solid var(--line);}
+.logo{font-family:var(--font-head);color:var(--brand-accent);text-transform:uppercase;letter-spacing:3px;font-weight:500;font-size:1.15rem;text-decoration:none;}
+.logo small{display:block;font-family:var(--font-body);font-size:.55rem;letter-spacing:3px;color:var(--text-muted);}
+.back{color:var(--brand-accent);text-decoration:none;font-size:.74rem;text-transform:uppercase;letter-spacing:1.5px;}
+.wrap{max-width:760px;margin:0 auto;padding:40px 24px 80px;}
+.intro{text-align:center;margin-bottom:30px;}
+.intro h1{font-family:var(--font-head);font-weight:500;color:var(--brand-accent);font-size:2rem;letter-spacing:1px;margin-bottom:8px;}
+.intro p{color:var(--text-muted);font-size:.95rem;}
+/* progress */
+.prog{margin:0 0 30px;}
+.prog-top{display:flex;justify-content:space-between;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:8px;}
+.prog-bar{height:6px;background:rgba(164,130,86,.18);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--brand-green);width:33%;transition:width .35s ease;border-radius:99px;}
+/* card / steps */
+.card{background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:32px 28px;}
+.step{display:none;}.step.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.step h2{font-family:var(--font-head);font-weight:500;color:var(--text-main);font-size:1.35rem;margin-bottom:4px;}
+.step .sub{color:var(--text-muted);font-size:.88rem;margin-bottom:22px;}
+label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin:16px 0 6px;}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid rgba(0,0,0,.15);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--text-main);background:#fff;outline:none;transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--brand-accent);}
+textarea{height:90px;resize:vertical;}
+.req{color:#b9542f;}
+.err{color:#b9542f;font-size:.8rem;margin-top:10px;min-height:1em;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:560px){.row{grid-template-columns:1fr;}}
+/* segmented toggle */
+.seg{display:flex;background:rgba(164,130,86,.1);border-radius:10px;padding:4px;margin-bottom:8px;}
+.seg button{flex:1;border:none;background:transparent;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.2px;font-size:.74rem;color:var(--text-muted);padding:10px;border-radius:7px;cursor:pointer;transition:.2s;}
+.seg button.on{background:#fff;color:var(--brand-accent);box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.pane{display:none;}.pane.on{display:block;}
+/* nav buttons */
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px;}
+.btn{cursor:pointer;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.78rem;padding:12px 26px;border-radius:6px;border:1px solid var(--brand-accent);background:transparent;color:var(--brand-accent);transition:.2s;}
+.btn:hover{background:var(--brand-accent);color:#fff;}
+.btn.solid{background:var(--brand-green);border-color:var(--brand-green);color:#fff;}
+.btn.solid:hover{background:var(--brand-accent);border-color:var(--brand-accent);}
+.btn.ghost{border-color:transparent;color:var(--text-muted);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+.btn.sm{padding:8px 16px;font-size:.68rem;}
+/* tier boxes */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px;}
+@media(max-width:640px){.tiers{grid-template-columns:1fr;}}
+.tier{border:2px dashed var(--line);border-radius:12px;padding:16px;background:#fff;transition:.2s;min-height:150px;}
+.tier h3{font-family:var(--font-head);font-size:1rem;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.tier .dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
+.tier.t15 .dot{background:var(--t15);} .tier.t20 .dot{background:var(--t20);} .tier.t25 .dot{background:var(--t25);}
+.tier small{color:var(--text-muted);font-size:.74rem;display:block;margin-bottom:10px;}
+.tier.drag{border-color:var(--brand-green);background:#f0f7f3;}
+.tier .filechip{display:flex;align-items:center;gap:8px;background:rgba(135,169,150,.14);border-radius:7px;padding:7px 10px;font-size:.8rem;margin-top:8px;word-break:break-all;}
+.tier .filechip button{margin-left:auto;background:none;border:none;color:#b9542f;cursor:pointer;font-size:1rem;line-height:1;}
+.uploadbtn{display:inline-block;font-size:.72rem;color:var(--brand-accent);border:1px solid var(--brand-accent);border-radius:6px;padding:7px 12px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;}
+.uploadbtn input{display:none;}
+/* agent assignment */
+.assign-grid{display:grid;grid-template-columns:1fr;gap:16px;}
+.pool{border:1px solid var(--line);border-radius:12px;background:#fff;padding:16px;}
+.pool h3{font-family:var(--font-head);font-size:1rem;font-weight:600;margin-bottom:10px;}
+.addrow{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:end;}
+@media(max-width:560px){.addrow{grid-template-columns:1fr;}}
+.addrow label{margin-top:0;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;min-height:38px;}
+.agent{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:99px;padding:6px 12px;font-size:.84rem;cursor:grab;user-select:none;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.agent:active{cursor:grabbing;}
+.agent .em{color:var(--text-muted);font-size:.74rem;}
+.agent .x{background:none;border:none;color:#b9542f;cursor:pointer;font-size:1rem;line-height:1;margin-left:2px;}
+.agent.dragging{opacity:.4;}
+.assigned{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;min-height:34px;}
+.assigned .agent{font-size:.78rem;padding:5px 10px;}
+.empty-hint{color:var(--text-muted);font-size:.76rem;font-style:italic;}
+/* preview */
+.preview{margin-top:8px;border:1px solid var(--line);border-radius:12px;background:linear-gradient(180deg,#fff, #faf8f4);padding:18px;}
+.preview h3{font-family:var(--font-head);font-size:1rem;font-weight:600;margin-bottom:4px;}
+.preview .pv-result{margin-top:14px;padding:16px;border-radius:10px;background:#fff;border:1px solid var(--line);display:none;}
+.preview .pv-result.on{display:block;animation:fade .3s ease;}
+.pv-band{display:inline-block;font-family:var(--font-head);font-weight:600;color:#fff;border-radius:99px;padding:4px 14px;font-size:.85rem;letter-spacing:1px;}
+.pv-band.t15{background:var(--t15);}.pv-band.t20{background:var(--t20);}.pv-band.t25{background:var(--t25);}
+.pv-none{color:#b9542f;}
+.review-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem;}
+.review-row .k{color:var(--text-muted);}.review-row .v{text-align:right;}
+.done{text-align:center;display:none;}
+.done.active{display:block;}
+.done .check{width:64px;height:64px;border-radius:50%;background:var(--brand-green);color:#fff;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.done h2{font-family:var(--font-head);color:var(--brand-accent);font-weight:500;margin-bottom:8px;}
+.done p{color:var(--text-muted);}
+.note{background:rgba(135,169,150,.12);border:1px solid rgba(135,169,150,.4);border-radius:10px;padding:12px 14px;font-size:.8rem;color:#4f6b5d;margin-top:18px;}
+footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
+</style></head>
+<body>
+<div class="cbanner">⚠ Demo preview — supplier portal. Sign-ups and data are for demonstration only and email to our team.</div>
+<header class="site">
+  <a class="logo" href="/">Namibia Rates<small>Supplier Portal</small></a>
+  <a class="back" href="/">&#8592; Back to home</a>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    <h1>Supplier Portal</h1>
+    <p>Register your property, load your STO rate tiers, and choose which rate each agent sees.</p>
+  </div>
+
+  <div class="prog" id="prog">
+    <div class="prog-top"><span id="prog-label">Step 1 of 3</span><span id="prog-pct">33%</span></div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+  </div>
+
+  <form id="wiz" class="card" onsubmit="return false;">
+
+    <!-- STEP 1: account -->
+    <div class="step active" data-step="1">
+      <div class="seg">
+        <button type="button" id="seg-reg" class="on" onclick="setMode('reg')">Register property</button>
+        <button type="button" id="seg-log" onclick="setMode('log')">Lodge owner login</button>
+      </div>
+
+      <!-- register pane -->
+      <div class="pane on" id="pane-reg">
+        <h2>Register your property</h2><p class="sub">Create your supplier account — it takes about a minute.</p>
+        <label>Property / hotel name <span class="req">*</span></label><input id="f-name" placeholder="e.g. Acacia Desert Lodge">
+        <div class="row">
+          <div><label>Property type</label><select id="f-type"><option value="">Select…</option><option>Lodge</option><option>Tented Camp</option><option>Guesthouse</option><option>Hotel</option><option>Campsite</option><option>Collection / Group</option><option>Other</option></select></div>
+          <div><label>Region</label><select id="f-region"><option value="">Select…</option><option>Sossusvlei &amp; Namib</option><option>Swakopmund</option><option>Damaraland</option><option>Kaokoland</option><option>Etosha</option><option>Central Namibia</option><option>Windhoek</option><option>Kalahari</option><option>Fish River Canyon</option><option>Lüderitz</option><option>Zambezi &amp; Caprivi</option><option>Other</option></select></div>
+        </div>
+        <label>Contact name <span class="req">*</span></label><input id="f-contact" placeholder="Full name">
+        <div class="row">
+          <div><label>Email <span class="req">*</span></label><input id="f-email" type="email" placeholder="you@email.com"></div>
+          <div><label>Phone</label><input id="f-phone" placeholder="+264 …"></div>
+        </div>
+        <label>Choose a username <span class="req">*</span></label><input id="f-user" placeholder="e.g. acacia_lodge" autocomplete="off">
+        <div class="row">
+          <div><label>Create password <span class="req">*</span></label><input id="f-pass" type="password" placeholder="••••••••" autocomplete="new-password"></div>
+          <div><label>Confirm password <span class="req">*</span></label><input id="f-pass2" type="password" placeholder="••••••••" autocomplete="new-password"></div>
+        </div>
+        <div class="note">Your username &amp; password let you log back in later to update rates and agents. For this demo your registration is emailed to our team.</div>
+      </div>
+
+      <!-- login pane -->
+      <div class="pane" id="pane-log">
+        <h2>Lodge owner login</h2><p class="sub">Already registered? Sign in to manage your rates and agents.</p>
+        <label>Username</label><input id="l-user" placeholder="Your username" autocomplete="off">
+        <label>Password</label><input id="l-pass" type="password" placeholder="••••••••" autocomplete="current-password">
+        <div class="note">Demo mode — any username &amp; password will continue to the rates step.</div>
+      </div>
+
+      <div class="err" id="e1"></div>
+    </div>
+
+    <!-- STEP 2: rate tiers -->
+    <div class="step" data-step="2">
+      <h2>Load your rate sheets</h2><p class="sub">Add a rate sheet for each STO tier. Agents you assign to a tier will see that sheet when they sign in.</p>
+      <div class="tiers">
+        <div class="tier t15" id="tierbox-15">
+          <h3><span class="dot"></span>15% STO</h3><small>Standard trade rate</small>
+          <label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile('15',this)"></label>
+          <div id="files-15"></div>
+        </div>
+        <div class="tier t20" id="tierbox-20">
+          <h3><span class="dot"></span>20% STO</h3><small>Preferred partner rate</small>
+          <label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile('20',this)"></label>
+          <div id="files-20"></div>
+        </div>
+        <div class="tier t25" id="tierbox-25">
+          <h3><span class="dot"></span>25% STO</h3><small>Top / key account rate</small>
+          <label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile('25',this)"></label>
+          <div id="files-25"></div>
+        </div>
+      </div>
+      <div class="note">Tip: you only need a sheet for the tiers you actually offer. You can change these any time after logging in.</div>
+      <div class="err" id="e2"></div>
+    </div>
+
+    <!-- STEP 3: assign agents -->
+    <div class="step" data-step="3">
+      <h2>Assign agents to a rate tier</h2><p class="sub">Add your agents, then drag each one into the rate band they should get. When that agent signs in, the system reads their band and shows that rate automatically.</p>
+
+      <div class="assign-grid">
+        <div class="pool">
+          <h3>Your agents</h3>
+          <div class="addrow">
+            <div><label>Agent name</label><input id="a-name" placeholder="e.g. Sarah Jones"></div>
+            <div><label>Agent email</label><input id="a-email" placeholder="agent@agency.com"></div>
+            <button type="button" class="btn solid sm" onclick="addAgent()" style="height:44px">Add</button>
+          </div>
+          <div class="chips" id="agent-pool"><span class="empty-hint" id="pool-hint">No agents yet — add one above.</span></div>
+        </div>
+
+        <div class="tiers">
+          <div class="tier t15" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,'15')">
+            <h3><span class="dot"></span>15% STO</h3><small>Drop agents here</small>
+            <div class="assigned" id="band-15"></div>
+          </div>
+          <div class="tier t20" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,'20')">
+            <h3><span class="dot"></span>20% STO</h3><small>Drop agents here</small>
+            <div class="assigned" id="band-20"></div>
+          </div>
+          <div class="tier t25" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,'25')">
+            <h3><span class="dot"></span>25% STO</h3><small>Drop agents here</small>
+            <div class="assigned" id="band-25"></div>
+          </div>
+        </div>
+
+        <div class="preview">
+          <h3>Preview: what an agent sees on sign-in</h3>
+          <p class="sub" style="margin-bottom:12px">Type an agent's name or email to test the lookup.</p>
+          <input id="pv-input" placeholder="agent name or email" oninput="runPreview()">
+          <div class="pv-result" id="pv-result"></div>
+        </div>
+      </div>
+      <div class="err" id="e3"></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn ghost" id="btn-back" onclick="prev()" style="visibility:hidden">&#8592; Back</button>
+      <button type="button" class="btn solid" id="btn-next" onclick="next()">Next &#8594;</button>
+    </div>
+  </form>
+
+  <!-- success -->
+  <div class="card done" id="done">
+    <div class="check">&#10003;</div>
+    <h2>All set!</h2>
+    <p id="done-msg">Your supplier registration, rate tiers and agent assignments have been sent to our team.</p>
+    <div class="actions" style="justify-content:center"><a class="btn" href="/">Back to home</a></div>
+  </div>
+</div>
+<footer>&copy; <span id="yr"></span> Namibia Rates · Supplier Portal · Demo</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+var TOTAL=3, step=1, mode='reg';
+var files={'15':null,'20':null,'25':null};
+var agents=[];            // {id,name,email,band}
+var dragId=null, nextId=1;
+
+/* ---------- step nav ---------- */
+function show(){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('active', +s.dataset.step===step);});
+  var pct=Math.round(step/TOTAL*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-label').textContent='Step '+step+' of '+TOTAL;
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('btn-back').style.visibility=step===1?'hidden':'visible';
+  document.getElementById('btn-next').textContent=step===TOTAL?'Finish & submit':'Next →';
+}
+function setMode(m){
+  mode=m;
+  document.getElementById('seg-reg').classList.toggle('on',m==='reg');
+  document.getElementById('seg-log').classList.toggle('on',m==='log');
+  document.getElementById('pane-reg').classList.toggle('on',m==='reg');
+  document.getElementById('pane-log').classList.toggle('on',m==='log');
+  document.getElementById('e1').textContent='';
+}
+function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
+
+function validate(){
+  var e=document.getElementById('e'+step); if(e)e.textContent='';
+  if(step===1){
+    if(mode==='reg'){
+      if(!val('f-name')||!val('f-contact')||!val('f-email')||!val('f-user')||!val('f-pass')||!val('f-pass2')){e.textContent='Please complete the required fields.';return false;}
+      if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('f-email'))){e.textContent='Please enter a valid email.';return false;}
+      if(val('f-pass').length<4){e.textContent='Password must be at least 4 characters.';return false;}
+      if(val('f-pass')!==val('f-pass2')){e.textContent='Passwords do not match.';return false;}
+    } else {
+      if(!val('l-user')||!val('l-pass')){e.textContent='Enter your username and password.';return false;}
+    }
+  }
+  return true;
+}
+function next(){ if(!validate())return; if(step<TOTAL){step++;show();window.scrollTo(0,0);} else submitWiz(); }
+function prev(){ if(step>1){step--;show();window.scrollTo(0,0);} }
+
+/* ---------- step 2: files ---------- */
+function addFile(band,input){
+  if(!input.files||!input.files[0])return;
+  files[band]=input.files[0].name;
+  renderFiles(band);
+}
+function renderFiles(band){
+  var box=document.getElementById('files-'+band);
+  if(files[band]){
+    box.innerHTML='<div class="filechip">📄 '+esc(files[band])+'<button type="button" onclick="clearFile(\''+band+'\')">×</button></div>';
+  } else { box.innerHTML=''; }
+}
+function clearFile(band){files[band]=null;renderFiles(band);}
+
+/* ---------- step 3: agents ---------- */
+function addAgent(){
+  var n=val('a-name'), em=val('a-email'), e=document.getElementById('e3'); e.textContent='';
+  if(!n){e.textContent='Enter an agent name.';return;}
+  if(em && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){e.textContent='Enter a valid agent email.';return;}
+  agents.push({id:nextId++,name:n,email:em,band:null});
+  document.getElementById('a-name').value=''; document.getElementById('a-email').value='';
+  document.getElementById('a-name').focus();
+  renderAgents();
+}
+function removeAgent(id){ agents=agents.filter(function(a){return a.id!==id;}); renderAgents(); runPreview(); }
+
+function agentChip(a,inBand){
+  return '<div class="agent" draggable="true" data-id="'+a.id+'" ondragstart="dragStart(event,'+a.id+')" ondragend="dragEnd(event)">'
+    +'<span>'+esc(a.name)+'</span>'+(a.email?'<span class="em">'+esc(a.email)+'</span>':'')
+    +'<button type="button" class="x" onclick="removeAgent('+a.id+')">×</button></div>';
+}
+function renderAgents(){
+  var pool=document.getElementById('agent-pool');
+  var unassigned=agents.filter(function(a){return !a.band;});
+  pool.innerHTML = unassigned.length ? unassigned.map(function(a){return agentChip(a);}).join('')
+    : '<span class="empty-hint">No unassigned agents — drag one back here to unassign.</span>';
+  ['15','20','25'].forEach(function(b){
+    var box=document.getElementById('band-'+b);
+    var inb=agents.filter(function(a){return a.band===b;});
+    box.innerHTML = inb.length ? inb.map(function(a){return agentChip(a,true);}).join('')
+      : '<span class="empty-hint">—</span>';
+  });
+}
+function dragStart(ev,id){ dragId=id; ev.dataTransfer.effectAllowed='move'; var t=ev.target.closest('.agent'); if(t)t.classList.add('dragging'); }
+function dragEnd(ev){ var t=ev.target.closest('.agent'); if(t)t.classList.remove('dragging'); }
+function dragOver(ev){ ev.preventDefault(); ev.currentTarget.classList.add('drag'); }
+function dragLeave(ev){ ev.currentTarget.classList.remove('drag'); }
+function dropAgent(ev,band){ ev.preventDefault(); ev.currentTarget.classList.remove('drag');
+  var a=agents.find(function(x){return x.id===dragId;}); if(a){a.band=band;} dragId=null; renderAgents(); runPreview(); }
+// allow dropping back onto the pool to unassign
+document.addEventListener('DOMContentLoaded',function(){
+  var pool=document.getElementById('agent-pool');
+  pool.addEventListener('dragover',function(ev){ev.preventDefault();pool.classList.add('drag');});
+  pool.addEventListener('dragleave',function(){pool.classList.remove('drag');});
+  pool.addEventListener('drop',function(ev){ev.preventDefault();pool.classList.remove('drag');
+    var a=agents.find(function(x){return x.id===dragId;}); if(a){a.band=null;} dragId=null; renderAgents(); runPreview();});
+});
+
+/* ---------- preview lookup ---------- */
+function runPreview(){
+  var q=(document.getElementById('pv-input').value||'').trim().toLowerCase();
+  var box=document.getElementById('pv-result');
+  if(!q){box.classList.remove('on');box.innerHTML='';return;}
+  var a=agents.find(function(x){return x.name.toLowerCase()===q || (x.email&&x.email.toLowerCase()===q)
+    || x.name.toLowerCase().indexOf(q)>-1 || (x.email&&x.email.toLowerCase().indexOf(q)>-1);});
+  box.classList.add('on');
+  if(!a){ box.innerHTML='<span class="pv-none">No matching agent. Add them and assign a tier, or this agent would not get a rate.</span>'; return; }
+  if(!a.band){ box.innerHTML='<strong>'+esc(a.name)+'</strong> is added but <span class="pv-none">not assigned to a tier yet</span> — drag them into a rate band.'; return; }
+  var sheet=files[a.band]?('“'+esc(files[a.band])+'”'):'your '+a.band+'% rate sheet';
+  box.innerHTML='<div>On sign-in, <strong>'+esc(a.name)+'</strong> is matched to:</div>'
+    +'<div style="margin:10px 0"><span class="pv-band t'+a.band+'">'+a.band+'% STO</span></div>'
+    +'<div class="sub" style="margin:0">They will see '+sheet+'.</div>';
+}
+
+/* ---------- submit ---------- */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function submitWiz(){
+  var btn=document.getElementById('btn-next'); btn.disabled=true; btn.textContent='Sending…';
+  var acct = mode==='reg'
+    ? [['Property',val('f-name')],['Type',val('f-type')],['Region',val('f-region')],['Contact',val('f-contact')],
+       ['Email',val('f-email')],['Phone',val('f-phone')],['Username',val('f-user')],['Password',val('f-pass')]]
+    : [['Mode','Existing lodge owner login'],['Username',val('l-user')]];
+  var tierRows=['15','20','25'].map(function(b){return [b+'% sheet', files[b]||'—'];});
+  var agentRows=agents.map(function(a){return [a.name+(a.email?' ('+a.email+')':''), a.band?a.band+'% STO':'unassigned'];});
+
+  function tbl(title,rows){ if(!rows.length)return '';
+    return '<h3 style="font-family:Georgia,serif;color:#a48256;margin:18px 0 6px">'+title+'</h3><table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">'
+      + rows.map(function(r){return '<tr><td style="padding:7px 0;border-bottom:1px solid #eee;color:#7A7269">'+esc(r[0])+'</td><td style="padding:7px 0;border-bottom:1px solid #eee;text-align:right">'+esc(r[1]||'—')+'</td></tr>';}).join('')
+      + '</table>'; }
+  var html='<div style="font-family:Inter,Arial,sans-serif;max-width:620px;margin:0 auto">'
+    +'<h2 style="font-family:Georgia,serif;color:#a48256">New Supplier Portal Submission</h2>'
+    +tbl('Account',acct)+tbl('Rate sheets',tierRows)+tbl('Agent assignments',agentRows.length?agentRows:[['No agents added','—']])
+    +'</div>';
+  var who = mode==='reg' ? val('f-name')||val('f-user') : val('l-user');
+  fetch('https://desert-tracks.vercel.app/api/send_email',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({to:'jaun@desert-tracks.com',subject:'Supplier Portal: '+who, html:html})})
+  .then(function(){finishDone();}).catch(function(){finishDone();});
+}
+function finishDone(){
+  document.getElementById('wiz').style.display='none';
+  document.getElementById('prog').style.display='none';
+  document.querySelector('.intro').style.display='none';
+  document.getElementById('done').classList.add('active');
+  window.scrollTo(0,0);
+}
+show(); renderAgents();
+</script>
+</body></html>
