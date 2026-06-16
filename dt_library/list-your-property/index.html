@@ -20,7 +20,7 @@ header.site{display:flex;justify-content:space-between;align-items:center;paddin
 .prog{margin:0 0 30px;}
 .prog-top{display:flex;justify-content:space-between;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:8px;}
 .prog-bar{height:6px;background:rgba(164,130,86,.18);border-radius:99px;overflow:hidden;}
-.prog-fill{height:100%;background:var(--brand-green);width:16.6%;transition:width .35s ease;border-radius:99px;}
+.prog-fill{height:100%;background:var(--brand-green);width:20%;transition:width .35s ease;border-radius:99px;}
 /* card / steps */
 .card{background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:32px 28px;}
 .step{display:none;}.step.active{display:block;animation:fade .35s ease;}
@@ -68,7 +68,7 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
   </div>
 
   <div class="prog" id="prog">
-    <div class="prog-top"><span id="prog-label">Step 1 of 6</span><span id="prog-pct">17%</span></div>
+    <div class="prog-top"><span id="prog-label">Step 1 of 5</span><span id="prog-pct">20%</span></div>
     <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
   </div>
 
@@ -103,23 +103,15 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
     </div>
     <!-- 4 -->
     <div class="step" data-step="4">
-      <h2>Rates &amp; partnership</h2><p class="sub">How you'd work with trade partners.</p>
-      <div class="row"><div><label>STO commission offered</label><select id="f-sto"><option value="">Select…</option><option>10%</option><option>15%</option><option>20%</option><option>25%</option><option>Other</option></select></div>
-      <div><label>Rate validity</label><input id="f-valid" placeholder="e.g. 2026 season"></div></div>
-      <label>Do you have a rate sheet ready?</label><select id="f-ratesheet"><option value="">Select…</option><option>Yes — ready to send</option><option>In progress</option><option>Not yet</option></select>
-      <div class="err" id="e4"></div>
-    </div>
-    <!-- 5 -->
-    <div class="step" data-step="5">
       <h2>Anything else?</h2><p class="sub">Optional — anything we should know.</p>
       <label>Notes</label><textarea id="f-notes" placeholder="Activities, special features, availability, etc."></textarea>
-      <div class="err" id="e5"></div>
+      <div class="err" id="e4"></div>
     </div>
-    <!-- 6 review -->
-    <div class="step" data-step="6">
+    <!-- 5 review -->
+    <div class="step" data-step="5">
       <h2>Review &amp; submit</h2><p class="sub">Please check the details below.</p>
       <div id="review"></div>
-      <div class="err" id="e6"></div>
+      <div class="err" id="e5"></div>
     </div>
 
     <div class="actions">
@@ -140,7 +132,7 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
-var TOTAL=6, step=1;
+var TOTAL=5, step=1;
 function show(){
   document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('active', +s.dataset.step===step);});
   var pct=Math.round(step/TOTAL*100);
@@ -166,8 +158,7 @@ function prev(){ if(step>1){step--;show();window.scrollTo(0,0);} }
 function buildReview(){
   var rows=[['Property',val('f-name')],['Type',val('f-type')],['Region',val('f-region')],
    ['Nearest town',val('f-area')],['Rooms / units',val('f-rooms')],['Star rating',val('f-star')],['Website',val('f-web')],
-   ['Contact',val('f-contact')],['Role',val('f-role')],['Email',val('f-email')],['Phone',val('f-phone')],
-   ['STO offered',val('f-sto')],['Rate validity',val('f-valid')],['Rate sheet',val('f-ratesheet')],['Notes',val('f-notes')]];
+   ['Contact',val('f-contact')],['Role',val('f-role')],['Email',val('f-email')],['Phone',val('f-phone')],['Notes',val('f-notes')]];
   document.getElementById('review').innerHTML=rows.filter(function(r){return r[1];}).map(function(r){
     return '<div class="review-row"><span class="k">'+r[0]+'</span><span class="v">'+r[1].replace(/</g,'&lt;')+'</span></div>';}).join('');
 }
@@ -175,8 +166,7 @@ function submitWiz(){
   var btn=document.getElementById('btn-next'); btn.disabled=true; btn.textContent='Sending…';
   var rows=[['Property',val('f-name')],['Type',val('f-type')],['Region',val('f-region')],['Nearest town',val('f-area')],
    ['Rooms / units',val('f-rooms')],['Star rating',val('f-star')],['Website',val('f-web')],['Contact',val('f-contact')],
-   ['Role',val('f-role')],['Email',val('f-email')],['Phone',val('f-phone')],['STO offered',val('f-sto')],
-   ['Rate validity',val('f-valid')],['Rate sheet ready',val('f-ratesheet')],['Notes',val('f-notes')]];
+   ['Role',val('f-role')],['Email',val('f-email')],['Phone',val('f-phone')],['Notes',val('f-notes')]];
   var html='<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto"><h2 style="font-family:Georgia,serif;color:#a48256">New Property Listing Enquiry</h2><table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">'
     + rows.filter(function(r){return r[1];}).map(function(r){return '<tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#7A7269">'+r[0]+'</td><td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right">'+String(r[1]).replace(/</g,'&lt;')+'</td></tr>';}).join('')
     + '</table></div>';
