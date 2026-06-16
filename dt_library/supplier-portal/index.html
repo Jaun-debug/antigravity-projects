@@ -313,7 +313,7 @@ function renderAgents(){
   var pool=document.getElementById('agent-pool');
   var unassigned=agents.filter(function(a){return !a.band;});
   pool.innerHTML = unassigned.length ? unassigned.map(function(a){return agentChip(a);}).join('')
-    : '<span class="empty-hint">No unassigned agents — drag one back here to unassign.</span>';
+    : '<span class="empty-hint">No unassigned agents. To unassign, remove an agent from its % band with the × button.</span>';
   TIERS.forEach(function(b){
     var box=document.getElementById('band-'+b);
     var inb=agents.filter(function(a){return a.band===b;});
@@ -328,14 +328,6 @@ function dragOver(ev){ ev.preventDefault(); ev.currentTarget.classList.add('drag
 function dragLeave(ev){ ev.currentTarget.classList.remove('drag'); }
 function dropAgent(ev,band){ ev.preventDefault(); ev.currentTarget.classList.remove('drag');
   var a=agents.find(function(x){return x.id===dragId;}); if(a){a.band=band;} dragId=null; renderAgents(); runPreview(); }
-// allow dropping back onto the pool to unassign
-document.addEventListener('DOMContentLoaded',function(){
-  var pool=document.getElementById('agent-pool');
-  pool.addEventListener('dragover',function(ev){ev.preventDefault();pool.classList.add('drag');});
-  pool.addEventListener('dragleave',function(){pool.classList.remove('drag');});
-  pool.addEventListener('drop',function(ev){ev.preventDefault();pool.classList.remove('drag');
-    var a=agents.find(function(x){return x.id===dragId;}); if(a){a.band=null;} dragId=null; renderAgents(); runPreview();});
-});
 
 /* ---------- preview lookup ---------- */
 function runPreview(){
