@@ -312,8 +312,7 @@ function agentChip(a,inBand){
 function renderAgents(){
   var pool=document.getElementById('agent-pool');
   var unassigned=agents.filter(function(a){return !a.band;});
-  pool.innerHTML = unassigned.length ? unassigned.map(function(a){return agentChip(a);}).join('')
-    : '<span class="empty-hint">No unassigned agents. To unassign, remove an agent from its % band with the × button.</span>';
+  pool.innerHTML = unassigned.length ? unassigned.map(function(a){return agentChip(a);}).join('') : '';
   TIERS.forEach(function(b){
     var box=document.getElementById('band-'+b);
     var inb=agents.filter(function(a){return a.band===b;});
