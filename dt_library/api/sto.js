@@ -486,11 +486,19 @@ module.exports = (req, res) => {
     return res.status(500).json({ error: 'Login not configured. Set AGENT_USER and AGENT_PASS in Vercel.' });
   }
 
+  // Additional accepted logins. Each one still issues the same session token,
+  // so the gate (middleware) keeps validating against AGENT_PASS.
+  const EXTRA_LOGINS = [
+    { user: 'ol', pass: 'ol' },
+  ];
+
   const validToken = sessionToken(VALID_PASS);
 
-  // Authenticate by an existing session token OR by username + password.
+  // Authenticate by an existing session token OR by any valid username + password.
   const authedByToken = token && token === validToken;
-  const authedByCreds = user && user === VALID_USER && pass === VALID_PASS;
+  const authedByCreds =
+    (user && user === VALID_USER && pass === VALID_PASS) ||
+    EXTRA_LOGINS.some(function (c) { return user === c.user && pass === c.pass; });
 
   if (!authedByToken && !authedByCreds) {
     return res.status(401).json({ error: 'Invalid agent credentials.' });

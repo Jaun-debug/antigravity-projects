@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>List Your Property | Namibia Rates</title>
+<meta name="description" content="List your Namibian lodge, camp or guesthouse on Namibia Rates — a quick step-by-step enquiry for trade partnership.">
+<link rel="canonical" href="https://namibiarates.com/list-your-property/">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--brand-accent:#a48256;--brand-green:#87a996;--text-main:#3c3530;--text-muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--line:rgba(164,130,86,.22);--font-head:'Cinzel',serif;--font-body:'Jost',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-main);font-weight:300;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.cbanner{background:#efe9dd;color:#6b5b3e;font-size:.74rem;text-align:center;padding:8px 16px;border-bottom:1px solid var(--line);}
+header.site{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;background:var(--sand);border-bottom:1px solid var(--line);}
+.logo{font-family:var(--font-head);color:var(--brand-accent);text-transform:uppercase;letter-spacing:3px;font-weight:500;font-size:1.15rem;text-decoration:none;}
+.logo small{display:block;font-family:var(--font-body);font-size:.55rem;letter-spacing:3px;color:var(--text-muted);}
+.back{color:var(--brand-accent);text-decoration:none;font-size:.74rem;text-transform:uppercase;letter-spacing:1.5px;}
+.wrap{max-width:640px;margin:0 auto;padding:40px 24px 80px;}
+.intro{text-align:center;margin-bottom:30px;}
+.intro h1{font-family:var(--font-head);font-weight:500;color:var(--brand-accent);font-size:2rem;letter-spacing:1px;margin-bottom:8px;}
+.intro p{color:var(--text-muted);font-size:.95rem;}
+/* progress */
+.prog{margin:0 0 30px;}
+.prog-top{display:flex;justify-content:space-between;font-size:.72rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin-bottom:8px;}
+.prog-bar{height:6px;background:rgba(164,130,86,.18);border-radius:99px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--brand-green);width:16.6%;transition:width .35s ease;border-radius:99px;}
+/* card / steps */
+.card{background:var(--sand);border:1px solid var(--line);border-radius:14px;padding:32px 28px;}
+.step{display:none;}.step.active{display:block;animation:fade .35s ease;}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.step h2{font-family:var(--font-head);font-weight:500;color:var(--text-main);font-size:1.35rem;margin-bottom:4px;}
+.step .sub{color:var(--text-muted);font-size:.88rem;margin-bottom:22px;}
+label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin:16px 0 6px;}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid rgba(0,0,0,.15);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--text-main);background:#fff;outline:none;transition:border-color .2s;}
+input:focus,select:focus,textarea:focus{border-color:var(--brand-accent);}
+textarea{height:110px;resize:vertical;}
+.req{color:#b9542f;}
+.err{color:#b9542f;font-size:.8rem;margin-top:10px;min-height:1em;}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:520px){.row{grid-template-columns:1fr;}}
+/* nav buttons */
+.actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px;}
+.btn{cursor:pointer;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.78rem;padding:12px 26px;border-radius:6px;border:1px solid var(--brand-accent);background:transparent;color:var(--brand-accent);transition:.2s;}
+.btn:hover{background:var(--brand-accent);color:#fff;}
+.btn.solid{background:var(--brand-green);border-color:var(--brand-green);color:#fff;}
+.btn.solid:hover{background:var(--brand-accent);border-color:var(--brand-accent);}
+.btn.ghost{border-color:transparent;color:var(--text-muted);}
+.btn:disabled{opacity:.5;cursor:not-allowed;}
+/* review */
+.review-row{display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line);font-size:.9rem;}
+.review-row .k{color:var(--text-muted);}.review-row .v{text-align:right;font-weight:400;}
+/* done */
+.done{text-align:center;display:none;}
+.done.active{display:block;}
+.done .check{width:64px;height:64px;border-radius:50%;background:var(--brand-green);color:#fff;font-size:2rem;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+.done h2{font-family:var(--font-head);color:var(--brand-accent);font-weight:500;margin-bottom:8px;}
+.done p{color:var(--text-muted);}
+footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
+</style></head>
+<body>
+<div class="cbanner">⚠ Site under construction — this listing enquiry is for testing only.</div>
+<header class="site">
+  <a class="logo" href="/">Namibia Rates<small>Trade Rates Portal</small></a>
+  <a class="back" href="/">&#8592; Back to home</a>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    <h1>List Your Property</h1>
+    <p>Tell us about your lodge, camp or guesthouse — it takes about a minute.</p>
+  </div>
+
+  <div class="prog" id="prog">
+    <div class="prog-top"><span id="prog-label">Step 1 of 6</span><span id="prog-pct">17%</span></div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill"></div></div>
+  </div>
+
+  <form id="wiz" class="card" onsubmit="return false;">
+    <!-- 1 -->
+    <div class="step active" data-step="1">
+      <h2>Your property</h2><p class="sub">The basics about the property you'd like to list.</p>
+      <label>Property name <span class="req">*</span></label><input id="f-name" required placeholder="e.g. Acacia Desert Lodge">
+      <label>Property type <span class="req">*</span></label>
+      <select id="f-type" required><option value="">Select…</option><option>Lodge</option><option>Tented Camp</option><option>Guesthouse</option><option>Hotel</option><option>Campsite</option><option>Self-catering</option><option>Other</option></select>
+      <label>Region <span class="req">*</span></label>
+      <select id="f-region" required><option value="">Select…</option><option>Sossusvlei &amp; Namib</option><option>Swakopmund</option><option>Skeleton Coast</option><option>Damaraland</option><option>Kaokoland</option><option>Epupa</option><option>Opuwo</option><option>West Etosha</option><option>South Etosha</option><option>East Etosha</option><option>Central Namibia</option><option>Windhoek</option><option>Kalahari</option><option>Fish River Canyon</option><option>Lüderitz</option><option>Zambezi &amp; Caprivi</option><option>Other</option></select>
+      <div class="err" id="e1"></div>
+    </div>
+    <!-- 2 -->
+    <div class="step" data-step="2">
+      <h2>Location &amp; size</h2><p class="sub">Where it is and roughly how big.</p>
+      <label>Nearest town / area</label><input id="f-area" placeholder="e.g. Sesriem">
+      <div class="row"><div><label>Number of rooms / units</label><input id="f-rooms" type="number" min="0" placeholder="e.g. 12"></div>
+      <div><label>Star rating (optional)</label><select id="f-star"><option value="">—</option><option>2★</option><option>3★</option><option>4★</option><option>5★</option></select></div></div>
+      <label>Website (optional)</label><input id="f-web" placeholder="https://">
+      <div class="err" id="e2"></div>
+    </div>
+    <!-- 3 -->
+    <div class="step" data-step="3">
+      <h2>Your contact details</h2><p class="sub">So we can get back to you.</p>
+      <label>Your name <span class="req">*</span></label><input id="f-contact" required placeholder="Full name">
+      <label>Role (optional)</label><input id="f-role" placeholder="e.g. Owner, Reservations Manager">
+      <div class="row"><div><label>Email <span class="req">*</span></label><input id="f-email" type="email" required placeholder="you@email.com"></div>
+      <div><label>Phone <span class="req">*</span></label><input id="f-phone" required placeholder="+264 …"></div></div>
+      <div class="err" id="e3"></div>
+    </div>
+    <!-- 4 -->
+    <div class="step" data-step="4">
+      <h2>Rates &amp; partnership</h2><p class="sub">How you'd work with trade partners.</p>
+      <div class="row"><div><label>STO commission offered</label><select id="f-sto"><option value="">Select…</option><option>10%</option><option>15%</option><option>20%</option><option>25%</option><option>Other</option></select></div>
+      <div><label>Rate validity</label><input id="f-valid" placeholder="e.g. 2026 season"></div></div>
+      <label>Do you have a rate sheet ready?</label><select id="f-ratesheet"><option value="">Select…</option><option>Yes — ready to send</option><option>In progress</option><option>Not yet</option></select>
+      <div class="err" id="e4"></div>
+    </div>
+    <!-- 5 -->
+    <div class="step" data-step="5">
+      <h2>Anything else?</h2><p class="sub">Optional — anything we should know.</p>
+      <label>Notes</label><textarea id="f-notes" placeholder="Activities, special features, availability, etc."></textarea>
+      <div class="err" id="e5"></div>
+    </div>
+    <!-- 6 review -->
+    <div class="step" data-step="6">
+      <h2>Review &amp; submit</h2><p class="sub">Please check the details below.</p>
+      <div id="review"></div>
+      <div class="err" id="e6"></div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn ghost" id="btn-back" onclick="prev()" style="visibility:hidden">&#8592; Back</button>
+      <button type="button" class="btn solid" id="btn-next" onclick="next()">Next &#8594;</button>
+    </div>
+  </form>
+
+  <!-- success -->
+  <div class="card done" id="done">
+    <div class="check">&#10003;</div>
+    <h2>Thank you!</h2>
+    <p>Your property listing enquiry has been sent to our team. We'll be in touch shortly.</p>
+    <div class="actions" style="justify-content:center"><a class="btn" href="/">Back to home</a></div>
+  </div>
+</div>
+<footer>&copy; <span id="yr"></span> Namibia Rates · Trade Rates Portal</footer>
+
+<script>
+document.getElementById('yr').textContent=new Date().getFullYear();
+var TOTAL=6, step=1;
+function show(){
+  document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('active', +s.dataset.step===step);});
+  var pct=Math.round(step/TOTAL*100);
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('prog-label').textContent='Step '+step+' of '+TOTAL;
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('btn-back').style.visibility = step===1?'hidden':'visible';
+  document.getElementById('btn-next').textContent = step===TOTAL ? 'Submit listing' : 'Next →';
+  if(step===TOTAL) buildReview();
+}
+function val(id){return (document.getElementById(id).value||'').trim();}
+function validate(){
+  var e=document.getElementById('e'+step); if(e)e.textContent='';
+  if(step===1){ if(!val('f-name')||!val('f-type')||!val('f-region')){e.textContent='Please complete the required fields.';return false;} }
+  if(step===3){
+    if(!val('f-contact')||!val('f-email')||!val('f-phone')){e.textContent='Please complete the required fields.';return false;}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(val('f-email'))){e.textContent='Please enter a valid email.';return false;}
+  }
+  return true;
+}
+function next(){ if(!validate())return; if(step<TOTAL){step++;show();window.scrollTo(0,0);} else submitWiz(); }
+function prev(){ if(step>1){step--;show();window.scrollTo(0,0);} }
+function buildReview(){
+  var rows=[['Property',val('f-name')],['Type',val('f-type')],['Region',val('f-region')],
+   ['Nearest town',val('f-area')],['Rooms / units',val('f-rooms')],['Star rating',val('f-star')],['Website',val('f-web')],
+   ['Contact',val('f-contact')],['Role',val('f-role')],['Email',val('f-email')],['Phone',val('f-phone')],
+   ['STO offered',val('f-sto')],['Rate validity',val('f-valid')],['Rate sheet',val('f-ratesheet')],['Notes',val('f-notes')]];
+  document.getElementById('review').innerHTML=rows.filter(function(r){return r[1];}).map(function(r){
+    return '<div class="review-row"><span class="k">'+r[0]+'</span><span class="v">'+r[1].replace(/</g,'&lt;')+'</span></div>';}).join('');
+}
+function submitWiz(){
+  var btn=document.getElementById('btn-next'); btn.disabled=true; btn.textContent='Sending…';
+  var rows=[['Property',val('f-name')],['Type',val('f-type')],['Region',val('f-region')],['Nearest town',val('f-area')],
+   ['Rooms / units',val('f-rooms')],['Star rating',val('f-star')],['Website',val('f-web')],['Contact',val('f-contact')],
+   ['Role',val('f-role')],['Email',val('f-email')],['Phone',val('f-phone')],['STO offered',val('f-sto')],
+   ['Rate validity',val('f-valid')],['Rate sheet ready',val('f-ratesheet')],['Notes',val('f-notes')]];
+  var html='<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto"><h2 style="font-family:Georgia,serif;color:#a48256">New Property Listing Enquiry</h2><table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">'
+    + rows.filter(function(r){return r[1];}).map(function(r){return '<tr><td style="padding:8px 0;border-bottom:1px solid #eee;color:#7A7269">'+r[0]+'</td><td style="padding:8px 0;border-bottom:1px solid #eee;text-align:right">'+String(r[1]).replace(/</g,'&lt;')+'</td></tr>';}).join('')
+    + '</table></div>';
+  fetch('https://desert-tracks.vercel.app/api/send_email',{method:'POST',headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({to:'bookings@desert-tracks.com',subject:'New Property Listing: '+val('f-name'),html:html})})
+  .then(function(r){ finishDone(); })
+  .catch(function(){ finishDone(); });
+}
+function finishDone(){
+  document.getElementById('wiz').style.display='none';
+  document.getElementById('prog').style.display='none';
+  document.querySelector('.intro').style.display='none';
+  document.getElementById('done').classList.add('active');
+  window.scrollTo(0,0);
+}
+show();
+</script>
+</body></html>
