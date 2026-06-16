@@ -212,7 +212,9 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
 
 <script>
 document.getElementById('yr').textContent=new Date().getFullYear();
-var TOTAL=3, step=1, mode='reg';
+var step=1, mode='reg';
+/* Register = 1 step (create account only). Login = 3 steps (account -> rate sheets -> agents). */
+function totalSteps(){ return mode==='reg' ? 1 : 3; }
 /* tier config — change these numbers / add/remove to alter the rate boxes everywhere */
 var TIERS=['15','20','25','30'];
 var TIER_DESC={'15':'Standard trade rate','20':'Preferred partner rate','25':'Key account rate','30':'Top / strategic rate'};
@@ -238,21 +240,24 @@ function toggleCust(t){ document.getElementById('band-'+t).classList.toggle('col
 
 /* ---------- step nav ---------- */
 function show(){
+  var TOTAL=totalSteps();
   document.querySelectorAll('.step').forEach(function(s){s.classList.toggle('active', +s.dataset.step===step);});
+  document.getElementById('prog').style.display = (mode==='reg') ? 'none' : '';   // hide progress for the 1-step registration
   var pct=Math.round(step/TOTAL*100);
   document.getElementById('prog-fill').style.width=pct+'%';
   document.getElementById('prog-label').textContent='Step '+step+' of '+TOTAL;
   document.getElementById('prog-pct').textContent=pct+'%';
   document.getElementById('btn-back').style.visibility=step===1?'hidden':'visible';
-  document.getElementById('btn-next').textContent=step===TOTAL?'Finish & submit':'Next →';
+  document.getElementById('btn-next').textContent = step===TOTAL ? (mode==='reg'?'Create account':'Finish & submit') : 'Next →';
 }
 function setMode(m){
-  mode=m;
+  mode=m; step=1;
   document.getElementById('seg-reg').classList.toggle('on',m==='reg');
   document.getElementById('seg-log').classList.toggle('on',m==='log');
   document.getElementById('pane-reg').classList.toggle('on',m==='reg');
   document.getElementById('pane-log').classList.toggle('on',m==='log');
   document.getElementById('e1').textContent='';
+  show();
 }
 function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
 
@@ -270,7 +275,7 @@ function validate(){
   }
   return true;
 }
-function next(){ if(!validate())return; if(step<TOTAL){step++;show();window.scrollTo(0,0);} else submitWiz(); }
+function next(){ var TOTAL=totalSteps(); if(!validate())return; if(step<TOTAL){step++;show();window.scrollTo(0,0);} else submitWiz(); }
 function prev(){ if(step>1){step--;show();window.scrollTo(0,0);} }
 
 /* ---------- step 2: files ---------- */
@@ -363,13 +368,18 @@ function submitWiz(){
     return '<h3 style="font-family:Georgia,serif;color:#a48256;margin:18px 0 6px">'+title+'</h3><table width="100%" cellpadding="0" cellspacing="0" style="font-size:14px">'
       + rows.map(function(r){return '<tr><td style="padding:7px 0;border-bottom:1px solid #eee;color:#7A7269">'+esc(r[0])+'</td><td style="padding:7px 0;border-bottom:1px solid #eee;text-align:right">'+esc(r[1]||'—')+'</td></tr>';}).join('')
       + '</table>'; }
+  var title = mode==='reg' ? 'New Supplier Registration' : 'Supplier Portal — Rates & Agents Update';
+  var body = (mode==='reg')
+    ? tbl('Account',acct)
+    : tbl('Account',acct)+tbl('Rate sheets',tierRows)+tbl('Agent assignments',agentRows.length?agentRows:[['No agents added','—']]);
   var html='<div style="font-family:Inter,Arial,sans-serif;max-width:620px;margin:0 auto">'
-    +'<h2 style="font-family:Georgia,serif;color:#a48256">New Supplier Portal Submission</h2>'
-    +tbl('Account',acct)+tbl('Rate sheets',tierRows)+tbl('Agent assignments',agentRows.length?agentRows:[['No agents added','—']])
-    +'</div>';
-  var who = mode==='reg' ? val('f-name')||val('f-user') : val('l-user');
+    +'<h2 style="font-family:Georgia,serif;color:#a48256">'+title+'</h2>'+body+'</div>';
+  document.getElementById('done-msg').textContent = (mode==='reg')
+    ? "Thanks for registering! We've received your details and will email your login so you can sign in and add your rate tiers and agents."
+    : "Your rate tiers and agent assignments have been saved and sent to our team.";
+  var who = mode==='reg' ? (val('f-name')||val('f-user')) : val('l-user');
   fetch('https://desert-tracks.vercel.app/api/send_email',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({to:'jaun@desert-tracks.com',subject:'Supplier Portal: '+who, html:html})})
+    body:JSON.stringify({to:'jaun@desert-tracks.com',subject:(mode==='reg'?'Supplier Registration: ':'Supplier Portal: ')+who, html:html})})
   .then(function(){finishDone();}).catch(function(){finishDone();});
 }
 function finishDone(){
