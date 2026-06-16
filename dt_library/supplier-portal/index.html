@@ -101,7 +101,7 @@ textarea{height:90px;resize:vertical;}
 footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
 </style></head>
 <body>
-<div class="cbanner">⚠ Demo preview — supplier portal. Sign-ups and data are for demonstration only and email to our team.</div>
+<div class="cbanner">⚠ Development Version. Rates displayed on this site are illustrative examples only and do not represent actual lodge rates, availability, or bookable inventory. Please contact the property directly for current pricing and availability.</div>
 <header class="site">
   <a class="logo" href="/">Namibia Rates<small>Supplier Portal</small></a>
   <a class="back" href="/">&#8592; Back to home</a>
@@ -123,13 +123,13 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
     <!-- STEP 1: account -->
     <div class="step active" data-step="1">
       <div class="seg">
-        <button type="button" id="seg-reg" class="on" onclick="setMode('reg')">Register property</button>
-        <button type="button" id="seg-log" onclick="setMode('log')">Lodge owner login</button>
+        <button type="button" id="seg-reg" class="on" onclick="setMode('reg')">List Your Business</button>
+        <button type="button" id="seg-log" onclick="setMode('log')">Login</button>
       </div>
 
       <!-- register pane -->
       <div class="pane on" id="pane-reg">
-        <h2>Register your property</h2><p class="sub">Create your supplier account — it takes about a minute.</p>
+        <h2>List your business</h2><p class="sub">Create your supplier account — it takes about a minute.</p>
         <label>Property / hotel name <span class="req">*</span></label><input id="f-name" placeholder="e.g. Acacia Desert Lodge">
         <div class="row">
           <div><label>Property type</label><select id="f-type"><option value="">Select…</option><option>Lodge</option><option>Tented Camp</option><option>Guesthouse</option><option>Hotel</option><option>Campsite</option><option>Collection / Group</option><option>Other</option></select></div>
@@ -150,7 +150,7 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
 
       <!-- login pane -->
       <div class="pane" id="pane-log">
-        <h2>Lodge owner login</h2><p class="sub">Already registered? Sign in to manage your rates and agents.</p>
+        <h2>Login</h2><p class="sub">Already registered? Sign in to manage your rates and agents.</p>
         <label>Username</label><input id="l-user" placeholder="Your username" autocomplete="off">
         <label>Password</label><input id="l-pass" type="password" placeholder="••••••••" autocomplete="current-password">
         <div class="note">Demo mode — any username &amp; password will continue to the rates step.</div>
