@@ -46,12 +46,26 @@ background:none;border:none;cursor:pointer;color:var(--gold);text-decoration:non
 .lodge .note{margin-top:12px;width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;
 font-family:var(--font-body);font-size:.85rem;resize:vertical;min-height:38px;background:#fbfaf8}
 .lodge .rates{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
-.lodge .rate-row{display:flex;justify-content:space-between;gap:12px;font-size:.85rem;padding:4px 0;color:var(--text-main)}
-.lodge .rate-row span:last-child{color:var(--gold);white-space:nowrap}
+.lodge .nights-ctrl{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}
+.lodge .nights-ctrl .step{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--gold);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.lodge .nights-ctrl .step:hover{border-color:var(--gold)}
+.lodge .nights-ctrl .nval{font-family:var(--font-head);font-size:1.1rem;color:var(--text-main);min-width:18px;text-align:center}
+.lodge .rate-row{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:.85rem;padding:5px 0;color:var(--text-main)}
+.lodge .rate-row .rl{flex:1 1 auto;display:flex;align-items:center;gap:8px}
+.lodge .rate-row .qin{width:46px;border:1px solid var(--border);border-radius:6px;padding:4px 6px;font-family:var(--font-body);font-size:.85rem;background:#fbfaf8;text-align:center}
+.lodge .rate-row .amt2{color:var(--gold);white-space:nowrap}
+.lodge .rate-row .xl{border:none;background:none;color:#c08a8a;cursor:pointer;font-size:1.05rem;line-height:1;padding:0 2px}
+.lodge .rate-row .xl:hover{color:#a85a5a}
 .lodge .subtotal{display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-family:var(--font-head);font-size:1.05rem}
 .lodge .subtotal .amt{color:var(--gold)}
 .lodge .stay{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-top:6px}
 .lodge .norate{margin-top:12px;font-size:.82rem;color:var(--text-muted);background:#fbfaf8;border:1px dashed var(--border);border-radius:8px;padding:10px 12px}
+.leg{display:flex;align-items:center;gap:12px;margin:-2px 0 12px;padding-left:46px}
+.leg-line{flex:0 0 18px;height:1px;background:var(--border)}
+.leg-in{flex:1 1 auto;max-width:520px;border:1px dashed var(--border);border-radius:30px;padding:8px 16px;
+font-family:var(--font-body);font-size:.8rem;color:var(--text-main);background:#fbfaf8;text-align:center}
+.leg-in::placeholder{color:#b3a89c}
+.leg-ico{flex:0 0 auto;color:var(--gold);font-size:.95rem}
 #grand{margin-top:8px}
 .grand-bar{display:flex;justify-content:space-between;align-items:baseline;background:#2C2824;color:#fff;border-radius:14px;padding:20px 24px}
 .grand-bar .lbl{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:#B8956A}
@@ -111,6 +125,17 @@ function load(){try{return JSON.parse(sessionStorage.getItem(KEY))||[]}catch(e){
 function save(a){sessionStorage.setItem(KEY,JSON.stringify(a));render()}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
+function recalc(l){var t=0;(l.items||[]).forEach(function(r){r.total=(r.qty||0)*(r.price||0)*(r.nights||1);t+=r.total});l.total=t}
+function update(url,fn){
+  var a=load();
+  for(var i=0;i<a.length;i++){
+    if(a[i].url===url){
+      (a[i].items||[]).forEach(function(r){if(r.price==null){r.price=(r.qty&&r.nights)?r.total/(r.qty*r.nights):0}});
+      fn(a[i]); recalc(a[i]); break;
+    }
+  }
+  save(a);
+}
 
 function render(){
   var items=load(), list=document.getElementById('list'), trip=document.getElementById('trip'), sub=document.getElementById('sub'), grand=document.getElementById('grand');
@@ -131,11 +156,20 @@ function render(){
     var rates='';
     if(it.items&&it.items.length){
       grandTotal+=(it.total||0);
-      var rows=it.items.map(function(r){
-        var nts=r.nights?' <span style="color:var(--text-muted)">× '+r.nights+' night'+(r.nights>1?'s':'')+'</span>':'';
-        return '<div class="rate-row"><span><strong>'+r.qty+'×</strong> '+esc(r.name)+nts+'</span><span>'+money(r.total)+'</span></div>';
+      var nightsVal=it.items[0]&&it.items[0].nights?it.items[0].nights:1;
+      var nightsCtrl='<div class="nights-ctrl">Nights '
+        +'<button class="step nights-dn" data-url="'+esc(it.url)+'" type="button" aria-label="Fewer nights">&minus;</button>'
+        +'<span class="nval">'+nightsVal+'</span>'
+        +'<button class="step nights-up" data-url="'+esc(it.url)+'" type="button" aria-label="More nights">+</button></div>';
+      var rows=it.items.map(function(r,ri){
+        return '<div class="rate-row"><span class="rl">'
+          +'<input class="qin" type="number" min="0" value="'+(r.qty||0)+'" data-url="'+esc(it.url)+'" data-idx="'+ri+'" aria-label="Quantity">'
+          +'<span>× '+esc(r.name)+'</span></span>'
+          +'<span class="amt2">'+money(r.total)+'</span>'
+          +'<button class="xl rm-line" data-url="'+esc(it.url)+'" data-idx="'+ri+'" type="button" aria-label="Remove line">&times;</button>'
+          +'</div>';
       }).join('');
-      rates='<div class="rates">'+rows+'<div class="subtotal"><span>Subtotal</span><span class="amt">'+money(it.total)+'</span></div></div>';
+      rates='<div class="rates">'+nightsCtrl+rows+'<div class="subtotal"><span>Subtotal</span><span class="amt">'+money(it.total)+'</span></div></div>';
     } else {
       rates='<div class="norate">No rates selected yet. Open this lodge’s rate sheet, choose your dates &amp; rooms, then tap “+ Add to Itinerary” again to capture the amount.</div>';
     }
@@ -155,6 +189,20 @@ function render(){
     var a=load(),u=t.getAttribute('data-url');
     a.forEach(function(x){if(x.url===u)x.note=t.value});
     sessionStorage.setItem(KEY,JSON.stringify(a));
+  })});
+  list.querySelectorAll('.nights-up').forEach(function(b){b.addEventListener('click',function(){
+    update(b.getAttribute('data-url'),function(l){var n=((l.items[0]&&l.items[0].nights)||1)+1;l.items.forEach(function(r){r.nights=n})});
+  })});
+  list.querySelectorAll('.nights-dn').forEach(function(b){b.addEventListener('click',function(){
+    update(b.getAttribute('data-url'),function(l){var n=Math.max(1,((l.items[0]&&l.items[0].nights)||1)-1);l.items.forEach(function(r){r.nights=n})});
+  })});
+  list.querySelectorAll('.qin').forEach(function(inp){inp.addEventListener('change',function(){
+    var url=inp.getAttribute('data-url'),idx=+inp.getAttribute('data-idx'),q=Math.max(0,parseInt(inp.value,10)||0);
+    update(url,function(l){if(l.items[idx])l.items[idx].qty=q});
+  })});
+  list.querySelectorAll('.rm-line').forEach(function(b){b.addEventListener('click',function(){
+    var url=b.getAttribute('data-url'),idx=+b.getAttribute('data-idx');
+    update(url,function(l){l.items.splice(idx,1)});
   })});
 }
 

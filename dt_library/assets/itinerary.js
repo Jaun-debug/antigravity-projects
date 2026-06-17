@@ -101,18 +101,21 @@
 
   /* ---- read the rates the agent has selected on this sheet (if any) ---- */
   function currentRates() {
-    var items = [], total = 0, dateIn = '', dateOut = '';
+    var items = [], total = 0, dateIn = '', dateOut = '', dateInISO = '', dateOutISO = '';
     try {
       if (typeof selectedItems !== 'undefined' && Array.isArray(selectedItems)) {
         items = selectedItems.map(function (it) {
-          return { qty: it.qty, name: it.name, nights: it.nights, total: it.total };
+          return { qty: it.qty, name: it.name, nights: it.nights, price: it.price, total: it.total };
         });
         total = items.reduce(function (a, i) { return a + (i.total || 0); }, 0);
       }
     } catch (e) {}
     try { if (typeof checkIn !== 'undefined' && checkIn) dateIn = fmtDate(checkIn); } catch (e) {}
     try { if (typeof checkOut !== 'undefined' && checkOut) dateOut = fmtDate(checkOut); } catch (e) {}
-    return { items: items, total: total, dateIn: dateIn, dateOut: dateOut };
+    // ISO dates straight from the booking fields (set by the sheet's own calendar)
+    try { var di = document.getElementById('b-date-in'); if (di) dateInISO = di.value || ''; } catch (e) {}
+    try { var dou = document.getElementById('b-date-out'); if (dou) dateOutISO = dou.value || ''; } catch (e) {}
+    return { items: items, total: total, dateIn: dateIn, dateOut: dateOut, dateInISO: dateInISO, dateOutISO: dateOutISO };
   }
 
   /* ---- add the lodge of the current sheet (auto-detected) ---- */
@@ -130,8 +133,12 @@
       items: r.items,
       total: r.total,
       dateIn: r.dateIn,
-      dateOut: r.dateOut
+      dateOut: r.dateOut,
+      dateInISO: r.dateInISO,
+      dateOutISO: r.dateOutISO
     });
+    // remember the checkout so the NEXT lodge's calendar can carry on from it
+    if (ok && r.dateOutISO) { try { sessionStorage.setItem('nr_cursor', r.dateOutISO); } catch (e) {} }
     if (ok && btn) {
       var orig = btn.getAttribute('data-label') || btn.textContent;
       btn.setAttribute('data-label', orig);
@@ -141,7 +148,38 @@
     }
   };
 
+  /* ---- carry the previous lodge's check-out onto this sheet's calendar ---- */
+  function applyCarryOver() {
+    try {
+      if (typeof selectDate !== 'function' || typeof checkIn === 'undefined') return; // not a rate sheet
+      if (checkIn) return;                       // agent has already picked dates here
+      var iso = sessionStorage.getItem('nr_cursor');
+      if (!iso) return;
+      var d = new Date(iso + 'T00:00:00');
+      if (isNaN(d.getTime())) return;
+      var today = new Date(); today.setHours(0, 0, 0, 0);
+      if (d < today) return;                     // never pre-select a past date
+      if (typeof calMonth !== 'undefined') { calMonth = d.getMonth(); calYear = d.getFullYear(); }
+      selectDate(d);                             // sets check-in; agent picks check-out for nights
+      flagCarry(iso);
+    } catch (e) {}
+  }
+  function flagCarry(iso) {
+    // gentle hint that the date was carried over from the previous lodge
+    var disp = document.getElementById('b-dates-display');
+    if (disp && /Select dates/i.test(disp.innerText || '')) { /* leave default */ }
+    var host = document.getElementById('cal-root');
+    if (host && !document.getElementById('nr-carry-note')) {
+      var n = document.createElement('div');
+      n.id = 'nr-carry-note';
+      n.style.cssText = 'text-align:center;font-family:Inter,sans-serif;font-size:.78rem;color:#7A7269;margin:6px 0 0';
+      n.innerHTML = 'Check-in carried over from your previous lodge. Pick a check-out date to set the nights.';
+      host.parentNode.insertBefore(n, host.nextSibling);
+    }
+  }
+
+  function init() { render(); applyCarryOver(); }
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', render);
-  } else { render(); }
+    window.addEventListener('load', init);
+  } else { init(); }
 })();
