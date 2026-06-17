@@ -505,14 +505,18 @@ module.exports = (req, res) => {
   // Always hand back the session token so the browser can stay signed in.
   const out = { ok: true, token: validToken };
 
-  // If a lodge was requested, include its net STO rates.
+  // If a lodge was requested and we hold inline net rates for it, include them.
+  // Many lodges keep their net rates in a separate STO sheet instead of here,
+  // so a lodge that isn't in STO_DB is normal and must NEVER block a valid
+  // login. In that case we simply return the session token without rates; the
+  // lodge page then sends the signed-in agent straight to its bookable STO
+  // sheet.
   if (lodge) {
     const data = STO_DB[lodge];
-    if (!data) {
-      return res.status(404).json({ error: 'Lodge not found.' });
+    if (data) {
+      out.lodge = lodge;
+      out.rates = data;
     }
-    out.lodge = lodge;
-    out.rates = data;
   }
 
   return res.status(200).json(out);

@@ -294,21 +294,21 @@ function showSto(d){
 
 // On load: if a session token exists, fetch STO automatically.
 function applySession(){
-  var token=localStorage.getItem(TOKEN_KEY);
+  var token=sessionStorage.getItem(TOKEN_KEY);
   if(!token){ showRack(); return; }
   fetch('/api/sto',{method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({token:token,lodge:LODGE})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(res){
     if(res.ok && res.j && res.j.rates){ showSto(res.j.rates); }
-    else { localStorage.removeItem(TOKEN_KEY); showRack(); }   // stale/invalid session
+    else { showRack(); }   // no inline rates for this lodge; keep the agent's session
   })
   .catch(function(){ showRack(); });
 }
 
 // Header button: signed in -> sign out; signed out -> open the login modal.
 function agentBtn(){
-  if(localStorage.getItem(TOKEN_KEY)){ localStorage.removeItem(TOKEN_KEY); showRack(); }
+  if(sessionStorage.getItem(TOKEN_KEY)){ sessionStorage.removeItem(TOKEN_KEY); location.reload(); }
   else { openLoginModal(); }
 }
 function openLoginModal(){
@@ -330,9 +330,9 @@ function submitLogin(){
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(res){
     if(res.ok && res.j && res.j.token){
-      localStorage.setItem(TOKEN_KEY,res.j.token);
+      
       closeLoginModal();
-      if(res.j.rates){ showSto(res.j.rates); } else { applySession(); }
+      sessionStorage.setItem(TOKEN_KEY,res.j.token); location.reload();
     } else {
       err.textContent=(res.j && res.j.error) ? res.j.error : 'Sign in failed.';
     }
