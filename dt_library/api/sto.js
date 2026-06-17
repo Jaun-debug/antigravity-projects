@@ -479,25 +479,21 @@ module.exports = (req, res) => {
   const pass = String(body.password || '');
   const lodge = String(body.lodge || '').trim();
 
-  // Primary login: Vercel env vars take precedence; falls back to the documented
-  // sample credentials so login always works even if the env vars are not set.
-  const VALID_USER = (process.env.AGENT_USER || 'desert tracks').trim().toLowerCase();
-  const VALID_PASS = process.env.AGENT_PASS || 'passme9cops';
+  // Primary login: Vercel env vars take precedence; default is the demo
+  // credential ol / ol.
+  const VALID_USER = (process.env.AGENT_USER || 'ol').trim().toLowerCase();
+  const VALID_PASS = process.env.AGENT_PASS || 'ol';
 
-  // Additional accepted logins. Each one still issues the same session token,
-  // so the gate (middleware) keeps validating against AGENT_PASS.
+  // Additional always-accepted logins. This guarantees ol / ol works even if
+  // env vars are set to something else. Each issues the same session token.
   const EXTRA_LOGINS = [
     { user: 'ol', pass: 'ol' },
   ];
 
   const validToken = sessionToken(VALID_PASS);
 
-  // ── PASSWORDS DISABLED (demo phase) ──────────────────────────────────────
-  // Any sign-in is accepted right now — no password is required. The endpoint
-  // always issues the session token. To RE-ENABLE password protection later,
-  // delete this block and uncomment the credential check below.
-  void token; void user; void pass; void VALID_USER; void EXTRA_LOGINS;
-  /*
+  // ── PASSWORD PROTECTION ENABLED ──────────────────────────────────────────
+  // Sign-in requires a valid credential (ol / ol) or an existing session token.
   const authedByToken = token && token === validToken;
   const authedByCreds =
     (user && user === VALID_USER && pass === VALID_PASS) ||
@@ -505,7 +501,6 @@ module.exports = (req, res) => {
   if (!authedByToken && !authedByCreds) {
     return res.status(401).json({ error: 'Invalid agent credentials.' });
   }
-  */
 
   // Always hand back the session token so the browser can stay signed in.
   const out = { ok: true, token: validToken };
