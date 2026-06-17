@@ -45,6 +45,18 @@ background:none;border:none;cursor:pointer;color:var(--gold);text-decoration:non
 .lodge .links .rm{color:#b46a6a}
 .lodge .note{margin-top:12px;width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;
 font-family:var(--font-body);font-size:.85rem;resize:vertical;min-height:38px;background:#fbfaf8}
+.lodge .rates{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
+.lodge .rate-row{display:flex;justify-content:space-between;gap:12px;font-size:.85rem;padding:4px 0;color:var(--text-main)}
+.lodge .rate-row span:last-child{color:var(--gold);white-space:nowrap}
+.lodge .subtotal{display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);font-family:var(--font-head);font-size:1.05rem}
+.lodge .subtotal .amt{color:var(--gold)}
+.lodge .stay{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin-top:6px}
+.lodge .norate{margin-top:12px;font-size:.82rem;color:var(--text-muted);background:#fbfaf8;border:1px dashed var(--border);border-radius:8px;padding:10px 12px}
+#grand{margin-top:8px}
+.grand-bar{display:flex;justify-content:space-between;align-items:baseline;background:#2C2824;color:#fff;border-radius:14px;padding:20px 24px}
+.grand-bar .lbl{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:#B8956A}
+.grand-bar .amt{font-family:var(--font-head);font-size:1.9rem;font-weight:400}
+.grand-note{font-size:.72rem;color:var(--text-muted);margin-top:8px;text-align:right}
 .trip{background:#fff;border:1px solid var(--border);border-radius:16px;padding:26px;margin-top:30px}
 .trip h2{font-family:var(--font-head);font-weight:400;font-size:1.5rem;margin-bottom:18px}
 .field{margin-bottom:16px}
@@ -77,6 +89,8 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
 
   <div id="list"></div>
 
+  <div id="grand"></div>
+
   <div class="trip" id="trip">
     <h2>Send or print this itinerary</h2>
     <div class="field"><label>Your email (consultant)</label><input id="agent-email" type="email" placeholder="you@agency.com"></div>
@@ -96,26 +110,44 @@ var KEY='nr_itinerary';
 function load(){try{return JSON.parse(sessionStorage.getItem(KEY))||[]}catch(e){return[]}}
 function save(a){sessionStorage.setItem(KEY,JSON.stringify(a));render()}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
 
 function render(){
-  var items=load(), list=document.getElementById('list'), trip=document.getElementById('trip'), sub=document.getElementById('sub');
+  var items=load(), list=document.getElementById('list'), trip=document.getElementById('trip'), sub=document.getElementById('sub'), grand=document.getElementById('grand');
   if(!items.length){
     trip.style.display='none';
+    grand.innerHTML='';
     sub.textContent='';
     list.innerHTML='<div class="empty"><p>Your itinerary is empty. Open any lodge’s rate sheet and tap “+ Add to Itinerary”.</p><a class="btn" href="/">Browse lodges</a></div>';
     return;
   }
   trip.style.display='';
   sub.textContent=items.length+(items.length===1?' lodge':' lodges')+' in this itinerary.';
+  var grandTotal=0;
   list.innerHTML=items.map(function(it,i){
     var view=it.url?'<a href="'+esc(it.url)+'">View rates</a>':'';
     var region=it.region?'<div class="region">'+esc(it.region)+'</div>':'';
+    var stay=(it.dateIn&&it.dateOut)?'<div class="stay">'+esc(it.dateIn)+' &rarr; '+esc(it.dateOut)+'</div>':'';
+    var rates='';
+    if(it.items&&it.items.length){
+      grandTotal+=(it.total||0);
+      var rows=it.items.map(function(r){
+        var nts=r.nights?' <span style="color:var(--text-muted)">× '+r.nights+' night'+(r.nights>1?'s':'')+'</span>':'';
+        return '<div class="rate-row"><span><strong>'+r.qty+'×</strong> '+esc(r.name)+nts+'</span><span>'+money(r.total)+'</span></div>';
+      }).join('');
+      rates='<div class="rates">'+rows+'<div class="subtotal"><span>Subtotal</span><span class="amt">'+money(it.total)+'</span></div></div>';
+    } else {
+      rates='<div class="norate">No rates selected yet. Open this lodge’s rate sheet, choose your dates &amp; rooms, then tap “+ Add to Itinerary” again to capture the amount.</div>';
+    }
     return '<div class="lodge"><div class="num">'+(i+1)+'</div><div class="info">'
-      +'<div class="name">'+esc(it.name)+'</div>'+region
+      +'<div class="name">'+esc(it.name)+'</div>'+region+stay
       +'<div class="links">'+view+'<button class="rm" data-url="'+esc(it.url)+'">Remove</button></div>'
+      +rates
       +'<textarea class="note" data-url="'+esc(it.url)+'" placeholder="Notes for this lodge (nights, room type, dates…)">'+esc(it.note||'')+'</textarea>'
       +'</div></div>';
   }).join('');
+  grand.innerHTML='<div class="grand-bar"><span class="lbl">Estimated total</span><span class="amt">'+money(grandTotal)+'</span></div>'
+    +'<p class="grand-note">Sum of captured rates. Lodges with no rates selected count as N$ 0 until you add them with rooms chosen.</p>';
   list.querySelectorAll('.rm').forEach(function(b){b.addEventListener('click',function(){
     save(load().filter(function(x){return x.url!==b.getAttribute('data-url')}));
   })});
@@ -131,13 +163,30 @@ document.getElementById('btn-clear').addEventListener('click',function(){
 });
 
 function buildEmail(items,agent,client,notes){
+  var grandTotal=0;
   var rows=items.map(function(it,i){
+    var stay=(it.dateIn&&it.dateOut)?' &nbsp;·&nbsp; '+esc(it.dateIn)+' → '+esc(it.dateOut):'';
+    var rateLines='';
+    if(it.items&&it.items.length){
+      grandTotal+=(it.total||0);
+      rateLines=it.items.map(function(r){
+        return '<div style="font-size:13px;color:#555;padding:2px 0"><strong>'+r.qty+'×</strong> '+esc(r.name)
+          +(r.nights?' × '+r.nights+' night'+(r.nights>1?'s':''):'')
+          +' — <span style="color:#B8956A">'+money(r.total)+'</span></div>';
+      }).join('')
+      +'<div style="font-size:13px;margin-top:4px"><strong>Subtotal: <span style="color:#B8956A">'+money(it.total)+'</span></strong></div>';
+    } else {
+      rateLines='<div style="font-size:12px;color:#999;font-style:italic;padding:2px 0">No rates selected</div>';
+    }
     return '<tr><td style="padding:12px 10px;border-bottom:1px solid #f0ede8;vertical-align:top">'
       +'<strong style="font-family:Georgia,serif;font-size:15px">'+(i+1)+'. '+esc(it.name)+'</strong>'
-      +(it.region?'<br><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269">'+esc(it.region)+'</span>':'')
+      +(it.region?'<br><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269">'+esc(it.region)+stay+'</span>':'')
       +(it.note?'<br><span style="font-size:13px;color:#555">'+esc(it.note)+'</span>':'')
+      +'<div style="margin-top:6px">'+rateLines+'</div>'
       +'</td></tr>';
   }).join('');
+  rows+='<tr><td style="padding:14px 10px;font-family:Georgia,serif;font-size:16px"><strong>Estimated Total</strong>'
+    +'<span style="float:right;color:#B8956A">'+money(grandTotal)+'</span></td></tr>';
   return '<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden">'
     +'<div style="background:#2C2824;padding:32px;text-align:center;color:#fff">'
     +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A">Namibia Rates Trade Portal</p>'

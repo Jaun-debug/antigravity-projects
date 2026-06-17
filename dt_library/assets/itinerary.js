@@ -18,8 +18,13 @@
   function count() { return load().length; }
   function add(item) {
     var a = load();
-    if (a.some(function (x) { return x.url === item.url; })) {
-      toast(item.name + ' is already in your itinerary'); return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i].url === item.url) {
+        // already there — refresh its rate data, keep any note the agent typed
+        if (a[i].note && !item.note) item.note = a[i].note;
+        a[i] = item; save(a);
+        toast(item.name + ' updated in itinerary'); return true;
+      }
     }
     a.push(item); save(a);
     toast(item.name + ' added to itinerary'); return true;
@@ -89,17 +94,43 @@
     return s.replace(/\b\w/g, function (m) { return m.toUpperCase(); });
   }
 
+  function fmtDate(d) {
+    try { return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); }
+    catch (e) { return ''; }
+  }
+
+  /* ---- read the rates the agent has selected on this sheet (if any) ---- */
+  function currentRates() {
+    var items = [], total = 0, dateIn = '', dateOut = '';
+    try {
+      if (typeof selectedItems !== 'undefined' && Array.isArray(selectedItems)) {
+        items = selectedItems.map(function (it) {
+          return { qty: it.qty, name: it.name, nights: it.nights, total: it.total };
+        });
+        total = items.reduce(function (a, i) { return a + (i.total || 0); }, 0);
+      }
+    } catch (e) {}
+    try { if (typeof checkIn !== 'undefined' && checkIn) dateIn = fmtDate(checkIn); } catch (e) {}
+    try { if (typeof checkOut !== 'undefined' && checkOut) dateOut = fmtDate(checkOut); } catch (e) {}
+    return { items: items, total: total, dateIn: dateIn, dateOut: dateOut };
+  }
+
   /* ---- add the lodge of the current sheet (auto-detected) ---- */
   window.nrAddCurrentLodge = function (btn) {
     var name = (document.title || '').split(' — ')[0].split(' | ')[0].split(' STO')[0].trim() || 'This lodge';
     var link = document.querySelector('#main-view a.back-btn[href*="-accommodation"]')
             || document.querySelector('a[href*="-accommodation/"]');
     var regionUrl = link ? link.getAttribute('href') : '';
+    var r = currentRates();
     var ok = add({
       name: name,
       region: regionLabel(regionUrl),
       regionUrl: regionUrl,
-      url: location.pathname
+      url: location.pathname,
+      items: r.items,
+      total: r.total,
+      dateIn: r.dateIn,
+      dateOut: r.dateOut
     });
     if (ok && btn) {
       var orig = btn.getAttribute('data-label') || btn.textContent;
