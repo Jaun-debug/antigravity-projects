@@ -177,6 +177,7 @@ table input.qty{width:54px;padding:5px;border:1px solid var(--border);border-rad
 </head>
 <body>
 <div id="main-view" class="main-view">
+  <a class="back-btn" href="/fish-river-canyon-accommodation/" style="text-decoration:none">← Back to Region</a>
   <div class="site-hero">
   <div class="hero-dot"></div>
   <span class="hero-display">Hobas</span>
@@ -207,7 +208,7 @@ table input.qty{width:54px;padding:5px;border:1px solid var(--border);border-rad
 <div id="detail-view" class="detail-view">
 <div class="wrap" style="padding-top:40px">
   <button class="back-btn" onclick="closeRates()">← Back to Lodge</button>
-  <a class="back-btn" href="/fish-river-canyon-accommodation/" style="margin-left:10px;text-decoration:none">← Back to Region</a>
+  <button class="back-btn nr-add-btn" type="button" onclick="nrAddCurrentLodge(this)" style="margin-left:10px;border-color:var(--gold);color:var(--gold)">+ Add to Itinerary</button>
   <div class="intro-grid">
     <div class="intro-block">
       <span class="intro-loc">Fish River Canyon Area</span>
@@ -423,5 +424,6 @@ document.addEventListener('keydown',function(e){
 });
 
 </script>
+<script src="/assets/itinerary.js" defer></script>
 </body>
 </html>
