@@ -43,8 +43,20 @@ display:flex;align-items:center;justify-content:center;font-weight:600;font-size
 .lodge .links a,.lodge .links button{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;
 background:none;border:none;cursor:pointer;color:var(--gold);text-decoration:none;padding:0;font-family:var(--font-body)}
 .lodge .links .rm{color:#b46a6a}
+.lodge .desc{margin-top:8px;font-size:.9rem;color:var(--text-muted);line-height:1.6}
+.lodge .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.lodge .photos img{width:100%;height:96px;object-fit:cover;border-radius:8px;display:block}
 .lodge .note{margin-top:12px;width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;
 font-family:var(--font-body);font-size:.85rem;resize:vertical;min-height:38px;background:#fbfaf8}
+/* client mode — hide all price/agent-only bits, keep photos + descriptions + distances */
+body.client .rates,body.client .subtotal,body.client #grand,body.client .grand-bar,body.client .grand-note,
+body.client .lodge .links,body.client .note,body.client .nights-ctrl,body.client .qin,body.client .rm-line{display:none!important}
+body.client .leg-in{border:none;background:none;color:var(--text-muted);pointer-events:none}
+.client-toggle{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.8rem;color:var(--text-main)}
+.client-toggle input{width:18px;height:18px}
+.client-flag{display:none;background:#87a996;color:#fff;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+padding:7px 14px;border-radius:20px;margin-bottom:18px}
+body.client .client-flag{display:inline-block}
 .lodge .rates{margin-top:12px;border-top:1px solid var(--border);padding-top:10px}
 .lodge .nights-ctrl{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}
 .lodge .nights-ctrl .step{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);background:#fff;color:var(--gold);font-size:1rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
@@ -100,6 +112,7 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
   <p class="eyebrow">Trade Portal</p>
   <h1>Your Itinerary</h1>
   <p class="sub" id="sub">Lodges you've added this session.</p>
+  <span class="client-flag">Client view — rates hidden</span>
 
   <div id="list"></div>
 
@@ -107,8 +120,10 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
 
   <div class="trip" id="trip">
     <h2>Send or print this itinerary</h2>
+    <label class="client-toggle"><input type="checkbox" id="client-mode"> <span>Client view — hide all rates &amp; agent controls (for sending to a traveller)</span></label>
     <div class="field"><label>Your email (consultant)</label><input id="agent-email" type="email" placeholder="you@agency.com"></div>
     <div class="field"><label>Client / trip name</label><input id="client" type="text" placeholder="e.g. Smith family — Namibia 2026"></div>
+    <div class="field"><label>Send to (leave blank to send to operations)</label><input id="send-to" type="email" placeholder="client@email.com"></div>
     <div class="field"><label>Trip notes (optional)</label><textarea id="trip-notes" placeholder="Routing, dates, preferences…"></textarea></div>
     <div class="actions">
       <button class="btn dark" id="btn-email" type="button">Email itinerary</button>
@@ -173,12 +188,20 @@ function render(){
     } else {
       rates='<div class="norate">No rates selected yet. Open this lodge’s rate sheet, choose your dates &amp; rooms, then tap “+ Add to Itinerary” again to capture the amount.</div>';
     }
+    var desc=it.desc?'<div class="desc">'+esc(it.desc)+'</div>':'';
+    var photos=(it.photos&&it.photos.length)?'<div class="photos">'+it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" alt="'+esc(it.name)+'">';}).join('')+'</div>':'';
+    var leg=(i<items.length-1)
+      ? '<div class="leg"><span class="leg-line"></span><span class="leg-ico">&#9660;</span>'
+        +'<input class="leg-in" data-url="'+esc(it.url)+'" value="'+esc(it.legToNext||'')+'" placeholder="Distance / drive to next lodge — e.g. 210 km · ~2h30">'
+        +'<span class="leg-ico">&#9660;</span><span class="leg-line"></span></div>'
+      : '';
     return '<div class="lodge"><div class="num">'+(i+1)+'</div><div class="info">'
       +'<div class="name">'+esc(it.name)+'</div>'+region+stay
       +'<div class="links">'+view+'<button class="rm" data-url="'+esc(it.url)+'">Remove</button></div>'
+      +desc+photos
       +rates
       +'<textarea class="note" data-url="'+esc(it.url)+'" placeholder="Notes for this lodge (nights, room type, dates…)">'+esc(it.note||'')+'</textarea>'
-      +'</div></div>';
+      +'</div></div>'+leg;
   }).join('');
   grand.innerHTML='<div class="grand-bar"><span class="lbl">Estimated total</span><span class="amt">'+money(grandTotal)+'</span></div>'
     +'<p class="grand-note">Sum of captured rates. Lodges with no rates selected count as N$ 0 until you add them with rooms chosen.</p>';
@@ -204,70 +227,100 @@ function render(){
     var url=b.getAttribute('data-url'),idx=+b.getAttribute('data-idx');
     update(url,function(l){l.items.splice(idx,1)});
   })});
+  list.querySelectorAll('.leg-in').forEach(function(inp){inp.addEventListener('change',function(){
+    var a=load(),u=inp.getAttribute('data-url');
+    a.forEach(function(x){if(x.url===u)x.legToNext=inp.value});
+    sessionStorage.setItem(KEY,JSON.stringify(a));
+  })});
 }
 
 document.getElementById('btn-clear').addEventListener('click',function(){
   if(confirm('Clear all lodges from this itinerary?'))save([]);
 });
 
-function buildEmail(items,agent,client,notes){
+function buildEmail(items,agent,client,notes,clientMode){
   var grandTotal=0;
   var rows=items.map(function(it,i){
     var stay=(it.dateIn&&it.dateOut)?' &nbsp;·&nbsp; '+esc(it.dateIn)+' → '+esc(it.dateOut):'';
+    var photos=(it.photos&&it.photos.length)?'<div style="margin:8px 0 4px">'
+      +it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" width="168" style="width:168px;height:108px;object-fit:cover;border-radius:8px;margin:0 4px 4px 0" alt="">';}).join('')+'</div>':'';
+    var desc=it.desc?'<div style="font-size:13px;color:#555;line-height:1.6;margin:4px 0">'+esc(it.desc)+'</div>':'';
     var rateLines='';
-    if(it.items&&it.items.length){
-      grandTotal+=(it.total||0);
-      rateLines=it.items.map(function(r){
-        return '<div style="font-size:13px;color:#555;padding:2px 0"><strong>'+r.qty+'×</strong> '+esc(r.name)
-          +(r.nights?' × '+r.nights+' night'+(r.nights>1?'s':''):'')
-          +' — <span style="color:#B8956A">'+money(r.total)+'</span></div>';
-      }).join('')
-      +'<div style="font-size:13px;margin-top:4px"><strong>Subtotal: <span style="color:#B8956A">'+money(it.total)+'</span></strong></div>';
-    } else {
-      rateLines='<div style="font-size:12px;color:#999;font-style:italic;padding:2px 0">No rates selected</div>';
+    if(!clientMode){
+      if(it.items&&it.items.length){
+        grandTotal+=(it.total||0);
+        rateLines=it.items.map(function(r){
+          return '<div style="font-size:13px;color:#555;padding:2px 0"><strong>'+r.qty+'×</strong> '+esc(r.name)
+            +(r.nights?' × '+r.nights+' night'+(r.nights>1?'s':''):'')
+            +' — <span style="color:#B8956A">'+money(r.total)+'</span></div>';
+        }).join('')
+        +'<div style="font-size:13px;margin-top:4px"><strong>Subtotal: <span style="color:#B8956A">'+money(it.total)+'</span></strong></div>';
+      } else {
+        rateLines='<div style="font-size:12px;color:#999;font-style:italic;padding:2px 0">No rates selected</div>';
+      }
     }
-    return '<tr><td style="padding:12px 10px;border-bottom:1px solid #f0ede8;vertical-align:top">'
+    var lodgeRow='<tr><td style="padding:12px 10px;border-bottom:1px solid #f0ede8;vertical-align:top">'
       +'<strong style="font-family:Georgia,serif;font-size:15px">'+(i+1)+'. '+esc(it.name)+'</strong>'
       +(it.region?'<br><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269">'+esc(it.region)+stay+'</span>':'')
-      +(it.note?'<br><span style="font-size:13px;color:#555">'+esc(it.note)+'</span>':'')
-      +'<div style="margin-top:6px">'+rateLines+'</div>'
+      +desc+photos
+      +(!clientMode&&it.note?'<div style="font-size:13px;color:#555;margin-top:4px">'+esc(it.note)+'</div>':'')
+      +(rateLines?'<div style="margin-top:6px">'+rateLines+'</div>':'')
       +'</td></tr>';
+    var leg=(i<items.length-1&&it.legToNext)
+      ? '<tr><td style="padding:8px 10px;text-align:center;font-size:12px;letter-spacing:1px;color:#7A7269">▼ '+esc(it.legToNext)+' ▼</td></tr>'
+      : '';
+    return lodgeRow+leg;
   }).join('');
-  rows+='<tr><td style="padding:14px 10px;font-family:Georgia,serif;font-size:16px"><strong>Estimated Total</strong>'
-    +'<span style="float:right;color:#B8956A">'+money(grandTotal)+'</span></td></tr>';
+  if(!clientMode){
+    rows+='<tr><td style="padding:14px 10px;font-family:Georgia,serif;font-size:16px"><strong>Estimated Total</strong>'
+      +'<span style="float:right;color:#B8956A">'+money(grandTotal)+'</span></td></tr>';
+  }
+  var infoTable=clientMode
+    ? '<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Lodges</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">'+items.length+'</td></tr>'
+    : '<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">'+esc(agent||'—')+'</td></tr>'
+      +'<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Lodges</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">'+items.length+'</td></tr>';
   return '<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden">'
     +'<div style="background:#2C2824;padding:32px;text-align:center;color:#fff">'
-    +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A">Namibia Rates Trade Portal</p>'
-    +'<h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300">Proposed Itinerary</h1>'
+    +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A">'+(clientMode?'Namibia Rates':'Namibia Rates Trade Portal')+'</p>'
+    +'<h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300">'+(clientMode?'Your Namibia Itinerary':'Proposed Itinerary')+'</h1>'
     +(client?'<p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7BA99A">'+esc(client)+'</p>':'')
     +'</div><div style="padding:32px;background:#fff">'
-    +'<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px">'
-    +'<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">'+esc(agent||'—')+'</td></tr>'
-    +'<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Lodges</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">'+items.length+'</td></tr>'
-    +'</table>'
-    +'<p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8956A;margin-bottom:12px">Lodges</p>'
+    +'<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px">'+infoTable+'</table>'
+    +'<p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#B8956A;margin-bottom:12px">Itinerary</p>'
     +'<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px">'+rows+'</table>'
     +'<div style="background:#f9f7f4;padding:18px;border-radius:8px;border-left:3px solid #7BA99A">'
-    +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269">Trip notes</p>'
+    +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#7A7269">'+(clientMode?'Notes':'Trip notes')+'</p>'
     +'<p style="margin:0;font-size:14px;color:#555;white-space:pre-line">'+(esc(notes)||'No additional notes.')+'</p></div>'
     +'</div></div>';
 }
 
+// client view toggle — hides prices & agent controls on screen and for printing
+document.getElementById('client-mode').addEventListener('change',function(){
+  document.body.classList.toggle('client',this.checked);
+});
+
 document.getElementById('btn-email').addEventListener('click',async function(){
   var items=load();
   if(!items.length){alert('Your itinerary is empty.');return}
+  var clientMode=document.getElementById('client-mode').checked;
   var agent=document.getElementById('agent-email').value.trim();
   var client=document.getElementById('client').value.trim();
   var notes=document.getElementById('trip-notes').value.trim();
+  var sendTo=document.getElementById('send-to').value.trim();
   if(!agent){alert('Please enter your email so we know who the itinerary is from.');return}
+  var to=sendTo||'bookings@desert-tracks.com';
+  if(clientMode && !sendTo){
+    if(!confirm('Client view is on but no client email is set, so this will go to operations (bookings@desert-tracks.com), not the client. Continue?'))return;
+  }
   var btn=this, orig=btn.textContent;
   btn.innerHTML='<span style="display:inline-block;border:2px solid #fff;border-top-color:transparent;border-radius:50%;width:13px;height:13px;animation:spin 1s linear infinite;margin-right:8px;vertical-align:middle"></span>Sending…';
   btn.disabled=true;
-  var html=buildEmail(items,agent,client,notes);
+  var html=buildEmail(items,agent,client,notes,clientMode);
+  var subject=(clientMode?'Your Namibia itinerary':'Itinerary')+(client?': '+client:'')+' — '+items.length+' lodges';
   try{
     var res=await fetch('https://desert-tracks.vercel.app/api/send_email',{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({to:'bookings@desert-tracks.com',subject:'Itinerary'+(client?': '+client:'')+' — '+items.length+' lodges',html:html})});
-    if(res.ok){alert('Itinerary sent to bookings@desert-tracks.com');}
+      body:JSON.stringify({to:to,subject:subject,html:html})});
+    if(res.ok){alert('Itinerary sent to '+to);}
     else{var d=await res.json().catch(function(){return{}});alert('Failed: '+(d.error||'Unknown error'));}
   }catch(e){alert('Network error. Please try again.');}
   finally{btn.textContent=orig;btn.disabled=false;}

@@ -118,6 +118,23 @@
     return { items: items, total: total, dateIn: dateIn, dateOut: dateOut, dateInISO: dateInISO, dateOutISO: dateOutISO };
   }
 
+  /* ---- short description + up to 3 photos from the sheet ---- */
+  function lodgeBlurb() {
+    var el = document.querySelector('.intro-text') || document.querySelector('.hero-intro');
+    var txt = el ? (el.textContent || '').trim() : '';
+    if (txt.length > 320) txt = txt.slice(0, 317).replace(/\s+\S*$/, '') + '…';
+    return txt;
+  }
+  function lodgePhotos() {
+    var urls = [], seen = {};
+    var g = document.querySelectorAll('.gallery-img, .lodge-card-img');
+    for (var i = 0; i < g.length && urls.length < 3; i++) {
+      var s = g[i].getAttribute('src');
+      if (s && !seen[s]) { seen[s] = 1; urls.push(s); }
+    }
+    return urls;
+  }
+
   /* ---- add the lodge of the current sheet (auto-detected) ---- */
   window.nrAddCurrentLodge = function (btn) {
     var name = (document.title || '').split(' — ')[0].split(' | ')[0].split(' STO')[0].trim() || 'This lodge';
@@ -135,7 +152,9 @@
       dateIn: r.dateIn,
       dateOut: r.dateOut,
       dateInISO: r.dateInISO,
-      dateOutISO: r.dateOutISO
+      dateOutISO: r.dateOutISO,
+      desc: lodgeBlurb(),
+      photos: lodgePhotos()
     });
     // remember the checkout so the NEXT lodge's calendar can carry on from it
     if (ok && r.dateOutISO) { try { sessionStorage.setItem('nr_cursor', r.dateOutISO); } catch (e) {} }
