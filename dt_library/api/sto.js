@@ -492,15 +492,20 @@ module.exports = (req, res) => {
 
   const validToken = sessionToken(VALID_PASS);
 
-  // Authenticate by an existing session token OR by any valid username + password.
+  // ── PASSWORDS DISABLED (demo phase) ──────────────────────────────────────
+  // Any sign-in is accepted right now — no password is required. The endpoint
+  // always issues the session token. To RE-ENABLE password protection later,
+  // delete this block and uncomment the credential check below.
+  void token; void user; void pass; void VALID_USER; void EXTRA_LOGINS;
+  /*
   const authedByToken = token && token === validToken;
   const authedByCreds =
     (user && user === VALID_USER && pass === VALID_PASS) ||
     EXTRA_LOGINS.some(function (c) { return user === c.user && pass === c.pass; });
-
   if (!authedByToken && !authedByCreds) {
     return res.status(401).json({ error: 'Invalid agent credentials.' });
   }
+  */
 
   // Always hand back the session token so the browser can stay signed in.
   const out = { ok: true, token: validToken };
