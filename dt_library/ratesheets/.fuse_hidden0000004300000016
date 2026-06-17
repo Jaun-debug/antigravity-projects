@@ -1,0 +1,2373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiwani Safari Camps — Rates &amp; Booking 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #F3EFE9;
+            --card-bg: #FFFFFF;
+            --text-main: #3E3832;
+            --text-muted: #847970;
+            --gold: #C09A6B;
+            --gold-light: rgba(192, 154, 107, 0.12);
+            --seafoam: #8CA89E;
+            --seafoam-light: rgba(140, 168, 158, 0.12);
+            --border: rgba(192, 154, 107, 0.25);
+            --font-head: 'Cormorant Garamond', serif;
+            --font-body: 'Inter', sans-serif;
+            --transition: all 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --radius: 16px;
+        }
+
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: var(--font-head);
+            font-weight: 400;
+            margin: 0;
+        }
+
+        /* ── HERO HEADER ── */
+        .site-hero {
+            text-align: center;
+            padding: 90px 20px 60px;
+        }
+        .hero-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: inline-block;
+            margin: 0 auto 28px;
+        }
+        .hero-display {
+            font-family: var(--font-head);
+            font-size: clamp(4.5rem, 10vw, 10rem);
+            font-weight: 300;
+            font-style: italic;
+            line-height: 0.9;
+            letter-spacing: -2px;
+            color: var(--text-main);
+            display: block;
+            margin-bottom: 0;
+            user-select: none;
+            transition: color 0.3s ease;
+        }
+        .hero-image-loaded .hero-display {
+            background-image: url('https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg');
+            background-size: cover;
+            background-position: center 30%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+        .hero-rule {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin: 28px auto;
+        }
+        .hero-tagline {
+            font-family: var(--font-head);
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-style: italic;
+            font-weight: 300;
+            color: var(--text-main);
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+        .hero-sub {
+            font-family: var(--font-body);
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+        }
+
+        /* ── LODGE GRID ── */
+        .lodge-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 30px 100px;
+        }
+        .lodge-card {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            overflow: hidden;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 24px rgba(62, 56, 50, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        .lodge-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 48px rgba(62, 56, 50, 0.12);
+        }
+        .lodge-card-img-wrap {
+            overflow: hidden;
+            height: 240px;
+            background: #e5ded4;
+        }
+        .lodge-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition);
+        }
+        .lodge-card:hover .lodge-card-img {
+            transform: scale(1.04);
+        }
+        .lodge-card-body {
+            padding: 24px 28px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .lodge-card-location {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: block;
+        }
+        .lodge-card-name {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--text-main);
+            line-height: 1.2;
+            margin-bottom: 10px;
+        }
+        .lodge-card-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--seafoam);
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .lodge-card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.65;
+            font-weight: 300;
+            margin-bottom: 22px;
+            flex: 1;
+        }
+        .lodge-card-divider {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 0 0 18px;
+        }
+        .lodge-card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-lodge {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 9px 16px;
+            border: 1px solid rgba(62, 56, 50, 0.2);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-lodge:hover {
+            border-color: var(--text-main);
+            color: var(--text-main);
+        }
+        .btn-rates {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 9px 18px;
+            border: 1px solid var(--gold);
+            border-radius: 6px;
+            background: transparent;
+            color: var(--gold);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-rates:hover {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        /* ── DETAIL VIEW ── */
+        .detail-view {
+            display: none;
+            max-width: 1250px;
+            margin: 0 auto;
+            padding: 40px 30px 120px;
+            animation: fadeIn 0.4s ease;
+        }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+            padding: 10px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+            background: transparent;
+            margin-bottom: 40px;
+        }
+        .back-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .detail-hero {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 36px;
+            margin-bottom: 44px;
+            align-items: start;
+        }
+        .detail-title {
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 300;
+            color: var(--text-main);
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+        .detail-location {
+            font-family: var(--font-body);
+            font-size: 0.68rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--seafoam);
+            font-weight: 500;
+            margin-bottom: 18px;
+            display: block;
+        }
+        .detail-intro {
+            font-size: 0.95rem;
+            line-height: 1.85;
+            color: var(--text-muted);
+            font-weight: 300;
+            white-space: pre-line;
+        }
+        .spec-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border);
+        }
+        .spec-card-title {
+            font-family: var(--font-body);
+            font-size: 0.62rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px;
+            margin-bottom: 18px;
+            display: block;
+        }
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+            font-size: 0.85rem;
+        }
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+        .spec-label {
+            color: var(--text-main);
+            font-weight: 400;
+        }
+        .spec-value {
+            color: var(--text-muted);
+            font-weight: 300;
+            text-align: right;
+        }
+
+        /* ── TABS ── */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 36px;
+            overflow-x: auto;
+            padding: 12px 14px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            position: sticky;
+            top: 16px;
+            z-index: 90;
+            box-shadow: 0 4px 20px rgba(62, 56, 50, 0.05);
+        }
+        .tab-btn {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: 1px solid transparent;
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: var(--gold-light);
+        }
+        .tab-btn.active {
+            background: var(--text-main);
+            color: #fff;
+            border-color: transparent;
+        }
+        .tab-btn-highlight {
+            border-color: var(--border);
+            color: var(--text-muted);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .tab-btn-highlight.ready {
+            border-color: var(--seafoam);
+            color: var(--seafoam);
+            opacity: 1;
+            cursor: pointer;
+            animation: tabPulse 1.8s ease-in-out infinite;
+        }
+        .tab-btn-highlight.active {
+            background: var(--seafoam);
+            color: #fff;
+            border-color: transparent;
+            opacity: 1;
+            animation: none;
+            cursor: pointer;
+        }
+        @keyframes tabPulse {
+            0%, 100% { border-color: var(--seafoam); color: var(--seafoam); box-shadow: none; }
+            50% { border-color: var(--gold); color: var(--gold); box-shadow: 0 0 14px rgba(192,154,107,0.35); }
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        .lodge-gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 30px;
+        }
+        .gallery-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .content-block {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 38px 44px;
+            margin-bottom: 28px;
+        }
+        .content-block h3 {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-bottom: 22px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+            letter-spacing: 1px;
+        }
+        .sub-block {
+            margin-top: 32px;
+        }
+        .sub-block h4 {
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin-bottom: 24px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        th {
+            font-family: var(--font-body);
+            background: var(--gold-light);
+            color: var(--text-main);
+            font-size: 0.7rem;
+            padding: 14px 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+        td {
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(62, 56, 50, 0.05);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.55;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        tr:hover td {
+            background: var(--gold-light);
+            color: var(--text-main);
+        }
+        td strong {
+            color: var(--text-main);
+            font-weight: 500;
+        }
+        .table-highlight td {
+            background: var(--seafoam-light);
+        }
+        .text-list {
+            list-style: none;
+            padding: 0;
+            color: var(--text-muted);
+            line-height: 1.95;
+            font-size: 0.92rem;
+            margin: 0;
+        }
+        .text-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+        .text-list li::before {
+            content: "—";
+            color: var(--gold);
+            position: absolute;
+            left: 0;
+            font-weight: 300;
+        }
+        .raw-text {
+            white-space: pre-line;
+            color: var(--text-muted);
+            line-height: 1.9;
+            font-size: 0.92rem;
+            margin: 0;
+        }
+
+        /* ── CUSTOM CALENDAR ── */
+        .dew-calendar-container {
+            display: flex;
+            gap: 40px;
+            width: 100%;
+            max-width: 700px;
+            justify-content: center;
+            margin: 10px auto 0;
+        }
+        .dew-calendar-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+        .dew-calendar-nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-size: 24px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        .dew-calendar-nav-btn:hover {
+            background: var(--gold-light);
+            color: var(--gold);
+        }
+        .dew-calendar-month-title {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--text-main);
+            text-align: center;
+            width: 300px;
+            letter-spacing: 1px;
+        }
+        .dew-calendar {
+            flex: 1;
+            max-width: 320px;
+            width: 100%;
+        }
+        .dew-calendar-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 10px;
+        }
+        .dew-calendar-day-label {
+            font-family: var(--font-body);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 0;
+        }
+        .dew-calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+        }
+        .dew-calendar-day {
+            font-family: var(--font-body);
+            font-size: 13px;
+            color: var(--text-main);
+            text-align: center;
+            padding: 10px 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border-radius: 4px;
+        }
+        .dew-calendar-day:hover {
+            background: var(--gold-light);
+        }
+        .dew-calendar-day.dew-empty {
+            cursor: default;
+        }
+        .dew-calendar-day.dew-empty:hover {
+            background: transparent;
+        }
+        .dew-calendar-day.dew-today {
+            background: var(--seafoam-light);
+            color: var(--seafoam)!important;
+            font-weight: 600;
+        }
+        .dew-calendar-day.dew-range-start {
+            background: var(--gold)!important;
+            border-radius: 50% 0 0 50%;
+            color: #fff!important;
+            font-weight: 600;
+        }
+        .dew-calendar-day.dew-range-end {
+            background: var(--gold)!important;
+            border-radius: 0 50% 50% 0;
+            color: #fff!important;
+            font-weight: 600;
+        }
+        .dew-calendar-day.dew-range {
+            background: rgba(192, 154, 107, 0.12);
+            border-radius: 0;
+        }
+        .dew-calendar-day.dew-past {
+            color: rgba(62, 56, 50, 0.2);
+            cursor: not-allowed;
+        }
+        .dew-calendar-day.dew-past:hover {
+            background: transparent;
+        }
+        @media(max-width: 768px) {
+            .dew-calendar-container { flex-direction: column; gap: 24px; align-items: center; }
+            .dew-calendar-container > .dew-calendar:last-child { display: none; }
+            .dew-calendar-month-title { width: 100%; }
+        }
+
+        /* ── BOOKING BAR ── */
+        #booking-bar {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(243, 239, 233, 0.95);
+            backdrop-filter: blur(12px);
+            padding: 18px 30px;
+            box-shadow: 0 -8px 30px rgba(62, 56, 50, 0.08);
+            z-index: 100;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid var(--border);
+            animation: fadeInUp 0.3s ease;
+        }
+        #booking-total {
+            font-family: var(--font-head);
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: var(--text-main);
+            margin-right: 24px;
+        }
+        .btn-finalise {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 12px 28px;
+            background: var(--text-main);
+            color: #fff;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            animation: barBtnPulse 1.8s ease-in-out infinite;
+        }
+        .btn-finalise:hover {
+            animation: none;
+            background: var(--gold);
+        }
+        @keyframes barBtnPulse {
+            0%, 100% { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px rgba(192,154,107,0.4); }
+            50% { background: var(--seafoam); border-color: var(--seafoam); box-shadow: 0 0 18px rgba(140,168,158,0.5); }
+        }
+
+        /* ── FORM CONTROL ── */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-label {
+            font-family: var(--font-body);
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .form-label.accent {
+            color: var(--gold);
+        }
+        .form-control {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 0.92rem;
+            background: var(--bg);
+            color: var(--text-main);
+            transition: var(--transition);
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: #fff;
+            box-shadow: 0 0 0 3px var(--gold-light);
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .btn-submit {
+            width: 100%;
+            font-family: var(--font-body);
+            font-size: 0.72rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 18px;
+            background: var(--text-main);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            font-weight: 600;
+        }
+        .btn-submit:hover {
+            background: var(--gold);
+        }
+        .rate-qty {
+            width: 58px;
+            padding: 6px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--text-main);
+            font-weight: 500;
+            text-align: center;
+            outline: none;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+        }
+        .rate-qty:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 2px var(--gold-light);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        @media(max-width: 1200px) {
+            .lodge-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width: 900px) {
+            .detail-hero { grid-template-columns: 1fr; }
+            .lodge-gallery { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media(max-width: 600px) {
+            .lodge-grid { grid-template-columns: 1fr; padding: 16px; }
+            .lodge-gallery { grid-template-columns: 1fr; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .detail-view { padding: 16px 16px 100px; }
+            .content-block { padding: 24px; }
+            .booking-bar-content { flex-direction: column; text-align: center; gap: 12px; }
+            .booking-bar-text { text-align: center; }
+        }
+    </style>
+<style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
+<body>
+<button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
+
+<div id="main-view">
+    <div class="site-hero"><a class="grp-back" href="/">&#8592; Back to Home Page</a>
+        <div class="hero-dot"></div>
+        <span class="hero-display">Chiwani</span>
+        <span class="hero-display">Safari Camps</span>
+        <div class="hero-rule"></div>
+        <p class="hero-tagline">Granite inselbergs. Luxury. Wilderness.</p>
+        <p class="hero-sub">STO15 Rates &middot; 01 Jan 2026 – 31 Dec 2026</p>
+    </div>
+    <div class="lodge-grid" id="lodge-grid"></div>
+</div>
+
+<div id="detail-view" class="detail-view">
+    <button class="back-btn" onclick="closeProperty()">&#8592; All Properties</button>
+    <div class="detail-hero">
+        <div>
+            <span class="detail-location" id="d-location"></span>
+            <h1 class="detail-title" id="d-title"></h1>
+            <p class="detail-intro" id="d-intro"></p>
+        </div>
+        <div class="spec-card">
+            <span class="spec-card-title">Quick Specs</span>
+            <div class="spec-row"><span class="spec-label">Commission</span><span class="spec-value">STO15 (15% built-in)</span></div>
+            <div class="spec-row"><span class="spec-label">Location</span><span class="spec-value" id="spec-location">—</span></div>
+            <div class="spec-row"><span class="spec-label">Rate Period</span><span class="spec-value">01 Jan 2026 – 31 Dec 2026</span></div>
+            <div class="spec-row"><span class="spec-label">Contact</span><span class="spec-value">res@chiwani.com</span></div>
+        </div>
+    </div>
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+        <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities &amp; Transfers</button>
+        <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies &amp; Info</button>
+        <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
+        <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
+    </div>
+    <div id="tab-1" class="tab-content active"></div>
+    <div id="tab-2" class="tab-content"></div>
+    <div id="tab-3" class="tab-content"></div>
+    <div id="tab-4" class="tab-content">
+        <div class="content-block"><h3>Gallery</h3><div class="lodge-gallery" id="d-gallery-full"></div></div>
+    </div>
+    <div id="tab-5" class="tab-content">
+        <div class="content-block">
+            <h3>Finalise Booking</h3>
+            <p class="raw-text" style="margin-bottom:24px;">Review your selection and complete the booking request below.</p>
+            <div id="booking-summary" style="margin-bottom:28px;background:var(--bg);padding:22px;border-radius:10px;border:1px solid var(--border);">
+                <p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates from the tabs above to build your booking.</p>
+            </div>
+            <form onsubmit="submitBooking(event)" id="booking-form">
+                <div class="grid-2">
+                    <div class="form-group"><label class="form-label accent">Agent / Consultant Email</label><input type="email" id="b-agent-email" class="form-control" placeholder="your@email.com" required></div>
+                    <div class="form-group"><label class="form-label accent">Booking Status</label><select id="b-status" class="form-control" required style="cursor:pointer;"><option value="Provisional Booking">Provisional Booking</option><option value="Confirmed Booking">Confirmed Booking</option></select></div>
+                </div>
+                <hr style="border:none;border-top:1px solid var(--border);margin-bottom:18px;">
+                <div class="grid-2">
+                    <div class="form-group"><label class="form-label">Client Full Name</label><input type="text" id="b-name" class="form-control" placeholder="e.g. John &amp; Jane Doe" required></div>
+                    <div class="form-group"><label class="form-label">Guide / Pilot Room(s)</label><input type="number" id="b-guide" class="form-control" placeholder="0" min="0"></div>
+                </div>
+                <input type="hidden" id="b-date-in" required>
+                <input type="hidden" id="b-date-out" required>
+                <div class="form-group" style="background:var(--bg);padding:14px 16px;border-radius:8px;border:1px solid var(--border);">
+                    <span class="form-label" style="display:block;margin-bottom:4px;">Travel Dates</span>
+                    <span id="b-dates-display" style="font-family:var(--font-head);font-size:1.1rem;color:var(--text-muted);">Select dates from the calendar above</span>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group"><label class="form-label">Arriving From</label><input type="text" id="b-arriving" class="form-control" placeholder="e.g. Windhoek" required></div>
+                    <div class="form-group"><label class="form-label">Departing To</label><input type="text" id="b-departing" class="form-control" placeholder="e.g. Next Lodge" required></div>
+                </div>
+                <div class="form-group"><label class="form-label">Additional Notes</label><textarea id="b-message" class="form-control" placeholder="Children ages, private activity requirements, dietary needs..." style="height:110px;resize:vertical;"></textarea></div>
+                <button type="submit" class="btn-submit">Send Booking to Operations</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="booking-bar">
+    <div style="display:inline-block;text-align:right;margin-right:24px;vertical-align:middle;">
+        <span id="booking-total" style="display:block;">Total: N$ 0.00</span>
+        <span id="booking-breakdown" style="display:block;font-family:var(--font-body);font-size:0.7rem;color:var(--text-muted);letter-spacing:0.5px;margin-top:2px;"></span>
+    </div>
+    <button class="btn-finalise" onclick="switchTab(5)">Finalise Booking</button>
+</div>
+
+<script>
+let activePropertyId = "";
+
+const DB = {
+    kipwe: {
+        name: 'Camp Kipwe',
+        location: 'Twyfelfontein Conservancy, Damaraland',
+        cover: 'https://www.info-namibia.com/images/accommodation/damaraland/Camp_Kipwe.jpg',
+        images: [
+            'https://www.info-namibia.com/images/accommodation/damaraland/Camp_Kipwe.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/camp-kipwe/pic10.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/camp-kipwe/pic2.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/camp-kipwe/pic24.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/camp-kipwe/pic33.jpg'
+        ],
+        shortDesc: 'Stunning lodge organically built into massive granite boulders — offering bungalows and suites with outdoor bathrooms, desert elephant tracking, and Twyfelfontein rock art excursions.',
+        intro: 'Camp Kipwe is an architectural masterpiece nestled among giant granite inselbergs in the heart of Damaraland. Organically shaped rondavels and suites blend seamlessly into the rocks. The camp offers outdoor open-air bathrooms, a refreshing pool nestled in the stone, and nature drives to track desert-adapted elephants.',
+        tab1: `<div class="content-block">
+            <h3>STO15 Rate — 01 Jan 2026 to 31 Dec 2026</h3>
+            <p class="raw-text">Rates are in NAD per person per night (pppn) or per package. Includes NTB tourism levy & VAT. Excludes Conservancy Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Configuration</th>
+                            <th>Low Season STO 15%</th>
+                            <th>High Season STO 15%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>9 x Bungalows — DBB p/p Sharing</strong></td>
+                            <td>4,310</td>
+                            <td>5,695</td>
+                        </tr>
+                        <tr>
+                            <td><strong>9 x Bungalows — DBB Single Person</strong></td>
+                            <td>5,814</td>
+                            <td>8,432</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>12,631</td>
+                            <td>15,385</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 2-Night FI Package — Single</strong></td>
+                            <td>15,436</td>
+                            <td>19,312</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>18,335</td>
+                            <td>22,440</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 3-Night FI Package — Single</strong></td>
+                            <td>22,670</td>
+                            <td>28,458</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Kipwe Suite — DBB p/p Sharing</strong></td>
+                            <td>7,259</td>
+                            <td>8,696</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Kipwe Suite — DBB Single Person</strong></td>
+                            <td>9,894</td>
+                            <td>12,580</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>18,496</td>
+                            <td>21,369</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 2-Night FI Package — Single</strong></td>
+                            <td>23,571</td>
+                            <td>27,574</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>27,107</td>
+                            <td>31,442</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 3-Night FI Package — Single</strong></td>
+                            <td>34,859</td>
+                            <td>40,851</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2 x Luxury Suites — DBB p/p Sharing</strong></td>
+                            <td>10,608</td>
+                            <td>12,589</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2 x Luxury Suites — DBB Single Person</strong></td>
+                            <td>14,425</td>
+                            <td>17,663</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>25,313</td>
+                            <td>29,240</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 2-Night FI Package — Single</strong></td>
+                            <td>32,734</td>
+                            <td>37,834</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>37,281</td>
+                            <td>43,223</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 3-Night FI Package — Single</strong></td>
+                            <td>48,552</td>
+                            <td>56,228</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sub-block">
+                <h4>Child Sharing Rates (accommodated in children's tent / camping bed)</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Age / Configuration</th>
+                                <th>Low Season NETT</th>
+                                <th>High Season NETT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Child (4-12 yrs) — DBB per night</strong></td>
+                                <td>2,610</td>
+                                <td>2,610</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 2-Night FI Package</strong></td>
+                                <td>8,190</td>
+                                <td>8,190</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 3-Night FI Package</strong></td>
+                                <td>11,190</td>
+                                <td>11,190</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-block">
+                <h4>Guide &amp; Pilot Rates</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Room Configuration</th>
+                                <th>Rate (N$)</th>
+                                <th>Inclusions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tour Guide Room (per Guide/Pilot per night)</strong></td>
+                                <td>2,210</td>
+                                <td>NETT. Includes all 3 meals, and transfers with guests.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 01 Jan 2026 to 31 Dec 2026</h3>
+            <p class="raw-text">Published rack rates in NAD. Includes NTB tourism levy & VAT. Excludes Conservancy Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Configuration</th>
+                            <th>Low Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>9 x Bungalows — DBB p/p Sharing</strong></td>
+                            <td>5,070</td>
+                            <td>6,700</td>
+                        </tr>
+                        <tr>
+                            <td><strong>9 x Bungalows — DBB Single Person</strong></td>
+                            <td>6,840</td>
+                            <td>9,920</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>14,860</td>
+                            <td>18,100</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 2-Night FI Package — Single</strong></td>
+                            <td>18,160</td>
+                            <td>22,720</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>21,570</td>
+                            <td>26,400</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Bungalow 3-Night FI Package — Single</strong></td>
+                            <td>26,670</td>
+                            <td>33,480</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Kipwe Suite — DBB p/p Sharing</strong></td>
+                            <td>8,540</td>
+                            <td>10,230</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Kipwe Suite — DBB Single Person</strong></td>
+                            <td>11,640</td>
+                            <td>14,800</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>21,760</td>
+                            <td>25,140</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 2-Night FI Package — Single</strong></td>
+                            <td>27,730</td>
+                            <td>32,440</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>31,890</td>
+                            <td>36,990</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Kipwe Suite 3-Night FI Package — Single</strong></td>
+                            <td>41,010</td>
+                            <td>48,060</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2 x Luxury Suites — DBB p/p Sharing</strong></td>
+                            <td>12,480</td>
+                            <td>14,810</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2 x Luxury Suites — DBB Single Person</strong></td>
+                            <td>16,970</td>
+                            <td>20,780</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>29,780</td>
+                            <td>34,400</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 2-Night FI Package — Single</strong></td>
+                            <td>38,510</td>
+                            <td>44,510</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>43,860</td>
+                            <td>50,850</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Suite 3-Night FI Package — Single</strong></td>
+                            <td>57,120</td>
+                            <td>66,150</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sub-block">
+                <h4>Child Sharing Rates (accommodated in children's tent / camping bed)</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Age / Configuration</th>
+                                <th>Low Season NETT</th>
+                                <th>High Season NETT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Child (4-12 yrs) — DBB per night</strong></td>
+                                <td>2,610</td>
+                                <td>2,610</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 2-Night FI Package</strong></td>
+                                <td>8,190</td>
+                                <td>8,190</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 3-Night FI Package</strong></td>
+                                <td>11,190</td>
+                                <td>11,190</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-block">
+                <h4>Guide &amp; Pilot Rates</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Room Configuration</th>
+                                <th>Rate (N$)</th>
+                                <th>Inclusions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tour Guide Room (per Guide/Pilot per night)</strong></td>
+                                <td>2,210</td>
+                                <td>NETT. Includes all 3 meals, and transfers with guests.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities offered at Camp Kipwe</h3>
+            <p class="raw-text">These activities are only to be added if booking on a DBB basis. (Package rates fully include activities and return Twyfelfontein transfers).</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>Nett Price (N$)</th>
+                            <th>Details &amp; Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nature Drive (guided, Morning)</strong></td>
+                            <td>1,360</td>
+                            <td>Per person. Includes drinks. Departs at 06h30 (+- 4 to 6 hours).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Twyfelfontein Excursion (guided, Afternoon)</strong></td>
+                            <td>1,110</td>
+                            <td>Per person. Twyfelfontein Rock Art, Burnt Mountain &amp; Organ Pipes (+- 2 hours).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Damara Living Museum Entry</strong></td>
+                            <td>320</td>
+                            <td>Per person. Cultural experience.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>All-Inclusive Drinks Add-On</strong></td>
+                            <td>1,200</td>
+                            <td>Per person per night. Soft drinks, speciality coffees, and local alcohol (for DBB bookings).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sub-block">
+                <h4>Transfers (Charged pp one-way)</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Nett Price (N$)</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Twyfelfontein Airstrip Transfer</strong></td>
+                                <td>395</td>
+                                <td>30 minutes. Free in 2-Night &amp; 3-Night FI packages.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>!Doro Nawas Transfer</strong></td>
+                                <td>465</td>
+                                <td>45 minutes.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Damaraland Camp Transfer</strong></td>
+                                <td>695</td>
+                                <td>90 minutes.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-block">
+                <h4>Additional Meals</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Meal Type</th>
+                                <th>Price (N$)</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Breakfast</strong></td>
+                                <td>395</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lunch</strong></td>
+                                <td>375</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lunch Pack</strong></td>
+                                <td>255</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dinner (3 Course)</strong></td>
+                                <td>890</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Rate &amp; Levy Information</h3>
+            <ul class="text-list">
+                <li><strong>Conservancy Levy:</strong> Compulsory and non-commissionable. Low Season (Jan-Mar, Dec) = <strong>N$ 235</strong> per night. High Season (Apr-Nov) = <strong>N$ 345</strong> per night. Double/triple for Packages. Children (under 13) and Guides are exempt.</li>
+                <li><strong>Dinner, Bed &amp; Breakfast (DBB) Inclusions:</strong> Includes accommodation, breakfast, dinner, NTB tourism levy, and VAT. Excludes lunch, drinks, activities, and transfers.</li>
+                <li><strong>Fully Inclusive (FI) Packages Inclusions:</strong> Includes accommodation, all meals, local drinks, return Twyfelfontein airstrip transfers, scheduled activities, NTB levy, and VAT. Excludes premium imported beverages.</li>
+                <li><strong>Single Supplement:</strong> Supplement of 40% applies to DBB single bookings.</li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <h3>Children Policy</h3>
+            <ul class="text-list">
+                <li>Free of charge for children aged 3 years and younger.</li>
+                <li>Children aged 4 to 12 sharing with parents are charged children rates. Accommodated in a children’s tent or camping beds.</li>
+                <li>Children aged 13 and older must be accommodated in their own room and are charged full adult rates.</li>
+                <li>Children under the age of 6 are not permitted on scheduled game drive activities unless a private vehicle is booked.</li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <h3>Booking &amp; Cancellation Terms</h3>
+            <ul class="text-list">
+                <li><strong>Provisional bookings:</strong> Held for 14 days. If made within 31 days of travel, held for 24 hours.</li>
+                <li><strong>Confirmation fee:</strong> A 15% cancellation/administration fee is charged once a provisional booking is moved to confirmed status if it is subsequently cancelled.</li>
+                <li><strong>FIT Cancellation Policy:</strong>
+                    <br>— 61+ days prior to arrival: 15% administration fee
+                    <br>— 46 to 60 days prior: 25% fee
+                    <br>— 31 to 45 days prior: 50% fee
+                    <br>— 0 to 30 days prior: 100% fee
+                </li>
+                <li><strong>Group bookings (3+ rooms):</strong> 25% non-refundable administration fee required to guarantee group bookings. Balance due 30 days prior. Group cancellation policies apply (100% within 30 days).</li>
+                <li><strong>Check-in/out:</strong> Check-in from 13h00. Check-out by 10h00.</li>
+            </ul>
+        </div>`
+    },
+    mowani: {
+        name: 'Mowani Mountain Camp',
+        location: 'Twyfelfontein Conservancy, Damaraland',
+        cover: 'https://www.info-namibia.com/images/accommodation/damaraland/Mowani-Mountain-Camp.jpg',
+        images: [
+            'https://www.info-namibia.com/images/accommodation/damaraland/Mowani-Mountain-Camp.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/mowani-mountain-camp/01.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/mowani-mountain-camp/02.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/mowani-mountain-camp/03.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/mowani-mountain-camp/04.jpg'
+        ],
+        shortDesc: 'Organically shaped luxury dome tents set on granite rocks — featuring views of the valley, swimming pool in the boulders, and exclusive suites.',
+        intro: 'Mowani Mountain Camp is located in the Twyfelfontein Conservancy, surrounded by dramatic rock formations. Guest rooms are shaped like large rounded thatched domes, built on decks overlooking the valley. Facilities include a boulders-embedded swimming pool, sundowner view deck, and drives to search for the desert-adapted elephants.',
+        tab1: `<div class="content-block">
+            <h3>STO15 Rate — 01 Jan 2026 to 31 Dec 2026</h3>
+            <p class="raw-text">Rates are in NAD per person per night (pppn) or per package. Includes NTB tourism levy & VAT. Excludes Conservancy Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Configuration</th>
+                            <th>Low Season STO 15%</th>
+                            <th>High Season STO 15%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>8 x View Rooms — DBB p/p Sharing</strong></td>
+                            <td>5,049</td>
+                            <td>6,766</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8 x View Rooms — DBB Single Person</strong></td>
+                            <td>6,817</td>
+                            <td>9,231</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>14,102</td>
+                            <td>17,519</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 2-Night FI Package — Single</strong></td>
+                            <td>17,459</td>
+                            <td>22,253</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>20,553</td>
+                            <td>25,653</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 3-Night FI Package — Single</strong></td>
+                            <td>25,653</td>
+                            <td>32,870</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4 x Superior View Rooms — DBB p/p Sharing</strong></td>
+                            <td>5,440</td>
+                            <td>7,259</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4 x Superior View Rooms — DBB Single Person</strong></td>
+                            <td>7,327</td>
+                            <td>9,792</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>14,858</td>
+                            <td>18,530</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 2-Night FI Package — Single</strong></td>
+                            <td>18,462</td>
+                            <td>23,384</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>21,675</td>
+                            <td>27,183</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 3-Night FI Package — Single</strong></td>
+                            <td>27,183</td>
+                            <td>34,578</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Luxury Room — DBB p/p Sharing</strong></td>
+                            <td>5,687</td>
+                            <td>7,608</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Luxury Room — DBB Single Person</strong></td>
+                            <td>7,676</td>
+                            <td>10,251</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>15,462</td>
+                            <td>19,312</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 2-Night FI Package — Single</strong></td>
+                            <td>19,253</td>
+                            <td>24,421</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>22,568</td>
+                            <td>28,305</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 3-Night FI Package — Single</strong></td>
+                            <td>28,331</td>
+                            <td>36,032</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Rock Suite (Mini) — DBB p/p Sharing</strong></td>
+                            <td>6,477</td>
+                            <td>8,339</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Rock Suite (Mini) — DBB Single Person</strong></td>
+                            <td>8,730</td>
+                            <td>11,110</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>17,060</td>
+                            <td>20,757</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 2-Night FI Package — Single</strong></td>
+                            <td>21,378</td>
+                            <td>26,129</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>24,939</td>
+                            <td>30,498</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 3-Night FI Package — Single</strong></td>
+                            <td>31,518</td>
+                            <td>38,633</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Mountain Suite — DBB p/p Sharing</strong></td>
+                            <td>10,710</td>
+                            <td>12,708</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Mountain Suite — DBB Single Person</strong></td>
+                            <td>14,561</td>
+                            <td>17,145</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>25,526</td>
+                            <td>29,495</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 2-Night FI Package — Single</strong></td>
+                            <td>33,023</td>
+                            <td>38,174</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>37,613</td>
+                            <td>43,605</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 3-Night FI Package — Single</strong></td>
+                            <td>48,986</td>
+                            <td>56,712</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sub-block">
+                <h4>Child Sharing Rates (accommodated in children's tent / camping bed)</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Age / Configuration</th>
+                                <th>Low Season NETT</th>
+                                <th>High Season NETT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Child (4-12 yrs) — DBB per night</strong></td>
+                                <td>2,610</td>
+                                <td>2,610</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 2-Night FI Package</strong></td>
+                                <td>8,190</td>
+                                <td>8,190</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 3-Night FI Package</strong></td>
+                                <td>11,190</td>
+                                <td>11,190</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-block">
+                <h4>Guide &amp; Pilot Rates</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Room Configuration</th>
+                                <th>Rate (N$)</th>
+                                <th>Inclusions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tour Guide Room (per Guide/Pilot per night)</strong></td>
+                                <td>2,210</td>
+                                <td>NETT. Includes all 3 meals, and transfers with guests.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="content-block">
+            <h3>Rack Rate — 01 Jan 2026 to 31 Dec 2026</h3>
+            <p class="raw-text">Published rack rates in NAD. Includes NTB tourism levy & VAT. Excludes Conservancy Levy.</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Room Type & Configuration</th>
+                            <th>Low Season RACK</th>
+                            <th>High Season RACK</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>8 x View Rooms — DBB p/p Sharing</strong></td>
+                            <td>5,940</td>
+                            <td>7,960</td>
+                        </tr>
+                        <tr>
+                            <td><strong>8 x View Rooms — DBB Single Person</strong></td>
+                            <td>8,020</td>
+                            <td>10,860</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>16,590</td>
+                            <td>20,610</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 2-Night FI Package — Single</strong></td>
+                            <td>20,540</td>
+                            <td>26,180</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>24,180</td>
+                            <td>30,180</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>View Room 3-Night FI Package — Single</strong></td>
+                            <td>30,180</td>
+                            <td>38,670</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4 x Superior View Rooms — DBB p/p Sharing</strong></td>
+                            <td>6,400</td>
+                            <td>8,540</td>
+                        </tr>
+                        <tr>
+                            <td><strong>4 x Superior View Rooms — DBB Single Person</strong></td>
+                            <td>8,620</td>
+                            <td>11,520</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>17,480</td>
+                            <td>21,800</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 2-Night FI Package — Single</strong></td>
+                            <td>21,720</td>
+                            <td>27,510</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>25,500</td>
+                            <td>31,980</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Superior View 3-Night FI Package — Single</strong></td>
+                            <td>31,980</td>
+                            <td>40,680</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Luxury Room — DBB p/p Sharing</strong></td>
+                            <td>6,690</td>
+                            <td>8,950</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Luxury Room — DBB Single Person</strong></td>
+                            <td>9,030</td>
+                            <td>12,060</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>18,190</td>
+                            <td>22,720</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 2-Night FI Package — Single</strong></td>
+                            <td>22,650</td>
+                            <td>28,730</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>26,550</td>
+                            <td>33,300</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Luxury Room 3-Night FI Package — Single</strong></td>
+                            <td>33,330</td>
+                            <td>42,390</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Rock Suite (Mini) — DBB p/p Sharing</strong></td>
+                            <td>7,620</td>
+                            <td>9,810</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Rock Suite (Mini) — DBB Single Person</strong></td>
+                            <td>10,270</td>
+                            <td>13,070</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>20,070</td>
+                            <td>24,420</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 2-Night FI Package — Single</strong></td>
+                            <td>25,150</td>
+                            <td>30,740</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>29,340</td>
+                            <td>35,880</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Rock Suite 3-Night FI Package — Single</strong></td>
+                            <td>37,080</td>
+                            <td>45,450</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Mountain Suite — DBB p/p Sharing</strong></td>
+                            <td>12,600</td>
+                            <td>14,950</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1 x Mountain Suite — DBB Single Person</strong></td>
+                            <td>17,130</td>
+                            <td>20,170</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 2-Night FI Package — Sharing p/p</strong></td>
+                            <td>30,030</td>
+                            <td>34,700</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 2-Night FI Package — Single</strong></td>
+                            <td>38,850</td>
+                            <td>44,910</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 3-Night FI Package — Sharing p/p</strong></td>
+                            <td>44,250</td>
+                            <td>51,300</td>
+                        </tr>
+                        <tr class="table-highlight">
+                            <td><strong>Mountain Suite 3-Night FI Package — Single</strong></td>
+                            <td>57,630</td>
+                            <td>66,720</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sub-block">
+                <h4>Child Sharing Rates (accommodated in children's tent / camping bed)</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Age / Configuration</th>
+                                <th>Low Season NETT</th>
+                                <th>High Season NETT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Child (4-12 yrs) — DBB per night</strong></td>
+                                <td>2,610</td>
+                                <td>2,610</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 2-Night FI Package</strong></td>
+                                <td>8,190</td>
+                                <td>8,190</td>
+                            </tr>
+                            <tr class="table-highlight">
+                                <td><strong>Child (4-12 yrs) — 3-Night FI Package</strong></td>
+                                <td>11,190</td>
+                                <td>11,190</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-block">
+                <h4>Guide &amp; Pilot Rates</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Room Configuration</th>
+                                <th>Rate (N$)</th>
+                                <th>Inclusions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Tour Guide Room (per Guide/Pilot per night)</strong></td>
+                                <td>2,210</td>
+                                <td>NETT. Includes all 3 meals, and transfers with guests.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Activities offered at Mowani Mountain Camp</h3>
+            <p class="raw-text">These activities are only to be added if booking on a DBB basis. (Package rates fully include activities and return Twyfelfontein transfers).</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Activity / Service</th>
+                            <th>Nett Price (N$)</th>
+                            <th>Details &amp; Remarks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Nature Drive (guided, Morning)</strong></td>
+                            <td>1,360</td>
+                            <td>Per person. Includes drinks. Departs at 06h30 (+- 4 to 6 hours).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Twyfelfontein Excursion (guided, Afternoon)</strong></td>
+                            <td>1,110</td>
+                            <td>Per person. Twyfelfontein Rock Art, Burnt Mountain &amp; Organ Pipes (+- 2 hours).</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Damara Living Museum Entry</strong></td>
+                            <td>320</td>
+                            <td>Per person. Cultural experience.</td>
+                        </tr>
+                        <tr>
+                            <td><strong>All-Inclusive Drinks Add-On</strong></td>
+                            <td>1,200</td>
+                            <td>Per person per night. Soft drinks, speciality coffees, and local alcohol (for DBB bookings).</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="sub-block">
+                <h4>Transfers (Charged pp one-way)</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Destination</th>
+                                <th>Nett Price (N$)</th>
+                                <th>Duration</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Twyfelfontein Airstrip Transfer</strong></td>
+                                <td>395</td>
+                                <td>30 minutes. Free in 2-Night &amp; 3-Night FI packages.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>!Doro Nawas Transfer</strong></td>
+                                <td>465</td>
+                                <td>45 minutes.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Damaraland Camp Transfer</strong></td>
+                                <td>695</td>
+                                <td>90 minutes.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="sub-block">
+                <h4>Additional Meals</h4>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Meal Type</th>
+                                <th>Price (N$)</th>
+                                <th>Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Breakfast</strong></td>
+                                <td>395</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lunch</strong></td>
+                                <td>375</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Lunch Pack</strong></td>
+                                <td>255</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Dinner (3 Course)</strong></td>
+                                <td>890</td>
+                                <td>Per person NETT.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Important Rate &amp; Levy Information</h3>
+            <ul class="text-list">
+                <li><strong>Conservancy Levy:</strong> Compulsory and non-commissionable. <strong>N$ 325</strong> per person per night (Low and High season). Double/triple for Packages. Children (under 13) and Guides are exempt.</li>
+                <li><strong>Dinner, Bed &amp; Breakfast (DBB) Inclusions:</strong> Includes accommodation, breakfast, dinner, NTB tourism levy, and VAT. Excludes lunch, drinks, activities, and transfers.</li>
+                <li><strong>Fully Inclusive (FI) Packages Inclusions:</strong> Includes accommodation, all meals, local drinks, return Twyfelfontein airstrip transfers, scheduled activities, NTB levy, and VAT. Excludes premium imported beverages.</li>
+                <li><strong>Single Supplement:</strong> Standard single DBB rates are listed.</li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <h3>Children Policy</h3>
+            <ul class="text-list">
+                <li>Free of charge for children aged 3 years and younger.</li>
+                <li>Children aged 4 to 12 sharing with parents are charged children rates. Accommodated in a children’s tent or camping beds. Mowani has a limited number of camping beds.</li>
+                <li>Children aged 13 and older must be accommodated in their own room and are charged full adult rates.</li>
+                <li>Children under the age of 6 are not permitted on scheduled game drive activities unless a private vehicle is booked.</li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <h3>Booking &amp; Cancellation Terms</h3>
+            <ul class="text-list">
+                <li><strong>Provisional bookings:</strong> Held for 14 days. If made within 31 days of travel, held for 24 hours.</li>
+                <li><strong>Confirmation fee:</strong> A 15% cancellation/administration fee is charged once a provisional booking is moved to confirmed status if it is subsequently cancelled.</li>
+                <li><strong>FIT Cancellation Policy:</strong>
+                    <br>— 61+ days prior to arrival: 15% administration fee
+                    <br>— 46 to 60 days prior: 25% fee
+                    <br>— 31 to 45 days prior: 50% fee
+                    <br>— 0 to 30 days prior: 100% fee
+                </li>
+                <li><strong>Group bookings (3+ rooms):</strong> 25% non-refundable administration fee required to guarantee group bookings. Balance due 30 days prior. Group cancellation policies apply (100% within 30 days).</li>
+                <li><strong>Check-in/out:</strong> Check-in from 13h00. Check-out by 10h00.</li>
+            </ul>
+        </div>`
+    },
+    campsite: {
+        name: 'Mowani Campsite',
+        location: 'Twyfelfontein Conservancy, Damaraland',
+        cover: 'https://www.hiddenplaces.net/wp-content/uploads/2018/12/mowani-campsite.jpg',
+        images: [
+            'https://www.hiddenplaces.net/wp-content/uploads/2018/12/mowani-campsite.jpg',
+            'https://www.info-namibia.com/images/galleries/damaraland/mowani-mountain-camp/05.jpg'
+        ],
+        shortDesc: '7 private self-catering campsites with private ablutions, electricity, boiler on request, and shared pool & reception shop access.',
+        intro: 'Mowani Campsite offers 7 private campsites of various sizes. Each site is equipped with electricity, its own private ablution facilities (shower, basin, toilet), and a kitchen wash-up area. Campsite guests have access to the campsite swimming pool, Wi-Fi at reception, and a camp shop. *Please note: Lodge facilities/activities are not open to campsite guests.*',
+        tab1: `<div class="content-block">
+            <h3>NETT Rates — 01 Jan 2026 to 31 Dec 2026</h3>
+            <p class="raw-text">Rates are in NAD per person per night (pppn), self-catering. Includes VAT. Excludes Conservancy Levy (exempt).</p>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Campsite Accommodation</th>
+                            <th>Nett Price (N$)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Campsite — Per Adult per night</strong></td>
+                            <td>520</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Campsite — Per Child (3-12 yrs) per night</strong></td>
+                            <td>240</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Campsite — Child under 3 yrs</strong></td>
+                            <td>0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>`,
+        tab2: `<div class="content-block">
+            <h3>Campsite Services &amp; Facilities</h3>
+            <p class="raw-text">All campsites include standard features. Additional amenities available at the shop.</p>
+            <ul class="text-list">
+                <li><strong>Private Ablutions:</strong> Each site has a private shower, basin, toilet, and kitchen wash-up.</li>
+                <li><strong>Electricity:</strong> Available at all campsites.</li>
+                <li><strong>Boilers:</strong> Lit on request only (please arrange at check-in).</li>
+                <li><strong>Swimming Pool &amp; Wi-Fi:</strong> Campsite-only pool and Wi-Fi available at campsite reception area.</li>
+                <li><strong>Campsite Shop:</strong> Sells wood, ice, meat, drinks, and other basic amenities.</li>
+                <li><strong>Lodge Inaccessibility:</strong> Camp facilities and lodge activities are strictly for residents of Mowani Mountain Camp only.</li>
+            </ul>
+        </div>`,
+        tab3: `<div class="content-block">
+            <h3>Booking &amp; Campsite Policies</h3>
+            <ul class="text-list">
+                <li><strong>Self-Catering:</strong> No meals or catering are included in campsite rates.</li>
+                <li><strong>Conservancy Levy:</strong> Campsites are exempt from the Twyfelfontein Conservancy Levy.</li>
+                <li><strong>Child Policy:</strong> Free of charge for children under 3 years. Children aged 3 to 12 pay N$ 240/night.</li>
+                <li><strong>Check-in/out:</strong> Check-in from 13h00. Check-out by 10h00.</li>
+                <li><strong>Cancellation Policy:</strong> Standard individual cancellation policies apply (15% administration fee if cancelled, 100% within 30 days).</li>
+            </ul>
+        </div>`
+    }
+};
+
+const grid = document.getElementById('lodge-grid');
+Object.keys(DB).forEach(key => {
+    const d = DB[key];
+    const card = document.createElement('div');
+    card.className = 'lodge-card';
+    card.innerHTML = `<div class="lodge-card-img-wrap"><img src="${d.cover}" class="lodge-card-img" alt="${d.name}"></div><div class="lodge-card-body"><span class="lodge-card-location">${d.location}</span><h2 class="lodge-card-name">${d.name}</h2><span class="lodge-card-dot"></span><p class="lodge-card-desc">${d.shortDesc}</p><hr class="lodge-card-divider"><div class="lodge-card-actions"><button class="btn-lodge" onclick="openProperty('${key}')">Lodge</button><button class="btn-rates" onclick="openProperty('${key}');setTimeout(()=>switchTab(1),200)">View Rates</button></div></div>`;
+    grid.appendChild(card);
+});
+
+function parseTab1(htmlString) {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString;
+    div.querySelectorAll('table').forEach(table => {
+        const tbody = table.querySelector('tbody'); if (!tbody) return;
+        const firstRow = [...tbody.querySelectorAll('tr')].find(tr => tr.querySelectorAll('td').length > 1); if (!firstRow) return;
+        const cells = [...firstRow.querySelectorAll('td')];
+        const priceCols = [];
+        cells.forEach((td, idx) => {
+            if (idx === 0 || td.hasAttribute('colspan')) return;
+            const val = td.innerText.trim().replace(/,/g,'').replace(/\(.*\)/g,'').trim();
+            if (val !== 'N/A' && val !== '' && val.toLowerCase() !== 'free' && val.toLowerCase() !== 'included' && !isNaN(parseFloat(val))) priceCols.push(idx);
+        });
+        if (!priceCols.length) return;
+        const theadRows = table.querySelectorAll('thead tr');
+        const lastHead = theadRows[theadRows.length - 1];
+        const headThs = lastHead ? [...lastHead.querySelectorAll('th')] : [];
+        [...priceCols].reverse().forEach(idx => {
+            const th = headThs[idx]; if (!th) return;
+            const qth = document.createElement('th'); qth.innerText = 'QTY'; qth.style.cssText = 'text-align:center;width:60px;font-size:0.65rem;'; th.after(qth);
+        });
+        tbody.querySelectorAll('tr').forEach(tr => {
+            const tds = [...tr.querySelectorAll('td')]; if (tds.length <= 1) return;
+            const roomName = tds[0] ? tds[0].innerText.trim() : '';
+            [...priceCols].reverse().forEach(idx => {
+                const td = tds[idx]; if (!td) return;
+                const val = td.innerText.trim().replace(/,/g,'').replace(/\(.*\)/g,'').trim();
+                const price = parseFloat(val);
+                const colLabel = headThs[idx] ? headThs[idx].innerText.trim() : '';
+                const label = roomName + ' — ' + colLabel;
+                const qtyTd = document.createElement('td'); qtyTd.style.textAlign = 'center';
+                
+                let levy = 0;
+                if (activePropertyId === 'kipwe') {
+                    if (label.toLowerCase().includes("child") || label.toLowerCase().includes("guide") || label.toLowerCase().includes("leader") || label.toLowerCase().includes("pilot")) {
+                        levy = 0;
+                    } else {
+                        // Kipwe has low season levy N$ 235 and high season levy N$ 345
+                        if (colLabel.toLowerCase().includes("low season") || label.toLowerCase().includes("low season")) {
+                            levy = 235;
+                        } else {
+                            levy = 345;
+                        }
+                        
+                        // If it's a package row, the levy value in the table is already total (e.g. 2 night package levy is N$ 470)
+                        // But since we override the nights multiplier to 1 for packages, we should store the total package levy directly
+                        if (label.toLowerCase().includes("2-night") || label.toLowerCase().includes("2 night")) {
+                            levy = (colLabel.toLowerCase().includes("low") || label.toLowerCase().includes("low")) ? 470 : 690;
+                        } else if (label.toLowerCase().includes("3-night") || label.toLowerCase().includes("3 night")) {
+                            levy = (colLabel.toLowerCase().includes("low") || label.toLowerCase().includes("low")) ? 705 : 1035;
+                        }
+                    }
+                } else if (activePropertyId === 'mowani') {
+                    if (label.toLowerCase().includes("child") || label.toLowerCase().includes("guide") || label.toLowerCase().includes("leader") || label.toLowerCase().includes("pilot")) {
+                        levy = 0;
+                    } else {
+                        levy = 325; // flat N$ 325 per night
+                        
+                        // Package levy adjustments
+                        if (label.toLowerCase().includes("2-night") || label.toLowerCase().includes("2 night")) {
+                            levy = 650;
+                        } else if (label.toLowerCase().includes("3-night") || label.toLowerCase().includes("3 night")) {
+                            levy = 975;
+                        }
+                    }
+                } else if (activePropertyId === 'campsite') {
+                    levy = 0;
+                }
+
+                if (!isNaN(price)) {
+                    qtyTd.innerHTML = `<input type="number" min="0" placeholder="" class="rate-qty" data-name="${label}" data-price="${price}" data-levy="${levy}" oninput="updateTotal()" style="width:58px;padding:6px;border:1px solid var(--border);border-radius:6px;background:#fff;color:var(--text-main);font-weight:500;text-align:center;outline:none;">`;
+                } else {
+                    qtyTd.innerHTML = ``;
+                }
+                td.after(qtyTd);
+            });
+        });
+    });
+    return div.innerHTML;
+}
+
+let calendarState = {
+    month: new Date().getFullYear() === 2026 ? new Date().getMonth() : 5,
+    year: 2026,
+    rangeStart: null,
+    rangeEnd: null
+};
+
+function calculateNights() {
+    let din='', dout='', nights=1;
+    if(calendarState.rangeStart){const d1=new Date(calendarState.rangeStart.getTime()-calendarState.rangeStart.getTimezoneOffset()*60000);din=d1.toISOString().split('T')[0];}
+    if(calendarState.rangeStart&&calendarState.rangeEnd){const d2=new Date(calendarState.rangeEnd.getTime()-calendarState.rangeEnd.getTimezoneOffset()*60000);dout=d2.toISOString().split('T')[0];const diff=Math.ceil((calendarState.rangeEnd-calendarState.rangeStart)/(1000*60*60*24));nights=diff>0?diff:1;}
+    document.getElementById('b-date-in').value=din;document.getElementById('b-date-out').value=dout;
+    document.getElementById('nights-count').innerText=nights;
+    const disp=document.getElementById('b-dates-display');
+    if(disp){if(din&&dout)disp.innerText=din+'  →  '+dout+'  ('+nights+' night'+(nights>1?'s':'')+')';else if(din)disp.innerText=din+'  →  Select check-out date';else disp.innerText='Select dates from the calendar above';}
+    updateTotal();
+}
+
+function renderCustomCalendar() {
+    const root=document.getElementById('inline-calendar');if(!root)return;root.innerHTML='';
+    const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const dayLabels=['Su','Mo','Tu','We','Th','Fr','Sa'];
+    let m1=calendarState.month,y1=calendarState.year,m2=m1+1,y2=y1;
+    if(m2>11){m2=0;y2=y1+1;}
+    const nav=document.createElement('div');nav.className='dew-calendar-nav';
+    const prevBtn=document.createElement('button');prevBtn.className='dew-calendar-nav-btn';prevBtn.innerHTML='&lsaquo;';
+    prevBtn.onclick=()=>{calendarState.month--;if(calendarState.month<0){calendarState.month=11;calendarState.year--;}renderCustomCalendar();};
+    const t1=document.createElement('span');t1.className='dew-calendar-month-title';t1.textContent=monthNames[m1]+' '+y1;
+    const t2=document.createElement('span');t2.className='dew-calendar-month-title';t2.textContent=monthNames[m2]+' '+y2;
+    const nextBtn=document.createElement('button');nextBtn.className='dew-calendar-nav-btn';nextBtn.innerHTML='&rsaquo;';
+    nextBtn.onclick=()=>{calendarState.month++;if(calendarState.month>11){calendarState.month=0;calendarState.year++;}renderCustomCalendar();};
+    nav.append(prevBtn,t1,t2,nextBtn);root.appendChild(nav);
+    function buildMonth(month,year){
+        const cal=document.createElement('div');cal.className='dew-calendar';
+        const header=document.createElement('div');header.className='dew-calendar-header';
+        dayLabels.forEach(d=>{const l=document.createElement('div');l.className='dew-calendar-day-label';l.textContent=d;header.appendChild(l);});
+        cal.appendChild(header);
+        const gridEl=document.createElement('div');gridEl.className='dew-calendar-grid';
+        const firstDay=new Date(year,month,1).getDay();const daysInMonth=new Date(year,month+1,0).getDate();
+        const today=new Date();today.setHours(0,0,0,0);
+        const minDate = new Date(2026, 0, 1);
+        const maxDate = new Date(2026, 11, 31);
+        for(let i=0;i<firstDay;i++){const e=document.createElement('div');e.className='dew-calendar-day dew-empty';gridEl.appendChild(e);}
+        for(let d=1;d<=daysInMonth;d++){
+            const dayEl=document.createElement('div');dayEl.className='dew-calendar-day';dayEl.textContent=d;
+            const thisDate=new Date(year,month,d);
+            if(thisDate<minDate || thisDate>maxDate)dayEl.classList.add('dew-past');
+            else{
+                if(thisDate.toDateString()===today.toDateString())dayEl.classList.add('dew-today');
+                if(calendarState.rangeStart&&thisDate.toDateString()===calendarState.rangeStart.toDateString())dayEl.classList.add('dew-range-start');
+                else if(calendarState.rangeEnd&&thisDate.toDateString()===calendarState.rangeEnd.toDateString())dayEl.classList.add('dew-range-end');
+                else if(calendarState.rangeStart&&calendarState.rangeEnd&&thisDate>calendarState.rangeStart&&thisDate<calendarState.rangeEnd)dayEl.classList.add('dew-range');
+                dayEl.onclick=()=>{
+                    if(!calendarState.rangeStart||(calendarState.rangeStart&&calendarState.rangeEnd)){calendarState.rangeStart=thisDate;calendarState.rangeEnd=null;}
+                    else{if(thisDate>calendarState.rangeStart)calendarState.rangeEnd=thisDate;else{calendarState.rangeEnd=calendarState.rangeStart;calendarState.rangeStart=thisDate;}}
+                    renderCustomCalendar();calculateNights();
+                };
+            }
+            gridEl.appendChild(dayEl);
+        }
+        cal.appendChild(gridEl);return cal;
+    }
+    const container=document.createElement('div');container.className='dew-calendar-container';
+    container.appendChild(buildMonth(m1,y1));container.appendChild(buildMonth(m2,y2));root.appendChild(container);
+}
+
+function openProperty(id) {
+    activePropertyId = id;
+    const d=DB[id];if(!d)return;
+    if (window.location.hash !== '#' + id) {
+        window.location.hash = id;
+    }
+    document.getElementById('main-view').style.display='none';
+    document.getElementById('detail-view').style.display='block';
+    window.scrollTo(0,0);
+    document.getElementById('d-title').innerText=d.name;
+    document.getElementById('d-intro').innerText=d.intro;
+    document.getElementById('d-location').innerText=d.location;
+    document.getElementById('spec-location').innerText=d.location;
+    const galleryFull=document.getElementById('d-gallery-full');galleryFull.innerHTML='';
+    if(d.images)d.images.forEach(src=>{galleryFull.innerHTML+=`<img src="${src}" class="gallery-img">`;});
+    const calendarBlock=document.getElementById('global-dates-ui');calendarBlock.style.display='block';
+    document.getElementById('tab-1').innerHTML=parseTab1(d.tab1);document.getElementById('tab-1').prepend(calendarBlock);
+    document.getElementById('tab-2').innerHTML=parseTab1(d.tab2);document.getElementById('tab-3').innerHTML=d.tab3;
+    document.querySelectorAll('.rate-qty').forEach(el=>el.addEventListener('input',updateTotal));
+    const saved=localStorage.getItem('dt_agent_email');if(saved)document.getElementById('b-agent-email').value=saved;
+    calendarState={
+        month: new Date().getFullYear() === 2026 ? new Date().getMonth() : 5, 
+        year: 2026, 
+        rangeStart: null, 
+        rangeEnd: null
+    };
+    selectedItems=[];const finalBtn=document.getElementById('tab-btn-5');if(finalBtn)finalBtn.classList.remove('ready','active');
+    renderCustomCalendar();calculateNights();updateTotal();switchTab(1);
+}
+
+function closeProperty(){
+    window.location.hash = "";
+    document.getElementById('detail-view').style.display='none';
+    document.getElementById('main-view').style.display='block';
+    window.scrollTo(0,0);
+}
+
+function switchTab(num){
+    if(num===5&&!document.getElementById('tab-btn-5').classList.contains('ready'))return;
+    for(let i=1;i<=5;i++){document.getElementById('tab-btn-'+i)?.classList.remove('active');document.getElementById('tab-'+i)?.classList.remove('active');}
+    document.getElementById('tab-btn-'+num)?.classList.add('active');document.getElementById('tab-'+num)?.classList.add('active');
+    if(num===5){
+        renderBookingSummary();
+        document.getElementById('booking-bar').style.display = 'none';
+    } else {
+        updateTotal();
+    }
+
+const _tabsEl=document.querySelector('.tabs');const _tabContent=document.getElementById('tab-'+num);if(_tabsEl&&_tabContent){requestAnimationFrame(()=>{const _scrollY=_tabContent.getBoundingClientRect().top+window.pageYOffset-_tabsEl.offsetHeight-32;window.scrollTo({top:_scrollY,behavior:'smooth'});});}
+}
+
+let selectedItems=[];
+function updateTotal(){
+    selectedItems=[];let totalAccom=0;let totalLevy=0;
+    const nights=parseInt(document.getElementById('nights-count')?.innerText)||1;
+    document.querySelectorAll('.rate-qty').forEach(el=>{
+        const qty=parseInt(el.value)||0;
+        if(qty>0){
+            const price=parseFloat(el.dataset.price);
+            const levy=parseFloat(el.dataset.levy)||0;
+            const name=el.dataset.name;
+            
+            // If it is a package rate, we do not multiply the base package rate or the package levy by nights.
+            const isPackage = name.toLowerCase().includes('package') || name.toLowerCase().includes('pack');
+            const mult = isPackage ? 1 : nights;
+            
+            const lineAccom=qty*price*mult;
+            const lineLevy=qty*levy*mult;
+            totalAccom+=lineAccom;
+            totalLevy+=lineLevy;
+            selectedItems.push({name,qty,price,levy,nights:mult,total:lineAccom});
+        }
+    });
+    const grandTotal=totalAccom+totalLevy;
+    const bar=document.getElementById('booking-bar');const finalBtn=document.getElementById('tab-btn-5');
+    const isFinaliseTabActive = document.getElementById('tab-5')?.classList.contains('active');
+    if(grandTotal>0){
+        if (isFinaliseTabActive) {
+            bar.style.display='none';
+        } else {
+            bar.style.display='flex';
+        }
+        document.getElementById('booking-total').innerText='Total: N$ '+grandTotal.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+        const brkEl=document.getElementById('booking-breakdown');
+        if(brkEl){
+            if(totalLevy>0)brkEl.innerText="Accommodation N$ "+totalAccom.toLocaleString('en-US',{minimumFractionDigits:2})+"  +  Levy N$ "+totalLevy.toLocaleString('en-US',{minimumFractionDigits:2});
+            else brkEl.innerText="";
+        }
+        if(finalBtn)finalBtn.classList.add('ready');
+    }
+    else{bar.style.display='none';if(finalBtn)finalBtn.classList.remove('ready');}
+    if(isFinaliseTabActive)renderBookingSummary();
+}
+
+function renderBookingSummary(){
+    const summary=document.getElementById('booking-summary');if(!summary)return;
+    if(!selectedItems.length){summary.innerHTML='<p style="color:var(--text-muted);margin:0;font-size:0.88rem;">Select rates from the tabs above to build your booking.</p>';return;}
+    let html='<ul style="list-style:none;padding:0;margin:0;">';
+    let totalAccom = 0;
+    let totalLevy = 0;
+    selectedItems.forEach(item=>{
+        const isPackage = item.name.toLowerCase().includes('package') || item.name.toLowerCase().includes('pack');
+        const lineAccom = item.qty * item.price * item.nights;
+        const lineLevy = item.qty * (item.levy || 0) * item.nights;
+        totalAccom += lineAccom;
+        totalLevy += lineLevy;
+        
+        const nightText = isPackage ? 'package stay' : `${item.nights} night${item.nights>1?'s':''}`;
+        html+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem;">
+            <span><strong>${item.qty}&times;</strong> ${item.name} <span style="color:var(--text-muted);font-size:0.8rem;">&times; ${nightText}</span></span>
+            <span style="color:var(--text-main);font-weight:500;">N$ ${lineAccom.toLocaleString('en-US',{minimumFractionDigits:2})}</span>
+        </li>`;
+    });
+    if (totalLevy > 0) {
+        html+=`<li style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border);font-size:0.88rem;color:var(--seafoam);">
+            <span><strong>Compulsory Conservancy Levy</strong> <span style="color:var(--text-muted);font-size:0.8rem;">(Non-commissionable)</span></span>
+            <span style="font-weight:500;color:var(--seafoam);">N$ ${totalLevy.toLocaleString('en-US',{minimumFractionDigits:2})}</span>
+        </li>`;
+    }
+    const grandTotal = totalAccom + totalLevy;
+    html+=`<li style="display:flex;justify-content:space-between;margin-top:14px;font-family:var(--font-head);font-size:1.35rem;border-top:1px solid var(--border);padding-top:12px;">
+        <span>Grand Total</span>
+        <span style="color:var(--gold);font-weight:600;">N$ ${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2})}</span>
+    </li></ul>`;
+    summary.innerHTML=html;
+}
+
+async function submitBooking(e){
+    e.preventDefault();
+    if(!selectedItems.length){alert('Please select at least one rate before submitting.');return;}
+    
+    const dateIn=document.getElementById('b-date-in').value;
+    const dateOut=document.getElementById('b-date-out').value;
+    if(!dateIn || !dateOut){
+        alert('Please select your travel dates on the calendar before submitting.');
+        switchTab(1); // switch back to accommodation tab where calendar is
+        return;
+    }
+
+    const lodgeName=document.getElementById('d-title').innerText,agentEmail=document.getElementById('b-agent-email').value,status=document.getElementById('b-status').value,clientName=document.getElementById('b-name').value,guideRooms=document.getElementById('b-guide').value||'0',arriving=document.getElementById('b-arriving').value,departing=document.getElementById('b-departing').value,msg=document.getElementById('b-message').value;
+    localStorage.setItem('dt_agent_email',agentEmail);
+    const btn=e.target.querySelector('button[type="submit"]');
+    btn.innerHTML='<span style="display:inline-block;border:2px solid #fff;border-top-color:transparent;border-radius:50%;width:14px;height:14px;animation:spin 1s linear infinite;margin-right:8px;vertical-align:middle;"></span>Sending...';btn.disabled=true;
+    
+    let totalAccom = 0;
+    let totalLevy = 0;
+    selectedItems.forEach(item => {
+        totalAccom += item.qty * item.price * item.nights;
+        totalLevy += item.qty * (item.levy || 0) * item.nights;
+    });
+    const grandTotal = totalAccom + totalLevy;
+
+    const htmlItems=selectedItems.map(item=>{
+        const isPackage = item.name.toLowerCase().includes('package') || item.name.toLowerCase().includes('pack');
+        const nightText = isPackage ? 'package stay' : `${item.nights} night${item.nights>1?'s':''}`;
+        return `<tr><td style="padding:10px;border-bottom:1px solid #eee;"><strong>${item.qty}&times;</strong> ${item.name} &times; ${nightText}</td><td style="padding:10px;border-bottom:1px solid #eee;text-align:right;color:#C09A6B;"><strong>N$ ${(item.qty*item.price*item.nights).toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr>`;
+    }).join('');
+    
+    let levyRowHtml = "";
+    if (totalLevy > 0) {
+        levyRowHtml = `<tr><td style="padding:10px;border-bottom:1px solid #eee;color:#8CA89E;"><strong>Compulsory Conservancy Levy</strong> (Non-commissionable)</td><td style="padding:10px;border-bottom:1px solid #eee;text-align:right;color:#8CA89E;"><strong>N$ ${totalLevy.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr>`;
+    }
+
+    let guideRowHtml = "";
+    const parsedGuideRooms = parseInt(guideRooms) || 0;
+    if (parsedGuideRooms > 0) {
+        guideRowHtml = `<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Guide/Pilot Rooms</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${parsedGuideRooms}</td></tr>`;
+    }
+
+    let notesHtml = "";
+    if (msg && msg.trim().length > 0) {
+        notesHtml = `<div style="background:#f9f7f4;padding:18px;border-radius:8px;border-left:3px solid #8CA89E;"><p style="margin:0 0 6px;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#847970;">Notes</p><p style="margin:0;font-size:14px;color:#555;white-space:pre-line;">${msg}</p></div>`;
+    }
+
+    const emailHtml=`<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden;"><div style="background:#3E3832;padding:32px;text-align:center;color:#fff;"><p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#C09A6B;">Chiwani Safari Camps Rates Portal</p><h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300;">${lodgeName}</h1><p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#8CA89E;">New ${status}</p></div><div style="padding:32px;background:#fff;"><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:28px;font-size:14px;"><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Consultant</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${agentEmail}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Client</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${clientName}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Date In</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateIn}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Date Out</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${dateOut}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Arriving From</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${arriving}</td></tr><tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#847970;">Departing To</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right;">${departing}</td></tr>${guideRowHtml}</table><p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:#C09A6B;margin-bottom:12px;">Requested Rates</p><table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;font-size:14px;">${htmlItems}${levyRowHtml}<tr><td style="padding:14px 10px;font-size:16px;font-family:Georgia,serif;"><strong>Estimated Total</strong></td><td style="padding:14px 10px;text-align:right;font-size:16px;color:#C09A6B;"><strong>N$ ${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2})}</strong></td></tr></table>${notesHtml}</div></div>`;
+    try{
+        const res=await fetch('https://desert-tracks.vercel.app/api/send_email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:'bookings@desert-tracks.com',subject:`New ${status}: ${lodgeName} — ${clientName}`,html:emailHtml})});
+        if(res.ok){alert('Booking request sent to bookings@desert-tracks.com');closeProperty();e.target.reset();selectedItems=[];updateTotal();}
+        else{const data=await res.json();alert('Failed: '+(data.error||'Unknown error'));}
+    }catch(err){alert('Network error. Please try again.');}
+    finally{btn.innerHTML='Send Booking to Operations';btn.disabled=false;}
+}
+
+document.addEventListener('keydown',function(e){if(e.key==='Enter'&&e.target.classList.contains('rate-qty')){e.preventDefault();const inputs=[...document.querySelectorAll('.rate-qty')];const idx=inputs.indexOf(e.target);if(idx>=0&&idx<inputs.length-1)inputs[idx+1].focus();}});
+const savedEmail=localStorage.getItem('dt_agent_email');if(savedEmail){const el=document.getElementById('b-agent-email');if(el)el.value=savedEmail;}
+
+window.addEventListener('load', () => {
+    // Progressive enhancement: load hero image dynamically to check for availability/CORS
+    const img = new Image();
+    img.src = 'https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg';
+    img.onload = () => {
+        document.body.classList.add('hero-image-loaded');
+    };
+
+    const hash = window.location.hash.replace("#", "");
+    if (hash && DB[hash]) {
+        openProperty(hash);
+    }
+});
+</script>
+
+<div id="global-dates-ui" style="display:none;margin-bottom:28px;background:var(--card-bg);padding:32px;border-radius:12px;border:1px solid var(--border);text-align:center;">
+    <h3 style="font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--text-main);margin-bottom:6px;letter-spacing:1px;">When would you like to travel?</h3>
+    <p style="font-family:var(--font-body);font-size:0.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-bottom:24px;">Select your check-in and check-out dates</p>
+    <div id="inline-calendar"></div>
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+        <span id="nights-count" style="font-family:var(--font-head);font-size:2rem;color:var(--gold);">1</span>
+        <span style="font-family:var(--font-body);font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin-left:8px;">Night(s) Selected</span>
+    </div>
+</div>
+<style>
+.burger-menu-btn{position:fixed;top:16px;right:18px;z-index:9999;display:flex;flex-direction:column;justify-content:center;gap:5px;width:44px;height:44px;padding:11px 9px;background:rgba(255,255,255,.92);border:1px solid var(--gold-light,rgba(184,149,106,.25));border-radius:9px;box-shadow:0 4px 16px rgba(0,0,0,.10);cursor:pointer;}
+.burger-menu-btn span{display:block;width:100%;height:2px;background:var(--gold,#B8956A);transition:transform .3s,opacity .2s;}
+.burger-menu-btn.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger-menu-btn.active span:nth-child(2){opacity:0;}
+.burger-menu-btn.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+#mm-backdrop{position:fixed;inset:0;background:rgba(44,40,36,.45);opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s;z-index:99999;}
+#mm-backdrop.open{opacity:1;visibility:visible;}
+#mobile-menu{position:fixed;top:0;left:0;height:100%;width:min(420px,100%);background:#F5F3EF;transform:translateX(-100%);transition:transform .45s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:18px 26px 40px;overflow-y:auto;z-index:100000;box-shadow:6px 0 40px rgba(0,0,0,.16);}
+#mobile-menu.open{transform:translateX(0);}
+#mobile-menu .mm-top{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(184,149,106,.22);padding-bottom:16px;}
+#mobile-menu .mm-logo{font-family:var(--font-head,serif);color:var(--gold,#B8956A);letter-spacing:3px;text-transform:uppercase;font-size:1.15rem;}
+#mobile-menu .mm-close{background:none;border:none;font-size:2rem;color:var(--gold,#B8956A);cursor:pointer;line-height:1;}
+#mobile-menu .mm-section{border-bottom:1px solid rgba(184,149,106,.14);}
+#mobile-menu .mm-head{display:flex;align-items:center;justify-content:space-between;width:100%;background:none;border:none;text-align:left;font-family:var(--font-head,serif);color:var(--gold,#B8956A);font-weight:500;font-size:16px;padding:16px 2px 12px;cursor:pointer;}
+#mobile-menu .mm-arrow{color:var(--seafoam,#7BA99A);font-size:14px;transition:transform .3s;}
+#mobile-menu .mm-section.collapsed .mm-arrow{transform:rotate(-90deg);}
+#mobile-menu .mm-body{overflow:hidden;max-height:1400px;opacity:1;transition:max-height .5s cubic-bezier(.22,1,.36,1),opacity .4s ease;}
+#mobile-menu .mm-section.collapsed .mm-body{max-height:0;opacity:0;}
+#mobile-menu a{display:block;padding:10px 2px;color:var(--text-main,#2C2824);text-decoration:none;font-size:14px;border-bottom:1px solid rgba(0,0,0,.05);}
+#mobile-menu .mm-regions{columns:2;column-gap:18px;}
+#mobile-menu .mm-listprop{width:100%;margin-top:24px;background:transparent;color:var(--gold,#B8956A);border:1px solid var(--gold,#B8956A);padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+#mobile-menu .mm-signin{width:100%;margin-top:12px;background:var(--seafoam,#7BA99A);color:#fff;border:none;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
+</style><div id="mm-backdrop" onclick="closeMobileMenu()"></div><div id="mobile-menu" role="dialog" aria-label="Menu"><div class="mm-top"><span class="mm-logo">Namibia Rates</span><button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><div class="mm-regions"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Vehicle rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Activity rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Home &amp; search</a></div></div><button class="mm-listprop" type="button" onclick="location.href='/supplier-portal/'">Supplier Portal</button><button class="mm-signin" id="mm-agent" type="button">Agent Sign In</button></div><script>function toggleMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){var o=m.classList.toggle("open");if(o){m.querySelectorAll('.mm-section').forEach(function(s){s.classList.remove('collapsed');});}if(b)b.classList.toggle("active",o);if(k)k.classList.toggle("open",o);document.body.style.overflow=o?"hidden":"";}}function closeMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn"),k=document.getElementById("mm-backdrop");if(m){m.classList.remove("open");if(b)b.classList.remove("active");if(k)k.classList.remove("open");document.body.style.overflow="";}}function toggleSection(btn){var s=btn.closest(".mm-section");if(s)s.classList.toggle("collapsed");}(function(){var a=document.getElementById("mm-agent");if(!a)return;if(sessionStorage.getItem("nr_agent_token")){a.textContent="Sign Out";a.onclick=function(){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.href="/";};}else{a.onclick=function(){location.href="/#agent";};}})();</script>
+</body>
+</html>
