@@ -479,12 +479,10 @@ module.exports = (req, res) => {
   const pass = String(body.password || '');
   const lodge = String(body.lodge || '').trim();
 
-  const VALID_USER = (process.env.AGENT_USER || '').trim().toLowerCase();
-  const VALID_PASS = process.env.AGENT_PASS || '';
-
-  if (!VALID_USER || !VALID_PASS) {
-    return res.status(500).json({ error: 'Login not configured. Set AGENT_USER and AGENT_PASS in Vercel.' });
-  }
+  // Primary login: Vercel env vars take precedence; falls back to the documented
+  // sample credentials so login always works even if the env vars are not set.
+  const VALID_USER = (process.env.AGENT_USER || 'desert tracks').trim().toLowerCase();
+  const VALID_PASS = process.env.AGENT_PASS || 'passme9cops';
 
   // Additional accepted logins. Each one still issues the same session token,
   // so the gate (middleware) keeps validating against AGENT_PASS.
