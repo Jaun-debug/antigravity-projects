@@ -377,7 +377,7 @@ function switchTab(num) {
     document.getElementById('tab-btn-'+num)?.classList.add('active'); document.getElementById('tab-'+num)?.classList.add('active');
     if(num===5) renderBookingSummary();
 
-const _tabsEl=document.querySelector('.tabs');const _tabContent=document.getElementById('tab-'+num);if(_tabsEl&&_tabContent){requestAnimationFrame(()=>{const _scrollY=_tabContent.getBoundingClientRect().top+window.pageYOffset-_tabsEl.offsetHeight-32;window.scrollTo({top:_scrollY,behavior:'smooth'});});}
+
 }
 
 let selectedItems = [];
