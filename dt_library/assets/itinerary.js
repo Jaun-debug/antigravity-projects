@@ -115,6 +115,9 @@
     // ISO dates straight from the booking fields (set by the sheet's own calendar)
     try { var di = document.getElementById('b-date-in'); if (di) dateInISO = di.value || ''; } catch (e) {}
     try { var dou = document.getElementById('b-date-out'); if (dou) dateOutISO = dou.value || ''; } catch (e) {}
+    // group sheets don't expose checkIn/checkOut — derive display dates from the ISO fields
+    if (!dateIn && dateInISO) { var a1 = new Date(dateInISO + 'T00:00:00'); if (!isNaN(a1)) dateIn = fmtDate(a1); }
+    if (!dateOut && dateOutISO) { var a2 = new Date(dateOutISO + 'T00:00:00'); if (!isNaN(a2)) dateOut = fmtDate(a2); }
     return { items: items, total: total, dateIn: dateIn, dateOut: dateOut, dateInISO: dateInISO, dateOutISO: dateOutISO };
   }
 
@@ -135,31 +138,60 @@
     return urls;
   }
 
+  function isGroupSheet() { return typeof openProperty === 'function' && !!document.getElementById('d-title'); }
+
+  /* ---- details for a lodge open inside a group/collection sheet ---- */
+  function groupLodge() {
+    var dt = document.getElementById('d-title');
+    var dv = document.getElementById('detail-view');
+    var open = dv && getComputedStyle(dv).display !== 'none';
+    var name = dt ? (dt.innerText || dt.textContent || '').trim() : '';
+    if (!open || !name) return null;
+    var loc = document.getElementById('d-location') || document.getElementById('spec-location');
+    var region = loc ? (loc.innerText || loc.textContent || '').trim() : '';
+    var photos = [], seen = {};
+    document.querySelectorAll('#d-gallery img').forEach(function (im) {
+      var s = im.getAttribute('src'); if (s && !seen[s] && photos.length < 3) { seen[s] = 1; photos.push(s); }
+    });
+    var intro = document.getElementById('d-intro');
+    var desc = intro ? (intro.innerText || intro.textContent || '').trim() : '';
+    if (desc.length > 320) desc = desc.slice(0, 317).replace(/\s+\S*$/, '') + '…';
+    var url = location.pathname + (window.__nrLodgeKey ? '?lodge=' + encodeURIComponent(window.__nrLodgeKey) : '');
+    return { name: name, region: region, regionUrl: '', url: url, desc: desc, photos: photos };
+  }
+
   /* ---- add the lodge of the current sheet (auto-detected) ---- */
   window.nrAddCurrentLodge = function (btn) {
-    var name = (document.title || '').split(' — ')[0].split(' | ')[0].split(' STO')[0].trim() || 'This lodge';
-    var link = document.querySelector('#main-view a.back-btn[href*="-accommodation"]')
-            || document.querySelector('a[href*="-accommodation/"]');
-    var regionUrl = link ? link.getAttribute('href') : '';
+    var base;
+    if (isGroupSheet()) {
+      base = groupLodge();
+      if (!base) { toast('Open a lodge in this collection first, then add it.'); return; }
+    } else {
+      var nm = (document.title || '').split(' — ')[0].split(' | ')[0].split(' STO')[0].trim() || 'This lodge';
+      var link = document.querySelector('#main-view a.back-btn[href*="-accommodation"]')
+              || document.querySelector('a[href*="-accommodation/"]');
+      var regionUrl = link ? link.getAttribute('href') : '';
+      base = { name: nm, region: regionLabel(regionUrl), regionUrl: regionUrl, url: location.pathname, desc: lodgeBlurb(), photos: lodgePhotos() };
+    }
     var r = currentRates();
     var ok = add({
-      name: name,
-      region: regionLabel(regionUrl),
-      regionUrl: regionUrl,
-      url: location.pathname,
+      name: base.name,
+      region: base.region,
+      regionUrl: base.regionUrl,
+      url: base.url,
       items: r.items,
       total: r.total,
       dateIn: r.dateIn,
       dateOut: r.dateOut,
       dateInISO: r.dateInISO,
       dateOutISO: r.dateOutISO,
-      desc: lodgeBlurb(),
-      photos: lodgePhotos()
+      desc: base.desc,
+      photos: base.photos
     });
     // remember the checkout so the NEXT lodge's calendar can carry on from it
     if (ok && r.dateOutISO) { try { sessionStorage.setItem('nr_cursor', r.dateOutISO); } catch (e) {} }
     // best-effort geocode so the itinerary page can estimate drive distances
-    geocodeAndStore(location.pathname, name, regionLabel(regionUrl));
+    geocodeAndStore(base.url, base.name, base.region);
     if (ok && btn) {
       var orig = btn.getAttribute('data-label') || btn.textContent;
       btn.setAttribute('data-label', orig);
@@ -219,7 +251,7 @@
 
   /* ---- right-edge vertical tabs: Add to Itinerary + Finalise Booking (rate sheets only) ---- */
   function injectVTabs() {
-    if (typeof goFinalise !== 'function') return;        // only on lodge rate sheets
+    if (typeof goFinalise !== 'function' && typeof openProperty !== 'function') return; // single OR group rate sheets
     if (document.getElementById('nr-vtabs')) return;
     var css = ''
       + '#booking-bar{display:none!important}'            // replaced by the floating Finalise tab
@@ -243,13 +275,19 @@
   }
   function floatingFinalise() {
     try {
+      // single sheets can open their rates view; group sheets need a lodge already open
       if (typeof openRates === 'function') {
         var dv = document.getElementById('detail-view');
         if (dv && getComputedStyle(dv).display === 'none') openRates();
       }
+      if (isGroupSheet() && !groupLodge()) {
+        toast('Open a lodge in this collection first.');
+        return;
+      }
       var btn5 = document.getElementById('tab-btn-5');
       var ready = btn5 && btn5.classList.contains('ready');
       if (ready && typeof goFinalise === 'function') { goFinalise(); }
+      else if (ready && typeof switchTab === 'function') { switchTab(5); }   // group sheets
       else {
         toast('Select your rooms and travel dates first to finalise.');
         var anchor = document.getElementById('cal-root') || document.querySelector('.tabs') || document.getElementById('detail-view');
@@ -257,8 +295,18 @@
       }
     } catch (e) {}
   }
+  /* ---- record which lodge is open inside a group sheet (for deep-link + add) ---- */
+  function hookOpenProperty() {
+    try {
+      if (typeof openProperty === 'function' && !openProperty.__nrWrapped) {
+        var orig = openProperty;
+        window.openProperty = function (id) { try { window.__nrLodgeKey = id; } catch (e) {} return orig.apply(this, arguments); };
+        window.openProperty.__nrWrapped = true;
+      }
+    } catch (e) {}
+  }
 
-  function init() { render(); applyCarryOver(); injectVTabs(); }
+  function init() { render(); hookOpenProperty(); applyCarryOver(); injectVTabs(); }
   if (document.readyState === 'loading') {
     window.addEventListener('load', init);
   } else { init(); }
