@@ -249,23 +249,26 @@
     }
   }
 
-  /* ---- horizontal left-side action bar (rate sheets only) ---- */
+  /* ---- sticky action row, packed next to the "Back to Lodge" button ---- */
   function injectVTabs() {
     if (typeof goFinalise !== 'function' && typeof openProperty !== 'function') return; // single OR group rate sheets
     if (document.getElementById('nr-bar')) return;
+    var back = document.querySelector('#detail-view button.back-btn')
+            || document.querySelector('button.back-btn[onclick*="close"]');
+    if (!back) return;                                  // no rates back-button to attach to
     var css = ''
-      + '#booking-bar{display:none!important}'            // replaced by the floating dock
-      + '#nr-bar{position:fixed;left:16px;bottom:16px;z-index:9997;display:flex;flex-wrap:wrap;gap:6px;max-width:min(540px,74vw);'
-      + 'padding:8px;background:rgba(247,245,242,.80);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25);'
-      + 'border:1px solid rgba(184,149,106,.28);border-radius:24px;box-shadow:0 12px 36px rgba(44,40,36,.16)}'
-      + '.nr-b{border:none;cursor:pointer;padding:11px 18px;border-radius:30px;font-family:Inter,sans-serif;font-size:.68rem;'
-      + 'letter-spacing:1.4px;text-transform:uppercase;color:#2C2824;background:transparent;white-space:nowrap;'
-      + 'transition:background .2s,color .2s,transform .15s}'
-      + '.nr-b:hover{background:rgba(44,40,36,.07);transform:translateY(-1px)}'
-      + '.nr-b.primary{background:#B8956A;color:#fff}.nr-b.primary:hover{background:#a8895f;color:#fff}'
-      + '.nr-b.save{color:#5f7f72}'
-      + '@media print{#nr-bar{display:none!important}}'
-      + '@media(max-width:640px){#nr-bar{max-width:92vw}.nr-b{font-size:.62rem;padding:10px 14px}}'
+      + '#booking-bar{display:none!important}'
+      + '#nr-bar{position:sticky;top:0;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:8px;'
+      + 'margin:0 0 26px;padding:12px 0;background:var(--bg,#EEEAE3)}'
+      + '#nr-bar .back-btn{margin-bottom:0!important}'
+      + '.nr-act{display:inline-flex;align-items:center;font-family:var(--font-body,Inter,sans-serif);font-size:.65rem;'
+      + 'letter-spacing:2px;text-transform:uppercase;padding:10px 18px;border-radius:30px;cursor:pointer;'
+      + 'border:1px solid var(--border,rgba(184,149,106,.2));background:transparent;color:var(--text-muted,#7A7269);'
+      + 'transition:var(--transition,all .25s);white-space:nowrap}'
+      + '.nr-act:hover{border-color:var(--gold,#B8956A);color:var(--gold,#B8956A)}'
+      + '.nr-act.primary{background:#B8956A;border-color:#B8956A;color:#fff}.nr-act.primary:hover{filter:brightness(.95);color:#fff}'
+      + '.nr-act.save{color:#5f7f72;border-color:rgba(135,169,150,.55)}.nr-act.save:hover{border-color:#87a996;color:#5f7f72}'
+      + '@media print{.nr-act{display:none!important}}'
       // saved-itineraries overlay
       + '#nr-saved-ov{position:fixed;inset:0;z-index:10000;background:rgba(20,18,16,.55);display:none;align-items:center;justify-content:center;padding:20px}'
       + '#nr-saved-ov.open{display:flex}'
@@ -278,8 +281,10 @@
       + '.nr-saved-close{margin-top:8px;border:1px solid rgba(184,149,106,.4);background:none;color:#7A7269;border-radius:30px;padding:9px 18px;cursor:pointer;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var bar = document.createElement('div'); bar.id = 'nr-bar';
+    back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
+    bar.appendChild(back);                     // back button first, now sticky too
     function mk(label, cls, fn) {
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'nr-b' + (cls ? ' ' + cls : '');
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nr-act' + (cls ? ' ' + cls : '');
       b.textContent = label; b.onclick = fn; bar.appendChild(b); return b;
     }
     var addBtn = mk('+ Add to Itinerary', 'primary', function () { window.nrAddCurrentLodge(addBtn); });
@@ -287,7 +292,6 @@
     mk('View Itinerary', '', function () { location.href = '/itinerary/'; });
     mk('Save Itinerary', 'save', saveCurrentItinerary);
     mk('View Itineraries', '', showSavedItineraries);
-    document.body.appendChild(bar);
   }
   function floatingFinalise() {
     try {
