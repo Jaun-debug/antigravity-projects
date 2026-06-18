@@ -292,7 +292,7 @@
       b.textContent = label; b.onclick = fn; bar.appendChild(b); return b;
     }
     var addBtn = mk('+ Add to Itinerary', 'primary', function () { window.nrAddCurrentLodge(addBtn); });
-    mk('Next Lodge', '', function () { location.href = '/'; });
+    mk('Itinerary Builder', '', function () { location.href = '/builder/'; });
     mk('View Itinerary', '', function () { location.href = '/itinerary/'; });
     mk('Save Itinerary', 'save', saveCurrentItinerary);
     mk('Saved Itineraries', '', showSavedItineraries);

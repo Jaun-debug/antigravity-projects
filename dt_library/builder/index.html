@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, follow">
+<title>Itinerary Builder — Namibia Rates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EEEAE3;--card:#fff;--gold:#B8956A;--green:#87a996;--text-main:#2C2824;--text-muted:#7A7269;
+--border:rgba(184,149,106,0.22);--font-head:'Cormorant Garamond',serif;--font-body:'Inter',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text-main);font-family:var(--font-body);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.banner{background:#2C2824;color:#E9E2D6;font-size:.72rem;letter-spacing:.4px;text-align:center;padding:9px 16px}
+.banner strong{color:#B8956A}
+header.site{display:flex;align-items:center;justify-content:space-between;padding:18px 28px;border-bottom:1px solid var(--border)}
+.logo{font-family:var(--font-head);font-size:1.5rem;font-weight:500;letter-spacing:1px;text-decoration:none}
+.logo span{color:var(--gold)}
+.hlinks a{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;margin-left:18px}
+.hlinks a:hover{color:var(--gold)}
+.wrap{max-width:1180px;margin:0 auto;padding:34px 22px 90px}
+.eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+h1{font-family:var(--font-head);font-weight:300;font-size:clamp(2rem,4vw,3rem);line-height:1.05;margin-bottom:4px}
+.sub{color:var(--text-muted);font-style:italic;font-family:var(--font-head);font-size:1.15rem;margin-bottom:26px}
+.toprow{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:22px}
+.fld{display:flex;flex-direction:column;gap:5px}
+.fld label{font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted)}
+.fld input,.fld select{border:1px solid var(--border);border-radius:9px;padding:9px 11px;font-family:var(--font-body);font-size:.9rem;background:var(--card);color:var(--text-main)}
+.fld input{width:170px}
+.spacer{flex:1 1 auto}
+.btn{display:inline-flex;align-items:center;gap:7px;font-family:var(--font-body);font-size:.68rem;letter-spacing:1.6px;text-transform:uppercase;padding:11px 20px;border-radius:30px;cursor:pointer;border:1px solid var(--gold);background:var(--gold);color:#fff;text-decoration:none;transition:.2s}
+.btn:hover{filter:brightness(.95)}
+.btn.ghost{background:transparent;color:var(--gold)}
+.btn.ghost:hover{background:rgba(184,149,106,.08)}
+.btn.dark{background:#2C2824;border-color:#2C2824}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 8px 30px rgba(44,40,36,.05)}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px;flex-wrap:wrap}
+.panel-head h2{font-family:var(--font-head);font-weight:400;font-size:1.6rem}
+table.bd{width:100%;border-collapse:collapse}
+table.bd th{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);text-align:left;padding:8px 8px;border-bottom:1px solid var(--border);font-weight:500}
+table.bd th.r,table.bd td.r{text-align:right}
+table.bd td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-align:top}
+.rownum{color:var(--gold);font-family:var(--font-head);font-size:1.1rem}
+.cellsel{display:flex;flex-direction:column;gap:6px;min-width:200px}
+.bd select,.bd input{border:1px solid var(--border);border-radius:8px;padding:8px 9px;font-family:var(--font-body);font-size:.85rem;background:#fbfaf8;color:var(--text-main);width:100%}
+.bd .nights,.bd .pax{width:64px;text-align:center}
+.bd .pernight,.bd .subtotal{font-family:var(--font-head);font-size:1.05rem;white-space:nowrap}
+.bd .subtotal{color:var(--gold)}
+.bd .rm{border:none;background:none;color:#c08a8a;cursor:pointer;font-size:1.1rem;padding:0 4px}
+.bd .rm:hover{color:#a85a5a}
+.viewlink{font-size:.64rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-decoration:none;margin-top:4px;display:inline-block}
+.totalbar{display:flex;justify-content:space-between;align-items:baseline;background:#2C2824;color:#fff;border-radius:14px;padding:18px 24px;margin-top:18px}
+.totalbar .lbl{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:#B8956A}
+.totalbar .amt{font-family:var(--font-head);font-size:2rem}
+.note{font-size:.72rem;color:var(--text-muted);margin-top:10px}
+.empty{color:var(--text-muted);font-size:.9rem;padding:14px 4px}
+@media print{.banner,header.site,.toprow .btn,.bd .rm,#addday,.actions,.viewlink{display:none!important}body{background:#fff}}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
+</head>
+<body>
+<div class="banner">&#9888; <strong>Development Version.</strong> Rates are illustrative examples only and do not represent bookable inventory. Confirm live rates &amp; availability with the property.</div>
+<header class="site">
+  <a class="logo" href="/">Namibia<span>Rates</span></a>
+  <div class="hlinks"><a href="/itinerary/">Itinerary</a><a href="/">Home</a></div>
+</header>
+
+<div class="wrap">
+  <p class="eyebrow">Agent Trade Portal</p>
+  <h1>Itinerary Builder</h1>
+  <p class="sub">Cost a trip across any lodge in the Namibia Rates library.</p>
+
+  <div class="toprow">
+    <div class="fld"><label>Quote / client name</label><input id="q-name" type="text" placeholder="e.g. Smith — Namibia 2026"></div>
+    <div class="fld"><label>Adults</label><input id="q-adults" type="number" min="1" value="2"></div>
+    <div class="fld"><label>Children</label><input id="q-children" type="number" min="0" value="0"></div>
+    <div class="spacer"></div>
+    <button class="btn ghost" id="btn-save" type="button">Save quote</button>
+    <button class="btn ghost" id="btn-saved" type="button">Saved quotes</button>
+    <button class="btn ghost" onclick="window.print()" type="button">Print / PDF</button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><h2>Itinerary breakdown</h2><span id="loadmsg" class="note">Loading lodge rates…</span></div>
+    <div style="overflow-x:auto">
+      <table class="bd">
+        <thead><tr>
+          <th style="width:40px">#</th><th style="width:70px">Nights</th><th>Region &amp; Lodge</th><th>Room / rate</th>
+          <th style="width:70px">Pax</th><th class="r" style="width:120px">Per night</th><th class="r" style="width:130px">Subtotal</th><th style="width:30px"></th>
+        </tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+    <button class="btn ghost" id="addday" type="button" style="margin-top:16px">+ Add day / lodge</button>
+    <div class="totalbar"><span class="lbl">Estimated total</span><span class="amt" id="grand">N$ 0.00</span></div>
+    <p class="note">Per-night rates are per person (as published on each lodge sheet). Subtotal = rate × pax × nights. Quotes save to this browser only.</p>
+  </div>
+</div>
+
+<script>
+var DATA={lodges:[]}, rows=[];
+function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
+function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function regions(){var s={};DATA.lodges.forEach(function(l){s[l.region]=1});return Object.keys(s).sort()}
+function lodgesIn(region){var o=[];DATA.lodges.forEach(function(l,i){if(l.region===region)o.push(i)});return o}
+
+function blankRow(){return {nights:2,region:'',lodgeIdx:-1,roomIdx:-1,pax:(parseInt(document.getElementById('q-adults').value)||2)}}
+
+function render(){
+  var tb=document.getElementById('rows');
+  if(!rows.length){tb.innerHTML='<tr><td colspan="8" class="empty">No days yet — tap “Add day / lodge” to start costing.</td></tr>';document.getElementById('grand').textContent=money(0);return}
+  var regs=regions(), grand=0;
+  tb.innerHTML=rows.map(function(r,i){
+    var regOpts='<option value="">Region…</option>'+regs.map(function(rg){return '<option '+(r.region===rg?'selected':'')+'>'+esc(rg)+'</option>'}).join('');
+    var lodgeOpts='<option value="-1">Lodge…</option>';
+    if(r.region){ lodgesIn(r.region).forEach(function(li){ lodgeOpts+='<option value="'+li+'" '+(r.lodgeIdx===li?'selected':'')+'>'+esc(DATA.lodges[li].name)+'</option>'; }); }
+    var roomOpts='<option value="-1">Room / rate…</option>', perNight=0, view='';
+    if(r.lodgeIdx>-1){
+      var L=DATA.lodges[r.lodgeIdx];
+      L.rates.forEach(function(rt,ri){ roomOpts+='<option value="'+ri+'" '+(r.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'; });
+      if(r.roomIdx>-1 && L.rates[r.roomIdx]) perNight=L.rates[r.roomIdx].p;
+      view='<a class="viewlink" href="'+esc(L.file)+'" target="_blank">View sheet ↗</a>';
+    }
+    var sub=perNight*(r.pax||0)*(r.nights||0); grand+=sub;
+    return '<tr>'
+      +'<td class="rownum">'+(i+1)+'</td>'
+      +'<td><input class="nights" type="number" min="1" value="'+(r.nights||1)+'" data-i="'+i+'"></td>'
+      +'<td><div class="cellsel"><select class="reg" data-i="'+i+'">'+regOpts+'</select><select class="lodge" data-i="'+i+'">'+lodgeOpts+'</select>'+view+'</div></td>'
+      +'<td><select class="room" data-i="'+i+'">'+roomOpts+'</select></td>'
+      +'<td><input class="pax" type="number" min="1" value="'+(r.pax||1)+'" data-i="'+i+'"></td>'
+      +'<td class="r pernight">'+(perNight?money(perNight):'—')+'</td>'
+      +'<td class="r subtotal">'+money(sub)+'</td>'
+      +'<td><button class="rm" data-i="'+i+'" title="Remove">&times;</button></td>'
+      +'</tr>';
+  }).join('');
+  document.getElementById('grand').textContent=money(grand);
+  bind();
+}
+function bind(){
+  var tb=document.getElementById('rows');
+  tb.querySelectorAll('.reg').forEach(function(s){s.onchange=function(){var i=+s.dataset.i;rows[i].region=s.value;rows[i].lodgeIdx=-1;rows[i].roomIdx=-1;render()}});
+  tb.querySelectorAll('.lodge').forEach(function(s){s.onchange=function(){var i=+s.dataset.i;rows[i].lodgeIdx=+s.value;rows[i].roomIdx=-1;render()}});
+  tb.querySelectorAll('.room').forEach(function(s){s.onchange=function(){var i=+s.dataset.i;rows[i].roomIdx=+s.value;render()}});
+  tb.querySelectorAll('.nights').forEach(function(inp){inp.onchange=function(){var i=+inp.dataset.i;rows[i].nights=Math.max(1,parseInt(inp.value,10)||1);render()}});
+  tb.querySelectorAll('.pax').forEach(function(inp){inp.onchange=function(){var i=+inp.dataset.i;rows[i].pax=Math.max(1,parseInt(inp.value,10)||1);render()}});
+  tb.querySelectorAll('.rm').forEach(function(b){b.onclick=function(){rows.splice(+b.dataset.i,1);render()}});
+}
+document.getElementById('addday').addEventListener('click',function(){rows.push(blankRow());render()});
+
+// ---- saved quotes (this browser) ----
+var QK='nr_saved_quotes';
+function loadQ(){try{return JSON.parse(localStorage.getItem(QK))||[]}catch(e){return[]}}
+function saveQ(a){try{localStorage.setItem(QK,JSON.stringify(a))}catch(e){}}
+document.getElementById('btn-save').addEventListener('click',function(){
+  if(!rows.length){alert('Add at least one day first.');return}
+  var nm=document.getElementById('q-name').value.trim()||('Quote '+new Date().toLocaleDateString('en-GB'));
+  var nm2=prompt('Name this quote:',nm); if(!nm2)return;
+  var s=loadQ();s.unshift({id:'q'+Date.now(),name:nm2.trim(),savedAt:new Date().toISOString(),
+    adults:document.getElementById('q-adults').value,children:document.getElementById('q-children').value,rows:rows});
+  saveQ(s);alert('Saved: '+nm2.trim());
+});
+document.getElementById('btn-saved').addEventListener('click',function(){
+  var s=loadQ(); if(!s.length){alert('No saved quotes yet.');return}
+  var list=s.map(function(x,i){return (i+1)+'. '+x.name+'  ('+(x.rows?x.rows.length:0)+' days, '+(x.savedAt||'').split('T')[0]+')'}).join('\n');
+  var pick=prompt('Saved quotes — number to LOAD (or d+number to delete, e.g. d2):\n\n'+list); if(!pick)return; pick=pick.trim();
+  if(/^d\s*\d+$/i.test(pick)){var di=parseInt(pick.replace(/[^0-9]/g,''),10)-1;if(s[di]){s.splice(di,1);saveQ(s);alert('Deleted.')}return}
+  var idx=parseInt(pick,10)-1;
+  if(s[idx]){rows=s[idx].rows||[];document.getElementById('q-name').value=s[idx].name||'';if(s[idx].adults)document.getElementById('q-adults').value=s[idx].adults;if(s[idx].children!=null)document.getElementById('q-children').value=s[idx].children;render();alert('Loaded: '+s[idx].name)}
+});
+
+// ---- load rates + seed from a handed-over itinerary if present ----
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){
+  DATA=j; document.getElementById('loadmsg').textContent=j.count+' lodges loaded';
+  // seed from the simple itinerary (sessionStorage) if the agent came from there
+  try{
+    var it=JSON.parse(sessionStorage.getItem('nr_itinerary'))||[];
+    if(it.length){
+      it.forEach(function(x){
+        var li=-1; for(var k=0;k<DATA.lodges.length;k++){ if(DATA.lodges[k].name.toLowerCase()===(x.name||'').toLowerCase()){li=k;break;} }
+        var nights=(x.items&&x.items[0]&&x.items[0].nights)||x.nights||2;
+        rows.push({nights:nights,region:li>-1?DATA.lodges[li].region:'',lodgeIdx:li,roomIdx:-1,pax:parseInt(document.getElementById('q-adults').value)||2});
+      });
+    }
+  }catch(e){}
+  if(!rows.length) rows.push(blankRow());
+  render();
+}).catch(function(){document.getElementById('loadmsg').textContent='Could not load rates.';rows.push(blankRow());render()});
+</script>
+</body>
+</html>
