@@ -255,14 +255,15 @@
     if (document.getElementById('nr-bar')) return;
     var css = ''
       + '#booking-bar{display:none!important}'            // replaced by the floating bar
-      + '#nr-bar{position:fixed;left:14px;bottom:14px;z-index:9997;display:flex;flex-wrap:wrap;gap:8px;max-width:62vw}'
-      + '.nr-b{border:none;cursor:pointer;padding:11px 16px;border-radius:30px;font-family:Inter,sans-serif;'
-      + 'font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#2C2824;'
-      + 'box-shadow:0 6px 18px rgba(44,40,36,.20);transition:filter .2s,transform .15s;white-space:nowrap}'
-      + '.nr-b:hover{filter:brightness(1.1);transform:translateY(-1px)}'
+      + '#nr-bar{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:9997;display:flex;flex-direction:column;gap:10px;align-items:flex-start}'
+      + '.nr-b{border:none;cursor:pointer;padding:13px 22px;border-radius:0 30px 30px 0;font-family:Inter,sans-serif;'
+      + 'font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#2C2824;'
+      + 'box-shadow:4px 5px 18px rgba(44,40,36,.22);white-space:nowrap;'
+      + 'transform:translateX(var(--tuck,-40%));transition:transform .28s cubic-bezier(.22,1,.36,1)}'
+      + '.nr-b:hover,.nr-b:focus{transform:translateX(0)}'
       + '.nr-b.gold{background:#B8956A}.nr-b.green{background:#87a996}'
       + '@media print{#nr-bar{display:none!important}}'
-      + '@media(max-width:640px){#nr-bar{max-width:94vw}.nr-b{font-size:.62rem;padding:9px 12px}}'
+      + '@media(max-width:640px){.nr-b{font-size:.62rem;padding:10px 16px}}'
       // saved-itineraries overlay
       + '#nr-saved-ov{position:fixed;inset:0;z-index:10000;background:rgba(20,18,16,.55);display:none;align-items:center;justify-content:center;padding:20px}'
       + '#nr-saved-ov.open{display:flex}'
@@ -275,16 +276,16 @@
       + '.nr-saved-close{margin-top:8px;border:1px solid rgba(184,149,106,.4);background:none;color:#7A7269;border-radius:30px;padding:9px 18px;cursor:pointer;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var bar = document.createElement('div'); bar.id = 'nr-bar';
-    function mk(label, cls, fn) {
+    function mk(label, cls, tuck, fn) {
       var b = document.createElement('button'); b.type = 'button'; b.className = 'nr-b' + (cls ? ' ' + cls : '');
-      b.textContent = label; b.onclick = fn; bar.appendChild(b); return b;
+      b.textContent = label; b.onclick = fn; b.style.setProperty('--tuck', tuck); bar.appendChild(b); return b;
     }
-    var addBtn = mk('+ Add to Itinerary', 'gold', function () { window.nrAddCurrentLodge(addBtn); });
-    mk('Next Lodge', '', function () { location.href = '/'; });
-    mk('Finalise Booking', '', floatingFinalise);
-    mk('Itinerary Progress', '', function () { location.href = '/itinerary/'; });
-    mk('Save Itinerary', 'green', saveCurrentItinerary);
-    mk('Saved Itineraries', '', showSavedItineraries);
+    // peeking tabs — reveal % when resting, slide to 100% on hover
+    var addBtn = mk('+ Add to Itinerary', 'gold', '-30%', function () { window.nrAddCurrentLodge(addBtn); });
+    mk('Next Lodge', '', '-40%', function () { location.href = '/'; });
+    mk('View Itinerary', '', '-50%', function () { location.href = '/itinerary/'; });
+    mk('Save Itinerary', 'green', '-60%', saveCurrentItinerary);
+    mk('View Itineraries', '', '-70%', showSavedItineraries);
     document.body.appendChild(bar);
   }
   function floatingFinalise() {
