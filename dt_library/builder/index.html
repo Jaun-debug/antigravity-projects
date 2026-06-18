@@ -105,6 +105,13 @@ table.bd td{padding:10px 8px;border-bottom:1px solid var(--border);vertical-alig
 <script>
 var DATA={lodges:[]}, rows=[];
 function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
+function markup(){return Math.max(0,parseFloat(document.getElementById('q-markup').value)||0)}
+function setTotals(net){
+  var mk=markup();
+  document.getElementById('grand-net').textContent=money(net);
+  document.getElementById('mk-lbl').textContent=(mk%1===0?mk.toFixed(0):String(mk));
+  document.getElementById('grand-sell').textContent=money(net*(1+mk/100));
+}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function regions(){var s={};DATA.lodges.forEach(function(l){s[l.region]=1});return Object.keys(s).sort()}
 function lodgesIn(region){var o=[];DATA.lodges.forEach(function(l,i){if(l.region===region)o.push(i)});return o}
