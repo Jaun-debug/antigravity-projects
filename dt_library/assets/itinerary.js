@@ -309,6 +309,55 @@
       }
     } catch (e) {}
   }
+  /* ---- saved itineraries (this browser, localStorage) ---- */
+  var SAVED_KEY = 'nr_saved_itineraries';
+  function loadSaved() { try { return JSON.parse(localStorage.getItem(SAVED_KEY)) || []; } catch (e) { return []; } }
+  function persistSaved(a) { try { localStorage.setItem(SAVED_KEY, JSON.stringify(a)); } catch (e) {} }
+  function saveCurrentItinerary() {
+    var cur = load();
+    if (!cur.length) { toast('Your itinerary is empty — add a lodge first.'); return; }
+    var def = (cur[0] && cur[0].name ? cur[0].name : 'Itinerary') + ' (' + cur.length + ' lodge' + (cur.length > 1 ? 's' : '') + ')';
+    var name = prompt('Name this itinerary:', def);
+    if (!name) return;
+    var saved = loadSaved();
+    saved.unshift({ id: 'it' + Date.now(), name: name.trim(), savedAt: new Date().toISOString(), items: cur });
+    persistSaved(saved);
+    toast('Saved: ' + name.trim());
+  }
+  function showSavedItineraries() {
+    var ov = document.getElementById('nr-saved-ov');
+    if (!ov) {
+      ov = document.createElement('div'); ov.id = 'nr-saved-ov';
+      ov.addEventListener('click', function (e) { if (e.target === ov) ov.classList.remove('open'); });
+      document.body.appendChild(ov);
+    }
+    var saved = loadSaved();
+    var rows = saved.length ? saved.map(function (s) {
+      var when = (s.savedAt || '').split('T')[0];
+      return '<div class="nr-si" data-id="' + s.id + '"><div><div class="nm">' + (s.name || 'Itinerary').replace(/</g, '&lt;') + '</div>'
+        + '<div class="meta">' + (s.items ? s.items.length : 0) + ' lodges · saved ' + when + '</div></div>'
+        + '<div><button class="ld" data-id="' + s.id + '">Load</button><button class="dl" data-id="' + s.id + '">Delete</button></div></div>';
+    }).join('') : '<p style="color:#7A7269;font-size:.9rem">No saved itineraries yet. Build one and tap “Save Itinerary”.</p>';
+    ov.innerHTML = '<div class="nr-saved-card"><h3>Saved itineraries</h3>' + rows
+      + '<button class="nr-saved-close">Close</button></div>';
+    ov.classList.add('open');
+    ov.querySelector('.nr-saved-close').onclick = function () { ov.classList.remove('open'); };
+    ov.querySelectorAll('.ld').forEach(function (b) {
+      b.onclick = function () {
+        var s = loadSaved().filter(function (x) { return x.id === b.getAttribute('data-id'); })[0];
+        if (s) { sessionStorage.setItem(KEY, JSON.stringify(s.items || [])); location.href = '/itinerary/'; }
+      };
+    });
+    ov.querySelectorAll('.dl').forEach(function (b) {
+      b.onclick = function () {
+        persistSaved(loadSaved().filter(function (x) { return x.id !== b.getAttribute('data-id'); }));
+        showSavedItineraries();
+      };
+    });
+  }
+  window.NRItinerary.save = saveCurrentItinerary;
+  window.NRItinerary.showSaved = showSavedItineraries;
+
   /* ---- record which lodge is open inside a group sheet (for deep-link + add) ---- */
   function hookOpenProperty() {
     try {

@@ -127,6 +127,8 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
     <div class="actions">
       <button class="btn dark" id="btn-email" type="button">Email itinerary</button>
       <button class="btn ghost" onclick="window.print()" type="button">Print / Save PDF</button>
+      <button class="btn ghost" id="btn-save" type="button">Save itinerary</button>
+      <button class="btn ghost" id="btn-saved" type="button">Saved itineraries</button>
       <button class="btn ghost" id="btn-clear" type="button">Clear all</button>
     </div>
   </div>
@@ -248,6 +250,31 @@ function render(){
 
 document.getElementById('btn-clear').addEventListener('click',function(){
   if(confirm('Clear all lodges from this itinerary?'))save([]);
+});
+
+// ---- saved itineraries (this browser) ----
+var SAVED_KEY='nr_saved_itineraries';
+function loadSaved(){try{return JSON.parse(localStorage.getItem(SAVED_KEY))||[]}catch(e){return[]}}
+function persistSaved(a){try{localStorage.setItem(SAVED_KEY,JSON.stringify(a))}catch(e){}}
+document.getElementById('btn-save').addEventListener('click',function(){
+  var cur=load();
+  if(!cur.length){alert('Your itinerary is empty.');return}
+  var def=(cur[0]&&cur[0].name?cur[0].name:'Itinerary')+' ('+cur.length+' lodge'+(cur.length>1?'s':'')+')';
+  var name=prompt('Name this itinerary:',def);
+  if(!name)return;
+  var s=loadSaved();s.unshift({id:'it'+Date.now(),name:name.trim(),savedAt:new Date().toISOString(),items:cur});
+  persistSaved(s);alert('Saved: '+name.trim());
+});
+document.getElementById('btn-saved').addEventListener('click',function(){
+  var s=loadSaved();
+  if(!s.length){alert('No saved itineraries yet. Build one and tap “Save itinerary”.');return}
+  var list=s.map(function(x,i){return (i+1)+'. '+x.name+'  ('+(x.items?x.items.length:0)+' lodges, '+(x.savedAt||'').split('T')[0]+')'}).join('\n');
+  var pick=prompt('Saved itineraries — type a number to LOAD it (or "d" + number to delete, e.g. d2):\n\n'+list);
+  if(!pick)return;
+  pick=pick.trim();
+  if(/^d\s*\d+$/i.test(pick)){var di=parseInt(pick.replace(/[^0-9]/g,''),10)-1;if(s[di]){s.splice(di,1);persistSaved(s);alert('Deleted.')}return}
+  var idx=parseInt(pick,10)-1;
+  if(s[idx]){sessionStorage.setItem(KEY,JSON.stringify(s[idx].items||[]));render();estimateDistances();alert('Loaded: '+s[idx].name)}
 });
 
 function buildEmail(items,agent,client,notes,clientMode){
