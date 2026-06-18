@@ -197,7 +197,48 @@
     }
   }
 
-  function init() { render(); applyCarryOver(); }
+  /* ---- right-edge vertical tabs: Add to Itinerary + Finalise Booking (rate sheets only) ---- */
+  function injectVTabs() {
+    if (typeof goFinalise !== 'function') return;        // only on lodge rate sheets
+    if (document.getElementById('nr-vtabs')) return;
+    var css = ''
+      + '#booking-bar{display:none!important}'            // replaced by the floating Finalise tab
+      + '.nr-vtabs{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9997;display:flex;flex-direction:column;gap:10px}'
+      + '.nr-vtab{writing-mode:vertical-rl;border:none;cursor:pointer;padding:18px 11px;border-radius:12px 0 0 12px;'
+      + 'font-family:Inter,sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#fff;'
+      + 'box-shadow:-5px 4px 18px rgba(44,40,36,.20);transition:filter .2s,padding .2s}'
+      + '.nr-vtab:hover{filter:brightness(1.08);padding-right:15px}'
+      + '.nr-vtab.add{background:#B8956A}.nr-vtab.fin{background:#2C2824}'
+      + '@media print{.nr-vtabs{display:none!important}}';
+    var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
+    var box = document.createElement('div'); box.id = 'nr-vtabs'; box.className = 'nr-vtabs';
+    var add = document.createElement('button');
+    add.type = 'button'; add.className = 'nr-vtab add'; add.textContent = '+ Add to Itinerary';
+    add.onclick = function () { window.nrAddCurrentLodge(add); };
+    var fin = document.createElement('button');
+    fin.type = 'button'; fin.className = 'nr-vtab fin'; fin.textContent = 'Finalise Booking';
+    fin.onclick = floatingFinalise;
+    box.appendChild(add); box.appendChild(fin);
+    document.body.appendChild(box);
+  }
+  function floatingFinalise() {
+    try {
+      if (typeof openRates === 'function') {
+        var dv = document.getElementById('detail-view');
+        if (dv && getComputedStyle(dv).display === 'none') openRates();
+      }
+      var btn5 = document.getElementById('tab-btn-5');
+      var ready = btn5 && btn5.classList.contains('ready');
+      if (ready && typeof goFinalise === 'function') { goFinalise(); }
+      else {
+        toast('Select your rooms and travel dates first to finalise.');
+        var anchor = document.getElementById('cal-root') || document.querySelector('.tabs') || document.getElementById('detail-view');
+        if (anchor && anchor.scrollIntoView) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    } catch (e) {}
+  }
+
+  function init() { render(); applyCarryOver(); injectVTabs(); }
   if (document.readyState === 'loading') {
     window.addEventListener('load', init);
   } else { init(); }
