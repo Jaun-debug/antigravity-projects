@@ -51,7 +51,7 @@ font-family:var(--font-body);font-size:.85rem;resize:vertical;min-height:38px;ba
 /* client mode — hide all price/agent-only bits, keep photos + descriptions + distances */
 body.client .rates,body.client .subtotal,body.client #grand,body.client .grand-bar,body.client .grand-note,
 body.client .lodge .links,body.client .note,body.client .nights-ctrl,body.client .qin,body.client .rm-line{display:none!important}
-body.client .leg-in{border:none;background:none;color:var(--text-muted);pointer-events:none}
+body.client .leg-val{border:none;background:none;color:var(--text-muted)}
 .client-toggle{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.8rem;color:var(--text-main)}
 .client-toggle input{width:18px;height:18px}
 .client-flag{display:none;background:#87a996;color:#fff;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
@@ -74,9 +74,8 @@ body.client .client-flag{display:inline-block}
 .lodge .norate{margin-top:12px;font-size:.82rem;color:var(--text-muted);background:#fbfaf8;border:1px dashed var(--border);border-radius:8px;padding:10px 12px}
 .leg{display:flex;align-items:center;gap:12px;margin:-2px 0 12px;padding-left:46px}
 .leg-line{flex:0 0 18px;height:1px;background:var(--border)}
-.leg-in{flex:1 1 auto;max-width:520px;border:1px dashed var(--border);border-radius:30px;padding:8px 16px;
-font-family:var(--font-body);font-size:.8rem;color:var(--text-main);background:#fbfaf8;text-align:center}
-.leg-in::placeholder{color:#b3a89c}
+.leg-val{flex:0 1 auto;border:1px solid var(--border);border-radius:30px;padding:8px 18px;
+font-family:var(--font-body);font-size:.8rem;letter-spacing:.3px;color:var(--text-muted);background:#fbfaf8;text-align:center;white-space:nowrap}
 .leg-ico{flex:0 0 auto;color:var(--gold);font-size:.95rem}
 #grand{margin-top:8px}
 .grand-bar{display:flex;justify-content:space-between;align-items:baseline;background:#2C2824;color:#fff;border-radius:14px;padding:20px 24px}
@@ -140,6 +139,23 @@ function load(){try{return JSON.parse(sessionStorage.getItem(KEY))||[]}catch(e){
 function save(a){sessionStorage.setItem(KEY,JSON.stringify(a));render()}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
+function isoD(d){return d.toISOString().split('T')[0]}
+function fmtD(d){try{return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return''}}
+function lodgeNights(it){return (it.items&&it.items[0]&&it.items[0].nights)||it.nights||1}
+// chain dates: each lodge's check-in = previous lodge's check-out (trip anchored on the 1st lodge's date)
+function rechainDates(items){
+  if(!items.length)return;
+  var start=items[0].dateInISO?new Date(items[0].dateInISO+'T00:00:00'):new Date();
+  if(isNaN(start))start=new Date();
+  start.setHours(0,0,0,0);
+  var cur=new Date(start);
+  items.forEach(function(it){
+    var n=lodgeNights(it);
+    var ci=new Date(cur),co=new Date(cur);co.setDate(co.getDate()+n);
+    it.dateInISO=isoD(ci);it.dateOutISO=isoD(co);it.dateIn=fmtD(ci);it.dateOut=fmtD(co);it.nights=n;
+    cur=co;
+  });
+}
 function recalc(l){var t=0;(l.items||[]).forEach(function(r){r.total=(r.qty||0)*(r.price||0)*(r.nights||1);t+=r.total});l.total=t}
 function update(url,fn){
   var a=load();
@@ -162,6 +178,7 @@ function render(){
     return;
   }
   trip.style.display='';
+  rechainDates(items); sessionStorage.setItem(KEY,JSON.stringify(items));
   sub.textContent=items.length+(items.length===1?' lodge':' lodges')+' in this itinerary.';
   var grandTotal=0;
   list.innerHTML=items.map(function(it,i){
@@ -192,7 +209,7 @@ function render(){
     var photos=(it.photos&&it.photos.length)?'<div class="photos">'+it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" alt="'+esc(it.name)+'">';}).join('')+'</div>':'';
     var leg=(i<items.length-1)
       ? '<div class="leg"><span class="leg-line"></span><span class="leg-ico">&#9660;</span>'
-        +'<input class="leg-in" data-url="'+esc(it.url)+'" value="'+esc(it.legToNext||'')+'" placeholder="Distance / drive to next lodge — e.g. 210 km · ~2h30">'
+        +'<span class="leg-val">'+esc(it.legToNext||'Estimating drive distance…')+'</span>'
         +'<span class="leg-ico">&#9660;</span><span class="leg-line"></span></div>'
       : '';
     return '<div class="lodge"><div class="num">'+(i+1)+'</div><div class="info">'
@@ -226,11 +243,6 @@ function render(){
   list.querySelectorAll('.rm-line').forEach(function(b){b.addEventListener('click',function(){
     var url=b.getAttribute('data-url'),idx=+b.getAttribute('data-idx');
     update(url,function(l){l.items.splice(idx,1)});
-  })});
-  list.querySelectorAll('.leg-in').forEach(function(inp){inp.addEventListener('change',function(){
-    var a=load(),u=inp.getAttribute('data-url');
-    a.forEach(function(x){if(x.url===u){x.legToNext=inp.value;x.legAuto=false;}});
-    sessionStorage.setItem(KEY,JSON.stringify(a));
   })});
 }
 

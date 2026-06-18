@@ -249,29 +249,43 @@
     }
   }
 
-  /* ---- right-edge vertical tabs: Add to Itinerary + Finalise Booking (rate sheets only) ---- */
+  /* ---- horizontal left-side action bar (rate sheets only) ---- */
   function injectVTabs() {
     if (typeof goFinalise !== 'function' && typeof openProperty !== 'function') return; // single OR group rate sheets
-    if (document.getElementById('nr-vtabs')) return;
+    if (document.getElementById('nr-bar')) return;
     var css = ''
-      + '#booking-bar{display:none!important}'            // replaced by the floating Finalise tab
-      + '.nr-vtabs{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:9997;display:flex;flex-direction:column;gap:10px}'
-      + '.nr-vtab{writing-mode:vertical-rl;border:none;cursor:pointer;padding:18px 11px;border-radius:12px 0 0 12px;'
-      + 'font-family:Inter,sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:#fff;'
-      + 'box-shadow:-5px 4px 18px rgba(44,40,36,.20);transition:filter .2s,padding .2s}'
-      + '.nr-vtab:hover{filter:brightness(1.08);padding-right:15px}'
-      + '.nr-vtab.add{background:#B8956A}.nr-vtab.fin{background:#2C2824}'
-      + '@media print{.nr-vtabs{display:none!important}}';
+      + '#booking-bar{display:none!important}'            // replaced by the floating bar
+      + '#nr-bar{position:fixed;left:14px;bottom:14px;z-index:9997;display:flex;flex-wrap:wrap;gap:8px;max-width:62vw}'
+      + '.nr-b{border:none;cursor:pointer;padding:11px 16px;border-radius:30px;font-family:Inter,sans-serif;'
+      + 'font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:#fff;background:#2C2824;'
+      + 'box-shadow:0 6px 18px rgba(44,40,36,.20);transition:filter .2s,transform .15s;white-space:nowrap}'
+      + '.nr-b:hover{filter:brightness(1.1);transform:translateY(-1px)}'
+      + '.nr-b.gold{background:#B8956A}.nr-b.green{background:#87a996}'
+      + '@media print{#nr-bar{display:none!important}}'
+      + '@media(max-width:640px){#nr-bar{max-width:94vw}.nr-b{font-size:.62rem;padding:9px 12px}}'
+      // saved-itineraries overlay
+      + '#nr-saved-ov{position:fixed;inset:0;z-index:10000;background:rgba(20,18,16,.55);display:none;align-items:center;justify-content:center;padding:20px}'
+      + '#nr-saved-ov.open{display:flex}'
+      + '.nr-saved-card{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:80vh;overflow:auto;padding:26px;font-family:Inter,sans-serif}'
+      + '.nr-saved-card h3{font-family:Georgia,serif;font-weight:400;font-size:1.4rem;margin:0 0 14px;color:#2C2824}'
+      + '.nr-si{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid rgba(184,149,106,.25);border-radius:10px;padding:12px 14px;margin-bottom:9px}'
+      + '.nr-si .meta{font-size:.78rem;color:#7A7269}.nr-si .nm{font-size:.95rem;color:#2C2824;font-weight:500}'
+      + '.nr-si button{border:none;background:none;cursor:pointer;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;padding:6px 8px}'
+      + '.nr-si .ld{color:#B8956A}.nr-si .dl{color:#b46a6a}'
+      + '.nr-saved-close{margin-top:8px;border:1px solid rgba(184,149,106,.4);background:none;color:#7A7269;border-radius:30px;padding:9px 18px;cursor:pointer;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
-    var box = document.createElement('div'); box.id = 'nr-vtabs'; box.className = 'nr-vtabs';
-    var add = document.createElement('button');
-    add.type = 'button'; add.className = 'nr-vtab add'; add.textContent = '+ Add to Itinerary';
-    add.onclick = function () { window.nrAddCurrentLodge(add); };
-    var fin = document.createElement('button');
-    fin.type = 'button'; fin.className = 'nr-vtab fin'; fin.textContent = 'Finalise Booking';
-    fin.onclick = floatingFinalise;
-    box.appendChild(add); box.appendChild(fin);
-    document.body.appendChild(box);
+    var bar = document.createElement('div'); bar.id = 'nr-bar';
+    function mk(label, cls, fn) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'nr-b' + (cls ? ' ' + cls : '');
+      b.textContent = label; b.onclick = fn; bar.appendChild(b); return b;
+    }
+    var addBtn = mk('+ Add to Itinerary', 'gold', function () { window.nrAddCurrentLodge(addBtn); });
+    mk('Next Lodge', '', function () { location.href = '/'; });
+    mk('Finalise Booking', '', floatingFinalise);
+    mk('Itinerary Progress', '', function () { location.href = '/itinerary/'; });
+    mk('Save Itinerary', 'green', saveCurrentItinerary);
+    mk('Saved Itineraries', '', showSavedItineraries);
+    document.body.appendChild(bar);
   }
   function floatingFinalise() {
     try {
@@ -306,7 +320,18 @@
     } catch (e) {}
   }
 
-  function init() { render(); hookOpenProperty(); applyCarryOver(); injectVTabs(); }
+  /* ---- on a group sheet, deep-link straight to a lodge via ?lodge=KEY ---- */
+  function maybeOpenFromUrl() {
+    try {
+      if (typeof openProperty !== 'function') return;
+      var m = location.search.match(/[?&]lodge=([^&]+)/);
+      if (!m) return;
+      var dv = document.getElementById('detail-view');
+      var alreadyOpen = dv && getComputedStyle(dv).display !== 'none';
+      if (!alreadyOpen) openProperty(decodeURIComponent(m[1]));
+    } catch (e) {}
+  }
+  function init() { render(); hookOpenProperty(); maybeOpenFromUrl(); applyCarryOver(); injectVTabs(); }
   if (document.readyState === 'loading') {
     window.addEventListener('load', init);
   } else { init(); }
