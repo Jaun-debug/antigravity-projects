@@ -268,7 +268,10 @@
       + '.nr-act:hover{border-color:var(--gold,#B8956A);color:var(--gold,#B8956A)}'
       + '.nr-act.primary{background:#B8956A;border-color:#B8956A;color:#fff}.nr-act.primary:hover{filter:brightness(.95);color:#fff}'
       + '.nr-act.save{color:#5f7f72;border-color:rgba(135,169,150,.55)}.nr-act.save:hover{border-color:#87a996;color:#5f7f72}'
-      + '@media print{.nr-act{display:none!important}}'
+      + '#nr-tabs-host{display:none!important}'                       // hide the old tabs "belt"
+      + '#nr-bar .tab-btn{border-radius:30px;padding:10px 18px;border:1px solid var(--border,rgba(184,149,106,.2))}'
+      + '#nr-bar .tab-btn.active{border-color:transparent}'
+      + '@media print{.nr-act,#nr-bar .tab-btn{display:none!important}}'
       // saved-itineraries overlay
       + '#nr-saved-ov{position:fixed;inset:0;z-index:10000;background:rgba(20,18,16,.55);display:none;align-items:center;justify-content:center;padding:20px}'
       + '#nr-saved-ov.open{display:flex}'
@@ -292,14 +295,14 @@
     mk('View Itinerary', '', function () { location.href = '/itinerary/'; });
     mk('Save Itinerary', 'save', saveCurrentItinerary);
     mk('View Itineraries', '', showSavedItineraries);
-    // the sheet's tabs bar is also sticky — push it to sit just BELOW our row, not behind it
-    function offsetTabs() {
-      var h = bar.offsetHeight || 56;
-      document.querySelectorAll('.tabs').forEach(function (t) { t.style.top = (h + 4) + 'px'; });
+    // pull the sheet's own rate-tabs into this same sticky row (as pills) and hide the old belt
+    var tabsHost = document.querySelector('#detail-view .tabs') || document.querySelector('.tabs');
+    if (tabsHost) {
+      tabsHost.id = 'nr-tabs-host';                          // hidden via CSS, but keep it in the DOM
+      Array.prototype.slice.call(tabsHost.querySelectorAll('.tab-btn')).forEach(function (t) {
+        bar.appendChild(t);                                  // move each tab button into the bar (keeps id + onclick)
+      });
     }
-    offsetTabs();
-    window.addEventListener('resize', offsetTabs);
-    setTimeout(offsetTabs, 400);
   }
   function floatingFinalise() {
     try {
