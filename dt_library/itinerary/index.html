@@ -229,7 +229,7 @@ function render(){
   })});
   list.querySelectorAll('.leg-in').forEach(function(inp){inp.addEventListener('change',function(){
     var a=load(),u=inp.getAttribute('data-url');
-    a.forEach(function(x){if(x.url===u)x.legToNext=inp.value});
+    a.forEach(function(x){if(x.url===u){x.legToNext=inp.value;x.legAuto=false;}});
     sessionStorage.setItem(KEY,JSON.stringify(a));
   })});
 }
@@ -326,9 +326,61 @@ document.getElementById('btn-email').addEventListener('click',async function(){
   finally{btn.textContent=orig;btn.disabled=false;}
 });
 
+// ---- automatic drive-distance estimates (geocode + routing, all approximate) ----
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function haversine(a,b){
+  var R=6371,dLat=(b.lat-a.lat)*Math.PI/180,dLon=(b.lon-a.lon)*Math.PI/180;
+  var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLon/2)*Math.sin(dLon/2);
+  return 2*R*Math.asin(Math.sqrt(s));
+}
+function fmtLeg(km,mins){
+  var h=Math.floor(mins/60),m=mins%60;
+  var t=h>0?(h+'h'+(m<10?'0'+m:m)):(m+' min');
+  return Math.round(km)+' km · ~'+t+' (est.)';
+}
+async function ensureCoords(items){
+  for(var i=0;i<items.length;i++){
+    var it=items[i];
+    if(it.lat&&it.lon)continue;
+    try{
+      var q=encodeURIComponent(it.name+(it.region?', '+it.region:'')+', Namibia');
+      var r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+q,{headers:{'Accept':'application/json'}});
+      var j=await r.json();
+      if(j&&j[0]){it.lat=parseFloat(j[0].lat);it.lon=parseFloat(j[0].lon);}
+      await sleep(1100); // respect Nominatim's ~1 request/second policy
+    }catch(e){}
+  }
+  sessionStorage.setItem(KEY,JSON.stringify(items));
+}
+async function estimateDistances(){
+  var items=load();
+  if(items.length<2)return;
+  var note=document.querySelector('.grand-note');
+  await ensureCoords(items);
+  var changed=false;
+  for(var i=0;i<items.length-1;i++){
+    var A=items[i],B=items[i+1];
+    if(A.legToNext&&!A.legAuto)continue;            // keep manual entries
+    if(!(A.lat&&A.lon&&B.lat&&B.lon))continue;
+    try{
+      var u='https://router.project-osrm.org/route/v1/driving/'+A.lon+','+A.lat+';'+B.lon+','+B.lat+'?overview=false';
+      var r=await fetch(u);var j=await r.json();
+      if(j&&j.routes&&j.routes[0]){
+        A.legToNext=fmtLeg(j.routes[0].distance/1000,Math.round(j.routes[0].duration/60));
+        A.legAuto=true;changed=true;continue;
+      }
+      throw 0;
+    }catch(e){
+      A.legToNext=Math.round(haversine(A,B)*1.35)+' km (approx)';A.legAuto=true;changed=true;
+    }
+  }
+  if(changed){sessionStorage.setItem(KEY,JSON.stringify(items));render();}
+}
+
 // prefill consultant email if the enquiry form saved one earlier
 var saved=localStorage.getItem('dt_agent_email');if(saved){document.getElementById('agent-email').value=saved;}
 render();
+estimateDistances();
 </script>
 </body>
 </html>

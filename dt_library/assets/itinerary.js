@@ -158,6 +158,8 @@
     });
     // remember the checkout so the NEXT lodge's calendar can carry on from it
     if (ok && r.dateOutISO) { try { sessionStorage.setItem('nr_cursor', r.dateOutISO); } catch (e) {} }
+    // best-effort geocode so the itinerary page can estimate drive distances
+    geocodeAndStore(location.pathname, name, regionLabel(regionUrl));
     if (ok && btn) {
       var orig = btn.getAttribute('data-label') || btn.textContent;
       btn.setAttribute('data-label', orig);
@@ -166,6 +168,24 @@
       setTimeout(function () { btn.textContent = orig; btn.disabled = false; }, 2200);
     }
   };
+
+  /* ---- best-effort geocode (OpenStreetMap / Nominatim) ---- */
+  function geocodeAndStore(url, name, region) {
+    try {
+      var q = encodeURIComponent(name + (region ? ', ' + region : '') + ', Namibia');
+      fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + q, { headers: { 'Accept': 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (j) {
+          if (j && j[0]) {
+            var lat = parseFloat(j[0].lat), lon = parseFloat(j[0].lon);
+            var a = load();
+            for (var i = 0; i < a.length; i++) { if (a[i].url === url) { a[i].lat = lat; a[i].lon = lon; break; } }
+            sessionStorage.setItem(KEY, JSON.stringify(a));
+          }
+        })
+        .catch(function () {});
+    } catch (e) {}
+  }
 
   /* ---- carry the previous lodge's check-out onto this sheet's calendar ---- */
   function applyCarryOver() {
