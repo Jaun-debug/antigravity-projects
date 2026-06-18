@@ -120,7 +120,7 @@ function blankRow(){return {nights:2,region:'',lodgeIdx:-1,roomIdx:-1,pax:(parse
 
 function render(){
   var tb=document.getElementById('rows');
-  if(!rows.length){tb.innerHTML='<tr><td colspan="8" class="empty">No days yet — tap “Add day / lodge” to start costing.</td></tr>';document.getElementById('grand').textContent=money(0);return}
+  if(!rows.length){tb.innerHTML='<tr><td colspan="8" class="empty">No days yet — tap “Add day / lodge” to start costing.</td></tr>';setTotals(0);return}
   var regs=regions(), grand=0;
   tb.innerHTML=rows.map(function(r,i){
     var regOpts='<option value="">Region…</option>'+regs.map(function(rg){return '<option '+(r.region===rg?'selected':'')+'>'+esc(rg)+'</option>'}).join('');
@@ -145,7 +145,7 @@ function render(){
       +'<td><button class="rm" data-i="'+i+'" title="Remove">&times;</button></td>'
       +'</tr>';
   }).join('');
-  document.getElementById('grand').textContent=money(grand);
+  setTotals(grand);
   bind();
 }
 function bind(){
@@ -158,6 +158,7 @@ function bind(){
   tb.querySelectorAll('.rm').forEach(function(b){b.onclick=function(){rows.splice(+b.dataset.i,1);render()}});
 }
 document.getElementById('addday').addEventListener('click',function(){rows.push(blankRow());render()});
+document.getElementById('q-markup').addEventListener('input',render);
 
 // ---- saved quotes (this browser) ----
 var QK='nr_saved_quotes';
@@ -168,7 +169,7 @@ document.getElementById('btn-save').addEventListener('click',function(){
   var nm=document.getElementById('q-name').value.trim()||('Quote '+new Date().toLocaleDateString('en-GB'));
   var nm2=prompt('Name this quote:',nm); if(!nm2)return;
   var s=loadQ();s.unshift({id:'q'+Date.now(),name:nm2.trim(),savedAt:new Date().toISOString(),
-    adults:document.getElementById('q-adults').value,children:document.getElementById('q-children').value,rows:rows});
+    adults:document.getElementById('q-adults').value,children:document.getElementById('q-children').value,markup:document.getElementById('q-markup').value,rows:rows});
   saveQ(s);alert('Saved: '+nm2.trim());
 });
 document.getElementById('btn-saved').addEventListener('click',function(){
@@ -177,7 +178,7 @@ document.getElementById('btn-saved').addEventListener('click',function(){
   var pick=prompt('Saved quotes — number to LOAD (or d+number to delete, e.g. d2):\n\n'+list); if(!pick)return; pick=pick.trim();
   if(/^d\s*\d+$/i.test(pick)){var di=parseInt(pick.replace(/[^0-9]/g,''),10)-1;if(s[di]){s.splice(di,1);saveQ(s);alert('Deleted.')}return}
   var idx=parseInt(pick,10)-1;
-  if(s[idx]){rows=s[idx].rows||[];document.getElementById('q-name').value=s[idx].name||'';if(s[idx].adults)document.getElementById('q-adults').value=s[idx].adults;if(s[idx].children!=null)document.getElementById('q-children').value=s[idx].children;render();alert('Loaded: '+s[idx].name)}
+  if(s[idx]){rows=s[idx].rows||[];document.getElementById('q-name').value=s[idx].name||'';if(s[idx].adults)document.getElementById('q-adults').value=s[idx].adults;if(s[idx].children!=null)document.getElementById('q-children').value=s[idx].children;if(s[idx].markup!=null)document.getElementById('q-markup').value=s[idx].markup;render();alert('Loaded: '+s[idx].name)}
 });
 
 // ---- load rates + seed from a handed-over itinerary if present ----
