@@ -258,8 +258,8 @@
     if (!back) return;                                  // no rates back-button to attach to
     var css = ''
       + '#booking-bar{display:none!important}'
-      + '#nr-bar{position:sticky;top:0;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:8px;'
-      + 'margin:0 0 26px;padding:12px 0;background:var(--bg,#EEEAE3)}'
+      + '#nr-bar{position:sticky;top:0;z-index:120;display:flex;flex-wrap:wrap;align-items:center;gap:8px;'
+      + 'margin:0 0 22px;padding:12px 0 14px;background:var(--bg,#EEEAE3)}'
       + '#nr-bar .back-btn{margin-bottom:0!important}'
       + '.nr-act{display:inline-flex;align-items:center;font-family:var(--font-body,Inter,sans-serif);font-size:.65rem;'
       + 'letter-spacing:2px;text-transform:uppercase;padding:10px 18px;border-radius:30px;cursor:pointer;'
@@ -292,6 +292,14 @@
     mk('View Itinerary', '', function () { location.href = '/itinerary/'; });
     mk('Save Itinerary', 'save', saveCurrentItinerary);
     mk('View Itineraries', '', showSavedItineraries);
+    // the sheet's tabs bar is also sticky — push it to sit just BELOW our row, not behind it
+    function offsetTabs() {
+      var h = bar.offsetHeight || 56;
+      document.querySelectorAll('.tabs').forEach(function (t) { t.style.top = (h + 4) + 'px'; });
+    }
+    offsetTabs();
+    window.addEventListener('resize', offsetTabs);
+    setTimeout(offsetTabs, 400);
   }
   function floatingFinalise() {
     try {
