@@ -125,6 +125,7 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
     <div class="field"><label>Send to (leave blank to send to operations)</label><input id="send-to" type="email" placeholder="client@email.com"></div>
     <div class="field"><label>Trip notes (optional)</label><textarea id="trip-notes" placeholder="Routing, dates, preferences…"></textarea></div>
     <div class="actions">
+      <button class="btn" id="btn-cost" type="button">Cost this itinerary &rarr;</button>
       <button class="btn dark" id="btn-email" type="button">Email itinerary</button>
       <button class="btn ghost" onclick="window.print()" type="button">Print / Save PDF</button>
       <button class="btn ghost" id="btn-save" type="button">Save itinerary</button>
@@ -250,6 +251,10 @@ function render(){
 
 document.getElementById('btn-clear').addEventListener('click',function(){
   if(confirm('Clear all lodges from this itinerary?'))save([]);
+});
+document.getElementById('btn-cost').addEventListener('click',function(){
+  if(!load().length){alert('Add a lodge to your itinerary first.');return}
+  location.href='/builder/';   // the builder pre-fills from this itinerary
 });
 
 // ---- saved itineraries (this browser) ----
