@@ -270,7 +270,8 @@
       + '.nr-act.save{color:#5f7f72;border-color:rgba(135,169,150,.55)}.nr-act.save:hover{border-color:#87a996;color:#5f7f72}'
       + '#nr-tabs-host{display:none!important}'                       // hide the old tabs "belt"
       + '#nr-bar .tab-btn{border-radius:30px;padding:10px 18px;border:1px solid var(--border,rgba(184,149,106,.2))}'
-      + '#nr-bar .tab-btn.active{border-color:transparent}'
+      + '#nr-bar .tab-btn.active{background:#B8956A;color:#fff;border-color:transparent}'
+      + '#nr-bar .tab-btn-hl.active{background:var(--seafoam,#87a996);color:#fff;border-color:transparent}'
       + '@media print{.nr-act,#nr-bar .tab-btn{display:none!important}}'
       // saved-itineraries overlay
       + '#nr-saved-ov{position:fixed;inset:0;z-index:10000;background:rgba(20,18,16,.55);display:none;align-items:center;justify-content:center;padding:20px}'
@@ -294,7 +295,7 @@
     mk('Next Lodge', '', function () { location.href = '/'; });
     mk('View Itinerary', '', function () { location.href = '/itinerary/'; });
     mk('Save Itinerary', 'save', saveCurrentItinerary);
-    mk('View Itineraries', '', showSavedItineraries);
+    mk('Saved Itineraries', '', showSavedItineraries);
     // pull the sheet's own rate-tabs into this same sticky row (as pills) and hide the old belt
     var tabsHost = document.querySelector('#detail-view .tabs') || document.querySelector('.tabs');
     if (tabsHost) {
