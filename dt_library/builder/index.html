@@ -328,7 +328,7 @@ document.getElementById('btn-saved').addEventListener('click',function(){
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start()}).catch(function(){start()});
 function seed(){
   try{
-    var it=JSON.parse(sessionStorage.getItem('nr_itinerary'))||[];
+    var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
     it.forEach(function(x){
       var li=-1;for(var k=0;k<RATES.lodges.length;k++){if(RATES.lodges[k].name.toLowerCase()===(x.name||'').toLowerCase()){li=k;break}}
       var nights=(x.items&&x.items[0]&&x.items[0].nights)||x.nights||2;

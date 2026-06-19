@@ -1,5 +1,5 @@
 /* Namibia Rates — Agent Itinerary (front-end, session-scoped)
-   Stores added lodges in sessionStorage so they persist while the agent's
+   Stores added lodges in localStorage so they persist while the agent's
    browser is open and clear when it closes. No database required.
    Exposes:  window.NRItinerary  (load/add/remove/clear/count)
              window.nrAddCurrentLodge(btn)  — adds the lodge of the current sheet
@@ -8,11 +8,11 @@
   var KEY = 'nr_itinerary';
 
   function load() {
-    try { return JSON.parse(sessionStorage.getItem(KEY)) || []; }
+    try { return JSON.parse(localStorage.getItem(KEY)) || []; }
     catch (e) { return []; }
   }
   function save(arr) {
-    sessionStorage.setItem(KEY, JSON.stringify(arr));
+    localStorage.setItem(KEY, JSON.stringify(arr));
     render();
   }
   function count() { return load().length; }
@@ -189,7 +189,7 @@
       photos: base.photos
     });
     // remember the checkout so the NEXT lodge's calendar can carry on from it
-    if (ok && r.dateOutISO) { try { sessionStorage.setItem('nr_cursor', r.dateOutISO); } catch (e) {} }
+    if (ok && r.dateOutISO) { try { localStorage.setItem('nr_cursor', r.dateOutISO); } catch (e) {} }
     // best-effort geocode so the itinerary page can estimate drive distances
     geocodeAndStore(base.url, base.name, base.region);
     if (ok && btn) {
@@ -214,7 +214,7 @@
             var lat = parseFloat(j[0].lat), lon = parseFloat(j[0].lon);
             var a = load();
             for (var i = 0; i < a.length; i++) { if (a[i].url === url) { a[i].lat = lat; a[i].lon = lon; break; } }
-            sessionStorage.setItem(KEY, JSON.stringify(a));
+            localStorage.setItem(KEY, JSON.stringify(a));
           }
         })
         .catch(function () {});
@@ -226,7 +226,7 @@
     try {
       if (typeof selectDate !== 'function' || typeof checkIn === 'undefined') return; // not a rate sheet
       if (checkIn) return;                       // agent has already picked dates here
-      var iso = sessionStorage.getItem('nr_cursor');
+      var iso = localStorage.getItem('nr_cursor');
       if (!iso) return;
       var d = new Date(iso + 'T00:00:00');
       if (isNaN(d.getTime())) return;
@@ -382,7 +382,7 @@
     ov.querySelectorAll('.ld').forEach(function (b) {
       b.onclick = function () {
         var s = loadSaved().filter(function (x) { return x.id === b.getAttribute('data-id'); })[0];
-        if (s) { sessionStorage.setItem(KEY, JSON.stringify(s.items || [])); location.href = '/itinerary/'; }
+        if (s) { localStorage.setItem(KEY, JSON.stringify(s.items || [])); location.href = '/itinerary/'; }
       };
     });
     ov.querySelectorAll('.dl').forEach(function (b) {

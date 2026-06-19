@@ -138,8 +138,8 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
 
 <script>
 var KEY='nr_itinerary';
-function load(){try{return JSON.parse(sessionStorage.getItem(KEY))||[]}catch(e){return[]}}
-function save(a){sessionStorage.setItem(KEY,JSON.stringify(a));render()}
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||[]}catch(e){return[]}}
+function save(a){localStorage.setItem(KEY,JSON.stringify(a));render()}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
 function isoD(d){return d.toISOString().split('T')[0]}
@@ -181,7 +181,7 @@ function render(){
     return;
   }
   trip.style.display='';
-  rechainDates(items); sessionStorage.setItem(KEY,JSON.stringify(items));
+  rechainDates(items); localStorage.setItem(KEY,JSON.stringify(items));
   sub.textContent=items.length+(items.length===1?' lodge':' lodges')+' in this itinerary.';
   var grandTotal=0;
   list.innerHTML=items.map(function(it,i){
@@ -231,7 +231,7 @@ function render(){
   list.querySelectorAll('.note').forEach(function(t){t.addEventListener('input',function(){
     var a=load(),u=t.getAttribute('data-url');
     a.forEach(function(x){if(x.url===u)x.note=t.value});
-    sessionStorage.setItem(KEY,JSON.stringify(a));
+    localStorage.setItem(KEY,JSON.stringify(a));
   })});
   list.querySelectorAll('.nights-up').forEach(function(b){b.addEventListener('click',function(){
     update(b.getAttribute('data-url'),function(l){var n=((l.items[0]&&l.items[0].nights)||1)+1;l.items.forEach(function(r){r.nights=n})});
@@ -279,7 +279,7 @@ document.getElementById('btn-saved').addEventListener('click',function(){
   pick=pick.trim();
   if(/^d\s*\d+$/i.test(pick)){var di=parseInt(pick.replace(/[^0-9]/g,''),10)-1;if(s[di]){s.splice(di,1);persistSaved(s);alert('Deleted.')}return}
   var idx=parseInt(pick,10)-1;
-  if(s[idx]){sessionStorage.setItem(KEY,JSON.stringify(s[idx].items||[]));render();estimateDistances();alert('Loaded: '+s[idx].name)}
+  if(s[idx]){localStorage.setItem(KEY,JSON.stringify(s[idx].items||[]));render();estimateDistances();alert('Loaded: '+s[idx].name)}
 });
 
 function buildEmail(items,agent,client,notes,clientMode){
@@ -394,7 +394,7 @@ async function ensureCoords(items){
       await sleep(1100); // respect Nominatim's ~1 request/second policy
     }catch(e){}
   }
-  sessionStorage.setItem(KEY,JSON.stringify(items));
+  localStorage.setItem(KEY,JSON.stringify(items));
 }
 async function estimateDistances(){
   var items=load();
@@ -418,7 +418,7 @@ async function estimateDistances(){
       A.legToNext=Math.round(haversine(A,B)*1.35)+' km (approx)';A.legAuto=true;changed=true;
     }
   }
-  if(changed){sessionStorage.setItem(KEY,JSON.stringify(items));render();}
+  if(changed){localStorage.setItem(KEY,JSON.stringify(items));render();}
 }
 
 // prefill consultant email if the enquiry form saved one earlier
