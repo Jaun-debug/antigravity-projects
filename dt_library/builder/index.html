@@ -93,6 +93,7 @@ display:flex;align-items:center;justify-content:space-between;gap:18px;padding:1
     <button class="btn ghost" id="btn-save" type="button">Save quote</button>
     <button class="btn ghost" id="btn-saved" type="button">Saved quotes</button>
     <button class="btn ghost" onclick="window.print()" type="button">Print / PDF</button>
+    <button class="btn" id="btn-saveexit" type="button">Save &amp; Exit</button>
     <a class="btn dark" href="/itinerary/">&larr; Itinerary</a>
   </div>
 </div>
@@ -289,7 +290,7 @@ function bindPanel(){
   if(x=document.getElementById('f-vehicle'))x.oninput=function(){S.vehicleTotal=num(x.value);updateTotals();var st=document.querySelectorAll('#panel .sec-total .amt');if(st[1])st[1].textContent=money(num(S.vehicleTotal)+fuelCost())};
   if(x=document.getElementById('f-fuelkm'))x.oninput=function(){S.fuelKm=num(x.value);renderPanel()};
   if(x=document.getElementById('f-fueltype'))x.onchange=function(){S.fuelType=x.value;renderPanel()};
-  if(x=document.getElementById('f-startdate'))x.onchange=function(){S.startDate=x.value;renderPanel()};
+  if(x=document.getElementById('f-startdate')){var sd=x;sd.addEventListener('change',function(){S.startDate=sd.value;setTimeout(renderPanel,60)});}
   // lodges
   document.querySelectorAll('#panel select[data-f],#panel input[data-f]').forEach(function(el){
     var ev=el.tagName==='SELECT'?'onchange':'oninput';
@@ -320,11 +321,13 @@ document.getElementById('t-markup').addEventListener('input',function(){S.markup
 var QK='nr_saved_quotes';
 function loadQ(){try{return JSON.parse(localStorage.getItem(QK))||[]}catch(e){return[]}}
 function saveQ(a){try{localStorage.setItem(QK,JSON.stringify(a))}catch(e){}}
-document.getElementById('btn-save').addEventListener('click',function(){
-  var nm=prompt('Name this quote:',S.name||('Quote '+new Date().toLocaleDateString('en-GB')));if(!nm)return;
+function doSaveQuote(silent){
+  var nm=prompt('Name this quote:',S.name||('Quote '+new Date().toLocaleDateString('en-GB')));if(!nm)return false;
   var a=loadQ();a.unshift({id:'q'+Date.now(),name:nm.trim(),savedAt:new Date().toISOString(),state:JSON.parse(JSON.stringify(S))});
-  saveQ(a);alert('Saved: '+nm.trim());
-});
+  saveQ(a);if(!silent)alert('Saved: '+nm.trim());return true;
+}
+document.getElementById('btn-save').addEventListener('click',function(){doSaveQuote(false)});
+document.getElementById('btn-saveexit').addEventListener('click',function(){ if(doSaveQuote(true)) location.href='/'; });
 document.getElementById('btn-saved').addEventListener('click',function(){
   var a=loadQ();if(!a.length){alert('No saved quotes yet.');return}
   var list=a.map(function(x,i){return (i+1)+'. '+x.name+'  ('+(x.savedAt||'').split('T')[0]+')'}).join('\n');
