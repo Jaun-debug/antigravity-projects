@@ -281,7 +281,15 @@
       + '.nr-si .meta{font-size:.78rem;color:#7A7269}.nr-si .nm{font-size:.95rem;color:#2C2824;font-weight:500}'
       + '.nr-si button{border:none;background:none;cursor:pointer;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;padding:6px 8px}'
       + '.nr-si .ld{color:#B8956A}.nr-si .dl{color:#b46a6a}'
-      + '.nr-saved-close{margin-top:8px;border:1px solid rgba(184,149,106,.4);background:none;color:#7A7269;border-radius:30px;padding:9px 18px;cursor:pointer;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase}';
+      + '.nr-saved-close{margin-top:8px;border:1px solid rgba(184,149,106,.4);background:none;color:#7A7269;border-radius:30px;padding:9px 18px;cursor:pointer;font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase}'
+      // flashing top-right "Add to Itinerary" tab
+      + '#nr-addtab{position:fixed;top:78px;right:0;z-index:9996;background:#B8956A;color:#fff;border:none;cursor:pointer;'
+      + 'padding:13px 18px;border-radius:30px 0 0 30px;font-family:Inter,sans-serif;font-size:.7rem;letter-spacing:1.5px;'
+      + 'text-transform:uppercase;box-shadow:-4px 6px 20px rgba(184,149,106,.5);animation:nrPulse 1.5s ease-in-out infinite}'
+      + '#nr-addtab:hover{filter:brightness(.94);animation:none;padding-right:24px}'
+      + '@keyframes nrPulse{0%,100%{box-shadow:-4px 6px 18px rgba(184,149,106,.4);transform:translateX(0)}'
+      + '50%{box-shadow:-6px 8px 30px rgba(184,149,106,.85);transform:translateX(-4px)}}'
+      + '@media print{#nr-addtab{display:none!important}}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var bar = document.createElement('div'); bar.id = 'nr-bar';
     back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
@@ -294,6 +302,13 @@
       Array.prototype.slice.call(tabsHost.querySelectorAll('.tab-btn')).forEach(function (t) {
         bar.appendChild(t);                                  // move each tab button into the bar (keeps id + onclick)
       });
+    }
+    // flashing top-right "Add to Itinerary" tab
+    if (!document.getElementById('nr-addtab')) {
+      var at = document.createElement('button');
+      at.id = 'nr-addtab'; at.type = 'button'; at.textContent = '+ Add to Itinerary';
+      at.onclick = function () { window.nrAddCurrentLodge(at); };
+      document.body.appendChild(at);
     }
   }
   function floatingFinalise() {
