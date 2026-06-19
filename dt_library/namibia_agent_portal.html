@@ -5296,6 +5296,8 @@
             if (b) { b.textContent = loggedInAgent ? 'Sign Out' : 'Agent Sign In'; }
             const nb = document.getElementById('nav-builder');
             if (nb) { nb.style.display = loggedInAgent ? '' : 'none'; }
+            const sp = document.getElementById('nav-list-property');
+            if (sp) { sp.style.display = loggedInAgent ? 'none' : ''; }
         }
 
         function submitAgentLogin() {
