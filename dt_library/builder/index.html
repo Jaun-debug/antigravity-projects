@@ -128,7 +128,7 @@ var SECTIONS=[
   {id:'final',n:9,label:'Final Pricing'}
 ];
 var S={
-  name:'',adults:2,children:0,markup:25,
+  name:'',adults:2,children:0,markup:25,startDate:'',
   lodges:[],
   vehicleTotal:0, fuelKm:0, fuelType:'2wd',
   guide:[],flights:[],activities:[],extras:[],botswana:[]
@@ -149,6 +149,12 @@ function rowPerNight(d){
   return lodgePrice(d)*(d.pax||0);
 }
 function rowSub(d){return rowPerNight(d)*(d.nights||0)}
+// safari start date chains through the lodges: each check-in = start + prior nights
+function addDays(iso,n){var d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(n||0));return d.toISOString().split('T')[0]}
+function fmtDisp(iso){if(!iso)return '';try{return new Date(iso+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short'})}catch(e){return''}}
+function rowCheckIn(i){if(!S.startDate)return '';var n=0;for(var k=0;k<i;k++){n+=(S.lodges[k].nights||0)}return addDays(S.startDate,n)}
+// open a lodge's rate sheet with its check-in date carried into the calendar
+function openLodgeSheet(i,file){var ci=rowCheckIn(i);if(ci){try{localStorage.setItem('nr_cursor',ci)}catch(e){}}window.open(file,'_blank')}
 function fuelCost(){return num(S.fuelKm)*(S.fuelType==='4wd'?4.0:3.125)}
 function sumLI(arr){var t=0;(arr||[]).forEach(function(x){t+=num(x.amount)});return t}
 function netTotal(){return accomTotal()+num(S.vehicleTotal)+fuelCost()+sumLI(S.guide)+sumLI(S.flights)+sumLI(S.activities)+sumLI(S.extras)+sumLI(S.botswana)}
@@ -212,13 +218,14 @@ function renderPanel(){
       var lodgeOpts='<option value="-1">Lodge…</option>';
       if(d.region) lodgesIn(d.region).forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>'});
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];L.rates.forEach(function(rt,ri){roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});view='<a class="viewlink" href="'+esc(L.file)+'" target="_blank">View sheet ↗</a>'}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];L.rates.forEach(function(rt,ri){roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
         regionLodgeCell='<div class="cellsel"><strong>'+esc(d.name||(d.lodgeIdx>-1?RATES.lodges[d.lodgeIdx].name:'Lodge'))+'</strong>'
           +(d.region?'<span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">'+esc(d.region)+'</span>':'')
-          +(d.fileUrl?'<a class="viewlink" href="'+esc(d.fileUrl)+'" target="_blank">View sheet ↗</a>':'')+'</div>';
+          +(d.fileUrl?'<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(d.fileUrl)+'\');return false">View sheet ↗</a>':'')
+          +(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')+'</div>';
         roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('');
         paxCell='<span class="muted" style="font-size:.78rem">from sheet</span>';
       } else {
@@ -237,6 +244,7 @@ function renderPanel(){
     }).join('');
     if(!S.lodges.length) body='<tr><td colspan="8" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
     h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Per-night rates are per person, pulled from the live rate sheets.</p>'
+      +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'
       +'<div style="overflow-x:auto"><table class="bd"><thead><tr><th style="width:34px">#</th><th style="width:64px">Nights</th><th>Region &amp; Lodge</th><th>Room / rate</th><th style="width:60px">Pax</th><th class="r">Per night</th><th class="r">Subtotal</th><th></th></tr></thead><tbody>'+body+'</tbody></table></div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
@@ -281,6 +289,7 @@ function bindPanel(){
   if(x=document.getElementById('f-vehicle'))x.oninput=function(){S.vehicleTotal=num(x.value);updateTotals();var st=document.querySelectorAll('#panel .sec-total .amt');if(st[1])st[1].textContent=money(num(S.vehicleTotal)+fuelCost())};
   if(x=document.getElementById('f-fuelkm'))x.oninput=function(){S.fuelKm=num(x.value);renderPanel()};
   if(x=document.getElementById('f-fueltype'))x.onchange=function(){S.fuelType=x.value;renderPanel()};
+  if(x=document.getElementById('f-startdate'))x.onchange=function(){S.startDate=x.value;renderPanel()};
   // lodges
   document.querySelectorAll('#panel select[data-f],#panel input[data-f]').forEach(function(el){
     var ev=el.tagName==='SELECT'?'onchange':'oninput';
