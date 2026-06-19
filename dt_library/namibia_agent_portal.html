@@ -132,8 +132,11 @@
         .nav-links {
             display: flex;
             align-items: center;
-            gap: 22px;
+            gap: 30px;
         }
+        /* Group Lodges sits right after Accommodation */
+        .nav-links > .nav-item-dropdown:first-child { order: -2; }
+        #nav-grouplodges { order: -1; }
 
         .burger-menu-btn {
             display: none; /* Hide hamburger menu icon on desktop screens */
