@@ -287,15 +287,7 @@
     var bar = document.createElement('div'); bar.id = 'nr-bar';
     back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
     bar.appendChild(back);                     // back button first, now sticky too
-    function mk(label, cls, fn) {
-      var b = document.createElement('button'); b.type = 'button'; b.className = 'nr-act' + (cls ? ' ' + cls : '');
-      b.textContent = label; b.onclick = fn; bar.appendChild(b); return b;
-    }
-    var addBtn = mk('+ Add to Itinerary', 'primary', function () { window.nrAddCurrentLodge(addBtn); });
-    mk('Itinerary Builder', '', function () { location.href = '/builder/'; });
-    mk('View Itinerary', '', function () { location.href = '/itinerary/'; });
-    mk('Save Itinerary', 'save', saveCurrentItinerary);
-    mk('Saved Itineraries', '', showSavedItineraries);
+    // itinerary actions removed — trip building now lives on /builder/ and /itinerary/.
     // pull the sheet's own rate-tabs into this same sticky row (as pills) and hide the old belt
     var tabsHost = document.querySelector('#detail-view .tabs') || document.querySelector('.tabs');
     if (tabsHost) {
