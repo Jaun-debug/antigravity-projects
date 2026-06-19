@@ -141,8 +141,14 @@ function regions(){var o={};RATES.lodges.forEach(function(l){o[l.region]=1});ret
 function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r)a.push(i)});return a}
 
 /* ---- totals ---- */
-function accomTotal(){var t=0;S.lodges.forEach(function(d){var p=lodgePrice(d);t+=p*(d.pax||0)*(d.nights||0)});return t}
+function accomTotal(){var t=0;S.lodges.forEach(function(d){t+=rowSub(d)});return t}
 function lodgePrice(d){if(d.lodgeIdx>-1&&d.roomIdx>-1){var L=RATES.lodges[d.lodgeIdx];if(L&&L.rates[d.roomIdx])return L.rates[d.roomIdx].p}return 0}
+// per-night total for a row: captured rooms from the rate sheet take priority over the dropdown
+function rowPerNight(d){
+  if(d.cap&&d.cap.length){var t=0;d.cap.forEach(function(r){t+=(r.qty||0)*(r.price||0)});return t}
+  return lodgePrice(d)*(d.pax||0);
+}
+function rowSub(d){return rowPerNight(d)*(d.nights||0)}
 function fuelCost(){return num(S.fuelKm)*(S.fuelType==='4wd'?4.0:3.125)}
 function sumLI(arr){var t=0;(arr||[]).forEach(function(x){t+=num(x.amount)});return t}
 function netTotal(){return accomTotal()+num(S.vehicleTotal)+fuelCost()+sumLI(S.guide)+sumLI(S.flights)+sumLI(S.activities)+sumLI(S.extras)+sumLI(S.botswana)}
@@ -207,12 +213,24 @@ function renderPanel(){
       if(d.region) lodgesIn(d.region).forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>'});
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
       if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];L.rates.forEach(function(rt,ri){roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});view='<a class="viewlink" href="'+esc(L.file)+'" target="_blank">View sheet ↗</a>'}
-      var pn=lodgePrice(d), sub=pn*(d.pax||0)*(d.nights||0);
+      var pn=rowPerNight(d), sub=rowSub(d);
+      var regionLodgeCell, roomCell, paxCell;
+      if(d.cap&&d.cap.length){
+        regionLodgeCell='<div class="cellsel"><strong>'+esc(d.name||(d.lodgeIdx>-1?RATES.lodges[d.lodgeIdx].name:'Lodge'))+'</strong>'
+          +(d.region?'<span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">'+esc(d.region)+'</span>':'')
+          +(d.fileUrl?'<a class="viewlink" href="'+esc(d.fileUrl)+'" target="_blank">View sheet ↗</a>':'')+'</div>';
+        roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('');
+        paxCell='<span class="muted" style="font-size:.78rem">from sheet</span>';
+      } else {
+        regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><select data-i="'+i+'" data-f="lodgeIdx">'+lodgeOpts+'</select>'+view+'</div>';
+        roomCell='<select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>';
+        paxCell='<input class="pax" type="number" min="1" value="'+(d.pax||1)+'" data-i="'+i+'" data-f="pax">';
+      }
       return '<tr><td class="rownum">'+(i+1)+'</td>'
         +'<td><input class="nights" type="number" min="1" value="'+(d.nights||1)+'" data-i="'+i+'" data-f="nights"></td>'
-        +'<td><div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><select data-i="'+i+'" data-f="lodgeIdx">'+lodgeOpts+'</select>'+view+'</div></td>'
-        +'<td><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></td>'
-        +'<td><input class="pax" type="number" min="1" value="'+(d.pax||1)+'" data-i="'+i+'" data-f="pax"></td>'
+        +'<td>'+regionLodgeCell+'</td>'
+        +'<td>'+roomCell+'</td>'
+        +'<td>'+paxCell+'</td>'
         +'<td class="r amtcell">'+(pn?money(pn):'—')+'</td>'
         +'<td class="r amtcell g">'+money(sub)+'</td>'
         +'<td><button class="rm" data-lodge-rm="'+i+'">&times;</button></td></tr>';
@@ -314,7 +332,7 @@ function seed(){
     it.forEach(function(x){
       var li=-1;for(var k=0;k<RATES.lodges.length;k++){if(RATES.lodges[k].name.toLowerCase()===(x.name||'').toLowerCase()){li=k;break}}
       var nights=(x.items&&x.items[0]&&x.items[0].nights)||x.nights||2;
-      S.lodges.push({region:li>-1?RATES.lodges[li].region:'',lodgeIdx:li,roomIdx:-1,pax:parseInt(S.adults)||2,nights:nights});
+      S.lodges.push({region:li>-1?RATES.lodges[li].region:(x.region||''),lodgeIdx:li,roomIdx:-1,pax:parseInt(S.adults)||2,nights:nights,name:x.name||'',fileUrl:x.url||'',cap:(x.items&&x.items.length)?x.items:null});
     });
     if(it.length) active='lodges';
   }catch(e){}

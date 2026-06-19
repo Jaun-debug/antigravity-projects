@@ -199,6 +199,8 @@
       btn.disabled = true;
       setTimeout(function () { btn.textContent = orig; btn.disabled = false; }, 2200);
     }
+    // reveal the flashing "Back to Builder" tab once something's been added
+    if (ok) { var bb = document.getElementById('nr-backbuilder'); if (bb) bb.style.display = 'inline-flex'; }
   };
 
   /* ---- best-effort geocode (OpenStreetMap / Nominatim) ---- */
@@ -289,7 +291,12 @@
       + '#nr-addtab:hover{filter:brightness(.94);animation:none;padding-right:24px}'
       + '@keyframes nrPulse{0%,100%{box-shadow:-4px 6px 18px rgba(184,149,106,.4);transform:translateX(0)}'
       + '50%{box-shadow:-6px 8px 30px rgba(184,149,106,.85);transform:translateX(-4px)}}'
-      + '@media print{#nr-addtab{display:none!important}}';
+      // "Back to Builder" tab — hidden until a lodge is added, then flashes
+      + '#nr-backbuilder{position:fixed;top:132px;right:0;z-index:9996;display:none;align-items:center;background:#2C2824;color:#fff;'
+      + 'border:none;cursor:pointer;padding:13px 18px;border-radius:30px 0 0 30px;font-family:Inter,sans-serif;font-size:.7rem;'
+      + 'letter-spacing:1.5px;text-transform:uppercase;box-shadow:-4px 6px 20px rgba(44,40,36,.4);animation:nrPulse 1.4s ease-in-out infinite}'
+      + '#nr-backbuilder:hover{filter:brightness(1.12);animation:none;padding-right:24px}'
+      + '@media print{#nr-addtab,#nr-backbuilder{display:none!important}}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
     var bar = document.createElement('div'); bar.id = 'nr-bar';
     back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
@@ -309,6 +316,12 @@
       at.id = 'nr-addtab'; at.type = 'button'; at.textContent = '+ Add to Itinerary';
       at.onclick = function () { window.nrAddCurrentLodge(at); };
       document.body.appendChild(at);
+    }
+    if (!document.getElementById('nr-backbuilder')) {
+      var bb = document.createElement('button');
+      bb.id = 'nr-backbuilder'; bb.type = 'button'; bb.textContent = '← Back to Builder';
+      bb.onclick = function () { location.href = '/builder/'; };
+      document.body.appendChild(bb);
     }
   }
   function floatingFinalise() {
