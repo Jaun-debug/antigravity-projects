@@ -257,7 +257,6 @@
             || document.querySelector('button.back-btn[onclick*="close"]');
     if (!back) return;                                  // no rates back-button to attach to
     var css = ''
-      + '#booking-bar{display:none!important}'
       + '#nr-bar{position:sticky;top:0;z-index:120;display:flex;flex-wrap:wrap;align-items:center;gap:8px;'
       + 'margin:0 0 22px;padding:12px 0 14px;background:var(--bg,#EEEAE3)}'
       + '#nr-bar .back-btn{margin-bottom:0!important}'
