@@ -322,6 +322,7 @@
       bb.id = 'nr-backbuilder'; bb.type = 'button'; bb.textContent = '← Back to Builder';
       bb.onclick = function () { location.href = '/builder/'; };
       document.body.appendChild(bb);
+      if (count() > 0) bb.style.display = 'inline-flex';   // already have lodges → show it now
     }
   }
   function floatingFinalise() {
