@@ -99,6 +99,36 @@ textarea{height:90px;resize:vertical;}
 .done p{color:var(--text-muted);}
 .note{background:rgba(135,169,150,.12);border:1px solid rgba(135,169,150,.4);border-radius:10px;padding:12px 14px;font-size:.8rem;color:#4f6b5d;margin-top:18px;}
 footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
+/* --- redesign: bigger tier blocks, editable %, drop zones, client modal --- */
+.tiers{gap:16px;margin-top:14px;}
+.tier{min-height:auto;padding:22px 20px;border-radius:16px;}
+.tier .dot{background:var(--brand-accent);}
+.tier-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+.tier-head .pctin{width:78px;font-family:var(--font-head);font-weight:600;font-size:1.2rem;padding:8px 8px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#fff;}
+.tier-head .pctsfx{font-family:var(--font-head);font-weight:600;font-size:.95rem;}
+.tier-head .tier-rm{margin-left:auto;background:none;border:none;color:#b9542f;font-size:1.25rem;cursor:pointer;line-height:1;padding:0 4px;}
+.dropzone{border:2px dashed var(--line);border-radius:12px;padding:20px;text-align:center;margin-top:12px;transition:.2s;background:#fff;}
+.dropzone.drag{border-color:var(--brand-green);background:#f0f7f3;}
+.dropzone .dzhint{font-size:.72rem;color:var(--text-muted);margin-top:10px;}
+.uploadbtn{padding:12px 20px;font-size:.74rem;}
+.addtile{cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);color:var(--brand-accent);font-size:1rem;border:2px dashed var(--brand-accent);background:rgba(164,130,86,.04);min-height:120px;border-radius:16px;}
+.addtile:hover{background:rgba(164,130,86,.1);}
+/* assignment — larger, clearer */
+.pool{padding:24px;}
+.agent{padding:10px 16px;font-size:.92rem;}
+.assigned{min-height:54px;background:rgba(164,130,86,.04);border-radius:10px;padding:8px;}
+.tier .viewclients{width:100%;margin-top:12px;background:var(--brand-green);color:#fff;border:none;border-radius:9px;padding:12px;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1px;font-size:.74rem;cursor:pointer;transition:.2s;}
+.tier .viewclients:hover{background:var(--brand-accent);}
+.pv-band{background:var(--brand-accent);}
+/* client modal */
+.tmodal{position:fixed;inset:0;background:rgba(40,36,30,.55);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;}
+.tmodal.on{display:flex;}
+.tmodal-card{background:#fff;border-radius:16px;max-width:520px;width:100%;max-height:82vh;overflow:auto;padding:28px;}
+.tmodal-card h3{font-family:var(--font-head);color:var(--brand-accent);font-size:1.5rem;margin-bottom:4px;}
+.tmodal-card .mc-sub{color:var(--text-muted);font-size:.85rem;margin-bottom:16px;}
+.mc-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 14px;border:1px solid var(--line);border-radius:10px;margin-bottom:8px;}
+.mc-row .nm{font-size:.96rem;}.mc-row .em{color:var(--text-muted);font-size:.78rem;}
+.tmodal-close{margin-top:8px;border:1px solid var(--line);background:none;color:var(--text-muted);border-radius:30px;padding:10px 22px;cursor:pointer;text-transform:uppercase;letter-spacing:1px;font-size:.72rem;}
 </style></head>
 <body>
 <div class="cbanner">⚠ Development Version. Rates displayed on this site are illustrative examples only and do not represent actual lodge rates, availability, or bookable inventory. Please contact the property directly for current pricing and availability.</div>
@@ -208,6 +238,15 @@ footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
     <div class="actions" style="justify-content:center"><a class="btn" href="/">Back to home</a></div>
   </div>
 </div>
+<datalist id="pct-presets"><option value="10"></option><option value="15"></option><option value="18"></option><option value="20"></option><option value="22"></option><option value="25"></option></datalist>
+<div class="tmodal" id="tmodal" onclick="if(event.target===this)closeClients()">
+  <div class="tmodal-card">
+    <h3 id="tm-title">Clients</h3>
+    <p class="mc-sub" id="tm-sub"></p>
+    <div id="tm-list"></div>
+    <button type="button" class="tmodal-close" onclick="closeClients()">Close</button>
+  </div>
+</div>
 <footer>&copy; <span id="yr"></span> Namibia Rates · Supplier Portal · Demo</footer>
 
 <script>
@@ -216,7 +255,7 @@ var step=1, mode='reg';
 /* Register = 1 step (create account only). Login = 3 steps (account -> rate sheets -> agents). */
 function totalSteps(){ return mode==='reg' ? 1 : 3; }
 /* tier config — change these numbers / add/remove to alter the rate boxes everywhere */
-var TIERS=['15','20','25','30'];
+var TIERS=['15','20','25'];
 var TIER_DESC={'15':'Standard trade rate','20':'Preferred partner rate','25':'Key account rate','30':'Top / strategic rate'};
 var files={}; TIERS.forEach(function(t){files[t]=null;});
 var agents=[];            // {id,name,email,band}
@@ -225,18 +264,56 @@ var dragId=null, nextId=1;
 /* build the rate boxes for step 2 (upload) and step 3 (assign) from TIERS */
 function buildTiers(){
   document.getElementById('tiers-upload').innerHTML=TIERS.map(function(t){
-    return '<div class="tier t'+t+'" id="tierbox-'+t+'"><h3><span class="dot"></span>'+t+'% STO</h3><small>'+TIER_DESC[t]+'</small>'
+    return '<div class="tier t'+t+'" id="tierbox-'+t+'">'
+      +'<div class="tier-head"><span class="dot"></span>'
+      +'<input class="pctin" type="number" min="1" max="100" value="'+t+'" list="pct-presets" onchange="changePct(\''+t+'\',this.value)" title="Rate %">'
+      +'<span class="pctsfx">% STO</span>'
+      +(TIERS.length>1?'<button type="button" class="tier-rm" title="Remove this tier" onclick="removeTier(\''+t+'\')">&times;</button>':'')+'</div>'
+      +'<small>'+(TIER_DESC[t]||'Custom rate tier')+'</small>'
+      +'<div class="dropzone" id="dz-'+t+'" ondragover="dzOver(event)" ondragleave="dzLeave(event)" ondrop="dzDrop(event,\''+t+'\')">'
       +'<label class="uploadbtn">Upload sheet<input type="file" accept=".pdf,.xlsx,.xls,.csv,.doc,.docx" onchange="addFile(\''+t+'\',this)"></label>'
+      +'<div class="dzhint">…or drag &amp; drop a rate sheet here</div></div>'
       +'<div id="files-'+t+'"></div></div>';
-  }).join('');
+  }).join('') + '<button type="button" class="addtile" onclick="addTier()">+ Add rate tier</button>';
   document.getElementById('tiers-assign').innerHTML=TIERS.map(function(t){
-    return '<div class="tier t'+t+'" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,\''+t+'\')">'
-      +'<h3><span class="dot"></span>'+t+'% STO</h3>'
-      +'<button type="button" class="viewcust" onclick="toggleCust(\''+t+'\')">View '+t+'% customers <span class="cnt" id="cnt-'+t+'">0</span></button>'
-      +'<div class="assigned" id="band-'+t+'"></div></div>';
+    return '<div class="tier t'+t+' assignbox" ondragover="dragOver(event)" ondragleave="dragLeave(event)" ondrop="dropAgent(event,\''+t+'\')">'
+      +'<div class="tier-head"><span class="dot"></span><h3 style="margin:0">'+t+'% STO</h3></div>'
+      +'<div class="assigned" id="band-'+t+'"></div>'
+      +'<button type="button" class="viewclients" onclick="openClients(\''+t+'\')">View '+t+'% clients (<span id="cnt-'+t+'">0</span>)</button>'
+      +'</div>';
   }).join('');
 }
-function toggleCust(t){ document.getElementById('band-'+t).classList.toggle('collapsed'); }
+/* editable / dynamic tiers */
+function rekey(oldT,newT){ files[newT]=files[oldT]||null; delete files[oldT]; agents.forEach(function(a){if(a.band===oldT)a.band=newT;}); }
+function changePct(oldT,raw){
+  var n=parseInt(raw,10);
+  if(!raw||isNaN(n)||n<=0){ buildTiers(); renderAgents(); return; }
+  var v=String(n);
+  if(v!==oldT && TIERS.indexOf(v)>-1){ alert('You already have a '+v+'% tier.'); buildTiers(); renderAgents(); return; }
+  var i=TIERS.indexOf(oldT); if(i<0)return;
+  if(v!==oldT){ rekey(oldT,v); TIERS[i]=v; }
+  buildTiers(); renderAgents();
+}
+function removeTier(t){ var i=TIERS.indexOf(t); if(i<0||TIERS.length<=1)return;
+  agents.forEach(function(a){if(a.band===t)a.band=null;}); delete files[t]; TIERS.splice(i,1); buildTiers(); renderAgents(); }
+function addTier(){ var presets=['15','20','25','18','22','10','12','30','35'];
+  var v=presets.find(function(p){return TIERS.indexOf(p)<0;});
+  if(!v){var k=5;while(TIERS.indexOf(String(k))>-1)k+=5;v=String(k);}
+  files[v]=null; TIERS.push(v); buildTiers(); renderAgents(); }
+/* drag-and-drop a rate sheet file onto an upload tier */
+function dzOver(ev){ ev.preventDefault(); ev.currentTarget.classList.add('drag'); }
+function dzLeave(ev){ ev.currentTarget.classList.remove('drag'); }
+function dzDrop(ev,t){ ev.preventDefault(); ev.currentTarget.classList.remove('drag');
+  var f=ev.dataTransfer&&ev.dataTransfer.files; if(f&&f[0]){ files[t]=f[0].name; renderFiles(t); } }
+/* per-tier "view clients" modal */
+function openClients(t){
+  var inb=agents.filter(function(a){return a.band===t;});
+  document.getElementById('tm-title').textContent=t+'% STO clients';
+  document.getElementById('tm-sub').textContent=inb.length?(inb.length+' agent'+(inb.length>1?'s':'')+' on this rate tier'):'No agents assigned to this tier yet — drag agents into the band.';
+  document.getElementById('tm-list').innerHTML=inb.map(function(a){return '<div class="mc-row"><span class="nm">'+esc(a.name)+'</span>'+(a.email?'<span class="em">'+esc(a.email)+'</span>':'')+'</div>';}).join('');
+  document.getElementById('tmodal').classList.add('on');
+}
+function closeClients(){ document.getElementById('tmodal').classList.remove('on'); }
 
 /* ---------- step nav ---------- */
 function show(){
