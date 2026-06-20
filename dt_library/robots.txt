@@ -1,6 +1,12 @@
 # Namibia Rates
 # Public rack pages are open to search engines.
-# Agent STO rate sheets are private trade pages — keep them out of search.
+# Agent-only pages (STO rate sheets, builder, itinerary) are private trade tools — keep them out of search.
 
 User-agent: *
+Allow: /
 Disallow: /ratesheets/
+Disallow: /builder/
+Disallow: /itinerary/
+Disallow: /api/
+
+Sitemap: https://namibiarates.com/sitemap.xml
