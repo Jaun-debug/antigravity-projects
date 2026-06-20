@@ -458,5 +458,18 @@ function finishDone(){
   window.scrollTo(0,0);
 }
 show(); buildTiers(); renderAgents();
+
+/* Enter commits the current field and moves to the next box */
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter')return;var t=e.target;if(!t)return;
+  if(t.tagName==='TEXTAREA'||t.type==='date'||t.type==='button'||t.type==='submit'||t.type==='file')return;
+  if(t.tagName!=='INPUT'&&t.tagName!=='SELECT')return;
+  e.preventDefault();
+  var els=[].slice.call(document.querySelectorAll('input,select,textarea')).filter(function(el){return !el.disabled&&el.type!=='hidden'&&el.type!=='file'&&el.offsetParent!==null});
+  var i=els.indexOf(t);
+  try{t.dispatchEvent(new Event('change',{bubbles:true}))}catch(_){}
+  var els2=[].slice.call(document.querySelectorAll('input,select,textarea')).filter(function(el){return !el.disabled&&el.type!=='hidden'&&el.type!=='file'&&el.offsetParent!==null});
+  var n=els2[i+1];if(n){n.focus();if(n.select)try{n.select()}catch(_){}}else if(t.blur)t.blur();
+});
 </script>
 </body></html>

@@ -239,9 +239,12 @@ function render(){
   list.querySelectorAll('.nights-dn').forEach(function(b){b.addEventListener('click',function(){
     update(b.getAttribute('data-url'),function(l){var n=Math.max(1,((l.items[0]&&l.items[0].nights)||1)-1);l.items.forEach(function(r){r.nights=n})});
   })});
-  list.querySelectorAll('.qin').forEach(function(inp){inp.addEventListener('change',function(){
+  list.querySelectorAll('.qin').forEach(function(inp){inp.addEventListener('input',function(){
     var url=inp.getAttribute('data-url'),idx=+inp.getAttribute('data-idx'),q=Math.max(0,parseInt(inp.value,10)||0);
     update(url,function(l){if(l.items[idx])l.items[idx].qty=q});
+    // render() rebuilt the list — restore focus to this box so typing continues
+    try{var sel='.qin[data-url="'+(window.CSS&&CSS.escape?CSS.escape(url):url)+'"][data-idx="'+idx+'"]';
+      var n=document.querySelector(sel);if(n){n.focus();var v=n.value;n.value='';n.value=v;}}catch(_){}
   })});
   list.querySelectorAll('.rm-line').forEach(function(b){b.addEventListener('click',function(){
     var url=b.getAttribute('data-url'),idx=+b.getAttribute('data-idx');
@@ -425,6 +428,19 @@ async function estimateDistances(){
 var saved=localStorage.getItem('dt_agent_email');if(saved){document.getElementById('agent-email').value=saved;}
 render();
 estimateDistances();
+
+/* Enter commits the current field and moves to the next box */
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Enter')return;var t=e.target;if(!t)return;
+  if(t.tagName==='TEXTAREA'||t.type==='date'||t.type==='button'||t.type==='submit')return;
+  if(t.tagName!=='INPUT'&&t.tagName!=='SELECT')return;
+  e.preventDefault();
+  var els=[].slice.call(document.querySelectorAll('input,select,textarea')).filter(function(el){return !el.disabled&&el.type!=='hidden'&&el.offsetParent!==null});
+  var i=els.indexOf(t);
+  try{t.dispatchEvent(new Event('change',{bubbles:true}))}catch(_){}
+  var els2=[].slice.call(document.querySelectorAll('input,select,textarea')).filter(function(el){return !el.disabled&&el.type!=='hidden'&&el.offsetParent!==null});
+  var n=els2[i+1];if(n){n.focus();if(n.select)try{n.select()}catch(_){}}else if(t.blur)t.blur();
+});
 </script>
 </body>
 </html>
