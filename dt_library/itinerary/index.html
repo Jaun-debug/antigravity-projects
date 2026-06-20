@@ -385,6 +385,19 @@ function fmtLeg(km,mins){
   var t=h>0?(h+'h'+(m<10?'0'+m:m)):(m+' min');
   return Math.round(km)+' km · ~'+t+' (est.)';
 }
+// approximate hub coordinates per region — used as a fallback so a distance
+// always resolves even when the geocoder can't find a specific lodge name
+var REGION_COORDS={
+  'caprivi':{lat:-17.50,lon:24.27},'central namibia':{lat:-21.00,lon:16.70},
+  'damaraland':{lat:-20.59,lon:14.37},'east etosha':{lat:-18.81,lon:16.93},
+  'epupa':{lat:-17.00,lon:13.24},'fish river canyon':{lat:-27.60,lon:17.62},
+  'kalahari':{lat:-24.63,lon:17.97},'kaokoland':{lat:-19.12,lon:13.61},
+  'luderitz':{lat:-26.65,lon:15.16},'opuwo':{lat:-18.06,lon:13.84},
+  'skeleton coast':{lat:-19.98,lon:12.98},'sossusvlei':{lat:-24.49,lon:15.80},
+  'south etosha':{lat:-19.18,lon:15.91},'swakopmund':{lat:-22.68,lon:14.53},
+  'west etosha':{lat:-19.10,lon:14.90},'windhoek':{lat:-22.57,lon:17.08}
+};
+function regionCoord(reg){if(!reg)return null;return REGION_COORDS[String(reg).trim().toLowerCase()]||null;}
 async function ensureCoords(items){
   for(var i=0;i<items.length;i++){
     var it=items[i];
@@ -396,6 +409,7 @@ async function ensureCoords(items){
       if(j&&j[0]){it.lat=parseFloat(j[0].lat);it.lon=parseFloat(j[0].lon);}
       await sleep(1100); // respect Nominatim's ~1 request/second policy
     }catch(e){}
+    if(!(it.lat&&it.lon)){var rc=regionCoord(it.region);if(rc){it.lat=rc.lat;it.lon=rc.lon;}}
   }
   localStorage.setItem(KEY,JSON.stringify(items));
 }
