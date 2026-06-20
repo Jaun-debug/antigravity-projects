@@ -267,7 +267,8 @@ function renderPanel(){
         +'<td class="r amtcell">'+(pn?money(pn):'—')+'</td>'
         +'<td class="r amtcell g">'+money(sub)+'</td>'
         +'<td><button class="rm" data-lodge-rm="'+i+'">&times;</button></td></tr>'
-        +((i<S.lodges.length-1&&d.legToNext)?'<tr><td></td><td colspan="7" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--gold)">&#8595; '+esc(d.legToNext)+'</td></tr>':'');
+        +((i<S.lodges.length-1&&d.legToNext)?'<tr><td></td><td colspan="7" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--gold)">&#8595; '+esc(d.legToNext)+'</td></tr>'
+          :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<tr><td></td><td colspan="7" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--muted)">&#8595; estimating drive distance…</td></tr>':''));
     }).join('');
     if(!S.lodges.length) body='<tr><td colspan="8" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
     h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Per-night rates are per person, pulled from the live rate sheets.</p>'
@@ -336,10 +337,11 @@ function bindPanel(){
     if(el.tagName==='SELECT'){
       el.onchange=function(){
         var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
-        if(f==='region'){d.region=el.value;d.lodgeIdx=-1;d.roomIdx=-1;}
-        else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;d.roomIdx=-1;}
+        if(f==='region'){d.region=el.value;d.lodgeIdx=-1;d.roomIdx=-1;d.name='';d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
+        else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;d.roomIdx=-1;d.name=(RATES.lodges[d.lodgeIdx]?RATES.lodges[d.lodgeIdx].name:'');d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
         else if(f==='roomIdx'){d.roomIdx=+el.value;}
         renderPanel();
+        if(f==='lodgeIdx'||f==='region')autoDistances();
       };
     } else {
       // nights / pax: update totals live while typing (no rebuild, keeps focus);
@@ -353,8 +355,8 @@ function bindPanel(){
       el.onchange=function(){renderPanel()};
     }
   });
-  if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,pax:parseInt(S.adults)||2,nights:2});renderPanel()};
-  document.querySelectorAll('#panel [data-lodge-rm]').forEach(function(b){b.onclick=function(){S.lodges.splice(+b.dataset.lodgeRm,1);renderPanel()}});
+  if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,pax:parseInt(S.adults)||2,nights:2});renderPanel();autoDistances()};
+  document.querySelectorAll('#panel [data-lodge-rm]').forEach(function(b){b.onclick=function(){var ri=+b.dataset.lodgeRm;S.lodges.splice(ri,1);if(S.lodges[ri-1])S.lodges[ri-1].legToNext='';renderPanel();autoDistances()}});
   // line items
   document.querySelectorAll('#panel input[data-k]').forEach(function(el){
     el.oninput=function(){var k=el.dataset.k,i=+el.dataset.i,f=el.dataset.f;if(S[k][i])S[k][i][f]=(f==='amount'?el.value:el.value);updateTotals();
@@ -399,6 +401,49 @@ function seed(){
     if(it.length) active='lodges';
   }catch(e){}
 }
+/* ---- automatic drive-distance estimates (geocode + routing; all approximate) ---- */
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+function haversine(a,b){var R=6371,dLat=(b.lat-a.lat)*Math.PI/180,dLon=(b.lon-a.lon)*Math.PI/180;var s=Math.sin(dLat/2)*Math.sin(dLat/2)+Math.cos(a.lat*Math.PI/180)*Math.cos(b.lat*Math.PI/180)*Math.sin(dLon/2)*Math.sin(dLon/2);return 2*R*Math.asin(Math.sqrt(s));}
+function fmtLeg(km,mins){var h=Math.floor(mins/60),m=mins%60;var t=h>0?(h+'h'+(m<10?'0'+m:m)):(m+' min');return Math.round(km)+' km · ~'+t+' (est.)';}
+function lodgeLabel(d){if(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])return RATES.lodges[d.lodgeIdx].name;return d.name||'';}
+function lodgeRegion2(d){if(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])return RATES.lodges[d.lodgeIdx].region;return d.region||'';}
+var _geoCache={};
+async function geoCoord(d){
+  var nm=lodgeLabel(d);if(!nm)return null;
+  if(d.lat&&d.lon)return{lat:d.lat,lon:d.lon};
+  if(_geoCache[nm]){d.lat=_geoCache[nm].lat;d.lon=_geoCache[nm].lon;return _geoCache[nm];}
+  try{
+    var q=encodeURIComponent(nm+', '+lodgeRegion2(d)+', Namibia');
+    var r=await fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&q='+q,{headers:{'Accept':'application/json'}});
+    var j=await r.json();
+    if(j&&j[0]){var c={lat:parseFloat(j[0].lat),lon:parseFloat(j[0].lon)};_geoCache[nm]=c;d.lat=c.lat;d.lon=c.lon;return c;}
+  }catch(e){}
+  return null;
+}
+var _distRunning=false;
+async function autoDistances(){
+  if(_distRunning||!RATES.lodges||S.lodges.length<2)return;
+  var todo=false;for(var k=0;k<S.lodges.length-1;k++){if(lodgeLabel(S.lodges[k])&&lodgeLabel(S.lodges[k+1])&&!S.lodges[k].legToNext){todo=true;break;}}
+  if(!todo)return;
+  _distRunning=true;
+  try{
+    for(var i=0;i<S.lodges.length;i++){var d=S.lodges[i];if(lodgeLabel(d)&&!(d.lat&&d.lon)){await geoCoord(d);await sleep(1100);}}
+    var changed=false;
+    for(var i=0;i<S.lodges.length-1;i++){
+      var A=S.lodges[i],B=S.lodges[i+1];
+      if(A.legToNext)continue;
+      if(!(A.lat&&A.lon&&B.lat&&B.lon))continue;
+      try{
+        var u='https://router.project-osrm.org/route/v1/driving/'+A.lon+','+A.lat+';'+B.lon+','+B.lat+'?overview=false';
+        var r=await fetch(u);var j=await r.json();
+        if(j&&j.routes&&j.routes[0]){A.legToNext=fmtLeg(j.routes[0].distance/1000,Math.round(j.routes[0].duration/60));A.legAuto=true;changed=true;continue;}
+        throw 0;
+      }catch(e){A.legToNext=Math.round(haversine(A,B)*1.35)+' km (approx)';A.legAuto=true;changed=true;}
+    }
+    if(changed){renderPanel();}
+  }finally{_distRunning=false;}
+}
+
 /* Enter commits the current field (re-chains dates / recalcs) and jumps to the next box */
 document.addEventListener('keydown',function(e){
   if(e.key!=='Enter')return;
@@ -413,7 +458,7 @@ document.addEventListener('keydown',function(e){
   var els2=[].slice.call(document.querySelectorAll('input,select,textarea')).filter(function(el){return !el.disabled&&el.type!=='hidden'&&el.offsetParent!==null});
   var n=els2[i+1]; if(n){n.focus();if(n.select)try{n.select()}catch(_){}}else if(t.blur)t.blur();
 });
-function start(){renderNav();renderPanel();}
+function start(){renderNav();renderPanel();autoDistances();}
 </script>
 </body>
 </html>
