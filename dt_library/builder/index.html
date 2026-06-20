@@ -315,22 +315,23 @@ function renderPanel(){
 }
 
 function bindPanel(){
-  // trip
+  // trip — NOTE: every handler reads `this` (the field), never a shared variable,
+  // otherwise the closure reads whichever element was assigned last (often null)
   var x;
-  if(x=document.getElementById('f-name'))x.oninput=function(){S.name=x.value;updateTotals()};
-  if(x=document.getElementById('f-adults'))x.oninput=function(){S.adults=x.value;updateTotals()};
-  if(x=document.getElementById('f-children'))x.oninput=function(){S.children=x.value;updateTotals()};
-  if(x=document.getElementById('f-markup'))x.oninput=function(){S.markup=num(x.value);document.getElementById('t-markup').value=S.markup;updateTotals()};
+  if(x=document.getElementById('f-name'))x.oninput=function(){S.name=this.value;updateTotals()};
+  if(x=document.getElementById('f-adults'))x.oninput=function(){S.adults=this.value;updateTotals()};
+  if(x=document.getElementById('f-children'))x.oninput=function(){S.children=this.value;updateTotals()};
+  if(x=document.getElementById('f-markup'))x.oninput=function(){S.markup=num(this.value);document.getElementById('t-markup').value=S.markup;updateTotals()};
   // vehicle/fuel — update live without rebuilding the inputs (keeps focus + allows decimals)
-  if(x=document.getElementById('f-vrate'))x.oninput=function(){S.vehicleRate=x.value;recalc()};
-  if(x=document.getElementById('f-vdays'))x.oninput=function(){S.vehicleDays=x.value;recalc()};
-  if(x=document.getElementById('f-fuelkm'))x.oninput=function(){S.fuelKm=x.value;recalc()};
-  if(x=document.getElementById('f-fueltype'))x.onchange=function(){S.fuelType=x.value;renderPanel()};
-  if(x=document.getElementById('f-cons'))x.oninput=function(){if(S.fuelType==='4wd')S.cons4wd=x.value;else S.cons2wd=x.value;recalc()};
-  if(x=document.getElementById('f-fuelprice'))x.oninput=function(){S.fuelPrice=x.value;recalc()};
-  if(x=document.getElementById('f-fuelbuffer'))x.oninput=function(){S.fuelBuffer=x.value;recalc()};
-  if(x=document.getElementById('f-triptype'))x.onchange=function(){S.tripType=x.value;if(x.value==='guided'){S.fuelType='4wd';if(!S.fuelBuffer)S.fuelBuffer=20;}if(x.value==='flyin'){S.vehicleRate=0;S.fuelKm='0';}renderPanel();};
-  if(x=document.getElementById('f-startdate')){var sd=x;sd.addEventListener('change',function(){S.startDate=sd.value;setTimeout(renderPanel,60)});}
+  if(x=document.getElementById('f-vrate'))x.oninput=function(){S.vehicleRate=this.value;recalc()};
+  if(x=document.getElementById('f-vdays'))x.oninput=function(){S.vehicleDays=this.value;recalc()};
+  if(x=document.getElementById('f-fuelkm'))x.oninput=function(){S.fuelKm=this.value;recalc()};
+  if(x=document.getElementById('f-fueltype'))x.onchange=function(){S.fuelType=this.value;renderPanel()};
+  if(x=document.getElementById('f-cons'))x.oninput=function(){if(S.fuelType==='4wd')S.cons4wd=this.value;else S.cons2wd=this.value;recalc()};
+  if(x=document.getElementById('f-fuelprice'))x.oninput=function(){S.fuelPrice=this.value;recalc()};
+  if(x=document.getElementById('f-fuelbuffer'))x.oninput=function(){S.fuelBuffer=this.value;recalc()};
+  if(x=document.getElementById('f-triptype'))x.onchange=function(){S.tripType=this.value;if(this.value==='guided'){S.fuelType='4wd';if(!S.fuelBuffer)S.fuelBuffer=20;}if(this.value==='flyin'){S.vehicleRate=0;S.fuelKm='0';}renderPanel();};
+  if(x=document.getElementById('f-startdate')){x.addEventListener('change',function(){S.startDate=this.value;setTimeout(renderPanel,60)});}
   // lodges
   document.querySelectorAll('#panel select[data-f],#panel input[data-f]').forEach(function(el){
     var f=el.dataset.f;
