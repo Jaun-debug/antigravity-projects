@@ -242,10 +242,10 @@ function renderPanel(){
       +'<div class="fld"><label>Children</label><input id="f-children" type="number" min="0" value="'+S.children+'"></div>'
       +'<div class="fld"><label>Markup %</label><input id="f-markup" type="number" min="0" step="0.5" value="'+S.markup+'"></div></div>'
       +'<div class="fld" style="max-width:300px"><label>Trip type</label><select id="f-triptype">'
-      +['selfdrive|Self-drive (rental + fuel)','guided|Guided (guide + 4×4, game-drive fuel)','flyin|Fly-in (flights, no vehicle)','hybrid|Hybrid (mix per day)']
+      +['selfdrive|Self-drive (rental only)','guided|Guided (guide + 4×4, game-drive fuel)','flyin|Fly-in (flights, no vehicle)','hybrid|Hybrid (mix per day)']
         .map(function(o){var v=o.split('|')[0],l=o.split('|')[1];return '<option value="'+v+'" '+(S.tripType===v?'selected':'')+'>'+l+'</option>'}).join('')
       +'</select></div>'
-      +'<p class="muted" style="font-style:normal">Trip type sets sensible defaults (4×4 + game-drive fuel buffer for guided, no vehicle/fuel for fly-in). You can still adjust any section.</p>';
+      +'<p class="muted" style="font-style:normal">Trip type sets sensible defaults (4×4 + game-drive fuel for guided; self-drive bills no fuel since the client refuels; no vehicle/fuel for fly-in). You can still adjust any section.</p>';
   } else if(active==='lodges'){
     var regs=regions();
     var body=S.lodges.map(function(d,i){
