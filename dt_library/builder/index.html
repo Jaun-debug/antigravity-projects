@@ -60,9 +60,10 @@ table.bd td{padding:9px 7px;border-bottom:1px solid var(--border);vertical-align
 .rm{border:none;background:none;color:#c08a8a;cursor:pointer;font-size:1.05rem;padding:0 3px}
 .rm:hover{color:#a85a5a}
 .viewlink{font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-decoration:none}
-.li{display:flex;gap:10px;align-items:center;margin-bottom:9px}
+.li{display:flex;gap:10px;align-items:center;margin-bottom:10px}
+.li input{box-sizing:border-box;height:42px;border:1px solid var(--border);border-radius:9px;padding:10px 12px;font-family:var(--body);font-size:.92rem;background:#fbfaf8;color:var(--ink)}
 .li input.nm{flex:1 1 auto}
-.li input.am{width:140px;text-align:right}
+.li input.am{width:160px;text-align:right}
 .addbtn{margin-top:6px}
 .muted{color:var(--muted);font-size:.85rem;font-style:italic;padding:8px 2px}
 .sec-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
@@ -215,13 +216,14 @@ function renderNav(){
 
 /* ---- generic line-item section ---- */
 function liSection(key,label,ph){
-  var rows=(S[key].length?S[key]:[]).map(function(x,i){
+  if(!S[key].length){ S[key]=[{name:'',amount:''},{name:'',amount:''}]; }  // two blank lines open by default
+  var rows=S[key].map(function(x,i){
     return '<div class="li"><input class="nm" data-k="'+key+'" data-i="'+i+'" data-f="name" value="'+esc(x.name)+'" placeholder="'+esc(ph)+'">'
       +'<input class="am" type="number" min="0" data-k="'+key+'" data-i="'+i+'" data-f="amount" value="'+(x.amount||'')+'" placeholder="0.00">'
       +'<button class="rm" data-k="'+key+'" data-i="'+i+'">&times;</button></div>';
   }).join('');
-  if(!S[key].length) rows='<div class="muted">None added yet.</div>';
-  return '<div id="li-'+key+'">'+rows+'</div><button class="btn ghost addbtn" data-add="'+key+'" type="button">+ Add line</button>'
+  return '<button class="btn ghost addbtn" data-add="'+key+'" type="button" style="margin:0 0 14px">+ Add line</button>'
+    +'<div id="li-'+key+'">'+rows+'</div>'
     +'<div class="sec-total"><span class="lbl">'+esc(label)+' total</span><span class="amt">'+money(sumLI(S[key]))+'</span></div>';
 }
 
