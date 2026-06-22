@@ -165,7 +165,12 @@ function vehicleDays(){return (S.vehicleDays!==''&&S.vehicleDays!=null)?num(S.ve
 function vehicleHire(){return num(S.vehicleRate)*vehicleDays()}
 function parseKm(s){if(!s)return 0;var m=String(s).match(/([0-9][0-9.,]*)\s*km/i);return m?parseFloat(m[1].replace(/,/g,'')):0}
 function routeKm(){var t=0;S.lodges.forEach(function(d){t+=parseKm(d.legToNext)});return t}
-function fuelKmVal(){return (S.fuelKm!==''&&S.fuelKm!=null)?num(S.fuelKm):routeKm()}
+// auto drive distance only feeds fuel on guided safaris (operator pays fuel);
+// self-drive (client fuels) and fly-in default to 0 — agent can still type a manual km
+function fuelKmVal(){
+  if(S.fuelKm!==''&&S.fuelKm!=null)return num(S.fuelKm);
+  return S.tripType==='guided'?routeKm():0;
+}
 function consumption(){return S.fuelType==='4wd'?num(S.cons4wd):num(S.cons2wd)}      // L/100km
 function fuelPerKm(){return (consumption()/100)*num(S.fuelPrice)}                       // N$/km
 function fuelCost(){var c=fuelKmVal()*fuelPerKm();if(S.tripType==='guided')c*=(1+num(S.fuelBuffer)/100);return c}
@@ -281,7 +286,7 @@ function renderPanel(){
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
   } else if(active==='vehicle'){
-    var autoDays=totalNights(), autoKm=routeKm(), guided=(S.tripType==='guided');
+    var autoDays=totalNights(), guided=(S.tripType==='guided'), autoKm=guided?routeKm():0;
     h='<h2>Vehicle &amp; Fuel</h2><p class="lead">Vehicle days auto-calculate from the itinerary nights; fuel auto-sums the drive distance between your lodges.</p>'
       +'<div class="grid3"><div class="fld"><label>Vehicle day-rate (N$)</label><input id="f-vrate" type="number" min="0" value="'+(S.vehicleRate||'')+'" placeholder="0.00"></div>'
       +'<div class="fld"><label>Vehicle days <span style="color:var(--muted)">(auto '+autoDays+')</span></label><input id="f-vdays" type="number" min="0" value="'+(S.vehicleDays!==''?S.vehicleDays:'')+'" placeholder="'+autoDays+'"></div>'
@@ -334,7 +339,7 @@ function bindPanel(){
   if(x=document.getElementById('f-cons'))x.oninput=function(){if(S.fuelType==='4wd')S.cons4wd=this.value;else S.cons2wd=this.value;recalc()};
   if(x=document.getElementById('f-fuelprice'))x.oninput=function(){S.fuelPrice=this.value;recalc()};
   if(x=document.getElementById('f-fuelbuffer'))x.oninput=function(){S.fuelBuffer=this.value;recalc()};
-  if(x=document.getElementById('f-triptype'))x.onchange=function(){S.tripType=this.value;if(this.value==='guided'){S.fuelType='4wd';if(!S.fuelBuffer)S.fuelBuffer=20;}if(this.value==='flyin'){S.vehicleRate=0;S.fuelKm='0';}renderPanel();};
+  if(x=document.getElementById('f-triptype'))x.onchange=function(){S.tripType=this.value;S.fuelKm='';if(this.value==='guided'){S.fuelType='4wd';if(!num(S.fuelBuffer))S.fuelBuffer=20;}if(this.value==='flyin'){S.vehicleRate=0;}renderPanel();};
   if(x=document.getElementById('f-startdate')){x.addEventListener('change',function(){S.startDate=this.value;setTimeout(renderPanel,60)});}
   // lodges
   document.querySelectorAll('#panel select[data-f],#panel input[data-f]').forEach(function(el){
