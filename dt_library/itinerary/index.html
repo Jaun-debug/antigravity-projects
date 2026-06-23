@@ -48,9 +48,23 @@ background:none;border:none;cursor:pointer;color:var(--gold);text-decoration:non
 .lodge .photos img{width:100%;height:96px;object-fit:cover;border-radius:8px;display:block}
 .lodge .note{margin-top:12px;width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;
 font-family:var(--font-body);font-size:.85rem;resize:vertical;min-height:38px;background:#fbfaf8}
-/* client mode — hide all price/agent-only bits, keep photos + descriptions + distances */
+/* what's included + activities */
+.extras{margin:14px 0 2px;display:grid;gap:14px}
+.ex-head{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.ex-title{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:600}
+.ex-edit{background:none;border:none;color:var(--gold);font-size:.66rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;padding:0}
+.ex-edit:hover{text-decoration:underline}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:rgba(184,149,106,.10);border:1px solid rgba(184,149,106,.28);color:#5b5147;border-radius:30px;padding:5px 12px;font-size:.79rem;line-height:1.2}
+.ex-prose{margin:0;font-size:.86rem;color:var(--text-muted);line-height:1.55}
+.ex-empty{color:#bbb;font-size:.84rem}
+.ex-ta{width:100%;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;padding:9px 11px;font-family:var(--font-body);font-size:.85rem;resize:vertical;background:#fbfaf8}
+.ex-actions{margin-top:7px;display:flex;gap:8px}
+.ex-actions button{border:1px solid var(--border);background:#fff;border-radius:20px;padding:6px 15px;font-size:.68rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;color:var(--text-muted)}
+.ex-actions .ex-save{background:var(--gold);color:#fff;border-color:var(--gold)}
+/* client mode — hide all price/agent-only bits, keep photos + descriptions + distances + included/activities */
 body.client .rates,body.client .subtotal,body.client #grand,body.client .grand-bar,body.client .grand-note,
-body.client .lodge .links,body.client .note,body.client .nights-ctrl,body.client .qin,body.client .rm-line{display:none!important}
+body.client .lodge .links,body.client .note,body.client .nights-ctrl,body.client .qin,body.client .rm-line,body.client .ex-edit{display:none!important}
 body.client .leg-val{border:none;background:none;color:var(--text-muted)}
 .client-toggle{display:flex;align-items:center;gap:10px;margin-bottom:18px;font-size:.8rem;color:var(--text-main)}
 .client-toggle input{width:18px;height:18px}
@@ -171,8 +185,42 @@ function update(url,fn){
   save(a);
 }
 
+/* ---- what's included (amenities) + activities, auto-filled from lodge data ---- */
+var LODGEINFO={byId:{},byName:{},byFile:{}};
+function liNorm(s){return String(s||'').toLowerCase().replace(/&amp;/g,'&').replace(/[^a-z0-9]+/g,' ').replace(/\b(the|a|lodge|camp|hotel|guest|farm|collection|namibia|gondwana|resort|safari|tented|by|at|and)\b/g,' ').replace(/\s+/g,' ').trim();}
+function propIdFromPhotos(photos){if(!photos)return null;for(var i=0;i<photos.length;i++){var m=String(photos[i]).match(/imageHandler\/[a-z0-9]+\/(\d{3,7})\//i);if(m)return m[1];}return null;}
+function lookupInfo(it){
+  var byId=LODGEINFO.byId||{},byName=LODGEINFO.byName||{},byFile=LODGEINFO.byFile||{};
+  var pid=propIdFromPhotos(it.photos);
+  var file=(it.url||'').split('/').pop().split('?')[0];
+  var recId=pid&&byId[pid]?byId[pid]:null, recName=byName[liNorm(it.name)]||null, recFile=file&&byFile[file]?byFile[file]:null;
+  var incSrc=(recId&&recId.included&&recId.included.length&&recId)||(recName&&recName.included&&recName.included.length&&recName)||null;
+  var hasAct=function(r){return r&&((r.activities&&r.activities.length)||r.activitiesText);};
+  var actSrc=(hasAct(recFile)&&recFile)||(hasAct(recId)&&recId)||(hasAct(recName)&&recName)||null;
+  return {included:(incSrc&&incSrc.included)||[],activities:(actSrc&&actSrc.activities)||[],activitiesText:(actSrc&&actSrc.activitiesText)||''};
+}
+function liChips(arr){return '<div class="chips">'+arr.map(function(x){return '<span class="chip">'+esc(x)+'</span>';}).join('')+'</div>';}
+function extrasBlock(it,i,client){
+  var info=lookupInfo(it);
+  var incArr=it.incCustom!=null?it.incCustom:info.included;
+  var actArr=it.actCustom!=null?it.actCustom:info.activities;
+  var actTxt=it.actCustom!=null?'':info.activitiesText;
+  var incHas=incArr.length>0, actHas=actArr.length>0||!!actTxt;
+  if(client&&!incHas&&!actHas) return '';
+  function sec(kind,title,has,bodyHtml){
+    if(client&&!has) return '';
+    return '<div class="ex-sec"><div class="ex-head"><span class="ex-title">'+title+'</span>'
+      +(client?'':'<button class="ex-edit" data-url="'+esc(it.url)+'" data-kind="'+kind+'" type="button">Edit</button>')+'</div>'
+      +'<div class="ex-body">'+bodyHtml+'</div></div>';
+  }
+  var incBody=incHas?liChips(incArr):'<span class="ex-empty">Tap Edit to add what’s included.</span>';
+  var actBody=actArr.length?liChips(actArr):(actTxt?'<p class="ex-prose">'+esc(actTxt)+'</p>':'<span class="ex-empty">Tap Edit to add activities.</span>');
+  return '<div class="extras">'+sec('inc','What’s included',incHas,incBody)+sec('act','Activities',actHas,actBody)+'</div>';
+}
+
 function render(){
   var items=load(), list=document.getElementById('list'), trip=document.getElementById('trip'), sub=document.getElementById('sub'), grand=document.getElementById('grand');
+  var clientView=document.body.classList.contains('client');
   if(!items.length){
     trip.style.display='none';
     grand.innerHTML='';
@@ -219,6 +267,7 @@ function render(){
       +'<div class="name">'+esc(it.name)+'</div>'+region+stay
       +'<div class="links">'+view+'<button class="rm" data-url="'+esc(it.url)+'">Remove</button></div>'
       +desc+photos
+      +extrasBlock(it,i,clientView)
       +rates
       +'<textarea class="note" data-url="'+esc(it.url)+'" placeholder="Notes for this lodge (nights, room type, dates…)">'+esc(it.note||'')+'</textarea>'
       +'</div></div>'+leg;
@@ -232,6 +281,22 @@ function render(){
     var a=load(),u=t.getAttribute('data-url');
     a.forEach(function(x){if(x.url===u)x.note=t.value});
     localStorage.setItem(KEY,JSON.stringify(a));
+  })});
+  list.querySelectorAll('.ex-edit').forEach(function(b){b.addEventListener('click',function(){
+    var url=b.getAttribute('data-url'),kind=b.getAttribute('data-kind');
+    var it=load().filter(function(x){return x.url===url})[0]; if(!it)return;
+    var info=lookupInfo(it);
+    var cur = kind==='inc' ? (it.incCustom!=null?it.incCustom:info.included)
+            : (it.actCustom!=null?it.actCustom:(info.activities.length?info.activities:(info.activitiesText?[info.activitiesText]:[])));
+    var body=b.parentNode.parentNode.querySelector('.ex-body');
+    body.innerHTML='<textarea class="ex-ta" rows="5" placeholder="One item per line">'+esc(cur.join('\n'))+'</textarea>'
+      +'<div class="ex-actions"><button class="ex-save" type="button">Save</button><button class="ex-cancel" type="button">Cancel</button></div>';
+    var ta=body.querySelector('.ex-ta'); ta.focus();
+    body.querySelector('.ex-save').addEventListener('click',function(){
+      var arr=ta.value.split('\n').map(function(s){return s.trim()}).filter(Boolean);
+      update(url,function(l){ if(kind==='inc')l.incCustom=arr; else l.actCustom=arr; });
+    });
+    body.querySelector('.ex-cancel').addEventListener('click',function(){ render(); });
   })});
   list.querySelectorAll('.nights-up').forEach(function(b){b.addEventListener('click',function(){
     update(b.getAttribute('data-url'),function(l){var n=((l.items[0]&&l.items[0].nights)||1)+1;l.items.forEach(function(r){r.nights=n})});
@@ -442,6 +507,8 @@ async function estimateDistances(){
 var saved=localStorage.getItem('dt_agent_email');if(saved){document.getElementById('agent-email').value=saved;}
 render();
 estimateDistances();
+// load amenities + activities lookup, then re-render so the sections fill in
+fetch('/assets/lodge-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||LODGEINFO;render();}).catch(function(){});
 
 /* Enter commits the current field and moves to the next box */
 document.addEventListener('keydown',function(e){
