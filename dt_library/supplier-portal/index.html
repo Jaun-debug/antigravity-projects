@@ -52,7 +52,7 @@ textarea{height:90px;resize:vertical;}
 .btn:disabled{opacity:.5;cursor:not-allowed;}
 .btn.sm{padding:8px 16px;font-size:.68rem;}
 /* tier boxes */
-.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:6px;}
+.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-top:6px;}
 .tier{border:2px dashed var(--line);border-radius:12px;padding:16px;background:#fff;transition:.2s;min-height:150px;}
 .tier h3{font-family:var(--font-head);font-size:1rem;font-weight:600;display:flex;align-items:center;gap:8px;margin-bottom:4px;}
 .tier .dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
@@ -100,13 +100,13 @@ textarea{height:90px;resize:vertical;}
 .note{background:rgba(135,169,150,.12);border:1px solid rgba(135,169,150,.4);border-radius:10px;padding:12px 14px;font-size:.8rem;color:#4f6b5d;margin-top:18px;}
 footer{text-align:center;color:var(--text-muted);font-size:.78rem;padding:24px;}
 /* --- redesign: bigger tier blocks, editable %, drop zones, client modal --- */
-.tiers{gap:16px;margin-top:14px;}
-.tier{min-height:auto;padding:22px 20px;border-radius:16px;}
+.tiers{gap:20px;margin-top:14px;}
+.tier{position:relative;min-height:auto;padding:26px 24px;border-radius:16px;}
 .tier .dot{background:var(--brand-accent);}
-.tier-head{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
-.tier-head .pctin{width:78px;font-family:var(--font-head);font-weight:600;font-size:1.2rem;padding:8px 8px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#fff;}
-.tier-head .pctsfx{font-family:var(--font-head);font-weight:600;font-size:.95rem;}
-.tier-head .tier-rm{margin-left:auto;background:none;border:none;color:#b9542f;font-size:1.25rem;cursor:pointer;line-height:1;padding:0 4px;}
+.tier-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;padding-right:24px;}
+.tier-head .pctin{width:70px;font-family:var(--font-head);font-weight:600;font-size:1.2rem;padding:8px;text-align:center;border:1px solid var(--line);border-radius:8px;background:#fff;}
+.tier-head .pctsfx{font-family:var(--font-head);font-weight:600;font-size:1rem;white-space:nowrap;}
+.tier-head .tier-rm{position:absolute;top:14px;right:16px;background:none;border:none;color:#b9542f;font-size:1.2rem;cursor:pointer;line-height:1;padding:0;}
 .dropzone{border:2px dashed var(--line);border-radius:12px;padding:20px;text-align:center;margin-top:12px;transition:.2s;background:#fff;}
 .dropzone.drag{border-color:var(--brand-green);background:#f0f7f3;}
 .dropzone .dzhint{font-size:.72rem;color:var(--text-muted);margin-top:10px;}
