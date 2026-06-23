@@ -17,7 +17,8 @@ a{color:inherit}
 header.site{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid var(--border)}
 .logo{font-family:var(--font-head);font-size:1.5rem;font-weight:500;letter-spacing:1px;text-decoration:none}
 .logo span{color:var(--gold)}
-.home-link{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-decoration:none}
+.head-links{display:flex;gap:24px;align-items:center}
+.home-link{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;white-space:nowrap}
 .home-link:hover{color:var(--gold)}
 .wrap{max-width:860px;margin:0 auto;padding:48px 24px 90px}
 .eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
@@ -118,7 +119,10 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
 <div class="banner">&#9888; <strong>Development Version.</strong> Rates displayed on this site are illustrative examples only and do not represent actual lodge rates, availability, or bookable inventory. Please contact the property directly for current pricing and availability.</div>
 <header class="site">
   <a class="logo" href="/">Namibia<span>Rates</span></a>
-  <a class="home-link" href="/">&larr; Continue browsing</a>
+  <div class="head-links">
+    <a class="home-link" href="/builder/">Open in builder &rarr;</a>
+    <a class="home-link" href="/">&larr; Continue browsing</a>
+  </div>
 </header>
 
 <div class="wrap">
