@@ -17,9 +17,14 @@ a{color:inherit}
 header.site{display:flex;align-items:center;justify-content:space-between;padding:20px 28px;border-bottom:1px solid var(--border)}
 .logo{font-family:var(--font-head);font-size:1.5rem;font-weight:500;letter-spacing:1px;text-decoration:none}
 .logo span{color:var(--gold)}
-.head-links{display:flex;gap:24px;align-items:center}
 .home-link{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;white-space:nowrap}
 .home-link:hover{color:var(--gold)}
+/* floating "Open in Builder" edge tab (matches the rate-sheet tabs) */
+#nr-tobuilder{position:fixed;top:120px;right:0;z-index:9996;display:inline-flex;align-items:center;background:#2C2824;color:#fff;text-decoration:none;cursor:pointer;padding:13px 18px;border-radius:30px 0 0 30px;font-family:var(--font-body);font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;box-shadow:-4px 6px 20px rgba(44,40,36,.4);animation:nrPulse 1.5s ease-in-out infinite}
+#nr-tobuilder:hover{filter:brightness(1.14);animation:none;padding-right:24px}
+@keyframes nrPulse{0%,100%{box-shadow:-4px 6px 18px rgba(44,40,36,.38);transform:translateX(0)}50%{box-shadow:-6px 8px 30px rgba(44,40,36,.7);transform:translateX(-4px)}}
+body.client #nr-tobuilder{display:none!important}
+@media print{#nr-tobuilder{display:none!important}}
 .wrap{max-width:860px;margin:0 auto;padding:48px 24px 90px}
 .eyebrow{font-size:.7rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 h1{font-family:var(--font-head);font-weight:300;font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.05;margin-bottom:8px}
@@ -119,11 +124,9 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
 <div class="banner">&#9888; <strong>Development Version.</strong> Rates displayed on this site are illustrative examples only and do not represent actual lodge rates, availability, or bookable inventory. Please contact the property directly for current pricing and availability.</div>
 <header class="site">
   <a class="logo" href="/">Namibia<span>Rates</span></a>
-  <div class="head-links">
-    <a class="home-link" href="/builder/">Open in builder &rarr;</a>
-    <a class="home-link" href="/">&larr; Continue browsing</a>
-  </div>
+  <a class="home-link" href="/">&larr; Continue browsing</a>
 </header>
+<a id="nr-tobuilder" href="/builder/">Open in Builder &rarr;</a>
 
 <div class="wrap">
   <p class="eyebrow">Trade Portal</p>
