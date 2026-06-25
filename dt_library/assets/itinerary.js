@@ -298,17 +298,19 @@
       + '#nr-backbuilder:hover{filter:brightness(1.12);animation:none;padding-right:24px}'
       + '@media print{#nr-addtab,#nr-backbuilder{display:none!important}}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
-    var bar = document.createElement('div'); bar.id = 'nr-bar';
-    back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
-    bar.appendChild(back);                     // back button first, now sticky too
-    // itinerary actions removed — trip building now lives on /builder/ and /itinerary/.
-    // pull the sheet's own rate-tabs into this same sticky row (as pills) and hide the old belt
-    var tabsHost = document.querySelector('#detail-view .tabs') || document.querySelector('.tabs');
-    if (tabsHost) {
-      tabsHost.id = 'nr-tabs-host';                          // hidden via CSS, but keep it in the DOM
-      Array.prototype.slice.call(tabsHost.querySelectorAll('.tab-btn')).forEach(function (t) {
-        bar.appendChild(t);                                  // move each tab button into the bar (keeps id + onclick)
-      });
+    // sheets with data-keep-tabs leave their tab bar in place (below the Quick Specs) — agreed nr-2 layout
+    if (!document.body.hasAttribute('data-keep-tabs')) {
+      var bar = document.createElement('div'); bar.id = 'nr-bar';
+      back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
+      bar.appendChild(back);                     // back button first, now sticky too
+      // pull the sheet's own rate-tabs into this same sticky row (as pills) and hide the old belt
+      var tabsHost = document.querySelector('#detail-view .tabs') || document.querySelector('.tabs');
+      if (tabsHost) {
+        tabsHost.id = 'nr-tabs-host';                          // hidden via CSS, but keep it in the DOM
+        Array.prototype.slice.call(tabsHost.querySelectorAll('.tab-btn')).forEach(function (t) {
+          bar.appendChild(t);                                  // move each tab button into the bar (keeps id + onclick)
+        });
+      }
     }
     // flashing top-right "Add to Itinerary" tab
     if (!document.getElementById('nr-addtab')) {
