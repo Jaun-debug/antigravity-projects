@@ -224,13 +224,17 @@
 (function(){
   var g=document.getElementById('er-gate');
   function hide(){ if(g) g.style.display='none'; document.documentElement.style.overflow=''; }
+  function notifyOpen(){
+    // ping our own serverless function (same-origin, no CORS); it emails server-side
+    try{ fetch('/api/notify',{method:'POST',keepalive:true}).catch(function(){}); }catch(e){}
+  }
   function check(){
     var u=(document.getElementById('er-user').value||'').trim();
     var p=(document.getElementById('er-pass').value||'').trim();
-    if(u==='00'&&p==='00'){ try{sessionStorage.setItem('er_auth','1');}catch(e){} hide(); }
+    if(u==='00'&&p==='00'){ try{sessionStorage.setItem('er_auth','1');}catch(e){} notifyOpen(); hide(); }
     else { document.getElementById('er-err').style.display='block'; }
   }
-  try{ if(sessionStorage.getItem('er_auth')==='1'){ hide(); return; } }catch(e){}
+  try{ if(sessionStorage.getItem('er_auth')==='1'){ notifyOpen(); hide(); return; } }catch(e){}
   document.documentElement.style.overflow='hidden';
   document.getElementById('er-btn').addEventListener('click',check);
   document.addEventListener('keydown',function(e){ if(e.key==='Enter'&&g&&g.style.display!=='none') check(); });
