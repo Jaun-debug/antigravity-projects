@@ -247,14 +247,16 @@
     </div>
 
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+        <button class="tab-btn active" onclick="switchTab(6)" id="tab-btn-6">Lodge Rates</button>
+        <button class="tab-btn" onclick="switchTab(1)" id="tab-btn-1">Book / Enquire</button>
         <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities & Extras</button>
         <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies & Info</button>
         <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
         <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
     </div>
 
-    <div id="tab-1" class="tab-content active">
+    <div id="tab-6" class="tab-content active"></div>
+    <div id="tab-1" class="tab-content">
         <!-- CALENDAR -->
         <div id="global-dates-ui" style="margin-bottom:28px;background:var(--card-bg);padding:32px;border-radius:12px;border:1px solid var(--border);text-align:center;">
             <h3 style="font-family:var(--font-head);font-size:1.6rem;font-weight:300;color:var(--text-main);margin-bottom:6px;letter-spacing:1px;">When would you like to travel?</h3>
@@ -623,6 +625,7 @@ function openProperty(id) {
     document.getElementById('tab-1').prepend(calendarBlock);
     document.getElementById('tab-2').innerHTML = parseTab1(d.tab2);
     document.getElementById('tab-3').innerHTML = d.tab3;
+    document.getElementById('tab-6').innerHTML = d.tab1;
 
     // Re-attach QTY listeners
     document.querySelectorAll('.rate-qty').forEach(el => el.addEventListener('change', updateTotal));
@@ -634,7 +637,7 @@ function openProperty(id) {
     renderCustomCalendar();
     calculateNights();
     updateTotal();
-    switchTab(1);
+    switchTab(6);
 }
 
 function closeProperty() {
@@ -646,7 +649,7 @@ function closeProperty() {
 // ── TABS ──
 function switchTab(num) {
     if (num === 5 && !document.getElementById('tab-btn-5').classList.contains('ready')) return;
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 6; i++) {
         document.getElementById('tab-btn-' + i)?.classList.remove('active');
         document.getElementById('tab-' + i)?.classList.remove('active');
     }

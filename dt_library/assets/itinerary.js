@@ -298,8 +298,9 @@
       + '#nr-backbuilder:hover{filter:brightness(1.12);animation:none;padding-right:24px}'
       + '@media print{#nr-addtab,#nr-backbuilder{display:none!important}}';
     var st = document.createElement('style'); st.textContent = css; document.head.appendChild(st);
-    // sheets with data-keep-tabs leave their tab bar in place (below the Quick Specs) — agreed nr-2 layout
-    if (!document.body.hasAttribute('data-keep-tabs')) {
+    // DEFAULT: every sheet keeps its tab bar in place (below the Quick Specs) — the agreed nr-2 layout.
+    // A sheet can opt back into the old sticky-top tab bar with <body data-relocate-tabs>.
+    if (document.body.hasAttribute('data-relocate-tabs')) {
       var bar = document.createElement('div'); bar.id = 'nr-bar';
       back.parentNode.insertBefore(bar, back);   // sticky row sits where the back button was
       bar.appendChild(back);                     // back button first, now sticky too
