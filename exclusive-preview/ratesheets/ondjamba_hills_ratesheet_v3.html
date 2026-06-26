@@ -165,6 +165,35 @@ td strong{color:var(--text-main);font-weight:500}
 <style id="preview-clean">.burger-menu-btn,#mobile-menu,#mm-backdrop,#nr-addtab,#nr-backbuilder,.banner,#dev-banner{display:none!important}</style>
 </head>
 <body data-keep-tabs>
+<!-- ER ACCESS GATE -->
+<div id="er-gate" style="position:fixed;inset:0;z-index:2147483647;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-family:Georgia,'Times New Roman',serif;">
+  <div style="background:#fff;padding:42px 36px;border-radius:14px;max-width:340px;width:90%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.45);">
+    <h2 style="margin:0 0 4px;font-weight:400;color:#1a1a1a;font-size:1.45rem;letter-spacing:.5px;">Exclusive Reservations</h2>
+    <p style="margin:0 0 22px;color:#999;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;">Agent Access</p>
+    <input id="er-user" placeholder="Username" autocomplete="off" style="display:block;width:100%;box-sizing:border-box;padding:11px 12px;margin-bottom:10px;border:1px solid #ccc;border-radius:8px;font-size:.95rem;outline:none;">
+    <input id="er-pass" type="password" placeholder="Password" style="display:block;width:100%;box-sizing:border-box;padding:11px 12px;margin-bottom:16px;border:1px solid #ccc;border-radius:8px;font-size:.95rem;outline:none;">
+    <button id="er-btn" style="width:100%;padding:12px;background:#a48256;color:#fff;border:none;border-radius:8px;font-size:.82rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;">Enter</button>
+    <p id="er-err" style="display:none;color:#c0392b;font-size:.78rem;margin:14px 0 0;">Incorrect username or password</p>
+  </div>
+</div>
+<script>
+(function(){
+  var g=document.getElementById('er-gate');
+  function hide(){ if(g) g.style.display='none'; document.documentElement.style.overflow=''; }
+  function check(){
+    var u=(document.getElementById('er-user').value||'').trim();
+    var p=(document.getElementById('er-pass').value||'').trim();
+    if(u==='00'&&p==='00'){ try{sessionStorage.setItem('er_auth','1');}catch(e){} hide(); }
+    else { document.getElementById('er-err').style.display='block'; }
+  }
+  try{ if(sessionStorage.getItem('er_auth')==='1'){ hide(); return; } }catch(e){}
+  document.documentElement.style.overflow='hidden';
+  document.getElementById('er-btn').addEventListener('click',check);
+  document.addEventListener('keydown',function(e){ if(e.key==='Enter'&&g&&g.style.display!=='none') check(); });
+})();
+</script>
+<!-- /ER ACCESS GATE -->
+
 <button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
 
 <!-- MAIN (CARD) VIEW -->
