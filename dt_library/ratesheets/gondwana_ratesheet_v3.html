@@ -163,13 +163,15 @@
         </div>
     </div>
     <div class="tabs">
-        <button class="tab-btn active" onclick="switchTab(1)" id="tab-btn-1">Accommodation Rates</button>
+        <button class="tab-btn active" onclick="switchTab(6)" id="tab-btn-6">Lodge Rates</button>
+        <button class="tab-btn" onclick="switchTab(1)" id="tab-btn-1">Book / Enquire</button>
         <button class="tab-btn" onclick="switchTab(2)" id="tab-btn-2">Activities &amp; Extras</button>
         <button class="tab-btn" onclick="switchTab(3)" id="tab-btn-3">Policies &amp; Info</button>
         <button class="tab-btn" onclick="switchTab(4)" id="tab-btn-4">Gallery</button>
         <button class="tab-btn tab-btn-highlight" onclick="switchTab(5)" id="tab-btn-5">Finalise Booking</button>
     </div>
-    <div id="tab-1" class="tab-content active"></div>
+    <div id="tab-6" class="tab-content active"></div>
+    <div id="tab-1" class="tab-content"></div>
     <div id="tab-2" class="tab-content"></div>
     <div id="tab-3" class="tab-content"></div>
     <div id="tab-4" class="tab-content"><div class="content-block"><h3>Gallery</h3><div class="lodge-gallery" id="d-gallery-full"></div></div></div>
@@ -419,14 +421,14 @@ function openProperty(id){
   const saved=localStorage.getItem("dt_agent_email");if(saved)document.getElementById("b-agent-email").value=saved;
   calendarState={month:new Date().getMonth(),year:new Date().getFullYear(),rangeStart:null,rangeEnd:null};
   selectedItems=[];const fb=document.getElementById("tab-btn-5");if(fb)fb.classList.remove("ready","active");
-  renderCustomCalendar();calculateNights();updateTotal();switchTab(1);
+  renderCustomCalendar();calculateNights();updateTotal();(function(){var t6=document.getElementById('tab-6');if(t6)t6.innerHTML=d.tab1;})();switchTab(6);
 }
 
 function closeProperty(){document.getElementById("detail-view").style.display="none";document.getElementById("main-view").style.display="block";window.scrollTo(0,0);}
 
 function switchTab(num){
   if(num===5&&!document.getElementById("tab-btn-5").classList.contains("ready"))return;
-  for(let i=1;i<=5;i++){document.getElementById("tab-btn-"+i)?.classList.remove("active");document.getElementById("tab-"+i)?.classList.remove("active");}
+  for(let i=1;i<=6;i++){document.getElementById("tab-btn-"+i)?.classList.remove("active");document.getElementById("tab-"+i)?.classList.remove("active");}
   document.getElementById("tab-btn-"+num)?.classList.add("active");document.getElementById("tab-"+num)?.classList.add("active");
   if(num===5)renderBookingSummary();
 
