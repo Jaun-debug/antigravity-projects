@@ -433,7 +433,7 @@ function switchTab(n){
     if(!tabsEl||!content)return;
     const tabsH=tabsEl.offsetHeight;
     const y=content.getBoundingClientRect().top+window.pageYOffset-tabsH-32;
-    window.scrollTo({top:y,behavior:'smooth'});
+    /* tab-switch scroll removed: no page jump */
   });
 }
 
