@@ -55,13 +55,8 @@ table.bd td{padding:9px 7px;border-bottom:1px solid var(--border);vertical-align
 .bd select,.bd input{border:1px solid var(--border);border-radius:8px;padding:7px 8px;font-family:var(--body);font-size:.84rem;background:#fbfaf8;color:var(--ink);width:100%}
 .bd .nights,.bd .pax{width:60px;text-align:center}
 .cellsel{display:flex;flex-direction:column;gap:5px;min-width:190px}
-.roomcell{display:flex;flex-direction:column;gap:6px;min-width:240px}
-.qtygrid{display:flex;flex-direction:column;gap:4px;margin-top:2px}
-.qline{display:flex;align-items:center;gap:7px}
-.qline .qlbl{flex:0 0 74px;font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
-.bd .qline .qbox{width:52px;text-align:center;flex:0 0 52px}
-.qline .qrate{font-size:.72rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
-.qline .qrate.qnone{color:var(--muted);font-style:italic}
+.roomcell{display:flex;flex-direction:column;gap:5px;min-width:160px}
+.bd .occsel{width:auto;min-width:96px;color:var(--gold);font-weight:500}
 .amtcell{font-family:var(--head);font-size:1.02rem;white-space:nowrap}
 .amtcell.g{color:var(--gold)}
 .rm{border:none;background:none;color:#c08a8a;cursor:pointer;font-size:1.05rem;padding:0 3px}
@@ -163,36 +158,10 @@ function rateExcluded(s){return /child|chd|\bkid|infant/.test(s)||/\byrs?\b|\bye
 function rateMatches(n,mode){var s=(n||'').toLowerCase();if(rateExcluded(s))return false;if(mode==='single')return /single/.test(s);return /sharing/.test(s)||/per person/.test(s)||/\bpps\b/.test(s);}
 // index of the CHEAPEST priced rate matching the mode (ignores N$0 rows like child/free); -1 if none
 function bestRoomIdx(L,mode){if(!L||!L.rates)return -1;var best=-1,bp=Infinity;L.rates.forEach(function(rt,ri){if(rateMatches(rt.n,mode)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;best=ri;}}});return best;}
-// activity/meal/fee lines that must NOT be treated as a child accommodation rate
-function childActivity(s){return /guide|driver|pilot|breakfast|lunch|dinner|brunch|\bmeal|beverage|drinks|\bbar\b|\bwine\b|game[ -]?drive|cruise|tracking|excursion|sundowner|sunset|\bdrive\b|transfer|shuttle|activit|\bboat\b|scenic|fly-?in|flight|hide\b|feeding|spa|massage|treatment|laundry|wifi|fishing|quad|horse|riding|\bbike|cycl|kayak|canoe|mokoro|balloon|photograph|\bwalk\b|hike|picnic|braai|boma|swim|\bpool\b|\bgym\b|tasting|\btour\b|township|cultural|museum|entrance|\bentry\b|\bcot\b|crib|park fee|conservation|levy|permit|tourism|commission|deposit|supplement|\bextra\b|add[- ]?on/.test(s);}
-// cheapest child ACCOMMODATION rate; falls back to a free/N$0 child row if that's all there is
-function bestChildIdx(L){if(!L||!L.rates)return -1;var b=-1,bp=Infinity;L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(/child|chd|\bkid/.test(s)&&!childActivity(s)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;b=ri;}}});if(b<0){L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(b<0&&/child|chd|\bkid/.test(s)&&!childActivity(s))b=ri;});}return b;}
-// resolve the three priced categories for a row: PP-sharing = the dropdown choice (d.roomIdx),
-// single & child = cheapest matching rate for that lodge. Each is {p,n} or null.
-function catInfo(d){
-  var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null; if(!L)return {sh:null,sg:null,ch:null};
-  var sh=(d.roomIdx>-1&&L.rates[d.roomIdx])?{p:L.rates[d.roomIdx].p,n:L.rates[d.roomIdx].n}:null;
-  var sgI=bestRoomIdx(L,'single'),chI=bestChildIdx(L);
-  return {sh:sh,sg:(sgI>-1?{p:L.rates[sgI].p,n:L.rates[sgI].n}:null),ch:(chI>-1?{p:L.rates[chI].p,n:L.rates[chI].n}:null)};
-}
-// quantities per row (back-compat: old quotes only have d.pax → treat as sharing qty)
-function qShareOf(d){return (d.qShare!=null)?num(d.qShare):num(d.pax||0)}
-function qSingleOf(d){return num(d.qSingle||0)}
-function qChildOf(d){return num(d.qChild||0)}
-// one qty box + the matched rate it will pull (name shown so the agent can confirm the room/season)
-function qtyLine(i,key,label,info,val){
-  var rate=info?('<span class="qrate" title="'+esc(info.n)+'">× '+money(info.p)+' · '+esc(info.n)+'</span>')
-               :'<span class="qrate qnone">no rate on sheet</span>';
-  return '<div class="qline"><span class="qlbl">'+label+'</span>'
-    +'<input class="qbox" type="number" min="0" step="1" value="'+val+'" data-i="'+i+'" data-f="'+key+'">'
-    +rate+'</div>';
-}
-// per-night total: captured rooms from the rate sheet take priority; otherwise sum qty × category rate
+// per-night total for a row: captured rooms from the rate sheet take priority over the dropdown
 function rowPerNight(d){
   if(d.cap&&d.cap.length){var t=0;d.cap.forEach(function(r){t+=(r.qty||0)*(r.price||0)});return t}
-  if(d.lodgeIdx<0)return 0;
-  var c=catInfo(d);
-  return qShareOf(d)*((c.sh&&c.sh.p)||0)+qSingleOf(d)*((c.sg&&c.sg.p)||0)+qChildOf(d)*((c.ch&&c.ch.p)||0);
+  return lodgePrice(d)*(d.pax||0);
 }
 function rowSub(d){return rowPerNight(d)*(d.nights||0)}
 // safari start date chains through the lodges: each check-in = start + prior nights
@@ -302,35 +271,30 @@ function renderPanel(){
           +(d.region?'<span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">'+esc(d.region)+'</span>':'')
           +(d.fileUrl?'<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(d.fileUrl)+'\');return false">View sheet ↗</a>':'')
           +(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')+'</div>';
-        roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('')+'<div class="muted" style="font-size:.72rem;padding:2px 0">from sheet</div>';
-        paxCell='';
+        roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('');
+        paxCell='<span class="muted" style="font-size:.78rem">from sheet</span>';
       } else {
         regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><select data-i="'+i+'" data-f="lodgeIdx">'+lodgeOpts+'</select>'+view+'</div>';
-        var boxes='';
-        if(d.lodgeIdx>-1){var ci=catInfo(d);
-          boxes='<div class="qtygrid">'
-            +qtyLine(i,'qShare','PP Sharing',ci.sh,qShareOf(d))
-            +qtyLine(i,'qSingle','Single',ci.sg,qSingleOf(d))
-            +qtyLine(i,'qChild','Child',ci.ch,qChildOf(d))
-            +'</div>';
-        }
-        roomCell='<div class="roomcell"><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>'+boxes+'</div>';
-        paxCell='';
+        var occ=d.occ||'sharing';
+        var occSel=(d.lodgeIdx>-1)?'<select class="occsel" data-i="'+i+'" data-f="occ"><option value="sharing"'+(occ==='sharing'?' selected':'')+'>Sharing</option><option value="single"'+(occ==='single'?' selected':'')+'>Single</option></select>':'';
+        roomCell='<div class="roomcell">'+occSel+'<select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></div>';
+        paxCell='<input class="pax" type="number" min="1" value="'+(d.pax||1)+'" data-i="'+i+'" data-f="pax">';
       }
       return '<tr><td class="rownum">'+(i+1)+'</td>'
         +'<td><input class="nights" type="number" min="1" value="'+(d.nights||1)+'" data-i="'+i+'" data-f="nights"></td>'
         +'<td>'+regionLodgeCell+'</td>'
         +'<td>'+roomCell+'</td>'
+        +'<td>'+paxCell+'</td>'
         +'<td class="r amtcell">'+(pn?money(pn):'—')+'</td>'
         +'<td class="r amtcell g">'+money(sub)+'</td>'
         +'<td><button class="rm" data-lodge-rm="'+i+'">&times;</button></td></tr>'
-        +((i<S.lodges.length-1&&d.legToNext)?'<tr><td></td><td colspan="6" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--gold)">&#8595; '+esc(d.legToNext)+'</td></tr>'
-          :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<tr><td></td><td colspan="6" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--muted)">&#8595; estimating drive distance…</td></tr>':''));
+        +((i<S.lodges.length-1&&d.legToNext)?'<tr><td></td><td colspan="7" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--gold)">&#8595; '+esc(d.legToNext)+'</td></tr>'
+          :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<tr><td></td><td colspan="7" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--muted)">&#8595; estimating drive distance…</td></tr>':''));
     }).join('');
-    if(!S.lodges.length) body='<tr><td colspan="7" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
-    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate).</p>'
+    if(!S.lodges.length) body='<tr><td colspan="8" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
+    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Per-night rates are per person, pulled from the live rate sheets.</p>'
       +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'
-      +'<div style="overflow-x:auto"><table class="bd"><thead><tr><th style="width:34px">#</th><th style="width:64px">Nights</th><th>Region &amp; Lodge</th><th>Rooms &amp; rates</th><th class="r">Per night</th><th class="r">Subtotal</th><th></th></tr></thead><tbody>'+body+'</tbody></table></div>'
+      +'<div style="overflow-x:auto"><table class="bd"><thead><tr><th style="width:34px">#</th><th style="width:64px">Nights</th><th>Region &amp; Lodge</th><th>Room / rate</th><th style="width:60px">Pax</th><th class="r">Per night</th><th class="r">Subtotal</th><th></th></tr></thead><tbody>'+body+'</tbody></table></div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
   } else if(active==='vehicle'){
@@ -409,15 +373,12 @@ function bindPanel(){
         var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
         if(f==='nights')d.nights=Math.max(1,parseInt(el.value,10)||1);
         else if(f==='pax')d.pax=Math.max(1,parseInt(el.value,10)||1);
-        else if(f==='qShare')d.qShare=Math.max(0,parseInt(el.value,10)||0);
-        else if(f==='qSingle')d.qSingle=Math.max(0,parseInt(el.value,10)||0);
-        else if(f==='qChild')d.qChild=Math.max(0,parseInt(el.value,10)||0);
         recalc();
       };
       el.onchange=function(){renderPanel()};
     }
   });
-  if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:2});renderPanel();autoDistances()};
+  if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,occ:'sharing',pax:parseInt(S.adults)||2,nights:2});renderPanel();autoDistances()};
   document.querySelectorAll('#panel [data-lodge-rm]').forEach(function(b){b.onclick=function(){var ri=+b.dataset.lodgeRm;S.lodges.splice(ri,1);if(S.lodges[ri-1])S.lodges[ri-1].legToNext='';renderPanel();autoDistances()}});
   // line items
   document.querySelectorAll('#panel input[data-k]').forEach(function(el){
@@ -458,7 +419,7 @@ function seed(){
     it.forEach(function(x){
       var li=-1;for(var k=0;k<RATES.lodges.length;k++){if(RATES.lodges[k].name.toLowerCase()===(x.name||'').toLowerCase()){li=k;break}}
       var nights=(x.items&&x.items[0]&&x.items[0].nights)||x.nights||2;
-      S.lodges.push({region:li>-1?RATES.lodges[li].region:(x.region||''),lodgeIdx:li,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:nights,name:x.name||'',fileUrl:x.url||'',cap:(x.items&&x.items.length)?x.items:null,legToNext:x.legToNext||''});
+      S.lodges.push({region:li>-1?RATES.lodges[li].region:(x.region||''),lodgeIdx:li,roomIdx:-1,occ:'sharing',pax:parseInt(S.adults)||2,nights:nights,name:x.name||'',fileUrl:x.url||'',cap:(x.items&&x.items.length)?x.items:null,legToNext:x.legToNext||''});
     });
     if(it.length) active='lodges';
   }catch(e){}
