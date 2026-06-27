@@ -155,23 +155,48 @@ function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r
 /* ---- totals ---- */
 function accomTotal(){var t=0;S.lodges.forEach(function(d){t+=rowSub(d)});return t}
 function lodgePrice(d){if(d.lodgeIdx>-1&&d.roomIdx>-1){var L=RATES.lodges[d.lodgeIdx];if(L&&L.rates[d.roomIdx])return L.rates[d.roomIdx].p}return 0}
-// exclude non-room line items (children, guides, meals, activities, fees, supplements) from auto-grab
-function rateExcluded(s){return /child|chd|\bkid|infant/.test(s)||/\byrs?\b|\byears?\b/.test(s)||/\d\s*[–\-]\s*\d+\s*(yr|year)/.test(s)||/guide|driver|pilot/.test(s)||/breakfast|lunch|dinner|brunch/.test(s)||/game[ -]?drive|cruise|tracking|excursion|sundowner|\bdrive\b|transfer|activit|\bboat\b|scenic|fly-?in|flight|hide\b/.test(s)||/park fee|conservation|levy|permit|tourism|campsite|camping|apartment|per unit|\bunit\b|per room/.test(s)||/supplement|\bextra\b|add[- ]?on/.test(s);}
-// pick a room rate by occupancy mode: 'sharing' = per-person-sharing room, 'single' = single room. Requires an
-// occupancy keyword (sharing / per person / pps, or single) and rejects non-room items, so auto-grab never lands
-// on a cheap activity/child/extra/fee line.
+// HARD non-room: services that are never a guest accommodation rate, even when they mention a room
+// (e.g. "Guide Room — DBB", "Tour Guide Sharing"). Guides, drives, transfers, fees, activities-by-name.
+function nonRoom(s){return /guide|driver|pilot|game[ -]?drive|\bdrives?\b|scheduled|cruise|tracking|excursion|sundowner|sunset|transfer|shuttle|airstrip|airfield|\bpassenger\b|one[ -]?way|\bfee\b|game ?package|\bboat\b|scenic|fly-?in|flight|\bhide\b|feeding|spa|massage|treatment|laundry|wifi|fishing|quad|horse|riding|\bbike|cycl|kayak|canoe|mokoro|balloon|photograph|\bwalk\b|hik|picnic|braai|boma|swim|\bpool\b|\bgym\b|tasting|\btour\b|township|cultural|museum|entrance|\bentry\b|\bcot\b|crib|park fee|conservation|levy|permit|tourism|commission|deposit|supplement|\bextra\b|add[- ]?on/.test(s);}
+// SOFT: meals/inclusions that often appear ON a room rate ("DBB", "incl. meals & activities") —
+// only disqualifying when NO room/board noun is present (i.e. the line is the meal/activity itself).
+function softNonRoom(s){return /breakfast|lunch|dinner|brunch|\bmeal|beverage|drinks|\bbar\b|\bwine\b|activit/.test(s);}
+// positive accommodation signal — naming a room/board type means it is lodging despite any inclusions listed
+function hasRoomNoun(s){return /sharing|\bsingle\b|\broom\b|chalet|\btent\b|bungalow|suite|villa|cabin|rondavel|cottage|\bbed\b|\bdbb\b|\bb ?& ?b\b|full board|half board|fully inclusive|\bfi\b|per person per night|per adult|pppn|accommodation|night rate/.test(s);}
+// a service/extra rather than a bookable room
+function notRoomService(s){return nonRoom(s)||(softNonRoom(s)&&!hasRoomNoun(s));}
+// exclude non-room lines (children, ages, units, camping, services) from sharing/single auto-grab
+function rateExcluded(s){
+  if(/child|chd|\bkid|infant/.test(s)||/\byrs?\b|\byears?\b/.test(s)||/\d\s*[–\-]\s*\d+\s*(yr|year)/.test(s))return true;
+  if(notRoomService(s))return true;
+  return (/campsite|camping|apartment|per unit|\bunit\b|per room/.test(s))&&!hasRoomNoun(s);
+}
+// pick a room rate by occupancy mode: 'sharing' = per-person-sharing room, 'single' = single room.
 function rateMatches(n,mode){var s=(n||'').toLowerCase();if(rateExcluded(s))return false;if(mode==='single')return /single/.test(s);return /sharing/.test(s)||/per person/.test(s)||/\bpps\b/.test(s);}
 // index of the CHEAPEST priced rate matching the mode (ignores N$0 rows like child/free); -1 if none
 function bestRoomIdx(L,mode){if(!L||!L.rates)return -1;var best=-1,bp=Infinity;L.rates.forEach(function(rt,ri){if(rateMatches(rt.n,mode)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;best=ri;}}});return best;}
-// activity/meal/fee lines that must NOT be treated as a child accommodation rate
-function childActivity(s){return /guide|driver|pilot|breakfast|lunch|dinner|brunch|\bmeal|beverage|drinks|\bbar\b|\bwine\b|game[ -]?drive|cruise|tracking|excursion|sundowner|sunset|\bdrive\b|transfer|shuttle|activit|\bboat\b|scenic|fly-?in|flight|hide\b|feeding|spa|massage|treatment|laundry|wifi|fishing|quad|horse|riding|\bbike|cycl|kayak|canoe|mokoro|balloon|photograph|\bwalk\b|hike|picnic|braai|boma|swim|\bpool\b|\bgym\b|tasting|\btour\b|township|cultural|museum|entrance|\bentry\b|\bcot\b|crib|park fee|conservation|levy|permit|tourism|commission|deposit|supplement|\bextra\b|add[- ]?on/.test(s);}
+// lines that must NOT be treated as a child accommodation rate (services/meals)
+function childActivity(s){return notRoomService(s);}
 // cheapest child ACCOMMODATION rate; falls back to a free/N$0 child row if that's all there is
 function bestChildIdx(L){if(!L||!L.rates)return -1;var b=-1,bp=Infinity;L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(/child|chd|\bkid/.test(s)&&!childActivity(s)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;b=ri;}}});if(b<0){L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(b<0&&/child|chd|\bkid/.test(s)&&!childActivity(s))b=ri;});}return b;}
-// resolve the three priced categories for a row: PP-sharing = the dropdown choice (d.roomIdx),
-// single & child = cheapest matching rate for that lodge. Each is {p,n} or null.
+// cheapest genuine accommodation rate (any wording) — excludes activities, meals, fees, single,
+// child, camping/day-visitor. Used as a fallback when a lodge has no rate worded "sharing".
+function bestAccommIdx(L){if(!L||!L.rates)return -1;
+  function pick(allowCamp){var b=-1,bp=Infinity;L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();
+    if(notRoomService(s))return; if(/child|chd|\bkid/.test(s))return; if(/single/.test(s)&&!/sharing/.test(s))return;
+    if(/\byrs?\b|\byears?\b|\d\s*[–\-]\s*\d+\s*(yr|year)/.test(s))return;
+    if(/additional|supplement|\bextra\b|add[- ]?on|2nd room|3rd room|second room|third person|day visitor/.test(s))return;
+    if(!allowCamp&&/campsite|camping|ablution|per site/.test(s))return;
+    var p=Number(rt.p)||0; if(p>0&&p<bp){bp=p;b=ri;}});return b;}
+  var i=pick(false); return i>-1?i:pick(true);}
+// the sharing rate to use: a proper per-person-sharing rate if the sheet has one, else the cheapest room rate
+function bestShareIdx(L){var i=bestRoomIdx(L,'sharing');return i>-1?i:bestAccommIdx(L);}
+// resolve the three priced categories for a row: PP-sharing = the dropdown choice (d.roomIdx) or the
+// best room rate; single & child = cheapest matching rate for that lodge. Each is {p,n} or null.
 function catInfo(d){
   var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null; if(!L)return {sh:null,sg:null,ch:null};
-  var sh=(d.roomIdx>-1&&L.rates[d.roomIdx])?{p:L.rates[d.roomIdx].p,n:L.rates[d.roomIdx].n}:null;
+  var shI=(d.roomIdx>-1)?d.roomIdx:bestShareIdx(L);
+  var sh=(shI>-1&&L.rates[shI])?{p:L.rates[shI].p,n:L.rates[shI].n}:null;
   var sgI=bestRoomIdx(L,'single'),chI=bestChildIdx(L);
   return {sh:sh,sg:(sgI>-1?{p:L.rates[sgI].p,n:L.rates[sgI].n}:null),ch:(chI>-1?{p:L.rates[chI].p,n:L.rates[chI].n}:null)};
 }
@@ -396,7 +421,7 @@ function bindPanel(){
       el.onchange=function(){
         var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
         if(f==='region'){d.region=el.value;d.lodgeIdx=-1;d.roomIdx=-1;d.name='';d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
-        else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;var L=RATES.lodges[d.lodgeIdx];d.occ=d.occ||'sharing';var ri=bestRoomIdx(L,d.occ);if(ri<0&&d.occ==='single')ri=bestRoomIdx(L,'sharing');d.roomIdx=(ri>-1?ri:-1);d.name=(L?L.name:'');d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
+        else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;var L=RATES.lodges[d.lodgeIdx];var ri=bestShareIdx(L);d.roomIdx=(ri>-1?ri:-1);d.name=(L?L.name:'');d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
         else if(f==='occ'){d.occ=el.value;var L=RATES.lodges[d.lodgeIdx];var ri=bestRoomIdx(L,d.occ);if(ri<0)ri=bestRoomIdx(L,d.occ==='single'?'sharing':'single');if(ri>-1)d.roomIdx=ri;}
         else if(f==='roomIdx'){d.roomIdx=+el.value;var rr=(RATES.lodges[d.lodgeIdx]&&RATES.lodges[d.lodgeIdx].rates[d.roomIdx]);if(rr)d.occ=(/single/i.test(rr.n)?'single':'sharing');}
         renderPanel();
