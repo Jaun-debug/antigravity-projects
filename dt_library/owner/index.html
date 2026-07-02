@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Owner Rates — Namibia Rates</title>
+<style>
+  :root{
+    --gold:#B8956A; --gold-dk:#9c7b52; --green:#87a996; --green-dk:#6d8d7b;
+    --bone:#F5F1E8; --card:#fffdf8; --ink:#2f2b25; --muted:#8a8175;
+    --line:#e6ded0; --danger:#c0603f; --shadow:0 1px 3px rgba(60,50,35,.09);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bone);color:var(--ink);font-size:15px;line-height:1.4}
+  a{color:var(--gold-dk)}
+  h1,h2,h3{font-weight:600;margin:0}
+  button{font:inherit;cursor:pointer;border:0;border-radius:8px;padding:9px 14px;background:var(--gold);color:#fff;box-shadow:var(--shadow)}
+  button:hover{background:var(--gold-dk)}
+  button.ghost{background:#fff;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+  button.ghost:hover{background:#faf6ee}
+  button.green{background:var(--green)} button.green:hover{background:var(--green-dk)}
+  button.danger{background:#fff;color:var(--danger);border:1px solid #e7c6ba;box-shadow:none}
+  button.danger:hover{background:#fbeee9}
+  button.sm{padding:5px 9px;font-size:13px;border-radius:6px}
+  input,textarea,select{font:inherit;color:var(--ink);border:1px solid var(--line);border-radius:7px;padding:8px 10px;background:#fff;width:100%}
+  input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:-1px}
+  label{display:block;font-size:12px;color:var(--muted);margin:0 0 3px 2px;letter-spacing:.02em;text-transform:uppercase}
+  .wrap{max-width:1080px;margin:0 auto;padding:18px}
+  /* login */
+  #login{max-width:380px;margin:9vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:var(--shadow)}
+  #login h1{font-size:20px;margin-bottom:4px}
+  #login p{color:var(--muted);font-size:13px;margin:0 0 18px}
+  .brandbar{height:5px;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:14px 14px 0 0;margin:-26px -26px 20px}
+  /* app */
+  header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--card);border-bottom:1px solid var(--line)}
+  header.top .lhs{display:flex;align-items:center;gap:10px}
+  .dot{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--gold),var(--green))}
+  .layout{display:grid;grid-template-columns:290px 1fr;gap:18px}
+  @media(max-width:760px){.layout{grid-template-columns:1fr}}
+  .side{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:var(--shadow);align-self:start}
+  .side .search{margin-bottom:10px}
+  .lodge{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px;border-radius:8px;cursor:pointer}
+  .lodge:hover{background:#f6f1e7}
+  .lodge.active{background:#efe7d7}
+  .lodge .nm{font-weight:500;font-size:14px}
+  .lodge .rg{font-size:11px;color:var(--muted)}
+  .badges{display:flex;gap:4px}
+  .b{font-size:10px;padding:2px 6px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
+  .b.on{background:var(--green);color:#fff;border-color:var(--green)}
+  .b.on.rk{background:var(--gold);border-color:var(--gold)}
+  .main{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);min-height:60vh}
+  .empty{color:var(--muted);text-align:center;padding:60px 20px}
+  .tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--line)}
+  .tab{padding:9px 16px;border-radius:8px 8px 0 0;background:transparent;color:var(--muted);box-shadow:none}
+  .tab:hover{background:#f6f1e7;color:var(--ink)}
+  .tab.active{background:#efe7d7;color:var(--ink);font-weight:600}
+  .metagrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  @media(max-width:620px){.metagrid{grid-template-columns:1fr}}
+  .section{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:12px;background:#fffdf9}
+  .section .shead{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .row{display:grid;grid-template-columns:1fr 150px 34px;gap:8px;margin-bottom:6px;align-items:center}
+  .row .x{background:#fff;color:var(--danger);border:1px solid #e7c6ba;box-shadow:none;padding:0;height:34px;border-radius:7px}
+  .row .x:hover{background:#fbeee9}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;align-items:center}
+  .spacer{flex:1}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:22px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:50}
+  .toast.show{opacity:.96}
+  .hint{font-size:12px;color:var(--muted);margin:2px 0 14px}
+  .err{color:var(--danger);font-size:13px;min-height:18px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login">
+  <div class="brandbar"></div>
+  <h1>Owner Rates</h1>
+  <p>Private area — sign in to manage rack &amp; STO rates.</p>
+  <label for="pw">Owner password</label>
+  <input id="pw" type="password" autocomplete="current-password" placeholder="••••••••">
+  <div class="err" id="loginErr"></div>
+  <div style="margin-top:14px"><button id="loginBtn" style="width:100%">Sign in</button></div>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+  <header class="top">
+    <div class="lhs"><div class="dot"></div><h2 style="font-size:17px">Owner Rates</h2></div>
+    <div><button class="ghost sm" id="logoutBtn">Sign out</button></div>
+  </header>
+  <div class="wrap">
+    <div class="layout">
+      <aside class="side">
+        <div class="search"><input id="q" placeholder="Search lodges…"></div>
+        <button class="green sm" id="addBtn" style="width:100%;margin-bottom:8px">＋ Add lodge</button>
+        <div id="list"></div>
+      </aside>
+      <section class="main" id="editor">
+        <div class="empty" id="emptyState">Select a lodge on the left, or add a new one, to edit its rates.</div>
+        <div id="edit" style="display:none">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+            <h2 id="edTitle" style="font-size:19px"></h2>
+            <span class="spacer"></span>
+            <button class="danger sm" id="delBtn">Delete this list</button>
+          </div>
+          <div class="hint" id="edSlug"></div>
+          <div class="tabs">
+            <button class="tab active" data-kind="rack" id="tabRack">Rack rates</button>
+            <button class="tab" data-kind="sto" id="tabSto">STO (net) rates</button>
+          </div>
+          <div class="metagrid">
+            <div><label>Lodge name</label><input id="m_name"></div>
+            <div><label>Region</label><input id="m_region"></div>
+            <div><label>Currency</label><input id="m_currency"></div>
+            <div><label>Validity</label><input id="m_validity"></div>
+            <div id="commWrap"><label>Commission (STO)</label><input id="m_commission" placeholder="e.g. 20% STO"></div>
+            <div><label>Note</label><input id="m_note"></div>
+          </div>
+          <div id="sections"></div>
+          <div class="actions">
+            <button class="ghost sm" id="addSection">＋ Add section</button>
+            <span class="spacer"></span>
+            <button id="saveBtn">Save <span id="saveKind"></span></button>
+          </div>
+          <div class="err" id="edErr"></div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+  var API='/api/owner-rates';
+  var token=sessionStorage.getItem('nr_owner_token')||'';
+  var lodges=[];          // list summaries
+  var current=null;       // { slug, rack, sto }
+  var kind='rack';        // active tab
+
+  var $=function(id){return document.getElementById(id)};
+  function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+
+  function api(payload){
+    payload.token=payload.token||token;
+    return fetch(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
+      .then(function(r){return r.json().then(function(j){return {status:r.status,body:j}})});
+  }
+
+  // ── login ─────────────────────────────────────────────
+  function showApp(){$('login').style.display='none';$('app').style.display='block';loadList();}
+  function showLogin(){$('app').style.display='none';$('login').style.display='block';$('pw').focus();}
+
+  function doLogin(){
+    var pw=$('pw').value;$('loginErr').textContent='';
+    api({action:'login',password:pw,token:''}).then(function(r){
+      if(r.status===200&&r.body.ok){token=r.body.token;sessionStorage.setItem('nr_owner_token',token);$('pw').value='';showApp();}
+      else{$('loginErr').textContent=(r.body&&r.body.error)||'Sign in failed.';}
+    }).catch(function(){$('loginErr').textContent='Network error.';});
+  }
+  $('loginBtn').addEventListener('click',doLogin);
+  $('pw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
+  $('logoutBtn').addEventListener('click',function(){token='';sessionStorage.removeItem('nr_owner_token');showLogin();});
+
+  // ── list ──────────────────────────────────────────────
+  function loadList(){
+    api({action:'list'}).then(function(r){
+      if(r.status===401){showLogin();return}
+      if(r.body&&r.body.ok){lodges=r.body.lodges||[];renderList();}
+      else if(r.body&&r.body.error){toast(r.body.error)}
+    });
+  }
+  function renderList(){
+    var q=($('q').value||'').trim().toLowerCase();
+    var box=$('list');box.innerHTML='';
+    var items=lodges.filter(function(l){return !q||(l.name||'').toLowerCase().indexOf(q)>-1||(l.region||'').toLowerCase().indexOf(q)>-1});
+    if(!items.length){box.innerHTML='<div class="hint" style="padding:6px">No lodges yet.</div>';return}
+    items.forEach(function(l){
+      var d=document.createElement('div');d.className='lodge'+(current&&current.slug===l.slug?' active':'');
+      d.innerHTML='<div><div class="nm"></div><div class="rg"></div></div>'+
+        '<div class="badges"><span class="b rk '+(l.hasRack?'on':'')+'">R</span><span class="b '+(l.hasSto?'on':'')+'">S</span></div>';
+      d.querySelector('.nm').textContent=l.name||l.slug;
+      d.querySelector('.rg').textContent=l.region||'';
+      d.addEventListener('click',function(){openLodge(l.slug)});
+      box.appendChild(d);
+    });
+  }
+  $('q').addEventListener('input',renderList);
+
+  // ── open / edit ───────────────────────────────────────
+  function openLodge(slug){
+    api({action:'get',slug:slug}).then(function(r){
+      if(r.body&&r.body.ok){current={slug:r.body.slug,rack:r.body.rack,sto:r.body.sto};kind='rack';renderEditor();renderList();}
+    });
+  }
+  function blankDoc(){return{name:'',region:'',currency:'N$',validity:'',note:'',commission:'',sections:[]}}
+  function activeDoc(){
+    if(!current) return null;
+    var d=current[kind];
+    if(!d) d=current[kind]=blankDoc();
+    if(!Array.isArray(d.sections)) d.sections=[];
+    return d;
+  }
+
+  function setTab(k){kind=k;$('tabRack').classList.toggle('active',k==='rack');$('tabSto').classList.toggle('active',k==='sto');renderEditor()}
+  $('tabRack').addEventListener('click',function(){pullMeta();setTab('rack')});
+  $('tabSto').addEventListener('click',function(){pullMeta();setTab('sto')});
+
+  function renderEditor(){
+    if(!current){$('edit').style.display='none';$('emptyState').style.display='block';return}
+    $('emptyState').style.display='none';$('edit').style.display='block';
+    var d=activeDoc();
+    $('edTitle').textContent=(d.name|| (current.rack&&current.rack.name)||(current.sto&&current.sto.name)||current.slug||'New lodge');
+    $('edSlug').textContent='URL slug: '+(current.slug||'(new — set from name on save)');
+    $('saveKind').textContent=kind==='rack'?'rack rates':'STO rates';
+    $('commWrap').style.display=kind==='sto'?'block':'none';
+    $('m_name').value=d.name||'';
+    $('m_region').value=d.region||'';
+    $('m_currency').value=d.currency||'N$';
+    $('m_validity').value=d.validity||'';
+    $('m_note').value=d.note||'';
+    $('m_commission').value=d.commission||'';
+    renderSections();
+    $('edErr').textContent='';
+  }
+
+  function renderSections(){
+    var d=activeDoc();var box=$('sections');box.innerHTML='';
+    d.sections.forEach(function(sec,si){
+      var el=document.createElement('div');el.className='section';
+      var head=document.createElement('div');head.className='shead';
+      var ti=document.createElement('input');ti.value=sec.title||'';ti.placeholder='Section title (e.g. Rooms — DBB per person)';
+      ti.addEventListener('input',function(){sec.title=ti.value});
+      var rm=document.createElement('button');rm.className='danger sm';rm.textContent='Remove section';
+      rm.addEventListener('click',function(){pullMeta();d.sections.splice(si,1);renderSections()});
+      head.appendChild(ti);head.appendChild(rm);el.appendChild(head);
+      (sec.rows||[]).forEach(function(row,ri){
+        var r=document.createElement('div');r.className='row';
+        var lab=document.createElement('input');lab.value=row[0]||'';lab.placeholder='Rate name (e.g. Double — pp sharing)';
+        lab.addEventListener('input',function(){row[0]=lab.value});
+        var pr=document.createElement('input');pr.value=row[1]||'';pr.placeholder='Price';
+        pr.addEventListener('input',function(){row[1]=pr.value});
+        var x=document.createElement('button');x.className='x';x.textContent='✕';
+        x.addEventListener('click',function(){sec.rows.splice(ri,1);renderSections()});
+        r.appendChild(lab);r.appendChild(pr);r.appendChild(x);el.appendChild(r);
+      });
+      var addRow=document.createElement('button');addRow.className='ghost sm';addRow.textContent='＋ Add rate';
+      addRow.addEventListener('click',function(){sec.rows=sec.rows||[];sec.rows.push(['','']);renderSections()});
+      el.appendChild(addRow);
+      box.appendChild(el);
+    });
+  }
+
+  $('addSection').addEventListener('click',function(){pullMeta();activeDoc().sections.push({title:'',rows:[['','']]});renderSections()});
+
+  // Copy DOM meta fields back into the active doc (before switching tab / saving).
+  function pullMeta(){
+    var d=activeDoc();if(!d)return;
+    d.name=$('m_name').value.trim();
+    d.region=$('m_region').value.trim();
+    d.currency=$('m_currency').value.trim();
+    d.validity=$('m_validity').value.trim();
+    d.note=$('m_note').value.trim();
+    d.commission=$('m_commission').value.trim();
+  }
+
+  // ── save / delete / add ───────────────────────────────
+  $('saveBtn').addEventListener('click',function(){
+    pullMeta();var d=activeDoc();$('edErr').textContent='';
+    if(!d.name){$('edErr').textContent='Lodge name is required.';return}
+    api({action:'save',slug:current.slug||'',kind:kind,data:d}).then(function(r){
+      if(r.body&&r.body.ok){
+        current.slug=r.body.slug;
+        toast('Saved — '+(kind==='rack'?'rack':'STO')+' rates live');
+        loadList();renderEditor();
+      }else{$('edErr').textContent=(r.body&&r.body.error)||'Save failed.';}
+    }).catch(function(){$('edErr').textContent='Network error.';});
+  });
+
+  $('delBtn').addEventListener('click',function(){
+    if(!current||!current.slug){toast('Nothing saved to delete yet.');return}
+    if(!confirm('Delete the '+(kind==='rack'?'RACK':'STO')+' rate list for this lodge? This cannot be undone.'))return;
+    api({action:'delete',slug:current.slug,kind:kind}).then(function(r){
+      if(r.body&&r.body.ok){current[kind]=null;toast('Deleted '+(kind==='rack'?'rack':'STO')+' list');loadList();
+        if(!current.rack&&!current.sto){current=null;renderEditor()}else{renderEditor()}
+      }else{toast((r.body&&r.body.error)||'Delete failed.')}
+    });
+  });
+
+  $('addBtn').addEventListener('click',function(){
+    var name=prompt('New lodge name:');if(!name)return;
+    var region=prompt('Region (optional):')||'';
+    current={slug:'',rack:{name:name.trim(),region:region.trim(),currency:'N$',validity:'',note:'',commission:'',sections:[{title:'Rooms (per person, per night)',rows:[['','']]}]},sto:null};
+    kind='rack';renderEditor();
+    toast('Fill in rates, then Save to create it.');
+  });
+
+  // ── boot ──────────────────────────────────────────────
+  if(token){ api({action:'list'}).then(function(r){ if(r.status===200&&r.body.ok){showApp()} else {showLogin()} }).catch(showLogin); }
+  else showLogin();
+})();
+</script>
+</body>
+</html>

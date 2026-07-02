@@ -113,6 +113,14 @@ Both `builder/index.html` and `assets/rates-index.json` ship together in one pus
   cheapest rate for those properties.
 - A handful of lodges use "PPS" or bare "Per person" wording — covered by the matcher, but verify new sheets.
 
+## 8b. Owner Rates area (added 01 Jul 2026)
+A private, password-gated owner area now manages **rack** and **net STO** rates in a
+Redis (Upstash) database, feeding the live site. The builder overlays live rack rates from
+`/api/rack` on top of `rates-index.json` (matched by lodge **name**; new lodges appended).
+Full setup + architecture: see `/OWNER_AREA.md` at the repo root. Requires the Vercel Redis
+store + an `OWNER_PASS` env var. If either is missing, the builder falls back to the static
+JSON unchanged.
+
 ## 9. What changed this session (27 Jun 2026)
 1. Fixed `rates-index.json` (142 lodges) via a new static-table parser; added `tools/rebuild_rates_index.py`.
 2. Added cheapest-rate auto-grab + (initially) a Sharing/Single toggle.

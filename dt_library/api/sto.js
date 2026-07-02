@@ -16,6 +16,7 @@
 // and it automatically invalidates every session if you ever change the password.
 
 const crypto = require('crypto');
+const db = require('./_ratesdb');
 
 function sessionToken(pass) {
   return crypto.createHash('sha256').update('nr-agent-session|' + pass).digest('hex').slice(0, 40);
@@ -468,7 +469,7 @@ const STO_DB = {
   'white-sands-caprivi': {"name": "White Sands Lodge", "commission": "Net STO", "currency": "N$", "validity": "2026", "note": "Net STO rates, incl. VAT & levy.", "sections": [{"title": "Game Drives (per person, min 2)", "rows": [["Game Drive — Bwabwata NP (2.5–3 hr)", "950.00"], ["Game Drive — Mahango NP (3.5–4 hr)", "1,150.00"], ["VIP Game Drive — Bwabwata NP (5 hr)", "1,800.00"], ["Full Day Game Drive — Mahango &amp; Bwabwata", "2,500.00"], ["SAN Traditional Tour (1.5–2 hr)", "480.00"]]}, {"title": "Sunset &amp; Fishing — N//Goabaca (per person, min 3)", "rows": [["Sunset Cruise (1.5 hr)", "440.00"], ["Fishing per hour — 1 to 3 pax (min 2 hr)", "935.00"], ["Fishing — additional pax per hour", "240.00"], ["Rent of fishing gear (4 hr)", "250.00"]]}, {"title": "Private Boat Charters — Okavango Dreams (per person, min 4)", "rows": [["Breakfast Cruise (1.5 hr)", "650.00"], ["Breakfast Cruise — in-house guests", "420.00"], ["Namibian Braai Cruise (4 hr, all drinks)", "1,699.00"], ["Birding Cruise (3 hr, 2 drinks)", "880.00"], ["Game Cruise (4 hr, 2 drinks)", "1,350.00"], ["VIP Cruise (6 hr, all-inclusive)", "2,500.00"]]}]}
 };
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
@@ -512,7 +513,16 @@ module.exports = (req, res) => {
   // lodge page then sends the signed-in agent straight to its bookable STO
   // sheet.
   if (lodge) {
-    const data = STO_DB[lodge];
+    // Owner-entered net rates (Redis) take precedence; the inline STO_DB below
+    // is the fallback for lodges not yet managed in the owner area. If the DB
+    // is unreachable we silently fall back so a valid login is never blocked.
+    let data = null;
+    try {
+      data = await db.getRates('sto', lodge);
+    } catch (e) {
+      data = null;
+    }
+    if (!data) data = STO_DB[lodge];
     if (data) {
       out.lodge = lodge;
       out.rates = data;

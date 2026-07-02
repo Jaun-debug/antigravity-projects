@@ -476,7 +476,25 @@ document.getElementById('btn-saved').addEventListener('click',function(){
 });
 
 /* ---- load rates + seed from the card itinerary ---- */
-fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start()}).catch(function(){start()});
+/* Overlay owner-entered RACK rates (live, from /api/rack) on top of the static
+   index: matched lodges (by name) get their rates replaced; brand-new lodges are
+   appended. Non-breaking — if /api/rack is empty or unreachable, the static file
+   is used unchanged. */
+function overlayRack(){
+  return fetch('/api/rack').then(function(r){return r.json()}).then(function(j){
+    if(!j||!j.lodges||!RATES||!RATES.lodges)return;
+    var byName={};
+    for(var k=0;k<RATES.lodges.length;k++){byName[(RATES.lodges[k].name||'').trim().toLowerCase()]=RATES.lodges[k];}
+    Object.keys(j.lodges).forEach(function(slug){
+      var L=j.lodges[slug]; if(!L||!L.rates||!L.rates.length)return;
+      var key=(L.name||'').trim().toLowerCase();
+      var ex=byName[key];
+      if(ex){ex.rates=L.rates;}
+      else{var nl={file:'',name:L.name||slug,region:L.region||'',rates:L.rates};RATES.lodges.push(nl);byName[key]=nl;}
+    });
+  }).catch(function(){});
+}
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;return overlayRack()}).then(function(){seed();start()}).catch(function(){start()});
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];

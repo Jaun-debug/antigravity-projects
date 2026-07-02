@@ -1,0 +1,9 @@
+{
+  "name": "namibia-rates",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Namibia Rates — static site, itinerary builder, and owner rate-management area (Vercel).",
+  "dependencies": {
+    "@upstash/redis": "^1.34.0"
+  }
+}
