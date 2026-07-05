@@ -283,6 +283,7 @@ document.addEventListener('DOMContentLoaded',function(){
   var eb=document.querySelector('.header .nr-eyebrow');
   if(eb&&!agent){ eb.textContent=(eb.textContent||'').replace(/[·\-\s]*Pre-?Negotiated STO Rates?.*$/i,'').replace(/[·\-\s]+$/,'').trim(); if(!eb.textContent) eb.style.display='none'; }
   if(agent) return;
+  document.querySelectorAll(".spec-item").forEach(function(si){ if(/\b(sto|commission)\b/i.test(si.textContent||"")) si.style.display="none"; });
   var money=/N\$|\d,\d{3}|\d[.,]\d{2}\b/;
   var tables=document.querySelectorAll('table');
   for(var ti=0;ti<tables.length;ti++){
@@ -305,7 +306,7 @@ document.addEventListener('DOMContentLoaded',function(){
   }
 });
 </script>
-        <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function setCo(t){if(el&&t)el.textContent=t.replace(/\s+/g,' ').trim();}var tabs=document.querySelectorAll('.tabs-container .tab-link');var a=document.querySelector('.tabs-container .tab-link.active')||tabs[0];if(a)setCo(a.textContent);tabs.forEach(function(b){b.addEventListener('click',function(){setCo(b.textContent);});});});</script>
+        <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function activeName(){var c=document.querySelector('.rate-card.active .supplier-details h2');if(c)return c.textContent;var t=document.querySelector('.tabs-container .tab-link.active');return t?t.textContent:'';}function sync(){if(el){var n=activeName();if(n)el.textContent=n.replace(/\s+/g,' ').trim();}}sync();if(typeof window.switchSupplier==="function"){var o=window.switchSupplier;window.switchSupplier=function(){var r=o.apply(this,arguments);setTimeout(sync,0);return r;};}document.querySelectorAll('.tabs-container .tab-link').forEach(function(b){b.addEventListener('click',function(){setTimeout(sync,0);});});});</script>
 
         <!-- SEASON SELECTOR -->
         <div class="season-selector">
