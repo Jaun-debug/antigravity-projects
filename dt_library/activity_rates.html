@@ -236,15 +236,16 @@
         <div class="back-btn" onclick="goBackToPortal()">← Back to Portal</div>
 
         <style>
-          .header h1{font-size:1rem!important;letter-spacing:3px;font-weight:500;text-transform:uppercase;opacity:.5;margin-bottom:4px}
-          .header p{font-size:.72rem!important;letter-spacing:2px;opacity:.45}
-          .supplier-details h2{font-size:2.8rem!important;letter-spacing:1px;line-height:1.08;margin-bottom:14px}
-          @media(max-width:640px){.supplier-details h2{font-size:2rem!important}}
+          .header .nr-eyebrow{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;opacity:.5;margin-bottom:8px}
+          .header h1{font-size:2.8rem!important;letter-spacing:1px;text-transform:none!important;font-weight:400;line-height:1.1;margin-bottom:8px}
+          .supplier-details h2{display:none}
+          @media(max-width:640px){.header h1{font-size:2rem!important}}
         </style>
         <header class="header">
-            <h1>Activity Experiences</h1>
-            <p>PRE-NEGOTIATED STO CONTRACT RATES 2026/2027</p>
+            <p class="nr-eyebrow">Activity Experiences &middot; Pre-Negotiated STO Rates 2026/2027</p>
+            <h1 id="nr-hero-co">Mola Mola Safaris</h1>
         </header>
+        <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function setCo(t){if(el&&t)el.textContent=t.replace(/\s+/g,' ').trim();}var tabs=document.querySelectorAll('.tabs-container .tab-link');var a=document.querySelector('.tabs-container .tab-link.active')||tabs[0];if(a)setCo(a.textContent);tabs.forEach(function(b){b.addEventListener('click',function(){setCo(b.textContent);});});});</script>
 
         <!-- SUPPLIER TABS -->
         <div class="tabs-container">
