@@ -191,11 +191,8 @@ body{padding-top:102px;}
   .nr-map-bar .nr-map-x:hover{background:rgba(255,255,255,.18)}
   .nr-map-panel #lodge-map{flex:1;width:100%;background:#e7ddca}
   .nr-pin{background:none;border:0}
-  .nr-pulse{position:relative;width:18px;height:18px}
-  .nr-pulse .dot,.nr-pulse .ring{position:absolute;top:50%;left:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;box-sizing:border-box}
-  .nr-pulse .dot{background:#B8956A;border:2px solid #fff}
-  .nr-pulse .ring{background:rgba(184,149,106,.55);animation:nrpulse 1.8s ease-out infinite}
-  @keyframes nrpulse{0%{transform:scale(1);opacity:.7}70%{opacity:.12}100%{transform:scale(3.4);opacity:0}}
+  .nr-pulse{width:16px;height:16px;border-radius:50%;background:#B8956A;border:2px solid #fff;box-sizing:border-box;box-shadow:0 0 0 0 rgba(184,149,106,.7);animation:nrpulse 1.5s ease-out infinite}
+  @keyframes nrpulse{0%{box-shadow:0 0 0 0 rgba(184,149,106,.75)}70%{box-shadow:0 0 0 22px rgba(184,149,106,0)}100%{box-shadow:0 0 0 0 rgba(184,149,106,0)}}
   #lodge-map .leaflet-popup-content-wrapper{border-radius:10px}
   #lodge-map .leaflet-popup-content{margin:0;width:230px!important}
   .nr-pop img{width:230px;height:120px;object-fit:cover;display:block;border-radius:10px 10px 0 0}
@@ -224,7 +221,7 @@ body{padding-top:102px;}
     var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'});
     map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView([lat,lon],10);
     L.control.layers({'Satellite':sat,'Terrain':terrain,'Minimal':minimal,'Standard':standard},null,{collapsed:false}).addTo(map);
-    var pin=L.divIcon({className:'nr-pin',iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-10],html:'<div class="nr-pulse"><span class="ring"></span><span class="dot"></span></div>'});
+    var pin=L.divIcon({className:'nr-pin',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-9],html:'<div class="nr-pulse"></div>'});
     L.marker([lat,lon],{icon:pin}).addTo(map).bindPopup('<div class="nr-pop"><img src="'+photo+'" onerror="this.remove()"><div class="nr-pop-body"><div class="nr-pop-name">'+name+'</div><div class="nr-pop-sub">'+region+'</div></div></div>').openPopup();
     inited=true;
   }
