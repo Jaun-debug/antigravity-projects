@@ -138,6 +138,7 @@ body{padding-top:102px;}
     </style>
     <h1>De<span class="drop">s</span>ert Whis<span class="drop d2">p</span>er</h1>
     <div class="loc">Riverside in Sossusvlei &amp; Namib, Namibia</div>
+    <button type="button" class="nr-mapbtn" onclick="nrOpenMap()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> View on map</button>
   </div>
 </div>
 
@@ -176,9 +177,19 @@ body{padding-top:102px;}
   </div>
 </div></section>
 
-<!-- LODGE LOCATION MAP (full width) -->
+<!-- LODGE LOCATION MAP (full-screen overlay from hero button) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
+  .nr-mapbtn{display:inline-flex;align-items:center;gap:7px;margin-top:16px;cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:1.5px;font-size:.72rem;padding:10px 18px;border-radius:6px;border:1px solid rgba(255,255,255,.85);background:rgba(0,0,0,.28);color:#fff;backdrop-filter:blur(4px);transition:.2s}
+  .nr-mapbtn:hover{background:#fff;color:#3c3530}
+  .nr-mapbtn svg{width:15px;height:15px}
+  .nr-map-overlay{display:none;position:fixed;inset:0;z-index:300;background:rgba(20,18,16,.72);align-items:center;justify-content:center;padding:26px}
+  .nr-map-overlay.open{display:flex}
+  .nr-map-panel{background:#fff;border-radius:14px;overflow:hidden;width:100%;max-width:960px;height:80vh;max-height:760px;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .nr-map-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#3c3530;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:14px}
+  .nr-map-bar .nr-map-x{cursor:pointer;background:none;border:0;color:#fff;font-size:24px;line-height:1;padding:0 8px;border-radius:6px}
+  .nr-map-bar .nr-map-x:hover{background:rgba(255,255,255,.18)}
+  .nr-map-panel #lodge-map{flex:1;width:100%;background:#e7ddca}
   .nr-pin{background:none;border:0}
   #lodge-map .leaflet-popup-content-wrapper{border-radius:10px}
   #lodge-map .leaflet-popup-content{margin:0;width:230px!important}
@@ -186,38 +197,35 @@ body{padding-top:102px;}
   .nr-pop .nr-pop-body{padding:8px 12px 10px;font-family:Arial,Helvetica,sans-serif}
   .nr-pop .nr-pop-name{font-weight:700;color:#3a3427;font-size:15px}
   .nr-pop .nr-pop-sub{color:#8a8175;font-size:12px;margin-top:2px}
+  @media(max-width:600px){.nr-map-overlay{padding:0}.nr-map-panel{max-width:none;height:100dvh;max-height:none;border-radius:0}}
 </style>
-<section style="padding-top:0"><div class="wrap">
-  <h2>Desert Whisper on the map</h2>
-  <div class="sub">Approximate location &middot; Sossusvlei &amp; Namib, Namibia &middot; switch map style top-right</div>
-  <div id="lodge-map" style="height:440px;border-radius:12px;overflow:hidden;border:1px solid #d6c9ad;margin-top:14px;background:#e7ddca"></div>
-</div></section>
+<div id="nr-map-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseMap()">
+  <div class="nr-map-panel">
+    <div class="nr-map-bar"><span>Desert Whisper &middot; Sossusvlei &amp; Namib</span><button type="button" class="nr-map-x" aria-label="Close map" onclick="nrCloseMap()">&times;</button></div>
+    <div id="lodge-map"></div>
+  </div>
+</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script>
 (function(){
-  function initMap(){
-    if(typeof L==='undefined'){return setTimeout(initMap,150);}
-    var lat=-24.2806, lon=16.0650, name='Desert Whisper', region='Sossusvlei & Namib, Namibia';
-    var photo='https://wetu.com/imageHandler/c1920x1080/192014/desert-whisper-layout.jpg?fmt=jpg';
-
-    // ---- basemap choices (all free, no key) ----
+  var inited=false, map=null;
+  var lat=-24.2806, lon=16.0650, name='Desert Whisper', region='Sossusvlei & Namib, Namibia';
+  var photo='https://wetu.com/imageHandler/c1920x1080/192014/desert-whisper-layout.jpg?fmt=jpg';
+  function build(){
+    if(typeof L==='undefined'){return setTimeout(build,150);}
     var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'});
-    var terrain=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenTopoMap (CC-BY-SA)'});
+    var terrain=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenTopoMap'});
     var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
-    var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap contributors'});
-
-    var map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView([lat,lon],10);
+    var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'});
+    map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView([lat,lon],10);
     L.control.layers({'Satellite':sat,'Terrain':terrain,'Minimal':minimal,'Standard':standard},null,{collapsed:false}).addTo(map);
-
-    // ---- custom gold location pin (no blue default) ----
-    var pin=L.divIcon({className:'nr-pin',iconSize:[32,44],iconAnchor:[16,44],popupAnchor:[0,-40],
-      html:'<svg width="32" height="44" viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.2 0 0 7.2 0 16c0 11.4 16 28 16 28s16-16.6 16-28C32 7.2 24.8 0 16 0z" fill="#B8956A" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="#fff"/></svg>'});
-
-    L.marker([lat,lon],{icon:pin}).addTo(map)
-      .bindPopup('<div class="nr-pop"><img src="'+photo+'" alt="'+name+'" onerror="this.remove()"><div class="nr-pop-body"><div class="nr-pop-name">'+name+'</div><div class="nr-pop-sub">'+region+'</div></div></div>')
-      .openPopup();
+    var pin=L.divIcon({className:'nr-pin',iconSize:[32,44],iconAnchor:[16,44],popupAnchor:[0,-40],html:'<svg width="32" height="44" viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.2 0 0 7.2 0 16c0 11.4 16 28 16 28s16-16.6 16-28C32 7.2 24.8 0 16 0z" fill="#B8956A" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="#fff"/></svg>'});
+    L.marker([lat,lon],{icon:pin}).addTo(map).bindPopup('<div class="nr-pop"><img src="'+photo+'" onerror="this.remove()"><div class="nr-pop-body"><div class="nr-pop-name">'+name+'</div><div class="nr-pop-sub">'+region+'</div></div></div>').openPopup();
+    inited=true;
   }
-  if(document.readyState!=='loading')initMap();else document.addEventListener('DOMContentLoaded',initMap);
+  window.nrOpenMap=function(){var o=document.getElementById('nr-map-overlay');o.classList.add('open');document.body.style.overflow='hidden';if(!inited)build();setTimeout(function(){if(map)map.invalidateSize();},90);};
+  window.nrCloseMap=function(){var o=document.getElementById('nr-map-overlay');o.classList.remove('open');document.body.style.overflow='';};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nrCloseMap();});
 })();
 </script>
 
