@@ -276,6 +276,35 @@
             <p class="nr-eyebrow">Vehicle Rental Services &middot; Pre-Negotiated STO Rates 2026/2027</p>
             <h1 id="nr-hero-co">Namibia Tours &amp; Safaris (NTS)</h1>
         </header>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var agent=false; try{agent=!!sessionStorage.getItem('nr_agent_token');}catch(e){}
+  document.body.classList.add(agent?'nr-agent':'nr-public');
+  var eb=document.querySelector('.header .nr-eyebrow');
+  if(eb&&!agent){ eb.textContent=(eb.textContent||'').replace(/[·\-\s]*Pre-?Negotiated STO Rates?.*$/i,'').replace(/[·\-\s]+$/,'').trim(); if(!eb.textContent) eb.style.display='none'; }
+  if(agent) return;
+  var money=/N\$|\d,\d{3}|\d[.,]\d{2}\b/;
+  var tables=document.querySelectorAll('table');
+  for(var ti=0;ti<tables.length;ti++){
+    var t=tables[ti]; var rows=t.rows; if(!rows||rows.length<2) continue;
+    var head=rows[0]; var ncol=head.cells.length; if(!ncol) continue;
+    var rack=[]; for(var i=0;i<ncol;i++){ if(/rack/i.test(head.cells[i].textContent||'')) rack.push(i); }
+    var hasRack=rack.length>0;
+    var price=[];
+    for(var c=0;c<ncol;c++){
+      if(rack.indexOf(c)>-1) continue;
+      var isPrice=false;
+      for(var r=1;r<rows.length;r++){ var cell=rows[r].cells[c]; if(cell&&(money.test(cell.textContent||'')||/price-highlight/.test(cell.className))){isPrice=true;break;} }
+      if(isPrice) price.push(c);
+    }
+    if(!price.length) continue;
+    for(var p=0;p<price.length;p++){ var col=price[p];
+      if(hasRack){ for(var r2=0;r2<rows.length;r2++){ var cc=rows[r2].cells[col]; if(cc) cc.style.display='none'; } }
+      else { for(var r3=1;r3<rows.length;r3++){ var cd=rows[r3].cells[col]; if(cd){ cd.textContent='Rates to follow'; cd.style.fontStyle='italic'; cd.style.color='#8a8175'; if(cd.classList) cd.classList.remove('price-highlight'); } } }
+    }
+  }
+});
+</script>
         <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function setCo(t){if(el&&t)el.textContent=t.replace(/\s+/g,' ').trim();}var tabs=document.querySelectorAll('.tabs-container .tab-link');var a=document.querySelector('.tabs-container .tab-link.active')||tabs[0];if(a)setCo(a.textContent);tabs.forEach(function(b){b.addEventListener('click',function(){setCo(b.textContent);});});});</script>
 
         <!-- SEASON SELECTOR -->

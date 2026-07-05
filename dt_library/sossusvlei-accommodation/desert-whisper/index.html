@@ -204,57 +204,19 @@ body{padding-top:102px;}
 </style>
 <style>
   .nr-avail-frame{flex:1 1 auto;width:100%;border:0;background:#fff;min-height:0}
-  .nr-map-bar .nr-avail-newtab{margin-left:auto;color:#fff;font-size:12px;text-decoration:underline;white-space:nowrap;display:none}
-  .nr-avail-form{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px;font-family:Arial,Helvetica,sans-serif;background:#fff}
-  .nr-avail-form h3{font-size:21px;color:#3c3530;margin:0 0 4px}
-  .nr-avail-form .nr-av-sub{color:#8a8175;font-size:13px}
-  .nr-avail-form label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#8a8175;margin:16px 0 4px}
-  .nr-avail-form input{font-size:15px;padding:9px 12px;border:1px solid #d6c9ad;border-radius:8px;width:230px;text-align:center;font-family:inherit}
-  .nr-avail-form button{margin-top:20px;cursor:pointer;border:0;border-radius:8px;background:#B8956A;color:#fff;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;padding:12px 24px}
-  .nr-avail-form button:hover{background:#9c7b52}
-  .nr-avail-form .nr-av-note{font-size:12px;color:#8a8175;margin-top:16px}
+  .nr-map-bar .nr-avail-newtab{margin-left:auto;color:#fff;font-size:12px;text-decoration:underline;white-space:nowrap}
 </style>
 <div id="nr-avail-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseAvail()">
   <div class="nr-map-panel">
-    <div class="nr-map-bar"><span>Availability &middot; Desert Whisper</span><a id="nr-avail-newtab" class="nr-avail-newtab" href="https://book.nightsbridge.com/28617" target="_blank" rel="noopener">Open in new tab &#8599;</a><button type="button" class="nr-map-x" aria-label="Close availability" onclick="nrCloseAvail()">&times;</button></div>
-    <div id="nr-avail-form" class="nr-avail-form">
-      <h3>When are you travelling?</h3>
-      <div class="nr-av-sub">Desert Whisper &middot; check live availability</div>
-      <label for="nr-av-date">Check-in date</label>
-      <input type="date" id="nr-av-date">
-      <label for="nr-av-nights">Nights</label>
-      <input type="number" id="nr-av-nights" value="2" min="1" max="30">
-      <button type="button" onclick="nrAvailGo()">Check availability</button>
-      <p class="nr-av-note">Opens the live NightsBridge calendar for your dates.</p>
-    </div>
-    <iframe id="nr-avail-frame" class="nr-avail-frame" title="Availability — Desert Whisper" src="about:blank" style="display:none"></iframe>
+    <div class="nr-map-bar"><span>Availability &middot; Desert Whisper</span><a class="nr-avail-newtab" href="https://book.nightsbridge.com/28617" target="_blank" rel="noopener">Open in new tab &#8599;</a><button type="button" class="nr-map-x" aria-label="Close availability" onclick="nrCloseAvail()">&times;</button></div>
+    <iframe id="nr-avail-frame" class="nr-avail-frame" title="Availability — Desert Whisper" src="about:blank" data-src="https://book.nightsbridge.com/28617"></iframe>
   </div>
 </div>
 <script>
 (function(){
-  var BBID='28617';
-  function two(n){return (n<10?'0':'')+n;}
-  window.nrOpenAvail=function(){
-    var o=document.getElementById('nr-avail-overlay');
-    document.getElementById('nr-avail-form').style.display='flex';
-    var fr=document.getElementById('nr-avail-frame'); fr.style.display='none'; fr.setAttribute('src','about:blank');
-    document.getElementById('nr-avail-newtab').style.display='none';
-    var di=document.getElementById('nr-av-date');
-    if(di&&!di.value){var t=new Date();t.setDate(t.getDate()+1);di.value=t.getFullYear()+'-'+two(t.getMonth()+1)+'-'+two(t.getDate());}
-    o.classList.add('open'); document.body.style.overflow='hidden';
-  };
-  window.nrAvailGo=function(){
-    var iso=document.getElementById('nr-av-date').value; if(!iso){return;}
-    var n=parseInt(document.getElementById('nr-av-nights').value,10)||2;
-    var slash=iso.replace(/-/g,'/');
-    var url='https://book.nightsbridge.com/'+BBID+'?checkin='+iso+'&startdate='+slash+'&nights='+n+'&numnights='+n;
-    var fr=document.getElementById('nr-avail-frame');
-    document.getElementById('nr-avail-form').style.display='none';
-    fr.setAttribute('src',url); fr.style.display='block';
-    var nt=document.getElementById('nr-avail-newtab'); nt.href=url; nt.style.display='inline';
-  };
-  window.nrCloseAvail=function(){document.getElementById('nr-avail-overlay').classList.remove('open');document.body.style.overflow='';};
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')nrCloseAvail();});
+  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",fr.getAttribute("data-src"));}o.classList.add("open");document.body.style.overflow="hidden";};
+  window.nrCloseAvail=function(){document.getElementById("nr-avail-overlay").classList.remove("open");document.body.style.overflow="";};
+  document.addEventListener("keydown",function(e){if(e.key==="Escape")nrCloseAvail();});
 })();
 </script>
 <div id="nr-map-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseMap()">
