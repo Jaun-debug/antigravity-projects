@@ -131,7 +131,7 @@ body{padding-top:102px;}
 <div class="hero"><a class="hero-back" href="/sossusvlei-accommodation/">&#8592; Back to Sossusvlei &amp; Namib Accommodation</a>
   <div class="hero-inner">
     <div class="eyebrow">Sossusvlei &amp; Namib</div>
-    <h1>Solitaire Mountain Lodge</h1>
+    <style>@keyframes nrdrop{0%{transform:translateY(-.15em)}50%{transform:translateY(.75em)}75%{transform:translateY(-.06em)}100%{transform:translateY(0)}}.hero h1 .drop{display:inline-block;animation:nrdrop 1.5s cubic-bezier(.34,1.56,.64,1) .9s both}.hero h1 .drop.d2{animation-delay:1.25s}</style><h1><span class="drop">S</span>olitaire Mountain <span class="drop d2">L</span>odge</h1>
     <div class="loc">Riverside in Sossusvlei &amp; Namib, Namibia</div>
   </div>
 </div>
@@ -153,10 +153,35 @@ body{padding-top:102px;}
   <div id="rate-tables"></div>
 </div></section>
 
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>.nr-pin{background:none;border:0}#lodge-map .leaflet-popup-content-wrapper{border-radius:10px}#lodge-map .leaflet-popup-content{margin:0;width:230px!important}.nr-pop img{width:230px;height:120px;object-fit:cover;display:block;border-radius:10px 10px 0 0}.nr-pop .nr-pop-body{padding:8px 12px 10px;font-family:Arial,Helvetica,sans-serif}.nr-pop .nr-pop-name{font-weight:700;color:#3a3427;font-size:15px}.nr-pop .nr-pop-sub{color:#8a8175;font-size:12px;margin-top:2px}</style>
 <section style="padding-top:0"><div class="wrap">
-  <h2>Gallery</h2><div class="sub">Solitaire Mountain Lodge &amp; Sossusvlei &amp; Namib</div>
-  <div class="gallery"></div>
+  <h2>Solitaire Mountain Lodge on the map</h2>
+  <div class="sub">Approximate location &middot; Sossusvlei &amp; Namib &middot; switch map style top-right</div>
+  <div id="lodge-map" style="height:440px;border-radius:12px;overflow:hidden;border:1px solid #d6c9ad;margin-top:14px;background:#e7ddca"></div>
 </div></section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){function initMap(){if(typeof L==='undefined'){return setTimeout(initMap,150);}
+var fb=[-24.49,15.8],name='Solitaire Mountain Lodge';
+var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles © Esri'});
+var terrain=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenTopoMap'});
+var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'© OpenStreetMap, © CARTO'});
+var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'});
+var map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView(fb,10);
+L.control.layers({'Satellite':sat,'Terrain':terrain,'Minimal':minimal,'Standard':standard},null,{collapsed:false}).addTo(map);
+var pin=L.divIcon({className:'nr-pin',iconSize:[32,44],iconAnchor:[16,44],popupAnchor:[0,-40],html:'<svg width="32" height="44" viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.2 0 0 7.2 0 16c0 11.4 16 28 16 28s16-16.6 16-28C32 7.2 24.8 0 16 0z" fill="#B8956A" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="#fff"/></svg>'});
+var marker=L.marker(fb,{icon:pin}).addTo(map).bindPopup('<div class="nr-pop"><div class="nr-pop-body"><div class="nr-pop-name">Solitaire Mountain Lodge</div><div class="nr-pop-sub">Sossusvlei &amp; Namib</div></div></div>');marker.openPopup();
+function place(la,lo){marker.setLatLng([la,lo]);map.setView([la,lo],11);}
+try{var key='nrgeo:'+name,cached=localStorage.getItem(key);
+if(cached){var c=JSON.parse(cached);place(c[0],c[1]);}
+else{fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=na&q='+encodeURIComponent(name)).then(function(r){return r.json();}).then(function(a){if(a&&a[0]){var la=parseFloat(a[0].lat),lo=parseFloat(a[0].lon);place(la,lo);try{localStorage.setItem(key,JSON.stringify([la,lo]));}catch(e){}}}).catch(function(){});}
+}catch(e){}}
+if(document.readyState!=='loading')initMap();else document.addEventListener('DOMContentLoaded',initMap);})();
+</script>
 
 <section style="padding-top:0"><div class="wrap">
   <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:reservations@solitairenamibia.com">reservations@solitairenamibia.com</a></p></div></div>

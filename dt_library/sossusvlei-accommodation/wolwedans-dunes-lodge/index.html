@@ -79,23 +79,41 @@ td:not(:first-child),th:not(:first-child){text-align:right!important;}
     <button class="search-icon-btn" aria-label="Search" onclick="location.href='/'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
   </nav>
 </header>
-<div class="hero" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/10082/camp_moremi_-_fire_place2.jpg?fmt=jpg')"><a class="hero-back" href="/sossusvlei-accommodation/">&#8592; Back to Sossusvlei &amp; Namib Accommodation</a><div class="hero-inner"><div class="eyebrow">Sossusvlei &amp; Namib</div><h1>Wolwedans Dunes Lodge</h1></div></div>
+<div class="hero" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/10082/camp_moremi_-_fire_place2.jpg?fmt=jpg')"><a class="hero-back" href="/sossusvlei-accommodation/">&#8592; Back to Sossusvlei &amp; Namib Accommodation</a><div class="hero-inner"><div class="eyebrow">Sossusvlei &amp; Namib</div><style>@keyframes nrdrop{0%{transform:translateY(-.15em)}50%{transform:translateY(.75em)}75%{transform:translateY(-.06em)}100%{transform:translateY(0)}}.hero h1 .drop{display:inline-block;animation:nrdrop 1.5s cubic-bezier(.34,1.56,.64,1) .9s both}.hero h1 .drop.d2{animation-delay:1.25s}</style><h1><span class="drop">W</span>olwedans Dunes <span class="drop d2">L</span>odge</h1></div></div>
 <div class="wrap"><div class="crumbs">Home · Accommodation · Wolwedans Dunes Lodge</div><h2>Rates</h2><div class="sub">Published rack rates · per person, per night · N$ incl. VAT &amp; levy</div><span class="badge">Rack Rates</span>
 <table><thead><tr><th>Room Type</th><th>pp Sharing (N$)</th><th>Single (N$)</th><th>Child (N$)</th></tr></thead><tbody><tr><td><strong>Standard Tent</strong></td><td>14,900</td><td>20,860</td><td>&ndash;</td></tr><tr><td><strong>Desert Suite Additional</strong></td><td>&ndash;</td><td>&ndash;</td><td>3,750</td></tr><tr><td><strong>Child (7–14 yrs) sharing with 2 adults</strong></td><td>3,750</td><td>&ndash;</td><td>&ndash;</td></tr><tr><td><strong>Desert Suite (Base Rate: 4 guests)</strong></td><td>59,600</td><td>&ndash;</td><td>&ndash;</td></tr></tbody></table>
 
-<section style="padding-top:0"><div class="wrap">
-  <h2>Gallery</h2><div class="sub">Wolwedans Dunes Lodge</div>
-  <div class="lodge-gallery">
-    <img src="https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/01.jpg" alt="Wolwedans Dunes Lodge" loading="lazy" onerror="this.remove()">
-    <img src="https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/02.jpg" alt="Wolwedans Dunes Lodge" loading="lazy" onerror="this.remove()">
-    <img src="https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/03.jpg" alt="Wolwedans Dunes Lodge" loading="lazy" onerror="this.remove()">
-    <img src="https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/04.jpg" alt="Wolwedans Dunes Lodge" loading="lazy" onerror="this.remove()">
-    <img src="https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/05.jpg" alt="Wolwedans Dunes Lodge" loading="lazy" onerror="this.remove()">
-    <img src="https://www.info-namibia.com/images/galleries/sossusvlei/wolwedans-dunes-lodge/06.jpg" alt="Wolwedans Dunes Lodge" loading="lazy" onerror="this.remove()">
-  </div>
-</div></section>
+
 <div class="cta" id="cta"><h3>Trade partner?</h3><p class="sub" id="cta-text">Open the full rate sheet to select your dates and rooms and build a booking.</p><a class="btn" id="cta-btn" href="/ratesheets/wolwedans_ratesheet_v3.html?lodge=dunes">View rates &amp; booking &#8594;</a></div>
-</div><footer>&copy; <span id="yr"></span> Namibia Rates · Trade Rates Portal — Authorised Partners Only · <a href="mailto:info@namibiarates.com" style="color:var(--gold)">info@namibiarates.com</a></footer>
+</div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>.nr-pin{background:none;border:0}#lodge-map .leaflet-popup-content-wrapper{border-radius:10px}#lodge-map .leaflet-popup-content{margin:0;width:230px!important}.nr-pop img{width:230px;height:120px;object-fit:cover;display:block;border-radius:10px 10px 0 0}.nr-pop .nr-pop-body{padding:8px 12px 10px;font-family:Arial,Helvetica,sans-serif}.nr-pop .nr-pop-name{font-weight:700;color:#3a3427;font-size:15px}.nr-pop .nr-pop-sub{color:#8a8175;font-size:12px;margin-top:2px}</style>
+<section style="padding-top:0"><div class="wrap">
+  <h2>Wolwedans Dunes Lodge on the map</h2>
+  <div class="sub">Approximate location &middot; Sossusvlei &amp; Namib &middot; switch map style top-right</div>
+  <div id="lodge-map" style="height:440px;border-radius:12px;overflow:hidden;border:1px solid #d6c9ad;margin-top:14px;background:#e7ddca"></div>
+</div></section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){function initMap(){if(typeof L==='undefined'){return setTimeout(initMap,150);}
+var fb=[-24.49,15.8],name='Wolwedans Dunes Lodge';
+var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles © Esri'});
+var terrain=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'© OpenTopoMap'});
+var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'© OpenStreetMap, © CARTO'});
+var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'© OpenStreetMap'});
+var map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView(fb,10);
+L.control.layers({'Satellite':sat,'Terrain':terrain,'Minimal':minimal,'Standard':standard},null,{collapsed:false}).addTo(map);
+var pin=L.divIcon({className:'nr-pin',iconSize:[32,44],iconAnchor:[16,44],popupAnchor:[0,-40],html:'<svg width="32" height="44" viewBox="0 0 32 44" xmlns="http://www.w3.org/2000/svg"><path d="M16 0C7.2 0 0 7.2 0 16c0 11.4 16 28 16 28s16-16.6 16-28C32 7.2 24.8 0 16 0z" fill="#B8956A" stroke="#fff" stroke-width="2"/><circle cx="16" cy="16" r="6" fill="#fff"/></svg>'});
+var marker=L.marker(fb,{icon:pin}).addTo(map).bindPopup('<div class="nr-pop"><div class="nr-pop-body"><div class="nr-pop-name">Wolwedans Dunes Lodge</div><div class="nr-pop-sub">Sossusvlei &amp; Namib</div></div></div>');marker.openPopup();
+function place(la,lo){marker.setLatLng([la,lo]);map.setView([la,lo],11);}
+try{var key='nrgeo:'+name,cached=localStorage.getItem(key);
+if(cached){var c=JSON.parse(cached);place(c[0],c[1]);}
+else{fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=na&q='+encodeURIComponent(name)).then(function(r){return r.json();}).then(function(a){if(a&&a[0]){var la=parseFloat(a[0].lat),lo=parseFloat(a[0].lon);place(la,lo);try{localStorage.setItem(key,JSON.stringify([la,lo]));}catch(e){}}}).catch(function(){});}
+}catch(e){}}
+if(document.readyState!=='loading')initMap();else document.addEventListener('DOMContentLoaded',initMap);})();
+</script>
+
+<footer>&copy; <span id="yr"></span> Namibia Rates · Trade Rates Portal — Authorised Partners Only · <a href="mailto:info@namibiarates.com" style="color:var(--gold)">info@namibiarates.com</a></footer>
 <script>document.getElementById('yr').textContent=new Date().getFullYear();
 if(sessionStorage.getItem('nr_agent_token')){document.getElementById('cta-text').textContent='You are signed in. Open your bookable net STO rate sheet for this property.';var b=document.getElementById('cta-btn');b.textContent='View & book your STO rate →';b.className='btn gold';b.href='/ratesheets/wolwedans_ratesheet_v3.html?lodge=dunes';}</script><script>(function(){var b=document.getElementById('hdr-agent');if(!b)return;if(typeof agentBtn!=='function'){if(sessionStorage.getItem('nr_agent_token')){b.textContent='Sign Out';b.onclick=function(){sessionStorage.removeItem('nr_agent_token');document.cookie='nr_session=; path=/; max-age=0; SameSite=Lax';location.reload();};}}})();</script>
 
