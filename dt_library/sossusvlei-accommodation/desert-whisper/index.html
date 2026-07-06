@@ -214,7 +214,7 @@ body{padding-top:102px;}
 </div>
 <script>
 (function(){
-  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");var base=fr.getAttribute("data-src");var d=new Date();d.setDate(d.getDate()+21);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");var url=base+"?startdate="+iso+"&nights=1";if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",url);}var nt=document.querySelector(".nr-avail-newtab");if(nt){nt.setAttribute("href",url);}o.classList.add("open");document.body.style.overflow="hidden";};
+  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");var base=fr.getAttribute("data-src");var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");var url=base+"?startdate="+iso+"&nights=1";if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",url);}var nt=document.querySelector(".nr-avail-newtab");if(nt){nt.setAttribute("href",url);}o.classList.add("open");document.body.style.overflow="hidden";};
   window.nrCloseAvail=function(){document.getElementById("nr-avail-overlay").classList.remove("open");document.body.style.overflow="";};
   document.addEventListener("keydown",function(e){if(e.key==="Escape")nrCloseAvail();});
 })();
