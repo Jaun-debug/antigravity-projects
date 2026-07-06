@@ -209,12 +209,12 @@ body{padding-top:102px;}
 <div id="nr-avail-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseAvail()">
   <div class="nr-map-panel">
     <div class="nr-map-bar"><span>Availability &middot; Desert Whisper</span><a class="nr-avail-newtab" href="https://book.nightsbridge.com/28617" target="_blank" rel="noopener">Open in new tab &#8599;</a><button type="button" class="nr-map-x" aria-label="Close availability" onclick="nrCloseAvail()">&times;</button></div>
-    <iframe id="nr-avail-frame" class="nr-avail-frame" title="Availability — Desert Whisper" src="about:blank" data-src="https://book.nightsbridge.com/22340"></iframe>
+    <iframe id="nr-avail-frame" class="nr-avail-frame" title="Availability — Desert Whisper" src="about:blank" data-src="https://book.nightsbridge.com/28617"></iframe>
   </div>
 </div>
 <script>
 (function(){
-  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",fr.getAttribute("data-src"));}o.classList.add("open");document.body.style.overflow="hidden";};
+  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");var base=fr.getAttribute("data-src");var d=new Date();d.setDate(d.getDate()+21);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");var url=base+"?startdate="+iso+"&nights=1";if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",url);}var nt=document.querySelector(".nr-avail-newtab");if(nt){nt.setAttribute("href",url);}o.classList.add("open");document.body.style.overflow="hidden";};
   window.nrCloseAvail=function(){document.getElementById("nr-avail-overlay").classList.remove("open");document.body.style.overflow="";};
   document.addEventListener("keydown",function(e){if(e.key==="Escape")nrCloseAvail();});
 })();
