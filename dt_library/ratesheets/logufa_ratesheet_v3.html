@@ -489,5 +489,26 @@ window.nrAvail=function(){var id=window.__nrLodgeId||"";var bbid=window.__nrBBID
 window.__nrSyncAvail=function(){var id=window.__nrLodgeId||"";var has=!!(window.__nrBBIDS&&window.__nrBBIDS[id]);var tab=document.getElementById("nr-avail-tab");if(tab)tab.style.display=has?"":"none";var cal=document.getElementById("global-dates-ui");if(cal){var b=document.getElementById("nr-cal-avail");if(has){if(!b){b=document.createElement("div");b.id="nr-cal-avail";b.style.cssText="margin-top:20px;text-align:center";b.innerHTML='<button type="button" onclick="nrAvail()" style="font-family:var(--font-body);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;border-radius:8px;border:1px solid var(--seafoam,#7BA99A);background:var(--seafoam,#7BA99A);color:#fff;cursor:pointer">Check Live Availability &#8599;</button>'+'<p style="font-family:var(--font-body);font-size:.68rem;color:var(--text-muted,#7A7269);margin-top:9px">Opens NightsBridge in a new tab with your selected dates</p>';cal.appendChild(b);}b.style.display="";}else if(b){b.style.display="none";}}};
 (function(){var _op=window.openProperty;if(typeof _op==="function"){window.openProperty=function(id){window.__nrLodgeId=id;var r=_op.apply(this,arguments);try{window.__nrSyncAvail();}catch(e){}return r;};}})();
 </script>
+<style>#nr-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 30px}#nr-photo-strip img{width:100%;height:210px;object-fit:cover;border-radius:12px;display:block;box-shadow:0 6px 18px rgba(44,40,36,.1);transition:transform .3s}#nr-photo-strip img:hover{transform:scale(1.02)}@media(max-width:700px){#nr-photo-strip{grid-template-columns:1fr}}</style>
+<script>
+(function(){
+  function build(){
+    var dv=document.getElementById('detail-view');if(!dv||document.getElementById('nr-photo-strip'))return;
+    var tabs=dv.querySelector('.tabs');if(!tabs)return;
+    var strip=document.createElement('div');strip.id='nr-photo-strip';strip.style.display='none';
+    tabs.parentNode.insertBefore(strip,tabs);
+  }
+  window.__nrPhotos=function(images){
+    var strip=document.getElementById('nr-photo-strip');if(!strip)return;
+    var imgs=(images||[]).slice(0,3);strip.innerHTML='';
+    if(!imgs.length){strip.style.display='none';return;}
+    strip.style.display='grid';
+    imgs.forEach(function(src){var im=document.createElement('img');im.src=src;im.loading='lazy';im.alt='';im.onerror=function(){this.remove();};strip.appendChild(im);});
+  };
+  function hook(){var _op=window.openProperty;if(typeof _op==='function'){window.openProperty=function(id){var r=_op.apply(this,arguments);try{var d=(typeof DB!=='undefined')?DB[id]:null;window.__nrPhotos(d?d.images:[]);}catch(e){}return r;};}}
+  function init(){build();hook();}
+  if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
 </body>
 </html>
