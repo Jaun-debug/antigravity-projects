@@ -468,7 +468,7 @@ function doSaveQuote(silent){
   saveQ(a);if(!silent)alert('Saved: '+nm.trim());return true;
 }
 document.getElementById('btn-save').addEventListener('click',function(){doSaveQuote(false)});
-document.getElementById('btn-saveexit').addEventListener('click',function(){ if(doSaveQuote(true)) location.href='/'; });
+document.getElementById('btn-saveexit').addEventListener('click',function(){ if(doSaveQuote(true)){ try{localStorage.removeItem('nr_itinerary');}catch(e){} S.lodges=[]; location.href='/'; } });
 document.getElementById('btn-saved').addEventListener('click',function(){
   var a=loadQ();if(!a.length){alert('No saved quotes yet.');return}
   var list=a.map(function(x,i){return (i+1)+'. '+x.name+'  ('+(x.savedAt||'').split('T')[0]+')'}).join('\n');
