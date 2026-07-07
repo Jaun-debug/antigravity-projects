@@ -399,19 +399,7 @@ applySession();
   .nr-pop .nr-pop-sub{color:#8a8175;font-size:12px;margin-top:2px}
 </style>
 
-<div id="nr-avail-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseAvail()">
-  <div class="nr-map-panel">
-    <div class="nr-map-bar"><span>Availability &middot; Camp Sossus</span><a class="nr-avail-newtab" href="https://book.nightsbridge.com/35218" target="_blank" rel="noopener">Open in new tab &#8599;</a><button type="button" class="nr-map-x" aria-label="Close availability" onclick="nrCloseAvail()">&times;</button></div>
-    <iframe id="nr-avail-frame" class="nr-avail-frame" title="Availability" src="about:blank" data-src="https://book.nightsbridge.com/35218"></iframe>
-  </div>
-</div>
-<script>
-(function(){
-  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");var base=fr.getAttribute("data-src");var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");var url=base+"?startdate="+iso+"&nights=1";if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",url);}var nt=document.querySelector(".nr-avail-newtab");if(nt){nt.setAttribute("href",url);}o.classList.add("open");document.body.style.overflow="hidden";};
-  window.nrCloseAvail=function(){document.getElementById("nr-avail-overlay").classList.remove("open");document.body.style.overflow="";};
-  document.addEventListener("keydown",function(e){if(e.key==="Escape")nrCloseAvail();});
-})();
-</script>
+<script>window.nrOpenAvail=function(){var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");window.open("https://book.nightsbridge.com/35218?startdate="+iso+"&nights=1","_blank","noopener");};</script>
 <div id="nr-map-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseMap()">
   <div class="nr-map-panel">
     <div class="nr-map-bar"><span>Camp Sossus &middot; Sossusvlei &amp; Namib</span><button type="button" class="nr-map-x" aria-label="Close map" onclick="nrCloseMap()">&times;</button></div>

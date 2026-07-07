@@ -386,19 +386,7 @@ applySession();
   .nr-map-bar .nr-avail-newtab{margin-left:auto;color:#fff;font-size:12px;text-decoration:underline;white-space:nowrap}
   @media(max-width:600px){.nr-map-overlay{padding:0}.nr-map-panel{max-width:none;height:100dvh;max-height:none;border-radius:0}}
 </style>
-<div id="nr-avail-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseAvail()">
-  <div class="nr-map-panel">
-    <div class="nr-map-bar"><span>Availability &middot; Namib Desert Lodge</span><a class="nr-avail-newtab" href="https://book.nightsbridge.com/14889" target="_blank" rel="noopener">Open in new tab &#8599;</a><button type="button" class="nr-map-x" aria-label="Close availability" onclick="nrCloseAvail()">&times;</button></div>
-    <iframe id="nr-avail-frame" class="nr-avail-frame" title="Availability" src="about:blank" data-src="https://book.nightsbridge.com/14889"></iframe>
-  </div>
-</div>
-<script>
-(function(){
-  window.nrOpenAvail=function(){var o=document.getElementById("nr-avail-overlay");var fr=document.getElementById("nr-avail-frame");var base=fr.getAttribute("data-src");var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");var url=base+"?startdate="+iso+"&nights=1";if(fr&&(fr.getAttribute("src")||"").indexOf("nightsbridge")===-1){fr.setAttribute("src",url);}var nt=document.querySelector(".nr-avail-newtab");if(nt){nt.setAttribute("href",url);}o.classList.add("open");document.body.style.overflow="hidden";};
-  window.nrCloseAvail=function(){document.getElementById("nr-avail-overlay").classList.remove("open");document.body.style.overflow="";};
-  document.addEventListener("keydown",function(e){if(e.key==="Escape")nrCloseAvail();});
-})();
-</script>
+<script>window.nrOpenAvail=function(){var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");window.open("https://book.nightsbridge.com/14889?startdate="+iso+"&nights=1","_blank","noopener");};</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
   .nr-map-panel #lodge-map{flex:1;width:100%;background:#e7ddca}
