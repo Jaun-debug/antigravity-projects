@@ -205,7 +205,7 @@ td strong{color:var(--text-main);font-weight:500}
 <div id="detail-view" class="detail-view">
 
 <div class="wrap" style="padding-top:40px">
-  <button class="back-btn" onclick="closeRates()">← Back to Lodge</button>
+  <button class="back-btn" onclick="closeRates()">← Back</button>
 
   <div class="intro-grid">
     <div class="intro-block">
@@ -436,7 +436,7 @@ td strong{color:var(--text-main);font-weight:500}
 <script>
 // ── VIEW SWITCH ──
 function openRates(){document.getElementById('main-view').style.display='none';document.getElementById('detail-view').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
-function closeRates(){document.getElementById('detail-view').style.display='none';document.getElementById('main-view').style.display='block';window.scrollTo({top:0,behavior:'smooth'})}
+function closeRates(){if(history.length>1){history.back()}else{document.getElementById('detail-view').style.display='none';document.getElementById('main-view').style.display='block';window.scrollTo(0,0)}}
 function scrollToCardCTA(){
   const btn=document.getElementById('card-view-rates');if(!btn)return;
   btn.scrollIntoView({behavior:'smooth',block:'center'});
