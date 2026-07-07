@@ -236,6 +236,7 @@ table input.qty{width:54px;padding:5px;border:1px solid var(--border);border-rad
   <div class="tabs">
     <button class="tab-btn active" id="tab-btn-6" onclick="switchTab(6)">Lodge Rates</button>
     <button class="tab-btn" id="tab-btn-1" onclick="switchTab(1)">Book / Enquire</button>
+    <button class="tab-btn" onclick="nrAvail()">Availability</button>
     <button class="tab-btn" id="tab-btn-2" onclick="switchTab(2)">Activities &amp; Extras</button>
     <button class="tab-btn" id="tab-btn-3" onclick="switchTab(3)">Policies &amp; Info</button>
     <button class="tab-btn" id="tab-btn-4" onclick="switchTab(4)">Gallery</button>
@@ -501,5 +502,6 @@ document.addEventListener('keydown',function(e){
 
 </script>
 <script src="/assets/itinerary.js?v=20" defer></script>
+<script>window.nrAvail=function(){var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");window.open("https://book.nightsbridge.com/28615?startdate="+iso+"&nights=1","_blank","noopener");};</script>
 </body>
 </html>
