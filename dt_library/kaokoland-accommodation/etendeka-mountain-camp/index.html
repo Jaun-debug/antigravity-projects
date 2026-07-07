@@ -133,6 +133,8 @@ body{padding-top:102px;}
     <div class="eyebrow">Kaokoland</div>
     <h1>Etendeka Mountain Camp</h1>
     <div class="loc">Riverside in Kaokoland, Namibia</div>
+    <button type="button" class="nr-mapbtn" onclick="nrOpenMap()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> View on map</button>
+    <button type="button" class="nr-mapbtn" style="margin-left:16px" onclick="nrOpenAvail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg> Availability</button>
   </div>
 </div>
 
@@ -369,5 +371,65 @@ applySession();
 #mobile-menu .mm-listprop{width:100%;margin-top:24px;background:transparent;color:#AE8245;border:1px solid #AE8245;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
 #mobile-menu .mm-signin{width:100%;margin-top:12px;background:var(--brand-green,#87a996);color:#fff;border:none;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
 </style><div id="mobile-menu" role="dialog" aria-label="Menu"><div class="mm-top"><span class="mm-logo">Namibia Rates</span><button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><div class="mm-regions"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Vehicle rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Activity rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Search lodges</a></div></div><button class="mm-listprop" type="button" onclick="location.href='/supplier-portal/'">Supplier Portal</button><button class="mm-signin" id="mm-agent" type="button">Agent Sign In</button></div><script>function toggleMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn");if(m){var o=m.classList.toggle("open");if(o){m.querySelectorAll('.mm-section').forEach(function(s){s.classList.remove('collapsed');});}if(b)b.classList.toggle("active",o);document.body.style.overflow=o?"hidden":"";}}function closeMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn");if(m){m.classList.remove("open");if(b)b.classList.remove("active");document.body.style.overflow="";}}function toggleSection(btn){var s=btn.closest(".mm-section");if(s)s.classList.toggle("collapsed");}(function(){var a=document.getElementById("mm-agent");if(!a)return;if(sessionStorage.getItem("nr_agent_token")){a.textContent="Sign Out";a.onclick=function(){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.reload();};}else{a.onclick=function(){location.href="/#agent";};}})();</script>
-<script src="/assets/enquiry-wizard.js" defer></script></body>
+<script src="/assets/enquiry-wizard.js" defer></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+  .nr-mapbtn{display:inline-flex;align-items:center;gap:7px;margin-top:22px;cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:1.5px;font-size:.72rem;padding:10px 18px;border-radius:6px;border:1px solid rgba(255,255,255,.85);background:rgba(0,0,0,.28);color:#fff;backdrop-filter:blur(4px);transition:.2s}
+  .nr-mapbtn:hover{background:#fff;color:#3c3530}
+  .nr-mapbtn svg{width:15px;height:15px}
+  .nr-map-overlay{display:none;position:fixed;inset:0;z-index:2147483647;background:rgba(20,18,16,.72);align-items:center;justify-content:center;padding:26px}
+  .nr-map-overlay.open{display:flex}
+  .nr-map-panel{background:#fff;border-radius:14px;overflow:hidden;width:100%;max-width:960px;height:80vh;max-height:760px;display:flex;flex-direction:column;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .nr-map-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:#3c3530;color:#fff;font-family:Arial,Helvetica,sans-serif;font-size:14px}
+  .nr-map-bar .nr-map-x{cursor:pointer;background:none;border:0;color:#fff;font-size:24px;line-height:1;padding:0 8px;border-radius:6px}
+  .nr-map-bar .nr-map-x:hover{background:rgba(255,255,255,.18)}
+  .nr-map-panel #lodge-map{flex:1;width:100%;background:#e7ddca}
+  .nr-pin{background:none;border:0}
+  .nr-pulse{width:16px;height:16px;border-radius:50%;background:#1c1c1c;border:2px solid #fff;box-sizing:border-box;box-shadow:0 0 0 0 rgba(0,0,0,.5);animation:nrpulse 1.5s ease-out infinite}
+  @keyframes nrpulse{0%{box-shadow:0 0 0 0 rgba(0,0,0,.6)}70%{box-shadow:0 0 0 22px rgba(0,0,0,0)}100%{box-shadow:0 0 0 0 rgba(0,0,0,0)}}
+  #lodge-map .leaflet-popup-content-wrapper{border-radius:10px}
+  #lodge-map .leaflet-popup-content{margin:0;width:230px!important}
+  .nr-pop img{width:230px;height:120px;object-fit:cover;display:block;border-radius:10px 10px 0 0}
+  .nr-pop .nr-pop-body{padding:8px 12px 10px;font-family:Arial,Helvetica,sans-serif}
+  .nr-pop .nr-pop-name{font-weight:700;color:#3a3427;font-size:15px}
+  .nr-pop .nr-pop-sub{color:#8a8175;font-size:12px;margin-top:2px}
+  @media(max-width:600px){.nr-map-overlay{padding:0}.nr-map-panel{max-width:none;height:100dvh;max-height:none;border-radius:0}}
+</style>
+<script>window.nrOpenAvail=function(){var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");window.open("https://book.nightsbridge.com/15939?startdate="+iso+"&nights=1","_blank","noopener");};</script>
+
+<div id="nr-map-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseMap()">
+  <div class="nr-map-panel">
+    <div class="nr-map-bar"><span>Etendeka Mountain Camp &middot; Kaokoland</span><button type="button" class="nr-map-x" aria-label="Close map" onclick="nrCloseMap()">&times;</button></div>
+    <div id="lodge-map"></div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  var inited=false, map=null, marker=null;
+  var fb=[-18.4,13.5], name='Etendeka Mountain Camp', region='Kaokoland';
+  function heroPhoto(){try{var h=document.querySelector('.hero');var bg=getComputedStyle(h).backgroundImage;var m=/url\(["']?(.*?)["']?\)/.exec(bg);return m?m[1]:'';}catch(e){return '';}}
+  function place(la,lo){marker.setLatLng([la,lo]);map.setView([la,lo],11);marker.openPopup();}
+  function build(){
+    if(typeof L==='undefined'){return setTimeout(build,150);}
+    var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'});
+    var terrain=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenTopoMap'});
+    var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
+    var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'});
+    map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView(fb,8);
+    L.control.layers({'Satellite':sat,'Terrain':terrain,'Minimal':minimal,'Standard':standard},null,{collapsed:false}).addTo(map);
+    var pin=L.divIcon({className:'nr-pin',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-9],html:'<div class="nr-pulse"></div>'});
+    var photo=heroPhoto();
+    marker=L.marker(fb,{icon:pin}).addTo(map).bindPopup('<div class="nr-pop">'+(photo?'<img src="'+photo+'" onerror="this.remove()">':'')+'<div class="nr-pop-body"><div class="nr-pop-name">'+name+'</div><div class="nr-pop-sub">'+region+'</div></div></div>').openPopup();
+    inited=true;
+    try{var key='nrgeo:'+name,cached=localStorage.getItem(key);
+      if(cached){var c=JSON.parse(cached);place(c[0],c[1]);}
+      else{fetch('https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=na&q='+encodeURIComponent(name)).then(function(r){return r.json();}).then(function(a){if(a&&a[0]){var la=parseFloat(a[0].lat),lo=parseFloat(a[0].lon);place(la,lo);try{localStorage.setItem(key,JSON.stringify([la,lo]));}catch(e){}}}).catch(function(){});}
+    }catch(e){}
+  }
+  window.nrOpenMap=function(){var o=document.getElementById('nr-map-overlay');o.classList.add('open');document.body.style.overflow='hidden';if(!inited)build();setTimeout(function(){if(map)map.invalidateSize();},90);};
+  window.nrCloseMap=function(){var o=document.getElementById('nr-map-overlay');o.classList.remove('open');document.body.style.overflow='';};
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')nrCloseMap();});
+})();
+</script>
+</body>
 </html>
