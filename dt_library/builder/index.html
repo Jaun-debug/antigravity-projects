@@ -469,13 +469,22 @@ function doSaveQuote(silent){
 }
 document.getElementById('btn-save').addEventListener('click',function(){doSaveQuote(false)});
 document.getElementById('btn-saveexit').addEventListener('click',function(){ if(doSaveQuote(true)){ try{localStorage.removeItem('nr_itinerary');}catch(e){} S.lodges=[]; location.href='/'; } });
-document.getElementById('btn-saved').addEventListener('click',function(){
-  var a=loadQ();if(!a.length){alert('No saved quotes yet.');return}
-  var list=a.map(function(x,i){return (i+1)+'. '+x.name+'  ('+(x.savedAt||'').split('T')[0]+')'}).join('\n');
-  var pick=prompt('Saved quotes — number to LOAD (or d+number to delete):\n\n'+list);if(!pick)return;pick=pick.trim();
-  if(/^d\s*\d+$/i.test(pick)){var di=parseInt(pick.replace(/[^0-9]/g,''),10)-1;if(a[di]){a.splice(di,1);saveQ(a);alert('Deleted.')}return}
-  var idx=parseInt(pick,10)-1;if(a[idx]){S=Object.assign(S,a[idx].state);document.getElementById('t-markup').value=S.markup;active='final';renderNav();renderPanel();alert('Loaded: '+a[idx].name)}
-});
+function nrCloseSaved(){var m=document.getElementById('sq-modal');if(m)m.style.display='none';}
+function nrRenderSaved(){
+  var a=loadQ();var box=document.getElementById('sq-list');if(!box)return;
+  if(!a.length){box.innerHTML='<p style="color:var(--muted);padding:16px 0;margin:0">No saved quotes yet.</p>';return;}
+  box.innerHTML=a.map(function(x,i){
+    return '<div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border)">'
+      +'<div style="flex:1;min-width:0"><div style="font-weight:600;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">'+esc(x.name)+'</div><div style="font-size:.78rem;color:var(--muted)">'+((x.savedAt||"").split("T")[0])+'</div></div>'
+      +'<button data-load="'+i+'" style="border:1px solid var(--green);background:var(--green);color:#fff;border-radius:7px;padding:8px 16px;font-size:.76rem;cursor:pointer">Load</button>'
+      +'<button data-del="'+i+'" style="border:1px solid #c0392b;background:#fff;color:#c0392b;border-radius:7px;padding:8px 14px;font-size:.76rem;cursor:pointer">Delete</button>'
+      +'</div>';
+  }).join('');
+  box.querySelectorAll('[data-load]').forEach(function(b){b.onclick=function(){var i=+b.dataset.load;var a=loadQ();if(a[i]){S=Object.assign(S,a[i].state);var mk=document.getElementById('t-markup');if(mk)mk.value=S.markup;active='final';renderNav();renderPanel();nrCloseSaved();}};});
+  box.querySelectorAll('[data-del]').forEach(function(b){b.onclick=function(){var i=+b.dataset.del;if(!confirm('Delete this quote?'))return;var a=loadQ();a.splice(i,1);saveQ(a);nrRenderSaved();};});
+}
+document.getElementById('btn-saved').addEventListener('click',function(){ nrRenderSaved(); var m=document.getElementById('sq-modal'); if(m)m.style.display='flex'; });
+document.addEventListener('keydown',function(e){if(e.key==='Escape')nrCloseSaved();});
 
 /* ---- load rates + seed from the card itinerary ---- */
 /* Overlay owner-entered RACK rates (live, from /api/rack) on top of the static
@@ -580,5 +589,14 @@ document.addEventListener('keydown',function(e){
 });
 function start(){renderNav();renderPanel();autoDistances();}
 </script>
+<div id="sq-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,18,16,.55);align-items:center;justify-content:center;padding:24px" onclick="if(event.target===this)nrCloseSaved()">
+  <div style="background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:80vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)">
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:1px solid var(--border)">
+      <strong style="font-size:1.05rem;color:var(--ink)">Saved Quotes</strong>
+      <button onclick="nrCloseSaved()" style="border:0;background:none;font-size:24px;line-height:1;cursor:pointer;color:var(--muted)">&times;</button>
+    </div>
+    <div id="sq-list" style="padding:8px 22px 22px"></div>
+  </div>
+</div>
 </body>
 </html>
