@@ -283,7 +283,8 @@ function renderNav(){
       +'<span class="num">'+(hasData(s.id)&&active!==s.id?'✓':s.n)+'</span>'+esc(s.label)+'</a>';
   }).join('')
   +'<a class="nav-ext" href="https://www.desert-tracks-welcome.com/dt_invoice_generator.html" target="_blank" rel="noopener"><span class="num">10</span>Invoice Generator</a>'
-  +'<a class="nav-ext" href="https://www.desert-tracks-welcome.com" target="_blank" rel="noopener"><span class="num">11</span>Booking Registration</a>';
+  +'<a class="nav-ext" href="https://www.desert-tracks-welcome.com" target="_blank" rel="noopener"><span class="num">11</span>Booking Registration</a>'
+  +'<a class="nav-ext" href="https://budget-reader-vercel.vercel.app" target="_blank" rel="noopener"><span class="num">12</span>Budget Dashboard</a>';
   document.querySelectorAll('#nav a[data-id]').forEach(function(a){a.onclick=function(){active=a.dataset.id;renderNav();renderPanel();}});
 }
 
