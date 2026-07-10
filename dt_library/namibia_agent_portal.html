@@ -411,8 +411,8 @@
         .hero {
             position: relative;
             width: 100%;
-            height: 82vh;
-            min-height: 640px;
+            height: 100vh;
+            min-height: 0;
             background-color: #2b2b2b;
             background-image: linear-gradient(rgba(25,22,19,0.40), rgba(25,22,19,0.55)), url('https://wetu.com/imageHandler/c1920x1080/33551/1740838386767_Panoramc-2.jpg?fmt=jpg');
             background-size: cover;
@@ -426,7 +426,7 @@
         }
 .hero-video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;pointer-events:none;}
 .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(25,22,19,0.12),rgba(25,22,19,0.22));z-index:0;pointer-events:none;}
-.hero h1{position:relative;z-index:2;}
+.hero h1{position:relative;z-index:2;}.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;width:26px;height:42px;border:2px solid rgba(255,255,255,.75);border-radius:14px;display:flex;justify-content:center;pointer-events:none}.scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:scrollDot 1.8s ease-in-out infinite}@keyframes scrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}
 
 
         /* Subtle overlay guarantees title legibility over any hero image */
@@ -838,6 +838,7 @@
     </script>
 
     <div class="hero">
+        <div class="scroll-cue" aria-hidden="true"></div>
         <video class="hero-video" autoplay muted loop playsinline poster="/media/hero-poster.jpg">
         <source src="/media/hero-720.mp4" type="video/mp4">
         </video>
@@ -2048,7 +2049,7 @@
             right: 50% !important;
             margin-left: -50vw !important;
             margin-right: -50vw !important;
-            margin-top: -60px !important;
+            margin-top: 0 !important;
             height: 600px !important; /* Extremely large hero pictures for stunning premium visual impact! */
             border-radius: 0 !important; /* Touch-to-edge full width exactly like the screenshot */
             overflow: hidden !important;
