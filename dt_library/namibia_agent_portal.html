@@ -693,7 +693,29 @@
             font-size: 0.9rem;
             font-style: italic;
         }
-    </style>
+    
+.lodge-gallery{display:grid;grid-template-columns:1fr 230px;gap:16px;margin-bottom:8px;padding:16px;background:#f2ede4;border:1px solid rgba(0,0,0,.06);border-radius:18px;box-shadow:0 16px 44px rgba(0,0,0,.07)}
+.lg-main{position:relative;height:560px;border-radius:14px;overflow:hidden;background:#3c3530 center/cover no-repeat;box-shadow:0 6px 18px rgba(0,0,0,.10);transition:background-image .3s}
+.lg-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.05) 45%,rgba(0,0,0,.25) 100%)}
+.lg-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 34px;color:#fff}
+.lg-cap p{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;margin:0 0 6px;opacity:.85}
+.lg-cap h3{font-family:var(--font-head);font-weight:400;font-size:clamp(1.5rem,3vw,2.2rem);margin:0 0 16px;color:#fff}
+.lg-view{display:inline-block;padding:11px 30px;background:var(--brand-accent);color:#fff;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.78rem;border-radius:8px;text-decoration:none;transition:.3s}
+.lg-view:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.lg-rate{position:absolute;top:16px;right:16px;z-index:2;display:none;align-items:center;gap:6px;background:rgba(255,255,255,.93);color:#3c3530;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1px;font-size:.66rem;padding:6px 12px;border-radius:20px}
+.lg-rate.on{display:flex}
+.lg-rate .rate-dot{width:7px;height:7px;border-radius:50%;background:#2e9e5b}
+.lg-thumbs{display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:560px;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--brand-accent) transparent}
+.lg-thumbs::-webkit-scrollbar{width:6px}
+.lg-thumbs::-webkit-scrollbar-thumb{background:rgba(164,130,86,.5);border-radius:3px}
+.lg-thumb{position:relative;flex:0 0 auto;height:78px;border-radius:9px;overflow:hidden;cursor:pointer;background:#3c3530 center/cover no-repeat;border:2px solid transparent;transition:.25s}
+.lg-thumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.34);transition:.25s}
+.lg-thumb:hover::after{background:rgba(0,0,0,.12)}
+.lg-thumb.active{border-color:var(--brand-accent)}
+.lg-thumb.active::after{background:rgba(0,0,0,0)}
+.lg-thumb span{position:absolute;left:8px;right:8px;bottom:6px;z-index:2;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.5px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
+@media(max-width:768px){.lodge-gallery{grid-template-columns:1fr}.lg-main{height:340px}.lg-thumbs{flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden;padding-bottom:8px}.lg-thumb{width:130px;height:82px}}
+</style>
 </head>
 <body>
 <style>#uc-belt{position:fixed;top:0;left:0;right:0;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2px;line-height:1.4;text-align:center;padding:7px 16px;}@media(max-width:600px){#uc-belt{font-size:10px;padding:6px 12px;}}</style><div id="uc-belt">&#9888; Development Version. Rates displayed on this site are illustrative examples only and do not represent actual lodge rates, availability, or bookable inventory. Please contact the property directly for current pricing and availability.</div><script>(function(){function f(){var b=document.getElementById("uc-belt");if(!b)return;var bh=b.offsetHeight;var hd=document.querySelector(".main-header");if(hd){hd.style.top=bh+"px";}var pt=parseInt(getComputedStyle(document.body).paddingTop)||0;if(pt>=50&&hd){document.body.style.paddingTop=(bh+hd.offsetHeight)+"px";}}window.addEventListener("load",f);window.addEventListener("resize",f);if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);})();</script>
@@ -7294,5 +7316,22 @@
     </footer>
 
 <script>/* group-lodges visibility */(function(){function s(){try{var e=document.getElementById("nav-grouplodges");if(e)e.style.display=sessionStorage.getItem("nr_agent_token")?"":"none";}catch(_){}}if(document.readyState!=="loading")s();else document.addEventListener("DOMContentLoaded",s);})();</script>
-</body>
+<script>(function(){
+var grid=document.querySelector(".region-grid");if(!grid)return;
+var cards=[].slice.call(grid.querySelectorAll(".region-card"));if(cards.length<2)return;
+var MAP={"Sossusvlei & Namib": "/sossusvlei-accommodation/", "Zambezi & Caprivi": "/caprivi-accommodation/", "Damaraland": "/damaraland-accommodation/", "Central Namibia": "/central-namibia-accommodation/", "Swakopmund": "/swakopmund-accommodation/", "Skeleton Coast": "/skeleton-coast-accommodation/", "West Etosha": "/west-etosha-accommodation/", "Epupa": "/epupa-accommodation/", "Kaokoland": "/kaokoland-accommodation/", "Luderitz": "/luderitz-accommodation/", "Kalahari": "/kalahari-accommodation/", "Fish River Canyon": "/fish-river-canyon-accommodation/", "Opuwo": "/opuwo-accommodation/", "Botswana": "/botswana-accommodation/", "South Etosha": "/south-etosha-accommodation/", "East Etosha": "/east-etosha-accommodation/", "Windhoek": "/windhoek-accommodation/"};
+function slug(n){return "/"+n.toLowerCase().replace(/&/g,"").replace(/[^a-z0-9]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"")+"-accommodation/";}
+function imgOf(c){var el=c.querySelector(".region-image");var bg=el?el.style.backgroundImage:"";var m=bg.match(/url\(["']?(.*?)["']?\)/);return m?m[1]:"";}
+var items=cards.map(function(c){var h3=c.querySelector(".region-image h3")||c.querySelector("h3");var nm=h3?h3.textContent.trim():"";return{name:nm,img:imgOf(c),href:MAP[nm]||slug(nm)};}).filter(function(i){return i.name;});
+if(items.length<2)return;
+var wrap=document.createElement("div");wrap.className="lodge-gallery";
+var main=document.createElement("div");main.className="lg-main";
+var cap=document.createElement("div");cap.className="lg-cap";
+var reg=document.createElement("p"),name=document.createElement("h3"),view=document.createElement("a");view.className="lg-view";
+reg.textContent="Region";cap.appendChild(reg);cap.appendChild(name);cap.appendChild(view);main.appendChild(cap);
+var strip=document.createElement("div");strip.className="lg-thumbs";var thumbs=[];
+function feature(i){var it=items[i];main.style.backgroundImage=it.img?"url('"+it.img+"')":"";name.textContent=it.name;view.href=it.href;view.textContent="View region \u2192";thumbs.forEach(function(t,j){t.classList.toggle("active",j===i);});}
+items.forEach(function(it,i){var t=document.createElement("div");t.className="lg-thumb";if(it.img)t.style.backgroundImage="url('"+it.img+"')";t.innerHTML="<span>"+it.name+"</span>";t.addEventListener("click",function(){feature(i);});strip.appendChild(t);thumbs.push(t);});
+wrap.appendChild(main);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,grid);grid.style.display="none";feature(0);
+})();</script></body>
 </html>

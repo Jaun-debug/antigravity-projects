@@ -77,6 +77,27 @@ body{padding-top:102px;}
 
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.lodge-gallery{display:grid;grid-template-columns:1fr 230px;gap:16px;margin-bottom:8px;padding:16px;background:var(--sand);border:1px solid rgba(0,0,0,.06);border-radius:18px;box-shadow:0 16px 44px rgba(0,0,0,.07)}
+.lg-main{position:relative;height:560px;border-radius:14px;overflow:hidden;background:#3c3530 center/cover no-repeat;box-shadow:0 6px 18px rgba(0,0,0,.10);transition:background-image .3s}
+.lg-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.05) 45%,rgba(0,0,0,.25) 100%)}
+.lg-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 34px;color:#fff}
+.lg-cap p{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;margin:0 0 6px;opacity:.85}
+.lg-cap h3{font-family:var(--font-head);font-weight:400;font-size:clamp(1.5rem,3vw,2.2rem);margin:0 0 16px;color:#fff}
+.lg-view{display:inline-block;padding:11px 30px;background:var(--brand-accent);color:#fff;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.78rem;border-radius:8px;text-decoration:none;transition:.3s}
+.lg-view:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.lg-rate{position:absolute;top:16px;right:16px;z-index:2;display:none;align-items:center;gap:6px;background:rgba(255,255,255,.93);color:#3c3530;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1px;font-size:.66rem;padding:6px 12px;border-radius:20px}
+.lg-rate.on{display:flex}
+.lg-rate .rate-dot{width:7px;height:7px;border-radius:50%;background:#2e9e5b}
+.lg-thumbs{display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:560px;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--brand-accent) transparent}
+.lg-thumbs::-webkit-scrollbar{width:6px}
+.lg-thumbs::-webkit-scrollbar-thumb{background:rgba(164,130,86,.5);border-radius:3px}
+.lg-thumb{position:relative;flex:0 0 auto;height:78px;border-radius:9px;overflow:hidden;cursor:pointer;background:#3c3530 center/cover no-repeat;border:2px solid transparent;transition:.25s}
+.lg-thumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.34);transition:.25s}
+.lg-thumb:hover::after{background:rgba(0,0,0,.12)}
+.lg-thumb.active{border-color:var(--brand-accent)}
+.lg-thumb.active::after{background:rgba(0,0,0,0)}
+.lg-thumb span{position:absolute;left:8px;right:8px;bottom:6px;z-index:2;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.5px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
+@media(max-width:768px){.lodge-gallery{grid-template-columns:1fr}.lg-main{height:340px}.lg-thumbs{flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden;padding-bottom:8px}.lg-thumb{width:130px;height:82px}}
 .card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.05);transition:.4s ease;border:1px solid rgba(0,0,0,.03);display:flex;flex-direction:column;text-decoration:none;}
 .card:hover{transform:translateY(-5px);box-shadow:0 15px 40px rgba(164,130,86,.18);border-color:rgba(164,130,86,.3);}
 .card .img{height:320px;background:#3c3530 center/cover no-repeat;position:relative;transition:transform .7s cubic-bezier(.2,.8,.2,1);}
@@ -177,5 +198,26 @@ body{padding-top:102px;}
 #mobile-menu .mm-listprop{width:100%;margin-top:24px;background:transparent;color:#AE8245;border:1px solid #AE8245;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
 #mobile-menu .mm-signin{width:100%;margin-top:12px;background:var(--brand-green,#87a996);color:#fff;border:none;padding:14px;border-radius:6px;font-family:var(--font-head,serif);text-transform:uppercase;font-size:.9rem;cursor:pointer;}
 </style><div id="mobile-menu" role="dialog" aria-label="Menu"><div class="mm-top"><span class="mm-logo">Namibia Rates</span><button class="mm-close" type="button" aria-label="Close menu" onclick="closeMobileMenu()">&times;</button></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Accommodation <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><div class="mm-regions"><a href="/sossusvlei-accommodation/">Sossusvlei &amp; Namib</a><a href="/swakopmund-accommodation/">Swakopmund</a><a href="/skeleton-coast-accommodation/">Skeleton Coast</a><a href="/damaraland-accommodation/">Damaraland</a><a href="/kaokoland-accommodation/">Kaokoland</a><a href="/epupa-accommodation/">Epupa</a><a href="/opuwo-accommodation/">Opuwo</a><a href="/west-etosha-accommodation/">West Etosha</a><a href="/south-etosha-accommodation/">South Etosha</a><a href="/east-etosha-accommodation/">East Etosha</a><a href="/central-namibia-accommodation/">Central Namibia</a><a href="/windhoek-accommodation/">Windhoek</a><a href="/kalahari-accommodation/">Kalahari</a><a href="/fish-river-canyon-accommodation/">Fish River Canyon</a><a href="/luderitz-accommodation/">Luderitz</a><a href="/caprivi-accommodation/">Zambezi &amp; Caprivi</a><a href="/botswana-accommodation/">Botswana</a></div></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Vehicles <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Vehicle rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">Activities <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Activity rates</a></div></div><div class="mm-section collapsed"><button class="mm-head" type="button" onclick="toggleSection(this)">More <span class="mm-arrow">&#9662;</span></button><div class="mm-body"><a href="/">Search lodges</a></div></div><button class="mm-listprop" type="button" onclick="location.href='/supplier-portal/'">Supplier Portal</button><button class="mm-signin" id="mm-agent" type="button">Agent Sign In</button></div><script>function toggleMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn");if(m){var o=m.classList.toggle("open");if(o){m.querySelectorAll('.mm-section').forEach(function(s){s.classList.remove('collapsed');});}if(b)b.classList.toggle("active",o);document.body.style.overflow=o?"hidden":"";}}function closeMobileMenu(){var m=document.getElementById("mobile-menu"),b=document.querySelector(".burger-menu-btn");if(m){m.classList.remove("open");if(b)b.classList.remove("active");document.body.style.overflow="";}}function toggleSection(btn){var s=btn.closest(".mm-section");if(s)s.classList.toggle("collapsed");}(function(){var a=document.getElementById("mm-agent");if(!a)return;if(sessionStorage.getItem("nr_agent_token")){a.textContent="Sign Out";a.onclick=function(){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.reload();};}else{a.onclick=function(){location.href="/#agent";};}})();</script>
-<script>function filterLodges(q){q=(q||"").trim().toLowerCase();var n=0;document.querySelectorAll("#lodge-grid .card").forEach(function(c){var m=c.getAttribute("data-name").indexOf(q)>-1;c.style.display=m?"":"none";if(m)n++;});var nr=document.getElementById("lodge-noresult");if(nr)nr.style.display=n?"none":"block";}</script></body>
+<script>function filterLodges(q){q=(q||"").trim().toLowerCase();var n=0;document.querySelectorAll("#lodge-grid .card").forEach(function(c){var m=c.getAttribute("data-name").indexOf(q)>-1;c.style.display=m?"":"none";if(m)n++;});var nr=document.getElementById("lodge-noresult");if(nr)nr.style.display=n?"none":"block";}</script><script>(function(){
+var grid=document.getElementById('lodge-grid');if(!grid)return;
+var cards=[].slice.call(grid.querySelectorAll('a.card'));if(cards.length<2)return;
+function imgOf(c){var el=c.querySelector('.img');var bg=el?el.style.backgroundImage:'';var m=bg.match(/url\(["']?(.*?)["']?\)/);return m?m[1]:'';}
+var items=cards.map(function(c){
+ var h3=c.querySelector('.body h3')||c.querySelector('h3');var p=c.querySelector('.body p');var go=c.querySelector('.go');
+ return{name:h3?h3.textContent.trim():'',region:p?p.textContent.trim():'',img:imgOf(c),href:c.getAttribute('href'),
+        rates:c.classList.contains('has-rates'),label:go?go.textContent.trim():'View →',dn:(c.getAttribute('data-name')||'').toLowerCase()};
+}).filter(function(i){return i.href;});
+if(items.length<2)return;
+var wrap=document.createElement('div');wrap.className='lodge-gallery';
+var main=document.createElement('div');main.className='lg-main';
+var rate=document.createElement('span');rate.className='lg-rate';rate.innerHTML='<span class="rate-dot"></span>Rates';
+var cap=document.createElement('div');cap.className='lg-cap';
+var reg=document.createElement('p'),name=document.createElement('h3'),view=document.createElement('a');view.className='lg-view';
+cap.appendChild(reg);cap.appendChild(name);cap.appendChild(view);main.appendChild(rate);main.appendChild(cap);
+var strip=document.createElement('div');strip.className='lg-thumbs';var thumbs=[];
+function feature(i){var it=items[i];main.style.backgroundImage=it.img?"url('"+it.img+"')":'';name.textContent=it.name;reg.textContent=it.region;view.href=it.href;view.textContent=it.label;rate.classList.toggle('on',!!it.rates);thumbs.forEach(function(t,j){t.classList.toggle('active',j===i);});}
+items.forEach(function(it,i){var t=document.createElement('div');t.className='lg-thumb';if(it.img)t.style.backgroundImage="url('"+it.img+"')";t.setAttribute('data-name',it.dn);t.innerHTML='<span>'+it.name+'</span>';t.addEventListener('click',function(){feature(i);});strip.appendChild(t);thumbs.push(t);});
+wrap.appendChild(main);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,grid);grid.style.display='none';feature(0);
+window.filterLodges=function(q){q=(q||'').toLowerCase();var first=-1;thumbs.forEach(function(t,j){var m=items[j].dn.indexOf(q)>-1;t.style.display=m?'':'none';if(m&&first<0)first=j;});if(first>=0)feature(first);};
+})();</script></body>
 </html>
