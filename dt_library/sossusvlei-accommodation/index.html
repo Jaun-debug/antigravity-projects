@@ -77,8 +77,8 @@ body{padding-top:102px;}
 
 
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
-.lodge-gallery{display:grid;grid-template-columns:1fr 230px;gap:18px;margin-bottom:8px}
-.lg-main{position:relative;height:560px;border-radius:14px;overflow:hidden;background:#3c3530 center/cover no-repeat;box-shadow:0 12px 34px rgba(0,0,0,.12);transition:background-image .3s}
+.lodge-gallery{display:grid;grid-template-columns:1fr 230px;gap:16px;margin-bottom:8px;padding:16px;background:var(--sand);border:1px solid rgba(0,0,0,.06);border-radius:18px;box-shadow:0 16px 44px rgba(0,0,0,.07)}
+.lg-main{position:relative;height:560px;border-radius:14px;overflow:hidden;background:#3c3530 center/cover no-repeat;box-shadow:0 6px 18px rgba(0,0,0,.10);transition:background-image .3s}
 .lg-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.72) 0%,rgba(0,0,0,.05) 45%,rgba(0,0,0,.25) 100%)}
 .lg-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:30px 34px;color:#fff}
 .lg-cap p{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;margin:0 0 6px;opacity:.85}
@@ -88,7 +88,9 @@ body{padding-top:102px;}
 .lg-rate{position:absolute;top:16px;right:16px;z-index:2;display:none;align-items:center;gap:6px;background:rgba(255,255,255,.93);color:#3c3530;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1px;font-size:.66rem;padding:6px 12px;border-radius:20px}
 .lg-rate.on{display:flex}
 .lg-rate .rate-dot{width:7px;height:7px;border-radius:50%;background:#2e9e5b}
-.lg-thumbs{display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:560px;padding-right:6px;scrollbar-width:thin}
+.lg-thumbs{display:flex;flex-direction:column;gap:10px;overflow-y:auto;max-height:560px;padding-right:6px;scrollbar-width:thin;scrollbar-color:var(--brand-accent) transparent}
+.lg-thumbs::-webkit-scrollbar{width:6px}
+.lg-thumbs::-webkit-scrollbar-thumb{background:rgba(164,130,86,.5);border-radius:3px}
 .lg-thumb{position:relative;flex:0 0 auto;height:78px;border-radius:9px;overflow:hidden;cursor:pointer;background:#3c3530 center/cover no-repeat;border:2px solid transparent;transition:.25s}
 .lg-thumb::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,.34);transition:.25s}
 .lg-thumb:hover::after{background:rgba(0,0,0,.12)}
