@@ -32,7 +32,7 @@ header.site{position:sticky;top:0;z-index:50;display:flex;justify-content:space-
 .crumbs a{text-decoration:none;color:var(--text-muted);}.crumbs a:hover{color:var(--brand-accent);}
 .hdr-agent{cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:1.5px;font-size:.7rem;padding:8px 16px;border-radius:5px;border:1px solid var(--brand-accent);background:transparent;color:var(--brand-accent);white-space:nowrap;transition:.25s;}
 .hdr-agent:hover{background:var(--brand-accent);color:#fff;}
-.hero{position:relative;height:62vh;min-height:420px;background:#2b2b2b url('https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg') center/cover no-repeat;display:flex;align-items:flex-end;}
+.hero{position:relative;height:calc(100vh - 107px);min-height:0;background:#2b2b2b url('https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg') center/cover no-repeat;display:flex;align-items:flex-end;}.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;width:26px;height:42px;border:2px solid rgba(255,255,255,.75);border-radius:14px;display:flex;justify-content:center;pointer-events:none}.scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:scrollDot 1.8s ease-in-out infinite}@keyframes scrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.65));}
 .hero-inner{position:relative;z-index:2;color:#fff;padding:0 28px 46px;max-width:1080px;margin:0 auto;width:100%;}
 .hero .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:.72rem;color:#e8dcc8;}
@@ -128,7 +128,7 @@ body{padding-top:102px;}
     <button class="search-icon-btn" aria-label="Search" onclick="location.href='/'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
   </nav>
 </header>
-<div class="hero"><a class="hero-back" href="/central-namibia-accommodation/">&#8592; Back to Central Namibia Accommodation</a>
+<div class="hero"><div class="scroll-cue" aria-hidden="true"></div><a class="hero-back" href="/central-namibia-accommodation/">&#8592; Back to Central Namibia Accommodation</a>
   <div class="hero-inner">
     <div class="eyebrow">Central Namibia</div>
     <h1>Waterberg Wilderness</h1>
