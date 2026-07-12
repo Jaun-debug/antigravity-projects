@@ -184,13 +184,13 @@
 .ond-side .desc{font-size:.85rem;line-height:1.6;color:var(--text-muted);font-weight:300;margin:0 0 20px;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
 .ond-view{display:inline-block;align-self:flex-start;padding:11px 26px;background:var(--gold);color:#fff;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.72rem;border-radius:8px;text-decoration:none;transition:.3s}
 .ond-view:hover{filter:brightness(1.08);transform:translateY(-2px)}
-.ond-thumbs{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:14px 40% 6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;scroll-snap-type:x mandatory}
+.ond-thumbs{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:14px 4px 6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;scroll-snap-type:x proximity}
 .ond-thumbs::-webkit-scrollbar{height:7px}.ond-thumbs::-webkit-scrollbar-thumb{background:rgba(190,150,90,.55);border-radius:4px}
 .ond-thumb{position:relative;flex:0 0 auto;width:150px;height:94px;border-radius:10px;overflow:hidden;cursor:pointer;background:#3c3530 center/cover no-repeat;border:2px solid transparent;transition:.25s;scroll-snap-align:center;opacity:.7}
 .ond-thumb:hover{opacity:.95}
 .ond-thumb.active{border-color:var(--gold);opacity:1;transform:scale(1.05)}
 .ond-thumb span{position:absolute;left:8px;right:8px;bottom:6px;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.4px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
-@media(max-width:768px){.ond-top{grid-template-columns:1fr}.ond-main{height:300px}.ond-thumbs{padding:14px 32% 6px}}
+@media(max-width:768px){.ond-top{grid-template-columns:1fr}.ond-main{height:300px}.ond-thumbs{padding:14px 4px 6px}}
 
 </style>
 <style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
