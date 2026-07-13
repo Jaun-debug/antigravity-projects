@@ -261,6 +261,13 @@
 .gl-search input:focus{box-shadow:0 0 0 3px rgba(164,130,86,.15)}
 .gl-search input::placeholder{color:#9a938b}
 
+
+/* explore scroll button */
+.scroll-explore{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;text-decoration:none}
+.scroll-explore .se-label{color:rgba(255,255,255,.9);font-family:var(--font-head,serif);text-transform:uppercase;letter-spacing:3px;font-size:.68rem;transition:color .2s,transform .2s}
+.scroll-explore:hover .se-label{color:#fff;transform:translateY(-1px)}
+.scroll-explore .scroll-cue{position:static;left:auto;bottom:auto;transform:none;margin:0}
+
 </style>
 <style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
 <body>
@@ -268,7 +275,7 @@
 
 <!-- MAIN VIEW -->
 <div id="main-view">
-    <div class="site-hero"><div class="scroll-cue" aria-hidden="true"></div><a class="grp-back" href="/">&#8592; Back to Home Page</a>
+    <div class="site-hero"><a class="scroll-explore" href="javascript:void(0)" onclick="exploreDown();return false" aria-label="Explore lodges"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a><a class="grp-back" href="/">&#8592; Back to Home Page</a>
         <div class="hero-dot"></div>
         <span class="hero-display">O&L</span>
         <span class="hero-display">Leisure</span>
@@ -931,5 +938,5 @@ function build(){
 }
 var n=0;var iv=setInterval(function(){n++;if(build()||n>40)clearInterval(iv);},120);
 window.addEventListener('load',build);
-})();</script><script>function filterGL(q){q=(q||"").toLowerCase();var ts=document.querySelectorAll(".ond-thumb");var first=null;ts.forEach(function(t){var sp=t.querySelector("span");var nm=(sp?sp.textContent:"").toLowerCase();var m=nm.indexOf(q)>-1;t.style.display=m?"":"none";if(m&&!first)first=t;});if(first){try{first.dispatchEvent(new MouseEvent("mouseenter"));}catch(e){}}}</script></body>
+})();</script><script>function filterGL(q){q=(q||"").toLowerCase();var ts=document.querySelectorAll(".ond-thumb");var first=null;ts.forEach(function(t){var sp=t.querySelector("span");var nm=(sp?sp.textContent:"").toLowerCase();var m=nm.indexOf(q)>-1;t.style.display=m?"":"none";if(m&&!first)first=t;});if(first){try{first.dispatchEvent(new MouseEvent("mouseenter"));}catch(e){}}}</script><script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script></body>
 </html>
