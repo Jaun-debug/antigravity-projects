@@ -896,6 +896,12 @@ function submitLogin(){
   })
   .catch(function(){ err.textContent='Network error — please try again.'; });
 }</script><style>/* hdr-fix-final */
+/* show top-level nav items (keep gated ones hidden via inline style) */
+.main-header .nav-links>.nav-item-dropdown:not([style*="none"]){display:inline-flex!important}
+.main-header .nav-links>.nav-link:not([style*="none"]):not(#nav-supplier){display:inline-flex!important}
+.main-header .nav-item-dropdown>.nav-link{display:inline-flex!important}
+@media(max-width:900px){.main-header .nav-links>*{display:none!important}}
+
 .main-header .nav-links{display:flex!important}
 .burger-menu-btn{display:none!important}
 @media(max-width:900px){.main-header .nav-links{display:none!important}.burger-menu-btn{display:flex!important}}</style><style>
