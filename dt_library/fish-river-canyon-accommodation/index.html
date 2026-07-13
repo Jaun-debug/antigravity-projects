@@ -153,6 +153,13 @@ body{padding-top:102px;}
 .rg2-thumb span{position:absolute;left:8px;right:8px;bottom:6px;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.4px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
 @media(max-width:768px){.rg2-top{grid-template-columns:1fr}.rg2-main{height:300px}.rg2-thumbs{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}}
 
+
+/* explore scroll button */
+.scroll-explore{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;text-decoration:none}
+.scroll-explore .se-label{color:rgba(255,255,255,.9);font-family:var(--font-head,serif);text-transform:uppercase;letter-spacing:3px;font-size:.68rem;transition:color .2s,transform .2s}
+.scroll-explore:hover .se-label{color:#fff;transform:translateY(-1px)}
+.scroll-explore .scroll-cue{position:static;left:auto;bottom:auto;transform:none;margin:0}
+
 </style>
 <style id="nav-order-fix">.nav-links>.nav-item-dropdown:first-child{order:-2}#nav-grouplodges{order:-1}</style>
 </head>
@@ -170,7 +177,7 @@ body{padding-top:102px;}
     <button class="search-icon-btn" aria-label="Search" onclick="location.href='/'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
   </nav>
 </header>
-<div class="hero"><div class="scroll-cue" aria-hidden="true"></div><a class="hero-back" href="/">&#8592; Back to all regions</a><div class="hero-inner">
+<div class="hero"><a class="scroll-explore" href="javascript:void(0)" onclick="exploreDown();return false" aria-label="Explore"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a><a class="hero-back" href="/">&#8592; Back to all regions</a><div class="hero-inner">
   <div class="eyebrow">Namibia</div>
   <h1>Fish River Canyon Accommodation</h1>
 </div></div>
@@ -245,5 +252,5 @@ function build(){
 }
 var n=0;var iv=setInterval(function(){n++;if(build()||n>40)clearInterval(iv);},120);
 window.addEventListener('load',build);
-})();</script></body>
+})();</script><script>function exploreDown(){var h=document.querySelector('.hero')||document.querySelector('.site-hero');var t=(h&&h.nextElementSibling)||document.querySelector('section');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-20;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script></body>
 </html>
