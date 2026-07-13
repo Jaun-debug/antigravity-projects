@@ -41,7 +41,7 @@ window.agentBtn=function(){
 
 function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
-var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display="";
+var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":"none";
 var b=document.getElementById("hdr-agent");if(b)b.textContent=inn?"Sign Out":"Agent Sign In";}
 window.agentBtn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");location.reload();}else{openLoginModal();}};
 
