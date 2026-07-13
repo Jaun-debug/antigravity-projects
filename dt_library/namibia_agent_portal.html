@@ -715,6 +715,25 @@
 .lg-thumb.active::after{background:rgba(0,0,0,0)}
 .lg-thumb span{position:absolute;left:8px;right:8px;bottom:6px;z-index:2;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.5px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
 @media(max-width:768px){.lodge-gallery{grid-template-columns:1fr}.lg-main{height:340px}.lg-thumbs{flex-direction:row;max-height:none;overflow-x:auto;overflow-y:hidden;padding-bottom:8px}.lg-thumb{width:130px;height:82px}}
+
+/* homepage region thumbroll */
+.rg2-wrap{max-width:1200px;margin:0 auto 8px;padding:16px;background:#f2ede4;border:1px solid rgba(0,0,0,.06);border-radius:18px;box-shadow:0 16px 44px rgba(0,0,0,.07)}
+.rg2-top{display:grid;grid-template-columns:1fr 300px;gap:16px}
+.rg2-main{position:relative;height:480px;border-radius:14px;overflow:hidden;background:#3c3530 center/cover no-repeat;cursor:pointer;transition:background-image .3s}
+.rg2-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5),rgba(0,0,0,0) 45%)}
+.rg2-side{display:flex;flex-direction:column;justify-content:center;padding:22px 24px;background:#fff;border-radius:14px}
+.rg2-side .loc{font-size:.62rem;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);margin:0 0 8px}
+.rg2-side h3{font-family:var(--font-head);font-weight:400;font-size:1.7rem;line-height:1.15;margin:0 0 16px;color:var(--text-main)}
+.rg2-view{display:inline-block;align-self:flex-start;padding:11px 26px;background:var(--brand-accent);color:#fff;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.72rem;border-radius:8px;text-decoration:none;transition:.3s}
+.rg2-view:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.rg2-thumbs{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:14px 4px 6px;scrollbar-width:thin;scrollbar-color:var(--brand-accent) transparent;scroll-snap-type:x proximity}
+.rg2-thumbs::-webkit-scrollbar{height:7px}.rg2-thumbs::-webkit-scrollbar-thumb{background:rgba(164,130,86,.5);border-radius:4px}
+.rg2-thumb{position:relative;flex:0 0 auto;width:150px;height:94px;border-radius:10px;overflow:hidden;cursor:pointer;background:#3c3530 center/cover no-repeat;border:2px solid transparent;transition:.25s;scroll-snap-align:center;opacity:.72}
+.rg2-thumb:hover{opacity:.96}
+.rg2-thumb.active{border-color:var(--brand-accent);opacity:1;transform:scale(1.05)}
+.rg2-thumb span{position:absolute;left:8px;right:8px;bottom:6px;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.4px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
+@media(max-width:768px){.rg2-top{grid-template-columns:1fr}.rg2-main{height:300px}.rg2-thumbs{scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}}
+
 </style>
 </head>
 <body>
@@ -7320,18 +7339,16 @@
 var grid=document.querySelector(".region-grid");if(!grid)return;
 var cards=[].slice.call(grid.querySelectorAll(".region-card"));if(cards.length<2)return;
 var MAP={"Sossusvlei & Namib":{"href":"/sossusvlei-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/33551/1740838504512_Drone-View-from-Main-erea-and-Deck-.jpg?fmt=jpg"},"Zambezi & Caprivi":{"href":"/caprivi-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/28492/chobe_.jpg?fmt=jpg"},"Damaraland":{"href":"/damaraland-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/10498/camp_kipwe_-_aerial_view_1.jpg?fmt=jpg"},"Central Namibia":{"href":"/central-namibia-accommodation/","img":"https://www.nwr.com.na/wp-content/uploads/2022/12/Waterberg-Plateau-03-%C2%A9-NWR-2018-1920x960.jpeg"},"Swakopmund":{"href":"/swakopmund-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/91389/fvl_birdlife_mr0031.jpg?fmt=jpg"},"Skeleton Coast":{"href":"/skeleton-coast-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/1612/3.jpg?fmt=jpg"},"West Etosha":{"href":"/west-etosha-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/10417/amazing_planet_filip_kulisev_elephant3.jpg?fmt=jpg"},"Epupa":{"href":"/epupa-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/34701/omarunga-scenery21.jpg?fmt=jpg"},"Kaokoland":{"href":"/kaokoland-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg"},"Luderitz":{"href":"/luderitz-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/10515/img_5262.jpg?fmt=jpg"},"Kalahari":{"href":"/kalahari-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/24263/1733131043525_2.jpg?fmt=jpg"},"Fish River Canyon":{"href":"/fish-river-canyon-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/21616/1759400018062mg3394-panorama.jpg?fmt=jpg"},"Opuwo":{"href":"/opuwo-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/406772/1761301431593dusk-property-and-landscape-11.jpg?fmt=jpg"},"Botswana":{"href":"/botswana-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/10099/1732260849229_1727442045_1700166832_Camp-Okavango---Main-Area-2023-31.jpg?fmt=jpg"},"South Etosha":{"href":"/south-etosha-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg?fmt=jpg"},"East Etosha":{"href":"/east-etosha-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/8717/onguma_bush_camp_1098.jpg?fmt=jpg"},"Windhoek":{"href":"/windhoek-accommodation/","img":"https://wetu.com/imageHandler/c1920x1080/34177/auas_mountains_and_impala.jpg?fmt=jpg"}};
-function slug(n){return "/"+n.toLowerCase().replace(/&/g,"").replace(/[^a-z0-9]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"")+"-accommodation/";}
 function imgOf(c){var el=c.querySelector(".region-image");var bg=el?el.style.backgroundImage:"";var m=bg.match(/url\(["']?(.*?)["']?\)/);return m?m[1]:"";}
-var items=cards.map(function(c){var h3=c.querySelector(".region-image h3")||c.querySelector("h3");var nm=h3?h3.textContent.trim():"";return{name:nm,img:(MAP[nm]&&MAP[nm].img)||imgOf(c),href:(MAP[nm]&&MAP[nm].href)||slug(nm)};}).filter(function(i){return i.name;});
+var items=cards.map(function(c){var h=c.querySelector(".region-image h3")||c.querySelector("h3");var nm=h?h.textContent.trim():"";var mm=MAP[nm]||{};return{name:nm,img:mm.img||imgOf(c),href:mm.href||"#"};}).filter(function(i){return i.name;});
 if(items.length<2)return;
-var wrap=document.createElement("div");wrap.className="lodge-gallery";
-var main=document.createElement("div");main.className="lg-main";
-var cap=document.createElement("div");cap.className="lg-cap";
-var reg=document.createElement("p"),name=document.createElement("h3"),view=document.createElement("a");view.className="lg-view";
-reg.textContent="Region";cap.appendChild(reg);cap.appendChild(name);cap.appendChild(view);main.appendChild(cap);
-var strip=document.createElement("div");strip.className="lg-thumbs";var thumbs=[];
-function feature(i){var it=items[i];main.style.backgroundImage=it.img?"url('"+it.img+"')":"";name.textContent=it.name;view.href=it.href;view.textContent="View region \u2192";thumbs.forEach(function(t,j){t.classList.toggle("active",j===i);});}
-items.forEach(function(it,i){var t=document.createElement("div");t.className="lg-thumb";if(it.img)t.style.backgroundImage="url('"+it.img+"')";t.innerHTML="<span>"+it.name+"</span>";t.addEventListener("click",function(){feature(i);});strip.appendChild(t);thumbs.push(t);});
-wrap.appendChild(main);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,grid);grid.style.display="none";feature(0);
+var wrap=document.createElement("div");wrap.className="rg2-wrap";var top=document.createElement("div");top.className="rg2-top";var main=document.createElement("div");main.className="rg2-main";var side=document.createElement("div");side.className="rg2-side";var loc=document.createElement("p");loc.className="loc";loc.textContent="Region";var name=document.createElement("h3");var view=document.createElement("a");view.className="rg2-view";view.textContent="View region →";side.appendChild(loc);side.appendChild(name);side.appendChild(view);top.appendChild(main);top.appendChild(side);var strip=document.createElement("div");strip.className="rg2-thumbs";var thumbs=[];var curr=-1;
+function center(i){var t=thumbs[i];if(!t)return;var sr=strip.getBoundingClientRect(),tr=t.getBoundingClientRect();strip.scrollBy({left:(tr.left+tr.width/2)-(sr.left+sr.width/2),behavior:"smooth"});}
+function feature(i){curr=i;var it=items[i];main.style.backgroundImage=it.img?"url('"+it.img+"')":"";name.textContent=it.name;view.href=it.href;thumbs.forEach(function(t,j){t.classList.toggle("active",j===i);});}
+var canHover=window.matchMedia?window.matchMedia("(hover:hover) and (pointer:fine)").matches:true;
+items.forEach(function(it,i){var t=document.createElement("div");t.className="rg2-thumb";if(it.img)t.style.backgroundImage="url('"+it.img+"')";t.innerHTML="<span>"+it.name+"</span>";t.addEventListener("click",function(){if(it.href&&it.href!=="#")location.href=it.href;});if(canHover)t.addEventListener("mouseenter",function(){feature(i);});strip.appendChild(t);thumbs.push(t);});
+main.addEventListener("click",function(){var it=items[curr];if(it&&it.href&&it.href!=="#")location.href=it.href;});
+var raf;strip.addEventListener("scroll",function(){if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(function(){var sr=strip.getBoundingClientRect(),cx=sr.left+sr.width/2,best=-1,bd=1e9;thumbs.forEach(function(t,i){var r=t.getBoundingClientRect(),d=Math.abs((r.left+r.width/2)-cx);if(d<bd){bd=d;best=i;}});if(best>=0&&best!==curr)feature(best);});},{passive:true});
+wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,grid);grid.style.display="none";var mid=Math.floor(items.length/2);feature(mid);setTimeout(function(){center(mid);},80);
 })();</script></body>
 </html>
