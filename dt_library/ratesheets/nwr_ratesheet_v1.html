@@ -154,8 +154,9 @@
 
 
 /* lodge search (region style) */
-.gl-search{max-width:440px;margin:38px auto 38px}
-.gl-search input{width:100%;box-sizing:border-box;padding:13px 18px;border:1px solid var(--gold,#a48256);border-radius:8px;background:#fff;font-family:var(--font-body,sans-serif);font-size:.95rem;color:var(--text-main,#3c3530);outline:none;transition:.2s}
+.gl-search{max-width:1200px;margin:34px auto 24px;padding:0 16px;box-sizing:border-box}
+.gl-head{font-family:var(--font-head,serif);color:var(--gold,#a48256);font-size:1.8rem;font-weight:400;letter-spacing:2px;margin:0 0 16px}
+.gl-search input{display:block;width:100%;max-width:440px;box-sizing:border-box;padding:13px 18px;border:1px solid var(--gold,#a48256);border-radius:8px;background:#fff;font-family:var(--font-body,sans-serif);font-size:.95rem;color:var(--text-main,#3c3530);outline:none;transition:.2s}
 .gl-search input:focus{box-shadow:0 0 0 3px rgba(164,130,86,.15)}
 .gl-search input::placeholder{color:#9a938b}
 
@@ -172,7 +173,7 @@
         <p class="hero-tagline">Rack Rates 2025 / 2026</p>
         <p class="hero-sub">01 November 2025 to 31 October 2026</p>
     </div>
-    <div class="gl-search"><input type="search" placeholder="Search lodges&hellip;" oninput="filterGL(this.value)" aria-label="Search lodges"></div><div id="all-cards"></div>
+    <div class="gl-search"><h2 class="gl-head">Lodges</h2><input type="search" placeholder="Search lodges&hellip;" oninput="filterGL(this.value)" aria-label="Search lodges"></div><div id="all-cards"></div>
 </div><div id="detail-view" style="display:none;max-width:1200px;margin:0 auto;padding:40px 30px 120px;animation:fadeIn 0.4s ease;">
     <button class="back-btn" onclick="closeProperty()">&#8592; All Properties</button>
     <div class="detail-hero">
