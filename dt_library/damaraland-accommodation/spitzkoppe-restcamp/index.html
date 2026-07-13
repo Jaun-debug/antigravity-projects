@@ -111,7 +111,14 @@ body{padding-top:102px;}
 .region-back a{color:var(--brand-green)!important;letter-spacing:1.5px!important;font-weight:400!important;}
 .region-back a:hover{color:var(--brand-accent)!important;}
 
-.hero-back{position:absolute;top:16px;left:28px;z-index:4;color:#fff;text-decoration:none;font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);text-shadow:0 1px 10px rgba(0,0,0,.6);transition:.2s;}.hero-back:hover{color:var(--brand-green);}</style>
+.hero-back{position:absolute;top:16px;left:28px;z-index:4;color:#fff;text-decoration:none;font-size:.76rem;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);text-shadow:0 1px 10px rgba(0,0,0,.6);transition:.2s;}.hero-back:hover{color:var(--brand-green);}
+/* explore scroll button */
+.scroll-explore{position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;text-decoration:none}
+.scroll-explore .se-label{color:rgba(255,255,255,.9);font-family:var(--font-head,serif);text-transform:uppercase;letter-spacing:3px;font-size:.68rem;transition:color .2s,transform .2s}
+.scroll-explore:hover .se-label{color:#fff;transform:translateY(-1px)}
+.scroll-explore .scroll-cue{position:static;left:auto;bottom:auto;transform:none;margin:0}
+
+</style>
 <style id="nav-order-fix">.nav-links>.nav-item-dropdown:first-child{order:-2}#nav-grouplodges{order:-1}</style>
 </head>
 <body>
@@ -128,7 +135,7 @@ body{padding-top:102px;}
     <button class="search-icon-btn" aria-label="Search" onclick="location.href='/'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
   </nav>
 </header>
-<div class="hero"><div class="scroll-cue" aria-hidden="true"></div><a class="hero-back" href="/damaraland-accommodation/">&#8592; Back to Damaraland Accommodation</a>
+<div class="hero"><a class="scroll-explore" href="javascript:void(0)" onclick="exploreDown();return false" aria-label="Explore"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a><a class="hero-back" href="/damaraland-accommodation/">&#8592; Back to Damaraland Accommodation</a>
   <div class="hero-inner">
     <div class="eyebrow">Damaraland</div>
     <h1>Spitzkoppe Restcamp</h1>
@@ -426,5 +433,5 @@ applySession();
   document.addEventListener('keydown',function(e){if(e.key==='Escape')nrCloseMap();});
 })();
 </script>
-</body>
+<script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.rg2-wrap')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t){var h=document.querySelector('.hero');t=h&&h.nextElementSibling;}if(!t)t=document.querySelector('section');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script></body>
 </html>
