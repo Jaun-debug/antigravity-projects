@@ -118,7 +118,31 @@
         @media(max-width:1200px){.lodge-grid{grid-template-columns:repeat(3,1fr);}}
         @media(max-width:900px){.lodge-grid,.lodge-grid.cols3,.lodge-grid.cols2{grid-template-columns:repeat(2,1fr);}.detail-hero{grid-template-columns:1fr;}.lodge-gallery{grid-template-columns:1fr;}}
         @media(max-width:600px){.lodge-grid{grid-template-columns:1fr;}.grid-2{grid-template-columns:1fr;}.detail-view{padding:16px 16px 100px;}.content-block{padding:22px;}.region-section{padding:0 16px 40px;}}
-    </style>
+    /* --- hero as real photo --- */
+.site-hero{padding:88px 20px!important;min-height:58vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#2b2b2b url('https://wetu.com/imageHandler/c1920x1080/10477/main-building-3.jpg?fmt=jpg') center/cover no-repeat!important}
+.site-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.34),rgba(0,0,0,.58));z-index:0}
+.site-hero>*{position:relative;z-index:1}
+.hero-display{display:block;-webkit-text-fill-color:#fff!important;color:#fff!important;background:none!important;text-shadow:0 2px 26px rgba(0,0,0,.55)}
+.hero-tagline{color:#fff!important}.hero-sub{color:rgba(255,255,255,.85)!important}.grp-back{color:rgba(255,255,255,.92)!important}
+/* --- ondili slider gallery --- */
+.ond-wrap{max-width:1200px;margin:36px auto 30px;padding:16px;background:#fff;border:1px solid rgba(44,40,36,.08);border-radius:18px;box-shadow:0 16px 44px rgba(44,40,36,.08)}
+.ond-top{display:grid;grid-template-columns:1fr 320px;gap:16px}
+.ond-main{position:relative;height:460px;border-radius:14px;overflow:hidden;background:#3c3530 center/cover no-repeat;transition:background-image .3s}
+.ond-main::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),rgba(0,0,0,0) 45%)}
+.ond-side{display:flex;flex-direction:column;justify-content:center;padding:22px 24px;background:var(--card-bg,#faf7f2);border-radius:14px}
+.ond-side .loc{font-size:.62rem;text-transform:uppercase;letter-spacing:3px;color:var(--text-muted);margin:0 0 8px}
+.ond-side h3{font-family:var(--font-head);font-weight:400;font-size:1.7rem;line-height:1.15;margin:0 0 12px;color:var(--text-main)}
+.ond-side .desc{font-size:.85rem;line-height:1.6;color:var(--text-muted);font-weight:300;margin:0 0 20px;display:-webkit-box;-webkit-line-clamp:5;-webkit-box-orient:vertical;overflow:hidden}
+.ond-view{display:inline-block;align-self:flex-start;padding:11px 26px;background:var(--gold);color:#fff;font-family:var(--font-head);text-transform:uppercase;letter-spacing:1.5px;font-size:.72rem;border-radius:8px;text-decoration:none;transition:.3s}
+.ond-view:hover{filter:brightness(1.08);transform:translateY(-2px)}
+.ond-thumbs{display:flex;gap:10px;overflow-x:auto;overflow-y:hidden;padding:14px 4px 6px;scrollbar-width:thin;scrollbar-color:var(--gold) transparent;scroll-snap-type:x proximity}
+.ond-thumbs::-webkit-scrollbar{height:7px}.ond-thumbs::-webkit-scrollbar-thumb{background:rgba(190,150,90,.55);border-radius:4px}
+.ond-thumb{position:relative;flex:0 0 auto;width:150px;height:94px;border-radius:10px;overflow:hidden;cursor:pointer;background:#3c3530 center/cover no-repeat;border:2px solid transparent;transition:.25s;scroll-snap-align:center;opacity:.7}
+.ond-thumb:hover{opacity:.95}
+.ond-thumb.active{border-color:var(--gold);opacity:1;transform:scale(1.05)}
+.ond-thumb span{position:absolute;left:8px;right:8px;bottom:6px;color:#fff;font-size:.6rem;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.4px;text-shadow:0 1px 4px rgba(0,0,0,.85);line-height:1.15}
+@media(max-width:768px){.ond-top{grid-template-columns:1fr}.ond-main{height:300px}.ond-thumbs{padding:12px 4px 6px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.ond-thumb{width:150px;height:94px;scroll-snap-align:center}}
+</style>
 <style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
 <body>
 <button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
@@ -534,5 +558,32 @@ window.__nrSyncAvail=function(){var has=!!window.__nrCurBbid();var tab=document.
   if(document.readyState!=='loading')init();else document.addEventListener('DOMContentLoaded',init);
 })();
 </script>
-</body>
+<script>(function(){
+function build(){
+ var grid=document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!grid){var _fc=document.querySelector('.lodge-card');grid=_fc?_fc.parentNode:null;}if(!grid)return false;
+ if(document.querySelector('.ond-wrap'))return true;
+ var cards=[].slice.call(grid.querySelectorAll('.lodge-card'));if(cards.length<2)return false;
+ var items=cards.map(function(c){
+  var im=c.querySelector('.lodge-card-img'),nm=c.querySelector('.lodge-card-name'),lo=c.querySelector('.lodge-card-location'),de=c.querySelector('.lodge-card-desc');
+  var b=c.querySelector('.btn-lodge')||c.querySelector('.btn-rates')||c;
+  return{img:im?im.getAttribute('src'):'',name:nm?nm.textContent.trim():'',loc:lo?lo.textContent.trim():'',desc:de?de.textContent.trim():'',openEl:b};
+ }).filter(function(i){return i.img;});
+ if(items.length<2)return false;
+ var wrap=document.createElement('div');wrap.className='ond-wrap';
+ var top=document.createElement('div');top.className='ond-top';
+ var main=document.createElement('div');main.className='ond-main';
+ var side=document.createElement('div');side.className='ond-side';
+ var loc=document.createElement('p');loc.className='loc';var name=document.createElement('h3');var desc=document.createElement('p');desc.className='desc';var view=document.createElement('a');view.className='ond-view';view.textContent='View lodge \u2192';
+ side.appendChild(loc);side.appendChild(name);side.appendChild(desc);side.appendChild(view);
+ top.appendChild(main);top.appendChild(side);view.href='javascript:void(0)';view.style.cursor='pointer';main.style.cursor='pointer';main.title='Open lodge';function openCurrent(){var it=items[curr];if(it&&it.openEl&&it.openEl.click){it.openEl.click();}}view.addEventListener('click',function(e){e.preventDefault();openCurrent();});main.addEventListener('click',openCurrent);
+ var strip=document.createElement('div');strip.className='ond-thumbs';var thumbs=[];var curr=-1;
+ function feature(i,scroll){curr=i;var it=items[i];main.style.backgroundImage="url('"+it.img+"')";name.textContent=it.name;loc.textContent=it.loc;desc.textContent=it.desc;view.style.display='';thumbs.forEach(function(t,j){t.classList.toggle('active',j===i);});if(scroll&&thumbs[i]){var _t=thumbs[i];var _sr=strip.getBoundingClientRect();var _tr=_t.getBoundingClientRect();strip.scrollBy({left:(_tr.left+_tr.width/2)-(_sr.left+_sr.width/2),behavior:'smooth'});}}
+ var canHover=window.matchMedia?window.matchMedia('(hover:hover) and (pointer:fine)').matches:true;items.forEach(function(it,i){var t=document.createElement('div');t.className='ond-thumb';if(it.img)t.style.backgroundImage="url('"+it.img+"')";t.innerHTML='<span>'+it.name+'</span>';t.addEventListener('click',function(){feature(i,false);openCurrent();});if(canHover)t.addEventListener('mouseenter',function(){feature(i,false);});strip.appendChild(t);thumbs.push(t);});
+ var raf;function onScroll(){var sr=strip.getBoundingClientRect();var cx=sr.left+sr.width/2;var best=-1,bd=1e9;thumbs.forEach(function(t,i){var r=t.getBoundingClientRect();var d=Math.abs((r.left+r.width/2)-cx);if(d<bd){bd=d;best=i;}});if(best>=0&&best!==curr)feature(best,false);}strip.addEventListener('scroll',function(){if(raf)cancelAnimationFrame(raf);raf=requestAnimationFrame(onScroll);},{passive:true});wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,grid);grid.style.display='none';
+ var mid=Math.floor(items.length/2);feature(mid,false);setTimeout(function(){var _t=thumbs[mid];if(_t){var _sr=strip.getBoundingClientRect();var _tr=_t.getBoundingClientRect();strip.scrollLeft+= (_tr.left+_tr.width/2)-(_sr.left+_sr.width/2);}},80);
+ return true;
+}
+var n=0;var iv=setInterval(function(){n++;if(build()||n>40)clearInterval(iv);},120);
+window.addEventListener('load',build);
+})();</script></body>
 </html>
