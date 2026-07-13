@@ -253,6 +253,15 @@
 .scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:scrollDot 1.8s ease-in-out infinite}
 @keyframes scrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}
 
+
+/* premium lodge search */
+.gl-search{max-width:1200px;margin:0 auto 20px;position:relative}
+.gl-search input{width:100%;box-sizing:border-box;padding:17px 24px 17px 54px;border:1px solid rgba(44,40,36,.14);border-radius:44px;background:#fff;font-family:var(--font-body,sans-serif);font-size:1rem;color:var(--text-main,#3c3530);box-shadow:0 10px 30px rgba(44,40,36,.08);outline:none;transition:.25s}
+.gl-search input:focus{border-color:var(--gold,#a48256);box-shadow:0 12px 34px rgba(164,130,86,.18)}
+.gl-search input::placeholder{color:#a49c92;letter-spacing:.3px}
+.gl-search::before{content:'';position:absolute;left:24px;top:50%;width:15px;height:15px;border:2px solid var(--gold,#a48256);border-radius:50%;transform:translateY(-60%);opacity:.75}
+.gl-search::after{content:'';position:absolute;left:37px;top:50%;width:9px;height:2px;background:var(--gold,#a48256);transform:translateY(6px) rotate(45deg);transform-origin:left;opacity:.75;border-radius:2px}
+
 </style>
 <style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
 <body>
@@ -269,7 +278,7 @@
         <p class="hero-sub">STO 20 Rates &middot; Season 2026–2028</p>
     </div>
 
-    <div class="lodge-grid" id="lodge-grid">
+    <div class="gl-search"><input type="search" placeholder="Search lodges&hellip;" oninput="filterGL(this.value)" aria-label="Search lodges"></div><div class="lodge-grid" id="lodge-grid">
         <!-- Cards injected by JS -->
     </div>
 </div>
