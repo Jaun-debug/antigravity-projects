@@ -7392,18 +7392,20 @@ wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,
 </div>
 <script>
 (function(){
-  function wire(){
-    var ag=document.getElementById('agent-header-btn');
-    var sp=document.getElementById('nav-list-property');
-    if(ag){ag.textContent='Sign In';ag.removeAttribute('onclick');ag.onclick=function(e){e.preventDefault();hpOpenRole('hp-signin');};}
-    if(sp){sp.textContent='Sign Up';sp.removeAttribute('onclick');sp.onclick=function(e){e.preventDefault();hpOpenRole('hp-signup');};}
-    return !!(ag&&sp);
-  }
   window.hpOpenRole=function(id){var m=document.getElementById(id);if(m)m.classList.add('open');};
   window.hpCloseRole=function(){document.querySelectorAll('.hp-role-ov').forEach(function(m){m.classList.remove('open');});};
   window.hpPickIn=function(role){hpCloseRole();if(role==='agent'){if(window.openLogin){openLogin('Agent Portal');}else{location.href='/#agent';}}else{location.href='/supplier-portal/';}};
   window.hpPickUp=function(role){hpCloseRole();location.href='/signup/?role='+role;};
-  if(!wire()){var n=0,iv=setInterval(function(){if(wire()||++n>30)clearInterval(iv);},200);}
+  function relabel(){
+    var ag=document.getElementById('agent-header-btn');
+    if(ag){ if(/agent sign in/i.test(ag.textContent))ag.textContent='Sign In'; ag.onclick=function(e){e.preventDefault();e.stopPropagation();hpOpenRole('hp-signin');}; }
+    var sp=document.getElementById('nav-list-property');
+    if(sp){ if(/supplier portal|list your/i.test(sp.textContent))sp.textContent='Sign Up'; sp.onclick=function(e){e.preventDefault();e.stopPropagation();hpOpenRole('hp-signup');}; }
+  }
+  relabel();
+  try{var mo=new MutationObserver(relabel);mo.observe(document.body,{childList:true,subtree:true,characterData:true});}catch(e){}
+  var n=0,iv=setInterval(function(){relabel();if(++n>40)clearInterval(iv);},250);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',relabel);
 })();
 </script>
 
