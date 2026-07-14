@@ -41,10 +41,11 @@ window.agentBtn=function(){
 
 window.scOpenRole=function(id){var m=document.getElementById(id);if(m)m.classList.add("open");};
 window.scCloseRole=function(){["role-signin","role-signup"].forEach(function(id){var m=document.getElementById(id);if(m)m.classList.remove("open");});};
-window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");location.reload();}else{scOpenRole("role-signin");}};
-window.scSignUp=function(){scOpenRole("role-signup");};
+window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");location.reload();}else{if(window.openAuthWizard){openAuthWizard("signin");}else{scOpenRole("role-signin");}}};
+window.scSignUp=function(){if(window.openAuthWizard){openAuthWizard("signup");}else{scOpenRole("role-signup");}};
 window.scPick=function(role){scCloseRole();if(role==="agent"){openLoginModal();}else{location.href="/supplier-portal/";}};
 window.scPickUp=function(role){scCloseRole();location.href="/signup/?role="+role;};
+(function(){var w=document.createElement("script");w.src="/assets/auth-wizard.js";w.defer=true;(document.head||document.documentElement).appendChild(w);})();
 function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
 var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":"none";
