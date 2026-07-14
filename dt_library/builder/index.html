@@ -614,6 +614,17 @@ function start(){renderNav();renderPanel();autoDistances();}
 @media(max-width:900px){.layout{padding-right:0!important}#nr-home{position:fixed;top:auto;bottom:78px;width:auto}.top-actions{position:static!important;width:auto!important;flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}.top-actions>*{width:auto!important;border-radius:999px!important}}
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
+<script>
+(function(){
+function ord(){var ta=document.querySelector('.top-actions');if(!ta)return;var k=[].slice.call(ta.children);if(k.length<5)return;function f(re){for(var i=0;i<k.length;i++){if(re.test(k[i].textContent.trim()))return k[i];}return null;}
+var seq=[f(/view itinerary/i),f(/^save quote/i),f(/save\s*&\s*exit/i),f(/saved quote/i),f(/print/i)];
+for(var j=0;j<seq.length;j++){if(!seq[j])return;}
+if(/view itinerary/i.test(k[0].textContent))return; // already ordered
+for(var m=0;m<seq.length;m++){ta.appendChild(seq[m]);}}
+var t=setInterval(ord,300);setTimeout(function(){clearInterval(t);},9000);
+if(document.readyState!=='loading')ord();else document.addEventListener('DOMContentLoaded',ord);
+})();
+</script>
 
 </body>
 </html>
