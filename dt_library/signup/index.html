@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — Namibia Rates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--gold:#a48256;--green:#87a996;--ink:#3c3530;--muted:#7d756e;--bg:#eae9e6;--sand:#f2ede4}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Jost',sans-serif}
+  .signup-wrap{min-height:calc(100vh - 140px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+  .signup-card{background:#fff;width:100%;max-width:460px;border-radius:14px;padding:40px 38px;box-shadow:0 25px 60px rgba(0,0,0,.08);border:1px solid rgba(164,130,86,.12)}
+  .signup-card h1{font-family:'Cinzel',serif;font-weight:500;color:var(--gold);font-size:1.7rem;margin:0 0 4px;text-transform:uppercase;letter-spacing:2px}
+  .signup-card .sub{color:var(--muted);font-size:.9rem;margin:0 0 24px}
+  .role-toggle{display:flex;gap:0;background:var(--sand);border-radius:10px;padding:4px;margin-bottom:26px}
+  .role-toggle button{flex:1;border:none;background:none;padding:11px;border-radius:8px;cursor:pointer;font-family:'Jost',sans-serif;font-size:.82rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);transition:.2s}
+  .role-toggle button.active{background:#fff;color:var(--gold);box-shadow:0 2px 8px rgba(0,0,0,.06)}
+  form label{display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:0 0 6px}
+  form .field{margin-bottom:16px}
+  form input,form select{width:100%;padding:12px 14px;border:1px solid rgba(0,0,0,.14);border-radius:8px;font-family:'Jost',sans-serif;font-size:.95rem;outline:none;transition:.2s}
+  form input:focus,form select:focus{border-color:var(--gold)}
+  .submit-btn{width:100%;margin-top:8px;background:var(--green);color:#fff;border:none;padding:14px;border-radius:8px;font-family:'Cinzel',serif;text-transform:uppercase;letter-spacing:1.5px;font-size:.85rem;cursor:pointer;transition:.25s}
+  .submit-btn:hover{background:var(--gold)}
+  .signin-link{text-align:center;margin:20px 0 0;font-size:.85rem;color:var(--muted)}
+  .signin-link a{color:var(--gold);cursor:pointer;text-decoration:none}
+  .done{display:none;text-align:center;padding:10px 0}
+  .done.show{display:block}
+  .done .tick{width:56px;height:56px;border-radius:50%;background:var(--green);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin:0 auto 16px}
+  .done h2{font-family:'Cinzel',serif;color:var(--gold);font-weight:500}
+</style>
+</head>
+<body>
+  <main class="signup-wrap">
+    <div class="signup-card">
+      <div id="form-view">
+        <h1>Sign Up</h1>
+        <p class="sub">Create your trade account &mdash; it only takes a minute.</p>
+        <div class="role-toggle">
+          <button type="button" data-role="agent" class="active" onclick="setRole('agent')">Agent</button>
+          <button type="button" data-role="supplier" onclick="setRole('supplier')">Supplier</button>
+        </div>
+        <form id="signup-form" onsubmit="return doSignup(event)">
+          <div class="field"><label>Full name</label><input name="name" required></div>
+          <div class="field"><label>Email address</label><input name="email" type="email" required></div>
+          <div class="field"><label id="org-label">Company name</label><input name="org" required></div>
+          <div class="field" id="type-field" style="display:none"><label>Property type</label><select name="ptype"><option>Lodge</option><option>Tented Camp</option><option>Guesthouse</option><option>Hotel</option><option>Campsite</option><option>Collection / Group</option><option>Other</option></select></div>
+          <div class="field"><label>Phone</label><input name="phone"></div>
+          <div class="field"><label>Password</label><input name="password" type="password" required></div>
+          <button class="submit-btn" type="submit">Create account</button>
+        </form>
+        <p class="signin-link">Already registered? <a onclick="if(window.scSignIn)scSignIn()">Sign In</a></p>
+      </div>
+      <div class="done" id="done-view">
+        <div class="tick">&#10003;</div>
+        <h2>Account created</h2>
+        <p class="sub" id="done-msg"></p>
+        <button class="submit-btn" onclick="location.href='/'">Continue &rarr;</button>
+      </div>
+    </div>
+  </main>
+  <script src="/assets/site-chrome.js"></script>
+  <script>
+    var role='agent';
+    function setRole(r){
+      role=r;
+      document.querySelectorAll('.role-toggle button').forEach(function(b){b.classList.toggle('active',b.dataset.role===r);});
+      document.getElementById('org-label').textContent = r==='supplier' ? 'Property / hotel name' : 'Agency / company name';
+      document.getElementById('type-field').style.display = r==='supplier' ? 'block' : 'none';
+    }
+    (function(){var p=new URLSearchParams(location.search).get('role');if(p==='supplier'||p==='agent')setRole(p);})();
+    function doSignup(e){
+      e.preventDefault();
+      var f=e.target, name=f.name.value.trim();
+      document.getElementById('form-view').style.display='none';
+      var dv=document.getElementById('done-view'); dv.classList.add('show');
+      document.getElementById('done-msg').textContent = (role==='supplier'
+        ? 'Welcome, '+name+'. Your supplier account is ready — sign in to load your rates.'
+        : 'Welcome, '+name+'. Your agent account is ready — sign in to view your contracted rates.');
+      return false;
+    }
+  </script>
+</body>
+</html>
