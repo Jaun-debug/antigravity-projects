@@ -600,8 +600,10 @@ function start(){renderNav();renderPanel();autoDistances();}
   </div>
 </div>
 <style>
-#nr-home{position:fixed;top:92px;right:0;z-index:9998;background:rgba(184,149,106,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.28);border-right:none;color:#fff;padding:9px 20px;border-radius:30px 0 0 30px;font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-size:11.2px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:background .2s}
+#nr-home{position:fixed;top:46px;right:0;z-index:9998;background:rgba(184,149,106,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.28);border-right:none;color:#fff;padding:9px 20px;border-radius:30px 0 0 30px;font-family:'Jost',sans-serif;text-transform:uppercase;letter-spacing:1.5px;font-size:11.2px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 22px rgba(0,0,0,.18);transition:background .2s}
 #nr-home:hover{background:rgba(184,149,106,.78)}
+.top-actions{margin-right:132px!important}
+@media(max-width:900px){.top-actions{margin-right:0!important}#nr-home{top:auto;bottom:78px}}
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
 
