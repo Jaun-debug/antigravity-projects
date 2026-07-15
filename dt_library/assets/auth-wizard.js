@@ -111,7 +111,7 @@
 
   function render(){
     backBtn.style.display=S.hist.length>1?'block':'none';
-    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep};
+    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,photos:photosStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep};
     (m[S.step]||roleStep)();
   }
 
@@ -147,8 +147,8 @@
   }
 
   function supMenuStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Supplier Portal</div><h2 class="aw-h">What would you like to do?</h2><p class="aw-sub">Choose how you want to load your rates.</p><div class="aw-opts"><button class="aw-opt" data-g="rack"><strong>Load Rack Rates</strong><span>Set your standard published rates &amp; upload property photos</span></button><button class="aw-opt" data-g="sto"><strong>Upload STO Rates</strong><span>Net rate tiers &amp; choose which agents qualify for each</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var g=b.getAttribute('data-g');if(g==='rack'){S.pendingForm='rack';go('season');}else{go('stochoice');}};});
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Supplier Portal</div><h2 class="aw-h">What would you like to do?</h2><p class="aw-sub">Choose how you want to load your rates.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-g="rack"><strong>Load Rack Rates</strong><span>Set your standard published rates</span></button><button class="aw-opt" data-g="sto"><strong>Upload STO Rates</strong><span>Net rate tiers &amp; choose which agents qualify for each</span></button><button class="aw-opt" data-g="photos"><strong>Upload Photos</strong><span>Add photos of your property</span></button></div></div>';
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var g=b.getAttribute('data-g');if(g==='rack'){go('rack');}else if(g==='photos'){go('photos');}else{go('stochoice');}};});
   }
 
   function formStep(){
@@ -182,24 +182,27 @@
     drop.ondrop=function(e){e.preventDefault();drop.style.borderColor='';add(e.dataTransfer.files);};
   }
   function rackStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your rates manually below, or upload a screenshot / file of your rate sheet.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your rates manually below, or upload a screenshot / file of your rate sheet.</p>'+
       '<div class="aw-panel"><h4>Rates</h4><div id="rk-rows"></div><button class="aw-btn ghost" id="rk-add">+ Add rate</button></div>'+
       '<div class="aw-panel"><h4>Or upload a rate sheet</h4><div class="aw-drop" id="rk-sheet-drop">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="rk-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="rk-sheet-thumbs"></div></div>'+
-      '<div class="aw-panel"><h4>Property photos</h4><div class="aw-drop" id="rk-drop">Click to upload or drag photos here</div><input type="file" id="rk-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="rk-thumbs"></div></div>'+
       '<button class="aw-btn" id="rk-save">Save rack rates</button><div class="aw-err" id="rk-msg" style="color:#bcd0a0"></div></div>';
     var rows=stage.querySelector('#rk-rows');
     function addRow(){var d=document.createElement('div');d.className='rk-row';d.innerHTML='<input class="aw-input" placeholder="Room / unit type (e.g. Standard Double)"><input class="aw-input" placeholder="Rate / night"><button class="rk-del">&times;</button>';d.querySelector('.rk-del').onclick=function(){d.remove();};rows.appendChild(d);}
     addRow();addRow();
     stage.querySelector('#rk-add').onclick=addRow;
-    var file=stage.querySelector('#rk-file'),drop=stage.querySelector('#rk-drop'),thumbs=stage.querySelector('#rk-thumbs');
-    function addPhotos(list){[].forEach.call(list,function(f){if(!/^image\//.test(f.type))return;var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);});}
-    drop.onclick=function(){file.click();};
-    file.onchange=function(){addPhotos(file.files);};
-    drop.ondragover=function(e){e.preventDefault();drop.style.borderColor='#a48256';};
-    drop.ondragleave=function(){drop.style.borderColor='';};
-    drop.ondrop=function(e){e.preventDefault();drop.style.borderColor='';addPhotos(e.dataTransfer.files);};
     wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
     stage.querySelector('#rk-save').onclick=function(){stage.querySelector('#rk-msg').textContent='✓ Rack rates saved. Our team will review and publish them.';};
+  }
+  function photosStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Property</div><h2 class="aw-h">Upload property photos</h2><p class="aw-sub">Add photos of your rooms, facilities and surroundings.</p><div class="aw-panel"><h4>Photos</h4><div class="aw-drop" id="ph-drop">Click to upload or drag photos here</div><input type="file" id="ph-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="ph-thumbs"></div></div><button class="aw-btn" id="ph-save">Save photos</button><div class="aw-err" id="ph-msg" style="color:#bcd0a0"></div></div>';
+    var file=stage.querySelector('#ph-file'),drop=stage.querySelector('#ph-drop'),thumbs=stage.querySelector('#ph-thumbs');
+    function add(list){[].forEach.call(list,function(f){if(!/^image\//.test(f.type))return;var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);});}
+    drop.onclick=function(){file.click();};
+    file.onchange=function(){add(file.files);};
+    drop.ondragover=function(e){e.preventDefault();drop.classList.add('over');};
+    drop.ondragleave=function(){drop.classList.remove('over');};
+    drop.ondrop=function(e){e.preventDefault();drop.classList.remove('over');add(e.dataTransfer.files);};
+    stage.querySelector('#ph-save').onclick=function(){stage.querySelector('#ph-msg').textContent='✓ Photos uploaded. Our team will review them.';};
   }
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
