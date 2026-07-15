@@ -52,6 +52,18 @@
   #aw-ov .tier-drop{padding:12px;font-size:.76rem;margin-top:12px}
   #aw-ov .sto-create{border:1.5px dashed rgba(164,130,86,.55);border-radius:10px;padding:18px;text-align:center;cursor:pointer;color:#d9b98a;font-family:'Cinzel',serif;letter-spacing:1px;font-size:.9rem;transition:.2s}
   #aw-ov .sto-create:hover{border-color:#a48256;background:rgba(164,130,86,.12)}
+  #aw-ov #sto-tiers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  #aw-ov #sto-tiers .sto-tier{aspect-ratio:1;display:flex;flex-direction:column;gap:8px;margin:0;padding:16px}
+  #aw-ov #sto-tiers .sto-tier .aw-input{margin:0}
+  #aw-ov #sto-tiers .tier-drop{flex:1;display:flex;align-items:center;justify-content:center;margin-top:0}
+  #aw-ov #sto-tiers .sto-create{aspect-ratio:1;display:flex;align-items:center;justify-content:center;margin:0}
+  @media(max-width:560px){#aw-ov #sto-tiers{grid-template-columns:1fr}#aw-ov #sto-tiers .sto-tier,#aw-ov #sto-tiers .sto-create{aspect-ratio:auto}}
+  #aw-ov #sto-cats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  #aw-ov #sto-cats .sto-tier{aspect-ratio:1;display:flex;flex-direction:column;gap:8px;margin:0;padding:16px}
+  #aw-ov #sto-cats .sto-tier .aw-input{margin:0}
+  #aw-ov #sto-cats .sto-zone{flex:1;margin-top:0}
+  #aw-ov #sto-cats .sto-create{aspect-ratio:1;display:flex;align-items:center;justify-content:center;margin:0}
+  @media(max-width:560px){#aw-ov #sto-cats{grid-template-columns:1fr}#aw-ov #sto-cats .sto-tier,#aw-ov #sto-cats .sto-create{aspect-ratio:auto}}
   #aw-ov .sto-tier{border:1px solid rgba(164,130,86,.3);border-radius:10px;padding:16px;margin-bottom:12px;background:rgba(28,24,19,.25)}
   #aw-ov .sto-tier-top{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin-bottom:12px}
   #aw-ov .sto-tier-top .aw-input{margin:0}
@@ -186,13 +198,14 @@
 
   function stoRatesStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Enter a net rate for each tier &mdash; and drag in, pick a file, or take a photo of the rate for each. Add your own tiers too.</p>'+
-      '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div><div class="sto-create" id="sto-create">+ Create new tier</div></div>'+
+      '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div></div>'+
       '<button class="aw-btn" id="sto-save">Save STO rates</button><div class="aw-err" id="sto-msg" style="color:#bcd0a0"></div></div>';
     var tiers=stage.querySelector('#sto-tiers');
+    var createBlk=document.createElement('div');createBlk.className='sto-create';createBlk.innerHTML='+ Create new tier';tiers.appendChild(createBlk);
     function wireDrop(drop,file,thumbs){function add(list){[].forEach.call(list,function(f){if(/^image\//.test(f.type)){var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);}else{var c=document.createElement('span');c.className='chip';c.textContent='📄 '+f.name.slice(0,16);thumbs.appendChild(c);}});}drop.onclick=function(){file.click();};file.onchange=function(){add(file.files);};drop.ondragover=function(e){e.preventDefault();drop.classList.add('over');};drop.ondragleave=function(){drop.classList.remove('over');};drop.ondrop=function(e){e.preventDefault();drop.classList.remove('over');add(e.dataTransfer.files);};}
-    function addTier(label,rate){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<div class="sto-tier-top"><input class="aw-input" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"></div><div class="aw-drop tier-drop">Drag a rate file, click to select, or take a photo</div><input type="file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos"></div>';var drop=t.querySelector('.tier-drop'),file=t.querySelector('input[type=file]'),thumbs=t.querySelector('.aw-photos');wireDrop(drop,file,thumbs);tiers.appendChild(t);}
+    function addTier(label,rate){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"><div class="aw-drop tier-drop">Drag, pick a file, or take a photo</div><input type="file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos"></div>';var drop=t.querySelector('.tier-drop'),file=t.querySelector('input[type=file]'),thumbs=t.querySelector('.aw-photos');wireDrop(drop,file,thumbs);tiers.insertBefore(t,createBlk);}
     addTier('15% commission','');addTier('20% commission','');addTier('30% commission','');
-    stage.querySelector('#sto-create').onclick=function(){addTier('New tier','');};
+    createBlk.onclick=function(){addTier('New tier','');};
     stage.querySelector('#sto-save').onclick=function(){stage.querySelector('#sto-msg').textContent='✓ STO rates saved. Our team will review and publish them.';};
   }
 
@@ -216,16 +229,16 @@
   function stoAgentsStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; Agents</div><h2 class="aw-h">Assign agents to rate categories</h2><p class="aw-sub">Drag the agents who qualify into each rate category.</p>'+
       '<div class="pool" id="sto-pool"></div>'+
-      '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div><div class="sto-create" id="sto-catadd">+ Create new category</div></div>'+
+      '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div></div>'+
       '<button class="aw-btn" id="sto-asave">Save agent access</button><div class="aw-err" id="sto-amsg" style="color:#bcd0a0"></div></div>';
     var pool=stage.querySelector('#sto-pool');
     (AGENTS.concat(S.customAgents||[])).forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
-    var cats=stage.querySelector('#sto-cats');
+    var cats=stage.querySelector('#sto-cats');var catCreate=document.createElement('div');catCreate.className='sto-create';catCreate.innerHTML='+ Create new category';cats.appendChild(catCreate);
     function makeZoneHint(z){if(!z.querySelector('.chip')&&!z.querySelector('.zhint')){var h=document.createElement('span');h.className='zhint';h.textContent='Drag qualifying agents here…';z.appendChild(h);}}
     function addAgent(z,name){var hint=z.querySelector('.zhint');if(hint)hint.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();makeZoneHint(z);};z.appendChild(c);}
-    function addCat(label){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<div class="sto-tier-top" style="grid-template-columns:1fr"><input class="aw-input" value="'+esc(label)+'"></div><div class="sto-zone"></div>';var z=t.querySelector('.sto-zone');makeZoneHint(z);z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});z.addEventListener('dragleave',function(){z.classList.remove('over');});z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(z,name);});cats.appendChild(t);}
+    function addCat(label){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input" value="'+esc(label)+'"><div class="sto-zone"></div>';var z=t.querySelector('.sto-zone');makeZoneHint(z);z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});z.addEventListener('dragleave',function(){z.classList.remove('over');});z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(z,name);});cats.insertBefore(t,catCreate);}
     addCat('15% commission');addCat('20% commission');addCat('30% commission');
-    stage.querySelector('#sto-catadd').onclick=function(){addCat('New category');};
+    catCreate.onclick=function(){addCat('New category');};
     stage.querySelector('#sto-asave').onclick=function(){stage.querySelector('#sto-amsg').textContent='✓ Agent access saved for each rate category.';};
   }
 })();
