@@ -32,6 +32,7 @@
   #aw-ov .aw-input::placeholder{color:rgba(255,255,255,.45)}
   #aw-ov .aw-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:440px}
   #aw-ov .aw-row .aw-field{max-width:none}
+  #aw-ov .aw-panel .aw-field,#aw-ov .aw-panel .aw-row{max-width:none}
   #aw-ov .aw-err{color:#e9a;font-size:.82rem;min-height:1em;margin:2px 0 14px;text-align:center}
   #aw-ov .aw-btn{width:280px;max-width:100%;padding:16px;background:#a48256;border:none;border-radius:8px;color:#fff;font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;cursor:pointer;transition:.2s;margin-top:10px}
   #aw-ov .aw-btn:hover{background:#8f6f45}
@@ -272,7 +273,18 @@
   }
   function stoAgentDetailStep(){
     var d=agentDetail(S.currentAgent||'Agent');
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+esc(S.currentTier||'Agent')+'</div><h2 class="aw-h">'+esc(d.company)+'</h2><div class="aw-panel" style="text-align:left">'+mgRow('Contact person',d.contact)+mgRow('Email',d.email)+mgRow('Phone',d.phone)+mgRow('Country',d.country)+mgRow('Status',d.status)+mgRow('Partner since',d.since)+mgRow('Bookings (12 mo)',d.bookings)+'</div><button class="aw-btn" id="mg-back">Back to tier</button></div>';
-    stage.querySelector('#mg-back').onclick=function(){back();};
+    function f(label,val,id){return '<div class="aw-field"><label>'+label+'</label><input class="aw-input" id="'+id+'" value="'+esc(String(val))+'"></div>';}
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+esc(S.currentTier||'Agent')+'</div><h2 class="aw-h">'+esc(d.company)+'</h2><p class="aw-sub">Fill in or edit this agent\'s details.</p>'+
+      '<div class="aw-panel">'+
+        f('Agency / company name',d.company,'ad-company')+
+        '<div class="aw-row">'+f('Contact person',d.contact,'ad-contact')+f('Email',d.email,'ad-email')+'</div>'+
+        '<div class="aw-row">'+f('Phone',d.phone,'ad-phone')+f('Country',d.country,'ad-country')+'</div>'+
+        '<div class="aw-row">'+f('Status',d.status,'ad-status')+f('Partner since',d.since,'ad-since')+'</div>'+
+        '<div class="aw-row">'+f('Bookings (12 mo)',d.bookings,'ad-bookings')+f('Rate tier',(S.currentTier||''),'ad-tier')+'</div>'+
+        f('Address','','ad-address')+
+        '<div class="aw-field"><label>Notes</label><input class="aw-input" id="ad-notes" placeholder="Internal notes…"></div>'+
+      '</div>'+
+      '<button class="aw-btn" id="ad-save">Save agent details</button><div class="aw-err" id="ad-msg" style="color:#bcd0a0"></div></div>';
+    stage.querySelector('#ad-save').onclick=function(){stage.querySelector('#ad-msg').textContent='✓ Agent details saved.';};
   }
 })();
