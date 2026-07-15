@@ -68,9 +68,9 @@
   #aw-ov #sto-cats .sto-create{aspect-ratio:1;display:flex;align-items:center;justify-content:center;margin:0}
   @media(max-width:560px){#aw-ov #sto-cats{grid-template-columns:1fr}#aw-ov #sto-cats .sto-tier,#aw-ov #sto-cats .sto-create{aspect-ratio:auto}}
   #aw-ov #mg-tiers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-  #aw-ov .mg-tile{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin:0;transition:.2s}
+  #aw-ov .mg-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;margin:0;padding:26px 18px;transition:.2s}
   #aw-ov .mg-tile:hover{border-color:#a48256;background:rgba(164,130,86,.18)}
-  #aw-ov .mg-pct{font-family:'Cinzel',serif;font-size:1.9rem;color:#fff}
+  #aw-ov .mg-pct{font-family:'Cinzel',serif;font-size:1.55rem;color:#fff}
   #aw-ov .mg-count{font-size:.8rem;color:rgba(255,255,255,.6)}
   #aw-ov .mg-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(164,130,86,.2)}
   #aw-ov .mg-row:last-child{border-bottom:none}
