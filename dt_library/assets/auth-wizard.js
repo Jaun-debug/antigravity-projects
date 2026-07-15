@@ -83,7 +83,7 @@
 
   function render(){
     backBtn.style.display=S.hist.length>1?'block':'none';
-    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,sto:stoStep};
+    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stoagents:stoAgentsStep};
     (m[S.step]||roleStep)();
   }
 
@@ -139,7 +139,7 @@
   function seasonStep(){
     var isRack=S.pendingForm==='rack';
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+(isRack?'Rack Rates':'STO Rates')+'</div><h2 class="aw-h">Which season?</h2><p class="aw-sub">Choose the season you want to load rates for &mdash; you can come back and add the other.</p><div class="aw-opts"><button class="aw-opt" data-s="high"><strong>High Season</strong><span>Peak / premium-season rates</span></button><button class="aw-opt" data-s="low"><strong>Low Season</strong><span>Off-peak / value rates</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.season=b.getAttribute('data-s');go(S.pendingForm);};});
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.season=b.getAttribute('data-s');go(S.pendingForm==='sto'?'stochoice':'rack');};});
   }
 
   /* ---------- RACK RATES ---------- */
@@ -175,29 +175,54 @@
   }
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
-  function stoStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Set your net rate tiers and drag qualifying agents into each &mdash; or upload a screenshot / file of your rate sheet.</p>'+
-      '<div class="pool" id="sto-pool"></div>'+
+  function stoChoiceStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stoassign"><strong>Assign Agents</strong><span>Add &amp; manage your list of trade agents</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button></div></div>';
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){go(b.getAttribute('data-x'));};});
+  }
+
+  function stoRatesStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Set your net rate tiers, or upload a screenshot / file of your rate sheet.</p>'+
       '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div><button class="aw-btn ghost" id="sto-add">+ Add another segment</button></div>'+
       '<div class="aw-panel"><h4>Or upload a rate sheet</h4><div class="aw-drop" id="sto-sheet-drop">Take a screenshot or select a file (image / PDF) of your STO rate sheet</div><input type="file" id="sto-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="sto-sheet-thumbs"></div></div>'+
       '<button class="aw-btn" id="sto-save">Save STO rates</button><div class="aw-err" id="sto-msg" style="color:#bcd0a0"></div></div>';
-    var pool=stage.querySelector('#sto-pool');
-    AGENTS.forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
     var tiers=stage.querySelector('#sto-tiers');
-    function makeZoneHint(z){if(!z.querySelector('.chip')&&!z.querySelector('.zhint')){var h=document.createElement('span');h.className='zhint';h.textContent='Drag qualifying agents here…';z.appendChild(h);}}
-    function addAgent(z,name){var hint=z.querySelector('.zhint');if(hint)hint.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();makeZoneHint(z);};z.appendChild(c);}
-    function addTier(label,rate){
-      var t=document.createElement('div');t.className='sto-tier';
-      t.innerHTML='<div class="sto-tier-top"><input class="aw-input tlabel" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"></div><div class="sto-zone"></div>';
-      var z=t.querySelector('.sto-zone');makeZoneHint(z);
-      z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});
-      z.addEventListener('dragleave',function(){z.classList.remove('over');});
-      z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(z,name);});
-      tiers.appendChild(t);
-    }
+    function addTier(label,rate){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<div class="sto-tier-top"><input class="aw-input" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"></div>';tiers.appendChild(t);}
     addTier('15% commission','');addTier('20% commission','');addTier('30% commission','');
     stage.querySelector('#sto-add').onclick=function(){addTier('New segment','');};
     wireSheet('sto-sheet-drop','sto-sheet-file','sto-sheet-thumbs');
-    stage.querySelector('#sto-save').onclick=function(){stage.querySelector('#sto-msg').textContent='✓ STO rates & agent access saved.';};
+    stage.querySelector('#sto-save').onclick=function(){stage.querySelector('#sto-msg').textContent='✓ STO rates saved. Our team will review and publish them.';};
+  }
+
+  function stoAssignStep(){
+    if(!S.customAgents)S.customAgents=[];
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Assign your agents</h2><p class="aw-sub">Add the trade agents you work with, then allocate rates to them.</p>'+
+      '<div class="aw-row" style="max-width:520px"><div class="aw-field"><label>Agent / agency name</label><input class="aw-input" id="ag-name"></div><div class="aw-field"><label>Email (optional)</label><input class="aw-input" id="ag-email"></div></div>'+
+      '<button class="aw-btn ghost" id="ag-add">+ Add agent</button>'+
+      '<div class="aw-panel" style="margin-top:18px"><h4>Your agents</h4><div class="pool" id="ag-list" style="margin:0"></div></div>'+
+      '<button class="aw-btn" id="ag-save">Save agents</button><div class="aw-err" id="ag-msg" style="color:#bcd0a0"></div></div>';
+    var list=stage.querySelector('#ag-list');
+    function chip(name,removable){var c=document.createElement('span');c.className='chip';c.innerHTML=esc(name)+(removable?' <span class="x">&times;</span>':'');if(removable){c.querySelector('.x').onclick=function(){var i=S.customAgents.indexOf(name);if(i>-1)S.customAgents.splice(i,1);c.remove();};}list.appendChild(c);}
+    AGENTS.forEach(function(a){chip(a,false);});
+    S.customAgents.forEach(function(a){chip(a,true);});
+    function addNew(){var n=stage.querySelector('#ag-name').value.trim();if(!n)return;if(S.customAgents.indexOf(n)<0&&AGENTS.indexOf(n)<0){S.customAgents.push(n);chip(n,true);}stage.querySelector('#ag-name').value='';stage.querySelector('#ag-email').value='';}
+    stage.querySelector('#ag-add').onclick=addNew;
+    stage.querySelector('#ag-name').addEventListener('keydown',function(e){if(e.key==='Enter')addNew();});
+    stage.querySelector('#ag-save').onclick=function(){stage.querySelector('#ag-msg').textContent='✓ Agents saved. Now allocate rates to them.';};
+  }
+
+  function stoAgentsStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Assign agents to rate categories</h2><p class="aw-sub">Drag the agents who qualify into each rate category.</p>'+
+      '<div class="pool" id="sto-pool"></div>'+
+      '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div><button class="aw-btn ghost" id="sto-catadd">+ Add category</button></div>'+
+      '<button class="aw-btn" id="sto-asave">Save agent access</button><div class="aw-err" id="sto-amsg" style="color:#bcd0a0"></div></div>';
+    var pool=stage.querySelector('#sto-pool');
+    (AGENTS.concat(S.customAgents||[])).forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
+    var cats=stage.querySelector('#sto-cats');
+    function makeZoneHint(z){if(!z.querySelector('.chip')&&!z.querySelector('.zhint')){var h=document.createElement('span');h.className='zhint';h.textContent='Drag qualifying agents here…';z.appendChild(h);}}
+    function addAgent(z,name){var hint=z.querySelector('.zhint');if(hint)hint.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();makeZoneHint(z);};z.appendChild(c);}
+    function addCat(label){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<div class="sto-tier-top" style="grid-template-columns:1fr"><input class="aw-input" value="'+esc(label)+'"></div><div class="sto-zone"></div>';var z=t.querySelector('.sto-zone');makeZoneHint(z);z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});z.addEventListener('dragleave',function(){z.classList.remove('over');});z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(z,name);});cats.appendChild(t);}
+    addCat('15% commission');addCat('20% commission');addCat('30% commission');
+    stage.querySelector('#sto-catadd').onclick=function(){addCat('New category');};
+    stage.querySelector('#sto-asave').onclick=function(){stage.querySelector('#sto-amsg').textContent='✓ Agent access saved for each rate category.';};
   }
 })();
