@@ -83,7 +83,7 @@
 
   function render(){
     backBtn.style.display=S.hist.length>1?'block':'none';
-    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,rack:rackStep,sto:stoStep};
+    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,sto:stoStep};
     (m[S.step]||roleStep)();
   }
 
@@ -120,7 +120,7 @@
 
   function supMenuStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Supplier Portal</div><h2 class="aw-h">What would you like to do?</h2><p class="aw-sub">Choose how you want to load your rates.</p><div class="aw-opts"><button class="aw-opt" data-g="rack"><strong>Load Rack Rates</strong><span>Set your standard published rates &amp; upload property photos</span></button><button class="aw-opt" data-g="sto"><strong>Upload STO Rates</strong><span>Net rate tiers &amp; choose which agents qualify for each</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){go(b.getAttribute('data-g'));};});
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.pendingForm=b.getAttribute('data-g');go('season');};});
   }
 
   function formStep(){
@@ -135,9 +135,16 @@
     stage.querySelector('#s-go').onclick=function(){S.mode='signin';S.role=null;S.step='role';S.hist=['role'];render();};
   }
 
+  function seasonLabel(){return S.season==='low'?'Low Season':'High Season';}
+  function seasonStep(){
+    var isRack=S.pendingForm==='rack';
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+(isRack?'Rack Rates':'STO Rates')+'</div><h2 class="aw-h">Which season?</h2><p class="aw-sub">Choose the season you want to load rates for &mdash; you can come back and add the other.</p><div class="aw-opts"><button class="aw-opt" data-s="high"><strong>High Season</strong><span>Peak / premium-season rates</span></button><button class="aw-opt" data-s="low"><strong>Low Season</strong><span>Off-peak / value rates</span></button></div></div>';
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.season=b.getAttribute('data-s');go(S.pendingForm);};});
+  }
+
   /* ---------- RACK RATES ---------- */
   function rackStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your standard published rates and upload photos of your property.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your standard published rates and upload photos of your property.</p>'+
       '<div class="aw-panel"><h4>Rates</h4><div id="rk-rows"></div><button class="aw-btn ghost" id="rk-add">+ Add rate</button></div>'+
       '<div class="aw-panel"><h4>Property photos</h4><div class="aw-drop" id="rk-drop">Click to upload or drag photos here</div><input type="file" id="rk-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="rk-thumbs"></div></div>'+
       '<button class="aw-btn" id="rk-save">Save rack rates</button><div class="aw-err" id="rk-msg" style="color:#bcd0a0"></div></div>';
@@ -157,7 +164,7 @@
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
   function stoStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Set your net rate tiers, then drag the agents who qualify for each tier into it.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Set your net rate tiers, then drag the agents who qualify for each tier into it.</p>'+
       '<div class="pool" id="sto-pool"></div>'+
       '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div><button class="aw-btn ghost" id="sto-add">+ Add another segment</button></div>'+
       '<button class="aw-btn" id="sto-save">Save STO rates</button><div class="aw-err" id="sto-msg" style="color:#bcd0a0"></div></div>';
