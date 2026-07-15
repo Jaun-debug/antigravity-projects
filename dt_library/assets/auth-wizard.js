@@ -216,7 +216,7 @@
   function stoAgentsStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; Agents</div><h2 class="aw-h">Assign agents to rate categories</h2><p class="aw-sub">Drag the agents who qualify into each rate category.</p>'+
       '<div class="pool" id="sto-pool"></div>'+
-      '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div><button class="aw-btn ghost" id="sto-catadd">+ Add category</button></div>'+
+      '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div><div class="sto-create" id="sto-catadd">+ Create new category</div></div>'+
       '<button class="aw-btn" id="sto-asave">Save agent access</button><div class="aw-err" id="sto-amsg" style="color:#bcd0a0"></div></div>';
     var pool=stage.querySelector('#sto-pool');
     (AGENTS.concat(S.customAgents||[])).forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
