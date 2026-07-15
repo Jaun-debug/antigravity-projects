@@ -115,7 +115,7 @@
 
   function render(){
     backBtn.style.display=S.hist.length>1?'block':'none';
-    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,uprates:uploadRatesStep,season:seasonStep,rack:rackStep,photos:photosStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep,stoalloctier:stoAllocTierStep,stonews:stoNewsStep};
+    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,uprates:uploadRatesStep,season:seasonStep,rack:rackStep,photos:photosStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep,stoalloctier:stoAllocTierStep,stonews:stoNewsStep,stoflash:stoFlashStep};
     (m[S.step]||roleStep)();
   }
 
@@ -151,8 +151,8 @@
   }
 
   function supMenuStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Supplier Portal</div><h2 class="aw-h">What would you like to do?</h2><p class="aw-sub">Manage your rates, photos and agents.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-g="uprates"><strong>Upload Rates</strong><span>Load your rack or STO rates</span></button><button class="aw-opt" data-g="photos"><strong>Upload Photos</strong><span>Add photos of your property</span></button><button class="aw-opt" data-g="manage"><strong>Manage Agents</strong><span>View &amp; edit your agents by rate tier</span></button><button class="aw-opt" data-g="allocate"><strong>Allocate Rates to Agents</strong><span>Assign agents to each rate</span></button><button class="aw-opt" data-g="news"><strong>Send Newsletter</strong><span>Email an update or offer to your agents</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var g=b.getAttribute('data-g');if(g==='uprates'){go('uprates');}else if(g==='photos'){go('photos');}else if(g==='manage'){go('stomanage');}else if(g==='allocate'){go('stoagents');}else if(g==='news'){go('stonews');}};});
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Supplier Portal</div><h2 class="aw-h">What would you like to do?</h2><p class="aw-sub">Manage your rates, photos and agents.</p><div class="aw-opts" style="grid-template-columns:repeat(3,1fr);max-width:900px"><button class="aw-opt" data-g="uprates"><strong>Upload Rates</strong><span>Load your rack or STO rates</span></button><button class="aw-opt" data-g="photos"><strong>Upload Photos</strong><span>Add photos of your property</span></button><button class="aw-opt" data-g="manage"><strong>Manage Agents</strong><span>View &amp; edit your agents by rate tier</span></button><button class="aw-opt" data-g="allocate"><strong>Allocate Rates to Agents</strong><span>Assign agents to each rate</span></button><button class="aw-opt" data-g="news"><strong>Send Newsletter</strong><span>Email an update or offer to your agents</span></button><button class="aw-opt" data-g="flash"><strong>Post Ratesheet Newsflash</strong><span>Push a rate sheet update to your agents</span></button></div></div>';
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var g=b.getAttribute('data-g');if(g==='uprates'){go('uprates');}else if(g==='photos'){go('photos');}else if(g==='manage'){go('stomanage');}else if(g==='allocate'){go('stoagents');}else if(g==='news'){go('stonews');}else if(g==='flash'){go('stoflash');}};});
   }
   function uploadRatesStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Upload Rates</div><h2 class="aw-h">Which rates are you loading?</h2><p class="aw-sub">Choose the type of rates to upload.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="rack"><strong>Upload Rack Rates</strong><span>Your standard published rates</span></button><button class="aw-opt" data-x="sto"><strong>Upload STO Rates</strong><span>Net rate tiers, per season</span></button></div></div>';
@@ -319,5 +319,18 @@
       '</div>'+
       '<button class="aw-btn" id="nw-send">Send newsletter</button><div class="aw-err" id="nw-msg" style="color:#bcd0a0"></div></div>';
     stage.querySelector('#nw-send').onclick=function(){var subj=stage.querySelector('#nw-subj').value.trim();var m=stage.querySelector('#nw-msg');if(!subj){m.style.color='#e9a';m.textContent='Add a subject before sending.';return;}m.style.color='#bcd0a0';m.textContent='✓ Newsletter sent to '+stage.querySelector('#nw-to').value+'.';};
+  }
+
+  function stoFlashStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Ratesheet Newsflash</div><h2 class="aw-h">Post a ratesheet newsflash</h2><p class="aw-sub">Push an updated rate sheet straight to your agents with a short note.</p>'+
+      '<div class="aw-panel">'+
+        '<div class="aw-field"><label>Send to</label><select class="aw-input" id="fl-to"><option>All agents</option><option>15% commission tier</option><option>20% commission tier</option><option>25% commission tier</option><option>30% commission tier</option></select></div>'+
+        '<div class="aw-field"><label>Headline</label><input class="aw-input" id="fl-subj" placeholder="e.g. Updated 2026/27 rate sheet"></div>'+
+        '<div class="aw-field"><label>Note (optional)</label><textarea class="aw-input aw-textarea" id="fl-body" placeholder="Add a short message…"></textarea></div>'+
+      '</div>'+
+      '<div class="aw-panel"><h4>Attach rate sheet</h4><div class="aw-drop" id="fl-drop">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="fl-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="fl-thumbs"></div></div>'+
+      '<button class="aw-btn" id="fl-send">Post newsflash</button><div class="aw-err" id="fl-msg" style="color:#bcd0a0"></div></div>';
+    wireSheet('fl-drop','fl-file','fl-thumbs');
+    stage.querySelector('#fl-send').onclick=function(){var subj=stage.querySelector('#fl-subj').value.trim();var m=stage.querySelector('#fl-msg');if(!subj){m.style.color='#e9a';m.textContent='Add a headline before posting.';return;}m.style.color='#bcd0a0';m.textContent='✓ Newsflash posted to '+stage.querySelector('#fl-to').value+'.';};
   }
 })();
