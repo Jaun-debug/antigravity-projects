@@ -124,7 +124,7 @@
 
   function supMenuStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Supplier Portal</div><h2 class="aw-h">What would you like to do?</h2><p class="aw-sub">Choose how you want to load your rates.</p><div class="aw-opts"><button class="aw-opt" data-g="rack"><strong>Load Rack Rates</strong><span>Set your standard published rates &amp; upload property photos</span></button><button class="aw-opt" data-g="sto"><strong>Upload STO Rates</strong><span>Net rate tiers &amp; choose which agents qualify for each</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.pendingForm=b.getAttribute('data-g');go('season');};});
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var g=b.getAttribute('data-g');if(g==='rack'){S.pendingForm='rack';go('season');}else{go('stochoice');}};});
   }
 
   function formStep(){
@@ -143,7 +143,7 @@
   function seasonStep(){
     var isRack=S.pendingForm==='rack';
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+(isRack?'Rack Rates':'STO Rates')+'</div><h2 class="aw-h">Which season?</h2><p class="aw-sub">Choose the season you want to load rates for &mdash; you can come back and add the other.</p><div class="aw-opts"><button class="aw-opt" data-s="high"><strong>High Season</strong><span>Peak / premium-season rates</span></button><button class="aw-opt" data-s="low"><strong>Low Season</strong><span>Off-peak / value rates</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.season=b.getAttribute('data-s');go(S.pendingForm==='sto'?'stochoice':'rack');};});
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.season=b.getAttribute('data-s');go(S.pendingForm);};});
   }
 
   /* ---------- RACK RATES ---------- */
@@ -180,8 +180,8 @@
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
   function stoChoiceStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stoassign"><strong>Assign Agents</strong><span>Add &amp; manage your list of trade agents</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){go(b.getAttribute('data-x'));};});
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stoassign"><strong>Assign Agents</strong><span>Add &amp; manage your list of trade agents</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button></div></div>';
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var x=b.getAttribute('data-x');if(x==='storates'){S.pendingForm='storates';go('season');}else{go(x);}};});
   }
 
   function stoRatesStep(){
@@ -198,7 +198,7 @@
 
   function stoAssignStep(){
     if(!S.customAgents)S.customAgents=[];
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Assign your agents</h2><p class="aw-sub">Add the trade agents you work with, then allocate rates to them.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; Agents</div><h2 class="aw-h">Assign your agents</h2><p class="aw-sub">Add the trade agents you work with, then allocate rates to them.</p>'+
       '<div class="aw-row" style="max-width:520px"><div class="aw-field"><label>Agent / agency name</label><input class="aw-input" id="ag-name"></div><div class="aw-field"><label>Email (optional)</label><input class="aw-input" id="ag-email"></div></div>'+
       '<button class="aw-btn ghost" id="ag-add">+ Add agent</button>'+
       '<div class="aw-panel" style="margin-top:18px"><h4>Your agents</h4><div class="pool" id="ag-list" style="margin:0"></div></div>'+
@@ -214,7 +214,7 @@
   }
 
   function stoAgentsStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Assign agents to rate categories</h2><p class="aw-sub">Drag the agents who qualify into each rate category.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; Agents</div><h2 class="aw-h">Assign agents to rate categories</h2><p class="aw-sub">Drag the agents who qualify into each rate category.</p>'+
       '<div class="pool" id="sto-pool"></div>'+
       '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div><button class="aw-btn ghost" id="sto-catadd">+ Add category</button></div>'+
       '<button class="aw-btn" id="sto-asave">Save agent access</button><div class="aw-err" id="sto-amsg" style="color:#bcd0a0"></div></div>';
