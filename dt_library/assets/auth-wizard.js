@@ -143,9 +143,20 @@
   }
 
   /* ---------- RACK RATES ---------- */
+  function wireSheet(dropId,fileId,thumbsId){
+    var file=stage.querySelector('#'+fileId),drop=stage.querySelector('#'+dropId),thumbs=stage.querySelector('#'+thumbsId);
+    if(!file||!drop)return;
+    function add(list){[].forEach.call(list,function(f){if(/^image\//.test(f.type)){var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);}else{var c=document.createElement('span');c.className='chip';c.textContent='\uD83D\uDCC4 '+f.name.slice(0,22);thumbs.appendChild(c);}});}
+    drop.onclick=function(){file.click();};
+    file.onchange=function(){add(file.files);};
+    drop.ondragover=function(e){e.preventDefault();drop.style.borderColor='#a48256';};
+    drop.ondragleave=function(){drop.style.borderColor='';};
+    drop.ondrop=function(e){e.preventDefault();drop.style.borderColor='';add(e.dataTransfer.files);};
+  }
   function rackStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your standard published rates and upload photos of your property.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your rates manually below, or upload a screenshot / file of your rate sheet.</p>'+
       '<div class="aw-panel"><h4>Rates</h4><div id="rk-rows"></div><button class="aw-btn ghost" id="rk-add">+ Add rate</button></div>'+
+      '<div class="aw-panel"><h4>Or upload a rate sheet</h4><div class="aw-drop" id="rk-sheet-drop">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="rk-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="rk-sheet-thumbs"></div></div>'+
       '<div class="aw-panel"><h4>Property photos</h4><div class="aw-drop" id="rk-drop">Click to upload or drag photos here</div><input type="file" id="rk-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="rk-thumbs"></div></div>'+
       '<button class="aw-btn" id="rk-save">Save rack rates</button><div class="aw-err" id="rk-msg" style="color:#bcd0a0"></div></div>';
     var rows=stage.querySelector('#rk-rows');
@@ -159,14 +170,16 @@
     drop.ondragover=function(e){e.preventDefault();drop.style.borderColor='#a48256';};
     drop.ondragleave=function(){drop.style.borderColor='';};
     drop.ondrop=function(e){e.preventDefault();drop.style.borderColor='';addPhotos(e.dataTransfer.files);};
+    wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
     stage.querySelector('#rk-save').onclick=function(){stage.querySelector('#rk-msg').textContent='✓ Rack rates saved. Our team will review and publish them.';};
   }
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
   function stoStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Set your net rate tiers, then drag the agents who qualify for each tier into it.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Set your net rate tiers and drag qualifying agents into each &mdash; or upload a screenshot / file of your rate sheet.</p>'+
       '<div class="pool" id="sto-pool"></div>'+
       '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div><button class="aw-btn ghost" id="sto-add">+ Add another segment</button></div>'+
+      '<div class="aw-panel"><h4>Or upload a rate sheet</h4><div class="aw-drop" id="sto-sheet-drop">Take a screenshot or select a file (image / PDF) of your STO rate sheet</div><input type="file" id="sto-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="sto-sheet-thumbs"></div></div>'+
       '<button class="aw-btn" id="sto-save">Save STO rates</button><div class="aw-err" id="sto-msg" style="color:#bcd0a0"></div></div>';
     var pool=stage.querySelector('#sto-pool');
     AGENTS.forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
@@ -184,6 +197,7 @@
     }
     addTier('15% commission','');addTier('20% commission','');addTier('30% commission','');
     stage.querySelector('#sto-add').onclick=function(){addTier('New segment','');};
+    wireSheet('sto-sheet-drop','sto-sheet-file','sto-sheet-thumbs');
     stage.querySelector('#sto-save').onclick=function(){stage.querySelector('#sto-msg').textContent='✓ STO rates & agent access saved.';};
   }
 })();
