@@ -201,7 +201,7 @@
     stage.querySelector('#rk-save').onclick=function(){stage.querySelector('#rk-msg').textContent='✓ Rack rates saved. Our team will review and publish them.';};
   }
   function photosStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Property</div><h2 class="aw-h">Upload property photos</h2><p class="aw-sub">Add photos of your rooms, facilities and surroundings.</p><div class="aw-panel"><h4>Photos</h4><div class="aw-drop" id="ph-drop">Click to upload or drag photos here</div><input type="file" id="ph-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="ph-thumbs"></div></div><button class="aw-btn" id="ph-save">Save photos</button><div class="aw-err" id="ph-msg" style="color:#bcd0a0"></div></div>';
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Property</div><h2 class="aw-h">Upload property photos</h2><p class="aw-sub">Add photos of your rooms, facilities and surroundings.</p><div class="aw-panel" style="max-width:520px"><h4>Photos</h4><div class="aw-drop" id="ph-drop" style="min-height:360px;display:flex;align-items:center;justify-content:center">Click to upload or drag photos here</div><input type="file" id="ph-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="ph-thumbs"></div></div><button class="aw-btn" id="ph-save">Save photos</button><div class="aw-err" id="ph-msg" style="color:#bcd0a0"></div></div>';
     var file=stage.querySelector('#ph-file'),drop=stage.querySelector('#ph-drop'),thumbs=stage.querySelector('#ph-thumbs');
     function add(list){[].forEach.call(list,function(f){if(!/^image\//.test(f.type))return;var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);});}
     drop.onclick=function(){file.click();};
@@ -222,8 +222,8 @@
   function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
   function getTiers(){return lsGet('nr_sto_tiers',['15% commission','20% commission','30% commission']);}
   function setTiers(a){lsSet('nr_sto_tiers',a);}
-  function getAlloc(){var a=lsGet('nr_sto_alloc',null);if(!a){a={};getTiers().forEach(function(t){a[t]=(TIER_AGENTS[t]||[]).slice();});lsSet('nr_sto_alloc',a);}return a;}
-  function setAlloc(a){lsSet('nr_sto_alloc',a);}
+  function getAlloc(){var a=lsGet('nr_sto_alloc2',null);if(!a){a={};getTiers().forEach(function(t){a[t]=[];});lsSet('nr_sto_alloc2',a);}return a;}
+  function setAlloc(a){lsSet('nr_sto_alloc2',a);}
   function stoRatesStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Enter a net rate for each tier &mdash; and drag in, pick a file, or take a photo of the rate for each. Add your own tiers too.</p>'+
       '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div></div>'+
@@ -264,7 +264,7 @@
     var t=S.currentTier,alloc=getAlloc();
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Allocate &middot; '+esc(t)+'</div><h2 class="aw-h">'+esc(t.split(' ')[0])+' rate</h2><p class="aw-sub">Drag every agent who should get this rate into the box below.</p>'+
       '<div class="pool" id="al-pool"></div>'+
-      '<div class="aw-panel"><h4>Agents on this rate</h4><div class="sto-zone" id="al-zone" style="min-height:130px"></div></div>'+
+      '<div class="aw-panel" style="max-width:520px"><h4>Agents on this rate</h4><div class="sto-zone" id="al-zone" style="min-height:360px"></div></div>'+
       '<button class="aw-btn" id="al-save">Save</button><div class="aw-err" id="al-msg" style="color:#bcd0a0"></div></div>';
     var pool=stage.querySelector('#al-pool');
     (AGENTS.concat(S.customAgents||[])).forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
