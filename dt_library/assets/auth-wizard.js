@@ -213,6 +213,12 @@
     [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var x=b.getAttribute('data-x');if(x==='storates'){S.pendingForm='storates';go('season');}else{go(x);}};});
   }
 
+  function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+  function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
+  function getTiers(){return lsGet('nr_sto_tiers',['15% commission','20% commission','30% commission']);}
+  function setTiers(a){lsSet('nr_sto_tiers',a);}
+  function getAlloc(){var a=lsGet('nr_sto_alloc',null);if(!a){a={};getTiers().forEach(function(t){a[t]=(TIER_AGENTS[t]||[]).slice();});lsSet('nr_sto_alloc',a);}return a;}
+  function setAlloc(a){lsSet('nr_sto_alloc',a);}
   function stoRatesStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Enter a net rate for each tier &mdash; and drag in, pick a file, or take a photo of the rate for each. Add your own tiers too.</p>'+
       '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div></div>'+
@@ -220,10 +226,10 @@
     var tiers=stage.querySelector('#sto-tiers');
     var createBlk=document.createElement('div');createBlk.className='sto-create';createBlk.innerHTML='+ Create new tier';tiers.appendChild(createBlk);
     function wireDrop(drop,file,thumbs){function add(list){[].forEach.call(list,function(f){if(/^image\//.test(f.type)){var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);}else{var c=document.createElement('span');c.className='chip';c.textContent='📄 '+f.name.slice(0,16);thumbs.appendChild(c);}});}drop.onclick=function(){file.click();};file.onchange=function(){add(file.files);};drop.ondragover=function(e){e.preventDefault();drop.classList.add('over');};drop.ondragleave=function(){drop.classList.remove('over');};drop.ondrop=function(e){e.preventDefault();drop.classList.remove('over');add(e.dataTransfer.files);};}
-    function addTier(label,rate){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"><div class="aw-drop tier-drop">Drag, pick a file, or take a photo</div><input type="file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos"></div>';var drop=t.querySelector('.tier-drop'),file=t.querySelector('input[type=file]'),thumbs=t.querySelector('.aw-photos');wireDrop(drop,file,thumbs);tiers.insertBefore(t,createBlk);}
-    addTier('15% commission','');addTier('20% commission','');addTier('30% commission','');
+    function addTier(label,rate){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input tlabel" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"><div class="aw-drop tier-drop">Drag, pick a file, or take a photo</div><input type="file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos"></div>';var drop=t.querySelector('.tier-drop'),file=t.querySelector('input[type=file]'),thumbs=t.querySelector('.aw-photos');wireDrop(drop,file,thumbs);tiers.insertBefore(t,createBlk);}
+    getTiers().forEach(function(t){addTier(t,'');});
     createBlk.onclick=function(){addTier('New tier','');};
-    stage.querySelector('#sto-save').onclick=function(){stage.querySelector('#sto-msg').textContent='✓ STO rates saved. Our team will review and publish them.';};
+    stage.querySelector('#sto-save').onclick=function(){var labels=[].map.call(stage.querySelectorAll('#sto-tiers .tlabel'),function(i){return i.value.trim();}).filter(Boolean);if(labels.length)setTiers(labels);stage.querySelector('#sto-msg').textContent='✓ STO rates saved. Our team will review and publish them.';};
   }
 
   function stoAssignStep(){
@@ -244,29 +250,28 @@
   }
 
   function stoAgentsStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; Agents</div><h2 class="aw-h">Assign agents to rate categories</h2><p class="aw-sub">Drag the agents who qualify into each rate category.</p>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; Agents</div><h2 class="aw-h">Choose a rate, then add agents</h2><p class="aw-sub">Drag agent names into the rate they qualify for. Assignments save automatically to Manage Agents.</p>'+
       '<div class="pool" id="sto-pool"></div>'+
       '<div class="aw-panel"><h4>Rate categories</h4><div id="sto-cats"></div></div>'+
       '<button class="aw-btn" id="sto-asave">Save agent access</button><div class="aw-err" id="sto-amsg" style="color:#bcd0a0"></div></div>';
     var pool=stage.querySelector('#sto-pool');
     (AGENTS.concat(S.customAgents||[])).forEach(function(a){var c=document.createElement('span');c.className='chip';c.draggable=true;c.textContent=a;c.dataset.name=a;c.addEventListener('dragstart',function(e){e.dataTransfer.setData('text/plain',a);});pool.appendChild(c);});
-    var cats=stage.querySelector('#sto-cats');var catCreate=document.createElement('div');catCreate.className='sto-create';catCreate.innerHTML='+ Create new category';cats.appendChild(catCreate);
+    var cats=stage.querySelector('#sto-cats');var alloc=getAlloc();function nmz(z){return [].map.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name;});}function persist(z){alloc[z.dataset.tier]=nmz(z);setAlloc(alloc);}
     function makeZoneHint(z){if(!z.querySelector('.chip')&&!z.querySelector('.zhint')){var h=document.createElement('span');h.className='zhint';h.textContent='Drag qualifying agents here…';z.appendChild(h);}}
-    function addAgent(z,name){var hint=z.querySelector('.zhint');if(hint)hint.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();makeZoneHint(z);};z.appendChild(c);}
-    function addCat(label){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input" value="'+esc(label)+'"><div class="sto-zone"></div>';var z=t.querySelector('.sto-zone');makeZoneHint(z);z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});z.addEventListener('dragleave',function(){z.classList.remove('over');});z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(z,name);});cats.insertBefore(t,catCreate);}
-    addCat('15% commission');addCat('20% commission');addCat('30% commission');
-    catCreate.onclick=function(){addCat('New category');};
+    function addAgent(z,name,np){var hint=z.querySelector('.zhint');if(hint)hint.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();makeZoneHint(z);persist(z);};z.appendChild(c);if(!np)persist(z);}
+    function addCat(label){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input" value="'+esc(label)+'" readonly><div class="sto-zone"></div>';var z=t.querySelector('.sto-zone');z.dataset.tier=label;(alloc[label]||[]).forEach(function(n){addAgent(z,n,true);});makeZoneHint(z);z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});z.addEventListener('dragleave',function(){z.classList.remove('over');});z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(z,name);});cats.appendChild(t);}
+    getTiers().forEach(addCat);
     stage.querySelector('#sto-asave').onclick=function(){stage.querySelector('#sto-amsg').textContent='✓ Agent access saved for each rate category.';};
   }
   function agentDetail(name){var slug=name.toLowerCase().replace(/[^a-z]+/g,'');return {company:name,contact:'Trade Desk',email:'trade@'+slug+'.com',phone:'+264 61 '+(100+(name.length*7)%900)+' '+(1000+(name.length*13)%9000),country:['Namibia','South Africa','United Kingdom','United States','Germany'][name.length%5],status:'Active',since:2019+(name.length%6),bookings:5+(name.length*3)%40};}
   function mgRow(k,v){return '<div class="mg-row"><span class="mg-k">'+k+'</span><span class="mg-v">'+esc(String(v))+'</span></div>';}
   function stoManageStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Manage Agents</div><h2 class="aw-h">Agents by rate tier</h2><p class="aw-sub">Tap a tier to see the agents on it.</p><div class="aw-panel"><h4>Rate tiers</h4><div id="mg-tiers"></div></div></div>';
-    var wrap=stage.querySelector('#mg-tiers');
-    TIERS.forEach(function(t){var n=(TIER_AGENTS[t]||[]).length;var d=document.createElement('div');d.className='sto-tier mg-tile';d.innerHTML='<div class="mg-pct">'+esc(t.split(' ')[0])+'</div><div class="mg-count">'+n+' agent'+(n===1?'':'s')+'</div>';d.onclick=function(){S.currentTier=t;go('stotieragents');};wrap.appendChild(d);});
+    var wrap=stage.querySelector('#mg-tiers');var alloc=getAlloc();
+    getTiers().forEach(function(t){var n=(alloc[t]||[]).length;var d=document.createElement('div');d.className='sto-tier mg-tile';d.innerHTML='<div class="mg-pct">'+esc(t.split(' ')[0])+'</div><div class="mg-count">'+n+' agent'+(n===1?'':'s')+'</div>';d.onclick=function(){S.currentTier=t;go('stotieragents');};wrap.appendChild(d);});
   }
   function stoTierAgentsStep(){
-    var t=S.currentTier,list=TIER_AGENTS[t]||[];
+    var t=S.currentTier,list=(getAlloc()[t])||[];
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Manage Agents &middot; '+esc(t)+'</div><h2 class="aw-h">'+esc(t.split(' ')[0])+' agents</h2><p class="aw-sub">Tap an agent to open their details.</p><div class="pool" id="mg-agents"></div></div>';
     var pool=stage.querySelector('#mg-agents');
     if(!list.length){pool.innerHTML='<span style="color:rgba(255,255,255,.5)">No agents on this tier yet.</span>';}
