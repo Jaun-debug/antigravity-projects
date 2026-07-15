@@ -30,6 +30,7 @@
   #aw-ov select.aw-input option{color:#222}
   #aw-ov .aw-input:focus{border-color:#a48256;background:rgba(28,24,19,.5)}
   #aw-ov .aw-input::placeholder{color:rgba(255,255,255,.45)}
+  #aw-ov .aw-textarea{min-height:130px;resize:vertical;line-height:1.5}
   #aw-ov .aw-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;width:100%;max-width:440px}
   #aw-ov .aw-row .aw-field{max-width:none}
   #aw-ov .aw-panel .aw-field,#aw-ov .aw-panel .aw-row{max-width:none}
@@ -112,7 +113,7 @@
 
   function render(){
     backBtn.style.display=S.hist.length>1?'block':'none';
-    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,photos:photosStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep};
+    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,photos:photosStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep,stonews:stoNewsStep};
     (m[S.step]||roleStep)();
   }
 
@@ -208,7 +209,7 @@
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
   function stoChoiceStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stomanage"><strong>Manage Agents</strong><span>View &amp; edit your agents by rate tier</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button></div></div>';
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stomanage"><strong>Manage Agents</strong><span>View &amp; edit your agents by rate tier</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button><button class="aw-opt" data-x="stonews"><strong>Send Newsletter</strong><span>Email an update or offer to your agents</span></button></div></div>';
     [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var x=b.getAttribute('data-x');if(x==='storates'){S.pendingForm='storates';go('season');}else{go(x);}};});
   }
 
@@ -286,5 +287,15 @@
       '</div>'+
       '<button class="aw-btn" id="ad-save">Save agent details</button><div class="aw-err" id="ad-msg" style="color:#bcd0a0"></div></div>';
     stage.querySelector('#ad-save').onclick=function(){stage.querySelector('#ad-msg').textContent='✓ Agent details saved.';};
+  }
+  function stoNewsStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Newsletter</div><h2 class="aw-h">Send a newsletter</h2><p class="aw-sub">Send an update or special offer to your trade agents.</p>'+
+      '<div class="aw-panel">'+
+        '<div class="aw-field"><label>Send to</label><select class="aw-input" id="nw-to"><option>All agents</option><option>15% commission tier</option><option>20% commission tier</option><option>25% commission tier</option><option>30% commission tier</option></select></div>'+
+        '<div class="aw-field"><label>Subject</label><input class="aw-input" id="nw-subj" placeholder="e.g. 2026 rates now available"></div>'+
+        '<div class="aw-field"><label>Message</label><textarea class="aw-input aw-textarea" id="nw-body" placeholder="Write your message…"></textarea></div>'+
+      '</div>'+
+      '<button class="aw-btn" id="nw-send">Send newsletter</button><div class="aw-err" id="nw-msg" style="color:#bcd0a0"></div></div>';
+    stage.querySelector('#nw-send').onclick=function(){var subj=stage.querySelector('#nw-subj').value.trim();var m=stage.querySelector('#nw-msg');if(!subj){m.style.color='#e9a';m.textContent='Add a subject before sending.';return;}m.style.color='#bcd0a0';m.textContent='✓ Newsletter sent to '+stage.querySelector('#nw-to').value+'.';};
   }
 })();
