@@ -2,6 +2,8 @@
   if(window.__authWizard)return;window.__authWizard=1;
   var BG='https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg';
   var AGENTS=['Wilderness Travel','andBeyond','Abercrombie & Kent','Jenman Safaris','Pulse Africa','Sense of Africa','Cedarberg Travel','Expert Africa','Rhino Africa','Go2Africa','Safari Bookings','Africa Odyssey'];
+  var TIERS=['15% commission','20% commission','25% commission','30% commission'];
+  var TIER_AGENTS={'15% commission':['Wilderness Travel','andBeyond','Abercrombie & Kent'],'20% commission':['Jenman Safaris','Pulse Africa','Sense of Africa','Cedarberg Travel'],'25% commission':['Expert Africa','Rhino Africa'],'30% commission':['Go2Africa','Safari Bookings','Africa Odyssey']};
   var CSS=`
   #aw-root *{box-sizing:border-box}
   #aw-ov{position:fixed;inset:0;z-index:2147483000;display:none;flex-direction:column;align-items:center;justify-content:flex-start;overflow-y:auto;background:#1f1b16 url('${BG}') center/cover no-repeat fixed;font-family:'Jost',sans-serif;color:#fff}
@@ -64,6 +66,16 @@
   #aw-ov #sto-cats .sto-zone{flex:1;margin-top:0}
   #aw-ov #sto-cats .sto-create{aspect-ratio:1;display:flex;align-items:center;justify-content:center;margin:0}
   @media(max-width:560px){#aw-ov #sto-cats{grid-template-columns:1fr}#aw-ov #sto-cats .sto-tier,#aw-ov #sto-cats .sto-create{aspect-ratio:auto}}
+  #aw-ov #mg-tiers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  #aw-ov .mg-tile{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;margin:0;transition:.2s}
+  #aw-ov .mg-tile:hover{border-color:#a48256;background:rgba(164,130,86,.18)}
+  #aw-ov .mg-pct{font-family:'Cinzel',serif;font-size:1.9rem;color:#fff}
+  #aw-ov .mg-count{font-size:.8rem;color:rgba(255,255,255,.6)}
+  #aw-ov .mg-row{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-bottom:1px solid rgba(164,130,86,.2)}
+  #aw-ov .mg-row:last-child{border-bottom:none}
+  #aw-ov .mg-k{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6)}
+  #aw-ov .mg-v{color:#fff;font-size:.92rem;text-align:right}
+  @media(max-width:560px){#aw-ov #mg-tiers{grid-template-columns:1fr}#aw-ov .mg-tile{aspect-ratio:auto;padding:26px}}
   #aw-ov .sto-tier{border:1px solid rgba(164,130,86,.3);border-radius:10px;padding:16px;margin-bottom:12px;background:rgba(28,24,19,.25)}
   #aw-ov .sto-tier-top{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin-bottom:12px}
   #aw-ov .sto-tier-top .aw-input{margin:0}
@@ -99,7 +111,7 @@
 
   function render(){
     backBtn.style.display=S.hist.length>1?'block':'none';
-    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stoagents:stoAgentsStep};
+    var m={role:roleStep,agentlogin:agentStep,form:formStep,success:successStep,suplogin:supLoginStep,supmenu:supMenuStep,season:seasonStep,rack:rackStep,stochoice:stoChoiceStep,storates:stoRatesStep,stoassign:stoAssignStep,stomanage:stoManageStep,stotieragents:stoTierAgentsStep,stoagentdetail:stoAgentDetailStep,stoagents:stoAgentsStep};
     (m[S.step]||roleStep)();
   }
 
@@ -192,7 +204,7 @@
 
   /* ---------- STO RATES + DRAG-DROP AGENTS ---------- */
   function stoChoiceStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stoassign"><strong>Assign Agents</strong><span>Add &amp; manage your list of trade agents</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button></div></div>';
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates</div><h2 class="aw-h">What would you like to upload?</h2><p class="aw-sub">Manage your rates and which agents can see them.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="storates"><strong>Upload Rates</strong><span>Enter your net rate tiers or upload a rate sheet</span></button><button class="aw-opt" data-x="stomanage"><strong>Manage Agents</strong><span>View &amp; edit your agents by rate tier</span></button><button class="aw-opt" data-x="stoagents"><strong>Allocate Rates to Agents</strong><span>Drag agents into each rate category</span></button></div></div>';
     [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var x=b.getAttribute('data-x');if(x==='storates'){S.pendingForm='storates';go('season');}else{go(x);}};});
   }
 
@@ -240,5 +252,24 @@
     addCat('15% commission');addCat('20% commission');addCat('30% commission');
     catCreate.onclick=function(){addCat('New category');};
     stage.querySelector('#sto-asave').onclick=function(){stage.querySelector('#sto-amsg').textContent='✓ Agent access saved for each rate category.';};
+  }
+  function agentDetail(name){var slug=name.toLowerCase().replace(/[^a-z]+/g,'');return {company:name,contact:'Trade Desk',email:'trade@'+slug+'.com',phone:'+264 61 '+(100+(name.length*7)%900)+' '+(1000+(name.length*13)%9000),country:['Namibia','South Africa','United Kingdom','United States','Germany'][name.length%5],status:'Active',since:2019+(name.length%6),bookings:5+(name.length*3)%40};}
+  function mgRow(k,v){return '<div class="mg-row"><span class="mg-k">'+k+'</span><span class="mg-v">'+esc(String(v))+'</span></div>';}
+  function stoManageStep(){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Manage Agents</div><h2 class="aw-h">Agents by rate tier</h2><p class="aw-sub">Tap a tier to see the agents on it.</p><div class="aw-panel"><h4>Rate tiers</h4><div id="mg-tiers"></div></div></div>';
+    var wrap=stage.querySelector('#mg-tiers');
+    TIERS.forEach(function(t){var n=(TIER_AGENTS[t]||[]).length;var d=document.createElement('div');d.className='sto-tier mg-tile';d.innerHTML='<div class="mg-pct">'+esc(t.split(' ')[0])+'</div><div class="mg-count">'+n+' agent'+(n===1?'':'s')+'</div>';d.onclick=function(){S.currentTier=t;go('stotieragents');};wrap.appendChild(d);});
+  }
+  function stoTierAgentsStep(){
+    var t=S.currentTier,list=TIER_AGENTS[t]||[];
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Manage Agents &middot; '+esc(t)+'</div><h2 class="aw-h">'+esc(t.split(' ')[0])+' agents</h2><p class="aw-sub">Tap an agent to open their details.</p><div class="pool" id="mg-agents"></div></div>';
+    var pool=stage.querySelector('#mg-agents');
+    if(!list.length){pool.innerHTML='<span style="color:rgba(255,255,255,.5)">No agents on this tier yet.</span>';}
+    list.forEach(function(a){var c=document.createElement('span');c.className='chip';c.style.cursor='pointer';c.textContent=a;c.onclick=function(){S.currentAgent=a;go('stoagentdetail');};pool.appendChild(c);});
+  }
+  function stoAgentDetailStep(){
+    var d=agentDetail(S.currentAgent||'Agent');
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+esc(S.currentTier||'Agent')+'</div><h2 class="aw-h">'+esc(d.company)+'</h2><div class="aw-panel" style="text-align:left">'+mgRow('Contact person',d.contact)+mgRow('Email',d.email)+mgRow('Phone',d.phone)+mgRow('Country',d.country)+mgRow('Status',d.status)+mgRow('Partner since',d.since)+mgRow('Bookings (12 mo)',d.bookings)+'</div><button class="aw-btn" id="mg-back">Back to tier</button></div>';
+    stage.querySelector('#mg-back').onclick=function(){back();};
   }
 })();
