@@ -259,6 +259,6 @@ function build(){
 }
 var n=0;var iv=setInterval(function(){n++;if(build()||n>40)clearInterval(iv);},120);
 window.addEventListener('load',build);
-})();</script><script>function exploreDown(){var h=document.querySelector('.hero')||document.querySelector('.site-hero');var t=(h&&h.nextElementSibling)||document.querySelector('section');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-20;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script><script src="/assets/site-chrome.js"></script>
+})();</script><script>function exploreDown(){var t=document.querySelector('.rg2-wrap');if(!t){var h=document.querySelector('.hero')||document.querySelector('.site-hero');t=(h&&h.nextElementSibling)||document.querySelector('section');}if(!t)return;var hd=document.querySelector('.main-header');var hoff=hd?Math.ceil(hd.getBoundingClientRect().bottom):0;var y=t.getBoundingClientRect().top+window.pageYOffset-hoff-14;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script><script src="/assets/site-chrome.js"></script>
 </body>
 </html>
