@@ -265,7 +265,7 @@
             position: fixed; top: 0; left: 0; z-index: 2147483647;
             height: 100%; width: 100%;
             background: #F5F5F3;
-            transform: translateX(-100%); transition: transform 2.55s cubic-bezier(.4,0,.2,1);
+            transform: translateX(-100%); transition: transform 1.25s cubic-bezier(.4,0,.2,1);
             display: flex; flex-direction: column;
             padding: 18px 26px 40px; overflow-y: auto; -webkit-overflow-scrolling: touch;
         }
@@ -287,7 +287,7 @@
         }
         #mobile-menu .mm-head .mm-arrow { color: #8CB5A3; font-size: 14px; line-height: 1; transition: transform .3s ease; }
         #mobile-menu .mm-section.collapsed .mm-head .mm-arrow { transform: rotate(-90deg); }
-        #mobile-menu .mm-body { overflow: hidden; max-height: 1400px; opacity: 1; transition: max-height 3.6s cubic-bezier(.22,1,.36,1), opacity 2.1s ease .08s; }
+        #mobile-menu .mm-body { overflow: hidden; max-height: 1400px; opacity: 1; transition: max-height 7.2s cubic-bezier(.22,1,.36,1), opacity 4.2s ease .08s; }
         #mobile-menu .mm-section.collapsed .mm-body { max-height: 0; opacity: 0; transition: max-height .4s cubic-bezier(.4,0,.2,1), opacity .2s ease; }
         /* Menu links: gold, 14px, not uppercase — matching Desert Tracks */
         #mobile-menu a {
@@ -880,7 +880,7 @@
         <button class="mm-signin" type="button" onclick="openLogin('Agent Portal'); closeMobileMenu();">Agent Sign In</button>
     </div>
     <script>
-        function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ var open=m.classList.toggle('open');if(open){var ss=m.querySelectorAll('.mm-section');ss.forEach(function(s){s.classList.add('collapsed');});ss.forEach(function(s,i){setTimeout(function(){s.classList.remove('collapsed');},1560+i*1680);});} if(b)b.classList.toggle('active',open); document.body.style.overflow=open?'hidden':''; } }
+        function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ var open=m.classList.toggle('open');if(open){var ss=m.querySelectorAll('.mm-section');ss.forEach(function(s){s.classList.add('collapsed');});ss.forEach(function(s,i){setTimeout(function(){s.classList.remove('collapsed');},3120+i*3360);});} if(b)b.classList.toggle('active',open); document.body.style.overflow=open?'hidden':''; } }
         function closeMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ m.classList.remove('open'); if(b)b.classList.remove('active'); document.body.style.overflow=''; } }
         function toggleSection(btn){ var s=btn.closest('.mm-section'); if(s) s.classList.toggle('collapsed'); }
     </script>
