@@ -7382,5 +7382,77 @@ wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,
 </script>
 <!--/HPAUTH-->
 
+<!-- NAMIBIA RATES VISITOR TRACKER — homepage carries its own copy because it does not
+     load site-chrome.js. Emails on page exit (≥30s dwell), once per page/day. Payload
+     keys mirror the track-visit.js contract so the cloned nr-track-visit.js parses them. -->
+<script>
+(function(){
+  var TRACKER_URL="https://desert-tracks-itinerary-vault.vercel.app/api/nr-track-visit";
+  var MIN_TIME_MS=30000;
+  var host=location.hostname;
+  if(/\.vercel\.app$/i.test(host)||host==="localhost"||host==="127.0.0.1")return;
+  function trafficSource(){
+    try{
+      var p=new URLSearchParams(location.search);
+      var gAds=p.get("gclid")||p.get("gbraid")||p.get("wbraid");
+      var msclkid=p.get("msclkid"),fbclid=p.get("fbclid");
+      var src=(p.get("utm_source")||"").trim();
+      var med=(p.get("utm_medium")||"").trim().toLowerCase();
+      var camp=(p.get("utm_campaign")||"").trim();
+      var paid=/^(cpc|ppc|paid|paidsearch|paid_social|display|banner)/.test(med);
+      var label="";
+      if(gAds)label="Google Ads (paid)";
+      else if(msclkid)label="Microsoft Ads (paid)";
+      else if(src&&paid)label=src+" (paid)";
+      else if(src)label=src+(med?" / "+med:"");
+      else if(paid)label="Paid";
+      else if(fbclid)label="Social (Meta)";
+      else{
+        var ref=document.referrer||"";
+        if(!ref)label="Direct";
+        else{
+          var h="";try{h=new URL(ref).hostname.replace(/^www\./,"");}catch(e){h="";}
+          var selfh=location.hostname.replace(/^www\./,"");
+          if(h===selfh)label="Internal";
+          else if(/(^|\.)google\./.test(h))label="Organic (Google)";
+          else if(/(^|\.)(bing|yahoo|duckduckgo|ecosia|yandex)\./.test(h))label="Organic (search)";
+          else if(/(^|\.)(facebook|instagram|linkedin|pinterest|youtube)\.|^t\.co$|^lnkd\.in$/.test(h))label="Social";
+          else label="Referral"+(h?" ("+h+")":"");
+        }
+      }
+      if(camp)label+=" · "+camp;
+      return label||"Unknown";
+    }catch(e){return "Unknown";}
+  }
+  var start=Date.now(),sent=false,clientLocation="Unknown Location",clientCountry="Unknown Country";
+  function pageName(){var t=(document.title||"").trim();t=t.split("|")[0].split(" – ")[0].split(" — ")[0].trim();return t||"Namibia Rates";}
+  function fmtTime(ms){var s=Math.round(ms/1000);if(s<60)return s+"s";var m=Math.floor(s/60),r=s%60;return m+"m "+r+"s";}
+  function send(reason){
+    if(sent)return;
+    var elapsed=Date.now()-start;
+    if(elapsed<MIN_TIME_MS)return;
+    try{var k="nr_tracked_"+pageName()+"_"+new Date().toISOString().slice(0,10);if(sessionStorage.getItem(k)){sent=true;return;}sessionStorage.setItem(k,"1");}catch(e){}
+    sent=true;
+    var payload=JSON.stringify({
+      safari_name:pageName(),
+      time_spent:fmtTime(elapsed),
+      seconds:Math.round(elapsed/1000),
+      visitor_location:clientLocation,
+      country:clientCountry,
+      source:trafficSource(),
+      page_link:location.href,
+      timestamp:new Date().toLocaleString(),
+      reason:reason
+    });
+    try{var blob=new Blob([payload],{type:"text/plain"});if(navigator.sendBeacon&&navigator.sendBeacon(TRACKER_URL,blob))return;}catch(e){}
+    try{fetch(TRACKER_URL,{method:"POST",headers:{"Content-Type":"text/plain"},body:payload,keepalive:true}).catch(function(){});}catch(e){}
+  }
+  fetch("https://get.geojs.io/v1/ip/geo.json").then(function(r){return r.json();}).then(function(d){if(d){clientCountry=d.country||clientCountry;clientLocation=(d.city?d.city+", ":"")+(d.region?d.region+", ":"")+(d.country||"");}}).catch(function(){});
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")send("hidden");});
+  window.addEventListener("pagehide",function(){send("pagehide");});
+  window.addEventListener("beforeunload",function(){send("beforeunload");});
+})();
+</script>
+
 </body>
 </html>
