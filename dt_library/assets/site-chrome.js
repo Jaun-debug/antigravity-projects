@@ -49,6 +49,7 @@ window.scPickUp=function(role){scCloseRole();location.href="/signup/?role="+role
 function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
 var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":"none";
+var ib=document.getElementById("nav-builder");if(ib)ib.style.display=inn?"":"none";
 var b=document.getElementById("hdr-agent-btn");if(b)b.textContent=inn?"Sign Out":"Sign In";var su=document.getElementById("hdr-signup-btn");if(su)su.style.display=inn?"none":"";}
 window.agentBtn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");location.reload();}else{openLoginModal();}};
 
