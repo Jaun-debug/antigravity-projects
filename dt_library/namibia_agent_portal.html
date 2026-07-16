@@ -876,8 +876,9 @@
             <a href="#" onclick="document.getElementById('lodge-search').scrollIntoView({behavior:'smooth',block:'center'}); document.getElementById('lodge-search').focus(); closeMobileMenu(); return false;">Search lodges</a>
           </div>
         </div>
-        <button class="mm-listprop" type="button" onclick="location.href='/supplier-portal/'; closeMobileMenu();">Supplier Portal</button>
-        <button class="mm-signin" type="button" onclick="openLogin('Agent Portal'); closeMobileMenu();">Agent Sign In</button>
+        <a class="mm-listprop" id="mm-builder" href="/builder/" style="display:none;text-align:center;text-decoration:none" onclick="closeMobileMenu()">Itinerary Builder</a>
+        <button class="mm-listprop" id="mm-listprop" type="button" onclick="location.href='/supplier-portal/'; closeMobileMenu();">Supplier Portal</button>
+        <button class="mm-signin" id="mm-signin" type="button" onclick="openLogin('Agent Portal'); closeMobileMenu();">Agent Sign In</button>
     </div>
     <script>
         function toggleMobileMenu(){ var m=document.getElementById('mobile-menu'), b=document.querySelector('.burger-menu-btn'); if(m){ var open=m.classList.toggle('open');if(open){var ss=m.querySelectorAll('.mm-section');ss.forEach(function(s){s.classList.add('collapsed');});ss.forEach(function(s,i){setTimeout(function(){s.classList.remove('collapsed');},3120+i*3360);});} if(b)b.classList.toggle('active',open); document.body.style.overflow=open?'hidden':''; } }
@@ -7373,6 +7374,12 @@ wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,
     if(ag){ var want=signedIn?'Sign Out':'Sign In'; if(ag.textContent.trim()!==want)ag.textContent=want; ag.onclick=function(e){e.preventDefault();e.stopPropagation(); if(sessionStorage.getItem('nr_agent_token')){signOut();} else {open('signin');} }; }
     var sp=document.getElementById('nav-list-property');
     if(sp){ if(/supplier portal|list your/i.test(sp.textContent))sp.textContent='Sign Up'; sp.onclick=function(e){e.preventDefault();e.stopPropagation();open('signup');}; }
+    var msi=document.getElementById('mm-signin');
+    if(msi){ var wm=signedIn?'Sign Out':'Sign In'; if(msi.textContent.trim()!==wm)msi.textContent=wm; msi.onclick=function(e){e.preventDefault();e.stopPropagation(); if(window.closeMobileMenu)closeMobileMenu(); if(sessionStorage.getItem('nr_agent_token')){signOut();} else {open('signin');} }; }
+    var msu=document.getElementById('mm-listprop');
+    if(msu){ if(/supplier portal|list your/i.test(msu.textContent))msu.textContent='Sign Up'; msu.onclick=function(e){e.preventDefault();e.stopPropagation(); if(window.closeMobileMenu)closeMobileMenu(); open('signup'); }; }
+    var mbu=document.getElementById('mm-builder');
+    if(mbu){ mbu.style.display=signedIn?'block':'none'; }
   }
   relabel();
   try{var mo=new MutationObserver(relabel);mo.observe(document.body,{childList:true,subtree:true,characterData:true});}catch(e){}
