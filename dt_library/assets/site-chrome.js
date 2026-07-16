@@ -47,6 +47,7 @@ window.scPick=function(role){scCloseRole();if(role==="agent"){openLoginModal();}
 window.scPickUp=function(role){scCloseRole();location.href="/signup/?role="+role;};
 (function(){var w=document.createElement("script");w.src="/assets/auth-wizard.js";w.defer=true;(document.head||document.documentElement).appendChild(w);})();
 function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
+if(inn){document.cookie="nr_session="+encodeURIComponent(sessionStorage.getItem("nr_agent_token"))+"; path=/; SameSite=Lax";}
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
 var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":"none";
 var ib=document.getElementById("nav-builder");if(ib)ib.style.display=inn?"":"none";
