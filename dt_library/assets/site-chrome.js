@@ -64,22 +64,25 @@ function build(){
  var mh=document.querySelector(".main-header");if(mh){var h=Math.ceil(mh.getBoundingClientRect().bottom);document.body.style.paddingTop=h+"px";var sh=document.querySelector(".site-hero");if(sh)sh.style.minHeight="calc(100vh - "+h+"px)";}
  wireExplore();
 }
+/* Define exploreDown() globally so the .scroll-explore hint (onclick="exploreDown()")
+   works on every page, not just the welcome page. Mirrors the welcome-page logic. */
+if(!window.exploreDown){
+ window.exploreDown=function(){
+  var h=document.querySelector(".hero")||document.querySelector(".site-hero");
+  var t=(h&&h.nextElementSibling)||document.querySelector("section");
+  if(!t){t=window.innerHeight;window.scrollTo({top:window.innerHeight,behavior:"smooth"});return;}
+  var header=document.querySelector(".main-header");
+  var hoff=header?Math.ceil(header.getBoundingClientRect().height):0;
+  var y=t.getBoundingClientRect().top+window.pageYOffset-hoff-4;
+  var s=window.pageYOffset,d=y-s,dur=1100,t0=null;
+  function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}
+  requestAnimationFrame(st);
+ };
+}
 function wireExplore(){
  try{
-  var hint=null,els=document.querySelectorAll("body *");
-  for(var i=0;i<els.length;i++){var e=els[i];if(e.children.length<=2 && /^explore$/i.test((e.textContent||"").trim())){ if(e.closest(".sc-footer")||e.closest(".footer-col"))continue; hint=e;break;}}
-  if(!hint)return;
-  var box=hint.closest("a")||hint.parentElement||hint;
-  box.style.cursor="pointer";
-  box.addEventListener("click",function(ev){
-   ev.preventDefault();
-   var header=document.querySelector(".main-header");
-   var hoff=header?Math.ceil(header.getBoundingClientRect().height):100;
-   var hero=document.querySelector(".site-hero")||box.closest("section")||box.closest("header");
-   var top;
-   if(hero){var r=hero.getBoundingClientRect();top=r.bottom+window.pageYOffset-hoff+1;}else{top=window.innerHeight-hoff;}
-   window.scrollTo({top:top,behavior:"smooth"});
-  });
+  var els=document.querySelectorAll(".scroll-explore");
+  for(var i=0;i<els.length;i++){(function(box){box.style.cursor="pointer";box.addEventListener("click",function(ev){ev.preventDefault();window.exploreDown();});})(els[i]);}
  }catch(err){}
 }
 if(document.readyState!=="loading")build();else document.addEventListener("DOMContentLoaded",build);
