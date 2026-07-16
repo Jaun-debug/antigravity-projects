@@ -7363,9 +7363,11 @@ wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,
 (function(){
   function open(mode){ if(window.openAuthWizard){openAuthWizard(mode);} else {var n=0,iv=setInterval(function(){if(window.openAuthWizard){clearInterval(iv);openAuthWizard(mode);}if(++n>40)clearInterval(iv);},100);} }
   window.hpOpenAuth=open;
+  function signOut(){ sessionStorage.removeItem('nr_agent_token'); document.cookie='nr_session=; path=/; max-age=0; SameSite=Lax'; location.reload(); }
   function relabel(){
+    var signedIn=!!sessionStorage.getItem('nr_agent_token');
     var ag=document.getElementById('agent-header-btn');
-    if(ag){ if(/agent sign in/i.test(ag.textContent))ag.textContent='Sign In'; ag.onclick=function(e){e.preventDefault();e.stopPropagation();open('signin');}; }
+    if(ag){ var want=signedIn?'Sign Out':'Sign In'; if(ag.textContent.trim()!==want)ag.textContent=want; ag.onclick=function(e){e.preventDefault();e.stopPropagation(); if(sessionStorage.getItem('nr_agent_token')){signOut();} else {open('signin');} }; }
     var sp=document.getElementById('nav-list-property');
     if(sp){ if(/supplier portal|list your/i.test(sp.textContent))sp.textContent='Sign Up'; sp.onclick=function(e){e.preventDefault();e.stopPropagation();open('signup');}; }
   }
