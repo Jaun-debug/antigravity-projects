@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<!-- Agent-only guard: the Edge middleware is the real gate, this is the client-side backup.
+     Runs before render so signed-out visitors never see the builder, even in preview/local. -->
+<script>if(!sessionStorage.getItem('nr_agent_token')){location.replace('/?agent=1');}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
 <title>Itinerary Builder — Namibia Rates</title>
