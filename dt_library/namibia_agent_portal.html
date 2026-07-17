@@ -7373,11 +7373,11 @@ wrap.appendChild(top);wrap.appendChild(strip);grid.parentNode.insertBefore(wrap,
     var ag=document.getElementById('agent-header-btn');
     if(ag){ var want=signedIn?'Sign Out':'Sign In'; if(ag.textContent.trim()!==want)ag.textContent=want; ag.onclick=function(e){e.preventDefault();e.stopPropagation(); if(sessionStorage.getItem('nr_agent_token')){signOut();} else {open('signin');} }; }
     var sp=document.getElementById('nav-list-property');
-    if(sp){ if(/supplier portal|list your/i.test(sp.textContent))sp.textContent='Sign Up'; sp.onclick=function(e){e.preventDefault();e.stopPropagation();open('signup');}; }
+    if(sp){ if(/supplier portal|list your/i.test(sp.textContent))sp.textContent='Sign Up'; sp.style.display=signedIn?'none':''; sp.onclick=function(e){e.preventDefault();e.stopPropagation();open('signup');}; }
     var msi=document.getElementById('mm-signin');
     if(msi){ var wm=signedIn?'Sign Out':'Sign In'; if(msi.textContent.trim()!==wm)msi.textContent=wm; msi.onclick=function(e){e.preventDefault();e.stopPropagation(); if(window.closeMobileMenu)closeMobileMenu(); if(sessionStorage.getItem('nr_agent_token')){signOut();} else {open('signin');} }; }
     var msu=document.getElementById('mm-listprop');
-    if(msu){ if(/supplier portal|list your/i.test(msu.textContent))msu.textContent='Sign Up'; msu.onclick=function(e){e.preventDefault();e.stopPropagation(); if(window.closeMobileMenu)closeMobileMenu(); open('signup'); }; }
+    if(msu){ if(/supplier portal|list your/i.test(msu.textContent))msu.textContent='Sign Up'; msu.style.display=signedIn?'none':''; msu.onclick=function(e){e.preventDefault();e.stopPropagation(); if(window.closeMobileMenu)closeMobileMenu(); open('signup'); }; }
     var mbu=document.getElementById('mm-builder');
     if(mbu){ mbu.style.display=signedIn?'block':'none'; }
   }
