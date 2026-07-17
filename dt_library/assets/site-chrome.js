@@ -63,7 +63,9 @@ function build(){
  document.body.insertAdjacentHTML("beforeend",FOOTER);
  var yr=document.getElementById("yr");if(yr)yr.textContent=new Date().getFullYear();
  updateAgentState();
- var mh=document.querySelector(".main-header");if(mh){var h=Math.ceil(mh.getBoundingClientRect().bottom);document.body.style.paddingTop=h+"px";var sh=document.querySelector(".site-hero");if(sh)sh.style.minHeight="calc(100vh - "+h+"px)";}
+ var mh=document.querySelector(".main-header");var belt=document.getElementById("uc-belt");
+ function scFit(){var bb=belt?belt.offsetHeight:0;if(mh)mh.style.top=bb+"px";if(mh){var h=Math.ceil(mh.getBoundingClientRect().bottom);document.body.style.paddingTop=h+"px";var sh=document.querySelector(".site-hero");if(sh)sh.style.minHeight="calc(100vh - "+h+"px)";}}
+ scFit();window.addEventListener("resize",scFit);window.addEventListener("load",scFit);
  wireExplore();
 }
 /* Define exploreDown() globally so the .scroll-explore hint (onclick="exploreDown()")
