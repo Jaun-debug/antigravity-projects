@@ -3,13 +3,13 @@
 // TWO independent gates share the same session check:
 //   1. /builder/*    -> ALWAYS gated. The Itinerary Builder is an agent-only tool and
 //                       must never be reachable by signed-out visitors, even by direct URL.
-//   2. /ratesheets/* -> gated only when ENABLE_GATE is true. Currently OFF while the site
-//                       is under construction (rates shown are fictitious sample rates).
+//   2. /ratesheets/* -> gated only when ENABLE_GATE is true. Now ON — net STO ratesheets
+//                       require an agent sign-in.
 //
 // A valid session = an `nr_session` cookie whose value equals sessionToken(AGENT_PASS).
 // The homepage login sets this cookie; sign-out (homepage AND shared header) clears it.
 
-const ENABLE_GATE = false;   // controls /ratesheets/* only — /builder/* is always gated
+const ENABLE_GATE = true;   // controls /ratesheets/* only — /builder/* is always gated
 
 export const config = { matcher: ['/ratesheets/:path*', '/builder', '/builder/:path*'] };
 
