@@ -152,7 +152,7 @@ body{padding-top:102px;}
   <div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -164,7 +164,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Caprivi<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Caprivi — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:sales@ol.na">sales@ol.na</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Caprivi<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Caprivi — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:sales@ol.na">sales@ol.na</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -216,13 +216,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Low Season (per person, per night)', rows:[['Full Inclusive','21,173'],['Bed &amp; Breakfast','8,854'],['Dinner, Bed &amp; Breakfast','9,528'],['Boat Cruise','1,925'],['Game Drive — Chobe NP','1,925'],['Kasika Village Cultural Tour','720'],['Fishing Trip','3,600'],['Boat Transfer','361'],['Victoria Falls Airport – Kasane (one way)','1,925'],['Kazungula Border Post (one way)','2,406'],['Katima – Kasane (one way)','3,720'],['Kasane – Livingstone (one way)','2,406'],['Kasane Airport Transfer','361'],['Breakfast / Lunch','722'],['High Tea / Mini Bar Food','481'],['Dinner / Mini Bar Beverage','842'],['Butler\'s Bar / Spa Treatment','1,204']]},
-    {title:'High Season (per person, per night)', rows:[['Full Inclusive','33,876'],['Bed &amp; Breakfast','13,282'],['Dinner, Bed &amp; Breakfast','13,955'],['Boat Cruise','1,632'],['Game Drive — Chobe NP','1,632'],['Kasika Village Cultural Tour','612'],['Fishing Trip','3,060'],['Boat Transfer','306'],['Victoria Falls Airport – Kasane (one way)','1,632'],['Kazungula Border Post (one way)','2,040'],['Katima – Kasane (one way)','3,162'],['Kasane – Livingstone (one way)','2,040'],['Kasane Airport Transfer','306'],['Breakfast / Lunch','612'],['High Tea / Mini Bar Food','408'],['Dinner / Mini Bar Beverage','714'],['Butler\'s Bar / Spa Treatment','1,020']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -284,9 +278,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 

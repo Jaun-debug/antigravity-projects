@@ -152,7 +152,7 @@ body{padding-top:102px;}
   <div class="nr-raterow"><div><div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -167,7 +167,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:bookings@barkhan.africa">bookings@barkhan.africa</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:bookings@barkhan.africa">bookings@barkhan.africa</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -219,12 +219,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Rates (per person, per night)', rows:[['Sharing — STO 1 (1 night)','4,182'],['Sharing — STO 2 (2+ nights)','3,936'],['Child 2–10 yrs (PCPN) — STO 1','2,092'],['Child 2–10 yrs (PCPN) — STO 2','1,968'],['Single — STO 1','5,437'],['Single — STO 2','5,117'],['Sharing — STO 1','2,782'],['Sharing — STO 2','2,618'],['Child 2–10 yrs — STO 1','1,391'],['Child 2–10 yrs — STO 2','1,309'],['Guide (DBB) — rack rate','1,644'],['Self-Catering Sharing — STO 1','3,636'],['Self-Catering Sharing — STO 2','3,422'],['Single Self-Catering — STO 1','4,727'],['Single Self-Catering — STO 2','4,450'],['Sundowner DriveIncl. water, beer/soda &amp; light snacks','792'],['Guided Hike to Ubib Grotto (≈4h)Prehistoric rock paintings · min 3 / max 8 pax · incl. water, beer/soda','792'],['Guided Klipspringer Mountain Summit Hike (≈4h)Incl. water, beer/soda &amp; light snacks','792'],['Self-Guided E-Bike Kudu Trail Picnic (≈2h)Incl. e-bike rental, water, beer/soda &amp; light snacks','792'],['E-Bike Rental (2 hours)','726'],['Breakfast','270'],['Lunch','414'],['Dinner','678'],['Lunch pack (to take on excursions)','223'],['Tea time cake &amp; coffee @ 16:00','138'],['Laundry — per 6kg load','318']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -286,9 +281,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 

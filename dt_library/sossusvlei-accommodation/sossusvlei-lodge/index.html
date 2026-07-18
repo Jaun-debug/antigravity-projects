@@ -152,7 +152,7 @@ body{padding-top:102px;}
   <div class="nr-raterow"><div><div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -167,7 +167,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:reservations@taleni-africa.com">reservations@taleni-africa.com</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:reservations@taleni-africa.com">reservations@taleni-africa.com</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -219,13 +219,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Low Season (per person, per night)', rows:[['Superior — PP Sharing — High','5,118'],['Superior — Single — High','7,680'],['Superior — PP Sharing — Low','3,840'],['Superior — Single — Low','5,760'],['Standard — PP Sharing — High','4,395'],['Standard — Single — High','6,594'],['Standard — PP Sharing — Low','3,270'],['Standard — Single — Low','4,908'],['Junior Suite (per room) — High','15,360'],['Junior Suite (per room) — Low','14,520'],['Breakfast','228'],['Lunch','330'],['Lunch Pack','174'],['Dinner','522']]},
-    {title:'High Season (per person, per night)', rows:[['Superior — PP Sharing — High','4,094'],['Superior — Single — High','6,144'],['Superior — PP Sharing — Low','3,072'],['Superior — Single — Low','4,608'],['Standard — PP Sharing — High','3,516'],['Standard — Single — High','5,275'],['Standard — PP Sharing — Low','2,616'],['Standard — Single — Low','3,926'],['Junior Suite (per room) — High','12,288'],['Junior Suite (per room) — Low','11,616'],['Breakfast','228'],['Lunch','330'],['Lunch Pack','174'],['Dinner','522']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -287,9 +281,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 

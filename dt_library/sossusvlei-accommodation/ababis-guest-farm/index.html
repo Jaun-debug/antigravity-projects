@@ -152,7 +152,7 @@ body{padding-top:102px;}
   <div class="nr-raterow"><div><div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -167,7 +167,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Tel:</strong> <a href="tel:009345-7448">009345-7448</a><br><strong>Email:</strong> <a href="mailto:info2@ababis-guestfarm.com">info2@ababis-guestfarm.com</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Sossusvlei &amp; Namib<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Sossusvlei &amp; Namib — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Tel:</strong> <a href="tel:009345-7448">009345-7448</a><br><strong>Email:</strong> <a href="mailto:info2@ababis-guestfarm.com">info2@ababis-guestfarm.com</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -219,12 +219,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Rates (per person, per night)', rows:[['Comfort Double Room — 1 night','5,990'],['Comfort Double Room — 2 nights (-10%)','5,391'],['Comfort Single Room — 1 night','3,360'],['Comfort Single Room — 2 nights (-10%)','3,024'],['Comfort Triple +1 child (6–12) — 1 night','7,488'],['Comfort Triple +1 child (6–12) — 2 nights','6,889'],['Comfort Triple +1 child (13–16) — 1 night','8,237'],['Comfort Triple +1 child (13–16) — 2 nights','7,638'],['Comfort Family +2 children (6–12) — 1 night','8,986'],['Comfort Family +2 children (6–12) — 2 nights','8,387'],['Comfort Family +2 children (13–16) — 1 night','10,483'],['Comfort Family +2 children (13–16) — 2 nights','9,884'],['Comfort Family +1 child (6–12) +1 child (13–16) — 1 night','9,734'],['Comfort Family +1 child (6–12) +1 child (13–16) — 2 nights','9,135'],['Children (6–12) sharing — 50%','1,498'],['Children (13–16) sharing — 25%','2,246'],['Tour Guide — DBB','1,248'],['Self-Catering 2 people — 1 night','1,920'],['Self-Catering 2 people — 2 nights','1,728'],['Self-Catering 4–5 people — 1 night','2,880'],['Self-Catering 4–5 people — 2 nights','2,592'],['Camping (per person)','336'],['Off-road Training Course (4–5h) — 1 person','3,600'],['Off-road Training Course (4–5h) — 2 sharing a vehicle','6,000'],['Scenic Sundowner Drive (~2h, per person)','720'],['Mountain Camp — 2 nights full-board + 2 guided hikes (pp)March–October only','8,087'],['Breakfast','288'],['Light Lunch','324'],['Lunch Pack','228'],['Coffee &amp; Cake','180'],['Dinner','594']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -286,9 +281,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 

@@ -153,7 +153,7 @@ body{padding-top:102px;}
   <div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -165,7 +165,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Damaraland<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Damaraland — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:res@chiwani.com">res@chiwani.com</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Damaraland<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Damaraland — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:res@chiwani.com">res@chiwani.com</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -217,13 +217,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Low Season (per person, per night)', rows:[['8 x View Rooms — DBB p/p Sharing','6,059'],['8 x View Rooms — DBB Single Person','8,180'],['4 x Superior View Rooms — DBB p/p Sharing','6,528'],['4 x Superior View Rooms — DBB Single Person','8,792'],['1 x Luxury Room — DBB p/p Sharing','6,824'],['1 x Luxury Room — DBB Single Person','9,211'],['1 x Rock Suite (Mini) — DBB p/p Sharing','7,772'],['1 x Rock Suite (Mini) — DBB Single Person','10,476'],['1 x Mountain Suite — DBB p/p Sharing','12,852'],['1 x Mountain Suite — DBB Single Person','17,473'],['Child (4-12 yrs) — DBB per night','3,132'],['Tour Guide Room (per Guide/Pilot per night)','2,652'],['Nature Drive (guided, Morning)','1,632'],['Twyfelfontein Excursion (guided, Afternoon)','1,332'],['Damara Living Museum Entry','384'],['All-Inclusive Drinks Add-On','1,440'],['Twyfelfontein Airstrip Transfer','474'],['!Doro Nawas Transfer','558'],['Damaraland Camp Transfer','834'],['Breakfast','474'],['Lunch','450'],['Lunch Pack','306'],['Dinner (3 Course)','1,068']]},
-    {title:'High Season (per person, per night)', rows:[['8 x View Rooms — DBB p/p Sharing','8,119'],['8 x View Rooms — DBB Single Person','11,077'],['4 x Superior View Rooms — DBB p/p Sharing','8,711'],['4 x Superior View Rooms — DBB Single Person','11,750'],['1 x Luxury Room — DBB p/p Sharing','9,130'],['1 x Luxury Room — DBB Single Person','12,301'],['1 x Rock Suite (Mini) — DBB p/p Sharing','10,007'],['1 x Rock Suite (Mini) — DBB Single Person','13,332'],['1 x Mountain Suite — DBB p/p Sharing','15,250'],['1 x Mountain Suite — DBB Single Person','20,574'],['Child (4-12 yrs) — DBB per night','3,132'],['Tour Guide Room (per Guide/Pilot per night)','2,652'],['Nature Drive (guided, Morning)','1,632'],['Twyfelfontein Excursion (guided, Afternoon)','1,332'],['Damara Living Museum Entry','384'],['All-Inclusive Drinks Add-On','1,440'],['Twyfelfontein Airstrip Transfer','474'],['!Doro Nawas Transfer','558'],['Damaraland Camp Transfer','834'],['Breakfast','474'],['Lunch','450'],['Lunch Pack','306'],['Dinner (3 Course)','1,068']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -285,9 +279,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 

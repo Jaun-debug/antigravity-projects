@@ -152,7 +152,7 @@ body{padding-top:102px;}
   <div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -164,7 +164,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Lüderitz<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Lüderitz — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:bookings@desert-tracks.com">bookings@desert-tracks.com</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Lüderitz<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Lüderitz — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Email:</strong> <a href="mailto:bookings@desert-tracks.com">bookings@desert-tracks.com</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -216,12 +216,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Rates (per person, per night)', rows:[['Kolmanskoppe — 1 adult','2,511'],['Kolmanskoppe — 2 adults','4,058'],['Garub — 1 adult (private lounge shared w/ Grasplatz)','2,511'],['Garub — 2 adults','4,058'],['Grasplatz — 1 adult (private lounge shared w/ Garub)','2,511'],['Grasplatz — 2 adults','4,058'],['Bogenfels Studio — 1 adult','2,511'],['Bogenfels Studio — 2 adults','4,058'],['Bogenfels Studio — 3 adults','6,086'],['Bogenfels — +1 child &amp;lt;12 (with 2 adults)','1,104'],['Bogenfels — +2 children &amp;lt;12 (with 2 adults)','2,208'],['Tsiras Mountains (private terrace) — 1 adult','2,511'],['Tsiras Mountains — 2 adults','4,058'],['Tsiras Mountains — +1 child &amp;lt;12','1,104'],['Tsiras Mountains — +2 children &amp;lt;12','2,208'],['Itchaboe Apartment — 1 adult','2,511'],['Itchaboe Apartment — 2 adults','4,058'],['Itchaboe — 3 adults','6,086'],['Itchaboe — 4 adults','8,114'],['Itchaboe — +1 child &amp;lt;12','1,104'],['Itchaboe — +2 children &amp;lt;12','2,208'],['Loft — 1 adult','2,511'],['Loft — 2 adults','4,058'],['Loft — +1 child &amp;lt;12','1,104'],['Loft — +2 children &amp;lt;12','2,208'],['Charlottental — 1 adult','2,511'],['Charlottental — 2 adults','4,058'],['Charlottental — 3 adults','6,086'],['Charlottental — 4 adults','8,114'],['Märchental — 1 adult','2,511'],['Märchental — 2 adults','4,058']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -283,9 +278,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 

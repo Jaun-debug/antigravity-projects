@@ -152,7 +152,7 @@ body{padding-top:102px;}
   <div class="rate-head">
     <div>
       <h2>Rates</h2>
-      <div class="sub" id="rate-sub">Published rates · per person, per night · N$ incl. VAT &amp; levy</div>
+      <div class="sub" id="rate-sub">Rate to follow</div>
     </div>
     <div style="text-align:right">
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
@@ -164,7 +164,7 @@ body{padding-top:102px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Central Namibia<br><strong>Rates:</strong> Published rack rates (incl. VAT &amp; levy)<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Central Namibia — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Tel:</strong> <a href="tel:+26467234291">+264 67 234 291</a><br><strong>Email:</strong> <a href="mailto:office@gabusnamibia.com">office@gabusnamibia.com</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Central Namibia<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Central Namibia — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Tel:</strong> <a href="tel:+26467234291">+264 67 234 291</a><br><strong>Email:</strong> <a href="mailto:office@gabusnamibia.com">office@gabusnamibia.com</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -216,12 +216,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK = {
-  badge:'Rack Rates', sub:'Published rack rates · per person, per night · N$ incl. VAT & levy',
-  sections:[
-    {title:'Rates (per person, per night)', rows:[['Single','2,965'],['Per person sharing','2,670'],['Double (per room)','5,341'],['Kids 2–6 yrs sharing','443'],['Kids 7–11 yrs sharing','1,397'],['Per unit per night','6,635'],['Adult per night','354'],['Child 7–11 yrs','174'],['Morning Drive (2 hr)','624'],['Sundowner Drive (2.5 hr)','720'],['Morning / Sunset Ride 1.5 hr','1,188'],['Morning / Sunset Ride 2.5 hr','1,548'],['Kids Ride 45 min','552'],['Guided Hike 3–5 hr','588'],['Bush Breakfast + Game Drive','1,680'],['Bush Breakfast + Horse Riding','1,920'],['Bush Breakfast + Guided Hike','1,560'],['Tour Guide DBB rate','1,020'],['Educational DBB rate (T&amp;Cs)','1,194']]}
-  ]
-};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -283,9 +278,9 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  renderRates(RACK,false);
+  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
   var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Published rates · per person, per night · N$ incl. VAT & levy';
+  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
 }
 
