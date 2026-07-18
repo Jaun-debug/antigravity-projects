@@ -281,10 +281,18 @@ function setHdrBtn(signedIn){
 
 // Show public rack rates (signed-out state).
 function showRack(){
-  document.getElementById('rate-tables').innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>';
-  var b=document.getElementById('mode-badge'); b.textContent='Rack Rates'; b.classList.remove('sto');
-  document.getElementById('rate-sub').textContent='Rate to follow';
   setHdrBtn(false);
+  var b=document.getElementById('mode-badge'); if(b){b.textContent='Rack Rates'; b.classList.remove('sto');}
+  var rt=document.getElementById('rate-tables'), sub=document.getElementById('rate-sub');
+  function tbc(){ if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>'; if(sub) sub.textContent='Rate to follow'; }
+  if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-size:.95rem">Loading rates\u2026</p>';
+  fetch('/api/rack?slug='+encodeURIComponent(LODGE)+'&full=1',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+    var doc=j&&j.doc;
+    if(doc&&doc.sections&&doc.sections.length&&doc.sections.some(function(s){return s.rows&&s.rows.some(function(r){return r[0]&&(r[1]||r[1]===0);});})){
+      renderRates(doc,false);
+      if(sub) sub.textContent=(doc.note||'Published rack rates')+(doc.validity?' \u00b7 Valid '+doc.validity:'');
+    } else { tbc(); }
+  }).catch(function(){ tbc(); });
 }
 
 // Show net STO (signed-in state) using the rates returned by the server.

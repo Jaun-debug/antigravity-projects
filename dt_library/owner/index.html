@@ -290,13 +290,44 @@
     });
   });
 
-  $('addBtn').addEventListener('click',function(){
-    var name=prompt('New lodge name:');if(!name)return;
-    var region=prompt('Region (optional):')||'';
-    current={slug:'',rack:{name:name.trim(),region:region.trim(),currency:'N$',validity:'',note:'',commission:'',sections:[{title:'Rooms (per person, per night)',rows:[['','']]}]},sto:null};
-    kind='rack';renderEditor();
-    toast('Fill in rates, then Save to create it.');
-  });
+  $('addBtn').addEventListener('click',function(){ openLodgePicker(); });
+
+  function openLodgePicker(){
+    var ov=document.createElement('div');
+    ov.style.cssText='position:fixed;inset:0;z-index:500;background:rgba(30,28,26,.5);display:flex;align-items:flex-start;justify-content:center;padding:56px 16px;';
+    ov.innerHTML='<div style="background:#fff;border-radius:12px;max-width:520px;width:100%;max-height:80vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.3)">'
+      +'<div style="padding:16px 20px;border-bottom:1px solid #eee;display:flex;gap:10px;align-items:center"><strong style="flex:1">Pick a lodge</strong><span class="lpClose" style="cursor:pointer;font-size:1.5rem;line-height:1;color:#999">&times;</span></div>'
+      +'<input class="lpSearch" placeholder="Search lodges…" style="margin:14px 20px;padding:10px 12px;border:1px solid #ccc;border-radius:6px;font-size:1rem;font-family:inherit">'
+      +'<div class="lpList" style="overflow-y:auto;padding:0 12px 14px"></div></div>';
+    document.body.appendChild(ov);
+    var list=ov.querySelector('.lpList'), search=ov.querySelector('.lpSearch');
+    function draw(q){ q=(q||'').toLowerCase();
+      var idx=window._lodgeIndex||[];
+      var items=idx.filter(function(l){return !q||(l.name+' '+l.region+' '+l.slug).toLowerCase().indexOf(q)>=0;}).slice(0,150);
+      list.innerHTML=items.map(function(l){return '<div class="lp-item" data-slug="'+l.slug+'" style="padding:10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;gap:10px"><span>'+l.name+'</span><span style="color:#999;font-size:.85rem">'+l.region+'</span></div>';}).join('')||'<div style="padding:14px;color:#999">No match.</div>';
+      Array.prototype.forEach.call(list.querySelectorAll('.lp-item'),function(el){
+        el.onmouseenter=function(){el.style.background='#f2efe9';}; el.onmouseleave=function(){el.style.background='';};
+        el.onclick=function(){ ov.remove(); pickLodge(el.getAttribute('data-slug')); };
+      });
+    }
+    ov.onclick=function(e){ if(e.target===ov) ov.remove(); };
+    ov.querySelector('.lpClose').onclick=function(){ ov.remove(); };
+    search.oninput=function(){ draw(search.value); };
+    if(window._lodgeIndex){ draw(''); }
+    else { fetch('/assets/lodge-pages.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){window._lodgeIndex=(j&&j.lodges)||[];draw('');}).catch(function(){window._lodgeIndex=[];draw('');}); }
+    setTimeout(function(){search.focus();},50);
+  }
+
+  function pickLodge(slug){
+    var l=(window._lodgeIndex||[]).filter(function(x){return x.slug===slug;})[0]||{slug:slug,name:slug,region:''};
+    function fresh(){ return {slug:slug,rack:{name:l.name,region:l.region,currency:'N$',validity:'',note:'',commission:'',sections:[{title:'Rooms (per person, per night)',rows:[['','']]}]},sto:null}; }
+    api({action:'get',slug:slug}).then(function(r){
+      if(r.body&&r.body.ok&&(r.body.rack||r.body.sto)){ current={slug:slug,rack:r.body.rack||fresh().rack,sto:r.body.sto}; }
+      else { current=fresh(); }
+      kind='rack';renderEditor();renderList();
+      toast('Editing '+l.name+' — fill in rack rates, then Save.');
+    }).catch(function(){ current=fresh();kind='rack';renderEditor();toast('Editing '+l.name); });
+  }
 
   // ── boot ──────────────────────────────────────────────
   if(token){ api({action:'list'}).then(function(r){ if(r.status===200&&r.body.ok){showApp()} else {showLogin()} }).catch(showLogin); }

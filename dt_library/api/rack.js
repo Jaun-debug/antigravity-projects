@@ -51,6 +51,10 @@ module.exports = async (req, res) => {
     const slug = req.query && req.query.slug ? String(req.query.slug).trim() : '';
     if (slug) {
       const doc = await db.getRates('rack', slug);
+      // full=1 -> the raw sectioned doc (used by lodge pages to render season tables).
+      if (req.query && req.query.full) {
+        return res.status(200).json({ ok: true, slug: slug, doc: doc || null });
+      }
       return res.status(200).json({ ok: true, slug: slug, lodge: doc ? flatten(doc) : null });
     }
 
