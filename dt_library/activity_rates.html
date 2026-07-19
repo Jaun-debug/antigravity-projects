@@ -691,10 +691,10 @@ document.addEventListener('DOMContentLoaded',function(){
                     switchSupplier(supplierId, matchedTab);
                 }
                 
-                // Keep tabs visible so suppliers can be switched on-page too.
+                // Hide the tab row on a single-supplier (deep-linked) view; the nav dropdown handles switching.
                 const tabsContainer = document.querySelector('.tabs-container');
                 if (tabsContainer) {
-                    tabsContainer.style.display = '';
+                    tabsContainer.style.display = 'none';
                 }
             }
 
