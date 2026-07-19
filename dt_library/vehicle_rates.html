@@ -291,12 +291,20 @@
         function nrHeroScroll(){var t=document.querySelector('.season-selector')||document.querySelector('.tabs-container');if(!t)return;var hd=document.querySelector('.main-header');var off=hd?Math.ceil(hd.getBoundingClientRect().bottom):0;var y=t.getBoundingClientRect().top+window.pageYOffset-off-16;window.scrollTo({top:y,behavior:'smooth'});}
         (function(){
           // Per-supplier hero images — replace each value with that supplier's own landscape photo.
-          var HERO_IMG={nts:'/media/hero-poster.jpg',ncr:'/media/hero-poster.jpg',nrcr:'/media/hero-poster.jpg',zaris:'/media/hero-poster.jpg',sanga:'/media/hero-poster.jpg',zap:'/media/hero-poster.jpg',suricate:'/media/hero-poster.jpg'};
+          var HERO_IMG={
+            nts:'https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg?fmt=jpg',
+            ncr:'https://wetu.com/imageHandler/c1920x1080/1518/arrival-area-andbeyond-sossusvlei.jpg?fmt=jpg',
+            nrcr:'https://wetu.com/imageHandler/c1920x1080/1519/17_little_kulala_red_sand_dunes_0374.jpg?fmt=jpg',
+            zaris:'https://wetu.com/imageHandler/c1920x1080/15393/201204_mowani_1223.jpg?fmt=jpg',
+            sanga:'https://wetu.com/imageHandler/c1920x1080/1520/1738592251695_KulalaDL_MainAreas_0724_TC_082.jpg?fmt=jpg',
+            zap:'https://wetu.com/imageHandler/c1920x1080/181182/namib_camping2go_11.jpg?fmt=jpg',
+            suricate:'https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg'
+          };
           function hero(){return document.querySelector('.header.nr-hero');}
-          function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"')";}
+          function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"'),url('/media/hero-poster.jpg')";}
           function keyFromHash(){var m=(location.hash||'').replace('#','').trim();return HERO_IMG.hasOwnProperty(m)?m:'nts';}
           function moveBack(){var bb=document.querySelector('.back-btn'),h=hero();if(bb&&h&&bb.parentNode!==h){h.appendChild(bb);bb.style.position='absolute';bb.style.top='16px';bb.style.left='20px';bb.style.zIndex='4';bb.style.color='#fff';bb.style.borderColor='rgba(255,255,255,.6)';bb.style.background='rgba(0,0,0,.25)';}}
-          document.addEventListener('DOMContentLoaded',function(){moveBack();setHero(keyFromHash());var iv=setInterval(function(){if(typeof window.switchSupplier==='function'){clearInterval(iv);var o=window.switchSupplier;window.switchSupplier=function(k){var r=o.apply(this,arguments);setHero(k);return r;};}},80);setTimeout(function(){clearInterval(iv);},4000);window.addEventListener('hashchange',function(){setHero(keyFromHash());});});
+          document.addEventListener('DOMContentLoaded',function(){moveBack();setHero(keyFromHash());var iv=setInterval(function(){if(typeof window.switchSupplier==='function'){clearInterval(iv);var o=window.switchSupplier;window.switchSupplier=function(k){var r=o.apply(this,arguments);setHero(k);return r;};}},80);setTimeout(function(){clearInterval(iv);},4000);window.addEventListener('hashchange',function(){var k=keyFromHash();setHero(k);var tab=document.querySelector(".tab-link[onclick*=\"'"+k+"'\"]");if(typeof window.switchSupplier==='function'){try{window.switchSupplier(k,tab);}catch(e){}}});});
         })();
         </script>
 <script>
@@ -804,10 +812,10 @@ document.addEventListener('DOMContentLoaded',function(){
                     switchSupplier(supplierId, matchedTab);
                 }
                 
-                // Hide tabs container if opened directly with a hash
+                // Keep tabs visible so suppliers can be switched on-page too.
                 const tabsContainer = document.querySelector('.tabs-container');
                 if (tabsContainer) {
-                    tabsContainer.style.display = 'none';
+                    tabsContainer.style.display = '';
                 }
             }
 
