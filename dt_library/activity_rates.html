@@ -282,6 +282,17 @@ document.addEventListener('DOMContentLoaded',function(){
   if(eb&&!agent){ eb.textContent=(eb.textContent||'').replace(/[·\-\s]*Pre-?Negotiated STO Rates?.*$/i,'').replace(/[·\-\s]+$/,'').trim(); if(!eb.textContent) eb.style.display='none'; }
   if(agent) return;
   document.querySelectorAll(".spec-item").forEach(function(si){ if(/\b(sto|commission)\b/i.test(si.textContent||"")) si.style.display="none"; });
+  // Public view: strip agent-trade wording (STO / NETT / pre-negotiated / commission) from supplier descriptions.
+  document.querySelectorAll(".supplier-details p, .supplier-info p, .supplier-desc, .lead").forEach(function(p){
+    var t=p.textContent||""; if(!/(\bsto\b|nett|pre-?negotiated|commission|net\s+rate)/i.test(t)) return;
+    t=t.replace(/\b([A-Z][\w'&]*(?:\s+[A-Z][\w'&]*)*)'s\s+pre-?negotiated\s+STO\s+\w*\s*rates?\s+offer\b/gi,"$1 offers");
+    t=t.replace(/\bpre-?negotiated\s+STO\s+(?:NETT|NET|contract)?\s*rates?\s+valid\s+across\b/gi,"Available across");
+    t=t.replace(/\bpre-?negotiated\s+STO\s+(?:NETT|NET|contract)?\s*rates?\b/gi,"rates");
+    t=t.replace(/\bbuilt-?in\s+STO\s+NETT\b/gi,"");
+    t=t.replace(/\bSTO\s+(?:NETT|NET|contract)\b/gi,""); t=t.replace(/\bnett\b/gi,""); t=t.replace(/\bSTO\b/gi,"");
+    t=t.replace(/\s{2,}/g," ").replace(/\s+([.,])/g,"$1").replace(/^\s*[.,]\s*/,"").trim();
+    p.textContent=t;
+  });
   var money=/N\$|\d,\d{3}|\d[.,]\d{2}\b/;
   var tables=document.querySelectorAll('table');
   for(var ti=0;ti<tables.length;ti++){
