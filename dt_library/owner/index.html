@@ -339,29 +339,70 @@
       +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:10px">Paste the JSON extracted from a supplier PDF. Preview to check it, then Import — it saves to the database and goes live on the lodge pages.</p>'
       +'<textarea class="biJson" placeholder="[ { &quot;slug&quot;: &quot;ongava-lodge&quot;, &quot;name&quot;: &quot;Ongava Lodge&quot;, &quot;region&quot;: &quot;South Etosha&quot;, &quot;sections&quot;: [ { &quot;title&quot;: &quot;Low Season&quot;, &quot;rows&quot;: [ [&quot;Full Board&quot;,&quot;12036&quot;] ] } ] } ]" style="width:100%;height:200px;font-family:monospace;font-size:12px;border:1px solid #ccc;border-radius:6px;padding:10px"></textarea>'
       +'<div class="biPreview" style="margin:10px 0;font-size:.85rem;max-height:180px;overflow:auto"></div>'
-      +'<div style="display:flex;gap:10px;justify-content:flex-end"><button class="biPrev" style="padding:9px 16px;border:1px solid #ccc;border-radius:6px;background:#fff;cursor:pointer">Preview</button><button class="biGo" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer" disabled>Import</button></div></div>';
+      +'<div style="display:flex;gap:10px;justify-content:flex-end"><button class="biPrev" style="padding:9px 16px;border:1px solid #a48256;border-radius:6px;background:#fff;color:#a48256;cursor:pointer;font-family:inherit">Preview / check</button><button class="biGo" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import</button></div></div>';
     document.body.appendChild(ov);
     var ta=ov.querySelector('.biJson'), prev=ov.querySelector('.biPreview'), goBtn=ov.querySelector('.biGo'), parsed=null;
     ov.onclick=function(e){if(e.target===ov)ov.remove();};
     ov.querySelector('.biClose').onclick=function(){ov.remove();};
-    ov.querySelector('.biPrev').onclick=function(){
-      parsed=null; goBtn.disabled=true;
-      var arr; try{ arr=JSON.parse(ta.value); }catch(e){ prev.innerHTML='<span style="color:#c0392b">Invalid JSON: '+e.message+'</span>'; return; }
-      if(!Array.isArray(arr)) arr=[arr];
-      var lines=[], ok=true;
-      arr.forEach(function(l){
-        var slug=l.slug||'', nrows=0; (l.sections||[]).forEach(function(s){ nrows+=(s.rows||[]).filter(function(r){return r[0]&&(r[1]||r[1]===0);}).length; });
-        var valid=slug&&l.sections&&l.sections.length&&nrows>0; if(!valid) ok=false;
-        lines.push('<div style="padding:4px 0;border-bottom:1px solid #eee">'+(valid?'✓':'⚠️')+' <strong>'+(l.name||slug||'(no slug)')+'</strong> <span style="color:#999">'+slug+'</span> — '+nrows+' rate rows'+(valid?'':' <span style="color:#c0392b">(needs slug + rows)</span>')+'</div>');
+    function num(v){ var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,'')); return isNaN(n)?null:n; }
+    function median(a){ a=a.slice().sort(function(x,y){return x-y;}); var m=Math.floor(a.length/2); return a.length?(a.length%2?a[m]:(a[m-1]+a[m])/2):0; }
+    function mx(a){return Math.max.apply(null,a);} function mn(a){return Math.min.apply(null,a);}
+    function checkLodge(l){
+      var errs=[], warns=[], nrows=0, slug=l.slug||'';
+      if(!slug) errs.push('missing slug');
+      if(!l.sections||!l.sections.length) errs.push('no sections');
+      (l.sections||[]).forEach(function(s){
+        var prices=[];
+        (s.rows||[]).forEach(function(r){
+          if(!r[0] && !(r[1]||r[1]===0)) return;
+          nrows++;
+          var p=num(r[1]);
+          if(p===null){ errs.push('non-numeric price for “'+(r[0]||'?')+'”'); return; }
+          prices.push({label:String(r[0]||'').toLowerCase(),p:p});
+        });
+        if(prices.length){
+          var med=median(prices.map(function(x){return x.p;}));
+          prices.forEach(function(x){ if(med>0 && (x.p>med*10 || x.p<med/10)) warns.push('“'+x.label+'” ('+x.p+') looks off in '+(s.title||'section')); });
+          var sng=prices.filter(function(x){return /single|sgl/.test(x.label);}).map(function(x){return x.p;});
+          var shr=prices.filter(function(x){return /(sharing|double|dbl|twin|per person)/.test(x.label)&&!/single|sgl/.test(x.label);}).map(function(x){return x.p;});
+          if(sng.length&&shr.length&&mx(sng)<mx(shr)) warns.push('single < sharing in '+(s.title||'section')+' (possible column swap)');
+          var dbb=prices.filter(function(x){return /dbb|dinner/.test(x.label);}).map(function(x){return x.p;});
+          var bb=prices.filter(function(x){return /(^|[^d])bb|breakfast/.test(x.label)&&!/dbb|dinner/.test(x.label);}).map(function(x){return x.p;});
+          if(dbb.length&&bb.length&&mn(dbb)<mn(bb)) warns.push('DBB < BB in '+(s.title||'section'));
+          var ch=prices.filter(function(x){return /child|chd/.test(x.label);}).map(function(x){return x.p;});
+          var ad=prices.filter(function(x){return !/child|chd/.test(x.label);}).map(function(x){return x.p;});
+          if(ch.length&&ad.length&&mn(ch)>=mn(ad)) warns.push('child ≥ adult in '+(s.title||'section'));
+        }
       });
-      prev.innerHTML=lines.join(''); if(ok&&arr.length){ parsed=arr; goBtn.disabled=false; }
-    };
+      if(!nrows) errs.push('no rate rows');
+      return {slug:slug,name:l.name||slug,nrows:nrows,errs:errs,warns:warns};
+    }
+    function validate(){
+      parsed=null;
+      var arr; try{ arr=JSON.parse(ta.value); }catch(e){ prev.innerHTML='<span style="color:#c0392b">Invalid JSON: '+e.message+'</span>'; return null; }
+      if(!Array.isArray(arr)) arr=[arr];
+      var lines=[], anyErr=false;
+      arr.forEach(function(l){
+        var c=checkLodge(l);
+        var icon=c.errs.length?'✗':(c.warns.length?'⚠️':'✓'), col=c.errs.length?'#c0392b':(c.warns.length?'#b9770e':'#2e7d46');
+        if(c.errs.length) anyErr=true;
+        var detail=(c.errs.length?'<div style="color:#c0392b;margin-left:20px">'+c.errs.join('; ')+'</div>':'')+(c.warns.length?'<div style="color:#b9770e;margin-left:20px">'+c.warns.join('; ')+'</div>':'');
+        lines.push('<div style="padding:5px 0;border-bottom:1px solid #eee"><span style="color:'+col+'">'+icon+'</span> <strong>'+c.name+'</strong> <span style="color:#999">'+c.slug+'</span> — '+c.nrows+' rows'+detail+'</div>');
+      });
+      lines.push('<div style="padding:6px 0;font-size:.78rem;color:#7d756e">✓ ok · ⚠️ glance at the flagged rows (still importable) · ✗ fix before import</div>');
+      prev.innerHTML=lines.join('');
+      if(anyErr) return null;
+      parsed=arr; return arr;
+    }
+    ov.querySelector('.biPrev').onclick=function(){ validate(); };
     goBtn.onclick=function(){
-      if(!parsed) return; goBtn.disabled=true; goBtn.textContent='Importing…';
+      var arr=parsed||validate();
+      if(!arr){ return; }
+      goBtn.disabled=true; goBtn.textContent='Importing…';
       var i=0, done=0, fail=0;
       function next(){
-        if(i>=parsed.length){ toast('Imported '+done+' lodge'+(done!==1?'s':'')+(fail?', '+fail+' failed':'')+'.'); ov.remove(); api({action:'list'}).then(function(r){if(r.body&&r.body.ok)renderList();}); return; }
-        var l=parsed[i++];
+        if(i>=arr.length){ toast('Imported '+done+' lodge'+(done!==1?'s':'')+(fail?', '+fail+' failed':'')+'.'); ov.remove(); api({action:'list'}).then(function(r){if(r.body&&r.body.ok)renderList();}); return; }
+        var l=arr[i++];
         var data={name:l.name||l.slug,region:l.region||'',currency:l.currency||'N$',validity:l.validity||'',note:l.note||'',commission:'',sections:l.sections||[]};
         api({action:'save',slug:l.slug,kind:'rack',data:data}).then(function(r){ if(r.body&&r.body.ok)done++; else fail++; next(); }).catch(function(){ fail++; next(); });
       }
