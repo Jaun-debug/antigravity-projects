@@ -1,0 +1,19 @@
+[
+  {
+    "slug": "epako-safari-lodge",
+    "name": "Epako Safari Lodge & Spa",
+    "region": "Central Namibia",
+    "currency": "N$",
+    "validity": "01 Jan 2027 – 31 Dec 2027",
+    "note": "Rack rates 2027 · fully inclusive (2 activities/day, all meals & most beverages) · incl. tourism levy & VAT (NAD)",
+    "sections": [
+      { "title": "Deluxe Rooms", "rows": [ ["Sharing (per person)", "9,800"], ["Single", "14,700"] ] },
+      { "title": "Junior Suite", "rows": [ ["Sharing (per person)", "13,350"], ["Single", "19,600"] ] },
+      { "title": "Loft Suite", "rows": [ ["Sharing (per person)", "13,350"], ["Single", "19,600"] ] },
+      { "title": "River Suite", "rows": [ ["Sharing (per person)", "17,200"], ["Single", "24,500"] ] },
+      { "title": "River Suite — two bedrooms (max 4)", "rows": [ ["Daily rate (whole unit)", "51,500"] ] },
+      { "title": "Waterhole Suite", "rows": [ ["Sharing (per person)", "19,500"], ["Single", "28,900"] ] },
+      { "title": "Waterhole Suite — two bedrooms (max 4)", "rows": [ ["Daily rate (whole unit)", "55,600"] ] }
+    ]
+  }
+]

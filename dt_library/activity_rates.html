@@ -39,6 +39,16 @@
         .header { text-align: center; margin-bottom: 40px; }
         .header h1 { font-size: 2.8rem; color: var(--brand-charcoal); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
         .header p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; border-top: 1px solid rgba(164, 130, 86, 0.3); border-bottom: 1px solid rgba(164, 130, 86, 0.3); display: inline-block; padding: 6px 20px; margin-top: 5px; }
+        .header.nr-hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-40px;margin-bottom:36px;min-height:54vh;background:#2b2b2b url('/media/hero-poster.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 24px 88px;overflow:hidden;}
+        .header.nr-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.62));}
+        .header.nr-hero>*{position:relative;z-index:2;}
+        .header.nr-hero h1{color:#fff !important;text-shadow:0 3px 20px rgba(0,0,0,.45);}
+        .header.nr-hero p{color:#fff !important;opacity:1 !important;border-color:rgba(255,255,255,.45) !important;background:rgba(0,0,0,.12);}
+        .header.nr-hero .scroll-explore{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;text-decoration:none;}
+        .header.nr-hero .se-label{color:rgba(255,255,255,.9);font-family:serif;text-transform:uppercase;letter-spacing:3px;font-size:.68rem;}
+        .header.nr-hero .scroll-cue{position:relative;width:26px;height:42px;border:2px solid rgba(255,255,255,.75);border-radius:14px;display:flex;justify-content:center;}
+        .header.nr-hero .scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:nrScrollDot 1.8s ease-in-out infinite;}
+        @keyframes nrScrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}
 
         /* SUPPLIER TABS */
         .tabs-container {
@@ -241,10 +251,12 @@
           .supplier-details h2{display:none}
           @media(max-width:640px){.header h1{font-size:2rem!important}}
         </style>
-        <header class="header">
+        <header class="header nr-hero">
             <p class="nr-eyebrow">Activity Experiences &middot; Pre-Negotiated STO Rates 2026/2027</p>
             <h1 id="nr-hero-co">Mola Mola Safaris</h1>
+            <a class="scroll-explore" href="javascript:void(0)" onclick="nrHeroScroll();return false" aria-label="Explore"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a>
         </header>
+        <script>function nrHeroScroll(){var t=document.querySelector('.season-selector')||document.querySelector('.tabs-container');if(!t)return;var hd=document.querySelector('.main-header');var off=hd?Math.ceil(hd.getBoundingClientRect().bottom):0;var y=t.getBoundingClientRect().top+window.pageYOffset-off-16;window.scrollTo({top:y,behavior:'smooth'});}</script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
   var agent=false; try{agent=!!sessionStorage.getItem('nr_agent_token');}catch(e){}
