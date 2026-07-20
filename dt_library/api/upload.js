@@ -26,6 +26,8 @@ function slugify(s) {
 
 module.exports = async function (req, res) {
   res.setHeader('Content-Type', 'application/json');
+  // Safe health-check (no secrets) so config can be verified.
+  if (req.method === 'GET') return res.status(200).json({ ok: true, extractConfigured: extract.extractConfigured(), blobConfigured: !!process.env.BLOB_READ_WRITE_TOKEN, dbConfigured: db.dbConfigured() });
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!db.dbConfigured()) return res.status(200).json({ ok: false, error: 'Database not configured.' });
 
