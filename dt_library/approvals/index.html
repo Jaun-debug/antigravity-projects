@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Approvals | Namibia Rates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#a48256;--green:#87a996;--text:#3c3530;--muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--head:'Cinzel',serif;--body:'Jost',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);font-weight:300;}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 30px;background:var(--sand);border-bottom:1px solid rgba(164,130,86,.15);}
+.logo{font-family:var(--head);color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-weight:500;font-size:1.05rem;}
+.hbtns a,.hbtns button{cursor:pointer;font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);text-decoration:none;margin-left:8px;}
+.hbtns a:hover,.hbtns button:hover{background:var(--accent);color:#fff;}
+.layout{display:grid;grid-template-columns:320px 1fr;gap:22px;max-width:1200px;margin:0 auto;padding:26px 24px;}
+.side{background:var(--sand);border-radius:12px;padding:16px;height:fit-content;}
+.filter{display:flex;gap:6px;margin-bottom:12px;}
+.filter button{flex:1;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;padding:7px;border-radius:6px;border:1px solid rgba(164,130,86,.3);background:#fff;color:var(--muted);cursor:pointer;}
+.filter button.on{background:var(--accent);color:#fff;border-color:var(--accent);}
+.item{padding:11px 12px;border-radius:8px;cursor:pointer;margin-bottom:6px;border:1px solid transparent;}
+.item:hover{background:#fff;}
+.item.active{background:#fff;border-color:var(--accent);}
+.item .nm{font-weight:500;font-size:.92rem;}
+.item .meta{font-size:.76rem;color:var(--muted);margin-top:2px;}
+.badge{display:inline-block;font-size:.62rem;padding:1px 7px;border-radius:20px;margin-left:6px;}
+.badge.hi{background:rgba(135,169,150,.2);color:#5a7d68;} .badge.mid{background:rgba(164,130,86,.18);color:var(--accent);} .badge.lo{background:rgba(192,57,43,.14);color:#c0392b;}
+.main{background:var(--sand);border-radius:12px;padding:26px;min-height:420px;}
+.empty{color:var(--muted);text-align:center;padding:80px 0;}
+h2{font-family:var(--head);font-weight:500;color:var(--accent);font-size:1.3rem;}
+.metaline{color:var(--muted);font-size:.85rem;margin:4px 0 18px;}
+.metaline a{color:var(--accent);}
+.flags{background:#fff6ee;border:1px solid #e7c9a5;border-radius:8px;padding:12px 14px;margin-bottom:16px;font-size:.85rem;color:#8a5a1e;}
+.flags b{color:#c0392b;}
+.diff{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:.85rem;}
+.diff th,.diff td{padding:6px 8px;border-bottom:1px solid rgba(0,0,0,.06);text-align:left;}
+.up{color:#c0392b;} .down{color:#2e7d46;}
+table.rates{width:100%;border-collapse:collapse;margin:10px 0 16px;background:#fff;border-radius:8px;overflow:hidden;}
+table.rates caption{text-align:left;font-family:var(--head);padding:12px 12px 4px;color:var(--text);}
+table.rates th,table.rates td{padding:9px 12px;font-size:.88rem;border-bottom:1px solid rgba(0,0,0,.05);text-align:left;}
+table.rates td:last-child{text-align:right;font-variant-numeric:tabular-nums;}
+label{font-size:.7rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+textarea{width:100%;height:150px;font-family:monospace;font-size:12px;border:1px solid rgba(164,130,86,.3);border-radius:8px;padding:10px;margin-top:6px;}
+.actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.btn{padding:11px 20px;border-radius:7px;border:none;cursor:pointer;font-family:var(--head);text-transform:uppercase;letter-spacing:1px;font-size:.78rem;}
+.btn.pub{background:var(--green);color:#fff;} .btn.pub:hover{background:var(--accent);}
+.btn.ghost{background:#fff;border:1px solid var(--accent);color:var(--accent);}
+.msg{font-size:.85rem;margin-top:12px;} .msg.ok{color:#2e7d46;} .msg.err{color:#c0392b;}
+@media(max-width:820px){.layout{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Namibia Rates — Approvals</div>
+    <div class="hbtns"><a href="/owner/">Rate admin</a><a href="/accounts/">Accounts</a><button onclick="signOut()">Sign out</button></div>
+  </header>
+  <div class="layout">
+    <aside class="side">
+      <div class="filter">
+        <button data-f="pending" class="on">Pending</button>
+        <button data-f="corrections">Corrections</button>
+        <button data-f="approved">Published</button>
+      </div>
+      <div id="list"><div style="color:var(--muted);font-size:.85rem;padding:10px">Loading…</div></div>
+    </aside>
+    <section class="main" id="main"><div class="empty" id="empty">Select an upload on the left to review it.</div><div id="detail" style="display:none"></div></section>
+  </div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  function ap(b){return fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  function auth(b){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var status='pending', current=null;
+
+  auth({action:'me'}).then(function(r){
+    if(!r||!r.ok||!r.user){ location.href='/portal/'; return; }
+    if(r.user.role!=='owner'){ location.href = r.user.role==='supplier'?'/supplier/':'/agent/'; return; }
+    load();
+  }).catch(function(){ location.href='/portal/'; });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.filter button'),function(b){
+    b.onclick=function(){ document.querySelectorAll('.filter button').forEach(function(x){x.classList.remove('on');}); b.classList.add('on'); status=b.getAttribute('data-f'); load(); };
+  });
+
+  function confBadge(c){ if(c==null) return ''; var cls=c>=80?'hi':(c>=60?'mid':'lo'); return '<span class="badge '+cls+'">'+c+'%</span>'; }
+
+  function load(){
+    ap({action:'list',status:status}).then(function(r){
+      var el=$('list');
+      if(!r||!r.ok){ el.innerHTML='<div style="color:#c0392b;padding:10px">'+((r&&r.error)||'Could not load')+'</div>'; return; }
+      if(!r.uploads.length){ el.innerHTML='<div style="color:var(--muted);font-size:.85rem;padding:10px">Nothing here.</div>'; return; }
+      el.innerHTML=r.uploads.map(function(u){
+        return '<div class="item" data-id="'+u.id+'"><div class="nm">'+esc(u.name||u.slug||u.filename)+confBadge(u.confidence)+'</div>'
+          +'<div class="meta">'+esc(u.supplierEmail||'')+(u.anomalyCount?' · ⚠️ '+u.anomalyCount:'')+'</div></div>';
+      }).join('');
+      Array.prototype.forEach.call(el.querySelectorAll('.item'),function(it){ it.onclick=function(){ document.querySelectorAll('.item').forEach(function(x){x.classList.remove('active');}); it.classList.add('active'); open(it.getAttribute('data-id')); }; });
+    });
+  }
+
+  function open(id){
+    ap({action:'get',id:id}).then(function(r){
+      if(!r||!r.ok){ return; }
+      current=r.upload; render(current);
+    });
+  }
+
+  function render(u){
+    $('empty').style.display='none'; var d=$('detail'); d.style.display='block';
+    var doc=u.extracted||{sections:[]};
+    var flags='';
+    if((u.anomalies||[]).length){ flags+='<div class="flags"><b>⚠️ AI flagged '+u.anomalies.length+' item(s) — check these:</b><ul style="margin:6px 0 0 18px">'+u.anomalies.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul></div>'; }
+    var diff='';
+    if((u.yearDiff||[]).length){
+      diff='<label>Changes vs current published rates</label><table class="diff"><thead><tr><th>Section</th><th>Rate</th><th>Was</th><th>Now</th><th>Δ</th></tr></thead><tbody>'
+        +u.yearDiff.map(function(c){var cls=c.pct>0?'up':'down';return '<tr><td>'+esc(c.section)+'</td><td>'+esc(c.label)+'</td><td>'+c.from+'</td><td>'+c.to+'</td><td class="'+cls+'">'+(c.pct==null?'':(c.pct>0?'+':'')+c.pct+'%')+'</td></tr>';}).join('')+'</tbody></table>';
+    }
+    var tables=(doc.sections||[]).map(function(s){
+      var rows=(s.rows||[]).map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';}).join('');
+      return '<table class="rates"><caption>'+esc(s.title||'')+'</caption><tbody>'+rows+'</tbody></table>';
+    }).join('');
+    d.innerHTML='<h2>'+esc(doc.name||u.name||u.slug)+'</h2>'
+      +'<div class="metaline">'+esc(u.region||doc.region||'')+' · slug: <code>'+esc(u.slug||'—')+'</code> · confidence '+(u.confidence==null?'n/a':u.confidence+'%')+' · from '+esc(u.supplierEmail||'')+(u.blobUrl?' · <a href="'+u.blobUrl+'" target="_blank">original PDF</a>':'')+'</div>'
+      +flags+diff
+      +'<label>Extracted rates</label>'+tables
+      +'<label>Edit data before publishing (JSON)</label><textarea id="jsonEdit">'+esc(JSON.stringify(doc,null,1))+'</textarea>'
+      +'<div class="actions"><button class="btn pub" onclick="approve()">Approve &amp; publish</button>'
+      +'<button class="btn ghost" onclick="correct()">Request corrections</button>'
+      +'<button class="btn ghost" onclick="reject()">Reject</button></div>'
+      +'<div class="msg" id="rmsg"></div>';
+  }
+
+  window.approve=function(){
+    var m=$('rmsg'); m.className='msg';
+    var data; try{ data=JSON.parse($('jsonEdit').value); }catch(e){ m.className='msg err'; m.textContent='JSON is invalid — fix it before publishing.'; return; }
+    ap({action:'approve',id:current.id,data:data}).then(function(r){
+      if(r&&r.ok){ m.className='msg ok'; m.textContent='Published to '+r.slug+'. Live on the lodge page now.'; load(); }
+      else { m.className='msg err'; m.textContent=(r&&r.error)||'Publish failed.'; }
+    });
+  };
+  window.reject=function(){ var note=prompt('Reason (optional):')||''; ap({action:'reject',id:current.id,note:note}).then(function(){ $('detail').style.display='none'; $('empty').style.display='block'; load(); }); };
+  window.correct=function(){ var note=prompt('What should the supplier fix?')||''; ap({action:'correct',id:current.id,note:note}).then(function(){ $('detail').style.display='none'; $('empty').style.display='block'; load(); }); };
+  window.signOut=function(){ auth({action:'logout'}).then(function(){ location.href='/portal/'; }); };
+})();
+</script>
+</body>
+</html>

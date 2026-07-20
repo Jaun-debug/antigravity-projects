@@ -1176,5 +1176,13 @@
       "source": "/",
       "destination": "/namibia_agent_portal.html"
     }
-  ]
+  ],
+  "functions": {
+    "api/upload.js": {
+      "maxDuration": 60
+    },
+    "api/approvals.js": {
+      "maxDuration": 30
+    }
+  }
 }

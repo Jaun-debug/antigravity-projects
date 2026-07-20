@@ -15,14 +15,25 @@ header{display:flex;justify-content:space-between;align-items:center;padding:16p
 .logo small{display:block;font-family:var(--body);font-size:.55rem;letter-spacing:3px;color:var(--muted);}
 .signout{cursor:pointer;font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;padding:8px 16px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);}
 .signout:hover{background:var(--accent);color:#fff;}
-.wrap{max-width:960px;margin:0 auto;padding:44px 28px;}
-h1{font-family:var(--head);font-weight:500;font-size:1.7rem;color:var(--accent);margin-bottom:6px;}
-.sub{color:var(--muted);margin-bottom:30px;}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
-.card{background:var(--sand);border-radius:12px;padding:26px;}
-.card h3{font-family:var(--head);font-weight:500;color:var(--accent);font-size:1.05rem;margin-bottom:8px;}
-.card p{font-size:.9rem;color:var(--muted);line-height:1.6;}
-.soon{display:inline-block;margin-top:12px;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);border:1px solid var(--green);border-radius:20px;padding:3px 10px;}
+.wrap{max-width:820px;margin:0 auto;padding:40px 24px;}
+h1{font-family:var(--head);font-weight:500;font-size:1.6rem;color:var(--accent);margin-bottom:6px;}
+.sub{color:var(--muted);margin-bottom:26px;}
+.panel{background:var(--sand);border-radius:12px;padding:26px;margin-bottom:24px;}
+.panel h2{font-family:var(--head);font-weight:500;color:var(--accent);font-size:1.1rem;margin-bottom:14px;}
+.drop{border:2px dashed rgba(164,130,86,.45);border-radius:10px;padding:34px 20px;text-align:center;color:var(--muted);cursor:pointer;transition:.2s;background:#fff;}
+.drop:hover,.drop.over{border-color:var(--accent);background:#fffdf9;}
+.drop strong{color:var(--accent);}
+.status{margin-top:14px;font-size:.9rem;min-height:1em;}
+.status.ok{color:#2e7d46;} .status.err{color:#c0392b;} .status.busy{color:var(--muted);}
+table{width:100%;border-collapse:collapse;}
+th,td{text-align:left;padding:10px 8px;font-size:.9rem;border-bottom:1px solid rgba(0,0,0,.06);}
+th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.tag{display:inline-block;font-size:.62rem;text-transform:uppercase;letter-spacing:1px;padding:2px 9px;border-radius:20px;}
+.tag.pending{background:rgba(164,130,86,.15);color:var(--accent);}
+.tag.approved{background:rgba(135,169,150,.2);color:#5a7d68;}
+.tag.rejected,.tag.error{background:rgba(192,57,43,.12);color:#c0392b;}
+.tag.corrections{background:rgba(184,149,106,.18);color:#8a5a1e;}
+.tag.processing{background:rgba(0,0,0,.08);color:var(--muted);}
 </style>
 </head>
 <body>
@@ -32,23 +43,73 @@ h1{font-family:var(--head);font-weight:500;font-size:1.7rem;color:var(--accent);
   </header>
   <div class="wrap">
     <h1>Welcome<span id="who"></span></h1>
-    <p class="sub">Your supplier dashboard. Upload your rack rates here — no conversions needed, just your PDF or Excel.</p>
-    <div class="grid">
-      <div class="card"><h3>Upload rack rates</h3><p>Drop in your PDF or Excel rate sheet. Our AI reads it for you.</p><span class="soon">Coming soon</span></div>
-      <div class="card"><h3>Upload history</h3><p>Every sheet you've sent, with its approval status.</p><span class="soon">Coming soon</span></div>
-      <div class="card"><h3>Approval status</h3><p>See when the Namibia Rates team has published your rates.</p><span class="soon">Coming soon</span></div>
-      <div class="card"><h3>Messages</h3><p>Correspondence with the Namibia Rates team.</p><span class="soon">Coming soon</span></div>
+    <p class="sub">Upload your rack rate sheet as a PDF — no conversions needed. We read it, and the Namibia Rates team approves it before it goes live.</p>
+
+    <div class="panel">
+      <h2>Upload rack rates (PDF)</h2>
+      <div class="drop" id="drop">
+        <p><strong>Choose a PDF</strong> or drag it here</p>
+        <p style="font-size:.8rem;margin-top:6px">Your latest rate card — up to ~3&nbsp;MB.</p>
+      </div>
+      <input id="file" type="file" accept="application/pdf,.pdf" style="display:none">
+      <div class="status" id="status"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Upload history</h2>
+      <table><thead><tr><th>File</th><th>Status</th><th>AI confidence</th><th>Sent</th></tr></thead>
+      <tbody id="rows"><tr><td colspan="4" style="color:var(--muted)">Loading…</td></tr></tbody></table>
     </div>
   </div>
+
 <script>
 (function(){
+  var $=function(id){return document.getElementById(id);};
   function post(b){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  function fmtDate(ms){ if(!ms) return ''; var d=new Date(ms); return d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }
+
   post({action:'me'}).then(function(r){
     if(!r||!r.ok||!r.user){ location.href='/portal/'; return; }
     if(r.user.role!=='supplier'){ location.href = r.user.role==='owner'?'/owner/':'/agent/'; return; }
-    var n=(r.user.name||r.user.email||'').split('@')[0];
-    if(n) document.getElementById('who').textContent=', '+n;
+    var n=(r.user.name||r.user.email||'').split('@')[0]; if(n) $('who').textContent=', '+n;
+    loadHistory();
   }).catch(function(){ location.href='/portal/'; });
+
+  function loadHistory(){
+    fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'mine'})}).then(function(r){return r.json();}).then(function(r){
+      var tb=$('rows');
+      if(!r||!r.ok){ tb.innerHTML='<tr><td colspan="4" style="color:var(--muted)">No uploads yet.</td></tr>'; return; }
+      if(!r.uploads.length){ tb.innerHTML='<tr><td colspan="4" style="color:var(--muted)">No uploads yet.</td></tr>'; return; }
+      tb.innerHTML=r.uploads.map(function(u){
+        return '<tr><td>'+(u.filename||'')+'</td><td><span class="tag '+u.status+'">'+u.status+'</span></td><td>'+(u.confidence==null?'—':u.confidence+'%')+'</td><td>'+fmtDate(u.createdAt)+'</td></tr>';
+      }).join('');
+    });
+  }
+
+  var drop=$('drop'), file=$('file');
+  drop.onclick=function(){ file.click(); };
+  ['dragenter','dragover'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over');}); });
+  ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.remove('over');}); });
+  drop.addEventListener('drop',function(e){ if(e.dataTransfer.files&&e.dataTransfer.files[0]) handle(e.dataTransfer.files[0]); });
+  file.onchange=function(){ if(file.files&&file.files[0]) handle(file.files[0]); };
+
+  function handle(f){
+    var s=$('status');
+    if(!/pdf/i.test(f.type) && !/\.pdf$/i.test(f.name)){ s.className='status err'; s.textContent='Please choose a PDF file.'; return; }
+    if(f.size>3*1024*1024){ s.className='status err'; s.textContent='That file is a bit large (max ~3 MB). Please send a smaller PDF.'; return; }
+    s.className='status busy'; s.textContent='Reading “'+f.name+'” and extracting rates… this can take a moment.';
+    var reader=new FileReader();
+    reader.onload=function(){
+      var b64=String(reader.result).split(',')[1]||'';
+      fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:'rack'})})
+        .then(function(r){return r.json();}).then(function(r){
+          if(r&&r.ok){ s.className='status ok'; s.textContent='Received & read (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'). Sent to Namibia Rates for approval.'; loadHistory(); }
+          else { s.className='status err'; s.textContent=(r&&r.error)||'Upload failed — please try again.'; }
+        }).catch(function(){ s.className='status err'; s.textContent='Network error — please try again.'; });
+    };
+    reader.readAsDataURL(f);
+  }
+
   window.signOut=function(){ post({action:'logout'}).then(function(){ location.href='/portal/'; }); };
 })();
 </script>
