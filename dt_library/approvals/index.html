@@ -59,6 +59,7 @@ textarea{width:100%;height:150px;font-family:monospace;font-size:12px;border:1px
     <aside class="side">
       <div class="filter">
         <button data-f="pending" class="on">Pending</button>
+        <button data-f="error">Errors</button>
         <button data-f="corrections">Corrections</button>
         <button data-f="approved">Published</button>
       </div>
@@ -111,6 +112,7 @@ textarea{width:100%;height:150px;font-family:monospace;font-size:12px;border:1px
     $('empty').style.display='none'; var d=$('detail'); d.style.display='block';
     var doc=u.extracted||{sections:[]};
     var flags='';
+    if(u.note){ flags+='<div class="flags"><b>'+(u.status==='error'?'Extraction error: ':'Note: ')+'</b>'+esc(u.note)+'</div>'; }
     if((u.anomalies||[]).length){ flags+='<div class="flags"><b>⚠️ AI flagged '+u.anomalies.length+' item(s) — check these:</b><ul style="margin:6px 0 0 18px">'+u.anomalies.map(function(a){return '<li>'+esc(a)+'</li>';}).join('')+'</ul></div>'; }
     var diff='';
     if((u.yearDiff||[]).length){
