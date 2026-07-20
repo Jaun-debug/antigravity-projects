@@ -180,13 +180,32 @@
   /* ---------- RACK RATES ---------- */
   function wireSheet(dropId,fileId,thumbsId){
     var file=stage.querySelector('#'+fileId),drop=stage.querySelector('#'+dropId),thumbs=stage.querySelector('#'+thumbsId);
-    if(!file||!drop)return;
-    function add(list){[].forEach.call(list,function(f){if(/^image\//.test(f.type)){var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);}else{var c=document.createElement('span');c.className='chip';c.textContent='\uD83D\uDCC4 '+f.name.slice(0,22);thumbs.appendChild(c);}});}
+    var picked=[];
+    if(!file||!drop)return picked;
+    function add(list){[].forEach.call(list,function(f){picked.push(f);if(/^image\//.test(f.type)){var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);}else{var c=document.createElement('span');c.className='chip';c.textContent='\uD83D\uDCC4 '+f.name.slice(0,22);thumbs.appendChild(c);}});}
     drop.onclick=function(){file.click();};
     file.onchange=function(){add(file.files);};
     drop.ondragover=function(e){e.preventDefault();drop.style.borderColor='#a48256';};
     drop.ondragleave=function(){drop.style.borderColor='';};
     drop.ondrop=function(e){e.preventDefault();drop.style.borderColor='';add(e.dataTransfer.files);};
+    return picked;
+  }
+  function uploadSheet(files,kind,msg){
+    var pdfs=(files||[]).filter(function(f){return /pdf/i.test(f.type)||/\.pdf$/i.test(f.name);});
+    if(!pdfs.length){msg.style.color='#e9a';msg.textContent='Please attach your rate sheet as a PDF to send it through for reading.';return;}
+    var f=pdfs[0];
+    if(f.size>4*1024*1024){msg.style.color='#e9a';msg.textContent='That PDF is a bit large (max ~4 MB) \u2014 please send a smaller file.';return;}
+    msg.style.color='#bcd0a0';msg.textContent='Reading \u201C'+f.name+'\u201D and extracting rates\u2026 this can take a moment.';
+    var reader=new FileReader();
+    reader.onload=function(){
+      var b64=String(reader.result).split(',')[1]||'';
+      fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:kind||'rack'})})
+        .then(function(r){return r.json();}).then(function(r){
+          if(r&&r.ok){msg.style.color='#bcd0a0';msg.textContent='\u2713 Received & read (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'). Sent to Namibia Rates for approval.';}
+          else{msg.style.color='#e9a';msg.textContent=(r&&r.error)||'Upload failed \u2014 please try again.';}
+        }).catch(function(){msg.style.color='#e9a';msg.textContent='Network error \u2014 please try again.';});
+    };
+    reader.readAsDataURL(f);
   }
   function rackStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your rates manually below, or upload a screenshot / file of your rate sheet.</p>'+
@@ -197,8 +216,8 @@
     function addRow(){var d=document.createElement('div');d.className='rk-row';d.innerHTML='<input class="aw-input" placeholder="Room / unit type (e.g. Standard Double)"><input class="aw-input" placeholder="Rate / night"><button class="rk-del">&times;</button>';d.querySelector('.rk-del').onclick=function(){d.remove();};rows.appendChild(d);}
     addRow();addRow();
     stage.querySelector('#rk-add').onclick=addRow;
-    wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
-    stage.querySelector('#rk-save').onclick=function(){stage.querySelector('#rk-msg').textContent='✓ Rack rates saved. Our team will review and publish them.';};
+    var rkFiles=wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
+    stage.querySelector('#rk-save').onclick=function(){uploadSheet(rkFiles,'rack',stage.querySelector('#rk-msg'));};
   }
   function photosStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Property</div><h2 class="aw-h">Upload property photos</h2><p class="aw-sub">Add photos of your rooms, facilities and surroundings.</p><div class="aw-panel" style="max-width:520px"><h4>Photos</h4><div class="aw-drop" id="ph-drop" style="min-height:360px;display:flex;align-items:center;justify-content:center">Click to upload or drag photos here</div><input type="file" id="ph-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="ph-thumbs"></div></div><button class="aw-btn" id="ph-save">Save photos</button><div class="aw-err" id="ph-msg" style="color:#bcd0a0"></div></div>';
