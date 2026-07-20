@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Agent Dashboard | Namibia Rates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#a48256;--green:#87a996;--text:#3c3530;--muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--head:'Cinzel',serif;--body:'Jost',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);font-weight:300;min-height:100vh;}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 34px;background:var(--sand);border-bottom:1px solid rgba(164,130,86,.15);}
+.logo{font-family:var(--head);color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-weight:500;font-size:1.1rem;}
+.logo small{display:block;font-family:var(--body);font-size:.55rem;letter-spacing:3px;color:var(--muted);}
+.signout{cursor:pointer;font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;padding:8px 16px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);}
+.signout:hover{background:var(--accent);color:#fff;}
+.wrap{max-width:960px;margin:0 auto;padding:44px 28px;}
+h1{font-family:var(--head);font-weight:500;font-size:1.7rem;color:var(--accent);margin-bottom:6px;}
+.sub{color:var(--muted);margin-bottom:30px;}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
+.card{background:var(--sand);border-radius:12px;padding:26px;}
+.card h3{font-family:var(--head);font-weight:500;color:var(--accent);font-size:1.05rem;margin-bottom:8px;}
+.card p{font-size:.9rem;color:var(--muted);line-height:1.6;}
+.card a{color:var(--accent);text-decoration:none;font-size:.85rem;}
+.soon{display:inline-block;margin-top:12px;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--green);border:1px solid var(--green);border-radius:20px;padding:3px 10px;}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Namibia Rates<small>Agent Portal</small></div>
+    <button class="signout" onclick="signOut()">Sign out</button>
+  </header>
+  <div class="wrap">
+    <h1>Welcome<span id="who"></span></h1>
+    <p class="sub">Your agent dashboard — search lodges, compare rates and build quotations.</p>
+    <div class="grid">
+      <div class="card"><h3>Browse rates</h3><p>Accommodation, vehicles and activities across Namibia.</p><a href="/">Open the portal &rarr;</a></div>
+      <div class="card"><h3>Search &amp; compare</h3><p>Find and compare lodge rates side by side.</p><span class="soon">Coming soon</span></div>
+      <div class="card"><h3>Build quotations</h3><p>Assemble itineraries and download client-ready PDFs.</p><span class="soon">Coming soon</span></div>
+      <div class="card"><h3>Favourites</h3><p>Save the lodges and rates you use most.</p><span class="soon">Coming soon</span></div>
+    </div>
+  </div>
+<script>
+(function(){
+  function post(b){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  post({action:'me'}).then(function(r){
+    if(!r||!r.ok||!r.user){ location.href='/portal/'; return; }
+    if(r.user.role!=='agent'){ location.href = r.user.role==='owner'?'/owner/':'/supplier/'; return; }
+    var n=(r.user.name||r.user.email||'').split('@')[0];
+    if(n) document.getElementById('who').textContent=', '+n;
+  }).catch(function(){ location.href='/portal/'; });
+  window.signOut=function(){ post({action:'logout'}).then(function(){ location.href='/portal/'; }); };
+})();
+</script>
+</body>
+</html>

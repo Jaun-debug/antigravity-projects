@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Partner Portal | Namibia Rates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#a48256;--green:#87a996;--text:#3c3530;--muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--head:'Cinzel',serif;--body:'Jost',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;font-weight:300;}
+.card{background:var(--sand);border-radius:14px;max-width:400px;width:100%;padding:40px 34px;box-shadow:0 25px 60px rgba(0,0,0,.12);}
+.brand{text-align:center;margin-bottom:6px;}
+.brand .logo{font-family:var(--head);color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-size:1.35rem;font-weight:500;}
+.brand .sub{font-size:.58rem;letter-spacing:4px;color:var(--muted);text-transform:uppercase;margin-top:4px;}
+h1{font-family:var(--head);font-weight:500;font-size:1.15rem;color:var(--accent);text-align:center;margin:22px 0 4px;}
+p.lead{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:22px;}
+label{display:block;font-size:.72rem;text-transform:uppercase;letter-spacing:1.2px;color:var(--muted);margin:14px 0 5px;}
+input{width:100%;padding:12px 14px;border:1px solid rgba(164,130,86,.3);border-radius:7px;font-family:var(--body);font-size:1rem;background:#fff;color:var(--text);}
+input:focus{outline:none;border-color:var(--accent);}
+button{width:100%;margin-top:22px;background:var(--green);color:#fff;border:none;padding:13px;border-radius:7px;font-family:var(--head);text-transform:uppercase;letter-spacing:1.5px;font-size:.85rem;cursor:pointer;transition:background .25s;}
+button:hover{background:var(--accent);}
+button[disabled]{opacity:.6;cursor:default;}
+.err{color:#c0392b;font-size:.85rem;margin-top:14px;min-height:1em;text-align:center;}
+.alt{text-align:center;margin-top:20px;font-size:.8rem;}
+.alt a{color:var(--accent);text-decoration:none;cursor:pointer;}
+.alt a:hover{text-decoration:underline;}
+.back{text-align:center;margin-top:18px;}
+.back a{color:var(--muted);font-size:.78rem;text-decoration:none;letter-spacing:.5px;}
+.hidden{display:none;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="brand"><div class="logo">Namibia Rates</div><div class="sub">Partner Portal</div></div>
+
+    <!-- LOGIN -->
+    <div id="loginView">
+      <h1>Sign in</h1>
+      <p class="lead">Suppliers, agents &amp; management</p>
+      <form id="loginForm" autocomplete="on">
+        <label for="email">Email</label>
+        <input id="email" type="email" autocomplete="username" required>
+        <label for="pass">Password</label>
+        <input id="pass" type="password" autocomplete="current-password" required>
+        <button type="submit" id="loginBtn">Sign in</button>
+      </form>
+      <div class="err" id="loginErr"></div>
+      <div class="alt"><a id="toSetup">First-time owner setup</a></div>
+    </div>
+
+    <!-- FIRST-TIME OWNER SETUP -->
+    <div id="setupView" class="hidden">
+      <h1>Owner setup</h1>
+      <p class="lead">Create the first owner account</p>
+      <form id="setupForm">
+        <label for="sEmail">Owner email</label>
+        <input id="sEmail" type="email" autocomplete="username" required>
+        <label for="sPass">Choose a password (min 8)</label>
+        <input id="sPass" type="password" autocomplete="new-password" required>
+        <label for="sOwner">Owner setup password (OWNER_PASS)</label>
+        <input id="sOwner" type="password" required>
+        <button type="submit" id="setupBtn">Create owner account</button>
+      </form>
+      <div class="err" id="setupErr"></div>
+      <div class="alt"><a id="toLogin">Back to sign in</a></div>
+    </div>
+
+    <div class="back"><a href="/">&larr; Back to website</a></div>
+  </div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  function post(body){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json();});}
+
+  // If already signed in, jump straight to the right dashboard.
+  post({action:'me'}).then(function(r){ if(r&&r.ok&&r.user){ location.href = r.user.role==='owner'?'/owner/':(r.user.role==='supplier'?'/supplier/':'/agent/'); } });
+
+  $('toSetup').onclick=function(){ $('loginView').classList.add('hidden'); $('setupView').classList.remove('hidden'); };
+  $('toLogin').onclick=function(){ $('setupView').classList.add('hidden'); $('loginView').classList.remove('hidden'); };
+
+  $('loginForm').onsubmit=function(e){
+    e.preventDefault(); var b=$('loginBtn'); b.disabled=true; $('loginErr').textContent='';
+    post({action:'login',email:$('email').value.trim(),password:$('pass').value}).then(function(r){
+      if(r&&r.ok){ location.href=r.redirect||'/'; }
+      else { $('loginErr').textContent=(r&&r.error)||'Sign in failed.'; b.disabled=false; }
+    }).catch(function(){ $('loginErr').textContent='Network error — please try again.'; b.disabled=false; });
+  };
+
+  $('setupForm').onsubmit=function(e){
+    e.preventDefault(); var b=$('setupBtn'); b.disabled=true; $('setupErr').textContent='';
+    post({action:'bootstrap',email:$('sEmail').value.trim(),password:$('sPass').value,ownerPass:$('sOwner').value}).then(function(r){
+      if(r&&r.ok){ location.href=r.redirect||'/owner/'; }
+      else { $('setupErr').textContent=(r&&r.error)||'Setup failed.'; b.disabled=false; }
+    }).catch(function(){ $('setupErr').textContent='Network error — please try again.'; b.disabled=false; });
+  };
+})();
+</script>
+</body>
+</html>

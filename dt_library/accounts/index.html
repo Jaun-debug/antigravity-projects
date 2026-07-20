@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Accounts | Namibia Rates</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--accent:#a48256;--green:#87a996;--text:#3c3530;--muted:#7d756e;--bg:#eae9e6;--sand:#f6f5f2;--head:'Cinzel',serif;--body:'Jost',sans-serif;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);font-weight:300;min-height:100vh;}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 34px;background:var(--sand);border-bottom:1px solid rgba(164,130,86,.15);}
+.logo{font-family:var(--head);color:var(--accent);text-transform:uppercase;letter-spacing:3px;font-weight:500;font-size:1.1rem;}
+.logo small{display:block;font-family:var(--body);font-size:.55rem;letter-spacing:3px;color:var(--muted);}
+.hbtns a,.hbtns button{cursor:pointer;font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;padding:8px 14px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);text-decoration:none;margin-left:8px;}
+.hbtns a:hover,.hbtns button:hover{background:var(--accent);color:#fff;}
+.wrap{max-width:1000px;margin:0 auto;padding:40px 28px;}
+h1{font-family:var(--head);font-weight:500;font-size:1.6rem;color:var(--accent);margin-bottom:4px;}
+.sub{color:var(--muted);margin-bottom:28px;}
+.panel{background:var(--sand);border-radius:12px;padding:24px;margin-bottom:26px;}
+.panel h2{font-family:var(--head);font-weight:500;color:var(--accent);font-size:1.1rem;margin-bottom:16px;}
+.row{display:grid;grid-template-columns:1fr 1fr 150px 1fr 130px;gap:10px;align-items:end;}
+label{display:block;font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:4px;}
+input,select{width:100%;padding:10px 11px;border:1px solid rgba(164,130,86,.3);border-radius:6px;font-family:var(--body);font-size:.92rem;background:#fff;color:var(--text);}
+input:focus,select:focus{outline:none;border-color:var(--accent);}
+.btn{background:var(--green);color:#fff;border:none;padding:11px;border-radius:6px;font-family:var(--head);text-transform:uppercase;letter-spacing:1px;font-size:.78rem;cursor:pointer;}
+.btn:hover{background:var(--accent);}
+table{width:100%;border-collapse:collapse;margin-top:6px;}
+th,td{text-align:left;padding:10px 8px;font-size:.9rem;border-bottom:1px solid rgba(0,0,0,.06);}
+th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
+.tag{display:inline-block;font-size:.62rem;text-transform:uppercase;letter-spacing:1px;padding:2px 9px;border-radius:20px;}
+.tag.owner{background:rgba(164,130,86,.15);color:var(--accent);}
+.tag.agent{background:rgba(135,169,150,.18);color:#5a7d68;}
+.tag.supplier{background:rgba(60,53,48,.1);color:var(--text);}
+.linkbtn{background:none;border:none;color:var(--accent);cursor:pointer;font-size:.82rem;text-decoration:underline;padding:0;font-family:var(--body);}
+.msg{font-size:.85rem;margin-top:12px;min-height:1em;}
+.msg.ok{color:#2e7d46;} .msg.err{color:#c0392b;}
+.hint{font-size:.75rem;color:var(--muted);margin-top:8px;}
+@media(max-width:760px){.row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+  <header>
+    <div class="logo">Namibia Rates<small>Account Management</small></div>
+    <div class="hbtns">
+      <a href="/owner/">Rate admin</a>
+      <button onclick="signOut()">Sign out</button>
+    </div>
+  </header>
+  <div class="wrap">
+    <h1>Partner accounts</h1>
+    <p class="sub">Create and manage supplier, agent and owner logins.</p>
+
+    <div class="panel">
+      <h2>Add an account</h2>
+      <div class="row">
+        <div><label>Email</label><input id="cEmail" type="email"></div>
+        <div><label>Name</label><input id="cName" type="text"></div>
+        <div><label>Role</label><select id="cRole"><option value="supplier">Supplier</option><option value="agent">Agent</option><option value="owner">Owner</option></select></div>
+        <div><label>Lodge slug (suppliers)</label><input id="cSlug" type="text" placeholder="e.g. ongava-lodge"></div>
+        <div><button class="btn" onclick="createUser()">Create</button></div>
+      </div>
+      <div class="hint">A temporary password is generated — share it with the partner; they can change it after signing in.</div>
+      <div class="msg" id="cMsg"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Existing accounts</h2>
+      <table><thead><tr><th>Email</th><th>Name</th><th>Role</th><th>Status</th><th></th></tr></thead>
+      <tbody id="rows"><tr><td colspan="5" style="color:var(--muted)">Loading…</td></tr></tbody></table>
+    </div>
+  </div>
+
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id);};
+  function post(b){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  function genPass(){return Math.random().toString(36).slice(2,7)+Math.random().toString(36).slice(2,6).toUpperCase()+'!';}
+
+  post({action:'me'}).then(function(r){
+    if(!r||!r.ok||!r.user){ location.href='/portal/'; return; }
+    if(r.user.role!=='owner'){ location.href = r.user.role==='supplier'?'/supplier/':'/agent/'; return; }
+    load();
+  }).catch(function(){ location.href='/portal/'; });
+
+  function load(){
+    post({action:'listUsers'}).then(function(r){
+      var tb=$('rows');
+      if(!r||!r.ok){ tb.innerHTML='<tr><td colspan="5" style="color:#c0392b">'+((r&&r.error)||'Could not load')+'</td></tr>'; return; }
+      if(!r.users.length){ tb.innerHTML='<tr><td colspan="5" style="color:var(--muted)">No accounts yet.</td></tr>'; return; }
+      tb.innerHTML=r.users.map(function(u){
+        return '<tr><td>'+u.email+'</td><td>'+(u.name||'')+'</td><td><span class="tag '+u.role+'">'+u.role+'</span>'+(u.supplierSlug?' <span style="color:#999;font-size:.8rem">'+u.supplierSlug+'</span>':'')+'</td>'
+          +'<td>'+(u.active?'Active':'<span style="color:#c0392b">Disabled</span>')+'</td>'
+          +'<td style="text-align:right">'
+          +'<button class="linkbtn" onclick="resetPw(\''+u.email+'\')">Reset password</button> &nbsp; '
+          +'<button class="linkbtn" onclick="toggle(\''+u.email+'\','+(!u.active)+')">'+(u.active?'Disable':'Enable')+'</button>'
+          +'</td></tr>';
+      }).join('');
+    });
+  }
+
+  window.createUser=function(){
+    var email=$('cEmail').value.trim(), name=$('cName').value.trim(), role=$('cRole').value, slug=$('cSlug').value.trim();
+    var pw=genPass();
+    var m=$('cMsg'); m.className='msg'; m.textContent='';
+    post({action:'createUser',email:email,name:name,role:role,supplierSlug:slug,password:pw}).then(function(r){
+      if(r&&r.ok){ m.className='msg ok'; m.textContent='Created '+email+' — temporary password: '+pw+'  (copy & send it now; it isn\'t shown again)'; $('cEmail').value='';$('cName').value='';$('cSlug').value=''; load(); }
+      else { m.className='msg err'; m.textContent=(r&&r.error)||'Could not create account.'; }
+    });
+  };
+  window.resetPw=function(email){
+    var pw=genPass();
+    post({action:'setPassword',email:email,password:pw}).then(function(r){
+      var m=$('cMsg'); if(r&&r.ok){ m.className='msg ok'; m.textContent='New password for '+email+': '+pw+'  (copy & send it now)'; } else { m.className='msg err'; m.textContent=(r&&r.error)||'Reset failed.'; }
+    });
+  };
+  window.toggle=function(email,active){ post({action:'setActive',email:email,active:active}).then(function(){ load(); }); };
+  window.signOut=function(){ post({action:'logout'}).then(function(){ location.href='/portal/'; }); };
+})();
+</script>
+</body>
+</html>
