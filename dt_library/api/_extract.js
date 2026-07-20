@@ -49,7 +49,7 @@ async function extractFromPdf(base64pdf) {
   let Anthropic;
   try { Anthropic = require('@anthropic-ai/sdk'); } catch (e) { return { ok: false, error: 'Anthropic SDK not installed.' }; }
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-  const model = process.env.ANTHROPIC_MODEL || 'claude-3-5-sonnet-latest';
+  const model = process.env.ANTHROPIC_MODEL || 'claude-sonnet-5';
   try {
     const resp = await client.messages.create({
       model: model,
