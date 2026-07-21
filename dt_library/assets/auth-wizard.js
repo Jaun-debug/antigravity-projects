@@ -156,7 +156,7 @@
   }
   function uploadRatesStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Upload Rates</div><h2 class="aw-h">Which rates are you loading?</h2><p class="aw-sub">Choose the type of rates to upload.</p><div class="aw-opts" style="grid-template-columns:1fr;max-width:460px"><button class="aw-opt" data-x="rack"><strong>Upload Rack Rates</strong><span>Your standard published rates</span></button><button class="aw-opt" data-x="sto"><strong>Upload STO Rates</strong><span>Net rate tiers, per season</span></button></div></div>';
-    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var x=b.getAttribute('data-x');if(x==='rack'){go('rack');}else{S.pendingForm='storates';go('season');}};});
+    [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){var x=b.getAttribute('data-x');if(x==='rack'){S.pendingForm='rack';go('season');}else{S.pendingForm='storates';go('season');}};});
   }
   function formStep(){
     var sup=S.role==='supplier';
@@ -258,13 +258,11 @@
     };
   }
   function rackStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Upload a screenshot or PDF of your rate sheet — our AI reads it, then you review the rates before submitting.</p>'+
-      '<div class="aw-panel"><h4>Season year</h4><div class="aw-field" style="margin:0"><label>Which season year is this rate sheet for?</label><select class="aw-input" id="rk-year"></select></div></div>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Upload a screenshot or PDF of your rate sheet — our AI reads it, then you review the rates before submitting.</p>'+
       '<div class="aw-panel"><h4>Upload your rate sheet</h4><div class="aw-drop" id="rk-sheet-drop" style="min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1rem">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="rk-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="rk-sheet-thumbs"></div></div>'+
       '<button class="aw-btn" id="rk-save">Read my rate sheet</button><div class="aw-err" id="rk-msg" style="color:#bcd0a0"></div></div>';
-    (function(){var now=new Date().getFullYear();var set=[now,now+1];stage.querySelector('#rk-year').innerHTML=set.map(function(y){return '<option value="'+y+'">'+y+' Season</option>';}).join('');})();
     var rkFiles=wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
-    stage.querySelector('#rk-save').onclick=function(){var yr=stage.querySelector('#rk-year').value;uploadSheet(rkFiles,'rack',stage.querySelector('#rk-msg'),function(r){r.year=yr||r.year;rackReviewStep(r);});};
+    stage.querySelector('#rk-save').onclick=function(){var yr=String(S.season||new Date().getFullYear()).replace(/[^0-9]/g,'');uploadSheet(rkFiles,'rack',stage.querySelector('#rk-msg'),function(r){r.year=yr||r.year;rackReviewStep(r);});};
   }
   function photosStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Property</div><h2 class="aw-h">Upload property photos</h2><p class="aw-sub">Add photos of your rooms, facilities and surroundings.</p><div class="aw-panel" style="max-width:520px"><h4>Photos</h4><div class="aw-drop" id="ph-drop" style="min-height:360px;display:flex;align-items:center;justify-content:center">Click to upload or drag photos here</div><input type="file" id="ph-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="ph-thumbs"></div></div><button class="aw-btn" id="ph-save">Save photos</button><div class="aw-err" id="ph-msg" style="color:#bcd0a0"></div></div>';
