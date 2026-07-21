@@ -45,7 +45,7 @@ window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionS
 window.scSignUp=function(){if(window.openAuthWizard){openAuthWizard("signup");}else{scOpenRole("role-signup");}};
 window.scPick=function(role){scCloseRole();if(role==="agent"){openLoginModal();}else{location.href="/supplier-portal/";}};
 window.scPickUp=function(role){scCloseRole();location.href="/signup/?role="+role;};
-(function(){var w=document.createElement("script");w.src="/assets/auth-wizard.js";w.defer=true;(document.head||document.documentElement).appendChild(w);})();
+(function(){var w=document.createElement("script");w.src="/assets/auth-wizard.js?v="+Date.now();w.defer=true;(document.head||document.documentElement).appendChild(w);})();
 function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
 if(inn){document.cookie="nr_session="+encodeURIComponent(sessionStorage.getItem("nr_agent_token"))+"; path=/; SameSite=Lax";}
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
