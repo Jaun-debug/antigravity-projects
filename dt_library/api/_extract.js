@@ -54,7 +54,7 @@ async function extractFromPdf(base64pdf) {
   try {
     const resp = await client.messages.create({
       model: model,
-      max_tokens: 4096,
+      max_tokens: 16000,
       system: SYSTEM,
       messages: [{
         role: 'user',
@@ -67,7 +67,9 @@ async function extractFromPdf(base64pdf) {
     const text = (resp.content || []).map(function (b) { return b && b.text ? b.text : ''; }).join('');
     const parsed = parseJson(text);
     if (!parsed || !Array.isArray(parsed.sections)) {
-      return { ok: false, error: 'Could not parse extraction output.', raw: text.slice(0, 500) };
+      const stop = resp && resp.stop_reason ? resp.stop_reason : '';
+      const hint = stop === 'max_tokens' ? ' (the sheet was too long and got cut off — try splitting it)' : '';
+      return { ok: false, error: 'Could not read this PDF into rates' + hint + '. AI said: ' + String(text || '').slice(0, 300) };
     }
     const doc = {
       name: parsed.name || '', region: parsed.region || '', currency: parsed.currency || 'N$',
