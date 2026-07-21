@@ -46,8 +46,9 @@
   .navsel{margin-bottom:8px}
   .lodge{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px;border-radius:8px;cursor:pointer}
   .lodge:hover{background:#f6f1e7}
+  .lodge:hover .nm{color:var(--green)}
   .lodge.active{background:#efe7d7}
-  .lodge .nm{font-weight:500;font-size:14px}
+  .lodge .nm{font-weight:500;font-size:14px;transition:color .12s}
   .lodge .rg{font-size:11px;color:var(--muted)}
   .grouphdr{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:10px 6px 4px;font-weight:700}
   .mk{font-size:14px;color:#d7cfbf;width:20px;display:inline-block;text-align:center;flex:none}
@@ -161,8 +162,10 @@
 
   var VEHICLES=[{slug:'nts',name:'NTS'},{slug:'ncr',name:'Namibia Car Rental'},{slug:'nrcr',name:'Namib Roos Car Rentals'},{slug:'sanga',name:'Sanga Group Travel'},{slug:'suricate',name:'Suricate Safaris'},{slug:'zap',name:'Zap Car Rental'},{slug:'zaris',name:'Zaris Safaris'}];
   var ACTIVITIES=[{slug:'molamola',name:'Mola Mola'},{slug:'desert',name:'Desert Explorers'},{slug:'namibsky',name:'Namib Sky'},{slug:'bogenfels',name:'Bogenfels Tours'},{slug:'alteraction',name:'Alter-Action'}];
-  var CATS={rack:[['accommodation','Accommodation (by region)'],['activity','Activities']],
+  var GROUPS=[{slug:'ol-leisure',name:'O&L Leisure'},{slug:'gondwana-collection',name:'Gondwana Collection'},{slug:'ongava',name:'Ongava'},{slug:'journeys-namibia',name:'Journeys Namibia'},{slug:'natural-selection',name:'Natural Selection'},{slug:'wilderness-namibia',name:'Wilderness Namibia'},{slug:'taleni-africa',name:'Taleni Africa'},{slug:'sun-karros',name:'Sun Karros'},{slug:'ultimate-safaris',name:'Ultimate Safaris'},{slug:'desert-hills',name:'Desert Hills Collection'}];
+  var CATS={rack:[['accommodation','Accommodation (by region)'],['vehicle','Vehicles'],['activity','Activities']],
             sto:[['accommodation','Accommodation lodges'],['group','Group lodges'],['vehicle','Vehicles'],['activity','Activities']]};
+  var openRegions={};   // which region groups are expanded (folded by default)
 
   var $=function(id){return document.getElementById(id)};
   function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
@@ -230,7 +233,7 @@
   $('msRack').addEventListener('click',function(){setMode('rack')});
   $('msSto').addEventListener('click',function(){setMode('sto')});
   $('catSel').addEventListener('change',function(){category=$('catSel').value;$('regionWrap').style.display=(category==='accommodation')?'block':'none';renderList();});
-  $('regionSel').addEventListener('change',function(){region=$('regionSel').value;renderList();});
+  $('regionSel').addEventListener('change',function(){ region=$('regionSel').value; openRegions={}; if(region) openRegions[region]=true; renderList(); });
   $('q').addEventListener('input',renderList);
 
   // ── build item set for the current mode/category ──────
@@ -239,9 +242,9 @@
     if(category==='accommodation'){
       items=lodgeIndex.map(function(l){return {slug:l.slug,name:l.name,region:l.region};});
       suppliers.filter(function(s){return s.category==='accommodation'&&s.supplierSlug;}).forEach(function(s){ if(!items.some(function(i){return i.slug===s.supplierSlug;})) items.push({slug:s.supplierSlug,name:s.name||s.supplierSlug,region:'',supplier:true}); });
-      if(region) items=items.filter(function(i){return i.region===region;});
     } else if(category==='group'){
-      items=suppliers.filter(function(s){return s.category==='group';}).map(function(s){return {slug:s.supplierSlug||slugify(s.name||s.email),name:s.name||s.email,supplier:true};});
+      items=GROUPS.slice();
+      suppliers.filter(function(s){return s.category==='group';}).forEach(function(s){var sl=s.supplierSlug||slugify(s.name||s.email);if(!items.some(function(i){return i.slug===sl;}))items.push({slug:sl,name:s.name||s.email,supplier:true});});
     } else if(category==='vehicle'){
       items=VEHICLES.slice();
       suppliers.filter(function(s){return s.category==='vehicle';}).forEach(function(s){var sl=s.supplierSlug||slugify(s.name||s.email);if(!items.some(function(i){return i.slug===sl;}))items.push({slug:sl,name:s.name||s.email,supplier:true});});
@@ -269,15 +272,22 @@
     var box=$('list');box.innerHTML='';
     var items=currentItems();
     if(!items.length){box.innerHTML='<div class="hint" style="padding:6px">Nothing here yet.</div>';return}
-    // group accommodation by region when "All regions"
-    if(category==='accommodation' && !region){
+    var q=($('q').value||'').trim().toLowerCase();
+    if(category==='accommodation'){
+      // collapsible region groups — folded by default, the region picked at the top opens.
       var byReg={},order=[];
       items.forEach(function(i){var r=i.region||'Other';if(!byReg[r]){byReg[r]=[];order.push(r);}byReg[r].push(i);});
       order.sort();
+      var openTarget=null;
       order.forEach(function(r){
-        var h=document.createElement('div');h.className='grouphdr';h.textContent=r;box.appendChild(h);
-        byReg[r].forEach(function(i){box.appendChild(itemRow(i));});
+        var open = q ? true : !!openRegions[r];
+        var h=document.createElement('div');h.className='grouphdr';h.style.cursor='pointer';
+        h.innerHTML='<span style="display:inline-block;width:14px;color:#b8a988">'+(open?'▾':'▸')+'</span>'+esc(r)+' <span style="color:#cfc7b8;font-weight:400">('+byReg[r].length+')</span>';
+        h.addEventListener('click',function(){ openRegions[r]=!open; renderList(); });
+        box.appendChild(h);
+        if(open){ byReg[r].forEach(function(i){box.appendChild(itemRow(i));}); if(r===region) openTarget=h; }
       });
+      if(openTarget) setTimeout(function(){ openTarget.scrollIntoView({block:'nearest'}); },0);
     } else {
       items.forEach(function(i){box.appendChild(itemRow(i));});
     }
