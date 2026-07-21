@@ -245,7 +245,7 @@
     (doc.sections&&doc.sections.length?doc.sections:[{title:'',rows:[['','']]}]).forEach(function(s){secHost.appendChild(secEl(s));});
     stage.querySelector('#rv-addsec').onclick=function(){secHost.appendChild(secEl({title:'',rows:[['','']]}));};
     function collect(){var sections=[];[].forEach.call(secHost.children,function(w){if(!w.querySelector)return;var tEl=w.querySelector('.rv-sectitle');if(!tEl)return;var title=tEl.value.trim();var rows=[];[].forEach.call(w.querySelectorAll('.rk-row'),function(rw){var l=rw.querySelector('.rv-label').value.trim();var p=rw.querySelector('.rv-price').value.trim();if(l||p)rows.push([l,p]);});if(title||rows.length)sections.push({title:title,rows:rows});});
-      return {name:stage.querySelector('#rv-name').value.trim(),region:stage.querySelector('#rv-region').value.trim(),currency:currency,validity:stage.querySelector('#rv-validity').value.trim(),note:stage.querySelector('#rv-note').value.trim(),sections:sections};}
+      return {name:stage.querySelector('#rv-name').value.trim(),region:stage.querySelector('#rv-region').value.trim(),currency:currency,validity:stage.querySelector('#rv-validity').value.trim(),note:stage.querySelector('#rv-note').value.trim(),commission:(rec&&rec.commission)||'',sections:sections};}
     stage.querySelector('#rv-submit').onclick=function(){
       var msg=stage.querySelector('#rv-msg');var data=collect();
       if(!data.sections.length){msg.style.color='#e9a';msg.textContent='Add at least one rate before submitting.';return;}
@@ -286,21 +286,44 @@
 
   function lsGet(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
   function lsSet(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
-  function getTiers(){return lsGet('nr_sto_tiers',['15% commission','20% commission','30% commission']);}
+  function getTiers(){return lsGet('nr_sto_tiers',['15% commission','20% commission','25% commission']);}
   function setTiers(a){lsSet('nr_sto_tiers',a);}
   function getAlloc(){var a=lsGet('nr_sto_alloc2',null);if(!a){a={};getTiers().forEach(function(t){a[t]=[];});lsSet('nr_sto_alloc2',a);}return a;}
   function setAlloc(a){lsSet('nr_sto_alloc2',a);}
   function stoRatesStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Upload your STO rates</h2><p class="aw-sub">Enter a net rate for each tier &mdash; and drag in, pick a file, or take a photo of the rate for each. Add your own tiers too.</p>'+
-      '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div></div>'+
-      '<button class="aw-btn" id="sto-save">Save STO rates</button><div class="aw-err" id="sto-msg" style="color:#bcd0a0"></div></div>';
-    var tiers=stage.querySelector('#sto-tiers');
-    var createBlk=document.createElement('div');createBlk.className='sto-create';createBlk.innerHTML='+ Create new tier';tiers.appendChild(createBlk);
-    function wireDrop(drop,file,thumbs){function add(list){[].forEach.call(list,function(f){if(/^image\//.test(f.type)){var img=document.createElement('img');img.className='aw-photo';img.src=URL.createObjectURL(f);thumbs.appendChild(img);}else{var c=document.createElement('span');c.className='chip';c.textContent='📄 '+f.name.slice(0,16);thumbs.appendChild(c);}});}drop.onclick=function(){file.click();};file.onchange=function(){add(file.files);};drop.ondragover=function(e){e.preventDefault();drop.classList.add('over');};drop.ondragleave=function(){drop.classList.remove('over');};drop.ondrop=function(e){e.preventDefault();drop.classList.remove('over');add(e.dataTransfer.files);};}
-    function addTier(label,rate){var t=document.createElement('div');t.className='sto-tier';t.innerHTML='<input class="aw-input tlabel" value="'+esc(label)+'"><input class="aw-input" placeholder="Net rate" value="'+(rate||'')+'"><div class="aw-drop tier-drop">Drag, pick a file, or take a photo</div><input type="file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos"></div>';var drop=t.querySelector('.tier-drop'),file=t.querySelector('input[type=file]'),thumbs=t.querySelector('.aw-photos');wireDrop(drop,file,thumbs);tiers.insertBefore(t,createBlk);}
-    getTiers().forEach(function(t){addTier(t,'');});
-    createBlk.onclick=function(){addTier('New tier','');};
-    stage.querySelector('#sto-save').onclick=function(){var labels=[].map.call(stage.querySelectorAll('#sto-tiers .tlabel'),function(i){return i.value.trim();}).filter(Boolean);if(labels.length)setTiers(labels);stage.querySelector('#sto-msg').textContent='✓ STO rates saved. Our team will review and publish them.';};
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Your rate tiers</h2><p class="aw-sub">Tap a commission tier to load its net rate sheet, or add a new one. Rename a tier by typing in it.</p>'+
+      '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div></div></div>';
+    var host=stage.querySelector('#sto-tiers');
+    function render(){
+      host.innerHTML='';
+      var arr=getTiers();
+      arr.forEach(function(t,i){
+        var card=document.createElement('div');card.className='sto-tier';card.style.cursor='pointer';
+        var inp=document.createElement('input');inp.className='aw-input tlabel';inp.value=t;inp.style.margin='0';
+        inp.onclick=function(e){e.stopPropagation();};
+        inp.onchange=function(){arr[i]=inp.value.trim()||arr[i];setTiers(arr);};
+        var hint=document.createElement('div');hint.className='tier-drop';hint.style.cssText='display:flex;align-items:center;justify-content:center;flex:1;color:#d9b98a;letter-spacing:1px;font-size:.85rem;margin-top:0';hint.textContent='Load rates →';
+        var del=document.createElement('span');del.textContent='×';del.title='Remove tier';del.style.cssText='position:absolute;top:8px;right:12px;color:rgba(255,255,255,.5);cursor:pointer;font-size:1.1rem';del.onclick=function(e){e.stopPropagation();var a=getTiers();a.splice(i,1);setTiers(a);render();};
+        card.style.position='relative';
+        card.appendChild(inp);card.appendChild(hint);card.appendChild(del);
+        card.onclick=function(){stoUploadStep(inp.value.trim()||t);};
+        host.appendChild(card);
+      });
+      var addc=document.createElement('div');addc.className='sto-create';addc.textContent='+ Create new tier';
+      addc.onclick=function(){var a=getTiers();a.push('New tier');setTiers(a);render();};
+      host.appendChild(addc);
+    }
+    render();
+  }
+  function stoUploadStep(tier){
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+esc(tier)+'</div><h2 class="aw-h">Load your net rates</h2><p class="aw-sub">Upload a screenshot or PDF of your '+esc(tier)+' net rate sheet — our AI reads it, then you review before submitting.</p>'+
+      '<div class="aw-panel"><h4>Season year</h4><div class="aw-field" style="margin:0"><label>Which season year is this rate sheet for?</label><select class="aw-input" id="st-year"></select></div></div>'+
+      '<div class="aw-panel"><h4>Upload your rate sheet</h4><div class="aw-drop" id="st-drop" style="min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1rem">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="st-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="st-thumbs"></div></div>'+
+      '<div style="display:flex;gap:10px;justify-content:center"><button class="aw-btn ghost" id="st-back2">‹ Back to tiers</button><button class="aw-btn" id="st-save">Read my rate sheet</button></div><div class="aw-err" id="st-msg" style="color:#bcd0a0"></div></div>';
+    (function(){var now=new Date().getFullYear();var set=[now,now+1];var sel=String(S.season||now).replace(/[^0-9]/g,'');var chosen=sel||String(now);stage.querySelector('#st-year').innerHTML=set.map(function(y){return '<option value="'+y+'"'+(String(y)===chosen?' selected':'')+'>'+y+' Season</option>';}).join('');})();
+    stage.querySelector('#st-back2').onclick=function(){stoRatesStep();};
+    var files=wireSheet('st-drop','st-file','st-thumbs');
+    stage.querySelector('#st-save').onclick=function(){var yr=stage.querySelector('#st-year').value;uploadSheet(files,'sto',stage.querySelector('#st-msg'),function(r){r.year=yr||r.year;r.commission=tier;rackReviewStep(r);});};
   }
 
   function stoAssignStep(){
