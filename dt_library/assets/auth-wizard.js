@@ -347,22 +347,18 @@
   }
   function stoAllocTierStep(){
     var t=S.currentTier,alloc=getAlloc();
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Allocate &middot; '+esc(t)+'</div><h2 class="aw-h">'+esc(t.split(' ')[0])+' rate</h2><p class="aw-sub">Add every agent who should get this rate.</p>'+
-      '<div class="aw-field" style="max-width:520px"><label>Add an agent</label><div style="display:grid;grid-template-columns:1fr auto;gap:10px"><select class="aw-input" id="al-sel"></select><button class="aw-btn ghost" id="al-addbtn" style="margin:0;white-space:nowrap">+ Add</button></div></div>'+
-      '<div class="aw-panel" style="max-width:520px"><h4>Agents on this rate</h4><div class="sto-zone" id="al-zone" style="min-height:300px"></div></div>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Allocate &middot; '+esc(t)+'</div><h2 class="aw-h">'+esc(t.split(' ')[0])+' rate</h2><p class="aw-sub">Drag the email addresses or company names of every agent who should get this rate into the box below.</p>'+
+      '<div class="aw-panel" style="max-width:560px"><h4>Agents on this rate</h4><div class="sto-zone" id="al-zone" style="min-height:320px"></div></div>'+
       '<button class="aw-btn" id="al-save">Save</button><div class="aw-err" id="al-msg" style="color:#bcd0a0"></div></div>';
-    var all=AGENTS.concat(S.customAgents||[]);
-    var z=stage.querySelector('#al-zone'),sel=stage.querySelector('#al-sel');
+    var z=stage.querySelector('#al-zone');
     function names(){return [].map.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name;});}
     function persist(){alloc[t]=names();setAlloc(alloc);}
-    function rebuildSel(){var used=names();sel.innerHTML='';var av=all.filter(function(a){return used.indexOf(a)<0;});if(!av.length){var o=document.createElement('option');o.textContent='All agents added';o.disabled=true;sel.appendChild(o);return;}av.forEach(function(a){var o=document.createElement('option');o.value=a;o.textContent=a;sel.appendChild(o);});}
-    function hint(){if(!z.querySelector('.chip')&&!z.querySelector('.zhint')){var h=document.createElement('span');h.className='zhint';h.textContent='No agents on this rate yet.';z.appendChild(h);}}
-    function addAgent(name,np){var hh=z.querySelector('.zhint');if(hh)hh.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();hint();persist();rebuildSel();};z.appendChild(c);if(!np){persist();rebuildSel();}}
-    (alloc[t]||[]).forEach(function(n){addAgent(n,true);});hint();rebuildSel();
+    function hint(){if(!z.querySelector('.chip')&&!z.querySelector('.zhint')){var h=document.createElement('span');h.className='zhint';h.textContent='Drag email addresses or company names here.';z.appendChild(h);}}
+    function addAgent(name,np){name=String(name||'').trim();if(!name)return;var hh=z.querySelector('.zhint');if(hh)hh.remove();if([].some.call(z.querySelectorAll('.chip'),function(c){return c.dataset.name===name;}))return;var c=document.createElement('span');c.className='chip';c.dataset.name=name;c.innerHTML=esc(name)+' <span class="x">&times;</span>';c.querySelector('.x').onclick=function(){c.remove();hint();persist();};z.appendChild(c);if(!np)persist();}
+    (alloc[t]||[]).forEach(function(n){addAgent(n,true);});hint();
     z.addEventListener('dragover',function(e){e.preventDefault();z.classList.add('over');});
     z.addEventListener('dragleave',function(){z.classList.remove('over');});
-    z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var name=e.dataTransfer.getData('text/plain');if(name)addAgent(name);});
-    stage.querySelector('#al-addbtn').onclick=function(){var v=sel.value;if(v&&all.indexOf(v)>-1)addAgent(v);};
+    z.addEventListener('drop',function(e){e.preventDefault();z.classList.remove('over');var txt=e.dataTransfer.getData('text/plain');if(txt){txt.split(/[\n,;]+/).forEach(function(p){addAgent(p);});}});
     stage.querySelector('#al-save').onclick=function(){persist();stage.querySelector('#al-msg').textContent='✓ Agents saved for '+esc(t)+'.';};
   }
   function agentDetail(name){var slug=name.toLowerCase().replace(/[^a-z]+/g,'');return {company:name,contact:'Trade Desk',email:'trade@'+slug+'.com',phone:'+264 61 '+(100+(name.length*7)%900)+' '+(1000+(name.length*13)%9000),country:['Namibia','South Africa','United Kingdom','United States','Germany'][name.length%5],status:'Active',since:2019+(name.length%6),bookings:5+(name.length*3)%40};}
