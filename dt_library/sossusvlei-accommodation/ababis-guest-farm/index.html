@@ -297,12 +297,14 @@ function showRack(yr){
 }
 
 // Show net STO (signed-in state) using the rates returned by the server.
-function showSto(d){
+function showSto(d,meta){
   renderRates(d,true);
   var b=document.getElementById('mode-badge'); b.textContent='Net STO · '+d.commission; b.classList.add('sto');
-  document.getElementById('rate-sub').textContent=d.note+' · Valid '+d.validity;
+  document.getElementById('rate-sub').textContent=d.note+' · Valid '+d.validity+((meta&&meta.year)?' · '+meta.year+' season':'');
+  if(meta&&meta.years&&meta.years.length>1){var rt=document.getElementById('rate-tables');if(rt){var cur=meta.year;var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 2px 16px';meta.years.forEach(function(y){var bt=document.createElement('button');bt.type='button';bt.textContent=y+' season';var on=String(y)===String(cur);bt.style.cssText='cursor:pointer;font:inherit;padding:7px 16px;border-radius:20px;border:1px solid #a48256;background:'+(on?'#a48256':'transparent')+';color:'+(on?'#fff':'#a48256');bt.onclick=function(){showStoYear(y);};bar.appendChild(bt);});rt.insertBefore(bar,rt.firstChild);}}
   setHdrBtn(true);
 }
+function showStoYear(yr){var t=sessionStorage.getItem(TOKEN_KEY);if(!t)return;fetch('/api/sto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:t,lodge:LODGE,year:yr})}).then(function(r){return r.json();}).then(function(j){if(j&&j.rates){showSto(j.rates,j);}});}
 
 // On load: if a session token exists, fetch STO automatically.
 function applySession(){
@@ -312,7 +314,7 @@ function applySession(){
     body:JSON.stringify({token:token,lodge:LODGE})})
   .then(function(r){return r.json().then(function(j){return {ok:r.ok,j:j};});})
   .then(function(res){
-    if(res.ok && res.j && res.j.rates){ showSto(res.j.rates); }
+    if(res.ok && res.j && res.j.rates){ showSto(res.j.rates,res.j); }
     else { showRack(); }   // no inline rates for this lodge; keep the agent's session
   })
   .catch(function(){ showRack(); });

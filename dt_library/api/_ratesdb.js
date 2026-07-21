@@ -148,21 +148,22 @@ function pickDefaultYear(years) {
   return String(nums[nums.length - 1]);
 }
 
-// Resolve the doc to show for a slug: a specific year, else default year, else legacy.
-async function getRackResolved(slug, year) {
-  const years = await listYears('rack', slug);
+// Resolve the doc to show for a kind+slug: a specific year, else default year, else legacy.
+async function getResolved(kind, slug, year) {
+  const years = await listYears(kind, slug);
   if (year) {
-    const doc = await getRates('rack', slug, year);
+    const doc = await getRates(kind, slug, year);
     return { doc: doc, year: String(year), years: years };
   }
   if (years.length) {
     const def = pickDefaultYear(years);
-    const doc = await getRates('rack', slug, def);
+    const doc = await getRates(kind, slug, def);
     return { doc: doc, year: def, years: years };
   }
-  const legacy = await getRates('rack', slug); // undated fallback
+  const legacy = await getRates(kind, slug); // undated fallback
   return { doc: legacy, year: null, years: years };
 }
+async function getRackResolved(slug, year) { return getResolved('rack', slug, year); }
 
 async function listSlugs() {
   const r = getRedis();
@@ -216,6 +217,7 @@ module.exports = {
   setRates,
   delRates,
   listYears,
+  getResolved,
   getRackResolved,
   pickDefaultYear,
   listSlugs,

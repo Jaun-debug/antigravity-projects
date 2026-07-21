@@ -516,16 +516,20 @@ module.exports = async (req, res) => {
     // Owner-entered net rates (Redis) take precedence; the inline STO_DB below
     // is the fallback for lodges not yet managed in the owner area. If the DB
     // is unreachable we silently fall back so a valid login is never blocked.
-    let data = null;
+    const yearReq = body.year ? String(body.year) : '';
+    let data = null, years = [], year = null;
     try {
-      data = await db.getRates('sto', lodge);
+      const resolved = await db.getResolved('sto', lodge, yearReq || undefined);
+      data = resolved.doc; years = resolved.years || []; year = resolved.year;
     } catch (e) {
       data = null;
     }
-    if (!data) data = STO_DB[lodge];
+    if (!data) { data = STO_DB[lodge]; years = []; year = null; }
     if (data) {
       out.lodge = lodge;
       out.rates = data;
+      out.years = years;   // e.g. ["2026","2027"] when more than one STO year exists
+      out.year = year;     // the year these rates are for (null = undated)
     }
   }
 
