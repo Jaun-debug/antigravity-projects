@@ -291,25 +291,25 @@
   function getAlloc(){var a=lsGet('nr_sto_alloc2',null);if(!a){a={};getTiers().forEach(function(t){a[t]=[];});lsSet('nr_sto_alloc2',a);}return a;}
   function setAlloc(a){lsSet('nr_sto_alloc2',a);}
   function stoRatesStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Your rate tiers</h2><p class="aw-sub">Tap a commission tier to load its net rate sheet, or add a new one. Rename a tier by typing in it.</p>'+
-      '<div class="aw-panel"><h4>Rate tiers</h4><div id="sto-tiers"></div></div></div>';
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+seasonLabel()+'</div><h2 class="aw-h">Your rate tiers</h2><p class="aw-sub">Tap a commission tier to load its net rate sheet, or add a new one. Rename a tier by typing in it.</p><div class="aw-opts" id="sto-tiers" style="max-width:560px"></div></div>';
     var host=stage.querySelector('#sto-tiers');
     function render(){
       host.innerHTML='';
       var arr=getTiers();
       arr.forEach(function(t,i){
-        var card=document.createElement('div');card.className='sto-tier';card.style.cursor='pointer';
-        var inp=document.createElement('input');inp.className='aw-input tlabel';inp.value=t;inp.style.margin='0';
+        var card=document.createElement('div');card.className='aw-opt';card.style.position='relative';card.style.cursor='pointer';
+        var inp=document.createElement('input');inp.className='tlabel';inp.value=t;
+        inp.style.cssText="background:transparent;border:none;color:#fff;font-family:'Cinzel',serif;font-weight:500;font-size:1.12rem;letter-spacing:1px;padding:0;width:calc(100% - 18px);outline:none";
         inp.onclick=function(e){e.stopPropagation();};
         inp.onchange=function(){arr[i]=inp.value.trim()||arr[i];setTiers(arr);};
-        var hint=document.createElement('div');hint.className='tier-drop';hint.style.cssText='display:flex;align-items:center;justify-content:center;flex:1;color:#d9b98a;letter-spacing:1px;font-size:.85rem;margin-top:0';hint.textContent='Load rates →';
-        var del=document.createElement('span');del.textContent='×';del.title='Remove tier';del.style.cssText='position:absolute;top:8px;right:12px;color:rgba(255,255,255,.5);cursor:pointer;font-size:1.1rem';del.onclick=function(e){e.stopPropagation();var a=getTiers();a.splice(i,1);setTiers(a);render();};
-        card.style.position='relative';
-        card.appendChild(inp);card.appendChild(hint);card.appendChild(del);
+        var sub=document.createElement('span');sub.textContent='Load net rates →';
+        var del=document.createElement('span');del.textContent='×';del.title='Remove tier';del.style.cssText='position:absolute;top:12px;right:16px;color:rgba(255,255,255,.5);cursor:pointer;font-size:1.1rem;line-height:1';del.onclick=function(e){e.stopPropagation();var a=getTiers();a.splice(i,1);setTiers(a);render();};
+        card.appendChild(inp);card.appendChild(sub);card.appendChild(del);
         card.onclick=function(){stoUploadStep(inp.value.trim()||t);};
         host.appendChild(card);
       });
-      var addc=document.createElement('div');addc.className='sto-create';addc.textContent='+ Create new tier';
+      var addc=document.createElement('div');addc.className='aw-opt';addc.style.cssText='cursor:pointer;align-items:center;justify-content:center;text-align:center;border-style:dashed';
+      addc.innerHTML='<strong style="width:100%;text-align:center">+ Create new tier</strong>';
       addc.onclick=function(){var a=getTiers();a.push('New tier');setTiers(a);render();};
       host.appendChild(addc);
     }
