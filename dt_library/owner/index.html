@@ -57,6 +57,9 @@
   .mk{font-size:14px;color:#d7cfbf;width:20px;display:inline-block;text-align:center;flex:none}
   .mk.rk.on{color:var(--green)}
   .mk.st.on{color:var(--green-dk)}
+  .mkyears{display:flex;gap:6px;flex:none;align-items:center}
+  .yb{font-size:11px;font-weight:700;letter-spacing:.5px;color:#2f2b25}
+  .yb.on{color:var(--green-dk)}
   .main{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);min-height:60vh}
   .empty{color:var(--muted);text-align:center;padding:60px 20px}
   .tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--line)}
@@ -219,7 +222,7 @@
   function loadSummary(){
     api({action:'list'}).then(function(r){
       if(r.status===401){showLogin();return}
-      if(r.body&&r.body.ok){ summary={}; (r.body.lodges||[]).forEach(function(l){ summary[l.slug]={hasRack:l.hasRack,hasSto:l.hasSto,name:l.name,region:l.region}; }); renderList(); }
+      if(r.body&&r.body.ok){ summary={}; (r.body.lodges||[]).forEach(function(l){ summary[l.slug]={hasRack:l.hasRack,hasSto:l.hasSto,rackYears:l.rackYears||[],stoYears:l.stoYears||[],rackLegacy:l.rackLegacy,stoLegacy:l.stoLegacy,name:l.name,region:l.region}; }); renderList(); }
       else if(r.body&&r.body.error){toast(r.body.error)}
     });
   }
@@ -271,9 +274,13 @@
   }
   function markerHtml(slug){
     var s=summary[slug]||{};
-    var loaded= mode==='rack' ? s.hasRack : s.hasSto;
-    if(mode==='rack') return '<span class="mk rk '+(loaded?'on':'')+'" title="'+(loaded?'Rack rates loaded':'No rack rates yet')+'">'+(loaded?'●':'○')+'</span>';
-    return '<span class="mk st '+(loaded?'on':'')+'" title="'+(loaded?'STO rates loaded':'No STO rates yet')+'">'+(loaded?'✓':'○')+'</span>';
+    var years = mode==='rack' ? (s.rackYears||[]) : (s.stoYears||[]);
+    var legacy = mode==='rack' ? s.rackLegacy : s.stoLegacy;
+    function badge(y,short){
+      var on = years.indexOf(String(y))>-1 || (String(y)==='2026' && legacy);
+      return '<span class="yb '+(on?'on':'')+'" title="'+y+' '+(mode==='rack'?'rack':'STO')+' '+(on?'loaded':'not loaded')+'">'+short+'</span>';
+    }
+    return '<span class="mkyears">'+badge('2026','26')+badge('2027','27')+'</span>';
   }
   function itemRow(i){
     var d=document.createElement('div');d.className='lodge'+(current&&current.slug===i.slug?' active':'');

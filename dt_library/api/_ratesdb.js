@@ -192,6 +192,8 @@ async function listSummary() {
       region: meta.region || '',
       hasRack: !!rack || rackYears.length > 0,
       hasSto: !!sto || stoYears.length > 0,
+      rackYears: rackYears, stoYears: stoYears,
+      rackLegacy: !!rack, stoLegacy: !!sto,
     });
   }
   return out;

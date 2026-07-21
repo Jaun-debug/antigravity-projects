@@ -170,10 +170,11 @@
     stage.querySelector('#s-go').onclick=function(){S.mode='signin';S.role=null;S.step='role';S.hist=['role'];render();};
   }
 
-  function seasonLabel(){return S.season==='low'?'Low Season':'High Season';}
+  function seasonLabel(){return S.season?(S.season+' Season'):(new Date().getFullYear()+' Season');}
   function seasonStep(){
     var isRack=S.pendingForm==='rack';
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+(isRack?'Rack Rates':'STO Rates')+'</div><h2 class="aw-h">Which season?</h2><p class="aw-sub">Choose the season you want to load rates for &mdash; you can come back and add the other.</p><div class="aw-opts"><button class="aw-opt" data-s="high"><strong>High Season</strong><span>Peak / premium-season rates</span></button><button class="aw-opt" data-s="low"><strong>Low Season</strong><span>Off-peak / value rates</span></button></div></div>';
+    var now=new Date().getFullYear();
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">'+(isRack?'Rack Rates':'STO Rates')+'</div><h2 class="aw-h">Which year?</h2><p class="aw-sub">Choose the season year you want to load rates for &mdash; you can come back and add the other.</p><div class="aw-opts"><button class="aw-opt" data-s="'+now+'"><strong>'+now+' Season</strong><span>Rates for the '+now+' season</span></button><button class="aw-opt" data-s="'+(now+1)+'"><strong>'+(now+1)+' Season</strong><span>Rates for the '+(now+1)+' season</span></button></div></div>';
     [].forEach.call(stage.querySelectorAll('.aw-opt'),function(b){b.onclick=function(){S.season=b.getAttribute('data-s');go(S.pendingForm);};});
   }
 
