@@ -123,11 +123,18 @@ textarea{width:100%;height:150px;font-family:monospace;font-size:12px;border:1px
       var rows=(s.rows||[]).map(function(r){return '<tr><td>'+esc(r[0])+'</td><td>'+esc(r[1])+'</td></tr>';}).join('');
       return '<table class="rates"><caption>'+esc(s.title||'')+'</caption><tbody>'+rows+'</tbody></table>';
     }).join('');
+    var _now=new Date().getFullYear(); var _yrs=[_now,_now+1];
+    var _ysel=String(u.year||doc.year||'').replace(/[^0-9]/g,'');
+    if(_ysel && _yrs.indexOf(parseInt(_ysel,10))===-1) _yrs.push(parseInt(_ysel,10));
+    _yrs.sort(function(a,b){return a-b;});
+    var _chosen=_ysel||String(_now);
+    var yearSel='<label>Publish as season year</label><select id="pubYear" style="padding:9px 12px;border-radius:8px;border:1px solid rgba(164,130,86,.4);font:inherit;margin-top:6px;display:block">'+_yrs.map(function(y){return '<option value="'+y+'"'+(String(y)===_chosen?' selected':'')+'>'+y+'</option>';}).join('')+'</select>';
     d.innerHTML='<h2>'+esc(doc.name||u.name||u.slug)+'</h2>'
-      +'<div class="metaline">'+esc(u.region||doc.region||'')+' · slug: <code>'+esc(u.slug||'—')+'</code> · confidence '+(u.confidence==null?'n/a':u.confidence+'%')+' · from '+esc(u.supplierEmail||'')+(u.blobUrl?' · <a href="'+u.blobUrl+'" target="_blank">original PDF</a>':'')+'</div>'
+      +'<div class="metaline">'+esc(u.region||doc.region||'')+' · slug: <code>'+esc(u.slug||'—')+'</code>'+(u.year?' · year <code>'+esc(u.year)+'</code>':'')+' · confidence '+(u.confidence==null?'n/a':u.confidence+'%')+' · from '+esc(u.supplierEmail||'')+(u.blobUrl?' · <a href="'+u.blobUrl+'" target="_blank">original PDF</a>':'')+'</div>'
       +flags+diff
       +'<label>Extracted rates</label>'+tables
       +'<label>Edit data before publishing (JSON)</label><textarea id="jsonEdit">'+esc(JSON.stringify(doc,null,1))+'</textarea>'
+      +yearSel
       +'<div class="actions"><button class="btn pub" onclick="approve()">Approve &amp; publish</button>'
       +'<button class="btn ghost" onclick="correct()">Request corrections</button>'
       +'<button class="btn ghost" onclick="reject()">Reject</button></div>'
@@ -137,8 +144,9 @@ textarea{width:100%;height:150px;font-family:monospace;font-size:12px;border:1px
   window.approve=function(){
     var m=$('rmsg'); m.className='msg';
     var data; try{ data=JSON.parse($('jsonEdit').value); }catch(e){ m.className='msg err'; m.textContent='JSON is invalid — fix it before publishing.'; return; }
-    ap({action:'approve',id:current.id,data:data}).then(function(r){
-      if(r&&r.ok){ m.className='msg ok'; m.textContent='Published to '+r.slug+'. Live on the lodge page now.'; load(); }
+    var yr=($('pubYear')&&$('pubYear').value)||'';
+    ap({action:'approve',id:current.id,data:data,year:yr}).then(function(r){
+      if(r&&r.ok){ m.className='msg ok'; m.textContent='Published to '+r.slug+(r.year?' ('+r.year+')':'')+'. Live on the lodge page now.'; load(); }
       else { m.className='msg err'; m.textContent=(r&&r.error)||'Publish failed.'; }
     });
   };

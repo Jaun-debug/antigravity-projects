@@ -69,6 +69,7 @@ module.exports = async function (req, res) {
       }
       u.extracted = doc || u.extracted;
       if (doc) { u.name = doc.name || u.name; u.region = doc.region || u.region; }
+      if (body.year != null && body.year !== '') u.year = String(body.year).replace(/[^0-9]/g, '');
       u.status = action === 'submit' ? 'pending' : 'draft';
       if (action === 'submit') u.submittedAt = Date.now();
       await uploads.saveUpload(u);
@@ -95,15 +96,17 @@ module.exports = async function (req, res) {
       if (!doc || !Array.isArray(doc.sections) || !doc.sections.length) return res.status(200).json({ ok: false, error: 'Nothing to publish.' });
       if (!u.slug) return res.status(200).json({ ok: false, error: 'This upload has no lodge slug — set one before publishing.' });
       const kind = u.kind === 'sto' ? 'sto' : 'rack';
+      // Year: owner override in body wins, else the year carried on the upload, else the doc's detected year.
+      const year = String((body.year != null && body.year !== '') ? body.year : (u.year || doc.year || '')).replace(/[^0-9]/g, '');
       const payload = {
         name: doc.name || u.name || u.slug, region: doc.region || u.region || '',
         currency: doc.currency || 'N$', validity: doc.validity || '', note: doc.note || '',
-        commission: doc.commission || '', sections: doc.sections,
+        year: year || '', commission: doc.commission || '', sections: doc.sections,
       };
-      await db.setRates(kind, u.slug, payload);
-      u.status = 'approved'; u.extracted = doc; u.reviewedAt = Date.now(); u.reviewedBy = caller.email;
+      await db.setRates(kind, u.slug, payload, year || undefined);
+      u.status = 'approved'; u.extracted = doc; u.year = year || u.year; u.reviewedAt = Date.now(); u.reviewedBy = caller.email;
       await uploads.saveUpload(u);
-      return res.status(200).json({ ok: true, slug: u.slug, kind: kind });
+      return res.status(200).json({ ok: true, slug: u.slug, kind: kind, year: year || null });
     }
 
     if (action === 'reject' || action === 'correct') {

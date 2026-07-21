@@ -216,6 +216,7 @@
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Review &amp; correct your rates</h2>'+
       '<p class="aw-sub">Our AI read your PDF into the fields below. Check every number, fix anything that is wrong, then submit. Nothing goes live until Namibia Rates approves it.</p>'+
       (flags.length?'<div class="aw-panel"><h4>Worth a look</h4><div style="font-size:.85rem;color:#e8c9a0;line-height:1.5">'+flags.join(' ')+'</div></div>':'')+
+      '<div class="aw-panel"><h4>Season year</h4><div class="aw-field" style="margin:0"><label>Which season year are these rates for?</label><select class="aw-input" id="rv-year"></select></div></div>'+
       '<div class="aw-panel"><h4>Details</h4>'+
         '<div class="aw-field"><label>Property / operator</label><input class="aw-input" id="rv-name"></div>'+
         '<div class="aw-row"><div class="aw-field"><label>Region</label><input class="aw-input" id="rv-region"></div><div class="aw-field"><label>Validity / season</label><input class="aw-input" id="rv-validity"></div></div>'+
@@ -223,6 +224,7 @@
       '</div>'+
       '<div class="aw-panel"><h4>Rates</h4><div id="rv-secs"></div><button class="aw-btn ghost" id="rv-addsec">+ Add section</button></div>'+
       '<button class="aw-btn" id="rv-submit">Submit for approval</button><div class="aw-err" id="rv-msg" style="color:#bcd0a0"></div></div>';
+    (function(){var now=new Date().getFullYear();var set=[now,now+1];var sel=String((rec&&rec.year)||doc.year||'').replace(/[^0-9]/g,'');if(sel&&set.indexOf(parseInt(sel,10))===-1)set.push(parseInt(sel,10));set.sort(function(a,b){return a-b;});var chosen=sel||String(now);stage.querySelector('#rv-year').innerHTML=set.map(function(y){return '<option value="'+y+'"'+(String(y)===chosen?' selected':'')+'>'+y+'</option>';}).join('');})();
     stage.querySelector('#rv-name').value=doc.name||'';
     stage.querySelector('#rv-region').value=doc.region||'';
     stage.querySelector('#rv-validity').value=doc.validity||'';
@@ -247,7 +249,7 @@
       var msg=stage.querySelector('#rv-msg');var data=collect();
       if(!data.sections.length){msg.style.color='#e9a';msg.textContent='Add at least one rate before submitting.';return;}
       msg.style.color='#bcd0a0';msg.textContent='Submitting\u2026';
-      fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'submit',id:rec.id,data:data})})
+      fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'submit',id:rec.id,data:data,year:stage.querySelector('#rv-year').value})})
         .then(function(r){return r.json();}).then(function(r){
           if(r&&r.ok){msg.style.color='#bcd0a0';msg.textContent='\u2713 Submitted to Namibia Rates for approval. Thank you!';}
           else{msg.style.color='#e9a';msg.textContent=(r&&r.error)||'Could not submit \u2014 please try again.';}

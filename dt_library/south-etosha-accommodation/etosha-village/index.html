@@ -278,17 +278,18 @@ function setHdrBtn(signedIn){
 }
 
 // Show public rack rates (signed-out state).
-function showRack(){
+function showRack(yr){
   setHdrBtn(false);
   var b=document.getElementById('mode-badge'); if(b){b.textContent='Rack Rates'; b.classList.remove('sto');}
   var rt=document.getElementById('rate-tables'), sub=document.getElementById('rate-sub');
   function tbc(){ if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>'; if(sub) sub.textContent='Rate to follow'; }
-  if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-size:.95rem">Loading rates\u2026</p>';
-  fetch('/api/rack?slug='+encodeURIComponent(LODGE)+'&full=1',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+  if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-size:.95rem">Loading rates…</p>';
+  fetch('/api/rack?slug='+encodeURIComponent(LODGE)+'&full=1'+(yr?'&year='+encodeURIComponent(yr):''),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
     var doc=j&&j.doc;
     if(doc&&doc.sections&&doc.sections.length&&doc.sections.some(function(s){return s.rows&&s.rows.some(function(r){return r[0]&&(r[1]||r[1]===0);});})){
       renderRates(doc,false);var _b=document.getElementById('uc-belt');if(_b){_b.remove();var _h=document.querySelector('.main-header');if(_h)_h.style.top='0';document.body.style.paddingTop=(_h?_h.offsetHeight:0)+'px';}
-      if(sub) sub.textContent=(doc.note||'Published rack rates')+(doc.validity?' \u00b7 Valid '+doc.validity:'');
+      if(j&&j.years&&j.years.length>1&&rt){var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 2px 16px';j.years.forEach(function(y){var bt=document.createElement('button');bt.type='button';bt.textContent=y+' season';var on=String(y)===String(j.year);bt.style.cssText='cursor:pointer;font:inherit;padding:7px 16px;border-radius:20px;border:1px solid #a48256;background:'+(on?'#a48256':'transparent')+';color:'+(on?'#fff':'#a48256');bt.onclick=function(){showRack(y);};bar.appendChild(bt);});rt.insertBefore(bar,rt.firstChild);}
+      if(sub) sub.textContent=(doc.note||'Published rack rates')+(doc.validity?' · Valid '+doc.validity:'')+(j&&j.year?' · '+j.year+' season':'');
     } else { tbc(); }
   }).catch(function(){ tbc(); });
 }

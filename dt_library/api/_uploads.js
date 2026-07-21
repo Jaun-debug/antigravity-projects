@@ -53,7 +53,7 @@ function summary(u) {
   return {
     id: u.id, supplierEmail: u.supplierEmail, supplierName: u.supplierName || '',
     slug: u.slug || '', name: u.name || '', region: u.region || '', kind: u.kind || 'rack',
-    filename: u.filename || '', status: u.status, confidence: u.confidence == null ? null : u.confidence,
+    year: u.year || '', filename: u.filename || '', status: u.status, confidence: u.confidence == null ? null : u.confidence,
     anomalyCount: (u.anomalies || []).length, createdAt: u.createdAt || 0, reviewedAt: u.reviewedAt || 0,
   };
 }

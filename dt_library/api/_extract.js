@@ -20,6 +20,7 @@ const INSTRUCTIONS =
   '  "region": "<region if shown, else empty>",\n' +
   '  "currency": "N$",\n' +
   '  "validity": "<validity/season dates if shown>",\n' +
+  '  "year": "<the season/rate year this card is for, e.g. 2026 or 2027, if you can tell from the dates or title; else empty>",\n' +
   '  "note": "<short note: inclusions, levy/VAT, per person/unit>",\n' +
   '  "sections": [ { "title": "<room type or season>", "rows": [ ["<rate label>", "<price as printed, e.g. 4,397>"] ] } ],\n' +
   '  "confidence": <integer 0-100, your confidence the numbers are correct>,\n' +
@@ -70,7 +71,8 @@ async function extractFromPdf(base64pdf) {
     }
     const doc = {
       name: parsed.name || '', region: parsed.region || '', currency: parsed.currency || 'N$',
-      validity: parsed.validity || '', note: parsed.note || '', sections: parsed.sections,
+      validity: parsed.validity || '', year: parsed.year ? String(parsed.year).replace(/[^0-9]/g, '') : '',
+      note: parsed.note || '', sections: parsed.sections,
     };
     return {
       ok: true, doc: doc,

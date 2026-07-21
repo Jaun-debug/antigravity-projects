@@ -65,7 +65,7 @@ module.exports = async function (req, res) {
     id: id, supplierEmail: caller.email, supplierName: caller.name || '',
     slug: slugHint, name: '', region: '', kind: String(body.kind || 'rack'),
     filename: body.filename, blobUrl: blobUrl, status: 'processing',
-    extracted: null, confidence: null, anomalies: [], yearDiff: [], note: '',
+    extracted: null, confidence: null, anomalies: [], yearDiff: [], note: '', year: '',
     createdAt: Date.now(), reviewedAt: 0, reviewedBy: '',
   };
   await uploads.saveUpload(rec);
@@ -86,11 +86,12 @@ module.exports = async function (req, res) {
   rec.slug = slug;
   rec.name = ex.doc.name || '';
   rec.region = ex.doc.region || '';
+  rec.year = ex.doc.year || '';
   rec.extracted = ex.doc;
   rec.confidence = ex.confidence;
   rec.anomalies = ex.anomalies || [];
   rec.yearDiff = diff;
   await uploads.saveUpload(rec);
 
-  return res.status(200).json({ ok: true, id: id, status: 'draft', confidence: ex.confidence, anomalies: rec.anomalies, extracted: ex.doc, slug: slug, yearDiff: diff });
+  return res.status(200).json({ ok: true, id: id, status: 'draft', confidence: ex.confidence, anomalies: rec.anomalies, extracted: ex.doc, slug: slug, year: rec.year, yearDiff: diff });
 };

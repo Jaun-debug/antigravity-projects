@@ -94,6 +94,13 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
       <p class="rv-hint">The AI read your PDF into the fields below. Check every number against your rate sheet, fix anything that's wrong, then submit. Nothing goes live until the Namibia Rates team approves it.</p>
       <div class="rv-flags" id="rv-flags" style="display:none"></div>
 
+      <div class="panel" style="border-left:4px solid var(--accent)">
+        <div class="rv-field" style="margin:0">
+          <label>Which season year are these rates for?</label>
+          <select class="inp" id="rv-year"></select>
+        </div>
+      </div>
+
       <div class="panel">
         <div class="rv-grid">
           <div class="rv-field"><label>Property / operator name</label><input class="inp" id="rv-name"></div>
@@ -188,8 +195,19 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
     });
   }
 
+  function yearOptions(selected){
+    var now=new Date().getFullYear();
+    var set=[now, now+1];
+    var sel=String(selected||'').replace(/[^0-9]/g,'');
+    if(sel && set.indexOf(parseInt(sel,10))===-1) set.push(parseInt(sel,10));
+    set.sort(function(a,b){return a-b;});
+    var chosen=sel||String(now);
+    return set.map(function(y){return '<option value="'+y+'"'+(String(y)===chosen?' selected':'')+'>'+y+'</option>';}).join('');
+  }
+
   function openReview(u){
     var doc=u.extracted||{};
+    $('rv-year').innerHTML=yearOptions(u.year||doc.year||'');
     $('rv-name').value=doc.name||'';
     $('rv-region').value=doc.region||'';
     $('rv-validity').value=doc.validity||'';
@@ -259,7 +277,7 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
     var doc=collectDoc();
     if(action==='submit' && !doc.sections.length){ var m=$('rv-msg'); m.className='status err'; m.textContent='Add at least one rate before submitting.'; return; }
     var msg=$('rv-msg'); msg.className='status busy'; msg.textContent=action==='submit'?'Submitting…':'Saving…';
-    appr({action:action, id:CURRENT, data:doc}).then(function(r){
+    appr({action:action, id:CURRENT, data:doc, year:$('rv-year').value}).then(function(r){
       if(r&&r.ok){
         if(action==='submit'){ msg.className='status ok'; msg.textContent='✓ Submitted for approval.'; setTimeout(closeReview,900); }
         else { msg.className='status ok'; msg.textContent='✓ Draft saved.'; }

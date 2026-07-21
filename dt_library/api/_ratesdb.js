@@ -73,19 +73,26 @@ function isOwner({ token, username, password }) {
 }
 
 // ── Rate storage ────────────────────────────────────────────────────────────
+// Rates can be stored per season YEAR so 2026 and 2027 live side by side.
+//   rates:rack:<slug>          -> legacy / undated doc (still read as a fallback)
+//   rates:rack:<slug>:<year>   -> that year's doc
+//   rates:years:rack:<slug>    -> SET of the years that exist for this slug
 const KINDS = { rack: 'rates:rack:', sto: 'rates:sto:' };
 const INDEX = 'rates:index';
 
-function keyFor(kind, slug) {
+function keyFor(kind, slug, year) {
   const prefix = KINDS[kind];
   if (!prefix) throw new Error('bad kind: ' + kind);
-  return prefix + slug;
+  return prefix + slug + (year ? ':' + String(year) : '');
+}
+function yearsKey(kind, slug) {
+  return 'rates:years:' + kind + ':' + slug;
 }
 
-async function getRates(kind, slug) {
+async function getRates(kind, slug, year) {
   const r = getRedis();
   if (!r) return null;
-  const raw = await r.get(keyFor(kind, slug));
+  const raw = await r.get(keyFor(kind, slug, year));
   if (!raw) return null;
   try {
     return typeof raw === 'string' ? JSON.parse(raw) : raw;
@@ -94,23 +101,67 @@ async function getRates(kind, slug) {
   }
 }
 
-async function setRates(kind, slug, obj) {
+// List the years that exist for a slug (sorted ascending). Empty => only legacy/undated.
+async function listYears(kind, slug) {
+  const r = getRedis();
+  if (!r) return [];
+  const ys = await r.smembers(yearsKey(kind, slug));
+  return Array.isArray(ys) ? ys.map(String).sort() : [];
+}
+
+async function setRates(kind, slug, obj, year) {
   const r = getRedis();
   if (!r) throw new Error('database not configured');
-  await r.set(keyFor(kind, slug), JSON.stringify(obj));
+  await r.set(keyFor(kind, slug, year), JSON.stringify(obj));
   await r.sadd(INDEX, slug);
+  if (year) await r.sadd(yearsKey(kind, slug), String(year));
   return true;
 }
 
-async function delRates(kind, slug) {
+async function delRates(kind, slug, year) {
   const r = getRedis();
   if (!r) throw new Error('database not configured');
-  await r.del(keyFor(kind, slug));
-  // Drop from index only if neither rack nor sto remains for this slug.
+  await r.del(keyFor(kind, slug, year));
+  if (year) {
+    await r.srem(yearsKey(kind, slug), String(year));
+    return true;
+  }
+  // Drop from index only if neither rack nor sto (any year) remains for this slug.
   const other = kind === 'rack' ? 'sto' : 'rack';
   const stillHas = await r.exists(keyFor(other, slug));
-  if (!stillHas) await r.srem(INDEX, slug);
+  const rackYears = await r.scard(yearsKey('rack', slug));
+  const stoYears = await r.scard(yearsKey('sto', slug));
+  if (!stillHas && !rackYears && !stoYears) await r.srem(INDEX, slug);
   return true;
+}
+
+// Pick the best year to show by default: current calendar year if present,
+// else the nearest upcoming year, else the latest available.
+function pickDefaultYear(years) {
+  if (!years || !years.length) return null;
+  const now = new Date().getFullYear();
+  const nums = years.map(Number).filter(function (n) { return !isNaN(n); }).sort(function (a, b) { return a - b; });
+  if (!nums.length) return years[years.length - 1];
+  if (nums.indexOf(now) !== -1) return String(now);
+  const upcoming = nums.filter(function (n) { return n >= now; });
+  if (upcoming.length) return String(upcoming[0]);
+  return String(nums[nums.length - 1]);
+}
+
+// Resolve the doc to show for a slug: a specific year, else default year, else legacy.
+async function getRackResolved(slug, year) {
+  const years = await listYears('rack', slug);
+  if (year) {
+    const doc = await getRates('rack', slug, year);
+    return { doc: doc, year: String(year), years: years };
+  }
+  if (years.length) {
+    const def = pickDefaultYear(years);
+    const doc = await getRates('rack', slug, def);
+    return { doc: doc, year: def, years: years };
+  }
+  const legacy = await getRates('rack', slug); // undated fallback
+  return { doc: legacy, year: null, years: years };
 }
 
 async function listSlugs() {
@@ -148,8 +199,8 @@ async function allRack() {
   const slugs = await listSlugs();
   const out = {};
   for (const slug of slugs) {
-    const rack = await getRates('rack', slug);
-    if (rack) out[slug] = rack;
+    const resolved = await getRackResolved(slug);
+    if (resolved && resolved.doc) out[slug] = resolved.doc;
   }
   return out;
 }
@@ -164,6 +215,9 @@ module.exports = {
   getRates,
   setRates,
   delRates,
+  listYears,
+  getRackResolved,
+  pickDefaultYear,
   listSlugs,
   listSummary,
   allRack,

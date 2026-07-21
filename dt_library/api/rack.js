@@ -50,12 +50,14 @@ module.exports = async (req, res) => {
 
     const slug = req.query && req.query.slug ? String(req.query.slug).trim() : '';
     if (slug) {
-      const doc = await db.getRates('rack', slug);
+      const yearReq = req.query && req.query.year ? String(req.query.year).trim() : '';
+      const resolved = await db.getRackResolved(slug, yearReq || undefined);
+      const doc = resolved.doc;
       // full=1 -> the raw sectioned doc (used by lodge pages to render season tables).
       if (req.query && req.query.full) {
-        return res.status(200).json({ ok: true, slug: slug, doc: doc || null });
+        return res.status(200).json({ ok: true, slug: slug, doc: doc || null, year: resolved.year, years: resolved.years });
       }
-      return res.status(200).json({ ok: true, slug: slug, lodge: doc ? flatten(doc) : null });
+      return res.status(200).json({ ok: true, slug: slug, lodge: doc ? flatten(doc) : null, year: resolved.year, years: resolved.years });
     }
 
     const all = await db.allRack();
