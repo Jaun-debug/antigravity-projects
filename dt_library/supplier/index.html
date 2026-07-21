@@ -15,7 +15,7 @@ header{display:flex;justify-content:space-between;align-items:center;padding:16p
 .logo small{display:block;font-family:var(--body);font-size:.55rem;letter-spacing:3px;color:var(--muted);}
 .signout{cursor:pointer;font-size:.7rem;text-transform:uppercase;letter-spacing:1.5px;padding:8px 16px;border-radius:6px;border:1px solid var(--accent);background:transparent;color:var(--accent);}
 .signout:hover{background:var(--accent);color:#fff;}
-.wrap{max-width:820px;margin:0 auto;padding:40px 24px;}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px;}
 h1{font-family:var(--head);font-weight:500;font-size:1.6rem;color:var(--accent);margin-bottom:6px;}
 .sub{color:var(--muted);margin-bottom:26px;}
 .panel{background:var(--sand);border-radius:12px;padding:26px;margin-bottom:24px;}
@@ -29,11 +29,36 @@ table{width:100%;border-collapse:collapse;}
 th,td{text-align:left;padding:10px 8px;font-size:.9rem;border-bottom:1px solid rgba(0,0,0,.06);}
 th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);}
 .tag{display:inline-block;font-size:.62rem;text-transform:uppercase;letter-spacing:1px;padding:2px 9px;border-radius:20px;}
+.tag.draft{background:rgba(164,130,86,.18);color:#8a5a1e;}
 .tag.pending{background:rgba(164,130,86,.15);color:var(--accent);}
 .tag.approved{background:rgba(135,169,150,.2);color:#5a7d68;}
 .tag.rejected,.tag.error{background:rgba(192,57,43,.12);color:#c0392b;}
 .tag.corrections{background:rgba(184,149,106,.18);color:#8a5a1e;}
 .tag.processing{background:rgba(0,0,0,.08);color:var(--muted);}
+.linkbtn{background:none;border:none;color:var(--accent);cursor:pointer;font-family:var(--body);font-size:.85rem;text-decoration:underline;padding:0;}
+#review{display:none;}
+.rv-hint{font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.5;}
+.rv-flags{background:#fbf6ec;border:1px solid rgba(164,130,86,.35);border-radius:8px;padding:12px 14px;margin-bottom:18px;font-size:.85rem;color:#8a5a1e;}
+.rv-flags b{color:#7a4d16;}
+.rv-field{margin-bottom:14px;}
+.rv-field label{display:block;font-size:.64rem;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:5px;}
+.inp{width:100%;padding:10px 12px;border:1px solid rgba(164,130,86,.4);border-radius:7px;background:#fff;color:var(--text);font-family:var(--body);font-size:.92rem;outline:none;}
+.inp:focus{border-color:var(--accent);}
+.rv-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.sec{border:1px solid rgba(164,130,86,.25);border-radius:10px;padding:16px;margin-bottom:14px;background:#fff;}
+.sec-top{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+.sec-top .inp{font-weight:500;}
+.rrow{display:grid;grid-template-columns:1fr 150px 32px;gap:8px;align-items:center;margin-bottom:8px;}
+.rrow .inp{margin:0;}
+.xbtn{width:32px;height:32px;border-radius:7px;border:1px solid rgba(192,57,43,.3);background:transparent;color:#c0392b;cursor:pointer;font-size:15px;}
+.ghost{background:transparent;border:1.5px solid rgba(164,130,86,.5);color:var(--accent);border-radius:7px;padding:8px 14px;font-family:var(--body);font-size:.78rem;cursor:pointer;}
+.ghost:hover{background:rgba(164,130,86,.12);}
+.actions{display:flex;gap:12px;align-items:center;margin-top:20px;flex-wrap:wrap;}
+.btn{padding:13px 26px;border:none;border-radius:8px;font-family:var(--head);font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;}
+.btn.primary{background:var(--accent);color:#fff;}
+.btn.primary:hover{background:#8f6f45;}
+.btn.primary:disabled{opacity:.5;cursor:not-allowed;}
+.btn.sec2{background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,.15);}
 </style>
 </head>
 <body>
@@ -42,50 +67,90 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
     <button class="signout" onclick="signOut()">Sign out</button>
   </header>
   <div class="wrap">
-    <h1>Welcome<span id="who"></span></h1>
-    <p class="sub">Upload your rack rate sheet as a PDF — no conversions needed. We read it, and the Namibia Rates team approves it before it goes live.</p>
+    <div id="home">
+      <h1>Welcome<span id="who"></span></h1>
+      <p class="sub">Upload your rack rate sheet as a PDF. We read it with AI, then <strong>you check and fix the numbers</strong> before sending it to the Namibia Rates team for approval.</p>
 
-    <div class="panel">
-      <h2>Upload rack rates (PDF)</h2>
-      <div class="drop" id="drop">
-        <p><strong>Choose a PDF</strong> or drag it here</p>
-        <p style="font-size:.8rem;margin-top:6px">Your latest rate card — up to ~3&nbsp;MB.</p>
+      <div class="panel">
+        <h2>Upload rack rates (PDF)</h2>
+        <div class="drop" id="drop">
+          <p><strong>Choose a PDF</strong> or drag it here</p>
+          <p style="font-size:.8rem;margin-top:6px">Your latest rate card — up to ~3&nbsp;MB.</p>
+        </div>
+        <input id="file" type="file" accept="application/pdf,.pdf" style="display:none">
+        <div class="status" id="status"></div>
       </div>
-      <input id="file" type="file" accept="application/pdf,.pdf" style="display:none">
-      <div class="status" id="status"></div>
+
+      <div class="panel">
+        <h2>Upload history</h2>
+        <table><thead><tr><th>File</th><th>Status</th><th>AI confidence</th><th>Sent</th><th></th></tr></thead>
+        <tbody id="rows"><tr><td colspan="5" style="color:var(--muted)">Loading…</td></tr></tbody></table>
+      </div>
     </div>
 
-    <div class="panel">
-      <h2>Upload history</h2>
-      <table><thead><tr><th>File</th><th>Status</th><th>AI confidence</th><th>Sent</th></tr></thead>
-      <tbody id="rows"><tr><td colspan="4" style="color:var(--muted)">Loading…</td></tr></tbody></table>
+    <div id="review">
+      <button class="linkbtn" onclick="closeReview()">&lsaquo; Back to dashboard</button>
+      <h1 style="margin-top:12px">Review &amp; correct your rates</h1>
+      <p class="rv-hint">The AI read your PDF into the fields below. Check every number against your rate sheet, fix anything that's wrong, then submit. Nothing goes live until the Namibia Rates team approves it.</p>
+      <div class="rv-flags" id="rv-flags" style="display:none"></div>
+
+      <div class="panel">
+        <div class="rv-grid">
+          <div class="rv-field"><label>Property / operator name</label><input class="inp" id="rv-name"></div>
+          <div class="rv-field"><label>Region</label><input class="inp" id="rv-region"></div>
+        </div>
+        <div class="rv-grid">
+          <div class="rv-field"><label>Validity / season</label><input class="inp" id="rv-validity"></div>
+          <div class="rv-field"><label>Currency</label><input class="inp" id="rv-currency"></div>
+        </div>
+        <div class="rv-field"><label>Note (inclusions, levy/VAT, per person/unit)</label><input class="inp" id="rv-note"></div>
+      </div>
+
+      <div class="panel">
+        <h2>Rates</h2>
+        <div id="rv-sections"></div>
+        <button class="ghost" id="rv-addsec">+ Add section</button>
+      </div>
+
+      <div class="actions">
+        <button class="btn primary" id="rv-submit">Submit for approval</button>
+        <button class="btn sec2" id="rv-save">Save draft</button>
+        <span class="status" id="rv-msg"></span>
+      </div>
     </div>
   </div>
 
 <script>
 (function(){
   var $=function(id){return document.getElementById(id);};
+  var CURRENT=null; // id of the upload being reviewed
   function post(b){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
+  function appr(b){return fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
   function fmtDate(ms){ if(!ms) return ''; var d=new Date(ms); return d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   post({action:'me'}).then(function(r){
     if(!r||!r.ok||!r.user){ location.href='/portal/'; return; }
-    if(r.user.role!=='supplier'){ location.href = r.user.role==='owner'?'/owner/':'/agent/'; return; }
+    if(r.user.role!=='supplier'&&r.user.role!=='owner'){ location.href='/agent/'; return; }
     var n=(r.user.name||r.user.email||'').split('@')[0]; if(n) $('who').textContent=', '+n;
     loadHistory();
   }).catch(function(){ location.href='/portal/'; });
 
   function loadHistory(){
-    fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'mine'})}).then(function(r){return r.json();}).then(function(r){
+    appr({action:'mine'}).then(function(r){
       var tb=$('rows');
-      if(!r||!r.ok){ tb.innerHTML='<tr><td colspan="4" style="color:var(--muted)">No uploads yet.</td></tr>'; return; }
-      if(!r.uploads.length){ tb.innerHTML='<tr><td colspan="4" style="color:var(--muted)">No uploads yet.</td></tr>'; return; }
+      if(!r||!r.ok||!r.uploads||!r.uploads.length){ tb.innerHTML='<tr><td colspan="5" style="color:var(--muted)">No uploads yet.</td></tr>'; return; }
       tb.innerHTML=r.uploads.map(function(u){
-        return '<tr><td>'+(u.filename||'')+'</td><td><span class="tag '+u.status+'">'+u.status+'</span></td><td>'+(u.confidence==null?'—':u.confidence+'%')+'</td><td>'+fmtDate(u.createdAt)+'</td></tr>';
+        var action = (u.status==='draft'||u.status==='corrections')
+          ? '<button class="linkbtn" data-id="'+esc(u.id)+'">Review &amp; submit</button>'
+          : (u.status==='pending' ? 'Awaiting approval' : '');
+        return '<tr><td>'+esc(u.filename||'')+'</td><td><span class="tag '+esc(u.status)+'">'+esc(u.status)+'</span></td><td>'+(u.confidence==null?'—':u.confidence+'%')+'</td><td>'+fmtDate(u.createdAt)+'</td><td>'+action+'</td></tr>';
       }).join('');
+      [].forEach.call(tb.querySelectorAll('button[data-id]'),function(b){ b.onclick=function(){ openReviewById(b.getAttribute('data-id')); }; });
     });
   }
 
+  /* ---------- upload ---------- */
   var drop=$('drop'), file=$('file');
   drop.onclick=function(){ file.click(); };
   ['dragenter','dragover'].forEach(function(ev){ drop.addEventListener(ev,function(e){e.preventDefault();drop.classList.add('over');}); });
@@ -103,12 +168,106 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
       var b64=String(reader.result).split(',')[1]||'';
       fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:'rack'})})
         .then(function(r){return r.json();}).then(function(r){
-          if(r&&r.ok){ s.className='status ok'; s.textContent='Received & read (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'). Sent to Namibia Rates for approval.'; loadHistory(); }
-          else { s.className='status err'; s.textContent=(r&&r.error)||'Upload failed — please try again.'; }
+          if(r&&r.ok){
+            s.className='status ok'; s.textContent='Read successfully (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'). Please review the rates below.';
+            CURRENT=r.id;
+            openReview({ extracted:r.extracted, confidence:r.confidence, anomalies:r.anomalies||[] });
+            loadHistory();
+          } else { s.className='status err'; s.textContent=(r&&r.error)||'Upload failed — please try again.'; }
         }).catch(function(){ s.className='status err'; s.textContent='Network error — please try again.'; });
     };
     reader.readAsDataURL(f);
   }
+
+  /* ---------- review editor ---------- */
+  function openReviewById(id){
+    appr({action:'myget', id:id}).then(function(r){
+      if(!r||!r.ok||!r.upload){ alert((r&&r.error)||'Could not open that upload.'); return; }
+      CURRENT=id;
+      openReview(r.upload);
+    });
+  }
+
+  function openReview(u){
+    var doc=u.extracted||{};
+    $('rv-name').value=doc.name||'';
+    $('rv-region').value=doc.region||'';
+    $('rv-validity').value=doc.validity||'';
+    $('rv-currency').value=doc.currency||'N$';
+    $('rv-note').value=doc.note||'';
+    var flags=[];
+    if(u.confidence!=null) flags.push('AI confidence: '+u.confidence+'%.');
+    if(u.anomalies&&u.anomalies.length) flags.push('Please double-check: '+u.anomalies.map(esc).join('; ')+'.');
+    var fb=$('rv-flags');
+    if(flags.length){ fb.style.display='block'; fb.innerHTML='<b>Worth a look —</b> '+flags.join(' '); } else { fb.style.display='none'; }
+    renderSections(doc.sections||[]);
+    $('rv-msg').textContent='';
+    $('home').style.display='none'; $('review').style.display='block';
+    window.scrollTo(0,0);
+  }
+  function closeReview(){ $('review').style.display='none'; $('home').style.display='block'; loadHistory(); }
+  window.closeReview=closeReview;
+
+  function renderSections(sections){
+    var host=$('rv-sections'); host.innerHTML='';
+    if(!sections.length) sections=[{title:'',rows:[['','']]}];
+    sections.forEach(function(sec){ host.appendChild(sectionEl(sec)); });
+  }
+  function sectionEl(sec){
+    var wrap=document.createElement('div'); wrap.className='sec';
+    var top=document.createElement('div'); top.className='sec-top';
+    var ti=document.createElement('input'); ti.className='inp sec-title'; ti.placeholder='Section (e.g. room type or season)'; ti.value=sec.title||'';
+    var del=document.createElement('button'); del.className='xbtn'; del.innerHTML='&times;'; del.title='Remove section'; del.onclick=function(){ wrap.remove(); };
+    top.appendChild(ti); top.appendChild(del); wrap.appendChild(top);
+    var rowsHost=document.createElement('div'); rowsHost.className='rows-host'; wrap.appendChild(rowsHost);
+    (sec.rows&&sec.rows.length?sec.rows:[['','']]).forEach(function(row){ rowsHost.appendChild(rowEl(row)); });
+    var add=document.createElement('button'); add.className='ghost'; add.textContent='+ Add rate'; add.onclick=function(){ rowsHost.appendChild(rowEl(['',''])); };
+    wrap.appendChild(add);
+    return wrap;
+  }
+  function rowEl(row){
+    var r=document.createElement('div'); r.className='rrow';
+    var l=document.createElement('input'); l.className='inp r-label'; l.placeholder='Rate label (e.g. Single)'; l.value=row[0]||'';
+    var p=document.createElement('input'); p.className='inp r-price'; p.placeholder='Price'; p.value=row[1]||'';
+    var x=document.createElement('button'); x.className='xbtn'; x.innerHTML='&times;'; x.onclick=function(){ r.remove(); };
+    r.appendChild(l); r.appendChild(p); r.appendChild(x);
+    return r;
+  }
+  $('rv-addsec').onclick=function(){ $('rv-sections').appendChild(sectionEl({title:'',rows:[['','']]})); };
+
+  function collectDoc(){
+    var sections=[];
+    [].forEach.call($('rv-sections').querySelectorAll('.sec'),function(secEl){
+      var title=secEl.querySelector('.sec-title').value.trim();
+      var rows=[];
+      [].forEach.call(secEl.querySelectorAll('.rrow'),function(rw){
+        var label=rw.querySelector('.r-label').value.trim();
+        var price=rw.querySelector('.r-price').value.trim();
+        if(label||price) rows.push([label,price]);
+      });
+      if(title||rows.length) sections.push({title:title,rows:rows});
+    });
+    return {
+      name:$('rv-name').value.trim(), region:$('rv-region').value.trim(),
+      currency:$('rv-currency').value.trim()||'N$', validity:$('rv-validity').value.trim(),
+      note:$('rv-note').value.trim(), sections:sections
+    };
+  }
+
+  function save(action){
+    if(!CURRENT){ return; }
+    var doc=collectDoc();
+    if(action==='submit' && !doc.sections.length){ var m=$('rv-msg'); m.className='status err'; m.textContent='Add at least one rate before submitting.'; return; }
+    var msg=$('rv-msg'); msg.className='status busy'; msg.textContent=action==='submit'?'Submitting…':'Saving…';
+    appr({action:action, id:CURRENT, data:doc}).then(function(r){
+      if(r&&r.ok){
+        if(action==='submit'){ msg.className='status ok'; msg.textContent='✓ Submitted for approval.'; setTimeout(closeReview,900); }
+        else { msg.className='status ok'; msg.textContent='✓ Draft saved.'; }
+      } else { msg.className='status err'; msg.textContent=(r&&r.error)||'Could not save — please try again.'; }
+    }).catch(function(){ msg.className='status err'; msg.textContent='Network error — please try again.'; });
+  }
+  $('rv-submit').onclick=function(){ save('submit'); };
+  $('rv-save').onclick=function(){ save('savedraft'); };
 
   window.signOut=function(){ post({action:'logout'}).then(function(){ location.href='/portal/'; }); };
 })();

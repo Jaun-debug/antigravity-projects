@@ -190,7 +190,7 @@
     drop.ondrop=function(e){e.preventDefault();drop.style.borderColor='';add(e.dataTransfer.files);};
     return picked;
   }
-  function uploadSheet(files,kind,msg){
+  function uploadSheet(files,kind,msg,onDone){
     var pdfs=(files||[]).filter(function(f){return /pdf/i.test(f.type)||/\.pdf$/i.test(f.name);});
     if(!pdfs.length){msg.style.color='#e9a';msg.textContent='Please attach your rate sheet as a PDF to send it through for reading.';return;}
     var f=pdfs[0];
@@ -201,11 +201,58 @@
       var b64=String(reader.result).split(',')[1]||'';
       fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:kind||'rack'})})
         .then(function(r){return r.json();}).then(function(r){
-          if(r&&r.ok){msg.style.color='#bcd0a0';msg.textContent='\u2713 Received & read (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'). Sent to Namibia Rates for approval.';}
+          if(r&&r.ok){ if(onDone){onDone(r);} else {msg.style.color='#bcd0a0';msg.textContent='\u2713 Received & read (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+').';} }
           else{msg.style.color='#e9a';msg.textContent=(r&&r.error)||'Upload failed \u2014 please try again.';}
         }).catch(function(){msg.style.color='#e9a';msg.textContent='Network error \u2014 please try again.';});
     };
     reader.readAsDataURL(f);
+  }
+  /* ---------- RACK REVIEW (edit AI output before submitting) ---------- */
+  function rackReviewStep(rec){
+    var doc=(rec&&rec.extracted)||{};
+    var flags=[];
+    if(rec&&rec.confidence!=null) flags.push('AI confidence: '+rec.confidence+'%.');
+    if(rec&&rec.anomalies&&rec.anomalies.length) flags.push('Double-check: '+rec.anomalies.map(esc).join('; ')+'.');
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Review &amp; correct your rates</h2>'+
+      '<p class="aw-sub">Our AI read your PDF into the fields below. Check every number, fix anything that is wrong, then submit. Nothing goes live until Namibia Rates approves it.</p>'+
+      (flags.length?'<div class="aw-panel"><h4>Worth a look</h4><div style="font-size:.85rem;color:#e8c9a0;line-height:1.5">'+flags.join(' ')+'</div></div>':'')+
+      '<div class="aw-panel"><h4>Details</h4>'+
+        '<div class="aw-field"><label>Property / operator</label><input class="aw-input" id="rv-name"></div>'+
+        '<div class="aw-row"><div class="aw-field"><label>Region</label><input class="aw-input" id="rv-region"></div><div class="aw-field"><label>Validity / season</label><input class="aw-input" id="rv-validity"></div></div>'+
+        '<div class="aw-field"><label>Note (inclusions, levy/VAT, per person/unit)</label><input class="aw-input" id="rv-note"></div>'+
+      '</div>'+
+      '<div class="aw-panel"><h4>Rates</h4><div id="rv-secs"></div><button class="aw-btn ghost" id="rv-addsec">+ Add section</button></div>'+
+      '<button class="aw-btn" id="rv-submit">Submit for approval</button><div class="aw-err" id="rv-msg" style="color:#bcd0a0"></div></div>';
+    stage.querySelector('#rv-name').value=doc.name||'';
+    stage.querySelector('#rv-region').value=doc.region||'';
+    stage.querySelector('#rv-validity').value=doc.validity||'';
+    stage.querySelector('#rv-note').value=doc.note||'';
+    var currency=doc.currency||'N$';
+    var secHost=stage.querySelector('#rv-secs');
+    function rowEl(row){var d=document.createElement('div');d.className='rk-row';d.innerHTML='<input class="aw-input rv-label" placeholder="Rate label (e.g. Single)"><input class="aw-input rv-price" placeholder="Price"><button class="rk-del">&times;</button>';d.querySelector('.rv-label').value=row[0]||'';d.querySelector('.rv-price').value=row[1]||'';d.querySelector('.rk-del').onclick=function(){d.remove();};return d;}
+    function secEl(sec){var w=document.createElement('div');w.style.cssText='border:1px solid rgba(164,130,86,.3);border-radius:10px;padding:14px;margin-bottom:12px;background:rgba(28,24,19,.25)';
+      var top=document.createElement('div');top.style.cssText='display:flex;gap:10px;margin-bottom:10px';
+      var ti=document.createElement('input');ti.className='aw-input rv-sectitle';ti.placeholder='Section (room type or season)';ti.value=sec.title||'';ti.style.margin='0';
+      var del=document.createElement('button');del.className='rk-del';del.innerHTML='&times;';del.title='Remove section';del.onclick=function(){w.remove();};
+      top.appendChild(ti);top.appendChild(del);w.appendChild(top);
+      var rh=document.createElement('div');rh.className='rv-rows';w.appendChild(rh);
+      (sec.rows&&sec.rows.length?sec.rows:[['','']]).forEach(function(r){rh.appendChild(rowEl(r));});
+      var add=document.createElement('button');add.className='aw-btn ghost';add.textContent='+ Add rate';add.onclick=function(){rh.appendChild(rowEl(['','']));};w.appendChild(add);
+      return w;}
+    (doc.sections&&doc.sections.length?doc.sections:[{title:'',rows:[['','']]}]).forEach(function(s){secHost.appendChild(secEl(s));});
+    stage.querySelector('#rv-addsec').onclick=function(){secHost.appendChild(secEl({title:'',rows:[['','']]}));};
+    function collect(){var sections=[];[].forEach.call(secHost.children,function(w){if(!w.querySelector)return;var tEl=w.querySelector('.rv-sectitle');if(!tEl)return;var title=tEl.value.trim();var rows=[];[].forEach.call(w.querySelectorAll('.rk-row'),function(rw){var l=rw.querySelector('.rv-label').value.trim();var p=rw.querySelector('.rv-price').value.trim();if(l||p)rows.push([l,p]);});if(title||rows.length)sections.push({title:title,rows:rows});});
+      return {name:stage.querySelector('#rv-name').value.trim(),region:stage.querySelector('#rv-region').value.trim(),currency:currency,validity:stage.querySelector('#rv-validity').value.trim(),note:stage.querySelector('#rv-note').value.trim(),sections:sections};}
+    stage.querySelector('#rv-submit').onclick=function(){
+      var msg=stage.querySelector('#rv-msg');var data=collect();
+      if(!data.sections.length){msg.style.color='#e9a';msg.textContent='Add at least one rate before submitting.';return;}
+      msg.style.color='#bcd0a0';msg.textContent='Submitting\u2026';
+      fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'submit',id:rec.id,data:data})})
+        .then(function(r){return r.json();}).then(function(r){
+          if(r&&r.ok){msg.style.color='#bcd0a0';msg.textContent='\u2713 Submitted to Namibia Rates for approval. Thank you!';}
+          else{msg.style.color='#e9a';msg.textContent=(r&&r.error)||'Could not submit \u2014 please try again.';}
+        }).catch(function(){msg.style.color='#e9a';msg.textContent='Network error \u2014 please try again.';});
+    };
   }
   function rackStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your rates manually below, or upload a screenshot / file of your rate sheet.</p>'+
@@ -217,7 +264,7 @@
     addRow();addRow();
     stage.querySelector('#rk-add').onclick=addRow;
     var rkFiles=wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
-    stage.querySelector('#rk-save').onclick=function(){uploadSheet(rkFiles,'rack',stage.querySelector('#rk-msg'));};
+    stage.querySelector('#rk-save').onclick=function(){uploadSheet(rkFiles,'rack',stage.querySelector('#rk-msg'),function(r){rackReviewStep(r);});};
   }
   function photosStep(){
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Property</div><h2 class="aw-h">Upload property photos</h2><p class="aw-sub">Add photos of your rooms, facilities and surroundings.</p><div class="aw-panel" style="max-width:520px"><h4>Photos</h4><div class="aw-drop" id="ph-drop" style="min-height:360px;display:flex;align-items:center;justify-content:center">Click to upload or drag photos here</div><input type="file" id="ph-file" accept="image/*" multiple style="display:none"><div class="aw-photos" id="ph-thumbs"></div></div><button class="aw-btn" id="ph-save">Save photos</button><div class="aw-err" id="ph-msg" style="color:#bcd0a0"></div></div>';

@@ -6,7 +6,9 @@
 //   uploads:index      -> SET of every upload id
 //   uploads:bySupplier:<email> -> SET of that supplier's upload ids
 //
-// status: 'processing' | 'pending' | 'approved' | 'rejected' | 'error'
+// status: 'processing' | 'draft' | 'pending' | 'approved' | 'rejected' | 'corrections' | 'error'
+//   draft   = read by AI, waiting for the supplier to review/correct & submit
+//   pending = supplier submitted; waiting for owner approval
 
 const crypto = require('crypto');
 const db = require('./_ratesdb');

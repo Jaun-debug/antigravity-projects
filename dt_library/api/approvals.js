@@ -42,6 +42,39 @@ module.exports = async function (req, res) {
       return res.status(200).json({ ok: true, uploads: list.map(uploads.summary) });
     }
 
+    // supplier: fetch the full record of one of THEIR OWN uploads (to review/edit)
+    if (action === 'myget') {
+      if (!caller) return res.status(200).json({ ok: false, error: 'Sign in required.' });
+      const u = await uploads.getUpload(body.id);
+      if (!u) return res.status(200).json({ ok: false, error: 'Upload not found.' });
+      const ownIt = caller.role === 'owner' || (u.supplierEmail && String(u.supplierEmail).toLowerCase() === String(caller.email).toLowerCase());
+      if (!ownIt) return res.status(200).json({ ok: false, error: 'Not your upload.' });
+      return res.status(200).json({ ok: true, upload: u });
+    }
+
+    // supplier: save edits to a draft, or submit it into the owner's approval queue
+    if (action === 'savedraft' || action === 'submit') {
+      if (!caller) return res.status(200).json({ ok: false, error: 'Sign in required.' });
+      const u = await uploads.getUpload(body.id);
+      if (!u) return res.status(200).json({ ok: false, error: 'Upload not found.' });
+      const ownIt = caller.role === 'owner' || (u.supplierEmail && String(u.supplierEmail).toLowerCase() === String(caller.email).toLowerCase());
+      if (!ownIt) return res.status(200).json({ ok: false, error: 'Not your upload.' });
+      // Only editable while it is the supplier's to edit.
+      if (['approved', 'rejected', 'processing', 'error'].indexOf(u.status) !== -1) {
+        return res.status(200).json({ ok: false, error: 'This upload can no longer be edited.' });
+      }
+      const doc = (body.data && typeof body.data === 'object') ? body.data : u.extracted;
+      if (action === 'submit') {
+        if (!doc || !Array.isArray(doc.sections) || !doc.sections.length) return res.status(200).json({ ok: false, error: 'Add at least one rate before submitting.' });
+      }
+      u.extracted = doc || u.extracted;
+      if (doc) { u.name = doc.name || u.name; u.region = doc.region || u.region; }
+      u.status = action === 'submit' ? 'pending' : 'draft';
+      if (action === 'submit') u.submittedAt = Date.now();
+      await uploads.saveUpload(u);
+      return res.status(200).json({ ok: true, status: u.status });
+    }
+
     if (!isOwner) return res.status(200).json({ ok: false, error: 'Owner access required.' });
 
     if (action === 'list') {

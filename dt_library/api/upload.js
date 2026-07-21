@@ -81,7 +81,8 @@ module.exports = async function (req, res) {
   const slug = slugHint || slugify(ex.doc.name);
   const diff = await extract.yearDiff(slug, ex.doc);
 
-  rec.status = 'pending';
+  // Land as a DRAFT the supplier reviews/corrects before submitting to the owner queue.
+  rec.status = 'draft';
   rec.slug = slug;
   rec.name = ex.doc.name || '';
   rec.region = ex.doc.region || '';
@@ -91,5 +92,5 @@ module.exports = async function (req, res) {
   rec.yearDiff = diff;
   await uploads.saveUpload(rec);
 
-  return res.status(200).json({ ok: true, id: id, status: 'pending', confidence: ex.confidence, anomalies: rec.anomalies });
+  return res.status(200).json({ ok: true, id: id, status: 'draft', confidence: ex.confidence, anomalies: rec.anomalies, extracted: ex.doc, slug: slug, yearDiff: diff });
 };
