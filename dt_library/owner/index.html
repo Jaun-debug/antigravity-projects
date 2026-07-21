@@ -512,7 +512,7 @@
       var reader=new FileReader();
       reader.onload=function(){
         var b64=String(reader.result).split(',')[1]||'';
-        fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:biKind})})
+        fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:biKind,token:token})})
           .then(function(r){ if(!r.ok) throw new Error(r.status===504||r.status===502?'timeout':'HTTP '+r.status); return r.json(); })
           .then(function(r){
             if(r&&r.ok&&r.extracted){ extracted=r.extracted; renderPreview(r); }

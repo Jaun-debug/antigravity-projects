@@ -31,12 +31,17 @@ module.exports = async function (req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!db.dbConfigured()) return res.status(200).json({ ok: false, error: 'Database not configured.' });
 
-  const caller = auth.sessionFromReq(req);
+  const body = await readBody(req);
+
+  // Suppliers/owners authenticate with the Partner Portal cookie. The Owner Rates
+  // area signs in with OWNER_PASS instead, so accept that owner token as well.
+  let caller = auth.sessionFromReq(req);
+  if (!caller && body.token && db.isOwner({ token: String(body.token) })) {
+    caller = { email: 'owner', role: 'owner', name: 'Owner' };
+  }
   if (!caller || (caller.role !== 'supplier' && caller.role !== 'owner')) {
     return res.status(200).json({ ok: false, error: 'Please sign in as a supplier to upload.' });
   }
-
-  const body = await readBody(req);
   if (!body.dataBase64 || !body.filename) return res.status(200).json({ ok: false, error: 'No file received.' });
   const ct = String(body.contentType || '');
   if (!/pdf/i.test(ct) && !/\.pdf$/i.test(body.filename)) {
