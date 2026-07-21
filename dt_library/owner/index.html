@@ -513,10 +513,17 @@
       reader.onload=function(){
         var b64=String(reader.result).split(',')[1]||'';
         fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:biKind})})
-          .then(function(r){return r.json();}).then(function(r){
+          .then(function(r){ if(!r.ok) throw new Error(r.status===504||r.status===502?'timeout':'HTTP '+r.status); return r.json(); })
+          .then(function(r){
             if(r&&r.ok&&r.extracted){ extracted=r.extracted; renderPreview(r); }
             else { status.style.color='#c0392b';status.textContent=(r&&r.error)||'Could not read that PDF.'; }
-          }).catch(function(){status.style.color='#c0392b';status.textContent='Network error — please try again.';});
+          }).catch(function(e){
+            var m=(e&&e.message)||'';
+            status.style.color='#c0392b';
+            status.textContent = m==='timeout'
+              ? 'That sheet took too long to read. Try a smaller PDF, or split it into fewer properties per file.'
+              : 'Could not read that PDF ('+(m||'network error')+'). Please try again.';
+          });
       };
       reader.readAsDataURL(f);
     }

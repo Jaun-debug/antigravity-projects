@@ -1179,7 +1179,7 @@
   ],
   "functions": {
     "api/upload.js": {
-      "maxDuration": 60
+      "maxDuration": 300
     },
     "api/approvals.js": {
       "maxDuration": 30
