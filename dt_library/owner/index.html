@@ -163,6 +163,14 @@
   var VEHICLES=[{slug:'nts',name:'NTS'},{slug:'ncr',name:'Namibia Car Rental'},{slug:'nrcr',name:'Namib Roos Car Rentals'},{slug:'sanga',name:'Sanga Group Travel'},{slug:'suricate',name:'Suricate Safaris'},{slug:'zap',name:'Zap Car Rental'},{slug:'zaris',name:'Zaris Safaris'}];
   var ACTIVITIES=[{slug:'molamola',name:'Mola Mola'},{slug:'desert',name:'Desert Explorers'},{slug:'namibsky',name:'Namib Sky'},{slug:'bogenfels',name:'Bogenfels Tours'},{slug:'alteraction',name:'Alter-Action'}];
   var GROUPS=[{slug:'ol-leisure',name:'O&L Leisure'},{slug:'gondwana-collection',name:'Gondwana Collection'},{slug:'ongava',name:'Ongava'},{slug:'journeys-namibia',name:'Journeys Namibia'},{slug:'natural-selection',name:'Natural Selection'},{slug:'wilderness-namibia',name:'Wilderness Namibia'},{slug:'taleni-africa',name:'Taleni Africa'},{slug:'sun-karros',name:'Sun Karros'},{slug:'ultimate-safaris',name:'Ultimate Safaris'},{slug:'desert-hills',name:'Desert Hills Collection'}];
+  // Which member lodges belong to each group (explicit slugs, or a keyword match against the lodge list).
+  var GROUP_MEMBERS={
+    'ol-leisure':['strand-hotel-swakopmund','mokuti-etosha','midgard-otjihavera-windhoek','chobe-water-villas-zambezi'],
+    'ongava':['ongava-lodge','ongava-tented-camp','little-ongava','anderssons-at-ongava'],
+    'gondwana-collection':['namib-desert-lodge','kalahari-anib-lodge','canyon-lodge','canyon-village','canyon-roadhouse']
+  };
+  var GROUP_KW={'wilderness-namibia':/wilderness/i};
+  var openGroups={};
   var CATS={rack:[['accommodation','Accommodation (by region)'],['vehicle','Vehicles'],['activity','Activities']],
             sto:[['accommodation','Accommodation lodges'],['group','Group lodges'],['vehicle','Vehicles'],['activity','Activities']]};
   var openRegions={};   // which region groups are expanded (folded by default)
@@ -288,9 +296,32 @@
         if(open){ byReg[r].forEach(function(i){box.appendChild(itemRow(i));}); if(r===region) openTarget=h; }
       });
       if(openTarget) setTimeout(function(){ openTarget.scrollIntoView({block:'nearest'}); },0);
+    } else if(category==='group'){
+      // each group folds open to reveal its member lodges
+      items.forEach(function(g){
+        var open=!!openGroups[g.slug]||!!q;
+        var members=groupMembers(g.slug);
+        var h=document.createElement('div');h.className='grouphdr';h.style.cursor='pointer';
+        h.innerHTML='<span style="display:inline-block;width:14px;color:#b8a988">'+(open?'▾':'▸')+'</span>'+esc(g.name)+' <span style="color:#cfc7b8;font-weight:400">('+members.length+')</span>';
+        h.addEventListener('click',function(){openGroups[g.slug]=!open;renderList();});
+        box.appendChild(h);
+        if(open){
+          box.appendChild(itemRow({slug:g.slug,name:g.name+' — group rate sheet'}));
+          if(members.length) members.forEach(function(m){box.appendChild(itemRow(m));});
+          else{ var hn=document.createElement('div');hn.className='hint';hn.style.padding='4px 10px 8px';hn.textContent='No lodges linked yet.';box.appendChild(hn); }
+        }
+      });
     } else {
       items.forEach(function(i){box.appendChild(itemRow(i));});
     }
+  }
+  function lodgeBySlug(sl){return (lodgeIndex||[]).filter(function(x){return x.slug===sl;})[0]||{slug:sl,name:sl,region:''};}
+  function groupMembers(slug){
+    var out=[],seen={};
+    (GROUP_MEMBERS[slug]||[]).forEach(function(sl){if(!seen[sl]){seen[sl]=1;out.push(lodgeBySlug(sl));}});
+    var kw=GROUP_KW[slug];
+    if(kw) lodgeIndex.forEach(function(l){if(!seen[l.slug]&&kw.test((l.name||'')+' '+l.slug)){seen[l.slug]=1;out.push(l);}});
+    return out;
   }
 
   // ── open / edit ───────────────────────────────────────
