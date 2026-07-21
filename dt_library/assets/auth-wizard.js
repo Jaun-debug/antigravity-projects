@@ -314,14 +314,12 @@
     render();
   }
   function stoUploadStep(tier){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+esc(tier)+'</div><h2 class="aw-h">Load your net rates</h2><p class="aw-sub">Upload a screenshot or PDF of your '+esc(tier)+' net rate sheet — our AI reads it, then you review before submitting.</p>'+
-      '<div class="aw-panel"><h4>Season year</h4><div class="aw-field" style="margin:0"><label>Which season year is this rate sheet for?</label><select class="aw-input" id="st-year"></select></div></div>'+
-      '<div class="aw-panel"><h4>Upload your rate sheet</h4><div class="aw-drop" id="st-drop" style="min-height:280px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1rem">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="st-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="st-thumbs"></div></div>'+
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">STO Rates &middot; '+esc(tier)+' &middot; '+seasonLabel()+'</div><h2 class="aw-h">Load your net rates</h2><p class="aw-sub">Upload a screenshot or PDF of your '+esc(tier)+' net rate sheet — our AI reads it, then you review before submitting.</p>'+
+      '<div class="aw-panel"><h4>Upload your rate sheet</h4><div class="aw-drop" id="st-drop" style="min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1rem">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="st-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="st-thumbs"></div></div>'+
       '<div style="display:flex;gap:10px;justify-content:center"><button class="aw-btn ghost" id="st-back2">‹ Back to tiers</button><button class="aw-btn" id="st-save">Read my rate sheet</button></div><div class="aw-err" id="st-msg" style="color:#bcd0a0"></div></div>';
-    (function(){var now=new Date().getFullYear();var set=[now,now+1];var sel=String(S.season||now).replace(/[^0-9]/g,'');var chosen=sel||String(now);stage.querySelector('#st-year').innerHTML=set.map(function(y){return '<option value="'+y+'"'+(String(y)===chosen?' selected':'')+'>'+y+' Season</option>';}).join('');})();
     stage.querySelector('#st-back2').onclick=function(){stoRatesStep();};
     var files=wireSheet('st-drop','st-file','st-thumbs');
-    stage.querySelector('#st-save').onclick=function(){var yr=stage.querySelector('#st-year').value;uploadSheet(files,'sto',stage.querySelector('#st-msg'),function(r){r.year=yr||r.year;r.commission=tier;rackReviewStep(r);});};
+    stage.querySelector('#st-save').onclick=function(){var yr=String(S.season||new Date().getFullYear()).replace(/[^0-9]/g,'');uploadSheet(files,'sto',stage.querySelector('#st-msg'),function(r){r.year=yr||r.year;r.commission=tier;rackReviewStep(r);});};
   }
 
   function stoAssignStep(){
