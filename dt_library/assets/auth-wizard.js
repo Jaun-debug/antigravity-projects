@@ -257,14 +257,9 @@
     };
   }
   function rackStep(){
-    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Enter your rates manually below, or upload a screenshot / file of your rate sheet.</p>'+
-      '<div class="aw-panel"><h4>Rates</h4><div id="rk-rows"></div><button class="aw-btn ghost" id="rk-add">+ Add rate</button></div>'+
-      '<div class="aw-panel"><h4>Or upload a rate sheet</h4><div class="aw-drop" id="rk-sheet-drop">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="rk-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="rk-sheet-thumbs"></div></div>'+
-      '<button class="aw-btn" id="rk-save">Save rack rates</button><div class="aw-err" id="rk-msg" style="color:#bcd0a0"></div></div>';
-    var rows=stage.querySelector('#rk-rows');
-    function addRow(){var d=document.createElement('div');d.className='rk-row';d.innerHTML='<input class="aw-input" placeholder="Room / unit type (e.g. Standard Double)"><input class="aw-input" placeholder="Rate / night"><button class="rk-del">&times;</button>';d.querySelector('.rk-del').onclick=function(){d.remove();};rows.appendChild(d);}
-    addRow();addRow();
-    stage.querySelector('#rk-add').onclick=addRow;
+    stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Load your rack rates</h2><p class="aw-sub">Upload a screenshot or PDF of your rate sheet — our AI reads it, then you review the rates before submitting.</p>'+
+      '<div class="aw-panel"><h4>Upload your rate sheet</h4><div class="aw-drop" id="rk-sheet-drop" style="min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:1rem">Take a screenshot or select a file (image / PDF) of your rate sheet</div><input type="file" id="rk-sheet-file" accept="image/*,application/pdf" multiple style="display:none"><div class="aw-photos" id="rk-sheet-thumbs"></div></div>'+
+      '<button class="aw-btn" id="rk-save">Read my rate sheet</button><div class="aw-err" id="rk-msg" style="color:#bcd0a0"></div></div>';
     var rkFiles=wireSheet('rk-sheet-drop','rk-sheet-file','rk-sheet-thumbs');
     stage.querySelector('#rk-save').onclick=function(){uploadSheet(rkFiles,'rack',stage.querySelector('#rk-msg'),function(r){rackReviewStep(r);});};
   }
