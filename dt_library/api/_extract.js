@@ -34,7 +34,9 @@ const INSTRUCTIONS =
   'Rules: one entry in "properties" per distinct property/camp/lodge. If the card covers only one property, return exactly one entry. ' +
   'Never merge two properties into one entry, and never split one property across entries. ' +
   'Rates that apply across the whole group (transfers, lodge hops, activities not tied to one camp) go in a final entry named "<operator> — shared". ' +
-  'Keep prices as printed (with commas, no currency symbol). One section per room type (or per season). ' +
+  'Keep prices as printed (with commas, no currency symbol). One section per room type (or per season/vehicle group). ' +
+  'Keep row labels SHORT: put anything common to a whole block (season, vehicle group, board basis, duration band) in the section "title" ' +
+  'instead of repeating it in every row label. Never repeat the property name inside row labels. ' +
   'Put every rate category (single, sharing, child, DBB/BB, etc.) as its own row. ' +
   'Flag in "anomalies" any value you had to guess, any garbled/partial number (mark it "CHECK"), and any price that breaks an obvious rule ' +
   '(single cheaper than sharing, child dearer than adult, a value 10x its neighbours). ' +
@@ -62,7 +64,7 @@ async function extractFromPdf(base64pdf) {
   try {
     const resp = await client.messages.create({
       model: model,
-      max_tokens: 16000,
+      max_tokens: 32000,
       system: SYSTEM,
       messages: [{
         role: 'user',
