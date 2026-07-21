@@ -181,13 +181,17 @@ async function listSummary() {
   for (const slug of slugs) {
     const rack = await getRates('rack', slug);
     const sto = await getRates('sto', slug);
-    const meta = rack || sto || {};
+    const rackYears = await listYears('rack', slug);
+    const stoYears = await listYears('sto', slug);
+    let meta = rack || sto || {};
+    if (!meta.name && rackYears.length) meta = (await getRates('rack', slug, pickDefaultYear(rackYears))) || meta;
+    if (!meta.name && stoYears.length) meta = (await getRates('sto', slug, pickDefaultYear(stoYears))) || meta;
     out.push({
       slug,
       name: meta.name || slug,
       region: meta.region || '',
-      hasRack: !!rack,
-      hasSto: !!sto,
+      hasRack: !!rack || rackYears.length > 0,
+      hasSto: !!sto || stoYears.length > 0,
     });
   }
   return out;

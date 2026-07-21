@@ -97,9 +97,16 @@ module.exports = async (req, res) => {
     if (action === 'get') {
       const slug = slugify(body.slug);
       if (!slug) return res.status(400).json({ error: 'Missing slug.' });
-      const rack = await db.getRates('rack', slug);
-      const sto = await db.getRates('sto', slug);
-      return res.status(200).json({ ok: true, slug: slug, rack: rack, sto: sto });
+      const yearReq = body.year ? String(body.year) : '';
+      const rackYears = await db.listYears('rack', slug);
+      const stoYears = await db.listYears('sto', slug);
+      const rackRes = await db.getResolved('rack', slug, yearReq || undefined);
+      const stoRes = await db.getResolved('sto', slug, yearReq || undefined);
+      return res.status(200).json({
+        ok: true, slug: slug, rack: rackRes.doc, sto: stoRes.doc,
+        year: yearReq || rackRes.year || stoRes.year || '',
+        rackYears: rackYears, stoYears: stoYears,
+      });
     }
 
     if (action === 'save') {
@@ -112,8 +119,10 @@ module.exports = async (req, res) => {
       if (!slug) return res.status(400).json({ error: 'Provide a lodge name or slug.' });
       const doc = normalizeDoc(body.data);
       if (!doc.name) return res.status(400).json({ error: 'Lodge name is required.' });
-      await db.setRates(kind, slug, doc);
-      return res.status(200).json({ ok: true, slug: slug, kind: kind });
+      const year = body.year ? String(body.year).replace(/[^0-9]/g, '') : '';
+      if (year) doc.year = year;
+      await db.setRates(kind, slug, doc, year || undefined);
+      return res.status(200).json({ ok: true, slug: slug, kind: kind, year: year || null });
     }
 
     if (action === 'delete') {
@@ -123,8 +132,9 @@ module.exports = async (req, res) => {
       }
       const slug = slugify(body.slug);
       if (!slug) return res.status(400).json({ error: 'Missing slug.' });
-      await db.delRates(kind, slug);
-      return res.status(200).json({ ok: true, slug: slug, kind: kind });
+      const year = body.year ? String(body.year).replace(/[^0-9]/g, '') : '';
+      await db.delRates(kind, slug, year || undefined);
+      return res.status(200).json({ ok: true, slug: slug, kind: kind, year: year || null });
     }
 
     return res.status(400).json({ error: 'Unknown action: ' + action });
