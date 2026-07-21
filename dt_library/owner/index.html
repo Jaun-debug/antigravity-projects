@@ -8,7 +8,7 @@
 <style>
   :root{
     --gold:#B8956A; --gold-dk:#9c7b52; --green:#87a996; --green-dk:#6d8d7b;
-    --bone:#F5F1E8; --card:#fffdf8; --ink:#2f2b25; --muted:#8a8175;
+    --blue:#2f6fd0; --bone:#F5F1E8; --card:#fffdf8; --ink:#2f2b25; --muted:#8a8175;
     --line:#e6ded0; --danger:#c0603f; --shadow:0 1px 3px rgba(60,50,35,.09);
   }
   *{box-sizing:border-box}
@@ -28,12 +28,10 @@
   input:focus,textarea:focus{outline:2px solid var(--gold);outline-offset:-1px}
   label{display:block;font-size:12px;color:var(--muted);margin:0 0 3px 2px;letter-spacing:.02em;text-transform:uppercase}
   .wrap{max-width:1080px;margin:0 auto;padding:18px}
-  /* login */
   #login{max-width:380px;margin:9vh auto;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px;box-shadow:var(--shadow)}
   #login h1{font-size:20px;margin-bottom:4px}
   #login p{color:var(--muted);font-size:13px;margin:0 0 18px}
   .brandbar{height:5px;background:linear-gradient(90deg,var(--gold),var(--green));border-radius:14px 14px 0 0;margin:-26px -26px 20px}
-  /* app */
   header.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--card);border-bottom:1px solid var(--line)}
   header.top .lhs{display:flex;align-items:center;gap:10px}
   .dot{width:26px;height:26px;border-radius:7px;background:linear-gradient(135deg,var(--gold),var(--green))}
@@ -41,15 +39,20 @@
   @media(max-width:760px){.layout{grid-template-columns:1fr}}
   .side{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:var(--shadow);align-self:start}
   .side .search{margin-bottom:10px}
+  .modeSwitch{display:flex;gap:6px;margin-bottom:10px;background:#f1ece2;padding:4px;border-radius:9px}
+  .ms{flex:1;background:transparent;color:var(--muted);box-shadow:none;border-radius:7px;padding:8px 6px;font-size:13px;font-weight:600}
+  .ms.active{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
+  .ms[data-mode="sto"].active{color:var(--blue)}
+  .navsel{margin-bottom:8px}
   .lodge{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 9px;border-radius:8px;cursor:pointer}
   .lodge:hover{background:#f6f1e7}
   .lodge.active{background:#efe7d7}
   .lodge .nm{font-weight:500;font-size:14px}
   .lodge .rg{font-size:11px;color:var(--muted)}
-  .badges{display:flex;gap:4px}
-  .b{font-size:10px;padding:2px 6px;border-radius:20px;border:1px solid var(--line);color:var(--muted)}
-  .b.on{background:var(--green);color:#fff;border-color:var(--green)}
-  .b.on.rk{background:var(--gold);border-color:var(--gold)}
+  .grouphdr{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);padding:10px 6px 4px;font-weight:700}
+  .mk{font-size:14px;color:#d7cfbf;width:20px;display:inline-block;text-align:center;flex:none}
+  .mk.rk.on{color:var(--green)}
+  .mk.st.on{color:var(--blue)}
   .main{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px;box-shadow:var(--shadow);min-height:60vh}
   .empty{color:var(--muted);text-align:center;padding:60px 20px}
   .tabs{display:flex;gap:6px;margin-bottom:16px;border-bottom:1px solid var(--line)}
@@ -69,6 +72,9 @@
   .toast.show{opacity:.96}
   .hint{font-size:12px;color:var(--muted);margin:2px 0 14px}
   .err{color:var(--danger);font-size:13px;min-height:18px;margin-top:8px}
+  .seg{display:inline-flex;gap:4px;background:#f1ece2;padding:4px;border-radius:9px}
+  .seg button{background:transparent;color:var(--muted);box-shadow:none;font-size:13px;font-weight:600;padding:6px 14px;border-radius:7px}
+  .seg button.on{background:#fff;color:var(--ink);box-shadow:var(--shadow)}
 </style>
 </head>
 <body>
@@ -93,13 +99,19 @@
   <div class="wrap">
     <div class="layout">
       <aside class="side">
-        <div class="search"><input id="q" placeholder="Search lodges…"></div>
+        <div class="modeSwitch">
+          <button class="ms active" data-mode="rack" id="msRack">Public · Rack</button>
+          <button class="ms" data-mode="sto" id="msSto">Agent · STO</button>
+        </div>
+        <div class="navsel"><label>Category</label><select id="catSel"></select></div>
+        <div class="navsel" id="regionWrap"><label>Region</label><select id="regionSel"></select></div>
+        <div class="search"><input id="q" placeholder="Search…"></div>
         <button class="green sm" id="addBtn" style="width:100%;margin-bottom:6px">＋ Add lodge</button>
         <button class="sm" id="bulkBtn" style="width:100%;margin-bottom:8px;background:transparent;border:1px solid #a48256;color:#a48256">⇪ Bulk import (from PDF extract)</button>
         <div id="list"></div>
       </aside>
       <section class="main" id="editor">
-        <div class="empty" id="emptyState">Select a lodge on the left, or add a new one, to edit its rates.</div>
+        <div class="empty" id="emptyState">Pick an item on the left to load its rates.</div>
         <div id="edit" style="display:none">
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
             <h2 id="edTitle" style="font-size:19px"></h2>
@@ -112,7 +124,7 @@
             <button class="tab" data-kind="sto" id="tabSto">STO (net) rates</button>
           </div>
           <div class="metagrid">
-            <div><label>Lodge name</label><input id="m_name"></div>
+            <div><label>Name</label><input id="m_name"></div>
             <div><label>Region</label><input id="m_region"></div>
             <div><label>Currency</label><input id="m_currency"></div>
             <div><label>Validity</label><input id="m_validity"></div>
@@ -138,12 +150,24 @@
 (function(){
   var API='/api/owner-rates';
   var token=sessionStorage.getItem('nr_owner_token')||'';
-  var lodges=[];          // list summaries
+  var summary={};         // slug -> {hasRack,hasSto,name,region}
+  var lodgeIndex=[];      // [{slug,name,region}]
+  var suppliers=[];       // [{email,name,supplierSlug,category}]
   var current=null;       // { slug, rack, sto }
-  var kind='rack';        // active tab
+  var kind='rack';        // active editor tab
+  var mode='rack';        // rack | sto  (Public / Agent)
+  var category='accommodation';
+  var region='';
+
+  var VEHICLES=[{slug:'nts',name:'NTS'},{slug:'ncr',name:'Namibia Car Rental'},{slug:'nrcr',name:'Namib Roos Car Rentals'},{slug:'sanga',name:'Sanga Group Travel'},{slug:'suricate',name:'Suricate Safaris'},{slug:'zap',name:'Zap Car Rental'},{slug:'zaris',name:'Zaris Safaris'}];
+  var ACTIVITIES=[{slug:'molamola',name:'Mola Mola'},{slug:'desert',name:'Desert Explorers'},{slug:'namibsky',name:'Namib Sky'},{slug:'bogenfels',name:'Bogenfels Tours'},{slug:'alteraction',name:'Alter-Action'}];
+  var CATS={rack:[['accommodation','Accommodation (by region)'],['activity','Activities']],
+            sto:[['accommodation','Accommodation lodges'],['group','Group lodges'],['vehicle','Vehicles'],['activity','Activities']]};
 
   var $=function(id){return document.getElementById(id)};
   function toast(msg){var t=$('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast._t);toast._t=setTimeout(function(){t.classList.remove('show')},1800)}
+  function slugify(s){return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 
   function api(payload){
     payload.token=payload.token||token;
@@ -152,9 +176,8 @@
   }
 
   // ── login ─────────────────────────────────────────────
-  function showApp(){$('login').style.display='none';$('app').style.display='block';loadList();}
+  function showApp(){$('login').style.display='none';$('app').style.display='block';boot();}
   function showLogin(){$('app').style.display='none';$('login').style.display='block';$('pw').focus();}
-
   function doLogin(){
     var pw=$('pw').value;$('loginErr').textContent='';
     api({action:'login',password:pw,token:''}).then(function(r){
@@ -166,36 +189,112 @@
   $('pw').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin()});
   $('logoutBtn').addEventListener('click',function(){token='';sessionStorage.removeItem('nr_owner_token');showLogin();});
 
-  // ── list ──────────────────────────────────────────────
-  function loadList(){
+  // ── data loading ──────────────────────────────────────
+  function boot(){
+    loadSummary();
+    // static lodge index (regions + lodges)
+    if(window._lodgeIndex){ lodgeIndex=window._lodgeIndex; buildRegionOptions(); }
+    else fetch('/assets/lodge-pages.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){window._lodgeIndex=lodgeIndex=(j&&j.lodges)||[];buildRegionOptions();renderList();}).catch(function(){lodgeIndex=[];});
+    // supplier accounts (so new signups appear). Needs the portal owner cookie; if unavailable, skip gracefully.
+    fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'listUsers'})})
+      .then(function(r){return r.json();}).then(function(j){ if(j&&j.ok&&j.users){ suppliers=j.users.filter(function(u){return u.role==='supplier';}); renderList(); } }).catch(function(){});
+    buildCatOptions();
+  }
+  function loadSummary(){
     api({action:'list'}).then(function(r){
       if(r.status===401){showLogin();return}
-      if(r.body&&r.body.ok){lodges=r.body.lodges||[];renderList();}
+      if(r.body&&r.body.ok){ summary={}; (r.body.lodges||[]).forEach(function(l){ summary[l.slug]={hasRack:l.hasRack,hasSto:l.hasSto,name:l.name,region:l.region}; }); renderList(); }
       else if(r.body&&r.body.error){toast(r.body.error)}
     });
   }
-  function renderList(){
-    var q=($('q').value||'').trim().toLowerCase();
-    var box=$('list');box.innerHTML='';
-    var items=lodges.filter(function(l){return !q||(l.name||'').toLowerCase().indexOf(q)>-1||(l.region||'').toLowerCase().indexOf(q)>-1});
-    if(!items.length){box.innerHTML='<div class="hint" style="padding:6px">No lodges yet.</div>';return}
-    items.forEach(function(l){
-      var d=document.createElement('div');d.className='lodge'+(current&&current.slug===l.slug?' active':'');
-      d.innerHTML='<div><div class="nm"></div><div class="rg"></div></div>'+
-        '<div class="badges"><span class="b rk '+(l.hasRack?'on':'')+'">R</span><span class="b '+(l.hasSto?'on':'')+'">S</span></div>';
-      d.querySelector('.nm').textContent=l.name||l.slug;
-      d.querySelector('.rg').textContent=l.region||'';
-      d.addEventListener('click',function(){openLodge(l.slug)});
-      box.appendChild(d);
-    });
+
+  // ── nav controls ──────────────────────────────────────
+  function buildCatOptions(){
+    var sel=$('catSel'); sel.innerHTML=CATS[mode].map(function(c){return '<option value="'+c[0]+'">'+c[1]+'</option>';}).join('');
+    if(!CATS[mode].some(function(c){return c[0]===category;})) category='accommodation';
+    sel.value=category;
+    $('regionWrap').style.display=(category==='accommodation')?'block':'none';
   }
+  function buildRegionOptions(){
+    var regs=[]; lodgeIndex.forEach(function(l){ if(l.region && regs.indexOf(l.region)<0) regs.push(l.region); });
+    regs.sort();
+    $('regionSel').innerHTML='<option value="">All regions</option>'+regs.map(function(r){return '<option value="'+esc(r)+'">'+esc(r)+'</option>';}).join('');
+    $('regionSel').value=region;
+  }
+  function setMode(m){
+    mode=m; $('msRack').classList.toggle('active',m==='rack'); $('msSto').classList.toggle('active',m==='sto');
+    buildCatOptions();
+    if(current){ kind=mode; setTab(mode); }
+    renderList();
+  }
+  $('msRack').addEventListener('click',function(){setMode('rack')});
+  $('msSto').addEventListener('click',function(){setMode('sto')});
+  $('catSel').addEventListener('change',function(){category=$('catSel').value;$('regionWrap').style.display=(category==='accommodation')?'block':'none';renderList();});
+  $('regionSel').addEventListener('change',function(){region=$('regionSel').value;renderList();});
   $('q').addEventListener('input',renderList);
 
+  // ── build item set for the current mode/category ──────
+  function currentItems(){
+    var items=[];
+    if(category==='accommodation'){
+      items=lodgeIndex.map(function(l){return {slug:l.slug,name:l.name,region:l.region};});
+      suppliers.filter(function(s){return s.category==='accommodation'&&s.supplierSlug;}).forEach(function(s){ if(!items.some(function(i){return i.slug===s.supplierSlug;})) items.push({slug:s.supplierSlug,name:s.name||s.supplierSlug,region:'',supplier:true}); });
+      if(region) items=items.filter(function(i){return i.region===region;});
+    } else if(category==='group'){
+      items=suppliers.filter(function(s){return s.category==='group';}).map(function(s){return {slug:s.supplierSlug||slugify(s.name||s.email),name:s.name||s.email,supplier:true};});
+    } else if(category==='vehicle'){
+      items=VEHICLES.slice();
+      suppliers.filter(function(s){return s.category==='vehicle';}).forEach(function(s){var sl=s.supplierSlug||slugify(s.name||s.email);if(!items.some(function(i){return i.slug===sl;}))items.push({slug:sl,name:s.name||s.email,supplier:true});});
+    } else if(category==='activity'){
+      items=ACTIVITIES.slice();
+      suppliers.filter(function(s){return s.category==='activity';}).forEach(function(s){var sl=s.supplierSlug||slugify(s.name||s.email);if(!items.some(function(i){return i.slug===sl;}))items.push({slug:sl,name:s.name||s.email,supplier:true});});
+    }
+    var q=($('q').value||'').trim().toLowerCase();
+    if(q) items=items.filter(function(i){return ((i.name||'')+' '+(i.region||'')+' '+i.slug).toLowerCase().indexOf(q)>-1;});
+    return items;
+  }
+  function markerHtml(slug){
+    var s=summary[slug]||{};
+    var loaded= mode==='rack' ? s.hasRack : s.hasSto;
+    if(mode==='rack') return '<span class="mk rk '+(loaded?'on':'')+'" title="'+(loaded?'Rack rates loaded':'No rack rates yet')+'">'+(loaded?'●':'○')+'</span>';
+    return '<span class="mk st '+(loaded?'on':'')+'" title="'+(loaded?'STO rates loaded':'No STO rates yet')+'">'+(loaded?'✓':'○')+'</span>';
+  }
+  function itemRow(i){
+    var d=document.createElement('div');d.className='lodge'+(current&&current.slug===i.slug?' active':'');
+    d.innerHTML='<div><div class="nm">'+esc(i.name||i.slug)+'</div>'+(i.region?'<div class="rg">'+esc(i.region)+'</div>':'')+'</div>'+markerHtml(i.slug);
+    d.addEventListener('click',function(){openItem(i)});
+    return d;
+  }
+  function renderList(){
+    var box=$('list');box.innerHTML='';
+    var items=currentItems();
+    if(!items.length){box.innerHTML='<div class="hint" style="padding:6px">Nothing here yet.</div>';return}
+    // group accommodation by region when "All regions"
+    if(category==='accommodation' && !region){
+      var byReg={},order=[];
+      items.forEach(function(i){var r=i.region||'Other';if(!byReg[r]){byReg[r]=[];order.push(r);}byReg[r].push(i);});
+      order.sort();
+      order.forEach(function(r){
+        var h=document.createElement('div');h.className='grouphdr';h.textContent=r;box.appendChild(h);
+        byReg[r].forEach(function(i){box.appendChild(itemRow(i));});
+      });
+    } else {
+      items.forEach(function(i){box.appendChild(itemRow(i));});
+    }
+  }
+
   // ── open / edit ───────────────────────────────────────
-  function openLodge(slug){
-    api({action:'get',slug:slug}).then(function(r){
-      if(r.body&&r.body.ok){current={slug:r.body.slug,rack:r.body.rack,sto:r.body.sto};kind='rack';renderEditor();renderList();}
-    });
+  function openItem(i){
+    api({action:'get',slug:i.slug}).then(function(r){
+      if(r.body&&r.body.ok&&(r.body.rack||r.body.sto)){ current={slug:i.slug,rack:r.body.rack,sto:r.body.sto}; }
+      else { current=freshItem(i); }
+      kind=mode;renderEditor();renderList();
+      toast('Editing '+(i.name||i.slug)+' — '+(mode==='rack'?'rack':'STO')+' rates.');
+    }).catch(function(){ current=freshItem(i);kind=mode;renderEditor(); });
+  }
+  function freshItem(i){
+    var base={name:i.name||i.slug,region:i.region||'',currency:'N$',validity:'',note:'',commission:'',sections:[{title:'Rates',rows:[['','']]}]};
+    return mode==='rack' ? {slug:i.slug,rack:base,sto:null} : {slug:i.slug,rack:null,sto:base};
   }
   function blankDoc(){return{name:'',region:'',currency:'N$',validity:'',note:'',commission:'',sections:[]}}
   function activeDoc(){
@@ -205,7 +304,6 @@
     if(!Array.isArray(d.sections)) d.sections=[];
     return d;
   }
-
   function setTab(k){kind=k;$('tabRack').classList.toggle('active',k==='rack');$('tabSto').classList.toggle('active',k==='sto');renderEditor()}
   $('tabRack').addEventListener('click',function(){pullMeta();setTab('rack')});
   $('tabSto').addEventListener('click',function(){pullMeta();setTab('sto')});
@@ -214,7 +312,7 @@
     if(!current){$('edit').style.display='none';$('emptyState').style.display='block';return}
     $('emptyState').style.display='none';$('edit').style.display='block';
     var d=activeDoc();
-    $('edTitle').textContent=(d.name|| (current.rack&&current.rack.name)||(current.sto&&current.sto.name)||current.slug||'New lodge');
+    $('edTitle').textContent=(d.name|| (current.rack&&current.rack.name)||(current.sto&&current.sto.name)||current.slug||'New');
     $('edSlug').textContent='URL slug: '+(current.slug||'(new — set from name on save)');
     $('saveKind').textContent=kind==='rack'?'rack rates':'STO rates';
     $('commWrap').style.display=kind==='sto'?'block':'none';
@@ -227,7 +325,6 @@
     renderSections();
     $('edErr').textContent='';
   }
-
   function renderSections(){
     var d=activeDoc();var box=$('sections');box.innerHTML='';
     d.sections.forEach(function(sec,si){
@@ -254,10 +351,7 @@
       box.appendChild(el);
     });
   }
-
   $('addSection').addEventListener('click',function(){pullMeta();activeDoc().sections.push({title:'',rows:[['','']]});renderSections()});
-
-  // Copy DOM meta fields back into the active doc (before switching tab / saving).
   function pullMeta(){
     var d=activeDoc();if(!d)return;
     d.name=$('m_name').value.trim();
@@ -268,31 +362,30 @@
     d.commission=$('m_commission').value.trim();
   }
 
-  // ── save / delete / add ───────────────────────────────
+  // ── save / delete ─────────────────────────────────────
   $('saveBtn').addEventListener('click',function(){
     pullMeta();var d=activeDoc();$('edErr').textContent='';
-    if(!d.name){$('edErr').textContent='Lodge name is required.';return}
+    if(!d.name){$('edErr').textContent='Name is required.';return}
     api({action:'save',slug:current.slug||'',kind:kind,data:d}).then(function(r){
       if(r.body&&r.body.ok){
         current.slug=r.body.slug;
         toast('Saved — '+(kind==='rack'?'rack':'STO')+' rates live');
-        loadList();renderEditor();
+        loadSummary();renderEditor();
       }else{$('edErr').textContent=(r.body&&r.body.error)||'Save failed.';}
     }).catch(function(){$('edErr').textContent='Network error.';});
   });
-
   $('delBtn').addEventListener('click',function(){
     if(!current||!current.slug){toast('Nothing saved to delete yet.');return}
-    if(!confirm('Delete the '+(kind==='rack'?'RACK':'STO')+' rate list for this lodge? This cannot be undone.'))return;
+    if(!confirm('Delete the '+(kind==='rack'?'RACK':'STO')+' rate list for this item? This cannot be undone.'))return;
     api({action:'delete',slug:current.slug,kind:kind}).then(function(r){
-      if(r.body&&r.body.ok){current[kind]=null;toast('Deleted '+(kind==='rack'?'rack':'STO')+' list');loadList();
+      if(r.body&&r.body.ok){current[kind]=null;toast('Deleted '+(kind==='rack'?'rack':'STO')+' list');loadSummary();
         if(!current.rack&&!current.sto){current=null;renderEditor()}else{renderEditor()}
       }else{toast((r.body&&r.body.error)||'Delete failed.')}
     });
   });
 
+  // ── add lodge picker ──────────────────────────────────
   $('addBtn').addEventListener('click',function(){ openLodgePicker(); });
-
   function openLodgePicker(){
     var ov=document.createElement('div');
     ov.style.cssText='position:fixed;inset:0;z-index:500;background:rgba(30,28,26,.5);display:flex;align-items:flex-start;justify-content:center;padding:56px 16px;';
@@ -303,45 +396,38 @@
     document.body.appendChild(ov);
     var list=ov.querySelector('.lpList'), search=ov.querySelector('.lpSearch');
     function draw(q){ q=(q||'').toLowerCase();
-      var idx=window._lodgeIndex||[];
-      var items=idx.filter(function(l){return !q||(l.name+' '+l.region+' '+l.slug).toLowerCase().indexOf(q)>=0;}).slice(0,150);
-      list.innerHTML=items.map(function(l){return '<div class="lp-item" data-slug="'+l.slug+'" style="padding:10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;gap:10px"><span>'+l.name+'</span><span style="color:#999;font-size:.85rem">'+l.region+'</span></div>';}).join('')||'<div style="padding:14px;color:#999">No match.</div>';
+      var items=(lodgeIndex||[]).filter(function(l){return !q||(l.name+' '+l.region+' '+l.slug).toLowerCase().indexOf(q)>=0;}).slice(0,150);
+      list.innerHTML=items.map(function(l){return '<div class="lp-item" data-slug="'+l.slug+'" style="padding:10px;border-radius:6px;cursor:pointer;display:flex;justify-content:space-between;gap:10px"><span>'+esc(l.name)+'</span><span style="color:#999;font-size:.85rem">'+esc(l.region)+'</span></div>';}).join('')||'<div style="padding:14px;color:#999">No match.</div>';
       Array.prototype.forEach.call(list.querySelectorAll('.lp-item'),function(el){
         el.onmouseenter=function(){el.style.background='#f2efe9';}; el.onmouseleave=function(){el.style.background='';};
-        el.onclick=function(){ ov.remove(); pickLodge(el.getAttribute('data-slug')); };
+        el.onclick=function(){ ov.remove(); var slug=el.getAttribute('data-slug'); var l=(lodgeIndex||[]).filter(function(x){return x.slug===slug;})[0]||{slug:slug,name:slug,region:''}; openItem(l); };
       });
     }
     ov.onclick=function(e){ if(e.target===ov) ov.remove(); };
     ov.querySelector('.lpClose').onclick=function(){ ov.remove(); };
     search.oninput=function(){ draw(search.value); };
-    if(window._lodgeIndex){ draw(''); }
-    else { fetch('/assets/lodge-pages.json',{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){window._lodgeIndex=(j&&j.lodges)||[];draw('');}).catch(function(){window._lodgeIndex=[];draw('');}); }
+    draw('');
     setTimeout(function(){search.focus();},50);
   }
 
-  function pickLodge(slug){
-    var l=(window._lodgeIndex||[]).filter(function(x){return x.slug===slug;})[0]||{slug:slug,name:slug,region:''};
-    function fresh(){ return {slug:slug,rack:{name:l.name,region:l.region,currency:'N$',validity:'',note:'',commission:'',sections:[{title:'Rooms (per person, per night)',rows:[['','']]}]},sto:null}; }
-    api({action:'get',slug:slug}).then(function(r){
-      if(r.body&&r.body.ok&&(r.body.rack||r.body.sto)){ current={slug:slug,rack:r.body.rack||fresh().rack,sto:r.body.sto}; }
-      else { current=fresh(); }
-      kind='rack';renderEditor();renderList();
-      toast('Editing '+l.name+' — fill in rack rates, then Save.');
-    }).catch(function(){ current=fresh();kind='rack';renderEditor();toast('Editing '+l.name); });
-  }
-
+  // ── bulk import ───────────────────────────────────────
   $('bulkBtn').addEventListener('click',function(){ openBulkImport(); });
   function openBulkImport(){
+    var biKind=mode; // default to the current mode
     var ov=document.createElement('div');
     ov.style.cssText='position:fixed;inset:0;z-index:500;background:rgba(30,28,26,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto';
     ov.innerHTML='<div style="background:#fff;border-radius:12px;max-width:640px;width:100%;padding:22px;box-shadow:0 25px 60px rgba(0,0,0,.3)">'
-      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px"><strong style="flex:1;font-size:1.05rem">Bulk import rack rates</strong><span class="biClose" style="cursor:pointer;font-size:1.5rem;color:#999">&times;</span></div>'
-      +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:10px">Paste the JSON extracted from a supplier PDF. Preview to check it, then Import — it saves to the database and goes live on the lodge pages.</p>'
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><strong style="flex:1;font-size:1.05rem">Bulk import rates</strong><span class="biClose" style="cursor:pointer;font-size:1.5rem;color:#999">&times;</span></div>'
+      +'<div style="margin-bottom:10px"><div class="seg"><button class="biR on" data-k="rack">Public · Rack</button><button class="biS" data-k="sto">Agent · STO</button></div></div>'
+      +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:10px">Paste the JSON extracted from a supplier PDF. Preview to check it, then Import — it saves to the database under the chosen rate type.</p>'
       +'<textarea class="biJson" placeholder="[ { &quot;slug&quot;: &quot;ongava-lodge&quot;, &quot;name&quot;: &quot;Ongava Lodge&quot;, &quot;region&quot;: &quot;South Etosha&quot;, &quot;sections&quot;: [ { &quot;title&quot;: &quot;Low Season&quot;, &quot;rows&quot;: [ [&quot;Full Board&quot;,&quot;12036&quot;] ] } ] } ]" style="width:100%;height:200px;font-family:monospace;font-size:12px;border:1px solid #ccc;border-radius:6px;padding:10px"></textarea>'
       +'<div class="biPreview" style="margin:10px 0;font-size:.85rem;max-height:180px;overflow:auto"></div>'
       +'<div style="display:flex;gap:10px;justify-content:flex-end"><button class="biPrev" style="padding:9px 16px;border:1px solid #a48256;border-radius:6px;background:#fff;color:#a48256;cursor:pointer;font-family:inherit">Preview / check</button><button class="biGo" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import</button></div></div>';
     document.body.appendChild(ov);
     var ta=ov.querySelector('.biJson'), prev=ov.querySelector('.biPreview'), goBtn=ov.querySelector('.biGo'), parsed=null;
+    var biR=ov.querySelector('.biR'), biS=ov.querySelector('.biS');
+    biR.onclick=function(){biKind='rack';biR.classList.add('on');biS.classList.remove('on');};
+    biS.onclick=function(){biKind='sto';biS.classList.add('on');biR.classList.remove('on');};
     ov.onclick=function(e){if(e.target===ov)ov.remove();};
     ov.querySelector('.biClose').onclick=function(){ov.remove();};
     function num(v){ var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,'')); return isNaN(n)?null:n; }
@@ -366,12 +452,6 @@
           var sng=prices.filter(function(x){return /single|sgl/.test(x.label);}).map(function(x){return x.p;});
           var shr=prices.filter(function(x){return /(sharing|double|dbl|twin|per person)/.test(x.label)&&!/single|sgl/.test(x.label);}).map(function(x){return x.p;});
           if(sng.length&&shr.length&&mx(sng)<mx(shr)) warns.push('single < sharing in '+(s.title||'section')+' (possible column swap)');
-          var dbb=prices.filter(function(x){return /dbb|dinner/.test(x.label);}).map(function(x){return x.p;});
-          var bb=prices.filter(function(x){return /(^|[^d])bb|breakfast/.test(x.label)&&!/dbb|dinner/.test(x.label);}).map(function(x){return x.p;});
-          if(dbb.length&&bb.length&&mn(dbb)<mn(bb)) warns.push('DBB < BB in '+(s.title||'section'));
-          var ch=prices.filter(function(x){return /child|chd/.test(x.label);}).map(function(x){return x.p;});
-          var ad=prices.filter(function(x){return !/child|chd/.test(x.label);}).map(function(x){return x.p;});
-          if(ch.length&&ad.length&&mn(ch)>=mn(ad)) warns.push('child ≥ adult in '+(s.title||'section'));
         }
       });
       if(!nrows) errs.push('no rate rows');
@@ -387,9 +467,9 @@
         var icon=c.errs.length?'✗':(c.warns.length?'⚠️':'✓'), col=c.errs.length?'#c0392b':(c.warns.length?'#b9770e':'#2e7d46');
         if(c.errs.length) anyErr=true;
         var detail=(c.errs.length?'<div style="color:#c0392b;margin-left:20px">'+c.errs.join('; ')+'</div>':'')+(c.warns.length?'<div style="color:#b9770e;margin-left:20px">'+c.warns.join('; ')+'</div>':'');
-        lines.push('<div style="padding:5px 0;border-bottom:1px solid #eee"><span style="color:'+col+'">'+icon+'</span> <strong>'+c.name+'</strong> <span style="color:#999">'+c.slug+'</span> — '+c.nrows+' rows'+detail+'</div>');
+        lines.push('<div style="padding:5px 0;border-bottom:1px solid #eee"><span style="color:'+col+'">'+icon+'</span> <strong>'+esc(c.name)+'</strong> <span style="color:#999">'+esc(c.slug)+'</span> — '+c.nrows+' rows'+detail+'</div>');
       });
-      lines.push('<div style="padding:6px 0;font-size:.78rem;color:#7d756e">✓ ok · ⚠️ glance at the flagged rows (still importable) · ✗ fix before import</div>');
+      lines.push('<div style="padding:6px 0;font-size:.78rem;color:#7d756e">Importing as <strong>'+(biKind==='rack'?'PUBLIC RACK':'AGENT STO')+'</strong> · ✓ ok · ⚠️ check flagged rows (still importable) · ✗ fix before import</div>');
       prev.innerHTML=lines.join('');
       if(anyErr) return null;
       parsed=arr; return arr;
@@ -401,10 +481,10 @@
       goBtn.disabled=true; goBtn.textContent='Importing…';
       var i=0, done=0, fail=0;
       function next(){
-        if(i>=arr.length){ toast('Imported '+done+' lodge'+(done!==1?'s':'')+(fail?', '+fail+' failed':'')+'.'); ov.remove(); api({action:'list'}).then(function(r){if(r.body&&r.body.ok)renderList();}); return; }
+        if(i>=arr.length){ toast('Imported '+done+' '+(biKind==='rack'?'rack':'STO')+' list'+(done!==1?'s':'')+(fail?', '+fail+' failed':'')+'.'); ov.remove(); loadSummary(); return; }
         var l=arr[i++];
-        var data={name:l.name||l.slug,region:l.region||'',currency:l.currency||'N$',validity:l.validity||'',note:l.note||'',commission:'',sections:l.sections||[]};
-        api({action:'save',slug:l.slug,kind:'rack',data:data}).then(function(r){ if(r.body&&r.body.ok)done++; else fail++; next(); }).catch(function(){ fail++; next(); });
+        var data={name:l.name||l.slug,region:l.region||'',currency:l.currency||'N$',validity:l.validity||'',note:l.note||'',commission:l.commission||'',sections:l.sections||[]};
+        api({action:'save',slug:l.slug,kind:biKind,data:data}).then(function(r){ if(r.body&&r.body.ok)done++; else fail++; next(); }).catch(function(){ fail++; next(); });
       }
       next();
     };

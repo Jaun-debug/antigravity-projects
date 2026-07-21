@@ -58,7 +58,8 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
         <div><label>Email</label><input id="cEmail" type="email"></div>
         <div><label>Name</label><input id="cName" type="text"></div>
         <div><label>Role</label><select id="cRole"><option value="supplier">Supplier</option><option value="agent">Agent</option><option value="owner">Owner</option></select></div>
-        <div><label>Lodge slug (suppliers)</label><input id="cSlug" type="text" placeholder="e.g. ongava-lodge"></div>
+        <div><label>Category (suppliers)</label><select id="cCat"><option value="accommodation">Accommodation</option><option value="group">Group lodges</option><option value="vehicle">Vehicles</option><option value="activity">Activities</option></select></div>
+        <div><label>Lodge / supplier slug</label><input id="cSlug" type="text" placeholder="e.g. ongava-lodge"></div>
         <div><button class="btn" onclick="createUser()">Create</button></div>
       </div>
       <div class="hint">A temporary password is generated — share it with the partner; they can change it after signing in.</div>
@@ -101,10 +102,10 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
   }
 
   window.createUser=function(){
-    var email=$('cEmail').value.trim(), name=$('cName').value.trim(), role=$('cRole').value, slug=$('cSlug').value.trim();
+    var email=$('cEmail').value.trim(), name=$('cName').value.trim(), role=$('cRole').value, slug=$('cSlug').value.trim(), category=$('cCat').value;
     var pw=genPass();
     var m=$('cMsg'); m.className='msg'; m.textContent='';
-    post({action:'createUser',email:email,name:name,role:role,supplierSlug:slug,password:pw}).then(function(r){
+    post({action:'createUser',email:email,name:name,role:role,supplierSlug:slug,category:category,password:pw}).then(function(r){
       if(r&&r.ok){ m.className='msg ok'; m.textContent='Created '+email+' — temporary password: '+pw+'  (copy & send it now; it isn\'t shown again)'; $('cEmail').value='';$('cName').value='';$('cSlug').value=''; load(); }
       else { m.className='msg err'; m.textContent=(r&&r.error)||'Could not create account.'; }
     });

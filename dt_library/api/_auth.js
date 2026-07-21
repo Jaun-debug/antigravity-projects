@@ -110,7 +110,7 @@ async function listUsers() {
   const out = [];
   for (const e of (emails || [])) {
     const u = await getUser(e);
-    if (u) out.push({ email: u.email, name: u.name || '', role: u.role, supplierSlug: u.supplierSlug || '', active: u.active !== false, createdAt: u.createdAt || 0 });
+    if (u) out.push({ email: u.email, name: u.name || '', role: u.role, supplierSlug: u.supplierSlug || '', category: u.category || 'accommodation', active: u.active !== false, createdAt: u.createdAt || 0 });
   }
   out.sort(function (a, b) { return a.role === b.role ? (a.email < b.email ? -1 : 1) : (a.role < b.role ? -1 : 1); });
   return out;

@@ -82,7 +82,9 @@ module.exports = async function (req, res) {
       if (String(body.password || '').length < 8) return res.status(200).json({ ok: false, error: 'Password must be at least 8 characters.' });
       if (await auth.getUser(body.email)) return res.status(200).json({ ok: false, error: 'An account with that email already exists.' });
       const ph = auth.hashPassword(body.password);
-      await auth.saveUser({ email: body.email, name: body.name || '', role: role, supplierSlug: body.supplierSlug || '', salt: ph.salt, hash: ph.hash, active: true, createdAt: Date.now() });
+      const cats = ['accommodation', 'group', 'vehicle', 'activity'];
+      const category = cats.indexOf(String(body.category || '')) !== -1 ? String(body.category) : 'accommodation';
+      await auth.saveUser({ email: body.email, name: body.name || '', role: role, supplierSlug: body.supplierSlug || '', category: category, salt: ph.salt, hash: ph.hash, active: true, createdAt: Date.now() });
       return res.status(200).json({ ok: true, email: auth.normEmail(body.email), role: role });
     }
 
