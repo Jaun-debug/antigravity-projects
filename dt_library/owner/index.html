@@ -476,81 +476,73 @@
   $('bulkBtn').addEventListener('click',function(){ openBulkImport(); });
   function openBulkImport(){
     var biKind=mode; // default to the current mode
+    var biYear=String(new Date().getFullYear());
+    var extracted=null;
+    var now=new Date().getFullYear();
     var ov=document.createElement('div');
     ov.style.cssText='position:fixed;inset:0;z-index:500;background:rgba(30,28,26,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto';
     ov.innerHTML='<div style="background:#fff;border-radius:12px;max-width:640px;width:100%;padding:22px;box-shadow:0 25px 60px rgba(0,0,0,.3)">'
-      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px"><strong style="flex:1;font-size:1.05rem">Bulk import rates</strong><span class="biClose" style="cursor:pointer;font-size:1.5rem;color:#999">&times;</span></div>'
-      +'<div style="margin-bottom:10px"><div class="seg"><button class="biR on" data-k="rack">Public · Rack</button><button class="biS" data-k="sto">Agent · STO</button></div></div>'
-      +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:10px">Paste the JSON extracted from a supplier PDF. Preview to check it, then Import — it saves to the database under the chosen rate type.</p>'
-      +'<textarea class="biJson" placeholder="[ { &quot;slug&quot;: &quot;ongava-lodge&quot;, &quot;name&quot;: &quot;Ongava Lodge&quot;, &quot;region&quot;: &quot;South Etosha&quot;, &quot;sections&quot;: [ { &quot;title&quot;: &quot;Low Season&quot;, &quot;rows&quot;: [ [&quot;Full Board&quot;,&quot;12036&quot;] ] } ] } ]" style="width:100%;height:200px;font-family:monospace;font-size:12px;border:1px solid #ccc;border-radius:6px;padding:10px"></textarea>'
-      +'<div class="biPreview" style="margin:10px 0;font-size:.85rem;max-height:180px;overflow:auto"></div>'
-      +'<div style="display:flex;gap:10px;justify-content:flex-end"><button class="biPrev" style="padding:9px 16px;border:1px solid #a48256;border-radius:6px;background:#fff;color:#a48256;cursor:pointer;font-family:inherit">Preview / check</button><button class="biGo" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import</button></div></div>';
+      +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><strong style="flex:1;font-size:1.05rem">Import a rate sheet (PDF)</strong><span class="biClose" style="cursor:pointer;font-size:1.5rem;color:#999">&times;</span></div>'
+      +'<div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap"><div class="seg"><button class="biR on" data-k="rack">Public · Rack</button><button class="biS" data-k="sto">Agent · STO</button></div><label style="margin:0">Year</label><select class="biYear" style="width:auto;padding:7px 10px">'+[now,now+1].map(function(y){return '<option value="'+y+'">'+y+'</option>';}).join('')+'</select></div>'
+      +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:12px">Upload a PDF of the rate sheet — our AI reads it, then you review and import. It saves directly under the chosen rate type and year.</p>'
+      +'<div class="biDrop" style="border:2px dashed #cdb68f;border-radius:10px;padding:36px 20px;text-align:center;color:#7d756e;cursor:pointer;background:#fbf7ef"><strong style="color:#a48256">Choose a PDF</strong> or drag it here<div style="font-size:.8rem;margin-top:6px">Up to ~4 MB</div></div>'
+      +'<input class="biFile" type="file" accept="application/pdf,.pdf" style="display:none">'
+      +'<div class="biStatus" style="margin-top:10px;font-size:.9rem;min-height:1em"></div>'
+      +'<div class="biPrev2" style="margin-top:8px"></div>'
+      +'</div>';
     document.body.appendChild(ov);
-    var ta=ov.querySelector('.biJson'), prev=ov.querySelector('.biPreview'), goBtn=ov.querySelector('.biGo'), parsed=null;
-    var biR=ov.querySelector('.biR'), biS=ov.querySelector('.biS');
+    var biR=ov.querySelector('.biR'), biS=ov.querySelector('.biS'), yearSel=ov.querySelector('.biYear');
+    var drop=ov.querySelector('.biDrop'), file=ov.querySelector('.biFile'), status=ov.querySelector('.biStatus'), prev=ov.querySelector('.biPrev2');
     biR.onclick=function(){biKind='rack';biR.classList.add('on');biS.classList.remove('on');};
     biS.onclick=function(){biKind='sto';biS.classList.add('on');biR.classList.remove('on');};
+    if(mode==='sto') biS.click();
+    yearSel.value=biYear; yearSel.onchange=function(){biYear=yearSel.value;};
     ov.onclick=function(e){if(e.target===ov)ov.remove();};
     ov.querySelector('.biClose').onclick=function(){ov.remove();};
-    function num(v){ var n=parseFloat(String(v==null?'':v).replace(/[^0-9.\-]/g,'')); return isNaN(n)?null:n; }
-    function median(a){ a=a.slice().sort(function(x,y){return x-y;}); var m=Math.floor(a.length/2); return a.length?(a.length%2?a[m]:(a[m-1]+a[m])/2):0; }
-    function mx(a){return Math.max.apply(null,a);} function mn(a){return Math.min.apply(null,a);}
-    function checkLodge(l){
-      var errs=[], warns=[], nrows=0, slug=l.slug||'';
-      if(!slug) errs.push('missing slug');
-      if(!l.sections||!l.sections.length) errs.push('no sections');
-      (l.sections||[]).forEach(function(s){
-        var prices=[];
-        (s.rows||[]).forEach(function(r){
-          if(!r[0] && !(r[1]||r[1]===0)) return;
-          nrows++;
-          var p=num(r[1]);
-          if(p===null){ errs.push('non-numeric price for “'+(r[0]||'?')+'”'); return; }
-          prices.push({label:String(r[0]||'').toLowerCase(),p:p});
-        });
-        if(prices.length){
-          var med=median(prices.map(function(x){return x.p;}));
-          prices.forEach(function(x){ if(med>0 && (x.p>med*10 || x.p<med/10)) warns.push('“'+x.label+'” ('+x.p+') looks off in '+(s.title||'section')); });
-          var sng=prices.filter(function(x){return /single|sgl/.test(x.label);}).map(function(x){return x.p;});
-          var shr=prices.filter(function(x){return /(sharing|double|dbl|twin|per person)/.test(x.label)&&!/single|sgl/.test(x.label);}).map(function(x){return x.p;});
-          if(sng.length&&shr.length&&mx(sng)<mx(shr)) warns.push('single < sharing in '+(s.title||'section')+' (possible column swap)');
-        }
-      });
-      if(!nrows) errs.push('no rate rows');
-      return {slug:slug,name:l.name||slug,nrows:nrows,errs:errs,warns:warns};
+    drop.onclick=function(){file.click();};
+    ['dragenter','dragover'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.style.background='#f6efdf';});});
+    ['dragleave','drop'].forEach(function(ev){drop.addEventListener(ev,function(e){e.preventDefault();drop.style.background='#fbf7ef';});});
+    drop.addEventListener('drop',function(e){if(e.dataTransfer.files&&e.dataTransfer.files[0])handle(e.dataTransfer.files[0]);});
+    file.onchange=function(){if(file.files&&file.files[0])handle(file.files[0]);};
+    function slugify(s){return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
+    function handle(f){
+      if(!/pdf/i.test(f.type)&&!/\.pdf$/i.test(f.name)){status.style.color='#c0392b';status.textContent='Please choose a PDF.';return;}
+      if(f.size>4*1024*1024){status.style.color='#c0392b';status.textContent='That PDF is a bit large (max ~4 MB).';return;}
+      status.style.color='#7d756e';status.textContent='Reading “'+f.name+'” with AI… this can take a moment.';prev.innerHTML='';extracted=null;
+      var reader=new FileReader();
+      reader.onload=function(){
+        var b64=String(reader.result).split(',')[1]||'';
+        fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:biKind})})
+          .then(function(r){return r.json();}).then(function(r){
+            if(r&&r.ok&&r.extracted){ extracted=r.extracted; renderPreview(r); }
+            else { status.style.color='#c0392b';status.textContent=(r&&r.error)||'Could not read that PDF.'; }
+          }).catch(function(){status.style.color='#c0392b';status.textContent='Network error — please try again.';});
+      };
+      reader.readAsDataURL(f);
     }
-    function validate(){
-      parsed=null;
-      var arr; try{ arr=JSON.parse(ta.value); }catch(e){ prev.innerHTML='<span style="color:#c0392b">Invalid JSON: '+e.message+'</span>'; return null; }
-      if(!Array.isArray(arr)) arr=[arr];
-      var lines=[], anyErr=false;
-      arr.forEach(function(l){
-        var c=checkLodge(l);
-        var icon=c.errs.length?'✗':(c.warns.length?'⚠️':'✓'), col=c.errs.length?'#c0392b':(c.warns.length?'#b9770e':'#2e7d46');
-        if(c.errs.length) anyErr=true;
-        var detail=(c.errs.length?'<div style="color:#c0392b;margin-left:20px">'+c.errs.join('; ')+'</div>':'')+(c.warns.length?'<div style="color:#b9770e;margin-left:20px">'+c.warns.join('; ')+'</div>':'');
-        lines.push('<div style="padding:5px 0;border-bottom:1px solid #eee"><span style="color:'+col+'">'+icon+'</span> <strong>'+esc(c.name)+'</strong> <span style="color:#999">'+esc(c.slug)+'</span> — '+c.nrows+' rows'+detail+'</div>');
-      });
-      lines.push('<div style="padding:6px 0;font-size:.78rem;color:#7d756e">Importing as <strong>'+(biKind==='rack'?'PUBLIC RACK':'AGENT STO')+'</strong> · ✓ ok · ⚠️ check flagged rows (still importable) · ✗ fix before import</div>');
-      prev.innerHTML=lines.join('');
-      if(anyErr) return null;
-      parsed=arr; return arr;
+    function renderPreview(r){
+      var doc=extracted; var rows=0;(doc.sections||[]).forEach(function(s){rows+=(s.rows||[]).length;});
+      if(r.year) biYear=String(r.year).replace(/[^0-9]/g,'')||biYear; yearSel.value=biYear;
+      status.style.color='#2e7d46';status.textContent='Read successfully — review and import.';
+      var slug=slugify(doc.name);
+      prev.innerHTML='<div style="border:1px solid #eee;border-radius:8px;padding:14px">'
+        +'<div style="font-weight:600;margin-bottom:4px">'+esc(doc.name||'(no name)')+'</div>'
+        +'<div style="font-size:.85rem;color:#7d756e;margin-bottom:10px">'+esc(doc.region||'')+' · '+rows+' rows · confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'</div>'
+        +'<label style="display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:#8a8175;margin-bottom:4px">Lodge slug (must match the lodge page URL)</label>'
+        +'<input class="biSlug" value="'+esc(slug)+'" style="width:100%;padding:8px 10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px">'
+        +((r.anomalies&&r.anomalies.length)?'<div style="font-size:.82rem;color:#b9770e;margin-bottom:10px">Worth a look: '+r.anomalies.map(esc).join('; ')+'</div>':'')
+        +'<div style="display:flex;justify-content:flex-end"><button class="biImport" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import to '+(biKind==='rack'?'Rack':'STO')+' '+biYear+'</button></div>'
+        +'</div>';
+      prev.querySelector('.biImport').onclick=function(){
+        var slugVal=slugify(prev.querySelector('.biSlug').value)||slug;
+        if(!slugVal){status.style.color='#c0392b';status.textContent='Enter a lodge slug.';return;}
+        var btn=prev.querySelector('.biImport');btn.disabled=true;btn.textContent='Importing…';
+        api({action:'save',slug:slugVal,kind:biKind,data:extracted,year:biYear}).then(function(rr){
+          if(rr.body&&rr.body.ok){toast('Imported '+(biKind==='rack'?'rack':'STO')+' '+biYear+' — '+slugVal);ov.remove();loadSummary();}
+          else {status.style.color='#c0392b';status.textContent=(rr.body&&rr.body.error)||'Import failed.';btn.disabled=false;btn.textContent='Import';}
+        }).catch(function(){status.style.color='#c0392b';status.textContent='Network error.';btn.disabled=false;btn.textContent='Import';});
+      };
     }
-    ov.querySelector('.biPrev').onclick=function(){ validate(); };
-    goBtn.onclick=function(){
-      var arr=parsed||validate();
-      if(!arr){ return; }
-      goBtn.disabled=true; goBtn.textContent='Importing…';
-      var i=0, done=0, fail=0;
-      function next(){
-        if(i>=arr.length){ toast('Imported '+done+' '+(biKind==='rack'?'rack':'STO')+' list'+(done!==1?'s':'')+(fail?', '+fail+' failed':'')+'.'); ov.remove(); loadSummary(); return; }
-        var l=arr[i++];
-        var data={name:l.name||l.slug,region:l.region||'',currency:l.currency||'N$',validity:l.validity||'',note:l.note||'',commission:l.commission||'',sections:l.sections||[]};
-        api({action:'save',slug:l.slug,kind:biKind,data:data}).then(function(r){ if(r.body&&r.body.ok)done++; else fail++; next(); }).catch(function(){ fail++; next(); });
-      }
-      next();
-    };
-    setTimeout(function(){ta.focus();},50);
   }
 
   // ── boot ──────────────────────────────────────────────
