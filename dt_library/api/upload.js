@@ -88,10 +88,11 @@ module.exports = async function (req, res) {
   rec.region = ex.doc.region || '';
   rec.year = ex.doc.year || '';
   rec.extracted = ex.doc;
+  rec.properties = ex.properties || [ex.doc];   // every property found in the sheet
   rec.confidence = ex.confidence;
   rec.anomalies = ex.anomalies || [];
   rec.yearDiff = diff;
   await uploads.saveUpload(rec);
 
-  return res.status(200).json({ ok: true, id: id, status: 'draft', confidence: ex.confidence, anomalies: rec.anomalies, extracted: ex.doc, slug: slug, year: rec.year, yearDiff: diff });
+  return res.status(200).json({ ok: true, id: id, status: 'draft', confidence: ex.confidence, anomalies: rec.anomalies, extracted: ex.doc, properties: rec.properties, slug: slug, year: rec.year, yearDiff: diff });
 };

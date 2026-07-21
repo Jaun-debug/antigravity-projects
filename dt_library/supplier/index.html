@@ -95,10 +95,17 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
       <div class="rv-flags" id="rv-flags" style="display:none"></div>
 
       <div class="panel" style="border-left:4px solid var(--accent)">
-        <div class="rv-field" style="margin:0">
-          <label>Which season year are these rates for?</label>
-          <select class="inp" id="rv-year"></select>
+        <div class="rv-grid">
+          <div class="rv-field" style="margin:0">
+            <label>Which season year are these rates for?</label>
+            <select class="inp" id="rv-year"></select>
+          </div>
+          <div class="rv-field" id="rv-propwrap" style="margin:0;display:none">
+            <label>Property in this rate sheet</label>
+            <select class="inp" id="rv-prop"></select>
+          </div>
         </div>
+        <div class="rv-hint" id="rv-propnote" style="margin:10px 0 0;display:none"></div>
       </div>
 
       <div class="panel">
@@ -131,6 +138,7 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
 (function(){
   var $=function(id){return document.getElementById(id);};
   var CURRENT=null; // id of the upload being reviewed
+  var PROPS=[], PIDX=0; // every property found in the sheet, and which one is on screen
   function post(b){return fetch('/api/auth',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
   function appr(b){return fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json();});}
   function fmtDate(ms){ if(!ms) return ''; var d=new Date(ms); return d.toLocaleDateString()+' '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}); }
@@ -205,24 +213,40 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
     return set.map(function(y){return '<option value="'+y+'"'+(String(y)===chosen?' selected':'')+'>'+y+'</option>';}).join('');
   }
 
+  function slugify(s){return String(s||'').toLowerCase().trim().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
   function openReview(u){
-    var doc=u.extracted||{};
-    $('rv-year').innerHTML=yearOptions(u.year||doc.year||'');
-    $('rv-name').value=doc.name||'';
-    $('rv-region').value=doc.region||'';
-    $('rv-validity').value=doc.validity||'';
-    $('rv-currency').value=doc.currency||'N$';
-    $('rv-note').value=doc.note||'';
+    PROPS=(u.properties&&u.properties.length)?u.properties.slice():[u.extracted||{}];
+    PIDX=0;
+    $('rv-year').innerHTML=yearOptions(u.year||(PROPS[0]&&PROPS[0].year)||'');
+    var multi=PROPS.length>1;
+    $('rv-propwrap').style.display=multi?'block':'none';
+    $('rv-propnote').style.display=multi?'block':'none';
+    if(multi){
+      $('rv-propnote').textContent='This rate sheet covers '+PROPS.length+' properties. Check each one using the dropdown — they are all submitted together.';
+      $('rv-prop').innerHTML=PROPS.map(function(p,i){return '<option value="'+i+'">'+esc(p.name||('Property '+(i+1)))+'</option>';}).join('');
+      $('rv-prop').value='0';
+    }
     var flags=[];
     if(u.confidence!=null) flags.push('AI confidence: '+u.confidence+'%.');
     if(u.anomalies&&u.anomalies.length) flags.push('Please double-check: '+u.anomalies.map(esc).join('; ')+'.');
     var fb=$('rv-flags');
     if(flags.length){ fb.style.display='block'; fb.innerHTML='<b>Worth a look —</b> '+flags.join(' '); } else { fb.style.display='none'; }
-    renderSections(doc.sections||[]);
+    loadProp(0);
     $('rv-msg').textContent='';
     $('home').style.display='none'; $('review').style.display='block';
     window.scrollTo(0,0);
   }
+  function loadProp(i){
+    PIDX=i; var doc=PROPS[i]||{};
+    $('rv-name').value=doc.name||'';
+    $('rv-region').value=doc.region||'';
+    $('rv-validity').value=doc.validity||'';
+    $('rv-currency').value=doc.currency||'N$';
+    $('rv-note').value=doc.note||'';
+    renderSections(doc.sections||[]);
+  }
+  function stashProp(){ if(PROPS[PIDX]){ var d=collectDoc(); d.slug=PROPS[PIDX].slug||''; PROPS[PIDX]=d; } }
+  $('rv-prop').addEventListener('change',function(){ stashProp(); loadProp(parseInt($('rv-prop').value,10)||0); });
   function closeReview(){ $('review').style.display='none'; $('home').style.display='block'; loadHistory(); }
   window.closeReview=closeReview;
 
@@ -274,10 +298,13 @@ th{font-size:.66rem;text-transform:uppercase;letter-spacing:1px;color:var(--mute
 
   function save(action){
     if(!CURRENT){ return; }
-    var doc=collectDoc();
-    if(action==='submit' && !doc.sections.length){ var m=$('rv-msg'); m.className='status err'; m.textContent='Add at least one rate before submitting.'; return; }
+    stashProp();
+    var doc=PROPS[0]||collectDoc();
+    var hasRates=PROPS.some(function(p){return p.sections&&p.sections.length;});
+    if(action==='submit' && !hasRates){ var m=$('rv-msg'); m.className='status err'; m.textContent='Add at least one rate before submitting.'; return; }
+    var payload=PROPS.map(function(p){ return {slug:p.slug||slugify(p.name), data:p}; });
     var msg=$('rv-msg'); msg.className='status busy'; msg.textContent=action==='submit'?'Submitting…':'Saving…';
-    appr({action:action, id:CURRENT, data:doc, year:$('rv-year').value}).then(function(r){
+    appr({action:action, id:CURRENT, data:doc, properties:payload, year:$('rv-year').value}).then(function(r){
       if(r&&r.ok){
         if(action==='submit'){ msg.className='status ok'; msg.textContent='✓ Submitted for approval.'; setTimeout(closeReview,900); }
         else { msg.className='status ok'; msg.textContent='✓ Draft saved.'; }

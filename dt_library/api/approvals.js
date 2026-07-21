@@ -64,8 +64,23 @@ module.exports = async function (req, res) {
         return res.status(200).json({ ok: false, error: 'This upload can no longer be edited.' });
       }
       const doc = (body.data && typeof body.data === 'object') ? body.data : u.extracted;
+      // Multi-property sheets: the supplier reviews every property and sends them all back.
+      if (Array.isArray(body.properties) && body.properties.length) {
+        u.properties = body.properties.map(function (it) {
+          const d = (it && it.data) || it || {};
+          const out = {
+            name: d.name || '', region: d.region || '', currency: d.currency || 'N$',
+            validity: d.validity || '', note: d.note || '', year: d.year || '',
+            commission: d.commission || '', sections: Array.isArray(d.sections) ? d.sections : [],
+          };
+          out.slug = String((it && it.slug) || d.slug || '').trim();
+          return out;
+        });
+      }
       if (action === 'submit') {
-        if (!doc || !Array.isArray(doc.sections) || !doc.sections.length) return res.status(200).json({ ok: false, error: 'Add at least one rate before submitting.' });
+        const anyProp = Array.isArray(u.properties) && u.properties.some(function (p) { return p.sections && p.sections.length; });
+        const okDoc = doc && Array.isArray(doc.sections) && doc.sections.length;
+        if (!anyProp && !okDoc) return res.status(200).json({ ok: false, error: 'Add at least one rate before submitting.' });
       }
       u.extracted = doc || u.extracted;
       if (doc) { u.name = doc.name || u.name; u.region = doc.region || u.region; }
@@ -94,16 +109,40 @@ module.exports = async function (req, res) {
       if (!u) return res.status(200).json({ ok: false, error: 'Upload not found.' });
       const doc = (body.data && typeof body.data === 'object') ? body.data : u.extracted;
       if (!doc || !Array.isArray(doc.sections) || !doc.sections.length) return res.status(200).json({ ok: false, error: 'Nothing to publish.' });
-      if (!u.slug) return res.status(200).json({ ok: false, error: 'This upload has no lodge slug — set one before publishing.' });
       const kind = u.kind === 'sto' ? 'sto' : 'rack';
       // Year: owner override in body wins, else the year carried on the upload, else the doc's detected year.
       const year = String((body.year != null && body.year !== '') ? body.year : (u.year || doc.year || '')).replace(/[^0-9]/g, '');
-      const payload = {
-        name: doc.name || u.name || u.slug, region: doc.region || u.region || '',
-        currency: doc.currency || 'N$', validity: doc.validity || '', note: doc.note || '',
-        year: year || '', commission: doc.commission || '', sections: doc.sections,
-      };
-      await db.setRates(kind, u.slug, payload, year || undefined);
+      function payloadFor(d, fallbackSlug) {
+        return {
+          name: d.name || fallbackSlug, region: d.region || '',
+          currency: d.currency || 'N$', validity: d.validity || '', note: d.note || '',
+          year: year || '', commission: d.commission || '', sections: d.sections,
+        };
+      }
+
+      // Multi-property sheets: publish each property to its own slug.
+      let items = null;
+      if (Array.isArray(body.properties) && body.properties.length) items = body.properties;
+      else if (Array.isArray(u.properties) && u.properties.length > 1) {
+        items = u.properties.map(function (p) { return { slug: p.slug || '', data: p }; });
+      }
+      if (items) {
+        const published = [];
+        for (const it of items) {
+          const d = (it && it.data) || it;
+          const sl = String((it && it.slug) || (d && d.slug) || '').trim();
+          if (!sl || !d || !Array.isArray(d.sections) || !d.sections.length) continue;
+          await db.setRates(kind, sl, payloadFor(d, sl), year || undefined);
+          published.push(sl);
+        }
+        if (!published.length) return res.status(200).json({ ok: false, error: 'None of the properties had a slug to publish to.' });
+        u.status = 'approved'; u.year = year || u.year; u.reviewedAt = Date.now(); u.reviewedBy = caller.email;
+        await uploads.saveUpload(u);
+        return res.status(200).json({ ok: true, slugs: published, count: published.length, kind: kind, year: year || null });
+      }
+
+      if (!u.slug) return res.status(200).json({ ok: false, error: 'This upload has no lodge slug — set one before publishing.' });
+      await db.setRates(kind, u.slug, payloadFor(doc, u.slug), year || undefined);
       u.status = 'approved'; u.extracted = doc; u.year = year || u.year; u.reviewedAt = Date.now(); u.reviewedBy = caller.email;
       await uploads.saveUpload(u);
       return res.status(200).json({ ok: true, slug: u.slug, kind: kind, year: year || null });

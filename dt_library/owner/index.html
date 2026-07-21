@@ -527,28 +527,60 @@
       };
       reader.readAsDataURL(f);
     }
+    // Match an extracted property name to an existing lodge slug.
+    function matchSlug(name){
+      var k=String(name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+      if(!k) return {slug:'',matched:false};
+      var idx=lodgeIndex||[], i;
+      for(i=0;i<idx.length;i++){ var lk=String(idx[i].name||'').toLowerCase().replace(/[^a-z0-9]/g,''); if(lk&&lk===k) return {slug:idx[i].slug,matched:true}; }
+      for(i=0;i<idx.length;i++){ var l2=String(idx[i].name||'').toLowerCase().replace(/[^a-z0-9]/g,''); if(l2&&(l2.indexOf(k)>-1||k.indexOf(l2)>-1)&&Math.abs(l2.length-k.length)<6) return {slug:idx[i].slug,matched:true}; }
+      return {slug:slugify(name),matched:false};
+    }
     function renderPreview(r){
-      var doc=extracted; var rows=0;(doc.sections||[]).forEach(function(s){rows+=(s.rows||[]).length;});
-      if(r.year) biYear=String(r.year).replace(/[^0-9]/g,'')||biYear; yearSel.value=biYear;
-      status.style.color='#2e7d46';status.textContent='Read successfully — review and import.';
-      var slug=slugify(doc.name);
+      var props=(r.properties&&r.properties.length)?r.properties:[extracted];
+      if(r.year){ biYear=String(r.year).replace(/[^0-9]/g,'')||biYear; yearSel.value=biYear; }
+      status.style.color='#2e7d46';
+      status.textContent='Read successfully — '+props.length+' propert'+(props.length===1?'y':'ies')+' found. Check the slugs, then import.';
+      var rowsHtml=props.map(function(p,i){
+        var rows=0;(p.sections||[]).forEach(function(s){rows+=(s.rows||[]).length;});
+        var m=matchSlug(p.name);
+        return '<div class="biRow" data-i="'+i+'" style="display:grid;grid-template-columns:22px 1fr 210px;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid #f2eee6">'
+          +'<input type="checkbox" class="biOn" checked style="width:auto">'
+          +'<div><div style="font-weight:600;font-size:.92rem">'+esc(p.name||'(unnamed)')+'</div>'
+          +'<div style="font-size:.76rem;color:#8a8175">'+(p.region?esc(p.region)+' · ':'')+rows+' rows'+(m.matched?'':' · <span style="color:#b9770e">new entry</span>')+'</div></div>'
+          +'<input class="biSlug" value="'+esc(m.slug)+'" title="Must match the lodge page URL" style="padding:7px 9px;border:1px solid '+(m.matched?'#a9c6b5':'#e0d6c4')+';border-radius:6px;font-size:.84rem">'
+          +'</div>';
+      }).join('');
       prev.innerHTML='<div style="border:1px solid #eee;border-radius:8px;padding:14px">'
-        +'<div style="font-weight:600;margin-bottom:4px">'+esc(doc.name||'(no name)')+'</div>'
-        +'<div style="font-size:.85rem;color:#7d756e;margin-bottom:10px">'+esc(doc.region||'')+' · '+rows+' rows · confidence '+(r.confidence==null?'n/a':r.confidence+'%')+'</div>'
-        +'<label style="display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:1px;color:#8a8175;margin-bottom:4px">Lodge slug (must match the lodge page URL)</label>'
-        +'<input class="biSlug" value="'+esc(slug)+'" style="width:100%;padding:8px 10px;border:1px solid #ccc;border-radius:6px;margin-bottom:10px">'
-        +((r.anomalies&&r.anomalies.length)?'<div style="font-size:.82rem;color:#b9770e;margin-bottom:10px">Worth a look: '+r.anomalies.map(esc).join('; ')+'</div>':'')
-        +'<div style="display:flex;justify-content:flex-end"><button class="biImport" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import to '+(biKind==='rack'?'Rack':'STO')+' '+biYear+'</button></div>'
+        +'<div style="font-size:.8rem;color:#8a8175;margin-bottom:8px">Confidence '+(r.confidence==null?'n/a':r.confidence+'%')+' · untick anything you don\'t want, and fix any slug that didn\'t match</div>'
+        +rowsHtml
+        +((r.anomalies&&r.anomalies.length)?'<div style="font-size:.8rem;color:#b9770e;margin-top:10px">Worth a look: '+r.anomalies.map(esc).join('; ')+'</div>':'')
+        +'<div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="biImport" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import to '+(biKind==='rack'?'Rack':'STO')+' '+biYear+'</button></div>'
         +'</div>';
-      prev.querySelector('.biImport').onclick=function(){
-        var slugVal=slugify(prev.querySelector('.biSlug').value)||slug;
-        if(!slugVal){status.style.color='#c0392b';status.textContent='Enter a lodge slug.';return;}
-        var btn=prev.querySelector('.biImport');btn.disabled=true;btn.textContent='Importing…';
-        api({action:'save',slug:slugVal,kind:biKind,data:extracted,year:biYear}).then(function(rr){
-          if(rr.body&&rr.body.ok){toast('Imported '+(biKind==='rack'?'rack':'STO')+' '+biYear+' — '+slugVal);ov.remove();loadSummary();}
-          else {status.style.color='#c0392b';status.textContent=(rr.body&&rr.body.error)||'Import failed.';btn.disabled=false;btn.textContent='Import';}
-        }).catch(function(){status.style.color='#c0392b';status.textContent='Network error.';btn.disabled=false;btn.textContent='Import';});
-      };
+      prev.querySelector('.biImport').onclick=function(){ doImport(props); };
+    }
+    function doImport(props){
+      var jobs=[];
+      [].forEach.call(prev.querySelectorAll('.biRow'),function(el){
+        if(!el.querySelector('.biOn').checked) return;
+        var i=parseInt(el.getAttribute('data-i'),10);
+        var slug=slugify(el.querySelector('.biSlug').value);
+        if(slug&&props[i]) jobs.push({slug:slug,data:props[i]});
+      });
+      if(!jobs.length){status.style.color='#c0392b';status.textContent='Nothing selected to import.';return;}
+      var btn=prev.querySelector('.biImport'); btn.disabled=true;
+      var i=0,done=0,fail=0;
+      function next(){
+        if(i>=jobs.length){
+          toast('Imported '+done+' propert'+(done===1?'y':'ies')+(fail?', '+fail+' failed':'')+' — '+(biKind==='rack'?'rack':'STO')+' '+biYear);
+          ov.remove(); loadSummary(); return;
+        }
+        var j=jobs[i++]; btn.textContent='Importing '+i+' of '+jobs.length+'…';
+        api({action:'save',slug:j.slug,kind:biKind,data:j.data,year:biYear})
+          .then(function(rr){ if(rr.body&&rr.body.ok)done++; else fail++; next(); })
+          .catch(function(){ fail++; next(); });
+      }
+      next();
     }
   }
 

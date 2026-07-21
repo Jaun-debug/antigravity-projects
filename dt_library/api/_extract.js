@@ -14,19 +14,27 @@ const SYSTEM = 'You are a meticulous data-entry assistant for a Namibian travel-
   'Never invent, round, or infer numbers you cannot read. If a value is unreadable, use the string "CHECK" for it.';
 
 const INSTRUCTIONS =
-  'Extract the RACK (published/retail) rates from this rate card into this exact JSON shape:\n' +
+  'Extract the rates from this rate card into this exact JSON shape.\n' +
+  'IMPORTANT: one PDF often covers SEVERAL properties (camps / lodges / hotels). Return EVERY property separately in "properties".\n' +
   '{\n' +
-  '  "name": "<property/operator name>",\n' +
-  '  "region": "<region if shown, else empty>",\n' +
-  '  "currency": "N$",\n' +
-  '  "validity": "<validity/season dates if shown>",\n' +
-  '  "year": "<the season/rate year this card is for, e.g. 2026 or 2027, if you can tell from the dates or title; else empty>",\n' +
-  '  "note": "<short note: inclusions, levy/VAT, per person/unit>",\n' +
-  '  "sections": [ { "title": "<room type or season>", "rows": [ ["<rate label>", "<price as printed, e.g. 4,397>"] ] } ],\n' +
+  '  "properties": [\n' +
+  '    {\n' +
+  '      "name": "<property name exactly as printed>",\n' +
+  '      "region": "<region if shown, else empty>",\n' +
+  '      "currency": "N$",\n' +
+  '      "validity": "<validity/season dates if shown>",\n' +
+  '      "year": "<the season/rate year, e.g. 2026 or 2027, if you can tell; else empty>",\n' +
+  '      "note": "<short note: inclusions, levy/VAT, per person/unit>",\n' +
+  '      "sections": [ { "title": "<room type or season>", "rows": [ ["<rate label>", "<price as printed, e.g. 4,397>"] ] } ]\n' +
+  '    }\n' +
+  '  ],\n' +
   '  "confidence": <integer 0-100, your confidence the numbers are correct>,\n' +
   '  "anomalies": [ "<plain-english flag for anything unusual: unreadable value, price that looks off, missing column, etc.>" ]\n' +
   '}\n\n' +
-  'Rules: keep prices as printed (with commas, no currency symbol). One section per room type (or per season). ' +
+  'Rules: one entry in "properties" per distinct property/camp/lodge. If the card covers only one property, return exactly one entry. ' +
+  'Never merge two properties into one entry, and never split one property across entries. ' +
+  'Rates that apply across the whole group (transfers, lodge hops, activities not tied to one camp) go in a final entry named "<operator> — shared". ' +
+  'Keep prices as printed (with commas, no currency symbol). One section per room type (or per season). ' +
   'Put every rate category (single, sharing, child, DBB/BB, etc.) as its own row. ' +
   'Flag in "anomalies" any value you had to guess, any garbled/partial number (mark it "CHECK"), and any price that breaks an obvious rule ' +
   '(single cheaper than sharing, child dearer than adult, a value 10x its neighbours). ' +
@@ -66,18 +74,27 @@ async function extractFromPdf(base64pdf) {
     });
     const text = (resp.content || []).map(function (b) { return b && b.text ? b.text : ''; }).join('');
     const parsed = parseJson(text);
-    if (!parsed || !Array.isArray(parsed.sections)) {
+    // Accept the multi-property shape, or a single-property doc (older shape).
+    let list = null;
+    if (parsed && Array.isArray(parsed.properties)) list = parsed.properties;
+    else if (parsed && Array.isArray(parsed.sections)) list = [parsed];
+    if (!list || !list.length) {
       const stop = resp && resp.stop_reason ? resp.stop_reason : '';
       const hint = stop === 'max_tokens' ? ' (the sheet was too long and got cut off — try splitting it)' : '';
       return { ok: false, error: 'Could not read this PDF into rates' + hint + '. AI said: ' + String(text || '').slice(0, 300) };
     }
-    const doc = {
-      name: parsed.name || '', region: parsed.region || '', currency: parsed.currency || 'N$',
-      validity: parsed.validity || '', year: parsed.year ? String(parsed.year).replace(/[^0-9]/g, '') : '',
-      note: parsed.note || '', sections: parsed.sections,
-    };
+    const properties = list.map(function (p) {
+      return {
+        name: (p && p.name) || '', region: (p && p.region) || '', currency: (p && p.currency) || 'N$',
+        validity: (p && p.validity) || '', year: p && p.year ? String(p.year).replace(/[^0-9]/g, '') : '',
+        note: (p && p.note) || '', sections: Array.isArray(p && p.sections) ? p.sections : [],
+      };
+    }).filter(function (p) { return p.sections.length; });
+    if (!properties.length) return { ok: false, error: 'No rates found in that PDF.' };
     return {
-      ok: true, doc: doc,
+      ok: true,
+      doc: properties[0],          // first property (backwards compatible)
+      properties: properties,      // every property found in the sheet
       confidence: typeof parsed.confidence === 'number' ? Math.max(0, Math.min(100, parsed.confidence)) : null,
       anomalies: Array.isArray(parsed.anomalies) ? parsed.anomalies.filter(Boolean) : [],
     };
