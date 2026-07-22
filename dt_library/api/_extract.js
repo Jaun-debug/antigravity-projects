@@ -92,14 +92,21 @@ async function extractFromPdf(base64pdf, opts) {
       const hint = stop === 'max_tokens' ? ' (the sheet was too long and got cut off — try splitting it)' : '';
       return { ok: false, error: 'Could not read this PDF into rates' + hint + '. AI said: ' + String(text || '').slice(0, 300) };
     }
-    const properties = list.map(function (p) {
+    let properties = list.map(function (p) {
       return {
         name: (p && p.name) || '', region: (p && p.region) || '', currency: (p && p.currency) || 'N$',
-        validity: (p && p.validity) || '', year: p && p.year ? String(p.year).replace(/[^0-9]/g, '') : '',
+        validity: (p && p.validity) || '', year: p && p.year ? String(p.year).replace(/[^0-9]/g, '').slice(0, 4) : '',
         note: (p && p.note) || '', sections: Array.isArray(p && p.sections) ? p.sections : [],
       };
     }).filter(function (p) { return p.sections.length; });
     if (!properties.length) return { ok: false, error: 'No rates found in that PDF.' };
+    // Single-supplier sheets (vehicles/activities): collapse everything into ONE property.
+    if (opts.single && properties.length > 1) {
+      const merged = properties[0];
+      for (let i = 1; i < properties.length; i++) merged.sections = merged.sections.concat(properties[i].sections || []);
+      merged.name = String(merged.name || '').split(' — ')[0].split(' - ')[0].trim();
+      properties = [merged];
+    }
     return {
       ok: true,
       doc: properties[0],          // first property (backwards compatible)

@@ -540,18 +540,23 @@
       };
       reader.readAsDataURL(f);
     }
-    // Match an extracted property name to an existing lodge slug.
+    // Candidates to match an extracted property name against: lodges + vehicles + activities + groups.
+    function matchCandidates(){
+      var c=(lodgeIndex||[]).concat(VEHICLES,ACTIVITIES,GROUPS);
+      Object.keys(GROUP_MEMBERS).forEach(function(kk){ c=c.concat(GROUP_MEMBERS[kk]); });
+      return c;
+    }
     function matchSlug(name){
       var k=String(name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
       if(!k) return {slug:'',matched:false};
-      var idx=lodgeIndex||[], i;
+      var idx=matchCandidates(), i;
       for(i=0;i<idx.length;i++){ var lk=String(idx[i].name||'').toLowerCase().replace(/[^a-z0-9]/g,''); if(lk&&lk===k) return {slug:idx[i].slug,matched:true}; }
       for(i=0;i<idx.length;i++){ var l2=String(idx[i].name||'').toLowerCase().replace(/[^a-z0-9]/g,''); if(l2&&(l2.indexOf(k)>-1||k.indexOf(l2)>-1)&&Math.abs(l2.length-k.length)<6) return {slug:idx[i].slug,matched:true}; }
       return {slug:slugify(name),matched:false};
     }
     function renderPreview(r){
       var props=(r.properties&&r.properties.length)?r.properties:[extracted];
-      if(r.year){ biYear=String(r.year).replace(/[^0-9]/g,'')||biYear; yearSel.value=biYear; }
+      if(r.year){ var yy=String(r.year).replace(/[^0-9]/g,'').slice(0,4); if(yy){ biYear=yy; if(!yearSel.querySelector('option[value="'+yy+'"]')){ var o=document.createElement('option'); o.value=yy; o.textContent=yy; yearSel.appendChild(o); } yearSel.value=biYear; } }
       status.style.color='#2e7d46';
       status.textContent='Read successfully — '+props.length+' propert'+(props.length===1?'y':'ies')+' found. Check the slugs, then import.';
       var rowsHtml=props.map(function(p,i){
