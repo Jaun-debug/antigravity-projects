@@ -1215,6 +1215,14 @@
     {
       "source": "/agent/:path*",
       "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }]
+    },
+    {
+      "source": "/vehicle_rates.html",
+      "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }]
+    },
+    {
+      "source": "/activity_rates.html",
+      "headers": [{ "key": "Cache-Control", "value": "no-store, max-age=0" }]
     }
   ]
 }
