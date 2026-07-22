@@ -55,12 +55,19 @@ function parseJson(text) {
 }
 
 // Calls Claude with a base64 PDF. Returns { ok, doc, confidence, anomalies, error }.
-async function extractFromPdf(base64pdf) {
+async function extractFromPdf(base64pdf, opts) {
+  opts = opts || {};
   if (!extractConfigured()) return { ok: false, error: 'AI extraction not configured (ANTHROPIC_API_KEY missing).' };
   let Anthropic;
   try { Anthropic = require('@anthropic-ai/sdk'); } catch (e) { return { ok: false, error: 'Anthropic SDK not installed.' }; }
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const model = process.env.ANTHROPIC_MODEL || 'claude-sonnet-5';
+  // Vehicle/activity sheets are ONE supplier — never split them into "properties".
+  const instr = opts.single
+    ? 'This entire rate sheet belongs to ONE supplier/operator (a vehicle-rental or activity company). ' +
+      'Return EXACTLY ONE entry in "properties" whose "name" is that company. Its vehicle groups, rate categories, ' +
+      'seasons and duration bands are SECTIONS inside that single property — never separate properties.\n\n' + INSTRUCTIONS
+    : INSTRUCTIONS;
   try {
     const resp = await client.messages.create({
       model: model,
@@ -70,7 +77,7 @@ async function extractFromPdf(base64pdf) {
         role: 'user',
         content: [
           { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: base64pdf } },
-          { type: 'text', text: INSTRUCTIONS },
+          { type: 'text', text: instr },
         ],
       }],
     });

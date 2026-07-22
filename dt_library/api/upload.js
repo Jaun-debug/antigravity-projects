@@ -75,8 +75,9 @@ module.exports = async function (req, res) {
   };
   await uploads.saveUpload(rec);
 
-  // 3) AI extraction
-  const ex = await extract.extractFromPdf(body.dataBase64);
+  // 3) AI extraction. Vehicle/activity sheets are a single supplier — don't split.
+  const single = !!body.single;
+  const ex = await extract.extractFromPdf(body.dataBase64, { single: single });
   if (!ex.ok) {
     rec.status = 'error'; rec.note = ex.error || 'Extraction failed.';
     await uploads.saveUpload(rec);
