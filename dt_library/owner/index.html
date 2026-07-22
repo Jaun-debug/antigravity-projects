@@ -486,6 +486,8 @@
   $('bulkBtn').addEventListener('click',function(){ openBulkImport(); });
   function openBulkImport(){
     var biKind=mode; // default to the current mode
+    // Vehicles & activities show on public pages -> default them to Rack.
+    if(category==='vehicle'||category==='activity') biKind='rack';
     var biYear=String(new Date().getFullYear());
     var extracted=null, uploadId=null;
     var now=new Date().getFullYear();
@@ -505,7 +507,7 @@
     var drop=ov.querySelector('.biDrop'), file=ov.querySelector('.biFile'), status=ov.querySelector('.biStatus'), prev=ov.querySelector('.biPrev2');
     biR.onclick=function(){biKind='rack';biR.classList.add('on');biS.classList.remove('on');};
     biS.onclick=function(){biKind='sto';biS.classList.add('on');biR.classList.remove('on');};
-    if(mode==='sto') biS.click();
+    if(biKind==='sto') biS.click();
     yearSel.value=biYear; yearSel.onchange=function(){biYear=yearSel.value;};
     ov.onclick=function(e){if(e.target===ov)ov.remove();};
     ov.querySelector('.biClose').onclick=function(){ov.remove();};
