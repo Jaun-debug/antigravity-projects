@@ -100,7 +100,7 @@ input.qty:focus{border-color:var(--brand-accent);box-shadow:0 0 0 2px rgba(164,1
 #booking-bar .btn.solid{animation:none;}
 @media(max-width:760px){.gallery{grid-template-columns:1fr 1fr;}.info-grid{grid-template-columns:1fr;}.gallery img{height:180px;}}
 
-.main-header{position:fixed;top:28px;left:0;width:100%;padding:14px 50px;display:flex;justify-content:space-between;align-items:center;z-index:9999;background:rgba(234,233,230,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(164,130,86,.15);box-shadow:0 4px 25px rgba(0,0,0,.04);}
+.main-header{position:fixed;top:0;left:0;width:100%;padding:14px 50px;display:flex;justify-content:space-between;align-items:center;z-index:9999;background:rgba(234,233,230,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(164,130,86,.15);box-shadow:0 4px 25px rgba(0,0,0,.04);}
 .header-logo-block{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;}
 .logo-main{font-family:var(--font-head);font-size:1.5rem;color:var(--brand-accent);text-transform:uppercase;letter-spacing:3px;line-height:1.1;font-weight:500;}
 .logo-sub{font-family:var(--font-body);font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:4px;margin-top:5px;}
@@ -119,7 +119,7 @@ input.qty:focus{border-color:var(--brand-accent);box-shadow:0 0 0 2px rgba(164,1
 .dropdown-menu a:hover{background:rgba(164,130,86,.1);color:var(--brand-accent);}
 .nav-item-dropdown::after{content:'';position:absolute;top:100%;left:0;right:0;height:16px;}
 .dropdown-menu::before{content:'';position:absolute;top:-16px;left:0;right:0;height:16px;}
-body{padding-top:102px;}
+body{padding-top:74px;}
 @media(max-width:900px){.main-header{padding:12px 20px;}.nav-links{gap:14px;}.nav-link,.nav-item-dropdown{display:none;}}
 
 .region-back{max-width:1080px;margin:0 auto;padding:16px 28px 0;}.region-back a{color:var(--brand-accent);text-decoration:none;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;font-family:var(--font-body);transition:.2s;}.region-back a:hover{color:var(--text-main);}
@@ -139,7 +139,7 @@ body{padding-top:102px;}
 <style id="nav-order-fix">.nav-links>.nav-item-dropdown:first-child{order:-2}#nav-grouplodges{order:-1}</style>
 </head>
 <body>
-<style>#uc-belt{position:fixed;top:0;left:0;right:0;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2px;line-height:1.4;text-align:center;padding:7px 16px;}@media(max-width:600px){#uc-belt{font-size:10px;padding:6px 12px;}}</style><div id="uc-belt">&#9888; Development Version. Rates displayed on this site are illustrative examples only and do not represent actual lodge rates, availability, or bookable inventory. Please contact the property directly for current pricing and availability.</div><script>(function(){function f(){var b=document.getElementById("uc-belt");if(!b)return;var bh=b.offsetHeight;var hd=document.querySelector(".main-header");if(hd){hd.style.top=bh+"px";}var pt=parseInt(getComputedStyle(document.body).paddingTop)||0;if(pt>=50&&hd){document.body.style.paddingTop=(bh+hd.offsetHeight)+"px";}}window.addEventListener("load",f);window.addEventListener("resize",f);if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);})();</script>
+<style>#uc-belt{position:fixed;top:0;left:0;right:0;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2px;line-height:1.4;text-align:center;padding:7px 16px;}@media(max-width:600px){#uc-belt{font-size:10px;padding:6px 12px;}}</style><script>(function(){function f(){var b=document.getElementById("uc-belt");if(!b)return;var bh=b.offsetHeight;var hd=document.querySelector(".main-header");if(hd){hd.style.top=bh+"px";}var pt=parseInt(getComputedStyle(document.body).paddingTop)||0;if(pt>=50&&hd){document.body.style.paddingTop=(bh+hd.offsetHeight)+"px";}}window.addEventListener("load",f);window.addEventListener("resize",f);if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);})();</script>
 <header class="main-header">
   <a href="/" class="header-logo-block"><span class="logo-main">Namibia Rates</span><span class="logo-sub">Trade Rates Portal</span></a>
   <button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
