@@ -124,10 +124,10 @@ module.exports = async function (req, res) {
         };
       }
 
-      // Multi-property sheets: publish each property to its own slug.
+      // Publish each stored property to its own (owner-corrected) slug — including a single property.
       let items = null;
       if (Array.isArray(body.properties) && body.properties.length) items = body.properties;
-      else if (Array.isArray(u.properties) && u.properties.length > 1) {
+      else if (Array.isArray(u.properties) && u.properties.length) {
         items = u.properties.map(function (p) { return { slug: p.slug || '', data: p }; });
       }
       if (items) {
