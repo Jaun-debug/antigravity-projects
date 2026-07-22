@@ -477,14 +477,14 @@
   function openBulkImport(){
     var biKind=mode; // default to the current mode
     var biYear=String(new Date().getFullYear());
-    var extracted=null;
+    var extracted=null, uploadId=null;
     var now=new Date().getFullYear();
     var ov=document.createElement('div');
     ov.style.cssText='position:fixed;inset:0;z-index:500;background:rgba(30,28,26,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto';
     ov.innerHTML='<div style="background:#fff;border-radius:12px;max-width:640px;width:100%;padding:22px;box-shadow:0 25px 60px rgba(0,0,0,.3)">'
       +'<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px"><strong style="flex:1;font-size:1.05rem">Import a rate sheet (PDF)</strong><span class="biClose" style="cursor:pointer;font-size:1.5rem;color:#999">&times;</span></div>'
       +'<div style="display:flex;gap:12px;align-items:center;margin-bottom:10px;flex-wrap:wrap"><div class="seg"><button class="biR on" data-k="rack">Public · Rack</button><button class="biS" data-k="sto">Agent · STO</button></div><label style="margin:0">Year</label><select class="biYear" style="width:auto;padding:7px 10px">'+[now,now+1].map(function(y){return '<option value="'+y+'">'+y+'</option>';}).join('')+'</select></div>'
-      +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:12px">Upload a PDF of the rate sheet — our AI reads it, then you review and import. It saves directly under the chosen rate type and year.</p>'
+      +'<p style="font-size:.85rem;color:#7d756e;margin-bottom:12px">Upload a PDF of the rate sheet — our AI reads it, you check the properties &amp; slugs, then send it to the Approvals queue to review and publish.</p>'
       +'<div class="biDrop" style="border:2px dashed #cdb68f;border-radius:10px;padding:36px 20px;text-align:center;color:#7d756e;cursor:pointer;background:#fbf7ef"><strong style="color:#a48256">Choose a PDF</strong> or drag it here<div style="font-size:.8rem;margin-top:6px">Up to ~4 MB</div></div>'
       +'<input class="biFile" type="file" accept="application/pdf,.pdf" style="display:none">'
       +'<div class="biStatus" style="margin-top:10px;font-size:.9rem;min-height:1em"></div>'
@@ -516,7 +516,7 @@
         fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:biKind,token:token,single:single})})
           .then(function(r){ if(!r.ok) throw new Error(r.status===504||r.status===502?'timeout':'HTTP '+r.status); return r.json(); })
           .then(function(r){
-            if(r&&r.ok&&r.extracted){ extracted=r.extracted; renderPreview(r); }
+            if(r&&r.ok&&r.extracted){ extracted=r.extracted; uploadId=r.id; renderPreview(r); }
             else { status.style.color='#c0392b';status.textContent=(r&&r.error)||'Could not read that PDF.'; }
           }).catch(function(e){
             var m=(e&&e.message)||'';
@@ -556,7 +556,8 @@
         +'<div style="font-size:.8rem;color:#8a8175;margin-bottom:8px">Confidence '+(r.confidence==null?'n/a':r.confidence+'%')+' · untick anything you don\'t want, and fix any slug that didn\'t match</div>'
         +rowsHtml
         +((r.anomalies&&r.anomalies.length)?'<div style="font-size:.8rem;color:#b9770e;margin-top:10px">Worth a look: '+r.anomalies.map(esc).join('; ')+'</div>':'')
-        +'<div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="biImport" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Import to '+(biKind==='rack'?'Rack':'STO')+' '+biYear+'</button></div>'
+        +'<div style="display:flex;justify-content:flex-end;margin-top:12px"><button class="biImport" style="padding:9px 16px;border:none;border-radius:6px;background:#87a996;color:#fff;cursor:pointer;font-family:inherit">Send to Approvals ('+(biKind==='rack'?'Rack':'STO')+' '+biYear+')</button></div>'
+        +'<div style="font-size:.78rem;color:#8a8175;text-align:right;margin-top:6px">Goes to the Approvals queue — review the rates there, then publish.</div>'
         +'</div>';
       prev.querySelector('.biImport').onclick=function(){ doImport(props); };
     }
@@ -569,19 +570,13 @@
         if(slug&&props[i]) jobs.push({slug:slug,data:props[i]});
       });
       if(!jobs.length){status.style.color='#c0392b';status.textContent='Nothing selected to import.';return;}
-      var btn=prev.querySelector('.biImport'); btn.disabled=true;
-      var i=0,done=0,fail=0;
-      function next(){
-        if(i>=jobs.length){
-          toast('Imported '+done+' propert'+(done===1?'y':'ies')+(fail?', '+fail+' failed':'')+' — '+(biKind==='rack'?'rack':'STO')+' '+biYear);
-          ov.remove(); loadSummary(); return;
-        }
-        var j=jobs[i++]; btn.textContent='Importing '+i+' of '+jobs.length+'…';
-        api({action:'save',slug:j.slug,kind:biKind,data:j.data,year:biYear})
-          .then(function(rr){ if(rr.body&&rr.body.ok)done++; else fail++; next(); })
-          .catch(function(){ fail++; next(); });
-      }
-      next();
+      if(!uploadId){status.style.color='#c0392b';status.textContent='Upload reference lost — please re-upload the PDF.';return;}
+      var btn=prev.querySelector('.biImport'); btn.disabled=true; btn.textContent='Sending to Approvals…';
+      fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'submit',id:uploadId,properties:jobs,year:biYear,token:token})})
+        .then(function(r){return r.json();}).then(function(r){
+          if(r&&r.ok){ toast(jobs.length+' item'+(jobs.length===1?'':'s')+' sent to Approvals'); ov.remove(); }
+          else { status.style.color='#c0392b'; status.textContent=(r&&r.error)||'Could not send to Approvals.'; btn.disabled=false; btn.textContent='Send to Approvals'; }
+        }).catch(function(){ status.style.color='#c0392b'; status.textContent='Network error.'; btn.disabled=false; btn.textContent='Send to Approvals'; });
     }
   }
 

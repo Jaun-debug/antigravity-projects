@@ -31,7 +31,11 @@ module.exports = async function (req, res) {
 
   const body = await readBody(req);
   const action = String(body.action || '');
-  const caller = auth.sessionFromReq(req);
+  // Portal cookie normally; also accept the Owner Rates OWNER_PASS token as owner.
+  let caller = auth.sessionFromReq(req);
+  if (!caller && body.token && db.isOwner({ token: String(body.token) })) {
+    caller = { email: 'owner', role: 'owner', name: 'Owner' };
+  }
   const isOwner = caller && caller.role === 'owner';
 
   try {
