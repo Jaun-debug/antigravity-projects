@@ -208,7 +208,8 @@
     if(f.size>3.2*1024*1024){
       msg.style.color='#bcd0a0';msg.textContent='Uploading \u201C'+f.name+'\u201D ('+(f.size/1048576).toFixed(1)+' MB)\u2026';
       import('https://esm.sh/@vercel/blob@0.27.0/client').then(function(m){
-        return m.upload(f.name, f, {access:'public', handleUploadUrl:'/api/blob-upload'});
+        var tok='';try{tok=sessionStorage.getItem('nr_owner_token')||'';}catch(e){}
+        return m.upload(f.name, f, {access:'public', handleUploadUrl:'/api/blob-upload', clientPayload:JSON.stringify({token:tok})});
       }).then(function(blob){ send({filename:f.name,contentType:f.type||'application/pdf',blobUrl:blob.url}); })
         .catch(function(e){msg.style.color='#e9a';msg.textContent='Upload failed ('+((e&&e.message)||'error')+') \u2014 try a smaller PDF.';});
       return;
