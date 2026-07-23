@@ -195,17 +195,26 @@
     var pdfs=(files||[]).filter(function(f){return /pdf/i.test(f.type)||/\.pdf$/i.test(f.name);});
     if(!pdfs.length){msg.style.color='#e9a';msg.textContent='Please attach your rate sheet as a PDF to send it through for reading.';return;}
     var f=pdfs[0];
-    if(f.size>4*1024*1024){msg.style.color='#e9a';msg.textContent='That PDF is a bit large (max ~4 MB) \u2014 please send a smaller file.';return;}
-    msg.style.color='#bcd0a0';msg.textContent='Reading \u201C'+f.name+'\u201D and extracting rates\u2026 this can take a moment.';
-    var reader=new FileReader();
-    reader.onload=function(){
-      var b64=String(reader.result).split(',')[1]||'';
-      fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({filename:f.name,contentType:f.type||'application/pdf',dataBase64:b64,kind:kind||'rack'})})
+    if(f.size>25*1024*1024){msg.style.color='#e9a';msg.textContent='That PDF is very large (max ~25 MB) \u2014 please send a smaller file.';return;}
+    function send(payload){
+      msg.style.color='#bcd0a0';msg.textContent='Reading \u201C'+f.name+'\u201D and extracting rates\u2026 this can take a moment.';
+      payload.kind=kind||'rack';
+      fetch('/api/upload',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)})
         .then(function(r){return r.json();}).then(function(r){
           if(r&&r.ok){ if(onDone){onDone(r);} else {msg.style.color='#bcd0a0';msg.textContent='\u2713 Received & read (confidence '+(r.confidence==null?'n/a':r.confidence+'%')+').';} }
           else{msg.style.color='#e9a';msg.textContent=(r&&r.error)||'Upload failed \u2014 please try again.';}
         }).catch(function(){msg.style.color='#e9a';msg.textContent='Network error \u2014 please try again.';});
-    };
+    }
+    if(f.size>3.2*1024*1024){
+      msg.style.color='#bcd0a0';msg.textContent='Uploading \u201C'+f.name+'\u201D ('+(f.size/1048576).toFixed(1)+' MB)\u2026';
+      import('https://esm.sh/@vercel/blob@0.27.0/client').then(function(m){
+        return m.upload(f.name, f, {access:'public', handleUploadUrl:'/api/blob-upload'});
+      }).then(function(blob){ send({filename:f.name,contentType:f.type||'application/pdf',blobUrl:blob.url}); })
+        .catch(function(e){msg.style.color='#e9a';msg.textContent='Upload failed ('+((e&&e.message)||'error')+') \u2014 try a smaller PDF.';});
+      return;
+    }
+    var reader=new FileReader();
+    reader.onload=function(){ send({filename:f.name,contentType:f.type||'application/pdf',dataBase64:String(reader.result).split(',')[1]||''}); };
     reader.readAsDataURL(f);
   }
   /* ---------- RACK REVIEW (edit AI output before submitting) ---------- */

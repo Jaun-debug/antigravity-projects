@@ -42,7 +42,7 @@ module.exports = async function (req, res) {
   if (!caller || (caller.role !== 'supplier' && caller.role !== 'owner')) {
     return res.status(200).json({ ok: false, error: 'Please sign in as a supplier to upload.' });
   }
-  if (!body.dataBase64 || !body.filename) return res.status(200).json({ ok: false, error: 'No file received.' });
+  if (!body.filename || (!body.dataBase64 && !body.blobUrl)) return res.status(200).json({ ok: false, error: 'No file received.' });
   const ct = String(body.contentType || '');
   if (!/pdf/i.test(ct) && !/\.pdf$/i.test(body.filename)) {
     return res.status(200).json({ ok: false, error: 'Please upload a PDF (Excel support is coming).' });
@@ -52,18 +52,30 @@ module.exports = async function (req, res) {
   // supplier's own slug takes priority; owner may pass a slug
   const slugHint = caller.role === 'supplier' ? (caller.supplierSlug || body.slug || '') : (body.slug || '');
 
-  // 1) store the original file (Blob optional — extraction still runs without it)
-  let blobUrl = '';
-  try {
-    if (process.env.BLOB_READ_WRITE_TOKEN) {
-      const blob = require('@vercel/blob');
-      const buf = Buffer.from(body.dataBase64, 'base64');
-      const put = await blob.put('rate-uploads/' + id + '-' + String(body.filename).replace(/[^\w.\-]+/g, '_'), buf, {
-        access: 'public', token: process.env.BLOB_READ_WRITE_TOKEN, contentType: 'application/pdf',
-      });
-      blobUrl = (put && put.url) || '';
-    }
-  } catch (e) { /* non-fatal — carry on to extraction */ }
+  // Large sheets are uploaded straight to Blob by the browser; fetch the bytes here.
+  let base64 = body.dataBase64 || '';
+  let blobUrl = body.blobUrl || '';
+  if (!base64 && blobUrl) {
+    try {
+      const r = await fetch(blobUrl);
+      if (!r.ok) return res.status(200).json({ ok: false, error: 'Could not read the uploaded file (' + r.status + ').' });
+      base64 = Buffer.from(await r.arrayBuffer()).toString('base64');
+    } catch (e) { return res.status(200).json({ ok: false, error: 'Could not read the uploaded file.' }); }
+  }
+
+  // Store a copy in Blob only when the browser sent the bytes inline (small files).
+  if (!blobUrl && base64) {
+    try {
+      if (process.env.BLOB_READ_WRITE_TOKEN) {
+        const blob = require('@vercel/blob');
+        const buf = Buffer.from(base64, 'base64');
+        const put = await blob.put('rate-uploads/' + id + '-' + String(body.filename).replace(/[^\w.\-]+/g, '_'), buf, {
+          access: 'public', token: process.env.BLOB_READ_WRITE_TOKEN, contentType: 'application/pdf',
+        });
+        blobUrl = (put && put.url) || '';
+      }
+    } catch (e) { /* non-fatal — carry on to extraction */ }
+  }
 
   // 2) record it as processing
   let rec = {
@@ -77,7 +89,7 @@ module.exports = async function (req, res) {
 
   // 3) AI extraction. Vehicle/activity sheets are a single supplier — don't split.
   const single = !!body.single;
-  const ex = await extract.extractFromPdf(body.dataBase64, { single: single });
+  const ex = await extract.extractFromPdf(base64, { single: single });
   if (!ex.ok) {
     rec.status = 'error'; rec.note = ex.error || 'Extraction failed.';
     await uploads.saveUpload(rec);
