@@ -289,7 +289,7 @@ function viewItinerary(){
   });});
   if(!items.length){toast('Add at least one lodge to a stop to view your itinerary');return;}
   try{localStorage.setItem('nr_itinerary',JSON.stringify(items));}catch(e){}
-  window.location.href='/itinerary/';
+  window.location.href='/itinerary/?client=1';
 }
 function closeItin(){document.getElementById('itin-view').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePicker();closeItin();}});

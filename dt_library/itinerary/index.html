@@ -555,7 +555,7 @@ body.pubclient .pub-actions .btn{width:150px!important;box-sizing:border-box!imp
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
 
 <script>/*public-client itinerary view*/(function(){
-if(sessionStorage.getItem('nr_agent_token'))return;
+if(new URLSearchParams(location.search).get('client')!=='1' && sessionStorage.getItem('nr_agent_token'))return;
 document.body.classList.add('pubclient');
 var tb=document.getElementById('nr-tobuilder');if(tb){tb.setAttribute('href','/map/');tb.innerHTML='&larr; Back to map';}
 function txt(){var it=[];try{it=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}var L=['My Namibia itinerary:',''];it.forEach(function(x,i){L.push((i+1)+'. '+(x.name||'')+(x.region?' ('+x.region+')':'')+(x.nights?' - '+x.nights+' night'+(x.nights>1?'s':''):''));});L.push('');L.push('Sent from the Namibia Rates route planner: '+location.origin+'/map/');return L.join('\n');}
