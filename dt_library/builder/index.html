@@ -509,7 +509,7 @@ function overlayRack(){
     });
   }).catch(function(){});
 }
-fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;return overlayRack()}).then(function(){seed();start()}).catch(function(){start()});
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlayRack().then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
