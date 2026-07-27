@@ -14,14 +14,6 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--font-body);background:var(--bg-color);color:var(--text-main);line-height:1.6;font-weight:300;-webkit-font-smoothing:antialiased}
 a{color:inherit}
-.map-header{display:flex;align-items:center;justify-content:space-between;padding:18px 40px;background:rgba(246,245,242,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:1200}
-.logo-block{display:flex;flex-direction:column;text-decoration:none;line-height:1.05}
-.logo-main{font-family:var(--font-head);font-size:1.5rem;letter-spacing:3px;text-transform:uppercase;color:var(--brand-accent)}
-.logo-sub{font-family:var(--font-body);font-size:.6rem;letter-spacing:4px;text-transform:uppercase;color:var(--text-muted);margin-top:2px}
-.hnav{display:flex;gap:26px;align-items:center}
-.hnav a{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color .25s}
-.hnav a:hover{color:var(--brand-accent)}
-@media(max-width:640px){.map-header{padding:14px 20px}.hnav{gap:14px}.hnav a{font-size:.6rem;letter-spacing:1px}}
 .intro{text-align:center;padding:46px 24px 12px}
 .intro h1{font-family:var(--font-head);font-weight:500;font-size:2.5rem;letter-spacing:1px}
 .intro p{max-width:640px;margin:14px auto 0;color:var(--text-muted);font-size:1.02rem}
@@ -98,7 +90,7 @@ a{color:inherit}
 .foot .fc{font-size:.72rem;letter-spacing:1px;margin-top:8px;color:rgba(255,255,255,.55)}
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:rgba(60,53,48,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;padding:14px 28px;border-radius:8px;border:1px solid rgba(245,241,234,.42);box-shadow:0 10px 30px rgba(0,0,0,.28);font-size:.9rem;opacity:0;transition:all .4s cubic-bezier(.175,.885,.32,1.275);pointer-events:none;z-index:2000}
 .toast.show{transform:translateX(-50%) translateY(0);opacity:1}
-.pk-overlay{display:none;position:fixed;inset:0;z-index:3000;background:rgba(20,18,16,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:24px}
+.pk-overlay{display:none;position:fixed;inset:0;z-index:2147483646;background:rgba(20,18,16,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:24px}
 .pk-overlay.open{display:flex}
 .pk-panel{background:var(--panel);border-radius:14px;width:100%;max-width:520px;max-height:82vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
 .pk-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;background:#3c3530;color:#fff}
@@ -117,7 +109,7 @@ a{color:inherit}
 .pk-empty{padding:26px 6px;text-align:center;color:var(--text-muted);font-size:.9rem}
 .pk-empty a{color:var(--brand-accent)}
 
-.iv-overlay{display:none;position:fixed;inset:0;z-index:3500;background:rgba(20,18,16,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:24px}
+.iv-overlay{display:none;position:fixed;inset:0;z-index:2147483646;background:rgba(20,18,16,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);align-items:center;justify-content:center;padding:24px}
 .iv-overlay.open{display:flex}
 .iv-panel{background:#fff;border-radius:14px;width:100%;max-width:600px;max-height:86vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.45)}
 .iv-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:20px 24px;background:#2f2a26;color:#fff}
@@ -137,14 +129,10 @@ a{color:inherit}
 .iv-drive{color:var(--brand-accent);font-size:.8rem;letter-spacing:.5px;margin:4px 0 4px 48px;padding:4px 0}
 .iv-foot{display:flex;gap:12px;padding:16px 24px;border-top:1px solid var(--line);background:var(--panel)}
 .iv-foot .btn{flex:1}
-@media print{.map-header,.intro,.wrap,.foot,.toast,.pk-overlay{display:none!important}body{background:#fff}.iv-overlay{display:block!important;position:static;background:#fff;padding:0}.iv-panel{max-width:none;max-height:none;box-shadow:none;border-radius:0}.iv-content{overflow:visible}.iv-foot,.iv-x{display:none!important}.iv-head{background:#fff}.iv-title{color:var(--brand-accent)}.iv-sub{color:var(--text-muted)}}
+@media print{.map-header,.main-header,#uc-belt,#mobile-menu,.intro,.wrap,.foot,.toast,.pk-overlay{display:none!important}body{background:#fff}.iv-overlay{display:block!important;position:static;background:#fff;padding:0}.iv-panel{max-width:none;max-height:none;box-shadow:none;border-radius:0}.iv-content{overflow:visible}.iv-foot,.iv-x{display:none!important}.iv-head{background:#fff}.iv-title{color:var(--brand-accent)}.iv-sub{color:var(--text-muted)}}
 </style>
 </head>
 <body>
-<header class="map-header">
-  <a href="/" class="logo-block"><span class="logo-main">Namibia Rates</span><span class="logo-sub">Trade Rates Portal</span></a>
-  <nav class="hnav"><a href="/">Accommodation</a><a href="/vehicle_rates.html">Vehicles</a><a href="/activity_rates.html">Activities</a><a href="/">&larr; Portal</a></nav>
-</header>
 <section class="intro">
   <h1>Plan Your Namibia Route</h1>
   <p>Click regions on the map to build a route, then add lodges to each stop to stack up your itinerary. Distances between stops are tallied as you go.</p>
@@ -274,5 +262,7 @@ function closeItin(){document.getElementById('itin-view').classList.remove('open
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePicker();closeItin();}});
 if(typeof L!=='undefined'){initMap();refresh();}else{window.addEventListener('load',()=>{initMap();refresh();});}
 </script>
+<script>window.LODGE=window.LODGE||"";</script>
+<script src="/assets/site-chrome.js"></script>
 </body>
 </html>
