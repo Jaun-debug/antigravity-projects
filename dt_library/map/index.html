@@ -168,8 +168,6 @@ a{color:inherit}
         <div class="tot"><div class="v" id="totTime">0m</div><div class="k">Drive</div></div>
       </div>
       <button class="btn full primary" id="viewBtn" onclick="viewItinerary()" disabled>View itinerary</button>
-      <button class="btn full" id="emailBtn" onclick="emailItinerary()" disabled>Email itinerary</button>
-      <button class="btn full" id="enquiryBtn" onclick="sendEnquiry()" disabled>Send enquiry</button>
       <p class="fine" id="fine">Add regions and lodges to build your itinerary. Distances are approximate driving distances between region hubs; live road distances load when routing is available.</p>
     </aside>
   </div>
@@ -273,8 +271,6 @@ function renderPanel(){
   document.getElementById('totKm').textContent=tkm;
   document.getElementById('totTime').textContent=tmin?fmtMin(tmin):'0m';
   document.getElementById('viewBtn').disabled=route.length===0;
-  document.getElementById('emailBtn').disabled=route.length===0;
-  document.getElementById('enquiryBtn').disabled=route.length===0;
   document.getElementById('fine').textContent=mode==='road'?'Distances and drive times are live values along real roads (OSRM).':'Approximate driving distances between region hubs — refines to live road distances when routing is available.';
   renderInline();
 }
