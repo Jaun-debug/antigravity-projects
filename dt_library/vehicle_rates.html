@@ -861,5 +861,6 @@ document.addEventListener('DOMContentLoaded',function(){
   document.addEventListener('DOMContentLoaded',function(){var c=document.querySelectorAll('.rate-card[id^="supplier-"]');for(var i=0;i<c.length;i++)load(c[i]);});
 })();</script>
 
+<script>/*nav-map-inject*/(function(){function I(){var n=document.querySelector(".main-header .nav-links");if(!n)return false;if(document.getElementById("nav-map"))return true;var d=document.createElement("div");d.className="nav-item-dropdown";d.id="nav-map";d.innerHTML='<a class="nav-link" href="/map/">Map Your Itinerary</a>';var b=n.querySelector(".enquire-now-btn");b?n.insertBefore(d,b):n.appendChild(d);if(sessionStorage.getItem("nr_agent_token"))d.style.display="none";return true;}var t=0,iv=setInterval(function(){if(I()||++t>60)clearInterval(iv);},80);if(document.readyState!=="loading")I();else document.addEventListener("DOMContentLoaded",I);})();</script>
 </body>
 </html>

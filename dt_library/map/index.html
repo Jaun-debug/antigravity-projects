@@ -19,6 +19,9 @@ a{color:inherit}
 .main-header #hdr-signup-btn:hover{background:var(--brand-accent)!important;color:#fff!important}
 .main-header #hdr-agent-btn{background:var(--brand-green)!important;border:1px solid var(--brand-green)!important;color:#fff!important;font-family:var(--font-head)!important}
 .main-header #hdr-agent-btn:hover{background:var(--brand-accent)!important;border-color:var(--brand-accent)!important}
+.map-back{display:inline-flex;align-items:center;gap:6px;margin:16px 0 0 40px;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);text-decoration:none;transition:color .25s}
+.map-back:hover{color:var(--brand-accent)}
+@media(max-width:640px){.map-back{margin-left:20px}}
 .intro{text-align:center;padding:46px 24px 12px}
 .intro h1{font-family:var(--font-head);font-weight:500;font-size:2.5rem;letter-spacing:1px}
 .intro p{max-width:640px;margin:14px auto 0;color:var(--text-muted);font-size:1.02rem}
@@ -138,6 +141,7 @@ a{color:inherit}
 </style>
 </head>
 <body>
+<a class="map-back" href="/">&larr; Back to homepage</a>
 <section class="intro">
   <h1>Plan Your Namibia Route</h1>
   <p>Click regions on the map to build a route, then add lodges to each stop to stack up your itinerary. Distances between stops are tallied as you go.</p>
