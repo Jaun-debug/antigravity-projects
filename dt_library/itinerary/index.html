@@ -127,6 +127,7 @@ font-family:var(--font-body);font-size:.92rem;background:#fbfaf8;color:var(--tex
   <a class="home-link" href="/">&larr; Continue browsing</a>
 </header>
 <a id="nr-tobuilder" href="/builder/">&larr; Back to Builder</a>
+<div class="pub-actions" id="pub-actions"><button class="btn dark" id="pub-email" type="button">Email itinerary</button><button class="btn" id="pub-enquiry" type="button">Send enquiry</button></div>
 
 <div class="wrap">
   <p class="eyebrow">Trade Portal</p>
@@ -536,6 +537,11 @@ document.addEventListener('keydown',function(e){
 #nr-home{top:44px!important}
 .home-link{top:86px!important;z-index:9997!important}
 #nr-tobuilder{top:128px!important;z-index:9997!important}
+.pub-actions{display:none}
+body.pubclient .trip,body.pubclient #nr-home,body.pubclient .home-link{display:none!important}
+body.pubclient .pub-actions{position:fixed!important;top:172px!important;right:0!important;left:auto!important;display:flex!important;flex-direction:column!important;gap:10px!important;width:150px!important;z-index:9997!important}
+body.pubclient .pub-actions .btn{width:150px!important;box-sizing:border-box!important;border-radius:30px 0 0 30px!important;justify-content:center!important}
+@media(max-width:900px){body.pubclient .pub-actions{position:static!important;width:auto!important;flex-direction:row!important}body.pubclient .pub-actions .btn{width:auto!important;border-radius:999px!important}}
 .actions{position:fixed!important;top:172px!important;right:0!important;left:auto!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important;width:150px!important;margin:0!important;z-index:9997!important}
 .actions>*{border-radius:30px 0 0 30px!important;justify-content:center!important;white-space:nowrap!important;margin:0!important;width:100%!important;box-sizing:border-box!important;font-size:10px!important;padding:8px 12px!important;letter-spacing:.5px!important;border:1px solid!important;box-shadow:0 4px 14px rgba(0,0,0,.12)!important}
 .actions>*:nth-child(1),.actions>*:nth-child(1) *{background:#cfe0d6!important;color:#33463b!important;border-color:#b6cdbf!important}
@@ -548,5 +554,13 @@ document.addEventListener('keydown',function(e){
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
 
+<script>/*public-client itinerary view*/(function(){
+if(sessionStorage.getItem('nr_agent_token'))return;
+document.body.classList.add('pubclient');
+var tb=document.getElementById('nr-tobuilder');if(tb){tb.setAttribute('href','/map/');tb.innerHTML='&larr; Back to map';}
+function txt(){var it=[];try{it=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}var L=['My Namibia itinerary:',''];it.forEach(function(x,i){L.push((i+1)+'. '+(x.name||'')+(x.region?' ('+x.region+')':'')+(x.nights?' - '+x.nights+' night'+(x.nights>1?'s':''):''));});L.push('');L.push('Sent from the Namibia Rates route planner: '+location.origin+'/map/');return L.join('\n');}
+var e=document.getElementById('pub-email');if(e)e.addEventListener('click',function(){window.location.href='mailto:?subject='+encodeURIComponent('My Namibia Itinerary')+'&body='+encodeURIComponent(txt());});
+var q=document.getElementById('pub-enquiry');if(q)q.addEventListener('click',function(){window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(txt());});
+})();</script>
 </body>
 </html>
