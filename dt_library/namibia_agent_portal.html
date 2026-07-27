@@ -891,7 +891,14 @@
         <video class="hero-video" autoplay muted loop playsinline poster="/media/hero-poster.jpg">
         <source src="/media/hero-720.mp4" type="video/mp4">
         </video>
-        <h1>Namibia Rates</h1>
+        <div class="hero-inner" style="position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; gap:30px; padding:0 20px;">
+            <h1 style="margin:0;">Namibia Rates</h1>
+            <div class="year-toggle-container hero-year-toggle" role="group" aria-label="Travel year" style="display:inline-flex; align-items:center; gap:5px; background:rgba(245,241,234,0.16); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); padding:6px; border-radius:8px; border:1px solid rgba(245,241,234,0.42); box-shadow:0 10px 30px rgba(0,0,0,0.28);">
+                <span class="hero-year-label" style="color:rgba(245,241,234,0.85); font-family:var(--font-body); font-weight:500; font-size:0.68rem; letter-spacing:2.5px; text-transform:uppercase; padding:0 12px 0 8px; white-space:nowrap;">Travel Year</span>
+                <button class="year-toggle-btn" id="btn-year-2026" onclick="setYear('2026')" style="padding:10px 24px; border:none; border-radius:5px; font-family:var(--font-body); font-weight:500; font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:all 0.3s ease; background:var(--brand-accent); color:#fff; box-shadow:0 4px 12px rgba(164,130,86,0.4); outline:none;">2026 Season</button>
+                <button class="year-toggle-btn" id="btn-year-2027" onclick="setYear('2027')" style="padding:10px 24px; border:none; border-radius:5px; font-family:var(--font-body); font-weight:500; font-size:0.8rem; letter-spacing:1.5px; text-transform:uppercase; cursor:pointer; transition:all 0.3s ease; background:transparent; color:rgba(245,241,234,0.9); outline:none;">2027 Season</button>
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -902,10 +909,7 @@
                 <h2>Namibia Master Agent Portal</h2>
             <p>Welcome to the centralized trade hub. Select a region below to view the luxury lodges and properties. Clicking on a property will open your dedicated, pre-negotiated STO ratesheet for immediate booking capabilities.</p>
             
-            <div class="year-toggle-container" style="margin: 25px auto 10px; display: inline-flex; align-items: center; gap: 5px; background: rgba(0,0,0,0.03); padding: 5px; border-radius: 5px; border: 1px solid rgba(0,0,0,0.06); box-shadow: inset 0 2px 5px rgba(0,0,0,0.03);">
-                <button class="year-toggle-btn" id="btn-year-2026" onclick="setYear('2026')" style="padding: 10px 24px; border: none; border-radius: 5px; font-family: var(--font-head); font-weight: 400; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; background: var(--brand-green); color: #fff; box-shadow: 0 4px 10px rgba(135, 169, 150, 0.3); outline: none;">2026 Season</button>
-                <button class="year-toggle-btn" id="btn-year-2027" onclick="setYear('2027')" style="padding: 10px 24px; border: none; border-radius: 5px; font-family: var(--font-head); font-weight: 400; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; background: transparent; color: var(--text-muted); outline: none;">2027 Season</button>
-            </div>
+            <!-- Travel-year toggle moved up onto the hero (see .hero-inner). Single instance keeps IDs unique. -->
             
             <div class="search-grid">
                 <div style="position: relative;">
@@ -3937,13 +3941,13 @@
             
             if (year === '2026') {
                 if (btn2026) {
-                    btn2026.style.background = 'var(--brand-green)';
+                    btn2026.style.background = 'var(--brand-accent)';
                     btn2026.style.color = '#fff';
-                    btn2026.style.boxShadow = '0 4px 10px rgba(135, 169, 150, 0.3)';
+                    btn2026.style.boxShadow = '0 4px 12px rgba(164, 130, 86, 0.4)';
                 }
                 if (btn2027) {
                     btn2027.style.background = 'transparent';
-                    btn2027.style.color = 'var(--text-muted)';
+                    btn2027.style.color = 'rgba(245,241,234,0.9)';
                     btn2027.style.boxShadow = 'none';
                 }
                 if (navYear2027) {
@@ -3953,13 +3957,13 @@
                 showToast('Switched to 2026 Rates Season');
             } else {
                 if (btn2027) {
-                    btn2027.style.background = 'var(--brand-green)';
+                    btn2027.style.background = 'var(--brand-accent)';
                     btn2027.style.color = '#fff';
-                    btn2027.style.boxShadow = '0 4px 10px rgba(135, 169, 150, 0.3)';
+                    btn2027.style.boxShadow = '0 4px 12px rgba(164, 130, 86, 0.4)';
                 }
                 if (btn2026) {
                     btn2026.style.background = 'transparent';
-                    btn2026.style.color = 'var(--text-muted)';
+                    btn2026.style.color = 'rgba(245,241,234,0.9)';
                     btn2026.style.boxShadow = 'none';
                 }
                 
