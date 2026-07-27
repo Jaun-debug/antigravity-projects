@@ -168,12 +168,9 @@ a{color:inherit}
         <div class="tot"><div class="v" id="totTime">0m</div><div class="k">Drive</div></div>
       </div>
       <button class="btn full primary" id="viewBtn" onclick="viewItinerary()" disabled>View itinerary</button>
-      <button class="btn full" id="whBtn" onclick="addStop('windhoek')" disabled>&#8617; Return to Windhoek</button>
-      <div class="acts">
-        <button class="btn" id="undoBtn" onclick="undo()" disabled>Undo stop</button>
-        <button class="btn primary" id="clearBtn" onclick="clearRoute()" disabled>Clear all</button>
-      </div>
-      <p class="fine" id="fine">Add regions and lodges to build your itinerary. Distances are approximate driving distances between region hubs; live road distances load when routing is available. Rates &amp; costing live in the signed-in agent section.</p>
+      <button class="btn full" id="emailBtn" onclick="emailItinerary()" disabled>Email itinerary</button>
+      <button class="btn full" id="enquiryBtn" onclick="sendEnquiry()" disabled>Send enquiry</button>
+      <p class="fine" id="fine">Add regions and lodges to build your itinerary. Distances are approximate driving distances between region hubs; live road distances load when routing is available.</p>
     </aside>
   </div>
 </div>
@@ -245,6 +242,10 @@ function setNights(i,j,d){const l=route[i].lodges[j];l.nights=Math.max(1,l.night
 function removeLodge(i,j){route[i].lodges.splice(j,1);refresh();}
 
 function refresh(){renderMarkers();routeCompute();}
+function itinText(){var lines=['My Namibia route:',''];route.forEach(function(s,i){var lg=(s.lodges||[]).map(function(l){return l.name+' ('+l.nights+' night'+(l.nights>1?'s':'')+')';}).join(', ');lines.push((i+1)+'. '+BY[s.key].name+(lg?' - '+lg:''));});var tkm=0,nights=0;legInfo.forEach(function(l){tkm+=l.km;});route.forEach(function(s){(s.lodges||[]).forEach(function(l){nights+=l.nights;});});lines.push('');lines.push('Total: '+route.length+' stops, '+nights+' night'+(nights===1?'':'s')+', ~'+tkm+' km driving');lines.push('');lines.push('Planned with the Namibia Rates route planner: '+location.origin+'/map/');return lines.join('\n');}
+function emailItinerary(){if(!route.length)return;window.location.href='mailto:?subject='+encodeURIComponent('My Namibia Itinerary')+'&body='+encodeURIComponent(itinText());}
+function sendEnquiry(){if(!route.length)return;window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(itinText());}
+
 function renderMarkers(){if(!map)return;PINS.forEach(p=>{const idx=route.findIndex(s=>s.key===p.key);markers[p.key].setIcon(icon(p,idx>=0,idx+1,idx>=0?route[idx].lodges:null));});}
 function fallback(){legInfo=[];for(let i=0;i<route.length-1;i++){const km=Math.round(hav(BY[route[i].key],BY[route[i+1].key])*ROAD_FACTOR);legInfo.push({km:km,min:km/SPEED*60});}mode='est';if(routeLine)routeLine.setLatLngs(route.map(s=>[BY[s.key].lat,BY[s.key].lng]));renderPanel();}
 async function routeCompute(){fallback();if(route.length<2)return;const my=++reqId;try{const coords=route.map(s=>BY[s.key].lng+','+BY[s.key].lat).join(';');const res=await fetch(OSRM+coords+'?overview=full&geometries=geojson');const j=await res.json();if(my!==reqId)return;if(j.code==='Ok'&&j.routes&&j.routes[0]){const rt=j.routes[0];legInfo=rt.legs.map(l=>({km:Math.round(l.distance/1000),min:l.duration/60}));mode='road';if(routeLine)routeLine.setLatLngs(rt.geometry.coordinates.map(c=>[c[1],c[0]]));renderPanel();}}catch(e){}}
@@ -271,11 +272,10 @@ function renderPanel(){
   document.getElementById('totNights').textContent=nights;
   document.getElementById('totKm').textContent=tkm;
   document.getElementById('totTime').textContent=tmin?fmtMin(tmin):'0m';
-  document.getElementById('undoBtn').disabled=route.length===0;
-  document.getElementById('clearBtn').disabled=route.length===0;
   document.getElementById('viewBtn').disabled=route.length===0;
-  document.getElementById('whBtn').disabled=(route.length===0||route[route.length-1].key==='windhoek');
-  document.getElementById('fine').textContent=mode==='road'?'Distances and drive times are live values along real roads (OSRM). Rates & costing live in the signed-in agent section.':'Approximate driving distances between region hubs — refines to live road distances when routing is available. Rates & costing live in the signed-in agent section.';
+  document.getElementById('emailBtn').disabled=route.length===0;
+  document.getElementById('enquiryBtn').disabled=route.length===0;
+  document.getElementById('fine').textContent=mode==='road'?'Distances and drive times are live values along real roads (OSRM).':'Approximate driving distances between region hubs — refines to live road distances when routing is available.';
   renderInline();
 }
 function renderCards(){const C=document.getElementById('cards');C.innerHTML='';PINS.forEach(p=>{const n=(LODGES[p.key]||[]).length;const c=document.createElement('div');c.className='card';c.innerHTML='<div class="cn">'+p.name+'</div><div class="cs">'+(n?n+' lodges':'region page')+'</div><div class="cactions"><button class="add" onclick="addStop(\''+p.key+'\')">+ Add to route</button><a class="view" href="'+p.url+'" target="_blank" rel="noopener">Lodges</a></div>';C.appendChild(c);});}
