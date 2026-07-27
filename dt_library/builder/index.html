@@ -509,7 +509,7 @@ function overlayRack(){
     });
   }).catch(function(){});
 }
-var LODGEINFO={};fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};try{persist();}catch(e){}}).catch(function(){});
+var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlayRack().then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
 function persist(){try{var it=S.lodges.map(function(d){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
@@ -593,7 +593,7 @@ document.addEventListener('keydown',function(e){
   var els2=[].slice.call(document.querySelectorAll('input,select,textarea')).filter(function(el){return !el.disabled&&el.type!=='hidden'&&el.offsetParent!==null});
   var n=els2[i+1]; if(n){n.focus();if(n.select)try{n.select()}catch(_){}}else if(t.blur)t.blur();
 });
-function start(){renderNav();renderPanel();autoDistances();}
+function start(){renderNav();renderPanel();autoDistances();_inited=true;}
 </script>
 <div id="sq-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,18,16,.55);align-items:center;justify-content:center;padding:24px" onclick="if(event.target===this)nrCloseSaved()">
   <div style="background:#fff;border-radius:14px;max-width:520px;width:100%;max-height:80vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.4)">
