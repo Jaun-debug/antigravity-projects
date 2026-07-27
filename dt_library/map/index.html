@@ -257,7 +257,7 @@ function renderPanel(){
       let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
       seg.innerHTML='<div class="seg-head"><div class="num">'+(i+1)+'</div><div class="nm">'+p.name+'</div><button class="rm" title="Remove stop" onclick="removeStop('+i+')">&times;</button></div>'+
         (lodgesHtml?'<div class="lodges">'+lodgesHtml+'</div>':'')+
-        '<div class="seg-actions"><button class="addlodge" onclick="toggleInline('+i+')">+ Add lodge</button></div>'+
+        (s.lodges.length===0?'<div class="seg-actions"><button class="addlodge" onclick="toggleInline('+i+')">+ Add lodge</button></div>':'')+
         '<div class="seg-picker" id="segpk-'+i+'"></div>';
       S.appendChild(seg);
       if(i<route.length-1){const li=legInfo[i]||{km:0,min:0};const leg=document.createElement('div');leg.className='leg';leg.innerHTML='<span class="dash"></span><span class="km">'+li.km+' km &middot; ~'+fmtMin(li.min)+' drive</span><span class="dash"></span>';S.appendChild(leg);}
