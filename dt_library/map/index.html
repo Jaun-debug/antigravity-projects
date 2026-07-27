@@ -258,23 +258,17 @@ function renderPanel(){
   document.getElementById('fine').textContent=mode==='road'?'Distances and drive times are live values along real roads (OSRM). Rates & costing live in the signed-in agent section.':'Approximate driving distances between region hubs — refines to live road distances when routing is available. Rates & costing live in the signed-in agent section.';
 }
 function renderCards(){const C=document.getElementById('cards');C.innerHTML='';PINS.forEach(p=>{const n=(LODGES[p.key]||[]).length;const c=document.createElement('div');c.className='card';c.innerHTML='<div class="cn">'+p.name+'</div><div class="cs">'+(n?n+' lodges':'region page')+'</div><div class="cactions"><button class="add" onclick="addStop(\''+p.key+'\')">+ Add to route</button><a class="view" href="'+p.url+'" target="_blank" rel="noopener">Lodges</a></div>';C.appendChild(c);});}
+let LODGEINFO={};fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{}}).catch(function(){});
 function viewItinerary(){
-  if(!route.length)return;
-  let tkm=0,tmin=0;legInfo.forEach(l=>{tkm+=l.km;tmin+=l.min;});
-  let nights=0;route.forEach(s=>s.lodges.forEach(l=>nights+=l.nights));
-  let day=1,html='';
-  route.forEach((s,i)=>{
-    const p=BY[s.key];const sn=s.lodges.reduce((a,l)=>a+l.nights,0);
-    const range=sn>0?(sn===1?('Day '+day):('Days '+day+'–'+(day+sn-1))):'';
-    html+='<div class="iv-stop"><div class="iv-daynum">'+(i+1)+'</div><div class="iv-body"><div class="iv-region">'+p.name+(range?'<span class="iv-days">'+range+'</span>':'')+'</div>';
-    html+=s.lodges.length?('<ul class="iv-lodges">'+s.lodges.map(l=>'<li>'+l.name+' <span>— '+l.nights+' night'+(l.nights>1?'s':'')+'</span></li>').join('')+'</ul>'):'<div class="iv-nolodge">No lodge selected yet</div>';
-    html+='</div></div>';
-    if(sn>0)day+=sn;
-    if(i<route.length-1){const li=legInfo[i]||{km:0,min:0};html+='<div class="iv-drive">▼ Drive '+li.km+' km · ~'+fmtMin(li.min)+'</div>';}
-  });
-  document.getElementById('iv-summary').innerHTML=route.length+' stops &middot; '+nights+' nights &middot; '+tkm+' km &middot; '+(tmin?fmtMin(tmin):'0m')+' driving';
-  document.getElementById('iv-content').innerHTML=html;
-  document.getElementById('itin-view').classList.add('open');document.body.style.overflow='hidden';
+  const items=[];
+  route.forEach(function(s){(s.lodges||[]).forEach(function(l){
+    const key=(l.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
+    const inf=LODGEINFO[key]||null;
+    items.push({name:l.name,region:BY[s.key].name,url:(inf&&inf.url)||l.file||('/'+s.key+'-accommodation/'),nights:l.nights,items:[{nights:l.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[]});
+  });});
+  if(!items.length){toast('Add at least one lodge to a stop to view your itinerary');return;}
+  try{localStorage.setItem('nr_itinerary',JSON.stringify(items));}catch(e){}
+  window.location.href='/itinerary/';
 }
 function closeItin(){document.getElementById('itin-view').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePicker();closeItin();}});
