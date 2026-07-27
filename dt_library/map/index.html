@@ -237,7 +237,7 @@ function renderInline(){
   box.innerHTML=head+'<div class="seg-pk-list">'+list+'</div>';box.style.display='block';
 }
 function filterInline(i){var box=document.getElementById('segpk-'+i);if(!box)return;var q=box.querySelector('.seg-pk-search').value.toLowerCase();box.querySelectorAll('.pk-item').forEach(function(el){el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
-function addInline(i,idx){var l=(LODGES[route[i].key]||[])[idx];if(!l)return;route[i].lodges.push({name:l.name,file:l.file,nights:2});toast('Added '+l.name);refresh();}
+function addInline(i,idx){var l=(LODGES[route[i].key]||[])[idx];if(!l)return;route[i].lodges.push({name:l.name,file:l.file,nights:2});toast('Added '+l.name);inlineOpen=null;refresh();}
 
 function setNights(i,j,d){const l=route[i].lodges[j];l.nights=Math.max(1,l.nights+d);refresh();}
 function removeLodge(i,j){route[i].lodges.splice(j,1);refresh();}
