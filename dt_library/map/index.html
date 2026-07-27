@@ -239,7 +239,8 @@ function addInline(i,idx){var l=(LODGES[route[i].key]||[])[idx];if(!l)return;rou
 function setNights(i,j,d){const l=route[i].lodges[j];l.nights=Math.max(1,l.nights+d);refresh();}
 function removeLodge(i,j){route[i].lodges.splice(j,1);refresh();}
 
-function refresh(){renderMarkers();routeCompute();}
+function saveRoute(){try{localStorage.setItem('nr_route',JSON.stringify(route));}catch(e){}}
+function refresh(){saveRoute();renderMarkers();routeCompute();}
 function itinText(){var lines=['My Namibia route:',''];route.forEach(function(s,i){var lg=(s.lodges||[]).map(function(l){return l.name+' ('+l.nights+' night'+(l.nights>1?'s':'')+')';}).join(', ');lines.push((i+1)+'. '+BY[s.key].name+(lg?' - '+lg:''));});var tkm=0,nights=0;legInfo.forEach(function(l){tkm+=l.km;});route.forEach(function(s){(s.lodges||[]).forEach(function(l){nights+=l.nights;});});lines.push('');lines.push('Total: '+route.length+' stops, '+nights+' night'+(nights===1?'':'s')+', ~'+tkm+' km driving');lines.push('');lines.push('Planned with the Namibia Rates route planner: '+location.origin+'/map/');return lines.join('\n');}
 function emailItinerary(){if(!route.length)return;window.location.href='mailto:?subject='+encodeURIComponent('My Namibia Itinerary')+'&body='+encodeURIComponent(itinText());}
 function sendEnquiry(){if(!route.length)return;window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(itinText());}
@@ -289,6 +290,7 @@ function viewItinerary(){
 }
 function closeItin(){document.getElementById('itin-view').classList.remove('open');document.body.style.overflow='';}
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePicker();closeItin();}});
+try{var _sr=JSON.parse(localStorage.getItem('nr_route')||'[]');if(Array.isArray(_sr))route=_sr.filter(function(x){return x&&BY[x.key];}).map(function(x){return {key:x.key,lodges:Array.isArray(x.lodges)?x.lodges:[]};});}catch(e){}
 if(typeof L!=='undefined'){initMap();refresh();}else{window.addEventListener('load',()=>{initMap();refresh();});}
 </script>
 <script>window.LODGE=window.LODGE||"";</script>
