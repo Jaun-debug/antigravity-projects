@@ -305,7 +305,7 @@ function liSection(key,label,ph){
 }
 
 /* ---- panels ---- */
-function renderPanel(){
+function renderPanel(){persist();
   var p=document.getElementById('panel'),h='';
   if(active==='trip'){
     h='<h2>Trip &amp; Client</h2><p class="lead">Who the quote is for and your markup.</p>'
@@ -509,11 +509,13 @@ function overlayRack(){
     });
   }).catch(function(){});
 }
+var LODGEINFO={};fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};try{persist();}catch(e){}}).catch(function(){});
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlayRack().then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
+function persist(){try{var it=S.lodges.map(function(d){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
-    it.forEach(function(x){
+    it.forEach(function(x){if(x&&x._b){try{S.lodges.push(JSON.parse(JSON.stringify(x._b)));}catch(e){}return;}
       var li=-1;for(var k=0;k<RATES.lodges.length;k++){if(RATES.lodges[k].name.toLowerCase()===(x.name||'').toLowerCase()){li=k;break}}
       var nights=(x.items&&x.items[0]&&x.items[0].nights)||x.nights||2;
       S.lodges.push({region:li>-1?RATES.lodges[li].region:(x.region||''),lodgeIdx:li,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:nights,name:x.name||'',fileUrl:x.url||'',cap:(x.items&&x.items.length)?x.items:null,legToNext:x.legToNext||''});
