@@ -309,7 +309,9 @@ function viewItinerary(){
   route.forEach(function(s){(s.lodges||[]).forEach(function(l){
     const key=(l.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
     const inf=LODGEINFO[key]||null;
-    items.push({name:l.name,region:BY[s.key].name,url:(inf&&inf.url)||l.file||('/'+s.key+'-accommodation/'),nights:l.nights,items:[{nights:l.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[]});
+    var fp=FROMPP[l.file];
+    var rows=fp?[{qty:pax,name:fp.n||'Per person sharing',price:fp.p,nights:l.nights,total:pax*(fp.p||0)*(l.nights||1)}]:[];
+    items.push({name:l.name,region:BY[s.key].name,url:(inf&&inf.url)||l.file||('/'+s.key+'-accommodation/'),nights:l.nights,items:rows,desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[]});
   });});
   if(!items.length){toast('Add at least one lodge to a stop to view your itinerary');return;}
   try{localStorage.setItem('nr_itinerary',JSON.stringify(items));}catch(e){}
