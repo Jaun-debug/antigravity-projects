@@ -122,6 +122,8 @@ a{color:inherit}
 .pk-rates:hover{border-color:var(--brand-accent);color:var(--brand-accent)}
 .pk-add{border:1px solid var(--brand-accent);background:transparent;color:var(--brand-accent);font-family:var(--font-body);font-size:.62rem;letter-spacing:1px;text-transform:uppercase;padding:6px 13px;border-radius:6px;cursor:pointer;transition:all .2s}
 .pk-add:hover{background:var(--brand-accent);color:#fff}
+.pk-from{display:block;font-size:.62rem;color:var(--brand-accent);letter-spacing:.4px;margin-top:2px;text-transform:none}
+.lodge .ln-from{display:block;font-size:.62rem;color:var(--brand-accent);letter-spacing:.3px;margin-top:2px}
 .pk-empty{padding:26px 6px;text-align:center;color:var(--text-muted);font-size:.9rem}
 .pk-empty a{color:var(--brand-accent)}
 .seg-picker{margin:8px 0 2px 42px;border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
@@ -203,6 +205,19 @@ const PINS=[{"key": "epupa", "name": "Epupa", "url": "/epupa-accommodation/", "l
 const ROAD_FACTOR=1.3,SPEED=75,OSRM='https://router.project-osrm.org/route/v1/driving/';
 let route=[], map=null, routeLine=null, markers={}, reqId=0, legInfo=[], mode='est', pickerStop=null, pickerList=[], inlineOpen=null;
 let pax=2;
+var FROMPP={};
+function money(n){return 'N$ '+Math.round(Number(n)||0).toLocaleString('en-US');}
+function nonRoom(s){return /guide|driver|pilot|game[ -]?drive|\bdrives?\b|scheduled|cruise|tracking|excursion|sundowner|sunset|transfer|shuttle|airstrip|airfield|\bpassenger\b|one[ -]?way|\bfee\b|game ?package|\bboat\b|scenic|fly-?in|flight|\bhide\b|feeding|spa|massage|treatment|laundry|wifi|fishing|quad|horse|riding|\bbike|cycl|kayak|canoe|mokoro|balloon|photograph|\bwalk\b|hik|picnic|braai|boma|swim|\bpool\b|\bgym\b|tasting|\btour\b|township|cultural|museum|entrance|\bentry\b|\bcot\b|crib|park fee|conservation|levy|permit|tourism|commission|deposit|supplement|\bextra\b|add[- ]?on/.test(s);}
+function softNonRoom(s){return /breakfast|lunch|dinner|brunch|\bmeal|beverage|drinks|\bbar\b|\bwine\b|activit/.test(s);}
+function hasRoomNoun(s){return /sharing|\bsingle\b|\broom\b|chalet|\btent\b|bungalow|suite|villa|cabin|rondavel|cottage|\bbed\b|\bdbb\b|\bb ?& ?b\b|full board|half board|fully inclusive|\bfi\b|per person per night|per adult|pppn|accommodation|night rate/.test(s);}
+function notRoomService(s){return nonRoom(s)||(softNonRoom(s)&&!hasRoomNoun(s));}
+function rateExcluded(s){if(/child|chd|\bkid|infant/.test(s)||/\byrs?\b|\byears?\b/.test(s)||/\d\s*[–\-]\s*\d+\s*(yr|year)/.test(s))return true;if(notRoomService(s))return true;return (/campsite|camping|apartment|per unit|\bunit\b|per room/.test(s))&&!hasRoomNoun(s);}
+function rateMatches(n,mode){var s=(n||'').toLowerCase();if(rateExcluded(s))return false;if(mode==='single')return /single/.test(s);return /sharing/.test(s)||/per person/.test(s)||/\bpps\b/.test(s);}
+function bestRoomIdx(L,mode){if(!L||!L.rates)return -1;var best=-1,bp=Infinity;L.rates.forEach(function(rt,ri){if(rateMatches(rt.n,mode)){var pp=Number(rt.p)||0;if(pp>0&&pp<bp){bp=pp;best=ri;}}});return best;}
+function bestAccommIdx(L){if(!L||!L.rates)return -1;function pick(allowCamp){var b=-1,bp=Infinity;L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(notRoomService(s))return;if(/child|chd|\bkid/.test(s))return;if(/single/.test(s)&&!/sharing/.test(s))return;if(/\byrs?\b|\byears?\b/.test(s))return;if(/additional|supplement|\bextra\b|add[- ]?on|2nd room|3rd room|second room|third person|day visitor/.test(s))return;if(!allowCamp&&/campsite|camping|ablution|per site/.test(s))return;var pp=Number(rt.p)||0;if(pp>0&&pp<bp){bp=pp;b=ri;}});return b;}var i=pick(false);return i>-1?i:pick(true);}
+function bestShareIdx(L){var i=bestRoomIdx(L,'sharing');return i>-1?i:bestAccommIdx(L);}
+function fromLabel(file){var f=FROMPP[file];return f?('from '+money(f.p)+' pp'):'';}
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){(j.lodges||[]).forEach(function(L){var i=bestShareIdx(L);if(i>-1&&L.file){FROMPP[L.file]={p:L.rates[i].p,n:L.rates[i].n};}});try{renderPanel();}catch(e){}}).catch(function(){});
 
 function hav(a,b){const R=6371,r=Math.PI/180;const dla=(b.lat-a.lat)*r,dlo=(b.lng-a.lng)*r;const s=Math.sin(dla/2)**2+Math.cos(a.lat*r)*Math.cos(b.lat*r)*Math.sin(dlo/2)**2;return 2*R*Math.asin(Math.sqrt(s));}
 function fmtMin(m){const H=Math.floor(m/60),M=Math.round(m%60);return (H?H+'h ':'')+M+'m';}
@@ -226,7 +241,7 @@ function undo(){route.pop();refresh();}
 function clearRoute(){if(route.length&&!confirm('Clear all stops and start over?'))return;route=[];inlineOpen=null;refresh();}
 
 function openPicker(i){pickerStop=i;const key=route[i].key;pickerList=(LODGES[key]||[]).slice();document.getElementById('pk-title').textContent='Lodges — '+BY[key].name;document.getElementById('pk-search').value='';buildPickerList(key);document.getElementById('picker').classList.add('open');document.body.style.overflow='hidden';}
-function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
+function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l.file)?'<span class="pk-from">'+fromLabel(l.file)+'</span>':'')+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
 function filterPicker(){const q=document.getElementById('pk-search').value.toLowerCase();document.querySelectorAll('#pk-list .pk-item').forEach(el=>{el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
 function addLodge(idx){const l=pickerList[idx];if(!l||pickerStop==null)return;route[pickerStop].lodges.push({name:l.name,file:l.file,nights:2});toast('Added '+l.name);closePicker();refresh();}
 function closePicker(){document.getElementById('picker').classList.remove('open');document.body.style.overflow='';pickerStop=null;}
@@ -239,7 +254,7 @@ function renderInline(){
   var head='<input class="seg-pk-search" placeholder="Search '+BY[key].name+' lodges…" oninput="filterInline('+i+')">';
   var list;
   if(!L.length){list='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';}
-  else{list=L.map(function(l,idx){return '<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addInline('+i+','+idx+')">Add</button></span></div>';}).join('');}
+  else{list=L.map(function(l,idx){return '<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l.file)?'<span class="pk-from">'+fromLabel(l.file)+'</span>':'')+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addInline('+i+','+idx+')">Add</button></span></div>';}).join('');}
   box.innerHTML=head+'<div class="seg-pk-list">'+list+'</div>';box.style.display='block';
 }
 function filterInline(i){var box=document.getElementById('segpk-'+i);if(!box)return;var q=box.querySelector('.seg-pk-search').value.toLowerCase();box.querySelectorAll('.pk-item').forEach(function(el){el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
@@ -253,7 +268,7 @@ function refresh(){saveRoute();renderMarkers();routeCompute();}
 function savePax(){try{localStorage.setItem('nr_pax',String(pax));}catch(e){}}
 function renderPax(){var v=document.getElementById('paxVal');if(v)v.textContent=pax;var w=document.getElementById('paxWord');if(w)w.textContent=(pax===1?'person':'people');}
 function setPax(d){pax=Math.max(1,Math.min(99,pax+d));savePax();renderPax();}
-function itinText(){var lines=['My Namibia route:',''];route.forEach(function(s,i){var lg=(s.lodges||[]).map(function(l){return l.name+' ('+l.nights+' night'+(l.nights>1?'s':'')+')';}).join(', ');lines.push((i+1)+'. '+BY[s.key].name+(lg?' - '+lg:''));});var tkm=0,nights=0;legInfo.forEach(function(l){tkm+=l.km;});route.forEach(function(s){(s.lodges||[]).forEach(function(l){nights+=l.nights;});});lines.push('');lines.push('Travellers: '+pax+' '+(pax===1?'person':'people'));lines.push('Total: '+route.length+' stops, '+nights+' night'+(nights===1?'':'s')+', ~'+tkm+' km driving');lines.push('');lines.push('Planned with the Namibia Rates route planner: '+location.origin+'/map/');return lines.join('\n');}
+function itinText(){var lines=['My Namibia route:',''];route.forEach(function(s,i){var lg=(s.lodges||[]).map(function(l){return l.name+' ('+l.nights+' night'+(l.nights>1?'s':'')+(FROMPP[l.file]?', from '+money(FROMPP[l.file].p)+' pp':'')+')';}).join(', ');lines.push((i+1)+'. '+BY[s.key].name+(lg?' - '+lg:''));});var tkm=0,nights=0;legInfo.forEach(function(l){tkm+=l.km;});route.forEach(function(s){(s.lodges||[]).forEach(function(l){nights+=l.nights;});});lines.push('');lines.push('Travellers: '+pax+' '+(pax===1?'person':'people'));lines.push('Total: '+route.length+' stops, '+nights+' night'+(nights===1?'':'s')+', ~'+tkm+' km driving');lines.push('');lines.push('Planned with the Namibia Rates route planner: '+location.origin+'/map/');return lines.join('\n');}
 function emailItinerary(){if(!route.length)return;window.location.href='mailto:?subject='+encodeURIComponent('My Namibia Itinerary')+'&body='+encodeURIComponent(itinText());}
 function sendEnquiry(){if(!route.length)return;window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(itinText());}
 
@@ -268,7 +283,7 @@ function renderPanel(){
     route.forEach((s,i)=>{
       const p=BY[s.key];
       const seg=document.createElement('div');seg.className='seg';
-      let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
+      let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+(fromLabel(l.file)?'<span class="ln-from">'+fromLabel(l.file)+'</span>':'')+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
       seg.innerHTML='<div class="seg-head"><div class="num">'+(i+1)+'</div><div class="nm">'+p.name+'</div><button class="rm" title="Remove stop" onclick="removeStop('+i+')">&times;</button></div>'+
         (lodgesHtml?'<div class="lodges">'+lodgesHtml+'</div>':'')+
         (s.lodges.length===0?'<div class="seg-actions"><button class="addlodge" onclick="toggleInline('+i+')">+ Add lodge</button></div>':'')+
