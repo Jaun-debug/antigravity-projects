@@ -49,7 +49,7 @@ a{color:inherit}
 .seg{border:1px solid var(--line);border-radius:12px;padding:14px 14px 12px;margin-bottom:4px;background:#fff}
 .seg-head{display:flex;align-items:center;gap:12px}
 .seg-head .num{flex:0 0 30px;height:30px;width:30px;border-radius:50%;background:var(--brand-accent);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:500;font-size:.9rem}
-.seg-head .nm{flex:1;font-size:1.1rem;font-family:var(--font-head)}
+.seg-head .nm{flex:1;font-size:1.1rem;font-family:var(--font-head);text-align:center}
 .seg-head .rm{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1.2rem;line-height:1;padding:2px 6px;border-radius:6px}
 .seg-head .rm:hover{color:#b4453a;background:rgba(180,69,58,.08)}
 .lodges{margin:10px 0 6px;padding-left:42px;display:flex;flex-direction:column;gap:7px}
@@ -62,9 +62,9 @@ a{color:inherit}
 .stepper .nt b{color:var(--text-main);font-weight:500}
 .lodge .lx{background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:1rem;padding:2px 4px;border-radius:5px}
 .lodge .lx:hover{color:#b4453a}
-.seg-actions{display:flex;gap:14px;align-items:center;padding-left:42px;margin-top:6px}
-.addlodge{border:1px dashed var(--brand-accent);background:rgba(164,130,86,.06);color:var(--brand-accent);border-radius:7px;padding:7px 14px;font-family:var(--font-body);font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.addlodge:hover{background:var(--brand-accent);color:#fff}
+.seg-actions{display:flex;gap:14px;align-items:center;justify-content:flex-end;padding-left:0;margin-top:8px}
+.addlodge{border:1px solid rgba(255,255,255,.4);background:rgba(164,130,86,.6);color:#fff;border-radius:11px;padding:12px 24px;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;transition:all .2s;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(60,53,48,.18)}
+.addlodge:hover{background:rgba(164,130,86,.82);color:#fff;box-shadow:0 10px 28px rgba(60,53,48,.24)}
 .seg-actions .viewreg{font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--brand-green);text-decoration:none}
 .seg-actions .viewreg:hover{color:var(--brand-accent)}
 .leg{display:flex;align-items:center;gap:10px;padding:6px 0 6px 46px;color:var(--text-muted);font-size:.85rem}
