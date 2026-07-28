@@ -181,7 +181,7 @@ function rechainDates(items){
     cur=co;
   });
 }
-function recalc(l){var t=0;(l.items||[]).forEach(function(r){r.total=(r.qty||0)*(r.price||0)*(r.nights||1);t+=r.total});l.total=t}
+function recalc(l){var t=0;(l.items||[]).forEach(function(r){if(r.price==null){r.price=(r.qty&&r.nights)?(Number(r.total)||0)/(r.qty*r.nights):0;}r.total=(r.qty||0)*(r.price||0)*(r.nights||1);t+=r.total});l.total=t}
 function update(url,fn){
   var a=load();
   for(var i=0;i<a.length;i++){
@@ -241,6 +241,7 @@ function render(){
   sub.textContent=items.length+(items.length===1?' lodge':' lodges')+' in this itinerary.';
   var grandTotal=0;
   list.innerHTML=items.map(function(it,i){
+    recalc(it);
     var view=it.url?'<a href="'+esc(it.url)+'">View rates</a>':'';
     var region=it.region?'<div class="region">'+esc(it.region)+'</div>':'';
     var stay=(it.dateIn&&it.dateOut)?'<div class="stay">'+esc(it.dateIn)+' &rarr; '+esc(it.dateOut)+'</div>':'';
