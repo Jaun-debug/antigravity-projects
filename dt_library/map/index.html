@@ -82,6 +82,8 @@ a{color:inherit}
 .btn:disabled{opacity:.4;cursor:not-allowed}
 .btn.full{width:100%;margin-bottom:12px}
 .fine{font-size:.68rem;color:var(--text-muted);margin-top:14px;line-height:1.5}
+.clear-route{display:block;width:100%;margin:-2px 0 0;background:none;border:none;color:var(--text-muted);font-family:var(--font-body);font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;padding:8px;border-radius:8px;transition:all .2s}
+.clear-route:hover{color:#b4453a;background:rgba(180,69,58,.06)}
 .regions{margin-top:52px}
 .regions h3{font-family:var(--font-head);font-weight:500;font-size:1.35rem;text-align:center;letter-spacing:1px}
 .regions .rsub{text-align:center;color:var(--text-muted);font-size:.9rem;margin:8px 0 26px}
@@ -168,6 +170,7 @@ a{color:inherit}
         <div class="tot"><div class="v" id="totTime">0m</div><div class="k">Drive</div></div>
       </div>
       <button class="btn full primary" id="viewBtn" onclick="viewItinerary()" disabled>View itinerary</button>
+      <button class="clear-route" id="clearBtn" onclick="clearRoute()" style="display:none">Clear route</button>
       <p class="fine" id="fine">Add regions and lodges to build your itinerary. Distances are approximate driving distances between region hubs; live road distances load when routing is available.</p>
     </aside>
   </div>
@@ -214,7 +217,7 @@ function initMap(){
 function addStop(key){if(route.length&&route[route.length-1].key===key){toast(BY[key].name+' is already your last stop');return;}route.push({key:key,lodges:[]});toast(route.length===1?('Start: '+BY[key].name):('Added '+BY[key].name));refresh();}
 function removeStop(i){route.splice(i,1);refresh();}
 function undo(){route.pop();refresh();}
-function clearRoute(){route=[];refresh();}
+function clearRoute(){if(route.length&&!confirm('Clear all stops and start over?'))return;route=[];inlineOpen=null;refresh();}
 
 function openPicker(i){pickerStop=i;const key=route[i].key;pickerList=(LODGES[key]||[]).slice();document.getElementById('pk-title').textContent='Lodges — '+BY[key].name;document.getElementById('pk-search').value='';buildPickerList(key);document.getElementById('picker').classList.add('open');document.body.style.overflow='hidden';}
 function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
@@ -271,7 +274,7 @@ function renderPanel(){
   document.getElementById('totNights').textContent=nights;
   document.getElementById('totKm').textContent=tkm;
   document.getElementById('totTime').textContent=tmin?fmtMin(tmin):'0m';
-  document.getElementById('viewBtn').disabled=route.length===0;
+  document.getElementById('viewBtn').disabled=route.length===0;var _cb=document.getElementById('clearBtn');if(_cb)_cb.style.display=route.length?'block':'none';
   document.getElementById('fine').textContent=mode==='road'?'Distances and drive times are live values along real roads (OSRM).':'Approximate driving distances between region hubs — refines to live road distances when routing is available.';
   renderInline();
 }
