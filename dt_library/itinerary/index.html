@@ -554,7 +554,13 @@ body.pubclient .pub-actions .btn{width:150px!important;box-sizing:border-box!imp
 @media(max-width:900px){#nr-home,.home-link,#nr-tobuilder{position:static!important;width:auto!important;display:inline-flex!important;margin:4px!important}.actions{position:static!important;width:auto!important;flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}.actions>*{width:auto!important;border-radius:999px!important}}
 /* wilderness-orange glass action tabs */
 #nr-tobuilder,body.pubclient .pub-actions .btn{background:rgba(200,90,23,.6)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;border:1px solid rgba(255,255,255,.35)!important;border-right:none!important;color:#fff!important;padding:6px 12px!important;line-height:1.2!important;min-height:46px!important;box-sizing:border-box!important;border-radius:5px 0 0 5px!important;box-shadow:0 4px 16px rgba(60,53,48,.22)!important}
-#nr-tobuilder:hover,body.pubclient .pub-actions .btn:hover{background:rgba(200,90,23,.82)!important}
+#nr-tobuilder:hover,body.pubclient .pub-actions .btn:hover{background:rgba(200,90,23,.82)!important;filter:none!important}
+/* slight overlapping stack */
+#nr-tobuilder{z-index:9999!important}
+body.pubclient .pub-actions{top:166px!important;gap:0!important}
+body.pubclient .pub-actions .btn{position:relative!important}
+body.pubclient .pub-actions .btn:nth-child(1){z-index:9996!important}
+body.pubclient .pub-actions .btn:nth-child(2){z-index:9995!important;margin-top:-8px!important}
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
 
