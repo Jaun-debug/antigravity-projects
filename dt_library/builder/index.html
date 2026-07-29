@@ -617,6 +617,16 @@ function start(){renderNav();renderPanel();autoDistances();_inited=true;}
 .top-actions>*:nth-child(5),.top-actions>*:nth-child(5) *{background:#e6cfd2!important;color:#523b40!important;border-color:#d6b8bd!important}
 .top-actions>*{border-width:1px!important;border-style:solid!important;box-shadow:0 4px 14px rgba(0,0,0,.12)!important}
 @media(max-width:900px){.layout{padding-right:0!important}#nr-home{position:fixed;top:auto;bottom:78px;width:auto}.top-actions{position:static!important;width:auto!important;flex-direction:row!important;flex-wrap:wrap!important;gap:8px!important}.top-actions>*{width:auto!important;border-radius:999px!important}}
+/* terracotta glass stacked tabs (match itinerary) */
+#nr-home,.top-actions>*{background:rgba(200,90,23,.6)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;border:1px solid rgba(255,255,255,.35)!important;border-right:none!important;color:#fff!important;padding:6px 12px!important;min-height:44px!important;line-height:1.2!important;box-sizing:border-box!important;border-radius:5px 0 0 5px!important;box-shadow:0 4px 16px rgba(60,53,48,.22)!important;display:flex!important;align-items:center!important;justify-content:center!important;transition:transform .18s ease,background .2s ease!important;animation:none!important}
+#nr-home:hover,.top-actions>*:hover{background:rgba(200,90,23,.82)!important;transform:translateX(-7px)!important}
+.top-actions>*:nth-child(1),.top-actions>*:nth-child(2),.top-actions>*:nth-child(3),.top-actions>*:nth-child(4),.top-actions>*:nth-child(5){background:rgba(200,90,23,.6)!important;color:#fff!important;border-color:rgba(255,255,255,.35)!important}
+.top-actions>*:nth-child(1) *,.top-actions>*:nth-child(2) *,.top-actions>*:nth-child(3) *,.top-actions>*:nth-child(4) *,.top-actions>*:nth-child(5) *{background:transparent!important;color:#fff!important;border-color:transparent!important}
+#nr-home{z-index:9998!important}
+.top-actions{top:80px!important;gap:0!important}
+.top-actions>*{position:relative!important;margin-top:-8px!important}
+.top-actions>*:first-child{margin-top:0!important}
+.top-actions>*:nth-child(1){z-index:9996!important}.top-actions>*:nth-child(2){z-index:9995!important}.top-actions>*:nth-child(3){z-index:9994!important}.top-actions>*:nth-child(4){z-index:9993!important}.top-actions>*:nth-child(5){z-index:9992!important}
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
 <script>
