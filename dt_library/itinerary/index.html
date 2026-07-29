@@ -646,5 +646,27 @@ function nrSendWiz(){
 var e=document.getElementById('pub-email');if(e)e.addEventListener('click',function(ev){ev.preventDefault();nrOpenWiz();});
 var q=document.getElementById('pub-enquiry');if(q)q.addEventListener('click',function(){window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(txt());});
 })();</script>
+<script>/* align the fixed action tabs with the itinerary card top (dynamic, robust to any header height) */
+(function(){
+  function alignTabs(){
+    var list=document.getElementById('list'); if(!list) return;
+    var base=Math.round(list.getBoundingClientRect().top + (window.pageYOffset||0));
+    if(base<100) base=100;
+    var pub=document.body.classList.contains('pubclient');
+    function setTop(el,v){ if(el) el.style.setProperty('top', v+'px','important'); }
+    if(pub){
+      setTop(document.getElementById('nr-tobuilder'), base);
+      setTop(document.querySelector('.pub-actions'), base+38);
+    } else {
+      setTop(document.getElementById('nr-home'), base);
+      setTop(document.getElementById('nr-tobuilder'), base+36);
+      setTop(document.querySelector('.actions'), base+72);
+    }
+  }
+  window.addEventListener('load', alignTabs);
+  window.addEventListener('resize', alignTabs);
+  if(document.fonts&&document.fonts.ready){document.fonts.ready.then(alignTabs);}
+  setTimeout(alignTabs,400);
+})();</script>
 </body>
 </html>
