@@ -515,12 +515,12 @@ function persist(){try{var it=S.lodges.map(function(d){var nm=lodgeLabel(d);var 
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
-    it.forEach(function(x){if(x&&x._b){try{S.lodges.push(JSON.parse(JSON.stringify(x._b)));}catch(e){}return;}
+    it.forEach(function(x){if(!x||!x._b)return;/* only import lodges built in the Builder, not the public route planner */try{S.lodges.push(JSON.parse(JSON.stringify(x._b)));}catch(e){}return;
       var li=-1;for(var k=0;k<RATES.lodges.length;k++){if(RATES.lodges[k].name.toLowerCase()===(x.name||'').toLowerCase()){li=k;break}}
       var nights=(x.items&&x.items[0]&&x.items[0].nights)||x.nights||2;
       S.lodges.push({region:li>-1?RATES.lodges[li].region:(x.region||''),lodgeIdx:li,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:nights,name:x.name||'',fileUrl:x.url||'',cap:(x.items&&x.items.length)?x.items:null,legToNext:x.legToNext||''});
     });
-    if(it.length) active='lodges';
+    if(S.lodges.length) active='lodges';
   }catch(e){}
 }
 /* ---- automatic drive-distance estimates (geocode + routing; all approximate) ---- */

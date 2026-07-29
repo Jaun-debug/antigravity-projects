@@ -561,6 +561,18 @@ body.pubclient .pub-actions{top:166px!important;gap:0!important}
 body.pubclient .pub-actions .btn{position:relative!important}
 body.pubclient .pub-actions .btn:nth-child(1){z-index:9996!important}
 body.pubclient .pub-actions .btn:nth-child(2){z-index:9995!important;margin-top:-8px!important}
+/* agent-view side tabs -> terracotta glass stack (match client tabs) */
+body:not(.pubclient) #nr-home,body:not(.pubclient) .home-link,body:not(.pubclient) .actions>*{background:rgba(200,90,23,.6)!important;-webkit-backdrop-filter:blur(12px)!important;backdrop-filter:blur(12px)!important;border:1px solid rgba(255,255,255,.35)!important;border-right:none!important;color:#fff!important;padding:6px 12px!important;min-height:44px!important;line-height:1.2!important;box-sizing:border-box!important;border-radius:5px 0 0 5px!important;box-shadow:0 4px 16px rgba(60,53,48,.22)!important;display:flex!important;align-items:center!important;justify-content:center!important;text-align:center!important;transition:transform .18s ease,background .2s ease!important;animation:none!important}
+body:not(.pubclient) #nr-home:hover,body:not(.pubclient) .home-link:hover,body:not(.pubclient) .actions>*:hover{background:rgba(200,90,23,.82)!important;transform:translateX(-7px)!important}
+body:not(.pubclient) .actions>*:nth-child(1),body:not(.pubclient) .actions>*:nth-child(2),body:not(.pubclient) .actions>*:nth-child(3),body:not(.pubclient) .actions>*:nth-child(4),body:not(.pubclient) .actions>*:nth-child(5),body:not(.pubclient) .actions>*:nth-child(6){background:rgba(200,90,23,.6)!important;color:#fff!important;border-color:rgba(255,255,255,.35)!important}
+body:not(.pubclient) .actions>*:nth-child(1) *,body:not(.pubclient) .actions>*:nth-child(2) *,body:not(.pubclient) .actions>*:nth-child(3) *,body:not(.pubclient) .actions>*:nth-child(4) *,body:not(.pubclient) .actions>*:nth-child(5) *,body:not(.pubclient) .actions>*:nth-child(6) *{background:transparent!important;color:#fff!important;border-color:transparent!important}
+body:not(.pubclient) #nr-home{top:44px!important;z-index:9999!important}
+body:not(.pubclient) .home-link{top:80px!important;z-index:9998!important}
+body:not(.pubclient) #nr-tobuilder{top:116px!important;z-index:9997!important}
+body:not(.pubclient) .actions{top:152px!important;gap:0!important;z-index:9990!important}
+body:not(.pubclient) .actions>*{position:relative!important;margin-top:-8px!important}
+body:not(.pubclient) .actions>*:first-child{margin-top:0!important}
+body:not(.pubclient) .actions>*:nth-child(1){z-index:9989!important}body:not(.pubclient) .actions>*:nth-child(2){z-index:9988!important}body:not(.pubclient) .actions>*:nth-child(3){z-index:9987!important}body:not(.pubclient) .actions>*:nth-child(4){z-index:9986!important}body:not(.pubclient) .actions>*:nth-child(5){z-index:9985!important}body:not(.pubclient) .actions>*:nth-child(6){z-index:9984!important}
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
 
@@ -569,7 +581,7 @@ if(new URLSearchParams(location.search).get('client')!=='1' && sessionStorage.ge
 document.body.classList.add('pubclient');
 var tb=document.getElementById('nr-tobuilder');if(tb){tb.setAttribute('href','/map/');tb.innerHTML='&larr; Back to map';}
 function txt(){var it=[];try{it=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}var L=['My Namibia itinerary:',''];it.forEach(function(x,i){L.push((i+1)+'. '+(x.name||'')+(x.region?' ('+x.region+')':'')+(x.nights?' - '+x.nights+' night'+(x.nights>1?'s':''):''));});L.push('');L.push('Sent from the Namibia Rates route planner: '+location.origin+'/map/');return L.join('\n');}
-var VAULT_SEND='https://desert-tracks-itinerary-vault.vercel.app/api/send_email';
+var VAULT_SEND='/api/send_email';
 var COPY_TO='jaun@desert-tracks.com';
 function nrMoney(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2});}
 function nrEsc(x){return String(x||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
@@ -598,7 +610,7 @@ function nrItinHtml(clientName,message,tripName){
     +'<p style="font-size:11px;color:#9a9088;line-height:1.6;margin-top:22px">Rates are illustrative examples for planning purposes, per person sharing unless stated. Please contact us to confirm final pricing and availability.</p>'
     +'</div><div style="background:#EEEAE3;padding:18px 30px;text-align:center;font-size:11px;color:#7A7269">Desert Tracks &middot; bookings@desert-tracks.com</div></div>';
 }
-function nrPost(to,subject,html){return fetch(VAULT_SEND,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:to,subject:subject,html:html})});}
+function nrPost(payload){return fetch(VAULT_SEND,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});}
 function nrEnsureModal(){
   if(document.getElementById('nr-ew'))return;
   var css='#nr-ew{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;background:rgba(44,40,36,.55);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);padding:20px}#nr-ew.open{display:flex}#nr-ew .ew-box{background:#fff;border-radius:14px;max-width:440px;width:100%;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.35)}#nr-ew h3{font-family:var(--font-head),Georgia,serif;font-weight:500;font-size:1.6rem;color:#2C2824;margin:0 0 4px}#nr-ew .ew-sub{font-size:.82rem;color:#7A7269;margin:0 0 12px}#nr-ew .ew-trip{font-size:.82rem;color:#8a6d3b;background:#f6efe4;border:1px solid rgba(184,149,106,.3);border-radius:8px;padding:9px 12px;margin:0 0 4px}#nr-ew .ew-trip b{color:#2C2824}#nr-ew label{display:block;font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:#7A7269;margin:14px 0 5px}#nr-ew input,#nr-ew textarea{width:100%;box-sizing:border-box;border:1px solid rgba(184,149,106,.4);border-radius:8px;padding:11px 13px;font-family:var(--font-body),Arial,sans-serif;font-size:.92rem;color:#2C2824;background:#fbfaf8;outline:none}#nr-ew input:focus,#nr-ew textarea:focus{border-color:#B8956A}#nr-ew textarea{min-height:70px;resize:vertical}#nr-ew .ew-actions{display:flex;gap:10px;margin-top:22px}#nr-ew .ew-btn{flex:1;padding:12px;border-radius:8px;font-family:var(--font-body),Arial,sans-serif;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:1px solid #B8956A;transition:.2s}#nr-ew .ew-cancel{background:#fff;color:#B8956A}#nr-ew .ew-send{background:#B8956A;color:#fff}#nr-ew .ew-send:disabled{opacity:.5;cursor:default}#nr-ew .ew-msg{font-size:.8rem;margin-top:14px;min-height:1em;text-align:center}';
@@ -622,10 +634,9 @@ function nrSendWiz(){
   var trip=nrTripName();
   var html=nrItinHtml(name,msg,trip);
   var subj=trip||('Your Namibia Itinerary'+(name?' - '+name:''));
-  Promise.all([nrPost(email,subj,html),nrPost(COPY_TO,'Copy: '+subj,html)]).then(function(rs){
-    var ok=rs.every(function(r){return r&&r.ok;});
-    if(ok){status.style.color='#3f7d52';status.textContent='Sent to '+email+' (copy to Jaun).';setTimeout(nrCloseWiz,1700);}
-    else{status.style.color='#b4453a';status.textContent='Send failed (server '+((rs[0]&&rs[0].status)||'error')+').';btn.disabled=false;}
+  nrPost({to:email,bcc:COPY_TO,subject:subj,html:html}).then(function(r){return r.json().catch(function(){return{ok:r.ok};});}).then(function(j){
+    if(j&&j.ok){status.style.color='#3f7d52';status.textContent='Sent to '+email+' (copy to Jaun).';setTimeout(nrCloseWiz,1800);}
+    else{status.style.color='#b4453a';status.textContent='Send failed: '+((j&&j.error)||'server error');btn.disabled=false;}
   }).catch(function(){status.style.color='#b4453a';status.textContent='Could not reach the mail service.';btn.disabled=false;});
 }
 var e=document.getElementById('pub-email');if(e)e.addEventListener('click',function(ev){ev.preventDefault();nrOpenWiz();});
