@@ -569,7 +569,64 @@ if(new URLSearchParams(location.search).get('client')!=='1' && sessionStorage.ge
 document.body.classList.add('pubclient');
 var tb=document.getElementById('nr-tobuilder');if(tb){tb.setAttribute('href','/map/');tb.innerHTML='&larr; Back to map';}
 function txt(){var it=[];try{it=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}var L=['My Namibia itinerary:',''];it.forEach(function(x,i){L.push((i+1)+'. '+(x.name||'')+(x.region?' ('+x.region+')':'')+(x.nights?' - '+x.nights+' night'+(x.nights>1?'s':''):''));});L.push('');L.push('Sent from the Namibia Rates route planner: '+location.origin+'/map/');return L.join('\n');}
-var e=document.getElementById('pub-email');if(e)e.addEventListener('click',function(){window.location.href='mailto:?subject='+encodeURIComponent('My Namibia Itinerary')+'&body='+encodeURIComponent(txt());});
+var VAULT_SEND='https://desert-tracks-itinerary-vault.vercel.app/api/send_email';
+var COPY_TO='jaun@desert-tracks.com';
+function nrMoney(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2});}
+function nrEsc(x){return String(x||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function nrItinHtml(clientName,message){
+  var items=[];try{items=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}
+  var gt=0,rows='';
+  items.forEach(function(it,i){
+    try{if(typeof recalc==='function')recalc(it);}catch(e){}
+    gt+=(it.total||0);
+    var lines=(it.items||[]).map(function(r){return '<div style="font-size:13px;color:#5b5147;margin:3px 0">'+(r.qty||0)+' &times; '+nrEsc(r.name)+(r.nights?' &times; '+r.nights+' night'+(r.nights>1?'s':''):'')+' &mdash; <strong>'+nrMoney(r.total)+'</strong></div>';}).join('');
+    rows+='<tr><td style="padding:16px 0;border-bottom:1px solid #eadfce">'
+      +'<div style="font-family:Georgia,serif;font-size:19px;color:#2C2824">'+(i+1)+'. '+nrEsc(it.name)+'</div>'
+      +(it.region?'<div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#a08a6a;margin:4px 0 2px">'+nrEsc(it.region)+'</div>':'')
+      +((it.dateIn&&it.dateOut)?'<div style="font-size:12px;color:#7A7269;margin-bottom:6px">'+nrEsc(it.dateIn)+' &rarr; '+nrEsc(it.dateOut)+'</div>':'')
+      +lines+'</td></tr>';
+  });
+  var msgHtml=message?'<p style="font-size:14px;color:#5b5147;line-height:1.7;margin:0 0 20px">'+nrEsc(message).replace(/\n/g,'<br>')+'</p>':'';
+  var hi=clientName?('Dear '+nrEsc(clientName)+',<br><br>'):'';
+  return '<div style="max-width:600px;margin:0 auto;background:#EEEAE3;font-family:Arial,Helvetica,sans-serif;color:#2C2824">'
+    +'<div style="background:#2C2824;padding:26px 30px"><span style="font-family:Georgia,serif;font-size:22px;letter-spacing:1px;color:#fff">Namibia<span style="color:#B8956A">Rates</span></span><div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:#B8956A;margin-top:4px">Your Namibia Itinerary</div></div>'
+    +'<div style="background:#fff;padding:30px">'
+    +'<p style="font-size:14px;color:#5b5147;line-height:1.7;margin:0 0 6px">'+hi+'Here is your proposed Namibia itinerary:</p>'+msgHtml
+    +'<table style="width:100%;border-collapse:collapse;margin-top:8px">'+rows+'</table>'
+    +'<div style="text-align:right;margin-top:18px;padding-top:14px;border-top:2px solid #B8956A"><span style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#a08a6a">Estimated total</span><div style="font-family:Georgia,serif;font-size:24px;color:#B8956A">'+nrMoney(gt)+'</div></div>'
+    +'<p style="font-size:11px;color:#9a9088;line-height:1.6;margin-top:22px">Rates are illustrative examples for planning purposes, per person sharing unless stated. Please contact us to confirm final pricing and availability.</p>'
+    +'</div><div style="background:#EEEAE3;padding:18px 30px;text-align:center;font-size:11px;color:#7A7269">Desert Tracks &middot; bookings@desert-tracks.com</div></div>';
+}
+function nrPost(to,subject,html){return fetch(VAULT_SEND,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({to:to,subject:subject,html:html})});}
+function nrEnsureModal(){
+  if(document.getElementById('nr-ew'))return;
+  var css='#nr-ew{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;background:rgba(44,40,36,.55);-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);padding:20px}#nr-ew.open{display:flex}#nr-ew .ew-box{background:#fff;border-radius:14px;max-width:440px;width:100%;padding:30px;box-shadow:0 30px 80px rgba(0,0,0,.35)}#nr-ew h3{font-family:var(--font-head),Georgia,serif;font-weight:500;font-size:1.6rem;color:#2C2824;margin:0 0 4px}#nr-ew .ew-sub{font-size:.82rem;color:#7A7269;margin:0 0 18px}#nr-ew label{display:block;font-size:.64rem;letter-spacing:2px;text-transform:uppercase;color:#7A7269;margin:14px 0 5px}#nr-ew input,#nr-ew textarea{width:100%;box-sizing:border-box;border:1px solid rgba(184,149,106,.4);border-radius:8px;padding:11px 13px;font-family:var(--font-body),Arial,sans-serif;font-size:.92rem;color:#2C2824;background:#fbfaf8;outline:none}#nr-ew input:focus,#nr-ew textarea:focus{border-color:#B8956A}#nr-ew textarea{min-height:70px;resize:vertical}#nr-ew .ew-actions{display:flex;gap:10px;margin-top:22px}#nr-ew .ew-btn{flex:1;padding:12px;border-radius:8px;font-family:var(--font-body),Arial,sans-serif;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;cursor:pointer;border:1px solid #B8956A;transition:.2s}#nr-ew .ew-cancel{background:#fff;color:#B8956A}#nr-ew .ew-send{background:#B8956A;color:#fff}#nr-ew .ew-send:disabled{opacity:.5;cursor:default}#nr-ew .ew-msg{font-size:.8rem;margin-top:14px;min-height:1em;text-align:center}';
+  var st=document.createElement('style');st.textContent=css;document.head.appendChild(st);
+  var d=document.createElement('div');d.id='nr-ew';
+  d.innerHTML='<div class="ew-box"><h3>Email this itinerary</h3><p class="ew-sub">Enter the client details and we will send them a copy.</p><label>Client name</label><input id="ew-name" type="text" placeholder="First name"><label>Client email</label><input id="ew-email" type="email" placeholder="client@email.com"><label>Message (optional)</label><textarea id="ew-msg" placeholder="A short note to the client..."></textarea><div class="ew-msg" id="ew-status"></div><div class="ew-actions"><button class="ew-btn ew-cancel" type="button" id="ew-cancel">Cancel</button><button class="ew-btn ew-send" type="button" id="ew-send">Send</button></div></div>';
+  d.addEventListener('click',function(ev){if(ev.target===d)nrCloseWiz();});
+  document.body.appendChild(d);
+  document.getElementById('ew-cancel').addEventListener('click',nrCloseWiz);
+  document.getElementById('ew-send').addEventListener('click',nrSendWiz);
+}
+function nrOpenWiz(){nrEnsureModal();var stt=document.getElementById('ew-status');if(stt)stt.textContent='';document.getElementById('nr-ew').classList.add('open');var em=document.getElementById('ew-email');if(em)em.focus();}
+function nrCloseWiz(){var m=document.getElementById('nr-ew');if(m)m.classList.remove('open');}
+function nrSendWiz(){
+  var name=(document.getElementById('ew-name').value||'').trim();
+  var email=(document.getElementById('ew-email').value||'').trim();
+  var msg=(document.getElementById('ew-msg').value||'').trim();
+  var status=document.getElementById('ew-status');
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){status.style.color='#b4453a';status.textContent='Please enter a valid client email address.';return;}
+  var btn=document.getElementById('ew-send');btn.disabled=true;status.style.color='#7A7269';status.textContent='Sending...';
+  var html=nrItinHtml(name,msg);
+  var subj='Your Namibia Itinerary'+(name?' - '+name:'');
+  Promise.all([nrPost(email,subj,html),nrPost(COPY_TO,'Copy: '+subj,html)]).then(function(rs){
+    var ok=rs.every(function(r){return r&&r.ok;});
+    if(ok){status.style.color='#3f7d52';status.textContent='Sent to '+email+' (copy to Jaun).';setTimeout(nrCloseWiz,1700);}
+    else{status.style.color='#b4453a';status.textContent='Send failed (server '+((rs[0]&&rs[0].status)||'error')+').';btn.disabled=false;}
+  }).catch(function(){status.style.color='#b4453a';status.textContent='Could not reach the mail service.';btn.disabled=false;});
+}
+var e=document.getElementById('pub-email');if(e)e.addEventListener('click',function(ev){ev.preventDefault();nrOpenWiz();});
 var q=document.getElementById('pub-enquiry');if(q)q.addEventListener('click',function(){window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(txt());});
 })();</script>
 </body>
