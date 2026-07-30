@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script id="nr-sto-redirect">try{if(sessionStorage.getItem("nr_agent_token"))location.replace("/ratesheets/swakopmund_sands.html");}catch(e){}</script>
+<head><script id="nr-sto-redirect">try{if(sessionStorage.getItem("nr_agent_token"))location.replace("/ratesheets/toshari_lodge.html");}catch(e){}</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Swakopmund Sands | Namibia Rates</title>
-<meta name="description" content="Swakopmund Sands — published rack rates. Trade partners sign in for net STO rates.">
-<link rel="canonical" href="https://namibiarates.com/swakopmund-accommodation/swakopmund-sands/">
+<title>Toshari Lodge | Namibia Rates</title>
+<meta name="description" content="Toshari Lodge — published rack rates. Trade partners sign in for net STO rates.">
+<link rel="canonical" href="https://namibiarates.com/south-etosha-accommodation/toshari-lodge/">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#3c3530">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Namibia Rates">
-<meta property="og:title" content="Swakopmund Sands | Swakopmund">
-<meta property="og:description" content="Swakopmund Sands in Swakopmund, Namibia.">
-<meta property="og:url" content="https://namibiarates.com/swakopmund-accommodation/swakopmund-sands/">
-<meta property="og:image" content="https://quiverandco.s3.eu-central-1.amazonaws.com/wp-content/uploads/20260319135413/SwakopmundSands9-1-jpg.webp">
+<meta property="og:title" content="Toshari Lodge | South Etosha">
+<meta property="og:description" content="Toshari Lodge in South Etosha, Namibia.">
+<meta property="og:url" content="https://namibiarates.com/south-etosha-accommodation/toshari-lodge/">
+<meta property="og:image" content="https://quiverandco.s3.eu-central-1.amazonaws.com/wp-content/uploads/20260317165411/toshari-lodge-1-1-jpg.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,7 +32,7 @@ header.site{position:sticky;top:0;z-index:50;display:flex;justify-content:space-
 .crumbs a{text-decoration:none;color:var(--text-muted);}.crumbs a:hover{color:var(--brand-accent);}
 .hdr-agent{cursor:pointer;font-family:var(--font-body);text-transform:uppercase;letter-spacing:1.5px;font-size:.7rem;padding:8px 16px;border-radius:5px;border:1px solid var(--brand-accent);background:transparent;color:var(--brand-accent);white-space:nowrap;transition:.25s;}
 .hdr-agent:hover{background:var(--brand-accent);color:#fff;}
-.hero{position:relative;height:calc(100vh - 79px);min-height:0;background:#2b2b2b url('https://quiverandco.s3.eu-central-1.amazonaws.com/wp-content/uploads/20260319135413/SwakopmundSands9-1-jpg.webp') center/cover no-repeat;display:flex;align-items:flex-end;}.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;width:26px;height:42px;border:2px solid rgba(255,255,255,.75);border-radius:14px;display:flex;justify-content:center;pointer-events:none}.scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:scrollDot 1.8s ease-in-out infinite}@keyframes scrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}.hero-thumbs{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:4}.hero-thumb{width:96px;height:62px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid rgba(255,255,255,.45);box-shadow:0 6px 18px rgba(0,0,0,.4);transition:border-color .25s,transform .25s;opacity:.85}.hero-thumb:hover{transform:scale(1.06)}.hero-thumb.active{border-color:#fff;opacity:1}@media(max-width:768px){.hero-thumbs{right:10px;left:auto;top:50%;bottom:auto;transform:translateY(-50%);flex-direction:column;gap:7px}.hero-thumb{width:54px;height:36px;border-width:1.5px}.hero-inner{padding-left:24px;padding-right:24px;padding-bottom:104px}}
+.hero{position:relative;height:calc(100vh - 79px);min-height:0;background:#2b2b2b url('https://wetu.com/imageHandler/c1920x1080/10559/toshari-14.jpg?fmt=jpg') center/cover no-repeat;display:flex;align-items:flex-end;}.scroll-cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;width:26px;height:42px;border:2px solid rgba(255,255,255,.75);border-radius:14px;display:flex;justify-content:center;pointer-events:none}.scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:scrollDot 1.8s ease-in-out infinite}@keyframes scrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}.hero-thumbs{position:absolute;right:26px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:10px;z-index:4}.hero-thumb{width:96px;height:62px;object-fit:cover;border-radius:8px;cursor:pointer;border:2px solid rgba(255,255,255,.45);box-shadow:0 6px 18px rgba(0,0,0,.4);transition:border-color .25s,transform .25s;opacity:.85}.hero-thumb:hover{transform:scale(1.06)}.hero-thumb.active{border-color:#fff;opacity:1}@media(max-width:768px){.hero-thumbs{right:10px;left:auto;top:50%;bottom:auto;transform:translateY(-50%);flex-direction:column;gap:7px}.hero-thumb{width:54px;height:36px;border-width:1.5px}.hero-inner{padding-left:24px;padding-right:24px;padding-bottom:104px}}
 .hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.65));}
 .hero-inner{position:relative;z-index:2;color:#fff;padding:0 50px 132px;max-width:none;margin:0;width:100%;}
 .hero .eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:.72rem;color:#e8dcc8;}
@@ -135,17 +135,18 @@ body{padding-top:74px;}
     <button class="search-icon-btn" aria-label="Search" onclick="location.href='/'"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>
   </nav>
 </header>
-<div class="hero"><a class="scroll-explore" href="javascript:void(0)" onclick="exploreDown();return false" aria-label="Explore"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a><a class="hero-back" href="/swakopmund-accommodation/">&#8592; Back to Swakopmund Accommodation</a>
+<div class="hero"><a class="scroll-explore" href="javascript:void(0)" onclick="exploreDown();return false" aria-label="Explore"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a><div class="hero-thumbs"><img class="hero-thumb active" src="https://wetu.com/imageHandler/c400x260/10559/toshari-14.jpg?fmt=jpg" data-full="https://wetu.com/imageHandler/c1920x1080/10559/toshari-14.jpg?fmt=jpg" alt="" loading="lazy" onerror="this.remove()"><img class="hero-thumb" src="https://wetu.com/imageHandler/c400x260/10559/img_e02921.jpg?fmt=jpg" data-full="https://wetu.com/imageHandler/c1920x1080/10559/img_e02921.jpg?fmt=jpg" alt="" loading="lazy" onerror="this.remove()"><img class="hero-thumb" src="https://wetu.com/imageHandler/c400x260/10559/img_e0355.jpg?fmt=jpg" data-full="https://wetu.com/imageHandler/c1920x1080/10559/img_e0355.jpg?fmt=jpg" alt="" loading="lazy" onerror="this.remove()"><img class="hero-thumb" src="https://wetu.com/imageHandler/c400x260/10559/img_e0331.jpg?fmt=jpg" data-full="https://wetu.com/imageHandler/c1920x1080/10559/img_e0331.jpg?fmt=jpg" alt="" loading="lazy" onerror="this.remove()"><img class="hero-thumb" src="https://wetu.com/imageHandler/c400x260/10559/gjco6474.jpg?fmt=jpg" data-full="https://wetu.com/imageHandler/c1920x1080/10559/gjco6474.jpg?fmt=jpg" alt="" loading="lazy" onerror="this.remove()"><img class="hero-thumb" src="https://wetu.com/imageHandler/c400x260/10559/toshari-90.jpg?fmt=jpg" data-full="https://wetu.com/imageHandler/c1920x1080/10559/toshari-90.jpg?fmt=jpg" alt="" loading="lazy" onerror="this.remove()"></div><a class="hero-back" href="/south-etosha-accommodation/">&#8592; Back to South Etosha Accommodation</a>
   <div class="hero-inner">
-    <div class="eyebrow">Swakopmund</div>
-    <h1>Swakopmund Sands</h1>
-    <div class="loc">Riverside in Swakopmund, Namibia</div>
+    <div class="eyebrow">South Etosha</div>
+    <h1>Toshari Lodge</h1>
+    <div class="loc">Riverside in South Etosha, Namibia</div>
     <button type="button" class="nr-mapbtn" onclick="nrOpenMap()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> View on map</button>
+    <button type="button" class="nr-mapbtn" style="margin-left:16px" onclick="nrOpenAvail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg> Availability</button>
   </div>
 </div>
 
 <section><div class="wrap">
-  <p class="lead">Stylish seaside guesthouse on Swakopmund&#x27;s Platinum Mile — walking distance to the beach, restaurants and town.</p>
+  <p class="lead">Eco-friendly lodge under mopane &amp; white seringa trees, a 20-minute drive from Etosha — the perfect safari gateway.</p>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
@@ -164,14 +165,14 @@ body{padding-top:74px;}
 
 
 <section style="padding-top:0"><div class="wrap">
-  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> Swakopmund<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of Swakopmund — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Tel:</strong> <a href="tel:0260319135">0260319135</a><br><strong>Email:</strong> <a href="mailto:info@swakopsands-namibia.com">info@swakopsands-namibia.com</a></p></div></div>
+  <div class="info-grid"><div class="info-card"><h3>Good to know</h3><p><strong>Region:</strong> South Etosha<br><strong>Rates:</strong> Rate to follow<br><strong>Rate validity:</strong> 2026 Season</p></div><div class="info-card"><h3>Experiences</h3><p>Guided activities, scenic drives and the highlights of South Etosha — full details and the bookable net STO rate are available to signed-in trade partners.</p></div><div class="info-card"><h3>Contact</h3><p><strong>Tel:</strong> <a href="tel:0260317165">0260317165</a><br><strong>Email:</strong> <a href="mailto:info@toshari-namibia.com">info@toshari-namibia.com</a></p></div></div>
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
   <div class="cta">
-    <h2>Enquire about Swakopmund Sands</h2>
+    <h2>Enquire about Toshari Lodge</h2>
     <p>Send us your dates and we'll come back with availability and a tailored quote.</p>
-    <a class="btn solid dt-specific-enquiry-open" href="mailto:info@namibiarates.com?subject=Enquiry%20-%20Swakopmund%20Sands">Enquire now</a>
+    <a class="btn solid dt-specific-enquiry-open" href="mailto:info@namibiarates.com?subject=Enquiry%20-%20Toshari%20Lodge">Enquire now</a>
   </div>
 </div></section>
 
@@ -216,7 +217,7 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 
 // PUBLIC RACK RATES — baked in (derived from STO ÷ 0.80, i.e. the 20% STO discount).
 // Net STO numbers are NOT here; they come from /api/sto only after a valid login.
-var RACK_YEARS = {"2026": {"note": "Published rack rates", "validity": "01 Jan – 31 Dec 2026", "sections": [{"title": "Low Season · 01 Jan – 31 Mar", "rows": [["Classic / Cottage Room — pp sharing", "1,260.00"], ["Luxury Room — pp sharing", "1,640.00"], ["Luxury Suite — pp sharing", "1,800.00"], ["Sea View Cottage Suite — pp sharing", "2,380.00"], ["Classic / Cottage Room — single", "1,670.00"], ["Luxury Room — single", "2,090.00"], ["Luxury Suite — single", "2,330.00"], ["Sea View Cottage Suite — single", "2,890.00"]]}, {"title": "Shoulder Season · 01 Apr – 30 Jun & 01 – 31 Dec", "rows": [["Classic / Cottage Room — pp sharing", "1,380.00"], ["Luxury Room — pp sharing", "1,800.00"], ["Luxury Suite — pp sharing", "1,990.00"], ["Sea View Cottage Suite — pp sharing", "2,570.00"], ["Classic / Cottage Room — single", "1,820.00"], ["Luxury Room — single", "2,290.00"], ["Luxury Suite — single", "2,570.00"], ["Sea View Cottage Suite — single", "3,200.00"]]}, {"title": "High Season · 01 Jul – 30 Nov", "rows": [["Classic / Cottage Room — pp sharing", "1,560.00"], ["Luxury Room — pp sharing", "1,950.00"], ["Luxury Suite — pp sharing", "2,130.00"], ["Sea View Cottage Suite — pp sharing", "2,780.00"], ["Classic / Cottage Room — single", "2,050.00"], ["Luxury Room — single", "2,480.00"], ["Luxury Suite — single", "2,750.00"], ["Sea View Cottage Suite — single", "3,400.00"]]}]}, "2027": {"note": "Published rack rates", "validity": "01 Jan – 31 Dec 2027", "sections": [{"title": "Low Season · 01 Jan – 31 Mar", "rows": [["Classic / Cottage Room — pp sharing", "1,360.00"], ["Luxury Room — pp sharing", "1,770.00"], ["Luxury Suite — pp sharing", "1,950.00"], ["Sea View Cottage Suite — pp sharing", "2,580.00"], ["Classic / Cottage Room — single", "1,800.00"], ["Luxury Room — single", "2,255.00"], ["Luxury Suite — single", "2,515.00"], ["Sea View Cottage Suite — single", "3,120.00"]]}, {"title": "Shoulder Season · 01 Apr – 30 Jun & 01 – 31 Dec", "rows": [["Classic / Cottage Room — pp sharing", "1,510.00"], ["Luxury Room — pp sharing", "1,970.00"], ["Luxury Suite — pp sharing", "2,170.00"], ["Sea View Cottage Suite — pp sharing", "2,810.00"], ["Classic / Cottage Room — single", "1,980.00"], ["Luxury Room — single", "2,495.00"], ["Luxury Suite — single", "2,800.00"], ["Sea View Cottage Suite — single", "3,485.00"]]}, {"title": "High Season · 01 Jul – 30 Nov", "rows": [["Classic / Cottage Room — pp sharing", "1,730.00"], ["Luxury Room — pp sharing", "2,160.00"], ["Luxury Suite — pp sharing", "2,360.00"], ["Sea View Cottage Suite — pp sharing", "3,080.00"], ["Classic / Cottage Room — single", "2,275.00"], ["Luxury Room — single", "2,755.00"], ["Luxury Suite — single", "3,050.00"], ["Sea View Cottage Suite — single", "3,775.00"]]}]}};
+var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
   var html='';
@@ -264,12 +265,12 @@ function openBooking(){
 function closeBooking(){ document.getElementById('booking-modal').classList.remove('open'); }
 function sendBooking(){
   var bk=window._bk; if(!bk||!bk.lines.length) return;
-  var body='SWAKOPMUND SANDS - NET STO BOOKING REQUEST (Namibia Rates)%0D%0A%0D%0A';
+  var body='TOSHARI LODGE - NET STO BOOKING REQUEST (Namibia Rates)%0D%0A%0D%0A';
   bk.lines.forEach(function(l){ body+=l.qty+' x '+l.name+'  @ N$ '+fmtN(l.price)+'  = N$ '+fmtN(l.lt)+'%0D%0A'; });
   body+='%0D%0AGRAND TOTAL (net STO): N$ '+fmtN(bk.total)+'%0D%0A';
-  window.location.href='mailto:info@namibiarates.com?subject=Swakopmund%20Sands%20-%20STO%20Booking%20Request&body='+body;
+  window.location.href='mailto:info@namibiarates.com?subject=Toshari%20Lodge%20-%20STO%20Booking%20Request&body='+body;
 }
-var LODGE='swakopmund-sands', TOKEN_KEY='nr_agent_token';
+var LODGE='toshari-lodge', TOKEN_KEY='nr_agent_token';
 
 function setHdrBtn(signedIn){
   var h=document.getElementById('hdr-agent');
@@ -281,14 +282,16 @@ function showRack(yr){
   setHdrBtn(false);
   var b=document.getElementById('mode-badge'); if(b){b.textContent='Rack Rates'; b.classList.remove('sto');}
   var rt=document.getElementById('rate-tables'), sub=document.getElementById('rate-sub');
-  var years=Object.keys(RACK_YEARS);
-  if(!yr||!RACK_YEARS[yr]) yr=RACK_YEARS['2026']?'2026':years[0];
-  var doc=RACK_YEARS[yr];
-  if(!doc||!doc.sections||!doc.sections.length){ if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>'; if(sub) sub.textContent='Rate to follow'; return; }
-  renderRates(doc,false);
-  var _b=document.getElementById('uc-belt');if(_b){_b.remove();var _h=document.querySelector('.main-header');if(_h)_h.style.top='0';document.body.style.paddingTop=(_h?_h.offsetHeight:0)+'px';}
-  if(years.length>1&&rt){var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 2px 16px';years.forEach(function(y){var bt=document.createElement('button');bt.type='button';bt.textContent=y+' season';var on=String(y)===String(yr);bt.style.cssText='cursor:pointer;font:inherit;padding:7px 16px;border-radius:20px;border:1px solid #a48256;background:'+(on?'#a48256':'transparent')+';color:'+(on?'#fff':'#a48256');bt.onclick=function(){showRack(y);};bar.appendChild(bt);});rt.insertBefore(bar,rt.firstChild);}
-  if(sub) sub.textContent=(doc.note||'Published rack rates')+(doc.validity?' · Valid '+doc.validity:'')+' · '+yr+' season';
+  function tbc(){ if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>'; if(sub) sub.textContent='Rate to follow'; }
+  if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-size:.95rem">Loading rates…</p>';
+  fetch('/api/rack?slug='+encodeURIComponent(LODGE)+'&full=1'+(yr?'&year='+encodeURIComponent(yr):''),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
+    var doc=j&&j.doc;
+    if(doc&&doc.sections&&doc.sections.length&&doc.sections.some(function(s){return s.rows&&s.rows.some(function(r){return r[0]&&(r[1]||r[1]===0);});})){
+      renderRates(doc,false);var _b=document.getElementById('uc-belt');if(_b){_b.remove();var _h=document.querySelector('.main-header');if(_h)_h.style.top='0';document.body.style.paddingTop=(_h?_h.offsetHeight:0)+'px';}
+      if(j&&j.years&&j.years.length>1&&rt){var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 2px 16px';j.years.forEach(function(y){var bt=document.createElement('button');bt.type='button';bt.textContent=y+' season';var on=String(y)===String(j.year);bt.style.cssText='cursor:pointer;font:inherit;padding:7px 16px;border-radius:20px;border:1px solid #a48256;background:'+(on?'#a48256':'transparent')+';color:'+(on?'#fff':'#a48256');bt.onclick=function(){showRack(y);};bar.appendChild(bt);});rt.insertBefore(bar,rt.firstChild);}
+      if(sub) sub.textContent=(doc.note||'Published rack rates')+(doc.validity?' · Valid '+doc.validity:'')+(j&&j.year?' · '+j.year+' season':'');
+    } else { tbc(); }
+  }).catch(function(){ tbc(); });
 }
 
 // Show net STO (signed-in state) using the rates returned by the server.
@@ -401,10 +404,11 @@ applySession();
   .nr-pop .nr-pop-sub{color:#8a8175;font-size:12px;margin-top:2px}
   @media(max-width:600px){.nr-map-overlay{padding:0}.nr-map-panel{max-width:none;height:100dvh;max-height:none;border-radius:0}}
 </style>
+<script>window.nrOpenAvail=function(){var d=new Date();d.setDate(d.getDate()+1);var iso=d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");window.open("https://book.nightsbridge.com/31381?startdate="+iso+"&nights=1","_blank","noopener");};</script>
 
 <div id="nr-map-overlay" class="nr-map-overlay" onclick="if(event.target===this)nrCloseMap()">
   <div class="nr-map-panel">
-    <div class="nr-map-bar"><span>Swakopmund Sands &middot; Swakopmund</span><button type="button" class="nr-map-x" aria-label="Close map" onclick="nrCloseMap()">&times;</button></div>
+    <div class="nr-map-bar"><span>Toshari Lodge &middot; South Etosha</span><button type="button" class="nr-map-x" aria-label="Close map" onclick="nrCloseMap()">&times;</button></div>
     <div id="lodge-map"></div>
   </div>
 </div>
@@ -412,7 +416,7 @@ applySession();
 <script>
 (function(){
   var inited=false, map=null, marker=null;
-  var fb=[-22.68,14.53], name='Swakopmund Sands', region='Swakopmund';
+  var fb=[-19.35,15.9], name='Toshari Lodge', region='South Etosha';
   function heroPhoto(){try{var h=document.querySelector('.hero');var bg=getComputedStyle(h).backgroundImage;var m=/url\(["']?(.*?)["']?\)/.exec(bg);return m?m[1]:'';}catch(e){return '';}}
   function place(la,lo){marker.setLatLng([la,lo]);map.setView([la,lo],11);marker.openPopup();}
   function build(){
@@ -421,7 +425,7 @@ applySession();
     var terrain=L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom:17,attribution:'&copy; OpenTopoMap'});
     var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
     var standard=L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; OpenStreetMap'});
-    map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView(fb,10);
+    map=L.map('lodge-map',{scrollWheelZoom:false,layers:[sat]}).setView(fb,8);
     L.control.layers({'Satellite':sat,'Terrain':terrain,'Minimal':minimal,'Standard':standard},null,{collapsed:false}).addTo(map);
     var pin=L.divIcon({className:'nr-pin',iconSize:[16,16],iconAnchor:[8,8],popupAnchor:[0,-9],html:'<div class="nr-pulse"></div>'});
     var photo=heroPhoto();
@@ -437,5 +441,5 @@ applySession();
   document.addEventListener('keydown',function(e){if(e.key==='Escape')nrCloseMap();});
 })();
 </script>
-<script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.rg2-wrap')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t){var h=document.querySelector('.hero');t=h&&h.nextElementSibling;}if(!t)t=document.querySelector('section');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script></body>
+<script>(function(){var h=document.querySelector(".hero");if(!h)return;var ts=document.querySelectorAll(".hero-thumb");ts.forEach(function(t){t.addEventListener("click",function(){h.style.backgroundImage="url('"+t.dataset.full+"')";ts.forEach(function(x){x.classList.remove("active")});t.classList.add("active")})})})();</script><script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.rg2-wrap')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t){var h=document.querySelector('.hero');t=h&&h.nextElementSibling;}if(!t)t=document.querySelector('section');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script></body>
 </html>
