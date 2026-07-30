@@ -23,7 +23,7 @@ input{min-width:230px}
 .wrap{padding:0 28px 40px}
 table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(184,149,106,.16);font-size:.86rem}
-th{position:sticky;top:var(--stick,0);z-index:5;background:#f4efe7;box-shadow:0 1px 0 rgba(184,149,106,.35);font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
+th{background:#f4efe7;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
 th.cell,td.cell{text-align:center;width:70px}
 tbody tr:hover{background:rgba(200,90,23,.04)}
 .dot{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:middle}
@@ -105,5 +105,4 @@ function render(){
  document.querySelectorAll('th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();}));
  ['q','region','status'].forEach(id=>document.getElementById(id).addEventListener('input',render));
  tiles();render();})();
-</script><script>(function(){function fit(){var tb=document.querySelector(".topbar");if(tb)document.documentElement.style.setProperty("--stick",tb.offsetHeight+"px");}window.addEventListener("load",fit);window.addEventListener("resize",fit);document.addEventListener("input",function(){setTimeout(fit,50);});setTimeout(fit,120);setTimeout(fit,500);})();</script>
-</body></html>
+</script></body></html>
