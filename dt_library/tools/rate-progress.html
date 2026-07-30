@@ -4,7 +4,7 @@
 :root{--terra:#c85a17;--terra6:rgba(200,90,23,.6);--gold:#B8956A;--char:#2C2824;--muted:#7A7269;--bg:#EEEAE3;--card:#fff;--border:rgba(184,149,106,.28);--ok:#c85a17;--seafoam:#87a996}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--char);font-family:Inter,system-ui,sans-serif;font-size:14px}
-.topbar{position:sticky;top:0;z-index:20;background:var(--bg);box-shadow:0 6px 14px -8px rgba(60,53,48,.25)}
+.topbar{background:var(--bg)}
 header{padding:26px 28px 10px}
 .back-home{display:inline-block;margin-bottom:12px;font-size:.72rem;letter-spacing:1px;text-transform:uppercase;font-weight:600;color:#c85a17;text-decoration:none;border:1px solid rgba(200,90,23,.4);border-radius:5px;padding:7px 14px;background:rgba(200,90,23,.08);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:all .2s}
 .back-home:hover{background:rgba(200,90,23,.6);color:#fff;border-color:rgba(200,90,23,.6)}
@@ -23,7 +23,7 @@ input{min-width:230px}
 .wrap{padding:0 28px 40px}
 table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(184,149,106,.16);font-size:.86rem}
-th{position:sticky;top:var(--stick,110px);z-index:5;background:#f4efe7;box-shadow:0 1px 0 rgba(184,149,106,.35);font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
+th{position:sticky;top:0;z-index:5;background:#f4efe7;box-shadow:0 1px 0 rgba(184,149,106,.35);font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);cursor:pointer;white-space:nowrap;user-select:none}
 th.cell,td.cell{text-align:center;width:70px}
 tbody tr:hover{background:rgba(200,90,23,.04)}
 .dot{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:middle}
@@ -109,5 +109,4 @@ function render(){
  document.querySelectorAll('th[data-k]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();}));
  ['q','region','status','category'].forEach(id=>document.getElementById(id).addEventListener('input',render));
  render();})();
-</script><script>(function(){function so(){var tb=document.querySelector(".topbar");if(tb)document.documentElement.style.setProperty("--stick",tb.offsetHeight+"px");}so();window.addEventListener("load",so);window.addEventListener("resize",so);try{var tb=document.querySelector(".topbar");if(tb&&window.ResizeObserver)new ResizeObserver(so).observe(tb);}catch(e){}setTimeout(so,200);setTimeout(so,600);})();</script>
-</body></html>
+</script></body></html>
