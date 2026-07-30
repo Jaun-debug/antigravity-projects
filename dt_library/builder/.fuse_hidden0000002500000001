@@ -102,7 +102,7 @@ display:flex;align-items:center;justify-content:space-between;gap:18px;padding:1
 </style>
 </head>
 <body>
-
+<div class="banner">&#9888; <strong>Development Version.</strong> Rates are illustrative examples only — confirm live rates &amp; availability with each property.</div>
 <div class="topbar">
   <a class="brand" href="/">Namibia<span>Rates</span> &middot; Itinerary Builder</a>
   <div class="top-actions">
