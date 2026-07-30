@@ -45,11 +45,11 @@
    "region": "",
    "type": "lodge",
    "sto26": true,
-   "sto27": false,
+   "sto27": true,
    "rack26": null,
    "rack27": null,
-   "confidence": "auto",
-   "notes": "",
+   "confidence": "high",
+   "notes": "2027 STO loaded (Big Sky) — verified from rate sheet",
    "file": "ratesheets/ai_aiba_lodge.html",
    "category": "Lodge"
   },
@@ -643,11 +643,11 @@
    "region": "",
    "type": "lodge",
    "sto26": true,
-   "sto27": false,
+   "sto27": true,
    "rack26": null,
    "rack27": null,
-   "confidence": "auto",
-   "notes": "",
+   "confidence": "high",
+   "notes": "2027 STO loaded (Big Sky) — verified from rate sheet",
    "file": "ratesheets/etendeka_mountain_camp.html",
    "category": "Lodge"
   },
@@ -3266,10 +3266,10 @@
   }
  ],
  "summary": {
-  "total": 239,
-  "sto26": 235,
-  "sto27": 5,
-  "rack26": 4,
+  "total": 251,
+  "sto26": 247,
+  "sto27": 7,
+  "rack26": 16,
   "rack27": 4,
   "rackKnown": 2
  }
