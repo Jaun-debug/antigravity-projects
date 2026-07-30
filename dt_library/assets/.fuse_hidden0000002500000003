@@ -221,5 +221,5 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
   }
   function init(){build();}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
-  try{var _nrt;var mo=new MutationObserver(function(){clearTimeout(_nrt);_nrt=setTimeout(function(){if(!document.getElementById("nr-yrtoggle")){build();}else if(year()==="2027"){apply();}},250);});mo.observe(document.body||document.documentElement,{childList:true,subtree:true});}catch(x){}
+  try{var mo=new MutationObserver(function(){build();});mo.observe(document.documentElement,{childList:true,subtree:true});}catch(x){}
 }catch(e){}})();
