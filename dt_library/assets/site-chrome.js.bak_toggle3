@@ -165,20 +165,18 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
   window.addEventListener("pagehide",function(){send("pagehide");});
   window.addEventListener("beforeunload",function(){send("beforeunload");});
 })();
-/* ===== Agent 26/27 STO season toggle (Cowork). ONE floating control: drives real 2027 rates where present (standalone sheets AND group-collection sheets that carry both panes), hides any inline toggle, or shows "rates to follow" where there is no 2027 data. Default 2026 leaves the page untouched. ===== */
+/* ===== Agent 26/27 STO season toggle (Cowork). ONE control: the floating toggle drives real 2027 rates where a sheet has them (and hides the sheet's own inline toggle), or shows "rates to follow" where it doesn't. Default 2026 leaves the page untouched. ===== */
 ;(function(){"use strict";try{
   var KEY="nr_sto_year";
   function isAgent(){try{var e=document.querySelectorAll("a,button,span");for(var i=0;i<e.length;i++){var t=(e[i].textContent||"").trim().toLowerCase();if(t==="sign out"||t==="signout")return true;}}catch(x){}return false;}
   function year(){return localStorage.getItem(KEY)==="2027"?"2027":"2026";}
-  function hasNative(){try{return (typeof window.setRateYear==="function")||!!document.querySelector(".year-pane[data-year]");}catch(x){return false;}}
+  function hasNative(){try{return (typeof window.setRateYear==="function")||!!document.querySelector(".year-pane[data-year],.yr-btn");}catch(x){return false;}}
   function hideInline(){try{var nt=document.querySelector(".year-toggle");if(nt)nt.style.display="none";}catch(x){}}
   function driveNative(y){try{
     if(typeof window.setRateYear==="function"){window.setRateYear(y);}
     else{
-      var any=false;
-      document.querySelectorAll(".year-pane[data-year]").forEach(function(p){p.style.display=(p.getAttribute("data-year")===y)?"":"none";any=true;});
+      document.querySelectorAll(".year-pane[data-year]").forEach(function(p){p.style.display=(p.getAttribute("data-year")===y)?"":"none";});
       document.querySelectorAll(".yr-btn").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-y")===y);});
-      if(any && typeof window.updateTotal==="function"){try{window.updateTotal();}catch(e){}}
     }
     hideInline();
   }catch(x){}}
@@ -189,7 +187,6 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     return out;
   }
   function hideTables(on){rateTables().forEach(function(el){
-    if(el.closest&&el.closest(".year-pane"))return; /* real dual-year sheets manage their own panes */
     if(on){if(el.getAttribute("data-nr-open")==null){el.setAttribute("data-nr-open",el.style.display||"");el.style.display="none";}}
     else{if(el.getAttribute("data-nr-open")!=null){el.style.display=el.getAttribute("data-nr-open");el.removeAttribute("data-nr-open");}}
   });}
@@ -223,14 +220,6 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     reflect();
   }
   function pick(y){localStorage.setItem(KEY,(y==="2027")?"2027":"2026");applyState(year());}
-  /* group-collection sheets re-render a lodge's rates on open — re-apply the chosen year afterwards */
-  function wrapOpen(){try{
-    if(typeof window.openProperty==="function" && !window.openProperty.__nrYr){
-      var _op=window.openProperty;
-      window.openProperty=function(){var r=_op.apply(this,arguments);try{setTimeout(function(){applyState(year());},0);}catch(e){}return r;};
-      window.openProperty.__nrYr=1;
-    }
-  }catch(x){}}
   function build(){
     if(!isAgent())return;
     if(!document.getElementById("nr-yrtoggle")){
@@ -240,15 +229,13 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
       document.body.appendChild(w);
       w.addEventListener("click",function(e){var b=e.target&&e.target.closest?e.target.closest("button"):null;if(b)pick(b.getAttribute("data-y"));});
     }
-    wrapOpen();
     applyState(year());
   }
   function init(){build();}
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
   try{var _nrt;var mo=new MutationObserver(function(){clearTimeout(_nrt);_nrt=setTimeout(function(){
-    wrapOpen();
     if(!document.getElementById("nr-yrtoggle")){build();return;}
     reflect();
-    if(!hasNative()&&year()==="2027"){hideTables(true);showNote(true);}
+    if(!hasNative()&&year()==="2027"){hideTables(true);showNote(true);}   /* group sheets: re-hide freshly opened tables */
   },250);});mo.observe(document.body||document.documentElement,{childList:true,subtree:true});}catch(x){}
 }catch(e){}})();
