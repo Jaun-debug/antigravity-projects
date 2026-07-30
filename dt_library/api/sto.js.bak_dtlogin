@@ -480,26 +480,25 @@ module.exports = async (req, res) => {
   const pass = String(body.password || '');
   const lodge = String(body.lodge || '').trim();
 
-  // Primary login: Vercel env vars take precedence; default is the
-  // Desert Tracks credential dt / dt (username & password, not case-sensitive).
-  const VALID_USER = (process.env.AGENT_USER || 'dt').trim().toLowerCase();
-  const VALID_PASS = process.env.AGENT_PASS || 'dt';
+  // Primary login: Vercel env vars take precedence; default is the demo
+  // credential ol / ol.
+  const VALID_USER = (process.env.AGENT_USER || 'ol').trim().toLowerCase();
+  const VALID_PASS = process.env.AGENT_PASS || 'ol';
 
-  // Additional always-accepted logins. This guarantees dt / dt works even if
+  // Additional always-accepted logins. This guarantees ol / ol works even if
   // env vars are set to something else. Each issues the same session token.
   const EXTRA_LOGINS = [
-    { user: 'dt', pass: 'dt' },
+    { user: 'ol', pass: 'ol' },
   ];
 
   const validToken = sessionToken(VALID_PASS);
 
   // ── PASSWORD PROTECTION ENABLED ──────────────────────────────────────────
-  // Sign-in requires a valid credential (dt / dt) or an existing session token.
+  // Sign-in requires a valid credential (ol / ol) or an existing session token.
   const authedByToken = token && token === validToken;
-  const passLc = pass.toLowerCase();
   const authedByCreds =
-    (user && user === VALID_USER && passLc === VALID_PASS.toLowerCase()) ||
-    EXTRA_LOGINS.some(function (c) { return user === c.user && passLc === c.pass; });
+    (user && user === VALID_USER && pass === VALID_PASS) ||
+    EXTRA_LOGINS.some(function (c) { return user === c.user && pass === c.pass; });
   if (!authedByToken && !authedByCreds) {
     return res.status(401).json({ error: 'Invalid agent credentials.' });
   }
