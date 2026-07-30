@@ -60,7 +60,6 @@
     var c = document.createElement('a');
     c.id = 'nr-cart'; c.href = '/itinerary/';
     c.setAttribute('aria-label', 'View itinerary');
-    c.addEventListener('click', function (e) { if (count() === 0) { e.preventDefault(); toast('Please select your first lodge to start an itinerary.'); } });
     document.body.appendChild(c);
   }
   function render() {
@@ -68,10 +67,9 @@
     ensureCart();
     var c = document.getElementById('nr-cart'); if (!c) return;
     var n = count();
-    var agent = (function(){try{if(document.getElementById('nr-addtab'))return true;var e=document.querySelectorAll('a,button,span');for(var i=0;i<e.length;i++){var t=(e[i].textContent||'').trim().toLowerCase();if(t==='sign out'||t==='signout')return true;}}catch(x){}return false;})();
-    if (n > 0 || agent) {
+    if (n > 0) {
       c.style.display = 'inline-flex';
-      c.innerHTML = '<span class="nr-ic">&#129523;</span> View Itinerary' + (n > 0 ? ' <span class="nr-badge">' + n + '</span>' : '');
+      c.innerHTML = '<span class="nr-ic">&#129523;</span> Itinerary <span class="nr-badge">' + n + '</span>';
     } else {
       c.style.display = 'none';
     }
