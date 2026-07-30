@@ -10,6 +10,7 @@ h1{font-family:Georgia,"Cormorant Garamond",serif;font-weight:500;font-size:1.7r
 .tiles{display:flex;flex-wrap:wrap;gap:12px;padding:14px 28px}
 .tile{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;min-width:120px;box-shadow:0 6px 18px rgba(60,53,48,.06)}
 .tile .n{font-size:1.5rem;font-weight:600;color:var(--terra)}
+.tile .pct{font-size:.9rem;font-weight:500;color:var(--muted)}
 .tile .l{font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:2px}
 .tile .bar{height:5px;border-radius:3px;background:var(--border);margin-top:8px;overflow:hidden}
 .tile .bar>i{display:block;height:100%;background:var(--terra6)}
@@ -75,7 +76,7 @@ function tiles(){const s=DATA.summary,t=DATA.rows.length;const pct=(n)=>Math.rou
   ['26 Rack (verified)',s.rack26,pct(s.rack26)],
   ['27 STO',s.sto27,pct(s.sto27)],
   ['27 Rack (verified)',s.rack27,pct(s.rack27)],
- ].map(([l,n,p])=>`<div class="tile"><div class="n">${n}</div><div class="l">${l}</div>${p!==''?`<div class="bar"><i style="width:${p}%"></i></div>`:''}</div>`).join('');}
+ ].map(([l,n,p])=>`<div class="tile"><div class="n">${n}${p!==''?(" <span class='pct'>"+p+"%</span>"):""}</div><div class="l">${l}</div>${p!==''?`<div class="bar"><i style="width:${p}%"></i></div>`:''}</div>`).join('');}
 let sortK='lodge',sortDir=1;
 function render(){
  const q=document.getElementById('q').value.toLowerCase();
