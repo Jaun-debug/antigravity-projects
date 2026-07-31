@@ -108,6 +108,7 @@ display:flex;align-items:center;justify-content:space-between;gap:18px;padding:1
 @media(max-width:880px){.layout{flex-direction:column}.side{position:static;flex-basis:auto;width:100%}.nav{display:flex;flex-wrap:wrap;gap:6px}.nav a{margin:0}.grid2,.grid3,.ppgrid{grid-template-columns:1fr}}
 @media print{.banner,.topbar,.side,.totalbar,.addbtn,.rm,.viewlink{display:none!important}.layout{display:block}body{background:#fff}}
 </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
@@ -116,7 +117,7 @@ display:flex;align-items:center;justify-content:space-between;gap:18px;padding:1
   <div class="top-actions">
     <button class="btn ghost" id="btn-save" type="button">Save quote</button>
     <button class="btn ghost" id="btn-saved" type="button">Saved quotes</button>
-    <button class="btn ghost" onclick="window.print()" type="button">Print / PDF</button>
+    <button class="btn ghost" onclick="savePDF()" type="button">Save PDF</button>
     <button class="btn" id="btn-saveexit" type="button">Save &amp; Exit</button>
     <a class="btn dark" href="/itinerary/">&larr; View Itinerary</a>
   </div>
@@ -279,6 +280,54 @@ function actPaxVal(x){var p=(x.pax===''||x.pax==null)?tripPax():parseInt(x.pax);
 function actLine(x){return num(x.amount)*actPaxVal(x);}
 function sumAct(arr){var t=0;(arr||[]).forEach(function(x){t+=actLine(x);});return t;}
 function netTotal(){return accomTotal()+vehicleHire()+fuelCost()+sumLI(S.guide)+sumLI(S.flights)+sumAct(S.activities)+sumLI(S.extras)+sumLI(S.botswana)}
+// ---- one-click PDF of the priced quote (agent-facing) ----
+function fmtToday(){try{return new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return''}}
+function buildQuoteHTML(){
+  var C='#2b2620',MUT='#8a8175',BR='#e5ded4',OR='#c85a17';
+  var pax=Math.max(1,parseInt(S.adults)||1),net=netTotal(),sell=net*(1+num(S.markup)/100);
+  function sec(t,inner){return '<div style="page-break-inside:avoid;margin:0 0 15px"><div style="font-family:Arial,sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:'+OR+';border-bottom:1px solid '+BR+';padding-bottom:4px;margin-bottom:6px">'+t+'</div>'+inner+'</div>';}
+  function r2(a,b){return '<tr><td style="padding:4px 2px;border-bottom:1px solid '+BR+'">'+a+'</td><td style="padding:4px 2px;border-bottom:1px solid '+BR+';text-align:right;white-space:nowrap">'+b+'</td></tr>';}
+  function tbl(rows){return '<table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px">'+rows+'</table>';}
+  function liBlock(title,arr){var r='';(arr||[]).forEach(function(x){if((x.name||'').trim()===''&&!num(x.amount))return;r+=r2(esc(x.name||'Item'),money(num(x.amount)));});return r?sec(title,tbl(r)):'';}
+  var w=[];
+  w.push('<div style="font-family:Georgia,\'Times New Roman\',serif;color:'+C+';width:100%;max-width:720px;margin:0 auto;padding:4px;background:#fff">');
+  w.push('<div style="display:flex;justify-content:space-between;align-items:flex-end;border-bottom:2px solid '+OR+';padding-bottom:10px;margin-bottom:14px">'
+    +'<div><div style="font-size:22px;letter-spacing:.5px">Desert Tracks <span style="color:'+OR+'">Namibia</span></div>'
+    +'<div style="font-family:Arial,sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:'+MUT+';margin-top:3px">Safari Quotation</div></div>'
+    +'<div style="text-align:right;font-family:Arial,sans-serif;font-size:11px;color:'+MUT+'">'+esc(fmtToday())+'<br>Rate year '+esc(S.year||'2026')+'</div></div>');
+  w.push('<div style="font-family:Arial,sans-serif;font-size:12px;margin-bottom:14px"><div style="font-size:15px;font-family:Georgia,serif;margin-bottom:2px">'+esc(S.name||'Untitled quote')+'</div>'
+    +'<span style="color:'+MUT+'">'+pax+' adult'+(pax>1?'s':'')+(num(S.children)?' + '+num(S.children)+' child':'')+(S.startDate?(' · '+totalNights()+' nights from '+esc(fmtDisp(S.startDate))):'')+'</span></div>');
+  // itinerary
+  var irows='';S.lodges.forEach(function(d,i){if(d.lodgeIdx<0)return;var ci=catInfo(d);var room=ci.sh?ci.sh.n:'';
+    irows+='<tr><td style="padding:5px 2px;border-bottom:1px solid '+BR+';font-size:11px;color:'+MUT+';white-space:nowrap">'+(rowCheckIn(i)?esc(fmtDisp(rowCheckIn(i))):'')+'</td>'
+     +'<td style="padding:5px 2px;border-bottom:1px solid '+BR+'">'+esc(lodgeLabel(d))+'<div style="font-size:10px;color:'+MUT+'">'+esc(lodgeRegion2(d))+(room?(' · '+esc(room)):'')+'</div></td>'
+     +'<td style="padding:5px 2px;border-bottom:1px solid '+BR+';text-align:center">'+(d.nights||0)+'</td>'
+     +'<td style="padding:5px 2px;border-bottom:1px solid '+BR+';text-align:right;white-space:nowrap">'+money(rowSub(d))+'</td></tr>';});
+  if(irows)w.push(sec('Itinerary &amp; Accommodation','<table style="width:100%;border-collapse:collapse;font-family:Arial,sans-serif;font-size:12px"><tr><th style="text-align:left;padding:3px 2px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:'+MUT+';border-bottom:1.5px solid '+C+'">Date</th><th style="text-align:left;padding:3px 2px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:'+MUT+';border-bottom:1.5px solid '+C+'">Lodge</th><th style="text-align:center;padding:3px 2px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:'+MUT+';border-bottom:1.5px solid '+C+'">Nts</th><th style="text-align:right;padding:3px 2px;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:'+MUT+';border-bottom:1.5px solid '+C+'">Subtotal</th></tr>'+irows+'</table>'));
+  // vehicle & fuel
+  var vr='';if(vehicleHire()>0)vr+=r2('Vehicle hire'+(S.vehicleLabel?(' — '+esc(S.vehicleLabel)):''),money(vehicleHire()));if(fuelCost()>0)vr+=r2('Fuel',money(fuelCost()));if(vr)w.push(sec('Vehicle &amp; Fuel',tbl(vr)));
+  // activities (travel order)
+  var av=S.activities.map(function(x,i){return {x:x,i:i};}).filter(function(o){return (o.x.name||'').trim()!==''||num(o.x.amount)>0;});
+  av.sort(function(a,b){var oa=(a.x.ord==null?Infinity:a.x.ord),ob=(b.x.ord==null?Infinity:b.x.ord);if(oa!==ob)return oa-ob;return a.i-b.i;});
+  if(av.length){var ar='';av.forEach(function(o){var x=o.x;ar+=r2(esc(x.name||'Activity')+' <span style="color:'+MUT+';font-size:10px">('+money(num(x.amount))+' × '+actPaxVal(x)+')</span>',money(actLine(x)));});w.push(sec('Activities',tbl(ar)));}
+  w.push(liBlock('Guide',S.guide));w.push(liBlock('Flights',S.flights));w.push(liBlock('Extras',S.extras));w.push(liBlock('Botswana / Add-ons',S.botswana));
+  // pricing summary
+  w.push('<div style="page-break-inside:avoid;margin-top:8px;border-top:2px solid '+C+';padding-top:8px;font-family:Arial,sans-serif;font-size:12px">'
+    +tbl(r2('Net total','<b>'+money(net)+'</b>')+r2('Markup ('+num(S.markup)+'%)',money(sell-net)))
+    +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:10px 12px;background:'+OR+';color:#fff;border-radius:6px"><span style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase">Sell total</span><span style="font-family:Georgia,serif;font-size:20px">'+money(sell)+'</span></div>'
+    +'<div style="text-align:right;color:'+MUT+';margin-top:6px">Sell per adult: '+money(sell/pax)+'</div></div>');
+  w.push('<div style="font-family:Arial,sans-serif;font-size:9px;color:'+MUT+';margin-top:16px;border-top:1px solid '+BR+';padding-top:6px">Desert Tracks Namibia · bookings@desert-tracks.com · Rates are net STO, valid for the '+esc(S.year||'2026')+' season. This is a quotation, not a confirmation.</div>');
+  w.push('</div>');
+  return w.join('');
+}
+function savePDF(){
+  var fname=((S.name||'Namibia Quote').replace(/[^\w \-]+/g,'').trim()||'Namibia Quote')+' - Quote.pdf';
+  var el=document.createElement('div');el.style.cssText='position:absolute;left:-9999px;top:0;width:760px;background:#fff';el.innerHTML=buildQuoteHTML();document.body.appendChild(el);
+  function done(){try{document.body.removeChild(el);}catch(e){}}
+  if(window.html2pdf){
+    html2pdf().set({margin:[10,10,12,10],filename:fname,image:{type:'jpeg',quality:0.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},pagebreak:{mode:['css','legacy']}}).from(el).save().then(done).catch(function(){done();window.print();});
+  }else{done();window.print();}
+}
 function updateTotals(){
   S.markup=num(document.getElementById('t-markup').value);
   var net=netTotal(), sell=net*(1+S.markup/100), pax=Math.max(1,parseInt(S.adults)||1);
@@ -576,7 +625,7 @@ function overlayRack(){
 var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlayRack().then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
 fetch('/assets/providers.json').then(function(r){return r.json()}).then(function(j){PROVIDERS=j||{activities:[],vehicles:[]};if(!PROVIDERS.activities)PROVIDERS.activities=[];if(!PROVIDERS.vehicles)PROVIDERS.vehicles=[];try{renderPanel();}catch(e){}}).catch(function(){});
-function persist(){try{var it=S.lodges.map(function(d){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
+function persist(){try{var it=S.lodges.map(function(d,i){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;var pfx=nm+' — ';var opt=S.activities.filter(function(a){return a.ord===i&&((a.name||'').trim()!==''||num(a.amount)>0);}).map(function(a){var dn=a.name||'';if(dn.indexOf(pfx)===0)dn=dn.slice(pfx.length);return {n:dn,p:num(a.amount),pax:actPaxVal(a),line:actLine(a)};});return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],optExtras:opt,_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
