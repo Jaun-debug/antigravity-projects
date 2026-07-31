@@ -55,10 +55,10 @@ table.bd th{font-size:.6rem;letter-spacing:1.3px;text-transform:uppercase;color:
 table.bd th.r,table.bd td.r{text-align:right}
 table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align:top}
 .rownum{color:var(--gold);font-family:var(--head);font-size:1.05rem}
-.bd select,.bd input{border:1px solid var(--border);border-radius:5px;padding:7px 8px;font-family:var(--body);font-size:.84rem;background:#fbfaf8;color:var(--ink);width:100%}
+.bd select,.bd input{border:1px solid var(--border);border-radius:5px;padding:7px 8px;font-family:var(--body);font-size:.84rem;background:#fbfaf8;color:var(--ink);width:100%;max-width:100%;box-sizing:border-box}
 .bd .nights,.bd .pax{width:48px;text-align:center}
 .cellsel{display:flex;flex-direction:column;gap:5px;min-width:190px}
-.roomcell{display:flex;flex-direction:column;gap:6px;min-width:150px}
+.roomcell{display:flex;flex-direction:column;gap:6px;min-width:0}
 .qtygrid{display:flex;flex-direction:column;gap:4px;margin-top:2px}
 .qline{display:flex;align-items:center;gap:7px;min-width:0}
 .qline .qlbl{flex:0 0 74px;font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
@@ -366,7 +366,7 @@ function renderPanel(){persist();
     if(!S.lodges.length) body='<tr><td colspan="7" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
     h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate).</p>'
       +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'+'<div style="display:flex;gap:8px;align-items:center;margin:0 0 14px"><span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Rate year</span>'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(200,90,23,.6);background:'+(on?'rgba(200,90,23,.85)':'rgba(200,90,23,.08)')+';color:'+(on?'#fff':'#c85a17')+'">'+y+'</button>';}).join('')+'</div>'
-      +'<div style="overflow-x:auto;max-width:100%"><table class="bd" style="table-layout:auto"><thead><tr><th style="width:34px">#</th><th style="width:64px">Nights</th><th>Region &amp; Lodge</th><th>Rooms &amp; rates</th><th class="r">Per night</th><th class="r">Subtotal</th><th></th></tr></thead><tbody>'+body+'</tbody></table></div>'
+      +'<div style="max-width:100%"><table class="bd" style="table-layout:fixed;width:100%"><thead><tr><th style="width:26px">#</th><th style="width:50px">Nights</th><th style="width:22%">Region &amp; Lodge</th><th style="width:38%">Rooms &amp; rates</th><th class="r" style="width:84px">Per night</th><th class="r" style="width:92px">Subtotal</th><th style="width:30px"></th></tr></thead><tbody>'+body+'</tbody></table></div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
   } else if(active==='vehicle'){
