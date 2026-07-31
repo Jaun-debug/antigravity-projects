@@ -155,8 +155,8 @@ var active='trip';
 function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function num(v){return Math.max(0,parseFloat(v)||0)}
-function regions(){var o={};RATES.lodges.forEach(function(l){o[l.region]=1});return Object.keys(o).sort()}
-function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r)a.push(i)});return a}
+function regions(){var o={},y2=(S.year||'2026')==='2027';RATES.lodges.forEach(function(l){if(y2&&!has2027(l))return;o[l.region]=1});return Object.keys(o).sort()}
+function lodgesIn(r){var a=[],y2=(S.year||'2026')==='2027';RATES.lodges.forEach(function(l,i){if(l.region!==r)return;if(y2&&!has2027(l))return;a.push(i)});return a}
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
 
@@ -326,9 +326,9 @@ function renderPanel(){persist();
   } else if(active==='lodges'){
     var regs=regions();
     var body=S.lodges.map(function(d,i){
-      var regOpts='<option value="">Region…</option>'+regs.map(function(r){return '<option '+(d.region===r?'selected':'')+'>'+esc(r)+'</option>'}).join('');
+      var rlist=regs.slice();if(d.region&&rlist.indexOf(d.region)<0)rlist.push(d.region);var regOpts='<option value="">Region…</option>'+rlist.map(function(r){return '<option '+(d.region===r?'selected':'')+'>'+esc(r)+'</option>'}).join('');
       var lodgeOpts='<option value="-1">Lodge…</option>';
-      if(d.region) lodgesIn(d.region).forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>'});
+      if(d.region){var lis=lodgesIn(d.region);if(d.lodgeIdx>-1&&lis.indexOf(d.lodgeIdx)<0)lis=lis.concat([d.lodgeIdx]);lis.forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>'});}
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
       if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
