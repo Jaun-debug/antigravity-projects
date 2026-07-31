@@ -34467,6 +34467,100 @@
      "p": 47605.0
     }
    ]
+  },
+  {
+   "file": "/ratesheets/camp_khwai.html",
+   "name": "Camp Khwai",
+   "region": "Botswana",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Green Season (01 Dec – 31 Mar) · per person sharing (US$)",
+     "p": 388.0
+    },
+    {
+     "n": "Shoulder Season (Apr–Jun & Nov) · per person sharing (US$)",
+     "p": 454.0
+    },
+    {
+     "n": "High Season (01 Jul – 31 Oct) · per person sharing (US$)",
+     "p": 656.0
+    },
+    {
+     "n": "Green Season · single (+40%) (US$)",
+     "p": 543.2
+    },
+    {
+     "n": "Shoulder Season · single (+40%) (US$)",
+     "p": 635.6
+    },
+    {
+     "n": "High Season · single (+40%) (US$)",
+     "p": 918.4
+    },
+    {
+     "n": "Child 7–11 (50% of adult)",
+     "p": 0.0
+    },
+    {
+     "n": "Pilot / Guide (US$)",
+     "p": 160.0
+    }
+   ],
+   "currency": "USD"
+  },
+  {
+   "file": "/ratesheets/delta_camp_footsteps_in_africa.html",
+   "name": "Delta Camp (Footsteps in Africa)",
+   "region": "Botswana",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Green Season (Jan–Mar & Dec) · pps 1–2 nights (US$)",
+     "p": 450.0
+    },
+    {
+     "n": "Green Season · pps 3–5 nights (US$)",
+     "p": 433.0
+    },
+    {
+     "n": "Green Season · pps 6+ nights (US$)",
+     "p": 416.0
+    },
+    {
+     "n": "Shoulder Season (Apr–Jun & Nov) · pps 1–2 nights (US$)",
+     "p": 654.0
+    },
+    {
+     "n": "Shoulder Season · pps 3–5 nights (US$)",
+     "p": 630.0
+    },
+    {
+     "n": "Shoulder Season · pps 6+ nights (US$)",
+     "p": 605.0
+    },
+    {
+     "n": "High Season (Jul–Oct) · pps 1–2 nights (US$)",
+     "p": 757.0
+    },
+    {
+     "n": "High Season · pps 3–5 nights (US$)",
+     "p": 728.0
+    },
+    {
+     "n": "High Season · pps 6+ nights (US$)",
+     "p": 700.0
+    },
+    {
+     "n": "High Season · single supplement +30%",
+     "p": 0.0
+    },
+    {
+     "n": "Pilot / Guide (US$)",
+     "p": 212.0
+    }
+   ],
+   "currency": "USD"
   }
  ]
 }
