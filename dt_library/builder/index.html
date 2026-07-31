@@ -159,6 +159,8 @@ function regions(){var o={},y2=(S.year||'2026')==='2027';RATES.lodges.forEach(fu
 function lodgesIn(r){var a=[],y2=(S.year||'2026')==='2027';RATES.lodges.forEach(function(l,i){if(l.region!==r)return;if(y2&&!has2027(l))return;a.push(i)});return a}
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
+function isActivity(n){var s=(n||'').toLowerCase();if(/sharing|\bsingle\b|\broom\b|chalet|\btent\b|suite|villa|bungalow|cottage|\bdbb\b|b ?& ?b|per person per night|conservation|levy|park fee|tourism|deposit|\bmeal|breakfast|lunch|dinner|guide room|tour guide/.test(s))return false;return /game[ -]?drive|\bdrive\b|cruise|\bwalk\b|hik|nature drive|sundowner|mtb|bike|cycl|kayak|canoe|mokoro|balloon|fishing|quad|horse|riding|excursion|\btour\b|scenic|boat|tracking|township|cultural|museum|\bspa\b|massage|tasting|sandboard|living museum|e-bike/.test(s);}
+function lodgeActivities(L){var out=[],seen={};((L&&L.rates)||[]).forEach(function(r){if(isActivity(r.n)&&!seen[r.n]){seen[r.n]=1;out.push(r);}});return out;}
 
 /* ---- totals ---- */
 function accomTotal(){var t=0;S.lodges.forEach(function(d){t+=rowSub(d)});return t}
@@ -386,7 +388,7 @@ function renderPanel(){persist();
       +'<div class="sec-total"><span class="lbl">Vehicle + fuel</span><span class="amt" id="d-vfuel">'+money(vehicleHire()+fuelCost())+'</span></div>';
   } else if(active==='guide'){ h='<h2>Guide Costs</h2><p class="lead">Guide fees, accommodation, day rates.</p>'+liSection('guide','Guide','Guide fee / day rate'); }
   else if(active==='flights'){ h='<h2>Flights</h2><p class="lead">Scheduled or charter flight legs.</p>'+liSection('flights','Flights','Route — e.g. WDH → Sossusvlei'); }
-  else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates.</p>'+liSection('activities','Activities','Activity name'); }
+  else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates. Pick a chosen lodge’s own activities below, or add your own line.</p>';var _seenL={},_pk='';S.lodges.forEach(function(d){if(d.lodgeIdx<0||_seenL[d.lodgeIdx])return;var L=RATES.lodges[d.lodgeIdx];if(!L)return;_seenL[d.lodgeIdx]=1;var acts=lodgeActivities(L);if(!acts.length)return;var opts='<option value="">Add activity…</option>'+acts.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(L.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>'}).join('');_pk+='<div class="fld" style="max-width:520px;margin:0 0 8px"><label>'+esc(L.name)+' activities</label><select class="act-pick">'+opts+'</select></div>';});if(_pk)h+='<div style="margin:0 0 18px">'+_pk+'</div>';h+=liSection('activities','Activities','Activity name'); }
   else if(active==='extras'){ h='<h2>Extras</h2><p class="lead">Park fees, transfers, anything else.</p>'+liSection('extras','Extras','Extra item'); }
   else if(active==='botswana'){ h='<h2>Botswana / Add-ons</h2><p class="lead">Cross-border lodges and add-on segments.</p>'+liSection('botswana','Botswana / add-ons','Lodge / segment'); }
   else if(active==='final'){
@@ -462,6 +464,7 @@ function bindPanel(){
       var st=document.querySelector('#panel .sec-total .amt');if(st)st.textContent=money(sumLI(S[k]))};
   });
   document.querySelectorAll('#panel [data-add]').forEach(function(b){b.onclick=function(){S[b.dataset.add].push({name:'',amount:''});renderPanel()}});
+  document.querySelectorAll('#panel select.act-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;S.activities.push({name:o.dataset.name,amount:o.value});renderPanel();};});
   document.querySelectorAll('#panel .rm[data-k]').forEach(function(b){b.onclick=function(){S[b.dataset.k].splice(+b.dataset.i,1);renderPanel()}});
   updateTotals();
 }
