@@ -758,24 +758,28 @@
    "region": "Caprivi",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2647.2
+     "n": "Room B&B — per person sharing",
+     "p": 2912.0
     },
     {
-     "n": "Single -- BB",
-     "p": 3309.6
+     "n": "Room B&B — single",
+     "p": 3640.0
     },
     {
-     "n": "Hakusembe Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
     },
     {
-     "n": "Sunset Boat Cruise (guided, 1.5hrs, refreshments)",
-     "p": 345.0
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
     },
     {
-     "n": "Morning Boat Cruise -- Bird Lovers (guided, 1.5hrs, refreshments)",
-     "p": 345.0
+     "n": "Campsite — per person per night",
+     "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -798,6 +802,58 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3640.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4550.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3640.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4550.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -861,32 +917,28 @@
    "region": "Caprivi",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2647.2
+     "n": "Room B&B — per person sharing",
+     "p": 2912.0
     },
     {
-     "n": "Single -- BB",
-     "p": 3309.6
+     "n": "Room B&B — single",
+     "p": 3640.0
     },
     {
-     "n": "Namushasha Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
     },
     {
-     "n": "Bwabwata National Park Drive (guided, 3hrs, incl. park fees and boat)",
-     "p": 847.5
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
     },
     {
-     "n": "Afternoon Boat Cruise on Kwando (guided, 3hrs, refreshments)",
-     "p": 738.75
+     "n": "Campsite — per person per night",
+     "p": 324.0
     },
     {
-     "n": "Sundowner Boat Cruise (guided, 1.5hrs, refreshments)",
-     "p": 457.5
-    },
-    {
-     "n": "Morning Boat Cruise (guided, 1.5hrs, refreshments)",
-     "p": 457.5
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -909,6 +961,58 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3640.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4550.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3640.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4550.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -3089,12 +3193,16 @@
    "region": "Damaraland",
    "rates": [
     {
-     "n": "Double/Twin -- Sharing BB",
-     "p": 1827.2
+     "n": "Room B&B — per person sharing",
+     "p": 1918.4
     },
     {
-     "n": "Single -- BB",
-     "p": 2285.6
+     "n": "Room B&B — single",
+     "p": 2398.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -3105,6 +3213,34 @@
     {
      "n": "Room B&B — single",
      "p": 2398.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2398.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2997.5
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2398.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2997.5
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -4253,44 +4389,36 @@
    "region": "Damaraland",
    "rates": [
     {
-     "n": "Standard Double/Twin -- Sharing BB",
-     "p": 2245.6
+     "n": "Standard Room B&B — per person sharing",
+     "p": 2400.0
     },
     {
-     "n": "Standard -- Single BB",
-     "p": 2806.4
+     "n": "Standard Room B&B — single",
+     "p": 3000.0
     },
     {
-     "n": "Comfort Double/Twin/Family -- Sharing BB",
-     "p": 2759.2
+     "n": "Comfort Room B&B — per person sharing",
+     "p": 2948.8
     },
     {
-     "n": "Comfort -- Single BB",
-     "p": 3447.2
+     "n": "Comfort Room B&B — single",
+     "p": 3686.0
     },
     {
-     "n": "Palmwag Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
     },
     {
-     "n": "Half-Day Scenic Drive (guided, 3hrs, refreshments)",
-     "p": 1016.25
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
     },
     {
-     "n": "Full-Day Damaraland Excursion (guided, min 4 pax, full day)",
-     "p": 2666.25
+     "n": "Campsite — per person per night",
+     "p": 324.0
     },
     {
-     "n": "Morning Hike 2km (guided, 1.5hrs)",
-     "p": 300.0
-    },
-    {
-     "n": "Morning Hike 5km (guided, 3hrs)",
-     "p": 363.75
-    },
-    {
-     "n": "Half-Day Rhino Tracking (guided, min 2 pax -- not for under 12)",
-     "p": 2981.25
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -4321,6 +4449,74 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Standard Room B&B — per person sharing",
+     "p": 3000.0
+    },
+    {
+     "n": "Standard Room B&B — single",
+     "p": 3750.0
+    },
+    {
+     "n": "Comfort Room B&B — per person sharing",
+     "p": 3686.0
+    },
+    {
+     "n": "Comfort Room B&B — single",
+     "p": 4607.5
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Standard Room B&B — per person sharing",
+     "p": 3000.0
+    },
+    {
+     "n": "Standard Room B&B — single",
+     "p": 3750.0
+    },
+    {
+     "n": "Comfort Room B&B — per person sharing",
+     "p": 3686.0
+    },
+    {
+     "n": "Comfort Room B&B — single",
+     "p": 4607.5
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -5688,28 +5884,16 @@
    "region": "East Etosha",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2900.0
+     "n": "Room B&B — per person sharing",
+     "p": 2636.0
     },
     {
-     "n": "Single -- BB",
-     "p": 3622.4
+     "n": "Room B&B — single",
+     "p": 3295.0
     },
     {
-     "n": "Half-Day Etosha Excursion -- guided, 9-seater, 5-6hrs",
-     "p": 742.5
-    },
-    {
-     "n": "Full-Day Etosha Excursion -- guided, 9-seater, 9hrs",
-     "p": 1500.0
-    },
-    {
-     "n": "Private Waterhole Excursion -- King Nehale guests only, guided, 3hrs, incl. snacks",
-     "p": 1125.0
-    },
-    {
-     "n": "Cultural Experience -- guided, 9hrs",
-     "p": 888.75
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -5720,6 +5904,34 @@
     {
      "n": "Room B&B — single",
      "p": 3295.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3295.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4118.75
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3295.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4118.75
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -7058,32 +7270,20 @@
    "region": "Epupa",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2020.0
+     "n": "Room B&B — per person sharing",
+     "p": 2120.0
     },
     {
-     "n": "Single -- BB",
-     "p": 2524.0
+     "n": "Room B&B — single",
+     "p": 2650.0
     },
     {
-     "n": "Omarunga Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Campsite — per person per night",
+     "p": 324.0
     },
     {
-     "n": "Himba Village Visit (guided, 3-4hrs, refreshments included)",
-     "p": 896.25
-    },
-    {
-     "n": "Sundowner Walk above Epupa Falls (guided, 2hrs, snacks and drinks)",
-     "p": 356.25
-    },
-    {
-     "n": "Kunene River Walk (guided, 2hrs)",
-     "p": 333.75
-    },
-    {
-     "n": "Fly-In Day Visit -- Himba village and Epupa Falls excursion",
-     "p": 1350.0
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -7098,6 +7298,42 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2650.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 3312.5
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2650.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 3312.5
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -7328,32 +7564,16 @@
    "region": "Fish River Canyon",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2380.8
+     "n": "Room B&B — per person sharing",
+     "p": 2619.2
     },
     {
-     "n": "Single -- BB",
-     "p": 2975.2
+     "n": "Room B&B — single",
+     "p": 3274.0
     },
     {
-     "n": "Canyon Drive -- guided to Fish River lookouts incl. refreshments and park fees (3hrs)",
-     "p": 1200.0
-    },
-    {
-     "n": "Sundowner Drive in Canyon Park -- guided, refreshments (2-3hrs)",
-     "p": 652.5
-    },
-    {
-     "n": "Sunrise Hike -- guided, coffee and tea (3hrs)",
-     "p": 401.25
-    },
-    {
-     "n": "Morning Walk -- guided, 6km into Canyon Park (2-3hrs)",
-     "p": 213.75
-    },
-    {
-     "n": "Night Walk -- guided, 45min (direct booking only)",
-     "p": 217.5
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -7369,6 +7589,34 @@
      "n": "Tour Guide Room (DBB)",
      "p": 793.0
     }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3274.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4092.5
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3274.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4092.5
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
    ]
   },
   {
@@ -7377,32 +7625,20 @@
    "region": "Fish River Canyon",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2009.6
+     "n": "Room B&B — per person sharing",
+     "p": 2120.0
     },
     {
-     "n": "Single -- BB",
-     "p": 2514.4
+     "n": "Room B&B — single",
+     "p": 2650.0
     },
     {
-     "n": "Canyon Road Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Campsite — per person per night",
+     "p": 324.0
     },
     {
-     "n": "Canyon Drive to Fish River lookouts (guided, 3hrs)",
-     "p": 1200.0
-    },
-    {
-     "n": "Sundowner Drive in Canyon Park (guided, 2-3hrs)",
-     "p": 652.5
-    },
-    {
-     "n": "Sunrise Hike (guided, 3hrs)",
-     "p": 401.25
-    },
-    {
-     "n": "Morning Walk (guided, 2-3hrs)",
-     "p": 213.75
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -7422,6 +7658,42 @@
      "n": "Tour Guide Room (DBB)",
      "p": 793.0
     }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2650.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 3312.5
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2650.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 3312.5
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
    ]
   },
   {
@@ -7430,28 +7702,16 @@
    "region": "Fish River Canyon",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
+     "n": "Room B&B — per person sharing",
      "p": 1596.0
     },
     {
-     "n": "Single -- BB",
-     "p": 1996.0
+     "n": "Room B&B — single",
+     "p": 1995.0
     },
     {
-     "n": "Canyon Drive -- guided to Fish River lookouts (3hrs)",
-     "p": 1200.0
-    },
-    {
-     "n": "Sundowner Drive in Canyon Park (2-3hrs)",
-     "p": 652.5
-    },
-    {
-     "n": "Sunrise Hike (3hrs)",
-     "p": 401.25
-    },
-    {
-     "n": "Morning Walk (2-3hrs)",
-     "p": 213.75
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -7462,6 +7722,34 @@
     {
      "n": "Room B&B — single",
      "p": 1995.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 1995.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2493.75
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 1995.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2493.75
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -7987,48 +8275,36 @@
    "region": "Kalahari",
    "rates": [
     {
-     "n": "Standard Double/Twin/Family -- Sharing BB",
-     "p": 2057.6
+     "n": "Standard Room B&B — per person sharing",
+     "p": 2263.2
     },
     {
-     "n": "Standard -- Single BB",
-     "p": 2571.2
+     "n": "Standard Room B&B — single",
+     "p": 2829.0
     },
     {
-     "n": "Comfort Double/Twin/Family -- Sharing BB",
-     "p": 2565.6
+     "n": "Comfort Room B&B — per person sharing",
+     "p": 2822.4
     },
     {
-     "n": "Comfort -- Single BB",
-     "p": 3208.0
+     "n": "Comfort Room B&B — single",
+     "p": 3528.0
     },
     {
-     "n": "Anib Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
     },
     {
-     "n": "Dinner pp -- buffet",
-     "p": 572.0
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
     },
     {
-     "n": "Dune Dinner pp (min 10, max 60 pax)",
-     "p": 1386.0
+     "n": "Campsite — per person per night",
+     "p": 324.0
     },
     {
-     "n": "Dune Dinner + Sundowner Drive pp",
-     "p": 1964.0
-    },
-    {
-     "n": "Sunrise / Sundowner Drive (guided, 3hrs, refreshments)",
-     "p": 701.25
-    },
-    {
-     "n": "Dune Walk (guided, 2hrs, morning only, refreshments)",
-     "p": 701.25
-    },
-    {
-     "n": "Morning Drive for Families (guided, 2hrs)",
-     "p": 566.25
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -8059,6 +8335,74 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Standard Room B&B — per person sharing",
+     "p": 2829.0
+    },
+    {
+     "n": "Standard Room B&B — single",
+     "p": 3536.25
+    },
+    {
+     "n": "Comfort Room B&B — per person sharing",
+     "p": 3528.0
+    },
+    {
+     "n": "Comfort Room B&B — single",
+     "p": 4410.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Standard Room B&B — per person sharing",
+     "p": 2829.0
+    },
+    {
+     "n": "Standard Room B&B — single",
+     "p": 3536.25
+    },
+    {
+     "n": "Comfort Room B&B — per person sharing",
+     "p": 3528.0
+    },
+    {
+     "n": "Comfort Room B&B — single",
+     "p": 4410.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -8142,16 +8486,20 @@
    "region": "Kalahari",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
+     "n": "Room B&B — per person sharing",
      "p": 1700.0
     },
     {
-     "n": "Single -- BB",
-     "p": 2124.0
+     "n": "Room B&B — single",
+     "p": 2125.0
     },
     {
-     "n": "Farmhouse Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Campsite — per person per night",
+     "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -8166,6 +8514,42 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2125.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2656.25
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2125.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2656.25
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -10764,26 +11148,26 @@
    "region": "Sossusvlei",
    "rates": [
     {
-     "n": "Per room/night -- Fully Inclusive (max 2 pax)",
-     "p": 24200.0
-    },
-    {
-     "n": "Namib Naukluft Lodge Airstrip return (min 2 pax)",
-     "p": 1275.0
-    },
-    {
-     "n": "Solitaire Lodge Airstrip return (min 2 pax)",
-     "p": 1600.0
-    },
-    {
-     "n": "Sossusvlei Lodge Airstrip return (min 2 pax)",
-     "p": 2555.0
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 26400.0
     }
    ],
    "rates_2027": [
     {
      "n": "Fully inclusive (per room, max 2)",
      "p": 26400.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 33000.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 33000.0
     }
    ]
   },
@@ -11364,28 +11748,28 @@
    "region": "Sossusvlei",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 1918.4
+     "n": "Room B&B — per person sharing",
+     "p": 2033.6
     },
     {
-     "n": "Single -- BB",
-     "p": 2400.0
+     "n": "Room B&B — single",
+     "p": 2542.0
     },
     {
-     "n": "Namib Desert Campsite pppn (10% commission)",
-     "p": 307.0
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
     },
     {
-     "n": "Sundowner Dune Drive -- guided, min 4 pax, 2-3hrs, refreshments",
-     "p": 701.25
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
     },
     {
-     "n": "Morning Dune Drive -- guided, min 4 pax, 2-3hrs, refreshments",
-     "p": 566.25
+     "n": "Campsite — per person per night",
+     "p": 324.0
     },
     {
-     "n": "Sossusvlei Excursion -- guided, incl. park fees and brunch, 5-6hrs",
-     "p": 2265.0
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -11413,6 +11797,58 @@
      "n": "Tour Guide Room (DBB)",
      "p": 793.0
     }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2542.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 3177.5
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2542.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 3177.5
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
    ]
   },
   {
@@ -11421,12 +11857,16 @@
    "region": "Sossusvlei",
    "rates": [
     {
-     "n": "Double/Triple -- Sharing BB",
-     "p": 2724.0
+     "n": "Room B&B — per person sharing (one-night stay)",
+     "p": 2955.2
     },
     {
-     "n": "Single -- BB",
-     "p": 3407.2
+     "n": "Room B&B — single (one-night stay)",
+     "p": 3694.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -11437,6 +11877,34 @@
     {
      "n": "Room B&B — single (one-night stay)",
      "p": 3694.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing (one-night stay)",
+     "p": 3694.0
+    },
+    {
+     "n": "Room B&B — single (one-night stay)",
+     "p": 4617.5
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing (one-night stay)",
+     "p": 3694.0
+    },
+    {
+     "n": "Room B&B — single (one-night stay)",
+     "p": 4617.5
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -11739,14 +12207,26 @@
    "region": "Sossusvlei",
    "rates": [
     {
-     "n": "Per room/night -- Fully Inclusive (max 2 pax)",
-     "p": 24200.0
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 26400.0
     }
    ],
    "rates_2027": [
     {
      "n": "Fully inclusive (per room, max 2)",
      "p": 26400.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 33000.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 33000.0
     }
    ]
   },
@@ -12143,20 +12623,16 @@
    "region": "Sossusvlei",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 4312.8
+     "n": "Room B&B — per person sharing",
+     "p": 4744.0
     },
     {
-     "n": "Single -- BB",
-     "p": 5391.2
+     "n": "Room B&B — single",
+     "p": 5930.0
     },
     {
-     "n": "Morning or Sundowner Dune Drive -- guided, 2-3hrs, refreshments",
-     "p": 701.25
-    },
-    {
-     "n": "Sossusvlei Excursion -- guided, incl. park fees and brunch, 5-6hrs",
-     "p": 2265.0
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -12172,6 +12648,34 @@
      "n": "Tour Guide Room (DBB)",
      "p": 793.0
     }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 5930.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 7412.5
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 5930.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 7412.5
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
    ]
   },
   {
@@ -12180,16 +12684,24 @@
    "region": "Sossusvlei",
    "rates": [
     {
-     "n": "1st room/night (max 2 pax)",
+     "n": "The Jetty — F&B inclusive (per room, max 2)",
      "p": 24200.0
     },
     {
-     "n": "2nd room supplement/night (max 2 pax)",
+     "n": "The Jetty — additional room (2 rooms)",
      "p": 14520.0
     },
     {
-     "n": "3rd room supplement/night (max 2 pax)",
+     "n": "The Jetty — additional room (3 rooms)",
      "p": 9680.0
+    },
+    {
+     "n": "The Mole — F&B inclusive (per room, max 2)",
+     "p": 24200.0
+    },
+    {
+     "n": "The Mole — additional room (2 rooms)",
+     "p": 14520.0
     }
    ],
    "rates_2027": [
@@ -12212,6 +12724,50 @@
     {
      "n": "The Mole — additional room (2 rooms)",
      "p": 14520.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "The Jetty — F&B inclusive (per room, max 2)",
+     "p": 30250.0
+    },
+    {
+     "n": "The Jetty — additional room (2 rooms)",
+     "p": 18150.0
+    },
+    {
+     "n": "The Jetty — additional room (3 rooms)",
+     "p": 12100.0
+    },
+    {
+     "n": "The Mole — F&B inclusive (per room, max 2)",
+     "p": 30250.0
+    },
+    {
+     "n": "The Mole — additional room (2 rooms)",
+     "p": 18150.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "The Jetty — F&B inclusive (per room, max 2)",
+     "p": 30250.0
+    },
+    {
+     "n": "The Jetty — additional room (2 rooms)",
+     "p": 18150.0
+    },
+    {
+     "n": "The Jetty — additional room (3 rooms)",
+     "p": 12100.0
+    },
+    {
+     "n": "The Mole — F&B inclusive (per room, max 2)",
+     "p": 30250.0
+    },
+    {
+     "n": "The Mole — additional room (2 rooms)",
+     "p": 18150.0
     }
    ]
   },
@@ -13557,32 +14113,12 @@
    "region": "South Etosha",
    "rates": [
     {
-     "n": "Camping2Go Tent -- Sharing pppn",
-     "p": 867.2
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
     },
     {
-     "n": "Camping2Go Tent -- Single pppn",
-     "p": 1732.8
-    },
-    {
-     "n": "Dinner pp",
-     "p": 415.0
-    },
-    {
-     "n": "Breakfast pp -- buffet",
-     "p": 284.0
-    },
-    {
-     "n": "Lunch pp",
-     "p": 228.0
-    },
-    {
-     "n": "Half-Day Etosha Excursion (guided, 24-seater, 5-6hrs)",
-     "p": 742.5
-    },
-    {
-     "n": "Full-Day Etosha Excursion (guided, 24-seater, 9hrs)",
-     "p": 1500.0
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
     }
    ],
    "rates_2027": [
@@ -13594,6 +14130,26 @@
      "n": "Camping2Go (bed only) — single",
      "p": 1840.0
     }
+   ],
+   "rack_2027": [
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    }
    ]
   },
   {
@@ -13602,20 +14158,16 @@
    "region": "South Etosha",
    "rates": [
     {
-     "n": "Double/Twin/Triple/Family -- Sharing BB",
-     "p": 2706.4
+     "n": "Room B&B — per person sharing",
+     "p": 2976.8
     },
     {
-     "n": "Single -- BB",
-     "p": 3384.0
+     "n": "Room B&B — single",
+     "p": 3721.0
     },
     {
-     "n": "Morning or Afternoon Half-Day Etosha Excursion -- guided, 9-seater, 5-6hrs",
-     "p": 742.5
-    },
-    {
-     "n": "Full-Day Etosha Excursion -- guided, 9-seater, 9hrs",
-     "p": 1500.0
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
     }
    ],
    "rates_2027": [
@@ -13626,6 +14178,34 @@
     {
      "n": "Room B&B — single",
      "p": 3721.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3721.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4651.25
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 3721.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 4651.25
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -14395,14 +14975,26 @@
    "region": "South Etosha",
    "rates": [
     {
-     "n": "Per room/night -- Fully Inclusive (max 2 pax)",
-     "p": 24200.0
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 26400.0
     }
    ],
    "rates_2027": [
     {
      "n": "Fully inclusive (per room, max 2)",
      "p": 26400.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 33000.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Fully inclusive (per room, max 2)",
+     "p": 33000.0
     }
    ]
   },
@@ -15534,12 +16126,16 @@
    "region": "Swakopmund",
    "rates": [
     {
-     "n": "Double/Twin/Family -- Sharing BB",
-     "p": 1589.6
+     "n": "Room B&B — per person sharing",
+     "p": 1684.8
     },
     {
-     "n": "Single -- BB",
-     "p": 1986.4
+     "n": "Room B&B — single",
+     "p": 2106.0
+    },
+    {
+     "n": "Tour Guide Room (B&B)",
+     "p": 1684.8
     }
    ],
    "rates_2027": [
@@ -15550,6 +16146,34 @@
     {
      "n": "Room B&B — single",
      "p": 2106.0
+    },
+    {
+     "n": "Tour Guide Room (B&B)",
+     "p": 1684.8
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2106.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2632.5
+    },
+    {
+     "n": "Tour Guide Room (B&B)",
+     "p": 1684.8
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 2106.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2632.5
     },
     {
      "n": "Tour Guide Room (B&B)",
@@ -17070,40 +17694,32 @@
    "region": "Windhoek",
    "rates": [
     {
-     "n": "Standard Safari Double -- Sharing BB",
-     "p": 1544.8
+     "n": "Standard Safari Room B&B — per person sharing",
+     "p": 1699.2
     },
     {
-     "n": "Standard Safari -- Single BB",
-     "p": 1929.6
+     "n": "Standard Safari Room B&B — single",
+     "p": 2124.0
     },
     {
-     "n": "Classic Safari Double/Twin -- Sharing BB",
-     "p": 1886.4
+     "n": "Classic Safari Room B&B — per person sharing",
+     "p": 2075.2
     },
     {
-     "n": "Classic Safari -- Single BB",
-     "p": 2358.4
+     "n": "Classic Safari Room B&B — single",
+     "p": 2594.0
     },
     {
-     "n": "Luxury Safari Suite -- Sharing BB",
-     "p": 2313.6
+     "n": "Luxury Safari Suite B&B — per person sharing",
+     "p": 2544.8
     },
     {
-     "n": "Luxury Safari Suite -- Single BB",
-     "p": 2892.8
+     "n": "Luxury Safari Suite B&B — single",
+     "p": 3181.0
     },
     {
-     "n": "Sunrise Drive (guided, +/-2.5hrs, refreshments)",
-     "p": 701.25
-    },
-    {
-     "n": "Game Drive (guided, +/-2hrs, refreshments)",
-     "p": 701.25
-    },
-    {
-     "n": "Sunset Drive (guided, +/-2.5hrs, refreshments)",
-     "p": 701.25
+     "n": "Tour Guide Room (DBB)",
+     "p": 1699.2
     }
    ],
    "rates_2027": [
@@ -17130,6 +17746,66 @@
     {
      "n": "Luxury Safari Suite B&B — single",
      "p": 3181.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 1699.2
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Standard Safari Room B&B — per person sharing",
+     "p": 2124.0
+    },
+    {
+     "n": "Standard Safari Room B&B — single",
+     "p": 2655.0
+    },
+    {
+     "n": "Classic Safari Room B&B — per person sharing",
+     "p": 2594.0
+    },
+    {
+     "n": "Classic Safari Room B&B — single",
+     "p": 3242.5
+    },
+    {
+     "n": "Luxury Safari Suite B&B — per person sharing",
+     "p": 3181.0
+    },
+    {
+     "n": "Luxury Safari Suite B&B — single",
+     "p": 3976.25
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 1699.2
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Standard Safari Room B&B — per person sharing",
+     "p": 2124.0
+    },
+    {
+     "n": "Standard Safari Room B&B — single",
+     "p": 2655.0
+    },
+    {
+     "n": "Classic Safari Room B&B — per person sharing",
+     "p": 2594.0
+    },
+    {
+     "n": "Classic Safari Room B&B — single",
+     "p": 3242.5
+    },
+    {
+     "n": "Luxury Safari Suite B&B — per person sharing",
+     "p": 3181.0
+    },
+    {
+     "n": "Luxury Safari Suite B&B — single",
+     "p": 3976.25
     },
     {
      "n": "Tour Guide Room (DBB)",
@@ -17448,68 +18124,40 @@
    "region": "Windhoek",
    "rates": [
     {
-     "n": "Courtyard Double/Twin -- Sharing",
-     "p": 2261.6
+     "n": "Courtyard Room B&B — per person sharing",
+     "p": 2488.0
     },
     {
-     "n": "Courtyard Room -- Single",
-     "p": 3168.8
+     "n": "Courtyard Room B&B — single",
+     "p": 3483.2
     },
     {
-     "n": "Superior Upper-Level Double/Twin -- Sharing",
-     "p": 2482.4
+     "n": "Superior Upper-Level B&B — per person sharing",
+     "p": 2730.4
     },
     {
-     "n": "Superior Upper-Level -- Single",
-     "p": 3472.0
+     "n": "Superior Upper-Level B&B — single",
+     "p": 3822.56
     },
     {
-     "n": "Loft Double/Twin/Family -- Sharing",
-     "p": 3161.6
+     "n": "Loft Room B&B — per person sharing",
+     "p": 3477.6
     },
     {
-     "n": "Loft -- Single",
-     "p": 4412.0
+     "n": "Loft Room B&B — single",
+     "p": 4868.64
     },
     {
-     "n": "Terrace Suite per room/night (max 2 pax, incl. minibar)",
+     "n": "Terrace Suite B&B (per room, max 2)",
      "p": 13200.0
     },
     {
-     "n": "Terrace Suite -- additional room supplement/night",
+     "n": "Terrace Suite supplement",
      "p": 4400.0
     },
     {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 1 person — Low (N$)",
-     "p": 566.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 1 person — High (N$)",
-     "p": 612.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 2-3 pax pp — Low (N$)",
-     "p": 370.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 2-3 pax pp — High (N$)",
-     "p": 393.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Eros Airport return -- 1 person — Low (N$)",
-     "p": 214.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Eros Airport return -- 1 person — High (N$)",
-     "p": 231.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · City Transfer one-way -- 1 person — Low (N$)",
-     "p": 214.0
-    },
-    {
-     "n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · City Transfer one-way -- 1 person — High (N$)",
-     "p": 231.0
+     "n": "Tour Guide Single (B&B)",
+     "p": 2488.0
     }
    ],
    "rates_2027": [
@@ -17544,6 +18192,82 @@
     {
      "n": "Terrace Suite supplement",
      "p": 4400.0
+    },
+    {
+     "n": "Tour Guide Single (B&B)",
+     "p": 2488.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Courtyard Room B&B — per person sharing",
+     "p": 3110.0
+    },
+    {
+     "n": "Courtyard Room B&B — single",
+     "p": 4354.0
+    },
+    {
+     "n": "Superior Upper-Level B&B — per person sharing",
+     "p": 3413.0
+    },
+    {
+     "n": "Superior Upper-Level B&B — single",
+     "p": 4778.2
+    },
+    {
+     "n": "Loft Room B&B — per person sharing",
+     "p": 4347.0
+    },
+    {
+     "n": "Loft Room B&B — single",
+     "p": 6085.8
+    },
+    {
+     "n": "Terrace Suite B&B (per room, max 2)",
+     "p": 16500.0
+    },
+    {
+     "n": "Terrace Suite supplement",
+     "p": 5500.0
+    },
+    {
+     "n": "Tour Guide Single (B&B)",
+     "p": 2488.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Courtyard Room B&B — per person sharing",
+     "p": 3110.0
+    },
+    {
+     "n": "Courtyard Room B&B — single",
+     "p": 4354.0
+    },
+    {
+     "n": "Superior Upper-Level B&B — per person sharing",
+     "p": 3413.0
+    },
+    {
+     "n": "Superior Upper-Level B&B — single",
+     "p": 4778.2
+    },
+    {
+     "n": "Loft Room B&B — per person sharing",
+     "p": 4347.0
+    },
+    {
+     "n": "Loft Room B&B — single",
+     "p": 6085.8
+    },
+    {
+     "n": "Terrace Suite B&B (per room, max 2)",
+     "p": 16500.0
+    },
+    {
+     "n": "Terrace Suite supplement",
+     "p": 5500.0
     },
     {
      "n": "Tour Guide Single (B&B)",
@@ -17686,16 +18410,16 @@
    "region": "Windhoek",
    "rates": [
     {
-     "n": "1st room/night -- incl. all food and beverage (max 2 pax)",
-     "p": 24200.0
+     "n": "Urban Pod — F&B inclusive (per room, max 2)",
+     "p": 26400.0
     },
     {
-     "n": "2nd room supplement/night (max 2 pax)",
-     "p": 14520.0
+     "n": "Additional room supplement (2 rooms)",
+     "p": 15840.0
     },
     {
-     "n": "3rd room supplement/night (max 2 pax)",
-     "p": 9680.0
+     "n": "Additional room supplement (3 rooms)",
+     "p": 10560.0
     }
    ],
    "rates_2027": [
@@ -17710,6 +18434,34 @@
     {
      "n": "Additional room supplement (3 rooms)",
      "p": 10560.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Urban Pod — F&B inclusive (per room, max 2)",
+     "p": 33000.0
+    },
+    {
+     "n": "Additional room supplement (2 rooms)",
+     "p": 19800.0
+    },
+    {
+     "n": "Additional room supplement (3 rooms)",
+     "p": 13200.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Urban Pod — F&B inclusive (per room, max 2)",
+     "p": 33000.0
+    },
+    {
+     "n": "Additional room supplement (2 rooms)",
+     "p": 19800.0
+    },
+    {
+     "n": "Additional room supplement (3 rooms)",
+     "p": 13200.0
     }
    ]
   },
@@ -18366,7 +19118,24 @@
    "file": "/ratesheets/luna_namib_collection.html",
    "name": "Luna Namib Collection",
    "region": "Sossusvlei",
-   "rates": [],
+   "rates": [
+    {
+     "n": "King Unit — fully inclusive (per room, max 2)",
+     "p": 60000.0
+    },
+    {
+     "n": "Family Unit — fully inclusive (per room, max 4)",
+     "p": 52000.0
+    },
+    {
+     "n": "Twin Unit — fully inclusive (per room, max 2)",
+     "p": 40000.0
+    },
+    {
+     "n": "Guide/Pilot (Full Board, non-comm.)",
+     "p": 1500.0
+    }
+   ],
    "rates_2027": [
     {
      "n": "King Unit — fully inclusive (per room, max 2)",
@@ -18384,13 +19153,74 @@
      "n": "Guide/Pilot (Full Board, non-comm.)",
      "p": 1500.0
     }
+   ],
+   "rack_2027": [
+    {
+     "n": "King Unit — fully inclusive (per room, max 2)",
+     "p": 75000.0
+    },
+    {
+     "n": "Family Unit — fully inclusive (per room, max 4)",
+     "p": 65000.0
+    },
+    {
+     "n": "Twin Unit — fully inclusive (per room, max 2)",
+     "p": 50000.0
+    },
+    {
+     "n": "Guide/Pilot (Full Board, non-comm.)",
+     "p": 1500.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "King Unit — fully inclusive (per room, max 2)",
+     "p": 75000.0
+    },
+    {
+     "n": "Family Unit — fully inclusive (per room, max 4)",
+     "p": 65000.0
+    },
+    {
+     "n": "Twin Unit — fully inclusive (per room, max 2)",
+     "p": 50000.0
+    },
+    {
+     "n": "Guide/Pilot (Full Board, non-comm.)",
+     "p": 1500.0
+    }
    ]
   },
   {
    "file": "/ratesheets/etosha_safari_camp.html",
    "name": "Etosha Safari Camp",
    "region": "South Etosha",
-   "rates": [],
+   "rates": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 1584.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 1980.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 920.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 1840.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
    "rates_2027": [
     {
      "n": "Room B&B — per person sharing",
@@ -18411,6 +19241,58 @@
     {
      "n": "Campsite — per person per night",
      "p": 324.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 1980.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2475.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
+    },
+    {
+     "n": "Tour Guide Room (DBB)",
+     "p": 793.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "Room B&B — per person sharing",
+     "p": 1980.0
+    },
+    {
+     "n": "Room B&B — single",
+     "p": 2475.0
+    },
+    {
+     "n": "Camping2Go (bed only) — per person sharing",
+     "p": 1150.0
+    },
+    {
+     "n": "Camping2Go (bed only) — single",
+     "p": 2300.0
+    },
+    {
+     "n": "Campsite — per person per night",
+     "p": 360.0
     },
     {
      "n": "Tour Guide Room (DBB)",
