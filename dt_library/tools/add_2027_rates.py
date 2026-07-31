@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-# Additive 2027 pass: parses each sheet's 2027 pane into L['rates_2027'].
-# Leaves existing 2026 rates[] untouched. Re-runnable (auto-updates as sheets gain 2027).
+# Additive 2027 pass: parses each sheet's 2027 pane into L['rates_2027'],
+# folding the season heading (Low/High/Shoulder) into each rate label so
+# duplicate "Per Person Sharing"/"Single" rows are distinguishable.
+# Leaves 2026 rates[] untouched. Re-runnable.
 import json, os, re, datetime, shutil
 from bs4 import BeautifulSoup
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -19,6 +21,7 @@ def cell_text(td):
 GEN=re.compile(r'rate|price|n\$|nad|per person|pp\b|p\.p|sto|net|amount|cost|tariff',re.I)
 FEE=re.compile(r'rack|gross|\bfee\b|conservation|levy|park|tourism|commission|deposit',re.I)
 NET=re.compile(r'\bsto\b|\bnet\b',re.I)
+SEASON=re.compile(r'\b(low|high|shoulder|mid|green|peak|festive|value)\b|season',re.I)
 def parse_table(table):
     rates=[];headers=[];hdr_row=None
     thead=table.find('thead')
@@ -69,37 +72,50 @@ def parse_table(table):
             else: label=base
             rates.append({'n':label,'p':val})
     return rates
-def table_is_2027(table):
-    p=table
-    for _ in range(8):
+def year_ancestor(node):
+    p=node
+    for _ in range(10):
         p=p.parent
-        if p is None: break
+        if p is None: return None
         dy=p.get('data-year') if hasattr(p,'get') else None
-        if dy: return str(dy).strip()=='2027'
+        if dy: return str(dy).strip()
     return None
+def season_prefix(table):
+    h=table.find_previous(['h4','h3','h2'])
+    if not h or year_ancestor(h)!='2027': return ''
+    raw=clean(h.get_text(' ',strip=True))
+    m=re.search(r'(low|high|shoulder|mid|green|peak|festive|value)\s*season',raw,re.I)
+    base=m.group(0).title() if m else re.split(r'[(·]',raw)[0].strip(' -–—·')
+    if SEASON.search(base): return base
+    return ''
 def parse_2027(path):
     soup=BeautifulSoup(open(path,encoding='utf-8',errors='ignore').read(),'html.parser')
     out,seen=[],set()
     for table in soup.find_all('table'):
-        if table_is_2027(table)!=True: continue
+        if year_ancestor(table)!='2027': continue
+        pref=season_prefix(table)
         for r in parse_table(table):
-            k=(r['n'],r['p'])
+            nm=r['n']
+            if pref and pref.lower() not in nm.lower():
+                nm=pref+' · '+nm
+            k=(nm,r['p'])
             if k in seen: continue
-            seen.add(k);out.append(r)
+            seen.add(k);out.append({'n':nm,'p':r['p']})
     return out
 j=json.load(open(INDEX,encoding='utf-8'))
-added=0;lodges_with=0
+lodges_with=0;total=0
 for L in j['lodges']:
     path=os.path.join(SHEET_DIR,os.path.basename(L.get('file','')))
     if not L.get('file') or not os.path.exists(path):
         L.pop('rates_2027',None); continue
     rs=parse_2027(path)
-    if rs: L['rates_2027']=rs; lodges_with+=1; added+=len(rs)
+    if rs: L['rates_2027']=rs; lodges_with+=1; total+=len(rs)
     else: L.pop('rates_2027',None)
-print('lodges with 2027:',lodges_with,'total 2027 entries:',added)
+print('lodges with 2027:',lodges_with,'entries:',total)
 for L in j['lodges']:
     if L.get('rates_2027'):
-        print(' -',L['name'],'->',len(L['rates_2027']),'entries; sample:',json.dumps(L['rates_2027'][:2],ensure_ascii=False))
+        print(' -',L['name']); 
+        for r in L['rates_2027'][:6]: print('     ',r['n'],'=',r['p'])
 ts=datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 shutil.copy2(INDEX,INDEX+f'.bak_{ts}')
 j['generated']=datetime.datetime.now().isoformat(timespec='seconds')
