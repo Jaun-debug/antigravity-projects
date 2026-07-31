@@ -214,7 +214,8 @@ function extrasBlock(it,i,client){
   var actArr=it.actCustom!=null?it.actCustom:info.activities;
   var actTxt=it.actCustom!=null?'':info.activitiesText;
   var incHas=incArr.length>0, actHas=actArr.length>0||!!actTxt;
-  if(client&&!incHas&&!actHas) return '';
+  var opt=(it.optExtras||[]).filter(function(o){return o&&(o.n||'').trim()!=='';}); var optHas=opt.length>0;
+  if(client&&!incHas&&!actHas&&!optHas) return '';
   function sec(kind,title,has,bodyHtml){
     if(client&&!has) return '';
     return '<div class="ex-sec"><div class="ex-head"><span class="ex-title">'+title+'</span>'
@@ -223,7 +224,9 @@ function extrasBlock(it,i,client){
   }
   var incBody=incHas?liChips(incArr):'<span class="ex-empty">Tap Edit to add what’s included.</span>';
   var actBody=actArr.length?liChips(actArr):(actTxt?'<p class="ex-prose">'+esc(actTxt)+'</p>':'<span class="ex-empty">Tap Edit to add activities.</span>');
-  return '<div class="extras">'+sec('inc','What’s included',incHas,incBody)+sec('act','Activities',actHas,actBody)+'</div>';
+  var optBody='<div class="chips">'+opt.map(function(o){var lab=esc(o.n);if(!client&&Number(o.line||o.p))lab+=' <span style="opacity:.55">· '+money(o.line||o.p)+'</span>';return '<span class="chip">'+lab+'</span>';}).join('')+'</div>';
+  var optSec=optHas?('<div class="ex-sec"><div class="ex-head"><span class="ex-title">Optional extras</span></div><div class="ex-body">'+optBody+'</div></div>'):'';
+  return '<div class="extras">'+sec('inc','What’s included',incHas,incBody)+sec('act','Activities',actHas,actBody)+optSec+'</div>';
 }
 
 function render(){
