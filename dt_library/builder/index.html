@@ -147,7 +147,7 @@ var SECTIONS=[
 var S={
   name:'',adults:2,children:0,markup:25,startDate:'',year:'2026',
   lodges:[],
-  tripType:'selfdrive', vehicleRate:0, vehicleDays:'', fuelKm:'', fuelType:'2wd', fuelBuffer:20,
+  tripType:'selfdrive', vehicleRate:0, vehicleDays:'', fuelKm:'', fuelType:'2wd', fuelBuffer:20, vSupplier:'', vehicleLabel:'',
   cons2wd:9, cons4wd:14, fuelPrice:22,
   guide:[],flights:[],activities:[],extras:[],botswana:[]
 };
@@ -161,6 +161,11 @@ function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
 function isActivity(n){var s=(n||'').toLowerCase();if(/sharing|\bsingle\b|\broom\b|chalet|\btent\b|suite|villa|bungalow|cottage|\bdbb\b|b ?& ?b|per person per night|conservation|levy|park fee|tourism|deposit|\bmeal|breakfast|lunch|dinner|guide room|tour guide/.test(s))return false;return /game[ -]?drive|\bdrive\b|cruise|\bwalk\b|hik|nature drive|sundowner|mtb|bike|cycl|kayak|canoe|mokoro|balloon|fishing|quad|horse|riding|excursion|\btour\b|scenic|boat|tracking|township|cultural|museum|\bspa\b|massage|tasting|sandboard|living museum|e-bike/.test(s);}
 function lodgeActivities(L){var out=[],seen={};((L&&L.rates)||[]).forEach(function(r){if(isActivity(r.n)&&!seen[r.n]){seen[r.n]=1;out.push(r);}});return out;}
+// --- external activity & vehicle providers (assets/providers.json) ---
+var PROVIDERS={activities:[],vehicles:[]};
+function itinRegions(){var seen={},list=[];S.lodges.forEach(function(d){if(d.lodgeIdx<0)return;var L=RATES.lodges[d.lodgeIdx];if(L&&!seen[L.region]){seen[L.region]=1;list.push(L.region);}});return list;}
+function actProvidersIn(region){var out=[];(PROVIDERS.activities||[]).forEach(function(p,i){if(p.region===region)out.push({p:p,i:i});});return out;}
+function provActOptions(gi){var p=(PROVIDERS.activities||[])[gi];if(!p)return '<option value="">—</option>';return '<option value="">Add activity…</option>'+p.items.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(p.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>';}).join('');}
 
 /* ---- totals ---- */
 function accomTotal(){var t=0;S.lodges.forEach(function(d){t+=rowSub(d)});return t}
@@ -374,6 +379,8 @@ function renderPanel(){persist();
   } else if(active==='vehicle'){
     var autoDays=totalNights(), guided=(S.tripType==='guided'), autoKm=guided?routeKm():0;
     h='<h2>Vehicle &amp; Fuel</h2><p class="lead">Vehicle days auto-calculate from the itinerary nights; fuel auto-sums the drive distance between your lodges.</p>'
+      +((PROVIDERS.vehicles&&PROVIDERS.vehicles.length)?('<div class="grid3"><div class="fld"><label>Vehicle supplier</label><select id="f-vsupplier"><option value="">Choose supplier…</option>'+PROVIDERS.vehicles.map(function(v,i){return '<option value="'+i+'" '+(String(S.vSupplier)===String(i)?'selected':'')+'>'+esc(v.name)+'</option>';}).join('')+'</select></div>'
+      +'<div class="fld" style="grid-column:span 2"><label>Vehicle &amp; rate <span style="color:var(--muted)">(STO nett, 2026/2027)</span></label><select id="f-vpick"'+((S.vSupplier===''||S.vSupplier==null)?' disabled':'')+'><option value="">'+((S.vSupplier!==''&&S.vSupplier!=null)?'Choose vehicle…':'Choose supplier first…')+'</option>'+(((S.vSupplier!==''&&S.vSupplier!=null)&&PROVIDERS.vehicles[S.vSupplier])?PROVIDERS.vehicles[S.vSupplier].items.map(function(it){var lbl=it.n+' — '+it.t;return '<option value="'+it.p+'" data-label="'+esc(lbl)+'" '+((String(S.vehicleRate)===String(it.p)&&S.vehicleLabel===lbl)?'selected':'')+'>'+esc(lbl)+' — '+money(it.p)+'/day</option>';}).join(''):'')+'</select></div></div>'):'')
       +'<div class="grid3"><div class="fld"><label>Vehicle day-rate (N$)</label><input id="f-vrate" type="number" min="0" value="'+(S.vehicleRate||'')+'" placeholder="0.00"></div>'
       +'<div class="fld"><label>Vehicle days <span style="color:var(--muted)">(auto '+autoDays+')</span></label><input id="f-vdays" type="number" min="0" value="'+(S.vehicleDays!==''?S.vehicleDays:'')+'" placeholder="'+autoDays+'"></div>'
       +'<div class="fld"><label>Vehicle hire</label><input id="d-vhire" value="'+money(vehicleHire())+'" disabled></div></div>'
@@ -388,7 +395,7 @@ function renderPanel(){persist();
       +'<div class="sec-total"><span class="lbl">Vehicle + fuel</span><span class="amt" id="d-vfuel">'+money(vehicleHire()+fuelCost())+'</span></div>';
   } else if(active==='guide'){ h='<h2>Guide Costs</h2><p class="lead">Guide fees, accommodation, day rates.</p>'+liSection('guide','Guide','Guide fee / day rate'); }
   else if(active==='flights'){ h='<h2>Flights</h2><p class="lead">Scheduled or charter flight legs.</p>'+liSection('flights','Flights','Route — e.g. WDH → Sossusvlei'); }
-  else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates. Pick a chosen lodge’s own activities below, or add your own line.</p>';var _seenL={},_pk='';S.lodges.forEach(function(d){if(d.lodgeIdx<0||_seenL[d.lodgeIdx])return;var L=RATES.lodges[d.lodgeIdx];if(!L)return;_seenL[d.lodgeIdx]=1;var acts=lodgeActivities(L);if(!acts.length)return;var opts='<option value="">Add activity…</option>'+acts.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(L.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>'}).join('');_pk+='<div class="fld" style="max-width:520px;margin:0 0 8px"><label>'+esc(L.name)+' activities</label><select class="act-pick">'+opts+'</select></div>';});if(_pk)h+='<div style="margin:0 0 18px">'+_pk+'</div>';h+=liSection('activities','Activities','Activity name'); }
+  else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates. Pick a chosen lodge’s own activities below, or add your own line.</p>';var _seenL={},_pk='';S.lodges.forEach(function(d){if(d.lodgeIdx<0||_seenL[d.lodgeIdx])return;var L=RATES.lodges[d.lodgeIdx];if(!L)return;_seenL[d.lodgeIdx]=1;var acts=lodgeActivities(L);if(!acts.length)return;var opts='<option value="">Add activity…</option>'+acts.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(L.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>'}).join('');_pk+='<div class="fld" style="max-width:520px;margin:0 0 8px"><label>'+esc(L.name)+' activities</label><select class="act-pick">'+opts+'</select></div>';});if(_pk)h+='<div style="margin:0 0 18px">'+_pk+'</div>';var _pv='';itinRegions().forEach(function(rg){var provs=actProvidersIn(rg);if(!provs.length)return;var provOpts=(provs.length===1)?'<option value="'+provs[0].i+'" selected>'+esc(provs[0].p.name)+'</option>':'<option value="">Choose provider…</option>'+provs.map(function(x){return '<option value="'+x.i+'">'+esc(x.p.name)+'</option>';}).join('');var initGi=(provs.length===1)?provs[0].i:'';var actOpts=(provs.length===1)?provActOptions(provs[0].i):'<option value="">Choose provider first…</option>';_pv+='<div style="margin:0 0 12px"><div class="fld" style="max-width:520px;margin:0 0 6px"><label>'+esc(rg)+' — activity providers</label><select class="prov-pick" data-region="'+esc(rg)+'">'+provOpts+'</select></div><div class="fld" style="max-width:520px;margin:0"><select class="prov-act-pick" data-prov="'+initGi+'"'+(provs.length===1?'':' disabled')+'>'+actOpts+'</select></div></div>';});if(_pv)h+='<div style="margin:0 0 18px"><p class="muted" style="font-style:normal;margin:0 0 8px">Regional activity providers (STO nett, valid 2026/2027):</p>'+_pv+'</div>';h+=liSection('activities','Activities','Activity name'); }
   else if(active==='extras'){ h='<h2>Extras</h2><p class="lead">Park fees, transfers, anything else.</p>'+liSection('extras','Extras','Extra item'); }
   else if(active==='botswana'){ h='<h2>Botswana / Add-ons</h2><p class="lead">Cross-border lodges and add-on segments.</p>'+liSection('botswana','Botswana / add-ons','Lodge / segment'); }
   else if(active==='final'){
@@ -418,7 +425,9 @@ function bindPanel(){
   if(x=document.getElementById('f-children'))x.oninput=function(){S.children=this.value;updateTotals()};
   if(x=document.getElementById('f-markup'))x.oninput=function(){S.markup=num(this.value);document.getElementById('t-markup').value=S.markup;updateTotals()};
   // vehicle/fuel — update live without rebuilding the inputs (keeps focus + allows decimals)
-  if(x=document.getElementById('f-vrate'))x.oninput=function(){S.vehicleRate=this.value;recalc()};
+  if(x=document.getElementById('f-vsupplier'))x.onchange=function(){S.vSupplier=this.value;S.vehicleRate=0;S.vehicleLabel='';renderPanel();};
+  if(x=document.getElementById('f-vpick'))x.onchange=function(){var o=this.options[this.selectedIndex];S.vehicleRate=this.value||0;S.vehicleLabel=(o&&o.dataset?o.dataset.label||'':'');renderPanel();};
+  if(x=document.getElementById('f-vrate'))x.oninput=function(){S.vehicleRate=this.value;S.vehicleLabel='';recalc()};
   if(x=document.getElementById('f-vdays'))x.oninput=function(){S.vehicleDays=this.value;recalc()};
   if(x=document.getElementById('f-fuelkm'))x.oninput=function(){S.fuelKm=this.value;recalc()};
   if(x=document.getElementById('f-fueltype'))x.onchange=function(){S.fuelType=this.value;renderPanel()};
@@ -465,6 +474,8 @@ function bindPanel(){
   });
   document.querySelectorAll('#panel [data-add]').forEach(function(b){b.onclick=function(){S[b.dataset.add].push({name:'',amount:''});renderPanel()}});
   document.querySelectorAll('#panel select.act-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;S.activities.push({name:o.dataset.name,amount:o.value});renderPanel();};});
+  document.querySelectorAll('#panel select.prov-pick').forEach(function(sel){sel.onchange=function(){var gi=sel.value;var sib=sel.closest('div').parentNode.querySelector('.prov-act-pick');if(!sib)return;if(gi===''){sib.innerHTML='<option value="">Choose provider first…</option>';sib.disabled=true;sib.dataset.prov='';return;}sib.dataset.prov=gi;sib.innerHTML=provActOptions(+gi);sib.disabled=false;};});
+  document.querySelectorAll('#panel select.prov-act-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;S.activities.push({name:o.dataset.name,amount:o.value});renderPanel();};});
   document.querySelectorAll('#panel .rm[data-k]').forEach(function(b){b.onclick=function(){S[b.dataset.k].splice(+b.dataset.i,1);renderPanel()}});
   updateTotals();
 }
@@ -520,6 +531,7 @@ function overlayRack(){
 }
 var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlayRack().then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
+fetch('/assets/providers.json').then(function(r){return r.json()}).then(function(j){PROVIDERS=j||{activities:[],vehicles:[]};if(!PROVIDERS.activities)PROVIDERS.activities=[];if(!PROVIDERS.vehicles)PROVIDERS.vehicles=[];try{renderPanel();}catch(e){}}).catch(function(){});
 function persist(){try{var it=S.lodges.map(function(d){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
   try{
