@@ -1,5 +1,5 @@
 {
-"generated": "2026-07-31T09:57:39",
+"generated": "2026-07-31T10:11:45",
 "count": 197,
 "lodges": [
 {
@@ -1225,27 +1225,27 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season · Per Person Sharing",
+"n": "Low Season (16 Jan – 30 Jun) · Per Person Sharing",
 "p": 2001.0
 },
 {
-"n": "Low Season · Single",
+"n": "Low Season (16 Jan – 30 Jun) · Single",
 "p": 2703.0
 },
 {
-"n": "Low Season · Conservation Levy (pppn)",
+"n": "Low Season (16 Jan – 30 Jun) · Conservation Levy (pppn)",
 "p": 170.0
 },
 {
-"n": "High Season · Per Person Sharing",
+"n": "High Season (1 Jul – 15 Jan) · Per Person Sharing",
 "p": 2873.0
 },
 {
-"n": "High Season · Single",
+"n": "High Season (1 Jul – 15 Jan) · Single",
 "p": 3884.0
 },
 {
-"n": "High Season · Conservation Levy (pppn)",
+"n": "High Season (1 Jul – 15 Jan) · Conservation Levy (pppn)",
 "p": 170.0
 },
 {
@@ -2828,27 +2828,27 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season · Classic Room — per person sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Classic Room — per person sharing",
 "p": 1855.0
 },
 {
-"n": "Low Season · Classic Room — single",
+"n": "Low Season (01 Jan – 31 Mar) · Classic Room — single",
 "p": 2440.0
 },
 {
-"n": "Shoulder Season · Classic Room — per person sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
 "p": 2010.0
 },
 {
-"n": "Shoulder Season · Classic Room — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — single",
 "p": 2630.0
 },
 {
-"n": "High Season · Classic Room — per person sharing",
+"n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
 "p": 2305.0
 },
 {
-"n": "High Season · Classic Room — single",
+"n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
 "p": 3030.0
 }
 ]
@@ -6775,27 +6775,27 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season · Per Person Sharing",
+"n": "Low Season (1 Jan – 30 Jun) · Per Person Sharing",
 "p": 5066.0
 },
 {
-"n": "Low Season · Single",
+"n": "Low Season (1 Jan – 30 Jun) · Single",
 "p": 6298.0
 },
 {
-"n": "Low Season · Conservation Levy (pppn)",
+"n": "Low Season (1 Jan – 30 Jun) · Conservation Levy (pppn)",
 "p": 290.0
 },
 {
-"n": "High Season · Per Person Sharing",
+"n": "High Season (1 Jul – 31 Dec) · Per Person Sharing",
 "p": 5894.0
 },
 {
-"n": "High Season · Single",
+"n": "High Season (1 Jul – 31 Dec) · Single",
 "p": 7463.0
 },
 {
-"n": "High Season · Conservation Levy (pppn)",
+"n": "High Season (1 Jul – 31 Dec) · Conservation Levy (pppn)",
 "p": 290.0
 },
 {
@@ -11192,51 +11192,51 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season · Bush Room — per person sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Bush Room — per person sharing",
 "p": 1335.0
 },
 {
-"n": "Low Season · Bush Chalet — per person sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Bush Chalet — per person sharing",
 "p": 1475.0
 },
 {
-"n": "Low Season · Bush Room — single",
+"n": "Low Season (01 Jan – 31 Mar) · Bush Room — single",
 "p": 1800.0
 },
 {
-"n": "Low Season · Bush Chalet — single",
+"n": "Low Season (01 Jan – 31 Mar) · Bush Chalet — single",
 "p": 2010.0
 },
 {
-"n": "Shoulder Season · Bush Room — per person sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — per person sharing",
 "p": 1435.0
 },
 {
-"n": "Shoulder Season · Bush Chalet — per person sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — per person sharing",
 "p": 1550.0
 },
 {
-"n": "Shoulder Season · Bush Room — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — single",
 "p": 1930.0
 },
 {
-"n": "Shoulder Season · Bush Chalet — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — single",
 "p": 2120.0
 },
 {
-"n": "High Season · Bush Room — per person sharing",
+"n": "High Season (01 Jul – 30 Nov) · Bush Room — per person sharing",
 "p": 1680.0
 },
 {
-"n": "High Season · Bush Chalet — per person sharing",
+"n": "High Season (01 Jul – 30 Nov) · Bush Chalet — per person sharing",
 "p": 1775.0
 },
 {
-"n": "High Season · Bush Room — single",
+"n": "High Season (01 Jul – 30 Nov) · Bush Room — single",
 "p": 2255.0
 },
 {
-"n": "High Season · Bush Chalet — single",
+"n": "High Season (01 Jul – 30 Nov) · Bush Chalet — single",
 "p": 2440.0
 },
 {
@@ -11901,99 +11901,99 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season · Classic / Cottage Room — pp sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — pp sharing",
 "p": 1090.0
 },
 {
-"n": "Low Season · Luxury Room — pp sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Luxury Room — pp sharing",
 "p": 1420.0
 },
 {
-"n": "Low Season · Luxury Suite — pp sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Luxury Suite — pp sharing",
 "p": 1560.0
 },
 {
-"n": "Low Season · Sea View Cottage Suite — pp sharing",
+"n": "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — pp sharing",
 "p": 2065.0
 },
 {
-"n": "Low Season · Classic / Cottage Room — single",
+"n": "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — single",
 "p": 1440.0
 },
 {
-"n": "Low Season · Luxury Room — single",
+"n": "Low Season (01 Jan – 31 Mar) · Luxury Room — single",
 "p": 1800.0
 },
 {
-"n": "Low Season · Luxury Suite — single",
+"n": "Low Season (01 Jan – 31 Mar) · Luxury Suite — single",
 "p": 2010.0
 },
 {
-"n": "Low Season · Sea View Cottage Suite — single",
+"n": "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — single",
 "p": 2495.0
 },
 {
-"n": "Shoulder Season · Classic / Cottage Room — pp sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — pp sharing",
 "p": 1210.0
 },
 {
-"n": "Shoulder Season · Luxury Room — pp sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — pp sharing",
 "p": 1580.0
 },
 {
-"n": "Shoulder Season · Luxury Suite — pp sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — pp sharing",
 "p": 1740.0
 },
 {
-"n": "Shoulder Season · Sea View Cottage Suite — pp sharing",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — pp sharing",
 "p": 2250.0
 },
 {
-"n": "Shoulder Season · Classic / Cottage Room — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — single",
 "p": 1585.0
 },
 {
-"n": "Shoulder Season · Luxury Room — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — single",
 "p": 1995.0
 },
 {
-"n": "Shoulder Season · Luxury Suite — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — single",
 "p": 2240.0
 },
 {
-"n": "Shoulder Season · Sea View Cottage Suite — single",
+"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — single",
 "p": 2780.0
 },
 {
-"n": "High Season · Classic / Cottage Room — pp sharing",
+"n": "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — pp sharing",
 "p": 1385.0
 },
 {
-"n": "High Season · Luxury Room — pp sharing",
+"n": "High Season (01 Jul – 30 Nov) · Luxury Room — pp sharing",
 "p": 1730.0
 },
 {
-"n": "High Season · Luxury Suite — pp sharing",
+"n": "High Season (01 Jul – 30 Nov) · Luxury Suite — pp sharing",
 "p": 1890.0
 },
 {
-"n": "High Season · Sea View Cottage Suite — pp sharing",
+"n": "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — pp sharing",
 "p": 2465.0
 },
 {
-"n": "High Season · Classic / Cottage Room — single",
+"n": "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — single",
 "p": 1820.0
 },
 {
-"n": "High Season · Luxury Room — single",
+"n": "High Season (01 Jul – 30 Nov) · Luxury Room — single",
 "p": 2200.0
 },
 {
-"n": "High Season · Luxury Suite — single",
+"n": "High Season (01 Jul – 30 Nov) · Luxury Suite — single",
 "p": 2440.0
 },
 {
-"n": "High Season · Sea View Cottage Suite — single",
+"n": "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — single",
 "p": 3020.0
 }
 ]
@@ -13471,51 +13471,51 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season · Classic Room — per person sharing",
+"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
 "p": 1210.0
 },
 {
-"n": "Low Season · Terrace Room — per person sharing",
+"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
 "p": 1700.0
 },
 {
-"n": "Low Season · Terrace Suite — per person sharing",
+"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
 "p": 1935.0
 },
 {
-"n": "Low Season · Classic Room — single",
+"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
 "p": 1700.0
 },
 {
-"n": "Low Season · Terrace Room — single",
+"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
 "p": 2360.0
 },
 {
-"n": "Low Season · Terrace Suite — single",
+"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
 "p": 2725.0
 },
 {
-"n": "High Season · Classic Room — per person sharing",
+"n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
 "p": 1305.0
 },
 {
-"n": "High Season · Terrace Room — per person sharing",
+"n": "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
 "p": 1815.0
 },
 {
-"n": "High Season · Terrace Suite — per person sharing",
+"n": "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
 "p": 2040.0
 },
 {
-"n": "High Season · Classic Room — single",
+"n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
 "p": 1815.0
 },
 {
-"n": "High Season · Terrace Room — single",
+"n": "High Season (01 Jul – 30 Nov) · Terrace Room — single",
 "p": 2465.0
 },
 {
-"n": "High Season · Terrace Suite — single",
+"n": "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
 "p": 2860.0
 }
 ]
