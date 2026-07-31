@@ -145,7 +145,7 @@ var SECTIONS=[
   {id:'final',n:9,label:'Final Pricing'}
 ];
 var S={
-  name:'',adults:2,children:0,markup:25,startDate:'',
+  name:'',adults:2,children:0,markup:25,startDate:'',year:'2026',
   lodges:[],
   tripType:'selfdrive', vehicleRate:0, vehicleDays:'', fuelKm:'', fuelType:'2wd', fuelBuffer:20,
   cons2wd:9, cons4wd:14, fuelPrice:22,
@@ -157,10 +157,12 @@ function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;',
 function num(v){return Math.max(0,parseFloat(v)||0)}
 function regions(){var o={};RATES.lodges.forEach(function(l){o[l.region]=1});return Object.keys(o).sort()}
 function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r)a.push(i)});return a}
+function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
+function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
 
 /* ---- totals ---- */
 function accomTotal(){var t=0;S.lodges.forEach(function(d){t+=rowSub(d)});return t}
-function lodgePrice(d){if(d.lodgeIdx>-1&&d.roomIdx>-1){var L=RATES.lodges[d.lodgeIdx];if(L&&L.rates[d.roomIdx])return L.rates[d.roomIdx].p}return 0}
+function lodgePrice(d){if(d.lodgeIdx>-1&&d.roomIdx>-1){var L=RATES.lodges[d.lodgeIdx];var R=lodgeRates(L);if(R&&R[d.roomIdx])return R[d.roomIdx].p}return 0}
 // HARD non-room: services that are never a guest accommodation rate, even when they mention a room
 // (e.g. "Guide Room — DBB", "Tour Guide Sharing"). Guides, drives, transfers, fees, activities-by-name.
 function nonRoom(s){return /guide|driver|pilot|game[ -]?drive|\bdrives?\b|scheduled|cruise|tracking|excursion|sundowner|sunset|transfer|shuttle|airstrip|airfield|\bpassenger\b|one[ -]?way|\bfee\b|game ?package|\bboat\b|scenic|fly-?in|flight|\bhide\b|feeding|spa|massage|treatment|laundry|wifi|fishing|quad|horse|riding|\bbike|cycl|kayak|canoe|mokoro|balloon|photograph|\bwalk\b|hik|picnic|braai|boma|swim|\bpool\b|\bgym\b|tasting|\btour\b|township|cultural|museum|entrance|\bentry\b|\bcot\b|crib|park fee|conservation|levy|permit|tourism|commission|deposit|supplement|\bextra\b|add[- ]?on/.test(s);}
@@ -180,15 +182,15 @@ function rateExcluded(s){
 // pick a room rate by occupancy mode: 'sharing' = per-person-sharing room, 'single' = single room.
 function rateMatches(n,mode){var s=(n||'').toLowerCase();if(rateExcluded(s))return false;if(mode==='single')return /single/.test(s);return /sharing/.test(s)||/per person/.test(s)||/\bpps\b/.test(s);}
 // index of the CHEAPEST priced rate matching the mode (ignores N$0 rows like child/free); -1 if none
-function bestRoomIdx(L,mode){if(!L||!L.rates)return -1;var best=-1,bp=Infinity;L.rates.forEach(function(rt,ri){if(rateMatches(rt.n,mode)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;best=ri;}}});return best;}
+function bestRoomIdx(L,mode){var R=lodgeRates(L);if(!R.length)return -1;var best=-1,bp=Infinity;R.forEach(function(rt,ri){if(rateMatches(rt.n,mode)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;best=ri;}}});return best;}
 // lines that must NOT be treated as a child accommodation rate (services/meals)
 function childActivity(s){return notRoomService(s);}
 // cheapest child ACCOMMODATION rate; falls back to a free/N$0 child row if that's all there is
-function bestChildIdx(L){if(!L||!L.rates)return -1;var b=-1,bp=Infinity;L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(/child|chd|\bkid/.test(s)&&!childActivity(s)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;b=ri;}}});if(b<0){L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(b<0&&/child|chd|\bkid/.test(s)&&!childActivity(s))b=ri;});}return b;}
+function bestChildIdx(L){var R=lodgeRates(L);if(!R.length)return -1;var b=-1,bp=Infinity;R.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(/child|chd|\bkid/.test(s)&&!childActivity(s)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;b=ri;}}});if(b<0){R.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();if(b<0&&/child|chd|\bkid/.test(s)&&!childActivity(s))b=ri;});}return b;}
 // cheapest genuine accommodation rate (any wording) — excludes activities, meals, fees, single,
 // child, camping/day-visitor. Used as a fallback when a lodge has no rate worded "sharing".
-function bestAccommIdx(L){if(!L||!L.rates)return -1;
-  function pick(allowCamp){var b=-1,bp=Infinity;L.rates.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();
+function bestAccommIdx(L){var R=lodgeRates(L);if(!R.length)return -1;
+  function pick(allowCamp){var b=-1,bp=Infinity;R.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();
     if(notRoomService(s))return; if(/child|chd|\bkid/.test(s))return; if(/single/.test(s)&&!/sharing/.test(s))return;
     if(/\byrs?\b|\byears?\b|\d\s*[–\-]\s*\d+\s*(yr|year)/.test(s))return;
     if(/additional|supplement|\bextra\b|add[- ]?on|2nd room|3rd room|second room|third person|day visitor/.test(s))return;
@@ -200,11 +202,11 @@ function bestShareIdx(L){var i=bestRoomIdx(L,'sharing');return i>-1?i:bestAccomm
 // resolve the three priced categories for a row: PP-sharing = the dropdown choice (d.roomIdx) or the
 // best room rate; single & child = cheapest matching rate for that lodge. Each is {p,n} or null.
 function catInfo(d){
-  var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null; if(!L)return {sh:null,sg:null,ch:null};
+  var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null; if(!L)return {sh:null,sg:null,ch:null};var R=lodgeRates(L);
   var shI=(d.roomIdx>-1)?d.roomIdx:bestShareIdx(L);
-  var sh=(shI>-1&&L.rates[shI])?{p:L.rates[shI].p,n:L.rates[shI].n}:null;
+  var sh=(shI>-1&&R[shI])?{p:R[shI].p,n:R[shI].n}:null;
   var sgI=bestRoomIdx(L,'single'),chI=bestChildIdx(L);
-  return {sh:sh,sg:(sgI>-1?{p:L.rates[sgI].p,n:L.rates[sgI].n}:null),ch:(chI>-1?{p:L.rates[chI].p,n:L.rates[chI].n}:null)};
+  return {sh:sh,sg:(sgI>-1?{p:R[sgI].p,n:R[sgI].n}:null),ch:(chI>-1?{p:R[chI].p,n:R[chI].n}:null)};
 }
 // quantities per row (back-compat: old quotes only have d.pax → treat as sharing qty)
 function qShareOf(d){return (d.qShare!=null)?num(d.qShare):num(d.pax||0)}
@@ -328,7 +330,7 @@ function renderPanel(){persist();
       var lodgeOpts='<option value="-1">Lodge…</option>';
       if(d.region) lodgesIn(d.region).forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>'});
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];L.rates.forEach(function(rt,ri){roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
@@ -363,7 +365,7 @@ function renderPanel(){persist();
     }).join('');
     if(!S.lodges.length) body='<tr><td colspan="7" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
     h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate).</p>'
-      +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'
+      +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'+'<div style="display:flex;gap:8px;align-items:center;margin:0 0 14px"><span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Rate year</span>'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(200,90,23,.6);background:'+(on?'rgba(200,90,23,.85)':'rgba(200,90,23,.08)')+';color:'+(on?'#fff':'#c85a17')+'">'+y+'</button>';}).join('')+'</div>'
       +'<div style="overflow-x:auto"><table class="bd"><thead><tr><th style="width:34px">#</th><th style="width:64px">Nights</th><th>Region &amp; Lodge</th><th>Rooms &amp; rates</th><th class="r">Per night</th><th class="r">Subtotal</th><th></th></tr></thead><tbody>'+body+'</tbody></table></div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
@@ -423,6 +425,7 @@ function bindPanel(){
   if(x=document.getElementById('f-fuelbuffer'))x.oninput=function(){S.fuelBuffer=this.value;recalc()};
   if(x=document.getElementById('f-triptype'))x.onchange=function(){S.tripType=this.value;S.fuelKm='';if(this.value==='guided'){S.fuelType='4wd';if(!num(S.fuelBuffer))S.fuelBuffer=20;}if(this.value==='flyin'){S.vehicleRate=0;}renderPanel();};
   if(x=document.getElementById('f-startdate')){x.addEventListener('change',function(){S.startDate=this.value;setTimeout(renderPanel,60)});}
+  ['2026','2027'].forEach(function(y){var b=document.getElementById('yr-'+y);if(b)b.onclick=function(){if((S.year||'2026')===y)return;S.year=y;S.lodges.forEach(function(d){d.roomIdx=-1;});renderPanel();};});
   // lodges
   document.querySelectorAll('#panel select[data-f],#panel input[data-f]').forEach(function(el){
     var f=el.dataset.f;
@@ -432,7 +435,7 @@ function bindPanel(){
         if(f==='region'){d.region=el.value;d.lodgeIdx=-1;d.roomIdx=-1;d.name='';d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
         else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;var L=RATES.lodges[d.lodgeIdx];var ri=bestShareIdx(L);d.roomIdx=(ri>-1?ri:-1);d.name=(L?L.name:'');d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
         else if(f==='occ'){d.occ=el.value;var L=RATES.lodges[d.lodgeIdx];var ri=bestRoomIdx(L,d.occ);if(ri<0)ri=bestRoomIdx(L,d.occ==='single'?'sharing':'single');if(ri>-1)d.roomIdx=ri;}
-        else if(f==='roomIdx'){d.roomIdx=+el.value;var rr=(RATES.lodges[d.lodgeIdx]&&RATES.lodges[d.lodgeIdx].rates[d.roomIdx]);if(rr)d.occ=(/single/i.test(rr.n)?'single':'sharing');}
+        else if(f==='roomIdx'){d.roomIdx=+el.value;var rr=lodgeRates(RATES.lodges[d.lodgeIdx])[d.roomIdx];if(rr)d.occ=(/single/i.test(rr.n)?'single':'sharing');}
         renderPanel();
         if(f==='lodgeIdx'||f==='region')autoDistances();
       };
