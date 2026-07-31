@@ -1,5 +1,5 @@
 {
-"generated": "2026-07-31T08:49:09",
+"generated": "2026-06-27T10:01:35",
 "count": 197,
 "lodges": [
 {
@@ -1221,44 +1221,6 @@
 {
 "n": "Guided Sundowner MTB Ride",
 "p": 320.0
-}
-],
-"rates_2027": [
-{
-"n": "Per Person Sharing",
-"p": 2001.0
-},
-{
-"n": "Single",
-"p": 2703.0
-},
-{
-"n": "Conservation Levy (pppn)",
-"p": 170.0
-},
-{
-"n": "Per Person Sharing",
-"p": 2873.0
-},
-{
-"n": "Single",
-"p": 3884.0
-},
-{
-"n": "Low — ≤3 pax (25% off)",
-"p": 1501.0
-},
-{
-"n": "Low — 4+ pax (50% off)",
-"p": 1001.0
-},
-{
-"n": "High — ≤3 pax (25% off)",
-"p": 2155.0
-},
-{
-"n": "High — 4+ pax (50% off)",
-"p": 1437.0
 }
 ]
 },
@@ -2820,32 +2782,6 @@
 {
 "n": "Group Lunches (pre-bookable)",
 "p": 200.0
-}
-],
-"rates_2027": [
-{
-"n": "Classic Room — per person sharing",
-"p": 1855.0
-},
-{
-"n": "Classic Room — single",
-"p": 2440.0
-},
-{
-"n": "Classic Room — per person sharing",
-"p": 2010.0
-},
-{
-"n": "Classic Room — single",
-"p": 2630.0
-},
-{
-"n": "Classic Room — per person sharing",
-"p": 2305.0
-},
-{
-"n": "Classic Room — single",
-"p": 3030.0
 }
 ]
 },
@@ -6767,44 +6703,6 @@
 {
 "n": "High — 4+ pax (50% off)",
 "p": 2807.0
-}
-],
-"rates_2027": [
-{
-"n": "Per Person Sharing",
-"p": 5066.0
-},
-{
-"n": "Single",
-"p": 6298.0
-},
-{
-"n": "Conservation Levy (pppn)",
-"p": 290.0
-},
-{
-"n": "Per Person Sharing",
-"p": 5894.0
-},
-{
-"n": "Single",
-"p": 7463.0
-},
-{
-"n": "Low — ≤3 pax (25% off)",
-"p": 3800.0
-},
-{
-"n": "Low — 4+ pax (50% off)",
-"p": 2533.0
-},
-{
-"n": "High — ≤3 pax (25% off)",
-"p": 4421.0
-},
-{
-"n": "High — 4+ pax (50% off)",
-"p": 2947.0
 }
 ]
 },
@@ -11181,60 +11079,6 @@
 "n": "Group Lunches (min 10 pax)",
 "p": 200.0
 }
-],
-"rates_2027": [
-{
-"n": "Bush Room — per person sharing",
-"p": 1335.0
-},
-{
-"n": "Bush Chalet — per person sharing",
-"p": 1475.0
-},
-{
-"n": "Bush Room — single",
-"p": 1800.0
-},
-{
-"n": "Bush Chalet — single",
-"p": 2010.0
-},
-{
-"n": "Bush Room — per person sharing",
-"p": 1435.0
-},
-{
-"n": "Bush Chalet — per person sharing",
-"p": 1550.0
-},
-{
-"n": "Bush Room — single",
-"p": 1930.0
-},
-{
-"n": "Bush Chalet — single",
-"p": 2120.0
-},
-{
-"n": "Bush Room — per person sharing",
-"p": 1680.0
-},
-{
-"n": "Bush Chalet — per person sharing",
-"p": 1775.0
-},
-{
-"n": "Bush Room — single",
-"p": 2255.0
-},
-{
-"n": "Bush Chalet — single",
-"p": 2440.0
-},
-{
-"n": "Camping — per person",
-"p": 290.0
-}
 ]
 },
 {
@@ -11889,104 +11733,6 @@
 {
 "n": "Lunch Pack",
 "p": 175.0
-}
-],
-"rates_2027": [
-{
-"n": "Classic / Cottage Room — pp sharing",
-"p": 1090.0
-},
-{
-"n": "Luxury Room — pp sharing",
-"p": 1420.0
-},
-{
-"n": "Luxury Suite — pp sharing",
-"p": 1560.0
-},
-{
-"n": "Sea View Cottage Suite — pp sharing",
-"p": 2065.0
-},
-{
-"n": "Classic / Cottage Room — single",
-"p": 1440.0
-},
-{
-"n": "Luxury Room — single",
-"p": 1800.0
-},
-{
-"n": "Luxury Suite — single",
-"p": 2010.0
-},
-{
-"n": "Sea View Cottage Suite — single",
-"p": 2495.0
-},
-{
-"n": "Classic / Cottage Room — pp sharing",
-"p": 1210.0
-},
-{
-"n": "Luxury Room — pp sharing",
-"p": 1580.0
-},
-{
-"n": "Luxury Suite — pp sharing",
-"p": 1740.0
-},
-{
-"n": "Sea View Cottage Suite — pp sharing",
-"p": 2250.0
-},
-{
-"n": "Classic / Cottage Room — single",
-"p": 1585.0
-},
-{
-"n": "Luxury Room — single",
-"p": 1995.0
-},
-{
-"n": "Luxury Suite — single",
-"p": 2240.0
-},
-{
-"n": "Sea View Cottage Suite — single",
-"p": 2780.0
-},
-{
-"n": "Classic / Cottage Room — pp sharing",
-"p": 1385.0
-},
-{
-"n": "Luxury Room — pp sharing",
-"p": 1730.0
-},
-{
-"n": "Luxury Suite — pp sharing",
-"p": 1890.0
-},
-{
-"n": "Sea View Cottage Suite — pp sharing",
-"p": 2465.0
-},
-{
-"n": "Classic / Cottage Room — single",
-"p": 1820.0
-},
-{
-"n": "Luxury Room — single",
-"p": 2200.0
-},
-{
-"n": "Luxury Suite — single",
-"p": 2440.0
-},
-{
-"n": "Sea View Cottage Suite — single",
-"p": 3020.0
 }
 ]
 },
@@ -13459,56 +13205,6 @@
 {
 "n": "Eros Airport — per vehicle",
 "p": 280.0
-}
-],
-"rates_2027": [
-{
-"n": "Classic Room — per person sharing",
-"p": 1210.0
-},
-{
-"n": "Terrace Room — per person sharing",
-"p": 1700.0
-},
-{
-"n": "Terrace Suite — per person sharing",
-"p": 1935.0
-},
-{
-"n": "Classic Room — single",
-"p": 1700.0
-},
-{
-"n": "Terrace Room — single",
-"p": 2360.0
-},
-{
-"n": "Terrace Suite — single",
-"p": 2725.0
-},
-{
-"n": "Classic Room — per person sharing",
-"p": 1305.0
-},
-{
-"n": "Terrace Room — per person sharing",
-"p": 1815.0
-},
-{
-"n": "Terrace Suite — per person sharing",
-"p": 2040.0
-},
-{
-"n": "Classic Room — single",
-"p": 1815.0
-},
-{
-"n": "Terrace Room — single",
-"p": 2465.0
-},
-{
-"n": "Terrace Suite — single",
-"p": 2860.0
 }
 ]
 },
