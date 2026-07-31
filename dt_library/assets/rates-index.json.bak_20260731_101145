@@ -1,5 +1,5 @@
 {
-"generated": "2026-07-31T10:19:49",
+"generated": "2026-07-31T09:57:39",
 "count": 197,
 "lodges": [
 {
@@ -412,27 +412,27 @@
 "region": "Caprivi",
 "rates": [
 {
-"n": "Low Season (01.01.26 to 30.06.) · Luxury Chalets — DBL/Sharing DBB",
+"n": "Luxury Chalets — DBL/Sharing DBB",
 "p": 3312.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Luxury Chalets — Single DBB",
+"n": "Luxury Chalets — Single DBB",
 "p": 4424.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Luxury Chalets — 1 Child 6–12 Yrs DBB Sharing Adult",
+"n": "Luxury Chalets — 1 Child 6–12 Yrs DBB Sharing Adult",
 "p": 828.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Luxury Chalets — DBL/Sharing DBB",
+"n": "Luxury Chalets — DBL/Sharing DBB",
 "p": 4044.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Luxury Chalets — Single DBB",
+"n": "Luxury Chalets — Single DBB",
 "p": 5280.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Luxury Chalets — 1 Child 6–12 Yrs DBB Sharing Adult",
+"n": "Luxury Chalets — 1 Child 6–12 Yrs DBB Sharing Adult",
 "p": 1011.0
 },
 {
@@ -876,56 +876,52 @@
 "region": "Caprivi",
 "rates": [
 {
-"n": "Low Season (Luxury Rooms ×16 — DBB) · Per person sharing",
+"n": "Per person sharing",
 "p": 2904.0
 },
 {
-"n": "Low Season (Luxury Rooms ×16 — DBB) · Single Supplement",
+"n": "Single Supplement",
 "p": 601.92
 },
 {
-"n": "Low Season (Luxury Rooms ×16 — DBB) · Children 0–5 yrs (RO)",
+"n": "Children 0–5 yrs (RO)",
 "p": 0.0
 },
 {
-"n": "Low Season (Luxury Rooms ×16 — DBB) · Children 6–12 yrs (max 2 sharing)",
+"n": "Children 6–12 yrs (max 2 sharing)",
 "p": 1815.0
 },
 {
-"n": "High Season (Luxury Rooms ×16 — DBB) · Per person sharing",
+"n": "Per person sharing",
 "p": 3049.2
 },
 {
-"n": "High Season (Luxury Rooms ×16 — DBB) · Single Supplement",
+"n": "Single Supplement",
 "p": 632.02
 },
 {
-"n": "High Season (Luxury Rooms ×16 — DBB) · Children 6–12 yrs (max 2 sharing)",
+"n": "Children 6–12 yrs (max 2 sharing)",
 "p": 1905.75
 },
 {
-"n": "Low Season (Distinctive Rooms ×4 — DBB) · Per person sharing",
+"n": "Per person sharing",
 "p": 4488.0
 },
 {
-"n": "Low Season (Distinctive Rooms ×4 — DBB) · Single Supplement",
+"n": "Single Supplement",
 "p": 704.0
 },
 {
-"n": "Low Season (Distinctive Rooms ×4 — DBB) · Children 6–12 yrs (max 2 sharing)",
+"n": "Children 6–12 yrs (max 2 sharing)",
 "p": 1452.0
 },
 {
-"n": "High Season (Distinctive Rooms ×4 — DBB) · Per person sharing",
+"n": "Per person sharing",
 "p": 4712.4
 },
 {
-"n": "High Season (Distinctive Rooms ×4 — DBB) · Single Supplement",
+"n": "Single Supplement",
 "p": 739.2
-},
-{
-"n": "High Season (Distinctive Rooms ×4 — DBB) · Children 6–12 yrs (max 2 sharing)",
-"p": 1905.75
 },
 {
 "n": "Per person — Low Season",
@@ -1147,28 +1143,24 @@
 "region": "Central Namibia",
 "rates": [
 {
-"n": "Low Season (16 Jan – 30 Jun) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 1789.0
 },
 {
-"n": "Low Season (16 Jan – 30 Jun) · Single",
+"n": "Single",
 "p": 2414.0
 },
 {
-"n": "Low Season (16 Jan – 30 Jun) · Conservation Levy (pppn)",
+"n": "Conservation Levy (pppn)",
 "p": 160.0
 },
 {
-"n": "High Season (1 Jul – 15 Jan) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 2613.0
 },
 {
-"n": "High Season (1 Jul – 15 Jan) · Single",
+"n": "Single",
 "p": 3531.0
-},
-{
-"n": "High Season (1 Jul – 15 Jan) · Conservation Levy (pppn)",
-"p": 160.0
 },
 {
 "n": "Low — ≤3 pax (25% off)",
@@ -1233,27 +1225,27 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season (16 Jan – 30 Jun) · Per Person Sharing",
+"n": "Low Season · Per Person Sharing",
 "p": 2001.0
 },
 {
-"n": "Low Season (16 Jan – 30 Jun) · Single",
+"n": "Low Season · Single",
 "p": 2703.0
 },
 {
-"n": "Low Season (16 Jan – 30 Jun) · Conservation Levy (pppn)",
+"n": "Low Season · Conservation Levy (pppn)",
 "p": 170.0
 },
 {
-"n": "High Season (1 Jul – 15 Jan) · Per Person Sharing",
+"n": "High Season · Per Person Sharing",
 "p": 2873.0
 },
 {
-"n": "High Season (1 Jul – 15 Jan) · Single",
+"n": "High Season · Single",
 "p": 3884.0
 },
 {
-"n": "High Season (1 Jul – 15 Jan) · Conservation Levy (pppn)",
+"n": "High Season · Conservation Levy (pppn)",
 "p": 170.0
 },
 {
@@ -1678,59 +1670,59 @@
 "region": "Central Namibia",
 "rates": [
 {
-"n": "High Season (01.03. to 30.11.) · Room — per person sharing",
+"n": "Room — per person sharing",
 "p": 2320.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Room — Single use",
+"n": "Room — Single use",
 "p": 3040.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Chalet — per person sharing",
+"n": "Chalet — per person sharing",
 "p": 4000.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Chalet — Single use",
+"n": "Chalet — Single use",
 "p": 5600.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing in Room",
+"n": "4–12 years sharing in Room",
 "p": 1160.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing in Chalet",
+"n": "4–12 years sharing in Chalet",
 "p": 2000.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 13+ years sharing in Chalet",
+"n": "13+ years sharing in Chalet",
 "p": 4000.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Room — per person sharing",
+"n": "Room — per person sharing",
 "p": 1840.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Room — Single use",
+"n": "Room — Single use",
 "p": 2400.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Chalet — per person sharing",
+"n": "Chalet — per person sharing",
 "p": 3200.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Chalet — Single use",
+"n": "Chalet — Single use",
 "p": 4400.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing in Room",
+"n": "4–12 years sharing in Room",
 "p": 920.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing in Chalet",
+"n": "4–12 years sharing in Chalet",
 "p": 1600.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 13+ years sharing in Chalet",
+"n": "13+ years sharing in Chalet",
 "p": 3200.0
 },
 {
@@ -1784,60 +1776,48 @@
 "region": "Central Namibia",
 "rates": [
 {
-"n": "Low Season (Ohorongo Safari Lodge — DBB pp) · Double Room",
+"n": "Double Room",
 "p": 3000.0
 },
 {
-"n": "Low Season (Ohorongo Safari Lodge — DBB pp) · Triple Room (pp)",
+"n": "Triple Room (pp)",
 "p": 2711.0
 },
 {
-"n": "Low Season (Ohorongo Safari Lodge — DBB pp) · Child 6–11 yrs sharing with full-paying adults",
+"n": "Child 6–11 yrs sharing with full-paying adults",
 "p": 1500.0
 },
 {
-"n": "Low Season (Ohorongo Safari Lodge — DBB pp) · Child 0–5 yrs sharing with full-paying adults",
+"n": "Child 0–5 yrs sharing with full-paying adults",
 "p": 0.0
 },
 {
-"n": "High Season (Ohorongo Safari Lodge — DBB pp) · Double Room",
+"n": "Double Room",
 "p": 3582.0
 },
 {
-"n": "High Season (Ohorongo Safari Lodge — DBB pp) · Triple Room (pp)",
+"n": "Triple Room (pp)",
 "p": 3292.0
 },
 {
-"n": "High Season (Ohorongo Safari Lodge — DBB pp) · Child 6–11 yrs sharing with full-paying adults",
+"n": "Child 6–11 yrs sharing with full-paying adults",
 "p": 1791.0
 },
 {
-"n": "High Season (Ohorongo Safari Lodge — DBB pp) · Child 0–5 yrs sharing with full-paying adults",
-"p": 0.0
-},
-{
-"n": "Low Season (Ohorongo Tented Camp — FI pp, min 2-night stay) · Double Room — Fully Inclusive",
+"n": "Double Room — Fully Inclusive",
 "p": 7164.0
 },
 {
-"n": "Low Season (Ohorongo Tented Camp — FI pp, min 2-night stay) · Child 6–11 yrs sharing with full-paying adults",
+"n": "Child 6–11 yrs sharing with full-paying adults",
 "p": 3582.0
 },
 {
-"n": "Low Season (Ohorongo Tented Camp — FI pp, min 2-night stay) · Child 0–5 yrs sharing with full-paying adults",
-"p": 0.0
-},
-{
-"n": "High Season (Ohorongo Tented Camp — FI pp, min 2-night stay) · Double Room — Fully Inclusive",
+"n": "Double Room — Fully Inclusive",
 "p": 8616.0
 },
 {
-"n": "High Season (Ohorongo Tented Camp — FI pp, min 2-night stay) · Child 6–11 yrs sharing with full-paying adults",
+"n": "Child 6–11 yrs sharing with full-paying adults",
 "p": 4308.0
-},
-{
-"n": "High Season (Ohorongo Tented Camp — FI pp, min 2-night stay) · Child 0–5 yrs sharing with full-paying adults",
-"p": 0.0
 },
 {
 "n": "Nature Excursion 3–4 hr (min 2, max 6)",
@@ -1974,52 +1954,40 @@
 "region": "Central Namibia",
 "rates": [
 {
-"n": "Green Season (07.01. to 31.03.) · Double / Twin Tented Unit — DBB",
+"n": "Double / Twin Tented Unit — DBB",
 "p": 2820.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Single Tented Unit — DBB",
+"n": "Single Tented Unit — DBB",
 "p": 3807.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tree House Sleep-Out (2 Adults)",
+"n": "Tree House Sleep-Out (2 Adults)",
 "p": 5989.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tourguide DBB (pppn)",
+"n": "Tourguide DBB (pppn)",
 "p": 1727.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Double / Twin Tented Unit — DBB",
+"n": "Double / Twin Tented Unit — DBB",
 "p": 3473.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Single Tented Unit — DBB",
+"n": "Single Tented Unit — DBB",
 "p": 4689.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tree House Sleep-Out (2 Adults)",
-"p": 5989.0
-},
-{
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tourguide DBB (pppn)",
-"p": 1727.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Double / Twin Tented Unit — DBB",
+"n": "Double / Twin Tented Unit — DBB",
 "p": 3645.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Single Tented Unit — DBB",
+"n": "Single Tented Unit — DBB",
 "p": 4920.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tree House Sleep-Out (2 Adults)",
+"n": "Tree House Sleep-Out (2 Adults)",
 "p": 6921.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tourguide DBB (pppn)",
-"p": 1727.0
 },
 {
 "n": "Guided Hiking Trail pp (Scenic Erongo walk)",
@@ -2644,52 +2612,44 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "Green Season (07.01. to 31.03.) · Double / Twin Chalet — DBB",
+"n": "Double / Twin Chalet — DBB",
 "p": 2331.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Single Chalet — DBB",
+"n": "Single Chalet — DBB",
 "p": 3147.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Family Chalet — DBB",
+"n": "Family Chalet — DBB",
 "p": 2331.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tourguide DBB (pppn)",
+"n": "Tourguide DBB (pppn)",
 "p": 1727.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Double / Twin Chalet — DBB",
+"n": "Double / Twin Chalet — DBB",
 "p": 2865.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Single Chalet — DBB",
+"n": "Single Chalet — DBB",
 "p": 3867.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Family Chalet — DBB",
+"n": "Family Chalet — DBB",
 "p": 2865.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tourguide DBB (pppn)",
-"p": 1727.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Double / Twin Chalet — DBB",
+"n": "Double / Twin Chalet — DBB",
 "p": 3455.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Single Chalet — DBB",
+"n": "Single Chalet — DBB",
 "p": 4664.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Family Chalet — DBB",
+"n": "Family Chalet — DBB",
 "p": 3455.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tourguide DBB (pppn)",
-"p": 1727.0
 },
 {
 "n": "Rhino Tracking in Klip River Valley pp (3/4 day, min 2 night stay)",
@@ -2731,63 +2691,63 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "Green Season (07.01. to 31.03.) · Individual Campsite pppn (Max 8 pax)",
+"n": "Individual Campsite pppn (Max 8 pax)",
 "p": 258.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Group Campsite per night (Max 12 pax)",
+"n": "Group Campsite per night (Max 12 pax)",
 "p": 2829.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Group Campsite per night (Max 14 pax)",
+"n": "Group Campsite per night (Max 14 pax)",
 "p": 2829.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tented Camp — Catered (Meals Incl.)",
+"n": "Tented Camp — Catered (Meals Incl.)",
 "p": 853.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tented Camp — Self-Catered (Meals Excl.)",
+"n": "Tented Camp — Self-Catered (Meals Excl.)",
 "p": 610.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Individual Campsite pppn (Max 8 pax)",
+"n": "Individual Campsite pppn (Max 8 pax)",
 "p": 320.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Group Campsite per night (Max 12 pax)",
+"n": "Group Campsite per night (Max 12 pax)",
 "p": 3525.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Group Campsite per night (Max 14 pax)",
+"n": "Group Campsite per night (Max 14 pax)",
 "p": 3525.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tented Camp — Catered (Meals Incl.)",
+"n": "Tented Camp — Catered (Meals Incl.)",
 "p": 1001.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tented Camp — Self-Catered (Meals Excl.)",
+"n": "Tented Camp — Self-Catered (Meals Excl.)",
 "p": 758.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Individual Campsite pppn (Max 8 pax)",
+"n": "Individual Campsite pppn (Max 8 pax)",
 "p": 348.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Group Campsite per night (Max 12 pax)",
+"n": "Group Campsite per night (Max 12 pax)",
 "p": 3898.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Group Campsite per night (Max 14 pax)",
+"n": "Group Campsite per night (Max 14 pax)",
 "p": 3898.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tented Camp — Catered (Meals Incl.)",
+"n": "Tented Camp — Catered (Meals Incl.)",
 "p": 1031.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tented Camp — Self-Catered (Meals Excl.)",
+"n": "Tented Camp — Self-Catered (Meals Excl.)",
 "p": 789.0
 },
 {
@@ -2814,27 +2774,27 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic Room — per person sharing",
+"n": "Classic Room — per person sharing",
 "p": 1735.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic Room — single",
+"n": "Classic Room — single",
 "p": 2280.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+"n": "Classic Room — per person sharing",
 "p": 1865.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+"n": "Classic Room — single",
 "p": 2440.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+"n": "Classic Room — per person sharing",
 "p": 2110.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
+"n": "Classic Room — single",
 "p": 2785.0
 },
 {
@@ -2868,27 +2828,27 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic Room — per person sharing",
+"n": "Low Season · Classic Room — per person sharing",
 "p": 1855.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic Room — single",
+"n": "Low Season · Classic Room — single",
 "p": 2440.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+"n": "Shoulder Season · Classic Room — per person sharing",
 "p": 2010.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+"n": "Shoulder Season · Classic Room — single",
 "p": 2630.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+"n": "High Season · Classic Room — per person sharing",
 "p": 2305.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
+"n": "High Season · Classic Room — single",
 "p": 3030.0
 }
 ]
@@ -3848,51 +3808,51 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "High Season (01.03. to 30.11.) · Standard Tent — per person sharing",
+"n": "Standard Tent — per person sharing",
 "p": 2080.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Standard Tent — Single use",
+"n": "Standard Tent — Single use",
 "p": 2720.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Premium Tent — per person sharing",
+"n": "Premium Tent — per person sharing",
 "p": 3360.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Premium Tent — Single use",
+"n": "Premium Tent — Single use",
 "p": 4368.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing (Standard)",
+"n": "4–12 years sharing (Standard)",
 "p": 1040.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing (Premium)",
+"n": "4–12 years sharing (Premium)",
 "p": 1680.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Standard Tent — per person sharing",
+"n": "Standard Tent — per person sharing",
 "p": 1800.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Standard Tent — Single use",
+"n": "Standard Tent — Single use",
 "p": 2360.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Premium Tent — per person sharing",
+"n": "Premium Tent — per person sharing",
 "p": 2640.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Premium Tent — Single use",
+"n": "Premium Tent — Single use",
 "p": 3440.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing (Standard)",
+"n": "4–12 years sharing (Standard)",
 "p": 900.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing (Premium)",
+"n": "4–12 years sharing (Premium)",
 "p": 1320.0
 },
 {
@@ -4485,35 +4445,35 @@
 "region": "East Etosha",
 "rates": [
 {
-"n": "Low Season (01 Nov – 30 Jun — B&B) · Per person sharing",
+"n": "Per person sharing",
 "p": 1477.5
 },
 {
-"n": "Low Season (01 Nov – 30 Jun — B&B) · Single supplement",
+"n": "Single supplement",
 "p": 2325.0
 },
 {
-"n": "Low Season (01 Nov – 30 Jun — DBB) · Per person sharing",
+"n": "Per person sharing",
 "p": 1856.25
 },
 {
-"n": "Low Season (01 Nov – 30 Jun — DBB) · Single supplement",
+"n": "Single supplement",
 "p": 2970.0
 },
 {
-"n": "High Season (01 Jul – 31 Oct — B&B) · Per person sharing",
+"n": "Per person sharing",
 "p": 1875.0
 },
 {
-"n": "High Season (01 Jul – 31 Oct — B&B) · Single supplement",
+"n": "Single supplement",
 "p": 3000.0
 },
 {
-"n": "High Season (01 Jul – 31 Oct — DBB) · Per person sharing",
+"n": "Per person sharing",
 "p": 2257.5
 },
 {
-"n": "High Season (01 Jul – 31 Oct — DBB) · Single supplement",
+"n": "Single supplement",
 "p": 3210.0
 },
 {
@@ -4954,36 +4914,28 @@
 "region": "East Etosha",
 "rates": [
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Tent — Single Use DBB",
+"n": "Double Tent — Single Use DBB",
 "p": 3200.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Tent — Sharing DBB",
+"n": "Double Tent — Sharing DBB",
 "p": 2480.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Child Rate 4–12 years sharing — DBB",
+"n": "Child Rate 4–12 years sharing — DBB",
 "p": 1120.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Single Guide Room — DBB",
+"n": "Single Guide Room — DBB",
 "p": 1700.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Tent — Single Use DBB",
+"n": "Double Tent — Single Use DBB",
 "p": 3440.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Tent — Sharing DBB",
+"n": "Double Tent — Sharing DBB",
 "p": 2680.0
-},
-{
-"n": "High Season (01.07. to 31.12.) · Child Rate 4–12 years sharing — DBB",
-"p": 1120.0
-},
-{
-"n": "High Season (01.07. to 31.12.) · Single Guide Room — DBB",
-"p": 1700.0
 },
 {
 "n": "Morning or Afternoon Scheduled Game Drive (pp)",
@@ -5013,44 +4965,40 @@
 "region": "East Etosha",
 "rates": [
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Chalet — Single Use DBB",
+"n": "Double Chalet — Single Use DBB",
 "p": 4400.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Chalet — Sharing DBB",
+"n": "Double Chalet — Sharing DBB",
 "p": 3280.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Triple Room — Sharing DBB",
+"n": "Triple Room — Sharing DBB",
 "p": 3280.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Family House — Sharing pp DBB",
+"n": "Family House — Sharing pp DBB",
 "p": 3280.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Single Guide Room — DBB",
+"n": "Single Guide Room — DBB",
 "p": 1700.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Chalet — Single Use DBB",
+"n": "Double Chalet — Single Use DBB",
 "p": 4720.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Chalet — Sharing DBB",
+"n": "Double Chalet — Sharing DBB",
 "p": 3520.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Triple Room — Sharing DBB",
+"n": "Triple Room — Sharing DBB",
 "p": 3520.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Family House — Sharing pp DBB",
+"n": "Family House — Sharing pp DBB",
 "p": 3520.0
-},
-{
-"n": "High Season (01.07. to 31.12.) · Single Guide Room — DBB",
-"p": 1700.0
 },
 {
 "n": "Morning or Afternoon Scheduled Game Drive (pp)",
@@ -5080,44 +5028,40 @@
 "region": "East Etosha",
 "rates": [
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Tent — Single Use DBB",
+"n": "Double Tent — Single Use DBB",
 "p": 4560.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Tent — Sharing DBB",
+"n": "Double Tent — Sharing DBB",
 "p": 3480.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Tent — Single Use Fully Inclusive",
+"n": "Double Tent — Single Use Fully Inclusive",
 "p": 8320.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Tent — Sharing Fully Inclusive",
+"n": "Double Tent — Sharing Fully Inclusive",
 "p": 6360.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Single Guide Tent — DBB",
+"n": "Single Guide Tent — DBB",
 "p": 1700.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Tent — Single Use DBB",
+"n": "Double Tent — Single Use DBB",
 "p": 4880.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Tent — Sharing DBB",
+"n": "Double Tent — Sharing DBB",
 "p": 3760.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Tent — Single Use Fully Inclusive",
+"n": "Double Tent — Single Use Fully Inclusive",
 "p": 8880.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Tent — Sharing Fully Inclusive",
+"n": "Double Tent — Sharing Fully Inclusive",
 "p": 6880.0
-},
-{
-"n": "High Season (01.07. to 31.12.) · Single Guide Tent — DBB",
-"p": 1700.0
 },
 {
 "n": "Morning or Afternoon Scheduled Game Drive (pp)",
@@ -5648,44 +5592,40 @@
 "region": "East Etosha",
 "rates": [
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Single Occupancy — DBB",
+"n": "Single Occupancy — DBB",
 "p": 7440.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Occupancy — DBB",
+"n": "Double Occupancy — DBB",
 "p": 5680.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Single Occupancy — Fully Inclusive",
+"n": "Single Occupancy — Fully Inclusive",
 "p": 10880.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Double Occupancy — Fully Inclusive",
+"n": "Double Occupancy — Fully Inclusive",
 "p": 8320.0
 },
 {
-"n": "Shoulder Season (01.01. to 30.06.) · Single Guide Room — DBB",
+"n": "Single Guide Room — DBB",
 "p": 1700.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Single Occupancy — DBB",
+"n": "Single Occupancy — DBB",
 "p": 8000.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Occupancy — DBB",
+"n": "Double Occupancy — DBB",
 "p": 6160.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Single Occupancy — Fully Inclusive",
+"n": "Single Occupancy — Fully Inclusive",
 "p": 11760.0
 },
 {
-"n": "High Season (01.07. to 31.12.) · Double Occupancy — Fully Inclusive",
+"n": "Double Occupancy — Fully Inclusive",
 "p": 9000.0
-},
-{
-"n": "High Season (01.07. to 31.12.) · Single Guide Room — DBB",
-"p": 1700.0
 },
 {
 "n": "Morning or Afternoon Scheduled Game Drive (pp)",
@@ -6095,76 +6035,60 @@
 "region": "Fish River Canyon",
 "rates": [
 {
-"n": "Green Season (07.01. to 31.03.) · Double / Twin Room — FB+",
+"n": "Double / Twin Room — FB+",
 "p": 5252.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Single Room — FB+",
+"n": "Single Room — FB+",
 "p": 6294.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Double / Twin Room — DBB",
+"n": "Double / Twin Room — DBB",
 "p": 2976.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Single Room — DBB",
+"n": "Single Room — DBB",
 "p": 4018.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tourguide FB (pppn)",
+"n": "Tourguide FB (pppn)",
 "p": 1967.0
 },
 {
-"n": "Green Season (07.01. to 31.03.) · Tourguide DBB (pppn)",
+"n": "Tourguide DBB (pppn)",
 "p": 1727.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Double / Twin Room — FB+",
+"n": "Double / Twin Room — FB+",
 "p": 5951.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Single Room — FB+",
+"n": "Single Room — FB+",
 "p": 7238.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Double / Twin Room — DBB",
+"n": "Double / Twin Room — DBB",
 "p": 3676.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Single Room — DBB",
+"n": "Single Room — DBB",
 "p": 4962.0
 },
 {
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tourguide FB (pppn)",
-"p": 1967.0
-},
-{
-"n": "Low Season (01.04. to 30.06. & 16.11. to 14.12.) · Tourguide DBB (pppn)",
-"p": 1727.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Double / Twin Room — FB+",
+"n": "Double / Twin Room — FB+",
 "p": 6209.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Single Room — FB+",
+"n": "Single Room — FB+",
 "p": 7586.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Double / Twin Room — DBB",
+"n": "Double / Twin Room — DBB",
 "p": 3934.0
 },
 {
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Single Room — DBB",
+"n": "Single Room — DBB",
 "p": 5311.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tourguide FB (pppn)",
-"p": 1967.0
-},
-{
-"n": "High Season (01.07. to 15.11. & 15.12. to 06.01.) · Tourguide DBB (pppn)",
-"p": 1727.0
 },
 {
 "n": "Canyon Hike — 2 Night Package",
@@ -6636,60 +6560,56 @@
 "region": "Kalahari",
 "rates": [
 {
-"n": "High Season (01.03. to 30.11.) · Suite — per person sharing",
+"n": "Suite — per person sharing",
 "p": 4800.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Suite — Single use",
+"n": "Suite — Single use",
 "p": 6240.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Superior Suite — per person sharing",
+"n": "Superior Suite — per person sharing",
 "p": 6400.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing in Suite",
+"n": "4–12 years sharing in Suite",
 "p": 2400.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing in Superior Suite",
+"n": "4–12 years sharing in Superior Suite",
 "p": 3200.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 13+ years sharing in Superior Suite",
+"n": "13+ years sharing in Superior Suite",
 "p": 6400.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Tour Guide (Meals only)",
+"n": "Tour Guide (Meals only)",
 "p": 1190.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Suite — per person sharing",
+"n": "Suite — per person sharing",
 "p": 3200.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Suite — Single use",
+"n": "Suite — Single use",
 "p": 4160.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Superior Suite — per person sharing",
+"n": "Superior Suite — per person sharing",
 "p": 4800.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing in Suite",
+"n": "4–12 years sharing in Suite",
 "p": 1600.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing in Superior Suite",
+"n": "4–12 years sharing in Superior Suite",
 "p": 2400.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 13+ years sharing in Superior Suite",
+"n": "13+ years sharing in Superior Suite",
 "p": 4800.0
-},
-{
-"n": "Low Season (01.12. to 28.02.) · Tour Guide (Meals only)",
-"p": 1190.0
 },
 {
 "n": "2 Night — per person sharing (Suite) — High Season (N$)",
@@ -6731,44 +6651,40 @@
 "region": "Kalahari",
 "rates": [
 {
-"n": "High Season (01.03. to 30.11.) · Standard Tent — per person sharing",
+"n": "Standard Tent — per person sharing",
 "p": 2200.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Standard Tent — Single use",
+"n": "Standard Tent — Single use",
 "p": 2860.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing with 1–2 full paying adults",
+"n": "4–12 years sharing with 1–2 full paying adults",
 "p": 1100.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 13+ years sharing with 2 full paying adults",
+"n": "13+ years sharing with 2 full paying adults",
 "p": 2200.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Tour Guide Room",
+"n": "Tour Guide Room",
 "p": 990.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Standard Tent — per person sharing",
+"n": "Standard Tent — per person sharing",
 "p": 1680.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Standard Tent — Single use",
+"n": "Standard Tent — Single use",
 "p": 2184.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing with 1–2 full paying adults",
+"n": "4–12 years sharing with 1–2 full paying adults",
 "p": 840.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 13+ years sharing with 2 full paying adults",
+"n": "13+ years sharing with 2 full paying adults",
 "p": 1680.0
-},
-{
-"n": "Low Season (01.12. to 28.02.) · Tour Guide Room",
-"p": 990.0
 },
 {
 "n": "Morning Nature Drive (approx. 2 hours)",
@@ -6794,28 +6710,24 @@
 "region": "Kaokoland",
 "rates": [
 {
-"n": "Low Season (1 Jan – 30 Jun) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 5053.0
 },
 {
-"n": "Low Season (1 Jan – 30 Jun) · Single",
+"n": "Single",
 "p": 6277.0
 },
 {
-"n": "Low Season (1 Jan – 30 Jun) · Conservation Levy (pppn)",
+"n": "Conservation Levy (pppn)",
 "p": 280.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 6324.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Single",
+"n": "Single",
 "p": 8007.0
-},
-{
-"n": "High Season (1 Jul – 31 Dec) · Conservation Levy (pppn)",
-"p": 280.0
 }
 ]
 },
@@ -6825,28 +6737,24 @@
 "region": "Kaokoland",
 "rates": [
 {
-"n": "Low Season (1 Jan – 30 Jun) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 4692.0
 },
 {
-"n": "Low Season (1 Jan – 30 Jun) · Single",
+"n": "Single",
 "p": 5835.0
 },
 {
-"n": "Low Season (1 Jan – 30 Jun) · Conservation Levy (pppn)",
+"n": "Conservation Levy (pppn)",
 "p": 280.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 5614.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Single",
+"n": "Single",
 "p": 7110.0
-},
-{
-"n": "High Season (1 Jul – 31 Dec) · Conservation Levy (pppn)",
-"p": 280.0
 },
 {
 "n": "Low — ≤3 pax (25% off)",
@@ -6867,27 +6775,27 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season (1 Jan – 30 Jun) · Per Person Sharing",
+"n": "Low Season · Per Person Sharing",
 "p": 5066.0
 },
 {
-"n": "Low Season (1 Jan – 30 Jun) · Single",
+"n": "Low Season · Single",
 "p": 6298.0
 },
 {
-"n": "Low Season (1 Jan – 30 Jun) · Conservation Levy (pppn)",
+"n": "Low Season · Conservation Levy (pppn)",
 "p": 290.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Per Person Sharing",
+"n": "High Season · Per Person Sharing",
 "p": 5894.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Single",
+"n": "High Season · Single",
 "p": 7463.0
 },
 {
-"n": "High Season (1 Jul – 31 Dec) · Conservation Levy (pppn)",
+"n": "High Season · Conservation Levy (pppn)",
 "p": 290.0
 },
 {
@@ -8189,27 +8097,27 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "Low Season (1 Nov – 31 May) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 3080.0
 },
 {
-"n": "Low Season (1 Nov – 31 May) · Per Person Single",
+"n": "Per Person Single",
 "p": 3430.0
 },
 {
-"n": "High Season (1 Jun – 31 Oct) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 4200.0
 },
 {
-"n": "High Season (1 Jun – 31 Oct) · Per Person Single",
+"n": "Per Person Single",
 "p": 4410.0
 },
 {
-"n": "Low Season (1 Nov – 31 May) · Per Person Sharing",
+"n": "Per Person Sharing",
 "p": 3290.0
 },
 {
-"n": "Low Season (1 Nov – 31 May) · Per Person Single",
+"n": "Per Person Single",
 "p": 3640.0
 },
 {
@@ -8315,39 +8223,31 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "Low Season (1 Dec – 30 Apr) · Luxury Chalet (up to 2 pax)",
+"n": "Luxury Chalet (up to 2 pax)",
 "p": 6120.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 1530.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 1330.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Luxury Chalet (up to 2 pax)",
+"n": "Luxury Chalet (up to 2 pax)",
 "p": 6530.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 1630.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Guide Room — DBB (pp)",
-"p": 1330.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Luxury Chalet (up to 2 pax)",
-"p": 6530.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 1640.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 1460.0
 },
 {
@@ -8418,44 +8318,40 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "High Season (01.03. to 30.11.) · Standard Chalet — per person sharing",
+"n": "Standard Chalet — per person sharing",
 "p": 2640.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Standard Chalet — Single use",
+"n": "Standard Chalet — Single use",
 "p": 3440.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing",
+"n": "4–12 years sharing",
 "p": 1320.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 13+ years sharing",
+"n": "13+ years sharing",
 "p": 2640.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Tour Guide Room",
+"n": "Tour Guide Room",
 "p": 990.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Standard Chalet — per person sharing",
+"n": "Standard Chalet — per person sharing",
 "p": 2040.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Standard Chalet — Single use",
+"n": "Standard Chalet — Single use",
 "p": 2552.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing",
+"n": "4–12 years sharing",
 "p": 1020.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 13+ years sharing",
+"n": "13+ years sharing",
 "p": 2040.0
-},
-{
-"n": "Low Season (01.12. to 28.02.) · Tour Guide Room",
-"p": 990.0
 },
 {
 "n": "Sossusvlei Excursion",
@@ -8583,39 +8479,35 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "Low Season (1 Dec – 30 Apr) · Standard Room (up to 2 pax)",
+"n": "Standard Room (up to 2 pax)",
 "p": 1910.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 540.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 850.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Standard Room (up to 2 pax)",
+"n": "Standard Room (up to 2 pax)",
 "p": 2050.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 580.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Guide Room — DBB (pp)",
-"p": 850.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Standard Room (up to 2 pax)",
+"n": "Standard Room (up to 2 pax)",
 "p": 2070.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 590.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 1050.0
 },
 {
@@ -8781,51 +8673,51 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "Low Season (01.01.26 to 30.06.) · Camelthorn Room — DBL/Sharing DBB",
+"n": "Camelthorn Room — DBL/Sharing DBB",
 "p": 3096.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Camelthorn Room — Single DBB",
+"n": "Camelthorn Room — Single DBB",
 "p": 4136.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Camelthorn Room — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Camelthorn Room — 1 Child 13–17 Yrs Sharing Adult",
 "p": 774.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Oasis Room — DBL/Sharing DBB",
+"n": "Oasis Room — DBL/Sharing DBB",
 "p": 3420.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Oasis Room — Single DBB",
+"n": "Oasis Room — Single DBB",
 "p": 4561.0
 },
 {
-"n": "Low Season (01.01.26 to 30.06.) · Oasis Room — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Oasis Room — 1 Child 13–17 Yrs Sharing Adult",
 "p": 855.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Camelthorn Room — DBL/Sharing DBB",
+"n": "Camelthorn Room — DBL/Sharing DBB",
 "p": 3792.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Camelthorn Room — Single DBB",
+"n": "Camelthorn Room — Single DBB",
 "p": 5012.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Camelthorn Room — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Camelthorn Room — 1 Child 13–17 Yrs Sharing Adult",
 "p": 948.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Oasis Room — DBL/Sharing DBB",
+"n": "Oasis Room — DBL/Sharing DBB",
 "p": 4200.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Oasis Room — Single DBB",
+"n": "Oasis Room — Single DBB",
 "p": 5540.0
 },
 {
-"n": "High Season (01.07.26 to 30.11.) · Oasis Room — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Oasis Room — 1 Child 13–17 Yrs Sharing Adult",
 "p": 1050.0
 },
 {
@@ -9140,47 +9032,47 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "High Season (01 Mar – 30 Nov — DBB pp) · Suite — pp sharing",
+"n": "Suite — pp sharing",
 "p": 9460.0
 },
 {
-"n": "High Season (01 Mar – 30 Nov — DBB pp) · Suite — single",
+"n": "Suite — single",
 "p": 13710.0
 },
 {
-"n": "High Season (01 Mar – 30 Nov — DBB pp) · Superior Suite — pp sharing",
+"n": "Superior Suite — pp sharing",
 "p": 9890.0
 },
 {
-"n": "High Season (01 Mar – 30 Nov — DBB pp) · Child 4–12 yrs sharing with 1 full-paying adult",
+"n": "Child 4–12 yrs sharing with 1 full-paying adult",
 "p": 4855.0
 },
 {
-"n": "High Season (01 Mar – 30 Nov — DBB pp) · Child 4–12 yrs sharing with 2 full-paying adults",
+"n": "Child 4–12 yrs sharing with 2 full-paying adults",
 "p": 2935.0
 },
 {
-"n": "High Season (01 Mar – 30 Nov — DBB pp) · Family Suite — 2 adults + 2 children (4–12 yrs)",
+"n": "Family Suite — 2 adults + 2 children (4–12 yrs)",
 "p": 6440.0
 },
 {
-"n": "Low Season (01 Dec – 28 Feb — DBB pp) · Suite — pp sharing",
+"n": "Suite — pp sharing",
 "p": 7140.0
 },
 {
-"n": "Low Season (01 Dec – 28 Feb — DBB pp) · Suite — single",
+"n": "Suite — single",
 "p": 10760.0
 },
 {
-"n": "Low Season (01 Dec – 28 Feb — DBB pp) · Superior Suite — pp sharing",
+"n": "Superior Suite — pp sharing",
 "p": 7530.0
 },
 {
-"n": "Low Season (01 Dec – 28 Feb — DBB pp) · Child 4–12 yrs sharing with 1 full-paying adult",
+"n": "Child 4–12 yrs sharing with 1 full-paying adult",
 "p": 4185.0
 },
 {
-"n": "Low Season (01 Dec – 28 Feb — DBB pp) · Child 4–12 yrs sharing with 2 full-paying adults",
+"n": "Child 4–12 yrs sharing with 2 full-paying adults",
 "p": 2528.0
 },
 {
@@ -9766,39 +9658,35 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "Low Season (1 Dec – 30 Apr) · Luxury Chalet (up to 2 pax)",
+"n": "Luxury Chalet (up to 2 pax)",
 "p": 3830.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 960.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 810.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Luxury Chalet (up to 2 pax)",
+"n": "Luxury Chalet (up to 2 pax)",
 "p": 4080.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 1020.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Guide Room — DBB (pp)",
-"p": 810.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Luxury Chalet (up to 2 pax)",
+"n": "Luxury Chalet (up to 2 pax)",
 "p": 4500.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 1130.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 900.0
 },
 {
@@ -10541,44 +10429,40 @@
 "region": "South Etosha",
 "rates": [
 {
-"n": "High Season (01.03. to 30.11.) · Suite — per person sharing",
+"n": "Suite — per person sharing",
 "p": 6720.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Suite — Single use",
+"n": "Suite — Single use",
 "p": 8720.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 4–12 years sharing",
+"n": "4–12 years sharing",
 "p": 3360.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · 13+ years sharing",
+"n": "13+ years sharing",
 "p": 6720.0
 },
 {
-"n": "High Season (01.03. to 30.11.) · Tour Guide (Meals only)",
+"n": "Tour Guide (Meals only)",
 "p": 1190.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Suite — per person sharing",
+"n": "Suite — per person sharing",
 "p": 5480.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · Suite — Single use",
+"n": "Suite — Single use",
 "p": 7120.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 4–12 years sharing",
+"n": "4–12 years sharing",
 "p": 2740.0
 },
 {
-"n": "Low Season (01.12. to 28.02.) · 13+ years sharing",
+"n": "13+ years sharing",
 "p": 5480.0
-},
-{
-"n": "Low Season (01.12. to 28.02.) · Tour Guide (Meals only)",
-"p": 1190.0
 },
 {
 "n": "Etosha Game Drive (7–8h) incl. drinks & lunch packs",
@@ -10596,39 +10480,27 @@
 "region": "South Etosha",
 "rates": [
 {
-"n": "Low Season (1 Dec – 30 Apr) · Bungalow / Bush Chalet (up to 2 pax)",
+"n": "Bungalow / Bush Chalet (up to 2 pax)",
 "p": 2490.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 660.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 980.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Bungalow / Bush Chalet (up to 2 pax)",
+"n": "Bungalow / Bush Chalet (up to 2 pax)",
 "p": 2660.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 710.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Guide Room — DBB (pp)",
-"p": 980.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Bungalow / Bush Chalet (up to 2 pax)",
-"p": 2660.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Additional Child Sharing 7–12 (pp)",
-"p": 710.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Guide Room — DBB (pp)",
+"n": "Guide Room — DBB (pp)",
 "p": 1050.0
 },
 {
@@ -11222,51 +11094,51 @@
 "region": "South Etosha",
 "rates": [
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Room — per person sharing",
+"n": "Bush Room — per person sharing",
 "p": 1155.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Chalet — per person sharing",
+"n": "Bush Chalet — per person sharing",
 "p": 1310.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Room — single",
+"n": "Bush Room — single",
 "p": 1550.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Chalet — single",
+"n": "Bush Chalet — single",
 "p": 1825.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — per person sharing",
+"n": "Bush Room — per person sharing",
 "p": 1230.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — per person sharing",
+"n": "Bush Chalet — per person sharing",
 "p": 1375.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — single",
+"n": "Bush Room — single",
 "p": 1650.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — single",
+"n": "Bush Chalet — single",
 "p": 1935.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Room — per person sharing",
+"n": "Bush Room — per person sharing",
 "p": 1425.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Chalet — per person sharing",
+"n": "Bush Chalet — per person sharing",
 "p": 1570.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Room — single",
+"n": "Bush Room — single",
 "p": 1915.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Chalet — single",
+"n": "Bush Chalet — single",
 "p": 2200.0
 },
 {
@@ -11320,51 +11192,51 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Room — per person sharing",
+"n": "Low Season · Bush Room — per person sharing",
 "p": 1335.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Chalet — per person sharing",
+"n": "Low Season · Bush Chalet — per person sharing",
 "p": 1475.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Room — single",
+"n": "Low Season · Bush Room — single",
 "p": 1800.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Bush Chalet — single",
+"n": "Low Season · Bush Chalet — single",
 "p": 2010.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — per person sharing",
+"n": "Shoulder Season · Bush Room — per person sharing",
 "p": 1435.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — per person sharing",
+"n": "Shoulder Season · Bush Chalet — per person sharing",
 "p": 1550.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — single",
+"n": "Shoulder Season · Bush Room — single",
 "p": 1930.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — single",
+"n": "Shoulder Season · Bush Chalet — single",
 "p": 2120.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Room — per person sharing",
+"n": "High Season · Bush Room — per person sharing",
 "p": 1680.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Chalet — per person sharing",
+"n": "High Season · Bush Chalet — per person sharing",
 "p": 1775.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Room — single",
+"n": "High Season · Bush Room — single",
 "p": 2255.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Bush Chalet — single",
+"n": "High Season · Bush Chalet — single",
 "p": 2440.0
 },
 {
@@ -11524,60 +11396,52 @@
 "region": "Swakopmund",
 "rates": [
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Single Room",
+"n": "Single Room",
 "p": 1120.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Luxury Single Room",
+"n": "Luxury Single Room",
 "p": 1280.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Double Room — pp sharing",
+"n": "Double Room — pp sharing",
 "p": 1040.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Luxury Double — pp sharing",
+"n": "Luxury Double — pp sharing",
 "p": 1160.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Family Suite — pp sharing",
+"n": "Family Suite — pp sharing",
 "p": 1160.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Children 7–12 yrs per child",
+"n": "Children 7–12 yrs per child",
 "p": 600.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar — B&B) · Guide",
+"n": "Guide",
 "p": 700.0
 },
 {
-"n": "High Season (01 Apr – 31 Dec — B&B) · Single Room",
+"n": "Single Room",
 "p": 1440.0
 },
 {
-"n": "High Season (01 Apr – 31 Dec — B&B) · Luxury Single Room",
+"n": "Luxury Single Room",
 "p": 1600.0
 },
 {
-"n": "High Season (01 Apr – 31 Dec — B&B) · Double Room — pp sharing",
+"n": "Double Room — pp sharing",
 "p": 1160.0
 },
 {
-"n": "High Season (01 Apr – 31 Dec — B&B) · Luxury Double — pp sharing",
+"n": "Luxury Double — pp sharing",
 "p": 1360.0
 },
 {
-"n": "High Season (01 Apr – 31 Dec — B&B) · Family Suite — pp sharing",
+"n": "Family Suite — pp sharing",
 "p": 1360.0
-},
-{
-"n": "High Season (01 Apr – 31 Dec — B&B) · Children 7–12 yrs per child",
-"p": 600.0
-},
-{
-"n": "High Season (01 Apr – 31 Dec — B&B) · Guide",
-"p": 700.0
 }
 ]
 },
@@ -11587,39 +11451,35 @@
 "region": "Swakopmund",
 "rates": [
 {
-"n": "Low Season (1 Dec – 30 Apr) · Standard Room (up to 2 pax)",
+"n": "Standard Room (up to 2 pax)",
 "p": 2130.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 530.0
 },
 {
-"n": "Low Season (1 Dec – 30 Apr) · Guide Room — BB (pp)",
+"n": "Guide Room — BB (pp)",
 "p": 720.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Standard Room (up to 2 pax)",
+"n": "Standard Room (up to 2 pax)",
 "p": 2270.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 570.0
 },
 {
-"n": "High Season (1 May – 30 Nov) · Guide Room — BB (pp)",
-"p": 720.0
-},
-{
-"n": "Low Season (1 Dec – 28 Feb) · Standard Room (up to 2 pax)",
+"n": "Standard Room (up to 2 pax)",
 "p": 2250.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Additional Child Sharing 7–12 (pp)",
+"n": "Additional Child Sharing 7–12 (pp)",
 "p": 560.0
 },
 {
-"n": "Low Season (1 Dec – 28 Feb) · Guide Room — BB (pp)",
+"n": "Guide Room — BB (pp)",
 "p": 800.0
 },
 {
@@ -11931,99 +11791,99 @@
 "region": "Swakopmund",
 "rates": [
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — pp sharing",
+"n": "Classic / Cottage Room — pp sharing",
 "p": 1005.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Room — pp sharing",
+"n": "Luxury Room — pp sharing",
 "p": 1315.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Suite — pp sharing",
+"n": "Luxury Suite — pp sharing",
 "p": 1440.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — pp sharing",
+"n": "Sea View Cottage Suite — pp sharing",
 "p": 1905.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — single",
+"n": "Classic / Cottage Room — single",
 "p": 1335.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Room — single",
+"n": "Luxury Room — single",
 "p": 1675.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Suite — single",
+"n": "Luxury Suite — single",
 "p": 1865.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — single",
+"n": "Sea View Cottage Suite — single",
 "p": 2315.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — pp sharing",
+"n": "Classic / Cottage Room — pp sharing",
 "p": 1105.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — pp sharing",
+"n": "Luxury Room — pp sharing",
 "p": 1440.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — pp sharing",
+"n": "Luxury Suite — pp sharing",
 "p": 1595.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — pp sharing",
+"n": "Sea View Cottage Suite — pp sharing",
 "p": 2055.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — single",
+"n": "Classic / Cottage Room — single",
 "p": 1455.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — single",
+"n": "Luxury Room — single",
 "p": 1835.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — single",
+"n": "Luxury Suite — single",
 "p": 2055.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — single",
+"n": "Sea View Cottage Suite — single",
 "p": 2560.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — pp sharing",
+"n": "Classic / Cottage Room — pp sharing",
 "p": 1245.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Room — pp sharing",
+"n": "Luxury Room — pp sharing",
 "p": 1560.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Suite — pp sharing",
+"n": "Luxury Suite — pp sharing",
 "p": 1705.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — pp sharing",
+"n": "Sea View Cottage Suite — pp sharing",
 "p": 2225.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — single",
+"n": "Classic / Cottage Room — single",
 "p": 1640.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Room — single",
+"n": "Luxury Room — single",
 "p": 1985.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Suite — single",
+"n": "Luxury Suite — single",
 "p": 2200.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — single",
+"n": "Sea View Cottage Suite — single",
 "p": 2720.0
 },
 {
@@ -12041,99 +11901,99 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — pp sharing",
+"n": "Low Season · Classic / Cottage Room — pp sharing",
 "p": 1090.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Room — pp sharing",
+"n": "Low Season · Luxury Room — pp sharing",
 "p": 1420.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Suite — pp sharing",
+"n": "Low Season · Luxury Suite — pp sharing",
 "p": 1560.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — pp sharing",
+"n": "Low Season · Sea View Cottage Suite — pp sharing",
 "p": 2065.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — single",
+"n": "Low Season · Classic / Cottage Room — single",
 "p": 1440.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Room — single",
+"n": "Low Season · Luxury Room — single",
 "p": 1800.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Luxury Suite — single",
+"n": "Low Season · Luxury Suite — single",
 "p": 2010.0
 },
 {
-"n": "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — single",
+"n": "Low Season · Sea View Cottage Suite — single",
 "p": 2495.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — pp sharing",
+"n": "Shoulder Season · Classic / Cottage Room — pp sharing",
 "p": 1210.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — pp sharing",
+"n": "Shoulder Season · Luxury Room — pp sharing",
 "p": 1580.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — pp sharing",
+"n": "Shoulder Season · Luxury Suite — pp sharing",
 "p": 1740.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — pp sharing",
+"n": "Shoulder Season · Sea View Cottage Suite — pp sharing",
 "p": 2250.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — single",
+"n": "Shoulder Season · Classic / Cottage Room — single",
 "p": 1585.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — single",
+"n": "Shoulder Season · Luxury Room — single",
 "p": 1995.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — single",
+"n": "Shoulder Season · Luxury Suite — single",
 "p": 2240.0
 },
 {
-"n": "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — single",
+"n": "Shoulder Season · Sea View Cottage Suite — single",
 "p": 2780.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — pp sharing",
+"n": "High Season · Classic / Cottage Room — pp sharing",
 "p": 1385.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Room — pp sharing",
+"n": "High Season · Luxury Room — pp sharing",
 "p": 1730.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Suite — pp sharing",
+"n": "High Season · Luxury Suite — pp sharing",
 "p": 1890.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — pp sharing",
+"n": "High Season · Sea View Cottage Suite — pp sharing",
 "p": 2465.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — single",
+"n": "High Season · Classic / Cottage Room — single",
 "p": 1820.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Room — single",
+"n": "High Season · Luxury Room — single",
 "p": 2200.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Luxury Suite — single",
+"n": "High Season · Luxury Suite — single",
 "p": 2440.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — single",
+"n": "High Season · Sea View Cottage Suite — single",
 "p": 3020.0
 }
 ]
@@ -13541,51 +13401,51 @@
 "region": "Windhoek",
 "rates": [
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+"n": "Classic Room — per person sharing",
 "p": 1080.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
+"n": "Terrace Room — per person sharing",
 "p": 1570.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
+"n": "Terrace Suite — per person sharing",
 "p": 1790.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+"n": "Classic Room — single",
 "p": 1530.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
+"n": "Terrace Room — single",
 "p": 2175.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
+"n": "Terrace Suite — single",
 "p": 2530.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+"n": "Classic Room — per person sharing",
 "p": 1135.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
+"n": "Terrace Room — per person sharing",
 "p": 1640.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
+"n": "Terrace Suite — per person sharing",
 "p": 1870.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
+"n": "Classic Room — single",
 "p": 1585.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Room — single",
+"n": "Terrace Room — single",
 "p": 2240.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
+"n": "Terrace Suite — single",
 "p": 2625.0
 },
 {
@@ -13611,51 +13471,51 @@
 ],
 "rates_2027": [
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+"n": "Low Season · Classic Room — per person sharing",
 "p": 1210.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
+"n": "Low Season · Terrace Room — per person sharing",
 "p": 1700.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
+"n": "Low Season · Terrace Suite — per person sharing",
 "p": 1935.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+"n": "Low Season · Classic Room — single",
 "p": 1700.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
+"n": "Low Season · Terrace Room — single",
 "p": 2360.0
 },
 {
-"n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
+"n": "Low Season · Terrace Suite — single",
 "p": 2725.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+"n": "High Season · Classic Room — per person sharing",
 "p": 1305.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
+"n": "High Season · Terrace Room — per person sharing",
 "p": 1815.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
+"n": "High Season · Terrace Suite — per person sharing",
 "p": 2040.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
+"n": "High Season · Classic Room — single",
 "p": 1815.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Room — single",
+"n": "High Season · Terrace Room — single",
 "p": 2465.0
 },
 {
-"n": "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
+"n": "High Season · Terrace Suite — single",
 "p": 2860.0
 }
 ]
@@ -13777,35 +13637,35 @@
 "region": "Windhoek",
 "rates": [
 {
-"n": "Low Season (Jan – Jun — B&B) · Junior Suite — pp sharing",
+"n": "Junior Suite — pp sharing",
 "p": 4543.0
 },
 {
-"n": "Low Season (Jan – Jun — B&B) · Premier Suite — pp sharing",
+"n": "Premier Suite — pp sharing",
 "p": 5680.0
 },
 {
-"n": "Low Season (Jan – Jun — B&B) · Junior Suite — single",
+"n": "Junior Suite — single",
 "p": 5118.0
 },
 {
-"n": "Low Season (Jan – Jun — B&B) · Premier Suite — single",
+"n": "Premier Suite — single",
 "p": 6422.0
 },
 {
-"n": "High Season (Jul – Dec — B&B) · Junior Suite — pp sharing",
+"n": "Junior Suite — pp sharing",
 "p": 4913.0
 },
 {
-"n": "High Season (Jul – Dec — B&B) · Premier Suite — pp sharing",
+"n": "Premier Suite — pp sharing",
 "p": 6149.0
 },
 {
-"n": "High Season (Jul – Dec — B&B) · Junior Suite — single",
+"n": "Junior Suite — single",
 "p": 5539.0
 },
 {
-"n": "High Season (Jul – Dec — B&B) · Premier Suite — single",
+"n": "Premier Suite — single",
 "p": 6948.0
 },
 {
@@ -13856,35 +13716,35 @@
 "p": 4400.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 1 person — Low (N$)",
+"n": "Hosea Kutako Airport return -- 1 person — Low (N$)",
 "p": 566.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 1 person — High (N$)",
+"n": "Hosea Kutako Airport return -- 1 person — High (N$)",
 "p": 612.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 2-3 pax pp — Low (N$)",
+"n": "Hosea Kutako Airport return -- 2-3 pax pp — Low (N$)",
 "p": 370.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Hosea Kutako Airport return -- 2-3 pax pp — High (N$)",
+"n": "Hosea Kutako Airport return -- 2-3 pax pp — High (N$)",
 "p": 393.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Eros Airport return -- 1 person — Low (N$)",
+"n": "Eros Airport return -- 1 person — Low (N$)",
 "p": 214.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · Eros Airport return -- 1 person — High (N$)",
+"n": "Eros Airport return -- 1 person — High (N$)",
 "p": 231.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · City Transfer one-way -- 1 person — Low (N$)",
+"n": "City Transfer one-way -- 1 person — Low (N$)",
 "p": 214.0
 },
 {
-"n": "Low Season (Airport Transfers Nov-Jun / Jul-Oct) · City Transfer one-way -- 1 person — High (N$)",
+"n": "City Transfer one-way -- 1 person — High (N$)",
 "p": 231.0
 }
 ]

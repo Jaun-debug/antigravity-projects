@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-# Additive 2027 pass: parses each sheet's 2027 pane into L['rates_2027'],
-# folding the season heading (Low/High/Shoulder) into each rate label so
-# duplicate "Per Person Sharing"/"Single" rows are distinguishable.
-# Leaves 2026 rates[] untouched. Re-runnable.
+# Relabel 2026 rates[] with season + month prefixes (matching the 2027 style).
+# SAFE: only replaces a lodge's rates when the parsed price multiset is identical
+# to the existing one — so prices never change, only labels gain the season/months.
 import json, os, re, datetime, shutil
+from collections import Counter
 from bs4 import BeautifulSoup
 ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 INDEX=os.path.join(ROOT,"assets","rates-index.json")
@@ -82,46 +82,50 @@ def year_ancestor(node):
     return None
 def season_prefix(table):
     h=table.find_previous(['h4','h3','h2'])
-    if not h or year_ancestor(h)!='2027': return ''
+    if not h or year_ancestor(h)=='2027': return ''
     raw=clean(h.get_text(' ',strip=True))
     m=re.search(r'(low|high|shoulder|mid|green|peak|festive|value)\s*season',raw,re.I)
     if not m:
-        base=re.split(r'[(·]',raw)[0].strip(' -–—·')
-        return base if SEASON.search(base) else ''
+        base=re.split(r'[(·]',raw)[0].strip(' -–—·'); return base if SEASON.search(base) else ''
     season=m.group(0).title()
     rest=re.sub(r'(low|high|shoulder|mid|green|peak|festive|value)\s*season','',raw,flags=re.I)
     rest=rest.replace('(','').replace(')','')
     rest=re.sub(r'\b20\d\d\b','',rest)
     rest=clean(rest.strip(' -–—·'))
     return f"{season} ({rest})" if rest else season
-def parse_2027(path):
+def parse_2026(path):
     soup=BeautifulSoup(open(path,encoding='utf-8',errors='ignore').read(),'html.parser')
     out,seen=[],set()
     for table in soup.find_all('table'):
-        if year_ancestor(table)!='2027': continue
+        if year_ancestor(table)=='2027': continue
         pref=season_prefix(table)
         for r in parse_table(table):
             nm=r['n']
-            if pref and pref.lower() not in nm.lower():
-                nm=pref+' · '+nm
+            if pref and pref.lower() not in nm.lower(): nm=pref+' · '+nm
             k=(nm,r['p'])
             if k in seen: continue
-            seen.add(k);out.append({'n':nm,'p':r['p']})
+            seen.add(k); out.append({'n':nm,'p':r['p']})
     return out
+def pmult(rs): return Counter(round(float(r['p']),2) for r in rs if r.get('p') is not None)
+SEASONED=re.compile(r'^(low|high|shoulder|mid|green|peak|festive|value)\s*season',re.I)
 j=json.load(open(INDEX,encoding='utf-8'))
-lodges_with=0;total=0
+relabeled=[]; skipped_mismatch=[]; noseason=0
 for L in j['lodges']:
     path=os.path.join(SHEET_DIR,os.path.basename(L.get('file','')))
-    if not L.get('file') or not os.path.exists(path):
-        L.pop('rates_2027',None); continue
-    rs=parse_2027(path)
-    if rs: L['rates_2027']=rs; lodges_with+=1; total+=len(rs)
-    else: L.pop('rates_2027',None)
-print('lodges with 2027:',lodges_with,'entries:',total)
-for L in j['lodges']:
-    if L.get('rates_2027'):
-        print(' -',L['name']); 
-        for r in L['rates_2027'][:6]: print('     ',r['n'],'=',r['p'])
+    if not L.get('file') or not os.path.exists(path): continue
+    old=L.get('rates') or []
+    new=parse_2026(path)
+    has_season=any(SEASONED.match(r['n']) for r in new)
+    if not has_season:
+        noseason+=1; continue
+    if new and not (pmult(old)-pmult(new)):
+        L['rates']=new; relabeled.append(L['name'])
+    else:
+        skipped_mismatch.append(L['name'])
+print('relabeled (season+months added):',len(relabeled))
+print('skipped - had seasons but prices differ (left untouched):',len(skipped_mismatch))
+for n in skipped_mismatch[:40]: print('   SKIP:',n)
+print('no-season lodges (unchanged):',noseason)
 ts=datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 shutil.copy2(INDEX,INDEX+f'.bak_{ts}')
 j['generated']=datetime.datetime.now().isoformat(timespec='seconds')
