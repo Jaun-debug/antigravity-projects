@@ -1961,39 +1961,47 @@
    "rates_2027": [
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Room — per person sharing",
-     "p": 2320.0
+     "p": 2480.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Room — single",
-     "p": 3040.0
+     "p": 3240.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Chalet — per person sharing",
-     "p": 4000.0
+     "p": 4240.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Chalet — single",
-     "p": 5600.0
+     "p": 5520.0
     },
     {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Room — per person sharing",
-     "p": 1840.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Room — single",
-     "p": 2400.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Chalet — per person sharing",
-     "p": 3200.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Chalet — single",
-     "p": 4400.0
+     "n": "High Season (01 Mar – 30 Nov) · Child 4–12",
+     "p": 2120.0
     },
     {
      "n": "Tour Guide (Guide Room)",
-     "p": 1090.0
+     "p": 1190.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Room — per person sharing",
+     "p": 1520.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Room — single",
+     "p": 1976.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Chalet — per person sharing",
+     "p": 3120.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Chalet — single",
+     "p": 4080.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Child 4–12",
+     "p": 1560.0
     }
    ]
   },
@@ -4513,39 +4521,39 @@
    "rates_2027": [
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — per person sharing",
-     "p": 2080.0
+     "p": 2240.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — single",
-     "p": 2720.0
+     "p": 2960.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Premium Tent — per person sharing",
-     "p": 3360.0
+     "p": 3520.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Premium Tent — single",
-     "p": 4368.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Standard Tent — per person sharing",
-     "p": 1800.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Standard Tent — single",
-     "p": 2360.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Premium Tent — per person sharing",
-     "p": 2640.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Premium Tent — single",
-     "p": 3440.0
+     "p": 4640.0
     },
     {
      "n": "Tour Guide (Guide Room)",
-     "p": 990.0
+     "p": 1090.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — per person sharing",
+     "p": 1760.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — single",
+     "p": 2320.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Premium Tent — per person sharing",
+     "p": 2800.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Premium Tent — single",
+     "p": 3680.0
     }
    ]
   },
@@ -7917,31 +7925,39 @@
    "rates_2027": [
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
-     "p": 4800.0
+     "p": 5560.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
-     "p": 6240.0
+     "p": 7240.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
-     "p": 6400.0
+     "p": 7160.0
     },
     {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Suite — per person sharing",
-     "p": 3200.0
+     "n": "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
+     "p": 2780.0
     },
     {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Suite — single",
-     "p": 4160.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Superior Suite — per person sharing",
-     "p": 4800.0
-    },
-    {
-     "n": "Tour Guide (Guide Room, meals only)",
+     "n": "Tour Guide (Guide Room)",
      "p": 1190.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+     "p": 3360.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+     "p": 4400.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+     "p": 5040.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+     "p": 1680.0
     }
    ]
   },
@@ -8010,31 +8026,31 @@
    "rates_2027": [
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — per person sharing",
-     "p": 2200.0
+     "p": 2240.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — single",
-     "p": 2860.0
+     "p": 2960.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Child 4–12",
-     "p": 1100.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Standard Tent — per person sharing",
-     "p": 1680.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Standard Tent — single",
-     "p": 2184.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Child 4–12",
-     "p": 840.0
+     "p": 1120.0
     },
     {
      "n": "Tour Guide (Guide Room)",
      "p": 990.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — per person sharing",
+     "p": 1680.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — single",
+     "p": 2240.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Child 4–12",
+     "p": 840.0
     }
    ]
   },
@@ -10080,36 +10096,32 @@
    ],
    "rates_2027": [
     {
-     "n": "High Season (01 Mar – 30 Nov) · DBB · Standard Chalet — per person sharing",
-     "p": 2640.0
+     "n": "High Season (01 Mar – 30 Nov) · DBB · Chalet — per person sharing",
+     "p": 2800.0
     },
     {
-     "n": "High Season (01 Mar – 30 Nov) · DBB · Standard Chalet — single",
-     "p": 3440.0
+     "n": "High Season (01 Mar – 30 Nov) · DBB · Chalet — single",
+     "p": 3680.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Child 4–12",
-     "p": 1320.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Standard Chalet — per person sharing",
-     "p": 2040.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · DBB · Standard Chalet — single",
-     "p": 2552.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Child 4–12",
-     "p": 1020.0
+     "p": 1400.0
     },
     {
      "n": "Tour Guide (Guide Room)",
      "p": 990.0
     },
     {
-     "n": "Sleep-out ride — 1 night tented camp",
-     "p": 4590.0
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Chalet — per person sharing",
+     "p": 2080.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · DBB · Chalet — single",
+     "p": 2640.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Child 4–12",
+     "p": 1040.0
     }
    ]
   },
@@ -11009,43 +11021,39 @@
    "rates_2027": [
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
-     "p": 6720.0
+     "p": 7056.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
-     "p": 8760.0
+     "p": 9200.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
-     "p": 10080.0
+     "p": 10600.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
-     "p": 3360.0
+     "p": 3528.0
     },
     {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Suite — per person sharing",
-     "p": 5520.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Suite — single",
-     "p": 7200.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Superior Suite — per person sharing",
-     "p": 8400.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Child 4–12 (Suite)",
-     "p": 2760.0
-    },
-    {
-     "n": "Tour Guide (Guide Room, meals only)",
+     "n": "Tour Guide (Guide Room)",
      "p": 1190.0
     },
     {
-     "n": "Sleep-out ride — 1 night tented camp",
-     "p": 5500.0
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+     "p": 5800.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+     "p": 7560.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+     "p": 8800.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+     "p": 2900.0
     }
    ]
   },
@@ -12666,31 +12674,31 @@
    "rates_2027": [
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
-     "p": 6720.0
+     "p": 7056.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
-     "p": 8720.0
+     "p": 9200.0
     },
     {
      "n": "High Season (01 Mar – 30 Nov) · Child 4–12",
-     "p": 3360.0
+     "p": 3528.0
     },
     {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Suite — per person sharing",
-     "p": 5480.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Full Board Plus · Suite — single",
-     "p": 7120.0
-    },
-    {
-     "n": "Low Season (01 Dec – 28 Feb) · Child 4–12",
-     "p": 2740.0
-    },
-    {
-     "n": "Tour Guide (Guide Room, meals only)",
+     "n": "Tour Guide (Guide Room)",
      "p": 1190.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+     "p": 5800.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+     "p": 7560.0
+    },
+    {
+     "n": "Low Season (01 Dec – 29 Feb) · Child 4–12",
+     "p": 2900.0
     }
    ]
   },
@@ -16867,10 +16875,10 @@
     },
     {
      "n": "B&B · Room — single",
-     "p": 1760.0
+     "p": 2000.0
     },
     {
-     "n": "B&B · Child 4–12 (sharing)",
+     "n": "Child 4–12",
      "p": 960.0
     },
     {
@@ -17674,11 +17682,15 @@
    "rates_2027": [
     {
      "n": "B&B · Room — per person sharing",
-     "p": 1440.0
+     "p": 1520.0
     },
     {
      "n": "B&B · Room — single",
-     "p": 1840.0
+     "p": 2000.0
+    },
+    {
+     "n": "Child 4–12",
+     "p": 1160.0
     }
    ]
   }
