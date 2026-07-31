@@ -1,0 +1,908 @@
+{
+ "generated": "",
+ "note": "STO nett rates, valid 2026/2027",
+ "activities": [
+  {
+   "name": "Mola Mola Safaris",
+   "region": "Swakopmund",
+   "items": [
+    {
+     "n": "Mola Mola Day Tour",
+     "d": "Marine Dolphin Cruise, Pelican Point Beach Braai BBQ, & Sandwich Harbour 4x4 Experience",
+     "p": 4904.5
+    },
+    {
+     "n": "Mola Mola Day Tour (Children under 12)",
+     "d": "",
+     "p": 3740.0
+    },
+    {
+     "n": "Kayaking Combo & Beach Braai",
+     "d": "Catamaran to Pelican Point, Seal Kayaking, Beach Braai, & Sandwich Harbour 4x4",
+     "p": 4904.5
+    },
+    {
+     "n": "Kayaking Combo & Beach Braai (Children under 12)",
+     "d": "",
+     "p": 3740.0
+    },
+    {
+     "n": "(NEW) Crystal Kayak Combo & Beach Braai",
+     "d": "Crystal Clear Seal Kayaking at Pelican Point, Beach Braai BBQ, & Sandwich Harbour 4x4",
+     "p": 5355.0
+    },
+    {
+     "n": "Crystal Kayak Combo & Beach Braai (Children under 12)",
+     "d": "",
+     "p": 4165.0
+    },
+    {
+     "n": "Mola Dolphin Cruise & Beach Braai",
+     "d": "Classic marine cruise followed by a premium beach braai BBQ lunch on Pelican Point",
+     "p": 2575.5
+    },
+    {
+     "n": "Mola Dolphin Cruise & Beach Braai (Children 4 - 12)",
+     "d": "",
+     "p": 1785.0
+    },
+    {
+     "n": "AM/PM Sandwich Harbour 4x4 Experience & Beach Braai",
+     "d": "Sandwich Harbour 4x4 dune drive, Pelican Point beach BBQ lunch & catamaran transfer",
+     "p": 3867.5
+    },
+    {
+     "n": "AM/PM Sandwich Harbour 4x4 & Beach Braai (Children under 12)",
+     "d": "",
+     "p": 2975.0
+    },
+    {
+     "n": "Seal Kayaking Experience & Beach Braai",
+     "d": "Catamaran to Pelican Point, Seal Kayaking, Beach Braai & 4x4 return transfer",
+     "p": 3476.5
+    },
+    {
+     "n": "Seal Kayaking Experience & Beach Braai (Children 4 - 12)",
+     "d": "",
+     "p": 2720.0
+    },
+    {
+     "n": "(NEW) Crystal Kayak Experience & Beach Braai",
+     "d": "Pelican Point Crystal Clear Kayaking, Beach Braai BBQ & 4x4 mini-dune return",
+     "p": 3910.0
+    },
+    {
+     "n": "(NEW) Crystal Kayak & Beach Braai (Children 4 - 12)",
+     "d": "",
+     "p": 3145.0
+    },
+    {
+     "n": "(NEW) Marine Cruise & Beach Experience",
+     "d": "Marine cruise, beach drop-off, Walvis Bay oysters & premium lunch on the beach",
+     "p": 1691.5
+    },
+    {
+     "n": "(NEW) Marine Cruise & Beach Experience (Children 4 - 12)",
+     "d": "",
+     "p": 1190.0
+    },
+    {
+     "n": "Sandwich Harbour 4x4 AM/PM Half Day Experience",
+     "d": "Classic dune 4x4 tour including light meals, sparkling wine, and fresh oysters",
+     "p": 2575.5
+    },
+    {
+     "n": "Sandwich Harbour 4x4 AM/PM (Children under 12)",
+     "d": "",
+     "p": 1955.0
+    },
+    {
+     "n": "Golden Hour Sandwich Harbour 4x4 (Min 3 Pax)",
+     "d": "Late afternoon dune drive including sunset canapes and premium sparkling wine",
+     "p": 2575.5
+    }
+   ]
+  },
+  {
+   "name": "Namib Sky Balloon Safaris",
+   "region": "Sossusvlei",
+   "items": [
+    {
+     "n": "Classic Sossusvlei Balloon Safari",
+     "d": "Geluk Balloon Base flight (C27), ~1-hour flight, full gourmet desert champagne breakfast buffet, flight certificate, and C27 return drive.",
+     "p": 9648.0
+    },
+    {
+     "n": "NamibRand Balloon Safari",
+     "d": "Specialized deep-desert flight departing directly from Kwessi (NamibRand Reserve).",
+     "p": 9648.0
+    },
+    {
+     "n": "Follower & Breakfast",
+     "d": "Ground crew follower who joins the flight landing spot for the premium gourmet breakfast buffet.",
+     "p": 1550.0
+    },
+    {
+     "n": "Special Large Group (32 - 110 passengers)",
+     "d": "Split flight format: 1/2 hour in-flight, 1/2 hour 4x4 photo pursuit. Complete desert breakfast buffet included.",
+     "p": 7875.0
+    }
+   ]
+  },
+  {
+   "name": "Bogenfels & Diamond Tours",
+   "region": "Luderitz",
+   "items": [
+    {
+     "n": "Bogenfels & Diamonds Tour (Full Day Guided)",
+     "d": "Lüderitz Restricted Diamond Area, Bogenfels Arch, ghost towns. Includes food, drinks, permits.",
+     "p": 5232.0
+    },
+    {
+     "n": "Bogenfels & Diamonds Guided (Child 4 – 12)",
+     "d": "",
+     "p": 4112.0
+    },
+    {
+     "n": "Bogenfels & Diamonds Guided (Child under 4)",
+     "d": "",
+     "p": 1264.0
+    },
+    {
+     "n": "E-Bay Diamond History (Half Day Guided)",
+     "d": "Elizabeth Bay ghost town, Kolmanskop border tracks. Guided half-day tour.",
+     "p": 2904.0
+    },
+    {
+     "n": "E-Bay Diamond History (Child 4 – 12)",
+     "d": "",
+     "p": 2112.0
+    }
+   ]
+  },
+  {
+   "name": "Alter Action Sandboarding",
+   "region": "Swakopmund",
+   "items": [
+    {
+     "n": "Lie-down Sandboarding",
+     "d": "Excellent for beginners and high speeds. Board down on stomach on polished boards.",
+     "p": 560.0
+    },
+    {
+     "n": "Stand-up Sandboarding",
+     "d": "For snowboarding enthusiasts or brave beginners. Board down on standard snowboards with boots/bindings.",
+     "p": 640.0
+    }
+   ]
+  },
+  {
+   "name": "Desert Explorers Swakopmund",
+   "region": "Swakopmund",
+   "items": [
+    {
+     "n": "Quad Bike Tour (2 Hours)",
+     "d": "Scale high dunes on automated quad bikes. Beginners welcome.",
+     "p": 712.0
+    },
+    {
+     "n": "Quad Bike Tour (1 Hour)",
+     "d": "A perfect quick dune ride covering standard desert tracks.",
+     "p": 472.0
+    },
+    {
+     "n": "Explorer Quad Tour (2.5 Hours)",
+     "d": "Slow-paced educational quad tour focusing on hidden plant/animal life.",
+     "p": 760.0
+    },
+    {
+     "n": "Dune Breakfast Run (3 Hours - Min 2 Pax)",
+     "d": "Quad bike deep into the desert, followed by breakfast at Rossmund Golf Estate.",
+     "p": 1080.0
+    },
+    {
+     "n": "Camel Ride (30 Minutes)",
+     "d": "A highly popular family tour along the Swakopmund River delta border.",
+     "p": 312.0
+    },
+    {
+     "n": "Living Desert Tour (3 Hours)",
+     "d": "4x4 ecology tour to find the \"Little 5\" (Side-winder snake, chameleons, geckos).",
+     "p": 760.0
+    },
+    {
+     "n": "Township Cultural Tour",
+     "d": "Cultural tour through Swakopmund township including traditional meal.",
+     "p": 720.0
+    },
+    {
+     "n": "Dolphin & Seal Catamaran Cruise",
+     "d": "Walvis Bay catamaran cruise to see seals, dolphins, pelicans. Gourmet lunch.",
+     "p": 1160.0
+    },
+    {
+     "n": "Sandwich Harbour 4x4 Excursion",
+     "d": "Iconic 4x4 dune tour past salt pans to Sandwich Harbour lagoon.",
+     "p": 2320.0
+    },
+    {
+     "n": "Tandem Skydive (10,000 feet)",
+     "d": "Freefall jump over the Namib desert with professional tandem masters.",
+     "p": 3948.0
+    },
+    {
+     "n": "Moonlandscape Scenic Tour",
+     "d": "Drive to the Welwitschia plains and eroded Moonlandscape canyons.",
+     "p": 880.0
+    },
+    {
+     "n": "Cape Cross Seal Colony Tour",
+     "d": "Overland tour past Henties Bay to the massive Cape Cross seal reserve.",
+     "p": 1760.0
+    },
+    {
+     "n": "Paragliding Dune Flights",
+     "d": "Soar over coastal dunes with standard paragliding glider tandem.",
+     "p": 1520.0
+    },
+    {
+     "n": "Surf & Turf Combo",
+     "d": "AM Catamaran Cruise in Walvis Bay + PM 90-min Quad Bike in Swakopmund.",
+     "p": 1712.0
+    },
+    {
+     "n": "Catamaran / Sandwich Harbour 4x4 Combo",
+     "d": "AM Catamaran Marine Cruise + PM Sandwich Harbour 4x4 dune tour.",
+     "p": 3480.0
+    }
+   ]
+  }
+ ],
+ "vehicles": [
+  {
+   "name": "Namibia Tours & Safaris (NTS)",
+   "items": [
+    {
+     "n": "SUV 4x4",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 1650.0
+    },
+    {
+     "n": "SUV 4x4",
+     "t": "Rental Duration (15+ Days)",
+     "p": 1510.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2160.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto",
+     "t": "Rental Duration (15+ Days)",
+     "p": 1940.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3260.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2930.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (2 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2360.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (2 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2130.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (4 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2550.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (4 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2325.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (2 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2870.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (2 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2590.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (4 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3065.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (4 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2760.0
+    },
+    {
+     "n": "Safari 4x4 6/7-Seater",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3440.0
+    },
+    {
+     "n": "Safari 4x4 6/7-Seater",
+     "t": "Rental Duration (15+ Days)",
+     "p": 3100.0
+    },
+    {
+     "n": "Safari 4x4 9-Seater",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3870.0
+    },
+    {
+     "n": "Safari 4x4 9-Seater",
+     "t": "Rental Duration (15+ Days)",
+     "p": 3490.0
+    },
+    {
+     "n": "Safari 4x4 11-Seater",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 4260.0
+    },
+    {
+     "n": "Safari 4x4 11-Seater",
+     "t": "Rental Duration (15+ Days)",
+     "p": 3870.0
+    },
+    {
+     "n": "SUV 4x4",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 1865.0
+    },
+    {
+     "n": "SUV 4x4",
+     "t": "Rental Duration (15+ Days)",
+     "p": 1690.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2520.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2230.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3745.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual",
+     "t": "Rental Duration (15+ Days)",
+     "p": 3370.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (2 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2710.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (2 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2420.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (4 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 2905.0
+    },
+    {
+     "n": "4x4 Toyota Hilux D/C Auto (4 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2620.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (2 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3300.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (2 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 2980.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (4 Pax Camping)",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3520.0
+    },
+    {
+     "n": "4x4 Land Cruiser D/C Manual (4 Pax Camping)",
+     "t": "Rental Duration (15+ Days)",
+     "p": 3170.0
+    },
+    {
+     "n": "Safari 4x4 6/7-Seater",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 3970.0
+    },
+    {
+     "n": "Safari 4x4 6/7-Seater",
+     "t": "Rental Duration (15+ Days)",
+     "p": 3585.0
+    },
+    {
+     "n": "Safari 4x4 9-Seater",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 4505.0
+    },
+    {
+     "n": "Safari 4x4 9-Seater",
+     "t": "Rental Duration (15+ Days)",
+     "p": 4065.0
+    },
+    {
+     "n": "Safari 4x4 11-Seater",
+     "t": "Rental Duration (1 - 14 Days)",
+     "p": 4890.0
+    },
+    {
+     "n": "Safari 4x4 11-Seater",
+     "t": "Rental Duration (15+ Days)",
+     "p": 4460.0
+    }
+   ]
+  },
+  {
+   "name": "Namibia Car Rental",
+   "items": [
+    {
+     "n": "4x4 Jeep",
+     "t": "5 - 7 Days",
+     "p": 1086.0
+    },
+    {
+     "n": "4x4 Jeep",
+     "t": "8 - 14 Days",
+     "p": 1005.0
+    },
+    {
+     "n": "4x4 Jeep",
+     "t": "15+ Days",
+     "p": 950.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "5 - 7 Days",
+     "p": 2467.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "8 - 14 Days",
+     "p": 2282.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "15+ Days",
+     "p": 2159.0
+    },
+    {
+     "n": "Group K Toyota Hilux 4x4 Double Cab",
+     "t": "5 - 7 Days",
+     "p": 2240.0
+    },
+    {
+     "n": "Group K Toyota Hilux 4x4 Double Cab",
+     "t": "8 - 14 Days",
+     "p": 2072.0
+    },
+    {
+     "n": "Group K Toyota Hilux 4x4 Double Cab",
+     "t": "15+ Days",
+     "p": 1960.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (2 Pax Camping)",
+     "t": "5 - 7 Days",
+     "p": 2416.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (2 Pax Camping)",
+     "t": "8 - 14 Days",
+     "p": 2248.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (2 Pax Camping)",
+     "t": "15+ Days",
+     "p": 2136.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (4 Pax Camping)",
+     "t": "5 - 7 Days",
+     "p": 2496.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (4 Pax Camping)",
+     "t": "8 - 14 Days",
+     "p": 2328.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (4 Pax Camping)",
+     "t": "15+ Days",
+     "p": 2216.0
+    },
+    {
+     "n": "Group O Land Cruiser 79 Series 4x4 Camping",
+     "t": "5 - 7 Days",
+     "p": 2936.0
+    },
+    {
+     "n": "Group O Land Cruiser 79 Series 4x4 Camping",
+     "t": "8 - 14 Days",
+     "p": 2741.0
+    },
+    {
+     "n": "Group O Land Cruiser 79 Series 4x4 Camping",
+     "t": "15+ Days",
+     "p": 2611.0
+    },
+    {
+     "n": "4x4 Jeep",
+     "t": "5 - 7 Days",
+     "p": 1262.0
+    },
+    {
+     "n": "4x4 Jeep",
+     "t": "8 - 14 Days",
+     "p": 1181.0
+    },
+    {
+     "n": "4x4 Jeep",
+     "t": "15+ Days",
+     "p": 1126.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "5 - 7 Days",
+     "p": 2896.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "8 - 14 Days",
+     "p": 2704.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "15+ Days",
+     "p": 2576.0
+    },
+    {
+     "n": "Group K Toyota Hilux 4x4 Double Cab",
+     "t": "5 - 7 Days",
+     "p": 2576.0
+    },
+    {
+     "n": "Group K Toyota Hilux 4x4 Double Cab",
+     "t": "8 - 14 Days",
+     "p": 2396.0
+    },
+    {
+     "n": "Group K Toyota Hilux 4x4 Double Cab",
+     "t": "15+ Days",
+     "p": 2276.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (2 Pax Camping)",
+     "t": "5 - 7 Days",
+     "p": 2896.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (2 Pax Camping)",
+     "t": "8 - 14 Days",
+     "p": 2704.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (2 Pax Camping)",
+     "t": "15+ Days",
+     "p": 2576.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (4 Pax Camping)",
+     "t": "5 - 7 Days",
+     "p": 2896.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (4 Pax Camping)",
+     "t": "8 - 14 Days",
+     "p": 2704.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (4 Pax Camping)",
+     "t": "15+ Days",
+     "p": 2576.0
+    },
+    {
+     "n": "Group O Land Cruiser 79 Series 4x4 Camping",
+     "t": "5 - 7 Days",
+     "p": 3300.0
+    },
+    {
+     "n": "Group O Land Cruiser 79 Series 4x4 Camping",
+     "t": "8 - 14 Days",
+     "p": 2980.0
+    },
+    {
+     "n": "Group O Land Cruiser 79 Series 4x4 Camping",
+     "t": "15+ Days",
+     "p": 2870.0
+    }
+   ]
+  },
+  {
+   "name": "Namib Roos Car Rentals",
+   "items": [
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "Low Season (Jan - Jun)",
+     "p": 2076.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "High Season (Jul - Dec)",
+     "p": 2292.0
+    },
+    {
+     "n": "Toyota Hilux 2.4 4x4 Double Cab",
+     "t": "Low Season (Jan - Jun)",
+     "p": 1596.0
+    },
+    {
+     "n": "Toyota Hilux 2.4 4x4 Double Cab",
+     "t": "High Season (Jul - Dec)",
+     "p": 1800.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 Double Cab (2 Pax Camping)",
+     "t": "Low Season (Jan - Jun)",
+     "p": 1696.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 Double Cab (2 Pax Camping)",
+     "t": "High Season (Jul - Dec)",
+     "p": 1900.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 Double Cab (4 Pax Camping)",
+     "t": "Low Season (Jan - Jun)",
+     "p": 1800.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 Double Cab (4 Pax Camping)",
+     "t": "High Season (Jul - Dec)",
+     "p": 2004.0
+    }
+   ]
+  },
+  {
+   "name": "Zaris Safaris",
+   "items": [
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "Low Season (1-14 Days)",
+     "p": 2060.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "Low Season (15+ Days)",
+     "p": 1996.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "High Season (1-14 Days)",
+     "p": 2416.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "High Season (15+ Days)",
+     "p": 2384.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "Low Season (1-14 Days)",
+     "p": 2236.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "Low Season (15+ Days)",
+     "p": 2164.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "High Season (1-14 Days)",
+     "p": 3020.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "High Season (15+ Days)",
+     "p": 2988.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "Low Season (1-14 Days)",
+     "p": 2640.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "Low Season (15+ Days)",
+     "p": 2552.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "High Season (1-14 Days)",
+     "p": 3412.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "High Season (15+ Days)",
+     "p": 3376.0
+    }
+   ]
+  },
+  {
+   "name": "Sanga Group Travel Solutions",
+   "items": [
+    {
+     "n": "Land Cruiser 9-Seater",
+     "t": "Low Season STO Rate",
+     "p": 4505.0
+    },
+    {
+     "n": "Land Cruiser 9-Seater",
+     "t": "High Season STO Rate",
+     "p": 4700.0
+    },
+    {
+     "n": "Iveco 4x4 14-Seater",
+     "t": "Low Season STO Rate",
+     "p": 6475.0
+    },
+    {
+     "n": "Iveco 4x4 14-Seater",
+     "t": "High Season STO Rate",
+     "p": 6780.0
+    },
+    {
+     "n": "13-Seater Hino Off-road Safari Truck",
+     "t": "Low Season STO Rate",
+     "p": 5980.0
+    },
+    {
+     "n": "13-Seater Hino Off-road Safari Truck",
+     "t": "High Season STO Rate",
+     "p": 5980.0
+    },
+    {
+     "n": "18-Seater Hino Off-road Safari Truck",
+     "t": "Low Season STO Rate",
+     "p": 6355.0
+    },
+    {
+     "n": "18-Seater Hino Off-road Safari Truck",
+     "t": "High Season STO Rate",
+     "p": 6680.0
+    }
+   ]
+  },
+  {
+   "name": "Zap Car Rental",
+   "items": [
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "Low Season STO Rate",
+     "p": 2460.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "High Season STO Rate",
+     "p": 2760.0
+    },
+    {
+     "n": "Toyota Hilux Double Cab 4x4",
+     "t": "Low Season STO Rate",
+     "p": 2460.0
+    },
+    {
+     "n": "Toyota Hilux Double Cab 4x4",
+     "t": "High Season STO Rate",
+     "p": 2760.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (Fully Camping Equipped)",
+     "t": "Low Season STO Rate",
+     "p": 2740.0
+    },
+    {
+     "n": "Toyota Hilux 4x4 (Fully Camping Equipped)",
+     "t": "High Season STO Rate",
+     "p": 3440.0
+    },
+    {
+     "n": "Toyota Land Cruiser Double Cab 4x4",
+     "t": "Low Season STO Rate",
+     "p": 2810.0
+    },
+    {
+     "n": "Toyota Land Cruiser Double Cab 4x4",
+     "t": "High Season STO Rate",
+     "p": 3110.0
+    },
+    {
+     "n": "Toyota Landcruiser Stretch Safari (9-Seater)",
+     "t": "Low Season STO Rate",
+     "p": 3910.0
+    },
+    {
+     "n": "Toyota Landcruiser Stretch Safari (9-Seater)",
+     "t": "High Season STO Rate",
+     "p": 4210.0
+    }
+   ]
+  },
+  {
+   "name": "Suricate Safaris",
+   "items": [
+    {
+     "n": "Toyota Hilux GD6 D/C Standard",
+     "t": "6 - 14 Days",
+     "p": 1642.0
+    },
+    {
+     "n": "Toyota Hilux GD6 D/C Standard",
+     "t": "15+ Days",
+     "p": 1534.0
+    },
+    {
+     "n": "Toyota Hilux GD6 D/C (2 Pax Camping)",
+     "t": "6 - 14 Days",
+     "p": 1869.0
+    },
+    {
+     "n": "Toyota Hilux GD6 D/C (2 Pax Camping)",
+     "t": "15+ Days",
+     "p": 1802.0
+    },
+    {
+     "n": "Toyota Hilux GD6 D/C (4 Pax Camping)",
+     "t": "6 - 14 Days",
+     "p": 2027.0
+    },
+    {
+     "n": "Toyota Hilux GD6 D/C (4 Pax Camping)",
+     "t": "15+ Days",
+     "p": 1896.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "6 - 14 Days",
+     "p": 1857.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "15+ Days",
+     "p": 1534.0
+    }
+   ]
+  }
+ ]
+}
