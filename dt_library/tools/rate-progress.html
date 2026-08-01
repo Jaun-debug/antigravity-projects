@@ -134,7 +134,7 @@ function render(){
  ]).then(function(res){
    var li=res[0]||{}, idx=res[1]||{lodges:[]}, LI={}, ACT={};
    Object.keys(li).forEach(function(k){var e=li[k];LI[k]=(e&&e.imgs&&e.imgs.length)||0;});
-   (idx.lodges||[]).forEach(function(L){var seen={},c=0;[].concat(L.rates||[],L.rates_2027||[]).forEach(function(rt){if(rt&&isActivity(rt.n)&&!seen[rt.n]){seen[rt.n]=1;c++;}});ACT[normn(L.name)]=c;});
+   (idx.lodges||[]).forEach(function(L){var seen={},c=0;[].concat(L.rates||[],L.rates_2027||[]).forEach(function(rt){if(rt&&(isActivity(rt.n)||rt.a)&&!seen[rt.n]){seen[rt.n]=1;c++;}});ACT[normn(L.name)]=c;});
    DATA.rows.forEach(function(r){var k=normn(r.lodge);var isProp=(r.type==='lodge');r.photos=(k in LI)?LI[k]:(isProp?0:null);r.acts=(k in ACT)?ACT[k]:null;});
    render();
  });
