@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 241,
+ "count": 243,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -38674,6 +38674,135 @@
     {
      "n": "Guide Room B&B",
      "p": 1430.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fo/g2necwfsjxsb68f98p0nm/ACPA0sgg0ZC8eXBJzH4VdRI?rlkey=7rgim6zvjatg3lap0rgc00z1t&dl=0",
+   "name": "Babson House",
+   "region": "Central Namibia",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Fully Inclusive — single occupancy",
+     "p": 10994.75
+    },
+    {
+     "n": "Fully Inclusive — per person sharing",
+     "p": 7331.25
+    },
+    {
+     "n": "Guide / Pilot",
+     "p": 2120.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Fully Inclusive — single occupancy",
+     "p": 12935.0
+    },
+    {
+     "n": "Fully Inclusive — per person sharing",
+     "p": 8625.0
+    },
+    {
+     "n": "Guide / Pilot",
+     "p": 2120.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fo/g2necwfsjxsb68f98p0nm/ACPA0sgg0ZC8eXBJzH4VdRI?rlkey=7rgim6zvjatg3lap0rgc00z1t&dl=0",
+   "name": "Cheetah View Lodge",
+   "region": "Central Namibia",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "DBB — Single Room (per room)",
+     "p": 2711.5
+    },
+    {
+     "n": "DBB — Twin/Double Room (per room)",
+     "p": 4964.0
+    },
+    {
+     "n": "DBB — Triple Room (per room)",
+     "p": 7446.0
+    },
+    {
+     "n": "DBB — Quadruple Room (per room)",
+     "p": 9592.25
+    },
+    {
+     "n": "Fully Inclusive — Single Room (per room)",
+     "p": 6842.5
+    },
+    {
+     "n": "Fully Inclusive — Twin/Double Room (per room)",
+     "p": 12325.0
+    },
+    {
+     "n": "Fully Inclusive — Triple Room (per room)",
+     "p": 18487.5
+    },
+    {
+     "n": "Fully Inclusive — Quadruple Room (per room)",
+     "p": 24645.75
+    },
+    {
+     "n": "Lunch",
+     "p": 320.0
+    },
+    {
+     "n": "Cheetah Drive (daily, 1h)",
+     "p": 748.0,
+     "a": 1
+    },
+    {
+     "n": "Behind the Scenes (on request, 1.5h)",
+     "p": 1870.0,
+     "a": 1
+    },
+    {
+     "n": "Game Drive (daily, 2h)",
+     "p": 960.5,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "DBB — Single Room (per room)",
+     "p": 3190.0
+    },
+    {
+     "n": "DBB — Twin/Double Room (per room)",
+     "p": 5840.0
+    },
+    {
+     "n": "DBB — Triple Room (per room)",
+     "p": 8760.0
+    },
+    {
+     "n": "DBB — Quadruple Room (per room)",
+     "p": 11285.0
+    },
+    {
+     "n": "Fully Inclusive — Single Room (per room)",
+     "p": 8050.0
+    },
+    {
+     "n": "Fully Inclusive — Twin/Double Room (per room)",
+     "p": 14500.0
+    },
+    {
+     "n": "Fully Inclusive — Triple Room (per room)",
+     "p": 21750.0
+    },
+    {
+     "n": "Fully Inclusive — Quadruple Room (per room)",
+     "p": 28995.0
     }
    ]
   }
