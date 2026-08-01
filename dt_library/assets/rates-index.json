@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 243,
+ "count": 247,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -38803,6 +38803,343 @@
     {
      "n": "Fully Inclusive — Quadruple Room (per room)",
      "p": 28995.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fo/q3wf3zw9u037pavmcnjjb/AOgC633GXK3l-y3lTnxopgc?rlkey=jxccik629rzdzbp0ayuc5l1dk&dl=0",
+   "name": "Etaambura Camp",
+   "region": "Kaokoland",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Per person sharing — International (self-catering)",
+     "p": 1570.0
+    },
+    {
+     "n": "Per person sharing — SADC",
+     "p": 1330.0
+    },
+    {
+     "n": "Per person sharing — Namibian",
+     "p": 1245.0
+    },
+    {
+     "n": "Single supplement — International",
+     "p": 580.0
+    },
+    {
+     "n": "Guide Rate",
+     "p": 925.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Per person sharing — International (self-catering)",
+     "p": 1850.0
+    },
+    {
+     "n": "Per person sharing — SADC",
+     "p": 1565.0
+    },
+    {
+     "n": "Per person sharing — Namibian",
+     "p": 1465.0
+    },
+    {
+     "n": "Single supplement — International",
+     "p": 690.0
+    },
+    {
+     "n": "Guide Rate",
+     "p": 925.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fo/jj8qoh0gix2bw2l3inewd/AMjq13-Fr3xZifh01t4UX18?rlkey=70lhy5kvkhswegdl4bhxbxbsw&dl=0",
+   "name": "The Elegant Desert Camp",
+   "region": "Sossusvlei/Namib",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Single Room DBB (Low)",
+     "p": 2300.0
+    },
+    {
+     "n": "Twin Room DBB (Low)",
+     "p": 2020.0
+    },
+    {
+     "n": "Single Room DBB (High)",
+     "p": 3280.0
+    },
+    {
+     "n": "Twin Room DBB (High)",
+     "p": 2600.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 800.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 240.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 240.0
+    },
+    {
+     "n": "Lunch Packs",
+     "p": 320.0
+    },
+    {
+     "n": "Dinner",
+     "p": 490.0
+    },
+    {
+     "n": "2-hour Scenic Drive incl sundowner, drinks & snacks",
+     "p": 448.0,
+     "a": 1
+    },
+    {
+     "n": "Half Day Sossusvlei Excursion w/ picnic breakfast",
+     "p": 1880.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Walk 4km (min 2)",
+     "p": 170.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Walk 9km (min 2)",
+     "p": 220.0,
+     "a": 1
+    },
+    {
+     "n": "Special Bush Dinner under the stars (min 6)",
+     "p": 1500.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Single Room DBB (Low)",
+     "p": 2875.0
+    },
+    {
+     "n": "Twin Room DBB (Low)",
+     "p": 2525.0
+    },
+    {
+     "n": "Single Room DBB (High)",
+     "p": 4100.0
+    },
+    {
+     "n": "Twin Room DBB (High)",
+     "p": 3250.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 800.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fo/jj8qoh0gix2bw2l3inewd/AMjq13-Fr3xZifh01t4UX18?rlkey=70lhy5kvkhswegdl4bhxbxbsw&dl=0",
+   "name": "The Elegant Guesthouse",
+   "region": "Windhoek",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Single Room B&B (Low)",
+     "p": 1408.0
+    },
+    {
+     "n": "Twin Room B&B (Low)",
+     "p": 1136.0
+    },
+    {
+     "n": "Single Room B&B (High)",
+     "p": 1724.0
+    },
+    {
+     "n": "Twin Room B&B (High)",
+     "p": 1436.0
+    },
+    {
+     "n": "Guide Room B&B",
+     "p": 650.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 240.0
+    },
+    {
+     "n": "Fruit Basket",
+     "p": 270.0,
+     "a": 1
+    },
+    {
+     "n": "Sundowner Drinks & Snacks",
+     "p": 150.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Single Room B&B (Low)",
+     "p": 1760.0
+    },
+    {
+     "n": "Twin Room B&B (Low)",
+     "p": 1420.0
+    },
+    {
+     "n": "Single Room B&B (High)",
+     "p": 2155.0
+    },
+    {
+     "n": "Twin Room B&B (High)",
+     "p": 1795.0
+    },
+    {
+     "n": "Guide Room B&B",
+     "p": 650.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fo/jj8qoh0gix2bw2l3inewd/AMjq13-Fr3xZifh01t4UX18?rlkey=70lhy5kvkhswegdl4bhxbxbsw&dl=0",
+   "name": "Ondjamba Hills",
+   "region": "Damaraland",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Single Room B&B (Low)",
+     "p": 2120.0
+    },
+    {
+     "n": "Twin Room B&B (Low)",
+     "p": 1720.0
+    },
+    {
+     "n": "Single Room B&B (High)",
+     "p": 2940.0
+    },
+    {
+     "n": "Twin Room B&B (High)",
+     "p": 2300.0
+    },
+    {
+     "n": "Single Room DBB (Low)",
+     "p": 2608.0
+    },
+    {
+     "n": "Twin Room DBB (Low)",
+     "p": 2208.0
+    },
+    {
+     "n": "Single Room DBB (High)",
+     "p": 3452.0
+    },
+    {
+     "n": "Twin Room DBB (High)",
+     "p": 2812.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 800.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 240.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 240.0
+    },
+    {
+     "n": "Dinner",
+     "p": 490.0
+    },
+    {
+     "n": "Special Bush Dinner (min 6)",
+     "p": 810.0
+    },
+    {
+     "n": "Full Day Damaraland Excursion incl picnic lunch (min 2)",
+     "p": 1560.0,
+     "a": 1
+    },
+    {
+     "n": "Sundowner Drive with snacks & drinks (min 2)",
+     "p": 504.0,
+     "a": 1
+    },
+    {
+     "n": "Half Day Damaraland Excursion incl breakfast/sundowner (min 2)",
+     "p": 840.0,
+     "a": 1
+    },
+    {
+     "n": "Half Day Brandberg White Lady Excursion (min 2)",
+     "p": 1560.0,
+     "a": 1
+    },
+    {
+     "n": "Half Day Himba Village Visit (min 2)",
+     "p": 720.0,
+     "a": 1
+    },
+    {
+     "n": "Bush Walk with Bushman Paintings (min 2)",
+     "p": 240.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Single Room B&B (Low)",
+     "p": 2650.0
+    },
+    {
+     "n": "Twin Room B&B (Low)",
+     "p": 2150.0
+    },
+    {
+     "n": "Single Room B&B (High)",
+     "p": 3675.0
+    },
+    {
+     "n": "Twin Room B&B (High)",
+     "p": 2875.0
+    },
+    {
+     "n": "Single Room DBB (Low)",
+     "p": 3260.0
+    },
+    {
+     "n": "Twin Room DBB (Low)",
+     "p": 2760.0
+    },
+    {
+     "n": "Single Room DBB (High)",
+     "p": 4315.0
+    },
+    {
+     "n": "Twin Room DBB (High)",
+     "p": 3515.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 800.0
     }
    ]
   }
