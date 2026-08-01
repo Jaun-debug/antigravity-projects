@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 220,
+ "count": 221,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -36907,6 +36907,149 @@
     {
      "n": "Guide Room DBB",
      "p": 1450.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fi/lzne90ue1jop4ourumu7l/Cest-Si-Bon-STO-20-2027.pdf?rlkey=i0yax989u4prnzdh29e2fzbus&dl=0",
+   "name": "Cest Si Bon Hotel",
+   "region": "Central Namibia",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Standard Room B&B — single (per room)",
+     "p": 882.0
+    },
+    {
+     "n": "Standard Room B&B — double (per room)",
+     "p": 1176.0
+    },
+    {
+     "n": "Standard Room B&B — 3 pax (per room)",
+     "p": 1344.0
+    },
+    {
+     "n": "Standard Room B&B — 4 pax (per room)",
+     "p": 1512.0
+    },
+    {
+     "n": "Superior/Luxury Room B&B — single (per room)",
+     "p": 945.0
+    },
+    {
+     "n": "Superior/Luxury Room B&B — double (per room)",
+     "p": 1260.0
+    },
+    {
+     "n": "Luxury Room B&B — single (per room)",
+     "p": 1008.0
+    },
+    {
+     "n": "Luxury Room B&B — double (per room)",
+     "p": 1344.0
+    },
+    {
+     "n": "Luxury Family Room B&B — single (per room)",
+     "p": 1008.0
+    },
+    {
+     "n": "Luxury Family Room B&B — double (per room)",
+     "p": 1344.0
+    },
+    {
+     "n": "Luxury Family Room B&B — 3 pax (per room)",
+     "p": 1512.0
+    },
+    {
+     "n": "Luxury Family Room B&B — 4 pax (per room)",
+     "p": 1680.0
+    },
+    {
+     "n": "Executive Room B&B — single (per room)",
+     "p": 1134.0
+    },
+    {
+     "n": "Executive Room B&B — double (per room)",
+     "p": 1512.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 190.0
+    },
+    {
+     "n": "Breakfast Pack",
+     "p": 190.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 210.0
+    },
+    {
+     "n": "Dinner (2 course)",
+     "p": 380.0
+    },
+    {
+     "n": "Dinner (3 course)",
+     "p": 440.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Standard Room B&B — single (per room)",
+     "p": 1102.0
+    },
+    {
+     "n": "Standard Room B&B — double (per room)",
+     "p": 1470.0
+    },
+    {
+     "n": "Standard Room B&B — 3 pax (per room)",
+     "p": 1680.0
+    },
+    {
+     "n": "Standard Room B&B — 4 pax (per room)",
+     "p": 1890.0
+    },
+    {
+     "n": "Superior/Luxury Room B&B — single (per room)",
+     "p": 1180.0
+    },
+    {
+     "n": "Superior/Luxury Room B&B — double (per room)",
+     "p": 1575.0
+    },
+    {
+     "n": "Luxury Room B&B — single (per room)",
+     "p": 1260.0
+    },
+    {
+     "n": "Luxury Room B&B — double (per room)",
+     "p": 1680.0
+    },
+    {
+     "n": "Luxury Family Room B&B — single (per room)",
+     "p": 1260.0
+    },
+    {
+     "n": "Luxury Family Room B&B — double (per room)",
+     "p": 1680.0
+    },
+    {
+     "n": "Luxury Family Room B&B — 3 pax (per room)",
+     "p": 1890.0
+    },
+    {
+     "n": "Luxury Family Room B&B — 4 pax (per room)",
+     "p": 2100.0
+    },
+    {
+     "n": "Executive Room B&B — single (per room)",
+     "p": 1417.0
+    },
+    {
+     "n": "Executive Room B&B — double (per room)",
+     "p": 1890.0
     }
    ]
   }
