@@ -1078,6 +1078,98 @@
      "p27": 6739
     }
    ]
+  },
+  {
+   "name": "FlyNamibia Safari",
+   "cur": "NAD",
+   "note": "Per person, per seat · STO10 net · seasonal circuit 01 May–30 Nov · min 2 pax (Keerweeder/Witwater = Sossusvlei/NamibRand airstrip)",
+   "items": [
+    {
+     "n": "Keerweeder/Witwater → Mokuti",
+     "p": 21956.0,
+     "p27": 22509.0
+    },
+    {
+     "n": "Keerweeder/Witwater → Ongava",
+     "p": 20261.0,
+     "p27": 20808.0
+    },
+    {
+     "n": "Keerweeder/Witwater → Swakopmund",
+     "p": 11302.0,
+     "p27": 12402.0
+    },
+    {
+     "n": "Keerweeder/Witwater → Twyfelfontein",
+     "p": 17517.0,
+     "p27": 18963.0
+    },
+    {
+     "n": "Mokuti → Windhoek",
+     "p": 15494.0,
+     "p27": 16902.0
+    },
+    {
+     "n": "Ongava → Mokuti",
+     "p": 8684.0,
+     "p27": 9621.0
+    },
+    {
+     "n": "Ongava → Windhoek",
+     "p": 17076.0,
+     "p27": 18522.0
+    },
+    {
+     "n": "Swakopmund → Mokuti",
+     "p": 17643.0,
+     "p27": 19089.0
+    },
+    {
+     "n": "Swakopmund → Ongava",
+     "p": 15359.0,
+     "p27": 16767.0
+    },
+    {
+     "n": "Swakopmund → Twyfelfontein",
+     "p": 9275.0,
+     "p27": 10638.0
+    },
+    {
+     "n": "Swakopmund → Windhoek",
+     "p": 14072.0,
+     "p27": 15183.0
+    },
+    {
+     "n": "Twyfelfontein → Mokuti",
+     "p": 11481.0,
+     "p27": 14706.0
+    },
+    {
+     "n": "Twyfelfontein → Ongava",
+     "p": 9086.0,
+     "p27": 10089.0
+    },
+    {
+     "n": "Twyfelfontein → Windhoek",
+     "p": 14657.0,
+     "p27": 15768.0
+    },
+    {
+     "n": "Windhoek → Keerweeder/Witwater",
+     "p": 9242.0,
+     "p27": 10629.0
+    },
+    {
+     "n": "Windhoek → Zannier Sonop",
+     "p": 11905.0,
+     "p27": 13770.0
+    },
+    {
+     "n": "Zannier Sonop → Swakopmund",
+     "p": 16902.0,
+     "p27": 19062.0
+    }
+   ]
   }
  ]
 }
