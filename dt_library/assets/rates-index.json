@@ -1142,6 +1142,21 @@
     {
      "n": "Mpacha Airport (Katima Mulilo) — Jul 2027 – Jun 2028",
      "p": 2610.0
+    },
+    {
+     "n": "Helicopter + Half Day Delta (1 pax)",
+     "p": 2520.0,
+     "a": 1
+    },
+    {
+     "n": "Helicopter + Half Day Delta (2 pax)",
+     "p": 1260.0,
+     "a": 1
+    },
+    {
+     "n": "Helicopter + Half Day Delta (3 pax)",
+     "p": 1260.0,
+     "a": 1
     }
    ],
    "rates_2027": [
@@ -9432,6 +9447,11 @@
     {
      "n": "AM/PM Elephant Drive (min 2 pax)",
      "p": 1350.0
+    },
+    {
+     "n": "Stand-alone Sleep-Out",
+     "p": 4200.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -9869,83 +9889,193 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 10227.0
+     "p": 10866.25
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 13280.0
+     "p": 14106.25
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 12638.0
+     "p": 13427.5
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 16410.0
+     "p": 17431.25
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 17940.0
+     "p": 19061.25
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 23295.0
+     "p": 24746.25
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 12638.0
+     "p": 13427.5
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 16410.0
+     "p": 17431.25
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 17940.0
+     "p": 19061.25
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 23295.0
+     "p": 24746.25
     },
     {
      "n": "06 Jan – 31 Mar · DBB — per person sharing",
-     "p": 6341.0
+     "p": 6737.5
     },
     {
      "n": "06 Jan – 31 Mar · DBB — single",
-     "p": 8234.0
+     "p": 8746.25
     },
     {
      "n": "01 Apr – 31 May · DBB — per person sharing",
-     "p": 7964.0
+     "p": 8461.25
     },
     {
      "n": "01 Apr – 31 May · DBB — single",
-     "p": 10341.0
+     "p": 10985.0
     },
     {
      "n": "01 Jun – 31 Oct · DBB — per person sharing",
-     "p": 14286.0
+     "p": 15178.75
     },
     {
      "n": "01 Jun – 31 Oct · DBB — single",
-     "p": 18550.0
+     "p": 19705.0
     },
     {
      "n": "01 Nov – 19 Dec · DBB — per person sharing",
-     "p": 8194.0
+     "p": 8705.0
     },
     {
      "n": "01 Nov – 19 Dec · DBB — single",
-     "p": 10640.0
+     "p": 11301.25
     },
     {
      "n": "20 Dec – 05 Jan · DBB — per person sharing",
-     "p": 9159.0
+     "p": 9731.25
     },
     {
      "n": "20 Dec – 05 Jan · DBB — single",
-     "p": 11893.0
+     "p": 12633.75
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 9701.25
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 11988.75
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 17020.0
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 11988.75
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 17020.0
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 2893.75
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 3575.0
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 5075.0
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 3575.0
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 5075.0
+    },
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 6015.0
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 7555.0
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 13552.5
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 7772.5
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 8688.75
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 1793.75
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 2252.5
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 4041.25
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 2317.5
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 2591.25
+    },
+    {
+     "n": "Pilot / Guide (pp / night, incl. meals)",
+     "p": 1901.25
+    },
+    {
+     "n": "Private Activity — Classic (per party/night, max 6)",
+     "p": 11051.25
+    },
+    {
+     "n": "Scheduled Morning Drive — pp",
+     "p": 3028.75
+    },
+    {
+     "n": "Scheduled Afternoon Drive — pp",
+     "p": 1836.25
+    },
+    {
+     "n": "Scheduled Nature Walk — pp",
+     "p": 451.25
+    },
+    {
+     "n": "Lunch at camp (DBB) — pp",
+     "p": 632.5
+    },
+    {
+     "n": "Packed lunch (DBB) — pp",
+     "p": 406.25
     }
    ]
   },
@@ -10052,43 +10182,97 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 12418.0
+     "p": 13193.75
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 16124.0
+     "p": 17128.75
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 12865.0
+     "p": 13668.75
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 16705.0
+     "p": 17745.0
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 20423.0
+     "p": 21698.75
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 26519.0
+     "p": 28170.0
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 12865.0
+     "p": 13668.75
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 16705.0
+     "p": 17745.0
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 20423.0
+     "p": 21698.75
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 26519.0
+     "p": 28170.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 11780.0
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 12203.75
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 19375.0
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 12203.75
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 19375.0
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 3512.5
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 3640.0
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 5777.5
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 3640.0
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 5777.5
+    },
+    {
+     "n": "Pilot / Guide (pp / night, incl. meals)",
+     "p": 1901.25
+    },
+    {
+     "n": "Private Activity — Classic (per party/night, max 6)",
+     "p": 11051.25
+    },
+    {
+     "n": "Pilot / Guide (pp / night)",
+     "p": 1901.25
     }
    ]
   },
@@ -10275,83 +10459,177 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 7757.0
+     "p": 8242.5
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 10072.0
+     "p": 10700.0
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 9468.0
+     "p": 10060.0
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 12294.0
+     "p": 13060.0
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 12033.0
+     "p": 12785.0
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 15625.0
+     "p": 16597.5
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 9996.0
+     "p": 10618.75
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 12980.0
+     "p": 13785.0
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 11240.0
+     "p": 11942.5
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 14595.0
+     "p": 15503.75
     },
     {
      "n": "06 Jan – 31 Mar · DBB — per person sharing",
-     "p": 4773.0
+     "p": 5071.25
     },
     {
      "n": "06 Jan – 31 Mar · DBB — single",
-     "p": 6198.0
+     "p": 6583.75
     },
     {
      "n": "01 Apr – 31 May · DBB — per person sharing",
-     "p": 6153.0
+     "p": 6537.5
     },
     {
      "n": "01 Apr – 31 May · DBB — single",
-     "p": 7990.0
+     "p": 8487.5
     },
     {
      "n": "01 Jun – 31 Oct · DBB — per person sharing",
-     "p": 9075.0
+     "p": 9642.5
     },
     {
      "n": "01 Jun – 31 Oct · DBB — single",
-     "p": 11784.0
+     "p": 12517.5
     },
     {
      "n": "01 Nov – 19 Dec · DBB — per person sharing",
-     "p": 6122.0
+     "p": 6505.0
     },
     {
      "n": "01 Nov – 19 Dec · DBB — single",
-     "p": 7949.0
+     "p": 8445.0
     },
     {
      "n": "20 Dec – 05 Jan · DBB — per person sharing",
-     "p": 6507.0
+     "p": 6913.75
     },
     {
      "n": "20 Dec – 05 Jan · DBB — single",
-     "p": 8449.0
+     "p": 8975.0
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 7776.25
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 9490.0
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 12060.0
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 10018.75
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 11265.0
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 2318.75
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 2830.0
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 3596.25
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 2987.5
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 3360.0
+    },
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 4785.0
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 6167.5
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 9096.25
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 6120.0
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 6522.5
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 1426.25
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 1838.75
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 2712.5
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 1825.0
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 1945.0
+    },
+    {
+     "n": "Pilot / Guide (pp / night)",
+     "p": 1901.25
+    },
+    {
+     "n": "Lunch at camp (DBB) — pp",
+     "p": 632.5
+    },
+    {
+     "n": "Packed lunch (DBB) — pp",
+     "p": 406.25
     }
    ]
   },
@@ -12121,6 +12399,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -12258,6 +12581,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -12419,6 +12787,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -12580,6 +12993,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -12653,6 +13111,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -12726,6 +13229,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -12875,6 +13423,51 @@
     {
      "n": "Dinner (4 course)",
      "p": 810.0
+    },
+    {
+     "n": "Morning / Afternoon Etosha Game Drive (4 hrs)",
+     "p": 1750.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sunrise Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Sundowner Drive (3 hrs)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Interpretive Nature Walk (1½ hrs · min age 16)",
+     "p": 890.0,
+     "a": 1
+    },
+    {
+     "n": "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Young Explorers Walk (1½ hrs)",
+     "p": 420.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive (4 hrs) (per vehicle)",
+     "p": 9700.0,
+     "a": 1
+    },
+    {
+     "n": "Private Game Drive — Full Day (8 hrs) (per vehicle)",
+     "p": 15500.0,
+     "a": 1
+    },
+    {
+     "n": "Onguma Dream Cruiser (max 2 guests) (per vehicle)",
+     "p": 9800.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -14532,6 +15125,21 @@
     {
      "n": "Private Air Strip transfer (3 km)",
      "p": 0.0
+    },
+    {
+     "n": "Guided Nature Drive",
+     "p": 0.0,
+     "a": 1
+    },
+    {
+     "n": "Guided / Non-Guided Nature Walk",
+     "p": 0.0,
+     "a": 1
+    },
+    {
+     "n": "Guided / Non-Guided E-biking",
+     "p": 0.0,
+     "a": 1
     }
    ],
    "rates_2027": [
@@ -16538,6 +17146,16 @@
     {
      "n": "Airstrip Transfer (return, per vehicle)",
      "p": 700.0
+    },
+    {
+     "n": "Himba Village Visit (min 2)",
+     "p": 2100.0,
+     "a": 1
+    },
+    {
+     "n": "Hoanib Elephant Drive incl. Himba (min 2)",
+     "p": 3700.0,
+     "a": 1
     }
    ],
    "rack_2026": [
@@ -16770,43 +17388,97 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 19577.0
+     "p": 20800.0
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 25420.0
+     "p": 27002.5
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 19723.0
+     "p": 20955.0
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 25610.0
+     "p": 27205.0
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 32629.0
+     "p": 34668.75
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 42368.0
+     "p": 45007.5
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 19723.0
+     "p": 20955.0
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 25610.0
+     "p": 27205.0
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 32629.0
+     "p": 34668.75
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 42368.0
+     "p": 45007.5
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 18087.5
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 18221.25
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 30146.25
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 18221.25
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 30146.25
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 5393.75
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 5433.75
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 8990.0
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 5433.75
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 8990.0
+    },
+    {
+     "n": "Pilot / Guide (pp / night, incl. meals)",
+     "p": 1901.25
+    },
+    {
+     "n": "Private Activity — Classic (per party/night, max 6)",
+     "p": 11051.25
+    },
+    {
+     "n": "Pilot / Guide (pp / night)",
+     "p": 1901.25
     }
    ]
   },
@@ -18270,7 +18942,8 @@
      "n": "Pilot / Guide (pp / night)",
      "p": 1901.25
     }
-   ]
+   ],
+   "rack_2027": []
   },
   {
    "file": "/ratesheets/ababis_ratesheet_v3.html",
@@ -23726,83 +24399,181 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 7402.0
+     "p": 7865.0
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 9612.0
+     "p": 10210.0
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 8873.0
+     "p": 9427.5
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 11521.0
+     "p": 12238.75
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 12623.0
+     "p": 13411.25
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 16391.0
+     "p": 17411.25
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 8873.0
+     "p": 9427.5
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 11521.0
+     "p": 12238.75
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 11854.0
+     "p": 12595.0
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 15392.0
+     "p": 16351.25
     },
     {
      "n": "06 Jan – 31 Mar · DBB — per person sharing",
-     "p": 4557.0
+     "p": 4841.25
     },
     {
      "n": "06 Jan – 31 Mar · DBB — single",
-     "p": 5917.0
+     "p": 6285.0
     },
     {
      "n": "01 Apr – 31 May · DBB — per person sharing",
-     "p": 5767.0
+     "p": 6127.5
     },
     {
      "n": "01 Apr – 31 May · DBB — single",
-     "p": 7488.0
+     "p": 7955.0
     },
     {
      "n": "01 Jun – 31 Oct · DBB — per person sharing",
-     "p": 9057.0
+     "p": 9623.75
     },
     {
      "n": "01 Jun – 31 Oct · DBB — single",
-     "p": 11760.0
+     "p": 12493.75
     },
     {
      "n": "01 Nov – 19 Dec · DBB — per person sharing",
-     "p": 5888.0
+     "p": 6256.25
     },
     {
      "n": "01 Nov – 19 Dec · DBB — single",
-     "p": 7646.0
+     "p": 8121.25
     },
     {
      "n": "20 Dec – 05 Jan · DBB — per person sharing",
-     "p": 6378.0
+     "p": 6776.25
     },
     {
      "n": "20 Dec – 05 Jan · DBB — single",
-     "p": 8282.0
+     "p": 8797.5
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 7282.5
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 8727.5
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 11661.25
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 8727.5
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 11661.25
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 2171.25
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 2602.5
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 3477.5
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 2602.5
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 3477.5
+    },
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 4482.5
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 5673.75
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 8368.75
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 5791.25
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 6275.0
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 1336.25
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 1692.5
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 2495.0
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 1727.5
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 1871.25
+    },
+    {
+     "n": "Pilot / Guide (pp / night)",
+     "p": 1901.25
+    },
+    {
+     "n": "Lunch at camp (DBB) — pp",
+     "p": 632.5
+    },
+    {
+     "n": "Packed lunch (DBB) — pp",
+     "p": 406.25
+    },
+    {
+     "n": "Sossusvlei Ballooning Safari — pp (min 2)",
+     "p": 10338.75
     }
    ]
   },
@@ -23913,43 +24684,101 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 18375.0
+     "p": 19522.5
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 23859.0
+     "p": 25345.0
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 19036.0
+     "p": 20226.25
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 24718.0
+     "p": 26257.5
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 30223.0
+     "p": 32112.5
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 39244.0
+     "p": 41688.75
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 19036.0
+     "p": 20226.25
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 24718.0
+     "p": 26257.5
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 30223.0
+     "p": 32112.5
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 39244.0
+     "p": 41688.75
+    }
+   ],
+   "rack_2026": [
+    {
+     "n": "PP Sharing — Jan–Mar",
+     "p": 17276.25
+    },
+    {
+     "n": "PP Sharing — Apr–May",
+     "p": 17898.75
+    },
+    {
+     "n": "PP Sharing — Jun–Oct (peak)",
+     "p": 28418.75
+    },
+    {
+     "n": "PP Sharing — Nov–19 Dec",
+     "p": 17898.75
+    },
+    {
+     "n": "PP Sharing — 20 Dec–5 Jan (festive)",
+     "p": 28418.75
+    },
+    {
+     "n": "Single Supplement — Jan–Mar",
+     "p": 5152.5
+    },
+    {
+     "n": "Single Supplement — Apr–May",
+     "p": 5337.5
+    },
+    {
+     "n": "Single Supplement — Jun–Oct (peak)",
+     "p": 8475.0
+    },
+    {
+     "n": "Single Supplement — Nov–19 Dec",
+     "p": 5337.5
+    },
+    {
+     "n": "Single Supplement — 20 Dec–5 Jan (festive)",
+     "p": 8475.0
+    },
+    {
+     "n": "Pilot / Guide (pp / night, incl. meals)",
+     "p": 1901.25
+    },
+    {
+     "n": "Private Activity — Classic (per party/night, max 6)",
+     "p": 11051.25
+    },
+    {
+     "n": "Sossusvlei Ballooning Safari — pp (min 2)",
+     "p": 10338.75
+    },
+    {
+     "n": "Pilot / Guide (pp / night)",
+     "p": 1901.25
     }
    ]
   },
@@ -27518,6 +28347,16 @@
     {
      "n": "Group Lunches (min 10 pax)",
      "p": 200.0
+    },
+    {
+     "n": "10-Seater exclusive vehicle (max 4 pax) — half day (per vehicle)",
+     "p": 6300.0,
+     "a": 1
+    },
+    {
+     "n": "10-Seater exclusive vehicle (max 4 pax) — full day (per vehicle)",
+     "p": 7875.0,
+     "a": 1
     }
    ],
    "rates_2027": [
@@ -35340,45 +36179,46 @@
    "rack_2027": [
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-     "p": 21912.0
+     "p": 23281.25
     },
     {
      "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-     "p": 28453.0
+     "p": 30225.0
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-     "p": 23754.0
+     "p": 25238.75
     },
     {
      "n": "01 Apr – 31 May · Fully Inclusive — single",
-     "p": 30844.0
+     "p": 32765.0
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-     "p": 36662.0
+     "p": 38953.75
     },
     {
      "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-     "p": 47605.0
+     "p": 50570.0
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-     "p": 23754.0
+     "p": 25238.75
     },
     {
      "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-     "p": 30844.0
+     "p": 32765.0
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-     "p": 36662.0
+     "p": 38953.75
     },
     {
      "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-     "p": 47605.0
+     "p": 50570.0
     }
-   ]
+   ],
+   "rack_2026": []
   },
   {
    "file": "/ratesheets/camp_khwai.html",
