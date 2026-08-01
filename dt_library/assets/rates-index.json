@@ -583,6 +583,22 @@
     {
      "n": "Villa Dinner, Bed & Breakfast — child 13–17 (valid 2026–2028)",
      "p": 5955.0
+    },
+    {
+     "n": "Boat Cruise (3 hrs) — per person",
+     "p": 1360.0
+    },
+    {
+     "n": "Game Drive – Chobe National Park (4–5 hrs) — per person",
+     "p": 1360.0
+    },
+    {
+     "n": "Kasika Village / Cultural Tour (3 hrs) — per person",
+     "p": 510.0
+    },
+    {
+     "n": "Fishing Trip (3 hrs, max 3 rods) — per person",
+     "p": 2550.0
     }
    ],
    "rack_2027": [
@@ -1144,6 +1160,42 @@
     {
      "n": "High Season (01 Jul – 30 Nov) · Luxury Chalet DBB — single",
      "p": 6600.0
+    },
+    {
+     "n": "Buffalo Game Drive (4 hrs) — per person",
+     "p": 1438.0
+    },
+    {
+     "n": "Mahango Game Drive (3 hrs) — per person",
+     "p": 1135.0
+    },
+    {
+     "n": "Boat Cruise (2.5 hrs) — per person",
+     "p": 1061.0
+    },
+    {
+     "n": "Traditional Village Tour (1 hr) — per person",
+     "p": 522.0
+    },
+    {
+     "n": "Fishing Tour (4 hrs) — per person",
+     "p": 2560.0
+    },
+    {
+     "n": "Fishing Tour (2 hrs) — per person",
+     "p": 1280.0
+    },
+    {
+     "n": "Island Brunch Excursion (3 hrs, min 2 pax) — per person",
+     "p": 2450.0
+    },
+    {
+     "n": "Mokoro Poling excursion (4 hrs) — per person",
+     "p": 1585.0
+    },
+    {
+     "n": "Tsodilo Hills Excursion (7 hrs, min 2 pax) — per person",
+     "p": 2365.0
     }
    ],
    "rack_2027": [
@@ -2541,6 +2593,38 @@
     {
      "n": "High — 4+ pax (50% off)",
      "p": 1437.0
+    },
+    {
+     "n": "Nature Drive / Bushman Rock Art (3 hrs)",
+     "p": 750.0
+    },
+    {
+     "n": "Guided Morning Walk — Ai Aiba (2–3 hrs)",
+     "p": 450.0
+    },
+    {
+     "n": "Nature Drive / Bushman Rock Art (3 hrs, AM or PM) — per person",
+     "p": 750.0
+    },
+    {
+     "n": "Ai Aiba Guided Walk (2–3 hrs) — per person",
+     "p": 450.0
+    },
+    {
+     "n": "Walk & Drive (3 hrs) — per person",
+     "p": 750.0
+    },
+    {
+     "n": "Walk with San Living Museum visit (3 hrs) — per person",
+     "p": 710.0
+    },
+    {
+     "n": "Guided Sundowner Mountain Bike Ride (E-bike) — per person",
+     "p": 350.0
+    },
+    {
+     "n": "Guided Mountain Bike Tour (incl. E-bike) — per person",
+     "p": 1050.0
     }
    ],
    "rack_2027": [
@@ -4291,6 +4375,94 @@
     {
      "n": "Conservation & wildlife fee (per person/night, net)",
      "p": 385.0
+    },
+    {
+     "n": "Leopard Tracking (incl. in FI) — Low season",
+     "p": 1600.0
+    },
+    {
+     "n": "Leopard Tracking (incl. in FI) — High season",
+     "p": 1760.0
+    },
+    {
+     "n": "Brown Hyaena Tracking (incl. in FI) — Low season",
+     "p": 1600.0
+    },
+    {
+     "n": "Brown Hyaena Tracking (incl. in FI) — High season",
+     "p": 1760.0
+    },
+    {
+     "n": "Game & Nature Drive (incl. in FI) — Low season",
+     "p": 970.0
+    },
+    {
+     "n": "Game & Nature Drive (incl. in FI) — High season",
+     "p": 1060.0
+    },
+    {
+     "n": "Leopard Tracking (Low 01 Jan–30 Jun) — per person",
+     "p": 1600.0
+    },
+    {
+     "n": "Leopard Tracking (High 01 Jul–31 Dec) — per person",
+     "p": 1760.0
+    },
+    {
+     "n": "Brown Hyaena Tracking (Low) — per person",
+     "p": 1600.0
+    },
+    {
+     "n": "Brown Hyaena Tracking (High) — per person",
+     "p": 1760.0
+    },
+    {
+     "n": "Into AfriCat – Behind the Science guided experience (Low) — per person",
+     "p": 970.0
+    },
+    {
+     "n": "Into AfriCat – Behind the Science guided experience (High) — per person",
+     "p": 1060.0
+    },
+    {
+     "n": "Game & Nature Drive (Low) — per person",
+     "p": 970.0
+    },
+    {
+     "n": "Game & Nature Drive (High) — per person",
+     "p": 1060.0
+    },
+    {
+     "n": "Night Drive (Low) — per person",
+     "p": 1600.0
+    },
+    {
+     "n": "Night Drive (High) — per person",
+     "p": 1760.0
+    },
+    {
+     "n": "Pangolin Tracking on foot (min 2 nights, Low) — per person",
+     "p": 2900.0
+    },
+    {
+     "n": "Pangolin Tracking on foot (min 2 nights, High) — per person",
+     "p": 3190.0
+    },
+    {
+     "n": "Rhino Tracking on foot (Low) — per person",
+     "p": 2200.0
+    },
+    {
+     "n": "Rhino Tracking on foot (High) — per person",
+     "p": 2420.0
+    },
+    {
+     "n": "Guided Nature Trail hike (Low) — per person",
+     "p": 420.0
+    },
+    {
+     "n": "Guided Nature Trail hike (High) — per person",
+     "p": 460.0
     }
    ],
    "rack_2027": [
@@ -5078,6 +5250,30 @@
     {
      "n": "Standard rate (01 Jan – 31 Dec 2027) · Andersson Camp campsite — per person camping",
      "p": 460.0
+    },
+    {
+     "n": "Plateau Hike (guided)",
+     "p": 450.0
+    },
+    {
+     "n": "Rhino Drive (guided)",
+     "p": 1400.0
+    },
+    {
+     "n": "Rhino Tracking (guided)",
+     "p": 1200.0
+    },
+    {
+     "n": "Cave Excursion (guided)",
+     "p": 1000.0
+    },
+    {
+     "n": "Honeymoon Sundowner (guided)",
+     "p": 1000.0
+    },
+    {
+     "n": "Farm Tour (guided, min 10 pax)",
+     "p": 1000.0
     }
    ],
    "rack_2027": [
@@ -8993,6 +9189,14 @@
     {
      "n": "(01 Nov 2026 – 31 Oct 2027) · DBB — single",
      "p": 3695.86
+    },
+    {
+     "n": "Damaraland Scenic Flight — Route 1, 45min (per pax, 5 sharing)",
+     "p": 2710.0
+    },
+    {
+     "n": "Damaraland Scenic Flight — Route 1, 45min (per pax, 2 sharing)",
+     "p": 6775.0
     }
    ],
    "rack_2027": [
@@ -10939,6 +11143,38 @@
     {
      "n": "Presidential Suite · DBB — child 7–13 (valid 2026–2028)",
      "p": 2306.0
+    },
+    {
+     "n": "Hai//om Bush Walk — per person",
+     "p": 580.0
+    },
+    {
+     "n": "Snake Park Show (guided) — per person",
+     "p": 480.0
+    },
+    {
+     "n": "Mokuti Sundowner Drive (1.5 hrs) — per person",
+     "p": 1010.0
+    },
+    {
+     "n": "AM Etosha Game Drive (4 hrs) — per person",
+     "p": 1380.0
+    },
+    {
+     "n": "PM Etosha Game Drive (4 hrs) — per person",
+     "p": 1380.0
+    },
+    {
+     "n": "Property Night Game Drive (2 hrs) — per person",
+     "p": 580.0
+    },
+    {
+     "n": "Private Game Drive — 4 hrs (9-seater Land Cruiser, per vehicle)",
+     "p": 10300.0
+    },
+    {
+     "n": "Private Game Drive — 8 hrs (9-seater Land Cruiser, per vehicle)",
+     "p": 21600.0
     }
    ],
    "rack_2027": [
@@ -19146,6 +19382,22 @@
     {
      "n": "Dinner",
      "p": 460.0
+    },
+    {
+     "n": "Sundowner / Nature Drive (lodge property)",
+     "p": 550.0
+    },
+    {
+     "n": "Elim Dune Nature Walk",
+     "p": 845.0
+    },
+    {
+     "n": "Sesriem Canyon Excursion",
+     "p": 695.0
+    },
+    {
+     "n": "Sossusvlei & Dead Vlei Excursion",
+     "p": 1490.0
     }
    ],
    "rack_2027": [
@@ -19849,6 +20101,22 @@
     {
      "n": "Dinner",
      "p": 460.0
+    },
+    {
+     "n": "Sundowner / Nature Drive (lodge property)",
+     "p": 550.0
+    },
+    {
+     "n": "Elim Dune Nature Walk",
+     "p": 845.0
+    },
+    {
+     "n": "Sesriem Canyon Excursion",
+     "p": 695.0
+    },
+    {
+     "n": "Sossusvlei & Dead Vlei Excursion",
+     "p": 1490.0
     }
    ],
    "rack_2027": [
@@ -20661,6 +20929,18 @@
     {
      "n": "High Season (01 Jul – 30 Nov) · Oasis Room DBB — single",
      "p": 6925.0
+    },
+    {
+     "n": "Sundowner Drive (1.5 hrs) — per person",
+     "p": 592.0
+    },
+    {
+     "n": "Sossusvlei Drive (6 hrs) — per person",
+     "p": 2324.0
+    },
+    {
+     "n": "Quad Biking (2.5 hrs) — per person",
+     "p": 1471.0
     }
    ],
    "rack_2027": [
@@ -22141,6 +22421,14 @@
     {
      "n": "(01 Jan – 31 Dec 2027) · Family Room B&B (3 adults, per room)",
      "p": 3800.0
+    },
+    {
+     "n": "Cheetah Viewing Tour (1 hr, min 4 pax) — per person",
+     "p": 560.0
+    },
+    {
+     "n": "Cheetah Sundowner Tour (min 4 pax) — per person",
+     "p": 880.0
     }
    ],
    "rack_2027": [
@@ -22528,6 +22816,38 @@
     {
      "n": "Low Season · Junior Suite DBB (per room)",
      "p": 10312.0
+    },
+    {
+     "n": "Sundowner / Nature Drive (lodge property)",
+     "p": 550.0
+    },
+    {
+     "n": "Elim Dune Nature Walk",
+     "p": 845.0
+    },
+    {
+     "n": "Sesriem Canyon Excursion",
+     "p": 695.0
+    },
+    {
+     "n": "Sossusvlei & Dead Vlei Excursion",
+     "p": 1490.0
+    },
+    {
+     "n": "Sundowner / Nature Drive (min 2 pax) — per person",
+     "p": 550.0
+    },
+    {
+     "n": "Elim Dune Nature Walk (min 2 pax) — per person",
+     "p": 845.0
+    },
+    {
+     "n": "Sossusvlei & Dead Vlei excursion (min 4 pax) — per person",
+     "p": 1490.0
+    },
+    {
+     "n": "Sesriem Canyon excursion (min 4 pax) — per person",
+     "p": 695.0
     }
    ],
    "rack_2027": [
@@ -23840,6 +24160,90 @@
      "n": "Adopt a Silo Shingle Tile",
      "p": 2500.0
     }
+   ],
+   "rates_2027": [
+    {
+     "n": "Per person sharing (FI, 01 Apr – 15 Nov)",
+     "p": 16760.0
+    },
+    {
+     "n": "Child sharing",
+     "p": 4200.0
+    },
+    {
+     "n": "Exclusive use — whole camp (per night)",
+     "p": 100560.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 2625.0
+    },
+    {
+     "n": "Guided Nature Walk — Morning",
+     "p": 895.0
+    },
+    {
+     "n": "Sunset Drive with drinks",
+     "p": 1315.0
+    },
+    {
+     "n": "Half-day Scenic Drive (6 hrs)",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle",
+     "p": 1315.0
+    },
+    {
+     "n": "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree — per person",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Dune Bush Dining Experience – morning (first 2 guests)",
+     "p": 1575.0
+    },
+    {
+     "n": "Dining Under the Stars Experience – evening (first 2 guests)",
+     "p": 1945.0
+    },
+    {
+     "n": "Scenic Nature Drives – Morning/Afternoon/Sundowner (included)",
+     "p": 0.0
+    },
+    {
+     "n": "Guided Bushman Walk (3 hrs, included)",
+     "p": 0.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Per person sharing (FI, 01 Apr – 15 Nov)",
+     "p": 20950.0
+    },
+    {
+     "n": "Child sharing",
+     "p": 5250.0
+    },
+    {
+     "n": "Exclusive use — whole camp (per night)",
+     "p": 125700.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 3281.25
+    }
    ]
   },
   {
@@ -24129,6 +24533,138 @@
      "n": "Adopt a Silo Shingle Tile",
      "p": 2500.0
     }
+   ],
+   "rates_2027": [
+    {
+     "n": "Green Season · Standard Tent — per person sharing (FI)",
+     "p": 11920.0
+    },
+    {
+     "n": "High Season · Standard Tent — per person sharing (FI)",
+     "p": 12520.0
+    },
+    {
+     "n": "Green Season · additional child",
+     "p": 3000.0
+    },
+    {
+     "n": "High Season · additional child",
+     "p": 3150.0
+    },
+    {
+     "n": "Dune Family Suite — exclusive (per unit) · Green",
+     "p": 47680.0
+    },
+    {
+     "n": "Dune Family Suite — exclusive (per unit) · High",
+     "p": 50080.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 2625.0
+    },
+    {
+     "n": "Guided Nature Walk — Morning",
+     "p": 895.0
+    },
+    {
+     "n": "Sunset Drive with drinks",
+     "p": 1315.0
+    },
+    {
+     "n": "Half-day Scenic Drive (6 hrs)",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle",
+     "p": 1315.0
+    },
+    {
+     "n": "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree — per person",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Dune Bush Dining Experience – morning (first 2 guests)",
+     "p": 1575.0
+    },
+    {
+     "n": "Dining Under the Stars Experience – evening (first 2 guests)",
+     "p": 1945.0
+    },
+    {
+     "n": "Scenic Nature Drives – Morning/Afternoon/Sundowner (included)",
+     "p": 0.0
+    },
+    {
+     "n": "Guided Bushman Walk (3 hrs, included)",
+     "p": 0.0
+    },
+    {
+     "n": "Horse Riding – Morning (2 hrs) — per person",
+     "p": 895.0
+    },
+    {
+     "n": "Horse Riding – Sunset with drinks (3 hrs, min 2) — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Horse Riding – Full Day with picnic (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Desert Sleepout – Sundowner + Sunrise Overnight (min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Namib Sky Ballooning (min 2) — per person",
+     "p": 10720.0
+    },
+    {
+     "n": "Shared transfer to Kwessie/Geluk (min 2) — per person",
+     "p": 2395.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Green Season · Standard Tent — per person sharing (FI)",
+     "p": 14900.0
+    },
+    {
+     "n": "High Season · Standard Tent — per person sharing (FI)",
+     "p": 15650.0
+    },
+    {
+     "n": "Green Season · additional child",
+     "p": 3750.0
+    },
+    {
+     "n": "High Season · additional child",
+     "p": 3937.5
+    },
+    {
+     "n": "Dune Family Suite — exclusive (per unit) · Green",
+     "p": 59600.0
+    },
+    {
+     "n": "Dune Family Suite — exclusive (per unit) · High",
+     "p": 62600.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 3281.25
+    }
    ]
   },
   {
@@ -24201,6 +24737,106 @@
     {
      "n": "Tour Guide Room (Wolwedans Village) — High Season RACK",
      "p": 3125.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Per person sharing (FI)",
+     "p": 16760.0
+    },
+    {
+     "n": "Child sharing",
+     "p": 4200.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 2625.0
+    },
+    {
+     "n": "Guided Nature Walk — Morning",
+     "p": 895.0
+    },
+    {
+     "n": "Sunset Drive with drinks",
+     "p": 1315.0
+    },
+    {
+     "n": "Half-day Scenic Drive (6 hrs)",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle",
+     "p": 1315.0
+    },
+    {
+     "n": "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree — per person",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Dune Bush Dining Experience – morning (first 2 guests)",
+     "p": 1575.0
+    },
+    {
+     "n": "Dining Under the Stars Experience – evening (first 2 guests)",
+     "p": 1945.0
+    },
+    {
+     "n": "Scenic Nature Drives – Morning/Afternoon/Sundowner (included)",
+     "p": 0.0
+    },
+    {
+     "n": "Guided Bushman Walk (3 hrs, included)",
+     "p": 0.0
+    },
+    {
+     "n": "Horse Riding – Morning (2 hrs) — per person",
+     "p": 895.0
+    },
+    {
+     "n": "Horse Riding – Sunset with drinks (3 hrs, min 2) — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Horse Riding – Full Day with picnic (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Desert Sleepout – Sundowner + Sunrise Overnight (min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Namib Sky Ballooning (min 2) — per person",
+     "p": 10720.0
+    },
+    {
+     "n": "Shared transfer to Kwessie/Geluk (min 2) — per person",
+     "p": 2395.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Per person sharing (FI)",
+     "p": 20950.0
+    },
+    {
+     "n": "Child sharing",
+     "p": 5250.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 3281.25
     }
    ]
   },
@@ -24362,6 +24998,114 @@
     {
      "n": "Adopt a Silo Shingle Tile",
      "p": 2500.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Per person sharing (FI)",
+     "p": 16760.0
+    },
+    {
+     "n": "Child sharing",
+     "p": 4200.0
+    },
+    {
+     "n": "Exclusive use — whole camp (per night)",
+     "p": 67040.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 2625.0
+    },
+    {
+     "n": "Guided Nature Walk — Morning",
+     "p": 895.0
+    },
+    {
+     "n": "Sunset Drive with drinks",
+     "p": 1315.0
+    },
+    {
+     "n": "Half-day Scenic Drive (6 hrs)",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle",
+     "p": 1315.0
+    },
+    {
+     "n": "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Adopt & Plant a Tree — per person",
+     "p": 5775.0
+    },
+    {
+     "n": "Adopt a Fairy Circle — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Dune Bush Dining Experience – morning (first 2 guests)",
+     "p": 1575.0
+    },
+    {
+     "n": "Dining Under the Stars Experience – evening (first 2 guests)",
+     "p": 1945.0
+    },
+    {
+     "n": "Scenic Nature Drives – Morning/Afternoon/Sundowner (included)",
+     "p": 0.0
+    },
+    {
+     "n": "Guided Bushman Walk (3 hrs, included)",
+     "p": 0.0
+    },
+    {
+     "n": "Horse Riding – Morning (2 hrs) — per person",
+     "p": 895.0
+    },
+    {
+     "n": "Horse Riding – Sunset with drinks (3 hrs, min 2) — per person",
+     "p": 1315.0
+    },
+    {
+     "n": "Horse Riding – Full Day with picnic (6 hrs, min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Desert Sleepout – Sundowner + Sunrise Overnight (min 2) — per person",
+     "p": 2625.0
+    },
+    {
+     "n": "Namib Sky Ballooning (min 2) — per person",
+     "p": 10720.0
+    },
+    {
+     "n": "Shared transfer to Kwessie/Geluk (min 2) — per person",
+     "p": 2395.0
+    }
+   ],
+   "rack_2027": [
+    {
+     "n": "Per person sharing (FI)",
+     "p": 20950.0
+    },
+    {
+     "n": "Child sharing",
+     "p": 5250.0
+    },
+    {
+     "n": "Exclusive use — whole camp (per night)",
+     "p": 83800.0
+    },
+    {
+     "n": "Guide / Pilot (per night)",
+     "p": 3281.25
     }
    ]
   },
@@ -25254,6 +25998,46 @@
     {
      "n": "Dinner",
      "p": 460.0
+    },
+    {
+     "n": "Morning Game Drive (Etosha)",
+     "p": 1520.0
+    },
+    {
+     "n": "Full Day Game Drive (Etosha)",
+     "p": 1810.0
+    },
+    {
+     "n": "Sundowner Drive",
+     "p": 550.0
+    },
+    {
+     "n": "Sunrise Guided Walk",
+     "p": 520.0
+    },
+    {
+     "n": "Stargazing (guided)",
+     "p": 440.0
+    },
+    {
+     "n": "Etosha NP Morning Game Drive (min 4 pax) — per person",
+     "p": 1520.0
+    },
+    {
+     "n": "Etosha NP Full Day Game Drive (min 4 pax) — per person",
+     "p": 1810.0
+    },
+    {
+     "n": "Sundowner Drive – private reserve (min 4 pax) — per person",
+     "p": 550.0
+    },
+    {
+     "n": "Sunrise Guided Walk (min 2 pax, max 8) — per person",
+     "p": 520.0
+    },
+    {
+     "n": "Stargazing – seasonal (min 2 pax) — per person",
+     "p": 440.0
     }
    ],
    "rack_2027": [
@@ -25367,6 +26151,26 @@
     {
      "n": "Camping — child under 5 (no charge)",
      "p": 0.0
+    },
+    {
+     "n": "Morning Game Drive (Etosha)",
+     "p": 1520.0
+    },
+    {
+     "n": "Full Day Game Drive (Etosha)",
+     "p": 1810.0
+    },
+    {
+     "n": "Sundowner Drive",
+     "p": 550.0
+    },
+    {
+     "n": "Sunrise Guided Walk",
+     "p": 520.0
+    },
+    {
+     "n": "Stargazing (guided)",
+     "p": 440.0
     }
    ],
    "rack_2027": [
@@ -26010,6 +26814,30 @@
     {
      "n": "Bush Picnic Lunch",
      "p": 220.0
+    },
+    {
+     "n": "Etosha Day Tour (8 hrs) — per person",
+     "p": 1755.0
+    },
+    {
+     "n": "Morning Game/Nature Drive (2 hrs) — per person",
+     "p": 684.0
+    },
+    {
+     "n": "Afternoon Game/Nature Drive (2 hrs) — per person",
+     "p": 684.0
+    },
+    {
+     "n": "Night Drive — per person",
+     "p": 765.0
+    },
+    {
+     "n": "Morning Hiking Tour — per person",
+     "p": 351.0
+    },
+    {
+     "n": "Afternoon Hiking Tour — per person",
+     "p": 351.0
     }
    ],
    "rack_2027": [
@@ -31431,6 +32259,66 @@
     {
      "n": "Junior Suite · DBB — child 7–13 (valid 2026–2028)",
      "p": 1138.0
+    },
+    {
+     "n": "Sunrise Nature & Game Drive (3 hrs) — per person",
+     "p": 760.0
+    },
+    {
+     "n": "Sundowner Nature & Game Drive (3 hrs) — per person",
+     "p": 989.0
+    },
+    {
+     "n": "Hilltop Sundowner Drive — per person",
+     "p": 583.0
+    },
+    {
+     "n": "Steenbokkie Sunrise Nature & Game Drive — per person",
+     "p": 760.0
+    },
+    {
+     "n": "Steenbokkie Sundowner Nature & Game Drive — per person",
+     "p": 989.0
+    },
+    {
+     "n": "Steenbokkie Sundowner Drive — per person",
+     "p": 526.0
+    },
+    {
+     "n": "Gods Window Sunrise Nature & Game Drive — per person",
+     "p": 760.0
+    },
+    {
+     "n": "Gods Window Sundowner Nature & Game Drive — per person",
+     "p": 989.0
+    },
+    {
+     "n": "Gods Window Sundowner Drive — per person",
+     "p": 583.0
+    },
+    {
+     "n": "Night Drive Under the Stars (2 hrs) — per person",
+     "p": 493.0
+    },
+    {
+     "n": "Rietdam Birding Walk (2 hrs) — per person",
+     "p": 252.0
+    },
+    {
+     "n": "Night Walk Under the Stars — per person",
+     "p": 251.0
+    },
+    {
+     "n": "Guided Hilltop Nature & Game Bush Walk (4 hrs) — per person",
+     "p": 510.0
+    },
+    {
+     "n": "Horse Riding & Sundowner Baskets — per person",
+     "p": 583.0
+    },
+    {
+     "n": "Svens Kegelbahn Skittle Alley (activity, per lane)",
+     "p": 428.0
     }
    ],
    "rack_2027": [
@@ -33674,6 +34562,30 @@
     {
      "n": "(01 Nov 2026 – 31 Oct 2027) · Single Bungalow (DBB+, per room)",
      "p": 4800.0
+    },
+    {
+     "n": "Scenic Dune Drive – Sunrise Tour (min 2 pax) — per person",
+     "p": 1250.0
+    },
+    {
+     "n": "Scenic Dune Drive – Sunrise Tour (3–4 pax) — per person",
+     "p": 1100.0
+    },
+    {
+     "n": "Scenic Dune Drive – Sunrise Tour (5–7 pax) — per person",
+     "p": 990.0
+    },
+    {
+     "n": "Dunes & Canyon Sundowner Tour (min 2 pax) — per person",
+     "p": 1250.0
+    },
+    {
+     "n": "Dunes & Canyon Sundowner Tour (3–4 pax) — per person",
+     "p": 1100.0
+    },
+    {
+     "n": "Dunes & Canyon Sundowner Tour (5–7 pax) — per person",
+     "p": 990.0
     }
    ],
    "rack_2027": [
