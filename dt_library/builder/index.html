@@ -60,6 +60,12 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .cellsel{display:flex;flex-direction:column;gap:5px;min-width:190px}
 .roomcell{display:flex;flex-direction:column;gap:6px;min-width:0}
 .qtygrid{display:flex;flex-direction:column;gap:4px;margin-top:2px}
+.mealsel{display:flex;flex-direction:column;gap:5px;margin-top:5px;padding-top:6px;border-top:1px dashed var(--border)}
+.mealsel select{font-size:.8rem}
+.mealchips{display:flex;flex-direction:column;gap:4px}
+.mealchip{display:flex;align-items:center;gap:6px;font-size:.78rem;background:rgba(184,149,106,.12);border:1px solid var(--border);border-radius:6px;padding:3px 8px}
+.mealchip .mealcalc{color:var(--muted);font-size:.72rem;margin-left:auto;white-space:nowrap}
+.mealchip .mealrm{background:none;border:none;color:#b46a6a;cursor:pointer;font-size:1rem;line-height:1;padding:0 2px}
 .qline{display:flex;align-items:center;gap:7px;min-width:0}
 .qline .qlbl{flex:0 0 74px;font-size:.7rem;letter-spacing:.5px;text-transform:uppercase;color:var(--muted)}
 .bd .qline .qbox{width:52px;text-align:center;flex:0 0 52px}
@@ -169,6 +175,10 @@ function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
 function isActivity(n){var s=(n||'').toLowerCase();if(/sharing|\bsingle\b|\broom\b|chalet|\btent\b|suite|villa(?!ge)|bungalow|cottage|\bdbb\b|b ?& ?b|per person per night|conservation|levy|park fee|tourism|deposit|\bmeal|breakfast|lunch|dinner|guide room|tour guide/.test(s))return false;return /game[ -]?drive|\bdrive\b|cruise|\bwalk\b|hik|nature drive|sundowner|mtb|bike|cycl|kayak|canoe|mokoro|balloon|fishing|quad|horse|riding|excursion|\btour\b|scenic|boat|tracking|township|cultural|museum|\bspa\b|massage|tasting|sandboard|living museum|e-bike|stargaz|flight|rock ?art|plateau|fairy circle|adopt|sleep.?out|guided|experience|activit/.test(s);}
+function isMeal(n){var s=(n||'').toLowerCase();if(/room|chalet|\btent\b|suite|villa|bungalow|cottage|sharing|\bsingle\b|\bdouble\b|per person per night|\bdbb\b|b ?& ?b|package|\bfi\b|fully incl|campsite|camping|tented|per unit|exclusive|guide/.test(s))return false;return /breakfast|lunch|dinner|brunch|high tea|\bmeal\b|half board|full board|\bboma\b|picnic basket|coffee & cake|dessert/.test(s);}
+function lodgeMeals(L){var out=[],seen={};[].concat((L&&L.rates)||[],(L&&L.rates_2027)||[]).forEach(function(r){if(isMeal(r.n)&&!r.a&&!isActivity(r.n)&&!seen[r.n]){seen[r.n]=1;out.push(r);}});return out;}
+function totGuests(d){return qShareOf(d)+qSingleOf(d)+qChildOf(d)}
+function mealPerNight(d){var g=totGuests(d),s=0;(d.meals||[]).forEach(function(m){s+=num(m.p)});return g*s}
 function lodgeActivities(L){var out=[],seen={};[].concat((L&&L.rates)||[],(L&&L.rates_2027)||[]).forEach(function(r){if((isActivity(r.n)||r.a)&&!seen[r.n]){seen[r.n]=1;out.push(r);}});return out;}
 // --- external activity & vehicle providers (assets/providers.json) ---
 var PROVIDERS={activities:[],vehicles:[]};
@@ -248,10 +258,10 @@ function qtyLine(i,key,label,info,val){
 }
 // per-night total: captured rooms from the rate sheet take priority; otherwise sum qty × category rate
 function rowPerNight(d){
-  if(d.cap&&d.cap.length){var t=0;d.cap.forEach(function(r){t+=(r.qty||0)*(r.price||0)});return t}
+  if(d.cap&&d.cap.length){var t=0;d.cap.forEach(function(r){t+=(r.qty||0)*(r.price||0)});return t+mealPerNight(d)}
   if(d.lodgeIdx<0)return 0;
   var c=catInfo(d);
-  return qShareOf(d)*((c.sh&&c.sh.p)||0)+qSingleOf(d)*((c.sg&&c.sg.p)||0)+qChildOf(d)*((c.ch&&c.ch.p)||0);
+  return qShareOf(d)*((c.sh&&c.sh.p)||0)+qSingleOf(d)*((c.sg&&c.sg.p)||0)+qChildOf(d)*((c.ch&&c.ch.p)||0)+mealPerNight(d);
 }
 function rowSub(d){return rowPerNight(d)*(d.nights||0)}
 // safari start date chains through the lodges: each check-in = start + prior nights
@@ -429,7 +439,7 @@ function renderPanel(){persist();
       var lodgeOpts='<option value="-1">Lodge…</option>';
       if(d.region){var lis=lodgesIn(d.region);if(d.lodgeIdx>-1&&lis.indexOf(d.lodgeIdx)<0)lis=lis.concat([d.lodgeIdx]);lis.forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+(lodgeActivities(RATES.lodges[li]).length?'  ᴬ':'')+'</option>'});}
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a)return;roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
@@ -449,7 +459,9 @@ function renderPanel(){persist();
             +qtyLine(i,'qChild','Child',ci.ch,qChildOf(d))
             +'</div>';
         }
-        roomCell='<div class="roomcell"><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>'+boxes+'</div>';
+        var mealUI='';
+        if(d.lodgeIdx>-1){var _ml=lodgeMeals(RATES.lodges[d.lodgeIdx]);if(_ml.length||(d.meals&&d.meals.length)){var _mopts='<option value="">Add meal / meal plan…</option>'+_ml.map(function(rt){return '<option value="'+rt.p+'" data-name="'+esc(rt.n)+'">'+esc(rt.n)+' — '+money(rt.p)+' pp</option>';}).join('');var _tg=totGuests(d),_nn=(d.nights||0);var _chips=(d.meals||[]).map(function(m,mi){return '<div class="mealchip">'+esc(m.n)+'<span class="mealcalc">'+money(m.p)+' pp × '+_tg+' × '+_nn+'n = '+money(num(m.p)*_tg*_nn)+'</span><button class="mealrm" data-i="'+i+'" data-mi="'+mi+'" title="remove">&times;</button></div>';}).join('');mealUI='<div class="mealsel"><select class="meal-pick" data-i="'+i+'">'+_mopts+'</select>'+(_chips?'<div class="mealchips">'+_chips+'</div>':'')+'</div>';}}
+        roomCell='<div class="roomcell"><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>'+boxes+mealUI+'</div>';
         paxCell='';
       }
       return '<tr><td class="rownum">'+(i+1)+'</td>'
@@ -574,6 +586,8 @@ function bindPanel(){
   document.querySelectorAll('#panel select.prov-act-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;S.activities.push({name:o.dataset.name,amount:o.value,ord:+(sel.dataset.ord||0)});renderPanel();};});
   if(x=document.getElementById('f-flsupplier'))x.onchange=function(){var fi=this.value;var pick=document.getElementById('f-flpick');if(!pick)return;if(fi===''){pick.innerHTML='<option value="">Choose supplier first…</option>';pick.disabled=true;pick.dataset.sup='';return;}pick.dataset.sup=fi;pick.innerHTML=flightRouteOptions(+fi);pick.disabled=false;};
   document.querySelectorAll('#panel select.fl-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;var px=tripPax();var p=+o.dataset.p||0;S.flights.push({name:o.dataset.name+' — per seat × '+px,amount:p*px});renderPanel();};});
+  document.querySelectorAll('#panel select.meal-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;var i=+sel.dataset.i,d=S.lodges[i];if(!d)return;if(!d.meals)d.meals=[];d.meals.push({n:o.dataset.name,p:+o.value});renderPanel();};});
+  document.querySelectorAll('#panel .mealrm').forEach(function(b){b.onclick=function(){var i=+b.dataset.i,mi=+b.dataset.mi,d=S.lodges[i];if(d&&d.meals){d.meals.splice(mi,1);renderPanel();}};});
   document.querySelectorAll('#panel .rm[data-k]').forEach(function(b){b.onclick=function(){S[b.dataset.k].splice(+b.dataset.i,1);renderPanel()}});
   updateTotals();
 }
