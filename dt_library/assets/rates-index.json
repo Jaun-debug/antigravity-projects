@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 224,
+ "count": 226,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -37303,6 +37303,217 @@
     {
      "n": "Bush Camp campsite — kids up to 12",
      "p": 175.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fi/2nfxf5mtx2iy2080isefj/Tropic-of-Capricorn-20-STO-Rates-2027.pdf?rlkey=2dzbf6cqs3ln4ah0akb6els0a&dl=0",
+   "name": "Tropic of Capricorn Guest Farm",
+   "region": "Central Namibia",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Twin Room B&B — single",
+     "p": 1272.0
+    },
+    {
+     "n": "Twin Room B&B — per person sharing",
+     "p": 1008.0
+    },
+    {
+     "n": "Guide Rate",
+     "p": 850.0
+    },
+    {
+     "n": "Kids 6-12 (sharing with parents)",
+     "p": 504.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 270.0
+    },
+    {
+     "n": "Lunch (set menu)",
+     "p": 280.0
+    },
+    {
+     "n": "Dinner (set menu)",
+     "p": 490.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Twin Room B&B — single",
+     "p": 1590.0
+    },
+    {
+     "n": "Twin Room B&B — per person sharing",
+     "p": 1260.0
+    },
+    {
+     "n": "Guide Rate",
+     "p": 850.0
+    },
+    {
+     "n": "Kids 6-12 (sharing with parents)",
+     "p": 630.0
+    }
+   ]
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fi/wc9yujzc51zv6n99rs30t/Waterberg-Guest-Farm-STO-3-star-Rates-2027.pdf?rlkey=hswa7knwn0z6ko3bzc8af3375&dl=0",
+   "name": "Waterberg Guest Farm",
+   "region": "Central Namibia",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Standard Room B&B — single",
+     "p": 2072.0
+    },
+    {
+     "n": "Standard Room B&B — twin (per person)",
+     "p": 1796.0
+    },
+    {
+     "n": "Standard Room B&B — family (per person)",
+     "p": 1796.0
+    },
+    {
+     "n": "Bush Bungalow B&B — single",
+     "p": 3196.0
+    },
+    {
+     "n": "Bush Bungalow B&B — twin (per person)",
+     "p": 3008.0
+    },
+    {
+     "n": "Maxi Bungalow B&B (per person)",
+     "p": 3220.0
+    },
+    {
+     "n": "Self-Catering Villa (room only) — single occupation",
+     "p": 4864.0
+    },
+    {
+     "n": "Self-Catering Villa (room only) — twin/family, max 4 (per person)",
+     "p": 2436.0
+    },
+    {
+     "n": "Guide Room B&B",
+     "p": 1045.0
+    },
+    {
+     "n": "Child 3-11 (B&B, sharing with parents)",
+     "p": 895.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 270.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 215.0
+    },
+    {
+     "n": "Full Lunch / Lunch Pack",
+     "p": 250.0
+    },
+    {
+     "n": "Dinner",
+     "p": 490.0
+    },
+    {
+     "n": "Kids Dinner (4-11)",
+     "p": 245.0
+    },
+    {
+     "n": "CCF Half-day Safari to Cheetah Conservation Fund (min 2)",
+     "p": 1100.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Ride — Short (1h)",
+     "p": 990.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Ride — Medium (1.5-2h)",
+     "p": 1045.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Ride — Long (2-3h)",
+     "p": 1140.0,
+     "a": 1
+    },
+    {
+     "n": "Sunset Ride — Medium (1.5-2h)",
+     "p": 1430.0,
+     "a": 1
+    },
+    {
+     "n": "Sunset Ride — Long (2.5-3h)",
+     "p": 1715.0,
+     "a": 1
+    },
+    {
+     "n": "Cattle Drive (3-5h, experienced riders)",
+     "p": 1595.0,
+     "a": 1
+    },
+    {
+     "n": "Forest Hike (guided)",
+     "p": 220.0,
+     "a": 1
+    },
+    {
+     "n": "Mountain Hike (guided)",
+     "p": 165.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Standard Room B&B — single",
+     "p": 2590.0
+    },
+    {
+     "n": "Standard Room B&B — twin (per person)",
+     "p": 2245.0
+    },
+    {
+     "n": "Standard Room B&B — family (per person)",
+     "p": 2245.0
+    },
+    {
+     "n": "Bush Bungalow B&B — single",
+     "p": 3995.0
+    },
+    {
+     "n": "Bush Bungalow B&B — twin (per person)",
+     "p": 3760.0
+    },
+    {
+     "n": "Maxi Bungalow B&B (per person)",
+     "p": 4025.0
+    },
+    {
+     "n": "Self-Catering Villa (room only) — single occupation",
+     "p": 6080.0
+    },
+    {
+     "n": "Self-Catering Villa (room only) — twin/family, max 4 (per person)",
+     "p": 3045.0
+    },
+    {
+     "n": "Guide Room B&B",
+     "p": 1045.0
+    },
+    {
+     "n": "Child 3-11 (B&B, sharing with parents)",
+     "p": 895.0
     }
    ]
   }
