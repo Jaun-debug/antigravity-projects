@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 247,
+ "count": 268,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -39142,6 +39142,2322 @@
      "p": 800.0
     }
    ]
+  },
+  {
+   "file": "https://drive.google.com/file/d/1LIEruWgTc1Uuh2_woR07wNzDxIJoQr5N/view",
+   "name": "Bagatelle Kalahari Game Ranch",
+   "region": "Kalahari",
+   "rates": [
+    {
+     "n": "Dune Exclusive DBB (per room, max 2)",
+     "p": 13056.0
+    },
+    {
+     "n": "Dune Chalet DBB — per person sharing",
+     "p": 4972.5
+    },
+    {
+     "n": "Dune Chalet DBB — single supplement",
+     "p": 1649.0
+    },
+    {
+     "n": "Savannah Chalet DBB — per person sharing",
+     "p": 3825.0
+    },
+    {
+     "n": "Savannah Chalet DBB — single supplement",
+     "p": 1262.25
+    },
+    {
+     "n": "Savannah Chalet DBB — child 6-12",
+     "p": 2250.0
+    },
+    {
+     "n": "Garden Room DBB — per person sharing",
+     "p": 3264.0
+    },
+    {
+     "n": "Garden Room DBB — single supplement",
+     "p": 1079.5
+    },
+    {
+     "n": "Garden Room DBB — child 6-12",
+     "p": 1920.0
+    },
+    {
+     "n": "Campsite (self-catering) — per person",
+     "p": 657.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 1250.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 400.0
+    },
+    {
+     "n": "Lunch pack",
+     "p": 210.0
+    },
+    {
+     "n": "Dinner",
+     "p": 685.0
+    },
+    {
+     "n": "Horseback Safari",
+     "p": 1250.0,
+     "a": 1
+    },
+    {
+     "n": "Combination: Afternoon Nature Drive + Cheetah Excursion + Sundowner",
+     "p": 1350.0,
+     "a": 1
+    },
+    {
+     "n": "Afternoon Nature Drive + Sundowner",
+     "p": 1100.0,
+     "a": 1
+    },
+    {
+     "n": "Cheetah Excursion + Sundowner",
+     "p": 550.0,
+     "a": 1
+    },
+    {
+     "n": "Night Drive",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Morning Bushman Walk",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Morning Scenic Drive",
+     "p": 850.0,
+     "a": 1
+    },
+    {
+     "n": "Star Safari from Observatory",
+     "p": 500.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Dune Exclusive DBB (per room, max 2)",
+     "p": 15360.0
+    },
+    {
+     "n": "Dune Chalet DBB — per person sharing",
+     "p": 5850.0
+    },
+    {
+     "n": "Dune Chalet DBB — single supplement",
+     "p": 1940.0
+    },
+    {
+     "n": "Savannah Chalet DBB — per person sharing",
+     "p": 4500.0
+    },
+    {
+     "n": "Savannah Chalet DBB — single supplement",
+     "p": 1485.0
+    },
+    {
+     "n": "Savannah Chalet DBB — child 6-12",
+     "p": 2250.0
+    },
+    {
+     "n": "Garden Room DBB — per person sharing",
+     "p": 3840.0
+    },
+    {
+     "n": "Garden Room DBB — single supplement",
+     "p": 1270.0
+    },
+    {
+     "n": "Garden Room DBB — child 6-12",
+     "p": 1920.0
+    },
+    {
+     "n": "Campsite (self-catering) — per person",
+     "p": 730.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 1250.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1TrKb45SusJ0_Xbe7a9vqoCdb4mywzh-z/view",
+   "name": "Bagatelle Farmhouse",
+   "region": "Kalahari",
+   "rates": [
+    {
+     "n": "Luxury Room DBB — per person sharing",
+     "p": 4972.5
+    },
+    {
+     "n": "Luxury Room DBB — single supplement",
+     "p": 1649.0
+    },
+    {
+     "n": "Standard Room DBB — per person sharing",
+     "p": 3825.0
+    },
+    {
+     "n": "Standard Room DBB — single supplement",
+     "p": 1262.25
+    },
+    {
+     "n": "The Villa DBB — per person sharing",
+     "p": 6528.0
+    },
+    {
+     "n": "The Villa DBB — single supplement",
+     "p": 2154.75
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 1250.0
+    },
+    {
+     "n": "Lunch pack",
+     "p": 210.0
+    },
+    {
+     "n": "Horseback Safari",
+     "p": 1250.0,
+     "a": 1
+    },
+    {
+     "n": "Combination: Nature Drive + Cheetah Excursion + Sundowner",
+     "p": 1350.0,
+     "a": 1
+    },
+    {
+     "n": "Afternoon Nature Drive + Sundowner",
+     "p": 1100.0,
+     "a": 1
+    },
+    {
+     "n": "Cheetah Excursion + Sundowner",
+     "p": 550.0,
+     "a": 1
+    },
+    {
+     "n": "Night Drive",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Morning Bushman Walk",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "Morning Scenic Drive",
+     "p": 850.0,
+     "a": 1
+    },
+    {
+     "n": "Star Safari from Observatory",
+     "p": 500.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Luxury Room DBB — per person sharing",
+     "p": 5850.0
+    },
+    {
+     "n": "Luxury Room DBB — single supplement",
+     "p": 1940.0
+    },
+    {
+     "n": "Standard Room DBB — per person sharing",
+     "p": 4500.0
+    },
+    {
+     "n": "Standard Room DBB — single supplement",
+     "p": 1485.0
+    },
+    {
+     "n": "The Villa DBB — per person sharing",
+     "p": 7680.0
+    },
+    {
+     "n": "The Villa DBB — single supplement",
+     "p": 2535.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 1250.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1ujfzELbUI8VSjxktzkzvWKZS0rCCjlFS/view",
+   "name": "BüllsPort Lodge & Farm",
+   "region": "Naukluft",
+   "rates": [
+    {
+     "n": "Luxury Double / Twin Room DBB — pp sharing",
+     "p": 2275.0
+    },
+    {
+     "n": "Luxury Single Room DBB",
+     "p": 2499.0
+    },
+    {
+     "n": "Luxury Triple Room DBB — pp",
+     "p": 2037.0
+    },
+    {
+     "n": "Tour guide (min 4 paying guests) — pp/night",
+     "p": 1500.0
+    },
+    {
+     "n": "Camping pitch — per adult/night",
+     "p": 400.0
+    },
+    {
+     "n": "Camping pitch — per child 6-12/night",
+     "p": 215.0
+    },
+    {
+     "n": "Campsite (group up to 10) — per site/night",
+     "p": 2100.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 250.0
+    },
+    {
+     "n": "Lunch",
+     "p": 270.0
+    },
+    {
+     "n": "Lunch pack",
+     "p": 200.0
+    },
+    {
+     "n": "Afternoon coffee/tea & cake",
+     "p": 145.0
+    },
+    {
+     "n": "Dinner",
+     "p": 495.0
+    },
+    {
+     "n": "Quiver Tree Gorge Trail Tour",
+     "p": 990.0,
+     "a": 1
+    },
+    {
+     "n": "Rock Arch Trail Tour (guided hike)",
+     "p": 725.0,
+     "a": 1
+    },
+    {
+     "n": "Farm & Nature Drive",
+     "p": 615.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Carriage Ride (max 2 p.)",
+     "p": 550.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Luxury Double / Twin Room DBB — pp sharing",
+     "p": 3250.0
+    },
+    {
+     "n": "Luxury Single Room DBB",
+     "p": 3570.0
+    },
+    {
+     "n": "Luxury Triple Room DBB — pp",
+     "p": 2910.0
+    },
+    {
+     "n": "Tour guide (min 4 paying guests) — pp/night",
+     "p": 1500.0
+    },
+    {
+     "n": "Camping pitch — per adult/night",
+     "p": 400.0
+    },
+    {
+     "n": "Camping pitch — per child 6-12/night",
+     "p": 215.0
+    },
+    {
+     "n": "Campsite (group up to 10) — per site/night",
+     "p": 2100.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1joKEjlOXs6OEfchTyTZgYJjaUkW94jae/view",
+   "name": "Corona Guest Farm",
+   "region": "Khomas Hochland",
+   "rates": [
+    {
+     "n": "Standard Room DBB — pp sharing (Low)",
+     "p": 1615.0
+    },
+    {
+     "n": "Standard Room DB — child 4-6 sharing (Low)",
+     "p": 370.0
+    },
+    {
+     "n": "Standard Room DBB — child 7-12 sharing (Low)",
+     "p": 950.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 610.0
+    },
+    {
+     "n": "Lunch",
+     "p": 250.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 200.0
+    },
+    {
+     "n": "Sundowner",
+     "p": 306.0,
+     "a": 1
+    },
+    {
+     "n": "2hr Scenic / AM Drive",
+     "p": 504.0,
+     "a": 1
+    },
+    {
+     "n": "2hr Sundowner Scenic Drive",
+     "p": 603.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Standard Room DBB — pp sharing (Low)",
+     "p": 1900.0
+    },
+    {
+     "n": "Standard Room DB — child 4-6 sharing (Low)",
+     "p": 370.0
+    },
+    {
+     "n": "Standard Room DBB — child 7-12 sharing (Low)",
+     "p": 950.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 610.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1dphI2Mjn3DTWlC6SYVQd79Je1QBixgNX/view",
+   "name": "Etusis Lodge",
+   "region": "Erongo",
+   "rates": [
+    {
+     "n": "Bungalow DBB — pp sharing (Low)",
+     "p": 2142.0
+    },
+    {
+     "n": "Bungalow DBB — single (Low)",
+     "p": 2567.0
+    },
+    {
+     "n": "Bungalow DBB — child 4-12 (Low)",
+     "p": 1260.0
+    },
+    {
+     "n": "Luxury Tent DBB — pp sharing (Low)",
+     "p": 1491.75
+    },
+    {
+     "n": "Luxury Tent DBB — single (Low)",
+     "p": 1802.0
+    },
+    {
+     "n": "Luxury Tent DBB — child 4-12 (Low)",
+     "p": 877.5
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 710.0
+    },
+    {
+     "n": "Farmhouse (self-catering) — pp sharing (Low)",
+     "p": 1126.25
+    },
+    {
+     "n": "Farmhouse (self-catering) — single (Low)",
+     "p": 1423.75
+    },
+    {
+     "n": "Waterfall Hut (self-catering) — pp sharing (Low)",
+     "p": 3667.75
+    },
+    {
+     "n": "Camp Site (self-catering) — pp sharing (Low)",
+     "p": 187.0
+    },
+    {
+     "n": "Camp Site (self-catering) — child 4-12 (Low)",
+     "p": 110.0
+    },
+    {
+     "n": "Breakfast (self-catering)",
+     "p": 165.0
+    },
+    {
+     "n": "Lunch",
+     "p": 205.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 165.0
+    },
+    {
+     "n": "Dinner (self-catering)",
+     "p": 335.0
+    },
+    {
+     "n": "1.5h Guided Walk",
+     "p": 275.0,
+     "a": 1
+    },
+    {
+     "n": "2h Scenic Drive",
+     "p": 475.0,
+     "a": 1
+    },
+    {
+     "n": "2h Sundowner Scenic Drive",
+     "p": 530.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Back Riding (1st hour)",
+     "p": 580.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Back Riding (extra hour)",
+     "p": 290.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Bungalow DBB — pp sharing (Low)",
+     "p": 2520.0
+    },
+    {
+     "n": "Bungalow DBB — single (Low)",
+     "p": 3020.0
+    },
+    {
+     "n": "Bungalow DBB — child 4-12 (Low)",
+     "p": 1260.0
+    },
+    {
+     "n": "Luxury Tent DBB — pp sharing (Low)",
+     "p": 1755.0
+    },
+    {
+     "n": "Luxury Tent DBB — single (Low)",
+     "p": 2120.0
+    },
+    {
+     "n": "Luxury Tent DBB — child 4-12 (Low)",
+     "p": 877.5
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 710.0
+    },
+    {
+     "n": "Farmhouse (self-catering) — pp sharing (Low)",
+     "p": 1325.0
+    },
+    {
+     "n": "Farmhouse (self-catering) — single (Low)",
+     "p": 1675.0
+    },
+    {
+     "n": "Waterfall Hut (self-catering) — pp sharing (Low)",
+     "p": 4315.0
+    },
+    {
+     "n": "Camp Site (self-catering) — pp sharing (Low)",
+     "p": 220.0
+    },
+    {
+     "n": "Camp Site (self-catering) — child 4-12 (Low)",
+     "p": 110.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1ndQzvHIxNqGPfl8xSQ-IpXIcOZkh-L8I/view",
+   "name": "Fort Sesfontein Lodge",
+   "region": "Kaokoveld",
+   "rates": [
+    {
+     "n": "Standard Room DBB — pp/night (Low)",
+     "p": 2252.5
+    },
+    {
+     "n": "Standard Room — single supplement/night (Low)",
+     "p": 463.25
+    },
+    {
+     "n": "Standard Room DBB — child 6-12 (Low)",
+     "p": 1325.0
+    },
+    {
+     "n": "Family Room DBB — per room/night (Low)",
+     "p": 5797.0
+    },
+    {
+     "n": "Exclusive Tower Suite DBB — per room/night (Low)",
+     "p": 8602.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1630.0
+    },
+    {
+     "n": "Rhino Tracking Package (3N/4D) — per person",
+     "p": 16196.75
+    },
+    {
+     "n": "Lunch",
+     "p": 215.0
+    },
+    {
+     "n": "Lunch or Breakfast Pack",
+     "p": 200.0
+    },
+    {
+     "n": "Full Day Hoanib",
+     "p": 1485.0,
+     "a": 1
+    },
+    {
+     "n": "Kaokoveld Tour (with the Himba)",
+     "p": 1350.0,
+     "a": 1
+    },
+    {
+     "n": "Damaraland Tour (rock engravings)",
+     "p": 1350.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Standard Room DBB — pp/night (Low)",
+     "p": 2650.0
+    },
+    {
+     "n": "Standard Room — single supplement/night (Low)",
+     "p": 545.0
+    },
+    {
+     "n": "Standard Room DBB — child 6-12 (Low)",
+     "p": 1325.0
+    },
+    {
+     "n": "Family Room DBB — per room/night (Low)",
+     "p": 6820.0
+    },
+    {
+     "n": "Exclusive Tower Suite DBB — per room/night (Low)",
+     "p": 10120.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1630.0
+    },
+    {
+     "n": "Rhino Tracking Package (3N/4D) — per person",
+     "p": 19055.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1dw-kJJSEYDbcbToQEabeFF5CcJ5uKbht/view",
+   "name": "Goibib Mountain Lodge",
+   "region": "South (Grünau)",
+   "rates": [
+    {
+     "n": "Standard Room BB — pp sharing (Low)",
+     "p": 1000.0
+    },
+    {
+     "n": "Standard Room BB — single supplement (Low)",
+     "p": 332.0
+    },
+    {
+     "n": "Standard Room BB — child 6-12 (Low)",
+     "p": 625.0
+    },
+    {
+     "n": "Standard Room DBB — pp sharing (Low)",
+     "p": 1276.0
+    },
+    {
+     "n": "Standard Room DBB — single supplement (Low)",
+     "p": 332.0
+    },
+    {
+     "n": "Standard Room DBB — child 6-12 (Low)",
+     "p": 797.5
+    },
+    {
+     "n": "Guide Room BB — per night",
+     "p": 480.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 765.0
+    },
+    {
+     "n": "Camp Site (self-catering) — pp sharing (Low)",
+     "p": 202.5
+    },
+    {
+     "n": "Camp Site (self-catering) — child 6-12 (Low)",
+     "p": 112.5
+    },
+    {
+     "n": "Breakfast (self-catering)",
+     "p": 200.0
+    },
+    {
+     "n": "Lunch",
+     "p": 200.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 155.0
+    },
+    {
+     "n": "Dinner",
+     "p": 345.0
+    },
+    {
+     "n": "2h Game Drive",
+     "p": 365.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Standard Room BB — pp sharing (Low)",
+     "p": 1250.0
+    },
+    {
+     "n": "Standard Room BB — single supplement (Low)",
+     "p": 415.0
+    },
+    {
+     "n": "Standard Room BB — child 6-12 (Low)",
+     "p": 625.0
+    },
+    {
+     "n": "Standard Room DBB — pp sharing (Low)",
+     "p": 1595.0
+    },
+    {
+     "n": "Standard Room DBB — single supplement (Low)",
+     "p": 415.0
+    },
+    {
+     "n": "Standard Room DBB — child 6-12 (Low)",
+     "p": 797.5
+    },
+    {
+     "n": "Guide Room BB — per night",
+     "p": 480.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 765.0
+    },
+    {
+     "n": "Camp Site (self-catering) — pp sharing (Low)",
+     "p": 225.0
+    },
+    {
+     "n": "Camp Site (self-catering) — child 6-12 (Low)",
+     "p": 112.5
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1SMZR8oIgVfEfMVCMIoByeAIAbj5zc0GW/view",
+   "name": "Huab Lodge",
+   "region": "Damaraland",
+   "rates": [
+    {
+     "n": "Bungalow DBB — pp sharing (High)",
+     "p": 4160.75
+    },
+    {
+     "n": "Bungalow DBB — single supplement (High)",
+     "p": 1372.75
+    },
+    {
+     "n": "Bungalow DBB — child 6-12 (High)",
+     "p": 2447.5
+    },
+    {
+     "n": "The Villa (Full Board) — pp/night (High)",
+     "p": 9379.75
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1560.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 225.0
+    },
+    {
+     "n": "Early Morning Walk",
+     "p": 481.5,
+     "a": 1
+    },
+    {
+     "n": "3h Sundowner Drive",
+     "p": 1359.0,
+     "a": 1
+    },
+    {
+     "n": "Half Day Ephemeral Scenic & Birding Drive",
+     "p": 1593.0,
+     "a": 1
+    },
+    {
+     "n": "Half Day Bushman Paintings & German Graves Drive",
+     "p": 1638.0,
+     "a": 1
+    },
+    {
+     "n": "Full Day Ephemeral River Drive (desert elephants)",
+     "p": 2898.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Bungalow DBB — pp sharing (High)",
+     "p": 4895.0
+    },
+    {
+     "n": "Bungalow DBB — single supplement (High)",
+     "p": 1615.0
+    },
+    {
+     "n": "Bungalow DBB — child 6-12 (High)",
+     "p": 2447.5
+    },
+    {
+     "n": "The Villa (Full Board) — pp/night (High)",
+     "p": 11035.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1560.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/18oxXzZMcC-T4jeTqtiS4bRBKdrSdDlmV/view",
+   "name": "Jackalberry Tented Camp",
+   "region": "Zambezi (Caprivi)",
+   "rates": [
+    {
+     "n": "Tented DBB — pp sharing (Low, incl cons. levy)",
+     "p": 4820.0
+    },
+    {
+     "n": "Tented DBB — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Activity Package (DBB + 3 activities) — pp sharing (Low)",
+     "p": 6520.0
+    },
+    {
+     "n": "Activity Package — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1055.0
+    },
+    {
+     "n": "Lunch",
+     "p": 300.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 210.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 185.0
+    },
+    {
+     "n": "2h AM Game Drive — Nkasa Rupara NP",
+     "p": 860.0,
+     "a": 1
+    },
+    {
+     "n": "2h PM Sundowner Boat Cruise",
+     "p": 750.0,
+     "a": 1
+    },
+    {
+     "n": "1h Night Drive",
+     "p": 690.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Tented DBB — pp sharing (Low, incl cons. levy)",
+     "p": 5050.0
+    },
+    {
+     "n": "Tented DBB — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Activity Package (DBB + 3 activities) — pp sharing (Low)",
+     "p": 6750.0
+    },
+    {
+     "n": "Activity Package — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1285.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1-VtS3hrPwqf6mwvOpQCCNIRNYgeGAsAC/view",
+   "name": "Kashana Namibia",
+   "region": "Erongo (Omaruru)",
+   "rates": [
+    {
+     "n": "Luxury Bungalow BB — pp sharing",
+     "p": 1015.75
+    },
+    {
+     "n": "Luxury Bungalow BB — single supplement",
+     "p": 408.0
+    },
+    {
+     "n": "Luxury Bungalow BB — child 6-12",
+     "p": 597.5
+    },
+    {
+     "n": "Standard Room BB — pp sharing",
+     "p": 777.75
+    },
+    {
+     "n": "Standard Room BB — single supplement",
+     "p": 331.5
+    },
+    {
+     "n": "Standard Room BB — child 6-12",
+     "p": 457.5
+    },
+    {
+     "n": "Guide Room BB — per night",
+     "p": 580.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1005.0
+    },
+    {
+     "n": "Dinner",
+     "p": 450.0
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Luxury Bungalow BB — pp sharing",
+     "p": 1195.0
+    },
+    {
+     "n": "Luxury Bungalow BB — single supplement",
+     "p": 480.0
+    },
+    {
+     "n": "Luxury Bungalow BB — child 6-12",
+     "p": 597.5
+    },
+    {
+     "n": "Standard Room BB — pp sharing",
+     "p": 915.0
+    },
+    {
+     "n": "Standard Room BB — single supplement",
+     "p": 390.0
+    },
+    {
+     "n": "Standard Room BB — child 6-12",
+     "p": 457.5
+    },
+    {
+     "n": "Guide Room BB — per night",
+     "p": 580.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1005.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1rYfdxg_HiTULatgRFM1S1q3gaYh3Lhic/view",
+   "name": "Kiripotib Guest Farm",
+   "region": "Kalahari (Dordabis)",
+   "rates": [
+    {
+     "n": "Chalet DBB — pp sharing double/twin (Low)",
+     "p": 2616.0
+    },
+    {
+     "n": "Chalet DBB — single supplement (Low)",
+     "p": 680.0
+    },
+    {
+     "n": "Chalet DBB — pp sharing triple (Low)",
+     "p": 2412.0
+    },
+    {
+     "n": "Standard Room DBB — pp sharing (Low)",
+     "p": 2296.0
+    },
+    {
+     "n": "Standard Room DBB — single supplement (Low)",
+     "p": 520.0
+    },
+    {
+     "n": "Luxury Tent DBB — pp sharing (Low)",
+     "p": 1945.6
+    },
+    {
+     "n": "Luxury Tent DBB — single supplement (Low)",
+     "p": 360.0
+    },
+    {
+     "n": "Child 4-12 DBB — sharing with parents",
+     "p": 1085.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp/night (Low)",
+     "p": 314.5
+    },
+    {
+     "n": "Campsite (self-catering) — child 4-12 (Low)",
+     "p": 185.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1090.0
+    },
+    {
+     "n": "Breakfast",
+     "p": 210.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 235.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 160.0
+    },
+    {
+     "n": "Dinner",
+     "p": 490.0
+    },
+    {
+     "n": "1hr Farmstead Tour (art weavery & gallery)",
+     "p": 250.0,
+     "a": 1
+    },
+    {
+     "n": "4hr Guided Kiripotib Sunrise Hike",
+     "p": 640.0,
+     "a": 1
+    },
+    {
+     "n": "1hr Guided Aloe Forest Hike",
+     "p": 550.0,
+     "a": 1
+    },
+    {
+     "n": "2hr Sundowner Game Drive (incl 1 drink)",
+     "p": 710.0,
+     "a": 1
+    },
+    {
+     "n": "2hr Guided E-Bike Nature Drive",
+     "p": 650.0,
+     "a": 1
+    },
+    {
+     "n": "1hr Sunrise Excursion (incl coffee/tea)",
+     "p": 425.0,
+     "a": 1
+    },
+    {
+     "n": "Stargazing (around new moon)",
+     "p": 710.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Chalet DBB — pp sharing double/twin (Low)",
+     "p": 3270.0
+    },
+    {
+     "n": "Chalet DBB — single supplement (Low)",
+     "p": 850.0
+    },
+    {
+     "n": "Chalet DBB — pp sharing triple (Low)",
+     "p": 3015.0
+    },
+    {
+     "n": "Standard Room DBB — pp sharing (Low)",
+     "p": 2870.0
+    },
+    {
+     "n": "Standard Room DBB — single supplement (Low)",
+     "p": 650.0
+    },
+    {
+     "n": "Luxury Tent DBB — pp sharing (Low)",
+     "p": 2432.0
+    },
+    {
+     "n": "Luxury Tent DBB — single supplement (Low)",
+     "p": 450.0
+    },
+    {
+     "n": "Child 4-12 DBB — sharing with parents",
+     "p": 1085.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp/night (Low)",
+     "p": 370.0
+    },
+    {
+     "n": "Campsite (self-catering) — child 4-12 (Low)",
+     "p": 185.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1090.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1-bcqED6f2CL9ShtnQvQdFgAv5PTPiXyX/view",
+   "name": "Ndhovu Safari Lodge",
+   "region": "Kavango (Okavango River)",
+   "rates": [
+    {
+     "n": "Standard Tented DBB — pp/night (Low)",
+     "p": 1789.25
+    },
+    {
+     "n": "Standard Tented — single supplement (Low)",
+     "p": 590.75
+    },
+    {
+     "n": "Standard Tented DBB — child 4-6 (Low)",
+     "p": 400.0
+    },
+    {
+     "n": "Standard Tented DBB — child 7-12 (Low)",
+     "p": 1052.5
+    },
+    {
+     "n": "Luxury Tented DBB — pp/night (Low)",
+     "p": 1912.5
+    },
+    {
+     "n": "Luxury Tented — single supplement (Low)",
+     "p": 633.25
+    },
+    {
+     "n": "Luxury Tented DBB — child 7-12 (Low)",
+     "p": 1125.0
+    },
+    {
+     "n": "River / Land Suite DBB — pp/night (Low)",
+     "p": 3055.75
+    },
+    {
+     "n": "River / Land Suite — single supplement (Low)",
+     "p": 1008.1
+    },
+    {
+     "n": "River / Land Suite DBB — child 7-12 (Low)",
+     "p": 1797.5
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1035.0
+    },
+    {
+     "n": "Campsite 1 (riverside, self-catering) — pp/night (Low)",
+     "p": 233.75
+    },
+    {
+     "n": "Campsite 2 & 3 (river view, self-catering) — pp/night (Low)",
+     "p": 182.75
+    },
+    {
+     "n": "Breakfast (at lodge)",
+     "p": 205.0
+    },
+    {
+     "n": "Dinner (at lodge)",
+     "p": 400.0
+    },
+    {
+     "n": "Lunch",
+     "p": 210.0
+    },
+    {
+     "n": "Lunch or Breakfast Pack",
+     "p": 170.0
+    },
+    {
+     "n": "2h Ndhovu River Cruise",
+     "p": 460.0,
+     "a": 1
+    },
+    {
+     "n": "3h Mahango/Buffalo Park Game Drive",
+     "p": 970.0,
+     "a": 1
+    },
+    {
+     "n": "5h Combo (Boat Cruise + Buffalo Park Drive)",
+     "p": 1430.0,
+     "a": 1
+    },
+    {
+     "n": "Day Trip to Popa Falls",
+     "p": 1430.0,
+     "a": 1
+    },
+    {
+     "n": "Village Walk",
+     "p": 370.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Fishing Trip / hour (max 3)",
+     "p": 750.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Standard Tented DBB — pp/night (Low)",
+     "p": 2105.0
+    },
+    {
+     "n": "Standard Tented — single supplement (Low)",
+     "p": 695.0
+    },
+    {
+     "n": "Standard Tented DBB — child 4-6 (Low)",
+     "p": 400.0
+    },
+    {
+     "n": "Standard Tented DBB — child 7-12 (Low)",
+     "p": 1052.5
+    },
+    {
+     "n": "Luxury Tented DBB — pp/night (Low)",
+     "p": 2250.0
+    },
+    {
+     "n": "Luxury Tented — single supplement (Low)",
+     "p": 745.0
+    },
+    {
+     "n": "Luxury Tented DBB — child 7-12 (Low)",
+     "p": 1125.0
+    },
+    {
+     "n": "River / Land Suite DBB — pp/night (Low)",
+     "p": 3595.0
+    },
+    {
+     "n": "River / Land Suite — single supplement (Low)",
+     "p": 1186.0
+    },
+    {
+     "n": "River / Land Suite DBB — child 7-12 (Low)",
+     "p": 1797.5
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1035.0
+    },
+    {
+     "n": "Campsite 1 (riverside, self-catering) — pp/night (Low)",
+     "p": 275.0
+    },
+    {
+     "n": "Campsite 2 & 3 (river view, self-catering) — pp/night (Low)",
+     "p": 215.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1pU_zhrBkZxwE_obALCQYQsyHVm-TTm0_/view",
+   "name": "Nkasa Lupala Tented Lodge",
+   "region": "Zambezi (Caprivi)",
+   "rates": [
+    {
+     "n": "Tented DBB — pp sharing (Low, incl cons. levy)",
+     "p": 3300.0
+    },
+    {
+     "n": "Tented DBB — single supplement (Low)",
+     "p": 1188.0
+    },
+    {
+     "n": "Tented DBB — child 4-12 (Low)",
+     "p": 1650.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1055.0
+    },
+    {
+     "n": "Lunch (1 course)",
+     "p": 300.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 200.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 200.0
+    },
+    {
+     "n": "2h Game Drive — Nkasa Rupara NP",
+     "p": 960.0,
+     "a": 1
+    },
+    {
+     "n": "4h Linyanti Combo (Boat Cruise + Game Drive)",
+     "p": 1700.0,
+     "a": 1
+    },
+    {
+     "n": "1h Night Drive (min 2 pax)",
+     "p": 750.0,
+     "a": 1
+    },
+    {
+     "n": "2h Guided Walk (min 2 pax)",
+     "p": 560.0,
+     "a": 1
+    },
+    {
+     "n": "3h Village Visit",
+     "p": 660.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Tented DBB — pp sharing (Low, incl cons. levy)",
+     "p": 3530.0
+    },
+    {
+     "n": "Tented DBB — single supplement (Low)",
+     "p": 1188.0
+    },
+    {
+     "n": "Tented DBB — child 4-12 (Low)",
+     "p": 1880.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1285.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1H1xWDFG_14K0X5R0V1FmTx9fNUKb0Tnu/view",
+   "name": "Ohange Lodge",
+   "region": "Otavi / Outjo area",
+   "rates": [
+    {
+     "n": "Bungalow BB — pp sharing (Low)",
+     "p": 1027.5
+    },
+    {
+     "n": "Bungalow BB — child 7-12 (Low)",
+     "p": 685.0
+    },
+    {
+     "n": "Self-Catering Bungalow — pp sharing (Low)",
+     "p": 915.0
+    },
+    {
+     "n": "Self-Catering Bungalow — child 7-12 (Low)",
+     "p": 610.0
+    },
+    {
+     "n": "Self-Catering Stables — pp sharing (Low)",
+     "p": 363.75
+    },
+    {
+     "n": "Self-Catering Stables — child 7-12 (Low)",
+     "p": 242.5
+    },
+    {
+     "n": "Campsite (self-catering) — pp sharing (Low)",
+     "p": 215.0
+    },
+    {
+     "n": "Exclusive Campsite (self-catering) — pp sharing (Low)",
+     "p": 355.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 645.0
+    },
+    {
+     "n": "Breakfast (self-catering)",
+     "p": 150.0
+    },
+    {
+     "n": "Lunch",
+     "p": 150.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 120.0
+    },
+    {
+     "n": "Dinner",
+     "p": 405.0
+    },
+    {
+     "n": "2.5h Game Drive",
+     "p": 355.0,
+     "a": 1
+    },
+    {
+     "n": "1.5h Night Drive",
+     "p": 355.0,
+     "a": 1
+    },
+    {
+     "n": "1h Guided Morning Walk",
+     "p": 125.0,
+     "a": 1
+    },
+    {
+     "n": "1.5h Guided Sundowner Walk",
+     "p": 175.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Bungalow BB — pp sharing (Low)",
+     "p": 1370.0
+    },
+    {
+     "n": "Bungalow BB — child 7-12 (Low)",
+     "p": 685.0
+    },
+    {
+     "n": "Self-Catering Bungalow — pp sharing (Low)",
+     "p": 1220.0
+    },
+    {
+     "n": "Self-Catering Bungalow — child 7-12 (Low)",
+     "p": 610.0
+    },
+    {
+     "n": "Self-Catering Stables — pp sharing (Low)",
+     "p": 485.0
+    },
+    {
+     "n": "Self-Catering Stables — child 7-12 (Low)",
+     "p": 242.5
+    },
+    {
+     "n": "Campsite (self-catering) — pp sharing (Low)",
+     "p": 215.0
+    },
+    {
+     "n": "Exclusive Campsite (self-catering) — pp sharing (Low)",
+     "p": 355.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 645.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1Ti8xazdQxrrzrQdooNKhBqduFwjUYfhJ/view",
+   "name": "Ongula Village Homestead Lodge",
+   "region": "Owamboland (North)",
+   "rates": [
+    {
+     "n": "Luxury Thatched Rondawel DBB — pp sharing (Low)",
+     "p": 1649.0
+    },
+    {
+     "n": "Luxury Rondawel DBB — child 7-13 (Low)",
+     "p": 970.0
+    },
+    {
+     "n": "Rondawel DBB + Homestead Tour — pp sharing (Low)",
+     "p": 1993.25
+    },
+    {
+     "n": "Exclusive Honeymoon Suite DBB — pp sharing (Low)",
+     "p": 2337.5
+    },
+    {
+     "n": "Standard Room / Tent DBB — pp sharing (Low)",
+     "p": 977.5
+    },
+    {
+     "n": "Standard Tent (self-catering) — pp sharing (Low)",
+     "p": 590.75
+    },
+    {
+     "n": "Campsite (self-catering) — pp sharing (Low)",
+     "p": 185.0
+    },
+    {
+     "n": "Guide Room DBB + Homestead Tour — per night",
+     "p": 935.0
+    },
+    {
+     "n": "Breakfast (self-catering)",
+     "p": 175.0
+    },
+    {
+     "n": "Lunch",
+     "p": 245.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 175.0
+    },
+    {
+     "n": "Traditional Dinner (self-catering)",
+     "p": 400.0
+    },
+    {
+     "n": "Homestead Tour",
+     "p": 405.0,
+     "a": 1
+    },
+    {
+     "n": "Village Walk",
+     "p": 485.0,
+     "a": 1
+    },
+    {
+     "n": "Donkey Cart Sundowner Tour",
+     "p": 455.0,
+     "a": 1
+    },
+    {
+     "n": "Gastronomic Experience",
+     "p": 310.0,
+     "a": 1
+    },
+    {
+     "n": "Music / Drum & Dance Experience",
+     "p": 210.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Luxury Thatched Rondawel DBB — pp sharing (Low)",
+     "p": 1940.0
+    },
+    {
+     "n": "Luxury Rondawel DBB — child 7-13 (Low)",
+     "p": 970.0
+    },
+    {
+     "n": "Rondawel DBB + Homestead Tour — pp sharing (Low)",
+     "p": 2345.0
+    },
+    {
+     "n": "Exclusive Honeymoon Suite DBB — pp sharing (Low)",
+     "p": 2750.0
+    },
+    {
+     "n": "Standard Room / Tent DBB — pp sharing (Low)",
+     "p": 1150.0
+    },
+    {
+     "n": "Standard Tent (self-catering) — pp sharing (Low)",
+     "p": 695.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp sharing (Low)",
+     "p": 185.0
+    },
+    {
+     "n": "Guide Room DBB + Homestead Tour — per night",
+     "p": 935.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1bO2sDs9Os6fjYy68jVXRuvPiqfp2litu/view",
+   "name": "Otjiwa Eagle's Rest",
+   "region": "Otjozondjupa (Otjiwarongo)",
+   "rates": [
+    {
+     "n": "Elegant Room DBB — pp sharing (Low)",
+     "p": 2877.25
+    },
+    {
+     "n": "Elegant Room DBB — single supplement (Low)",
+     "p": 884.0
+    },
+    {
+     "n": "Elegant Room DBB — child 4-12 (Low)",
+     "p": 1692.5
+    },
+    {
+     "n": "Family Chalet DBB — pp sharing (Low)",
+     "p": 2503.25
+    },
+    {
+     "n": "Family Chalet DBB — child 4-12 (Low)",
+     "p": 1472.5
+    },
+    {
+     "n": "Family Chalet (self-catering) — pp sharing (Low)",
+     "p": 1759.5
+    },
+    {
+     "n": "Campsite (self-catering) — pp sharing (Low)",
+     "p": 307.5
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1000.0
+    },
+    {
+     "n": "Guide (self-catering) — per night",
+     "p": 500.0
+    },
+    {
+     "n": "2.5h Sundowner Game Drive",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "AM Rhino Tracking",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "2h Night Drive",
+     "p": 800.0,
+     "a": 1
+    },
+    {
+     "n": "Ombu Village Tour (Herero cultural)",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Walk in Nature (6 km)",
+     "p": 290.0,
+     "a": 1
+    },
+    {
+     "n": "Guided eBike Trails",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "Bird Watching",
+     "p": 365.0,
+     "a": 1
+    },
+    {
+     "n": "Namibian Cooking Class",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Back Riding (2h)",
+     "p": 1000.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Elegant Room DBB — pp sharing (Low)",
+     "p": 3385.0
+    },
+    {
+     "n": "Elegant Room DBB — single supplement (Low)",
+     "p": 1040.0
+    },
+    {
+     "n": "Elegant Room DBB — child 4-12 (Low)",
+     "p": 1692.5
+    },
+    {
+     "n": "Family Chalet DBB — pp sharing (Low)",
+     "p": 2945.0
+    },
+    {
+     "n": "Family Chalet DBB — child 4-12 (Low)",
+     "p": 1472.5
+    },
+    {
+     "n": "Family Chalet (self-catering) — pp sharing (Low)",
+     "p": 2070.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp sharing (Low)",
+     "p": 410.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1000.0
+    },
+    {
+     "n": "Guide (self-catering) — per night",
+     "p": 500.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1KTrnvQe-n4CZx5AULC7KauMEpBac3M63/view",
+   "name": "Otjiwa Mountain Lodge",
+   "region": "Otjozondjupa (Otjiwarongo)",
+   "rates": [
+    {
+     "n": "Mountain Lodge Chalet DBB — pp sharing (Low)",
+     "p": 8933.5
+    },
+    {
+     "n": "Mountain Lodge Chalet DBB — single supplement (Low)",
+     "p": 2941.0
+    },
+    {
+     "n": "Mountain Lodge Chalet DBB — child 4-12 (Low)",
+     "p": 5255.0
+    },
+    {
+     "n": "All Inclusive (FB + 2 activities/day) — pp sharing (Low)",
+     "p": 11033.0
+    },
+    {
+     "n": "All Inclusive — child 4-12 (Low)",
+     "p": 6490.0
+    },
+    {
+     "n": "Combo Package (2 nights: DBB + All Inclusive) — pp sharing",
+     "p": 17969.85
+    },
+    {
+     "n": "Guide Room Full Board — per night",
+     "p": 1665.0
+    },
+    {
+     "n": "2.5h Sundowner Game Drive",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "AM Rhino Tracking",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "2h Night Drive",
+     "p": 800.0,
+     "a": 1
+    },
+    {
+     "n": "Ombu Village Tour (Herero cultural)",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Walk in Nature (6 km)",
+     "p": 290.0,
+     "a": 1
+    },
+    {
+     "n": "Guided eBike Trails",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "Bird Watching",
+     "p": 365.0,
+     "a": 1
+    },
+    {
+     "n": "Namibian Cooking Class",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Back Riding (2h)",
+     "p": 1000.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Mountain Lodge Chalet DBB — pp sharing (Low)",
+     "p": 10510.0
+    },
+    {
+     "n": "Mountain Lodge Chalet DBB — single supplement (Low)",
+     "p": 3460.0
+    },
+    {
+     "n": "Mountain Lodge Chalet DBB — child 4-12 (Low)",
+     "p": 5255.0
+    },
+    {
+     "n": "All Inclusive (FB + 2 activities/day) — pp sharing (Low)",
+     "p": 12980.0
+    },
+    {
+     "n": "All Inclusive — child 4-12 (Low)",
+     "p": 6490.0
+    },
+    {
+     "n": "Combo Package (2 nights: DBB + All Inclusive) — pp sharing",
+     "p": 23490.0
+    },
+    {
+     "n": "Guide Room Full Board — per night",
+     "p": 1665.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1ZiM7271hTF2j9MHo2MWQqy2QpdGHMwLv/view",
+   "name": "Otjiwa Thorn Bush Tented Camp",
+   "region": "Otjozondjupa (Otjiwarongo)",
+   "rates": [
+    {
+     "n": "Luxury Tent DBB — pp sharing (Low)",
+     "p": 6375.0
+    },
+    {
+     "n": "Luxury Tent DBB — single supplement (Low)",
+     "p": 2103.75
+    },
+    {
+     "n": "Luxury Tent DBB — child 4-12 (Low)",
+     "p": 3750.0
+    },
+    {
+     "n": "All Inclusive (FB + 2 activities/day) — pp sharing (Low)",
+     "p": 9095.0
+    },
+    {
+     "n": "All Inclusive — child 4-12 (Low)",
+     "p": 5350.0
+    },
+    {
+     "n": "Guide Room Full Board — per night",
+     "p": 1665.0
+    },
+    {
+     "n": "2.5h Sundowner Game Drive",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "AM Rhino Tracking",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "2h Night Drive",
+     "p": 800.0,
+     "a": 1
+    },
+    {
+     "n": "Ombu Village Tour (Herero cultural)",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Walk in Nature (6 km)",
+     "p": 290.0,
+     "a": 1
+    },
+    {
+     "n": "Guided eBike Trails",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "Bird Watching",
+     "p": 365.0,
+     "a": 1
+    },
+    {
+     "n": "Namibian Cooking Class",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Back Riding (2h)",
+     "p": 1000.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Luxury Tent DBB — pp sharing (Low)",
+     "p": 7500.0
+    },
+    {
+     "n": "Luxury Tent DBB — single supplement (Low)",
+     "p": 2475.0
+    },
+    {
+     "n": "Luxury Tent DBB — child 4-12 (Low)",
+     "p": 3750.0
+    },
+    {
+     "n": "All Inclusive (FB + 2 activities/day) — pp sharing (Low)",
+     "p": 10700.0
+    },
+    {
+     "n": "All Inclusive — child 4-12 (Low)",
+     "p": 5350.0
+    },
+    {
+     "n": "Guide Room Full Board — per night",
+     "p": 1665.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1NLZVJNqzgjL18EFB0AbEYOT797ex0kpW/view",
+   "name": "Otjiwa Savanna Luxury Villa",
+   "region": "Otjozondjupa (Otjiwarongo)",
+   "rates": [
+    {
+     "n": "The Villa DBB — pp sharing, min 4 pax (Low)",
+     "p": 5843.75
+    },
+    {
+     "n": "The Villa DBB — child 4-12 (Low)",
+     "p": 3437.5
+    },
+    {
+     "n": "All Inclusive (FB + 2 activities/day) — pp sharing (Low)",
+     "p": 8393.75
+    },
+    {
+     "n": "All Inclusive — child 4-12 (Low)",
+     "p": 4937.5
+    },
+    {
+     "n": "Guide Room Full Board — per night",
+     "p": 1665.0
+    },
+    {
+     "n": "2.5h Sundowner Game Drive",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "AM Rhino Tracking",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "2h Night Drive",
+     "p": 725.0,
+     "a": 1
+    },
+    {
+     "n": "Ombu Village Tour (Herero cultural)",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Walk in Nature (6 km)",
+     "p": 290.0,
+     "a": 1
+    },
+    {
+     "n": "Guided eBike Trails",
+     "p": 1000.0,
+     "a": 1
+    },
+    {
+     "n": "Bird Watching",
+     "p": 365.0,
+     "a": 1
+    },
+    {
+     "n": "Namibian Cooking Class",
+     "p": 880.0,
+     "a": 1
+    },
+    {
+     "n": "Horse Back Riding (2h)",
+     "p": 1000.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "The Villa DBB — pp sharing, min 4 pax (Low)",
+     "p": 6875.0
+    },
+    {
+     "n": "The Villa DBB — child 4-12 (Low)",
+     "p": 3437.5
+    },
+    {
+     "n": "All Inclusive (FB + 2 activities/day) — pp sharing (Low)",
+     "p": 9875.0
+    },
+    {
+     "n": "All Inclusive — child 4-12 (Low)",
+     "p": 4937.5
+    },
+    {
+     "n": "Guide Room Full Board — per night",
+     "p": 1665.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1ncBfe_dITTmKKOvoHC3mUYQxJ0pH7_2p/view",
+   "name": "Serondela Lodge",
+   "region": "Zambezi (Chobe riverfront)",
+   "rates": [
+    {
+     "n": "Chalet DBB — pp sharing (Low, incl cons. levy)",
+     "p": 4820.0
+    },
+    {
+     "n": "Chalet DBB — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Chalet DBB — child 4-12 (Low)",
+     "p": 2410.0
+    },
+    {
+     "n": "Activity Package (DBB + cruises/drives) — pp sharing (Low)",
+     "p": 6117.5
+    },
+    {
+     "n": "Activity Package — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Activity Package — child 4-12 (Low)",
+     "p": 3058.75
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1055.0
+    },
+    {
+     "n": "Lunch",
+     "p": 300.0
+    },
+    {
+     "n": "3h AM Chobe National Park Drive (incl park fees)",
+     "p": 1150.0,
+     "a": 1
+    },
+    {
+     "n": "6h Combo Boat Cruise / Chobe NP Drive (incl park fees)",
+     "p": 2280.0,
+     "a": 1
+    },
+    {
+     "n": "3h PM Sundowner Boat Cruise",
+     "p": 805.0,
+     "a": 1
+    },
+    {
+     "n": "2h AM Village Visit Guided Walk",
+     "p": 600.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Chalet DBB — pp sharing (Low, incl cons. levy)",
+     "p": 5060.0
+    },
+    {
+     "n": "Chalet DBB — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Chalet DBB — child 4-12 (Low)",
+     "p": 2650.0
+    },
+    {
+     "n": "Activity Package (DBB + cruises/drives) — pp sharing (Low)",
+     "p": 6357.5
+    },
+    {
+     "n": "Activity Package — single supplement (Low)",
+     "p": 2030.0
+    },
+    {
+     "n": "Activity Package — child 4-12 (Low)",
+     "p": 3298.75
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1295.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1-4sRDudm0jzuU6hXkEHgKgl8gnsy6ngi/view",
+   "name": "Ugab Terrace Lodge",
+   "region": "Damaraland (Ugab)",
+   "rates": [
+    {
+     "n": "Chalet DBB — pp sharing (Low)",
+     "p": 2133.75
+    },
+    {
+     "n": "Chalet DBB — single (Low)",
+     "p": 2778.75
+    },
+    {
+     "n": "Chalet DBB — child 4-12 (Low)",
+     "p": 1422.5
+    },
+    {
+     "n": "Chalet BB — pp sharing (Low)",
+     "p": 1841.25
+    },
+    {
+     "n": "Luxury Chalet DBB — pp sharing (Low)",
+     "p": 5167.5
+    },
+    {
+     "n": "Luxury Chalet DBB — single (Low)",
+     "p": 7605.0
+    },
+    {
+     "n": "Luxury Chalet BB — pp sharing (Low)",
+     "p": 4875.0
+    },
+    {
+     "n": "Guide Room DBB — sharing/night",
+     "p": 1422.5
+    },
+    {
+     "n": "Camp Site (self-catering) — pp sharing (Low)",
+     "p": 390.0
+    },
+    {
+     "n": "Camp Site (self-catering) — child 4-12 (Low)",
+     "p": 195.0
+    },
+    {
+     "n": "Breakfast (self-catering)",
+     "p": 260.0
+    },
+    {
+     "n": "Lunch",
+     "p": 285.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 285.0
+    },
+    {
+     "n": "Dinner (BB & self-catering)",
+     "p": 390.0
+    },
+    {
+     "n": "Guided Walking Trail (min 2)",
+     "p": 425.0,
+     "a": 1
+    },
+    {
+     "n": "Sundowner Experience (min 4)",
+     "p": 480.0,
+     "a": 1
+    },
+    {
+     "n": "Scorpion Night Walking Trail (min 2)",
+     "p": 500.0,
+     "a": 1
+    },
+    {
+     "n": "Zip Line (both lines, min 2)",
+     "p": 645.0,
+     "a": 1
+    },
+    {
+     "n": "Rock Art Excursion (min 4)",
+     "p": 850.0,
+     "a": 1
+    },
+    {
+     "n": "Nature / Game Drive (min 4)",
+     "p": 1000.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Chalet DBB — pp sharing (Low)",
+     "p": 2845.0
+    },
+    {
+     "n": "Chalet DBB — single (Low)",
+     "p": 3705.0
+    },
+    {
+     "n": "Chalet DBB — child 4-12 (Low)",
+     "p": 1422.5
+    },
+    {
+     "n": "Chalet BB — pp sharing (Low)",
+     "p": 2455.0
+    },
+    {
+     "n": "Luxury Chalet DBB — pp sharing (Low)",
+     "p": 6890.0
+    },
+    {
+     "n": "Luxury Chalet DBB — single (Low)",
+     "p": 10140.0
+    },
+    {
+     "n": "Luxury Chalet BB — pp sharing (Low)",
+     "p": 6500.0
+    },
+    {
+     "n": "Guide Room DBB — sharing/night",
+     "p": 1422.5
+    },
+    {
+     "n": "Camp Site (self-catering) — pp sharing (Low)",
+     "p": 390.0
+    },
+    {
+     "n": "Camp Site (self-catering) — child 4-12 (Low)",
+     "p": 195.0
+    }
+   ],
+   "rack_2027": []
   }
  ]
 }
