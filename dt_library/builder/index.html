@@ -164,8 +164,8 @@ var active='trip';
 function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function num(v){return Math.max(0,parseFloat(v)||0)}
-function regions(){var o={},y2=(S.year||'2026')==='2027';RATES.lodges.forEach(function(l){if(y2&&!has2027(l))return;o[l.region]=1});return Object.keys(o).sort()}
-function lodgesIn(r){var a=[],y2=(S.year||'2026')==='2027';RATES.lodges.forEach(function(l,i){if(l.region!==r)return;if(y2&&!has2027(l))return;a.push(i)});return a}
+function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region)o[l.region]=1});return Object.keys(o).sort()}
+function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r)a.push(i)});return a}
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
 function isActivity(n){var s=(n||'').toLowerCase();if(/sharing|\bsingle\b|\broom\b|chalet|\btent\b|suite|villa(?!ge)|bungalow|cottage|\bdbb\b|b ?& ?b|per person per night|conservation|levy|park fee|tourism|deposit|\bmeal|breakfast|lunch|dinner|guide room|tour guide/.test(s))return false;return /game[ -]?drive|\bdrive\b|cruise|\bwalk\b|hik|nature drive|sundowner|mtb|bike|cycl|kayak|canoe|mokoro|balloon|fishing|quad|horse|riding|excursion|\btour\b|scenic|boat|tracking|township|cultural|museum|\bspa\b|massage|tasting|sandboard|living museum|e-bike|stargaz|flight|rock ?art|plateau|fairy circle|adopt|sleep.?out|guided|experience|activit/.test(s);}
