@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 209,
+ "count": 220,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -36761,6 +36761,154 @@
     }
    ],
    "currency": "USD"
+  },
+  {
+   "file": "https://www.dropbox.com/scl/fi/n56m6ct4yy4o572gqx5tc/Kifaru-20-STO-Rates-2027.pdf?rlkey=x0l91o79820bnxt06z5iw22ir&dl=0",
+   "name": "Kifaru Luxury Lodge & Bush Camp",
+   "region": "Central Namibia",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Main Lodge — Premier Suite DBB single (Low)",
+     "p": 6271.0
+    },
+    {
+     "n": "Main Lodge — Premier Suite DBB per person (Low)",
+     "p": 4767.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB single (Low)",
+     "p": 4743.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB per person (Low)",
+     "p": 3631.0
+    },
+    {
+     "n": "Main Lodge — Premier Suite DBB single (High)",
+     "p": 6743.0
+    },
+    {
+     "n": "Main Lodge — Premier Suite DBB per person (High)",
+     "p": 5119.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB single (High)",
+     "p": 5095.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB per person (High)",
+     "p": 3903.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB single (Low)",
+     "p": 1815.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB per person (Low)",
+     "p": 1607.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB single (High)",
+     "p": 1943.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB per person (High)",
+     "p": 1703.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 1155.0
+    },
+    {
+     "n": "Light Lunch",
+     "p": 250.0
+    },
+    {
+     "n": "Lunch Pack",
+     "p": 175.0
+    },
+    {
+     "n": "Morning Rhino Tracking (spot & walk, 3h, min 2)",
+     "p": 1700.0,
+     "a": 1
+    },
+    {
+     "n": "Morning Rhino Excursion (3h)",
+     "p": 1135.0,
+     "a": 1
+    },
+    {
+     "n": "Unicorn Brunch Drive (3.5h, min 4)",
+     "p": 2200.0,
+     "a": 1
+    },
+    {
+     "n": "Sundowner Drive (3h)",
+     "p": 1200.0,
+     "a": 1
+    },
+    {
+     "n": "Return Transfer Outjo-Lodge-Outjo",
+     "p": 2200.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Main Lodge — Premier Suite DBB single (Low)",
+     "p": 7470.0
+    },
+    {
+     "n": "Main Lodge — Premier Suite DBB per person (Low)",
+     "p": 5590.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB single (Low)",
+     "p": 5560.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB per person (Low)",
+     "p": 4170.0
+    },
+    {
+     "n": "Main Lodge — Premier Suite DBB single (High)",
+     "p": 8000.0
+    },
+    {
+     "n": "Main Lodge — Premier Suite DBB per person (High)",
+     "p": 6030.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB single (High)",
+     "p": 6000.0
+    },
+    {
+     "n": "Main Lodge — Deluxe Room DBB per person (High)",
+     "p": 4510.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB single (Low)",
+     "p": 1900.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB per person (Low)",
+     "p": 1640.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB single (High)",
+     "p": 2060.0
+    },
+    {
+     "n": "Bush Camp — Standard Twin/Dbl DBB per person (High)",
+     "p": 1760.0
+    },
+    {
+     "n": "Guide Room DBB",
+     "p": 1450.0
+    }
+   ]
   }
  ]
 }
