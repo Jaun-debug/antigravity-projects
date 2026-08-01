@@ -52,6 +52,7 @@ background:none;border:none;cursor:pointer;color:var(--gold);text-decoration:non
 .lodge .desc{margin-top:8px;font-size:.9rem;color:var(--text-muted);line-height:1.6}
 .lodge .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
 .lodge .photos img{width:100%;height:96px;object-fit:cover;border-radius:8px;display:block}
+.lodge .mtf{margin-top:12px;border:1px dashed var(--border);border-radius:8px;padding:22px 14px;text-align:center;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);background:#fbfaf8}
 .lodge .note{margin-top:12px;width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;
 font-family:var(--font-body);font-size:.85rem;resize:vertical;min-height:38px;background:#fbfaf8}
 /* what's included + activities */
@@ -269,7 +270,7 @@ function render(){
       rates='<div class="norate">No rates selected yet. Open this lodge’s rate sheet, choose your dates &amp; rooms, then tap “+ Add to Itinerary” again to capture the amount.</div>';
     }
     var desc=it.desc?'<div class="desc">'+esc(it.desc)+'</div>':'';
-    var photos=(it.photos&&it.photos.length)?'<div class="photos">'+it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" alt="'+esc(it.name)+'">';}).join('')+'</div>':'';
+    var photos=(it.photos&&it.photos.length)?'<div class="photos">'+it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" alt="'+esc(it.name)+'">';}).join('')+'</div>':'<div class="mtf">Media to follow</div>';
     var leg=(i<items.length-1)
       ? '<div class="leg"><span class="leg-line"></span><span class="leg-ico">&#9660;</span>'
         +'<span class="leg-val"><svg viewBox="0 0 44 28" width="24" height="15" aria-hidden="true" style="vertical-align:-3px;margin-right:7px"><path d="M12 5 H30 M14 5 V8 M28 5 V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M4 19 V13 H10 V8 H32 V13 H40 V19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><line x1="21" y1="8" x2="21" y2="13" stroke="currentColor" stroke-width="1.3"/><line x1="10" y1="13" x2="32" y2="13" stroke="currentColor" stroke-width="1.3"/><path d="M4 19 H8 M15.5 19 H27.5 M34.5 19 H40" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle cx="12" cy="19.5" r="3.6" fill="#fff" stroke="currentColor" stroke-width="1.7"/><circle cx="31" cy="19.5" r="3.6" fill="#fff" stroke="currentColor" stroke-width="1.7"/></svg>'+esc(it.legToNext||'Estimating drive distance…')+'</span>'
@@ -367,7 +368,7 @@ function buildEmail(items,agent,client,notes,clientMode){
   var rows=items.map(function(it,i){
     var stay=(it.dateIn&&it.dateOut)?' &nbsp;·&nbsp; '+esc(it.dateIn)+' → '+esc(it.dateOut):'';
     var photos=(it.photos&&it.photos.length)?'<div style="margin:8px 0 4px">'
-      +it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" width="168" style="width:168px;height:108px;object-fit:cover;border-radius:8px;margin:0 4px 4px 0" alt="">';}).join('')+'</div>':'';
+      +it.photos.slice(0,3).map(function(p){return '<img src="'+esc(p)+'" width="168" style="width:168px;height:108px;object-fit:cover;border-radius:8px;margin:0 4px 4px 0" alt="">';}).join('')+'</div>':'<div style="margin:8px 0 4px;border:1px dashed #d9d2c6;border-radius:8px;padding:16px;text-align:center;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#999;background:#fbfaf8">Media to follow</div>';
     var desc=it.desc?'<div style="font-size:13px;color:#555;line-height:1.6;margin:4px 0">'+esc(it.desc)+'</div>':'';
     var rateLines='';
     if(!clientMode){
