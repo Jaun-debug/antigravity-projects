@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 268,
+ "count": 270,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -41455,6 +41455,382 @@
     {
      "n": "Camp Site (self-catering) — child 4-12 (Low)",
      "p": 195.0
+    }
+   ],
+   "rack_2027": []
+  },
+  {
+   "file": "https://drive.google.com/file/d/1vM2nRPJrjbSlwF9X5ndC6TXz_jH9aX2U/view",
+   "name": "Ndhovu Enclave",
+   "region": "Kavango (Okavango River)",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Enclave Room DBB — pp sharing (Low)",
+     "p": 1785.0
+    },
+    {
+     "n": "Enclave Room DBB — single supplement (Low)",
+     "p": 586.5
+    },
+    {
+     "n": "Enclave Room DBB — child 4-6 (Low)",
+     "p": 420.0
+    },
+    {
+     "n": "Enclave Room DBB — child 7-12 (Low)",
+     "p": 1050.0
+    },
+    {
+     "n": "Luxury Campsite (self-catering) — pp/night (Low)",
+     "p": 425.0
+    },
+    {
+     "n": "Luxury Campsite — child 7-12 (Low)",
+     "p": 250.0
+    },
+    {
+     "n": "Enclave Room DBB — pp sharing (High)",
+     "p": 1912.5
+    },
+    {
+     "n": "Enclave Room DBB — single supplement (High)",
+     "p": 629.0
+    },
+    {
+     "n": "Enclave Room DBB — child 7-12 (High)",
+     "p": 1125.0
+    },
+    {
+     "n": "Luxury Campsite (self-catering) — pp/night (High)",
+     "p": 459.0
+    },
+    {
+     "n": "Luxury Campsite — child 7-12 (High)",
+     "p": 270.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1180.0
+    },
+    {
+     "n": "Breakfast (at lodge)",
+     "p": 220.0
+    },
+    {
+     "n": "Dinner (at lodge)",
+     "p": 420.0
+    },
+    {
+     "n": "Lunch",
+     "p": 225.0
+    },
+    {
+     "n": "Lunch or Breakfast Pack",
+     "p": 180.0
+    },
+    {
+     "n": "2h Ndhovu River Cruise",
+     "p": 490.0,
+     "a": 1
+    },
+    {
+     "n": "3h Mahango/Buffalo Park Game Drive",
+     "p": 930.0,
+     "a": 1
+    },
+    {
+     "n": "5h Combo (Boat Cruise + Buffalo Park Drive)",
+     "p": 1420.0,
+     "a": 1
+    },
+    {
+     "n": "Day Trip to Popa Falls",
+     "p": 1420.0,
+     "a": 1
+    },
+    {
+     "n": "Village Walk",
+     "p": 395.0,
+     "a": 1
+    },
+    {
+     "n": "Guided Fishing Trip / hour (max 3)",
+     "p": 800.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Enclave Room DBB — pp sharing (Low)",
+     "p": 2100.0
+    },
+    {
+     "n": "Enclave Room DBB — single supplement (Low)",
+     "p": 690.0
+    },
+    {
+     "n": "Enclave Room DBB — child 4-6 (Low)",
+     "p": 420.0
+    },
+    {
+     "n": "Enclave Room DBB — child 7-12 (Low)",
+     "p": 1050.0
+    },
+    {
+     "n": "Luxury Campsite (self-catering) — pp/night (Low)",
+     "p": 500.0
+    },
+    {
+     "n": "Luxury Campsite — child 7-12 (Low)",
+     "p": 250.0
+    },
+    {
+     "n": "Enclave Room DBB — pp sharing (High)",
+     "p": 2250.0
+    },
+    {
+     "n": "Enclave Room DBB — single supplement (High)",
+     "p": 740.0
+    },
+    {
+     "n": "Enclave Room DBB — child 7-12 (High)",
+     "p": 1125.0
+    },
+    {
+     "n": "Luxury Campsite (self-catering) — pp/night (High)",
+     "p": 540.0
+    },
+    {
+     "n": "Luxury Campsite — child 7-12 (High)",
+     "p": 270.0
+    },
+    {
+     "n": "Guide Room DBB — per night",
+     "p": 1180.0
+    }
+   ]
+  },
+  {
+   "file": "https://drive.google.com/file/d/1MN6NsXUh-xC7R_vgSDRTu0TpkNT-PFLh/view",
+   "name": "Namib's Valley Lodge",
+   "region": "Namib (Guab Valley)",
+   "rates": [
+    {
+     "n": "Bungalow BB — pp sharing (Low)",
+     "p": 1683.0
+    },
+    {
+     "n": "Bungalow BB — single supplement (Low)",
+     "p": 590.75
+    },
+    {
+     "n": "Bungalow BB — child 4-12 (Low)",
+     "p": 990.0
+    },
+    {
+     "n": "Bungalow DBB — pp sharing (Low)",
+     "p": 2082.5
+    },
+    {
+     "n": "Bungalow DBB — single supplement (Low)",
+     "p": 590.75
+    },
+    {
+     "n": "Bungalow DBB — child 4-12 (Low)",
+     "p": 1225.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp/night (Low)",
+     "p": 289.0
+    },
+    {
+     "n": "Campsite — child 4-12 (Low)",
+     "p": 170.0
+    },
+    {
+     "n": "Bungalow BB — pp sharing (High)",
+     "p": 1836.0
+    },
+    {
+     "n": "Bungalow BB — single supplement (High)",
+     "p": 646.0
+    },
+    {
+     "n": "Bungalow BB — child 4-12 (High)",
+     "p": 1080.0
+    },
+    {
+     "n": "Bungalow DBB — pp sharing (High)",
+     "p": 2269.5
+    },
+    {
+     "n": "Bungalow DBB — single supplement (High)",
+     "p": 646.0
+    },
+    {
+     "n": "Bungalow DBB — child 4-12 (High)",
+     "p": 1335.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp/night (High)",
+     "p": 314.5
+    },
+    {
+     "n": "Campsite — child 4-12 (High)",
+     "p": 185.0
+    },
+    {
+     "n": "Guide Room BB — per night (Low)",
+     "p": 620.0
+    },
+    {
+     "n": "Guide Room DBB — per night (Low)",
+     "p": 885.0
+    },
+    {
+     "n": "Guide Room BB — per night (High)",
+     "p": 675.0
+    },
+    {
+     "n": "Guide Room DBB — per night (High)",
+     "p": 965.0
+    },
+    {
+     "n": "Breakfast (self-catering) (Low)",
+     "p": 210.0
+    },
+    {
+     "n": "Lunch (Low)",
+     "p": 265.0
+    },
+    {
+     "n": "Lunch Pack (Low)",
+     "p": 210.0
+    },
+    {
+     "n": "Dinner (Low)",
+     "p": 470.0
+    },
+    {
+     "n": "Breakfast (self-catering) (High)",
+     "p": 230.0
+    },
+    {
+     "n": "Lunch (High)",
+     "p": 290.0
+    },
+    {
+     "n": "Lunch Pack (High)",
+     "p": 230.0
+    },
+    {
+     "n": "Dinner (High)",
+     "p": 510.0
+    },
+    {
+     "n": "1.5h Guided Walk (Low)",
+     "p": 180.0,
+     "a": 1
+    },
+    {
+     "n": "2h Sundowner Scenic Drive (Low)",
+     "p": 500.0,
+     "a": 1
+    },
+    {
+     "n": "1.5h Guided Walk (High)",
+     "p": 200.0,
+     "a": 1
+    },
+    {
+     "n": "2h Sundowner Scenic Drive (High)",
+     "p": 550.0,
+     "a": 1
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [
+    {
+     "n": "Bungalow BB — pp sharing (Low)",
+     "p": 1980.0
+    },
+    {
+     "n": "Bungalow BB — single supplement (Low)",
+     "p": 695.0
+    },
+    {
+     "n": "Bungalow BB — child 4-12 (Low)",
+     "p": 990.0
+    },
+    {
+     "n": "Bungalow DBB — pp sharing (Low)",
+     "p": 2450.0
+    },
+    {
+     "n": "Bungalow DBB — single supplement (Low)",
+     "p": 695.0
+    },
+    {
+     "n": "Bungalow DBB — child 4-12 (Low)",
+     "p": 1225.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp/night (Low)",
+     "p": 340.0
+    },
+    {
+     "n": "Campsite — child 4-12 (Low)",
+     "p": 170.0
+    },
+    {
+     "n": "Bungalow BB — pp sharing (High)",
+     "p": 2160.0
+    },
+    {
+     "n": "Bungalow BB — single supplement (High)",
+     "p": 760.0
+    },
+    {
+     "n": "Bungalow BB — child 4-12 (High)",
+     "p": 1080.0
+    },
+    {
+     "n": "Bungalow DBB — pp sharing (High)",
+     "p": 2670.0
+    },
+    {
+     "n": "Bungalow DBB — single supplement (High)",
+     "p": 760.0
+    },
+    {
+     "n": "Bungalow DBB — child 4-12 (High)",
+     "p": 1335.0
+    },
+    {
+     "n": "Campsite (self-catering) — pp/night (High)",
+     "p": 370.0
+    },
+    {
+     "n": "Campsite — child 4-12 (High)",
+     "p": 185.0
+    },
+    {
+     "n": "Guide Room BB — per night (Low)",
+     "p": 620.0
+    },
+    {
+     "n": "Guide Room DBB — per night (Low)",
+     "p": 885.0
+    },
+    {
+     "n": "Guide Room BB — per night (High)",
+     "p": 675.0
+    },
+    {
+     "n": "Guide Room DBB — per night (High)",
+     "p": 965.0
     }
    ],
    "rack_2027": []
