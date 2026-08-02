@@ -76,6 +76,11 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .rm{border:none;background:none;color:#c08a8a;cursor:pointer;font-size:1.05rem;padding:0 3px}
 .rm:hover{color:#a85a5a}
 .viewlink{font-size:.62rem;letter-spacing:1px;text-transform:uppercase;color:var(--gold);text-decoration:none}
+.nbdot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:7px;vertical-align:middle;background:#c9c2b8;position:relative;top:-1px}
+.nbdot.checking{background:#d8cfc0;animation:nbpulse 1s ease-in-out infinite}
+.nbdot.yes{background:#3f9d55;box-shadow:0 0 0 2px rgba(63,157,85,.18)}
+.nbdot.no{background:#c0453c;box-shadow:0 0 0 2px rgba(192,69,60,.18)}
+@keyframes nbpulse{0%,100%{opacity:.35}50%{opacity:1}}
 .li{display:flex;gap:10px;align-items:center;margin-bottom:10px}
 .li input{box-sizing:border-box;height:42px;border:1px solid var(--border);border-radius:5px;padding:10px 12px;font-family:var(--body);font-size:.92rem;background:#fbfaf8;color:var(--ink)}
 .li input.nm{flex:1 1 auto}
@@ -297,6 +302,46 @@ function nbOpenAvail(i){
   var n=Math.max(1,num(d.nights)||1);
   window.open('https://book.nightsbridge.com/'+id+'?startdate='+ci+'&nights='+n,'_blank','noopener');
 }
+// ── NightsBridge background availability ──────────────────────
+// Once a row has a lodge (with an NB id) and a check-in date we probe
+// /api/nbavail in the background and colour a dot: green = rooms free,
+// red = nothing available. Cached per lodge+date+nights so re-rendering
+// the quote doesn't re-hit NightsBridge.
+var NBAVAIL={};
+function nbKey(id,ci,n){return id+'|'+ci+'|'+n}
+function nbCheck(i){
+  var d=S.lodges[i]; if(!d) return;
+  var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null;
+  var id=nbIdFor(L); if(!id) return;
+  var ci=rowCheckIn(i); if(!ci) return;
+  var n=Math.max(1,num(d.nights)||1);
+  var key=nbKey(id,ci,n);
+  if(NBAVAIL[key]) return;
+  NBAVAIL[key]={state:'checking'};
+  nbPaint();
+  fetch('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n)
+    .then(function(r){return r.json()})
+    .then(function(j){NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};nbPaint();})
+    .catch(function(){NBAVAIL[key]={state:'err'};nbPaint();});
+}
+function nbPaint(){
+  var els=document.querySelectorAll('[data-nbdot]');
+  for(var k=0;k<els.length;k++){(function(el){
+    var i=parseInt(el.getAttribute('data-nbdot'),10);
+    var d=S.lodges[i]; if(!d){el.className='nbdot';el.title='';return;}
+    var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null;
+    var id=nbIdFor(L); var ci=rowCheckIn(i); var n=Math.max(1,num(d.nights)||1);
+    if(!id||!ci){el.style.display='none';return;}
+    el.style.display='';
+    var st=NBAVAIL[nbKey(id,ci,n)];
+    if(!st){el.className='nbdot';el.title='Checking availability\u2026';return;}
+    if(st.state==='checking'){el.className='nbdot checking';el.title='Checking availability\u2026';}
+    else if(st.state==='yes'){el.className='nbdot yes';el.title=st.free+' room(s) available from '+fmtDisp(ci)+' for '+n+' night(s)';}
+    else if(st.state==='no'){el.className='nbdot no';el.title='No availability from '+fmtDisp(ci)+' for '+n+' night(s)';}
+    else {el.className='nbdot';el.title='Availability check unavailable';}
+  })(els[k]);}
+}
+function nbCheckAll(){ if(!S||!S.lodges) return; for(var i=0;i<S.lodges.length;i++) nbCheck(i); nbPaint(); }
 function openLodgeSheet(i,file){var ci=rowCheckIn(i);if(ci){try{localStorage.setItem('nr_cursor',ci)}catch(e){}}window.open(file,'_blank')}
 function totalNights(){var t=0;S.lodges.forEach(function(d){t+=(d.nights||0)});return t}
 function vehicleDays(){return (S.vehicleDays!==''&&S.vehicleDays!=null)?num(S.vehicleDays):totalNights()}
@@ -502,7 +547,7 @@ function renderPanel(){persist();
       var lodgeOpts='<option value="-1">Lodge…</option>';
       if(d.region){var lis=lodgesIn(d.region);if(d.lodgeIdx>-1&&lis.indexOf(d.lodgeIdx)<0)lis=lis.concat([d.lodgeIdx]);lis.forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+(lodgeActivities(RATES.lodges[li]).length?'  ᴬ':'')+'</option>'});}
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗</a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
@@ -588,6 +633,9 @@ function renderPanel(){persist();
   p.innerHTML=h;
   bindPanel();
   renderNav();
+  // Fire NightsBridge availability probes for any row that now has a lodge +
+  // check-in date. Runs after paint so it never blocks rendering.
+  try{setTimeout(nbCheckAll,0);}catch(e){}
 }
 
 function bindPanel(){
