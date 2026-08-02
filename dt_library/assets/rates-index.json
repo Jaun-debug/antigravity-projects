@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 280,
+ "count": 290,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -42777,6 +42777,1314 @@
    ],
    "rack_2026": [],
    "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Chobe Game Lodge",
+   "region": "Chobe",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Chobe Game Lodge Suite — Green",
+     "p": 808.0
+    },
+    {
+     "n": "Chobe Game Lodge Suite — Shoulder",
+     "p": 1128.0
+    },
+    {
+     "n": "Chobe Game Lodge Suite — Peak",
+     "p": 1256.0
+    },
+    {
+     "n": "Best of Chobe 4-night package — Green",
+     "p": 2044.0
+    },
+    {
+     "n": "Best of Chobe 4-night package — Shoulder",
+     "p": 2932.0
+    },
+    {
+     "n": "Best of Chobe 4-night package — Peak",
+     "p": 3820.0
+    },
+    {
+     "n": "Best of Chobe package single supplement",
+     "p": 1448.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Chobe Game Lodge Suite — Green",
+     "p": 872.0
+    },
+    {
+     "n": "Chobe Game Lodge Suite — Shoulder",
+     "p": 1232.0
+    },
+    {
+     "n": "Chobe Game Lodge Suite — Peak",
+     "p": 1372.0
+    },
+    {
+     "n": "Best of Chobe 4-night package — Green",
+     "p": 2220.0
+    },
+    {
+     "n": "Best of Chobe 4-night package — Shoulder",
+     "p": 3240.0
+    },
+    {
+     "n": "Best of Chobe 4-night package — Peak",
+     "p": 4232.0
+    },
+    {
+     "n": "Best of Chobe package single supplement",
+     "p": 1580.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Chobe Savanna Lodge",
+   "region": "Chobe",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Per person sharing (Green (6 Jan – Mar))",
+     "p": 392.0
+    },
+    {
+     "n": "Per person sharing (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 416.0
+    },
+    {
+     "n": "Per person sharing (Peak (May – Oct))",
+     "p": 528.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 185.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Per person sharing (Green (6 Jan – Mar))",
+     "p": 424.0
+    },
+    {
+     "n": "Per person sharing (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 456.0
+    },
+    {
+     "n": "Per person sharing (Peak (May – Oct))",
+     "p": 576.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 202.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Savute Safari Lodge",
+   "region": "Chobe",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Camp Okavango",
+   "region": "Okavango Delta",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Xugana Island Lodge",
+   "region": "Okavango Delta",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Nxamaseri Island Lodge",
+   "region": "Okavango Delta",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Camp Moremi",
+   "region": "Okavango Delta",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Camp Xakanaxa",
+   "region": "Okavango Delta",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Sediba Sa Rona",
+   "region": "Okavango Delta",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Leroo La Tau",
+   "region": "Botswana",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 552.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 511.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 497.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 792.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 733.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '27))",
+     "p": 713.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1032.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 955.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 929.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 362.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 500.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 475.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 268.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "1 – 4 night stay (Green (6 Jan – Mar))",
+     "p": 592.0
+    },
+    {
+     "n": "5 – 6 night stay (Green (6 Jan – Mar))",
+     "p": 555.0
+    },
+    {
+     "n": "7 or more nights (Green (6 Jan – Mar))",
+     "p": 533.0
+    },
+    {
+     "n": "1 – 4 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 864.0
+    },
+    {
+     "n": "5 – 6 night stay (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 810.0
+    },
+    {
+     "n": "7 or more nights (Shoulder (Apr & Nov – 5 Jan '28))",
+     "p": 778.0
+    },
+    {
+     "n": "1 – 4 night stay (Peak (May – Oct))",
+     "p": 1128.0
+    },
+    {
+     "n": "5 – 6 night stay (Peak (May – Oct))",
+     "p": 1058.0
+    },
+    {
+     "n": "7 or more nights (Peak (May – Oct))",
+     "p": 1015.0
+    },
+    {
+     "n": "Single supplement",
+     "p": 395.0
+    },
+    {
+     "n": "Tour leader / registered guide / pilot per night",
+     "p": 350.0
+    },
+    {
+     "n": "Private activity per night",
+     "p": 525.0
+    },
+    {
+     "n": "Specialist guide per night",
+     "p": 500.0
+    },
+    {
+     "n": "Victoria Falls day trip",
+     "p": 300.0
+    },
+    {
+     "n": "Chobe Impact levy per bed night",
+     "p": 5.0
+    }
+   ]
   }
  ]
 }
