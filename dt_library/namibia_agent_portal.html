@@ -384,6 +384,22 @@
             padding: 15px;
         }
 
+        .dropdown-column.xborder {
+            border-left: 1px solid rgba(164,130,86,.3);
+            padding-left: 18px;
+            margin-left: 4px;
+        }
+
+        .xborder-head {
+            font-family: 'Jost', sans-serif;
+            font-size: .58rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #a48256;
+            margin: 2px 0 8px;
+            opacity: .95;
+        }
+
         .dropdown-menu a {
             color: var(--text-main) !important;
             text-decoration: none;
@@ -785,7 +801,12 @@
                         <a href="#" onclick="navigateToRegion('Fish River Canyon'); return false;">Fish River Canyon</a>
                         <a href="#" onclick="navigateToRegion('Luderitz'); return false;">Luderitz</a>
                         <a href="#" onclick="navigateToRegion('Zambezi & Caprivi'); return false;">Zambezi & Caprivi</a>
-                        <a href="#" onclick="navigateToRegion('Botswana'); return false;">Botswana</a>
+                    </div>
+                    <div class="dropdown-column xborder">
+                        <div class="xborder-head">Botswana &amp; Zimbabwe</div>
+                        <a href="#" onclick="navigateToRegion('Okavango Delta'); return false;">Okavango Delta</a>
+                        <a href="#" onclick="navigateToRegion('Chobe'); return false;">Chobe</a>
+                        <a href="#" onclick="navigateToRegion('Victoria Falls'); return false;">Victoria Falls</a>
                     </div>
                 </div>
             </div>
@@ -5279,7 +5300,10 @@
             'Fish River Canyon': '/fish-river-canyon-accommodation/',
             'Luderitz': '/luderitz-accommodation/',
             'Zambezi & Caprivi': '/caprivi-accommodation/',
-            'Botswana': '/botswana-accommodation/'
+            'Botswana': '/botswana-accommodation/',
+            'Okavango Delta': '/okavango-delta-accommodation/',
+            'Chobe': '/chobe-accommodation/',
+            'Victoria Falls': '/victoria-falls-accommodation/'
         };
 
         function openLogin(lodgeName) {
