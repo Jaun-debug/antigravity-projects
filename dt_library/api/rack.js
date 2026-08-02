@@ -20,98 +20,118 @@ const VF_RACK = {
     "note": "Published rack rates (USD)",
     "sections": [
       {
-        "title": "Standard (per person, B&B)",
+        "title": "Standard — Low (per person, B&B)",
         "rows": [
           [
-            "Adult sharing (Low)",
+            "Adult sharing",
             "91"
           ],
           [
-            "Adult sharing (High)",
-            "101"
-          ],
-          [
-            "Adult single (Low)",
+            "Adult single",
             "118"
           ],
           [
-            "Adult single (High)",
-            "131"
-          ],
-          [
-            "Child sharing (Low)",
+            "Child sharing",
             "46"
           ],
           [
-            "Child sharing (High)",
+            "Child single",
+            "60"
+          ]
+        ]
+      },
+      {
+        "title": "Standard — High (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing",
+            "101"
+          ],
+          [
+            "Adult single",
+            "131"
+          ],
+          [
+            "Child sharing",
             "51"
           ],
           [
-            "Child single (Low)",
-            "60"
-          ],
-          [
-            "Child single (High)",
+            "Child single",
             "66"
           ]
         ]
       },
       {
-        "title": "Studio (per person, B&B)",
+        "title": "Studio — Low (per person, B&B)",
         "rows": [
           [
-            "Adult sharing (Low)",
+            "Adult sharing",
             "102"
           ],
           [
-            "Adult sharing (High)",
-            "111"
-          ],
-          [
-            "Adult single (Low)",
+            "Adult single",
             "132"
           ],
           [
-            "Adult single (High)",
-            "141"
-          ],
-          [
-            "Child sharing (Low)",
+            "Child sharing",
             "52"
           ],
           [
-            "Child sharing (High)",
+            "Child single",
+            "67"
+          ]
+        ]
+      },
+      {
+        "title": "Studio — High (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing",
+            "111"
+          ],
+          [
+            "Adult single",
+            "141"
+          ],
+          [
+            "Child sharing",
             "56"
           ],
           [
-            "Child single (Low)",
-            "67"
-          ],
-          [
-            "Child single (High)",
+            "Child single",
             "71"
           ]
         ]
       },
       {
-        "title": "Family rooms & guide",
+        "title": "Family rooms & guide — Low",
         "rows": [
           [
-            "Standard Family Room per unit (Low)",
+            "Standard Family Room per unit",
             "291"
           ],
           [
-            "Standard Family Room per unit (High)",
+            "Studio Family Room per unit",
+            "331"
+          ]
+        ]
+      },
+      {
+        "title": "Family rooms & guide — High",
+        "rows": [
+          [
+            "Standard Family Room per unit",
             "326"
           ],
           [
-            "Studio Family Room per unit (Low)",
-            "331"
-          ],
-          [
-            "Studio Family Room per unit (High)",
+            "Studio Family Room per unit",
             "371"
-          ],
+          ]
+        ]
+      },
+      {
+        "title": "Family rooms & guide — all seasons",
+        "rows": [
           [
             "Guide per night",
             "65"
@@ -128,40 +148,50 @@ const VF_RACK = {
     "note": "Published rack rates (USD)",
     "sections": [
       {
-        "title": "Deluxe (per person, B&B)",
+        "title": "Deluxe — Low (per person, B&B)",
         "rows": [
           [
-            "Adult sharing (Low)",
+            "Adult sharing",
             "116"
           ],
           [
-            "Adult sharing (High)",
-            "136"
-          ],
-          [
-            "Adult single (Low)",
+            "Adult single",
             "151"
           ],
           [
-            "Adult single (High)",
-            "176"
-          ],
-          [
-            "Child sharing (Low)",
+            "Child sharing",
             "59"
           ],
           [
-            "Child sharing (High)",
+            "Child single",
+            "76"
+          ]
+        ]
+      },
+      {
+        "title": "Deluxe — High (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing",
+            "136"
+          ],
+          [
+            "Adult single",
+            "176"
+          ],
+          [
+            "Child sharing",
             "69"
           ],
           [
-            "Child single (Low)",
-            "76"
-          ],
-          [
-            "Child single (High)",
+            "Child single",
             "88"
-          ],
+          ]
+        ]
+      },
+      {
+        "title": "Deluxe — all seasons",
+        "rows": [
           [
             "Guide per night",
             "65"
@@ -178,77 +208,92 @@ const VF_RACK = {
     "note": "Published rack rates (USD)",
     "sections": [
       {
-        "title": "Classic (per person, B&B)",
+        "title": "Classic — Low (per person, B&B)",
         "rows": [
           [
-            "Adult sharing (Low)",
+            "Adult sharing",
             "131"
           ],
           [
-            "Adult sharing (High)",
-            "146"
-          ],
-          [
-            "Adult single (Low)",
+            "Adult single",
             "171"
           ],
           [
-            "Adult single (High)",
-            "191"
-          ],
-          [
-            "Child sharing (Low)",
+            "Child sharing",
             "66"
           ],
           [
-            "Child sharing (High)",
+            "Child single",
+            "86"
+          ]
+        ]
+      },
+      {
+        "title": "Classic — High (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing",
+            "146"
+          ],
+          [
+            "Adult single",
+            "191"
+          ],
+          [
+            "Child sharing",
             "74"
           ],
           [
-            "Child single (Low)",
-            "86"
-          ],
-          [
-            "Child single (High)",
+            "Child single",
             "96"
           ]
         ]
       },
       {
-        "title": "Executive & Honeymoon (per person, B&B)",
+        "title": "Executive & Honeymoon — Low (per person, B&B)",
         "rows": [
           [
-            "Adult sharing (Low)",
+            "Adult sharing",
             "141"
           ],
           [
-            "Adult sharing (High)",
-            "176"
-          ],
-          [
-            "Adult single (Low)",
+            "Adult single",
             "181"
           ],
           [
-            "Adult single (High)",
-            "231"
-          ],
-          [
-            "Child sharing (Low)",
+            "Child sharing",
             "71"
           ],
           [
-            "Child sharing (High)",
+            "Child single",
+            "91"
+          ]
+        ]
+      },
+      {
+        "title": "Executive & Honeymoon — High (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing",
+            "176"
+          ],
+          [
+            "Adult single",
+            "231"
+          ],
+          [
+            "Child sharing",
             "89"
           ],
           [
-            "Child single (Low)",
-            "91"
-          ],
-          [
-            "Child single (High)",
+            "Child single",
             "116"
-          ],
+          ]
+        ]
+      },
+      {
+        "title": "Executive & Honeymoon — all seasons",
+        "rows": [
           [
             "Guide per night",
             "65"
@@ -265,40 +310,50 @@ const VF_RACK = {
     "note": "Published rack rates (USD)",
     "sections": [
       {
-        "title": "Superior & Honeymoon (per person, B&B)",
+        "title": "Superior & Honeymoon — Low (per person, B&B)",
         "rows": [
           [
-            "Adult sharing (Low)",
+            "Adult sharing",
             "171"
           ],
           [
-            "Adult sharing (High)",
-            "206"
-          ],
-          [
-            "Adult single (Low)",
+            "Adult single",
             "221"
           ],
           [
-            "Adult single (High)",
-            "271"
-          ],
-          [
-            "Child sharing (Low)",
+            "Child sharing",
             "86"
           ],
           [
-            "Child sharing (High)",
+            "Child single",
+            "111"
+          ]
+        ]
+      },
+      {
+        "title": "Superior & Honeymoon — High (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing",
+            "206"
+          ],
+          [
+            "Adult single",
+            "271"
+          ],
+          [
+            "Child sharing",
             "104"
           ],
           [
-            "Child single (Low)",
-            "111"
-          ],
-          [
-            "Child single (High)",
+            "Child single",
             "136"
-          ],
+          ]
+        ]
+      },
+      {
+        "title": "Superior & Honeymoon — all seasons",
+        "rows": [
           [
             "Guide per night",
             "80"
