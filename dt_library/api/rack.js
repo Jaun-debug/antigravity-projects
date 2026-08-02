@@ -616,6 +616,1828 @@ const NAM_RACK = {
     ]
   }
 };
+// Desert & Delta Safaris — multi-year (2026 + 2027) US$ rack rates,
+// keyed slug -> year -> doc so lodge pages can show a year switcher.
+const DDS_RACK_BY_YEAR = {
+  "chobe-game-lodge": {
+    "2026": {
+      "name": "Chobe Game Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Suites & Best of Chobe package",
+          "rows": [
+            [
+              "Chobe Game Lodge Suite — Green",
+              "1010"
+            ],
+            [
+              "Chobe Game Lodge Suite — Shoulder",
+              "1410"
+            ],
+            [
+              "Chobe Game Lodge Suite — Peak",
+              "1570"
+            ],
+            [
+              "Best of Chobe 4-night package — Green",
+              "2596"
+            ],
+            [
+              "Best of Chobe 4-night package — Shoulder",
+              "3724"
+            ],
+            [
+              "Best of Chobe 4-night package — Peak",
+              "4852"
+            ],
+            [
+              "Best of Chobe package single supplement",
+              "1808"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Chobe Game Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Suites & Best of Chobe package",
+          "rows": [
+            [
+              "Chobe Game Lodge Suite — Green",
+              "1090"
+            ],
+            [
+              "Chobe Game Lodge Suite — Shoulder",
+              "1540"
+            ],
+            [
+              "Chobe Game Lodge Suite — Peak",
+              "1715"
+            ],
+            [
+              "Best of Chobe 4-night package — Green",
+              "2812"
+            ],
+            [
+              "Best of Chobe 4-night package — Shoulder",
+              "4104"
+            ],
+            [
+              "Best of Chobe 4-night package — Peak",
+              "5360"
+            ],
+            [
+              "Best of Chobe package single supplement",
+              "1976"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "chobe-savanna-lodge": {
+    "2026": {
+      "name": "Chobe Savanna Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "Per person sharing",
+              "490"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "Per person sharing",
+              "520"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "Per person sharing",
+              "660"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "231"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Chobe Savanna Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "Per person sharing",
+              "530"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "Per person sharing",
+              "570"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "Per person sharing",
+              "720"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "252"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "savute-safari-lodge": {
+    "2026": {
+      "name": "Savute Safari Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Savute Safari Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "camp-okavango": {
+    "2026": {
+      "name": "Camp Okavango",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Camp Okavango",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "xugana-island-lodge": {
+    "2026": {
+      "name": "Xugana Island Lodge",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Xugana Island Lodge",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "nxamaseri-island-lodge": {
+    "2026": {
+      "name": "Nxamaseri Island Lodge",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Nxamaseri Island Lodge",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "camp-moremi": {
+    "2026": {
+      "name": "Camp Moremi",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Camp Moremi",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "camp-xakanaxa": {
+    "2026": {
+      "name": "Camp Xakanaxa",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Camp Xakanaxa",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "sediba-sa-rona": {
+    "2026": {
+      "name": "Sediba Sa Rona",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Sediba Sa Rona",
+      "region": "Okavango Delta",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "leroo-la-tau": {
+    "2026": {
+      "name": "Leroo La Tau",
+      "region": "Botswana",
+      "currency": "US$",
+      "validity": "2026 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '27 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "690"
+            ],
+            [
+              "5 – 6 night stay",
+              "649"
+            ],
+            [
+              "7 or more nights",
+              "635"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '27) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "990"
+            ],
+            [
+              "5 – 6 night stay",
+              "931"
+            ],
+            [
+              "7 or more nights",
+              "911"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1290"
+            ],
+            [
+              "5 – 6 night stay",
+              "1213"
+            ],
+            [
+              "7 or more nights",
+              "1187"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "452"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "550"
+            ],
+            [
+              "Specialist guide per night",
+              "475"
+            ],
+            [
+              "Victoria Falls day trip",
+              "300"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Leroo La Tau",
+      "region": "Botswana",
+      "currency": "US$",
+      "validity": "2027 · Green 6 Jan–Mar / Shoulder Apr & Nov–5 Jan '28 / Peak May–Oct",
+      "note": "Published selling rates (RSR), US$. Fully inclusive: accommodation, scheduled activities, all meals, local drinks, laundry, park fees, levies and 14% VAT, plus airport transfers.",
+      "sections": [
+        {
+          "title": "Green season (6 Jan – Mar) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "740"
+            ],
+            [
+              "5 – 6 night stay",
+              "703"
+            ],
+            [
+              "7 or more nights",
+              "681"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (Apr & Nov – 5 Jan '28) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1080"
+            ],
+            [
+              "5 – 6 night stay",
+              "1026"
+            ],
+            [
+              "7 or more nights",
+              "994"
+            ]
+          ]
+        },
+        {
+          "title": "Peak season (May – Oct) — per person sharing",
+          "rows": [
+            [
+              "1 – 4 night stay",
+              "1410"
+            ],
+            [
+              "5 – 6 night stay",
+              "1340"
+            ],
+            [
+              "7 or more nights",
+              "1297"
+            ]
+          ]
+        },
+        {
+          "title": "Supplements & extras (all seasons)",
+          "rows": [
+            [
+              "Single supplement",
+              "494"
+            ],
+            [
+              "Tour leader / registered guide / pilot per night",
+              "350"
+            ],
+            [
+              "Private activity per night",
+              "575"
+            ],
+            [
+              "Specialist guide per night",
+              "500"
+            ],
+            [
+              "Victoria Falls day trip",
+              "314"
+            ],
+            [
+              "Chobe Impact levy per bed night",
+              "5"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+};
 Object.assign(VF_RACK, NAM_RACK);
 
 
@@ -658,9 +2480,23 @@ module.exports = async (req, res) => {
     if (slug) {
       const yearReq = req.query && req.query.year ? String(req.query.year).trim() : '';
       let resolved = { doc: null, year: '', years: [] };
-      if (db.dbConfigured()) { try { resolved = await db.getRackResolved(slug, yearReq || undefined); } catch(e){} }
-      let doc = resolved.doc;
-      if (!doc && VF_RACK[slug]) { doc = VF_RACK[slug]; }
+      let doc = null;
+      if (DDS_RACK_BY_YEAR[slug]) {
+        // Multi-year inline lodge: serve the requested year (default earliest)
+        // and advertise every year held so the page renders a year switcher.
+        const yrs = Object.keys(DDS_RACK_BY_YEAR[slug]).sort();
+        const y = (yearReq && DDS_RACK_BY_YEAR[slug][yearReq]) ? yearReq : yrs[0];
+        doc = DDS_RACK_BY_YEAR[slug][y];
+        resolved = { doc: doc, year: y, years: yrs };
+      } else if (VF_RACK[slug] && !yearReq) {
+        // Inline rack data is pushed manually and is the source of truth, so
+        // use it directly and skip the Redis lookup (~500ms saved per page).
+        doc = VF_RACK[slug];
+      } else {
+        if (db.dbConfigured()) { try { resolved = await db.getRackResolved(slug, yearReq || undefined); } catch(e){} }
+        doc = resolved.doc;
+        if (!doc && VF_RACK[slug]) { doc = VF_RACK[slug]; }
+      }
       // full=1 -> the raw sectioned doc (used by lodge pages to render season tables).
       if (req.query && req.query.full) {
         return res.status(200).json({ ok: true, slug: slug, doc: doc || null, year: resolved.year, years: resolved.years });
@@ -672,6 +2508,7 @@ module.exports = async (req, res) => {
     const lodges = {};
     for (const s of Object.keys(all)) lodges[s] = flatten(all[s]);
     for (const s of Object.keys(VF_RACK)) { if (!lodges[s]) lodges[s] = flatten(VF_RACK[s]); }
+    for (const s of Object.keys(DDS_RACK_BY_YEAR)) { if (!lodges[s]) lodges[s] = flatten(DDS_RACK_BY_YEAR[s][Object.keys(DDS_RACK_BY_YEAR[s]).sort()[0]]); }
     return res.status(200).json({ ok: true, lodges: lodges });
   } catch (e) {
     return res.status(200).json({ ok: true, lodges: {}, error: String(e && e.message ? e.message : e) });
