@@ -175,7 +175,7 @@ function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region&&l.cur!
 function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r&&l.cur!=='USD')a.push(i)});return a}
 /* ---- USD cross-border (Botswana / Delta / Chobe / Vic Falls) ---- */
 var USD_AREA_ORDER=['Botswana','Delta','Chobe','Vic Falls'];
-function usdAreas(){var o={};RATES.lodges.forEach(function(l){if(l.cur==='USD'&&l.region)o[l.region]=1;});return USD_AREA_ORDER.filter(function(a){return o[a];}).concat(Object.keys(o).filter(function(a){return USD_AREA_ORDER.indexOf(a)<0;}).sort());}
+function usdAreas(){var o={};RATES.lodges.forEach(function(l){if(l.cur==='USD'&&l.region&&USD_AREA_ORDER.indexOf(l.region)<0)o[l.region]=1;});return USD_AREA_ORDER.concat(Object.keys(o).sort());}
 function usdLodgesInArea(area){var a=[];RATES.lodges.forEach(function(l,i){if(l.cur==='USD'&&l.region===area)a.push(i);});return a;}
 function usdRates(L){return (L&&((L.rates_2027&&L.rates_2027.length&&L.rates_2027)||L.rates))||[];}
 function botswanaTotal(){return sumLI(S.botswana);}
@@ -443,8 +443,9 @@ function botswanaSection(){
   var area=S._bwArea||'';
   var hasLodge=(S._bwLodge!=null&&S._bwLodge!=='');
   var areaOpts='<option value="">Choose area…</option>'+areas.map(function(a){return '<option value="'+esc(a)+'"'+(area===a?' selected':'')+'>'+esc(a)+'</option>';}).join('');
-  var lodgeOpts='<option value="">'+(area?'Choose lodge…':'Choose area first…')+'</option>';
-  if(area){usdLodgesInArea(area).forEach(function(li){lodgeOpts+='<option value="'+li+'"'+(String(S._bwLodge)===String(li)?' selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>';});}
+  var areaLodges=area?usdLodgesInArea(area):[];
+  var lodgeOpts='<option value="">'+(area?(areaLodges.length?'Choose lodge…':'No lodges loaded for '+esc(area)+' yet'):'Choose area first…')+'</option>';
+  areaLodges.forEach(function(li){lodgeOpts+='<option value="'+li+'"'+(String(S._bwLodge)===String(li)?' selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>';});
   var rateOpts='<option value="">'+(hasLodge?'Choose rate…':'Choose lodge first…')+'</option>';
   if(hasLodge){var L=RATES.lodges[+S._bwLodge];if(L)usdRates(L).forEach(function(rt){rateOpts+='<option value="'+rt.p+'" data-name="'+esc(L.name+' — '+rt.n)+'">'+esc(rt.n)+' — '+usd(rt.p)+'</option>';});}
   return '<div style="display:grid;gap:10px;max-width:640px;margin:0 0 20px">'
