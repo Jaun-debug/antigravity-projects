@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 295,
+ "count": 296,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -44817,6 +44817,39 @@
     {
      "n": "Safari Air — Departure tax per leg (Maun/Kasane)",
      "p": 25.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Living Desert Adventures",
+   "region": "Swakopmund",
+   "rates": [
+    {
+     "n": "Living Desert \"Little 5\" Tour — adult (half day)",
+     "p": 935.0
+    },
+    {
+     "n": "Living Desert \"Little 5\" Tour — child 12 and under",
+     "p": 510.0
+    },
+    {
+     "n": "Living Desert private tour — per vehicle (8 seats)",
+     "p": 7480.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Living Desert \"Little 5\" Tour — adult (half day)",
+     "p": 935.0
+    },
+    {
+     "n": "Living Desert \"Little 5\" Tour — child 12 and under",
+     "p": 510.0
+    },
+    {
+     "n": "Living Desert private tour — per vehicle (8 seats)",
+     "p": 7480.0
     }
    ]
   }
