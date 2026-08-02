@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 270,
+ "count": 274,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -41833,6 +41833,261 @@
      "p": 965.0
     }
    ],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Weltevrede Guest Farm",
+   "region": "Namib (Maltahöhe)",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "DBB — per person sharing",
+     "p": 1900.0
+    },
+    {
+     "n": "DBB — single per night",
+     "p": 2500.0
+    },
+    {
+     "n": "Child 4–12 (DBB, sharing with 2 adults)",
+     "p": 950.0
+    },
+    {
+     "n": "Camping — per person (more than 2 pax)",
+     "p": 190.0
+    },
+    {
+     "n": "Camping — child under 12",
+     "p": 95.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Duwisib Guest Farm",
+   "region": "Namib-Naukluft (Duwisib)",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Double/twin BB — pp sharing",
+     "p": 1184.0
+    },
+    {
+     "n": "Double/twin BB — single",
+     "p": 1472.0
+    },
+    {
+     "n": "Triple room BB — pp sharing (3 pax)",
+     "p": 1012.0
+    },
+    {
+     "n": "Double/twin DBB — pp sharing",
+     "p": 1512.0
+    },
+    {
+     "n": "Double/twin DBB — single",
+     "p": 1720.0
+    },
+    {
+     "n": "Triple room DBB — pp sharing (3 pax)",
+     "p": 1356.0
+    },
+    {
+     "n": "Self-catering bungalow — per bungalow",
+     "p": 1144.0
+    },
+    {
+     "n": "Camping — per person",
+     "p": 216.0
+    },
+    {
+     "n": "Nature Drive — per person (rack; no STO)",
+     "p": 550.0,
+     "a": 1
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Double/twin BB — pp sharing",
+     "p": 1480.0
+    },
+    {
+     "n": "Double/twin BB — single",
+     "p": 1840.0
+    },
+    {
+     "n": "Triple room BB — pp sharing (3 pax)",
+     "p": 1265.0
+    },
+    {
+     "n": "Double/twin DBB — pp sharing",
+     "p": 1890.0
+    },
+    {
+     "n": "Double/twin DBB — single",
+     "p": 2150.0
+    },
+    {
+     "n": "Triple room DBB — pp sharing (3 pax)",
+     "p": 1695.0
+    },
+    {
+     "n": "Self-catering bungalow — per bungalow",
+     "p": 1430.0
+    },
+    {
+     "n": "Camping — per person",
+     "p": 270.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Hotel Pension Rapmund",
+   "region": "Swakopmund",
+   "rates": [],
+   "rates_2027": [
+    {
+     "n": "Double room B/B — per room",
+     "p": 2340.0
+    },
+    {
+     "n": "Single room B/B — per room",
+     "p": 1404.0
+    },
+    {
+     "n": "Triple room B/B — 2 adults + 1 child under 12",
+     "p": 2574.0
+    },
+    {
+     "n": "Triple room B/B — 3 adults / 2 adults + 1 child 12+",
+     "p": 2866.5
+    },
+    {
+     "n": "Family unit B/B — 2 adults + 2/3 children under 12",
+     "p": 3276.0
+    },
+    {
+     "n": "Family unit B/B — 2 adults + 2/3 children 12+ / 4 adults",
+     "p": 3744.0
+    },
+    {
+     "n": "Luxury flat & Gallery room B/B — 2 adults",
+     "p": 2866.5
+    },
+    {
+     "n": "Guide room B/B (with a group only)",
+     "p": 772.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": [
+    {
+     "n": "Double room B/B — per room",
+     "p": 2574.0
+    },
+    {
+     "n": "Single room B/B — per room",
+     "p": 1545.0
+    },
+    {
+     "n": "Triple room B/B — 2 adults + 1 child under 12",
+     "p": 2866.5
+    },
+    {
+     "n": "Triple room B/B — 3 adults",
+     "p": 3159.0
+    },
+    {
+     "n": "Family room B/B — children under 12",
+     "p": 3627.0
+    },
+    {
+     "n": "Family room B/B — children 12+ / 4 adults",
+     "p": 4154.0
+    },
+    {
+     "n": "Luxury flat & Gallery room B/B — 2 adults",
+     "p": 3182.0
+    },
+    {
+     "n": "Luxury flat B/B — 3 adults / 2 adults + 2-3 children under 12",
+     "p": 4095.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Lagoon Chalets",
+   "region": "Walvis Bay",
+   "rates": [
+    {
+     "n": "One/Two Bedroom Chalet — 1 pax",
+     "p": 950.0
+    },
+    {
+     "n": "One/Two Bedroom Chalet — 2 pax",
+     "p": 1300.0
+    },
+    {
+     "n": "One/Two Bedroom Chalet — 3 pax",
+     "p": 1500.0
+    },
+    {
+     "n": "One/Two Bedroom Chalet — 4 pax",
+     "p": 1700.0
+    },
+    {
+     "n": "One/Two Bedroom Chalet — 5 pax",
+     "p": 1850.0
+    },
+    {
+     "n": "One/Two Bedroom Chalet — 6 pax",
+     "p": 1950.0
+    },
+    {
+     "n": "Double Storey Chalet — 5 pax",
+     "p": 1950.0
+    },
+    {
+     "n": "Double Storey Chalet — 6 pax",
+     "p": 2100.0
+    },
+    {
+     "n": "Double Storey Chalet — 7-8 pax",
+     "p": 2500.0
+    },
+    {
+     "n": "Double Room (max 4 pax) — 2 pax",
+     "p": 850.0
+    },
+    {
+     "n": "Double Room (max 4 pax) — 4 pax",
+     "p": 1200.0
+    },
+    {
+     "n": "Bachelor Flat — 2 pax",
+     "p": 1300.0
+    },
+    {
+     "n": "Campsite — 2 pax",
+     "p": 700.0
+    },
+    {
+     "n": "Campsite — 4 pax",
+     "p": 1100.0
+    },
+    {
+     "n": "Campsite — 6 pax",
+     "p": 1300.0
+    }
+   ],
+   "rates_2027": [],
+   "rack_2026": [],
    "rack_2027": []
   }
  ]
