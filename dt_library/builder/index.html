@@ -182,7 +182,10 @@ function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r
 var USD_AREA_ORDER=['Botswana','Delta','Chobe','Vic Falls'];
 function usdAreas(){var o={};RATES.lodges.forEach(function(l){if(l.cur==='USD'&&l.region&&USD_AREA_ORDER.indexOf(l.region)<0)o[l.region]=1;});return USD_AREA_ORDER.concat(Object.keys(o).sort());}
 function usdLodgesInArea(area){var a=[];RATES.lodges.forEach(function(l,i){if(l.cur==='USD'&&l.region===area)a.push(i);});return a;}
-function usdRates(L){return (L&&((L.rates_2027&&L.rates_2027.length&&L.rates_2027)||L.rates))||[];}
+// Respect the 2026/2027 toggle like the main lodge step does. Previously this
+// always preferred 2027 when present, so a 2026 quote silently priced USD
+// segments at next year's rates.
+function usdRates(L){if((S.year||'2026')==='2027'){return (L&&L.rates_2027&&L.rates_2027.length)?L.rates_2027:[];}return (L&&L.rates)||[];}
 function botswanaTotal(){return sumLI(S.botswana);}
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
