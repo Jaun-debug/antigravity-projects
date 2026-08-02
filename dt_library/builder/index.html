@@ -272,7 +272,7 @@ function rowPerNight(d){
 }
 function rowSub(d){return rowPerNight(d)*(d.nights||0)}
 // safari start date chains through the lodges: each check-in = start + prior nights
-function addDays(iso,n){var d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(n||0));return d.toISOString().split('T')[0]}
+function addDays(iso,n){var d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+(n||0));return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')}
 function fmtDisp(iso){if(!iso)return '';try{return new Date(iso+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short'})}catch(e){return''}}
 function rowCheckIn(i){if(!S.startDate)return '';var n=0;for(var k=0;k<i;k++){n+=(S.lodges[k].nights||0)}return addDays(S.startDate,n)}
 // open a lodge's rate sheet with its check-in date carried into the calendar
