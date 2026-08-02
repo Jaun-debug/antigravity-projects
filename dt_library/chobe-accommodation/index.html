@@ -197,6 +197,9 @@ body{padding-top:74px;}
 </style>
   <div class="lodge-search-wrap"><input id="lodge-search" type="search" placeholder="Search Chobe lodges…" oninput="filterLodges(this.value)" autocomplete="off" aria-label="Search lodges"></div>
   <div class="grid" id="lodge-grid">
+      <a class="card has-rates" data-name="chobe game lodge" href="/chobe-accommodation/chobe-game-lodge/"><div class="img" style="background-image:linear-gradient(160deg,#4a5a44,#243021)"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Chobe Game Lodge</h3></div><div class="body"><p>Chobe &middot; US$</p><span class="go">View lodge &amp; rates &rarr;</span></div></a>
+    <a class="card has-rates" data-name="chobe savanna lodge" href="/chobe-accommodation/chobe-savanna-lodge/"><div class="img" style="background-image:linear-gradient(160deg,#4a5a44,#243021)"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Chobe Savanna Lodge</h3></div><div class="body"><p>Chobe &middot; US$</p><span class="go">View lodge &amp; rates &rarr;</span></div></a>
+    <a class="card has-rates" data-name="savute safari lodge" href="/chobe-accommodation/savute-safari-lodge/"><div class="img" style="background-image:linear-gradient(160deg,#4a5a44,#243021)"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Savute Safari Lodge</h3></div><div class="body"><p>Chobe &middot; US$</p><span class="go">View lodge &amp; rates &rarr;</span></div></a>
   </div>
   <p id="lodge-noresult">No lodges match your search.</p>
   <script>function filterLodges(q){q=(q||"").trim().toLowerCase();var n=0;document.querySelectorAll("#lodge-grid .card").forEach(function(c){var m=c.getAttribute("data-name").indexOf(q)>-1;c.style.display=m?"":"none";if(m)n++;});var nr=document.getElementById("lodge-noresult");if(nr)nr.style.display=n?"none":"block";}</script>
