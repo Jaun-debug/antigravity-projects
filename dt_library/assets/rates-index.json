@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 274,
+ "count": 279,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -42087,6 +42087,610 @@
     }
    ],
    "rates_2027": [],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Drift Inn (Bayete Collection)",
+   "region": "Vic Falls",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Standard — pp sharing (Low)",
+     "p": 73.0
+    },
+    {
+     "n": "Standard — single (Low)",
+     "p": 95.0
+    },
+    {
+     "n": "Standard — pp sharing (High)",
+     "p": 83.0
+    },
+    {
+     "n": "Standard — single (High)",
+     "p": 108.0
+    },
+    {
+     "n": "Standard — child sharing (Low)",
+     "p": 37.0
+    },
+    {
+     "n": "Standard — child single (Low)",
+     "p": 48.0
+    },
+    {
+     "n": "Standard — child sharing (High)",
+     "p": 42.0
+    },
+    {
+     "n": "Standard — child single (High)",
+     "p": 55.0
+    },
+    {
+     "n": "Studio — pp sharing (Low)",
+     "p": 82.0
+    },
+    {
+     "n": "Studio — single (Low)",
+     "p": 106.0
+    },
+    {
+     "n": "Studio — pp sharing (High)",
+     "p": 91.0
+    },
+    {
+     "n": "Studio — single (High)",
+     "p": 113.0
+    },
+    {
+     "n": "Studio — child sharing (Low)",
+     "p": 42.0
+    },
+    {
+     "n": "Studio — child single (Low)",
+     "p": 54.0
+    },
+    {
+     "n": "Studio — child sharing (High)",
+     "p": 46.0
+    },
+    {
+     "n": "Studio — child single (High)",
+     "p": 57.0
+    },
+    {
+     "n": "Standard Family Room — per unit (Low)",
+     "p": 233.0
+    },
+    {
+     "n": "Standard Family Room — per unit (High)",
+     "p": 261.0
+    },
+    {
+     "n": "Studio Family Room — per unit (Low)",
+     "p": 265.0
+    },
+    {
+     "n": "Studio Family Room — per unit (High)",
+     "p": 297.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 65.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Standard — pp sharing (Low)",
+     "p": 73.0
+    },
+    {
+     "n": "Standard — single (Low)",
+     "p": 95.0
+    },
+    {
+     "n": "Standard — pp sharing (High)",
+     "p": 83.0
+    },
+    {
+     "n": "Standard — single (High)",
+     "p": 108.0
+    },
+    {
+     "n": "Standard — child sharing (Low)",
+     "p": 37.0
+    },
+    {
+     "n": "Standard — child single (Low)",
+     "p": 48.0
+    },
+    {
+     "n": "Standard — child sharing (High)",
+     "p": 42.0
+    },
+    {
+     "n": "Standard — child single (High)",
+     "p": 55.0
+    },
+    {
+     "n": "Studio — pp sharing (Low)",
+     "p": 82.0
+    },
+    {
+     "n": "Studio — single (Low)",
+     "p": 106.0
+    },
+    {
+     "n": "Studio — pp sharing (High)",
+     "p": 91.0
+    },
+    {
+     "n": "Studio — single (High)",
+     "p": 113.0
+    },
+    {
+     "n": "Studio — child sharing (Low)",
+     "p": 42.0
+    },
+    {
+     "n": "Studio — child single (Low)",
+     "p": 54.0
+    },
+    {
+     "n": "Studio — child sharing (High)",
+     "p": 46.0
+    },
+    {
+     "n": "Studio — child single (High)",
+     "p": 57.0
+    },
+    {
+     "n": "Standard Family Room — per unit (Low)",
+     "p": 233.0
+    },
+    {
+     "n": "Standard Family Room — per unit (High)",
+     "p": 261.0
+    },
+    {
+     "n": "Studio Family Room — per unit (Low)",
+     "p": 265.0
+    },
+    {
+     "n": "Studio Family Room — per unit (High)",
+     "p": 297.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 65.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "PheZulu (Bayete Collection)",
+   "region": "Vic Falls",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Deluxe — pp sharing (Low)",
+     "p": 93.0
+    },
+    {
+     "n": "Deluxe — single (Low)",
+     "p": 121.0
+    },
+    {
+     "n": "Deluxe — pp sharing (High)",
+     "p": 109.0
+    },
+    {
+     "n": "Deluxe — single (High)",
+     "p": 141.0
+    },
+    {
+     "n": "Deluxe — child sharing (Low)",
+     "p": 47.0
+    },
+    {
+     "n": "Deluxe — child single (Low)",
+     "p": 61.0
+    },
+    {
+     "n": "Deluxe — child sharing (High)",
+     "p": 55.0
+    },
+    {
+     "n": "Deluxe — child single (High)",
+     "p": 71.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 65.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Deluxe — pp sharing (Low)",
+     "p": 93.0
+    },
+    {
+     "n": "Deluxe — single (Low)",
+     "p": 121.0
+    },
+    {
+     "n": "Deluxe — pp sharing (High)",
+     "p": 109.0
+    },
+    {
+     "n": "Deluxe — single (High)",
+     "p": 141.0
+    },
+    {
+     "n": "Deluxe — child sharing (Low)",
+     "p": 47.0
+    },
+    {
+     "n": "Deluxe — child single (Low)",
+     "p": 61.0
+    },
+    {
+     "n": "Deluxe — child sharing (High)",
+     "p": 55.0
+    },
+    {
+     "n": "Deluxe — child single (High)",
+     "p": 71.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 65.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Bayete Guest Lodge",
+   "region": "Vic Falls",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Classic — pp sharing (Low)",
+     "p": 105.0
+    },
+    {
+     "n": "Classic — single (Low)",
+     "p": 137.0
+    },
+    {
+     "n": "Classic — pp sharing (High)",
+     "p": 117.0
+    },
+    {
+     "n": "Classic — single (High)",
+     "p": 153.0
+    },
+    {
+     "n": "Classic — child sharing (Low)",
+     "p": 53.0
+    },
+    {
+     "n": "Classic — child single (Low)",
+     "p": 69.0
+    },
+    {
+     "n": "Classic — child sharing (High)",
+     "p": 59.0
+    },
+    {
+     "n": "Classic — child single (High)",
+     "p": 77.0
+    },
+    {
+     "n": "Executive & Honeymoon — pp sharing (Low)",
+     "p": 113.0
+    },
+    {
+     "n": "Executive & Honeymoon — single (Low)",
+     "p": 145.0
+    },
+    {
+     "n": "Executive & Honeymoon — pp sharing (High)",
+     "p": 141.0
+    },
+    {
+     "n": "Executive & Honeymoon — single (High)",
+     "p": 185.0
+    },
+    {
+     "n": "Executive & Honeymoon — child sharing (Low)",
+     "p": 57.0
+    },
+    {
+     "n": "Executive & Honeymoon — child single (Low)",
+     "p": 73.0
+    },
+    {
+     "n": "Executive & Honeymoon — child sharing (High)",
+     "p": 71.0
+    },
+    {
+     "n": "Executive & Honeymoon — child single (High)",
+     "p": 93.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 65.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Classic — pp sharing (Low)",
+     "p": 105.0
+    },
+    {
+     "n": "Classic — single (Low)",
+     "p": 137.0
+    },
+    {
+     "n": "Classic — pp sharing (High)",
+     "p": 117.0
+    },
+    {
+     "n": "Classic — single (High)",
+     "p": 153.0
+    },
+    {
+     "n": "Classic — child sharing (Low)",
+     "p": 53.0
+    },
+    {
+     "n": "Classic — child single (Low)",
+     "p": 69.0
+    },
+    {
+     "n": "Classic — child sharing (High)",
+     "p": 59.0
+    },
+    {
+     "n": "Classic — child single (High)",
+     "p": 77.0
+    },
+    {
+     "n": "Executive & Honeymoon — pp sharing (Low)",
+     "p": 113.0
+    },
+    {
+     "n": "Executive & Honeymoon — single (Low)",
+     "p": 145.0
+    },
+    {
+     "n": "Executive & Honeymoon — pp sharing (High)",
+     "p": 141.0
+    },
+    {
+     "n": "Executive & Honeymoon — single (High)",
+     "p": 185.0
+    },
+    {
+     "n": "Executive & Honeymoon — child sharing (Low)",
+     "p": 57.0
+    },
+    {
+     "n": "Executive & Honeymoon — child single (Low)",
+     "p": 73.0
+    },
+    {
+     "n": "Executive & Honeymoon — child sharing (High)",
+     "p": 71.0
+    },
+    {
+     "n": "Executive & Honeymoon — child single (High)",
+     "p": 93.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 65.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Nkosi (Bayete Collection)",
+   "region": "Vic Falls",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Superior & Honeymoon — pp sharing (Low)",
+     "p": 137.0
+    },
+    {
+     "n": "Superior & Honeymoon — single (Low)",
+     "p": 177.0
+    },
+    {
+     "n": "Superior & Honeymoon — pp sharing (High)",
+     "p": 165.0
+    },
+    {
+     "n": "Superior & Honeymoon — single (High)",
+     "p": 217.0
+    },
+    {
+     "n": "Superior & Honeymoon — child sharing (Low)",
+     "p": 69.0
+    },
+    {
+     "n": "Superior & Honeymoon — child single (Low)",
+     "p": 89.0
+    },
+    {
+     "n": "Superior & Honeymoon — child sharing (High)",
+     "p": 83.0
+    },
+    {
+     "n": "Superior & Honeymoon — child single (High)",
+     "p": 109.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 80.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Superior & Honeymoon — pp sharing (Low)",
+     "p": 137.0
+    },
+    {
+     "n": "Superior & Honeymoon — single (Low)",
+     "p": 177.0
+    },
+    {
+     "n": "Superior & Honeymoon — pp sharing (High)",
+     "p": 165.0
+    },
+    {
+     "n": "Superior & Honeymoon — single (High)",
+     "p": 217.0
+    },
+    {
+     "n": "Superior & Honeymoon — child sharing (Low)",
+     "p": 69.0
+    },
+    {
+     "n": "Superior & Honeymoon — child single (Low)",
+     "p": 89.0
+    },
+    {
+     "n": "Superior & Honeymoon — child sharing (High)",
+     "p": 83.0
+    },
+    {
+     "n": "Superior & Honeymoon — child single (High)",
+     "p": 109.0
+    },
+    {
+     "n": "Guide — per night",
+     "p": 80.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "Pioneers Victoria Falls",
+   "region": "Vic Falls",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "pp sharing (Jan-May)",
+     "p": 164.0
+    },
+    {
+     "n": "single (Jan-May)",
+     "p": 230.0
+    },
+    {
+     "n": "child 4-11 sharing (Jan-May)",
+     "p": 82.0
+    },
+    {
+     "n": "child 4-11 single (Jan-May)",
+     "p": 230.0
+    },
+    {
+     "n": "pp sharing (Jun-Oct)",
+     "p": 184.0
+    },
+    {
+     "n": "single (Jun-Oct)",
+     "p": 258.0
+    },
+    {
+     "n": "child 4-11 sharing (Jun-Oct)",
+     "p": 92.0
+    },
+    {
+     "n": "child 4-11 single (Jun-Oct)",
+     "p": 258.0
+    },
+    {
+     "n": "pp sharing (Nov-Dec)",
+     "p": 164.0
+    },
+    {
+     "n": "single (Nov-Dec)",
+     "p": 230.0
+    },
+    {
+     "n": "child 4-11 sharing (Nov-Dec)",
+     "p": 82.0
+    },
+    {
+     "n": "child 4-11 single (Nov-Dec)",
+     "p": 230.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "pp sharing (Jan-May)",
+     "p": 164.0
+    },
+    {
+     "n": "single (Jan-May)",
+     "p": 230.0
+    },
+    {
+     "n": "child 4-11 sharing (Jan-May)",
+     "p": 82.0
+    },
+    {
+     "n": "child 4-11 single (Jan-May)",
+     "p": 230.0
+    },
+    {
+     "n": "pp sharing (Jun-Oct)",
+     "p": 184.0
+    },
+    {
+     "n": "single (Jun-Oct)",
+     "p": 258.0
+    },
+    {
+     "n": "child 4-11 sharing (Jun-Oct)",
+     "p": 92.0
+    },
+    {
+     "n": "child 4-11 single (Jun-Oct)",
+     "p": 258.0
+    },
+    {
+     "n": "pp sharing (Nov-Dec)",
+     "p": 164.0
+    },
+    {
+     "n": "single (Nov-Dec)",
+     "p": 230.0
+    },
+    {
+     "n": "child 4-11 sharing (Nov-Dec)",
+     "p": 82.0
+    },
+    {
+     "n": "child 4-11 single (Nov-Dec)",
+     "p": 230.0
+    }
+   ],
    "rack_2026": [],
    "rack_2027": []
   }
