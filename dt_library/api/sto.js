@@ -23,6 +23,140 @@ function sessionToken(pass) {
 }
 
 const STO_DB = {
+"duwisib-guest-farm": {
+    "name": "Duwisib Guest Farm",
+    "region": "Namib-Naukluft",
+    "currency": "N$",
+    "commission": "20% STO",
+    "validity": "2027 (01.11.2026–31.10.2027)",
+    "note": "Net STO rates, incl. VAT & levy.",
+    "sections": [
+      {
+        "title": "Rates (per person sharing unless noted)",
+        "rows": [
+          [
+            "Double/twin BB — pp sharing",
+            "1184"
+          ],
+          [
+            "Double/twin BB — single",
+            "1472"
+          ],
+          [
+            "Triple room BB — pp sharing (3 pax)",
+            "1012"
+          ],
+          [
+            "Double/twin DBB — pp sharing",
+            "1512"
+          ],
+          [
+            "Double/twin DBB — single",
+            "1720"
+          ],
+          [
+            "Triple room DBB — pp sharing (3 pax)",
+            "1356"
+          ],
+          [
+            "Self-catering bungalow — per bungalow",
+            "1144"
+          ],
+          [
+            "Camping — per person",
+            "216"
+          ],
+          [
+            "Nature Drive — per person (rack; no STO)",
+            "550"
+          ]
+        ]
+      }
+    ]
+  },
+  "hotel-pension-rapmund": {
+    "name": "Hotel Pension Rapmund",
+    "region": "Swakopmund",
+    "currency": "N$",
+    "commission": "Agent nett",
+    "validity": "2027 (01.01–31.12.2027)",
+    "note": "Net STO rates, per room, incl. 2% levy & 15% VAT.",
+    "sections": [
+      {
+        "title": "Bed & Breakfast (per room)",
+        "rows": [
+          [
+            "Double room B/B — per room",
+            "2340"
+          ],
+          [
+            "Single room B/B — per room",
+            "1404"
+          ],
+          [
+            "Triple room B/B — 2 adults + 1 child under 12",
+            "2574"
+          ],
+          [
+            "Triple room B/B — 3 adults / 2 adults + 1 child 12+",
+            "2866.50"
+          ],
+          [
+            "Family unit B/B — 2 adults + 2/3 children under 12",
+            "3276"
+          ],
+          [
+            "Family unit B/B — 2 adults + 2/3 children 12+ / 4 adults",
+            "3744"
+          ],
+          [
+            "Luxury flat & Gallery room B/B — 2 adults",
+            "2866.50"
+          ],
+          [
+            "Guide room B/B (with a group only)",
+            "772"
+          ]
+        ]
+      }
+    ]
+  },
+  "weltevrede-guest-farm": {
+    "name": "Weltevrede Guest Farm",
+    "region": "Namib (Maltahöhe)",
+    "currency": "N$",
+    "commission": "20% STO",
+    "validity": "2027 (01.01–31.12.2027)",
+    "note": "Net agent (STO) rates, incl. VAT & levy.",
+    "sections": [
+      {
+        "title": "Dinner, Bed & Breakfast / Camping",
+        "rows": [
+          [
+            "DBB — per person sharing",
+            "1900"
+          ],
+          [
+            "DBB — single per night",
+            "2500"
+          ],
+          [
+            "Child 4–12 (DBB, sharing with 2 adults)",
+            "950"
+          ],
+          [
+            "Camping — per person (more than 2 pax)",
+            "190"
+          ],
+          [
+            "Camping — child under 12",
+            "95"
+          ]
+        ]
+      }
+    ]
+  },
+
 "drift-inn-bayete-collection": {
     "name": "Drift Inn (Bayete Collection)",
     "region": "Vic Falls",

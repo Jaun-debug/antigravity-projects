@@ -359,6 +359,210 @@ const VF_RACK = {
   }
 };
 
+const NAM_RACK = {
+  "duwisib-guest-farm": {
+    "name": "Duwisib Guest Farm",
+    "region": "Namib-Naukluft",
+    "currency": "N$",
+    "validity": "2027 (01.11.2026–31.10.2027)",
+    "note": "Published rack rates, incl. VAT & levy.",
+    "sections": [
+      {
+        "title": "Rates (per person sharing unless noted)",
+        "rows": [
+          [
+            "Double/twin BB — pp sharing",
+            "1480"
+          ],
+          [
+            "Double/twin BB — single",
+            "1840"
+          ],
+          [
+            "Triple room BB — pp sharing (3 pax)",
+            "1265"
+          ],
+          [
+            "Double/twin DBB — pp sharing",
+            "1890"
+          ],
+          [
+            "Double/twin DBB — single",
+            "2150"
+          ],
+          [
+            "Triple room DBB — pp sharing (3 pax)",
+            "1695"
+          ],
+          [
+            "Self-catering bungalow — per bungalow",
+            "1430"
+          ],
+          [
+            "Camping — per person",
+            "270"
+          ]
+        ]
+      }
+    ]
+  },
+  "hotel-pension-rapmund": {
+    "name": "Hotel Pension Rapmund",
+    "region": "Swakopmund",
+    "currency": "N$",
+    "validity": "2027 (01.01–31.12.2027)",
+    "note": "Published rack rates, per room, incl. 2% levy & 15% VAT.",
+    "sections": [
+      {
+        "title": "Bed & Breakfast (per room)",
+        "rows": [
+          [
+            "Double room B/B — per room",
+            "2574"
+          ],
+          [
+            "Single room B/B — per room",
+            "1545"
+          ],
+          [
+            "Triple room B/B — 2 adults + 1 child under 12",
+            "2866.50"
+          ],
+          [
+            "Triple room B/B — 3 adults",
+            "3159"
+          ],
+          [
+            "Family room B/B — children under 12",
+            "3627"
+          ],
+          [
+            "Family room B/B — children 12+ / 4 adults",
+            "4154"
+          ],
+          [
+            "Luxury flat & Gallery room B/B — 2 adults",
+            "3182"
+          ],
+          [
+            "Luxury flat B/B — 3 adults / 2 adults + 2-3 children under 12",
+            "4095"
+          ]
+        ]
+      }
+    ]
+  },
+  "weltevrede-guest-farm": {
+    "name": "Weltevrede Guest Farm",
+    "region": "Namib (Maltahöhe)",
+    "currency": "N$",
+    "validity": "2027 (01.01–31.12.2027)",
+    "note": "Rack rates (derived: agent rate is 20% off rack), incl. VAT & levy.",
+    "sections": [
+      {
+        "title": "Dinner, Bed & Breakfast / Camping",
+        "rows": [
+          [
+            "DBB — per person sharing",
+            "2375"
+          ],
+          [
+            "DBB — single per night",
+            "3125"
+          ],
+          [
+            "Child 4–12, sharing with 2 adults)",
+            "1187.50"
+          ],
+          [
+            "Camping — per person (more than 2 pax)",
+            "237.50"
+          ],
+          [
+            "Camping — child under 12",
+            "118.75"
+          ]
+        ]
+      }
+    ]
+  },
+  "lagoon-chalets": {
+    "name": "Lagoon Chalets",
+    "region": "Walvis Bay",
+    "currency": "N$",
+    "validity": "01.07.2026–30.06.2027",
+    "note": "Self-catering, per unit per night by number of guests.",
+    "sections": [
+      {
+        "title": "Self-catering units (per unit / night)",
+        "rows": [
+          [
+            "One/Two Bedroom Chalet — 1 pax",
+            "950"
+          ],
+          [
+            "One/Two Bedroom Chalet — 2 pax",
+            "1300"
+          ],
+          [
+            "One/Two Bedroom Chalet — 3 pax",
+            "1500"
+          ],
+          [
+            "One/Two Bedroom Chalet — 4 pax",
+            "1700"
+          ],
+          [
+            "One/Two Bedroom Chalet — 5 pax",
+            "1850"
+          ],
+          [
+            "One/Two Bedroom Chalet — 6 pax",
+            "1950"
+          ],
+          [
+            "Double Storey Chalet — 5 pax",
+            "1950"
+          ],
+          [
+            "Double Storey Chalet — 6 pax",
+            "2100"
+          ],
+          [
+            "Double Storey Chalet — 7-8 pax",
+            "2500"
+          ],
+          [
+            "Double Room (max 4 pax) — 2 pax",
+            "850"
+          ],
+          [
+            "Double Room (max 4 pax) — 4 pax",
+            "1200"
+          ],
+          [
+            "Bachelor Flat — 2 pax",
+            "1300"
+          ],
+          [
+            "Campsite — 2 pax",
+            "700"
+          ],
+          [
+            "Campsite — 4 pax",
+            "1100"
+          ],
+          [
+            "Campsite — 6 pax",
+            "1300"
+          ]
+        ]
+      }
+    ]
+  }
+};
+Object.assign(VF_RACK, NAM_RACK);
+
 
 function parsePrice(s) {
   const str = String(s == null ? '' : s).replace(/,/g, '').replace(/[^\d.\-]/g, '');
