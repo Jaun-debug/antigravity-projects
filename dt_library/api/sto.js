@@ -23,6 +23,420 @@ function sessionToken(pass) {
 }
 
 const STO_DB = {
+"drift-inn-bayete-collection": {
+    "name": "Drift Inn (Bayete Collection)",
+    "region": "Vic Falls",
+    "currency": "US$",
+    "validity": "2027 · Low 1 Jan–31 Mar / High 1 Apr–31 Dec",
+    "note": "Net STO rates (USD).",
+    "sections": [
+      {
+        "title": "Standard (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing (Low)",
+            "73"
+          ],
+          [
+            "Adult sharing (High)",
+            "83"
+          ],
+          [
+            "Adult single (Low)",
+            "95"
+          ],
+          [
+            "Adult single (High)",
+            "108"
+          ],
+          [
+            "Child sharing (Low)",
+            "37"
+          ],
+          [
+            "Child sharing (High)",
+            "42"
+          ],
+          [
+            "Child single (Low)",
+            "48"
+          ],
+          [
+            "Child single (High)",
+            "55"
+          ]
+        ]
+      },
+      {
+        "title": "Studio (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing (Low)",
+            "82"
+          ],
+          [
+            "Adult sharing (High)",
+            "91"
+          ],
+          [
+            "Adult single (Low)",
+            "106"
+          ],
+          [
+            "Adult single (High)",
+            "113"
+          ],
+          [
+            "Child sharing (Low)",
+            "42"
+          ],
+          [
+            "Child sharing (High)",
+            "46"
+          ],
+          [
+            "Child single (Low)",
+            "54"
+          ],
+          [
+            "Child single (High)",
+            "57"
+          ]
+        ]
+      },
+      {
+        "title": "Family rooms & guide",
+        "rows": [
+          [
+            "Standard Family Room per unit (Low)",
+            "233"
+          ],
+          [
+            "Standard Family Room per unit (High)",
+            "261"
+          ],
+          [
+            "Studio Family Room per unit (Low)",
+            "265"
+          ],
+          [
+            "Studio Family Room per unit (High)",
+            "297"
+          ],
+          [
+            "Guide per night",
+            "65"
+          ]
+        ]
+      }
+    ],
+    "commission": "20% STO"
+  },
+  "phezulu-bayete-collection": {
+    "name": "PheZulu (Bayete Collection)",
+    "region": "Vic Falls",
+    "currency": "US$",
+    "validity": "2027 · Low 1 Jan–31 Mar / High 1 Apr–31 Dec",
+    "note": "Net STO rates (USD).",
+    "sections": [
+      {
+        "title": "Deluxe (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing (Low)",
+            "93"
+          ],
+          [
+            "Adult sharing (High)",
+            "109"
+          ],
+          [
+            "Adult single (Low)",
+            "121"
+          ],
+          [
+            "Adult single (High)",
+            "141"
+          ],
+          [
+            "Child sharing (Low)",
+            "47"
+          ],
+          [
+            "Child sharing (High)",
+            "55"
+          ],
+          [
+            "Child single (Low)",
+            "61"
+          ],
+          [
+            "Child single (High)",
+            "71"
+          ],
+          [
+            "Guide per night",
+            "65"
+          ]
+        ]
+      }
+    ],
+    "commission": "20% STO"
+  },
+  "bayete-guest-lodge": {
+    "name": "Bayete Guest Lodge",
+    "region": "Vic Falls",
+    "currency": "US$",
+    "validity": "2027 · Low 1 Jan–31 Mar / High 1 Apr–31 Dec",
+    "note": "Net STO rates (USD).",
+    "sections": [
+      {
+        "title": "Classic (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing (Low)",
+            "105"
+          ],
+          [
+            "Adult sharing (High)",
+            "117"
+          ],
+          [
+            "Adult single (Low)",
+            "137"
+          ],
+          [
+            "Adult single (High)",
+            "153"
+          ],
+          [
+            "Child sharing (Low)",
+            "53"
+          ],
+          [
+            "Child sharing (High)",
+            "59"
+          ],
+          [
+            "Child single (Low)",
+            "69"
+          ],
+          [
+            "Child single (High)",
+            "77"
+          ]
+        ]
+      },
+      {
+        "title": "Executive & Honeymoon (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing (Low)",
+            "113"
+          ],
+          [
+            "Adult sharing (High)",
+            "141"
+          ],
+          [
+            "Adult single (Low)",
+            "145"
+          ],
+          [
+            "Adult single (High)",
+            "185"
+          ],
+          [
+            "Child sharing (Low)",
+            "57"
+          ],
+          [
+            "Child sharing (High)",
+            "71"
+          ],
+          [
+            "Child single (Low)",
+            "73"
+          ],
+          [
+            "Child single (High)",
+            "93"
+          ],
+          [
+            "Guide per night",
+            "65"
+          ]
+        ]
+      }
+    ],
+    "commission": "20% STO"
+  },
+  "nkosi-bayete-collection": {
+    "name": "Nkosi (Bayete Collection)",
+    "region": "Vic Falls",
+    "currency": "US$",
+    "validity": "2027 · Low 1 Jan–31 Mar / High 1 Apr–31 Dec",
+    "note": "Net STO rates (USD).",
+    "sections": [
+      {
+        "title": "Superior & Honeymoon (per person, B&B)",
+        "rows": [
+          [
+            "Adult sharing (Low)",
+            "137"
+          ],
+          [
+            "Adult sharing (High)",
+            "165"
+          ],
+          [
+            "Adult single (Low)",
+            "177"
+          ],
+          [
+            "Adult single (High)",
+            "217"
+          ],
+          [
+            "Child sharing (Low)",
+            "69"
+          ],
+          [
+            "Child sharing (High)",
+            "83"
+          ],
+          [
+            "Child single (Low)",
+            "89"
+          ],
+          [
+            "Child single (High)",
+            "109"
+          ],
+          [
+            "Guide per night",
+            "80"
+          ]
+        ]
+      }
+    ],
+    "commission": "20% STO"
+  },
+  "the-victorian-manor": {
+    "name": "The Victorian Manor (Bayete Collection)",
+    "region": "Vic Falls",
+    "currency": "US$",
+    "validity": "2027 · 1 Jan–31 Dec",
+    "note": "Net STO rates (USD).",
+    "sections": [
+      {
+        "title": "Per person, B&B (1 Jan–31 Dec)",
+        "rows": [
+          [
+            "Victorian Suite — sharing",
+            "221"
+          ],
+          [
+            "Victorian Suite — single",
+            "289"
+          ],
+          [
+            "Master Suite — sharing",
+            "257"
+          ],
+          [
+            "Master Suite — single",
+            "333"
+          ],
+          [
+            "Cassa 2-Bedroom Unit",
+            "561"
+          ],
+          [
+            "Villa — sharing",
+            "281"
+          ],
+          [
+            "Villa — single",
+            "365"
+          ],
+          [
+            "Exclusive Entire Manor",
+            "4020"
+          ],
+          [
+            "Guide per night",
+            "100"
+          ]
+        ]
+      }
+    ],
+    "commission": "20% STO"
+  },
+  "pioneers-victoria-falls": {
+    "name": "Pioneers Victoria Falls",
+    "region": "Vic Falls",
+    "currency": "US$",
+    "validity": "2027 · Jan–May / Jun–Oct / Nov–Dec",
+    "note": "Net STO rates (USD).",
+    "sections": [
+      {
+        "title": "Per person, B&B",
+        "rows": [
+          [
+            "pp sharing (Jan–May)",
+            "164"
+          ],
+          [
+            "pp sharing (Jun–Oct)",
+            "184"
+          ],
+          [
+            "pp sharing (Nov–Dec)",
+            "164"
+          ],
+          [
+            "single (Jan–May)",
+            "230"
+          ],
+          [
+            "single (Jun–Oct)",
+            "258"
+          ],
+          [
+            "single (Nov–Dec)",
+            "230"
+          ],
+          [
+            "child 4–11 sharing (Jan–May)",
+            "82"
+          ],
+          [
+            "child 4–11 sharing (Jun–Oct)",
+            "92"
+          ],
+          [
+            "child 4–11 sharing (Nov–Dec)",
+            "82"
+          ],
+          [
+            "child 4–11 single (Jan–May)",
+            "230"
+          ],
+          [
+            "child 4–11 single (Jun–Oct)",
+            "258"
+          ],
+          [
+            "child 4–11 single (Nov–Dec)",
+            "230"
+          ]
+        ]
+      }
+    ],
+    "commission": "STO"
+  },
+
   'camp-kwando': {
     name: 'Camp Kwando',
     commission: '20% STO',
