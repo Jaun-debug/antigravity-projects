@@ -157,6 +157,37 @@ const STO_DB = {
     ]
   },
 
+  "lagoon-chalets": {
+    "name": "Lagoon Chalets",
+    "region": "Walvis Bay",
+    "currency": "N$",
+    "commission": "Self-catering — net to agent",
+    "validity": "01.07.2026–30.06.2027",
+    "note": "Self-catering unit rates, net to agent (per unit / night by number of guests). Agent adds own markup.",
+    "sections": [
+      {
+        "title": "Self-catering units (per unit / night)",
+        "rows": [
+          ["One/Two Bedroom Chalet — 1 pax", "950"],
+          ["One/Two Bedroom Chalet — 2 pax", "1300"],
+          ["One/Two Bedroom Chalet — 3 pax", "1500"],
+          ["One/Two Bedroom Chalet — 4 pax", "1700"],
+          ["One/Two Bedroom Chalet — 5 pax", "1850"],
+          ["One/Two Bedroom Chalet — 6 pax", "1950"],
+          ["Double Storey Chalet — 5 pax", "1950"],
+          ["Double Storey Chalet — 6 pax", "2100"],
+          ["Double Storey Chalet — 7-8 pax", "2500"],
+          ["Double Room (max 4 pax) — 2 pax", "850"],
+          ["Double Room (max 4 pax) — 4 pax", "1200"],
+          ["Bachelor Flat — 2 pax", "1300"],
+          ["Campsite — 2 pax", "700"],
+          ["Campsite — 4 pax", "1100"],
+          ["Campsite — 6 pax", "1300"]
+        ]
+      }
+    ]
+  },
+
 "drift-inn-bayete-collection": {
     "name": "Drift Inn (Bayete Collection)",
     "region": "Vic Falls",
