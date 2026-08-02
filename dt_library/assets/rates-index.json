@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 279,
+ "count": 280,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -42689,6 +42689,90 @@
     {
      "n": "child 4-11 single (Nov-Dec)",
      "p": 230.0
+    }
+   ],
+   "rack_2026": [],
+   "rack_2027": []
+  },
+  {
+   "file": "",
+   "name": "The Victorian Manor (Bayete Collection)",
+   "region": "Vic Falls",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Victorian Suite — pp sharing (USD)",
+     "p": 221.0
+    },
+    {
+     "n": "Victorian Suite — single (USD)",
+     "p": 289.0
+    },
+    {
+     "n": "Master Suite — pp sharing (USD)",
+     "p": 257.0
+    },
+    {
+     "n": "Master Suite — single (USD)",
+     "p": 333.0
+    },
+    {
+     "n": "Cassa 2-Bedroom Unit (USD)",
+     "p": 561.0
+    },
+    {
+     "n": "Villa — pp sharing (USD)",
+     "p": 281.0
+    },
+    {
+     "n": "Villa — single (USD)",
+     "p": 365.0
+    },
+    {
+     "n": "Exclusive Entire Manor (USD)",
+     "p": 4020.0
+    },
+    {
+     "n": "Guide — per night (USD)",
+     "p": 100.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Victorian Suite — pp sharing (USD)",
+     "p": 221.0
+    },
+    {
+     "n": "Victorian Suite — single (USD)",
+     "p": 289.0
+    },
+    {
+     "n": "Master Suite — pp sharing (USD)",
+     "p": 257.0
+    },
+    {
+     "n": "Master Suite — single (USD)",
+     "p": 333.0
+    },
+    {
+     "n": "Cassa 2-Bedroom Unit (USD)",
+     "p": 561.0
+    },
+    {
+     "n": "Villa — pp sharing (USD)",
+     "p": 281.0
+    },
+    {
+     "n": "Villa — single (USD)",
+     "p": 365.0
+    },
+    {
+     "n": "Exclusive Entire Manor (USD)",
+     "p": 4020.0
+    },
+    {
+     "n": "Guide — per night (USD)",
+     "p": 100.0
     }
    ],
    "rack_2026": [],
