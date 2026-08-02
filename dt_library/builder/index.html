@@ -167,11 +167,18 @@ var S={
   guide:[],flights:[],activities:[],extras:[],botswana:[]
 };
 var active='trip';
-function money(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
+function money(n,cur){return (cur==='USD'?'US$ ':'N$ ')+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2})}
+function usd(n){return money(n,'USD')}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function num(v){return Math.max(0,parseFloat(v)||0)}
-function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region)o[l.region]=1});return Object.keys(o).sort()}
-function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r)a.push(i)});return a}
+function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region&&l.cur!=='USD')o[l.region]=1});return Object.keys(o).sort()}
+function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r&&l.cur!=='USD')a.push(i)});return a}
+/* ---- USD cross-border (Botswana / Delta / Chobe / Vic Falls) ---- */
+var USD_AREA_ORDER=['Botswana','Delta','Chobe','Vic Falls'];
+function usdAreas(){var o={};RATES.lodges.forEach(function(l){if(l.cur==='USD'&&l.region)o[l.region]=1;});return USD_AREA_ORDER.filter(function(a){return o[a];}).concat(Object.keys(o).filter(function(a){return USD_AREA_ORDER.indexOf(a)<0;}).sort());}
+function usdLodgesInArea(area){var a=[];RATES.lodges.forEach(function(l,i){if(l.cur==='USD'&&l.region===area)a.push(i);});return a;}
+function usdRates(L){return (L&&((L.rates_2027&&L.rates_2027.length&&L.rates_2027)||L.rates))||[];}
+function botswanaTotal(){return sumLI(S.botswana);}
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
 function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
 function isActivity(n){var s=(n||'').toLowerCase();if(/sharing|\bsingle\b|\broom\b|chalet|\btent\b|suite|villa(?!ge)|bungalow|cottage|\bdbb\b|b ?& ?b|per person per night|conservation|levy|park fee|tourism|deposit|\bmeal|breakfast|lunch|dinner|guide room|tour guide/.test(s))return false;return /game[ -]?drive|\bdrive\b|cruise|\bwalk\b|hik|nature drive|sundowner|mtb|bike|cycl|kayak|canoe|mokoro|balloon|fishing|quad|horse|riding|excursion|\btour\b|scenic|boat|tracking|township|cultural|museum|\bspa\b|massage|tasting|sandboard|living museum|e-bike|stargaz|flight|rock ?art|plateau|fairy circle|adopt|sleep.?out|guided|experience|activit/.test(s);}
@@ -290,7 +297,8 @@ function tripPax(){return Math.max(1,(parseInt(S.adults)||0)+(parseInt(S.childre
 function actPaxVal(x){var p=(x.pax===''||x.pax==null)?tripPax():parseInt(x.pax);return Math.max(0,p||0);}
 function actLine(x){return num(x.amount)*actPaxVal(x);}
 function sumAct(arr){var t=0;(arr||[]).forEach(function(x){t+=actLine(x);});return t;}
-function netTotal(){return accomTotal()+vehicleHire()+fuelCost()+sumLI(S.guide)+sumLI(S.flights)+sumAct(S.activities)+sumLI(S.extras)+sumLI(S.botswana)}
+/* N$ net total — excludes Botswana/Vic Falls/Delta which are USD and kept separate */
+function netTotal(){return accomTotal()+vehicleHire()+fuelCost()+sumLI(S.guide)+sumLI(S.flights)+sumAct(S.activities)+sumLI(S.extras)}
 // ---- one-click PDF of the priced quote (agent-facing) ----
 function fmtToday(){try{return new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'})}catch(e){return''}}
 function buildQuoteHTML(){
@@ -321,12 +329,17 @@ function buildQuoteHTML(){
   var av=S.activities.map(function(x,i){return {x:x,i:i};}).filter(function(o){return (o.x.name||'').trim()!==''||num(o.x.amount)>0;});
   av.sort(function(a,b){var oa=(a.x.ord==null?Infinity:a.x.ord),ob=(b.x.ord==null?Infinity:b.x.ord);if(oa!==ob)return oa-ob;return a.i-b.i;});
   if(av.length){var ar='';av.forEach(function(o){var x=o.x;ar+=r2(esc(x.name||'Activity')+' <span style="color:'+MUT+';font-size:10px">('+money(num(x.amount))+' × '+actPaxVal(x)+')</span>',money(actLine(x)));});w.push(sec('Activities',tbl(ar)));}
-  w.push(liBlock('Guide',S.guide));w.push(liBlock('Flights',S.flights));w.push(liBlock('Extras',S.extras));w.push(liBlock('Botswana / Add-ons',S.botswana));
+  w.push(liBlock('Guide',S.guide));w.push(liBlock('Flights',S.flights));w.push(liBlock('Extras',S.extras));
   // pricing summary
   w.push('<div style="page-break-inside:avoid;margin-top:8px;border-top:2px solid '+C+';padding-top:8px;font-family:Arial,sans-serif;font-size:12px">'
     +tbl(r2('Net total','<b>'+money(net)+'</b>')+r2('Markup ('+num(S.markup)+'%)',money(sell-net)))
     +'<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:10px 12px;background:'+OR+';color:#fff;border-radius:6px"><span style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase">Sell total</span><span style="font-family:Georgia,serif;font-size:20px">'+money(sell)+'</span></div>'
     +'<div style="text-align:right;color:'+MUT+';margin-top:6px">Sell per adult: '+money(sell/pax)+'</div></div>');
+  // Botswana / Delta / Vic Falls — separate USD section (not converted into the N$ total)
+  var bwt=botswanaTotal();
+  if(bwt>0){var br='';S.botswana.forEach(function(x){if((x.name||'').trim()===''&&!num(x.amount))return;br+=r2(esc(x.name||'Item'),usd(num(x.amount)));});
+    br+=r2('<b>USD total</b>','<b>'+usd(bwt)+'</b>');br+=r2('USD + markup ('+num(S.markup)+'%)',usd(bwt*(1+num(S.markup)/100)));
+    w.push('<div style="page-break-inside:avoid;margin-top:12px;border-top:2px solid '+OR+';padding-top:8px">'+sec('Botswana / Delta / Vic Falls — billed separately in USD',tbl(br))+'<div style="font-family:Arial,sans-serif;font-size:9px;color:'+MUT+'">Quoted in US$; not converted to N$.</div></div>');}
   w.push('<div style="font-family:Arial,sans-serif;font-size:9px;color:'+MUT+';margin-top:16px;border-top:1px solid '+BR+';padding-top:6px">Desert Tracks Namibia · bookings@desert-tracks.com · Rates are net STO, valid for the '+esc(S.year||'2026')+' season. This is a quotation, not a confirmation.</div>');
   w.push('</div>');
   return w.join('');
@@ -417,6 +430,34 @@ function liActivities(){
     +'<div class="sec-total"><span class="lbl">Activities total <span style="font-size:.6rem;letter-spacing:.5px;color:var(--muted)">(all lodges + custom)</span></span><span class="amt" data-actgrand>'+money(sumAct(S[key]))+'</span></div></div>';
 }
 
+/* ---- Botswana / Delta / Vic Falls (USD cross-border) picker ---- */
+function botswanaRows(){
+  return (S.botswana||[]).map(function(x,i){
+    return '<div class="li"><input class="nm" data-k="botswana" data-i="'+i+'" data-f="name" value="'+esc(x.name)+'" placeholder="Lodge / segment">'
+      +'<input class="am" type="number" min="0" data-k="botswana" data-i="'+i+'" data-f="amount" value="'+(x.amount||'')+'" placeholder="0.00" title="USD">'
+      +'<button class="rm" data-k="botswana" data-i="'+i+'">&times;</button></div>';
+  }).join('');
+}
+function botswanaSection(){
+  var areas=usdAreas();
+  var area=S._bwArea||'';
+  var hasLodge=(S._bwLodge!=null&&S._bwLodge!=='');
+  var areaOpts='<option value="">Choose area…</option>'+areas.map(function(a){return '<option value="'+esc(a)+'"'+(area===a?' selected':'')+'>'+esc(a)+'</option>';}).join('');
+  var lodgeOpts='<option value="">'+(area?'Choose lodge…':'Choose area first…')+'</option>';
+  if(area){usdLodgesInArea(area).forEach(function(li){lodgeOpts+='<option value="'+li+'"'+(String(S._bwLodge)===String(li)?' selected':'')+'>'+esc(RATES.lodges[li].name)+'</option>';});}
+  var rateOpts='<option value="">'+(hasLodge?'Choose rate…':'Choose lodge first…')+'</option>';
+  if(hasLodge){var L=RATES.lodges[+S._bwLodge];if(L)usdRates(L).forEach(function(rt){rateOpts+='<option value="'+rt.p+'" data-name="'+esc(L.name+' — '+rt.n)+'">'+esc(rt.n)+' — '+usd(rt.p)+'</option>';});}
+  return '<div style="display:grid;gap:10px;max-width:640px;margin:0 0 20px">'
+    +'<div class="fld"><label>Area</label><select id="bw-area">'+areaOpts+'</select></div>'
+    +'<div class="fld"><label>Lodge</label><select id="bw-lodge"'+(area?'':' disabled')+'>'+lodgeOpts+'</select></div>'
+    +'<div class="fld"><label>Rate <span style="color:var(--muted)">(US$, STO nett)</span></label><select id="bw-rate"'+(hasLodge?'':' disabled')+'>'+rateOpts+'</select></div>'
+    +'</div>'
+    +'<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px">Selected segments (US$)</div>'
+    +'<button class="btn ghost addbtn" data-add="botswana" type="button" style="margin:0 0 12px">+ Add manual line</button>'
+    +'<div id="li-botswana">'+botswanaRows()+'</div>'
+    +'<div class="sec-total"><span class="lbl">Botswana / Delta / Vic Falls total <span style="font-size:.6rem;letter-spacing:.5px;color:var(--muted)">(USD — kept separate)</span></span><span class="amt bw-total">'+usd(botswanaTotal())+'</span></div>';
+}
+
 /* ---- panels ---- */
 function renderPanel(){persist();
   var p=document.getElementById('panel'),h='';
@@ -503,19 +544,24 @@ function renderPanel(){persist();
     h+=liSection('flights','Flights','Route — e.g. WDH → Sossusvlei'); }
   else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates. Each lodge shows its own activities plus any activity providers in that region (STO nett, valid 2026/2027). You can still add your own line below.</p>';var _seenL={},_seenR={},_body='';S.lodges.forEach(function(d,li){if(d.lodgeIdx<0||_seenL[d.lodgeIdx])return;var L=RATES.lodges[d.lodgeIdx];if(!L)return;_seenL[d.lodgeIdx]=1;var acts=lodgeActivities(L);var provs=(!_seenR[L.region])?actProvidersIn(L.region):[];if(!acts.length&&!provs.length)return;var block='<div style="margin:0 0 22px;border-left:2px solid rgba(200,90,23,.25);padding:0 0 2px 14px">';block+='<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#c85a17;margin:0 0 8px">'+esc(L.name)+'</div>';if(acts.length){var opts='<option value="">Add lodge activity…</option>'+acts.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(L.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>'}).join('');block+='<div class="fld" style="max-width:520px;margin:0 0 8px"><select class="act-pick" data-ord="'+li+'">'+opts+'</select></div>';}if(provs.length){_seenR[L.region]=1;var provOpts=(provs.length===1)?'<option value="'+provs[0].i+'" selected>'+esc(provs[0].p.name)+'</option>':'<option value="">Choose provider…</option>'+provs.map(function(x){return '<option value="'+x.i+'">'+esc(x.p.name)+'</option>';}).join('');var initGi=(provs.length===1)?provs[0].i:'';var actOpts=(provs.length===1)?provActOptions(provs[0].i):'<option value="">Choose provider first…</option>';block+='<div style="margin:0"><div class="fld" style="max-width:520px;margin:0 0 6px"><label style="color:var(--muted)">'+esc(L.region)+' activity providers</label><select class="prov-pick" data-region="'+esc(L.region)+'">'+provOpts+'</select></div><div class="fld" style="max-width:520px;margin:0"><select class="prov-act-pick" data-ord="'+li+'" data-prov="'+initGi+'"'+(provs.length===1?'':' disabled')+'>'+actOpts+'</select></div></div>';}var _mine=S.activities.map(function(x,ix){return {x:x,i:ix};}).filter(function(o){return o.x.ord===li&&((o.x.name||'').trim()!==''||num(o.x.amount)>0);});if(_mine.length){var _px=tripPax();var _st=0;_mine.forEach(function(o){_st+=actLine(o.x);});block+='<div style="margin:10px 0 0;max-width:760px">'+actRowHeader()+_mine.map(function(o){return actRow(o.x,o.i,_px);}).join('')+'<div class="sec-total" style="margin-top:2px"><span class="lbl">'+esc(L.name)+' subtotal</span><span class="amt" data-ordtotal="'+li+'">'+money(_st)+'</span></div></div>';}block+='</div>';_body+=block;});if(_body)h+='<div style="margin:0 0 18px">'+_body+'</div>';h+=liActivities(); }
   else if(active==='extras'){ h='<h2>Extras</h2><p class="lead">Park fees, transfers, anything else.</p>'+liSection('extras','Extras','Extra item'); }
-  else if(active==='botswana'){ h='<h2>Botswana / Add-ons</h2><p class="lead">Cross-border lodges and add-on segments.</p>'+liSection('botswana','Botswana / add-ons','Lodge / segment'); }
+  else if(active==='botswana'){ h='<h2>Botswana / Delta / Vic Falls</h2><p class="lead">Cross-border USD segments. Pick an area, then a lodge, then a rate — or add a manual line. These are billed in <b>US$</b> and kept separate from the N$ totals.</p>'+botswanaSection(); }
   else if(active==='final'){
     var net=netTotal(),sell=net*(1+num(S.markup)/100),pax=Math.max(1,parseInt(S.adults)||1);
     function row(l,v){return '<div class="sumrow"><span>'+l+'</span><span class="v">'+money(v)+'</span></div>'}
     h='<h2>Final Pricing</h2><p class="lead">'+esc(S.name||'Untitled quote')+' &middot; '+pax+' adult'+(pax>1?'s':'')+(num(S.children)?' + '+S.children+' child':'')+'</p>'
       +row('Accommodation',accomTotal())+row('Vehicle hire',vehicleHire())+row('Fuel',fuelCost())
       +row('Guide',sumLI(S.guide))+row('Flights',sumLI(S.flights))+row('Activities',sumAct(S.activities))
-      +row('Extras',sumLI(S.extras))+row('Botswana / add-ons',sumLI(S.botswana))
-      +'<div class="sumrow big"><span>Net total</span><span class="v">'+money(net)+'</span></div>'
+      +row('Extras',sumLI(S.extras))
+      +'<div class="sumrow big"><span>Net total (N$)</span><span class="v">'+money(net)+'</span></div>'
       +'<div class="sumrow"><span>Markup ('+S.markup+'%)</span><span class="v">'+money(sell-net)+'</span></div>'
-      +'<div class="sumrow big" style="color:var(--gold)"><span>Sell total</span><span class="v">'+money(sell)+'</span></div>'
-      +'<div class="ppgrid"><div class="ppcard"><div class="l">Sell per adult</div><div class="n">'+money(sell/pax)+'</div></div>'
-      +'<div class="ppcard"><div class="l">Net per adult</div><div class="n">'+money(net/pax)+'</div></div></div>';
+      +'<div class="sumrow big" style="color:var(--gold)"><span>Sell total (N$)</span><span class="v">'+money(sell)+'</span></div>'
+      +'<div class="ppgrid"><div class="ppcard"><div class="l">Sell per adult (N$)</div><div class="n">'+money(sell/pax)+'</div></div>'
+      +'<div class="ppcard"><div class="l">Net per adult (N$)</div><div class="n">'+money(net/pax)+'</div></div></div>'
+      +(botswanaTotal()>0?('<div style="margin-top:18px;border-top:2px solid var(--gold);padding-top:12px">'
+        +'<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 6px">Botswana / Delta / Vic Falls — billed separately in USD</div>'
+        +'<div class="sumrow big"><span>USD total</span><span class="v">'+usd(botswanaTotal())+'</span></div>'
+        +'<div class="sumrow"><span>USD + markup ('+S.markup+'%)</span><span class="v">'+usd(botswanaTotal()*(1+num(S.markup)/100))+'</span></div>'
+        +'<div style="font-size:.66rem;color:var(--muted);margin-top:6px">Not converted to N$ — quote these USD amounts to the client separately.</div></div>'):'');
   }
   p.innerHTML=h;
   bindPanel();
@@ -578,6 +624,7 @@ function bindPanel(){
     el.oninput=function(){var k=el.dataset.k,i=+el.dataset.i,f=el.dataset.f;if(S[k][i])S[k][i][f]=el.value;updateTotals();
       var st=document.querySelector('#panel .sec-total .amt');
       if(k==='activities'){var ln=document.querySelector('#panel .actline[data-i="'+i+'"]');if(ln&&S[k][i])ln.textContent=money(actLine(S[k][i]));document.querySelectorAll('#panel [data-ordtotal]').forEach(function(sp){var od=+sp.dataset.ordtotal,t=0;S.activities.forEach(function(x){if(x.ord===od)t+=actLine(x);});sp.textContent=money(t);});var g=document.querySelector('#panel [data-actgrand]');if(g)g.textContent=money(sumAct(S[k]));}
+      else if(k==='botswana'){var bt=document.querySelector('#panel .bw-total');if(bt)bt.textContent=usd(sumLI(S[k]));}
       else if(st)st.textContent=money(sumLI(S[k]))};
   });
   document.querySelectorAll('#panel [data-add]').forEach(function(b){b.onclick=function(){S[b.dataset.add].push({name:'',amount:''});renderPanel()}});
@@ -589,6 +636,10 @@ function bindPanel(){
   document.querySelectorAll('#panel select.meal-pick').forEach(function(sel){sel.onchange=function(){var o=sel.options[sel.selectedIndex];if(!o||!o.value)return;var i=+sel.dataset.i,d=S.lodges[i];if(!d)return;if(!d.meals)d.meals=[];d.meals.push({n:o.dataset.name,p:+o.value});renderPanel();};});
   document.querySelectorAll('#panel .mealrm').forEach(function(b){b.onclick=function(){var i=+b.dataset.i,mi=+b.dataset.mi,d=S.lodges[i];if(d&&d.meals){d.meals.splice(mi,1);renderPanel();}};});
   document.querySelectorAll('#panel .rm[data-k]').forEach(function(b){b.onclick=function(){S[b.dataset.k].splice(+b.dataset.i,1);renderPanel()}});
+  // Botswana / Delta / Vic Falls cascading picker
+  if(x=document.getElementById('bw-area'))x.onchange=function(){S._bwArea=this.value;S._bwLodge='';renderPanel();};
+  if(x=document.getElementById('bw-lodge'))x.onchange=function(){S._bwLodge=this.value;renderPanel();};
+  if(x=document.getElementById('bw-rate'))x.onchange=function(){var o=this.options[this.selectedIndex];if(!o||!o.value)return;S.botswana.push({name:o.dataset.name,amount:+o.value,cur:'USD'});renderPanel();};
   updateTotals();
 }
 
