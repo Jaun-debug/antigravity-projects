@@ -299,7 +299,6 @@
             nrcr:'https://wetu.com/imageHandler/c1920x1080/1519/17_little_kulala_red_sand_dunes_0374.jpg?fmt=jpg',
             zaris:'https://wetu.com/imageHandler/c1920x1080/15393/201204_mowani_1223.jpg?fmt=jpg',
             sanga:'https://wetu.com/imageHandler/c1920x1080/1520/1738592251695_KulalaDL_MainAreas_0724_TC_082.jpg?fmt=jpg',
-            zap:'https://wetu.com/imageHandler/c1920x1080/181182/namib_camping2go_11.jpg?fmt=jpg',
             suricate:'https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg'
           };
           function hero(){return document.querySelector('.header.nr-hero');}
@@ -366,7 +365,6 @@ document.addEventListener('DOMContentLoaded',function(){
             <button class="tab-link" onclick="switchSupplier('nrcr', this)">Namib Roos Car Rentals</button>
             <button class="tab-link" onclick="switchSupplier('zaris', this)">Zaris Safaris</button>
             <button class="tab-link" onclick="switchSupplier('sanga', this)">Sanga Group Travel</button>
-            <button class="tab-link" onclick="switchSupplier('zap', this)">Zap Car Rental</button>
             <button class="tab-link" onclick="switchSupplier('suricate', this)">Suricate Safaris</button>
             <button class="tab-link" onclick="switchSupplier('warthog', this)">Warthog Car Rental</button>
             <button class="tab-link" onclick="switchSupplier('sch', this)">Swakopmund Car Hire</button>
@@ -695,44 +693,6 @@ document.addEventListener('DOMContentLoaded',function(){
         </div>
 
         <!-- ============================================== -->
-        <!-- ZAP -->
-        <!-- ============================================== -->
-        <div class="rate-card" id="supplier-zap">
-            <div class="supplier-info">
-                <div class="supplier-details">
-                    <h2>Zap Car Rental</h2>
-                    <p>Clean, reliable standard rental options featuring Ford Everests, Hiluxes, and custom stretch Cruisers.</p>
-                </div>
-                <div class="supplier-quick-spec">
-                    <div class="spec-item"><span class="spec-label">STO Surcharge</span><span class="spec-value">Less 20% on RACK</span></div>
-                    <div class="spec-item"><span class="spec-label">Spare Tyres</span><span class="spec-value">2 Tyres Included</span></div>
-                    <div class="spec-item"><span class="spec-label">Translators</span><span class="spec-value">On-Demand German / French</span></div>
-                </div>
-            </div>
-
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Vehicle Category</th>
-                            <th>Low Season STO Rate</th>
-                            <th>High Season STO Rate</th>
-                            <th>Low Season RACK</th>
-                            <th>High Season RACK</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 2,460.00</td><td>N$ 2,760.00</td><td>N$ 2,580.00</td><td>N$ 2,880.00</td></tr>
-                        <tr><td><strong>Toyota Hilux Double Cab 4x4</strong></td><td class="price-highlight">N$ 2,460.00</td><td>N$ 2,760.00</td><td>N$ 2,580.00</td><td>N$ 2,880.00</td></tr>
-                        <tr><td><strong>Toyota Hilux 4x4 (Fully Camping Equipped)</strong></td><td class="price-highlight">N$ 2,740.00</td><td>N$ 3,440.00</td><td>N$ 3,288.00</td><td>N$ 4,128.00</td></tr>
-                        <tr><td><strong>Toyota Land Cruiser Double Cab 4x4</strong></td><td class="price-highlight">N$ 2,810.00</td><td>N$ 3,110.00</td><td>N$ 2,930.00</td><td>N$ 3,230.00</td></tr>
-                        <tr><td><strong>Toyota Landcruiser Stretch Safari (9-Seater)</strong></td><td class="price-highlight">N$ 3,910.00</td><td>N$ 4,210.00</td><td>N$ 3,940.00</td><td>N$ 4,240.00</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- ============================================== -->
         <!-- SURICATE -->
         <!-- ============================================== -->
         <div class="rate-card" id="supplier-suricate">
@@ -784,7 +744,7 @@ document.addEventListener('DOMContentLoaded',function(){
                 </div>
             </div>
 
-            <p style="margin:0 0 14px;font-size:.8rem;color:#8a6a34"><strong>Note:</strong> These are published RACK rates. Warthog&rsquo;s STO rate sheet has not been received, so no agent net rate is shown and this supplier is not yet selectable in the itinerary builder.</p>
+            <p style="margin:0 0 14px;font-size:.8rem;color:#8a6a34"><strong>Note:</strong> These are published RACK rates. Warthog&rsquo;s STO rate sheet has not been received, so no agent net rate is shown. Warthog is selectable in the itinerary builder, but every line is labelled &ldquo;RACK (STO sheet outstanding)&rdquo; &mdash; quote off it only if you are adding your own margin.</p>
 
             <div class="table-responsive">
                 <table>
