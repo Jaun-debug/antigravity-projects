@@ -309,6 +309,7 @@ document.addEventListener('DOMContentLoaded',function(){
     for (var i=0;i<hdr.length;i++){
       if (!hdr[i].classList.contains('sto-col')) continue;
       hdr[i].style.display=''; hdr[i].classList.remove('sto-col');
+      hdr[i].innerHTML = hdr[i].innerHTML.replace(/\s*\b(?:STO|NETT|NET)\b\s*/gi,' ').replace(/\s{2,}/g,' ').trim() || 'Rate';
       for (var r=1;r<t.rows.length;r++){
         var cd=t.rows[r].cells[i];
         if (cd){ cd.style.display=''; cd.classList.remove('sto-col');
