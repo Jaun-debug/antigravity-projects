@@ -209,7 +209,10 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
   window.addEventListener("pagehide",function(){send("pagehide");});
   window.addEventListener("beforeunload",function(){send("beforeunload");});
 })();
-/* ===== Agent 26/27 STO season toggle (Cowork). ONE floating control: drives real 2027 rates where present (standalone sheets AND group-collection sheets that carry both panes), hides any inline toggle, or shows "rates to follow" where there is no 2027 data. Default 2026 leaves the page untouched. ===== */
+/* ===== 26/27 rate-season switcher. Inline pills (same look as the lodge pages), shown to
+   public visitors AND signed-in agents. Drives real 2027 rates where a page carries them,
+   defers to a page's own native switcher, and otherwise shows a "rates to follow" note.
+   Default 2026 leaves the page untouched. ===== */
 ;(function(){"use strict";try{
   var KEY="nr_sto_year";
   function isAgent(){try{var e=document.querySelectorAll("a,button,span");for(var i=0;i<e.length;i++){var t=(e[i].textContent||"").trim().toLowerCase();if(t==="sign out"||t==="signout")return true;}}catch(x){}return false;}
@@ -237,10 +240,19 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     if(on){if(el.getAttribute("data-nr-open")==null){el.setAttribute("data-nr-open",el.style.display||"");el.style.display="none";}}
     else{if(el.getAttribute("data-nr-open")!=null){el.style.display=el.getAttribute("data-nr-open");el.removeAttribute("data-nr-open");}}
   });}
+  function noteText(){
+    /* never say "STO" to a signed-out visitor */
+    return isAgent()
+      ? "2027 STO rates - to follow. We are loading these now; please continue to quote 2026 rates in the meantime."
+      : "2027 rates - to follow. We are loading these now; please continue to use 2026 rates in the meantime.";
+  }
   function showNote(on){
     var note=document.getElementById("nr-2027-note");
     if(on){
-      if(!note){note=document.createElement("div");note.id="nr-2027-note";note.textContent="2027 STO rates - to follow. We are loading these now; please continue to quote 2026 rates in the meantime.";}
+      if(!note){note=document.createElement("div");note.id="nr-2027-note";}
+      note.textContent=noteText();
+      var t=document.getElementById("nr-yrtoggle");
+      if(t&&t.parentNode){ if(note.parentNode!==t.parentNode||note.previousSibling!==t){t.parentNode.insertBefore(note,t.nextSibling);} return; }
       var host=document.querySelector("#detail-view")||document.querySelector("main")||document.body;
       if(host&&note.parentNode!==host){host.insertBefore(note,host.firstChild);}
     }else if(note){note.remove();}
@@ -249,12 +261,23 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     if(document.getElementById("nr-yr-css"))return;
     var s=document.createElement("style");s.id="nr-yr-css";
     s.textContent=
-      "#nr-yrtoggle{position:fixed;top:258px;right:0;z-index:9996;display:flex;width:170px;box-sizing:border-box;border-radius:5px 0 0 5px;overflow:hidden;border:1px solid rgba(255,255,255,.35);border-right:none;box-shadow:0 4px 16px rgba(60,53,48,.22)}"
-      +"#nr-yrtoggle .lbl{position:absolute;top:-15px;left:0;width:100%;text-align:center;font-size:8px;letter-spacing:2px;color:#8a807a;text-transform:uppercase;font-family:Inter,sans-serif}"
-      +"#nr-yrtoggle button{flex:1;border:none;cursor:pointer;padding:0 6px;min-height:34px;font-size:11px;letter-spacing:1px;font-weight:600;background:rgba(60,53,48,.4);color:#fff;-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);font-family:Inter,sans-serif;transition:background .2s}"
-      +"#nr-yrtoggle button.active{background:rgba(200,90,23,.85)}"
+      "#nr-yrtoggle{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}"
+      +"#nr-yrtoggle button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(200,90,23,.6);background:rgba(200,90,23,.08);color:#c85a17;transition:background .18s,color .18s}"
+      +"#nr-yrtoggle button.active{background:rgba(200,90,23,.6);color:#fff}"
       +"#nr-2027-note{margin:0 0 18px;padding:15px 18px;border-radius:12px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.4);color:#8a4a22;font-family:Inter,sans-serif;font-size:.86rem;text-align:center;letter-spacing:.2px;line-height:1.45}";
     document.head.appendChild(s);
+  }
+  /* Put the pills in the flow of the page, just above the rates. */
+  function place(w){
+    var dv=document.getElementById("detail-view");
+    if(dv){ if(w.parentNode!==dv||dv.firstChild!==w) dv.insertBefore(w,dv.firstChild); return true; }
+    var tc=document.querySelector(".tabs-container");
+    if(tc&&tc.parentNode){ if(w.nextSibling!==tc) tc.parentNode.insertBefore(w,tc); return true; }
+    var rc=document.querySelector(".rate-card");
+    if(rc&&rc.parentNode){ if(w.nextSibling!==rc) rc.parentNode.insertBefore(w,rc); return true; }
+    var mn=document.querySelector("main");
+    if(mn){ if(w.parentNode!==mn||mn.firstChild!==w) mn.insertBefore(w,mn.firstChild); return true; }
+    return false;
   }
   function reflect(){
     var y=year(),t=document.getElementById("nr-yrtoggle");
@@ -276,14 +299,14 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     }
   }catch(x){}}
   function build(){
-    if(!isAgent())return;
-    if(!document.getElementById("nr-yrtoggle")){
+    var w=document.getElementById("nr-yrtoggle");
+    if(!w){
       injectCss();
-      var w=document.createElement("div");w.id="nr-yrtoggle";
-      w.innerHTML='<span class="lbl">STO Season</span><button type="button" data-y="2026">2026</button><button type="button" data-y="2027">2027</button>';
-      document.body.appendChild(w);
+      w=document.createElement("div");w.id="nr-yrtoggle";
+      w.innerHTML='<button type="button" data-y="2026">2026 season</button><button type="button" data-y="2027">2027 season</button>';
       w.addEventListener("click",function(e){var b=e.target&&e.target.closest?e.target.closest("button"):null;if(b)pick(b.getAttribute("data-y"));});
     }
+    if(!place(w))return;
     wrapOpen();
     applyState(year());
   }
