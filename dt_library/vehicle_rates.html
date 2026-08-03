@@ -328,35 +328,34 @@ document.addEventListener('DOMContentLoaded',function(){
     t=t.replace(/\s{2,}/g," ").replace(/\s+([.,])/g,"$1").replace(/^\s*[.,]\s*/,"").trim();
     p.textContent=t;
   });
-  var money=/N\$|\d,\d{3}|\d[.,]\d{2}\b/;
-  var tables=document.querySelectorAll('table');
-  for(var ti=0;ti<tables.length;ti++){
-    var t=tables[ti]; var rows=t.rows; if(!rows||rows.length<2) continue;
-    var head=rows[0]; var ncol=head.cells.length; if(!ncol) continue;
-    var rack=[]; for(var i=0;i<ncol;i++){ if(/rack/i.test(head.cells[i].textContent||'')) rack.push(i); }
-    var hasRack=rack.length>0;
-    var price=[];
-    for(var c=0;c<ncol;c++){
-      if(rack.indexOf(c)>-1) continue;
-      var isPrice=false;
-      for(var r=1;r<rows.length;r++){ var cell=rows[r].cells[c]; if(cell&&(money.test(cell.textContent||'')||/price-highlight/.test(cell.className))){isPrice=true;break;} }
-      if(isPrice) price.push(c);
+  // Signed-out view: hide the negotiated STO columns outright and show RACK only.
+  // Columns are tagged explicitly (.sto-col / .rack-col / .info-col) so nothing is
+  // guessed from the cell text — excess, waiver and fee columns always stay visible.
+  document.querySelectorAll('.sto-col').forEach(function(c){ c.style.display='none'; });
+  // Strip the "Rack" qualifier from headers once the STO twin is gone.
+  document.querySelectorAll('th.rack-col').forEach(function(h){
+    h.innerHTML = h.innerHTML.replace(/\s*(?:&mdash;|\u2014|-)?\s*Rack\s*/i,' ').replace(/^\s*Rack\s*/i,'').replace(/\s{2,}/g,' ').trim() || 'Rate';
+  });
+  // Any rate table left with no rack figures at all is still awaiting a public rate.
+  document.querySelectorAll('table').forEach(function(t){
+    if (t.querySelector('.rack-col')) return;
+    if (!t.querySelector('.sto-col')) return;
+    var hdr=t.querySelectorAll('thead th');
+    for (var i=0;i<hdr.length;i++){
+      if (!hdr[i].classList.contains('sto-col')) continue;
+      hdr[i].style.display='';
+      hdr[i].classList.remove('sto-col');
+      for (var r=1;r<t.rows.length;r++){
+        var cd=t.rows[r].cells[i];
+        if (cd){ cd.style.display=''; cd.classList.remove('sto-col');
+                 cd.textContent='Rates to follow'; cd.style.fontStyle='italic';
+                 cd.style.color='#8a8175'; cd.classList.remove('price-highlight'); }
+      }
     }
-    if(!price.length) continue;
-    for(var p=0;p<price.length;p++){ var col=price[p];
-      if(hasRack){ for(var r2=0;r2<rows.length;r2++){ var cc=rows[r2].cells[col]; if(cc) cc.style.display='none'; } }
-      else { for(var r3=1;r3<rows.length;r3++){ var cd=rows[r3].cells[col]; if(cd){ cd.textContent='Rates to follow'; cd.style.fontStyle='italic'; cd.style.color='#8a8175'; if(cd.classList) cd.classList.remove('price-highlight'); } } }
-    }
-  }
+  });
 });
 </script>
         <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function activeName(){var c=document.querySelector('.rate-card.active .supplier-details h2');if(c)return c.textContent;var t=document.querySelector('.tabs-container .tab-link.active');return t?t.textContent:'';}function sync(){if(el){var n=activeName();if(n)el.textContent=n.replace(/\s+/g,' ').trim();}}sync();if(typeof window.switchSupplier==="function"){var o=window.switchSupplier;window.switchSupplier=function(){var r=o.apply(this,arguments);setTimeout(sync,0);return r;};}document.querySelectorAll('.tabs-container .tab-link').forEach(function(b){b.addEventListener('click',function(){setTimeout(sync,0);});});});</script>
-
-        <!-- SEASON SELECTOR -->
-        <div class="season-selector">
-            <button class="toggle-btn active" id="btn-low" onclick="setSeason('low')">Low Season (Jan - Jun)</button>
-            <button class="toggle-btn" id="btn-high" onclick="setSeason('high')">High Season (Jul - Dec)</button>
-        </div>
 
         <!-- SUPPLIER TABS -->
         <div class="tabs-container">
@@ -389,36 +388,31 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Vehicle Category & Description</th>
-                            <th>Rental Duration (1 - 14 Days)</th>
-                            <th>Rental Duration (15+ Days)</th>
-                            <th>Standard Excess Liability</th>
-                        </tr>
+                        <tr><th>Vehicle Category & Description</th><th class="sto-col">Rental Duration (1 - 14 Days)</th><th class="rack-col">Rental Duration (1 - 14 Days) &mdash; Rack</th><th class="sto-col">Rental Duration (15+ Days)</th><th class="rack-col">Rental Duration (15+ Days) &mdash; Rack</th><th class="info-col">Standard Excess Liability</th></tr>
                     </thead>
-                    <tbody class="season-view low-season">
-                        <tr><td><strong>SUV 4x4</strong> (Toyota Fortuner or similar)</td><td class="price-highlight">N$ 1,650.00 / day</td><td>N$ 1,510.00 / day</td><td>Zero (Included)</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux D/C Auto</strong></td><td class="price-highlight">N$ 2,160.00 / day</td><td>N$ 1,940.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser D/C Manual</strong></td><td class="price-highlight">N$ 3,260.00 / day</td><td>N$ 2,930.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,360.00 / day</td><td>N$ 2,130.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,550.00 / day</td><td>N$ 2,325.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser D/C Manual (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,870.00 / day</td><td>N$ 2,590.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser D/C Manual (4 Pax Camping)</strong></td><td class="price-highlight">N$ 3,065.00 / day</td><td>N$ 2,760.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>Safari 4x4 6/7-Seater</strong> (4-Window Seats)</td><td class="price-highlight">N$ 3,440.00 / day</td><td>N$ 3,100.00 / day</td><td>N$ 10,000.00</td></tr>
-                        <tr><td><strong>Safari 4x4 9-Seater</strong> (6-Window Seats)</td><td class="price-highlight">N$ 3,870.00 / day</td><td>N$ 3,490.00 / day</td><td>N$ 10,000.00</td></tr>
-                        <tr><td><strong>Safari 4x4 11-Seater</strong> (8 Window Seats)</td><td class="price-highlight">N$ 4,260.00 / day</td><td>N$ 3,870.00 / day</td><td>N$ 14,000.00</td></tr>
+                    <tbody><tr class="season-band"><td colspan="6" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Low season · January – June</td></tr>
+                        <tr><td><strong>SUV 4x4</strong> (Toyota Fortuner or similar)</td><td class="price-highlight sto-col">N$ 1,650.00 / day</td><td class="rack-col">N$ 2,062.50 / day</td><td class="sto-col">N$ 1,510.00 / day</td><td class="rack-col">N$ 1,887.50 / day</td><td class="info-col">Zero (Included)</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto</strong></td><td class="price-highlight sto-col">N$ 2,160.00 / day</td><td class="rack-col">N$ 2,700.00 / day</td><td class="sto-col">N$ 1,940.00 / day</td><td class="rack-col">N$ 2,425.00 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual</strong></td><td class="price-highlight sto-col">N$ 3,260.00 / day</td><td class="rack-col">N$ 4,075.00 / day</td><td class="sto-col">N$ 2,930.00 / day</td><td class="rack-col">N$ 3,662.50 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,360.00 / day</td><td class="rack-col">N$ 2,950.00 / day</td><td class="sto-col">N$ 2,130.00 / day</td><td class="rack-col">N$ 2,662.50 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,550.00 / day</td><td class="rack-col">N$ 3,187.50 / day</td><td class="sto-col">N$ 2,325.00 / day</td><td class="rack-col">N$ 2,906.25 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,870.00 / day</td><td class="rack-col">N$ 3,587.50 / day</td><td class="sto-col">N$ 2,590.00 / day</td><td class="rack-col">N$ 3,237.50 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 3,065.00 / day</td><td class="rack-col">N$ 3,831.25 / day</td><td class="sto-col">N$ 2,760.00 / day</td><td class="rack-col">N$ 3,450.00 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 6/7-Seater</strong> (4-Window Seats)</td><td class="price-highlight sto-col">N$ 3,440.00 / day</td><td class="rack-col">N$ 4,300.00 / day</td><td class="sto-col">N$ 3,100.00 / day</td><td class="rack-col">N$ 3,875.00 / day</td><td class="info-col">N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 9-Seater</strong> (6-Window Seats)</td><td class="price-highlight sto-col">N$ 3,870.00 / day</td><td class="rack-col">N$ 4,837.50 / day</td><td class="sto-col">N$ 3,490.00 / day</td><td class="rack-col">N$ 4,362.50 / day</td><td class="info-col">N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 11-Seater</strong> (8 Window Seats)</td><td class="price-highlight sto-col">N$ 4,260.00 / day</td><td class="rack-col">N$ 5,325.00 / day</td><td class="sto-col">N$ 3,870.00 / day</td><td class="rack-col">N$ 4,837.50 / day</td><td class="info-col">N$ 14,000.00</td></tr>
                     </tbody>
-                    <tbody class="season-view high-season" style="display: none;">
-                        <tr><td><strong>SUV 4x4</strong> (Toyota Fortuner or similar)</td><td class="price-highlight">N$ 1,865.00 / day</td><td>N$ 1,690.00 / day</td><td>Zero (Included)</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux D/C Auto</strong></td><td class="price-highlight">N$ 2,520.00 / day</td><td>N$ 2,230.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser D/C Manual</strong></td><td class="price-highlight">N$ 3,745.00 / day</td><td>N$ 3,370.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,710.00 / day</td><td>N$ 2,420.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,905.00 / day</td><td>N$ 2,620.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser D/C Manual (2 Pax Camping)</strong></td><td class="price-highlight">N$ 3,300.00 / day</td><td>N$ 2,980.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser D/C Manual (4 Pax Camping)</strong></td><td class="price-highlight">N$ 3,520.00 / day</td><td>N$ 3,170.00 / day</td><td>N$ 7,000.00</td></tr>
-                        <tr><td><strong>Safari 4x4 6/7-Seater</strong> (4-Window Seats)</td><td class="price-highlight">N$ 3,970.00 / day</td><td>N$ 3,585.00 / day</td><td>N$ 10,000.00</td></tr>
-                        <tr><td><strong>Safari 4x4 9-Seater</strong> (6-Window Seats)</td><td class="price-highlight">N$ 4,505.00 / day</td><td>N$ 4,065.00 / day</td><td>N$ 10,000.00</td></tr>
-                        <tr><td><strong>Safari 4x4 11-Seater</strong> (8 Window Seats)</td><td class="price-highlight">N$ 4,890.00 / day</td><td>N$ 4,460.00 / day</td><td>N$ 14,000.00</td></tr>
+                    <tbody><tr class="season-band"><td colspan="6" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">High season · July – December</td></tr>
+                        <tr><td><strong>SUV 4x4</strong> (Toyota Fortuner or similar)</td><td class="price-highlight sto-col">N$ 1,865.00 / day</td><td class="rack-col">N$ 2,331.25 / day</td><td class="sto-col">N$ 1,690.00 / day</td><td class="rack-col">N$ 2,112.50 / day</td><td class="info-col">Zero (Included)</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto</strong></td><td class="price-highlight sto-col">N$ 2,520.00 / day</td><td class="rack-col">N$ 3,150.00 / day</td><td class="sto-col">N$ 2,230.00 / day</td><td class="rack-col">N$ 2,787.50 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual</strong></td><td class="price-highlight sto-col">N$ 3,745.00 / day</td><td class="rack-col">N$ 4,681.25 / day</td><td class="sto-col">N$ 3,370.00 / day</td><td class="rack-col">N$ 4,212.50 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,710.00 / day</td><td class="rack-col">N$ 3,387.50 / day</td><td class="sto-col">N$ 2,420.00 / day</td><td class="rack-col">N$ 3,025.00 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux D/C Auto (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,905.00 / day</td><td class="rack-col">N$ 3,631.25 / day</td><td class="sto-col">N$ 2,620.00 / day</td><td class="rack-col">N$ 3,275.00 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 3,300.00 / day</td><td class="rack-col">N$ 4,125.00 / day</td><td class="sto-col">N$ 2,980.00 / day</td><td class="rack-col">N$ 3,725.00 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser D/C Manual (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 3,520.00 / day</td><td class="rack-col">N$ 4,400.00 / day</td><td class="sto-col">N$ 3,170.00 / day</td><td class="rack-col">N$ 3,962.50 / day</td><td class="info-col">N$ 7,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 6/7-Seater</strong> (4-Window Seats)</td><td class="price-highlight sto-col">N$ 3,970.00 / day</td><td class="rack-col">N$ 4,962.50 / day</td><td class="sto-col">N$ 3,585.00 / day</td><td class="rack-col">N$ 4,481.25 / day</td><td class="info-col">N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 9-Seater</strong> (6-Window Seats)</td><td class="price-highlight sto-col">N$ 4,505.00 / day</td><td class="rack-col">N$ 5,631.25 / day</td><td class="sto-col">N$ 4,065.00 / day</td><td class="rack-col">N$ 5,081.25 / day</td><td class="info-col">N$ 10,000.00</td></tr>
+                        <tr><td><strong>Safari 4x4 11-Seater</strong> (8 Window Seats)</td><td class="price-highlight sto-col">N$ 4,890.00 / day</td><td class="rack-col">N$ 6,112.50 / day</td><td class="sto-col">N$ 4,460.00 / day</td><td class="rack-col">N$ 5,575.00 / day</td><td class="info-col">N$ 14,000.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -466,29 +460,23 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Vehicle Category</th>
-                            <th>5 - 7 Days</th>
-                            <th>8 - 14 Days</th>
-                            <th>15+ Days</th>
-                            <th>Waiver Option (Super Cover)</th>
-                        </tr>
+                        <tr><th>Vehicle Category</th><th class="sto-col">5 - 7 Days</th><th class="rack-col">5 - 7 Days &mdash; Rack</th><th class="sto-col">8 - 14 Days</th><th class="rack-col">8 - 14 Days &mdash; Rack</th><th class="sto-col">15+ Days</th><th class="rack-col">15+ Days &mdash; Rack</th><th class="info-col">Waiver Option (Super Cover)</th></tr>
                     </thead>
-                    <tbody class="season-view low-season">
-                        <tr><td><strong>4x4 Jeep</strong> (2 adults)</td><td class="price-highlight">N$ 1,086.00</td><td>N$ 1,005.00</td><td>N$ 950.00</td><td>+ N$ 250.00 / day</td></tr>
-                        <tr><td><strong>Toyota Fortuner 4x4</strong> (4 adults)</td><td class="price-highlight">N$ 2,467.00</td><td>N$ 2,282.00</td><td>N$ 2,159.00</td><td>+ N$ 550.00 / day</td></tr>
-                        <tr><td><strong>Group K Toyota Hilux 4x4 Double Cab</strong></td><td class="price-highlight">N$ 2,240.00</td><td>N$ 2,072.00</td><td>N$ 1,960.00</td><td>+ N$ 300.00 / day</td></tr>
-                        <tr><td><strong>Toyota Hilux 4x4 (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,416.00</td><td>N$ 2,248.00</td><td>N$ 2,136.00</td><td>+ N$ 300.00 / day</td></tr>
-                        <tr><td><strong>Toyota Hilux 4x4 (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,496.00</td><td>N$ 2,328.00</td><td>N$ 2,216.00</td><td>+ N$ 300.00 / day</td></tr>
-                        <tr><td><strong>Group O Land Cruiser 79 Series 4x4 Camping</strong></td><td class="price-highlight">N$ 2,936.00</td><td>N$ 2,741.00</td><td>N$ 2,611.00</td><td>+ N$ 300.00 / day</td></tr>
+                    <tbody><tr class="season-band"><td colspan="8" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Low season · January – June</td></tr>
+                        <tr><td><strong>4x4 Jeep</strong> (2 adults)</td><td class="price-highlight sto-col">N$ 1,086.00</td><td class="rack-col">N$ 1,357.50</td><td class="sto-col">N$ 1,005.00</td><td class="rack-col">N$ 1,256.25</td><td class="sto-col">N$ 950.00</td><td class="rack-col">N$ 1,187.50</td><td class="info-col">+ N$ 250.00 / day</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong> (4 adults)</td><td class="price-highlight sto-col">N$ 2,467.00</td><td class="rack-col">N$ 3,083.75</td><td class="sto-col">N$ 2,282.00</td><td class="rack-col">N$ 2,852.50</td><td class="sto-col">N$ 2,159.00</td><td class="rack-col">N$ 2,698.75</td><td class="info-col">+ N$ 550.00 / day</td></tr>
+                        <tr><td><strong>Group K Toyota Hilux 4x4 Double Cab</strong></td><td class="price-highlight sto-col">N$ 2,240.00</td><td class="rack-col">N$ 2,800.00</td><td class="sto-col">N$ 2,072.00</td><td class="rack-col">N$ 2,590.00</td><td class="sto-col">N$ 1,960.00</td><td class="rack-col">N$ 2,450.00</td><td class="info-col">+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td><td class="sto-col">N$ 2,248.00</td><td class="rack-col">N$ 2,810.00</td><td class="sto-col">N$ 2,136.00</td><td class="rack-col">N$ 2,670.00</td><td class="info-col">+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,496.00</td><td class="rack-col">N$ 3,120.00</td><td class="sto-col">N$ 2,328.00</td><td class="rack-col">N$ 2,910.00</td><td class="sto-col">N$ 2,216.00</td><td class="rack-col">N$ 2,770.00</td><td class="info-col">+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Group O Land Cruiser 79 Series 4x4 Camping</strong></td><td class="price-highlight sto-col">N$ 2,936.00</td><td class="rack-col">N$ 3,670.00</td><td class="sto-col">N$ 2,741.00</td><td class="rack-col">N$ 3,426.25</td><td class="sto-col">N$ 2,611.00</td><td class="rack-col">N$ 3,263.75</td><td class="info-col">+ N$ 300.00 / day</td></tr>
                     </tbody>
-                    <tbody class="season-view high-season" style="display: none;">
-                        <tr><td><strong>4x4 Jeep</strong> (2 adults)</td><td class="price-highlight">N$ 1,262.00</td><td>N$ 1,181.00</td><td>N$ 1,126.00</td><td>+ N$ 250.00 / day</td></tr>
-                        <tr><td><strong>Toyota Fortuner 4x4</strong> (4 adults)</td><td class="price-highlight">N$ 2,896.00</td><td>N$ 2,704.00</td><td>N$ 2,576.00</td><td>+ N$ 550.00 / day</td></tr>
-                        <tr><td><strong>Group K Toyota Hilux 4x4 Double Cab</strong></td><td class="price-highlight">N$ 2,576.00</td><td>N$ 2,396.00</td><td>N$ 2,276.00</td><td>+ N$ 300.00 / day</td></tr>
-                        <tr><td><strong>Toyota Hilux 4x4 (2 Pax Camping)</strong></td><td class="price-highlight">N$ 2,896.00</td><td>N$ 2,704.00</td><td>N$ 2,576.00</td><td>+ N$ 300.00 / day</td></tr>
-                        <tr><td><strong>Toyota Hilux 4x4 (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,896.00</td><td>N$ 2,704.00</td><td>N$ 2,576.00</td><td>+ N$ 300.00 / day</td></tr>
-                        <tr><td><strong>Group O Land Cruiser 79 Series 4x4 Camping</strong></td><td class="price-highlight">N$ 3,300.00</td><td>N$ 2,980.00</td><td>N$ 2,870.00</td><td>+ N$ 300.00 / day</td></tr>
+                    <tbody><tr class="season-band"><td colspan="8" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">High season · July – December</td></tr>
+                        <tr><td><strong>4x4 Jeep</strong> (2 adults)</td><td class="price-highlight sto-col">N$ 1,262.00</td><td class="rack-col">N$ 1,577.50</td><td class="sto-col">N$ 1,181.00</td><td class="rack-col">N$ 1,476.25</td><td class="sto-col">N$ 1,126.00</td><td class="rack-col">N$ 1,407.50</td><td class="info-col">+ N$ 250.00 / day</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong> (4 adults)</td><td class="price-highlight sto-col">N$ 2,896.00</td><td class="rack-col">N$ 3,620.00</td><td class="sto-col">N$ 2,704.00</td><td class="rack-col">N$ 3,380.00</td><td class="sto-col">N$ 2,576.00</td><td class="rack-col">N$ 3,220.00</td><td class="info-col">+ N$ 550.00 / day</td></tr>
+                        <tr><td><strong>Group K Toyota Hilux 4x4 Double Cab</strong></td><td class="price-highlight sto-col">N$ 2,576.00</td><td class="rack-col">N$ 3,220.00</td><td class="sto-col">N$ 2,396.00</td><td class="rack-col">N$ 2,995.00</td><td class="sto-col">N$ 2,276.00</td><td class="rack-col">N$ 2,845.00</td><td class="info-col">+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,896.00</td><td class="rack-col">N$ 3,620.00</td><td class="sto-col">N$ 2,704.00</td><td class="rack-col">N$ 3,380.00</td><td class="sto-col">N$ 2,576.00</td><td class="rack-col">N$ 3,220.00</td><td class="info-col">+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux 4x4 (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,896.00</td><td class="rack-col">N$ 3,620.00</td><td class="sto-col">N$ 2,704.00</td><td class="rack-col">N$ 3,380.00</td><td class="sto-col">N$ 2,576.00</td><td class="rack-col">N$ 3,220.00</td><td class="info-col">+ N$ 300.00 / day</td></tr>
+                        <tr><td><strong>Group O Land Cruiser 79 Series 4x4 Camping</strong></td><td class="price-highlight sto-col">N$ 3,300.00</td><td class="rack-col">N$ 4,125.00</td><td class="sto-col">N$ 2,980.00</td><td class="rack-col">N$ 3,725.00</td><td class="sto-col">N$ 2,870.00</td><td class="rack-col">N$ 3,587.50</td><td class="info-col">+ N$ 300.00 / day</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -535,25 +523,17 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Vehicle Model &amp; Equipment</th>
-                            <th>Low STO (1–15 days)</th>
-                            <th>Low Rack (1–15 days)</th>
-                            <th>High STO (1–15 days)</th>
-                            <th>High Rack (1–15 days)</th>
-                            <th>Low STO (16+ days)</th>
-                            <th>High STO (16+ days)</th>
-                        </tr>
+                        <tr><th>Vehicle Model &amp; Equipment</th><th class="sto-col">Low STO (1–15 days)</th><th class="rack-col">Low Rack (1–15 days)</th><th class="sto-col">High STO (1–15 days)</th><th class="rack-col">High Rack (1–15 days)</th><th class="sto-col">Low STO (16+ days)</th><th class="rack-col">Low Rack (16+ days)</th><th class="sto-col">High STO (16+ days)</th><th class="rack-col">High Rack (16+ days)</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>4x4 Toyota Fortuner (2023–2025) — Automatic, non-camping</strong></td><td class="price-highlight">N$ 2,288.00</td><td>N$ 2,860.00</td><td class="price-highlight">N$ 2,520.00</td><td>N$ 3,150.00</td><td>N$ 2,188.00</td><td>N$ 2,416.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 (2022–2025) — Automatic, non-camping</strong></td><td class="price-highlight">N$ 1,756.00</td><td>N$ 2,195.00</td><td class="price-highlight">N$ 1,976.00</td><td>N$ 2,470.00</td><td>N$ 1,656.00</td><td>N$ 1,876.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 2 pax</strong></td><td class="price-highlight">N$ 1,868.00</td><td>N$ 2,335.00</td><td class="price-highlight">N$ 2,088.00</td><td>N$ 2,610.00</td><td>N$ 1,764.00</td><td>N$ 1,988.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 4 pax</strong></td><td class="price-highlight">N$ 1,976.00</td><td>N$ 2,470.00</td><td class="price-highlight">N$ 2,204.00</td><td>N$ 2,755.00</td><td>N$ 1,876.00</td><td>N$ 2,104.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 (2024) — Automatic, non-camping</strong></td><td class="price-highlight">N$ 2,124.00</td><td>N$ 2,655.00</td><td class="price-highlight">N$ 2,232.00</td><td>N$ 2,790.00</td><td>N$ 2,024.00</td><td>N$ 2,132.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 2 pax</strong></td><td class="price-highlight">N$ 2,264.00</td><td>N$ 2,830.00</td><td class="price-highlight">N$ 2,376.00</td><td>N$ 2,970.00</td><td>N$ 2,164.00</td><td>N$ 2,276.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 4 pax</strong></td><td class="price-highlight">N$ 2,404.00</td><td>N$ 3,005.00</td><td class="price-highlight">N$ 2,524.00</td><td>N$ 3,155.00</td><td>N$ 2,300.00</td><td>N$ 2,420.00</td></tr>
-                        <tr><td><strong>4x4 Cruiser Safari 6-window seater — Manual (2019), C1 licence required</strong></td><td class="price-highlight">N$ 4,232.00</td><td>N$ 5,290.00</td><td class="price-highlight">N$ 4,712.00</td><td>N$ 5,890.00</td><td>N$ 4,132.00</td><td>N$ 4,612.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Fortuner (2023–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,288.00</td><td class="rack-col">N$ 2,860.00</td><td class="price-highlight sto-col">N$ 2,520.00</td><td class="rack-col">N$ 3,150.00</td><td class="sto-col">N$ 2,188.00</td><td class="rack-col">N$ 2,735.00</td><td class="sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 (2022–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 1,756.00</td><td class="rack-col">N$ 2,195.00</td><td class="price-highlight sto-col">N$ 1,976.00</td><td class="rack-col">N$ 2,470.00</td><td class="sto-col">N$ 1,656.00</td><td class="rack-col">N$ 2,070.00</td><td class="sto-col">N$ 1,876.00</td><td class="rack-col">N$ 2,345.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 1,868.00</td><td class="rack-col">N$ 2,335.00</td><td class="price-highlight sto-col">N$ 2,088.00</td><td class="rack-col">N$ 2,610.00</td><td class="sto-col">N$ 1,764.00</td><td class="rack-col">N$ 2,205.00</td><td class="sto-col">N$ 1,988.00</td><td class="rack-col">N$ 2,485.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 1,976.00</td><td class="rack-col">N$ 2,470.00</td><td class="price-highlight sto-col">N$ 2,204.00</td><td class="rack-col">N$ 2,755.00</td><td class="sto-col">N$ 1,876.00</td><td class="rack-col">N$ 2,345.00</td><td class="sto-col">N$ 2,104.00</td><td class="rack-col">N$ 2,630.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 (2024) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,124.00</td><td class="rack-col">N$ 2,655.00</td><td class="price-highlight sto-col">N$ 2,232.00</td><td class="rack-col">N$ 2,790.00</td><td class="sto-col">N$ 2,024.00</td><td class="rack-col">N$ 2,530.00</td><td class="sto-col">N$ 2,132.00</td><td class="rack-col">N$ 2,665.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 2,264.00</td><td class="rack-col">N$ 2,830.00</td><td class="price-highlight sto-col">N$ 2,376.00</td><td class="rack-col">N$ 2,970.00</td><td class="sto-col">N$ 2,164.00</td><td class="rack-col">N$ 2,705.00</td><td class="sto-col">N$ 2,276.00</td><td class="rack-col">N$ 2,845.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 2,404.00</td><td class="rack-col">N$ 3,005.00</td><td class="price-highlight sto-col">N$ 2,524.00</td><td class="rack-col">N$ 3,155.00</td><td class="sto-col">N$ 2,300.00</td><td class="rack-col">N$ 2,875.00</td><td class="sto-col">N$ 2,420.00</td><td class="rack-col">N$ 3,025.00</td></tr>
+                        <tr><td><strong>4x4 Cruiser Safari 6-window seater — Manual (2019), C1 licence required</strong></td><td class="price-highlight sto-col">N$ 4,232.00</td><td class="rack-col">N$ 5,290.00</td><td class="price-highlight sto-col">N$ 4,712.00</td><td class="rack-col">N$ 5,890.00</td><td class="sto-col">N$ 4,132.00</td><td class="rack-col">N$ 5,165.00</td><td class="sto-col">N$ 4,612.00</td><td class="rack-col">N$ 5,765.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -599,18 +579,12 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Vehicle Model & Spec</th>
-                            <th>Low Season (1-14 Days)</th>
-                            <th>Low Season (15+ Days)</th>
-                            <th>High Season (1-14 Days)</th>
-                            <th>High Season (15+ Days)</th>
-                        </tr>
+                        <tr><th>Vehicle Model & Spec</th><th class="sto-col">Low Season (1-14 Days)</th><th class="rack-col">Low Season (1-14 Days) &mdash; Rack</th><th class="sto-col">Low Season (15+ Days)</th><th class="rack-col">Low Season (15+ Days) &mdash; Rack</th><th class="sto-col">High Season (1-14 Days)</th><th class="rack-col">High Season (1-14 Days) &mdash; Rack</th><th class="sto-col">High Season (15+ Days)</th><th class="rack-col">High Season (15+ Days) &mdash; Rack</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 2,060.00</td><td>N$ 1,996.00</td><td>N$ 2,416.00</td><td>N$ 2,384.00</td></tr>
-                        <tr><td><strong>Toyota Hilux D/C 4x4 Fully Equipped</strong></td><td class="price-highlight">N$ 2,236.00</td><td>N$ 2,164.00</td><td>N$ 3,020.00</td><td>N$ 2,988.00</td></tr>
-                        <tr><td><strong>Toyota Land Cruiser D/C 4x4 Fully Equipped</strong></td><td class="price-highlight">N$ 2,640.00</td><td>N$ 2,552.00</td><td>N$ 3,412.00</td><td>N$ 3,376.00</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight sto-col">N$ 2,060.00</td><td class="rack-col">N$ 2,575.00</td><td class="sto-col">N$ 1,996.00</td><td class="rack-col">N$ 2,495.00</td><td class="sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td><td class="sto-col">N$ 2,384.00</td><td class="rack-col">N$ 2,980.00</td></tr>
+                        <tr><td><strong>Toyota Hilux D/C 4x4 Fully Equipped</strong></td><td class="price-highlight sto-col">N$ 2,236.00</td><td class="rack-col">N$ 2,795.00</td><td class="sto-col">N$ 2,164.00</td><td class="rack-col">N$ 2,705.00</td><td class="sto-col">N$ 3,020.00</td><td class="rack-col">N$ 3,775.00</td><td class="sto-col">N$ 2,988.00</td><td class="rack-col">N$ 3,735.00</td></tr>
+                        <tr><td><strong>Toyota Land Cruiser D/C 4x4 Fully Equipped</strong></td><td class="price-highlight sto-col">N$ 2,640.00</td><td class="rack-col">N$ 3,300.00</td><td class="sto-col">N$ 2,552.00</td><td class="rack-col">N$ 3,190.00</td><td class="sto-col">N$ 3,412.00</td><td class="rack-col">N$ 4,265.00</td><td class="sto-col">N$ 3,376.00</td><td class="rack-col">N$ 4,220.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -657,18 +631,13 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Heavy Duty Group Vehicle</th>
-                            <th>Low Season STO Rate</th>
-                            <th>High Season STO Rate</th>
-                            <th>Car Wash Fee (Daily)</th>
-                        </tr>
+                        <tr><th>Heavy Duty Group Vehicle</th><th class="sto-col">Low Season STO Rate</th><th class="sto-col">High Season STO Rate</th><th class="info-col">Car Wash Fee (Daily)</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Land Cruiser 9-Seater</strong> (Custom Safari chassis)</td><td class="price-highlight">N$ 4,505.00 / day</td><td>N$ 4,700.00 / day</td><td>N$ 65.00</td></tr>
-                        <tr><td><strong>Iveco 4x4 14-Seater</strong> (Off-road group bus)</td><td class="price-highlight">N$ 6,475.00 / day</td><td>N$ 6,780.00 / day</td><td>N$ 80.00</td></tr>
-                        <tr><td><strong>13-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight">N$ 5,980.00 / day</td><td>N$ 5,980.00 / day</td><td>N$ 80.00</td></tr>
-                        <tr><td><strong>18-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight">N$ 6,355.00 / day</td><td>N$ 6,680.00 / day</td><td>N$ 80.00</td></tr>
+                        <tr><td><strong>Land Cruiser 9-Seater</strong> (Custom Safari chassis)</td><td class="price-highlight sto-col">N$ 4,505.00 / day</td><td class="sto-col">N$ 4,700.00 / day</td><td class="info-col">N$ 65.00</td></tr>
+                        <tr><td><strong>Iveco 4x4 14-Seater</strong> (Off-road group bus)</td><td class="price-highlight sto-col">N$ 6,475.00 / day</td><td class="sto-col">N$ 6,780.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr><td><strong>13-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight sto-col">N$ 5,980.00 / day</td><td class="sto-col">N$ 5,980.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr><td><strong>18-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight sto-col">N$ 6,355.00 / day</td><td class="sto-col">N$ 6,680.00 / day</td><td class="info-col">N$ 80.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -710,18 +679,13 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Vehicle & Camping Package (2025/2026 Fallback)</th>
-                            <th>6 - 14 Days</th>
-                            <th>15+ Days</th>
-                            <th>Waiver Option (Zero Excess)</th>
-                        </tr>
+                        <tr><th>Vehicle & Camping Package (2025/2026 Fallback)</th><th class="sto-col">6 - 14 Days</th><th class="rack-col">6 - 14 Days &mdash; Rack</th><th class="sto-col">15+ Days</th><th class="rack-col">15+ Days &mdash; Rack</th><th class="info-col">Waiver Option (Zero Excess)</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Toyota Hilux GD6 D/C Standard</strong></td><td class="price-highlight">N$ 1,642.00</td><td>N$ 1,534.00</td><td>+ N$ 590.00 / day</td></tr>
-                        <tr><td><strong>Toyota Hilux GD6 D/C (2 Pax Camping)</strong></td><td class="price-highlight">N$ 1,869.00</td><td>N$ 1,802.00</td><td>+ N$ 590.00 / day</td></tr>
-                        <tr><td><strong>Toyota Hilux GD6 D/C (4 Pax Camping)</strong></td><td class="price-highlight">N$ 2,027.00</td><td>N$ 1,896.00</td><td>+ N$ 590.00 / day</td></tr>
-                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight">N$ 1,857.00</td><td>N$ 1,534.00</td><td>+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux GD6 D/C Standard</strong></td><td class="price-highlight sto-col">N$ 1,642.00</td><td class="rack-col">N$ 2,052.50</td><td class="sto-col">N$ 1,534.00</td><td class="rack-col">N$ 1,917.50</td><td class="info-col">+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux GD6 D/C (2 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 1,869.00</td><td class="rack-col">N$ 2,336.25</td><td class="sto-col">N$ 1,802.00</td><td class="rack-col">N$ 2,252.50</td><td class="info-col">+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Hilux GD6 D/C (4 Pax Camping)</strong></td><td class="price-highlight sto-col">N$ 2,027.00</td><td class="rack-col">N$ 2,533.75</td><td class="sto-col">N$ 1,896.00</td><td class="rack-col">N$ 2,370.00</td><td class="info-col">+ N$ 590.00 / day</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight sto-col">N$ 1,857.00</td><td class="rack-col">N$ 2,321.25</td><td class="sto-col">N$ 1,534.00</td><td class="rack-col">N$ 1,917.50</td><td class="info-col">+ N$ 590.00 / day</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -749,29 +713,20 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th rowspan="2">Vehicle</th>
-                            <th colspan="3">1&ndash;7 days</th>
-                            <th colspan="3">8&ndash;14 days</th>
-                            <th colspan="3">15+ days</th>
-                        </tr>
-                        <tr>
-                            <th>Off</th><th>Mid</th><th>High</th>
-                            <th>Off</th><th>Mid</th><th>High</th>
-                            <th>Off</th><th>Mid</th><th>High</th>
-                        </tr>
+                        <tr><th rowspan="2">Vehicle</th><th colspan="3" class="rack-col">1&ndash;7 days</th><th colspan="3" class="rack-col">8&ndash;14 days</th><th colspan="3" class="rack-col">15+ days</th></tr>
+                        <tr><th>Off</th><th class="rack-col">Mid</th><th class="rack-col">High</th><th class="rack-col">Off</th><th class="rack-col">Mid</th><th class="rack-col">High</th><th class="rack-col">Off</th><th class="rack-col">Mid</th><th class="rack-col">High</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)</strong></td><td>N$ 1,714.65</td><td>N$ 1,905.75</td><td>N$ 2,425.50</td><td>N$ 1,587.60</td><td>N$ 1,778.70</td><td>N$ 2,194.50</td><td>N$ 1,524.60</td><td>N$ 1,651.65</td><td>N$ 2,021.25</td></tr>
-                        <tr><td><strong>2.8 Double Cab — non-camping (Toyota, automatic)</strong></td><td>N$ 2,038.05</td><td>N$ 2,248.05</td><td>N$ 2,787.75</td><td>N$ 1,899.45</td><td>N$ 2,108.40</td><td>N$ 2,556.75</td><td>N$ 1,829.10</td><td>N$ 1,968.75</td><td>N$ 2,362.50</td></tr>
-                        <tr><td><strong>7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)</strong></td><td>N$ 3,465.00</td><td>N$ 4,095.00</td><td>N$ 4,515.00</td><td>N$ 3,360.00</td><td>N$ 3,990.00</td><td>N$ 4,410.00</td><td>N$ 3,255.00</td><td>N$ 3,885.00</td><td>N$ 4,200.00</td></tr>
-                        <tr><td><strong>Toyota Fortuner — automatic</strong></td><td>N$ 1,714.65</td><td>N$ 1,905.75</td><td>N$ 2,257.50</td><td>N$ 1,651.65</td><td>N$ 1,778.70</td><td>N$ 2,130.45</td><td>N$ 1,587.60</td><td>N$ 1,651.65</td><td>N$ 2,003.40</td></tr>
-                        <tr><td><strong>Suzuki Jimny — automatic</strong></td><td>N$ 1,587.60</td><td>N$ 1,587.60</td><td>N$ 1,714.65</td><td>N$ 1,524.60</td><td>N$ 1,524.60</td><td>N$ 1,651.65</td><td>N$ 1,460.55</td><td>N$ 1,460.55</td><td>N$ 1,587.60</td></tr>
-                        <tr><td><strong>2.4 Double Cab — camping, 2 pax</strong></td><td>N$ 1,778.70</td><td>N$ 2,032.80</td><td>N$ 2,714.25</td><td>N$ 1,691.55</td><td>N$ 1,905.75</td><td>N$ 2,610.30</td><td>N$ 1,570.80</td><td>N$ 1,778.70</td><td>N$ 2,367.75</td></tr>
-                        <tr><td><strong>2.8 Double Cab — camping, 2 pax</strong></td><td>N$ 2,108.40</td><td>N$ 2,387.70</td><td>N$ 3,123.75</td><td>N$ 2,011.80</td><td>N$ 2,248.05</td><td>N$ 3,008.25</td><td>N$ 1,877.40</td><td>N$ 2,108.40</td><td>N$ 2,493.75</td></tr>
-                        <tr><td><strong>2.4 Double Cab — camping, 4 pax</strong></td><td>N$ 1,930.95</td><td>N$ 2,159.85</td><td>N$ 2,772.00</td><td>N$ 1,803.90</td><td>N$ 2,032.80</td><td>N$ 2,702.70</td><td>N$ 1,676.85</td><td>N$ 1,905.75</td><td>N$ 2,483.25</td></tr>
-                        <tr><td><strong>2.8 Double Cab — camping, 4 pax</strong></td><td>N$ 2,277.45</td><td>N$ 2,541.00</td><td>N$ 3,187.80</td><td>N$ 2,136.75</td><td>N$ 2,387.70</td><td>N$ 3,112.20</td><td>N$ 2,011.80</td><td>N$ 2,248.05</td><td>N$ 2,870.70</td></tr>
-                        <tr><td><strong>7-Seater Land Cruiser — camping, 2–7 pax (fridge included)</strong></td><td>N$ 3,885.00</td><td>N$ 4,410.00</td><td>N$ 5,040.00</td><td>N$ 3,780.00</td><td>N$ 4,305.00</td><td>N$ 4,935.00</td><td>N$ 3,675.00</td><td>N$ 4,200.00</td><td>N$ 4,830.00</td></tr>
+                        <tr><td><strong>2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,425.50</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,194.50</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 2,021.25</td></tr>
+                        <tr><td><strong>2.8 Double Cab — non-camping (Toyota, automatic)</strong></td><td class="rack-col">N$ 2,038.05</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 2,787.75</td><td class="rack-col">N$ 1,899.45</td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,556.75</td><td class="rack-col">N$ 1,829.10</td><td class="rack-col">N$ 1,968.75</td><td class="rack-col">N$ 2,362.50</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)</strong></td><td class="rack-col">N$ 3,465.00</td><td class="rack-col">N$ 4,095.00</td><td class="rack-col">N$ 4,515.00</td><td class="rack-col">N$ 3,360.00</td><td class="rack-col">N$ 3,990.00</td><td class="rack-col">N$ 4,410.00</td><td class="rack-col">N$ 3,255.00</td><td class="rack-col">N$ 3,885.00</td><td class="rack-col">N$ 4,200.00</td></tr>
+                        <tr><td><strong>Toyota Fortuner — automatic</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,257.50</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,130.45</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 2,003.40</td></tr>
+                        <tr><td><strong>Suzuki Jimny — automatic</strong></td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 1,460.55</td><td class="rack-col">N$ 1,460.55</td><td class="rack-col">N$ 1,587.60</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,032.80</td><td class="rack-col">N$ 2,714.25</td><td class="rack-col">N$ 1,691.55</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,610.30</td><td class="rack-col">N$ 1,570.80</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,367.75</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,387.70</td><td class="rack-col">N$ 3,123.75</td><td class="rack-col">N$ 2,011.80</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 3,008.25</td><td class="rack-col">N$ 1,877.40</td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,493.75</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 1,930.95</td><td class="rack-col">N$ 2,159.85</td><td class="rack-col">N$ 2,772.00</td><td class="rack-col">N$ 1,803.90</td><td class="rack-col">N$ 2,032.80</td><td class="rack-col">N$ 2,702.70</td><td class="rack-col">N$ 1,676.85</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,483.25</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 2,277.45</td><td class="rack-col">N$ 2,541.00</td><td class="rack-col">N$ 3,187.80</td><td class="rack-col">N$ 2,136.75</td><td class="rack-col">N$ 2,387.70</td><td class="rack-col">N$ 3,112.20</td><td class="rack-col">N$ 2,011.80</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 2,870.70</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — camping, 2–7 pax (fridge included)</strong></td><td class="rack-col">N$ 3,885.00</td><td class="rack-col">N$ 4,410.00</td><td class="rack-col">N$ 5,040.00</td><td class="rack-col">N$ 3,780.00</td><td class="rack-col">N$ 4,305.00</td><td class="rack-col">N$ 4,935.00</td><td class="rack-col">N$ 3,675.00</td><td class="rack-col">N$ 4,200.00</td><td class="rack-col">N$ 4,830.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -817,19 +772,19 @@ document.addEventListener('DOMContentLoaded',function(){
             <h3>Low season (January &ndash; June 2026)</h3>
             <div class="table-responsive">
                 <table>
-                    <thead><tr><th>Group &amp; Vehicle</th><th>STO 3&ndash;7 d</th><th>STO 8&ndash;14 d</th><th>STO 15+ d</th><th>Rack 3&ndash;7 d</th><th>Rack 8&ndash;14 d</th><th>Rack 15+ d</th></tr></thead>
+                    <thead><tr><th>Group &amp; Vehicle</th><th class="sto-col">STO 3&ndash;7 d</th><th class="sto-col">STO 8&ndash;14 d</th><th class="sto-col">STO 15+ d</th><th class="rack-col">Rack 3&ndash;7 d</th><th class="rack-col">Rack 8&ndash;14 d</th><th class="rack-col">Rack 15+ d</th></tr></thead>
                     <tbody>
-                        <tr><td><strong>A+</strong> &mdash; Toyota Agya AT or similar<br><small>Km charge N$ 2.30 · standard excess N$ 18,000.00</small></td><td class="price-highlight">N$ 520.00</td><td>N$ 476.00</td><td>N$ 436.00</td><td class="price-highlight">N$ 650.00</td><td>N$ 595.00</td><td>N$ 545.00</td></tr>
-                        <tr><td><strong>B</strong> &mdash; Volkswagen Polo Vivo MT or similar<br><small>Km charge N$ 3.34 · standard excess N$ 22,000.00</small></td><td class="price-highlight">N$ 584.00</td><td>N$ 520.00</td><td>N$ 476.00</td><td class="price-highlight">N$ 730.00</td><td>N$ 650.00</td><td>N$ 595.00</td></tr>
-                        <tr><td><strong>B+</strong> &mdash; Toyota Starlet AT or similar<br><small>Km charge N$ 3.34 · standard excess N$ 23,000.00</small></td><td class="price-highlight">N$ 628.00</td><td>N$ 588.00</td><td>N$ 548.00</td><td class="price-highlight">N$ 785.00</td><td>N$ 735.00</td><td>N$ 685.00</td></tr>
-                        <tr><td><strong>TX</strong> &mdash; Single Cab 4x4 Nissan Navara MT or similar<br><small>Km charge N$ 5.29 · standard excess N$ 45,000.00</small></td><td class="price-highlight">N$ 1,296.00</td><td>N$ 1,239.20</td><td>N$ 1,168.00</td><td class="price-highlight">N$ 1,620.00</td><td>N$ 1,549.00</td><td>N$ 1,460.00</td></tr>
-                        <tr><td><strong>TDX</strong> &mdash; Double Cab 4x4 Toyota Hilux MT or similar<br><small>Km charge N$ 5.52 · standard excess N$ 62,000.00</small></td><td class="price-highlight">N$ 1,504.00</td><td>N$ 1,448.00</td><td>N$ 1,376.00</td><td class="price-highlight">N$ 1,880.00</td><td>N$ 1,810.00</td><td>N$ 1,720.00</td></tr>
-                        <tr><td><strong>TDX+</strong> &mdash; Double Cab 4x4 Toyota Hilux AT or similar<br><small>Km charge N$ 5.52 · standard excess N$ 65,000.00</small></td><td class="price-highlight">N$ 1,600.00</td><td>N$ 1,544.00</td><td>N$ 1,472.00</td><td class="price-highlight">N$ 2,000.00</td><td>N$ 1,930.00</td><td>N$ 1,840.00</td></tr>
-                        <tr><td><strong>N+</strong> &mdash; Toyota Corolla Cross AT or similar<br><small>Km charge N$ 4.37 · standard excess N$ 35,000.00</small></td><td class="price-highlight">N$ 880.00</td><td>N$ 800.00</td><td>N$ 720.00</td><td class="price-highlight">N$ 1,100.00</td><td>N$ 1,000.00</td><td>N$ 900.00</td></tr>
-                        <tr><td><strong>M+</strong> &mdash; Suzuki Jimny 5-door 4x4 AT<br><small>Km charge N$ 4.37 · standard excess N$ 45,000.00</small></td><td class="price-highlight">N$ 1,184.00</td><td>N$ 1,080.00</td><td>N$ 1,080.00</td><td class="price-highlight">N$ 1,480.00</td><td>N$ 1,350.00</td><td>N$ 1,350.00</td></tr>
-                        <tr><td><strong>MX+</strong> &mdash; SUV 4x4 Toyota Fortuner AT or similar<br><small>Km charge N$ 5.75 · standard excess N$ 73,000.00</small></td><td class="price-highlight">N$ 1,728.00</td><td>N$ 1,656.00</td><td>N$ 1,552.00</td><td class="price-highlight">N$ 2,160.00</td><td>N$ 2,070.00</td><td>N$ 1,940.00</td></tr>
-                        <tr><td><strong>X</strong> &mdash; Double Cab 4x4 Toyota Land Cruiser 79 MT or similar<br><small>Km charge N$ 5.75 · standard excess N$ 78,000.00</small></td><td class="price-highlight">N$ 1,904.00</td><td>N$ 1,800.27</td><td>N$ 1,752.00</td><td class="price-highlight">N$ 2,380.00</td><td>N$ 2,250.34</td><td>N$ 2,190.00</td></tr>
-                        <tr><td><strong>QX</strong> &mdash; Safari 4-window 4x4 Nissan Patrol 7-seater<br><small>Km charge N$ 9.20 · standard excess N$ 78,000.00</small></td><td class="price-highlight">N$ 2,712.00</td><td>N$ 2,712.00</td><td>N$ 2,712.00</td><td class="price-highlight">N$ 3,390.00</td><td>N$ 3,390.00</td><td>N$ 3,390.00</td></tr>
+                        <tr><td><strong>A+</strong> &mdash; Toyota Agya AT or similar<br><small>Km charge N$ 2.30 · standard excess N$ 18,000.00</small></td><td class="price-highlight sto-col">N$ 520.00</td><td class="sto-col">N$ 476.00</td><td class="sto-col">N$ 436.00</td><td class="price-highlight rack-col">N$ 650.00</td><td class="rack-col">N$ 595.00</td><td class="rack-col">N$ 545.00</td></tr>
+                        <tr><td><strong>B</strong> &mdash; Volkswagen Polo Vivo MT or similar<br><small>Km charge N$ 3.34 · standard excess N$ 22,000.00</small></td><td class="price-highlight sto-col">N$ 584.00</td><td class="sto-col">N$ 520.00</td><td class="sto-col">N$ 476.00</td><td class="price-highlight rack-col">N$ 730.00</td><td class="rack-col">N$ 650.00</td><td class="rack-col">N$ 595.00</td></tr>
+                        <tr><td><strong>B+</strong> &mdash; Toyota Starlet AT or similar<br><small>Km charge N$ 3.34 · standard excess N$ 23,000.00</small></td><td class="price-highlight sto-col">N$ 628.00</td><td class="sto-col">N$ 588.00</td><td class="sto-col">N$ 548.00</td><td class="price-highlight rack-col">N$ 785.00</td><td class="rack-col">N$ 735.00</td><td class="rack-col">N$ 685.00</td></tr>
+                        <tr><td><strong>TX</strong> &mdash; Single Cab 4x4 Nissan Navara MT or similar<br><small>Km charge N$ 5.29 · standard excess N$ 45,000.00</small></td><td class="price-highlight sto-col">N$ 1,296.00</td><td class="sto-col">N$ 1,239.20</td><td class="sto-col">N$ 1,168.00</td><td class="price-highlight rack-col">N$ 1,620.00</td><td class="rack-col">N$ 1,549.00</td><td class="rack-col">N$ 1,460.00</td></tr>
+                        <tr><td><strong>TDX</strong> &mdash; Double Cab 4x4 Toyota Hilux MT or similar<br><small>Km charge N$ 5.52 · standard excess N$ 62,000.00</small></td><td class="price-highlight sto-col">N$ 1,504.00</td><td class="sto-col">N$ 1,448.00</td><td class="sto-col">N$ 1,376.00</td><td class="price-highlight rack-col">N$ 1,880.00</td><td class="rack-col">N$ 1,810.00</td><td class="rack-col">N$ 1,720.00</td></tr>
+                        <tr><td><strong>TDX+</strong> &mdash; Double Cab 4x4 Toyota Hilux AT or similar<br><small>Km charge N$ 5.52 · standard excess N$ 65,000.00</small></td><td class="price-highlight sto-col">N$ 1,600.00</td><td class="sto-col">N$ 1,544.00</td><td class="sto-col">N$ 1,472.00</td><td class="price-highlight rack-col">N$ 2,000.00</td><td class="rack-col">N$ 1,930.00</td><td class="rack-col">N$ 1,840.00</td></tr>
+                        <tr><td><strong>N+</strong> &mdash; Toyota Corolla Cross AT or similar<br><small>Km charge N$ 4.37 · standard excess N$ 35,000.00</small></td><td class="price-highlight sto-col">N$ 880.00</td><td class="sto-col">N$ 800.00</td><td class="sto-col">N$ 720.00</td><td class="price-highlight rack-col">N$ 1,100.00</td><td class="rack-col">N$ 1,000.00</td><td class="rack-col">N$ 900.00</td></tr>
+                        <tr><td><strong>M+</strong> &mdash; Suzuki Jimny 5-door 4x4 AT<br><small>Km charge N$ 4.37 · standard excess N$ 45,000.00</small></td><td class="price-highlight sto-col">N$ 1,184.00</td><td class="sto-col">N$ 1,080.00</td><td class="sto-col">N$ 1,080.00</td><td class="price-highlight rack-col">N$ 1,480.00</td><td class="rack-col">N$ 1,350.00</td><td class="rack-col">N$ 1,350.00</td></tr>
+                        <tr><td><strong>MX+</strong> &mdash; SUV 4x4 Toyota Fortuner AT or similar<br><small>Km charge N$ 5.75 · standard excess N$ 73,000.00</small></td><td class="price-highlight sto-col">N$ 1,728.00</td><td class="sto-col">N$ 1,656.00</td><td class="sto-col">N$ 1,552.00</td><td class="price-highlight rack-col">N$ 2,160.00</td><td class="rack-col">N$ 2,070.00</td><td class="rack-col">N$ 1,940.00</td></tr>
+                        <tr><td><strong>X</strong> &mdash; Double Cab 4x4 Toyota Land Cruiser 79 MT or similar<br><small>Km charge N$ 5.75 · standard excess N$ 78,000.00</small></td><td class="price-highlight sto-col">N$ 1,904.00</td><td class="sto-col">N$ 1,800.27</td><td class="sto-col">N$ 1,752.00</td><td class="price-highlight rack-col">N$ 2,380.00</td><td class="rack-col">N$ 2,250.34</td><td class="rack-col">N$ 2,190.00</td></tr>
+                        <tr><td><strong>QX</strong> &mdash; Safari 4-window 4x4 Nissan Patrol 7-seater<br><small>Km charge N$ 9.20 · standard excess N$ 78,000.00</small></td><td class="price-highlight sto-col">N$ 2,712.00</td><td class="sto-col">N$ 2,712.00</td><td class="sto-col">N$ 2,712.00</td><td class="price-highlight rack-col">N$ 3,390.00</td><td class="rack-col">N$ 3,390.00</td><td class="rack-col">N$ 3,390.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -837,19 +792,19 @@ document.addEventListener('DOMContentLoaded',function(){
             <h3>High season (July &ndash; December 2026)</h3>
             <div class="table-responsive">
                 <table>
-                    <thead><tr><th>Group &amp; Vehicle</th><th>STO 3&ndash;7 d</th><th>STO 8&ndash;14 d</th><th>STO 15+ d</th><th>Rack 3&ndash;7 d</th><th>Rack 8&ndash;14 d</th><th>Rack 15+ d</th></tr></thead>
+                    <thead><tr><th>Group &amp; Vehicle</th><th class="sto-col">STO 3&ndash;7 d</th><th class="sto-col">STO 8&ndash;14 d</th><th class="sto-col">STO 15+ d</th><th class="rack-col">Rack 3&ndash;7 d</th><th class="rack-col">Rack 8&ndash;14 d</th><th class="rack-col">Rack 15+ d</th></tr></thead>
                     <tbody>
-                        <tr><td><strong>A+</strong> &mdash; Toyota Agya AT or similar</td><td class="price-highlight">N$ 520.00</td><td>N$ 476.00</td><td>N$ 436.00</td><td class="price-highlight">N$ 650.00</td><td>N$ 595.00</td><td>N$ 545.00</td></tr>
-                        <tr><td><strong>B</strong> &mdash; Volkswagen Polo Vivo MT or similar</td><td class="price-highlight">N$ 584.00</td><td>N$ 520.00</td><td>N$ 476.00</td><td class="price-highlight">N$ 730.00</td><td>N$ 650.00</td><td>N$ 595.00</td></tr>
-                        <tr><td><strong>B+</strong> &mdash; Toyota Starlet AT or similar</td><td class="price-highlight">N$ 628.00</td><td>N$ 588.00</td><td>N$ 548.00</td><td class="price-highlight">N$ 785.00</td><td>N$ 735.00</td><td>N$ 685.00</td></tr>
-                        <tr><td><strong>TX</strong> &mdash; Single Cab 4x4 Nissan Navara MT or similar</td><td class="price-highlight">N$ 1,560.00</td><td>N$ 1,496.00</td><td>N$ 1,416.00</td><td class="price-highlight">N$ 1,950.00</td><td>N$ 1,870.00</td><td>N$ 1,770.00</td></tr>
-                        <tr><td><strong>TDX</strong> &mdash; Double Cab 4x4 Toyota Hilux MT or similar</td><td class="price-highlight">N$ 1,840.00</td><td>N$ 1,756.00</td><td>N$ 1,664.00</td><td class="price-highlight">N$ 2,300.00</td><td>N$ 2,195.00</td><td>N$ 2,080.00</td></tr>
-                        <tr><td><strong>TDX+</strong> &mdash; Double Cab 4x4 Toyota Hilux AT or similar</td><td class="price-highlight">N$ 1,944.00</td><td>N$ 1,848.00</td><td>N$ 1,752.00</td><td class="price-highlight">N$ 2,430.00</td><td>N$ 2,310.00</td><td>N$ 2,190.00</td></tr>
-                        <tr><td><strong>N+</strong> &mdash; Toyota Corolla Cross AT or similar</td><td class="price-highlight">N$ 880.00</td><td>N$ 800.00</td><td>N$ 720.00</td><td class="price-highlight">N$ 1,100.00</td><td>N$ 1,000.00</td><td>N$ 900.00</td></tr>
-                        <tr><td><strong>M+</strong> &mdash; Suzuki Jimny 5-door 4x4 AT</td><td class="price-highlight">N$ 1,352.00</td><td>N$ 1,296.00</td><td>N$ 1,240.00</td><td class="price-highlight">N$ 1,690.00</td><td>N$ 1,620.00</td><td>N$ 1,550.00</td></tr>
-                        <tr><td><strong>MX+</strong> &mdash; SUV 4x4 Toyota Fortuner AT or similar</td><td class="price-highlight">N$ 2,104.00</td><td>N$ 1,912.00</td><td>N$ 1,904.00</td><td class="price-highlight">N$ 2,630.00</td><td>N$ 2,390.00</td><td>N$ 2,380.00</td></tr>
-                        <tr><td><strong>X</strong> &mdash; Double Cab 4x4 Toyota Land Cruiser 79 MT or similar</td><td class="price-highlight">N$ 2,260.00</td><td>N$ 2,136.00</td><td>N$ 2,104.00</td><td class="price-highlight">N$ 2,825.00</td><td>N$ 2,670.00</td><td>N$ 2,630.00</td></tr>
-                        <tr><td><strong>QX</strong> &mdash; Safari 4-window 4x4 Nissan Patrol 7-seater</td><td class="price-highlight">N$ 3,156.00</td><td>N$ 3,156.00</td><td>N$ 3,156.00</td><td class="price-highlight">N$ 3,945.00</td><td>N$ 3,945.00</td><td>N$ 3,945.00</td></tr>
+                        <tr><td><strong>A+</strong> &mdash; Toyota Agya AT or similar</td><td class="price-highlight sto-col">N$ 520.00</td><td class="sto-col">N$ 476.00</td><td class="sto-col">N$ 436.00</td><td class="price-highlight rack-col">N$ 650.00</td><td class="rack-col">N$ 595.00</td><td class="rack-col">N$ 545.00</td></tr>
+                        <tr><td><strong>B</strong> &mdash; Volkswagen Polo Vivo MT or similar</td><td class="price-highlight sto-col">N$ 584.00</td><td class="sto-col">N$ 520.00</td><td class="sto-col">N$ 476.00</td><td class="price-highlight rack-col">N$ 730.00</td><td class="rack-col">N$ 650.00</td><td class="rack-col">N$ 595.00</td></tr>
+                        <tr><td><strong>B+</strong> &mdash; Toyota Starlet AT or similar</td><td class="price-highlight sto-col">N$ 628.00</td><td class="sto-col">N$ 588.00</td><td class="sto-col">N$ 548.00</td><td class="price-highlight rack-col">N$ 785.00</td><td class="rack-col">N$ 735.00</td><td class="rack-col">N$ 685.00</td></tr>
+                        <tr><td><strong>TX</strong> &mdash; Single Cab 4x4 Nissan Navara MT or similar</td><td class="price-highlight sto-col">N$ 1,560.00</td><td class="sto-col">N$ 1,496.00</td><td class="sto-col">N$ 1,416.00</td><td class="price-highlight rack-col">N$ 1,950.00</td><td class="rack-col">N$ 1,870.00</td><td class="rack-col">N$ 1,770.00</td></tr>
+                        <tr><td><strong>TDX</strong> &mdash; Double Cab 4x4 Toyota Hilux MT or similar</td><td class="price-highlight sto-col">N$ 1,840.00</td><td class="sto-col">N$ 1,756.00</td><td class="sto-col">N$ 1,664.00</td><td class="price-highlight rack-col">N$ 2,300.00</td><td class="rack-col">N$ 2,195.00</td><td class="rack-col">N$ 2,080.00</td></tr>
+                        <tr><td><strong>TDX+</strong> &mdash; Double Cab 4x4 Toyota Hilux AT or similar</td><td class="price-highlight sto-col">N$ 1,944.00</td><td class="sto-col">N$ 1,848.00</td><td class="sto-col">N$ 1,752.00</td><td class="price-highlight rack-col">N$ 2,430.00</td><td class="rack-col">N$ 2,310.00</td><td class="rack-col">N$ 2,190.00</td></tr>
+                        <tr><td><strong>N+</strong> &mdash; Toyota Corolla Cross AT or similar</td><td class="price-highlight sto-col">N$ 880.00</td><td class="sto-col">N$ 800.00</td><td class="sto-col">N$ 720.00</td><td class="price-highlight rack-col">N$ 1,100.00</td><td class="rack-col">N$ 1,000.00</td><td class="rack-col">N$ 900.00</td></tr>
+                        <tr><td><strong>M+</strong> &mdash; Suzuki Jimny 5-door 4x4 AT</td><td class="price-highlight sto-col">N$ 1,352.00</td><td class="sto-col">N$ 1,296.00</td><td class="sto-col">N$ 1,240.00</td><td class="price-highlight rack-col">N$ 1,690.00</td><td class="rack-col">N$ 1,620.00</td><td class="rack-col">N$ 1,550.00</td></tr>
+                        <tr><td><strong>MX+</strong> &mdash; SUV 4x4 Toyota Fortuner AT or similar</td><td class="price-highlight sto-col">N$ 2,104.00</td><td class="sto-col">N$ 1,912.00</td><td class="sto-col">N$ 1,904.00</td><td class="price-highlight rack-col">N$ 2,630.00</td><td class="rack-col">N$ 2,390.00</td><td class="rack-col">N$ 2,380.00</td></tr>
+                        <tr><td><strong>X</strong> &mdash; Double Cab 4x4 Toyota Land Cruiser 79 MT or similar</td><td class="price-highlight sto-col">N$ 2,260.00</td><td class="sto-col">N$ 2,136.00</td><td class="sto-col">N$ 2,104.00</td><td class="price-highlight rack-col">N$ 2,825.00</td><td class="rack-col">N$ 2,670.00</td><td class="rack-col">N$ 2,630.00</td></tr>
+                        <tr><td><strong>QX</strong> &mdash; Safari 4-window 4x4 Nissan Patrol 7-seater</td><td class="price-highlight sto-col">N$ 3,156.00</td><td class="sto-col">N$ 3,156.00</td><td class="sto-col">N$ 3,156.00</td><td class="price-highlight rack-col">N$ 3,945.00</td><td class="rack-col">N$ 3,945.00</td><td class="rack-col">N$ 3,945.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -897,15 +852,6 @@ document.addEventListener('DOMContentLoaded',function(){
     <script data-no-optimize="1">
         let activeSeason = 'low';
         let activeSupplier = 'nts';
-
-        function setSeason(season) {
-            activeSeason = season;
-            document.getElementById('btn-low').classList.toggle('active', season === 'low');
-            document.getElementById('btn-high').classList.toggle('active', season === 'high');
-
-            document.querySelectorAll('.low-season').forEach(el => el.style.display = (season === 'low' ? '' : 'none'));
-            document.querySelectorAll('.high-season').forEach(el => el.style.display = (season === 'high' ? '' : 'none'));
-        }
 
         function switchSupplier(supplierId, btn) {
             activeSupplier = supplierId;

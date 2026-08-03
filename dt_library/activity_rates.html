@@ -295,26 +295,28 @@ document.addEventListener('DOMContentLoaded',function(){
     t=t.replace(/\s{2,}/g," ").replace(/\s+([.,])/g,"$1").replace(/^\s*[.,]\s*/,"").trim();
     p.textContent=t;
   });
-  var money=/N\$|\d,\d{3}|\d[.,]\d{2}\b/;
-  var tables=document.querySelectorAll('table');
-  for(var ti=0;ti<tables.length;ti++){
-    var t=tables[ti]; var rows=t.rows; if(!rows||rows.length<2) continue;
-    var head=rows[0]; var ncol=head.cells.length; if(!ncol) continue;
-    var rack=[]; for(var i=0;i<ncol;i++){ if(/rack/i.test(head.cells[i].textContent||'')) rack.push(i); }
-    var hasRack=rack.length>0;
-    var price=[];
-    for(var c=0;c<ncol;c++){
-      if(rack.indexOf(c)>-1) continue;
-      var isPrice=false;
-      for(var r=1;r<rows.length;r++){ var cell=rows[r].cells[c]; if(cell&&(money.test(cell.textContent||'')||/price-highlight/.test(cell.className))){isPrice=true;break;} }
-      if(isPrice) price.push(c);
+  // Signed-out view: hide negotiated STO columns outright and show RACK only.
+  // Columns are tagged explicitly (.sto-col / .rack-col / .info-col) so nothing is
+  // guessed from the cell text — duration, inclusions and min-guest columns stay visible.
+  document.querySelectorAll('.sto-col').forEach(function(c){ c.style.display='none'; });
+  document.querySelectorAll('th.rack-col').forEach(function(h){
+    h.innerHTML = h.innerHTML.replace(/\s*Rate\s*$/i,' Rate').replace(/^\s*(?:Total\s+)?Rack\s*/i,'').replace(/\s{2,}/g,' ').trim() || 'Rate';
+  });
+  document.querySelectorAll('table').forEach(function(t){
+    if (t.querySelector('.rack-col')) return;
+    if (!t.querySelector('.sto-col')) return;
+    var hdr=t.querySelectorAll('thead th');
+    for (var i=0;i<hdr.length;i++){
+      if (!hdr[i].classList.contains('sto-col')) continue;
+      hdr[i].style.display=''; hdr[i].classList.remove('sto-col');
+      for (var r=1;r<t.rows.length;r++){
+        var cd=t.rows[r].cells[i];
+        if (cd){ cd.style.display=''; cd.classList.remove('sto-col');
+                 cd.textContent='Rates to follow'; cd.style.fontStyle='italic';
+                 cd.style.color='#8a8175'; cd.classList.remove('price-highlight'); }
+      }
     }
-    if(!price.length) continue;
-    for(var p=0;p<price.length;p++){ var col=price[p];
-      if(hasRack){ for(var r2=0;r2<rows.length;r2++){ var cc=rows[r2].cells[col]; if(cc) cc.style.display='none'; } }
-      else { for(var r3=1;r3<rows.length;r3++){ var cd=rows[r3].cells[col]; if(cd){ cd.textContent='Rates to follow'; cd.style.fontStyle='italic'; cd.style.color='#8a8175'; if(cd.classList) cd.classList.remove('price-highlight'); } } }
-    }
-  }
+  });
 });
 </script>
         <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function activeName(){var c=document.querySelector('.rate-card.active .supplier-details h2');if(c)return c.textContent;var t=document.querySelector('.tabs-container .tab-link.active');return t?t.textContent:'';}function sync(){if(el){var n=activeName();if(n)el.textContent=n.replace(/\s+/g,' ').trim();}}sync();if(typeof window.switchSupplier==="function"){var o=window.switchSupplier;window.switchSupplier=function(){var r=o.apply(this,arguments);setTimeout(sync,0);return r;};}document.querySelectorAll('.tabs-container .tab-link').forEach(function(b){b.addEventListener('click',function(){setTimeout(sync,0);});});});</script>
@@ -349,42 +351,37 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Activity / Combo Description</th>
-                            <th>Duration & Timing</th>
-                            <th>STO Nett Rate</th>
-                            <th>Rack Rate</th>
-                        </tr>
+                        <tr><th>Activity / Combo Description</th><th class="info-col">Duration & Timing</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Mola Mola Day Tour</strong><br><small>Marine Dolphin Cruise, Pelican Point Beach Braai BBQ, & Sandwich Harbour 4x4 Experience</small></td><td>09h00 – 18h00</td><td class="price-highlight">N$ 4,904.50</td><td>N$ 5,770.00</td></tr>
-                        <tr><td><strong>Mola Mola Day Tour (Children under 12)</strong></td><td>09h00 – 18h00</td><td class="price-highlight">N$ 3,740.00</td><td>N$ 4,400.00</td></tr>
+                        <tr><td><strong>Mola Mola Day Tour</strong><br><small>Marine Dolphin Cruise, Pelican Point Beach Braai BBQ, & Sandwich Harbour 4x4 Experience</small></td><td class="info-col">09h00 – 18h00</td><td class="price-highlight sto-col">N$ 4,904.50</td><td class="rack-col">N$ 5,770.00</td></tr>
+                        <tr><td><strong>Mola Mola Day Tour (Children under 12)</strong></td><td class="info-col">09h00 – 18h00</td><td class="price-highlight sto-col">N$ 3,740.00</td><td class="rack-col">N$ 4,400.00</td></tr>
                         
-                        <tr><td><strong>Kayaking Combo & Beach Braai</strong><br><small>Catamaran to Pelican Point, Seal Kayaking, Beach Braai, & Sandwich Harbour 4x4</small></td><td>07h45 – 18h00</td><td class="price-highlight">N$ 4,904.50</td><td>N$ 5,770.00</td></tr>
-                        <tr><td><strong>Kayaking Combo & Beach Braai (Children under 12)</strong></td><td>07h45 – 18h00</td><td class="price-highlight">N$ 3,740.00</td><td>N$ 4,400.00</td></tr>
+                        <tr><td><strong>Kayaking Combo & Beach Braai</strong><br><small>Catamaran to Pelican Point, Seal Kayaking, Beach Braai, & Sandwich Harbour 4x4</small></td><td class="info-col">07h45 – 18h00</td><td class="price-highlight sto-col">N$ 4,904.50</td><td class="rack-col">N$ 5,770.00</td></tr>
+                        <tr><td><strong>Kayaking Combo & Beach Braai (Children under 12)</strong></td><td class="info-col">07h45 – 18h00</td><td class="price-highlight sto-col">N$ 3,740.00</td><td class="rack-col">N$ 4,400.00</td></tr>
 
-                        <tr><td><strong>(NEW) Crystal Kayak Combo & Beach Braai</strong><br><small>Crystal Clear Seal Kayaking at Pelican Point, Beach Braai BBQ, & Sandwich Harbour 4x4</small></td><td>07h45 – 18h00</td><td class="price-highlight">N$ 5,355.00</td><td>N$ 6,300.00</td></tr>
-                        <tr><td><strong>Crystal Kayak Combo & Beach Braai (Children under 12)</strong></td><td>07h45 – 18h00</td><td class="price-highlight">N$ 4,165.00</td><td>N$ 4,900.00</td></tr>
+                        <tr><td><strong>(NEW) Crystal Kayak Combo & Beach Braai</strong><br><small>Crystal Clear Seal Kayaking at Pelican Point, Beach Braai BBQ, & Sandwich Harbour 4x4</small></td><td class="info-col">07h45 – 18h00</td><td class="price-highlight sto-col">N$ 5,355.00</td><td class="rack-col">N$ 6,300.00</td></tr>
+                        <tr><td><strong>Crystal Kayak Combo & Beach Braai (Children under 12)</strong></td><td class="info-col">07h45 – 18h00</td><td class="price-highlight sto-col">N$ 4,165.00</td><td class="rack-col">N$ 4,900.00</td></tr>
 
-                        <tr><td><strong>Mola Dolphin Cruise & Beach Braai</strong><br><small>Classic marine cruise followed by a premium beach braai BBQ lunch on Pelican Point</small></td><td>09h00 – 14h00</td><td class="price-highlight">N$ 2,575.50</td><td>N$ 3,030.00</td></tr>
-                        <tr><td><strong>Mola Dolphin Cruise & Beach Braai (Children 4 - 12)</strong></td><td>09h00 – 14h00</td><td class="price-highlight">N$ 1,785.00</td><td>N$ 2,100.00</td></tr>
+                        <tr><td><strong>Mola Dolphin Cruise & Beach Braai</strong><br><small>Classic marine cruise followed by a premium beach braai BBQ lunch on Pelican Point</small></td><td class="info-col">09h00 – 14h00</td><td class="price-highlight sto-col">N$ 2,575.50</td><td class="rack-col">N$ 3,030.00</td></tr>
+                        <tr><td><strong>Mola Dolphin Cruise & Beach Braai (Children 4 - 12)</strong></td><td class="info-col">09h00 – 14h00</td><td class="price-highlight sto-col">N$ 1,785.00</td><td class="rack-col">N$ 2,100.00</td></tr>
 
-                        <tr><td><strong>AM/PM Sandwich Harbour 4x4 Experience & Beach Braai</strong><br><small>Sandwich Harbour 4x4 dune drive, Pelican Point beach BBQ lunch & catamaran transfer</small></td><td>AM or PM Slots</td><td class="price-highlight">N$ 3,867.50</td><td>N$ 4,550.00</td></tr>
-                        <tr><td><strong>AM/PM Sandwich Harbour 4x4 & Beach Braai (Children under 12)</strong></td><td>AM or PM Slots</td><td class="price-highlight">N$ 2,975.00</td><td>N$ 3,500.00</td></tr>
+                        <tr><td><strong>AM/PM Sandwich Harbour 4x4 Experience & Beach Braai</strong><br><small>Sandwich Harbour 4x4 dune drive, Pelican Point beach BBQ lunch & catamaran transfer</small></td><td class="info-col">AM or PM Slots</td><td class="price-highlight sto-col">N$ 3,867.50</td><td class="rack-col">N$ 4,550.00</td></tr>
+                        <tr><td><strong>AM/PM Sandwich Harbour 4x4 & Beach Braai (Children under 12)</strong></td><td class="info-col">AM or PM Slots</td><td class="price-highlight sto-col">N$ 2,975.00</td><td class="rack-col">N$ 3,500.00</td></tr>
 
-                        <tr><td><strong>Seal Kayaking Experience & Beach Braai</strong><br><small>Catamaran to Pelican Point, Seal Kayaking, Beach Braai & 4x4 return transfer</small></td><td>07h45 – 14h00</td><td class="price-highlight">N$ 3,476.50</td><td>N$ 4,090.00</td></tr>
-                        <tr><td><strong>Seal Kayaking Experience & Beach Braai (Children 4 - 12)</strong></td><td>07h45 – 14h00</td><td class="price-highlight">N$ 2,720.00</td><td>N$ 3,200.00</td></tr>
+                        <tr><td><strong>Seal Kayaking Experience & Beach Braai</strong><br><small>Catamaran to Pelican Point, Seal Kayaking, Beach Braai & 4x4 return transfer</small></td><td class="info-col">07h45 – 14h00</td><td class="price-highlight sto-col">N$ 3,476.50</td><td class="rack-col">N$ 4,090.00</td></tr>
+                        <tr><td><strong>Seal Kayaking Experience & Beach Braai (Children 4 - 12)</strong></td><td class="info-col">07h45 – 14h00</td><td class="price-highlight sto-col">N$ 2,720.00</td><td class="rack-col">N$ 3,200.00</td></tr>
 
-                        <tr><td><strong>(NEW) Crystal Kayak Experience & Beach Braai</strong><br><small>Pelican Point Crystal Clear Kayaking, Beach Braai BBQ & 4x4 mini-dune return</small></td><td>07h45 – 14h00</td><td class="price-highlight">N$ 3,910.00</td><td>N$ 4,600.00</td></tr>
-                        <tr><td><strong>(NEW) Crystal Kayak & Beach Braai (Children 4 - 12)</strong></td><td>07h45 – 14h00</td><td class="price-highlight">N$ 3,145.00</td><td>N$ 3,700.00</td></tr>
+                        <tr><td><strong>(NEW) Crystal Kayak Experience & Beach Braai</strong><br><small>Pelican Point Crystal Clear Kayaking, Beach Braai BBQ & 4x4 mini-dune return</small></td><td class="info-col">07h45 – 14h00</td><td class="price-highlight sto-col">N$ 3,910.00</td><td class="rack-col">N$ 4,600.00</td></tr>
+                        <tr><td><strong>(NEW) Crystal Kayak & Beach Braai (Children 4 - 12)</strong></td><td class="info-col">07h45 – 14h00</td><td class="price-highlight sto-col">N$ 3,145.00</td><td class="rack-col">N$ 3,700.00</td></tr>
 
-                        <tr><td><strong>(NEW) Marine Cruise & Beach Experience</strong><br><small>Marine cruise, beach drop-off, Walvis Bay oysters & premium lunch on the beach</small></td><td>09h00 – 12h00</td><td class="price-highlight">N$ 1,691.50</td><td>N$ 1,990.00</td></tr>
-                        <tr><td><strong>(NEW) Marine Cruise & Beach Experience (Children 4 - 12)</strong></td><td>09h00 – 12h00</td><td class="price-highlight">N$ 1,190.00</td><td>N$ 1,400.00</td></tr>
+                        <tr><td><strong>(NEW) Marine Cruise & Beach Experience</strong><br><small>Marine cruise, beach drop-off, Walvis Bay oysters & premium lunch on the beach</small></td><td class="info-col">09h00 – 12h00</td><td class="price-highlight sto-col">N$ 1,691.50</td><td class="rack-col">N$ 1,990.00</td></tr>
+                        <tr><td><strong>(NEW) Marine Cruise & Beach Experience (Children 4 - 12)</strong></td><td class="info-col">09h00 – 12h00</td><td class="price-highlight sto-col">N$ 1,190.00</td><td class="rack-col">N$ 1,400.00</td></tr>
 
-                        <tr><td><strong>Sandwich Harbour 4x4 AM/PM Half Day Experience</strong><br><small>Classic dune 4x4 tour including light meals, sparkling wine, and fresh oysters</small></td><td>Half Day</td><td class="price-highlight">N$ 2,575.50</td><td>N$ 3,030.00</td></tr>
-                        <tr><td><strong>Sandwich Harbour 4x4 AM/PM (Children under 12)</strong></td><td>Half Day</td><td class="price-highlight">N$ 1,955.00</td><td>N$ 2,300.00</td></tr>
+                        <tr><td><strong>Sandwich Harbour 4x4 AM/PM Half Day Experience</strong><br><small>Classic dune 4x4 tour including light meals, sparkling wine, and fresh oysters</small></td><td class="info-col">Half Day</td><td class="price-highlight sto-col">N$ 2,575.50</td><td class="rack-col">N$ 3,030.00</td></tr>
+                        <tr><td><strong>Sandwich Harbour 4x4 AM/PM (Children under 12)</strong></td><td class="info-col">Half Day</td><td class="price-highlight sto-col">N$ 1,955.00</td><td class="rack-col">N$ 2,300.00</td></tr>
 
-                        <tr><td><strong>Golden Hour Sandwich Harbour 4x4 (Min 3 Pax)</strong><br><small>Late afternoon dune drive including sunset canapes and premium sparkling wine</small></td><td>Sunset Slot</td><td class="price-highlight">N$ 2,575.50</td><td>N$ 3,030.00</td></tr>
+                        <tr><td><strong>Golden Hour Sandwich Harbour 4x4 (Min 3 Pax)</strong><br><small>Late afternoon dune drive including sunset canapes and premium sparkling wine</small></td><td class="info-col">Sunset Slot</td><td class="price-highlight sto-col">N$ 2,575.50</td><td class="rack-col">N$ 3,030.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -428,18 +425,13 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Flight Description</th>
-                            <th>Timing & Requirements</th>
-                            <th>STO Nett Rate</th>
-                            <th>Rack Rate</th>
-                        </tr>
+                        <tr><th>Flight Description</th><th class="info-col">Timing & Requirements</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Classic Sossusvlei Balloon Safari</strong><br><small>Geluk Balloon Base flight (C27), ~1-hour flight, full gourmet desert champagne breakfast buffet, flight certificate, and C27 return drive.</small></td><td>Daily, 1h30 before sunrise</td><td class="price-highlight">N$ 9,648.00</td><td>N$ 10,720.00</td></tr>
-                        <tr><td><strong>NamibRand Balloon Safari</strong><br><small>Specialized deep-desert flight departing directly from Kwessi (NamibRand Reserve).</small></td><td>Daily, 1h30 before sunrise</td><td class="price-highlight">N$ 9,648.00</td><td>N$ 10,720.00</td></tr>
-                        <tr><td><strong>Follower & Breakfast</strong><br><small>Ground crew follower who joins the flight landing spot for the premium gourmet breakfast buffet.</small></td><td>Daily, 1h30 before sunrise</td><td class="price-highlight">N$ 1,550.00</td><td>N$ 1,720.00</td></tr>
-                        <tr><td><strong>Special Large Group (32 - 110 passengers)</strong><br><small>Split flight format: 1/2 hour in-flight, 1/2 hour 4x4 photo pursuit. Complete desert breakfast buffet included.</small></td><td>Pre-Arranged Only</td><td class="price-highlight">N$ 7,875.00</td><td>N$ 8,750.00</td></tr>
+                        <tr><td><strong>Classic Sossusvlei Balloon Safari</strong><br><small>Geluk Balloon Base flight (C27), ~1-hour flight, full gourmet desert champagne breakfast buffet, flight certificate, and C27 return drive.</small></td><td class="info-col">Daily, 1h30 before sunrise</td><td class="price-highlight sto-col">N$ 9,648.00</td><td class="rack-col">N$ 10,720.00</td></tr>
+                        <tr><td><strong>NamibRand Balloon Safari</strong><br><small>Specialized deep-desert flight departing directly from Kwessi (NamibRand Reserve).</small></td><td class="info-col">Daily, 1h30 before sunrise</td><td class="price-highlight sto-col">N$ 9,648.00</td><td class="rack-col">N$ 10,720.00</td></tr>
+                        <tr><td><strong>Follower & Breakfast</strong><br><small>Ground crew follower who joins the flight landing spot for the premium gourmet breakfast buffet.</small></td><td class="info-col">Daily, 1h30 before sunrise</td><td class="price-highlight sto-col">N$ 1,550.00</td><td class="rack-col">N$ 1,720.00</td></tr>
+                        <tr><td><strong>Special Large Group (32 - 110 passengers)</strong><br><small>Split flight format: 1/2 hour in-flight, 1/2 hour 4x4 photo pursuit. Complete desert breakfast buffet included.</small></td><td class="info-col">Pre-Arranged Only</td><td class="price-highlight sto-col">N$ 7,875.00</td><td class="rack-col">N$ 8,750.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -485,21 +477,15 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Tour Description</th>
-                            <th>Permit & Levies (Nett)</th>
-                            <th>Excursion Fee (Commissionable)</th>
-                            <th>Total STO Nett</th>
-                            <th>Total Rack Rate</th>
-                        </tr>
+                        <tr><th>Tour Description</th><th class="sto-col">Permit & Levies (Nett)</th><th class="sto-col">Excursion Fee (Commissionable)</th><th class="sto-col">Total STO Nett</th><th class="rack-col">Total Rack Rate</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Bogenfels & Diamonds Tour (Full Day Guided)</strong><br><small>Lüderitz Restricted Diamond Area, Bogenfels Arch, ghost towns. Includes food, drinks, permits.</small></td><td>Permit: N$ 1,136.00<br>Fuel: N$ 360.00</td><td>N$ 3,736.00</td><td class="price-highlight">N$ 5,232.00</td><td>N$ 6,540.00</td></tr>
-                        <tr><td><strong>Bogenfels & Diamonds Guided (Child 4 – 12)</strong></td><td>Permit: N$ 1,136.00<br>Fuel: N$ 360.00</td><td>N$ 2,616.00</td><td class="price-highlight">N$ 4,112.00</td><td>N$ 5,140.00</td></tr>
-                        <tr><td><strong>Bogenfels & Diamonds Guided (Child under 4)</strong></td><td>Exempt</td><td>N$ 1,264.00</td><td class="price-highlight">N$ 1,264.00</td><td>N$ 1,580.00</td></tr>
+                        <tr><td><strong>Bogenfels & Diamonds Tour (Full Day Guided)</strong><br><small>Lüderitz Restricted Diamond Area, Bogenfels Arch, ghost towns. Includes food, drinks, permits.</small></td><td class="sto-col">Permit: N$ 1,136.00<br>Fuel: N$ 360.00</td><td class="sto-col">N$ 3,736.00</td><td class="price-highlight sto-col">N$ 5,232.00</td><td class="rack-col">N$ 6,540.00</td></tr>
+                        <tr><td><strong>Bogenfels & Diamonds Guided (Child 4 – 12)</strong></td><td class="sto-col">Permit: N$ 1,136.00<br>Fuel: N$ 360.00</td><td class="sto-col">N$ 2,616.00</td><td class="price-highlight sto-col">N$ 4,112.00</td><td class="rack-col">N$ 5,140.00</td></tr>
+                        <tr><td><strong>Bogenfels & Diamonds Guided (Child under 4)</strong></td><td class="sto-col">Exempt</td><td class="sto-col">N$ 1,264.00</td><td class="price-highlight sto-col">N$ 1,264.00</td><td class="rack-col">N$ 1,580.00</td></tr>
                         
-                        <tr><td><strong>E-Bay Diamond History (Half Day Guided)</strong><br><small>Elizabeth Bay ghost town, Kolmanskop border tracks. Guided half-day tour.</small></td><td>Permit: N$ 136.00<br>Fuel: N$ 224.00</td><td>N$ 2,544.00</td><td class="price-highlight">N$ 2,904.00</td><td>N$ 3,630.00</td></tr>
-                        <tr><td><strong>E-Bay Diamond History (Child 4 – 12)</strong></td><td>Permit: N$ 136.00<br>Fuel: N$ 224.00</td><td>N$ 1,752.00</td><td class="price-highlight">N$ 2,112.00</td><td>N$ 2,640.00</td></tr>
+                        <tr><td><strong>E-Bay Diamond History (Half Day Guided)</strong><br><small>Elizabeth Bay ghost town, Kolmanskop border tracks. Guided half-day tour.</small></td><td class="sto-col">Permit: N$ 136.00<br>Fuel: N$ 224.00</td><td class="sto-col">N$ 2,544.00</td><td class="price-highlight sto-col">N$ 2,904.00</td><td class="rack-col">N$ 3,630.00</td></tr>
+                        <tr><td><strong>E-Bay Diamond History (Child 4 – 12)</strong></td><td class="sto-col">Permit: N$ 136.00<br>Fuel: N$ 224.00</td><td class="sto-col">N$ 1,752.00</td><td class="price-highlight sto-col">N$ 2,112.00</td><td class="rack-col">N$ 2,640.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -543,16 +529,11 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Boarding Option</th>
-                            <th>Inclusions & Features</th>
-                            <th>STO Nett Rate</th>
-                            <th>Rack Rate</th>
-                        </tr>
+                        <tr><th>Boarding Option</th><th class="info-col">Inclusions & Features</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Lie-down Sandboarding</strong><br><small>Excellent for beginners and high speeds. Board down on stomach on polished boards.</small></td><td>All safety gear, standard equipment, light lunch, mineral water, and Swakopmund transfers.</td><td class="price-highlight">N$ 560.00</td><td>N$ 700.00</td></tr>
-                        <tr><td><strong>Stand-up Sandboarding</strong><br><small>For snowboarding enthusiasts or brave beginners. Board down on standard snowboards with boots/bindings.</small></td><td>Professional snowboards, boots, bindings, safety helmets, light lunch, water, and Swakopmund transfers.</td><td class="price-highlight">N$ 640.00</td><td>N$ 800.00</td></tr>
+                        <tr><td><strong>Lie-down Sandboarding</strong><br><small>Excellent for beginners and high speeds. Board down on stomach on polished boards.</small></td><td class="info-col">All safety gear, standard equipment, light lunch, mineral water, and Swakopmund transfers.</td><td class="price-highlight sto-col">N$ 560.00</td><td class="rack-col">N$ 700.00</td></tr>
+                        <tr><td><strong>Stand-up Sandboarding</strong><br><small>For snowboarding enthusiasts or brave beginners. Board down on standard snowboards with boots/bindings.</small></td><td class="info-col">Professional snowboards, boots, bindings, safety helmets, light lunch, water, and Swakopmund transfers.</td><td class="price-highlight sto-col">N$ 640.00</td><td class="rack-col">N$ 800.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -596,34 +577,29 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Adventure / Tour Option</th>
-                            <th>Duration & Inclusions</th>
-                            <th>STO Nett Rate</th>
-                            <th>Rack Rate</th>
-                        </tr>
+                        <tr><th>Adventure / Tour Option</th><th class="info-col">Duration & Inclusions</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Quad Bike Tour (2 Hours)</strong><br><small>Scale high dunes on automated quad bikes. Beginners welcome.</small></td><td>2 Hours, gear & water included</td><td class="price-highlight">N$ 712.00</td><td>N$ 890.00</td></tr>
-                        <tr><td><strong>Quad Bike Tour (1 Hour)</strong><br><small>A perfect quick dune ride covering standard desert tracks.</small></td><td>1 Hour, safety gear included</td><td class="price-highlight">N$ 472.00</td><td>N$ 590.00</td></tr>
-                        <tr><td><strong>Explorer Quad Tour (2.5 Hours)</strong><br><small>Slow-paced educational quad tour focusing on hidden plant/animal life.</small></td><td>2.5 Hours, safety gear, water</td><td class="price-highlight">N$ 760.00</td><td>N$ 950.00</td></tr>
-                        <tr><td><strong>Dune Breakfast Run (3 Hours - Min 2 Pax)</strong><br><small>Quad bike deep into the desert, followed by breakfast at Rossmund Golf Estate.</small></td><td>3 Hours, quad bike, gear, breakfast</td><td class="price-highlight">N$ 1,080.00</td><td>N$ 1,350.00</td></tr>
+                        <tr><td><strong>Quad Bike Tour (2 Hours)</strong><br><small>Scale high dunes on automated quad bikes. Beginners welcome.</small></td><td class="info-col">2 Hours, gear & water included</td><td class="price-highlight sto-col">N$ 712.00</td><td class="rack-col">N$ 890.00</td></tr>
+                        <tr><td><strong>Quad Bike Tour (1 Hour)</strong><br><small>A perfect quick dune ride covering standard desert tracks.</small></td><td class="info-col">1 Hour, safety gear included</td><td class="price-highlight sto-col">N$ 472.00</td><td class="rack-col">N$ 590.00</td></tr>
+                        <tr><td><strong>Explorer Quad Tour (2.5 Hours)</strong><br><small>Slow-paced educational quad tour focusing on hidden plant/animal life.</small></td><td class="info-col">2.5 Hours, safety gear, water</td><td class="price-highlight sto-col">N$ 760.00</td><td class="rack-col">N$ 950.00</td></tr>
+                        <tr><td><strong>Dune Breakfast Run (3 Hours - Min 2 Pax)</strong><br><small>Quad bike deep into the desert, followed by breakfast at Rossmund Golf Estate.</small></td><td class="info-col">3 Hours, quad bike, gear, breakfast</td><td class="price-highlight sto-col">N$ 1,080.00</td><td class="rack-col">N$ 1,350.00</td></tr>
                         
-                        <tr><td><strong>Camel Ride (30 Minutes)</strong><br><small>A highly popular family tour along the Swakopmund River delta border.</small></td><td>30 Mins, guide included</td><td class="price-highlight">N$ 312.00</td><td>N$ 390.00</td></tr>
+                        <tr><td><strong>Camel Ride (30 Minutes)</strong><br><small>A highly popular family tour along the Swakopmund River delta border.</small></td><td class="info-col">30 Mins, guide included</td><td class="price-highlight sto-col">N$ 312.00</td><td class="rack-col">N$ 390.00</td></tr>
                         
-                        <tr><td><strong>Living Desert Tour (3 Hours)</strong><br><small>4x4 ecology tour to find the "Little 5" (Side-winder snake, chameleons, geckos).</small></td><td>3 Hours, water, transfers</td><td class="price-highlight">N$ 760.00</td><td>N$ 950.00</td></tr>
-                        <tr><td><strong>Township Cultural Tour</strong><br><small>Cultural tour through Swakopmund township including traditional meal.</small></td><td>3 Hours, meal & traditional drinks</td><td class="price-highlight">N$ 720.00</td><td>N$ 900.00</td></tr>
+                        <tr><td><strong>Living Desert Tour (3 Hours)</strong><br><small>4x4 ecology tour to find the "Little 5" (Side-winder snake, chameleons, geckos).</small></td><td class="info-col">3 Hours, water, transfers</td><td class="price-highlight sto-col">N$ 760.00</td><td class="rack-col">N$ 950.00</td></tr>
+                        <tr><td><strong>Township Cultural Tour</strong><br><small>Cultural tour through Swakopmund township including traditional meal.</small></td><td class="info-col">3 Hours, meal & traditional drinks</td><td class="price-highlight sto-col">N$ 720.00</td><td class="rack-col">N$ 900.00</td></tr>
                         
-                        <tr><td><strong>Dolphin & Seal Catamaran Cruise</strong><br><small>Walvis Bay catamaran cruise to see seals, dolphins, pelicans. Gourmet lunch.</small></td><td>3.5 Hours, oysters, champagne, lunch</td><td class="price-highlight">N$ 1,160.00</td><td>N$ 1,450.00</td></tr>
-                        <tr><td><strong>Sandwich Harbour 4x4 Excursion</strong><br><small>Iconic 4x4 dune tour past salt pans to Sandwich Harbour lagoon.</small></td><td>Half Day, meal, champagne, permit</td><td class="price-highlight">N$ 2,320.00</td><td>N$ 2,900.00</td></tr>
+                        <tr><td><strong>Dolphin & Seal Catamaran Cruise</strong><br><small>Walvis Bay catamaran cruise to see seals, dolphins, pelicans. Gourmet lunch.</small></td><td class="info-col">3.5 Hours, oysters, champagne, lunch</td><td class="price-highlight sto-col">N$ 1,160.00</td><td class="rack-col">N$ 1,450.00</td></tr>
+                        <tr><td><strong>Sandwich Harbour 4x4 Excursion</strong><br><small>Iconic 4x4 dune tour past salt pans to Sandwich Harbour lagoon.</small></td><td class="info-col">Half Day, meal, champagne, permit</td><td class="price-highlight sto-col">N$ 2,320.00</td><td class="rack-col">N$ 2,900.00</td></tr>
                         
-                        <tr><td><strong>Tandem Skydive (10,000 feet)</strong><br><small>Freefall jump over the Namib desert with professional tandem masters.</small></td><td>35-min flight, jump, safety gear</td><td class="price-highlight">N$ 3,948.00</td><td>N$ 4,935.00</td></tr>
-                        <tr><td><strong>Moonlandscape Scenic Tour</strong><br><small>Drive to the Welwitschia plains and eroded Moonlandscape canyons.</small></td><td>4 Hours, water, park fees</td><td class="price-highlight">N$ 880.00</td><td>N$ 1,100.00</td></tr>
-                        <tr><td><strong>Cape Cross Seal Colony Tour</strong><br><small>Overland tour past Henties Bay to the massive Cape Cross seal reserve.</small></td><td>4 Hours, water, park fees</td><td class="price-highlight">N$ 1,760.00</td><td>N$ 2,200.00</td></tr>
-                        <tr><td><strong>Paragliding Dune Flights</strong><br><small>Soar over coastal dunes with standard paragliding glider tandem.</small></td><td>Dune flight, safety gear, transfers</td><td class="price-highlight">N$ 1,520.00</td><td>N$ 1,900.00</td></tr>
+                        <tr><td><strong>Tandem Skydive (10,000 feet)</strong><br><small>Freefall jump over the Namib desert with professional tandem masters.</small></td><td class="info-col">35-min flight, jump, safety gear</td><td class="price-highlight sto-col">N$ 3,948.00</td><td class="rack-col">N$ 4,935.00</td></tr>
+                        <tr><td><strong>Moonlandscape Scenic Tour</strong><br><small>Drive to the Welwitschia plains and eroded Moonlandscape canyons.</small></td><td class="info-col">4 Hours, water, park fees</td><td class="price-highlight sto-col">N$ 880.00</td><td class="rack-col">N$ 1,100.00</td></tr>
+                        <tr><td><strong>Cape Cross Seal Colony Tour</strong><br><small>Overland tour past Henties Bay to the massive Cape Cross seal reserve.</small></td><td class="info-col">4 Hours, water, park fees</td><td class="price-highlight sto-col">N$ 1,760.00</td><td class="rack-col">N$ 2,200.00</td></tr>
+                        <tr><td><strong>Paragliding Dune Flights</strong><br><small>Soar over coastal dunes with standard paragliding glider tandem.</small></td><td class="info-col">Dune flight, safety gear, transfers</td><td class="price-highlight sto-col">N$ 1,520.00</td><td class="rack-col">N$ 1,900.00</td></tr>
                         
-                        <tr><td><strong>Surf & Turf Combo</strong><br><small>AM Catamaran Cruise in Walvis Bay + PM 90-min Quad Bike in Swakopmund.</small></td><td>Full Day, lunch, cruise, quad ride</td><td class="price-highlight">N$ 1,712.00</td><td>N$ 2,140.00</td></tr>
-                        <tr><td><strong>Catamaran / Sandwich Harbour 4x4 Combo</strong><br><small>AM Catamaran Marine Cruise + PM Sandwich Harbour 4x4 dune tour.</small></td><td>Full Day, food, cruise, 4x4 drive</td><td class="price-highlight">N$ 3,480.00</td><td>N$ 4,350.00</td></tr>
+                        <tr><td><strong>Surf & Turf Combo</strong><br><small>AM Catamaran Cruise in Walvis Bay + PM 90-min Quad Bike in Swakopmund.</small></td><td class="info-col">Full Day, lunch, cruise, quad ride</td><td class="price-highlight sto-col">N$ 1,712.00</td><td class="rack-col">N$ 2,140.00</td></tr>
+                        <tr><td><strong>Catamaran / Sandwich Harbour 4x4 Combo</strong><br><small>AM Catamaran Marine Cruise + PM Sandwich Harbour 4x4 dune tour.</small></td><td class="info-col">Full Day, food, cruise, 4x4 drive</td><td class="price-highlight sto-col">N$ 3,480.00</td><td class="rack-col">N$ 4,350.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -668,17 +644,12 @@ document.addEventListener('DOMContentLoaded',function(){
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Activity / Description</th>
-                            <th>Duration &amp; Timing</th>
-                            <th>STO Nett Rate</th>
-                            <th>Rack Rate</th>
-                        </tr>
+                        <tr><th>Activity / Description</th><th class="info-col">Duration &amp; Timing</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Living Desert &ldquo;Little 5&rdquo; Tour &mdash; Adult</strong><br><small>Half-day 4x4 dune ecology tour, incl. Dorob park &amp; conservation fees, water and soft drinks</small></td><td>Pickup 08h00&ndash;08h15, drop-off 12h00&ndash;13h00 (4&ndash;5 hrs)</td><td class="price-highlight">N$ 935.00</td><td>N$ 1,100.00</td></tr>
-                        <tr><td><strong>Living Desert &ldquo;Little 5&rdquo; Tour &mdash; Child (12 and under)</strong></td><td>Half day (4&ndash;5 hrs)</td><td class="price-highlight">N$ 510.00</td><td>N$ 600.00</td></tr>
-                        <tr><td><strong>Private Tour &mdash; per vehicle</strong><br><small>Booked per vehicle, 8 seats per vehicle</small></td><td>Half day (4&ndash;5 hrs)</td><td class="price-highlight">N$ 7,480.00</td><td>N$ 8,800.00</td></tr>
+                        <tr><td><strong>Living Desert &ldquo;Little 5&rdquo; Tour &mdash; Adult</strong><br><small>Half-day 4x4 dune ecology tour, incl. Dorob park &amp; conservation fees, water and soft drinks</small></td><td class="info-col">Pickup 08h00&ndash;08h15, drop-off 12h00&ndash;13h00 (4&ndash;5 hrs)</td><td class="price-highlight sto-col">N$ 935.00</td><td class="rack-col">N$ 1,100.00</td></tr>
+                        <tr><td><strong>Living Desert &ldquo;Little 5&rdquo; Tour &mdash; Child (12 and under)</strong></td><td class="info-col">Half day (4&ndash;5 hrs)</td><td class="price-highlight sto-col">N$ 510.00</td><td class="rack-col">N$ 600.00</td></tr>
+                        <tr><td><strong>Private Tour &mdash; per vehicle</strong><br><small>Booked per vehicle, 8 seats per vehicle</small></td><td class="info-col">Half day (4&ndash;5 hrs)</td><td class="price-highlight sto-col">N$ 7,480.00</td><td class="rack-col">N$ 8,800.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -725,33 +696,27 @@ document.addEventListener('DOMContentLoaded',function(){
                 </div>
             </div>
 
-            <p style="margin:0 0 14px;font-size:.8rem;color:#8a6a34"><strong>Note:</strong> Published RACK rates. No agent commission or STO rate was stated on the sheet, so no net rate is shown and this supplier is not yet selectable in the itinerary builder.</p>
+            <p style="margin:0 0 14px;font-size:.8rem;color:#8a6a34"><strong>Note:</strong> Published RACK rates. No agent commission or STO rate was stated on the sheet, so no net rate is shown. Infinite African Safaris is selectable in the itinerary builder, but every line is labelled &ldquo;RACK (no STO stated)&rdquo; &mdash; quote off it only if you are adding your own margin.</p>
 
             <div class="table-responsive">
                 <table>
                     <thead>
-                        <tr>
-                            <th>Tour / Activity</th>
-                            <th>Adult</th>
-                            <th>Child (4&ndash;12)</th>
-                            <th>Duration</th>
-                            <th>Min. guests</th>
-                        </tr>
+                        <tr><th>Tour / Activity</th><th class="rack-col">Adult</th><th class="rack-col">Child (4&ndash;12)</th><th class="info-col">Duration</th><th class="info-col">Min. guests</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Half Day Sandwich Harbour</strong></td><td>N$ 2,500</td><td>N$ 1,250</td><td>4 hours</td><td>2</td></tr>
-                        <tr><td><strong>Sunset Sandwich Harbour</strong></td><td>N$ 3,500</td><td>N$ 1,750</td><td>4 hours</td><td>2</td></tr>
-                        <tr><td><strong>Full Day Sandwich Harbour</strong></td><td>N$ 3,500</td><td>N$ 1,750</td><td>6 hours</td><td>2</td></tr>
-                        <tr><td><strong>Private Sandwich Harbour Custom Tour</strong></td><td>N$ 3,500</td><td>N$ 1,750</td><td>4 hours</td><td>2</td></tr>
-                        <tr><td><strong>Marine Boat Cruise</strong></td><td>N$ 1,500</td><td>N$ 750</td><td>3 hours</td><td>2</td></tr>
-                        <tr><td><strong>Kayaking at Pelican Point Seal Colony</strong></td><td>N$ 1,500</td><td>N$ 750</td><td>3 hours</td><td>2</td></tr>
-                        <tr><td><strong>Moon Landscape Tour (Moonvalley &amp; Welwitschia)</strong></td><td>N$ 2,000</td><td>N$ 1,000</td><td>5 hours</td><td>2</td></tr>
-                        <tr><td><strong>Sandwich Harbour &amp; Dune Boarding Combo</strong></td><td>N$ 3,500</td><td>N$ 1,750</td><td>6 hours</td><td>2</td></tr>
-                        <tr><td><strong>Marine Boat Cruise &amp; Sandwich Harbour Combo</strong></td><td>N$ 4,000</td><td>N$ 2,250</td><td>7+ hours</td><td>2</td></tr>
-                        <tr><td><strong>Kayaking &amp; Sandwich Harbour Combo</strong></td><td>N$ 4,000</td><td>N$ 2,250</td><td>7+ hours</td><td>2</td></tr>
-                        <tr><td><strong>Shoreline Fishing Trips</strong></td><td>On request</td><td>&ndash;</td><td>&ndash;</td><td>2</td></tr>
-                        <tr><td><strong>Sossusvlei</strong></td><td>On request</td><td>&ndash;</td><td>&ndash;</td><td>2</td></tr>
-                        <tr><td><strong>Spitzkoppe</strong></td><td>On request</td><td>&ndash;</td><td>&ndash;</td><td>2</td></tr>
+                        <tr><td><strong>Half Day Sandwich Harbour</strong></td><td class="rack-col">N$ 2,500</td><td class="rack-col">N$ 1,250</td><td class="info-col">4 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Sunset Sandwich Harbour</strong></td><td class="rack-col">N$ 3,500</td><td class="rack-col">N$ 1,750</td><td class="info-col">4 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Full Day Sandwich Harbour</strong></td><td class="rack-col">N$ 3,500</td><td class="rack-col">N$ 1,750</td><td class="info-col">6 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Private Sandwich Harbour Custom Tour</strong></td><td class="rack-col">N$ 3,500</td><td class="rack-col">N$ 1,750</td><td class="info-col">4 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Marine Boat Cruise</strong></td><td class="rack-col">N$ 1,500</td><td class="rack-col">N$ 750</td><td class="info-col">3 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Kayaking at Pelican Point Seal Colony</strong></td><td class="rack-col">N$ 1,500</td><td class="rack-col">N$ 750</td><td class="info-col">3 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Moon Landscape Tour (Moonvalley &amp; Welwitschia)</strong></td><td class="rack-col">N$ 2,000</td><td class="rack-col">N$ 1,000</td><td class="info-col">5 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Sandwich Harbour &amp; Dune Boarding Combo</strong></td><td class="rack-col">N$ 3,500</td><td class="rack-col">N$ 1,750</td><td class="info-col">6 hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Marine Boat Cruise &amp; Sandwich Harbour Combo</strong></td><td class="rack-col">N$ 4,000</td><td class="rack-col">N$ 2,250</td><td class="info-col">7+ hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Kayaking &amp; Sandwich Harbour Combo</strong></td><td class="rack-col">N$ 4,000</td><td class="rack-col">N$ 2,250</td><td class="info-col">7+ hours</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Shoreline Fishing Trips</strong></td><td class="rack-col">On request</td><td class="rack-col">&ndash;</td><td class="info-col">&ndash;</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Sossusvlei</strong></td><td class="rack-col">On request</td><td class="rack-col">&ndash;</td><td class="info-col">&ndash;</td><td class="info-col">2</td></tr>
+                        <tr><td><strong>Spitzkoppe</strong></td><td class="rack-col">On request</td><td class="rack-col">&ndash;</td><td class="info-col">&ndash;</td><td class="info-col">2</td></tr>
                     </tbody>
                 </table>
             </div>
