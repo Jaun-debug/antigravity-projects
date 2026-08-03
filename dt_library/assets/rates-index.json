@@ -1,6 +1,6 @@
 {
  "generated": "2026-07-31T10:19:49",
- "count": 296,
+ "count": 297,
  "lodges": [
   {
    "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -44850,6 +44850,80 @@
     {
      "n": "Living Desert private tour — per vehicle (8 seats)",
      "p": 7480.0
+    }
+   ]
+  },
+  {
+   "file": "",
+   "name": "Muchenje Safari Lodge",
+   "region": "Chobe",
+   "cur": "USD",
+   "rates": [
+    {
+     "n": "Shoulder (1 Apr–30 Jun 26) — pp sharing",
+     "p": 628.0
+    },
+    {
+     "n": "Shoulder (1 Apr–30 Jun 26) — single",
+     "p": 940.0
+    },
+    {
+     "n": "High (1 Jul–31 Oct 26) — pp sharing",
+     "p": 772.0
+    },
+    {
+     "n": "High (1 Jul–31 Oct 26) — single",
+     "p": 1156.0
+    },
+    {
+     "n": "Shoulder (1–30 Nov 26) — pp sharing",
+     "p": 628.0
+    },
+    {
+     "n": "Shoulder (1–30 Nov 26) — single",
+     "p": 940.0
+    },
+    {
+     "n": "Green (1 Dec 26–31 Mar 27) — pp sharing",
+     "p": 468.0
+    },
+    {
+     "n": "Green (1 Dec 26–31 Mar 27) — single",
+     "p": 468.0
+    }
+   ],
+   "rates_2027": [
+    {
+     "n": "Shoulder (1 Apr–30 Jun 27) — pp sharing",
+     "p": 700.0
+    },
+    {
+     "n": "Shoulder (1 Apr–30 Jun 27) — single",
+     "p": 904.0
+    },
+    {
+     "n": "High (1 Jul–31 Oct 27) — pp sharing",
+     "p": 848.0
+    },
+    {
+     "n": "High (1 Jul–31 Oct 27) — single",
+     "p": 1104.0
+    },
+    {
+     "n": "Shoulder (1–30 Nov 27) — pp sharing",
+     "p": 700.0
+    },
+    {
+     "n": "Shoulder (1–30 Nov 27) — single",
+     "p": 904.0
+    },
+    {
+     "n": "Green (1 Dec 27–31 Mar 28) — pp sharing",
+     "p": 512.0
+    },
+    {
+     "n": "Green (1 Dec 27–31 Mar 28) — single",
+     "p": 512.0
     }
    ]
   }
