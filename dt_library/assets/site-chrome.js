@@ -325,7 +325,19 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
       });
       var n=card.querySelector(".nr-card-note");
       if(!ok){
-        if(!n){n=document.createElement("div");n.className="nr-card-note";n.id="";card.appendChild(n);}
+        if(!n){
+          n=document.createElement("div");n.className="nr-card-note";n.id="";
+          /* sit where the rates would have been — above the terms and cancellation
+             sections — rather than tacked on at the very bottom of the card */
+          var slot=card.querySelector(".year-block, .table-responsive, table");
+          if(slot){
+            var wrap=(slot.closest&&(slot.closest(".year-block")||slot.closest(".table-responsive")))||slot;
+            wrap.parentNode.insertBefore(n,wrap);
+          } else {
+            var info=card.querySelector(".supplier-info");
+            if(info&&info.nextSibling) card.insertBefore(n,info.nextSibling); else card.appendChild(n);
+          }
+        }
         n.textContent=y+" rates for this supplier are still to follow. Their published year is "+have.join(" / ")+".";
         n.style.display="";
       } else if(n){ n.style.display="none"; }
