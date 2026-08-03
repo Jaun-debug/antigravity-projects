@@ -350,7 +350,7 @@
     if(document.getElementById("nr-lodge-yr-css"))return;
     var s=document.createElement("style");s.id="nr-lodge-yr-css";
     s.textContent=
-      "#nr-lodge-yr{display:flex;gap:8px;margin:0 2px 16px;flex-wrap:wrap;align-items:center}"
+      "#nr-lodge-yr{display:flex;gap:8px;margin:16px 2px 20px;flex-wrap:wrap;align-items:center}"
       +"#nr-lodge-yr button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(200,90,23,.6);background:rgba(200,90,23,.08);color:#c85a17;transition:background .18s,color .18s}"
       +"#nr-lodge-yr button.on{background:rgba(200,90,23,.6);color:#fff}"
       +"#nr-lodge-yr-note{margin:0 2px 16px;padding:12px 16px;border-radius:10px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.35);color:#8a4a22;font-size:.84rem;line-height:1.45}";

@@ -279,7 +279,7 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     if(document.getElementById("nr-yr-css"))return;
     var s=document.createElement("style");s.id="nr-yr-css";
     s.textContent=
-      "#nr-yrtoggle{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}"
+      "#nr-yrtoggle{display:flex;gap:8px;margin:32px 0 22px;flex-wrap:wrap}"
       +"#nr-yrtoggle button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(200,90,23,.6);background:rgba(200,90,23,.08);color:#c85a17;transition:background .18s,color .18s}"
       +"#nr-yrtoggle button.active{background:rgba(200,90,23,.6);color:#fff}"
       +".nr-card-note{margin:6px 0 2px;padding:15px 18px;border-radius:12px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.4);color:#8a4a22;font-family:Inter,sans-serif;font-size:.86rem;text-align:center;letter-spacing:.2px;line-height:1.45}"
