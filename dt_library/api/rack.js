@@ -2438,6 +2438,166 @@ const DDS_RACK_BY_YEAR = {
     }
   }
 };
+Object.assign(DDS_RACK_BY_YEAR, {
+  "muchenje-safari-lodge": {
+    "2026": {
+      "name": "Muchenje Safari Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2026/27 · valid 1 Apr 2026 – 31 Mar 2027",
+      "note": "Published rack rates, US$ per person per night. Fully inclusive: unlimited safari activities, full-day Chobe excursion with river cruise, night drives, guided walks, mokoro (water permitting), village trip, all meals and drinks, park fees, Kasane airport transfers, laundry and government tax.",
+      "sections": [
+        {
+          "title": "Shoulder season (1 Apr – 30 Jun 2026)",
+          "rows": [
+            [
+              "Per person sharing",
+              "785"
+            ],
+            [
+              "Single per night",
+              "1175"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Oct 2026)",
+          "rows": [
+            [
+              "Per person sharing",
+              "965"
+            ],
+            [
+              "Single per night",
+              "1445"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (1 – 30 Nov 2026)",
+          "rows": [
+            [
+              "Per person sharing",
+              "785"
+            ],
+            [
+              "Single per night",
+              "1175"
+            ]
+          ]
+        },
+        {
+          "title": "Green season (1 Dec 2026 – 31 Mar 2027)",
+          "rows": [
+            [
+              "Per person sharing",
+              "585"
+            ],
+            [
+              "Single per night",
+              "585"
+            ]
+          ]
+        },
+        {
+          "title": "Guides & tour leaders (all seasons)",
+          "rows": [
+            [
+              "Groups 8+ rooms — 1 tour leader",
+              "0"
+            ],
+            [
+              "Groups 3–7 rooms — guide at 50% STO",
+              "0"
+            ],
+            [
+              "Groups 1–2 rooms — guide at STO rate",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Muchenje Safari Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2027/28 · valid 1 Apr 2027 – 31 Mar 2028",
+      "note": "Published rack rates, US$ per person per night. Fully inclusive: unlimited safari activities, full-day Chobe excursion with river cruise, night drives, guided walks, mokoro (water permitting), village trip, all meals and drinks, park fees, Kasane airport transfers, laundry and government tax.",
+      "sections": [
+        {
+          "title": "Shoulder season (1 Apr – 30 Jun 2027)",
+          "rows": [
+            [
+              "Per person sharing",
+              "875"
+            ],
+            [
+              "Single per night",
+              "1130"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Oct 2027)",
+          "rows": [
+            [
+              "Per person sharing",
+              "1060"
+            ],
+            [
+              "Single per night",
+              "1380"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (1 – 30 Nov 2027) · Pay 2 Stay 3",
+          "rows": [
+            [
+              "Per person sharing",
+              "875"
+            ],
+            [
+              "Single per night",
+              "1130"
+            ]
+          ]
+        },
+        {
+          "title": "Green season (1 Dec 2027 – 31 Mar 2028) · Pay 2 Stay 3",
+          "rows": [
+            [
+              "Per person sharing",
+              "640"
+            ],
+            [
+              "Single per night",
+              "640"
+            ]
+          ]
+        },
+        {
+          "title": "Guides & tour leaders (all seasons)",
+          "rows": [
+            [
+              "Groups 8+ rooms — 1 tour leader",
+              "0"
+            ],
+            [
+              "Groups 3–7 rooms — guide at 50% STO",
+              "0"
+            ],
+            [
+              "Groups 1–2 rooms — guide at STO rate",
+              "0"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+});
 Object.assign(VF_RACK, NAM_RACK);
 
 

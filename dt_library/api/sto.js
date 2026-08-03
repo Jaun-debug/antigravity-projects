@@ -1863,6 +1863,168 @@ const DDS_STO_BY_YEAR = {
     }
   }
 };
+Object.assign(DDS_STO_BY_YEAR, {
+  "muchenje-safari-lodge": {
+    "2026": {
+      "name": "Muchenje Safari Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2026/27 · valid 1 Apr 2026 – 31 Mar 2027",
+      "note": "Net 20% STO rates, US$ per person per night. Same inclusions as rack. Minimum 2-night stay in High season (Jul–Oct).",
+      "sections": [
+        {
+          "title": "Shoulder season (1 Apr – 30 Jun 2026)",
+          "rows": [
+            [
+              "Per person sharing",
+              "628"
+            ],
+            [
+              "Single per night",
+              "940"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Oct 2026)",
+          "rows": [
+            [
+              "Per person sharing",
+              "772"
+            ],
+            [
+              "Single per night",
+              "1156"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (1 – 30 Nov 2026)",
+          "rows": [
+            [
+              "Per person sharing",
+              "628"
+            ],
+            [
+              "Single per night",
+              "940"
+            ]
+          ]
+        },
+        {
+          "title": "Green season (1 Dec 2026 – 31 Mar 2027)",
+          "rows": [
+            [
+              "Per person sharing",
+              "468"
+            ],
+            [
+              "Single per night",
+              "468"
+            ]
+          ]
+        },
+        {
+          "title": "Guides & tour leaders (all seasons)",
+          "rows": [
+            [
+              "Groups 8+ rooms — 1 tour leader",
+              "0"
+            ],
+            [
+              "Groups 3–7 rooms — guide at 50% STO",
+              "0"
+            ],
+            [
+              "Groups 1–2 rooms — guide at STO rate",
+              "0"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Muchenje Safari Lodge",
+      "region": "Chobe",
+      "currency": "US$",
+      "validity": "2027/28 · valid 1 Apr 2027 – 31 Mar 2028",
+      "note": "Net 20% STO rates, US$ per person per night. Same inclusions as rack. Minimum 2-night stay in High season (Jul–Oct).",
+      "sections": [
+        {
+          "title": "Shoulder season (1 Apr – 30 Jun 2027)",
+          "rows": [
+            [
+              "Per person sharing",
+              "700"
+            ],
+            [
+              "Single per night",
+              "904"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Oct 2027)",
+          "rows": [
+            [
+              "Per person sharing",
+              "848"
+            ],
+            [
+              "Single per night",
+              "1104"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (1 – 30 Nov 2027) · Pay 2 Stay 3",
+          "rows": [
+            [
+              "Per person sharing",
+              "700"
+            ],
+            [
+              "Single per night",
+              "904"
+            ]
+          ]
+        },
+        {
+          "title": "Green season (1 Dec 2027 – 31 Mar 2028) · Pay 2 Stay 3",
+          "rows": [
+            [
+              "Per person sharing",
+              "512"
+            ],
+            [
+              "Single per night",
+              "512"
+            ]
+          ]
+        },
+        {
+          "title": "Guides & tour leaders (all seasons)",
+          "rows": [
+            [
+              "Groups 8+ rooms — 1 tour leader",
+              "0"
+            ],
+            [
+              "Groups 3–7 rooms — guide at 50% STO",
+              "0"
+            ],
+            [
+              "Groups 1–2 rooms — guide at STO rate",
+              "0"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  }
+});
 
 const STO_DB = {
   "duwisib-guest-farm": {
