@@ -230,7 +230,7 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     hideInline();
   }catch(x){}}
   function rateTables(){
-    var sel=["#detail-view table",".tab-content table",".rate-table","table.rates",".rates-table","#rates table"];
+    var sel=["#detail-view table",".tab-content table",".rate-table","table.rates",".rates-table","#rates table",".rate-card table"];
     var out=[],seen=[];
     sel.forEach(function(s){try{document.querySelectorAll(s).forEach(function(el){if(seen.indexOf(el)<0){seen.push(el);out.push(el);}});}catch(x){}});
     return out;
@@ -264,6 +264,7 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
       "#nr-yrtoggle{display:flex;gap:8px;margin:0 0 16px;flex-wrap:wrap}"
       +"#nr-yrtoggle button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(200,90,23,.6);background:rgba(200,90,23,.08);color:#c85a17;transition:background .18s,color .18s}"
       +"#nr-yrtoggle button.active{background:rgba(200,90,23,.6);color:#fff}"
+      +".nr-card-note{margin:6px 0 2px;padding:15px 18px;border-radius:12px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.4);color:#8a4a22;font-family:Inter,sans-serif;font-size:.86rem;text-align:center;letter-spacing:.2px;line-height:1.45}"
       +"#nr-2027-note{margin:0 0 18px;padding:15px 18px;border-radius:12px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.4);color:#8a4a22;font-family:Inter,sans-serif;font-size:.86rem;text-align:center;letter-spacing:.2px;line-height:1.45}";
     document.head.appendChild(s);
   }
@@ -284,8 +285,29 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     if(t){t.querySelectorAll("button").forEach(function(b){b.classList.toggle("active",b.getAttribute("data-y")===y);});}
     if(hasNative())hideInline();
   }
+  /* Supplier sheets tag each card with the year it actually carries (data-years).
+     Show that card's tables only for the matching year; otherwise swap in a per-card note. */
+  function perCard(){try{return document.querySelectorAll(".rate-card[data-years]").length>0;}catch(x){return false;}}
+  function applyPerCard(y){
+    document.querySelectorAll(".rate-card[data-years]").forEach(function(card){
+      var have=(card.getAttribute("data-years")||"").split(/[,\s]+/).filter(Boolean);
+      var ok=have.indexOf(y)>-1;
+      card.querySelectorAll("table").forEach(function(t){
+        var wrap=(t.closest&&t.closest(".table-responsive"))||t;
+        if(!ok){if(wrap.getAttribute("data-nr-open")==null){wrap.setAttribute("data-nr-open",wrap.style.display||"");wrap.style.display="none";}}
+        else{if(wrap.getAttribute("data-nr-open")!=null){wrap.style.display=wrap.getAttribute("data-nr-open");wrap.removeAttribute("data-nr-open");}}
+      });
+      var n=card.querySelector(".nr-card-note");
+      if(!ok){
+        if(!n){n=document.createElement("div");n.className="nr-card-note";n.id="";card.appendChild(n);}
+        n.textContent=y+" rates for this supplier are still to follow. Their published year is "+have.join(" / ")+".";
+        n.style.display="";
+      } else if(n){ n.style.display="none"; }
+    });
+  }
   function applyState(y){
     if(hasNative()){hideTables(false);showNote(false);driveNative(y);}
+    else if(perCard()){hideTables(false);showNote(false);applyPerCard(y);}
     else{var on=(y==="2027");hideTables(on);showNote(on);}
     reflect();
   }
@@ -316,6 +338,6 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     wrapOpen();
     if(!document.getElementById("nr-yrtoggle")){build();return;}
     reflect();
-    if(!hasNative()&&year()==="2027"){hideTables(true);showNote(true);}
+    if(!hasNative()){ if(perCard())applyPerCard(year()); else if(year()==="2027"){hideTables(true);showNote(true);} }
   },250);});mo.observe(document.body||document.documentElement,{childList:true,subtree:true});}catch(x){}
 }catch(e){}})();
