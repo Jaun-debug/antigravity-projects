@@ -3,6 +3,259 @@
  "note": "STO nett rates, valid 2026/2027",
  "activities": [
   {
+   "name": "Alter Action Sandboarding",
+   "region": "Swakopmund",
+   "items": [
+    {
+     "n": "Lie-down Sandboarding",
+     "d": "Excellent for beginners and high speeds. Board down on stomach on polished boards.",
+     "p": 560.0
+    },
+    {
+     "n": "Stand-up Sandboarding",
+     "d": "For snowboarding enthusiasts or brave beginners. Board down on standard snowboards with boots/bindings.",
+     "p": 640.0
+    }
+   ]
+  },
+  {
+   "name": "Bogenfels & Diamond Tours",
+   "region": "Luderitz",
+   "items": [
+    {
+     "n": "Bogenfels & Diamonds Tour (Full Day Guided)",
+     "d": "Lüderitz Restricted Diamond Area, Bogenfels Arch, ghost towns. Includes food, drinks, permits.",
+     "p": 5232.0
+    },
+    {
+     "n": "Bogenfels & Diamonds Guided (Child 4 – 12)",
+     "d": "",
+     "p": 4112.0
+    },
+    {
+     "n": "Bogenfels & Diamonds Guided (Child under 4)",
+     "d": "",
+     "p": 1264.0
+    },
+    {
+     "n": "E-Bay Diamond History (Half Day Guided)",
+     "d": "Elizabeth Bay ghost town, Kolmanskop border tracks. Guided half-day tour.",
+     "p": 2904.0
+    },
+    {
+     "n": "E-Bay Diamond History (Child 4 – 12)",
+     "d": "",
+     "p": 2112.0
+    }
+   ]
+  },
+  {
+   "name": "Desert Explorers Swakopmund",
+   "region": "Swakopmund",
+   "items": [
+    {
+     "n": "Quad Bike Tour (2 Hours)",
+     "d": "Scale high dunes on automated quad bikes. Beginners welcome.",
+     "p": 712.0
+    },
+    {
+     "n": "Quad Bike Tour (1 Hour)",
+     "d": "A perfect quick dune ride covering standard desert tracks.",
+     "p": 472.0
+    },
+    {
+     "n": "Explorer Quad Tour (2.5 Hours)",
+     "d": "Slow-paced educational quad tour focusing on hidden plant/animal life.",
+     "p": 760.0
+    },
+    {
+     "n": "Dune Breakfast Run (3 Hours - Min 2 Pax)",
+     "d": "Quad bike deep into the desert, followed by breakfast at Rossmund Golf Estate.",
+     "p": 1080.0
+    },
+    {
+     "n": "Camel Ride (30 Minutes)",
+     "d": "A highly popular family tour along the Swakopmund River delta border.",
+     "p": 312.0
+    },
+    {
+     "n": "Living Desert Tour (3 Hours)",
+     "d": "4x4 ecology tour to find the \"Little 5\" (Side-winder snake, chameleons, geckos).",
+     "p": 760.0
+    },
+    {
+     "n": "Township Cultural Tour",
+     "d": "Cultural tour through Swakopmund township including traditional meal.",
+     "p": 720.0
+    },
+    {
+     "n": "Dolphin & Seal Catamaran Cruise",
+     "d": "Walvis Bay catamaran cruise to see seals, dolphins, pelicans. Gourmet lunch.",
+     "p": 1160.0
+    },
+    {
+     "n": "Sandwich Harbour 4x4 Excursion",
+     "d": "Iconic 4x4 dune tour past salt pans to Sandwich Harbour lagoon.",
+     "p": 2320.0
+    },
+    {
+     "n": "Tandem Skydive (10,000 feet)",
+     "d": "Freefall jump over the Namib desert with professional tandem masters.",
+     "p": 3948.0
+    },
+    {
+     "n": "Moonlandscape Scenic Tour",
+     "d": "Drive to the Welwitschia plains and eroded Moonlandscape canyons.",
+     "p": 880.0
+    },
+    {
+     "n": "Cape Cross Seal Colony Tour",
+     "d": "Overland tour past Henties Bay to the massive Cape Cross seal reserve.",
+     "p": 1760.0
+    },
+    {
+     "n": "Paragliding Dune Flights",
+     "d": "Soar over coastal dunes with standard paragliding glider tandem.",
+     "p": 1520.0
+    },
+    {
+     "n": "Surf & Turf Combo",
+     "d": "AM Catamaran Cruise in Walvis Bay + PM 90-min Quad Bike in Swakopmund.",
+     "p": 1712.0
+    },
+    {
+     "n": "Catamaran / Sandwich Harbour 4x4 Combo",
+     "d": "AM Catamaran Marine Cruise + PM Sandwich Harbour 4x4 dune tour.",
+     "p": 3480.0
+    }
+   ]
+  },
+  {
+   "name": "Infinite African Safaris",
+   "items": [
+    {
+     "n": "Half Day Sandwich Harbour — Adult",
+     "t": "2026 4 hours · RACK (no STO stated)",
+     "p": 2500.0
+    },
+    {
+     "n": "Half Day Sandwich Harbour — Child (4–12)",
+     "t": "2026 4 hours · RACK (no STO stated)",
+     "p": 1250.0
+    },
+    {
+     "n": "Sunset Sandwich Harbour — Adult",
+     "t": "2026 4 hours · RACK (no STO stated)",
+     "p": 3500.0
+    },
+    {
+     "n": "Sunset Sandwich Harbour — Child (4–12)",
+     "t": "2026 4 hours · RACK (no STO stated)",
+     "p": 1750.0
+    },
+    {
+     "n": "Full Day Sandwich Harbour — Adult",
+     "t": "2026 6 hours · RACK (no STO stated)",
+     "p": 3500.0
+    },
+    {
+     "n": "Full Day Sandwich Harbour — Child (4–12)",
+     "t": "2026 6 hours · RACK (no STO stated)",
+     "p": 1750.0
+    },
+    {
+     "n": "Private Sandwich Harbour Custom Tour — Adult",
+     "t": "2026 4 hours · RACK (no STO stated)",
+     "p": 3500.0
+    },
+    {
+     "n": "Private Sandwich Harbour Custom Tour — Child (4–12)",
+     "t": "2026 4 hours · RACK (no STO stated)",
+     "p": 1750.0
+    },
+    {
+     "n": "Marine Boat Cruise — Adult",
+     "t": "2026 3 hours · RACK (no STO stated)",
+     "p": 1500.0
+    },
+    {
+     "n": "Marine Boat Cruise — Child (4–12)",
+     "t": "2026 3 hours · RACK (no STO stated)",
+     "p": 750.0
+    },
+    {
+     "n": "Kayaking at Pelican Point Seal Colony — Adult",
+     "t": "2026 3 hours · RACK (no STO stated)",
+     "p": 1500.0
+    },
+    {
+     "n": "Kayaking at Pelican Point Seal Colony — Child (4–12)",
+     "t": "2026 3 hours · RACK (no STO stated)",
+     "p": 750.0
+    },
+    {
+     "n": "Moon Landscape Tour (Moonvalley & Welwitschia) — Adult",
+     "t": "2026 5 hours · RACK (no STO stated)",
+     "p": 2000.0
+    },
+    {
+     "n": "Moon Landscape Tour (Moonvalley & Welwitschia) — Child (4–12)",
+     "t": "2026 5 hours · RACK (no STO stated)",
+     "p": 1000.0
+    },
+    {
+     "n": "Sandwich Harbour & Dune Boarding Combo — Adult",
+     "t": "2026 6 hours · RACK (no STO stated)",
+     "p": 3500.0
+    },
+    {
+     "n": "Sandwich Harbour & Dune Boarding Combo — Child (4–12)",
+     "t": "2026 6 hours · RACK (no STO stated)",
+     "p": 1750.0
+    },
+    {
+     "n": "Marine Boat Cruise & Sandwich Harbour Combo — Adult",
+     "t": "2026 7+ hours · RACK (no STO stated)",
+     "p": 4000.0
+    },
+    {
+     "n": "Marine Boat Cruise & Sandwich Harbour Combo — Child (4–12)",
+     "t": "2026 7+ hours · RACK (no STO stated)",
+     "p": 2250.0
+    },
+    {
+     "n": "Kayaking & Sandwich Harbour Combo — Adult",
+     "t": "2026 7+ hours · RACK (no STO stated)",
+     "p": 4000.0
+    },
+    {
+     "n": "Kayaking & Sandwich Harbour Combo — Child (4–12)",
+     "t": "2026 7+ hours · RACK (no STO stated)",
+     "p": 2250.0
+    }
+   ]
+  },
+  {
+   "name": "Living Desert Adventures",
+   "items": [
+    {
+     "n": "Living Desert \"Little 5\" Tour — Adult",
+     "t": "2027 half day (4–5 hrs) · STO nett",
+     "p": 935.0
+    },
+    {
+     "n": "Living Desert \"Little 5\" Tour — Child (12 and under)",
+     "t": "2027 half day (4–5 hrs) · STO nett",
+     "p": 510.0
+    },
+    {
+     "n": "Living Desert Private Tour — per vehicle (8 seats)",
+     "t": "2027 half day (4–5 hrs) · STO nett",
+     "p": 7480.0
+    }
+   ]
+  },
+  {
    "name": "Mola Mola Safaris",
    "region": "Swakopmund",
    "items": [
@@ -128,137 +381,345 @@
      "p": 7875.0
     }
    ]
-  },
-  {
-   "name": "Bogenfels & Diamond Tours",
-   "region": "Luderitz",
-   "items": [
-    {
-     "n": "Bogenfels & Diamonds Tour (Full Day Guided)",
-     "d": "Lüderitz Restricted Diamond Area, Bogenfels Arch, ghost towns. Includes food, drinks, permits.",
-     "p": 5232.0
-    },
-    {
-     "n": "Bogenfels & Diamonds Guided (Child 4 – 12)",
-     "d": "",
-     "p": 4112.0
-    },
-    {
-     "n": "Bogenfels & Diamonds Guided (Child under 4)",
-     "d": "",
-     "p": 1264.0
-    },
-    {
-     "n": "E-Bay Diamond History (Half Day Guided)",
-     "d": "Elizabeth Bay ghost town, Kolmanskop border tracks. Guided half-day tour.",
-     "p": 2904.0
-    },
-    {
-     "n": "E-Bay Diamond History (Child 4 – 12)",
-     "d": "",
-     "p": 2112.0
-    }
-   ]
-  },
-  {
-   "name": "Alter Action Sandboarding",
-   "region": "Swakopmund",
-   "items": [
-    {
-     "n": "Lie-down Sandboarding",
-     "d": "Excellent for beginners and high speeds. Board down on stomach on polished boards.",
-     "p": 560.0
-    },
-    {
-     "n": "Stand-up Sandboarding",
-     "d": "For snowboarding enthusiasts or brave beginners. Board down on standard snowboards with boots/bindings.",
-     "p": 640.0
-    }
-   ]
-  },
-  {
-   "name": "Desert Explorers Swakopmund",
-   "region": "Swakopmund",
-   "items": [
-    {
-     "n": "Quad Bike Tour (2 Hours)",
-     "d": "Scale high dunes on automated quad bikes. Beginners welcome.",
-     "p": 712.0
-    },
-    {
-     "n": "Quad Bike Tour (1 Hour)",
-     "d": "A perfect quick dune ride covering standard desert tracks.",
-     "p": 472.0
-    },
-    {
-     "n": "Explorer Quad Tour (2.5 Hours)",
-     "d": "Slow-paced educational quad tour focusing on hidden plant/animal life.",
-     "p": 760.0
-    },
-    {
-     "n": "Dune Breakfast Run (3 Hours - Min 2 Pax)",
-     "d": "Quad bike deep into the desert, followed by breakfast at Rossmund Golf Estate.",
-     "p": 1080.0
-    },
-    {
-     "n": "Camel Ride (30 Minutes)",
-     "d": "A highly popular family tour along the Swakopmund River delta border.",
-     "p": 312.0
-    },
-    {
-     "n": "Living Desert Tour (3 Hours)",
-     "d": "4x4 ecology tour to find the \"Little 5\" (Side-winder snake, chameleons, geckos).",
-     "p": 760.0
-    },
-    {
-     "n": "Township Cultural Tour",
-     "d": "Cultural tour through Swakopmund township including traditional meal.",
-     "p": 720.0
-    },
-    {
-     "n": "Dolphin & Seal Catamaran Cruise",
-     "d": "Walvis Bay catamaran cruise to see seals, dolphins, pelicans. Gourmet lunch.",
-     "p": 1160.0
-    },
-    {
-     "n": "Sandwich Harbour 4x4 Excursion",
-     "d": "Iconic 4x4 dune tour past salt pans to Sandwich Harbour lagoon.",
-     "p": 2320.0
-    },
-    {
-     "n": "Tandem Skydive (10,000 feet)",
-     "d": "Freefall jump over the Namib desert with professional tandem masters.",
-     "p": 3948.0
-    },
-    {
-     "n": "Moonlandscape Scenic Tour",
-     "d": "Drive to the Welwitschia plains and eroded Moonlandscape canyons.",
-     "p": 880.0
-    },
-    {
-     "n": "Cape Cross Seal Colony Tour",
-     "d": "Overland tour past Henties Bay to the massive Cape Cross seal reserve.",
-     "p": 1760.0
-    },
-    {
-     "n": "Paragliding Dune Flights",
-     "d": "Soar over coastal dunes with standard paragliding glider tandem.",
-     "p": 1520.0
-    },
-    {
-     "n": "Surf & Turf Combo",
-     "d": "AM Catamaran Cruise in Walvis Bay + PM 90-min Quad Bike in Swakopmund.",
-     "p": 1712.0
-    },
-    {
-     "n": "Catamaran / Sandwich Harbour 4x4 Combo",
-     "d": "AM Catamaran Marine Cruise + PM Sandwich Harbour 4x4 dune tour.",
-     "p": 3480.0
-    }
-   ]
   }
  ],
  "vehicles": [
+  {
+   "name": "Namib Roos Car Rentals",
+   "items": [
+    {
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2288.0
+    },
+    {
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2188.0
+    },
+    {
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2520.0
+    },
+    {
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2416.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 1756.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 1656.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 1976.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 1876.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 1868.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 1764.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2088.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 1988.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 1976.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 1876.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2204.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2104.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2124.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2024.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2232.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2132.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2264.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2164.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2376.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2276.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2404.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2300.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2524.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2420.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 4232.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 4132.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 4712.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 4612.0
+    }
+   ]
+  },
+  {
+   "name": "Namibia Car Rental",
+   "items": [
+    {
+     "n": "Group B — Suzuki Baleno (Compact Hatch, Auto)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 592.0
+    },
+    {
+     "n": "Group B — Suzuki Baleno (Compact Hatch, Auto)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 522.0
+    },
+    {
+     "n": "Group B — Suzuki Baleno (Compact Hatch, Auto)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 464.0
+    },
+    {
+     "n": "Group D — Suzuki Jimny (Compact 4x4 Jeep)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 1093.0
+    },
+    {
+     "n": "Group D — Suzuki Jimny (Compact 4x4 Jeep)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 929.0
+    },
+    {
+     "n": "Group D — Suzuki Jimny (Compact 4x4 Jeep)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 893.0
+    },
+    {
+     "n": "Group I — Toyota Fortuner / Mahindra Scorpio (SUV 4x4 Auto)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 2267.0
+    },
+    {
+     "n": "Group I — Toyota Fortuner / Mahindra Scorpio (SUV 4x4 Auto)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1727.0
+    },
+    {
+     "n": "Group I — Toyota Fortuner / Mahindra Scorpio (SUV 4x4 Auto)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1511.0
+    },
+    {
+     "n": "Group J — Isuzu D-Max (Single Cab 4x4 Manual)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 1919.0
+    },
+    {
+     "n": "Group J — Isuzu D-Max (Single Cab 4x4 Manual)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1575.0
+    },
+    {
+     "n": "Group J — Isuzu D-Max (Single Cab 4x4 Manual)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1470.0
+    },
+    {
+     "n": "Group K — Toyota Hilux (Double Cab 4x4 Manual)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 2058.0
+    },
+    {
+     "n": "Group K — Toyota Hilux (Double Cab 4x4 Manual)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1673.0
+    },
+    {
+     "n": "Group K — Toyota Hilux (Double Cab 4x4 Manual)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1470.0
+    },
+    {
+     "n": "Group M — Toyota Hilux / Isuzu D-Max (Double Cab 4x4 Auto)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 2205.0
+    },
+    {
+     "n": "Group M — Toyota Hilux / Isuzu D-Max (Double Cab 4x4 Auto)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1680.0
+    },
+    {
+     "n": "Group M — Toyota Hilux / Isuzu D-Max (Double Cab 4x4 Auto)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1470.0
+    },
+    {
+     "n": "Group L — Toyota Hilux Expedition (Double Cab 4x4 Auto)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 2352.0
+    },
+    {
+     "n": "Group L — Toyota Hilux Expedition (Double Cab 4x4 Auto)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1855.0
+    },
+    {
+     "n": "Group L — Toyota Hilux Expedition (Double Cab 4x4 Auto)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1733.0
+    },
+    {
+     "n": "Group O — Toyota Land Cruiser 79 (Double Cab 4x4 Manual)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 2389.0
+    },
+    {
+     "n": "Group O — Toyota Land Cruiser 79 (Double Cab 4x4 Manual)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1995.0
+    },
+    {
+     "n": "Group O — Toyota Land Cruiser 79 (Double Cab 4x4 Manual)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1768.0
+    },
+    {
+     "n": "Group S4 — Toyota Quantum (7-seater)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 3079.0
+    },
+    {
+     "n": "Group S4 — Toyota Quantum (7-seater)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 2695.0
+    },
+    {
+     "n": "Group S4 — Toyota Quantum (7-seater)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 2555.0
+    },
+    {
+     "n": "Group T — Toyota Quantum (Mini-Bus, 14-seater)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 2208.0
+    },
+    {
+     "n": "Group T — Toyota Quantum (Mini-Bus, 14-seater)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 1820.0
+    },
+    {
+     "n": "Group T — Toyota Quantum (Mini-Bus, 14-seater)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 1610.0
+    },
+    {
+     "n": "Group T4 — Toyota Quantum (10-seater)",
+     "t": "High (1 Jul – 30 Nov) · 15+ days",
+     "p": 3184.0
+    },
+    {
+     "n": "Group T4 — Toyota Quantum (10-seater)",
+     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
+     "p": 2800.0
+    },
+    {
+     "n": "Group T4 — Toyota Quantum (10-seater)",
+     "t": "Low (1 Dec – 29 Feb) · 15+ days",
+     "p": 2660.0
+    }
+   ],
+   "note": "2027 STO20, 15+ day rate, non-camping fleet"
+  },
   {
    "name": "Namibia Tours & Safaris (NTS)",
    "items": [
@@ -465,407 +926,6 @@
    ]
   },
   {
-   "name": "Namibia Car Rental",
-   "items": [
-    {
-     "n": "Group B — Suzuki Baleno (Compact Hatch, Auto)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 592.0
-    },
-    {
-     "n": "Group B — Suzuki Baleno (Compact Hatch, Auto)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 522.0
-    },
-    {
-     "n": "Group B — Suzuki Baleno (Compact Hatch, Auto)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 464.0
-    },
-    {
-     "n": "Group D — Suzuki Jimny (Compact 4x4 Jeep)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 1093.0
-    },
-    {
-     "n": "Group D — Suzuki Jimny (Compact 4x4 Jeep)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 929.0
-    },
-    {
-     "n": "Group D — Suzuki Jimny (Compact 4x4 Jeep)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 893.0
-    },
-    {
-     "n": "Group I — Toyota Fortuner / Mahindra Scorpio (SUV 4x4 Auto)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 2267.0
-    },
-    {
-     "n": "Group I — Toyota Fortuner / Mahindra Scorpio (SUV 4x4 Auto)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1727.0
-    },
-    {
-     "n": "Group I — Toyota Fortuner / Mahindra Scorpio (SUV 4x4 Auto)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1511.0
-    },
-    {
-     "n": "Group J — Isuzu D-Max (Single Cab 4x4 Manual)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 1919.0
-    },
-    {
-     "n": "Group J — Isuzu D-Max (Single Cab 4x4 Manual)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1575.0
-    },
-    {
-     "n": "Group J — Isuzu D-Max (Single Cab 4x4 Manual)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1470.0
-    },
-    {
-     "n": "Group K — Toyota Hilux (Double Cab 4x4 Manual)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 2058.0
-    },
-    {
-     "n": "Group K — Toyota Hilux (Double Cab 4x4 Manual)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1673.0
-    },
-    {
-     "n": "Group K — Toyota Hilux (Double Cab 4x4 Manual)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1470.0
-    },
-    {
-     "n": "Group M — Toyota Hilux / Isuzu D-Max (Double Cab 4x4 Auto)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 2205.0
-    },
-    {
-     "n": "Group M — Toyota Hilux / Isuzu D-Max (Double Cab 4x4 Auto)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1680.0
-    },
-    {
-     "n": "Group M — Toyota Hilux / Isuzu D-Max (Double Cab 4x4 Auto)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1470.0
-    },
-    {
-     "n": "Group L — Toyota Hilux Expedition (Double Cab 4x4 Auto)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 2352.0
-    },
-    {
-     "n": "Group L — Toyota Hilux Expedition (Double Cab 4x4 Auto)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1855.0
-    },
-    {
-     "n": "Group L — Toyota Hilux Expedition (Double Cab 4x4 Auto)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1733.0
-    },
-    {
-     "n": "Group O — Toyota Land Cruiser 79 (Double Cab 4x4 Manual)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 2389.0
-    },
-    {
-     "n": "Group O — Toyota Land Cruiser 79 (Double Cab 4x4 Manual)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1995.0
-    },
-    {
-     "n": "Group O — Toyota Land Cruiser 79 (Double Cab 4x4 Manual)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1768.0
-    },
-    {
-     "n": "Group S4 — Toyota Quantum (7-seater)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 3079.0
-    },
-    {
-     "n": "Group S4 — Toyota Quantum (7-seater)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 2695.0
-    },
-    {
-     "n": "Group S4 — Toyota Quantum (7-seater)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 2555.0
-    },
-    {
-     "n": "Group T — Toyota Quantum (Mini-Bus, 14-seater)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 2208.0
-    },
-    {
-     "n": "Group T — Toyota Quantum (Mini-Bus, 14-seater)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 1820.0
-    },
-    {
-     "n": "Group T — Toyota Quantum (Mini-Bus, 14-seater)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 1610.0
-    },
-    {
-     "n": "Group T4 — Toyota Quantum (10-seater)",
-     "t": "High (1 Jul – 30 Nov) · 15+ days",
-     "p": 3184.0
-    },
-    {
-     "n": "Group T4 — Toyota Quantum (10-seater)",
-     "t": "Shoulder (1 Mar – 30 Jun) · 15+ days",
-     "p": 2800.0
-    },
-    {
-     "n": "Group T4 — Toyota Quantum (10-seater)",
-     "t": "Low (1 Dec – 29 Feb) · 15+ days",
-     "p": 2660.0
-    }
-   ],
-   "note": "2027 STO20, 15+ day rate, non-camping fleet"
-  },
-  {
-   "name": "Namib Roos Car Rentals",
-   "items": [
-    {
-     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 2288.0
-    },
-    {
-     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 2188.0
-    },
-    {
-     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 2520.0
-    },
-    {
-     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 2416.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 1756.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 1656.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 1976.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 1876.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 1868.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 1764.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 2088.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 1988.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 1976.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 1876.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 2204.0
-    },
-    {
-     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 2104.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 2124.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 2024.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 2232.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 2132.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 2264.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 2164.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 2376.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 2276.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 2404.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 2300.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 2524.0
-    },
-    {
-     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 2420.0
-    },
-    {
-     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
-     "t": "2027 Low (Jan–Jun) · 1–15 days",
-     "p": 4232.0
-    },
-    {
-     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
-     "t": "2027 Low (Jan–Jun) · 16+ days",
-     "p": 4132.0
-    },
-    {
-     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
-     "t": "2027 High (Jul–Dec) · 1–15 days",
-     "p": 4712.0
-    },
-    {
-     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
-     "t": "2027 High (Jul–Dec) · 16+ days",
-     "p": 4612.0
-    }
-   ]
-  },
-  {
-   "name": "Zaris Safaris",
-   "items": [
-    {
-     "n": "Toyota Fortuner 4x4",
-     "t": "Low Season (1-14 Days)",
-     "p": 2060.0
-    },
-    {
-     "n": "Toyota Fortuner 4x4",
-     "t": "Low Season (15+ Days)",
-     "p": 1996.0
-    },
-    {
-     "n": "Toyota Fortuner 4x4",
-     "t": "High Season (1-14 Days)",
-     "p": 2416.0
-    },
-    {
-     "n": "Toyota Fortuner 4x4",
-     "t": "High Season (15+ Days)",
-     "p": 2384.0
-    },
-    {
-     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
-     "t": "Low Season (1-14 Days)",
-     "p": 2236.0
-    },
-    {
-     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
-     "t": "Low Season (15+ Days)",
-     "p": 2164.0
-    },
-    {
-     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
-     "t": "High Season (1-14 Days)",
-     "p": 3020.0
-    },
-    {
-     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
-     "t": "High Season (15+ Days)",
-     "p": 2988.0
-    },
-    {
-     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
-     "t": "Low Season (1-14 Days)",
-     "p": 2640.0
-    },
-    {
-     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
-     "t": "Low Season (15+ Days)",
-     "p": 2552.0
-    },
-    {
-     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
-     "t": "High Season (1-14 Days)",
-     "p": 3412.0
-    },
-    {
-     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
-     "t": "High Season (15+ Days)",
-     "p": 3376.0
-    }
-   ]
-  },
-  {
    "name": "Sanga Group Travel Solutions",
    "items": [
     {
@@ -907,61 +967,6 @@
      "n": "18-Seater Hino Off-road Safari Truck",
      "t": "High Season STO Rate",
      "p": 6680.0
-    }
-   ]
-  },
-  {
-   "name": "Zap Car Rental",
-   "items": [
-    {
-     "n": "Toyota Fortuner 4x4",
-     "t": "Low Season STO Rate",
-     "p": 2460.0
-    },
-    {
-     "n": "Toyota Fortuner 4x4",
-     "t": "High Season STO Rate",
-     "p": 2760.0
-    },
-    {
-     "n": "Toyota Hilux Double Cab 4x4",
-     "t": "Low Season STO Rate",
-     "p": 2460.0
-    },
-    {
-     "n": "Toyota Hilux Double Cab 4x4",
-     "t": "High Season STO Rate",
-     "p": 2760.0
-    },
-    {
-     "n": "Toyota Hilux 4x4 (Fully Camping Equipped)",
-     "t": "Low Season STO Rate",
-     "p": 2740.0
-    },
-    {
-     "n": "Toyota Hilux 4x4 (Fully Camping Equipped)",
-     "t": "High Season STO Rate",
-     "p": 3440.0
-    },
-    {
-     "n": "Toyota Land Cruiser Double Cab 4x4",
-     "t": "Low Season STO Rate",
-     "p": 2810.0
-    },
-    {
-     "n": "Toyota Land Cruiser Double Cab 4x4",
-     "t": "High Season STO Rate",
-     "p": 3110.0
-    },
-    {
-     "n": "Toyota Landcruiser Stretch Safari (9-Seater)",
-     "t": "Low Season STO Rate",
-     "p": 3910.0
-    },
-    {
-     "n": "Toyota Landcruiser Stretch Safari (9-Seater)",
-     "t": "High Season STO Rate",
-     "p": 4210.0
     }
    ]
   },
@@ -1342,6 +1347,526 @@
      "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
      "t": "2026 High (Jul–Dec) · 15+ days",
      "p": 3156.0
+    }
+   ]
+  },
+  {
+   "name": "Warthog Car Rental",
+   "items": [
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1714.65
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1905.75
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2425.5
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1587.6
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1778.7
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2194.5
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1524.6
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1651.65
+    },
+    {
+     "n": "2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2021.25
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2038.05
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2248.05
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2787.75
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1899.45
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2108.4
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2556.75
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1829.1
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1968.75
+    },
+    {
+     "n": "2.8 Double Cab — non-camping (Toyota, automatic)",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2362.5
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 3465.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 4095.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 4515.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 3360.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 3990.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 4410.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 3255.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 3885.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 4200.0
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1714.65
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1905.75
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2257.5
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1651.65
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1778.7
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2130.45
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1587.6
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1651.65
+    },
+    {
+     "n": "Toyota Fortuner — automatic",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2003.4
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1587.6
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1587.6
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1714.65
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1524.6
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1524.6
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1651.65
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1460.55
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1460.55
+    },
+    {
+     "n": "Suzuki Jimny — automatic",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1587.6
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1778.7
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2032.8
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2714.25
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1691.55
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1905.75
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2610.3
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1570.8
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1778.7
+    },
+    {
+     "n": "2.4 Double Cab — camping, 2 pax",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2367.75
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2108.4
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2387.7
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 3123.75
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2011.8
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2248.05
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 3008.25
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1877.4
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2108.4
+    },
+    {
+     "n": "2.8 Double Cab — camping, 2 pax",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2493.75
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 1930.95
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2159.85
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2772.0
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 1803.9
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2032.8
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2702.7
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1676.85
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 1905.75
+    },
+    {
+     "n": "2.4 Double Cab — camping, 4 pax",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2483.25
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2277.45
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 2541.0
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 3187.8
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2136.75
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 2387.7
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 3112.2
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2011.8
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2248.05
+    },
+    {
+     "n": "2.8 Double Cab — camping, 4 pax",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 2870.7
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 Off (Dec–Feb) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 3885.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 Mid (Mar–Jun) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 4410.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 High (Jul–Nov) · 1–7 days — RACK (STO sheet outstanding)",
+     "p": 5040.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 Off (Dec–Feb) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 3780.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 Mid (Mar–Jun) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 4305.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 High (Jul–Nov) · 8–14 days — RACK (STO sheet outstanding)",
+     "p": 4935.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 Off (Dec–Feb) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 3675.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 Mid (Mar–Jun) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 4200.0
+    },
+    {
+     "n": "7-Seater Land Cruiser — camping, 2–7 pax (fridge included)",
+     "t": "2026 High (Jul–Nov) · 15+ days — RACK (STO sheet outstanding)",
+     "p": 4830.0
+    }
+   ]
+  },
+  {
+   "name": "Zaris Safaris",
+   "items": [
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "Low Season (1-14 Days)",
+     "p": 2060.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "Low Season (15+ Days)",
+     "p": 1996.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "High Season (1-14 Days)",
+     "p": 2416.0
+    },
+    {
+     "n": "Toyota Fortuner 4x4",
+     "t": "High Season (15+ Days)",
+     "p": 2384.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "Low Season (1-14 Days)",
+     "p": 2236.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "Low Season (15+ Days)",
+     "p": 2164.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "High Season (1-14 Days)",
+     "p": 3020.0
+    },
+    {
+     "n": "Toyota Hilux D/C 4x4 Fully Equipped",
+     "t": "High Season (15+ Days)",
+     "p": 2988.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "Low Season (1-14 Days)",
+     "p": 2640.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "Low Season (15+ Days)",
+     "p": 2552.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "High Season (1-14 Days)",
+     "p": 3412.0
+    },
+    {
+     "n": "Toyota Land Cruiser D/C 4x4 Fully Equipped",
+     "t": "High Season (15+ Days)",
+     "p": 3376.0
     }
    ]
   }
