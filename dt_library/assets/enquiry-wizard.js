@@ -447,3 +447,20 @@
   }
   if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
 }catch(e){}})();
+
+/* ===== Shared site chrome on property pages ==================================
+   Property pages were built with their own hand-rolled header, dropdown menus,
+   footer and sign-in modal, so they drifted from the rest of the site: the
+   Accommodation / Vehicles / Activities menus looked different and "Agent Sign
+   In" opened a bare username box instead of the Agent / Supplier chooser.
+
+   site-chrome.js already strips any existing .main-header / #mobile-menu /
+   #login-modal / footer and injects the canonical ones, so simply loading it
+   here brings every property page onto the same chrome as the home page.
+   ============================================================================ */
+;(function(){"use strict";try{
+  if(document.querySelector('script[src*="site-chrome.js"]')) return;
+  var s=document.createElement("script");
+  s.src="/assets/site-chrome.js";
+  document.head.appendChild(s);
+}catch(e){}})();

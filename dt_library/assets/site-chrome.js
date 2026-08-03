@@ -321,6 +321,8 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     }
   }catch(x){}}
   function build(){
+    /* property pages ship their own season pills (enquiry-wizard.js) — don't double up */
+    if(document.getElementById("nr-lodge-yr")) return;
     var w=document.getElementById("nr-yrtoggle");
     if(!w){
       injectCss();
