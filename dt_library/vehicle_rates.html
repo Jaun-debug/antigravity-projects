@@ -40,7 +40,7 @@
         .header h1 { font-size: 2.8rem; color: var(--brand-charcoal); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
         .header p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; border-top: 1px solid rgba(164, 130, 86, 0.3); border-bottom: 1px solid rgba(164, 130, 86, 0.3); display: inline-block; padding: 6px 20px; margin-top: 5px; }
         html,body{overflow-x:hidden;max-width:100%;}
-        .header.nr-hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-40px;margin-bottom:0;min-height:calc(100vh - 260px);background:#2b2b2b url('/media/hero-poster.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 24px 88px;overflow:hidden;}
+        .header.nr-hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-40px;margin-bottom:0;min-height:min(56vh,520px);background:#2b2b2b url('/media/hero-poster.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 24px 88px;overflow:hidden;}
         .header.nr-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.62));}
         .header.nr-hero>*{position:relative;z-index:2;}
         .header.nr-hero h1{color:#fff !important;text-shadow:0 3px 20px rgba(0,0,0,.45);}
@@ -299,13 +299,15 @@
             nrcr:'https://wetu.com/imageHandler/c1920x1080/1519/17_little_kulala_red_sand_dunes_0374.jpg?fmt=jpg',
             zaris:'https://wetu.com/imageHandler/c1920x1080/15393/201204_mowani_1223.jpg?fmt=jpg',
             sanga:'https://wetu.com/imageHandler/c1920x1080/1520/1738592251695_KulalaDL_MainAreas_0724_TC_082.jpg?fmt=jpg',
-            suricate:'https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg'
+            suricate:'https://wetu.com/imageHandler/c1920x1080/1642/lodge_rocks_valley_wwl_08-12_dropbox.jpg?fmt=jpg',
+            warthog:'https://wetu.com/imageHandler/c1920x1080/10498/camp_kipwe_-_aerial_view_1.jpg?fmt=jpg',
+            sch:'https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg'
           };
           function hero(){return document.querySelector('.header.nr-hero');}
           function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"'),url('/media/hero-poster.jpg')";}
           function keyFromHash(){var m=(location.hash||'').replace('#','').trim();return HERO_IMG.hasOwnProperty(m)?m:'nts';}
           function moveBack(){var bb=document.querySelector('.back-btn'),h=hero();if(bb&&h&&bb.parentNode!==h){h.appendChild(bb);bb.style.position='absolute';bb.style.top='16px';bb.style.left='20px';bb.style.zIndex='4';bb.style.color='#fff';bb.style.borderColor='rgba(255,255,255,.6)';bb.style.background='rgba(0,0,0,.25)';}}
-          function fitHero(){var h=hero();if(!h)return;var cw=document.documentElement.clientWidth;var p=h.parentNode;var pl=p?(p.getBoundingClientRect().left+(parseFloat(getComputedStyle(p).paddingLeft)||0)):0;h.style.width=cw+'px';h.style.marginLeft=Math.round(-pl)+'px';var t=h.getBoundingClientRect().top;h.style.minHeight=Math.max(320,Math.round(window.innerHeight-t-160))+'px';}
+          function fitHero(){var h=hero();if(!h)return;var cw=document.documentElement.clientWidth;var p=h.parentNode;var pl=p?(p.getBoundingClientRect().left+(parseFloat(getComputedStyle(p).paddingLeft)||0)):0;h.style.width=cw+'px';h.style.marginLeft=Math.round(-pl)+'px';var t=h.getBoundingClientRect().top;h.style.minHeight=Math.max(300,Math.min(520,Math.round(window.innerHeight-t-160)))+'px';}
           document.addEventListener('DOMContentLoaded',function(){moveBack();setHero(keyFromHash());fitHero();window.addEventListener('resize',fitHero);window.addEventListener('load',fitHero);setTimeout(fitHero,400);var iv=setInterval(function(){if(typeof window.switchSupplier==='function'){clearInterval(iv);var o=window.switchSupplier;window.switchSupplier=function(k){var r=o.apply(this,arguments);setHero(k);return r;};}},80);setTimeout(function(){clearInterval(iv);},4000);window.addEventListener('hashchange',function(){var k=keyFromHash();setHero(k);var tab=document.querySelector(".tab-link[onclick*=\"'"+k+"'\"]");if(typeof window.switchSupplier==='function'){try{window.switchSupplier(k,tab);}catch(e){}}});});
         })();
         </script>
@@ -522,19 +524,28 @@ document.addEventListener('DOMContentLoaded',function(){
             </div>
 
             <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr><th>Vehicle Model &amp; Equipment</th><th class="sto-col">Low STO (1–15 days)</th><th class="rack-col">Low Rack (1–15 days)</th><th class="sto-col">High STO (1–15 days)</th><th class="rack-col">High Rack (1–15 days)</th><th class="sto-col">Low STO (16+ days)</th><th class="rack-col">Low Rack (16+ days)</th><th class="sto-col">High STO (16+ days)</th><th class="rack-col">High Rack (16+ days)</th></tr>
+                <table><thead>
+                        <tr><th>Vehicle Model &amp; Equipment</th><th class="sto-col">1&ndash;15 days</th><th class="rack-col">1&ndash;15 days &mdash; Rack</th><th class="sto-col">16+ days</th><th class="rack-col">16+ days &mdash; Rack</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>4x4 Toyota Fortuner (2023–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,288.00</td><td class="rack-col">N$ 2,860.00</td><td class="price-highlight sto-col">N$ 2,520.00</td><td class="rack-col">N$ 3,150.00</td><td class="sto-col">N$ 2,188.00</td><td class="rack-col">N$ 2,735.00</td><td class="sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 (2022–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 1,756.00</td><td class="rack-col">N$ 2,195.00</td><td class="price-highlight sto-col">N$ 1,976.00</td><td class="rack-col">N$ 2,470.00</td><td class="sto-col">N$ 1,656.00</td><td class="rack-col">N$ 2,070.00</td><td class="sto-col">N$ 1,876.00</td><td class="rack-col">N$ 2,345.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 1,868.00</td><td class="rack-col">N$ 2,335.00</td><td class="price-highlight sto-col">N$ 2,088.00</td><td class="rack-col">N$ 2,610.00</td><td class="sto-col">N$ 1,764.00</td><td class="rack-col">N$ 2,205.00</td><td class="sto-col">N$ 1,988.00</td><td class="rack-col">N$ 2,485.00</td></tr>
-                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 1,976.00</td><td class="rack-col">N$ 2,470.00</td><td class="price-highlight sto-col">N$ 2,204.00</td><td class="rack-col">N$ 2,755.00</td><td class="sto-col">N$ 1,876.00</td><td class="rack-col">N$ 2,345.00</td><td class="sto-col">N$ 2,104.00</td><td class="rack-col">N$ 2,630.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 (2024) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,124.00</td><td class="rack-col">N$ 2,655.00</td><td class="price-highlight sto-col">N$ 2,232.00</td><td class="rack-col">N$ 2,790.00</td><td class="sto-col">N$ 2,024.00</td><td class="rack-col">N$ 2,530.00</td><td class="sto-col">N$ 2,132.00</td><td class="rack-col">N$ 2,665.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 2,264.00</td><td class="rack-col">N$ 2,830.00</td><td class="price-highlight sto-col">N$ 2,376.00</td><td class="rack-col">N$ 2,970.00</td><td class="sto-col">N$ 2,164.00</td><td class="rack-col">N$ 2,705.00</td><td class="sto-col">N$ 2,276.00</td><td class="rack-col">N$ 2,845.00</td></tr>
-                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 2,404.00</td><td class="rack-col">N$ 3,005.00</td><td class="price-highlight sto-col">N$ 2,524.00</td><td class="rack-col">N$ 3,155.00</td><td class="sto-col">N$ 2,300.00</td><td class="rack-col">N$ 2,875.00</td><td class="sto-col">N$ 2,420.00</td><td class="rack-col">N$ 3,025.00</td></tr>
-                        <tr><td><strong>4x4 Cruiser Safari 6-window seater — Manual (2019), C1 licence required</strong></td><td class="price-highlight sto-col">N$ 4,232.00</td><td class="rack-col">N$ 5,290.00</td><td class="price-highlight sto-col">N$ 4,712.00</td><td class="rack-col">N$ 5,890.00</td><td class="sto-col">N$ 4,132.00</td><td class="rack-col">N$ 5,165.00</td><td class="sto-col">N$ 4,612.00</td><td class="rack-col">N$ 5,765.00</td></tr>
+                        <tr class="season-band"><td colspan="5" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Low season &middot; January &ndash; June</td></tr>
+                        <tr><td><strong>4x4 Toyota Fortuner (2023–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,288.00</td><td class="rack-col">N$ 2,860.00</td><td class="sto-col">N$ 2,188.00</td><td class="rack-col">N$ 2,735.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 (2022–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 1,756.00</td><td class="rack-col">N$ 2,195.00</td><td class="sto-col">N$ 1,656.00</td><td class="rack-col">N$ 2,070.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 1,868.00</td><td class="rack-col">N$ 2,335.00</td><td class="sto-col">N$ 1,764.00</td><td class="rack-col">N$ 2,205.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 1,976.00</td><td class="rack-col">N$ 2,470.00</td><td class="sto-col">N$ 1,876.00</td><td class="rack-col">N$ 2,345.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 (2024) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,124.00</td><td class="rack-col">N$ 2,655.00</td><td class="sto-col">N$ 2,024.00</td><td class="rack-col">N$ 2,530.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 2,264.00</td><td class="rack-col">N$ 2,830.00</td><td class="sto-col">N$ 2,164.00</td><td class="rack-col">N$ 2,705.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 2,404.00</td><td class="rack-col">N$ 3,005.00</td><td class="sto-col">N$ 2,300.00</td><td class="rack-col">N$ 2,875.00</td></tr>
+                        <tr><td><strong>4x4 Cruiser Safari 6-window seater — Manual (2019), C1 licence required</strong></td><td class="price-highlight sto-col">N$ 4,232.00</td><td class="rack-col">N$ 5,290.00</td><td class="sto-col">N$ 4,132.00</td><td class="rack-col">N$ 5,165.00</td></tr>
+                        <tr class="season-band"><td colspan="5" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">High season &middot; July &ndash; December</td></tr>
+                        <tr><td><strong>4x4 Toyota Fortuner (2023–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,520.00</td><td class="rack-col">N$ 3,150.00</td><td class="sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 (2022–2025) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 1,976.00</td><td class="rack-col">N$ 2,470.00</td><td class="sto-col">N$ 1,876.00</td><td class="rack-col">N$ 2,345.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 2,088.00</td><td class="rack-col">N$ 2,610.00</td><td class="sto-col">N$ 1,988.00</td><td class="rack-col">N$ 2,485.00</td></tr>
+                        <tr><td><strong>4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 2,204.00</td><td class="rack-col">N$ 2,755.00</td><td class="sto-col">N$ 2,104.00</td><td class="rack-col">N$ 2,630.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 (2024) — Automatic, non-camping</strong></td><td class="price-highlight sto-col">N$ 2,232.00</td><td class="rack-col">N$ 2,790.00</td><td class="sto-col">N$ 2,132.00</td><td class="rack-col">N$ 2,665.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 2 pax</strong></td><td class="price-highlight sto-col">N$ 2,376.00</td><td class="rack-col">N$ 2,970.00</td><td class="sto-col">N$ 2,276.00</td><td class="rack-col">N$ 2,845.00</td></tr>
+                        <tr><td><strong>4x4 Land Cruiser Double Cab 2.8 — Camping, 4 pax</strong></td><td class="price-highlight sto-col">N$ 2,524.00</td><td class="rack-col">N$ 3,155.00</td><td class="sto-col">N$ 2,420.00</td><td class="rack-col">N$ 3,025.00</td></tr>
+                        <tr><td><strong>4x4 Cruiser Safari 6-window seater — Manual (2019), C1 licence required</strong></td><td class="price-highlight sto-col">N$ 4,712.00</td><td class="rack-col">N$ 5,890.00</td><td class="sto-col">N$ 4,612.00</td><td class="rack-col">N$ 5,765.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -578,14 +589,18 @@ document.addEventListener('DOMContentLoaded',function(){
             </div>
 
             <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr><th>Vehicle Model & Spec</th><th class="sto-col">Low Season (1-14 Days)</th><th class="rack-col">Low Season (1-14 Days) &mdash; Rack</th><th class="sto-col">Low Season (15+ Days)</th><th class="rack-col">Low Season (15+ Days) &mdash; Rack</th><th class="sto-col">High Season (1-14 Days)</th><th class="rack-col">High Season (1-14 Days) &mdash; Rack</th><th class="sto-col">High Season (15+ Days)</th><th class="rack-col">High Season (15+ Days) &mdash; Rack</th></tr>
+                <table><thead>
+                        <tr><th>Vehicle Model &amp; Spec</th><th class="sto-col">1-14 Days</th><th class="rack-col">1-14 Days &mdash; Rack</th><th class="sto-col">15+ Days</th><th class="rack-col">15+ Days &mdash; Rack</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight sto-col">N$ 2,060.00</td><td class="rack-col">N$ 2,575.00</td><td class="sto-col">N$ 1,996.00</td><td class="rack-col">N$ 2,495.00</td><td class="sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td><td class="sto-col">N$ 2,384.00</td><td class="rack-col">N$ 2,980.00</td></tr>
-                        <tr><td><strong>Toyota Hilux D/C 4x4 Fully Equipped</strong></td><td class="price-highlight sto-col">N$ 2,236.00</td><td class="rack-col">N$ 2,795.00</td><td class="sto-col">N$ 2,164.00</td><td class="rack-col">N$ 2,705.00</td><td class="sto-col">N$ 3,020.00</td><td class="rack-col">N$ 3,775.00</td><td class="sto-col">N$ 2,988.00</td><td class="rack-col">N$ 3,735.00</td></tr>
-                        <tr><td><strong>Toyota Land Cruiser D/C 4x4 Fully Equipped</strong></td><td class="price-highlight sto-col">N$ 2,640.00</td><td class="rack-col">N$ 3,300.00</td><td class="sto-col">N$ 2,552.00</td><td class="rack-col">N$ 3,190.00</td><td class="sto-col">N$ 3,412.00</td><td class="rack-col">N$ 4,265.00</td><td class="sto-col">N$ 3,376.00</td><td class="rack-col">N$ 4,220.00</td></tr>
+                        <tr class="season-band"><td colspan="5" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Low season &middot; January &ndash; June</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="price-highlight sto-col">N$ 2,060.00</td><td class="rack-col">N$ 2,575.00</td><td class="sto-col">N$ 1,996.00</td><td class="rack-col">N$ 2,495.00</td></tr>
+                        <tr><td><strong>Toyota Hilux D/C 4x4 Fully Equipped</strong></td><td class="price-highlight sto-col">N$ 2,236.00</td><td class="rack-col">N$ 2,795.00</td><td class="sto-col">N$ 2,164.00</td><td class="rack-col">N$ 2,705.00</td></tr>
+                        <tr><td><strong>Toyota Land Cruiser D/C 4x4 Fully Equipped</strong></td><td class="price-highlight sto-col">N$ 2,640.00</td><td class="rack-col">N$ 3,300.00</td><td class="sto-col">N$ 2,552.00</td><td class="rack-col">N$ 3,190.00</td></tr>
+                        <tr class="season-band"><td colspan="5" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">High season &middot; July &ndash; December</td></tr>
+                        <tr><td><strong>Toyota Fortuner 4x4</strong></td><td class="sto-col">N$ 2,416.00</td><td class="rack-col">N$ 3,020.00</td><td class="sto-col">N$ 2,384.00</td><td class="rack-col">N$ 2,980.00</td></tr>
+                        <tr><td><strong>Toyota Hilux D/C 4x4 Fully Equipped</strong></td><td class="sto-col">N$ 3,020.00</td><td class="rack-col">N$ 3,775.00</td><td class="sto-col">N$ 2,988.00</td><td class="rack-col">N$ 3,735.00</td></tr>
+                        <tr><td><strong>Toyota Land Cruiser D/C 4x4 Fully Equipped</strong></td><td class="sto-col">N$ 3,412.00</td><td class="rack-col">N$ 4,265.00</td><td class="sto-col">N$ 3,376.00</td><td class="rack-col">N$ 4,220.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -630,15 +645,20 @@ document.addEventListener('DOMContentLoaded',function(){
             </div>
 
             <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr><th>Heavy Duty Group Vehicle</th><th class="sto-col">Low Season STO Rate</th><th class="sto-col">High Season STO Rate</th><th class="info-col">Car Wash Fee (Daily)</th></tr>
+                <table><thead>
+                        <tr><th>Heavy Duty Group Vehicle</th><th class="sto-col">Daily Rate</th><th class="info-col">Car Wash Fee (Daily)</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>Land Cruiser 9-Seater</strong> (Custom Safari chassis)</td><td class="price-highlight sto-col">N$ 4,505.00 / day</td><td class="sto-col">N$ 4,700.00 / day</td><td class="info-col">N$ 65.00</td></tr>
-                        <tr><td><strong>Iveco 4x4 14-Seater</strong> (Off-road group bus)</td><td class="price-highlight sto-col">N$ 6,475.00 / day</td><td class="sto-col">N$ 6,780.00 / day</td><td class="info-col">N$ 80.00</td></tr>
-                        <tr><td><strong>13-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight sto-col">N$ 5,980.00 / day</td><td class="sto-col">N$ 5,980.00 / day</td><td class="info-col">N$ 80.00</td></tr>
-                        <tr><td><strong>18-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight sto-col">N$ 6,355.00 / day</td><td class="sto-col">N$ 6,680.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr class="season-band"><td colspan="3" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Low season</td></tr>
+                        <tr><td><strong>Land Cruiser 9-Seater</strong> (Custom Safari chassis)</td><td class="price-highlight sto-col">N$ 4,505.00 / day</td><td class="info-col">N$ 65.00</td></tr>
+                        <tr><td><strong>Iveco 4x4 14-Seater</strong> (Off-road group bus)</td><td class="price-highlight sto-col">N$ 6,475.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr><td><strong>13-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight sto-col">N$ 5,980.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr><td><strong>18-Seater Hino Off-road Safari Truck</strong></td><td class="price-highlight sto-col">N$ 6,355.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr class="season-band"><td colspan="3" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">High season</td></tr>
+                        <tr><td><strong>Land Cruiser 9-Seater</strong> (Custom Safari chassis)</td><td class="sto-col">N$ 4,700.00 / day</td><td class="info-col">N$ 65.00</td></tr>
+                        <tr><td><strong>Iveco 4x4 14-Seater</strong> (Off-road group bus)</td><td class="sto-col">N$ 6,780.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr><td><strong>13-Seater Hino Off-road Safari Truck</strong></td><td class="sto-col">N$ 5,980.00 / day</td><td class="info-col">N$ 80.00</td></tr>
+                        <tr><td><strong>18-Seater Hino Off-road Safari Truck</strong></td><td class="sto-col">N$ 6,680.00 / day</td><td class="info-col">N$ 80.00</td></tr>
                     </tbody>
                 </table>
             </div>
@@ -712,22 +732,43 @@ document.addEventListener('DOMContentLoaded',function(){
             <p style="margin:0 0 14px;font-size:.8rem;color:#8a6a34"><strong>Note:</strong> These are published RACK rates. Warthog&rsquo;s STO rate sheet has not been received, so no agent net rate is shown. Warthog is selectable in the itinerary builder, but every line is labelled &ldquo;RACK (STO sheet outstanding)&rdquo; &mdash; quote off it only if you are adding your own margin.</p>
 
             <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr><th rowspan="2">Vehicle</th><th colspan="3" class="rack-col">1&ndash;7 days</th><th colspan="3" class="rack-col">8&ndash;14 days</th><th colspan="3" class="rack-col">15+ days</th></tr>
-                        <tr><th>Off</th><th class="rack-col">Mid</th><th class="rack-col">High</th><th class="rack-col">Off</th><th class="rack-col">Mid</th><th class="rack-col">High</th><th class="rack-col">Off</th><th class="rack-col">Mid</th><th class="rack-col">High</th></tr>
+                <table><thead>
+                        <tr><th>Vehicle</th><th class="rack-col">1&ndash;7 days</th><th class="rack-col">8&ndash;14 days</th><th class="rack-col">15+ days</th></tr>
                     </thead>
                     <tbody>
-                        <tr><td><strong>2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,425.50</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,194.50</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 2,021.25</td></tr>
-                        <tr><td><strong>2.8 Double Cab — non-camping (Toyota, automatic)</strong></td><td class="rack-col">N$ 2,038.05</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 2,787.75</td><td class="rack-col">N$ 1,899.45</td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,556.75</td><td class="rack-col">N$ 1,829.10</td><td class="rack-col">N$ 1,968.75</td><td class="rack-col">N$ 2,362.50</td></tr>
-                        <tr><td><strong>7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)</strong></td><td class="rack-col">N$ 3,465.00</td><td class="rack-col">N$ 4,095.00</td><td class="rack-col">N$ 4,515.00</td><td class="rack-col">N$ 3,360.00</td><td class="rack-col">N$ 3,990.00</td><td class="rack-col">N$ 4,410.00</td><td class="rack-col">N$ 3,255.00</td><td class="rack-col">N$ 3,885.00</td><td class="rack-col">N$ 4,200.00</td></tr>
-                        <tr><td><strong>Toyota Fortuner — automatic</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,257.50</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,130.45</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 2,003.40</td></tr>
-                        <tr><td><strong>Suzuki Jimny — automatic</strong></td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 1,460.55</td><td class="rack-col">N$ 1,460.55</td><td class="rack-col">N$ 1,587.60</td></tr>
-                        <tr><td><strong>2.4 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,032.80</td><td class="rack-col">N$ 2,714.25</td><td class="rack-col">N$ 1,691.55</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,610.30</td><td class="rack-col">N$ 1,570.80</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 2,367.75</td></tr>
-                        <tr><td><strong>2.8 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,387.70</td><td class="rack-col">N$ 3,123.75</td><td class="rack-col">N$ 2,011.80</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 3,008.25</td><td class="rack-col">N$ 1,877.40</td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,493.75</td></tr>
-                        <tr><td><strong>2.4 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 1,930.95</td><td class="rack-col">N$ 2,159.85</td><td class="rack-col">N$ 2,772.00</td><td class="rack-col">N$ 1,803.90</td><td class="rack-col">N$ 2,032.80</td><td class="rack-col">N$ 2,702.70</td><td class="rack-col">N$ 1,676.85</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 2,483.25</td></tr>
-                        <tr><td><strong>2.8 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 2,277.45</td><td class="rack-col">N$ 2,541.00</td><td class="rack-col">N$ 3,187.80</td><td class="rack-col">N$ 2,136.75</td><td class="rack-col">N$ 2,387.70</td><td class="rack-col">N$ 3,112.20</td><td class="rack-col">N$ 2,011.80</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 2,870.70</td></tr>
-                        <tr><td><strong>7-Seater Land Cruiser — camping, 2–7 pax (fridge included)</strong></td><td class="rack-col">N$ 3,885.00</td><td class="rack-col">N$ 4,410.00</td><td class="rack-col">N$ 5,040.00</td><td class="rack-col">N$ 3,780.00</td><td class="rack-col">N$ 4,305.00</td><td class="rack-col">N$ 4,935.00</td><td class="rack-col">N$ 3,675.00</td><td class="rack-col">N$ 4,200.00</td><td class="rack-col">N$ 4,830.00</td></tr>
+                        <tr class="season-band"><td colspan="4" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Off season &middot; December &ndash; February</td></tr>
+                        <tr><td><strong>2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,524.60</td></tr>
+                        <tr><td><strong>2.8 Double Cab — non-camping (Toyota, automatic)</strong></td><td class="rack-col">N$ 2,038.05</td><td class="rack-col">N$ 1,899.45</td><td class="rack-col">N$ 1,829.10</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)</strong></td><td class="rack-col">N$ 3,465.00</td><td class="rack-col">N$ 3,360.00</td><td class="rack-col">N$ 3,255.00</td></tr>
+                        <tr><td><strong>Toyota Fortuner — automatic</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 1,587.60</td></tr>
+                        <tr><td><strong>Suzuki Jimny — automatic</strong></td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,460.55</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 1,691.55</td><td class="rack-col">N$ 1,570.80</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 2,011.80</td><td class="rack-col">N$ 1,877.40</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 1,930.95</td><td class="rack-col">N$ 1,803.90</td><td class="rack-col">N$ 1,676.85</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 2,277.45</td><td class="rack-col">N$ 2,136.75</td><td class="rack-col">N$ 2,011.80</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — camping, 2–7 pax (fridge included)</strong></td><td class="rack-col">N$ 3,885.00</td><td class="rack-col">N$ 3,780.00</td><td class="rack-col">N$ 3,675.00</td></tr>
+                        <tr class="season-band"><td colspan="4" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">Mid season &middot; March &ndash; June</td></tr>
+                        <tr><td><strong>2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)</strong></td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 1,651.65</td></tr>
+                        <tr><td><strong>2.8 Double Cab — non-camping (Toyota, automatic)</strong></td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 2,108.40</td><td class="rack-col">N$ 1,968.75</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)</strong></td><td class="rack-col">N$ 4,095.00</td><td class="rack-col">N$ 3,990.00</td><td class="rack-col">N$ 3,885.00</td></tr>
+                        <tr><td><strong>Toyota Fortuner — automatic</strong></td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 1,778.70</td><td class="rack-col">N$ 1,651.65</td></tr>
+                        <tr><td><strong>Suzuki Jimny — automatic</strong></td><td class="rack-col">N$ 1,587.60</td><td class="rack-col">N$ 1,524.60</td><td class="rack-col">N$ 1,460.55</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 2,032.80</td><td class="rack-col">N$ 1,905.75</td><td class="rack-col">N$ 1,778.70</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 2,387.70</td><td class="rack-col">N$ 2,248.05</td><td class="rack-col">N$ 2,108.40</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 2,159.85</td><td class="rack-col">N$ 2,032.80</td><td class="rack-col">N$ 1,905.75</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 2,541.00</td><td class="rack-col">N$ 2,387.70</td><td class="rack-col">N$ 2,248.05</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — camping, 2–7 pax (fridge included)</strong></td><td class="rack-col">N$ 4,410.00</td><td class="rack-col">N$ 4,305.00</td><td class="rack-col">N$ 4,200.00</td></tr>
+                        <tr class="season-band"><td colspan="4" style="background:#efece4;color:#5b5344;font-family:'Jost',sans-serif;font-size:.66rem;letter-spacing:1.6px;text-transform:uppercase;padding:9px 14px;font-weight:600;">High season &middot; July &ndash; November</td></tr>
+                        <tr><td><strong>2.4 Double Cab — non-camping (Toyota / Isuzu / Ford, manual or auto)</strong></td><td class="rack-col">N$ 2,425.50</td><td class="rack-col">N$ 2,194.50</td><td class="rack-col">N$ 2,021.25</td></tr>
+                        <tr><td><strong>2.8 Double Cab — non-camping (Toyota, automatic)</strong></td><td class="rack-col">N$ 2,787.75</td><td class="rack-col">N$ 2,556.75</td><td class="rack-col">N$ 2,362.50</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — non-camping (Toyota manual, fridge included)</strong></td><td class="rack-col">N$ 4,515.00</td><td class="rack-col">N$ 4,410.00</td><td class="rack-col">N$ 4,200.00</td></tr>
+                        <tr><td><strong>Toyota Fortuner — automatic</strong></td><td class="rack-col">N$ 2,257.50</td><td class="rack-col">N$ 2,130.45</td><td class="rack-col">N$ 2,003.40</td></tr>
+                        <tr><td><strong>Suzuki Jimny — automatic</strong></td><td class="rack-col">N$ 1,714.65</td><td class="rack-col">N$ 1,651.65</td><td class="rack-col">N$ 1,587.60</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 2,714.25</td><td class="rack-col">N$ 2,610.30</td><td class="rack-col">N$ 2,367.75</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 2 pax</strong></td><td class="rack-col">N$ 3,123.75</td><td class="rack-col">N$ 3,008.25</td><td class="rack-col">N$ 2,493.75</td></tr>
+                        <tr><td><strong>2.4 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 2,772.00</td><td class="rack-col">N$ 2,702.70</td><td class="rack-col">N$ 2,483.25</td></tr>
+                        <tr><td><strong>2.8 Double Cab — camping, 4 pax</strong></td><td class="rack-col">N$ 3,187.80</td><td class="rack-col">N$ 3,112.20</td><td class="rack-col">N$ 2,870.70</td></tr>
+                        <tr><td><strong>7-Seater Land Cruiser — camping, 2–7 pax (fridge included)</strong></td><td class="rack-col">N$ 5,040.00</td><td class="rack-col">N$ 4,935.00</td><td class="rack-col">N$ 4,830.00</td></tr>
                     </tbody>
                 </table>
             </div>
