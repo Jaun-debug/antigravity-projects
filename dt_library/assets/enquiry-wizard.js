@@ -341,6 +341,10 @@
     var rt=document.getElementById("rate-tables");
     return !!(rt && rt.querySelector("table"));
   }
+  function loading(){
+    var rt=document.getElementById("rate-tables");
+    return !!(rt && /Loading rates/i.test(rt.textContent||""));
+  }
 
   function css(){
     if(document.getElementById("nr-lodge-yr-css"))return;
@@ -400,13 +404,30 @@
       }
     }catch(e){}
 
+    if(loading()) return;
     var w=want(), got=shown();
     b.querySelectorAll("button").forEach(function(bt){
       bt.classList.toggle("on", bt.getAttribute("data-y")===w);
     });
-    /* when the property has no rates at all the page already prints "Rate to
-       follow" — don't say it twice. Only flag a genuine year mismatch. */
-    if(hasRates() && got && got!==w) note(w+" rates for this property are still to follow — showing "+got+".");
+    /* No rates for the year the agent picked: say so in the year's own words,
+       replacing the page's generic "Rate to follow." Guarded by a marker id so
+       rewriting the message doesn't retrigger the observer forever. */
+    if(!hasRates()){
+      note(null);
+      var rt2=document.getElementById("rate-tables");
+      if(rt2){
+        var msg=document.getElementById("nr-yr-empty");
+        var txt=w+" rates to follow soon.";
+        if(!msg||msg.parentNode!==rt2){
+          rt2.innerHTML='<p id="nr-yr-empty" style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem"></p>';
+          msg=document.getElementById("nr-yr-empty");
+        }
+        if(msg && msg.textContent!==txt) msg.textContent=txt;
+      }
+      var sub2=document.getElementById("rate-sub");
+      if(sub2 && sub2.textContent!==w+" rates to follow") sub2.textContent=w+" rates to follow";
+    }
+    else if(got && got!==w) note(w+" rates for this property are still to follow — showing "+got+".");
     else note(null);
   }
 
