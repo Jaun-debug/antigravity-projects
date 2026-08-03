@@ -404,8 +404,9 @@
     b.querySelectorAll("button").forEach(function(bt){
       bt.classList.toggle("on", bt.getAttribute("data-y")===w);
     });
-    if(!hasRates()) note(w+" rates for this property are still to follow.");
-    else if(got && got!==w) note(w+" rates for this property are still to follow — showing "+got+".");
+    /* when the property has no rates at all the page already prints "Rate to
+       follow" — don't say it twice. Only flag a genuine year mismatch. */
+    if(hasRates() && got && got!==w) note(w+" rates for this property are still to follow — showing "+got+".");
     else note(null);
   }
 
