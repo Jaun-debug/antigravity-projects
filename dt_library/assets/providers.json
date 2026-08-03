@@ -639,44 +639,164 @@
    "name": "Namib Roos Car Rentals",
    "items": [
     {
-     "n": "Toyota Fortuner 4x4",
-     "t": "Low Season (Jan - Jun)",
-     "p": 2076.0
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2288.0
     },
     {
-     "n": "Toyota Fortuner 4x4",
-     "t": "High Season (Jul - Dec)",
-     "p": 2292.0
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2188.0
     },
     {
-     "n": "Toyota Hilux 2.4 4x4 Double Cab",
-     "t": "Low Season (Jan - Jun)",
-     "p": 1596.0
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2520.0
     },
     {
-     "n": "Toyota Hilux 2.4 4x4 Double Cab",
-     "t": "High Season (Jul - Dec)",
-     "p": 1800.0
+     "n": "4x4 Toyota Fortuner (2023–2025) Auto",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2416.0
     },
     {
-     "n": "Toyota Hilux 4x4 Double Cab (2 Pax Camping)",
-     "t": "Low Season (Jan - Jun)",
-     "p": 1696.0
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 1756.0
     },
     {
-     "n": "Toyota Hilux 4x4 Double Cab (2 Pax Camping)",
-     "t": "High Season (Jul - Dec)",
-     "p": 1900.0
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 1656.0
     },
     {
-     "n": "Toyota Hilux 4x4 Double Cab (4 Pax Camping)",
-     "t": "Low Season (Jan - Jun)",
-     "p": 1800.0
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 1976.0
     },
     {
-     "n": "Toyota Hilux 4x4 Double Cab (4 Pax Camping)",
-     "t": "High Season (Jul - Dec)",
-     "p": 2004.0
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — non-camping",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 1876.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 1868.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 1764.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2088.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 1988.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 1976.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 1876.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2204.0
+    },
+    {
+     "n": "4x4 Toyota Hilux 2.4 / Ford Ranger 2.2 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2104.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2124.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2024.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2232.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 (2024) — non-camping",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2132.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2264.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2164.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2376.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 2 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2276.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 2404.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 2300.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 2524.0
+    },
+    {
+     "n": "4x4 Land Cruiser DC 2.8 — camping 4 pax",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 2420.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 Low (Jan–Jun) · 1–15 days",
+     "p": 4232.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 Low (Jan–Jun) · 16+ days",
+     "p": 4132.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 High (Jul–Dec) · 1–15 days",
+     "p": 4712.0
+    },
+    {
+     "n": "4x4 Cruiser Safari 6-window seater — Manual, C1 licence",
+     "t": "2027 High (Jul–Dec) · 16+ days",
+     "p": 4612.0
     }
    ]
   },
@@ -887,6 +1007,341 @@
      "n": "Toyota Fortuner 4x4",
      "t": "15+ Days",
      "p": 1534.0
+    }
+   ]
+  },
+  {
+   "name": "Swakopmund Car Hire",
+   "items": [
+    {
+     "n": "Group A+ — Toyota Agya AT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 520.0
+    },
+    {
+     "n": "Group A+ — Toyota Agya AT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 476.0
+    },
+    {
+     "n": "Group A+ — Toyota Agya AT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 436.0
+    },
+    {
+     "n": "Group A+ — Toyota Agya AT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 520.0
+    },
+    {
+     "n": "Group A+ — Toyota Agya AT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 476.0
+    },
+    {
+     "n": "Group A+ — Toyota Agya AT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 436.0
+    },
+    {
+     "n": "Group B — Volkswagen Polo Vivo MT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 584.0
+    },
+    {
+     "n": "Group B — Volkswagen Polo Vivo MT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 520.0
+    },
+    {
+     "n": "Group B — Volkswagen Polo Vivo MT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 476.0
+    },
+    {
+     "n": "Group B — Volkswagen Polo Vivo MT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 584.0
+    },
+    {
+     "n": "Group B — Volkswagen Polo Vivo MT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 520.0
+    },
+    {
+     "n": "Group B — Volkswagen Polo Vivo MT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 476.0
+    },
+    {
+     "n": "Group B+ — Toyota Starlet AT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 628.0
+    },
+    {
+     "n": "Group B+ — Toyota Starlet AT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 588.0
+    },
+    {
+     "n": "Group B+ — Toyota Starlet AT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 548.0
+    },
+    {
+     "n": "Group B+ — Toyota Starlet AT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 628.0
+    },
+    {
+     "n": "Group B+ — Toyota Starlet AT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 588.0
+    },
+    {
+     "n": "Group B+ — Toyota Starlet AT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 548.0
+    },
+    {
+     "n": "Group TX — Single Cab 4x4 Nissan Navara MT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 1296.0
+    },
+    {
+     "n": "Group TX — Single Cab 4x4 Nissan Navara MT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 1239.2
+    },
+    {
+     "n": "Group TX — Single Cab 4x4 Nissan Navara MT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 1168.0
+    },
+    {
+     "n": "Group TX — Single Cab 4x4 Nissan Navara MT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 1560.0
+    },
+    {
+     "n": "Group TX — Single Cab 4x4 Nissan Navara MT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 1496.0
+    },
+    {
+     "n": "Group TX — Single Cab 4x4 Nissan Navara MT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 1416.0
+    },
+    {
+     "n": "Group TDX — Double Cab 4x4 Toyota Hilux MT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 1504.0
+    },
+    {
+     "n": "Group TDX — Double Cab 4x4 Toyota Hilux MT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 1448.0
+    },
+    {
+     "n": "Group TDX — Double Cab 4x4 Toyota Hilux MT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 1376.0
+    },
+    {
+     "n": "Group TDX — Double Cab 4x4 Toyota Hilux MT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 1840.0
+    },
+    {
+     "n": "Group TDX — Double Cab 4x4 Toyota Hilux MT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 1756.0
+    },
+    {
+     "n": "Group TDX — Double Cab 4x4 Toyota Hilux MT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 1664.0
+    },
+    {
+     "n": "Group TDX+ — Double Cab 4x4 Toyota Hilux AT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 1600.0
+    },
+    {
+     "n": "Group TDX+ — Double Cab 4x4 Toyota Hilux AT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 1544.0
+    },
+    {
+     "n": "Group TDX+ — Double Cab 4x4 Toyota Hilux AT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 1472.0
+    },
+    {
+     "n": "Group TDX+ — Double Cab 4x4 Toyota Hilux AT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 1944.0
+    },
+    {
+     "n": "Group TDX+ — Double Cab 4x4 Toyota Hilux AT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 1848.0
+    },
+    {
+     "n": "Group TDX+ — Double Cab 4x4 Toyota Hilux AT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 1752.0
+    },
+    {
+     "n": "Group N+ — Toyota Corolla Cross AT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 880.0
+    },
+    {
+     "n": "Group N+ — Toyota Corolla Cross AT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 800.0
+    },
+    {
+     "n": "Group N+ — Toyota Corolla Cross AT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 720.0
+    },
+    {
+     "n": "Group N+ — Toyota Corolla Cross AT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 880.0
+    },
+    {
+     "n": "Group N+ — Toyota Corolla Cross AT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 800.0
+    },
+    {
+     "n": "Group N+ — Toyota Corolla Cross AT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 720.0
+    },
+    {
+     "n": "Group M+ — Suzuki Jimny 5-door 4x4 AT",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 1184.0
+    },
+    {
+     "n": "Group M+ — Suzuki Jimny 5-door 4x4 AT",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 1080.0
+    },
+    {
+     "n": "Group M+ — Suzuki Jimny 5-door 4x4 AT",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 1080.0
+    },
+    {
+     "n": "Group M+ — Suzuki Jimny 5-door 4x4 AT",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 1352.0
+    },
+    {
+     "n": "Group M+ — Suzuki Jimny 5-door 4x4 AT",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 1296.0
+    },
+    {
+     "n": "Group M+ — Suzuki Jimny 5-door 4x4 AT",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 1240.0
+    },
+    {
+     "n": "Group MX+ — SUV 4x4 Toyota Fortuner AT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 1728.0
+    },
+    {
+     "n": "Group MX+ — SUV 4x4 Toyota Fortuner AT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 1656.0
+    },
+    {
+     "n": "Group MX+ — SUV 4x4 Toyota Fortuner AT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 1552.0
+    },
+    {
+     "n": "Group MX+ — SUV 4x4 Toyota Fortuner AT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 2104.0
+    },
+    {
+     "n": "Group MX+ — SUV 4x4 Toyota Fortuner AT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 1912.0
+    },
+    {
+     "n": "Group MX+ — SUV 4x4 Toyota Fortuner AT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 1904.0
+    },
+    {
+     "n": "Group X — Double Cab 4x4 Toyota Land Cruiser 79 MT or similar",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 1904.0
+    },
+    {
+     "n": "Group X — Double Cab 4x4 Toyota Land Cruiser 79 MT or similar",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 1800.27
+    },
+    {
+     "n": "Group X — Double Cab 4x4 Toyota Land Cruiser 79 MT or similar",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 1752.0
+    },
+    {
+     "n": "Group X — Double Cab 4x4 Toyota Land Cruiser 79 MT or similar",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 2260.0
+    },
+    {
+     "n": "Group X — Double Cab 4x4 Toyota Land Cruiser 79 MT or similar",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 2136.0
+    },
+    {
+     "n": "Group X — Double Cab 4x4 Toyota Land Cruiser 79 MT or similar",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 2104.0
+    },
+    {
+     "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
+     "t": "2026 Low (Jan–Jun) · 3–7 days",
+     "p": 2712.0
+    },
+    {
+     "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
+     "t": "2026 Low (Jan–Jun) · 8–14 days",
+     "p": 2712.0
+    },
+    {
+     "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
+     "t": "2026 Low (Jan–Jun) · 15+ days",
+     "p": 2712.0
+    },
+    {
+     "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
+     "t": "2026 High (Jul–Dec) · 3–7 days",
+     "p": 3156.0
+    },
+    {
+     "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
+     "t": "2026 High (Jul–Dec) · 8–14 days",
+     "p": 3156.0
+    },
+    {
+     "n": "Group QX — Safari 4-window 4x4 Nissan Patrol 7-seater",
+     "t": "2026 High (Jul–Dec) · 15+ days",
+     "p": 3156.0
     }
    ]
   }
