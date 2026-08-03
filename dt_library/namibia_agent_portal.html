@@ -831,11 +831,16 @@
             <div class="nav-item-dropdown" onmouseleave="this.querySelector('.dropdown-menu').classList.remove('clicked')">
                 <a href="#" class="nav-link dropdown-toggle" id="nav-activities" onclick="switchTab('activities', this); return false;">Activities ▾</a>
                 <div class="dropdown-menu single-column">
-                    <a href="#" onclick="openActivityRates('molamola'); return false;">Mola Mola Safaris</a>
+                    <div style="font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:#a48256;margin:10px 14px 4px;opacity:.95;">Sossusvlei &amp; Namib</div>
                     <a href="#" onclick="openActivityRates('namibsky'); return false;">Namib Sky Ballooning</a>
-                    <a href="#" onclick="openActivityRates('bogenfels'); return false;">Bogenfels Tours</a>
+                    <div style="font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:#a48256;margin:10px 14px 4px;opacity:.95;margin-top:12px;">Swakopmund</div>
                     <a href="#" onclick="openActivityRates('alteraction'); return false;">Alter Action Sandboarding</a>
                     <a href="#" onclick="openActivityRates('desert'); return false;">Desert Explorers</a>
+                    <a href="#" onclick="openActivityRates('livingdesert'); return false;">Living Desert Adventures</a>
+                    <div style="font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:#a48256;margin:10px 14px 4px;opacity:.95;margin-top:12px;">Walvis Bay</div>
+                    <a href="#" onclick="openActivityRates('molamola'); return false;">Mola Mola Safaris</a>
+                    <div style="font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:#a48256;margin:10px 14px 4px;opacity:.95;margin-top:12px;">L&uuml;deritz</div>
+                    <a href="#" onclick="openActivityRates('bogenfels'); return false;">Bogenfels Tours</a>
                 </div>
             </div>
             
@@ -1554,6 +1559,11 @@
                             <div class="activity-item" onclick="openActivityRates('desert')" style="border: 1px solid rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; cursor: pointer; position: relative;">
                                 <div style="font-weight: 600; font-family: var(--font-head); color: var(--brand-charcoal);" class="activity-title">Desert Explorers</div>
                                 <p style="font-size: 0.75rem; color: var(--text-muted); margin: 5px 0 10px 0;">Quad biking sand dunes, e-biking tours, and camel rides.</p>
+                                <button class="lodge-btn" style="position: absolute; bottom: 10px; right: 10px; padding: 5px 12px; font-size: 0.75rem;">Rates</button>
+                            </div>
+                            <div class="activity-item" onclick="openActivityRates('livingdesert')" style="border: 1px solid rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; cursor: pointer; position: relative;">
+                                <div style="font-weight: 600; font-family: var(--font-head); color: var(--brand-charcoal);" class="activity-title">Living Desert Adventures</div>
+                                <p style="font-size: 0.75rem; color: var(--text-muted); margin: 5px 0 10px 0;">The original &ldquo;Little 5&rdquo; half-day 4x4 dune ecology tour from Swakopmund. Dorob park fees included.</p>
                                 <button class="lodge-btn" style="position: absolute; bottom: 10px; right: 10px; padding: 5px 12px; font-size: 0.75rem;">Rates</button>
                             </div>
                             <div class="activity-item" onclick="openActivityRates('alteraction')" style="border: 1px solid rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; cursor: pointer; position: relative;">
@@ -3959,6 +3969,9 @@
                                     activityName.includes('Bogenfels') || activityName.includes('Alter Action') || 
                                     activityName.includes('Desert Explorers'));
                 }
+                // Living Desert Adventures is contracted for 2027, so its rate
+                // sheet is available whichever travel year is selected.
+                if (activityName.includes('Living Desert')) hasRateSheet = true;
                 
                 const originalBtn = item.querySelector('button');
                 if (hasRateSheet) {
