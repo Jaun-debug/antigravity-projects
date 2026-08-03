@@ -3838,27 +3838,21 @@
         function openVehicleRates(supplierId) {
             // Instantly hide open dropdown menus
             document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('clicked'));
-            if (currentYear === '2027') {
-                showToast(`Showing 2026 vehicle rates for ${supplierId.toUpperCase()} as fallback. 2027 rates pending.`, 'warning');
-                setTimeout(() => {
-                    window.open(`vehicle_rates.html#${supplierId}`, '_blank');
-                }, 800);
-            } else {
-                window.open(`vehicle_rates.html#${supplierId}`, '_blank');
-            }
+            // Navigate in this tab. Opening a new tab each time left stale tabs lying
+            // around, so a second click could land on whichever supplier was open there.
+            // The chosen season travels with you via localStorage, and the rate sheet
+            // says per supplier whether that year is loaded — no need to guess here.
+            window.location.href = `vehicle_rates.html#${supplierId}`;
         }
 
         function openActivityRates(activityId) {
             // Instantly hide open dropdown menus
             document.querySelectorAll('.dropdown-menu').forEach(menu => menu.classList.add('clicked'));
-            if (currentYear === '2027') {
-                showToast(`Showing 2026 activity rates for ${activityId.toUpperCase()} as fallback. 2027 rates pending.`, 'warning');
-                setTimeout(() => {
-                    window.open(`activity_rates.html#${activityId}`, '_blank');
-                }, 800);
-            } else {
-                window.open(`activity_rates.html#${activityId}`, '_blank');
-            }
+            // Navigate in this tab. Opening a new tab each time left stale tabs lying
+            // around, so a second click could land on whichever supplier was open there.
+            // The chosen season travels with you via localStorage, and the rate sheet
+            // says per supplier whether that year is loaded — no need to guess here.
+            window.location.href = `activity_rates.html#${activityId}`;
         }
 
         function switchYearMode(year, el) {
