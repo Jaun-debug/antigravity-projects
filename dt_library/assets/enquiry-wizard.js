@@ -314,3 +314,114 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+/* ===== Lodge-page 2026/2027 season pills =====================================
+   Individual property pages render their rates from /api/rack (public) or
+   /api/sto (signed in). They only ever drew a year bar when a lodge happened to
+   carry BOTH years, so every single-year property showed no control at all.
+
+   This adds one persistent bar to every property page, public and signed in.
+   It lives OUTSIDE #rate-tables so the page's own re-render doesn't wipe it,
+   and it drives the page's existing loaders (showRack / showStoYear) rather
+   than duplicating any rate logic.
+   ============================================================================ */
+;(function(){"use strict";try{
+  var YEARS=["2026","2027"], KEY="nr_sto_year", TOKEN="nr_agent_token";
+  function want(){try{return localStorage.getItem(KEY)==="2027"?"2027":"2026";}catch(e){return "2026";}}
+  function signedIn(){try{return !!sessionStorage.getItem(TOKEN);}catch(e){return false;}}
+  function ready(){return document.getElementById("rate-tables") && typeof window.showRack==="function";}
+
+  /* Which year did the page actually end up rendering? #rate-sub carries "· 2026 season". */
+  function shown(){
+    var sub=document.getElementById("rate-sub");
+    var m=sub && (sub.textContent||"").match(/\b(20\d{2})\s+season\b/);
+    return m?m[1]:null;
+  }
+  function hasRates(){
+    var rt=document.getElementById("rate-tables");
+    return !!(rt && rt.querySelector("table"));
+  }
+
+  function css(){
+    if(document.getElementById("nr-lodge-yr-css"))return;
+    var s=document.createElement("style");s.id="nr-lodge-yr-css";
+    s.textContent=
+      "#nr-lodge-yr{display:flex;gap:8px;margin:0 2px 16px;flex-wrap:wrap;align-items:center}"
+      +"#nr-lodge-yr button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(200,90,23,.6);background:rgba(200,90,23,.08);color:#c85a17;transition:background .18s,color .18s}"
+      +"#nr-lodge-yr button.on{background:rgba(200,90,23,.6);color:#fff}"
+      +"#nr-lodge-yr-note{margin:0 2px 16px;padding:12px 16px;border-radius:10px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.35);color:#8a4a22;font-size:.84rem;line-height:1.45}";
+    document.head.appendChild(s);
+  }
+
+  function load(y){
+    try{localStorage.setItem(KEY,y);}catch(e){}
+    if(signedIn() && typeof window.showStoYear==="function") window.showStoYear(y);
+    else window.showRack(y);
+    setTimeout(sync,60); setTimeout(sync,400); setTimeout(sync,1200);
+  }
+
+  function bar(){
+    var rt=document.getElementById("rate-tables");
+    if(!rt||!rt.parentNode) return null;
+    var b=document.getElementById("nr-lodge-yr");
+    if(!b){
+      css();
+      b=document.createElement("div"); b.id="nr-lodge-yr";
+      YEARS.forEach(function(y){
+        var bt=document.createElement("button");
+        bt.type="button"; bt.setAttribute("data-y",y); bt.textContent=y+" season";
+        bt.onclick=function(){ load(y); };
+        b.appendChild(bt);
+      });
+    }
+    if(b.nextSibling!==rt) rt.parentNode.insertBefore(b,rt);
+    return b;
+  }
+
+  function note(msg){
+    var n=document.getElementById("nr-lodge-yr-note");
+    if(!msg){ if(n) n.remove(); return; }
+    if(!n){ n=document.createElement("div"); n.id="nr-lodge-yr-note"; }
+    n.textContent=msg;
+    var b=document.getElementById("nr-lodge-yr");
+    if(b&&b.parentNode&&n.previousSibling!==b) b.parentNode.insertBefore(n,b.nextSibling);
+  }
+
+  function sync(){
+    var b=bar(); if(!b) return;
+    /* the page draws its own inline bar inside #rate-tables when a lodge has both
+       years — hide it so agents don't see two identical controls */
+    try{
+      var rt=document.getElementById("rate-tables");
+      if(rt){
+        var first=rt.firstElementChild;
+        if(first && first.tagName==="DIV" && first!==b && first.querySelector("button") &&
+           /season/i.test(first.textContent||"")) first.style.display="none";
+      }
+    }catch(e){}
+
+    var w=want(), got=shown();
+    b.querySelectorAll("button").forEach(function(bt){
+      bt.classList.toggle("on", bt.getAttribute("data-y")===w);
+    });
+    if(!hasRates()) note(w+" rates for this property are still to follow.");
+    else if(got && got!==w) note(w+" rates for this property are still to follow — showing "+got+".");
+    else note(null);
+  }
+
+  function init(){
+    if(!ready()){ setTimeout(init,150); return; }
+    bar();
+    /* the page loads its default year on its own; only re-request if the agent
+       previously chose the other one */
+    if(want()!=="2026") load(want()); else setTimeout(sync,300);
+    try{
+      var t; var mo=new MutationObserver(function(){clearTimeout(t);t=setTimeout(sync,120);});
+      var rt=document.getElementById("rate-tables");
+      if(rt) mo.observe(rt,{childList:true,subtree:true});
+      var sub=document.getElementById("rate-sub");
+      if(sub) mo.observe(sub,{childList:true,characterData:true,subtree:true});
+    }catch(e){}
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",init); else init();
+}catch(e){}})();
