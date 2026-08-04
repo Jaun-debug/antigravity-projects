@@ -4033,3 +4033,328 @@ Object.assign(DDS_RACK_BY_YEAR, {
     }
   }
 });
+
+// ---------------------------------------------------------------------------
+// Thebe River Safaris, Kasane (Chobe) — 2026 and 2027.
+// NOTE: quoted in BOTSWANA PULA, not US$ — this is the supplier's own currency
+// on both the rack and STO sheets. Rack is the supplier's published sheet, not
+// derived. STO is a consistent 20% off rack across every line.
+// ---------------------------------------------------------------------------
+Object.assign(DDS_RACK_BY_YEAR, {
+  "thebe-river-safaris": {
+    "2026": {
+      "name": "Thebe River Safaris",
+      "region": "Chobe",
+      "currency": "BWP",
+      "validity": "2026 · single season, 1 Jan – 31 Dec 2026",
+      "note": "Published rack rates, BWP. Rates are quoted in Botswana Pula (BWP) per person per night as supplied by Thebe — this supplier does not quote in US$. All rates exclude Government park fees; the Government bed levy and park fees may change without notice. Child policy: children under 6 sharing with 2 adults free of charge; 6–12 sharing with 2 adults pay 50% of the adult rate; 12 and over count as an adult if using their own room. One child sharing per room; child and third-person sharing subject to availability. Guide policy: one room free of charge per accommodated group booking for crew or translator, subject to availability at check-in and not confirmable at booking or rooming-list stage — a guaranteed crew room is charged at the STO rate, as are additional crew rooms. Crew free of charge on camping group bookings; crew pay park fees only for activities. Activities are not private, seats may be shared with other hotel guests, and require a minimum of four persons per departure. Packages exclude park fees, visas, transfers and drinks. The three-night package includes a guided day trip to Victoria Falls (Zimbabwe) with transfer, lunch and craft market visit, excluding park fees and visa. A signed STO agreement must be returned to reservations@theberiversafaris.com.",
+      "sections": [
+        {
+          "title": "Safari rooms — per person sharing",
+          "rows": [
+            [
+              "Bed & breakfast",
+              "974"
+            ],
+            [
+              "Half board (dinner, bed & breakfast)",
+              "1,104"
+            ],
+            [
+              "Full board (breakfast, lunch, dinner & bed)",
+              "1,234"
+            ],
+            [
+              "Fully inclusive (full board + two game viewing activities)",
+              "2,014"
+            ]
+          ]
+        },
+        {
+          "title": "Safari rooms — single",
+          "rows": [
+            [
+              "Bed & breakfast",
+              "1,455"
+            ],
+            [
+              "Half board",
+              "1,585"
+            ],
+            [
+              "Full board",
+              "1,715"
+            ],
+            [
+              "Fully inclusive",
+              "2,495"
+            ]
+          ]
+        },
+        {
+          "title": "Family room — per person sharing (minimum 4 persons)",
+          "rows": [
+            [
+              "Bed & breakfast",
+              "736"
+            ],
+            [
+              "Half board",
+              "866"
+            ],
+            [
+              "Full board",
+              "996"
+            ],
+            [
+              "Fully inclusive",
+              "1,776"
+            ]
+          ]
+        },
+        {
+          "title": "Camping — per person sharing",
+          "rows": [
+            [
+              "Room only",
+              "144"
+            ]
+          ]
+        },
+        {
+          "title": "Packages — per person",
+          "rows": [
+            [
+              "Two-night package — sharing",
+              "2,963"
+            ],
+            [
+              "Two-night package — single",
+              "3,875"
+            ],
+            [
+              "Three-night package — sharing",
+              "6,459"
+            ],
+            [
+              "Three-night package — single",
+              "7,827"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — per person",
+          "rows": [
+            [
+              "Chobe game drive (3 hrs)",
+              "390"
+            ],
+            [
+              "Full day game drive (9 hrs)",
+              "1,170"
+            ],
+            [
+              "Chobe boat cruise (3 hrs)",
+              "390"
+            ]
+          ]
+        },
+        {
+          "title": "Transfers — per person",
+          "rows": [
+            [
+              "Border to Kasane town",
+              "108"
+            ],
+            [
+              "Border to Kasane airport",
+              "133"
+            ],
+            [
+              "Thebe to Victoria Falls",
+              "631"
+            ],
+            [
+              "Thebe to Livingstone",
+              "631"
+            ]
+          ]
+        },
+        {
+          "title": "Chobe National Park / conservation fees — per person per day",
+          "rows": [
+            [
+              "Foreign / international",
+              "190"
+            ],
+            [
+              "Residents",
+              "145"
+            ],
+            [
+              "Citizens",
+              "20"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Thebe River Safaris",
+      "region": "Chobe",
+      "currency": "BWP",
+      "validity": "2027 · single season, 1 Jan – 31 Dec 2027",
+      "note": "Published rack rates, BWP. Rates are quoted in Botswana Pula (BWP) per person per night as supplied by Thebe — this supplier does not quote in US$. All rates exclude Government park fees; the Government bed levy and park fees may change without notice. Child policy: children under 6 sharing with 2 adults free of charge; 6–12 sharing with 2 adults pay 50% of the adult rate; 12 and over count as an adult if using their own room. One child sharing per room; child and third-person sharing subject to availability. Guide policy: one room free of charge per accommodated group booking for crew or translator, subject to availability at check-in and not confirmable at booking or rooming-list stage — a guaranteed crew room is charged at the STO rate, as are additional crew rooms. Crew free of charge on camping group bookings; crew pay park fees only for activities. Activities are not private, seats may be shared with other hotel guests, and require a minimum of four persons per departure. Packages exclude park fees, visas, transfers and drinks. The three-night package includes a guided day trip to Victoria Falls (Zimbabwe) with transfer, lunch and craft market visit, excluding park fees and visa. A signed STO agreement must be returned to reservations@theberiversafaris.com.",
+      "sections": [
+        {
+          "title": "Safari rooms — per person sharing",
+          "rows": [
+            [
+              "Bed & breakfast",
+              "1,043"
+            ],
+            [
+              "Half board (dinner, bed & breakfast)",
+              "1,173"
+            ],
+            [
+              "Full board (breakfast, lunch, dinner & bed)",
+              "1,303"
+            ],
+            [
+              "Fully inclusive (full board + two game viewing activities)",
+              "2,083"
+            ]
+          ]
+        },
+        {
+          "title": "Safari rooms — single",
+          "rows": [
+            [
+              "Bed & breakfast",
+              "1,557"
+            ],
+            [
+              "Half board",
+              "1,687"
+            ],
+            [
+              "Full board",
+              "1,817"
+            ],
+            [
+              "Fully inclusive",
+              "2,597"
+            ]
+          ]
+        },
+        {
+          "title": "Family room — per person sharing (minimum 4 persons)",
+          "rows": [
+            [
+              "Bed & breakfast",
+              "788"
+            ],
+            [
+              "Half board",
+              "918"
+            ],
+            [
+              "Full board",
+              "1,048"
+            ],
+            [
+              "Fully inclusive",
+              "1,828"
+            ]
+          ]
+        },
+        {
+          "title": "Camping — per person sharing",
+          "rows": [
+            [
+              "Room only",
+              "154"
+            ]
+          ]
+        },
+        {
+          "title": "Packages — per person",
+          "rows": [
+            [
+              "Two-night package — sharing",
+              "3,093"
+            ],
+            [
+              "Two-night package — single",
+              "4,070"
+            ],
+            [
+              "Three-night package — sharing",
+              "6,515"
+            ],
+            [
+              "Three-night package — single",
+              "7,980"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — per person",
+          "rows": [
+            [
+              "Chobe game drive (3 hrs)",
+              "390"
+            ],
+            [
+              "Full day game drive (9 hrs)",
+              "1,170"
+            ],
+            [
+              "Chobe boat cruise (3 hrs)",
+              "390"
+            ]
+          ]
+        },
+        {
+          "title": "Transfers — per person",
+          "rows": [
+            [
+              "Border to Kasane town",
+              "108"
+            ],
+            [
+              "Border to Kasane airport",
+              "133"
+            ],
+            [
+              "Thebe to Victoria Falls",
+              "631"
+            ],
+            [
+              "Thebe to Livingstone",
+              "631"
+            ]
+          ]
+        },
+        {
+          "title": "Chobe National Park / conservation fees — per person per day",
+          "rows": [
+            [
+              "Foreign / international",
+              "190"
+            ],
+            [
+              "Residents",
+              "145"
+            ],
+            [
+              "Citizens",
+              "20"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+});
