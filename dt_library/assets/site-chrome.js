@@ -343,7 +343,14 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
       } else if(n){ n.style.display="none"; }
     });
   }
+  /* A whole sheet can declare the years it covers, e.g. the O&L collection whose
+     contracted rates run 01.01.26 - 30.06.2028 and so are valid for BOTH years.
+     Without this the 2027 toggle hid perfectly good rates behind a "to follow" note. */
+  function pageYears(){try{var v=document.body&&document.body.getAttribute("data-rate-years");
+    return v?v.split(/[,\s]+/).filter(Boolean):null;}catch(x){return null;}}
   function applyState(y){
+    var py=pageYears();
+    if(py){ var ok=py.indexOf(y)>-1; hideTables(!ok); showNote(!ok); reflect(); return; }
     if(hasNative()){hideTables(false);showNote(false);driveNative(y);}
     else if(perCard()){hideTables(false);showNote(false);applyPerCard(y);}
     else{var on=(y==="2027");hideTables(on);showNote(on);}
@@ -378,6 +385,6 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     wrapOpen();
     if(!document.getElementById("nr-yrtoggle")){build();return;}
     reflect();
-    if(!hasNative()){ if(perCard())applyPerCard(year()); else if(year()==="2027"){hideTables(true);showNote(true);} }
+    if(!pageYears()&&!hasNative()){ if(perCard())applyPerCard(year()); else if(year()==="2027"){hideTables(true);showNote(true);} }
   },250);});mo.observe(document.body||document.documentElement,{childList:true,subtree:true});}catch(x){}
 }catch(e){}})();
