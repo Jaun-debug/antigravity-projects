@@ -269,8 +269,10 @@
             desert:'https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg',
             livingdesert:'https://wetu.com/imageHandler/c1920x1080/406772/1761301431593dusk-property-and-landscape-11.jpg?fmt=jpg',
             sandwaves:'https://wetu.com/imageHandler/c1920x1080/10408/17682337465312018-lnh-jetty---beach.jpg?fmt=jpg',
-            infinite:'https://wetu.com/imageHandler/c1920x1080/10408/17689249594832025-lnh-private-beach-primary.jpg?fmt=jpg'
-          
+            infinite:'https://wetu.com/imageHandler/c1920x1080/10408/17689249594832025-lnh-private-beach-primary.jpg?fmt=jpg',
+            hafeni:'https://wetu.com/imageHandler/c1920x1080/10408/17682337465312018-lnh-jetty---beach.jpg?fmt=jpg',
+            solitaireact:'https://wetu.com/imageHandler/c1920x1080/10601/wolwedans_-_dune_camp_-_0.jpg?fmt=jpg'
+
           };
           function hero(){return document.querySelector('.header.nr-hero');}
           function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"'),url('/media/hero-poster.jpg')";}
@@ -336,6 +338,8 @@ document.addEventListener('DOMContentLoaded',function(){
             <button class="tab-link" onclick="switchSupplier('livingdesert', this)">Living Desert Adventures</button>
             <button class="tab-link" onclick="switchSupplier('sandwaves', this)">Sand Waves</button>
             <button class="tab-link" onclick="switchSupplier('infinite', this)">Infinite African Safaris</button>
+            <button class="tab-link" onclick="switchSupplier('hafeni', this)">Hafeni Tourism Group</button>
+            <button class="tab-link" onclick="switchSupplier('solitaireact', this)">Solitaire Activity Centre</button>
         </div>
 
         <!-- ============================================== -->
@@ -807,6 +811,104 @@ document.addEventListener('DOMContentLoaded',function(){
         </div>
 
 
+
+        <!-- ============================================== -->
+        <!-- HAFENI TOURISM GROUP -->
+        <!-- ============================================== -->
+        <div class="rate-card" data-years="2027" id="supplier-hafeni">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Hafeni Tourism Group</h2>
+                    <p>Proudly Namibian-guided cultural community tours in Swakopmund, Walvis Bay and Windhoek &mdash; Mondesa township by day, by bicycle and by night, a nomadic Himba encounter, the Topnaar community in the Kuiseb Delta, German colonial architecture, and a traditional cooking experience at the Hafeni Traditional Restaurant.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% STO</span></div>
+                    <div class="spec-item"><span class="spec-label">Location</span><span class="spec-value">Swakopmund, Walvis Bay &amp; Windhoek</span></div>
+                    <div class="spec-item"><span class="spec-label">Validity</span><span class="spec-value">Jan 2027 &ndash; Jan 2028</span></div>
+                    <div class="spec-item"><span class="spec-label">Minimum</span><span class="spec-value">2 pax per tour</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Tour</th><th class="info-col">Duration &amp; Departure</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Mondesa Cultural Township Tour</strong><br><small>Informal market, education centre, women&rsquo;s craft centre, Herero or Damara home visit, DRC settlement, light traditional meal and cultural performance.</small></td><td class="info-col">3 hours &middot; 10h00 or 15h00</td><td class="price-highlight sto-col">N$ 800.00</td><td class="rack-col">N$ 1,000.00</td></tr>
+                        <tr><td><strong>&ldquo;Mondesa by Night&rdquo; Township Dinner Tour</strong><br><small>Market visit, Khoisan women&rsquo;s craft centre, sundowner over Mondesa, assorted traditional meal with traditional brew, cultural performance.</small></td><td class="info-col">4 hours &middot; 17h00 or 17h30</td><td class="price-highlight sto-col">N$ 960.00</td><td class="rack-col">N$ 1,200.00</td></tr>
+                        <tr><td><strong>Traditional Dinner in the Township</strong><br><small>Dining experience at Hafeni Traditional Restaurant &mdash; mopane worms, omahangu porridge, traditional beans and mutete, with refreshments and a welcome drink.</small></td><td class="info-col">13h00 (lunch) or 18h00 (dinner)</td><td class="price-highlight sto-col">N$ 600.00</td><td class="rack-col">N$ 750.00</td></tr>
+                        <tr><td><strong>Mondesa Township Bicycle Tour</strong><br><small>Eco-friendly guided cycle through Mondesa and the DRC settlement, day-care and education centre (mornings), Herero or Khoisan home visit, light traditional meal.</small></td><td class="info-col">4 hours &middot; 10h00 or 15h00</td><td class="price-highlight sto-col">N$ 1,000.00</td><td class="rack-col">N$ 1,250.00</td></tr>
+                        <tr><td><strong>Nomadic Himba Cultural Tour, Swakopmund</strong><br><small>Pre-arranged. Story-telling on Ovahimba origins and beliefs, traditional attire and otjize, community art centre, light traditional meal.</small></td><td class="info-col">3 hours &middot; 10h00 or 15h00</td><td class="price-highlight sto-col">N$ 1,040.00</td><td class="rack-col">N$ 1,300.00</td></tr>
+                        <tr><td><strong>German Historic City Tour</strong><br><small>Guided walk through Swakopmund&rsquo;s colonial architecture &mdash; Altes Amtsgericht, Prinzessin Rupprecht Heim, Woermann Haus and tower, the mole and lighthouse, museum, Caf&eacute; Anton and the old railway station.</small></td><td class="info-col">2 hours &middot; 10h00 or 15h00</td><td class="price-highlight sto-col">N$ 720.00</td><td class="rack-col">N$ 900.00</td></tr>
+                        <tr><td><strong>Traditional Township Cooking Experience</strong><br><small>Shop for ingredients at the Mondesa market, then cook with a professional chef at Hafeni Traditional Restaurant. Includes a Happy Cooking certificate.</small></td><td class="info-col">10h00 or 15h00</td><td class="price-highlight sto-col">N$ 1,040.00</td><td class="rack-col">N$ 1,300.00</td></tr>
+                        <tr><td><strong>Cruise Liner Cultural Township Tour</strong><br><small>Walvis Bay introduction, Dune 7 (park entrance and port permit included), Mondesa market, education centre, DRC settlement, traditional meal with brew and cultural performances.</small></td><td class="info-col">4&ndash;6 hours / full day</td><td class="price-highlight sto-col">N$ 1,280.00</td><td class="rack-col">N$ 1,600.00</td></tr>
+                        <tr><td><strong>Topnaar Community Tour</strong><br><small>Pre-arranged on request. Semi-nomadic Khoisan community of the Kuiseb Delta &mdash; donkey carts, the endemic !Nara plant and its harvest, light meal by the dunes.</small></td><td class="info-col">3 hours &middot; 10h00 or 15h00</td><td class="price-highlight sto-col">N$ 1,600.00</td><td class="rack-col">N$ 2,000.00</td></tr>
+                        <tr><td><strong>Windhoek Katutura Township Tour</strong><br><small>Katutura history from the apartheid era, old location cemetery, informal market with kapana tasting, Herero Mall and Soweto, Oshiwambo or Herero home visit, independence museum.</small></td><td class="info-col">Half day</td><td class="price-highlight sto-col">N$ 800.00</td><td class="rack-col">N$ 1,000.00</td></tr>
+                        <tr><td><strong>Walvis Bay Scenic Tour</strong><br><small>Walvis Bay town and Kuisebmond township, Dune 7, the lagoon, pink lake and flamingos, harbour via the waterfront, Long Beach. Light meal and drink included.</small></td><td class="info-col">4&ndash;5 hours</td><td class="price-highlight sto-col">N$ 1,200.00</td><td class="rack-col">N$ 1,500.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Inclusions &amp; Logistics</h3>
+            <ul>
+                <li>All rates are per person and include guest pick-up and drop-off within the usual tour perimeter. Pick-ups from another town or beyond that perimeter carry an additional fee.</li>
+                <li>Most tours include a light traditional meal and a refreshment (soft drink, beer or a glass of wine).</li>
+                <li>Morning tours depart at 10h00 and afternoon tours at 15h00 unless stated otherwise. All tours are pre-booked and pre-arranged.</li>
+                <li>Swakopmund township and city drive combo tours, Windhoek city tours and tailor-made cultural tours are available on request.</li>
+                <li>Tours run on public holidays on request. Please advise dietary requirements, allergies or special occasions in advance.</li>
+            </ul>
+
+            <h3>Payment Policy</h3>
+            <ul>
+                <li>Invoices to be settled within 30 days; proof of payment to be sent after payment.</li>
+                <li>Tour itineraries are subject to change based on season and time of booking.</li>
+            </ul>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- SOLITAIRE ACTIVITY CENTRE -->
+        <!-- ============================================== -->
+        <div class="rate-card" data-years="2027" id="supplier-solitaireact">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Solitaire Activity Centre</h2>
+                    <p>Cheetah viewing in a 50-hectare sanctuary camp for cats that cannot be released to the wild, sundowner game drives along the base of the Rant Mountains, and fat-bike hire across the Solitaire Land Trust &mdash; on the doorstep of Sossusvlei. Tour fees support cheetah care and the Solitaire Land Trust.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% STO</span></div>
+                    <div class="spec-item"><span class="spec-label">Location</span><span class="spec-value">Solitaire (Sossusvlei)</span></div>
+                    <div class="spec-item"><span class="spec-label">Validity</span><span class="spec-value">1 Jan &ndash; 31 Dec 2027</span></div>
+                    <div class="spec-item"><span class="spec-label">Minimum</span><span class="spec-value">4 pax to pre-book a tour</span></div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Activity</th><th class="info-col">Duration &amp; Departure</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Cheetah Viewing Tour</strong><br><small>Guided 4x4 game viewer into the cheetah camp. Guests remain in the vehicle at all times.</small></td><td class="info-col">1 hour &middot; 08h00, 10h00, 16h00, 17h00</td><td class="price-highlight sto-col">N$ 560.00</td><td class="rack-col">N$ 700.00</td></tr>
+                        <tr><td><strong>Cheetah Sundowner Tour</strong><br><small>Cheetah viewing followed by a short game drive to the sundowner spot, with a complimentary drink and snack platter.</small></td><td class="info-col">Approx. 2 hours &middot; departs 1&frac12; hours before sunset</td><td class="price-highlight sto-col">N$ 880.00</td><td class="rack-col">N$ 1,100.00</td></tr>
+                        <tr><td><strong>Sundowner Game Drive</strong><br><small>Farm roads at the base of the Rant Mountains &mdash; oryx, springbok, klipspringer and mountain zebra, ending at the sundowner spot with a drink and snack platter. Sightings not guaranteed.</small></td><td class="info-col">Late afternoon</td><td class="price-highlight sto-col">N$ 600.00</td><td class="rack-col">N$ 750.00</td></tr>
+                        <tr><td><strong>Fat Bike Hire &mdash; 1 hour</strong><br><small>Includes helmet, storage pouch, puncture repair kit, water bottle and a route map.</small></td><td class="info-col">1 hour</td><td class="price-highlight sto-col">On request</td><td class="rack-col">N$ 300.00</td></tr>
+                        <tr><td><strong>Fat Bike Hire &mdash; half day</strong><br><small>Includes helmet, storage pouch, puncture repair kit, water bottle and a route map.</small></td><td class="info-col">6 hours</td><td class="price-highlight sto-col">On request</td><td class="rack-col">N$ 840.00</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Inclusions &amp; Logistics</h3>
+            <ul>
+                <li>All rates are per person. Children aged 4 to 12 are charged half price on cheetah tours and must be accompanied by a guardian.</li>
+                <li>A minimum of 4 pax is required to pre-book a tour. Tours are limited and should be booked in advance.</li>
+                <li>All tours depart from the Solitaire Activity Centre. Guests overnighting at Solitaire Mountain Lodge are collected and brought to the Activity Centre for sundowner tours.</li>
+                <li>Guided sundowner fat-bike combos are available, including a cheetah-camp visit before the ride, with bikes trailered back after sundowners.</li>
+                <li>Cheetah feeding viewings depend strictly on availability and cannot be pre-booked &mdash; enquire closer to the day or on arrival.</li>
+                <li>Night game drives are available on request and subject to availability.</li>
+                <li>Reservations for activities: activities@solitairenamibia.com</li>
+            </ul>
+        </div>
 
         <!-- ACTIONS BAR -->
         <div class="actions-bar">
