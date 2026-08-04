@@ -7781,3 +7781,78 @@ Object.assign(DDS_STO_BY_YEAR, {
     }
   }
 });
+
+// ---------------------------------------------------------------------------
+// Cresta Sprayview Hotel, Victoria Falls (Zimbabwe) — 2027 tour operator rates.
+// Supplier publishes both RACK and STO on the same agreement, so rack is taken
+// from the sheet (api/rack.js) and NOT derived. STO is nett and
+// non-commissionable. RATES ONLY BECOME VALID ONCE THE SIGNED AGREEMENT IS
+// RETURNED TO CRESTA — see the Sign contract folder.
+// ---------------------------------------------------------------------------
+Object.assign(DDS_STO_BY_YEAR, {
+  "cresta-sprayview": {
+    "2027": {
+      "name": "Cresta Sprayview Hotel",
+      "region": "Victoria Falls",
+      "currency": "US$",
+      "validity": "2027 · Green 1 Jan – 30 Jun / High 1 Jul – 31 Dec",
+      "note": "Nett, non-commissionable tour operator rates in US$, per person per night, inclusive of VAT and the Government Tourism levy. Excludes all local and international transfers, beverages, laundry, telephone and personal charges. Children 12 and under (maximum 2 per room) are charged 50% of the adult rate on bed & breakfast when sharing with 2 adults in a family or interleading room; children in their own room pay the full adult rate. Meals: ages 0–2 no charge, ages 3–12 50% of the applicable rate per meal per day. Group rooming lists required 30 days prior to arrival. Rooms held until 18:00 on the arrival date; check-in 14:00, check-out 10:00. Rates become valid only once the signed agreement is returned to Cresta.",
+      "sections": [
+        {
+          "title": "Green season (1 Jan – 30 Jun 2027) — bed & breakfast",
+          "rows": [
+            ["Standard room — per person sharing", "147"],
+            ["Standard room — single", "176"],
+            ["Executive — per person sharing", "169"],
+            ["Executive — single", "202"]
+          ]
+        },
+        {
+          "title": "Green season (1 Jan – 30 Jun 2027) — half board",
+          "rows": [
+            ["Standard room — per person sharing", "175"],
+            ["Standard room — single", "210"],
+            ["Executive — per person sharing", "197"],
+            ["Executive — single", "236"]
+          ]
+        },
+        {
+          "title": "Green season (1 Jan – 30 Jun 2027) — full board",
+          "rows": [
+            ["Standard room — per person sharing", "199"],
+            ["Standard room — single", "238"],
+            ["Executive — per person sharing", "221"],
+            ["Executive — single", "265"]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Dec 2027) — bed & breakfast",
+          "rows": [
+            ["Standard room — per person sharing", "176"],
+            ["Standard room — single", "211"],
+            ["Executive — per person sharing", "202"],
+            ["Executive — single", "242"]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Dec 2027) — half board",
+          "rows": [
+            ["Standard room — per person sharing", "204"],
+            ["Standard room — single", "244"],
+            ["Executive — per person sharing", "230"],
+            ["Executive — single", "276"]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Dec 2027) — full board",
+          "rows": [
+            ["Standard room — per person sharing", "228"],
+            ["Standard room — single", "273"],
+            ["Executive — per person sharing", "254"],
+            ["Executive — single", "304"]
+          ]
+        }
+      ]
+    }
+  }
+});
