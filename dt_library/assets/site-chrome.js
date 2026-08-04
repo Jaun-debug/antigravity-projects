@@ -70,7 +70,9 @@ window.submitLogin=function(){
     if(res.ok && res.j && res.j.token){
       
       closeLoginModal();
-      sessionStorage.setItem(TOKEN_KEY,res.j.token); location.reload();
+      sessionStorage.setItem(TOKEN_KEY,res.j.token);
+      try{ sessionStorage.setItem('nr_agent_user', u.toLowerCase()); sessionStorage.removeItem('nr_owner'); }catch(e){}
+      location.reload();
     } else {
       err.textContent=(res.j && res.j.error) ? res.j.error : 'Sign in failed.';
     }
@@ -86,7 +88,7 @@ window.agentBtn=function(){
 
 window.scOpenRole=function(id){var m=document.getElementById(id);if(m)m.classList.add("open");};
 window.scCloseRole=function(){["role-signin","role-signup"].forEach(function(id){var m=document.getElementById(id);if(m)m.classList.remove("open");});};
-window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");location.reload();}else{if(window.openAuthWizard){openAuthWizard("signin");}else{scOpenRole("role-signin");}}};
+window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");try{sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(e){}location.reload();}else{if(window.openAuthWizard){openAuthWizard("signin");}else{scOpenRole("role-signin");}}};
 window.scSignUp=function(){if(window.openAuthWizard){openAuthWizard("signup");}else{scOpenRole("role-signup");}};
 window.scPick=function(role){scCloseRole();if(role==="agent"){openLoginModal();}else{location.href="/supplier-portal/";}};
 window.scPickUp=function(role){scCloseRole();location.href="/signup/?role="+role;};
@@ -106,14 +108,42 @@ function markActiveNav(){try{
     a.classList.toggle("active", !!want && t===want);
   });
 }catch(e){}}
+/* Who is signed in?
+   Every agent shares the same session token, so the token alone cannot tell the
+   owner apart from a partner. We record the username used at sign-in, and — for
+   accounts created through /accounts/ — confirm the role against /api/auth.
+   Only the owner sees the Progress Report in the header. */
+var OWNER_USERS = ['dt'];
+function signedInUser(){ try{ return (sessionStorage.getItem('nr_agent_user')||'').trim().toLowerCase(); }catch(e){ return ''; } }
+function isOwner(){
+  try{
+    if (sessionStorage.getItem('nr_owner') === '1') return true;
+    var u = signedInUser();
+    return !!u && OWNER_USERS.indexOf(u) > -1;
+  }catch(e){ return false; }
+}
+/* Accounts made in /accounts/ carry a real role; ask once and cache the answer. */
+function confirmOwnerRole(){
+  try{
+    if (!sessionStorage.getItem('nr_agent_token')) return;
+    if (sessionStorage.getItem('nr_owner')) return;
+    fetch('/api/auth?action=me',{credentials:'same-origin'})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        var owner = !!(j && j.ok && j.user && j.user.role === 'owner');
+        try{ sessionStorage.setItem('nr_owner', owner ? '1' : '0'); }catch(e){}
+        if (owner) updateAgentState();
+      }).catch(function(){});
+  }catch(e){}
+}
 function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
 if(inn){document.cookie="nr_session="+encodeURIComponent(sessionStorage.getItem("nr_agent_token"))+"; path=/; SameSite=Lax";}
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
 var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":"none";
-var ib=document.getElementById("nav-builder");if(ib)ib.style.display=inn?"":"none";var pr=document.getElementById("nav-progress");if(pr)pr.style.display=inn?"":"none";
+var ib=document.getElementById("nav-builder");if(ib)ib.style.display=inn?"":"none";var pr=document.getElementById("nav-progress");if(pr)pr.style.display=(inn&&isOwner())?"":"none";
 var b=document.getElementById("hdr-agent-btn");if(b)b.textContent=inn?"Sign Out":"Sign In";var su=document.getElementById("hdr-signup-btn");if(su)su.style.display=inn?"none":"";
 var mp=document.getElementById("nav-map");if(mp)mp.style.display=inn?"none":"";}
-window.agentBtn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.reload();}else{openLoginModal();}};
+window.agentBtn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");try{sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(e){}document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.reload();}else{openLoginModal();}};
 
 function build(){
  ["#uc-belt",".main-header","#mobile-menu","#mm-backdrop","#login-modal"].forEach(function(s){var e=document.querySelector(s);if(e)e.remove();});
@@ -124,6 +154,7 @@ function build(){
  document.body.insertAdjacentHTML("beforeend",FOOTER);
  var yr=document.getElementById("yr");if(yr)yr.textContent=new Date().getFullYear();
  updateAgentState();
+ confirmOwnerRole();
  markActiveNav();
  var mh=document.querySelector(".main-header");var belt=document.getElementById("uc-belt");
  function scFit(){var bb=belt?belt.offsetHeight:0;if(mh)mh.style.top=bb+"px";if(mh){var h=Math.ceil(mh.getBoundingClientRect().bottom);document.body.style.paddingTop=h+"px";var sh=document.querySelector(".site-hero");if(sh)sh.style.minHeight="calc(100vh - "+h+"px)";}}
