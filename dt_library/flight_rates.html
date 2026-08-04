@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NAMIBIA &amp; BOTSWANA FLIGHTS - Pre-Negotiated STO Rates 2026/2027</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer" data-no-optimize="1"></script>
+    <style data-no-optimize="1">
+        :root {
+            --primary-bg: #eae9e6; /* Soft Warm-Grey */
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-main: #3c3530; /* Warm Dark Charcoal */
+            --text-muted: #7d756e; /* Warm Earthy Muted */
+            --brand-accent: #a48256; /* Warm Gold Accent */
+            --brand-green: #87a996; /* Eucalyptus Sage Green */
+            --brand-charcoal: #3c3530;
+            --brand-gradient: linear-gradient(135deg, #eae9e6, #a48256, #87a996);
+            --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --glass-border: 1px solid rgba(164, 130, 86, 0.15);
+            --font-head: 'Cinzel', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        body { 
+            margin: 0; 
+            padding: 0; 
+            background: var(--primary-bg); 
+            color: var(--text-main); 
+            font-family: var(--font-body); 
+            -webkit-font-smoothing: antialiased; 
+            font-weight: 300;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 400; margin: 0; }
+        
+        .wrapper { max-width: 1400px; margin: 0 auto; padding: 40px 20px; }
+        
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 2.8rem; color: var(--brand-charcoal); margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
+        .header p { color: var(--text-muted); font-size: 0.95rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 400; border-top: 1px solid rgba(164, 130, 86, 0.3); border-bottom: 1px solid rgba(164, 130, 86, 0.3); display: inline-block; padding: 6px 20px; margin-top: 5px; }
+        html,body{overflow-x:hidden;max-width:100%;}
+        .header.nr-hero{position:relative;width:100vw;margin-left:calc(50% - 50vw);margin-top:-40px;margin-bottom:0;height:calc(100vh - 79px);box-sizing:border-box;background:#2b2b2b url('/media/hero-poster.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:70px 24px 88px;overflow:hidden;}
+        .header.nr-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.28),rgba(0,0,0,.62));}
+        .header.nr-hero>*{position:relative;z-index:2;}
+        .header.nr-hero h1{color:#fff !important;text-shadow:0 3px 20px rgba(0,0,0,.45);}
+        .header.nr-hero p{color:#fff !important;opacity:1 !important;border-color:rgba(255,255,255,.45) !important;background:rgba(0,0,0,.12);}
+        .header.nr-hero .scroll-explore{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;display:flex;flex-direction:column;align-items:center;gap:9px;cursor:pointer;text-decoration:none;}
+        .header.nr-hero .se-label{color:rgba(255,255,255,.9);font-family:serif;text-transform:uppercase;letter-spacing:3px;font-size:.68rem;}
+        .header.nr-hero .scroll-cue{position:relative;width:26px;height:42px;border:2px solid rgba(255,255,255,.75);border-radius:14px;display:flex;justify-content:center;}
+        .header.nr-hero .scroll-cue::before{content:'';width:4px;height:8px;margin-top:7px;border-radius:2px;background:#fff;animation:nrScrollDot 1.8s ease-in-out infinite;}
+        @keyframes nrScrollDot{0%{opacity:0;transform:translateY(0)}25%{opacity:1}55%{opacity:1;transform:translateY(13px)}100%{opacity:0;transform:translateY(13px)}}
+
+        /* SUPPLIER TABS */
+        .tabs-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(164, 130, 86, 0.15);
+            padding-bottom: 15px;
+        }
+
+        .tab-link {
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.7);
+            border: 1px solid rgba(164, 130, 86, 0.15);
+            color: var(--text-muted);
+            font-family: var(--font-head);
+            font-size: 0.85rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .tab-link:hover {
+            background: #fff;
+            border-color: var(--brand-accent);
+            color: var(--brand-accent);
+            transform: translateY(-2px);
+        }
+
+        .tab-link.active {
+            background: var(--brand-green);
+            border-color: var(--brand-green);
+            color: #fff;
+            font-weight: 400;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(135, 169, 150, 0.25);
+        }
+
+        /* RATE CARD AND VIEWS */
+        .rate-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            border: var(--glass-border);
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+            margin-bottom: 40px;
+            display: none;
+        }
+
+        .rate-card.active {
+            display: block;
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        .supplier-info {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .supplier-info { grid-template-columns: 1fr; }
+        }
+
+        .supplier-details h2 { font-size: 2rem; color: var(--brand-charcoal); margin-bottom: 15px; font-weight: 400; }
+        .supplier-details p { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; font-weight: 300; }
+
+        .supplier-quick-spec {
+            background: rgba(164, 130, 86, 0.05);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px dashed rgba(164, 130, 86, 0.25);
+        }
+
+        .spec-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(164, 130, 86, 0.15);
+            font-size: 0.85rem;
+        }
+        .spec-item:last-child { border-bottom: none; }
+        .spec-label { font-weight: 400; color: var(--brand-charcoal); }
+        .spec-value { color: var(--text-muted); font-weight: 300; }
+
+        /* DATA TABLE */
+        .table-responsive { width: 100%; overflow-x: auto; margin-bottom: 30px; border-radius: 8px; border: 1px solid rgba(164, 130, 86, 0.15); }
+        table { width: 100%; border-collapse: collapse; text-align: left; background: #fff; font-size: 0.9rem; }
+        th { background: var(--brand-charcoal); color: #fff; padding: 15px 20px; font-family: var(--font-head); font-weight: 400; letter-spacing: 1px; }
+        td { padding: 15px 20px; border-bottom: 1px solid rgba(164, 130, 86, 0.1); color: var(--text-main); font-weight: 300; }
+        tr:last-child td { border-bottom: none; }
+        tr:nth-child(even) { background: rgba(164, 130, 86, 0.02); }
+
+        .price-highlight { font-weight: 500; color: var(--brand-accent); }
+
+        /* BUTTONS */
+        .actions-bar { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; }
+        
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 28px;
+            background: var(--brand-green);
+            color: #fff;
+            font-family: var(--font-head);
+            font-weight: 400;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-action:hover {
+            background: var(--brand-accent);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(164, 130, 86, 0.25);
+        }
+
+        /* INCLUSIONS EXCLUSIONS GRID */
+        .terms-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+            background: rgba(255,255,255,0.5);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(164, 130, 86, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .terms-grid { grid-template-columns: 1fr; }
+        }
+
+        .terms-col h3 { font-size: 1.2rem; color: var(--brand-charcoal); margin-bottom: 15px; border-bottom: 2px solid var(--brand-accent); padding-bottom: 8px; font-weight: 400; }
+        .terms-col ul { padding-left: 20px; margin: 0; }
+        .terms-col li { margin-bottom: 8px; color: var(--text-muted); font-size: 0.85rem; line-height: 1.5; font-weight: 300; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--brand-accent);
+            border: 1px solid rgba(164, 130, 86, 0.25);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 20px;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(5px);
+            font-family: var(--font-head);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+            font-weight: 400;
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            background: var(--brand-accent);
+            border-color: transparent;
+        }
+
+        /* print styles */
+        @media print {
+            body { background: #fff; color: #000; }
+            .wrapper { padding: 0; }
+            .back-btn, .tabs-container, .actions-bar { display: none !important; }
+            .rate-card { display: none !important; }
+            .rate-card.active { display: block !important; border: none; box-shadow: none; padding: 0; margin-bottom: 50px; page-break-after: avoid; }
+            th { background: #555 !important; color: #fff !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper" id="print-area">
+        
+        <div class="back-btn" onclick="goBackToPortal()">← Back to Portal</div>
+
+        <style>
+          .header .nr-eyebrow{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;opacity:.5;margin-bottom:8px}
+          .header h1{font-size:2.8rem!important;letter-spacing:1px;text-transform:none!important;font-weight:400;line-height:1.1;margin-bottom:8px}
+          .supplier-details h2{display:none}
+          @media(max-width:640px){.header h1{font-size:2rem!important}}
+        </style>
+        <header class="header nr-hero">
+            <p class="nr-eyebrow">Activity Experiences &middot; Pre-Negotiated STO Rates 2026/2027</p>
+            <h1 id="nr-hero-co">Mack Air</h1>
+            <a class="scroll-explore" href="javascript:void(0)" onclick="nrHeroScroll();return false" aria-label="Explore"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a>
+        </header>
+        <script>
+        function nrHeroScroll(){var t=document.querySelector('.season-selector')||document.querySelector('.tabs-container');if(!t)return;var hd=document.querySelector('.main-header');var off=hd?Math.ceil(hd.getBoundingClientRect().bottom):0;var y=t.getBoundingClientRect().top+window.pageYOffset-off-16;window.scrollTo({top:y,behavior:'smooth'});}
+        (function(){
+          // Per-supplier hero images — replace each value with that operator's own landscape photo.
+          var HERO_IMG={
+            mackair:'https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg'
+          };
+          function hero(){return document.querySelector('.header.nr-hero');}
+          function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"'),url('/media/hero-poster.jpg')";}
+          function keyFromHash(){var m=(location.hash||'').replace('#','').trim();return HERO_IMG.hasOwnProperty(m)?m:'mackair';}
+          function moveBack(){var bb=document.querySelector('.back-btn'),h=hero();if(bb&&h&&bb.parentNode!==h){h.appendChild(bb);bb.style.position='absolute';bb.style.top='16px';bb.style.left='20px';bb.style.zIndex='4';bb.style.color='#fff';bb.style.borderColor='rgba(255,255,255,.6)';bb.style.background='rgba(0,0,0,.25)';}}
+          function fitHero(){var h=hero();if(!h)return;var cw=document.documentElement.clientWidth;var p=h.parentNode;var pl=p?(p.getBoundingClientRect().left+(parseFloat(getComputedStyle(p).paddingLeft)||0)):0;h.style.width=cw+'px';h.style.marginLeft=Math.round(-pl)+'px';var t=h.getBoundingClientRect().top;/* height is set in CSS (region-page parity) — JS only handles full-bleed width */}
+          document.addEventListener('DOMContentLoaded',function(){moveBack();setHero(keyFromHash());fitHero();window.addEventListener('resize',fitHero);window.addEventListener('load',fitHero);setTimeout(fitHero,400);var iv=setInterval(function(){if(typeof window.switchSupplier==='function'){clearInterval(iv);var o=window.switchSupplier;window.switchSupplier=function(k){var r=o.apply(this,arguments);setHero(k);return r;};}},80);setTimeout(function(){clearInterval(iv);},4000);window.addEventListener('hashchange',function(){var k=keyFromHash();setHero(k);var tab=document.querySelector(".tab-link[onclick*=\"'"+k+"'\"]");if(typeof window.switchSupplier==='function'){try{window.switchSupplier(k,tab);}catch(e){}}});});
+        })();
+        </script>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var agent=false; try{agent=!!sessionStorage.getItem('nr_agent_token');}catch(e){}
+  document.body.classList.add(agent?'nr-agent':'nr-public');
+  var eb=document.querySelector('.header .nr-eyebrow');
+  if(eb&&!agent){ eb.textContent=(eb.textContent||'').replace(/[·\-\s]*Pre-?Negotiated STO Rates?.*$/i,'').replace(/[·\-\s]+$/,'').trim(); if(!eb.textContent) eb.style.display='none'; }
+  if(agent) return;
+  document.querySelectorAll(".spec-item").forEach(function(si){ if(/\b(sto|commission)\b/i.test(si.textContent||"")) si.style.display="none"; });
+  // Public view: strip agent-trade wording (STO / NETT / pre-negotiated / commission) from supplier descriptions.
+  document.querySelectorAll(".supplier-details p, .supplier-info p, .supplier-desc, .lead").forEach(function(p){
+    var t=p.textContent||""; if(!/(\bsto\b|nett|pre-?negotiated|commission|net\s+rate)/i.test(t)) return;
+    t=t.replace(/\b([A-Z][\w'&]*(?:\s+[A-Z][\w'&]*)*)'s\s+pre-?negotiated\s+STO\s+\w*\s*rates?\s+offer\b/gi,"$1 offers");
+    t=t.replace(/\bpre-?negotiated\s+STO\s+(?:NETT|NET|contract)?\s*rates?\s+valid\s+across\b/gi,"Available across");
+    t=t.replace(/\bpre-?negotiated\s+STO\s+(?:NETT|NET|contract)?\s*rates?\b/gi,"rates");
+    t=t.replace(/\bbuilt-?in\s+STO\s+NETT\b/gi,"");
+    t=t.replace(/\bSTO\s+(?:NETT|NET|contract)\b/gi,""); t=t.replace(/\bnett\b/gi,""); t=t.replace(/\bSTO\b/gi,"");
+    t=t.replace(/\s{2,}/g," ").replace(/\s+([.,])/g,"$1").replace(/^\s*[.,]\s*/,"").trim();
+    p.textContent=t;
+  });
+  // Signed-out view: hide negotiated STO columns outright and show RACK only.
+  // Columns are tagged explicitly (.sto-col / .rack-col / .info-col) so nothing is
+  // guessed from the cell text — duration, inclusions and min-guest columns stay visible.
+  document.querySelectorAll('.sto-col').forEach(function(c){ c.style.display='none'; });
+  document.querySelectorAll('th.rack-col').forEach(function(h){
+    h.innerHTML = h.innerHTML.replace(/\s*Rate\s*$/i,' Rate').replace(/^\s*(?:Total\s+)?Rack\s*/i,'').replace(/\s{2,}/g,' ').trim() || 'Rate';
+  });
+  document.querySelectorAll('table').forEach(function(t){
+    if (t.querySelector('.rack-col')) return;
+    if (!t.querySelector('.sto-col')) return;
+    var hdr=t.querySelectorAll('thead th');
+    for (var i=0;i<hdr.length;i++){
+      if (!hdr[i].classList.contains('sto-col')) continue;
+      hdr[i].style.display=''; hdr[i].classList.remove('sto-col');
+      hdr[i].innerHTML = hdr[i].innerHTML.replace(/\s*\b(?:STO|NETT|NET)\b\s*/gi,' ').replace(/\s{2,}/g,' ').trim() || 'Rate';
+      for (var r=1;r<t.rows.length;r++){
+        var cd=t.rows[r].cells[i];
+        if (cd){ cd.style.display=''; cd.classList.remove('sto-col');
+                 cd.textContent='Rates to follow'; cd.style.fontStyle='italic';
+                 cd.style.color='#8a8175'; cd.classList.remove('price-highlight'); }
+      }
+    }
+  });
+});
+</script>
+        <script>document.addEventListener('DOMContentLoaded',function(){var el=document.getElementById('nr-hero-co');function activeName(){var c=document.querySelector('.rate-card.active .supplier-details h2');if(c)return c.textContent;var t=document.querySelector('.tabs-container .tab-link.active');return t?t.textContent:'';}function sync(){if(el){var n=activeName();if(n)el.textContent=n.replace(/\s+/g,' ').trim();}}sync();if(typeof window.switchSupplier==="function"){var o=window.switchSupplier;window.switchSupplier=function(){var r=o.apply(this,arguments);setTimeout(sync,0);return r;};}document.querySelectorAll('.tabs-container .tab-link').forEach(function(b){b.addEventListener('click',function(){setTimeout(sync,0);});});});</script>
+
+        <!-- SUPPLIER TABS -->
+        <div class="tabs-container">
+            <button class="tab-link active" onclick="switchSupplier('mackair', this)">Mack Air</button>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- MACK AIR -->
+        <!-- ============================================== -->
+        <div class="rate-card active" data-years="2027" id="supplier-mackair">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Mack Air</h2>
+                    <p>Botswana&rsquo;s seat-rate light-aircraft network out of Maun and Kasane, linking the Okavango Delta, Linyanti, Chobe and Kalahari airstrips, plus the Victoria Falls Express between Kasane, Victoria Falls and Livingstone.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">20% STO (rack derived)</span></div>
+                    <div class="spec-item"><span class="spec-label">Coverage</span><span class="spec-value">Botswana, Victoria Falls &amp; Livingstone</span></div>
+                    <div class="spec-item"><span class="spec-label">Validity</span><span class="spec-value">2027 season</span></div>
+                    <div class="spec-item"><span class="spec-label">Fuel Surcharge</span><span class="spec-value">None applicable</span></div>
+                </div>
+            </div>
+
+            <div class="year-block" data-year="2027">
+            <h3>Botswana Seat Rates &mdash; per person, one way</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Route</th><th class="info-col">Destination</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>From Group A</strong></td><td class="info-col">to Maun</td><td class="price-highlight sto-col">USD 295</td><td class="rack-col">USD 369</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group A</td><td class="price-highlight sto-col">USD 295</td><td class="rack-col">USD 369</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group B</td><td class="price-highlight sto-col">USD 315</td><td class="rack-col">USD 394</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group C</td><td class="price-highlight sto-col">USD 350</td><td class="rack-col">USD 438</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group D</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><strong>From Group B</strong></td><td class="info-col">to Maun</td><td class="price-highlight sto-col">USD 315</td><td class="rack-col">USD 394</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group A</td><td class="price-highlight sto-col">USD 315</td><td class="rack-col">USD 394</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group B</td><td class="price-highlight sto-col">USD 315</td><td class="rack-col">USD 394</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group C</td><td class="price-highlight sto-col">USD 350</td><td class="rack-col">USD 438</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group D</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><strong>From Group C</strong></td><td class="info-col">to Maun</td><td class="price-highlight sto-col">USD 350</td><td class="rack-col">USD 438</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group A</td><td class="price-highlight sto-col">USD 350</td><td class="rack-col">USD 438</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group B</td><td class="price-highlight sto-col">USD 350</td><td class="rack-col">USD 438</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group C</td><td class="price-highlight sto-col">USD 350</td><td class="rack-col">USD 438</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group D</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><strong>From Group D</strong></td><td class="info-col">to Maun</td><td class="price-highlight sto-col">USD 365</td><td class="rack-col">USD 456</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group A</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group B</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group C</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group D</td><td class="price-highlight sto-col">USD 460</td><td class="rack-col">USD 575</td></tr>
+                        <tr><td><strong>From Kasane</strong></td><td class="info-col">to Maun</td><td class="price-highlight sto-col">USD 555</td><td class="rack-col">USD 694</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group A</td><td class="price-highlight sto-col">USD 555</td><td class="rack-col">USD 694</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group B</td><td class="price-highlight sto-col">USD 555</td><td class="rack-col">USD 694</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group C</td><td class="price-highlight sto-col">USD 555</td><td class="rack-col">USD 694</td></tr>
+                        <tr><td><span style="opacity:.55">&#8226;</span></td><td class="info-col">to Group D</td><td class="price-highlight sto-col">USD 635</td><td class="rack-col">USD 794</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Victoria Falls Express</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Route</th><th class="info-col">Conditions</th><th class="sto-col">STO Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Kasane &harr; Victoria Falls</strong></td><td class="info-col">Daily flights</td><td class="price-highlight sto-col">USD 225</td><td class="rack-col">USD 281</td></tr>
+                        <tr><td><strong>Kasane &harr; Livingstone</strong></td><td class="info-col">Minimum 2 passengers</td><td class="price-highlight sto-col">USD 390</td><td class="rack-col">USD 488</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+            <h3>Runway Groupings</h3>
+            <ul>
+                <li><strong>Group A</strong> &mdash; Chitabe, Delta, Elo, Kiri, Ntswi, Qorokwe, Santawani, Stanleys, Xaxaba.</li>
+                <li><strong>Group B</strong> &mdash; 4 Rivers, Abu, Camp Okavango, Cement, Guma, Hunda, Jao, Jedibe, Kadizora, Kanana, Khwai, Khwai Private, Kwara, Mombo, Mopiri, Motswiri, Nxabega, Omdop, Piajio, Pom Pom, Seronga, Shinde, Vumbura, Xakanaxa, Xaranna, Xaraxai, Xigera, Xugana.</li>
+                <li><strong>Group C</strong> &mdash; Chobe, Kwando, Lebala, Linyanti, Nogatsaa, Saile, Savute, Selinda.</li>
+                <li><strong>Group D</strong> &mdash; Deception Valley, Dinaka, Haina, Leroo La Tau, Nxai Pan, Nxamaseri, Shakawe, Tau Pan.</li>
+            </ul>
+
+            <h3>Inclusions &amp; Conditions</h3>
+            <ul>
+                <li>All rates are per person, one way, and include 14% VAT. Rates are quoted in US dollars.</li>
+                <li>Rack rates shown are derived from the supplier&rsquo;s nett seat rate at the standard 20% margin &mdash; Mack Air does not publish a separate rack sheet.</li>
+                <li>Rates <strong>exclude</strong> all service fees at airstrips.</li>
+                <li>Rates <strong>exclude</strong> departure tax: USD 30 per person on local flights, USD 35 per person on international departures from Maun and Kasane, and USD 50 per person on international departures from Victoria Falls in 2027.</li>
+                <li>No fuel surcharge is applicable for the 2027 season.</li>
+                <li>Luggage terms and conditions are governed by the Mack Air luggage guidelines &mdash; soft bags only, with strict weight limits on light aircraft. Confirm allowances at time of booking.</li>
+            </ul>
+        </div>
+
+        <!-- ACTIONS BAR -->
+        <div class="actions-bar">
+            <button class="btn-action" onclick="window.close()">Close Document</button>
+            <button class="btn-action" onclick="printRateSheet()">Print Rate Sheet (PDF)</button>
+        </div>
+
+    </div>
+
+    <script data-no-optimize="1">
+        let activeSupplier = 'mackair';
+
+        function switchSupplier(supplierId, btn) {
+            activeSupplier = supplierId;
+            document.querySelectorAll('.tab-link').forEach(el => el.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+
+            document.querySelectorAll('.rate-card').forEach(el => el.classList.remove('active'));
+            document.getElementById('supplier-' + supplierId).classList.add('active');
+            
+            // update URL hash
+            window.location.hash = supplierId;
+        }
+
+        function printRateSheet() {
+            const element = document.getElementById('print-area');
+            const opt = {
+                margin:       10,
+                filename:     `namibia_activity_rates_${activeSupplier}_2026.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
+            };
+            html2pdf().from(element).save();
+        }
+
+        function goBackToPortal() {
+            if (window.opener || (document.referrer && document.referrer.includes('namibia_agent_portal.html')) || window.history.length <= 2) {
+                window.close();
+                setTimeout(() => {
+                    window.location.href = 'namibia_agent_portal.html';
+                }, 100);
+            } else {
+                window.location.href = 'namibia_agent_portal.html';
+            }
+        }
+
+        // Initialize based on URL hash
+        window.addEventListener('DOMContentLoaded', () => {
+            const hash = window.location.hash;
+            if (hash) {
+                const supplierId = hash.substring(1);
+                const matchedTab = Array.from(document.querySelectorAll('.tab-link')).find(btn => {
+                    return btn.getAttribute('onclick').includes(`'${supplierId}'`);
+                });
+                if (matchedTab) {
+                    switchSupplier(supplierId, matchedTab);
+                }
+                
+                // Hide the tab row on a single-supplier (deep-linked) view; the nav dropdown handles switching.
+                const tabsContainer = document.querySelector('.tabs-container');
+                if (tabsContainer) {
+                    tabsContainer.style.display = 'none';
+                }
+            }
+
+            // Adjust back button text based on entry context
+            const backBtn = document.querySelector('.back-btn');
+            if (backBtn) {
+                if (window.opener || (document.referrer && document.referrer.includes('namibia_agent_portal.html')) || window.history.length <= 2) {
+                    backBtn.innerText = '← Close & Return to Portal';
+                } else {
+                    backBtn.innerText = '← Back to Portal';
+                }
+            }
+        });
+    </script>
+<script src="/assets/site-chrome.js"></script>
+<script>/* pull owner-loaded rates into supplier cards */(function(){
+  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function render(card,doc,year,years){
+    var t=card.querySelectorAll('table');for(var i=0;i<t.length;i++)t[i].style.display='none';
+    var sel=card.querySelector('.season-selector');/* season toggle N/A for db rates */
+    var old=card.querySelector('.db-rates');if(old)old.remove();
+    var wrap=document.createElement('div');wrap.className='db-rates';
+    if(years&&years.length>1){var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 0 16px';years.forEach(function(y){var b=document.createElement('button');b.type='button';b.textContent=y+' season';var on=String(y)===String(year);b.style.cssText='cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(200,90,23,.6);background:'+(on?'rgba(200,90,23,.6)':'rgba(200,90,23,.08)')+';color:'+(on?'#fff':'#c85a17');b.onclick=function(){load(card,y);};bar.appendChild(b);});wrap.appendChild(bar);}
+    (doc.sections||[]).forEach(function(s){var tb=document.createElement('table');tb.style.marginBottom='20px';var rows=(s.rows||[]).map(function(r){return '<tr><td>'+esc(r[0])+'</td><td style="text-align:right;white-space:nowrap">N$ '+esc(r[1])+'</td></tr>';}).join('');tb.innerHTML='<caption style="text-align:left;font-weight:500;font-size:1.05rem;padding:12px 0 8px;color:#3c3530">'+esc(s.title||'')+'</caption><tbody>'+rows+'</tbody>';wrap.appendChild(tb);});
+    if(doc.note){var n=document.createElement('p');n.style.cssText='font-size:.85rem;color:#7d756e;margin-top:6px';n.textContent=doc.note+(doc.validity?' · Valid '+doc.validity:'');wrap.appendChild(n);}
+    card.appendChild(wrap);
+  }
+  function load(card,yr){var key=card.id.replace('supplier-','');fetch('/api/rack?slug='+encodeURIComponent(key)+'&full=1'+(yr?'&year='+encodeURIComponent(yr):''),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){if(j&&j.doc&&j.doc.sections&&j.doc.sections.length){render(card,j.doc,j.year,j.years);}}).catch(function(){});}
+  document.addEventListener('DOMContentLoaded',function(){var c=document.querySelectorAll('.rate-card[id^="supplier-"]');for(var i=0;i<c.length;i++)load(c[i]);});
+})();</script>
+
+<script>/*nav-map-inject*/(function(){function I(){var n=document.querySelector(".main-header .nav-links");if(!n)return false;if(document.getElementById("nav-map"))return true;var d=document.createElement("div");d.className="nav-item-dropdown";d.id="nav-map";d.innerHTML='<a class="nav-link" href="/map/">Map Your Itinerary</a>';var b=n.querySelector(".enquire-now-btn");b?n.insertBefore(d,b):n.appendChild(d);if(sessionStorage.getItem("nr_agent_token"))d.style.display="none";return true;}var t=0,iv=setInterval(function(){if(I()||++t>60)clearInterval(iv);},80);if(document.readyState!=="loading")I();else document.addEventListener("DOMContentLoaded",I);})();</script>
+</body>
+</html>

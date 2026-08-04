@@ -855,6 +855,16 @@
                 </div>
             </div>
             
+            <div class="nav-item-dropdown" onmouseleave="this.querySelector('.dropdown-menu').classList.remove('clicked')">
+                <a href="#" class="nav-link dropdown-toggle" id="nav-flights" onclick="openFlightRates(''); return false;">Flights &#9662;</a>
+                <div class="dropdown-menu">
+                    <div class="dropdown-column">
+                        <div style="font-family:'Jost',sans-serif;font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:#a48256;margin:10px 14px 4px;opacity:.95;">Botswana &amp; Victoria Falls</div>
+                        <a href="#" onclick="openFlightRates('mackair'); return false;">Mack Air</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="nav-item-dropdown" id="nav-map"><a class="nav-link" href="/map/" style="cursor:pointer">Map Your Itinerary</a></div>
             <div class="nav-item-dropdown" id="nav-builder" style="display:none"><a class="nav-link" href="/builder/" style="cursor:pointer">Itinerary Builder</a></div>
             <div class="nav-item-dropdown" id="nav-progress" style="display:none"><a class="nav-link" href="/tools/rate-progress.html">Progress Report</a></div>
@@ -3867,6 +3877,10 @@
             // The chosen season travels with you via localStorage, and the rate sheet
             // says per supplier whether that year is loaded — no need to guess here.
             window.location.href = `vehicle_rates.html#${supplierId}`;
+        }
+
+        function openFlightRates(flightId) {
+            window.location.href = '/flight_rates.html' + (flightId ? '#' + flightId : '');
         }
 
         function openActivityRates(activityId) {
