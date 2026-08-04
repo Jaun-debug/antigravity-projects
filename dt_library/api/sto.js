@@ -6403,6 +6403,1264 @@ const STO_DB = {
   }
 };
 
+/* -- O&L Collection ---------------------------------------------------------
+   Contracted rates run 01.01.2026 to 30.06.2028, so 2026 and 2027 carry the
+   same figures. Rack is the STO grossed up at the sheet's stated 20% commission
+   (rack = STO / 0.8) -- what an agent must bill to net the STO back.
+   -------------------------------------------------------------------------- */
+Object.assign(DDS_STO_BY_YEAR, {
+  "strand-hotel-swakopmund": {
+    "2026": {
+      "name": "Strand Hotel Swakopmund",
+      "region": "Swakopmund",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing BB",
+          "rows": [
+            [
+              "Standard Rooms",
+              "3,518"
+            ],
+            [
+              "Standard Sea Facing",
+              "3,758"
+            ],
+            [
+              "Luxury Rooms",
+              "4,222"
+            ],
+            [
+              "Luxury Sea Facing",
+              "4,462"
+            ],
+            [
+              "Junior Suite",
+              "4,573"
+            ],
+            [
+              "Luxury Suite",
+              "5,629"
+            ],
+            [
+              "Presidential Suite",
+              "8,794"
+            ]
+          ]
+        },
+        {
+          "title": "Single BB",
+          "rows": [
+            [
+              "Standard Rooms",
+              "5,629"
+            ],
+            [
+              "Standard Sea Facing",
+              "6,013"
+            ],
+            [
+              "Luxury Rooms",
+              "6,754"
+            ],
+            [
+              "Luxury Sea Facing",
+              "7,138"
+            ],
+            [
+              "Junior Suite",
+              "7,317"
+            ],
+            [
+              "Luxury Suite",
+              "9,005"
+            ],
+            [
+              "Presidential Suite",
+              "14,071"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 Yrs BB Sharing Adult",
+          "rows": [
+            [
+              "Standard Rooms",
+              "879"
+            ],
+            [
+              "Standard Sea Facing",
+              "939"
+            ],
+            [
+              "Luxury Rooms",
+              "1,055"
+            ],
+            [
+              "Luxury Sea Facing",
+              "1,115"
+            ],
+            [
+              "Junior Suite",
+              "1,143"
+            ],
+            [
+              "Luxury Suite",
+              "1,407"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 Yrs BB Sgl Interleading",
+          "rows": [
+            [
+              "Standard Rooms",
+              "2,638"
+            ],
+            [
+              "Standard Sea Facing",
+              "2,818"
+            ],
+            [
+              "Luxury Rooms",
+              "3,166"
+            ],
+            [
+              "Luxury Sea Facing",
+              "3,346"
+            ],
+            [
+              "Junior Suite",
+              "3,430"
+            ],
+            [
+              "Luxury Suite",
+              "4,222"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Strand Hotel Swakopmund",
+      "region": "Swakopmund",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing BB",
+          "rows": [
+            [
+              "Standard Rooms",
+              "3,518"
+            ],
+            [
+              "Standard Sea Facing",
+              "3,758"
+            ],
+            [
+              "Luxury Rooms",
+              "4,222"
+            ],
+            [
+              "Luxury Sea Facing",
+              "4,462"
+            ],
+            [
+              "Junior Suite",
+              "4,573"
+            ],
+            [
+              "Luxury Suite",
+              "5,629"
+            ],
+            [
+              "Presidential Suite",
+              "8,794"
+            ]
+          ]
+        },
+        {
+          "title": "Single BB",
+          "rows": [
+            [
+              "Standard Rooms",
+              "5,629"
+            ],
+            [
+              "Standard Sea Facing",
+              "6,013"
+            ],
+            [
+              "Luxury Rooms",
+              "6,754"
+            ],
+            [
+              "Luxury Sea Facing",
+              "7,138"
+            ],
+            [
+              "Junior Suite",
+              "7,317"
+            ],
+            [
+              "Luxury Suite",
+              "9,005"
+            ],
+            [
+              "Presidential Suite",
+              "14,071"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 Yrs BB Sharing Adult",
+          "rows": [
+            [
+              "Standard Rooms",
+              "879"
+            ],
+            [
+              "Standard Sea Facing",
+              "939"
+            ],
+            [
+              "Luxury Rooms",
+              "1,055"
+            ],
+            [
+              "Luxury Sea Facing",
+              "1,115"
+            ],
+            [
+              "Junior Suite",
+              "1,143"
+            ],
+            [
+              "Luxury Suite",
+              "1,407"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 Yrs BB Sgl Interleading",
+          "rows": [
+            [
+              "Standard Rooms",
+              "2,638"
+            ],
+            [
+              "Standard Sea Facing",
+              "2,818"
+            ],
+            [
+              "Luxury Rooms",
+              "3,166"
+            ],
+            [
+              "Luxury Sea Facing",
+              "3,346"
+            ],
+            [
+              "Junior Suite",
+              "3,430"
+            ],
+            [
+              "Luxury Suite",
+              "4,222"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  },
+  "mokuti-etosha": {
+    "2026": {
+      "name": "Mokuti Etosha Lodge",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing BB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,518"
+            ],
+            [
+              "Deluxe Room",
+              "4,046"
+            ],
+            [
+              "Junior Suite",
+              "4,573"
+            ],
+            [
+              "Presidential Suite",
+              "8,794"
+            ]
+          ]
+        },
+        {
+          "title": "DBL/Sharing DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,946"
+            ],
+            [
+              "Deluxe Room",
+              "4,474"
+            ],
+            [
+              "Junior Suite",
+              "5,001"
+            ],
+            [
+              "Presidential Suite",
+              "9,222"
+            ]
+          ]
+        },
+        {
+          "title": "Single BB",
+          "rows": [
+            [
+              "Standard Room",
+              "5,629"
+            ],
+            [
+              "Deluxe Room",
+              "6,473"
+            ],
+            [
+              "Junior Suite",
+              "7,317"
+            ],
+            [
+              "Presidential Suite",
+              "14,071"
+            ]
+          ]
+        },
+        {
+          "title": "Single DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "6,057"
+            ],
+            [
+              "Deluxe Room",
+              "6,901"
+            ],
+            [
+              "Junior Suite",
+              "7,745"
+            ],
+            [
+              "Presidential Suite",
+              "14,499"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 BB",
+          "rows": [
+            [
+              "Standard Room",
+              "879"
+            ],
+            [
+              "Deluxe Room",
+              "1,011"
+            ],
+            [
+              "Junior Suite",
+              "1,143"
+            ],
+            [
+              "Presidential Suite",
+              "2,199"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "986"
+            ],
+            [
+              "Deluxe Room",
+              "1,118"
+            ],
+            [
+              "Junior Suite",
+              "1,250"
+            ],
+            [
+              "Presidential Suite",
+              "2,306"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Mokuti Etosha Lodge",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing BB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,518"
+            ],
+            [
+              "Deluxe Room",
+              "4,046"
+            ],
+            [
+              "Junior Suite",
+              "4,573"
+            ],
+            [
+              "Presidential Suite",
+              "8,794"
+            ]
+          ]
+        },
+        {
+          "title": "DBL/Sharing DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,946"
+            ],
+            [
+              "Deluxe Room",
+              "4,474"
+            ],
+            [
+              "Junior Suite",
+              "5,001"
+            ],
+            [
+              "Presidential Suite",
+              "9,222"
+            ]
+          ]
+        },
+        {
+          "title": "Single BB",
+          "rows": [
+            [
+              "Standard Room",
+              "5,629"
+            ],
+            [
+              "Deluxe Room",
+              "6,473"
+            ],
+            [
+              "Junior Suite",
+              "7,317"
+            ],
+            [
+              "Presidential Suite",
+              "14,071"
+            ]
+          ]
+        },
+        {
+          "title": "Single DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "6,057"
+            ],
+            [
+              "Deluxe Room",
+              "6,901"
+            ],
+            [
+              "Junior Suite",
+              "7,745"
+            ],
+            [
+              "Presidential Suite",
+              "14,499"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 BB",
+          "rows": [
+            [
+              "Standard Room",
+              "879"
+            ],
+            [
+              "Deluxe Room",
+              "1,011"
+            ],
+            [
+              "Junior Suite",
+              "1,143"
+            ],
+            [
+              "Presidential Suite",
+              "2,199"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "986"
+            ],
+            [
+              "Deluxe Room",
+              "1,118"
+            ],
+            [
+              "Junior Suite",
+              "1,250"
+            ],
+            [
+              "Presidential Suite",
+              "2,306"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  },
+  "midgard-otjihavera-windhoek": {
+    "2026": {
+      "name": "Midgard Otjihavera Windhoek",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing BB",
+          "rows": [
+            [
+              "Standard Room",
+              "2,472"
+            ],
+            [
+              "Family Room",
+              "3,214"
+            ],
+            [
+              "Junior Suite",
+              "3,804"
+            ],
+            [
+              "Presidential Suite",
+              "4,708"
+            ]
+          ]
+        },
+        {
+          "title": "DBL/Sharing DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,086"
+            ],
+            [
+              "Family Room",
+              "3,902"
+            ],
+            [
+              "Junior Suite",
+              "4,551"
+            ],
+            [
+              "Presidential Suite",
+              "5,546"
+            ]
+          ]
+        },
+        {
+          "title": "Single BB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,956"
+            ],
+            [
+              "Family Room",
+              "5,142"
+            ],
+            [
+              "Junior Suite",
+              "6,086"
+            ],
+            [
+              "Presidential Suite",
+              "7,533"
+            ]
+          ]
+        },
+        {
+          "title": "Single DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "4,718"
+            ],
+            [
+              "Family Room",
+              "6,023"
+            ],
+            [
+              "Junior Suite",
+              "7,062"
+            ],
+            [
+              "Presidential Suite",
+              "8,653"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 BB",
+          "rows": [
+            [
+              "Standard Room",
+              "618"
+            ],
+            [
+              "Family Room",
+              "804"
+            ],
+            [
+              "Junior Suite",
+              "951"
+            ],
+            [
+              "Presidential Suite",
+              "1,177"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "771"
+            ],
+            [
+              "Family Room",
+              "976"
+            ],
+            [
+              "Junior Suite",
+              "1,138"
+            ],
+            [
+              "Presidential Suite",
+              "1,386"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Midgard Otjihavera Windhoek",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing BB",
+          "rows": [
+            [
+              "Standard Room",
+              "2,472"
+            ],
+            [
+              "Family Room",
+              "3,214"
+            ],
+            [
+              "Junior Suite",
+              "3,804"
+            ],
+            [
+              "Presidential Suite",
+              "4,708"
+            ]
+          ]
+        },
+        {
+          "title": "DBL/Sharing DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,086"
+            ],
+            [
+              "Family Room",
+              "3,902"
+            ],
+            [
+              "Junior Suite",
+              "4,551"
+            ],
+            [
+              "Presidential Suite",
+              "5,546"
+            ]
+          ]
+        },
+        {
+          "title": "Single BB",
+          "rows": [
+            [
+              "Standard Room",
+              "3,956"
+            ],
+            [
+              "Family Room",
+              "5,142"
+            ],
+            [
+              "Junior Suite",
+              "6,086"
+            ],
+            [
+              "Presidential Suite",
+              "7,533"
+            ]
+          ]
+        },
+        {
+          "title": "Single DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "4,718"
+            ],
+            [
+              "Family Room",
+              "6,023"
+            ],
+            [
+              "Junior Suite",
+              "7,062"
+            ],
+            [
+              "Presidential Suite",
+              "8,653"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 BB",
+          "rows": [
+            [
+              "Standard Room",
+              "618"
+            ],
+            [
+              "Family Room",
+              "804"
+            ],
+            [
+              "Junior Suite",
+              "951"
+            ],
+            [
+              "Presidential Suite",
+              "1,177"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 7–13 DBB",
+          "rows": [
+            [
+              "Standard Room",
+              "771"
+            ],
+            [
+              "Family Room",
+              "976"
+            ],
+            [
+              "Junior Suite",
+              "1,138"
+            ],
+            [
+              "Presidential Suite",
+              "1,386"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  },
+  "chobe-water-villas-zambezi": {
+    "2026": {
+      "name": "Chobe Water Villas Zambezi",
+      "region": "Zambezi & Caprivi",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing",
+          "rows": [
+            [
+              "Full Inclusive",
+              "17,644"
+            ],
+            [
+              "Bed & Breakfast",
+              "7,378"
+            ],
+            [
+              "Dinner, Bed & Breakfast",
+              "7,940"
+            ]
+          ]
+        },
+        {
+          "title": "Single",
+          "rows": [
+            [
+              "Full Inclusive",
+              "28,230"
+            ],
+            [
+              "Bed & Breakfast",
+              "11,068"
+            ],
+            [
+              "Dinner, Bed & Breakfast",
+              "11,629"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 13–17 Yrs Sharing Adult",
+          "rows": [
+            [
+              "Full Inclusive",
+              "13,233"
+            ],
+            [
+              "Bed & Breakfast",
+              "5,534"
+            ],
+            [
+              "Dinner, Bed & Breakfast",
+              "5,955"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Chobe Water Villas Zambezi",
+      "region": "Zambezi & Caprivi",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "DBL/Sharing",
+          "rows": [
+            [
+              "Full Inclusive",
+              "17,644"
+            ],
+            [
+              "Bed & Breakfast",
+              "7,378"
+            ],
+            [
+              "Dinner, Bed & Breakfast",
+              "7,940"
+            ]
+          ]
+        },
+        {
+          "title": "Single",
+          "rows": [
+            [
+              "Full Inclusive",
+              "28,230"
+            ],
+            [
+              "Bed & Breakfast",
+              "11,068"
+            ],
+            [
+              "Dinner, Bed & Breakfast",
+              "11,629"
+            ]
+          ]
+        },
+        {
+          "title": "1 Child 13–17 Yrs Sharing Adult",
+          "rows": [
+            [
+              "Full Inclusive",
+              "13,233"
+            ],
+            [
+              "Bed & Breakfast",
+              "5,534"
+            ],
+            [
+              "Dinner, Bed & Breakfast",
+              "5,955"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  },
+  "divava-okavango": {
+    "2026": {
+      "name": "Divava Okavango",
+      "region": "Zambezi & Caprivi",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "3,312"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "4,424"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "828"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "4,044"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · Single DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "5,280"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "1,011"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Divava Okavango",
+      "region": "Zambezi & Caprivi",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "3,312"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "4,424"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "828"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "4,044"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · Single DBB",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "5,280"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+          "rows": [
+            [
+              "Luxury Chalets",
+              "1,011"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  },
+  "le-mirage-sossusvlei": {
+    "2026": {
+      "name": "Le Mirage Sossusvlei",
+      "region": "Sossusvlei & Namib",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "3,096"
+            ],
+            [
+              "Oasis Room",
+              "3,420"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "4,136"
+            ],
+            [
+              "Oasis Room",
+              "4,561"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "774"
+            ],
+            [
+              "Oasis Room",
+              "855"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "3,792"
+            ],
+            [
+              "Oasis Room",
+              "4,200"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · Single DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "5,012"
+            ],
+            [
+              "Oasis Room",
+              "5,540"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "948"
+            ],
+            [
+              "Oasis Room",
+              "1,050"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    },
+    "2027": {
+      "name": "Le Mirage Sossusvlei",
+      "region": "Sossusvlei & Namib",
+      "currency": "N$",
+      "validity": "01 Jan 2026 – 30 Jun 2028 (2026 and 2027 identical)",
+      "note": "Net STO rates",
+      "sections": [
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "3,096"
+            ],
+            [
+              "Oasis Room",
+              "3,420"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "4,136"
+            ],
+            [
+              "Oasis Room",
+              "4,561"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "774"
+            ],
+            [
+              "Oasis Room",
+              "855"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "3,792"
+            ],
+            [
+              "Oasis Room",
+              "4,200"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · Single DBB",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "5,012"
+            ],
+            [
+              "Oasis Room",
+              "5,540"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
+          "rows": [
+            [
+              "Camelthorn Room",
+              "948"
+            ],
+            [
+              "Oasis Room",
+              "1,050"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% STO"
+    }
+  }
+});
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
