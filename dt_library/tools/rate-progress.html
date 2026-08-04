@@ -43,7 +43,28 @@ tbody tr:hover{background:rgba(200,90,23,.04)}
 .pill.need{background:rgba(200,90,23,.15);color:#c85a17}
 .pill.act{background:rgba(184,149,106,.20);color:#7a5f2f}
 .grp.grpm{background:rgba(184,149,106,.10);border-color:rgba(184,149,106,.4)}.grpm .grp-h{color:#7a5f2f}.grpm .tile .n{color:#7a5f2f}.grpm .tile .bar>i{background:var(--gold)}
-</style></head><body>
+</style><script id="nr-progress-guard">
+/* Owner-only page. The header hides the link for partner agents; this stops a
+   shared or bookmarked URL from opening it too. Note this is a convenience
+   guard, not access control — the file is static, so treat anything on this
+   page as visible to any signed-in agent who really goes looking. */
+(function(){try{
+  var OWNER_USERS=['dt'];
+  var tok=sessionStorage.getItem('nr_agent_token');
+  if(!tok){ location.replace('/?agent=1'); return; }
+  var u=(sessionStorage.getItem('nr_agent_user')||'').trim().toLowerCase();
+  if(sessionStorage.getItem('nr_owner')==='1') return;
+  if(u && OWNER_USERS.indexOf(u)>-1) return;
+  fetch('/api/auth?action=me',{credentials:'same-origin'})
+    .then(function(r){return r.json();})
+    .then(function(j){
+      if(j&&j.ok&&j.user&&j.user.role==='owner'){ try{sessionStorage.setItem('nr_owner','1');}catch(e){} return; }
+      location.replace('/');
+    })
+    .catch(function(){ location.replace('/'); });
+}catch(e){}})();
+</script>
+</head><body>
 <div class="topbar"><header>
 <a href="/" class="back-home">&larr; Back to Home</a>
 <h1>Rate Loading Progress</h1>
