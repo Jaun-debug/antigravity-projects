@@ -508,5 +508,35 @@ document.addEventListener('DOMContentLoaded',function(){
 })();</script>
 
 <script>/*nav-map-inject*/(function(){function I(){var n=document.querySelector(".main-header .nav-links");if(!n)return false;if(document.getElementById("nav-map"))return true;var d=document.createElement("div");d.className="nav-item-dropdown";d.id="nav-map";d.innerHTML='<a class="nav-link" href="/map/">Map Your Itinerary</a>';var b=n.querySelector(".enquire-now-btn");b?n.insertBefore(d,b):n.appendChild(d);if(sessionStorage.getItem("nr_agent_token"))d.style.display="none";return true;}var t=0,iv=setInterval(function(){if(I()||++t>60)clearInterval(iv);},80);if(document.readyState!=="loading")I();else document.addEventListener("DOMContentLoaded",I);})();</script>
+<script data-no-optimize="1">
+/* Year-block enforcement for this page. The shared site-chrome switcher treats
+   2026 as "leave the page untouched", which left a 2027-only supplier showing
+   an empty card. This keeps exactly one .year-block visible at all times and
+   is driven by the same localStorage key the shared pills write. */
+;(function(){"use strict";
+  function cur(){ try{ return localStorage.getItem('nr_sto_year') || '2026'; }catch(e){ return '2026'; } }
+  function apply(){
+    var y = cur();
+    var blocks = document.querySelectorAll('.rate-card .year-block[data-year]');
+    if(!blocks.length) return;
+    var any = false;
+    blocks.forEach(function(b){ if(b.getAttribute('data-year') === y) any = true; });
+    blocks.forEach(function(b){
+      var show = (b.getAttribute('data-year') === y) || (!any && b.getAttribute('data-year') === '2027');
+      b.style.setProperty('display', show ? 'block' : 'none', 'important');
+    });
+  }
+  function boot(){
+    apply();
+    [120, 400, 900, 1800].forEach(function(ms){ setTimeout(apply, ms); });
+    document.addEventListener('click', function(e){
+      var t = e.target;
+      if(t && t.closest && t.closest('#nr-yrtoggle')){ setTimeout(apply, 40); setTimeout(apply, 260); }
+    }, true);
+    window.addEventListener('storage', apply);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
 </body>
 </html>
