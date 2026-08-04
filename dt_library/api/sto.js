@@ -1949,7 +1949,7 @@ Object.assign(DDS_STO_BY_YEAR, {
       "region": "Chobe",
       "currency": "US$",
       "validity": "2027/28 · valid 1 Apr 2027 – 31 Mar 2028",
-      "note": "Net 20% STO rates, US$ per person per night. Same inclusions as rack. Minimum 2-night stay in High season (Jul–Oct).",
+      "note": "Net 20% STO rates, US$ per person per night. Same inclusions as rack. Minimum 2-night stay in High season (Jul–Oct). Kasane airport transfers complimentary; Victoria Falls, Livingstone or Katima US$90 per person, minimum 2 (US$80 in 2026/27). Private vehicle and guide US$500 per 24 hours, or US$250 for families of 4 or fewer in low and mid season. Pay 2 Stay 3 applies in Green season and in the November shoulder.",
       "sections": [
         {
           "title": "Shoulder season (1 Apr – 30 Jun 2027)",
@@ -2007,16 +2007,8 @@ Object.assign(DDS_STO_BY_YEAR, {
           "title": "Guides & tour leaders (all seasons)",
           "rows": [
             [
-              "Groups 8+ rooms — 1 tour leader",
-              "0"
-            ],
-            [
-              "Groups 3–7 rooms — guide at 50% STO",
-              "0"
-            ],
-            [
-              "Groups 1–2 rooms — guide at STO rate",
-              "0"
+              "Guide accommodation, per person per night (subject to availability)",
+              "300"
             ]
           ]
         }
