@@ -3920,3 +3920,51 @@ module.exports = async (req, res) => {
     return res.status(200).json({ ok: true, lodges: {}, error: String(e && e.message ? e.message : e) });
   }
 };
+
+// ---------------------------------------------------------------------------
+// Solitaire General Dealer (Pty) Ltd — Solitaire Mountain Lodge & Solitaire
+// Roadhouse. 2027 published RACK rates, B&B, N$. These are the supplier's own
+// published rack figures from the 2027 rate sheet — NOT derived from STO.
+// ---------------------------------------------------------------------------
+Object.assign(DDS_RACK_BY_YEAR, {
+  "solitaire-mountain-lodge": {
+    "2027": {
+      "name": "Solitaire Mountain Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 · single season, no high/low split",
+      "note": "Published rack rates, N$, bed & breakfast. Rates exclude dinner, alcohol and activities, and are rounded down to the lowest N$10. Extras: buffet dinner N$400 per person, lunch packs N$300 per person. Children 0–4 sharing with parents free of charge, 5–12 half price, 13 and over full price.",
+      "sections": [
+        {
+          "title": "2027 — bed & breakfast",
+          "rows": [
+            ["Single room (1 person)", "2,000"],
+            ["Double room (per person sharing)", "1,850"],
+            ["Family room (3 adults, see child policy)", "4,750"],
+            ["Guide room", "900"]
+          ]
+        }
+      ]
+    }
+  },
+  "solitaire-roadhouse": {
+    "2027": {
+      "name": "Solitaire Roadhouse",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 · single season, no high/low split",
+      "note": "Published rack rates, N$, bed & breakfast. Rates exclude dinner, alcohol and activities, and are rounded down to the lowest N$10. Extras: buffet dinner N$400 per person, lunch packs N$300 per person. Children 0–4 sharing with parents free of charge, 5–12 half price, 13 and over full price.",
+      "sections": [
+        {
+          "title": "2027 — bed & breakfast",
+          "rows": [
+            ["Single room (1 person)", "1,900"],
+            ["Double room (per person sharing)", "1,700"],
+            ["Family room (3 adults, see child policy)", "4,550"],
+            ["Guide room", "900"]
+          ]
+        }
+      ]
+    }
+  }
+});

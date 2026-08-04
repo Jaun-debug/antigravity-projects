@@ -7740,3 +7740,52 @@ module.exports = async (req, res) => {
 
   return res.status(200).json(out);
 };
+
+// ---------------------------------------------------------------------------
+// Solitaire General Dealer (Pty) Ltd — Solitaire Mountain Lodge & Solitaire
+// Roadhouse. 2027 STO 20% rates, B&B, N$. Supplier published its own rack
+// alongside the STO, so rack is taken from the sheet (see api/rack.js) rather
+// than derived. 2026 not supplied — chase Solitaire reservations.
+// ---------------------------------------------------------------------------
+Object.assign(DDS_STO_BY_YEAR, {
+  "solitaire-mountain-lodge": {
+    "2027": {
+      "name": "Solitaire Mountain Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 · single season, no high/low split",
+      "note": "STO 20% nett rates, N$, bed & breakfast. Rates exclude dinner, alcohol and activities, and are rounded down to the lowest N$10. Non-commissionable extras: buffet dinner N$400 per person, lunch packs N$300 per person (group lunches must be pre-booked at lunchbooking@solitairenamibia.com). Children 0–4 sharing with parents free of charge, 5–12 half price, 13 and over full price; extra beds and cots available. Guide policy: groups under 10 pax, 1 guide free of charge B&B and additional guides or drivers at N$720 per person; groups over 10 pax, 2 guides or drivers free of charge B&B.",
+      "sections": [
+        {
+          "title": "2027 — bed & breakfast",
+          "rows": [
+            ["Single room (1 person)", "1,600"],
+            ["Double room (per person sharing)", "1,480"],
+            ["Family room (3 adults, see child policy)", "3,800"],
+            ["Guide room", "720"]
+          ]
+        }
+      ]
+    }
+  },
+  "solitaire-roadhouse": {
+    "2027": {
+      "name": "Solitaire Roadhouse",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 · single season, no high/low split",
+      "note": "STO 20% nett rates, N$, bed & breakfast. Rates exclude dinner, alcohol and activities, and are rounded down to the lowest N$10. Non-commissionable extras: buffet dinner N$400 per person, lunch packs N$300 per person (group lunches must be pre-booked at lunchbooking@solitairenamibia.com). Children 0–4 sharing with parents free of charge, 5–12 half price, 13 and over full price; extra beds and cots available. Guide policy: groups under 10 pax, 1 guide free of charge B&B and additional guides or drivers at N$720 per person; groups over 10 pax, 2 guides or drivers free of charge B&B.",
+      "sections": [
+        {
+          "title": "2027 — bed & breakfast",
+          "rows": [
+            ["Single room (1 person)", "1,520"],
+            ["Double room (per person sharing)", "1,360"],
+            ["Family room (3 adults, see child policy)", "3,640"],
+            ["Guide room", "720"]
+          ]
+        }
+      ]
+    }
+  }
+});
