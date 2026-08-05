@@ -1,0 +1,1570 @@
+{
+ "note": "Catalog of properties the site presents (what should have rates), by region and category. NO rate-status flags live here — the tracker derives rack/STO presence live from /api/rack and /api/sto. Regenerate on deploy: python3 tools/build_coverage_universe.py",
+ "counts": {
+  "total": 256,
+  "lodges": 234,
+  "activities": 12,
+  "vehicles": 8,
+  "flights": 2
+ },
+ "regions": [
+  "Botswana",
+  "Caprivi",
+  "Central Namibia",
+  "Chobe",
+  "Damaraland",
+  "East Etosha",
+  "Epupa",
+  "Fish River Canyon",
+  "Kalahari",
+  "Kaokoland",
+  "Lüderitz",
+  "Okavango Delta",
+  "Opuwo",
+  "Skeleton Coast",
+  "Sossusvlei",
+  "South Etosha",
+  "Swakopmund",
+  "Victoria Falls",
+  "West Etosha",
+  "Windhoek"
+ ],
+ "properties": [
+  {
+   "slug": "leroo-la-tau",
+   "name": "Leroo La Tau",
+   "region": "Botswana",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-kwando",
+   "name": "Camp Kwando",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "chobe-princess",
+   "name": "Chobe Princess",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "chobe-river-camp",
+   "name": "Chobe River Camp",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "chobe-water-villas-zambezi",
+   "name": "Chobe Water Villas Zambezi",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "divava-okavango",
+   "name": "Divava Okavango",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hakusembe-camping2go",
+   "name": "Hakusembe Camping2Go",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hakusembe-river-lodge",
+   "name": "Hakusembe River Lodge",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ichingo-chobe-river-lodge",
+   "name": "Ichingo Chobe River Lodge",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namushasha-river-camping2go",
+   "name": "Namushasha Camping2Go",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namushasha-camping2go",
+   "name": "Namushasha Camping2go",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namushasha-river-lodge",
+   "name": "Namushasha River Lodge",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namushasha-river-villa",
+   "name": "Namushasha River Villa",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "nkasa-linyanti",
+   "name": "Nkasa Linyanti",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "popa-falls-resort",
+   "name": "Popa Falls Resort",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "simanya-river-lodge",
+   "name": "Simanya River Lodge",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "white-sands-caprivi",
+   "name": "White Sands Caprivi",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "zambezi-mubala-camp",
+   "name": "Zambezi Mubala Camp",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "zambezi-mubala-lodge",
+   "name": "Zambezi Mubala Lodge",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "zambezi-queen",
+   "name": "Zambezi Queen",
+   "region": "Caprivi",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ai-aiba-lodge",
+   "name": "Ai Aiba Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "aloegrove-safari-lodge",
+   "name": "Aloegrove Safari Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "midgard-country-estate",
+   "name": "Camp Kwando",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "epako-safari-lodge",
+   "name": "Epako Safari Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "erongo-rocks",
+   "name": "Erongo Rocks nature &amp;amp; camp",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "gabus-game-ranch",
+   "name": "Gabus Game Ranch",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "gabus-safari-lodge",
+   "name": "Gabus Safari Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ghaub",
+   "name": "Ghaub &amp;amp; Waterberg Wilderness",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "gross-barmen-resort",
+   "name": "Gross Barmen Resort",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hohenstein-lodge",
+   "name": "Hohenstein Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kamaku-guesthouse",
+   "name": "Kamaku Guesthouse",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ohorongo-game-and-safari-lodge",
+   "name": "Ohorongo Game and Safari Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "okonjima-bush-camp",
+   "name": "Okonjima Bush Camp",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "okonjima-plains-camp",
+   "name": "Okonjima Plains Camp",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "okonjima-villa",
+   "name": "Okonjima Villa",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ondudu-safari-lodge",
+   "name": "Ondudu Safari Lodge",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "waterberg-camp",
+   "name": "Waterberg Camp",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "waterberg-wilderness",
+   "name": "Waterberg Wilderness",
+   "region": "Central Namibia",
+   "category": "Lodge"
+  },
+  {
+   "slug": "chobe-game-lodge",
+   "name": "Chobe Game Lodge",
+   "region": "Chobe",
+   "category": "Lodge"
+  },
+  {
+   "slug": "chobe-savanna-lodge",
+   "name": "Chobe Savanna Lodge",
+   "region": "Chobe",
+   "category": "Lodge"
+  },
+  {
+   "slug": "muchenje-safari-lodge",
+   "name": "Muchenje Safari Lodge",
+   "region": "Chobe",
+   "category": "Lodge"
+  },
+  {
+   "slug": "savute-safari-lodge",
+   "name": "Savute Safari Lodge",
+   "region": "Chobe",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-doros",
+   "name": "Camp Doros",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-kipwe",
+   "name": "Camp Kipwe",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "damara-mopane-lodge",
+   "name": "Damara Mopane Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "grootberg-lodge",
+   "name": "Grootberg Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "khorixas-lodge",
+   "name": "Khorixas Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "lodge-damaraland",
+   "name": "Lodge Damaraland",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "mowani-mountain-camp",
+   "name": "Mowani Mountain Camp",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "omaruru-game-lodge",
+   "name": "Omaruru Game Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onduli-enclave",
+   "name": "Onduli Enclave",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onduli-ridge",
+   "name": "Onduli Ridge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "palmwag-camping2go",
+   "name": "Palmwag Camping2Go",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "palmwag-lodge",
+   "name": "Palmwag Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "palmwag-under-canvas-sleep-out",
+   "name": "Palmwag Under-Canvas Sleep-Out",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "spitzkoppe-cabin-camp",
+   "name": "Spitzkoppe Cabin Camp",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "spitzkoppe-restcamp",
+   "name": "Spitzkoppe Restcamp",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "spitzkoppen-lodge",
+   "name": "Spitzkoppen Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "twyfelfontein-adventure-camp",
+   "name": "Twyfelfontein Adventure Camp",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "twyfelfontein-country-lodge",
+   "name": "Twyfelfontein Country Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "uis-elephant",
+   "name": "Uis Elephant",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "vingerklip-lodge",
+   "name": "Vingerklip Lodge",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-damaraland-camp",
+   "name": "Wilderness Damaraland Camp",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-desert-rhino-camp",
+   "name": "Wilderness Desert Rhino Camp",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-doro-nawas",
+   "name": "Wilderness Doro Nawas",
+   "region": "Damaraland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "emanya-at-etosha",
+   "name": "Emanya at Etosha",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-king-nehale",
+   "name": "Etosha King Nehale",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "mokuti-etosha",
+   "name": "Mokuti Etosha",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "mushara-bush-camp",
+   "name": "Mushara Bush Camp",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "mushara-lodge",
+   "name": "Mushara Lodge",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "mushara-outpost",
+   "name": "Mushara Outpost",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namutoni-resort",
+   "name": "Namutoni Resort",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onguma-bush-camp",
+   "name": "Onguma Bush Camp",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onguma-camp-kala",
+   "name": "Onguma Camp Kala",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onguma-forest-camp",
+   "name": "Onguma Forest Camp",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onguma-tented-camp",
+   "name": "Onguma Tented Camp",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onguma-the-fort",
+   "name": "Onguma The Fort",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "villa-mushara",
+   "name": "Villa Mushara",
+   "region": "East Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "epupa-falls-lodge",
+   "name": "Epupa Falls Lodge",
+   "region": "Epupa",
+   "category": "Lodge"
+  },
+  {
+   "slug": "omarunga-epupa-falls-camp",
+   "name": "Omarunga Epupa Falls Camp",
+   "region": "Epupa",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ai-ais-hot-springs-and-spa",
+   "name": "/Ai-/Ais Hot Springs and Spa",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "alte-kalkofen-lodge",
+   "name": "Alte Kalkofen Lodge",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "bahnhof-hotel-aus",
+   "name": "Bahnhof Hotel Aus",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "canyon-lodge",
+   "name": "Canyon Lodge",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "canyon-roadhouse",
+   "name": "Canyon Roadhouse",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "canyon-village",
+   "name": "Canyon Village",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "fish-river-lodge",
+   "name": "Fish River Lodge",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hobas-lodge",
+   "name": "Hobas Lodge",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "koiimasis",
+   "name": "Koiimasis Fest-Inn-Fels Farmlodge",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "nooishof",
+   "name": "Nooishof",
+   "region": "Fish River Canyon",
+   "category": "Lodge"
+  },
+  {
+   "slug": "africa-safari-lodge",
+   "name": "Africa Safari Lodge",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hardap-resort",
+   "name": "Hardap Resort",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kalahari-anib-lodge",
+   "name": "Kalahari Anib Lodge",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kalahari-bush-breaks",
+   "name": "Kalahari Bush Breaks",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kalahari-camping2go",
+   "name": "Kalahari Camping2Go",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kalahari-farmhouse",
+   "name": "Kalahari Farmhouse",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kalahari-game-lodge",
+   "name": "Kalahari Game Lodge",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kalahari-red-dunes-lodge",
+   "name": "Kalahari Red Dunes Lodge",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "teufelskrallen-lodge",
+   "name": "Teufelskrallen Lodge",
+   "region": "Kalahari",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etendeka-hiking-trails",
+   "name": "Etendeka Hiking Trails",
+   "region": "Kaokoland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etendeka-mountain-camp",
+   "name": "Etendeka Mountain Camp",
+   "region": "Kaokoland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hoanib-elephant-camp",
+   "name": "Hoanib Elephant Camp",
+   "region": "Kaokoland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hoanib-valley-camp",
+   "name": "Hoanib Valley Camp",
+   "region": "Kaokoland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "sesfontein-guesthouse",
+   "name": "Sesfontein Guesthouse",
+   "region": "Kaokoland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-serra-cafema",
+   "name": "Wilderness Serra Cafema",
+   "region": "Kaokoland",
+   "category": "Lodge"
+  },
+  {
+   "slug": "alte-villa-2025",
+   "name": "Alte Villa 2025",
+   "region": "Lüderitz",
+   "category": "Lodge"
+  },
+  {
+   "slug": "luderitz-nest-hotel",
+   "name": "Luderitz Nest Hotel",
+   "region": "Lüderitz",
+   "category": "Lodge"
+  },
+  {
+   "slug": "l-deritz-nest-hotel",
+   "name": "Lüderitz Nest Hotel",
+   "region": "Lüderitz",
+   "category": "Lodge"
+  },
+  {
+   "slug": "shark-island-resort",
+   "name": "Shark Island Resort",
+   "region": "Lüderitz",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-moremi",
+   "name": "Camp Moremi",
+   "region": "Okavango Delta",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-okavango",
+   "name": "Camp Okavango",
+   "region": "Okavango Delta",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-xakanaxa",
+   "name": "Camp Xakanaxa",
+   "region": "Okavango Delta",
+   "category": "Lodge"
+  },
+  {
+   "slug": "nxamaseri-island-lodge",
+   "name": "Nxamaseri Island Lodge",
+   "region": "Okavango Delta",
+   "category": "Lodge"
+  },
+  {
+   "slug": "sediba-sa-rona",
+   "name": "Sediba Sa Rona",
+   "region": "Okavango Delta",
+   "category": "Lodge"
+  },
+  {
+   "slug": "xugana-island-lodge",
+   "name": "Xugana Island Lodge",
+   "region": "Okavango Delta",
+   "category": "Lodge"
+  },
+  {
+   "slug": "forgotten-valley",
+   "name": "Forgotten Valley (Ekoto Camp)",
+   "region": "Opuwo",
+   "category": "Lodge"
+  },
+  {
+   "slug": "opuwo-country-lodge",
+   "name": "Opuwo Country Lodge",
+   "region": "Opuwo",
+   "category": "Lodge"
+  },
+  {
+   "slug": "mile-108",
+   "name": "Mile 108",
+   "region": "Skeleton Coast",
+   "category": "Lodge"
+  },
+  {
+   "slug": "shipwreck-lodge",
+   "name": "Shipwreck Lodge",
+   "region": "Skeleton Coast",
+   "category": "Lodge"
+  },
+  {
+   "slug": "terrace-bay-resort",
+   "name": "Terrace Bay Resort",
+   "region": "Skeleton Coast",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-hoanib-skeleton-coast-camp",
+   "name": "Wilderness Hoanib Skeleton Coast Camp",
+   "region": "Skeleton Coast",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ababis-guest-farm",
+   "name": "Ababis Guest Farm",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "barkhan-dune-retreat",
+   "name": "Barkhan Dune Retreat",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "camp-sossus",
+   "name": "Camp Sossus",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "dead-valley-lodge",
+   "name": "Dead Valley Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "desert-camp",
+   "name": "Desert Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "desert-hills-lodge",
+   "name": "Desert Hills Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "desert-homestead-lodge",
+   "name": "Desert Homestead Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "desert-quiver-camp",
+   "name": "Desert Quiver Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "desert-whisper",
+   "name": "Desert Whisper",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "duwisib-guest-farm",
+   "name": "Duwisib Guest Farm",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hammerstein-lodge",
+   "name": "Hammerstein Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "kwessi-dunes",
+   "name": "Kwessi Dunes",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "le-mirage-resort-spa",
+   "name": "Le Mirage Resort Spa",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "le-mirage-sossusvlei",
+   "name": "Le Mirage Sossusvlei",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "little-sossus-lodge",
+   "name": "Little Sossus Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "moon-mountain-lodge",
+   "name": "Moon Mountain Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namib-desert-lodge",
+   "name": "Namib Desert Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namib-dune-star-camp",
+   "name": "Namib Dune Star Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namib-outpost",
+   "name": "Namib Outpost",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "naukluft-camp",
+   "name": "Naukluft Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "reverie-kalahari-pod",
+   "name": "Reverie Kalahari Pod",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "rostock-ritz-desert-lodge",
+   "name": "Rostock Ritz Desert Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "solitaire-mountain-lodge",
+   "name": "Solitaire Mountain Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "sossus-dune-lodge",
+   "name": "Sossus Dune Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "sossusvlei-lodge",
+   "name": "Sossusvlei Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-desert-grace",
+   "name": "The Desert Grace",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-pearls-beach-pods",
+   "name": "The Pearls Beach Pods",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "tsauchab-river-camp",
+   "name": "Tsauchab River Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "we-kebi-safari-lodge",
+   "name": "We Kebi Safari Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "weltevrede-guest-farm",
+   "name": "Weltevrede Guest Farm",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-kulala-desert-lodge",
+   "name": "Wilderness Kulala Desert Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wilderness-little-kulala",
+   "name": "Wilderness Little Kulala",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wolwedans-boulders-camp",
+   "name": "Wolwedans Boulders Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wolwedans-dune-camp",
+   "name": "Wolwedans Dune Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wolwedans-dunes-lodge",
+   "name": "Wolwedans Dunes Lodge",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wolwedans-mountain-view-suite",
+   "name": "Wolwedans Mountain View Suite",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "wolwedans-plains-camp",
+   "name": "Wolwedans Plains Camp",
+   "region": "Sossusvlei",
+   "category": "Lodge"
+  },
+  {
+   "slug": "anderssons-at-ongava",
+   "name": "Anderssons at Ongava",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "epacha-game-lodge-spa",
+   "name": "Epacha Game Lodge &amp;amp; Spa",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-oberland-lodge",
+   "name": "Etosha Oberland Lodge",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-omusati-lodge",
+   "name": "Etosha Omusati Lodge",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-safari-camping2go",
+   "name": "Etosha Safari Camping2Go",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-safari-lodge",
+   "name": "Etosha Safari Lodge",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-village",
+   "name": "Etosha Village",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "halali-resort",
+   "name": "Halali Resort",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "little-ongava",
+   "name": "Little Ongava",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "okaukuejo-camp",
+   "name": "Okaukuejo Camp",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "okutala-etosha-lodge",
+   "name": "Okutala Etosha Lodge",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ongava-lodge",
+   "name": "Ongava Lodge",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ongava-tented-camp",
+   "name": "Ongava Tented Camp",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onkoshi-camp",
+   "name": "Onkoshi Camp",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-ekipa-etosha-pod",
+   "name": "The Ekipa Etosha Pod",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "toshari-lodge",
+   "name": "Toshari Lodge",
+   "region": "South Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "atlantic-villa",
+   "name": "Atlantic Villa Boutique Guesthouse",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "beach-hotel-swakopmund",
+   "name": "Beach Hotel Swakopmund",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "beach-lodge",
+   "name": "Beach Lodge",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "cornerstone-guesthouse",
+   "name": "Cornerstone Guesthouse",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "flamingo-villa-boutique-hotel",
+   "name": "Flamingo Villa Boutique Hotel",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hansa-hotel",
+   "name": "Hansa Hotel",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hotel-pension-rapmund",
+   "name": "Hotel Pension Rapmund",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "lagoon-chalets",
+   "name": "Lagoon Chalets",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "namib-guesthouse",
+   "name": "Namib Guesthouse",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ocean-house-guesthouse",
+   "name": "Ocean House Guesthouse",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "organic-stay",
+   "name": "Organic Stay",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "oyster-box-guesthouse",
+   "name": "Oyster Box Guesthouse",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "strand-hotel-swakopmund",
+   "name": "Strand Hotel Swakopmund",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "swakopmund-sands",
+   "name": "Swakopmund Sands",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-delight-swakopmund",
+   "name": "The Delight Swakopmund",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-rez",
+   "name": "The Rez",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "windpomp-14-sea-side-camp",
+   "name": "Windpomp 14 Sea Side Camp",
+   "region": "Swakopmund",
+   "category": "Lodge"
+  },
+  {
+   "slug": "bayete-guest-lodge",
+   "name": "Bayete Guest Lodge",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "cresta-sprayview",
+   "name": "Cresta Sprayview",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "drift-inn-bayete-collection",
+   "name": "Drift Inn Bayete Collection",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "nkosi-bayete-collection",
+   "name": "Nkosi Bayete Collection",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "phezulu-bayete-collection",
+   "name": "Phezulu Bayete Collection",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "pioneers-victoria-falls",
+   "name": "Pioneers Victoria Falls",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-victorian-manor",
+   "name": "The Victorian Manor",
+   "region": "Victoria Falls",
+   "category": "Lodge"
+  },
+  {
+   "slug": "dolomite-camp",
+   "name": "Dolomite Camp",
+   "region": "West Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "etosha-mountain-lodge",
+   "name": "Etosha Mountain Lodge",
+   "region": "West Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "galton-house",
+   "name": "Galton House",
+   "region": "West Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "safari-house",
+   "name": "Safari House",
+   "region": "West Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "safarihoek-lodge",
+   "name": "Safarihoek Lodge",
+   "region": "West Etosha",
+   "category": "Lodge"
+  },
+  {
+   "slug": "auas-safari-lodge",
+   "name": "Auas Safari Lodge",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "belvedere-boutique-hotel",
+   "name": "Belvedere Boutique Hotel",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "daan-viljoen-lodge",
+   "name": "Daan Viljoen Lodge",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "droombos-estate",
+   "name": "Droombos Estate &amp;amp; Simanya River Lodge",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "heinitzburg-boutique-hotel",
+   "name": "Heinitzburg Boutique Hotel",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hohewarte-guestfarm",
+   "name": "Hohewarte Guestfarm",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "hotel-thule",
+   "name": "Hotel Thule",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "midgard-otjihavera-windhoek",
+   "name": "Midgard Otjihavera Windhoek",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "okapuka-safari-lodge",
+   "name": "Okapuka Safari Lodge",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "olive-grove-guesthouse",
+   "name": "Olive Grove Guesthouse",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "onjala-lodge",
+   "name": "Onjala",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-olive-exclusive",
+   "name": "The Olive Exclusive",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "the-weinberg-windhoek",
+   "name": "The Weinberg Windhoek",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "windhoek-lux-suites",
+   "name": "The Windhoek Lux Suites",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "ti-melen",
+   "name": "Ti Melen",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "voigtland-guesthouse",
+   "name": "Voigtland Guesthouse",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "waldeck-lodge",
+   "name": "Waldeck Lodge",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "weinberg-urban-pod",
+   "name": "Weinberg Urban Pod",
+   "region": "Windhoek",
+   "category": "Lodge"
+  },
+  {
+   "slug": "prov-flynamibia-safari",
+   "name": "FlyNamibia Safari",
+   "region": "",
+   "category": "Flight"
+  },
+  {
+   "slug": "prov-infinite-african-safaris",
+   "name": "Infinite African Safaris",
+   "region": "",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-living-desert-adventures",
+   "name": "Living Desert Adventures",
+   "region": "",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-namib-roos-car-rentals",
+   "name": "Namib Roos Car Rentals",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-namibia-car-rental",
+   "name": "Namibia Car Rental",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-namibia-tours-safaris-nts",
+   "name": "Namibia Tours & Safaris (NTS)",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-sand-waves",
+   "name": "Sand Waves",
+   "region": "",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-sanga-group-travel-solutions",
+   "name": "Sanga Group Travel Solutions",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-suricate-safaris",
+   "name": "Suricate Safaris",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-swakopmund-car-hire",
+   "name": "Swakopmund Car Hire",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-warthog-car-rental",
+   "name": "Warthog Car Rental",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "prov-wilderness-air-namibia",
+   "name": "Wilderness Air Namibia",
+   "region": "",
+   "category": "Flight"
+  },
+  {
+   "slug": "prov-zaris-safaris",
+   "name": "Zaris Safaris",
+   "region": "",
+   "category": "Vehicle"
+  },
+  {
+   "slug": "hoada-campsite",
+   "name": "Hoada Campsite",
+   "region": "Damaraland",
+   "category": "Camping"
+  },
+  {
+   "slug": "mowani-campsite",
+   "name": "Mowani Campsite",
+   "region": "Damaraland",
+   "category": "Camping"
+  },
+  {
+   "slug": "onguma-leadwood-campsite",
+   "name": "Onguma Leadwood Campsite",
+   "region": "East Etosha",
+   "category": "Camping"
+  },
+  {
+   "slug": "onguma-tamboti-campsite",
+   "name": "Onguma Tamboti Campsite",
+   "region": "East Etosha",
+   "category": "Camping"
+  },
+  {
+   "slug": "boplaas-campsite",
+   "name": "Boplaas Campsite",
+   "region": "Fish River Canyon",
+   "category": "Camping"
+  },
+  {
+   "slug": "prov-bogenfels-diamond-tours",
+   "name": "Bogenfels & Diamond Tours",
+   "region": "Luderitz",
+   "category": "Activity"
+  },
+  {
+   "slug": "kaoko-mopane-lodge",
+   "name": "Kaoko Mopane Lodge &amp;amp; Camping",
+   "region": "Opuwo",
+   "category": "Camping"
+  },
+  {
+   "slug": "prov-namib-sky-balloon-safaris",
+   "name": "Namib Sky Balloon Safaris",
+   "region": "Sossusvlei",
+   "category": "Activity"
+  },
+  {
+   "slug": "sesriem-campsite",
+   "name": "Sesriem Campsite",
+   "region": "Sossusvlei",
+   "category": "Camping"
+  },
+  {
+   "slug": "sesriem-oshana-campsite",
+   "name": "Sesriem Oshana Campsite",
+   "region": "Sossusvlei",
+   "category": "Camping"
+  },
+  {
+   "slug": "prov-solitaire-activity-centre",
+   "name": "Solitaire Activity Centre",
+   "region": "Sossusvlei",
+   "category": "Activity"
+  },
+  {
+   "slug": "sossus-oasis-campsite",
+   "name": "Sossus Oasis Campsite",
+   "region": "Sossusvlei",
+   "category": "Camping"
+  },
+  {
+   "slug": "etosha-trading-post-campsite",
+   "name": "Etosha Trading Post Campsite",
+   "region": "South Etosha",
+   "category": "Camping"
+  },
+  {
+   "slug": "etosha-village-campsite",
+   "name": "Etosha Village Campsite",
+   "region": "South Etosha",
+   "category": "Camping"
+  },
+  {
+   "slug": "olifantsrus-campsite",
+   "name": "Olifantsrus Campsite",
+   "region": "South Etosha",
+   "category": "Camping"
+  },
+  {
+   "slug": "prov-alter-action-sandboarding",
+   "name": "Alter Action Sandboarding",
+   "region": "Swakopmund",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-desert-explorers-swakopmund",
+   "name": "Desert Explorers Swakopmund",
+   "region": "Swakopmund",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-hafeni-tourism-group",
+   "name": "Hafeni Tourism Group",
+   "region": "Swakopmund",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-mola-mola-safaris",
+   "name": "Mola Mola Safaris",
+   "region": "Swakopmund",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-namibian-charters-catamaran-charters",
+   "name": "Namibian Charters — Catamaran Charters",
+   "region": "Swakopmund",
+   "category": "Activity"
+  },
+  {
+   "slug": "prov-sandwich-harbour-4x4",
+   "name": "Sandwich Harbour 4x4",
+   "region": "Swakopmund",
+   "category": "Activity"
+  },
+  {
+   "slug": "daan-viljoen-camping",
+   "name": "Daan Viljoen Camping",
+   "region": "Windhoek",
+   "category": "Camping"
+  }
+ ]
+}
