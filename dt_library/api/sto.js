@@ -22,6 +22,20 @@ function sessionToken(pass) {
   return crypto.createHash('sha256').update('nr-agent-session|' + pass).digest('hex').slice(0, 40);
 }
 
+// Season year of an undated/legacy doc, read from its own `validity` label.
+// A leading 4-digit year is the season (e.g. "2027 (01.11.2026–31.10.2027)" is
+// 2027); otherwise the latest year mentioned. Reads the doc's declared season —
+// it does NOT guess from filenames.
+function seasonYear(v) {
+  if (!v) return null;
+  const s = String(v);
+  const lead = s.match(/^\s*(20\d\d)/);
+  if (lead) return lead[1];
+  const all = s.match(/20\d\d/g);
+  if (!all || !all.length) return null;
+  return String(all.map(Number).sort(function (a, b) { return a - b; })[all.length - 1]);
+}
+
 // Desert & Delta Safaris — multi-year (2026 + 2027) US$ NETT agent rates.
 const DDS_STO_BY_YEAR = {
   "chobe-game-lodge": {
@@ -7690,6 +7704,39 @@ module.exports = async (req, res) => {
 
   // Always hand back the session token so the browser can stay signed in.
   const out = { ok: true, token: validToken };
+
+  // coverage:1 -> per-slug STO coverage (which years each slug holds), merged
+  // across inline data + Redis. Auth already passed above, so this owner/agent
+  // tool sees YEARS ONLY — never the rate numbers themselves. Lets the
+  // rate-progress tracker derive coverage live instead of storing a stale file.
+  if (body.coverage) {
+    const cov = {};
+    const add = function (slug, y, legacy, meta) {
+      const e = cov[slug] || (cov[slug] = { years: [], undated: false, legacy: false, name: '', region: '' });
+      if (y === 'undated') { e.undated = true; e.legacy = true; }
+      else if (e.years.indexOf(y) === -1) e.years.push(y);
+      if (legacy) e.legacy = true;
+      if (meta) { if (!e.name && meta.name) e.name = meta.name; if (!e.region && meta.region) e.region = meta.region; }
+    };
+    for (const s of Object.keys(DDS_STO_BY_YEAR)) {
+      for (const y of Object.keys(DDS_STO_BY_YEAR[s])) add(s, y, false, DDS_STO_BY_YEAR[s][y]);
+    }
+    for (const s of Object.keys(STO_DB)) {
+      const d = STO_DB[s]; add(s, seasonYear(d && d.validity) || 'undated', true, d);
+    }
+    if (db.dbConfigured()) {
+      try {
+        for (const s of await db.listSlugs()) {
+          const ys = await db.listYears('sto', s);
+          if (ys && ys.length) { for (const y of ys) add(s, String(y), false, (await db.getRates('sto', s, y)) || {}); }
+          else { const lg = await db.getRates('sto', s); if (lg) add(s, seasonYear(lg.validity) || 'undated', true, lg); }
+        }
+      } catch (e) {}
+    }
+    for (const s of Object.keys(cov)) cov[s].years.sort();
+    out.coverage = cov;
+    return res.status(200).json(out);
+  }
 
   // If a lodge was requested and we hold inline net rates for it, include them.
   // Many lodges keep their net rates in a separate STO sheet instead of here,

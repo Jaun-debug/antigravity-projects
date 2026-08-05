@@ -3862,6 +3862,20 @@ Object.assign(DDS_RACK_BY_YEAR, {
   }
 });
 
+// Season year of an undated/legacy doc, read from its own `validity` label.
+// A leading 4-digit year is the season (e.g. "2027 (01.11.2026–31.10.2027)" is
+// 2027); otherwise the latest year mentioned. This reads the doc's declared
+// season — it does NOT guess from filenames.
+function seasonYear(v) {
+  if (!v) return null;
+  const s = String(v);
+  const lead = s.match(/^\s*(20\d\d)/);
+  if (lead) return lead[1];
+  const all = s.match(/20\d\d/g);
+  if (!all || !all.length) return null;
+  return String(all.map(Number).sort(function (a, b) { return a - b; })[all.length - 1]);
+}
+
 module.exports = async (req, res) => {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -3870,6 +3884,38 @@ module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=120');
 
   try {
+    // ?list=1 -> per-slug RACK coverage (which years each slug holds), merged
+    // across inline data + Redis. Used by the owner rate-progress tracker so it
+    // can derive coverage live instead of storing a stale status file. Rack is
+    // public, so this needs no auth (it exposes no more than the rack API does).
+    if (req.query && req.query.list) {
+      const cov = {};
+      const add = function (slug, y, legacy, meta) {
+        const e = cov[slug] || (cov[slug] = { years: [], undated: false, legacy: false, name: '', region: '' });
+        if (y === 'undated') { e.undated = true; e.legacy = true; }
+        else if (e.years.indexOf(y) === -1) e.years.push(y);
+        if (legacy) e.legacy = true;
+        if (meta) { if (!e.name && meta.name) e.name = meta.name; if (!e.region && meta.region) e.region = meta.region; }
+      };
+      for (const s of Object.keys(DDS_RACK_BY_YEAR)) {
+        for (const y of Object.keys(DDS_RACK_BY_YEAR[s])) add(s, y, false, DDS_RACK_BY_YEAR[s][y]);
+      }
+      for (const s of Object.keys(VF_RACK)) {
+        const d = VF_RACK[s]; add(s, seasonYear(d && d.validity) || 'undated', true, d);
+      }
+      if (db.dbConfigured()) {
+        try {
+          for (const s of await db.listSlugs()) {
+            const ys = await db.listYears('rack', s);
+            if (ys && ys.length) { for (const y of ys) add(s, String(y), false, (await db.getRates('rack', s, y)) || {}); }
+            else { const lg = await db.getRates('rack', s); if (lg) add(s, seasonYear(lg.validity) || 'undated', true, lg); }
+          }
+        } catch (e) {}
+      }
+      for (const s of Object.keys(cov)) cov[s].years.sort();
+      return res.status(200).json({ ok: true, coverage: cov });
+    }
+
     const slug = req.query && req.query.slug ? String(req.query.slug).trim() : '';
     if (!db.dbConfigured() && !slug) {
       // No DB and no slug -> empty overlay; builder just uses the static file.
