@@ -8617,3 +8617,341 @@ Object.assign(DDS_STO_BY_YEAR, {
     }
   }
 });
+
+// ---------------------------------------------------------------------------
+// The Victoria Falls Hotel (Zimbabwe) — 2026 and 2027, US$.
+// Rates are PER ROOM per night, bed & breakfast, nett and non-commissionable.
+// No published rack sheet, so rack is derived at STO/0.8.
+// ---------------------------------------------------------------------------
+Object.assign(DDS_STO_BY_YEAR, {
+  "the-victoria-falls-hotel": {
+    "2026": {
+      "name": "The Victoria Falls Hotel",
+      "region": "Victoria Falls",
+      "currency": "US$",
+      "validity": "2026 · Low 1 Jan–30 Jun / High 1 Jul–31 Dec",
+      "note": "Nett, non-commissionable travel agent rates. US$ per ROOM per night — not per person — on a bed and breakfast basis. The Presidential / Livingstone suite is quoted on dinner, bed and breakfast. Rates include the 2% tourism levy and VAT as legislated by the Government of Zimbabwe. The hotel offers a fully serviced wheelchair accessible room in the Classic category. Check-in 14:00, check-out 10:00. A provisional booking is held for 14 days and then automatically released if not confirmed. Low season bookings need a 10% non-refundable deposit or voucher within 30 days of booking; high season 20%. Bookings made within 30 days of travel require full payment within 48 hours, and full prepayment is due no later than 45 days before arrival. Children are 3–11 years and adult children 12 and over. Child rates apply to Classic, Stables Signature Wing and Premium rooms only, subject to availability, and never to suites: a second room taken by a guest of 12 or over is charged the normal single or twin rate; a second room taken by a child of 3–11 is charged 50% on bed and breakfast — one child pays 50% of the single rate, two children pay 50% of the double rate. Infants under 3 stay free sharing with paying guests and cots are available. Children 3–11 pay 50% of the applicable meal rate on buffet meals only. An STO rate application form and a signed agreement are required by the hotel.",
+      "sections": [
+        {
+          "title": "Low season (1 Jan – 30 Jun 2026) — single, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "559"
+            ],
+            [
+              "Classic accessible room",
+              "559"
+            ],
+            [
+              "Stables Signature Wing room",
+              "760"
+            ],
+            [
+              "Premium room",
+              "1,086"
+            ],
+            [
+              "Deluxe suite",
+              "1,226"
+            ],
+            [
+              "Executive suite",
+              "1,592"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "Low season (1 Jan – 30 Jun 2026) — double / twin, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "598"
+            ],
+            [
+              "Classic accessible room",
+              "598"
+            ],
+            [
+              "Stables Signature Wing room",
+              "796"
+            ],
+            [
+              "Premium room",
+              "1,138"
+            ],
+            [
+              "Deluxe suite",
+              "1,226"
+            ],
+            [
+              "Executive suite",
+              "1,592"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Dec 2026) — single, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "612"
+            ],
+            [
+              "Classic accessible room",
+              "612"
+            ],
+            [
+              "Stables Signature Wing room",
+              "826"
+            ],
+            [
+              "Premium room",
+              "1,179"
+            ],
+            [
+              "Deluxe suite",
+              "1,347"
+            ],
+            [
+              "Executive suite",
+              "1,755"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Jul – 31 Dec 2026) — double / twin, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "654"
+            ],
+            [
+              "Classic accessible room",
+              "654"
+            ],
+            [
+              "Stables Signature Wing room",
+              "862"
+            ],
+            [
+              "Premium room",
+              "1,232"
+            ],
+            [
+              "Deluxe suite",
+              "1,347"
+            ],
+            [
+              "Executive suite",
+              "1,755"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "Restaurant & meal rates, per person",
+          "rows": [
+            [
+              "Jungle Junction breakfast buffet (06:30–10:00)",
+              "40"
+            ],
+            [
+              "Jungle Junction private lunch buffet, minimum 35 pax (12:00–14:00)",
+              "40"
+            ],
+            [
+              "Jungle Junction dinner buffet (19:00–22:00)",
+              "45"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "The Victoria Falls Hotel",
+      "region": "Victoria Falls",
+      "currency": "US$",
+      "validity": "2027 · Low 1 Jan–30 Apr & 1 Nov–31 Dec / High 1 May–31 Oct",
+      "note": "Nett, non-commissionable travel agent rates. US$ per ROOM per night — not per person — on a bed and breakfast basis. The Presidential / Livingstone suite is quoted on dinner, bed and breakfast. Rates include the 2% tourism levy and VAT as legislated by the Government of Zimbabwe. The hotel offers a fully serviced wheelchair accessible room in the Classic category. Check-in 14:00, check-out 10:00. A provisional booking is held for 14 days and then automatically released if not confirmed. Low season bookings need a 10% non-refundable deposit or voucher within 30 days of booking; high season 20%. Bookings made within 30 days of travel require full payment within 48 hours, and full prepayment is due no later than 45 days before arrival. Children are 3–11 years and adult children 12 and over. Child rates apply to Classic, Stables Signature Wing and Premium rooms only, subject to availability, and never to suites: a second room taken by a guest of 12 or over is charged the normal single or twin rate; a second room taken by a child of 3–11 is charged 50% on bed and breakfast — one child pays 50% of the single rate, two children pay 50% of the double rate. Infants under 3 stay free sharing with paying guests and cots are available. Children 3–11 pay 50% of the applicable meal rate on buffet meals only. An STO rate application form and a signed agreement are required by the hotel.",
+      "sections": [
+        {
+          "title": "Low season (1 Jan – 30 Apr 2027 and 1 Nov – 31 Dec 2027) — single, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "560"
+            ],
+            [
+              "Stables Signature Wing room",
+              "798"
+            ],
+            [
+              "Premium room",
+              "1,086"
+            ],
+            [
+              "Deluxe suite",
+              "1,226"
+            ],
+            [
+              "Executive suite",
+              "1,592"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "Low season (1 Jan – 30 Apr 2027 and 1 Nov – 31 Dec 2027) — double / twin, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "598"
+            ],
+            [
+              "Stables Signature Wing room",
+              "835"
+            ],
+            [
+              "Premium room",
+              "1,138"
+            ],
+            [
+              "Deluxe suite",
+              "1,226"
+            ],
+            [
+              "Executive suite",
+              "1,592"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 May – 31 Oct 2027) — single, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "612"
+            ],
+            [
+              "Stables Signature Wing room",
+              "867"
+            ],
+            [
+              "Premium room",
+              "1,179"
+            ],
+            [
+              "Deluxe suite",
+              "1,347"
+            ],
+            [
+              "Executive suite",
+              "1,755"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 May – 31 Oct 2027) — double / twin, per room per night",
+          "rows": [
+            [
+              "Classic room",
+              "653"
+            ],
+            [
+              "Stables Signature Wing room",
+              "905"
+            ],
+            [
+              "Premium room",
+              "1,231"
+            ],
+            [
+              "Deluxe suite",
+              "1,347"
+            ],
+            [
+              "Executive suite",
+              "1,755"
+            ],
+            [
+              "Batoka suite",
+              "3,960"
+            ],
+            [
+              "Presidential / Livingstone suite (dinner, bed & breakfast)",
+              "5,850"
+            ]
+          ]
+        },
+        {
+          "title": "Restaurant & meal rates, per person",
+          "rows": [
+            [
+              "Jungle Junction breakfast buffet (06:30–10:00)",
+              "41"
+            ],
+            [
+              "Jungle Junction dinner buffet (19:00–22:00)",
+              "41"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+});
