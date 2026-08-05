@@ -4358,3 +4358,439 @@ Object.assign(DDS_RACK_BY_YEAR, {
     }
   }
 });
+
+// ---------------------------------------------------------------------------
+// Ultimate Safaris / ultimate.earth camps — 2027, N$.
+// Galton House (Windhoek), Camp Sossus (Sossusvlei), Camp Doros, Onduli Ridge
+// and Onduli Enclave (Damaraland).
+// RACK IS THE SUPPLIER'S OWN PUBLISHED SHEET, NOT DERIVED. Their STO discount is
+// ~26.4% off public, not the usual 20% — deriving rack at STO/0.8 would have
+// understated every public price.
+// Conservation & community fee is charged ON TOP and is not in the rates.
+// ---------------------------------------------------------------------------
+Object.assign(DDS_RACK_BY_YEAR, {
+  "galton-house": {
+    "2027": {
+      "name": "Galton House",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2027 · Shoulder 10 Jan–31 Mar & 1–19 Dec / High 1 Apr–30 Nov & 20 Dec–9 Jan '28",
+      "note": "Published public rates. N$ per person per night, bed & breakfast, minimum 1 night. Includes accommodation, breakfast and VAT. Excludes drinks, dinner, a la carte lunch, artisan coffee, laundry (available on two-night stays or longer), activities, tips, personal items and travel insurance. Day use of the communal areas and bathroom, without a guest room, is N$550 per person for guests not staying at Galton House. Windhoek city tour N$1,415 per person one way, 3 hours, minimum 2 and maximum 7 pax. Children of all ages welcome sharing with adults on a single bed: 0–5 years at 25% of the adult rate, 6–12 years at 50%. A 15% long-stay discount applies from 6 nights and is already reflected in the 6+ night columns; it applies in shoulder season only.",
+      "sections": [
+        {
+          "title": "Shoulder season (10 Jan – 31 Mar 2027 and 1 – 19 Dec 2027) — standard rooms",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "2,098"
+            ],
+            [
+              "Per person sharing, 6+ nights (15% long-stay)",
+              "1,784"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "461"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "393"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Apr – 30 Nov 2027 and 20 Dec 2027 – 9 Jan 2028) — standard rooms",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "2,393"
+            ],
+            [
+              "Per person sharing, 6+ nights",
+              "2,393"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "542"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "542"
+            ]
+          ]
+        },
+        {
+          "title": "Shoulder season (10 Jan – 31 Mar 2027 and 1 – 19 Dec 2027) — pool suite",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "2,855"
+            ],
+            [
+              "Per person sharing, 6+ nights (15% long-stay)",
+              "2,426"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "695"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "591"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Apr – 30 Nov 2027 and 20 Dec 2027 – 9 Jan 2028) — pool suite",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "3,235"
+            ],
+            [
+              "Per person sharing, 6+ nights",
+              "3,235"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "851"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "851"
+            ]
+          ]
+        },
+        {
+          "title": "Pilots & guides (per person per night, all meals and non-alcoholic drinks)",
+          "rows": [
+            [
+              "Standard room",
+              "1,779"
+            ],
+            [
+              "Pool suite",
+              "3,558"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "camp-sossus": {
+    "2027": {
+      "name": "Camp Sossus",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 · Shoulder 10 Jan–31 Mar & 1–19 Dec / High 1 Apr–30 Nov & 20 Dec–9 Jan '28",
+      "note": "Published public rates. N$ per person per night, fully inclusive, minimum 2 nights. The conservation and community fee is charged per person per night for adults and children and is NOT included in the rates above — it must be added to every booking. Pilots and guides are not subject to the conservation and community fee; their rate includes all meals and non-alcoholic drinks. Private vehicles must be booked in advance for the entire stay, are charged per night, are limited to 7 passengers and are subject to availability. A 15% long-stay discount applies from 6 nights and is already reflected in the 6+ night columns; it applies in shoulder season only. Rates must be read in conjunction with the camp fact sheet. Includes accommodation, all meals, local drinks, shared camp activities, transfers to and from Hammerstein or Witwater airstrips, concession fees, the Sossusvlei fee and VAT. Excludes premium drinks, laundry (not available), additional transfers, third-party activities, tips, the conservation fee, personal items and travel insurance. No children under 6 unless exclusive use is booked (5 or more full-paying tents, 10 adults); children 6–12 at 50% of the adult rate sharing with adults. Exclusive use is considered at 5 or more full-paying tents.",
+      "sections": [
+        {
+          "title": "Shoulder season (10 Jan – 31 Mar 2027 and 1 – 19 Dec 2027)",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "7,828"
+            ],
+            [
+              "Per person sharing, 6+ nights (15% long-stay)",
+              "6,654"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "2,614"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "2,222"
+            ],
+            [
+              "Conservation & community fee, per person per night",
+              "420"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Apr – 30 Nov 2027 and 20 Dec 2027 – 9 Jan 2028)",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "9,279"
+            ],
+            [
+              "Per person sharing, 6+ nights",
+              "9,279"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "3,096"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "3,096"
+            ],
+            [
+              "Conservation & community fee, per person per night",
+              "420"
+            ]
+          ]
+        },
+        {
+          "title": "Pilots, guides & private vehicle",
+          "rows": [
+            [
+              "Pilot or guide — shoulder season",
+              "2,703"
+            ],
+            [
+              "Pilot or guide — high season",
+              "5,406"
+            ],
+            [
+              "Private vehicle, per vehicle per night",
+              "17,508"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "camp-doros": {
+    "2027": {
+      "name": "Camp Doros",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2027 · Shoulder 10 Jan–31 Mar & 1–19 Dec / High 1 Apr–30 Nov & 20 Dec–9 Jan '28",
+      "note": "Published public rates. N$ per person per night, fully inclusive, minimum 2 nights. The conservation and community fee is charged per person per night for adults and children and is NOT included in the rates above — it must be added to every booking. Pilots and guides are not subject to the conservation and community fee; their rate includes all meals and non-alcoholic drinks. Private vehicles must be booked in advance for the entire stay, are charged per night, are limited to 7 passengers and are subject to availability. A 15% long-stay discount applies from 6 nights and is already reflected in the 6+ night columns; it applies in shoulder season only. Rates must be read in conjunction with the camp fact sheet. Includes accommodation, all meals, local drinks, scheduled shared activities, airstrip transfers from Onduli airstrip at the scheduled 15:00 pick-up, concession fees, the rhino activity and VAT. On a three-night stay the rock engraving visit and elephant tracking fee are included. Excludes premium drinks, laundry (not available), additional transfers, tips, the conservation fee, personal items and travel insurance. Exclusive use is considered at 5 or more full-paying tents.",
+      "sections": [
+        {
+          "title": "Shoulder season (10 Jan – 31 Mar 2027 and 1 – 19 Dec 2027)",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "7,828"
+            ],
+            [
+              "Per person sharing, 6+ nights (15% long-stay)",
+              "6,654"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "2,614"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "2,222"
+            ],
+            [
+              "Conservation & community fee, per person per night",
+              "420"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Apr – 30 Nov 2027 and 20 Dec 2027 – 9 Jan 2028)",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "9,279"
+            ],
+            [
+              "Per person sharing, 6+ nights",
+              "9,279"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "3,096"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "3,096"
+            ],
+            [
+              "Conservation & community fee, per person per night",
+              "420"
+            ]
+          ]
+        },
+        {
+          "title": "Pilots, guides & private vehicle",
+          "rows": [
+            [
+              "Pilot or guide — shoulder season",
+              "2,703"
+            ],
+            [
+              "Pilot or guide — high season",
+              "5,406"
+            ],
+            [
+              "Private vehicle, per vehicle per night",
+              "17,508"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onduli-ridge": {
+    "2027": {
+      "name": "Onduli Ridge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2027 · Shoulder 10 Jan–31 Mar & 1–19 Dec / High 1 Apr–30 Nov & 20 Dec–9 Jan '28",
+      "note": "Published public rates. N$ per person per night, fully inclusive, minimum 2 nights. The conservation and community fee is charged per person per night for adults and children and is NOT included in the rates above — it must be added to every booking. Pilots and guides are not subject to the conservation and community fee; their rate includes all meals and non-alcoholic drinks. Private vehicles must be booked in advance for the entire stay, are charged per night, are limited to 7 passengers and are subject to availability. A 15% long-stay discount applies from 6 nights and is already reflected in the 6+ night columns; it applies in shoulder season only. Rates must be read in conjunction with the camp fact sheet. Includes accommodation, all meals, local drinks, laundry, scheduled shared activities, airstrip transfers from Onduli airstrip, concession fees, the elephant tracking fee, the Twyfelfontein fee and VAT. On a three-night stay the rhino activity is included. Excludes premium brand drinks, additional transfers, tips, the conservation fee, personal items and travel insurance.",
+      "sections": [
+        {
+          "title": "Shoulder season (10 Jan – 31 Mar 2027 and 1 – 19 Dec 2027)",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "15,337"
+            ],
+            [
+              "Per person sharing, 6+ nights (15% long-stay)",
+              "13,037"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "5,268"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "4,479"
+            ],
+            [
+              "Conservation & community fee, per person per night",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Apr – 30 Nov 2027 and 20 Dec 2027 – 9 Jan 2028)",
+          "rows": [
+            [
+              "Per person sharing, 1–5 nights",
+              "19,984"
+            ],
+            [
+              "Per person sharing, 6+ nights",
+              "19,984"
+            ],
+            [
+              "Single supplement, 1–5 nights",
+              "6,846"
+            ],
+            [
+              "Single supplement, 6+ nights",
+              "6,846"
+            ],
+            [
+              "Conservation & community fee, per person per night",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "Pilots, guides & private vehicle",
+          "rows": [
+            [
+              "Pilot or guide — shoulder season",
+              "2,875"
+            ],
+            [
+              "Pilot or guide — high season",
+              "5,750"
+            ],
+            [
+              "Private vehicle, per vehicle per night",
+              "17,508"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onduli-enclave": {
+    "2027": {
+      "name": "Onduli Enclave",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2027 · Shoulder 10 Jan–31 Mar & 1–19 Dec / High 1 Apr–30 Nov & 20 Dec–9 Jan '28",
+      "note": "Published public rates. N$ per night, fully inclusive, exclusive use, minimum 4 pax and minimum 2 nights. The headline figure is for 4 persons sharing per night, not per person. Includes accommodation, all meals with a private chef, local and premium brand drinks as offered, laundry, private activities, a private butler, airstrip transfers from Onduli airstrip, concession fees, the elephant tracking fee, the Twyfelfontein fee and VAT. On a three-night stay the rhino activity is included. Excludes additional transfers, tips, conservation fees, personal items and travel insurance. Pilots and guides are accommodated at Onduli Ridge. A 15% long-stay discount applies from 6 nights, shoulder season only, and is already reflected in the 6+ night columns.",
+      "sections": [
+        {
+          "title": "Shoulder season (10 Jan – 31 Mar 2027 and 1 – 19 Dec 2027) — exclusive use, minimum 4 pax",
+          "rows": [
+            [
+              "4 persons sharing, per night, 1–5 nights",
+              "105,455"
+            ],
+            [
+              "4 persons sharing, per night, 6+ nights (15% long-stay)",
+              "89,639"
+            ],
+            [
+              "Additional 5th or 6th adult sharing, 1–5 nights",
+              "26,364"
+            ],
+            [
+              "Additional 5th or 6th adult sharing, 6+ nights",
+              "22,409"
+            ],
+            [
+              "Conservation & community fee, per night (4 pax unit)",
+              "2,400"
+            ],
+            [
+              "Conservation & community fee, each additional adult",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "High season (1 Apr – 30 Nov 2027 and 20 Dec 2027 – 9 Jan 2028) — exclusive use, minimum 4 pax",
+          "rows": [
+            [
+              "4 persons sharing, per night, 1–5 nights",
+              "137,859"
+            ],
+            [
+              "4 persons sharing, per night, 6+ nights",
+              "137,859"
+            ],
+            [
+              "Additional 5th or 6th adult sharing, 1–5 nights",
+              "34,465"
+            ],
+            [
+              "Additional 5th or 6th adult sharing, 6+ nights",
+              "34,465"
+            ],
+            [
+              "Conservation & community fee, per night (4 pax unit)",
+              "2,400"
+            ],
+            [
+              "Conservation & community fee, each additional adult",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "Pilots & guides (accommodated at Onduli Ridge)",
+          "rows": [
+            [
+              "Shoulder season",
+              "2,875"
+            ],
+            [
+              "High season",
+              "5,750"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+});
