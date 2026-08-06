@@ -146,8 +146,29 @@ function confirmOwnerRole(){
       }).catch(function(){});
   }catch(e){}
 }
-function updateAgentState(){var inn=!!sessionStorage.getItem("nr_agent_token");
-if(inn){document.cookie="nr_session="+encodeURIComponent(sessionStorage.getItem("nr_agent_token"))+"; path=/; SameSite=Lax";}
+/* Sign in once, not once per tab.
+   The token lived only in sessionStorage, which is scoped to a single tab — so
+   every new tab, and every window, looked signed out and threw the agent back
+   at the sign-in box. The nr_session cookie was already being written but never
+   read back. Restore from it on load, and give it a lifetime so closing the
+   browser doesn't sign you out either. Sign Out still clears both. */
+var NR_SESSION_DAYS=30;
+function nrCookie(n){try{var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?decodeURIComponent(m[2]):'';}catch(e){return '';}}
+function nrRestoreSession(){
+  try{
+    if(sessionStorage.getItem('nr_agent_token')) return;
+    var t=nrCookie('nr_session');
+    if(t){ sessionStorage.setItem('nr_agent_token',t);
+      var u=''; try{u=localStorage.getItem('nr_agent_user')||'';}catch(e){}
+      if(u) try{sessionStorage.setItem('nr_agent_user',u);}catch(e){}
+      var o=''; try{o=localStorage.getItem('nr_owner')||'';}catch(e){}
+      if(o==='1') try{sessionStorage.setItem('nr_owner','1');}catch(e){}
+    }
+  }catch(e){}
+}
+nrRestoreSession();
+function updateAgentState(){nrRestoreSession();var inn=!!sessionStorage.getItem("nr_agent_token");
+if(inn){document.cookie="nr_session="+encodeURIComponent(sessionStorage.getItem("nr_agent_token"))+"; path=/; SameSite=Lax; max-age="+(NR_SESSION_DAYS*86400);}
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
 var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":"none";
 var ib=document.getElementById("nav-builder");if(ib)ib.style.display=inn?"":"none";var pr=document.getElementById("nav-progress");if(pr)pr.style.display=(inn&&isOwner())?"":"none";
