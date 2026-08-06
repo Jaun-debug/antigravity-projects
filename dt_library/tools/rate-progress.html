@@ -36,10 +36,13 @@ input{min-width:230px}
 .wrap{padding:0 28px 40px}
 .section-h{font-family:Georgia,serif;font-size:1.05rem;margin:26px 2px 10px;color:var(--char);font-weight:600}
 .section-h .muted{font-family:Inter,system-ui,sans-serif;font-size:.72rem;color:var(--muted);font-weight:400;letter-spacing:.3px}
-table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+table{width:100%;border-collapse:separate;border-spacing:0;background:var(--card);border:1px solid var(--border);border-radius:14px}
+#byregion{overflow:hidden}
 th,td{padding:10px 12px;text-align:left;border-bottom:1px solid rgba(184,149,106,.16);font-size:.86rem}
 th{background:#f4efe7;font-size:.66rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);white-space:nowrap;user-select:none}
 #detail th{position:sticky;top:var(--stick,300px);z-index:20;box-shadow:0 1px 0 rgba(184,149,106,.35);cursor:pointer}
+#detail thead th:first-child{border-top-left-radius:13px}#detail thead th:last-child{border-top-right-radius:13px}
+#detail tbody tr:last-child td:first-child{border-bottom-left-radius:13px}#detail tbody tr:last-child td:last-child{border-bottom-right-radius:13px}
 th.cell,td.cell{text-align:center;width:64px}
 tbody tr:hover{background:rgba(200,90,23,.04)}
 tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px solid var(--border)}
