@@ -36,6 +36,32 @@ function seasonYear(v) {
   return String(all.map(Number).sort(function (a, b) { return a - b; })[all.length - 1]);
 }
 
+// Parse a price string like "2,000" or "N$ 1.850" into a number (null if none).
+function parsePrice(s) {
+  const str = String(s == null ? '' : s).replace(/,/g, '').replace(/[^\d.\-]/g, '');
+  if (str === '' || str === '-' || str === '.') return null;
+  const v = parseFloat(str);
+  return isNaN(v) ? null : v;
+}
+
+// Flatten a sectioned rate doc into [{n, p}] rows — same shape the rack API and
+// the itinerary builder use.
+function flattenSto(doc) {
+  const rates = [];
+  const sections = doc && Array.isArray(doc.sections) ? doc.sections : [];
+  for (const sec of sections) {
+    const rows = sec && Array.isArray(sec.rows) ? sec.rows : [];
+    for (const row of rows) {
+      if (!Array.isArray(row)) continue;
+      const n = String(row[0] == null ? '' : row[0]).trim();
+      const p = parsePrice(row[1]);
+      if (!n || p == null) continue;
+      rates.push({ n: n, p: p });
+    }
+  }
+  return rates;
+}
+
 // Desert & Delta Safaris — multi-year (2026 + 2027) US$ NETT agent rates.
 const DDS_STO_BY_YEAR = {
   "chobe-game-lodge": {
@@ -7735,6 +7761,42 @@ module.exports = async (req, res) => {
     }
     for (const s of Object.keys(cov)) cov[s].years.sort();
     out.coverage = cov;
+    return res.status(200).json(out);
+  }
+
+  // all:1 -> every lodge's live NET STO rates, flattened per year, for the
+  // itinerary builder. Auth already passed (the builder is agent-only). Mirrors
+  // GET /api/rack's all-lodges shape so the builder can overlay live net rates
+  // exactly the way it already overlays live rack. Merges inline data + Redis:
+  //   rates       = 2026 / default-year rates
+  //   rates_2027  = 2027 rates, EMPTY when the API has no 2027 for that lodge
+  // (an empty rates_2027 is what stops the builder quoting a 2027 rate the live
+  // site itself doesn't yet have).
+  if (body.all) {
+    async function resolveStoYear(slug, year) {
+      if (db.dbConfigured()) { try { const r = await db.getRates('sto', slug, year); if (r) return r; } catch (e) {} }
+      if (DDS_STO_BY_YEAR[slug] && DDS_STO_BY_YEAR[slug][year]) return DDS_STO_BY_YEAR[slug][year];
+      let legacy = STO_DB[slug];
+      if (db.dbConfigured()) { try { const rl = await db.getRates('sto', slug); if (rl) legacy = rl; } catch (e) {} }
+      if (legacy && seasonYear(legacy.validity) === year) return legacy;
+      return null;
+    }
+    const slugs = new Set([...Object.keys(STO_DB), ...Object.keys(DDS_STO_BY_YEAR)]);
+    if (db.dbConfigured()) { try { (await db.listSlugs()).forEach(function (s) { slugs.add(s); }); } catch (e) {} }
+    const lodges = {};
+    for (const slug of slugs) {
+      const d26 = await resolveStoYear(slug, '2026');
+      const d27 = await resolveStoYear(slug, '2027');
+      if (!d26 && !d27) continue;
+      const meta = d26 || d27 || {};
+      lodges[slug] = {
+        name: meta.name || '',
+        region: meta.region || '',
+        rates: d26 ? flattenSto(d26) : [],
+        rates_2027: d27 ? flattenSto(d27) : [],
+      };
+    }
+    out.lodges = lodges;
     return res.status(200).json(out);
   }
 
