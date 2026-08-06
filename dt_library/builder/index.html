@@ -811,7 +811,29 @@ var NBMAP={};fetch('/assets/nightsbridge.json').then(function(r){return r.json()
 var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlaySto().then(overlayRack).then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
 fetch('/assets/providers.json').then(function(r){return r.json()}).then(function(j){PROVIDERS=j||{activities:[],vehicles:[]};if(!PROVIDERS.activities)PROVIDERS.activities=[];if(!PROVIDERS.vehicles)PROVIDERS.vehicles=[];try{renderPanel();}catch(e){}}).catch(function(){});
-function persist(){try{var it=S.lodges.map(function(d,i){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;var pfx=nm+' — ';var opt=S.activities.filter(function(a){return a.ord===i&&((a.name||'').trim()!==''||num(a.amount)>0);}).map(function(a){var dn=a.name||'';if(dn.indexOf(pfx)===0)dn=dn.slice(pfx.length);return {n:dn,p:num(a.amount),pax:actPaxVal(a),line:actLine(a)};});return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],optExtras:opt,_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
+/* Priced rows for the itinerary view. It expects {name,qty,price,nights,total}
+   per line and sums them; the builder used to hand over only {nights}, so every
+   lodge showed "0 x N$ 0.00" and the estimated total stayed N$ 0.00 no matter
+   what had been quoted. Mirrors rowPerNight(): captured rooms win, else the
+   sharing/single/child boxes, plus any meals — so the itinerary total matches
+   the builder's subtotal exactly. */
+function itinRows(d){
+  var n=d.nights||1, rows=[];
+  if(d.cap&&d.cap.length){
+    d.cap.forEach(function(r){var q=num(r.qty),p=num(r.price);
+      if(q>0&&p>0)rows.push({name:r.name||r.n||'Room',qty:q,price:p,nights:n,total:q*p*n});});
+  }else if(d.lodgeIdx>-1){
+    var c=catInfo(d);
+    var add=function(info,q){if(info&&q>0)rows.push({name:info.n,qty:q,price:num(info.p),nights:n,total:q*num(info.p)*n});};
+    add(c.sh,qShareOf(d)); add(c.sg,qSingleOf(d)); add(c.ch,qChildOf(d));
+  }
+  var g=totGuests(d);
+  (d.meals||[]).forEach(function(m){var p=num(m.p);
+    if(g>0&&p>0)rows.push({name:m.n||'Meal',qty:g,price:p,nights:n,total:g*p*n});});
+  if(!rows.length)rows.push({nights:n}); // nothing priced yet — keep the nights control working
+  return rows;
+}
+function persist(){try{var it=S.lodges.map(function(d,i){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;var pfx=nm+' — ';var opt=S.activities.filter(function(a){return a.ord===i&&((a.name||'').trim()!==''||num(a.amount)>0);}).map(function(a){var dn=a.name||'';if(dn.indexOf(pfx)===0)dn=dn.slice(pfx.length);return {n:dn,p:num(a.amount),pax:actPaxVal(a),line:actLine(a)};});return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:itinRows(d),total:rowSub(d),desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],optExtras:opt,_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
