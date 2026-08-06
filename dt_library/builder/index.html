@@ -223,8 +223,19 @@ function rateExcluded(s){
 }
 // pick a room rate by occupancy mode: 'sharing' = per-person-sharing room, 'single' = single room.
 function rateMatches(n,mode){var s=(n||'').toLowerCase();if(rateExcluded(s))return false;if(mode==='single')return /single/.test(s);return /sharing/.test(s)||/per person/.test(s)||/\bpps\b/.test(s);}
-// index of the CHEAPEST priced rate matching the mode (ignores N$0 rows like child/free); -1 if none
-function bestRoomIdx(L,mode){var R=lodgeRates(L);if(!R.length)return -1;var best=-1,bp=Infinity;R.forEach(function(rt,ri){if(rateMatches(rt.n,mode)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;best=ri;}}});return best;}
+// campsite / pre-pitched-tent lines: real products, but a different class to a lodge room.
+function isCampLine(s){return /campsite|camping|ablution|per site/.test(s);}
+// index of the CHEAPEST priced rate matching the mode (ignores N$0 rows like child/free); -1 if none.
+// Two-pass, mirroring bestAccommIdx: proper rooms first, camping only if the lodge has nothing else.
+// Without this, a line like "Campsite - per person per night" satisfies hasRoomNoun ("per person per
+// night"), so it survives rateExcluded and — being the cheapest — became the default PP Sharing rate
+// on lodges that DO have rooms (e.g. Palmwag defaulted to the N$324 campsite over the N$2,400 room).
+// Camping-only properties are unaffected: pass 1 finds nothing, pass 2 allows camping as before.
+function bestRoomIdx(L,mode){var R=lodgeRates(L);if(!R.length)return -1;
+  function pick(allowCamp){var best=-1,bp=Infinity;R.forEach(function(rt,ri){var s=(rt.n||'').toLowerCase();
+    if(!allowCamp&&isCampLine(s))return;
+    if(rateMatches(rt.n,mode)){var p=Number(rt.p)||0;if(p>0&&p<bp){bp=p;best=ri;}}});return best;}
+  var i=pick(false); return i>-1?i:pick(true);}
 // lines that must NOT be treated as a child accommodation rate (services/meals)
 function childActivity(s){return notRoomService(s);}
 // cheapest child ACCOMMODATION rate; falls back to a free/N$0 child row if that's all there is
