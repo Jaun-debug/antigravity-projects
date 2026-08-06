@@ -809,8 +809,16 @@ function overlaySto(){
 }
 var NBMAP={};fetch('/assets/nightsbridge.json').then(function(r){return r.json()}).then(function(j){NBMAP=j||{};try{render()}catch(e){}}).catch(function(){});
 var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
-fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlaySto().then(overlayRack).then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlaySto().then(overlayRack).then(function(){try{renderPanel();}catch(e){}});}).catch(function(){_seeded=true;start()});
 fetch('/assets/providers.json').then(function(r){return r.json()}).then(function(j){PROVIDERS=j||{activities:[],vehicles:[]};if(!PROVIDERS.activities)PROVIDERS.activities=[];if(!PROVIDERS.vehicles)PROVIDERS.vehicles=[];try{renderPanel();}catch(e){}}).catch(function(){});
+/* Guard against a load race that wiped saved quotes. The asset fetches
+   (nightsbridge / lodges-info / providers) each call render/renderPanel, which
+   calls persist() — and those can resolve BEFORE rates-index.json, which is what
+   triggers seed(). With no lodges restored yet, persist() wrote an empty list
+   over localStorage, so seed() then found nothing and the builder came back
+   blank (losing the quote) after "Back to builder". persist() now refuses to
+   write until seed() has had its turn. */
+var _seeded=false;
 /* Priced rows for the itinerary view. It expects {name,qty,price,nights,total}
    per line and sums them; the builder used to hand over only {nights}, so every
    lodge showed "0 x N$ 0.00" and the estimated total stayed N$ 0.00 no matter
@@ -833,7 +841,7 @@ function itinRows(d){
   if(!rows.length)rows.push({nights:n}); // nothing priced yet — keep the nights control working
   return rows;
 }
-function persist(){try{var it=S.lodges.map(function(d,i){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;var pfx=nm+' — ';var opt=S.activities.filter(function(a){return a.ord===i&&((a.name||'').trim()!==''||num(a.amount)>0);}).map(function(a){var dn=a.name||'';if(dn.indexOf(pfx)===0)dn=dn.slice(pfx.length);return {n:dn,p:num(a.amount),pax:actPaxVal(a),line:actLine(a)};});return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:itinRows(d),total:rowSub(d),desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],optExtras:opt,_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
+function persist(){if(!_seeded)return;try{var it=S.lodges.map(function(d,i){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;var pfx=nm+' — ';var opt=S.activities.filter(function(a){return a.ord===i&&((a.name||'').trim()!==''||num(a.amount)>0);}).map(function(a){var dn=a.name||'';if(dn.indexOf(pfx)===0)dn=dn.slice(pfx.length);return {n:dn,p:num(a.amount),pax:actPaxVal(a),line:actLine(a)};});return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:itinRows(d),total:rowSub(d),desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],optExtras:opt,_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
   try{
     var it=JSON.parse(localStorage.getItem('nr_itinerary'))||[];
@@ -844,6 +852,7 @@ function seed(){
     });
     if(S.lodges.length) active='lodges';
   }catch(e){}
+  _seeded=true; // from here on persist() may write (incl. a genuine empty list)
 }
 /* ---- automatic drive-distance estimates (geocode + routing; all approximate) ---- */
 function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
