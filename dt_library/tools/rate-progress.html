@@ -48,6 +48,8 @@ th{background:#f4efe7;font-size:.66rem;letter-spacing:1px;text-transform:upperca
 th.cell,td.cell{text-align:center;width:64px}
 tbody tr:hover{background:rgba(200,90,23,.04)}
 tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px solid var(--border)}
+.grouprow td{background:rgba(184,149,106,.16);color:#7a5f2f;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;padding:7px 12px}
+tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px solid var(--border);color:#6b5a44}
 .dot{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:middle}
 .dot.yes{background:var(--terra6);border:1px solid var(--terra)}
 .dot.no{background:transparent;border:1.5px solid rgba(122,114,110,.45)}
@@ -274,13 +276,17 @@ function renderRegionTable(){
   var list=Object.keys(byr).map(function(k){return byr[k];}).filter(function(g){return g.n>0;});
   list.sort(function(a,b){return b.gap-a.gap||b.n-a.n||a.region.localeCompare(b.region);});
   function bar(cls,n,t){var p=pct(n,t);return '<div class="mini '+cls+'"><i style="width:'+p+'%"></i><span>'+n+'/'+t+' · '+p+'%</span></div>';}
-  var tot={n:0,sto27:0,rack27:0,sto26:0,rack26:0,stoAny:0,gap:0};
-  var html=list.map(function(g){tot.n+=g.n;tot.sto27+=g.sto27;tot.rack27+=g.rack27;tot.sto26+=g.sto26;tot.rack26+=g.rack26;tot.stoAny+=g.stoAny;tot.gap+=g.gap;
-    return '<tr><td><a class="rlink" href="#" data-region="'+enc(g.region)+'">'+g.region+'</a></td><td class="cell">'+g.n+'</td><td>'+bar('sto',g.sto27,g.n)+'</td><td>'+bar('rack',g.rack27,g.n)+'</td><td>'+bar('sto dim',g.sto26,g.n)+'</td><td>'+bar('rack dim',g.rack26,g.n)+'</td><td class="cell">'+g.stoAny+'</td><td class="cell">'+(g.gap?'<span class="pill gap">'+g.gap+'</span>':'0')+'</td></tr>';
-  }).join('');
-  html+='<tr class="totrow"><td>All regions</td><td class="cell">'+tot.n+'</td><td>'+bar('sto',tot.sto27,tot.n)+'</td><td>'+bar('rack',tot.rack27,tot.n)+'</td><td>'+bar('sto dim',tot.sto26,tot.n)+'</td><td>'+bar('rack dim',tot.rack26,tot.n)+'</td><td class="cell">'+tot.stoAny+'</td><td class="cell">'+tot.gap+'</td></tr>';
+  var BEYOND={'Botswana':1,'Chobe':1,'Okavango Delta':1,'Victoria Falls':1};
+  function agg(arr){var t={region:'',n:0,sto27:0,rack27:0,sto26:0,rack26:0,stoAny:0,gap:0};arr.forEach(function(g){t.n+=g.n;t.sto27+=g.sto27;t.rack27+=g.rack27;t.sto26+=g.sto26;t.rack26+=g.rack26;t.stoAny+=g.stoAny;t.gap+=g.gap;});return t;}
+  function row(g,sub){var name=sub?g.region:'<a class="rlink" href="#" data-region="'+enc(g.region)+'">'+g.region+'</a>';var gapc=sub?g.gap:(g.gap?'<span class="pill gap">'+g.gap+'</span>':'0');return '<tr'+(sub?' class="subtot"':'')+'><td>'+name+'</td><td class="cell">'+g.n+'</td><td>'+bar('sto',g.sto27,g.n)+'</td><td>'+bar('rack',g.rack27,g.n)+'</td><td>'+bar('sto dim',g.sto26,g.n)+'</td><td>'+bar('rack dim',g.rack26,g.n)+'</td><td class="cell">'+g.stoAny+'</td><td class="cell">'+gapc+'</td></tr>';}
+  function ghead(label){return '<tr class="grouprow"><td colspan="8">'+label+'</td></tr>';}
+  var nam=list.filter(function(g){return !BEYOND[g.region];});
+  var bey=list.filter(function(g){return BEYOND[g.region];});
+  var html=ghead('Namibia · N$')+nam.map(function(g){return row(g);}).join('');
+  var namT=agg(nam);namT.region='Namibia subtotal';html+=row(namT,true);
+  if(bey.length){var beyT=agg(bey);beyT.region='Botswana / Delta / Vic Falls subtotal';html+=ghead('Botswana · Chobe · Okavango Delta · Victoria Falls · US$')+bey.map(function(g){return row(g);}).join('')+row(beyT,true);}
   document.getElementById('rtb').innerHTML=html;
-  var rm=document.getElementById('regionMini');if(rm)rm.textContent=' · '+list.length+' regions · '+tot.gap+' priority-gap lodges';
+  var rm=document.getElementById('regionMini');if(rm)rm.textContent=' · '+list.length+' regions · '+agg(list).gap+' priority-gap lodges';
   document.querySelectorAll('#rtb a[data-region]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();document.getElementById('region').value=dec(a.dataset.region);document.getElementById('detail').scrollIntoView({behavior:'smooth'});render();});});
 }
 function enc(s){return (s||'').replace(/"/g,'&quot;');}
