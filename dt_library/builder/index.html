@@ -270,6 +270,17 @@ function catInfo(d){
   var sgI=bestRoomIdx(L,'single'),chI=bestChildIdx(L);
   return {sh:sh,sg:(sgI>-1?{p:R[sgI].p,n:R[sgI].n}:null),ch:(chI>-1?{p:R[chI].p,n:R[chI].n}:null)};
 }
+// Keep the sharing/rooms quantity meaningful for the rate now selected: a
+// whole-room rate defaults to 1 room (not 1 per guest, which would double it),
+// a per-person rate goes back to the guest count. Only ever runs when the agent
+// changes lodge or rate, so a quantity they typed themselves is never clobbered.
+function syncShareQty(d){
+  try{
+    var c=catInfo(d); if(!c||!c.sh)return;
+    if(isPerRoomRate(c.sh.n)){ if(qShareOf(d)>1)d.qShare=1; }
+    else if(d.qShare===1 && (parseInt(S.adults,10)||2)>1){ d.qShare=parseInt(S.adults,10)||2; }
+  }catch(e){}
+}
 // quantities per row (back-compat: old quotes only have d.pax → treat as sharing qty)
 function qShareOf(d){return (d.qShare!=null)?num(d.qShare):num(d.pax||0)}
 function qSingleOf(d){return num(d.qSingle||0)}
@@ -279,6 +290,15 @@ function qChildOf(d){return num(d.qChild||0)}
 // supplier's own wording are untouched — the full text stays in the hover title
 // and in anything written to the itinerary/PDF.
 function shortRate(n){return String(n==null?'':n).replace(/per person sharing/gi,'pps');}
+// A rate charged for the WHOLE room/unit rather than per guest ("per room, max 2",
+// "Per Double Unit", "Double per room"). The quantity box multiplies whatever it
+// is given, so treating one of these as per-person silently DOUBLES the price for
+// two guests — on premium properties that is tens of thousands of N$ a night.
+// These lodges often have no per-person rate at all, so we can't just exclude the
+// rate: instead the box is relabelled "Rooms" and defaults to 1.
+function isPerRoomRate(n){var s=String(n==null?'':n).toLowerCase();
+  if(/per person|\bpps\b|\bsharing\b|\bpppn\b|per adult/.test(s))return false;
+  return /per room|per unit|\bunit\b|per chalet|per villa|per house|per cottage|per bungalow|per cabin|apartment|whole|max \d+\s*(pax|people|persons)/.test(s);}
 // one qty box + the matched rate it will pull (name shown so the agent can confirm the room/season)
 function qtyLine(i,key,label,info,val){
   var rate=info?('<span class="qrate" title="'+esc(info.n)+'">× '+money(info.p)+' · '+esc(shortRate(info.n))+'</span>')
@@ -581,7 +601,7 @@ function renderPanel(){persist();
         var boxes='';
         if(d.lodgeIdx>-1){var ci=catInfo(d);
           boxes='<div class="qtygrid">'
-            +qtyLine(i,'qShare','PP Sharing',ci.sh,qShareOf(d))
+            +qtyLine(i,'qShare',(ci.sh&&isPerRoomRate(ci.sh.n))?'Rooms':'PP Sharing',ci.sh,qShareOf(d))
             +qtyLine(i,'qSingle','Single',ci.sg,qSingleOf(d))
             +qtyLine(i,'qChild','Child',ci.ch,qChildOf(d))
             +'</div>';
@@ -685,9 +705,9 @@ function bindPanel(){
       el.onchange=function(){
         var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
         if(f==='region'){d.region=el.value;d.lodgeIdx=-1;d.roomIdx=-1;d.name='';d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
-        else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;d.roomManual=false;var L=RATES.lodges[d.lodgeIdx];var ri=seasonShareIdx(L,rowCheckIn(i));d.roomIdx=(ri>-1?ri:-1);d.name=(L?L.name:'');d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';}
+        else if(f==='lodgeIdx'){d.lodgeIdx=+el.value;d.roomManual=false;var L=RATES.lodges[d.lodgeIdx];var ri=seasonShareIdx(L,rowCheckIn(i));d.roomIdx=(ri>-1?ri:-1);d.name=(L?L.name:'');d.lat=null;d.lon=null;d.legToNext='';if(i>0)S.lodges[i-1].legToNext='';syncShareQty(d);}
         else if(f==='occ'){d.occ=el.value;d.roomManual=true;var L=RATES.lodges[d.lodgeIdx];var ri=bestRoomIdx(L,d.occ);if(ri<0)ri=bestRoomIdx(L,d.occ==='single'?'sharing':'single');if(ri>-1)d.roomIdx=ri;}
-        else if(f==='roomIdx'){d.roomIdx=+el.value;d.roomManual=true;var rr=lodgeRates(RATES.lodges[d.lodgeIdx])[d.roomIdx];if(rr)d.occ=(/single/i.test(rr.n)?'single':'sharing');}
+        else if(f==='roomIdx'){d.roomIdx=+el.value;d.roomManual=true;var rr=lodgeRates(RATES.lodges[d.lodgeIdx])[d.roomIdx];if(rr)d.occ=(/single/i.test(rr.n)?'single':'sharing');syncShareQty(d);}
         renderPanel();
         if(f==='lodgeIdx'||f==='region')autoDistances();
       };
