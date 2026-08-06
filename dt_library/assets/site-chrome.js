@@ -72,6 +72,10 @@ window.submitLogin=function(){
       closeLoginModal();
       sessionStorage.setItem(TOKEN_KEY,res.j.token);
       try{ sessionStorage.setItem('nr_agent_user', u.toLowerCase()); sessionStorage.removeItem('nr_owner'); }catch(e){}
+      /* Mirror to localStorage. sessionStorage is per-tab, so opening the
+         Progress Report in a new tab or from a bookmark lost who you are and
+         bounced the owner back to the home page. */
+      try{ localStorage.setItem('nr_agent_user', u.toLowerCase()); localStorage.removeItem('nr_owner'); }catch(e){}
       location.reload();
     } else {
       err.textContent=(res.j && res.j.error) ? res.j.error : 'Sign in failed.';
@@ -114,10 +118,13 @@ function markActiveNav(){try{
    accounts created through /accounts/ — confirm the role against /api/auth.
    Only the owner sees the Progress Report in the header. */
 var OWNER_USERS = ['dt'];
-function signedInUser(){ try{ return (sessionStorage.getItem('nr_agent_user')||'').trim().toLowerCase(); }catch(e){ return ''; } }
+/* Read from this tab first, then the persistent copy — see the sign-in handler
+   for why the localStorage mirror exists. */
+function nrRemember(k){ try{ return sessionStorage.getItem(k) || localStorage.getItem(k) || ''; }catch(e){ return ''; } }
+function signedInUser(){ try{ return (nrRemember('nr_agent_user')||'').trim().toLowerCase(); }catch(e){ return ''; } }
 function isOwner(){
   try{
-    if (sessionStorage.getItem('nr_owner') === '1') return true;
+    if (nrRemember('nr_owner') === '1') return true;
     var u = signedInUser();
     return !!u && OWNER_USERS.indexOf(u) > -1;
   }catch(e){ return false; }
@@ -132,6 +139,9 @@ function confirmOwnerRole(){
       .then(function(j){
         var owner = !!(j && j.ok && j.user && j.user.role === 'owner');
         try{ sessionStorage.setItem('nr_owner', owner ? '1' : '0'); }catch(e){}
+        // Only the positive answer is worth remembering across tabs; caching a
+        // "0" would stick to an owner who simply hadn't signed in yet.
+        try{ if(owner) localStorage.setItem('nr_owner','1'); }catch(e){}
         if (owner) updateAgentState();
       }).catch(function(){});
   }catch(e){}
@@ -143,7 +153,7 @@ var gl=document.getElementById("nav-grouplodges");if(gl)gl.style.display=inn?"":
 var ib=document.getElementById("nav-builder");if(ib)ib.style.display=inn?"":"none";var pr=document.getElementById("nav-progress");if(pr)pr.style.display=(inn&&isOwner())?"":"none";
 var b=document.getElementById("hdr-agent-btn");if(b)b.textContent=inn?"Sign Out":"Sign In";var su=document.getElementById("hdr-signup-btn");if(su)su.style.display=inn?"none":"";
 var mp=document.getElementById("nav-map");if(mp)mp.style.display=inn?"none":"";}
-window.agentBtn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");try{sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(e){}document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.reload();}else{openLoginModal();}};
+window.agentBtn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");try{sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(e){}try{localStorage.removeItem("nr_agent_user");localStorage.removeItem("nr_owner");}catch(e){}document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";location.reload();}else{openLoginModal();}};
 
 function build(){
  ["#uc-belt",".main-header","#mobile-menu","#mm-backdrop","#login-modal"].forEach(function(s){var e=document.querySelector(s);if(e)e.remove();});
