@@ -13500,3 +13500,63 @@ Object.assign(LEGACY_STO_BY_YEAR, {
     }
   }
 });
+
+
+// ---------------------------------------------------------------------------
+// Namib Outpost — its inline entry above is a 2025 season, i.e. an expired rate
+// that agents were still being shown. Drop that entry so the lookup falls
+// through to the owner area (if it holds anything) and otherwise to the 2027
+// sheet rates below. Same gap-fill rule as the rest of this block: never an
+// override of a live rate.
+// ---------------------------------------------------------------------------
+delete STO_DB['namib-outpost'];
+Object.assign(LEGACY_STO_BY_YEAR, { "namib-outpost": { "2027": {
+  "name": "Namib Outpost",
+  "region": "Sossusvlei",
+  "currency": "N$",
+  "validity": "2027 season",
+  "note": "Net STO rates recovered from the supplier rate sheet (/ratesheets/namib_outpost_ratesheet_v3.html). Replaces an expired 2025 rate that was previously being served. Seasons are shown in the rate label.",
+  "sections": [
+    {
+      "title": "2027 — net STO",
+      "rows": [
+        [
+          "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+          "7,056"
+        ],
+        [
+          "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+          "9,200"
+        ],
+        [
+          "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
+          "10,600"
+        ],
+        [
+          "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
+          "3,528"
+        ],
+        [
+          "Tour Guide (Guide Room)",
+          "1,190"
+        ],
+        [
+          "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+          "5,800"
+        ],
+        [
+          "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+          "7,560"
+        ],
+        [
+          "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+          "8,800"
+        ],
+        [
+          "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+          "2,900"
+        ]
+      ]
+    }
+  ]
+} } });
