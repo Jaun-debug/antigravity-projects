@@ -81,15 +81,25 @@ tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px sol
    page as visible to any signed-in agent who really goes looking. */
 (function(){try{
   var OWNER_USERS=['dt'];
-  var tok=sessionStorage.getItem('nr_agent_token');
+  function ss(k){try{return sessionStorage.getItem(k)||'';}catch(e){return '';}}
+  function ls(k){try{return localStorage.getItem(k)||'';}catch(e){return '';}}
+  function ck(n){try{var m=document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');return m?decodeURIComponent(m[2]):'';}catch(e){return '';}}
+  /* sessionStorage is per-tab, so opening this page in a new tab or from a
+     bookmark looked "signed out" and bounced the owner back to the home page.
+     Fall back to the persistent copies the header now keeps (and the nr_session
+     cookie it already sets), then restore them into this tab so the page can
+     still load its rate data. */
+  var tok=ss('nr_agent_token')||ck('nr_session');
   if(!tok){ location.replace('/?agent=1'); return; }
-  var u=(sessionStorage.getItem('nr_agent_user')||'').trim().toLowerCase();
-  if(sessionStorage.getItem('nr_owner')==='1') return;
+  if(!ss('nr_agent_token')){ try{sessionStorage.setItem('nr_agent_token',tok);}catch(e){} }
+  var u=(ss('nr_agent_user')||ls('nr_agent_user')).trim().toLowerCase();
+  if(u && !ss('nr_agent_user')){ try{sessionStorage.setItem('nr_agent_user',u);}catch(e){} }
+  if(ss('nr_owner')==='1'||ls('nr_owner')==='1'){ try{sessionStorage.setItem('nr_owner','1');}catch(e){} return; }
   if(u && OWNER_USERS.indexOf(u)>-1) return;
   fetch('/api/auth?action=me',{credentials:'same-origin'})
     .then(function(r){return r.json();})
     .then(function(j){
-      if(j&&j.ok&&j.user&&j.user.role==='owner'){ try{sessionStorage.setItem('nr_owner','1');}catch(e){} return; }
+      if(j&&j.ok&&j.user&&j.user.role==='owner'){ try{sessionStorage.setItem('nr_owner','1');localStorage.setItem('nr_owner','1');}catch(e){} return; }
       location.replace('/');
     })
     .catch(function(){ location.replace('/'); });
