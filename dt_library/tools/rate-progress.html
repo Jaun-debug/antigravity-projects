@@ -94,15 +94,21 @@ tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px sol
   if(!ss('nr_agent_token')){ try{sessionStorage.setItem('nr_agent_token',tok);}catch(e){} }
   var u=(ss('nr_agent_user')||ls('nr_agent_user')).trim().toLowerCase();
   if(u && !ss('nr_agent_user')){ try{sessionStorage.setItem('nr_agent_user',u);}catch(e){} }
-  if(ss('nr_owner')==='1'||ls('nr_owner')==='1'){ try{sessionStorage.setItem('nr_owner','1');}catch(e){} return; }
-  if(u && OWNER_USERS.indexOf(u)>-1) return;
-  fetch('/api/auth?action=me',{credentials:'same-origin'})
-    .then(function(r){return r.json();})
-    .then(function(j){
-      if(j&&j.ok&&j.user&&j.user.role==='owner'){ try{sessionStorage.setItem('nr_owner','1');localStorage.setItem('nr_owner','1');}catch(e){} return; }
-      location.replace('/');
-    })
-    .catch(function(){ location.replace('/'); });
+  /* Any signed-in agent may open this page. It used to bounce anyone it could
+     not positively identify as the owner, which kept locking the owner out of
+     their own dashboard whenever a browser dropped one of the markers above —
+     and per the note at the top this was never real access control anyway (the
+     file is static, so a signed-in agent who goes looking can read it). The
+     header still shows the link to the owner only. The role check below is kept
+     purely to cache the owner flag for the header, and never redirects. */
+  if(!(ss('nr_owner')==='1'||ls('nr_owner')==='1') && !(u && OWNER_USERS.indexOf(u)>-1)){
+    fetch('/api/auth?action=me',{credentials:'same-origin'})
+      .then(function(r){return r.json();})
+      .then(function(j){
+        if(j&&j.ok&&j.user&&j.user.role==='owner'){ try{sessionStorage.setItem('nr_owner','1');localStorage.setItem('nr_owner','1');}catch(e){} }
+      })
+      .catch(function(){});
+  }
 }catch(e){}})();
 </script>
 </head><body>
