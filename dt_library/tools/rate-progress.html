@@ -11,11 +11,10 @@ header{padding:10px 28px 4px}
 h1{font-family:Georgia,"Cormorant Garamond",serif;font-weight:500;font-size:1.15rem;margin:0 0 1px}
 .sub{color:var(--muted);font-size:.7rem}
 .tiles{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;padding:7px 28px}
-.tiles.collapsed{display:none}
-.sumbar{display:flex;align-items:center;gap:12px;padding:3px 28px 1px;flex-wrap:wrap}
-.tt{font:inherit;font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;font-weight:700;color:var(--terra);background:rgba(200,90,23,.08);border:1px solid rgba(200,90,23,.32);border-radius:8px;padding:5px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
-.tt:hover{background:rgba(200,90,23,.15)}
-.sumline{color:var(--muted);font-size:.76rem}
+.foldwrap.collapsed{display:none}
+.section-h.fold{cursor:pointer;user-select:none}
+.section-h.fold:hover{color:var(--terra)}
+.fold-caret{color:var(--terra);display:inline-block;width:.9em;font-size:.85em}
 .grp{border-radius:12px;padding:5px 9px 7px;border:1px solid}
 .grp-h{font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin:1px 4px 4px}
 .grp-tiles{display:flex;gap:6px}
@@ -94,8 +93,7 @@ tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px sol
 <h1>Rate Loading Progress</h1>
 <div class="sub" id="sub">Namibia Rates · 2026/2027 coverage · derived live from the rack &amp; STO APIs</div>
 </header>
-<div class="sumbar"><button id="tilesToggle" class="tt" aria-expanded="false">&#9656; Coverage summary</button><span class="sumline" id="sumline"></span></div>
-<div class="tiles collapsed" id="tiles"></div>
+<div class="tiles" id="tiles"></div>
 <div class="legend">
 <span><span class="dot yes"></span>loaded (season-tagged)</span>
 <span><span class="dot leg"></span>loaded, from an undated sheet — tag its year</span>
@@ -124,12 +122,14 @@ tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px sol
 </div>
 <div class="err" id="err"></div>
 <div class="wrap">
-<div class="section-h">Coverage by region <span class="muted">— lodges &amp; camps only · target year 2027</span></div>
+<div class="section-h fold" id="regionHead" role="button" tabindex="0" aria-expanded="false"><span class="fold-caret">&#9656;</span> Coverage by region <span class="muted">— lodges &amp; camps only · target year 2027<span id="regionMini"></span></span></div>
+<div id="byregionWrap" class="foldwrap collapsed">
 <table id="byregion"><thead><tr>
 <th>Region</th><th class="cell">Lodges</th><th>2027 STO</th><th>2027 Rack</th>
 <th class="cell">Any STO</th><th class="cell">Gap*</th>
 </tr></thead><tbody id="rtb"></tbody></table>
 <div class="notes" style="max-width:none;margin:8px 2px 0">*Gap = a lodge an agent sees an STO rate for, but the public rack page shows nothing. These quote-but-can't-publish rows are the priority.</div>
+</div>
 
 <div class="section-h">Every property <span class="muted">— rate presence read live per slug from /api/rack &amp; /api/sto</span></div>
 <table id="detail"><thead><tr>
@@ -215,7 +215,7 @@ Promise.all([
   var sel=document.getElementById('region');
   DATA.regions.forEach(function(r){var o=document.createElement('option');o.value=r;o.textContent=r;sel.appendChild(o);});
   ['q','region','status','category'].forEach(function(id){document.getElementById(id).addEventListener('input',render);});
-  (function(){var tt=document.getElementById('tilesToggle');if(!tt)return;tt.addEventListener('click',function(){var tiles=document.getElementById('tiles');var collapsed=tiles.classList.toggle('collapsed');tt.innerHTML=(collapsed?'&#9656;':'&#9662;')+' Coverage summary';tt.setAttribute('aria-expanded',String(!collapsed));var sl=document.getElementById('sumline');if(sl)sl.style.display=collapsed?'':'none';window.dispatchEvent(new Event('resize'));});})();
+  (function(){var h=document.getElementById('regionHead');if(!h)return;function toggle(){var w=document.getElementById('byregionWrap');var collapsed=w.classList.toggle('collapsed');var c=h.querySelector('.fold-caret');if(c)c.innerHTML=collapsed?'&#9656;':'&#9662;';var rm=document.getElementById('regionMini');if(rm)rm.style.display=collapsed?'':'none';h.setAttribute('aria-expanded',String(!collapsed));window.dispatchEvent(new Event('resize'));}h.addEventListener('click',toggle);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});})();
   document.querySelectorAll('#detail th[data-k]').forEach(function(th){th.addEventListener('click',function(){var k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();});});
   document.getElementById('sub').textContent='Namibia Rates · 2026/2027 coverage · derived live from the rack & STO APIs · '+new Date().toISOString().slice(0,10);
   renderRegionTable();
@@ -274,6 +274,7 @@ function renderRegionTable(){
   }).join('');
   html+='<tr class="totrow"><td>All regions</td><td class="cell">'+tot.n+'</td><td>'+bar('sto',tot.sto27,tot.n)+'</td><td>'+bar('rack',tot.rack27,tot.n)+'</td><td class="cell">'+tot.stoAny+'</td><td class="cell">'+tot.gap+'</td></tr>';
   document.getElementById('rtb').innerHTML=html;
+  var rm=document.getElementById('regionMini');if(rm)rm.textContent=' · '+list.length+' regions · '+tot.gap+' priority-gap lodges';
   document.querySelectorAll('#rtb a[data-region]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();document.getElementById('region').value=dec(a.dataset.region);document.getElementById('detail').scrollIntoView({behavior:'smooth'});render();});});
 }
 function enc(s){return (s||'').replace(/"/g,'&quot;');}
