@@ -274,9 +274,14 @@ function catInfo(d){
 function qShareOf(d){return (d.qShare!=null)?num(d.qShare):num(d.pax||0)}
 function qSingleOf(d){return num(d.qSingle||0)}
 function qChildOf(d){return num(d.qChild||0)}
+// Display-only shortening: long rate names pushed the price out of view in the
+// room/rate dropdown ("... — N$ 2,40(" truncated). The stored rate name and the
+// supplier's own wording are untouched — the full text stays in the hover title
+// and in anything written to the itinerary/PDF.
+function shortRate(n){return String(n==null?'':n).replace(/per person sharing/gi,'pps');}
 // one qty box + the matched rate it will pull (name shown so the agent can confirm the room/season)
 function qtyLine(i,key,label,info,val){
-  var rate=info?('<span class="qrate" title="'+esc(info.n)+'">× '+money(info.p)+' · '+esc(info.n)+'</span>')
+  var rate=info?('<span class="qrate" title="'+esc(info.n)+'">× '+money(info.p)+' · '+esc(shortRate(info.n))+'</span>')
                :'<span class="qrate qnone">no rate on sheet</span>';
   return '<div class="qline"><span class="qlbl">'+label+'</span>'
     +'<input class="qbox" type="number" min="0" step="1" value="'+val+'" data-i="'+i+'" data-f="'+key+'">'
@@ -561,7 +566,7 @@ function renderPanel(){persist();
       var lodgeOpts='<option value="-1">Lodge…</option>';
       if(d.region){var lis=lodgesIn(d.region);if(d.lodgeIdx>-1&&lis.indexOf(d.lodgeIdx)<0)lis=lis.concat([d.lodgeIdx]);lis.forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+(lodgeActivities(RATES.lodges[li]).length?'  ᴬ':'')+'</option>'});}
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(rt.n)+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
