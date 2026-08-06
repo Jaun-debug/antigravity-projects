@@ -765,9 +765,40 @@ function overlayRack(){
     });
   }).catch(function(){});
 }
+/* Overlay live NET STO rates from /api/sto (all lodges) on top of the static
+   index, the same way overlayRack does for rack. Runs BEFORE overlayRack so
+   rack still wins where it exists. Freshens each matched lodge's net rates and,
+   crucially, sets rates_2027 to exactly what the live API has — EMPTY when the
+   site has no 2027 yet — so the builder can't quote a phantom next-year rate.
+   2026 is only replaced when the API has it (never blanked), so no lodge loses
+   its existing base rate. Needs the agent token; silently no-ops if signed out
+   or /api/sto is unreachable. */
+function overlaySto(){
+  var tok=(function(){try{return sessionStorage.getItem('nr_agent_token')||'';}catch(e){return '';}})();
+  if(!tok)return Promise.resolve();
+  return fetch('/api/sto',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:tok,all:1})}).then(function(r){return r.json()}).then(function(j){
+    if(!j||!j.lodges||!RATES||!RATES.lodges)return;
+    var byName={};
+    for(var k=0;k<RATES.lodges.length;k++){byName[(RATES.lodges[k].name||'').trim().toLowerCase()]=RATES.lodges[k];}
+    Object.keys(j.lodges).forEach(function(slug){
+      var L=j.lodges[slug]; if(!L)return;
+      var key=(L.name||'').trim().toLowerCase();
+      var ex=byName[key];
+      // Match-only: never append. Several live-STO lodges use a slightly
+      // different name than the static index (e.g. "Epako Safari Lodge" vs
+      // "Epako Safari Lodge & Spa"); appending them would create duplicate
+      // rows in a financial tool. Unmatched lodges simply keep their existing
+      // (static) rate — no worse than today — and can be name-aliased later.
+      if(ex){
+        if(L.rates&&L.rates.length){ex.rates=L.rates;}
+        ex.rates_2027=(L.rates_2027&&L.rates_2027.length)?L.rates_2027:[];
+      }
+    });
+  }).catch(function(){});
+}
 var NBMAP={};fetch('/assets/nightsbridge.json').then(function(r){return r.json()}).then(function(j){NBMAP=j||{};try{render()}catch(e){}}).catch(function(){});
 var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
-fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlayRack().then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlaySto().then(overlayRack).then(function(){try{renderPanel();}catch(e){}});}).catch(function(){start()});
 fetch('/assets/providers.json').then(function(r){return r.json()}).then(function(j){PROVIDERS=j||{activities:[],vehicles:[]};if(!PROVIDERS.activities)PROVIDERS.activities=[];if(!PROVIDERS.vehicles)PROVIDERS.vehicles=[];try{renderPanel();}catch(e){}}).catch(function(){});
 function persist(){try{var it=S.lodges.map(function(d,i){var nm=lodgeLabel(d);var inf=(LODGEINFO&&LODGEINFO[nm.toLowerCase().replace(/[^a-z0-9]/g,'')])||null;var pfx=nm+' — ';var opt=S.activities.filter(function(a){return a.ord===i&&((a.name||'').trim()!==''||num(a.amount)>0);}).map(function(a){var dn=a.name||'';if(dn.indexOf(pfx)===0)dn=dn.slice(pfx.length);return {n:dn,p:num(a.amount),pax:actPaxVal(a),line:actLine(a)};});return {name:nm,region:lodgeRegion2(d),url:d.fileUrl||(inf?inf.url:''),nights:d.nights,items:[{nights:d.nights}],desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[],optExtras:opt,_b:d};});localStorage.setItem('nr_itinerary',JSON.stringify(it));}catch(e){}}
 function seed(){
