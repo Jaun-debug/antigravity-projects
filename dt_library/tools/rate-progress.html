@@ -11,6 +11,11 @@ header{padding:10px 28px 4px}
 h1{font-family:Georgia,"Cormorant Garamond",serif;font-weight:500;font-size:1.15rem;margin:0 0 1px}
 .sub{color:var(--muted);font-size:.7rem}
 .tiles{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;padding:7px 28px}
+.tiles.collapsed{display:none}
+.sumbar{display:flex;align-items:center;gap:12px;padding:3px 28px 1px;flex-wrap:wrap}
+.tt{font:inherit;font-size:.68rem;letter-spacing:.5px;text-transform:uppercase;font-weight:700;color:var(--terra);background:rgba(200,90,23,.08);border:1px solid rgba(200,90,23,.32);border-radius:8px;padding:5px 12px;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.tt:hover{background:rgba(200,90,23,.15)}
+.sumline{color:var(--muted);font-size:.76rem}
 .grp{border-radius:12px;padding:5px 9px 7px;border:1px solid}
 .grp-h{font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin:1px 4px 4px}
 .grp-tiles{display:flex;gap:6px}
@@ -89,7 +94,8 @@ tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px sol
 <h1>Rate Loading Progress</h1>
 <div class="sub" id="sub">Namibia Rates · 2026/2027 coverage · derived live from the rack &amp; STO APIs</div>
 </header>
-<div class="tiles" id="tiles"></div>
+<div class="sumbar"><button id="tilesToggle" class="tt" aria-expanded="false">&#9656; Coverage summary</button><span class="sumline" id="sumline"></span></div>
+<div class="tiles collapsed" id="tiles"></div>
 <div class="legend">
 <span><span class="dot yes"></span>loaded (season-tagged)</span>
 <span><span class="dot leg"></span>loaded, from an undated sheet — tag its year</span>
@@ -209,6 +215,7 @@ Promise.all([
   var sel=document.getElementById('region');
   DATA.regions.forEach(function(r){var o=document.createElement('option');o.value=r;o.textContent=r;sel.appendChild(o);});
   ['q','region','status','category'].forEach(function(id){document.getElementById(id).addEventListener('input',render);});
+  (function(){var tt=document.getElementById('tilesToggle');if(!tt)return;tt.addEventListener('click',function(){var tiles=document.getElementById('tiles');var collapsed=tiles.classList.toggle('collapsed');tt.innerHTML=(collapsed?'&#9656;':'&#9662;')+' Coverage summary';tt.setAttribute('aria-expanded',String(!collapsed));var sl=document.getElementById('sumline');if(sl)sl.style.display=collapsed?'':'none';window.dispatchEvent(new Event('resize'));});})();
   document.querySelectorAll('#detail th[data-k]').forEach(function(th){th.addEventListener('click',function(){var k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();});});
   document.getElementById('sub').textContent='Namibia Rates · 2026/2027 coverage · derived live from the rack & STO APIs · '+new Date().toISOString().slice(0,10);
   renderRegionTable();
@@ -249,6 +256,8 @@ function tiles(rows){
    +'<div class="grp grp26"><div class="grp-h">2026 · context</div><div class="grp-tiles">'+tile('STO loaded',s.sto26,pct(s.sto26,s.total))+tile('Public rack',s.rack26,pct(s.rack26,s.total))+'</div></div>'
    +'<div class="grp grpm"><div class="grp-h">Media &amp; suppliers</div><div class="grp-tiles">'+tile('Photos loaded',haveP,pct(haveP,media.length||1))+tile('Priced suppliers',provPriced,pct(provPriced,prov.length||1))+'</div></div>';
   document.getElementById('tiles').innerHTML=html;
+  var sl=document.getElementById('sumline');
+  if(sl)sl.textContent=s.total+' lodges · 2027: '+s.sto27+' STO / '+s.rack27+' rack · '+s.gap+' priority gap · '+(s.total-s.stoAny)+' no rates yet';
 }
 
 // ---- coverage-by-region table ----
