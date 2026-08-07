@@ -375,13 +375,21 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
         if(!document.getElementById("nr-yrdock-css")){
           var st=document.createElement("style"); st.id="nr-yrdock-css";
           st.textContent=
-            /* no panel behind the pills — they carry their own blurred backdrop */
+            /* No panel behind the pills — each pill is its own piece of frosted
+               glass: 60% translucent, blurred and saturated backdrop, hairline
+               highlight along the top edge. */
             "#nr-yrdock{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:1200;"
             +"display:flex;flex-direction:column;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
             +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
-            +"#nr-yrdock button{white-space:nowrap;width:100%;text-align:center;"
-            +"background:rgba(255,255,255,.82);box-shadow:0 4px 14px rgba(0,0,0,.10)}"
-            +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(200,90,23,.85);color:#fff}"
+            +"#nr-yrdock button{white-space:nowrap;width:100%;text-align:center;padding:7px 15px;"
+            +"background:rgba(255,255,255,.60);"
+            +"-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);"
+            +"border:1px solid rgba(255,255,255,.45);"
+            +"box-shadow:0 8px 26px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.6);"
+            +"transition:background .18s,box-shadow .18s}"
+            +"#nr-yrdock button:hover{background:rgba(255,255,255,.74);box-shadow:0 10px 30px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.7)}"
+            +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(200,90,23,.60);color:#fff;"
+            +"border-color:rgba(255,255,255,.40);text-shadow:0 1px 2px rgba(0,0,0,.22)}"
             +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;right:10px;transform:none}"
             +"#nr-yrdock>div{flex-direction:row}}"
             +"@media print{#nr-yrdock{display:none}}";
