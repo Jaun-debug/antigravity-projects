@@ -2593,6 +2593,23 @@ Object.assign(DDS_RACK_BY_YEAR, {
 Object.assign(VF_RACK, NAM_RACK);
 
 
+// Run an async job over a list with a concurrency cap. Used for the database
+// lookups below: doing them one after another meant ~90 round-trips in series,
+// which made the coverage call take ~7.5s and the progress page feel stuck.
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  const workers = new Array(Math.min(limit, items.length)).fill(0).map(async function () {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      try { out[i] = await fn(items[i]); } catch (e) { out[i] = null; }
+    }
+  });
+  await Promise.all(workers);
+  return out;
+}
+
 // Derived public rack (populated at the end of this file). Consulted LAST — after
 // the owner area (Redis) and the inline maps — so it can only ever fill a gap,
 // never override a rack the supplier or the owner has set.
@@ -3910,11 +3927,20 @@ module.exports = async (req, res) => {
       }
       if (db.dbConfigured()) {
         try {
-          for (const s of await db.listSlugs()) {
+          const slugs = await db.listSlugs();
+          const found = await mapLimit(slugs, 24, async function (s) {
             const ys = await db.listYears('rack', s);
-            if (ys && ys.length) { for (const y of ys) add(s, String(y), false, (await db.getRates('rack', s, y)) || {}); }
-            else { const lg = await db.getRates('rack', s); if (lg) add(s, seasonYear(lg.validity) || 'undated', true, lg); }
-          }
+            if (ys && ys.length) {
+              const docs = await Promise.all(ys.map(function (y) { return db.getRates('rack', s, y); }));
+              return { s: s, ys: ys, docs: docs };
+            }
+            return { s: s, ys: [], legacyDoc: await db.getRates('rack', s) };
+          });
+          found.forEach(function (r) {
+            if (!r) return;
+            if (r.ys.length) r.ys.forEach(function (y, i) { add(r.s, String(y), false, r.docs[i] || {}); });
+            else if (r.legacyDoc) add(r.s, seasonYear(r.legacyDoc.validity) || 'undated', true, r.legacyDoc);
+          });
         } catch (e) {}
       }
       // Derived rack counts as coverage, but only where nothing live holds one.

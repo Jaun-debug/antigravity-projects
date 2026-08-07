@@ -36,6 +36,23 @@ function seasonYear(v) {
   return String(all.map(Number).sort(function (a, b) { return a - b; })[all.length - 1]);
 }
 
+// Run an async job over a list with a concurrency cap. The database lookups
+// below used to run strictly one after another — hundreds of round-trips in
+// series — which is what made the coverage and builder feeds slow to load.
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  const workers = new Array(Math.min(limit, items.length)).fill(0).map(async function () {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      try { out[i] = await fn(items[i]); } catch (e) { out[i] = null; }
+    }
+  });
+  await Promise.all(workers);
+  return out;
+}
+
 // Legacy sheet rates (populated at the bottom of this file). Consulted LAST —
 // after Redis and after the inline maps — so it can only ever fill a gap, never
 // override a live rate. See the block at the end of the file for the rationale.
@@ -7757,11 +7774,20 @@ module.exports = async (req, res) => {
     }
     if (db.dbConfigured()) {
       try {
-        for (const s of await db.listSlugs()) {
+        const dbSlugs = await db.listSlugs();
+        const found = await mapLimit(dbSlugs, 24, async function (s) {
           const ys = await db.listYears('sto', s);
-          if (ys && ys.length) { for (const y of ys) add(s, String(y), false, (await db.getRates('sto', s, y)) || {}); }
-          else { const lg = await db.getRates('sto', s); if (lg) add(s, seasonYear(lg.validity) || 'undated', true, lg); }
-        }
+          if (ys && ys.length) {
+            const docs = await Promise.all(ys.map(function (y) { return db.getRates('sto', s, y); }));
+            return { s: s, ys: ys, docs: docs };
+          }
+          return { s: s, ys: [], legacyDoc: await db.getRates('sto', s) };
+        });
+        found.forEach(function (r) {
+          if (!r) return;
+          if (r.ys.length) r.ys.forEach(function (y, i) { add(r.s, String(y), false, r.docs[i] || {}); });
+          else if (r.legacyDoc) add(r.s, seasonYear(r.legacyDoc.validity) || 'undated', true, r.legacyDoc);
+        });
       } catch (e) {}
     }
     // Legacy sheet rates count as coverage too, but only where nothing live
@@ -7801,18 +7827,20 @@ module.exports = async (req, res) => {
     const slugs = new Set([...Object.keys(STO_DB), ...Object.keys(DDS_STO_BY_YEAR), ...Object.keys(LEGACY_STO_BY_YEAR)]);
     if (db.dbConfigured()) { try { (await db.listSlugs()).forEach(function (s) { slugs.add(s); }); } catch (e) {} }
     const lodges = {};
-    for (const slug of slugs) {
-      const d26 = await resolveStoYear(slug, '2026');
-      const d27 = await resolveStoYear(slug, '2027');
-      if (!d26 && !d27) continue;
-      const meta = d26 || d27 || {};
-      lodges[slug] = {
+    const built = await mapLimit([...slugs], 24, async function (slug) {
+      const pair = await Promise.all([resolveStoYear(slug, '2026'), resolveStoYear(slug, '2027')]);
+      return { slug: slug, d26: pair[0], d27: pair[1] };
+    });
+    built.forEach(function (b) {
+      if (!b || (!b.d26 && !b.d27)) return;
+      const meta = b.d26 || b.d27 || {};
+      lodges[b.slug] = {
         name: meta.name || '',
         region: meta.region || '',
-        rates: d26 ? flattenSto(d26) : [],
-        rates_2027: d27 ? flattenSto(d27) : [],
+        rates: b.d26 ? flattenSto(b.d26) : [],
+        rates_2027: b.d27 ? flattenSto(b.d27) : [],
       };
-    }
+    });
     out.lodges = lodges;
     return res.status(200).json(out);
   }
