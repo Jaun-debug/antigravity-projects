@@ -49,6 +49,8 @@ th.cell,td.cell{text-align:center;width:64px}
 tbody tr:hover{background:rgba(200,90,23,.04)}
 tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px solid var(--border)}
 .grouprow td{background:rgba(184,149,106,.16);color:#7a5f2f;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;padding:7px 12px}
+.grouprow.gfold td{cursor:pointer;user-select:none}
+.grouprow.gfold:hover td{background:rgba(184,149,106,.26);color:#5f4a24}
 tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px solid var(--border);color:#6b5a44}
 .dot{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:middle}
 .dot.yes{background:var(--terra6);border:1px solid var(--terra)}
@@ -237,7 +239,14 @@ Promise.all([
   DATA.rows=rows;
   DATA.regions=(uni.regions&&uni.regions.length)?uni.regions.slice():dedupeRegions(rows);
   var sel=document.getElementById('region');
-  DATA.regions.forEach(function(r){var o=document.createElement('option');o.value=r;o.textContent=r;sel.appendChild(o);});
+  /* Botswana, the Delta, Chobe and Vic Falls sit at the top of the list rather
+     than buried alphabetically among the Namibian regions. */
+  function regOpts(host,list){list.forEach(function(r){var o=document.createElement('option');o.value=r;o.textContent=r;host.appendChild(o);});}
+  var beyR=DATA.regions.filter(function(r){return BEYOND[r];});
+  var namR=DATA.regions.filter(function(r){return !BEYOND[r];});
+  if(beyR.length){var gB=document.createElement('optgroup');gB.label='Botswana · Delta · Vic Falls · US$';regOpts(gB,beyR);sel.appendChild(gB);}
+  if(namR.length){var gN=document.createElement('optgroup');gN.label='Namibia · N$';regOpts(gN,namR);sel.appendChild(gN);}
+  if(!beyR.length&&!namR.length) regOpts(sel,DATA.regions);
   ['q','region','status','category'].forEach(function(id){document.getElementById(id).addEventListener('input',render);});
   (function(){var h=document.getElementById('regionHead');if(!h)return;function toggle(){var w=document.getElementById('byregionWrap');var collapsed=w.classList.toggle('collapsed');var c=h.querySelector('.fold-caret');if(c)c.innerHTML=collapsed?'&#9656;':'&#9662;';var rm=document.getElementById('regionMini');if(rm)rm.style.display=collapsed?'':'none';h.setAttribute('aria-expanded',String(!collapsed));window.dispatchEvent(new Event('resize'));}h.addEventListener('click',toggle);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});})();
   document.querySelectorAll('#detail th[data-k]').forEach(function(th){th.addEventListener('click',function(){var k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();});});
@@ -313,6 +322,9 @@ function dec(s){return (s||'').replace(/&quot;/g,'"');}
 
 // ---- detail table ----
 var sortK='name',sortDir=1;
+/* Both blocks start folded so the page opens short; searching or filtering
+   opens them, because a hit you can't see reads as no hit at all. */
+var foldG={nam:true,bey:true};
 function dot(state){ // 'yes' | 'leg' | 'no' | 'na'
   var t={yes:'loaded (season-tagged)',leg:'loaded from an undated sheet — tag its season year',no:'not loaded',na:'not applicable'}[state];
   return '<span class="dot '+state+'" title="'+t+'"></span>';
@@ -366,13 +378,16 @@ function render(){
   }
   /* Same split as the region summary: the US$ regions read as their own block so
      they aren't mixed in among the N$ ones. */
-  function dhead(label,n){return '<tr class="grouprow"><td colspan="10">'+label+' <span style="opacity:.6">· '+n+'</span></td></tr>';}
+  function dhead(key,label,n){var open=!foldG[key];return '<tr class="grouprow gfold" data-g="'+key+'"><td colspan="10"><span class="fold-caret">'+(open?'&#9662;':'&#9656;')+'</span> '+label+' <span style="opacity:.6">· '+n+'</span>'+(open?'':' <span style="opacity:.5;letter-spacing:1px">— click to open</span>')+'</td></tr>';}
   var dNam=rows.filter(function(r){return !BEYOND[r.region];});
   var dBey=rows.filter(function(r){return BEYOND[r.region];});
+  /* a search or filter is a request to see rows — open both blocks for it */
+  if(q||rg||st||cat){foldG.nam=false;foldG.bey=false;}
   var dhtml='';
-  if(dNam.length) dhtml+=dhead('Namibia · N$',dNam.length)+dNam.map(detailRow).join('');
-  if(dBey.length) dhtml+=dhead('Botswana · Chobe · Okavango Delta · Victoria Falls · US$',dBey.length)+dBey.map(detailRow).join('');
+  if(dNam.length) dhtml+=dhead('nam','Namibia · N$',dNam.length)+(foldG.nam?'':dNam.map(detailRow).join(''));
+  if(dBey.length) dhtml+=dhead('bey','Botswana · Chobe · Okavango Delta · Victoria Falls · US$',dBey.length)+(foldG.bey?'':dBey.map(detailRow).join(''));
   document.getElementById('tb').innerHTML=dhtml;
+  document.querySelectorAll('#tb .gfold').forEach(function(tr){tr.addEventListener('click',function(){var k=tr.dataset.g;foldG[k]=!foldG[k];render();});});
   document.getElementById('count').textContent=rows.length+' of '+DATA.rows.length+' shown';
   tiles(rows.length?rows:DATA.rows);
 }
