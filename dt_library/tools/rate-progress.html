@@ -146,10 +146,10 @@ tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px sol
 </div>
 <div class="err" id="err"></div>
 <div class="wrap">
-<div class="section-h fold" id="regionHead" role="button" tabindex="0" aria-expanded="false"><span class="fold-caret">&#9656;</span> Coverage by region <span class="muted">— lodges &amp; camps only · 2027 target &amp; 2026 context<span id="regionMini"></span></span></div>
+<div class="section-h fold" id="regionHead" role="button" tabindex="0" aria-expanded="false"><span class="fold-caret">&#9656;</span> Coverage by region <span class="muted">— lodges &amp; camps only · 2026 context &amp; 2027 target<span id="regionMini"></span></span></div>
 <div id="byregionWrap" class="foldwrap collapsed">
 <table id="byregion"><thead><tr>
-<th>Region</th><th class="cell">Lodges</th><th>2027 STO</th><th>2027 Rack</th><th>2026 STO</th><th>2026 Rack</th>
+<th>Region</th><th class="cell">Lodges</th><th>2026 STO</th><th>2026 Rack</th><th>2027 STO</th><th>2027 Rack</th>
 <th class="cell">Any STO</th><th class="cell">Gap*</th>
 </tr></thead><tbody id="rtb"></tbody></table>
 <div class="notes" style="max-width:none;margin:8px 2px 0">*Gap = a lodge an agent sees an STO rate for, but the public rack page shows nothing. These quote-but-can't-publish rows are the priority.</div>
@@ -158,8 +158,8 @@ tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px sol
 <div class="section-h">Every property <span class="muted">— rate presence read live per slug from /api/rack &amp; /api/sto</span></div>
 <table id="detail"><thead><tr>
 <th data-k="name">Property</th><th data-k="region">Region</th>
-<th class="cell" data-k="sto27">27 STO</th><th class="cell" data-k="rack27">27 Rack</th>
 <th class="cell" data-k="sto26">26 STO</th><th class="cell" data-k="rack26">26 Rack</th>
+<th class="cell" data-k="sto27">27 STO</th><th class="cell" data-k="rack27">27 Rack</th>
 <th class="cell" data-k="photos">Photos</th><th class="cell" data-k="acts">Acts</th>
 <th data-k="src">Source</th><th data-k="notes">Notes</th>
 </tr></thead><tbody id="tb"></tbody></table>
@@ -275,9 +275,9 @@ function tiles(rows){
   var media=rows.filter(function(r){return r.lodge&&r.photos!=null;});
   var haveP=media.filter(function(r){return r.photos>0;}).length;
   var html='<div class="tile total"><div class="n">'+s.total+'</div><div class="l">Lodges &amp; camps</div></div>'
+   +'<div class="grp grp26"><div class="grp-h">2026 · context</div><div class="grp-tiles">'+tile('STO loaded',s.sto26,pct(s.sto26,s.total))+tile('Public rack',s.rack26,pct(s.rack26,s.total))+'</div></div>'
    +'<div class="grp grp27"><div class="grp-h">2027 · target year</div><div class="grp-tiles">'+tile('STO loaded',s.sto27,pct(s.sto27,s.total))+tile('Public rack',s.rack27,pct(s.rack27,s.total))+'</div></div>'
    +'<div class="grp grpgap"><div class="grp-h">Priority gap</div><div class="grp-tiles">'+tile('STO · no rack',s.gap,null)+tile('No rates yet',s.total-s.stoAny,null)+'</div></div>'
-   +'<div class="grp grp26"><div class="grp-h">2026 · context</div><div class="grp-tiles">'+tile('STO loaded',s.sto26,pct(s.sto26,s.total))+tile('Public rack',s.rack26,pct(s.rack26,s.total))+'</div></div>'
    +'<div class="grp grpm"><div class="grp-h">Media &amp; suppliers</div><div class="grp-tiles">'+tile('Photos loaded',haveP,pct(haveP,media.length||1))+tile('Priced suppliers',provPriced,pct(provPriced,prov.length||1))+'</div></div>';
   document.getElementById('tiles').innerHTML=html;
   var sl=document.getElementById('sumline');
@@ -294,7 +294,7 @@ function renderRegionTable(){
   function bar(cls,n,t){var p=pct(n,t);return '<div class="mini '+cls+'"><i style="width:'+p+'%"></i><span>'+n+'/'+t+' · '+p+'%</span></div>';}
   var BEYOND={'Botswana':1,'Chobe':1,'Okavango Delta':1,'Victoria Falls':1};
   function agg(arr){var t={region:'',n:0,sto27:0,rack27:0,sto26:0,rack26:0,stoAny:0,gap:0};arr.forEach(function(g){t.n+=g.n;t.sto27+=g.sto27;t.rack27+=g.rack27;t.sto26+=g.sto26;t.rack26+=g.rack26;t.stoAny+=g.stoAny;t.gap+=g.gap;});return t;}
-  function row(g,sub){var name=sub?g.region:'<a class="rlink" href="#" data-region="'+enc(g.region)+'">'+g.region+'</a>';var gapc=sub?g.gap:(g.gap?'<span class="pill gap">'+g.gap+'</span>':'0');return '<tr'+(sub?' class="subtot"':'')+'><td>'+name+'</td><td class="cell">'+g.n+'</td><td>'+bar('sto',g.sto27,g.n)+'</td><td>'+bar('rack',g.rack27,g.n)+'</td><td>'+bar('sto dim',g.sto26,g.n)+'</td><td>'+bar('rack dim',g.rack26,g.n)+'</td><td class="cell">'+g.stoAny+'</td><td class="cell">'+gapc+'</td></tr>';}
+  function row(g,sub){var name=sub?g.region:'<a class="rlink" href="#" data-region="'+enc(g.region)+'">'+g.region+'</a>';var gapc=sub?g.gap:(g.gap?'<span class="pill gap">'+g.gap+'</span>':'0');return '<tr'+(sub?' class="subtot"':'')+'><td>'+name+'</td><td class="cell">'+g.n+'</td><td>'+bar('sto dim',g.sto26,g.n)+'</td><td>'+bar('rack dim',g.rack26,g.n)+'</td><td>'+bar('sto',g.sto27,g.n)+'</td><td>'+bar('rack',g.rack27,g.n)+'</td><td class="cell">'+g.stoAny+'</td><td class="cell">'+gapc+'</td></tr>';}
   function ghead(label){return '<tr class="grouprow"><td colspan="8">'+label+'</td></tr>';}
   var nam=list.filter(function(g){return !BEYOND[g.region];});
   var bey=list.filter(function(g){return BEYOND[g.region];});
@@ -358,7 +358,7 @@ function render(){
     if(r.orphan)tag+='<span class="type">orphan</span>';
     var rateCells;
     if(r.provider){rateCells='<td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td>';}
-    else{rateCells='<td class="cell">'+rateDot(r.sto27,r.stoLegacy)+'</td><td class="cell">'+rateDot(r.rack27,r.rackLegacy)+'</td><td class="cell">'+rateDot(r.sto26,r.stoLegacy)+'</td><td class="cell">'+rateDot(r.rack26,r.rackLegacy)+'</td>';}
+    else{rateCells='<td class="cell">'+rateDot(r.sto26,r.stoLegacy)+'</td><td class="cell">'+rateDot(r.rack26,r.rackLegacy)+'</td><td class="cell">'+rateDot(r.sto27,r.stoLegacy)+'</td><td class="cell">'+rateDot(r.rack27,r.rackLegacy)+'</td>';}
     return '<tr><td>'+nm+tag+'</td><td>'+(r.region||'<span style="color:#b9b1a9">—</span>')+'</td>'+rateCells+'<td class="cell">'+photoCell(r)+'</td><td class="cell">'+actCell(r)+'</td><td class="cell">'+srcCell(r)+'</td><td class="notes">'+noteCell(r)+'</td></tr>';
   }).join('');
   document.getElementById('count').textContent=rows.length+' of '+DATA.rows.length+' shown';
