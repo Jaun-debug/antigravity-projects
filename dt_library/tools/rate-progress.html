@@ -292,7 +292,6 @@ function renderRegionTable(){
   var list=Object.keys(byr).map(function(k){return byr[k];}).filter(function(g){return g.n>0;});
   list.sort(function(a,b){return b.gap-a.gap||b.n-a.n||a.region.localeCompare(b.region);});
   function bar(cls,n,t){var p=pct(n,t);return '<div class="mini '+cls+'"><i style="width:'+p+'%"></i><span>'+n+'/'+t+' · '+p+'%</span></div>';}
-  var BEYOND={'Botswana':1,'Chobe':1,'Okavango Delta':1,'Victoria Falls':1};
   function agg(arr){var t={region:'',n:0,sto27:0,rack27:0,sto26:0,rack26:0,stoAny:0,gap:0};arr.forEach(function(g){t.n+=g.n;t.sto27+=g.sto27;t.rack27+=g.rack27;t.sto26+=g.sto26;t.rack26+=g.rack26;t.stoAny+=g.stoAny;t.gap+=g.gap;});return t;}
   function row(g,sub){var name=sub?g.region:'<a class="rlink" href="#" data-region="'+enc(g.region)+'">'+g.region+'</a>';var gapc=sub?g.gap:(g.gap?'<span class="pill gap">'+g.gap+'</span>':'0');return '<tr'+(sub?' class="subtot"':'')+'><td>'+name+'</td><td class="cell">'+g.n+'</td><td>'+bar('sto dim',g.sto26,g.n)+'</td><td>'+bar('rack dim',g.rack26,g.n)+'</td><td>'+bar('sto',g.sto27,g.n)+'</td><td>'+bar('rack',g.rack27,g.n)+'</td><td class="cell">'+g.stoAny+'</td><td class="cell">'+gapc+'</td></tr>';}
   function ghead(label){return '<tr class="grouprow"><td colspan="8">'+label+'</td></tr>';}
@@ -305,6 +304,10 @@ function renderRegionTable(){
   var rm=document.getElementById('regionMini');if(rm)rm.textContent=' · '+list.length+' regions · '+agg(list).gap+' priority-gap lodges';
   document.querySelectorAll('#rtb a[data-region]').forEach(function(a){a.addEventListener('click',function(ev){ev.preventDefault();document.getElementById('region').value=dec(a.dataset.region);document.getElementById('detail').scrollIntoView({behavior:'smooth'});render();});});
 }
+/* Botswana, the Delta, Chobe and Vic Falls price in US$, so they are read as a
+   separate block from the N$ regions — in the region summary and, below, in the
+   full property list. */
+var BEYOND={'Botswana':1,'Chobe':1,'Okavango Delta':1,'Victoria Falls':1};
 function enc(s){return (s||'').replace(/"/g,'&quot;');}
 function dec(s){return (s||'').replace(/&quot;/g,'"');}
 
@@ -352,7 +355,7 @@ function render(){
     return true;
   });
   rows.sort(function(a,b){var x=a[sortK],y=b[sortK];x=(x===null||x===undefined)?-1:x;y=(y===null||y===undefined)?-1:y;if(typeof x==='boolean')x=x?1:0;if(typeof y==='boolean')y=y?1:0;if(x<y)return -sortDir;if(x>y)return sortDir;return 0;});
-  document.getElementById('tb').innerHTML=rows.map(function(r){
+  function detailRow(r){
     var nm=r.url?'<a class="rlink" href="'+r.url+'" target="_blank" rel="noopener">'+r.name+'</a>':r.name;
     var tag=(r.category&&r.category!=='Lodge')?'<span class="type">'+r.category+'</span>':'';
     if(r.orphan)tag+='<span class="type">orphan</span>';
@@ -360,7 +363,16 @@ function render(){
     if(r.provider){rateCells='<td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td>';}
     else{rateCells='<td class="cell">'+rateDot(r.sto26,r.stoLegacy)+'</td><td class="cell">'+rateDot(r.rack26,r.rackLegacy)+'</td><td class="cell">'+rateDot(r.sto27,r.stoLegacy)+'</td><td class="cell">'+rateDot(r.rack27,r.rackLegacy)+'</td>';}
     return '<tr><td>'+nm+tag+'</td><td>'+(r.region||'<span style="color:#b9b1a9">—</span>')+'</td>'+rateCells+'<td class="cell">'+photoCell(r)+'</td><td class="cell">'+actCell(r)+'</td><td class="cell">'+srcCell(r)+'</td><td class="notes">'+noteCell(r)+'</td></tr>';
-  }).join('');
+  }
+  /* Same split as the region summary: the US$ regions read as their own block so
+     they aren't mixed in among the N$ ones. */
+  function dhead(label,n){return '<tr class="grouprow"><td colspan="10">'+label+' <span style="opacity:.6">· '+n+'</span></td></tr>';}
+  var dNam=rows.filter(function(r){return !BEYOND[r.region];});
+  var dBey=rows.filter(function(r){return BEYOND[r.region];});
+  var dhtml='';
+  if(dNam.length) dhtml+=dhead('Namibia · N$',dNam.length)+dNam.map(detailRow).join('');
+  if(dBey.length) dhtml+=dhead('Botswana · Chobe · Okavango Delta · Victoria Falls · US$',dBey.length)+dBey.map(detailRow).join('');
+  document.getElementById('tb').innerHTML=dhtml;
   document.getElementById('count').textContent=rows.length+' of '+DATA.rows.length+' shown';
   tiles(rows.length?rows:DATA.rows);
 }
