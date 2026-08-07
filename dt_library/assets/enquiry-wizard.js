@@ -364,14 +364,14 @@
         if(!document.getElementById("nr-yrdock-css")){
           var st=document.createElement("style"); st.id="nr-yrdock-css";
           st.textContent=
-            "#nr-yrdock{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:1200;"
-            +"display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:12px 0 0 12px;"
-            +"background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);"
-            +"border:1px solid rgba(200,90,23,.35);border-right:0;box-shadow:0 10px 30px rgba(0,0,0,.14)}"
+            /* no panel behind the pills — they carry their own blurred backdrop */
+            "#nr-yrdock{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:1200;"
+            +"display:flex;flex-direction:column;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
             +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
-            +"#nr-yrdock button{white-space:nowrap;width:100%;text-align:center}"
-            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;right:10px;transform:none;"
-            +"border-radius:12px;border-right:1px solid rgba(200,90,23,.35);padding:8px}"
+            +"#nr-yrdock button{white-space:nowrap;width:100%;text-align:center;"
+            +"background:rgba(255,255,255,.82);box-shadow:0 4px 14px rgba(0,0,0,.10)}"
+            +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(200,90,23,.85);color:#fff}"
+            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;right:10px;transform:none}"
             +"#nr-yrdock>div{flex-direction:row}}"
             +"@media print{#nr-yrdock{display:none}}";
           (document.head||document.documentElement).appendChild(st);
