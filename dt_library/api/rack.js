@@ -2597,6 +2597,10 @@ Object.assign(VF_RACK, NAM_RACK);
 // the owner area (Redis) and the inline maps — so it can only ever fill a gap,
 // never override a rack the supplier or the owner has set.
 const LEGACY_RACK_BY_YEAR = {};
+// Rack for lodges the API held nothing for: the supplier's own published rack
+// where the sheet prints one, otherwise the net rate at the house +20% ceiling.
+// Consulted LAST, so a real rack always wins.
+const SHEET_RACK_BY_YEAR = {};
 
 function parsePrice(s) {
   const str = String(s == null ? '' : s).replace(/,/g, '').replace(/[^\d.\-]/g, '');
@@ -3918,6 +3922,10 @@ module.exports = async (req, res) => {
         } catch (e) {}
       }
       // Derived rack counts as coverage, but only where nothing live holds one.
+      for (const s of Object.keys(SHEET_RACK_BY_YEAR)) {
+        if (cov[s]) continue;
+        for (const y of Object.keys(SHEET_RACK_BY_YEAR[s])) add(s, y, false, SHEET_RACK_BY_YEAR[s][y]);
+      }
       for (const s of Object.keys(LEGACY_RACK_BY_YEAR)) {
         if (cov[s]) continue;
         for (const y of Object.keys(LEGACY_RACK_BY_YEAR[s])) add(s, y, false, LEGACY_RACK_BY_YEAR[s][y]);
@@ -3970,6 +3978,12 @@ module.exports = async (req, res) => {
           doc = ly ? LEGACY_RACK_BY_YEAR[slug][ly] : null;
           resolved = { doc: doc, year: ly, years: lys };
         }
+        if (!doc && SHEET_RACK_BY_YEAR[slug]) {
+          const hys = Object.keys(SHEET_RACK_BY_YEAR[slug]).sort();
+          const hy = yearReq ? (SHEET_RACK_BY_YEAR[slug][yearReq] ? yearReq : '') : hys[0];
+          doc = hy ? SHEET_RACK_BY_YEAR[slug][hy] : null;
+          resolved = { doc: doc, year: hy, years: hys };
+        }
       }
       // full=1 -> the raw sectioned doc (used by lodge pages to render season tables).
       if (req.query && req.query.full) {
@@ -3984,6 +3998,7 @@ module.exports = async (req, res) => {
     for (const s of Object.keys(VF_RACK)) { if (!lodges[s]) lodges[s] = flatten(VF_RACK[s]); }
     for (const s of Object.keys(DDS_RACK_BY_YEAR)) { if (!lodges[s]) lodges[s] = flatten(DDS_RACK_BY_YEAR[s][Object.keys(DDS_RACK_BY_YEAR[s]).sort()[0]]); }
     for (const s of Object.keys(LEGACY_RACK_BY_YEAR)) { if (!lodges[s]) lodges[s] = flatten(LEGACY_RACK_BY_YEAR[s][Object.keys(LEGACY_RACK_BY_YEAR[s]).sort()[0]]); }
+    for (const s of Object.keys(SHEET_RACK_BY_YEAR)) { if (!lodges[s]) lodges[s] = flatten(SHEET_RACK_BY_YEAR[s][Object.keys(SHEET_RACK_BY_YEAR[s]).sort()[0]]); }
     return res.status(200).json({ ok: true, lodges: lodges });
   } catch (e) {
     return res.status(200).json({ ok: true, lodges: {}, error: String(e && e.message ? e.message : e) });
@@ -13228,4 +13243,5731 @@ Object.assign(LEGACY_RACK_BY_YEAR, {
    ]
   }
  }
+});
+
+// --------------------------------------------------------------------------
+// Rack for the sheet-only lodges. Where the supplier sheet prints its own rack
+// column that is what appears here; where it prints only a net rate the rack is
+// that rate at the house +20% ceiling, and says so in its note.
+// --------------------------------------------------------------------------
+Object.assign(SHEET_RACK_BY_YEAR, {
+  "chobe-princess": {
+    "2026": {
+      "name": "Chobe Princess",
+      "region": "Chobe",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "1 March – 30 November 2026",
+          "rows": [
+            [
+              "Cabin — PP Sharing",
+              "13,432"
+            ]
+          ]
+        },
+        {
+          "title": "1 December 2026 – 28 February 2027",
+          "rows": [
+            [
+              "Cabin — PP Sharing",
+              "10,896"
+            ]
+          ]
+        },
+        {
+          "title": "Levy & Guide",
+          "rows": [
+            [
+              "Conservation & Community Levy (pppn)",
+              "150"
+            ],
+            [
+              "Tour Guide (per night, at Ichingo)",
+              "3,800"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ichingo-chobe-river-lodge": {
+    "2026": {
+      "name": "Ichingo Chobe River Lodge",
+      "region": "Chobe",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "1 March – 30 November 2026",
+          "rows": [
+            [
+              "PP Sharing",
+              "9,247"
+            ]
+          ]
+        },
+        {
+          "title": "1 December 2026 – 28 February 2027",
+          "rows": [
+            [
+              "PP Sharing",
+              "8,556"
+            ]
+          ]
+        },
+        {
+          "title": "Levy & Guide",
+          "rows": [
+            [
+              "Conservation & Community Levy (pppn)",
+              "150"
+            ],
+            [
+              "Guide Tent (per night)",
+              "3,800"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "zambezi-queen": {
+    "2026": {
+      "name": "Zambezi Queen",
+      "region": "Chobe",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "1 March – 30 November 2026",
+          "rows": [
+            [
+              "Suite — PP Sharing",
+              "17,570"
+            ],
+            [
+              "Luxury Suite — PP Sharing",
+              "20,739"
+            ]
+          ]
+        },
+        {
+          "title": "1 December 2026 – 28 February 2027",
+          "rows": [
+            [
+              "Suite — PP Sharing",
+              "15,819"
+            ],
+            [
+              "Luxury Suite — PP Sharing",
+              "18,662"
+            ]
+          ]
+        },
+        {
+          "title": "Levy & Guide",
+          "rows": [
+            [
+              "Conservation & Community Levy (pppn)",
+              "250"
+            ],
+            [
+              "Tour Guide Cabin (per night, 2–9 suites)",
+              "4,800"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "palmwag-under-canvas-sleep-out": {
+    "2026": {
+      "name": "Palmwag Under-Canvas Sleep-Out",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "STO 25% Rate -- All-Inclusive Sleep-Out",
+          "rows": [
+            [
+              "Sharing/Single tent pp -- meals, beverages and activities included",
+              "4,995"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "dead-valley-lodge": {
+    "2026": {
+      "name": "Dead Valley Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "Low Season (1 Nov 2025 – 31 May 2026)",
+          "rows": [
+            [
+              "Per Person Sharing",
+              "4,400"
+            ],
+            [
+              "Per Person Single",
+              "4,900"
+            ]
+          ]
+        },
+        {
+          "title": "High Season (1 Jun – 31 Oct 2026)",
+          "rows": [
+            [
+              "Per Person Sharing",
+              "6,000"
+            ],
+            [
+              "Per Person Single",
+              "6,300"
+            ]
+          ]
+        },
+        {
+          "title": "Low Season (1 Nov 2026 – 31 May 2027)",
+          "rows": [
+            [
+              "Per Person Sharing",
+              "4,700"
+            ],
+            [
+              "Per Person Single",
+              "5,200"
+            ]
+          ]
+        },
+        {
+          "title": "Excursions (1 Jun 2026 – 31 May 2027, STO less 15%)",
+          "rows": [
+            [
+              "Sossusvlei Scenic Sunrise Drive",
+              "1,350"
+            ],
+            [
+              "Sossusvlei Scenic Sunset Drive",
+              "1,350"
+            ],
+            [
+              "Sunset Elim Dune Drive / Guided Walk",
+              "850"
+            ],
+            [
+              "Sesriem Canyon",
+              "700"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "windpomp-14-sea-side-camp": {
+    "2026": {
+      "name": "Windpomp 14 Sea Side Camp",
+      "region": "Swakopmund",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "Beachfront Units",
+          "rows": [
+            [
+              "Adult — Off Season",
+              "310"
+            ],
+            [
+              "Child 6–15 — Off Season",
+              "200"
+            ],
+            [
+              "Child 0–5 — Off Season",
+              "50"
+            ],
+            [
+              "Adult — Peak Season",
+              "340"
+            ],
+            [
+              "Child 6–15 — Peak Season",
+              "270"
+            ],
+            [
+              "Child 0–5 — Peak Season",
+              "85"
+            ]
+          ]
+        },
+        {
+          "title": "Middle Row Units",
+          "rows": [
+            [
+              "Adult — Off Season",
+              "280"
+            ],
+            [
+              "Child 6–15 — Off Season",
+              "195"
+            ],
+            [
+              "Child 0–5 — Off Season",
+              "50"
+            ],
+            [
+              "Adult — Peak Season",
+              "325"
+            ],
+            [
+              "Child 6–15 — Peak Season",
+              "260"
+            ],
+            [
+              "Child 0–5 — Peak Season",
+              "75"
+            ]
+          ]
+        },
+        {
+          "title": "Back Row Units",
+          "rows": [
+            [
+              "Adult — Off Season",
+              "260"
+            ],
+            [
+              "Child 6–15 — Off Season",
+              "190"
+            ],
+            [
+              "Child 0–5 — Off Season",
+              "50"
+            ],
+            [
+              "Adult — Peak Season",
+              "315"
+            ],
+            [
+              "Child 6–15 — Peak Season",
+              "250"
+            ],
+            [
+              "Child 0–5 — Peak Season",
+              "70"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "daan-viljoen-lodge": {
+    "2026": {
+      "name": "Daan Viljoen Lodge",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "Standard Chalet",
+          "rows": [
+            [
+              "Adult Double Room",
+              "2,400"
+            ],
+            [
+              "Adult Single Room",
+              "1,550"
+            ],
+            [
+              "Child Double Room (6–15)",
+              "1,660"
+            ],
+            [
+              "Child Single Room (6–15)",
+              "840"
+            ]
+          ]
+        },
+        {
+          "title": "Deluxe Chalet (sleeps 3)",
+          "rows": [
+            [
+              "Adult Double Room",
+              "2,740"
+            ],
+            [
+              "Adult Single Room",
+              "1,900"
+            ],
+            [
+              "Children (6–15)",
+              "590"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Extras",
+          "rows": [
+            [
+              "Dinner (per person, tour groups)",
+              "440"
+            ],
+            [
+              "Tour Guide & Driver Accommodation (pp)",
+              "800"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "sesriem-oshana-campsite": {
+    "2026": {
+      "name": "Sesriem Oshana Campsite",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "1 Nov 2025 – 31 May 2026",
+          "rows": [
+            [
+              "Per Person",
+              "440"
+            ],
+            [
+              "Child 6–15",
+              "220"
+            ]
+          ]
+        },
+        {
+          "title": "1 Jun – 31 Oct 2026",
+          "rows": [
+            [
+              "Per Person",
+              "560"
+            ]
+          ]
+        },
+        {
+          "title": "1 Nov 2026 – 31 May 2027",
+          "rows": [
+            [
+              "Per Person",
+              "470"
+            ],
+            [
+              "Child 6–15",
+              "240"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "daan-viljoen-camping": {
+    "2026": {
+      "name": "Daan Viljoen Camping",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "Camping Rates (2026)",
+          "rows": [
+            [
+              "Single Camp",
+              "350"
+            ],
+            [
+              "Double Camp",
+              "510"
+            ],
+            [
+              "Extra per person",
+              "180"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "nkasa-linyanti": {
+    "2026": {
+      "name": "Nkasa Linyanti",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Nkasa Linyanti — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "10,075.20"
+            ],
+            [
+              "Single Supplement",
+              "4,042.80"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Nkasa Linyanti — Shoulder High1-31 May",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "12,523.20"
+            ],
+            [
+              "Single Supplement",
+              "5,025.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Nkasa Linyanti — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "14,966.40"
+            ],
+            [
+              "Single Supplement",
+              "6,006"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "Nkasa Linyanti — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "16,075.20"
+            ],
+            [
+              "Single Supplement",
+              "6,451.20"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "10,075.20"
+            ],
+            [
+              "Single Supplement",
+              "4,042.80"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder High1-31 May",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "12,523.20"
+            ],
+            [
+              "Single Supplement",
+              "5,025.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "14,966.40"
+            ],
+            [
+              "Single Supplement",
+              "6,006"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "16,075.20"
+            ],
+            [
+              "Single Supplement",
+              "6,451.20"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "camp-kipwe": {
+    "2026": {
+      "name": "Camp Kipwe",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season STO 15%",
+          "rows": [
+            [
+              "9 x Bungalows — DBB p/p Sharing",
+              "5,172"
+            ],
+            [
+              "9 x Bungalows — DBB Single Person",
+              "6,976.80"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Sharing p/p",
+              "15,157.20"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Single",
+              "18,523.20"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Sharing p/p",
+              "22,002"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Single",
+              "27,204"
+            ],
+            [
+              "1 x Kipwe Suite — DBB p/p Sharing",
+              "8,710.80"
+            ],
+            [
+              "1 x Kipwe Suite — DBB Single Person",
+              "11,872.80"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "22,195.20"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Single",
+              "28,285.20"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "32,528.40"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Single",
+              "41,830.80"
+            ],
+            [
+              "2 x Luxury Suites — DBB p/p Sharing",
+              "12,729.60"
+            ],
+            [
+              "2 x Luxury Suites — DBB Single Person",
+              "17,310"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "30,375.60"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Single",
+              "39,280.80"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "44,737.20"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Single",
+              "58,262.40"
+            ]
+          ]
+        },
+        {
+          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — High Season STO 15%",
+          "rows": [
+            [
+              "9 x Bungalows — DBB p/p Sharing",
+              "6,834"
+            ],
+            [
+              "9 x Bungalows — DBB Single Person",
+              "10,118.40"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Sharing p/p",
+              "18,462"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Single",
+              "23,174.40"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Sharing p/p",
+              "26,928"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Single",
+              "34,149.60"
+            ],
+            [
+              "1 x Kipwe Suite — DBB p/p Sharing",
+              "10,435.20"
+            ],
+            [
+              "1 x Kipwe Suite — DBB Single Person",
+              "15,096"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "25,642.80"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Single",
+              "33,088.80"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "37,730.40"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Single",
+              "49,021.20"
+            ],
+            [
+              "2 x Luxury Suites — DBB p/p Sharing",
+              "15,106.80"
+            ],
+            [
+              "2 x Luxury Suites — DBB Single Person",
+              "21,195.60"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "35,088"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Single",
+              "45,400.80"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "51,867.60"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Single",
+              "67,473.60"
+            ]
+          ]
+        },
+        {
+          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — Low Season NETT",
+          "rows": [
+            [
+              "Child (4-12 yrs) — DBB per night",
+              "3,132"
+            ],
+            [
+              "Child (4-12 yrs) — 2-Night FI Package",
+              "9,828"
+            ],
+            [
+              "Child (4-12 yrs) — 3-Night FI Package",
+              "13,428"
+            ]
+          ]
+        },
+        {
+          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — High Season NETT",
+          "rows": [
+            [
+              "Child (4-12 yrs) — DBB per night",
+              "3,132"
+            ],
+            [
+              "Child (4-12 yrs) — 2-Night FI Package",
+              "9,828"
+            ],
+            [
+              "Child (4-12 yrs) — 3-Night FI Package",
+              "13,428"
+            ]
+          ]
+        },
+        {
+          "title": "Guide & Pilot Rates — Rate (N$)",
+          "rows": [
+            [
+              "Tour Guide Room (per Guide/Pilot per night)",
+              "2,652"
+            ]
+          ]
+        },
+        {
+          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season RACK",
+          "rows": [
+            [
+              "9 x Bungalows — DBB p/p Sharing",
+              "6,084"
+            ],
+            [
+              "9 x Bungalows — DBB Single Person",
+              "8,208"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Sharing p/p",
+              "17,832"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Single",
+              "21,792"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Sharing p/p",
+              "25,884"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Single",
+              "32,004"
+            ],
+            [
+              "1 x Kipwe Suite — DBB p/p Sharing",
+              "10,248"
+            ],
+            [
+              "1 x Kipwe Suite — DBB Single Person",
+              "13,968"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "26,112"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Single",
+              "33,276"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "38,268"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Single",
+              "49,212"
+            ],
+            [
+              "2 x Luxury Suites — DBB p/p Sharing",
+              "14,976"
+            ],
+            [
+              "2 x Luxury Suites — DBB Single Person",
+              "20,364"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "35,736"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Single",
+              "46,212"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "52,632"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Single",
+              "68,544"
+            ]
+          ]
+        },
+        {
+          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — High Season RACK",
+          "rows": [
+            [
+              "9 x Bungalows — DBB p/p Sharing",
+              "8,040"
+            ],
+            [
+              "9 x Bungalows — DBB Single Person",
+              "11,904"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Sharing p/p",
+              "21,720"
+            ],
+            [
+              "Bungalow 2-Night FI Package — Single",
+              "27,264"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Sharing p/p",
+              "31,680"
+            ],
+            [
+              "Bungalow 3-Night FI Package — Single",
+              "40,176"
+            ],
+            [
+              "1 x Kipwe Suite — DBB p/p Sharing",
+              "12,276"
+            ],
+            [
+              "1 x Kipwe Suite — DBB Single Person",
+              "17,760"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "30,168"
+            ],
+            [
+              "Kipwe Suite 2-Night FI Package — Single",
+              "38,928"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "44,388"
+            ],
+            [
+              "Kipwe Suite 3-Night FI Package — Single",
+              "57,672"
+            ],
+            [
+              "2 x Luxury Suites — DBB p/p Sharing",
+              "17,772"
+            ],
+            [
+              "2 x Luxury Suites — DBB Single Person",
+              "24,936"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "41,280"
+            ],
+            [
+              "Luxury Suite 2-Night FI Package — Single",
+              "53,412"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "61,020"
+            ],
+            [
+              "Luxury Suite 3-Night FI Package — Single",
+              "79,380"
+            ]
+          ]
+        },
+        {
+          "title": "Activities offered at Camp Kipwe — Nett Price (N$)",
+          "rows": [
+            [
+              "Nature Drive (guided, Morning)",
+              "1,632"
+            ],
+            [
+              "Twyfelfontein Excursion (guided, Afternoon)",
+              "1,332"
+            ],
+            [
+              "Damara Living Museum Entry",
+              "384"
+            ],
+            [
+              "All-Inclusive Drinks Add-On",
+              "1,440"
+            ]
+          ]
+        },
+        {
+          "title": "Transfers (Charged pp one-way) — Nett Price (N$)",
+          "rows": [
+            [
+              "Twyfelfontein Airstrip Transfer",
+              "474"
+            ],
+            [
+              "!Doro Nawas Transfer",
+              "558"
+            ],
+            [
+              "Damaraland Camp Transfer",
+              "834"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Price (N$)",
+          "rows": [
+            [
+              "Breakfast",
+              "474"
+            ],
+            [
+              "Lunch",
+              "450"
+            ],
+            [
+              "Lunch Pack",
+              "306"
+            ],
+            [
+              "Dinner (3 Course)",
+              "1,068"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "mowani-mountain-camp": {
+    "2026": {
+      "name": "Mowani Mountain Camp",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season STO 15%",
+          "rows": [
+            [
+              "8 x View Rooms — DBB p/p Sharing",
+              "6,058.80"
+            ],
+            [
+              "8 x View Rooms — DBB Single Person",
+              "8,180.40"
+            ],
+            [
+              "View Room 2-Night FI Package — Sharing p/p",
+              "16,922.40"
+            ],
+            [
+              "View Room 2-Night FI Package — Single",
+              "20,950.80"
+            ],
+            [
+              "View Room 3-Night FI Package — Sharing p/p",
+              "24,663.60"
+            ],
+            [
+              "View Room 3-Night FI Package — Single",
+              "30,783.60"
+            ],
+            [
+              "4 x Superior View Rooms — DBB p/p Sharing",
+              "6,528"
+            ],
+            [
+              "4 x Superior View Rooms — DBB Single Person",
+              "8,792.40"
+            ],
+            [
+              "Superior View 2-Night FI Package — Sharing p/p",
+              "17,829.60"
+            ],
+            [
+              "Superior View 2-Night FI Package — Single",
+              "22,154.40"
+            ],
+            [
+              "Superior View 3-Night FI Package — Sharing p/p",
+              "26,010"
+            ],
+            [
+              "Superior View 3-Night FI Package — Single",
+              "32,619.60"
+            ],
+            [
+              "1 x Luxury Room — DBB p/p Sharing",
+              "6,824.40"
+            ],
+            [
+              "1 x Luxury Room — DBB Single Person",
+              "9,211.20"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "18,554.40"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Single",
+              "23,103.60"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "27,081.60"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Single",
+              "33,997.20"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "7,772.40"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB Single Person",
+              "10,476"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "20,472"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Single",
+              "25,653.60"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "29,926.80"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Single",
+              "37,821.60"
+            ],
+            [
+              "1 x Mountain Suite — DBB p/p Sharing",
+              "12,852"
+            ],
+            [
+              "1 x Mountain Suite — DBB Single Person",
+              "17,473.20"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "30,631.20"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Single",
+              "39,627.60"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "45,135.60"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Single",
+              "58,783.20"
+            ]
+          ]
+        },
+        {
+          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — High Season STO 15%",
+          "rows": [
+            [
+              "8 x View Rooms — DBB p/p Sharing",
+              "8,119.20"
+            ],
+            [
+              "8 x View Rooms — DBB Single Person",
+              "11,077.20"
+            ],
+            [
+              "View Room 2-Night FI Package — Sharing p/p",
+              "21,022.80"
+            ],
+            [
+              "View Room 2-Night FI Package — Single",
+              "26,703.60"
+            ],
+            [
+              "View Room 3-Night FI Package — Sharing p/p",
+              "30,783.60"
+            ],
+            [
+              "View Room 3-Night FI Package — Single",
+              "39,444"
+            ],
+            [
+              "4 x Superior View Rooms — DBB p/p Sharing",
+              "8,710.80"
+            ],
+            [
+              "4 x Superior View Rooms — DBB Single Person",
+              "11,750.40"
+            ],
+            [
+              "Superior View 2-Night FI Package — Sharing p/p",
+              "22,236"
+            ],
+            [
+              "Superior View 2-Night FI Package — Single",
+              "28,060.80"
+            ],
+            [
+              "Superior View 3-Night FI Package — Sharing p/p",
+              "32,619.60"
+            ],
+            [
+              "Superior View 3-Night FI Package — Single",
+              "41,493.60"
+            ],
+            [
+              "1 x Luxury Room — DBB p/p Sharing",
+              "9,129.60"
+            ],
+            [
+              "1 x Luxury Room — DBB Single Person",
+              "12,301.20"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "23,174.40"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Single",
+              "29,305.20"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "33,966"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Single",
+              "43,238.40"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "10,006.80"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB Single Person",
+              "13,332"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "24,908.40"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Single",
+              "31,354.80"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "36,597.60"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Single",
+              "46,359.60"
+            ],
+            [
+              "1 x Mountain Suite — DBB p/p Sharing",
+              "15,249.60"
+            ],
+            [
+              "1 x Mountain Suite — DBB Single Person",
+              "20,574"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "35,394"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Single",
+              "45,808.80"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "52,326"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Single",
+              "68,054.40"
+            ]
+          ]
+        },
+        {
+          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — Low Season NETT",
+          "rows": [
+            [
+              "Child (4-12 yrs) — DBB per night",
+              "3,132"
+            ],
+            [
+              "Child (4-12 yrs) — 2-Night FI Package",
+              "9,828"
+            ],
+            [
+              "Child (4-12 yrs) — 3-Night FI Package",
+              "13,428"
+            ]
+          ]
+        },
+        {
+          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — High Season NETT",
+          "rows": [
+            [
+              "Child (4-12 yrs) — DBB per night",
+              "3,132"
+            ],
+            [
+              "Child (4-12 yrs) — 2-Night FI Package",
+              "9,828"
+            ],
+            [
+              "Child (4-12 yrs) — 3-Night FI Package",
+              "13,428"
+            ]
+          ]
+        },
+        {
+          "title": "Guide & Pilot Rates — Rate (N$)",
+          "rows": [
+            [
+              "Tour Guide Room (per Guide/Pilot per night)",
+              "2,652"
+            ]
+          ]
+        },
+        {
+          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season RACK",
+          "rows": [
+            [
+              "8 x View Rooms — DBB p/p Sharing",
+              "7,128"
+            ],
+            [
+              "8 x View Rooms — DBB Single Person",
+              "9,624"
+            ],
+            [
+              "View Room 2-Night FI Package — Sharing p/p",
+              "19,908"
+            ],
+            [
+              "View Room 2-Night FI Package — Single",
+              "24,648"
+            ],
+            [
+              "View Room 3-Night FI Package — Sharing p/p",
+              "29,016"
+            ],
+            [
+              "View Room 3-Night FI Package — Single",
+              "36,216"
+            ],
+            [
+              "4 x Superior View Rooms — DBB p/p Sharing",
+              "7,680"
+            ],
+            [
+              "4 x Superior View Rooms — DBB Single Person",
+              "10,344"
+            ],
+            [
+              "Superior View 2-Night FI Package — Sharing p/p",
+              "20,976"
+            ],
+            [
+              "Superior View 2-Night FI Package — Single",
+              "26,064"
+            ],
+            [
+              "Superior View 3-Night FI Package — Sharing p/p",
+              "30,600"
+            ],
+            [
+              "Superior View 3-Night FI Package — Single",
+              "38,376"
+            ],
+            [
+              "1 x Luxury Room — DBB p/p Sharing",
+              "8,028"
+            ],
+            [
+              "1 x Luxury Room — DBB Single Person",
+              "10,836"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "21,828"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Single",
+              "27,180"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "31,860"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Single",
+              "39,996"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "9,144"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB Single Person",
+              "12,324"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "24,084"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Single",
+              "30,180"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "35,208"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Single",
+              "44,496"
+            ],
+            [
+              "1 x Mountain Suite — DBB p/p Sharing",
+              "15,120"
+            ],
+            [
+              "1 x Mountain Suite — DBB Single Person",
+              "20,556"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "36,036"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Single",
+              "46,620"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "53,100"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Single",
+              "69,156"
+            ]
+          ]
+        },
+        {
+          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — High Season RACK",
+          "rows": [
+            [
+              "8 x View Rooms — DBB p/p Sharing",
+              "9,552"
+            ],
+            [
+              "8 x View Rooms — DBB Single Person",
+              "13,032"
+            ],
+            [
+              "View Room 2-Night FI Package — Sharing p/p",
+              "24,732"
+            ],
+            [
+              "View Room 2-Night FI Package — Single",
+              "31,416"
+            ],
+            [
+              "View Room 3-Night FI Package — Sharing p/p",
+              "36,216"
+            ],
+            [
+              "View Room 3-Night FI Package — Single",
+              "46,404"
+            ],
+            [
+              "4 x Superior View Rooms — DBB p/p Sharing",
+              "10,248"
+            ],
+            [
+              "4 x Superior View Rooms — DBB Single Person",
+              "13,824"
+            ],
+            [
+              "Superior View 2-Night FI Package — Sharing p/p",
+              "26,160"
+            ],
+            [
+              "Superior View 2-Night FI Package — Single",
+              "33,012"
+            ],
+            [
+              "Superior View 3-Night FI Package — Sharing p/p",
+              "38,376"
+            ],
+            [
+              "Superior View 3-Night FI Package — Single",
+              "48,816"
+            ],
+            [
+              "1 x Luxury Room — DBB p/p Sharing",
+              "10,740"
+            ],
+            [
+              "1 x Luxury Room — DBB Single Person",
+              "14,472"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "27,264"
+            ],
+            [
+              "Luxury Room 2-Night FI Package — Single",
+              "34,476"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "39,960"
+            ],
+            [
+              "Luxury Room 3-Night FI Package — Single",
+              "50,868"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "11,772"
+            ],
+            [
+              "1 x Rock Suite (Mini) — DBB Single Person",
+              "15,684"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "29,304"
+            ],
+            [
+              "Rock Suite 2-Night FI Package — Single",
+              "36,888"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "43,056"
+            ],
+            [
+              "Rock Suite 3-Night FI Package — Single",
+              "54,540"
+            ],
+            [
+              "1 x Mountain Suite — DBB p/p Sharing",
+              "17,940"
+            ],
+            [
+              "1 x Mountain Suite — DBB Single Person",
+              "24,204"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "41,640"
+            ],
+            [
+              "Mountain Suite 2-Night FI Package — Single",
+              "53,892"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "61,560"
+            ],
+            [
+              "Mountain Suite 3-Night FI Package — Single",
+              "80,064"
+            ]
+          ]
+        },
+        {
+          "title": "Activities offered at Mowani Mountain Camp — Nett Price (N$)",
+          "rows": [
+            [
+              "Nature Drive (guided, Morning)",
+              "1,632"
+            ],
+            [
+              "Twyfelfontein Excursion (guided, Afternoon)",
+              "1,332"
+            ],
+            [
+              "Damara Living Museum Entry",
+              "384"
+            ],
+            [
+              "All-Inclusive Drinks Add-On",
+              "1,440"
+            ]
+          ]
+        },
+        {
+          "title": "Transfers (Charged pp one-way) — Nett Price (N$)",
+          "rows": [
+            [
+              "Twyfelfontein Airstrip Transfer",
+              "474"
+            ],
+            [
+              "!Doro Nawas Transfer",
+              "558"
+            ],
+            [
+              "Damaraland Camp Transfer",
+              "834"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Price (N$)",
+          "rows": [
+            [
+              "Breakfast",
+              "474"
+            ],
+            [
+              "Lunch",
+              "450"
+            ],
+            [
+              "Lunch Pack",
+              "306"
+            ],
+            [
+              "Dinner (3 Course)",
+              "1,068"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "spitzkoppe-cabin-camp": {
+    "2026": {
+      "name": "Spitzkoppe Cabin Camp",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Cabin STO Rates 2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Per Person Sharing — Self-Catering",
+              "1,530"
+            ],
+            [
+              "Single Person — Self-Catering",
+              "2,856"
+            ],
+            [
+              "Child 3–12 Sharing with Adults (max 3)",
+              "765"
+            ],
+            [
+              "Child 3–12 Own Room (1st child)",
+              "1,530"
+            ],
+            [
+              "Child 3–12 Own Room (2nd/3rd child)",
+              "765"
+            ],
+            [
+              "Tour Guide Single",
+              "2,100"
+            ],
+            [
+              "Tour Guide Sharing",
+              "1,056"
+            ]
+          ]
+        },
+        {
+          "title": "Camp Service Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Scullery / Cutlery Usage Fee (per 2 pax per stay)",
+              "60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "spitzkoppe-restcamp": {
+    "2026": {
+      "name": "Spitzkoppe Restcamp",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Community Camping Rates 2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Adult Campsite Pitch — pppn",
+              "324"
+            ],
+            [
+              "Child 4–11 Campsite Pitch — pppn",
+              "216"
+            ]
+          ]
+        },
+        {
+          "title": "Day Visitor Permits — STO Rate (N$)",
+          "rows": [
+            [
+              "Day Visitor — Adult",
+              "204"
+            ],
+            [
+              "Day Visitor — Child 4–11",
+              "132"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "spitzkoppen-lodge": {
+    "2026": {
+      "name": "Spitzkoppen Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Lodge Rates 2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Per Person Sharing — DBB",
+              "6,630"
+            ],
+            [
+              "Single Person — DBB",
+              "9,690"
+            ],
+            [
+              "Child 6–11 Sharing with Adults — DBB",
+              "3,060"
+            ],
+            [
+              "Child 6–11 Own Room — DBB",
+              "4,794"
+            ],
+            [
+              "Tour Guide — DBB",
+              "2,880"
+            ]
+          ]
+        },
+        {
+          "title": "Spitzkoppe Excursions & Activities — STO Rate (N$)",
+          "rows": [
+            [
+              "Guided Walk Chain Tour (per person)",
+              "492"
+            ],
+            [
+              "Guided Drive — 4 Stop Excursion (per person)",
+              "492"
+            ],
+            [
+              "Top-Up Sunset Drive (added to drive, per person)",
+              "288"
+            ],
+            [
+              "Guided Cycling Tour (per person)",
+              "660"
+            ],
+            [
+              "Mountain Hike (per person)",
+              "828"
+            ],
+            [
+              "Lunch (standard dining)",
+              "444"
+            ],
+            [
+              "Lunch Pack (per person)",
+              "288"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "mushara-bush-camp": {
+    "2026": {
+      "name": "Mushara Bush Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Double Tent — Single Use DBB",
+              "3,840"
+            ],
+            [
+              "Double Tent — Sharing DBB",
+              "2,976"
+            ],
+            [
+              "Child Rate 4–12 years sharing — DBB",
+              "1,344"
+            ],
+            [
+              "Single Guide Room — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Double Tent — Single Use DBB",
+              "4,128"
+            ],
+            [
+              "Double Tent — Sharing DBB",
+              "3,216"
+            ],
+            [
+              "Child Rate 4–12 years sharing — DBB",
+              "1,344"
+            ],
+            [
+              "Single Guide Room — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "Etosha Game Drives & Activities — STO Rate (N$)",
+          "rows": [
+            [
+              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "1,482"
+            ],
+            [
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "11,832"
+            ],
+            [
+              "Pilot Separate Airstrip Transfer (per transfer)",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "Dining & Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Lunch (per person)",
+              "360"
+            ],
+            [
+              "Lunch Pack (per person)",
+              "240"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "mushara-lodge": {
+    "2026": {
+      "name": "Mushara Lodge",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Double Chalet — Single Use DBB",
+              "5,280"
+            ],
+            [
+              "Double Chalet — Sharing DBB",
+              "3,936"
+            ],
+            [
+              "Triple Room — Sharing DBB",
+              "3,936"
+            ],
+            [
+              "Family House — Sharing pp DBB",
+              "3,936"
+            ],
+            [
+              "Single Guide Room — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Double Chalet — Single Use DBB",
+              "5,664"
+            ],
+            [
+              "Double Chalet — Sharing DBB",
+              "4,224"
+            ],
+            [
+              "Triple Room — Sharing DBB",
+              "4,224"
+            ],
+            [
+              "Family House — Sharing pp DBB",
+              "4,224"
+            ],
+            [
+              "Single Guide Room — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "Etosha Game Drives & Activities — STO Rate (N$)",
+          "rows": [
+            [
+              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "1,482"
+            ],
+            [
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "11,832"
+            ],
+            [
+              "Pilot Separate Airstrip Transfer (per transfer)",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "Dining & Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Lunch (per person)",
+              "360"
+            ],
+            [
+              "Lunch Pack (per person)",
+              "240"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "mushara-outpost": {
+    "2026": {
+      "name": "Mushara Outpost",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Double Tent — Single Use DBB",
+              "5,472"
+            ],
+            [
+              "Double Tent — Sharing DBB",
+              "4,176"
+            ],
+            [
+              "Double Tent — Single Use Fully Inclusive",
+              "9,984"
+            ],
+            [
+              "Double Tent — Sharing Fully Inclusive",
+              "7,632"
+            ],
+            [
+              "Single Guide Tent — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Double Tent — Single Use DBB",
+              "5,856"
+            ],
+            [
+              "Double Tent — Sharing DBB",
+              "4,512"
+            ],
+            [
+              "Double Tent — Single Use Fully Inclusive",
+              "10,656"
+            ],
+            [
+              "Double Tent — Sharing Fully Inclusive",
+              "8,256"
+            ],
+            [
+              "Single Guide Tent — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "Etosha Game Drives & Activities — STO Rate (N$)",
+          "rows": [
+            [
+              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "1,482"
+            ],
+            [
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "11,832"
+            ],
+            [
+              "Pilot Separate Airstrip Transfer (per transfer)",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "Dining & Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Lunch (per person)",
+              "360"
+            ],
+            [
+              "Lunch Pack (per person)",
+              "240"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-bush-camp": {
+    "2026": {
+      "name": "Onguma Bush Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Per Person Sharing (DBB) — Rate (N$)",
+          "rows": [
+            [
+              "3 Rondavels",
+              "2,697.60"
+            ],
+            [
+              "Rondavel — Child (3–11)",
+              "1,686"
+            ],
+            [
+              "3 Loft & 3 Family Rooms",
+              "3,120"
+            ],
+            [
+              "Loft / Family — Child (3–11)",
+              "1,950"
+            ],
+            [
+              "8 Deluxe Rooms",
+              "3,936"
+            ],
+            [
+              "Deluxe — Child (3–11)",
+              "2,460"
+            ],
+            [
+              "1 Settler's Room",
+              "4,118.40"
+            ],
+            [
+              "Settler's — Child (3–11)",
+              "2,574"
+            ]
+          ]
+        },
+        {
+          "title": "Single Supplement (per night) — Rate (N$)",
+          "rows": [
+            [
+              "Rondavels",
+              "1,017.60"
+            ],
+            [
+              "Loft, Family, Deluxe & Settler's",
+              "1,324.80"
+            ]
+          ]
+        },
+        {
+          "title": "3-Night DBB Package (per person · fixed) — Adult",
+          "rows": [
+            [
+              "3 Rondavels",
+              "6,393.60"
+            ],
+            [
+              "3 Loft & 3 Family Rooms",
+              "7,473.60"
+            ],
+            [
+              "8 Deluxe Rooms",
+              "9,345.60"
+            ],
+            [
+              "1 Settler's Room",
+              "9,885.60"
+            ]
+          ]
+        },
+        {
+          "title": "3-Night DBB Package (per person · fixed) — Child (3–11)",
+          "rows": [
+            [
+              "3 Rondavels",
+              "3,996"
+            ],
+            [
+              "3 Loft & 3 Family Rooms",
+              "4,672.80"
+            ],
+            [
+              "8 Deluxe Rooms",
+              "5,842.80"
+            ],
+            [
+              "1 Settler's Room",
+              "6,179.40"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-camp-kala": {
+    "2026": {
+      "name": "Onguma Camp Kala",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "All-Inclusive Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "rows": [
+            [
+              "Suite — per person sharing (All-Inclusive)",
+              "28,598.40"
+            ],
+            [
+              "Single Supplement",
+              "13,612.80"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-forest-camp": {
+    "2026": {
+      "name": "Onguma Forest Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Per Person Sharing (DBB) — Rate (N$)",
+          "rows": [
+            [
+              "4 Heritage Bungalows",
+              "2,918.40"
+            ],
+            [
+              "Heritage — Child (3–11)",
+              "1,824"
+            ],
+            [
+              "3 Bush Suites — Double",
+              "3,283.20"
+            ],
+            [
+              "3 Bush Suites — Triple",
+              "3,072"
+            ],
+            [
+              "3 Bush Suites — Quad",
+              "2,870.40"
+            ],
+            [
+              "Bush Suite — Child (3–11)",
+              "2,052"
+            ],
+            [
+              "3 Explorer Bungalows",
+              "3,705.60"
+            ],
+            [
+              "Explorer — Child (3–11)",
+              "2,316"
+            ],
+            [
+              "1 Honeymoon Bungalow",
+              "3,888"
+            ],
+            [
+              "Honeymoon — Child (3–11)",
+              "2,430"
+            ]
+          ]
+        },
+        {
+          "title": "Single Supplement (per night) — Rate (N$)",
+          "rows": [
+            [
+              "Heritage Bungalows",
+              "1,017.60"
+            ],
+            [
+              "Bush Suites, Explorer & Honeymoon",
+              "1,324.80"
+            ]
+          ]
+        },
+        {
+          "title": "3-Night DBB Package (per person · fixed) — Adult",
+          "rows": [
+            [
+              "4 Heritage Bungalows",
+              "7,671.60"
+            ],
+            [
+              "3 Bush Suites — Double",
+              "8,683.20"
+            ],
+            [
+              "3 Bush Suites — Triple",
+              "8,128.80"
+            ],
+            [
+              "3 Bush Suites — Quad",
+              "7,567.20"
+            ],
+            [
+              "3 Explorer Bungalows",
+              "9,824.40"
+            ],
+            [
+              "1 Honeymoon Bungalow",
+              "10,558.80"
+            ]
+          ]
+        },
+        {
+          "title": "3-Night DBB Package (per person · fixed) — Child (3–11)",
+          "rows": [
+            [
+              "4 Heritage Bungalows",
+              "4,795.20"
+            ],
+            [
+              "3 Bush Suites — Double",
+              "5,428.80"
+            ],
+            [
+              "3 Bush Suites — Triple",
+              "5,428.80"
+            ],
+            [
+              "3 Bush Suites — Quad",
+              "5,428.80"
+            ],
+            [
+              "3 Explorer Bungalows",
+              "6,141.60"
+            ],
+            [
+              "1 Honeymoon Bungalow",
+              "6,600.60"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-tented-camp": {
+    "2026": {
+      "name": "Onguma Tented Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "All-Inclusive Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "rows": [
+            [
+              "Luxury Safari Tent — per person sharing (All-Inclusive)",
+              "14,217.60"
+            ],
+            [
+              "Single Supplement",
+              "2,918.40"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-the-fort": {
+    "2026": {
+      "name": "Onguma The Fort",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Dinner, Bed & Breakfast (per person sharing) — Rate (N$)",
+          "rows": [
+            [
+              "11 Bush Suites",
+              "10,137.60"
+            ],
+            [
+              "Bush Suite — Child (7–11)",
+              "6,336"
+            ],
+            [
+              "1 Sultan Suite",
+              "12,345.60"
+            ],
+            [
+              "Sultan Suite — Child (7–11)",
+              "7,716"
+            ],
+            [
+              "1 Honeymoon Suite",
+              "14,150.40"
+            ],
+            [
+              "Honeymoon Suite — Child (7–11)",
+              "8,844"
+            ]
+          ]
+        },
+        {
+          "title": "All-Inclusive (per person sharing) — Rate (N$)",
+          "rows": [
+            [
+              "11 Bush Suites",
+              "14,467.20"
+            ],
+            [
+              "Bush Suite — Child (7–11)",
+              "9,036"
+            ],
+            [
+              "1 Sultan Suite",
+              "16,675.20"
+            ],
+            [
+              "Sultan Suite — Child (7–11)",
+              "10,416"
+            ],
+            [
+              "1 Honeymoon Suite",
+              "18,480"
+            ],
+            [
+              "Honeymoon Suite — Child (7–11)",
+              "11,556"
+            ]
+          ]
+        },
+        {
+          "title": "Single Supplement (per night) — Rate (N$)",
+          "rows": [
+            [
+              "Bush Suite",
+              "3,379.20"
+            ],
+            [
+              "Sultan Suite",
+              "3,753.60"
+            ],
+            [
+              "Honeymoon Suite",
+              "7,113.60"
+            ]
+          ]
+        },
+        {
+          "title": "3-Night DBB Package (per person · fixed) — Adult",
+          "rows": [
+            [
+              "11 Bush Suites",
+              "24,192"
+            ],
+            [
+              "1 Sultan Suite",
+              "29,181.60"
+            ],
+            [
+              "1 Honeymoon Suite",
+              "34,088.40"
+            ]
+          ]
+        },
+        {
+          "title": "3-Night DBB Package (per person · fixed) — Child (7–11)",
+          "rows": [
+            [
+              "11 Bush Suites",
+              "15,120"
+            ],
+            [
+              "1 Sultan Suite",
+              "18,240"
+            ],
+            [
+              "1 Honeymoon Suite",
+              "21,306"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "villa-mushara": {
+    "2026": {
+      "name": "Villa Mushara",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Single Occupancy — DBB",
+              "8,928"
+            ],
+            [
+              "Double Occupancy — DBB",
+              "6,816"
+            ],
+            [
+              "Single Occupancy — Fully Inclusive",
+              "13,056"
+            ],
+            [
+              "Double Occupancy — Fully Inclusive",
+              "9,984"
+            ],
+            [
+              "Single Guide Room — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Single Occupancy — DBB",
+              "9,600"
+            ],
+            [
+              "Double Occupancy — DBB",
+              "7,392"
+            ],
+            [
+              "Single Occupancy — Fully Inclusive",
+              "14,112"
+            ],
+            [
+              "Double Occupancy — Fully Inclusive",
+              "10,800"
+            ],
+            [
+              "Single Guide Room — DBB",
+              "2,040"
+            ]
+          ]
+        },
+        {
+          "title": "Etosha Private Excursions & Activities — STO Rate (N$)",
+          "rows": [
+            [
+              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "1,482"
+            ],
+            [
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "11,832"
+            ],
+            [
+              "Pilot Separate Airstrip Transfer (per transfer)",
+              "600"
+            ]
+          ]
+        },
+        {
+          "title": "Dining & Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Lunch (per person)",
+              "360"
+            ],
+            [
+              "Lunch Pack (per person)",
+              "240"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kalahari-bush-breaks": {
+    "2026": {
+      "name": "Kalahari Bush Breaks",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Lodge Rates 2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Per Person Sharing — DBB",
+              "3,264"
+            ],
+            [
+              "Single Person — DBB",
+              "4,896"
+            ],
+            [
+              "Child 2–12 Max 2 in Family Room — DBB",
+              "1,632"
+            ],
+            [
+              "Tour Guide — DBB",
+              "1,980"
+            ]
+          ]
+        },
+        {
+          "title": "Campsite — Self-Catering — STO Rate (N$)",
+          "rows": [
+            [
+              "Kalahari Campsite Pitch — pppn",
+              "324"
+            ]
+          ]
+        },
+        {
+          "title": "Meals & Dining Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Dinner (adult)",
+              "660"
+            ],
+            [
+              "Dinner (child 2–11)",
+              "456"
+            ],
+            [
+              "Breakfast (adult)",
+              "420"
+            ],
+            [
+              "Lunch Pack (per person)",
+              "336"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "hoanib-elephant-camp": {
+    "2026": {
+      "name": "Hoanib Elephant Camp",
+      "region": "Kaokoland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Hoanib Elephant Camp — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "19,848"
+            ],
+            [
+              "Single Supplement",
+              "7,965.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Hoanib Elephant Camp — Shoulder High1-31 May",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "21,537.60"
+            ],
+            [
+              "Single Supplement",
+              "8,643.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Hoanib Elephant Camp — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "23,803.20"
+            ],
+            [
+              "Single Supplement",
+              "9,552"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "Hoanib Elephant Camp — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "27,451.20"
+            ],
+            [
+              "Single Supplement",
+              "11,016"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "19,848"
+            ],
+            [
+              "Single Supplement",
+              "7,965.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder High1-31 May",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "21,537.60"
+            ],
+            [
+              "Single Supplement",
+              "8,643.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "23,803.20"
+            ],
+            [
+              "Single Supplement",
+              "9,552"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "Per Night RatePer Person Sharing",
+              "27,451.20"
+            ],
+            [
+              "Single Supplement",
+              "11,016"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "hoanib-valley-camp": {
+    "2026": {
+      "name": "Hoanib Valley Camp",
+      "region": "Kaokoland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Hoanib Valley Camp — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "18,043.20"
+            ],
+            [
+              "Single Supplement",
+              "7,240.80"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "16,239.60"
+            ],
+            [
+              "Single Supplement",
+              "6,517.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "15,337.20"
+            ],
+            [
+              "Single Supplement",
+              "6,154.80"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Hoanib Valley Camp — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "19,579.20"
+            ],
+            [
+              "Single Supplement",
+              "7,857.60"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "18,600"
+            ],
+            [
+              "Single Supplement",
+              "7,464"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "17,622"
+            ],
+            [
+              "Single Supplement",
+              "7,071.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Hoanib Valley Camp — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "21,643.20"
+            ],
+            [
+              "Single Supplement",
+              "8,685.60"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "20,560.80"
+            ],
+            [
+              "Single Supplement",
+              "8,251.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "19,479.60"
+            ],
+            [
+              "Single Supplement",
+              "7,816.80"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "Hoanib Valley Camp — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "24,955.20"
+            ],
+            [
+              "Single Supplement",
+              "10,015.20"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "23,707.20"
+            ],
+            [
+              "Single Supplement",
+              "9,513.60"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "23,707.20"
+            ],
+            [
+              "Single Supplement",
+              "9,513.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "18,043.20"
+            ],
+            [
+              "Single Supplement",
+              "7,240.80"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "16,239.60"
+            ],
+            [
+              "Single Supplement",
+              "6,517.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "15,337.20"
+            ],
+            [
+              "Single Supplement",
+              "6,154.80"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "19,579.20"
+            ],
+            [
+              "Single Supplement",
+              "7,857.60"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "18,600"
+            ],
+            [
+              "Single Supplement",
+              "7,464"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "17,622"
+            ],
+            [
+              "Single Supplement",
+              "7,071.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "21,643.20"
+            ],
+            [
+              "Single Supplement",
+              "8,685.60"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "20,560.80"
+            ],
+            [
+              "Single Supplement",
+              "8,251.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "19,479.60"
+            ],
+            [
+              "Single Supplement",
+              "7,816.80"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "24,955.20"
+            ],
+            [
+              "Single Supplement",
+              "10,015.20"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "23,707.20"
+            ],
+            [
+              "Single Supplement",
+              "9,513.60"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "23,707.20"
+            ],
+            [
+              "Single Supplement",
+              "9,513.60"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "l-deritz-nest-hotel": {
+    "2026": {
+      "name": "Lüderitz Nest Hotel",
+      "region": "Luderitz",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Comfort Rooms — B&B (per room — gross) — Rate (N$)",
+          "rows": [
+            [
+              "Comfort Single",
+              "3,019.20"
+            ],
+            [
+              "Comfort Twin / Double",
+              "4,855.20"
+            ],
+            [
+              "Comfort Family Room (max 2 adults + 2 children 0–12)",
+              "7,874.40"
+            ]
+          ]
+        },
+        {
+          "title": "Deluxe Rooms & Suite — B&B (per room — gross) — Rate (N$)",
+          "rows": [
+            [
+              "Deluxe Single",
+              "3,702.60"
+            ],
+            [
+              "Deluxe Twin / Double",
+              "5,926.20"
+            ],
+            [
+              "Suite",
+              "9,843"
+            ],
+            [
+              "Tour Guide (50% of single rack)",
+              "1,776"
+            ]
+          ]
+        },
+        {
+          "title": "Meals (per person — gross) — Rate (N$)",
+          "rows": [
+            [
+              "Breakfast — adult",
+              "408"
+            ],
+            [
+              "Breakfast — child 3–12 yrs",
+              "288"
+            ],
+            [
+              "Lunch — adult",
+              "612"
+            ],
+            [
+              "Lunch — child 3–12 yrs",
+              "432"
+            ],
+            [
+              "Dinner — adult",
+              "792"
+            ],
+            [
+              "Dinner — child 3–12 yrs",
+              "564"
+            ],
+            [
+              "Lunchpack",
+              "384"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "shark-island-resort": {
+    "2026": {
+      "name": "Shark Island Resort",
+      "region": "Luderitz",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Rack Rates — Low PPS (N$)",
+          "rows": [
+            [
+              "Campsite (max 8)",
+              "396"
+            ],
+            [
+              "Lighthouse (min 2 people)",
+              "1,452"
+            ]
+          ]
+        },
+        {
+          "title": "Rack Rates — High PPS (N$)",
+          "rows": [
+            [
+              "Campsite (max 8)",
+              "396"
+            ],
+            [
+              "Lighthouse (min 2 people)",
+              "1,452"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "forgotten-valley": {
+    "2026": {
+      "name": "Forgotten Valley (Ekoto Camp)",
+      "region": "Opuwo",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Chalet Rates 2026 — STO Rate (N$)",
+          "rows": [
+            [
+              "Per Person Sharing — Self-Catering",
+              "2,832"
+            ],
+            [
+              "Single Person — Self-Catering",
+              "5,664"
+            ],
+            [
+              "Child 6–12 Sharing",
+              "816"
+            ],
+            [
+              "Tour Guide",
+              "1,200"
+            ],
+            [
+              "Exclusive Use — All 6 Chalets (Max 12 pax)",
+              "33,984"
+            ]
+          ]
+        },
+        {
+          "title": "Ekoto Excursions & Extras — STO Rate (N$)",
+          "rows": [
+            [
+              "Compulsory Conservancy Levy (per adult per stay)",
+              "300"
+            ],
+            [
+              "Guided Hike pp (2–4 hours, min 2 pax)",
+              "420"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kwessi-dunes": {
+    "2026": {
+      "name": "Kwessi Dunes",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Kwessi Dunes — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "11,995.20"
+            ],
+            [
+              "Single Supplement",
+              "4,813.20"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "10,796.40"
+            ],
+            [
+              "Single Supplement",
+              "4,333.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "10,196.40"
+            ],
+            [
+              "Single Supplement",
+              "4,092"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Kwessi Dunes — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "14,059.20"
+            ],
+            [
+              "Single Supplement",
+              "5,642.40"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "13,356"
+            ],
+            [
+              "Single Supplement",
+              "5,360.40"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "12,654"
+            ],
+            [
+              "Single Supplement",
+              "5,078.40"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "Kwessi Dunes — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "17,707.20"
+            ],
+            [
+              "Single Supplement",
+              "7,106.40"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "16,821.60"
+            ],
+            [
+              "Single Supplement",
+              "6,751.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "15,937.20"
+            ],
+            [
+              "Single Supplement",
+              "6,396"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "Kwessi Dunes — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "19,675.20"
+            ],
+            [
+              "Single Supplement",
+              "7,896"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "18,691.20"
+            ],
+            [
+              "Single Supplement",
+              "7,501.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "18,691.20"
+            ],
+            [
+              "Single Supplement",
+              "7,501.20"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "11,995.20"
+            ],
+            [
+              "Single Supplement",
+              "4,813.20"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "10,796.40"
+            ],
+            [
+              "Single Supplement",
+              "4,333.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "10,196.40"
+            ],
+            [
+              "Single Supplement",
+              "4,092"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "14,059.20"
+            ],
+            [
+              "Single Supplement",
+              "5,642.40"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "13,356"
+            ],
+            [
+              "Single Supplement",
+              "5,360.40"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "12,654"
+            ],
+            [
+              "Single Supplement",
+              "5,078.40"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "11,850"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "17,707.20"
+            ],
+            [
+              "Single Supplement",
+              "7,106.40"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "16,821.60"
+            ],
+            [
+              "Single Supplement",
+              "6,751.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "15,937.20"
+            ],
+            [
+              "Single Supplement",
+              "6,396"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night RatePer Person Sharing",
+              "19,675.20"
+            ],
+            [
+              "Single Supplement",
+              "7,896"
+            ],
+            [
+              "6-7 Night RatePer Person Sharing",
+              "18,691.20"
+            ],
+            [
+              "Single Supplement",
+              "7,501.20"
+            ],
+            [
+              "8+ Night RatePer Person Sharing",
+              "18,691.20"
+            ],
+            [
+              "Single Supplement",
+              "7,501.20"
+            ],
+            [
+              "Private VehiclePer vehicle per night",
+              "14,514"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "anderssons-at-ongava": {
+    "2026": {
+      "name": "Anderssons at Ongava",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "23,868"
+            ],
+            [
+              "Fully Inclusive",
+              "30,192"
+            ]
+          ]
+        },
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "1,440"
+            ],
+            [
+              "Fully Inclusive",
+              "1,440"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Fully Inclusive — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Ongava Lodge, Tented Camp & Anderssons",
+              "16,800"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Fully Inclusive — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Ongava Lodge, Tented Camp & Anderssons",
+              "720"
+            ]
+          ]
+        },
+        {
+          "title": "Guide & Pilot Rates — Rate (N$)",
+          "rows": [
+            [
+              "Per single unit",
+              "2,160"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Miscellaneous — Rate (N$)",
+          "rows": [
+            [
+              "Lunch Pack",
+              "720"
+            ],
+            [
+              "Etosha Game Drives (Scheduled)",
+              "3,120"
+            ],
+            [
+              "Ongava Property Game Drives (Scheduled)",
+              "1,920"
+            ],
+            [
+              "Nature Walk (Scheduled)",
+              "840"
+            ],
+            [
+              "Night Drives (Scheduled)",
+              "1,680"
+            ],
+            [
+              "Airfield Passenger Fee",
+              "840"
+            ],
+            [
+              "Airfield Transfer — each way",
+              "720"
+            ],
+            [
+              "Private Activities — Sole Use Guide & Vehicle (FI only)",
+              "22,440"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "little-ongava": {
+    "2026": {
+      "name": "Little Ongava",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "51,816"
+            ],
+            [
+              "Fully Inclusive",
+              "64,708.80"
+            ]
+          ]
+        },
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "1,440"
+            ],
+            [
+              "Fully Inclusive",
+              "1,440"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Fully Inclusive — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "44,400"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Fully Inclusive — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "720"
+            ]
+          ]
+        },
+        {
+          "title": "Guide & Pilot Rates — Rate (N$)",
+          "rows": [
+            [
+              "Per single unit",
+              "2,160"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ongava-lodge": {
+    "2026": {
+      "name": "Ongava Lodge",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Full Board",
+              "12,036"
+            ],
+            [
+              "Full Board",
+              "15,402"
+            ],
+            [
+              "Fully Inclusive",
+              "17,646"
+            ],
+            [
+              "Fully Inclusive",
+              "22,338"
+            ]
+          ]
+        },
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Full Board",
+              "1,440"
+            ],
+            [
+              "Full Board",
+              "1,440"
+            ],
+            [
+              "Fully Inclusive",
+              "1,440"
+            ],
+            [
+              "Fully Inclusive",
+              "1,440"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Full Board",
+              "11,160"
+            ],
+            [
+              "Fully Inclusive",
+              "16,800"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Full Board",
+              "720"
+            ],
+            [
+              "Fully Inclusive",
+              "720"
+            ]
+          ]
+        },
+        {
+          "title": "Guide & Pilot Rates — Rate (N$)",
+          "rows": [
+            [
+              "Per single unit",
+              "2,160"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Miscellaneous — Rate (N$)",
+          "rows": [
+            [
+              "Lunch Pack",
+              "720"
+            ],
+            [
+              "Etosha Game Drives (Scheduled)",
+              "3,120"
+            ],
+            [
+              "Ongava Property Game Drives (Scheduled)",
+              "1,920"
+            ],
+            [
+              "Nature Walk (Scheduled)",
+              "840"
+            ],
+            [
+              "Night Drives (Scheduled)",
+              "1,680"
+            ],
+            [
+              "Ongava Airfield Passenger Fee",
+              "840"
+            ],
+            [
+              "Airfield Transfer — each way",
+              "720"
+            ],
+            [
+              "Private Activities — Sole Use Guide & Vehicle (FI only)",
+              "22,440"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ongava-tented-camp": {
+    "2026": {
+      "name": "Ongava Tented Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "17,646"
+            ],
+            [
+              "Fully Inclusive",
+              "22,338"
+            ]
+          ]
+        },
+        {
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Fully Inclusive",
+              "1,440"
+            ],
+            [
+              "Fully Inclusive",
+              "1,440"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Fully Inclusive — Accommodation Rate (N$)",
+          "rows": [
+            [
+              "Ongava Lodge, Tented Camp & Anderssons",
+              "16,800"
+            ]
+          ]
+        },
+        {
+          "title": "Child Rates — Fully Inclusive — Conservation Fee (N$)",
+          "rows": [
+            [
+              "Ongava Lodge, Tented Camp & Anderssons",
+              "720"
+            ]
+          ]
+        },
+        {
+          "title": "Guide & Pilot Rates — Rate (N$)",
+          "rows": [
+            [
+              "Per single unit",
+              "2,160"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Miscellaneous — Rate (N$)",
+          "rows": [
+            [
+              "Lunch Pack",
+              "720"
+            ],
+            [
+              "Etosha Game Drives (Scheduled)",
+              "3,120"
+            ],
+            [
+              "Ongava Property Game Drives (Scheduled)",
+              "1,920"
+            ],
+            [
+              "Nature Walk (Scheduled)",
+              "840"
+            ],
+            [
+              "Night Drives (Scheduled)",
+              "1,680"
+            ],
+            [
+              "Ongava Airfield Passenger Fee",
+              "840"
+            ],
+            [
+              "Airfield Transfer — Ongava Camp to/from airfield (each way)",
+              "720"
+            ],
+            [
+              "Private Activities — Sole Use Guide & Vehicle (FI only)",
+              "22,440"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "etosha-mountain-lodge": {
+    "2026": {
+      "name": "Etosha Mountain Lodge",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "4,219.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "3,798"
+            ],
+            [
+              "8+ Night Rate",
+              "3,586.80"
+            ]
+          ]
+        },
+        {
+          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "5,371.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "4,834.80"
+            ],
+            [
+              "8+ Night Rate",
+              "4,566"
+            ],
+            [
+              "Single Supplement",
+              "21,553,832.40"
+            ]
+          ]
+        },
+        {
+          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "5,899.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "5,604"
+            ],
+            [
+              "8+ Night Rate",
+              "5,310"
+            ],
+            [
+              "Single Supplement",
+              "23,678,131.20"
+            ]
+          ]
+        },
+        {
+          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "6,216"
+            ],
+            [
+              "6-7 Night Rate",
+              "5,905.20"
+            ],
+            [
+              "8+ Night Rate",
+              "5,594.40"
+            ],
+            [
+              "Single Supplement",
+              "24,950,245.20"
+            ]
+          ]
+        },
+        {
+          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "7,051.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "6,698.40"
+            ],
+            [
+              "8+ Night Rate",
+              "6,698.40"
+            ],
+            [
+              "Single Supplement",
+              "28,298,688"
+            ]
+          ]
+        },
+        {
+          "title": "Fully Inclusive -- Per Person Sharing — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "7,032"
+            ],
+            [
+              "6-7 Night Rate",
+              "6,328.80"
+            ],
+            [
+              "8+ Night Rate",
+              "5,977.20"
+            ]
+          ]
+        },
+        {
+          "title": "Fully Inclusive -- Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,241.60"
+            ],
+            [
+              "6-7 Night Rate",
+              "7,418.40"
+            ],
+            [
+              "8+ Night Rate",
+              "7,005.60"
+            ],
+            [
+              "Single Supplement",
+              "33,074,811.60"
+            ]
+          ]
+        },
+        {
+          "title": "Fully Inclusive -- Per Person Sharing — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "9,000"
+            ],
+            [
+              "6-7 Night Rate",
+              "8,550"
+            ],
+            [
+              "8+ Night Rate",
+              "8,100"
+            ],
+            [
+              "Single Supplement",
+              "36,123,250.80"
+            ]
+          ]
+        },
+        {
+          "title": "Fully Inclusive -- Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "9,355.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "8,887.20"
+            ],
+            [
+              "8+ Night Rate",
+              "8,420.40"
+            ],
+            [
+              "Single Supplement",
+              "37,551,379.20"
+            ]
+          ]
+        },
+        {
+          "title": "Fully Inclusive -- Per Person Sharing — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "10,363.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "9,844.80"
+            ],
+            [
+              "8+ Night Rate",
+              "9,844.80"
+            ],
+            [
+              "Single Supplement",
+              "41,595,950.40"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "safari-house": {
+    "2026": {
+      "name": "Safari House",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Safari House — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "35,160"
+            ],
+            [
+              "6-7 Night Rate",
+              "31,644"
+            ],
+            [
+              "8+ Night Rate",
+              "29,886"
+            ]
+          ]
+        },
+        {
+          "title": "Safari House — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "41,208"
+            ],
+            [
+              "6-7 Night Rate",
+              "37,087.20"
+            ],
+            [
+              "8+ Night Rate",
+              "35,026.80"
+            ]
+          ]
+        },
+        {
+          "title": "Safari House — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "45,000"
+            ],
+            [
+              "6-7 Night Rate",
+              "42,750"
+            ],
+            [
+              "8+ Night Rate",
+              "40,500"
+            ]
+          ]
+        },
+        {
+          "title": "Safari House — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "46,776"
+            ],
+            [
+              "6-7 Night Rate",
+              "44,437.20"
+            ],
+            [
+              "8+ Night Rate",
+              "42,098.40"
+            ]
+          ]
+        },
+        {
+          "title": "Safari House — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "51,816"
+            ],
+            [
+              "6-7 Night Rate",
+              "49,225.20"
+            ],
+            [
+              "8+ Night Rate",
+              "49,225.20"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "35,160"
+            ],
+            [
+              "6-7 Night Rate",
+              "31,644"
+            ],
+            [
+              "8+ Night Rate",
+              "29,886"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "41,208"
+            ],
+            [
+              "6-7 Night Rate",
+              "37,087.20"
+            ],
+            [
+              "8+ Night Rate",
+              "35,026.80"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "45,000"
+            ],
+            [
+              "6-7 Night Rate",
+              "42,750"
+            ],
+            [
+              "8+ Night Rate",
+              "40,500"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "46,776"
+            ],
+            [
+              "6-7 Night Rate",
+              "44,437.20"
+            ],
+            [
+              "8+ Night Rate",
+              "42,098.40"
+            ]
+          ]
+        },
+        {
+          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "51,816"
+            ],
+            [
+              "6-7 Night Rate",
+              "49,225.20"
+            ],
+            [
+              "8+ Night Rate",
+              "49,225.20"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "safarihoek-lodge": {
+    "2026": {
+      "name": "Safarihoek Lodge",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Luxury Room -- DBB Per Person Sharing — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "6,235.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "5,612.40"
+            ],
+            [
+              "8+ Night Rate",
+              "5,300.40"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- DBB Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "7,233.60"
+            ],
+            [
+              "6-7 Night Rate",
+              "6,511.20"
+            ],
+            [
+              "8+ Night Rate",
+              "6,148.80"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- DBB Per Person Sharing — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "7,656"
+            ],
+            [
+              "6-7 Night Rate",
+              "7,273.20"
+            ],
+            [
+              "8+ Night Rate",
+              "6,890.40"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- DBB Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,232"
+            ],
+            [
+              "6-7 Night Rate",
+              "7,820.40"
+            ],
+            [
+              "8+ Night Rate",
+              "7,408.80"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- DBB Per Person Sharing — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "9,072"
+            ],
+            [
+              "6-7 Night Rate",
+              "8,618.40"
+            ],
+            [
+              "8+ Night Rate",
+              "8,618.40"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- DBB Per Person Sharing — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "5,563.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "5,007.60"
+            ],
+            [
+              "8+ Night Rate",
+              "4,729.20"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- DBB Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "6,480"
+            ],
+            [
+              "6-7 Night Rate",
+              "5,832"
+            ],
+            [
+              "8+ Night Rate",
+              "5,508"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- DBB Per Person Sharing — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "6,859.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "6,516"
+            ],
+            [
+              "8+ Night Rate",
+              "6,174"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- DBB Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "7,368"
+            ],
+            [
+              "6-7 Night Rate",
+              "6,999.60"
+            ],
+            [
+              "8+ Night Rate",
+              "6,631.20"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- DBB Per Person Sharing — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,155.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "7,747.20"
+            ],
+            [
+              "8+ Night Rate",
+              "7,747.20"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,587.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "7,729.20"
+            ],
+            [
+              "8+ Night Rate",
+              "7,298.40"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "9,835.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "8,852.40"
+            ],
+            [
+              "8+ Night Rate",
+              "8,359.20"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "10,440"
+            ],
+            [
+              "6-7 Night Rate",
+              "9,918"
+            ],
+            [
+              "8+ Night Rate",
+              "9,396"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "10,920"
+            ],
+            [
+              "6-7 Night Rate",
+              "10,374"
+            ],
+            [
+              "8+ Night Rate",
+              "9,828"
+            ]
+          ]
+        },
+        {
+          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "12,254.40"
+            ],
+            [
+              "6-7 Night Rate",
+              "11,642.40"
+            ],
+            [
+              "8+ Night Rate",
+              "11,642.40"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Green Season10 Jan-31 Mar",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "6,974.40"
+            ],
+            [
+              "6-7 Night Rate",
+              "6,277.20"
+            ],
+            [
+              "8+ Night Rate",
+              "5,928"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,289.60"
+            ],
+            [
+              "6-7 Night Rate",
+              "7,461.60"
+            ],
+            [
+              "8+ Night Rate",
+              "7,046.40"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Shoulder High1-31 May",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,788.80"
+            ],
+            [
+              "6-7 Night Rate",
+              "8,349.60"
+            ],
+            [
+              "8+ Night Rate",
+              "7,910.40"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- Fully Inclusive Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "8,923.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "8,476.80"
+            ],
+            [
+              "8+ Night Rate",
+              "8,031.60"
+            ]
+          ]
+        },
+        {
+          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Peak Season1 Jul-31 Aug",
+          "rows": [
+            [
+              "1-5 Night Rate",
+              "9,979.20"
+            ],
+            [
+              "6-7 Night Rate",
+              "9,480"
+            ],
+            [
+              "8+ Night Rate",
+              "9,480"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "windhoek-lux-suites": {
+    "2026": {
+      "name": "The Windhoek Lux Suites",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Rooms — B&B (per room) — Rate (N$)",
+          "rows": [
+            [
+              "Ground Room — Single",
+              "2,468.40"
+            ],
+            [
+              "Ground Room — Double",
+              "3,702.60"
+            ],
+            [
+              "Loft Room — Single",
+              "2,468.40"
+            ],
+            [
+              "Loft Room — Double",
+              "3,702.60"
+            ]
+          ]
+        },
+        {
+          "title": "Family Rooms — B&B (per room) — Rate (N$)",
+          "rows": [
+            [
+              "Family Room — 2 adults + 2 children",
+              "4,936.80"
+            ],
+            [
+              "Family Room — 2 adults + 1 child",
+              "4,319.70"
+            ]
+          ]
+        },
+        {
+          "title": "Children — Rate (N$)",
+          "rows": [
+            [
+              "Children under 3 yrs",
+              "0"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "mowani-campsite": {
+    "2026": {
+      "name": "Mowani Campsite",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "NETT Rates — 01 Jan 2026 to 31 Dec 2026 — Nett Price (N$)",
+          "rows": [
+            [
+              "Campsite — Per Adult per night",
+              "624"
+            ],
+            [
+              "Campsite — Per Child (3-12 yrs) per night",
+              "288"
+            ],
+            [
+              "Campsite — Child under 3 yrs",
+              "0"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-leadwood-campsite": {
+    "2026": {
+      "name": "Onguma Leadwood Campsite",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Campsite Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "rows": [
+            [
+              "Camping Site — per adult (nett)",
+              "600"
+            ],
+            [
+              "Camping Site — per child 3–11 (nett)",
+              "300"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "onguma-tamboti-campsite": {
+    "2026": {
+      "name": "Onguma Tamboti Campsite",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
+      "sections": [
+        {
+          "title": "Campsite Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "rows": [
+            [
+              "Camping Site — per adult (nett)",
+              "600"
+            ],
+            [
+              "Camping Site — per child 3–11 (nett)",
+              "300"
+            ]
+          ]
+        },
+        {
+          "title": "Activities & Nature Drives — Rate",
+          "rows": [
+            [
+              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "2,100"
+            ],
+            [
+              "Onguma Sunrise Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Onguma Sundowner Drive (3 hrs)",
+              "1,068"
+            ],
+            [
+              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "1,068"
+            ],
+            [
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "780"
+            ],
+            [
+              "Young Explorers Walk (1½ hrs)",
+              "504"
+            ],
+            [
+              "Private Game Drive (4 hrs)",
+              "11,640"
+            ],
+            [
+              "Private Game Drive — Full Day (8 hrs)",
+              "18,600"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "7,200"
+            ],
+            [
+              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "9,000"
+            ]
+          ]
+        },
+        {
+          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "rows": [
+            [
+              "Onguma Dream Cruiser (max 2 guests)",
+              "11,760"
+            ],
+            [
+              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "6,240"
+            ]
+          ]
+        },
+        {
+          "title": "Additional Meals — Rate",
+          "rows": [
+            [
+              "Breakfast",
+              "348"
+            ],
+            [
+              "Breakfast Pack",
+              "348"
+            ],
+            [
+              "Lunch (3 course)",
+              "432"
+            ],
+            [
+              "Lunch Pack",
+              "312"
+            ],
+            [
+              "Dinner (3 course)",
+              "768"
+            ],
+            [
+              "Dinner (4 course)",
+              "972"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "chobe-river-camp": {
+    "2026": {
+      "name": "Chobe River Camp",
+      "region": "Chobe",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Double/Twin/Family -- Sharing BB",
+              "2,364"
+            ],
+            [
+              "Single -- BB",
+              "2,955"
+            ],
+            [
+              "Chobe Campsite pppn (10% commission)",
+              "383.75"
+            ],
+            [
+              "Morning or Afternoon Boat Cruise (guided, seasonal, 3hrs)",
+              "923.44"
+            ],
+            [
+              "Sundowner Boat Cruise (guided, seasonal, 2hrs)",
+              "496.88"
+            ],
+            [
+              "Walking Trail (guided, seasonal, 1-2hrs -- direct booking only)",
+              "426.56"
+            ],
+            [
+              "Canoe Trip (guided, 1.5hrs, refreshments -- direct booking only)",
+              "520.31"
+            ],
+            [
+              "Birding Drive (guided, 3hrs, refreshments -- direct booking only)",
+              "478.12"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "hakusembe-camping2go": {
+    "2026": {
+      "name": "Hakusembe Camping2Go",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Camping2Go Tent -- Sharing pppn",
+              "1,084"
+            ],
+            [
+              "Camping2Go Tent -- Single pppn",
+              "2,166"
+            ],
+            [
+              "Dinner pp -- buffet",
+              "715"
+            ],
+            [
+              "Breakfast pp -- buffet",
+              "355"
+            ],
+            [
+              "Lunch pp",
+              "285"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-river-camping2go": {
+    "2026": {
+      "name": "Namushasha Camping2Go",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Camping2Go Tent -- Sharing pppn",
+              "1,084"
+            ],
+            [
+              "Camping2Go Tent -- Single pppn",
+              "2,166"
+            ],
+            [
+              "Dinner pp -- buffet",
+              "715"
+            ],
+            [
+              "Breakfast pp -- buffet",
+              "355"
+            ],
+            [
+              "Lunch pp",
+              "285"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-camping2go": {
+    "2026": {
+      "name": "Namushasha Camping2go",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Camping2Go Tent -- Sharing pppn",
+              "1,084"
+            ],
+            [
+              "Camping2Go Tent -- Single pppn",
+              "2,166"
+            ],
+            [
+              "Dinner pp -- buffet",
+              "715"
+            ],
+            [
+              "Breakfast pp -- buffet",
+              "355"
+            ],
+            [
+              "Lunch pp",
+              "285"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-river-villa": {
+    "2026": {
+      "name": "Namushasha River Villa",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Per room/night -- Fully Inclusive (max 2 pax)",
+              "30,250"
+            ],
+            [
+              "Transfer to Katima Mpacha Airport return (120km)",
+              "1,256.25"
+            ],
+            [
+              "Transfer to Lianshulu return (25km)",
+              "412.50"
+            ],
+            [
+              "Package Transfer -- Airport and 3 Zambezi properties return",
+              "1,462.50"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "zambezi-mubala-camp": {
+    "2026": {
+      "name": "Zambezi Mubala Camp",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Self-Catering Tent -- Sharing pppn",
+              "1,084"
+            ],
+            [
+              "Self-Catering Tent -- Single pppn",
+              "2,166"
+            ],
+            [
+              "Zambezi Mubala Campsite pppn (10% commission)",
+              "383.75"
+            ],
+            [
+              "Sundowner Boat Cruise (guided, 1.5hrs, refreshments)",
+              "575"
+            ],
+            [
+              "Morning or Afternoon Boat Cruise (guided, 3hrs, refreshments)",
+              "987.50"
+            ],
+            [
+              "Nature Walk to bird colonies (guided, 3hrs, seasonal -- direct booking)",
+              "381.25"
+            ],
+            [
+              "Transfer to Katima Mpacha Airport return (50km)",
+              "631.25"
+            ],
+            [
+              "Package Transfer -- Airport and 3 Zambezi properties return",
+              "1,462.50"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "zambezi-mubala-lodge": {
+    "2026": {
+      "name": "Zambezi Mubala Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Double/Twin/Triple/Family -- Sharing BB",
+              "3,309"
+            ],
+            [
+              "Single -- BB",
+              "4,138"
+            ],
+            [
+              "Sundowner Boat Cruise (guided, 1.5hrs, refreshments)",
+              "575"
+            ],
+            [
+              "Morning or Afternoon Boat Cruise (guided, 3hrs, refreshments)",
+              "987.50"
+            ],
+            [
+              "Nature Walk to bird colonies (guided, 3hrs, seasonal)",
+              "381.25"
+            ],
+            [
+              "Transfer to Katima Mpacha Airport return (50km)",
+              "631.25"
+            ],
+            [
+              "Package Transfer -- Airport and 3 Zambezi properties return",
+              "1,462.50"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "palmwag-camping2go": {
+    "2026": {
+      "name": "Palmwag Camping2Go",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Camping2Go Tent -- Sharing pppn",
+              "1,084"
+            ],
+            [
+              "Camping2Go Tent -- Single pppn",
+              "2,166"
+            ],
+            [
+              "Dinner pp -- buffet",
+              "518.75"
+            ],
+            [
+              "Breakfast pp -- buffet",
+              "355"
+            ],
+            [
+              "Lunch pp",
+              "282.50"
+            ],
+            [
+              "Half-Day Scenic Drive (guided, 3hrs)",
+              "1,270.31"
+            ],
+            [
+              "Full-Day Damaraland Excursion (guided, min 4 pax)",
+              "3,332.81"
+            ],
+            [
+              "Half-Day Rhino Tracking (guided, min 2 pax -- not for under 12)",
+              "3,726.56"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kalahari-camping2go": {
+    "2026": {
+      "name": "Kalahari Camping2Go",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2026",
+      "note": "Published rack rates from the supplier sheet.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Camping2Go Tent -- Sharing pppn",
+              "1,084"
+            ],
+            [
+              "Camping2Go Tent -- Single pppn",
+              "2,166"
+            ],
+            [
+              "Dinner pp -- buffet",
+              "715"
+            ],
+            [
+              "Breakfast pp -- buffet",
+              "355"
+            ],
+            [
+              "Lunch pp",
+              "285"
+            ]
+          ]
+        }
+      ]
+    }
+  }
 });
