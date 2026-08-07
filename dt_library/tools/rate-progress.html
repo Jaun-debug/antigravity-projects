@@ -48,9 +48,14 @@ th{background:#f4efe7;font-size:.66rem;letter-spacing:1px;text-transform:upperca
 th.cell,td.cell{text-align:center;width:64px}
 tbody tr:hover{background:rgba(200,90,23,.04)}
 tr.totrow td{font-weight:700;background:rgba(184,149,106,.08);border-top:2px solid var(--border)}
-.grouprow td{background:rgba(184,149,106,.16);color:#7a5f2f;font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;font-weight:800;padding:7px 12px}
+/* the two block headers read exactly like the 'Coverage by region' header above
+   them — same serif, same size, same orange caret */
+.grouprow td{background:rgba(184,149,106,.14);font-family:Georgia,serif;font-size:1.05rem;font-weight:600;color:var(--char);letter-spacing:0;text-transform:none;padding:9px 12px}
+.grouprow .gm{font-family:Inter,system-ui,sans-serif;font-size:.72rem;color:var(--muted);font-weight:400;letter-spacing:.3px}
+.grouprow.sub td{font-size:.9rem;background:rgba(184,149,106,.07);padding-left:34px;color:#6b5a44}
 .grouprow.gfold td{cursor:pointer;user-select:none}
-.grouprow.gfold:hover td{background:rgba(184,149,106,.26);color:#5f4a24}
+.grouprow.gfold:hover td{background:rgba(184,149,106,.24)}
+.grouprow.gfold:hover .gm{color:#6b5a44}
 tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px solid var(--border);color:#6b5a44}
 .dot{display:inline-block;width:15px;height:15px;border-radius:50%;vertical-align:middle}
 .dot.yes{background:var(--terra6);border:1px solid var(--terra)}
@@ -130,7 +135,7 @@ tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px sol
 <div class="controls">
 <input id="q" placeholder="Search property…">
 <select id="region"><option value="">All regions</option></select>
-<select id="category"><option value="">All types</option><option value="Lodge">Lodges</option><option value="Camping">Camping</option><option value="Vehicle">Vehicles</option><option value="Activity">Activities</option><option value="Flight">Flights</option></select>
+<select id="category"><option value="">All types</option><option value="Lodge">Lodges</option><option value="Camping">Camping</option><option value="Vehicle">Vehicles</option><option value="Activity">Activities</option><option value="Flight">Flights</option><optgroup label="Group lodges"><option value="g:*">Any collection</option><option value="g:Big Sky Lodges">Big Sky Lodges (3)</option><option value="g:Chiwani">Chiwani (3)</option><option value="g:Gondwana Collection">Gondwana Collection (33)</option><option value="g:Hammerstein Africa">Hammerstein Africa (5)</option><option value="g:Journeys Namibia">Journeys Namibia (4)</option><option value="g:Logufa">Logufa (6)</option><option value="g:Mushara Collection">Mushara Collection (4)</option><option value="g:NWR">NWR (20)</option><option value="g:Namibia Country Lodges">Namibia Country Lodges (1)</option><option value="g:Natural Selection">Natural Selection (8)</option><option value="g:O&L Collection">O&amp;L Collection (6)</option><option value="g:Okonjima / AfriCat">Okonjima / AfriCat (3)</option><option value="g:Ondili">Ondili (8)</option><option value="g:Ongava">Ongava (4)</option><option value="g:Onguma">Onguma (7)</option><option value="g:Quiver & Co">Quiver &amp; Co (4)</option><option value="g:Sun Karros">Sun Karros (5)</option><option value="g:Taleni Africa">Taleni Africa (7)</option><option value="g:Ultimate Safaris">Ultimate Safaris (5)</option><option value="g:Wilderness">Wilderness (7)</option><option value="g:Wolwedans">Wolwedans (5)</option><option value="g:Zambezi Queen Collection">Zambezi Queen Collection (3)</option></optgroup></select>
 <select id="status">
 <option value="">All</option>
 <option value="need27sto">Missing 2027 STO</option>
@@ -317,6 +322,10 @@ function renderRegionTable(){
    separate block from the N$ regions — in the region summary and, below, in the
    full property list. */
 var BEYOND={'Botswana':1,'Chobe':1,'Okavango Delta':1,'Victoria Falls':1};
+/* Which collection ratesheet a lodge's rates come from, read off the group
+   sheets themselves. Lets the type filter narrow to one collection so you can
+   see, e.g., how much of Gondwana still needs 2027. */
+var GROUP_OF={'ai-aiba-lodge':'Big Sky Lodges','ai-ais-hot-springs-and-spa':'NWR','anderssons-at-ongava':'Ongava','boplaas-campsite':'NWR','camp-doros':'Ultimate Safaris','camp-kipwe':'Chiwani','camp-sossus':'Ultimate Safaris','canyon-lodge':'Gondwana Collection','canyon-roadhouse':'Gondwana Collection','canyon-village':'Gondwana Collection','chobe-princess':'Zambezi Queen Collection','chobe-river-camp':'Gondwana Collection','chobe-water-villas-zambezi':'O&L Collection','daan-viljoen-camping':'Sun Karros','daan-viljoen-lodge':'Sun Karros','damara-mopane-lodge':'Gondwana Collection','dead-valley-lodge':'Sun Karros','desert-camp':'Taleni Africa','desert-hills-lodge':'Hammerstein Africa','desert-homestead-lodge':'Ondili','desert-quiver-camp':'Taleni Africa','desert-whisper':'Gondwana Collection','divava-okavango':'O&L Collection','dolomite-camp':'NWR','etendeka-hiking-trails':'Big Sky Lodges','etendeka-mountain-camp':'Big Sky Lodges','etosha-king-nehale':'Gondwana Collection','etosha-mountain-lodge':'Natural Selection','etosha-oberland-lodge':'Ondili','etosha-omusati-lodge':'Hammerstein Africa','etosha-safari-camping2go':'Gondwana Collection','etosha-safari-lodge':'Gondwana Collection','etosha-trading-post-campsite':'Taleni Africa','etosha-village':'Taleni Africa','etosha-village-campsite':'Taleni Africa','fish-river-lodge':'Journeys Namibia','forgotten-valley':'Logufa','galton-house':'Ultimate Safaris','grootberg-lodge':'Journeys Namibia','gross-barmen-resort':'NWR','hakusembe-camping2go':'Gondwana Collection','hakusembe-river-lodge':'Gondwana Collection','halali-resort':'NWR','hammerstein-lodge':'Hammerstein Africa','hardap-resort':'NWR','hoada-campsite':'Journeys Namibia','hoanib-elephant-camp':'Natural Selection','hoanib-valley-camp':'Natural Selection','hobas-lodge':'NWR','hohenstein-lodge':'Ondili','ichingo-chobe-river-lodge':'Zambezi Queen Collection','kalahari-anib-lodge':'Gondwana Collection','kalahari-bush-breaks':'Logufa','kalahari-camping2go':'Gondwana Collection','kalahari-farmhouse':'Gondwana Collection','kalahari-red-dunes-lodge':'Ondili','khorixas-lodge':'NWR','koiimasis':'Logufa','kwessi-dunes':'Natural Selection','le-mirage-sossusvlei':'O&L Collection','little-ongava':'Ongava','lodge-damaraland':'Quiver & Co','midgard-otjihavera-windhoek':'O&L Collection','mile-108':'NWR','mokuti-etosha':'O&L Collection','mowani-campsite':'Chiwani','mowani-mountain-camp':'Chiwani','mushara-bush-camp':'Mushara Collection','mushara-lodge':'Mushara Collection','mushara-outpost':'Mushara Collection','namib-desert-lodge':'Gondwana Collection','namib-dune-star-camp':'Gondwana Collection','namib-outpost':'Ondili','namushasha-river-camping2go':'Gondwana Collection','namushasha-river-lodge':'Gondwana Collection','namushasha-river-villa':'Gondwana Collection','namutoni-resort':'NWR','naukluft-camp':'NWR','nkasa-linyanti':'Natural Selection','ocean-house-guesthouse':'Hammerstein Africa','okapuka-safari-lodge':'Gondwana Collection','okaukuejo-camp':'NWR','okonjima-bush-camp':'Okonjima / AfriCat','okonjima-plains-camp':'Okonjima / AfriCat','okonjima-villa':'Okonjima / AfriCat','olifantsrus-campsite':'NWR','olive-grove-guesthouse':'Quiver & Co','omarunga-epupa-falls-camp':'Gondwana Collection','ondudu-safari-lodge':'Journeys Namibia','onduli-enclave':'Ultimate Safaris','onduli-ridge':'Ultimate Safaris','ongava-lodge':'Ongava','ongava-tented-camp':'Ongava','onguma-bush-camp':'Onguma','onguma-camp-kala':'Onguma','onguma-forest-camp':'Onguma','onguma-leadwood-campsite':'Onguma','onguma-tamboti-campsite':'Onguma','onguma-tented-camp':'Onguma','onguma-the-fort':'Onguma','onkoshi-camp':'NWR','palmwag-camping2go':'Gondwana Collection','palmwag-lodge':'Gondwana Collection','palmwag-under-canvas-sleep-out':'Gondwana Collection','popa-falls-resort':'NWR','reverie-kalahari-pod':'Gondwana Collection','safari-house':'Natural Selection','safarihoek-lodge':'Natural Selection','sesriem-campsite':'NWR','sesriem-oshana-campsite':'Sun Karros','shark-island-resort':'NWR','shipwreck-lodge':'Natural Selection','sossus-dune-lodge':'NWR','sossus-oasis-campsite':'Taleni Africa','sossusvlei-lodge':'Taleni Africa','spitzkoppe-cabin-camp':'Logufa','spitzkoppe-restcamp':'Logufa','spitzkoppen-lodge':'Logufa','strand-hotel-swakopmund':'O&L Collection','swakopmund-sands':'Quiver & Co','terrace-bay-resort':'NWR','teufelskrallen-lodge':'Ondili','the-delight-swakopmund':'Gondwana Collection','the-desert-grace':'Gondwana Collection','the-ekipa-etosha-pod':'Gondwana Collection','the-pearls-beach-pods':'Gondwana Collection','the-weinberg-windhoek':'Gondwana Collection','ti-melen':'Ondili','toshari-lodge':'Quiver & Co','twyfelfontein-adventure-camp':'Ondili','twyfelfontein-country-lodge':'Namibia Country Lodges','villa-mushara':'Mushara Collection','waterberg-camp':'NWR','we-kebi-safari-lodge':'Hammerstein Africa','weinberg-urban-pod':'Gondwana Collection','wilderness-damaraland-camp':'Wilderness','wilderness-desert-rhino-camp':'Wilderness','wilderness-doro-nawas':'Wilderness','wilderness-hoanib-skeleton-coast-camp':'Wilderness','wilderness-kulala-desert-lodge':'Wilderness','wilderness-little-kulala':'Wilderness','wilderness-serra-cafema':'Wilderness','windpomp-14-sea-side-camp':'Sun Karros','wolwedans-boulders-camp':'Wolwedans','wolwedans-dune-camp':'Wolwedans','wolwedans-dunes-lodge':'Wolwedans','wolwedans-mountain-view-suite':'Wolwedans','wolwedans-plains-camp':'Wolwedans','zambezi-mubala-camp':'Gondwana Collection','zambezi-mubala-lodge':'Gondwana Collection','zambezi-queen':'Zambezi Queen Collection'};
 function enc(s){return (s||'').replace(/"/g,'&quot;');}
 function dec(s){return (s||'').replace(/&quot;/g,'"');}
 
@@ -353,7 +362,8 @@ function render(){
   var cat=document.getElementById('category').value;
   var rows=DATA.rows.filter(function(r){
     if(q&&r.name.toLowerCase().indexOf(q)<0)return false;
-    if(cat&&r.category!==cat)return false;
+    if(cat.indexOf('g:')===0){var gw=cat.slice(2);var gh=GROUP_OF[r.slug];if(!gh)return false;if(gw!=='*'&&gh!==gw)return false;}
+    else if(cat&&r.category!==cat)return false;
     if(rg&&r.region!==rg)return false;
     if(st==='need27sto'&&(!r.lodge||r.sto27))return false;
     if(st==='need27rack'&&(!r.lodge||r.rack27))return false;
@@ -370,6 +380,7 @@ function render(){
   function detailRow(r){
     var nm=r.url?'<a class="rlink" href="'+r.url+'" target="_blank" rel="noopener">'+r.name+'</a>':r.name;
     var tag=(r.category&&r.category!=='Lodge')?'<span class="type">'+r.category+'</span>':'';
+    if(cat.indexOf('g:')===0&&GROUP_OF[r.slug]) tag+='<span class="type" style="color:#5f7f72;border-color:rgba(135,169,150,.5)">'+GROUP_OF[r.slug]+'</span>';
     if(r.orphan)tag+='<span class="type">orphan</span>';
     var rateCells;
     if(r.provider){rateCells='<td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td><td class="cell">'+dot('na')+'</td>';}
@@ -378,14 +389,25 @@ function render(){
   }
   /* Same split as the region summary: the US$ regions read as their own block so
      they aren't mixed in among the N$ ones. */
-  function dhead(key,label,n){var open=!foldG[key];return '<tr class="grouprow gfold" data-g="'+key+'"><td colspan="10"><span class="fold-caret">'+(open?'&#9662;':'&#9656;')+'</span> '+label+' <span style="opacity:.6">· '+n+'</span>'+(open?'':' <span style="opacity:.5;letter-spacing:1px">— click to open</span>')+'</td></tr>';}
+  function dhead(key,label,n){var open=!foldG[key];return '<tr class="grouprow gfold" data-g="'+key+'"><td colspan="10"><span class="fold-caret">'+(open?'&#9662;':'&#9656;')+'</span> '+label+' <span class="gm">— '+n+' propert'+(n===1?'y':'ies')+(open?'':' · click to open')+'</span></td></tr>';}
   var dNam=rows.filter(function(r){return !BEYOND[r.region];});
   var dBey=rows.filter(function(r){return BEYOND[r.region];});
   /* a search or filter is a request to see rows — open both blocks for it */
   if(q||rg||st||cat){foldG.nam=false;foldG.bey=false;}
   var dhtml='';
   if(dNam.length) dhtml+=dhead('nam','Namibia · N$',dNam.length)+(foldG.nam?'':dNam.map(detailRow).join(''));
-  if(dBey.length) dhtml+=dhead('bey','Botswana · Chobe · Okavango Delta · Victoria Falls · US$',dBey.length)+(foldG.bey?'':dBey.map(detailRow).join(''));
+  if(dBey.length){
+    dhtml+=dhead('bey','Botswana · Chobe · Okavango Delta · Victoria Falls · US$',dBey.length);
+    if(!foldG.bey){
+      /* Chobe sits inside Botswana; the Delta and the Falls read on their own */
+      var BEY_SECS=[{label:'Botswana',reg:{'Botswana':1,'Chobe':1}},{label:'Okavango Delta',reg:{'Okavango Delta':1}},{label:'Victoria Falls',reg:{'Victoria Falls':1}}];
+      BEY_SECS.forEach(function(sec){
+        var part=dBey.filter(function(r){return sec.reg[r.region];});
+        if(!part.length)return;
+        dhtml+='<tr class="grouprow sub"><td colspan="10">'+sec.label+' <span class="gm">— '+part.length+' propert'+(part.length===1?'y':'ies')+'</span></td></tr>'+part.map(detailRow).join('');
+      });
+    }
+  }
   document.getElementById('tb').innerHTML=dhtml;
   document.querySelectorAll('#tb .gfold').forEach(function(tr){tr.addEventListener('click',function(){var k=tr.dataset.g;foldG[k]=!foldG[k];render();});});
   document.getElementById('count').textContent=rows.length+' of '+DATA.rows.length+' shown';
