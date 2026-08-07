@@ -2629,6 +2629,18 @@ function parsePrice(s) {
 function flatten(doc) {
   const rates = [];
   const sections = doc && Array.isArray(doc.sections) ? doc.sections : [];
+  // A label that appears in more than one section (the same room across Low,
+  // High and Shoulder, say) is ambiguous once the sections are flattened away —
+  // the agent sees three identical rows at three prices. Fold the section title
+  // into those labels only. Labels that are already unique are left untouched.
+  const _seen = {};
+  for (const sec of sections) {
+    for (const row of (sec && Array.isArray(sec.rows) ? sec.rows : [])) {
+      if (!Array.isArray(row) || !row[0]) continue;
+      const k = String(row[0]).trim();
+      _seen[k] = (_seen[k] || 0) + 1;
+    }
+  }
   for (const sec of sections) {
     const rows = sec && Array.isArray(sec.rows) ? sec.rows : [];
     for (const row of rows) {
@@ -2636,7 +2648,8 @@ function flatten(doc) {
       const n = String(row[0] == null ? '' : row[0]).trim();
       const p = parsePrice(row[1]);
       if (!n || p == null) continue;
-      rates.push({ n: n, p: p });
+      const t = String((sec && sec.title) || '').trim();
+      rates.push({ n: (_seen[n] > 1 && t) ? (n + ' — ' + t) : n, p: p });
     }
   }
   return { name: (doc && doc.name) || '', region: (doc && doc.region) || '', rates: rates };
@@ -13285,7 +13298,7 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 March – 30 November 2026",
           "rows": [
             [
-              "Cabin — PP Sharing",
+              "Cabin — PP Sharing — 1 March – 30 November 2026",
               "13,432"
             ]
           ]
@@ -13294,7 +13307,7 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 December 2026 – 28 February 2027",
           "rows": [
             [
-              "Cabin — PP Sharing",
+              "Cabin — PP Sharing — 1 December 2026 – 28 February 2027",
               "10,896"
             ]
           ]
@@ -13327,7 +13340,7 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 March – 30 November 2026",
           "rows": [
             [
-              "PP Sharing",
+              "PP Sharing — 1 March – 30 November 2026",
               "9,247"
             ]
           ]
@@ -13336,7 +13349,7 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 December 2026 – 28 February 2027",
           "rows": [
             [
-              "PP Sharing",
+              "PP Sharing — 1 December 2026 – 28 February 2027",
               "8,556"
             ]
           ]
@@ -13369,11 +13382,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 March – 30 November 2026",
           "rows": [
             [
-              "Suite — PP Sharing",
+              "Suite — PP Sharing — 1 March – 30 November 2026",
               "17,570"
             ],
             [
-              "Luxury Suite — PP Sharing",
+              "Luxury Suite — PP Sharing — 1 March – 30 November 2026",
               "20,739"
             ]
           ]
@@ -13382,11 +13395,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 December 2026 – 28 February 2027",
           "rows": [
             [
-              "Suite — PP Sharing",
+              "Suite — PP Sharing — 1 December 2026 – 28 February 2027",
               "15,819"
             ],
             [
-              "Luxury Suite — PP Sharing",
+              "Luxury Suite — PP Sharing — 1 December 2026 – 28 February 2027",
               "18,662"
             ]
           ]
@@ -13439,11 +13452,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Low Season (1 Nov 2025 – 31 May 2026)",
           "rows": [
             [
-              "Per Person Sharing",
+              "Per Person Sharing — Low Season (1 Nov 2025 – 31 May 2026)",
               "4,400"
             ],
             [
-              "Per Person Single",
+              "Per Person Single — Low Season (1 Nov 2025 – 31 May 2026)",
               "4,900"
             ]
           ]
@@ -13452,11 +13465,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "High Season (1 Jun – 31 Oct 2026)",
           "rows": [
             [
-              "Per Person Sharing",
+              "Per Person Sharing — High Season (1 Jun – 31 Oct 2026)",
               "6,000"
             ],
             [
-              "Per Person Single",
+              "Per Person Single — High Season (1 Jun – 31 Oct 2026)",
               "6,300"
             ]
           ]
@@ -13465,11 +13478,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Low Season (1 Nov 2026 – 31 May 2027)",
           "rows": [
             [
-              "Per Person Sharing",
+              "Per Person Sharing — Low Season (1 Nov 2026 – 31 May 2027)",
               "4,700"
             ],
             [
-              "Per Person Single",
+              "Per Person Single — Low Season (1 Nov 2026 – 31 May 2027)",
               "5,200"
             ]
           ]
@@ -13510,27 +13523,27 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Beachfront Units",
           "rows": [
             [
-              "Adult — Off Season",
+              "Adult — Off Season — Beachfront Units",
               "310"
             ],
             [
-              "Child 6–15 — Off Season",
+              "Child 6–15 — Off Season — Beachfront Units",
               "200"
             ],
             [
-              "Child 0–5 — Off Season",
+              "Child 0–5 — Off Season — Beachfront Units",
               "50"
             ],
             [
-              "Adult — Peak Season",
+              "Adult — Peak Season — Beachfront Units",
               "340"
             ],
             [
-              "Child 6–15 — Peak Season",
+              "Child 6–15 — Peak Season — Beachfront Units",
               "270"
             ],
             [
-              "Child 0–5 — Peak Season",
+              "Child 0–5 — Peak Season — Beachfront Units",
               "85"
             ]
           ]
@@ -13539,27 +13552,27 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Middle Row Units",
           "rows": [
             [
-              "Adult — Off Season",
+              "Adult — Off Season — Middle Row Units",
               "280"
             ],
             [
-              "Child 6–15 — Off Season",
+              "Child 6–15 — Off Season — Middle Row Units",
               "195"
             ],
             [
-              "Child 0–5 — Off Season",
+              "Child 0–5 — Off Season — Middle Row Units",
               "50"
             ],
             [
-              "Adult — Peak Season",
+              "Adult — Peak Season — Middle Row Units",
               "325"
             ],
             [
-              "Child 6–15 — Peak Season",
+              "Child 6–15 — Peak Season — Middle Row Units",
               "260"
             ],
             [
-              "Child 0–5 — Peak Season",
+              "Child 0–5 — Peak Season — Middle Row Units",
               "75"
             ]
           ]
@@ -13568,27 +13581,27 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Back Row Units",
           "rows": [
             [
-              "Adult — Off Season",
+              "Adult — Off Season — Back Row Units",
               "260"
             ],
             [
-              "Child 6–15 — Off Season",
+              "Child 6–15 — Off Season — Back Row Units",
               "190"
             ],
             [
-              "Child 0–5 — Off Season",
+              "Child 0–5 — Off Season — Back Row Units",
               "50"
             ],
             [
-              "Adult — Peak Season",
+              "Adult — Peak Season — Back Row Units",
               "315"
             ],
             [
-              "Child 6–15 — Peak Season",
+              "Child 6–15 — Peak Season — Back Row Units",
               "250"
             ],
             [
-              "Child 0–5 — Peak Season",
+              "Child 0–5 — Peak Season — Back Row Units",
               "70"
             ]
           ]
@@ -13608,11 +13621,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Standard Chalet",
           "rows": [
             [
-              "Adult Double Room",
+              "Adult Double Room — Standard Chalet",
               "2,400"
             ],
             [
-              "Adult Single Room",
+              "Adult Single Room — Standard Chalet",
               "1,550"
             ],
             [
@@ -13629,11 +13642,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "Deluxe Chalet (sleeps 3)",
           "rows": [
             [
-              "Adult Double Room",
+              "Adult Double Room — Deluxe Chalet (sleeps 3)",
               "2,740"
             ],
             [
-              "Adult Single Room",
+              "Adult Single Room — Deluxe Chalet (sleeps 3)",
               "1,900"
             ],
             [
@@ -13670,11 +13683,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 Nov 2025 – 31 May 2026",
           "rows": [
             [
-              "Per Person",
+              "Per Person — 1 Nov 2025 – 31 May 2026",
               "440"
             ],
             [
-              "Child 6–15",
+              "Child 6–15 — 1 Nov 2025 – 31 May 2026",
               "220"
             ]
           ]
@@ -13683,7 +13696,7 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 Jun – 31 Oct 2026",
           "rows": [
             [
-              "Per Person",
+              "Per Person — 1 Jun – 31 Oct 2026",
               "560"
             ]
           ]
@@ -13692,11 +13705,11 @@ Object.assign(SHEET_RACK_BY_YEAR, {
           "title": "1 Nov 2026 – 31 May 2027",
           "rows": [
             [
-              "Per Person",
+              "Per Person — 1 Nov 2026 – 31 May 2027",
               "470"
             ],
             [
-              "Child 6–15",
+              "Child 6–15 — 1 Nov 2026 – 31 May 2027",
               "240"
             ]
           ]
@@ -13741,137 +13754,107 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Nkasa Linyanti — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "Nkasa Linyanti",
           "rows": [
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Nkasa Linyanti",
               "10,075.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Nkasa Linyanti",
               "4,042.80"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Nkasa Linyanti",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Nkasa Linyanti — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder High 1-31 May — Nkasa Linyanti",
               "12,523.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Nkasa Linyanti",
               "5,025.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — Nkasa Linyanti",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Nkasa Linyanti — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Nkasa Linyanti",
               "14,966.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Nkasa Linyanti",
               "6,006"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Nkasa Linyanti",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "Nkasa Linyanti — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Nkasa Linyanti",
               "16,075.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Nkasa Linyanti",
               "6,451.20"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — Nkasa Linyanti",
               "14,514"
             ]
           ]
         },
         {
-          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "When would you like to travel?",
           "rows": [
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "10,075.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "4,042.80"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "12,523.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel?",
               "5,025.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "14,966.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "6,006"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "16,075.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "6,451.20"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "14,514"
             ]
           ]
@@ -13888,411 +13871,396 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season STO 15%",
+          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026",
           "rows": [
             [
-              "9 x Bungalows — DBB p/p Sharing",
+              "9 x Bungalows — DBB p/p Sharing — Low Season STO 15%",
               "5,172"
             ],
             [
-              "9 x Bungalows — DBB Single Person",
+              "9 x Bungalows — DBB Single Person — Low Season STO 15%",
               "6,976.80"
             ],
             [
-              "Bungalow 2-Night FI Package — Sharing p/p",
+              "Bungalow 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "15,157.20"
             ],
             [
-              "Bungalow 2-Night FI Package — Single",
+              "Bungalow 2-Night FI Package — Single — Low Season STO 15%",
               "18,523.20"
             ],
             [
-              "Bungalow 3-Night FI Package — Sharing p/p",
+              "Bungalow 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "22,002"
             ],
             [
-              "Bungalow 3-Night FI Package — Single",
+              "Bungalow 3-Night FI Package — Single — Low Season STO 15%",
               "27,204"
             ],
             [
-              "1 x Kipwe Suite — DBB p/p Sharing",
+              "1 x Kipwe Suite — DBB p/p Sharing — Low Season STO 15%",
               "8,710.80"
             ],
             [
-              "1 x Kipwe Suite — DBB Single Person",
+              "1 x Kipwe Suite — DBB Single Person — Low Season STO 15%",
               "11,872.80"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "Kipwe Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "22,195.20"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Single",
+              "Kipwe Suite 2-Night FI Package — Single — Low Season STO 15%",
               "28,285.20"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "Kipwe Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "32,528.40"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Single",
+              "Kipwe Suite 3-Night FI Package — Single — Low Season STO 15%",
               "41,830.80"
             ],
             [
-              "2 x Luxury Suites — DBB p/p Sharing",
+              "2 x Luxury Suites — DBB p/p Sharing — Low Season STO 15%",
               "12,729.60"
             ],
             [
-              "2 x Luxury Suites — DBB Single Person",
+              "2 x Luxury Suites — DBB Single Person — Low Season STO 15%",
               "17,310"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "Luxury Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "30,375.60"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Single",
+              "Luxury Suite 2-Night FI Package — Single — Low Season STO 15%",
               "39,280.80"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "Luxury Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "44,737.20"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Single",
+              "Luxury Suite 3-Night FI Package — Single — Low Season STO 15%",
               "58,262.40"
-            ]
-          ]
-        },
-        {
-          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — High Season STO 15%",
-          "rows": [
+            ],
             [
-              "9 x Bungalows — DBB p/p Sharing",
+              "9 x Bungalows — DBB p/p Sharing — High Season STO 15%",
               "6,834"
             ],
             [
-              "9 x Bungalows — DBB Single Person",
+              "9 x Bungalows — DBB Single Person — High Season STO 15%",
               "10,118.40"
             ],
             [
-              "Bungalow 2-Night FI Package — Sharing p/p",
+              "Bungalow 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "18,462"
             ],
             [
-              "Bungalow 2-Night FI Package — Single",
+              "Bungalow 2-Night FI Package — Single — High Season STO 15%",
               "23,174.40"
             ],
             [
-              "Bungalow 3-Night FI Package — Sharing p/p",
+              "Bungalow 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "26,928"
             ],
             [
-              "Bungalow 3-Night FI Package — Single",
+              "Bungalow 3-Night FI Package — Single — High Season STO 15%",
               "34,149.60"
             ],
             [
-              "1 x Kipwe Suite — DBB p/p Sharing",
+              "1 x Kipwe Suite — DBB p/p Sharing — High Season STO 15%",
               "10,435.20"
             ],
             [
-              "1 x Kipwe Suite — DBB Single Person",
+              "1 x Kipwe Suite — DBB Single Person — High Season STO 15%",
               "15,096"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "Kipwe Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "25,642.80"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Single",
+              "Kipwe Suite 2-Night FI Package — Single — High Season STO 15%",
               "33,088.80"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "Kipwe Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "37,730.40"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Single",
+              "Kipwe Suite 3-Night FI Package — Single — High Season STO 15%",
               "49,021.20"
             ],
             [
-              "2 x Luxury Suites — DBB p/p Sharing",
+              "2 x Luxury Suites — DBB p/p Sharing — High Season STO 15%",
               "15,106.80"
             ],
             [
-              "2 x Luxury Suites — DBB Single Person",
+              "2 x Luxury Suites — DBB Single Person — High Season STO 15%",
               "21,195.60"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "Luxury Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "35,088"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Single",
+              "Luxury Suite 2-Night FI Package — Single — High Season STO 15%",
               "45,400.80"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "Luxury Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "51,867.60"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Single",
+              "Luxury Suite 3-Night FI Package — Single — High Season STO 15%",
               "67,473.60"
             ]
           ]
         },
         {
-          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — Low Season NETT",
+          "title": "Child Sharing Rates (accommodated in children's tent / camping bed)",
           "rows": [
             [
-              "Child (4-12 yrs) — DBB per night",
+              "Child (4-12 yrs) — DBB per night — Low Season NETT",
               "3,132"
             ],
             [
-              "Child (4-12 yrs) — 2-Night FI Package",
+              "Child (4-12 yrs) — 2-Night FI Package — Low Season NETT",
               "9,828"
             ],
             [
-              "Child (4-12 yrs) — 3-Night FI Package",
+              "Child (4-12 yrs) — 3-Night FI Package — Low Season NETT",
+              "13,428"
+            ],
+            [
+              "Child (4-12 yrs) — DBB per night — High Season NETT",
+              "3,132"
+            ],
+            [
+              "Child (4-12 yrs) — 2-Night FI Package — High Season NETT",
+              "9,828"
+            ],
+            [
+              "Child (4-12 yrs) — 3-Night FI Package — High Season NETT",
               "13,428"
             ]
           ]
         },
         {
-          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — High Season NETT",
+          "title": "Guide & Pilot Rates",
           "rows": [
             [
-              "Child (4-12 yrs) — DBB per night",
-              "3,132"
-            ],
-            [
-              "Child (4-12 yrs) — 2-Night FI Package",
-              "9,828"
-            ],
-            [
-              "Child (4-12 yrs) — 3-Night FI Package",
-              "13,428"
-            ]
-          ]
-        },
-        {
-          "title": "Guide & Pilot Rates — Rate (N$)",
-          "rows": [
-            [
-              "Tour Guide Room (per Guide/Pilot per night)",
+              "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
               "2,652"
             ]
           ]
         },
         {
-          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season RACK",
+          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026",
           "rows": [
             [
-              "9 x Bungalows — DBB p/p Sharing",
+              "9 x Bungalows — DBB p/p Sharing — Low Season RACK",
               "6,084"
             ],
             [
-              "9 x Bungalows — DBB Single Person",
+              "9 x Bungalows — DBB Single Person — Low Season RACK",
               "8,208"
             ],
             [
-              "Bungalow 2-Night FI Package — Sharing p/p",
+              "Bungalow 2-Night FI Package — Sharing p/p — Low Season RACK",
               "17,832"
             ],
             [
-              "Bungalow 2-Night FI Package — Single",
+              "Bungalow 2-Night FI Package — Single — Low Season RACK",
               "21,792"
             ],
             [
-              "Bungalow 3-Night FI Package — Sharing p/p",
+              "Bungalow 3-Night FI Package — Sharing p/p — Low Season RACK",
               "25,884"
             ],
             [
-              "Bungalow 3-Night FI Package — Single",
+              "Bungalow 3-Night FI Package — Single — Low Season RACK",
               "32,004"
             ],
             [
-              "1 x Kipwe Suite — DBB p/p Sharing",
+              "1 x Kipwe Suite — DBB p/p Sharing — Low Season RACK",
               "10,248"
             ],
             [
-              "1 x Kipwe Suite — DBB Single Person",
+              "1 x Kipwe Suite — DBB Single Person — Low Season RACK",
               "13,968"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "Kipwe Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
               "26,112"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Single",
+              "Kipwe Suite 2-Night FI Package — Single — Low Season RACK",
               "33,276"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "Kipwe Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
               "38,268"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Single",
+              "Kipwe Suite 3-Night FI Package — Single — Low Season RACK",
               "49,212"
             ],
             [
-              "2 x Luxury Suites — DBB p/p Sharing",
+              "2 x Luxury Suites — DBB p/p Sharing — Low Season RACK",
               "14,976"
             ],
             [
-              "2 x Luxury Suites — DBB Single Person",
+              "2 x Luxury Suites — DBB Single Person — Low Season RACK",
               "20,364"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "Luxury Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
               "35,736"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Single",
+              "Luxury Suite 2-Night FI Package — Single — Low Season RACK",
               "46,212"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "Luxury Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
               "52,632"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Single",
+              "Luxury Suite 3-Night FI Package — Single — Low Season RACK",
               "68,544"
-            ]
-          ]
-        },
-        {
-          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — High Season RACK",
-          "rows": [
+            ],
             [
-              "9 x Bungalows — DBB p/p Sharing",
+              "9 x Bungalows — DBB p/p Sharing — High Season RACK",
               "8,040"
             ],
             [
-              "9 x Bungalows — DBB Single Person",
+              "9 x Bungalows — DBB Single Person — High Season RACK",
               "11,904"
             ],
             [
-              "Bungalow 2-Night FI Package — Sharing p/p",
+              "Bungalow 2-Night FI Package — Sharing p/p — High Season RACK",
               "21,720"
             ],
             [
-              "Bungalow 2-Night FI Package — Single",
+              "Bungalow 2-Night FI Package — Single — High Season RACK",
               "27,264"
             ],
             [
-              "Bungalow 3-Night FI Package — Sharing p/p",
+              "Bungalow 3-Night FI Package — Sharing p/p — High Season RACK",
               "31,680"
             ],
             [
-              "Bungalow 3-Night FI Package — Single",
+              "Bungalow 3-Night FI Package — Single — High Season RACK",
               "40,176"
             ],
             [
-              "1 x Kipwe Suite — DBB p/p Sharing",
+              "1 x Kipwe Suite — DBB p/p Sharing — High Season RACK",
               "12,276"
             ],
             [
-              "1 x Kipwe Suite — DBB Single Person",
+              "1 x Kipwe Suite — DBB Single Person — High Season RACK",
               "17,760"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Sharing p/p",
+              "Kipwe Suite 2-Night FI Package — Sharing p/p — High Season RACK",
               "30,168"
             ],
             [
-              "Kipwe Suite 2-Night FI Package — Single",
+              "Kipwe Suite 2-Night FI Package — Single — High Season RACK",
               "38,928"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Sharing p/p",
+              "Kipwe Suite 3-Night FI Package — Sharing p/p — High Season RACK",
               "44,388"
             ],
             [
-              "Kipwe Suite 3-Night FI Package — Single",
+              "Kipwe Suite 3-Night FI Package — Single — High Season RACK",
               "57,672"
             ],
             [
-              "2 x Luxury Suites — DBB p/p Sharing",
+              "2 x Luxury Suites — DBB p/p Sharing — High Season RACK",
               "17,772"
             ],
             [
-              "2 x Luxury Suites — DBB Single Person",
+              "2 x Luxury Suites — DBB Single Person — High Season RACK",
               "24,936"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Sharing p/p",
+              "Luxury Suite 2-Night FI Package — Sharing p/p — High Season RACK",
               "41,280"
             ],
             [
-              "Luxury Suite 2-Night FI Package — Single",
+              "Luxury Suite 2-Night FI Package — Single — High Season RACK",
               "53,412"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Sharing p/p",
+              "Luxury Suite 3-Night FI Package — Sharing p/p — High Season RACK",
               "61,020"
             ],
             [
-              "Luxury Suite 3-Night FI Package — Single",
+              "Luxury Suite 3-Night FI Package — Single — High Season RACK",
               "79,380"
             ]
           ]
         },
         {
-          "title": "Activities offered at Camp Kipwe — Nett Price (N$)",
+          "title": "Activities offered at Camp Kipwe",
           "rows": [
             [
-              "Nature Drive (guided, Morning)",
+              "Nature Drive (guided, Morning) — Nett Price (N$)",
               "1,632"
             ],
             [
-              "Twyfelfontein Excursion (guided, Afternoon)",
+              "Twyfelfontein Excursion (guided, Afternoon) — Nett Price (N$)",
               "1,332"
             ],
             [
-              "Damara Living Museum Entry",
+              "Damara Living Museum Entry — Nett Price (N$)",
               "384"
             ],
             [
-              "All-Inclusive Drinks Add-On",
+              "All-Inclusive Drinks Add-On — Nett Price (N$)",
               "1,440"
             ]
           ]
         },
         {
-          "title": "Transfers (Charged pp one-way) — Nett Price (N$)",
+          "title": "Transfers (Charged pp one-way)",
           "rows": [
             [
-              "Twyfelfontein Airstrip Transfer",
+              "Twyfelfontein Airstrip Transfer — Nett Price (N$)",
               "474"
             ],
             [
-              "!Doro Nawas Transfer",
+              "!Doro Nawas Transfer — Nett Price (N$)",
               "558"
             ],
             [
-              "Damaraland Camp Transfer",
+              "Damaraland Camp Transfer — Nett Price (N$)",
               "834"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Price (N$)",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Price (N$)",
               "474"
             ],
             [
-              "Lunch",
+              "Lunch — Price (N$)",
               "450"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Price (N$)",
               "306"
             ],
             [
-              "Dinner (3 Course)",
+              "Dinner (3 Course) — Price (N$)",
               "1,068"
             ]
           ]
@@ -14309,603 +14277,588 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season STO 15%",
+          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026",
           "rows": [
             [
-              "8 x View Rooms — DBB p/p Sharing",
+              "8 x View Rooms — DBB p/p Sharing — Low Season STO 15%",
               "6,058.80"
             ],
             [
-              "8 x View Rooms — DBB Single Person",
+              "8 x View Rooms — DBB Single Person — Low Season STO 15%",
               "8,180.40"
             ],
             [
-              "View Room 2-Night FI Package — Sharing p/p",
+              "View Room 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "16,922.40"
             ],
             [
-              "View Room 2-Night FI Package — Single",
+              "View Room 2-Night FI Package — Single — Low Season STO 15%",
               "20,950.80"
             ],
             [
-              "View Room 3-Night FI Package — Sharing p/p",
+              "View Room 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "24,663.60"
             ],
             [
-              "View Room 3-Night FI Package — Single",
+              "View Room 3-Night FI Package — Single — Low Season STO 15%",
               "30,783.60"
             ],
             [
-              "4 x Superior View Rooms — DBB p/p Sharing",
+              "4 x Superior View Rooms — DBB p/p Sharing — Low Season STO 15%",
               "6,528"
             ],
             [
-              "4 x Superior View Rooms — DBB Single Person",
+              "4 x Superior View Rooms — DBB Single Person — Low Season STO 15%",
               "8,792.40"
             ],
             [
-              "Superior View 2-Night FI Package — Sharing p/p",
+              "Superior View 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "17,829.60"
             ],
             [
-              "Superior View 2-Night FI Package — Single",
+              "Superior View 2-Night FI Package — Single — Low Season STO 15%",
               "22,154.40"
             ],
             [
-              "Superior View 3-Night FI Package — Sharing p/p",
+              "Superior View 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "26,010"
             ],
             [
-              "Superior View 3-Night FI Package — Single",
+              "Superior View 3-Night FI Package — Single — Low Season STO 15%",
               "32,619.60"
             ],
             [
-              "1 x Luxury Room — DBB p/p Sharing",
+              "1 x Luxury Room — DBB p/p Sharing — Low Season STO 15%",
               "6,824.40"
             ],
             [
-              "1 x Luxury Room — DBB Single Person",
+              "1 x Luxury Room — DBB Single Person — Low Season STO 15%",
               "9,211.20"
             ],
             [
-              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "Luxury Room 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "18,554.40"
             ],
             [
-              "Luxury Room 2-Night FI Package — Single",
+              "Luxury Room 2-Night FI Package — Single — Low Season STO 15%",
               "23,103.60"
             ],
             [
-              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "Luxury Room 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "27,081.60"
             ],
             [
-              "Luxury Room 3-Night FI Package — Single",
+              "Luxury Room 3-Night FI Package — Single — Low Season STO 15%",
               "33,997.20"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "1 x Rock Suite (Mini) — DBB p/p Sharing — Low Season STO 15%",
               "7,772.40"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB Single Person",
+              "1 x Rock Suite (Mini) — DBB Single Person — Low Season STO 15%",
               "10,476"
             ],
             [
-              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "Rock Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "20,472"
             ],
             [
-              "Rock Suite 2-Night FI Package — Single",
+              "Rock Suite 2-Night FI Package — Single — Low Season STO 15%",
               "25,653.60"
             ],
             [
-              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "Rock Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "29,926.80"
             ],
             [
-              "Rock Suite 3-Night FI Package — Single",
+              "Rock Suite 3-Night FI Package — Single — Low Season STO 15%",
               "37,821.60"
             ],
             [
-              "1 x Mountain Suite — DBB p/p Sharing",
+              "1 x Mountain Suite — DBB p/p Sharing — Low Season STO 15%",
               "12,852"
             ],
             [
-              "1 x Mountain Suite — DBB Single Person",
+              "1 x Mountain Suite — DBB Single Person — Low Season STO 15%",
               "17,473.20"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "Mountain Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
               "30,631.20"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Single",
+              "Mountain Suite 2-Night FI Package — Single — Low Season STO 15%",
               "39,627.60"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "Mountain Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
               "45,135.60"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Single",
+              "Mountain Suite 3-Night FI Package — Single — Low Season STO 15%",
               "58,783.20"
-            ]
-          ]
-        },
-        {
-          "title": "STO15 Rate — 01 Jan 2026 to 31 Dec 2026 — High Season STO 15%",
-          "rows": [
+            ],
             [
-              "8 x View Rooms — DBB p/p Sharing",
+              "8 x View Rooms — DBB p/p Sharing — High Season STO 15%",
               "8,119.20"
             ],
             [
-              "8 x View Rooms — DBB Single Person",
+              "8 x View Rooms — DBB Single Person — High Season STO 15%",
               "11,077.20"
             ],
             [
-              "View Room 2-Night FI Package — Sharing p/p",
+              "View Room 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "21,022.80"
             ],
             [
-              "View Room 2-Night FI Package — Single",
+              "View Room 2-Night FI Package — Single — High Season STO 15%",
               "26,703.60"
             ],
             [
-              "View Room 3-Night FI Package — Sharing p/p",
+              "View Room 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "30,783.60"
             ],
             [
-              "View Room 3-Night FI Package — Single",
+              "View Room 3-Night FI Package — Single — High Season STO 15%",
               "39,444"
             ],
             [
-              "4 x Superior View Rooms — DBB p/p Sharing",
+              "4 x Superior View Rooms — DBB p/p Sharing — High Season STO 15%",
               "8,710.80"
             ],
             [
-              "4 x Superior View Rooms — DBB Single Person",
+              "4 x Superior View Rooms — DBB Single Person — High Season STO 15%",
               "11,750.40"
             ],
             [
-              "Superior View 2-Night FI Package — Sharing p/p",
+              "Superior View 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "22,236"
             ],
             [
-              "Superior View 2-Night FI Package — Single",
+              "Superior View 2-Night FI Package — Single — High Season STO 15%",
               "28,060.80"
             ],
             [
-              "Superior View 3-Night FI Package — Sharing p/p",
+              "Superior View 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "32,619.60"
             ],
             [
-              "Superior View 3-Night FI Package — Single",
+              "Superior View 3-Night FI Package — Single — High Season STO 15%",
               "41,493.60"
             ],
             [
-              "1 x Luxury Room — DBB p/p Sharing",
+              "1 x Luxury Room — DBB p/p Sharing — High Season STO 15%",
               "9,129.60"
             ],
             [
-              "1 x Luxury Room — DBB Single Person",
+              "1 x Luxury Room — DBB Single Person — High Season STO 15%",
               "12,301.20"
             ],
             [
-              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "Luxury Room 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "23,174.40"
             ],
             [
-              "Luxury Room 2-Night FI Package — Single",
+              "Luxury Room 2-Night FI Package — Single — High Season STO 15%",
               "29,305.20"
             ],
             [
-              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "Luxury Room 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "33,966"
             ],
             [
-              "Luxury Room 3-Night FI Package — Single",
+              "Luxury Room 3-Night FI Package — Single — High Season STO 15%",
               "43,238.40"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "1 x Rock Suite (Mini) — DBB p/p Sharing — High Season STO 15%",
               "10,006.80"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB Single Person",
+              "1 x Rock Suite (Mini) — DBB Single Person — High Season STO 15%",
               "13,332"
             ],
             [
-              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "Rock Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "24,908.40"
             ],
             [
-              "Rock Suite 2-Night FI Package — Single",
+              "Rock Suite 2-Night FI Package — Single — High Season STO 15%",
               "31,354.80"
             ],
             [
-              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "Rock Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "36,597.60"
             ],
             [
-              "Rock Suite 3-Night FI Package — Single",
+              "Rock Suite 3-Night FI Package — Single — High Season STO 15%",
               "46,359.60"
             ],
             [
-              "1 x Mountain Suite — DBB p/p Sharing",
+              "1 x Mountain Suite — DBB p/p Sharing — High Season STO 15%",
               "15,249.60"
             ],
             [
-              "1 x Mountain Suite — DBB Single Person",
+              "1 x Mountain Suite — DBB Single Person — High Season STO 15%",
               "20,574"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "Mountain Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
               "35,394"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Single",
+              "Mountain Suite 2-Night FI Package — Single — High Season STO 15%",
               "45,808.80"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "Mountain Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
               "52,326"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Single",
+              "Mountain Suite 3-Night FI Package — Single — High Season STO 15%",
               "68,054.40"
             ]
           ]
         },
         {
-          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — Low Season NETT",
+          "title": "Child Sharing Rates (accommodated in children's tent / camping bed)",
           "rows": [
             [
-              "Child (4-12 yrs) — DBB per night",
+              "Child (4-12 yrs) — DBB per night — Low Season NETT",
               "3,132"
             ],
             [
-              "Child (4-12 yrs) — 2-Night FI Package",
+              "Child (4-12 yrs) — 2-Night FI Package — Low Season NETT",
               "9,828"
             ],
             [
-              "Child (4-12 yrs) — 3-Night FI Package",
+              "Child (4-12 yrs) — 3-Night FI Package — Low Season NETT",
+              "13,428"
+            ],
+            [
+              "Child (4-12 yrs) — DBB per night — High Season NETT",
+              "3,132"
+            ],
+            [
+              "Child (4-12 yrs) — 2-Night FI Package — High Season NETT",
+              "9,828"
+            ],
+            [
+              "Child (4-12 yrs) — 3-Night FI Package — High Season NETT",
               "13,428"
             ]
           ]
         },
         {
-          "title": "Child Sharing Rates (accommodated in children's tent / camping bed) — High Season NETT",
+          "title": "Guide & Pilot Rates",
           "rows": [
             [
-              "Child (4-12 yrs) — DBB per night",
-              "3,132"
-            ],
-            [
-              "Child (4-12 yrs) — 2-Night FI Package",
-              "9,828"
-            ],
-            [
-              "Child (4-12 yrs) — 3-Night FI Package",
-              "13,428"
-            ]
-          ]
-        },
-        {
-          "title": "Guide & Pilot Rates — Rate (N$)",
-          "rows": [
-            [
-              "Tour Guide Room (per Guide/Pilot per night)",
+              "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
               "2,652"
             ]
           ]
         },
         {
-          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — Low Season RACK",
+          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026",
           "rows": [
             [
-              "8 x View Rooms — DBB p/p Sharing",
+              "8 x View Rooms — DBB p/p Sharing — Low Season RACK",
               "7,128"
             ],
             [
-              "8 x View Rooms — DBB Single Person",
+              "8 x View Rooms — DBB Single Person — Low Season RACK",
               "9,624"
             ],
             [
-              "View Room 2-Night FI Package — Sharing p/p",
+              "View Room 2-Night FI Package — Sharing p/p — Low Season RACK",
               "19,908"
             ],
             [
-              "View Room 2-Night FI Package — Single",
+              "View Room 2-Night FI Package — Single — Low Season RACK",
               "24,648"
             ],
             [
-              "View Room 3-Night FI Package — Sharing p/p",
+              "View Room 3-Night FI Package — Sharing p/p — Low Season RACK",
               "29,016"
             ],
             [
-              "View Room 3-Night FI Package — Single",
+              "View Room 3-Night FI Package — Single — Low Season RACK",
               "36,216"
             ],
             [
-              "4 x Superior View Rooms — DBB p/p Sharing",
+              "4 x Superior View Rooms — DBB p/p Sharing — Low Season RACK",
               "7,680"
             ],
             [
-              "4 x Superior View Rooms — DBB Single Person",
+              "4 x Superior View Rooms — DBB Single Person — Low Season RACK",
               "10,344"
             ],
             [
-              "Superior View 2-Night FI Package — Sharing p/p",
+              "Superior View 2-Night FI Package — Sharing p/p — Low Season RACK",
               "20,976"
             ],
             [
-              "Superior View 2-Night FI Package — Single",
+              "Superior View 2-Night FI Package — Single — Low Season RACK",
               "26,064"
             ],
             [
-              "Superior View 3-Night FI Package — Sharing p/p",
+              "Superior View 3-Night FI Package — Sharing p/p — Low Season RACK",
               "30,600"
             ],
             [
-              "Superior View 3-Night FI Package — Single",
+              "Superior View 3-Night FI Package — Single — Low Season RACK",
               "38,376"
             ],
             [
-              "1 x Luxury Room — DBB p/p Sharing",
+              "1 x Luxury Room — DBB p/p Sharing — Low Season RACK",
               "8,028"
             ],
             [
-              "1 x Luxury Room — DBB Single Person",
+              "1 x Luxury Room — DBB Single Person — Low Season RACK",
               "10,836"
             ],
             [
-              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "Luxury Room 2-Night FI Package — Sharing p/p — Low Season RACK",
               "21,828"
             ],
             [
-              "Luxury Room 2-Night FI Package — Single",
+              "Luxury Room 2-Night FI Package — Single — Low Season RACK",
               "27,180"
             ],
             [
-              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "Luxury Room 3-Night FI Package — Sharing p/p — Low Season RACK",
               "31,860"
             ],
             [
-              "Luxury Room 3-Night FI Package — Single",
+              "Luxury Room 3-Night FI Package — Single — Low Season RACK",
               "39,996"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "1 x Rock Suite (Mini) — DBB p/p Sharing — Low Season RACK",
               "9,144"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB Single Person",
+              "1 x Rock Suite (Mini) — DBB Single Person — Low Season RACK",
               "12,324"
             ],
             [
-              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "Rock Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
               "24,084"
             ],
             [
-              "Rock Suite 2-Night FI Package — Single",
+              "Rock Suite 2-Night FI Package — Single — Low Season RACK",
               "30,180"
             ],
             [
-              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "Rock Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
               "35,208"
             ],
             [
-              "Rock Suite 3-Night FI Package — Single",
+              "Rock Suite 3-Night FI Package — Single — Low Season RACK",
               "44,496"
             ],
             [
-              "1 x Mountain Suite — DBB p/p Sharing",
+              "1 x Mountain Suite — DBB p/p Sharing — Low Season RACK",
               "15,120"
             ],
             [
-              "1 x Mountain Suite — DBB Single Person",
+              "1 x Mountain Suite — DBB Single Person — Low Season RACK",
               "20,556"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "Mountain Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
               "36,036"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Single",
+              "Mountain Suite 2-Night FI Package — Single — Low Season RACK",
               "46,620"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "Mountain Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
               "53,100"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Single",
+              "Mountain Suite 3-Night FI Package — Single — Low Season RACK",
               "69,156"
-            ]
-          ]
-        },
-        {
-          "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026 — High Season RACK",
-          "rows": [
+            ],
             [
-              "8 x View Rooms — DBB p/p Sharing",
+              "8 x View Rooms — DBB p/p Sharing — High Season RACK",
               "9,552"
             ],
             [
-              "8 x View Rooms — DBB Single Person",
+              "8 x View Rooms — DBB Single Person — High Season RACK",
               "13,032"
             ],
             [
-              "View Room 2-Night FI Package — Sharing p/p",
+              "View Room 2-Night FI Package — Sharing p/p — High Season RACK",
               "24,732"
             ],
             [
-              "View Room 2-Night FI Package — Single",
+              "View Room 2-Night FI Package — Single — High Season RACK",
               "31,416"
             ],
             [
-              "View Room 3-Night FI Package — Sharing p/p",
+              "View Room 3-Night FI Package — Sharing p/p — High Season RACK",
               "36,216"
             ],
             [
-              "View Room 3-Night FI Package — Single",
+              "View Room 3-Night FI Package — Single — High Season RACK",
               "46,404"
             ],
             [
-              "4 x Superior View Rooms — DBB p/p Sharing",
+              "4 x Superior View Rooms — DBB p/p Sharing — High Season RACK",
               "10,248"
             ],
             [
-              "4 x Superior View Rooms — DBB Single Person",
+              "4 x Superior View Rooms — DBB Single Person — High Season RACK",
               "13,824"
             ],
             [
-              "Superior View 2-Night FI Package — Sharing p/p",
+              "Superior View 2-Night FI Package — Sharing p/p — High Season RACK",
               "26,160"
             ],
             [
-              "Superior View 2-Night FI Package — Single",
+              "Superior View 2-Night FI Package — Single — High Season RACK",
               "33,012"
             ],
             [
-              "Superior View 3-Night FI Package — Sharing p/p",
+              "Superior View 3-Night FI Package — Sharing p/p — High Season RACK",
               "38,376"
             ],
             [
-              "Superior View 3-Night FI Package — Single",
+              "Superior View 3-Night FI Package — Single — High Season RACK",
               "48,816"
             ],
             [
-              "1 x Luxury Room — DBB p/p Sharing",
+              "1 x Luxury Room — DBB p/p Sharing — High Season RACK",
               "10,740"
             ],
             [
-              "1 x Luxury Room — DBB Single Person",
+              "1 x Luxury Room — DBB Single Person — High Season RACK",
               "14,472"
             ],
             [
-              "Luxury Room 2-Night FI Package — Sharing p/p",
+              "Luxury Room 2-Night FI Package — Sharing p/p — High Season RACK",
               "27,264"
             ],
             [
-              "Luxury Room 2-Night FI Package — Single",
+              "Luxury Room 2-Night FI Package — Single — High Season RACK",
               "34,476"
             ],
             [
-              "Luxury Room 3-Night FI Package — Sharing p/p",
+              "Luxury Room 3-Night FI Package — Sharing p/p — High Season RACK",
               "39,960"
             ],
             [
-              "Luxury Room 3-Night FI Package — Single",
+              "Luxury Room 3-Night FI Package — Single — High Season RACK",
               "50,868"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB p/p Sharing",
+              "1 x Rock Suite (Mini) — DBB p/p Sharing — High Season RACK",
               "11,772"
             ],
             [
-              "1 x Rock Suite (Mini) — DBB Single Person",
+              "1 x Rock Suite (Mini) — DBB Single Person — High Season RACK",
               "15,684"
             ],
             [
-              "Rock Suite 2-Night FI Package — Sharing p/p",
+              "Rock Suite 2-Night FI Package — Sharing p/p — High Season RACK",
               "29,304"
             ],
             [
-              "Rock Suite 2-Night FI Package — Single",
+              "Rock Suite 2-Night FI Package — Single — High Season RACK",
               "36,888"
             ],
             [
-              "Rock Suite 3-Night FI Package — Sharing p/p",
+              "Rock Suite 3-Night FI Package — Sharing p/p — High Season RACK",
               "43,056"
             ],
             [
-              "Rock Suite 3-Night FI Package — Single",
+              "Rock Suite 3-Night FI Package — Single — High Season RACK",
               "54,540"
             ],
             [
-              "1 x Mountain Suite — DBB p/p Sharing",
+              "1 x Mountain Suite — DBB p/p Sharing — High Season RACK",
               "17,940"
             ],
             [
-              "1 x Mountain Suite — DBB Single Person",
+              "1 x Mountain Suite — DBB Single Person — High Season RACK",
               "24,204"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Sharing p/p",
+              "Mountain Suite 2-Night FI Package — Sharing p/p — High Season RACK",
               "41,640"
             ],
             [
-              "Mountain Suite 2-Night FI Package — Single",
+              "Mountain Suite 2-Night FI Package — Single — High Season RACK",
               "53,892"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Sharing p/p",
+              "Mountain Suite 3-Night FI Package — Sharing p/p — High Season RACK",
               "61,560"
             ],
             [
-              "Mountain Suite 3-Night FI Package — Single",
+              "Mountain Suite 3-Night FI Package — Single — High Season RACK",
               "80,064"
             ]
           ]
         },
         {
-          "title": "Activities offered at Mowani Mountain Camp — Nett Price (N$)",
+          "title": "Activities offered at Mowani Mountain Camp",
           "rows": [
             [
-              "Nature Drive (guided, Morning)",
+              "Nature Drive (guided, Morning) — Nett Price (N$)",
               "1,632"
             ],
             [
-              "Twyfelfontein Excursion (guided, Afternoon)",
+              "Twyfelfontein Excursion (guided, Afternoon) — Nett Price (N$)",
               "1,332"
             ],
             [
-              "Damara Living Museum Entry",
+              "Damara Living Museum Entry — Nett Price (N$)",
               "384"
             ],
             [
-              "All-Inclusive Drinks Add-On",
+              "All-Inclusive Drinks Add-On — Nett Price (N$)",
               "1,440"
             ]
           ]
         },
         {
-          "title": "Transfers (Charged pp one-way) — Nett Price (N$)",
+          "title": "Transfers (Charged pp one-way)",
           "rows": [
             [
-              "Twyfelfontein Airstrip Transfer",
+              "Twyfelfontein Airstrip Transfer — Nett Price (N$)",
               "474"
             ],
             [
-              "!Doro Nawas Transfer",
+              "!Doro Nawas Transfer — Nett Price (N$)",
               "558"
             ],
             [
-              "Damaraland Camp Transfer",
+              "Damaraland Camp Transfer — Nett Price (N$)",
               "834"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Price (N$)",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Price (N$)",
               "474"
             ],
             [
-              "Lunch",
+              "Lunch — Price (N$)",
               "450"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Price (N$)",
               "306"
             ],
             [
-              "Dinner (3 Course)",
+              "Dinner (3 Course) — Price (N$)",
               "1,068"
             ]
           ]
@@ -14922,43 +14875,43 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Cabin STO Rates 2026 — STO Rate (N$)",
+          "title": "Cabin STO Rates 2026",
           "rows": [
             [
-              "Per Person Sharing — Self-Catering",
+              "Per Person Sharing — Self-Catering — STO Rate (N$)",
               "1,530"
             ],
             [
-              "Single Person — Self-Catering",
+              "Single Person — Self-Catering — STO Rate (N$)",
               "2,856"
             ],
             [
-              "Child 3–12 Sharing with Adults (max 3)",
+              "Child 3–12 Sharing with Adults (max 3) — STO Rate (N$)",
               "765"
             ],
             [
-              "Child 3–12 Own Room (1st child)",
+              "Child 3–12 Own Room (1st child) — STO Rate (N$)",
               "1,530"
             ],
             [
-              "Child 3–12 Own Room (2nd/3rd child)",
+              "Child 3–12 Own Room (2nd/3rd child) — STO Rate (N$)",
               "765"
             ],
             [
-              "Tour Guide Single",
+              "Tour Guide Single — STO Rate (N$)",
               "2,100"
             ],
             [
-              "Tour Guide Sharing",
+              "Tour Guide Sharing — STO Rate (N$)",
               "1,056"
             ]
           ]
         },
         {
-          "title": "Camp Service Extras — STO Rate (N$)",
+          "title": "Camp Service Extras",
           "rows": [
             [
-              "Scullery / Cutlery Usage Fee (per 2 pax per stay)",
+              "Scullery / Cutlery Usage Fee (per 2 pax per stay) — STO Rate (N$)",
               "60"
             ]
           ]
@@ -14975,27 +14928,27 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Community Camping Rates 2026 — STO Rate (N$)",
+          "title": "Community Camping Rates 2026",
           "rows": [
             [
-              "Adult Campsite Pitch — pppn",
+              "Adult Campsite Pitch — pppn — STO Rate (N$)",
               "324"
             ],
             [
-              "Child 4–11 Campsite Pitch — pppn",
+              "Child 4–11 Campsite Pitch — pppn — STO Rate (N$)",
               "216"
             ]
           ]
         },
         {
-          "title": "Day Visitor Permits — STO Rate (N$)",
+          "title": "Day Visitor Permits",
           "rows": [
             [
-              "Day Visitor — Adult",
+              "Day Visitor — Adult — STO Rate (N$)",
               "204"
             ],
             [
-              "Day Visitor — Child 4–11",
+              "Day Visitor — Child 4–11 — STO Rate (N$)",
               "132"
             ]
           ]
@@ -15012,59 +14965,59 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Lodge Rates 2026 — STO Rate (N$)",
+          "title": "Lodge Rates 2026",
           "rows": [
             [
-              "Per Person Sharing — DBB",
+              "Per Person Sharing — DBB — STO Rate (N$)",
               "6,630"
             ],
             [
-              "Single Person — DBB",
+              "Single Person — DBB — STO Rate (N$)",
               "9,690"
             ],
             [
-              "Child 6–11 Sharing with Adults — DBB",
+              "Child 6–11 Sharing with Adults — DBB — STO Rate (N$)",
               "3,060"
             ],
             [
-              "Child 6–11 Own Room — DBB",
+              "Child 6–11 Own Room — DBB — STO Rate (N$)",
               "4,794"
             ],
             [
-              "Tour Guide — DBB",
+              "Tour Guide — DBB — STO Rate (N$)",
               "2,880"
             ]
           ]
         },
         {
-          "title": "Spitzkoppe Excursions & Activities — STO Rate (N$)",
+          "title": "Spitzkoppe Excursions & Activities",
           "rows": [
             [
-              "Guided Walk Chain Tour (per person)",
+              "Guided Walk Chain Tour (per person) — STO Rate (N$)",
               "492"
             ],
             [
-              "Guided Drive — 4 Stop Excursion (per person)",
+              "Guided Drive — 4 Stop Excursion (per person) — STO Rate (N$)",
               "492"
             ],
             [
-              "Top-Up Sunset Drive (added to drive, per person)",
+              "Top-Up Sunset Drive (added to drive, per person) — STO Rate (N$)",
               "288"
             ],
             [
-              "Guided Cycling Tour (per person)",
+              "Guided Cycling Tour (per person) — STO Rate (N$)",
               "660"
             ],
             [
-              "Mountain Hike (per person)",
+              "Mountain Hike (per person) — STO Rate (N$)",
               "828"
             ],
             [
-              "Lunch (standard dining)",
+              "Lunch (standard dining) — STO Rate (N$)",
               "444"
             ],
             [
-              "Lunch Pack (per person)",
+              "Lunch Pack (per person) — STO Rate (N$)",
               "288"
             ]
           ]
@@ -15081,73 +15034,73 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026",
           "rows": [
             [
-              "Double Tent — Single Use DBB",
+              "Double Tent — Single Use DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "3,840"
             ],
             [
-              "Double Tent — Sharing DBB",
+              "Double Tent — Sharing DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "2,976"
             ],
             [
-              "Child Rate 4–12 years sharing — DBB",
+              "Child Rate 4–12 years sharing — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "1,344"
             ],
             [
-              "Single Guide Room — DBB",
+              "Single Guide Room — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "title": "High Season — 01.07.2026 to 31.12.2026",
           "rows": [
             [
-              "Double Tent — Single Use DBB",
+              "Double Tent — Single Use DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "4,128"
             ],
             [
-              "Double Tent — Sharing DBB",
+              "Double Tent — Sharing DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "3,216"
             ],
             [
-              "Child Rate 4–12 years sharing — DBB",
+              "Child Rate 4–12 years sharing — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "1,344"
             ],
             [
-              "Single Guide Room — DBB",
+              "Single Guide Room — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "Etosha Game Drives & Activities — STO Rate (N$)",
+          "title": "Etosha Game Drives & Activities",
           "rows": [
             [
-              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "Morning or Afternoon Scheduled Game Drive (pp) — STO Rate (N$)",
               "1,482"
             ],
             [
-              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive) — STO Rate (N$)",
               "11,832"
             ],
             [
-              "Pilot Separate Airstrip Transfer (per transfer)",
+              "Pilot Separate Airstrip Transfer (per transfer) — STO Rate (N$)",
               "600"
             ]
           ]
         },
         {
-          "title": "Dining & Extras — STO Rate (N$)",
+          "title": "Dining & Extras",
           "rows": [
             [
-              "Lunch (per person)",
+              "Lunch (per person) — STO Rate (N$)",
               "360"
             ],
             [
-              "Lunch Pack (per person)",
+              "Lunch Pack (per person) — STO Rate (N$)",
               "240"
             ]
           ]
@@ -15164,81 +15117,81 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026",
           "rows": [
             [
-              "Double Chalet — Single Use DBB",
+              "Double Chalet — Single Use DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "5,280"
             ],
             [
-              "Double Chalet — Sharing DBB",
+              "Double Chalet — Sharing DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "3,936"
             ],
             [
-              "Triple Room — Sharing DBB",
+              "Triple Room — Sharing DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "3,936"
             ],
             [
-              "Family House — Sharing pp DBB",
+              "Family House — Sharing pp DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "3,936"
             ],
             [
-              "Single Guide Room — DBB",
+              "Single Guide Room — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "title": "High Season — 01.07.2026 to 31.12.2026",
           "rows": [
             [
-              "Double Chalet — Single Use DBB",
+              "Double Chalet — Single Use DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "5,664"
             ],
             [
-              "Double Chalet — Sharing DBB",
+              "Double Chalet — Sharing DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "4,224"
             ],
             [
-              "Triple Room — Sharing DBB",
+              "Triple Room — Sharing DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "4,224"
             ],
             [
-              "Family House — Sharing pp DBB",
+              "Family House — Sharing pp DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "4,224"
             ],
             [
-              "Single Guide Room — DBB",
+              "Single Guide Room — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "Etosha Game Drives & Activities — STO Rate (N$)",
+          "title": "Etosha Game Drives & Activities",
           "rows": [
             [
-              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "Morning or Afternoon Scheduled Game Drive (pp) — STO Rate (N$)",
               "1,482"
             ],
             [
-              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive) — STO Rate (N$)",
               "11,832"
             ],
             [
-              "Pilot Separate Airstrip Transfer (per transfer)",
+              "Pilot Separate Airstrip Transfer (per transfer) — STO Rate (N$)",
               "600"
             ]
           ]
         },
         {
-          "title": "Dining & Extras — STO Rate (N$)",
+          "title": "Dining & Extras",
           "rows": [
             [
-              "Lunch (per person)",
+              "Lunch (per person) — STO Rate (N$)",
               "360"
             ],
             [
-              "Lunch Pack (per person)",
+              "Lunch Pack (per person) — STO Rate (N$)",
               "240"
             ]
           ]
@@ -15255,81 +15208,81 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026",
           "rows": [
             [
-              "Double Tent — Single Use DBB",
+              "Double Tent — Single Use DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "5,472"
             ],
             [
-              "Double Tent — Sharing DBB",
+              "Double Tent — Sharing DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "4,176"
             ],
             [
-              "Double Tent — Single Use Fully Inclusive",
+              "Double Tent — Single Use Fully Inclusive — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "9,984"
             ],
             [
-              "Double Tent — Sharing Fully Inclusive",
+              "Double Tent — Sharing Fully Inclusive — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "7,632"
             ],
             [
-              "Single Guide Tent — DBB",
+              "Single Guide Tent — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "title": "High Season — 01.07.2026 to 31.12.2026",
           "rows": [
             [
-              "Double Tent — Single Use DBB",
+              "Double Tent — Single Use DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "5,856"
             ],
             [
-              "Double Tent — Sharing DBB",
+              "Double Tent — Sharing DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "4,512"
             ],
             [
-              "Double Tent — Single Use Fully Inclusive",
+              "Double Tent — Single Use Fully Inclusive — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "10,656"
             ],
             [
-              "Double Tent — Sharing Fully Inclusive",
+              "Double Tent — Sharing Fully Inclusive — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "8,256"
             ],
             [
-              "Single Guide Tent — DBB",
+              "Single Guide Tent — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "Etosha Game Drives & Activities — STO Rate (N$)",
+          "title": "Etosha Game Drives & Activities",
           "rows": [
             [
-              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "Morning or Afternoon Scheduled Game Drive (pp) — STO Rate (N$)",
               "1,482"
             ],
             [
-              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive) — STO Rate (N$)",
               "11,832"
             ],
             [
-              "Pilot Separate Airstrip Transfer (per transfer)",
+              "Pilot Separate Airstrip Transfer (per transfer) — STO Rate (N$)",
               "600"
             ]
           ]
         },
         {
-          "title": "Dining & Extras — STO Rate (N$)",
+          "title": "Dining & Extras",
           "rows": [
             [
-              "Lunch (per person)",
+              "Lunch (per person) — STO Rate (N$)",
               "360"
             ],
             [
-              "Lunch Pack (per person)",
+              "Lunch Pack (per person) — STO Rate (N$)",
               "240"
             ]
           ]
@@ -15346,180 +15299,175 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Per Person Sharing (DBB) — Rate (N$)",
+          "title": "Per Person Sharing (DBB)",
           "rows": [
             [
-              "3 Rondavels",
+              "3 Rondavels — Rate (N$)",
               "2,697.60"
             ],
             [
-              "Rondavel — Child (3–11)",
+              "Rondavel — Child (3–11) — Rate (N$)",
               "1,686"
             ],
             [
-              "3 Loft & 3 Family Rooms",
+              "3 Loft & 3 Family Rooms — Rate (N$)",
               "3,120"
             ],
             [
-              "Loft / Family — Child (3–11)",
+              "Loft / Family — Child (3–11) — Rate (N$)",
               "1,950"
             ],
             [
-              "8 Deluxe Rooms",
+              "8 Deluxe Rooms — Rate (N$)",
               "3,936"
             ],
             [
-              "Deluxe — Child (3–11)",
+              "Deluxe — Child (3–11) — Rate (N$)",
               "2,460"
             ],
             [
-              "1 Settler's Room",
+              "1 Settler's Room — Rate (N$)",
               "4,118.40"
             ],
             [
-              "Settler's — Child (3–11)",
+              "Settler's — Child (3–11) — Rate (N$)",
               "2,574"
             ]
           ]
         },
         {
-          "title": "Single Supplement (per night) — Rate (N$)",
+          "title": "Single Supplement (per night)",
           "rows": [
             [
-              "Rondavels",
+              "Rondavels — Rate (N$)",
               "1,017.60"
             ],
             [
-              "Loft, Family, Deluxe & Settler's",
+              "Loft, Family, Deluxe & Settler's — Rate (N$)",
               "1,324.80"
             ]
           ]
         },
         {
-          "title": "3-Night DBB Package (per person · fixed) — Adult",
+          "title": "3-Night DBB Package (per person · fixed)",
           "rows": [
             [
-              "3 Rondavels",
+              "3 Rondavels — Adult",
               "6,393.60"
             ],
             [
-              "3 Loft & 3 Family Rooms",
+              "3 Loft & 3 Family Rooms — Adult",
               "7,473.60"
             ],
             [
-              "8 Deluxe Rooms",
+              "8 Deluxe Rooms — Adult",
               "9,345.60"
             ],
             [
-              "1 Settler's Room",
+              "1 Settler's Room — Adult",
               "9,885.60"
-            ]
-          ]
-        },
-        {
-          "title": "3-Night DBB Package (per person · fixed) — Child (3–11)",
-          "rows": [
+            ],
             [
-              "3 Rondavels",
+              "3 Rondavels — Child (3–11)",
               "3,996"
             ],
             [
-              "3 Loft & 3 Family Rooms",
+              "3 Loft & 3 Family Rooms — Child (3–11)",
               "4,672.80"
             ],
             [
-              "8 Deluxe Rooms",
+              "8 Deluxe Rooms — Child (3–11)",
               "5,842.80"
             ],
             [
-              "1 Settler's Room",
+              "1 Settler's Room — Child (3–11)",
               "6,179.40"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
@@ -15536,101 +15484,101 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "All-Inclusive Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "title": "All-Inclusive Rates — 01.11.2025 to 31.10.2026",
           "rows": [
             [
-              "Suite — per person sharing (All-Inclusive)",
+              "Suite — per person sharing (All-Inclusive) — Rate (N$)",
               "28,598.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Rate (N$)",
               "13,612.80"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
@@ -15647,204 +15595,199 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Per Person Sharing (DBB) — Rate (N$)",
+          "title": "Per Person Sharing (DBB)",
           "rows": [
             [
-              "4 Heritage Bungalows",
+              "4 Heritage Bungalows — Rate (N$)",
               "2,918.40"
             ],
             [
-              "Heritage — Child (3–11)",
+              "Heritage — Child (3–11) — Rate (N$)",
               "1,824"
             ],
             [
-              "3 Bush Suites — Double",
+              "3 Bush Suites — Double — Rate (N$)",
               "3,283.20"
             ],
             [
-              "3 Bush Suites — Triple",
+              "3 Bush Suites — Triple — Rate (N$)",
               "3,072"
             ],
             [
-              "3 Bush Suites — Quad",
+              "3 Bush Suites — Quad — Rate (N$)",
               "2,870.40"
             ],
             [
-              "Bush Suite — Child (3–11)",
+              "Bush Suite — Child (3–11) — Rate (N$)",
               "2,052"
             ],
             [
-              "3 Explorer Bungalows",
+              "3 Explorer Bungalows — Rate (N$)",
               "3,705.60"
             ],
             [
-              "Explorer — Child (3–11)",
+              "Explorer — Child (3–11) — Rate (N$)",
               "2,316"
             ],
             [
-              "1 Honeymoon Bungalow",
+              "1 Honeymoon Bungalow — Rate (N$)",
               "3,888"
             ],
             [
-              "Honeymoon — Child (3–11)",
+              "Honeymoon — Child (3–11) — Rate (N$)",
               "2,430"
             ]
           ]
         },
         {
-          "title": "Single Supplement (per night) — Rate (N$)",
+          "title": "Single Supplement (per night)",
           "rows": [
             [
-              "Heritage Bungalows",
+              "Heritage Bungalows — Rate (N$)",
               "1,017.60"
             ],
             [
-              "Bush Suites, Explorer & Honeymoon",
+              "Bush Suites, Explorer & Honeymoon — Rate (N$)",
               "1,324.80"
             ]
           ]
         },
         {
-          "title": "3-Night DBB Package (per person · fixed) — Adult",
+          "title": "3-Night DBB Package (per person · fixed)",
           "rows": [
             [
-              "4 Heritage Bungalows",
+              "4 Heritage Bungalows — Adult",
               "7,671.60"
             ],
             [
-              "3 Bush Suites — Double",
+              "3 Bush Suites — Double — Adult",
               "8,683.20"
             ],
             [
-              "3 Bush Suites — Triple",
+              "3 Bush Suites — Triple — Adult",
               "8,128.80"
             ],
             [
-              "3 Bush Suites — Quad",
+              "3 Bush Suites — Quad — Adult",
               "7,567.20"
             ],
             [
-              "3 Explorer Bungalows",
+              "3 Explorer Bungalows — Adult",
               "9,824.40"
             ],
             [
-              "1 Honeymoon Bungalow",
+              "1 Honeymoon Bungalow — Adult",
               "10,558.80"
-            ]
-          ]
-        },
-        {
-          "title": "3-Night DBB Package (per person · fixed) — Child (3–11)",
-          "rows": [
+            ],
             [
-              "4 Heritage Bungalows",
+              "4 Heritage Bungalows — Child (3–11)",
               "4,795.20"
             ],
             [
-              "3 Bush Suites — Double",
+              "3 Bush Suites — Double — Child (3–11)",
               "5,428.80"
             ],
             [
-              "3 Bush Suites — Triple",
+              "3 Bush Suites — Triple — Child (3–11)",
               "5,428.80"
             ],
             [
-              "3 Bush Suites — Quad",
+              "3 Bush Suites — Quad — Child (3–11)",
               "5,428.80"
             ],
             [
-              "3 Explorer Bungalows",
+              "3 Explorer Bungalows — Child (3–11)",
               "6,141.60"
             ],
             [
-              "1 Honeymoon Bungalow",
+              "1 Honeymoon Bungalow — Child (3–11)",
               "6,600.60"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
@@ -15861,101 +15804,101 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "All-Inclusive Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "title": "All-Inclusive Rates — 01.11.2025 to 31.10.2026",
           "rows": [
             [
-              "Luxury Safari Tent — per person sharing (All-Inclusive)",
+              "Luxury Safari Tent — per person sharing (All-Inclusive) — Rate (N$)",
               "14,217.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Rate (N$)",
               "2,918.40"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
@@ -15972,197 +15915,192 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Dinner, Bed & Breakfast (per person sharing) — Rate (N$)",
+          "title": "Dinner, Bed & Breakfast (per person sharing)",
           "rows": [
             [
-              "11 Bush Suites",
+              "11 Bush Suites — Rate (N$) — Dinner, Bed & Breakfast (per person sharing)",
               "10,137.60"
             ],
             [
-              "Bush Suite — Child (7–11)",
+              "Bush Suite — Child (7–11) — Rate (N$) — Dinner, Bed & Breakfast (per person sharing)",
               "6,336"
             ],
             [
-              "1 Sultan Suite",
+              "1 Sultan Suite — Rate (N$) — Dinner, Bed & Breakfast (per person sharing)",
               "12,345.60"
             ],
             [
-              "Sultan Suite — Child (7–11)",
+              "Sultan Suite — Child (7–11) — Rate (N$) — Dinner, Bed & Breakfast (per person sharing)",
               "7,716"
             ],
             [
-              "1 Honeymoon Suite",
+              "1 Honeymoon Suite — Rate (N$) — Dinner, Bed & Breakfast (per person sharing)",
               "14,150.40"
             ],
             [
-              "Honeymoon Suite — Child (7–11)",
+              "Honeymoon Suite — Child (7–11) — Rate (N$) — Dinner, Bed & Breakfast (per person sharing)",
               "8,844"
             ]
           ]
         },
         {
-          "title": "All-Inclusive (per person sharing) — Rate (N$)",
+          "title": "All-Inclusive (per person sharing)",
           "rows": [
             [
-              "11 Bush Suites",
+              "11 Bush Suites — Rate (N$) — All-Inclusive (per person sharing)",
               "14,467.20"
             ],
             [
-              "Bush Suite — Child (7–11)",
+              "Bush Suite — Child (7–11) — Rate (N$) — All-Inclusive (per person sharing)",
               "9,036"
             ],
             [
-              "1 Sultan Suite",
+              "1 Sultan Suite — Rate (N$) — All-Inclusive (per person sharing)",
               "16,675.20"
             ],
             [
-              "Sultan Suite — Child (7–11)",
+              "Sultan Suite — Child (7–11) — Rate (N$) — All-Inclusive (per person sharing)",
               "10,416"
             ],
             [
-              "1 Honeymoon Suite",
+              "1 Honeymoon Suite — Rate (N$) — All-Inclusive (per person sharing)",
               "18,480"
             ],
             [
-              "Honeymoon Suite — Child (7–11)",
+              "Honeymoon Suite — Child (7–11) — Rate (N$) — All-Inclusive (per person sharing)",
               "11,556"
             ]
           ]
         },
         {
-          "title": "Single Supplement (per night) — Rate (N$)",
+          "title": "Single Supplement (per night)",
           "rows": [
             [
-              "Bush Suite",
+              "Bush Suite — Rate (N$)",
               "3,379.20"
             ],
             [
-              "Sultan Suite",
+              "Sultan Suite — Rate (N$)",
               "3,753.60"
             ],
             [
-              "Honeymoon Suite",
+              "Honeymoon Suite — Rate (N$)",
               "7,113.60"
             ]
           ]
         },
         {
-          "title": "3-Night DBB Package (per person · fixed) — Adult",
+          "title": "3-Night DBB Package (per person · fixed)",
           "rows": [
             [
-              "11 Bush Suites",
+              "11 Bush Suites — Adult",
               "24,192"
             ],
             [
-              "1 Sultan Suite",
+              "1 Sultan Suite — Adult",
               "29,181.60"
             ],
             [
-              "1 Honeymoon Suite",
+              "1 Honeymoon Suite — Adult",
               "34,088.40"
-            ]
-          ]
-        },
-        {
-          "title": "3-Night DBB Package (per person · fixed) — Child (7–11)",
-          "rows": [
+            ],
             [
-              "11 Bush Suites",
+              "11 Bush Suites — Child (7–11)",
               "15,120"
             ],
             [
-              "1 Sultan Suite",
+              "1 Sultan Suite — Child (7–11)",
               "18,240"
             ],
             [
-              "1 Honeymoon Suite",
+              "1 Honeymoon Suite — Child (7–11)",
               "21,306"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
@@ -16179,81 +16117,81 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Shoulder Season — 01.01.2026 to 30.06.2026 — STO Rate (N$)",
+          "title": "Shoulder Season — 01.01.2026 to 30.06.2026",
           "rows": [
             [
-              "Single Occupancy — DBB",
+              "Single Occupancy — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "8,928"
             ],
             [
-              "Double Occupancy — DBB",
+              "Double Occupancy — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "6,816"
             ],
             [
-              "Single Occupancy — Fully Inclusive",
+              "Single Occupancy — Fully Inclusive — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "13,056"
             ],
             [
-              "Double Occupancy — Fully Inclusive",
+              "Double Occupancy — Fully Inclusive — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "9,984"
             ],
             [
-              "Single Guide Room — DBB",
+              "Single Guide Room — DBB — STO Rate (N$) — Shoulder Season — 01.01.2026 to 30.06.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "High Season — 01.07.2026 to 31.12.2026 — STO Rate (N$)",
+          "title": "High Season — 01.07.2026 to 31.12.2026",
           "rows": [
             [
-              "Single Occupancy — DBB",
+              "Single Occupancy — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "9,600"
             ],
             [
-              "Double Occupancy — DBB",
+              "Double Occupancy — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "7,392"
             ],
             [
-              "Single Occupancy — Fully Inclusive",
+              "Single Occupancy — Fully Inclusive — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "14,112"
             ],
             [
-              "Double Occupancy — Fully Inclusive",
+              "Double Occupancy — Fully Inclusive — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "10,800"
             ],
             [
-              "Single Guide Room — DBB",
+              "Single Guide Room — DBB — STO Rate (N$) — High Season — 01.07.2026 to 31.12.2026",
               "2,040"
             ]
           ]
         },
         {
-          "title": "Etosha Private Excursions & Activities — STO Rate (N$)",
+          "title": "Etosha Private Excursions & Activities",
           "rows": [
             [
-              "Morning or Afternoon Scheduled Game Drive (pp)",
+              "Morning or Afternoon Scheduled Game Drive (pp) — STO Rate (N$)",
               "1,482"
             ],
             [
-              "Morning or Afternoon Private Game Drive (per vehicle exclusive)",
+              "Morning or Afternoon Private Game Drive (per vehicle exclusive) — STO Rate (N$)",
               "11,832"
             ],
             [
-              "Pilot Separate Airstrip Transfer (per transfer)",
+              "Pilot Separate Airstrip Transfer (per transfer) — STO Rate (N$)",
               "600"
             ]
           ]
         },
         {
-          "title": "Dining & Extras — STO Rate (N$)",
+          "title": "Dining & Extras",
           "rows": [
             [
-              "Lunch (per person)",
+              "Lunch (per person) — STO Rate (N$)",
               "360"
             ],
             [
-              "Lunch Pack (per person)",
+              "Lunch Pack (per person) — STO Rate (N$)",
               "240"
             ]
           ]
@@ -16270,52 +16208,52 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Lodge Rates 2026 — STO Rate (N$)",
+          "title": "Lodge Rates 2026",
           "rows": [
             [
-              "Per Person Sharing — DBB",
+              "Per Person Sharing — DBB — STO Rate (N$)",
               "3,264"
             ],
             [
-              "Single Person — DBB",
+              "Single Person — DBB — STO Rate (N$)",
               "4,896"
             ],
             [
-              "Child 2–12 Max 2 in Family Room — DBB",
+              "Child 2–12 Max 2 in Family Room — DBB — STO Rate (N$)",
               "1,632"
             ],
             [
-              "Tour Guide — DBB",
+              "Tour Guide — DBB — STO Rate (N$)",
               "1,980"
             ]
           ]
         },
         {
-          "title": "Campsite — Self-Catering — STO Rate (N$)",
+          "title": "Campsite — Self-Catering",
           "rows": [
             [
-              "Kalahari Campsite Pitch — pppn",
+              "Kalahari Campsite Pitch — pppn — STO Rate (N$)",
               "324"
             ]
           ]
         },
         {
-          "title": "Meals & Dining Extras — STO Rate (N$)",
+          "title": "Meals & Dining Extras",
           "rows": [
             [
-              "Dinner (adult)",
+              "Dinner (adult) — STO Rate (N$)",
               "660"
             ],
             [
-              "Dinner (child 2–11)",
+              "Dinner (child 2–11) — STO Rate (N$)",
               "456"
             ],
             [
-              "Breakfast (adult)",
+              "Breakfast (adult) — STO Rate (N$)",
               "420"
             ],
             [
-              "Lunch Pack (per person)",
+              "Lunch Pack (per person) — STO Rate (N$)",
               "336"
             ]
           ]
@@ -16332,137 +16270,107 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Hoanib Elephant Camp — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "Hoanib Elephant Camp",
           "rows": [
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Elephant Camp",
               "19,848"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Elephant Camp",
               "7,965.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Elephant Camp",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Hoanib Elephant Camp — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder High 1-31 May — Hoanib Elephant Camp",
               "21,537.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Hoanib Elephant Camp",
               "8,643.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — Hoanib Elephant Camp",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Hoanib Elephant Camp — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Elephant Camp",
               "23,803.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Elephant Camp",
               "9,552"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Elephant Camp",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "Hoanib Elephant Camp — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Hoanib Elephant Camp",
               "27,451.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Hoanib Elephant Camp",
               "11,016"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — Hoanib Elephant Camp",
               "14,514"
             ]
           ]
         },
         {
-          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "When would you like to travel?",
           "rows": [
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "19,848"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "7,965.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "21,537.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel?",
               "8,643.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "23,803.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "9,552"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "Per Night RatePer Person Sharing",
+              "Per Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "27,451.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "11,016"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "14,514"
             ]
           ]
@@ -16479,265 +16387,235 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Hoanib Valley Camp — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "Hoanib Valley Camp",
           "rows": [
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp",
               "18,043.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp",
               "7,240.80"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp",
               "16,239.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp (2)",
               "6,517.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp",
               "15,337.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp (3)",
               "6,154.80"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Hoanib Valley Camp",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Hoanib Valley Camp — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder High 1-31 May — Hoanib Valley Camp",
               "19,579.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Hoanib Valley Camp",
               "7,857.60"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder High 1-31 May — Hoanib Valley Camp",
               "18,600"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Hoanib Valley Camp (2)",
               "7,464"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder High 1-31 May — Hoanib Valley Camp",
               "17,622"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Hoanib Valley Camp (3)",
               "7,071.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — Hoanib Valley Camp",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Hoanib Valley Camp — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp",
               "21,643.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp",
               "8,685.60"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp",
               "20,560.80"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp (2)",
               "8,251.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp",
               "19,479.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp (3)",
               "7,816.80"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Hoanib Valley Camp",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "Hoanib Valley Camp — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp",
               "24,955.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp",
               "10,015.20"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp",
               "23,707.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp (2)",
               "9,513.60"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp",
               "23,707.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp (3)",
               "9,513.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — Hoanib Valley Camp",
               "14,514"
             ]
           ]
         },
         {
-          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "When would you like to travel?",
           "rows": [
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "18,043.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "7,240.80"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "16,239.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel? (2)",
               "6,517.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "15,337.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel? (3)",
               "6,154.80"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "19,579.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel?",
               "7,857.60"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "18,600"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel? (2)",
               "7,464"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "17,622"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel? (3)",
               "7,071.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "21,643.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "8,685.60"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "20,560.80"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel? (2)",
               "8,251.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "19,479.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel? (3)",
               "7,816.80"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "24,955.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "10,015.20"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "23,707.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel? (2)",
               "9,513.60"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "23,707.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel? (3)",
               "9,513.60"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "14,514"
             ]
           ]
@@ -16754,72 +16632,72 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Comfort Rooms — B&B (per room — gross) — Rate (N$)",
+          "title": "Comfort Rooms — B&B (per room — gross)",
           "rows": [
             [
-              "Comfort Single",
+              "Comfort Single — Rate (N$)",
               "3,019.20"
             ],
             [
-              "Comfort Twin / Double",
+              "Comfort Twin / Double — Rate (N$)",
               "4,855.20"
             ],
             [
-              "Comfort Family Room (max 2 adults + 2 children 0–12)",
+              "Comfort Family Room (max 2 adults + 2 children 0–12) — Rate (N$)",
               "7,874.40"
             ]
           ]
         },
         {
-          "title": "Deluxe Rooms & Suite — B&B (per room — gross) — Rate (N$)",
+          "title": "Deluxe Rooms & Suite — B&B (per room — gross)",
           "rows": [
             [
-              "Deluxe Single",
+              "Deluxe Single — Rate (N$)",
               "3,702.60"
             ],
             [
-              "Deluxe Twin / Double",
+              "Deluxe Twin / Double — Rate (N$)",
               "5,926.20"
             ],
             [
-              "Suite",
+              "Suite — Rate (N$)",
               "9,843"
             ],
             [
-              "Tour Guide (50% of single rack)",
+              "Tour Guide (50% of single rack) — Rate (N$)",
               "1,776"
             ]
           ]
         },
         {
-          "title": "Meals (per person — gross) — Rate (N$)",
+          "title": "Meals (per person — gross)",
           "rows": [
             [
-              "Breakfast — adult",
+              "Breakfast — adult — Rate (N$)",
               "408"
             ],
             [
-              "Breakfast — child 3–12 yrs",
+              "Breakfast — child 3–12 yrs — Rate (N$)",
               "288"
             ],
             [
-              "Lunch — adult",
+              "Lunch — adult — Rate (N$)",
               "612"
             ],
             [
-              "Lunch — child 3–12 yrs",
+              "Lunch — child 3–12 yrs — Rate (N$)",
               "432"
             ],
             [
-              "Dinner — adult",
+              "Dinner — adult — Rate (N$)",
               "792"
             ],
             [
-              "Dinner — child 3–12 yrs",
+              "Dinner — child 3–12 yrs — Rate (N$)",
               "564"
             ],
             [
-              "Lunchpack",
+              "Lunchpack — Rate (N$)",
               "384"
             ]
           ]
@@ -16836,27 +16714,22 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Rack Rates — Low PPS (N$)",
+          "title": "Rack Rates",
           "rows": [
             [
-              "Campsite (max 8)",
+              "Campsite (max 8) — Low PPS (N$)",
               "396"
             ],
             [
-              "Lighthouse (min 2 people)",
+              "Lighthouse (min 2 people) — Low PPS (N$)",
               "1,452"
-            ]
-          ]
-        },
-        {
-          "title": "Rack Rates — High PPS (N$)",
-          "rows": [
+            ],
             [
-              "Campsite (max 8)",
+              "Campsite (max 8) — High PPS (N$)",
               "396"
             ],
             [
-              "Lighthouse (min 2 people)",
+              "Lighthouse (min 2 people) — High PPS (N$)",
               "1,452"
             ]
           ]
@@ -16873,39 +16746,39 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Chalet Rates 2026 — STO Rate (N$)",
+          "title": "Chalet Rates 2026",
           "rows": [
             [
-              "Per Person Sharing — Self-Catering",
+              "Per Person Sharing — Self-Catering — STO Rate (N$)",
               "2,832"
             ],
             [
-              "Single Person — Self-Catering",
+              "Single Person — Self-Catering — STO Rate (N$)",
               "5,664"
             ],
             [
-              "Child 6–12 Sharing",
+              "Child 6–12 Sharing — STO Rate (N$)",
               "816"
             ],
             [
-              "Tour Guide",
+              "Tour Guide — STO Rate (N$)",
               "1,200"
             ],
             [
-              "Exclusive Use — All 6 Chalets (Max 12 pax)",
+              "Exclusive Use — All 6 Chalets (Max 12 pax) — STO Rate (N$)",
               "33,984"
             ]
           ]
         },
         {
-          "title": "Ekoto Excursions & Extras — STO Rate (N$)",
+          "title": "Ekoto Excursions & Extras",
           "rows": [
             [
-              "Compulsory Conservancy Levy (per adult per stay)",
+              "Compulsory Conservancy Levy (per adult per stay) — STO Rate (N$)",
               "300"
             ],
             [
-              "Guided Hike pp (2–4 hours, min 2 pax)",
+              "Guided Hike pp (2–4 hours, min 2 pax) — STO Rate (N$)",
               "420"
             ]
           ]
@@ -16922,265 +16795,235 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Kwessi Dunes — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "Kwessi Dunes",
           "rows": [
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes",
               "11,995.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes",
               "4,813.20"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes",
               "10,796.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes (2)",
               "4,333.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes",
               "10,196.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes (3)",
               "4,092"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Kwessi Dunes",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Kwessi Dunes — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder High 1-31 May — Kwessi Dunes",
               "14,059.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Kwessi Dunes",
               "5,642.40"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder High 1-31 May — Kwessi Dunes",
               "13,356"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Kwessi Dunes (2)",
               "5,360.40"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder High 1-31 May — Kwessi Dunes",
               "12,654"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Kwessi Dunes (3)",
               "5,078.40"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — Kwessi Dunes",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "Kwessi Dunes — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes",
               "17,707.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes",
               "7,106.40"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes",
               "16,821.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes (2)",
               "6,751.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes",
               "15,937.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes (3)",
               "6,396"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Kwessi Dunes",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "Kwessi Dunes — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Kwessi Dunes",
               "19,675.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Kwessi Dunes",
               "7,896"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Kwessi Dunes",
               "18,691.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Kwessi Dunes (2)",
               "7,501.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — Kwessi Dunes",
               "18,691.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Kwessi Dunes (3)",
               "7,501.20"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — Kwessi Dunes",
               "14,514"
             ]
           ]
         },
         {
-          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
+          "title": "When would you like to travel?",
           "rows": [
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "11,995.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "4,813.20"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "10,796.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel? (2)",
               "4,333.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "10,196.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel? (3)",
               "4,092"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "14,059.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel?",
               "5,642.40"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "13,356"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel? (2)",
               "5,360.40"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Shoulder High 1-31 May — When would you like to travel?",
               "12,654"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — When would you like to travel? (3)",
               "5,078.40"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Shoulder High 1-31 May — When would you like to travel?",
               "11,850"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "17,707.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "7,106.40"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "16,821.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel? (2)",
               "6,751.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "15,937.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel? (3)",
               "6,396"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "14,514"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night RatePer Person Sharing",
+              "1-5 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "19,675.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "7,896"
             ],
             [
-              "6-7 Night RatePer Person Sharing",
+              "6-7 Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "18,691.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel? (2)",
               "7,501.20"
             ],
             [
-              "8+ Night RatePer Person Sharing",
+              "8+ Night RatePer Person Sharing — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "18,691.20"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — When would you like to travel? (3)",
               "7,501.20"
             ],
             [
-              "Private VehiclePer vehicle per night",
+              "Private VehiclePer vehicle per night — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "14,514"
             ]
           ]
@@ -17197,91 +17040,81 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027",
           "rows": [
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "23,868"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "30,192"
-            ]
-          ]
-        },
-        {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "1,440"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "1,440"
             ]
           ]
         },
         {
-          "title": "Child Rates — Fully Inclusive — Accommodation Rate (N$)",
+          "title": "Child Rates — Fully Inclusive",
           "rows": [
             [
-              "Ongava Lodge, Tented Camp & Anderssons",
+              "Ongava Lodge, Tented Camp & Anderssons — Accommodation Rate (N$)",
               "16,800"
-            ]
-          ]
-        },
-        {
-          "title": "Child Rates — Fully Inclusive — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Ongava Lodge, Tented Camp & Anderssons",
+              "Ongava Lodge, Tented Camp & Anderssons — Conservation Fee (N$)",
               "720"
             ]
           ]
         },
         {
-          "title": "Guide & Pilot Rates — Rate (N$)",
+          "title": "Guide & Pilot Rates",
           "rows": [
             [
-              "Per single unit",
+              "Per single unit — Rate (N$)",
               "2,160"
             ]
           ]
         },
         {
-          "title": "Activities & Miscellaneous — Rate (N$)",
+          "title": "Activities & Miscellaneous",
           "rows": [
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate (N$)",
               "720"
             ],
             [
-              "Etosha Game Drives (Scheduled)",
+              "Etosha Game Drives (Scheduled) — Rate (N$)",
               "3,120"
             ],
             [
-              "Ongava Property Game Drives (Scheduled)",
+              "Ongava Property Game Drives (Scheduled) — Rate (N$)",
               "1,920"
             ],
             [
-              "Nature Walk (Scheduled)",
+              "Nature Walk (Scheduled) — Rate (N$)",
               "840"
             ],
             [
-              "Night Drives (Scheduled)",
+              "Night Drives (Scheduled) — Rate (N$)",
               "1,680"
             ],
             [
-              "Airfield Passenger Fee",
+              "Airfield Passenger Fee — Rate (N$)",
               "840"
             ],
             [
-              "Airfield Transfer — each way",
+              "Airfield Transfer — each way — Rate (N$)",
               "720"
             ],
             [
-              "Private Activities — Sole Use Guide & Vehicle (FI only)",
+              "Private Activities — Sole Use Guide & Vehicle (FI only) — Rate (N$)",
               "22,440"
             ]
           ]
@@ -17298,54 +17131,44 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027",
           "rows": [
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "51,816"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "64,708.80"
-            ]
-          ]
-        },
-        {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "1,440"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "1,440"
             ]
           ]
         },
         {
-          "title": "Child Rates — Fully Inclusive — Accommodation Rate (N$)",
+          "title": "Child Rates — Fully Inclusive",
           "rows": [
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — Child Rates — Fully Inclusive",
               "44,400"
-            ]
-          ]
-        },
-        {
-          "title": "Child Rates — Fully Inclusive — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — Child Rates — Fully Inclusive",
               "720"
             ]
           ]
         },
         {
-          "title": "Guide & Pilot Rates — Rate (N$)",
+          "title": "Guide & Pilot Rates",
           "rows": [
             [
-              "Per single unit",
+              "Per single unit — Rate (N$)",
               "2,160"
             ]
           ]
@@ -17362,115 +17185,105 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027",
           "rows": [
             [
-              "Full Board",
+              "Full Board — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "12,036"
             ],
             [
-              "Full Board",
+              "Full Board — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "15,402"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "17,646"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "22,338"
-            ]
-          ]
-        },
-        {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Full Board",
+              "Full Board — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "1,440"
             ],
             [
-              "Full Board",
+              "Full Board — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "1,440"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "1,440"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "1,440"
             ]
           ]
         },
         {
-          "title": "Child Rates — Accommodation Rate (N$)",
+          "title": "Child Rates",
           "rows": [
             [
-              "Full Board",
+              "Full Board — Accommodation Rate (N$) — Child Rates",
               "11,160"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — Child Rates",
               "16,800"
-            ]
-          ]
-        },
-        {
-          "title": "Child Rates — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Full Board",
+              "Full Board — Conservation Fee (N$) — Child Rates",
               "720"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — Child Rates",
               "720"
             ]
           ]
         },
         {
-          "title": "Guide & Pilot Rates — Rate (N$)",
+          "title": "Guide & Pilot Rates",
           "rows": [
             [
-              "Per single unit",
+              "Per single unit — Rate (N$)",
               "2,160"
             ]
           ]
         },
         {
-          "title": "Activities & Miscellaneous — Rate (N$)",
+          "title": "Activities & Miscellaneous",
           "rows": [
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate (N$)",
               "720"
             ],
             [
-              "Etosha Game Drives (Scheduled)",
+              "Etosha Game Drives (Scheduled) — Rate (N$)",
               "3,120"
             ],
             [
-              "Ongava Property Game Drives (Scheduled)",
+              "Ongava Property Game Drives (Scheduled) — Rate (N$)",
               "1,920"
             ],
             [
-              "Nature Walk (Scheduled)",
+              "Nature Walk (Scheduled) — Rate (N$)",
               "840"
             ],
             [
-              "Night Drives (Scheduled)",
+              "Night Drives (Scheduled) — Rate (N$)",
               "1,680"
             ],
             [
-              "Ongava Airfield Passenger Fee",
+              "Ongava Airfield Passenger Fee — Rate (N$)",
               "840"
             ],
             [
-              "Airfield Transfer — each way",
+              "Airfield Transfer — each way — Rate (N$)",
               "720"
             ],
             [
-              "Private Activities — Sole Use Guide & Vehicle (FI only)",
+              "Private Activities — Sole Use Guide & Vehicle (FI only) — Rate (N$)",
               "22,440"
             ]
           ]
@@ -17487,91 +17300,81 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Accommodation Rate (N$)",
+          "title": "STO15 Rates — 11.01.2026 to 10.01.2027",
           "rows": [
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "17,646"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Accommodation Rate (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "22,338"
-            ]
-          ]
-        },
-        {
-          "title": "STO15 Rates — 11.01.2026 to 10.01.2027 — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027",
               "1,440"
             ],
             [
-              "Fully Inclusive",
+              "Fully Inclusive — Conservation Fee (N$) — STO15 Rates — 11.01.2026 to 10.01.2027 (2)",
               "1,440"
             ]
           ]
         },
         {
-          "title": "Child Rates — Fully Inclusive — Accommodation Rate (N$)",
+          "title": "Child Rates — Fully Inclusive",
           "rows": [
             [
-              "Ongava Lodge, Tented Camp & Anderssons",
+              "Ongava Lodge, Tented Camp & Anderssons — Accommodation Rate (N$)",
               "16,800"
-            ]
-          ]
-        },
-        {
-          "title": "Child Rates — Fully Inclusive — Conservation Fee (N$)",
-          "rows": [
+            ],
             [
-              "Ongava Lodge, Tented Camp & Anderssons",
+              "Ongava Lodge, Tented Camp & Anderssons — Conservation Fee (N$)",
               "720"
             ]
           ]
         },
         {
-          "title": "Guide & Pilot Rates — Rate (N$)",
+          "title": "Guide & Pilot Rates",
           "rows": [
             [
-              "Per single unit",
+              "Per single unit — Rate (N$)",
               "2,160"
             ]
           ]
         },
         {
-          "title": "Activities & Miscellaneous — Rate (N$)",
+          "title": "Activities & Miscellaneous",
           "rows": [
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate (N$)",
               "720"
             ],
             [
-              "Etosha Game Drives (Scheduled)",
+              "Etosha Game Drives (Scheduled) — Rate (N$)",
               "3,120"
             ],
             [
-              "Ongava Property Game Drives (Scheduled)",
+              "Ongava Property Game Drives (Scheduled) — Rate (N$)",
               "1,920"
             ],
             [
-              "Nature Walk (Scheduled)",
+              "Nature Walk (Scheduled) — Rate (N$)",
               "840"
             ],
             [
-              "Night Drives (Scheduled)",
+              "Night Drives (Scheduled) — Rate (N$)",
               "1,680"
             ],
             [
-              "Ongava Airfield Passenger Fee",
+              "Ongava Airfield Passenger Fee — Rate (N$)",
               "840"
             ],
             [
-              "Airfield Transfer — Ongava Camp to/from airfield (each way)",
+              "Airfield Transfer — Ongava Camp to/from airfield (each way) — Rate (N$)",
               "720"
             ],
             [
-              "Private Activities — Sole Use Guide & Vehicle (FI only)",
+              "Private Activities — Sole Use Guide & Vehicle (FI only) — Rate (N$)",
               "22,440"
             ]
           ]
@@ -17588,203 +17391,163 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Green Season10 Jan-31 Mar",
+          "title": "Dinner, Bed and Breakfast -- Per Person Sharing",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Dinner, Bed and Breakfast -- Per Person Sharing",
               "4,219.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Dinner, Bed and Breakfast -- Per Person Sharing",
               "3,798"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Dinner, Bed and Breakfast -- Per Person Sharing",
               "3,586.80"
-            ]
-          ]
-        },
-        {
-          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Dinner, Bed and Breakfast -- Per Person Sharing",
               "5,371.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Dinner, Bed and Breakfast -- Per Person Sharing",
               "4,834.80"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Dinner, Bed and Breakfast -- Per Person Sharing",
               "4,566"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Dinner, Bed and Breakfast -- Per Person Sharing",
               "21,553,832.40"
-            ]
-          ]
-        },
-        {
-          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Dinner, Bed and Breakfast -- Per Person Sharing",
               "5,899.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Dinner, Bed and Breakfast -- Per Person Sharing",
               "5,604"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Dinner, Bed and Breakfast -- Per Person Sharing",
               "5,310"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Dinner, Bed and Breakfast -- Per Person Sharing",
               "23,678,131.20"
-            ]
-          ]
-        },
-        {
-          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Dinner, Bed and Breakfast -- Per Person Sharing",
               "6,216"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Dinner, Bed and Breakfast -- Per Person Sharing",
               "5,905.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Dinner, Bed and Breakfast -- Per Person Sharing",
               "5,594.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Dinner, Bed and Breakfast -- Per Person Sharing",
               "24,950,245.20"
-            ]
-          ]
-        },
-        {
-          "title": "Dinner, Bed and Breakfast -- Per Person Sharing — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Dinner, Bed and Breakfast -- Per Person Sharing",
               "7,051.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Dinner, Bed and Breakfast -- Per Person Sharing",
               "6,698.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Dinner, Bed and Breakfast -- Per Person Sharing",
               "6,698.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Dinner, Bed and Breakfast -- Per Person Sharing",
               "28,298,688"
             ]
           ]
         },
         {
-          "title": "Fully Inclusive -- Per Person Sharing — Green Season10 Jan-31 Mar",
+          "title": "Fully Inclusive -- Per Person Sharing",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Fully Inclusive -- Per Person Sharing",
               "7,032"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Fully Inclusive -- Per Person Sharing",
               "6,328.80"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Fully Inclusive -- Per Person Sharing",
               "5,977.20"
-            ]
-          ]
-        },
-        {
-          "title": "Fully Inclusive -- Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Fully Inclusive -- Per Person Sharing",
               "8,241.60"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Fully Inclusive -- Per Person Sharing",
               "7,418.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Fully Inclusive -- Per Person Sharing",
               "7,005.60"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Fully Inclusive -- Per Person Sharing",
               "33,074,811.60"
-            ]
-          ]
-        },
-        {
-          "title": "Fully Inclusive -- Per Person Sharing — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Fully Inclusive -- Per Person Sharing",
               "9,000"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Fully Inclusive -- Per Person Sharing",
               "8,550"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Fully Inclusive -- Per Person Sharing",
               "8,100"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Shoulder High 1-31 May — Fully Inclusive -- Per Person Sharing",
               "36,123,250.80"
-            ]
-          ]
-        },
-        {
-          "title": "Fully Inclusive -- Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Fully Inclusive -- Per Person Sharing",
               "9,355.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Fully Inclusive -- Per Person Sharing",
               "8,887.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Fully Inclusive -- Per Person Sharing",
               "8,420.40"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Fully Inclusive -- Per Person Sharing",
               "37,551,379.20"
-            ]
-          ]
-        },
-        {
-          "title": "Fully Inclusive -- Per Person Sharing — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Fully Inclusive -- Per Person Sharing",
               "10,363.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Fully Inclusive -- Per Person Sharing",
               "9,844.80"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Fully Inclusive -- Per Person Sharing",
               "9,844.80"
             ],
             [
-              "Single Supplement",
+              "Single Supplement — Peak Season 1 Jul-31 Aug — Fully Inclusive -- Per Person Sharing",
               "41,595,950.40"
             ]
           ]
@@ -17801,171 +17564,131 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Safari House — Green Season10 Jan-31 Mar",
+          "title": "Safari House",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Safari House",
               "35,160"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Safari House",
               "31,644"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Safari House",
               "29,886"
-            ]
-          ]
-        },
-        {
-          "title": "Safari House — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Safari House",
               "41,208"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Safari House",
               "37,087.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Safari House",
               "35,026.80"
-            ]
-          ]
-        },
-        {
-          "title": "Safari House — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Safari House",
               "45,000"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Safari House",
               "42,750"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Safari House",
               "40,500"
-            ]
-          ]
-        },
-        {
-          "title": "Safari House — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Safari House",
               "46,776"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Safari House",
               "44,437.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Safari House",
               "42,098.40"
-            ]
-          ]
-        },
-        {
-          "title": "Safari House — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Safari House",
               "51,816"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Safari House",
               "49,225.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Safari House",
               "49,225.20"
             ]
           ]
         },
         {
-          "title": "When would you like to travel? — Green Season10 Jan-31 Mar",
+          "title": "When would you like to travel?",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — When would you like to travel?",
               "35,160"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — When would you like to travel?",
               "31,644"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — When would you like to travel?",
               "29,886"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "41,208"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "37,087.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — When would you like to travel?",
               "35,026.80"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — When would you like to travel?",
               "45,000"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — When would you like to travel?",
               "42,750"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — When would you like to travel?",
               "40,500"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "46,776"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "44,437.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — When would you like to travel?",
               "42,098.40"
-            ]
-          ]
-        },
-        {
-          "title": "When would you like to travel? — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "51,816"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "49,225.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — When would you like to travel?",
               "49,225.20"
             ]
           ]
@@ -17982,341 +17705,261 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Luxury Room -- DBB Per Person Sharing — Green Season10 Jan-31 Mar",
+          "title": "Luxury Room -- DBB Per Person Sharing",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Luxury Room -- DBB Per Person Sharing",
               "6,235.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Luxury Room -- DBB Per Person Sharing",
               "5,612.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Luxury Room -- DBB Per Person Sharing",
               "5,300.40"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- DBB Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Luxury Room -- DBB Per Person Sharing",
               "7,233.60"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Luxury Room -- DBB Per Person Sharing",
               "6,511.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Luxury Room -- DBB Per Person Sharing",
               "6,148.80"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- DBB Per Person Sharing — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Luxury Room -- DBB Per Person Sharing",
               "7,656"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Luxury Room -- DBB Per Person Sharing",
               "7,273.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Luxury Room -- DBB Per Person Sharing",
               "6,890.40"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- DBB Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Luxury Room -- DBB Per Person Sharing",
               "8,232"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Luxury Room -- DBB Per Person Sharing",
               "7,820.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Luxury Room -- DBB Per Person Sharing",
               "7,408.80"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- DBB Per Person Sharing — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Luxury Room -- DBB Per Person Sharing",
               "9,072"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Luxury Room -- DBB Per Person Sharing",
               "8,618.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Luxury Room -- DBB Per Person Sharing",
               "8,618.40"
             ]
           ]
         },
         {
-          "title": "Classic Room -- DBB Per Person Sharing — Green Season10 Jan-31 Mar",
+          "title": "Classic Room -- DBB Per Person Sharing",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Classic Room -- DBB Per Person Sharing",
               "5,563.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Classic Room -- DBB Per Person Sharing",
               "5,007.60"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Classic Room -- DBB Per Person Sharing",
               "4,729.20"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- DBB Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Classic Room -- DBB Per Person Sharing",
               "6,480"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Classic Room -- DBB Per Person Sharing",
               "5,832"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Classic Room -- DBB Per Person Sharing",
               "5,508"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- DBB Per Person Sharing — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Classic Room -- DBB Per Person Sharing",
               "6,859.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Classic Room -- DBB Per Person Sharing",
               "6,516"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Classic Room -- DBB Per Person Sharing",
               "6,174"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- DBB Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Classic Room -- DBB Per Person Sharing",
               "7,368"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Classic Room -- DBB Per Person Sharing",
               "6,999.60"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Classic Room -- DBB Per Person Sharing",
               "6,631.20"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- DBB Per Person Sharing — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Classic Room -- DBB Per Person Sharing",
               "8,155.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Classic Room -- DBB Per Person Sharing",
               "7,747.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Classic Room -- DBB Per Person Sharing",
               "7,747.20"
             ]
           ]
         },
         {
-          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Green Season10 Jan-31 Mar",
+          "title": "Luxury Room -- Fully Inclusive Per Person Sharing",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Luxury Room -- Fully Inclusive Per Person Sharing",
               "8,587.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Luxury Room -- Fully Inclusive Per Person Sharing",
               "7,729.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Luxury Room -- Fully Inclusive Per Person Sharing",
               "7,298.40"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Luxury Room -- Fully Inclusive Per Person Sharing",
               "9,835.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Luxury Room -- Fully Inclusive Per Person Sharing",
               "8,852.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Luxury Room -- Fully Inclusive Per Person Sharing",
               "8,359.20"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Luxury Room -- Fully Inclusive Per Person Sharing",
               "10,440"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Luxury Room -- Fully Inclusive Per Person Sharing",
               "9,918"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Luxury Room -- Fully Inclusive Per Person Sharing",
               "9,396"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Luxury Room -- Fully Inclusive Per Person Sharing",
               "10,920"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Luxury Room -- Fully Inclusive Per Person Sharing",
               "10,374"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Luxury Room -- Fully Inclusive Per Person Sharing",
               "9,828"
-            ]
-          ]
-        },
-        {
-          "title": "Luxury Room -- Fully Inclusive Per Person Sharing — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Luxury Room -- Fully Inclusive Per Person Sharing",
               "12,254.40"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Luxury Room -- Fully Inclusive Per Person Sharing",
               "11,642.40"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Luxury Room -- Fully Inclusive Per Person Sharing",
               "11,642.40"
             ]
           ]
         },
         {
-          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Green Season10 Jan-31 Mar",
+          "title": "Classic Room -- Fully Inclusive Per Person Sharing",
           "rows": [
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Green Season 10 Jan-31 Mar — Classic Room -- Fully Inclusive Per Person Sharing",
               "6,974.40"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Green Season 10 Jan-31 Mar — Classic Room -- Fully Inclusive Per Person Sharing",
               "6,277.20"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Green Season 10 Jan-31 Mar — Classic Room -- Fully Inclusive Per Person Sharing",
               "5,928"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Shoulder Season1-30 Apr | 1-30 Jun1 Nov-19 Dec",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Classic Room -- Fully Inclusive Per Person Sharing",
               "8,289.60"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Classic Room -- Fully Inclusive Per Person Sharing",
               "7,461.60"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder Season 1-30 Apr / 1-30 Jun 1 Nov-19 Dec — Classic Room -- Fully Inclusive Per Person Sharing",
               "7,046.40"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Shoulder High1-31 May",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Shoulder High 1-31 May — Classic Room -- Fully Inclusive Per Person Sharing",
               "8,788.80"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Shoulder High 1-31 May — Classic Room -- Fully Inclusive Per Person Sharing",
               "8,349.60"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Shoulder High 1-31 May — Classic Room -- Fully Inclusive Per Person Sharing",
               "7,910.40"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- Fully Inclusive Per Person Sharing — High Season1 Sep-31 Oct20 Dec-9 Jan",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Classic Room -- Fully Inclusive Per Person Sharing",
               "8,923.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Classic Room -- Fully Inclusive Per Person Sharing",
               "8,476.80"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — High Season 1 Sep-31 Oct 20 Dec-9 Jan — Classic Room -- Fully Inclusive Per Person Sharing",
               "8,031.60"
-            ]
-          ]
-        },
-        {
-          "title": "Classic Room -- Fully Inclusive Per Person Sharing — Peak Season1 Jul-31 Aug",
-          "rows": [
+            ],
             [
-              "1-5 Night Rate",
+              "1-5 Night Rate — Peak Season 1 Jul-31 Aug — Classic Room -- Fully Inclusive Per Person Sharing",
               "9,979.20"
             ],
             [
-              "6-7 Night Rate",
+              "6-7 Night Rate — Peak Season 1 Jul-31 Aug — Classic Room -- Fully Inclusive Per Person Sharing",
               "9,480"
             ],
             [
-              "8+ Night Rate",
+              "8+ Night Rate — Peak Season 1 Jul-31 Aug — Classic Room -- Fully Inclusive Per Person Sharing",
               "9,480"
             ]
           ]
@@ -18333,44 +17976,44 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Rooms — B&B (per room) — Rate (N$)",
+          "title": "Rooms — B&B (per room)",
           "rows": [
             [
-              "Ground Room — Single",
+              "Ground Room — Single — Rate (N$)",
               "2,468.40"
             ],
             [
-              "Ground Room — Double",
+              "Ground Room — Double — Rate (N$)",
               "3,702.60"
             ],
             [
-              "Loft Room — Single",
+              "Loft Room — Single — Rate (N$)",
               "2,468.40"
             ],
             [
-              "Loft Room — Double",
+              "Loft Room — Double — Rate (N$)",
               "3,702.60"
             ]
           ]
         },
         {
-          "title": "Family Rooms — B&B (per room) — Rate (N$)",
+          "title": "Family Rooms — B&B (per room)",
           "rows": [
             [
-              "Family Room — 2 adults + 2 children",
+              "Family Room — 2 adults + 2 children — Rate (N$)",
               "4,936.80"
             ],
             [
-              "Family Room — 2 adults + 1 child",
+              "Family Room — 2 adults + 1 child — Rate (N$)",
               "4,319.70"
             ]
           ]
         },
         {
-          "title": "Children — Rate (N$)",
+          "title": "Children",
           "rows": [
             [
-              "Children under 3 yrs",
+              "Children under 3 yrs — Rate (N$)",
               "0"
             ]
           ]
@@ -18387,18 +18030,18 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "NETT Rates — 01 Jan 2026 to 31 Dec 2026 — Nett Price (N$)",
+          "title": "NETT Rates — 01 Jan 2026 to 31 Dec 2026",
           "rows": [
             [
-              "Campsite — Per Adult per night",
+              "Campsite — Per Adult per night — Nett Price (N$)",
               "624"
             ],
             [
-              "Campsite — Per Child (3-12 yrs) per night",
+              "Campsite — Per Child (3-12 yrs) per night — Nett Price (N$)",
               "288"
             ],
             [
-              "Campsite — Child under 3 yrs",
+              "Campsite — Child under 3 yrs — Nett Price (N$)",
               "0"
             ]
           ]
@@ -18415,101 +18058,101 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Campsite Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "title": "Campsite Rates — 01.11.2025 to 31.10.2026",
           "rows": [
             [
-              "Camping Site — per adult (nett)",
+              "Camping Site — per adult (nett) — Rate (N$)",
               "600"
             ],
             [
-              "Camping Site — per child 3–11 (nett)",
+              "Camping Site — per child 3–11 (nett) — Rate (N$)",
               "300"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
@@ -18526,101 +18169,101 @@ Object.assign(SHEET_RACK_BY_YEAR, {
       "note": "Rack derived from the supplier net rate at the house +20% ceiling — replace when the supplier publishes its own rack.",
       "sections": [
         {
-          "title": "Campsite Rates — 01.11.2025 to 31.10.2026 — Rate (N$)",
+          "title": "Campsite Rates — 01.11.2025 to 31.10.2026",
           "rows": [
             [
-              "Camping Site — per adult (nett)",
+              "Camping Site — per adult (nett) — Rate (N$)",
               "600"
             ],
             [
-              "Camping Site — per child 3–11 (nett)",
+              "Camping Site — per child 3–11 (nett) — Rate (N$)",
               "300"
             ]
           ]
         },
         {
-          "title": "Activities & Nature Drives — Rate",
+          "title": "Activities & Nature Drives",
           "rows": [
             [
-              "Morning / Afternoon Etosha Game Drive (4 hrs)",
+              "Morning / Afternoon Etosha Game Drive (4 hrs) — Rate",
               "2,100"
             ],
             [
-              "Onguma Sunrise Drive (3 hrs)",
+              "Onguma Sunrise Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Onguma Sundowner Drive (3 hrs)",
+              "Onguma Sundowner Drive (3 hrs) — Rate",
               "1,068"
             ],
             [
-              "Interpretive Nature Walk (1½ hrs · min age 16)",
+              "Interpretive Nature Walk (1½ hrs · min age 16) — Rate",
               "1,068"
             ],
             [
-              "Mid-Morning Onkolo Hide (3 hrs · min age 7)",
+              "Mid-Morning Onkolo Hide (3 hrs · min age 7) — Rate",
               "780"
             ],
             [
-              "Young Explorers Walk (1½ hrs)",
+              "Young Explorers Walk (1½ hrs) — Rate",
               "504"
             ],
             [
-              "Private Game Drive (4 hrs)",
+              "Private Game Drive (4 hrs) — Rate",
               "11,640"
             ],
             [
-              "Private Game Drive — Full Day (8 hrs)",
+              "Private Game Drive — Full Day (8 hrs) — Rate",
               "18,600"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (per activity)",
+              "Private Game Drive — Fully Inclusive surcharge (per activity) — Rate",
               "7,200"
             ],
             [
-              "Private Game Drive — Fully Inclusive surcharge (full day)",
+              "Private Game Drive — Fully Inclusive surcharge (full day) — Rate",
               "9,000"
             ]
           ]
         },
         {
-          "title": "Onguma Dream Cruiser (Sleep-Out) — Rate",
+          "title": "Onguma Dream Cruiser (Sleep-Out)",
           "rows": [
             [
-              "Onguma Dream Cruiser (max 2 guests)",
+              "Onguma Dream Cruiser (max 2 guests) — Rate",
               "11,760"
             ],
             [
-              "Additional surcharge — Leadwood & Tamboti Campsite",
+              "Additional surcharge — Leadwood & Tamboti Campsite — Rate",
               "6,240"
             ]
           ]
         },
         {
-          "title": "Additional Meals — Rate",
+          "title": "Additional Meals",
           "rows": [
             [
-              "Breakfast",
+              "Breakfast — Rate",
               "348"
             ],
             [
-              "Breakfast Pack",
+              "Breakfast Pack — Rate",
               "348"
             ],
             [
-              "Lunch (3 course)",
+              "Lunch (3 course) — Rate",
               "432"
             ],
             [
-              "Lunch Pack",
+              "Lunch Pack — Rate",
               "312"
             ],
             [
-              "Dinner (3 course)",
+              "Dinner (3 course) — Rate",
               "768"
             ],
             [
-              "Dinner (4 course)",
+              "Dinner (4 course) — Rate",
               "972"
             ]
           ]
