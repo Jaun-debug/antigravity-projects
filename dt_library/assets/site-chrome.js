@@ -327,13 +327,22 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
       : "2027 rates - to follow. We are loading these now; please continue to use 2026 rates in the meantime.";
   }
   function showNote(on){
+    /* Index and landing pages carry no rates at all, so a "2027 rates to follow"
+       banner there would be answering a question nobody asked. Only pages that
+       actually show rates get the note. */
+    if(on && !rateTables().length && !perCard() && !pageYears()) on=false;
     var note=document.getElementById("nr-2027-note");
     if(on){
       if(!note){note=document.createElement("div");note.id="nr-2027-note";}
       note.textContent=noteText();
       var t=document.getElementById("nr-yrtoggle");
-      if(t&&t.parentNode){ if(note.parentNode!==t.parentNode||note.previousSibling!==t){t.parentNode.insertBefore(note,t.nextSibling);} return; }
-      var host=document.querySelector("#detail-view")||document.querySelector("main")||document.body;
+      if(t&&t.parentNode&&t.parentNode.id!=="nr-yrdock"){ if(note.parentNode!==t.parentNode||note.previousSibling!==t){t.parentNode.insertBefore(note,t.nextSibling);} return; }
+      var host=document.querySelector("#detail-view")||document.querySelector("main")||document.querySelector(".wrap")||document.body;
+      if(host===document.body){
+        /* never above the site header — sit just under it */
+        var hd=document.querySelector(".main-header");
+        if(hd&&hd.parentNode===document.body){ if(note.previousSibling!==hd) document.body.insertBefore(note,hd.nextSibling); return; }
+      }
       if(host&&note.parentNode!==host){host.insertBefore(note,host.firstChild);}
     }else if(note){note.remove();}
   }
@@ -348,8 +357,46 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
       +"#nr-2027-note{margin:0 0 18px;padding:15px 18px;border-radius:12px;background:rgba(200,90,23,.10);border:1px solid rgba(200,90,23,.4);color:#8a4a22;font-family:Inter,sans-serif;font-size:.86rem;text-align:center;letter-spacing:.2px;line-height:1.45}";
     document.head.appendChild(s);
   }
-  /* Put the pills in the flow of the page, just above the rates. */
+  /* ---------------------------------------------------------------------
+     Floating season dock. The 2026 / 2027 pills used to sit in the flow of
+     the page, which meant they were buried well below the fold on lodge and
+     region pages — and missing entirely on pages with nothing to anchor to.
+     They now ride in a small fixed tab on the right edge of every page except
+     the home page, whose hero carries its own travel-year switch.
+     Both site-chrome.js and enquiry-wizard.js build this by the same id, so
+     whichever loads first wins and the other reuses it.
+     --------------------------------------------------------------------- */
+  function nrDock(){
+    try{
+      var p=(location.pathname||"/").replace(/index\.html?$/,"");
+      if(p==="/"||p==="") return null;               /* home page keeps its hero switch */
+      var d=document.getElementById("nr-yrdock");
+      if(!d){
+        if(!document.getElementById("nr-yrdock-css")){
+          var st=document.createElement("style"); st.id="nr-yrdock-css";
+          st.textContent=
+            "#nr-yrdock{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:1200;"
+            +"display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:12px 0 0 12px;"
+            +"background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);"
+            +"border:1px solid rgba(200,90,23,.35);border-right:0;box-shadow:0 10px 30px rgba(0,0,0,.14)}"
+            +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
+            +"#nr-yrdock button{white-space:nowrap;width:100%;text-align:center}"
+            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;right:10px;transform:none;"
+            +"border-radius:12px;border-right:1px solid rgba(200,90,23,.35);padding:8px}"
+            +"#nr-yrdock>div{flex-direction:row}}"
+            +"@media print{#nr-yrdock{display:none}}";
+          (document.head||document.documentElement).appendChild(st);
+        }
+        d=document.createElement("div"); d.id="nr-yrdock";
+        (document.body||document.documentElement).appendChild(d);
+      }
+      return d;
+    }catch(e){ return null; }
+  }
+  /* Dock first; fall back to the flow of the page for anything without one. */
   function place(w){
+    var dock=nrDock();
+    if(dock){ if(w.parentNode!==dock) dock.appendChild(w); return true; }
     var dv=document.getElementById("detail-view");
     if(dv){ if(w.parentNode!==dv||dv.firstChild!==w) dv.insertBefore(w,dv.firstChild); return true; }
     var tc=document.querySelector(".tabs-container");
@@ -428,8 +475,9 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     }
   }catch(x){}}
   function build(){
-    /* property pages ship their own season pills (enquiry-wizard.js) — don't double up */
-    if(document.getElementById("nr-lodge-yr")) return;
+    /* property pages ship their own season pills (enquiry-wizard.js) — don't double up.
+       Those pills can appear after ours, so clear ours out if they turn up late. */
+    if(document.getElementById("nr-lodge-yr")){ var dup=document.getElementById("nr-yrtoggle"); if(dup) dup.remove(); return; }
     var w=document.getElementById("nr-yrtoggle");
     if(!w){
       injectCss();
@@ -445,6 +493,7 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init);else init();
   try{var _nrt;var mo=new MutationObserver(function(){clearTimeout(_nrt);_nrt=setTimeout(function(){
     wrapOpen();
+    if(document.getElementById("nr-lodge-yr")){var dup2=document.getElementById("nr-yrtoggle");if(dup2)dup2.remove();return;}
     if(!document.getElementById("nr-yrtoggle")){build();return;}
     reflect();
     if(!pageYears()&&!hasNative()){ if(perCard())applyPerCard(year()); else if(year()==="2027"){hideTables(true);showNote(true);} }
