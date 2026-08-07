@@ -200,15 +200,29 @@ async function listSummary() {
 }
 
 // Public: all rack rates keyed by slug (used by the builder overlay).
+// Resolve every slug with a concurrency cap rather than one after another.
+// Strictly sequential this took ~7.5s, which the builder waits on before it can
+// overlay live rack.
 async function allRack() {
   const r = getRedis();
   if (!r) return {};
   const slugs = await listSlugs();
   const out = {};
-  for (const slug of slugs) {
-    const resolved = await getRackResolved(slug);
+  const limit = Math.min(24, slugs.length);
+  let next = 0;
+  const results = new Array(slugs.length);
+  await Promise.all(new Array(limit).fill(0).map(async function () {
+    for (;;) {
+      const i = next++;
+      if (i >= slugs.length) return;
+      try { results[i] = await getRackResolved(slugs[i]); } catch (e) { results[i] = null; }
+    }
+  }));
+  // Reassemble in slug order so the output is identical to the sequential version.
+  slugs.forEach(function (slug, i) {
+    const resolved = results[i];
     if (resolved && resolved.doc) out[slug] = resolved.doc;
-  }
+  });
   return out;
 }
 
