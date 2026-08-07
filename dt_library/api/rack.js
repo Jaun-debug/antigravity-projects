@@ -2593,6 +2593,11 @@ Object.assign(DDS_RACK_BY_YEAR, {
 Object.assign(VF_RACK, NAM_RACK);
 
 
+// Derived public rack (populated at the end of this file). Consulted LAST — after
+// the owner area (Redis) and the inline maps — so it can only ever fill a gap,
+// never override a rack the supplier or the owner has set.
+const LEGACY_RACK_BY_YEAR = {};
+
 function parsePrice(s) {
   const str = String(s == null ? '' : s).replace(/,/g, '').replace(/[^\d.\-]/g, '');
   if (str === '' || str === '-' || str === '.') return null;
@@ -3912,6 +3917,11 @@ module.exports = async (req, res) => {
           }
         } catch (e) {}
       }
+      // Derived rack counts as coverage, but only where nothing live holds one.
+      for (const s of Object.keys(LEGACY_RACK_BY_YEAR)) {
+        if (cov[s]) continue;
+        for (const y of Object.keys(LEGACY_RACK_BY_YEAR[s])) add(s, y, false, LEGACY_RACK_BY_YEAR[s][y]);
+      }
       for (const s of Object.keys(cov)) cov[s].years.sort();
       return res.status(200).json({ ok: true, coverage: cov });
     }
@@ -3940,6 +3950,14 @@ module.exports = async (req, res) => {
         if (db.dbConfigured()) { try { resolved = await db.getRackResolved(slug, yearReq || undefined); } catch(e){} }
         doc = resolved.doc;
         if (!doc && VF_RACK[slug]) { doc = VF_RACK[slug]; }
+        // Last resort: rack derived from the supplier's net STO. Only reached
+        // when nothing else holds a rack, so a real rack always wins.
+        if (!doc && LEGACY_RACK_BY_YEAR[slug]) {
+          const lys = Object.keys(LEGACY_RACK_BY_YEAR[slug]).sort();
+          const ly = (yearReq && LEGACY_RACK_BY_YEAR[slug][yearReq]) ? yearReq : lys[0];
+          doc = LEGACY_RACK_BY_YEAR[slug][ly];
+          resolved = { doc: doc, year: ly, years: lys };
+        }
       }
       // full=1 -> the raw sectioned doc (used by lodge pages to render season tables).
       if (req.query && req.query.full) {
@@ -3953,6 +3971,7 @@ module.exports = async (req, res) => {
     for (const s of Object.keys(all)) lodges[s] = flatten(all[s]);
     for (const s of Object.keys(VF_RACK)) { if (!lodges[s]) lodges[s] = flatten(VF_RACK[s]); }
     for (const s of Object.keys(DDS_RACK_BY_YEAR)) { if (!lodges[s]) lodges[s] = flatten(DDS_RACK_BY_YEAR[s][Object.keys(DDS_RACK_BY_YEAR[s]).sort()[0]]); }
+    for (const s of Object.keys(LEGACY_RACK_BY_YEAR)) { if (!lodges[s]) lodges[s] = flatten(LEGACY_RACK_BY_YEAR[s][Object.keys(LEGACY_RACK_BY_YEAR[s]).sort()[0]]); }
     return res.status(200).json({ ok: true, lodges: lodges });
   } catch (e) {
     return res.status(200).json({ ok: true, lodges: {}, error: String(e && e.message ? e.message : e) });
@@ -5177,4 +5196,8024 @@ Object.assign(DDS_RACK_BY_YEAR, {
       ]
     }
   }
+});
+
+
+// ---------------------------------------------------------------------------
+// DERIVED PUBLIC RACK — lodges that had an agent (STO) rate but no public rack,
+// so the public page showed nothing at all.
+//
+// HOUSE RULE: rack is never more than 20% above the net STO.
+//   - Supplier states a commission that grosses up to MORE than +20% (20/25/40%)
+//     -> the +20% cap applies.
+//   - Supplier states a commission that grosses up to LESS (10/15%)
+//     -> that smaller figure is used, never inflated to the cap.
+//   - Supplier states no commission -> the house +20% is used.
+//
+// Consulted LAST, so a supplier's own published rack — or anything set in the
+// owner area — always wins over these. Ultimate Safaris is the reason that
+// matters: their real discount is 26.4%, so their published rack legitimately
+// sits above this cap and must not be overwritten.
+// ---------------------------------------------------------------------------
+Object.assign(LEGACY_RACK_BY_YEAR, {
+ "camp-kwando": {
+  "2026": {
+   "name": "Camp Kwando",
+   "region": "",
+   "currency": "N$",
+   "validity": "01 Dec 2025 – 30 Nov 2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Bed & Breakfast (per person, per night)",
+     "rows": [
+      [
+       "Tented River Chalet — Single",
+       "1,934.40"
+      ],
+      [
+       "Tented River Chalet — Double (pp sharing)",
+       "1,656"
+      ],
+      [
+       "Tented Chalet — Single",
+       "1,449.60"
+      ],
+      [
+       "Tented Chalet — Double (pp sharing)",
+       "1,286.40"
+      ],
+      [
+       "Tree House — Single",
+       "3,240"
+      ],
+      [
+       "Tree House — Double (pp sharing)",
+       "2,462.40"
+      ]
+     ]
+    },
+    {
+     "title": "Dinner, Bed & Breakfast (per person, per night)",
+     "rows": [
+      [
+       "Tented River Chalet — Single",
+       "2,438.40"
+      ],
+      [
+       "Tented River Chalet — Double (pp sharing)",
+       "2,160"
+      ],
+      [
+       "Tented Chalet — Single",
+       "1,953.60"
+      ],
+      [
+       "Tented Chalet — Double (pp sharing)",
+       "1,790.40"
+      ],
+      [
+       "Tree House — Single",
+       "3,744"
+      ],
+      [
+       "Tree House — Double (pp sharing)",
+       "2,966.40"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (per person)",
+     "rows": [
+      [
+       "Game Drive (min 2 / max 10 pax)",
+       "912"
+      ],
+      [
+       "Boat Cruise (morning or sunset)",
+       "662.40"
+      ],
+      [
+       "Bird Cruise (mornings only)",
+       "662.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "epako-safari-lodge": {
+  "2026": {
+   "name": "Epako Safari Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Deluxe Room (Sharing pp) - DBB",
+       "8,544"
+      ],
+      [
+       "Deluxe Room (Single) - DBB",
+       "12,864"
+      ],
+      [
+       "Junior Suite (Sharing pp) - DBB",
+       "11,664"
+      ],
+      [
+       "Junior Suite (Single) - DBB",
+       "17,088"
+      ],
+      [
+       "Tour Guide Room - DBB",
+       "2,628"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ababis-guest-farm": {
+  "2026": {
+   "name": "Ababis Guest Farm",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Comfort Double Room (Sharing) - DBB",
+       "2,995.20"
+      ],
+      [
+       "Comfort Single Room - DBB",
+       "3,360"
+      ],
+      [
+       "Comfort Double (2 Nights Stay Discount) - DBB",
+       "2,695.68"
+      ],
+      [
+       "Comfort Single (2 Nights Stay Discount) - DBB",
+       "3,024"
+      ],
+      [
+       "Self-Catering Farmhouse (2 Pax Sharing) - RO",
+       "960"
+      ],
+      [
+       "Campsite (Per Person) - RO",
+       "336"
+      ],
+      [
+       "Tour Guide Room - DBB",
+       "1,248"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "africa-safari-lodge": {
+  "2026": {
+   "name": "Africa Safari Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 40% commission, which would gross up to 66.7% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Standard Room (Sharing) - DBB",
+       "1,160.40"
+      ],
+      [
+       "Standard Room (Single) - DBB",
+       "1,430.40"
+      ],
+      [
+       "Standard Room (Sharing) - BB",
+       "806.40"
+      ],
+      [
+       "Standard Room (Single) - BB",
+       "1,076.40"
+      ],
+      [
+       "Deluxe Family Room (2 Adults Sharing) - DBB",
+       "3,303.60"
+      ],
+      [
+       "Deluxe Family Room (2 Adults Sharing) - BB",
+       "2,235.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "aloegrove-safari-lodge": {
+  "2026": {
+   "name": "Aloegrove Safari Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Standard Room (Sharing pp) - B&B",
+       "1,704.96"
+      ],
+      [
+       "Standard Room (Single) - B&B",
+       "1,948.80"
+      ],
+      [
+       "Luxury Room (Sharing pp) - B&B",
+       "1,973.76"
+      ],
+      [
+       "Luxury Room (Single) - B&B",
+       "2,217.60"
+      ],
+      [
+       "Kids 5-11 sharing - B&B",
+       "518.40"
+      ],
+      [
+       "Kids 12-18 sharing - B&B",
+       "1,536"
+      ],
+      [
+       "Tour Guide Room - B&B",
+       "1,440"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "alte-kalkofen-lodge": {
+  "2026": {
+   "name": "Alte Kalkofen Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Luxury Chalet (Sharing) - B&B",
+       "1,622.40"
+      ],
+      [
+       "Luxury Chalet (Single) - B&B",
+       "1,872"
+      ],
+      [
+       "Luxury Chalet (Sharing) - Self Catering (Acc Only)",
+       "1,420.80"
+      ],
+      [
+       "Luxury Chalet (Single) - Self Catering (Acc Only)",
+       "1,689.60"
+      ],
+      [
+       "Children 3-13 years sharing - B&B",
+       "811.20"
+      ],
+      [
+       "Camping (Per Person) - RO",
+       "240"
+      ],
+      [
+       "Tour Guide Room - B&B",
+       "974.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "atlantic-villa": {
+  "2026": {
+   "name": "Atlantic Villa Boutique Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Standard Room (Sharing pp) - B&B",
+       "1,267.20"
+      ],
+      [
+       "Standard Room (Single) - B&B",
+       "1,728"
+      ],
+      [
+       "Deluxe Room (Sharing pp) - B&B",
+       "1,584"
+      ],
+      [
+       "Deluxe Room (Single) - B&B",
+       "2,112"
+      ],
+      [
+       "Luxury Room (Sharing pp) - B&B",
+       "1,708.80"
+      ],
+      [
+       "Luxury Room (Single) - B&B",
+       "2,323.20"
+      ],
+      [
+       "Junior Suite (Sharing pp) - B&B",
+       "2,428.80"
+      ],
+      [
+       "Junior Suite (Single) - B&B",
+       "3,379.20"
+      ],
+      [
+       "Tour Guide Rate (Nett) - B&B",
+       "900"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "auas-safari-lodge": {
+  "2026": {
+   "name": "Auas Safari Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Standard Room (Sharing pp) - DBB",
+       "2,265.60"
+      ],
+      [
+       "Standard Room (Single) - DBB",
+       "2,649.60"
+      ],
+      [
+       "Luxury Room (Sharing pp) - DBB",
+       "3,000"
+      ],
+      [
+       "Luxury Room (Single) - DBB",
+       "3,379.20"
+      ],
+      [
+       "Children (7-12 years) sharing - DBB",
+       "1,440"
+      ],
+      [
+       "Children (3-6 years) sharing - DBB",
+       "441.60"
+      ],
+      [
+       "Tour Guide Rate (Nett) - DBB",
+       "1,800"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "bahnhof-hotel-aus": {
+  "2026": {
+   "name": "Bahnhof Hotel Aus",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Double Room (Sharing pp) - B&B",
+       "1,137.60"
+      ],
+      [
+       "Single Room - B&B",
+       "1,315.20"
+      ],
+      [
+       "Family Room (Sharing pp) - B&B",
+       "1,137.60"
+      ],
+      [
+       "Orange House Sharing - Self Catering (Acc Only)",
+       "561"
+      ],
+      [
+       "Orange House Single - Self Catering (Acc Only)",
+       "1,122"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "cornerstone-guesthouse": {
+  "2026": {
+   "name": "Cornerstone Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Double Room (Sharing pp) - B&B",
+       "1,214.36"
+      ],
+      [
+       "Single Room - B&B",
+       "1,468.72"
+      ],
+      [
+       "Apartment (1-Bedroom, max 2) - RO",
+       "2,539.49"
+      ],
+      [
+       "Apartment (2-Bedroom, max 4) - RO",
+       "3,815.39"
+      ],
+      [
+       "Apartment (3-Bedroom, max 6) - RO",
+       "4,455.38"
+      ],
+      [
+       "Children (4-12 years) sharing - B&B",
+       "758.98"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "epacha-game-lodge-spa": {
+  "2026": {
+   "name": "Epacha Game Lodge & Spa",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Hemingway Safari Tent (Sharing) - DBB",
+       "3,960"
+      ],
+      [
+       "Hemingway Safari Tent (Single) - DBB",
+       "5,118"
+      ],
+      [
+       "Family Safari Tent (Sharing) - DBB",
+       "3,960"
+      ],
+      [
+       "Epacha Lodge Chalet (Sharing) - DBB",
+       "6,072"
+      ],
+      [
+       "Epacha Lodge Chalet (Single) - DBB",
+       "7,200"
+      ],
+      [
+       "Children 6-12 sharing (Safari Tents) - DBB",
+       "1,974"
+      ],
+      [
+       "Children 6-12 sharing (Lodge Chalet) - DBB",
+       "3,030"
+      ],
+      [
+       "Tour Guide Room - DBB",
+       "1,584"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "epupa-falls-lodge": {
+  "2026": {
+   "name": "Epupa Falls Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "River View Chalet (Sharing pp) - DBB",
+       "2,054.40"
+      ],
+      [
+       "River View Chalet (Single) - DBB",
+       "2,347.20"
+      ],
+      [
+       "Standard Twin Chalet (Sharing pp) - DBB",
+       "1,761.60"
+      ],
+      [
+       "Standard Twin Chalet (Single) - DBB",
+       "1,761.60"
+      ],
+      [
+       "Children 3-12 sharing (Standard Chalet) - DBB",
+       "780"
+      ],
+      [
+       "Campsite (Per Person) - RO",
+       "216"
+      ],
+      [
+       "Tour Guide Room - DBB",
+       "1,260"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "erongo-rocks": {
+  "2026": {
+   "name": "Erongo Rocks nature & camp",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 10% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Comfy Camping (Sharing) - RO",
+       "944.44"
+      ],
+      [
+       "Comfy Camping (Single) - RO",
+       "1,055.56"
+      ],
+      [
+       "Campsite (Self-drive, per person) - RO",
+       "427.78"
+      ],
+      [
+       "Children 7-12 sharing - RO",
+       "472.22"
+      ],
+      [
+       "Tour Guide Rate (Camping) - RO",
+       "213.89"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "gabus-safari-lodge": {
+  "2026": {
+   "name": "Gabus Safari Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Luxury Room (Sharing pp) - DBB",
+       "2,965.19"
+      ],
+      [
+       "Luxury Room (Single) - DBB",
+       "5,340.94"
+      ],
+      [
+       "Luxury Room (Double per room) - DBB",
+       "2,670.47"
+      ],
+      [
+       "Kids 2-6 sharing - DBB",
+       "443.11"
+      ],
+      [
+       "Kids 7-11 sharing - DBB",
+       "1,396.67"
+      ],
+      [
+       "Tour Guide Room - DBB",
+       "900"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ghaub": {
+  "2026": {
+   "name": "Ghaub & Waterberg Wilderness",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Ghaub Double Room (Single/Twin beds) - DBB",
+       "3,264"
+      ],
+      [
+       "Ghaub Campsite (Per Person) - RO",
+       "504"
+      ],
+      [
+       "Waterberg Plateau Lodge Rock Chalet - DBB",
+       "4,176"
+      ],
+      [
+       "Waterberg Wilderness Lodge Double Room - DBB",
+       "3,072"
+      ],
+      [
+       "Waterberg Valley Lodge Econo Chalet - DBB",
+       "2,160"
+      ],
+      [
+       "Waterberg Plateau Campsite - RO",
+       "504"
+      ],
+      [
+       "Tour Guide Room (DBB) - Nett",
+       "1,200"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hansa-hotel": {
+  "2026": {
+   "name": "Hansa Hotel Swakopmund",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Single Room - B&B",
+       "2,340"
+      ],
+      [
+       "Double Room (Sharing pp) - B&B",
+       "1,650"
+      ],
+      [
+       "Double Room (Per Room) - B&B",
+       "3,300"
+      ],
+      [
+       "Triple Room - B&B",
+       "3,900"
+      ],
+      [
+       "Suite - B&B",
+       "4,152"
+      ],
+      [
+       "Children 5-12 sharing - B&B",
+       "270"
+      ],
+      [
+       "Children 13-18 sharing - B&B",
+       "396"
+      ],
+      [
+       "Tour Guide Room - B&B",
+       "1,464"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hohewarte-guestfarm": {
+  "2026": {
+   "name": "Hohewarte Guestfarm",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Double Room (Sharing pp) - DBB",
+       "1,920"
+      ],
+      [
+       "Single Room - DBB",
+       "2,400"
+      ],
+      [
+       "Child u12 sharing - DBB",
+       "960"
+      ],
+      [
+       "Tour Guide Room - DBB",
+       "1,200"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hotel-thule": {
+  "2026": {
+   "name": "Hotel Thule",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Double Room (Sharing pp) - B&B",
+       "1,940"
+      ],
+      [
+       "Single Room - B&B",
+       "1,940"
+      ],
+      [
+       "Double Room (Per Room) - B&B",
+       "3,880"
+      ],
+      [
+       "Children 3-12 sharing - B&B",
+       "735.29"
+      ],
+      [
+       "Tour Guide Room - B&B",
+       "1,235.29"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kalahari-game-lodge": {
+  "2026": {
+   "name": "Kalahari Game Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Chalet (Sharing pp) - DBB",
+       "2,322"
+      ],
+      [
+       "Chalet (Single) - DBB",
+       "4,022.40"
+      ],
+      [
+       "Campsite (Per Person) - RO",
+       "453.60"
+      ],
+      [
+       "Kids 4-9 sharing - DBB",
+       "1,173"
+      ],
+      [
+       "Tour Guide Room (2nd) - DBB",
+       "840"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "waldeck-lodge": {
+  "2026": {
+   "name": "Waldeck Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 25% commission, which would gross up to 33.3% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Per Person Rate (1 - 6 guests) - Full Inclusive",
+       "29,700"
+      ],
+      [
+       "Per Person Rate (7 - 16 guests) - Full Inclusive",
+       "24,750"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kaoko-mopane-lodge": {
+  "2026": {
+   "name": "Kaoko Mopane Lodge & Camping",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Luxury Room — Single",
+       "2,650"
+      ],
+      [
+       "Luxury Room — Double/Twin (pp sharing)",
+       "2,260"
+      ],
+      [
+       "Child 4–12 yrs (sharing with adults)",
+       "950"
+      ],
+      [
+       "Tour Guide (per guide)",
+       "1,352.94"
+      ],
+      [
+       "Luxury Room — Single",
+       "2,200"
+      ],
+      [
+       "Luxury Room — Double/Twin (pp sharing)",
+       "1,780"
+      ],
+      [
+       "Child 4–12 yrs",
+       "600"
+      ],
+      [
+       "Tour Guide",
+       "1,058.82"
+      ],
+      [
+       "Per Person",
+       "300"
+      ],
+      [
+       "Child 4–12 yrs",
+       "150"
+      ],
+      [
+       "Overlander (10+ pax)",
+       "250"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "nooishof": {
+  "2026": {
+   "name": "Nooishof",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 25% commission, which would gross up to 33.3% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Adult (per person per night)",
+       "7,290"
+      ],
+      [
+       "Child 4–15 yrs (per night)",
+       "3,645"
+      ],
+      [
+       "Guide (per night, nett)",
+       "3,000"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "droombos-estate": {
+  "2026": {
+   "name": "Droombos Estate & Simanya River Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Droombos Distinctive Room (Sharing) - B&B (Low Season)",
+       "5,338.80"
+      ],
+      [
+       "Droombos Distinctive Room (Sharing) - B&B (High Season)",
+       "5,872.80"
+      ],
+      [
+       "Droombos Distinctive Room (Single) - B&B (Low Season)",
+       "6,145.20"
+      ],
+      [
+       "Droombos Distinctive Room (Single) - B&B (High Season)",
+       "6,759.60"
+      ],
+      [
+       "Droombos Luxury Room (Sharing) - B&B (Low Season)",
+       "3,310.80"
+      ],
+      [
+       "Droombos Luxury Room (Sharing) - B&B (High Season)",
+       "3,642"
+      ],
+      [
+       "Droombos Luxury Room (Single) - B&B (Low Season)",
+       "3,775.20"
+      ],
+      [
+       "Droombos Luxury Room (Single) - B&B (High Season)",
+       "4,153.20"
+      ],
+      [
+       "Droombos Standard Room (Sharing) - B&B (Low Season)",
+       "1,626"
+      ],
+      [
+       "Droombos Standard Room (Sharing) - B&B (High Season)",
+       "1,789.20"
+      ],
+      [
+       "Droombos Standard Room (Single) - B&B (Low Season)",
+       "1,858.80"
+      ],
+      [
+       "Droombos Standard Room (Single) - B&B (High Season)",
+       "2,044.80"
+      ],
+      [
+       "Droombos Vineyard Glamping (Sharing) - B&B (Low Season)",
+       "840"
+      ],
+      [
+       "Droombos Vineyard Glamping (Sharing) - B&B (High Season)",
+       "1,056"
+      ],
+      [
+       "Droombos Campsite (Sharing) - RO (Low Season)",
+       "480"
+      ],
+      [
+       "Droombos Campsite (Sharing) - RO (High Season)",
+       "576"
+      ],
+      [
+       "Simanya Standard Chalet (Sharing) - DBB (Low Season)",
+       "3,484.80"
+      ],
+      [
+       "Simanya Standard Chalet (Sharing) - DBB (High Season)",
+       "3,659.04"
+      ],
+      [
+       "Simanya Standard Chalet (Single) - DBB (Low Season)",
+       "4,207.10"
+      ],
+      [
+       "Simanya Standard Chalet (Single) - DBB (High Season)",
+       "4,417.46"
+      ],
+      [
+       "Simanya Luxury Chalet (Sharing) - DBB (Low Season)",
+       "5,385.60"
+      ],
+      [
+       "Simanya Luxury Chalet (Sharing) - DBB (High Season)",
+       "5,654.88"
+      ],
+      [
+       "Simanya Luxury Chalet (Single) - DBB (Low Season)",
+       "6,230.40"
+      ],
+      [
+       "Simanya Luxury Chalet (Single) - DBB (High Season)",
+       "6,541.92"
+      ],
+      [
+       "Simanya Campsite (Sharing) - RO (Low Season)",
+       "420"
+      ],
+      [
+       "Simanya Campsite (Sharing) - RO (High Season)",
+       "504"
+      ],
+      [
+       "Tour Guide Room (Droombos) - B&B (Low Season)",
+       "1,440"
+      ],
+      [
+       "Tour Guide Room (Droombos) - B&B (High Season)",
+       "1,440"
+      ],
+      [
+       "Tour Guide Room (Simanya) - DBB (Low Season)",
+       "1,332"
+      ],
+      [
+       "Tour Guide Room (Simanya) - DBB (High Season)",
+       "1,332"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "emanya-at-etosha": {
+  "2026": {
+   "name": "Emanya at Etosha",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 25% commission, which would gross up to 33.3% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Standard Chalet (Sharing) - B&B (Low Season)",
+       "1,773"
+      ],
+      [
+       "Standard Chalet (Sharing) - B&B (High Season)",
+       "2,250"
+      ],
+      [
+       "Standard Chalet (Single) - B&B (Low Season)",
+       "2,790"
+      ],
+      [
+       "Standard Chalet (Single) - B&B (High Season)",
+       "3,600"
+      ],
+      [
+       "Standard Chalet (Sharing) - DBB (Low Season)",
+       "2,227.50"
+      ],
+      [
+       "Standard Chalet (Sharing) - DBB (High Season)",
+       "2,709"
+      ],
+      [
+       "Standard Chalet (Single) - DBB (Low Season)",
+       "3,564"
+      ],
+      [
+       "Standard Chalet (Single) - DBB (High Season)",
+       "3,852"
+      ],
+      [
+       "Children 4-11 sharing - B&B (Low Season)",
+       "1,053"
+      ],
+      [
+       "Children 4-11 sharing - B&B (High Season)",
+       "1,350"
+      ],
+      [
+       "Children 4-11 sharing - DBB (Low Season)",
+       "1,336.50"
+      ],
+      [
+       "Children 4-11 sharing - DBB (High Season)",
+       "1,620"
+      ],
+      [
+       "Tour Guide Room - DBB (Low Season)",
+       "1,056"
+      ],
+      [
+       "Tour Guide Room - DBB (High Season)",
+       "1,056"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "namib-guesthouse": {
+  "2026": {
+   "name": "Namib Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rates (per person, per night)",
+     "rows": [
+      [
+       "Single Room (Low Season)",
+       "1,344"
+      ],
+      [
+       "Single Room (High Season)",
+       "1,728"
+      ],
+      [
+       "Luxury Single Room (Low Season)",
+       "1,536"
+      ],
+      [
+       "Luxury Single Room (High Season)",
+       "1,920"
+      ],
+      [
+       "Double Room (pp sharing) (Low Season)",
+       "1,248"
+      ],
+      [
+       "Double Room (pp sharing) (High Season)",
+       "1,392"
+      ],
+      [
+       "Luxury Double (pp sharing) (Low Season)",
+       "1,392"
+      ],
+      [
+       "Luxury Double (pp sharing) (High Season)",
+       "1,632"
+      ],
+      [
+       "Family Suite (pp sharing) (Low Season)",
+       "1,392"
+      ],
+      [
+       "Family Suite (pp sharing) (High Season)",
+       "1,632"
+      ],
+      [
+       "Child 7–12 yrs (per child) (Low Season)",
+       "720"
+      ],
+      [
+       "Child 7–12 yrs (per child) (High Season)",
+       "720"
+      ],
+      [
+       "Tour Guide (Low Season)",
+       "840"
+      ],
+      [
+       "Tour Guide (High Season)",
+       "840"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "alte-villa-2025": {
+  "2026": {
+   "name": "Alte Villa",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Double Rooms (per room / night)",
+     "rows": [
+      [
+       "Kolmanskoppe — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Kolmanskoppe — 2 adults",
+       "3,978"
+      ],
+      [
+       "Garub — 1 adult (private lounge shared w/ Grasplatz)",
+       "2,462.06"
+      ],
+      [
+       "Garub — 2 adults",
+       "3,978"
+      ],
+      [
+       "Grasplatz — 1 adult (private lounge shared w/ Garub)",
+       "2,462.06"
+      ],
+      [
+       "Grasplatz — 2 adults",
+       "3,978"
+      ]
+     ]
+    },
+    {
+     "title": "Family / Studio Rooms (sleeps up to 4)",
+     "rows": [
+      [
+       "Bogenfels Studio — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Bogenfels Studio — 2 adults",
+       "3,978"
+      ],
+      [
+       "Bogenfels Studio — 3 adults",
+       "5,967"
+      ],
+      [
+       "Bogenfels — +1 child &amp;lt;12 (with 2 adults)",
+       "1,082.35"
+      ],
+      [
+       "Bogenfels — +2 children &amp;lt;12 (with 2 adults)",
+       "2,164.71"
+      ],
+      [
+       "Tsiras Mountains (private terrace) — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Tsiras Mountains — 2 adults",
+       "3,978"
+      ],
+      [
+       "Tsiras Mountains — +1 child &amp;lt;12",
+       "1,082.35"
+      ],
+      [
+       "Tsiras Mountains — +2 children &amp;lt;12",
+       "2,164.71"
+      ]
+     ]
+    },
+    {
+     "title": "Apartments (self-catering option)",
+     "rows": [
+      [
+       "Itchaboe Apartment — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Itchaboe Apartment — 2 adults",
+       "3,978"
+      ],
+      [
+       "Itchaboe — 3 adults",
+       "5,967"
+      ],
+      [
+       "Itchaboe — 4 adults",
+       "7,955.29"
+      ],
+      [
+       "Itchaboe — +1 child &amp;lt;12",
+       "1,082.35"
+      ],
+      [
+       "Itchaboe — +2 children &amp;lt;12",
+       "2,164.71"
+      ],
+      [
+       "Loft — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Loft — 2 adults",
+       "3,978"
+      ],
+      [
+       "Loft — +1 child &amp;lt;12",
+       "1,082.35"
+      ],
+      [
+       "Loft — +2 children &amp;lt;12",
+       "2,164.71"
+      ],
+      [
+       "Charlottental — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Charlottental — 2 adults",
+       "3,978"
+      ],
+      [
+       "Charlottental — 3 adults",
+       "5,967"
+      ],
+      [
+       "Charlottental — 4 adults",
+       "7,955.29"
+      ],
+      [
+       "Märchental — 1 adult",
+       "2,462.06"
+      ],
+      [
+       "Märchental — 2 adults",
+       "3,978"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "barkhan-dune-retreat": {
+  "2026": {
+   "name": "Barkhan Dune Retreat",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Dune Chalet — Full Board (per person, per night)",
+     "rows": [
+      [
+       "Sharing — STO 1 (1 night)",
+       "4,182"
+      ],
+      [
+       "Sharing — STO 2 (2+ nights)",
+       "3,936"
+      ],
+      [
+       "Child 2–10 yrs (PCPN) — STO 1",
+       "2,091.60"
+      ],
+      [
+       "Child 2–10 yrs (PCPN) — STO 2",
+       "1,968"
+      ],
+      [
+       "Single — STO 1",
+       "5,437.20"
+      ],
+      [
+       "Single — STO 2",
+       "5,116.80"
+      ]
+     ]
+    },
+    {
+     "title": "Dune Chalet — Dinner, Bed &amp; Breakfast",
+     "rows": [
+      [
+       "Sharing — STO 1",
+       "2,781.60"
+      ],
+      [
+       "Sharing — STO 2",
+       "2,618.40"
+      ],
+      [
+       "Child 2–10 yrs — STO 1",
+       "1,390.80"
+      ],
+      [
+       "Child 2–10 yrs — STO 2",
+       "1,309.20"
+      ],
+      [
+       "Single — STO 1",
+       "3,615.60"
+      ],
+      [
+       "Single — STO 2",
+       "3,403.20"
+      ],
+      [
+       "Guide (DBB) — rack rate",
+       "1,644"
+      ]
+     ]
+    },
+    {
+     "title": "Okanti House &amp; Rustic Cabin — Self-Catering",
+     "rows": [
+      [
+       "Sharing — STO 1",
+       "1,398"
+      ],
+      [
+       "Sharing — STO 2",
+       "1,315.20"
+      ],
+      [
+       "Child 2–10 yrs — STO 1",
+       "698.40"
+      ],
+      [
+       "Child 2–10 yrs — STO 2",
+       "657.60"
+      ],
+      [
+       "Single — STO 1",
+       "1,816.80"
+      ],
+      [
+       "Single — STO 2",
+       "1,710"
+      ]
+     ]
+    },
+    {
+     "title": "Exclusive Kuangukuangu (bed only)",
+     "rows": [
+      [
+       "Self-Catering Sharing — STO 1",
+       "3,636"
+      ],
+      [
+       "Self-Catering Sharing — STO 2",
+       "3,422.40"
+      ],
+      [
+       "Single Self-Catering — STO 1",
+       "4,726.80"
+      ],
+      [
+       "Single Self-Catering — STO 2",
+       "4,449.60"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (per person)",
+     "rows": [
+      [
+       "Sundowner DriveIncl. water, beer/soda &amp; light snacks",
+       "792"
+      ],
+      [
+       "Guided Hike to Ubib Grotto (≈4h)Prehistoric rock paintings · min 3 / max 8 pax · incl. water, beer/soda",
+       "792"
+      ],
+      [
+       "Guided Klipspringer Mountain Summit Hike (≈4h)Incl. water, beer/soda &amp; light snacks",
+       "792"
+      ],
+      [
+       "Self-Guided E-Bike Kudu Trail Picnic (≈2h)Incl. e-bike rental, water, beer/soda &amp; light snacks",
+       "792"
+      ],
+      [
+       "E-Bike Rental (2 hours)",
+       "726"
+      ]
+     ]
+    },
+    {
+     "title": "Meals — for self-catering guests (per person)",
+     "rows": [
+      [
+       "Breakfast",
+       "270"
+      ],
+      [
+       "Lunch",
+       "414"
+      ],
+      [
+       "Dinner",
+       "678"
+      ],
+      [
+       "Lunch pack (to take on excursions)",
+       "223.20"
+      ],
+      [
+       "Tea time cake &amp; coffee @ 16:00",
+       "138"
+      ]
+     ]
+    },
+    {
+     "title": "Other",
+     "rows": [
+      [
+       "Laundry — per 6kg load",
+       "318"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "belvedere-boutique-hotel": {
+  "2026": {
+   "name": "Belvedere Boutique Hotel",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Room Rates — STO (per room, per night)",
+     "rows": [
+      [
+       "Standard Room — Single (12 rooms available)",
+       "2,570.59"
+      ],
+      [
+       "Standard Room — Double",
+       "3,565.88"
+      ],
+      [
+       "Family Room — Single (1 room)",
+       "2,627.06"
+      ],
+      [
+       "Family Room — Double",
+       "3,692.94"
+      ],
+      [
+       "Luxury Room — Single (4 rooms)",
+       "2,970.59"
+      ],
+      [
+       "Luxury Room — Double",
+       "4,022.35"
+      ],
+      [
+       "Luxury Twin — Single (1 room)",
+       "2,970.59"
+      ],
+      [
+       "Luxury Twin — Double",
+       "4,022.35"
+      ],
+      [
+       "Penthouse — Single (1 room)",
+       "3,265.88"
+      ],
+      [
+       "Penthouse — Double",
+       "4,430.59"
+      ]
+     ]
+    },
+    {
+     "title": "Family Room — Child Rates (sharing)",
+     "rows": [
+      [
+       "Extra child (10–12 yrs)",
+       "588.24"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "flamingo-villa-boutique-hotel": {
+  "2026": {
+   "name": "Flamingo Villas Boutique Hotel",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Comfort Double / Twin Room — B&amp;B (per room)",
+     "rows": [
+      [
+       "Single per room",
+       "2,980.80"
+      ],
+      [
+       "Double per room",
+       "3,974.40"
+      ],
+      [
+       "Children 7–12 yrs sharing",
+       "1,490.88"
+      ]
+     ]
+    },
+    {
+     "title": "Superior Double Room with Balcony — B&amp;B (per room)",
+     "rows": [
+      [
+       "Single per room",
+       "3,672"
+      ],
+      [
+       "Double per room",
+       "5,269.44"
+      ],
+      [
+       "Children 7–12 yrs sharing",
+       "1,772.16"
+      ]
+     ]
+    },
+    {
+     "title": "Deluxe Double Room with Balcony — B&amp;B (per room)",
+     "rows": [
+      [
+       "Single per room",
+       "4,141.44"
+      ],
+      [
+       "Double per room",
+       "6,172.80"
+      ],
+      [
+       "Children 7–12 yrs sharing",
+       "1,808.64"
+      ]
+     ]
+    },
+    {
+     "title": "Flamingo Suite with Balcony — B&amp;B (per room)",
+     "rows": [
+      [
+       "Single per room",
+       "5,608.32"
+      ],
+      [
+       "Double per room",
+       "6,642.24"
+      ],
+      [
+       "Children 7–12 yrs sharing",
+       "1,957.44"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "heinitzburg-boutique-hotel": {
+  "2026": {
+   "name": "Hotel Heinitzburg",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Single Rooms — B&amp;B (per room)",
+     "rows": [
+      [
+       "Single Standard Deluxe Room",
+       "3,010.18"
+      ],
+      [
+       "Single Comfort Deluxe Room",
+       "3,311.98"
+      ],
+      [
+       "Single Superior Deluxe Room",
+       "3,596.20"
+      ]
+     ]
+    },
+    {
+     "title": "Twin / Double — B&amp;B (per room)",
+     "rows": [
+      [
+       "Twin Standard Deluxe Room",
+       "4,449.83"
+      ],
+      [
+       "Twin Comfort Deluxe Room",
+       "4,981.15"
+      ],
+      [
+       "Double Superior Deluxe Room",
+       "5,685.35"
+      ],
+      [
+       "Triple Comfort Deluxe Room",
+       "5,685.35"
+      ]
+     ]
+    },
+    {
+     "title": "Family — B&amp;B (per room)",
+     "rows": [
+      [
+       "Family Room (2 adults + 2 children, 2 rooms / 2 bathrooms, interleading)",
+       "8,280.42"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kamaku-guesthouse": {
+  "2026": {
+   "name": "Kamaku Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Rooms — B&amp;B",
+     "rows": [
+      [
+       "Per Double Unit",
+       "1,150"
+      ],
+      [
+       "Per Single Unit",
+       "900"
+      ],
+      [
+       "Family Unit per person",
+       "575"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "little-sossus-lodge": {
+  "2026": {
+   "name": "Little Sossus Lodge &amp; Campsite",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Chalet (DBB, per room per night)",
+     "rows": [
+      [
+       "Single room",
+       "4,320"
+      ],
+      [
+       "Double / Twin room",
+       "6,528"
+      ],
+      [
+       "3-bed room (max 2 adults)",
+       "7,632"
+      ],
+      [
+       "4-bed room (max 2 adults)",
+       "8,736"
+      ],
+      [
+       "Additional Tour Guide / Driver",
+       "2,100"
+      ]
+     ]
+    },
+    {
+     "title": "Camping (self-catering, per site + per person)",
+     "rows": [
+      [
+       "Campsite per night",
+       "285.60"
+      ],
+      [
+       "Per person per night",
+       "265.20"
+      ],
+      [
+       "Per child (5–11 yrs) per night",
+       "178.50"
+      ]
+     ]
+    },
+    {
+     "title": "Meals (per person — incl. VAT)",
+     "rows": [
+      [
+       "Lunch pack",
+       "396"
+      ],
+      [
+       "Lunch",
+       "420"
+      ],
+      [
+       "Breakfast",
+       "456"
+      ],
+      [
+       "Breakfast — child 5–11 yrs",
+       "360"
+      ],
+      [
+       "Dinner",
+       "660"
+      ],
+      [
+       "Dinner — child 5–11 yrs",
+       "540"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (per person)",
+     "rows": [
+      [
+       "Guided Sossusvlei Trip (min 2 paying, child 5–11 yrs 50%)",
+       "3,600"
+      ],
+      [
+       "Sundowner Drive (min 2 pax, child 5–11 yrs 50%)",
+       "2,220"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "luderitz-nest-hotel": {
+  "2026": {
+   "name": "Lüderitz Nest Hotel",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Comfort Rooms — B&amp;B (per room — gross)",
+     "rows": [
+      [
+       "Comfort Single",
+       "2,960"
+      ],
+      [
+       "Comfort Twin / Double",
+       "4,760"
+      ],
+      [
+       "Comfort Family Room (max 2 adults + 2 children 0–12)",
+       "7,720"
+      ]
+     ]
+    },
+    {
+     "title": "Deluxe Rooms &amp; Suite — B&amp;B (per room — gross)",
+     "rows": [
+      [
+       "Deluxe Single",
+       "3,630"
+      ],
+      [
+       "Deluxe Twin / Double",
+       "5,810"
+      ],
+      [
+       "Suite",
+       "9,650"
+      ],
+      [
+       "Tour Guide (50% of single rack)",
+       "1,741.18"
+      ]
+     ]
+    },
+    {
+     "title": "Meals (per person — gross)",
+     "rows": [
+      [
+       "Breakfast — adult",
+       "400"
+      ],
+      [
+       "Breakfast — child 3–12 yrs",
+       "282.35"
+      ],
+      [
+       "Lunch — adult",
+       "600"
+      ],
+      [
+       "Lunch — child 3–12 yrs",
+       "423.53"
+      ],
+      [
+       "Dinner — adult",
+       "776.47"
+      ],
+      [
+       "Dinner — child 3–12 yrs",
+       "552.94"
+      ],
+      [
+       "Lunchpack",
+       "376.47"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "moon-mountain-lodge": {
+  "2026": {
+   "name": "Moon Mountain Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Luxury Rooms (×11) — DBB",
+     "rows": [
+      [
+       "Single Room",
+       "3,822"
+      ],
+      [
+       "Double Room (per person)",
+       "3,483"
+      ]
+     ]
+    },
+    {
+     "title": "Executive Suites (×6) — DBB",
+     "rows": [
+      [
+       "Single Room",
+       "4,214.00"
+      ],
+      [
+       "Double Room (per person)",
+       "3,843"
+      ],
+      [
+       "Child under 12 sharing with parents",
+       "1,922.00"
+      ]
+     ]
+    },
+    {
+     "title": "Guide Rates (nett)",
+     "rows": [
+      [
+       "Guide DBB — 1 to 9 pax",
+       "1,214.40"
+      ],
+      [
+       "Guide DBB — 10 to 19 pax",
+       "607.20"
+      ]
+     ]
+    },
+    {
+     "title": "Activities &amp; Extras (nett)",
+     "rows": [
+      [
+       "Lunch pack (pp)",
+       "283.20"
+      ],
+      [
+       "Lunch — 3-course menu, 2 choices",
+       "484.80"
+      ],
+      [
+       "Guided Sossusvlei Excursion (pp)",
+       "3,326.40"
+      ],
+      [
+       "Mountain Sunset at view point (drinks &amp; snacks incl.)",
+       "315.60"
+      ],
+      [
+       "Namib-Naukluft Airstrip transfer (one way, pp)",
+       "324"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ohorongo-game-and-safari-lodge": {
+  "2026": {
+   "name": "Ohorongo Game &amp; Safari Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Ohorongo Safari Lodge — Low Season (DBB pp)",
+     "rows": [
+      [
+       "Double Room",
+       "3,600"
+      ],
+      [
+       "Triple Room (pp)",
+       "3,253.20"
+      ],
+      [
+       "Child 6–11 yrs sharing with full-paying adults",
+       "1,800"
+      ]
+     ]
+    },
+    {
+     "title": "Ohorongo Safari Lodge — High Season (DBB pp)",
+     "rows": [
+      [
+       "Double Room",
+       "4,298.40"
+      ],
+      [
+       "Triple Room (pp)",
+       "3,950.40"
+      ],
+      [
+       "Child 6–11 yrs sharing with full-paying adults",
+       "2,149.20"
+      ]
+     ]
+    },
+    {
+     "title": "Ohorongo Tented Camp — Low Season (FI pp, min 2-night stay)",
+     "rows": [
+      [
+       "Double Room — Fully Inclusive",
+       "8,596.80"
+      ],
+      [
+       "Child 6–11 yrs sharing with full-paying adults",
+       "4,298.40"
+      ]
+     ]
+    },
+    {
+     "title": "Ohorongo Tented Camp — High Season (FI pp, min 2-night stay)",
+     "rows": [
+      [
+       "Double Room — Fully Inclusive",
+       "10,339.20"
+      ],
+      [
+       "Child 6–11 yrs sharing with full-paying adults",
+       "5,169.60"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (per person, gross)",
+     "rows": [
+      [
+       "Nature Excursion 3–4 hr (min 2, max 6)",
+       "1,020"
+      ],
+      [
+       "Nature Excursion 2 hr (min 2, max 6)",
+       "510"
+      ],
+      [
+       "Night Drive 2 hr (min 2, max 6)",
+       "720"
+      ],
+      [
+       "Rhino Tracking 3–4 hr (no children u/12)",
+       "2,376"
+      ],
+      [
+       "Guided Nature Walk 2 hr (max 4)",
+       "510"
+      ],
+      [
+       "Private Vehicle &amp; Guide (4 hr, max 5)",
+       "8,100"
+      ]
+     ]
+    },
+    {
+     "title": "Wilderness Feasts &amp; Meals (per person)",
+     "rows": [
+      [
+       "Light Lunch (12:00–14:00)",
+       "420"
+      ],
+      [
+       "Brunch in Nature (min 2 guests)",
+       "510"
+      ],
+      [
+       "Dinner under the Stars (min 2 guests)",
+       "792"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-olive-exclusive": {
+  "2026": {
+   "name": "The Olive Exclusive",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Jan – Jun 2026 (Low Season) — B&amp;B",
+     "rows": [
+      [
+       "Junior Suite — pp sharing",
+       "5,344.71"
+      ],
+      [
+       "Premier Suite — pp sharing",
+       "6,682.35"
+      ],
+      [
+       "Junior Suite — single",
+       "6,021.18"
+      ],
+      [
+       "Premier Suite — single",
+       "7,555.29"
+      ]
+     ]
+    },
+    {
+     "title": "Jul – Dec 2026 (High Season) — B&amp;B",
+     "rows": [
+      [
+       "Junior Suite — pp sharing",
+       "5,780"
+      ],
+      [
+       "Premier Suite — pp sharing",
+       "7,234.12"
+      ],
+      [
+       "Junior Suite — single",
+       "6,516.47"
+      ],
+      [
+       "Premier Suite — single",
+       "8,174.12"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "opuwo-country-lodge": {
+  "2026": {
+   "name": "Opuwo Country Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Rooms — B&amp;B (STO gross)",
+     "rows": [
+      [
+       "Luxury Room — pp sharing",
+       "2,200"
+      ],
+      [
+       "Luxury Room — single",
+       "3,300"
+      ],
+      [
+       "Standard Room — pp sharing",
+       "1,595"
+      ],
+      [
+       "Standard Room — single",
+       "2,200"
+      ],
+      [
+       "1st Tour Guide (≤7 clients)",
+       "1,552.94"
+      ],
+      [
+       "2nd Tour Guide",
+       "1,552.94"
+      ]
+     ]
+    },
+    {
+     "title": "Camping — Self-catering",
+     "rows": [
+      [
+       "Adult per person",
+       "388.24"
+      ],
+      [
+       "Child 5–11 yrs",
+       "194.12"
+      ]
+     ]
+    },
+    {
+     "title": "Meals (per person — rack)",
+     "rows": [
+      [
+       "Breakfast",
+       "464.71"
+      ],
+      [
+       "Lunch (3-course set menu)",
+       "652.94"
+      ],
+      [
+       "Dinner (4-course set menu)",
+       "811.76"
+      ],
+      [
+       "Lunch Pack",
+       "435.29"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (per person — rack)",
+     "rows": [
+      [
+       "Desert Elephant Excursion (min 2)",
+       "2,529.41"
+      ],
+      [
+       "Fly-in Excursion (incl. lunch &amp; Himba)",
+       "2,305.88"
+      ],
+      [
+       "Himba Excursion",
+       "1,411.76"
+      ],
+      [
+       "Wine Tasting Flight (min 2 max 6)",
+       "1,411.76"
+      ],
+      [
+       "Epupa Falls Excursion (per guide)",
+       "4,464.71"
+      ],
+      [
+       "Epupa Falls Excursion (per guest, min 2)",
+       "1,041.18"
+      ],
+      [
+       "Ruacana Falls Excursion (per guide)",
+       "4,464.71"
+      ],
+      [
+       "Ruacana Falls Excursion (per guest, min 2)",
+       "1,041.18"
+      ],
+      [
+       "Airstrip Transfer (two-way pp)",
+       "517.65"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "organic-stay": {
+  "2026": {
+   "name": "Organic Stay",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026/2027",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Rooms — B&amp;B",
+     "rows": [
+      [
+       "Single",
+       "2,196"
+      ],
+      [
+       "Double",
+       "3,504"
+      ],
+      [
+       "Triple",
+       "4,500"
+      ],
+      [
+       "Family Standard",
+       "5,100"
+      ],
+      [
+       "2-Bedroom Family",
+       "6,600"
+      ]
+     ]
+    },
+    {
+     "title": "Child Policy",
+     "rows": [
+      [
+       "Children 5–10 years",
+       "828"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "oyster-box-guesthouse": {
+  "2026": {
+   "name": "Oyster Box Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Single Rooms — B&amp;B (per room)",
+     "rows": [
+      [
+       "Single Room Standard",
+       "1,396.68"
+      ],
+      [
+       "Single Room, Partial-Sea Facing",
+       "1,631.08"
+      ],
+      [
+       "Single Comfort Room, Partial-Sea Facing",
+       "1,802.00"
+      ]
+     ]
+    },
+    {
+     "title": "Twin / Double — B&amp;B (per room)",
+     "rows": [
+      [
+       "Twin Room Standard",
+       "2,236.63"
+      ],
+      [
+       "Twin Room, Partial-Sea Facing",
+       "2,568.71"
+      ],
+      [
+       "Double Comfort Room, Partial-Sea Facing",
+       "2,812.88"
+      ]
+     ]
+    },
+    {
+     "title": "Triple — B&amp;B (per room)",
+     "rows": [
+      [
+       "Triple Room Standard",
+       "2,812.88"
+      ],
+      [
+       "Triple Room, Partial-Sea Facing",
+       "3,237.74"
+      ],
+      [
+       "Triple Comfort Room, Partial-Sea Facing",
+       "3,467.27"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "rostock-ritz-desert-lodge": {
+  "2026": {
+   "name": "Rostock Ritz Desert Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Suites — B&amp;B",
+     "rows": [
+      [
+       "Suite — Double/Twin (2 pax sharing)",
+       "6,240"
+      ],
+      [
+       "Suite — Single",
+       "4,992"
+      ],
+      [
+       "Children 3–11 yrs sharing with adults",
+       "1,200"
+      ],
+      [
+       "Guide — Single (no aircon)",
+       "1,200"
+      ]
+     ]
+    },
+    {
+     "title": "Meals (per person)",
+     "rows": [
+      [
+       "Breakfast",
+       "282"
+      ],
+      [
+       "Lunch Pack",
+       "282"
+      ],
+      [
+       "Lunch (3-course set menu, max 10 + TG)",
+       "420"
+      ],
+      [
+       "Dinner (3-course à la carte)",
+       "600"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (per person)",
+     "rows": [
+      [
+       "Sunset Scenic Drive (2 hr, min 2 pax)",
+       "960"
+      ],
+      [
+       "4x4 Cave Painting Drive (4 hr, min 2 pax)",
+       "1,620"
+      ],
+      [
+       "4x4 Cave Painting Drive (4 hr, 3+ pax)",
+       "1,440"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "sesfontein-guesthouse": {
+  "2026": {
+   "name": "Sesfontein Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Bed &amp; Breakfast (per person)",
+     "rows": [
+      [
+       "Per person sharing",
+       "2,112"
+      ],
+      [
+       "Third person in room",
+       "1,104"
+      ],
+      [
+       "Per single room",
+       "2,640"
+      ],
+      [
+       "Guide / Pilot",
+       "1,104"
+      ],
+      [
+       "Children 7–12 yrs",
+       "1,104"
+      ]
+     ]
+    },
+    {
+     "title": "Dinner, Bed &amp; Breakfast (per person)",
+     "rows": [
+      [
+       "Per person sharing",
+       "2,784"
+      ],
+      [
+       "Third person in room",
+       "1,776"
+      ],
+      [
+       "Per single room",
+       "3,312"
+      ],
+      [
+       "Guide / Pilot",
+       "1,776"
+      ],
+      [
+       "Children 7–12 yrs",
+       "1,776"
+      ]
+     ]
+    },
+    {
+     "title": "1-night Sleep-Out (DBB, min 2 pax)",
+     "rows": [
+      [
+       "Per person",
+       "4,224"
+      ],
+      [
+       "Single supplement",
+       "912"
+      ],
+      [
+       "Child under 13 yrs",
+       "2,448"
+      ],
+      [
+       "Guide rate (per guide)",
+       "2,448"
+      ]
+     ]
+    },
+    {
+     "title": "2-night Hoanib Elephant Sleep-Out Package (min 2 pax)",
+     "rows": [
+      [
+       "Per person",
+       "8,064"
+      ],
+      [
+       "Single supplement",
+       "1,440"
+      ],
+      [
+       "Child under 13 yrs",
+       "4,752"
+      ],
+      [
+       "Guide rate (per guide)",
+       "4,752"
+      ]
+     ]
+    },
+    {
+     "title": "3-night Rhino Tracking Sleep-Out Package (min 2 pax)",
+     "rows": [
+      [
+       "Per person",
+       "10,368"
+      ],
+      [
+       "Single supplement",
+       "2,448"
+      ],
+      [
+       "Guide rate (per guide)",
+       "6,624"
+      ]
+     ]
+    },
+    {
+     "title": "1-night Ongongo Tented Option (DBB, min 2 pax)",
+     "rows": [
+      [
+       "Per person",
+       "2,448"
+      ],
+      [
+       "Single supplement",
+       "768"
+      ],
+      [
+       "Child 7–12 yrs",
+       "2,016"
+      ],
+      [
+       "Child 0–6 yrs",
+       "672"
+      ],
+      [
+       "Guide rate (per guide)",
+       "1,344"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (rack — fully commissionable)",
+     "rows": [
+      [
+       "Himba Village Visit (pp, min 2)",
+       "2,520"
+      ],
+      [
+       "Hoanib Elephant Drive incl. Himba (pp, min 2)",
+       "4,440"
+      ],
+      [
+       "Sundowner Drive (incl. drinks &amp; snacks)",
+       "960"
+      ],
+      [
+       "Airstrip Transfer (return, per vehicle)",
+       "840"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "simanya-river-lodge": {
+  "2026": {
+   "name": "Simanya River Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Luxury Rooms (×16) — Low Season DBB",
+     "rows": [
+      [
+       "Per person sharing",
+       "3,484.80"
+      ],
+      [
+       "Single Supplement",
+       "722.30"
+      ],
+      [
+       "Children 6–12 yrs (max 2 sharing)",
+       "2,178"
+      ]
+     ]
+    },
+    {
+     "title": "Luxury Rooms (×16) — High Season DBB",
+     "rows": [
+      [
+       "Per person sharing",
+       "3,659.04"
+      ],
+      [
+       "Single Supplement",
+       "758.42"
+      ],
+      [
+       "Children 6–12 yrs (max 2 sharing)",
+       "2,286.90"
+      ]
+     ]
+    },
+    {
+     "title": "Distinctive Rooms (×4) — Low Season DBB",
+     "rows": [
+      [
+       "Per person sharing",
+       "5,385.60"
+      ],
+      [
+       "Single Supplement",
+       "844.80"
+      ],
+      [
+       "Children 6–12 yrs (max 2 sharing)",
+       "1,742.40"
+      ]
+     ]
+    },
+    {
+     "title": "Distinctive Rooms (×4) — High Season DBB",
+     "rows": [
+      [
+       "Per person sharing",
+       "5,654.88"
+      ],
+      [
+       "Single Supplement",
+       "887.04"
+      ],
+      [
+       "Children 6–12 yrs (max 2 sharing)",
+       "2,286.90"
+      ]
+     ]
+    },
+    {
+     "title": "Camping (max 5 pax per site)",
+     "rows": [
+      [
+       "Per person — Low Season",
+       "420"
+      ],
+      [
+       "Per person — High Season",
+       "504"
+      ],
+      [
+       "Kids 6–12 yrs — Low",
+       "210"
+      ],
+      [
+       "Kids 6–12 yrs — High",
+       "240"
+      ]
+     ]
+    },
+    {
+     "title": "Meals (per person)",
+     "rows": [
+      [
+       "Breakfast",
+       "330"
+      ],
+      [
+       "Breakfast Pack",
+       "300"
+      ],
+      [
+       "Lunch",
+       "372"
+      ],
+      [
+       "Lunch Pack",
+       "330"
+      ],
+      [
+       "Dinner (3-course)",
+       "660"
+      ]
+     ]
+    },
+    {
+     "title": "Guide Room",
+     "rows": [
+      [
+       "Guide Room (only 1 guide per group)",
+       "1,332"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-rez": {
+  "2026": {
+   "name": "The Rez",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Luxury Rooms — B&amp;B",
+     "rows": [
+      [
+       "Luxury Room — Single",
+       "1,790.59"
+      ],
+      [
+       "Luxury Room — Double (pp sharing)",
+       "1,529.41"
+      ]
+     ]
+    },
+    {
+     "title": "Deluxe Rooms — B&amp;B",
+     "rows": [
+      [
+       "Deluxe Room — Single",
+       "1,921.35"
+      ],
+      [
+       "Deluxe Room — Double (pp sharing)",
+       "1,708.59"
+      ]
+     ]
+    },
+    {
+     "title": "Super Deluxe Rooms — B&amp;B",
+     "rows": [
+      [
+       "Super Deluxe Room — Single",
+       "2,338.59"
+      ],
+      [
+       "Super Deluxe Room — Double (pp sharing)",
+       "1,888.71"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "tsauchab-river-camp": {
+  "2026": {
+   "name": "Tsauchab River Camp",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Chalet (DBB, per room per night)",
+     "rows": [
+      [
+       "Chalet single",
+       "2,880"
+      ],
+      [
+       "Chalet double/twin",
+       "4,800"
+      ],
+      [
+       "Chalet 3-bed (max 2 adults)",
+       "5,616"
+      ],
+      [
+       "Chalet 4-bed (max 2 adults)",
+       "6,432"
+      ]
+     ]
+    },
+    {
+     "title": "Falcon View Suite — DBB (per room per night)",
+     "rows": [
+      [
+       "Suite single",
+       "7,200"
+      ],
+      [
+       "Suite double/twin",
+       "9,600"
+      ]
+     ]
+    },
+    {
+     "title": "Tour Guides",
+     "rows": [
+      [
+       "Additional Tour Guide / Driver",
+       "1,920"
+      ]
+     ]
+    },
+    {
+     "title": "Camping (self-catering, per site + per person)",
+     "rows": [
+      [
+       "Campsite per night",
+       "255"
+      ],
+      [
+       "Per person per night",
+       "234.60"
+      ],
+      [
+       "Per child (5–11 yrs) per night",
+       "132.60"
+      ]
+     ]
+    },
+    {
+     "title": "Meals (per person — incl. VAT, rack)",
+     "rows": [
+      [
+       "Breakfast",
+       "396"
+      ],
+      [
+       "Breakfast — child 5–11 yrs",
+       "336"
+      ],
+      [
+       "Lunch Pack",
+       "360"
+      ],
+      [
+       "Lunch",
+       "420"
+      ],
+      [
+       "Dinner",
+       "540"
+      ],
+      [
+       "Dinner — child 5–11 yrs",
+       "444"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "uis-elephant": {
+  "2026": {
+   "name": "Uis Elephant Guesthouse",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Bed &amp; Breakfast — Per Person Sharing",
+     "rows": [
+      [
+       "Standard Room",
+       "2,016"
+      ],
+      [
+       "Luxury Room",
+       "2,208"
+      ],
+      [
+       "Suite",
+       "2,448"
+      ]
+     ]
+    },
+    {
+     "title": "Bed &amp; Breakfast — Per Single Room",
+     "rows": [
+      [
+       "Standard Room",
+       "2,544"
+      ],
+      [
+       "Luxury Room",
+       "2,736"
+      ],
+      [
+       "Suite",
+       "3,168"
+      ]
+     ]
+    },
+    {
+     "title": "Bed &amp; Breakfast — Guides &amp; Children",
+     "rows": [
+      [
+       "Guide / Pilot",
+       "1,056"
+      ],
+      [
+       "Children 7–12 yrs",
+       "1,056"
+      ]
+     ]
+    },
+    {
+     "title": "Dinner, Bed &amp; Breakfast — Per Person Sharing",
+     "rows": [
+      [
+       "Standard Room",
+       "2,592"
+      ],
+      [
+       "Luxury Room",
+       "2,784"
+      ],
+      [
+       "Suite",
+       "3,024"
+      ]
+     ]
+    },
+    {
+     "title": "Dinner, Bed &amp; Breakfast — Per Single Room",
+     "rows": [
+      [
+       "Standard Room",
+       "3,120"
+      ],
+      [
+       "Luxury Room",
+       "3,312"
+      ],
+      [
+       "Suite",
+       "3,744"
+      ]
+     ]
+    },
+    {
+     "title": "Sleep-Out Packages (min 4 pax — fully commissionable)",
+     "rows": [
+      [
+       "Stand-alone Sleep-Out — pp",
+       "5,040"
+      ],
+      [
+       "Standard Room + Sleep-Out — pp",
+       "8,220"
+      ],
+      [
+       "Luxury Room + Sleep-Out — pp",
+       "8,460"
+      ],
+      [
+       "Suite + Sleep-Out — pp",
+       "8,700"
+      ]
+     ]
+    },
+    {
+     "title": "Brandberg Hiking Package (min 4 pax)",
+     "rows": [
+      [
+       "Per person",
+       "14,520"
+      ],
+      [
+       "Guide rate (per guide)",
+       "7,140"
+      ]
+     ]
+    },
+    {
+     "title": "Activities (rack — fully commissionable)",
+     "rows": [
+      [
+       "Full-day Brandberg Excursion (min 2 pax)",
+       "2,400"
+      ],
+      [
+       "Sundowner Drive (min 2 pax)",
+       "1,320"
+      ],
+      [
+       "AM/PM Elephant Drive (min 2 pax)",
+       "1,620"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "vingerklip-lodge": {
+  "2026": {
+   "name": "Vingerklip Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 15% commission, which is within the cap.",
+   "sections": [
+    {
+     "title": "Rooms — DBB (per person)",
+     "rows": [
+      [
+       "Double Room (pp sharing)",
+       "2,430"
+      ],
+      [
+       "Single Supplement",
+       "1,230"
+      ],
+      [
+       "Children 4–14 yrs",
+       "1,490"
+      ]
+     ]
+    },
+    {
+     "title": "Heaven&#x27;s Gate Suite — DBB (per person)",
+     "rows": [
+      [
+       "Suite (pp sharing)",
+       "3,620"
+      ],
+      [
+       "Single Supplement",
+       "1,780"
+      ]
+     ]
+    },
+    {
+     "title": "Tour Guides (NET rates — non-commissionable)",
+     "rows": [
+      [
+       "Group of up to 7 full-paying pax",
+       "1,623.53"
+      ],
+      [
+       "Group of 8 or more full-paying pax",
+       "1,500"
+      ],
+      [
+       "Each additional guide",
+       "1,358.82"
+      ]
+     ]
+    },
+    {
+     "title": "Separate Services (per person — non-commissionable)",
+     "rows": [
+      [
+       "Eagles Nest Dinner (extra, on top)",
+       "117.65"
+      ],
+      [
+       "Lunch — Buffet",
+       "329.41"
+      ],
+      [
+       "Lunch — Set menu",
+       "258.82"
+      ],
+      [
+       "Light Lunches (range)",
+       "258.82"
+      ],
+      [
+       "Lunch Pack",
+       "200"
+      ],
+      [
+       "Dinner",
+       "458.82"
+      ],
+      [
+       "Breakfast",
+       "258.82"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "voigtland-guesthouse": {
+  "2026": {
+   "name": "Guesthouse Voigtland",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Explorer Package — Bed &amp; Breakfast (Agent STO)",
+     "rows": [
+      [
+       "Per person sharing",
+       "3,460.80"
+      ],
+      [
+       "Single room",
+       "3,910.80"
+      ]
+     ]
+    },
+    {
+     "title": "Exclusive Package — DBB (Agent STO) — Best Seller",
+     "rows": [
+      [
+       "Per person sharing",
+       "4,296"
+      ],
+      [
+       "Single room",
+       "4,746"
+      ]
+     ]
+    },
+    {
+     "title": "Superior Package — Full Board (Agent STO)",
+     "rows": [
+      [
+       "Per person sharing",
+       "4,652.40"
+      ],
+      [
+       "Single room",
+       "5,102.40"
+      ]
+     ]
+    },
+    {
+     "title": "Building Blocks — Agent STO ~25% commission",
+     "rows": [
+      [
+       "Bed Rate per person",
+       "2,248.80"
+      ],
+      [
+       "Bed Rate — single",
+       "2,698.80"
+      ],
+      [
+       "Tour Guide Room (single, accom only)",
+       "2,248.80"
+      ],
+      [
+       "Day Room — per person",
+       "2,812.80"
+      ]
+     ]
+    },
+    {
+     "title": "À la carte Extras (per person)",
+     "rows": [
+      [
+       "Breakfast",
+       "420"
+      ],
+      [
+       "Lunch",
+       "356.40"
+      ],
+      [
+       "4-Course Dinner",
+       "835.20"
+      ],
+      [
+       "High Tea",
+       "360"
+      ],
+      [
+       "Giraffe Feeding",
+       "432"
+      ],
+      [
+       "Nature Drive incl. Sundowner Cocktail (2 hr)",
+       "654"
+      ],
+      [
+       "Laundry Service (per machine)",
+       "276"
+      ]
+     ]
+    },
+    {
+     "title": "Transfers (per person)",
+     "rows": [
+      [
+       "Airport Transfer",
+       "462"
+      ],
+      [
+       "City Transfer",
+       "552"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "waterberg-wilderness": {
+  "2026": {
+   "name": "Waterberg Wilderness Lodges",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack, capped at 20% above the net STO (house rule: rack is never more than STO + 20%). The supplier states 20% commission, which would gross up to 25.0% above net — the cap applies.",
+   "sections": [
+    {
+     "title": "Waterberg Plateau Lodge — Rock Chalet (DBB pp)",
+     "rows": [
+      [
+       "Per person DBB",
+       "4,176"
+      ]
+     ]
+    },
+    {
+     "title": "Waterberg Wilderness Lodge — Double / Family Unit (DBB pp)",
+     "rows": [
+      [
+       "Per person DBB",
+       "3,072"
+      ]
+     ]
+    },
+    {
+     "title": "Waterberg Valley Lodge — Econo Chalet (DBB pp)",
+     "rows": [
+      [
+       "Per person DBB",
+       "2,160"
+      ]
+     ]
+    },
+    {
+     "title": "Camping (per person, non-commissionable)",
+     "rows": [
+      [
+       "Waterberg Plateau Campsite",
+       "504"
+      ],
+      [
+       "Waterberg Andersson Camp",
+       "504"
+      ]
+     ]
+    },
+    {
+     "title": "Experiences — 1 night stay (non-commissionable)",
+     "rows": [
+      [
+       "Plateau hike (guided)",
+       "504"
+      ],
+      [
+       "Honeymoon Sundowner (guided)",
+       "1,200"
+      ],
+      [
+       "Rhino drive (guided)",
+       "1,440"
+      ],
+      [
+       "Rhino tracking (guided)",
+       "1,320"
+      ]
+     ]
+    },
+    {
+     "title": "Experiences — Stay-2-Experience (2+ nights, 25% off)",
+     "rows": [
+      [
+       "Plateau hike",
+       "378"
+      ],
+      [
+       "Honeymoon Sundowner",
+       "900"
+      ],
+      [
+       "Rhino drive",
+       "1,080"
+      ],
+      [
+       "Rhino tracking",
+       "990"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "pioneers-victoria-falls": {
+  "2027": {
+   "name": "Pioneers Victoria Falls",
+   "region": "Vic Falls",
+   "currency": "US$",
+   "validity": "2027 · Jan–May / Jun–Oct / Nov–Dec",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "Per person, B&B — Jan–May (per person, B&B)",
+     "rows": [
+      [
+       "pp sharing",
+       "196.80"
+      ],
+      [
+       "single",
+       "276"
+      ],
+      [
+       "child 4–11 sharing",
+       "98.40"
+      ],
+      [
+       "child 4–11 single",
+       "276"
+      ]
+     ]
+    },
+    {
+     "title": "Per person, B&B — Jun–Oct (per person, B&B)",
+     "rows": [
+      [
+       "pp sharing",
+       "220.80"
+      ],
+      [
+       "single",
+       "309.60"
+      ],
+      [
+       "child 4–11 sharing",
+       "110.40"
+      ],
+      [
+       "child 4–11 single",
+       "309.60"
+      ]
+     ]
+    },
+    {
+     "title": "Per person, B&B — Nov–Dec (per person, B&B)",
+     "rows": [
+      [
+       "pp sharing",
+       "196.80"
+      ],
+      [
+       "single",
+       "276"
+      ],
+      [
+       "child 4–11 sharing",
+       "98.40"
+      ],
+      [
+       "child 4–11 single",
+       "276"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "white-sands-caprivi": {
+  "2026": {
+   "name": "White Sands Lodge",
+   "region": "",
+   "currency": "N$",
+   "validity": "2026",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "Game Drives (per person, min 2)",
+     "rows": [
+      [
+       "Game Drive — Bwabwata NP (2.5–3 hr)",
+       "1,140"
+      ],
+      [
+       "Game Drive — Mahango NP (3.5–4 hr)",
+       "1,380"
+      ],
+      [
+       "VIP Game Drive — Bwabwata NP (5 hr)",
+       "2,160"
+      ],
+      [
+       "Full Day Game Drive — Mahango &amp; Bwabwata",
+       "3,000"
+      ],
+      [
+       "SAN Traditional Tour (1.5–2 hr)",
+       "576"
+      ]
+     ]
+    },
+    {
+     "title": "Sunset &amp; Fishing — N//Goabaca (per person, min 3)",
+     "rows": [
+      [
+       "Sunset Cruise (1.5 hr)",
+       "528"
+      ],
+      [
+       "Fishing per hour — 1 to 3 pax (min 2 hr)",
+       "1,122"
+      ],
+      [
+       "Fishing — additional pax per hour",
+       "288"
+      ],
+      [
+       "Rent of fishing gear (4 hr)",
+       "300"
+      ]
+     ]
+    },
+    {
+     "title": "Private Boat Charters — Okavango Dreams (per person, min 4)",
+     "rows": [
+      [
+       "Breakfast Cruise (1.5 hr)",
+       "780"
+      ],
+      [
+       "Breakfast Cruise — in-house guests",
+       "504"
+      ],
+      [
+       "Namibian Braai Cruise (4 hr, all drinks)",
+       "2,038.80"
+      ],
+      [
+       "Birding Cruise (3 hr, 2 drinks)",
+       "1,056"
+      ],
+      [
+       "Game Cruise (4 hr, 2 drinks)",
+       "1,620"
+      ],
+      [
+       "VIP Cruise (6 hr, all-inclusive)",
+       "3,000"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hakusembe-river-lodge": {
+  "2027": {
+   "name": "Hakusembe River Lodge",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "3,494.40"
+      ],
+      [
+       "Room B&B — single",
+       "4,368"
+      ],
+      [
+       "Camping2Go (bed only) — per person sharing",
+       "1,104"
+      ],
+      [
+       "Camping2Go (bed only) — single",
+       "2,208"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "namushasha-river-lodge": {
+  "2027": {
+   "name": "Namushasha River Lodge",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "3,494.40"
+      ],
+      [
+       "Room B&B — single",
+       "4,368"
+      ],
+      [
+       "Camping2Go (bed only) — per person sharing",
+       "1,104"
+      ],
+      [
+       "Camping2Go (bed only) — single",
+       "2,208"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "popa-falls-resort": {
+  "2027": {
+   "name": "Popa Falls Resort",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "183.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "183.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite (overlander) (max — per person camping",
+       "183.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite (overlander) (max — per person camping",
+       "183.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · River cabins (2 beds) BB — per person sharing",
+       "1,641.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · River cabins (2 beds) BB — per person sharing",
+       "2,052"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · River cabins (2 beds) BB — single",
+       "1,900.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · River cabins (2 beds) BB — single",
+       "2,322"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+       "1,468.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+       "1,825.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+       "1,738.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+       "2,095.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Family House (6 beds) - min BB — per person sharing",
+       "1,641.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Family House (6 beds) - min BB — per person sharing",
+       "2,052"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Luxury river cabins BB — per person sharing",
+       "1,965.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Luxury river cabins BB — per person sharing",
+       "2,354.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Luxury river cabins BB — single",
+       "2,224.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Luxury river cabins BB — single",
+       "2,613.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ai-aiba-lodge": {
+  "2027": {
+   "name": "Ai Aiba Lodge",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (16 Jan – 30 Jun) · Per Person Sharing",
+       "2,401.20"
+      ],
+      [
+       "Low Season (16 Jan – 30 Jun) · Single",
+       "3,243.60"
+      ],
+      [
+       "Low Season (16 Jan – 30 Jun) · Conservation Levy (pppn)",
+       "204"
+      ],
+      [
+       "High Season (1 Jul – 15 Jan) · Per Person Sharing",
+       "3,447.60"
+      ],
+      [
+       "High Season (1 Jul – 15 Jan) · Single",
+       "4,660.80"
+      ],
+      [
+       "High Season (1 Jul – 15 Jan) · Conservation Levy (pppn)",
+       "204"
+      ],
+      [
+       "Low — ≤3 pax (25% off)",
+       "1,801.20"
+      ],
+      [
+       "Low — 4+ pax (50% off)",
+       "1,201.20"
+      ],
+      [
+       "High — ≤3 pax (25% off)",
+       "2,586"
+      ],
+      [
+       "High — 4+ pax (50% off)",
+       "1,724.40"
+      ],
+      [
+       "Nature Drive / Bushman Rock Art (3 hrs)",
+       "900"
+      ],
+      [
+       "Guided Morning Walk — Ai Aiba (2–3 hrs)",
+       "540"
+      ],
+      [
+       "Nature Drive / Bushman Rock Art (3 hrs, AM or PM) — per person",
+       "900"
+      ],
+      [
+       "Ai Aiba Guided Walk (2–3 hrs) — per person",
+       "540"
+      ],
+      [
+       "Walk & Drive (3 hrs) — per person",
+       "900"
+      ],
+      [
+       "Walk with San Living Museum visit (3 hrs) — per person",
+       "852"
+      ],
+      [
+       "Guided Sundowner Mountain Bike Ride (E-bike) — per person",
+       "420"
+      ],
+      [
+       "Guided Mountain Bike Tour (incl. E-bike) — per person",
+       "1,260"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "gross-barmen-resort": {
+  "2027": {
+   "name": "Gross Barmen Resort",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "259.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "259.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Premier chalet BB — per person sharing",
+       "2,872.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Premier chalet BB — per person sharing",
+       "2,872.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Premier chalet BB — single",
+       "3,078"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Premier chalet BB — single",
+       "3,078"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet BB — per person sharing",
+       "1,436.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet BB — per person sharing",
+       "1,436.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet BB — single",
+       "1,641.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet BB — single",
+       "1,641.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds) – min BB — per person sharing",
+       "2,160"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Family chalet (4 beds) – min BB — per person sharing",
+       "2,160"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Premier family chalet (4 beds) -min BB — per person sharing",
+       "2,872.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Premier family chalet (4 beds) -min BB — per person sharing",
+       "2,872.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Acacia (A & B) – Bed only — bed only",
+       "1,274.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Acacia (A & B) – Bed only — bed only",
+       "1,274.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Aloe (A , B & C) – Bed only — bed only",
+       "1,274.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Aloe (A , B & C) – Bed only — bed only",
+       "1,274.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hohenstein-lodge": {
+  "2027": {
+   "name": "Hohenstein Lodge",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Room — per person sharing",
+       "2,976"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Room — single",
+       "3,888"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Chalet — per person sharing",
+       "5,088"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Chalet — single",
+       "6,624"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Child 4–12",
+       "2,544"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,428"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Room — per person sharing",
+       "1,824"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Room — single",
+       "2,371.20"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Chalet — per person sharing",
+       "3,744"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Chalet — single",
+       "4,896"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Child 4–12",
+       "1,872"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ondudu-safari-lodge": {
+  "2027": {
+   "name": "Ondudu Safari Lodge",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Green Season (07 Jan – 31 Mar) · DBB — per person sharing",
+       "3,384"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · DBB — per person sharing",
+       "4,167.60"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · DBB — per person sharing",
+       "4,374"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · DBB — single",
+       "4,568.40"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · DBB — single",
+       "5,626.80"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · DBB — single",
+       "5,904"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "waterberg-camp": {
+  "2027": {
+   "name": "Waterberg Camp",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "464.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "464.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room BB — per person sharing",
+       "1,188"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room BB — per person sharing",
+       "1,382.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room BB — single",
+       "1,458"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room BB — single",
+       "1,652.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+       "1,447.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+       "1,674"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+       "1,728"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+       "1,944"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds) - min BB — per person sharing",
+       "1,447.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds) - min BB — per person sharing",
+       "1,641.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds) - min BB — per person sharing",
+       "1,641.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Family chalet (4 beds) - min BB — per person sharing",
+       "1,900.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — per person sharing",
+       "1,771.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — per person sharing",
+       "1,965.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — single",
+       "2,041.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — single",
+       "2,246.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "damara-mopane-lodge": {
+  "2027": {
+   "name": "Damara Mopane Lodge",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "2,302.08"
+      ],
+      [
+       "Room B&B — single",
+       "2,877.60"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "grootberg-lodge": {
+  "2027": {
+   "name": "Grootberg Lodge",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Green Season (07 Jan – 31 Mar) · DBB — per person sharing",
+       "2,965.20"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · DBB — per person sharing",
+       "3,643.20"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · DBB — per person sharing",
+       "4,394.40"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · DBB — single",
+       "4,003.20"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · DBB — single",
+       "4,918.80"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · DBB — single",
+       "5,932.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hoada-campsite": {
+  "2027": {
+   "name": "Hoada Campsite",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Green Season (07 Jan – 31 Mar) · Individual campsite — per person",
+       "327.60"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Individual campsite — per person",
+       "408"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Individual campsite — per person",
+       "442.80"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · Group campsite — per site",
+       "3,598.80"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Group campsite — per site",
+       "4,484.40"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Group campsite — per site",
+       "4,957.20"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · Comfort camping tent (incl) — per person",
+       "1,084.80"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Comfort camping tent (incl) — per person",
+       "1,273.20"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Comfort camping tent (incl) — per person",
+       "1,311.60"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · Comfort camping tent (excl) — per person",
+       "776.40"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Comfort camping tent (excl) — per person",
+       "964.80"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Comfort camping tent (excl) — per person",
+       "1,003.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "lodge-damaraland": {
+  "2027": {
+   "name": "Lodge Damaraland",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Jan – 31 Mar) · Classic Room — per person sharing",
+       "2,226"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Classic Room — single",
+       "2,928"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+       "2,412"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+       "3,156"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+       "2,766"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Classic Room — single",
+       "3,636"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "omaruru-game-lodge": {
+  "2027": {
+   "name": "Omaruru Game Lodge",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Bungalow Standard · DBB — per person sharing",
+       "2,256"
+      ],
+      [
+       "Bungalow Standard · DBB — single",
+       "2,400"
+      ],
+      [
+       "Bungalow Superior · DBB — per person sharing",
+       "2,496"
+      ],
+      [
+       "Bungalow Superior · DBB — single",
+       "2,880"
+      ],
+      [
+       "Child 4–10 (DBB)",
+       "960"
+      ],
+      [
+       "Tour Guide (DBB)",
+       "1,140"
+      ],
+      [
+       "Game Drive (per person)",
+       "720"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "palmwag-lodge": {
+  "2027": {
+   "name": "Palmwag Lodge",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Standard Room B&B — per person sharing",
+       "2,880"
+      ],
+      [
+       "Standard Room B&B — single",
+       "3,600"
+      ],
+      [
+       "Comfort Room B&B — per person sharing",
+       "3,538.56"
+      ],
+      [
+       "Comfort Room B&B — single",
+       "4,423.20"
+      ],
+      [
+       "Camping2Go (bed only) — per person sharing",
+       "1,104"
+      ],
+      [
+       "Camping2Go (bed only) — single",
+       "2,208"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "twyfelfontein-adventure-camp": {
+  "2027": {
+   "name": "Twyfelfontein Adventure Camp",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — per person sharing",
+       "2,688"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — single",
+       "3,552"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Premium Tent — per person sharing",
+       "4,224"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Premium Tent — single",
+       "5,568"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,308"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — per person sharing",
+       "2,112"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — single",
+       "2,784"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Premium Tent — per person sharing",
+       "3,360"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Premium Tent — single",
+       "4,416"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "twyfelfontein-country-lodge": {
+  "2027": {
+   "name": "Twyfelfontein Country Lodge",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "(01 Nov 2026 – 31 Oct 2027) · DBB — per person sharing",
+       "3,740.28"
+      ],
+      [
+       "(01 Nov 2026 – 31 Oct 2027) · DBB — single",
+       "4,435.03"
+      ],
+      [
+       "Damaraland Scenic Flight — Route 1, 45min (per pax, 5 sharing)",
+       "3,252"
+      ],
+      [
+       "Damaraland Scenic Flight — Route 1, 45min (per pax, 2 sharing)",
+       "8,130"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wilderness-damaraland-camp": {
+  "2027": {
+   "name": "Wilderness Damaraland Camp",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+       "10,431.60"
+      ],
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — single",
+       "13,542"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — per person sharing",
+       "12,890.40"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — single",
+       "16,734"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+       "18,298.80"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — single",
+       "23,756.40"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+       "12,890.40"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — single",
+       "16,734"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+       "18,298.80"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — single",
+       "23,756.40"
+      ],
+      [
+       "06 Jan – 31 Mar · DBB — per person sharing",
+       "6,468"
+      ],
+      [
+       "06 Jan – 31 Mar · DBB — single",
+       "8,396.40"
+      ],
+      [
+       "01 Apr – 31 May · DBB — per person sharing",
+       "8,122.80"
+      ],
+      [
+       "01 Apr – 31 May · DBB — single",
+       "10,545.60"
+      ],
+      [
+       "01 Jun – 31 Oct · DBB — per person sharing",
+       "14,571.60"
+      ],
+      [
+       "01 Jun – 31 Oct · DBB — single",
+       "18,916.80"
+      ],
+      [
+       "01 Nov – 19 Dec · DBB — per person sharing",
+       "8,356.80"
+      ],
+      [
+       "01 Nov – 19 Dec · DBB — single",
+       "10,849.20"
+      ],
+      [
+       "20 Dec – 05 Jan · DBB — per person sharing",
+       "9,342"
+      ],
+      [
+       "20 Dec – 05 Jan · DBB — single",
+       "12,128.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wilderness-desert-rhino-camp": {
+  "2027": {
+   "name": "Wilderness Desert Rhino Camp",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+       "12,666"
+      ],
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — single",
+       "16,443.60"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — per person sharing",
+       "13,122"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — single",
+       "17,035.20"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+       "20,830.80"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — single",
+       "27,043.20"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+       "13,122"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — single",
+       "17,035.20"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+       "20,830.80"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — single",
+       "27,043.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wilderness-doro-nawas": {
+  "2027": {
+   "name": "Wilderness Doro Nawas",
+   "region": "Damaraland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+       "7,912.80"
+      ],
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — single",
+       "10,272"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — per person sharing",
+       "9,657.60"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — single",
+       "12,537.60"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+       "12,273.60"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — single",
+       "15,933.60"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+       "10,194"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — single",
+       "13,233.60"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+       "11,464.80"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — single",
+       "14,883.60"
+      ],
+      [
+       "06 Jan – 31 Mar · DBB — per person sharing",
+       "4,868.40"
+      ],
+      [
+       "06 Jan – 31 Mar · DBB — single",
+       "6,320.40"
+      ],
+      [
+       "01 Apr – 31 May · DBB — per person sharing",
+       "6,276"
+      ],
+      [
+       "01 Apr – 31 May · DBB — single",
+       "8,148"
+      ],
+      [
+       "01 Jun – 31 Oct · DBB — per person sharing",
+       "9,256.80"
+      ],
+      [
+       "01 Jun – 31 Oct · DBB — single",
+       "12,016.80"
+      ],
+      [
+       "01 Nov – 19 Dec · DBB — per person sharing",
+       "6,244.80"
+      ],
+      [
+       "01 Nov – 19 Dec · DBB — single",
+       "8,107.20"
+      ],
+      [
+       "20 Dec – 05 Jan · DBB — per person sharing",
+       "6,637.20"
+      ],
+      [
+       "20 Dec – 05 Jan · DBB — single",
+       "8,616"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-king-nehale": {
+  "2027": {
+   "name": "Etosha King Nehale",
+   "region": "East Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "3,163.20"
+      ],
+      [
+       "Room B&B — single",
+       "3,954"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "omarunga-epupa-falls-camp": {
+  "2027": {
+   "name": "Omarunga Epupa-Falls Camp",
+   "region": "Epupa",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "2,544"
+      ],
+      [
+       "Room B&B — single",
+       "3,180"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ai-ais-hot-springs-and-spa": {
+  "2027": {
+   "name": "/Ai-/Ais Hot Springs and Spa",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "421.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "421.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Mountain view double room (2 beds) BB — per person sharing",
+       "1,468.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Mountain view double room (2 beds) BB — per person sharing",
+       "1,771.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Mountain view double room (2 beds) BB — single",
+       "1,771.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Mountain view double room (2 beds) BB — single",
+       "2,062.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · River view double room (2 beds) BB — per person sharing",
+       "1,771.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · River view double room (2 beds) BB — per person sharing",
+       "2,160"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · River view double room (2 beds) BB — single",
+       "2,062.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · River view double room (2 beds) BB — single",
+       "2,462.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush family chalet (4 beds) – min Bed only — bed only",
+       "1,965.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush family chalet (4 beds) – min Bed only — bed only",
+       "2,354.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "boplaas-campsite": {
+  "2027": {
+   "name": "Boplaas Campsite",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "118.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "118.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "canyon-lodge": {
+  "2027": {
+   "name": "Canyon Lodge",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "3,143.04"
+      ],
+      [
+       "Room B&B — single",
+       "3,928.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "canyon-roadhouse": {
+  "2027": {
+   "name": "Canyon Roadhouse",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "2,544"
+      ],
+      [
+       "Room B&B — single",
+       "3,180"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "canyon-village": {
+  "2027": {
+   "name": "Canyon Village",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "1,915.20"
+      ],
+      [
+       "Room B&B — single",
+       "2,394"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "fish-river-lodge": {
+  "2027": {
+   "name": "Fish River Lodge",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Green Season (07 Jan – 31 Mar) · FB+ — per person sharing",
+       "6,806.40"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · FB+ — per person sharing",
+       "7,713.60"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · FB+ — per person sharing",
+       "8,047.20"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · FB+ — single",
+       "8,156.40"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · FB+ — single",
+       "9,380.40"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · FB+ — single",
+       "9,831.60"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · DBB — per person sharing",
+       "3,928.80"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · DBB — per person sharing",
+       "4,851.60"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · DBB — per person sharing",
+       "5,192.40"
+      ],
+      [
+       "Green Season (07 Jan – 31 Mar) · DBB — single",
+       "5,304"
+      ],
+      [
+       "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · DBB — single",
+       "6,549.60"
+      ],
+      [
+       "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · DBB — single",
+       "7,009.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hobas-lodge": {
+  "2027": {
+   "name": "Hobas Lodge",
+   "region": "Fish River Canyon",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "518.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "518.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+       "2,041.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+       "2,527.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+       "2,322"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+       "2,527.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hardap-resort": {
+  "2027": {
+   "name": "Hardap Resort",
+   "region": "Kalahari",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "237.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "237.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · VIP chalets (4 beds) - min BB — per person sharing",
+       "1,252.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · VIP chalets (4 beds) - min BB — per person sharing",
+       "1,252.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds) - min BB — per person sharing",
+       "928.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Family chalet (4 beds) - min BB — per person sharing",
+       "928.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+       "777.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+       "1,252.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+       "982.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+       "1,447.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kalahari-anib-lodge": {
+  "2027": {
+   "name": "Kalahari Anib Lodge",
+   "region": "Kalahari",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Standard Room B&B — per person sharing",
+       "2,715.84"
+      ],
+      [
+       "Standard Room B&B — single",
+       "3,394.80"
+      ],
+      [
+       "Comfort Room B&B — per person sharing",
+       "3,386.88"
+      ],
+      [
+       "Comfort Room B&B — single",
+       "4,233.60"
+      ],
+      [
+       "Camping2Go (bed only) — per person sharing",
+       "1,104"
+      ],
+      [
+       "Camping2Go (bed only) — single",
+       "2,208"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kalahari-farmhouse": {
+  "2027": {
+   "name": "Kalahari Farmhouse",
+   "region": "Kalahari",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "2,040"
+      ],
+      [
+       "Room B&B — single",
+       "2,550"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kalahari-red-dunes-lodge": {
+  "2027": {
+   "name": "Kalahari Red Dunes Lodge",
+   "region": "Kalahari",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+       "6,672"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+       "8,688"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
+       "8,592"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
+       "3,336"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,428"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+       "4,032"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+       "5,280"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+       "6,048"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+       "2,016"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "teufelskrallen-lodge": {
+  "2027": {
+   "name": "Teufelskrallen Lodge",
+   "region": "Kalahari",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — per person sharing",
+       "2,688"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — single",
+       "3,552"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Child 4–12",
+       "1,344"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,188"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — per person sharing",
+       "2,016"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — single",
+       "2,688"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Child 4–12",
+       "1,008"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etendeka-hiking-trails": {
+  "2027": {
+   "name": "Etendeka Hiking Trails",
+   "region": "Kaokoland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun) · Full Board — per person sharing",
+       "6,664.80"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun) · Full Board — single",
+       "8,282.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec) · Full Board — per person sharing",
+       "8,154"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec) · Full Board — single",
+       "10,327.20"
+      ],
+      [
+       "CESW Conservation Levy (per person per night, additional)",
+       "348"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etendeka-mountain-camp": {
+  "2027": {
+   "name": "Etendeka Mountain Camp",
+   "region": "Kaokoland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (1 Jan – 30 Jun) · Per Person Sharing",
+       "6,079.20"
+      ],
+      [
+       "Low Season (1 Jan – 30 Jun) · Single",
+       "7,557.60"
+      ],
+      [
+       "Low Season (1 Jan – 30 Jun) · Conservation Levy (pppn)",
+       "348"
+      ],
+      [
+       "High Season (1 Jul – 31 Dec) · Per Person Sharing",
+       "7,072.80"
+      ],
+      [
+       "High Season (1 Jul – 31 Dec) · Single",
+       "8,955.60"
+      ],
+      [
+       "High Season (1 Jul – 31 Dec) · Conservation Levy (pppn)",
+       "348"
+      ],
+      [
+       "Low — ≤3 pax (25% off)",
+       "4,560"
+      ],
+      [
+       "Low — 4+ pax (50% off)",
+       "3,039.60"
+      ],
+      [
+       "High — ≤3 pax (25% off)",
+       "5,305.20"
+      ],
+      [
+       "High — 4+ pax (50% off)",
+       "3,536.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wilderness-serra-cafema": {
+  "2027": {
+   "name": "Wilderness Serra Cafema",
+   "region": "Kaokoland",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+       "19,968"
+      ],
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — single",
+       "25,922.40"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — per person sharing",
+       "20,116.80"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — single",
+       "26,116.80"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+       "33,282"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — single",
+       "43,207.20"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+       "20,116.80"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — single",
+       "26,116.80"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+       "33,282"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — single",
+       "43,207.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "mile-108": {
+  "2027": {
+   "name": "Mile 108",
+   "region": "Skeleton Coast",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "205.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "205.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Fisherman Chalet (max Bed only — bed only",
+       "518.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Fisherman Chalet (max Bed only — bed only",
+       "518.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Self-contained Campsites (max — per person camping",
+       "334.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Self-contained Campsites (max — per person camping",
+       "334.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "shipwreck-lodge": {
+  "2027": {
+   "name": "Shipwreck Lodge",
+   "region": "Skeleton Coast",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Green Season (10 Jan – 31 Mar) · FI — per person sharing",
+       "18,312"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — per person sharing",
+       "22,789.20"
+      ],
+      [
+       "High Shoulder Season (01 May – 31 May) · FI — per person sharing",
+       "24,519.60"
+      ],
+      [
+       "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — per person sharing",
+       "27,368.40"
+      ],
+      [
+       "Peak Season (01 Jul – 31 Aug) · FI — per person sharing",
+       "30,726"
+      ],
+      [
+       "Green Season (10 Jan – 31 Mar) · FI — single",
+       "25,638"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — single",
+       "31,906.80"
+      ],
+      [
+       "High Shoulder Season (01 May – 31 May) · FI — single",
+       "34,328.40"
+      ],
+      [
+       "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — single",
+       "38,317.20"
+      ],
+      [
+       "Peak Season (01 Jul – 31 Aug) · FI — single",
+       "43,018.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "terrace-bay-resort": {
+  "2027": {
+   "name": "Terrace Bay Resort",
+   "region": "Skeleton Coast",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room (2 beds) DBB — per person sharing",
+       "1,879.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room (2 beds) DBB — per person sharing",
+       "1,425.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room (2 beds) DBB — single",
+       "2,095.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room (2 beds) DBB — single",
+       "1,652.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Beach chalet (8 beds) - min Bed only — bed only",
+       "1,663.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Beach chalet (8 beds) - min Bed only — bed only",
+       "1,036.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "desert-camp": {
+  "2027": {
+   "name": "Desert Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season · DBB — per person sharing",
+       "2,551.50"
+      ],
+      [
+       "High Season · DBB — single",
+       "3,433.80"
+      ],
+      [
+       "Low Season · DBB — per person sharing",
+       "2,413.80"
+      ],
+      [
+       "Low Season · DBB — single",
+       "3,229.80"
+      ],
+      [
+       "High Season · B&B — per person sharing",
+       "1,999.50"
+      ],
+      [
+       "High Season · B&B — single",
+       "2,881.80"
+      ],
+      [
+       "Low Season · B&B — per person sharing",
+       "1,861.80"
+      ],
+      [
+       "Low Season · B&B — single",
+       "2,677.80"
+      ],
+      [
+       "High Season · Room Only (self-catering) — per person sharing",
+       "1,759.50"
+      ],
+      [
+       "High Season · Room Only (self-catering) — single",
+       "2,641.80"
+      ],
+      [
+       "Low Season · Room Only (self-catering) — per person sharing",
+       "1,621.80"
+      ],
+      [
+       "Low Season · Room Only (self-catering) — single",
+       "2,437.80"
+      ],
+      [
+       "Breakfast",
+       "240"
+      ],
+      [
+       "Lunch",
+       "348"
+      ],
+      [
+       "Lunch Pack",
+       "180"
+      ],
+      [
+       "Dinner",
+       "552"
+      ],
+      [
+       "Sundowner / Nature Drive (lodge property)",
+       "660"
+      ],
+      [
+       "Elim Dune Nature Walk",
+       "1,014"
+      ],
+      [
+       "Sesriem Canyon Excursion",
+       "834"
+      ],
+      [
+       "Sossusvlei & Dead Vlei Excursion",
+       "1,788"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "desert-hills-lodge": {
+  "2027": {
+   "name": "Desert Hills Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · DBB — Luxury Chalet (per room, 1–2 guests)",
+       "8,088"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · DBB — Luxury Chalet (per room, 1–2 guests)",
+       "8,628"
+      ],
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · Additional child 7–12 (sharing)",
+       "2,028"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · Additional child 7–12 (sharing)",
+       "2,160"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "desert-homestead-lodge": {
+  "2027": {
+   "name": "Desert Homestead Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Chalet — per person sharing",
+       "3,360"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · DBB · Chalet — single",
+       "4,416"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Child 4–12",
+       "1,680"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,188"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Chalet — per person sharing",
+       "2,496"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · DBB · Chalet — single",
+       "3,168"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Child 4–12",
+       "1,248"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "desert-quiver-camp": {
+  "2027": {
+   "name": "Desert Quiver Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season · DBB — per person sharing",
+       "2,551.50"
+      ],
+      [
+       "High Season · DBB — single",
+       "3,433.80"
+      ],
+      [
+       "Low Season · DBB — per person sharing",
+       "2,413.80"
+      ],
+      [
+       "Low Season · DBB — single",
+       "3,229.80"
+      ],
+      [
+       "High Season · B&B — per person sharing",
+       "1,999.50"
+      ],
+      [
+       "High Season · B&B — single",
+       "2,881.80"
+      ],
+      [
+       "Low Season · B&B — per person sharing",
+       "1,861.80"
+      ],
+      [
+       "Low Season · B&B — single",
+       "2,677.80"
+      ],
+      [
+       "High Season · Room Only (self-catering) — per person sharing",
+       "1,759.50"
+      ],
+      [
+       "High Season · Room Only (self-catering) — single",
+       "2,641.80"
+      ],
+      [
+       "Low Season · Room Only (self-catering) — per person sharing",
+       "1,621.80"
+      ],
+      [
+       "Low Season · Room Only (self-catering) — single",
+       "2,437.80"
+      ],
+      [
+       "Breakfast",
+       "240"
+      ],
+      [
+       "Lunch",
+       "348"
+      ],
+      [
+       "Lunch Pack",
+       "180"
+      ],
+      [
+       "Dinner",
+       "552"
+      ],
+      [
+       "Sundowner / Nature Drive (lodge property)",
+       "660"
+      ],
+      [
+       "Elim Dune Nature Walk",
+       "1,014"
+      ],
+      [
+       "Sesriem Canyon Excursion",
+       "834"
+      ],
+      [
+       "Sossusvlei & Dead Vlei Excursion",
+       "1,788"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "desert-whisper": {
+  "2027": {
+   "name": "Desert Whisper",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Fully inclusive (per room, max 2)",
+       "31,680"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "hammerstein-lodge": {
+  "2027": {
+   "name": "Hammerstein Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · DBB — Standard Room (per room, 1–2 guests)",
+       "2,520"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · DBB — Standard Room (per room, 1–2 guests)",
+       "2,712"
+      ],
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · Additional child 7–12 (sharing)",
+       "708"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · Additional child 7–12 (sharing)",
+       "768"
+      ],
+      [
+       "Camping · Per campsite (up to 4 pax)",
+       "564"
+      ],
+      [
+       "Camping · Additional camper (per person, max 6)",
+       "312"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "namib-desert-lodge": {
+  "2027": {
+   "name": "Namib Desert Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "2,440.32"
+      ],
+      [
+       "Room B&B — single",
+       "3,050.40"
+      ],
+      [
+       "Camping2Go (bed only) — per person sharing",
+       "1,104"
+      ],
+      [
+       "Camping2Go (bed only) — single",
+       "2,208"
+      ],
+      [
+       "Campsite — per person per night",
+       "388.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "namib-dune-star-camp": {
+  "2027": {
+   "name": "Namib Dune Star Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing (one-night stay)",
+       "3,546.24"
+      ],
+      [
+       "Room B&B — single (one-night stay)",
+       "4,432.80"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "naukluft-camp": {
+  "2027": {
+   "name": "Naukluft Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "496.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "496.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+       "1,566"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+       "2,160"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+       "1,857.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+       "2,462.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "reverie-kalahari-pod": {
+  "2027": {
+   "name": "Reverie Kalahari Pod",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Fully inclusive (per room, max 2)",
+       "31,680"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "sesriem-campsite": {
+  "2027": {
+   "name": "Sesriem Campsite",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "723.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "723.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "sossus-dune-lodge": {
+  "2027": {
+   "name": "Sossus Dune Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Dune chalet (2 beds) DBB — per person sharing",
+       "4,352.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Dune chalet (2 beds) DBB — per person sharing",
+       "7,560"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Dune chalet (2 beds) DBB — single",
+       "4,752"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Dune chalet (2 beds) DBB — single",
+       "7,970.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Honeymoon chalets (double bed) DBB — per person sharing",
+       "4,957.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Honeymoon chalets (double bed) DBB — per person sharing",
+       "8,348.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Honeymoon chalets (double bed) DBB — single",
+       "5,356.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Honeymoon chalets (double bed) DBB — single",
+       "8,758.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "sossus-oasis-campsite": {
+  "2027": {
+   "name": "Sossus Oasis Campsite",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Camping — per adult per night",
+       "367.20"
+      ],
+      [
+       "Camping — per child (5–11 yrs)",
+       "183.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "sossusvlei-lodge": {
+  "2027": {
+   "name": "Sossusvlei Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season · Superior Room DBB — per person sharing",
+       "4,363.20"
+      ],
+      [
+       "High Season · Superior Room DBB — single",
+       "6,547.20"
+      ],
+      [
+       "Low Season · Superior Room DBB — per person sharing",
+       "3,259.20"
+      ],
+      [
+       "Low Season · Superior Room DBB — single",
+       "4,896"
+      ],
+      [
+       "High Season · Standard Room DBB — per person sharing",
+       "3,748.80"
+      ],
+      [
+       "High Season · Standard Room DBB — single",
+       "5,625.60"
+      ],
+      [
+       "Low Season · Standard Room DBB — per person sharing",
+       "2,788.80"
+      ],
+      [
+       "Low Season · Standard Room DBB — single",
+       "4,185.60"
+      ],
+      [
+       "High Season · Junior Suite DBB (per room)",
+       "13,094.40"
+      ],
+      [
+       "Low Season · Junior Suite DBB (per room)",
+       "12,374.40"
+      ],
+      [
+       "Sundowner / Nature Drive (lodge property)",
+       "660"
+      ],
+      [
+       "Elim Dune Nature Walk",
+       "1,014"
+      ],
+      [
+       "Sesriem Canyon Excursion",
+       "834"
+      ],
+      [
+       "Sossusvlei & Dead Vlei Excursion",
+       "1,788"
+      ],
+      [
+       "Sundowner / Nature Drive (min 2 pax) — per person",
+       "660"
+      ],
+      [
+       "Elim Dune Nature Walk (min 2 pax) — per person",
+       "1,014"
+      ],
+      [
+       "Sossusvlei & Dead Vlei excursion (min 4 pax) — per person",
+       "1,788"
+      ],
+      [
+       "Sesriem Canyon excursion (min 4 pax) — per person",
+       "834"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-desert-grace": {
+  "2027": {
+   "name": "The Desert Grace",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "5,692.80"
+      ],
+      [
+       "Room B&B — single",
+       "7,116"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-pearls-beach-pods": {
+  "2027": {
+   "name": "The Pearls Beach Pods",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "The Jetty — F&B inclusive (per room, max 2)",
+       "29,040"
+      ],
+      [
+       "The Jetty — additional room (2 rooms)",
+       "17,424"
+      ],
+      [
+       "The Jetty — additional room (3 rooms)",
+       "11,616"
+      ],
+      [
+       "The Mole — F&B inclusive (per room, max 2)",
+       "29,040"
+      ],
+      [
+       "The Mole — additional room (2 rooms)",
+       "17,424"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "we-kebi-safari-lodge": {
+  "2027": {
+   "name": "We Kebi Safari Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · DBB — Luxury Chalet (per room, 1–2 guests)",
+       "5,064"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · DBB — Luxury Chalet (per room, 1–2 guests)",
+       "5,388"
+      ],
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · Additional child 7–12 (sharing)",
+       "1,272"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · Additional child 7–12 (sharing)",
+       "1,356"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wilderness-kulala-desert-lodge": {
+  "2027": {
+   "name": "Wilderness Kulala Desert Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+       "7,550.40"
+      ],
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — single",
+       "9,801.60"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — per person sharing",
+       "9,050.40"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — single",
+       "11,749.20"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+       "12,874.80"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — single",
+       "16,714.80"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+       "9,050.40"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — single",
+       "11,749.20"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+       "12,091.20"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — single",
+       "15,697.20"
+      ],
+      [
+       "06 Jan – 31 Mar · DBB — per person sharing",
+       "4,647.60"
+      ],
+      [
+       "06 Jan – 31 Mar · DBB — single",
+       "6,033.60"
+      ],
+      [
+       "01 Apr – 31 May · DBB — per person sharing",
+       "5,882.40"
+      ],
+      [
+       "01 Apr – 31 May · DBB — single",
+       "7,636.80"
+      ],
+      [
+       "01 Jun – 31 Oct · DBB — per person sharing",
+       "9,238.80"
+      ],
+      [
+       "01 Jun – 31 Oct · DBB — single",
+       "11,994"
+      ],
+      [
+       "01 Nov – 19 Dec · DBB — per person sharing",
+       "6,006"
+      ],
+      [
+       "01 Nov – 19 Dec · DBB — single",
+       "7,796.40"
+      ],
+      [
+       "20 Dec – 05 Jan · DBB — per person sharing",
+       "6,505.20"
+      ],
+      [
+       "20 Dec – 05 Jan · DBB — single",
+       "8,445.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wilderness-little-kulala": {
+  "2027": {
+   "name": "Wilderness Little Kulala",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+       "18,741.60"
+      ],
+      [
+       "06 Jan – 31 Mar · Fully Inclusive — single",
+       "24,331.20"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — per person sharing",
+       "19,417.20"
+      ],
+      [
+       "01 Apr – 31 May · Fully Inclusive — single",
+       "25,207.20"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+       "30,828"
+      ],
+      [
+       "01 Jun – 31 Oct · Fully Inclusive — single",
+       "40,021.20"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+       "19,417.20"
+      ],
+      [
+       "01 Nov – 19 Dec · Fully Inclusive — single",
+       "25,207.20"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+       "30,828"
+      ],
+      [
+       "20 Dec – 05 Jan · Fully Inclusive — single",
+       "40,021.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wolwedans-boulders-camp": {
+  "2027": {
+   "name": "Wolwedans Boulders Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Per person sharing (FI, 01 Apr – 15 Nov)",
+       "20,112"
+      ],
+      [
+       "Child sharing",
+       "5,040"
+      ],
+      [
+       "Exclusive use — whole camp (per night)",
+       "120,672"
+      ],
+      [
+       "Guide / Pilot (per night)",
+       "3,150"
+      ],
+      [
+       "Guided Nature Walk — Morning",
+       "1,074"
+      ],
+      [
+       "Sunset Drive with drinks",
+       "1,578"
+      ],
+      [
+       "Half-day Scenic Drive (6 hrs)",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle",
+       "1,578"
+      ],
+      [
+       "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree — per person",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle — per person",
+       "1,578"
+      ],
+      [
+       "Dune Bush Dining Experience – morning (first 2 guests)",
+       "1,890"
+      ],
+      [
+       "Dining Under the Stars Experience – evening (first 2 guests)",
+       "2,334"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wolwedans-dune-camp": {
+  "2027": {
+   "name": "Wolwedans Dune Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Green Season · Standard Tent — per person sharing (FI)",
+       "14,304"
+      ],
+      [
+       "High Season · Standard Tent — per person sharing (FI)",
+       "15,024"
+      ],
+      [
+       "Green Season · additional child",
+       "3,600"
+      ],
+      [
+       "High Season · additional child",
+       "3,780"
+      ],
+      [
+       "Dune Family Suite — exclusive (per unit) · Green",
+       "57,216"
+      ],
+      [
+       "Dune Family Suite — exclusive (per unit) · High",
+       "60,096"
+      ],
+      [
+       "Guide / Pilot (per night)",
+       "3,150"
+      ],
+      [
+       "Guided Nature Walk — Morning",
+       "1,074"
+      ],
+      [
+       "Sunset Drive with drinks",
+       "1,578"
+      ],
+      [
+       "Half-day Scenic Drive (6 hrs)",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle",
+       "1,578"
+      ],
+      [
+       "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree — per person",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle — per person",
+       "1,578"
+      ],
+      [
+       "Dune Bush Dining Experience – morning (first 2 guests)",
+       "1,890"
+      ],
+      [
+       "Dining Under the Stars Experience – evening (first 2 guests)",
+       "2,334"
+      ],
+      [
+       "Horse Riding – Morning (2 hrs) — per person",
+       "1,074"
+      ],
+      [
+       "Horse Riding – Sunset with drinks (3 hrs, min 2) — per person",
+       "1,578"
+      ],
+      [
+       "Horse Riding – Full Day with picnic (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Desert Sleepout – Sundowner + Sunrise Overnight (min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Namib Sky Ballooning (min 2) — per person",
+       "12,864"
+      ],
+      [
+       "Shared transfer to Kwessie/Geluk (min 2) — per person",
+       "2,874"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wolwedans-mountain-view-suite": {
+  "2027": {
+   "name": "Wolwedans Mountain View Suite",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Per person sharing (FI)",
+       "20,112"
+      ],
+      [
+       "Child sharing",
+       "5,040"
+      ],
+      [
+       "Guide / Pilot (per night)",
+       "3,150"
+      ],
+      [
+       "Guided Nature Walk — Morning",
+       "1,074"
+      ],
+      [
+       "Sunset Drive with drinks",
+       "1,578"
+      ],
+      [
+       "Half-day Scenic Drive (6 hrs)",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle",
+       "1,578"
+      ],
+      [
+       "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree — per person",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle — per person",
+       "1,578"
+      ],
+      [
+       "Dune Bush Dining Experience – morning (first 2 guests)",
+       "1,890"
+      ],
+      [
+       "Dining Under the Stars Experience – evening (first 2 guests)",
+       "2,334"
+      ],
+      [
+       "Horse Riding – Morning (2 hrs) — per person",
+       "1,074"
+      ],
+      [
+       "Horse Riding – Sunset with drinks (3 hrs, min 2) — per person",
+       "1,578"
+      ],
+      [
+       "Horse Riding – Full Day with picnic (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Desert Sleepout – Sundowner + Sunrise Overnight (min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Namib Sky Ballooning (min 2) — per person",
+       "12,864"
+      ],
+      [
+       "Shared transfer to Kwessie/Geluk (min 2) — per person",
+       "2,874"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "wolwedans-plains-camp": {
+  "2027": {
+   "name": "Wolwedans Plains Camp",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Per person sharing (FI)",
+       "20,112"
+      ],
+      [
+       "Child sharing",
+       "5,040"
+      ],
+      [
+       "Exclusive use — whole camp (per night)",
+       "80,448"
+      ],
+      [
+       "Guide / Pilot (per night)",
+       "3,150"
+      ],
+      [
+       "Guided Nature Walk — Morning",
+       "1,074"
+      ],
+      [
+       "Sunset Drive with drinks",
+       "1,578"
+      ],
+      [
+       "Half-day Scenic Drive (6 hrs)",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle",
+       "1,578"
+      ],
+      [
+       "E-Biking Full Day with picnic lunch (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Adopt & Plant a Tree — per person",
+       "6,930"
+      ],
+      [
+       "Adopt a Fairy Circle — per person",
+       "1,578"
+      ],
+      [
+       "Dune Bush Dining Experience – morning (first 2 guests)",
+       "1,890"
+      ],
+      [
+       "Dining Under the Stars Experience – evening (first 2 guests)",
+       "2,334"
+      ],
+      [
+       "Horse Riding – Morning (2 hrs) — per person",
+       "1,074"
+      ],
+      [
+       "Horse Riding – Sunset with drinks (3 hrs, min 2) — per person",
+       "1,578"
+      ],
+      [
+       "Horse Riding – Full Day with picnic (6 hrs, min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Desert Sleepout – Sundowner + Sunrise Overnight (min 2) — per person",
+       "3,150"
+      ],
+      [
+       "Namib Sky Ballooning (min 2) — per person",
+       "12,864"
+      ],
+      [
+       "Shared transfer to Kwessie/Geluk (min 2) — per person",
+       "2,874"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-oberland-lodge": {
+  "2027": {
+   "name": "Etosha Oberland Lodge",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+       "8,467.20"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+       "11,040"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Child 4–12",
+       "4,233.60"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,428"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+       "6,960"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+       "9,072"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Child 4–12",
+       "3,480"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-omusati-lodge": {
+  "2027": {
+   "name": "Etosha Omusati Lodge",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · DBB — Bush Chalet/Bungalow (per room, 1–2 guests)",
+       "3,444"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · DBB — Bush Chalet/Bungalow (per room, 1–2 guests)",
+       "3,672"
+      ],
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Dec – 28 Feb) · Additional child 7–12 (sharing)",
+       "912"
+      ],
+      [
+       "High Season (01 May – 30 Nov) · Additional child 7–12 (sharing)",
+       "984"
+      ],
+      [
+       "Camping · Per campsite (up to 4 pax)",
+       "564"
+      ],
+      [
+       "Camping · Additional camper (per person, max 6)",
+       "312"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-safari-camping2go": {
+  "2027": {
+   "name": "Etosha Safari Camping2Go",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Camping2Go (bed only) — per person sharing",
+       "1,104"
+      ],
+      [
+       "Camping2Go (bed only) — single",
+       "2,208"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-safari-lodge": {
+  "2027": {
+   "name": "Etosha Safari Lodge",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "3,572.16"
+      ],
+      [
+       "Room B&B — single",
+       "4,465.20"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "951.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-trading-post-campsite": {
+  "2027": {
+   "name": "Etosha Trading Post Campsite",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Camping — per adult per night",
+       "367.20"
+      ],
+      [
+       "Camping — per child (5–11 yrs)",
+       "183.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-village": {
+  "2027": {
+   "name": "Etosha Village",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season · DBB — per person sharing",
+       "2,659.20"
+      ],
+      [
+       "High Season · DBB — single",
+       "3,993.60"
+      ],
+      [
+       "Low Season · DBB — per person sharing",
+       "2,376"
+      ],
+      [
+       "Low Season · DBB — single",
+       "3,566.40"
+      ],
+      [
+       "Breakfast",
+       "240"
+      ],
+      [
+       "Lunch",
+       "348"
+      ],
+      [
+       "Lunch Pack",
+       "180"
+      ],
+      [
+       "Dinner",
+       "552"
+      ],
+      [
+       "Morning Game Drive (Etosha)",
+       "1,824"
+      ],
+      [
+       "Full Day Game Drive (Etosha)",
+       "2,172"
+      ],
+      [
+       "Sundowner Drive",
+       "660"
+      ],
+      [
+       "Sunrise Guided Walk",
+       "624"
+      ],
+      [
+       "Stargazing (guided)",
+       "528"
+      ],
+      [
+       "Etosha NP Morning Game Drive (min 4 pax) — per person",
+       "1,824"
+      ],
+      [
+       "Etosha NP Full Day Game Drive (min 4 pax) — per person",
+       "2,172"
+      ],
+      [
+       "Sundowner Drive – private reserve (min 4 pax) — per person",
+       "660"
+      ],
+      [
+       "Sunrise Guided Walk (min 2 pax, max 8) — per person",
+       "624"
+      ],
+      [
+       "Stargazing – seasonal (min 2 pax) — per person",
+       "528"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "etosha-village-campsite": {
+  "2027": {
+   "name": "Etosha Village Campsite",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Camping — per adult per night",
+       "367.20"
+      ],
+      [
+       "Camping — per child (5–11 yrs)",
+       "183.60"
+      ],
+      [
+       "Morning Game Drive (Etosha)",
+       "1,824"
+      ],
+      [
+       "Full Day Game Drive (Etosha)",
+       "2,172"
+      ],
+      [
+       "Sundowner Drive",
+       "660"
+      ],
+      [
+       "Sunrise Guided Walk",
+       "624"
+      ],
+      [
+       "Stargazing (guided)",
+       "528"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okaukuejo-camp": {
+  "2027": {
+   "name": "Okaukuejo Camp",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "496.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "604.80"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room A (2 beds) BB — per person sharing",
+       "2,052"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room A (2 beds) BB — per person sharing",
+       "2,570.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room A (2 beds) BB — single",
+       "2,300.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room A (2 beds) BB — single",
+       "2,991.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room B (2 beds) BB — per person sharing",
+       "2,052"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room B (2 beds) BB — per person sharing",
+       "2,570.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Double room B (2 beds) BB — single",
+       "2,300.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Double room B (2 beds) BB — single",
+       "2,991.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds, disabled access) BB — per person sharing",
+       "2,052"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds, disabled access) BB — per person sharing",
+       "2,732.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds, disabled access) BB — single",
+       "2,300.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds, disabled access) BB — single",
+       "3,164.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+       "2,386.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+       "2,894.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+       "2,646"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+       "3,337.20"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds) - min BB — per person sharing",
+       "2,300.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Family chalet (4 beds) - min BB — per person sharing",
+       "3,078"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Waterhole chalet (2 beds) BB — per person sharing",
+       "2,570.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Waterhole chalet (2 beds) BB — per person sharing",
+       "3,758.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Waterhole chalet (2 beds) BB — single",
+       "2,829.60"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Waterhole chalet (2 beds) BB — single",
+       "4,179.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Premier Waterhole Chalet (double BB — per person sharing",
+       "4,276.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Premier Waterhole Chalet (double BB — per person sharing",
+       "6,404.40"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okutala-etosha-lodge": {
+  "2027": {
+   "name": "Okutala Etosha Lodge",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Season 1 (01 Jan – 31 Mar) · Hilltop Chalet DBB — per person sharing",
+       "2,702.40"
+      ],
+      [
+       "Season 1 (01 Jan – 31 Mar) · Hilltop Chalet DBB — single",
+       "3,110.40"
+      ],
+      [
+       "Season 2 (01 Apr – 31 Dec) · Hilltop Chalet DBB — per person sharing",
+       "3,379.20"
+      ],
+      [
+       "Season 2 (01 Apr – 31 Dec) · Hilltop Chalet DBB — single",
+       "3,883.20"
+      ],
+      [
+       "Season 1 (01 Jan – 31 Mar) · Lodge Luxury Room DBB — per person sharing",
+       "2,702.40"
+      ],
+      [
+       "Season 1 (01 Jan – 31 Mar) · Lodge Luxury Room DBB — single",
+       "3,110.40"
+      ],
+      [
+       "Season 2 (01 Apr – 31 Dec) · Lodge Luxury Room DBB — per person sharing",
+       "3,379.20"
+      ],
+      [
+       "Season 2 (01 Apr – 31 Dec) · Lodge Luxury Room DBB — single",
+       "3,883.20"
+      ],
+      [
+       "Season 1 (01 Jan – 31 Mar) · King Suite DBB — per person sharing",
+       "3,456"
+      ],
+      [
+       "Season 1 (01 Jan – 31 Mar) · King Suite DBB — single",
+       "4,032"
+      ],
+      [
+       "Season 2 (01 Apr – 31 Dec) · King Suite DBB — per person sharing",
+       "4,032"
+      ],
+      [
+       "Season 2 (01 Apr – 31 Dec) · King Suite DBB — single",
+       "4,992"
+      ],
+      [
+       "Guide Room (per guide)",
+       "691.20"
+      ],
+      [
+       "Light Lunch",
+       "504"
+      ],
+      [
+       "Lunch Pack",
+       "240"
+      ],
+      [
+       "Bush Picnic Lunch",
+       "264"
+      ],
+      [
+       "Etosha Day Tour (8 hrs) — per person",
+       "2,106"
+      ],
+      [
+       "Morning Game/Nature Drive (2 hrs) — per person",
+       "820.80"
+      ],
+      [
+       "Afternoon Game/Nature Drive (2 hrs) — per person",
+       "820.80"
+      ],
+      [
+       "Night Drive — per person",
+       "918"
+      ],
+      [
+       "Morning Hiking Tour — per person",
+       "421.20"
+      ],
+      [
+       "Afternoon Hiking Tour — per person",
+       "421.20"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "olifantsrus-campsite": {
+  "2027": {
+   "name": "Olifantsrus Campsite",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Campsite — per person camping",
+       "550.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Campsite — per person camping",
+       "550.80"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "onkoshi-camp": {
+  "2027": {
+   "name": "Onkoshi Camp",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Onkoshi chalet (2 beds) DBB — per person sharing",
+       "3,434.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Onkoshi chalet (2 beds) DBB — per person sharing",
+       "4,665.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Onkoshi chalet (2 beds) DBB — single",
+       "3,769.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Onkoshi chalet (2 beds) DBB — single",
+       "5,000.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Onkoshi honeymoon chalets DBB — per person sharing",
+       "3,844.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Onkoshi honeymoon chalets DBB — per person sharing",
+       "5,508"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Onkoshi honeymoon chalets DBB — single",
+       "4,190.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Onkoshi honeymoon chalets DBB — single",
+       "5,832"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-ekipa-etosha-pod": {
+  "2027": {
+   "name": "The Ekipa Etosha Pod",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Fully inclusive (per room, max 2)",
+       "31,680"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "toshari-lodge": {
+  "2027": {
+   "name": "Toshari Lodge",
+   "region": "South Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Jan – 31 Mar) · Bush Room — per person sharing",
+       "1,602"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Bush Chalet — per person sharing",
+       "1,770"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Bush Room — single",
+       "2,160"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Bush Chalet — single",
+       "2,412"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — per person sharing",
+       "1,722"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — per person sharing",
+       "1,860"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Room — single",
+       "2,316"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Bush Chalet — single",
+       "2,544"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Bush Room — per person sharing",
+       "2,016"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Bush Chalet — per person sharing",
+       "2,130"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Bush Room — single",
+       "2,706"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Bush Chalet — single",
+       "2,928"
+      ],
+      [
+       "Camping — per person",
+       "348"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ocean-house-guesthouse": {
+  "2027": {
+   "name": "Ocean House Guesthouse",
+   "region": "Swakopmund",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Jan – 28 Feb) · DBB — Standard Room (per room, 1–2 guests)",
+       "2,700"
+      ],
+      [
+       "High Season (01 May – 31 Dec) · DBB — Standard Room (per room, 1–2 guests)",
+       "2,868"
+      ],
+      [
+       "Low Season (01 Mar – 30 Apr & 01 Jan – 28 Feb) · Additional child 7–12 (sharing)",
+       "696"
+      ],
+      [
+       "High Season (01 May – 31 Dec) · Additional child 7–12 (sharing)",
+       "756"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "swakopmund-sands": {
+  "2027": {
+   "name": "Swakopmund Sands",
+   "region": "Swakopmund",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — pp sharing",
+       "1,308"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Luxury Room — pp sharing",
+       "1,704"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Luxury Suite — pp sharing",
+       "1,872"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — pp sharing",
+       "2,478"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Classic / Cottage Room — single",
+       "1,728"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Luxury Room — single",
+       "2,160"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Luxury Suite — single",
+       "2,412"
+      ],
+      [
+       "Low Season (01 Jan – 31 Mar) · Sea View Cottage Suite — single",
+       "2,994"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — pp sharing",
+       "1,452"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — pp sharing",
+       "1,896"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — pp sharing",
+       "2,088"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — pp sharing",
+       "2,700"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Classic / Cottage Room — single",
+       "1,902"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Room — single",
+       "2,394"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Luxury Suite — single",
+       "2,688"
+      ],
+      [
+       "Shoulder Season (01 Apr – 30 Jun & 01 – 31 Dec) · Sea View Cottage Suite — single",
+       "3,336"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — pp sharing",
+       "1,662"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Luxury Room — pp sharing",
+       "2,076"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Luxury Suite — pp sharing",
+       "2,268"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — pp sharing",
+       "2,958"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Classic / Cottage Room — single",
+       "2,184"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Luxury Room — single",
+       "2,640"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Luxury Suite — single",
+       "2,928"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Sea View Cottage Suite — single",
+       "3,624"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-delight-swakopmund": {
+  "2027": {
+   "name": "The Delight Swakopmund",
+   "region": "Swakopmund",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Room B&B — per person sharing",
+       "2,021.76"
+      ],
+      [
+       "Room B&B — single",
+       "2,527.20"
+      ],
+      [
+       "Tour Guide Room (B&B)",
+       "2,021.76"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "dolomite-camp": {
+  "2027": {
+   "name": "Dolomite Camp",
+   "region": "West Etosha",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) DBB — per person sharing",
+       "3,434.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) DBB — per person sharing",
+       "4,665.60"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) DBB — single",
+       "3,769.20"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) DBB — single",
+       "5,000.40"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Deluxe chalet (Double bed) DBB — per person sharing",
+       "3,844.80"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Deluxe chalet (Double bed) DBB — per person sharing",
+       "5,508"
+      ],
+      [
+       "Low Season (01 Nov – 30 Jun) · Deluxe chalet (Double bed) DBB — single",
+       "4,190.40"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct) · Deluxe chalet (Double bed) DBB — single",
+       "5,832"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okapuka-safari-lodge": {
+  "2027": {
+   "name": "Okapuka Safari Lodge",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Standard Safari Room B&B — per person sharing",
+       "2,039.04"
+      ],
+      [
+       "Standard Safari Room B&B — single",
+       "2,548.80"
+      ],
+      [
+       "Classic Safari Room B&B — per person sharing",
+       "2,490.24"
+      ],
+      [
+       "Classic Safari Room B&B — single",
+       "3,112.80"
+      ],
+      [
+       "Luxury Safari Suite B&B — per person sharing",
+       "3,053.76"
+      ],
+      [
+       "Luxury Safari Suite B&B — single",
+       "3,817.20"
+      ],
+      [
+       "Tour Guide Room (DBB)",
+       "2,039.04"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "olive-grove-guesthouse": {
+  "2027": {
+   "name": "Olive Grove Guesthouse",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+       "1,452"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
+       "2,040"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
+       "2,322"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+       "2,040"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
+       "2,832"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
+       "3,270"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+       "1,566"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
+       "2,178"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
+       "2,448"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Classic Room — single",
+       "2,178"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Terrace Room — single",
+       "2,958"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
+       "3,432"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "onjala-lodge": {
+  "2027": {
+   "name": "Onjala",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Low Season (01 Dec – 30 Jun) · DBB — per person sharing",
+       "2,592"
+      ],
+      [
+       "Low Season (01 Dec – 30 Jun) · Single supplement",
+       "648"
+      ],
+      [
+       "Low Season (01 Dec – 30 Jun) · Day room — per person",
+       "1,620"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · DBB — per person sharing",
+       "3,240"
+      ],
+      [
+       "High Season (01 Jul – 30 Nov) · Single supplement",
+       "810"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "the-weinberg-windhoek": {
+  "2027": {
+   "name": "The Weinberg",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Courtyard Room B&B — per person sharing",
+       "2,985.60"
+      ],
+      [
+       "Courtyard Room B&B — single",
+       "4,179.84"
+      ],
+      [
+       "Superior Upper-Level B&B — per person sharing",
+       "3,276.48"
+      ],
+      [
+       "Superior Upper-Level B&B — single",
+       "4,587.07"
+      ],
+      [
+       "Loft Room B&B — per person sharing",
+       "4,173.12"
+      ],
+      [
+       "Loft Room B&B — single",
+       "5,842.37"
+      ],
+      [
+       "Terrace Suite B&B (per room, max 2)",
+       "15,840"
+      ],
+      [
+       "Terrace Suite supplement",
+       "5,280"
+      ],
+      [
+       "Tour Guide Single (B&B)",
+       "2,985.60"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "ti-melen": {
+  "2027": {
+   "name": "Ti Melen",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "B&B · Room — per person sharing",
+       "1,632"
+      ],
+      [
+       "B&B · Room — single",
+       "2,400"
+      ],
+      [
+       "Child 4–12",
+       "1,152"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,188"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "weinberg-urban-pod": {
+  "2027": {
+   "name": "Weinberg Urban Pod",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "Urban Pod — F&B inclusive (per room, max 2)",
+       "31,680"
+      ],
+      [
+       "Additional room supplement (2 rooms)",
+       "19,008"
+      ],
+      [
+       "Additional room supplement (3 rooms)",
+       "12,672"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "namib-outpost": {
+  "2027": {
+   "name": "Namib Outpost",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "2027 season",
+   "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+   "sections": [
+    {
+     "title": "2027 — rack",
+     "rows": [
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+       "8,467.20"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+       "11,040"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
+       "12,720"
+      ],
+      [
+       "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
+       "4,233.60"
+      ],
+      [
+       "Tour Guide (Guide Room)",
+       "1,428"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+       "6,960"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+       "9,072"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+       "10,560"
+      ],
+      [
+       "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+       "3,480"
+      ]
+     ]
+    }
+   ]
+  }
+ }
 });
