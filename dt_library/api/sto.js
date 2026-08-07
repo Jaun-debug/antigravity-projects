@@ -39,6 +39,23 @@ function seasonYear(v) {
 // Legacy sheet rates (populated at the bottom of this file). Consulted LAST —
 // after Redis and after the inline maps — so it can only ever fill a gap, never
 // override a live rate. See the block at the end of the file for the rationale.
+
+// Run an async job over a list with a concurrency cap. These database lookups
+// used to run strictly one after another — hundreds of round-trips in series —
+// which is what made the coverage feeds and the builder feed crawl.
+async function mapLimit(items, limit, fn) {
+  const out = new Array(items.length);
+  let next = 0;
+  const workers = new Array(Math.min(limit, items.length)).fill(0).map(async function () {
+    for (;;) {
+      const i = next++;
+      if (i >= items.length) return;
+      try { out[i] = await fn(items[i]); } catch (e) { out[i] = null; }
+    }
+  });
+  await Promise.all(workers);
+  return out;
+}
 const LEGACY_STO_BY_YEAR = {};
 // Rates read off a lodge's own supplier sheet for lodges the API held nothing
 // for. Consulted LAST, so anything live or inline always wins.
@@ -7760,11 +7777,16 @@ module.exports = async (req, res) => {
     }
     if (db.dbConfigured()) {
       try {
-        for (const s of await db.listSlugs()) {
+        const found = await mapLimit(await db.listSlugs(), 24, async function (s) {
           const ys = await db.listYears('sto', s);
-          if (ys && ys.length) { for (const y of ys) add(s, String(y), false, (await db.getRates('sto', s, y)) || {}); }
-          else { const lg = await db.getRates('sto', s); if (lg) add(s, seasonYear(lg.validity) || 'undated', true, lg); }
-        }
+          if (ys && ys.length) return { s: s, ys: ys, docs: await Promise.all(ys.map(function (y) { return db.getRates('sto', s, y); })) };
+          return { s: s, ys: [], legacyDoc: await db.getRates('sto', s) };
+        });
+        found.forEach(function (r) {
+          if (!r) return;
+          if (r.ys.length) r.ys.forEach(function (y, i) { add(r.s, String(y), false, r.docs[i] || {}); });
+          else if (r.legacyDoc) add(r.s, seasonYear(r.legacyDoc.validity) || 'undated', true, r.legacyDoc);
+        });
       } catch (e) {}
     }
     // Legacy sheet rates count as coverage too, but only where nothing live
@@ -7793,11 +7815,18 @@ module.exports = async (req, res) => {
   // (an empty rates_2027 is what stops the builder quoting a 2027 rate the live
   // site itself doesn't yet have).
   if (body.all) {
+    // Only the slugs the owner area actually holds are worth a database lookup.
+    // Asking the database about the ~150 lodges that only exist inline meant
+    // hundreds of round-trips that could only ever return nothing, which is what
+    // made this feed crawl once the sheet-only lodges were added.
+    let dbSlugs = new Set();
+    if (db.dbConfigured()) { try { (await db.listSlugs()).forEach(function (s) { dbSlugs.add(s); }); } catch (e) {} }
+    const inDb = function (slug) { return dbSlugs.has(slug); };
     async function resolveStoYear(slug, year) {
-      if (db.dbConfigured()) { try { const r = await db.getRates('sto', slug, year); if (r) return r; } catch (e) {} }
+      if (inDb(slug)) { try { const r = await db.getRates('sto', slug, year); if (r) return r; } catch (e) {} }
       if (DDS_STO_BY_YEAR[slug] && DDS_STO_BY_YEAR[slug][year]) return DDS_STO_BY_YEAR[slug][year];
       let legacy = STO_DB[slug];
-      if (db.dbConfigured()) { try { const rl = await db.getRates('sto', slug); if (rl) legacy = rl; } catch (e) {} }
+      if (inDb(slug)) { try { const rl = await db.getRates('sto', slug); if (rl) legacy = rl; } catch (e) {} }
       if (legacy && seasonYear(legacy.validity) === year) return legacy;
       // Last resort: supplier-sheet rates, only for lodges with nothing live.
       if (!STO_DB[slug] && !DDS_STO_BY_YEAR[slug] && LEGACY_STO_BY_YEAR[slug] && LEGACY_STO_BY_YEAR[slug][year]) {
@@ -7809,20 +7838,22 @@ module.exports = async (req, res) => {
       return null;
     }
     const slugs = new Set([...Object.keys(STO_DB), ...Object.keys(DDS_STO_BY_YEAR), ...Object.keys(LEGACY_STO_BY_YEAR), ...Object.keys(SHEET_STO_BY_YEAR)]);
-    if (db.dbConfigured()) { try { (await db.listSlugs()).forEach(function (s) { slugs.add(s); }); } catch (e) {} }
+    dbSlugs.forEach(function (s) { slugs.add(s); });
     const lodges = {};
-    for (const slug of slugs) {
-      const d26 = await resolveStoYear(slug, '2026');
-      const d27 = await resolveStoYear(slug, '2027');
-      if (!d26 && !d27) continue;
-      const meta = d26 || d27 || {};
-      lodges[slug] = {
+    const built = await mapLimit([...slugs], 24, async function (slug) {
+      const pair = await Promise.all([resolveStoYear(slug, '2026'), resolveStoYear(slug, '2027')]);
+      return { slug: slug, d26: pair[0], d27: pair[1] };
+    });
+    built.forEach(function (b) {
+      if (!b || (!b.d26 && !b.d27)) return;
+      const meta = b.d26 || b.d27 || {};
+      lodges[b.slug] = {
         name: meta.name || '',
         region: meta.region || '',
-        rates: d26 ? flattenSto(d26) : [],
-        rates_2027: d27 ? flattenSto(d27) : [],
+        rates: b.d26 ? flattenSto(b.d26) : [],
+        rates_2027: b.d27 ? flattenSto(b.d27) : [],
       };
-    }
+    });
     out.lodges = lodges;
     return res.status(200).json(out);
   }
