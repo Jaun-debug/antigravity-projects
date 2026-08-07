@@ -18636,3 +18636,2122 @@ Object.assign(SHEET_RACK_BY_YEAR, {
     }
   }
 });
+
+// --------------------------------------------------------------------------
+// Gondwana Collection — 2026 season, 01.11.2025 to 31.10.2026, straight from
+// the supplier's own 'RACK & 20% STO RATES 2026' sheet. Both columns are
+// printed there, so nothing here is derived. Each lodge carries every year it
+// already held alongside the new 2026, so adding a season never hides one.
+// --------------------------------------------------------------------------
+Object.assign(DDS_RACK_BY_YEAR, {
+  "okapuka-safari-lodge": {
+    "2026": {
+      "name": "Okapuka Safari Lodge",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Standard Safari double room - sharing: bed & breakfast pp/night.",
+              "1,931"
+            ],
+            [
+              "Standard Safari room - single: bed & breakfast pp/night.",
+              "2,412"
+            ],
+            [
+              "Classic Safari double/twin - sharing: bed & breakfast pp/night.",
+              "2,358"
+            ],
+            [
+              "Classic Safari room - single: bed & breakfast pp/night.",
+              "2,948"
+            ],
+            [
+              "Luxury Safari Suite - sharing: bed & breakfast pp/night",
+              "2,892"
+            ],
+            [
+              "Luxury Safari Suite - single: bed & breakfast pp/night.",
+              "3,616"
+            ],
+            [
+              "Dinner pp - pre-booked, alternatively à la carte at the lodge",
+              "572"
+            ],
+            [
+              "Lunch pp - pre-booked, alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3-course lunch pp - pre-booked, alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Okapuka Safari Lodge",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Standard Safari Room B&B — per person sharing",
+              "2,039.04"
+            ],
+            [
+              "Standard Safari Room B&B — single",
+              "2,548.80"
+            ],
+            [
+              "Classic Safari Room B&B — per person sharing",
+              "2,490.24"
+            ],
+            [
+              "Classic Safari Room B&B — single",
+              "3,112.80"
+            ],
+            [
+              "Luxury Safari Suite B&B — per person sharing",
+              "3,053.76"
+            ],
+            [
+              "Luxury Safari Suite B&B — single",
+              "3,817.20"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "2,039.04"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "the-weinberg-windhoek": {
+    "2026": {
+      "name": "The Weinberg Windhoek",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Courtyard double/twin room - sharing: bed & breakfast pp/night.",
+              "2,827"
+            ],
+            [
+              "Courtyard room - single: bed & breakfast pp/night.",
+              "3,961"
+            ],
+            [
+              "Superior upper-level double/twin room - sharing: bed & breakfast pp/night.",
+              "3,103"
+            ],
+            [
+              "Superior upper-level room - single: bed & breakfast pp/night.",
+              "4,340"
+            ],
+            [
+              "Loft double/twin/family - sharing: bed & breakfast pp/night.",
+              "3,952"
+            ],
+            [
+              "Loft - single: bed & breakfast pp/night.",
+              "5,515"
+            ],
+            [
+              "Terrace Suite per room/night: bed & breakfast including minibar — max 2 pax/room",
+              "16,500"
+            ],
+            [
+              "Terrace Suite Supplement for additional room/night: bed & breakfast including minibar — max 2 pax/room",
+              "5,500"
+            ],
+            [
+              "Tour guide room - single: bed & breakfast pp/night.",
+              "2,261.60"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "The Weinberg",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Courtyard Room B&B — per person sharing",
+              "2,985.60"
+            ],
+            [
+              "Courtyard Room B&B — single",
+              "4,179.84"
+            ],
+            [
+              "Superior Upper-Level B&B — per person sharing",
+              "3,276.48"
+            ],
+            [
+              "Superior Upper-Level B&B — single",
+              "4,587.07"
+            ],
+            [
+              "Loft Room B&B — per person sharing",
+              "4,173.12"
+            ],
+            [
+              "Loft Room B&B — single",
+              "5,842.37"
+            ],
+            [
+              "Terrace Suite B&B (per room, max 2)",
+              "15,840"
+            ],
+            [
+              "Terrace Suite supplement",
+              "5,280"
+            ],
+            [
+              "Tour Guide Single (B&B)",
+              "2,985.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "weinberg-urban-pod": {
+    "2026": {
+      "name": "Weinberg Urban Pod",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Per room/night, inclusive of food and beverage, max 2 pax/room",
+              "30,250"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Weinberg Urban Pod",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Urban Pod — F&B inclusive (per room, max 2)",
+              "31,680"
+            ],
+            [
+              "Additional room supplement (2 rooms)",
+              "19,008"
+            ],
+            [
+              "Additional room supplement (3 rooms)",
+              "12,672"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kalahari-anib-lodge": {
+    "2026": {
+      "name": "Kalahari Anib Lodge",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Standard room double/twin/triple/family - sharing: bed & breakfast pp/night.",
+              "2,572"
+            ],
+            [
+              "Standard room - single: bed & breakfast pp/night.",
+              "3,214"
+            ],
+            [
+              "Comfort room double/twin/triple/family - sharing: bed & breakfast pp/night.",
+              "3,207"
+            ],
+            [
+              "Comfort room - single: bed & breakfast pp/night.",
+              "4,010"
+            ],
+            [
+              "Dinner pp - buffet",
+              "572"
+            ],
+            [
+              "Dune Dinner pp - min 10 pax, max 60 pax only",
+              "1,386"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Kalahari Anib Campsite pp/night – 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Kalahari Anib Lodge",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Standard Room B&B — per person sharing",
+              "2,715.84"
+            ],
+            [
+              "Standard Room B&B — single",
+              "3,394.80"
+            ],
+            [
+              "Comfort Room B&B — per person sharing",
+              "3,386.88"
+            ],
+            [
+              "Comfort Room B&B — single",
+              "4,233.60"
+            ],
+            [
+              "Camping2Go (bed only) — per person sharing",
+              "1,104"
+            ],
+            [
+              "Camping2Go (bed only) — single",
+              "2,208"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kalahari-camping2go": {
+    "2026": {
+      "name": "Kalahari Camping2Go",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Dinner pp - buffet at Kalahari Anib Lodge",
+              "572"
+            ],
+            [
+              "Breakfast pp - buffet at Kalahari Anib Lodge",
+              "284"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night – meals at the lodge",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "reverie-kalahari-pod": {
+    "2026": {
+      "name": "Reverie Kalahari Pod",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Per room/night, fully inclusive, max 2 pax/room",
+              "30,250"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Reverie Kalahari Pod",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Fully inclusive (per room, max 2)",
+              "31,680"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kalahari-farmhouse": {
+    "2026": {
+      "name": "Kalahari Farmhouse",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "2,125"
+            ],
+            [
+              "Single room - bed & breakfast pp/night.",
+              "2,655"
+            ],
+            [
+              "Dinner pp - alternatively à la carte at the lodge",
+              "415"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Kalahari Farmhouse Campsite pp/night– 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Kalahari Farmhouse",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "2,040"
+            ],
+            [
+              "Room B&B — single",
+              "2,550"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "canyon-lodge": {
+    "2026": {
+      "name": "Canyon Lodge",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "2,976"
+            ],
+            [
+              "Single room: bed & breakfast pp/night.",
+              "3,719"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Canyon Lodge",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "3,143.04"
+            ],
+            [
+              "Room B&B — single",
+              "3,928.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "canyon-village": {
+    "2026": {
+      "name": "Canyon Village",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "1,995"
+            ],
+            [
+              "Single room: bed & breakfast pp/night.",
+              "2,495"
+            ],
+            [
+              "Dinner pp",
+              "415"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Canyon Village",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "1,915.20"
+            ],
+            [
+              "Room B&B — single",
+              "2,394"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "canyon-roadhouse": {
+    "2026": {
+      "name": "Canyon Roadhouse",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "2,512"
+            ],
+            [
+              "Single room - bed & breakfast pp/night.",
+              "3,143"
+            ],
+            [
+              "Dinner pp - alternatively à la carte at the lodge",
+              "572"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Canyon Road Campsite pp/night – 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Canyon Roadhouse",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "2,544"
+            ],
+            [
+              "Room B&B — single",
+              "3,180"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namib-desert-lodge": {
+    "2026": {
+      "name": "Namib Desert Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "2,398"
+            ],
+            [
+              "Single room - bed & breakfast pp/night.",
+              "3,000"
+            ],
+            [
+              "Dinner pp - buffet",
+              "415"
+            ],
+            [
+              "Dune Dinner pp - min 10 Pax",
+              "1,386"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Namib Desert Campsite pp/night– 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Namib Desert Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "2,440.32"
+            ],
+            [
+              "Room B&B — single",
+              "3,050.40"
+            ],
+            [
+              "Camping2Go (bed only) — per person sharing",
+              "1,104"
+            ],
+            [
+              "Camping2Go (bed only) — single",
+              "2,208"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namib-dune-star-camp": {
+    "2026": {
+      "name": "Namib Dune Star Camp",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/triple room - sharing: bed & breakfast pp/night.",
+              "3,405"
+            ],
+            [
+              "Single room - bed & breakfast pp/night.",
+              "4,259"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Namib Dune Star Camp",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing (one-night stay)",
+              "3,546.24"
+            ],
+            [
+              "Room B&B — single (one-night stay)",
+              "4,432.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "the-desert-grace": {
+    "2026": {
+      "name": "The Desert Grace",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room – sharing: bed & breakfast pp/night.",
+              "5,391"
+            ],
+            [
+              "Single room – bed & breakfast pp/night.",
+              "6,739"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Dune Dinner pp – min 10 Pax",
+              "1,386"
+            ],
+            [
+              "Lunch pp – alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp – alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "The Desert Grace",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "5,692.80"
+            ],
+            [
+              "Room B&B — single",
+              "7,116"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "desert-whisper": {
+    "2026": {
+      "name": "Desert Whisper",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Per room/night, fully inclusive, max 2 pax/room",
+              "30,250"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Desert Whisper",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Fully inclusive (per room, max 2)",
+              "31,680"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "the-delight-swakopmund": {
+    "2026": {
+      "name": "The Delight Swakopmund",
+      "region": "Swakopmund",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin//family room – sharing: bed & breakfast pp/night.",
+              "1,987"
+            ],
+            [
+              "Single room: bed & breakfast pp/night.",
+              "2,483"
+            ],
+            [
+              "Tour guide room: bed & breakfast pp/night.",
+              "1,589.60"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "The Delight Swakopmund",
+      "region": "Swakopmund",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "2,021.76"
+            ],
+            [
+              "Room B&B — single",
+              "2,527.20"
+            ],
+            [
+              "Tour Guide Room (B&B)",
+              "2,021.76"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "the-pearls-beach-pods": {
+    "2026": {
+      "name": "The Pearls Beach Pods",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Per room/night, inclusive of food and beverage, max 2 pax/room",
+              "30,250"
+            ],
+            [
+              "Per room/night, inclusive of food and beverage, max 2 pax/room",
+              "30,250"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "The Pearls Beach Pods",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "The Jetty — F&B inclusive (per room, max 2)",
+              "29,040"
+            ],
+            [
+              "The Jetty — additional room (2 rooms)",
+              "17,424"
+            ],
+            [
+              "The Jetty — additional room (3 rooms)",
+              "11,616"
+            ],
+            [
+              "The Mole — F&B inclusive (per room, max 2)",
+              "29,040"
+            ],
+            [
+              "The Mole — additional room (2 rooms)",
+              "17,424"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "damara-mopane-lodge": {
+    "2026": {
+      "name": "Damara Mopane Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin room - sharing: bed & breakfast pp/night.",
+              "2,284"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "2,857"
+            ],
+            [
+              "Dinner (buffet) pp",
+              "415"
+            ],
+            [
+              "Lunch pp - pre-booked, alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Damara Mopane Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "2,302.08"
+            ],
+            [
+              "Room B&B — single",
+              "2,877.60"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "palmwag-lodge": {
+    "2026": {
+      "name": "Palmwag Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Standard room double/twin - sharing: bed & breakfast pp/night.",
+              "2,807"
+            ],
+            [
+              "Standard room - single: bed & breakfast pp/night.",
+              "3,508"
+            ],
+            [
+              "Comfort room double/twin/triple/family - sharing: bed & breakfast pp/night.",
+              "3,449"
+            ],
+            [
+              "Comfort room - single: bed & breakfast pp/night",
+              "4,309"
+            ],
+            [
+              "Dinner pp",
+              "415"
+            ],
+            [
+              "Lunch pp",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Palmwag Campsite pp/night– 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Palmwag Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Standard Room B&B — per person sharing",
+              "2,880"
+            ],
+            [
+              "Standard Room B&B — single",
+              "3,600"
+            ],
+            [
+              "Comfort Room B&B — per person sharing",
+              "3,538.56"
+            ],
+            [
+              "Comfort Room B&B — single",
+              "4,423.20"
+            ],
+            [
+              "Camping2Go (bed only) — per person sharing",
+              "1,104"
+            ],
+            [
+              "Camping2Go (bed only) — single",
+              "2,208"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "palmwag-camping2go": {
+    "2026": {
+      "name": "Palmwag Camping2Go",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Dinner pp - buffet at Palmwag Lodge",
+              "415"
+            ],
+            [
+              "Breakfast pp - buffet at Palmwag Lodge",
+              "284"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at Palmwag Lodge",
+              "226"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "palmwag-under-canvas-sleep-out": {
+    "2026": {
+      "name": "Palmwag Under-Canvas Sleep-Out",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Sharing/Single tent pp - meals, beverages, and activities as per itinerary below.",
+              "4,995"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "omarunga-epupa-falls-camp": {
+    "2026": {
+      "name": "Omarunga Epupa Falls Camp",
+      "region": "Epupa",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "2,525"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "3,155"
+            ],
+            [
+              "Dinner pp",
+              "415"
+            ],
+            [
+              "Lunch pp",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Omarunga Epupa Falls Campsite pp/night - 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Omarunga Epupa-Falls Camp",
+      "region": "Epupa",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "2,544"
+            ],
+            [
+              "Room B&B — single",
+              "3,180"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "etosha-safari-lodge": {
+    "2026": {
+      "name": "Etosha Safari Lodge",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "3,383"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "4,230"
+            ],
+            [
+              "Dinner (buffet) pp",
+              "572"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Etosha Safari Lodge",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "3,572.16"
+            ],
+            [
+              "Room B&B — single",
+              "4,465.20"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "the-ekipa-etosha-pod": {
+    "2026": {
+      "name": "The Ekipa Etosha Pod",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Per room/night, inclusive of food and beverage, max 2 pax/room",
+              "30,250"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "The Ekipa Etosha Pod",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Fully inclusive (per room, max 2)",
+              "31,680"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "etosha-safari-camping2go": {
+    "2026": {
+      "name": "Etosha Safari Camping2Go",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Dinner pp - buffet at Etosha Safari Camp",
+              "415"
+            ],
+            [
+              "Breakfast pp - buffet at Etosha Safari Camp",
+              "284"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at Etosha Safari Camp",
+              "228"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night – meals at Etosha Safari Camp",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Etosha Safari Camping2Go",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Camping2Go (bed only) — per person sharing",
+              "1,104"
+            ],
+            [
+              "Camping2Go (bed only) — single",
+              "2,208"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "etosha-king-nehale": {
+    "2026": {
+      "name": "Etosha King Nehale",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "3,625"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "4,528"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Lunch pp- alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Etosha King Nehale",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "3,163.20"
+            ],
+            [
+              "Room B&B — single",
+              "3,954"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "hakusembe-river-lodge": {
+    "2026": {
+      "name": "Hakusembe River Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "3,309"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "4,137"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Lunch - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Hakusembe River Campsite pp/night – 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Hakusembe River Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "3,494.40"
+            ],
+            [
+              "Room B&B — single",
+              "4,368"
+            ],
+            [
+              "Camping2Go (bed only) — per person sharing",
+              "1,104"
+            ],
+            [
+              "Camping2Go (bed only) — single",
+              "2,208"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "hakusembe-camping2go": {
+    "2026": {
+      "name": "Hakusembe Camping2Go",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Dinner pp - buffet at Hakusembe River Lodge",
+              "572"
+            ],
+            [
+              "Breakfast pp - buffet at Hakusembe River Lodge",
+              "284"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at Hakusembe River Lodge",
+              "228"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-river-lodge": {
+    "2026": {
+      "name": "Namushasha River Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "3,309"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "4,137"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Namushasha River Campsite pp/night– 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Namushasha River Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2027 season",
+      "note": "Public rack at the house rule of 20% above the net STO. This supplier does not state a commission on its rate sheet, so the house cap is used rather than a supplier figure — if they publish their own rack, it replaces this.",
+      "sections": [
+        {
+          "title": "2027 — rack",
+          "rows": [
+            [
+              "Room B&B — per person sharing",
+              "3,494.40"
+            ],
+            [
+              "Room B&B — single",
+              "4,368"
+            ],
+            [
+              "Camping2Go (bed only) — per person sharing",
+              "1,104"
+            ],
+            [
+              "Camping2Go (bed only) — single",
+              "2,208"
+            ],
+            [
+              "Campsite — per person per night",
+              "388.80"
+            ],
+            [
+              "Tour Guide Room (DBB)",
+              "951.60"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-river-camping2go": {
+    "2026": {
+      "name": "Namushasha Camping2Go",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Dinner pp - buffet at Namushasha River Lodge",
+              "572"
+            ],
+            [
+              "Breakfast pp - buffet at Namushasha River Lodge",
+              "284"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at Namushasha River Lodge",
+              "228"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-river-villa": {
+    "2026": {
+      "name": "Namushasha River Villa",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Per room/night, fully inclusive, max 2 pax/room",
+              "30,250"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "zambezi-mubala-camp": {
+    "2026": {
+      "name": "Zambezi Mubala Camp",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Zambezi Mubala Campsite pp/night– 10% commission",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Dinner pp - pre-booked, alternatively à la carte at the camp",
+              "415"
+            ],
+            [
+              "Breakfast pp - pre-booked, alternatively à la carte at the camp",
+              "284"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "zambezi-mubala-lodge": {
+    "2026": {
+      "name": "Zambezi Mubala Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/triple/family room - sharing: bed & breakfast pp/night.",
+              "3,309"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "4,138"
+            ],
+            [
+              "Dinner pp",
+              "572"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge",
+              "341"
+            ],
+            [
+              "Lunch pack pp",
+              "226"
+            ],
+            [
+              "Tour guide room: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "chobe-river-camp": {
+    "2026": {
+      "name": "Chobe River Camp",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Double/twin/family room - sharing: bed & breakfast pp/night.",
+              "2,364"
+            ],
+            [
+              "Single room: bed & breakfast pp/night",
+              "2,955"
+            ],
+            [
+              "Dinner pp - buffet",
+              "415"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at the lodge.",
+              "228"
+            ],
+            [
+              "Full 3 Course Lunch pp - alternatively à la carte at the lodge.",
+              "341"
+            ],
+            [
+              "Breakfast (if prebooked by tour operator) pp (alternatively à la carte menu available at camp)",
+              "341"
+            ],
+            [
+              "Lunch pack pp.",
+              "226"
+            ],
+            [
+              "Chobe River Campsite pp/night– 10% commission",
+              "341"
+            ],
+            [
+              "Tour guide tent: dinner, bed & breakfast pp/night.",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namushasha-camping2go": {
+    "2026": {
+      "name": "Namushasha Camping2go",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Published rack rates from the Gondwana Collection 2026 rate sheet (01.11.2025–31.10.2026).",
+      "sections": [
+        {
+          "title": "2026 season — rack",
+          "rows": [
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - sharing: bed only, pp/night.",
+              "1,084"
+            ],
+            [
+              "Camping2Go - Self-catering tents with en-suite bathrooms - single: bed only, pp/night.",
+              "2,166"
+            ],
+            [
+              "Dinner pp - buffet at Namushasha River Lodge",
+              "572"
+            ],
+            [
+              "Breakfast pp - buffet at Namushasha River Lodge",
+              "284"
+            ],
+            [
+              "Lunch pp - alternatively à la carte at Namushasha River Lodge",
+              "228"
+            ],
+            [
+              "Tour guide tent: dinner, bed, and breakfast pp/night",
+              "721"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+});
+// One source per lodge: the sheet supersedes the earlier recovered entries.
+["okapuka-safari-lodge", "the-weinberg-windhoek", "weinberg-urban-pod", "kalahari-anib-lodge", "kalahari-camping2go", "reverie-kalahari-pod", "kalahari-farmhouse", "canyon-lodge", "canyon-village", "canyon-roadhouse", "namib-desert-lodge", "namib-dune-star-camp", "the-desert-grace", "desert-whisper", "the-delight-swakopmund", "the-pearls-beach-pods", "damara-mopane-lodge", "palmwag-lodge", "palmwag-camping2go", "palmwag-under-canvas-sleep-out", "omarunga-epupa-falls-camp", "etosha-safari-lodge", "the-ekipa-etosha-pod", "etosha-safari-camping2go", "etosha-king-nehale", "hakusembe-river-lodge", "hakusembe-camping2go", "namushasha-river-lodge", "namushasha-river-camping2go", "namushasha-river-villa", "zambezi-mubala-camp", "zambezi-mubala-lodge", "chobe-river-camp", "namushasha-camping2go"].forEach(function (s) { delete LEGACY_RACK_BY_YEAR[s]; delete SHEET_RACK_BY_YEAR[s]; });
