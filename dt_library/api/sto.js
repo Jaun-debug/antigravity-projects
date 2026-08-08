@@ -21280,3 +21280,496 @@ Object.assign(DDS_STO_BY_YEAR, {
 });
 // One source per lodge: the sheet supersedes the earlier recovered entries.
 ["okapuka-safari-lodge", "the-weinberg-windhoek", "weinberg-urban-pod", "kalahari-anib-lodge", "kalahari-camping2go", "reverie-kalahari-pod", "kalahari-farmhouse", "canyon-lodge", "canyon-village", "canyon-roadhouse", "namib-desert-lodge", "namib-dune-star-camp", "the-desert-grace", "desert-whisper", "the-delight-swakopmund", "the-pearls-beach-pods", "damara-mopane-lodge", "palmwag-lodge", "palmwag-camping2go", "palmwag-under-canvas-sleep-out", "omarunga-epupa-falls-camp", "etosha-safari-lodge", "the-ekipa-etosha-pod", "etosha-safari-camping2go", "etosha-king-nehale", "hakusembe-river-lodge", "hakusembe-camping2go", "namushasha-river-lodge", "namushasha-river-camping2go", "namushasha-river-villa", "zambezi-mubala-camp", "zambezi-mubala-lodge", "chobe-river-camp", "namushasha-camping2go"].forEach(function (s) { delete LEGACY_STO_BY_YEAR[s]; delete SHEET_STO_BY_YEAR[s]; });
+
+// ---------------------------------------------------------------------------
+// Gondwana Collection — lodge ACTIVITIES, 2026 season.
+//
+// Taken as printed from the collection sheet, which prints rack and STO side
+// by side; nothing here is derived. Note the commission: the sheet heads these
+// tables "Activities -- STO 25%", so they run at 25%, NOT the 20% the rooms
+// carry. Deriving these at 20% would overstate the net on every row.
+//
+// Rows printed "Free", "Included" or "On request" are carried as printed. They
+// parse to no number, so they show on the lodge page in the sectioned view but
+// never reach the builder as a quotable line — which is correct.
+//
+// One row is not at 25%: Omarunga Epupa-Falls Camp's fly-in day visit prints
+// 1,860.00 / 1,350.00, which is 27.42%. Loaded as printed and flagged rather
+// than "corrected" to a number the supplier never published.
+//
+// Appended after the map cleanup at the end of this file, so it lands on
+// whichever map actually serves each lodge.
+// ---------------------------------------------------------------------------
+;(function () {
+  var ACTS = {
+    "okapuka-safari-lodge": [
+      [
+        "Sunrise Drive (guided, +/-2.5hrs, refreshments)",
+        "701.25"
+      ],
+      [
+        "Game Drive (guided, +/-2hrs, refreshments)",
+        "701.25"
+      ],
+      [
+        "Sunset Drive (guided, +/-2.5hrs, refreshments)",
+        "701.25"
+      ]
+    ],
+    "canyon-lodge": [
+      [
+        "Canyon Drive -- guided to Fish River lookouts incl. refreshments and park fees (3hrs)",
+        "1,200.00"
+      ],
+      [
+        "Sundowner Drive in Canyon Park -- guided, refreshments (2-3hrs)",
+        "652.50"
+      ],
+      [
+        "Sunrise Hike -- guided, coffee and tea (3hrs)",
+        "401.25"
+      ],
+      [
+        "Morning Walk -- guided, 6km into Canyon Park (2-3hrs)",
+        "213.75"
+      ],
+      [
+        "Night Walk -- guided, 45min (direct booking only)",
+        "217.50"
+      ],
+      [
+        "Transfer Canyon Lodge to Hiker Point/Hobas (max 6 pax)",
+        "1,440.00"
+      ],
+      [
+        "Transfer Canyon Lodge to Ai-Ais (max 6 pax)",
+        "2,880.00"
+      ]
+    ],
+    "canyon-village": [
+      [
+        "Canyon Drive -- guided to Fish River lookouts (3hrs)",
+        "1,200.00"
+      ],
+      [
+        "Sundowner Drive in Canyon Park (2-3hrs)",
+        "652.50"
+      ],
+      [
+        "Sunrise Hike (3hrs)",
+        "401.25"
+      ],
+      [
+        "Morning Walk (2-3hrs)",
+        "213.75"
+      ]
+    ],
+    "namib-desert-lodge": [
+      [
+        "Sundowner Dune Drive -- guided, min 4 pax, 2-3hrs, refreshments",
+        "701.25"
+      ],
+      [
+        "Morning Dune Drive -- guided, min 4 pax, 2-3hrs, refreshments",
+        "566.25"
+      ],
+      [
+        "Sossusvlei Excursion -- guided, incl. park fees and brunch, 5-6hrs",
+        "2,265.00"
+      ],
+      [
+        "Desert Night Walk -- guided, 45min (direct booking only)",
+        "290.00"
+      ],
+      [
+        "Hiking Trails -- unguided",
+        "Free"
+      ]
+    ],
+    "the-desert-grace": [
+      [
+        "Morning or Sundowner Dune Drive -- guided, 2-3hrs, refreshments",
+        "701.25"
+      ],
+      [
+        "Sossusvlei Excursion -- guided, incl. park fees and brunch, 5-6hrs",
+        "2,265.00"
+      ],
+      [
+        "Desert Night Walk -- guided, 45min (direct booking only)",
+        "290.00"
+      ],
+      [
+        "Walking Trails 3km/5km/7km -- unguided",
+        "Free"
+      ]
+    ],
+    "etosha-safari-lodge": [
+      [
+        "Morning or Afternoon Half-Day Etosha Excursion -- guided, 9-seater, 5-6hrs",
+        "742.50"
+      ],
+      [
+        "Full-Day Etosha Excursion -- guided, 9-seater, 9hrs",
+        "1,500.00"
+      ],
+      [
+        "Guided Walks 2-3.5km -- mopane woodland, 1-2hrs",
+        "445.00"
+      ],
+      [
+        "Transfer to Okutala Airstrip -- return",
+        "560.00"
+      ]
+    ],
+    "kalahari-anib-lodge": [
+      [
+        "Sunrise / Sundowner Drive (guided, 3hrs, refreshments)",
+        "701.25"
+      ],
+      [
+        "Dune Walk (guided, 2hrs, morning only, refreshments)",
+        "701.25"
+      ],
+      [
+        "Morning Drive for Families (guided, 2hrs)",
+        "566.25"
+      ],
+      [
+        "Desert Night Walk (45min -- direct booking only)",
+        "290.00"
+      ],
+      [
+        "Hiking Trails (unguided)",
+        "Free"
+      ]
+    ],
+    "reverie-kalahari-pod": [
+      [
+        "Sunrise / Sundowner Dune Drive (guided, 3hrs)",
+        "Included"
+      ],
+      [
+        "Dune Walk (guided, 2hrs)",
+        "Included"
+      ],
+      [
+        "Hiking Trails (unguided)",
+        "Free of charge"
+      ]
+    ],
+    "damara-mopane-lodge": [
+      [
+        "Birding Morning or Afternoon Walk (guided, 1-1.5hrs)",
+        "187.50"
+      ],
+      [
+        "Sundowner Walk to viewing platform (escorted -- drinks charged to room)",
+        "Free"
+      ],
+      [
+        "Mountain or Valley Hiking Trails (unguided, marked)",
+        "Free"
+      ]
+    ],
+    "palmwag-lodge": [
+      [
+        "Half-Day Scenic Drive (guided, 3hrs, refreshments)",
+        "1,016.25"
+      ],
+      [
+        "Full-Day Damaraland Excursion (guided, min 4 pax, full day)",
+        "2,666.25"
+      ],
+      [
+        "Morning Hike 2km (guided, 1.5hrs)",
+        "300.00"
+      ],
+      [
+        "Morning Hike 5km (guided, 3hrs)",
+        "363.75"
+      ],
+      [
+        "Half-Day Rhino Tracking (guided, min 2 pax -- not for under 12)",
+        "2,981.25"
+      ],
+      [
+        "Welwitschia Walk (unguided, 1.5hrs)",
+        "Free"
+      ],
+      [
+        "Airstrip Transfer -- return (free of charge)",
+        "Free"
+      ]
+    ],
+    "palmwag-camping2go": [
+      [
+        "Half-Day Scenic Drive (guided, 3hrs)",
+        "1,016.25"
+      ],
+      [
+        "Full-Day Damaraland Excursion (guided, min 4 pax)",
+        "2,666.25"
+      ],
+      [
+        "Half-Day Rhino Tracking (guided, min 2 pax -- not for under 12)",
+        "2,981.25"
+      ]
+    ],
+    "omarunga-epupa-falls-camp": [
+      [
+        "Himba Village Visit (guided, 3-4hrs, refreshments included)",
+        "896.25"
+      ],
+      [
+        "Sundowner Walk above Epupa Falls (guided, 2hrs, snacks and drinks)",
+        "356.25"
+      ],
+      [
+        "Kunene River Walk (guided, 2hrs)",
+        "333.75"
+      ],
+      [
+        "Fly-In Day Visit -- Himba village and Epupa Falls excursion",
+        "1,350.00"
+      ],
+      [
+        "River Rafting on the Kunene (guided, 2.5hrs)",
+        "On request"
+      ],
+      [
+        "Transfer to Epupa Airstrip return (max 6 pax per vehicle, 3km)",
+        "1,210.00 per vehicle"
+      ]
+    ],
+    "etosha-safari-camping2go": [
+      [
+        "Half-Day Etosha Excursion (guided, 24-seater, 5-6hrs)",
+        "742.50"
+      ],
+      [
+        "Full-Day Etosha Excursion (guided, 24-seater, 9hrs)",
+        "1,500.00"
+      ]
+    ],
+    "the-ekipa-etosha-pod": [
+      [
+        "Morning or Afternoon Half-Day Etosha Excursion (guided, 4x4, 5-6hrs, park fees included)",
+        "Included"
+      ],
+      [
+        "Full-Day Etosha Excursion (guided, 4x4, 9hrs, park fees included)",
+        "Included"
+      ],
+      [
+        "Guided Walks 2-3.5km -- mopane woodland",
+        "Included"
+      ],
+      [
+        "Transfer to Okutala Airstrip return",
+        "560.00 n.c."
+      ]
+    ],
+    "hakusembe-river-lodge": [
+      [
+        "Sunset Boat Cruise (guided, 1.5hrs, refreshments)",
+        "345.00"
+      ],
+      [
+        "Morning Boat Cruise -- Bird Lovers (guided, 1.5hrs, refreshments)",
+        "345.00"
+      ],
+      [
+        "Fishing Trip (guided, per hour, min/max 2 per boat -- catch and release)",
+        "290.00 p/h"
+      ],
+      [
+        "Transfer Hakusembe to Rundu Airport return (min 2 pax, 10km)",
+        "350.00"
+      ]
+    ],
+    "namushasha-river-lodge": [
+      [
+        "Bwabwata National Park Drive (guided, 3hrs, incl. park fees and boat)",
+        "847.50"
+      ],
+      [
+        "Afternoon Boat Cruise on Kwando (guided, 3hrs, refreshments)",
+        "738.75"
+      ],
+      [
+        "Sundowner Boat Cruise (guided, 1.5hrs, refreshments)",
+        "457.50"
+      ],
+      [
+        "Morning Boat Cruise (guided, 1.5hrs, refreshments)",
+        "457.50"
+      ],
+      [
+        "Fishing Trip (guided, per hour, catch-and-release)",
+        "385.00 p/h"
+      ],
+      [
+        "Transfer to Katima Mpacha Airport return (120km)",
+        "1,005.00"
+      ],
+      [
+        "Transfer to Lianshulu return (25km)",
+        "330.00"
+      ],
+      [
+        "Package Transfer -- Airport and 3 Zambezi properties return",
+        "1,170.00"
+      ]
+    ],
+    "canyon-roadhouse": [
+      [
+        "Hiking Trail (unguided, 2-3hrs, marked trail)",
+        "Free of charge"
+      ],
+      [
+        "4x4 Garas Self-Drive through Canyon Park (park fee applies)",
+        "Park fees only"
+      ],
+      [
+        "Canyon Drive to Fish River lookouts (guided, 3hrs)",
+        "1,200.00"
+      ],
+      [
+        "Sundowner Drive in Canyon Park (guided, 2-3hrs)",
+        "652.50"
+      ],
+      [
+        "Sunrise Hike (guided, 3hrs)",
+        "401.25"
+      ],
+      [
+        "Morning Walk (guided, 2-3hrs)",
+        "213.75"
+      ]
+    ],
+    "zambezi-mubala-camp": [
+      [
+        "Sundowner Boat Cruise (guided, 1.5hrs, refreshments)",
+        "345.00"
+      ],
+      [
+        "Morning or Afternoon Boat Cruise (guided, 3hrs, refreshments)",
+        "592.50"
+      ],
+      [
+        "Nature Walk to bird colonies (guided, 3hrs, seasonal -- direct booking)",
+        "305.00"
+      ],
+      [
+        "Fishing Trip (guided, per hour, catch-and-release)",
+        "385.00 p/h"
+      ],
+      [
+        "Transfer to Katima Mpacha Airport return (50km)",
+        "505.00"
+      ],
+      [
+        "Package Transfer -- Airport and 3 Zambezi properties return",
+        "1,170.00"
+      ]
+    ],
+    "zambezi-mubala-lodge": [
+      [
+        "Sundowner Boat Cruise (guided, 1.5hrs, refreshments)",
+        "345.00"
+      ],
+      [
+        "Morning or Afternoon Boat Cruise (guided, 3hrs, refreshments)",
+        "592.50"
+      ],
+      [
+        "Nature Walk to bird colonies (guided, 3hrs, seasonal)",
+        "305.00"
+      ],
+      [
+        "Fishing Trip (guided, per hour, catch-and-release)",
+        "385.00 p/h"
+      ],
+      [
+        "Transfer to Katima Mpacha Airport return (50km)",
+        "505.00"
+      ],
+      [
+        "Package Transfer -- Airport and 3 Zambezi properties return",
+        "1,170.00"
+      ]
+    ],
+    "chobe-river-camp": [
+      [
+        "Morning or Afternoon Boat Cruise (guided, seasonal, 3hrs)",
+        "738.75"
+      ],
+      [
+        "Sundowner Boat Cruise (guided, seasonal, 2hrs)",
+        "397.50"
+      ],
+      [
+        "Walking Trail (guided, seasonal, 1-2hrs -- direct booking only)",
+        "341.25"
+      ],
+      [
+        "Canoe Trip (guided, 1.5hrs, refreshments -- direct booking only)",
+        "416.25"
+      ],
+      [
+        "Birding Drive (guided, 3hrs, refreshments -- direct booking only)",
+        "382.50"
+      ],
+      [
+        "Transfer to Katima Mpacha Airport return (90km)",
+        "840.00"
+      ],
+      [
+        "Package Transfer -- Airport and 3 Zambezi properties return",
+        "1,170.00"
+      ]
+    ],
+    "etosha-king-nehale": [
+      [
+        "Half-Day Etosha Excursion -- guided, 9-seater, 5-6hrs",
+        "742.50"
+      ],
+      [
+        "Full-Day Etosha Excursion -- guided, 9-seater, 9hrs",
+        "1,500.00"
+      ],
+      [
+        "Private Waterhole Excursion -- King Nehale guests only, guided, 3hrs, incl. snacks",
+        "1,125.00"
+      ],
+      [
+        "Cultural Experience -- guided, 9hrs",
+        "888.75"
+      ],
+      [
+        "Transfer to/from Ondangwa -- one way, 9-seater (102km)",
+        "1,980.00 per vehicle"
+      ],
+      [
+        "Transfer to/from Mokuti -- one way, 9-seater (58km)",
+        "1,035.00 per vehicle"
+      ],
+      [
+        "Transfer to/from Mushara -- one way, 9-seater (65km)",
+        "1,145.00 per vehicle"
+      ]
+    ]
+  };
+  var MAPS = [DDS_STO_BY_YEAR, LEGACY_STO_BY_YEAR, SHEET_STO_BY_YEAR];
+  Object.keys(ACTS).forEach(function (slug) {
+    for (var i = 0; i < MAPS.length; i++) {
+      var m = MAPS[i];
+      var doc = m && m[slug] && m[slug]["2026"];
+      if (!doc || !Array.isArray(doc.sections)) continue;
+      if (doc.sections.some(function (s) { return /^Activities/i.test(s.title || ""); })) return;
+      doc.sections.push({ title: "Activities — 25% commission", rows: ACTS[slug] });
+      return;
+    }
+  });
+})();
