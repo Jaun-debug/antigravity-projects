@@ -22334,3 +22334,1089 @@ Object.assign(DDS_RACK_BY_YEAR, {
     DDS_RACK_BY_YEAR[slug] = { "2026": NWR[slug] };
   });
 })();
+
+// ---------------------------------------------------------------------------
+// Namibia Wildlife Resorts — 2026 season, rebuilt from the NWR rate sheet.
+//
+// NWR publishes RACK ONLY and allows Desert Tracks 10%. The house treatment,
+// which applies to NWR and to nothing else:
+//
+//     our net STO   = NWR published rack  x 0.90
+//     our public rack = our net STO       x 1.20
+//
+// These properties previously carried a doc keyed "2027". Those figures were
+// correct under the rule above but the YEAR was wrong: every one of the 130
+// values was this 2025/2026 sheet, and NWR has published no 2027 season at all.
+// (0.90 x 1.20 = 1.08, which is why they looked like a 2026 sheet escalated 8%.)
+// The 2027 keys are removed so a visitor asking for 2027 gets an honest
+// "rates to follow" instead of last season priced as next season.
+//
+// Halali Resort and Namutoni Resort get rates here for the first time — both
+// have had live pages and no doc in either API.
+//
+// Activities follow the sheet, not the house rule: it states "game drives
+// commissionable at 10% when pre-booked" and everything else non-commissionable,
+// so drives take the same x0.90 / x1.20 treatment and every other row carries
+// rack = net as printed. Rows reading "Rates on request" are carried as printed.
+// ---------------------------------------------------------------------------
+;(function () {
+  var NWR = {
+    "boplaas-campsite": {
+      "name": "Boplaas Campsite",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8 people) -- per person 110 — per person sharing",
+              "118.8"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Kayak half-day trip (min 4, max 30)",
+              "400 per person"
+            ],
+            [
+              "Kayak Hire",
+              "150 per person"
+            ],
+            [
+              "Overnight trails",
+              "1,800 per person"
+            ],
+            [
+              "3-day trails (booked in advance)",
+              "4,300 per person"
+            ],
+            [
+              "Rental of a canoe (max 2)",
+              "150 per canoe"
+            ]
+          ]
+        }
+      ]
+    },
+    "hobas-lodge": {
+      "name": "Hobas Lodge",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person sharing",
+              "518.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — single",
+              "518.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "2,041.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "2,322"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "2,527.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,527.2"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Fish River Canyon hiking trail (min 3, max 30)",
+              "540 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-ais-hot-springs-and-spa": {
+      "name": "/Ai-/Ais Hot Springs and Spa",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "421.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "421.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Mountain view double (2 beds) BB — per person sharing",
+              "1,468.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Mountain view double (2 beds) BB — single",
+              "1,771.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Mountain view double (2 beds) BB — per person sharing",
+              "1,771.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Mountain view double (2 beds) BB — single",
+              "2,062.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River view double (2 beds) BB — per person sharing",
+              "1,771.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River view double (2 beds) BB — single",
+              "2,062.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River view double (2 beds) BB — per person sharing",
+              "2,160"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River view double (2 beds) BB — single",
+              "2,462.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush family chalet (4 beds, min 2) Bed only — per person sharing",
+              "1,965.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush family chalet (4 beds, min 2) Bed only — per person sharing",
+              "2,354.4"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Nature drive (morning or afternoon)",
+              "650 per person"
+            ],
+            [
+              "Guided nature walk",
+              "300 per person"
+            ],
+            [
+              "Shuttle Service (/Ai-/Ais to Hobas)",
+              "500 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "gross-barmen-resort": {
+      "name": "Gross Barmen Resort",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person sharing",
+              "259.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier chalet BB — per person camping",
+              "2,872.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier chalet BB — per person camping",
+              "3,078"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet BB — per person camping",
+              "1,436.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet BB — per person camping",
+              "1,641.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person camping",
+              "2,160"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier family chalet (4 beds, min 2) BB — per person camping",
+              "2,872.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Self-catering Acacia (4 beds, min 2) Bed only — per person camping",
+              "1,274.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Self-catering Aloe (2 beds, min 2) Bed only — per person camping",
+              "1,274.4"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Hiking",
+              "200 per person"
+            ],
+            [
+              "Day visitor fee (Picnic and Olympic swimming pool)",
+              "200 per person"
+            ],
+            [
+              "Day visitor surcharge to access thermal pool",
+              "100 per person"
+            ],
+            [
+              "Conference facility",
+              "Rates on request"
+            ]
+          ]
+        }
+      ]
+    },
+    "halali-resort": {
+      "name": "Halali Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "496.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "594"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — per person sharing",
+              "1,512"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — single",
+              "1,641.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — per person sharing",
+              "1,825.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — single",
+              "2,246.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,663.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "2,246.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,663.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,911.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "2,246.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,484"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "1,663.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — single",
+              "1,911.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "2,246.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — single",
+              "2,484"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "2,570.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "2,646"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon suite (double bed) BB — per person sharing",
+              "1,998"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon suite (double bed) BB — single",
+              "2,246.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon suite (double bed) BB — per person sharing",
+              "2,991.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon suite (double bed) BB — single",
+              "3,240"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "702 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "702 per person"
+            ],
+            [
+              "Guided night drives",
+              "810 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "okaukuejo-camp": {
+      "name": "Okaukuejo Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "496.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "604.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room A (2 beds) BB — per person sharing",
+              "2,052"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room A (2 beds) BB — single",
+              "2,300.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room A (2 beds) BB — per person sharing",
+              "2,570.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room A (2 beds) BB — single",
+              "2,991.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room B (2 beds) BB — per person sharing",
+              "2,052"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room B (2 beds) BB — single",
+              "2,300.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room B (2 beds) BB — per person sharing",
+              "2,570.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room B (2 beds) BB — single",
+              "2,991.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "2,052"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — single",
+              "2,300.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "2,732.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — single",
+              "3,164.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "2,386.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "2,646"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "2,894.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "3,337.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "2,300.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "3,078"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Waterhole chalet (2 beds) BB — per person sharing",
+              "2,570.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Waterhole chalet (2 beds) BB — single",
+              "2,829.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Waterhole chalet (2 beds) BB — per person sharing",
+              "3,758.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Waterhole chalet (2 beds) BB — single",
+              "4,179.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier Waterhole Chalet (double story, 4 beds, min 2) BB — per person sharing",
+              "4,276.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier Waterhole Chalet (double story, 4 beds, min 2) BB — per person sharing",
+              "6,404.4"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "702 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "702 per person"
+            ],
+            [
+              "Guided night drives",
+              "810 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "namutoni-resort": {
+      "name": "Namutoni Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "496.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "594"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room (2 beds) BB — per person sharing",
+              "1,987.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room (2 beds) BB — single",
+              "1,987.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room (2 beds) BB — per person sharing",
+              "2,494.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room (2 beds) BB — single",
+              "2,743.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush Chalet (2 beds) BB — per person sharing",
+              "2,332.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush Chalet (2 beds) BB — single",
+              "2,332.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush Chalet (2 beds) BB — per person sharing",
+              "2,894.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush Chalet (2 beds) BB — single",
+              "3,148.2"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "702 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "702 per person"
+            ],
+            [
+              "Guided night drives",
+              "810 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "waterberg-camp": {
+      "name": "Waterberg Camp",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "464.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "464.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — per person sharing",
+              "1,188"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — single",
+              "1,458"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — per person sharing",
+              "1,382.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — single",
+              "1,652.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,447.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,728"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "1,674"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "1,944"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,447.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,641.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,641.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,900.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,771.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — single",
+              "2,041.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,965.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — single",
+              "2,246.4"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "702 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "702 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "popa-falls-resort": {
+      "name": "Popa Falls Resort",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) overlander — per person camping",
+              "183.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) overlander — per person camping",
+              "183.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River cabins (2 beds) BB — per person sharing",
+              "1,641.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River cabins (2 beds) BB — single",
+              "1,900.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River cabins (2 beds) BB — per person sharing",
+              "2,052"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River cabins (2 beds) BB — single",
+              "2,322"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,468.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,738.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "1,825.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,095.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,468.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,641.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,641.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,900.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,771.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — single",
+              "2,041.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,965.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — single",
+              "2,246.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Luxury river cabins BB — per person sharing",
+              "1,965.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Luxury river cabins BB — single",
+              "2,224.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Luxury river cabins BB — per person sharing",
+              "2,354.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Luxury river cabins BB — single",
+              "2,613.6"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family House (6 beds, min 3) BB — per person sharing",
+              "1,641.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family House (6 beds, min 3) BB — per person sharing",
+              "2,052"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "594 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "594 per person"
+            ],
+            [
+              "Exclusive Full Day Boat Cruise",
+              "750 per person"
+            ],
+            [
+              "Boat Cruise (Morning or Afternoon)",
+              "350 per person"
+            ],
+            [
+              "Day visitor fee -- Namibians",
+              "20 per person"
+            ],
+            [
+              "Day visitor fee -- Others",
+              "30 per person"
+            ],
+            [
+              "Conference facility",
+              "Rates on request"
+            ]
+          ]
+        }
+      ]
+    },
+    "sossus-dune-lodge": {
+      "name": "Sossus Dune Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Dune chalet (2 beds) DBB — per person sharing",
+              "4,352.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Dune chalet (2 beds) DBB — single",
+              "4,752"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Dune chalet (2 beds) DBB — per person sharing",
+              "7,560"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Dune chalet (2 beds) DBB — single",
+              "7,970.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon chalet (double bed) DBB — per person sharing",
+              "4,957.2"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon chalet (double bed) DBB — single",
+              "5,356.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon chalet (double bed) DBB — per person sharing",
+              "8,348.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon chalet (double bed) DBB — single",
+              "8,758.8"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided Game/Nature Drive (Park or Vlei, anytime)",
+              "810 per person"
+            ],
+            [
+              "Guided excursion to Elim Dune",
+              "440 per person"
+            ],
+            [
+              "Guided walks to Sesriem Canyon",
+              "440 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "onkoshi-camp": {
+      "name": "Onkoshi Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi chalet (2 beds) DBB — per person sharing",
+              "3,434.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi chalet (2 beds) DBB — single",
+              "3,769.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi chalet (2 beds) DBB — per person sharing",
+              "4,665.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi chalet (2 beds) DBB — single",
+              "5,000.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi honeymoon chalet (king-size) DBB — per person sharing",
+              "3,844.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi honeymoon chalet (king-size) DBB — single",
+              "4,190.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi honeymoon chalet (king-size) DBB — per person sharing",
+              "5,508"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi honeymoon chalet (king-size) DBB — single",
+              "5,832"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "702 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "702 per person"
+            ],
+            [
+              "Guided night drives",
+              "810 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "dolomite-camp": {
+      "name": "Dolomite Camp",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) DBB — per person sharing",
+              "3,434.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) DBB — single",
+              "3,769.2"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) DBB — per person sharing",
+              "4,665.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) DBB — single",
+              "5,000.4"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Deluxe chalet (double bed) DBB — per person sharing",
+              "3,844.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Deluxe chalet (double bed) DBB — single",
+              "4,190.4"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Deluxe chalet (double bed) DBB — per person sharing",
+              "5,508"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Deluxe chalet (double bed) DBB — single",
+              "5,832"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "702 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "702 per person"
+            ],
+            [
+              "Guided night drives",
+              "810 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "naukluft-camp": {
+      "name": "Naukluft Camp",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Namibia Wildlife Resorts publishes rack only and allows Desert Tracks 10%. Net STO is NWR rack less 10%; the figure shown here is that net grossed up by 20%, which is the public rack. NWR has not published a 2027 season, so no 2027 rates exist for this property.",
+      "sections": [
+        {
+          "title": "2026 — rack",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 5) — per person camping",
+              "496.8"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 5) — per person camping",
+              "496.8"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,566"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,857.6"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "2,160"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,462.4"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided Kluft Walk",
+              "400 per person"
+            ],
+            [
+              "Naukluft Hiking Trail -- 4 days",
+              "400 per person"
+            ],
+            [
+              "Naukluft Hiking Trail -- 8 days",
+              "800 per person"
+            ]
+          ]
+        }
+      ]
+    }
+  };
+  var LOWER = [LEGACY_RACK_BY_YEAR, SHEET_RACK_BY_YEAR, VF_RACK];
+  Object.keys(NWR).forEach(function (slug) {
+    // one source per lodge: clear every older copy, then install 2026 on top
+    LOWER.forEach(function (m) { if (m && m[slug]) { try { delete m[slug]; } catch (e) {} } });
+    DDS_RACK_BY_YEAR[slug] = { "2026": NWR[slug] };
+  });
+})();

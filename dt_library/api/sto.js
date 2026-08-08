@@ -22872,3 +22872,1102 @@ Object.assign(DDS_STO_BY_YEAR, {
     DDS_STO_BY_YEAR[slug] = { "2026": NWR[slug] };
   });
 })();
+
+// ---------------------------------------------------------------------------
+// Namibia Wildlife Resorts — 2026 season, rebuilt from the NWR rate sheet.
+//
+// NWR publishes RACK ONLY and allows Desert Tracks 10%. The house treatment,
+// which applies to NWR and to nothing else:
+//
+//     our net STO   = NWR published rack  x 0.90
+//     our public rack = our net STO       x 1.20
+//
+// These properties previously carried a doc keyed "2027". Those figures were
+// correct under the rule above but the YEAR was wrong: every one of the 130
+// values was this 2025/2026 sheet, and NWR has published no 2027 season at all.
+// (0.90 x 1.20 = 1.08, which is why they looked like a 2026 sheet escalated 8%.)
+// The 2027 keys are removed so a visitor asking for 2027 gets an honest
+// "rates to follow" instead of last season priced as next season.
+//
+// Halali Resort and Namutoni Resort get rates here for the first time — both
+// have had live pages and no doc in either API.
+//
+// Activities follow the sheet, not the house rule: it states "game drives
+// commissionable at 10% when pre-booked" and everything else non-commissionable,
+// so drives take the same x0.90 / x1.20 treatment and every other row carries
+// rack = net as printed. Rows reading "Rates on request" are carried as printed.
+// ---------------------------------------------------------------------------
+;(function () {
+  var NWR = {
+    "boplaas-campsite": {
+      "name": "Boplaas Campsite",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8 people) -- per person 110 — per person sharing",
+              "99"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Kayak half-day trip (min 4, max 30)",
+              "400 per person"
+            ],
+            [
+              "Kayak Hire",
+              "150 per person"
+            ],
+            [
+              "Overnight trails",
+              "1,800 per person"
+            ],
+            [
+              "3-day trails (booked in advance)",
+              "4,300 per person"
+            ],
+            [
+              "Rental of a canoe (max 2)",
+              "150 per canoe"
+            ]
+          ]
+        }
+      ]
+    },
+    "hobas-lodge": {
+      "name": "Hobas Lodge",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person sharing",
+              "432"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — single",
+              "432"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,701"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,935"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "2,106"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,106"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Fish River Canyon hiking trail (min 3, max 30)",
+              "540 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-ais-hot-springs-and-spa": {
+      "name": "/Ai-/Ais Hot Springs and Spa",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "351"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "351"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Mountain view double (2 beds) BB — per person sharing",
+              "1,224"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Mountain view double (2 beds) BB — single",
+              "1,476"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Mountain view double (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Mountain view double (2 beds) BB — single",
+              "1,719"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River view double (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River view double (2 beds) BB — single",
+              "1,719"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River view double (2 beds) BB — per person sharing",
+              "1,800"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River view double (2 beds) BB — single",
+              "2,052"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush family chalet (4 beds, min 2) Bed only — per person sharing",
+              "1,638"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush family chalet (4 beds, min 2) Bed only — per person sharing",
+              "1,962"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Nature drive (morning or afternoon)",
+              "650 per person"
+            ],
+            [
+              "Guided nature walk",
+              "300 per person"
+            ],
+            [
+              "Shuttle Service (/Ai-/Ais to Hobas)",
+              "500 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "gross-barmen-resort": {
+      "name": "Gross Barmen Resort",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person sharing",
+              "216"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier chalet BB — per person camping",
+              "2,394"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier chalet BB — per person camping",
+              "2,565"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet BB — per person camping",
+              "1,197"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet BB — per person camping",
+              "1,368"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person camping",
+              "1,800"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier family chalet (4 beds, min 2) BB — per person camping",
+              "2,394"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Self-catering Acacia (4 beds, min 2) Bed only — per person camping",
+              "1,062"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Self-catering Aloe (2 beds, min 2) Bed only — per person camping",
+              "1,062"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Hiking",
+              "200 per person"
+            ],
+            [
+              "Day visitor fee (Picnic and Olympic swimming pool)",
+              "200 per person"
+            ],
+            [
+              "Day visitor surcharge to access thermal pool",
+              "100 per person"
+            ],
+            [
+              "Conference facility",
+              "Rates on request"
+            ]
+          ]
+        }
+      ]
+    },
+    "halali-resort": {
+      "name": "Halali Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "414"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "495"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — per person sharing",
+              "1,260"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — single",
+              "1,368"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — per person sharing",
+              "1,521"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — single",
+              "1,872"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,386"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,872"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,386"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,593"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "1,872"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,070"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "1,386"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — single",
+              "1,593"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "1,872"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — single",
+              "2,070"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "2,205"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon suite (double bed) BB — per person sharing",
+              "1,665"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon suite (double bed) BB — single",
+              "1,872"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon suite (double bed) BB — per person sharing",
+              "2,493"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon suite (double bed) BB — single",
+              "2,700"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "okaukuejo-camp": {
+      "name": "Okaukuejo Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "414"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "504"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room A (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room A (2 beds) BB — single",
+              "1,917"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room A (2 beds) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room A (2 beds) BB — single",
+              "2,493"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room B (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room B (2 beds) BB — single",
+              "1,917"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room B (2 beds) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room B (2 beds) BB — single",
+              "2,493"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet disabled (2 beds) BB — single",
+              "1,917"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — per person sharing",
+              "2,277"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet disabled (2 beds) BB — single",
+              "2,637"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,989"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "2,205"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "2,412"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,781"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,917"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "2,565"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Waterhole chalet (2 beds) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Waterhole chalet (2 beds) BB — single",
+              "2,358"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Waterhole chalet (2 beds) BB — per person sharing",
+              "3,132"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Waterhole chalet (2 beds) BB — single",
+              "3,483"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier Waterhole Chalet (double story, 4 beds, min 2) BB — per person sharing",
+              "3,564"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier Waterhole Chalet (double story, 4 beds, min 2) BB — per person sharing",
+              "5,337"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "namutoni-resort": {
+      "name": "Namutoni Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "414"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "495"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room (2 beds) BB — per person sharing",
+              "1,656"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room (2 beds) BB — single",
+              "1,656"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room (2 beds) BB — per person sharing",
+              "2,079"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room (2 beds) BB — single",
+              "2,286"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush Chalet (2 beds) BB — per person sharing",
+              "1,944"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush Chalet (2 beds) BB — single",
+              "1,944"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush Chalet (2 beds) BB — per person sharing",
+              "2,412"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush Chalet (2 beds) BB — single",
+              "2,623.5"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "waterberg-camp": {
+      "name": "Waterberg Camp",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) — per person camping",
+              "387"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) — per person camping",
+              "387"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — per person sharing",
+              "990"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Double room BB — single",
+              "1,215"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — per person sharing",
+              "1,152"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Double room BB — single",
+              "1,377"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,206"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,440"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "1,395"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "1,620"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,206"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,584"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — single",
+              "1,701"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,638"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — single",
+              "1,872"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "popa-falls-resort": {
+      "name": "Popa Falls Resort",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 8) overlander — per person camping",
+              "153"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 8) overlander — per person camping",
+              "153"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River cabins (2 beds) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · River cabins (2 beds) BB — single",
+              "1,584"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River cabins (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · River cabins (2 beds) BB — single",
+              "1,935"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,224"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,449"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "1,521"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "1,746"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,224"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (4 beds, min 2) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family chalet (4 beds, min 2) BB — per person sharing",
+              "1,584"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Premier bush chalet (2 beds) BB — single",
+              "1,701"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,638"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Premier bush chalet (2 beds) BB — single",
+              "1,872"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Luxury river cabins BB — per person sharing",
+              "1,638"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Luxury river cabins BB — single",
+              "1,854"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Luxury river cabins BB — per person sharing",
+              "1,962"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Luxury river cabins BB — single",
+              "2,178"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Family House (6 beds, min 3) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Family House (6 beds, min 3) BB — per person sharing",
+              "1,710"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "495 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "495 per person"
+            ],
+            [
+              "Exclusive Full Day Boat Cruise",
+              "750 per person"
+            ],
+            [
+              "Boat Cruise (Morning or Afternoon)",
+              "350 per person"
+            ],
+            [
+              "Day visitor fee -- Namibians",
+              "20 per person"
+            ],
+            [
+              "Day visitor fee -- Others",
+              "30 per person"
+            ],
+            [
+              "Conference facility",
+              "Rates on request"
+            ]
+          ]
+        }
+      ]
+    },
+    "sossus-dune-lodge": {
+      "name": "Sossus Dune Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Dune chalet (2 beds) DBB — per person sharing",
+              "3,627"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Dune chalet (2 beds) DBB — single",
+              "3,960"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Dune chalet (2 beds) DBB — per person sharing",
+              "6,300"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Dune chalet (2 beds) DBB — single",
+              "6,642"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon chalet (double bed) DBB — per person sharing",
+              "4,131"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Honeymoon chalet (double bed) DBB — single",
+              "4,464"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon chalet (double bed) DBB — per person sharing",
+              "6,957"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Honeymoon chalet (double bed) DBB — single",
+              "7,299"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided Game/Nature Drive (Park or Vlei, anytime)",
+              "675 per person"
+            ],
+            [
+              "Guided excursion to Elim Dune",
+              "440 per person"
+            ],
+            [
+              "Guided walks to Sesriem Canyon",
+              "440 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "onkoshi-camp": {
+      "name": "Onkoshi Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi chalet (2 beds) DBB — per person sharing",
+              "2,862"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi chalet (2 beds) DBB — single",
+              "3,141"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi chalet (2 beds) DBB — per person sharing",
+              "3,888"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi chalet (2 beds) DBB — single",
+              "4,167"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi honeymoon chalet (king-size) DBB — per person sharing",
+              "3,204"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Onkoshi honeymoon chalet (king-size) DBB — single",
+              "3,492"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi honeymoon chalet (king-size) DBB — per person sharing",
+              "4,590"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Onkoshi honeymoon chalet (king-size) DBB — single",
+              "4,860"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "dolomite-camp": {
+      "name": "Dolomite Camp",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) DBB — per person sharing",
+              "2,862"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) DBB — single",
+              "3,141"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) DBB — per person sharing",
+              "3,888"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) DBB — single",
+              "4,167"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Deluxe chalet (double bed) DBB — per person sharing",
+              "3,204"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Deluxe chalet (double bed) DBB — single",
+              "3,492"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Deluxe chalet (double bed) DBB — per person sharing",
+              "4,590"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Deluxe chalet (double bed) DBB — single",
+              "4,860"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "naukluft-camp": {
+      "name": "Naukluft Camp",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2025 – 31 Oct 2026",
+      "note": "Net STO is NWR's published rack less the 10% they allow. Taken from the NWR 2025/2026 rate sheet. NWR has not published a 2027 season.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2026 — net STO",
+          "rows": [
+            [
+              "Low Season (01 Nov – 30 Jun) · Campsite (max 5) — per person camping",
+              "414"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Campsite (max 5) — per person camping",
+              "414"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — per person sharing",
+              "1,305"
+            ],
+            [
+              "Low Season (01 Nov – 30 Jun) · Bush chalet (2 beds) BB — single",
+              "1,548"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — per person sharing",
+              "1,800"
+            ],
+            [
+              "High Season (01 Jul – 31 Oct) · Bush chalet (2 beds) BB — single",
+              "2,052"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided Kluft Walk",
+              "400 per person"
+            ],
+            [
+              "Naukluft Hiking Trail -- 4 days",
+              "400 per person"
+            ],
+            [
+              "Naukluft Hiking Trail -- 8 days",
+              "800 per person"
+            ]
+          ]
+        }
+      ]
+    }
+  };
+  var LOWER = [LEGACY_STO_BY_YEAR, SHEET_STO_BY_YEAR, STO_DB];
+  Object.keys(NWR).forEach(function (slug) {
+    // one source per lodge: clear every older copy, then install 2026 on top
+    LOWER.forEach(function (m) { if (m && m[slug]) { try { delete m[slug]; } catch (e) {} } });
+    DDS_STO_BY_YEAR[slug] = { "2026": NWR[slug] };
+  });
+})();
