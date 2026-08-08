@@ -23971,3 +23971,1382 @@ Object.assign(DDS_STO_BY_YEAR, {
     DDS_STO_BY_YEAR[slug] = { "2026": NWR[slug] };
   });
 })();
+
+// ---------------------------------------------------------------------------
+// Namibia Wildlife Resorts — 2027 season, from NWR's own "RACK RATES 2026/2027"
+// sheet, valid 01 November 2026 to 31 October 2027.
+//
+// House treatment, NWR and nothing else:
+//     our net STO     = NWR published rack x 0.90
+//     our public rack = our net STO       x 1.20
+//
+// EVERY rate label carries its season's real dates -- "Low Season · 01 Nov 2026
+// – 30 Jun 2027" -- so an agent picking a season sees exactly what it covers and
+// a wrong season is obvious on the page rather than silent.
+//
+// Activities follow the sheet, which states: "Game drives are commissionable at
+// 10% to tour operators only, when pre-booked", "Meals and activities are
+// non-commissionable" and "Hiking is non-discountable & non-commissionable".
+// So drives take x0.90 / x1.20 and every other row carries rack = net as printed.
+//
+// Extraction: parsed from the PDF by word position, because the pages are
+// two-column spreads and flat text extraction interleaves them -- Boplaas' rows
+// come out mixed into Naukluft's. Checks that were run before this shipped:
+//   - all 212 accommodation figures found verbatim in the PDF text
+//   - 12 of the 13 properties we already held matched the older sheet exactly,
+//     value for value
+//   - the 13th, Popa Falls, differs because the OLDER sheet is contaminated: it
+//     carries three rows belonging to Waterberg Camp (Premier bush chalet
+//     1,640/1,890/1,820/2,080 is Waterberg's). This PDF is the clean source.
+//   - Onkoshi and Dolomite print no "Activities" heading, so their drive rows sit
+//     directly under the chalets and 650 lands inside the Single-rate column.
+//     Rows whose figure is followed by "per person" are treated as activities
+//     regardless of a heading; without that the drives read as room rates.
+// ---------------------------------------------------------------------------
+;(function () {
+  var NWR27 = {
+    "boplaas-campsite": {
+      "name": "Boplaas Campsite",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "99"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "99"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Kayak half-day trip (min 4, max 30)",
+              "400 per person"
+            ],
+            [
+              "Kayak Hire",
+              "150 per person"
+            ],
+            [
+              "Overnight trails",
+              "1,800 per person"
+            ],
+            [
+              "3 day trails (booked in advance)",
+              "4,300 per person"
+            ],
+            [
+              "Rental of a canoe (max 2)",
+              "150 per canoe"
+            ]
+          ]
+        }
+      ]
+    },
+    "hobas-lodge": {
+      "name": "Hobas Lodge",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "432"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "432"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,701"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "1,935"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "2,106"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "2,106"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Fish River Canyon hiking trail (min",
+              "540 per person"
+            ],
+            [
+              "3, max 30)",
+              "—"
+            ]
+          ]
+        }
+      ]
+    },
+    "naukluft-camp": {
+      "name": "Naukluft Camp",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 5 people) — per person camping",
+              "414"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 5 people) — per person camping",
+              "414"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,305"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "1,548"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,800"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "2,052"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Kluft Walk: Olive & Waterklooft Guided Kluft Walk - N$",
+              "400 per person"
+            ],
+            [
+              "Trails (only bookable at Camp) Self-Guided Short Walk - Free (Park Entrance payment required)",
+              "—"
+            ],
+            [
+              "Naukluft Hiking Trail: 4-8 days 4 days -",
+              "400 per person"
+            ],
+            [
+              "(min 3, max 12) 8 days -",
+              "800 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "olifantsrus-campsite": {
+      "name": "Olifantsrus Campsite",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "459"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "459"
+            ]
+          ]
+        }
+      ]
+    },
+    "sesriem-campsite": {
+      "name": "Sesriem Campsite",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "603"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "603"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Sunset drive to ELIM Dune",
+              "300 per person"
+            ],
+            [
+              "Canyon drive",
+              "200 per person"
+            ],
+            [
+              "Shuttle (2x4 to Deadvlei)",
+              "180 per person"
+            ],
+            [
+              "Guided morning drives",
+              "540 per person"
+            ],
+            [
+              "700 per person (including breakfast)",
+              "700 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "terrace-bay-resort": {
+      "name": "Terrace Bay Resort",
+      "region": "Skeleton Coast",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room (2 beds) DBB — per person sharing",
+              "1,566"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room (2 beds) DBB — single",
+              "1,746"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room (2 beds) DBB — per person sharing",
+              "1,188"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room (2 beds) DBB — single",
+              "1,377"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Beach chalet (10 beds) - min 5 Bed only — per person sharing",
+              "1,386"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Beach chalet (10 beds) - min 5 Bed only — per person sharing",
+              "864"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Beach chalet (8 beds) - min 4 Bed only — per person sharing",
+              "1,386"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Beach chalet (8 beds) - min 4 Bed only — per person sharing",
+              "864"
+            ]
+          ]
+        }
+      ]
+    },
+    "mile-108": {
+      "name": "Mile 108",
+      "region": "Skeleton Coast",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "171"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "171"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Fisherman Chalet (max 2 people) Bed only — per person camping",
+              "432"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Fisherman Chalet (max 2 people) Bed only — per person camping",
+              "432"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Self-contained Campsites (max 8 people) — per person camping",
+              "279"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Self-contained Campsites (max 8 people) — per person camping",
+              "279"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Private Ablution (Dolfyn, Mussel,",
+              "730 per site"
+            ],
+            [
+              "Octopus, Pilchard, Rob, Seemeeu Any additional person pay N$ 75 to a maximum of 8 people per site.",
+              "—"
+            ],
+            [
+              "Jackal, Flamink, Jackal, Spotty,",
+              "—"
+            ],
+            [
+              "Brozi, Strandwolf & Barber)",
+              "—"
+            ],
+            [
+              "Rates exclude water, electricity, shower fees, which are payable separately at the Camp.",
+              "—"
+            ]
+          ]
+        }
+      ]
+    },
+    "gross-barmen-resort": {
+      "name": "Gross Barmen Resort",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "216"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "216"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Premier chalet BB — per person sharing",
+              "2,394"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Premier chalet BB — single",
+              "2,565"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Premier chalet BB — per person sharing",
+              "2,394"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Premier chalet BB — single",
+              "2,565"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet BB — per person sharing",
+              "1,197"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet BB — single",
+              "1,368"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet BB — per person sharing",
+              "1,197"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet BB — single",
+              "1,368"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family chalet (4 beds) – min 2 BB — per person sharing",
+              "1,800"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family chalet (4 beds) – min 2 BB — per person sharing",
+              "1,800"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Premier family chalet (4 beds) -min 2 BB — per person sharing",
+              "2,394"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Premier family chalet (4 beds) -min 2 BB — per person sharing",
+              "2,394"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Acacia (A & B) – 4 beds (min 2) Bed only — per person sharing",
+              "1,062"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Acacia (A & B) – 4 beds (min 2) Bed only — per person sharing",
+              "1,062"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Aloe (A , B & C) – 2 beds (min 2) Bed only — per person sharing",
+              "1,062"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Aloe (A , B & C) – 2 beds (min 2) Bed only — per person sharing",
+              "1,062"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Day visitor fee (Picnic & Olympic",
+              "200 per person"
+            ],
+            [
+              "swimming pool)",
+              "—"
+            ],
+            [
+              "Day visitor to pay surcharge to",
+              "100 per person"
+            ],
+            [
+              "access thermal pool",
+              "—"
+            ]
+          ]
+        }
+      ]
+    },
+    "ai-ais-hot-springs-and-spa": {
+      "name": "/Ai-/Ais Hot Springs and Spa",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "351"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "351"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Mountain view double room (2 beds) BB — per person sharing",
+              "1,224"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Mountain view double room (2 beds) BB — single",
+              "1,476"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Mountain view double room (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Mountain view double room (2 beds) BB — single",
+              "1,719"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · River view double room (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · River view double room (2 beds) BB — single",
+              "1,719"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · River view double room (2 beds) BB — per person sharing",
+              "1,800"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · River view double room (2 beds) BB — single",
+              "2,052"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush family chalet (4 beds) – min 2 Bed only — per person sharing",
+              "1,638"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush family chalet (4 beds) – min 2 Bed only — per person sharing",
+              "1,962"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Nature drive (morning or afternoon)",
+              "650 per person"
+            ],
+            [
+              "Guided nature walk",
+              "300 per person"
+            ],
+            [
+              "Shuttle Service (from /Ai-/Ais",
+              "500 per person"
+            ],
+            [
+              "Resort to Hobas)",
+              "—"
+            ]
+          ]
+        }
+      ]
+    },
+    "hardap-resort": {
+      "name": "Hardap Resort",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "198"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "198"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · VIP chalets (4 beds) - min 2 BB — per person sharing",
+              "1,044"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · VIP chalets (4 beds) - min 2 BB — per person sharing",
+              "1,044"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "774"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "774"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "648"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "819"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,044"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "1,206"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Dormitory (10 beds) - min 5 Bed Only — per person sharing",
+              "324"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Dormitory (10 beds) - min 5 Bed Only — per person sharing",
+              "324"
+            ]
+          ]
+        }
+      ]
+    },
+    "okaukuejo-camp": {
+      "name": "Okaukuejo Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "414"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "504"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room A (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room A (2 beds) BB — single",
+              "1,917"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room A (2 beds) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room A (2 beds) BB — single",
+              "2,493"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room B (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room B (2 beds) BB — single",
+              "1,917"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room B (2 beds) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room B (2 beds) BB — single",
+              "2,493"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds, disabled access) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds, disabled access) BB — single",
+              "1,917"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds, disabled access) BB — per person sharing",
+              "2,277"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds, disabled access) BB — single",
+              "2,637"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,989"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "2,205"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "2,412"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "2,781"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "1,917"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "2,565"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Waterhole chalet (2 beds) BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Waterhole chalet (2 beds) BB — single",
+              "2,358"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Waterhole chalet (2 beds) BB — per person sharing",
+              "3,132"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Waterhole chalet (2 beds) BB — single",
+              "3,483"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Premier Waterhole Chalet (double BB story, 4 beds) – min 2 — per person sharing",
+              "3,564"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Premier Waterhole Chalet (double BB story, 4 beds) – min 2 — per person sharing",
+              "5,337"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "namutoni-resort": {
+      "name": "Namutoni Camp",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "414"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "495"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room (2 beds) BB — per person sharing",
+              "1,656"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room (2 beds) BB — single",
+              "1,656"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room (2 beds) BB — per person sharing",
+              "2,079"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room (2 beds) BB — single",
+              "2,286"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush Chalet (2 beds) BB — per person sharing",
+              "1,944"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush Chalet (2 beds) BB — single",
+              "1,944"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush Chalet (2 beds) BB — per person sharing",
+              "2,412"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush Chalet (2 beds) BB — single",
+              "2,623.5"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "halali-resort": {
+      "name": "Halali Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "414"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "495"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room BB — per person sharing",
+              "1,260"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room BB — single",
+              "1,368"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room BB — per person sharing",
+              "1,521"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room BB — single",
+              "1,872"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (4 beds) - min 2 BB — per person sharing",
+              "1,386"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (4 beds) - min 2 BB — per person sharing",
+              "1,872"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,386"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "1,593"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,872"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "2,070"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds, disabled access) BB — per person sharing",
+              "1,386"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds, disabled access) BB — single",
+              "1,593"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds, disabled access) BB — per person sharing",
+              "1,872"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds, disabled access) BB — single",
+              "2,070"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "2,142"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "2,205"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Honeymoon suite (double-bed) BB — per person sharing",
+              "1,665"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Honeymoon suite (double-bed) BB — single",
+              "1,872"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Honeymoon suite (double-bed) BB — per person sharing",
+              "2,493"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Honeymoon suite (double-bed) BB — single",
+              "2,700"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "waterberg-camp": {
+      "name": "Waterberg Camp",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "387"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "387"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room BB — per person sharing",
+              "990"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Double room BB — single",
+              "1,215"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room BB — per person sharing",
+              "1,152"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Double room BB — single",
+              "1,377"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,206"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "1,440"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,395"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "1,620"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (4 beds) - min 2 BB — per person sharing",
+              "1,206"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (4 beds) - min 2 BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "1,584"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,476"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Premier bush chalet (2 beds) BB — single",
+              "1,701"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Premier bush chalet (2 beds) BB — per person sharing",
+              "1,638"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Premier bush chalet (2 beds) BB — single",
+              "1,872"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "popa-falls-resort": {
+      "name": "Popa Falls Resort",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "153"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "153"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (overlander) (max 8 people) — per person camping",
+              "153"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (overlander) (max 8 people) — per person camping",
+              "153"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · River cabins (2 beds) BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · River cabins (2 beds) BB — single",
+              "1,584"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · River cabins (2 beds) BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · River cabins (2 beds) BB — single",
+              "1,935"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,224"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) BB — single",
+              "1,449"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — per person sharing",
+              "1,521"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) BB — single",
+              "1,746"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family House (6 beds) - min 3 BB — per person sharing",
+              "1,368"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family House (6 beds) - min 3 BB — per person sharing",
+              "1,710"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Luxury river cabins BB — per person sharing",
+              "1,638"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Luxury river cabins BB — single",
+              "1,854"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Luxury river cabins BB — per person sharing",
+              "1,962"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Luxury river cabins BB — single",
+              "2,178"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "495 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "495 per person"
+            ],
+            [
+              "Exclusive Full day Boat Cruise",
+              "750 per person"
+            ],
+            [
+              "Boat Cruise (Morning/Afternoon)",
+              "350 per person"
+            ],
+            [
+              "Day visitor fee Namibians:",
+              "20 per person"
+            ],
+            [
+              "Others:",
+              "30 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "sossus-dune-lodge": {
+      "name": "Sossus Dune Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Dune chalet (2 beds) DBB — per person sharing",
+              "3,627"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Dune chalet (2 beds) DBB — single",
+              "3,960"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Dune chalet (2 beds) DBB — per person sharing",
+              "6,300"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Dune chalet (2 beds) DBB — single",
+              "6,642"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Honeymoon chalets (double bed) DBB — per person sharing",
+              "4,131"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Honeymoon chalets (double bed) DBB — single",
+              "4,464"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Honeymoon chalets (double bed) DBB — per person sharing",
+              "6,957"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Honeymoon chalets (double bed) DBB — single",
+              "7,299"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided Game/Nature Drive in the",
+              "675 per person"
+            ],
+            [
+              "Park or to the Vlei (anytime)",
+              "—"
+            ],
+            [
+              "Guided excursion to Elim Dune",
+              "440 per person"
+            ],
+            [
+              "Guided walks to Sesriem Canyon",
+              "440 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "onkoshi-camp": {
+      "name": "Onkoshi Camp",
+      "region": "South Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Onkoshi chalet (2 beds) DBB — per person sharing",
+              "2,862"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Onkoshi chalet (2 beds) DBB — single",
+              "3,141"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Onkoshi chalet (2 beds) DBB — per person sharing",
+              "3,888"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Onkoshi chalet (2 beds) DBB — single",
+              "4,167"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Onkoshi honeymoon chalets DBB (king-size bed) — per person sharing",
+              "3,204"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Onkoshi honeymoon chalets DBB (king-size bed) — single",
+              "3,492"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Onkoshi honeymoon chalets DBB (king-size bed) — per person sharing",
+              "4,590"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Onkoshi honeymoon chalets DBB (king-size bed) — single",
+              "4,860"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    },
+    "dolomite-camp": {
+      "name": "Dolomite Camp",
+      "region": "West Etosha",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Net STO is NWR's published rack less the 10% they allow, from the NWR \"RACK RATES 2026/2027\" sheet valid 01 November 2026 to 31 October 2027. Season dates are printed in every rate label.",
+      "commission": "10% STO",
+      "sections": [
+        {
+          "title": "2027 — net STO · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) DBB — per person sharing",
+              "2,862"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) DBB — single",
+              "3,141"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) DBB — per person sharing",
+              "3,888"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) DBB — single",
+              "4,167"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Deluxe chalet (Double bed) DBB — per person sharing",
+              "3,204"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Deluxe chalet (Double bed) DBB — single",
+              "3,492"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Deluxe chalet (Double bed) DBB — per person sharing",
+              "4,590"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Deluxe chalet (Double bed) DBB — single",
+              "4,860"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Guided morning drives",
+              "585 per person"
+            ],
+            [
+              "Guided afternoon drives",
+              "585 per person"
+            ],
+            [
+              "Guided night drives",
+              "675 per person"
+            ]
+          ]
+        }
+      ]
+    }
+  };
+  var LOWER = [LEGACY_STO_BY_YEAR, SHEET_STO_BY_YEAR, STO_DB];
+  Object.keys(NWR27).forEach(function (slug) {
+    LOWER.forEach(function (m) { if (m && m[slug]) { try { delete m[slug]; } catch (e) {} } });
+    var e = DDS_STO_BY_YEAR[slug] || (DDS_STO_BY_YEAR[slug] = {});
+    e['2027'] = NWR27[slug];
+  });
+})();
