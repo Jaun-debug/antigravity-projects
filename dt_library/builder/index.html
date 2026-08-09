@@ -621,6 +621,15 @@ function lodgeDatalist(i,d){
   });
   return '<datalist id="nr-lodges-'+i+'">'+o+'</datalist>';
 }
+function lodgeIdxExact(v){
+  v=String(v||'').replace(/\s*ᴬ\s*$/,'').trim().toLowerCase(); if(!v) return -1;
+  var ls=RATES.lodges||[];
+  for(var i=0;i<ls.length;i++){
+    var nm=(ls[i].name||'').toLowerCase();
+    if(nm===v||nm+' · '+(ls[i].region||'').toLowerCase()===v) return i;
+  }
+  return -1;
+}
 function lodgeIdxFromText(v){
   v=String(v||'').replace(/\s*ᴬ\s*$/,'').trim().toLowerCase(); if(!v) return -1;
   var part=-1, ls=RATES.lodges||[];
@@ -766,17 +775,36 @@ function bindPanel(){
         if(f==='lodgeIdx'||f==='region')autoDistances();
       };
     } else if(f==='lodgeIdx'){
-      el.onchange=function(){
+      /* Picking from a datalist fires `input` in Safari and only fires `change`
+         on blur, so binding change alone left the row empty until you clicked
+         away. Apply as soon as the text is a whole lodge name — that is what a
+         pick looks like — and fall back to a loose match on change/Enter. */
+      var applyLodge=function(fi){
         var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
-        if(!String(el.value).trim()){d.lodgeIdx=-1;d.roomIdx=-1;d.name='';renderPanel();return;}
-        var fi=lodgeIdxFromText(el.value);
-        if(fi<0){el.value='';el.placeholder='no lodge of that name — try fewer letters';return;}
-        var FL=RATES.lodges[fi];
+        var FL=RATES.lodges[fi];if(!FL)return;
         d.region=FL.region||d.region; d.lodgeIdx=fi; d.roomManual=false;
         var fri=seasonShareIdx(FL,rowCheckIn(i)); d.roomIdx=(fri>-1?fri:-1);
         d.name=FL.name||''; d.lat=null; d.lon=null; d.legToNext='';
         if(i>0)S.lodges[i-1].legToNext='';
         syncShareQty(d); renderPanel(); autoDistances();
+      };
+      el.oninput=function(){
+        var v=String(el.value).trim(); if(!v) return;
+        var fi=lodgeIdxExact(v);            // only a complete name, never a partial
+        if(fi>-1) applyLodge(fi);
+      };
+      el.onchange=function(){
+        var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
+        if(!String(el.value).trim()){d.lodgeIdx=-1;d.roomIdx=-1;d.name='';renderPanel();return;}
+        var fi=lodgeIdxFromText(el.value);
+        if(fi<0){el.value='';el.placeholder='no lodge of that name — try fewer letters';return;}
+        if(fi!==d.lodgeIdx) applyLodge(fi);
+      };
+      el.onkeydown=function(ev){
+        if(ev.key!=='Enter') return;
+        ev.preventDefault();
+        var fi=lodgeIdxFromText(el.value);
+        if(fi>-1) applyLodge(fi);
       };
     } else {
       // nights / pax: update totals live while typing (no rebuild, keeps focus);
