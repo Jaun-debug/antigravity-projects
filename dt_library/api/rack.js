@@ -24781,3 +24781,1157 @@ Object.assign(DDS_RACK_BY_YEAR, {
     e['2027'] = NWR27[slug];
   });
 })();
+
+// ---------------------------------------------------------------------------
+// Namibia Wildlife Resorts — the five properties the 2027 pass missed.
+//
+// Khorixas Camp, Torra Bay Campsite, Jakkalsputz Campsite and Mile 72 have
+// never existed in this file. The only trace of them anywhere was a stale row
+// in assets/rates-index.json carrying the old rack = net / 0.8 derivation and a
+// "Low Season 01 Nov - 30 Jun" label on three camps that open in December and
+// January only. Mile 108 is re-shipped because its Fisherman Chalet was
+// labelled "per person camping", which it is not.
+//
+// Same NWR rule as the rest: net STO = NWR rack x 0.90, displayed rack = that
+// net x 1.20. Game drives commissionable at 10 percent, everything else as printed.
+// ---------------------------------------------------------------------------
+;(function () {
+  var NWR27B = {
+    "khorixas-camp": {
+      "name": "Khorixas Camp",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Taken from the NWR \"RACK RATES 2026/2027\" sheet, valid 01 November 2026 to 31 October 2027. NWR publishes rack only and allows Desert Tracks 10%: net STO is their rack less 10%, and the figure here is that net grossed up by 20%. Season dates are printed in every rate label. The sheet states meals and activities are non-commissionable and hiking is non-discountable; game drives are commissionable at 10% when pre-booked.",
+      "sections": [
+        {
+          "title": "2027 — rack · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "356.4"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "356.4"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) - A BB — per person sharing",
+              "669.6"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) - A BB — single",
+              "874.8"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) - A BB — per person sharing",
+              "918"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) - A BB — single",
+              "1,134"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) - B BB — per person sharing",
+              "788.4"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (2 beds) - B BB — single",
+              "993.6"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) - B BB — per person sharing",
+              "993.6"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (2 beds) - B BB — single",
+              "1,317.6"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (access for disabled) BB — per person sharing",
+              "788.4"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Bush chalet (access for disabled) BB — single",
+              "993.6"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (access for disabled) BB — per person sharing",
+              "993.6"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Bush chalet (access for disabled) BB — single",
+              "1,317.6"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "918"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Family chalet (4 beds) - min 2 BB — per person sharing",
+              "1,134"
+            ]
+          ]
+        }
+      ]
+    },
+    "torra-bay-campsite": {
+      "name": "Torra Bay Campsite",
+      "region": "Skeleton Coast",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Taken from the NWR \"RACK RATES 2026/2027\" sheet, valid 01 November 2026 to 31 October 2027. NWR publishes rack only and allows Desert Tracks 10%: net STO is their rack less 10%, and the figure here is that net grossed up by 20%. Season dates are printed in every rate label. The sheet states meals and activities are non-commissionable and hiking is non-discountable; game drives are commissionable at 10% when pre-booked. This camp is open in December and January only, and the sheet prints a single rate for that window rather than a low/high season split. Rates exclude water, electricity and shower fees, which are payable at the camp.",
+      "sections": [
+        {
+          "title": "2027 — rack · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Open December & January only · Campsite (max 8 people) — per person camping",
+              "334.8"
+            ]
+          ]
+        }
+      ]
+    },
+    "jakkalsputz-campsite": {
+      "name": "Jakkalsputz Campsite",
+      "region": "Skeleton Coast",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Taken from the NWR \"RACK RATES 2026/2027\" sheet, valid 01 November 2026 to 31 October 2027. NWR publishes rack only and allows Desert Tracks 10%: net STO is their rack less 10%, and the figure here is that net grossed up by 20%. Season dates are printed in every rate label. The sheet states meals and activities are non-commissionable and hiking is non-discountable; game drives are commissionable at 10% when pre-booked. This camp is open in December and January only, and the sheet prints a single rate for that window rather than a low/high season split. Rates exclude water, electricity and shower fees, which are payable at the camp.",
+      "sections": [
+        {
+          "title": "2027 — rack · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Open December & January only · Campsite (max 8 people) — per person camping",
+              "205.2"
+            ]
+          ]
+        }
+      ]
+    },
+    "mile-72": {
+      "name": "Mile 72",
+      "region": "Skeleton Coast",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Taken from the NWR \"RACK RATES 2026/2027\" sheet, valid 01 November 2026 to 31 October 2027. NWR publishes rack only and allows Desert Tracks 10%: net STO is their rack less 10%, and the figure here is that net grossed up by 20%. Season dates are printed in every rate label. The sheet states meals and activities are non-commissionable and hiking is non-discountable; game drives are commissionable at 10% when pre-booked. This camp is open in December and January only, and the sheet prints a single rate for that window rather than a low/high season split. Rates exclude water, electricity and shower fees, which are payable at the camp.",
+      "sections": [
+        {
+          "title": "2027 — rack · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Open December & January only · Campsite (max 8 people) — per person camping",
+              "205.2"
+            ],
+            [
+              "Open December & January only · Fisherman Chalet - max 2 people Bed only — per person",
+              "518.4"
+            ]
+          ]
+        }
+      ]
+    },
+    "mile-108": {
+      "name": "Mile 108",
+      "region": "Skeleton Coast",
+      "currency": "N$",
+      "validity": "01 Nov 2026 – 31 Oct 2027",
+      "note": "Taken from the NWR \"RACK RATES 2026/2027\" sheet, valid 01 November 2026 to 31 October 2027. NWR publishes rack only and allows Desert Tracks 10%: net STO is their rack less 10%, and the figure here is that net grossed up by 20%. Season dates are printed in every rate label. The sheet states meals and activities are non-commissionable and hiking is non-discountable; game drives are commissionable at 10% when pre-booked.",
+      "sections": [
+        {
+          "title": "2027 — rack · 01 Nov 2026 to 31 Oct 2027",
+          "rows": [
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Campsite (max 8 people) — per person camping",
+              "205.2"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Campsite (max 8 people) — per person camping",
+              "205.2"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Fisherman Chalet (max 2 people) Bed only — per person",
+              "518.4"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Fisherman Chalet (max 2 people) Bed only — per person",
+              "518.4"
+            ],
+            [
+              "Low Season · 01 Nov 2026 – 30 Jun 2027 · Self-contained Campsites (max 8 people) — per person camping",
+              "334.8"
+            ],
+            [
+              "High Season · 01 Jul 2027 – 31 Oct 2027 · Self-contained Campsites (max 8 people) — per person camping",
+              "334.8"
+            ]
+          ]
+        },
+        {
+          "title": "Activities — game drives 10%, all else non-commissionable",
+          "rows": [
+            [
+              "Private Ablution (Dolfyn, Mussel,",
+              "730 per site"
+            ],
+            [
+              "Octopus, Pilchard, Rob, Seemeeu Any additional person pay N$ 75 to a maximum of 8 people per site.",
+              "—"
+            ],
+            [
+              "Jackal, Flamink, Jackal, Spotty,",
+              "—"
+            ],
+            [
+              "Brozi, Strandwolf & Barber)",
+              "—"
+            ],
+            [
+              "Rates exclude water, electricity, shower fees, which are payable separately at the Camp.",
+              "—"
+            ]
+          ]
+        }
+      ]
+    }
+  };
+  var LOWER = [LEGACY_RACK_BY_YEAR, SHEET_RACK_BY_YEAR, VF_RACK];
+  Object.keys(NWR27B).forEach(function (slug) {
+    LOWER.forEach(function (m) { if (m && m[slug]) { try { delete m[slug]; } catch (e) {} } });
+    var e = DDS_RACK_BY_YEAR[slug] || (DDS_RACK_BY_YEAR[slug] = {});
+    e['2027'] = NWR27B[slug];
+  });
+})();
+
+// ---------------------------------------------------------------------------
+// Two corrections to the NWR 2026 season.
+//
+// 1. Popa Falls' 2026 doc carries three room types that belong to Waterberg
+//    Camp — Bush chalet (4 beds), Family chalet (4 beds) and Premier bush
+//    chalet — bled across from the neighbouring block when the 2026 sheet was
+//    parsed. Waterberg still has its own copy of all three, so this only
+//    removes the duplicate. NWR's own 2026/2027 sheet lists six room types at
+//    Popa and none of these is among them.
+//
+// 2. Every NWR 2026 note still ends "NWR has not published a 2027 season, so no
+//    2027 rates exist for this property." That was true when it was written and
+//    is now false — their 2026/2027 sheet is loaded above.
+// ---------------------------------------------------------------------------
+;(function () {
+  var BLED = /Premier bush chalet|Bush chalet \(4 beds|Family chalet \(4 beds/i;
+  var STALE = 'NWR has not published a 2027 season, so no 2027 rates exist for this property.';
+  var FRESH = 'NWR\u2019s 2026/2027 sheet is loaded separately as the 2027 season.';
+  var M = DDS_RACK_BY_YEAR;
+  var popa = M['popa-falls-resort'] && M['popa-falls-resort']['2026'];
+  if (popa && popa.sections) {
+    popa.sections.forEach(function (s) {
+      if (s && s.rows) s.rows = s.rows.filter(function (r) { return !BLED.test(String(r && r[0])); });
+    });
+  }
+  Object.keys(M).forEach(function (slug) {
+    var d = M[slug] && M[slug]['2026'];
+    if (d && typeof d.note === 'string' && d.note.indexOf(STALE) !== -1) {
+      d.note = d.note.replace(STALE, FRESH);
+    }
+  });
+})();
+
+// ---------------------------------------------------------------------------
+// Ondili — 2026 season, from their own "RATES SEASON 2026/2027" sheet,
+// valid 01 March 2026 to 28 February 2027.
+//
+// This replaces what was here before, which was wrong in three ways at once:
+// the figures came from an older season, the published rack was net x 1.20
+// instead of the supplier's own printed rack, and the whole thing was filed
+// under 2027 while the 2026 tab sat empty.
+//
+// Ondili prints rack and allows a flat 20% ("STO 20"), so rack is loaded
+// exactly as printed and net is rack x 0.80. Nothing is derived upwards.
+//
+// Carried as text, and therefore unquotable, because the sheet does not print
+// a single number: "free", "on request", the child cells where two figures are
+// printed with no key saying which unit each belongs to, and the tour guide
+// room, which is on the 2025/26 STO sheet but not on the 2026/2027 rack sheet.
+//
+// 2027 holds a note rather than rates: Ondili's season ends 28 February 2027
+// and they have not published beyond it.
+// ---------------------------------------------------------------------------
+;(function () {
+  var ONDILI26 = {
+    "ti-melen": {
+      "2026": {
+        "name": "Ti Melen",
+        "region": "Windhoek",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "01 Mar 2026 – 28 Feb 2027 · B&B · Room — per person sharing",
+                "1,700"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · B&B · Room — single use",
+                "2,200"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults",
+                "1,200"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults",
+                "1,700"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "990"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "brigadoon": {
+      "2026": {
+        "name": "Brigadoon",
+        "region": "Swakopmund",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "01 Mar 2026 – 28 Feb 2027 · B&B · Room — per person sharing",
+                "1,800"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · B&B · Room — single use",
+                "2,300"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults",
+                "1,200"
+              ],
+              [
+                "01 Mar 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults",
+                "1,800"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "teufelskrallen-lodge": {
+      "2026": {
+        "name": "Teufelskrallen Lodge",
+        "region": "Kalahari",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Standard Tent — per person sharing",
+                "2,750"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Standard Tent — single use",
+                "3,575"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults",
+                "1,375"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults",
+                "2,750"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Standard Tent — per person sharing",
+                "2,100"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Standard Tent — single use",
+                "2,730"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults",
+                "1,050"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults",
+                "2,100"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Morning Nature Drive (approx 2 hours)",
+                "650"
+              ],
+              [
+                "Sundowner Drive (3–4 hours) incl. drinks",
+                "750"
+              ],
+              [
+                "Guided Walk (2 hours)",
+                "650"
+              ],
+              [
+                "Lunch incl. Dessert",
+                "290"
+              ],
+              [
+                "Transfer — Airstrip Ondili / Farm Gurus",
+                "free"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "990"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "kalahari-red-dunes-lodge": {
+      "2026": {
+        "name": "Kalahari Red Dunes Lodge",
+        "region": "Kalahari",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Suite — per person sharing",
+                "6,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Suite — single use",
+                "7,800"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Superior Suite — per person sharing",
+                "8,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Suite)",
+                "3,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Superior Suite)",
+                "4,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults",
+                "8,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — per person sharing",
+                "4,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — single use",
+                "5,200"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Superior Suite — per person sharing",
+                "6,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Suite)",
+                "2,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Superior Suite)",
+                "3,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults",
+                "6,000"
+              ]
+            ]
+          },
+          {
+            "title": "Trans Kalahari Walk — multi-night package, 20% commissionable",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Trans Kalahari Walk · 2 nights, per person sharing (Suite)",
+                "13,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Trans Kalahari Walk · 2 nights, per person sharing (Suite)",
+                "11,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Trans Kalahari Walk · 2 nights, single use (Suite)",
+                "16,900"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Trans Kalahari Walk · 2 nights, single use (Suite)",
+                "14,300"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Trans Kalahari Walk · 2 nights, per person sharing (Superior Suite)",
+                "15,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Trans Kalahari Walk · 2 nights, per person sharing (Superior Suite)",
+                "13,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Trans Kalahari Walk · 3 nights, per person sharing (Suite)",
+                "19,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Trans Kalahari Walk · 3 nights, per person sharing (Suite)",
+                "15,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Trans Kalahari Walk · 3 nights, single use (Suite)",
+                "24,700"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Trans Kalahari Walk · 3 nights, single use (Suite)",
+                "19,500"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Trans Kalahari Walk · 3 nights, per person sharing (Superior Suite)",
+                "23,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Trans Kalahari Walk · 3 nights, per person sharing (Superior Suite)",
+                "19,000"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Morning Nature Drive (approx 2 hours)",
+                "650"
+              ],
+              [
+                "Sundowner Drive (3–4 hours) incl. drinks",
+                "750"
+              ],
+              [
+                "Guided Walk (2 hours)",
+                "650"
+              ],
+              [
+                "Transfer — Airstrip Ondili",
+                "free"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "1,190"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "desert-homestead-lodge": {
+      "2026": {
+        "name": "Desert Homestead Lodge",
+        "region": "Sossusvlei",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Chalet — per person sharing",
+                "3,300"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Chalet — single use",
+                "4,300"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults",
+                "1,650"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults",
+                "3,300"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Chalet — per person sharing",
+                "2,550"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Chalet — single use",
+                "3,190"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults",
+                "1,275"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults",
+                "2,550"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Sossusvlei Excursion",
+                "1,950"
+              ],
+              [
+                "Sundowner Drive",
+                "750"
+              ],
+              [
+                "Morning Ride (1 hour)",
+                "500"
+              ],
+              [
+                "Sundowner Ride",
+                "750"
+              ],
+              [
+                "Namib Night — horse ride / sleep-out ride, 1 night in tented camp (bookable with 2 nights at the lodge)",
+                "4,590"
+              ],
+              [
+                "Lunch incl. Dessert",
+                "290"
+              ],
+              [
+                "Transfer — Airstrip Ondili / Witwater",
+                "free"
+              ],
+              [
+                "Transfer — airport pick-up at non-Ondili airfields",
+                "on request"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "990"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "namib-outpost": {
+      "2026": {
+        "name": "Namib Outpost",
+        "region": "Sossusvlei",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Suite — per person sharing",
+                "8,400"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Suite — single use",
+                "10,950"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Superior Suite — per person sharing",
+                "12,600"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Suite)",
+                "4,200"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Superior Suite)",
+                "6,300"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults (Suite)",
+                "8,400"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — per person sharing",
+                "6,900"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — single use",
+                "9,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Superior Suite — per person sharing",
+                "10,500"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Suite)",
+                "3,450"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Superior Suite)",
+                "5,250"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults (Suite)",
+                "6,900"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Sossusvlei Excursion",
+                "2,340"
+              ],
+              [
+                "Sundowner Drive",
+                "900"
+              ],
+              [
+                "Morning Ride (1 hour)",
+                "600"
+              ],
+              [
+                "Sundowner Ride",
+                "900"
+              ],
+              [
+                "Namib Night — horse ride / sleep-out ride, 1 night in tented camp (bookable with 2 nights at Namib Outpost)",
+                "5,500"
+              ],
+              [
+                "Transfer — Airstrip Ondili (Witwater)",
+                "free"
+              ],
+              [
+                "Transfer — airport pick-up at non-Ondili airfields",
+                "on request"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "1,190"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "twyfelfontein-adventure-camp": {
+      "2026": {
+        "name": "Twyfelfontein Adventure Camp",
+        "region": "Damaraland",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Standard Tent — per person sharing",
+                "2,600"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Standard Tent — single use",
+                "3,400"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Premium Tent — per person sharing",
+                "4,200"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Premium Tent — single use",
+                "5,460"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Standard Tent)",
+                "1,300"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Premium Tent)",
+                "2,100"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults (Standard Tent)",
+                "2,600"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults (Premium Tent)",
+                "4,200"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Standard Tent — per person sharing",
+                "2,250"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Standard Tent — single use",
+                "2,950"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Premium Tent — per person sharing",
+                "3,300"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Premium Tent — single use",
+                "4,300"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Standard Tent)",
+                "1,125"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Premium Tent)",
+                "1,650"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults (Standard Tent)",
+                "2,250"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults (Premium Tent)",
+                "3,300"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Huab River Scenic Drive incl. light lunch",
+                "1,200"
+              ],
+              [
+                "Lunch incl. Dessert",
+                "290"
+              ],
+              [
+                "Transfer — Airstrip Twyfelfontein Country Lodge",
+                "free"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "990"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "etosha-oberland-lodge": {
+      "2026": {
+        "name": "Etosha Oberland Lodge",
+        "region": "South Etosha",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Suite — per person sharing",
+                "8,400"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Full Board Plus · Suite — single use",
+                "10,900"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults",
+                "4,200"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults",
+                "8,400"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — per person sharing",
+                "6,850"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — single use",
+                "8,900"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults",
+                "3,425"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults",
+                "6,850"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Etosha Game Drive (7–8 h) incl. drinks and lunch packs",
+                "1,990"
+              ],
+              [
+                "Guided Walk (1–2 h)",
+                "450"
+              ],
+              [
+                "Transfer — Airstrip Ondili",
+                "free"
+              ],
+              [
+                "Transfer — airport pick-up at non-Ondili airfields",
+                "on request"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "1,190"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "hohenstein-lodge": {
+      "2026": {
+        "name": "Hohenstein Lodge",
+        "region": "Central Namibia",
+        "currency": "N$",
+        "validity": "01 Mar 2026 – 28 Feb 2027",
+        "note": "Ondili's own published rack, taken from their \"RATES SEASON 2026/2027\" sheet valid 01 March 2026 to 28 February 2027 and loaded exactly as printed — nothing is derived. Ondili allows Desert Tracks a flat 20% (their \"STO 20\" tier), so the agent net is this figure less 20%. Season dates are printed in every rate label. The sheet states all extras are non-commissionable, so every extra carries rack = net as printed. Ondili's 2026/2027 season ends 28 February 2027 and they have not yet published rates from 01 March 2027, so this property has no 2027 season. The 2026 tab holds the current season, which runs to the end of February 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Mar 2026 – 28 Feb 2027",
+            "rows": [
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Room — per person sharing",
+                "2,900"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Room — single use",
+                "3,800"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Chalet — per person sharing",
+                "5,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · DBB · Chalet — single use",
+                "7,000"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Room)",
+                "1,450"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 4–12 sharing with 1–2 full paying adults (Chalet)",
+                "2,500"
+              ],
+              [
+                "High Season · 01 Mar 2026 – 30 Nov 2026 · Child 13 and older sharing with 2 full paying adults (Chalet)",
+                "5,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Room — per person sharing",
+                "2,300"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Room — single use",
+                "3,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Chalet — per person sharing",
+                "4,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · DBB · Chalet — single use",
+                "5,500"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 0–3 sharing with full paying adults",
+                "free"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Room)",
+                "1,150"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 4–12 sharing with 1–2 full paying adults (Chalet)",
+                "2,000"
+              ],
+              [
+                "Low Season · 01 Dec 2026 – 28 Feb 2027 · Child 13 and older sharing with 2 full paying adults (Chalet)",
+                "4,000"
+              ]
+            ]
+          },
+          {
+            "title": "Extras — non-commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Morning Nature Drive (45–60 min)",
+                "500"
+              ],
+              [
+                "Sundowner Drive (approx 2 hours) incl. drinks",
+                "600"
+              ],
+              [
+                "Nature Excursion (3–4 hours)",
+                "800"
+              ],
+              [
+                "Guided Walk (60–90 min)",
+                "350"
+              ],
+              [
+                "Guided Walk (3–4 hours)",
+                "600"
+              ],
+              [
+                "Rock painting tour with sundowner (approx 3 hours)",
+                "750"
+              ],
+              [
+                "Lunch incl. Dessert",
+                "290"
+              ],
+              [
+                "Transfer — Airstrip Ondili / Dawib-Ost",
+                "free"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide — non-commissionable, and carried from Ondili’s 2025/26 sheet (the 2026/2027 sheet prints no guide room)",
+            "rows": [
+              [
+                "Tour guide (guide room) — Ondili’s printed rate, non-commissionable",
+                "1,090"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  };
+  var LOWER = [LEGACY_RACK_BY_YEAR, SHEET_RACK_BY_YEAR, VF_RACK, NAM_RACK];
+  Object.keys(ONDILI26).forEach(function (slug) {
+    LOWER.forEach(function (m) { if (m && m[slug]) { try { delete m[slug]; } catch (e) {} } });
+    DDS_RACK_BY_YEAR[slug] = ONDILI26[slug];
+  });
+})();
