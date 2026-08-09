@@ -25935,3 +25935,265 @@ Object.assign(DDS_RACK_BY_YEAR, {
     DDS_RACK_BY_YEAR[slug] = ONDILI26[slug];
   });
 })();
+
+// ---------------------------------------------------------------------------
+// Big Sky Lodges — 2026 season. Ai Aiba Lodge, Etendeka Mountain Camp and
+// Etendeka Hiking Trails, from the rack and STO sheets Big Sky sent Desert
+// Tracks in September 2025.
+//
+// Both columns are published, so both are loaded exactly as printed. Their
+// discount is 15%, not the 20% house band, and they round the net to the whole
+// N$ — 2,105 x 0.85 is 1,789.25 and they charge 1,789.00. Deriving either
+// column would have invented figures they do not actually invoice.
+//
+// This replaces what was here before, which was wrong three ways at once: the
+// figures were an older season's, every row sat at rack = net x 1.20 including
+// the conservation levy that both sheets call non-commissionable, and the whole
+// thing was filed under 2027 while 2026 sat empty. Big Sky told us in writing
+// that 2027 was not finalised.
+//
+// Non-commissionable and therefore carrying rack = net: the conservation levy,
+// tour guide rooms (published on the STO sheet only, stated nett), meals and
+// activities. Ai Aiba's activities sheet was cross-checked against its rate
+// sheet — every figure agrees.
+// ---------------------------------------------------------------------------
+;(function () {
+  var BIGSKY26 = {
+    "ai-aiba-lodge": {
+      "2026": {
+        "name": "Ai Aiba Lodge",
+        "region": "Central Namibia",
+        "currency": "N$",
+        "validity": "16 Jan 2026 – 15 Jan 2027",
+        "note": "Big Sky Lodges publish rack and STO side by side and both are loaded here exactly as printed — nothing is derived. Their trade discount is 15%, and they round the net to the whole N$, so deriving one column from the other would not match what they invoice. The conservation levy, tour guide rooms, meals and activities are stated non-commissionable and therefore carry the same figure as rack and net. Season dates are printed in every label. Big Sky Lodges had not finalised 2027 when they sent these — their words: \"Our 2027 rates are not finalized yet. These will most likely only be published begin of next year.\" So this property holds 2026 only. Note that Ai Aiba's high season runs to 15 January 2027.",
+        "sections": [
+          {
+            "title": "2026 — rack · 16 Jan 2026 – 15 Jan 2027",
+            "rows": [
+              [
+                "Low Season · 16 Jan 2026 – 30 Jun 2026 · BB + guided sundowner walk — per person sharing",
+                "2,105"
+              ],
+              [
+                "Low Season · 16 Jan 2026 – 30 Jun 2026 · BB + guided sundowner walk — single",
+                "2,840"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 15 Jan 2027 · BB + guided sundowner walk — per person sharing",
+                "3,075"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 15 Jan 2027 · BB + guided sundowner walk — single",
+                "4,155"
+              ]
+            ]
+          },
+          {
+            "title": "Conservation levy — not commissionable, so rack and net are the same",
+            "rows": [
+              [
+                "Conservation Levy — per person per night, additional, not commissionable",
+                "160"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide accommodation — nett, not commissionable, and no conservation levy applies",
+            "rows": [
+              [
+                "Low Season · 16 Jan 2026 – 30 Jun 2026 · Tour guide room — 3 pax or less (25% off STO)",
+                "1,342"
+              ],
+              [
+                "Low Season · 16 Jan 2026 – 30 Jun 2026 · Tour guide room — 4 pax or more (50% off STO)",
+                "895"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 15 Jan 2027 · Tour guide room — 3 pax or less (25% off STO)",
+                "1,960"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 15 Jan 2027 · Tour guide room — 4 pax or more (50% off STO)",
+                "1,307"
+              ]
+            ]
+          },
+          {
+            "title": "Meals — not commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Dinner (3-course)",
+                "495"
+              ],
+              [
+                "Bush Boma dinner (min 6 pax, pre-booked)",
+                "720"
+              ],
+              [
+                "Lunch & dessert",
+                "245"
+              ],
+              [
+                "Lunch packs",
+                "210"
+              ]
+            ]
+          },
+          {
+            "title": "Activities — not commissionable, printed rate applies to rack and net alike",
+            "rows": [
+              [
+                "Nature Drive / Bushman rock art (approx 3 hrs, incl. snacks & 1 drink)",
+                "680"
+              ],
+              [
+                "Nature Drive & Boma Bush Dinner (min 6 pax, pre-booked)",
+                "1,350"
+              ],
+              [
+                "Ai Aiba Guided Walk (2–3 hrs, incl. snacks & 1 drink)",
+                "410"
+              ],
+              [
+                "Guided Walk & Drive (approx 3 hrs, incl. snacks & 1 drink)",
+                "680"
+              ],
+              [
+                "Guided Walk with San Living Museum visit (approx 3 hrs, incl. entrance)",
+                "650"
+              ],
+              [
+                "Guided Mountain Bike Tour incl. E-bike (max 4 hrs, min age 8)",
+                "950"
+              ],
+              [
+                "Guided Sundowner Mountain Bike Ride (incl. E-bike & 1 drink, min age 8)",
+                "320"
+              ],
+              [
+                "Guided Sundowner Walk",
+                "included in the accommodation rate, drinks excluded"
+              ],
+              [
+                "Self-guided walking trail, and mountain bike trails with own bicycle",
+                "no charge"
+              ],
+              [
+                "San Living Museum tours — bushwalk, village visit, combination",
+                "on request"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "etendeka-mountain-camp": {
+      "2026": {
+        "name": "Etendeka Mountain Camp",
+        "region": "Kaokoland",
+        "currency": "N$",
+        "validity": "01 Jan 2026 – 31 Dec 2026",
+        "note": "Big Sky Lodges publish rack and STO side by side and both are loaded here exactly as printed — nothing is derived. Their trade discount is 15%, and they round the net to the whole N$, so deriving one column from the other would not match what they invoice. The conservation levy, tour guide rooms, meals and activities are stated non-commissionable and therefore carry the same figure as rack and net. Season dates are printed in every label. Big Sky Lodges had not finalised 2027 when they sent these — their words: \"Our 2027 rates are not finalized yet. These will most likely only be published begin of next year.\" So this property holds 2026 only. Note that Ai Aiba's high season runs to 15 January 2027. Not suitable for children under 8. Scenic transfer from the Etendeka parking area at Palmwag Lodge, pick-up 16h00; no private vehicles beyond that point.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Jan 2026 – 31 Dec 2026",
+            "rows": [
+              [
+                "Low Season · 01 Jan 2026 – 30 Jun 2026 · Full board & guided activities, minimum 2 nights — per person sharing",
+                "5,520"
+              ],
+              [
+                "Low Season · 01 Jan 2026 – 30 Jun 2026 · Full board & guided activities, minimum 2 nights — single",
+                "6,865"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 31 Dec 2026 · Full board & guided activities, minimum 2 nights — per person sharing",
+                "6,605"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 31 Dec 2026 · Full board & guided activities, minimum 2 nights — single",
+                "8,365"
+              ]
+            ]
+          },
+          {
+            "title": "Conservation levy — not commissionable, so rack and net are the same",
+            "rows": [
+              [
+                "Conservation Levy — per person per night, additional, not commissionable",
+                "280"
+              ]
+            ]
+          },
+          {
+            "title": "Tour guide accommodation — nett, not commissionable, and no conservation levy applies",
+            "rows": [
+              [
+                "Low Season · 01 Jan 2026 – 30 Jun 2026 · Tour guide tent — 3 pax or less (25% off STO)",
+                "3,519"
+              ],
+              [
+                "Low Season · 01 Jan 2026 – 30 Jun 2026 · Tour guide tent — 4 pax or more (50% off STO)",
+                "2,346"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 31 Dec 2026 · Tour guide tent — 3 pax or less (25% off STO)",
+                "4,211"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 31 Dec 2026 · Tour guide tent — 4 pax or more (50% off STO)",
+                "2,807"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "etendeka-hiking-trails": {
+      "2026": {
+        "name": "Etendeka Hiking Trails",
+        "region": "Kaokoland",
+        "currency": "N$",
+        "validity": "01 Jan 2026 – 31 Dec 2026",
+        "note": "Big Sky Lodges publish rack and STO side by side and both are loaded here exactly as printed — nothing is derived. Their trade discount is 15%, and they round the net to the whole N$, so deriving one column from the other would not match what they invoice. The conservation levy, tour guide rooms, meals and activities are stated non-commissionable and therefore carry the same figure as rack and net. Season dates are printed in every label. Big Sky Lodges had not finalised 2027 when they sent these — their words: \"Our 2027 rates are not finalized yet. These will most likely only be published begin of next year.\" So this property holds 2026 only. Note that Ai Aiba's high season runs to 15 January 2027. Minimum 2 guests, maximum 10. Not suitable for children under 12. 3 or 4 day trail, combinable with Etendeka Mountain Camp. Meet at the Etendeka parking area at Palmwag Lodge at 16h00. No tour guide facilities on the trail: guides can be accommodated in the guide tents at Etendeka Mountain Camp at the standard guide rate, and guides walking the trail pay the standard trail rate.",
+        "sections": [
+          {
+            "title": "2026 — rack · 01 Jan 2026 – 31 Dec 2026",
+            "rows": [
+              [
+                "Low Season · 01 Jan 2026 – 30 Jun 2026 · Full board, minimum 2 nights — per person sharing",
+                "5,945"
+              ],
+              [
+                "Low Season · 01 Jan 2026 – 30 Jun 2026 · Full board, minimum 2 nights — single",
+                "7,385"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 31 Dec 2026 · Full board, minimum 2 nights — per person sharing",
+                "7,440"
+              ],
+              [
+                "High Season · 01 Jul 2026 – 31 Dec 2026 · Full board, minimum 2 nights — single",
+                "9,420"
+              ]
+            ]
+          },
+          {
+            "title": "Conservation levy — not commissionable, so rack and net are the same",
+            "rows": [
+              [
+                "Conservation Levy — per person per night, additional, not commissionable",
+                "280"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  };
+  var LOWER = [LEGACY_RACK_BY_YEAR, SHEET_RACK_BY_YEAR, VF_RACK, NAM_RACK];
+  Object.keys(BIGSKY26).forEach(function (slug) {
+    LOWER.forEach(function (m) { if (m && m[slug]) { try { delete m[slug]; } catch (e) {} } });
+    DDS_RACK_BY_YEAR[slug] = BIGSKY26[slug];
+  });
+})();
