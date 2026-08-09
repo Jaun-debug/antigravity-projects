@@ -199,7 +199,22 @@ function lodgeActivities(L){var out=[],seen={};[].concat((L&&L.rates)||[],(L&&L.
 var PROVIDERS={activities:[],vehicles:[]};
 function itinRegions(){var seen={},list=[];S.lodges.forEach(function(d){if(d.lodgeIdx<0)return;var L=RATES.lodges[d.lodgeIdx];if(L&&!seen[L.region]){seen[L.region]=1;list.push(L.region);}});return list;}
 function actProvidersIn(region){var out=[];(PROVIDERS.activities||[]).forEach(function(p,i){if(p.region===region)out.push({p:p,i:i});});return out;}
-function provActOptions(gi){var p=(PROVIDERS.activities||[])[gi];if(!p)return '<option value="">—</option>';return '<option value="">Add activity…</option>'+p.items.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(p.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>';}).join('');}
+function provActOptions(gi){var p=(PROVIDERS.activities||[])[gi];if(!p)return '<option value="">—</option>';
+/* Activities carry p/p27 (net STO) and r/r27 (rack), the same two-year shape
+   flights use. The quote takes the RACK so an itinerary earns on activities;
+   the net is shown beside it so the margin is visible. Where a supplier states
+   an activity non-commissionable the two are equal, which reads correctly.
+   No rack for the year -> the row is listed but cannot be added, so a figure is
+   never quoted under a year it does not belong to. */
+var y27=(S.year||'2026')==='2027';
+var pick=function(a,k27,k26){var v=y27?a[k27]:a[k26];return (v===undefined||v===null)?null:v;};
+return '<option value="">Add activity…</option>'+p.items.map(function(a){
+  var rk=pick(a,'r27','r'), nt=pick(a,'p27','p');
+  var q=(rk!=null)?rk:nt;
+  if(q==null)return '<option value="" disabled>'+esc(a.n)+' — no '+(y27?'2027':'2026')+' rate published</option>';
+  var lbl=esc(a.n)+' — '+money(q)+((nt!=null&&rk!=null&&nt!==rk)?(' (net '+money(nt)+')'):'');
+  return '<option value="'+q+'" data-net="'+(nt==null?'':nt)+'" data-name="'+esc(p.name+' — '+a.n)+'">'+lbl+'</option>';
+}).join('');}
 function flightRouteOptions(fi){var f=(PROVIDERS.flights||[])[fi];if(!f)return '<option value="">—</option>';var y27=(S.year||'2026')==='2027';return '<option value="">Add flight leg…</option>'+f.items.map(function(it,ii){var p=(y27&&it.p27!=null)?it.p27:it.p;return '<option value="'+ii+'" data-p="'+p+'" data-name="'+esc(f.name+' · '+it.n)+'">'+esc(it.n)+' — '+money(p)+' /seat</option>';}).join('');}
 
 /* ---- totals ---- */
