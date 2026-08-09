@@ -60,12 +60,27 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .lodgepick{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:#fff;font:inherit;font-size:.82rem;color:var(--text-main);outline:none}
 .lodgepick::placeholder{color:var(--muted)}
 .lodgewrap{position:relative}
-.rownum .grip{cursor:grab;color:#c0b3a2;font-size:.95rem;letter-spacing:-3px;padding-right:5px;-webkit-user-select:none;user-select:none}
+/* The grip is painted, not typed. Two stacked colons squashed together read
+   as a smudge at this size and depend on the font; a repeating radial-gradient
+   gives an even 2x3 dot grid that scales and takes currentColor. */
+.rownum .grip{display:inline-block;width:12px;height:19px;vertical-align:-4px;margin-right:7px;cursor:grab;
+  color:#b3a28c;background-image:radial-gradient(currentColor 1.8px,transparent 1.9px);
+  background-size:6px 6.5px;background-position:0 3px;-webkit-user-select:none;user-select:none}
 .rownum .grip:hover{color:#c85a17}
+.rownum .grip:active{cursor:grabbing;color:#c85a17}
 .rownum .grip:active{cursor:grabbing}
-tr.dragging td{opacity:.45}
-tr.dropbefore td{box-shadow:inset 0 2px 0 #c85a17}
-tr.dropafter td{box-shadow:inset 0 -2px 0 #c85a17}
+tr.dragging td{opacity:.22}
+tr.dropbefore td{box-shadow:inset 0 4px 0 #c85a17}
+tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
+/* The row you are dragging is lifted off the page as a copy that follows the
+   cursor, so you can see the whole day travelling to where it will land. It is
+   pointer-events:none, otherwise it would sit between the cursor and the row
+   underneath and elementFromPoint would only ever find the ghost. */
+.nr-ghost{position:fixed;z-index:9000;pointer-events:none;opacity:.95;background:#fff;
+  border:1px solid rgba(0,0,0,.10);border-radius:8px;overflow:hidden;
+  box-shadow:0 18px 40px rgba(0,0,0,.24)}
+.nr-ghost table{border-collapse:collapse}
+.nr-ghost td{border-bottom:none}
 .lodgemenu{display:none;position:absolute;left:0;right:0;min-width:280px;top:calc(100% + 2px);z-index:80;background:#fff;border:1px solid var(--border);border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.18);max-height:250px;overflow:auto}
 .lodgemenu.on{display:block}
 .lodgemenu b{display:block;padding:6px 9px;font-weight:400;font-size:.82rem;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -716,7 +731,7 @@ function renderPanel(){persist();
         roomCell='<div class="roomcell"><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>'+boxes+mealUI+'</div>';
         paxCell='';
       }
-      return '<tr data-row="'+i+'"><td class="rownum" title="Drag by the dots to move this day">'+'<span class="grip">\u22EE\u22EE</span>'+(i+1)+'</td>'
+      return '<tr data-row="'+i+'"><td class="rownum" title="Drag by the dots to move this day">'+'<span class="grip"></span>'+(i+1)+'</td>'
         +'<td><input class="nights" type="number" min="1" value="'+(d.nights||1)+'" data-i="'+i+'" data-f="nights"></td>'
         +'<td>'+regionLodgeCell+'</td>'
         +'<td>'+roomCell+'</td>'
@@ -727,9 +742,9 @@ function renderPanel(){persist();
           :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<tr><td></td><td colspan="6" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--muted)">&#8595; estimating drive distance…</td></tr>':''));
     }).join('');
     if(!S.lodges.length) body='<tr><td colspan="7" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
-    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically. Days run in the order shown &mdash; drag a row by the <b>⋮⋮</b> beside its number to visit a lodge earlier or later; nights, rates and its activities move with it.</p>'
+    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically. Days run in the order shown &mdash; drag a row by the dotted grip beside its number to visit a lodge earlier or later; nights, rates and its activities move with it.</p>'
       +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'+'<div style="display:flex;gap:8px;align-items:center;margin:0 0 14px"><span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Rate year</span>'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(200,90,23,.6);background:'+(on?'rgba(200,90,23,.85)':'rgba(200,90,23,.08)')+';color:'+(on?'#fff':'#c85a17')+'">'+y+'</button>';}).join('')+'</div>'
-      +'<div style="max-width:100%"><table class="bd" style="table-layout:fixed;width:100%"><thead><tr><th style="width:42px">#</th><th style="width:50px">Nights</th><th style="width:22%">Region &amp; Lodge</th><th style="width:38%">Rooms &amp; rates</th><th class="r" style="width:84px">Per night</th><th class="r" style="width:92px">Subtotal</th><th style="width:30px"></th></tr></thead><tbody>'+body+'</tbody></table></div>'
+      +'<div style="max-width:100%"><table class="bd" style="table-layout:fixed;width:100%"><thead><tr><th style="width:48px">#</th><th style="width:50px">Nights</th><th style="width:22%">Region &amp; Lodge</th><th style="width:38%">Rooms &amp; rates</th><th class="r" style="width:84px">Per night</th><th class="r" style="width:92px">Subtotal</th><th style="width:30px"></th></tr></thead><tbody>'+body+'</tbody></table></div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
   } else if(active==='vehicle'){
@@ -907,7 +922,39 @@ function bindPanel(){
      does nothing at all on touch. Plain pointer events behave the same
      everywhere, so the grip tracks the cursor by hand and the row under it is
      found with elementFromPoint. */
-  var _dragFrom=-1, _dragRow=null;
+  var _dragFrom=-1, _dragRow=null, _ghost=null, _grabDY=0, _lastX=0, _lastY=0, _scrollT=null, _lastSlot=-1;
+  /* A copy of the row, lifted out of the table and moved with the cursor. It is
+     rebuilt rather than positioned in place because a <tr> cannot be given
+     position:fixed; the column widths are carried over from the header so the
+     copy lines up with the table it came from. cloneNode copies attributes but
+     not what is currently selected or typed, so those are copied by hand. */
+  var makeGhost=function(tr,y){
+    var tbl=tr.parentNode; while(tbl&&tbl.tagName!=='TABLE') tbl=tbl.parentNode;
+    if(!tbl) return;
+    var r=tr.getBoundingClientRect();
+    var cg='';
+    tbl.querySelectorAll('thead th').forEach(function(th){
+      cg+='<col style="width:'+th.getBoundingClientRect().width+'px">'; });
+    var t=document.createElement('table');
+    t.className=tbl.className;
+    t.style.tableLayout='fixed'; t.style.width=r.width+'px';
+    t.innerHTML='<colgroup>'+cg+'</colgroup><tbody></tbody>';
+    var c=tr.cloneNode(true);
+    c.classList.remove('dragging');
+    c.removeAttribute('data-row');     // a copy must not answer to a row query
+    var so=tr.querySelectorAll('select'), sc=c.querySelectorAll('select');
+    for(var k=0;k<so.length;k++) if(sc[k]) sc[k].selectedIndex=so[k].selectedIndex;
+    var io=tr.querySelectorAll('input'), ic=c.querySelectorAll('input');
+    for(var j=0;j<io.length;j++) if(ic[j]) ic[j].setAttribute('value',io[j].value);
+    t.querySelector('tbody').appendChild(c);
+    var g=document.createElement('div');
+    g.className='nr-ghost';
+    g.style.left=r.left+'px'; g.style.top=r.top+'px'; g.style.width=r.width+'px';
+    g.appendChild(t);
+    document.body.appendChild(g);
+    _ghost=g; _grabDY=y-r.top;
+  };
+  var killGhost=function(){ if(_ghost&&_ghost.parentNode) _ghost.parentNode.removeChild(_ghost); _ghost=null; };
   var clearMarks=function(){
     document.querySelectorAll('#panel tr.dropbefore,#panel tr.dropafter').forEach(function(t){
       t.classList.remove('dropbefore'); t.classList.remove('dropafter'); });
@@ -917,21 +964,44 @@ function bindPanel(){
     while(el&&el!==document.body&&!(el.tagName==='TR'&&el.hasAttribute('data-row'))) el=el.parentNode;
     return (el&&el.tagName==='TR')?el:null;
   };
+  /* Which gap the day would drop into: above the row the cursor is over, or
+     below it, decided by the halfway line. A day's row is tall, so marking the
+     whole row would put the line far from the cursor and under the copy being
+     dragged; this keeps it beside the pointer where it can be seen. Returns the
+     slot number, 0..length. */
+  var slotFor=function(tr,y){
+    var r=tr.getBoundingClientRect(), to=+tr.dataset.row;
+    return (y < r.top + r.height/2) ? to : to+1;
+  };
   var dragMove=function(x,y){
     if(_dragFrom<0) return;
-    var tr=rowUnder(x,y); clearMarks();
-    if(!tr) return;
-    var to=+tr.dataset.row;
-    if(to!==_dragFrom) tr.classList.add(to<_dragFrom?'dropbefore':'dropafter');
+    _lastX=x; _lastY=y;
+    if(_ghost) _ghost.style.top=(y-_grabDY)+'px';
+    var tr=rowUnder(x,y);
+    if(!tr) return;          // over the totals bar or off the table: hold the last marker
+    clearMarks();
+    var k=slotFor(tr,y);
+    _lastSlot=k;
+    if(k===_dragFrom||k===_dragFrom+1) return;      // would land back where it started
+    tr.classList.add(k===+tr.dataset.row?'dropbefore':'dropafter');
   };
   var dragEnd=function(x,y){
     if(_dragFrom<0) return;
     var tr=(x==null)?null:rowUnder(x,y), from=_dragFrom;
     _dragFrom=-1;
     if(_dragRow) _dragRow.classList.remove('dragging');
-    _dragRow=null; clearMarks();
+    _dragRow=null; clearMarks(); killGhost();
+    if(_scrollT){ clearInterval(_scrollT); _scrollT=null; }
     document.body.style.userSelect='';
-    if(tr){ var to=+tr.dataset.row; if(to!==from) moveLodge(from,to); }
+    /* Released over the sticky totals bar, or off the table entirely, the
+       cursor is not over a row — so the last gap that was actually marked is
+       what the drop means, rather than nothing at all. */
+    var k=tr?slotFor(tr,y):_lastSlot;
+    _lastSlot=-1;
+    if(k>-1){
+      var to=(from<k)?k-1:k;                        // the slot shifts once the row leaves
+      if(to!==from) moveLodge(from,to);
+    }
   };
   var onMove=function(ev){ dragMove(ev.clientX,ev.clientY); };
   var onUp=function(ev){
@@ -949,16 +1019,33 @@ function bindPanel(){
   document.querySelectorAll('#panel tr[data-row] .grip').forEach(function(g){
     var tr=g.parentNode; while(tr&&tr.tagName!=='TR') tr=tr.parentNode;
     if(!tr) return;
-    var begin=function(){ _dragFrom=+tr.dataset.row; _dragRow=tr; tr.classList.add('dragging');
-      document.body.style.userSelect='none'; };
+    var begin=function(y){
+      _dragFrom=+tr.dataset.row; _dragRow=tr;
+      makeGhost(tr,y);                       // copy first, then dim the original
+      tr.classList.add('dragging');
+      document.body.style.userSelect='none';
+      /* A row is taller than it looks — with the cursor held near an edge the
+         page has to scroll itself, or long itineraries cannot be reordered. */
+      if(_scrollT) clearInterval(_scrollT);
+      _scrollT=setInterval(function(){
+        if(_dragFrom<0) return;
+        var m=90, dy=0, de=document.documentElement;
+        var atTop=(window.pageYOffset<=0);
+        var atEnd=(window.innerHeight+window.pageYOffset>=de.scrollHeight-1);
+        if(_lastY<m&&!atTop) dy=-16; else if(_lastY>window.innerHeight-m&&!atEnd) dy=16;
+        if(dy){ window.scrollBy(0,dy); dragMove(_lastX,_lastY); }
+      },30);
+    };
     g.onmousedown=function(ev){
       if(ev.button) return;
-      ev.preventDefault(); begin();
+      ev.preventDefault(); _lastX=ev.clientX; _lastY=ev.clientY; begin(ev.clientY);
       document.addEventListener('mousemove',onMove);
       document.addEventListener('mouseup',onUp);
     };
     g.ontouchstart=function(ev){
-      begin();
+      var t0=ev.touches[0];
+      if(t0){ _lastX=t0.clientX; _lastY=t0.clientY; }
+      begin(t0?t0.clientY:0);
       document.addEventListener('touchmove',onTMove,{passive:false});
       document.addEventListener('touchend',onTEnd);
     };
