@@ -60,6 +60,12 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .lodgepick{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:#fff;font:inherit;font-size:.82rem;color:var(--text-main);outline:none}
 .lodgepick::placeholder{color:var(--muted)}
 .lodgewrap{position:relative}
+.rownum .grip{cursor:grab;color:#c0b3a2;font-size:.95rem;letter-spacing:-3px;padding-right:5px;-webkit-user-select:none;user-select:none}
+.rownum .grip:hover{color:#c85a17}
+.rownum .grip:active{cursor:grabbing}
+tr.dragging td{opacity:.45}
+tr.dropbefore td{box-shadow:inset 0 2px 0 #c85a17}
+tr.dropafter td{box-shadow:inset 0 -2px 0 #c85a17}
 .lodgemenu{display:none;position:absolute;left:0;right:0;min-width:280px;top:calc(100% + 2px);z-index:80;background:#fff;border:1px solid var(--border);border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.18);max-height:250px;overflow:auto}
 .lodgemenu.on{display:block}
 .lodgemenu b{display:block;padding:6px 9px;font-weight:400;font-size:.82rem;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -640,6 +646,25 @@ function lodgeIdxFromText(v){
   return part;
 }
 
+/* Reorder the days. Activities are filed against a lodge by its ROW NUMBER
+   (`ord`), so moving a row without remapping them would leave a lodge's game
+   drives sitting on whichever lodge landed in that slot. The permutation is
+   computed on a copy of the indices and applied to `ord` in the same step.
+   Every leg distance is cleared because all of them may now be wrong;
+   autoDistances refills them from the cached coordinates. */
+function moveLodge(from,to){
+  var n=S.lodges.length;
+  if(from===to||from<0||to<0||from>=n||to>=n) return;
+  var idx=[]; for(var k=0;k<n;k++) idx.push(k);
+  S.lodges.splice(to,0,S.lodges.splice(from,1)[0]);
+  idx.splice(to,0,idx.splice(from,1)[0]);          // idx[newPosition] = oldPosition
+  var newOf={}; idx.forEach(function(o,np){ newOf[o]=np; });
+  (S.activities||[]).forEach(function(a){
+    if(a.ord!=null&&newOf[a.ord]!=null) a.ord=newOf[a.ord];
+  });
+  S.lodges.forEach(function(d){ d.legToNext=''; });
+  renderPanel(); autoDistances();
+}
 function renderPanel(){persist();
   var p=document.getElementById('panel'),h='';
   if(active==='trip'){
@@ -691,7 +716,7 @@ function renderPanel(){persist();
         roomCell='<div class="roomcell"><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>'+boxes+mealUI+'</div>';
         paxCell='';
       }
-      return '<tr><td class="rownum">'+(i+1)+'</td>'
+      return '<tr data-row="'+i+'"><td class="rownum" title="Drag by the dots to move this day">'+'<span class="grip">\u22EE\u22EE</span>'+(i+1)+'</td>'
         +'<td><input class="nights" type="number" min="1" value="'+(d.nights||1)+'" data-i="'+i+'" data-f="nights"></td>'
         +'<td>'+regionLodgeCell+'</td>'
         +'<td>'+roomCell+'</td>'
@@ -702,9 +727,9 @@ function renderPanel(){persist();
           :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<tr><td></td><td colspan="6" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--muted)">&#8595; estimating drive distance…</td></tr>':''));
     }).join('');
     if(!S.lodges.length) body='<tr><td colspan="7" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
-    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically.</p>'
+    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically. Days run in the order shown &mdash; drag a row by the <b>⋮⋮</b> beside its number to visit a lodge earlier or later; nights, rates and its activities move with it.</p>'
       +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'+'<div style="display:flex;gap:8px;align-items:center;margin:0 0 14px"><span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Rate year</span>'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(200,90,23,.6);background:'+(on?'rgba(200,90,23,.85)':'rgba(200,90,23,.08)')+';color:'+(on?'#fff':'#c85a17')+'">'+y+'</button>';}).join('')+'</div>'
-      +'<div style="max-width:100%"><table class="bd" style="table-layout:fixed;width:100%"><thead><tr><th style="width:26px">#</th><th style="width:50px">Nights</th><th style="width:22%">Region &amp; Lodge</th><th style="width:38%">Rooms &amp; rates</th><th class="r" style="width:84px">Per night</th><th class="r" style="width:92px">Subtotal</th><th style="width:30px"></th></tr></thead><tbody>'+body+'</tbody></table></div>'
+      +'<div style="max-width:100%"><table class="bd" style="table-layout:fixed;width:100%"><thead><tr><th style="width:42px">#</th><th style="width:50px">Nights</th><th style="width:22%">Region &amp; Lodge</th><th style="width:38%">Rooms &amp; rates</th><th class="r" style="width:84px">Per night</th><th class="r" style="width:92px">Subtotal</th><th style="width:30px"></th></tr></thead><tbody>'+body+'</tbody></table></div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
   } else if(active==='vehicle'){
@@ -874,6 +899,70 @@ function bindPanel(){
   });
   if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:2});renderPanel();autoDistances()};
   document.querySelectorAll('#panel [data-lodge-rm]').forEach(function(b){b.onclick=function(){var ri=+b.dataset.lodgeRm;S.lodges.splice(ri,1);if(S.lodges[ri-1])S.lodges[ri-1].legToNext='';renderPanel();autoDistances()}});
+  /* Drag a day onto another day to reorder it.
+
+     This deliberately does NOT use HTML5 drag-and-drop. That API is the one
+     that just cost us three rounds on the lodge picker: Safari reports it
+     differently from Chrome and gives no usable event on some elements, and it
+     does nothing at all on touch. Plain pointer events behave the same
+     everywhere, so the grip tracks the cursor by hand and the row under it is
+     found with elementFromPoint. */
+  var _dragFrom=-1, _dragRow=null;
+  var clearMarks=function(){
+    document.querySelectorAll('#panel tr.dropbefore,#panel tr.dropafter').forEach(function(t){
+      t.classList.remove('dropbefore'); t.classList.remove('dropafter'); });
+  };
+  var rowUnder=function(x,y){
+    var el=document.elementFromPoint(x,y);
+    while(el&&el!==document.body&&!(el.tagName==='TR'&&el.hasAttribute('data-row'))) el=el.parentNode;
+    return (el&&el.tagName==='TR')?el:null;
+  };
+  var dragMove=function(x,y){
+    if(_dragFrom<0) return;
+    var tr=rowUnder(x,y); clearMarks();
+    if(!tr) return;
+    var to=+tr.dataset.row;
+    if(to!==_dragFrom) tr.classList.add(to<_dragFrom?'dropbefore':'dropafter');
+  };
+  var dragEnd=function(x,y){
+    if(_dragFrom<0) return;
+    var tr=(x==null)?null:rowUnder(x,y), from=_dragFrom;
+    _dragFrom=-1;
+    if(_dragRow) _dragRow.classList.remove('dragging');
+    _dragRow=null; clearMarks();
+    document.body.style.userSelect='';
+    if(tr){ var to=+tr.dataset.row; if(to!==from) moveLodge(from,to); }
+  };
+  var onMove=function(ev){ dragMove(ev.clientX,ev.clientY); };
+  var onUp=function(ev){
+    document.removeEventListener('mousemove',onMove);
+    document.removeEventListener('mouseup',onUp);
+    dragEnd(ev.clientX,ev.clientY);
+  };
+  var onTMove=function(ev){ var t=ev.touches[0]; if(!t)return; ev.preventDefault(); dragMove(t.clientX,t.clientY); };
+  var onTEnd=function(ev){
+    document.removeEventListener('touchmove',onTMove,{passive:false});
+    document.removeEventListener('touchend',onTEnd);
+    var t=(ev.changedTouches&&ev.changedTouches[0]);
+    dragEnd(t?t.clientX:null,t?t.clientY:null);
+  };
+  document.querySelectorAll('#panel tr[data-row] .grip').forEach(function(g){
+    var tr=g.parentNode; while(tr&&tr.tagName!=='TR') tr=tr.parentNode;
+    if(!tr) return;
+    var begin=function(){ _dragFrom=+tr.dataset.row; _dragRow=tr; tr.classList.add('dragging');
+      document.body.style.userSelect='none'; };
+    g.onmousedown=function(ev){
+      if(ev.button) return;
+      ev.preventDefault(); begin();
+      document.addEventListener('mousemove',onMove);
+      document.addEventListener('mouseup',onUp);
+    };
+    g.ontouchstart=function(ev){
+      begin();
+      document.addEventListener('touchmove',onTMove,{passive:false});
+      document.addEventListener('touchend',onTEnd);
+    };
+  });
   // line items
   document.querySelectorAll('#panel input[data-k]').forEach(function(el){
     el.oninput=function(){var k=el.dataset.k,i=+el.dataset.i,f=el.dataset.f;if(S[k][i])S[k][i][f]=el.value;updateTotals();
