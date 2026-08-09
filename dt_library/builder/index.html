@@ -59,6 +59,13 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .bd .nights,.bd .pax{width:48px;text-align:center}
 .lodgepick{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:#fff;font:inherit;font-size:.82rem;color:var(--text-main);outline:none}
 .lodgepick::placeholder{color:var(--muted)}
+.lodgewrap{position:relative}
+.lodgemenu{display:none;position:absolute;left:0;right:0;min-width:280px;top:calc(100% + 2px);z-index:80;background:#fff;border:1px solid var(--border);border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.18);max-height:250px;overflow:auto}
+.lodgemenu.on{display:block}
+.lodgemenu b{display:block;padding:6px 9px;font-weight:400;font-size:.82rem;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lodgemenu b:hover,.lodgemenu b.sel{background:#f1ece2}
+.lodgemenu i{display:block;padding:6px 9px;font-size:.78rem;color:var(--muted)}
+.lodgemenu .rg{color:var(--muted);font-size:.72rem}
 .cellsel{display:flex;flex-direction:column;gap:5px;min-width:190px}
 .roomcell{display:flex;flex-direction:column;gap:6px;min-width:0}
 .qtygrid{display:flex;flex-direction:column;gap:4px;margin-top:2px}
@@ -582,24 +589,10 @@ function botswanaSection(){
 }
 
 /* ---- panels ---- */
-function renderPanel(){persist();
-  var p=document.getElementById('panel'),h='';
-  if(active==='trip'){
-    h='<h2>Trip &amp; Client</h2><p class="lead">Who the quote is for and your markup.</p>'
-      +'<div class="fld"><label>Quote / client name</label><input id="f-name" value="'+esc(S.name)+'" placeholder="e.g. Smith — Namibia 2026"></div>'
-      +'<div class="grid3"><div class="fld"><label>Adults</label><input id="f-adults" type="number" min="1" value="'+S.adults+'"></div>'
-      +'<div class="fld"><label>Children</label><input id="f-children" type="number" min="0" value="'+S.children+'"></div>'
-      +'<div class="fld"><label>Markup %</label><input id="f-markup" type="number" min="0" step="0.5" value="'+S.markup+'"></div></div>'
-      +'<div class="fld" style="max-width:300px"><label>Trip type</label><select id="f-triptype">'
-      +['selfdrive|Self-drive (rental only)','guided|Guided (guide + 4×4, game-drive fuel)','flyin|Fly-in (flights, no vehicle)','hybrid|Hybrid (mix per day)']
-        .map(function(o){var v=o.split('|')[0],l=o.split('|')[1];return '<option value="'+v+'" '+(S.tripType===v?'selected':'')+'>'+l+'</option>'}).join('')
-      +'</select></div>'
-      +'<p class="muted" style="font-style:normal">Trip type sets sensible defaults (4×4 + game-drive fuel for guided; self-drive bills no fuel since the client refuels; no vehicle/fuel for fly-in). You can still adjust any section.</p>';
-  } else if(active==='lodges'){
-    var regs=regions();
-    applySeasonRates();
-    var body=S.lodges.map(function(d,i){
-      var rlist=regs.slice();if(d.region&&rlist.indexOf(d.region)<0)rlist.push(d.region);
+/* These live at top level on purpose. Declared inside renderPanel they were
+   scoped to it, so the lodge input handler in bindPanel called names that did
+   not exist there: every pick threw a silent ReferenceError and the row stayed
+   empty. That, not the event binding, is why the type-ahead did nothing. */
 /* ── find a lodge by name, without picking a region first ─────────────────
    The lodge select only fills once a region is chosen, so you had to know the
    region to find the lodge. This is a type-ahead over EVERY lodge; choosing
@@ -609,18 +602,24 @@ function renderPanel(){persist();
 /* Options for one row: this region's lodges when a region is set, otherwise all
    of them with the region appended so duplicate names stay distinguishable.
    'ᴬ' still marks a lodge that has bookable activities; it is stripped on read. */
-function lodgeDatalist(i,d){
+/* One row's candidate lodges: this region's when a region is set, otherwise
+   every lodge with its region shown, so duplicate names stay distinguishable.
+   `k` is what the typing is matched against — name AND region, so "opuwo"
+   finds the lodges there. 'ᴬ' still marks a lodge that has bookable activities. */
+function lodgeCandidates(d){
   var idxs;
-  if(d.region){ idxs=lodgesIn(d.region); if(d.lodgeIdx>-1&&idxs.indexOf(d.lodgeIdx)<0) idxs=idxs.concat([d.lodgeIdx]); }
+  if(d&&d.region){ idxs=lodgesIn(d.region); if(d.lodgeIdx>-1&&idxs.indexOf(d.lodgeIdx)<0) idxs=idxs.concat([d.lodgeIdx]); }
   else { idxs=[]; for(var k=0;k<(RATES.lodges||[]).length;k++) idxs.push(k); }
-  var o='';
+  var out=[];
   idxs.forEach(function(li){
     var L=RATES.lodges[li]; if(!L) return;
-    var lbl=(L.name||'')+(d.region?'':(L.region?(' · '+L.region):''))+(lodgeActivities(L).length?' ᴬ':'');
-    o+='<option value="'+esc(lbl)+'"></option>';
+    out.push({i:li, n:L.name||'', r:(d&&d.region)?'':(L.region||''),
+              a:lodgeActivities(L).length>0,
+              k:((L.name||'')+' '+(L.region||'')).toLowerCase()});
   });
-  return '<datalist id="nr-lodges-'+i+'">'+o+'</datalist>';
+  return out;
 }
+function lodgeMenu(i){ return '<div class="lodgemenu" id="nr-lodges-'+i+'"></div>'; }
 function lodgeIdxExact(v){
   v=String(v||'').replace(/\s*ᴬ\s*$/,'').trim().toLowerCase(); if(!v) return -1;
   var ls=RATES.lodges||[];
@@ -641,6 +640,24 @@ function lodgeIdxFromText(v){
   return part;
 }
 
+function renderPanel(){persist();
+  var p=document.getElementById('panel'),h='';
+  if(active==='trip'){
+    h='<h2>Trip &amp; Client</h2><p class="lead">Who the quote is for and your markup.</p>'
+      +'<div class="fld"><label>Quote / client name</label><input id="f-name" value="'+esc(S.name)+'" placeholder="e.g. Smith — Namibia 2026"></div>'
+      +'<div class="grid3"><div class="fld"><label>Adults</label><input id="f-adults" type="number" min="1" value="'+S.adults+'"></div>'
+      +'<div class="fld"><label>Children</label><input id="f-children" type="number" min="0" value="'+S.children+'"></div>'
+      +'<div class="fld"><label>Markup %</label><input id="f-markup" type="number" min="0" step="0.5" value="'+S.markup+'"></div></div>'
+      +'<div class="fld" style="max-width:300px"><label>Trip type</label><select id="f-triptype">'
+      +['selfdrive|Self-drive (rental only)','guided|Guided (guide + 4×4, game-drive fuel)','flyin|Fly-in (flights, no vehicle)','hybrid|Hybrid (mix per day)']
+        .map(function(o){var v=o.split('|')[0],l=o.split('|')[1];return '<option value="'+v+'" '+(S.tripType===v?'selected':'')+'>'+l+'</option>'}).join('')
+      +'</select></div>'
+      +'<p class="muted" style="font-style:normal">Trip type sets sensible defaults (4×4 + game-drive fuel for guided; self-drive bills no fuel since the client refuels; no vehicle/fuel for fly-in). You can still adjust any section.</p>';
+  } else if(active==='lodges'){
+    var regs=regions();
+    applySeasonRates();
+    var body=S.lodges.map(function(d,i){
+      var rlist=regs.slice();if(d.region&&rlist.indexOf(d.region)<0)rlist.push(d.region);
       var regOpts='<option value="">Region…</option>'+rlist.map(function(r){return '<option '+(d.region===r?'selected':'')+'>'+esc(r)+'</option>'}).join('');
       /* The lodge control is a type-ahead, not a dropdown. With a region chosen
          it offers that region; with none chosen it offers every lodge, so you can
@@ -659,8 +676,8 @@ function lodgeIdxFromText(v){
         roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('')+'<div class="muted" style="font-size:.72rem;padding:2px 0">from sheet</div>';
         paxCell='';
       } else {
-        regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><input class="lodgepick" data-i="'+i+'" data-f="lodgeIdx" list="nr-lodges-'+i+'" value="'+esc(lodgeVal)+'" placeholder="Lodge… (type to search)" title="Type any lodge name — no need to pick the region first" autocomplete="off">'
-        +lodgeDatalist(i,d)+view+'</div>';
+        regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><div class="lodgewrap"><input class="lodgepick" data-i="'+i+'" data-f="lodgeIdx" value="'+esc(lodgeVal)+'" placeholder="Lodge… (type to search)" title="Type any lodge name — no need to pick the region first" autocomplete="off" spellcheck="false">'
+        +lodgeMenu(i)+'</div>'+view+'</div>';
         var boxes='';
         if(d.lodgeIdx>-1){var ci=catInfo(d);
           boxes='<div class="qtygrid">'
@@ -775,36 +792,70 @@ function bindPanel(){
         if(f==='lodgeIdx'||f==='region')autoDistances();
       };
     } else if(f==='lodgeIdx'){
-      /* Picking from a datalist fires `input` in Safari and only fires `change`
-         on blur, so binding change alone left the row empty until you clicked
-         away. Apply as soon as the text is a whole lodge name — that is what a
-         pick looks like — and fall back to a loose match on change/Enter. */
+      /* Safari never gave us a usable event from a native <datalist> pick: the
+         value appeared in the box and nothing else fired, so the row stayed
+         empty. This is our own menu instead — the same type-ahead, but the pick
+         is a real mousedown on a real element, which every browser reports. */
+      var li=+el.dataset.i, ld=S.lodges[li];
+      var menu=document.getElementById('nr-lodges-'+li);
+      var cands=lodgeCandidates(ld), cur=[], sel=-1, was=el.value, done=false;
       var applyLodge=function(fi){
-        var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
-        var FL=RATES.lodges[fi];if(!FL)return;
+        var d=S.lodges[li]; if(!d) return;
+        done=true;
+        var FL=RATES.lodges[fi]; if(!FL) return;
         d.region=FL.region||d.region; d.lodgeIdx=fi; d.roomManual=false;
-        var fri=seasonShareIdx(FL,rowCheckIn(i)); d.roomIdx=(fri>-1?fri:-1);
+        var fri=seasonShareIdx(FL,rowCheckIn(li)); d.roomIdx=(fri>-1?fri:-1);
         d.name=FL.name||''; d.lat=null; d.lon=null; d.legToNext='';
-        if(i>0)S.lodges[i-1].legToNext='';
+        if(li>0)S.lodges[li-1].legToNext='';
         syncShareQty(d); renderPanel(); autoDistances();
       };
-      el.oninput=function(){
-        var v=String(el.value).trim(); if(!v) return;
-        var fi=lodgeIdxExact(v);            // only a complete name, never a partial
-        if(fi>-1) applyLodge(fi);
+      var hide=function(){ if(menu){menu.className='lodgemenu';menu.innerHTML='';} cur=[]; sel=-1; };
+      var mark=function(){ if(!menu)return; var bs=menu.children;
+        for(var k=0;k<bs.length;k++) bs[k].className=(k===sel)?'sel':'';
+        if(sel>-1&&bs[sel]&&bs[sel].scrollIntoView) bs[sel].scrollIntoView({block:'nearest'}); };
+      var show=function(q){
+        if(!menu) return;
+        q=String(q||'').trim().toLowerCase();
+        cur=q?cands.filter(function(c){return c.k.indexOf(q)>-1}):cands.slice(0);
+        if(q) cur.sort(function(a,b){return (a.n.toLowerCase().indexOf(q)===0?0:1)-(b.n.toLowerCase().indexOf(q)===0?0:1);});
+        cur=cur.slice(0,60);
+        if(!cur.length){ menu.className='lodgemenu on'; menu.innerHTML='<i>no lodge matches that</i>'; sel=-1; return; }
+        menu.innerHTML=cur.map(function(c){return '<b>'+esc(c.n)+(c.r?'<span class="rg"> · '+esc(c.r)+'</span>':'')+(c.a?'<span class="rg"> ᴬ</span>':'')+'</b>';}).join('');
+        menu.className='lodgemenu on'; sel=-1;
       };
-      el.onchange=function(){
-        var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
-        if(!String(el.value).trim()){d.lodgeIdx=-1;d.roomIdx=-1;d.name='';renderPanel();return;}
-        var fi=lodgeIdxFromText(el.value);
-        if(fi<0){el.value='';el.placeholder='no lodge of that name — try fewer letters';return;}
-        if(fi!==d.lodgeIdx) applyLodge(fi);
+      if(menu) menu.onmousedown=function(ev){
+        var t=ev.target; while(t&&t!==menu&&t.nodeName!=='B') t=t.parentNode;
+        if(!t||t===menu) return;
+        ev.preventDefault();                       // keep focus, beat blur
+        var k=Array.prototype.indexOf.call(menu.children,t);
+        if(cur[k]) applyLodge(cur[k].i);
       };
+      el.onfocus=function(){ was=el.value; el.select(); show(''); };
+      el.oninput=function(){ show(el.value); };
       el.onkeydown=function(ev){
+        if(ev.key==='ArrowDown'){ev.preventDefault();if(cur.length){sel=(sel+1)%cur.length;mark();}return;}
+        if(ev.key==='ArrowUp'){ev.preventDefault();if(cur.length){sel=(sel<=0?cur.length:sel)-1;mark();}return;}
+        if(ev.key==='Escape'){hide();el.value=was;return;}
         if(ev.key!=='Enter') return;
         ev.preventDefault();
-        var fi=lodgeIdxFromText(el.value);
+        var fi=(sel>-1&&cur[sel])?cur[sel].i:((cur.length===1)?cur[0].i:lodgeIdxFromText(el.value));
         if(fi>-1) applyLodge(fi);
+      };
+      /* A pick re-renders the panel, which detaches this input and fires blur on
+         it. Left unguarded, the blur below then re-resolved the half-typed text
+         ("etendeka" -> the FIRST Etendeka) and overwrote the lodge just chosen.
+         So blur only speaks for a row nobody has picked for. */
+      el.onblur=function(){
+        setTimeout(function(){
+          hide();
+          if(done||!document.body.contains(el)) return;
+          var d=S.lodges[li]; if(!d) return;
+          var v=String(el.value).trim();
+          if(!v){ if(d.lodgeIdx>-1){d.lodgeIdx=-1;d.roomIdx=-1;d.name='';renderPanel();} return; }
+          var fi=lodgeIdxFromText(v);
+          if(fi<0){ el.value=was; return; }         // never leave a name that resolves to nothing
+          if(fi!==d.lodgeIdx) applyLodge(fi);
+        },140);
       };
     } else {
       // nights / pax: update totals live while typing (no rebuild, keeps focus);
