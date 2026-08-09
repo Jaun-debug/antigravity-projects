@@ -26197,3 +26197,556 @@ Object.assign(DDS_RACK_BY_YEAR, {
     DDS_RACK_BY_YEAR[slug] = BIGSKY26[slug];
   });
 })();
+
+// ---------------------------------------------------------------------------
+// 2027 restored — Ondili and Big Sky Lodges.
+//
+// These 2027 seasons were deleted when the 2026 sheets were loaded. That was
+// wrong. The reasoning was that every row sat at rack = net x 1.20, which is
+// the signature of a derived rack — but it only condemns the rack, not the net
+// underneath. The nets were a real 2027: the conservation levy moves 160 -> 170
+// at Ai Aiba and 280 -> 290 at Etendeka between the two years, and the tour
+// guide rates differ too. Nothing derived invents an escalating levy.
+//
+// The nets go back exactly as they were. The rack is rebuilt at the commission
+// each supplier actually gives — 20% Ondili, 15% Big Sky — rather than the
+// x1.20 that was there. Rows the supplier calls non-commissionable carry
+// rack = net.
+//
+// Rule this enforces: loading one season must never remove another.
+// ---------------------------------------------------------------------------
+;(function () {
+  var R27 = {
+    "ti-melen": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "B&B · Room — per person sharing",
+                "1,700"
+              ],
+              [
+                "B&B · Room — single",
+                "2,500"
+              ],
+              [
+                "Child 4–12",
+                "1,200"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "990"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "teufelskrallen-lodge": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — per person sharing",
+                "2,800"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — single",
+                "3,700"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Child 4–12",
+                "1,400"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "990"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — per person sharing",
+                "2,100"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — single",
+                "2,800"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Child 4–12",
+                "1,050"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "kalahari-red-dunes-lodge": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+                "6,950"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+                "9,050"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
+                "8,950"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
+                "3,475"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "1,190"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+                "4,200"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+                "5,500"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+                "6,300"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+                "2,100"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "desert-homestead-lodge": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Chalet — per person sharing",
+                "3,500"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Chalet — single",
+                "4,600"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Child 4–12",
+                "1,750"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "990"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Chalet — per person sharing",
+                "2,600"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Chalet — single",
+                "3,300"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Child 4–12",
+                "1,300"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "namib-outpost": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+                "8,820"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+                "11,500"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Superior Suite — per person sharing",
+                "13,250"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Child 4–12 (Suite)",
+                "4,410"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "1,190"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+                "7,250"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+                "9,450"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Superior Suite — per person sharing",
+                "11,000"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Child 4–12 (Suite)",
+                "3,625"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "twyfelfontein-adventure-camp": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — per person sharing",
+                "2,800"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Standard Tent — single",
+                "3,700"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Premium Tent — per person sharing",
+                "4,400"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Premium Tent — single",
+                "5,800"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "1,090"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — per person sharing",
+                "2,200"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Standard Tent — single",
+                "2,900"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Premium Tent — per person sharing",
+                "3,500"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Premium Tent — single",
+                "4,600"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "etosha-oberland-lodge": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — per person sharing",
+                "8,820"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Full Board Plus · Suite — single",
+                "11,500"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Child 4–12",
+                "4,410"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "1,190"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — per person sharing",
+                "7,250"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Full Board Plus · Suite — single",
+                "9,450"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Child 4–12",
+                "3,625"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "hohenstein-lodge": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 20% this supplier gives)",
+            "rows": [
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Room — per person sharing",
+                "3,100"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Room — single",
+                "4,050"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Chalet — per person sharing",
+                "5,300"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · DBB · Chalet — single",
+                "6,900"
+              ],
+              [
+                "High Season (01 Mar – 30 Nov) · Child 4–12",
+                "2,650"
+              ],
+              [
+                "Tour Guide (Guide Room)",
+                "1,190"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Room — per person sharing",
+                "1,900"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Room — single",
+                "2,470"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Chalet — per person sharing",
+                "3,900"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · DBB · Chalet — single",
+                "5,100"
+              ],
+              [
+                "Low Season (01 Dec – 29 Feb) · Child 4–12",
+                "1,950"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "ai-aiba-lodge": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 15% this supplier gives)",
+            "rows": [
+              [
+                "Low Season (16 Jan – 30 Jun) · Per Person Sharing",
+                "2,354.12"
+              ],
+              [
+                "Low Season (16 Jan – 30 Jun) · Single",
+                "3,180"
+              ],
+              [
+                "Low Season (16 Jan – 30 Jun) · Conservation Levy (pppn)",
+                "170"
+              ],
+              [
+                "High Season (1 Jul – 15 Jan) · Per Person Sharing",
+                "3,380"
+              ],
+              [
+                "High Season (1 Jul – 15 Jan) · Single",
+                "4,569.41"
+              ],
+              [
+                "High Season (1 Jul – 15 Jan) · Conservation Levy (pppn)",
+                "170"
+              ],
+              [
+                "Low — ≤3 pax (25% off)",
+                "1,501"
+              ],
+              [
+                "Low — 4+ pax (50% off)",
+                "1,001"
+              ],
+              [
+                "High — ≤3 pax (25% off)",
+                "2,155"
+              ],
+              [
+                "High — 4+ pax (50% off)",
+                "1,437"
+              ],
+              [
+                "Nature Drive / Bushman Rock Art (3 hrs)",
+                "750"
+              ],
+              [
+                "Guided Morning Walk — Ai Aiba (2–3 hrs)",
+                "450"
+              ],
+              [
+                "Nature Drive / Bushman Rock Art (3 hrs, AM or PM) — per person",
+                "750"
+              ],
+              [
+                "Ai Aiba Guided Walk (2–3 hrs) — per person",
+                "450"
+              ],
+              [
+                "Walk & Drive (3 hrs) — per person",
+                "750"
+              ],
+              [
+                "Walk with San Living Museum visit (3 hrs) — per person",
+                "710"
+              ],
+              [
+                "Guided Sundowner Mountain Bike Ride (E-bike) — per person",
+                "350"
+              ],
+              [
+                "Guided Mountain Bike Tour (incl. E-bike) — per person",
+                "1,050"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "etendeka-mountain-camp": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 15% this supplier gives)",
+            "rows": [
+              [
+                "Low Season (1 Jan – 30 Jun) · Per Person Sharing",
+                "5,960"
+              ],
+              [
+                "Low Season (1 Jan – 30 Jun) · Single",
+                "7,409.41"
+              ],
+              [
+                "Low Season (1 Jan – 30 Jun) · Conservation Levy (pppn)",
+                "290"
+              ],
+              [
+                "High Season (1 Jul – 31 Dec) · Per Person Sharing",
+                "6,934.12"
+              ],
+              [
+                "High Season (1 Jul – 31 Dec) · Single",
+                "8,780"
+              ],
+              [
+                "High Season (1 Jul – 31 Dec) · Conservation Levy (pppn)",
+                "290"
+              ],
+              [
+                "Low — ≤3 pax (25% off)",
+                "3,800"
+              ],
+              [
+                "Low — 4+ pax (50% off)",
+                "2,533"
+              ],
+              [
+                "High — ≤3 pax (25% off)",
+                "4,421"
+              ],
+              [
+                "High — 4+ pax (50% off)",
+                "2,947"
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    "etendeka-hiking-trails": {
+      "2027": {
+        "currency": "N$",
+        "note": "2027 as previously loaded, restored. The net rates are exactly as they were — they are a real 2027 season, not the 2026 figures relabelled: the conservation levy and the tour-guide rates both differ between the two years. Only the rack has changed, and only because it was previously derived as net x 1.20; it is now net divided by the commission this supplier actually gives. Rows the supplier states are non-commissionable carry rack = net.",
+        "sections": [
+          {
+            "title": "2027 — rack (net grossed up at the 15% this supplier gives)",
+            "rows": [
+              [
+                "Low Season (01 Jan – 30 Jun) · Full Board — per person sharing",
+                "6,534.12"
+              ],
+              [
+                "Low Season (01 Jan – 30 Jun) · Full Board — single",
+                "8,120"
+              ],
+              [
+                "High Season (01 Jul – 31 Dec) · Full Board — per person sharing",
+                "7,994.12"
+              ],
+              [
+                "High Season (01 Jul – 31 Dec) · Full Board — single",
+                "10,124.71"
+              ],
+              [
+                "CESW Conservation Levy (per person per night, additional)",
+                "290"
+              ]
+            ]
+          }
+        ]
+      }
+    }
+  };
+  Object.keys(R27).forEach(function (slug) {
+    var e = DDS_RACK_BY_YEAR[slug] || (DDS_RACK_BY_YEAR[slug] = {});
+    e['2027'] = R27[slug]['2027'];
+  });
+})();
