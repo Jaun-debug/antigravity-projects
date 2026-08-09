@@ -54,7 +54,6 @@ table.bd{width:100%;border-collapse:collapse}
 table.bd th{font-size:.6rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted);text-align:left;padding:7px 5px;border-bottom:1px solid var(--border);font-weight:500}
 table.bd th.r,table.bd td.r{text-align:right}
 table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align:top}
-.rownum{color:var(--gold);font-family:var(--head);font-size:1.05rem}
 .bd select,.bd input{border:1px solid var(--border);border-radius:5px;padding:7px 8px;font-family:var(--body);font-size:.84rem;background:#fbfaf8;color:var(--ink);width:100%;max-width:100%;box-sizing:border-box}
 .bd .nights,.bd .pax{width:48px;text-align:center}
 .lodgepick{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:#fff;font:inherit;font-size:.82rem;color:var(--text-main);outline:none}
@@ -63,12 +62,11 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 /* The grip is painted, not typed. Two stacked colons squashed together read
    as a smudge at this size and depend on the font; a repeating radial-gradient
    gives an even 2x3 dot grid that scales and takes currentColor. */
-.rownum .grip{display:inline-block;width:12px;height:19px;vertical-align:-4px;margin-right:7px;cursor:grab;
+.grip{display:inline-block;width:12px;height:19px;vertical-align:-4px;margin-right:7px;cursor:grab;
   color:#b3a28c;background-image:radial-gradient(currentColor 1.8px,transparent 1.9px);
   background-size:6px 6.5px;background-position:0 3px;-webkit-user-select:none;user-select:none}
-.rownum .grip:hover{color:#c85a17}
-.rownum .grip:active{cursor:grabbing;color:#c85a17}
-.rownum .grip:active{cursor:grabbing}
+.grip:hover{color:#c85a17}
+.grip:active{cursor:grabbing;color:#c85a17}
 tr.dragging td{opacity:.22}
 tr.dropbefore td{box-shadow:inset 0 4px 0 #c85a17}
 tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
@@ -76,11 +74,9 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
    cursor, so you can see the whole day travelling to where it will land. It is
    pointer-events:none, otherwise it would sit between the cursor and the row
    underneath and elementFromPoint would only ever find the ghost. */
-.nr-ghost{position:fixed;z-index:9000;pointer-events:none;opacity:.95;background:#fff;
-  border:1px solid rgba(0,0,0,.10);border-radius:8px;overflow:hidden;
-  box-shadow:0 18px 40px rgba(0,0,0,.24)}
-.nr-ghost table{border-collapse:collapse}
-.nr-ghost td{border-bottom:none}
+.nr-ghost{position:fixed;z-index:9000;pointer-events:none;opacity:.97;
+  filter:drop-shadow(0 16px 26px rgba(0,0,0,.22))}
+.nr-ghost .daycard{margin:0;border-color:rgba(0,0,0,.16)}
 .lodgemenu{display:none;position:absolute;left:0;right:0;min-width:280px;top:calc(100% + 2px);z-index:80;background:#fff;border:1px solid var(--border);border-radius:6px;box-shadow:0 10px 26px rgba(0,0,0,.18);max-height:250px;overflow:auto}
 .lodgemenu.on{display:block}
 .lodgemenu b{display:block;padding:6px 9px;font-weight:400;font-size:.82rem;cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -102,6 +98,39 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
 .qline .qrate{font-size:.72rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
 .qline .qrate.qnone{color:var(--muted);font-style:italic}
 .amtcell{font-family:var(--head);font-size:1.02rem;white-space:nowrap}
+/* A day is a card, not a table row. The table forced every lodge into 22% of
+   the width, which truncated the rate names the agent is meant to check. */
+.daycard{border:1px solid var(--border);border-radius:10px;background:#fff;margin:0 0 11px}
+.daycard.empty{background:#fdfcfa}
+.daycard.dropbefore{box-shadow:inset 0 4px 0 #c85a17}
+.daycard.dropafter{box-shadow:inset 0 -4px 0 #c85a17}
+.daycard.dragging{opacity:.28}
+.dayhead{display:flex;align-items:center;gap:11px;padding:9px 12px;border-bottom:1px solid var(--border);
+  background:rgba(184,149,106,.06);border-radius:9px 9px 0 0}
+.daynum{font-family:var(--head);font-size:1.05rem;color:var(--gold);min-width:13px;text-align:center}
+.daytitle{display:flex;flex-direction:column;min-width:0;flex:1}
+.daytitle strong{font-family:var(--head);font-weight:500;font-size:1.06rem;color:var(--ink);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daytitle .daysub{font-size:.63rem;letter-spacing:1.1px;text-transform:uppercase;color:var(--muted);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.daymoney{display:flex;flex-direction:column;align-items:flex-end;white-space:nowrap;line-height:1.25}
+.daymoney .pernight{font-size:.71rem;color:var(--muted)}
+.daybody{padding:11px 12px 12px}
+.dayfields{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.fld2{display:flex;flex-direction:column;gap:3px;min-width:0}
+.fld2>span{font-size:.6rem;letter-spacing:1.3px;text-transform:uppercase;color:var(--muted)}
+.fld2.region{flex:0 1 190px}
+.fld2.lodge{flex:1 1 280px}
+.fld2.nights{flex:0 0 68px}
+.bd .fld2.nights .nights{width:100%;flex:none}
+.dayrates{margin-top:11px;padding-top:10px;border-top:1px dashed var(--border)}
+.dayrates .roomcell{max-width:640px}
+.daylinks{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:10px;padding-top:9px;
+  border-top:1px solid var(--border)}
+.dayleg{font-size:.72rem;letter-spacing:.5px;color:var(--gold);padding:0 0 11px 34px;margin-top:-4px}
+.dayleg.est{color:var(--muted)}
+.daycard .rm{font-size:1.1rem}
+@media(max-width:760px){.fld2.region,.fld2.lodge{flex:1 1 100%}}
 .amtcell.g{color:var(--gold)}
 .rm{border:none;background:none;color:#c08a8a;cursor:pointer;font-size:1.05rem;padding:0 3px}
 .rm:hover{color:#a85a5a}
@@ -705,19 +734,21 @@ function renderPanel(){persist();
          you pick. */
       var lodgeVal=(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].name:'';
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
-        regionLodgeCell='<div class="cellsel"><strong>'+esc(d.name||(d.lodgeIdx>-1?RATES.lodges[d.lodgeIdx].name:'Lodge'))+'</strong>'
-          +(d.region?'<span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">'+esc(d.region)+'</span>':'')
-          +(d.fileUrl?'<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(d.fileUrl)+'\');return false">View sheet ↗</a>':'')
-          +(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')+'</div>';
-        roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('')+'<div class="muted" style="font-size:.72rem;padding:2px 0">from sheet</div>';
+        regionLodgeCell='';
+        if(d.fileUrl) view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(d.fileUrl)+'\');return false">View sheet ↗</a>';
+        roomCell='<div class="roomcell">'+d.cap.map(function(r){return '<div style="font-size:.84rem">'+(r.qty||0)+'&times; '+esc(r.name)+' <span style="color:var(--muted)">&mdash; '+money(r.price)+'</span></div>'}).join('')+'<div class="muted" style="font-size:.72rem;padding:3px 0 0">from the rate sheet</div></div>';
         paxCell='';
       } else {
-        regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><div class="lodgewrap"><input class="lodgepick" data-i="'+i+'" data-f="lodgeIdx" value="'+esc(lodgeVal)+'" placeholder="Lodge… (type to search)" title="Type any lodge name — no need to pick the region first" autocomplete="off" spellcheck="false">'
-        +lodgeMenu(i)+'</div>'+view+'</div>';
+        regionLodgeCell='<div class="dayfields">'
+          +'<label class="fld2 region"><span>Region</span><select data-i="'+i+'" data-f="region">'+regOpts+'</select></label>'
+          +'<label class="fld2 lodge"><span>Lodge</span><div class="lodgewrap"><input class="lodgepick" data-i="'+i+'" data-f="lodgeIdx" value="'+esc(lodgeVal)+'" placeholder="Type any lodge name…" title="Type any lodge name — no need to pick the region first" autocomplete="off" spellcheck="false">'
+          +lodgeMenu(i)+'</div></label>'
+          +'<label class="fld2 nights"><span>Nights</span><input class="nights" type="number" min="1" value="'+(d.nights||1)+'" data-i="'+i+'" data-f="nights"></label>'
+          +'</div>';
         var boxes='';
         if(d.lodgeIdx>-1){var ci=catInfo(d);
           boxes='<div class="qtygrid">'
@@ -728,23 +759,40 @@ function renderPanel(){persist();
         }
         var mealUI='';
         if(d.lodgeIdx>-1){var _ml=lodgeMeals(RATES.lodges[d.lodgeIdx]);if(_ml.length||(d.meals&&d.meals.length)){var _mopts='<option value="">Add meal / meal plan…</option>'+_ml.map(function(rt){return '<option value="'+rt.p+'" data-name="'+esc(rt.n)+'">'+esc(rt.n)+' — '+money(rt.p)+' pp</option>';}).join('');var _tg=totGuests(d),_nn=(d.nights||0);var _chips=(d.meals||[]).map(function(m,mi){return '<div class="mealchip">'+esc(m.n)+'<span class="mealcalc">'+money(m.p)+' pp × '+_tg+' × '+_nn+'n = '+money(num(m.p)*_tg*_nn)+'</span><button class="mealrm" data-i="'+i+'" data-mi="'+mi+'" title="remove">&times;</button></div>';}).join('');mealUI='<div class="mealsel"><select class="meal-pick" data-i="'+i+'">'+_mopts+'</select>'+(_chips?'<div class="mealchips">'+_chips+'</div>':'')+'</div>';}}
-        roomCell='<div class="roomcell"><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select>'+boxes+mealUI+'</div>';
+        roomCell='<div class="roomcell"><label class="fld2"><span>Room / rate</span><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></label>'+boxes+mealUI+'</div>';
         paxCell='';
       }
-      return '<tr data-row="'+i+'"><td class="rownum" title="Drag by the dots to move this day">'+'<span class="grip"></span>'+(i+1)+'</td>'
-        +'<td><input class="nights" type="number" min="1" value="'+(d.nights||1)+'" data-i="'+i+'" data-f="nights"></td>'
-        +'<td>'+regionLodgeCell+'</td>'
-        +'<td>'+roomCell+'</td>'
-        +'<td class="r amtcell">'+(pn?money(pn):'—')+'</td>'
-        +'<td class="r amtcell g">'+money(sub)+'</td>'
-        +'<td><button class="rm" data-lodge-rm="'+i+'">&times;</button></td></tr>'
-        +((i<S.lodges.length-1&&d.legToNext)?'<tr><td></td><td colspan="6" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--gold)">&#8595; '+esc(d.legToNext)+'</td></tr>'
-          :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<tr><td></td><td colspan="6" style="border:none;padding:3px 7px 9px;font-size:.72rem;letter-spacing:.5px;color:var(--muted)">&#8595; estimating drive distance…</td></tr>':''));
+      /* Header: which day, which lodge, what it costs. Everything you change
+         sits in the body underneath, at a width where the rate names are
+         readable instead of cut off mid-word. */
+      var capd=!!(d.cap&&d.cap.length);
+      var ttl=capd?(d.name||'Lodge')
+                  :((d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].name:'Choose a lodge');
+      var ci2=rowCheckIn(i);
+      var sub2=[(capd?(d.region||''):((d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].region:(d.region||''))),
+                (ci2?('check-in '+fmtDisp(ci2)):''),
+                ((d.nights||1)+' night'+((d.nights||1)===1?'':'s'))].filter(Boolean).join(' · ');
+      return '<div class="daycard'+((!capd&&d.lodgeIdx<0)?' empty':'')+'" data-row="'+i+'">'
+        +'<div class="dayhead">'
+          +'<span class="grip" title="Drag to move this day earlier or later"></span>'
+          +'<span class="daynum">'+(i+1)+'</span>'
+          +'<div class="daytitle"><strong>'+esc(ttl)+'</strong>'
+            +(sub2?'<span class="daysub">'+esc(sub2)+'</span>':'')+'</div>'
+          +'<div class="daymoney"><span class="pernight">'+(pn?money(pn)+' / night':'&mdash;')+'</span>'
+            +'<span class="amtcell g">'+money(sub)+'</span></div>'
+          +'<button class="rm" data-lodge-rm="'+i+'" title="Remove this day">&times;</button>'
+        +'</div>'
+        +'<div class="daybody">'+regionLodgeCell
+          +(roomCell?'<div class="dayrates">'+roomCell+'</div>':'')
+          +(view?'<div class="daylinks">'+view+'</div>':'')
+        +'</div></div>'
+        +((i<S.lodges.length-1&&d.legToNext)?'<div class="dayleg">&#8595; '+esc(d.legToNext)+'</div>'
+          :((i<S.lodges.length-1&&lodgeLabel(d)&&lodgeLabel(S.lodges[i+1]))?'<div class="dayleg est">&#8595; estimating drive distance…</div>':''));
     }).join('');
-    if(!S.lodges.length) body='<tr><td colspan="7" class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</td></tr>';
-    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically. Days run in the order shown &mdash; drag a row by the dotted grip beside its number to visit a lodge earlier or later; nights, rates and its activities move with it.</p>'
+    if(!S.lodges.length) body='<p class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</p>';
+    h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically. Each day is a card, in the order they will be travelled &mdash; drag one by the grip beside its number to visit a lodge earlier or later; nights, rates, meals and its activities move with it.</p>'
       +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'+'<div style="display:flex;gap:8px;align-items:center;margin:0 0 14px"><span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Rate year</span>'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(200,90,23,.6);background:'+(on?'rgba(200,90,23,.85)':'rgba(200,90,23,.08)')+';color:'+(on?'#fff':'#c85a17')+'">'+y+'</button>';}).join('')+'</div>'
-      +'<div style="max-width:100%"><table class="bd" style="table-layout:fixed;width:100%"><thead><tr><th style="width:48px">#</th><th style="width:50px">Nights</th><th style="width:22%">Region &amp; Lodge</th><th style="width:38%">Rooms &amp; rates</th><th class="r" style="width:84px">Per night</th><th class="r" style="width:92px">Subtotal</th><th style="width:30px"></th></tr></thead><tbody>'+body+'</tbody></table></div>'
+      +'<div class="bd daylist">'+body+'</div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
   } else if(active==='vehicle'){
@@ -928,41 +976,33 @@ function bindPanel(){
      position:fixed; the column widths are carried over from the header so the
      copy lines up with the table it came from. cloneNode copies attributes but
      not what is currently selected or typed, so those are copied by hand. */
-  var makeGhost=function(tr,y){
-    var tbl=tr.parentNode; while(tbl&&tbl.tagName!=='TABLE') tbl=tbl.parentNode;
-    if(!tbl) return;
-    var r=tr.getBoundingClientRect();
-    var cg='';
-    tbl.querySelectorAll('thead th').forEach(function(th){
-      cg+='<col style="width:'+th.getBoundingClientRect().width+'px">'; });
-    var t=document.createElement('table');
-    t.className=tbl.className;
-    t.style.tableLayout='fixed'; t.style.width=r.width+'px';
-    t.innerHTML='<colgroup>'+cg+'</colgroup><tbody></tbody>';
-    var c=tr.cloneNode(true);
+  var makeGhost=function(row,y){
+    var r=row.getBoundingClientRect();
+    var c=row.cloneNode(true);
     c.classList.remove('dragging');
     c.removeAttribute('data-row');     // a copy must not answer to a row query
-    var so=tr.querySelectorAll('select'), sc=c.querySelectorAll('select');
+    c.style.width=r.width+'px';
+    /* cloneNode copies attributes, not what is currently chosen or typed */
+    var so=row.querySelectorAll('select'), sc=c.querySelectorAll('select');
     for(var k=0;k<so.length;k++) if(sc[k]) sc[k].selectedIndex=so[k].selectedIndex;
-    var io=tr.querySelectorAll('input'), ic=c.querySelectorAll('input');
+    var io=row.querySelectorAll('input'), ic=c.querySelectorAll('input');
     for(var j=0;j<io.length;j++) if(ic[j]) ic[j].setAttribute('value',io[j].value);
-    t.querySelector('tbody').appendChild(c);
     var g=document.createElement('div');
     g.className='nr-ghost';
     g.style.left=r.left+'px'; g.style.top=r.top+'px'; g.style.width=r.width+'px';
-    g.appendChild(t);
+    g.appendChild(c);
     document.body.appendChild(g);
     _ghost=g; _grabDY=y-r.top;
   };
   var killGhost=function(){ if(_ghost&&_ghost.parentNode) _ghost.parentNode.removeChild(_ghost); _ghost=null; };
   var clearMarks=function(){
-    document.querySelectorAll('#panel tr.dropbefore,#panel tr.dropafter').forEach(function(t){
+    document.querySelectorAll('#panel .dropbefore,#panel .dropafter').forEach(function(t){
       t.classList.remove('dropbefore'); t.classList.remove('dropafter'); });
   };
   var rowUnder=function(x,y){
     var el=document.elementFromPoint(x,y);
-    while(el&&el!==document.body&&!(el.tagName==='TR'&&el.hasAttribute('data-row'))) el=el.parentNode;
-    return (el&&el.tagName==='TR')?el:null;
+    while(el&&el!==document.body&&!(el.nodeType===1&&el.hasAttribute('data-row'))) el=el.parentNode;
+    return (el&&el!==document.body&&el.nodeType===1&&el.hasAttribute('data-row'))?el:null;
   };
   /* Which gap the day would drop into: above the row the cursor is over, or
      below it, decided by the halfway line. A day's row is tall, so marking the
@@ -1016,9 +1056,10 @@ function bindPanel(){
     var t=(ev.changedTouches&&ev.changedTouches[0]);
     dragEnd(t?t.clientX:null,t?t.clientY:null);
   };
-  document.querySelectorAll('#panel tr[data-row] .grip').forEach(function(g){
-    var tr=g.parentNode; while(tr&&tr.tagName!=='TR') tr=tr.parentNode;
-    if(!tr) return;
+  document.querySelectorAll('#panel [data-row] .grip').forEach(function(g){
+    var tr=g.parentNode;
+    while(tr&&tr!==document.body&&!(tr.nodeType===1&&tr.hasAttribute('data-row'))) tr=tr.parentNode;
+    if(!tr||tr===document.body) return;
     var begin=function(y){
       _dragFrom=+tr.dataset.row; _dragRow=tr;
       makeGhost(tr,y);                       // copy first, then dim the original
