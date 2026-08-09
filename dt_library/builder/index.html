@@ -57,8 +57,8 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .rownum{color:var(--gold);font-family:var(--head);font-size:1.05rem}
 .bd select,.bd input{border:1px solid var(--border);border-radius:5px;padding:7px 8px;font-family:var(--body);font-size:.84rem;background:#fbfaf8;color:var(--ink);width:100%;max-width:100%;box-sizing:border-box}
 .bd .nights,.bd .pax{width:48px;text-align:center}
-.lodgefind{width:100%;margin-top:5px;padding:5px 7px;border:1px solid var(--border);border-radius:6px;background:#fff;font:inherit;font-size:.78rem;color:var(--text-main);outline:none}
-.lodgefind::placeholder{color:var(--muted);font-style:italic}
+.lodgepick{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:6px;background:#fff;font:inherit;font-size:.82rem;color:var(--text-main);outline:none}
+.lodgepick::placeholder{color:var(--muted)}
 .cellsel{display:flex;flex-direction:column;gap:5px;min-width:190px}
 .roomcell{display:flex;flex-direction:column;gap:6px;min-width:0}
 .qtygrid{display:flex;flex-direction:column;gap:4px;margin-top:2px}
@@ -606,29 +606,38 @@ function renderPanel(){persist();
    one takes the region from the lodge itself. Names are not unique (two
    Lüderitz Nest Hotel entries), so the datalist label carries the region and
    the resolver matches the full label before falling back to the name. */
-function allLodgesDatalist(){
-  if(window.__nrLodgeList) return window.__nrLodgeList;
+/* Options for one row: this region's lodges when a region is set, otherwise all
+   of them with the region appended so duplicate names stay distinguishable.
+   'ᴬ' still marks a lodge that has bookable activities; it is stripped on read. */
+function lodgeDatalist(i,d){
+  var idxs;
+  if(d.region){ idxs=lodgesIn(d.region); if(d.lodgeIdx>-1&&idxs.indexOf(d.lodgeIdx)<0) idxs=idxs.concat([d.lodgeIdx]); }
+  else { idxs=[]; for(var k=0;k<(RATES.lodges||[]).length;k++) idxs.push(k); }
   var o='';
-  (RATES.lodges||[]).forEach(function(L){
-    o+='<option value="'+esc((L.name||'')+(L.region?(' · '+L.region):''))+'"></option>';
+  idxs.forEach(function(li){
+    var L=RATES.lodges[li]; if(!L) return;
+    var lbl=(L.name||'')+(d.region?'':(L.region?(' · '+L.region):''))+(lodgeActivities(L).length?' ᴬ':'');
+    o+='<option value="'+esc(lbl)+'"></option>';
   });
-  window.__nrLodgeList='<datalist id="nr-lodge-all">'+o+'</datalist>';
-  return window.__nrLodgeList;
+  return '<datalist id="nr-lodges-'+i+'">'+o+'</datalist>';
 }
 function lodgeIdxFromText(v){
-  v=String(v||'').trim().toLowerCase(); if(!v) return -1;
+  v=String(v||'').replace(/\s*ᴬ\s*$/,'').trim().toLowerCase(); if(!v) return -1;
   var part=-1, ls=RATES.lodges||[];
   for(var i=0;i<ls.length;i++){
     var nm=(ls[i].name||'').toLowerCase();
-    var lbl=nm+(ls[i].region?(' · '+ls[i].region).toLowerCase():'');
-    if(lbl===v||nm===v) return i;
+    if(nm===v||nm+' · '+(ls[i].region||'').toLowerCase()===v) return i;
     if(part<0&&nm.indexOf(v)>-1) part=i;
   }
   return part;
 }
+
       var regOpts='<option value="">Region…</option>'+rlist.map(function(r){return '<option '+(d.region===r?'selected':'')+'>'+esc(r)+'</option>'}).join('');
-      var lodgeOpts='<option value="-1">Lodge…</option>';
-      if(d.region){var lis=lodgesIn(d.region);if(d.lodgeIdx>-1&&lis.indexOf(d.lodgeIdx)<0)lis=lis.concat([d.lodgeIdx]);lis.forEach(function(li){lodgeOpts+='<option value="'+li+'" '+(d.lodgeIdx===li?'selected':'')+'>'+esc(RATES.lodges[li].name)+(lodgeActivities(RATES.lodges[li]).length?'  ᴬ':'')+'</option>'});}
+      /* The lodge control is a type-ahead, not a dropdown. With a region chosen
+         it offers that region; with none chosen it offers every lodge, so you can
+         find a lodge without knowing its region. Region is taken from whatever
+         you pick. */
+      var lodgeVal=(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].name:'';
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
       if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _orig=(_oinf&&_oinf.orig)?'<a class="viewlink" href="'+esc(_oinf.orig)+'" target="_blank" rel="noopener" title="Original supplier rate sheet (PDF)" style="color:#7a8a72">Original PDF ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot+(rowCheckIn(i)?'<span style="font-size:.66rem;color:var(--muted)">check-in '+fmtDisp(rowCheckIn(i))+'</span>':'')}
       var pn=rowPerNight(d), sub=rowSub(d);
@@ -641,9 +650,8 @@ function lodgeIdxFromText(v){
         roomCell=d.cap.map(function(r){return '<div style="font-size:.82rem">'+(r.qty||0)+'× '+esc(r.name)+' <span style="color:var(--muted)">— '+money(r.price)+'</span></div>'}).join('')+'<div class="muted" style="font-size:.72rem;padding:2px 0">from sheet</div>';
         paxCell='';
       } else {
-        regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><select data-i="'+i+'" data-f="lodgeIdx">'+lodgeOpts+'</select>'
-        +'<input class="lodgefind" data-i="'+i+'" data-f="findLodge" list="nr-lodge-all" placeholder="or search any lodge…" title="Type a lodge name — no need to pick the region first" autocomplete="off">'
-        +allLodgesDatalist()+view+'</div>';
+        regionLodgeCell='<div class="cellsel"><select data-i="'+i+'" data-f="region">'+regOpts+'</select><input class="lodgepick" data-i="'+i+'" data-f="lodgeIdx" list="nr-lodges-'+i+'" value="'+esc(lodgeVal)+'" placeholder="Lodge… (type to search)" title="Type any lodge name — no need to pick the region first" autocomplete="off">'
+        +lodgeDatalist(i,d)+view+'</div>';
         var boxes='';
         if(d.lodgeIdx>-1){var ci=catInfo(d);
           boxes='<div class="qtygrid">'
@@ -757,12 +765,10 @@ function bindPanel(){
         renderPanel();
         if(f==='lodgeIdx'||f==='region')autoDistances();
       };
-    } else if(f==='findLodge'){
-      /* A datalist pick fires change, and so does Enter. Resolve the typed
-         text to a lodge, take the region from the lodge, then re-render so the
-         region and lodge selects catch up. */
+    } else if(f==='lodgeIdx'){
       el.onchange=function(){
         var i=+el.dataset.i,d=S.lodges[i];if(!d)return;
+        if(!String(el.value).trim()){d.lodgeIdx=-1;d.roomIdx=-1;d.name='';renderPanel();return;}
         var fi=lodgeIdxFromText(el.value);
         if(fi<0){el.value='';el.placeholder='no lodge of that name — try fewer letters';return;}
         var FL=RATES.lodges[fi];
