@@ -123,6 +123,12 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
 .fld2.lodge{flex:1 1 280px}
 .fld2.nights{flex:0 0 68px}
 .bd .fld2.nights .nights{width:100%;flex:none}
+/* One height for every control on the card. They were inheriting three
+   different paddings — .bd input, .lodgepick and the qty box — so a row of
+   fields sat at three different heights. */
+.daycard select,.daycard input{height:38px;min-height:38px;box-sizing:border-box;
+  padding:0 10px;font-size:.84rem;line-height:normal}
+.daycard .qbox{padding:0 2px}
 .dayrates{margin-top:11px;padding-top:10px;border-top:1px dashed var(--border)}
 .dayrates .roomcell{max-width:640px}
 /* The pills live against the right edge, centred on the card's height, with the

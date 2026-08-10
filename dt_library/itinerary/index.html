@@ -578,8 +578,24 @@ body:not(.pubclient) .actions{top:382px!important;gap:0!important;z-index:9990!i
 body:not(.pubclient) .home-link{display:none!important}
 #btn-cost{display:none!important}
 body:not(.pubclient) .actions>*:nth-child(3){display:none!important}
-body:not(.pubclient) .actions>*{position:relative!important;margin-top:-8px!important}
-body:not(.pubclient) .actions>*:first-child{margin-top:0!important}
+/* Unstacked, matching the builder: the tabs used to overlap by 8px, which read
+   as a pile of cards rather than six things you can press. Smaller too — this
+   rail is a side tray, not the page. The fixed tops above already sit 36px
+   apart, which a 32px tab fills with a 4px gap. */
+body:not(.pubclient) .actions>*{position:relative!important;margin-top:0!important}
+body:not(.pubclient) .actions{gap:6px!important;width:142px!important}
+body:not(.pubclient) #nr-home,body:not(.pubclient) .home-link,
+body:not(.pubclient) #nr-tobuilder,body:not(.pubclient) .actions>*{
+  min-height:32px!important;font-size:9.5px!important;padding:5px 10px!important;
+  letter-spacing:.9px!important;width:142px!important;white-space:nowrap!important;
+  box-shadow:0 2px 8px rgba(60,53,48,.16)!important}
+/* the client view stacks two buttons the same way */
+body.pubclient .pub-actions{gap:6px!important;width:142px!important}
+body.pubclient .pub-actions .btn{margin-top:0!important;min-height:32px!important;
+  font-size:9.5px!important;padding:5px 10px!important;letter-spacing:.9px!important;
+  width:142px!important;white-space:nowrap!important;box-shadow:0 2px 8px rgba(60,53,48,.16)!important}
+body.pubclient #nr-tobuilder{min-height:32px!important;font-size:9.5px!important;
+  padding:5px 10px!important;letter-spacing:.9px!important;width:142px!important;white-space:nowrap!important}
 body:not(.pubclient) .actions>*:nth-child(1){z-index:9989!important}body:not(.pubclient) .actions>*:nth-child(2){z-index:9988!important}body:not(.pubclient) .actions>*:nth-child(3){z-index:9987!important}body:not(.pubclient) .actions>*:nth-child(4){z-index:9986!important}body:not(.pubclient) .actions>*:nth-child(5){z-index:9985!important}body:not(.pubclient) .actions>*:nth-child(6){z-index:9984!important}
 </style>
 <a id="nr-home" href="/" aria-label="Back to home">&#8592;&nbsp;Home</a>
