@@ -27347,3 +27347,259 @@ Object.assign(DDS_STO_BY_YEAR, {
     e['2027'] = R27[slug]['2027'];
   });
 })();
+
+// ---------------------------------------------------------------------------
+// Guesthouse Voigtland (Windhoek) - 2026 + 2027, supplier's OWN published RACK
+// and STO columns. Replaces the previous 2026 entry, whose rack was derived at
+// net x 1.20 and therefore overstated every public figure (Explorer pps showed
+// 3,460.80 against a published rack of 3,354) and put an invented 20 percent
+// margin on non-commissionable meals, activities and transfers. Commission is
+// 20 percent on the bed night only. Idempotent: re-running this block is a no-op.
+// ---------------------------------------------------------------------------
+(function loadVoigtland2627Sto() {
+  var V = {
+  "voigtland-guesthouse": {
+    "2026": {
+      "name": "Guesthouse Voigtland",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "January - December 2026",
+      "note": "Source: supplier PDF rate sheets 'Voigtland Rates 2026' and '2027VoigtlandRates' (Canva export, author Kim Krieger, exported 16 Aug 2026). The sheets themselves print no issue date. Both sheets print a RACK column and an STO column, so both are loaded exactly as printed - nothing is derived. Commission applies to the BED NIGHT ONLY at 20% off rack (2026: 2,344 -> 1,874 pps and 2,810 -> 2,249 single; 2027: 2,695 -> 2,156 pps and 3,234 -> 2,587 single, exact). Meals, high tea, giraffe feeding, nature drive, laundry and transfers are printed identically in both the RACK and STO tables and are therefore non-commissionable: rack = net. All 24 package figures reconcile exactly as bed rate + breakfast + high tea + giraffe feeding (+ dinner, + lunch). Rates quoted in Namibian Dollar, inclusive of VAT at 15%; tourism levies included. Single Room Supplement 20%, applied to the bed rate only. Children over 12 permitted; under 12 not permitted (safety). Cancellation: 30-15 days 25%, 14-08 days 50%, 07-01 days 75%, arrival day 100%, no-show 100%. FLAG: the 2026 sheet labels its agent line '25% COMMISSION' but its own printed STO figures are exactly 20% off the bed rate; the 2027 sheet labels the same line 20%. Figures loaded as printed; label discrepancy referred to the supplier.",
+      "sections": [
+        {
+          "title": "Explorer Package - Bed and Breakfast (Agent STO)",
+          "rows": [
+            [
+              "Explorer Package - per person sharing (Jan-Dec 2026)",
+              "2,884"
+            ],
+            [
+              "Explorer Package - single room (Jan-Dec 2026)",
+              "3,259"
+            ]
+          ]
+        },
+        {
+          "title": "Exclusive Package - Dinner, Bed and Breakfast (Agent STO) - Best Seller",
+          "rows": [
+            [
+              "Exclusive Package - per person sharing (Jan-Dec 2026)",
+              "3,580"
+            ],
+            [
+              "Exclusive Package - single room (Jan-Dec 2026)",
+              "3,955"
+            ]
+          ]
+        },
+        {
+          "title": "Superior Package - Full Board (Agent STO)",
+          "rows": [
+            [
+              "Superior Package - per person sharing (Jan-Dec 2026)",
+              "3,877"
+            ],
+            [
+              "Superior Package - single room (Jan-Dec 2026)",
+              "4,252"
+            ]
+          ]
+        },
+        {
+          "title": "Room Components (Agent STO)",
+          "rows": [
+            [
+              "Bed Rate only - per person sharing (Jan-Dec 2026)",
+              "1,874"
+            ],
+            [
+              "Bed Rate only - single room (Jan-Dec 2026)",
+              "2,249"
+            ],
+            [
+              "Tour Guide Room - single, accommodation only, non-commissionable (Jan-Dec 2026)",
+              "1,874"
+            ],
+            [
+              "Day Room - per person (Jan-Dec 2026) - supplier publishes no STO day-room rate",
+              "to confirm"
+            ]
+          ]
+        },
+        {
+          "title": "A la carte Extras - non-commissionable, rack equals net (per person)",
+          "rows": [
+            [
+              "Breakfast (Jan-Dec 2026)",
+              "350"
+            ],
+            [
+              "Lunch (per meal) (Jan-Dec 2026)",
+              "297"
+            ],
+            [
+              "4-Course Dinner (Jan-Dec 2026)",
+              "696"
+            ],
+            [
+              "High Tea (Jan-Dec 2026)",
+              "300"
+            ],
+            [
+              "Giraffe Feeding (Jan-Dec 2026)",
+              "360"
+            ],
+            [
+              "Nature Drive incl. Sundowner Cocktail (2 hr) (Jan-Dec 2026)",
+              "545"
+            ],
+            [
+              "Laundry Service (per machine) (Jan-Dec 2026)",
+              "230"
+            ]
+          ]
+        },
+        {
+          "title": "Transfers - non-commissionable, rack equals net (per person)",
+          "rows": [
+            [
+              "Airport Transfer (Jan-Dec 2026)",
+              "385"
+            ],
+            [
+              "City Transfer (Jan-Dec 2026)",
+              "460"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% on the bed night only; all extras non-commissionable"
+    },
+    "2027": {
+      "name": "Guesthouse Voigtland",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "January - December 2027",
+      "note": "Source: supplier PDF rate sheets 'Voigtland Rates 2026' and '2027VoigtlandRates' (Canva export, author Kim Krieger, exported 16 Aug 2026). The sheets themselves print no issue date. Both sheets print a RACK column and an STO column, so both are loaded exactly as printed - nothing is derived. Commission applies to the BED NIGHT ONLY at 20% off rack (2026: 2,344 -> 1,874 pps and 2,810 -> 2,249 single; 2027: 2,695 -> 2,156 pps and 3,234 -> 2,587 single, exact). Meals, high tea, giraffe feeding, nature drive, laundry and transfers are printed identically in both the RACK and STO tables and are therefore non-commissionable: rack = net. All 24 package figures reconcile exactly as bed rate + breakfast + high tea + giraffe feeding (+ dinner, + lunch). Rates quoted in Namibian Dollar, inclusive of VAT at 15%; tourism levies included. Single Room Supplement 20%, applied to the bed rate only. Children over 12 permitted; under 12 not permitted (safety). Cancellation: 30-15 days 25%, 14-08 days 50%, 07-01 days 75%, arrival day 100%, no-show 100%. FLAG: the 2027 PDF's internal document title is 'Calculations 27' although the page is headed 'AGENT PRICE LIST 2027 / January - December 2027'. Confirm with the supplier that this is the final published 2027 tariff.",
+      "sections": [
+        {
+          "title": "Explorer Package - Bed and Breakfast (Agent STO)",
+          "rows": [
+            [
+              "Explorer Package - per person sharing (Jan-Dec 2027)",
+              "3,236"
+            ],
+            [
+              "Explorer Package - single room (Jan-Dec 2027)",
+              "3,667"
+            ]
+          ]
+        },
+        {
+          "title": "Exclusive Package - Dinner, Bed and Breakfast (Agent STO) - Best Seller",
+          "rows": [
+            [
+              "Exclusive Package - per person sharing (Jan-Dec 2027)",
+              "3,932"
+            ],
+            [
+              "Exclusive Package - single room (Jan-Dec 2027)",
+              "4,363"
+            ]
+          ]
+        },
+        {
+          "title": "Superior Package - Full Board (Agent STO)",
+          "rows": [
+            [
+              "Superior Package - per person sharing (Jan-Dec 2027)",
+              "4,229"
+            ],
+            [
+              "Superior Package - single room (Jan-Dec 2027)",
+              "4,660"
+            ]
+          ]
+        },
+        {
+          "title": "Room Components (Agent STO)",
+          "rows": [
+            [
+              "Bed Rate only - per person sharing (Jan-Dec 2027)",
+              "2,156"
+            ],
+            [
+              "Bed Rate only - single room (Jan-Dec 2027)",
+              "2,587"
+            ],
+            [
+              "Tour Guide Room - single, accommodation only, non-commissionable (Jan-Dec 2027)",
+              "2,156"
+            ],
+            [
+              "Day Room - per person (Jan-Dec 2027) - supplier publishes no STO day-room rate",
+              "to confirm"
+            ]
+          ]
+        },
+        {
+          "title": "A la carte Extras - non-commissionable, rack equals net (per person)",
+          "rows": [
+            [
+              "Breakfast (Jan-Dec 2027)",
+              "350"
+            ],
+            [
+              "Lunch (per meal) (Jan-Dec 2027)",
+              "297"
+            ],
+            [
+              "4-Course Dinner (Jan-Dec 2027)",
+              "696"
+            ],
+            [
+              "High Tea (Jan-Dec 2027)",
+              "330"
+            ],
+            [
+              "Giraffe Feeding (Jan-Dec 2027)",
+              "400"
+            ],
+            [
+              "Nature Drive incl. Sundowner Cocktail (2 hr) (Jan-Dec 2027)",
+              "545"
+            ],
+            [
+              "Laundry Service (per machine) (Jan-Dec 2027)",
+              "300"
+            ]
+          ]
+        },
+        {
+          "title": "Transfers - non-commissionable, rack equals net (per person)",
+          "rows": [
+            [
+              "Airport Transfer (Jan-Dec 2027)",
+              "385"
+            ],
+            [
+              "City Transfer (Jan-Dec 2027)",
+              "460"
+            ]
+          ]
+        }
+      ],
+      "commission": "20% on the bed night only; all extras non-commissionable"
+    }
+  }
+};
+  if (typeof DDS_STO_BY_YEAR === 'undefined') return;
+  if (DDS_STO_BY_YEAR['voigtland-guesthouse'] && DDS_STO_BY_YEAR['voigtland-guesthouse']['2027']) return; // already applied
+  Object.keys(V).forEach(function (slug) {
+    var e = DDS_STO_BY_YEAR[slug] || (DDS_STO_BY_YEAR[slug] = {});
+    Object.keys(V[slug]).forEach(function (y) { e[y] = V[slug][y]; });
+    if (typeof STO_DB !== 'undefined' && STO_DB['voigtland-guesthouse']) delete STO_DB['voigtland-guesthouse'];
+    if (typeof LEGACY_STO_BY_YEAR !== 'undefined' && LEGACY_STO_BY_YEAR['voigtland-guesthouse']) delete LEGACY_STO_BY_YEAR['voigtland-guesthouse'];
+    if (typeof SHEET_STO_BY_YEAR !== 'undefined' && SHEET_STO_BY_YEAR['voigtland-guesthouse']) delete SHEET_STO_BY_YEAR['voigtland-guesthouse'];
+  });
+})();
