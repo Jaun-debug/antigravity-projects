@@ -84,7 +84,7 @@ window.submitLogin=function(){
   .catch(function(){ err.textContent='Network error — please try again.'; });
 }
 window.agentBtn=function(){
-  if(sessionStorage.getItem(TOKEN_KEY)){ sessionStorage.removeItem(TOKEN_KEY); location.reload(); }
+  if(sessionStorage.getItem(TOKEN_KEY)){ nrSignOut(); }
   else { openLoginModal(); }
 }
 
@@ -92,7 +92,7 @@ window.agentBtn=function(){
 
 window.scOpenRole=function(id){var m=document.getElementById(id);if(m)m.classList.add("open");};
 window.scCloseRole=function(){["role-signin","role-signup"].forEach(function(id){var m=document.getElementById(id);if(m)m.classList.remove("open");});};
-window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){sessionStorage.removeItem("nr_agent_token");try{sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(e){}location.reload();}else{if(window.openAuthWizard){openAuthWizard("signin");}else{scOpenRole("role-signin");}}};
+window.scSignIn=function(){if(sessionStorage.getItem("nr_agent_token")){nrSignOut();}else{if(window.openAuthWizard){openAuthWizard("signin");}else{scOpenRole("role-signin");}}};
 window.scSignUp=function(){if(window.openAuthWizard){openAuthWizard("signup");}else{scOpenRole("role-signup");}};
 window.scPick=function(role){scCloseRole();if(role==="agent"){openLoginModal();}else{location.href="/supplier-portal/";}};
 window.scPickUp=function(role){scCloseRole();location.href="/signup/?role="+role;};
@@ -167,6 +167,28 @@ function nrRestoreSession(){
   }catch(e){}
 }
 nrRestoreSession();
+/* ONE sign-out path, not three.
+   scSignIn() and agentBtn() used to clear only this tab's sessionStorage and
+   reload. The nr_session cookie survived, nrRestoreSession() read it straight
+   back on the very next load, and the agent was never signed out at all - one
+   tab was enough to reproduce it. sessionStorage is also per-tab while the
+   cookie is shared, so a second open tab re-armed the cookie for everyone.
+   Sign-out is now global: clear this tab, clear the cookie, drop the persisted
+   identity, and stamp localStorage so every other open tab clears itself too. */
+function nrSignOut(){
+  try{sessionStorage.removeItem("nr_agent_token");sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(e){}
+  try{localStorage.removeItem("nr_agent_user");localStorage.removeItem("nr_owner");}catch(e){}
+  document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";
+  try{localStorage.setItem("nr_signed_out",String(+new Date()));}catch(e){}
+  location.reload();
+}
+window.nrSignOut=nrSignOut;
+try{window.addEventListener("storage",function(e){
+  if(e.key!=="nr_signed_out"||!e.newValue)return;
+  try{sessionStorage.removeItem("nr_agent_token");sessionStorage.removeItem("nr_agent_user");sessionStorage.removeItem("nr_owner");}catch(x){}
+  document.cookie="nr_session=; path=/; max-age=0; SameSite=Lax";
+  location.reload();
+});}catch(e){}
 function updateAgentState(){nrRestoreSession();var inn=!!sessionStorage.getItem("nr_agent_token");
 if(inn){document.cookie="nr_session="+encodeURIComponent(sessionStorage.getItem("nr_agent_token"))+"; path=/; SameSite=Lax; max-age="+(NR_SESSION_DAYS*86400);}
 var sup=document.getElementById("nav-supplier");if(sup)sup.style.display=inn?"none":"";
@@ -366,6 +388,17 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
      Both site-chrome.js and enquiry-wizard.js build this by the same id, so
      whichever loads first wins and the other reuses it.
      --------------------------------------------------------------------- */
+  /* The pills sit top-centre, so they must clear the fixed header rather than
+     assume its height — the logo block makes .main-header taller on some pages
+     and at some widths. Measure it and publish the offset as a CSS variable. */
+  function nrDockTop(){
+    try{
+      var h=document.querySelector(".main-header");
+      var t=h?Math.round(h.getBoundingClientRect().bottom):0;
+      if(!(t>0)||t>260) t=74;
+      document.documentElement.style.setProperty("--nr-dock-top",(t+10)+"px");
+    }catch(e){}
+  }
   function nrDock(){
     try{
       var p=(location.pathname||"/").replace(/index\.html?$/,"");
@@ -378,10 +411,10 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
             /* No panel behind the pills — each pill is its own piece of frosted
                glass: 60% translucent, blurred and saturated backdrop, hairline
                highlight along the top edge. */
-            "#nr-yrdock{position:fixed;right:10px;top:50%;transform:translateY(-50%);z-index:1200;"
-            +"display:flex;flex-direction:column;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
-            +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
-            +"#nr-yrdock button{white-space:nowrap;width:100%;text-align:center;padding:7px 15px;"
+            "#nr-yrdock{position:fixed;left:50%;top:var(--nr-dock-top,84px);transform:translateX(-50%);z-index:1200;"
+            +"display:flex;flex-direction:row;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
+            +"#nr-yrdock>div{display:flex!important;flex-direction:row;gap:6px;margin:0!important;padding:0!important}"
+            +"#nr-yrdock button{white-space:nowrap;width:auto;text-align:center;padding:7px 15px;"
             +"background:rgba(255,255,255,.60);"
             +"-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);"
             +"border:1px solid rgba(255,255,255,.45);"
@@ -390,13 +423,16 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
             +"#nr-yrdock button:hover{background:rgba(255,255,255,.74);box-shadow:0 10px 30px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.7)}"
             +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(200,90,23,.60);color:#fff;"
             +"border-color:rgba(255,255,255,.40);text-shadow:0 1px 2px rgba(0,0,0,.22)}"
-            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;right:10px;transform:none}"
+            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;left:50%;transform:translateX(-50%)}"
             +"#nr-yrdock>div{flex-direction:row}}"
             +"@media print{#nr-yrdock{display:none}}";
           (document.head||document.documentElement).appendChild(st);
         }
         d=document.createElement("div"); d.id="nr-yrdock";
         (document.body||document.documentElement).appendChild(d);
+        nrDockTop();
+        try{window.addEventListener("resize",nrDockTop);
+            window.addEventListener("load",nrDockTop);}catch(e){}
       }
       return d;
     }catch(e){ return null; }
