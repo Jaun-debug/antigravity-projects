@@ -1,5 +1,5 @@
 {
-"generated": "2026-09-20T13:23:10",
+"generated": "2026-09-20T13:26:18",
 "count": 297,
 "lodges": [
 {
@@ -13736,102 +13736,146 @@
 "region": "Fish River Canyon",
 "rates": [
 {
-"n": "Luxury Chalet — Single — B&B (2026)",
+"n": "Luxury Chalet — Single — B&B",
 "p": 1480
 },
 {
-"n": "Luxury Chalet — Per Person Sharing — B&B (2026)",
+"n": "Luxury Chalet — Per Person Sharing — B&B",
 "p": 1296
 },
 {
-"n": "Guide Rate (2+ pax & 1 guide only) — B&B (2026)",
+"n": "Guide Rate (2+ pax & 1 guide only) — B&B",
 "p": 777.6
 },
 {
-"n": "Children 3–13 yrs sharing — B&B (2026)",
+"n": "Children 3–13 yrs sharing — B&B",
 "p": 648
 },
 {
-"n": "Luxury Chalet — Single — Self Catering (Acc Only) (2026)",
+"n": "Luxury Chalet — Single — Self Catering (Acc Only)",
 "p": 1520
 },
 {
-"n": "Luxury Chalet — Per Person Sharing — Self Catering (Acc Only) (2026)",
+"n": "Luxury Chalet — Per Person Sharing — Self Catering (Acc Only)",
 "p": 1336
 },
 {
-"n": "Children 3–13 yrs sharing — Self Catering (Acc Only) (2026)",
+"n": "Children 3–13 yrs sharing — Self Catering (Acc Only)",
 "p": 668
 },
 {
-"n": "Camping — Per Person (2026)",
+"n": "Camping — Per Person",
 "p": 250
 },
 {
-"n": "Camping — Children 0–3 yrs (2026)",
+"n": "Camping — Children 0–3 yrs",
 "p": 125
-},
-{
-"n": "Luxury Chalet — Single — B&B (2027)",
-"p": 1548
-},
-{
-"n": "Luxury Chalet — Per Person Sharing — B&B (2027)",
-"p": 1356
-},
-{
-"n": "Guide Rate (2+ pax & 1 guide only) — B&B (2027)",
-"p": 813.6
-},
-{
-"n": "Children 3–13 yrs sharing — B&B (2027)",
-"p": 678
-},
-{
-"n": "Luxury Chalet — Single — Self Catering (Acc Only) (2027)",
-"p": 1588
-},
-{
-"n": "Luxury Chalet — Per Person Sharing — Self Catering (Acc Only) (2027)",
-"p": 1396
-},
-{
-"n": "Camping — Per Person (2027)",
-"p": 260
-},
-{
-"n": "Camping — Children 0–3 yrs (2027)",
-"p": 130
 }
 ],
 "rack_2026": [
 {
-"n": "Luxury Chalet (Sharing) - B&B",
-"p": 1622.4
+"n": "Luxury Chalet — Single — B&B",
+"p": 1850
 },
 {
-"n": "Luxury Chalet (Single) - B&B",
-"p": 1872
+"n": "Luxury Chalet — Per Person Sharing — B&B",
+"p": 1620
 },
 {
-"n": "Luxury Chalet (Sharing) - Self Catering (Acc Only)",
-"p": 1420.8
+"n": "Guide Rate (2+ pax & 1 guide only) — B&B",
+"p": 970
 },
 {
-"n": "Luxury Chalet (Single) - Self Catering (Acc Only)",
-"p": 1689.6
+"n": "Children 3–13 yrs sharing — B&B",
+"p": 810
 },
 {
-"n": "Children 3-13 years sharing - B&B",
-"p": 811.2
+"n": "Luxury Chalet — Single — Self Catering (Acc Only)",
+"p": 1900
 },
 {
-"n": "Camping (Per Person) - RO",
-"p": 240
+"n": "Luxury Chalet — Per Person Sharing — Self Catering (Acc Only)",
+"p": 1670
 },
 {
-"n": "Tour Guide Room - B&B",
-"p": 974.4
+"n": "Children 3–13 yrs sharing — Self Catering (Acc Only)",
+"p": 835
+},
+{
+"n": "Camping — Per Person",
+"p": 250
+},
+{
+"n": "Camping — Children 0–3 yrs",
+"p": 125
+}
+],
+"rates_2027": [
+{
+"n": "Luxury Chalet — Single — B&B",
+"p": 1548
+},
+{
+"n": "Luxury Chalet — Per Person Sharing — B&B",
+"p": 1356
+},
+{
+"n": "Guide Rate (2+ pax & 1 guide only) — B&B",
+"p": 813.6
+},
+{
+"n": "Children 3–13 yrs sharing — B&B",
+"p": 678
+},
+{
+"n": "Luxury Chalet — Single — Self Catering (Acc Only)",
+"p": 1588
+},
+{
+"n": "Luxury Chalet — Per Person Sharing — Self Catering (Acc Only)",
+"p": 1396
+},
+{
+"n": "Camping — Per Person",
+"p": 260
+},
+{
+"n": "Camping — Children 0–3 yrs",
+"p": 130
+}
+],
+"rack_2027": [
+{
+"n": "Luxury Chalet — Single — B&B",
+"p": 1935
+},
+{
+"n": "Luxury Chalet — Per Person Sharing — B&B",
+"p": 1695
+},
+{
+"n": "Guide Rate (2+ pax & 1 guide only) — B&B",
+"p": 1015
+},
+{
+"n": "Children 3–13 yrs sharing — B&B",
+"p": 845
+},
+{
+"n": "Luxury Chalet — Single — Self Catering (Acc Only)",
+"p": 1985
+},
+{
+"n": "Luxury Chalet — Per Person Sharing — Self Catering (Acc Only)",
+"p": 1745
+},
+{
+"n": "Camping — Per Person",
+"p": 260
+},
+{
+"n": "Camping — Children 0–3 yrs",
+"p": 130
 }
 ]
 },

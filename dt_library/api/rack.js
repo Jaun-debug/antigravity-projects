@@ -27020,7 +27020,7 @@ Object.assign(DDS_RACK_BY_YEAR, {
   "alte-kalkofen-lodge": {
     "2026": {
       "name": "Alte Kalkofen Lodge",
-      "region": "",
+      "region": "Fish River Canyon",
       "currency": "N$",
       "validity": "01.03.2026 - 31.10.2026",
       "note": "Rack exactly as printed in the sheet's 'Rack Rate' column - not derived. Source: Alte-Kalkofen-Lodge-STO-20-2026.pdf, valid 01.03.2026-31.10.2026. Room rows run at 20% (STO divided by rack is 0.80 on every room row). Campsite, meals and activities print one column only, so rack equals net there. Loaded 20 Sep 2026.",
@@ -27138,7 +27138,7 @@ Object.assign(DDS_RACK_BY_YEAR, {
     },
     "2027": {
       "name": "Alte Kalkofen Lodge",
-      "region": "",
+      "region": "Fish River Canyon",
       "currency": "N$",
       "validity": "01.11.2026 - 31.10.2027",
       "note": "Rack exactly as printed in the sheet's 'Rack Rate' column - not derived. Source: Alte-Kalkofen-Lodge-STO-20-2027.pdf, valid 01.11.2026-31.10.2027. Self-catering children 3-13 is 'to confirm' - the sheet's three columns disagree on that row. Loaded 20 Sep 2026.",

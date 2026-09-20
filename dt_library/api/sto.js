@@ -27619,7 +27619,7 @@ Object.assign(DDS_STO_BY_YEAR, {
   "alte-kalkofen-lodge": {
     "2026": {
       "name": "Alte Kalkofen Lodge",
-      "region": "",
+      "region": "Fish River Canyon",
       "currency": "N$",
       "validity": "01.03.2026 - 31.10.2026",
       "note": "Net STO as printed in the sheet's 'Rate Incl Levy' column. Source: Alte-Kalkofen-Lodge-STO-20-2026.pdf from Exclusive Reservations, valid 01.03.2026-31.10.2026, 20% STO. All rates per person per night, incl. 2% bed levy and VAT; B&B rows include breakfast. Campsite, meals and activities print a single column with no rack and no stated commission, so rack is carried equal to net and no margin is invented. Loaded 20 Sep 2026.",
@@ -27738,7 +27738,7 @@ Object.assign(DDS_STO_BY_YEAR, {
     },
     "2027": {
       "name": "Alte Kalkofen Lodge",
-      "region": "",
+      "region": "Fish River Canyon",
       "currency": "N$",
       "validity": "01.11.2026 - 31.10.2027",
       "note": "Net STO as printed in the sheet's 'Rate Incl Levy' column. Source: Alte-Kalkofen-Lodge-STO-20-2027.pdf from Exclusive Reservations, valid 01.11.2026-31.10.2027, 20% STO. Self-catering children 3-13 is left 'to confirm': the sheet contradicts itself on that row, printing rack 870,00 while its own nett column grosses up to 870,00 and the STO column shows 730,00. Campsite, meals and activities print one column, so rack equals net. Loaded 20 Sep 2026.",
