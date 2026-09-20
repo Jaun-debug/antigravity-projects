@@ -27004,3 +27004,266 @@ Object.assign(DDS_RACK_BY_YEAR, {
     if (typeof VF_RACK !== 'undefined' && VF_RACK['voigtland-guesthouse']) delete VF_RACK['voigtland-guesthouse'];
   });
 })();
+
+
+// ---------------------------------------------------------------------------
+// Alte Kalkofen Lodge - 2026 and 2027, loaded 20 Sep 2026.
+// Source: Exclusive Reservations' own sheets, Alte-Kalkofen-Lodge-STO-20-2026.pdf
+// (valid 01.03.2026-31.10.2026) and -2027.pdf (valid 01.11.2026-31.10.2027).
+// Both sheets print a rack column and an STO column, so both are loaded exactly
+// as printed and nothing is derived. This supersedes the earlier entry, whose
+// figures were net x 1.20 and matched neither sheet.
+// Idempotent: re-running is a no-op once 2027 is present.
+// ---------------------------------------------------------------------------
+;(function loadAlteKalkofen2627Rack() {
+  var V = {
+  "alte-kalkofen-lodge": {
+    "2026": {
+      "name": "Alte Kalkofen Lodge",
+      "region": "",
+      "currency": "N$",
+      "validity": "01.03.2026 - 31.10.2026",
+      "note": "Rack exactly as printed in the sheet's 'Rack Rate' column - not derived. Source: Alte-Kalkofen-Lodge-STO-20-2026.pdf, valid 01.03.2026-31.10.2026. Room rows run at 20% (STO divided by rack is 0.80 on every room row). Campsite, meals and activities print one column only, so rack equals net there. Loaded 20 Sep 2026.",
+      "sections": [
+        {
+          "title": "Bed & Breakfast (per person, per night)",
+          "rows": [
+            [
+              "Luxury Chalet - Single - B&B (01 Mar - 31 Oct 2026)",
+              "1,850"
+            ],
+            [
+              "Luxury Chalet - Per Person Sharing - B&B (01 Mar - 31 Oct 2026)",
+              "1,620"
+            ],
+            [
+              "Guide Rate - 2 pax or more, 1 guide only - B&B (01 Mar - 31 Oct 2026)",
+              "970"
+            ],
+            [
+              "Children 0-2 years sharing with parents - B&B (01 Mar - 31 Oct 2026)",
+              "free of charge"
+            ],
+            [
+              "Children 3-13 years sharing - B&B (01 Mar - 31 Oct 2026)",
+              "810"
+            ]
+          ]
+        },
+        {
+          "title": "Self-Catering - accommodation only (per person, per night)",
+          "rows": [
+            [
+              "Luxury Chalet - Single - Self Catering (01 Mar - 31 Oct 2026)",
+              "1,900"
+            ],
+            [
+              "Luxury Chalet - Per Person Sharing - Self Catering (01 Mar - 31 Oct 2026)",
+              "1,670"
+            ],
+            [
+              "Children 0-2 years sharing with parents - Self Catering (01 Mar - 31 Oct 2026)",
+              "free of charge"
+            ],
+            [
+              "Children 3-13 years sharing - Self Catering (01 Mar - 31 Oct 2026)",
+              "835"
+            ]
+          ]
+        },
+        {
+          "title": "Campsite, max 6 pax per site - sheet prints one column, rack equals net (per person, per night)",
+          "rows": [
+            [
+              "Camping - per person (01 Mar - 31 Oct 2026)",
+              "250"
+            ],
+            [
+              "Camping - children 0-3 years (01 Mar - 31 Oct 2026)",
+              "125"
+            ]
+          ]
+        },
+        {
+          "title": "Meals - sheet prints one column, rack equals net (per person)",
+          "rows": [
+            [
+              "Breakfast (01 Mar - 31 Oct 2026)",
+              "190"
+            ],
+            [
+              "Light Lunch (01 Mar - 31 Oct 2026)",
+              "165"
+            ],
+            [
+              "Lunch Pack (01 Mar - 31 Oct 2026)",
+              "165"
+            ],
+            [
+              "Ladies Dinner (01 Mar - 31 Oct 2026)",
+              "310"
+            ],
+            [
+              "Kiddies Combo (01 Mar - 31 Oct 2026)",
+              "165"
+            ],
+            [
+              "Dinner (01 Mar - 31 Oct 2026)",
+              "430"
+            ]
+          ]
+        },
+        {
+          "title": "Activities - sheet prints one column, rack equals net (per person)",
+          "rows": [
+            [
+              "Nature Drive 2-3 hours - min 2 pax (01 Mar - 31 Oct 2026)",
+              "480"
+            ],
+            [
+              "Nature Drive 2-3 hours - 3 to 8 pax (01 Mar - 31 Oct 2026)",
+              "445"
+            ],
+            [
+              "Sunrise Breakfast - min 2 pax (01 Mar - 31 Oct 2026)",
+              "310"
+            ],
+            [
+              "Sunrise Breakfast - 3 to 8 pax (01 Mar - 31 Oct 2026)",
+              "240"
+            ]
+          ]
+        }
+      ]
+    },
+    "2027": {
+      "name": "Alte Kalkofen Lodge",
+      "region": "",
+      "currency": "N$",
+      "validity": "01.11.2026 - 31.10.2027",
+      "note": "Rack exactly as printed in the sheet's 'Rack Rate' column - not derived. Source: Alte-Kalkofen-Lodge-STO-20-2027.pdf, valid 01.11.2026-31.10.2027. Self-catering children 3-13 is 'to confirm' - the sheet's three columns disagree on that row. Loaded 20 Sep 2026.",
+      "sections": [
+        {
+          "title": "Bed & Breakfast (per person, per night)",
+          "rows": [
+            [
+              "Luxury Chalet - Single - B&B (01 Nov 2026 - 31 Oct 2027)",
+              "1,935"
+            ],
+            [
+              "Luxury Chalet - Per Person Sharing - B&B (01 Nov 2026 - 31 Oct 2027)",
+              "1,695"
+            ],
+            [
+              "Guide Rate - 2 pax or more, 1 guide only - B&B (01 Nov 2026 - 31 Oct 2027)",
+              "1,015"
+            ],
+            [
+              "Children 0-2 years sharing with parents - B&B (01 Nov 2026 - 31 Oct 2027)",
+              "free of charge"
+            ],
+            [
+              "Children 3-13 years sharing - B&B (01 Nov 2026 - 31 Oct 2027)",
+              "845"
+            ]
+          ]
+        },
+        {
+          "title": "Self-Catering - accommodation only (per person, per night)",
+          "rows": [
+            [
+              "Luxury Chalet - Single - Self Catering (01 Nov 2026 - 31 Oct 2027)",
+              "1,985"
+            ],
+            [
+              "Luxury Chalet - Per Person Sharing - Self Catering (01 Nov 2026 - 31 Oct 2027)",
+              "1,745"
+            ],
+            [
+              "Children 0-2 years sharing with parents - Self Catering (01 Nov 2026 - 31 Oct 2027)",
+              "free of charge"
+            ],
+            [
+              "Children 3-13 years sharing - Self Catering (01 Nov 2026 - 31 Oct 2027)",
+              "to confirm"
+            ]
+          ]
+        },
+        {
+          "title": "Campsite, max 6 pax per site - sheet prints one column, rack equals net (per person, per night)",
+          "rows": [
+            [
+              "Camping - per person (01 Nov 2026 - 31 Oct 2027)",
+              "260"
+            ],
+            [
+              "Camping - children 0-3 years (01 Nov 2026 - 31 Oct 2027)",
+              "130"
+            ]
+          ]
+        },
+        {
+          "title": "Meals - sheet prints one column, rack equals net (per person)",
+          "rows": [
+            [
+              "Breakfast (01 Nov 2026 - 31 Oct 2027)",
+              "200"
+            ],
+            [
+              "Light Lunch (01 Nov 2026 - 31 Oct 2027)",
+              "170"
+            ],
+            [
+              "Lunch Pack (01 Nov 2026 - 31 Oct 2027)",
+              "170"
+            ],
+            [
+              "Ladies Dinner (01 Nov 2026 - 31 Oct 2027)",
+              "325"
+            ],
+            [
+              "Kiddies Combo (01 Nov 2026 - 31 Oct 2027)",
+              "170"
+            ],
+            [
+              "Dinner (01 Nov 2026 - 31 Oct 2027)",
+              "450"
+            ]
+          ]
+        },
+        {
+          "title": "Activities - sheet prints one column, rack equals net (per person)",
+          "rows": [
+            [
+              "Nature Drive 2-3 hours - min 2 pax (01 Nov 2026 - 31 Oct 2027)",
+              "500"
+            ],
+            [
+              "Nature Drive 2-3 hours - 3 to 8 pax (01 Nov 2026 - 31 Oct 2027)",
+              "465"
+            ],
+            [
+              "Sunrise Breakfast - min 2 pax (01 Nov 2026 - 31 Oct 2027)",
+              "325"
+            ],
+            [
+              "Sunrise Breakfast - 3 to 8 pax (01 Nov 2026 - 31 Oct 2027)",
+              "250"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+};
+  if (typeof DDS_RACK_BY_YEAR === 'undefined') return;
+  if (DDS_RACK_BY_YEAR['alte-kalkofen-lodge'] && DDS_RACK_BY_YEAR['alte-kalkofen-lodge']['2027']) return; // already applied
+  Object.keys(V).forEach(function (slug) {
+    var e = DDS_RACK_BY_YEAR[slug] || (DDS_RACK_BY_YEAR[slug] = {});
+    Object.keys(V[slug]).forEach(function (y) { e[y] = V[slug][y]; });
+  });
+  if (typeof LEGACY_RACK_BY_YEAR !== 'undefined' && LEGACY_RACK_BY_YEAR['alte-kalkofen-lodge']) delete LEGACY_RACK_BY_YEAR['alte-kalkofen-lodge'];
+  if (typeof SHEET_RACK_BY_YEAR !== 'undefined' && SHEET_RACK_BY_YEAR['alte-kalkofen-lodge']) delete SHEET_RACK_BY_YEAR['alte-kalkofen-lodge'];
+  if (typeof NAM_RACK !== 'undefined' && NAM_RACK['alte-kalkofen-lodge']) delete NAM_RACK['alte-kalkofen-lodge'];
+  if (typeof VF_RACK !== 'undefined' && VF_RACK['alte-kalkofen-lodge']) delete VF_RACK['alte-kalkofen-lodge'];
+})();
