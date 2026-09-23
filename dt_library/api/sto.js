@@ -27867,3 +27867,6098 @@ Object.assign(DDS_STO_BY_YEAR, {
   if (typeof LEGACY_STO_BY_YEAR !== 'undefined' && LEGACY_STO_BY_YEAR['alte-kalkofen-lodge']) delete LEGACY_STO_BY_YEAR['alte-kalkofen-lodge'];
   if (typeof SHEET_STO_BY_YEAR !== 'undefined' && SHEET_STO_BY_YEAR['alte-kalkofen-lodge']) delete SHEET_STO_BY_YEAR['alte-kalkofen-lodge'];
 })();
+
+
+// ---------------------------------------------------------------------------
+// RESDEST_2026_27_LOAD — Reservation Destination (ResDest) portfolio, 22 properties.
+// Loaded from the ResDest Mailchimp / Google Drive rate sheets (23 Sep 2026).
+// 2026: rack and STO exactly as printed. 2027: only Bagatelle Kalahari Game
+// Ranch, Bagatelle Farmhouse, Ohange and Ugab have published 2027 RACK; no
+// 2027 STO has been issued, so no 2027 net is loaded. Adds years, never removes.
+// ---------------------------------------------------------------------------
+;(function loadResDest2627Sto() {
+  var V = {
+  "bagatelle-kalahari-game-ranch": {
+    "2026": {
+      "name": "Bagatelle Kalahari Game Ranch",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2026 · 01 Nov 2025 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Bagatelle-2026-STO-PP-15.pdf (valid 01 Nov 2025 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Season 1 Night SC per Person: rack 730 / STO 657 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Dune Exclusive [2] Dinner, Bed & Breakfast (Max 2 pax)",
+          "rows": [
+            [
+              "Dune Exclusive · 1 Night DBB per Room (01 Nov 2025 – 31 Oct 2026)",
+              "13,056"
+            ],
+            [
+              "Dune Exclusive · 2 Nights (plus) DBB per Room per night (01 Nov 2025 – 31 Oct 2026)",
+              "12,011.52"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Dune Chalet [4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Dune Chalet · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "4,972.50"
+            ],
+            [
+              "Dune Chalet · 1 Night DBB Single Supplement (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,649"
+            ],
+            [
+              "Dune Chalet · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "4,574.70"
+            ],
+            [
+              "Dune Chalet · 2 Nights (plus) DBB Single Supplement per night (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,517.08"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Savannah Chalet [8] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Savannah Chalet · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "3,825"
+            ],
+            [
+              "Savannah Chalet · 1 Night DBB Single Supplement (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,262.25"
+            ],
+            [
+              "Savannah Chalet · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Savannah Chalet · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "2,250"
+            ],
+            [
+              "Savannah Chalet · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "3,519"
+            ],
+            [
+              "Savannah Chalet · 2 Nights (plus) DBB Single Supplement per night (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,161.27"
+            ],
+            [
+              "Savannah Chalet · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Savannah Chalet · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "2,070"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Garden Rooms [6] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Garden Rooms · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "3,264"
+            ],
+            [
+              "Garden Rooms · 1 Night DBB Single Supplement (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,079.50"
+            ],
+            [
+              "Garden Rooms · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Garden Rooms · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "1,920"
+            ],
+            [
+              "Garden Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "3,002.88"
+            ],
+            [
+              "Garden Rooms · 2 Nights (plus) DBB Single Supplement per night (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "993.14"
+            ],
+            [
+              "Garden Rooms · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Garden Rooms · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "1,766.40"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Campsite [6]: Self Catering",
+          "rows": [
+            [
+              "Campsite · 1 Night SC per Person (01 Nov 2025 – 31 Oct 2026)",
+              "657"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Guide Rooms [4]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Nov 2025 – 31 Oct 2026)",
+              "1,250"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Extras per Person (Child Policy does not apply)",
+          "rows": [
+            [
+              "Extras · Horseback Safari (01 Nov 2025 – 31 Oct 2026)",
+              "1,250"
+            ],
+            [
+              "Extras · Combination: Afternoon Nature Drive + Cheetah Excursion + Sundowner (01 Nov 2025 – 31 Oct 2026)",
+              "1,350"
+            ],
+            [
+              "Extras · Afternoon Nature Drive + Sundowner (01 Nov 2025 – 31 Oct 2026)",
+              "1,100"
+            ],
+            [
+              "Extras · Cheetah Excursion + Sundowner (01 Nov 2025 – 31 Oct 2026)",
+              "550"
+            ],
+            [
+              "Extras · Night Drive (01 Nov 2025 – 31 Oct 2026)",
+              "650"
+            ],
+            [
+              "Extras · Morning Bushman Walk (01 Nov 2025 – 31 Oct 2026)",
+              "650"
+            ],
+            [
+              "Extras · Morning Scenic Drive (01 Nov 2025 – 31 Oct 2026)",
+              "850"
+            ],
+            [
+              "Extras · Star Safari From Observatory (01 Nov 2025 – 31 Oct 2026)",
+              "500"
+            ],
+            [
+              "Extras · Transfer to & from Mariental Airport / vehicle (Max 4 pax) one way (01 Nov 2025 – 31 Oct 2026)",
+              "1,960"
+            ],
+            [
+              "Extras · Transfer to & from Windhoek Airport / vehicle (Max 4 pax) one way (01 Nov 2025 – 31 Oct 2026)",
+              "8,450"
+            ],
+            [
+              "Extras · Breakfast (01 Nov 2025 – 31 Oct 2026)",
+              "400"
+            ],
+            [
+              "Extras · Breakfast for children aged 12 years old and younger (01 Nov 2025 – 31 Oct 2026)",
+              "205"
+            ],
+            [
+              "Extras · Lunch pack (01 Nov 2025 – 31 Oct 2026)",
+              "210"
+            ],
+            [
+              "Extras · Dinner (01 Nov 2025 – 31 Oct 2026)",
+              "685"
+            ],
+            [
+              "Extras · Dinner for children aged 12 years old and younger (01 Nov 2025 – 31 Oct 2026)",
+              "345"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "bagatelle-farmhouse": {
+    "2026": {
+      "name": "Bagatelle Farmhouse",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2026 · 01 Nov 2025 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: BK-Farmhouse-2026-STO-PP-15.pdf (valid 01 Nov 2025 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Luxury Rooms [4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Rooms · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "4,972.50"
+            ],
+            [
+              "Luxury Rooms · 1 Night DBB Single Supplement (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,649"
+            ],
+            [
+              "Luxury Rooms · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Rooms · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "2,925"
+            ],
+            [
+              "Luxury Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "4,574.70"
+            ],
+            [
+              "Luxury Rooms · 2 Nights (plus) DBB Single Supplement per night (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,517.08"
+            ],
+            [
+              "Luxury Rooms · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Rooms · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "2,691"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Standard Rooms [4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "3,825"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB Single Supplement (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,262.25"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "2,250"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "3,519"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Single Supplement per night (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,161.27"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "2,070"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — The Villa [1 building with 3 rooms] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "The Villa · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "6,528"
+            ],
+            [
+              "The Villa · 1 Night DBB Single Supplement (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "2,154.75"
+            ],
+            [
+              "The Villa · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "The Villa · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "3,840"
+            ],
+            [
+              "The Villa · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "6,005.76"
+            ],
+            [
+              "The Villa · 2 Nights (plus) DBB Single Supplement per night (*1) (01 Nov 2025 – 31 Oct 2026)",
+              "1,982.37"
+            ],
+            [
+              "The Villa · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "The Villa · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "3,532.80"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Nov 2025 – 31 Oct 2026)",
+              "1,250"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Extras per Person (Does not include Child Policy)",
+          "rows": [
+            [
+              "Extras · Horseback Safari (01 Nov 2025 – 31 Oct 2026)",
+              "1,250"
+            ],
+            [
+              "Extras · Combination: Afternoon Nature Drive + Cheetah Excursion + Sundowner (01 Nov 2025 – 31 Oct 2026)",
+              "1,350"
+            ],
+            [
+              "Extras · Afternoon Nature Drive + Sundowner (01 Nov 2025 – 31 Oct 2026)",
+              "1,100"
+            ],
+            [
+              "Extras · Cheetah Excursion + Sundowner (01 Nov 2025 – 31 Oct 2026)",
+              "550"
+            ],
+            [
+              "Extras · Night Drive (01 Nov 2025 – 31 Oct 2026)",
+              "650"
+            ],
+            [
+              "Extras · Morning Bushman Walk (01 Nov 2025 – 31 Oct 2026)",
+              "650"
+            ],
+            [
+              "Extras · Morning Scenic Drive (01 Nov 2025 – 31 Oct 2026)",
+              "850"
+            ],
+            [
+              "Extras · Star Safari From Observatory (01 Nov 2025 – 31 Oct 2026)",
+              "500"
+            ],
+            [
+              "Extras · Transfer to & from Mariental airport / vehicle (Max 4 pax) one way (01 Nov 2025 – 31 Oct 2026)",
+              "1,960"
+            ],
+            [
+              "Extras · Transfer to & from Windhoek airport / vehicle (Max 4 pax) one way (01 Nov 2025 – 31 Oct 2026)",
+              "8,450"
+            ],
+            [
+              "Extras · Lunch pack (01 Nov 2025 – 31 Oct 2026)",
+              "210"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kiripotib-guest-farm": {
+    "2026": {
+      "name": "Kiripotib Guest Farm",
+      "region": "Kalahari",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Mar 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Kiripotib-2026-LS-STO-PP-20.pdf (valid 01 Mar 2025 – 30 Jun 2026, STO 20%); Kiripotib-2026-HS-STO-PP-20.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 20%). STO commission 20% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season SC per Person Per Night: rack 370 / STO 314.50 (ratio 0.850); High season SC per Person Per Night: rack 400 / STO 340 (ratio 0.850).",
+      "sections": [
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — Chalets [2] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Chalets · 1 Night DBB per Person Sharing (double/Twin) (01 Mar 2025 – 30 Jun 2026)",
+              "2,616"
+            ],
+            [
+              "Chalets · 1 Night DBB Single Supplement (Add to per person rate) (01 Mar 2025 – 30 Jun 2026)",
+              "680"
+            ],
+            [
+              "Chalets · 1 Night DBB per Person Sharing (triple) (01 Mar 2025 – 30 Jun 2026)",
+              "2,412"
+            ],
+            [
+              "Chalets · 2 Nights (plus) DBB per Person Sharing (double/Twin) per night (01 Mar 2025 – 30 Jun 2026)",
+              "2,406.72"
+            ],
+            [
+              "Chalets · 2 Nights (plus) DBB Single Supplement (Add to per person rate)per night (01 Mar 2025 – 30 Jun 2026)",
+              "625.60"
+            ],
+            [
+              "Chalets · 2 Nights (plus) DBB per Person Sharing (triple) per night (01 Mar 2025 – 30 Jun 2026)",
+              "2,219.04"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — Standard Rooms [13] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Mar 2025 – 30 Jun 2026)",
+              "2,296"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB Single Supplement (Add to per person rate) (01 Mar 2025 – 30 Jun 2026)",
+              "520"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Mar 2025 – 30 Jun 2026)",
+              "2,112.32"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Single Supplement (Add to per person rate)per night (01 Mar 2025 – 30 Jun 2026)",
+              "478.40"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — Luxury Tent [2] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tent · 1 Night DBB per Person Sharing (01 Mar 2025 – 30 Jun 2026)",
+              "1,945.60"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB Single Supplement (Add to per person rate) (01 Mar 2025 – 30 Jun 2026)",
+              "360"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB per Person Sharing per night (01 Mar 2025 – 30 Jun 2026)",
+              "1,789.95"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB Single Supplement (Add to per person rate)per night (01 Mar 2025 – 30 Jun 2026)",
+              "331.20"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — Children (ref to T&C's)",
+          "rows": [
+            [
+              "Children · Child 4-12 Years DBB Sharing with parents Per Night (01 Mar 2025 – 30 Jun 2026)",
+              "1,085"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — Campsite [3]: Self Catering",
+          "rows": [
+            [
+              "Campsite · SC per Person Per Night (01 Mar 2025 – 30 Jun 2026)",
+              "314.50"
+            ],
+            [
+              "Campsite · SC per child 0-3 sharing with parents Per Night (01 Mar 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite · SC per child 4-12 sharing with parents Per Night (01 Mar 2025 – 30 Jun 2026)",
+              "185"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — Guide Rooms : Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Mar 2025 – 30 Jun 2026)",
+              "1,090"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Mar 2025 – 30 Jun 2026 — EXTRA'S per person (Child Policy does not apply)",
+          "rows": [
+            [
+              "Extras · 1hr Farmstead Tour (incl. African Kirikara Art Weavery & Gallery) (01 Mar 2025 – 30 Jun 2026)",
+              "250"
+            ],
+            [
+              "Extras · 4hr Guided Kiripotib Sunrise Hike (drive & walk) (01 Mar 2025 – 30 Jun 2026)",
+              "640"
+            ],
+            [
+              "Extras · 1hr Guided Aloe Forest Hike (walk) (01 Mar 2025 – 30 Jun 2026)",
+              "550"
+            ],
+            [
+              "Extras · 2hr Sundowner Game Drive (incl 1 drink) (01 Mar 2025 – 30 Jun 2026)",
+              "710"
+            ],
+            [
+              "Extras · 2hr Guided E-Bike Nature Drive (01 Mar 2025 – 30 Jun 2026)",
+              "650"
+            ],
+            [
+              "Extras · 1hr Sunrise excursion incl. coffee/tea (01 Mar 2025 – 30 Jun 2026)",
+              "425"
+            ],
+            [
+              "Extras · Stargazing (only around new moon - weather permitting) (01 Mar 2025 – 30 Jun 2026)",
+              "710"
+            ],
+            [
+              "Extras · Breakfast (01 Mar 2025 – 30 Jun 2026)",
+              "210"
+            ],
+            [
+              "Extras · Light Lunch - Prebooking required (01 Mar 2025 – 30 Jun 2026)",
+              "235"
+            ],
+            [
+              "Extras · LunchPacks (01 Mar 2025 – 30 Jun 2026)",
+              "160"
+            ],
+            [
+              "Extras · Dinner (01 Mar 2025 – 30 Jun 2026)",
+              "490"
+            ],
+            [
+              "Extras · Dinner - Children aged 4-12 (01 Mar 2025 – 30 Jun 2026)",
+              "235"
+            ],
+            [
+              "Extras · 1 Person (01 Mar 2025 – 30 Jun 2026)",
+              "3,545"
+            ],
+            [
+              "Extras · 2-3 Persons (01 Mar 2025 – 30 Jun 2026)",
+              "4,250"
+            ],
+            [
+              "Extras · 4-8 Persons (01 Mar 2025 – 30 Jun 2026)",
+              "5,300"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Chalets [2] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Chalets · 1 Night DBB per Person Sharing (double/Twin) (01 Jul 2026 – 31 Oct 2026)",
+              "2,800"
+            ],
+            [
+              "Chalets · 1 Night DBB Single Supplement (Add to per person rate) (01 Jul 2026 – 31 Oct 2026)",
+              "728"
+            ],
+            [
+              "Chalets · 1 Night DBB per Person Sharing (triple) (01 Jul 2026 – 31 Oct 2026)",
+              "2,412"
+            ],
+            [
+              "Chalets · 2 Nights (plus) DBB per Person Sharing (double/Twin) per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,576"
+            ],
+            [
+              "Chalets · 2 Nights (plus) DBB Single Supplement (Add to per person rate)per night (01 Jul 2026 – 31 Oct 2026)",
+              "669.76"
+            ],
+            [
+              "Chalets · 2 Nights (plus) DBB per Person Sharing (triple) per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,219.04"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Rooms [13] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,452"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB Single Supplement (Add to per person rate) (01 Jul 2026 – 31 Oct 2026)",
+              "540"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,255.84"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Single Supplement (Add to per person rate)per night (01 Jul 2026 – 31 Oct 2026)",
+              "496.80"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Luxury Tent [2] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tent · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,012"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB Single Supplement (Add to per person rate) (01 Jul 2026 – 31 Oct 2026)",
+              "380"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,851.04"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB Single Supplement (Add to per person rate)per night (01 Jul 2026 – 31 Oct 2026)",
+              "349.60"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Children (ref to T&C's)",
+          "rows": [
+            [
+              "Children · Child 4-12 Years DBB Sharing with parents Per Night (01 Jul 2026 – 31 Oct 2026)",
+              "1,200"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Campsite [3]: Self Catering",
+          "rows": [
+            [
+              "Campsite · SC per Person Per Night (01 Jul 2026 – 31 Oct 2026)",
+              "340"
+            ],
+            [
+              "Campsite · SC per child 0-3 sharing with parents Per Night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite · SC per child 4-12 sharing with parents Per Night (01 Jul 2026 – 31 Oct 2026)",
+              "200"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms : Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,200"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — EXTRA'S per person (Child Policy does not apply)",
+          "rows": [
+            [
+              "Extras · 1hr Farmstead Tour (incl. African Kirikara Art Weavery & Gallery) (01 Jul 2026 – 31 Oct 2026)",
+              "275"
+            ],
+            [
+              "Extras · 4hr Guided Kiripotib Sunrise Hike (drive & walk) (01 Jul 2026 – 31 Oct 2026)",
+              "700"
+            ],
+            [
+              "Extras · 1hr Guided Aloe Forest Hike (walk) (01 Jul 2026 – 31 Oct 2026)",
+              "600"
+            ],
+            [
+              "Extras · 2hr Sundowner Game Drive (incl 1 drink) (01 Jul 2026 – 31 Oct 2026)",
+              "780"
+            ],
+            [
+              "Extras · 2hr Guided E-Bike Nature Drive (01 Jul 2026 – 31 Oct 2026)",
+              "715"
+            ],
+            [
+              "Extras · 1hr Sunrise excursion incl. coffee/tea (01 Jul 2026 – 31 Oct 2026)",
+              "471"
+            ],
+            [
+              "Extras · Stargazing (only around new moon - weather permitting) (01 Jul 2026 – 31 Oct 2026)",
+              "780"
+            ],
+            [
+              "Extras · Breakfast (01 Jul 2026 – 31 Oct 2026)",
+              "230"
+            ],
+            [
+              "Extras · Light Lunch - Prebooking required (01 Jul 2026 – 31 Oct 2026)",
+              "260"
+            ],
+            [
+              "Extras · LunchPacks (01 Jul 2026 – 31 Oct 2026)",
+              "175"
+            ],
+            [
+              "Extras · Dinner (01 Jul 2026 – 31 Oct 2026)",
+              "540"
+            ],
+            [
+              "Extras · Dinner - Children aged 4-12 (01 Jul 2026 – 31 Oct 2026)",
+              "260"
+            ],
+            [
+              "Extras · 1 Person (01 Jul 2026 – 31 Oct 2026)",
+              "3,725"
+            ],
+            [
+              "Extras · 2-3 Persons (01 Jul 2026 – 31 Oct 2026)",
+              "4,470"
+            ],
+            [
+              "Extras · 4-8 Persons (01 Jul 2026 – 31 Oct 2026)",
+              "5,565"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "corona-guest-farm": {
+    "2026": {
+      "name": "Corona Guest Farm",
+      "region": "Windhoek",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Corona-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Corona-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season Sundowner: rack 340 / STO 306 (ratio 0.900); Low season 2hr Scenic / AM Drive: rack 560 / STO 504 (ratio 0.900); Low season 2hr Sundowner Scenic Drive: rack 670 / STO 603 (ratio 0.900); High season Sundowner: rack 375 / STO 337.50 (ratio 0.900); High season 2hr Scenic / AM Drive: rack 620 / STO 558 (ratio 0.900); High season 2hr Sundowner Scenic Drive: rack 740 / STO 666 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Standard Rooms [9] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,615"
+            ],
+            [
+              "Standard Rooms · No Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DB per Child 4-6 Years / Sharing with parents (Meals Only) (01 Nov 2025 – 30 Jun 2026)",
+              "370"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "950"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,453.50"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) — No Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DB / Child 4-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "370"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "855"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Room: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room · Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "610"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · Sundowner (01 Nov 2025 – 30 Jun 2026)",
+              "306"
+            ],
+            [
+              "Extras · 2hr Scenic / AM Drive (01 Nov 2025 – 30 Jun 2026)",
+              "504"
+            ],
+            [
+              "Extras · 2hr Sundowner Scenic Drive (01 Nov 2025 – 30 Jun 2026)",
+              "603"
+            ],
+            [
+              "Extras · Lunch (01 Nov 2025 – 30 Jun 2026)",
+              "250"
+            ],
+            [
+              "Extras · Lunch Pack (01 Nov 2025 – 30 Jun 2026)",
+              "200"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Rooms [9] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,776.50"
+            ],
+            [
+              "Standard Rooms · No Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DB per Child 4-6 Years / Sharing with parents (Meals Only) (01 Jul 2026 – 31 Oct 2026)",
+              "410"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,045"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,598.85"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) — No Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DB / Child 4-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "410"
+            ],
+            [
+              "Standard Rooms · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "940.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Room: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room · Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "670"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · Sundowner (01 Jul 2026 – 31 Oct 2026)",
+              "337.50"
+            ],
+            [
+              "Extras · 2hr Scenic / AM Drive (01 Jul 2026 – 31 Oct 2026)",
+              "558"
+            ],
+            [
+              "Extras · 2hr Sundowner Scenic Drive (01 Jul 2026 – 31 Oct 2026)",
+              "666"
+            ],
+            [
+              "Extras · Lunch (01 Jul 2026 – 31 Oct 2026)",
+              "275"
+            ],
+            [
+              "Extras · Lunch Pack (01 Jul 2026 – 31 Oct 2026)",
+              "220"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "etusis-lodge": {
+    "2026": {
+      "name": "Etusis Lodge",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Etusis-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Etusis-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Bungalow [7] - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Bungalow · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "2,142"
+            ],
+            [
+              "Bungalow · 1 Night DBB Single Person (1 Occupant) (01 Nov 2025 – 30 Jun 2026)",
+              "2,567"
+            ],
+            [
+              "Bungalow · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,260"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,927.80"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB Single Person (1 Occupant) per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,310.30"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,134"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Luxury Tent [5] - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tent · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,491.75"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB Single Person (1 Occupant) (01 Nov 2025 – 30 Jun 2026)",
+              "1,802"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "877.50"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,342.57"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB Single Person (1 Occupant) per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,621.80"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "789.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "710"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Farmhouse Accommodation - Self Catering (Min 2 nights)",
+          "rows": [
+            [
+              "Farmhouse Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,126.25"
+            ],
+            [
+              "Farmhouse Accommodation · 1 Night SC Single Person (1 Occupant) (01 Nov 2025 – 30 Jun 2026)",
+              "1,423.75"
+            ],
+            [
+              "Farmhouse Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Farmhouse Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "662.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Waterfall Hut Accommodation - Self Catering (Min 2 nights, Max 2pax)",
+          "rows": [
+            [
+              "Waterfall Hut Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "3,667.75"
+            ],
+            [
+              "Waterfall Hut Accommodation · 1 Night SC Single Person (1 Occupant) (01 Nov 2025 – 30 Jun 2026)",
+              "4,377.50"
+            ],
+            [
+              "Waterfall Hut Accommodation · DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "4,377.50"
+            ],
+            [
+              "Waterfall Hut Accommodation · DBB Single Person (1 Occupant) (01 Nov 2025 – 30 Jun 2026)",
+              "5,129.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Camp Site Accommodation [5] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "187"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "110"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "187"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Pre Booking is Required) Child Policy Does Not Apply",
+          "rows": [
+            [
+              "Extras · 1,5h Guided Walk (01 Nov 2025 – 30 Jun 2026)",
+              "275"
+            ],
+            [
+              "Extras · 2h Scenic Drive (01 Nov 2025 – 30 Jun 2026)",
+              "475"
+            ],
+            [
+              "Extras · 2h Sundowner Scenic Drive (01 Nov 2025 – 30 Jun 2026)",
+              "530"
+            ],
+            [
+              "Extras · Horse Back Riding per Person (1st hour) (01 Nov 2025 – 30 Jun 2026)",
+              "580"
+            ],
+            [
+              "Extras · Horse Back Riding per Person (extra hour) (01 Nov 2025 – 30 Jun 2026)",
+              "290"
+            ],
+            [
+              "Extras · Lunch - Pre bookings essential (01 Nov 2025 – 30 Jun 2026)",
+              "205"
+            ],
+            [
+              "Extras · Lunch Pack (01 Nov 2025 – 30 Jun 2026)",
+              "165"
+            ],
+            [
+              "Extras · Dinner for S-catering - subject to availability on the day (01 Nov 2025 – 30 Jun 2026)",
+              "335"
+            ],
+            [
+              "Extras · Breakfast for S-catering - subject to availability on the day (01 Nov 2025 – 30 Jun 2026)",
+              "165"
+            ],
+            [
+              "Extras · Seminar Room (01 Nov 2025 – 30 Jun 2026)",
+              "690"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Bungalow [7] - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Bungalow · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,575.50"
+            ],
+            [
+              "Bungalow · 1 Night DBB Single Person (1 Occupant) (01 Jul 2026 – 31 Oct 2026)",
+              "3,085.50"
+            ],
+            [
+              "Bungalow · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,515"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,317.95"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB Single Person (1 Occupant) per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,776.95"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,363.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Luxury Tent [5] - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tent · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,793.50"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB Single Person (1 Occupant) (01 Jul 2026 – 31 Oct 2026)",
+              "2,167.50"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tent · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,055"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,614.15"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB Single Person (1 Occupant) per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,950.75"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tent · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "949.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "850"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Farmhouse Accommodation - Self Catering (Min 2 nights)",
+          "rows": [
+            [
+              "Farmhouse Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,355.75"
+            ],
+            [
+              "Farmhouse Accommodation · 1 Night SC Single Person (1 Occupant) (01 Jul 2026 – 31 Oct 2026)",
+              "1,712.75"
+            ],
+            [
+              "Farmhouse Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Farmhouse Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "797.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Waterfall Hut Accommodation - Self Catering (Min 2 nights, Max 2pax)",
+          "rows": [
+            [
+              "Waterfall Hut Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "4,407.25"
+            ],
+            [
+              "Waterfall Hut Accommodation · 1 Night SC Single Person (1 Occupant) (01 Jul 2026 – 31 Oct 2026)",
+              "5,261.50"
+            ],
+            [
+              "Waterfall Hut Accommodation · DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "5,261.50"
+            ],
+            [
+              "Waterfall Hut Accommodation · DBB Single Person (1 Occupant) (01 Jul 2026 – 31 Oct 2026)",
+              "6,166.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Camp Site Accommodation [5] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "225.25"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "132.50"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "225.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Pre Booking is Required) Child Policy Does Not Apply",
+          "rows": [
+            [
+              "Extras · 1,5h Guided Walk (01 Jul 2026 – 31 Oct 2026)",
+              "315"
+            ],
+            [
+              "Extras · 2h Scenic Drive (01 Jul 2026 – 31 Oct 2026)",
+              "545"
+            ],
+            [
+              "Extras · 2h Sundowner Scenic Drive (01 Jul 2026 – 31 Oct 2026)",
+              "610"
+            ],
+            [
+              "Extras · Horse Back Riding per Person (1st hour) (01 Jul 2026 – 31 Oct 2026)",
+              "660"
+            ],
+            [
+              "Extras · Horse Back Riding per Person (extra hour) (01 Jul 2026 – 31 Oct 2026)",
+              "335"
+            ],
+            [
+              "Extras · Lunch - Pre bookings essential (01 Jul 2026 – 31 Oct 2026)",
+              "235"
+            ],
+            [
+              "Extras · Lunch Pack (01 Jul 2026 – 31 Oct 2026)",
+              "190"
+            ],
+            [
+              "Extras · Dinner for S-catering - subject to availability on the day (01 Jul 2026 – 31 Oct 2026)",
+              "410"
+            ],
+            [
+              "Extras · Breakfast for S-catering - subject to availability on the day (01 Jul 2026 – 31 Oct 2026)",
+              "190"
+            ],
+            [
+              "Extras · Seminar Room (01 Jul 2026 – 31 Oct 2026)",
+              "795"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "kashana-namibia": {
+    "2026": {
+      "name": "Kashana Namibia",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · 01 Nov 2025 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Kashana-2026-STO-PP-15.pdf (valid 01 Nov 2025 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Season Dinner: rack 520 / STO 450 (ratio 0.865).",
+      "sections": [
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Luxury Bungalow [13] - Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Bungalow · 1 Night BB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "1,015.75"
+            ],
+            [
+              "Luxury Bungalow · 1 Night BB Single Supplement (01 Nov 2025 – 31 Oct 2026)",
+              "408"
+            ],
+            [
+              "Luxury Bungalow · 1 Night BB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Bungalow · 1 Night BB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "597.50"
+            ],
+            [
+              "Luxury Bungalow · 2 Nights (plus) BB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "914.17"
+            ],
+            [
+              "Luxury Bungalow · 2 Nights (plus) BB Single Supplement per night (01 Nov 2025 – 31 Oct 2026)",
+              "367.20"
+            ],
+            [
+              "Luxury Bungalow · 2 Nights (plus) BB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Bungalow · 2 Nights (plus) BB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "537.75"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Standard Room [2] - Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Room · 1 Night BB per Person Sharing (01 Nov 2025 – 31 Oct 2026)",
+              "777.75"
+            ],
+            [
+              "Standard Room · 1 Night BB Single Supplement (01 Nov 2025 – 31 Oct 2026)",
+              "331.50"
+            ],
+            [
+              "Standard Room · 1 Night BB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 1 Night BB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 31 Oct 2026)",
+              "457.50"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) BB per Person Sharing per night (01 Nov 2025 – 31 Oct 2026)",
+              "699.97"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) BB Single Supplement per night (01 Nov 2025 – 31 Oct 2026)",
+              "298.35"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) BB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) BB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 31 Oct 2026)",
+              "411.75"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Nov 2025 – 31 Oct 2026)",
+              "580"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Nov 2025 – 31 Oct 2026)",
+              "1,005"
+            ]
+          ]
+        },
+        {
+          "title": "01 Nov 2025 – 31 Oct 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Dinner (01 Nov 2025 – 31 Oct 2026)",
+              "450"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ohange-lodge": {
+    "2026": {
+      "name": "Ohange Lodge",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Ohange-2026-LS-STO-PP-20.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 20%); Ohange-2026-HS-STO-PP-20.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 20%). STO commission 20% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Bungalow [10] Bed & Breakfast",
+          "rows": [
+            [
+              "Bungalow · 1 Night BB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,096"
+            ],
+            [
+              "Bungalow · 1 Night BB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 1 Night BB per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 1 Night BB per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "685"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Self-Catering Bungalow [2] Private Kitchen & Ablution Facilities (can be booked on BB basis)",
+          "rows": [
+            [
+              "Self-Catering Bungalow · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "976"
+            ],
+            [
+              "Self-Catering Bungalow · 1 Night SC Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Bungalow · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Bungalow · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "610"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Self-catering Rooms - Stables [2] Communal Kitchen & Ablution Facilities",
+          "rows": [
+            [
+              "Self-catering Rooms · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "388"
+            ],
+            [
+              "Self-catering Rooms · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Self-catering Rooms · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "242.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Campsite Accommodation [1] Communal Kitchen & Ablution Facilities shared with Stables",
+          "rows": [
+            [
+              "Campsite Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "215"
+            ],
+            [
+              "Campsite Accommodation · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite Accommodation · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "107.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Exclusive Campsite Accommodation [1] Private Kitchen & Ablution facilities",
+          "rows": [
+            [
+              "Exclusive Campsite Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "355"
+            ],
+            [
+              "Exclusive Campsite Accommodation · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Campsite Accommodation · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "177.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms Dinner, Bed & Breakfast · 1 Night guide/pilot/driver (01 Nov 2025 – 30 Jun 2026)",
+              "645"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · 2,5h Game Drive (01 Nov 2025 – 30 Jun 2026)",
+              "355"
+            ],
+            [
+              "Extras · 1,5h Night Drive (01 Nov 2025 – 30 Jun 2026)",
+              "355"
+            ],
+            [
+              "Extras · 1h Guided Marning Walk (01 Nov 2025 – 30 Jun 2026)",
+              "125"
+            ],
+            [
+              "Extras · 1,5h Guided Sundowner Walk (01 Nov 2025 – 30 Jun 2026)",
+              "175"
+            ],
+            [
+              "Extras · Lunch (01 Nov 2025 – 30 Jun 2026)",
+              "150"
+            ],
+            [
+              "Extras · Lunch pack (01 Nov 2025 – 30 Jun 2026)",
+              "120"
+            ],
+            [
+              "Extras · Breakfast for Self-Catering guests (01 Nov 2025 – 30 Jun 2026)",
+              "150"
+            ],
+            [
+              "Extras · Dinner (01 Nov 2025 – 30 Jun 2026)",
+              "405"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Bungalow [10] Bed & Breakfast",
+          "rows": [
+            [
+              "Bungalow · 1 Night BB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,172"
+            ],
+            [
+              "Bungalow · 1 Night BB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "388"
+            ],
+            [
+              "Bungalow · 1 Night BB per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalow · 1 Night BB per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "732.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Self-Catering Bungalow [2] Private Kitchen & Ablution Facilities (can be booked on BB basis)",
+          "rows": [
+            [
+              "Self-Catering Bungalow · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,044"
+            ],
+            [
+              "Self-Catering Bungalow · 1 Night SC Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "388"
+            ],
+            [
+              "Self-Catering Bungalow · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Bungalow · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "652.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Self-catering Rooms - Stables [2] Communal Kitchen & Ablution Facilities",
+          "rows": [
+            [
+              "Self-catering Rooms · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "416"
+            ],
+            [
+              "Self-catering Rooms · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Self-catering Rooms · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "260"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Campsite Accommodation [1] Communal Kitchen & Ablution Facilities shared with Stables",
+          "rows": [
+            [
+              "Campsite Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "230"
+            ],
+            [
+              "Campsite Accommodation · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite Accommodation · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "115"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Exclusive Campsite Accommodation [1] Private Kitchen & Ablution facilities",
+          "rows": [
+            [
+              "Exclusive Campsite Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "380"
+            ],
+            [
+              "Exclusive Campsite Accommodation · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Campsite Accommodation · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "190"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Room Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room Dinner, Bed & Breakfast · 1 Night guide/pilot/driver (01 Jul 2026 – 31 Oct 2026)",
+              "690"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · 2,5h Game Drive (01 Jul 2026 – 31 Oct 2026)",
+              "380"
+            ],
+            [
+              "Extras · 1,5h Night Drive (01 Jul 2026 – 31 Oct 2026)",
+              "380"
+            ],
+            [
+              "Extras · 1h Guided Marning Walk (01 Jul 2026 – 31 Oct 2026)",
+              "135"
+            ],
+            [
+              "Extras · 1,5h Guided Sundowner Walk (01 Jul 2026 – 31 Oct 2026)",
+              "190"
+            ],
+            [
+              "Extras · Lunch (01 Jul 2026 – 31 Oct 2026)",
+              "185"
+            ],
+            [
+              "Extras · Lunch pack (01 Jul 2026 – 31 Oct 2026)",
+              "130"
+            ],
+            [
+              "Extras · Breakfast for Self-Catering guests (01 Jul 2026 – 31 Oct 2026)",
+              "185"
+            ],
+            [
+              "Extras · Dinner (01 Jul 2026 – 31 Oct 2026)",
+              "435"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "otjiwa-eagles-rest": {
+    "2026": {
+      "name": "Otjiwa Eagle's Rest",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Otjiwa-Eagles-Rest-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Otjiwa-Eagles-Rest-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season 1 Night SC per Person Sharing: rack 410 / STO 307.50 (ratio 0.750); High season 1 Night SC per Person Sharing: rack 450 / STO 337.50 (ratio 0.750).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Elegant Rooms [22] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Elegant Rooms · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "2,877.25"
+            ],
+            [
+              "Elegant Rooms · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "884"
+            ],
+            [
+              "Elegant Rooms · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Elegant Rooms · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,692.50"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,589.52"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "795.60"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,523.25"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Family Chalets [7 Two Bedroom Unit: Min. 2 Pax] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Family Chalets · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "2,503.25"
+            ],
+            [
+              "Family Chalets · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,472.50"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,252.92"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,325.25"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Family Chalets [7 Two Bedroom Unit: Min. 2 Pax] Self-Catering",
+          "rows": [
+            [
+              "Family Chalets · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,759.50"
+            ],
+            [
+              "Family Chalets · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,035"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) SC per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,583.55"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) SC / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) SC / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "931.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Self-Catering",
+          "rows": [
+            [
+              "Guide Self-Catering · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "500"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Campsite [5] Self-Catering 25%",
+          "rows": [
+            [
+              "Campsite · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "307.50"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "205"
+            ],
+            [
+              "Campsite · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "195"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Nov 2025 – 30 Jun 2026)",
+              "800"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Nov 2025 – 30 Jun 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Nov 2025 – 30 Jun 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Nov 2025 – 30 Jun 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Nov 2025 – 30 Jun 2026)",
+              "425"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Elegant Rooms [22] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Elegant Rooms · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "3,166.25"
+            ],
+            [
+              "Elegant Rooms · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "973.25"
+            ],
+            [
+              "Elegant Rooms · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Elegant Rooms · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,862.50"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,849.62"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "875.92"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Elegant Rooms · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,676.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Family Chalets [7 Two Bedroom Unit - Min 2 Pax] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Family Chalets · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,754"
+            ],
+            [
+              "Family Chalets · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,620"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,478.60"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,458"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,100"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Family Chalets [7 Two Bedroom Unit Min 2 Pax] Self-Catering",
+          "rows": [
+            [
+              "Family Chalets · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,938"
+            ],
+            [
+              "Family Chalets · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,140"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) SC per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,744.20"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) SC / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Family Chalets · 2 Nights (plus) SC / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,026"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Self-Catering",
+          "rows": [
+            [
+              "Guide Self-Catering · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "550"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Campsite [5] Self-Catering 25%",
+          "rows": [
+            [
+              "Campsite · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "337.50"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "225"
+            ],
+            [
+              "Campsite · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "215"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Jul 2026 – 31 Oct 2026)",
+              "800"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Jul 2026 – 31 Oct 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Jul 2026 – 31 Oct 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Jul 2026 – 31 Oct 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Jul 2026 – 31 Oct 2026)",
+              "425"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "otjiwa-mountain-lodge": {
+    "2026": {
+      "name": "Otjiwa Mountain Lodge",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Otjiwa-Mountain-Lodge-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Otjiwa-Mountain-Lodge-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season 2 Nights Combo Package per Person Sharing: rack 23,490 / STO 17,969.85 (ratio 0.765); Low season 2 Nights Combo Package Single Supplement: rack 6,920 / STO 5,293.80 (ratio 0.765); Low season 2 Nights Combo / Child 4-12 Years sharing with parents: rack 11,745 / STO 10,570.50 (ratio 0.900); High season 2 Nights Combo Package per Person Sharing: rack 25,840 / STO 19,767.60 (ratio 0.765); High season 2 Nights Combo Package Single Supplement: rack 7,620 / STO 5,829.30 (ratio 0.765); High season 2 Nights Combo / Child 4-12 Years sharing with parents: rack 12,920 / STO 11,628 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "8,933.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "2,941"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "5,255"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "8,040.15"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,646.90"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "4,729.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — All Inclusive (Full board + 2 activities Per Day, Drinks & Laundry)",
+          "rows": [
+            [
+              "All Inclusive · 1 Night Fi per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "11,033"
+            ],
+            [
+              "All Inclusive · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "2,941"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "6,490"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "9,929.70"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,646.90"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "5,841"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Combo Package (1st Night DBB & 2nd Night All Inclusive)",
+          "rows": [
+            [
+              "2 Nights Combo Package per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "17,969.85"
+            ],
+            [
+              "2 Nights Combo Package Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "5,293.80"
+            ],
+            [
+              "Combo Package · 2 Nights Combo / Child 0-3 Years sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Combo Package · 2 Nights Combo / Child 4-12 Years sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "10,570.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [4] at Eagles Rest",
+          "rows": [
+            [
+              "Guide Rooms · Full Board (LDBB) Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "1,665"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Nov 2025 – 30 Jun 2026)",
+              "800"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Nov 2025 – 30 Jun 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Nov 2025 – 30 Jun 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Nov 2025 – 30 Jun 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Nov 2025 – 30 Jun 2026)",
+              "425"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "9,826"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "3,238.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "5,780"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "8,843.40"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,914.65"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "5,202"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — All Inclusive (Full board + 2 activities Per Day, Drinks & Laundry)",
+          "rows": [
+            [
+              "All Inclusive · 1 Night Fi per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "12,138"
+            ],
+            [
+              "All Inclusive · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "3,238.50"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "7,140"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "10,924.20"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,914.65"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "6,426"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Combo Package (1st Night DBB & 2nd Night All Inclusive)",
+          "rows": [
+            [
+              "2 Nights Combo Package per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "19,767.60"
+            ],
+            [
+              "2 Nights Combo Package Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "5,829.30"
+            ],
+            [
+              "Combo Package · 2 Nights Combo / Child 0-3 Years sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Combo Package · 2 Nights Combo / Child 4-12 Years sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "11,628"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [4] at Eagles Rest Full Board",
+          "rows": [
+            [
+              "Guide Rooms · Full Board (LDBB) Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,835"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Jul 2026 – 31 Oct 2026)",
+              "800"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Jul 2026 – 31 Oct 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Jul 2026 – 31 Oct 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Jul 2026 – 31 Oct 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Jul 2026 – 31 Oct 2026)",
+              "425"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "otjiwa-thorn-bush-tented-camp": {
+    "2026": {
+      "name": "Otjiwa Thorn Bush Tented Camp",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Otjiwa-Thorn-Bush-Tented-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Otjiwa-Thorn-Bush-Tented-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Luxury Tents [10] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tents · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "6,375"
+            ],
+            [
+              "Luxury Tents · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "2,103.75"
+            ],
+            [
+              "Luxury Tents · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tents · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "3,750"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "5,737.50"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,893.37"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "3,375"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — All Inclusive (Full board + 2 activities Per Day, Drinks & Laundry)",
+          "rows": [
+            [
+              "All Inclusive · 1 Night Fi per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "9,095"
+            ],
+            [
+              "All Inclusive · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "2,103.75"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "5,350"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "8,185.50"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,893.37"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "4,815"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [4] at Eagles Rest",
+          "rows": [
+            [
+              "Guide Rooms · Full Board (LDBB) Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "1,665"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Nov 2025 – 30 Jun 2026)",
+              "800"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Nov 2025 – 30 Jun 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Nov 2025 – 30 Jun 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Nov 2025 – 30 Jun 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Nov 2025 – 30 Jun 2026)",
+              "425"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Luxury Tents [10] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tents · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "7,012.50"
+            ],
+            [
+              "Luxury Tents · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "2,316.25"
+            ],
+            [
+              "Luxury Tents · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tents · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "4,125"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "6,311.25"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,084.62"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tents · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "3,712.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — All Inclusive (Full board + 2 activities Per Day, Drinks & Laundry)",
+          "rows": [
+            [
+              "All Inclusive · 1 Night Fi per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "10,004.50"
+            ],
+            [
+              "All Inclusive · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "2,316.25"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "5,885"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "9,004.05"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,084.62"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "5,296.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [4] at Eagles Rest",
+          "rows": [
+            [
+              "Guide Rooms · Full Board (LDBB) Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,835"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Jul 2026 – 31 Oct 2026)",
+              "800"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Jul 2026 – 31 Oct 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Jul 2026 – 31 Oct 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Jul 2026 – 31 Oct 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Jul 2026 – 31 Oct 2026)",
+              "425"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "otjiwa-savanna-luxury-villa": {
+    "2026": {
+      "name": "Otjiwa Savanna Luxury Villa",
+      "region": "Central Namibia",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Otjiwa-Savanna-Villa-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Otjiwa-Savanna-Villa-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "5,843.75"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "3,437.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "5,259.37"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "3,093.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — All Inclusive (Full board + 2 activities Per Day, Drinks & Laundry)",
+          "rows": [
+            [
+              "All Inclusive · 1 Night Fi per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "8,393.75"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "4,937.50"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "7,554.37"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "4,443.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [4] at Eagles Rest Full Board",
+          "rows": [
+            [
+              "Guide Rooms · Full Board (LDBB) Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "1,665"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Nov 2025 – 30 Jun 2026)",
+              "725"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Nov 2025 – 30 Jun 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Nov 2025 – 30 Jun 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Nov 2025 – 30 Jun 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Nov 2025 – 30 Jun 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Nov 2025 – 30 Jun 2026)",
+              "425"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "6,430.25"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "3,782.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "5,787.22"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "3,404.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — All Inclusive (Full board + 2 activities Per Day, Drinks & Laundry)",
+          "rows": [
+            [
+              "All Inclusive · 1 Night Fi per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "9,235.25"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 1 Night Fi per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "5,432.50"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "8,311.72"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "All Inclusive · 2 Nights (plus) Fi / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "4,889.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [4] at Eagles Rest Full Board",
+          "rows": [
+            [
+              "Guide Rooms · Full Board (LDBB) Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,835"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Pre Booking is Required) Child Policy Does NOT Apply",
+          "rows": [
+            [
+              "Extras · 2.5h Sundowner Game Drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · AM Rhino Tracking (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · 2h Night Drive (01 Jul 2026 – 31 Oct 2026)",
+              "725"
+            ],
+            [
+              "Extras · Ombu Village Tours (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Guided Walk in Nature 6 km (01 Jul 2026 – 31 Oct 2026)",
+              "290"
+            ],
+            [
+              "Extras · Guided eBike Trails: Max 7 Pax (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Guided Bicycle Trails: Min 2 Pax (Own Bike) (01 Jul 2026 – 31 Oct 2026)",
+              "320"
+            ],
+            [
+              "Extras · Bird Watching (01 Jul 2026 – 31 Oct 2026)",
+              "365"
+            ],
+            [
+              "Extras · Namibian Cooking Classes (01 Jul 2026 – 31 Oct 2026)",
+              "880"
+            ],
+            [
+              "Extras · Horse Back Riding - 2 hour sessions to be booked on check in only (01 Jul 2026 – 31 Oct 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Photographic View Point (01 Jul 2026 – 31 Oct 2026)",
+              "425"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "fort-sesfontein-lodge": {
+    "2026": {
+      "name": "Fort Sesfontein Lodge",
+      "region": "Kaokoland",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Fort-Sesfontein-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Fort-Sesfontein-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season Full Day Hoanib: rack 1,650 / STO 1,485 (ratio 0.900); Low season Kaokoveld Tour: rack 1,500 / STO 1,350 (ratio 0.900); Low season Damaraland Tour: rack 1,500 / STO 1,350 (ratio 0.900); High season Full Day Hoanib: rack 1,800 / STO 1,620 (ratio 0.900); High season Kaokoveld Tour: rack 1,650 / STO 1,485 (ratio 0.900); High season Damaraland Tour: rack 1,650 / STO 1,485 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Standard Rooms [12] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · Per Person per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,252.50"
+            ],
+            [
+              "Standard Rooms · Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "463.25"
+            ],
+            [
+              "Standard Rooms · Per Child 0-5 Years sharing with parents per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · Per Child 6-12 Years sharing with parents per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,325"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,027.25"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "416.92"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Per Child 0-5 Years sharing with parents per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,192.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Family Room[4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Family Room · Per Room per night (01 Nov 2025 – 30 Jun 2026)",
+              "5,797"
+            ],
+            [
+              "Family Room · 2 Nights (plus) DBB per room per night (01 Nov 2025 – 30 Jun 2026)",
+              "5,217.30"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Exclusive Tower Suite[1] Dinner, Bed & Breakfast (Max 4 Pax, Min 2 Nights)",
+          "rows": [
+            [
+              "Exclusive Tower Suite · Per Room per night (01 Nov 2025 – 30 Jun 2026)",
+              "8,602"
+            ],
+            [
+              "Exclusive Tower Suite · 3 Nights (plus) DBB per room per night (01 Nov 2025 – 30 Jun 2026)",
+              "7,741.80"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "1,630"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — 3 Nights, 4 Days Rhino Tracking Package (per Person) 15%",
+          "rows": [
+            [
+              "3 Nights, 4 Days Rhino Tracking Package · Per Person per Package - (Min 3 Persons Max 4 persons) (01 Nov 2025 – 30 Jun 2026)",
+              "16,196.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · Full Day Hoanib (01 Nov 2025 – 30 Jun 2026)",
+              "1,485"
+            ],
+            [
+              "Extras · Kaokoveld Tour (01 Nov 2025 – 30 Jun 2026)",
+              "1,350"
+            ],
+            [
+              "Extras · Damaraland Tour (01 Nov 2025 – 30 Jun 2026)",
+              "1,350"
+            ],
+            [
+              "Extras · Lunch per Person (01 Nov 2025 – 30 Jun 2026)",
+              "215"
+            ],
+            [
+              "Extras · Lunch or Breakfast Pack per Person (01 Nov 2025 – 30 Jun 2026)",
+              "200"
+            ],
+            [
+              "Extras · Transfer to/from Sesfontein Airstrip per Person (One way) (01 Nov 2025 – 30 Jun 2026)",
+              "205"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Rooms [12] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · Per Person per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,431"
+            ],
+            [
+              "Standard Rooms · Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "501.50"
+            ],
+            [
+              "Standard Rooms · Per Child 0-5 Years sharing with parents per night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · Per Child 6-12 Years sharing with parents per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,430"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,187.90"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "451.35"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB Per Child 0-5 Years sharing with parents per night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,287"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Family Room[4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Family Room · Per Room per night (01 Jul 2026 – 31 Oct 2026)",
+              "6,260.25"
+            ],
+            [
+              "Family Room · 2 Nights (plus) DBB per room per night (01 Jul 2026 – 31 Oct 2026)",
+              "5,634.22"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Exclusive Tower Suite[1] Dinner, Bed & Breakfast (Max 4 Pax, Min 2 Nights)",
+          "rows": [
+            [
+              "Exclusive Tower Suite · Per Room per night (01 Jul 2026 – 31 Oct 2026)",
+              "9,290.50"
+            ],
+            [
+              "Exclusive Tower Suite · 3 Nights (plus) DBB per room per night (01 Jul 2026 – 31 Oct 2026)",
+              "8,361.45"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,760"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — 3 Nights, 4 Days Rhino Tracking Package (per Person) 15%",
+          "rows": [
+            [
+              "3 Nights, 4 Days Rhino Tracking Package · Per Person per Package - (Min 3 Persons Max 4 persons) (01 Jul 2026 – 31 Oct 2026)",
+              "17,493"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · Full Day Hoanib (01 Jul 2026 – 31 Oct 2026)",
+              "1,620"
+            ],
+            [
+              "Extras · Kaokoveld Tour (01 Jul 2026 – 31 Oct 2026)",
+              "1,485"
+            ],
+            [
+              "Extras · Damaraland Tour (01 Jul 2026 – 31 Oct 2026)",
+              "1,485"
+            ],
+            [
+              "Extras · Lunch per Person (01 Jul 2026 – 31 Oct 2026)",
+              "235"
+            ],
+            [
+              "Extras · Lunch or Breakfast Pack per Person (01 Jul 2026 – 31 Oct 2026)",
+              "220"
+            ],
+            [
+              "Extras · Transfer to/from Sesfontein Airstrip per Person (One way) (01 Jul 2026 – 31 Oct 2026)",
+              "225"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "gecko-ridge": {
+    "2026": {
+      "name": "Gecko Ridge",
+      "region": "Swakopmund",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Gecko-Ridge-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Gecko-Ridge-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season 1 Night SC per Person Sharing: rack 325 / STO 292.50 (ratio 0.900); High season 1 Night SC per Person Sharing: rack 350 / STO 315 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Luxury Rooms [6] - Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Rooms · 1 Night BB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,168.75"
+            ],
+            [
+              "Luxury Rooms · 1 Night BB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "386.75"
+            ],
+            [
+              "Luxury Rooms · 1 Night BB per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Rooms · 1 Night BB per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "687.50"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,051.87"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "348.07"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB / Child 7-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "618.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Self-Catering Chalets [7] (fully equipped)",
+          "rows": [
+            [
+              "Self-Catering Chalets · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "875.50"
+            ],
+            [
+              "Self-Catering Chalets · 1 Night SC Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "386.75"
+            ],
+            [
+              "Self-Catering Chalets · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Chalets · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "515"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "787.95"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "348.07"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC / Child 7-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "463.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "650"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Camp Site Accommodation [10] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "292.50"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "162.50"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "165"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Nature drive at Moon landscape + Sundowner Min 4 Pax (Final (01 Nov 2025 – 30 Jun 2026)",
+              "650"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Luxury Rooms [6] - Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Rooms · 1 Night BB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,262.25"
+            ],
+            [
+              "Luxury Rooms · 1 Night BB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "416.50"
+            ],
+            [
+              "Luxury Rooms · 1 Night BB per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Rooms · 1 Night BB per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "742.50"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,136.02"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "374.85"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Rooms · 3 Nights (plus) BB / Child 7-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "668.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Self-Catering Chalets [7] (fully equipped)",
+          "rows": [
+            [
+              "Self-Catering Chalets · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "947.75"
+            ],
+            [
+              "Self-Catering Chalets · 1 Night SC Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "416.50"
+            ],
+            [
+              "Self-Catering Chalets · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Chalets · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "557.50"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "852.97"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "374.85"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Self-Catering Chalets · 3 Nights (plus) SC / Child 7-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "501.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "700"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Camp Site Accommodation [10] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "315"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 7-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "175"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "180"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Nature drive at Moon landscape + Sundowner Min 4 Pax (Final advice (01 Jul 2026 – 31 Oct 2026)",
+              "700"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "goibib-mountain-lodge": {
+    "2026": {
+      "name": "Goibib Mountain Lodge",
+      "region": "Fish River Canyon",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Goibib-2026-LS-STO-20.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 20%); Goibib-2026-HS-STO-20.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 20%). STO commission 20% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season 1 Night SC per Person Sharing: rack 225 / STO 202.50 (ratio 0.900); High season 1 Night SC per Person Sharing: rack 250 / STO 225 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Standard Rooms [9 Rooms] - Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night BB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Standard Rooms · 1 Night BB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "332"
+            ],
+            [
+              "Standard Rooms · 1 Night BB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night BB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "625"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Standard Rooms - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,276"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "332"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "797.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "480"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "765"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Camp Site Accommodation [7] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "202.50"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "112.50"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "112.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Breakfast for Self Catering Guests (01 Nov 2025 – 30 Jun 2026)",
+              "200"
+            ],
+            [
+              "Extras · Lunch (01 Nov 2025 – 30 Jun 2026)",
+              "200"
+            ],
+            [
+              "Extras · Lunch Pack (01 Nov 2025 – 30 Jun 2026)",
+              "155"
+            ],
+            [
+              "Extras · Dinner for B&B and Self Catering Guests (01 Nov 2025 – 30 Jun 2026)",
+              "345"
+            ],
+            [
+              "Extras · 2h Game Drive (01 Nov 2025 – 30 Jun 2026)",
+              "365"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Rooms [9 Rooms] - Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night BB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,100"
+            ],
+            [
+              "Standard Rooms · 1 Night BB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "364"
+            ],
+            [
+              "Standard Rooms · 1 Night BB per Child 0-5 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night BB per Child 6-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "687.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Rooms - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Rooms · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,404"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "364"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Rooms · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "877.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "530"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "900"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Camp Site Accommodation [7] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "225"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-5 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 6-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "125"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "125"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Breakfast for Self Catering Guests (01 Jul 2026 – 31 Oct 2026)",
+              "220"
+            ],
+            [
+              "Extras · Lunch (01 Jul 2026 – 31 Oct 2026)",
+              "220"
+            ],
+            [
+              "Extras · Lunch Pack (01 Jul 2026 – 31 Oct 2026)",
+              "175"
+            ],
+            [
+              "Extras · Dinner for B&B and Self Catering Guests (01 Jul 2026 – 31 Oct 2026)",
+              "380"
+            ],
+            [
+              "Extras · 2h Game Drive (01 Jul 2026 – 31 Oct 2026)",
+              "400"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "huab-lodge": {
+    "2026": {
+      "name": "Huab Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Huab-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Huab-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed. Rows printed at a different ratio than the headline commission (loaded as printed): Low season Early Morning Walk: rack 475 / STO 427.50 (ratio 0.900); Low season 3h Sundowner Drive: rack 1,345 / STO 1,210.50 (ratio 0.900); Low season Half Day Ephemeral scenic and birding drive: rack 1,580 / STO 1,422 (ratio 0.900); Low season Half Day Bushman paintings and German graves drive: rack 1,580 / STO 1,422 (ratio 0.900); Low season Full Day Ephemeral River Drive (min 2 pax, max 8 pax) no children under 6 yrs: rack 2,800 / STO 2,520 (ratio 0.900); High season Early Morning Walk: rack 535 / STO 481.50 (ratio 0.900); High season 3h Sundowner Drive: rack 1,510 / STO 1,359 (ratio 0.900); High season Half Day Ephemeral scenic and birding drive: rack 1,770 / STO 1,593 (ratio 0.900); High season Half Day Bushman paintings and German graves drive: rack 1,820 / STO 1,638 (ratio 0.900); High season Full Day Ephemeral River Drive (min 2 pax, max 8 pax) no children under 6 yrs: rack 3,220 / STO 2,898 (ratio 0.900).",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Bungalows [8] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Bungalows · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "3,616.75"
+            ],
+            [
+              "Bungalows · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "1,194.25"
+            ],
+            [
+              "Bungalows · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalows · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "2,127.50"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "3,255.07"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "1,074.82"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,914.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — The Villa [1] Full Board (LDBB) - Min 2 Nights",
+          "rows": [
+            [
+              "The Villa · LDBB per Person Sharing Per Night (01 Nov 2025 – 30 Jun 2026)",
+              "8,372.50"
+            ],
+            [
+              "The Villa · Single Supplement per Night (01 Nov 2025 – 30 Jun 2026)",
+              "8,372.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Room: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room · Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "1,355"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person - Child Policy Does not Apply",
+          "rows": [
+            [
+              "Extras · Early Morning Walk (01 Nov 2025 – 30 Jun 2026)",
+              "427.50"
+            ],
+            [
+              "Extras · 3h Sundowner Drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,210.50"
+            ],
+            [
+              "Extras · Half Day Ephemeral scenic and birding drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,422"
+            ],
+            [
+              "Extras · Half Day Bushman paintings and German graves drive (01 Nov 2025 – 30 Jun 2026)",
+              "1,422"
+            ],
+            [
+              "Extras · Full Day Ephemeral River Drive (min 2 pax, max 8 pax) no children under 6 yrs (01 Nov 2025 – 30 Jun 2026)",
+              "2,520"
+            ],
+            [
+              "Extras · Lunch Packs (01 Nov 2025 – 30 Jun 2026)",
+              "200"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Bungalows [8] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Bungalows · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "4,160.75"
+            ],
+            [
+              "Bungalows · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "1,372.75"
+            ],
+            [
+              "Bungalows · 1 Night DBB per Child 0-5 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalows · 1 Night DBB per Child 6-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "2,447.50"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "3,744.67"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "1,235.47"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB / Child 0-5 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Bungalows · 2 Nights (plus) DBB / Child 6-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "2,202.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — The Villa [1] Full Board (LDBB) - Min 2 Nights",
+          "rows": [
+            [
+              "The Villa · Per Person per night (01 Jul 2026 – 31 Oct 2026)",
+              "9,379.75"
+            ],
+            [
+              "The Villa · Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "9,379.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Room: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room · Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "1,560"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person - Child Policy Does not Apply",
+          "rows": [
+            [
+              "Extras · Early Morning Walk (01 Jul 2026 – 31 Oct 2026)",
+              "481.50"
+            ],
+            [
+              "Extras · 3h Sundowner Drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,359"
+            ],
+            [
+              "Extras · Half Day Ephemeral scenic and birding drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,593"
+            ],
+            [
+              "Extras · Half Day Bushman paintings and German graves drive (01 Jul 2026 – 31 Oct 2026)",
+              "1,638"
+            ],
+            [
+              "Extras · Full Day Ephemeral River Drive (min 2 pax, max 8 pax) no children under 6 yrs (01 Jul 2026 – 31 Oct 2026)",
+              "2,898"
+            ],
+            [
+              "Extras · Lunch Packs (01 Jul 2026 – 31 Oct 2026)",
+              "225"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ugab-terrace-lodge": {
+    "2026": {
+      "name": "Ugab Terrace Lodge",
+      "region": "Damaraland",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Dec 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 30 Nov 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Ugab-2026-LS-STO-Bonus-25-Rates.pdf (valid 01 Dec 2025 – 30 Jun 2026, STO 25%); Ugab-2026-HS-STO-20.pdf (valid 01 Jul 2026 – 30 Nov 2026, STO 20%). STO commission 20% / 25% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Chalets [16] - Dinner, Bed & Breakfast [DBB]",
+          "rows": [
+            [
+              "Chalets · 1 Night DBB per Person Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "2,133.75"
+            ],
+            [
+              "Chalets · 1 Night DBB Single Person (1 Occupant) (01 Dec 2025 – 30 Jun 2026)",
+              "2,778.75"
+            ],
+            [
+              "Chalets · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Chalets · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "1,422.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Chalets [16] Bed & Breakfast [BB]",
+          "rows": [
+            [
+              "Chalets · 1 Night BB per Person Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "1,841.25"
+            ],
+            [
+              "Chalets · 1 Night BB Single Person (1 Occupant) (01 Dec 2025 – 30 Jun 2026)",
+              "2,486.25"
+            ],
+            [
+              "Chalets · 1 Night BB per Child 0-3 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Chalets · 1 Night BB per Child 4-12 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "1,227.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Luxury Chalet [1] - Dinner, Bed & Breakfast [DBB]",
+          "rows": [
+            [
+              "Luxury Chalet · 1 Night DBB per Person Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "5,167.50"
+            ],
+            [
+              "Luxury Chalet · 1 Night DBB Single Person (1 Occupant) (01 Dec 2025 – 30 Jun 2026)",
+              "7,605"
+            ],
+            [
+              "Luxury Chalet · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Chalet · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "3,445"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Luxury Chalet [1] Bed & Breakfast [BB]",
+          "rows": [
+            [
+              "Luxury Chalet · 1 Night BB per Person Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "4,875"
+            ],
+            [
+              "Luxury Chalet · 1 Night BB Single Person (1 Occupant) (01 Dec 2025 – 30 Jun 2026)",
+              "7,312.50"
+            ],
+            [
+              "Luxury Chalet · 1 Night BB per Child 0-3 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Chalet · 1 Night BB per Child 4-12 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "3,250"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Guide Rooms",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - per Guide Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "1,422.50"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide single (1 Occupant) (01 Dec 2025 – 30 Jun 2026)",
+              "1,852.50"
+            ],
+            [
+              "Guide Rooms · BB Per Night - per Guide Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "1,227.50"
+            ],
+            [
+              "Guide Rooms · BB Per Night - Guide single (1 Occupant) (01 Dec 2025 – 30 Jun 2026)",
+              "1,657.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Camp Site Accommodation [3] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Dec 2025 – 30 Jun 2026)",
+              "390"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Dec 2025 – 30 Jun 2026)",
+              "195"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Dec 2025 – 30 Jun 2026)",
+              "390"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Dec 2025 – 30 Jun 2026 — Extras per Person (Child Policy Apply to Meals ONLY)",
+          "rows": [
+            [
+              "Extras · Lunch - Pre bookings essential (01 Dec 2025 – 30 Jun 2026)",
+              "285"
+            ],
+            [
+              "Extras · Lunch Pack - Pre bookings essential (01 Dec 2025 – 30 Jun 2026)",
+              "285"
+            ],
+            [
+              "Extras · Dinner for BB & S-catering - Pre bookings essential (01 Dec 2025 – 30 Jun 2026)",
+              "390"
+            ],
+            [
+              "Extras · Breakfast for S-catering -Pre bookings essential (01 Dec 2025 – 30 Jun 2026)",
+              "260"
+            ],
+            [
+              "Extras · Guided Walking Trail - Min. 2 pax - Includes: Water (01 Dec 2025 – 30 Jun 2026)",
+              "425"
+            ],
+            [
+              "Extras · Sundowner Experience - Min. 4 pax - Includes: Water, Snacks & cooldrink (01 Dec 2025 – 30 Jun 2026)",
+              "480"
+            ],
+            [
+              "Extras · Scorpion Night Walking Trail - Min. 2 pax - Includes: Water (01 Dec 2025 – 30 Jun 2026)",
+              "500"
+            ],
+            [
+              "Extras · Zip Line (Both Lines) - Min. 2 pax (Sundays min 4 Pax) - Includes water. (01 Dec 2025 – 30 Jun 2026)",
+              "645"
+            ],
+            [
+              "Extras · Rock Art Excursion - Min. 4 pax - Includes: Water & cooldrink (01 Dec 2025 – 30 Jun 2026)",
+              "850"
+            ],
+            [
+              "Extras · Nature/Game Drive - Min. 4 pax - Includes: Snacks, water & cooldrink (01 Dec 2025 – 30 Jun 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Walking Trail - no guide (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Extras · Bird Watching - no guide (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Extras · Stargazing in almost 100% Dark Sky with your own accessories (01 Dec 2025 – 30 Jun 2026)",
+              "no charge"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Chalets [16] - Dinner, Bed & Breakfast [DBB]",
+          "rows": [
+            [
+              "Chalets · 1 Night DBB per Person Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "2,276"
+            ],
+            [
+              "Chalets · 1 Night DBB Single Person (1 Occupant) (01 Jul 2026 – 30 Nov 2026)",
+              "2,964"
+            ],
+            [
+              "Chalets · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Chalets · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "1,422.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Chalets [16] Bed & Breakfast [BB]",
+          "rows": [
+            [
+              "Chalets · 1 Night BB per Person Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "1,964"
+            ],
+            [
+              "Chalets · 1 Night BB Single Person (1 Occupant) (01 Jul 2026 – 30 Nov 2026)",
+              "2,652"
+            ],
+            [
+              "Chalets · 1 Night BB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Chalets · 1 Night BB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "1,227.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Luxury Chalet [1] - Dinner, Bed & Breakfast [DBB]",
+          "rows": [
+            [
+              "Luxury Chalet · 1 Night DBB per Person Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "5,512"
+            ],
+            [
+              "Luxury Chalet · 1 Night DBB Single Person (1 Occupant) (01 Jul 2026 – 30 Nov 2026)",
+              "8,112"
+            ],
+            [
+              "Luxury Chalet · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Chalet · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "3,445"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Luxury Chalet [1] Bed & Breakfast [BB]",
+          "rows": [
+            [
+              "Luxury Chalet · 1 Night BB per Person Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "5,200"
+            ],
+            [
+              "Luxury Chalet · 1 Night BB Single Person (1 Occupant) (01 Jul 2026 – 30 Nov 2026)",
+              "7,800"
+            ],
+            [
+              "Luxury Chalet · 1 Night BB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Chalet · 1 Night BB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "3,250"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Guide Rooms",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - per Guide Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "1,422.50"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide single (1 Occupant) (01 Jul 2026 – 30 Nov 2026)",
+              "1,852.50"
+            ],
+            [
+              "Guide Rooms · BB Per Night - per Guide Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "1,227.50"
+            ],
+            [
+              "Guide Rooms · BB Per Night - Guide single (1 Occupant) (01 Jul 2026 – 30 Nov 2026)",
+              "1,657.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Camp Site Accommodation [3] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 30 Nov 2026)",
+              "390"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 30 Nov 2026)",
+              "195"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Jul 2026 – 30 Nov 2026)",
+              "390"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 30 Nov 2026 — Extras per Person (Child Policy Apply to Meals ONLY)",
+          "rows": [
+            [
+              "Extras · Lunch - Pre bookings essential (01 Jul 2026 – 30 Nov 2026)",
+              "285"
+            ],
+            [
+              "Extras · Lunch Pack - Pre bookings essential (01 Jul 2026 – 30 Nov 2026)",
+              "285"
+            ],
+            [
+              "Extras · Dinner for BB & S-catering - Pre bookings essential (01 Jul 2026 – 30 Nov 2026)",
+              "390"
+            ],
+            [
+              "Extras · Breakfast for S-catering -Pre bookings essential (01 Jul 2026 – 30 Nov 2026)",
+              "260"
+            ],
+            [
+              "Extras · Guided Walking Trail - Min. 2 pax - Includes: Water (01 Jul 2026 – 30 Nov 2026)",
+              "425"
+            ],
+            [
+              "Extras · Sundowner Experience - Min. 4 pax - Includes: Water, Snacks & cooldrink (01 Jul 2026 – 30 Nov 2026)",
+              "480"
+            ],
+            [
+              "Extras · Scorpion Night Walking Trail - Min. 2 pax - Includes: Water (01 Jul 2026 – 30 Nov 2026)",
+              "500"
+            ],
+            [
+              "Extras · Zip Line (Both Lines) - Min. 2 pax (Sundays min 4 Pax) - Includes water. (01 Jul 2026 – 30 Nov 2026)",
+              "645"
+            ],
+            [
+              "Extras · Rock Art Excursion - Min. 4 pax - Includes: Water & cooldrink (01 Jul 2026 – 30 Nov 2026)",
+              "850"
+            ],
+            [
+              "Extras · Nature/Game Drive - Min. 4 pax - Includes: Snacks, water & cooldrink (01 Jul 2026 – 30 Nov 2026)",
+              "1,000"
+            ],
+            [
+              "Extras · Walking Trail - no guide (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Extras · Bird Watching - no guide (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ],
+            [
+              "Extras · Stargazing in almost 100% Dark Sky with your own accessories (01 Jul 2026 – 30 Nov 2026)",
+              "no charge"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "jackalberry-tented-camp": {
+    "2026": {
+      "name": "Jackalberry Tented Camp",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 31 May 2026 / High season 01 Jun 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Room rates include the conservation levy (N$230 low season / N$240 high season per person per night, non-commissionable); rack is quoted incl. levy as the sheet prints it. Source: Jackalberry-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 31 May 2026, STO 15%); Jackalberry-2026-HS-STO-PP-15.pdf (valid 01 Jun 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Conservation levy (non-commissionable, per person per night)",
+          "rows": [
+            [
+              "Conservation levy per person per night (non-commissionable) (01 Nov 2025 – 31 May 2026)",
+              "230"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Tented Accommodation [4] — Dinner, Bed & Breakfast (minimum 2 nights)",
+          "rows": [
+            [
+              "Tented Accommodation · Per Night DBB per Person Sharing (01 Nov 2025 – 31 May 2026)",
+              "4,327"
+            ],
+            [
+              "Tented Accommodation · Per Night DBB Single Supplement (01 Nov 2025 – 31 May 2026)",
+              "1,725.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Activity Package: PP sharing / night",
+          "rows": [
+            [
+              "Activity Package · Per Night per Person Sharing (01 Nov 2025 – 31 May 2026)",
+              "5,772"
+            ],
+            [
+              "Activity Package · Per Night Single Supplement (01 Nov 2025 – 31 May 2026)",
+              "1,725.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Guide Room [1]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room · Per Night - Guide (01 Nov 2025 – 31 May 2026)",
+              "1,285"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Lunch (01 Nov 2025 – 31 May 2026)",
+              "300"
+            ],
+            [
+              "Extras · Light Lunch (01 Nov 2025 – 31 May 2026)",
+              "210"
+            ],
+            [
+              "Extras · Lunch Pack (01 Nov 2025 – 31 May 2026)",
+              "185"
+            ],
+            [
+              "Extras · Pick up Transfer @ 14:30 from Sangwali Village per vehicle (max 8 pax) (01 Nov 2025 – 31 May 2026)",
+              "400"
+            ],
+            [
+              "Extras · Drop off Transfer @ 9:00 to Sangwali Village per vehicle (max 8 pax) (01 Nov 2025 – 31 May 2026)",
+              "400"
+            ],
+            [
+              "Extras · Transfer outside of pick up and drop off time (one way) (01 Nov 2025 – 31 May 2026)",
+              "800"
+            ],
+            [
+              "Extras · 2h AM Game Drive Nkasa Rupara National Park (01 Nov 2025 – 31 May 2026)",
+              "860"
+            ],
+            [
+              "Extras · 2h PM Sundowner Boat Cruise (01 Nov 2025 – 31 May 2026)",
+              "750"
+            ],
+            [
+              "Extras · 1h Night Drive (01 Nov 2025 – 31 May 2026)",
+              "690"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Conservation levy (non-commissionable, per person per night)",
+          "rows": [
+            [
+              "Conservation levy per person per night (non-commissionable) (01 Jun 2026 – 31 Oct 2026)",
+              "240"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Tented Accommodation [4] — Dinner, Bed & Breakfast (minimum 2 nights)",
+          "rows": [
+            [
+              "Tented Accommodation · Per Night DBB per Person Sharing (01 Jun 2026 – 31 Oct 2026)",
+              "4,541"
+            ],
+            [
+              "Tented Accommodation · Per Night DBB Single Supplement (01 Jun 2026 – 31 Oct 2026)",
+              "1,810.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Activity Package: PP sharing / night",
+          "rows": [
+            [
+              "Activity Package · Per Night per Person Sharing (01 Jun 2026 – 31 Oct 2026)",
+              "6,130.50"
+            ],
+            [
+              "Activity Package · Per Night Single Supplement (01 Jun 2026 – 31 Oct 2026)",
+              "1,810.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Guide Room [1]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Room · Per Night - Guide (01 Jun 2026 – 31 Oct 2026)",
+              "1,455"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Extras per Person",
+          "rows": [
+            [
+              "Extras · Lunch (01 Jun 2026 – 31 Oct 2026)",
+              "300"
+            ],
+            [
+              "Extras · Light Lunch (01 Jun 2026 – 31 Oct 2026)",
+              "230"
+            ],
+            [
+              "Extras · Lunch Pack (01 Jun 2026 – 31 Oct 2026)",
+              "205"
+            ],
+            [
+              "Extras · Pick up Transfer @ 14:30 from Sangwali Village per vehicle (max 8 pax) (01 Jun 2026 – 31 Oct 2026)",
+              "440"
+            ],
+            [
+              "Extras · Drop off Transfer @ 9:00 to Sangwali Village per vehicle (max 8 pax) (01 Jun 2026 – 31 Oct 2026)",
+              "440"
+            ],
+            [
+              "Extras · Transfer outside of pick up and drop off time (one way) (01 Jun 2026 – 31 Oct 2026)",
+              "800"
+            ],
+            [
+              "Extras · 2h AM Game Drive Nkasa Rupara National Park (01 Jun 2026 – 31 Oct 2026)",
+              "945"
+            ],
+            [
+              "Extras · 2h PM Sundowner Boat Cruise (01 Jun 2026 – 31 Oct 2026)",
+              "825"
+            ],
+            [
+              "Extras · 1h Night Drive (01 Jun 2026 – 31 Oct 2026)",
+              "760"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "nkasa-lupala-tented-lodge": {
+    "2026": {
+      "name": "Nkasa Lupala Tented Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 31 May 2026 / High season 01 Jun 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Room rates include the conservation levy (N$230 low season / N$240 high season per person per night, non-commissionable); rack is quoted incl. levy as the sheet prints it. Source: Nkasa-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 31 May 2026, STO 15%); Nkasa-2026-HS-STO-PP-15.pdf (valid 01 Jun 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Conservation levy (non-commissionable, per person per night)",
+          "rows": [
+            [
+              "Conservation levy per person per night (non-commissionable) (01 Nov 2025 – 31 May 2026)",
+              "230"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Tented Accommodation [10] — Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Tented Accommodation · 1 Night DBB per Person Sharing (01 Nov 2025 – 31 May 2026)",
+              "3,035"
+            ],
+            [
+              "Tented Accommodation · 1 Night DBB Single Supplement (01 Nov 2025 – 31 May 2026)",
+              "1,009.80"
+            ],
+            [
+              "Tented Accommodation · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 31 May 2026)",
+              "no charge"
+            ],
+            [
+              "Tented Accommodation · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 31 May 2026)",
+              "1,880"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 31 May 2026)",
+              "2,754.50"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 31 May 2026)",
+              "908.82"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 31 May 2026)",
+              "no charge"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 31 May 2026)",
+              "1,715"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Nov 2025 – 31 May 2026)",
+              "1,285"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Extras per Person (Child Policy Only applies to Activities - less 50%)",
+          "rows": [
+            [
+              "Extras · Lunch (1 course) (01 Nov 2025 – 31 May 2026)",
+              "300"
+            ],
+            [
+              "Extras · Light Lunch (Sandwich or Wrap or Salad) (01 Nov 2025 – 31 May 2026)",
+              "200"
+            ],
+            [
+              "Extras · Lunch Pack (01 Nov 2025 – 31 May 2026)",
+              "200"
+            ],
+            [
+              "Extras · 2h - Game Drive Nkasa Rupara National Park (01 Nov 2025 – 31 May 2026)",
+              "960"
+            ],
+            [
+              "Extras · 4h - Linyanti Combo Experience (Boat Cruise + Game drive) (01 Nov 2025 – 31 May 2026)",
+              "1,700"
+            ],
+            [
+              "Extras · 1h Night Drive (min 2 pax) (01 Nov 2025 – 31 May 2026)",
+              "750"
+            ],
+            [
+              "Extras · 2h Guided Walk (min 2 pax) (children below 16 not allowed) (01 Nov 2025 – 31 May 2026)",
+              "560"
+            ],
+            [
+              "Extras · 3h - Village visit (pre-booking required) (01 Nov 2025 – 31 May 2026)",
+              "660"
+            ],
+            [
+              "Extras · Pickup & drop Off Sangwali (Return / person) (01 Nov 2025 – 31 May 2026)",
+              "250"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Conservation levy (non-commissionable, per person per night)",
+          "rows": [
+            [
+              "Conservation levy per person per night (non-commissionable) (01 Jun 2026 – 31 Oct 2026)",
+              "240"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Tented Accommodation [10] — Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Tented Accommodation · 1 Night DBB per Person Sharing (01 Jun 2026 – 31 Oct 2026)",
+              "3,465.75"
+            ],
+            [
+              "Tented Accommodation · 1 Night DBB Single Supplement (01 Jun 2026 – 31 Oct 2026)",
+              "1,161.10"
+            ],
+            [
+              "Tented Accommodation · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jun 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Tented Accommodation · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jun 2026 – 31 Oct 2026)",
+              "2,137.50"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB per Person Sharing per night (01 Jun 2026 – 31 Oct 2026)",
+              "3,143.17"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB Single Supplement per night (01 Jun 2026 – 31 Oct 2026)",
+              "1,044.99"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jun 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Tented Accommodation · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jun 2026 – 31 Oct 2026)",
+              "1,947.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Jun 2026 – 31 Oct 2026)",
+              "1,455"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Extras per Person (Child Policy Only applies to Activities - less 50%)",
+          "rows": [
+            [
+              "Extras · Lunch (1 course) (01 Jun 2026 – 31 Oct 2026)",
+              "300"
+            ],
+            [
+              "Extras · Light Lunch (Sandwich or Wrap or Salad) (01 Jun 2026 – 31 Oct 2026)",
+              "200"
+            ],
+            [
+              "Extras · Lunch Pack (01 Jun 2026 – 31 Oct 2026)",
+              "200"
+            ],
+            [
+              "Extras · 2h - Game Drive Nkasa Rupara National Park (01 Jun 2026 – 31 Oct 2026)",
+              "960"
+            ],
+            [
+              "Extras · 4h - Linyanti Combo Experience (Boat Cruise + Game drive) (01 Jun 2026 – 31 Oct 2026)",
+              "1,700"
+            ],
+            [
+              "Extras · 1h Night Drive (min 2 pax) (01 Jun 2026 – 31 Oct 2026)",
+              "750"
+            ],
+            [
+              "Extras · 2h Guided Walk (min 2 pax) (children below 16 not allowed) (01 Jun 2026 – 31 Oct 2026)",
+              "560"
+            ],
+            [
+              "Extras · 3h - Village visit (pre-booking required) (01 Jun 2026 – 31 Oct 2026)",
+              "660"
+            ],
+            [
+              "Extras · Pickup & drop Off Sangwali (Return / person) (01 Jun 2026 – 31 Oct 2026)",
+              "260"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ndhovu-safari-lodge": {
+    "2026": {
+      "name": "Ndhovu Safari Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Apr 2026 / High season 01 May 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Ndhovu-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Apr 2026, STO 15%); Ndhovu-2026-HS-STO-PP-15.pdf (valid 01 May 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Apr 2026 — Standard Tented Rooms [6] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Tented Rooms · Per Person per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,789.25"
+            ],
+            [
+              "Standard Tented Rooms · Single Supplement per night (01 Nov 2025 – 30 Apr 2026)",
+              "590.75"
+            ],
+            [
+              "Standard Tented Rooms · Per Child 0-3 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tented Rooms · Per Child 4-6 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "400"
+            ],
+            [
+              "Standard Tented Rooms · Per Child 7-12 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,052.50"
+            ],
+            [
+              "Standard Tented Rooms · 3 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,610.32"
+            ],
+            [
+              "Standard Tented Rooms · 3 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Apr 2026)",
+              "531.67"
+            ],
+            [
+              "Standard Tented Rooms · 3 Nights (plus) DBB Per Child 0-3 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tented Rooms · 3 Nights (plus) DBB / Child 4-6 Years sharing with parents/night (01 Nov 2025 – 30 Apr 2026)",
+              "360"
+            ],
+            [
+              "Standard Tented Rooms · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 Nov 2025 – 30 Apr 2026)",
+              "947.25"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Apr 2026 — Luxury Tented Rooms [4] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tented Rooms · Per Person per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,912.50"
+            ],
+            [
+              "Luxury Tented Rooms · Single Supplement per night (01 Nov 2025 – 30 Apr 2026)",
+              "633.25"
+            ],
+            [
+              "Luxury Tented Rooms · Per Child 0-3 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tented Rooms · Per Child 4-6 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "400"
+            ],
+            [
+              "Luxury Tented Rooms · Per Child 7-12 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,125"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,721.25"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Apr 2026)",
+              "569.92"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB Per Child 0-3 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB / Child 4-6 Years sharing with parents/night (01 Nov 2025 – 30 Apr 2026)",
+              "360"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 Nov 2025 – 30 Apr 2026)",
+              "1,012.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Apr 2026 — River Suite[2] Land Suite [3] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "River Suite · Per Person per night (01 Nov 2025 – 30 Apr 2026)",
+              "3,055.75"
+            ],
+            [
+              "River Suite · Single Supplement per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,008.10"
+            ],
+            [
+              "River Suite · Per Child 0-3 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "no charge"
+            ],
+            [
+              "River Suite · Per Child 4-6 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "400"
+            ],
+            [
+              "River Suite · Per Child 7-12 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "1,797.50"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Apr 2026)",
+              "2,750.17"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Apr 2026)",
+              "907.29"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB Per Child 0-3 Years sharing with parents per night (01 Nov 2025 – 30 Apr 2026)",
+              "no charge"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB / Child 4-6 Years sharing with parents/night (01 Nov 2025 – 30 Apr 2026)",
+              "360"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 Nov 2025 – 30 Apr 2026)",
+              "1,617.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Apr 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Nov 2025 – 30 Apr 2026)",
+              "1,035"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Apr 2026 — Campsite [3] (per Person) - Self-catering",
+          "rows": [
+            [
+              "Campsite 1 Per Person per night - alongside the river (01 Nov 2025 – 30 Apr 2026)",
+              "233.75"
+            ],
+            [
+              "Campsite 1 Per Child 7-12 Years sharing with adults per night (01 Nov 2025 – 30 Apr 2026)",
+              "137.50"
+            ],
+            [
+              "Campsite 2 & 3 Per Person per night - river view (01 Nov 2025 – 30 Apr 2026)",
+              "182.75"
+            ],
+            [
+              "Campsite 2 & 3 Per Child 7-12 Years sharing with adults per night (01 Nov 2025 – 30 Apr 2026)",
+              "107.50"
+            ],
+            [
+              "Campsite · Breakfast at the Lodge per Person (01 Nov 2025 – 30 Apr 2026)",
+              "205"
+            ],
+            [
+              "Campsite · Dinner at the Lodge per Person (01 Nov 2025 – 30 Apr 2026)",
+              "400"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Apr 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · 2h Ndhovu River Cruise per Person (01 Nov 2025 – 30 Apr 2026)",
+              "460"
+            ],
+            [
+              "Extras · 3h Mahango/Bufallo Park Game Drive (01 Nov 2025 – 30 Apr 2026)",
+              "970"
+            ],
+            [
+              "Extras · 5h Combo (Boatcruise + Buffalo Park Drive) (01 Nov 2025 – 30 Apr 2026)",
+              "1,430"
+            ],
+            [
+              "Extras · Day Trip to Popa Falls (01 Nov 2025 – 30 Apr 2026)",
+              "1,430"
+            ],
+            [
+              "Extras · Village Walk (01 Nov 2025 – 30 Apr 2026)",
+              "370"
+            ],
+            [
+              "Extras · Guided Fishing Trip / Hour (Max 3 people fishing) (01 Nov 2025 – 30 Apr 2026)",
+              "750"
+            ],
+            [
+              "Extras · Lunch per Person (01 Nov 2025 – 30 Apr 2026)",
+              "210"
+            ],
+            [
+              "Extras · Lunch or Breakfast Pack per Person (01 Nov 2025 – 30 Apr 2026)",
+              "170"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — Luxury Tented Rooms [10] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Tented Rooms · Per Person per night (01 May 2026 – 31 Oct 2026)",
+              "2,125"
+            ],
+            [
+              "Luxury Tented Rooms · Single Supplement per night (01 May 2026 – 31 Oct 2026)",
+              "701.25"
+            ],
+            [
+              "Luxury Tented Rooms · Per Child 0-3 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tented Rooms · Per Child 4-6 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "400"
+            ],
+            [
+              "Luxury Tented Rooms · Per Child 7-12 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "1,250"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB per Person Sharing per night (01 May 2026 – 31 Oct 2026)",
+              "1,912.50"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB Single Supplement per night (01 May 2026 – 31 Oct 2026)",
+              "631.12"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB Per Child 0-3 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB / Child 4-6 Years sharing with parents/night (01 May 2026 – 31 Oct 2026)",
+              "360"
+            ],
+            [
+              "Luxury Tented Rooms · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 May 2026 – 31 Oct 2026)",
+              "1,125"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — River Suite[2] Land Suite [3] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "River Suite · Per Person per night (01 May 2026 – 31 Oct 2026)",
+              "3,268.25"
+            ],
+            [
+              "River Suite · Single Supplement per night (01 May 2026 – 31 Oct 2026)",
+              "1,079.50"
+            ],
+            [
+              "River Suite · Per Child 0-3 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "River Suite · Per Child 4-6 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "400"
+            ],
+            [
+              "River Suite · Per Child 7-12 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "1,922.50"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB per Person Sharing per night (01 May 2026 – 31 Oct 2026)",
+              "2,941.42"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB Single Supplement per night (01 May 2026 – 31 Oct 2026)",
+              "971.55"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB Per Child 0-3 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB / Child 4-6 Years sharing with parents/night (01 May 2026 – 31 Oct 2026)",
+              "360"
+            ],
+            [
+              "River Suite · 3 Nights (plus) DBB / Child 7-12 Years sharing with parents/night (01 May 2026 – 31 Oct 2026)",
+              "1,730.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — Campsite [3] (per Person) - Self-catering",
+          "rows": [
+            [
+              "Campsite 1 Per Person per night - alongside the river (01 May 2026 – 31 Oct 2026)",
+              "250.75"
+            ],
+            [
+              "Campsite 1 Per Child 7-12 Years sharing with adults per night (01 May 2026 – 31 Oct 2026)",
+              "147.50"
+            ],
+            [
+              "Campsite 2 & 3 Per Person per night - river view (01 May 2026 – 31 Oct 2026)",
+              "195.50"
+            ],
+            [
+              "Campsite 2 & 3 Per Child 7-12 Years sharing with adults per night (01 May 2026 – 31 Oct 2026)",
+              "115"
+            ],
+            [
+              "Campsite · Breakfast at the Lodge per Person (01 May 2026 – 31 Oct 2026)",
+              "205"
+            ],
+            [
+              "Campsite · Dinner at the Lodge per Person (01 May 2026 – 31 Oct 2026)",
+              "400"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 May 2026 – 31 Oct 2026)",
+              "1,110"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — Ndhovu Enclave Rooms [10] Dinner, Bed and Breakfast",
+          "rows": [
+            [
+              "Ndhovu Enclave Rooms · Per Person per night (01 May 2026 – 31 Oct 2026)",
+              "1,785"
+            ],
+            [
+              "Ndhovu Enclave Rooms · Single Supplement per night (01 May 2026 – 31 Oct 2026)",
+              "586.50"
+            ],
+            [
+              "Ndhovu Enclave Rooms · Per Child 0-3 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Ndhovu Enclave Rooms · Per Child 4-6 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "400"
+            ],
+            [
+              "Ndhovu Enclave Rooms · Per Child 7-12 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "1,050"
+            ],
+            [
+              "Ndhovu Enclave Rooms · 3 Nights (plus) per Person Sharing per night (01 May 2026 – 31 Oct 2026)",
+              "1,606.50"
+            ],
+            [
+              "Ndhovu Enclave Rooms · 3 Nights (plus) Single Supplement per night (01 May 2026 – 31 Oct 2026)",
+              "527.85"
+            ],
+            [
+              "Ndhovu Enclave Rooms · 3 Nights (plus) Per Child 0-3 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Ndhovu Enclave Rooms · 3 Nights (plus) Per Child 4-6 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "360"
+            ],
+            [
+              "Ndhovu Enclave Rooms · 3 Nights (plus) per Child 7-12 Years sharing with parents per night (01 May 2026 – 31 Oct 2026)",
+              "945"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — Ndhovu Enclave Luxury Campsite [4] (per Person) - Self-catering",
+          "rows": [
+            [
+              "Ndhovu Enclave Luxury Campsite · Campsite Per Person per night (01 May 2026 – 31 Oct 2026)",
+              "425"
+            ],
+            [
+              "Ndhovu Enclave Luxury Campsite · Campsite Per Child 7-12 Years sharing with adults per night (01 May 2026 – 31 Oct 2026)",
+              "250"
+            ],
+            [
+              "Ndhovu Enclave Luxury Campsite · Campsite Guide per night (01 May 2026 – 31 Oct 2026)",
+              "212.50"
+            ],
+            [
+              "Ndhovu Enclave Luxury Campsite · Breakfast at the Lodge per Person (01 May 2026 – 31 Oct 2026)",
+              "205"
+            ],
+            [
+              "Ndhovu Enclave Luxury Campsite · Dinner at the Lodge per Person (01 May 2026 – 31 Oct 2026)",
+              "400"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 May 2026 – 31 Oct 2026 — Extras per Person (Child Policy does NOT Apply)",
+          "rows": [
+            [
+              "Extras · 2h Ndhovu River Cruise per Person (01 May 2026 – 31 Oct 2026)",
+              "460"
+            ],
+            [
+              "Extras · 3h Mahango/Bufallo Park Game Drive (01 May 2026 – 31 Oct 2026)",
+              "970"
+            ],
+            [
+              "Extras · 5h Combo (Boatcruise + Buffalo Park Drive) (01 May 2026 – 31 Oct 2026)",
+              "1,430"
+            ],
+            [
+              "Extras · Day Trip to Popa Falls (01 May 2026 – 31 Oct 2026)",
+              "1,430"
+            ],
+            [
+              "Extras · Village Walk (01 May 2026 – 31 Oct 2026)",
+              "370"
+            ],
+            [
+              "Extras · Guided Fishing Trip / Hour (Max 3 people fishing) (01 May 2026 – 31 Oct 2026)",
+              "750"
+            ],
+            [
+              "Extras · Lunch per Person (01 May 2026 – 31 Oct 2026)",
+              "210"
+            ],
+            [
+              "Extras · Lunch or Breakfast Pack per Person (01 May 2026 – 31 Oct 2026)",
+              "170"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "serondela-lodge": {
+    "2026": {
+      "name": "Serondela Lodge",
+      "region": "Caprivi",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 31 May 2026 / High season 01 Jun 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Room rates include the conservation levy (N$240 low season / N$240 high season per person per night, non-commissionable); rack is quoted incl. levy as the sheet prints it. Source: Serondela-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 31 May 2026, STO 15%); Serondela-2026-HS-STO-PP-15.pdf (valid 01 Jun 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Conservation levy (non-commissionable, per person per night)",
+          "rows": [
+            [
+              "Conservation levy per person per night (non-commissionable) (01 Nov 2025 – 31 May 2026)",
+              "240"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Chalets [8] — Dinner, Bed & Breakfast (minimum 2 nights)",
+          "rows": [
+            [
+              "Chalets · Per Night DBB per Person Sharing (01 Nov 2025 – 31 May 2026)",
+              "4,337"
+            ],
+            [
+              "Chalets · Per Night DBB Single Supplement (01 Nov 2025 – 31 May 2026)",
+              "1,725.50"
+            ],
+            [
+              "Chalets · Per Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 31 May 2026)",
+              "no charge"
+            ],
+            [
+              "Chalets · Per Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 31 May 2026)",
+              "2,650"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Activity Package (Min 2 Nights Stay)",
+          "rows": [
+            [
+              "Activity Package · Per Night per Person Sharing (01 Nov 2025 – 31 May 2026)",
+              "5,439.87"
+            ],
+            [
+              "Activity Package · Per Night Single Supplement (01 Nov 2025 – 31 May 2026)",
+              "1,725.50"
+            ],
+            [
+              "Activity Package · Per Night per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 31 May 2026)",
+              "no charge"
+            ],
+            [
+              "Activity Package · Per Night per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 31 May 2026)",
+              "3,298.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Nov 2025 – 31 May 2026)",
+              "1,295"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 31 May 2026 — Extras per Person (Child Policy only Applies where indicated below)",
+          "rows": [
+            [
+              "Extras · Lunch (01 Nov 2025 – 31 May 2026)",
+              "300"
+            ],
+            [
+              "Extras · Scheduled Boat Transfer From/To Kasane (included on DBB & Package rate) (01 Nov 2025 – 31 May 2026)",
+              "no charge"
+            ],
+            [
+              "Extras · Boat Transfer outside of pick up and drop off time (one way) per person (01 Nov 2025 – 31 May 2026)",
+              "1,150"
+            ],
+            [
+              "Extras · 3h-AM Chobe Nat.Park Drive (Incl: Park Fees) On day of arrival or departure (01 Nov 2025 – 31 May 2026)",
+              "1,150"
+            ],
+            [
+              "Extras · 3h-AM Chobe Nat. Park Drive (For Guide) On day of arrival or departure (01 Nov 2025 – 31 May 2026)",
+              "600"
+            ],
+            [
+              "Extras · 6h-Combo Boat Cruise/Chobe NP Drive (Incl: Park Fees) not incl. in Activity Package (01 Nov 2025 – 31 May 2026)",
+              "2,280"
+            ],
+            [
+              "Extras · 6h -Combo Boat Cruise/Chobe NP Drive (For Guide) not incl. in Activity Package (01 Nov 2025 – 31 May 2026)",
+              "1,140"
+            ],
+            [
+              "Extras · 3h PM Sundowner Boat Cruise (Children 4 to 12 pay 50%) (01 Nov 2025 – 31 May 2026)",
+              "805"
+            ],
+            [
+              "Extras · 2h AM Village Visit Guided Walk (Children 4 to 12 pay 50%) (01 Nov 2025 – 31 May 2026)",
+              "340"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Conservation levy (non-commissionable, per person per night)",
+          "rows": [
+            [
+              "Conservation levy per person per night (non-commissionable) (01 Jun 2026 – 31 Oct 2026)",
+              "240"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Chalets [8] — Dinner, Bed & Breakfast (minimum 2 nights)",
+          "rows": [
+            [
+              "Chalets · Per Night DBB per Person Sharing (01 Jun 2026 – 31 Oct 2026)",
+              "4,626"
+            ],
+            [
+              "Chalets · Per Night DBB Single Supplement (01 Jun 2026 – 31 Oct 2026)",
+              "1,848.75"
+            ],
+            [
+              "Chalets · Per Night DBB per Child 0-3 Years / Sharing with parents (01 Jun 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Chalets · Per Night DBB per Child 4-12 Years / Sharing with parents (01 Jun 2026 – 31 Oct 2026)",
+              "2,820"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Activity Package (Min 2 Nights Stay)",
+          "rows": [
+            [
+              "Activity Package · Per Night per Person Sharing (01 Jun 2026 – 31 Oct 2026)",
+              "5,839.37"
+            ],
+            [
+              "Activity Package · Per Night Single Supplement (01 Jun 2026 – 31 Oct 2026)",
+              "1,848.75"
+            ],
+            [
+              "Activity Package · Per Night per Child 0-3 Years / Sharing with parents (01 Jun 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Activity Package · Per Night per Child 4-12 Years / Sharing with parents (01 Jun 2026 – 31 Oct 2026)",
+              "3,533.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Guide Rooms [2]: Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Guide Rooms · Per Night - Guide (01 Jun 2026 – 31 Oct 2026)",
+              "1,455"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jun 2026 – 31 Oct 2026 — Extras per Person (Child Policy only Applies where indicated below)",
+          "rows": [
+            [
+              "Extras · Lunch (01 Jun 2026 – 31 Oct 2026)",
+              "300"
+            ],
+            [
+              "Extras · Scheduled Boat Transfer From/To Kasane (included on DBB & Package rate) (01 Jun 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Extras · Boat Transfer outside of pick up and drop off time (one way) per person (01 Jun 2026 – 31 Oct 2026)",
+              "1,150"
+            ],
+            [
+              "Extras · 3h-AM Chobe Nat.Park Drive (Incl: Park Fees) On day of arrival or departure (01 Jun 2026 – 31 Oct 2026)",
+              "1,265"
+            ],
+            [
+              "Extras · 3h-AM Chobe Nat. Park Drive (For Guide) On day of arrival or departure (01 Jun 2026 – 31 Oct 2026)",
+              "660"
+            ],
+            [
+              "Extras · 6h-Combo Boat Cruise/Chobe NP Drive (Incl: Park Fees) not incl. in Activity Package (01 Jun 2026 – 31 Oct 2026)",
+              "2,300"
+            ],
+            [
+              "Extras · 6h -Combo Boat Cruise/Chobe NP Drive (For Guide) not incl. in Activity Package (01 Jun 2026 – 31 Oct 2026)",
+              "1,140"
+            ],
+            [
+              "Extras · 3h PM Sundowner Boat Cruise (Children 4 to 12 pay 50%) (01 Jun 2026 – 31 Oct 2026)",
+              "820"
+            ],
+            [
+              "Extras · 2h AM Village Visit Guided Walk (Children 4 to 12 pay 50%) (01 Jun 2026 – 31 Oct 2026)",
+              "340"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "namibs-valley-lodge": {
+    "2026": {
+      "name": "Namib's Valley Lodge",
+      "region": "Sossusvlei",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Namibs-Valley-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Namibs-Valley-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Twin Bungalow [5] Family Bungalow [1] - Bed & Breakfast",
+          "rows": [
+            [
+              "Twin Bungalow · 1 Night BB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,683"
+            ],
+            [
+              "Twin Bungalow · 1 Night BB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "590.75"
+            ],
+            [
+              "Twin Bungalow · 1 Night BB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow · 1 Night BB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "990"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,514.70"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "531.67"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "891"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Twin Bungalow & Family Bungalow - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "2,082.50"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "590.75"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,225"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,874.25"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "531.67"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,102.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "620"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Nov 2025 – 30 Jun 2026)",
+              "885"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Camp Site Accommodation [4] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "289"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "170"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "235"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Child Policy Does Not Apply)",
+          "rows": [
+            [
+              "Extras · 1,5h Guided Walk (01 Nov 2025 – 30 Jun 2026)",
+              "180"
+            ],
+            [
+              "Extras · 2h Sundowner Scenic Drive (01 Nov 2025 – 30 Jun 2026)",
+              "500"
+            ],
+            [
+              "Extras · Lunch (01 Nov 2025 – 30 Jun 2026)",
+              "265"
+            ],
+            [
+              "Extras · Lunch Pack (01 Nov 2025 – 30 Jun 2026)",
+              "210"
+            ],
+            [
+              "Extras · Dinner (Main & Dessert) (01 Nov 2025 – 30 Jun 2026)",
+              "470"
+            ],
+            [
+              "Extras · Dinner 2 Course child 4-12 years old (01 Nov 2025 – 30 Jun 2026)",
+              "235"
+            ],
+            [
+              "Extras · Breakfast for SC (01 Nov 2025 – 30 Jun 2026)",
+              "210"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Twin Bungalow [5] Family Bungalow [1] - Bed & Breakfast",
+          "rows": [
+            [
+              "Twin Bungalow · 1 Night BB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,836"
+            ],
+            [
+              "Twin Bungalow · 1 Night BB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "646"
+            ],
+            [
+              "Twin Bungalow · 1 Night BB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow · 1 Night BB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,080"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,652.40"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "581.40"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow · 2 Nights (plus) BB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "972"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Twin Bungalow & Family Bungalow - Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,269.50"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "646"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 1 Night DBB per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,335"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,042.55"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "581.40"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB / Child 0-3 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Twin Bungalow & Family Bungalow · 2 Nights (plus) DBB / Child 4-12 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,201.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · BB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "675"
+            ],
+            [
+              "Guide Rooms · DBB Per Night - Guide (01 Jul 2026 – 31 Oct 2026)",
+              "965"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Camp Site Accommodation [4] - Self Catering",
+          "rows": [
+            [
+              "Camp Site Accommodation · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "314.50"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 0-3 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Child 4-12 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "185"
+            ],
+            [
+              "Camp Site Accommodation · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "255"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Child Policy Does Not Apply)",
+          "rows": [
+            [
+              "Extras · 1,5h Guided Walk (01 Jul 2026 – 31 Oct 2026)",
+              "200"
+            ],
+            [
+              "Extras · 2h Sundowner Scenic Drive (01 Jul 2026 – 31 Oct 2026)",
+              "550"
+            ],
+            [
+              "Extras · Lunch (01 Jul 2026 – 31 Oct 2026)",
+              "290"
+            ],
+            [
+              "Extras · Lunch Pack (01 Jul 2026 – 31 Oct 2026)",
+              "230"
+            ],
+            [
+              "Extras · Dinner (Main & Dessert) (01 Jul 2026 – 31 Oct 2026)",
+              "510"
+            ],
+            [
+              "Extras · Dinner 2 Course child 4-12 years old (01 Jul 2026 – 31 Oct 2026)",
+              "255"
+            ],
+            [
+              "Extras · Breakfast for SC (01 Jul 2026 – 31 Oct 2026)",
+              "230"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "ongula-village-homestead-lodge": {
+    "2026": {
+      "name": "Ongula Village Homestead Lodge",
+      "region": "East Etosha",
+      "currency": "N$",
+      "validity": "2026 · Low season 01 Nov 2025 – 30 Jun 2026 / High season 01 Jul 2026 – 31 Oct 2026",
+      "note": "Reservation Destination (ResDest) rate sheet, N$, incl. 15% VAT and the tourism levy as printed. Rack and STO loaded exactly as printed on the sheet; rows the sheet prints without a rack (multi-night STO specials) are STO only. Children, guide rooms and extras print rack equal to STO, i.e. non-commissionable. Source: Ongula-2026-LS-STO-PP-15.pdf (valid 01 Nov 2025 – 30 Jun 2026, STO 15%); Ongula-2026-HS-STO-PP-15.pdf (valid 01 Jul 2026 – 31 Oct 2026, STO 15%). STO commission 15% as printed.",
+      "sections": [
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Luxury Thatched Rondawel [5] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,649"
+            ],
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "970"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,484.10"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "873"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Dinner, Bed & Breakfast + Homestead Tour",
+          "rows": [
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "1,993.25"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,172.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "1,793.92"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,055.25"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Exclusive Honeymoon Suite [1] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "2,337.50"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "1,375"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "2,103.75"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "1,237.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - Guide + Homestead Tour (01 Nov 2025 – 30 Jun 2026)",
+              "935"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Volunteer Program",
+          "rows": [
+            [
+              "Volunteer Program · 1 Week Volunteer Package Per Person Sharing Self-Catering (01 Nov 2025 – 30 Jun 2026)",
+              "4,110"
+            ],
+            [
+              "Volunteer Program · 1 Month Volunteer Package per Person Sharing Self-Catering (01 Nov 2025 – 30 Jun 2026)",
+              "15,620"
+            ],
+            [
+              "Volunteer Program · Additional Week (per Week) per Person Sharing Self-Catering (01 Nov 2025 – 30 Jun 2026)",
+              "3,850"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Standard Room [2] & Standard Tents [3] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Room · 1 Night DBB per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "977.50"
+            ],
+            [
+              "Standard Room · 1 Night DBB Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "575"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "879.75"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "517.50"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Standard Tents [3] Self-Catering",
+          "rows": [
+            [
+              "Standard Tents · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "590.75"
+            ],
+            [
+              "Standard Tents · 1 Night SC Single Supplement (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tents · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tents · 1 Night SC per Child 7-13 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "347.50"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC per Person Sharing per night (01 Nov 2025 – 30 Jun 2026)",
+              "531.67"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC Single Supplement per night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC / Child 0-6 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC / Child 7-13 Years sharing with parents/night (01 Nov 2025 – 30 Jun 2026)",
+              "312.75"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Campsite [5] Self-Catering",
+          "rows": [
+            [
+              "Campsite · 1 Night SC per Person Sharing (01 Nov 2025 – 30 Jun 2026)",
+              "185"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 7-13 Years / Sharing with parents (01 Nov 2025 – 30 Jun 2026)",
+              "92.50"
+            ],
+            [
+              "Campsite · 1 Night Per Person Sharing - setup tent / stretchers / bedding / towels (01 Nov 2025 – 30 Jun 2026)",
+              "600"
+            ],
+            [
+              "Campsite · 1 Night SC per Guide (01 Nov 2025 – 30 Jun 2026)",
+              "185"
+            ]
+          ]
+        },
+        {
+          "title": "Low season 01 Nov 2025 – 30 Jun 2026 — Extras per Person (Child Policy Applies) - Min 2 People",
+          "rows": [
+            [
+              "Extras · Homestead Tour (01 Nov 2025 – 30 Jun 2026)",
+              "405"
+            ],
+            [
+              "Extras · Village Walk (01 Nov 2025 – 30 Jun 2026)",
+              "485"
+            ],
+            [
+              "Extras · Donkey Cart Sundowner Tour (01 Nov 2025 – 30 Jun 2026)",
+              "455"
+            ],
+            [
+              "Extras · Gastronomic Experience (pre book Essential) (01 Nov 2025 – 30 Jun 2026)",
+              "310"
+            ],
+            [
+              "Extras · Music/ drum & Dance Experience (pre book essential) (01 Nov 2025 – 30 Jun 2026)",
+              "210"
+            ],
+            [
+              "Extras · Lunch Packs (01 Nov 2025 – 30 Jun 2026)",
+              "175"
+            ],
+            [
+              "Extras · Lunch (01 Nov 2025 – 30 Jun 2026)",
+              "245"
+            ],
+            [
+              "Extras · Group scheduled Lunch Buffet (01 Nov 2025 – 30 Jun 2026)",
+              "300"
+            ],
+            [
+              "Extras · Breakfast for SC (01 Nov 2025 – 30 Jun 2026)",
+              "175"
+            ],
+            [
+              "Extras · Traditional Dinner for SC (01 Nov 2025 – 30 Jun 2026)",
+              "400"
+            ],
+            [
+              "Extras · Day Visit (Homestead Tour + Lunch) (01 Nov 2025 – 30 Jun 2026)",
+              "645"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Luxury Thatched Rondawel [5] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,823.25"
+            ],
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "552.50"
+            ],
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Thatched Rondawel · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,072.50"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,640.92"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "497.25"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Luxury Thatched Rondawel · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "965.25"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Dinner, Bed & Breakfast + Homestead Tour",
+          "rows": [
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,201.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "552.50"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,295"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "1,981.35"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "497.25"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Dinner, Bed & Breakfast + Homestead Tour · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,165.50"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Exclusive Honeymoon Suite [1] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "2,975"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "985.15"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "1,750"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "2,677.50"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "886.63"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Exclusive Honeymoon Suite · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "1,575"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Guide Rooms [1]",
+          "rows": [
+            [
+              "Guide Rooms · DBB Per Night - Guide + Homestead Tour (01 Jul 2026 – 31 Oct 2026)",
+              "1,030"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Volunteer Program",
+          "rows": [
+            [
+              "Volunteer Program · 1 Week Volunteer Package Per Person Sharing Self-Catering (01 Jul 2026 – 31 Oct 2026)",
+              "4,520"
+            ],
+            [
+              "Volunteer Program · 1 Month Volunteer Package per Person Sharing Self-Catering (01 Jul 2026 – 31 Oct 2026)",
+              "17,176"
+            ],
+            [
+              "Volunteer Program · Additional Week (per Week) per Person Sharing Self-Catering (01 Jul 2026 – 31 Oct 2026)",
+              "4,235"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Room [2] & Standard Tents [3] Dinner, Bed & Breakfast",
+          "rows": [
+            [
+              "Standard Room · 1 Night DBB per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "1,083.75"
+            ],
+            [
+              "Standard Room · 1 Night DBB Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "301.75"
+            ],
+            [
+              "Standard Room · 1 Night DBB per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 1 Night DBB per Child 7-13 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "637.50"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "975.37"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "271.57"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Room · 2 Nights (plus) DBB / Child 7-13 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "573.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Standard Tents [3] Self-Catering",
+          "rows": [
+            [
+              "Standard Tents · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "658.75"
+            ],
+            [
+              "Standard Tents · 1 Night SC Single Supplement (01 Jul 2026 – 31 Oct 2026)",
+              "301.75"
+            ],
+            [
+              "Standard Tents · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tents · 1 Night SC per Child 7-13 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "387.50"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC per Person Sharing per night (01 Jul 2026 – 31 Oct 2026)",
+              "592.87"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC Single Supplement per night (01 Jul 2026 – 31 Oct 2026)",
+              "271.57"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC / Child 0-6 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Standard Tents · 2 Nights (plus) SC / Child 7-13 Years sharing with parents/night (01 Jul 2026 – 31 Oct 2026)",
+              "348.75"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Campsite [5] Self-Catering",
+          "rows": [
+            [
+              "Campsite · 1 Night SC per Person Sharing (01 Jul 2026 – 31 Oct 2026)",
+              "205"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 0-6 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "no charge"
+            ],
+            [
+              "Campsite · 1 Night SC per Child 7-13 Years / Sharing with parents (01 Jul 2026 – 31 Oct 2026)",
+              "102.50"
+            ],
+            [
+              "Campsite · 1 Night Per Person Sharing - setup tent / stretchers / bedding / towels (01 Jul 2026 – 31 Oct 2026)",
+              "660"
+            ],
+            [
+              "Campsite · 1 Night SC per Guide (01 Jul 2026 – 31 Oct 2026)",
+              "205"
+            ]
+          ]
+        },
+        {
+          "title": "High season 01 Jul 2026 – 31 Oct 2026 — Extras per Person (Child Policy Applies) - Min 2 People",
+          "rows": [
+            [
+              "Extras · Homestead Tour (01 Jul 2026 – 31 Oct 2026)",
+              "445"
+            ],
+            [
+              "Extras · Village Walk (01 Jul 2026 – 31 Oct 2026)",
+              "535"
+            ],
+            [
+              "Extras · Donkey Cart Sundowner Tour (01 Jul 2026 – 31 Oct 2026)",
+              "500"
+            ],
+            [
+              "Extras · Gastronomic Experience (pre book Essential) (01 Jul 2026 – 31 Oct 2026)",
+              "345"
+            ],
+            [
+              "Extras · Music/ drum & Dance Experience (pre book essential) (01 Jul 2026 – 31 Oct 2026)",
+              "230"
+            ],
+            [
+              "Extras · Lunch Packs (01 Jul 2026 – 31 Oct 2026)",
+              "195"
+            ],
+            [
+              "Extras · Lunch (01 Jul 2026 – 31 Oct 2026)",
+              "270"
+            ],
+            [
+              "Extras · Group scheduled Lunch Buffet (01 Jul 2026 – 31 Oct 2026)",
+              "330"
+            ],
+            [
+              "Extras · Breakfast for SC (01 Jul 2026 – 31 Oct 2026)",
+              "195"
+            ],
+            [
+              "Extras · Traditional Dinner for SC (01 Jul 2026 – 31 Oct 2026)",
+              "450"
+            ],
+            [
+              "Extras · Day Visit (Homestead Tour + Lunch) (01 Jul 2026 – 31 Oct 2026)",
+              "710"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+};
+  if (typeof DDS_STO_BY_YEAR === 'undefined') return;
+  Object.keys(V).forEach(function (slug) {
+    var e = DDS_STO_BY_YEAR[slug] || (DDS_STO_BY_YEAR[slug] = {});
+    Object.keys(V[slug]).forEach(function (y) { if (!e[y]) e[y] = V[slug][y]; });
+  });
+})();
