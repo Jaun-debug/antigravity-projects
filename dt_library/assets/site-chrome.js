@@ -421,7 +421,7 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
             +"box-shadow:0 8px 26px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.6);"
             +"transition:background .18s,box-shadow .18s}"
             +"#nr-yrdock button:hover{background:rgba(255,255,255,.74);box-shadow:0 10px 30px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.7)}"
-            +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(200,90,23,.60);color:#fff;"
+            +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(135,169,150,.88);color:#fff;"
             +"border-color:rgba(255,255,255,.40);text-shadow:0 1px 2px rgba(0,0,0,.22)}"
             +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;left:50%;transform:translateX(-50%)}"
             +"#nr-yrdock>div{flex-direction:row}}"
