@@ -151,6 +151,15 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #87a996}
   transition:background .15s,border-color .15s}
 .daylinks .viewlink:hover{background:rgba(135,169,150,.12);border-color:rgba(135,169,150,.55)}
 .daylinks .nbdot{margin-left:7px}
+.nbchip{gap:7px;white-space:nowrap;flex:0 0 auto}
+.daylinks .nbchip .nbdot{margin-left:0;top:0;width:8px;height:8px}
+.nbchip .nbgo{opacity:.55}
+.nbchip.off{display:none!important}
+.daylinks .nbchip{color:#6f675e;background:#fbfaf8}
+.daylinks .nbchip.checking{color:#8a8175}
+.daylinks .nbchip.yes{color:#2f6b3f;background:rgba(63,157,85,.10);border-color:rgba(63,157,85,.40)}
+.daylinks .nbchip.no{color:#9a3a32;background:rgba(192,69,60,.08);border-color:rgba(192,69,60,.38)}
+.daylinks .nbchip.yes .nbdot{box-shadow:0 0 0 3px rgba(63,157,85,.18);animation:nbpulse 2.2s ease-in-out infinite}
 .dayleg{font-size:.72rem;letter-spacing:.5px;color:var(--gold);padding:0 0 11px 34px;margin-top:-4px}
 .dayleg.est{color:var(--muted)}
 .daycard .rm{font-size:1.1rem}
@@ -473,10 +482,14 @@ function nbPaint(){
     var st=NBAVAIL[nbKey(id,ci,n)];
     if(!st){el.className='nbdot';el.title='Checking availability\u2026';return;}
     if(st.state==='checking'){el.className='nbdot checking';el.title='Checking availability\u2026';}
-    else if(st.state==='yes'){el.className='nbdot yes';el.title=st.free+' room(s) available from '+fmtDisp(ci)+' for '+n+' night(s)';}
+    else if(st.state==='yes'){el.className='nbdot yes';el.setAttribute('data-free',st.free);el.title=st.free+' room(s) available from '+fmtDisp(ci)+' for '+n+' night(s)';}
     else if(st.state==='no'){el.className='nbdot no';el.title='No availability from '+fmtDisp(ci)+' for '+n+' night(s)';}
     else {el.className='nbdot';el.title='Availability check unavailable';}
   })(els[k]);}
+  document.querySelectorAll('.nbchip').forEach(function(ch){var el=ch.querySelector('.nbdot'),lb=ch.querySelector('.nblab');if(!el)return;
+    var st=(el.className.match(/\b(yes|no|checking)\b/)||[])[1]||'';var fr=parseInt(el.getAttribute('data-free'),10);
+    ch.className='viewlink nbchip'+(st?' '+st:'')+(el.style.display==='none'?' off':'');ch.title=el.title||ch.title;
+    if(lb)lb.textContent=st==='yes'?('Available'+(fr>0?' \u00b7 '+fr+' room'+(fr===1?'':'s'):'')):st==='no'?'Fully booked':st==='checking'?'Checking\u2026':'Check availability';});
 }
 function nbCheckAll(){ if(!S||!S.lodges) return; for(var i=0;i<S.lodges.length;i++) nbCheck(i); nbPaint(); }
 function openLodgeSheet(i,file){var ci=rowCheckIn(i);if(ci){try{localStorage.setItem('nr_cursor',ci)}catch(e){}}window.open(file,'_blank')}
@@ -797,12 +810,12 @@ function renderPanel(){persist();
          you pick. */
       var lodgeVal=(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].name:'';
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _yr=(S.year||'2026');var _use27=!!(_oinf&&_yr==='2027'&&_oinf.orig_2027);var _pdf=_use27?_oinf.orig_2027:((_oinf&&_oinf.orig)?_oinf.orig:'');var _plab=_use27?'2027 source PDF':'Source PDF';var _orig=_pdf?'<a class="viewlink" href="'+esc(_pdf)+'" target="_blank" rel="noopener" title="Supplier source rate sheet (PDF) for the selected season" style="color:#7a8a72">'+_plab+' ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date" style="color:#8a6a34">Availability ↗<span class="nbdot" data-nbdot="'+i+'"></span></a>':'';view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(L.file)+'\');return false">View sheet ↗</a>'+_orig+_nb+_shot}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _yr=(S.year||'2026');var _use27=!!(_oinf&&_yr==='2027'&&_oinf.orig_2027);var _pdf=_use27?_oinf.orig_2027:((_oinf&&_oinf.orig)?_oinf.orig:'');var _plab=_use27?'2027 source PDF':'Source PDF';var _orig=_pdf?'<a class="viewlink" href="'+esc(_pdf)+'" target="_blank" rel="noopener" title="Supplier source rate sheet (PDF) for the selected season" style="color:#7a8a72">'+_plab+' ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink nbchip" data-nbchip="'+i+'" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date"><span class="nbdot" data-nbdot="'+i+'"></span><span class="nblab">Availability</span><span class="nbgo">↗</span></a>':'';view=_orig+_nb+_shot}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
         regionLodgeCell='';
-        if(d.fileUrl) view='<a class="viewlink" href="#" onclick="openLodgeSheet('+i+',\''+esc(d.fileUrl)+'\');return false">View sheet ↗</a>';
+        /* View sheet link removed for now */
         roomCell='<div class="roomcell">'+d.cap.map(function(r){return '<div style="font-size:.84rem">'+(r.qty||0)+'&times; '+esc(r.name)+' <span style="color:var(--muted)">&mdash; '+money(r.price)+'</span></div>'}).join('')+'<div class="muted" style="font-size:.72rem;padding:3px 0 0">from the rate sheet</div></div>';
         paxCell='';
       } else {
@@ -1449,6 +1462,12 @@ if(document.readyState!=='loading')ord();else document.addEventListener('DOMCont
 .fld2.nights{flex:0 0 140px!important}
 .qline .nr-step{flex:0 0 138px}
 .nr-step input::-webkit-outer-spin-button,.nr-step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* match the other boxes exactly: same height, border, radius and tint */
+#panel .nr-step{height:38px!important;border:1px solid rgba(135,169,150,.45)!important;border-radius:5px!important;background:rgba(135,169,150,.08)!important}
+#panel .nr-step button{background:transparent!important;font-size:16px!important}
+#panel .nr-step button:hover{background:rgba(135,169,150,.16)!important}
+#panel .nr-step input{border-left:1px solid rgba(135,169,150,.45)!important;border-right:1px solid rgba(135,169,150,.45)!important;background:transparent!important;font-size:.95rem!important}
 </style>
 <script id="nr-step-js">
 /* Wraps every quantity box in the quote panel (rooms, singles, children, nights, guests, pax, days, markup)
