@@ -281,7 +281,12 @@ function usdLodgesInArea(area){var a=[];RATES.lodges.forEach(function(l,i){if(l.
 function usdRates(L){if((S.year||'2026')==='2027'){return (L&&L.rates_2027&&L.rates_2027.length)?L.rates_2027:[];}return (L&&L.rates)||[];}
 function botswanaTotal(){return sumLI(S.botswana);}
 function has2027(L){return !!(L&&L.rates_2027&&L.rates_2027.length);}
-function lodgeRates(L){if((S.year||'2026')==='2027'){return has2027(L)?L.rates_2027:[];}return (L&&L.rates)||[];}
+/* 2027 with no published 2027 rates: offer the lodge's 2026 rates plus the percentage the agent types
+   for that lodge (S.up27[lodge name]); every such line is labelled so the quote shows where it came from. */
+function up27Of(L){var v=(S.up27||{})[(L&&L.name)||''];v=parseFloat(v);return isNaN(v)?0:v;}
+function lodgeRates(L){if((S.year||'2026')==='2027'){if(has2027(L))return L.rates_2027;var pc=up27Of(L);
+  return ((L&&L.rates)||[]).map(function(r){var o={};for(var k in r)o[k]=r[k];o.p=Math.round((Number(r.p)||0)*(1+pc/100)*100)/100;o.base26=r.p;o.n=r.n+' (2026 rate'+(pc?' +'+pc+'%':'')+')';return o;});}
+  return (L&&L.rates)||[];}
 function isActivity(n){var s=(n||'').toLowerCase();/* An excursion is never a room or a meal, even when its description mentions the lunch or park fees it includes - that wording used to trip the guard below and drop it into the room dropdown. A lunch/picnic PACK is food, so it is excluded here. */if(/excursion/.test(s)&&!/^\s*(lunch|picnic|packed)\b/.test(s))return true;if(/sharing|\bsingle\b|\broom\b|chalet|\btent\b|suite|villa(?!ge)|bungalow|cottage|\bdbb\b|b ?& ?b|per person per night|conservation|levy|park fee|tourism|deposit|\bmeal|breakfast|lunch|dinner|guide room|tour guide/.test(s))return false;return /game[ -]?drive|\bdrive\b|cruise|\bwalk\b|hik|nature drive|sundowner|mtb|bike|cycl|kayak|canoe|mokoro|balloon|fishing|quad|horse|riding|excursion|\btour\b|scenic|boat|tracking|township|cultural|museum|\bspa\b|massage|tasting|sandboard|living museum|e-bike|stargaz|flight|rock ?art|plateau|fairy circle|adopt|sleep.?out|guided|experience|activit|feeding|transfer|shuttle|laundry|airstrip|pick.?up|drop.?off/.test(s);}
 function isMeal(n){var s=(n||'').toLowerCase();if(/^\s*(lunch|picnic|packed)\b.*\bpack/.test(s))return true;if(/room|chalet|\btent\b|suite|villa|bungalow|cottage|sharing|\bsingle\b|\bdouble\b|per person per night|\bdbb\b|b ?& ?b|bed ?& ?breakfast|bed and breakfast|dinner, bed|package|\bfi\b|fully incl|full board|half board|campsite|camping|tented|per unit|exclusive|guide|\bfee\b/.test(s))return false;if(/drive|excursion|fly.?in|\bgame\b|\btour\b|hik|cruise|sundowner|sleep.?out|scenic|safari|balloon|quad|horse|\bbike\b|\bwalk\b|tracking/.test(s))return false;return /breakfast|lunch|dinner|brunch|high tea|\bmeal\b|\bboma\b|picnic|coffee & cake|dessert/.test(s);}
 function lodgeMeals(L){var out=[],seen={};[].concat((L&&L.rates)||[],(L&&L.rates_2027)||[]).forEach(function(r){if(isMeal(r.n)&&!r.a&&!isActivity(r.n)&&!seen[r.n]){seen[r.n]=1;out.push(r);}});return out;}
@@ -816,7 +821,7 @@ function renderPanel(){persist();
          you pick. */
       var lodgeVal=(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].name:'';
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];if((S.year||'2026')==='2027'&&!has2027(L)){roomOpts='<option value="-1">2027 rate to follow</option>';}else{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _yr=(S.year||'2026');var _use27=!!(_oinf&&_yr==='2027'&&_oinf.orig_2027);var _pdf=_use27?_oinf.orig_2027:((_oinf&&_oinf.orig)?_oinf.orig:'');var _plab=_use27?'2027 source PDF':'Source PDF';var _orig=_pdf?'<a class="viewlink" href="'+esc(_pdf)+'" target="_blank" rel="noopener" title="Supplier source rate sheet (PDF) for the selected season" style="color:#7a8a72">'+_plab+' ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink nbchip" data-nbchip="'+i+'" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date"><span class="nbdot" data-nbdot="'+i+'"></span><span class="nblab"></span></a>':'';view=_orig+_shot;(window.NBHTML=window.NBHTML||{})[i]=_nb||'';}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _yr=(S.year||'2026');var _use27=!!(_oinf&&_yr==='2027'&&_oinf.orig_2027);var _pdf=_use27?_oinf.orig_2027:((_oinf&&_oinf.orig)?_oinf.orig:'');var _plab=_use27?'2027 source PDF':'Source PDF';var _orig=_pdf?'<a class="viewlink" href="'+esc(_pdf)+'" target="_blank" rel="noopener" title="Supplier source rate sheet (PDF) for the selected season" style="color:#7a8a72">'+_plab+' ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink nbchip" data-nbchip="'+i+'" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date"><span class="nbdot" data-nbdot="'+i+'"></span><span class="nblab"></span></a>':'';view=_orig+_shot;(window.NBHTML=window.NBHTML||{})[i]=_nb||'';}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){
@@ -842,7 +847,7 @@ function renderPanel(){persist();
         }
         var mealUI='';
         if(d.lodgeIdx>-1){var _ml=lodgeMeals(RATES.lodges[d.lodgeIdx]);if(_ml.length||(d.meals&&d.meals.length)){var _mopts='<option value="">Add meal / meal plan…</option>'+_ml.map(function(rt){return '<option value="'+rt.p+'" data-name="'+esc(rt.n)+'">'+esc(rt.n)+' — '+money(rt.p)+' pp</option>';}).join('');var _tg=totGuests(d),_nn=(d.nights||0);var _chips=(d.meals||[]).map(function(m,mi){return '<div class="mealchip">'+esc(m.n)+'<span class="mealcalc">'+money(m.p)+' pp × '+_tg+' × '+_nn+'n = '+money(num(m.p)*_tg*_nn)+'</span><button class="mealrm" data-i="'+i+'" data-mi="'+mi+'" title="remove">&times;</button></div>';}).join('');mealUI='<div class="mealsel"><select class="meal-pick" data-i="'+i+'">'+_mopts+'</select>'+(_chips?'<div class="mealchips">'+_chips+'</div>':'')+'</div>';}}
-        roomCell='<div class="roomcell"><label class="fld2"><span>Room / rate</span><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></label>'+boxes+mealUI+'</div>';
+        var _up27='';if((S.year||'2026')==='2027'&&d.lodgeIdx>-1&&!has2027(RATES.lodges[d.lodgeIdx])){var _pc=up27Of(RATES.lodges[d.lodgeIdx]);_up27='<div class="up27"><span class="up27-t">No 2027 rates yet \u2014 quoting the 2026 rates plus</span><input type="number" min="0" max="100" step="1" value="'+_pc+'" data-i="'+i+'" data-f="up27" title="Percentage added to every 2026 rate for this lodge"><span class="up27-t">%</span></div>';}roomCell='<div class="roomcell"><label class="fld2"><span>Room / rate</span><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></label>'+_up27+boxes+mealUI+'</div>';
         paxCell='';
       }
       /* Header: which day, which lodge, what it costs. Everything you change
@@ -1038,6 +1043,7 @@ function bindPanel(){
         else if(f==='qShare')d.qShare=Math.max(0,parseInt(el.value,10)||0);
         else if(f==='qSingle')d.qSingle=Math.max(0,parseInt(el.value,10)||0);
         else if(f==='qChild')d.qChild=Math.max(0,parseInt(el.value,10)||0);
+        else if(f==='up27'){var L27=RATES.lodges[d.lodgeIdx];if(L27){S.up27=S.up27||{};var pv=parseFloat(el.value);S.up27[L27.name]=isNaN(pv)?0:Math.max(0,Math.min(100,pv));}}
         recalc();
       };
       el.onchange=function(){renderPanel()};
@@ -1523,6 +1529,8 @@ function nrSyncDateOut(){var e=document.getElementById('f-enddate'),l=document.g
   document.addEventListener('change',function(e){if(e.target&&(e.target.id==='f-startdate'||e.target.getAttribute('data-f')==='nights'))setTimeout(nrSyncDateOut,0);},true);})();
 </script>
 <style id="nr-daterow-css">
+.up27{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px;padding:9px 12px;border:1px dashed rgba(184,149,106,.55);border-radius:5px;background:rgba(184,149,106,.07)}
+.up27 .up27-t{font-size:.8rem;color:#7a5f3c}
 .daterow{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin:0 0 16px}
 .daterow .fld{margin:0!important;flex:0 0 auto}
 .daterow input[type=date]{height:44px;box-sizing:border-box;width:190px}
