@@ -94,7 +94,16 @@ function flattenSto(doc) {
       const p = parsePrice(row[1]);
       if (!n || p == null) continue;
       const t = String((sec && sec.title) || '').trim();
-      rates.push({ n: (_seen[n] > 1 && t) ? (n + ' — ' + t) : n, p: p });
+      let label = (_seen[n] > 1 && t) ? (n + ' — ' + t) : n;
+      // A per-room/per-unit basis stated only in the section title is lost when
+      // flattened, and the builder then charges it per guest (doubling it for two).
+      // Carry the basis onto the label unless the label already states one.
+      const basis = t.match(/per (room|unit|chalet|villa|house|cottage|bungalow|cabin|tent|suite)\b/i);
+      if (basis && !/per person|pppn|sharing|per adult/i.test(t) &&
+          !/per person|\bpps\b|sharing|pppn|per adult|\bpp\b|per (room|unit|chalet|villa|house|cottage|bungalow|cabin|tent|suite)\b/i.test(label)) {
+        label = label + ' — per ' + basis[1].toLowerCase();
+      }
+      rates.push({ n: label, p: p });
     }
   }
   return rates;
