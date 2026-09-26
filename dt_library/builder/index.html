@@ -32,11 +32,11 @@ padding:10px 18px;border-radius:5px;cursor:pointer;border:1px solid var(--gold);
 .side{flex:0 0 250px;position:sticky;top:18px}
 .side h4{font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin:0 6px 12px}
 .nav a{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:5px;text-decoration:none;color:var(--ink);font-size:.85rem;font-weight:500;cursor:pointer;transition:.15s;margin-bottom:3px}
-.nav a:hover{background:rgba(184,149,106,.08)}
-.nav a.active{background:#c85a17;color:#fff;box-shadow:0 6px 18px rgba(200,90,23,.28)}
+.nav a:hover{background:rgba(135,169,150,.12)}
+.nav a.active{background:rgba(135,169,150,.88);color:#fff;box-shadow:0 6px 18px rgba(95,127,114,.25)}
 .nav .num{flex:0 0 26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--muted);background:#fff}
 .nav a.active .num{border-color:rgba(255,255,255,.35);color:#fff;background:transparent}
-.nav a.done .num{background:#c85a17;border-color:#c85a17;color:#fff}
+.nav a.done .num{background:#87a996;border-color:#87a996;color:#fff}
 /* main */
 .main{flex:1 1 auto;min-width:0}
 .panel{background:var(--card);border:1px solid var(--border);border-radius:5px;padding:26px;box-shadow:0 8px 30px rgba(44,40,36,.05)}
@@ -65,11 +65,11 @@ table.bd td{padding:8px 5px;border-bottom:1px solid var(--border);vertical-align
 .grip{display:inline-block;width:12px;height:19px;vertical-align:-4px;margin-right:7px;cursor:grab;
   color:#b3a28c;background-image:radial-gradient(currentColor 1.8px,transparent 1.9px);
   background-size:6px 6.5px;background-position:0 3px;-webkit-user-select:none;user-select:none}
-.grip:hover{color:#c85a17}
-.grip:active{cursor:grabbing;color:#c85a17}
+.grip:hover{color:#5f7f72}
+.grip:active{cursor:grabbing;color:#5f7f72}
 tr.dragging td{opacity:.22}
-tr.dropbefore td{box-shadow:inset 0 4px 0 #c85a17}
-tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
+tr.dropbefore td{box-shadow:inset 0 4px 0 #87a996}
+tr.dropafter td{box-shadow:inset 0 -4px 0 #87a996}
 /* The row you are dragging is lifted off the page as a copy that follows the
    cursor, so you can see the whole day travelling to where it will land. It is
    pointer-events:none, otherwise it would sit between the cursor and the row
@@ -102,8 +102,8 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
    the width, which truncated the rate names the agent is meant to check. */
 .daycard{border:1px solid var(--border);border-radius:10px;background:#fff;margin:0 0 11px}
 .daycard.empty{background:#fdfcfa}
-.daycard.dropbefore{box-shadow:inset 0 4px 0 #c85a17}
-.daycard.dropafter{box-shadow:inset 0 -4px 0 #c85a17}
+.daycard.dropbefore{box-shadow:inset 0 4px 0 #87a996}
+.daycard.dropafter{box-shadow:inset 0 -4px 0 #87a996}
 .daycard.dragging{opacity:.28}
 .dayhead{display:flex;align-items:center;gap:11px;padding:9px 12px;border-bottom:1px solid var(--border);
   background:rgba(184,149,106,.06);border-radius:9px 9px 0 0}
@@ -149,7 +149,7 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
   border:1px solid var(--border);
   border-radius:999px;padding:5px 12px;background:#fbfaf8;line-height:1;
   transition:background .15s,border-color .15s}
-.daylinks .viewlink:hover{background:rgba(200,90,23,.09);border-color:rgba(200,90,23,.45)}
+.daylinks .viewlink:hover{background:rgba(135,169,150,.12);border-color:rgba(135,169,150,.55)}
 .daylinks .nbdot{margin-left:7px}
 .dayleg{font-size:.72rem;letter-spacing:.5px;color:var(--gold);padding:0 0 11px 34px;margin-top:-4px}
 .dayleg.est{color:var(--muted)}
@@ -176,10 +176,10 @@ tr.dropafter td{box-shadow:inset 0 -4px 0 #c85a17}
 .li.lihdr .hpax{width:78px;text-align:right}
 .li.lihdr .actline{width:120px;text-align:right;color:var(--muted)}
 .li.lihdr .hrm{width:20px}
-.addbtn{margin-top:6px;background:transparent!important;border:1px solid #c85a17!important;color:#c85a17!important;border-radius:5px!important;transition:all .2s!important}
-.addbtn:hover{background:#c85a17!important;color:#fff!important}
-#panel input,#panel select,#panel textarea{border:1px solid rgba(200,90,23,.3)!important;background-color:rgba(200,90,23,.05)!important}
-#panel input:focus,#panel select:focus,#panel textarea:focus{outline:none!important;box-shadow:0 0 0 2px rgba(200,90,23,.18)!important}
+.addbtn{margin-top:6px;background:transparent!important;border:1px solid #87a996!important;color:#5f7f72!important;border-radius:5px!important;transition:all .2s!important}
+.addbtn:hover{background:#87a996!important;color:#fff!important}
+#panel input,#panel select,#panel textarea{border:1px solid rgba(135,169,150,.45)!important;background-color:rgba(135,169,150,.08)!important}
+#panel input:focus,#panel select:focus,#panel textarea:focus{outline:none!important;box-shadow:0 0 0 2px rgba(135,169,150,.3)!important}
 .muted{color:var(--muted);font-size:.85rem;font-style:italic;padding:8px 2px}
 .sec-total{display:flex;justify-content:space-between;align-items:baseline;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)}
 .sec-total .lbl{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
@@ -877,9 +877,9 @@ function renderPanel(){persist();
       +'<div class="sec-total"><span class="lbl">Vehicle + fuel</span><span class="amt" id="d-vfuel">'+money(vehicleHire()+fuelCost())+'</span></div>';
   } else if(active==='guide'){ h='<h2>Guide Costs</h2><p class="lead">Guide fees, accommodation, day rates.</p>'+liSection('guide','Guide','Guide fee / day rate'); }
   else if(active==='flights'){ h='<h2>Flights</h2><p class="lead">Scheduled or charter flight legs. Pick a supplier below to add a scheduled seat leg at its published per-seat rate, or type a custom leg.</p>';
-    if(PROVIDERS.flights&&PROVIDERS.flights.length){var fsup=PROVIDERS.flights;var supOpts=(fsup.length===1)?'<option value="0" selected>'+esc(fsup[0].name)+'</option>':'<option value="">Choose supplier…</option>'+fsup.map(function(f,i){return '<option value="'+i+'">'+esc(f.name)+'</option>';}).join('');var initFi=(fsup.length===1)?0:'';var routeOpts=(fsup.length===1)?flightRouteOptions(0):'<option value="">Choose supplier first…</option>';h+='<div style="margin:0 0 16px;border-left:2px solid rgba(200,90,23,.25);padding:0 0 2px 14px"><div class="fld" style="max-width:640px;margin:0 0 6px"><label>Flight supplier <span style="color:var(--muted)">(per seat, scheduled)</span></label><select id="f-flsupplier">'+supOpts+'</select></div><div class="fld" style="max-width:640px;margin:0"><select class="fl-pick" id="f-flpick" data-sup="'+initFi+'"'+(fsup.length===1?'':' disabled')+'>'+routeOpts+'</select></div><div style="font-size:.7rem;color:var(--muted);margin:6px 0 0">Adds a leg at the seat rate &times; '+tripPax()+' guests (rate follows the selected rate year) — edit the amount below if only some guests fly.</div></div>';}
+    if(PROVIDERS.flights&&PROVIDERS.flights.length){var fsup=PROVIDERS.flights;var supOpts=(fsup.length===1)?'<option value="0" selected>'+esc(fsup[0].name)+'</option>':'<option value="">Choose supplier…</option>'+fsup.map(function(f,i){return '<option value="'+i+'">'+esc(f.name)+'</option>';}).join('');var initFi=(fsup.length===1)?0:'';var routeOpts=(fsup.length===1)?flightRouteOptions(0):'<option value="">Choose supplier first…</option>';h+='<div style="margin:0 0 16px;border-left:2px solid rgba(135,169,150,.45);padding:0 0 2px 14px"><div class="fld" style="max-width:640px;margin:0 0 6px"><label>Flight supplier <span style="color:var(--muted)">(per seat, scheduled)</span></label><select id="f-flsupplier">'+supOpts+'</select></div><div class="fld" style="max-width:640px;margin:0"><select class="fl-pick" id="f-flpick" data-sup="'+initFi+'"'+(fsup.length===1?'':' disabled')+'>'+routeOpts+'</select></div><div style="font-size:.7rem;color:var(--muted);margin:6px 0 0">Adds a leg at the seat rate &times; '+tripPax()+' guests (rate follows the selected rate year) — edit the amount below if only some guests fly.</div></div>';}
     h+=liSection('flights','Flights','Route — e.g. WDH → Sossusvlei'); }
-  else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates. Each lodge shows its own activities plus any activity providers in that region (STO nett, valid 2026/2027). You can still add your own line below.</p>';var _seenL={},_seenR={},_body='';S.lodges.forEach(function(d,li){if(d.lodgeIdx<0||_seenL[d.lodgeIdx])return;var L=RATES.lodges[d.lodgeIdx];if(!L)return;_seenL[d.lodgeIdx]=1;var acts=lodgeActivities(L);var provs=(!_seenR[L.region])?actProvidersIn(L.region):[];if(!acts.length&&!provs.length)return;var block='<div style="margin:0 0 22px;border-left:2px solid rgba(200,90,23,.25);padding:0 0 2px 14px">';block+='<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#c85a17;margin:0 0 8px">'+esc(L.name)+'</div>';if(acts.length){var opts='<option value="">Add lodge activity…</option>'+acts.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(L.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>'}).join('');block+='<div class="fld" style="max-width:520px;margin:0 0 8px"><select class="act-pick" data-ord="'+li+'">'+opts+'</select></div>';}if(provs.length){_seenR[L.region]=1;var provOpts=(provs.length===1)?'<option value="'+provs[0].i+'" selected>'+esc(provs[0].p.name)+'</option>':'<option value="">Choose provider…</option>'+provs.map(function(x){return '<option value="'+x.i+'">'+esc(x.p.name)+'</option>';}).join('');var initGi=(provs.length===1)?provs[0].i:'';var actOpts=(provs.length===1)?provActOptions(provs[0].i):'<option value="">Choose provider first…</option>';block+='<div style="margin:0"><div class="fld" style="max-width:520px;margin:0 0 6px"><label style="color:var(--muted)">'+esc(L.region)+' activity providers</label><select class="prov-pick" data-region="'+esc(L.region)+'">'+provOpts+'</select></div><div class="fld" style="max-width:520px;margin:0"><select class="prov-act-pick" data-ord="'+li+'" data-prov="'+initGi+'"'+(provs.length===1?'':' disabled')+'>'+actOpts+'</select></div></div>';}var _mine=S.activities.map(function(x,ix){return {x:x,i:ix};}).filter(function(o){return o.x.ord===li&&((o.x.name||'').trim()!==''||num(o.x.amount)>0);});if(_mine.length){var _px=tripPax();var _st=0;_mine.forEach(function(o){_st+=actLine(o.x);});block+='<div style="margin:10px 0 0;max-width:760px">'+actRowHeader()+_mine.map(function(o){return actRow(o.x,o.i,_px);}).join('')+'<div class="sec-total" style="margin-top:2px"><span class="lbl">'+esc(L.name)+' subtotal</span><span class="amt" data-ordtotal="'+li+'">'+money(_st)+'</span></div></div>';}block+='</div>';_body+=block;});if(_body)h+='<div style="margin:0 0 18px">'+_body+'</div>';h+=liActivities(); }
+  else if(active==='activities'){ h='<h2>Activities</h2><p class="lead">Excursions and activities outside lodge rates. Each lodge shows its own activities plus any activity providers in that region (STO nett, valid 2026/2027). You can still add your own line below.</p>';var _seenL={},_seenR={},_body='';S.lodges.forEach(function(d,li){if(d.lodgeIdx<0||_seenL[d.lodgeIdx])return;var L=RATES.lodges[d.lodgeIdx];if(!L)return;_seenL[d.lodgeIdx]=1;var acts=lodgeActivities(L);var provs=(!_seenR[L.region])?actProvidersIn(L.region):[];if(!acts.length&&!provs.length)return;var block='<div style="margin:0 0 22px;border-left:2px solid rgba(135,169,150,.45);padding:0 0 2px 14px">';block+='<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:#5f7f72;margin:0 0 8px">'+esc(L.name)+'</div>';if(acts.length){var opts='<option value="">Add lodge activity…</option>'+acts.map(function(a){return '<option value="'+a.p+'" data-name="'+esc(L.name+' — '+a.n)+'">'+esc(a.n)+' — '+money(a.p)+'</option>'}).join('');block+='<div class="fld" style="max-width:520px;margin:0 0 8px"><select class="act-pick" data-ord="'+li+'">'+opts+'</select></div>';}if(provs.length){_seenR[L.region]=1;var provOpts=(provs.length===1)?'<option value="'+provs[0].i+'" selected>'+esc(provs[0].p.name)+'</option>':'<option value="">Choose provider…</option>'+provs.map(function(x){return '<option value="'+x.i+'">'+esc(x.p.name)+'</option>';}).join('');var initGi=(provs.length===1)?provs[0].i:'';var actOpts=(provs.length===1)?provActOptions(provs[0].i):'<option value="">Choose provider first…</option>';block+='<div style="margin:0"><div class="fld" style="max-width:520px;margin:0 0 6px"><label style="color:var(--muted)">'+esc(L.region)+' activity providers</label><select class="prov-pick" data-region="'+esc(L.region)+'">'+provOpts+'</select></div><div class="fld" style="max-width:520px;margin:0"><select class="prov-act-pick" data-ord="'+li+'" data-prov="'+initGi+'"'+(provs.length===1?'':' disabled')+'>'+actOpts+'</select></div></div>';}var _mine=S.activities.map(function(x,ix){return {x:x,i:ix};}).filter(function(o){return o.x.ord===li&&((o.x.name||'').trim()!==''||num(o.x.amount)>0);});if(_mine.length){var _px=tripPax();var _st=0;_mine.forEach(function(o){_st+=actLine(o.x);});block+='<div style="margin:10px 0 0;max-width:760px">'+actRowHeader()+_mine.map(function(o){return actRow(o.x,o.i,_px);}).join('')+'<div class="sec-total" style="margin-top:2px"><span class="lbl">'+esc(L.name)+' subtotal</span><span class="amt" data-ordtotal="'+li+'">'+money(_st)+'</span></div></div>';}block+='</div>';_body+=block;});if(_body)h+='<div style="margin:0 0 18px">'+_body+'</div>';h+=liActivities(); }
   else if(active==='extras'){ h='<h2>Extras</h2><p class="lead">Park fees, transfers, anything else.</p>'+liSection('extras','Extras','Extra item'); }
   else if(active==='botswana'){ h='<h2>Botswana / Delta / Vic Falls</h2><p class="lead">Cross-border USD segments. Pick an area, then a lodge, then a rate — or add a manual line. These are billed in <b>US$</b> and kept separate from the N$ totals.</p>'+botswanaSection(); }
   else if(active==='final'){
