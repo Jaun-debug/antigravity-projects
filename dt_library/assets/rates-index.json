@@ -1,6 +1,6 @@
 {
 "generated": "2026-09-23T18:09:03",
-"count": 298,
+"count": 297,
 "lodges": [
 {
 "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -9380,112 +9380,108 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 7761
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 10076
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 9591
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 12451
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 13616
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 17676
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 9591
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 12451
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 13616
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 2315
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 17676
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2860
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 4060
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2860
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 4060
-},
-{
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · DBB — per person sharing",
 "p": 4812
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · DBB — single",
+"p": 6247
+},
+{
+"n": "01 Apr – 31 May · DBB — per person sharing",
 "p": 6044
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · DBB — single",
+"p": 7846
+},
+{
+"n": "01 Jun – 31 Oct · DBB — per person sharing",
 "p": 10842
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · DBB — single",
+"p": 14075
+},
+{
+"n": "01 Nov – 19 Dec · DBB — per person sharing",
 "p": 6218
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · DBB — single",
+"p": 8072
+},
+{
+"n": "20 Dec – 05 Jan · DBB — per person sharing",
 "p": 6951
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1435
+"n": "20 Dec – 05 Jan · DBB — single",
+"p": 9024
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 1802
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 3233
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 1854
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 2073
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Private Activity — Classic (per party/night, max 6)",
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
 "p": 8841
 },
 {
-"n": "Scheduled Morning Drive — pp",
-"p": 2423
-},
-{
-"n": "Scheduled Afternoon Drive — pp",
-"p": 1469
-},
-{
-"n": "Scheduled Nature Walk — pp",
-"p": 361
-},
-{
-"n": "Lunch at camp (DBB) — pp",
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
 "p": 506
 },
 {
-"n": "Packed lunch (DBB) — pp",
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
 "p": 325
+},
+{
+"n": "Extras · Scheduled afternoon drive (nett, non-commissionable) — per person",
+"p": 1469
+},
+{
+"n": "Extras · Scheduled morning drive (nett, non-commissionable) — per person",
+"p": 2423
 }
 ],
 "rates_2027": [
@@ -9568,198 +9564,226 @@
 {
 "n": "20 Dec – 05 Jan · DBB — single",
 "p": 10107
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
+"p": 9902
+},
+{
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 530
+},
+{
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 340
+},
+{
+"n": "Extras · Scheduled afternoon drive (nett, non-commissionable) — per person",
+"p": 1544
+},
+{
+"n": "Extras · Scheduled morning drive (nett, non-commissionable) — per person",
+"p": 2544
 }
 ],
 "rack_2027": [
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 10431.6
+"p": 10866.25
 },
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 13542
+"p": 14106.25
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 12890.4
+"p": 13427.5
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 16734
+"p": 17431.25
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 18298.8
+"p": 19061.25
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 23756.4
+"p": 24746.25
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 12890.4
+"p": 13427.5
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 16734
+"p": 17431.25
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 18298.8
+"p": 19061.25
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 23756.4
+"p": 24746.25
 },
 {
 "n": "06 Jan – 31 Mar · DBB — per person sharing",
-"p": 6468
+"p": 6737.5
 },
 {
 "n": "06 Jan – 31 Mar · DBB — single",
-"p": 8396.4
+"p": 8746.25
 },
 {
 "n": "01 Apr – 31 May · DBB — per person sharing",
-"p": 8122.8
+"p": 8461.25
 },
 {
 "n": "01 Apr – 31 May · DBB — single",
-"p": 10545.6
+"p": 10985
 },
 {
 "n": "01 Jun – 31 Oct · DBB — per person sharing",
-"p": 14571.6
+"p": 15178.75
 },
 {
 "n": "01 Jun – 31 Oct · DBB — single",
-"p": 18916.8
+"p": 19705
 },
 {
 "n": "01 Nov – 19 Dec · DBB — per person sharing",
-"p": 8356.8
+"p": 8705
 },
 {
 "n": "01 Nov – 19 Dec · DBB — single",
-"p": 10849.2
+"p": 11301.25
 },
 {
 "n": "20 Dec – 05 Jan · DBB — per person sharing",
-"p": 9342
+"p": 9731.25
 },
 {
 "n": "20 Dec – 05 Jan · DBB — single",
-"p": 12128.4
+"p": 12633.75
+},
+{
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 530
+},
+{
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 340
+},
+{
+"n": "Extras · Scheduled afternoon drive (nett, non-commissionable) — per person",
+"p": 1544
+},
+{
+"n": "Extras · Scheduled morning drive (nett, non-commissionable) — per person",
+"p": 2544
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 9701.25
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 12595
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 11988.75
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 15563.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 17020
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 22095
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 11988.75
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 15563.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 17020
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 2893.75
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 22095
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 3575
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 5075
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 3575
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 5075
-},
-{
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · DBB — per person sharing",
 "p": 6015
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · DBB — single",
+"p": 7808.75
+},
+{
+"n": "01 Apr – 31 May · DBB — per person sharing",
 "p": 7555
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · DBB — single",
+"p": 9807.5
+},
+{
+"n": "01 Jun – 31 Oct · DBB — per person sharing",
 "p": 13552.5
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · DBB — single",
+"p": 17593.75
+},
+{
+"n": "01 Nov – 19 Dec · DBB — per person sharing",
 "p": 7772.5
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · DBB — single",
+"p": 10090
+},
+{
+"n": "20 Dec – 05 Jan · DBB — per person sharing",
 "p": 8688.75
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1793.75
+"n": "20 Dec – 05 Jan · DBB — single",
+"p": 11280
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2252.5
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 506
 },
 {
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 4041.25
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 325
 },
 {
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2317.5
+"n": "Extras · Scheduled afternoon drive (nett, non-commissionable) — per person",
+"p": 1469
 },
 {
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 2591.25
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
-"p": 1901.25
-},
-{
-"n": "Private Activity — Classic (per party/night, max 6)",
-"p": 11051.25
-},
-{
-"n": "Scheduled Morning Drive — pp",
-"p": 3028.75
-},
-{
-"n": "Scheduled Afternoon Drive — pp",
-"p": 1836.25
-},
-{
-"n": "Scheduled Nature Walk — pp",
-"p": 451.25
-},
-{
-"n": "Lunch at camp (DBB) — pp",
-"p": 632.5
-},
-{
-"n": "Packed lunch (DBB) — pp",
-"p": 406.25
+"n": "Extras · Scheduled morning drive (nett, non-commissionable) — per person",
+"p": 2423
 }
 ]
 },
@@ -9769,56 +9793,52 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 9424
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 12234
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 9763
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 12675
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 15500
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 20122
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 9763
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 12675
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 15500
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 2810
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 20122
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2912
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 4622
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2912
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 4622
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Private Activity — Classic (per party/night, max 6)",
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
 "p": 8841
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1521
 }
 ],
 "rates_2027": [
@@ -9861,102 +9881,98 @@
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
 "p": 22536
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
+"p": 9902
 }
 ],
 "rack_2027": [
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 12666
+"p": 13193.75
 },
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 16443.6
+"p": 17128.75
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 13122
+"p": 13668.75
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 17035.2
+"p": 17745
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 20830.8
+"p": 21698.75
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 27043.2
+"p": 28170
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 13122
+"p": 13668.75
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 17035.2
+"p": 17745
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 20830.8
+"p": 21698.75
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 27043.2
+"p": 28170
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 11780
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 15292.5
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 12203.75
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 15843.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 19375
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 25152.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 12203.75
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 15843.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 19375
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 3512.5
-},
-{
-"n": "Single Supplement — Apr–May",
-"p": 3640
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 5777.5
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 3640
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 5777.5
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
-"p": 1901.25
-},
-{
-"n": "Private Activity — Classic (per party/night, max 6)",
-"p": 11051.25
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1901.25
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 25152.5
 }
 ]
 },
@@ -9966,95 +9982,95 @@
 "region": "Damaraland",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 6221
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 8076
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 7592
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 9856
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 9648
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 12525
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 8015
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 10405
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 9012
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1855
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 11700
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2264
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 2877
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2390
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 2688
-},
-{
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · DBB — per person sharing",
 "p": 3828
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · DBB — single",
+"p": 4969
+},
+{
+"n": "01 Apr – 31 May · DBB — per person sharing",
 "p": 4934
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · DBB — single",
+"p": 6405
+},
+{
+"n": "01 Jun – 31 Oct · DBB — per person sharing",
 "p": 7277
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · DBB — single",
+"p": 9447
+},
+{
+"n": "01 Nov – 19 Dec · DBB — per person sharing",
 "p": 4896
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · DBB — single",
+"p": 6356
+},
+{
+"n": "20 Dec – 05 Jan · DBB — per person sharing",
 "p": 5218
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1141
+"n": "20 Dec – 05 Jan · DBB — single",
+"p": 6774
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 1471
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 2170
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 1460
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 1556
-},
-{
-"n": "Pilot / Guide (pp / night)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Lunch at camp (DBB) — pp",
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
 "p": 506
 },
 {
-"n": "Packed lunch (DBB) — pp",
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
 "p": 325
 }
 ],
@@ -10138,182 +10154,198 @@
 {
 "n": "20 Dec – 05 Jan · DBB — single",
 "p": 7180
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 530
+},
+{
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 340
 }
 ],
 "rack_2027": [
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 7912.8
+"p": 8242.5
 },
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 10272
+"p": 10700
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 9657.6
+"p": 10060
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 12537.6
+"p": 13060
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 12273.6
+"p": 12785
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 15933.6
+"p": 16597.5
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 10194
+"p": 10618.75
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 13233.6
+"p": 13785
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 11464.8
+"p": 11942.5
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 14883.6
+"p": 15503.75
 },
 {
 "n": "06 Jan – 31 Mar · DBB — per person sharing",
-"p": 4868.4
+"p": 5071.25
 },
 {
 "n": "06 Jan – 31 Mar · DBB — single",
-"p": 6320.4
+"p": 6583.75
 },
 {
 "n": "01 Apr – 31 May · DBB — per person sharing",
-"p": 6276
+"p": 6537.5
 },
 {
 "n": "01 Apr – 31 May · DBB — single",
-"p": 8148
+"p": 8487.5
 },
 {
 "n": "01 Jun – 31 Oct · DBB — per person sharing",
-"p": 9256.8
+"p": 9642.5
 },
 {
 "n": "01 Jun – 31 Oct · DBB — single",
-"p": 12016.8
+"p": 12517.5
 },
 {
 "n": "01 Nov – 19 Dec · DBB — per person sharing",
-"p": 6244.8
+"p": 6505
 },
 {
 "n": "01 Nov – 19 Dec · DBB — single",
-"p": 8107.2
+"p": 8445
 },
 {
 "n": "20 Dec – 05 Jan · DBB — per person sharing",
-"p": 6637.2
+"p": 6913.75
 },
 {
 "n": "20 Dec – 05 Jan · DBB — single",
-"p": 8616
+"p": 8975
+},
+{
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 530
+},
+{
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 340
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 7776.25
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 10095
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 9490
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 12320
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 12060
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 15656.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 10018.75
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 13006.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 11265
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 2318.75
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 14625
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2830
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 3596.25
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2987.5
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 3360
-},
-{
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · DBB — per person sharing",
 "p": 4785
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · DBB — single",
+"p": 6211.25
+},
+{
+"n": "01 Apr – 31 May · DBB — per person sharing",
 "p": 6167.5
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · DBB — single",
+"p": 8006.25
+},
+{
+"n": "01 Jun – 31 Oct · DBB — per person sharing",
 "p": 9096.25
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · DBB — single",
+"p": 11808.75
+},
+{
+"n": "01 Nov – 19 Dec · DBB — per person sharing",
 "p": 6120
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · DBB — single",
+"p": 7945
+},
+{
+"n": "20 Dec – 05 Jan · DBB — per person sharing",
 "p": 6522.5
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1426.25
+"n": "20 Dec – 05 Jan · DBB — single",
+"p": 8467.5
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 1838.75
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 506
 },
 {
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 2712.5
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 1825
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 1945
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1901.25
-},
-{
-"n": "Lunch at camp (DBB) — pp",
-"p": 632.5
-},
-{
-"n": "Packed lunch (DBB) — pp",
-"p": 406.25
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 325
 }
 ]
 },
@@ -17483,56 +17515,52 @@
 "region": "Kaokoland",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 14470
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 18785
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 14577
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 18924
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 24117
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 31309
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 14577
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 18924
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 24117
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 4315
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 31309
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 4347
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 7192
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 4347
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 7192
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Private Activity — Classic (per party/night, max 6)",
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
 "p": 8841
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1521
 }
 ],
 "rates_2027": [
@@ -17575,102 +17603,98 @@
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
 "p": 36006
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
+"p": 9902
 }
 ],
 "rack_2027": [
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 19968
+"p": 20800
 },
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 25922.4
+"p": 27002.5
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 20116.8
+"p": 20955
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 26116.8
+"p": 27205
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 33282
+"p": 34668.75
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 43207.2
+"p": 45007.5
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 20116.8
+"p": 20955
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 26116.8
+"p": 27205
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 33282
+"p": 34668.75
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 43207.2
+"p": 45007.5
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 18087.5
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 23481.25
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 18221.25
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 23655
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 30146.25
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 39136.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 18221.25
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 23655
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 30146.25
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 5393.75
-},
-{
-"n": "Single Supplement — Apr–May",
-"p": 5433.75
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 8990
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 5433.75
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 8990
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
-"p": 1901.25
-},
-{
-"n": "Private Activity — Classic (per party/night, max 6)",
-"p": 11051.25
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1901.25
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 39136.25
 }
 ]
 },
@@ -19037,113 +19061,188 @@
 "region": "Skeleton Coast",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 16196
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 21026
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 17557
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 22793
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 27098
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 35179
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 17560
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 22797
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 27098
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 4830
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 35179
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 5236
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 8081
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 5237
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 8081
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Private Activity — Classic (per party/night, max 6)",
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
 "p": 8841
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1521
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 20245
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 26282.5
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 21946.25
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 28491.25
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 33872.5
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 43973.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 21950
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 28496.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 33872.5
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 6037.5
-},
-{
-"n": "Single Supplement — Apr–May",
-"p": 6545
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 10101.25
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 6546.25
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 10101.25
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
-"p": 1901.25
-},
-{
-"n": "Private Activity — Classic (per party/night, max 6)",
-"p": 11051.25
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1901.25
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 43973.75
 }
 ],
-"rack_2027": []
+"rack_2027": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 23281.25
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 30225
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
+"p": 25238.75
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 32765
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 38953.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 50570
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 25238.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 32765
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 38953.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 50570
+}
+],
+"rates_2027": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 18625
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 24180
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
+"p": 20191
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 26212
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 31163
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 40456
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 20191
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 26212
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 31163
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 40456
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
+"p": 9902
+}
+]
 },
 {
 "file": "/ratesheets/ababis_ratesheet_v3.html",
@@ -24646,100 +24745,112 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 5826
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 7563
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 6982
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 9064
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 9329
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 12111
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 6982
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 9064
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 9329
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1737
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 12111
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2082
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 2782
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2082
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 2782
-},
-{
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · DBB — per person sharing",
 "p": 3586
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · DBB — single",
+"p": 4655
+},
+{
+"n": "01 Apr – 31 May · DBB — per person sharing",
 "p": 4539
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · DBB — single",
+"p": 5893
+},
+{
+"n": "01 Jun – 31 Oct · DBB — per person sharing",
 "p": 6695
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · DBB — single",
+"p": 8691
+},
+{
+"n": "01 Nov – 19 Dec · DBB — per person sharing",
 "p": 4633
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · DBB — single",
+"p": 6015
+},
+{
+"n": "20 Dec – 05 Jan · DBB — per person sharing",
 "p": 5020
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1069
+"n": "20 Dec – 05 Jan · DBB — single",
+"p": 6517
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 1354
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 1996
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 1382
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 1497
-},
-{
-"n": "Pilot / Guide (pp / night)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Lunch at camp (DBB) — pp",
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
 "p": 506
 },
 {
-"n": "Packed lunch (DBB) — pp",
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
 "p": 325
 },
 {
-"n": "Sossusvlei Ballooning Safari — pp (min 2)",
+"n": "Extras · Sossusvlei ballooning 02 Jan – 14 Jan — per person, min 2 guests",
 "p": 8271
+},
+{
+"n": "Extras · Sossusvlei ballooning 16 Feb – 30 Jun — per person, min 2 guests",
+"p": 8271
+},
+{
+"n": "Extras · Sossusvlei ballooning 01 Jul – 24 Dec — per person, min 2 guests",
+"p": 8938
+},
+{
+"n": "Extras · Sossusvlei ballooning 26 Dec – 31 Dec — per person, min 2 guests",
+"p": 8938
 }
 ],
 "rates_2027": [
@@ -24822,186 +24933,206 @@
 {
 "n": "20 Dec – 05 Jan · DBB — single",
 "p": 7038
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 530
+},
+{
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 340
+},
+{
+"n": "Extras · Sossusvlei ballooning 02 Jan – 14 Jan — per person, min 2 guests",
+"p": 8938
+},
+{
+"n": "Extras · Sossusvlei ballooning 16 Feb – 30 Jun — per person, min 2 guests",
+"p": 8938
 }
 ],
 "rack_2027": [
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 7550.4
+"p": 7865
 },
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 9801.6
+"p": 10210
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 9050.4
+"p": 9427.5
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 11749.2
+"p": 12238.75
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 12874.8
+"p": 13411.25
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 16714.8
+"p": 17411.25
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 9050.4
+"p": 9427.5
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 11749.2
+"p": 12238.75
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 12091.2
+"p": 12595
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 15697.2
+"p": 16351.25
 },
 {
 "n": "06 Jan – 31 Mar · DBB — per person sharing",
-"p": 4647.6
+"p": 4841.25
 },
 {
 "n": "06 Jan – 31 Mar · DBB — single",
-"p": 6033.6
+"p": 6285
 },
 {
 "n": "01 Apr – 31 May · DBB — per person sharing",
-"p": 5882.4
+"p": 6127.5
 },
 {
 "n": "01 Apr – 31 May · DBB — single",
-"p": 7636.8
+"p": 7955
 },
 {
 "n": "01 Jun – 31 Oct · DBB — per person sharing",
-"p": 9238.8
+"p": 9623.75
 },
 {
 "n": "01 Jun – 31 Oct · DBB — single",
-"p": 11994
+"p": 12493.75
 },
 {
 "n": "01 Nov – 19 Dec · DBB — per person sharing",
-"p": 6006
+"p": 6256.25
 },
 {
 "n": "01 Nov – 19 Dec · DBB — single",
-"p": 7796.4
+"p": 8121.25
 },
 {
 "n": "20 Dec – 05 Jan · DBB — per person sharing",
-"p": 6505.2
+"p": 6776.25
 },
 {
 "n": "20 Dec – 05 Jan · DBB — single",
-"p": 8445.6
+"p": 8797.5
+},
+{
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 530
+},
+{
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 340
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 7282.5
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 9453.75
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 8727.5
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 11330
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 11661.25
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 15138.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 8727.5
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 11330
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 11661.25
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 2171.25
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 15138.75
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 2602.5
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 3477.5
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 2602.5
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 3477.5
-},
-{
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · DBB — per person sharing",
 "p": 4482.5
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · DBB — single",
+"p": 5818.75
+},
+{
+"n": "01 Apr – 31 May · DBB — per person sharing",
 "p": 5673.75
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · DBB — single",
+"p": 7366.25
+},
+{
+"n": "01 Jun – 31 Oct · DBB — per person sharing",
 "p": 8368.75
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · DBB — single",
+"p": 10863.75
+},
+{
+"n": "01 Nov – 19 Dec · DBB — per person sharing",
 "p": 5791.25
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · DBB — single",
+"p": 7518.75
+},
+{
+"n": "20 Dec – 05 Jan · DBB — per person sharing",
 "p": 6275
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 1336.25
+"n": "20 Dec – 05 Jan · DBB — single",
+"p": 8146.25
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 1692.5
+"n": "Extras · Lunch at camp (DBB bookings, nett, non-commissionable) — per person",
+"p": 506
 },
 {
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 2495
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 1727.5
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 1871.25
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1901.25
-},
-{
-"n": "Lunch at camp (DBB) — pp",
-"p": 632.5
-},
-{
-"n": "Packed lunch (DBB) — pp",
-"p": 406.25
-},
-{
-"n": "Sossusvlei Ballooning Safari — pp (min 2)",
-"p": 10338.75
+"n": "Extras · Packed lunch (DBB bookings, nett, non-commissionable) — per person",
+"p": 325
 }
 ]
 },
@@ -25011,60 +25142,68 @@
 "region": "Sossusvlei",
 "rates": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 13821
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 17943
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 14319
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 18589
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 22735
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 29515
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 14319
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 18589
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 22735
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 4122
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 29515
 },
 {
-"n": "Single Supplement — Apr–May",
-"p": 4270
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 6780
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 4270
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 6780
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
 "p": 1521
 },
 {
-"n": "Private Activity — Classic (per party/night, max 6)",
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
 "p": 8841
 },
 {
-"n": "Sossusvlei Ballooning Safari — pp (min 2)",
+"n": "Extras · Sossusvlei ballooning 02 Jan – 14 Jan — per person, min 2 guests",
 "p": 8271
 },
 {
-"n": "Pilot / Guide (pp / night)",
-"p": 1521
+"n": "Extras · Sossusvlei ballooning 16 Feb – 30 Jun — per person, min 2 guests",
+"p": 8271
+},
+{
+"n": "Extras · Sossusvlei ballooning 01 Jul – 24 Dec — per person, min 2 guests",
+"p": 8938
+},
+{
+"n": "Extras · Sossusvlei ballooning 26 Dec – 31 Dec — per person, min 2 guests",
+"p": 8938
 }
 ],
 "rates_2027": [
@@ -25107,106 +25246,106 @@
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
 "p": 33351
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night",
+"p": 1673
+},
+{
+"n": "Extras · Private activities (Classic camps) — per party per night, max 6 guests",
+"p": 9902
+},
+{
+"n": "Extras · Sossusvlei ballooning 02 Jan – 14 Jan — per person, min 2 guests",
+"p": 8938
+},
+{
+"n": "Extras · Sossusvlei ballooning 16 Feb – 30 Jun — per person, min 2 guests",
+"p": 8938
 }
 ],
 "rack_2027": [
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 18741.6
+"p": 19522.5
 },
 {
 "n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 24331.2
+"p": 25345
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 19417.2
+"p": 20226.25
 },
 {
 "n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 25207.2
+"p": 26257.5
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 30828
+"p": 32112.5
 },
 {
 "n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 40021.2
+"p": 41688.75
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 19417.2
+"p": 20226.25
 },
 {
 "n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 25207.2
+"p": 26257.5
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 30828
+"p": 32112.5
 },
 {
 "n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 40021.2
+"p": 41688.75
 }
 ],
 "rack_2026": [
 {
-"n": "PP Sharing — Jan–Mar",
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
 "p": 17276.25
 },
 {
-"n": "PP Sharing — Apr–May",
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 22428.75
+},
+{
+"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
 "p": 17898.75
 },
 {
-"n": "PP Sharing — Jun–Oct (peak)",
+"n": "01 Apr – 31 May · Fully Inclusive — single",
+"p": 23236.25
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
 "p": 28418.75
 },
 {
-"n": "PP Sharing — Nov–19 Dec",
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 36893.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
 "p": 17898.75
 },
 {
-"n": "PP Sharing — 20 Dec–5 Jan (festive)",
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 23236.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
 "p": 28418.75
 },
 {
-"n": "Single Supplement — Jan–Mar",
-"p": 5152.5
-},
-{
-"n": "Single Supplement — Apr–May",
-"p": 5337.5
-},
-{
-"n": "Single Supplement — Jun–Oct (peak)",
-"p": 8475
-},
-{
-"n": "Single Supplement — Nov–19 Dec",
-"p": 5337.5
-},
-{
-"n": "Single Supplement — 20 Dec–5 Jan (festive)",
-"p": 8475
-},
-{
-"n": "Pilot / Guide (pp / night, incl. meals)",
-"p": 1901.25
-},
-{
-"n": "Private Activity — Classic (per party/night, max 6)",
-"p": 11051.25
-},
-{
-"n": "Sossusvlei Ballooning Safari — pp (min 2)",
-"p": 10338.75
-},
-{
-"n": "Pilot / Guide (pp / night)",
-"p": 1901.25
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 36893.75
 }
 ]
 },
@@ -37606,97 +37745,6 @@
 "p": 1800
 }
 ]
-},
-{
-"file": "/ratesheets/wilderness_hoanib_skeleton_coast.html",
-"name": "Wilderness Hoanib Skeleton Coast",
-"region": "Skeleton Coast",
-"rates": [],
-"rates_2027": [
-{
-"n": "Per person, sharing — FI: 6-Jan-27 to 31-Mar-27",
-"p": 18625
-},
-{
-"n": "Single supplement — FI: 6-Jan-27 to 31-Mar-27",
-"p": 5555
-},
-{
-"n": "Per person, sharing — FI: 1-Apr-27 to 31-May-27",
-"p": 20191
-},
-{
-"n": "Single supplement — FI: 1-Apr-27 to 31-May-27",
-"p": 6021
-},
-{
-"n": "Per person, sharing — FI: 1-Jun-27 to 31-Oct-27",
-"p": 31163
-},
-{
-"n": "Single supplement — FI: 1-Jun-27 to 31-Oct-27",
-"p": 9293
-},
-{
-"n": "Per person, sharing — FI: 1-Nov-27 to 19-Dec-27",
-"p": 20191
-},
-{
-"n": "Single supplement — FI: 1-Nov-27 to 19-Dec-27",
-"p": 6021
-},
-{
-"n": "Per person, sharing — FI: 20-Dec-27 to 5-Jan-28",
-"p": 31163
-},
-{
-"n": "Single supplement — FI: 20-Dec-27 to 5-Jan-28",
-"p": 9293
-}
-],
-"rack_2027": [
-{
-"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
-"p": 23281.25
-},
-{
-"n": "06 Jan – 31 Mar · Fully Inclusive — single",
-"p": 30225
-},
-{
-"n": "01 Apr – 31 May · Fully Inclusive — per person sharing",
-"p": 25238.75
-},
-{
-"n": "01 Apr – 31 May · Fully Inclusive — single",
-"p": 32765
-},
-{
-"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
-"p": 38953.75
-},
-{
-"n": "01 Jun – 31 Oct · Fully Inclusive — single",
-"p": 50570
-},
-{
-"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
-"p": 25238.75
-},
-{
-"n": "01 Nov – 19 Dec · Fully Inclusive — single",
-"p": 32765
-},
-{
-"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
-"p": 38953.75
-},
-{
-"n": "20 Dec – 05 Jan · Fully Inclusive — single",
-"p": 50570
-}
-],
-"rack_2026": []
 },
 {
 "file": "/ratesheets/camp_khwai.html",
