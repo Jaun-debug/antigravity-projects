@@ -874,7 +874,7 @@ function renderPanel(){persist();
     }).join('');
     if(!S.lodges.length) body='<p class="muted">No lodges yet — add days, or build in the card itinerary and use “Cost this itinerary”.</p>';
     h='<h2>Lodges &amp; Accommodation</h2><p class="lead">Pick a lodge, then enter how many guests in each rate type — PP sharing, single, child. Each box pulls that lodge’s matching rate (the room/season dropdown sets the sharing rate). Lodges marked <b>ᴬ</b> offer optional activities — add them in step 6. Picking a 2027 check-in date sets the rate year automatically. Each day is a card, in the order they will be travelled &mdash; drag one by the grip beside its number to visit a lodge earlier or later; nights, rates, meals and its activities move with it.</p>'
-      +'<div class="fld" style="max-width:230px"><label>Safari start date (check-in, lodge 1)</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'"></div>'+'<div style="display:flex;gap:8px;align-items:center;margin:0 0 14px"><span style="font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted)">Rate year</span>'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(135,169,150,.7);background:'+(on?'rgba(135,169,150,.88)':'rgba(135,169,150,.10)')+';color:'+(on?'#fff':'#5f7f72')+'">'+y+'</button>';}).join('')+'</div>'
+      +'<div class="daterow"><div class="fld"><label>Date in</label><input id="f-startdate" type="date" value="'+(S.startDate||'')+'" title="Safari start \u2014 check-in at lodge 1"></div>'+'<div class="fld"><label id="f-enddate-l">'+nrDateOutLabel()+'</label><input id="f-enddate" type="date" readonly tabindex="-1" value="'+nrDateOut()+'" title="Worked out from the date in plus every lodge\u2019s nights"></div>'+'<div class="fld"><label>Rate year</label><div class="yrpair">'+['2026','2027'].map(function(y){var on=(S.year||'2026')===y;return '<button type="button" id="yr-'+y+'" style="cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;border:1px solid rgba(135,169,150,.7);background:'+(on?'rgba(135,169,150,.88)':'rgba(135,169,150,.10)')+';color:'+(on?'#fff':'#5f7f72')+'">'+y+'</button>';}).join('')+'</div></div></div>'
       +'<div class="bd daylist">'+body+'</div>'
       +'<button class="btn ghost addbtn" id="add-lodge" type="button">+ Add day / lodge</button>'
       +'<div class="sec-total"><span class="lbl">Accommodation total</span><span class="amt">'+money(accomTotal())+'</span></div>';
@@ -1512,5 +1512,23 @@ if(document.readyState!=='loading')ord();else document.addEventListener('DOMCont
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
 })();
 </script>
+<script id="nr-dateout">
+/* Date out = date in + the nights of every lodge card, kept in step as nights change. */
+function nrTotNights(){var n=0;(S.lodges||[]).forEach(function(d){n+=(parseInt(d.nights,10)||0);});return n;}
+function nrDateOut(){if(!S.startDate)return '';var n=nrTotNights();if(!n)return '';try{return addDays(S.startDate,n);}catch(e){return '';}}
+function nrDateOutLabel(){var n=nrTotNights();return 'Date out'+(n?' · '+n+' night'+(n===1?'':'s'):'');}
+function nrSyncDateOut(){var e=document.getElementById('f-enddate'),l=document.getElementById('f-enddate-l');if(e)e.value=nrDateOut();if(l)l.textContent=nrDateOutLabel();}
+(function(){var _u=window.updateTotals;if(typeof _u==='function'){window.updateTotals=function(){var r=_u.apply(this,arguments);try{nrSyncDateOut();}catch(e){}return r;};}
+  document.addEventListener('input',function(e){if(e.target&&(e.target.id==='f-startdate'||e.target.getAttribute('data-f')==='nights'))setTimeout(nrSyncDateOut,0);},true);
+  document.addEventListener('change',function(e){if(e.target&&(e.target.id==='f-startdate'||e.target.getAttribute('data-f')==='nights'))setTimeout(nrSyncDateOut,0);},true);})();
+</script>
+<style id="nr-daterow-css">
+.daterow{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin:0 0 16px}
+.daterow .fld{margin:0!important;flex:0 0 auto}
+.daterow input[type=date]{height:44px;box-sizing:border-box;width:190px}
+.daterow #f-enddate{color:var(--ink);cursor:default;opacity:.9}
+.daterow .yrpair{display:flex;gap:8px}
+.daterow .yrpair button{height:44px!important;box-sizing:border-box;padding:0 18px!important;font-size:.85rem!important;border-radius:5px!important}
+</style>
 </body>
 </html>
