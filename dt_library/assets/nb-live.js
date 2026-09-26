@@ -1,5 +1,5 @@
 /* Live NightsBridge availability on the rate sheets' booking calendar.
-   Next to "Check Live Availability" a square block shows the result for the dates picked:
+   On the calendar's "Night(s) selected" line a square block shows the result for the dates picked:
    green tick = rooms free, red cross = fully booked, spinner = checking, calendar = no dates yet.
    Hover gives the detail; clicking opens NightsBridge (the sheet's own nrAvail) as before.
    Works with both calendar versions on the site:
@@ -47,19 +47,22 @@
     box.title=t+(st==='yes'||st==='no'?' — click to open NightsBridge':'');
     box.setAttribute('aria-label',box.title);
   }
+  /* The block sits on the "N Night(s) Selected" line of the booking calendar; the old
+     "Check Live Availability" button and its note are hidden (the block opens NightsBridge). */
   function ensure(){
-    var wrap=document.getElementById('nr-cal-avail'); if(!wrap||wrap.style.display==='none'||wrap.offsetParent===null)return null;
-    var btn=wrap.querySelector('button'); if(!btn)return null;
-    var box=wrap.querySelector('.nbl-box');
+    var n=document.getElementById('nights-count')||document.getElementById('nights');
+    var line=n&&n.parentNode; if(!line||!/night\(s\)\s*selected/i.test(line.textContent||''))return null;
+    if(!document.getElementById('nbl-css')){var s=document.createElement('style');s.id='nbl-css';s.textContent=CSS+'#nr-cal-avail{display:none!important}';document.head.appendChild(s);}
+    if(line.offsetParent===null||!bbid())return null;
+    var box=line.querySelector('.nbl-box');
     if(!box){
-      if(!document.getElementById('nbl-css')){var s=document.createElement('style');s.id='nbl-css';s.textContent=CSS;document.head.appendChild(s);}
-      var row=document.createElement('div');row.className='nbl-row';btn.parentNode.insertBefore(row,btn);row.appendChild(btn);
-      box=document.createElement('span');box.setAttribute('role','button');box.tabIndex=0;row.appendChild(box);
+      line.style.display='flex';line.style.alignItems='center';line.style.justifyContent='center';line.style.flexWrap='wrap';
+      box=document.createElement('span');box.setAttribute('role','button');box.tabIndex=0;box.style.marginLeft='18px';
+      box.style.width='40px';box.style.height='40px';line.appendChild(box);
       box.addEventListener('click',function(){try{window.nrAvail();}catch(e){}});
       box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();try{window.nrAvail();}catch(x){}}});
       paint(box,'idle');
     }
-    var h=btn.offsetHeight||44; box.style.width=h+'px'; box.style.height=h+'px';
     return box;
   }
   function tick(){
