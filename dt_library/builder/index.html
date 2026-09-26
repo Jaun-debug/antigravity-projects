@@ -847,7 +847,7 @@ function renderPanel(){persist();
         }
         var mealUI='';
         if(d.lodgeIdx>-1){var _ml=lodgeMeals(RATES.lodges[d.lodgeIdx]);if(_ml.length||(d.meals&&d.meals.length)){var _mopts='<option value="">Add meal / meal plan…</option>'+_ml.map(function(rt){return '<option value="'+rt.p+'" data-name="'+esc(rt.n)+'">'+esc(rt.n)+' — '+money(rt.p)+' pp</option>';}).join('');var _tg=totGuests(d),_nn=(d.nights||0);var _chips=(d.meals||[]).map(function(m,mi){return '<div class="mealchip">'+esc(m.n)+'<span class="mealcalc">'+money(m.p)+' pp × '+_tg+' × '+_nn+'n = '+money(num(m.p)*_tg*_nn)+'</span><button class="mealrm" data-i="'+i+'" data-mi="'+mi+'" title="remove">&times;</button></div>';}).join('');mealUI='<div class="mealsel"><select class="meal-pick" data-i="'+i+'">'+_mopts+'</select>'+(_chips?'<div class="mealchips">'+_chips+'</div>':'')+'</div>';}}
-        var _up27='';if((S.year||'2026')==='2027'&&d.lodgeIdx>-1&&!has2027(RATES.lodges[d.lodgeIdx])){var _pc=up27Of(RATES.lodges[d.lodgeIdx]);_up27='<div class="up27"><span class="up27-t">No 2027 rates yet \u2014 quoting the 2026 rates plus</span><input type="number" min="0" max="100" step="1" value="'+_pc+'" data-i="'+i+'" data-f="up27" title="Percentage added to every 2026 rate for this lodge"><span class="up27-t">%</span></div>';}roomCell='<div class="roomcell"><label class="fld2"><span>Room / rate</span><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></label>'+_up27+boxes+mealUI+'</div>';
+        var _up27='';if((S.year||'2026')==='2027'&&d.lodgeIdx>-1&&!has2027(RATES.lodges[d.lodgeIdx])){var _pc=up27Of(RATES.lodges[d.lodgeIdx]);_up27='<label class="fld2 up27f" title="No 2027 rates yet \u2014 the 2026 rates plus this percentage"><span>2026 rate + %</span><input type="number" min="0" max="100" step="1" value="'+_pc+'" data-i="'+i+'" data-f="up27"></label>';}roomCell='<div class="roomcell"><div class="roomrow"><label class="fld2 roomsel"><span>Room / rate</span><select data-i="'+i+'" data-f="roomIdx">'+roomOpts+'</select></label>'+_up27+'</div>'+boxes+mealUI+'</div>';
         paxCell='';
       }
       /* Header: which day, which lodge, what it costs. Everything you change
@@ -1529,8 +1529,10 @@ function nrSyncDateOut(){var e=document.getElementById('f-enddate'),l=document.g
   document.addEventListener('change',function(e){if(e.target&&(e.target.id==='f-startdate'||e.target.getAttribute('data-f')==='nights'))setTimeout(nrSyncDateOut,0);},true);})();
 </script>
 <style id="nr-daterow-css">
-.up27{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px;padding:9px 12px;border:1px dashed rgba(184,149,106,.55);border-radius:5px;background:rgba(184,149,106,.07)}
-.up27 .up27-t{font-size:.8rem;color:#7a5f3c}
+.roomrow{display:flex;gap:10px;align-items:flex-end}
+.roomrow .roomsel{flex:1 1 auto;min-width:0}
+.roomrow .up27f{flex:0 0 auto}
+.roomrow .up27f>span{color:#a0763f}
 .daterow{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;margin:0 0 16px}
 .daterow .fld{margin:0!important;flex:0 0 auto}
 .daterow input[type=date]{height:44px;box-sizing:border-box;width:190px}
