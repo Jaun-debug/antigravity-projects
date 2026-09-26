@@ -1437,5 +1437,52 @@ if(document.readyState!=='loading')ord();else document.addEventListener('DOMCont
 </script>
 
 <script id="nr-viewitin-guard">(function(){function pop(msg){var p=document.getElementById("nr-pop");if(!p){p=document.createElement("div");p.id="nr-pop";p.style.cssText="position:fixed;left:50%;top:70px;transform:translateX(-50%) translateY(-12px);z-index:100001;background:#2C2824;color:#fff;font-family:Inter,sans-serif;font-size:.86rem;padding:12px 22px;border-radius:30px;box-shadow:0 8px 26px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;max-width:88vw;text-align:center;border-left:4px solid #c85a17";document.body.appendChild(p);}p.textContent=msg;requestAnimationFrame(function(){p.style.opacity="1";p.style.transform="translateX(-50%) translateY(0)";});clearTimeout(window.__nrPopT);window.__nrPopT=setTimeout(function(){p.style.opacity="0";p.style.transform="translateX(-50%) translateY(-12px)";},2600);}function empty(){try{return !((JSON.parse(localStorage.getItem("nr_itinerary"))||[]).length);}catch(e){return true;}}document.addEventListener("click",function(e){var a=e.target&&e.target.closest?e.target.closest('a[href="/itinerary/"],a[href="/itinerary"]'):null;if(!a)return;if(empty()){e.preventDefault();e.stopPropagation();pop("Nothing to view yet \u2014 add a lodge to your itinerary first.");}},true);})();</script>
+<style id="nr-step-css">
+/* Quantity steppers: [-] 2 [+] */
+.nr-step{display:inline-flex;align-items:stretch;border:1px solid #dcdcdc;border-radius:6px;overflow:hidden;background:#fff;vertical-align:middle;height:44px}
+.nr-step button{width:40px;border:0;background:#fff;color:#444;font:inherit;font-size:18px;line-height:1;cursor:pointer;padding:0;transition:background .15s}
+.nr-step button:hover{background:rgba(135,169,150,.14)}
+.nr-step button:active{background:rgba(135,169,150,.28)}
+#panel .nr-step input,.nr-step input{width:58px!important;min-width:0!important;height:auto!important;text-align:center!important;border:0!important;border-left:1px solid #cfcfcf!important;border-right:1px solid #cfcfcf!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;margin:0!important;padding:0 4px!important;font-size:1.05rem!important;color:#444!important;-moz-appearance:textfield}
+.nr-step{flex:0 0 auto!important;min-width:138px}
+.nr-step button{flex:0 0 40px}
+.fld2.nights{flex:0 0 140px!important}
+.qline .nr-step{flex:0 0 138px}
+.nr-step input::-webkit-outer-spin-button,.nr-step input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+</style>
+<script id="nr-step-js">
+/* Wraps every quantity box in the quote panel (rooms, singles, children, nights, guests, pax, days, markup)
+   in a [-] n [+] stepper. Money boxes (amounts, rates) are left as typed fields. The buttons fire the same
+   input/change events typing does, so every total recalculates exactly as before. */
+(function(){
+  function isQty(el){
+    if(el.type!=='number'||el.closest('.nr-step'))return false;
+    if(el.getAttribute('data-f')==='amount')return false;
+    if(/0\.00/.test(el.getAttribute('placeholder')||''))return false;
+    return !!el.closest('#panel');
+  }
+  function bump(el,dir){
+    var st=parseFloat(el.step); if(!(st>0))st=1;
+    var v=parseFloat(el.value); if(isNaN(v))v=0;
+    v=Math.round((v+dir*st)*100)/100;
+    var mn=parseFloat(el.min); if(!isNaN(mn)&&v<mn)v=mn;
+    var mx=parseFloat(el.max); if(!isNaN(mx)&&v>mx)v=mx;
+    el.value=v;
+    el.dispatchEvent(new Event('input',{bubbles:true}));
+    el.dispatchEvent(new Event('change',{bubbles:true}));
+  }
+  function wrap(el){
+    var w=document.createElement('span');w.className='nr-step';
+    var m=document.createElement('button');m.type='button';m.textContent='-';m.setAttribute('aria-label','Decrease');m.tabIndex=-1;
+    var p=document.createElement('button');p.type='button';p.textContent='+';p.setAttribute('aria-label','Increase');p.tabIndex=-1;
+    el.parentNode.insertBefore(w,el);w.appendChild(m);w.appendChild(el);w.appendChild(p);
+    m.addEventListener('click',function(e){e.preventDefault();bump(el,-1);});
+    p.addEventListener('click',function(e){e.preventDefault();bump(el,1);});
+  }
+  function scan(){document.querySelectorAll('#panel input[type="number"]').forEach(function(el){if(isQty(el))wrap(el);});}
+  function go(){scan();try{new MutationObserver(scan).observe(document.getElementById('panel')||document.body,{childList:true,subtree:true});}catch(e){}}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
+})();
+</script>
 </body>
 </html>
