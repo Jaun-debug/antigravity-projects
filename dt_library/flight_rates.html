@@ -262,7 +262,8 @@
         (function(){
           // Per-supplier hero images — replace each value with that operator's own landscape photo.
           var HERO_IMG={
-            mackair:'https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg'
+            mackair:'https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg',
+            wildernessair:'https://wetu.com/imageHandler/c1920x1080/28944/1741354188743_Final-Hoanib-40.jpg?fmt=jpg'
           };
           function hero(){return document.querySelector('.header.nr-hero');}
           function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"'),url('/media/hero-poster.jpg')";}
@@ -321,6 +322,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <!-- SUPPLIER TABS -->
         <div class="tabs-container">
             <button class="tab-link active" onclick="switchSupplier('mackair', this)">Mack Air</button>
+            <button class="tab-link" onclick="switchSupplier('wildernessair', this)">Wilderness Air Namibia</button>
         </div>
 
         <!-- ============================================== -->
@@ -411,6 +413,200 @@ document.addEventListener('DOMContentLoaded',function(){
                 <li>Rates <strong>exclude</strong> departure tax: USD 30 per person on local flights, USD 35 per person on international departures from Maun and Kasane, and USD 50 per person on international departures from Victoria Falls in 2027.</li>
                 <li>No fuel surcharge is applicable for the 2027 season.</li>
                 <li>Luggage terms and conditions are governed by the Mack Air luggage guidelines &mdash; soft bags only, with strict weight limits on light aircraft. Confirm allowances at time of booking.</li>
+            </ul>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- WILDERNESS AIR NAMIBIA -->
+        <!-- ============================================== -->
+        <div class="rate-card" data-years="2026 2027" id="supplier-wildernessair">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Wilderness Air Namibia</h2>
+                    <p>Wilderness&rsquo;s scheduled light-aircraft circuit through Doro Nawas, linking Windhoek (Hosea Kutako and Eros), Sossusvlei (Geluk), Swakopmund/Arandis, Damaraland, Hoanib, Purros, Serra Cafema and Ongava &mdash; plus per-plane lodge hops to third-party areas.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">Agent nett (no rack published)</span></div>
+                    <div class="spec-item"><span class="spec-label">Coverage</span><span class="spec-value">Namibia</span></div>
+                    <div class="spec-item"><span class="spec-label">Validity</span><span class="spec-value">06 Jan 2026 &ndash; 05 Jan 2027 &middot; 06 Jan 2027 &ndash; 05 Jan 2028</span></div>
+                    <div class="spec-item"><span class="spec-label">Currency</span><span class="spec-value">Rand = N$ (1:1)</span></div>
+                </div>
+            </div>
+
+            <div class="year-block" data-year="2026">
+            <h3>Seat Rates &mdash; valid 06-Jan-2026 to 05-Jan-2027</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Route</th><th class="info-col">Basis</th><th class="sto-col">Agent Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Desert Rhino Camp to Hoanib</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 2,706</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Desert Rhino Camp to Serra Cafema via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,279</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Desert Rhino to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 2,706</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 2,706</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Hoanib via Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 5,412</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Kulala (Geluk) via WDH Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 15,323</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Ongava</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 5,425</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Serra Cafema</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,059</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Sossusvlei Desert via Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 15,323</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 9,413</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Doro Nawas via Windhoek Int. airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 10,824</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Kulala (Geluk) via Windhoek Int Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 7,323</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Sossusvlei Desert Lodge via WDH Int. Apt</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 7,323</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 1,411</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Hoanib to Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 2,706</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Hoanib to Purros/ Orutjanda or vice versa</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 4,487</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Hoanib to Serra Cafema via Desert Rhino and Doro! Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 10,564</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala (Geluk) to Doro Nawas via Swakopmund/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 13,413</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala (Geluk) to Swakopmund/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 7,530</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala (Geluk) to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 5,911</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala(Geluk) to Eros Airport via WDH Int Apt</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 7,323</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Kulala (Geluk) via Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 16,029</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Sossusvlei Desert Lodge via Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 16,029</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 10,118</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Desert Rhino Camp via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,279</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,059</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Hoanib via Doro Nawas and Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 10,564</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Ongava via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 16,471</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Sossusvlei Desert Lodge to Doro Nawas via SWP/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 13,413</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Sosussvlei Desert Lodge to Swakopmund/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 7,530</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Swakopmund/Arandis to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 5,883</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Swakopmund/Arandis to Windhoek Int. Airport via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 15,296</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 9,413</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Eros Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 1,411</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Serra Cafema(viaDoroN,DRC&amp;Hoanib)</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 20,471</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Sossusvlei Desert Lodge</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 5,911</td><td class="rack-col">Not published</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Lodge Hops &mdash; per plane per flight</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Route</th><th class="info-col">Guests</th><th class="sto-col">Agent Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">1 Guest &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 13,065</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">2 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 13,065</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">3 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 19,592</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 26,131</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Mokuti or vice versa</strong></td><td class="info-col">1 Guest &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 10,315</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Mokuti or vice versa</strong></td><td class="info-col">2 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 10,315</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Mokuti or vice versa</strong></td><td class="info-col">3 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 15,485</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Mokuti or vice versa</strong></td><td class="info-col">4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 20,643</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Swakopmund/Arandis</strong></td><td class="info-col">1 - 4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 30,556</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Swakopmund/Arandis to Geluk</strong></td><td class="info-col">1 - 4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 30,556</td><td class="rack-col">Not published</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Departure Taxes &mdash; added to every seat rate where applicable</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Airport</th><th class="info-col">Basis</th><th class="sto-col">Rate</th><th class="rack-col">Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Windhoek International Airport domestic departure tax</strong></td><td class="info-col">Per person, prepaid to Wilderness</td><td class="price-highlight sto-col">N$ 212</td><td class="rack-col">N$ 212</td></tr>
+                        <tr><td><strong>Windhoek Eros Airport domestic departure tax</strong></td><td class="info-col">Per person, prepaid to Wilderness</td><td class="price-highlight sto-col">N$ 212</td><td class="rack-col">N$ 212</td></tr>
+                        <tr><td><strong>Swakopmund Airport/Arandis domestic departure tax</strong></td><td class="info-col">Per person, prepaid to Wilderness</td><td class="price-highlight sto-col">N$ 95.75</td><td class="rack-col">N$ 95.75</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+            <div class="year-block" data-year="2027">
+            <h3>Seat Rates &mdash; valid 06-Jan-2027 to 05-Jan-2028</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Route</th><th class="info-col">Basis</th><th class="sto-col">Agent Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Desert Rhino Camp to Hoanib</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 3,031</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Desert Rhino Camp to Serra Cafema via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 12,730</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Desert Rhino to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 3,031</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 3,031</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Hoanib via Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 6,061</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Kulala (Geluk) via WDH Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 17,162</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Ongava</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 6,076</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Serra Cafema</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 12,387</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Sossusvlei Desert via Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 19,126</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 10,542</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Doro Nawas via Windhoek Int. airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 12,123</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Kulala (Geluk) via Windhoek Int Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 8,201</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Sossusvlei Desert Lodge via WDH Int. Apt</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 8,320</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Eros Airport to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 1,581</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Hoanib to Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 3,031</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Hoanib to Purros/ Orutjanda or vice versa</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 5,115</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Hoanib to Serra Cafema via Desert Rhino and Doro! Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,923</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala (Geluk) to Doro Nawas via Swakopmund/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 15,023</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala (Geluk) to Swakopmund/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 8,433</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala (Geluk) to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 6,621</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Kulala(Geluk) to Eros Airport via WDH Int Apt</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 8,201</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Kulala (Geluk) via Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 17,953</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Sossusvlei Desert Lodge via Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 18,071</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Windhoek Int. Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,332</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Desert Rhino Camp via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 12,730</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 12,387</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Hoanib via Doro Nawas and Desert Rhino</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 11,923</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Serra Cafema to Ongava via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 18,448</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Sossusvlei Desert Lodge to Doro Nawas via SWP/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 15,172</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Sosussvlei Desert Lodge to Swakopmund/Arandis</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 8,584</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Swakopmund/Arandis to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 6,589</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Swakopmund/Arandis to Windhoek Int. Airport via Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 17,131</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Doro Nawas</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 10,542</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Eros Airport</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 1,581</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Serra Cafema(viaDoroN,DRC&amp;Hoanib)</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 22,928</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Windhoek Int. Airport to Sossusvlei Desert Lodge</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">N$ 6,739</td><td class="rack-col">Not published</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Lodge Hops &mdash; per plane per flight</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Route</th><th class="info-col">Guests</th><th class="sto-col">Agent Nett Rate</th><th class="rack-col">Rack Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">1 Guest &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 15,678</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">2 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 15,678</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">3 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 23,510</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Ongava to Doro Nawas</strong></td><td class="info-col">4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 31,357</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Doro Nawas to Swakopmund/Arandis</strong></td><td class="info-col">1 - 4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 36,667</td><td class="rack-col">Not published</td></tr>
+                        <tr><td><strong>Swakopmund/Arandis to Geluk</strong></td><td class="info-col">1 - 4 Guests &middot; per plane, max 4</td><td class="price-highlight sto-col">N$ 36,667</td><td class="rack-col">Not published</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Departure Taxes &mdash; added to every seat rate where applicable</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr><th>Airport</th><th class="info-col">Basis</th><th class="sto-col">Rate</th><th class="rack-col">Rate</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td><strong>Windhoek International Airport domestic departure tax</strong></td><td class="info-col">Per person, prepaid to Wilderness</td><td class="price-highlight sto-col">N$ 212</td><td class="rack-col">N$ 212</td></tr>
+                        <tr><td><strong>Windhoek Eros Airport domestic departure tax</strong></td><td class="info-col">Per person, prepaid to Wilderness</td><td class="price-highlight sto-col">N$ 212</td><td class="rack-col">N$ 212</td></tr>
+                        <tr><td><strong>Swakopmund Airport/Arandis domestic departure tax</strong></td><td class="info-col">Per person, prepaid to Wilderness</td><td class="price-highlight sto-col">N$ 95.75</td><td class="rack-col">N$ 95.75</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+
+            <h3>Conditions</h3>
+            <ul>
+                <li>Rates are agent nett, quoted in South African Rand (1 Rand = 1 Namibian Dollar), per person per seat, and can be used vice versa. Wilderness publishes no rack rate for these flights.</li>
+                <li>Seat rates may be booked on their own &mdash; they no longer have to be booked with Wilderness accommodation. The Desert Rhino Camp to Kulala flight is part of a circuit and carries no charge.</li>
+                <li>Departure taxes are excluded from all seat rates (R50 of the Windhoek International and Eros tax is the Namibia Airports Company security tax).</li>
+                <li>Routes not on the circuit are sole-use charters &mdash; ask your Wilderness Travel Designer. Some flights have 2 or 3 stops and guests may change aircraft.</li>
+                <li>Lodge hops: no set times (guests are told in camp the night before); maximum 4 guests, extra seats on request. The 2027 sheet lists no Ongava&ndash;Mokuti hop.</li>
+                <li>Swakopmund is often closed by fog; the aircraft then uses Arandis and guests are transferred by road.</li>
+                <li>Luggage: soft bags only, max 20 kg per person including hand luggage, max 30 &times; 35 &times; 70 cm. Extra 20 kg: NAD 2,500 per sector if pre-booked. Weights of guests over 100 kg are needed in advance.</li>
+                <li>Rates may change with taxes, navigation and landing fees, fuel prices or other costs outside Wilderness&rsquo;s control.</li>
             </ul>
         </div>
 
