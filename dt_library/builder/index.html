@@ -1041,7 +1041,7 @@ function bindPanel(){
       el.onchange=function(){renderPanel()};
     }
   });
-  if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:2});renderPanel();autoDistances()};
+  if(x=document.getElementById('add-lodge'))x.onclick=function(){S.lodges.push({region:'',lodgeIdx:-1,roomIdx:-1,qShare:parseInt(S.adults)||2,qSingle:0,qChild:parseInt(S.children)||0,nights:1});renderPanel();autoDistances()};
   document.querySelectorAll('#panel [data-lodge-rm]').forEach(function(b){b.onclick=function(){var ri=+b.dataset.lodgeRm;S.lodges.splice(ri,1);if(S.lodges[ri-1])S.lodges[ri-1].legToNext='';renderPanel();autoDistances()}});
   /* Drag a day onto another day to reorder it.
 
@@ -1496,6 +1496,8 @@ if(document.readyState!=='loading')ord();else document.addEventListener('DOMCont
     el.dispatchEvent(new Event('change',{bubbles:true}));
   }
   function wrap(el){
+    /* empty quantity boxes start at 0 (or their minimum); boxes with a hint such as an automatic day count keep it */
+    if(el.value===''&&/^0?$/.test(el.getAttribute('placeholder')||'')){var mn0=parseFloat(el.min);el.value=(mn0>0?mn0:0);el.defaultValue=el.value;}
     var w=document.createElement('span');w.className='nr-step';
     var m=document.createElement('button');m.type='button';m.textContent='-';m.setAttribute('aria-label','Decrease');m.tabIndex=-1;
     var p=document.createElement('button');p.type='button';p.textContent='+';p.setAttribute('aria-label','Increase');p.tabIndex=-1;

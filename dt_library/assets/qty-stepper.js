@@ -48,6 +48,8 @@
     var bg=c.backgroundColor; if(bg&&!/rgba\(0, 0, 0, 0\)/.test(bg))w.style.background=bg;
   }catch(e){}}
   function wrap(el){
+    /* empty quantity boxes start at 0 (or their minimum); boxes with a hint such as an automatic day count keep it */
+    if(el.value===''&&/^0?$/.test(el.getAttribute('placeholder')||'')){var mn0=parseFloat(el.min);el.value=(mn0>0?mn0:0);el.defaultValue=el.value;}
     var w=document.createElement('span');w.className='nr-step';look(el,w);
     var m=document.createElement('button');m.type='button';m.textContent='-';m.setAttribute('aria-label','Decrease');m.tabIndex=-1;
     var p=document.createElement('button');p.type='button';p.textContent='+';p.setAttribute('aria-label','Increase');p.tabIndex=-1;
