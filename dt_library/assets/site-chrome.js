@@ -543,3 +543,5 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     if(!pageYears()&&!hasNative()){ if(perCard())applyPerCard(year()); else if(year()==="2027"){hideTables(true);showNote(true);} }
   },250);});mo.observe(document.body||document.documentElement,{childList:true,subtree:true});}catch(x){}
 }catch(e){}})();
+
+;(function(){try{if(document.getElementById("nr-qty-stepper"))return;var s=document.createElement("script");s.id="nr-qty-stepper";s.src="/assets/qty-stepper.js";s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(e){}})();
