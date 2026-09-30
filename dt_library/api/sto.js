@@ -34902,259 +34902,274 @@ Object.assign(DDS_STO_BY_YEAR, {
  "name": "The Chobe Safari Lodge",
  "region": "Chobe",
  "currency": "US$",
- "validity": "2027/28 · 01 Apr 2027 – 31 Mar 2028",
- "note": "The Chobe Safari Lodge (Kasane, Botswana) — supplier sheet 'Nett Rates 2027/28' (file: Nett_Rates_2027-28 20 STO), valid 01 Apr 2027 to 31 Mar 2028, US$ per person per night incl. 14% VAT and government bed levy; return Kasane airport transfers, two included experiences per night, high tea and wi-fi included. Impact levy US$5 pppn, premium drinks, gratuities, visas and extra park fees excluded. Secret Season offer: 3+ nights earns 1 extra night free (same board), Luxury Rooms and Suites, travel 01 Dec 2027 to 30 Apr 2028. FIT: 20% non-refundable deposit, balance 30 days out. Loaded 30 Sep 2026. Commission basis: sheet says 'Nett'; file name says 20% STO.",
+ "validity": "01 Apr 2027 – 31 Mar 2028",
+ "note": "Supplier sheet 'Nett Rates 2027/28', valid 01 Apr 2027 – 31 Mar 2028. US$ per person per night, incl. 14% VAT, bed levy, return Kasane airport transfers and two included experiences per night. Children 12+ pay the adult rate; 0–5 free; child rate only when sharing with two full-paying adults. Suites and Explorer Suites are all inclusive only. Impact levy US$5 pppn is not included in room rates. Victoria Falls excursions exclude visas and park fees, based on two guests. Transfers: minimum two adults, children 6–11 half price. Secret Season: stay 3+ nights, 1 extra night free (Luxury Rooms and Suites, 01 Dec 2027 – 30 Apr 2028). FIT deposit 20%, balance 30 days before arrival. Sheet says 'Nett'; file name says 20% STO.",
  "sections": [
   {
-   "title": "2027/28 — Luxury Rooms (nett)",
+   "title": "Luxury Room · Half board",
    "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Half board · 2+ nights · adult sharing (incl. children 12 yrs+) — per person",
+     "Adult sharing · 2+ nights",
      "395"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Full board · 2+ nights · adult sharing (incl. children 12 yrs+) — per person",
-     "460"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · All inclusive · 2+ nights · adult sharing (incl. children 12 yrs+) — per person",
-     "510"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Half board · 2+ nights · single adult (with or without children) — per person",
+     "Single adult · 2+ nights",
      "555"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Full board · 2+ nights · single adult (with or without children) — per person",
-     "620"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · All inclusive · 2+ nights · single adult (with or without children) — per person",
-     "670"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Half board · 2+ nights · child 6–11 yrs, max 2, sharing with two adults (0–5 free) — per child",
+     "Child 6–11 · 2+ nights",
      "220"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Full board · 2+ nights · child 6–11 yrs, max 2, sharing with two adults (0–5 free) — per child",
-     "270"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · All inclusive · 2+ nights · child 6–11 yrs, max 2, sharing with two adults (0–5 free) — per child",
-     "320"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Half board · 1 night · adult sharing, max 4 adults — per person",
+     "Adult sharing · 1 night",
      "415"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Full board · 1 night · adult sharing, max 4 adults — per person",
-     "485"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · All inclusive · 1 night · adult sharing, max 4 adults — per person",
-     "535"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Half board · 1 night · single adult (with or without children) — per person",
+     "Single adult · 1 night",
      "575"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Full board · 1 night · single adult (with or without children) — per person",
+     "Child 6–11 · 1 night",
+     "230"
+    ]
+   ]
+  },
+  {
+   "title": "Luxury Room · Full board",
+   "rows": [
+    [
+     "Adult sharing · 2+ nights",
+     "460"
+    ],
+    [
+     "Single adult · 2+ nights",
+     "620"
+    ],
+    [
+     "Child 6–11 · 2+ nights",
+     "270"
+    ],
+    [
+     "Adult sharing · 1 night",
+     "485"
+    ],
+    [
+     "Single adult · 1 night",
      "650"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · All inclusive · 1 night · single adult (with or without children) — per person",
+     "Child 6–11 · 1 night",
+     "280"
+    ]
+   ]
+  },
+  {
+   "title": "Luxury Room · All inclusive",
+   "rows": [
+    [
+     "Adult sharing · 2+ nights",
+     "510"
+    ],
+    [
+     "Single adult · 2+ nights",
+     "670"
+    ],
+    [
+     "Child 6–11 · 2+ nights",
+     "320"
+    ],
+    [
+     "Adult sharing · 1 night",
+     "535"
+    ],
+    [
+     "Single adult · 1 night",
      "700"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Half board · 1 night · child 6–11 yrs, max 3, sharing with two adults (0–5 free) — per child",
-     "230"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · Full board · 1 night · child 6–11 yrs, max 3, sharing with two adults (0–5 free) — per child",
-     "280"
-    ],
-    [
-     "01 Apr 2027 – 31 Mar 2028 · Luxury Room · All inclusive · 1 night · child 6–11 yrs, max 3, sharing with two adults (0–5 free) — per child",
+     "Child 6–11 · 1 night",
      "335"
     ]
    ]
   },
   {
-   "title": "2027/28 — Suites & Explorer Suites, all inclusive only (nett)",
+   "title": "Suite · All inclusive",
    "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Suite · All inclusive · 2+ nights · adult sharing (incl. children 12 yrs+) — per person",
+     "Adult sharing · 2+ nights",
      "625"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Suite · All inclusive · 2+ nights · single adult (with or without children) — per person",
+     "Single adult · 2+ nights",
      "800"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Suite · All inclusive · 2+ nights · child 6–11 yrs, max 2, sharing with two adults (0–5 free) — per child",
+     "Child 6–11 · 2+ nights",
      "375"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Suite · All inclusive · 1 night · adult sharing, max 4 adults — per person",
+     "Adult sharing · 1 night",
      "740"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Suite · All inclusive · 1 night · single adult (with or without children) — per person",
+     "Single adult · 1 night",
      "935"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Suite · All inclusive · 1 night · child 6–11 yrs, max 3, sharing with two adults (0–5 free) — per child",
+     "Child 6–11 · 1 night",
      "460"
-    ],
+    ]
+   ]
+  },
+  {
+   "title": "Explorer Suite · All inclusive",
+   "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Explorer Suite · All inclusive · 2+ nights · adult sharing (incl. children 12 yrs+) — per person",
+     "Adult sharing · 2+ nights",
      "750"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Explorer Suite · All inclusive · 2+ nights · single adult (with or without children) — per person",
+     "Single adult · 2+ nights",
      "950"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Explorer Suite · All inclusive · 2+ nights · child 6–11 yrs, max 2, sharing with two adults (0–5 free) — per child",
+     "Child 6–11 · 2+ nights",
      "450"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Explorer Suite · All inclusive · 1 night · adult sharing, max 4 adults — per person",
+     "Adult sharing · 1 night",
      "880"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Explorer Suite · All inclusive · 1 night · single adult (with or without children) — per person",
+     "Single adult · 1 night",
      "1,095"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Explorer Suite · All inclusive · 1 night · child 6–11 yrs, max 3, sharing with two adults (0–5 free) — per child",
+     "Child 6–11 · 1 night",
      "545"
     ]
    ]
   },
   {
-   "title": "2027/28 — Private Chobe experiences & excursions (nett, US$)",
+   "title": "Private experiences",
    "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Private boat safari — per boat",
+     "Private boat safari · per boat",
      "150"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Private game drive — per vehicle",
+     "Private game drive · per vehicle",
      "200"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Scenic flight (fuel surcharge may apply) — per person",
+     "Scenic flight · per person",
      "80"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Photographic boat safari, excl. photo equipment (may include other guests) — per person",
+     "Photographic boat safari, excl. equipment · per person",
      "100"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Photographic boat safari, incl. photo equipment (may include other guests) — per person",
+     "Photographic boat safari, incl. equipment · per person",
      "150"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Kasai fishing, half day — per boat",
+     "Kasai fishing, half day · per boat",
      "200"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Kasai fishing, full day — per boat",
+     "Kasai fishing, full day · per boat",
      "300"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Extended private game drive, half day — per vehicle",
+     "Extended private game drive, half day · per vehicle",
      "250"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Extended private game drive, full day — per vehicle",
+     "Extended private game drive, full day · per vehicle",
      "400"
     ]
    ]
   },
   {
-   "title": "2027/28 — Victoria Falls excursions (nett, US$, excl. visas & park fees, based on two guests)",
+   "title": "Victoria Falls excursions · per person",
    "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Tour of Victoria Falls (Zimbabwe), guided — per person",
+     "Victoria Falls tour, guided",
      "150"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Tour of Victoria Falls (Zimbabwe), unguided — per person",
+     "Victoria Falls tour, unguided",
      "20"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Helicopter over Victoria Falls, 12 min Flight of Angels (fuel surcharge may apply) — per person",
+     "Helicopter, 12 min Flight of Angels",
      "175"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Helicopter over Victoria Falls, 25 min Zambezi Spectacular (fuel surcharge may apply) — per person",
+     "Helicopter, 25 min Zambezi Spectacular",
      "330"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · White water rafting — per person",
+     "White water rafting",
      "185"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Bungee jumping — per person",
+     "Bungee jumping",
      "195"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Devil's Pool, Livingstone Island (Angel Pool outside mid-Aug – late Dec) — per person",
+     "Devil's Pool / Angel Pool",
      "175"
     ]
    ]
   },
   {
-   "title": "2027/28 — Road transfers (nett, min two adults; children 6–11 pay half, 0–5 free)",
+   "title": "Road transfers · per person",
    "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Victoria Falls town, one way (2 hrs) — per person",
+     "Victoria Falls town · one way",
      "100"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Victoria Falls town, return — per person",
+     "Victoria Falls town · return",
      "130"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Victoria Falls airport, one way (2.5 hrs) — per person",
+     "Victoria Falls airport · one way",
      "110"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Victoria Falls airport, return — per person",
+     "Victoria Falls airport · return",
      "135"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Livingstone town or airport, one way (2 hrs) — per person",
+     "Livingstone town or airport · one way",
      "115"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Livingstone town or airport, return — per person",
+     "Livingstone town or airport · return",
      "230"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Transfer to Kazungula, one way (15 min) — per person",
+     "Kazungula · one way",
      "32"
     ]
    ]
   },
   {
-   "title": "2027/28 — Extras (nett)",
+   "title": "Extras",
    "rows": [
     [
-     "01 Apr 2027 – 31 Mar 2028 · Chobe dinner cruise — per person",
+     "Chobe dinner cruise · per person",
      "35"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Impact levy (not included in room rates) — per person per night",
+     "Impact levy · per person per night",
      "5"
     ],
     [
-     "01 Apr 2027 – 31 Mar 2028 · Guide / tour leader, groups under 10 rooms, dinner bed & breakfast — per person per night",
+     "Guide, groups under 10 rooms (DBB) · per night",
      "195"
     ]
    ]
