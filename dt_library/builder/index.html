@@ -448,6 +448,7 @@ function nbIdFor(L){
 // public availability API), so their chip just opens the portal — no live dot.
 var WW_URL='https://wilderness-window.com/login.html';
 var WW_LODGES={wildernessdamaralandcamp:1,wildernessdesertrhinocamp:1,wildernessdoronawas:1,wildernessserracafema:1,wildernesshoanibskeletoncoastcamp:1,wildernesskulaladesertlodge:1,wildernesslittlekulala:1};
+function wwChipHTML(){return '<a class="viewlink nbchip" href="'+WW_URL+'" target="_blank" rel="noopener" aria-label="Check availability on Wilderness Window" title="Check availability \u2014 opens Wilderness Window (sign in with the Desert Tracks agent login)"><span class="nblab"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="5.5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></a>';}
 function wwIsLodge(L){return !!(L&&WW_LODGES[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')]);}
 // Open NightsBridge pre-filled with this row's check-in date and night count.
 function nbOpenAvail(i){
@@ -721,7 +722,7 @@ function botswanaSection(){
   if(hasLodge){var L=RATES.lodges[+S._bwLodge];if(L)usdRates(L).forEach(function(rt){rateOpts+='<option value="'+rt.p+'" data-name="'+esc(L.name+' — '+rt.n)+'">'+esc(rt.n)+' — '+usd(rt.p)+'</option>';});}
   return '<div style="display:grid;gap:10px;max-width:640px;margin:0 0 20px">'
     +'<div class="fld"><label>Area</label><select id="bw-area">'+areaOpts+'</select></div>'
-    +'<div class="fld"><label>Lodge</label><select id="bw-lodge"'+(area?'':' disabled')+'>'+lodgeOpts+'</select></div>'
+    +'<div class="fld"><label>Lodge</label><div style="display:flex;gap:10px;align-items:center"><select id="bw-lodge" style="flex:1"'+(area?'':' disabled')+'>'+lodgeOpts+'</select>'+((hasLodge&&RATES.lodges[+S._bwLodge]&&/^wilderness\b/i.test(RATES.lodges[+S._bwLodge].name||''))?wwChipHTML():'')+'</div></div>'
     +'<div class="fld"><label>Rate <span style="color:var(--muted)">(US$, STO nett)</span></label><select id="bw-rate"'+(hasLodge?'':' disabled')+'>'+rateOpts+'</select></div>'
     +'</div>'
     +'<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px">Selected segments (US$)</div>'
