@@ -444,6 +444,11 @@ function nbIdFor(L){
   if(!rec){var inf=LODGEINFO[key];var u=inf&&inf.url?String(inf.url).replace(/\/+$/,''):'';var slug=u?u.split('/').pop():'';if(slug)rec=NBMAP[slug];}
   return rec&&rec.nb?rec.nb:'';
 }
+// Wilderness Namibia camps book through Wilderness Window (agent login, no
+// public availability API), so their chip just opens the portal — no live dot.
+var WW_URL='https://wilderness-window.com/login.html';
+var WW_LODGES={wildernessdamaralandcamp:1,wildernessdesertrhinocamp:1,wildernessdoronawas:1,wildernessserracafema:1,wildernesshoanibskeletoncoastcamp:1,wildernesskulaladesertlodge:1,wildernesslittlekulala:1};
+function wwIsLodge(L){return !!(L&&WW_LODGES[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')]);}
 // Open NightsBridge pre-filled with this row's check-in date and night count.
 function nbOpenAvail(i){
   var d=S.lodges[i];if(!d)return;
@@ -821,7 +826,7 @@ function renderPanel(){persist();
          you pick. */
       var lodgeVal=(d.lodgeIdx>-1&&RATES.lodges[d.lodgeIdx])?RATES.lodges[d.lodgeIdx].name:'';
       var roomOpts='<option value="-1">Room / rate…</option>',view='';
-      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _yr=(S.year||'2026');var _use27=!!(_oinf&&_yr==='2027'&&_oinf.orig_2027);var _pdf=_use27?_oinf.orig_2027:((_oinf&&_oinf.orig)?_oinf.orig:'');var _plab=_use27?'2027 source PDF':'Source PDF';var _orig=_pdf?'<a class="viewlink" href="'+esc(_pdf)+'" target="_blank" rel="noopener" title="Supplier source rate sheet (PDF) for the selected season" style="color:#7a8a72">'+_plab+' ↗</a>':'';var _shot='';var _nb=nbIdFor(L)?'<a class="viewlink nbchip" data-nbchip="'+i+'" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date"><span class="nbdot" data-nbdot="'+i+'"></span><span class="nblab"></span></a>':'';view=_orig+_shot;(window.NBHTML=window.NBHTML||{})[i]=_nb||'';}
+      if(d.lodgeIdx>-1){var L=RATES.lodges[d.lodgeIdx];{lodgeRates(L).forEach(function(rt,ri){if(isActivity(rt.n)||rt.a||isMeal(rt.n))return;roomOpts+='<option value="'+ri+'" title="'+esc(rt.n)+'" '+(d.roomIdx===ri?'selected':'')+'>'+esc(shortRate(rt.n))+' — '+money(rt.p)+'</option>'});}var _oinf=LODGEINFO[(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'')];var _yr=(S.year||'2026');var _use27=!!(_oinf&&_yr==='2027'&&_oinf.orig_2027);var _pdf=_use27?_oinf.orig_2027:((_oinf&&_oinf.orig)?_oinf.orig:'');var _plab=_use27?'2027 source PDF':'Source PDF';var _orig=_pdf?'<a class="viewlink" href="'+esc(_pdf)+'" target="_blank" rel="noopener" title="Supplier source rate sheet (PDF) for the selected season" style="color:#7a8a72">'+_plab+' ↗</a>':'';var _shot='';var _nb=wwIsLodge(L)?'<a class="viewlink nbchip" href="'+WW_URL+'" target="_blank" rel="noopener" aria-label="Check availability on Wilderness Window" title="Check availability \u2014 opens Wilderness Window (sign in with the Desert Tracks agent login)"><span class="nblab"><svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="5.5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span></a>':nbIdFor(L)?'<a class="viewlink nbchip" data-nbchip="'+i+'" href="#" onclick="nbOpenAvail('+i+');return false" title="Live availability on NightsBridge for this check-in date"><span class="nbdot" data-nbdot="'+i+'"></span><span class="nblab"></span></a>':'';view=_orig+_shot;(window.NBHTML=window.NBHTML||{})[i]=_nb||'';}
       var pn=rowPerNight(d), sub=rowSub(d);
       var regionLodgeCell, roomCell, paxCell;
       if(d.cap&&d.cap.length){

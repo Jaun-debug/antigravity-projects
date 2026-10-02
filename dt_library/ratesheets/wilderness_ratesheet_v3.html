@@ -179,10 +179,10 @@
     <div class="site-hero"><a class="scroll-explore" href="javascript:void(0)" onclick="exploreDown();return false" aria-label="Explore lodges"><span class="se-label">Explore</span><span class="scroll-cue" aria-hidden="true"></span></a><a class="grp-back" href="/">&#8592; Back to Home Page</a>
         <div class="hero-dot"></div>
         <span class="hero-display">Wilderness</span>
-        <span class="hero-display">Collection</span>
+        <span class="hero-display">Namibia</span>
         <div class="hero-rule"></div>
-        <p class="hero-tagline">Etosha. Elevated.</p>
-        <p class="hero-sub">STO 20 Rates &middot; Season 2026</p>
+        <p class="hero-tagline">Wilderness Namibia.</p>
+        <p class="hero-sub">Agent nett rates &middot; Seasons 2026 &amp; 2027</p>
     </div>
     <div class="gl-search"><h2 class="gl-head">Lodges</h2><input type="search" placeholder="Search lodges&hellip;" oninput="filterGL(this.value)" aria-label="Search lodges"></div><div class="lodge-grid" id="lodge-grid"></div>
 </div>
@@ -571,6 +571,15 @@ window.__nrCurBbid=function(){var id=window.__nrLodgeId||"";var d=(typeof DB!=="
 window.nrAvail=function(){var bbid=window.__nrCurBbid();if(!bbid){alert("Live NightsBridge availability isn't set up for this property yet \u2014 please use the enquiry form.");return;}var cs=(typeof calendarState!=="undefined"&&calendarState)?calendarState:{};var rs=cs.rangeStart,re=cs.rangeEnd;function loc(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}var iso,nights;if(rs instanceof Date){iso=loc(rs);nights=(re instanceof Date)?Math.max(1,Math.round((re-rs)/86400000)):1;}else{var d=new Date();d.setDate(d.getDate()+1);iso=loc(d);nights=1;}window.open("https://book.nightsbridge.com/"+bbid+"?startdate="+iso+"&nights="+nights,"_blank","noopener");};
 window.__nrSyncAvail=function(){var has=!!window.__nrCurBbid();var tab=document.getElementById("nr-avail-tab");if(tab)tab.style.display=has?"":"none";var cal=document.getElementById("global-dates-ui");if(cal){var b=document.getElementById("nr-cal-avail");if(has){if(!b){b=document.createElement("div");b.id="nr-cal-avail";b.style.cssText="margin-top:20px;text-align:center";b.innerHTML='<button type="button" onclick="nrAvail()" style="font-family:var(--font-body);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;border-radius:8px;border:1px solid var(--seafoam,#7BA99A);background:var(--seafoam,#7BA99A);color:#fff;cursor:pointer">Check Live Availability &#8599;</button>'+'<p style="font-family:var(--font-body);font-size:.68rem;color:var(--text-muted,#7A7269);margin-top:9px">Opens NightsBridge in a new tab with your selected dates</p>';cal.appendChild(b);}b.style.display="";}else if(b){b.style.display="none";}}};
 (function(){var _op=window.openProperty;if(typeof _op==="function"){window.openProperty=function(id){window.__nrLodgeId=id;var r=_op.apply(this,arguments);try{window.__nrSyncAvail();}catch(e){}return r;};}})();
+</script>
+<script>
+/* Wilderness Namibia camps are not on NightsBridge - availability is checked on
+   Wilderness Window (agent login, no public availability link), so the button
+   simply opens the portal. No live green/red dot is shown. */
+window.__nrWW="https://wilderness-window.com/login.html";
+window.nrAvail=function(){window.open(window.__nrWW,"_blank","noopener");};
+window.__nrSyncAvail=function(){var tab=document.getElementById("nr-avail-tab");if(tab)tab.style.display="";var cal=document.getElementById("global-dates-ui");if(!cal)return;var b=document.getElementById("nr-cal-avail");if(!b){b=document.createElement("div");b.id="nr-cal-avail";b.style.cssText="margin-top:20px;text-align:center";b.innerHTML='<button type="button" onclick="nrAvail()" style="font-family:var(--font-body);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:13px 30px;border-radius:8px;border:1px solid var(--seafoam,#7BA99A);background:var(--seafoam,#7BA99A);color:#fff;cursor:pointer">Check Availability on Wilderness Window &#8599;</button>'+'<p style="font-family:var(--font-body);font-size:.68rem;color:var(--text-muted,#7A7269);margin-top:9px">Opens Wilderness Window in a new tab &mdash; sign in with the Desert Tracks agent login, then search your dates</p>';cal.appendChild(b);}b.style.display="";};
+document.addEventListener("DOMContentLoaded",function(){try{window.__nrSyncAvail();}catch(e){}});
 </script>
 <style>#nr-photo-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:0 0 30px}#nr-photo-strip img{width:100%;height:210px;object-fit:cover;border-radius:12px;display:block;box-shadow:0 6px 18px rgba(44,40,36,.1);transition:transform .3s}#nr-photo-strip img:hover{transform:scale(1.02)}@media(max-width:700px){#nr-photo-strip{grid-template-columns:1fr}}</style>
 <script>
