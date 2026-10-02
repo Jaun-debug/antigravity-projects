@@ -1,6 +1,6 @@
 {
 "generated": "2026-09-23T18:09:03",
-"count": 298,
+"count": 312,
 "lodges": [
 {
 "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -54346,6 +54346,1602 @@
 ],
 "rates_2027": [],
 "rack_2027": []
+},
+{
+"file": "",
+"name": "Wilderness Linyanti Tented Camp",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 513
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 667
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 762
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 991
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 866
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 1126
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 967
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 1257
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 762
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 991
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 870
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 1131
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 641.25
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 833.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 952.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1238.75
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1082.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 1407.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 1208.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 1571.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 952.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1238.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 1087.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 1413.75
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Savuti",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 836
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1087
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1070
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1391
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1400
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 1820
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 1732
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 2252
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1070
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1391
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 1190
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 1547
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1045
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1358.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1337.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1738.75
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1750
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2275
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 2165
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 2815
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1337.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1738.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 1487.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 1933.75
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Mokete",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 939
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1221
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1030
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1339
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1190
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 1547
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 1471
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 1912
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1030
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1339
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 1145
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 1488
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1173.75
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1526.25
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1287.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1673.75
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1487.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 1933.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 1838.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 2390
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1287.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1673.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 1431.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 1860
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Chitabe",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1451
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1886
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1726
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2244
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2076
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2699
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 2883
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 3748
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1757
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2284
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 2883
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 3748
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests (Chitabe: a higher rate may apply, confirm before quoting)",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1813.75
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2357.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2157.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2805
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2595
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3373.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3603.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4685
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2196.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2855
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3603.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4685
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Chitabe Lediba",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1296
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1685
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1541
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2003
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1853
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2409
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 2574
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 3346
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1569
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2040
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 2574
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 3346
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests (Chitabe: a higher rate may apply, confirm before quoting)",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1620
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2106.25
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1926.25
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2503.75
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2316.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3011.25
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3217.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4182.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1961.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2550
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3217.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4182.5
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Little Vumbura",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1258
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1635
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1496
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1945
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1799
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2339
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 2499
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 3249
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1523
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1980
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 2499
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 3249
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1572.5
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2043.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1870
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2431.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2248.75
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2923.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3123.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4061.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1903.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2475
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3123.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4061.25
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Qorokwe",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1258
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1635
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1496
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1945
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1799
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2339
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 2499
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 3249
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1454
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1890
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 2499
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 3249
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 871
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1572.5
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2043.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1870
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2431.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2248.75
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2923.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3123.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4061.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1817.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2362.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3123.75
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4061.25
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness DumaTau",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1535
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1995
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2548
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3312
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3678
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4781
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3126
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4064
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 1147
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1918.75
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2493.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 3185
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 4140
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 4597.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 5976.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3907.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 5080
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness King's Pool",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1068
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1389
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1392
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 1810
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 1772
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2304
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 2635
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 3426
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1392
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 1810
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 1982
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 2577
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 970
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1335
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1736.25
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1740
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2262.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2215
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 2880
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3293.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4282.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1740
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2262.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 2477.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 3221.25
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Little DumaTau",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1535
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 1995
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2548
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3312
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3678
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4781
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3126
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4064
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 1147
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1918.75
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2493.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 3185
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 4140
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 4597.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 5976.25
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3907.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 5080
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Little Mombo",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 2456
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 3193
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2792
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 3630
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 3350
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 4355
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 4286
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 5572
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2792
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 3630
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 4286
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 5572
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 369
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 1147
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 3070
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 3991.25
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 3490
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 4537.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 4187.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 5443.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 5357.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 6965
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 3490
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 4537.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 5357.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 6965
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Mombo",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 2456
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 3193
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2792
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 3630
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 3350
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 4355
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 4286
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 5572
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2792
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 3630
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 4286
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 5572
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 369
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 1147
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 3070
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 3991.25
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 3490
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 4537.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 4187.5
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 5443.75
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 5357.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 6965
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 3490
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 4537.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 5357.5
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 6965
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Vumbura Plains North",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1618
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2103
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2457
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3194
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3353
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4359
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3353
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4359
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 970
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 2022.5
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2628.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 3071.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3992.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 4191.25
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 5448.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 4191.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 5448.75
+}
+]
+},
+{
+"file": "",
+"name": "Wilderness Vumbura Plains South",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 1618
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2103
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 2457
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3194
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 3353
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 4359
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 1942
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 2525
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 3353
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 4359
+},
+{
+"n": "Extras · Pilot / guide accommodation — per pilot or guide per night (per bed)",
+"p": 149
+},
+{
+"n": "Extras · Private activities — per party per night, max 6 guests",
+"p": 970
+}
+],
+"rack_2026": [
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — per person sharing",
+"p": 2022.5
+},
+{
+"n": "06 Jan – 31 Mar · Fully Inclusive — single",
+"p": 2628.75
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Apr – 30 Apr · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — per person sharing",
+"p": 3071.25
+},
+{
+"n": "01 May – 31 May · Fully Inclusive — single",
+"p": 3992.5
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — per person sharing",
+"p": 4191.25
+},
+{
+"n": "01 Jun – 31 Oct · Fully Inclusive — single",
+"p": 5448.75
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — per person sharing",
+"p": 2427.5
+},
+{
+"n": "01 Nov – 19 Dec · Fully Inclusive — single",
+"p": 3156.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — per person sharing",
+"p": 4191.25
+},
+{
+"n": "20 Dec – 05 Jan · Fully Inclusive — single",
+"p": 5448.75
+}
+]
 }
 ]
 }
