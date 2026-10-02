@@ -53,7 +53,7 @@
     var n=document.getElementById('nights-count')||document.getElementById('nights');
     var line=n&&n.parentNode; if(!line||!/night\(s\)\s*selected/i.test(line.textContent||''))return null;
     if(!document.getElementById('nbl-css')){var s=document.createElement('style');s.id='nbl-css';s.textContent=CSS+'#nr-cal-avail{display:none!important}';document.head.appendChild(s);}
-    if(line.offsetParent===null||!bbid())return null;
+    if(line.offsetParent===null||!(bbid()||window.__nrWW))return null;
     var box=line.querySelector('.nbl-box');
     if(!box){
       line.style.display='flex';line.style.alignItems='center';line.style.justifyContent='center';line.style.flexWrap='wrap';
@@ -67,6 +67,8 @@
   }
   function tick(){
     var box=ensure(); if(!box)return;
+    /* Wilderness camps: no NightsBridge, so the block just opens Wilderness Window (sign-in) - no live check. */
+    if(!bbid()&&window.__nrWW){ if(box.getAttribute('data-ww')!=='1'){box.setAttribute('data-ww','1');box.className='nbl-box';box.innerHTML=ICON.idle;box.title='Check availability on Wilderness Window \u2014 opens the sign-in page in a new tab';box.setAttribute('aria-label',box.title);} return; }
     var id=bbid(), d=dates();
     if(!id||!d){ if(cur!==''){cur='';} paint(box,'idle'); return; }
     var key=id+'|'+d.start+'|'+d.nights, info={start:d.start,nights:d.nights};
