@@ -28,6 +28,14 @@
     try{var m=String(window.nrAvail||'').match(/book\.nightsbridge\.com\/(\d+)/);if(m)return m[1];}catch(e){}
     return '';
   }
+  /* Natural Selection camps not on NightsBridge: live grid via /api/nsavail. */
+  var NSSET={hoanibelephantcamp:1,etoshamountainlodge:1,safarihouse:1,nkasalinyanti:1,tawana:1,northislandokavango:1,dukescamp:1,dukeseast:1,mbamba:1,tuludi:1,sablealley:1,littlesable:1,elephantpan:1,skybeds:1,mokolwane:1,mokolwaneplains:1,jackscamp:1,sancamp:1,campkalahari:1,menoakwena:1,thamotelele:1,expeditionscamp:1,lekkerwater:1};
+  function nsKey(){
+    if(window.__nrNS)return String(window.__nrNS);
+    try{var id=window.__nrLodgeId||'';var d=(typeof DB!=='undefined'&&DB)?DB[id]:null;var k=d&&d.name?String(d.name).toLowerCase().replace(/[^a-z0-9]/g,''):'';if(k&&NSSET[k])return k;}catch(e){}
+    return '';
+  }
+  function nsOpen(){if(!nsKey())return false;window.open('https://naturalselection.travel/check-availability/','_blank','noopener');return true;}
   function dates(){
     var a=null,b=null;
     try{if(typeof calendarState!=='undefined'&&calendarState){a=calendarState.rangeStart;b=calendarState.rangeEnd;}}catch(e){}
@@ -42,9 +50,9 @@
     var t = st==='yes' ? ('Available'+(info&&info.free>0?' · '+info.free+' room'+(info.free==1?'':'s'):'')+' from '+fmt(info.start)+' for '+info.nights+' night'+(info.nights==1?'':'s'))
           : st==='no' ? ('Fully booked from '+fmt(info.start)+' for '+info.nights+' night'+(info.nights==1?'':'s'))
           : st==='checking' ? 'Checking availability…'
-          : st==='err' ? 'Could not check right now — click to open NightsBridge'
+          : st==='err' ? 'Could not check right now — click to open the booking page'
           : 'Pick your dates to check availability';
-    box.title=t+(st==='yes'||st==='no'?' — click to open NightsBridge':'');
+    box.title=t+(st==='yes'||st==='no'?' — click to open the booking page':'');
     box.setAttribute('aria-label',box.title);
   }
   /* The block sits on the "N Night(s) Selected" line of the booking calendar; the old
@@ -53,14 +61,14 @@
     var n=document.getElementById('nights-count')||document.getElementById('nights');
     var line=n&&n.parentNode; if(!line||!/night\(s\)\s*selected/i.test(line.textContent||''))return null;
     if(!document.getElementById('nbl-css')){var s=document.createElement('style');s.id='nbl-css';s.textContent=CSS+'#nr-cal-avail{display:none!important}';document.head.appendChild(s);}
-    if(line.offsetParent===null||!(bbid()||window.__nrWW))return null;
+    if(line.offsetParent===null||!(bbid()||nsKey()||window.__nrWW))return null;
     var box=line.querySelector('.nbl-box');
     if(!box){
       line.style.display='flex';line.style.alignItems='center';line.style.justifyContent='center';line.style.flexWrap='wrap';
       box=document.createElement('span');box.setAttribute('role','button');box.tabIndex=0;box.style.marginLeft='18px';
       box.style.width='40px';box.style.height='40px';line.appendChild(box);
-      box.addEventListener('click',function(){try{window.nrAvail();}catch(e){}});
-      box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();try{window.nrAvail();}catch(x){}}});
+      box.addEventListener('click',function(){try{if(!bbid()&&nsOpen())return;window.nrAvail();}catch(e){}});
+      box.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();try{if(!bbid()&&nsOpen())return;window.nrAvail();}catch(x){}}});
       paint(box,'idle');
     }
     return box;
@@ -68,19 +76,21 @@
   function tick(){
     var box=ensure(); if(!box)return;
     /* Wilderness camps: no NightsBridge, so the block just opens Wilderness Window (sign-in) - no live check. */
-    if(!bbid()&&window.__nrWW){ if(box.getAttribute('data-ww')!=='1'){box.setAttribute('data-ww','1');box.className='nbl-box';box.innerHTML=ICON.idle;box.title='Check availability on Wilderness Window \u2014 opens the sign-in page in a new tab';box.setAttribute('aria-label',box.title);} return; }
-    var id=bbid(), d=dates();
+    if(!bbid()&&!nsKey()&&window.__nrWW){ if(box.getAttribute('data-ww')!=='1'){box.setAttribute('data-ww','1');box.className='nbl-box';box.innerHTML=ICON.idle;box.title='Check availability on Wilderness Window \u2014 opens the sign-in page in a new tab';box.setAttribute('aria-label',box.title);} return; }
+    box.removeAttribute('data-ww');
+    var ns=bbid()?'':nsKey(), id=bbid()||(ns?'ns:'+ns:''), d=dates();
     if(!id||!d){ if(cur!==''){cur='';} paint(box,'idle'); return; }
     var key=id+'|'+d.start+'|'+d.nights, info={start:d.start,nights:d.nights};
     if(key===cur){ var c=CACHE[key]; if(c&&c.st!=='checking') paint(box,c.st,Object.assign({},info,c)); return; }
     cur=key;
     if(CACHE[key]&&CACHE[key].st!=='checking'){paint(box,CACHE[key].st,Object.assign({},info,CACHE[key]));return;}
     CACHE[key]={st:'checking'}; paint(box,'checking',info);
-    fetch('/api/nbavail?bbid='+encodeURIComponent(id)+'&start='+d.start+'&nights='+d.nights)
+    fetch(ns?('/api/nsavail?camp='+ns+'&start='+d.start+'&nights='+d.nights):('/api/nbavail?bbid='+encodeURIComponent(id)+'&start='+d.start+'&nights='+d.nights))
       .then(function(r){return r.json();})
-      .then(function(j){CACHE[key]=(j&&j.ok)?{st:(j.available?'yes':'no'),free:j.free||0}:{st:'err'};if(cur===key)paint(box,CACHE[key].st==='err'?'idle':CACHE[key].st,Object.assign({},info,CACHE[key]));if(CACHE[key].st==='err')box.title='Could not check right now — click to open NightsBridge';})
-      .catch(function(){CACHE[key]={st:'err'};if(cur===key){paint(box,'idle');box.title='Could not check right now — click to open NightsBridge';}});
+      .then(function(j){CACHE[key]=(j&&j.ok)?{st:(j.available?'yes':'no'),free:j.free||0}:{st:'err'};if(cur===key)paint(box,CACHE[key].st==='err'?'idle':CACHE[key].st,Object.assign({},info,CACHE[key]));if(CACHE[key].st==='err')box.title='Could not check right now — click to open the booking page';})
+      .catch(function(){CACHE[key]={st:'err'};if(cur===key){paint(box,'idle');box.title='Could not check right now — click to open the booking page';}});
   }
-  function go(){ tick(); setInterval(tick,700); }
+  function showTab(){ if(!nsKey())return; var t=document.getElementById('nr-avail-tab'); if(t&&t.style.display==='none')t.style.display=''; }
+  function go(){ tick(); showTab(); setInterval(function(){tick();showTab();},700); }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',go);else go();
 })();

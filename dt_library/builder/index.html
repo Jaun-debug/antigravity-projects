@@ -442,7 +442,8 @@ function nbIdFor(L){
   var key=(L.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
   var rec=NBMAP[key];
   if(!rec){var inf=LODGEINFO[key];var u=inf&&inf.url?String(inf.url).replace(/\/+$/,''):'';var slug=u?u.split('/').pop():'';if(slug)rec=NBMAP[slug];}
-  return rec&&rec.nb?rec.nb:'';
+  if(rec&&rec.nb)return rec.nb;
+  return NSSET[key]?'ns:'+key:'';
 }
 // Wilderness Namibia camps book through Wilderness Window (agent login, no
 // public availability API), so their chip just opens the portal — no live dot.
@@ -458,6 +459,7 @@ function nbOpenAvail(i){
   var ci=rowCheckIn(i);
   if(!ci){var t=new Date();t.setDate(t.getDate()+1);ci=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
   var n=Math.max(1,num(d.nights)||1);
+  if(String(id).indexOf('ns:')===0){window.open(NS_URL,'_blank','noopener');return;}
   window.open('https://book.nightsbridge.com/'+id+'?startdate='+ci+'&nights='+n,'_blank','noopener');
 }
 // ── NightsBridge background availability ──────────────────────
@@ -465,6 +467,9 @@ function nbOpenAvail(i){
 // /api/nbavail in the background and colour a dot: green = rooms free,
 // red = nothing available. Cached per lodge+date+nights so re-rendering
 // the quote doesn't re-hit NightsBridge.
+// Natural Selection camps not on NightsBridge: live grid via /api/nsavail (ids 'ns:<key>').
+var NSSET={hoanibelephantcamp:1,etoshamountainlodge:1,safarihouse:1,nkasalinyanti:1,tawana:1,northislandokavango:1,dukescamp:1,dukeseast:1,mbamba:1,tuludi:1,sablealley:1,littlesable:1,elephantpan:1,skybeds:1,mokolwane:1,mokolwaneplains:1,jackscamp:1,sancamp:1,campkalahari:1,menoakwena:1,thamotelele:1,expeditionscamp:1,lekkerwater:1};
+var NS_URL='https://naturalselection.travel/check-availability/';
 var NBAVAIL={};
 function nbKey(id,ci,n){return id+'|'+ci+'|'+n}
 function nbCheck(i){
@@ -477,7 +482,7 @@ function nbCheck(i){
   if(NBAVAIL[key]) return;
   NBAVAIL[key]={state:'checking'};
   nbPaint();
-  fetch('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n)
+  fetch(String(id).indexOf('ns:')===0?('/api/nsavail?camp='+id.slice(3)+'&start='+ci+'&nights='+n):('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n))
     .then(function(r){return r.json()})
     .then(function(j){NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};nbPaint();})
     .catch(function(){NBAVAIL[key]={state:'err'};nbPaint();});
