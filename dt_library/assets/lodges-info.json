@@ -3157,7 +3157,7 @@
 },
 "campkhwai": {
 "name": "Camp Khwai",
-"url": "",
+"url": "/okavango-delta-accommodation/camp-khwai/",
 "lead": "Classic Okavango Delta tented camp in the Khwai community area (My African Safari Camps) — big-game country on the edge of Moremi. Rates in USD.",
 "imgs": [
 "https://campkhwai.com/wp-content/uploads/2025/04/Camp-Aerial-020-Favouriite-scaled.jpg",
@@ -3169,7 +3169,7 @@
 },
 "deltacampfootstepsinafrica": {
 "name": "Delta Camp (Footsteps in Africa)",
-"url": "",
+"url": "/okavango-delta-accommodation/delta-camp/",
 "lead": "Water-based Okavango Delta camp on Chief's Island — mokoro and Footsteps walking-trail safaris. Rates in USD.",
 "imgs": [
 "https://cdn.prod.website-files.com/5d034c7053493476ee95ab3d/5dcc754b729c155f78ef2eaf_Delta_treehouse_1.jpg",
@@ -4281,7 +4281,9 @@
 "name": "Wilderness Linyanti Tented Camp",
 "url": "/linyanti-savuti-accommodation/wilderness-linyanti-tented-camp/",
 "lead": "Wilderness Classic camp — Linyanti Wildlife Reserve. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/ogreosat/wilderness-linyanti-tented-camp-hero.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4289,7 +4291,9 @@
 "name": "Wilderness Savuti",
 "url": "/linyanti-savuti-accommodation/wilderness-savuti/",
 "lead": "Wilderness Classic camp — On the Savuti Channel, Linyanti Wildlife Reserve. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/wzpnhlm3/tent-savuti-botswana-07-25_tc-22.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4297,7 +4301,9 @@
 "name": "Wilderness Mokete",
 "url": "/okavango-delta-accommodation/wilderness-mokete/",
 "lead": "Wilderness Classic camp — Mababe Depression, east of Moremi. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/owqh5tpj/mokete_2024_18.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4305,7 +4311,9 @@
 "name": "Wilderness Chitabe",
 "url": "/okavango-delta-accommodation/wilderness-chitabe/",
 "lead": "Wilderness Classic camp — Chitabe concession (NG31), southeastern Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/ufjhthc1/chitabe-tented-suite-okavango-botswana-hero-1-edit.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4313,7 +4321,9 @@
 "name": "Wilderness Chitabe Lediba",
 "url": "/okavango-delta-accommodation/wilderness-chitabe-lediba/",
 "lead": "Wilderness Classic camp — Chitabe concession (NG31), southeastern Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/nzod01u0/game-drive-chitabe-botswana.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4321,7 +4331,9 @@
 "name": "Wilderness Little Vumbura",
 "url": "/okavango-delta-accommodation/wilderness-little-vumbura/",
 "lead": "Wilderness Classic camp — Vumbura concession (NG22), northern Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/yy2lpttk/littlevumbura_tents_standard_036_toned.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4329,7 +4341,9 @@
 "name": "Wilderness Qorokwe",
 "url": "/okavango-delta-accommodation/wilderness-qorokwe/",
 "lead": "Wilderness Classic camp — Private concession on the southeastern edge of Moremi, Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/1jqf4xqu/qorokwe_dining_boma_080_toned.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4337,7 +4351,9 @@
 "name": "Wilderness DumaTau",
 "url": "/linyanti-savuti-accommodation/wilderness-dumatau/",
 "lead": "Wilderness Premier camp — Linyanti Wildlife Reserve. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/zl4pj4j4/osprey-spa-and-retreat-at-dumatau.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4345,7 +4361,9 @@
 "name": "Wilderness King's Pool",
 "url": "/linyanti-savuti-accommodation/wilderness-kings-pool/",
 "lead": "Wilderness Premier camp — Linyanti Wildlife Reserve. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/zsblrm12/wilderness-kings-pool-hero.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4353,7 +4371,9 @@
 "name": "Wilderness Little DumaTau",
 "url": "/linyanti-savuti-accommodation/wilderness-little-dumatau/",
 "lead": "Wilderness Premier camp — Linyanti Wildlife Reserve. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/uzqhzi3i/wilderness-dumatau-hero-image.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4361,7 +4381,9 @@
 "name": "Wilderness Little Mombo",
 "url": "/okavango-delta-accommodation/wilderness-little-mombo/",
 "lead": "Wilderness Premier camp — Chief's Island, Moremi Game Reserve, Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/bj1ce0jy/wilderness-little-mombo-hero.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4369,7 +4391,9 @@
 "name": "Wilderness Mombo",
 "url": "/okavango-delta-accommodation/wilderness-mombo/",
 "lead": "Wilderness Premier camp — Chief's Island, Moremi Game Reserve, Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/fyylufgu/walk-into-the-ultimate-luxury-camp-wilderness-mombo.webp?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4377,7 +4401,9 @@
 "name": "Wilderness Vumbura Plains North",
 "url": "/okavango-delta-accommodation/wilderness-vumbura-plains-north/",
 "lead": "Wilderness Premier camp — Vumbura concession (NG22), northern Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/5eemp0ns/wilderness-vumbura-okavango-delta-botswana.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 },
@@ -4385,7 +4411,9 @@
 "name": "Wilderness Vumbura Plains South",
 "url": "/okavango-delta-accommodation/wilderness-vumbura-plains-south/",
 "lead": "Wilderness Premier camp — Vumbura concession (NG22), northern Okavango Delta. Fully inclusive. Rates in US$.",
-"imgs": [],
+"imgs": [
+"https://www.wildernessdestinations.com/media/5eemp0ns/wilderness-vumbura-okavango-delta-botswana.jpg?rmode=crop"
+],
 "orig": "",
 "cur": "USD"
 }

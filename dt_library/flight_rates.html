@@ -263,7 +263,8 @@
           // Per-supplier hero images — replace each value with that operator's own landscape photo.
           var HERO_IMG={
             mackair:'https://wetu.com/imageHandler/c1920x1080/126088/hoanib_valley_camp_-_aerial_view.jpg?fmt=jpg',
-            wildernessair:'https://wetu.com/imageHandler/c1920x1080/28944/1741354188743_Final-Hoanib-40.jpg?fmt=jpg'
+            wildernessair:'https://wetu.com/imageHandler/c1920x1080/28944/1741354188743_Final-Hoanib-40.jpg?fmt=jpg',
+            wildernessairbw:'https://www.wildernessdestinations.com/media/5eemp0ns/wilderness-vumbura-okavango-delta-botswana.jpg?rmode=crop'
           };
           function hero(){return document.querySelector('.header.nr-hero');}
           function setHero(k){var h=hero();if(!h)return;var img=HERO_IMG[k]||'/media/hero-poster.jpg';h.style.backgroundImage="url('"+img+"'),url('/media/hero-poster.jpg')";}
@@ -323,6 +324,7 @@ document.addEventListener('DOMContentLoaded',function(){
         <div class="tabs-container">
             <button class="tab-link active" onclick="switchSupplier('mackair', this)">Mack Air</button>
             <button class="tab-link" onclick="switchSupplier('wildernessair', this)">Wilderness Air Namibia</button>
+            <button class="tab-link" onclick="switchSupplier('wildernessairbw', this)">Wilderness Air Botswana</button>
         </div>
 
         <!-- ============================================== -->
@@ -419,6 +421,52 @@ document.addEventListener('DOMContentLoaded',function(){
         <!-- ============================================== -->
         <!-- WILDERNESS AIR NAMIBIA -->
         <!-- ============================================== -->
+                <div class="rate-card" data-years="2026" id="supplier-wildernessairbw">
+            <div class="supplier-info">
+                <div class="supplier-details">
+                    <h2>Wilderness Air Botswana</h2>
+                    <p>Wilderness&rsquo;s scheduled seat-rate circuit linking Maun and Kasane with the Okavango Delta (Area 2) and Linyanti, Savuti and Selinda (Area 3) airstrips, plus Helicopter Horizons transfers to Wilderness Mokete. Seats may be booked on their own, without Wilderness accommodation.</p>
+                </div>
+                <div class="supplier-quick-spec">
+                    <div class="spec-item"><span class="spec-label">Commission Model</span><span class="spec-value">Agent nett (no rack published)</span></div>
+                    <div class="spec-item"><span class="spec-label">Coverage</span><span class="spec-value">Okavango Delta, Linyanti &amp; Savuti, Maun, Kasane</span></div>
+                    <div class="spec-item"><span class="spec-label">Validity</span><span class="spec-value">06 Jan 2026 &ndash; 05 Jan 2027 (no 2027 sheet yet)</span></div>
+                    <div class="spec-item"><span class="spec-label">Currency</span><span class="spec-value">US$</span></div>
+                </div>
+            </div>
+            <div class="year-block" data-year="2026">
+            <h3>Seat Rates &mdash; valid 06 Jan 2026 to 05 Jan 2027</h3>
+            <div class="table-responsive"><table>
+                <thead><tr><th>Route</th><th class="info-col">Basis</th><th class="sto-col">Agent Nett Rate</th><th class="rack-col">Rack Rate</th></tr></thead>
+                <tbody><tr><td><strong>Area 2 to Area 2 or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Within the Okavango Delta airstrips</td><td class="price-highlight sto-col">US$ 301</td><td class="rack-col">Not published</td></tr><tr><td><strong>Area 2 to Area 3 or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Delta to Linyanti / Savuti / Selinda</td><td class="price-highlight sto-col">US$ 301</td><td class="rack-col">Not published</td></tr><tr><td><strong>Area 2 to Kasane or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Delta to Kasane</td><td class="price-highlight sto-col">US$ 482</td><td class="rack-col">Not published</td></tr><tr><td><strong>Area 3 to Area 3 or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Within the Linyanti / Savuti airstrips</td><td class="price-highlight sto-col">US$ 301</td><td class="rack-col">Not published</td></tr><tr><td><strong>Area 3 to Kasane or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Linyanti / Savuti to Kasane</td><td class="price-highlight sto-col">US$ 482</td><td class="rack-col">Not published</td></tr><tr><td><strong>Maun Airport to Area 2 or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Maun to the Delta</td><td class="price-highlight sto-col">US$ 301</td><td class="rack-col">Not published</td></tr><tr><td><strong>Maun Airport to Area 3 or vice versa</strong></td><td class="info-col">Per person, per seat &middot; Maun to Linyanti / Savuti</td><td class="price-highlight sto-col">US$ 310</td><td class="rack-col">Not published</td></tr></tbody>
+            </table></div>
+            <h3>Helicopter Horizons transfers &mdash; Wilderness Mokete</h3>
+            <div class="table-responsive"><table>
+                <thead><tr><th>Route</th><th class="info-col">Basis</th><th class="sto-col">Agent Nett Rate</th><th class="rack-col">Rack Rate</th></tr></thead>
+                <tbody><tr><td><strong>Linyanti to Mokete or vice versa</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">US$ 672</td><td class="rack-col">Not published</td></tr><tr><td><strong>Maun Airport to Mokete or vice versa</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">US$ 672</td><td class="rack-col">Not published</td></tr><tr><td><strong>Okavango to Mokete or vice versa</strong></td><td class="info-col">Per person, per seat</td><td class="price-highlight sto-col">US$ 672</td><td class="rack-col">Not published</td></tr><tr><td><strong>Santawani Airstrip to Mokete or vice versa</strong></td><td class="info-col">Per person, per seat &middot; 01 Jan &ndash; 31 May 2026</td><td class="price-highlight sto-col">US$ 262</td><td class="rack-col">Not published</td></tr><tr><td><strong>Santawani Airstrip to Mokete or vice versa</strong></td><td class="info-col">Per person, per seat &middot; 01 Jun &ndash; 31 Dec 2026</td><td class="price-highlight sto-col">US$ 301</td><td class="rack-col">Not published</td></tr></tbody>
+            </table></div>
+            <h3>Which camps use which area</h3>
+            <div class="table-responsive"><table>
+                <thead><tr><th>Airstrip</th><th>Camps</th></tr></thead>
+                <tbody><tr><td><strong>Area 2 - Chitabe Airstrip</strong></td><td>Chitabe, Chitabe Lediba, Sandibe, Sandibe Under Canvas, Nxabega Under Canvas</td></tr><tr><td><strong>Area 2 - Jao Airstrip</strong></td><td>Jacana, Jao, Kwetsani, Pelo</td></tr><tr><td><strong>Area 2 - Mombo Airstrip</strong></td><td>Little Mombo, Mombo</td></tr><tr><td><strong>Area 2 - Piajo Airstrip</strong></td><td>Chief&rsquo;s Camp</td></tr><tr><td><strong>Area 2 - Stanley&rsquo;s Airstrip</strong></td><td>Baines Camp, Stanley&rsquo;s Camp</td></tr><tr><td><strong>Area 2 - Omdop Airstrip</strong></td><td>Duba Plains, Duba Explorers, Sitatunga</td></tr><tr><td><strong>Area 2 - Khwai Airstrip</strong></td><td>Machaba, Khwai Tented, Khwai Bush Camp, Khwai Leadwood, Khwai Lediba, Little Machaba, Saguni Safari Lodge, Nokanyana</td></tr><tr><td><strong>Area 2 - Hunda Airstrip</strong></td><td>Little Tubu, Tubu Tree</td></tr><tr><td><strong>Area 2 - Vumbura Airstrip</strong></td><td>Little Vumbura, Vumbura Plains, Karangoma Camp</td></tr><tr><td><strong>Area 2 - Xigera Airstrip</strong></td><td>Xigera Safari Lodge</td></tr><tr><td><strong>Area 2 - Gorokwe Airstrip</strong></td><td>Qorokwe, Gomoti Plains, Gomoti Private</td></tr><tr><td><strong>Area 2 - Jedibe Airstrip</strong></td><td>Treehouse, Kala Camp, Setari Camp</td></tr><tr><td><strong>Area 2 - Xakanaxa Airstrip</strong></td><td>Xakanaxa Camp, Camp Moremi, Okuti</td></tr><tr><td><strong>Area 2 - Xaranna Airstrip</strong></td><td>Xaranna Okavango Lodge</td></tr><tr><td><strong>Area 2 - Kadizora Airstrip</strong></td><td>Kadizora, Duke&rsquo;s Camp, Duke&rsquo;s East, North Island Okavango</td></tr><tr><td><strong>Area 2 - Nxabega Airstrip</strong></td><td>Nxabega Okavango Tented</td></tr><tr><td><strong>Area 2 - Kwara Airstrip</strong></td><td>Kwara, Splash</td></tr><tr><td><strong>Area 2 - Xaxaba Airstrip</strong></td><td>Eagle Island Lodge</td></tr><tr><td><strong>Area 2 - Santawani Airstrip</strong></td><td>Mma Dinare, Rra Dinare, Tawana Camp, Mokete</td></tr><tr><td><strong>Area 2 - Kwando 4Rivers Airstrip</strong></td><td>Four Rivers</td></tr><tr><td><strong>Area 2 - Kiri Waka Airstrip</strong></td><td>Machaba Kiri Camp</td></tr><tr><td><strong>Area 2 - Abu Airstrip</strong></td><td>Singita Elela</td></tr><tr><td><strong>Area 2 - Xaraxai Airstrip</strong></td><td>Mbamba Camp</td></tr><tr><td><strong>Area 3 - Chobe Airstrip</strong></td><td>DumaTau, Little DumaTau, Savuti</td></tr><tr><td><strong>Area 3 - Linyanti Airstrip</strong></td><td>Linyanti Tented Camp, King&rsquo;s Pool</td></tr><tr><td><strong>Area 3 - Saile Airstrip</strong></td><td>Linyanti Ebony, Linyanti Bush Camp, Linyanti Expeditions</td></tr><tr><td><strong>Area 3 - Selinda Airstrip</strong></td><td>Zarafa, Selinda, Selinda Explorers</td></tr><tr><td><strong>Area 3 - Savute Airstrip</strong></td><td>Savute Elephant Lodge, Savute Safari Lodge, Ghoha Hills Savuti Lodge</td></tr><tr><td><strong>Area 3 - Lebala Airstrip</strong></td><td>Lebala</td></tr><tr><td><strong>Area 3 - Motswiri Airstrip</strong></td><td>Okavango Explorers</td></tr><tr><td><strong>Area 3 - Nogatsaa Airstrip</strong></td><td>Nogatsaa Pans Lodge</td></tr></tbody>
+            </table></div>
+            <h3>Departure taxes &amp; fees &mdash; not in the seat rates</h3>
+            <ul>
+                <li>Botswana domestic departure tax (Maun / Kasane) US$26 pp; international US$30 pp.</li>
+                <li>Victoria Falls international departure tax plus AIDEF US$50 pp; Livingstone international US$40 pp, plus US$10 NACL safety tax and US$10 ZCAA charge per leg.</li>
+                <li>Landing fees: US$25 pp at Kadizora, Xakanaxa, Gorokwe (Gomoti Plains and Gomoti Private only), Kiri Waka and Savute airstrips; US$35 pp at Khwai; US$100 per party per arrival and per departure at Piajo.</li>
+            </ul>
+            <h3>Notes</h3>
+            <ul>
+                <li>Rates per person per seat. No minimum and no single surcharge, except on the Victoria Falls / Livingstone / Kasane flights.</li>
+                <li>Luggage: 20 kg per person including hand luggage, soft bags only, max 30 &times; 35 &times; 70 cm. Extra 20 kg costs US$100 per flight sector &mdash; pre-book it.</li>
+                <li>Mombo airstrip is restricted to Wilderness Air, flying 11:00&ndash;16:00.</li>
+                <li>The Santawani&ndash;Mokete helicopter is only booked with a Wilderness Air flight to or from Kasane.</li>
+                <li>Rates may change with fuel, taxes, landing and navigation fees. Sheet B9, dated 25 Jun 2026.</li>
+            </ul>
+            </div>
+        </div>
+
         <div class="rate-card" data-years="2026 2027" id="supplier-wildernessair">
             <div class="supplier-info">
                 <div class="supplier-details">

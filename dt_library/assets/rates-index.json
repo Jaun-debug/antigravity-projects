@@ -37747,98 +37747,178 @@
 ]
 },
 {
-"file": "/ratesheets/camp_khwai.html",
+"file": "",
 "name": "Camp Khwai",
 "region": "Okavango Delta",
-"rates": [],
-"rates_2027": [
+"rates": [
 {
-"n": "Green Season (01 Dec – 31 Mar) · per person sharing (US$)",
+"n": "01 Dec 2025 – 31 Mar 2026 · Green — per person sharing",
 "p": 388
 },
 {
-"n": "Shoulder Season (Apr–Jun & Nov) · per person sharing (US$)",
-"p": 454
-},
-{
-"n": "High Season (01 Jul – 31 Oct) · per person sharing (US$)",
-"p": 656
-},
-{
-"n": "Green Season · single (+40%) (US$)",
+"n": "01 Dec 2025 – 31 Mar 2026 · Green — single (sharing + 40% supplement)",
 "p": 543.2
 },
 {
-"n": "Shoulder Season · single (+40%) (US$)",
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder — per person sharing",
+"p": 454
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder — single (sharing + 40% supplement)",
 "p": 635.6
 },
 {
-"n": "High Season · single (+40%) (US$)",
+"n": "01 Jul – 31 Oct 2026 · High — per person sharing",
+"p": 656
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High — single (sharing + 40% supplement)",
 "p": 918.4
 },
 {
-"n": "Child 7–11 (50% of adult)",
-"p": 0
-},
-{
-"n": "Pilot / Guide (US$)",
+"n": "Pilot / guide — per night",
 "p": 160
 }
 ],
-"currency": "USD"
+"currency": "USD",
+"rack_2026": [
+{
+"n": "01 Dec 2025 – 31 Mar 2026 · Green — per person sharing",
+"p": 485
 },
 {
-"file": "/ratesheets/delta_camp_footsteps_in_africa.html",
+"n": "01 Dec 2025 – 31 Mar 2026 · Green — single (sharing + 40% supplement)",
+"p": 679
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder — per person sharing",
+"p": 567.5
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder — single (sharing + 40% supplement)",
+"p": 794.5
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High — per person sharing",
+"p": 820
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High — single (sharing + 40% supplement)",
+"p": 1148
+}
+],
+"cur": "USD"
+},
+{
+"file": "",
 "name": "Delta Camp (Footsteps in Africa)",
 "region": "Okavango Delta",
-"rates": [],
-"rates_2027": [
+"rates": [
 {
-"n": "Green Season (Jan–Mar & Dec) · pps 1–2 nights (US$)",
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green · 1–2 night stay — per person sharing",
 "p": 450
 },
 {
-"n": "Green Season · pps 3–5 nights (US$)",
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green · 1–2 night stay — single",
+"p": 450
+},
+{
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green · 3–5 night stay — per person sharing",
 "p": 433
 },
 {
-"n": "Green Season · pps 6+ nights (US$)",
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green · 3–5 night stay — single",
+"p": 433
+},
+{
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green · 6+ night stay — per person sharing",
 "p": 416
 },
 {
-"n": "Shoulder Season (Apr–Jun & Nov) · pps 1–2 nights (US$)",
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green · 6+ night stay — single",
+"p": 416
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder · 1–2 night stay — per person sharing",
 "p": 654
 },
 {
-"n": "Shoulder Season · pps 3–5 nights (US$)",
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder · 1–2 night stay — single",
+"p": 654
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder · 3–5 night stay — per person sharing",
 "p": 630
 },
 {
-"n": "Shoulder Season · pps 6+ nights (US$)",
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder · 3–5 night stay — single",
+"p": 630
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder · 6+ night stay — per person sharing",
 "p": 605
 },
 {
-"n": "High Season (Jul–Oct) · pps 1–2 nights (US$)",
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder · 6+ night stay — single",
+"p": 605
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High · 1–2 night stay — per person sharing",
 "p": 757
 },
 {
-"n": "High Season · pps 3–5 nights (US$)",
+"n": "01 Jul – 31 Oct 2026 · High · 1–2 night stay — single",
+"p": 984
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High · 3–5 night stay — per person sharing",
 "p": 728
 },
 {
-"n": "High Season · pps 6+ nights (US$)",
+"n": "01 Jul – 31 Oct 2026 · High · 3–5 night stay — single",
+"p": 946
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High · 6+ night stay — per person sharing",
 "p": 700
 },
 {
-"n": "High Season · single supplement +30%",
-"p": 0
+"n": "01 Jul – 31 Oct 2026 · High · 6+ night stay — single",
+"p": 910
 },
 {
-"n": "Pilot / Guide (US$)",
+"n": "Pilot / guide — per night",
 "p": 212
 }
 ],
-"currency": "USD"
+"currency": "USD",
+"rack_2026": [
+{
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green — per person sharing",
+"p": 562
+},
+{
+"n": "01 Jan – 31 Mar & 01 – 31 Dec 2026 · Green — single",
+"p": 562
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder — per person sharing",
+"p": 818
+},
+{
+"n": "01 Apr – 30 Jun & 01 – 30 Nov 2026 · Shoulder — single",
+"p": 818
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High — per person sharing",
+"p": 946
+},
+{
+"n": "01 Jul – 31 Oct 2026 · High — single",
+"p": 1230
+}
+],
+"cur": "USD"
 },
 {
 "file": "https://www.dropbox.com/scl/fi/n56m6ct4yy4o572gqx5tc/Kifaru-20-STO-Rates-2027.pdf?rlkey=x0l91o79820bnxt06z5iw22ir&dl=0",
