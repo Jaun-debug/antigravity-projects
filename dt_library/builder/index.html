@@ -744,6 +744,43 @@ function botswanaRows(){
       +'<button class="rm" data-k="botswana" data-i="'+i+'">&times;</button></div>';
   }).join('');
 }
+/* ---- Live availability in the Botswana step ----
+   The Botswana segments carry no dates, so the picker has its own check-in + nights
+   (defaulting to the day the Namibia lodges end). Same sources as the lodge cards:
+   NightsBridge (nb id), Natural Selection's grid (ns:<key>), Wilderness Window (link only). */
+function bwCheckIn(){if(S._bwCi)return S._bwCi;if(S.startDate)return addDays(S.startDate,totalNights());return '';}
+function bwNights(){var n=parseInt(S._bwN,10);return (n>0&&n<=14)?n:2;}
+function bwAvailChipHTML(L){
+  if(!L)return '';
+  var id=nbIdFor(L);
+  if(!id) return (wwIsBotswana(L)?wwChipHTML():'');
+  var ci=bwCheckIn(),n=bwNights();
+  var st=ci?NBAVAIL[nbKey(id,ci,n)]:null;
+  var state=st?st.state:'';
+  var ICON={yes:'<svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    no:'<svg viewBox="0 0 24 24" width="16" height="16"><path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>',
+    checking:'<span class="nbspin"></span>',
+    '':'<svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="5.5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'};
+  var t=!ci?'Pick a check-in date to check availability':state==='yes'?('Available'+(st.free>0?' · '+st.free+' room'+(st.free===1?'':'s'):'')+' from '+fmtDisp(ci)+' for '+n+' night'+(n===1?'':'s')):state==='no'?('Fully booked from '+fmtDisp(ci)+' for '+n+' night'+(n===1?'':'s')):state==='checking'?'Checking availability…':state==='err'?'Could not check right now':'Check availability';
+  return '<a class="viewlink nbchip'+(state==='yes'||state==='no'||state==='checking'?' '+state:'')+'" id="bw-avail" href="#" title="'+esc(t+' — click to open the booking page')+'" aria-label="'+esc(t)+'"><span class="nblab">'+(ICON[state==='err'?'':state]||ICON[''])+'</span></a>';
+}
+function wwIsBotswana(L){return !!(L&&/^wilderness\b/i.test(L.name||''));}
+function bwCheckAvail(){
+  var L=(S._bwLodge!=null&&S._bwLodge!=='')?RATES.lodges[+S._bwLodge]:null;if(!L)return;
+  var id=nbIdFor(L),ci=bwCheckIn(),n=bwNights();if(!id||!ci)return;
+  var key=nbKey(id,ci,n);if(NBAVAIL[key])return;
+  NBAVAIL[key]={state:'checking'};
+  var url=String(id).indexOf('ns:')===0?('/api/nsavail?camp='+id.slice(3)+'&start='+ci+'&nights='+n):('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n);
+  fetch(url).then(function(r){return r.json()}).then(function(j){NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};bwRepaint();}).catch(function(){NBAVAIL[key]={state:'err'};bwRepaint();});
+}
+function bwRepaint(){var c=document.getElementById('bw-avail');if(!c||active!=='botswana')return;var L=RATES.lodges[+S._bwLodge];var w=document.createElement('div');w.innerHTML=bwAvailChipHTML(L);if(w.firstChild){c.replaceWith(w.firstChild);bwWireChip();}}
+function bwOpenAvail(){
+  var L=RATES.lodges[+S._bwLodge];if(!L)return;var id=nbIdFor(L),ci=bwCheckIn(),n=bwNights();
+  if(!ci){var t=new Date();t.setDate(t.getDate()+1);ci=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
+  if(String(id).indexOf('ns:')===0){window.open(NS_URL,'_blank','noopener');return;}
+  if(id)window.open('https://book.nightsbridge.com/'+id+'?startdate='+ci+'&nights='+n,'_blank','noopener');
+}
+function bwWireChip(){var c=document.getElementById('bw-avail');if(c)c.onclick=function(e){e.preventDefault();bwOpenAvail();};}
 function botswanaSection(){
   var areas=usdAreas();
   var area=S._bwArea||'';
@@ -756,7 +793,8 @@ function botswanaSection(){
   if(hasLodge){var L=RATES.lodges[+S._bwLodge];if(L)rateOpts+=ddRateOptions(usdRates(L).map(function(rt){return {n:rt.n,attrs:'value="'+rt.p+'" data-name="'+esc(L.name+' — '+rt.n)+'"',html:function(t){return esc(t)+' — '+usd(rt.p);}};}));}
   return '<div style="display:grid;gap:10px;max-width:640px;margin:0 0 20px">'
     +'<div class="fld"><label>Area</label><select id="bw-area">'+areaOpts+'</select></div>'
-    +'<div class="fld"><label>Lodge</label><div style="display:flex;gap:10px;align-items:center"><select id="bw-lodge" style="flex:1"'+(area?'':' disabled')+'>'+lodgeOpts+'</select>'+((hasLodge&&RATES.lodges[+S._bwLodge]&&/^wilderness\b/i.test(RATES.lodges[+S._bwLodge].name||''))?wwChipHTML():'')+'</div></div>'
+    +'<div class="fld"><label>Lodge</label><div style="display:flex;gap:10px;align-items:center"><select id="bw-lodge" style="flex:1"'+(area?'':' disabled')+'>'+lodgeOpts+'</select>'+(hasLodge?bwAvailChipHTML(RATES.lodges[+S._bwLodge]):'')+'</div></div>'
+    +(hasLodge?'<div style="display:grid;grid-template-columns:1fr 120px;gap:10px"><div class="fld"><label>Check-in <span style="color:var(--muted)">(for live availability)</span></label><input type="date" id="bw-ci" value="'+esc(bwCheckIn())+'"></div><div class="fld"><label>Nights</label><input type="number" id="bw-n" min="1" max="14" value="'+bwNights()+'"></div></div>':'')
     +'<div class="fld"><label>Rate <span style="color:var(--muted)">(US$, STO nett)</span></label><select id="bw-rate"'+(hasLodge?'':' disabled')+'>'+rateOpts+'</select></div>'
     +'</div>'
     +'<div style="font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin:0 0 8px">Selected segments (US$)</div>'
@@ -1241,6 +1279,9 @@ function bindPanel(){
   // Botswana / Delta / Vic Falls cascading picker
   if(x=document.getElementById('bw-area'))x.onchange=function(){S._bwArea=this.value;S._bwLodge='';renderPanel();};
   if(x=document.getElementById('bw-lodge'))x.onchange=function(){S._bwLodge=this.value;renderPanel();};
+  if(x=document.getElementById('bw-ci'))x.onchange=function(){S._bwCi=this.value;renderPanel();};
+  if(x=document.getElementById('bw-n'))x.onchange=function(){S._bwN=this.value;renderPanel();};
+  if(active==='botswana'){bwWireChip();bwCheckAvail();}
   if(x=document.getElementById('bw-rate'))x.onchange=function(){var o=this.options[this.selectedIndex];if(!o||!o.value)return;S.botswana.push({name:o.dataset.name,amount:+o.value,cur:'USD'});renderPanel();};
   updateTotals();
 }
