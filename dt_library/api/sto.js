@@ -43247,3 +43247,19 @@ Object.assign(DDS_STO_BY_YEAR, {
     if (sl) fix(sl, 'strand');
   }
 })();
+
+// ---------------------------------------------------------------------------
+// Mokuti Deluxe single BB per O&L sheet, 03 Oct 2026: the O&L "2026-2028 STO20 RATES" sheet (03 Feb 2026) prints
+// Deluxe Room single BB as 5,629 net. Jaun: the sheet is the truth.
+// Net 6,473 -> 5,629; rack 8,091 -> 7,036 (5,629 / 0.8).
+// ---------------------------------------------------------------------------
+(function mokutiDeluxeSingle031026() {
+  if (typeof DDS_STO_BY_YEAR === 'undefined' || !DDS_STO_BY_YEAR['mokuti-etosha']) return;
+  var e = DDS_STO_BY_YEAR['mokuti-etosha'];
+  Object.keys(e).forEach(function (y) {
+    ((e[y] && e[y].sections) || []).forEach(function (sec) {
+      if (sec.title !== 'Single BB') return;
+      (sec.rows || []).forEach(function (r) { if (r[0] === 'Deluxe Room' && r[1] === '6,473') r[1] = '5,629'; });
+    });
+  });
+})();
