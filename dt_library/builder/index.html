@@ -1341,8 +1341,11 @@ function overlayRack(){
       RACK_ROOMS[key]=L.rates;
       if(!ex&&sto) ex=byName[(sto.name||'').trim().toLowerCase()];
       if(!ex){for(var q=0;q<RATES.lodges.length;q++){if(RATES.lodges[q]._slug===slug){ex=RATES.lodges[q];break;}}}
-      if(!ex&&sto&&sto.rates&&sto.rates.length){
-        var nn={file:'',name:sto.name||L.name||slug,region:sto.region||L.region||'',rates:sto.rates,rates_2027:(sto.rates_2027&&sto.rates_2027.length)?sto.rates_2027:[],rack_live:L.rates,_slug:slug};
+      // A lodge whose net is loaded for 2027 only (Jaun, 3 Oct 2026): no rates in
+      // 2026 rather than rack standing in for a net; its 2027 net in 2027.
+      var hasNet=!!(sto&&((sto.rates&&sto.rates.length)||(sto.rates_2027&&sto.rates_2027.length)));
+      if(!ex&&hasNet){
+        var nn={file:'',name:sto.name||L.name||slug,region:sto.region||L.region||'',rates:sto.rates||[],rates_2027:(sto.rates_2027&&sto.rates_2027.length)?sto.rates_2027:[],rack_live:L.rates,_slug:slug};
         RATES.lodges.push(nn);byName[key]=nn;byName[(nn.name||'').trim().toLowerCase()]=nn;
         if(L.name&&L.name!==nn.name)RACK_ALIAS[(L.name||'').trim().toLowerCase()]=nn.name;
         return;
@@ -1353,7 +1356,9 @@ function overlayRack(){
       // your own commission — so rack only fills in where there is no net rate
       // at all. A rack-only lodge stays quotable; a lodge with a net rate keeps
       // it. Rack always populates rack_live for anything that wants it.
-      if(ex){ ex.rack_live=L.rates; if(!(ex.rates&&ex.rates.length)) ex.rates=L.rates; }
+      if(ex){ ex.rack_live=L.rates;
+        if(hasNet){ if(!(ex.rates_2027&&ex.rates_2027.length)&&sto.rates_2027&&sto.rates_2027.length) ex.rates_2027=sto.rates_2027; }
+        else if(!(ex.rates&&ex.rates.length)) ex.rates=L.rates; }
       else{var nl={file:'',name:L.name||slug,region:L.region||'',rates:L.rates,rack_live:L.rates};RATES.lodges.push(nl);byName[key]=nl;}
     });
   }).catch(function(){});
