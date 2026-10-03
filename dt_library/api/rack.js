@@ -42529,3 +42529,34 @@ Object.assign(DDS_RACK_BY_YEAR, {
     Object.keys(V[slug]).forEach(function (y) { if (!e[y]) e[y] = V[slug][y]; });
   });
 })();
+
+// ---------------------------------------------------------------------------
+// O&L STO20 sheet check, 03 Oct 2026: corrections against O&L Leisure "2026-2028 STO20 RATES"
+// (PDF dated 03 Feb 2026).
+//  - Strand Hotel Luxury Suite single BB: sheet prints 9,006 (was 9,005).
+//    Rack 11,257 unchanged.
+//  - Mokuti Etosha: the fourth room is the "Luxury Room" on the sheet, not
+//    "Junior Suite". Figures unchanged.
+//  - Chobe Water Villas: sheet is valid 01.07.26 - 30.06.2028, not 01 Jan 2026.
+// ---------------------------------------------------------------------------
+(function olSto20Fix031026() {
+  if (typeof DDS_RACK_BY_YEAR === 'undefined') return;
+  function fix(doc, which) {
+    if (!doc || !Array.isArray(doc.sections)) return;
+    doc.sections.forEach(function (sec) {
+      (sec.rows || []).forEach(function (r) {
+        if (!Array.isArray(r)) return;
+        if (which === 'strand' && false && /^Single BB$/.test(sec.title) && r[0] === 'Luxury Suite' && r[1] === '9,005') r[1] = '9,006';
+        if (which === 'mokuti' && r[0] === 'Junior Suite') r[0] = 'Luxury Room';
+      });
+    });
+    if (which === 'chobe') {
+      doc.validity = '01 Jul 2026 – 30 Jun 2028 (2026 and 2027 identical; the sheet starts 01 Jul 2026)';
+    }
+  }
+  var M = DDS_RACK_BY_YEAR;
+  [['strand-hotel-swakopmund','strand'],['mokuti-etosha','mokuti'],['chobe-water-villas-zambezi','chobe']].forEach(function (p) {
+    var e = M[p[0]]; if (!e) return;
+    Object.keys(e).forEach(function (y) { fix(e[y], p[1]); });
+  });
+})();

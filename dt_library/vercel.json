@@ -291,8 +291,18 @@
       "permanent": true
     },
     {
+      "source": "/central-namibia-accommodation/midgard-country-estate",
+      "destination": "/windhoek-accommodation/midgard-otjihavera-windhoek/",
+      "permanent": true
+    },
+    {
+      "source": "/central-namibia-accommodation/midgard-country-estate/",
+      "destination": "/windhoek-accommodation/midgard-otjihavera-windhoek/",
+      "permanent": true
+    },
+    {
       "source": "/accommodation/midgard-country-estate",
-      "destination": "/central-namibia-accommodation/midgard-country-estate/",
+      "destination": "/windhoek-accommodation/midgard-otjihavera-windhoek/",
       "permanent": true
     },
     {
@@ -877,7 +887,7 @@
     },
     {
       "source": "/accommodation/midgard-country-estate/",
-      "destination": "/central-namibia-accommodation/midgard-country-estate/",
+      "destination": "/windhoek-accommodation/midgard-otjihavera-windhoek/",
       "permanent": true
     },
     {
