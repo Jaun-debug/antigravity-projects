@@ -1330,6 +1330,24 @@ function overlayRack(){
       var L=j.lodges[slug]; if(!L||!L.rates||!L.rates.length)return;
       var key=(L.name||'').trim().toLowerCase();
       var ex=byName[key];
+      /* rack-dup fix 03 Oct 2026 */
+      // The rack feed and the net feed can name the same lodge differently
+      // ("Mokuti Etosha" vs "Mokuti Etosha Lodge"). Matching on the rack name
+      // alone missed, and the lodge was appended a second time carrying RACK in
+      // the field the quote reads as NET -- 19 lodges quoted at rack, then
+      // marked up again. Match on the shared slug too, and when a rack-only
+      // entry has to be appended, give it the slug's net rates if there are any.
+      var sto=STO_BY_SLUG[slug];
+      RACK_ROOMS[key]=L.rates;
+      if(!ex&&sto) ex=byName[(sto.name||'').trim().toLowerCase()];
+      if(!ex){for(var q=0;q<RATES.lodges.length;q++){if(RATES.lodges[q]._slug===slug){ex=RATES.lodges[q];break;}}}
+      if(!ex&&sto&&sto.rates&&sto.rates.length){
+        var nn={file:'',name:sto.name||L.name||slug,region:sto.region||L.region||'',rates:sto.rates,rates_2027:(sto.rates_2027&&sto.rates_2027.length)?sto.rates_2027:[],rack_live:L.rates,_slug:slug};
+        RATES.lodges.push(nn);byName[key]=nn;byName[(nn.name||'').trim().toLowerCase()]=nn;
+        if(L.name&&L.name!==nn.name)RACK_ALIAS[(L.name||'').trim().toLowerCase()]=nn.name;
+        return;
+      }
+      if(ex&&L.name&&ex.name!==L.name)RACK_ALIAS[(L.name||'').trim().toLowerCase()]=ex.name;
       // ex.rates is the TRADE NET the quote reads; L.rates is the PUBLIC RACK.
       // Overwriting one with the other quietly quotes a lodge at rack — net plus
       // your own commission — so rack only fills in where there is no net rate
@@ -1348,6 +1366,31 @@ function overlayRack(){
    2026 is only replaced when the API has it (never blanked), so no lodge loses
    its existing base rate. Needs the agent token; silently no-ops if signed out
    or /api/sto is unreachable. */
+var STO_BY_SLUG={}, RACK_ALIAS={}, RACK_ROOMS={};
+/* Saved quotes point at lodges by list position. A quote saved on one of the
+   old rack duplicates (e.g. "Mokuti Etosha") now points at a different lodge,
+   so after the feeds load, re-find each saved lodge by its saved name and
+   re-pick the same room (room + sharing/single/child + BB/DBB) from the net list. */
+function reResolveSaved(){
+  function tok(n){n=(n||'').toLowerCase();var meal=/\bdbb\b/.test(n)?'dbb':(/\bfb\b|full board/.test(n)?'fb':(/\bbb\b/.test(n)?'bb':''));
+    var occ=/child/.test(n)?'child':(/single/.test(n)?'single':'share');
+    var room=(n.split(/\s[\u2014\u00b7-]\s/).filter(function(x){return /room|suite|chalet|tent|unit|villa|cottage|camp/.test(x)})[0]||'').trim();
+    return room+'|'+occ+'|'+meal;}
+  S.lodges.forEach(function(d){
+    if(d.lodgeIdx<0||!d.name)return;
+    var cur=RATES.lodges[d.lodgeIdx];
+    if(cur&&cur.name===d.name)return;
+    var want=RACK_ALIAS[d.name.trim().toLowerCase()]||d.name, fi=-1;
+    for(var k=0;k<RATES.lodges.length;k++){if(RATES.lodges[k].name===want){fi=k;break;}}
+    if(fi<0)return;
+    var _old=RACK_ROOMS[d.name.trim().toLowerCase()], oldRoom=(_old&&d.roomIdx>-1&&_old[d.roomIdx])?_old[d.roomIdx].n:'';
+    d.lodgeIdx=fi;d.name=want;
+    var R=lodgeRates(RATES.lodges[fi]),ri=-1;
+    if(oldRoom){var t=tok(oldRoom);for(var r=0;r<R.length;r++){if(tok(R[r].n)===t){ri=r;break;}}}
+    if(ri<0)ri=seasonShareIdx(RATES.lodges[fi],null);
+    d.roomIdx=ri;
+  });
+}
 function overlaySto(){
   var tok=(function(){try{return sessionStorage.getItem('nr_agent_token')||'';}catch(e){return '';}})();
   if(!tok)return Promise.resolve();
@@ -1364,16 +1407,18 @@ function overlaySto(){
       // "Epako Safari Lodge & Spa"); appending them would create duplicate
       // rows in a financial tool. Unmatched lodges simply keep their existing
       // (static) rate — no worse than today — and can be name-aliased later.
+      STO_BY_SLUG[slug]=L;
       if(ex){
         if(L.rates&&L.rates.length){ex.rates=L.rates;}
         ex.rates_2027=(L.rates_2027&&L.rates_2027.length)?L.rates_2027:[];
+        ex._slug=slug;
       }
     });
   }).catch(function(){});
 }
 var NBMAP={};fetch('/assets/nightsbridge.json').then(function(r){return r.json()}).then(function(j){NBMAP=j||{};try{render()}catch(e){}}).catch(function(){});
 var LODGEINFO={};var _inited=false;fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};if(_inited){try{persist();}catch(e){}}}).catch(function(){});
-fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlaySto().then(overlayRack).then(function(){try{renderPanel();}catch(e){}});}).catch(function(){_seeded=true;start()});
+fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){RATES=j;seed();start();overlaySto().then(overlayRack).then(function(){try{reResolveSaved();}catch(e){}try{renderPanel();}catch(e){}});}).catch(function(){_seeded=true;start()});
 fetch('/assets/providers.json').then(function(r){return r.json()}).then(function(j){PROVIDERS=j||{activities:[],vehicles:[]};if(!PROVIDERS.activities)PROVIDERS.activities=[];if(!PROVIDERS.vehicles)PROVIDERS.vehicles=[];try{renderPanel();}catch(e){}}).catch(function(){});
 /* Guard against a load race that wiped saved quotes. The asset fetches
    (nightsbridge / lodges-info / providers) each call render/renderPanel, which
