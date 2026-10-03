@@ -273,7 +273,7 @@ function num(v){return Math.max(0,parseFloat(v)||0)}
 function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region&&l.cur!=='USD')o[l.region]=1});return Object.keys(o).sort()}
 function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r&&l.cur!=='USD')a.push(i)});return a}
 /* ---- USD cross-border (Botswana / Delta / Chobe / Vic Falls) ---- */
-var USD_AREA_ORDER=['Botswana','Delta','Chobe','Vic Falls'];
+var USD_AREA_ORDER=['Botswana','Okavango Delta','Linyanti & Savuti','Makgadikgadi & Boteti','Chobe','Vic Falls'];
 function usdAreas(){var o={};RATES.lodges.forEach(function(l){if(l.cur==='USD'&&l.region&&USD_AREA_ORDER.indexOf(l.region)<0)o[l.region]=1;});return USD_AREA_ORDER.concat(Object.keys(o).sort());}
 function usdLodgesInArea(area){var a=[];RATES.lodges.forEach(function(l,i){if(l.cur==='USD'&&l.region===area)a.push(i);});return a;}
 // Respect the 2026/2027 toggle like the main lodge step does. Previously this
