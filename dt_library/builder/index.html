@@ -270,8 +270,13 @@ function money(n,cur){return (cur==='USD'?'US$ ':'N$ ')+(Number(n)||0).toLocaleS
 function usd(n){return money(n,'USD')}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function num(v){return Math.max(0,parseFloat(v)||0)}
-function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region&&l.cur!=='USD')o[l.region]=1});return Object.keys(o).sort()}
-function lodgesIn(r){var a=[];RATES.lodges.forEach(function(l,i){if(l.region===r&&l.cur!=='USD')a.push(i)});return a}
+/* Region dropdown: near-duplicate region names are folded into one entry and the list is grouped by area. Display/filter only; lodge data keeps its own region. */
+var REGION_FOLD={'okavango/kavango':'Kavango (Okavango River)','sossusvlei/namib':'Sossusvlei','windhoek, namibia':'Windhoek'};
+function canonReg(r){r=String(r||'').trim();return REGION_FOLD[r.toLowerCase()]||r;}
+var REGION_GROUPS=[['Windhoek & Central',['Windhoek','Central Namibia']],['Sossusvlei & Namib',['Sossusvlei','Naukluft','Namib (Maltahöhe)','Namib-Naukluft (Duwisib)']],['South',['Kalahari','Fish River Canyon','Luderitz']],['Coast',['Swakopmund','Walvis Bay','Skeleton Coast']],['Damaraland & Kaokoland',['Damaraland','Kaokoland','Opuwo','Epupa']],['Etosha',['South Etosha','East Etosha','West Etosha','Etosha']],['North-East',['Kavango (Okavango River)','Caprivi']],['Chobe & Victoria Falls',['Chobe','Victoria Falls']]];
+function regions(){var o={};RATES.lodges.forEach(function(l){if(l.region&&l.cur!=='USD')o[canonReg(l.region)]=1});return Object.keys(o).sort()}
+function lodgesIn(r){r=canonReg(r);var a=[];RATES.lodges.forEach(function(l,i){if(canonReg(l.region)===r&&l.cur!=='USD')a.push(i)});return a}
+function regionOptions(list,cur){cur=canonReg(cur);var have={},used={},h='';list.forEach(function(r){have[r]=1;});function opt(r){used[r]=1;return '<option value="'+esc(r)+'" '+(cur===r?'selected':'')+'>'+esc(r)+'</option>';}REGION_GROUPS.forEach(function(g){var rs=g[1].filter(function(r){return have[r];});if(rs.length)h+='<optgroup label="'+esc(g[0])+'">'+rs.map(opt).join('')+'</optgroup>';});var rest=list.filter(function(r){return !used[r];}).sort();if(rest.length)h+='<optgroup label="Other">'+rest.map(opt).join('')+'</optgroup>';return h;}
 /* ---- USD cross-border (Botswana / Delta / Chobe / Vic Falls) ---- */
 var USD_AREA_ORDER=['Botswana','Okavango Delta','Linyanti & Savuti','Makgadikgadi & Boteti','Chobe','Vic Falls'];
 function usdAreas(){var o={};RATES.lodges.forEach(function(l){if(l.cur==='USD'&&l.region&&USD_AREA_ORDER.indexOf(l.region)<0)o[l.region]=1;});return USD_AREA_ORDER.concat(Object.keys(o).sort());}
@@ -849,8 +854,8 @@ function renderPanel(){persist();
     var regs=regions();
     applySeasonRates();
     var body=S.lodges.map(function(d,i){
-      var rlist=regs.slice();if(d.region&&rlist.indexOf(d.region)<0)rlist.push(d.region);
-      var regOpts='<option value="">Region…</option>'+rlist.map(function(r){return '<option '+(d.region===r?'selected':'')+'>'+esc(r)+'</option>'}).join('');
+      var rlist=regs.slice();if(d.region&&rlist.indexOf(canonReg(d.region))<0)rlist.push(canonReg(d.region));
+      var regOpts='<option value="">Region…</option>'+regionOptions(rlist,d.region);
       /* The lodge control is a type-ahead, not a dropdown. With a region chosen
          it offers that region; with none chosen it offers every lodge, so you can
          find a lodge without knowing its region. Region is taken from whatever
