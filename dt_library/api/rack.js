@@ -42572,7 +42572,9 @@ Object.assign(DDS_RACK_BY_YEAR, {
   Object.keys(e).forEach(function (y) {
     ((e[y] && e[y].sections) || []).forEach(function (sec) {
       if (sec.title !== 'Single BB') return;
-      (sec.rows || []).forEach(function (r) { if (r[0] === 'Deluxe Room' && r[1] === '8,091') r[1] = '7,036'; });
+      (sec.rows || []).forEach(function (r) { if (r[0] === 'Deluxe Room' && false) r[1] = r[1]; });
     });
   });
 })();
+// Mokuti Deluxe single BB per O&L sheet, 03 Oct 2026: superseded the same day. Jaun's decision: keep 6,473 net / 8,091 rack
+// (fits the sheet's +428 BB->DBB step) pending O&L's confirmation.
