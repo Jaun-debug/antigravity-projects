@@ -26,7 +26,7 @@
   /* Ongava: one NightsBridge account (32926) for four camps - count only the camp's own rooms (room names start "<camp> - "). */
   var NB_ROOMPFX={"ongavalodge": "Ongava Lodge - ", "encounter": "Encounter - ", "ongavatentedcamp": "Encounter - ", "anderssonsatongava": "Anderssons at Ongava - ", "horizon": "Horizon - ", "littleongava": "Horizon - "};
   function nbPfx(nm){return NB_ROOMPFX[String(nm||'').toLowerCase().replace(/[^a-z0-9]/g,'')]||'';}
-  function nbFilter(j,p){if(!p||!j||!j.ok)return j;var f=0;(j.rooms||[]).forEach(function(r){if(String(r.name||'').toLowerCase().indexOf(p.toLowerCase())===0)f+=(+r.free||0);});return Object.assign({},j,{free:f,available:f>0});}
+  function nbFilter(j,p){if(!p||!j||!j.ok)return j;var f=0;(j.rooms||[]).forEach(function(r){var z=function(t){return String(t||'').toLowerCase().replace(/[^a-z0-9]/g,'');};if(z(r.name).indexOf(z(p))===0)f+=(+r.free||0);});return Object.assign({},j,{free:f,available:f>0});}
   function curName(){try{var id=window.__nrLodgeId||'';var d=(typeof DB!=='undefined'&&DB)?DB[id]:null;if(d&&d.name)return d.name;}catch(e){}try{var h=document.querySelector('h1');if(h&&h.textContent)return h.textContent.trim();}catch(e){}return String(document.title||'').split(' \u2014 ')[0];}
   function bbid(){
     try{if(typeof window.__nrCurBbid==='function'){var b=window.__nrCurBbid();if(b)return String(b);}}catch(e){}

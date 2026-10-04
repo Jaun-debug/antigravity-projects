@@ -9,7 +9,7 @@ PFX = {'ongavalodge': 'Ongava Lodge - ', 'encounter': 'Encounter - ', 'ongavaten
 JS_HELPERS = ('/* Ongava: one NightsBridge account (32926) for four camps - count only the camp\'s own rooms (room names start "<camp> - "). */\n'
   'var NB_ROOMPFX=' + json.dumps(PFX) + ';\n'
   'function nbPfx(nm){return NB_ROOMPFX[String(nm||\'\').toLowerCase().replace(/[^a-z0-9]/g,\'\')]||\'\';}\n'
-  'function nbFilter(j,p){if(!p||!j||!j.ok)return j;var f=0;(j.rooms||[]).forEach(function(r){if(String(r.name||\'\').toLowerCase().indexOf(p.toLowerCase())===0)f+=(+r.free||0);});return Object.assign({},j,{free:f,available:f>0});}\n')
+  'function nbFilter(j,p){if(!p||!j||!j.ok)return j;var f=0;(j.rooms||[]).forEach(function(r){var z=function(t){return String(t||\'\').toLowerCase().replace(/[^a-z0-9]/g,\'\');};if(z(r.name).indexOf(z(p))===0)f+=(+r.free||0);});return Object.assign({},j,{free:f,available:f>0});}\n')
 def rd(f): return io.open(f, encoding='utf-8').read()
 def wr(f, s):
     io.open(f + '.tmp', 'w', encoding='utf-8').write(s); os.replace(f + '.tmp', f)
