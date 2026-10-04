@@ -501,19 +501,25 @@ var NSSET={hoanibelephantcamp:1,etoshamountainlodge:1,safarihouse:1,nkasalinyant
 var NS_URL='https://naturalselection.travel/check-availability/';
 var NBAVAIL={};
 function nbKey(id,ci,n){return id+'|'+ci+'|'+n}
+/* Ongava: one NightsBridge account (32926) for four camps - count only the camp's own rooms (room names start "<camp> - "). */
+var NB_ROOMPFX={"ongavalodge": "Ongava Lodge - ", "encounter": "Encounter - ", "ongavatentedcamp": "Encounter - ", "anderssonsatongava": "Anderssons at Ongava - ", "horizon": "Horizon - ", "littleongava": "Horizon - "};
+function nbPfx(nm){return NB_ROOMPFX[String(nm||'').toLowerCase().replace(/[^a-z0-9]/g,'')]||'';}
+function nbFilter(j,p){if(!p||!j||!j.ok)return j;var f=0;(j.rooms||[]).forEach(function(r){if(String(r.name||'').toLowerCase().indexOf(p.toLowerCase())===0)f+=(+r.free||0);});return Object.assign({},j,{free:f,available:f>0});}
+
 function nbCheck(i){
   var d=S.lodges[i]; if(!d) return;
   var L=(d.lodgeIdx>-1)?RATES.lodges[d.lodgeIdx]:null;
   var id=nbIdFor(L); if(!id) return;
   var ci=rowCheckIn(i); if(!ci) return;
   var n=Math.max(1,num(d.nights)||1);
-  var key=nbKey(id,ci,n);
+  var pf=nbPfx(L&&L.name);
+  var key=nbKey(id+(pf?'#'+pf:''),ci,n);
   if(NBAVAIL[key]) return;
   NBAVAIL[key]={state:'checking'};
   nbPaint();
   fetch(String(id).indexOf('ns:')===0?('/api/nsavail?camp='+id.slice(3)+'&start='+ci+'&nights='+n):('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n))
     .then(function(r){return r.json()})
-    .then(function(j){NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};nbPaint();})
+    .then(function(j){j=nbFilter(j,pf);NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};nbPaint();})
     .catch(function(){NBAVAIL[key]={state:'err'};nbPaint();});
 }
 function nbPaint(){
@@ -525,7 +531,7 @@ function nbPaint(){
     var id=nbIdFor(L); var ci=rowCheckIn(i); var n=Math.max(1,num(d.nights)||1);
     if(!id||!ci){el.style.display='none';return;}
     el.style.display='';
-    var st=NBAVAIL[nbKey(id,ci,n)];
+    var pf=nbPfx(L&&L.name);var st=NBAVAIL[nbKey(id+(pf?'#'+pf:''),ci,n)];
     if(!st){el.className='nbdot';el.title='Checking availability\u2026';return;}
     if(st.state==='checking'){el.className='nbdot checking';el.title='Checking availability\u2026';}
     else if(st.state==='yes'){el.className='nbdot yes';el.setAttribute('data-free',st.free);el.title=st.free+' room(s) available from '+fmtDisp(ci)+' for '+n+' night(s)';}

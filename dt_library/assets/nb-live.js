@@ -23,6 +23,11 @@
   var CACHE={}, cur='';
   function loc(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
   function fmt(iso){try{return new Date(iso+'T00:00:00').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});}catch(e){return iso;}}
+  /* Ongava: one NightsBridge account (32926) for four camps - count only the camp's own rooms (room names start "<camp> - "). */
+  var NB_ROOMPFX={"ongavalodge": "Ongava Lodge - ", "encounter": "Encounter - ", "ongavatentedcamp": "Encounter - ", "anderssonsatongava": "Anderssons at Ongava - ", "horizon": "Horizon - ", "littleongava": "Horizon - "};
+  function nbPfx(nm){return NB_ROOMPFX[String(nm||'').toLowerCase().replace(/[^a-z0-9]/g,'')]||'';}
+  function nbFilter(j,p){if(!p||!j||!j.ok)return j;var f=0;(j.rooms||[]).forEach(function(r){if(String(r.name||'').toLowerCase().indexOf(p.toLowerCase())===0)f+=(+r.free||0);});return Object.assign({},j,{free:f,available:f>0});}
+  function curName(){try{var id=window.__nrLodgeId||'';var d=(typeof DB!=='undefined'&&DB)?DB[id]:null;if(d&&d.name)return d.name;}catch(e){}try{var h=document.querySelector('h1');if(h&&h.textContent)return h.textContent.trim();}catch(e){}return String(document.title||'').split(' \u2014 ')[0];}
   function bbid(){
     try{if(typeof window.__nrCurBbid==='function'){var b=window.__nrCurBbid();if(b)return String(b);}}catch(e){}
     try{var m=String(window.nrAvail||'').match(/book\.nightsbridge\.com\/(\d+)/);if(m)return m[1];}catch(e){}
@@ -80,14 +85,15 @@
     box.removeAttribute('data-ww');
     var ns=bbid()?'':nsKey(), id=bbid()||(ns?'ns:'+ns:''), d=dates();
     if(!id||!d){ if(cur!==''){cur='';} paint(box,'idle'); return; }
-    var key=id+'|'+d.start+'|'+d.nights, info={start:d.start,nights:d.nights};
+    var pf=ns?'':nbPfx(curName());
+    var key=id+(pf?'#'+pf:'')+'|'+d.start+'|'+d.nights, info={start:d.start,nights:d.nights};
     if(key===cur){ var c=CACHE[key]; if(c&&c.st!=='checking') paint(box,c.st,Object.assign({},info,c)); return; }
     cur=key;
     if(CACHE[key]&&CACHE[key].st!=='checking'){paint(box,CACHE[key].st,Object.assign({},info,CACHE[key]));return;}
     CACHE[key]={st:'checking'}; paint(box,'checking',info);
     fetch(ns?('/api/nsavail?camp='+ns+'&start='+d.start+'&nights='+d.nights):('/api/nbavail?bbid='+encodeURIComponent(id)+'&start='+d.start+'&nights='+d.nights))
       .then(function(r){return r.json();})
-      .then(function(j){CACHE[key]=(j&&j.ok)?{st:(j.available?'yes':'no'),free:j.free||0}:{st:'err'};if(cur===key)paint(box,CACHE[key].st==='err'?'idle':CACHE[key].st,Object.assign({},info,CACHE[key]));if(CACHE[key].st==='err')box.title='Could not check right now — click to open the booking page';})
+      .then(function(j){j=nbFilter(j,pf);CACHE[key]=(j&&j.ok)?{st:(j.available?'yes':'no'),free:j.free||0}:{st:'err'};if(cur===key)paint(box,CACHE[key].st==='err'?'idle':CACHE[key].st,Object.assign({},info,CACHE[key]));if(CACHE[key].st==='err')box.title='Could not check right now — click to open the booking page';})
       .catch(function(){CACHE[key]={st:'err'};if(cur===key){paint(box,'idle');box.title='Could not check right now — click to open the booking page';}});
   }
   function showTab(){ if(!nsKey())return; var t=document.getElementById('nr-avail-tab'); if(t&&t.style.display==='none')t.style.display=''; }
