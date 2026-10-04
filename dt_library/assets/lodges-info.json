@@ -115,7 +115,7 @@
 ]
 },
 "ongavatentedcamp": {
-"name": "Ongava Tented Camp",
+"name": "Encounter",
 "url": "/south-etosha-accommodation/ongava-tented-camp/",
 "lead": "Classic tented safari camp on the private Ongava Game Reserve — fully inclusive with twice-daily activities, Etosha access, and a private waterhole.",
 "imgs": [
@@ -182,7 +182,7 @@
 "orig": "/ratesheets/originals/nwr/nwr_olifantsrus.pdf"
 },
 "littleongava": {
-"name": "Little Ongava",
+"name": "Horizon",
 "url": "/south-etosha-accommodation/little-ongava/",
 "lead": "Ongava most exclusive retreat — a private three-suite villa with dedicated sole-use guide and vehicle included, for the ultimate Etosha luxury experience.",
 "imgs": [
@@ -4606,5 +4606,25 @@
 ],
 "orig": "/ratesheets/originals/natural_selection/ns_botswana_2027_nett.pdf",
 "cur": "USD"
+},
+"encounter": {
+"name": "Encounter",
+"url": "/south-etosha-accommodation/ongava-tented-camp/",
+"lead": "Classic tented safari camp on the private Ongava Game Reserve — fully inclusive with twice-daily activities, Etosha access, and a private waterhole.",
+"imgs": [
+"https://www.andbeyond.com/wp-content/uploads/sites/5/Guest-Area-at-Ongava-Tented-Camp.jpg",
+"https://cdn.sanity.io/images/t3qm2dt2/production/32f4abf12e3fcf1033ea17e6ab68b1487892ccd1-2175x1450.jpg"
+],
+"img_source": "web"
+},
+"horizon": {
+"name": "Horizon",
+"url": "/south-etosha-accommodation/little-ongava/",
+"lead": "Ongava most exclusive retreat — a private three-suite villa with dedicated sole-use guide and vehicle included, for the ultimate Etosha luxury experience.",
+"imgs": [
+"https://wetu.com/imageHandler/c1920x1080/10525/Mokuti_Etosha_Lodge_-_Elephants_at_Waterhole1.jpg",
+"https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg",
+"https://wetu.com/imageHandler/c1920x1080/48365/1739437470638_shutterstock_1230413242.jpg"
+]
 }
 }
