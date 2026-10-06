@@ -46067,3 +46067,26 @@ Object.assign(DDS_RACK_BY_YEAR, {
     Object.keys(V[slug]).forEach(function (y) { if (!e[y]) e[y] = V[slug][y]; });
   });
 })();
+
+/* CHOBE-NATA-PUBLIC-NOTES — public wording for The Chobe Safari Lodge and Nata Lodge rack notes and section titles (no trade terms on the public page). Rates unchanged. */
+(function chobeNataPublicNotes() {
+  var N = {
+ "chobe-safari-lodge": {
+  "2026": "Valid 01 Apr 2026 – 31 Mar 2027. US$ per person per night: half board with one activity, full board or fully inclusive with two. Includes 14% VAT, bed levy, Chobe National Park fees for the included activities and return Kasane airport transfers. Impact levy US$5 per person per night extra. Children 0–5 free, 6–11 child rate, 12 and over adult rate.",
+  "2027": "Valid 01 Apr 2027 – 31 Mar 2028. US$ per person per night with two included experiences per night on every plan. Suites and Explorer Suites are all inclusive only; separate rates for stays of 2+ nights and 1 night. Luxury Rooms take one child. Includes 14% VAT, bed levy and return Kasane airport transfers. Impact levy US$5 per person per night extra. Secret Season: stay three nights or more and get one night free, 01 Dec 2027 – 30 Apr 2028."
+ },
+ "nata-lodge": {
+  "2026": "Valid 01 Apr 2026 – 31 Mar 2027. Rooms in US$ per room per night, room only; campsite per person per night. Meals and activities per person; children 0–5 free. Family chalets sleep two adults and two children. VAT 14% included; impact levy and government bed levy extra.",
+  "2027": "Valid 01 Apr 2027 – 31 Mar 2028. Rooms in US$ per room per night, room only; campsite per person per night. Meals and activities per person; children 0–5 free. Family chalets sleep two adults and two children. VAT 14% included; impact levy (rooms US$2, campsite US$1 per person per night) and government bed levy US$1.50 per person per night extra."
+ }
+};
+  if (typeof DDS_RACK_BY_YEAR === 'undefined') return;
+  Object.keys(N).forEach(function (slug) {
+    var e = DDS_RACK_BY_YEAR[slug]; if (!e) return;
+    Object.keys(N[slug]).forEach(function (y) {
+      var d = e[y]; if (!d) return;
+      d.note = N[slug][y];
+      (d.sections || []).forEach(function (sec) { sec.title = String(sec.title || '').replace(/[\s·,]*one price \(rack = nett\)/, ''); });
+    });
+  });
+})();
