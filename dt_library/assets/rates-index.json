@@ -1,6 +1,6 @@
 {
 "generated": "2026-09-23T18:09:03",
-"count": 332,
+"count": 343,
 "lodges": [
 {
 "file": "/ratesheets/camp_kwando_ratesheet_v3.html",
@@ -68730,6 +68730,3004 @@
 {
 "n": "Government bed levy · per person per night, not in the rate — 01 Apr 2027 – 31 Mar 2028",
 "p": 1.5
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Kwara Camp",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1380
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 485
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1465
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 515
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing",
+"p": 1600
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 3–5 nights (Kwara minimum 3 nights) · single supplement — add to the sharing rate",
+"p": 560
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1380
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 485
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1465
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 515
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing",
+"p": 2120
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 3–5 nights (Kwara minimum 3 nights) · single supplement — add to the sharing rate",
+"p": 745
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1905
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 670
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing",
+"p": 2120
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 3–5 nights (Kwara minimum 3 nights) · single supplement — add to the sharing rate",
+"p": 745
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 690
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1035
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Kwara ↔ 4 Rivers by road, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+},
+{
+"n": "Transfers · Boat, Kwara ↔ Xakanaxa, Camp Moremi or Okuti, min 2 guests, ±1.5 hrs — per person per way (non-commissionable)",
+"p": 130
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1725
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1830
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 645
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing",
+"p": 2000
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 3–5 nights (Kwara minimum 3 nights) · single supplement — add to the sharing rate",
+"p": 700
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1725
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1830
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 645
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing",
+"p": 2650
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 3–5 nights (Kwara minimum 3 nights) · single supplement — add to the sharing rate",
+"p": 930
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 2250
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 790
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 2380
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 835
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing",
+"p": 2650
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 3–5 nights (Kwara minimum 3 nights) · single supplement — add to the sharing rate",
+"p": 930
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 1400
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1400
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 3–5 nights (Kwara minimum 3 nights) · fully inclusive — per person sharing · no single supplement",
+"p": 1400
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 860
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1205
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Kwara ↔ 4 Rivers by road, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+},
+{
+"n": "Transfers · Boat, Kwara ↔ Xakanaxa, Camp Moremi or Okuti, min 2 guests, ±1.5 hrs — per person per way (non-commissionable)",
+"p": 130
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Splash Camp",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1295
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 650
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 530
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1565
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 450
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · Splash Enclave supplement, 2–10 guests, private vehicle required — per group per night (non-commissionable)",
+"p": 550
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Splash ↔ 4 Rivers by road, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+},
+{
+"n": "Transfers · Boat, Splash ↔ Xakanaxa, Camp Moremi or Okuti, min 2 guests, ±1.5 hrs — per person per way (non-commissionable)",
+"p": 130
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1615
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 810
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1875
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 660
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1950
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 685
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 560
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · Splash Enclave supplement, 2–10 guests, private vehicle required — per group per night (non-commissionable)",
+"p": 550
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Splash ↔ 4 Rivers by road, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+},
+{
+"n": "Transfers · Boat, Splash ↔ Xakanaxa, Camp Moremi or Okuti, min 2 guests, ±1.5 hrs — per person per way (non-commissionable)",
+"p": 130
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "4 Rivers Camp",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1295
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 650
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 530
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1565
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 450
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · 4 Rivers ↔ Splash or Kwara by road, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1615
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 810
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1875
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 660
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1950
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 685
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 560
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · 4 Rivers ↔ Splash or Kwara by road, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Mma Dinare",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 900
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 315
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 980
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 345
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1080
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 380
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 540
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 900
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 315
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 980
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 345
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1440
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 505
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1240
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 435
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1300
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1440
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 720
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Maun ↔ Mma Dinare, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1125
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 395
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1225
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 430
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1350
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 475
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 675
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1125
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 395
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1225
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 430
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 900
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 545
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1625
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Maun ↔ Mma Dinare, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Rra Dinare",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 900
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 315
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 980
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 345
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1080
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 380
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 540
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 900
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 315
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 980
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 345
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1440
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 505
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1240
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 435
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1300
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1440
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 720
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Maun ↔ Rra Dinare, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1125
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 395
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1225
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 430
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1350
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 475
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 675
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1125
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 395
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1225
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 430
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 900
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 545
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1625
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Maun ↔ Rra Dinare, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 150
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Pom Pom Camp",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 900
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 315
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 980
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 345
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1080
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 380
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 540
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 900
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 315
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 980
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 345
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1440
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 505
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1240
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 435
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1300
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1440
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 720
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1125
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 395
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1225
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 430
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1350
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 475
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 675
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1125
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 395
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1225
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 430
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 900
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 545
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1625
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1800
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 630
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Moremi Crossing",
+"region": "Okavango Delta",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 560
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 595
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 640
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 320
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 560
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 595
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 800
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 280
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 400
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 705
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 250
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 740
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 260
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 800
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 280
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 400
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 560
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 560
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 560
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 280
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 700
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 740
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 800
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 400
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 700
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 740
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1000
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 350
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 500
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 880
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 310
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 920
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 325
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1000
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 350
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 500
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 700
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 700
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 700
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 350
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Lagoon Camp",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1295
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 650
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 530
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1565
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 450
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1615
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 810
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1875
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 660
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1950
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 685
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 560
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Lebala Camp",
+"region": "Linyanti & Savuti",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1295
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 455
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 650
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1095
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 385
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1165
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 410
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1505
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 530
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1565
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 550
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 605
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 860
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 900
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 450
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · Lebala Enclave supplement, 2–10 guests, private vehicle required — per group per night (non-commissionable)",
+"p": 550
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Lebala to Selinda main camp, min 2 guests, ±1 hr to the boundary — per person per way (non-commissionable)",
+"p": 200
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 1615
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 570
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 810
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1360
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 480
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1450
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 510
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing",
+"p": 1875
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · single supplement — add to the sharing rate",
+"p": 660
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing",
+"p": 1950
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · single supplement — add to the sharing rate",
+"p": 685
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing",
+"p": 2145
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · single supplement — add to the sharing rate",
+"p": 755
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 1075
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 1120
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 560
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · Lebala Enclave supplement, 2–10 guests, private vehicle required — per group per night (non-commissionable)",
+"p": 550
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Lebala to Selinda main camp, min 2 guests, ±1 hr to the boundary — per person per way (non-commissionable)",
+"p": 200
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Nxai Pan Camp",
+"region": "Makgadikgadi & Boteti",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 695
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 720
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 695
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 720
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 695
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Nxai Pan main gate ↔ camp, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 110
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 860
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 890
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 860
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 890
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 860
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 890
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+},
+{
+"n": "Transfers · Nxai Pan main gate ↔ camp, min 2 guests, ±2 hrs — per person per way (non-commissionable)",
+"p": 110
+}
+]
+},
+{
+"file": "/ratesheets/kwando_ratesheet_v3.html",
+"name": "Tau Pan Camp",
+"region": "Botswana",
+"cur": "USD",
+"rates_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 695
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 720
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 695
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 720
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 695
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 720
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 780
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 390
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 560
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 475
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 905
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 820
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
+}
+],
+"rack_2027": [
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 860
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 890
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Secret season (16–30 Apr, May, Nov 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 860
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 890
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Shoulder season (Jun, Oct 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 860
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 890
+},
+{
+"n": "Flood season (Jul–Sep 2027) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Flood season (Jul–Sep 2027) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 8+ nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 6–7 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · 1–5 nights · fully inclusive — per person sharing · no single supplement",
+"p": 970
+},
+{
+"n": "Green season (Dec 2027 – 15 Apr 2028) · child 6–15 in a family tent or on the extra bed — per child per night",
+"p": 485
+},
+{
+"n": "Extras · Kwando Community & Conservation Levy — per person per night, add to every rate (non-commissionable)",
+"p": 20
+},
+{
+"n": "Extras · Holiday surcharge 20 Dec 2027 – 4 Jan 2028 and 14–17 Apr 2028 — per person per night, guides, group leaders & pilots included (non-commissionable)",
+"p": 150
+},
+{
+"n": "Extras · Private vehicle with camp guide, 1–2 guests — per group per night",
+"p": 700
+},
+{
+"n": "Extras · Private vehicle with camp guide, 3–4 guests — per group per night",
+"p": 590
+},
+{
+"n": "Extras · Kwando Private Guide, named guide, private vehicle needed on top — per group per night (non-commissionable)",
+"p": 345
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 1–2 guests — per group per night",
+"p": 1045
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 3–4 guests — per group per night",
+"p": 935
+},
+{
+"n": "Extras · Private vehicle + Kwando Private Guide, 5–6 guests — per group per night",
+"p": 345
+},
+{
+"n": "Extras · External guide / group leader / pilot — per person per night (non-commissionable)",
+"p": 330
+},
+{
+"n": "Extras · Agent educational, one per company per fam trip — per person per night",
+"p": 330
 }
 ]
 }
