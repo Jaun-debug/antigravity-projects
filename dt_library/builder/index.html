@@ -475,7 +475,7 @@ function nbIdFor(L){
   var rec=NBMAP[key];
   if(!rec){var inf=LODGEINFO[key];var u=inf&&inf.url?String(inf.url).replace(/\/+$/,''):'';var slug=u?u.split('/').pop():'';if(slug)rec=NBMAP[slug];}
   if(rec&&rec.nb)return rec.nb;
-  return NSSET[key]?'ns:'+key:'';
+  return NSSET[key]?'ns:'+key:(SMSET[key]?'sm:'+SMSET[key]:'');
 }
 // Wilderness Namibia camps book through Wilderness Window (agent login, no
 // public availability API), so their chip just opens the portal — no live dot.
@@ -491,7 +491,7 @@ function nbOpenAvail(i){
   var ci=rowCheckIn(i);
   if(!ci){var t=new Date();t.setDate(t.getDate()+1);ci=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
   var n=Math.max(1,num(d.nights)||1);
-  if(String(id).indexOf('ns:')===0){window.open(NS_URL,'_blank','noopener');return;}
+  if(String(id).indexOf('ns:')===0){window.open(NS_URL,'_blank','noopener');return;}if(String(id).indexOf('sm:')===0){window.open(smUrl(id.slice(3),ci,n),'_blank','noopener');return;}
   window.open('https://book.nightsbridge.com/'+id+'?startdate='+ci+'&nights='+n,'_blank','noopener');
 }
 // ── NightsBridge background availability ──────────────────────
@@ -502,6 +502,11 @@ function nbOpenAvail(i){
 // Natural Selection camps not on NightsBridge: live grid via /api/nsavail (ids 'ns:<key>').
 var NSSET={hoanibelephantcamp:1,etoshamountainlodge:1,safarihouse:1,nkasalinyanti:1,tawana:1,northislandokavango:1,dukescamp:1,dukeseast:1,mbamba:1,tuludi:1,sablealley:1,littlesable:1,elephantpan:1,skybeds:1,mokolwane:1,mokolwaneplains:1,jackscamp:1,sancamp:1,campkalahari:1,menoakwena:1,thamotelele:1,expeditionscamp:1,lekkerwater:1};
 var NS_URL='https://naturalselection.travel/check-availability/';
+/* SiteMinder direct-book (the lodges' public booking engine): The Chobe Safari Lodge and Nata Lodge via /api/smavail (ids 'sm:<property>').
+   This is the PUBLIC allocation, not Kwando's trade allocation in CIMSO (agent login), and the chip says so. */
+var SMSET={thechobesafarilodge:'chobesafarilodgedirect',natalodge:'NataLodgeDIRECT'};
+function smUrl(prop,ci,n){return 'https://direct-book.com/properties/'+prop+'?locale=en&items[0][adults]=2&items[0][children]=0&items[0][infants]=0&currency=USD&checkInDate='+ci+'&checkOutDate='+addDays(ci,n);}
+function availApi(id,ci,n){id=String(id);return id.indexOf('ns:')===0?('/api/nsavail?camp='+id.slice(3)+'&start='+ci+'&nights='+n):id.indexOf('sm:')===0?('/api/smavail?prop='+id.slice(3)+'&start='+ci+'&nights='+n):('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n);}
 var NBAVAIL={};
 function nbKey(id,ci,n){return id+'|'+ci+'|'+n}
 /* Ongava: one NightsBridge account (32926) for four camps - count only the camp's own rooms (room names start "<camp> - "). */
@@ -520,7 +525,7 @@ function nbCheck(i){
   if(NBAVAIL[key]) return;
   NBAVAIL[key]={state:'checking'};
   nbPaint();
-  fetch(String(id).indexOf('ns:')===0?('/api/nsavail?camp='+id.slice(3)+'&start='+ci+'&nights='+n):('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n))
+  fetch(availApi(id,ci,n))
     .then(function(r){return r.json()})
     .then(function(j){j=nbFilter(j,pf);NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};nbPaint();})
     .catch(function(){NBAVAIL[key]={state:'err'};nbPaint();});
@@ -771,7 +776,7 @@ function bwAvailChipHTML(L){
     checking:'<span class="nbspin"></span>',
     '':'<svg viewBox="0 0 24 24" width="18" height="18"><rect x="4" y="5.5" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>'};
   var t=!ci?'Pick a check-in date to check availability':state==='yes'?('Available'+(st.free>0?' · '+st.free+' room'+(st.free===1?'':'s'):'')+' from '+fmtDisp(ci)+' for '+n+' night'+(n===1?'':'s')):state==='no'?('Fully booked from '+fmtDisp(ci)+' for '+n+' night'+(n===1?'':'s')):state==='checking'?'Checking availability…':state==='err'?'Could not check right now':'Check availability';
-  return '<a class="viewlink nbchip'+(state==='yes'||state==='no'||state==='checking'?' '+state:'')+'" id="bw-avail" href="#" title="'+esc(t+' — click to open the booking page')+'" aria-label="'+esc(t)+'"><span class="nblab">'+(ICON[state==='err'?'':state]||ICON[''])+'</span></a>';
+  return '<a class="viewlink nbchip'+(state==='yes'||state==='no'||state==='checking'?' '+state:'')+'" id="bw-avail" href="#" title="'+esc(t+(String(id).indexOf('sm:')===0?' (public availability on the lodge website, not the trade allocation)':'')+' — click to open the booking page')+'" aria-label="'+esc(t)+'"><span class="nblab">'+(ICON[state==='err'?'':state]||ICON[''])+'</span></a>';
 }
 function wwIsBotswana(L){return !!(L&&/^wilderness\b/i.test(L.name||''));}
 function bwCheckAvail(){
@@ -779,14 +784,14 @@ function bwCheckAvail(){
   var id=nbIdFor(L),ci=bwCheckIn(),n=bwNights();if(!id||!ci)return;
   var key=nbKey(id,ci,n);if(NBAVAIL[key])return;
   NBAVAIL[key]={state:'checking'};
-  var url=String(id).indexOf('ns:')===0?('/api/nsavail?camp='+id.slice(3)+'&start='+ci+'&nights='+n):('/api/nbavail?bbid='+id+'&start='+ci+'&nights='+n);
+  var url=availApi(id,ci,n);
   fetch(url).then(function(r){return r.json()}).then(function(j){NBAVAIL[key]=(j&&j.ok)?{state:(j.available?'yes':'no'),free:j.free||0}:{state:'err'};bwRepaint();}).catch(function(){NBAVAIL[key]={state:'err'};bwRepaint();});
 }
 function bwRepaint(){var c=document.getElementById('bw-avail');if(!c||active!=='botswana')return;var L=RATES.lodges[+S._bwLodge];var w=document.createElement('div');w.innerHTML=bwAvailChipHTML(L);if(w.firstChild){c.replaceWith(w.firstChild);bwWireChip();}}
 function bwOpenAvail(){
   var L=RATES.lodges[+S._bwLodge];if(!L)return;var id=nbIdFor(L),ci=bwCheckIn(),n=bwNights();
   if(!ci){var t=new Date();t.setDate(t.getDate()+1);ci=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');}
-  if(String(id).indexOf('ns:')===0){window.open(NS_URL,'_blank','noopener');return;}
+  if(String(id).indexOf('ns:')===0){window.open(NS_URL,'_blank','noopener');return;}if(String(id).indexOf('sm:')===0){window.open(smUrl(id.slice(3),ci,n),'_blank','noopener');return;}
   if(id)window.open('https://book.nightsbridge.com/'+id+'?startdate='+ci+'&nights='+n,'_blank','noopener');
 }
 function bwWireChip(){var c=document.getElementById('bw-avail');if(c)c.onclick=function(e){e.preventDefault();bwOpenAvail();};}
