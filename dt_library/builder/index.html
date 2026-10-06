@@ -311,6 +311,9 @@ function ddRateOptions(rows){
   var key=rows.map(function(r,k){var sg=segs[k];var _e=/^extras?\s*[·:\-–]\s*(.+)$/i.exec(sg[0]);if(_e)return {g:'Extras',rest:[_e[1]].concat(sg.slice(1)).join(' — ')};for(var j=0;j<sg.length;j++){if(j===0&&sg.length<2)break;if(DD_SEASON.test(sg[j])&&!/^(single|double|twin|per |pp\b)/i.test(sg[j])){var _p=sg[j].split(/\s+·\s+/),_gs=_p.filter(function(x){return DD_SEASON.test(x);}),_ot=_p.filter(function(x){return !DD_SEASON.test(x);});return {g:_gs.join(' · '),rest:sg.slice(0,j).concat(_ot,sg.slice(j+1)).join(' — ')};}}return null;});
   var hit=key.filter(Boolean).length,groups=[],by={},mode='';
   if(hit>=2&&hit>=rows.length*0.6){mode='season';}
+  /* one season covers most rows (a single rate-year sheet): group those rows by room instead of one big season group */
+  if(mode==='season'){var _cnt={},_top='',_n=0;key.forEach(function(k){if(k&&k.g!=='Extras'){_cnt[k.g]=(_cnt[k.g]||0)+1;_n++;if(!_top||_cnt[k.g]>_cnt[_top])_top=k.g;}});
+    if(_top&&_cnt[_top]>=_n*0.7&&!String(_top).replace(/\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)[a-z]*\.?/gi,'').replace(/[\d\s–\-,.]/g,'')){key=key.map(function(k){if(!k||k.g!==_top)return k;var rs=String(k.rest).split(/\s+—\s+/);return rs.length>1?{g:rs[0],rest:rs.slice(1).join(' — ')}:k;});}}
   else{var rk={};rows.forEach(function(r,k){if(segs[k].length>1)rk[segs[k][0]]=(rk[segs[k][0]]||0)+1;});var ks=Object.keys(rk);if(ks.length>=2&&ks.some(function(x){return rk[x]>1;})&&rows.every(function(r,k){return segs[k].length>1;})){mode='room';}}
   if(!mode)return rows.map(function(r){return '<option '+r.attrs+'>'+r.html(r.n)+'</option>';}).join('');
   rows.forEach(function(r,k){var g,t;if(mode==='season'){g=key[k]?key[k].g:'Other rates';t=key[k]?key[k].rest:r.n;}else{g=segs[k][0];t=segs[k].slice(1).join(' — ');}
