@@ -443,7 +443,7 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
         try{window.addEventListener("resize",nrDockTop);
             window.addEventListener("load",nrDockTop);
             /* hide while the page is scrolling, show again once it stops */
-            var nrSt;window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;dk.classList.add("nr-scrolling");clearTimeout(nrSt);nrSt=setTimeout(function(){dk.classList.remove("nr-scrolling");},350);},{passive:true});}catch(e){}
+            var nrSt;window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;if((window.__nrHoldUntil||0)>Date.now())return;dk.classList.add("nr-scrolling");clearTimeout(nrSt);nrSt=setTimeout(function(){dk.classList.remove("nr-scrolling");},350);},{passive:true});}catch(e){}
       }
       return d;
     }catch(e){ return null; }
@@ -520,7 +520,16 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
     else{var on=(y==="2027");hideTables(on);showNote(on);}
     reflect();
   }
-  function pick(y){localStorage.setItem(KEY,(y==="2027")?"2027":"2026");applyState(year());}
+  /* Switching season must not move the page: pin the rates block where it is on screen and keep
+     its height while the other year renders (tables can be shorter, or load a moment later). */
+  function nrHold(el){try{
+    el=el||document.getElementById("rate-tables")||document.querySelector(".rate-card")||document.querySelector("main");if(!el)return;
+    var top=el.getBoundingClientRect().top,h=el.offsetHeight;
+    if(h>(parseFloat(el.style.minHeight)||0))el.style.minHeight=h+"px";
+    var t0=Date.now();window.__nrHoldUntil=t0+2000;
+    (function fix(){var d=el.getBoundingClientRect().top-top;if(Math.abs(d)>1)window.scrollBy(0,d);if(Date.now()-t0<2000)requestAnimationFrame(fix);})();
+  }catch(e){}}
+  function pick(y){nrHold();localStorage.setItem(KEY,(y==="2027")?"2027":"2026");applyState(year());}
   /* group-collection sheets re-render a lodge's rates on open — re-apply the chosen year afterwards */
   function wrapOpen(){try{
     if(typeof window.openProperty==="function" && !window.openProperty.__nrYr){

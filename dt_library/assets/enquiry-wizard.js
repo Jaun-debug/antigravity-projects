@@ -408,7 +408,7 @@
         try{window.addEventListener("resize",nrDockTop);
             window.addEventListener("load",nrDockTop);
             /* hide while the page is scrolling, show again once it stops */
-            var nrSt;window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;dk.classList.add("nr-scrolling");clearTimeout(nrSt);nrSt=setTimeout(function(){dk.classList.remove("nr-scrolling");},350);},{passive:true});}catch(e){}
+            var nrSt;window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;if((window.__nrHoldUntil||0)>Date.now())return;dk.classList.add("nr-scrolling");clearTimeout(nrSt);nrSt=setTimeout(function(){dk.classList.remove("nr-scrolling");},350);},{passive:true});}catch(e){}
       }
       return d;
     }catch(e){ return null; }
@@ -432,6 +432,15 @@
     setTimeout(sync,60); setTimeout(sync,400); setTimeout(sync,1200);
   }
 
+  /* Switching season must not move the page: pin the rates block where it is on screen and keep
+     its height while the other year renders (tables can be shorter, or load a moment later). */
+  function nrHold(el){try{
+    el=el||document.getElementById("rate-tables")||document.querySelector(".rate-card")||document.querySelector("main");if(!el)return;
+    var top=el.getBoundingClientRect().top,h=el.offsetHeight;
+    if(h>(parseFloat(el.style.minHeight)||0))el.style.minHeight=h+"px";
+    var t0=Date.now();window.__nrHoldUntil=t0+2000;
+    (function fix(){var d=el.getBoundingClientRect().top-top;if(Math.abs(d)>1)window.scrollBy(0,d);if(Date.now()-t0<2000)requestAnimationFrame(fix);})();
+  }catch(e){}}
   function bar(){
     var rt=document.getElementById("rate-tables");
     if(!rt||!rt.parentNode) return null;
@@ -442,7 +451,7 @@
       YEARS.forEach(function(y){
         var bt=document.createElement("button");
         bt.type="button"; bt.setAttribute("data-y",y); bt.textContent=y+" season";
-        bt.onclick=function(){ load(y); };
+        bt.onclick=function(){ nrHold(document.getElementById("rate-tables")); load(y); };
         b.appendChild(bt);
       });
     }
