@@ -162,6 +162,21 @@ body{padding-top:74px;}
 
 </style>
 <style id="nav-order-fix">.nav-links>.nav-item-dropdown:first-child{order:-2}#nav-grouplodges{order:-1}</style>
+<!-- LODGE-CARDS-V2 -->
+<style>
+.grid a.card{background:#fff;border-radius:0;box-shadow:none;border:0;overflow:visible}
+.grid a.card:hover{transform:none;box-shadow:none;border:0}
+.grid a.card .img{height:auto;aspect-ratio:4/3;border-radius:2px;overflow:hidden}
+.grid a.card .img::after{display:none}
+.grid a.card:hover .img{transform:none;filter:brightness(1.04)}
+.grid a.card .body{padding:18px 18px 20px;text-align:left;align-items:flex-start;gap:0}
+.grid a.card .body p.area{font-family:var(--font-body);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin:0 0 8px}
+.grid a.card .body h3{position:static;display:block;margin:0 0 10px;padding:0;text-align:left;color:#2f2924;font-family:var(--font-head);font-size:1.45rem;font-weight:400;line-height:1.25;letter-spacing:.5px;text-shadow:none;transition:color .3s}
+.grid a.card .body p.desc{font-family:var(--font-body);font-size:.92rem;line-height:1.6;color:#6f675f;margin:0 0 14px;text-transform:none;letter-spacing:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.grid a.card .go{padding:0;border:0;border-radius:0;background:none;color:#2f2924;font-family:var(--font-body);font-size:.88rem;text-transform:none;letter-spacing:.3px;transition:color .3s}
+.grid a.card:hover h3,.grid a.card:hover .go{color:var(--brand-accent);background:none}
+</style>
+<!-- /LODGE-CARDS-V2 -->
 </head>
 <body>
 <style>#uc-belt{position:fixed;top:0;left:0;right:0;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2px;line-height:1.4;text-align:center;padding:7px 16px;}@media(max-width:600px){#uc-belt{font-size:10px;padding:6px 12px;}}</style><script>(function(){function f(){var hd=document.querySelector(".main-header");if(!hd)return;hd.style.top="0px";document.body.style.paddingTop=Math.ceil(hd.getBoundingClientRect().bottom)+"px";}window.addEventListener("load",f);window.addEventListener("resize",f);if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);})();</script>
@@ -187,7 +202,7 @@ body{padding-top:74px;}
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-  <h2>Lodges</h2><div class="lodge-search-wrap"><input id="lodge-search" type="search" placeholder="Search Opuwo lodges&hellip;" oninput="filterLodges(this.value)" autocomplete="off" aria-label="Search lodges"></div><div class="grid" id="lodge-grid"><a class="card has-rates" data-name="forgotten valley ekoto camp" href="/opuwo-accommodation/forgotten-valley/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/406772/1761301431593dusk-property-and-landscape-11.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Forgotten Valley (Ekoto Camp)</h3></div><div class="body"><p>Opuwo</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="kaoko mopane lodge amp camping" href="/opuwo-accommodation/kaoko-mopane-lodge/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/28970/dji_0036.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Kaoko Mopane Lodge &amp;amp; Camping</h3></div><div class="body"><p>Opuwo</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="opuwo country lodge" href="/opuwo-accommodation/opuwo-country-lodge/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/28950/20220804_192246.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Opuwo Country Lodge</h3></div><div class="body"><p>Opuwo</p><span class="go">View lodge &#8594;</span></div></a></div><p id="lodge-noresult">No lodges match your search.</p>
+  <h2>Lodges</h2><div class="lodge-search-wrap"><input id="lodge-search" type="search" placeholder="Search Opuwo lodges&hellip;" oninput="filterLodges(this.value)" autocomplete="off" aria-label="Search lodges"></div><div class="grid" id="lodge-grid"><a class="card has-rates" data-name="forgotten valley ekoto camp" href="/opuwo-accommodation/forgotten-valley/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/406772/1761301431593dusk-property-and-landscape-11.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Opuwo</p><h3>Forgotten Valley (Ekoto Camp)</h3><p class="desc">6 luxury off-grid stone-and-wood chalets deep in the Orupupa Conservancy — complete wilderness, stunning pool, and 4x4 access only.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="kaoko mopane lodge amp camping" href="/opuwo-accommodation/kaoko-mopane-lodge/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/28970/dji_0036.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Opuwo</p><h3>Kaoko Mopane Lodge &amp;amp; Camping</h3><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="opuwo country lodge" href="/opuwo-accommodation/opuwo-country-lodge/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/28950/20220804_192246.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Opuwo</p><h3>Opuwo Country Lodge</h3><p class="desc">Hilltop lodge with sweeping views over the Kunene basin — Luxury and Standard rooms plus a self-catering campsite, with Himba, Epupa &amp;amp; Ruacana excursions.</p><span class="go">View lodge &#8594;</span></div></a></div><p id="lodge-noresult">No lodges match your search.</p>
 
   <div class="more">
     <h3>More Opuwo lodges</h3>
