@@ -171,7 +171,8 @@
 .scroll-explore .scroll-cue{position:static;left:auto;bottom:auto;transform:none;margin:0}
 
 </style>
-<style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style></head>
+<style>.grp-back{position:absolute;top:22px;left:30px;z-index:30;color:var(--text-muted);text-decoration:none;font-family:var(--font-body);font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.25s;}.grp-back:hover{color:var(--gold);}.site-hero{position:relative;}@media(max-width:600px){.grp-back{top:14px;left:16px;font-size:.7rem;}}</style><style>/* GROUP-CARDS-V2: group sheets match the region pages (editorial lodge cards, shorter hero, bigger heading) */.lodge-grid{grid-template-columns:repeat(3,1fr)!important;gap:34px 26px!important;max-width:1200px!important;padding:10px 16px 80px!important}.lodge-card{background:#fff!important;border-radius:0!important;box-shadow:none!important;transform:none!important}.lodge-card:hover{transform:none!important;box-shadow:none!important}.lodge-card-img-wrap{height:auto!important;aspect-ratio:4/3;border-radius:2px}.lodge-card-img{height:100%!important}.lodge-card:hover .lodge-card-img{transform:none!important;filter:brightness(1.04)}.lodge-card-body{padding:18px 18px 20px!important}.lodge-card-location{font-size:.62rem!important;letter-spacing:2px!important;margin-bottom:8px!important}.lodge-card-name{font-size:1.45rem!important;margin-bottom:10px!important;transition:color .3s}.lodge-card-dot,.lodge-card-divider{display:none!important}.lodge-card-desc{font-size:.92rem!important;line-height:1.6!important;-webkit-line-clamp:2!important;margin-bottom:14px!important}.lodge-card-actions{justify-content:flex-start!important;gap:22px!important}.btn-lodge,.btn-rates{border:0!important;padding:0!important;background:none!important;font-size:.84rem!important;letter-spacing:.3px!important;text-transform:none!important;color:#2f2924!important}.btn-rates::after{content:" \2192"}.lodge-card:hover .lodge-card-name,.btn-lodge:hover,.btn-rates:hover{color:var(--gold,#a48256)!important}@media(max-width:1000px){.lodge-grid{grid-template-columns:repeat(2,1fr)!important}}@media(max-width:640px){.lodge-grid{grid-template-columns:1fr!important}}.gl-head{font-size:3rem!important;line-height:1.15}@media(max-width:760px){.gl-head{font-size:2.2rem!important}}body .site-hero{min-height:max(420px,calc(66vh - 52px))!important}</style>
+</head>
 <body>
 <button class="burger-menu-btn" type="button" aria-label="Open menu" onclick="toggleMobileMenu()"><span></span><span></span><span></span></button>
 
@@ -551,7 +552,7 @@ window.__nrSyncAvail=function(){var has=!!window.__nrCurBbid();var tab=document.
 </script>
 <script>(function(){
 function build(){
- var grid=document.getElementById('lodge-grid');if(!grid)return false;
+ var grid=document.getElementById('lodge-grid');if(!grid)return false;return true;/* OND-OFF: cards shown instead of the thumb gallery */
  if(document.querySelector('.ond-wrap'))return true;
  var cards=[].slice.call(grid.querySelectorAll('.lodge-card'));if(cards.length<2)return false;
  var items=cards.map(function(c){
@@ -577,5 +578,6 @@ function build(){
 var n=0;var iv=setInterval(function(){n++;if(build()||n>40)clearInterval(iv);},120);
 window.addEventListener('load',build);
 })();</script><script>function filterGL(q){q=(q||"").toLowerCase();var ts=document.querySelectorAll(".ond-thumb");var first=null;ts.forEach(function(t){var sp=t.querySelector("span");var nm=(sp?sp.textContent:"").toLowerCase();var m=nm.indexOf(q)>-1;t.style.display=m?"":"none";if(m&&!first)first=t;});if(first){try{first.dispatchEvent(new MouseEvent("mouseenter"));}catch(e){}}}</script><script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script><script src="/assets/site-chrome.js"></script>
+<script>/* GROUP-CARDS-V2: search filters the lodge cards (the thumb gallery is switched off) */function filterGL(q){q=(q||"").toLowerCase();document.querySelectorAll("#lodge-grid .lodge-card").forEach(function(c){var n=c.querySelector(".lodge-card-name");c.style.display=(n&&n.textContent.toLowerCase().indexOf(q)>-1)?"":"none";});}</script>
 </body>
 </html>
