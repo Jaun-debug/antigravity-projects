@@ -196,6 +196,44 @@ body{padding-top:74px;}
 #lodge-noresult{display:none;color:var(--text-muted,#7d756e);font-size:.92rem;margin:12px 2px;}
 </style>
   <div class="lodge-search-wrap"><input id="lodge-search" type="search" placeholder="Search Chobe lodges…" oninput="filterLodges(this.value)" autocomplete="off" aria-label="Search lodges"></div>
+  <!-- CHOBE-AREA-MAP -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+.area-map-wrap{margin:0 0 30px}
+#area-map{height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(164,130,86,.25);background:#2b2b2b}
+@media (max-width:700px){#area-map{height:340px}}
+.area-map-note{font-size:.8rem;color:#7d756e;margin:10px 0 0}
+.area-map-note a{color:#5f7f72}
+.dt-pin{background:none;border:0}
+.dt-pin span{display:block;position:relative;width:11px;height:11px;margin:1.5px;border-radius:50%;background:#d4a94e;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);box-sizing:border-box}
+.dt-pin span::after{content:'';position:absolute;inset:-2px;border-radius:50%;border:2px solid #e2bd66;opacity:0;pointer-events:none}
+.dt-pin:hover span::after{animation:dtpulse 1.1s ease-out infinite}
+@keyframes dtpulse{0%{transform:scale(1);opacity:.95}100%{transform:scale(3);opacity:0}}
+.leaflet-tooltip.dt-tip{background:#fff;color:#3c3530;border:0;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:.78rem;padding:4px 9px}
+.area-pop b{display:block;font-size:.95rem;margin:0 0 6px}
+.area-pop a{color:#5f7f72;font-weight:600;text-decoration:none}
+</style>
+<div class="area-map-wrap"><div id="area-map" aria-label="Map of the Chobe lodges"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  var PINS=[{"n": "Chobe Game Lodge", "u": "/chobe-accommodation/chobe-game-lodge/", "lat": -17.84083, "lng": 25.076058}, {"n": "Chobe Savanna Lodge", "u": "/chobe-accommodation/chobe-savanna-lodge/", "lat": -17.8306483, "lng": 25.0533611}, {"n": "The Chobe Safari Lodge", "u": "/chobe-accommodation/chobe-safari-lodge/", "lat": -17.8056984, "lng": 25.1466809}, {"n": "Savute Safari Lodge", "u": "/chobe-accommodation/savute-safari-lodge/", "lat": -18.564308, "lng": 24.057397}, {"n": "Muchenje Safari Lodge", "u": "/chobe-accommodation/muchenje-safari-lodge/", "lat": -17.9433756, "lng": 24.7034169}];
+  if(typeof L==='undefined')return;
+  var map=L.map('area-map',{scrollWheelZoom:false});
+  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'}).addTo(map);
+  var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
+  L.control.layers({'Satellite':sat,'Map':minimal},null,{position:'topright'}).addTo(map);
+  var b=[];
+  PINS.forEach(function(p){
+    b.push([p.lat,p.lng]);
+    L.marker([p.lat,p.lng],{icon:L.divIcon({className:'dt-pin',html:'<span></span>',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map)
+      .bindTooltip(p.n,{direction:'top',offset:[0,-8],className:'dt-tip'})
+      .bindPopup('<div class="area-pop"><b>'+p.n+'</b><a href="'+p.u+'">View lodge &amp; rates &rarr;</a></div>');
+  });
+  map.fitBounds(b,{padding:[40,40]});
+})();
+</script>
+<!-- /CHOBE-AREA-MAP -->
   <div class="grid" id="lodge-grid">
       <a class="card has-rates" data-name="chobe game lodge" href="/chobe-accommodation/chobe-game-lodge/"><div class="img" style="background-image:linear-gradient(160deg,#4a5a44,#243021)"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Chobe Game Lodge</h3></div><div class="body"><p>Chobe &middot; US$</p><span class="go">View lodge &amp; rates &rarr;</span></div></a>
     <a class="card has-rates" data-name="chobe savanna lodge" href="/chobe-accommodation/chobe-savanna-lodge/"><div class="img" style="background-image:linear-gradient(160deg,#4a5a44,#243021)"><span class="rate-badge"><span class="rate-dot"></span>Rates</span><h3>Chobe Savanna Lodge</h3></div><div class="body"><p>Chobe &middot; US$</p><span class="go">View lodge &amp; rates &rarr;</span></div></a>
