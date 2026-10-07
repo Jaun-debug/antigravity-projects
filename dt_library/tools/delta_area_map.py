@@ -68,7 +68,7 @@ for aid, aname, body in areas:
 assert len(pins) == len(COORDS), (len(pins), sorted(set(COORDS) - {p['n'] for p in pins}))
 print('pins', len(pins), 'no pin', [m[0] for m in missing])
 
-legend = ''.join('<button type="button" data-a="%s"><i style="background:%s"></i>%s</button>' % (aid, COLOR[aid], aname) for aid, aname, _ in areas)
+legend = ''.join('<button type="button" data-a="%s">%s</button>' % (aid, aname) for aid, aname, _ in areas)
 nopin = ''
 if missing:
     nopin = ('<p class="area-map-note">Not on the map yet: %s.</p>'
@@ -82,7 +82,12 @@ block = '''<!-- %(mark)s -->
 .area-legend{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
 .area-legend button{display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:.74rem;letter-spacing:.5px;padding:6px 13px;border-radius:4px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;cursor:pointer}
 .area-legend button:hover{background:rgba(135,169,150,.88);color:#fff}
-.area-legend i{width:10px;height:10px;border-radius:50%%;border:1.5px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25);display:inline-block}
+.dt-pin{background:none;border:0}
+.dt-pin span{display:block;position:relative;width:11px;height:11px;margin:1.5px;border-radius:50%%;background:#d4a94e;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);box-sizing:border-box}
+.dt-pin span::after{content:'';position:absolute;inset:-2px;border-radius:50%%;border:2px solid #e2bd66;opacity:0;pointer-events:none}
+.dt-pin:hover span::after{animation:dtpulse 1.1s ease-out infinite}
+@keyframes dtpulse{0%%{transform:scale(1);opacity:.95}100%%{transform:scale(3);opacity:0}}
+.leaflet-tooltip.dt-tip{background:#fff;color:#3c3530;border:0;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:.78rem;padding:4px 9px}
 .area-map-note{font-size:.8rem;color:#7d756e;margin:10px 0 0}
 .area-map-note a{color:#5f7f72}
 .area-pop b{display:block;font-size:.95rem;margin:0 0 2px}
@@ -107,8 +112,8 @@ block = '''<!-- %(mark)s -->
   var bounds=[];
   Object.keys(groups).forEach(function(k){
     var g=groups[k],p=g[0];bounds.push([p.lat,p.lng]);
-    var m=L.circleMarker([p.lat,p.lng],{radius:8,color:'#fff',weight:2,fillColor:COLOR[p.a],fillOpacity:1}).addTo(map);
-    m.bindTooltip(g.map(function(x){return x.n;}).join(' / '),{direction:'top',offset:[0,-6]});
+    var m=L.marker([p.lat,p.lng],{icon:L.divIcon({className:'dt-pin',html:'<span></span>',iconSize:[14,14],iconAnchor:[7,7]}),title:''}).addTo(map);
+    m.bindTooltip(g.map(function(x){return x.n;}).join(' / '),{direction:'top',offset:[0,-8],className:'dt-tip'});
     m.bindPopup('<div class="area-pop">'+g.map(function(x){return '<b>'+x.n+'</b><span>'+AREAS[x.a]+'</span><a href="'+x.u+'">View lodge &amp; rates &rarr;</a>';}).join('<hr style="border:0;border-top:1px solid #eee;margin:8px 0">')+'<div style="margin-top:8px"><a href="#'+p.a+'" data-go="'+p.a+'">See this area&rsquo;s camps &darr;</a></div></div>');
     m.on('popupopen',function(e){var a=e.popup.getElement().querySelector('[data-go]');if(a)a.addEventListener('click',function(ev){ev.preventDefault();map.closePopup();go(a.getAttribute('data-go'));});});
   });
