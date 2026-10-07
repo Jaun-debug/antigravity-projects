@@ -385,8 +385,8 @@
                glass: 60% translucent, blurred and saturated backdrop, hairline
                highlight along the top edge. */
             "#nr-yrdock{position:fixed;left:var(--nr-dock-left,auto);right:auto;top:50%;transform:translateY(-50%) translateX(8px);z-index:1200;transition:opacity .25s,transform .25s;opacity:0;pointer-events:none;"
-            +"#nr-yrdock.nr-show{opacity:1;pointer-events:auto;transform:translateY(-50%)}"
             +"display:flex;flex-direction:column;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
+            +"#nr-yrdock.nr-show{opacity:1;pointer-events:auto;transform:translateY(-50%)}"
             +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
             +"#nr-yrdock button{white-space:nowrap;width:auto;text-align:center;padding:7px 15px;"
             +"background:rgba(255,255,255,.60);"
