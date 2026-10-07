@@ -1,0 +1,1733 @@
+{
+ "source": "Google Places via places_search, 7 Oct 2026",
+ "regions": {
+  "caprivi-accommodation": {
+   "Simanya River Lodge": {
+    "lat": -17.5413543,
+    "lng": 18.5341437,
+    "place_id": "ChIJhbZ2NOXp7hsRhUUPD1zDoaM",
+    "places_name": "Simanya River Lodge",
+    "note": "Nkurenkuru, Kavango West"
+   },
+   "White Sands Caprivi": {
+    "lat": -18.1085305,
+    "lng": 21.5847032,
+    "place_id": "ChIJY3k7J7Q74xsRiH4ZC4_WHy8",
+    "places_name": "White Sands Lodge",
+    "note": "Google match is White Sands Lodge at Popa Falls, Divundu/Bagani (Kavango East) - assumed same property"
+   },
+   "Zambezi Mubala Camp": {
+    "lat": -17.5431919,
+    "lng": 24.5227546,
+    "place_id": "ChIJ-agQGFA7WhkRAl17lDnOwrI",
+    "places_name": "Zambezi Mubala Camp",
+    "note": ""
+   },
+   "Zambezi Mubala Lodge": {
+    "lat": -17.5401712,
+    "lng": 24.5664495,
+    "place_id": "ChIJYaBKBkpAWhkRPF_XfNQr6sg",
+    "places_name": "Zambezi Mubala Lodge - Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Zambezi Queen": {
+    "lat": -17.813378,
+    "lng": 25.1036816,
+    "place_id": "ChIJHy8OaX-dWhkRwoLTHEkhUMY",
+    "places_name": "Zambezi Queen by Mantis",
+    "note": "Chobe River, Kasika (Namibian side)"
+   },
+   "Nkasa Linyanti": {
+    "lat": -18.4643911,
+    "lng": 23.6341929,
+    "place_id": "ChIJL4BxHb8TVxkRFprqnK-f6RE",
+    "places_name": "Nkasa Linyanti",
+    "note": "Exact-name listing inside Nkasa Rupara NP; thin listing (1 review) so verify"
+   },
+   "Camp Kwando": {
+    "lat": -18.0424041,
+    "lng": 23.3216876,
+    "place_id": "ChIJtb8T3U8qWBkRSJbgqkDdYi8",
+    "places_name": "Camp Kwando",
+    "note": ""
+   },
+   "Chobe Princess": {
+    "lat": -17.7785415,
+    "lng": 25.1578369,
+    "place_id": "ChIJA5uA6tedWhkRVEVkTloNoCs",
+    "places_name": "Chobe Princesses by Mantis",
+    "note": ""
+   },
+   "Chobe River Camp": {
+    "lat": -17.8983444,
+    "lng": 24.7289378,
+    "place_id": "ChIJuxAxYaaCUBkRLhj5cvY6h-o",
+    "places_name": "Chobe River Camp",
+    "note": ""
+   },
+   "Chobe Water Villas Zambezi": {
+    "lat": -17.8056557,
+    "lng": 25.1250427,
+    "place_id": "ChIJ_15iFRqdWhkRFa4r_Quo7Nc",
+    "places_name": "Chobe Water Villas",
+    "note": ""
+   },
+   "Divava Okavango": {
+    "lat": -18.1143016,
+    "lng": 21.5879096,
+    "place_id": "ChIJCWXTJqAw4xsRTJQH5lKFxzw",
+    "places_name": "Divava Okavango",
+    "note": ""
+   },
+   "Hakusembe River Lodge": {
+    "lat": -17.8501949,
+    "lng": 19.6713887,
+    "place_id": "ChIJs4zxlUl55RsRI5wcC2bL7E8",
+    "places_name": "Hakusembe River Lodge",
+    "note": ""
+   },
+   "Hakusembe Camping2Go": {
+    "lat": -17.8501949,
+    "lng": 19.6713887,
+    "place_id": "ChIJs4zxlUl55RsRI5wcC2bL7E8",
+    "places_name": "Hakusembe River Lodge",
+    "note": ""
+   },
+   "Ichingo Chobe River Lodge": {
+    "lat": -17.7881998,
+    "lng": 25.2069157,
+    "place_id": "ChIJ9RGojDicWhkRqQMxARcLOpU",
+    "places_name": "Ichingo Chobe River Lodge",
+    "note": ""
+   },
+   "Namushasha River Lodge": {
+    "lat": -17.986188,
+    "lng": 23.295481,
+    "place_id": "ChIJxxAFKwQsWBkRomtaOyq9v6U",
+    "places_name": "Namushasha River Lodge",
+    "note": ""
+   },
+   "Namushasha Camping2Go": {
+    "lat": -17.986188,
+    "lng": 23.295481,
+    "place_id": "ChIJxxAFKwQsWBkRomtaOyq9v6U",
+    "places_name": "Namushasha River Lodge",
+    "note": ""
+   },
+   "Namushasha River Villa": {
+    "lat": -17.986188,
+    "lng": 23.295481,
+    "place_id": "ChIJxxAFKwQsWBkRomtaOyq9v6U",
+    "places_name": "Namushasha River Lodge",
+    "note": ""
+   },
+   "Popa Falls Resort": {
+    "lat": -18.1222645,
+    "lng": 21.5828576,
+    "place_id": "ChIJqzYWVKUw4xsRsif2Vl3nT4k",
+    "places_name": "Popa Falls Resort",
+    "note": ""
+   }
+  },
+  "central-namibia-accommodation": {
+   "Ai Aiba Lodge": {
+    "lat": -21.5135827,
+    "lng": 15.5796247,
+    "place_id": "ChIJURVZmRFoihsRZdlZNgrxcPc",
+    "places_name": "Ai Aiba - The Rock Painting Lodge",
+    "note": ""
+   },
+   "Aloegrove Safari Lodge": {
+    "lat": -20.3840553,
+    "lng": 16.9162512,
+    "place_id": "ChIJaY9zNYOY9BsRd1cWJSOznfg",
+    "places_name": "Aloegrove Safari Lodge",
+    "note": ""
+   },
+   "Epako Safari Lodge": {
+    "lat": -21.2251875,
+    "lng": 16.0020625,
+    "place_id": "ChIJUXEIz4_yihsRgaOy6ne5CnU",
+    "places_name": "Epako Safari Lodge & Spa Relais & Chateaux, 5-star Lodge",
+    "note": ""
+   },
+   "Erongo Rocks nature & camp": {
+    "lat": -21.4975112,
+    "lng": 15.6299336,
+    "place_id": "ChIJVSYWJ9xnihsRimtBpJn44bY",
+    "places_name": "Erongo Rocks - Farmhouse & Camping",
+    "note": ""
+   },
+   "Gabus Game Ranch": {
+    "lat": -19.5526722,
+    "lng": 17.3079745,
+    "place_id": "ChIJB_kFfhOq8xsRjkw3ZhaXx1Q",
+    "places_name": "Gabus Safari Lodge",
+    "note": "shares Gabus Safari Lodge location (no separate Game Ranch listing; same farm Gabus 52)"
+   },
+   "Gabus Safari Lodge": {
+    "lat": -19.5526722,
+    "lng": 17.3079745,
+    "place_id": "ChIJB_kFfhOq8xsRjkw3ZhaXx1Q",
+    "places_name": "Gabus Safari Lodge",
+    "note": ""
+   },
+   "Ghaub & Waterberg Wilderness": {
+    "lat": -19.4709053,
+    "lng": 17.749745,
+    "place_id": "ChIJHyFzEHDL8xsRJyi1E01zjAE",
+    "places_name": "Ghaub Nature Reserve & Farm - ONE Namibia",
+    "note": "Combined entry covers two separate ONE Namibia properties ~110 km apart; Ghaub location used. Waterberg Wilderness is at -20.4777898, 17.3005409"
+   },
+   "Gross Barmen Resort": {
+    "lat": -22.1113549,
+    "lng": 16.7449925,
+    "place_id": "ChIJW8UNqnK4ChwRzb1TL8vXtd4",
+    "places_name": "Gross Barmen Hot Springs Resort",
+    "note": ""
+   },
+   "Hohenstein Lodge": {
+    "lat": -21.7871983,
+    "lng": 15.5128025,
+    "place_id": "ChIJQwoIBrJ2ihsRFtfUjJA_PHM",
+    "places_name": "Hohenstein Lodge",
+    "note": ""
+   },
+   "Kamaku Guesthouse": {
+    "lat": -20.4779582,
+    "lng": 16.6518502,
+    "place_id": "ChIJ8cx87Oex9BsRjug18CM50A4",
+    "places_name": "Kamaku Guesthouse Accommodation",
+    "note": ""
+   },
+   "Midgard Country Estate": {
+    "lat": -22.0501405,
+    "lng": 17.366577,
+    "place_id": "ChIJ_W8jSb1gChwR_OU7xsCAh5Q",
+    "places_name": "Midgard",
+    "note": "Farm 191 Otjihavera (Okahandja/Windhoek district)"
+   },
+   "Ohorongo Game and Safari Lodge": {
+    "lat": -19.9147968,
+    "lng": 15.1817631,
+    "place_id": "ChIJMykIhPskjBsRWuXriMXSMPQ",
+    "places_name": "Ohorongo Safari Lodge",
+    "note": "Google places it in the Outjo district (west of Outjo), not near Otavi as the brief said; name matches exactly"
+   },
+   "Okonjima Bush Camp": {
+    "lat": -20.8500176,
+    "lng": 16.6660725,
+    "place_id": "ChIJ8wte6OrR9BsRYwMaLOngdbo",
+    "places_name": "Okonjima Bush Camp",
+    "note": ""
+   },
+   "Okonjima Plains Camp": {
+    "lat": -20.8564621,
+    "lng": 16.6452537,
+    "place_id": "ChIJU823QOzR9BsRz0prZ65F67s",
+    "places_name": "Okonjima Plains Camp",
+    "note": ""
+   },
+   "Okonjima Villa": {
+    "lat": -20.8028414,
+    "lng": 16.6756587,
+    "place_id": "ChIJOYVp2EzO9BsRzdsGy6b2sWc",
+    "places_name": "Okonjima Villa",
+    "note": ""
+   },
+   "Ondudu Safari Lodge": {
+    "lat": -21.4613075,
+    "lng": 15.8754863,
+    "place_id": "ChIJS3qv-PL1ihsRoCNDZTawfWE",
+    "places_name": "Ondudu safari lodge",
+    "note": ""
+   },
+   "Waterberg Camp": {
+    "lat": -20.5163693,
+    "lng": 17.2452939,
+    "place_id": "ChIJ3SZhcjOK9BsRfz0w7aZFRUs",
+    "places_name": "Waterberg Camp - NWR (Reception)",
+    "note": "NWR Waterberg Camp reception"
+   },
+   "Waterberg Wilderness": {
+    "lat": -20.4777898,
+    "lng": 17.3005409,
+    "place_id": "ChIJ_-_L6OWJ9BsRLAqvIh8maqs",
+    "places_name": "Waterberg Wilderness - ONE Namibia",
+    "note": ""
+   }
+  },
+  "windhoek-accommodation": {
+   "Auas Safari Lodge": {
+    "lat": -22.78957,
+    "lng": 17.331646,
+    "place_id": "ChIJMzYas1SbCxwR524VZAD-lyg",
+    "places_name": "Auas Safari Lodge",
+    "note": ""
+   },
+   "Belvedere Boutique Hotel": {
+    "lat": -22.5659411,
+    "lng": 17.1143905,
+    "place_id": "ChIJ1R3pFLgECxwRbqVrP_qi9_U",
+    "places_name": "Belvedere Boutique Hotel",
+    "note": ""
+   },
+   "Daan Viljoen Camping": {
+    "lat": -22.537774,
+    "lng": 16.945694,
+    "place_id": "ChIJWdKYuBcfCxwRR43nYoNfgng",
+    "places_name": "Daan Viljoen Lodge",
+    "note": "shares Daan Viljoen Lodge location (no separate campsite listing)"
+   },
+   "Daan Viljoen Lodge": {
+    "lat": -22.537774,
+    "lng": 16.945694,
+    "place_id": "ChIJWdKYuBcfCxwRR43nYoNfgng",
+    "places_name": "Daan Viljoen Lodge",
+    "note": ""
+   },
+   "Droombos Estate & Simanya River Lodge": {
+    "lat": -22.5897173,
+    "lng": 17.1423141,
+    "place_id": "ChIJB5-26poFCxwRB3CaTwgmLj4",
+    "places_name": "Droombos",
+    "note": "Droombos Estate, Windhoek location (Simanya River Lodge is separate, in Kavango)"
+   },
+   "Heinitzburg Boutique Hotel": {
+    "lat": -22.5741401,
+    "lng": 17.0928121,
+    "place_id": "ChIJYVYh2TYbCxwRWi-kz0FbrJc",
+    "places_name": "Heinitzburg",
+    "note": ""
+   },
+   "Hohewarte Guestfarm": {
+    "lat": -22.6440018,
+    "lng": 17.4026763,
+    "place_id": "ChIJ4YRYw82lCxwRWRKJpD0v1gQ",
+    "places_name": "Hohewarte Guestfarm",
+    "note": ""
+   },
+   "Hotel Thule": {
+    "lat": -22.5523035,
+    "lng": 17.0981261,
+    "place_id": "ChIJKwOxhFMbCxwRIys5FfnA9ZE",
+    "places_name": "Hotel Thule",
+    "note": ""
+   },
+   "Midgard Otjihavera Windhoek": {
+    "lat": -22.0501405,
+    "lng": 17.366577,
+    "place_id": "ChIJ_W8jSb1gChwR_OU7xsCAh5Q",
+    "places_name": "Midgard",
+    "note": "same property as Midgard Country Estate (Farm 191 Otjihavera)"
+   },
+   "Okapuka Safari Lodge": {
+    "lat": -22.3029196,
+    "lng": 17.065841,
+    "place_id": "ChIJVylz3xHlChwRHy3PS3Tl9UY",
+    "places_name": "Okapuka Safari Lodge",
+    "note": ""
+   },
+   "Olive Grove Guesthouse": {
+    "lat": -22.553773,
+    "lng": 17.0907032,
+    "place_id": "ChIJZ2LAvFAbCxwR4MG-2LSbpyY",
+    "places_name": "Olive Grove Guesthouse",
+    "note": ""
+   },
+   "Onjala": {
+    "lat": -22.2054653,
+    "lng": 17.5827999,
+    "place_id": "ChIJ5Y1kYg9GChwRuiTKJa9fXFQ",
+    "places_name": "Onjala",
+    "note": ""
+   },
+   "The Olive Exclusive": {
+    "lat": -22.5534297,
+    "lng": 17.0902601,
+    "place_id": "ChIJO2qblFkbCxwRKLjmqE5-tmM",
+    "places_name": "The Olive Exclusive All-Suite Hotel",
+    "note": ""
+   },
+   "The Weinberg Windhoek": {
+    "lat": -22.5765942,
+    "lng": 17.1088963,
+    "place_id": "ChIJa4YU9M4ECxwRUskOmCi7SUE",
+    "places_name": "The Weinberg Hotel, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Ti Melen": {
+    "lat": -22.574005,
+    "lng": 17.1243292,
+    "place_id": "ChIJr5FFesIECxwRymCoYZQdU7o",
+    "places_name": "Ti Melen Boutique Guesthouse",
+    "note": ""
+   },
+   "Voigtland Guesthouse": {
+    "lat": -22.5802669,
+    "lng": 17.3313808,
+    "place_id": "ChIJOe1ZhlmoCxwRQwXT6BpjCCs",
+    "places_name": "Voigtland Guesthouse",
+    "note": ""
+   },
+   "Waldeck Lodge": {
+    "lat": -22.7078289,
+    "lng": 17.2291494,
+    "place_id": "ChIJlcLjZBkLCxwRY4eu7q7knsg",
+    "places_name": "Waldeck Namibia Private Luxury Lodge",
+    "note": ""
+   },
+   "Weinberg Urban Pod": {
+    "lat": -22.576739,
+    "lng": 17.1093797,
+    "place_id": "ChIJk3TUYWIFCxwRwpHg_MFiIPs",
+    "places_name": "The Weinberg Urban Pods, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "The Windhoek Lux Suites": {
+    "lat": -22.5712386,
+    "lng": 17.1060012,
+    "place_id": "ChIJwSELMFYFCxwRwQk34yoGcVg",
+    "places_name": "The Windhoek Luxury Suites",
+    "note": ""
+   }
+  },
+  "kalahari-accommodation": {
+   "Africa Safari Lodge": {
+    "lat": -24.6306018,
+    "lng": 17.7699413,
+    "place_id": "ChIJT8gfPYIJEhwRn0yEEt_vv5c",
+    "places_name": "Africa Safari Lodge",
+    "note": ""
+   },
+   "Hardap Resort": {
+    "lat": -24.4898548,
+    "lng": 17.8466377,
+    "place_id": "ChIJq4vIaVL3DRwR9k-JEyQPIfg",
+    "places_name": "NWR Hardap Resort",
+    "note": ""
+   },
+   "Kalahari Anib Lodge": {
+    "lat": -24.4302912,
+    "lng": 18.1006077,
+    "place_id": "ChIJ74Gvt0cBEhwRykIKEPtaVkE",
+    "places_name": "Kalahari Anib Lodge, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Kalahari Bush Breaks": {
+    "lat": -22.3362774,
+    "lng": 19.7527357,
+    "place_id": "ChIJOylQ5BclBhwRzt5mwx_yujU",
+    "places_name": "Kalahari Bush Breaks Lodge",
+    "note": "East of Gobabis on the Trans-Kalahari Highway, not the Mariental area"
+   },
+   "Kalahari Camping2Go": {
+    "lat": -24.4341224,
+    "lng": 18.1025123,
+    "place_id": "ChIJ61gWERkHDhwR-snWc1eAC1w",
+    "places_name": "Camping2Go, Kalahari Anib, Gondwana Collection Namibia",
+    "note": "Camping2Go at Kalahari Anib"
+   },
+   "Kalahari Farmhouse": {
+    "lat": -24.3375432,
+    "lng": 18.4012599,
+    "place_id": "ChIJiXGDID0YDhwRBIsbeSV_nr8",
+    "places_name": "Kalahari Farmhouse, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Kalahari Game Lodge": {
+    "lat": -25.6426588,
+    "lng": 19.8608556,
+    "place_id": "ChIJm66lLhQZGhwRpxFbKzaf0Qg",
+    "places_name": "Kalahari Game Lodge",
+    "note": "near Mata Mata gate"
+   },
+   "Kalahari Red Dunes Lodge": {
+    "lat": -24.0916414,
+    "lng": 17.6452492,
+    "place_id": "ChIJkeJ3tmC4DRwRxgLD1jR4Qg4",
+    "places_name": "Kalahari Red Dunes Lodge",
+    "note": ""
+   },
+   "Teufelskrallen Lodge": {
+    "lat": -24.05568,
+    "lng": 17.614349,
+    "place_id": "ChIJ09jzaNa5DRwR8SSJVtF8Xdk",
+    "places_name": "Teufelskrallen Lodge",
+    "note": ""
+   }
+  },
+  "damaraland-accommodation": {
+   "Camp Doros": {
+    "lat": -20.7228054,
+    "lng": 14.3743809,
+    "place_id": "ChIJtQHjt2c7iRsRBd9B_uFGo0A",
+    "places_name": "Camp Doros",
+    "note": ""
+   },
+   "Camp Kipwe": {
+    "lat": -20.5377025,
+    "lng": 14.429804,
+    "place_id": "ChIJ-0o0bqwtiRsRvMpD6ssIAvc",
+    "places_name": "Camp Kipwe",
+    "note": ""
+   },
+   "Damara Mopane Lodge": {
+    "lat": -20.301767,
+    "lng": 15.174823,
+    "place_id": "ChIJP-P29skFjBsR8dLaN-b1U_0",
+    "places_name": "Damara Mopane Lodge, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Grootberg Lodge": {
+    "lat": -19.8510632,
+    "lng": 14.1333069,
+    "place_id": "ChIJR0iJynAGjxsRCxtuqlJoQD8",
+    "places_name": "Grootberg Lodge",
+    "note": ""
+   },
+   "Hoada Campsite": {
+    "lat": -19.731825,
+    "lng": 14.306146,
+    "place_id": "ChIJ5bwCgUFVjhsRm8-LMWUBsU8",
+    "places_name": "Hoada Campsite",
+    "note": ""
+   },
+   "Khorixas Lodge": {
+    "lat": -20.3563115,
+    "lng": 14.9454093,
+    "place_id": "ChIJy1_eMfqrjhsRXEbJZsTcDj0",
+    "places_name": "Khorixas Lodge",
+    "note": ""
+   },
+   "Lodge Damaraland": {
+    "lat": -20.3589005,
+    "lng": 14.9464178,
+    "place_id": "ChIJo3r_uwSrjhsRqVsZNvxmte0",
+    "places_name": "Lodge Damaraland",
+    "note": "Google places it on Khorixas Townlands, next to Khorixas Lodge"
+   },
+   "Mowani Campsite": {
+    "lat": -20.5100506,
+    "lng": 14.4297565,
+    "place_id": "ChIJ-2InKlMtiRsRkkY0nG6LiRg",
+    "places_name": "Mowani Campsite",
+    "note": ""
+   },
+   "Mowani Mountain Camp": {
+    "lat": -20.5047046,
+    "lng": 14.4225892,
+    "place_id": "ChIJXRa_BN8siRsRIQF-65z3bdQ",
+    "places_name": "Mowani Mountain Camp",
+    "note": ""
+   },
+   "Omaruru Game Lodge": {
+    "lat": -21.3338689,
+    "lng": 16.0829965,
+    "place_id": "ChIJY8ohzUDpihsR56kg69yPk-o",
+    "places_name": "Omaruru Game Lodge",
+    "note": ""
+   },
+   "Onduli Enclave": {
+    "lat": -20.6171513,
+    "lng": 14.4922628,
+    "place_id": "ChIJh8DCGMsxiRsRBmK387Anttc",
+    "places_name": "Onduli Enclave",
+    "note": "listing has no reviews; sits ~150 m from Onduli Ridge"
+   },
+   "Onduli Ridge": {
+    "lat": -20.6157103,
+    "lng": 14.4934626,
+    "place_id": "ChIJl-1FSGgbCxwRBhqsaZWrWBg",
+    "places_name": "Onduli Ridge",
+    "note": "listing address is Ultimate Safaris' Windhoek office, but the pin is in Damaraland"
+   },
+   "Palmwag Camping2Go": {
+    "lat": -19.887732,
+    "lng": 13.9404508,
+    "place_id": "ChIJITdpVEgMjxsRBcFwHAcMuvQ",
+    "places_name": "Palmwag Camping2Go",
+    "note": ""
+   },
+   "Palmwag Lodge": {
+    "lat": -19.8863142,
+    "lng": 13.9365328,
+    "place_id": "ChIJb4iBZ70MjxsRkJ9xt52hc7s",
+    "places_name": "Palmwag Lodge - Gondwana Collection",
+    "note": ""
+   },
+   "Palmwag Under-Canvas Sleep-Out": {
+    "lat": -19.8863142,
+    "lng": 13.9365328,
+    "place_id": "ChIJb4iBZ70MjxsRkJ9xt52hc7s",
+    "places_name": "Palmwag Lodge - Gondwana Collection",
+    "note": "shares Palmwag Lodge location; no own listing on Google"
+   },
+   "Spitzkoppe Cabin Camp": {
+    "lat": -21.8322189,
+    "lng": 15.1784545,
+    "place_id": "ChIJo67fSWsHihsR0I9bkv2vvNU",
+    "places_name": "Spitzkoppe Cabin Camp",
+    "note": ""
+   },
+   "Spitzkoppe Restcamp": {
+    "lat": -21.8395132,
+    "lng": 15.2015866,
+    "place_id": "ChIJm_Whpj4GihsRngOd0-dE3WE",
+    "places_name": "Spitzkoppe Community Restcamp",
+    "note": ""
+   },
+   "Spitzkoppen Lodge": {
+    "lat": -21.813838,
+    "lng": 15.1740448,
+    "place_id": "ChIJOfWoXtUFihsRWUB1OOan5Rs",
+    "places_name": "Spitzkoppen Lodge",
+    "note": ""
+   },
+   "Twyfelfontein Adventure Camp": {
+    "lat": -20.5307367,
+    "lng": 14.4018302,
+    "place_id": "ChIJqexqKkYtiRsRVw-jbWWyXYE",
+    "places_name": "Twyfelfontein Adventure Camp",
+    "note": ""
+   },
+   "Twyfelfontein Country Lodge": {
+    "lat": -20.5711387,
+    "lng": 14.3693672,
+    "place_id": "ChIJ2wLKYvAriRsRp6To0Q4zz1k",
+    "places_name": "Twyfelfontein Country Lodge",
+    "note": ""
+   },
+   "Vingerklip Lodge": {
+    "lat": -20.3944465,
+    "lng": 15.4307528,
+    "place_id": "ChIJX0PygGB1jBsRIyWW_l6s1XM",
+    "places_name": "Vingerklip Lodge",
+    "note": ""
+   },
+   "Wilderness Damaraland Camp": {
+    "lat": -20.4262301,
+    "lng": 14.0072348,
+    "place_id": "ChIJsV_hehkzjxsRoXbX8if6KbY",
+    "places_name": "Damaraland Wilderness Camp",
+    "note": ""
+   },
+   "Wilderness Desert Rhino Camp": {
+    "lat": -20.0245647,
+    "lng": 13.8457346,
+    "place_id": "ChIJiUT-EEpsjxsRXZ8hw_gEltY",
+    "places_name": "Desert Rhino Camp",
+    "note": ""
+   },
+   "Wilderness Doro Nawas": {
+    "lat": -20.4495351,
+    "lng": 14.3024351,
+    "place_id": "ChIJu8vxNwDVjhsRJrGJCwsIo_U",
+    "places_name": "Wilderness Doro Nawas",
+    "note": ""
+   },
+   "Uis Elephant": {
+    "lat": -21.2167307,
+    "lng": 14.8668677,
+    "place_id": "ChIJgVgl8rKDiRsRSPkc1OJdW_o",
+    "places_name": "Uis Elephant Guesthouse",
+    "note": "unsure: Google lists 'Uis Elephant Guesthouse' in Uis (offers elephant tours); no 'Uis Elephant Lodge' listing found"
+   }
+  },
+  "kaokoland-accommodation": {
+   "Etendeka Hiking Trails": {
+    "lat": -19.9024356,
+    "lng": 13.9742907,
+    "place_id": "ChIJv7Z1jbcNjxsRsoIkXk6xk9M",
+    "places_name": "Etendeka Hiking Trail",
+    "note": "pin is at Etendeka Mountain Camp (trail start)"
+   },
+   "Etendeka Mountain Camp": {
+    "lat": -19.9014123,
+    "lng": 13.973336,
+    "place_id": "ChIJIyz5dWKgjxsR1dPr8LQPmFo",
+    "places_name": "Etendeka Mountain Camp",
+    "note": ""
+   },
+   "Hoanib Elephant Camp": {
+    "lat": -19.3437129,
+    "lng": 13.1617805,
+    "place_id": "ChIJS57wYUc5hRsRZCj-ZfmBW0c",
+    "places_name": "Hoanib Elephant Camp",
+    "note": "only 2 reviews; pin ~3.5 km from Hoanib Skeleton Coast Camp"
+   },
+   "Hoanib Valley Camp": {
+    "lat": -19.2684889,
+    "lng": 13.3147586,
+    "place_id": "ChIJ6XslTRNLhRsR7p1DeKsRlwY",
+    "places_name": "Hoanib Valley Camp",
+    "note": ""
+   },
+   "Sesfontein Guesthouse": {
+    "lat": -19.1243125,
+    "lng": 13.6285625,
+    "place_id": "ChIJHXtQa5T-jxsRN8LqqsMpwd0",
+    "places_name": "Sesfontein Guesthouse",
+    "note": ""
+   },
+   "Wilderness Serra Cafema": {
+    "lat": -17.2127062,
+    "lng": 12.2018146,
+    "place_id": "ChIJZy_EdNo2mRsRW72smUya5_k",
+    "places_name": "Wilderness Serra Cafema",
+    "note": ""
+   }
+  },
+  "opuwo-accommodation": {
+   "Forgotten Valley (Ekoto Camp)": {
+    "lat": -18.8279258,
+    "lng": 14.3671207,
+    "place_id": "ChIJ_SylIQDTkRsRR35JutESycw",
+    "places_name": "Forgotten Valley Ekoto Self-Catering Camp",
+    "note": ""
+   },
+   "Kaoko Mopane Lodge & Camping": {
+    "lat": -18.0786368,
+    "lng": 13.8847275,
+    "place_id": "ChIJY5wNIk6TkBsRQJ2Dn7c6mIo",
+    "places_name": "Kaoko Mopane Lodge & Campsite | Opuwo",
+    "note": "a review says Google Maps directions are wrong; pin location itself not verified"
+   },
+   "Opuwo Country Lodge": {
+    "lat": -18.0445893,
+    "lng": 13.8334102,
+    "place_id": "ChIJySzHs8KTkBsRiQMc4YaV6hA",
+    "places_name": "Opuwo Country Lodge",
+    "note": ""
+   }
+  },
+  "epupa-accommodation": {
+   "Epupa Falls Lodge": {
+    "lat": -17.0024352,
+    "lng": 13.2454113,
+    "place_id": "ChIJ0wXPxt3ImRsR2HQJKwNAWXc",
+    "places_name": "Epupa Falls Lodge & Campsite",
+    "note": ""
+   },
+   "Omarunga Epupa Falls Camp": {
+    "lat": -17.0021208,
+    "lng": 13.246368,
+    "place_id": "ChIJEbU3M9zImRsRyy5kJDSMTJo",
+    "places_name": "Omarunga Epupa-Falls Camp",
+    "note": ""
+   }
+  },
+  "skeleton-coast-accommodation": {
+   "Mile 108": {
+    "lat": -21.4424015,
+    "lng": 13.8198442,
+    "place_id": "ChIJPSMlPABliBsRyoLrNPBRxhQ",
+    "places_name": "Mile 108 camp",
+    "note": ""
+   },
+   "Shipwreck Lodge": {
+    "lat": -19.0689327,
+    "lng": 12.5832245,
+    "place_id": "ChIJLV_hAONAmxsRO5aHAqmIc54",
+    "places_name": "Shipwreck Lodge",
+    "note": ""
+   },
+   "Terrace Bay Resort": {
+    "lat": -19.9961525,
+    "lng": 13.0355589,
+    "place_id": "ChIJFe3AdQKlhRsRIh0KchYaOUY",
+    "places_name": "Terrace Bay Resort",
+    "note": ""
+   },
+   "Wilderness Hoanib Skeleton Coast Camp": {
+    "lat": -19.3740209,
+    "lng": 13.1501451,
+    "place_id": "ChIJiSX0wbM4hRsRI9xwCSGScmc",
+    "places_name": "Hoanib Skeleton Coast Camp",
+    "note": ""
+   }
+  },
+  "west-etosha-accommodation": {
+   "Dolomite Camp": {
+    "lat": -19.0099258,
+    "lng": 14.4740438,
+    "place_id": "ChIJzYIGjeEnjhsRdu8Q7KD5p8g",
+    "places_name": "Dolomite Resort",
+    "note": "Google name is 'Dolomite Resort' (NWR, west Etosha); same property"
+   },
+   "Etosha Mountain Lodge": {
+    "lat": -19.2646202,
+    "lng": 15.2839875,
+    "place_id": "ChIJmTgPG4rpjRsR8uP9GogRPJg",
+    "places_name": "Etosha Mountain Lodge",
+    "note": ""
+   },
+   "Galton House": {
+    "lat": null,
+    "lng": null,
+    "place_id": null,
+    "places_name": null,
+    "note": "no match; only result was Galton House guesthouse in Windhoek (different property)"
+   },
+   "Safari House (Etosha Heights / Galton area)": {
+    "lat": null,
+    "lng": null,
+    "place_id": null,
+    "places_name": null,
+    "note": "no Google listing found"
+   },
+   "Safarihoek Lodge": {
+    "lat": -19.2427334,
+    "lng": 15.2853305,
+    "place_id": "ChIJh8kPSAzpjRsRdHab2pfR3Wo",
+    "places_name": "Etosha Heights Safarihoek Lodge",
+    "note": ""
+   }
+  },
+  "east-etosha-accommodation": {
+   "Etosha King Nehale": {
+    "lat": -18.494027,
+    "lng": 16.7273622,
+    "place_id": "ChIJQTbUp2VI7RsRhRouNIxgyrY",
+    "places_name": "Etosha King Nehale, Gondwana Collection Namibia",
+    "note": "near King Nehale (Andoni) gate, NE Etosha"
+   },
+   "Onguma Bush Camp": {
+    "lat": -18.8034346,
+    "lng": 17.0458936,
+    "place_id": "ChIJ3Q3-1qWd8hsR75O2yQ43kQo",
+    "places_name": "Onguma Bush Camp",
+    "note": ""
+   },
+   "Onguma The Fort": {
+    "lat": -18.8033788,
+    "lng": 17.0454107,
+    "place_id": "ChIJue7sDlBi7RsRv6fNGRl8TdM",
+    "places_name": "Onguma The Fort",
+    "note": "Google pins for all Onguma camps cluster at the reserve entrance address, not individual camps"
+   },
+   "Onguma Tented Camp": {
+    "lat": -18.8034397,
+    "lng": 17.0459258,
+    "place_id": "ChIJf9ZIb69j7RsRfvDhqzsnF5g",
+    "places_name": "Onguma Tented Camp",
+    "note": "Google pins for all Onguma camps cluster at the reserve entrance address"
+   },
+   "Onguma Camp Kala": {
+    "lat": -18.8034499,
+    "lng": 17.045915,
+    "place_id": "ChIJsxBneSdj7RsR3ZhypogUnHw",
+    "places_name": "Onguma Camp Kala",
+    "note": "Google pins for all Onguma camps cluster at the reserve entrance address"
+   },
+   "Onguma Forest Camp": {
+    "lat": -18.8034701,
+    "lng": 17.0462315,
+    "place_id": "ChIJlxef4axi7RsRArIfbmSONT8",
+    "places_name": "Onguma Forest Camp",
+    "note": "Google pins for all Onguma camps cluster at the reserve entrance address"
+   },
+   "Onguma Leadwood Campsite": {
+    "lat": -18.8034651,
+    "lng": 17.0459043,
+    "place_id": "ChIJe5RvxlZi7RsRNCCE-VRZsT8",
+    "places_name": "Onguma Leadwood Campsite",
+    "note": "Google pins for all Onguma camps cluster at the reserve entrance address"
+   },
+   "Onguma Tamboti Campsite": {
+    "lat": -18.8034484,
+    "lng": 17.0456116,
+    "place_id": "ChIJpaJbxXCd8hsRb05JH-l0GAg",
+    "places_name": "Onguma Tamboti Campsite",
+    "note": "Google pins for all Onguma camps cluster at the reserve entrance address"
+   },
+   "Mushara Lodge": {
+    "lat": -18.8119029,
+    "lng": 17.1195531,
+    "place_id": "ChIJbW7l1SaD8hsRzenKzqgcOvQ",
+    "places_name": "Mushara Lodge",
+    "note": ""
+   },
+   "Mushara Outpost": {
+    "lat": -18.8155825,
+    "lng": 17.1364099,
+    "place_id": "ChIJX6aaMxuD8hsRCQylYJ-6bs4",
+    "places_name": "Mushara Outpost",
+    "note": ""
+   },
+   "Mushara Bush Camp": {
+    "lat": -18.8143329,
+    "lng": 17.1287727,
+    "place_id": "ChIJI6Fc9cdh8hsR1IgFBqcPJe8",
+    "places_name": "Mushara Bush camp",
+    "note": ""
+   },
+   "Villa Mushara": {
+    "lat": -18.8115652,
+    "lng": 17.1206474,
+    "place_id": "ChIJFbehgCSD8hsRNMs98gNd0EU",
+    "places_name": "VILLA MUSHARA",
+    "note": ""
+   },
+   "Emanya at Etosha": {
+    "lat": -18.8149223,
+    "lng": 17.2131958,
+    "place_id": "ChIJ19jvfm6B8hsR4DyZUJAlxdY",
+    "places_name": "Emanya@Etosha Game Lodge",
+    "note": ""
+   },
+   "Mokuti Etosha": {
+    "lat": -18.8141724,
+    "lng": 17.0489201,
+    "place_id": "ChIJoQgRb6ud8hsRWQCrJynghFE",
+    "places_name": "Mokuti Etosha",
+    "note": ""
+   },
+   "Namutoni Resort": {
+    "lat": -18.8069682,
+    "lng": 16.9405591,
+    "place_id": "ChIJz2gbQSo48hsRPJ8HDAtHmxY",
+    "places_name": "Namutoni Resort - NWR",
+    "note": ""
+   }
+  },
+  "south-etosha-accommodation": {
+   "Anderssons at Ongava": {
+    "lat": -19.355867,
+    "lng": 15.904069,
+    "place_id": "ChIJyWoVcqIOjRsRyQtIaFRZDCs",
+    "places_name": "Andersson's at Ongava",
+    "note": ""
+   },
+   "Epacha Game Lodge & Spa": {
+    "lat": -19.3910947,
+    "lng": 15.6849211,
+    "place_id": "ChIJa-0dOwKIDxwRpPzNUhEIiAk",
+    "places_name": "Epacha Game Lodge & Spa",
+    "note": ""
+   },
+   "Etosha Oberland Lodge": {
+    "lat": -19.3718051,
+    "lng": 15.9833021,
+    "place_id": "ChIJN1Y-iDcRjRsRMCxi9R2StpU",
+    "places_name": "Etosha Oberland Lodge",
+    "note": ""
+   },
+   "Etosha Omusati Lodge": {
+    "lat": -19.4556665,
+    "lng": 15.9106057,
+    "place_id": "ChIJIQV3Lt8FjRsRhtGILGG4FHo",
+    "places_name": "Etosha Omusati Lodge",
+    "note": ""
+   },
+   "Etosha Safari Camping2Go": {
+    "lat": -19.411204,
+    "lng": 15.924296,
+    "place_id": "ChIJI-GYk50PjRsRjnpL45pinm0",
+    "places_name": "Etosha Safari Camp, Gondwana Collection Namibia",
+    "note": "no own Google listing; shares Etosha Safari Camp location (assumed Gondwana Camping2Go sits on that property - unverified)"
+   },
+   "Etosha Safari Lodge": {
+    "lat": -19.405377,
+    "lng": 15.910672,
+    "place_id": "ChIJuZsgW20PjRsRtk6sdpvvbqc",
+    "places_name": "Etosha Safari Lodge, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Etosha Trading Post Campsite": {
+    "lat": -19.3879271,
+    "lng": 15.9353813,
+    "place_id": "ChIJMaRPX1EDjRsR319OWY1XH5w",
+    "places_name": "Etosha Trading Post Campsite",
+    "note": ""
+   },
+   "Etosha Village Campsite": {
+    "lat": -19.352326,
+    "lng": 15.92996,
+    "place_id": "ChIJF4ZJ2n27jRsRoiJhZ9uxJpE",
+    "places_name": "Etosha Village",
+    "note": "shares Etosha Village location"
+   },
+   "Etosha Village": {
+    "lat": -19.352326,
+    "lng": 15.92996,
+    "place_id": "ChIJF4ZJ2n27jRsRoiJhZ9uxJpE",
+    "places_name": "Etosha Village",
+    "note": ""
+   },
+   "Halali Resort": {
+    "lat": -19.0356262,
+    "lng": 16.4706654,
+    "place_id": "ChIJlbzrGrxNjRsRT9QXlw0N6Mo",
+    "places_name": "Halali Resort",
+    "note": "inside park, central Etosha"
+   },
+   "Horizon": {
+    "lat": -19.3336944,
+    "lng": 15.8722558,
+    "place_id": "ChIJKbkzXAALjRsRKzOxPg78RZc",
+    "places_name": "Horizon by Ongava",
+    "note": "matched to 'Horizon by Ongava' on Ongava reserve; listing has only 6 reviews (some mention Little Ongava) - verify"
+   },
+   "Okaukuejo Camp": {
+    "lat": -19.1792132,
+    "lng": 15.9191339,
+    "place_id": "ChIJ5xY107NzjRsR0yDzfe7e6lo",
+    "places_name": "Okaukuejo Resort",
+    "note": ""
+   },
+   "Okutala Etosha Lodge": {
+    "lat": -19.5761594,
+    "lng": 15.7457793,
+    "place_id": "ChIJoyW2ACQHjRsRp6_oAxMZx_w",
+    "places_name": "Okutala Etosha Lodge",
+    "note": ""
+   },
+   "Olifantsrus Campsite": {
+    "lat": -18.971296,
+    "lng": 14.8611396,
+    "place_id": "ChIJIaGf7qQCjhsRzgd9N8SbX1o",
+    "places_name": "Olifantsrus Campsite",
+    "note": "in western Etosha, not near Okaukuejo"
+   },
+   "Ongava Lodge": {
+    "lat": -19.3332529,
+    "lng": 15.8715979,
+    "place_id": "ChIJRxlnzv4LjRsRxybgOH2MqQY",
+    "places_name": "Ongava Lodge",
+    "note": ""
+   },
+   "Encounter": {
+    "lat": null,
+    "lng": null,
+    "place_id": null,
+    "places_name": null,
+    "note": "no Google Places listing found for an 'Encounter' camp (Etosha Heights search returned only Safarihoek Lodge); identity unclear"
+   },
+   "Onkoshi Camp": {
+    "lat": -18.6589721,
+    "lng": 16.7247534,
+    "place_id": "ChIJby3Ty4Fa7RsR1mFkKOckBxY",
+    "places_name": "Onkoshi Resort",
+    "note": "on eastern edge of Etosha Pan, not near Okaukuejo"
+   },
+   "The Ekipa Etosha Pod": {
+    "lat": -19.4082673,
+    "lng": 15.9139767,
+    "place_id": "ChIJjbrySuwPjRsRkX792z-xLhI",
+    "places_name": "The Ekipa, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Toshari Lodge": {
+    "lat": -19.5563716,
+    "lng": 15.8771114,
+    "place_id": "ChIJJZThbNgDjRsRt4GWZXdxDvk",
+    "places_name": "Toshari Lodge",
+    "note": ""
+   }
+  },
+  "swakopmund-accommodation": {
+   "Atlantic Villa Boutique Guesthouse": {
+    "lat": -22.633691,
+    "lng": 14.5268509,
+    "place_id": "ChIJewKuBnFZdhwRTih8EM5spT0",
+    "places_name": "Atlantic Villa Guest House",
+    "note": ""
+   },
+   "Beach Hotel Swakopmund": {
+    "lat": -22.685733,
+    "lng": 14.5235021,
+    "place_id": "ChIJg3vCYfRYdhwR0tS9XjuI7PY",
+    "places_name": "Beach Hotel Swakopmund",
+    "note": ""
+   },
+   "Beach Lodge": {
+    "lat": -22.6338127,
+    "lng": 14.5254614,
+    "place_id": "ChIJnczNJnFZdhwRZsHXImA2o58",
+    "places_name": "Beach Lodge",
+    "note": ""
+   },
+   "Cornerstone Guesthouse": {
+    "lat": -22.6821337,
+    "lng": 14.5273274,
+    "place_id": "ChIJsw4mefFYdhwRtM5LY1oDERA",
+    "places_name": "Cornerstone Guesthouse",
+    "note": ""
+   },
+   "Flamingo Villa Boutique Hotel": {
+    "lat": -22.9773751,
+    "lng": 14.4822325,
+    "place_id": "ChIJz3ZqmVzvdhwRMPFGEClGeD8",
+    "places_name": "Flamingo Villas Boutique Hotel",
+    "note": "located in Walvis Bay (lagoon), not Swakopmund"
+   },
+   "Hansa Hotel Swakopmund": {
+    "lat": -22.6773521,
+    "lng": 14.5261385,
+    "place_id": "ChIJoSZv5vpYdhwRBKULgG2S5aw",
+    "places_name": "Hansa Hotel Swakopmund",
+    "note": ""
+   },
+   "Namib Guesthouse": {
+    "lat": -22.6809337,
+    "lng": 14.532121,
+    "place_id": "ChIJ7Wb_au5YdhwRDulrNbFRbNU",
+    "places_name": "Namib Guesthouse",
+    "note": ""
+   },
+   "Ocean House Guesthouse": {
+    "lat": -22.6636819,
+    "lng": 14.5280254,
+    "place_id": "ChIJWbnB9QJZdhwR2yZurVrTf8A",
+    "places_name": "Ocean House Guesthouse",
+    "note": ""
+   },
+   "Organic Stay": {
+    "lat": -22.6815268,
+    "lng": 14.5317198,
+    "place_id": "ChIJO2R_iPFYdhwR6v6kZHVYvXM",
+    "places_name": "Organic Stay",
+    "note": ""
+   },
+   "Oyster Box Guesthouse": {
+    "lat": -22.9625119,
+    "lng": 14.4860103,
+    "place_id": "ChIJicwupG_vdhwRj5voLX-08XI",
+    "places_name": "Oyster Box Guesthouse",
+    "note": "Walvis Bay"
+   },
+   "Strand Hotel Swakopmund": {
+    "lat": -22.6755638,
+    "lng": 14.5219671,
+    "place_id": "ChIJSTarUvhYdhwRtePjI88MXm0",
+    "places_name": "Strand Hotel",
+    "note": ""
+   },
+   "Swakopmund Sands": {
+    "lat": -22.6850188,
+    "lng": 14.5233665,
+    "place_id": "ChIJqZd_kfZYdhwRwtNG6ur8Ya8",
+    "places_name": "Swakopmund Sands",
+    "note": ""
+   },
+   "The Delight Swakopmund": {
+    "lat": -22.675263,
+    "lng": 14.527896,
+    "place_id": "ChIJEa_N9PpYdhwRl-sUjjuP2Wk",
+    "places_name": "The Delight Hotel Swakopmund, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "The Rez": {
+    "lat": -22.6830118,
+    "lng": 14.5280598,
+    "place_id": "ChIJA3QgSwBZdhwRy6phopmAkI4",
+    "places_name": "The Rez @ Swakop",
+    "note": "Google listing has no reviews or lodging type - verify it is the same property"
+   },
+   "Windpomp 14 Sea Side Camp": {
+    "lat": -22.4804904,
+    "lng": 14.4698591,
+    "place_id": "ChIJP-QuVH5PdhwRBUgWgpDcW9c",
+    "places_name": "Windpomp 14",
+    "note": "Mile 14 on C34, north of Swakopmund"
+   },
+   "Hotel Pension Rapmund": {
+    "lat": -22.6774675,
+    "lng": 14.5242528,
+    "place_id": "ChIJSwdTV_dYdhwRb9en_M0aKls",
+    "places_name": "Hotel Pension Rapmund",
+    "note": ""
+   },
+   "Lagoon Chalets": {
+    "lat": -22.9809526,
+    "lng": 14.4862247,
+    "place_id": "ChIJ236Iq0XvdhwRpMUBQj5C_8w",
+    "places_name": "Lagoon Chalets",
+    "note": "Walvis Bay"
+   }
+  },
+  "luderitz-accommodation": {
+   "Alte Villa 2025": {
+    "lat": -26.6480151,
+    "lng": 15.1565368,
+    "place_id": "ChIJfx7R2JDmaxwRiI7Ydtn_4O0",
+    "places_name": "Alte Villa",
+    "note": ""
+   },
+   "Lüderitz Nest Hotel": {
+    "lat": -26.652957,
+    "lng": 15.14962,
+    "place_id": "ChIJ9QHv-ZXmaxwRdYOLHfQaMLc",
+    "places_name": "LÜDERITZ NEST HOTEL",
+    "note": ""
+   },
+   "Luderitz Nest Hotel": {
+    "lat": -26.652957,
+    "lng": 15.14962,
+    "place_id": "ChIJ9QHv-ZXmaxwRdYOLHfQaMLc",
+    "places_name": "LÜDERITZ NEST HOTEL",
+    "note": "same hotel as Lüderitz Nest Hotel"
+   },
+   "Shark Island Resort": {
+    "lat": -26.6337525,
+    "lng": 15.1516815,
+    "place_id": "ChIJr1xGVZ7maxwRB9onhpEV9cY",
+    "places_name": "Shark Island Camp Site",
+    "note": "no separate 'Resort' listing; NWR Shark Island campsite listing used (same NWR site on Shark Island)"
+   }
+  },
+  "victoria-falls-accommodation": {
+   "Bayete Guest Lodge": {
+    "lat": -17.9277838,
+    "lng": 25.8210799,
+    "place_id": "ChIJt0l2wjDlTxkR9ptg3ufB9B8",
+    "places_name": "Bayete Guest Lodge",
+    "note": ""
+   },
+   "Nkosi (Bayete Collection)": {
+    "lat": -17.9247311,
+    "lng": 25.8218024,
+    "place_id": "ChIJ0QTuiP3lTxkRXLpuOnd9-vM",
+    "places_name": "Nkosi Guest Lodge",
+    "note": ""
+   },
+   "PheZulu (Bayete Collection)": {
+    "lat": -17.9265028,
+    "lng": 25.8228823,
+    "place_id": "ChIJbXGltF3lTxkRGsMWMae2iwQ",
+    "places_name": "PheZulu Guest Lodge",
+    "note": ""
+   },
+   "Drift Inn (Bayete Collection)": {
+    "lat": -17.9223108,
+    "lng": 25.830634,
+    "place_id": "ChIJubgVfZnlTxkR7Grr4NfWBJI",
+    "places_name": "Drift Inn",
+    "note": ""
+   },
+   "The Victorian Manor (Bayete Collection)": {
+    "lat": -17.922566,
+    "lng": 25.8303268,
+    "place_id": "ChIJox4V4H3lTxkRwwc0a-ToMtY",
+    "places_name": "The Victorian Manor",
+    "note": ""
+   },
+   "Pioneers Victoria Falls": {
+    "lat": -17.9268455,
+    "lng": 25.819025,
+    "place_id": "ChIJO9fANDDlTxkRPiARMAgiFB8",
+    "places_name": "Pioneers Lodge",
+    "note": ""
+   },
+   "Cresta Sprayview Hotel": {
+    "lat": -17.9309367,
+    "lng": 25.829459,
+    "place_id": "ChIJtfLNoUflTxkRLFB12eefyxg",
+    "places_name": "Cresta Sprayview",
+    "note": ""
+   }
+  },
+  "sossusvlei-accommodation": {
+   "Ababis Guest Farm": {
+    "lat": -23.9811376,
+    "lng": 16.0921824,
+    "place_id": "ChIJiQVQlu0ecxwRMO6OnVR7-D0",
+    "places_name": "Ababis Guest Farm",
+    "note": ""
+   },
+   "Barkhan Dune Retreat": {
+    "lat": -23.7620882,
+    "lng": 16.0352794,
+    "place_id": "ChIJE7MqctwTcxwRj-IMBYi80KQ",
+    "places_name": "Barkhan Dune Retreat",
+    "note": ""
+   },
+   "Camp Sossus": {
+    "lat": -24.7114074,
+    "lng": 16.0717812,
+    "place_id": "ChIJj29NXJCfchwReIiQTT0DHIU",
+    "places_name": "Camp Sossus",
+    "note": ""
+   },
+   "Dead Valley Lodge": {
+    "lat": -24.481554,
+    "lng": 15.7958612,
+    "place_id": "ChIJS6uDn3iLchwRu6olJLlIdXs",
+    "places_name": "Dead Valley Lodge",
+    "note": ""
+   },
+   "Desert Camp": {
+    "lat": -24.4870736,
+    "lng": 15.849274,
+    "place_id": "ChIJHcANjImKchwR-eO23SLUsa8",
+    "places_name": "Desert Camp",
+    "note": ""
+   },
+   "Desert Hills Lodge": {
+    "lat": -24.606279,
+    "lng": 15.9594286,
+    "place_id": "ChIJWwOWyPCFchwRfkr5RmnPdEs",
+    "places_name": "Desert Hills Lodge",
+    "note": ""
+   },
+   "Desert Homestead Lodge": {
+    "lat": -24.6392576,
+    "lng": 15.9620542,
+    "place_id": "ChIJTxbMJDGFchwR1WYQiASrzLE",
+    "places_name": "Desert Homestead Lodge",
+    "note": ""
+   },
+   "Desert Quiver Camp": {
+    "lat": -24.485799,
+    "lng": 15.837652,
+    "place_id": "ChIJZa13YqiLchwRuKAxIxpIxgY",
+    "places_name": "Desert Quiver Camp",
+    "note": ""
+   },
+   "Desert Whisper": {
+    "lat": -24.0925675,
+    "lng": 15.9110516,
+    "place_id": "ChIJufZJb_n9chwRQtSXqbulmkU",
+    "places_name": "Desert Whisper, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Hammerstein Lodge": {
+    "lat": -24.8732823,
+    "lng": 16.1784782,
+    "place_id": "ChIJQ8sMG-uZEhwRLKJy6CwtWf4",
+    "places_name": "Hammerstein Lodge",
+    "note": ""
+   },
+   "Kwessi Dunes": {
+    "lat": -24.876085,
+    "lng": 15.90196,
+    "place_id": "ChIJSwS3g2x8bRwRGkUQK6CIqKg",
+    "places_name": "Kwessi Dunes",
+    "note": ""
+   },
+   "Le Mirage Sossusvlei": {
+    "lat": -24.6830606,
+    "lng": 15.8154425,
+    "place_id": "ChIJP_0S3w-HchwR2zXib_uHuFQ",
+    "places_name": "Le Mirage Desert Lodge & Spa",
+    "note": ""
+   },
+   "Little Sossus Lodge": {
+    "lat": -24.6588638,
+    "lng": 15.9910315,
+    "place_id": "ChIJOVPh0iObchwRusCEWhz1Jw0",
+    "places_name": "Little Sossus Lodge",
+    "note": ""
+   },
+   "Moon Mountain Lodge": {
+    "lat": -24.1014026,
+    "lng": 15.9760763,
+    "place_id": "ChIJd5SFSYWycxwRBD_I0IXLV-U",
+    "places_name": "Moon Mountain Lodge",
+    "note": ""
+   },
+   "Namib Desert Lodge": {
+    "lat": -24.1165948,
+    "lng": 15.9051844,
+    "place_id": "ChIJga9aLU_8chwRYEQyKb9OJRI",
+    "places_name": "Namib Desert Lodge, Gondwana Collection Namibia",
+    "note": "Google address text says 'Hardap Dam' but coordinates are near Solitaire, consistent"
+   },
+   "Namib Dune Star Camp": {
+    "lat": -24.0987959,
+    "lng": 15.8686333,
+    "place_id": "ChIJgysHOegOchwRFKeUn7n3XIk",
+    "places_name": "Namib Dune Star Camp, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Namib Outpost": {
+    "lat": -24.6236354,
+    "lng": 15.8974619,
+    "place_id": "ChIJHcANjImKchwR-KqZr2HBc4U",
+    "places_name": "Namib Outpost",
+    "note": ""
+   },
+   "Naukluft Camp": {
+    "lat": -24.2651683,
+    "lng": 16.2391126,
+    "place_id": "ChIJs4al3ZrDchwREIyFanIyDTc",
+    "places_name": "Naukluft Campsite - NWR",
+    "note": "Google lists it as Naukluft Campsite (NWR); assumed same property"
+   },
+   "Reverie Kalahari Pod": {
+    "lat": -24.4115352,
+    "lng": 18.0974045,
+    "place_id": "ChIJcwI2bGIHDhwRUnxdmtbnmaE",
+    "places_name": "Reverie Kalahari Pod, Gondwana Collection Namibia",
+    "note": "Name matches but it is in the Kalahari near Mariental, not Sossusvlei region - check folder"
+   },
+   "Rostock Ritz Desert Lodge": {
+    "lat": -23.5594573,
+    "lng": 15.8431789,
+    "place_id": "ChIJG-P4kuJ2cxwRaTGqp8L0z_Q",
+    "places_name": "Rostock Ritz Desert Lodge",
+    "note": ""
+   },
+   "Sesriem Campsite": {
+    "lat": -24.4862708,
+    "lng": 15.7990914,
+    "place_id": "ChIJK6aZj4mKchwRScLb-2eyHi4",
+    "places_name": "Sesriem Campsite - NWR",
+    "note": ""
+   },
+   "Sesriem Oshana Campsite": {
+    "lat": -24.4845018,
+    "lng": 15.7940534,
+    "place_id": "ChIJfUYPiCyLchwRCUJFQCG-4nI",
+    "places_name": "Sesriem Oshana Camp",
+    "note": ""
+   },
+   "Solitaire Mountain Lodge": {
+    "lat": -23.8650178,
+    "lng": 16.058949,
+    "place_id": "ChIJERnoVgEacxwRIvikM8IVf9U",
+    "places_name": "Solitaire Mountain Lodge",
+    "note": ""
+   },
+   "Sossus Dune Lodge": {
+    "lat": -24.5065966,
+    "lng": 15.7889628,
+    "place_id": "ChIJ7ekgWXGKchwRyeMbkB_X58I",
+    "places_name": "Sossus Dune Lodge",
+    "note": ""
+   },
+   "Sossus Oasis Campsite": {
+    "lat": -24.491027,
+    "lng": 15.803219,
+    "place_id": "ChIJvT-f-WCKchwRQr-YReQKP8Y",
+    "places_name": "Sossus Oasis Camp Site",
+    "note": ""
+   },
+   "Sossusvlei Lodge": {
+    "lat": -24.4837177,
+    "lng": 15.8025467,
+    "place_id": "ChIJC2x-jYmKchwRAWYMU7dOvDY",
+    "places_name": "Sossusvlei Lodge",
+    "note": ""
+   },
+   "The Desert Grace": {
+    "lat": -24.1737446,
+    "lng": 15.901862,
+    "place_id": "ChIJWTImEcH7chwR78YociEwIZw",
+    "places_name": "The Desert Grace, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "The Pearls Beach Pods": {
+    "lat": -22.6794583,
+    "lng": 14.5220167,
+    "place_id": "ChIJWRk9WfpZdhwRSQiLnrCnU2Q",
+    "places_name": "The Pearls Beach Pods, Gondwana Collection Namibia",
+    "note": "Name matches but it is in Swakopmund (16 Molenweg), not Sossusvlei region - check folder",
+    "off_map": true
+   },
+   "Tsauchab River Camp": {
+    "lat": -24.4438025,
+    "lng": 16.1700763,
+    "place_id": "ChIJc4_H9M2_chwRCNsyQH_kZMs",
+    "places_name": "Tsauchab River Camp",
+    "note": ""
+   },
+   "We Kebi Safari Lodge": {
+    "lat": -24.905996,
+    "lng": 16.2345036,
+    "place_id": "ChIJN6XI4u1dbRwRaYkE884wwmY",
+    "places_name": "We Kebi Safari Lodge",
+    "note": ""
+   },
+   "Wilderness Kulala Desert Lodge": {
+    "lat": -24.614963,
+    "lng": 15.7034274,
+    "place_id": "ChIJwdLSekJjchwR8WSuagcMXMo",
+    "places_name": "Wilderness Kulala Desert Lodge",
+    "note": ""
+   },
+   "Wilderness Little Kulala": {
+    "lat": -24.6189495,
+    "lng": 15.7627201,
+    "place_id": "ChIJdRpA3LlichwRZ5fcTNh5L38",
+    "places_name": "Little Kulala",
+    "note": ""
+   },
+   "Wolwedans Boulders Camp": {
+    "lat": -25.3304383,
+    "lng": 15.976672,
+    "place_id": "ChIJ5z9y7RsQbRwR7p___LsLhTc",
+    "places_name": "Boulders Safari Camp",
+    "note": "Google name lacks 'Wolwedans' but reviews place it in NamibRand; probable match, unverified"
+   },
+   "Wolwedans Dune Camp": {
+    "lat": -25.1401081,
+    "lng": 15.9872017,
+    "place_id": "ChIJg57CLkJtbRwR48b2drn7kNY",
+    "places_name": "Wolwedans Dune Camp",
+    "note": ""
+   },
+   "Wolwedans Dunes Lodge": {
+    "lat": -25.0967694,
+    "lng": 15.9694099,
+    "place_id": "ChIJDzp8g3VybRwRCftsGUWKBpQ",
+    "places_name": "Wolwedans Dunes Lodge - Family Room, Non Smoking, Mountain View",
+    "note": "Google entry is a room listing; same spot as 'Wolwedans Collection' (ChIJy_RUgnVybRwRxPyVBiW454A)"
+   },
+   "Wolwedans Mountain View Suite": {
+    "lat": -25.0967694,
+    "lng": 15.9694099,
+    "place_id": "ChIJDzp8g3VybRwRCftsGUWKBpQ",
+    "places_name": "Wolwedans Dunes Lodge - Family Room, Non Smoking, Mountain View",
+    "note": "shares Wolwedans Dunes Lodge location; no separate Google listing for the suite"
+   },
+   "Wolwedans Plains Camp": {
+    "lat": -25.1339776,
+    "lng": 16.015005,
+    "place_id": "ChIJ89sljh9tbRwRY3HUg7SyC7g",
+    "places_name": "Wolwedans Plains Camp",
+    "note": ""
+   },
+   "Weltevrede Guest Farm": {
+    "lat": -24.1777342,
+    "lng": 15.9800571,
+    "place_id": "ChIJc05Zl8_kchwRvEWmlqmKsAE",
+    "places_name": "Weltevrede Guest Farm",
+    "note": ""
+   },
+   "Duwisib Guest Farm": {
+    "lat": -25.2564952,
+    "lng": 16.5383014,
+    "place_id": "ChIJ298gzZ3NEhwRg1GKqR99Ndo",
+    "places_name": "Duwisib Guest Farm",
+    "note": ""
+   }
+  },
+  "fish-river-canyon-accommodation": {
+   "/Ai-/Ais Hot Springs and Spa": {
+    "lat": -27.9180915,
+    "lng": 17.4890193,
+    "place_id": "ChIJP6SwV_pHPhwR0P3xjyfEksM",
+    "places_name": "Ai-Ais Hotsprings Chalets",
+    "note": "NWR resort chalets listing; campsite listing ChIJrT3aGPpHPhwRg6Ce4GrqlJo is ~300 m away"
+   },
+   "Alte Kalkofen Lodge": {
+    "lat": -26.8248181,
+    "lng": 17.3522271,
+    "place_id": "ChIJl9fNnc9UFBwR9IWK9q3PS1Q",
+    "places_name": "Alte Kalkofen Lodge",
+    "note": ""
+   },
+   "Bahnhof Hotel Aus": {
+    "lat": -26.6657867,
+    "lng": 16.2606143,
+    "place_id": "ChIJxysc3DY5axwRVKQE8tx56go",
+    "places_name": "Bahnhof Hotel Aus",
+    "note": ""
+   },
+   "Boplaas Campsite": {
+    "lat": -28.1377218,
+    "lng": 17.1953068,
+    "place_id": "ChIJr_LzwI2vPxwRLS-unP4SIc0",
+    "places_name": "Bo-Plaatz NWR Campsite",
+    "note": "spelling differs (Bo-Plaatz); Orange River near Fish River confluence, probable match"
+   },
+   "Canyon Lodge": {
+    "lat": -27.6633422,
+    "lng": 17.7801935,
+    "place_id": "ChIJneKJLzwaPhwRXi7TC-h-BB0",
+    "places_name": "Canyon Lodge, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Canyon Roadhouse": {
+    "lat": -27.5242786,
+    "lng": 17.8147869,
+    "place_id": "ChIJqSA7k3QdPhwRqyUEQcguD8E",
+    "places_name": "Canyon Roadhouse, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Canyon Village": {
+    "lat": -27.65232,
+    "lng": 17.77385,
+    "place_id": "ChIJ3eIcay4aPhwRiK_TL_DT7Rc",
+    "places_name": "Canyon Village, Gondwana Collection Namibia",
+    "note": ""
+   },
+   "Fish River Lodge": {
+    "lat": -27.5272636,
+    "lng": 17.5371074,
+    "place_id": "ChIJKb5xv8-JFRwR74VUYyiFWUM",
+    "places_name": "Fish River Lodge",
+    "note": ""
+   },
+   "Hobas Lodge": {
+    "lat": -27.6203131,
+    "lng": 17.7149519,
+    "place_id": "ChIJ17myFdgYPhwRZiZDvdWmxyU",
+    "places_name": "Hobas Campsite - NWR",
+    "note": "no Google listing named 'Hobas Lodge'; uses NWR Hobas camp at the canyon gate - verify"
+   },
+   "Koiimasis Fest-Inn-Fels Farmlodge": {
+    "lat": -25.9214007,
+    "lng": 16.2597244,
+    "place_id": "ChIJIfsIZSe5bBwRdrAtybZ2Pbk",
+    "places_name": "Ranch Koiimasis Farm-Lodge (Fest Inn Fels)",
+    "note": ""
+   },
+   "Nooishof": {
+    "lat": -25.7263459,
+    "lng": 16.3744882,
+    "place_id": "ChIJoc3cVADPbBwRoXzGbZvQjw4",
+    "places_name": "Guest Farm Nooishof",
+    "note": ""
+   }
+  },
+  "botswana-accommodation": {
+   "Camp Okavango": {
+    "lat": -19.1320797,
+    "lng": 23.0978137,
+    "place_id": "ChIJWW7BydRDVhkRKLVFW96uOp8",
+    "places_name": "Camp Okavango",
+    "note": ""
+   },
+   "Tuludi": {
+    "lat": -19.1379194,
+    "lng": 23.5675802,
+    "place_id": "ChIJSfCH-kKNVhkRM7_H1FcgzRk",
+    "places_name": "Tuludi Camp",
+    "note": ""
+   },
+   "Chobe Game Lodge": {
+    "lat": -17.84083,
+    "lng": 25.076058,
+    "place_id": null,
+    "places_name": "Chobe Game Lodge",
+    "note": ""
+   },
+   "Jack's Camp": {
+    "lat": -20.4956474,
+    "lng": 25.1844749,
+    "place_id": null,
+    "places_name": "Jack's Camp",
+    "note": ""
+   },
+   "Tau Pan Camp": {
+    "lat": -21.4506127,
+    "lng": 23.4210219,
+    "place_id": null,
+    "places_name": "Tau Pan Camp",
+    "note": ""
+   },
+   "Leroo La Tau": {
+    "lat": -20.4206221,
+    "lng": 24.5217782,
+    "place_id": null,
+    "places_name": "Leroo La Tau",
+    "note": ""
+   }
+  },
+  "linyanti-savuti-accommodation": {
+   "Wilderness Little DumaTau": {
+    "lat": -18.5247333,
+    "lng": 23.5784975,
+    "place_id": "ChIJiRCOXdMPVxkR_yk_YlPEPdk",
+    "places_name": "Wilderness DumaTau",
+    "note": "shares Wilderness DumaTau location; no separate Google listing for Little DumaTau"
+   },
+   "Wilderness DumaTau": {
+    "lat": -18.5247333,
+    "lng": 23.5784975,
+    "place_id": null,
+    "places_name": "Wilderness DumaTau",
+    "note": ""
+   },
+   "Wilderness King's Pool": {
+    "lat": -18.4380621,
+    "lng": 23.7069809,
+    "place_id": null,
+    "places_name": "Wilderness King's Pool",
+    "note": ""
+   },
+   "Wilderness Linyanti Tented Camp": {
+    "lat": -18.3545326,
+    "lng": 23.8382483,
+    "place_id": null,
+    "places_name": "Wilderness Linyanti Tented Camp",
+    "note": ""
+   },
+   "Wilderness Savuti": {
+    "lat": -18.5969336,
+    "lng": 23.6739327,
+    "place_id": null,
+    "places_name": "Wilderness Savuti",
+    "note": ""
+   },
+   "Lagoon Camp": {
+    "lat": -18.2153546,
+    "lng": 23.4126457,
+    "place_id": null,
+    "places_name": "Lagoon Camp",
+    "note": ""
+   },
+   "Lebala Camp": {
+    "lat": -18.3581272,
+    "lng": 23.5260708,
+    "place_id": null,
+    "places_name": "Lebala Camp",
+    "note": ""
+   }
+  },
+  "makgadikgadi-accommodation": {
+   "Jack's Private Camp": {
+    "lat": -20.4956474,
+    "lng": 25.1844749,
+    "place_id": "ChIJpUWPRkzPUhkRmncdicVznSA",
+    "places_name": "Jack's Camp",
+    "note": "shares Jack's Camp location; no separate Google listing for the private camp"
+   },
+   "Jack's Camp": {
+    "lat": -20.4956474,
+    "lng": 25.1844749,
+    "place_id": null,
+    "places_name": "Jack's Camp",
+    "note": ""
+   },
+   "San Camp": {
+    "lat": -20.4987244,
+    "lng": 25.1314136,
+    "place_id": null,
+    "places_name": "San Camp",
+    "note": ""
+   },
+   "Camp Kalahari": {
+    "lat": -20.4679819,
+    "lng": 25.1331246,
+    "place_id": null,
+    "places_name": "Camp Kalahari",
+    "note": ""
+   },
+   "Meno a Kwena": {
+    "lat": -20.3228263,
+    "lng": 24.3195033,
+    "place_id": null,
+    "places_name": "Meno a Kwena",
+    "note": ""
+   },
+   "Nata Lodge": {
+    "lat": -20.2239192,
+    "lng": 26.2678744,
+    "place_id": null,
+    "places_name": "Nata Lodge",
+    "note": ""
+   },
+   "Nxai Pan Camp": {
+    "lat": -19.8777527,
+    "lng": 24.7074089,
+    "place_id": null,
+    "places_name": "Nxai Pan Camp",
+    "note": ""
+   }
+  }
+ }
+}

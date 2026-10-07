@@ -203,7 +203,52 @@ body{padding-top:74px;}
 </div></section>
 
 <section style="padding-top:0"><div class="wrap">
-  <h2>Lodges</h2><div class="lodge-search-wrap"><input id="lodge-search" type="search" placeholder="Search Skeleton Coast lodges&hellip;" oninput="filterLodges(this.value)" autocomplete="off" aria-label="Search lodges"></div><div class="grid" id="lodge-grid"><a class="card has-rates" data-name="mile 108" href="/skeleton-coast-accommodation/mile-108/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Mile 108</h3><p class="desc">Year-round Skeleton Coast fishing camp -- basic chalets, self-contained campsites, and private ablution sites for serious anglers.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="shipwreck lodge" href="/skeleton-coast-accommodation/shipwreck-lodge/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/76469/1769586034571alexanderheinrichs--26-.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Shipwreck Lodge</h3><p class="desc">Iconic lodge on the Skeleton Coast -- dramatic dune landscape, shipwrecks, brown hyena, Cape fur seals, and desert-adapted wildlife.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="terrace bay resort" href="/skeleton-coast-accommodation/terrace-bay-resort/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/1612/1.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Terrace Bay Resort</h3><p class="desc">Remote Skeleton Coast fishing resort -- DBB double rooms, large beach chalets, and the ultimate angling destination.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="wilderness hoanib skeleton coast camp" href="/skeleton-coast-accommodation/wilderness-hoanib-skeleton-coast-camp/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/28944/1741354188743_Final-Hoanib-40.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Wilderness Hoanib Skeleton Coast Camp</h3><p class="desc">Remote camp in the Hoanib River concession — desert lion and elephant country, with an included coastal fly-in excursion on 3-night stays.</p><span class="go">View lodge &#8594;</span></div></a></div><p id="lodge-noresult">No lodges match your search.</p>
+  <h2>Lodges</h2>
+  <!-- REGION-AREA-MAP -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+.area-map-wrap{margin:0 0 30px}
+#area-map{height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(164,130,86,.25);background:#2b2b2b}
+@media (max-width:700px){#area-map{height:340px}}
+.area-legend{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.area-legend button{font:inherit;font-size:.74rem;letter-spacing:.5px;padding:6px 13px;border-radius:4px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;cursor:pointer}
+.area-legend button:hover{background:rgba(135,169,150,.88);color:#fff}
+.dt-pin{background:none;border:0}
+.dt-pin span{display:block;position:relative;width:11px;height:11px;margin:1.5px;border-radius:50%;background:#d4a94e;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);box-sizing:border-box}
+.dt-pin span::after{content:'';position:absolute;inset:-2px;border-radius:50%;border:2px solid #e2bd66;opacity:0;pointer-events:none}
+.dt-pin:hover span::after{animation:dtpulse 1.1s ease-out infinite}
+@keyframes dtpulse{0%{transform:scale(1);opacity:.95}100%{transform:scale(3);opacity:0}}
+.leaflet-tooltip.dt-tip{background:#fff;color:#3c3530;border:0;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:.78rem;padding:4px 9px}
+.area-map-note{font-size:.8rem;color:#7d756e;margin:10px 0 0}
+.area-map-note a{color:#5f7f72}
+.area-pop b{display:block;font-size:.95rem;margin:0 0 6px}
+.area-pop a{color:#5f7f72;font-weight:600;text-decoration:none}
+.area-pop hr{border:0;border-top:1px solid #eee;margin:8px 0}
+</style>
+<div class="area-map-wrap"><div id="area-map" aria-label="Map: Skeleton Coast Accommodation"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  var GROUPS=[{"lat": -21.4424015, "lng": 13.8198442, "l": [{"n": "Mile 108", "u": "/skeleton-coast-accommodation/mile-108/"}]}, {"lat": -19.0689327, "lng": 12.5832245, "l": [{"n": "Shipwreck Lodge", "u": "/skeleton-coast-accommodation/shipwreck-lodge/"}]}, {"lat": -19.9961525, "lng": 13.0355589, "l": [{"n": "Terrace Bay Resort", "u": "/skeleton-coast-accommodation/terrace-bay-resort/"}]}, {"lat": -19.3740209, "lng": 13.1501451, "l": [{"n": "Wilderness Hoanib Skeleton Coast Camp", "u": "/skeleton-coast-accommodation/wilderness-hoanib-skeleton-coast-camp/"}]}];
+  function go(a){var el=document.getElementById(a);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+  document.querySelectorAll('.area-legend button').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-a'));});});
+  if(typeof L==='undefined')return;
+  var map=L.map('area-map',{scrollWheelZoom:false});
+  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'}).addTo(map);
+  var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
+  L.control.layers({'Satellite':sat,'Map':minimal},null,{position:'topright'}).addTo(map);
+  var b=[];
+  GROUPS.forEach(function(g){
+    b.push([g.lat,g.lng]);
+    L.marker([g.lat,g.lng],{icon:L.divIcon({className:'dt-pin',html:'<span></span>',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map)
+      .bindTooltip(g.l.map(function(x){return x.n;}).join(' / '),{direction:'top',offset:[0,-8],className:'dt-tip'})
+      .bindPopup('<div class="area-pop">'+g.l.map(function(x){return '<b>'+x.n+'</b><a href="'+x.u+'">View lodge &amp; rates &rarr;</a>';}).join('<hr>')+'</div>');
+  });
+  if(b.length>1)map.fitBounds(b,{padding:[40,40],maxZoom:13});else map.setView(b[0],12);
+})();
+</script>
+<!-- /REGION-AREA-MAP -->
+  <div class="lodge-search-wrap"><input id="lodge-search" type="search" placeholder="Search Skeleton Coast lodges&hellip;" oninput="filterLodges(this.value)" autocomplete="off" aria-label="Search lodges"></div><div class="grid" id="lodge-grid"><a class="card has-rates" data-name="mile 108" href="/skeleton-coast-accommodation/mile-108/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/48365/1739437456976_iStock-137201859.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Mile 108</h3><p class="desc">Year-round Skeleton Coast fishing camp -- basic chalets, self-contained campsites, and private ablution sites for serious anglers.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="shipwreck lodge" href="/skeleton-coast-accommodation/shipwreck-lodge/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/76469/1769586034571alexanderheinrichs--26-.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Shipwreck Lodge</h3><p class="desc">Iconic lodge on the Skeleton Coast -- dramatic dune landscape, shipwrecks, brown hyena, Cape fur seals, and desert-adapted wildlife.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="terrace bay resort" href="/skeleton-coast-accommodation/terrace-bay-resort/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/1612/1.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Terrace Bay Resort</h3><p class="desc">Remote Skeleton Coast fishing resort -- DBB double rooms, large beach chalets, and the ultimate angling destination.</p><span class="go">View lodge &#8594;</span></div></a><a class="card has-rates" data-name="wilderness hoanib skeleton coast camp" href="/skeleton-coast-accommodation/wilderness-hoanib-skeleton-coast-camp/"><div class="img" style="background-image:url('https://wetu.com/imageHandler/c1920x1080/28944/1741354188743_Final-Hoanib-40.jpg?fmt=jpg')"><span class="rate-badge"><span class="rate-dot"></span>Rates</span></div><div class="body"><p class="area">Skeleton Coast</p><h3>Wilderness Hoanib Skeleton Coast Camp</h3><p class="desc">Remote camp in the Hoanib River concession — desert lion and elephant country, with an included coastal fly-in excursion on 3-night stays.</p><span class="go">View lodge &#8594;</span></div></a></div><p id="lodge-noresult">No lodges match your search.</p>
 
   <div class="more">
     <h3>More Skeleton Coast lodges</h3>

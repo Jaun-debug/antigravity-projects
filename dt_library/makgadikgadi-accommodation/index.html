@@ -204,6 +204,51 @@ body{padding-top:74px;}
 
 <section style="padding-top:0"><div class="wrap">
   <h2>Lodges</h2>
+  <!-- REGION-AREA-MAP -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+.area-map-wrap{margin:0 0 30px}
+#area-map{height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(164,130,86,.25);background:#2b2b2b}
+@media (max-width:700px){#area-map{height:340px}}
+.area-legend{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.area-legend button{font:inherit;font-size:.74rem;letter-spacing:.5px;padding:6px 13px;border-radius:4px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;cursor:pointer}
+.area-legend button:hover{background:rgba(135,169,150,.88);color:#fff}
+.dt-pin{background:none;border:0}
+.dt-pin span{display:block;position:relative;width:11px;height:11px;margin:1.5px;border-radius:50%;background:#d4a94e;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);box-sizing:border-box}
+.dt-pin span::after{content:'';position:absolute;inset:-2px;border-radius:50%;border:2px solid #e2bd66;opacity:0;pointer-events:none}
+.dt-pin:hover span::after{animation:dtpulse 1.1s ease-out infinite}
+@keyframes dtpulse{0%{transform:scale(1);opacity:.95}100%{transform:scale(3);opacity:0}}
+.leaflet-tooltip.dt-tip{background:#fff;color:#3c3530;border:0;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:.78rem;padding:4px 9px}
+.area-map-note{font-size:.8rem;color:#7d756e;margin:10px 0 0}
+.area-map-note a{color:#5f7f72}
+.area-pop b{display:block;font-size:.95rem;margin:0 0 6px}
+.area-pop a{color:#5f7f72;font-weight:600;text-decoration:none}
+.area-pop hr{border:0;border-top:1px solid #eee;margin:8px 0}
+</style>
+<div class="area-map-wrap"><div id="area-map" aria-label="Map: Makgadikgadi &amp;amp; Boteti Accommodation"></div><div class="area-legend"><button type="button" data-a="area-makgadikgadi">Makgadikgadi Pans &amp; Boteti River</button></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  var GROUPS=[{"lat": -20.4956474, "lng": 25.1844749, "l": [{"n": "Jack's Camp", "u": "/makgadikgadi-accommodation/jacks-camp/"}, {"n": "Jack's Private Camp", "u": "/makgadikgadi-accommodation/jacks-private-camp/"}]}, {"lat": -20.4987244, "lng": 25.1314136, "l": [{"n": "San Camp", "u": "/makgadikgadi-accommodation/san-camp/"}]}, {"lat": -20.4679819, "lng": 25.1331246, "l": [{"n": "Camp Kalahari", "u": "/makgadikgadi-accommodation/camp-kalahari/"}]}, {"lat": -20.3228263, "lng": 24.3195033, "l": [{"n": "Meno a Kwena", "u": "/makgadikgadi-accommodation/meno-a-kwena/"}]}, {"lat": -20.2239192, "lng": 26.2678744, "l": [{"n": "Nata Lodge", "u": "/makgadikgadi-accommodation/nata-lodge/"}]}, {"lat": -19.8777527, "lng": 24.7074089, "l": [{"n": "Nxai Pan Camp", "u": "/makgadikgadi-accommodation/kwando-nxai-pan/"}]}];
+  function go(a){var el=document.getElementById(a);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+  document.querySelectorAll('.area-legend button').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-a'));});});
+  if(typeof L==='undefined')return;
+  var map=L.map('area-map',{scrollWheelZoom:false});
+  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'}).addTo(map);
+  var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
+  L.control.layers({'Satellite':sat,'Map':minimal},null,{position:'topright'}).addTo(map);
+  var b=[];
+  GROUPS.forEach(function(g){
+    b.push([g.lat,g.lng]);
+    L.marker([g.lat,g.lng],{icon:L.divIcon({className:'dt-pin',html:'<span></span>',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map)
+      .bindTooltip(g.l.map(function(x){return x.n;}).join(' / '),{direction:'top',offset:[0,-8],className:'dt-tip'})
+      .bindPopup('<div class="area-pop">'+g.l.map(function(x){return '<b>'+x.n+'</b><a href="'+x.u+'">View lodge &amp; rates &rarr;</a>';}).join('<hr>')+'</div>');
+  });
+  if(b.length>1)map.fitBounds(b,{padding:[40,40],maxZoom:13});else map.setView(b[0],12);
+})();
+</script>
+<!-- /REGION-AREA-MAP -->
+  
   <style>
 .lodge-search-wrap{margin:4px 0 24px;}
 #lodge-search{width:100%;max-width:440px;padding:13px 18px;border:1px solid var(--brand-accent,#a48256);border-radius:8px;background:#fff;font-family:var(--font-body,sans-serif);font-size:.95rem;color:var(--text-main,#3c3530);outline:none;transition:box-shadow .2s;}

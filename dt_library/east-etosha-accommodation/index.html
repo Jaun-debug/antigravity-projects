@@ -204,6 +204,51 @@ body{padding-top:74px;}
 
 <section style="padding-top:0"><div class="wrap">
   <h2>Lodges</h2>
+  <!-- REGION-AREA-MAP -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+.area-map-wrap{margin:0 0 30px}
+#area-map{height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(164,130,86,.25);background:#2b2b2b}
+@media (max-width:700px){#area-map{height:340px}}
+.area-legend{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.area-legend button{font:inherit;font-size:.74rem;letter-spacing:.5px;padding:6px 13px;border-radius:4px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;cursor:pointer}
+.area-legend button:hover{background:rgba(135,169,150,.88);color:#fff}
+.dt-pin{background:none;border:0}
+.dt-pin span{display:block;position:relative;width:11px;height:11px;margin:1.5px;border-radius:50%;background:#d4a94e;border:1.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);box-sizing:border-box}
+.dt-pin span::after{content:'';position:absolute;inset:-2px;border-radius:50%;border:2px solid #e2bd66;opacity:0;pointer-events:none}
+.dt-pin:hover span::after{animation:dtpulse 1.1s ease-out infinite}
+@keyframes dtpulse{0%{transform:scale(1);opacity:.95}100%{transform:scale(3);opacity:0}}
+.leaflet-tooltip.dt-tip{background:#fff;color:#3c3530;border:0;border-radius:4px;box-shadow:0 2px 8px rgba(0,0,0,.25);font-size:.78rem;padding:4px 9px}
+.area-map-note{font-size:.8rem;color:#7d756e;margin:10px 0 0}
+.area-map-note a{color:#5f7f72}
+.area-pop b{display:block;font-size:.95rem;margin:0 0 6px}
+.area-pop a{color:#5f7f72;font-weight:600;text-decoration:none}
+.area-pop hr{border:0;border-top:1px solid #eee;margin:8px 0}
+</style>
+<div class="area-map-wrap"><div id="area-map" aria-label="Map: East Etosha Accommodation"></div></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(function(){
+  var GROUPS=[{"lat": -18.494027, "lng": 16.7273622, "l": [{"n": "Etosha King Nehale", "u": "/east-etosha-accommodation/etosha-king-nehale/"}]}, {"lat": -18.8034346, "lng": 17.0458936, "l": [{"n": "Onguma Bush Camp", "u": "/east-etosha-accommodation/onguma-bush-camp/"}, {"n": "Onguma The Fort", "u": "/east-etosha-accommodation/onguma-the-fort/"}, {"n": "Onguma Tented Camp", "u": "/east-etosha-accommodation/onguma-tented-camp/"}, {"n": "Onguma Camp Kala", "u": "/east-etosha-accommodation/onguma-camp-kala/"}, {"n": "Onguma Forest Camp", "u": "/east-etosha-accommodation/onguma-forest-camp/"}, {"n": "Onguma Leadwood Campsite", "u": "/east-etosha-accommodation/onguma-leadwood-campsite/"}, {"n": "Onguma Tamboti Campsite", "u": "/east-etosha-accommodation/onguma-tamboti-campsite/"}]}, {"lat": -18.8119029, "lng": 17.1195531, "l": [{"n": "Mushara Lodge", "u": "/east-etosha-accommodation/mushara-lodge/"}, {"n": "Villa Mushara", "u": "/east-etosha-accommodation/villa-mushara/"}]}, {"lat": -18.8155825, "lng": 17.1364099, "l": [{"n": "Mushara Outpost", "u": "/east-etosha-accommodation/mushara-outpost/"}]}, {"lat": -18.8143329, "lng": 17.1287727, "l": [{"n": "Mushara Bush Camp", "u": "/east-etosha-accommodation/mushara-bush-camp/"}]}, {"lat": -18.8149223, "lng": 17.2131958, "l": [{"n": "Emanya at Etosha", "u": "/east-etosha-accommodation/emanya-at-etosha/"}]}, {"lat": -18.8141724, "lng": 17.0489201, "l": [{"n": "Mokuti Etosha", "u": "/east-etosha-accommodation/mokuti-etosha/"}]}, {"lat": -18.8069682, "lng": 16.9405591, "l": [{"n": "Namutoni Resort", "u": "/east-etosha-accommodation/namutoni-resort/"}]}];
+  function go(a){var el=document.getElementById(a);if(el)el.scrollIntoView({behavior:'smooth',block:'start'});}
+  document.querySelectorAll('.area-legend button').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-a'));});});
+  if(typeof L==='undefined')return;
+  var map=L.map('area-map',{scrollWheelZoom:false});
+  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'}).addTo(map);
+  var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
+  L.control.layers({'Satellite':sat,'Map':minimal},null,{position:'topright'}).addTo(map);
+  var b=[];
+  GROUPS.forEach(function(g){
+    b.push([g.lat,g.lng]);
+    L.marker([g.lat,g.lng],{icon:L.divIcon({className:'dt-pin',html:'<span></span>',iconSize:[14,14],iconAnchor:[7,7]})}).addTo(map)
+      .bindTooltip(g.l.map(function(x){return x.n;}).join(' / '),{direction:'top',offset:[0,-8],className:'dt-tip'})
+      .bindPopup('<div class="area-pop">'+g.l.map(function(x){return '<b>'+x.n+'</b><a href="'+x.u+'">View lodge &amp; rates &rarr;</a>';}).join('<hr>')+'</div>');
+  });
+  if(b.length>1)map.fitBounds(b,{padding:[40,40],maxZoom:13});else map.setView(b[0],12);
+})();
+</script>
+<!-- /REGION-AREA-MAP -->
+  
   <style>
 .lodge-search-wrap{margin:4px 0 24px;}
 #lodge-search{width:100%;max-width:440px;padding:13px 18px;border:1px solid var(--brand-accent,#a48256);border-radius:8px;background:#fff;font-family:var(--font-body,sans-serif);font-size:.95rem;color:var(--text-main,#3c3530);outline:none;transition:box-shadow .2s;}
