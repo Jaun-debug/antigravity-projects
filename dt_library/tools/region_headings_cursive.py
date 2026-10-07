@@ -8,8 +8,8 @@ MARK = 'CURSIVE-ACCENTS'
 HEAD = ('<!-- %s -->\n<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">\n<style>\n'
         '.cur{font-family:"Pinyon Script",cursive;text-transform:none;letter-spacing:0;font-weight:400;font-size:1.3em;line-height:1;color:var(--brand-accent,#a48256)}\n'
         '.area-h{font-size:2.3rem!important;line-height:1.2;padding-bottom:12px!important;margin:0 0 22px!important}\n'
-        '.cur-kicker{display:block;font-family:"Pinyon Script",cursive;text-transform:none;letter-spacing:0;font-weight:400;font-size:2.2rem;line-height:1;color:var(--brand-accent,#a48256);margin:0 0 -4px}\n'
-        '@media(max-width:760px){.area-h{font-size:1.6rem!important}.cur-kicker{font-size:1.7rem}}\n</style>\n<!-- /%s -->\n') % (MARK, MARK)
+        '.cur-kicker{display:inline;font-family:"Pinyon Script",cursive;text-transform:none;letter-spacing:0;font-weight:400;font-size:1.15em;line-height:1;color:var(--brand-accent,#a48256);margin:0 .22em 0 0}\n'
+        '@media(max-width:760px){.area-h{font-size:1.6rem!important}}\n</style>\n<!-- /%s -->\n') % (MARK, MARK)
 n = 0
 for p in sorted(glob.glob('*-accommodation/index.html')):
     s = io.open(p, encoding='utf-8').read()
