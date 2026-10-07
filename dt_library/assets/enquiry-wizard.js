@@ -411,7 +411,7 @@
             /* Pills sit at rest beside the rate blocks: they fade out once you have been scrolling a
                moment (buffer), and come back a moment after you stop (buffer) - only while the rate
                blocks are in view. Hovering keeps them up. */
-            var nrStop,nrHideT,nrHov=false,HIDE_AFTER=250,SHOW_AFTER=450;
+            var nrStop,nrHideT,nrHov=false,HIDE_AFTER=250,SHOW_AFTER=1500;
             function nrInRates(){var els=document.querySelectorAll("#rate-tables,.rate-card,.year-block,.table-responsive,.rates-table");var vh=window.innerHeight;
               for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect();if(r.height>0&&r.bottom>vh*0.25&&r.top<vh*0.75)return true;}return false;}
             function nrSettle(){var dk=document.getElementById("nr-yrdock");if(!dk)return;nrHideT=null;if(nrInRates())dk.classList.add("nr-show");else if(!nrHov)dk.classList.remove("nr-show");}
