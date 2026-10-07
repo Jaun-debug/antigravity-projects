@@ -226,11 +226,11 @@
 .header-logo-block{display:flex;flex-direction:column;align-items:flex-start;text-decoration:none;}
 .logo-main{font-family:var(--font-head);font-size:1.5rem;color:var(--brand-accent);text-transform:uppercase;letter-spacing:3px;line-height:1.1;font-weight:500;}
 .logo-sub{font-family:var(--font-body);font-size:.6rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:4px;margin-top:5px;}
-.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links{display:flex;align-items:center;gap:24px;flex:1;justify-content:space-between;margin-left:clamp(20px,calc(12vw - 110px),130px);}.header-logo-block{flex:none;white-space:nowrap}.nav-links .nav-link,.nav-links button{white-space:nowrap}@media(max-width:1240px){.nav-links{gap:12px;margin-left:20px}.nav-links .nav-link{letter-spacing:.4px;font-size:.76rem}.nav-links .enquire-now-btn,.nav-links button[class*=btn]{padding-left:14px;padding-right:14px}}
 .nav-links{gap:14px;}
 .nav-links>.nav-item-dropdown:first-child{order:-2}
 .nav-links{display:none!important;}
-.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links{display:flex;align-items:center;gap:24px;flex:1;justify-content:space-between;margin-left:clamp(20px,calc(12vw - 110px),130px);}.header-logo-block{flex:none;white-space:nowrap}.nav-links .nav-link,.nav-links button{white-space:nowrap}@media(max-width:1240px){.nav-links{gap:12px;margin-left:20px}.nav-links .nav-link{letter-spacing:.4px;font-size:.76rem}.nav-links .enquire-now-btn,.nav-links button[class*=btn]{padding-left:14px;padding-right:14px}}
 .nav-link{color:var(--text-main);text-decoration:none;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;transition:color .3s;cursor:pointer;}
 .nav-link:hover{color:var(--brand-accent);}
 .nav-links{gap:14px;}
@@ -937,7 +937,7 @@ function submitLogin(){
 
 .main-header .nav-links{display:flex!important}
 .burger-menu-btn{display:none!important}
-@media(max-width:900px){.main-header .nav-links{display:none!important}.burger-menu-btn{display:flex!important}}</style><style>
+@media(max-width:1140px){.main-header .nav-links{display:none!important}.burger-menu-btn{display:flex!important}}</style><style>
 /* itinerary buttons below header, stacked top-right */
 #nr-addtab{top:114px!important;bottom:auto!important;right:20px!important;left:auto!important}
 #nr-backbuilder{top:166px!important;bottom:auto!important;right:20px!important;left:auto!important}
