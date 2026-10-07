@@ -408,17 +408,19 @@
         try{window.addEventListener("resize",nrDockTop);
             window.addEventListener("load",nrDockTop);
             /* hide while the page is scrolling, show again once it stops */
-            /* Pills show only while scrolling through the rate blocks; hidden at rest (a short grace,
-               and hovering keeps them up, so they can still be clicked). */
-            var nrSt,nrHov=false;
+            /* Pills sit at rest beside the rate blocks: they fade out once you have been scrolling a
+               moment (buffer), and come back a moment after you stop (buffer) - only while the rate
+               blocks are in view. Hovering keeps them up. */
+            var nrStop,nrHideT,nrHov=false,HIDE_AFTER=250,SHOW_AFTER=450;
             function nrInRates(){var els=document.querySelectorAll("#rate-tables,.rate-card,.year-block,.table-responsive,.rates-table");var vh=window.innerHeight;
               for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect();if(r.height>0&&r.bottom>vh*0.25&&r.top<vh*0.75)return true;}return false;}
-            function nrHide(){var dk=document.getElementById("nr-yrdock");if(dk&&!nrHov)dk.classList.remove("nr-show");}
+            function nrSettle(){var dk=document.getElementById("nr-yrdock");if(!dk)return;nrHideT=null;if(nrInRates())dk.classList.add("nr-show");else if(!nrHov)dk.classList.remove("nr-show");}
             window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;
-              if(!dk.__nrHov){dk.__nrHov=1;dk.addEventListener("mouseenter",function(){nrHov=true;clearTimeout(nrSt);});dk.addEventListener("mouseleave",function(){nrHov=false;clearTimeout(nrSt);nrSt=setTimeout(nrHide,600);});}
+              if(!dk.__nrHov){dk.__nrHov=1;dk.addEventListener("mouseenter",function(){nrHov=true;});dk.addEventListener("mouseleave",function(){nrHov=false;});}
               if((window.__nrHoldUntil||0)>Date.now())return;
-              if(nrInRates())dk.classList.add("nr-show");else dk.classList.remove("nr-show");
-              clearTimeout(nrSt);nrSt=setTimeout(nrHide,1200);},{passive:true});}catch(e){}
+              window.__nrLastScroll=Date.now();if(!nrHideT&&!nrHov)nrHideT=setTimeout(function(){nrHideT=null;var d=document.getElementById("nr-yrdock");if(d&&!nrHov&&Date.now()-window.__nrLastScroll<120)d.classList.remove("nr-show");},HIDE_AFTER);
+              clearTimeout(nrStop);nrStop=setTimeout(function(){clearTimeout(nrHideT);nrSettle();},SHOW_AFTER);},{passive:true});
+            setTimeout(nrSettle,600);}catch(e){}
       }
       return d;
     }catch(e){ return null; }
