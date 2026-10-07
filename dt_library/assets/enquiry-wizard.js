@@ -366,8 +366,10 @@
       document.documentElement.style.setProperty("--nr-dock-top",(t+10)+"px");
       /* line the pills up with the right edge of the page content (the rates block), not the window edge */
       var best=null,bw=0;document.querySelectorAll(".wrap").forEach(function(e){var r=e.getBoundingClientRect();if(r.width>bw&&!e.closest(".main-header")){bw=r.width;best=e;}});
-      var rt=24;if(best){var r=best.getBoundingClientRect(),pr=parseFloat(getComputedStyle(best).paddingRight)||0;rt=Math.max(16,Math.round(window.innerWidth-r.right+pr));}
-      document.documentElement.style.setProperty("--nr-dock-right",rt+"px");
+      /* hang just outside the right edge of the rates block, vertically centred; on narrow screens keep it on-screen */
+      var lf=window.innerWidth-140;if(best){var r=best.getBoundingClientRect(),pr=parseFloat(getComputedStyle(best).paddingRight)||0;lf=Math.round(r.right-pr+14);}
+      lf=Math.min(lf,window.innerWidth-132);
+      document.documentElement.style.setProperty("--nr-dock-left",lf+"px");
     }catch(e){}
   }
   function nrDock(){
@@ -382,10 +384,10 @@
             /* No panel behind the pills — each pill is its own piece of frosted
                glass: 60% translucent, blurred and saturated backdrop, hairline
                highlight along the top edge. */
-            "#nr-yrdock{position:fixed;left:auto;right:var(--nr-dock-right,24px);top:var(--nr-dock-top,84px);transform:none;z-index:1200;transition:opacity .25s,transform .25s;"
-            +"#nr-yrdock.nr-scrolling{opacity:0;pointer-events:none;transform:translateY(-6px)}"
-            +"display:flex;flex-direction:row;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
-            +"#nr-yrdock>div{display:flex!important;flex-direction:row;gap:6px;margin:0!important;padding:0!important}"
+            "#nr-yrdock{position:fixed;left:var(--nr-dock-left,auto);right:auto;top:50%;transform:translateY(-50%);z-index:1200;transition:opacity .25s,transform .25s;"
+            +"#nr-yrdock.nr-scrolling{opacity:0;pointer-events:none;transform:translateY(-50%) translateX(8px)}"
+            +"display:flex;flex-direction:column;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
+            +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
             +"#nr-yrdock button{white-space:nowrap;width:auto;text-align:center;padding:7px 15px;"
             +"background:rgba(255,255,255,.60);"
             +"-webkit-backdrop-filter:blur(16px) saturate(170%);backdrop-filter:blur(16px) saturate(170%);"
@@ -395,7 +397,7 @@
             +"#nr-yrdock button:hover{background:rgba(255,255,255,.74);box-shadow:0 10px 30px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.7)}"
             +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(135,169,150,.88);color:#fff;"
             +"border-color:rgba(255,255,255,.40);text-shadow:0 1px 2px rgba(0,0,0,.22)}"
-            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;left:50%;right:auto;transform:translateX(-50%)}#nr-yrdock.nr-scrolling{transform:translateX(-50%) translateY(8px)}"
+            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;left:50%!important;right:auto;flex-direction:row;transform:translateX(-50%)}#nr-yrdock.nr-scrolling{transform:translateX(-50%) translateY(8px)}"
             +"#nr-yrdock>div{flex-direction:row}}"
             +"@media print{#nr-yrdock{display:none}}";
           (document.head||document.documentElement).appendChild(st);
