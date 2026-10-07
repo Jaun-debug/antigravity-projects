@@ -257,8 +257,7 @@ body{padding-top:74px;}
   var map=L.map('area-map',{scrollWheelZoom:false,zoomControl:true});
   var topo=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'&copy; Esri'}).addTo(map);
   var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'});
-  var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
-  L.control.layers({'Terrain':topo,'Satellite':sat,'Light':minimal},null,{position:'topright'}).addTo(map);
+  L.control.layers({'Terrain':topo,'Satellite':sat},null,{position:'topright'}).addTo(map);
   var groups={};PINS.forEach(function(p){var k=p.lat+','+p.lng;(groups[k]=groups[k]||[]).push(p);});
   var bounds=[];
   Object.keys(groups).forEach(function(k){
