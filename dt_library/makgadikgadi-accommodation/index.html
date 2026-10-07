@@ -309,6 +309,7 @@ body{padding-top:74px;}
 <script>(function(){
 function imgOf(c){var el=c.querySelector('.img');var bg=el?el.style.backgroundImage:'';var m=bg.match(/url\(["']?(.*?)["']?\)/);return m?m[1]:'';}
 function build(){
+ return true; /* RG2-OFF: lodge cards shown instead of the thumb gallery (7 Oct 2026); delete this line to bring the gallery back */
  var grid=document.getElementById('lodge-grid');if(!grid)return false;
  if(document.querySelector('.rg2-wrap'))return true;
  var cards=[].slice.call(grid.querySelectorAll('a.card'));if(cards.length<2)return false;
