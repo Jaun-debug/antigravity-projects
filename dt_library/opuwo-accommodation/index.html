@@ -235,9 +235,10 @@ body{padding-top:74px;}
   document.querySelectorAll('.area-legend button').forEach(function(b){b.addEventListener('click',function(){go(b.getAttribute('data-a'));});});
   if(typeof L==='undefined')return;
   var map=L.map('area-map',{scrollWheelZoom:false});
-  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'}).addTo(map);
+  var topo=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'&copy; Esri'}).addTo(map);
+  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'});
   var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
-  L.control.layers({'Satellite':sat,'Map':minimal},null,{position:'topright'}).addTo(map);
+  L.control.layers({'Terrain':topo,'Satellite':sat,'Light':minimal},null,{position:'topright'}).addTo(map);
   var b=[];
   GROUPS.forEach(function(g){
     b.push([g.lat,g.lng]);

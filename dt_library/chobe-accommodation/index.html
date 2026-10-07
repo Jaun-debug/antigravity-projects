@@ -237,9 +237,10 @@ body{padding-top:74px;}
   var PINS=[{"n": "Chobe Game Lodge", "u": "/chobe-accommodation/chobe-game-lodge/", "lat": -17.84083, "lng": 25.076058}, {"n": "Chobe Savanna Lodge", "u": "/chobe-accommodation/chobe-savanna-lodge/", "lat": -17.8306483, "lng": 25.0533611}, {"n": "The Chobe Safari Lodge", "u": "/chobe-accommodation/chobe-safari-lodge/", "lat": -17.8056984, "lng": 25.1466809}, {"n": "Savute Safari Lodge", "u": "/chobe-accommodation/savute-safari-lodge/", "lat": -18.564308, "lng": 24.057397}, {"n": "Muchenje Safari Lodge", "u": "/chobe-accommodation/muchenje-safari-lodge/", "lat": -17.9433756, "lng": 24.7034169}];
   if(typeof L==='undefined')return;
   var map=L.map('area-map',{scrollWheelZoom:false});
-  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'}).addTo(map);
+  var topo=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'&copy; Esri'}).addTo(map);
+  var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:18,attribution:'Tiles &copy; Esri'});
   var minimal=L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19,attribution:'&copy; OpenStreetMap, &copy; CARTO'});
-  L.control.layers({'Satellite':sat,'Map':minimal},null,{position:'topright'}).addTo(map);
+  L.control.layers({'Terrain':topo,'Satellite':sat,'Light':minimal},null,{position:'topright'}).addTo(map);
   var b=[];
   PINS.forEach(function(p){
     b.push([p.lat,p.lng]);
