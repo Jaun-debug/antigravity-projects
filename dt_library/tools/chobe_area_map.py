@@ -32,7 +32,7 @@ block = '''<!-- %(mark)s -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <style>
 .area-map-wrap{margin:0 0 30px}
-#area-map{height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(164,130,86,.25);background:#2b2b2b}
+#area-map{height:460px;border-radius:12px;overflow:hidden;border:1px solid rgba(164,130,86,.25);background:#e9e6df;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0)}.wrap>h2{margin-bottom:30px}
 @media (max-width:700px){#area-map{height:340px}}
 .area-map-note{font-size:.8rem;color:#7d756e;margin:10px 0 0}
 .area-map-note a{color:#5f7f72}
