@@ -384,8 +384,8 @@
             /* No panel behind the pills — each pill is its own piece of frosted
                glass: 60% translucent, blurred and saturated backdrop, hairline
                highlight along the top edge. */
-            "#nr-yrdock{position:fixed;left:var(--nr-dock-left,auto);right:auto;top:50%;transform:translateY(-50%);z-index:1200;transition:opacity .25s,transform .25s;"
-            +"#nr-yrdock.nr-scrolling{opacity:0;pointer-events:none;transform:translateY(-50%) translateX(8px)}"
+            "#nr-yrdock{position:fixed;left:var(--nr-dock-left,auto);right:auto;top:50%;transform:translateY(-50%) translateX(8px);z-index:1200;transition:opacity .25s,transform .25s;opacity:0;pointer-events:none;"
+            +"#nr-yrdock.nr-show{opacity:1;pointer-events:auto;transform:translateY(-50%)}"
             +"display:flex;flex-direction:column;gap:6px;background:none;border:0;box-shadow:none;padding:0}"
             +"#nr-yrdock>div{display:flex!important;flex-direction:column;gap:6px;margin:0!important;padding:0!important}"
             +"#nr-yrdock button{white-space:nowrap;width:auto;text-align:center;padding:7px 15px;"
@@ -397,7 +397,7 @@
             +"#nr-yrdock button:hover{background:rgba(255,255,255,.74);box-shadow:0 10px 30px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.7)}"
             +"#nr-yrdock button.on,#nr-yrdock button.active{background:rgba(135,169,150,.88);color:#fff;"
             +"border-color:rgba(255,255,255,.40);text-shadow:0 1px 2px rgba(0,0,0,.22)}"
-            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;left:50%!important;right:auto;flex-direction:row;transform:translateX(-50%)}#nr-yrdock.nr-scrolling{transform:translateX(-50%) translateY(8px)}"
+            +"@media(max-width:760px){#nr-yrdock{top:auto;bottom:14px;left:50%!important;right:auto;flex-direction:row;transform:translateX(-50%)}#nr-yrdock,#nr-yrdock.nr-show{transform:translateX(-50%)}"
             +"#nr-yrdock>div{flex-direction:row}}"
             +"@media print{#nr-yrdock{display:none}}";
           (document.head||document.documentElement).appendChild(st);
@@ -408,7 +408,17 @@
         try{window.addEventListener("resize",nrDockTop);
             window.addEventListener("load",nrDockTop);
             /* hide while the page is scrolling, show again once it stops */
-            var nrSt;window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;if((window.__nrHoldUntil||0)>Date.now())return;dk.classList.add("nr-scrolling");clearTimeout(nrSt);nrSt=setTimeout(function(){dk.classList.remove("nr-scrolling");},350);},{passive:true});}catch(e){}
+            /* Pills show only while scrolling through the rate blocks; hidden at rest (a short grace,
+               and hovering keeps them up, so they can still be clicked). */
+            var nrSt,nrHov=false;
+            function nrInRates(){var els=document.querySelectorAll("#rate-tables,.rate-card,.year-block,.table-responsive,.rates-table");var vh=window.innerHeight;
+              for(var i=0;i<els.length;i++){var r=els[i].getBoundingClientRect();if(r.height>0&&r.bottom>vh*0.25&&r.top<vh*0.75)return true;}return false;}
+            function nrHide(){var dk=document.getElementById("nr-yrdock");if(dk&&!nrHov)dk.classList.remove("nr-show");}
+            window.addEventListener("scroll",function(){var dk=document.getElementById("nr-yrdock");if(!dk)return;
+              if(!dk.__nrHov){dk.__nrHov=1;dk.addEventListener("mouseenter",function(){nrHov=true;clearTimeout(nrSt);});dk.addEventListener("mouseleave",function(){nrHov=false;clearTimeout(nrSt);nrSt=setTimeout(nrHide,600);});}
+              if((window.__nrHoldUntil||0)>Date.now())return;
+              if(nrInRates())dk.classList.add("nr-show");else dk.classList.remove("nr-show");
+              clearTimeout(nrSt);nrSt=setTimeout(nrHide,1200);},{passive:true});}catch(e){}
       }
       return d;
     }catch(e){ return null; }
