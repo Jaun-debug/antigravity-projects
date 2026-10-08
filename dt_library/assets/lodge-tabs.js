@@ -9,12 +9,16 @@
     var secs=[].slice.call(document.querySelectorAll("section"));
     function find(fn){for(var i=0;i<secs.length;i++)if(fn(secs[i]))return secs[i];return null;}
     var items=[];
+    var tagged=[].slice.call(document.querySelectorAll("section[data-tab]"));
+    if(tagged.length>1){tagged.forEach(function(sec){items.push([sec.getAttribute("data-tab"),sec]);});}
+    else{
     var ov=hero.nextElementSibling;while(ov&&ov.tagName!=="SECTION")ov=ov.nextElementSibling;
     if(ov)items.push(["Overview",ov]);
     var rt=document.getElementById("rate-tables");var rs=rt&&rt.closest("section");if(rs)items.push(["Rates",rs]);
     var inf=find(function(s){var h=s.querySelector("h3");return h&&/good to know|experiences/i.test(h.textContent);});if(inf)items.push(["Information",inf]);
     if(typeof window.nrOpenMap==="function")items.push(["Location",null]);
     var enq=find(function(s){var h=s.querySelector("h2");return h&&/^\s*enquire/i.test(h.textContent);});if(enq)items.push(["Enquire",enq]);
+    }
     if(items.length<2)return;
     var bar=document.createElement("nav");bar.id="nr-ltabs";bar.setAttribute("aria-label","Sections");
     var inner=document.createElement("div");inner.className="nr-ltabs-in";bar.appendChild(inner);
