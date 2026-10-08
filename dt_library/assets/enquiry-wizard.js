@@ -494,7 +494,7 @@
       var rt=document.getElementById("rate-tables");
       if(rt){
         var first=rt.firstElementChild;
-        if(first && first.tagName==="DIV" && first!==b && first.querySelector("button") &&
+        if(first && first.tagName==="DIV" && first!==b && !first.querySelector(".nr-blocks") && first.querySelector("button") &&
            /season/i.test(first.textContent||"")) first.style.display="none";
       }
     }catch(e){}
