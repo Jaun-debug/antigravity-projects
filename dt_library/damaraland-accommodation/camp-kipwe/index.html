@@ -160,6 +160,15 @@ section[data-tab]:nth-of-type(even){background:#e9e6df}
 .nr-all{text-align:center;margin:34px 0 0}.nr-all a{font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:var(--brand-accent,#a48256);border-bottom:1px solid currentColor;text-decoration:none;padding-bottom:4px}
 @media(max-width:760px){section.nr-sec,section[data-tab]{padding:56px 0!important}.nr-row{grid-template-columns:1fr;gap:6px}.nr-gal{grid-template-columns:1fr 1fr}.nr-pair{grid-template-columns:1fr}#nr-lodge-map{height:320px}}
 </style>
+<style>
+.nr-acts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.nr-act{background:#fff;border:1px solid rgba(164,130,86,.18);border-top:3px solid #a48256;border-radius:6px;padding:26px 24px 20px;display:flex;flex-direction:column}
+.nr-act h3{font-family:var(--font-head);font-weight:400;text-transform:uppercase;letter-spacing:1px;font-size:19px;line-height:1.3;color:var(--brand-accent,#a48256);margin:0 0 8px}
+.nr-act-meta{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:#87a996;margin:0 0 14px}
+.nr-act-price{margin-top:auto;padding-top:14px;border-top:1px solid rgba(164,130,86,.18);display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--font-head);font-size:1.05rem;color:#3c3530}
+.nr-act-price input.qty{width:74px}
+@media(max-width:900px){.nr-acts{grid-template-columns:1fr}}
+</style>
 <!-- /OBERLAND-V2 -->
 </head>
 <body>
@@ -296,7 +305,7 @@ function renderRates(model, isSto){
         +'</tr>';
     });
     html+='</tbody></table>';
-    if(isAct){ ahtml+=html; html=keep; }
+    if(isAct){ ahtml+=nrActCards(s,isSto); html=keep; }
   });
   document.getElementById('rate-tables').innerHTML=html;
   var ac=document.getElementById('nr-acts'); if(ac){ ac.innerHTML=ahtml; nrActsVis(!!ahtml); }
@@ -315,6 +324,18 @@ function recalcBooking(){
     document.getElementById('booking-total').textContent='N$ '+fmtN(total);
     document.getElementById('booking-count').textContent=count+' item'+(count>1?'s':'')+' selected';
   } else { bar.style.display='none'; }
+}
+function nrActCards(s,isSto){
+  var h='<div class="nr-acts">';
+  s.rows.forEach(function(r){
+    var lab=String(r[0]).split(' — ')[0], m=/^(.*?)\s*\(([^)]*)\)\s*$/.exec(lab), nm=m?m[1]:lab, meta=m?m[2]:'';
+    var pnum=String(r[1]).replace(/[^0-9.]/g,''), full=String(r[0]).replace(/"/g,'&quot;');
+    h+='<div class="nr-act"><h3>'+nm+'</h3>'+(meta?'<div class="nr-act-meta">'+meta+'</div>':'')
+      +'<div class="nr-act-price"><span>'+(isSto?'STO':'Rack')+' N$ '+r[1]+'</span>'
+      +(isSto?'<input type="number" min="0" inputmode="numeric" class="qty" placeholder="Qty" aria-label="Quantity" data-name="'+full+'" data-price="'+pnum+'" oninput="recalcBooking()">':'')
+      +'</div></div>';
+  });
+  return h+'</div>';
 }
 function nrActsVis(on){
   var s=document.getElementById('activities'); if(s) s.style.display=on?'':'none';
