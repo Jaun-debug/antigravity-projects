@@ -444,5 +444,68 @@ applySession();
 })();
 </script>
 <script>(function(){var h=document.querySelector(".hero");if(!h)return;var ts=document.querySelectorAll(".hero-thumb");ts.forEach(function(t){t.addEventListener("click",function(){h.style.backgroundImage="url('"+t.dataset.full+"')";ts.forEach(function(x){x.classList.remove("active")});t.classList.add("active")})})})();</script><script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.rg2-wrap')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t){var h=document.querySelector('.hero');t=h&&h.nextElementSibling;}if(!t)t=document.querySelector('section');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script><script src="/assets/lodge-tabs.js" defer></script>
+<script src="/assets/scroll-fx.js" defer></script>
+<!-- KIPWE-BLOCKS: room rates regrouped into easy-read blocks (season -> room -> rate). Rows and qty boxes are the originals, only moved. -->
+<style>
+.nr-blocks-cap{font-family:var(--font-head);font-size:1rem;color:var(--text-main);margin:6px 2px 14px}
+.nr-blocks{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:0 0 34px}
+.nr-blk{background:#fff;border:1px solid rgba(164,130,86,.18);border-radius:12px;padding:20px 22px 10px}
+.nr-blk h4{margin:0 0 4px;font-family:var(--font-head);font-weight:400;font-size:1.25rem;letter-spacing:1px;color:var(--brand-accent,#a48256)}
+.nr-blk .nr-blk-sub{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:#7d756e;margin:0 0 10px}
+.nr-blk table{width:100%;border-collapse:collapse;margin:0 0 14px;background:none;box-shadow:none;border:0}
+.nr-blk caption{font-family:var(--font-body);font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#3c3530;padding:12px 0 6px;border-bottom:1px solid rgba(164,130,86,.25);text-align:left}
+.nr-blk td{padding:9px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.92rem;background:none}
+.nr-blk td:nth-child(2){text-align:right;white-space:nowrap;font-weight:500;padding-left:12px}
+.nr-blk td.qty-col{width:120px;text-align:right;padding-left:12px}
+.nr-blk tr:last-child td{border-bottom:0}
+@media(max-width:860px){.nr-blocks{grid-template-columns:1fr}}
+</style>
+<script>
+(function(){
+  function txt(el){return (el.textContent||'').replace(/\s+/g,' ').trim();}
+  function room(first){ if(/bungalow/i.test(first))return 'Bungalows'; if(/kipwe suite/i.test(first))return 'Kipwe Suite'; if(/luxury suite/i.test(first))return 'Luxury Suites'; return null; }
+  function build(){
+    var rt=document.getElementById('rate-tables'); if(!rt||rt.querySelector('.nr-blocks'))return;
+    [].forEach.call(rt.querySelectorAll(':scope>table'),function(tb){
+      var rows=[].slice.call(tb.querySelectorAll('tbody tr')); if(rows.length<4)return;
+      var parsed=rows.map(function(tr){
+        var lab=txt(tr.cells[0]); var parts=lab.split(' — ');
+        var si=-1; parts.forEach(function(p,i){ if(/\b(low|high|peak|shoulder|green|mid)\s+season\b/i.test(p)) si=i; });
+        if(si<1) return null;
+        var season=parts[si].match(/^(.*?season)/i)[1]; var rm=room(parts[0]); if(!rm) return null;
+        var rest=parts.slice(0,si).concat(parts.slice(si+1));
+        var first=rest[0], item;
+        if(/^\d+\s*x\s/i.test(first)) item=rest.slice(1).join(' — ');            // "9 x Bungalows — DBB p/p Sharing"
+        else item=first.replace(/^(Bungalow|Kipwe Suite|Luxury Suite)\s*/i,'')+(rest.length>1?' — '+rest.slice(1).join(' — '):'');
+        return {tr:tr,season:season,room:rm,count:(/^\d+\s*x\s/i.test(first)?first:''),item:item};
+      });
+      if(parsed.some(function(p){return !p;}))return;               // only regroup tables that fully fit the pattern
+      var priceHead=tb.querySelector('thead th:nth-child(2)'); priceHead=priceHead?txt(priceHead):'';
+      var cap=tb.querySelector('caption');
+      var wrap=document.createElement('div');
+      if(cap){var c=document.createElement('div');c.className='nr-blocks-cap';c.textContent=txt(cap);wrap.appendChild(c);}
+      var grid=document.createElement('div');grid.className='nr-blocks';wrap.appendChild(grid);
+      var seasons=[],bySeason={};
+      parsed.forEach(function(p){ if(!bySeason[p.season]){bySeason[p.season]={rooms:[],byRoom:{}};seasons.push(p.season);} var s=bySeason[p.season];
+        if(!s.byRoom[p.room]){s.byRoom[p.room]={rows:[],count:''};s.rooms.push(p.room);} var r=s.byRoom[p.room]; r.rows.push(p); if(p.count&&!r.count)r.count=p.count; });
+      seasons.forEach(function(sn){
+        var b=document.createElement('div');b.className='nr-blk';
+        b.innerHTML='<h4></h4><div class="nr-blk-sub"></div>';b.querySelector('h4').textContent=sn;b.querySelector('.nr-blk-sub').textContent=priceHead;
+        bySeason[sn].rooms.forEach(function(rm){
+          var r=bySeason[sn].byRoom[rm]; var t=document.createElement('table'); var cp=document.createElement('caption');
+          cp.textContent=r.count||rm; t.appendChild(cp); var tbd=document.createElement('tbody'); t.appendChild(tbd);
+          r.rows.forEach(function(p){ p.tr.cells[0].textContent=p.item; tbd.appendChild(p.tr); });
+          b.appendChild(t);
+        });
+        grid.appendChild(b);
+      });
+      tb.parentNode.replaceChild(wrap,tb);
+    });
+  }
+  function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
+    try{ new MutationObserver(function(){ build(); }).observe(rt,{childList:true}); }catch(e){} }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
 </body>
 </html>
