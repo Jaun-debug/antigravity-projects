@@ -206,6 +206,11 @@ section[data-tab]:nth-of-type(even){background:#e9e6df}
 
 
 
+<section data-tab="Activities" id="activities" class="nr-sec"><div class="wrap">
+  <div class="nr-sh"><span class="nr-lbl">Things to do</span><h2 class="nr-h">Activities</h2></div>
+  <div id="nr-acts"></div>
+</div></section>
+
 <section data-tab="Information" id="information" class="nr-sec"><div class="wrap">
   <div class="nr-sh"><span class="nr-lbl">Good to know</span><h2 class="nr-h">Information</h2></div>
   <div class="nr-info"><div class="nr-row"><div class="k">Region</div><div class="v">Damaraland</div></div><div class="nr-row"><div class="k">Rates</div><div class="v">Rate to follow</div></div><div class="nr-row"><div class="k">Rate validity</div><div class="v">2026 Season</div></div><div class="nr-row"><div class="k">Reservations</div><div class="v"><a href="mailto:res@chiwani.com">res@chiwani.com</a></div></div><div class="nr-row"><div class="k">Experiences</div><div class="v">Guided activities, scenic drives and the highlights of Damaraland — full details and the bookable net STO rate are available to signed-in trade partners.</div></div></div>
@@ -279,8 +284,9 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 var RACK = { badge:'Rack Rates', sub:'Rate to follow', sections:[] };
 
 function renderRates(model, isSto){
-  var html='';
+  var html='', ahtml='';
   model.sections.forEach(function(s){
+    var isAct=/^activities/i.test(s.title||''); if(isAct){ var keep=html; html=''; }
     html+='<table><caption>'+s.title+'</caption><thead><tr><th>Type</th><th>'+(isSto?'STO (N$)':'Rack (N$)')+'</th>'+(isSto?'<th class="qty-col">Qty</th>':'')+'</tr></thead><tbody>';
     s.rows.forEach(function(r){
       var pnum=String(r[1]).replace(/[^0-9.]/g,'');
@@ -290,15 +296,17 @@ function renderRates(model, isSto){
         +'</tr>';
     });
     html+='</tbody></table>';
+    if(isAct){ ahtml+=html; html=keep; }
   });
   document.getElementById('rate-tables').innerHTML=html;
+  var ac=document.getElementById('nr-acts'); if(ac){ ac.innerHTML=ahtml; nrActsVis(!!ahtml); }
   if(isSto){ recalcBooking(); } else { hideBookingBar(); }
 }
 
 // --- Bookable agent view: quantity boxes -> running total -> Finalise Booking ---
 function fmtN(n){ return n.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2}); }
 function recalcBooking(){
-  var inputs=document.querySelectorAll('#rate-tables input.qty');
+  var inputs=document.querySelectorAll('#rate-tables input.qty, #nr-acts input.qty');
   var total=0, count=0;
   inputs.forEach(function(i){ var q=parseInt(i.value,10)||0; if(q>0){ total+=q*(parseFloat(i.dataset.price)||0); count+=q; } });
   var bar=document.getElementById('booking-bar'); if(!bar) return;
@@ -308,9 +316,13 @@ function recalcBooking(){
     document.getElementById('booking-count').textContent=count+' item'+(count>1?'s':'')+' selected';
   } else { bar.style.display='none'; }
 }
+function nrActsVis(on){
+  var s=document.getElementById('activities'); if(s) s.style.display=on?'':'none';
+  [].forEach.call(document.querySelectorAll('#nr-ltabs a'),function(a){ if(a.textContent.trim()==='Activities') a.style.display=on?'':'none'; });
+}
 function hideBookingBar(){ var b=document.getElementById('booking-bar'); if(b){ b.style.display='none'; } }
 function openBooking(){
-  var inputs=document.querySelectorAll('#rate-tables input.qty');
+  var inputs=document.querySelectorAll('#rate-tables input.qty, #nr-acts input.qty');
   var lines=[], total=0;
   inputs.forEach(function(i){ var q=parseInt(i.value,10)||0; if(q>0){ var p=parseFloat(i.dataset.price)||0; var lt=q*p; total+=lt; lines.push({name:i.dataset.name,qty:q,price:p,lt:lt}); } });
   if(!lines.length){ return; }
