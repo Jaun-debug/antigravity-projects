@@ -253,7 +253,7 @@ function undo(){route.pop();refresh();}
 function clearRoute(){if(route.length&&!confirm('Clear all stops and start over?'))return;route=[];inlineOpen=null;refresh();}
 
 function openPicker(i){pickerStop=i;const key=route[i].key;pickerList=(LODGES[key]||[]).slice();document.getElementById('pk-title').textContent='Lodges — '+BY[key].name;document.getElementById('pk-search').value='';buildPickerList(key);document.getElementById('picker').classList.add('open');document.body.style.overflow='hidden';}
-function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
+function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(lodgeHref(l)?'<a class="pk-rates" href="'+lodgeHref(l)+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
 function filterPicker(){const q=document.getElementById('pk-search').value.toLowerCase();document.querySelectorAll('#pk-list .pk-item').forEach(el=>{el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
 function addLodge(idx){const l=pickerList[idx];if(!l||pickerStop==null)return;route[pickerStop].lodges.push({name:l.name,file:l.file,nights:2});toast('Added '+l.name);closePicker();refresh();}
 function closePicker(){document.getElementById('picker').classList.remove('open');document.body.style.overflow='';pickerStop=null;}
@@ -266,7 +266,7 @@ function renderInline(){
   var head='<input class="seg-pk-search" placeholder="Search '+BY[key].name+' lodges…" oninput="filterInline('+i+')">';
   var list;
   if(!L.length){list='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';}
-  else{list=L.map(function(l,idx){return '<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(l.file?'<a class="pk-rates" href="'+l.file+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addInline('+i+','+idx+')">Add</button></span></div>';}).join('');}
+  else{list=L.map(function(l,idx){return '<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(lodgeHref(l)?'<a class="pk-rates" href="'+lodgeHref(l)+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addInline('+i+','+idx+')">Add</button></span></div>';}).join('');}
   box.innerHTML=head+'<div class="seg-pk-list">'+list+'</div>';box.style.display='block';
 }
 function filterInline(i){var box=document.getElementById('segpk-'+i);if(!box)return;var q=box.querySelector('.seg-pk-search').value.toLowerCase();box.querySelectorAll('.pk-item').forEach(function(el){el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
@@ -315,7 +315,10 @@ function renderPanel(){
   renderInline();
 }
 function renderCards(){const C=document.getElementById('cards');C.innerHTML='';PINS.forEach(p=>{const n=(LODGES[p.key]||[]).length;const c=document.createElement('div');c.className='card';c.innerHTML='<div class="cn">'+p.name+'</div><div class="cs">'+(n?n+' lodges':'region page')+'</div><div class="cactions"><button class="add" onclick="addStop(\''+p.key+'\')">+ Add to route</button><a class="view" href="'+p.url+'" target="_blank" rel="noopener">Lodges</a></div>';C.appendChild(c);});}
-let LODGEINFO={};fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{}}).catch(function(){});
+let LODGEINFO={};fetch('/assets/lodges-info.json').then(function(r){return r.json()}).then(function(j){LODGEINFO=j||{};try{renderPanel();}catch(e){}}).catch(function(){});
+/* MAP-RATES-LINK (9 Oct 2026): this page is public (rack). "Rates" opens the lodge's own page, which shows rack signed out and STO signed in.
+   The single rate sheets (/ratesheets/*.html) need an agent sign-in, so they are only linked for signed-in agents when a lodge has no page. */
+function lodgeHref(l){var i=LODGEINFO[nkey(l&&l.name)];if(i&&i.url)return i.url;try{if(sessionStorage.getItem('nr_agent_token'))return (l&&l.file)||'';}catch(e){}return '';}
 function viewItinerary(){
   const items=[];
   route.forEach(function(s){(s.lodges||[]).forEach(function(l){
@@ -323,7 +326,7 @@ function viewItinerary(){
     const inf=LODGEINFO[key]||null;
     var fp=fromRec(l);
     var rows=fp?[{qty:pax,name:fp.n||'Per person sharing',price:fp.p,nights:l.nights,total:pax*(fp.p||0)*(l.nights||1)}]:[];
-    items.push({name:l.name,region:BY[s.key].name,url:(inf&&inf.url)||l.file||('/'+s.key+'-accommodation/'),nights:l.nights,items:rows,desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[]});
+    items.push({name:l.name,region:BY[s.key].name,url:lodgeHref(l)||('/'+s.key+'-accommodation/'),nights:l.nights,items:rows,desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[]});
   });});
   if(!items.length){toast('Add at least one lodge to a stop to view your itinerary');return;}
   try{localStorage.setItem('nr_itinerary',JSON.stringify(items));}catch(e){}
