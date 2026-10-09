@@ -614,18 +614,18 @@ applySession();
 .nr-tbc{padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem}
 .nr-sw{display:inline-flex;gap:4px;margin:0 2px 18px;padding:4px;border-radius:999px;background:#fff;border:1px solid rgba(135,169,150,.35)}
 .nr-blk table.nr-mx{table-layout:fixed;overflow:clip;margin:0}
-.nr-one .nr-blk.on{background:none;border:0;border-radius:0;padding:0;gap:20px}
+.nr-one .nr-blk.on{background:none;border:0;border-radius:0;padding:0;gap:28px 20px}
 .nr-one .nr-blk .nr-blk-sub{margin:0 2px -6px}
-.nr-room{background:#fff;border:1px solid rgba(164,130,86,.14);border-radius:14px;padding:20px 22px 12px;box-shadow:0 8px 28px rgba(60,53,48,.06);transition:box-shadow .2s,transform .2s}
+.nr-room{background:#fff;border:1px solid rgba(164,130,86,.14);border-radius:14px;padding:8px 22px 8px;box-shadow:0 8px 28px rgba(60,53,48,.06);transition:box-shadow .2s,transform .2s}
 .nr-room:hover{box-shadow:0 12px 34px rgba(60,53,48,.10);transform:translateY(-1px)}
-.nr-room-h{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;color:var(--brand-accent,#a48256);padding:0 0 12px;margin:0 0 4px;border-bottom:1px solid rgba(164,130,86,.18)}
+.nr-room-h{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;color:var(--brand-accent,#a48256);padding:0 4px 10px;margin:0}
+.nr-cw{min-width:0}
 .nr-room.kids{background:#f7f5f0}
-.nr-xgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:30px 0 10px;align-items:start}
+.nr-xgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px;margin:34px 0 10px;align-items:start}
 .nr-xrow{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.9rem}
 .nr-xrow:last-child{border-bottom:0}
 .nr-xrow .mx-l{color:#4a433d;min-width:0}
 .nr-xrow .mx-c{text-align:right;flex:0 0 auto}
-@media(max-width:960px){.nr-xgrid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.nr-xgrid{grid-template-columns:1fr}}
 .nr-blk .nr-mx tr:not(:last-child) td{border-bottom:1px solid rgba(0,0,0,.05)}
 .nr-mx td.mx-c{overflow:clip;overflow-clip-margin:4px}
@@ -647,7 +647,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
 .nr-sw button.on{background:#87a996;border-color:#87a996;color:#fff}
 .nr-blocks.nr-one{grid-template-columns:1fr}
 .nr-one .nr-blk{display:none}
-.nr-one .nr-blk.on{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;align-items:start}
+.nr-one .nr-blk.on{display:grid;grid-template-columns:1fr 1fr;column-gap:20px;align-items:start}
 .nr-one .nr-blk h4{display:none}
 .nr-one .nr-blk .nr-blk-sub{grid-column:1/-1}
 @media(max-width:860px){.nr-one .nr-blk.on{grid-template-columns:1fr}}
@@ -743,7 +743,9 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
     cols.sort(function(a,b){var o={'Sharing p/p':0,'Single':1,'Rate':2};return o[a]-o[b];});
     var cap=tb.querySelector('caption'), t=document.createElement('table'); t.className='nr-mx';
     var card=document.createElement('div'); card.className='nr-room'+(/child/i.test(cap?txt(cap):'')?' kids':'');
-    if(cap){var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=txt(cap); card.appendChild(hd);}
+    var cw=document.createElement('div'); cw.className='nr-cw';
+    if(cap){var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=txt(cap); cw.appendChild(hd);}
+    cw.appendChild(card);
     var th='<thead><tr><th></th>'+cols.map(function(c){return '<th>'+(c==='Rate'?'':c)+'</th>';}).join('')+'</tr></thead>';
     t.insertAdjacentHTML('beforeend',th); var tbd=document.createElement('tbody'); t.appendChild(tbd);
     prods.forEach(function(pr){
@@ -758,7 +760,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
       tbd.appendChild(r);
     });
     card.appendChild(t);
-    tb.parentNode.replaceChild(card,tb);
+    tb.parentNode.replaceChild(cw,tb);
   }
   function pcell(td,price,q){
           var b=document.createElement(q?'button':'span'); b.className='mx-p'; if(q)b.type='button'; b.textContent=price; td.appendChild(b);
@@ -780,7 +782,8 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
     var grid=document.createElement('div'); grid.className='nr-xgrid'; tbs[0].parentNode.insertBefore(grid,tbs[0]);
     tbs.forEach(function(tb){
       var card=document.createElement('div'); card.className='nr-room nr-x';
-      var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=txt(tb.querySelector('caption')); card.appendChild(hd);
+      var cw=document.createElement('div'); cw.className='nr-cw';
+      var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=txt(tb.querySelector('caption')); cw.appendChild(hd); cw.appendChild(card);
       [].forEach.call(tb.querySelectorAll('tbody tr'),function(tr){
         if(tr.cells.length<2)return;
         var row=document.createElement('div'); row.className='nr-xrow';
@@ -788,7 +791,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
         var c=document.createElement('div'); c.className='mx-c'; pcell(c,txt(tr.cells[1]),tr.cells[2]?tr.cells[2].firstElementChild:null); row.appendChild(c);
         card.appendChild(row);
       });
-      grid.appendChild(card); tb.parentNode.removeChild(tb);
+      grid.appendChild(cw); tb.parentNode.removeChild(tb);
     });
   }
   function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
