@@ -4980,6 +4980,52 @@
 "p": 2210
 },
 {
+"n": "Nature Drive (guided, Morning) — Nett Price (N$)",
+"p": 1360
+},
+{
+"n": "Twyfelfontein Excursion (guided, Afternoon) — Nett Price (N$)",
+"p": 1110
+},
+{
+"n": "Damara Living Museum Entry — Nett Price (N$)",
+"p": 320
+},
+{
+"n": "All-Inclusive Drinks Add-On — Nett Price (N$)",
+"p": 1200
+},
+{
+"n": "Twyfelfontein Airstrip Transfer — Nett Price (N$)",
+"p": 395
+},
+{
+"n": "!Doro Nawas Transfer — Nett Price (N$)",
+"p": 465
+},
+{
+"n": "Damaraland Camp Transfer — Nett Price (N$)",
+"p": 695
+},
+{
+"n": "Breakfast — Price (N$)",
+"p": 395
+},
+{
+"n": "Lunch — Price (N$)",
+"p": 375
+},
+{
+"n": "Lunch Pack — Price (N$)",
+"p": 255
+},
+{
+"n": "Dinner (3 Course) — Price (N$)",
+"p": 890
+}
+],
+"rack_2026": [
+{
 "n": "9 x Bungalows — DBB p/p Sharing — Low Season RACK",
 "p": 5070
 },
@@ -5124,6 +5170,34 @@
 "p": 66150
 },
 {
+"n": "Child (4-12 yrs) — DBB per night — Low Season NETT",
+"p": 2610
+},
+{
+"n": "Child (4-12 yrs) — 2-Night FI Package — Low Season NETT",
+"p": 8190
+},
+{
+"n": "Child (4-12 yrs) — 3-Night FI Package — Low Season NETT",
+"p": 11190
+},
+{
+"n": "Child (4-12 yrs) — DBB per night — High Season NETT",
+"p": 2610
+},
+{
+"n": "Child (4-12 yrs) — 2-Night FI Package — High Season NETT",
+"p": 8190
+},
+{
+"n": "Child (4-12 yrs) — 3-Night FI Package — High Season NETT",
+"p": 11190
+},
+{
+"n": "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
+"p": 2210
+},
+{
 "n": "Nature Drive (guided, Morning) — Nett Price (N$)",
 "p": 1360
 },
@@ -5166,368 +5240,6 @@
 {
 "n": "Dinner (3 Course) — Price (N$)",
 "p": 890
-}
-],
-"rack_2026": [
-{
-"n": "9 x Bungalows — DBB p/p Sharing — Low Season STO 15%",
-"p": 5172
-},
-{
-"n": "9 x Bungalows — DBB Single Person — Low Season STO 15%",
-"p": 6976.8
-},
-{
-"n": "Bungalow 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 15157.2
-},
-{
-"n": "Bungalow 2-Night FI Package — Single — Low Season STO 15%",
-"p": 18523.2
-},
-{
-"n": "Bungalow 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 22002
-},
-{
-"n": "Bungalow 3-Night FI Package — Single — Low Season STO 15%",
-"p": 27204
-},
-{
-"n": "1 x Kipwe Suite — DBB p/p Sharing — Low Season STO 15%",
-"p": 8710.8
-},
-{
-"n": "1 x Kipwe Suite — DBB Single Person — Low Season STO 15%",
-"p": 11872.8
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 22195.2
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Single — Low Season STO 15%",
-"p": 28285.2
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 32528.4
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Single — Low Season STO 15%",
-"p": 41830.8
-},
-{
-"n": "2 x Luxury Suites — DBB p/p Sharing — Low Season STO 15%",
-"p": 12729.6
-},
-{
-"n": "2 x Luxury Suites — DBB Single Person — Low Season STO 15%",
-"p": 17310
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 30375.6
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Single — Low Season STO 15%",
-"p": 39280.8
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 44737.2
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Single — Low Season STO 15%",
-"p": 58262.4
-},
-{
-"n": "9 x Bungalows — DBB p/p Sharing — High Season STO 15%",
-"p": 6834
-},
-{
-"n": "9 x Bungalows — DBB Single Person — High Season STO 15%",
-"p": 10118.4
-},
-{
-"n": "Bungalow 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 18462
-},
-{
-"n": "Bungalow 2-Night FI Package — Single — High Season STO 15%",
-"p": 23174.4
-},
-{
-"n": "Bungalow 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 26928
-},
-{
-"n": "Bungalow 3-Night FI Package — Single — High Season STO 15%",
-"p": 34149.6
-},
-{
-"n": "1 x Kipwe Suite — DBB p/p Sharing — High Season STO 15%",
-"p": 10435.2
-},
-{
-"n": "1 x Kipwe Suite — DBB Single Person — High Season STO 15%",
-"p": 15096
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 25642.8
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Single — High Season STO 15%",
-"p": 33088.8
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 37730.4
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Single — High Season STO 15%",
-"p": 49021.2
-},
-{
-"n": "2 x Luxury Suites — DBB p/p Sharing — High Season STO 15%",
-"p": 15106.8
-},
-{
-"n": "2 x Luxury Suites — DBB Single Person — High Season STO 15%",
-"p": 21195.6
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 35088
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Single — High Season STO 15%",
-"p": 45400.8
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 51867.6
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Single — High Season STO 15%",
-"p": 67473.6
-},
-{
-"n": "Child (4-12 yrs) — DBB per night — Low Season NETT",
-"p": 3132
-},
-{
-"n": "Child (4-12 yrs) — 2-Night FI Package — Low Season NETT",
-"p": 9828
-},
-{
-"n": "Child (4-12 yrs) — 3-Night FI Package — Low Season NETT",
-"p": 13428
-},
-{
-"n": "Child (4-12 yrs) — DBB per night — High Season NETT",
-"p": 3132
-},
-{
-"n": "Child (4-12 yrs) — 2-Night FI Package — High Season NETT",
-"p": 9828
-},
-{
-"n": "Child (4-12 yrs) — 3-Night FI Package — High Season NETT",
-"p": 13428
-},
-{
-"n": "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
-"p": 2652
-},
-{
-"n": "9 x Bungalows — DBB p/p Sharing — Low Season RACK",
-"p": 6084
-},
-{
-"n": "9 x Bungalows — DBB Single Person — Low Season RACK",
-"p": 8208
-},
-{
-"n": "Bungalow 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 17832
-},
-{
-"n": "Bungalow 2-Night FI Package — Single — Low Season RACK",
-"p": 21792
-},
-{
-"n": "Bungalow 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 25884
-},
-{
-"n": "Bungalow 3-Night FI Package — Single — Low Season RACK",
-"p": 32004
-},
-{
-"n": "1 x Kipwe Suite — DBB p/p Sharing — Low Season RACK",
-"p": 10248
-},
-{
-"n": "1 x Kipwe Suite — DBB Single Person — Low Season RACK",
-"p": 13968
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 26112
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Single — Low Season RACK",
-"p": 33276
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 38268
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Single — Low Season RACK",
-"p": 49212
-},
-{
-"n": "2 x Luxury Suites — DBB p/p Sharing — Low Season RACK",
-"p": 14976
-},
-{
-"n": "2 x Luxury Suites — DBB Single Person — Low Season RACK",
-"p": 20364
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 35736
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Single — Low Season RACK",
-"p": 46212
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 52632
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Single — Low Season RACK",
-"p": 68544
-},
-{
-"n": "9 x Bungalows — DBB p/p Sharing — High Season RACK",
-"p": 8040
-},
-{
-"n": "9 x Bungalows — DBB Single Person — High Season RACK",
-"p": 11904
-},
-{
-"n": "Bungalow 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 21720
-},
-{
-"n": "Bungalow 2-Night FI Package — Single — High Season RACK",
-"p": 27264
-},
-{
-"n": "Bungalow 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 31680
-},
-{
-"n": "Bungalow 3-Night FI Package — Single — High Season RACK",
-"p": 40176
-},
-{
-"n": "1 x Kipwe Suite — DBB p/p Sharing — High Season RACK",
-"p": 12276
-},
-{
-"n": "1 x Kipwe Suite — DBB Single Person — High Season RACK",
-"p": 17760
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 30168
-},
-{
-"n": "Kipwe Suite 2-Night FI Package — Single — High Season RACK",
-"p": 38928
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 44388
-},
-{
-"n": "Kipwe Suite 3-Night FI Package — Single — High Season RACK",
-"p": 57672
-},
-{
-"n": "2 x Luxury Suites — DBB p/p Sharing — High Season RACK",
-"p": 17772
-},
-{
-"n": "2 x Luxury Suites — DBB Single Person — High Season RACK",
-"p": 24936
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 41280
-},
-{
-"n": "Luxury Suite 2-Night FI Package — Single — High Season RACK",
-"p": 53412
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 61020
-},
-{
-"n": "Luxury Suite 3-Night FI Package — Single — High Season RACK",
-"p": 79380
-},
-{
-"n": "Nature Drive (guided, Morning) — Nett Price (N$)",
-"p": 1632
-},
-{
-"n": "Twyfelfontein Excursion (guided, Afternoon) — Nett Price (N$)",
-"p": 1332
-},
-{
-"n": "Damara Living Museum Entry — Nett Price (N$)",
-"p": 384
-},
-{
-"n": "All-Inclusive Drinks Add-On — Nett Price (N$)",
-"p": 1440
-},
-{
-"n": "Twyfelfontein Airstrip Transfer — Nett Price (N$)",
-"p": 474
-},
-{
-"n": "!Doro Nawas Transfer — Nett Price (N$)",
-"p": 558
-},
-{
-"n": "Damaraland Camp Transfer — Nett Price (N$)",
-"p": 834
-},
-{
-"n": "Breakfast — Price (N$)",
-"p": 474
-},
-{
-"n": "Lunch — Price (N$)",
-"p": 450
-},
-{
-"n": "Lunch Pack — Price (N$)",
-"p": 306
-},
-{
-"n": "Dinner (3 Course) — Price (N$)",
-"p": 1068
 }
 ]
 },

@@ -47027,3 +47027,268 @@ Object.assign(DDS_RACK_BY_YEAR, {
     Object.keys(N[slug]).forEach(function (y) { if (e[y]) e[y].sections = N[slug][y]; });
   });
 })();
+
+// --------------------------------------------------------------------------
+// KIPWE_RACK_FIX_091026 — Camp Kipwe 2026 public rack. Replaces the earlier doc that carried the
+// STO15 net x 1.2 as a second "rack" room table and the printed rack x 1.2 again. Now: the sheet's
+// own Rack Rate table as printed; child, guide, activities, transfers, meals at net (printed NETT).
+// Source: ratesheets/chiwani_ratesheet_v3.html + ratesheets/camp_kipwe.html (Rack Rate table).
+// --------------------------------------------------------------------------
+(function kipweRackFix(){
+  if (typeof SHEET_RACK_BY_YEAR === 'undefined' || !SHEET_RACK_BY_YEAR['camp-kipwe']) return;
+  SHEET_RACK_BY_YEAR['camp-kipwe']['2026'] = {
+ "name": "Camp Kipwe",
+ "region": "Damaraland",
+ "currency": "N$",
+ "validity": "2026",
+ "note": "Rack as printed on Camp Kipwe's 2026 rate sheet (Rack Rate table, 01 Jan – 31 Dec 2026; = STO15 net / 0.85 on every row). Child, guide & pilot, activities, transfers and meals are printed NETT on the sheet (non-commissionable), so rack = net.",
+ "sections": [
+  {
+   "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026",
+   "rows": [
+    [
+     "9 x Bungalows — DBB p/p Sharing — Low Season RACK",
+     "5,070"
+    ],
+    [
+     "9 x Bungalows — DBB Single Person — Low Season RACK",
+     "6,840"
+    ],
+    [
+     "Bungalow 2-Night FI Package — Sharing p/p — Low Season RACK",
+     "14,860"
+    ],
+    [
+     "Bungalow 2-Night FI Package — Single — Low Season RACK",
+     "18,160"
+    ],
+    [
+     "Bungalow 3-Night FI Package — Sharing p/p — Low Season RACK",
+     "21,570"
+    ],
+    [
+     "Bungalow 3-Night FI Package — Single — Low Season RACK",
+     "26,670"
+    ],
+    [
+     "1 x Kipwe Suite — DBB p/p Sharing — Low Season RACK",
+     "8,540"
+    ],
+    [
+     "1 x Kipwe Suite — DBB Single Person — Low Season RACK",
+     "11,640"
+    ],
+    [
+     "Kipwe Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
+     "21,760"
+    ],
+    [
+     "Kipwe Suite 2-Night FI Package — Single — Low Season RACK",
+     "27,730"
+    ],
+    [
+     "Kipwe Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
+     "31,890"
+    ],
+    [
+     "Kipwe Suite 3-Night FI Package — Single — Low Season RACK",
+     "41,010"
+    ],
+    [
+     "2 x Luxury Suites — DBB p/p Sharing — Low Season RACK",
+     "12,480"
+    ],
+    [
+     "2 x Luxury Suites — DBB Single Person — Low Season RACK",
+     "16,970"
+    ],
+    [
+     "Luxury Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
+     "29,780"
+    ],
+    [
+     "Luxury Suite 2-Night FI Package — Single — Low Season RACK",
+     "38,510"
+    ],
+    [
+     "Luxury Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
+     "43,860"
+    ],
+    [
+     "Luxury Suite 3-Night FI Package — Single — Low Season RACK",
+     "57,120"
+    ],
+    [
+     "9 x Bungalows — DBB p/p Sharing — High Season RACK",
+     "6,700"
+    ],
+    [
+     "9 x Bungalows — DBB Single Person — High Season RACK",
+     "9,920"
+    ],
+    [
+     "Bungalow 2-Night FI Package — Sharing p/p — High Season RACK",
+     "18,100"
+    ],
+    [
+     "Bungalow 2-Night FI Package — Single — High Season RACK",
+     "22,720"
+    ],
+    [
+     "Bungalow 3-Night FI Package — Sharing p/p — High Season RACK",
+     "26,400"
+    ],
+    [
+     "Bungalow 3-Night FI Package — Single — High Season RACK",
+     "33,480"
+    ],
+    [
+     "1 x Kipwe Suite — DBB p/p Sharing — High Season RACK",
+     "10,230"
+    ],
+    [
+     "1 x Kipwe Suite — DBB Single Person — High Season RACK",
+     "14,800"
+    ],
+    [
+     "Kipwe Suite 2-Night FI Package — Sharing p/p — High Season RACK",
+     "25,140"
+    ],
+    [
+     "Kipwe Suite 2-Night FI Package — Single — High Season RACK",
+     "32,440"
+    ],
+    [
+     "Kipwe Suite 3-Night FI Package — Sharing p/p — High Season RACK",
+     "36,990"
+    ],
+    [
+     "Kipwe Suite 3-Night FI Package — Single — High Season RACK",
+     "48,060"
+    ],
+    [
+     "2 x Luxury Suites — DBB p/p Sharing — High Season RACK",
+     "14,810"
+    ],
+    [
+     "2 x Luxury Suites — DBB Single Person — High Season RACK",
+     "20,780"
+    ],
+    [
+     "Luxury Suite 2-Night FI Package — Sharing p/p — High Season RACK",
+     "34,400"
+    ],
+    [
+     "Luxury Suite 2-Night FI Package — Single — High Season RACK",
+     "44,510"
+    ],
+    [
+     "Luxury Suite 3-Night FI Package — Sharing p/p — High Season RACK",
+     "50,850"
+    ],
+    [
+     "Luxury Suite 3-Night FI Package — Single — High Season RACK",
+     "66,150"
+    ]
+   ]
+  },
+  {
+   "title": "Child Sharing Rates (accommodated in children's tent / camping bed)",
+   "rows": [
+    [
+     "Child (4-12 yrs) — DBB per night — Low Season NETT",
+     "2,610"
+    ],
+    [
+     "Child (4-12 yrs) — 2-Night FI Package — Low Season NETT",
+     "8,190"
+    ],
+    [
+     "Child (4-12 yrs) — 3-Night FI Package — Low Season NETT",
+     "11,190"
+    ],
+    [
+     "Child (4-12 yrs) — DBB per night — High Season NETT",
+     "2,610"
+    ],
+    [
+     "Child (4-12 yrs) — 2-Night FI Package — High Season NETT",
+     "8,190"
+    ],
+    [
+     "Child (4-12 yrs) — 3-Night FI Package — High Season NETT",
+     "11,190"
+    ]
+   ]
+  },
+  {
+   "title": "Guide & Pilot Rates",
+   "rows": [
+    [
+     "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
+     "2,210"
+    ]
+   ]
+  },
+  {
+   "title": "Activities offered at Camp Kipwe",
+   "rows": [
+    [
+     "Nature Drive (guided, Morning) — Nett Price (N$)",
+     "1,360"
+    ],
+    [
+     "Twyfelfontein Excursion (guided, Afternoon) — Nett Price (N$)",
+     "1,110"
+    ],
+    [
+     "Damara Living Museum Entry — Nett Price (N$)",
+     "320"
+    ],
+    [
+     "All-Inclusive Drinks Add-On — Nett Price (N$)",
+     "1,200"
+    ]
+   ]
+  },
+  {
+   "title": "Transfers (Charged pp one-way)",
+   "rows": [
+    [
+     "Twyfelfontein Airstrip Transfer — Nett Price (N$)",
+     "395"
+    ],
+    [
+     "!Doro Nawas Transfer — Nett Price (N$)",
+     "465"
+    ],
+    [
+     "Damaraland Camp Transfer — Nett Price (N$)",
+     "695"
+    ]
+   ]
+  },
+  {
+   "title": "Additional Meals",
+   "rows": [
+    [
+     "Breakfast — Price (N$)",
+     "395"
+    ],
+    [
+     "Lunch — Price (N$)",
+     "375"
+    ],
+    [
+     "Lunch Pack — Price (N$)",
+     "255"
+    ],
+    [
+     "Dinner (3 Course) — Price (N$)",
+     "890"
+    ]
+   ]
+  }
+ ]
+};
+})();
