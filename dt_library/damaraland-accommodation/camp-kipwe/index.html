@@ -356,7 +356,7 @@ function nrDrawYears(){
   if(box.getAttribute('data-sig')===sig) return; box.setAttribute('data-sig',sig);
   box.innerHTML='';
   ys.forEach(function(y,i){
-    var ok=NR_YRS.have.indexOf(y)>=0, on=nm?(y===nm[2]):(btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur);
+    var ok=NR_YRS.have.indexOf(y)>=0, on=btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur;
     var b=document.createElement('button'); b.type='button';
     b.className='nr-yr'+(on?' on':'')+(ok?'':' off');
     var lab=ok?'Rates':(nm&&nm[1]===y?'Still to follow — showing '+nm[2]:'Rates still to follow');
@@ -609,6 +609,8 @@ applySession();
 .nr-yr:hover{border-color:#87a996}
 .nr-yr.on{background:#87a996;border-color:#87a996}.nr-yr.on .y,.nr-yr.on .s{color:#fff}
 .nr-yr.off .s{color:#2F5450}
+.nr-yr.on.off .s{color:#fff}
+.hero-thumbs{display:none!important}
 #nr-lodge-yr-note{display:none!important}
 @media(max-width:600px){.nr-years{gap:12px}.nr-yr{min-width:0;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px}.nr-yr .y{font-size:1.6rem}}
 .nr-tbc{padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem}
