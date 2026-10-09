@@ -351,14 +351,16 @@ function nrDrawYears(){
   var src=document.getElementById('nr-lodge-yr'), btns=src?[].slice.call(src.querySelectorAll('button[data-y]')):[];
   var ys=btns.length?btns.map(function(x){return x.getAttribute('data-y');}):NR_YRS.have.slice();
   if(!ys.length) return;
-  var sig=ys.map(function(y,i){var on=btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur;return y+(on?'*':'')+(NR_YRS.have.indexOf(y)>=0?'+':'');}).join('|');
+  var nt=document.getElementById('nr-lodge-yr-note'), nm=nt?/^(\d{4}) rates .*showing (\d{4})/.exec(nt.textContent||''):null;
+  var sig=(nm?nm[0]:'')+ys.map(function(y,i){var on=btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur;return y+(on?'*':'')+(NR_YRS.have.indexOf(y)>=0?'+':'');}).join('|');
   if(box.getAttribute('data-sig')===sig) return; box.setAttribute('data-sig',sig);
   box.innerHTML='';
   ys.forEach(function(y,i){
-    var ok=NR_YRS.have.indexOf(y)>=0, on=btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur;
+    var ok=NR_YRS.have.indexOf(y)>=0, on=nm?(y===nm[2]):(btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur);
     var b=document.createElement('button'); b.type='button';
     b.className='nr-yr'+(on?' on':'')+(ok?'':' off');
-    b.innerHTML='<span class="y">'+y+'</span><span class="s">'+(ok?'Rates':'Rates to follow')+'</span>';
+    var lab=ok?'Rates':(nm&&nm[1]===y?'Still to follow — showing '+nm[2]:'Rates still to follow');
+    b.innerHTML='<span class="y">'+y+'</span><span class="s">'+lab+'</span>';
     b.onclick=function(){ if(btns.length) btns[i].click(); else if(NR_YRS.sto) showStoYear(y); else showRack(y); };
     box.appendChild(b);
   });
@@ -606,7 +608,8 @@ applySession();
 .nr-yr .s{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#87a996}
 .nr-yr:hover{border-color:#87a996}
 .nr-yr.on{background:#87a996;border-color:#87a996}.nr-yr.on .y,.nr-yr.on .s{color:#fff}
-.nr-yr.off .s{color:#9a918a}
+.nr-yr.off .s{color:#2F5450}
+#nr-lodge-yr-note{display:none!important}
 @media(max-width:600px){.nr-years{gap:12px}.nr-yr{min-width:0;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px}.nr-yr .y{font-size:1.6rem}}
 .nr-tbc{padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem}
 .nr-sw{display:inline-flex;gap:4px;margin:0 2px 18px;padding:4px;border-radius:999px;background:#fff;border:1px solid rgba(135,169,150,.35)}
