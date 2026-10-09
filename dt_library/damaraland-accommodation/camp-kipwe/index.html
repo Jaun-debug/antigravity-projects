@@ -610,6 +610,22 @@ applySession();
 @media(max-width:600px){.nr-years{gap:12px}.nr-yr{min-width:0;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px}.nr-yr .y{font-size:1.6rem}}
 .nr-tbc{padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem}
 .nr-sw{display:flex;gap:10px;margin:0 2px 16px}
+.nr-blk table.nr-mx{table-layout:fixed;overflow:clip}
+.nr-mx td.mx-c{overflow:clip;overflow-clip-margin:4px}
+.nr-mx thead th{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:#9a918a;font-weight:400;text-align:right;padding:10px 0 4px;background:none;border:0}
+.nr-mx thead th:first-child{width:44%}
+.nr-blk .nr-mx td{padding:10px 0;vertical-align:top;font-size:.9rem}
+.nr-blk .nr-mx td.mx-l{color:#4a433d;padding-right:10px}
+.nr-blk .nr-mx td.mx-c{text-align:right;padding-left:8px}
+.mx-p{font:inherit;font-size:.95rem;color:#3c3530;background:none;border:0;padding:3px 6px;margin:-3px 0;border-radius:5px;white-space:nowrap}
+button.mx-p{cursor:pointer;border-bottom:1px dashed rgba(135,169,150,.6);border-radius:5px 5px 0 0}
+button.mx-p:hover{background:rgba(135,169,150,.12)}
+.mx-c.has .mx-p{background:#87a996;color:#fff;border-bottom-color:transparent;border-radius:5px}
+.mx-q{display:none;margin-top:8px;justify-content:flex-end}
+.mx-c.open .mx-q{display:flex}
+.mx-q .nr-step,td .mx-q .nr-step{height:30px}.mx-q .nr-step button{flex-basis:26px!important;width:26px!important;font-size:15px!important}.mx-q .nr-step input{width:32px!important;font-size:.9rem!important}
+.mx-q input.qty{width:60px}
+@media(max-width:600px){.nr-mx thead th:first-child{width:38%}.nr-blk .nr-mx td{font-size:.82rem}.mx-p{font-size:.84rem}}
 .nr-sw button{cursor:pointer;font:inherit;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;border-radius:5px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;transition:.2s}
 .nr-sw button.on{background:#87a996;border-color:#87a996;color:#fff}
 .nr-blocks.nr-one{grid-template-columns:1fr}
@@ -689,6 +705,48 @@ applySession();
     function show(k){blks.forEach(function(b,i){b.classList.toggle('on',i===k);});[].forEach.call(sw.children,function(x,i){x.classList.toggle('on',i===k);});}
     blks.forEach(function(b,i){var bt=document.createElement('button');bt.type='button';bt.textContent=txt(b.querySelector('h4'));bt.onclick=function(){show(i);};sw.appendChild(bt);});
     grid.classList.add('nr-one');grid.parentNode.insertBefore(sw,grid);show(0);
+    [].forEach.call(grid.querySelectorAll('.nr-blk table'),matrix);
+  }
+  // One room = one small grid: rows are the products (DBB, 2-Night FI Package ...), columns are
+  // Sharing p/p and Single. The original qty boxes are moved into the cells and only open when
+  // the agent taps a price, so the page isn't a wall of steppers.
+  function matrix(tb){
+    if(tb.classList.contains('nr-mx'))return;
+    var rows=[].slice.call(tb.querySelectorAll('tbody tr')); if(!rows.length)return;
+    var prods=[],cols=[],cell={};
+    var ok=rows.every(function(tr){
+      if(tr.cells.length<2)return false;
+      var l=txt(tr.cells[0]), occ=/sharing/i.test(l)?'Sharing p/p':(/single/i.test(l)?'Single':'Rate');
+      var pr=l.replace(/\s*—?\s*(sharing p\/p|p\/p sharing|single person|single)\s*/ig,' ').replace(/\s*—\s*$/,'').replace(/\s+/g,' ').trim();
+      if(!pr)return false; var k=pr+'|'+occ; if(cell[k])return false;
+      if(prods.indexOf(pr)<0)prods.push(pr); if(cols.indexOf(occ)<0)cols.push(occ);
+      cell[k]=tr; return true; });
+    if(!ok)return;
+    cols.sort(function(a,b){var o={'Sharing p/p':0,'Single':1,'Rate':2};return o[a]-o[b];});
+    var cap=tb.querySelector('caption'), t=document.createElement('table'); t.className='nr-mx';
+    if(cap)t.appendChild(cap);
+    var th='<thead><tr><th></th>'+cols.map(function(c){return '<th>'+(c==='Rate'?'':c)+'</th>';}).join('')+'</tr></thead>';
+    t.insertAdjacentHTML('beforeend',th); var tbd=document.createElement('tbody'); t.appendChild(tbd);
+    prods.forEach(function(pr){
+      var r=document.createElement('tr'), h=document.createElement('td'); h.className='mx-l'; h.textContent=pr; r.appendChild(h);
+      cols.forEach(function(c){
+        var td=document.createElement('td'); td.className='mx-c'; var src=cell[pr+'|'+c];
+        if(src){
+          var price=txt(src.cells[1]), q=src.cells[2]?src.cells[2].firstElementChild:null;
+          var b=document.createElement(q?'button':'span'); b.className='mx-p'; if(q)b.type='button'; b.textContent=price; td.appendChild(b);
+          if(q){
+            var box=document.createElement('div'); box.className='mx-q'; box.appendChild(q); td.appendChild(box); td.classList.add('can');
+            var inp=td.querySelector('input.qty');
+            function mark(){var v=parseInt(inp&&inp.value,10)||0; td.classList.toggle('has',v>0); if(v>0)td.classList.add('open');}
+            b.onclick=function(){ if(!td.classList.contains('open')){ td.classList.add('open'); if(inp&&!(parseInt(inp.value,10)>0)){inp.value=1;inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));} } else if(!td.classList.contains('has')) td.classList.remove('open'); mark(); };
+            td.addEventListener('input',mark); td.addEventListener('change',mark); mark();
+          }
+        }
+        r.appendChild(td);
+      });
+      tbd.appendChild(r);
+    });
+    tb.parentNode.replaceChild(t,tb);
   }
   function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
     try{ new MutationObserver(function(){ build(); }).observe(rt,{childList:true}); }catch(e){} }
