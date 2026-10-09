@@ -2480,5 +2480,181 @@ var n=0;var iv=setInterval(function(){n++;if(build()||n>40)clearInterval(iv);},1
 window.addEventListener('load',build);
 })();</script><script>function filterGL(q){q=(q||"").toLowerCase();var ts=document.querySelectorAll(".ond-thumb");var first=null;ts.forEach(function(t){var sp=t.querySelector("span");var nm=(sp?sp.textContent:"").toLowerCase();var m=nm.indexOf(q)>-1;t.style.display=m?"":"none";if(m&&!first)first=t;});if(first){try{first.dispatchEvent(new MouseEvent("mouseenter"));}catch(e){}}}</script><script>function exploreDown(){var t=document.querySelector('.gl-search')||document.querySelector('.ond-wrap')||document.getElementById('lodge-grid')||document.getElementById('all-cards');if(!t)return;var y=t.getBoundingClientRect().top+window.pageYOffset-24;var s=window.pageYOffset,d=y-s,dur=1100,t0=null;function st(ts){if(!t0)t0=ts;var p=Math.min((ts-t0)/dur,1);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;window.scrollTo(0,s+d*e);if(p<1)requestAnimationFrame(st);}requestAnimationFrame(st);}</script><script src="/assets/site-chrome.js"></script>
 <script>/* GROUP-CARDS-V2: search filters the lodge cards (the thumb gallery is switched off) */function filterGL(q){q=(q||"").toLowerCase();document.querySelectorAll("#lodge-grid .lodge-card").forEach(function(c){var n=c.querySelector(".lodge-card-name");c.style.display=(n&&n.textContent.toLowerCase().indexOf(q)>-1)?"":"none";});}</script>
+<!-- KIPWE-GROUP-V2: Camp Kipwe in the Chiwani group sheet gets the Kipwe lodge-page rate look (year cards, Low/High switch, room cards, tap-to-add). Original tables and qty inputs are reused, only moved. -->
+<style id="kg2-css">
+.kg2{margin:10px 0 30px;color:#2F5450}
+.kg2-years{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:6px 0 22px}
+.kg2-yr{cursor:pointer;font:inherit;text-align:left;padding:20px 24px;border-radius:10px;border:1px solid rgba(164,130,86,.25);background:#fff;display:flex;align-items:baseline;justify-content:space-between;gap:12px;transition:.2s}
+.kg2-yr .y{font-family:var(--font-head);font-size:2rem;letter-spacing:2px;color:#a48256;line-height:1}
+.kg2-yr .s{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#87a996}
+.kg2-yr.off .s{color:#2F5450}
+.kg2-yr.on{background:#87a996;border-color:#87a996}.kg2-yr.on .y,.kg2-yr.on .s{color:#fff}
+.kg2-cap{font-family:var(--font-head);font-size:1.05rem;color:#2F5450;margin:4px 2px 4px}
+.kg2-note{font-size:.85rem;color:#2F5450;margin:0 2px 16px;opacity:.85}
+.kg2-sw{display:inline-flex;gap:4px;margin:0 2px 18px;padding:4px;border-radius:999px;background:#fff;border:1px solid rgba(135,169,150,.35)}
+.kg2-sw button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:9px 22px;border-radius:999px;border:0;background:none;color:#5f7f72;transition:.2s}
+.kg2-sw button.on{background:#87a996;color:#fff}
+.kg2-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px;align-items:start;margin:0 0 30px}
+.kg2-cw{min-width:0}
+.kg2-h{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;color:#a48256;padding:0 4px 10px}
+.kg2-card{background:#fff;border:1px solid rgba(164,130,86,.14);border-radius:14px;padding:8px 22px 8px;box-shadow:0 8px 28px rgba(60,53,48,.06)}
+.kg2-card.kids{background:#f7f5f0}
+.kg2 table.kg2-mx{width:100%;table-layout:fixed;border-collapse:collapse;margin:0;background:none;box-shadow:none;border:0;overflow:clip}
+.kg2-mx th{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:#2F5450;opacity:.7;font-weight:400;text-align:right;padding:10px 0 4px;background:none!important;border:0!important}
+.kg2-mx th:first-child{width:44%}
+.kg2-mx td{padding:10px 0;vertical-align:top;font-size:.9rem;border:0;border-bottom:1px solid rgba(0,0,0,.05);background:none!important;color:#2F5450}
+.kg2-mx tr:last-child td{border-bottom:0}
+.kg2-mx td.c{text-align:right;padding-left:8px;overflow:clip;overflow-clip-margin:4px}
+.kg2-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.9rem;color:#2F5450}
+.kg2-row:last-child{border-bottom:0}
+.kg2-row .l{min-width:0}.kg2-row .l small{display:block;font-size:.78rem;opacity:.75;margin-top:3px}
+.kg2-row .c{text-align:right;flex:0 0 auto}
+.kg2-p{font:inherit;font-size:.95rem;color:#2F5450;background:none;border:0;padding:3px 6px;margin:-3px 0;border-radius:5px;white-space:nowrap}
+button.kg2-p{cursor:pointer;border-bottom:1px dashed rgba(135,169,150,.6);border-radius:5px 5px 0 0}
+button.kg2-p:hover{background:rgba(135,169,150,.12)}
+.c.has .kg2-p{background:#87a996;color:#fff;border-bottom-color:transparent;border-radius:5px}
+.kg2-q{display:none;margin-top:8px;justify-content:flex-end}
+.c.open .kg2-q{display:flex}
+.kg2-q .nr-step{height:30px!important}.kg2-q .nr-step button{flex-basis:26px!important;width:26px!important;font-size:15px!important}.kg2-q .nr-step input,.kg2-q input.rate-qty{width:34px!important;font-size:.9rem!important}
+.kg2-tbc{padding:22px 2px;font-style:italic;font-size:1.02rem;color:#2F5450}
+.kg2-hide{display:none!important}
+@media(max-width:760px){.kg2-grid{grid-template-columns:1fr}.kg2-years{gap:12px}.kg2-yr{flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px}.kg2-yr .y{font-size:1.6rem}.kg2-mx th:first-child{width:38%}.kg2-mx td{font-size:.82rem}.kg2-p{font-size:.84rem}}
+</style>
+<script data-no-optimize="1">
+(function(){
+  var SEASON=/\b((?:low|high|peak|shoulder|green|mid)\s+season)\b/i;
+  function txt(el){return (el&&el.textContent||'').replace(/\s+/g,' ').trim();}
+  function fire(i){i.dispatchEvent(new Event('input',{bubbles:true}));i.dispatchEvent(new Event('change',{bubbles:true}));if(typeof updateTotal==='function')updateTotal();}
+  function pcell(c,price,inp){
+    var b=document.createElement(inp?'button':'span');b.className='kg2-p';if(inp){b.type='button';b.title='Tap to add, tap again to remove';}
+    b.textContent='N$ '+price;c.appendChild(b);
+    if(!inp)return;
+    var q=document.createElement('div');q.className='kg2-q';q.appendChild(inp.closest('.nr-step')||inp);c.appendChild(q);
+    function mark(){var v=parseInt(inp.value,10)||0;c.classList.toggle('has',v>0);c.classList.toggle('open',v>0);}
+    b.onclick=function(){inp.value=(parseInt(inp.value,10)||0)>0?0:1;fire(inp);mark();};
+    c.addEventListener('input',mark);c.addEventListener('change',mark);c.addEventListener('click',function(){setTimeout(mark,0);});mark();
+  }
+  // read a table: price columns (header not QTY, numeric cells), the qty input sitting in the next cell
+  function readTable(tb){
+    var ths=[].slice.call(tb.querySelectorAll('thead tr:last-child th')).map(txt);
+    var rows=[];
+    [].forEach.call(tb.querySelectorAll('tbody tr'),function(tr){
+      var tds=[].slice.call(tr.children);if(tds.length<2)return;
+      var r={label:txt(tds[0]),cols:[]};
+      ths.forEach(function(h,i){
+        if(!i||/^qty$/i.test(h)||!tds[i])return;
+        var v=txt(tds[i]);if(!/^[\d,\.\s]+$/.test(v)||!/\d/.test(v))return;
+        var inp=(ths[i+1]&&/^qty$/i.test(ths[i+1])&&tds[i+1])?tds[i+1].querySelector('input.rate-qty'):null;
+        var sm=h.match(SEASON);
+        r.cols.push({head:h,season:sm?sm[1].replace(/\b\w/g,function(c){return c.toUpperCase();}):null,price:v,inp:inp});
+      });
+      var extra=tds.slice(1).map(txt).filter(function(t){return t&&!/^[\d,\.\s]+$/.test(t);});
+      r.note=ths.length>2&&!r.cols.some(function(c){return c.season;})?extra.join(' '):'';
+      if(r.cols.length)rows.push(r);
+    });
+    return rows;
+  }
+  function roomOf(l){if(/^child/i.test(l))return 'Children';if(/bungalow/i.test(l))return 'Bungalows';if(/kipwe suite/i.test(l))return 'Kipwe Suite';if(/luxury suite/i.test(l))return 'Luxury Suites';return null;}
+  function itemOf(l){var p=l.split(' — ');if(/^\d+\s*x\s/i.test(p[0])||/^child/i.test(p[0]))return p.slice(1).join(' — ');return p[0].replace(/^(Bungalow|Kipwe Suite|Luxury Suite)\s*/i,'')+(p.length>1?' — '+p.slice(1).join(' — '):'');}
+  function matrixCard(title,items,kids){
+    var prods=[],cols=[],cell={};
+    var ok=items.every(function(it){var l=it.item,occ=/sharing/i.test(l)?'Sharing p/p':(/single/i.test(l)?'Single':'Rate');
+      var pr=l.replace(/\s*—?\s*(sharing p\/p|p\/p sharing|single person|single)\s*/ig,' ').replace(/\s*—\s*$/,'').replace(/\s+/g,' ').trim();
+      if(!pr||cell[pr+'|'+occ])return false;if(prods.indexOf(pr)<0)prods.push(pr);if(cols.indexOf(occ)<0)cols.push(occ);cell[pr+'|'+occ]=it;return true;});
+    if(!ok)return null;
+    cols.sort(function(a,b){var o={'Sharing p/p':0,'Single':1,'Rate':2};return o[a]-o[b];});
+    var cw=document.createElement('div');cw.className='kg2-cw';
+    var h=document.createElement('div');h.className='kg2-h';h.textContent=title;cw.appendChild(h);
+    var card=document.createElement('div');card.className='kg2-card'+(kids?' kids':'');cw.appendChild(card);
+    var t=document.createElement('table');t.className='kg2-mx';card.appendChild(t);
+    t.innerHTML='<thead><tr><th></th>'+cols.map(function(c){return '<th>'+(c==='Rate'?'':c)+'</th>';}).join('')+'</tr></thead><tbody></tbody>';
+    var tb=t.querySelector('tbody');
+    prods.forEach(function(pr){var tr=document.createElement('tr');var l=document.createElement('td');l.textContent=pr;tr.appendChild(l);
+      cols.forEach(function(c){var td=document.createElement('td');td.className='c';var it=cell[pr+'|'+c];if(it)pcell(td,it.price,it.inp);tr.appendChild(td);});tb.appendChild(tr);});
+    return cw;
+  }
+  function listCard(title,rows){
+    var cw=document.createElement('div');cw.className='kg2-cw';
+    var h=document.createElement('div');h.className='kg2-h';h.textContent=title;cw.appendChild(h);
+    var card=document.createElement('div');card.className='kg2-card';cw.appendChild(card);
+    rows.forEach(function(r){r.cols.forEach(function(c){
+      var row=document.createElement('div');row.className='kg2-row';
+      var l=document.createElement('div');l.className='l';l.textContent=r.label.replace(/\s*—\s*(nett\s+)?(price|rate)\s*\(n\$\)\s*$/i,'');
+      if(r.note){var s=document.createElement('small');s.textContent=r.note;l.appendChild(s);}
+      row.appendChild(l);var cc=document.createElement('div');cc.className='c';pcell(cc,c.price,c.inp);row.appendChild(cc);card.appendChild(row);});});
+    return cw;
+  }
+  function blockTitle(sb){var h=sb.querySelector('h4,h3');return h?txt(h):'';}
+  // Rates tab (tab-6 view, tab-1 booking): the STO block becomes year cards + season switch + room cards
+  function rates(tab){
+    if(!tab||tab.querySelector('.kg2'))return;
+    var blk=[].slice.call(tab.querySelectorAll('.content-block')).filter(function(b){var h=b.querySelector('h3');return h&&/^STO/i.test(txt(h));})[0];if(!blk)return;
+    var wrap=document.createElement('div');wrap.className='kg2';
+    var yrs=document.createElement('div');yrs.className='kg2-years';
+    yrs.innerHTML='<button type="button" class="kg2-yr on" data-y="2026"><span class="y">2026</span><span class="s">Rates</span></button><button type="button" class="kg2-yr off" data-y="2027"><span class="y">2027</span><span class="s">Rates still to follow</span></button>';
+    wrap.appendChild(yrs);
+    var body=document.createElement('div');wrap.appendChild(body);
+    var tbc=document.createElement('p');tbc.className='kg2-tbc kg2-hide';tbc.textContent='2027 rates to follow soon.';wrap.appendChild(tbc);
+    [].forEach.call(yrs.children,function(b){b.onclick=function(){var y=b.getAttribute('data-y');[].forEach.call(yrs.children,function(x){x.classList.toggle('on',x===b);});body.classList.toggle('kg2-hide',y!=='2026');tbc.classList.toggle('kg2-hide',y==='2026');};});
+    var cap=document.createElement('div');cap.className='kg2-cap';cap.textContent=txt(blk.querySelector('h3'));body.appendChild(cap);
+    var rn=blk.querySelector('p.raw-text');if(rn){var n=document.createElement('p');n.className='kg2-note';n.textContent=txt(rn);body.appendChild(n);}
+    var seasons=[],bySeason={},flat=[];
+    [].forEach.call(blk.querySelectorAll('table'),function(tb){
+      var sb=tb.closest('.sub-block'),title=sb?blockTitle(sb):'';
+      readTable(tb).forEach(function(r){
+        var seasonal=r.cols.filter(function(c){return c.season;});
+        if(!seasonal.length){flat.push({title:title,row:r});return;}
+        var rm=roomOf(r.label);
+        seasonal.forEach(function(c){
+          if(!bySeason[c.season]){bySeason[c.season]={};seasons.push(c.season);}
+          var key=rm||r.label;var g=bySeason[c.season][key]||(bySeason[c.season][key]={title:null,items:[],kids:rm==='Children',order:Object.keys(bySeason[c.season]).length});
+          var cnt=r.label.split(' — ')[0];if(/^\d+\s*x\s/i.test(cnt))g.title=cnt;
+          if(rm==='Children')g.title='Children '+cnt.replace(/^child\s*/i,'');
+          g.items.push({item:itemOf(r.label),price:c.price,inp:c.inp});
+        });
+      });
+    });
+    if(!seasons.length)return;
+    var sw=document.createElement('div');sw.className='kg2-sw';body.appendChild(sw);
+    var grids=seasons.map(function(sn,i){
+      var bt=document.createElement('button');bt.type='button';bt.textContent=sn;sw.appendChild(bt);
+      var g=document.createElement('div');g.className='kg2-grid';
+      Object.keys(bySeason[sn]).forEach(function(k){var grp=bySeason[sn][k];var c=matrixCard(grp.title||k,grp.items,grp.kids)||listCard(grp.title||k,grp.items.map(function(it){return {label:it.item,cols:[it],note:''};}));g.appendChild(c);});
+      body.appendChild(g);return g;
+    });
+    function show(i){grids.forEach(function(g,k){g.classList.toggle('kg2-hide',k!==i);});[].forEach.call(sw.children,function(b,k){b.classList.toggle('on',k===i);});}
+    [].forEach.call(sw.children,function(b,i){b.onclick=function(){show(i);};});show(0);
+    if(flat.length){var fg=document.createElement('div');fg.className='kg2-grid';var byT={};flat.forEach(function(f){(byT[f.title]||(byT[f.title]=[])).push(f.row);});Object.keys(byT).forEach(function(t){fg.appendChild(listCard(t,byT[t]));});body.appendChild(fg);}
+    blk.parentNode.insertBefore(wrap,blk);blk.classList.add('kg2-hide');
+  }
+  // Activities & Transfers tab: each table becomes a card
+  function extras(tab){
+    if(!tab||tab.querySelector('.kg2'))return;
+    var wrap=document.createElement('div');wrap.className='kg2';var g=document.createElement('div');g.className='kg2-grid';wrap.appendChild(g);
+    var first=null,n=0;
+    [].forEach.call(tab.querySelectorAll('.content-block'),function(blk){
+      [].forEach.call(blk.querySelectorAll('table'),function(tb){
+        var sb=tb.closest('.sub-block'),title=sb?blockTitle(sb):txt(blk.querySelector('h3'));
+        var rows=readTable(tb);if(!rows.length)return;
+        g.appendChild(listCard(title,rows));n++;
+        (tb.closest('.table-responsive')||tb).classList.add('kg2-hide');
+        if(sb)sb.classList.add('kg2-hide');
+        if(!first)first=blk;
+      });
+    });
+    if(!n)return;
+    first.insertBefore(wrap,first.querySelector('.table-responsive')||null);
+  }
+  function apply(){
+    if(typeof activePropertyId==='undefined'||activePropertyId!=='kipwe')return;
+    rates(document.getElementById('tab-6'));rates(document.getElementById('tab-1'));extras(document.getElementById('tab-2'));
+  }
+  var orig=window.openProperty;
+  if(typeof orig==='function'){window.openProperty=function(id){var r=orig.apply(this,arguments);try{apply();}catch(e){console.error('KIPWE-GROUP-V2',e);}return r;};}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(apply,0);});else setTimeout(apply,0);
+})();
+</script>
+<!-- /KIPWE-GROUP-V2 -->
+
 </body>
 </html>
