@@ -569,6 +569,15 @@ applySession();
 .nr-blk td.qty-col{width:120px;text-align:right;padding-left:12px}
 .nr-blk tr:last-child td{border-bottom:0}
 @media(max-width:860px){.nr-blocks{grid-template-columns:1fr}}
+.nr-sw{display:flex;gap:10px;margin:0 2px 16px}
+.nr-sw button{cursor:pointer;font:inherit;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;border-radius:5px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;transition:.2s}
+.nr-sw button.on{background:#87a996;border-color:#87a996;color:#fff}
+.nr-blocks.nr-one{grid-template-columns:1fr}
+.nr-one .nr-blk{display:none}
+.nr-one .nr-blk.on{display:grid;grid-template-columns:1fr 1fr;column-gap:40px;align-items:start}
+.nr-one .nr-blk h4{display:none}
+.nr-one .nr-blk .nr-blk-sub{grid-column:1/-1}
+@media(max-width:860px){.nr-one .nr-blk.on{grid-template-columns:1fr}}
 </style>
 <script>
 (function(){
@@ -611,6 +620,33 @@ applySession();
       });
       tb.parentNode.replaceChild(wrap,tb);
     });
+    seasonize(rt);
+  }
+  function seasonize(rt){
+    [].forEach.call(rt.querySelectorAll('.nr-blocks:not(.nr-one)'),function(g,gi){seasonize1(rt,g,gi===0);});
+  }
+  function seasonize1(rt,grid,withKids){
+    var blks=[].slice.call(grid.querySelectorAll(':scope>.nr-blk')); if(blks.length<2)return;
+    function blkFor(sn){for(var i=0;i<blks.length;i++)if(txt(blks[i].querySelector('h4')).toLowerCase()===sn.toLowerCase())return blks[i];return null;}
+    // child rows ("Child (4-12 yrs) — DBB per night — Low Season NETT") join their season block
+    if(withKids)[].forEach.call(rt.querySelectorAll(':scope>table'),function(tb){
+      var rows=[].slice.call(tb.querySelectorAll('tbody tr')); if(!rows.length)return;
+      var ok=rows.every(function(tr){var l=txt(tr.cells[0]);return /^child/i.test(l)&&/\b(low|high|peak|shoulder|green|mid)\s+season\b/i.test(l)&&blkFor(l.match(/\b((?:low|high|peak|shoulder|green|mid)\s+season)\b/i)[1]);});
+      if(!ok)return;
+      var head=txt(rows[0].cells[0]).split(' — ')[0], made={};
+      rows.forEach(function(tr){
+        var l=txt(tr.cells[0]), sn=l.match(/\b((?:low|high|peak|shoulder|green|mid)\s+season)\b/i)[1], b=blkFor(sn);
+        if(!made[sn]){var t=document.createElement('table'),c=document.createElement('caption');c.textContent='Children '+head.replace(/^child\s*/i,'');t.appendChild(c);t.appendChild(document.createElement('tbody'));b.appendChild(t);made[sn]=t;}
+        tr.cells[0].textContent=l.split(' — ').filter(function(x,i){return i>0&&!/season/i.test(x);}).join(' — ');
+        made[sn].querySelector('tbody').appendChild(tr);
+      });
+      tb.parentNode.removeChild(tb);
+    });
+    // one season at a time, switched by two buttons
+    var sw=document.createElement('div');sw.className='nr-sw';
+    function show(k){blks.forEach(function(b,i){b.classList.toggle('on',i===k);});[].forEach.call(sw.children,function(x,i){x.classList.toggle('on',i===k);});}
+    blks.forEach(function(b,i){var bt=document.createElement('button');bt.type='button';bt.textContent=txt(b.querySelector('h4'));bt.onclick=function(){show(i);};sw.appendChild(bt);});
+    grid.classList.add('nr-one');grid.parentNode.insertBefore(sw,grid);show(0);
   }
   function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
     try{ new MutationObserver(function(){ build(); }).observe(rt,{childList:true}); }catch(e){} }
