@@ -620,6 +620,13 @@ applySession();
 .nr-room:hover{box-shadow:0 12px 34px rgba(60,53,48,.10);transform:translateY(-1px)}
 .nr-room-h{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;color:var(--brand-accent,#a48256);padding:0 0 12px;margin:0 0 4px;border-bottom:1px solid rgba(164,130,86,.18)}
 .nr-room.kids{background:#f7f5f0}
+.nr-xgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:30px 0 10px;align-items:start}
+.nr-xrow{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:11px 0;border-bottom:1px solid rgba(0,0,0,.05);font-size:.9rem}
+.nr-xrow:last-child{border-bottom:0}
+.nr-xrow .mx-l{color:#4a433d;min-width:0}
+.nr-xrow .mx-c{text-align:right;flex:0 0 auto}
+@media(max-width:960px){.nr-xgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.nr-xgrid{grid-template-columns:1fr}}
 .nr-blk .nr-mx tr:not(:last-child) td{border-bottom:1px solid rgba(0,0,0,.05)}
 .nr-mx td.mx-c{overflow:clip;overflow-clip-margin:4px}
 .nr-mx thead th{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:#9a918a;font-weight:400;text-align:right;padding:10px 0 4px;background:none;border:0}
@@ -652,7 +659,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
   function build(){
     var rt=document.getElementById('rate-tables'); if(!rt)return;
     [].forEach.call(rt.querySelectorAll(':scope>div'),function(d){var bs=d.querySelectorAll(':scope>button');if(bs.length&&[].every.call(bs,function(x){return / season$/.test(x.textContent);}))d.remove();});
-    if(rt.querySelector('.nr-blocks'))return;
+    if(rt.querySelector('.nr-blocks')){extras(rt);return;}
     [].forEach.call(rt.querySelectorAll(':scope>table'),function(tb){
       var rows=[].slice.call(tb.querySelectorAll('tbody tr')); if(rows.length<4)return;
       var parsed=rows.map(function(tr){
@@ -689,6 +696,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
       tb.parentNode.replaceChild(wrap,tb);
     });
     seasonize(rt);
+    extras(rt);
   }
   function seasonize(rt){
     [].forEach.call(rt.querySelectorAll('.nr-blocks:not(.nr-one)'),function(g,gi){seasonize1(rt,g,gi===0);});
@@ -743,7 +751,16 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
       cols.forEach(function(c){
         var td=document.createElement('td'); td.className='mx-c'; var src=cell[pr+'|'+c];
         if(src){
-          var price=txt(src.cells[1]), q=src.cells[2]?src.cells[2].firstElementChild:null;
+          pcell(td,txt(src.cells[1]),src.cells[2]?src.cells[2].firstElementChild:null);
+        }
+        r.appendChild(td);
+      });
+      tbd.appendChild(r);
+    });
+    card.appendChild(t);
+    tb.parentNode.replaceChild(card,tb);
+  }
+  function pcell(td,price,q){
           var b=document.createElement(q?'button':'span'); b.className='mx-p'; if(q)b.type='button'; b.textContent=price; td.appendChild(b);
           if(q){
             var box=document.createElement('div'); box.className='mx-q'; box.appendChild(q); td.appendChild(box); td.classList.add('can');
@@ -755,13 +772,24 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
             b.onclick=function(){ setQ((parseInt(inp&&inp.value,10)||0)>0?0:1); mark(); };
             td.addEventListener('input',mark); td.addEventListener('change',mark); mark();
           }
-        }
-        r.appendChild(td);
+  }
+  // Guide & pilot, transfers, meals ...: the plain tables left under the season cards become small cards
+  function extras(rt){
+    var tbs=[].slice.call(rt.querySelectorAll(':scope>table')).filter(function(tb){return tb.querySelector('caption')&&tb.querySelector('tbody tr');});
+    if(!tbs.length)return;
+    var grid=document.createElement('div'); grid.className='nr-xgrid'; tbs[0].parentNode.insertBefore(grid,tbs[0]);
+    tbs.forEach(function(tb){
+      var card=document.createElement('div'); card.className='nr-room nr-x';
+      var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=txt(tb.querySelector('caption')); card.appendChild(hd);
+      [].forEach.call(tb.querySelectorAll('tbody tr'),function(tr){
+        if(tr.cells.length<2)return;
+        var row=document.createElement('div'); row.className='nr-xrow';
+        var l=document.createElement('div'); l.className='mx-l'; l.textContent=txt(tr.cells[0]).replace(/\s*—\s*(nett\s+)?(price|rate)\s*\(n\$\)\s*$/i,''); row.appendChild(l);
+        var c=document.createElement('div'); c.className='mx-c'; pcell(c,txt(tr.cells[1]),tr.cells[2]?tr.cells[2].firstElementChild:null); row.appendChild(c);
+        card.appendChild(row);
       });
-      tbd.appendChild(r);
+      grid.appendChild(card); tb.parentNode.removeChild(tb);
     });
-    card.appendChild(t);
-    tb.parentNode.replaceChild(card,tb);
   }
   function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
     try{ new MutationObserver(function(){ build(); }).observe(rt,{childList:true}); }catch(e){} }
