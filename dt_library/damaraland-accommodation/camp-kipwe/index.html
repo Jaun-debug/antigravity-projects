@@ -748,8 +748,11 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
           if(q){
             var box=document.createElement('div'); box.className='mx-q'; box.appendChild(q); td.appendChild(box); td.classList.add('can');
             var inp=td.querySelector('input.qty');
-            function mark(){var v=parseInt(inp&&inp.value,10)||0; td.classList.toggle('has',v>0); if(v>0)td.classList.add('open');}
-            b.onclick=function(){ if(!td.classList.contains('open')){ td.classList.add('open'); if(inp&&!(parseInt(inp.value,10)>0)){inp.value=1;inp.dispatchEvent(new Event('input',{bubbles:true}));inp.dispatchEvent(new Event('change',{bubbles:true}));} } else if(!td.classList.contains('has')) td.classList.remove('open'); mark(); };
+            function setQ(v){ if(!inp)return; inp.value=v; inp.dispatchEvent(new Event('input',{bubbles:true})); inp.dispatchEvent(new Event('change',{bubbles:true})); }
+            // qty above 0 = price green + stepper open; back to 0 (with -, or tapping the price again) = closed
+            function mark(){var v=parseInt(inp&&inp.value,10)||0; td.classList.toggle('has',v>0); td.classList.toggle('open',v>0);}
+            b.title='Tap to add, tap again to remove';
+            b.onclick=function(){ setQ((parseInt(inp&&inp.value,10)||0)>0?0:1); mark(); };
             td.addEventListener('input',mark); td.addEventListener('change',mark); mark();
           }
         }
