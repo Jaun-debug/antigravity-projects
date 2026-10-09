@@ -609,8 +609,15 @@ applySession();
 .nr-yr.off .s{color:#9a918a}
 @media(max-width:600px){.nr-years{gap:12px}.nr-yr{min-width:0;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px}.nr-yr .y{font-size:1.6rem}}
 .nr-tbc{padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem}
-.nr-sw{display:flex;gap:10px;margin:0 2px 16px}
-.nr-blk table.nr-mx{table-layout:fixed;overflow:clip}
+.nr-sw{display:inline-flex;gap:4px;margin:0 2px 18px;padding:4px;border-radius:999px;background:#fff;border:1px solid rgba(135,169,150,.35)}
+.nr-blk table.nr-mx{table-layout:fixed;overflow:clip;margin:0}
+.nr-one .nr-blk.on{background:none;border:0;border-radius:0;padding:0;gap:20px}
+.nr-one .nr-blk .nr-blk-sub{margin:0 2px -6px}
+.nr-room{background:#fff;border:1px solid rgba(164,130,86,.14);border-radius:14px;padding:20px 22px 12px;box-shadow:0 8px 28px rgba(60,53,48,.06);transition:box-shadow .2s,transform .2s}
+.nr-room:hover{box-shadow:0 12px 34px rgba(60,53,48,.10);transform:translateY(-1px)}
+.nr-room-h{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;color:var(--brand-accent,#a48256);padding:0 0 12px;margin:0 0 4px;border-bottom:1px solid rgba(164,130,86,.18)}
+.nr-room.kids{background:#f7f5f0}
+.nr-blk .nr-mx tr:not(:last-child) td{border-bottom:1px solid rgba(0,0,0,.05)}
 .nr-mx td.mx-c{overflow:clip;overflow-clip-margin:4px}
 .nr-mx thead th{font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:#9a918a;font-weight:400;text-align:right;padding:10px 0 4px;background:none;border:0}
 .nr-mx thead th:first-child{width:44%}
@@ -626,7 +633,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
 .mx-q .nr-step,td .mx-q .nr-step{height:30px}.mx-q .nr-step button{flex-basis:26px!important;width:26px!important;font-size:15px!important}.mx-q .nr-step input{width:32px!important;font-size:.9rem!important}
 .mx-q input.qty{width:60px}
 @media(max-width:600px){.nr-mx thead th:first-child{width:38%}.nr-blk .nr-mx td{font-size:.82rem}.mx-p{font-size:.84rem}}
-.nr-sw button{cursor:pointer;font:inherit;font-size:.74rem;letter-spacing:2px;text-transform:uppercase;padding:10px 22px;border-radius:5px;border:1px solid rgba(135,169,150,.7);background:rgba(135,169,150,.10);color:#5f7f72;transition:.2s}
+.nr-sw button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:9px 22px;border-radius:999px;border:0;background:none;color:#5f7f72;transition:.2s}
 .nr-sw button.on{background:#87a996;border-color:#87a996;color:#fff}
 .nr-blocks.nr-one{grid-template-columns:1fr}
 .nr-one .nr-blk{display:none}
@@ -724,7 +731,8 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
     if(!ok)return;
     cols.sort(function(a,b){var o={'Sharing p/p':0,'Single':1,'Rate':2};return o[a]-o[b];});
     var cap=tb.querySelector('caption'), t=document.createElement('table'); t.className='nr-mx';
-    if(cap)t.appendChild(cap);
+    var card=document.createElement('div'); card.className='nr-room'+(/child/i.test(cap?txt(cap):'')?' kids':'');
+    if(cap){var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=txt(cap); card.appendChild(hd);}
     var th='<thead><tr><th></th>'+cols.map(function(c){return '<th>'+(c==='Rate'?'':c)+'</th>';}).join('')+'</tr></thead>';
     t.insertAdjacentHTML('beforeend',th); var tbd=document.createElement('tbody'); t.appendChild(tbd);
     prods.forEach(function(pr){
@@ -746,7 +754,8 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
       });
       tbd.appendChild(r);
     });
-    tb.parentNode.replaceChild(t,tb);
+    card.appendChild(t);
+    tb.parentNode.replaceChild(card,tb);
   }
   function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
     try{ new MutationObserver(function(){ build(); }).observe(rt,{childList:true}); }catch(e){} }
