@@ -90,13 +90,17 @@ POSTS = [
    ("Should I stay at Camp Kipwe or Mowani?", "Both are good choices and both are Chiwani camps in the same area. They have different styles, so pick the one that suits the stay you want."),
    ("How many nights should I spend at Camp Kipwe?", "We recommend two nights."),
    ("How do the desert-elephant drives work?", "The guided drive usually departs at 06h30 and lasts about four to six hours, with drinks and snacks. We recommend the guided drive rather than searching for the elephants on your own."),
+   ("Are the elephant drive and the Twyfelfontein excursion included in the rate?", "No. Both are extra and paid at the camp."),
+   ("Can young children join the elephant drive?", "Yes. A private vehicle can be arranged on request."),
    ("Can I visit the Twyfelfontein rock engravings from the camp?", "Yes. The Twyfelfontein, Burnt Mountain and Organ Pipes excursion usually departs at 15h00 and takes about two hours."),
    ("How far is Camp Kipwe from Swakopmund and Windhoek?", "About 320 km (around 4 hours) from Swakopmund and 550 km (around 5.5 hours) from Windhoek. Twyfelfontein airstrip is 15 km away, about a 20-minute transfer."),
    ("Do I need a 4x4 to reach Camp Kipwe?", "No. The road is gravel, and a 2WD vehicle is fine."),
    ("What rooms does Camp Kipwe have?", "Rondavel-style bungalows with open-air bathrooms (outdoor shower) and air-conditioning, twin beds that convert to a double, plus the Kipwe Suite and two thatched Luxury Suites, each with a heated splash pool."),
+   ("Do the rooms have air-conditioning?", "Yes. The bungalows have air-conditioning."),
    ("Is there Wi-Fi and phone signal?", "Wi-Fi is limited because of the remote location, and cell reception is limited too."),
    ("Is Camp Kipwe good for children?", "Yes. The camp is child friendly. Children under 3 stay free, and children aged 3 to 12 sleep in a children's tent or on camping beds in their parents' room."),
-   ("What power and payment options are there?", "220/240V power with a backup generator. The camp accepts Mastercard and Visa, and Namibian dollars, rand and US dollars."),
+   ("Are there plug points in the rooms?", "Yes, every room has plug points. Power is 220/240V with a backup generator, and the sockets take round 3-pin 15-amp or 2 round-pin plugs."),
+   ("Which payments does the camp accept?", "Mastercard and Visa, and Namibian dollars, rand and US dollars."),
   ],
   sources=[("Chiwani Safari Camps: Camp Kipwe", "https://www.chiwani.com/kipwe"),
            ("Chiwani: Kipwe bungalows", "https://www.chiwani.com/kipebungalows"),
@@ -124,7 +128,8 @@ POSTS = [
    ("What is in the chalets?", "Each 75 m² chalet has air-conditioning, a barrier-free shower and an outside shower, a fridge/minibar, tea and coffee, mosquito nets, a hair dryer, a safe and a private terrace."),
    ("What is the meal plan?", "Full board. Dinner is a five-course meal served after sunset."),
    ("Is there Wi-Fi in the chalets?", "Yes, there is Wi-Fi in the chalets."),
-   ("Does the lodge run game drives into Etosha?", "Yes. Guided drives into Etosha take 7 to 8 hours by 4x4 and include park entrance fees, an early breakfast and lunch packs. They need at least two guests (or a single supplement), take at most six guests per vehicle, and are for stays of two nights or more."),
+   ("Does the lodge run game drives into Etosha?", "Yes. The lodge offers full-day and half-day guided drives into Etosha. The full-day drive takes 7 to 8 hours by 4x4 and includes park entrance fees, an early breakfast and lunch packs. Drives need at least two guests (or a single supplement), take at most six guests per vehicle, and are for stays of two nights or more."),
+   ("Do I need to book the Etosha game drive before I arrive?", "No. You can book the game drives at the lodge."),
    ("Are children welcome?", "Yes, children of all ages are welcome at the lodge. The guided Etosha game drives are for children over 12 only."),
    ("Can I fly in?", "Yes. The lodge has a hard-surface landing strip."),
   ],
@@ -153,7 +158,8 @@ POSTS = [
    ("What is included in the rate?", "Breakfast, a minibar with selected drinks, unlimited Wi-Fi and use of the safe. The hotel has a 24-hour front desk and 24-hour security."),
    ("What rooms are there?", "Courtyard rooms (fountain level and upper level), Superior rooms, Lofts, Family Lofts and the two-bedroom Terrace Suite with its own double garage."),
    ("Is The Weinberg good for families?", "Yes. Children are welcome and stay free up to 5 years. The 7 Family Lofts sleep 2 adults and 2 children under 12."),
-   ("Is there a pool?", "The pool is for spa clients only."),
+   ("Is there a pool? Is it heated?", "The pool is for spa clients only, and it is not heated."),
+   ("Is there parking at The Weinberg?", "Yes. Guests park in a guarded garage."),
    ("Where can I eat?", "The Sky Lounge serves light meals, wine and drinks, and the Am Weinberg Estate has restaurants in different culinary styles."),
    ("Can I take a shuttle from Windhoek to Sossusvlei, Swakopmund or Etosha?", "Yes. Gondwana's Go2 shuttle leaves from the Windhoek Fuel Centre for Kalahari Anib, Sesriem, Swakopmund and Etosha. Book shuttles in advance."),
    ("Are pets allowed, and which cards are accepted?", "No pets. The hotel accepts Visa and Mastercard, and there is an ATM."),
@@ -180,10 +186,13 @@ POSTS = [
    ("Which rooms have a sea view?", "Standard Rooms come with or without a sea view. Luxury Rooms 1 and 2 have a partial sea view, and Luxury Room 3, the Junior Suite, the Luxury Suite and the Presidential Suite all face the sea."),
    ("Does the Strand Hotel have family rooms?", "Yes. The Standard Family Room takes up to 3 guests, Connecting Rooms up to 4, and Luxury Room 1, the Junior Suite and the Luxury Suite up to 4. There is also a Standard Enabled Room."),
    ("What time is check-in and check-out?", "Arrival from 14:00 and departure by 10:00."),
+   ("Does the Strand Hotel arrange airport transfers?", "Yes. The hotel arranges transfers from Walvis Bay airport."),
+   ("Is the Strand Hotel wheelchair accessible?", "Yes. The Standard Enabled Room is wheelchair accessible, including the bathroom."),
    ("Is breakfast included?", "Yes, rates include breakfast. It is served at the Farmhouse Deli from 06h00."),
    ("Where can I eat at the hotel?", "Brewer & Butcher (restaurant, bar and lounge with an in-house brewery), the Ocean Cellar (seafood and oysters), the Farmhouse Deli (walk-ins welcome), the Welwitschia Lounge (cocktails on a sea-facing terrace) and Café Mole (street food at the Mole beach entrance)."),
    ("Is there parking?", "Yes. Parking on site is free and secure."),
    ("Is there Wi-Fi?", "Yes. Wi-Fi in the rooms is free."),
+   ("Is there a hair dryer in the room?", "Yes. Every room has a hair dryer."),
    ("Is there a spa?", "Yes. The Atlantic Spa has crystal steam rooms, rain showers, a relaxation lounge and an outdoor couple's therapy suite, and there is a gym."),
   ],
   sources=[("O&L Leisure: Strand Hotel Swakopmund", "https://www.ol-leisure.com/destinations/coastal"),
@@ -236,7 +245,7 @@ img{max-width:100%;display:block}
 .bl-wrap h2 .cur{font-family:'Pinyon Script',cursive;text-transform:none;font-size:1.25em;color:var(--ink);font-weight:400}
 .bl-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:30px 0 8px}
 .bl-strip img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:8px}
-.bl-faq{border-top:1px solid var(--line)}
+.bl-tbl{overflow-x:auto;margin:0 0 8px;border:1px solid var(--line);border-radius:10px;background:#fff}.bl-tbl table{width:100%;border-collapse:collapse;font-size:.95rem}.bl-tbl th,.bl-tbl td{text-align:left;vertical-align:top;padding:11px 16px;border-bottom:1px solid var(--line)}.bl-tbl thead th{font-size:.68rem;letter-spacing:1.6px;text-transform:uppercase;color:var(--text-muted);font-weight:500;background:var(--panel)}.bl-tbl tbody th{font-weight:500;color:var(--ink)}.bl-tbl tr:last-child th,.bl-tbl tr:last-child td{border-bottom:0}@media(max-width:640px){.bl-tbl thead{display:none}.bl-tbl tr{display:block;padding:10px 14px;border-bottom:1px solid var(--line)}.bl-tbl tr:last-child{border-bottom:0}.bl-tbl tbody th,.bl-tbl td{display:block;padding:2px 0;border:0}.bl-tbl td[data-l]:not([data-l=''])::before{content:attr(data-l) ': ';color:var(--text-muted);font-size:.85rem}}.bl-faq{border-top:1px solid var(--line)}
 .bl-faq details{border-bottom:1px solid var(--line);padding:16px 0}
 .bl-faq summary{cursor:pointer;list-style:none;font-weight:500;font-size:1.04rem;display:flex;justify-content:space-between;gap:14px;color:var(--ink)}
 .bl-faq summary::-webkit-details-marker{display:none}
@@ -283,6 +292,69 @@ FOOT = """<script src="/assets/site-chrome.js"></script>
 </html>
 """
 
+TABLES = {
+ "strand-hotel-swakopmund": ("Strand Hotel rooms at a glance", ["Room", "Sea view", "Notes"], [
+   ("Standard Room", "With or without", "28 m\u00b2"),
+   ("Standard Family Room", "\u2014", "Up to 3 guests"),
+   ("Standard Enabled Room", "\u2014", "Wheelchair accessible, 39 m\u00b2"),
+   ("Connecting Rooms", "\u2014", "Up to 4 guests"),
+   ("Luxury Room 1", "Partial", "Up to 4 guests"),
+   ("Luxury Room 2", "Partial", "\u2014"),
+   ("Luxury Room 3", "Yes", "\u2014"),
+   ("Junior Suite", "Yes", "Up to 4 guests"),
+   ("Luxury Suite", "Yes", "Up to 4 guests"),
+   ("Presidential Suite", "Yes", "125\u2013150 m\u00b2"),
+ ]),
+ "the-weinberg-windhoek": ("The Weinberg rooms at a glance", ["Room", "Number", "Notes"], [
+   ("Courtyard, fountain level", "12", "\u2014"),
+   ("Courtyard, upper level", "14", "\u2014"),
+   ("Courtyard, upper level with bath", "2", "\u2014"),
+   ("Superior, upper level", "3", "\u2014"),
+   ("Loft", "3", "\u2014"),
+   ("Family Loft", "7", "2 adults and 2 children under 12"),
+   ("Terrace Suite", "2", "Two bedrooms, own double garage"),
+ ]),
+ "etosha-oberland-lodge": ("Etosha game drives from the lodge", ["", "Detail"], [
+   ("Options", "Full day and half day"),
+   ("Full-day drive", "7 to 8 hours by 4x4"),
+   ("Included on the full day", "Park entrance fees, early breakfast, lunch packs"),
+   ("Group size", "At least 2 guests (or a single supplement), up to 6 per vehicle"),
+   ("Minimum stay", "2 nights"),
+   ("Children", "Over 12 only"),
+   ("Booking", "At the lodge"),
+ ]),
+ "camp-kipwe": ("Camp Kipwe at a glance", ["", "Departs / distance", "Time"], [
+   ("Desert-elephant drive", "Usually 06h30", "About 4\u20136 hours"),
+   ("Twyfelfontein, Burnt Mountain & Organ Pipes", "Usually 15h00", "About 2 hours"),
+   ("Drive from Swakopmund", "320 km", "About 4 hours"),
+   ("Drive from Windhoek", "550 km", "About 5.5 hours"),
+   ("Twyfelfontein airstrip", "15 km", "About 20 minutes"),
+ ]),
+ "dead-valley-lodge": ("Dead Valley Lodge at a glance", ["", "Detail"], [
+   ("Operator", "Sun Karros"),
+   ("Location", "Inside the Sesriem gates, between Sesriem and Elim Dune"),
+   ("Park access for guests", "From 1 hour before sunrise to 1 hour after sunset"),
+   ("Rooms", "20, en suite, air-conditioned, 2 people per room"),
+   ("Meal plan", "Full board"),
+   ("Facilities", "Pool, bar, restaurant, internet"),
+   ("Guided drives", "Sossusvlei, Sesriem Canyon, sunset at Elim Dune"),
+   ("Opened", "1 July 2019"),
+ ]),
+}
+
+def table_html(slug):
+    t = TABLES.get(slug)
+    if not t:
+        return ""
+    cap, heads, rows = t
+    h = ['<h2>%s</h2><div class="bl-tbl"><table><thead><tr>' % e(cap)]
+    h += ['<th scope="col">%s</th>' % e(x) for x in heads]
+    h.append("</tr></thead><tbody>")
+    for r in rows:
+        h.append("<tr>" + "".join(('<th scope="row">%s</th>' % e(c)) if i == 0 else ('<td data-l="%s">%s</td>' % (e(heads[i]), e(c))) for i, c in enumerate(r)) + "</tr>")
+    h.append("</tbody></table></div>")
+    return "".join(h)
+
 def fill(t, **kw):
     for k, v in kw.items():
         t = t.replace("@@%s@@" % k.upper(), v)
@@ -314,6 +386,7 @@ def post_html(p):
         o.append("<p>%s</p>" % e(para))
     o.append('<div class="bl-strip">%s</div>' % "".join(
         '<img src="%s" alt="%s" loading="lazy" width="640" height="480">' % (e(u), e(p["lodge"])) for u in p["imgs"][1:4]))
+    o.append(table_html(p["slug"]))
     o.append('<h2>What travellers <span class="cur">ask</span></h2><div class="bl-faq">')
     for i, (q, a) in enumerate(p["faq"]):
         o.append('<details%s><summary>%s</summary><p>%s</p></details>' % (" open" if i == 0 else "", e(q), e(a)))
