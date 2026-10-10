@@ -161,6 +161,200 @@ section[data-tab]:nth-of-type(even){background:#e9e6df}
 @media(max-width:760px){section.nr-sec,section[data-tab]{padding:56px 0!important}.nr-row{grid-template-columns:1fr;gap:6px}.nr-gal{grid-template-columns:1fr 1fr}.nr-pair{grid-template-columns:1fr}#nr-lodge-map{height:320px}}
 </style>
 <!-- /OBERLAND-V2 -->
+<!-- NR-RATECARDS (10 Oct 2026): Camp Kipwe rate layout for any lodge page. Year cards (2026 / 2027) drive the
+     site-wide year switch; the rendered rate tables are regrouped into a Low/High switch (when the rates carry
+     seasons), room cards two per row and extras cards. Rows, prices and qty boxes are the originals, only moved;
+     a price is tapped to add it (qty 1) and tapped again to remove it. Rollback: index.html.bak_ratecards -->
+<style id="nr-ratecards-css">
+.nr-years~#nr-lodge-yr,#nr-yrdock{display:none!important}
+.nr-years{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:4px 0 22px}
+.nr-years:empty{display:none}
+.nr-yr{cursor:pointer;font:inherit;text-align:left;padding:20px 24px;border-radius:10px;border:1px solid rgba(164,130,86,.25);background:#fff;transition:.2s;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.nr-yr .y{font-family:var(--font-head);font-size:2rem;letter-spacing:2px;color:var(--brand-accent,#a48256);line-height:1}
+.nr-yr .s{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:#87a996}
+.nr-yr:hover{border-color:#87a996}
+.nr-yr.on{background:#87a996;border-color:#87a996}.nr-yr.on .y,.nr-yr.on .s{color:#fff}
+.nr-yr.off .s{color:#2F5450}
+.nr-yr.on.off .s{color:#fff}
+.hero-thumbs{display:none!important}
+#nr-lodge-yr-note{display:none!important}
+@media(max-width:600px){.nr-years{gap:12px}.nr-yr{min-width:0;flex-direction:column;align-items:flex-start;gap:8px;padding:16px 18px}.nr-yr .y{font-size:1.6rem}}
+.nr-sw{display:inline-flex;gap:4px;margin:0 2px 18px;padding:4px;border-radius:999px;background:#fff;border:1px solid rgba(135,169,150,.35)}
+.nr-sw button{cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:2px;text-transform:uppercase;padding:9px 22px;border-radius:999px;border:0;background:none;color:#5f7f72;transition:.2s}
+.nr-sw button.on{background:#87a996;border-color:#87a996;color:#fff}
+.nr-rc-season{display:none}.nr-rc-season.on{display:block}
+.nr-rc-dates{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:#7d756e;margin:0 2px 16px}
+.nr-blocks.nr-rc{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px;align-items:start;margin:0 0 10px}
+.nr-room{background:#fff;border:1px solid rgba(164,130,86,.14);border-radius:14px;padding:8px 22px 8px;box-shadow:0 8px 28px rgba(60,53,48,.06);transition:box-shadow .2s,transform .2s}
+.nr-room:hover{box-shadow:0 12px 34px rgba(60,53,48,.10);transform:translateY(-1px)}
+.nr-room-h{font-family:var(--font-head);font-size:1.2rem;letter-spacing:.5px;color:var(--brand-accent,#a48256);padding:0 4px 10px;margin:0}
+.nr-cw{min-width:0}
+.nr-room.kids{background:#f7f5f0}
+.nr-xgrid{display:grid;grid-template-columns:1fr 1fr;gap:28px 20px;margin:34px 0 10px;align-items:start}
+table.nr-mx{width:100%;border-collapse:collapse;table-layout:fixed;margin:0;background:none;box-shadow:none;border:0}
+.nr-mx td{padding:11px 0;vertical-align:top;font-size:.9rem;background:none;border:0}
+.nr-mx tr:not(:last-child) td{border-bottom:1px solid rgba(0,0,0,.05)}
+.nr-mx td.mx-l{color:#4a433d;padding-right:10px}
+.nr-mx td.mx-c{text-align:right;padding-left:8px;width:42%;overflow:clip;overflow-clip-margin:4px}
+.mx-p{font:inherit;font-size:.95rem;color:#3c3530;background:none;border:0;padding:3px 6px;margin:-3px 0;border-radius:5px;white-space:nowrap}
+button.mx-p{cursor:pointer;border-bottom:1px dashed rgba(135,169,150,.6);border-radius:5px 5px 0 0}
+button.mx-p:hover{background:rgba(135,169,150,.12)}
+.mx-c.has .mx-p{background:#87a996;color:#fff;border-bottom-color:transparent;border-radius:5px}
+.mx-q{display:none;margin-top:8px;justify-content:flex-end}
+.mx-c.open .mx-q{display:flex}
+.mx-q .nr-step,td .mx-q .nr-step{height:30px}.mx-q .nr-step button{flex-basis:26px!important;width:26px!important;font-size:15px!important}.mx-q .nr-step input{width:32px!important;font-size:.9rem!important}
+.mx-q input.qty{width:60px}
+@media(max-width:860px){.nr-blocks.nr-rc,.nr-xgrid{grid-template-columns:1fr}}
+@media(max-width:600px){.nr-mx td{font-size:.82rem}.mx-p{font-size:.84rem}}
+</style>
+<style id="nr-dirty-green">
+/* All small/body text in the page sections in Desert Tracks dirty green; gold headings and seafoam labels stay */
+section[data-tab]{--text-main:#2F5450}
+section[data-tab] p,section[data-tab] td,section[data-tab] th,section[data-tab] caption,
+#overview .lead,.nr-row .v,.nr-row .v a,#rate-sub,.rate-head .sub,.nr-rc-dates,
+.mx-l,.nr-mx td.mx-l,.mx-p,.nr-pair .go,#nr-yr-empty{color:#2F5450!important}
+.mx-c.has .mx-p{color:#fff!important}
+</style>
+<script>
+// Year cards (2026 / 2027): a year with no rates loaded says so instead of showing anything.
+var NR_YRS={have:[],cur:'',sto:false};
+function nrSetYears(j,sto){
+  j=j||{}; var cur=String(j.year||''), have=(j.years&&j.years.length?j.years:(cur?[cur]:[])).map(String);
+  NR_YRS={have:have,cur:cur,sto:sto}; nrDrawYears();
+}
+function nrDrawYears(){
+  var box=document.getElementById('nr-years'); if(!box) return;
+  // The site-wide year switch (enquiry-wizard.js, #nr-lodge-yr) owns loading, remembering and the
+  // "rates to follow" message; these cards only stand in for its small floating pills.
+  var src=document.getElementById('nr-lodge-yr'), btns=src?[].slice.call(src.querySelectorAll('button[data-y]')):[];
+  var ys=btns.length?btns.map(function(x){return x.getAttribute('data-y');}):NR_YRS.have.slice();
+  if(!ys.length) return;
+  var nt=document.getElementById('nr-lodge-yr-note'), nm=nt?/^(\d{4}) rates .*showing (\d{4})/.exec(nt.textContent||''):null;
+  var sig=(nm?nm[0]:'')+ys.map(function(y,i){var on=btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur;return y+(on?'*':'')+(NR_YRS.have.indexOf(y)>=0?'+':'');}).join('|');
+  if(box.getAttribute('data-sig')===sig) return; box.setAttribute('data-sig',sig);
+  box.innerHTML='';
+  ys.forEach(function(y,i){
+    var ok=NR_YRS.have.indexOf(y)>=0, on=btns.length?btns[i].classList.contains('on'):y===NR_YRS.cur;
+    var b=document.createElement('button'); b.type='button';
+    b.className='nr-yr'+(on?' on':'')+(ok?'':' off');
+    var lab=ok?'Rates':(nm&&nm[1]===y?'Still to follow — showing '+nm[2]:'Rates still to follow');
+    b.innerHTML='<span class="y">'+y+'</span><span class="s">'+lab+'</span>';
+    b.onclick=function(){ if(btns.length) btns[i].click(); else if(NR_YRS.sto) showStoYear(y); else showRack(y); };
+    box.appendChild(b);
+  });
+}
+(function(){var n=0,t=setInterval(function(){nrDrawYears();if(++n>40)clearInterval(t);},250);
+  document.addEventListener('click',function(){setTimeout(nrDrawYears,80);setTimeout(nrDrawYears,600);setTimeout(nrDrawYears,1500);},true);})();
+
+(function(){
+  var SEAS=/\b((?:low|high|peak|shoulder|green|mid)\s+season)\b/i, DATES=/^\(?\s*\d{1,2}\s+[A-Za-z]{3}/;
+  function txt(el){return (el&&el.textContent||'').replace(/\s+/g,' ').trim();}
+  function cap1(s){s=String(s||'').trim();return s.charAt(0).toUpperCase()+s.slice(1);}
+  function head(c){return String(c||'').split(' — ')[0].trim();}
+  function pcell(td,price,q){
+    var b=document.createElement(q?'button':'span'); b.className='mx-p'; if(q)b.type='button'; b.textContent=price; td.appendChild(b);
+    if(!q) return;
+    var box=document.createElement('div'); box.className='mx-q'; box.appendChild(q); td.appendChild(box); td.classList.add('can');
+    var inp=td.querySelector('input.qty');
+    function setQ(v){ if(!inp)return; inp.value=v; inp.dispatchEvent(new Event('input',{bubbles:true})); inp.dispatchEvent(new Event('change',{bubbles:true})); }
+    // qty above 0 = price green + stepper open; back to 0 (with -, or tapping the price again) = closed
+    function mark(){var v=parseInt(inp&&inp.value,10)||0; td.classList.toggle('has',v>0); td.classList.toggle('open',v>0);}
+    b.title='Tap to add, tap again to remove';
+    b.onclick=function(){ setQ((parseInt(inp&&inp.value,10)||0)>0?0:1); mark(); };
+    td.addEventListener('input',mark); td.addEventListener('change',mark); mark();
+  }
+  function card(title,rows,kids){
+    var cw=document.createElement('div'); cw.className='nr-cw';
+    var hd=document.createElement('div'); hd.className='nr-room-h'; hd.textContent=title; cw.appendChild(hd);
+    var c=document.createElement('div'); c.className='nr-room'+(kids?' kids':''); cw.appendChild(c);
+    var t=document.createElement('table'); t.className='nr-mx'; var tb=document.createElement('tbody'); t.appendChild(tb); c.appendChild(t);
+    rows.forEach(function(r){
+      var tr=document.createElement('tr'), l=document.createElement('td'), v=document.createElement('td');
+      l.className='mx-l'; l.textContent=r.item; v.className='mx-c'; pcell(v,r.price,r.q); tr.appendChild(l); tr.appendChild(v); tb.appendChild(tr);
+    });
+    return cw;
+  }
+  function build(){
+    var rt=document.getElementById('rate-tables'); if(!rt) return;
+    // the page's own inline year bar: the year cards above replace it
+    [].forEach.call(rt.querySelectorAll(':scope>div'),function(d){var bs=d.querySelectorAll(':scope>button');if(bs.length&&[].every.call(bs,function(x){return / season$/.test(x.textContent);}))d.remove();});
+    var tbs=[].slice.call(rt.querySelectorAll(':scope>table')).filter(function(tb){return tb.querySelector('tbody tr');});
+    if(!tbs.length) return;
+    var tabs=tbs.map(function(tb){
+      var cp=txt(tb.querySelector('caption'));
+      var recs=[].slice.call(tb.querySelectorAll('tbody tr')).filter(function(tr){return tr.cells.length>=2;}).map(function(tr){
+        var pr=txt(tr.cells[1]).replace(/^N\$\s*/,'N$ ');if(!/\d/.test(pr))pr=pr.replace(/^N\$\s*/,'');pr=cap1(pr);
+        return {label:txt(tr.cells[0]),price:pr,q:tr.cells[2]?tr.cells[2].firstElementChild:null,cap:cp};
+      });
+      var ns=recs.filter(function(r){return SEAS.test(r.label);}).length;
+      return {tb:tb,cap:cp,recs:recs,seasonal:recs.length&&ns*2>=recs.length};
+    });
+    // seasonal rows: "Low Season · 01 Dec 2026 – 28 Feb 2027 · Full Board Plus · Suite — per person sharing"
+    var seasons=[],bySeason={};
+    tabs.filter(function(t){return t.seasonal;}).forEach(function(t){
+      t.recs.forEach(function(r){
+        var segs=r.label.split(' · '), sn='', dates='';
+        segs=segs.map(function(s){
+          var m=s.match(SEAS);
+          if(m&&!sn){ sn=cap1(m[1].toLowerCase()).replace(/ season$/,' Season'); var pm=s.match(/\(([^)]*)\)/); if(pm)dates=pm[1];
+            return s.replace(m[0],'').replace(/\([^)]*\)/,'').replace(/^[\s—\-:]+|[\s—\-:]+$/g,''); }
+          if(DATES.test(s)&&!dates){ dates=s.replace(/[()]/g,''); return ''; }
+          return s;
+        }).filter(function(s){return s!=='';});
+        var rest=segs.join(' · '), room, item;
+        if(/^(child|infant|teen)/i.test(rest)){ room='Children'; item=rest; }
+        else { var p=rest.split(' — '); room=p[0]; item=p.slice(1).join(' — ')||'Rate'; }
+        if(!bySeason[sn]){bySeason[sn]={dates:dates,rooms:[],byRoom:{}};seasons.push(sn);}
+        var S=bySeason[sn]; if(!S.byRoom[room]){S.byRoom[room]=[];S.rooms.push(room);}
+        S.byRoom[room].push({item:cap1(item),price:r.price,q:r.q});
+      });
+    });
+    // tables without seasons: the same room names repeated across tables (Strand: one table per occupancy)
+    // become one card per room; anything else becomes an extras card
+    var plain=tabs.filter(function(t){return !t.seasonal;}), cnt={};
+    plain.forEach(function(t){var seen={};t.recs.forEach(function(r){if(!seen[r.label]){seen[r.label]=1;cnt[r.label]=(cnt[r.label]||0)+1;}});});
+    var pivotTabs=plain.filter(function(t){return t.recs.length&&t.recs.filter(function(r){return cnt[r.label]>1;}).length*2>=t.recs.length;});
+    if(pivotTabs.length<2) pivotTabs=[];
+    var roomOrder=[],byRoom={};
+    pivotTabs.forEach(function(t){t.recs.forEach(function(r){if(!byRoom[r.label]){byRoom[r.label]=[];roomOrder.push(r.label);}byRoom[r.label].push({item:head(t.cap)||'Rate',price:r.price,q:r.q});});});
+    var extrasTabs=plain.filter(function(t){return pivotTabs.indexOf(t)<0;});
+    if(!seasons.length&&!roomOrder.length&&!extrasTabs.length) return;
+    var wrap=document.createElement('div'); wrap.className='nr-rc-wrap';
+    if(seasons.length){
+      var sw=null; if(seasons.length>1){sw=document.createElement('div');sw.className='nr-sw';wrap.appendChild(sw);}
+      var panes=[];
+      seasons.forEach(function(sn,i){
+        var S=bySeason[sn], pane=document.createElement('div'); pane.className='nr-rc-season'+(i===0?' on':'');
+        if(S.dates||(!sw&&sn)){var dt=document.createElement('div');dt.className='nr-rc-dates';dt.textContent=(sw?'':sn+(S.dates?' · ':''))+(S.dates||'');pane.appendChild(dt);}
+        var g=document.createElement('div'); g.className='nr-blocks nr-rc';
+        S.rooms.filter(function(r){return r!=='Children';}).concat(S.byRoom['Children']?['Children']:[]).forEach(function(rm){g.appendChild(card(rm,S.byRoom[rm],rm==='Children'));});
+        pane.appendChild(g); wrap.appendChild(pane); panes.push(pane);
+        if(sw){var bt=document.createElement('button');bt.type='button';bt.textContent=sn||'Rates';bt.onclick=function(){panes.forEach(function(p,k){p.classList.toggle('on',k===i);});[].forEach.call(sw.children,function(x,k){x.classList.toggle('on',k===i);});};sw.appendChild(bt);}
+      });
+      if(sw) sw.firstChild.classList.add('on');
+    }
+    if(roomOrder.length){
+      var g2=document.createElement('div'); g2.className='nr-blocks nr-rc';
+      roomOrder.forEach(function(rm){g2.appendChild(card(rm,byRoom[rm],/child/i.test(rm)));});
+      wrap.appendChild(g2);
+    }
+    if(extrasTabs.length){
+      var xg=document.createElement('div'); xg.className='nr-xgrid';
+      extrasTabs.forEach(function(t){
+        xg.appendChild(card(head(t.cap)||'Extras',t.recs.map(function(r){return {item:r.label.replace(/\s*—\s*(nett\s+)?(price|rate)\s*\(n\$\)\s*$/i,''),price:r.price,q:r.q};}),false));
+      });
+      wrap.appendChild(xg);
+    }
+    tabs.forEach(function(t){ if(t.tb.parentNode) t.tb.parentNode.removeChild(t.tb); });
+    rt.appendChild(wrap);
+  }
+  function init(){ var rt=document.getElementById('rate-tables'); if(!rt)return; build();
+    try{ new MutationObserver(function(){ if(rt.querySelector(':scope>table')) build(); }).observe(rt,{childList:true}); }catch(e){} }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
+<!-- /NR-RATECARDS -->
+
 </head>
 <body>
 <style>#uc-belt{position:fixed;top:0;left:0;right:0;z-index:2147483600;background:#e7ddca;color:#6c5c39;border-bottom:1px solid #d6c9ad;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;font-weight:600;letter-spacing:.2px;line-height:1.4;text-align:center;padding:7px 16px;}@media(max-width:600px){#uc-belt{font-size:10px;padding:6px 12px;}}</style><script>(function(){function f(){var hd=document.querySelector(".main-header");if(!hd)return;hd.style.top="0px";document.body.style.paddingTop=Math.ceil(hd.getBoundingClientRect().bottom)+"px";}window.addEventListener("load",f);window.addEventListener("resize",f);if(document.readyState!=="loading")f();else document.addEventListener("DOMContentLoaded",f);})();</script>
@@ -201,6 +395,7 @@ section[data-tab]:nth-of-type(even){background:#e9e6df}
       <span class="mode-badge" id="mode-badge">Rack Rates</span>
     </div>
   </div>
+  <div id="nr-years" class="nr-years"></div>
   <div id="rate-tables"></div>
 </div></section>
 
@@ -344,7 +539,7 @@ function showRack(yr){
   function tbc(){ if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-style:italic;font-size:1.02rem">Rate to follow.</p>'; if(sub) sub.textContent='Rate to follow'; }
   if(rt) rt.innerHTML='<p style="padding:22px 2px;color:#7d756e;font-size:.95rem">Loading rates…</p>';
   fetch('/api/rack?slug='+encodeURIComponent(LODGE)+'&full=1'+(yr?'&year='+encodeURIComponent(yr):''),{cache:'no-store'}).then(function(r){return r.json();}).then(function(j){
-    var doc=j&&j.doc;
+    var doc=j&&j.doc; if(window.nrSetYears)nrSetYears(j,false);
     if(doc&&doc.sections&&doc.sections.length&&doc.sections.some(function(s){return s.rows&&s.rows.some(function(r){return r[0]&&(r[1]||r[1]===0);});})){
       renderRates(doc,false);var _b=document.getElementById('uc-belt');if(_b){_b.remove();var _h=document.querySelector('.main-header');if(_h)_h.style.top='0';document.body.style.paddingTop=(_h?_h.offsetHeight:0)+'px';}
       if(j&&j.years&&j.years.length>1&&rt){var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 2px 16px';j.years.forEach(function(y){var bt=document.createElement('button');bt.type='button';bt.textContent=y+' season';var on=String(y)===String(j.year);bt.style.cssText='cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(135,169,150,.7);background:'+(on?'rgba(135,169,150,.88)':'rgba(135,169,150,.10)')+';color:'+(on?'#fff':'#5f7f72');bt.onclick=function(){showRack(y);};bar.appendChild(bt);});rt.insertBefore(bar,rt.firstChild);}
@@ -356,6 +551,7 @@ function showRack(yr){
 // Show net STO (signed-in state) using the rates returned by the server.
 function showSto(d,meta){
   renderRates(d,true);
+  if(window.nrSetYears)nrSetYears(meta,true);
   var b=document.getElementById('mode-badge'); b.textContent='Net STO · '+d.commission; b.classList.add('sto');
   document.getElementById('rate-sub').textContent=d.note+' · Valid '+d.validity+((meta&&meta.year)?' · '+meta.year+' season':'');
   if(meta&&meta.years&&meta.years.length>1){var rt=document.getElementById('rate-tables');if(rt){var cur=meta.year;var bar=document.createElement('div');bar.style.cssText='display:flex;gap:8px;margin:0 2px 16px';meta.years.forEach(function(y){var bt=document.createElement('button');bt.type='button';bt.textContent=y+' season';var on=String(y)===String(cur);bt.style.cssText='cursor:pointer;font:inherit;font-size:.72rem;letter-spacing:.5px;padding:5px 13px;border-radius:4px;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(135,169,150,.7);background:'+(on?'rgba(135,169,150,.88)':'rgba(135,169,150,.10)')+';color:'+(on?'#fff':'#5f7f72');bt.onclick=function(){showStoYear(y);};bar.appendChild(bt);});rt.insertBefore(bar,rt.firstChild);}}
