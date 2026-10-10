@@ -883,7 +883,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
             try{ localStorage.setItem('nr_pending_add',JSON.stringify({name:NAME,key:KEY,rate:rate,at:Date.now()})); }catch(e){}
             [].forEach.call(rt.querySelectorAll('.nr-add.done'),function(x){x.classList.remove('done');x.textContent='Add';});
             a.classList.add('done'); a.textContent='Added';
-            toast('Added to your itinerary: '+rate.n+' · N$ '+p.toLocaleString('en-US')+(rate.pkg?' pp (package)':' pp'));
+            toast('Added to your itinerary: '+rate.n+' · N$ '+p.toLocaleString('en-US')+(rate.pkg?' pp rack (package)':' pp rack'));
           };
           td.appendChild(a);
         });
