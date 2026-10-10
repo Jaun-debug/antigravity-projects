@@ -581,3 +581,5 @@ if(document.readyState!=="loading")build();else document.addEventListener("DOMCo
 ;(function(){try{if(document.getElementById("nr-nb-live"))return;var s=document.createElement("script");s.id="nr-nb-live";s.src="/assets/nb-live.js";s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(e){}})();
 
 ;(function(){try{if(document.getElementById("nr-rate-hero"))return;var s=document.createElement("script");s.id="nr-rate-hero";s.src="/assets/rate-hero.js";s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+
+;(function(){try{if(document.getElementById("nr-footer-blog"))return;var s=document.createElement("script");s.id="nr-footer-blog";s.src="/assets/footer-blog.js";s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(e){}})(); /* FOOTER-BLOG */
