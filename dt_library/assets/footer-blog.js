@@ -17,7 +17,7 @@
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
   function thumb(u){return String(u).replace("/c1920x1080/","/c600x375/");}
   function render(posts){
-    var f=document.querySelector("footer.sc-footer");if(!f||f.querySelector(".nr-fblog"))return !!f;
+    var f=document.querySelector("footer.sc-footer")||document.querySelector("footer.site-footer");if(!f||f.querySelector(".nr-fblog"))return !!f;
     if(!document.getElementById("nr-fblog-css")){var st=document.createElement("style");st.id="nr-fblog-css";st.textContent=CSS;document.head.appendChild(st);}
     var h='<div class="nr-fblog"><div class="nr-fblog-head"><h4>From the Blog</h4><a href="/blog/">All lodge guides &rarr;</a></div><div class="nr-fblog-grid">';
     posts.slice(0,5).forEach(function(p){h+='<a class="nr-fblog-card" href="'+esc(p.url)+'"><img src="'+esc(thumb(p.img))+'" alt="'+esc(p.lodge)+'" loading="lazy" width="600" height="375"><span>'+esc(p.lodge)+'</span><strong>'+esc(p.title)+'</strong></a>';});
