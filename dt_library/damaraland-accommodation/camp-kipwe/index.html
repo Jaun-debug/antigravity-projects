@@ -845,7 +845,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
     if(at===null) at=(endKey!==null?endKey:n);
     return iso(addDays(st,at));
   }
-  var date=checkIn(), userSet=false;
+  var date='', userSet=false;
   function season(d){ if(!d)return null; var m=+d.slice(5,7); for(var k in NR_SEASONS) if(NR_SEASONS[k].indexOf(m)>=0) return k; return null; }
   var askedYear='';
   function bar(rt){
@@ -859,24 +859,14 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
     var inp=b.querySelector('input'); if(inp.value!==date) inp.value=date||'';
     return b.querySelector('#nr-plan-m');
   }
-  function apply(){
+  function apply(){   // 10 Oct: no dates for now - Add sits next to every room rate of each season
     var rt=document.getElementById('rate-tables'); if(!rt) return;
-    if(rt.querySelector('input.qty')) { var o=document.getElementById('nr-plan'); if(o) o.remove(); return; }   // STO view: no planner buttons
-    var msg=bar(rt), sn=season(date), y=date?date.slice(0,4):'';
+    var o=document.getElementById('nr-plan'); if(o) o.remove();
     [].forEach.call(rt.querySelectorAll('.nr-add'),function(x){x.remove();});
-    if(!date){ msg.innerHTML='Choose a check-in date (or set <b>Travel from</b> in the planner) to see which rates apply.'; return; }
-    var yc=[].filter.call(document.querySelectorAll('.nr-yr'),function(c){return txt(c.querySelector('.y'))===y;})[0];
-    if(document.querySelector('.nr-yr')){
-      if(yc&&!yc.classList.contains('on')&&askedYear!==y){ askedYear=y; yc.click(); msg.textContent='Loading '+y+' rates…'; return; }
-      if(!yc||!yc.classList.contains('on')||/follow/i.test(txt(yc))){ msg.innerHTML='<b>'+y+'</b> rates are not out yet, so nothing can be added for this date.'; return; }
-    }
-    var grid=rt.querySelector('.nr-blocks.nr-one');
-    if(!grid||!sn){ msg.innerHTML='<b>'+y+'</b> rates are not out yet, so nothing can be added for this date.'; return; }
-    var blk=[].filter.call(grid.querySelectorAll(':scope>.nr-blk'),function(b){return txt(b.querySelector('h4')).toLowerCase()===sn.toLowerCase();})[0];
-    if(!blk){ msg.textContent='No rates found for '+sn+'.'; return; }
-    var sw=grid.previousElementSibling; if(sw&&sw.classList.contains('nr-sw')){ var bt=[].filter.call(sw.children,function(x){return txt(x).toLowerCase()===sn.toLowerCase();})[0]; if(bt&&!bt.classList.contains('on')) bt.click(); }
-    var d=new Date(date+'T12:00:00');
-    msg.innerHTML='<b>'+d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</b> falls in <b>'+sn+'</b>. Tap Add next to a rate.';
+    if(rt.querySelector('input.qty')) return;   // STO view: no planner buttons
+    var yc=document.querySelector('.nr-yr.on'); if(yc&&/follow/i.test(txt(yc))) return;   // year without rates
+    var y=yc?txt(yc.querySelector('.y')):'';
+    [].forEach.call(rt.querySelectorAll('.nr-blocks.nr-one>.nr-blk'),function(blk){ var sn=txt(blk.querySelector('h4'));
     [].forEach.call(blk.querySelectorAll('.nr-cw'),function(cw){
       var card=cw.querySelector('.nr-room'); if(!card||card.classList.contains('kids')) return;
       var roomName=txt(cw.querySelector('.nr-room-h')).replace(/^\d+\s*x\s*/i,''), tb=card.querySelector('table.nr-mx'); if(!tb) return;
@@ -887,7 +877,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
           if(ci===0) return; var ps=td.querySelector('.mx-p'); if(!ps) return;
           var p=parseFloat(txt(ps).replace(/[^\d.]/g,'')); if(!p) return;
           var occ=heads[ci]||'', pk=(prod.match(/(\d+)\s*-?\s*night/i)||[])[1];
-          var rate={n:roomName+' · '+prod+(occ?' · '+occ:''),p:p,pkg:pk?+pk:0,season:sn,year:y,checkin:date};
+          var rate={n:roomName+' · '+sn+' · '+prod+(occ?' · '+occ:''),p:p,pkg:pk?+pk:0,season:sn,year:y};
           var a=document.createElement('button'); a.type='button'; a.className='nr-add'; a.textContent='Add';
           a.onclick=function(){
             try{ localStorage.setItem('nr_pending_add',JSON.stringify({name:NAME,key:KEY,rate:rate,at:Date.now()})); }catch(e){}
@@ -898,6 +888,7 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
           td.appendChild(a);
         });
       });
+    });
     });
   }
   function toast(m){ var t=document.querySelector('.nr-plan-toast'); if(!t){t=document.createElement('div');t.className='nr-plan-toast';document.body.appendChild(t);}
