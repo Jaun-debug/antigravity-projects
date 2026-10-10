@@ -124,6 +124,8 @@ a{color:inherit}
 .pk-add:hover{background:var(--brand-accent);color:#fff}
 .pk-from{display:block;font-size:.62rem;color:var(--brand-accent);letter-spacing:.4px;margin-top:2px;text-transform:none}
 .lodge .ln-from{display:block;font-size:.62rem;color:var(--brand-accent);letter-spacing:.3px;margin-top:2px}
+.lodge .ln-dates{display:block;font-size:.62rem;color:#2F5450;letter-spacing:.3px;margin-top:2px}
+.trip-date{font:inherit;font-size:.9rem;color:#2F5450;border:1px solid var(--line,#ddd);border-radius:8px;padding:6px 10px;background:#fff}
 .pk-empty{padding:26px 6px;text-align:center;color:var(--text-muted);font-size:.9rem}
 .pk-empty a{color:var(--brand-accent)}
 .seg-picker{margin:8px 0 2px 42px;border:1px solid var(--line);border-radius:8px;background:#fff;overflow:hidden}
@@ -169,6 +171,7 @@ a{color:inherit}
       <h2>Your Itinerary</h2>
       <div class="sub">Route &amp; lodge planner</div>
       <div class="pax-row"><span class="pax-label">Travellers</span><span class="stepper"><button type="button" onclick="setPax(-1)">&minus;</button><span class="nt"><b id="paxVal">2</b> <span id="paxWord">people</span></span><button type="button" onclick="setPax(1)">+</button></span></div>
+      <div class="pax-row"><span class="pax-label">Travel from</span><input type="date" id="tripStart" class="trip-date" onchange="setStart(this.value)"></div>
       <div id="stops"></div>
       <div class="totals">
         <div class="tot"><div class="v" id="totStops">0</div><div class="k">Stops</div></div>
@@ -226,8 +229,8 @@ function bestShareIdx(L){var i=bestRoomIdx(L,'sharing');return i>-1?i:bestAccomm
    published rack; a lodge with no rack shows no figure rather than falling back
    to net. */
 function nkey(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
-function fromRec(l){if(!l)return null;var T=FROMPP[window.NR_YEAR==='2027'?'2027':'2026'];return (l.file&&T[l.file])||T['n:'+nkey(l.name)]||null;}
-function fromLabel(l){var f=fromRec(l);return f?('from '+money(f.p)+' pp'):'';}
+function fromRec(l){if(!l)return null;if(l.rate&&l.rate.p)return {p:l.rate.p,n:l.rate.n,pkg:l.rate.pkg||0};var T=FROMPP[window.NR_YEAR==='2027'?'2027':'2026'];return (l.file&&T[l.file])||T['n:'+nkey(l.name)]||null;}
+function fromLabel(l){var f=fromRec(l);if(!f)return '';if(l&&l.rate)return f.n+' · '+money(f.p)+' pp'+(f.pkg?' (package)':'');return 'from '+money(f.p)+' pp';}
 /* 47 Gondwana and NWR lodges are filed in the index under their source PDF page rather than their sheet, so the map's own file path never matched and they showed no price at all. Key by name as well as file. */
 fetch('/assets/rates-index.json').then(function(r){return r.json()}).then(function(j){(j.lodges||[]).forEach(function(L){['2026','2027'].forEach(function(y){var rack=L['rack_'+y];if(!rack||!rack.length)return;var i=bestShareIdx({rates:rack});if(i<0)return;var rec={p:rack[i].p,n:rack[i].n};if(L.file)FROMPP[y][L.file]=rec;if(L.name)FROMPP[y]['n:'+nkey(L.name)]=rec;});});try{renderPanel();}catch(e){}}).catch(function(){});
 
@@ -253,7 +256,7 @@ function undo(){route.pop();refresh();}
 function clearRoute(){if(route.length&&!confirm('Clear all stops and start over?'))return;route=[];inlineOpen=null;refresh();}
 
 function openPicker(i){pickerStop=i;const key=route[i].key;pickerList=(LODGES[key]||[]).slice();document.getElementById('pk-title').textContent='Lodges — '+BY[key].name;document.getElementById('pk-search').value='';buildPickerList(key);document.getElementById('picker').classList.add('open');document.body.style.overflow='hidden';}
-function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(lodgeHref(l)?'<a class="pk-rates" href="'+lodgeHref(l)+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
+function buildPickerList(key){const L2=document.getElementById('pk-list');if(!pickerList.length){L2.innerHTML='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';return;}L2.innerHTML=pickerList.map((l,idx)=>'<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(lodgeHref(l)?'<a class="pk-rates" href="'+planHref(l)+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addLodge('+idx+')">Add</button></span></div>').join('');}
 function filterPicker(){const q=document.getElementById('pk-search').value.toLowerCase();document.querySelectorAll('#pk-list .pk-item').forEach(el=>{el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
 function addLodge(idx){const l=pickerList[idx];if(!l||pickerStop==null)return;route[pickerStop].lodges.push({name:l.name,file:l.file,nights:2});toast('Added '+l.name);closePicker();refresh();}
 function closePicker(){document.getElementById('picker').classList.remove('open');document.body.style.overflow='';pickerStop=null;}
@@ -266,7 +269,7 @@ function renderInline(){
   var head='<input class="seg-pk-search" placeholder="Search '+BY[key].name+' lodges…" oninput="filterInline('+i+')">';
   var list;
   if(!L.length){list='<div class="pk-empty">No lodges indexed for this region yet.<br><a href="/'+key+'-accommodation/" target="_blank">Open the region page &rarr;</a></div>';}
-  else{list=L.map(function(l,idx){return '<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(lodgeHref(l)?'<a class="pk-rates" href="'+lodgeHref(l)+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addInline('+i+','+idx+')">Add</button></span></div>';}).join('');}
+  else{list=L.map(function(l,idx){return '<div class="pk-item" data-n="'+l.name.toLowerCase().replace(/"/g,'')+'"><span class="pk-name">'+l.name+(fromLabel(l)?'<span class="pk-from">'+fromLabel(l)+'</span>':'')+'</span><span class="pk-actions">'+(lodgeHref(l)?'<a class="pk-rates" href="'+planHref(l)+'" target="_blank" rel="noopener">Rates</a>':'')+'<button class="pk-add" onclick="addInline('+i+','+idx+')">Add</button></span></div>';}).join('');}
   box.innerHTML=head+'<div class="seg-pk-list">'+list+'</div>';box.style.display='block';
 }
 function filterInline(i){var box=document.getElementById('segpk-'+i);if(!box)return;var q=box.querySelector('.seg-pk-search').value.toLowerCase();box.querySelectorAll('.pk-item').forEach(function(el){el.style.display=el.dataset.n.indexOf(q)>=0?'':'none';});}
@@ -277,6 +280,24 @@ function removeLodge(i,j){route[i].lodges.splice(j,1);refresh();}
 
 function saveRoute(){try{localStorage.setItem('nr_route',JSON.stringify(route));}catch(e){}}
 function refresh(){saveRoute();renderMarkers();routeCompute();}
+/* PLAN-ADD (10 Oct 2026): trip start date + rates added from a lodge page (?plan=1 -> nr_pending_add). */
+function planHref(l){var h=lodgeHref(l);if(!h||!/^\//.test(h)||/ratesheets\//.test(h))return h;return h+(h.indexOf('?')<0?'?':'&')+'plan=1';}
+var tripStart='';try{tripStart=localStorage.getItem('nr_start')||'';}catch(e){}
+function setStart(v){tripStart=v||'';try{localStorage.setItem('nr_start',tripStart);}catch(e){}renderPanel();}
+function addDays(iso,n){var d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+n);return d;}
+function fmtD(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});}
+function stayLabel(i,j){if(!tripStart)return '';var n=0;for(var a=0;a<route.length;a++){var ls=route[a].lodges||[];for(var b=0;b<ls.length;b++){if(a===i&&b===j){var ci=addDays(tripStart,n),co=addDays(tripStart,n+(ls[b].nights||1));return fmtD(ci)+' – '+fmtD(co)+' '+co.getFullYear();}n+=ls[b].nights||1;}}return '';}
+function regionOfLodge(name){var k=nkey(name);for(var key in LODGES){if((LODGES[key]||[]).some(function(x){return nkey(x.name)===k;}))return key;}return null;}
+function applyPending(){var raw=null;try{raw=localStorage.getItem('nr_pending_add');}catch(e){}if(!raw)return;try{localStorage.removeItem('nr_pending_add');}catch(e){}
+  var a;try{a=JSON.parse(raw);}catch(e){return;}if(!a||!a.name||!a.rate)return;
+  var key=(a.key&&BY[a.key])?a.key:regionOfLodge(a.name);if(!key||!BY[key])return;
+  var src=(LODGES[key]||[]).filter(function(x){return nkey(x.name)===nkey(a.name);})[0]||{name:a.name,file:''};
+  var hit=null;route.forEach(function(s){if(s.key!==key)return;(s.lodges||[]).forEach(function(l){if(nkey(l.name)===nkey(a.name))hit=l;});});
+  if(!hit){var st=null;for(var i=route.length-1;i>=0;i--){if(route[i].key===key){st=route[i];break;}}if(!st){st={key:key,lodges:[]};route.push(st);}hit={name:src.name,file:src.file,nights:2};st.lodges.push(hit);}
+  hit.rate=a.rate;if(a.rate.pkg)hit.nights=a.rate.pkg;
+  toast('Added '+src.name+' · '+a.rate.n);renderPanel();refresh();}
+window.addEventListener('storage',function(e){if(e.key==='nr_pending_add'&&e.newValue)applyPending();if(e.key==='nr_start'){tripStart=e.newValue||'';var t=document.getElementById('tripStart');if(t)t.value=tripStart;renderPanel();}});
+window.addEventListener('focus',applyPending);
 function savePax(){try{localStorage.setItem('nr_pax',String(pax));}catch(e){}}
 function renderPax(){var v=document.getElementById('paxVal');if(v)v.textContent=pax;var w=document.getElementById('paxWord');if(w)w.textContent=(pax===1?'person':'people');}
 function setPax(d){pax=Math.max(1,Math.min(99,pax+d));savePax();renderPax();}
@@ -295,7 +316,7 @@ function renderPanel(){
     route.forEach((s,i)=>{
       const p=BY[s.key];
       const seg=document.createElement('div');seg.className='seg';
-      let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+(fromLabel(l)?'<span class="ln-from">'+fromLabel(l)+'</span>':'')+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
+      let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+(fromLabel(l)?'<span class="ln-from">'+fromLabel(l)+'</span>':'')+(stayLabel(i,j)?'<span class="ln-dates">'+stayLabel(i,j)+'</span>':'')+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
       seg.innerHTML='<div class="seg-head"><div class="num">'+(i+1)+'</div><div class="nm">'+p.name+'</div><button class="rm" title="Remove stop" onclick="removeStop('+i+')">&times;</button></div>'+
         (lodgesHtml?'<div class="lodges">'+lodgesHtml+'</div>':'')+
         (s.lodges.length===0?'<div class="seg-actions"><button class="addlodge" onclick="toggleInline('+i+')">+ Add lodge</button></div>':'')+
@@ -325,7 +346,7 @@ function viewItinerary(){
     const key=(l.name||'').toLowerCase().replace(/[^a-z0-9]/g,'');
     const inf=LODGEINFO[key]||null;
     var fp=fromRec(l);
-    var rows=fp?[{qty:pax,name:fp.n||'Per person sharing',price:fp.p,nights:l.nights,total:pax*(fp.p||0)*(l.nights||1)}]:[];
+    var rows=fp?[{qty:pax,name:fp.n||'Per person sharing',price:fp.p,nights:fp.pkg?1:l.nights,total:pax*(fp.p||0)*(fp.pkg?1:(l.nights||1))}]:[];
     items.push({name:l.name,region:BY[s.key].name,url:lodgeHref(l)||('/'+s.key+'-accommodation/'),nights:l.nights,items:rows,desc:inf?inf.lead:'',photos:inf?(inf.imgs||[]):[]});
   });});
   if(!items.length){toast('Add at least one lodge to a stop to view your itinerary');return;}
@@ -336,6 +357,8 @@ function closeItin(){document.getElementById('itin-view').classList.remove('open
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){closePicker();closeItin();}});
 try{var _sr=JSON.parse(localStorage.getItem('nr_route')||'[]');if(Array.isArray(_sr))route=_sr.filter(function(x){return x&&BY[x.key];}).map(function(x){return {key:x.key,lodges:Array.isArray(x.lodges)?x.lodges:[]};});}catch(e){}
 try{var _p=parseInt(localStorage.getItem('nr_pax'),10);if(_p>=1&&_p<=99)pax=_p;}catch(e){}renderPax();
+try{var _t=document.getElementById('tripStart');if(_t)_t.value=tripStart;}catch(e){}
+setTimeout(applyPending,400);
 if(typeof L!=='undefined'){initMap();refresh();}else{window.addEventListener('load',()=>{initMap();refresh();});}
 </script>
 <script>window.LODGE=window.LODGE||"";</script>

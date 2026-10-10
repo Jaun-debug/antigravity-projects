@@ -811,5 +811,104 @@ button.mx-p:hover{background:rgba(135,169,150,.12)}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init); else init();
 })();
 </script>
+<!-- KIPWE-PLAN (10 Oct 2026): opened from Map Your Itinerary (?plan=1), rack view only. Works out the check-in date
+     from the planner (nr_start + nights in route order), picks the season it falls in, and puts an Add button next
+     to each room rate of that season. Add -> localStorage nr_pending_add, which the planner picks up. -->
+<style>
+.nr-plan{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:#fff;border:1px solid rgba(135,169,150,.45);border-radius:12px;padding:14px 18px;margin:0 0 20px;color:#2F5450;font-size:.9rem}
+.nr-plan b{font-weight:600}
+.nr-plan input{font:inherit;color:#2F5450;border:1px solid rgba(135,169,150,.6);border-radius:8px;padding:5px 9px;background:#fff}
+.nr-plan a{color:#2F5450;margin-left:auto;font-size:.8rem;letter-spacing:1px;text-transform:uppercase}
+.nr-add{cursor:pointer;font:inherit;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;margin:6px 0 0 auto;display:block;padding:5px 11px;border-radius:999px;border:1px solid #87a996;background:#fff;color:#2F5450;transition:.2s}
+.nr-add:hover{background:#87a996;color:#fff}
+.nr-add.done{background:#2F5450;border-color:#2F5450;color:#fff}
+.nr-plan-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#2F5450;color:#fff;padding:12px 20px;border-radius:10px;font-size:.88rem;z-index:9999;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.nr-plan-toast a{color:#fff;margin-left:12px;text-decoration:underline}
+</style>
+<script>
+(function(){
+  try{ if(/[?&]plan=1\b/.test(location.search)) sessionStorage.setItem('nr_plan','1'); }catch(e){}
+  var on=false; try{ on=sessionStorage.getItem('nr_plan')==='1'; }catch(e){}
+  if(!on) return;
+  var NAME='Camp Kipwe', KEY=(location.pathname.match(/\/([^\/]+)-accommodation\//)||[])[1]||'';
+  // Seasons as printed on the Camp Kipwe rate sheet
+  var NR_SEASONS={'Low Season':[1,2,3,12],'High Season':[4,5,6,7,8,9,10,11]};
+  function nkey(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
+  function txt(el){return (el&&el.textContent||'').replace(/\s+/g,' ').trim();}
+  function iso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+  function addDays(s,n){var d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return d;}
+  function checkIn(){
+    var st='',route=[];try{st=localStorage.getItem('nr_start')||'';route=JSON.parse(localStorage.getItem('nr_route')||'[]')||[];}catch(e){}
+    if(!st) return '';
+    var n=0,at=null,endKey=null;
+    route.forEach(function(s){(s.lodges||[]).forEach(function(l){ if(at===null&&nkey(l.name)===nkey(NAME)) at=n; n+=l.nights||1; }); if(s.key===KEY) endKey=n; });
+    if(at===null) at=(endKey!==null?endKey:n);
+    return iso(addDays(st,at));
+  }
+  var date=checkIn(), userSet=false;
+  function season(d){ if(!d)return null; var m=+d.slice(5,7); for(var k in NR_SEASONS) if(NR_SEASONS[k].indexOf(m)>=0) return k; return null; }
+  var askedYear='';
+  function bar(rt){
+    var b=document.getElementById('nr-plan');
+    if(!b){ b=document.createElement('div'); b.id='nr-plan'; b.className='nr-plan';
+      b.innerHTML='<span>Check-in <input type="date" id="nr-plan-d"></span><span id="nr-plan-m"></span><a href="/map/">Back to itinerary &rarr;</a>';
+      b.querySelector('input').onchange=function(){ date=this.value; userSet=true; askedYear=''; apply(); };
+    }
+    var yrs=document.getElementById('nr-years'), anchor=yrs&&yrs.parentNode===rt.parentNode?yrs:rt;
+    if(b.nextSibling!==anchor) anchor.parentNode.insertBefore(b,anchor);
+    var inp=b.querySelector('input'); if(inp.value!==date) inp.value=date||'';
+    return b.querySelector('#nr-plan-m');
+  }
+  function apply(){
+    var rt=document.getElementById('rate-tables'); if(!rt) return;
+    if(rt.querySelector('input.qty')) { var o=document.getElementById('nr-plan'); if(o) o.remove(); return; }   // STO view: no planner buttons
+    var msg=bar(rt), sn=season(date), y=date?date.slice(0,4):'';
+    [].forEach.call(rt.querySelectorAll('.nr-add'),function(x){x.remove();});
+    if(!date){ msg.innerHTML='Choose a check-in date (or set <b>Travel from</b> in the planner) to see which rates apply.'; return; }
+    var yc=[].filter.call(document.querySelectorAll('.nr-yr'),function(c){return txt(c.querySelector('.y'))===y;})[0];
+    if(document.querySelector('.nr-yr')){
+      if(yc&&!yc.classList.contains('on')&&askedYear!==y){ askedYear=y; yc.click(); msg.textContent='Loading '+y+' rates…'; return; }
+      if(!yc||!yc.classList.contains('on')||/follow/i.test(txt(yc))){ msg.innerHTML='<b>'+y+'</b> rates are not out yet, so nothing can be added for this date.'; return; }
+    }
+    var grid=rt.querySelector('.nr-blocks.nr-one');
+    if(!grid||!sn){ msg.innerHTML='<b>'+y+'</b> rates are not out yet, so nothing can be added for this date.'; return; }
+    var blk=[].filter.call(grid.querySelectorAll(':scope>.nr-blk'),function(b){return txt(b.querySelector('h4')).toLowerCase()===sn.toLowerCase();})[0];
+    if(!blk){ msg.textContent='No rates found for '+sn+'.'; return; }
+    var sw=grid.previousElementSibling; if(sw&&sw.classList.contains('nr-sw')){ var bt=[].filter.call(sw.children,function(x){return txt(x).toLowerCase()===sn.toLowerCase();})[0]; if(bt&&!bt.classList.contains('on')) bt.click(); }
+    var d=new Date(date+'T12:00:00');
+    msg.innerHTML='<b>'+d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})+'</b> falls in <b>'+sn+'</b>. Tap Add next to a rate.';
+    [].forEach.call(blk.querySelectorAll('.nr-cw'),function(cw){
+      var card=cw.querySelector('.nr-room'); if(!card||card.classList.contains('kids')) return;
+      var roomName=txt(cw.querySelector('.nr-room-h')).replace(/^\d+\s*x\s*/i,''), tb=card.querySelector('table.nr-mx'); if(!tb) return;
+      var heads=[].map.call(tb.querySelectorAll('thead th'),txt);
+      [].forEach.call(tb.querySelectorAll('tbody tr'),function(tr){
+        var prod=txt(tr.cells[0]);
+        [].forEach.call(tr.cells,function(td,ci){
+          if(ci===0) return; var ps=td.querySelector('.mx-p'); if(!ps) return;
+          var p=parseFloat(txt(ps).replace(/[^\d.]/g,'')); if(!p) return;
+          var occ=heads[ci]||'', pk=(prod.match(/(\d+)\s*-?\s*night/i)||[])[1];
+          var rate={n:roomName+' · '+prod+(occ?' · '+occ:''),p:p,pkg:pk?+pk:0,season:sn,year:y,checkin:date};
+          var a=document.createElement('button'); a.type='button'; a.className='nr-add'; a.textContent='Add';
+          a.onclick=function(){
+            try{ localStorage.setItem('nr_pending_add',JSON.stringify({name:NAME,key:KEY,rate:rate,at:Date.now()})); }catch(e){}
+            [].forEach.call(rt.querySelectorAll('.nr-add.done'),function(x){x.classList.remove('done');x.textContent='Add';});
+            a.classList.add('done'); a.textContent='Added';
+            toast('Added to your itinerary: '+rate.n+' · N$ '+p.toLocaleString('en-US')+(rate.pkg?' pp (package)':' pp'));
+          };
+          td.appendChild(a);
+        });
+      });
+    });
+  }
+  function toast(m){ var t=document.querySelector('.nr-plan-toast'); if(!t){t=document.createElement('div');t.className='nr-plan-toast';document.body.appendChild(t);}
+    t.innerHTML=''; t.appendChild(document.createTextNode(m)); var l=document.createElement('a'); l.href='/map/'; l.textContent='View itinerary'; t.appendChild(l);
+    clearTimeout(t._t); t._t=setTimeout(function(){t.remove();},5000); }
+  var tmr=null; function later(){ clearTimeout(tmr); tmr=setTimeout(apply,150); }
+  function init(){ var rt=document.getElementById('rate-tables'); if(!rt) return; later();
+    try{ new MutationObserver(function(ms){ if(ms.some(function(m){return [].some.call(m.addedNodes,function(n){return !(n.classList&&n.classList.contains('nr-add'));});})) later(); }).observe(rt,{childList:true,subtree:true}); }catch(e){}
+    window.addEventListener('storage',function(e){ if(!userSet&&(e.key==='nr_start'||e.key==='nr_route')){ date=checkIn(); later(); } }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
+</script>
 </body>
 </html>
