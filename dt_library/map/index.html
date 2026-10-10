@@ -171,7 +171,6 @@ a{color:inherit}
       <h2>Your Itinerary</h2>
       <div class="sub">Route &amp; lodge planner</div>
       <div class="pax-row"><span class="pax-label">Travellers</span><span class="stepper"><button type="button" onclick="setPax(-1)">&minus;</button><span class="nt"><b id="paxVal">2</b> <span id="paxWord">people</span></span><button type="button" onclick="setPax(1)">+</button></span></div>
-      <div class="pax-row"><span class="pax-label">Travel from</span><input type="date" id="tripStart" class="trip-date" onchange="setStart(this.value)"></div>
       <div id="stops"></div>
       <div class="totals">
         <div class="tot"><div class="v" id="totStops">0</div><div class="k">Stops</div></div>
@@ -282,7 +281,7 @@ function saveRoute(){try{localStorage.setItem('nr_route',JSON.stringify(route));
 function refresh(){saveRoute();renderMarkers();routeCompute();}
 /* PLAN-ADD (10 Oct 2026): trip start date + rates added from a lodge page (?plan=1 -> nr_pending_add). */
 function planHref(l){var h=lodgeHref(l);if(!h||!/^\//.test(h)||/ratesheets\//.test(h))return h;return h+(h.indexOf('?')<0?'?':'&')+'plan=1';}
-var tripStart='';try{tripStart=localStorage.getItem('nr_start')||'';}catch(e){}
+var tripStart='';try{localStorage.removeItem('nr_start');}catch(e){} /* dates parked 10 Oct: no Travel from row for now */
 function setStart(v){tripStart=v||'';try{localStorage.setItem('nr_start',tripStart);}catch(e){}renderPanel();}
 function addDays(iso,n){var d=new Date(iso+'T12:00:00');d.setDate(d.getDate()+n);return d;}
 function fmtD(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});}
@@ -316,7 +315,7 @@ function renderPanel(){
     route.forEach((s,i)=>{
       const p=BY[s.key];
       const seg=document.createElement('div');seg.className='seg';
-      let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+(fromLabel(l)?'<span class="ln-from">'+fromLabel(l)+'</span>':'')+(stayLabel(i,j)?'<span class="ln-dates">'+stayLabel(i,j)+'</span>':'')+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
+      let lodgesHtml=s.lodges.map((l,j)=>'<div class="lodge"><span class="ln">'+l.name+(fromLabel(l)?'<span class="ln-from">'+fromLabel(l)+'</span>':'')+'</span><span class="stepper"><button onclick="setNights('+i+','+j+',-1)">&minus;</button><span class="nt"><b>'+l.nights+'</b> night'+(l.nights>1?'s':'')+'</span><button onclick="setNights('+i+','+j+',1)">+</button></span><button class="lx" title="Remove lodge" onclick="removeLodge('+i+','+j+')">&times;</button></div>').join('');
       seg.innerHTML='<div class="seg-head"><div class="num">'+(i+1)+'</div><div class="nm">'+p.name+'</div><button class="rm" title="Remove stop" onclick="removeStop('+i+')">&times;</button></div>'+
         (lodgesHtml?'<div class="lodges">'+lodgesHtml+'</div>':'')+
         (s.lodges.length===0?'<div class="seg-actions"><button class="addlodge" onclick="toggleInline('+i+')">+ Add lodge</button></div>':'')+
