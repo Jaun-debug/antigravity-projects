@@ -561,3 +561,5 @@
 }catch(e){}})();
 
 ;(function(){try{if(document.getElementById("nr-qty-stepper"))return;var s=document.createElement("script");s.id="nr-qty-stepper";s.src="/assets/qty-stepper.js";s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(e){}})();
+
+;(function(){try{var h=location.hostname;if(/(^|\.)namibiarates\.com$/.test(h)||document.getElementById("nr-sandbox"))return;var b=document.createElement("div");b.id="nr-sandbox";b.textContent="SANDBOX COPY · not the live site";b.style.cssText="position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:2147483647;background:#B89A6A;color:#fff;font:600 11px/1 Jost,system-ui,sans-serif;letter-spacing:.16em;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none";(document.body?document.body.appendChild(b):document.addEventListener("DOMContentLoaded",function(){document.body.appendChild(b)}));}catch(e){}})(); /* SANDBOX-BANNER */
