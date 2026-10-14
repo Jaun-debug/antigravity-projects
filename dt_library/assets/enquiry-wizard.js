@@ -217,7 +217,7 @@
     var newsGroup = document.createElement('label'); newsGroup.style.display = 'flex'; newsGroup.style.alignItems = 'center'; newsGroup.style.gap = '12px'; newsGroup.style.width = '100%'; newsGroup.style.maxWidth = 'var(--dew-inner-w)'; newsGroup.style.cursor = 'pointer'; newsGroup.style.marginBottom = '20px'; newsGroup.style.color = '#3c3530'; newsGroup.style.fontSize = '14px'; newsGroup.style.fontFamily = 'var(--dew-font-body)';
     var check = document.createElement('input'); check.type = 'checkbox'; check.className = 'dew-checkbox'; check.checked = state.answers.newsletter;
     check.addEventListener('change', function() { state.answers.newsletter = this.checked; }); newsGroup.appendChild(check);
-    newsGroup.appendChild(document.createTextNode('I would like to receive the latest news from Namibia Rates')); wrapper.appendChild(newsGroup);
+    newsGroup.appendChild(document.createTextNode('I would like to receive the latest news from African Safari Rates')); wrapper.appendChild(newsGroup);
     var submitDisabled = !state.answers.email || !state.answers.firstName || !state.answers.surname || !state.answers.phone;
     return { content: wrapper, navOptions: { showSubmit: true, submitDisabled: submitDisabled, onSubmit: handleSubmit } };
   }

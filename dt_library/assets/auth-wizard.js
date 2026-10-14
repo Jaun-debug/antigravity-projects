@@ -225,7 +225,7 @@
     if(rec&&rec.confidence!=null) flags.push('AI confidence: '+rec.confidence+'%.');
     if(rec&&rec.anomalies&&rec.anomalies.length) flags.push('Double-check: '+rec.anomalies.map(esc).join('; ')+'.');
     stage.innerHTML='<div class="aw-step"><div class="aw-eyebrow">Rack Rates</div><h2 class="aw-h">Review &amp; correct your rates</h2>'+
-      '<p class="aw-sub">Our AI read your PDF into the fields below. Check every number, fix anything that is wrong, then submit. Nothing goes live until Namibia Rates approves it.</p>'+
+      '<p class="aw-sub">Our AI read your PDF into the fields below. Check every number, fix anything that is wrong, then submit. Nothing goes live until African Safari Rates approves it.</p>'+
       (flags.length?'<div class="aw-panel"><h4>Worth a look</h4><div style="font-size:.85rem;color:#e8c9a0;line-height:1.5">'+flags.join(' ')+'</div></div>':'')+
       '<div class="aw-panel"><h4>Season year</h4><div class="aw-field" style="margin:0"><label>Which season year are these rates for?</label><select class="aw-input" id="rv-year"></select></div></div>'+
       '<div class="aw-panel"><h4>Details</h4>'+
@@ -262,7 +262,7 @@
       msg.style.color='#bcd0a0';msg.textContent='Submitting\u2026';
       fetch('/api/approvals',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'submit',id:rec.id,data:data,year:stage.querySelector('#rv-year').value})})
         .then(function(r){return r.json();}).then(function(r){
-          if(r&&r.ok){msg.style.color='#bcd0a0';msg.textContent='\u2713 Submitted to Namibia Rates for approval. Thank you!';}
+          if(r&&r.ok){msg.style.color='#bcd0a0';msg.textContent='\u2713 Submitted to African Safari Rates for approval. Thank you!';}
           else{msg.style.color='#e9a';msg.textContent=(r&&r.error)||'Could not submit \u2014 please try again.';}
         }).catch(function(){msg.style.color='#e9a';msg.textContent='Network error \u2014 please try again.';});
     };

@@ -1,5 +1,5 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Rate Loading Progress — Namibia Rates</title>
+<title>Rate Loading Progress — African Safari Rates</title>
 <style>
 :root{--terra:#c85a17;--terra6:rgba(200,90,23,.6);--gold:#B8956A;--char:#2C2824;--muted:#7A7269;--bg:#EEEAE3;--card:#fff;--border:rgba(184,149,106,.28);--ok:#c85a17;--seafoam:#87a996;--seafd:#5f7f72}
 *{box-sizing:border-box}
@@ -122,7 +122,7 @@ tr.subtot td{font-weight:700;background:rgba(184,149,106,.05);border-top:1px sol
 <div class="topbar"><header>
 <a href="/" class="back-home">&larr; Back to Home</a>
 <h1>Rate Loading Progress</h1>
-<div class="sub" id="sub">Namibia Rates · 2026/2027 coverage · derived live from the rack &amp; STO APIs</div>
+<div class="sub" id="sub">African Safari Rates · 2026/2027 coverage · derived live from the rack &amp; STO APIs</div>
 </header>
 <div class="tiles" id="tiles"></div>
 <div class="legend">
@@ -254,7 +254,7 @@ Promise.all([
   ['q','region','status','category'].forEach(function(id){document.getElementById(id).addEventListener('input',render);});
   (function(){var h=document.getElementById('regionHead');if(!h)return;function toggle(){var w=document.getElementById('byregionWrap');var collapsed=w.classList.toggle('collapsed');var c=h.querySelector('.fold-caret');if(c)c.innerHTML=collapsed?'&#9656;':'&#9662;';var rm=document.getElementById('regionMini');if(rm)rm.style.display=collapsed?'':'none';h.setAttribute('aria-expanded',String(!collapsed));window.dispatchEvent(new Event('resize'));}h.addEventListener('click',toggle);h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}});})();
   document.querySelectorAll('#detail th[data-k]').forEach(function(th){th.addEventListener('click',function(){var k=th.dataset.k;if(sortK===k)sortDir*=-1;else{sortK=k;sortDir=1;}render();});});
-  document.getElementById('sub').textContent='Namibia Rates · 2026/2027 coverage · derived live from the rack & STO APIs · '+new Date().toISOString().slice(0,10);
+  document.getElementById('sub').textContent='African Safari Rates · 2026/2027 coverage · derived live from the rack & STO APIs · '+new Date().toISOString().slice(0,10);
   renderRegionTable();
   render();
 }).catch(function(e){showErr('Failed to build the tracker: '+(e&&e.message||e));});

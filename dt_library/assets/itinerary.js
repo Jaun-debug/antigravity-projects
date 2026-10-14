@@ -1,4 +1,4 @@
-/* Namibia Rates — Agent Itinerary (front-end, session-scoped)
+/* African Safari Rates — Agent Itinerary (front-end, session-scoped)
    Stores added lodges in localStorage so they persist while the agent's
    browser is open and clear when it closes. No database required.
    Exposes:  window.NRItinerary  (load/add/remove/clear/count)

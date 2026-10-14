@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, follow">
-<title>Your Itinerary — Namibia Rates</title>
+<title>Your Itinerary — African Safari Rates</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#EEEAE3;--gold:#B8956A;--green:#87a996;--text-main:#2C2824;--text-muted:#7A7269;
@@ -406,7 +406,7 @@ function buildEmail(items,agent,client,notes,clientMode){
       +'<tr><td style="padding:8px 0;border-bottom:1px solid #f0ede8;color:#7A7269">Lodges</td><td style="padding:8px 0;border-bottom:1px solid #f0ede8;text-align:right">'+items.length+'</td></tr>';
   return '<div style="font-family:Inter,sans-serif;max-width:600px;margin:0 auto;border:1px solid #eee;border-radius:12px;overflow:hidden">'
     +'<div style="background:#2C2824;padding:32px;text-align:center;color:#fff">'
-    +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A">'+(clientMode?'Namibia Rates':'Namibia Rates Trade Portal')+'</p>'
+    +'<p style="margin:0 0 6px;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:#B8956A">'+(clientMode?'African Safari Rates':'African Safari Rates Trade Portal')+'</p>'
     +'<h1 style="margin:0;font-size:26px;font-family:Georgia,serif;font-weight:300">'+(clientMode?'Your Namibia Itinerary':'Proposed Itinerary')+'</h1>'
     +(client?'<p style="margin:10px 0 0;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#7BA99A">'+esc(client)+'</p>':'')
     +'</div><div style="padding:32px;background:#fff">'
@@ -604,7 +604,7 @@ body:not(.pubclient) .actions>*:nth-child(1){z-index:9989!important}body:not(.pu
 if(new URLSearchParams(location.search).get('client')!=='1' && sessionStorage.getItem('nr_agent_token'))return;
 document.body.classList.add('pubclient');
 var tb=document.getElementById('nr-tobuilder');if(tb){tb.setAttribute('href','/map/');tb.innerHTML='&larr; Back to map';}
-function txt(){var it=[];try{it=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}var L=['My Namibia itinerary:',''];it.forEach(function(x,i){L.push((i+1)+'. '+(x.name||'')+(x.region?' ('+x.region+')':'')+(x.nights?' - '+x.nights+' night'+(x.nights>1?'s':''):''));});L.push('');L.push('Sent from the Namibia Rates route planner: '+location.origin+'/map/');return L.join('\n');}
+function txt(){var it=[];try{it=JSON.parse(localStorage.getItem('nr_itinerary')||'[]')}catch(e){}var L=['My Namibia itinerary:',''];it.forEach(function(x,i){L.push((i+1)+'. '+(x.name||'')+(x.region?' ('+x.region+')':'')+(x.nights?' - '+x.nights+' night'+(x.nights>1?'s':''):''));});L.push('');L.push('Sent from the African Safari Rates route planner: '+location.origin+'/map/');return L.join('\n');}
 var VAULT_SEND='/api/send_email';
 var COPY_TO='jaun@desert-tracks.com';
 function nrMoney(n){return 'N$ '+(Number(n)||0).toLocaleString('en-US',{minimumFractionDigits:2});}

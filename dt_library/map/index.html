@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Route Planner | Namibia Rates</title>
+<title>Route Planner | African Safari Rates</title>
 <meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -191,7 +191,7 @@ a{color:inherit}
     </aside>
   </div>
 </div>
-<footer class="foot"><div class="fl">Namibia Rates</div><div class="fc">Trade Rates Portal &mdash; Authorized Partners Only</div></footer>
+<footer class="foot"><div class="fl">African Safari Rates</div><div class="fc">Trade Rates Portal &mdash; Authorized Partners Only</div></footer>
 <div class="toast" id="toast"></div>
 <div class="pk-overlay" id="picker" onclick="if(event.target===this)closePicker()">
   <div class="pk-panel">
@@ -307,7 +307,7 @@ window.addEventListener('focus',applyPending);
 function savePax(){try{localStorage.setItem('nr_pax',String(pax));}catch(e){}}
 function renderPax(){var v=document.getElementById('paxVal');if(v)v.textContent=pax;var w=document.getElementById('paxWord');if(w)w.textContent=(pax===1?'person':'people');}
 function setPax(d){pax=Math.max(1,Math.min(99,pax+d));savePax();renderPax();renderPanel();}
-function itinText(){var lines=['My Namibia route:',''];route.forEach(function(s,i){var lg=(s.lodges||[]).map(function(l){return l.name+' ('+l.nights+' night'+(l.nights>1?'s':'')+(fromRec(l)?', from '+money(fromRec(l).p)+' pp':'')+')';}).join(', ');lines.push((i+1)+'. '+BY[s.key].name+(lg?' - '+lg:''));});var tkm=0,nights=0;legInfo.forEach(function(l){tkm+=l.km;});route.forEach(function(s){(s.lodges||[]).forEach(function(l){nights+=l.nights;});});lines.push('');lines.push('Travellers: '+pax+' '+(pax===1?'person':'people'));lines.push('Total: '+route.length+' stops, '+nights+' night'+(nights===1?'':'s')+', ~'+tkm+' km driving');lines.push('');lines.push('Planned with the Namibia Rates route planner: '+location.origin+'/map/');return lines.join('\n');}
+function itinText(){var lines=['My Namibia route:',''];route.forEach(function(s,i){var lg=(s.lodges||[]).map(function(l){return l.name+' ('+l.nights+' night'+(l.nights>1?'s':'')+(fromRec(l)?', from '+money(fromRec(l).p)+' pp':'')+')';}).join(', ');lines.push((i+1)+'. '+BY[s.key].name+(lg?' - '+lg:''));});var tkm=0,nights=0;legInfo.forEach(function(l){tkm+=l.km;});route.forEach(function(s){(s.lodges||[]).forEach(function(l){nights+=l.nights;});});lines.push('');lines.push('Travellers: '+pax+' '+(pax===1?'person':'people'));lines.push('Total: '+route.length+' stops, '+nights+' night'+(nights===1?'':'s')+', ~'+tkm+' km driving');lines.push('');lines.push('Planned with the African Safari Rates route planner: '+location.origin+'/map/');return lines.join('\n');}
 function emailItinerary(){if(!route.length)return;window.location.href='mailto:?subject='+encodeURIComponent('My Namibia Itinerary')+'&body='+encodeURIComponent(itinText());}
 function sendEnquiry(){if(!route.length)return;window.location.href='mailto:bookings@desert-tracks.com?subject='+encodeURIComponent('Namibia Itinerary Enquiry')+'&body='+encodeURIComponent(itinText());}
 
