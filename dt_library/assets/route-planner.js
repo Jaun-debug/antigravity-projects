@@ -311,3 +311,71 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
+
+/* REGION-CARDS — homepage: the region slider (rg2) is replaced by a grid of region cards,
+   grouped Namibia / Botswana & the Delta / Victoria Falls. Built from the page's own
+   .region-grid cards (name, photo, lodge list), so nothing new is written about a region. */
+(function(){
+  if(window.__nrRegionCards) return; window.__nrRegionCards=1;
+  var SLUG={'Sossusvlei & Namib':'sossusvlei','Zambezi & Caprivi':'caprivi','Damaraland':'damaraland','Central Namibia':'central-namibia','Swakopmund':'swakopmund',
+    'Skeleton Coast':'skeleton-coast','West Etosha':'west-etosha','Epupa':'epupa','Kaokoland':'kaokoland','Luderitz':'luderitz','Kalahari':'kalahari',
+    'Fish River Canyon':'fish-river-canyon','Opuwo':'opuwo','Botswana':'botswana','Victoria Falls':'victoria-falls','Chobe':'chobe','Okavango Delta':'okavango-delta',
+    'South Etosha':'south-etosha','East Etosha':'east-etosha','Windhoek':'windhoek'};
+  var GROUPS=[
+    ['Namibia',['Windhoek','Central Namibia','Kalahari','Sossusvlei & Namib','Fish River Canyon','Luderitz','Swakopmund','Skeleton Coast','Damaraland','Kaokoland','Opuwo','Epupa','West Etosha','South Etosha','East Etosha','Zambezi & Caprivi']],
+    ['Botswana & the Okavango Delta',['Okavango Delta','Chobe','Botswana']],
+    ['Victoria Falls',['Victoria Falls']]];
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function css(){
+    var st=document.createElement('style'); st.id='nr-rc-css';
+    st.textContent='.rg2-wrap{display:none!important}'+
+      '#nr-regions{display:flex;flex-direction:column;gap:34px}'+
+      '#nr-regions h3.rc-g{font-family:var(--font-head);font-weight:500;color:var(--brand-accent,#B89A6A);font-size:1.45rem;margin:0 0 14px;letter-spacing:1px}'+
+      '.rc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}'+
+      '@media (max-width:980px){.rc-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}'+
+      '@media (max-width:560px){.rc-grid{grid-template-columns:1fr}}'+
+      '.rc-card{position:relative;display:block;aspect-ratio:4/3;max-width:100%;border-radius:14px;overflow:hidden;background:#6d6258 center/cover no-repeat;text-decoration:none;box-shadow:0 10px 24px -16px rgba(20,14,8,.6);isolation:isolate}'+
+      '.rc-card::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(20,14,8,.72) 0%,rgba(20,14,8,.15) 45%,rgba(20,14,8,0) 70%);z-index:0}'+
+      '.rc-card .rc-ph{position:absolute;inset:0;background:inherit;transition:transform .5s ease}'+
+      '.rc-card:hover .rc-ph{transform:scale(1.04)}'+
+      '.rc-in{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:16px 18px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;color:#fff}'+
+      '.rc-in h4{margin:0;font-family:var(--font-head);font-weight:400;font-size:1.35rem;letter-spacing:1px;line-height:1.15;color:#fff}'+
+      '.rc-in small{display:block;margin-top:4px;font-family:var(--font-body);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85)}'+
+      '.rc-go{flex:none;font-family:var(--font-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);border-radius:999px;padding:7px 12px;white-space:nowrap}'+
+      '.rc-card:hover .rc-go{background:var(--brand-accent,#B89A6A);border-color:var(--brand-accent,#B89A6A)}'+
+      '.rc-card:focus-visible{outline:3px solid var(--brand-accent,#B89A6A);outline-offset:3px}';
+    document.head.appendChild(st);
+  }
+  function build(){
+    var wrap=document.querySelector('.swiper-container-wrapper'), src=wrap&&wrap.querySelector('.region-grid');
+    if(!wrap||!src||document.getElementById('nr-regions')) return;
+    var byName={};
+    [].forEach.call(src.querySelectorAll('.region-card'),function(c){
+      var h=c.querySelector('h3'); if(!h) return; var n=h.textContent.trim();
+      var im=c.querySelector('.region-image'); var bg=im?im.style.backgroundImage:'';
+      byName[n]={card:c,bg:bg,count:c.querySelectorAll('.lodge-item').length};
+    });
+    css();
+    var out=document.createElement('div'); out.id='nr-regions';
+    var html='', used={};
+    GROUPS.forEach(function(g){
+      var items=g[1].filter(function(n){return byName[n];});
+      if(!items.length) return;
+      html+='<section><h3 class="rc-g">'+esc(g[0])+'</h3><div class="rc-grid">';
+      items.forEach(function(n){ used[n]=1; var r=byName[n];
+        html+='<a class="rc-card" data-n="'+esc(n)+'" href="/'+(SLUG[n]||n.toLowerCase().replace(/[^a-z]+/g,'-'))+'-accommodation/" style="background-image:'+esc(r.bg).replace(/&quot;/g,"'")+'"><span class="rc-ph"></span>'+
+          '<span class="rc-in"><span><h4>'+esc(n)+'</h4><small>'+r.count+' lodge'+(r.count===1?'':'s')+'</small></span><span class="rc-go">View →</span></span></a>'; });
+      html+='</div></section>';
+    });
+    var rest=Object.keys(byName).filter(function(n){return !used[n];});
+    if(rest.length){ html+='<section><h3 class="rc-g">More regions</h3><div class="rc-grid">'+rest.map(function(n){var r=byName[n];
+      return '<a class="rc-card" data-n="'+esc(n)+'" href="/'+(SLUG[n]||n.toLowerCase().replace(/[^a-z]+/g,'-'))+'-accommodation/" style="background-image:'+esc(r.bg).replace(/&quot;/g,"'")+'"><span class="rc-ph"></span><span class="rc-in"><span><h4>'+esc(n)+'</h4><small>'+r.count+' lodges</small></span><span class="rc-go">View →</span></span></a>';}).join('')+'</div></section>'; }
+    out.innerHTML=html;
+    wrap.insertBefore(out,wrap.firstChild);
+    // Keep the existing region / lodge search working: mirror what filterRegions() does to the hidden cards.
+    function mirror(){ [].forEach.call(out.querySelectorAll('.rc-card'),function(a){ var r=byName[a.getAttribute('data-n')]; a.style.display=(r&&r.card.style.display==='none')?'none':''; });
+      [].forEach.call(out.querySelectorAll('section'),function(s){ s.style.display=[].some.call(s.querySelectorAll('.rc-card'),function(a){return a.style.display!=='none';})?'':'none'; }); }
+    ['region-search','lodge-search'].forEach(function(id){ var i=document.getElementById(id); if(i) i.addEventListener('keyup',function(){ setTimeout(mirror,0); }); });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',build); else build();
+})();
