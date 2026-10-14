@@ -9,7 +9,7 @@
   // ---- Sandbox badge (shows on any host that is not namibiarates.com) ----
   try{ if(!/(^|\.)namibiarates\.com$/.test(location.hostname) && !document.getElementById('nr-sandbox')){
     var sb=document.createElement('div'); sb.id='nr-sandbox'; sb.textContent='SANDBOX COPY · not the live site';
-    sb.style.cssText='position:fixed;left:12px;bottom:12px;z-index:2147483647;background:#B89A6A;color:#fff;font:600 11px/1 Jost,system-ui,sans-serif;letter-spacing:.16em;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none';
+    sb.style.cssText='position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:2147483647;background:#B89A6A;color:#fff;font:600 11px/1 Jost,system-ui,sans-serif;letter-spacing:.16em;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none';
     (document.body||document.documentElement).appendChild(sb);
   }}catch(e){}
 
