@@ -9,7 +9,7 @@
   // ---- Sandbox badge (shows on any host that is not namibiarates.com) ----
   try{ if(!/(^|\.)namibiarates\.com$/.test(location.hostname) && !document.getElementById('nr-sandbox')){
     var sb=document.createElement('div'); sb.id='nr-sandbox'; sb.textContent='SANDBOX COPY · not the live site';
-    sb.style.cssText='position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:2147483647;background:#B89A6A;color:#fff;font:600 11px/1 Jost,system-ui,sans-serif;letter-spacing:.16em;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none';
+    sb.style.cssText='position:fixed;left:12px;bottom:12px;z-index:2147483647;background:#B89A6A;color:#fff;font:600 11px/1 Jost,system-ui,sans-serif;letter-spacing:.16em;padding:8px 14px;border-radius:999px;box-shadow:0 4px 14px rgba(0,0,0,.25);pointer-events:none';
     (document.body||document.documentElement).appendChild(sb);
   }}catch(e){}
 
@@ -76,9 +76,10 @@
     Promise.all([
       fetch('/assets/rates-index.json').then(function(r){return r.json();}),
       fetch('/assets/lodges-info.json').then(function(r){return r.json();}).catch(function(){return {};}),
-      fetch('/assets/nightsbridge.json').then(function(r){return r.json();}).catch(function(){return {};})
+      fetch('/assets/nightsbridge.json').then(function(r){return r.json();}).catch(function(){return {};}),
+      fetch('/assets/route-coords.json').then(function(r){return r.json();}).catch(function(){return {};})
     ]).then(function(res){
-      var idx=res[0], info=res[1], nb=res[2];
+      var idx=res[0], info=res[1], nb=res[2]; COORDS=res[3]||{};
       var byName={}; Object.keys(info||{}).forEach(function(k){ var v=info[k]; if(v&&v.name) byName[norm(v.name)]=v; });
       var nbBy={}; Object.keys(nb||{}).forEach(function(k){ var v=nb[k]; if(v&&v.nb){ nbBy[norm(k)]=v.nb; if(v.name) nbBy[norm(v.name)]=v.nb; } });
       var seen={};
@@ -88,8 +89,11 @@
         var i=byName[key]||{};
         var img=(i.imgs&&i.imgs[0])||'';
         DATA.lodges.push({ n:l.name, r:reg, a:fromPrice(l.rack_2026), b:fromPrice(l.rack_2027),
-          nb:nbBy[key]||null, img:img, url:i.url||'', lead:i.lead||'' });
+          nb:nbBy[key]||null, img:img, url:i.url||'', lead:i.lead||'', ll:COORDS[key]||null });
       });
+      // Region centre = average of that region's mapped lodges (only lodges with confirmed pins).
+      var acc={}; DATA.lodges.forEach(function(l){ if(!l.ll) return; var a=acc[l.r]||(acc[l.r]=[0,0,0]); a[0]+=l.ll[0]; a[1]+=l.ll[1]; a[2]++; });
+      Object.keys(acc).forEach(function(r){ var a=acc[r]; CENTRE[r]=[a[0]/a[2], a[1]/a[2]]; });
       DATA.ready=true;
       S.route=S.route.filter(function(s){ return lodge(s.l); });
       render();
@@ -122,6 +126,77 @@
     if(st==='loading'||st==='idle') return '<span class="rp-av ld"><i></i>Checking…</span>';
     if(st==='nodate') return '<span class="rp-av"><i></i>Live availability</span>';
     return '';
+  }
+
+  // ---- Map (Leaflet + Esri terrain/satellite, same as the region pages) ----
+  var COORDS={}, CENTRE={}, MAP=null, LAYER=null, LMARK={};
+  function ensureLeaflet(cb){
+    if(window.L&&window.L.map) return cb();
+    if(!document.getElementById('rp-leaflet-css')){ var c=document.createElement('link'); c.id='rp-leaflet-css'; c.rel='stylesheet'; c.href='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css'; document.head.appendChild(c); }
+    var s=document.getElementById('rp-leaflet-js');
+    if(!s){ s=document.createElement('script'); s.id='rp-leaflet-js'; s.src='https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js'; document.head.appendChild(s); }
+    s.addEventListener('load',cb);
+  }
+  function mapCss(){
+    if(document.getElementById('rp-map-css')) return;
+    var st=document.createElement('style'); st.id='rp-map-css';
+    st.textContent='#nr-route{scroll-margin-top:90px}.rp-side{position:sticky;top:96px;display:flex;flex-direction:column;gap:14px}#rp-sum{position:static!important}'+
+      '.rp-mapcard{background:#fff;border:1px solid rgba(47,84,80,.14);border-radius:18px;overflow:hidden;isolation:isolate;-webkit-mask-image:-webkit-radial-gradient(white,black);transform:translateZ(0)}'+
+      '#rp-map{height:270px;background:#e8e1d3}'+
+      '.rp-maphint{display:flex;justify-content:space-between;gap:8px;padding:8px 12px;font-size:.74rem;color:#6c7f7b;border-top:1px solid rgba(47,84,80,.1)}'+
+      '.rp-pin{width:26px;height:26px;border-radius:50%;background:#B89A6A;color:#fff;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.35);display:grid;place-items:center;font:600 12px/1 Cinzel,serif}'+
+      '.rp-pin.start{background:#2F5450}'+
+      '.rp-rpin{background:rgba(255,255,255,.95);color:#2F5450;border:1.5px solid #87a996;border-radius:999px;padding:3px 9px;font:500 11px/1.2 Jost,sans-serif;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.2);cursor:pointer;transform:translate(-50%,-50%);display:inline-block}'+
+      '.rp-rpin.on{background:#B89A6A;border-color:#B89A6A;color:#fff}.rp-rpin.dim{opacity:.55}'+
+      '.rp-ldot{width:12px;height:12px;border-radius:50%;background:#87a996;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35);transition:transform .15s}'+
+      '.rp-ldot.hot{transform:scale(1.7);background:#B89A6A}'+
+      '.rp-lc.hot{box-shadow:0 0 0 2px #B89A6A}'+
+      '@media (max-width:980px){.rp-side{position:static;order:-1}#rp-map{height:220px}}';
+    document.head.appendChild(st);
+  }
+  function buildSide(){
+    var sum=$('rp-sum'); if(!sum||document.querySelector('.rp-side')) return;
+    var side=document.createElement('div'); side.className='rp-side';
+    sum.parentNode.insertBefore(side,sum);
+    var card=document.createElement('div'); card.className='rp-mapcard';
+    card.innerHTML='<div id="rp-map" role="img" aria-label="Map of your route"></div><div class="rp-maphint"><span>Gold: your stops · Green: where you can go next</span><span>Tap a place to pick it</span></div>';
+    side.appendChild(card); side.appendChild(sum);
+  }
+  function icon(html,cls,size){ return L.divIcon({html:html,className:'',iconSize:size||null,iconAnchor:size?[size[0]/2,size[1]/2]:null}); }
+  function drawMap(){
+    if(!DATA.ready||!$('rp-map')) return;
+    ensureLeaflet(function(){
+      if(!MAP){
+        MAP=L.map('rp-map',{scrollWheelZoom:false,zoomControl:true,attributionControl:true});
+        var topo=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}',{maxZoom:17,attribution:'Tiles &copy; Esri'});
+        var sat=L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom:17,attribution:'Tiles &copy; Esri'});
+        topo.addTo(MAP); L.control.layers({'Terrain':topo,'Satellite':sat},null,{position:'topright'}).addTo(MAP);
+        LAYER=L.layerGroup().addTo(MAP);
+        MAP.setView([-22.6,17.1],5);
+      }
+      LAYER.clearLayers(); LMARK={};
+      var pts=[], line=[];
+      var w=CENTRE['Windhoek']; if(w){ line.push(w); pts.push(w); L.marker(w,{icon:icon('<div class="rp-pin start">W</div>','',[26,26]),title:'Windhoek',zIndexOffset:900}).addTo(LAYER); }
+      S.route.forEach(function(s,i){ var l=lodge(s.l); if(!l) return; var p=l.ll||CENTRE[l.r]; if(!p) return; line.push(p); pts.push(p);
+        L.marker(p,{icon:icon('<div class="rp-pin">'+(i+1)+'</div>','',[26,26]),title:l.n+(l.ll?'':' ('+l.r+')'),zIndexOffset:800}).addTo(LAYER); });
+      if(line.length>1) L.polyline(line,{color:'#B89A6A',weight:3,opacity:.9,dashArray:'6 7'}).addTo(LAYER);
+      var from=lastRegion();
+      (NEXT[from]||[]).forEach(function(r){ var c=CENTRE[r]; if(!c) return; pts.push(c);
+        var m=L.marker(c,{icon:L.divIcon({className:'',html:'<span class="rp-rpin'+(S.pick===r?' on':'')+(matches(r)?'':' dim')+'">'+esc(r)+'</span>',iconSize:null}),zIndexOffset:500,keyboard:true,title:'Next stop: '+r});
+        m.on('click',function(){ S.pick=r; renderNext(); var t=$('rp-lodges'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); });
+        m.addTo(LAYER); });
+      if(S.pick){ DATA.lodges.filter(function(x){return x.r===S.pick&&x.ll&&price(x);}).forEach(function(l){ pts.push(l.ll);
+        var m=L.marker(l.ll,{icon:icon('<div class="rp-ldot"></div>','',[12,12]),title:l.n,zIndexOffset:300});
+        m.bindTooltip(esc(l.n)+' · '+fmt(price(l)),{direction:'top',offset:[0,-6]});
+        m.on('click',function(){ var c=document.querySelector('.rp-lc[data-ln="'+CSS.escape(l.n)+'"]'); if(c){ c.scrollIntoView({behavior:'smooth',block:'center'}); hot(l.n,true); setTimeout(function(){hot(l.n,false);},1600);} });
+        m.addTo(LAYER); LMARK[l.n]=m; }); }
+      if(pts.length) MAP.fitBounds(L.latLngBounds(pts).pad(0.2),{maxZoom:9,animate:false});
+      setTimeout(function(){ MAP.invalidateSize(); },60);
+    });
+  }
+  function hot(n,on){
+    var m=LMARK[n]; if(m&&m._icon){ var d=m._icon.querySelector('.rp-ldot'); if(d) d.classList.toggle('hot',on); if(on) m.openTooltip(); else m.closeTooltip(); }
+    var c=document.querySelector('.rp-lc[data-ln="'+CSS.escape(n)+'"]'); if(c) c.classList.toggle('hot',on);
   }
 
   // ---- Render ----
@@ -159,7 +234,7 @@
     opts.forEach(function(r){ var st=regionStats(r);
       h+='<button type="button" class="rp-rc'+(matches(r)?'':' dim')+'" aria-pressed="'+(S.pick===r)+'" data-r="'+esc(r)+'"><span class="rp-rn">'+esc(r)+'</span><span class="rp-tags">'+(STY[r]||[]).map(function(t){return '<span>'+t+'</span>';}).join('')+'</span><span class="rp-meta">'+(st.from?'from <b>'+fmt(st.from)+'</b> · ':'')+st.n+' lodges · '+st.live+' live</span></button>'; });
     h+='</div><div id="rp-lodges"></div>';
-    el.innerHTML=h; renderLodges();
+    el.innerHTML=h; renderLodges(); drawMap();
   }
 
   function renderLodges(){
@@ -176,7 +251,7 @@
     if(S.sort==='live'&&!ci) h+='<p class="rp-muted">Choose an arrival date above to check live availability.</p>';
     h+='<div class="rp-lodgegrid">';
     ls.forEach(function(l){ var p=price(l); var st=availState(l,ciIso,n);
-      h+='<article class="rp-lc"><div class="rp-ph"'+(l.img?' style="background-image:url(\''+esc(l.img)+'\')"':'')+'>'+availBadge(st)+'</div>'+
+      h+='<article class="rp-lc" data-ln="'+esc(l.n)+'"><div class="rp-ph"'+(l.img?' style="background-image:url(\''+esc(l.img)+'\')"':'')+'>'+availBadge(st)+'</div>'+
         '<div class="rp-lb"><h4>'+(l.url?'<a href="'+esc(l.url)+'">'+esc(l.n)+'</a>':esc(l.n))+'</h4>'+
         '<div class="rp-lrow"><div class="rp-price">'+(p?'<b>'+fmt(p)+'</b><small>from, pp sharing / night</small>':'<span class="rp-muted">No '+S.year+' rate yet</span>')+'</div>'+
         '<button type="button" class="rp-add" data-add="'+esc(l.n)+'"'+(p?'':' disabled')+'>Add · 2 nights</button></div></div></article>';
@@ -216,6 +291,8 @@
     var sty=$('rp-styles');
     if(sty){ sty.innerHTML=STYLES.map(function(s){return '<button type="button" class="rp-chip" data-s="'+s+'" aria-pressed="'+(!!S.styles[s])+'">'+s+'</button>';}).join('');
       sty.addEventListener('click',function(e){ var b=e.target.closest('.rp-chip'); if(!b) return; var s=b.dataset.s; S.styles[s]=!S.styles[s]; b.setAttribute('aria-pressed',!!S.styles[s]); render(); }); }
+    mapCss(); buildSide();
+    document.addEventListener('mouseover',function(e){ var c=e.target.closest&&e.target.closest('.rp-lc'); if(c&&c.dataset.ln&&c!==window.__rpHot){ if(window.__rpHot) hot(window.__rpHot.dataset.ln,false); window.__rpHot=c; hot(c.dataset.ln,true);} else if(!c&&window.__rpHot){ hot(window.__rpHot.dataset.ln,false); window.__rpHot=null; } });
     var go=$('rp-go'); if(go) go.addEventListener('click',function(){ var t=$('nr-route'); if(t) t.scrollIntoView({behavior:'smooth',block:'start'}); });
     document.addEventListener('click',function(e){
       var b=e.target.closest('#nr-route button'); if(!b) return;
