@@ -373,6 +373,19 @@
     out.innerHTML=html;
     wrap.insertBefore(out,wrap.firstChild);
     // Keep the existing region / lodge search working: mirror what filterRegions() does to the hidden cards.
+    // Photos: the page swaps each region's placeholder image for its real photo after load, so copy it across whenever it changes.
+    function photos(){ [].forEach.call(out.querySelectorAll('.rc-card'),function(a){ var r=byName[a.getAttribute('data-n')]; if(!r) return;
+      var im=r.card.querySelector('.region-image'); var bg=im?im.style.backgroundImage:'';
+      if(/images\/regions\//.test(bg)) bg=FALLBACK[a.getAttribute('data-n')]||'';   // placeholder file that does not exist
+      if(bg&&a.style.backgroundImage!==bg) a.style.backgroundImage=bg; }); }
+    // Regions whose own photo is missing borrow the first photo of a lodge on that region's page.
+    var FALLBACK={};
+    fetch('/assets/lodges-info.json').then(function(r){return r.json();}).then(function(info){
+      Object.keys(byName).forEach(function(n){ var pre='/'+(SLUG[n]||'')+'-accommodation/';
+        for(var k in info){ var v=info[k]; if(v&&v.url&&v.url.indexOf(pre)===0&&v.imgs&&v.imgs[0]){ FALLBACK[n]='url("'+v.imgs[0]+'")'; break; } } });
+      photos(); }).catch(function(){});
+    photos(); window.addEventListener('load',photos); setTimeout(photos,1500); setTimeout(photos,4000);
+    try{ new MutationObserver(photos).observe(src,{subtree:true,attributes:true,attributeFilter:['style']}); }catch(e){}
     function mirror(){ [].forEach.call(out.querySelectorAll('.rc-card'),function(a){ var r=byName[a.getAttribute('data-n')]; a.style.display=(r&&r.card.style.display==='none')?'none':''; });
       [].forEach.call(out.querySelectorAll('section'),function(s){ s.style.display=[].some.call(s.querySelectorAll('.rc-card'),function(a){return a.style.display!=='none';})?'':'none'; }); }
     ['region-search','lodge-search'].forEach(function(id){ var i=document.getElementById(id); if(i) i.addEventListener('keyup',function(){ setTimeout(mirror,0); }); });
