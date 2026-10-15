@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Safari Trip Agent · African Safari Rates</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: brief bar on top → agent work log → trip board (stops + legs) beside a sticky cost & notes rail */
+:root{
+  --bg:#F2F1EC; --surface:#FFFFFF; --ink:#2F5450; --muted:#6B7F7B; --line:rgba(47,84,80,.14);
+  --gold:#A9834B; --gold-ink:#FFFFFF; --sage:#87A996; --sage-tint:rgba(135,169,150,.12);
+  --warn:#B4652A; --warn-tint:rgba(180,101,42,.10); --ok:#4E8A62;
+  --display:"Cinzel",Georgia,serif; --body:"Jost","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#13201E; --surface:#1B2B29; --ink:#E4E3DB; --muted:#9FB0AA; --line:rgba(228,227,219,.12);
+  --gold:#C9A46A; --gold-ink:#13201E; --sage:#8FB5A0; --sage-tint:rgba(143,181,160,.12);
+  --warn:#E09A5F; --warn-tint:rgba(224,154,95,.12); --ok:#7BC08F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13201E; --surface:#1B2B29; --ink:#E4E3DB; --muted:#9FB0AA; --line:rgba(228,227,219,.12);
+  --gold:#C9A46A; --gold-ink:#13201E; --sage:#8FB5A0; --sage-tint:rgba(143,181,160,.12);
+  --warn:#E09A5F; --warn-tint:rgba(224,154,95,.12); --ok:#7BC08F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 48px}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto}
+.proto{display:flex;justify-content:center;padding-block:10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+header.brand{display:flex;align-items:baseline;gap:16px;flex-wrap:wrap;padding-block:18px 8px}
+header.brand h1{font-family:var(--display);font-weight:400;font-size:clamp(1.5rem,3vw,2.1rem);letter-spacing:.06em;margin:0}
+header.brand span{color:var(--muted);font-size:13px;letter-spacing:.2em;text-transform:uppercase}
+
+/* brief */
+.brief{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:12px}
+.brief label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.brief textarea{width:100%;min-height:64px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;background:transparent;color:var(--ink);font:inherit;font-size:16px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);border-radius:999px;padding:5px 12px;font-size:13px;background:var(--sage-tint)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:0;border-radius:999px;padding:10px 20px;background:var(--gold);color:var(--gold-ink);font-weight:500;letter-spacing:.04em}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.btn.small{padding:6px 14px;font-size:13px}
+.hint{font-size:13px;color:var(--muted)}
+
+/* work log */
+.log{margin-top:18px;border-left:2px solid var(--sage);padding-left:16px;display:grid;gap:6px}
+.log h2,.rail h2,.board h2{font-family:var(--display);font-weight:400;font-size:1.1rem;letter-spacing:.05em;margin:0 0 6px}
+.log li{list-style:none;display:flex;gap:10px;align-items:flex-start;font-size:14px}
+.log ul{margin:0;padding:0;display:grid;gap:6px}
+.dot{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:11px;margin-top:2px;background:var(--sage);color:var(--surface)}
+.dot.w{background:var(--warn)}
+.dot.spin{background:transparent;border:2px solid var(--sage);border-top-color:transparent;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.dot.spin{animation:none}}
+
+/* main grid */
+.main{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;margin-top:26px;align-items:start}
+@media (max-width:900px){.main{grid-template-columns:minmax(0,1fr)}}
+.stop{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px}
+.stop-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage)}
+.stop h3{font-family:var(--display);font-weight:400;font-size:1.25rem;margin:2px 0 0}
+.meta{font-size:13px;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:12px;font-weight:500}
+.pill.ok{background:var(--sage-tint);color:var(--ok)}
+.pill.warn{background:var(--warn-tint);color:var(--warn)}
+.nights{display:flex;align-items:center;gap:6px}
+.nights button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent}
+.nights b{min-width:62px;text-align:center;font-weight:500;font-variant-numeric:tabular-nums}
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px}
+.act{display:flex;justify-content:space-between;gap:10px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:14px}
+.act.inc{background:var(--sage-tint);border-color:transparent}
+.act .tag{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.act.inc .tag{color:var(--ok)}
+.act button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:3px 10px;font-size:12px;white-space:nowrap}
+.act button.on{background:var(--gold);border-color:var(--gold);color:var(--gold-ink)}
+.pick{font-size:11px;color:var(--gold);letter-spacing:.06em}
+.leg{display:flex;gap:10px;align-items:center;padding:10px 4px 10px 22px;font-size:13px;color:var(--muted);position:relative}
+.leg::before{content:"";position:absolute;left:10px;top:0;bottom:0;border-left:2px dashed var(--line)}
+.leg.long{color:var(--warn)}
+.stops{display:grid;gap:0}
+.board-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.stop-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;font-size:13px}
+.price{font-variant-numeric:tabular-nums;font-weight:500}
+
+/* rail */
+.rail{position:sticky;top:max(12px,env(safe-area-inset-top,0px));display:grid;gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px}
+.total{font-family:var(--display);font-size:2rem;font-variant-numeric:tabular-nums;margin:2px 0}
+.lines{display:grid;gap:4px;margin-top:10px;font-size:13px}
+.lines div{display:flex;justify-content:space-between;gap:10px}
+.lines .sub{color:var(--muted)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:transparent;padding:4px 12px;font-size:12px}
+.seg button.on{background:var(--ink);color:var(--surface)}
+.bar{height:6px;border-radius:999px;background:var(--line);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--ok)}
+.bar.over i{background:var(--warn)}
+.note{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:14px;display:grid;gap:8px}
+.note:first-of-type{border-top:0;margin-top:0;padding-top:0}
+.note.warn p::before{content:"● ";color:var(--warn)}
+.note.done p::before{content:"● ";color:var(--ok)}
+.note p{margin:0}
+
+/* request sheet */
+.sheet{position:fixed;inset:0;background:rgba(10,20,18,.55);display:grid;place-items:end center;z-index:10;padding:16px}
+.sheet>div{background:var(--surface);color:var(--ink);border-radius:18px;max-width:560px;width:100%;padding:22px;display:grid;gap:12px;max-height:90vh;overflow:auto;margin-bottom:env(safe-area-inset-bottom,0px)}
+.sheet h2{font-family:var(--display);font-weight:400;margin:0}
+.sheet input{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:transparent;color:var(--ink);font:inherit;font-size:16px}
+.sum{font-size:13px;color:var(--muted);display:grid;gap:3px}
+</style>
+</head>
+<body>
+
+
+<div class="wrap">
+  <div class="proto">Prototype · sample lodges, prices and availability · <a href="/" style="color:inherit">Back to African Safari Rates</a></div>
+  <header class="brand"><h1>African Safari Rates</h1><span>Trip agent</span></header>
+
+  <section class="brief" aria-labelledby="bl">
+    <label id="bl" for="brief">Describe your trip</label>
+    <textarea id="brief">Two of us, 9 nights from 3 June 2027, self-drive. We love big landscapes and want some wildlife. Around €5,000 for everything on the ground.</textarea>
+    <div class="chips" id="chips"></div>
+    <div class="row">
+      <button class="btn" id="go">Plan my trip</button>
+      <span class="hint">The agent builds the route, checks availability, adds activities and costs it.</span>
+    </div>
+  </section>
+
+  <section class="log" id="log" hidden><h2>What the agent did</h2><ul id="logList"></ul></section>
+
+  <div class="main" id="main" hidden>
+    <section class="board">
+      <div class="board-head"><h2>Your trip</h2><span class="hint" id="dates"></span></div>
+      <div class="stops" id="stops"></div>
+    </section>
+    <aside class="rail">
+      <div class="card">
+        <div class="row" style="justify-content:space-between">
+          <span class="eyebrow">Trip total · 2 adults</span>
+          <div class="seg" id="cur"></div>
+        </div>
+        <div class="total" id="total"></div>
+        <div class="hint" id="budget"></div>
+        <div class="bar" id="bar"><i></i></div>
+        <div class="lines" id="lines"></div>
+        <div class="lines" style="margin-top:12px">
+          <div class="sub"><span>Paid locally (fuel, park fees)</span><span id="local"></span></div>
+        </div>
+        <div class="row" style="margin-top:14px"><button class="btn" id="req" style="width:100%">Request this trip</button></div>
+      </div>
+      <div class="card"><h2>Agent notes</h2><div id="notes"></div></div>
+    </aside>
+  </div>
+</div>
+
+<div class="sheet" id="sheet" hidden><div id="sheetBody"></div></div>
+
+<script>
+const CUR={EUR:{s:'€',r:1},GBP:{s:'£',r:.86},USD:{s:'$',r:1.08}};
+let cur='EUR';
+const BUDGET=5000, START=new Date(2027,5,3);
+const ALT={sos:{lodge:'Hoodia Desert Lodge',basis:'Dinner, bed & breakfast',pp:330,avail:true,
+  inc:[],extras:[{n:'Guided Sossusvlei excursion',p:110,on:true,pick:true}]},
+  eto:{lodge:'Okaukuejo Camp',basis:'Bed & breakfast',pp:120,avail:true,inc:[],extras:[{n:'Etosha game drive (open vehicle)',p:85,on:true}]}};
+let stops=[
+ {id:'whk',area:'Windhoek',lodge:'The Weinberg',basis:'Bed & breakfast',nights:1,pp:95,avail:true,inc:[],extras:[]},
+ {id:'sos',area:'Sossusvlei',lodge:'Kulala Desert Lodge',basis:'All inclusive',nights:2,pp:420,avail:false,
+  inc:['Guided Sossusvlei excursion incl. park fees','Own gate into the park, in ahead of the crowds'],extras:[{n:'Hot-air balloon',p:520}]},
+ {id:'swk',area:'Swakopmund',lodge:'Strand Hotel Swakopmund',basis:'Bed & breakfast',nights:2,pp:140,avail:true,inc:[],
+  extras:[{n:'Sandwich Harbour 4x4 + marine cruise',p:190,pick:true},{n:'Desert living tour',p:75}]},
+ {id:'dam',area:'Damaraland',lodge:'Mowani Mountain Camp',basis:'Dinner, bed & breakfast',nights:2,pp:260,avail:true,
+  inc:['Desert-adapted elephant excursion','Twyfelfontein visit'],extras:[]},
+ {id:'eto',area:'Etosha',lodge:'Etosha Oberland Lodge',basis:'Dinner, bed & breakfast',nights:2,pp:170,avail:true,inc:[],
+  extras:[{n:'Etosha game drive (open vehicle)',p:85,pick:true}]}
+];
+const LEGS={'whk>sos':'≈ 5h 00m','sos>swk':'≈ 5h 10m','swk>dam':'≈ 4h 40m','dam>eto':'≈ 4h 30m','eto>end':'≈ 5h 00m back to Windhoek'};
+const VEH={n:'Toyota 4x4 double cab, full insurance',pd:95};
+let notes=[], orig={};
+const $=s=>document.querySelector(s);
+const money=v=>CUR[cur].s+Math.round(v*CUR[cur].r).toLocaleString('en-GB');
+const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+
+$('#chips').innerHTML=['2 adults','9 nights','3 Jun 2027','Self-drive','Landscape + wildlife','≈ €5,000'].map(c=>`<span class="chip">${c}</span>`).join('');
+
+function totals(){
+  let acc=0,act=0,n=0;
+  stops.forEach(s=>{acc+=s.pp*s.nights*2;n+=s.nights;s.extras.forEach(e=>{if(e.on)act+=e.p*2})});
+  const veh=VEH.pd*(n+1);
+  return {acc,act,veh,n,all:acc+act+veh};
+}
+function render(){
+  const t=totals();
+  let d=new Date(START);
+  const end=new Date(START);end.setDate(end.getDate()+t.n);
+  $('#dates').textContent=`${fmt(START)} – ${fmt(end)} 2027 · ${t.n} nights`;
+  $('#stops').innerHTML=stops.map((s,i)=>{
+    const din=new Date(d);d.setDate(d.getDate()+s.nights);const dout=new Date(d);
+    const next=stops[i+1]?stops[i+1].id:'end', leg=LEGS[s.id+'>'+next];
+    const longLeg=leg&&parseInt(leg.replace('≈ ',''))>=5;
+    const inc=s.inc.map(a=>`<div class="act inc"><span>${a}</span><span class="tag">Included</span></div>`).join('');
+    const ex=s.extras.map((e,j)=>`<div class="act"><span>${e.n}${e.pick?'<br><span class="pick">DESERT TRACKS PICK</span>':''}</span>
+      <button data-s="${i}" data-e="${j}" class="${e.on?'on':''}" aria-pressed="${!!e.on}">${e.on?'Added':'+ '+money(e.p)+' pp'}</button></div>`).join('');
+    return `<article class="stop">
+      <div class="stop-top"><div><div class="eyebrow">${s.area} · ${fmt(din)} – ${fmt(dout)}</div><h3>${s.lodge}</h3>
+        <div class="meta">${s.basis} · ${money(s.pp)} pp per night</div></div>
+        <div style="display:grid;gap:8px;justify-items:end">
+          <span class="pill ${s.avail?'ok':'warn'}">${s.avail?'✓ Available':'✕ Full on these dates'}</span>
+          <div class="nights"><button data-n="${i}" data-d="-1" aria-label="One night less">−</button><b>${s.nights} night${s.nights>1?'s':''}</b><button data-n="${i}" data-d="1" aria-label="One night more">+</button></div>
+        </div></div>
+      ${(inc||ex)?`<div class="acts">${inc}${ex}</div>`:''}
+      <div class="stop-foot"><span class="hint">${s.inc.length?s.inc.length+' activit'+(s.inc.length>1?'ies':'y')+' already in the rate':'Activities paid separately'}</span>
+        <span class="price">${money(s.pp*s.nights*2)} for 2</span></div>
+    </article>${leg?`<div class="leg ${longLeg?'long':''}">🚙 ${leg} drive${longLeg?' · long day, leave early':''}</div>`:''}`;
+  }).join('');
+  $('#cur').innerHTML=Object.keys(CUR).map(c=>`<button class="${c===cur?'on':''}" data-c="${c}">${c}</button>`).join('');
+  $('#total').textContent=money(t.all);
+  const over=t.all-BUDGET;
+  $('#budget').textContent=over>0?`${money(over)} over your ${money(BUDGET)} budget`:`${money(-over)} under your ${money(BUDGET)} budget`;
+  $('#bar').className='bar'+(over>0?' over':'');$('#bar i').style.width=Math.min(100,t.all/BUDGET*100)+'%';
+  $('#lines').innerHTML=`<div><span>Lodges (${t.n} nights)</span><span>${money(t.acc)}</span></div>
+    <div><span>Activities you added</span><span>${money(t.act)}</span></div>
+    <div><span>${VEH.n}</span><span>${money(t.veh)}</span></div>`;
+  $('#local').textContent='≈ '+money(420);
+  $('#notes').innerHTML=notes.map((n,i)=>`<div class="note ${n.kind}"><p>${n.text}</p>${n.btn?`<div><button class="btn small ghost" data-note="${i}">${n.btn}</button></div>`:''}</div>`).join('')||'<p class="hint">Nothing needs your attention.</p>';
+}
+function buildNotes(){
+  notes=[];
+  const sos=stops.find(s=>s.id==='sos');
+  if(sos.lodge==='Hoodia Desert Lodge')notes.push({kind:'done',text:'Kulala Desert Lodge is full on 4–6 Jun, so I put in Hoodia Desert Lodge at a similar standard and added its Sossusvlei excursion.',btn:'Keep Kulala and wait for space',act:()=>restore('sos')});
+  else notes.push({kind:'warn',text:'Kulala Desert Lodge is still full on 4–6 Jun. I will tell you if space opens; Hoodia Desert Lodge has space now.',btn:'Use Hoodia instead',act:()=>swap('sos')});
+  const t=totals();
+  if(t.all>BUDGET&&stops.find(s=>s.id==='eto').lodge!=='Okaukuejo Camp')notes.push({kind:'warn',text:`The trip is ${money(t.all-BUDGET)} over budget. Staying inside the park at Okaukuejo Camp brings it closer.`,btn:'Show the cheaper version',act:()=>swap('eto')});
+  else if(t.all>BUDGET)notes.push({kind:'warn',text:`Still ${money(t.all-BUDGET)} over. Dropping an activity or a night would close the gap.`});
+  if(stops.find(s=>s.id==='eto').lodge==='Okaukuejo Camp')notes.push({kind:'done',text:'Etosha is now Okaukuejo Camp, inside the park near its floodlit waterhole.',btn:'Undo',act:()=>restore('eto')});
+  const sw=stops.find(s=>s.id==='swk');
+  if(sw.extras[0].on)notes.push({kind:'done',text:'Added Sandwich Harbour, one of our favourite days in Namibia.',btn:'Remove',act:()=>{sw.extras[0].on=false;buildNotes();render()}});
+}
+function swap(id){const s=stops.find(x=>x.id===id);orig[id]=orig[id]||JSON.parse(JSON.stringify(s));Object.assign(s,JSON.parse(JSON.stringify(ALT[id])));buildNotes();render()}
+function restore(id){const i=stops.findIndex(x=>x.id===id);stops[i]=orig[id];delete orig[id];buildNotes();render()}
+
+document.addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.c){cur=b.dataset.c;render()}
+  else if(b.dataset.e!==undefined){const x=stops[b.dataset.s].extras[b.dataset.e];x.on=!x.on;buildNotes();render()}
+  else if(b.dataset.n!==undefined){const s=stops[b.dataset.n];s.nights=Math.max(1,s.nights+(+b.dataset.d));buildNotes();render()}
+  else if(b.dataset.note!==undefined){notes[b.dataset.note].act()}
+});
+
+const STEPS=[
+ ['Read your brief: 2 adults, 9 nights from 3 Jun 2027, self-drive, landscape and wildlife, about €5,000'],
+ ['Drew a route from Windhoek: Sossusvlei, Swakopmund, Damaraland, Etosha'],
+ ['Checked live availability at 5 lodges'],
+ ['Kulala Desert Lodge is full on 4–6 Jun, so placed Hoodia Desert Lodge','w'],
+ ['Matched activities: 4 included in lodge rates, 5 optional, 1 of our picks added'],
+ ['Checked driving: longest day about 5 hours, no driving after dark'],
+ ['Added a 4x4 with full insurance and costed everything']];
+function plan(){
+  stops.forEach(s=>s.extras.forEach(e=>e.on=false));
+  $('#log').hidden=false;$('#main').hidden=true;$('#logList').innerHTML='';
+  const fast=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let i=0;
+  (function step(){
+    const ul=$('#logList');
+    if(ul.lastElementChild){const d=ul.lastElementChild.querySelector('.dot');d.className='dot'+(STEPS[i-1][1]?' w':'');d.textContent=STEPS[i-1][1]?'!':'✓'}
+    if(i===STEPS.length){finish();return}
+    ul.insertAdjacentHTML('beforeend',`<li><span class="dot spin"></span><span>${STEPS[i][0]}</span></li>`);
+    i++;setTimeout(step,fast?0:520);
+  })();
+}
+function finish(){
+  const sos=stops.find(s=>s.id==='sos');
+  if(sos.lodge==='Kulala Desert Lodge')swap('sos');
+  stops.find(s=>s.id==='swk').extras[0].on=true;
+  buildNotes();render();$('#main').hidden=false;
+}
+$('#go').onclick=plan;
+
+$('#req').onclick=()=>{
+  const t=totals();
+  $('#sheetBody').innerHTML=`<h2>Request this trip</h2>
+   <div class="sum">${stops.map(s=>`<span>${s.area} · ${s.lodge} · ${s.nights} night${s.nights>1?'s':''}</span>`).join('')}
+   <span>${VEH.n} · ${t.n+1} days</span><strong style="color:var(--ink);margin-top:6px">${money(t.all)} for 2 adults</strong></div>
+   <form id="rf" style="display:grid;gap:10px">
+    <input id="rn" placeholder="Your name" required><input id="re" type="email" placeholder="Email" required>
+    <div class="row"><button class="btn" type="submit">Send to Desert Tracks</button><button class="btn ghost" type="button" id="close">Keep editing</button></div>
+   </form><p class="hint">Nothing is booked yet. A Desert Tracks consultant checks every detail and replies within 24 hours.</p>`;
+  $('#sheet').hidden=false;
+  $('#close').onclick=()=>$('#sheet').hidden=true;
+  $('#rf').onsubmit=ev=>{ev.preventDefault();
+    $('#sheetBody').innerHTML=`<h2>Request ready</h2><p>In the live version this goes to Desert Tracks with the full costed trip, every lodge, activity and the vehicle, ready to confirm.</p>
+     <p class="hint">Prototype: nothing was sent.</p><div><button class="btn" id="close2">Back to the trip</button></div>`;
+    $('#close2').onclick=()=>$('#sheet').hidden=true;};
+};
+plan();
+</script>
+
+</body>
+</html>
