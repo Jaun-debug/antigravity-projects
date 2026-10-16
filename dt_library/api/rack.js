@@ -47292,3 +47292,834 @@ Object.assign(DDS_RACK_BY_YEAR, {
  ]
 };
 })();
+
+// --------------------------------------------------------------------------
+// RATEFIX_161026 — 16 Oct 2026. Mowani Mountain Camp & Mowani Campsite public rack (the old doc was the
+// printed figures x 1.2 under STO/NETT labels); Hoada, Shipwreck, Olive Grove 2026 added and their
+// 2027 rack corrected (net / 0.8, or as printed for Olive Grove); Okonjima Villa 2026 added.
+// Sources: the site copies of the supplier sheets in /ratesheets/. Existing nets are not changed.
+// --------------------------------------------------------------------------
+(function rateFix161026Rack(){
+  var D = {
+ "SHEET_RACK_BY_YEAR|mowani-mountain-camp|2026": {
+  "name": "Mowani Mountain Camp",
+  "region": "Damaraland",
+  "currency": "N$",
+  "validity": "2026",
+  "note": "Published rack rates",
+  "sections": [
+   {
+    "title": "Rack Rate — 01 Jan 2026 to 31 Dec 2026",
+    "rows": [
+     [
+      "8 x View Rooms — DBB p/p Sharing — Low Season RACK",
+      "5,940"
+     ],
+     [
+      "8 x View Rooms — DBB Single Person — Low Season RACK",
+      "8,020"
+     ],
+     [
+      "View Room 2-Night FI Package — Sharing p/p — Low Season RACK",
+      "16,590"
+     ],
+     [
+      "View Room 2-Night FI Package — Single — Low Season RACK",
+      "20,540"
+     ],
+     [
+      "View Room 3-Night FI Package — Sharing p/p — Low Season RACK",
+      "24,180"
+     ],
+     [
+      "View Room 3-Night FI Package — Single — Low Season RACK",
+      "30,180"
+     ],
+     [
+      "4 x Superior View Rooms — DBB p/p Sharing — Low Season RACK",
+      "6,400"
+     ],
+     [
+      "4 x Superior View Rooms — DBB Single Person — Low Season RACK",
+      "8,620"
+     ],
+     [
+      "Superior View 2-Night FI Package — Sharing p/p — Low Season RACK",
+      "17,480"
+     ],
+     [
+      "Superior View 2-Night FI Package — Single — Low Season RACK",
+      "21,720"
+     ],
+     [
+      "Superior View 3-Night FI Package — Sharing p/p — Low Season RACK",
+      "25,500"
+     ],
+     [
+      "Superior View 3-Night FI Package — Single — Low Season RACK",
+      "31,980"
+     ],
+     [
+      "1 x Luxury Room — DBB p/p Sharing — Low Season RACK",
+      "6,690"
+     ],
+     [
+      "1 x Luxury Room — DBB Single Person — Low Season RACK",
+      "9,030"
+     ],
+     [
+      "Luxury Room 2-Night FI Package — Sharing p/p — Low Season RACK",
+      "18,190"
+     ],
+     [
+      "Luxury Room 2-Night FI Package — Single — Low Season RACK",
+      "22,650"
+     ],
+     [
+      "Luxury Room 3-Night FI Package — Sharing p/p — Low Season RACK",
+      "26,550"
+     ],
+     [
+      "Luxury Room 3-Night FI Package — Single — Low Season RACK",
+      "33,330"
+     ],
+     [
+      "1 x Rock Suite (Mini) — DBB p/p Sharing — Low Season RACK",
+      "7,620"
+     ],
+     [
+      "1 x Rock Suite (Mini) — DBB Single Person — Low Season RACK",
+      "10,270"
+     ],
+     [
+      "Rock Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
+      "20,070"
+     ],
+     [
+      "Rock Suite 2-Night FI Package — Single — Low Season RACK",
+      "25,150"
+     ],
+     [
+      "Rock Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
+      "29,340"
+     ],
+     [
+      "Rock Suite 3-Night FI Package — Single — Low Season RACK",
+      "37,080"
+     ],
+     [
+      "1 x Mountain Suite — DBB p/p Sharing — Low Season RACK",
+      "12,600"
+     ],
+     [
+      "1 x Mountain Suite — DBB Single Person — Low Season RACK",
+      "17,130"
+     ],
+     [
+      "Mountain Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
+      "30,030"
+     ],
+     [
+      "Mountain Suite 2-Night FI Package — Single — Low Season RACK",
+      "38,850"
+     ],
+     [
+      "Mountain Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
+      "44,250"
+     ],
+     [
+      "Mountain Suite 3-Night FI Package — Single — Low Season RACK",
+      "57,630"
+     ],
+     [
+      "8 x View Rooms — DBB p/p Sharing — High Season RACK",
+      "7,960"
+     ],
+     [
+      "8 x View Rooms — DBB Single Person — High Season RACK",
+      "10,860"
+     ],
+     [
+      "View Room 2-Night FI Package — Sharing p/p — High Season RACK",
+      "20,610"
+     ],
+     [
+      "View Room 2-Night FI Package — Single — High Season RACK",
+      "26,180"
+     ],
+     [
+      "View Room 3-Night FI Package — Sharing p/p — High Season RACK",
+      "30,180"
+     ],
+     [
+      "View Room 3-Night FI Package — Single — High Season RACK",
+      "38,670"
+     ],
+     [
+      "4 x Superior View Rooms — DBB p/p Sharing — High Season RACK",
+      "8,540"
+     ],
+     [
+      "4 x Superior View Rooms — DBB Single Person — High Season RACK",
+      "11,520"
+     ],
+     [
+      "Superior View 2-Night FI Package — Sharing p/p — High Season RACK",
+      "21,800"
+     ],
+     [
+      "Superior View 2-Night FI Package — Single — High Season RACK",
+      "27,510"
+     ],
+     [
+      "Superior View 3-Night FI Package — Sharing p/p — High Season RACK",
+      "31,980"
+     ],
+     [
+      "Superior View 3-Night FI Package — Single — High Season RACK",
+      "40,680"
+     ],
+     [
+      "1 x Luxury Room — DBB p/p Sharing — High Season RACK",
+      "8,950"
+     ],
+     [
+      "1 x Luxury Room — DBB Single Person — High Season RACK",
+      "12,060"
+     ],
+     [
+      "Luxury Room 2-Night FI Package — Sharing p/p — High Season RACK",
+      "22,720"
+     ],
+     [
+      "Luxury Room 2-Night FI Package — Single — High Season RACK",
+      "28,730"
+     ],
+     [
+      "Luxury Room 3-Night FI Package — Sharing p/p — High Season RACK",
+      "33,300"
+     ],
+     [
+      "Luxury Room 3-Night FI Package — Single — High Season RACK",
+      "42,390"
+     ],
+     [
+      "1 x Rock Suite (Mini) — DBB p/p Sharing — High Season RACK",
+      "9,810"
+     ],
+     [
+      "1 x Rock Suite (Mini) — DBB Single Person — High Season RACK",
+      "13,070"
+     ],
+     [
+      "Rock Suite 2-Night FI Package — Sharing p/p — High Season RACK",
+      "24,420"
+     ],
+     [
+      "Rock Suite 2-Night FI Package — Single — High Season RACK",
+      "30,740"
+     ],
+     [
+      "Rock Suite 3-Night FI Package — Sharing p/p — High Season RACK",
+      "35,880"
+     ],
+     [
+      "Rock Suite 3-Night FI Package — Single — High Season RACK",
+      "45,450"
+     ],
+     [
+      "1 x Mountain Suite — DBB p/p Sharing — High Season RACK",
+      "14,950"
+     ],
+     [
+      "1 x Mountain Suite — DBB Single Person — High Season RACK",
+      "20,170"
+     ],
+     [
+      "Mountain Suite 2-Night FI Package — Sharing p/p — High Season RACK",
+      "34,700"
+     ],
+     [
+      "Mountain Suite 2-Night FI Package — Single — High Season RACK",
+      "44,910"
+     ],
+     [
+      "Mountain Suite 3-Night FI Package — Sharing p/p — High Season RACK",
+      "51,300"
+     ],
+     [
+      "Mountain Suite 3-Night FI Package — Single — High Season RACK",
+      "66,720"
+     ]
+    ]
+   },
+   {
+    "title": "Child Sharing Rates (accommodated in children's tent / camping bed)",
+    "rows": [
+     [
+      "Child (4-12 yrs) — DBB per night — Low Season",
+      "2,610"
+     ],
+     [
+      "Child (4-12 yrs) — 2-Night FI Package — Low Season",
+      "8,190"
+     ],
+     [
+      "Child (4-12 yrs) — 3-Night FI Package — Low Season",
+      "11,190"
+     ],
+     [
+      "Child (4-12 yrs) — DBB per night — High Season",
+      "2,610"
+     ],
+     [
+      "Child (4-12 yrs) — 2-Night FI Package — High Season",
+      "8,190"
+     ],
+     [
+      "Child (4-12 yrs) — 3-Night FI Package — High Season",
+      "11,190"
+     ]
+    ]
+   },
+   {
+    "title": "Guide & Pilot Rates",
+    "rows": [
+     [
+      "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
+      "2,210"
+     ]
+    ]
+   },
+   {
+    "title": "Activities offered at Mowani Mountain Camp",
+    "rows": [
+     [
+      "Nature Drive (guided, Morning) — Price (N$)",
+      "1,360"
+     ],
+     [
+      "Twyfelfontein Excursion (guided, Afternoon) — Price (N$)",
+      "1,110"
+     ],
+     [
+      "Damara Living Museum Entry — Price (N$)",
+      "320"
+     ],
+     [
+      "All-Inclusive Drinks Add-On — Price (N$)",
+      "1,200"
+     ]
+    ]
+   },
+   {
+    "title": "Transfers (Charged pp one-way)",
+    "rows": [
+     [
+      "Twyfelfontein Airstrip Transfer — Price (N$)",
+      "395"
+     ],
+     [
+      "!Doro Nawas Transfer — Price (N$)",
+      "465"
+     ],
+     [
+      "Damaraland Camp Transfer — Price (N$)",
+      "695"
+     ]
+    ]
+   },
+   {
+    "title": "Additional Meals",
+    "rows": [
+     [
+      "Breakfast — Price (N$)",
+      "395"
+     ],
+     [
+      "Lunch — Price (N$)",
+      "375"
+     ],
+     [
+      "Lunch Pack — Price (N$)",
+      "255"
+     ],
+     [
+      "Dinner (3 Course) — Price (N$)",
+      "890"
+     ]
+    ]
+   }
+  ],
+  "source": "Rack as printed on Mowani Mountain Camp's 2026 rate sheet (Rack Rate table, 01 Jan – 31 Dec 2026; = STO15 net / 0.85 on every row). Child, guide & pilot, activities, transfers and meals are printed NETT on the sheet (non-commissionable), so rack = net. Excludes the conservancy levy."
+ },
+ "SHEET_RACK_BY_YEAR|mowani-campsite|2026": {
+  "name": "Mowani Campsite",
+  "region": "Damaraland",
+  "currency": "N$",
+  "validity": "2026",
+  "note": "Published rack rates",
+  "sections": [
+   {
+    "title": "Campsite Rates — 01 Jan 2026 to 31 Dec 2026",
+    "rows": [
+     [
+      "Campsite — Per Adult per night — Rate (N$)",
+      "520"
+     ],
+     [
+      "Campsite — Per Child (3-12 yrs) per night — Rate (N$)",
+      "240"
+     ],
+     [
+      "Campsite — Child under 3 yrs — Rate (N$)",
+      "0"
+     ]
+    ]
+   }
+  ],
+  "source": "The 2026 sheet prints one campsite rate, headed NETT, and no rack; as with the other NETT rows on the Chiwani sheets it is treated as non-commissionable, so the public rate = the printed rate. Self-catering, includes VAT; conservancy levy exempt."
+ },
+ "LEGACY_RACK_BY_YEAR|hoada-campsite|2026": {
+  "name": "Hoada Campsite",
+  "region": "Damaraland",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Rack rates",
+  "sections": [
+   {
+    "title": "2026 — rack",
+    "rows": [
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Individual campsite (max 8 pax) — per person",
+      "322.50"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Group campsite (max 12 pax) — per site",
+      "3,536.25"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Group campsite (max 14 pax) — per site",
+      "3,536.25"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Tented camp, catered (meals incl.) — per person",
+      "1,066.25"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Tented camp, self-catered (meals excl.) — per person",
+      "762.50"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Individual campsite (max 8 pax) — per person",
+      "400"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Group campsite (max 12 pax) — per site",
+      "4,406.25"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Group campsite (max 14 pax) — per site",
+      "4,406.25"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Tented camp, catered (meals incl.) — per person",
+      "1,251.25"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Tented camp, self-catered (meals excl.) — per person",
+      "947.50"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Individual campsite (max 8 pax) — per person",
+      "435"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Group campsite (max 12 pax) — per site",
+      "4,872.50"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Group campsite (max 14 pax) — per site",
+      "4,872.50"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Tented camp, catered (meals incl.) — per person",
+      "1,288.75"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Tented camp, self-catered (meals excl.) — per person",
+      "986.25"
+     ]
+    ]
+   }
+  ],
+  "source": "Public rack derived from the 2026 net STO at the house 20% (net / 0.8). The supplier states no commission and publishes no rack — if they do, it replaces this."
+ },
+ "LEGACY_RACK_BY_YEAR|hoada-campsite|2027": {
+  "name": "Hoada Campsite",
+  "region": "Damaraland",
+  "currency": "N$",
+  "validity": "2027 season",
+  "note": "Rack rates",
+  "sections": [
+   {
+    "title": "2027 — rack",
+    "rows": [
+     [
+      "Green Season (07 Jan – 31 Mar) · Individual campsite — per person",
+      "341.25"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Individual campsite — per person",
+      "425"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Individual campsite — per person",
+      "461.25"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar) · Group campsite — per site",
+      "3,748.75"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Group campsite — per site",
+      "4,671.25"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Group campsite — per site",
+      "5,163.75"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar) · Comfort camping tent (incl) — per person",
+      "1,130"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Comfort camping tent (incl) — per person",
+      "1,326.25"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Comfort camping tent (incl) — per person",
+      "1,366.25"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar) · Comfort camping tent (excl) — per person",
+      "808.75"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Comfort camping tent (excl) — per person",
+      "1,005"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Comfort camping tent (excl) — per person",
+      "1,045"
+     ]
+    ]
+   }
+  ],
+  "source": "Public rack derived from the 2027 net STO at the house 20% (net / 0.8; previously net x 1.2, which understated it). The supplier states no commission and publishes no rack — if they do, it replaces this."
+ },
+ "LEGACY_RACK_BY_YEAR|shipwreck-lodge|2026": {
+  "name": "Shipwreck Lodge",
+  "region": "Skeleton Coast",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Rack rates",
+  "sections": [
+   {
+    "title": "2026 — rack",
+    "rows": [
+     [
+      "Green Season (10 Jan – 31 Mar) · FI — per person sharing",
+      "17,995"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — per person sharing",
+      "22,395"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · FI — per person sharing",
+      "24,095"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — per person sharing",
+      "26,895"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · FI — per person sharing",
+      "30,195"
+     ],
+     [
+      "Green Season (10 Jan – 31 Mar) · FI — single supplement (add to the sharing rate)",
+      "7,200"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — single supplement (add to the sharing rate)",
+      "8,960"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · FI — single supplement (add to the sharing rate)",
+      "9,640"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — single supplement (add to the sharing rate)",
+      "10,760"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · FI — single supplement (add to the sharing rate)",
+      "12,080"
+     ]
+    ]
+   },
+   {
+    "title": "Fees & guides (2026)",
+    "rows": [
+     [
+      "CCR fee — per person per night (mandatory, non-commissionable)",
+      "650"
+     ],
+     [
+      "Pilot / guide — per person per night (non-commissionable)",
+      "3,585"
+     ]
+    ]
+   },
+   {
+    "title": "Private vehicle (2026)",
+    "rows": [
+     [
+      "Private vehicle — per vehicle per night",
+      "on request"
+     ]
+    ]
+   }
+  ],
+  "source": "Public rack derived from the 2026 net at the sheet's 20% (net / 0.8); no rack published. CCR fee and pilot/guide rate are non-commissionable, so shown at net. Private vehicle on request."
+ },
+ "LEGACY_RACK_BY_YEAR|shipwreck-lodge|2027": {
+  "name": "Shipwreck Lodge",
+  "region": "Skeleton Coast",
+  "currency": "N$",
+  "validity": "2027 season",
+  "note": "Rack rates",
+  "sections": [
+   {
+    "title": "2027 — rack",
+    "rows": [
+     [
+      "Green Season (10 Jan – 31 Mar) · FI — per person sharing",
+      "19,075"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — per person sharing",
+      "23,738.75"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · FI — per person sharing",
+      "25,541.25"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — per person sharing",
+      "28,508.75"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · FI — per person sharing",
+      "32,006.25"
+     ],
+     [
+      "Green Season (10 Jan – 31 Mar) · FI — single",
+      "26,706.25"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — single",
+      "33,236.25"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · FI — single",
+      "35,758.75"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — single",
+      "39,913.75"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · FI — single",
+      "44,811.25"
+     ]
+    ]
+   }
+  ],
+  "source": "Public rack derived from the 2027 net at 20% (net / 0.8; previously net x 1.2, which understated it). No rack published — if Natural Selection publishes one, it replaces this."
+ },
+ "LEGACY_RACK_BY_YEAR|olive-grove-guesthouse|2026": {
+  "name": "Olive Grove Guesthouse",
+  "region": "Windhoek",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Published rack rates",
+  "sections": [
+   {
+    "title": "2026 — rack",
+    "rows": [
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+      "1,350"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
+      "1,960"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
+      "2,240"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+      "1,910"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
+      "2,720"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
+      "3,160"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+      "1,420"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
+      "2,050"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
+      "2,340"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Classic Room — single",
+      "1,980"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Room — single",
+      "2,800"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
+      "3,280"
+     ]
+    ]
+   }
+  ],
+  "source": "Rack as printed on the Olive Grove sheet (/ratesheets/olive_grove_guesthouse.html, 2026 rates, B&B incl. VAT & tourism levies). STO carries a built-in 20% agent commission."
+ },
+ "LEGACY_RACK_BY_YEAR|olive-grove-guesthouse|2027": {
+  "name": "Olive Grove Guesthouse",
+  "region": "Windhoek",
+  "currency": "N$",
+  "validity": "2027 season",
+  "note": "Published rack rates",
+  "sections": [
+   {
+    "title": "2027 — rack",
+    "rows": [
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+      "1,510"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
+      "2,130"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
+      "2,420"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+      "2,130"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
+      "2,950"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
+      "3,410"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+      "1,630"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
+      "2,270"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
+      "2,550"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Classic Room — single",
+      "2,270"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Room — single",
+      "3,080"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
+      "3,575"
+     ]
+    ]
+   }
+  ],
+  "source": "Rack as printed on the Olive Grove sheet (/ratesheets/olive_grove_guesthouse.html, 2027 rates, B&B incl. VAT & tourism levies). STO carries a built-in 20% agent commission."
+ },
+ "DDS_RACK_BY_YEAR|okonjima-villa|2026": {
+  "name": "Okonjima Villa",
+  "region": "Central Namibia",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Rack rates",
+  "sections": [
+   {
+    "title": "2026 — rack",
+    "rows": [
+     [
+      "Low Season (01 Jan – 30 Jun 2026) · African Villa (non-exclusive, 2–6 pax) FI — per adult",
+      "16,000"
+     ],
+     [
+      "High Season (01 Jul – 31 Dec 2026) · African Villa (non-exclusive, 2–6 pax) FI — per adult",
+      "17,600"
+     ],
+     [
+      "African Villa exclusive use (2–8 pax)",
+      "on request"
+     ]
+    ]
+   },
+   {
+    "title": "Levy & guides (2026)",
+    "rows": [
+     [
+      "Park levy — per person per night, adults 14+ (non-commissionable)",
+      "350"
+     ],
+     [
+      "Guide / pilot DBB — at tour-guide accommodation (non-commissionable)",
+      "1,200"
+     ]
+    ]
+   }
+  ],
+  "source": "Public rack derived from the 2026 net STO 20% (net / 0.8); the sheet publishes no rack. Park levy and guide rate are non-commissionable, so shown at net."
+ }
+};
+  var MAPS = {'DDS_RACK_BY_YEAR': (typeof DDS_RACK_BY_YEAR === 'undefined' ? null : DDS_RACK_BY_YEAR), 'LEGACY_RACK_BY_YEAR': (typeof LEGACY_RACK_BY_YEAR === 'undefined' ? null : LEGACY_RACK_BY_YEAR), 'SHEET_RACK_BY_YEAR': (typeof SHEET_RACK_BY_YEAR === 'undefined' ? null : SHEET_RACK_BY_YEAR)};
+  Object.keys(D).forEach(function (k) {
+    var p = k.split('|'), m = MAPS[p[0]]; if (!m) return;
+    var e = m[p[1]] || (m[p[1]] = {}); e[p[2]] = D[k];
+  });
+})();

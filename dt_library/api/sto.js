@@ -47612,3 +47612,307 @@ Object.assign(DDS_STO_BY_YEAR, {
     Object.keys(N[slug]).forEach(function (y) { if (e[y]) e[y].sections = N[slug][y]; });
   });
 })();
+
+// --------------------------------------------------------------------------
+// RATEFIX_161026 — 16 Oct 2026. Mowani Mountain Camp & Mowani Campsite public rack (the old doc was the
+// printed figures x 1.2 under STO/NETT labels); Hoada, Shipwreck, Olive Grove 2026 added and their
+// 2027 rack corrected (net / 0.8, or as printed for Olive Grove); Okonjima Villa 2026 added.
+// Sources: the site copies of the supplier sheets in /ratesheets/. Existing nets are not changed.
+// --------------------------------------------------------------------------
+(function rateFix161026Sto(){
+  var D = {
+ "LEGACY_STO_BY_YEAR|hoada-campsite|2026": {
+  "name": "Hoada Campsite",
+  "region": "Damaraland",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Net STO rates from the 2026 Hoada Campsite sheet (/ratesheets/hoada_campsite.html, Journeys Namibia). Rates include VAT and local levies. The sheet states no commission.",
+  "sections": [
+   {
+    "title": "2026 — net STO",
+    "rows": [
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Individual campsite (max 8 pax) — per person",
+      "258"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Group campsite (max 12 pax) — per site",
+      "2,829"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Group campsite (max 14 pax) — per site",
+      "2,829"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Tented camp, catered (meals incl.) — per person",
+      "853"
+     ],
+     [
+      "Green Season (07 Jan – 31 Mar 2026) · Tented camp, self-catered (meals excl.) — per person",
+      "610"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Individual campsite (max 8 pax) — per person",
+      "320"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Group campsite (max 12 pax) — per site",
+      "3,525"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Group campsite (max 14 pax) — per site",
+      "3,525"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Tented camp, catered (meals incl.) — per person",
+      "1,001"
+     ],
+     [
+      "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec 2026) · Tented camp, self-catered (meals excl.) — per person",
+      "758"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Individual campsite (max 8 pax) — per person",
+      "348"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Group campsite (max 12 pax) — per site",
+      "3,898"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Group campsite (max 14 pax) — per site",
+      "3,898"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Tented camp, catered (meals incl.) — per person",
+      "1,031"
+     ],
+     [
+      "High Season (01 Jul – 15 Nov & 15 Dec 2026 – 06 Jan 2027) · Tented camp, self-catered (meals excl.) — per person",
+      "789"
+     ]
+    ]
+   },
+   {
+    "title": "Campsite excursions & extras (2026, net STO)",
+    "rows": [
+     [
+      "Morning Damara cultural walk (guided hike) — per person",
+      "359"
+     ],
+     [
+      "Elephant excursion (half-day tracking) — per person",
+      "1,839"
+     ],
+     [
+      "Rhino tracking (min 2-night stay) — per person",
+      "2,202"
+     ],
+     [
+      "Bag of braai wood (bought at check-in)",
+      "154"
+     ]
+    ]
+   }
+  ]
+ },
+ "LEGACY_STO_BY_YEAR|shipwreck-lodge|2026": {
+  "name": "Shipwreck Lodge",
+  "region": "Skeleton Coast",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Net rates from the 2026 Shipwreck Lodge sheet (/ratesheets/shipwreck_lodge.html, Natural Selection, \"Nett 20% Rates · Namibia 2026\"). Fully inclusive. CCR fee is added to every night.",
+  "sections": [
+   {
+    "title": "2026 — net STO",
+    "rows": [
+     [
+      "Green Season (10 Jan – 31 Mar) · FI — per person sharing",
+      "14,396"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — per person sharing",
+      "17,916"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · FI — per person sharing",
+      "19,276"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — per person sharing",
+      "21,516"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · FI — per person sharing",
+      "24,156"
+     ],
+     [
+      "Green Season (10 Jan – 31 Mar) · FI — single supplement (add to the sharing rate)",
+      "5,760"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — single supplement (add to the sharing rate)",
+      "7,168"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · FI — single supplement (add to the sharing rate)",
+      "7,712"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — single supplement (add to the sharing rate)",
+      "8,608"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · FI — single supplement (add to the sharing rate)",
+      "9,664"
+     ]
+    ]
+   },
+   {
+    "title": "Fees & guides (2026)",
+    "rows": [
+     [
+      "CCR fee — per person per night (mandatory, non-commissionable)",
+      "650"
+     ],
+     [
+      "Pilot / guide — per person per night (non-commissionable)",
+      "3,585"
+     ]
+    ]
+   },
+   {
+    "title": "Private vehicle (2026, net)",
+    "rows": [
+     [
+      "Green Season (10 Jan – 31 Mar) · Private vehicle — per vehicle per night",
+      "8,795"
+     ],
+     [
+      "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · Private vehicle — per vehicle per night",
+      "9,875"
+     ],
+     [
+      "High Shoulder Season (01 May – 31 May) · Private vehicle — per vehicle per night",
+      "9,875"
+     ],
+     [
+      "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · Private vehicle — per vehicle per night",
+      "12,095"
+     ],
+     [
+      "Peak Season (01 Jul – 31 Aug) · Private vehicle — per vehicle per night",
+      "12,095"
+     ]
+    ]
+   }
+  ]
+ },
+ "LEGACY_STO_BY_YEAR|olive-grove-guesthouse|2026": {
+  "name": "Olive Grove Guesthouse",
+  "region": "Windhoek",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Net STO rates from the Olive Grove sheet (/ratesheets/olive_grove_guesthouse.html, 2026 rates, B&B incl. VAT & tourism levies; 20% commission built in).",
+  "sections": [
+   {
+    "title": "2026 — net STO",
+    "rows": [
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
+      "1,080"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
+      "1,570"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
+      "1,790"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
+      "1,530"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
+      "2,175"
+     ],
+     [
+      "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
+      "2,530"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
+      "1,135"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
+      "1,640"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
+      "1,870"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Classic Room — single",
+      "1,585"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Room — single",
+      "2,240"
+     ],
+     [
+      "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
+      "2,625"
+     ]
+    ]
+   }
+  ]
+ },
+ "DDS_STO_BY_YEAR|okonjima-villa|2026": {
+  "name": "Okonjima Villa",
+  "region": "Central Namibia",
+  "currency": "N$",
+  "validity": "2026 season",
+  "note": "Net STO 20% from the 2026 Okonjima sheet (/ratesheets/okonjima_ratesheet_v3.html). Fully inclusive. The sheet carries no exclusive-use figure for the villa.",
+  "sections": [
+   {
+    "title": "2026 — net STO",
+    "rows": [
+     [
+      "Low Season (01 Jan – 30 Jun 2026) · African Villa (non-exclusive, 2–6 pax) FI — per adult",
+      "12,800"
+     ],
+     [
+      "High Season (01 Jul – 31 Dec 2026) · African Villa (non-exclusive, 2–6 pax) FI — per adult",
+      "14,080"
+     ],
+     [
+      "African Villa exclusive use (2–8 pax)",
+      "on request"
+     ]
+    ]
+   },
+   {
+    "title": "Levy & guides (2026)",
+    "rows": [
+     [
+      "Park levy — per person per night, adults 14+ (non-commissionable)",
+      "350"
+     ],
+     [
+      "Guide / pilot DBB — at tour-guide accommodation (non-commissionable)",
+      "1,200"
+     ]
+    ]
+   }
+  ]
+ }
+};
+  var MAPS = {'DDS_STO_BY_YEAR': (typeof DDS_STO_BY_YEAR === 'undefined' ? null : DDS_STO_BY_YEAR), 'LEGACY_STO_BY_YEAR': (typeof LEGACY_STO_BY_YEAR === 'undefined' ? null : LEGACY_STO_BY_YEAR)};
+  Object.keys(D).forEach(function (k) {
+    var p = k.split('|'), m = MAPS[p[0]]; if (!m) return;
+    var e = m[p[1]] || (m[p[1]] = {}); e[p[2]] = D[k];
+  });
+})();

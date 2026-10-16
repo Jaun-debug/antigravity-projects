@@ -5700,51 +5700,51 @@
 "rack_2027": [
 {
 "n": "Green Season (07 Jan – 31 Mar) · Individual campsite — per person",
-"p": 327.6
+"p": 341.25
 },
 {
 "n": "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Individual campsite — per person",
-"p": 408
+"p": 425
 },
 {
 "n": "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Individual campsite — per person",
-"p": 442.8
+"p": 461.25
 },
 {
 "n": "Green Season (07 Jan – 31 Mar) · Group campsite — per site",
-"p": 3598.8
+"p": 3748.75
 },
 {
 "n": "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Group campsite — per site",
-"p": 4484.4
+"p": 4671.25
 },
 {
 "n": "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Group campsite — per site",
-"p": 4957.2
+"p": 5163.75
 },
 {
 "n": "Green Season (07 Jan – 31 Mar) · Comfort camping tent (incl) — per person",
-"p": 1084.8
+"p": 1130
 },
 {
 "n": "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Comfort camping tent (incl) — per person",
-"p": 1273.2
+"p": 1326.25
 },
 {
 "n": "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Comfort camping tent (incl) — per person",
-"p": 1311.6
+"p": 1366.25
 },
 {
 "n": "Green Season (07 Jan – 31 Mar) · Comfort camping tent (excl) — per person",
-"p": 776.4
+"p": 808.75
 },
 {
 "n": "Low Season (01 Apr – 30 Jun & 16 Nov – 14 Dec) · Comfort camping tent (excl) — per person",
-"p": 964.8
+"p": 1005
 },
 {
 "n": "High Season (01 Jul – 15 Nov & 15 Dec – 06 Jan) · Comfort camping tent (excl) — per person",
-"p": 1003.2
+"p": 1045
 }
 ],
 "rack_2026": [
@@ -6011,15 +6011,15 @@
 ],
 "rack_2026": [
 {
-"n": "Campsite — Per Adult per night — Nett Price (N$)",
-"p": 624
+"n": "Campsite — Per Adult per night — Rate (N$)",
+"p": 520
 },
 {
-"n": "Campsite — Per Child (3-12 yrs) per night — Nett Price (N$)",
-"p": 288
+"n": "Campsite — Per Child (3-12 yrs) per night — Rate (N$)",
+"p": 240
 },
 {
-"n": "Campsite — Child under 3 yrs — Nett Price (N$)",
+"n": "Campsite — Child under 3 yrs — Rate (N$)",
 "p": 0
 }
 ]
@@ -6584,556 +6584,316 @@
 ],
 "rack_2026": [
 {
-"n": "8 x View Rooms — DBB p/p Sharing — Low Season STO 15%",
-"p": 6058.8
-},
-{
-"n": "8 x View Rooms — DBB Single Person — Low Season STO 15%",
-"p": 8180.4
-},
-{
-"n": "View Room 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 16922.4
-},
-{
-"n": "View Room 2-Night FI Package — Single — Low Season STO 15%",
-"p": 20950.8
-},
-{
-"n": "View Room 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 24663.6
-},
-{
-"n": "View Room 3-Night FI Package — Single — Low Season STO 15%",
-"p": 30783.6
-},
-{
-"n": "4 x Superior View Rooms — DBB p/p Sharing — Low Season STO 15%",
-"p": 6528
-},
-{
-"n": "4 x Superior View Rooms — DBB Single Person — Low Season STO 15%",
-"p": 8792.4
-},
-{
-"n": "Superior View 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 17829.6
-},
-{
-"n": "Superior View 2-Night FI Package — Single — Low Season STO 15%",
-"p": 22154.4
-},
-{
-"n": "Superior View 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 26010
-},
-{
-"n": "Superior View 3-Night FI Package — Single — Low Season STO 15%",
-"p": 32619.6
-},
-{
-"n": "1 x Luxury Room — DBB p/p Sharing — Low Season STO 15%",
-"p": 6824.4
-},
-{
-"n": "1 x Luxury Room — DBB Single Person — Low Season STO 15%",
-"p": 9211.2
-},
-{
-"n": "Luxury Room 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 18554.4
-},
-{
-"n": "Luxury Room 2-Night FI Package — Single — Low Season STO 15%",
-"p": 23103.6
-},
-{
-"n": "Luxury Room 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 27081.6
-},
-{
-"n": "Luxury Room 3-Night FI Package — Single — Low Season STO 15%",
-"p": 33997.2
-},
-{
-"n": "1 x Rock Suite (Mini) — DBB p/p Sharing — Low Season STO 15%",
-"p": 7772.4
-},
-{
-"n": "1 x Rock Suite (Mini) — DBB Single Person — Low Season STO 15%",
-"p": 10476
-},
-{
-"n": "Rock Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 20472
-},
-{
-"n": "Rock Suite 2-Night FI Package — Single — Low Season STO 15%",
-"p": 25653.6
-},
-{
-"n": "Rock Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 29926.8
-},
-{
-"n": "Rock Suite 3-Night FI Package — Single — Low Season STO 15%",
-"p": 37821.6
-},
-{
-"n": "1 x Mountain Suite — DBB p/p Sharing — Low Season STO 15%",
-"p": 12852
-},
-{
-"n": "1 x Mountain Suite — DBB Single Person — Low Season STO 15%",
-"p": 17473.2
-},
-{
-"n": "Mountain Suite 2-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 30631.2
-},
-{
-"n": "Mountain Suite 2-Night FI Package — Single — Low Season STO 15%",
-"p": 39627.6
-},
-{
-"n": "Mountain Suite 3-Night FI Package — Sharing p/p — Low Season STO 15%",
-"p": 45135.6
-},
-{
-"n": "Mountain Suite 3-Night FI Package — Single — Low Season STO 15%",
-"p": 58783.2
-},
-{
-"n": "8 x View Rooms — DBB p/p Sharing — High Season STO 15%",
-"p": 8119.2
-},
-{
-"n": "8 x View Rooms — DBB Single Person — High Season STO 15%",
-"p": 11077.2
-},
-{
-"n": "View Room 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 21022.8
-},
-{
-"n": "View Room 2-Night FI Package — Single — High Season STO 15%",
-"p": 26703.6
-},
-{
-"n": "View Room 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 30783.6
-},
-{
-"n": "View Room 3-Night FI Package — Single — High Season STO 15%",
-"p": 39444
-},
-{
-"n": "4 x Superior View Rooms — DBB p/p Sharing — High Season STO 15%",
-"p": 8710.8
-},
-{
-"n": "4 x Superior View Rooms — DBB Single Person — High Season STO 15%",
-"p": 11750.4
-},
-{
-"n": "Superior View 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 22236
-},
-{
-"n": "Superior View 2-Night FI Package — Single — High Season STO 15%",
-"p": 28060.8
-},
-{
-"n": "Superior View 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 32619.6
-},
-{
-"n": "Superior View 3-Night FI Package — Single — High Season STO 15%",
-"p": 41493.6
-},
-{
-"n": "1 x Luxury Room — DBB p/p Sharing — High Season STO 15%",
-"p": 9129.6
-},
-{
-"n": "1 x Luxury Room — DBB Single Person — High Season STO 15%",
-"p": 12301.2
-},
-{
-"n": "Luxury Room 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 23174.4
-},
-{
-"n": "Luxury Room 2-Night FI Package — Single — High Season STO 15%",
-"p": 29305.2
-},
-{
-"n": "Luxury Room 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 33966
-},
-{
-"n": "Luxury Room 3-Night FI Package — Single — High Season STO 15%",
-"p": 43238.4
-},
-{
-"n": "1 x Rock Suite (Mini) — DBB p/p Sharing — High Season STO 15%",
-"p": 10006.8
-},
-{
-"n": "1 x Rock Suite (Mini) — DBB Single Person — High Season STO 15%",
-"p": 13332
-},
-{
-"n": "Rock Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 24908.4
-},
-{
-"n": "Rock Suite 2-Night FI Package — Single — High Season STO 15%",
-"p": 31354.8
-},
-{
-"n": "Rock Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 36597.6
-},
-{
-"n": "Rock Suite 3-Night FI Package — Single — High Season STO 15%",
-"p": 46359.6
-},
-{
-"n": "1 x Mountain Suite — DBB p/p Sharing — High Season STO 15%",
-"p": 15249.6
-},
-{
-"n": "1 x Mountain Suite — DBB Single Person — High Season STO 15%",
-"p": 20574
-},
-{
-"n": "Mountain Suite 2-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 35394
-},
-{
-"n": "Mountain Suite 2-Night FI Package — Single — High Season STO 15%",
-"p": 45808.8
-},
-{
-"n": "Mountain Suite 3-Night FI Package — Sharing p/p — High Season STO 15%",
-"p": 52326
-},
-{
-"n": "Mountain Suite 3-Night FI Package — Single — High Season STO 15%",
-"p": 68054.4
-},
-{
-"n": "Child (4-12 yrs) — DBB per night — Low Season NETT",
-"p": 3132
-},
-{
-"n": "Child (4-12 yrs) — 2-Night FI Package — Low Season NETT",
-"p": 9828
-},
-{
-"n": "Child (4-12 yrs) — 3-Night FI Package — Low Season NETT",
-"p": 13428
-},
-{
-"n": "Child (4-12 yrs) — DBB per night — High Season NETT",
-"p": 3132
-},
-{
-"n": "Child (4-12 yrs) — 2-Night FI Package — High Season NETT",
-"p": 9828
-},
-{
-"n": "Child (4-12 yrs) — 3-Night FI Package — High Season NETT",
-"p": 13428
-},
-{
-"n": "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
-"p": 2652
-},
-{
 "n": "8 x View Rooms — DBB p/p Sharing — Low Season RACK",
-"p": 7128
+"p": 5940
 },
 {
 "n": "8 x View Rooms — DBB Single Person — Low Season RACK",
-"p": 9624
+"p": 8020
 },
 {
 "n": "View Room 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 19908
+"p": 16590
 },
 {
 "n": "View Room 2-Night FI Package — Single — Low Season RACK",
-"p": 24648
+"p": 20540
 },
 {
 "n": "View Room 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 29016
+"p": 24180
 },
 {
 "n": "View Room 3-Night FI Package — Single — Low Season RACK",
-"p": 36216
-},
-{
-"n": "4 x Superior View Rooms — DBB p/p Sharing — Low Season RACK",
-"p": 7680
-},
-{
-"n": "4 x Superior View Rooms — DBB Single Person — Low Season RACK",
-"p": 10344
-},
-{
-"n": "Superior View 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 20976
-},
-{
-"n": "Superior View 2-Night FI Package — Single — Low Season RACK",
-"p": 26064
-},
-{
-"n": "Superior View 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 30600
-},
-{
-"n": "Superior View 3-Night FI Package — Single — Low Season RACK",
-"p": 38376
-},
-{
-"n": "1 x Luxury Room — DBB p/p Sharing — Low Season RACK",
-"p": 8028
-},
-{
-"n": "1 x Luxury Room — DBB Single Person — Low Season RACK",
-"p": 10836
-},
-{
-"n": "Luxury Room 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 21828
-},
-{
-"n": "Luxury Room 2-Night FI Package — Single — Low Season RACK",
-"p": 27180
-},
-{
-"n": "Luxury Room 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 31860
-},
-{
-"n": "Luxury Room 3-Night FI Package — Single — Low Season RACK",
-"p": 39996
-},
-{
-"n": "1 x Rock Suite (Mini) — DBB p/p Sharing — Low Season RACK",
-"p": 9144
-},
-{
-"n": "1 x Rock Suite (Mini) — DBB Single Person — Low Season RACK",
-"p": 12324
-},
-{
-"n": "Rock Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 24084
-},
-{
-"n": "Rock Suite 2-Night FI Package — Single — Low Season RACK",
 "p": 30180
 },
 {
+"n": "4 x Superior View Rooms — DBB p/p Sharing — Low Season RACK",
+"p": 6400
+},
+{
+"n": "4 x Superior View Rooms — DBB Single Person — Low Season RACK",
+"p": 8620
+},
+{
+"n": "Superior View 2-Night FI Package — Sharing p/p — Low Season RACK",
+"p": 17480
+},
+{
+"n": "Superior View 2-Night FI Package — Single — Low Season RACK",
+"p": 21720
+},
+{
+"n": "Superior View 3-Night FI Package — Sharing p/p — Low Season RACK",
+"p": 25500
+},
+{
+"n": "Superior View 3-Night FI Package — Single — Low Season RACK",
+"p": 31980
+},
+{
+"n": "1 x Luxury Room — DBB p/p Sharing — Low Season RACK",
+"p": 6690
+},
+{
+"n": "1 x Luxury Room — DBB Single Person — Low Season RACK",
+"p": 9030
+},
+{
+"n": "Luxury Room 2-Night FI Package — Sharing p/p — Low Season RACK",
+"p": 18190
+},
+{
+"n": "Luxury Room 2-Night FI Package — Single — Low Season RACK",
+"p": 22650
+},
+{
+"n": "Luxury Room 3-Night FI Package — Sharing p/p — Low Season RACK",
+"p": 26550
+},
+{
+"n": "Luxury Room 3-Night FI Package — Single — Low Season RACK",
+"p": 33330
+},
+{
+"n": "1 x Rock Suite (Mini) — DBB p/p Sharing — Low Season RACK",
+"p": 7620
+},
+{
+"n": "1 x Rock Suite (Mini) — DBB Single Person — Low Season RACK",
+"p": 10270
+},
+{
+"n": "Rock Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
+"p": 20070
+},
+{
+"n": "Rock Suite 2-Night FI Package — Single — Low Season RACK",
+"p": 25150
+},
+{
 "n": "Rock Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 35208
+"p": 29340
 },
 {
 "n": "Rock Suite 3-Night FI Package — Single — Low Season RACK",
-"p": 44496
+"p": 37080
 },
 {
 "n": "1 x Mountain Suite — DBB p/p Sharing — Low Season RACK",
-"p": 15120
+"p": 12600
 },
 {
 "n": "1 x Mountain Suite — DBB Single Person — Low Season RACK",
-"p": 20556
+"p": 17130
 },
 {
 "n": "Mountain Suite 2-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 36036
+"p": 30030
 },
 {
 "n": "Mountain Suite 2-Night FI Package — Single — Low Season RACK",
-"p": 46620
+"p": 38850
 },
 {
 "n": "Mountain Suite 3-Night FI Package — Sharing p/p — Low Season RACK",
-"p": 53100
+"p": 44250
 },
 {
 "n": "Mountain Suite 3-Night FI Package — Single — Low Season RACK",
-"p": 69156
+"p": 57630
 },
 {
 "n": "8 x View Rooms — DBB p/p Sharing — High Season RACK",
-"p": 9552
+"p": 7960
 },
 {
 "n": "8 x View Rooms — DBB Single Person — High Season RACK",
-"p": 13032
+"p": 10860
 },
 {
 "n": "View Room 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 24732
+"p": 20610
 },
 {
 "n": "View Room 2-Night FI Package — Single — High Season RACK",
-"p": 31416
+"p": 26180
 },
 {
 "n": "View Room 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 36216
+"p": 30180
 },
 {
 "n": "View Room 3-Night FI Package — Single — High Season RACK",
-"p": 46404
+"p": 38670
 },
 {
 "n": "4 x Superior View Rooms — DBB p/p Sharing — High Season RACK",
-"p": 10248
+"p": 8540
 },
 {
 "n": "4 x Superior View Rooms — DBB Single Person — High Season RACK",
-"p": 13824
+"p": 11520
 },
 {
 "n": "Superior View 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 26160
+"p": 21800
 },
 {
 "n": "Superior View 2-Night FI Package — Single — High Season RACK",
-"p": 33012
+"p": 27510
 },
 {
 "n": "Superior View 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 38376
+"p": 31980
 },
 {
 "n": "Superior View 3-Night FI Package — Single — High Season RACK",
-"p": 48816
+"p": 40680
 },
 {
 "n": "1 x Luxury Room — DBB p/p Sharing — High Season RACK",
-"p": 10740
+"p": 8950
 },
 {
 "n": "1 x Luxury Room — DBB Single Person — High Season RACK",
-"p": 14472
+"p": 12060
 },
 {
 "n": "Luxury Room 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 27264
+"p": 22720
 },
 {
 "n": "Luxury Room 2-Night FI Package — Single — High Season RACK",
-"p": 34476
+"p": 28730
 },
 {
 "n": "Luxury Room 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 39960
+"p": 33300
 },
 {
 "n": "Luxury Room 3-Night FI Package — Single — High Season RACK",
-"p": 50868
+"p": 42390
 },
 {
 "n": "1 x Rock Suite (Mini) — DBB p/p Sharing — High Season RACK",
-"p": 11772
+"p": 9810
 },
 {
 "n": "1 x Rock Suite (Mini) — DBB Single Person — High Season RACK",
-"p": 15684
+"p": 13070
 },
 {
 "n": "Rock Suite 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 29304
+"p": 24420
 },
 {
 "n": "Rock Suite 2-Night FI Package — Single — High Season RACK",
-"p": 36888
+"p": 30740
 },
 {
 "n": "Rock Suite 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 43056
+"p": 35880
 },
 {
 "n": "Rock Suite 3-Night FI Package — Single — High Season RACK",
-"p": 54540
+"p": 45450
 },
 {
 "n": "1 x Mountain Suite — DBB p/p Sharing — High Season RACK",
-"p": 17940
+"p": 14950
 },
 {
 "n": "1 x Mountain Suite — DBB Single Person — High Season RACK",
-"p": 24204
+"p": 20170
 },
 {
 "n": "Mountain Suite 2-Night FI Package — Sharing p/p — High Season RACK",
-"p": 41640
+"p": 34700
 },
 {
 "n": "Mountain Suite 2-Night FI Package — Single — High Season RACK",
-"p": 53892
+"p": 44910
 },
 {
 "n": "Mountain Suite 3-Night FI Package — Sharing p/p — High Season RACK",
-"p": 61560
+"p": 51300
 },
 {
 "n": "Mountain Suite 3-Night FI Package — Single — High Season RACK",
-"p": 80064
+"p": 66720
 },
 {
-"n": "Nature Drive (guided, Morning) — Nett Price (N$)",
-"p": 1632
+"n": "Child (4-12 yrs) — DBB per night — Low Season",
+"p": 2610
 },
 {
-"n": "Twyfelfontein Excursion (guided, Afternoon) — Nett Price (N$)",
-"p": 1332
+"n": "Child (4-12 yrs) — 2-Night FI Package — Low Season",
+"p": 8190
 },
 {
-"n": "Damara Living Museum Entry — Nett Price (N$)",
-"p": 384
+"n": "Child (4-12 yrs) — 3-Night FI Package — Low Season",
+"p": 11190
 },
 {
-"n": "All-Inclusive Drinks Add-On — Nett Price (N$)",
-"p": 1440
+"n": "Child (4-12 yrs) — DBB per night — High Season",
+"p": 2610
 },
 {
-"n": "Twyfelfontein Airstrip Transfer — Nett Price (N$)",
-"p": 474
+"n": "Child (4-12 yrs) — 2-Night FI Package — High Season",
+"p": 8190
 },
 {
-"n": "!Doro Nawas Transfer — Nett Price (N$)",
-"p": 558
+"n": "Child (4-12 yrs) — 3-Night FI Package — High Season",
+"p": 11190
 },
 {
-"n": "Damaraland Camp Transfer — Nett Price (N$)",
-"p": 834
+"n": "Tour Guide Room (per Guide/Pilot per night) — Rate (N$)",
+"p": 2210
+},
+{
+"n": "Nature Drive (guided, Morning) — Price (N$)",
+"p": 1360
+},
+{
+"n": "Twyfelfontein Excursion (guided, Afternoon) — Price (N$)",
+"p": 1110
+},
+{
+"n": "Damara Living Museum Entry — Price (N$)",
+"p": 320
+},
+{
+"n": "All-Inclusive Drinks Add-On — Price (N$)",
+"p": 1200
+},
+{
+"n": "Twyfelfontein Airstrip Transfer — Price (N$)",
+"p": 395
+},
+{
+"n": "!Doro Nawas Transfer — Price (N$)",
+"p": 465
+},
+{
+"n": "Damaraland Camp Transfer — Price (N$)",
+"p": 695
 },
 {
 "n": "Breakfast — Price (N$)",
-"p": 474
+"p": 395
 },
 {
 "n": "Lunch — Price (N$)",
-"p": 450
+"p": 375
 },
 {
 "n": "Lunch Pack — Price (N$)",
-"p": 306
+"p": 255
 },
 {
 "n": "Dinner (3 Course) — Price (N$)",
-"p": 1068
+"p": 890
 }
 ]
 },
@@ -18560,43 +18320,43 @@
 "rack_2027": [
 {
 "n": "Green Season (10 Jan – 31 Mar) · FI — per person sharing",
-"p": 18312
+"p": 19075
 },
 {
 "n": "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — per person sharing",
-"p": 22789.2
+"p": 23738.75
 },
 {
 "n": "High Shoulder Season (01 May – 31 May) · FI — per person sharing",
-"p": 24519.6
+"p": 25541.25
 },
 {
 "n": "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — per person sharing",
-"p": 27368.4
+"p": 28508.75
 },
 {
 "n": "Peak Season (01 Jul – 31 Aug) · FI — per person sharing",
-"p": 30726
+"p": 32006.25
 },
 {
 "n": "Green Season (10 Jan – 31 Mar) · FI — single",
-"p": 25638
+"p": 26706.25
 },
 {
 "n": "Shoulder Season (01 Apr – 30 Apr & 01 Jun – 30 Jun & 01 Nov – 19 Dec) · FI — single",
-"p": 31906.8
+"p": 33236.25
 },
 {
 "n": "High Shoulder Season (01 May – 31 May) · FI — single",
-"p": 34328.4
+"p": 35758.75
 },
 {
 "n": "High Season (01 Sep – 31 Oct & 20 Dec – 09 Jan) · FI — single",
-"p": 38317.2
+"p": 39913.75
 },
 {
 "n": "Peak Season (01 Jul – 31 Aug) · FI — single",
-"p": 43018.8
+"p": 44811.25
 }
 ],
 "rack_2026": [
@@ -34944,51 +34704,51 @@
 "rack_2027": [
 {
 "n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — per person sharing",
-"p": 1452
+"p": 1510
 },
 {
 "n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — per person sharing",
-"p": 2040
+"p": 2130
 },
 {
 "n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — per person sharing",
-"p": 2322
+"p": 2420
 },
 {
 "n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Classic Room — single",
-"p": 2040
+"p": 2130
 },
 {
 "n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Room — single",
-"p": 2832
+"p": 2950
 },
 {
 "n": "Low Season (01 Jan – 30 Jun & 01 – 31 Dec) · Terrace Suite — single",
-"p": 3270
+"p": 3410
 },
 {
 "n": "High Season (01 Jul – 30 Nov) · Classic Room — per person sharing",
-"p": 1566
+"p": 1630
 },
 {
 "n": "High Season (01 Jul – 30 Nov) · Terrace Room — per person sharing",
-"p": 2178
+"p": 2270
 },
 {
 "n": "High Season (01 Jul – 30 Nov) · Terrace Suite — per person sharing",
-"p": 2448
+"p": 2550
 },
 {
 "n": "High Season (01 Jul – 30 Nov) · Classic Room — single",
-"p": 2178
+"p": 2270
 },
 {
 "n": "High Season (01 Jul – 30 Nov) · Terrace Room — single",
-"p": 2958
+"p": 3080
 },
 {
 "n": "High Season (01 Jul – 30 Nov) · Terrace Suite — single",
-"p": 3432
+"p": 3575
 }
 ],
 "rack_2026": [
