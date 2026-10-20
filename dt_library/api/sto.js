@@ -47916,3 +47916,2946 @@ Object.assign(DDS_STO_BY_YEAR, {
     var e = m[p[1]] || (m[p[1]] = {}); e[p[2]] = D[k];
   });
 })();
+
+/* RATES-20OCT2026-LOAD — rate sheets loaded 20 Oct 2026 (&Beyond 2027, Okonjima 2027, Batonka 2026/27, Swakopmund Luxury Suites 2026/27,
+   The Windhoek Lux Suites 2027, African Monarch Journeys 2026/27, Lapa Lange 2027, Okahirongo 2027/28). Adds years only;
+   years a slug already holds in a lower map are copied into its DDS entry first so none is hidden. tools/load_rates_20oct.py */
+(function loadRates20OctSto() {
+  var V = {
+ "andbeyond-sossusvlei-desert-lodge": {
+  "2027": {
+   "name": "&Beyond Sossusvlei Desert Lodge",
+   "region": "Sossusvlei",
+   "currency": "N$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Namibia STO20, \"Accommodation Rate Sheet, Namibia (STO20)\", dated 2026/03/04 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); Namibian Dollars (NAD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–5 nights) and STO Long Stay rates (6+ and 8+ nights, not valid Jul–Aug); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 6+ nights = STO less 10%, 8+ nights = STO less 15% (observed on the sheet). Rates are per person per night sharing; the Star Dune Suite (2 rooms + private lounge and dining area, max 4 adults OR 2 adults + 2 children, 3 children on request at extra cost) is per suite per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on scenic nature drives, laundry, emergency medical evacuation cover, VAT, airstrip transfers, Guides' Journal and area map, one pair of Swarovski binoculars per room; activities included: one morning Sossusvlei excursion, Living Dunes Experience, Desert People Experience, Desert Rock Experience, Desert Drive, Big Dune Walk, Stargazing, self-exploration e-biking and hiking (guided, subject to availability). Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine &Beyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Triple rooms: max 2 adults + 1 child 16 or younger (1 triple in the Suites, Star Dune on request). Child policy: 0–2 free (cots subject to availability); 3–5 free (triple rooms subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 children per room); 17+ adult rate; nature drives 6–12 at manager's discretion, walks 12+. Childminders NAD 125 per child per hour, paid at the lodge. Private vehicle NAD 14,333 per vehicle per night (14h00 arrival to 11h00 departure), all ages. Pilots/local driver-guides: 1 Village Guide room (twin sharing, single subject to availability, guide needs own transport to the main lodge for meals) and 1 Lodge Pilot/Guide room (single basis) at NAD 1,145 per night, accommodation, meals, teas and coffees only — one rate column printed, so rack = net. Tour Leader rate (bona fide tour leaders, max 1 per 14 guests, normal inclusions): Suites NAD 15,290 High / 9,133 Mid for 1–14 guests, 15+ guests 1 x no charge; not offered on the Star Dune Suite — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation for milestone birthdays/anniversaries, valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027, 1–5-night rate only; Soar over Sossusvlei: stay 3+ nights on the 1–5-night rate and get one complimentary shared 45-min scenic helicopter flight per full-paying adult per stay (min 2, max 4 guests, weather dependent, children sharing the Star Dune Suite max 2); Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Star Dune Suite. The Soar over Sossusvlei private-flight upgrades (NAD 3,100 / 9,200 / 21,400 pp) are loaded under Extras at the printed price; the sheet states all rates are nett/non-commissionable, so they are loaded with rack = net — confirm with &Beyond. Drones not allowed. &Beyond Trading Terms apply. Index of changes: accommodation rates increased, childminder rate increased, offer validity dates updated. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Suite",
+     "rows": [
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 1–5 nights · STO — per person sharing",
+       "30,580"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 6+ nights · STO Long Stay (not valid Jul – Aug) — per person sharing",
+       "27,522"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 8+ nights · STO Long Stay (not valid Jul – Aug) — per person sharing",
+       "25,993"
+      ],
+      [
+       "Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 1–5 nights · STO — per person sharing",
+       "18,265"
+      ],
+      [
+       "Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 6+ nights · STO Long Stay (not valid Jul – Aug) — per person sharing",
+       "16,439"
+      ],
+      [
+       "Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 8+ nights · STO Long Stay (not valid Jul – Aug) — per person sharing",
+       "15,526"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Star Dune Suite",
+     "rows": [
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Star Dune Suite · 1–5 nights · STO — per suite per night (Star Dune Suite, 2 rooms + private lounge)",
+       "137,595"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Star Dune Suite · 6+ nights · STO Long Stay (not valid Jul – Aug) — per suite per night (Star Dune Suite, 2 rooms + private lounge)",
+       "123,836"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Star Dune Suite · 8+ nights · STO Long Stay (not valid Jul – Aug) — per suite per night (Star Dune Suite, 2 rooms + private lounge)",
+       "116,956"
+      ],
+      [
+       "Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Star Dune Suite · 1–5 nights · STO — per suite per night (Star Dune Suite, 2 rooms + private lounge)",
+       "82,190"
+      ],
+      [
+       "Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Star Dune Suite · 6+ nights · STO Long Stay (not valid Jul – Aug) — per suite per night (Star Dune Suite, 2 rooms + private lounge)",
+       "73,971"
+      ],
+      [
+       "Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Star Dune Suite · 8+ nights · STO Long Stay (not valid Jul – Aug) — per suite per night (Star Dune Suite, 2 rooms + private lounge)",
+       "69,862"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle · 11 Jan 2027 – 10 Jan 2028 — per vehicle per night (14h00 arrival to 11h00 departure), all ages, subject to availability — nett",
+       "14,333"
+      ],
+      [
+       "Pilot / local driver-guide room (1 x Village Guide room, twin sharing; 1 x Lodge Pilot/Guide room, single) · 11 Jan 2027 – 10 Jan 2028 · accommodation, meals, teas and coffees only — per night — nett",
+       "1,145"
+      ],
+      [
+       "Tour Leader rate · High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "15,290"
+      ],
+      [
+       "Tour Leader rate · Mid Season (11 Jan – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "9,133"
+      ],
+      [
+       "Tour Leader · 15+ guests · Suite · 11 Jan 2027 – 10 Jan 2028 — 1 x tour leader no charge",
+       "no charge"
+      ],
+      [
+       "Tour Leader rate · Star Dune Suite — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid directly at the lodge, booked on day of arrival — nett",
+       "125"
+      ],
+      [
+       "Soar over Sossusvlei Upgrade · 60-minute private Deadvlei helicopter flight (upgrade of the complimentary shared 45-min flight, includes champagne stop) · 11 Jan 2027 – 10 Jan 2028 — per person — nett as printed, commission to confirm",
+       "3,100"
+      ],
+      [
+       "Soar over Sossusvlei Upgrade · 90-minute private coastal helicopter flight · 11 Jan 2027 – 10 Jan 2028 — per person — nett as printed, commission to confirm",
+       "9,200"
+      ],
+      [
+       "Soar over Sossusvlei Upgrade · 150-minute private shipwreck helicopter flight (Eduard Bohlen) · 11 Jan 2027 – 10 Jan 2028 — per person — nett as printed, commission to confirm",
+       "21,400"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Child 6–16 sharing with 1 or 2 adults (triple subject to availability) — half of the adult rate; child 0–5 sharing free",
+       "see label — half of the adult rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "andbeyond-nxabega-okavango-tented-camp": {
+  "2027": {
+   "name": "&Beyond Nxabega Okavango Tented Camp",
+   "region": "Okavango Delta",
+   "currency": "US$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Botswana STO20, \"Accommodation Rate Sheet, Botswana (STO20)\", dated 2026/09/07 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); US Dollars (USD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–3 nights) and STO Long Stay rates (4–5, 6+ and 8+ nights); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 4–5 nights = STO less 10%, 6+ = STO less 20%, 8+ = STO less 25% (observed on the sheet, some rounded). Rates are per person per night sharing; Family Suites/Tents are per Family Suite/Tent per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on game drives, laundry (excluding Under Canvas), safari activities, emergency medical evacuation cover, VAT, airstrip transfers and park fees, Guides' Journal and area map, one pair of Swarovski binoculars per room. Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine andBeyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Child policy (not applicable to Family Suites/Tents): 0–2 free (cots subject to availability); 3–5 free (triple subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 per room); 17+ adult rate; game drives 6–11 at manager's discretion, boating 12+, mokoro and bush walks 16+. Children of any age may go on game drives on a paid private vehicle. Childminders USD 5 per child per hour, paid at the lodge. Private vehicles per vehicle per night (14h00 arrival to 11h00 departure), subject to availability. Pilots/local driver-guides: rate includes accommodation, meals, teas and coffees only, twin basis (single subject to availability) — one rate column printed, so rack = net. Tour Leader rate (bona fide, max 1 per 14 guests, normal inclusions) for 1–14 guests, 15+ guests 1 x no charge — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation (milestone birthdays/anniversaries) valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027 on the 1–3-night rate; Fly Me around Botswana / around Botswana Under Canvas (7 nights) and Fly Me around the Delta (6 nights) package rates on request, 2–3 properties, max 3 nights per lodge; Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Family Suite/Tent. Drones not allowed. &Beyond Trading Terms apply. Index of changes: rate adjustments; new Family Suite at Xaranna from reopening Aug 2027; pilot/guide room available at Nxabega and Sandibe Under Canvas from 2027; Helicopter Me to Sandibe offer removed. Nxabega: Family Tent = 2 tents linked by an enclosed walkway, max 2 adults + 2 children (3 children on request at extra cost); 1 triple room (max 2 adults + 1 child 12 or younger); private vehicle USD 717; 1 pilot/guide room at USD 145; tour leader rates printed for the Tents only. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Tent",
+     "rows": [
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 1–3 nights · STO — per person sharing",
+       "2,480"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "2,232"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "1,984"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "1,860"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "1,335"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "1,202"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "1,068"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "1,002"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "1,020"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "918"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "816"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "765"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Family Tent",
+     "rows": [
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Tent · 1–3 nights · STO — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "8,680"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Tent · 4–5 nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "7,812"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Tent · 6+ nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "6,944"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Tent · 8+ nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "6,510"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Tent · 1–3 nights · STO — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "4,665"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Tent · 4–5 nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "4,199"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Tent · 6+ nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "3,732"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Tent · 8+ nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "3,499"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Tent · 1–3 nights · STO — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "3,560"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Tent · 4–5 nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "3,204"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Tent · 6+ nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "2,848"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Tent · 8+ nights · STO Long Stay — per Family Tent per night (2 tents linked by an enclosed walkway)",
+       "2,670"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle · 11 Jan 2027 – 10 Jan 2028 — per vehicle per night (14h00 arrival to 11h00 departure), all ages, subject to availability — nett",
+       "717"
+      ],
+      [
+       "Pilot / local driver-guide room (1 x pilot/guide room) · 11 Jan 2027 – 10 Jan 2028 · accommodation, meals, teas and coffees only, twin basis — per person per night — nett",
+       "145"
+      ],
+      [
+       "Tour Leader rate · High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "1,240"
+      ],
+      [
+       "Tour Leader rate · Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Tent · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "668"
+      ],
+      [
+       "Tour Leader rate · Low Season (11 Jan – 31 Mar 2027) · Tent · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "510"
+      ],
+      [
+       "Tour Leader · 15+ guests · Tent · 11 Jan 2027 – 10 Jan 2028 — 1 x tour leader no charge",
+       "no charge"
+      ],
+      [
+       "Tour Leader rate · Family Tent — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Children — all ages; triple rooms: 1 triple (max 2 adults + 1 child 12 or younger)",
+       "see label"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid at the lodge, booked on day of arrival — nett",
+       "5"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Child 6–16 sharing with 1 or 2 adults (triple subject to availability; not applicable to Family Suite/Tent) — half of the adult rate; child 0–5 sharing free",
+       "see label — half of the adult rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "andbeyond-nxabega-under-canvas": {
+  "2027": {
+   "name": "&Beyond Nxabega Under Canvas",
+   "region": "Okavango Delta",
+   "currency": "US$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Botswana STO20, \"Accommodation Rate Sheet, Botswana (STO20)\", dated 2026/09/07 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); US Dollars (USD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–3 nights) and STO Long Stay rates (4–5, 6+ and 8+ nights); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 4–5 nights = STO less 10%, 6+ = STO less 20%, 8+ = STO less 25% (observed on the sheet, some rounded). Rates are per person per night sharing; Family Suites/Tents are per Family Suite/Tent per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on game drives, laundry (excluding Under Canvas), safari activities, emergency medical evacuation cover, VAT, airstrip transfers and park fees, Guides' Journal and area map, one pair of Swarovski binoculars per room. Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine andBeyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Child policy (not applicable to Family Suites/Tents): 0–2 free (cots subject to availability); 3–5 free (triple subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 per room); 17+ adult rate; game drives 6–11 at manager's discretion, boating 12+, mokoro and bush walks 16+. Children of any age may go on game drives on a paid private vehicle. Childminders USD 5 per child per hour, paid at the lodge. Private vehicles per vehicle per night (14h00 arrival to 11h00 departure), subject to availability. Pilots/local driver-guides: rate includes accommodation, meals, teas and coffees only, twin basis (single subject to availability) — one rate column printed, so rack = net. Tour Leader rate (bona fide, max 1 per 14 guests, normal inclusions) for 1–14 guests, 15+ guests 1 x no charge — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation (milestone birthdays/anniversaries) valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027 on the 1–3-night rate; Fly Me around Botswana / around Botswana Under Canvas (7 nights) and Fly Me around the Delta (6 nights) package rates on request, 2–3 properties, max 3 nights per lodge; Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Family Suite/Tent. Drones not allowed. &Beyond Trading Terms apply. Index of changes: rate adjustments; new Family Suite at Xaranna from reopening Aug 2027; pilot/guide room available at Nxabega and Sandibe Under Canvas from 2027; Helicopter Me to Sandibe offer removed. Nxabega Under Canvas: children 12 years and older; no triple; private vehicle on request, subject to availability and provided it has not already been booked at the main lodge; pilot/guide rate USD 145 printed but # of pilot rooms shows N/A (the index of changes says a pilot/guide room is available at Nxabega and Sandibe Under Canvas from 2027 — query with &Beyond); no tour leader rate; laundry not included at Under Canvas. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Tent",
+     "rows": [
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 1–3 nights · STO — per person sharing",
+       "780"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "702"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "624"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "585"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "590"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "531"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "472"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "443"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "495"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "446"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "396"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "372"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle · 11 Jan 2027 – 10 Jan 2028 — per vehicle per night, subject to availability and not already booked at the main lodge",
+       "on request"
+      ],
+      [
+       "Pilot / local driver-guide room (number of pilot/guide rooms printed as N/A — to confirm) · 11 Jan 2027 – 10 Jan 2028 · accommodation, meals, teas and coffees only, twin basis — per person per night — nett",
+       "145"
+      ],
+      [
+       "Tour Leader rate — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Children — 12 years and older; triple rooms: none",
+       "see label"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid at the lodge, booked on day of arrival — nett",
+       "5"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "andbeyond-sandibe-okavango-safari-lodge": {
+  "2027": {
+   "name": "&Beyond Sandibe Okavango Safari Lodge",
+   "region": "Okavango Delta",
+   "currency": "US$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Botswana STO20, \"Accommodation Rate Sheet, Botswana (STO20)\", dated 2026/09/07 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); US Dollars (USD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–3 nights) and STO Long Stay rates (4–5, 6+ and 8+ nights); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 4–5 nights = STO less 10%, 6+ = STO less 20%, 8+ = STO less 25% (observed on the sheet, some rounded). Rates are per person per night sharing; Family Suites/Tents are per Family Suite/Tent per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on game drives, laundry (excluding Under Canvas), safari activities, emergency medical evacuation cover, VAT, airstrip transfers and park fees, Guides' Journal and area map, one pair of Swarovski binoculars per room. Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine andBeyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Child policy (not applicable to Family Suites/Tents): 0–2 free (cots subject to availability); 3–5 free (triple subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 per room); 17+ adult rate; game drives 6–11 at manager's discretion, boating 12+, mokoro and bush walks 16+. Children of any age may go on game drives on a paid private vehicle. Childminders USD 5 per child per hour, paid at the lodge. Private vehicles per vehicle per night (14h00 arrival to 11h00 departure), subject to availability. Pilots/local driver-guides: rate includes accommodation, meals, teas and coffees only, twin basis (single subject to availability) — one rate column printed, so rack = net. Tour Leader rate (bona fide, max 1 per 14 guests, normal inclusions) for 1–14 guests, 15+ guests 1 x no charge — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation (milestone birthdays/anniversaries) valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027 on the 1–3-night rate; Fly Me around Botswana / around Botswana Under Canvas (7 nights) and Fly Me around the Delta (6 nights) package rates on request, 2–3 properties, max 3 nights per lodge; Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Family Suite/Tent. Drones not allowed. &Beyond Trading Terms apply. Index of changes: rate adjustments; new Family Suite at Xaranna from reopening Aug 2027; pilot/guide room available at Nxabega and Sandibe Under Canvas from 2027; Helicopter Me to Sandibe offer removed. Sandibe: Family Suite = 2 suites linked by an enclosed walkway, max 2 adults + 2 children (3 children on request at extra cost); 1 triple room (max 2 adults + 1 child 16 or younger); private vehicle USD 882; no pilot/guide room (N/A, no rate); tour leader rates printed for the Suites only. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Suite",
+     "rows": [
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 1–3 nights · STO — per person sharing",
+       "3,040"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 4–5 nights · STO Long Stay — per person sharing",
+       "2,736"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 6+ nights · STO Long Stay — per person sharing",
+       "2,432"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 8+ nights · STO Long Stay — per person sharing",
+       "2,280"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 1–3 nights · STO — per person sharing",
+       "1,840"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 4–5 nights · STO Long Stay — per person sharing",
+       "1,656"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 6+ nights · STO Long Stay — per person sharing",
+       "1,472"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 8+ nights · STO Long Stay — per person sharing",
+       "1,380"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Suite · 1–3 nights · STO — per person sharing",
+       "1,480"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Suite · 4–5 nights · STO Long Stay — per person sharing",
+       "1,332"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Suite · 6+ nights · STO Long Stay — per person sharing",
+       "1,184"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Suite · 8+ nights · STO Long Stay — per person sharing",
+       "1,110"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Family Suite",
+     "rows": [
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 1–3 nights · STO — per Family Suite per night (2 linked suites)",
+       "10,640"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 4–5 nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "9,576"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 6+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "8,512"
+      ],
+      [
+       "High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 8+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "7,980"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Suite · 1–3 nights · STO — per Family Suite per night (2 linked suites)",
+       "6,440"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Suite · 4–5 nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "5,796"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Suite · 6+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "5,152"
+      ],
+      [
+       "Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Family Suite · 8+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "4,830"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Suite · 1–3 nights · STO — per Family Suite per night (2 linked suites)",
+       "5,180"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Suite · 4–5 nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "4,662"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Suite · 6+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "4,144"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Family Suite · 8+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "3,885"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle · 11 Jan 2027 – 10 Jan 2028 — per vehicle per night (14h00 arrival to 11h00 departure), all ages, subject to availability — nett",
+       "882"
+      ],
+      [
+       "Pilot / local driver-guide room — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Tour Leader rate · High Season (01 Jun – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "1,520"
+      ],
+      [
+       "Tour Leader rate · Mid Season (01 Apr – 31 May 2027; 01 Nov – 20 Dec 2027) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "920"
+      ],
+      [
+       "Tour Leader rate · Low Season (11 Jan – 31 Mar 2027) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "740"
+      ],
+      [
+       "Tour Leader · 15+ guests · Suite · 11 Jan 2027 – 10 Jan 2028 — 1 x tour leader no charge",
+       "no charge"
+      ],
+      [
+       "Tour Leader rate · Family Suite — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Children — all ages; triple rooms: 1 triple (max 2 adults + 1 child 16 or younger)",
+       "see label"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid at the lodge, booked on day of arrival — nett",
+       "5"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Child 6–16 sharing with 1 or 2 adults (triple subject to availability; not applicable to Family Suite/Tent) — half of the adult rate; child 0–5 sharing free",
+       "see label — half of the adult rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "andbeyond-sandibe-under-canvas": {
+  "2027": {
+   "name": "&Beyond Sandibe Under Canvas",
+   "region": "Okavango Delta",
+   "currency": "US$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Botswana STO20, \"Accommodation Rate Sheet, Botswana (STO20)\", dated 2026/09/07 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); US Dollars (USD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–3 nights) and STO Long Stay rates (4–5, 6+ and 8+ nights); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 4–5 nights = STO less 10%, 6+ = STO less 20%, 8+ = STO less 25% (observed on the sheet, some rounded). Rates are per person per night sharing; Family Suites/Tents are per Family Suite/Tent per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on game drives, laundry (excluding Under Canvas), safari activities, emergency medical evacuation cover, VAT, airstrip transfers and park fees, Guides' Journal and area map, one pair of Swarovski binoculars per room. Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine andBeyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Child policy (not applicable to Family Suites/Tents): 0–2 free (cots subject to availability); 3–5 free (triple subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 per room); 17+ adult rate; game drives 6–11 at manager's discretion, boating 12+, mokoro and bush walks 16+. Children of any age may go on game drives on a paid private vehicle. Childminders USD 5 per child per hour, paid at the lodge. Private vehicles per vehicle per night (14h00 arrival to 11h00 departure), subject to availability. Pilots/local driver-guides: rate includes accommodation, meals, teas and coffees only, twin basis (single subject to availability) — one rate column printed, so rack = net. Tour Leader rate (bona fide, max 1 per 14 guests, normal inclusions) for 1–14 guests, 15+ guests 1 x no charge — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation (milestone birthdays/anniversaries) valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027 on the 1–3-night rate; Fly Me around Botswana / around Botswana Under Canvas (7 nights) and Fly Me around the Delta (6 nights) package rates on request, 2–3 properties, max 3 nights per lodge; Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Family Suite/Tent. Drones not allowed. &Beyond Trading Terms apply. Index of changes: rate adjustments; new Family Suite at Xaranna from reopening Aug 2027; pilot/guide room available at Nxabega and Sandibe Under Canvas from 2027; Helicopter Me to Sandibe offer removed. Sandibe Under Canvas: children 12 years and older; no triple; private vehicle on request, subject to availability and provided it has not already been booked at the main lodge; pilot/guide rate USD 145 printed but # of pilot rooms shows N/A (the index of changes says a pilot/guide room is available at Nxabega and Sandibe Under Canvas from 2027 — query with &Beyond); no tour leader rate; laundry not included at Under Canvas. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Tent",
+     "rows": [
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 1–3 nights · STO — per person sharing",
+       "780"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "702"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "624"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "585"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "590"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "531"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "472"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "443"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "495"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "446"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "396"
+      ],
+      [
+       "Low Season (11 Jan – 31 Mar 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "372"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle · 11 Jan 2027 – 10 Jan 2028 — per vehicle per night, subject to availability and not already booked at the main lodge",
+       "on request"
+      ],
+      [
+       "Pilot / local driver-guide room (number of pilot/guide rooms printed as N/A — to confirm) · 11 Jan 2027 – 10 Jan 2028 · accommodation, meals, teas and coffees only, twin basis — per person per night — nett",
+       "145"
+      ],
+      [
+       "Tour Leader rate — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Children — 12 years and older; triple rooms: none",
+       "see label"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid at the lodge, booked on day of arrival — nett",
+       "5"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "andbeyond-xaranna-okavango-delta-lodge": {
+  "2027": {
+   "name": "&Beyond Xaranna Okavango Delta Lodge",
+   "region": "Okavango Delta",
+   "currency": "US$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Botswana STO20, \"Accommodation Rate Sheet, Botswana (STO20)\", dated 2026/09/07 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); US Dollars (USD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–3 nights) and STO Long Stay rates (4–5, 6+ and 8+ nights); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 4–5 nights = STO less 10%, 6+ = STO less 20%, 8+ = STO less 25% (observed on the sheet, some rounded). Rates are per person per night sharing; Family Suites/Tents are per Family Suite/Tent per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on game drives, laundry (excluding Under Canvas), safari activities, emergency medical evacuation cover, VAT, airstrip transfers and park fees, Guides' Journal and area map, one pair of Swarovski binoculars per room. Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine andBeyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Child policy (not applicable to Family Suites/Tents): 0–2 free (cots subject to availability); 3–5 free (triple subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 per room); 17+ adult rate; game drives 6–11 at manager's discretion, boating 12+, mokoro and bush walks 16+. Children of any age may go on game drives on a paid private vehicle. Childminders USD 5 per child per hour, paid at the lodge. Private vehicles per vehicle per night (14h00 arrival to 11h00 departure), subject to availability. Pilots/local driver-guides: rate includes accommodation, meals, teas and coffees only, twin basis (single subject to availability) — one rate column printed, so rack = net. Tour Leader rate (bona fide, max 1 per 14 guests, normal inclusions) for 1–14 guests, 15+ guests 1 x no charge — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation (milestone birthdays/anniversaries) valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027 on the 1–3-night rate; Fly Me around Botswana / around Botswana Under Canvas (7 nights) and Fly Me around the Delta (6 nights) package rates on request, 2–3 properties, max 3 nights per lodge; Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Family Suite/Tent. Drones not allowed. &Beyond Trading Terms apply. Index of changes: rate adjustments; new Family Suite at Xaranna from reopening Aug 2027; pilot/guide room available at Nxabega and Sandibe Under Canvas from 2027; Helicopter Me to Sandibe offer removed. Xaranna is temporarily closed for refurbishment 11 Jan – 31 Jul 2027 and is scheduled to reopen 01 Aug 2027 — no rates exist for that period, so there is no Low Season on this sheet; High Season runs 01 Aug – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028, Mid Season 01 Nov – 20 Dec 2027. New Family Suite from reopening = 2 suites linked by a private lounge, max 4 adults OR 2 adults + 2 children (3 children on request at extra cost); 1 triple room (max 2 adults + 1 child 16 or younger); private vehicle USD 882; no pilot/guide room (N/A); tour leader rates printed for the Suites only. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Suite",
+     "rows": [
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 1–3 nights · STO — per person sharing",
+       "3,100"
+      ],
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 4–5 nights · STO Long Stay — per person sharing",
+       "2,790"
+      ],
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 6+ nights · STO Long Stay — per person sharing",
+       "2,480"
+      ],
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 8+ nights · STO Long Stay — per person sharing",
+       "2,325"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Suite · 1–3 nights · STO — per person sharing",
+       "1,925"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Suite · 4–5 nights · STO Long Stay — per person sharing",
+       "1,733"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Suite · 6+ nights · STO Long Stay — per person sharing",
+       "1,540"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Suite · 8+ nights · STO Long Stay — per person sharing",
+       "1,444"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Family Suite",
+     "rows": [
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 1–3 nights · STO — per Family Suite per night (2 linked suites)",
+       "13,955"
+      ],
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 4–5 nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "12,560"
+      ],
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 6+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "11,164"
+      ],
+      [
+       "High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Family Suite · 8+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "10,467"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Family Suite · 1–3 nights · STO — per Family Suite per night (2 linked suites)",
+       "8,660"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Family Suite · 4–5 nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "7,794"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Family Suite · 6+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "6,928"
+      ],
+      [
+       "Mid Season (01 Nov – 20 Dec 2027) · Family Suite · 8+ nights · STO Long Stay — per Family Suite per night (2 linked suites)",
+       "6,495"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle · 11 Jan 2027 – 10 Jan 2028 — per vehicle per night (14h00 arrival to 11h00 departure), all ages, subject to availability — nett",
+       "882"
+      ],
+      [
+       "Pilot / local driver-guide room — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Tour Leader rate · High Season (01 Aug – 31 Oct 2027; 21 Dec 2027 – 10 Jan 2028) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "1,550"
+      ],
+      [
+       "Tour Leader rate · Mid Season (01 Nov – 20 Dec 2027) · Suite · 1–14 guests · max 1 tour leader per 14 guests — per person per night — one rate printed (nett)",
+       "963"
+      ],
+      [
+       "Tour Leader · 15+ guests · Suite · 11 Jan 2027 – 10 Jan 2028 — 1 x tour leader no charge",
+       "no charge"
+      ],
+      [
+       "Tour Leader rate · Family Suite — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Children — all ages; triple rooms: 1 triple (max 2 adults + 1 child 16 or younger)",
+       "see label"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid at the lodge, booked on day of arrival — nett",
+       "5"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Child 6–16 sharing with 1 or 2 adults (triple subject to availability; not applicable to Family Suite/Tent) — half of the adult rate; child 0–5 sharing free",
+       "see label — half of the adult rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "andbeyond-chobe-under-canvas": {
+  "2027": {
+   "name": "&Beyond Chobe Under Canvas",
+   "region": "Chobe",
+   "currency": "US$",
+   "validity": "11 Jan 2027 – 10 Jan 2028, as printed",
+   "note": "andBeyond Lodge Rates 2027 – Botswana STO20, \"Accommodation Rate Sheet, Botswana (STO20)\", dated 2026/09/07 on the sheet; valid 11 Jan 2027 – 10 Jan 2028 (01–10 Jan 2027 is on the 2026 sheet); US Dollars (USD), inclusive of VAT. The sheet prints a RACK rate, an STO rate (1–3 nights) and STO Long Stay rates (4–5, 6+ and 8+ nights); all loaded as printed, nothing derived. STO is 20% off rack (sheet title STO20); long-stay 4–5 nights = STO less 10%, 6+ = STO less 20%, 8+ = STO less 25% (observed on the sheet, some rounded). Rates are per person per night sharing; Family Suites/Tents are per Family Suite/Tent per night. Includes: accommodation, three meals daily, soft drinks, house wines, local brand spirits and beers, teas and coffees, refreshments on game drives, laundry (excluding Under Canvas), safari activities, emergency medical evacuation cover, VAT, airstrip transfers and park fees, Guides' Journal and area map, one pair of Swarovski binoculars per room. Excludes: telephone calls, Safari Shop purchases, gratuities, personal items, champagne, cognacs, fine wines, premium spirits, cigars, Healing Earth wellness treatments. Long Stay rates may combine andBeyond lodges in Africa for the same guests on one itinerary; not combinable with other offers including Signature Offers. Single supplement 50%: 11 Jan – 30 Apr and 01 Nov – 20 Dec 2027 charged only from the third single room per booking; 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 on all single rooms; charged when an adult shares with an infant. Child policy (not applicable to Family Suites/Tents): 0–2 free (cots subject to availability); 3–5 free (triple subject to availability); 6–16 sharing with 1–2 adults 50% of adult rate; 6–16 in own room 1st child adult rate, 2nd and 3rd child 50% (max 3 per room); 17+ adult rate; game drives 6–11 at manager's discretion, boating 12+, mokoro and bush walks 16+. Children of any age may go on game drives on a paid private vehicle. Childminders USD 5 per child per hour, paid at the lodge. Private vehicles per vehicle per night (14h00 arrival to 11h00 departure), subject to availability. Pilots/local driver-guides: rate includes accommodation, meals, teas and coffees only, twin basis (single subject to availability) — one rate column printed, so rack = net. Tour Leader rate (bona fide, max 1 per 14 guests, normal inclusions) for 1–14 guests, 15+ guests 1 x no charge — one column printed, so rack = net. Signature Offers (not loaded as rows): Milestone Celebrations Offer 20% off accommodation (milestone birthdays/anniversaries) valid 11 Jan – 19 Mar, 02 Apr – 30 Jun, 01 Sep – 20 Dec 2027 on the 1–3-night rate; Fly Me around Botswana / around Botswana Under Canvas (7 nights) and Fly Me around the Delta (6 nights) package rates on request, 2–3 properties, max 3 nights per lodge; Honeymoon Offer 11 Jan – 20 Dec 2027: one partner pays 50% of the accommodation rate, min 2 nights, within 6 months of marriage, excludes Family Suite/Tent. Drones not allowed. &Beyond Trading Terms apply. Index of changes: rate adjustments; new Family Suite at Xaranna from reopening Aug 2027; pilot/guide room available at Nxabega and Sandibe Under Canvas from 2027; Helicopter Me to Sandibe offer removed. Chobe Under Canvas (Chobe National Park): closed 11 Jan – 06 Feb 2027 and 03 – 10 Jan 2028 — no rows for closed periods; High Season ends 02 Jan 2028 (not 10 Jan). Children 12 years and older; no triple; no private vehicle (N/A); no pilot/guide room or rate; no tour leader rate. Rate includes one half-day photographic safari on the Chobe River with Pangolin Photo Safaris (camera provided) on stays of 2+ nights. Laundry not included at Under Canvas. This STO doc holds the net STO and STO Long Stay rates only.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Tent",
+     "rows": [
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Tent · 1–3 nights · STO — per person sharing",
+       "920"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "828"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "736"
+      ],
+      [
+       "High Season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "690"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "685"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "617"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "548"
+      ],
+      [
+       "Mid Season (01 Apr – 30 Jun 2027; 01 Nov – 20 Dec 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "514"
+      ],
+      [
+       "Low Season (07 Feb – 31 Mar 2027) · Tent · 1–3 nights · STO — per person sharing",
+       "550"
+      ],
+      [
+       "Low Season (07 Feb – 31 Mar 2027) · Tent · 4–5 nights · STO Long Stay — per person sharing",
+       "495"
+      ],
+      [
+       "Low Season (07 Feb – 31 Mar 2027) · Tent · 6+ nights · STO Long Stay — per person sharing",
+       "440"
+      ],
+      [
+       "Low Season (07 Feb – 31 Mar 2027) · Tent · 8+ nights · STO Long Stay — per person sharing",
+       "413"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — Extras, guide rooms and policies (nett, rack = net)",
+     "rows": [
+      [
+       "Private vehicle — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Pilot / local driver-guide room — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Tour Leader rate — not offered on the sheet (N/A)",
+       "not applicable"
+      ],
+      [
+       "Children — 12 years and older; triple rooms: none",
+       "see label"
+      ],
+      [
+       "Childminder · 11 Jan 2027 – 10 Jan 2028 — per child per hour, paid at the lodge, booked on day of arrival — nett",
+       "5"
+      ],
+      [
+       "Single supplement · 01 May – 31 Oct 2027 and 21 Dec 2027 – 10 Jan 2028 · all single rooms — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ],
+      [
+       "Single supplement · 11 Jan – 30 Apr 2027 and 01 Nov – 20 Dec 2027 · charged only from the third single room per booking — fifty per cent of the sharing rate (see note)",
+       "see label — half of the sharing rate"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okonjima-plains-camp": {
+  "2027": {
+   "name": "Okonjima Plains Camp",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "01 Jan – 31 Dec 2027 (Low 01 Jan – 30 Jun 2027; High 01 Jul – 31 Dec 2027), as printed",
+   "note": "Net STO 20% rates. Classic Rooms and View Rooms, both DBB. Included in the Plains Camp DBB rate: accommodation, dinner, breakfast/brunch, NTB levy, VAT; coffee/tea and fruit through the day, Wi-Fi in rooms and lobby. Children from 3 years; child 7–13 rate printed, child 3–6 printed as a dash. Guide / Pilot rate: guides and pilots sleep in Lux en-suite tents at Plains Camp or Bush Camp and join activities only if space is available; no charge for tour-guide accommodation (DBB) when clients are booked on the FI rate at Bush Suite or African Villa. No park levy on the guide/pilot row. Okonjima Nature Reserve '20% STO RATES 2027' sheet, 'Document Updated 10/03/2026'; shown in N$; Low Season 01/01/27–30/06/27, High Season 01/07/27–31/12/27. Both rack and STO (20%) are printed per room type and loaded as printed; nothing derived. All rates per person per night. Park Levy N$385 per person per night is printed as a separate net (non-commissionable) fee, charged to adults 14 years and over only (shown as '-' on child rows) — it is NOT in the room rate. Single supplement (adults 14 years and over): add the supplement to the per person sharing rate for a double room in single occupancy. Guide/pilot, campsite, meal and activity rows are printed with STO 'n/a' (rack only), so they are loaded at the same figure in both docs as nett rows. Child rows printed with a dash carry no rate on the sheet and are left 'to confirm'. T&Cs printed: check-in from 13:00 (before 15:00 for afternoon activities), check-out by 10:00; provisional bookings held 14 days then auto-cancelled; FIT/small-group cancellation 60–31 days 25%, 30–14 days 50%, 13–7 days 75%, 6 days–no show 90%; block bookings: viability 180 days, provisional rooming list or 50% release 120 days, confirmed rooming list or release 90 days; block cancellation 90–60 days 25%, 59–30 days 50%, 29–7 days 80%, 6 days–no show 90%; payment strictly 60 days prior unless an agreement exists. Child policy: Plains Camp from 3 years; Bush Camp and African Villa from 12 years; Bush Suite from birth; no guided bush walks under 8; under-12s accompanied by an adult at all times; indemnity for under-16s; no child minders. Activity departure times: morning 06:00/06:30 return 09:30/10:00; afternoon 15:30/16:00 return 19:00/19:30. Rates subject to change without notice (currency fluctuation etc.).",
+   "sections": [
+    {
+     "title": "2027 — net STO · Classic Rooms · DBB — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp Classic Room · DBB · Adult — per person sharing",
+       "4,256.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp Classic Room · DBB · Adult — per person sharing",
+       "4,680.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp Classic Room · DBB · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp Classic Room · DBB · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp Classic Room · DBB · Child 7–13 years — per child",
+       "2,128.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp Classic Room · DBB · Child 7–13 years — per child",
+       "2,340.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp Classic Room · DBB · Child 3–6 years — per child — to confirm (sheet prints a dash, no rate)",
+       "to confirm"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp Classic Room · DBB · Child 3–6 years — per child — to confirm (sheet prints a dash, no rate)",
+       "to confirm"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · View Rooms · DBB — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp View Room · DBB · Adult — per person sharing",
+       "6,160.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp View Room · DBB · Adult — per person sharing",
+       "6,776.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp View Room · DBB · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp View Room · DBB · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp View Room · DBB · Child 7–13 years — per child",
+       "3,080.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp View Room · DBB · Child 7–13 years — per child",
+       "3,388.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Plains Camp View Room · DBB · Child 3–6 years — per child — to confirm (sheet prints a dash, no rate)",
+       "to confirm"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Plains Camp View Room · DBB · Child 3–6 years — per child — to confirm (sheet prints a dash, no rate)",
+       "to confirm"
+      ]
+     ]
+    },
+    {
+     "title": "Park Levy (nett, non-commissionable) — add to every adult night",
+     "rows": [
+      [
+       "Park Levy / conservation fee (nett, non-commissionable; charged to adults 14 years and over, not children) — per person per night",
+       "385.00"
+      ]
+     ]
+    },
+    {
+     "title": "Guide / Pilot — DBB in Lux en-suite tent (nett)",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Guide / Pilot · DBB in Lux en-suite tent at Plains Camp or Bush Camp (nett, STO printed n/a) · Guide / Pilot — per person per night",
+       "1,320.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Guide / Pilot · DBB in Lux en-suite tent at Plains Camp or Bush Camp (nett, STO printed n/a) · Guide / Pilot — per person per night",
+       "1,450.00"
+      ]
+     ]
+    },
+    {
+     "title": "Activities — optional, per person (nett, no STO: rack rate applies; included activities on FI rates exclude rhino & pangolin tracking)",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Adult — per person",
+       "970.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Adult — per person",
+       "1,060.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Child 3–13 years — per person",
+       "485.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Child 3–13 years — per person",
+       "530.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Adult — per person",
+       "2,900.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Adult — per person",
+       "3,190.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Child 12–13 years — per person",
+       "1,450.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Child 12–13 years — per person",
+       "1,595.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "2,200.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "2,420.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Child 12–13 years — per person",
+       "1,100.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Child 12–13 years — per person",
+       "1,210.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Adult — per person",
+       "420.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Adult — per person",
+       "460.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Child 8–13 years — per person",
+       "210.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Child 8–13 years — per person",
+       "230.00"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okonjima-bush-camp": {
+  "2027": {
+   "name": "Okonjima Bush Camp",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "01 Jan – 31 Dec 2027 (Low 01 Jan – 30 Jun 2027; High 01 Jul – 31 Dec 2027), as printed",
+   "note": "Net STO 20% rates. Bush Camp Chalet on DBB or FI, and the Private Bush Suite on FI. Chalet DBB includes accommodation, dinner, breakfast, drinks (excl. premier and imported brands), laundry, Wi-Fi, NTB levy, VAT. Chalet FI includes accommodation, all meals, drinks (excl. premier and imported brands), laundry, 2 activities per person per day (excl. rhino & pangolin tracking), Wi-Fi, NTB levy, VAT. Bush Suite FI includes accommodation, meals, 2 activities per person per day (excl. rhino & pangolin tracking), drinks (excl. premier and imported brands), laundry, Wi-Fi, NTB levy, VAT, private guide, vehicle and chef. Bush Camp children from 12 years (child 12–13 rate); Bush Suite welcomes infants from birth (child 7–13 rate printed, child 3–6 printed as a dash). Guide / Pilot rate: guides and pilots sleep in Lux en-suite tents at Plains Camp or Bush Camp and join activities only if space is available; no charge for tour-guide accommodation (DBB) when clients are booked on the FI rate at Bush Suite or African Villa. No park levy on the guide/pilot row. Okonjima Nature Reserve '20% STO RATES 2027' sheet, 'Document Updated 10/03/2026'; shown in N$; Low Season 01/01/27–30/06/27, High Season 01/07/27–31/12/27. Both rack and STO (20%) are printed per room type and loaded as printed; nothing derived. All rates per person per night. Park Levy N$385 per person per night is printed as a separate net (non-commissionable) fee, charged to adults 14 years and over only (shown as '-' on child rows) — it is NOT in the room rate. Single supplement (adults 14 years and over): add the supplement to the per person sharing rate for a double room in single occupancy. Guide/pilot, campsite, meal and activity rows are printed with STO 'n/a' (rack only), so they are loaded at the same figure in both docs as nett rows. Child rows printed with a dash carry no rate on the sheet and are left 'to confirm'. T&Cs printed: check-in from 13:00 (before 15:00 for afternoon activities), check-out by 10:00; provisional bookings held 14 days then auto-cancelled; FIT/small-group cancellation 60–31 days 25%, 30–14 days 50%, 13–7 days 75%, 6 days–no show 90%; block bookings: viability 180 days, provisional rooming list or 50% release 120 days, confirmed rooming list or release 90 days; block cancellation 90–60 days 25%, 59–30 days 50%, 29–7 days 80%, 6 days–no show 90%; payment strictly 60 days prior unless an agreement exists. Child policy: Plains Camp from 3 years; Bush Camp and African Villa from 12 years; Bush Suite from birth; no guided bush walks under 8; under-12s accompanied by an adult at all times; indemnity for under-16s; no child minders. Activity departure times: morning 06:00/06:30 return 09:30/10:00; afternoon 15:30/16:00 return 19:00/19:30. Rates subject to change without notice (currency fluctuation etc.).",
+   "sections": [
+    {
+     "title": "2027 — net STO · Bush Camp Chalet · DBB — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Bush Camp Chalet · DBB · Adult — per person sharing",
+       "8,928.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Bush Camp Chalet · DBB · Adult — per person sharing",
+       "9,824.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Bush Camp Chalet · DBB · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Bush Camp Chalet · DBB · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Bush Camp Chalet · DBB · Child 12–13 years — per child",
+       "4,464.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Bush Camp Chalet · DBB · Child 12–13 years — per child",
+       "4,912.00"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Bush Camp Chalet · FI (fully inclusive) — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Bush Camp Chalet · FI (fully inclusive) · Adult — per person sharing",
+       "12,240.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Bush Camp Chalet · FI (fully inclusive) · Adult — per person sharing",
+       "13,464.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Bush Camp Chalet · FI (fully inclusive) · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Bush Camp Chalet · FI (fully inclusive) · Adult single supplement — single supplement — add to the per person sharing rate (adults 14 years and over)",
+       "1,456.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Bush Camp Chalet · FI (fully inclusive) · Child 12–13 years — per child",
+       "6,120.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Bush Camp Chalet · FI (fully inclusive) · Child 12–13 years — per child",
+       "6,732.00"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Private Bush Suite · FI (fully inclusive) — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Private Bush Suite · FI (fully inclusive, private guide, vehicle and chef) · Adult — per person sharing",
+       "17,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Private Bush Suite · FI (fully inclusive, private guide, vehicle and chef) · Adult — per person sharing",
+       "19,360.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Private Bush Suite · FI (fully inclusive, private guide, vehicle and chef) · Child 7–13 years — per child",
+       "8,800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Private Bush Suite · FI (fully inclusive, private guide, vehicle and chef) · Child 7–13 years — per child",
+       "9,680.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Private Bush Suite · FI (fully inclusive, private guide, vehicle and chef) · Child 3–6 years — per child — to confirm (sheet prints a dash, no rate)",
+       "to confirm"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Private Bush Suite · FI (fully inclusive, private guide, vehicle and chef) · Child 3–6 years — per child — to confirm (sheet prints a dash, no rate)",
+       "to confirm"
+      ]
+     ]
+    },
+    {
+     "title": "Park Levy (nett, non-commissionable) — add to every adult night",
+     "rows": [
+      [
+       "Park Levy / conservation fee (nett, non-commissionable; charged to adults 14 years and over, not children) — per person per night",
+       "385.00"
+      ]
+     ]
+    },
+    {
+     "title": "Guide / Pilot — DBB in Lux en-suite tent (nett)",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Guide / Pilot · DBB in Lux en-suite tent at Plains Camp or Bush Camp (nett, STO printed n/a) · Guide / Pilot — per person per night",
+       "1,320.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Guide / Pilot · DBB in Lux en-suite tent at Plains Camp or Bush Camp (nett, STO printed n/a) · Guide / Pilot — per person per night",
+       "1,450.00"
+      ]
+     ]
+    },
+    {
+     "title": "Activities — optional, per person (nett, no STO: rack rate applies; included activities on FI rates exclude rhino & pangolin tracking)",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Adult — per person",
+       "970.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Adult — per person",
+       "1,060.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Child 3–13 years — per person",
+       "485.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Child 3–13 years — per person",
+       "530.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Adult — per person",
+       "2,900.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Adult — per person",
+       "3,190.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Child 12–13 years — per person",
+       "1,450.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Child 12–13 years — per person",
+       "1,595.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "2,200.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "2,420.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Child 12–13 years — per person",
+       "1,100.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Child 12–13 years — per person",
+       "1,210.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Adult — per person",
+       "420.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Adult — per person",
+       "460.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Child 8–13 years — per person",
+       "210.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Child 8–13 years — per person",
+       "230.00"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okonjima-villa": {
+  "2027": {
+   "name": "Okonjima Villa",
+   "region": "Central Namibia",
+   "currency": "N$",
+   "validity": "01 Jan – 31 Dec 2027 (Low 01 Jan – 30 Jun 2027; High 01 Jul – 31 Dec 2027), as printed",
+   "note": "Net STO 20% rates. Printed on the sheet as 'African Villa' (child policy line: 'Okonjima African Villa'). FI rate includes accommodation, meals, 2 activities per person per day (excl. rhino & pangolin tracking), drinks (excl. premier and imported brands), laundry, Wi-Fi, NTB levy, VAT, private guide, vehicle and chef. NON-EXCLUSIVE (2–6 pax): small guided groups or rooms booked individually, the Villa operating as a boutique lodge. EXCLUSIVE (2–8 pax): includes private guide, game viewer and chef. Children from 12 years. No tour-guide accommodation charge (DBB) when clients are on the FI rate. Okonjima Nature Reserve '20% STO RATES 2027' sheet, 'Document Updated 10/03/2026'; shown in N$; Low Season 01/01/27–30/06/27, High Season 01/07/27–31/12/27. Both rack and STO (20%) are printed per room type and loaded as printed; nothing derived. All rates per person per night. Park Levy N$385 per person per night is printed as a separate net (non-commissionable) fee, charged to adults 14 years and over only (shown as '-' on child rows) — it is NOT in the room rate. Single supplement (adults 14 years and over): add the supplement to the per person sharing rate for a double room in single occupancy. Guide/pilot, campsite, meal and activity rows are printed with STO 'n/a' (rack only), so they are loaded at the same figure in both docs as nett rows. Child rows printed with a dash carry no rate on the sheet and are left 'to confirm'. T&Cs printed: check-in from 13:00 (before 15:00 for afternoon activities), check-out by 10:00; provisional bookings held 14 days then auto-cancelled; FIT/small-group cancellation 60–31 days 25%, 30–14 days 50%, 13–7 days 75%, 6 days–no show 90%; block bookings: viability 180 days, provisional rooming list or 50% release 120 days, confirmed rooming list or release 90 days; block cancellation 90–60 days 25%, 59–30 days 50%, 29–7 days 80%, 6 days–no show 90%; payment strictly 60 days prior unless an agreement exists. Child policy: Plains Camp from 3 years; Bush Camp and African Villa from 12 years; Bush Suite from birth; no guided bush walks under 8; under-12s accompanied by an adult at all times; indemnity for under-16s; no child minders. Activity departure times: morning 06:00/06:30 return 09:30/10:00; afternoon 15:30/16:00 return 19:00/19:30. Rates subject to change without notice (currency fluctuation etc.). The sheet calls this property the African Villa; it is the site's Okonjima Villa.",
+   "sections": [
+    {
+     "title": "2027 — net STO · African Villa · Non-exclusive (2–6 pax) · FI — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · African Villa · Non-exclusive (2–6 pax) · FI (fully inclusive) · Adult — per person sharing",
+       "14,080.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · African Villa · Non-exclusive (2–6 pax) · FI (fully inclusive) · Adult — per person sharing",
+       "15,488.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · African Villa · Non-exclusive (2–6 pax) · FI (fully inclusive) · Child 12–13 years — per child",
+       "7,040.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · African Villa · Non-exclusive (2–6 pax) · FI (fully inclusive) · Child 12–13 years — per child",
+       "7,744.00"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · African Villa · Exclusive use (2–8 pax) · FI — per person per night",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · African Villa · Exclusive use (2–8 pax, private guide, game viewer and chef) · FI (fully inclusive) · Adult — per person sharing",
+       "17,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · African Villa · Exclusive use (2–8 pax, private guide, game viewer and chef) · FI (fully inclusive) · Adult — per person sharing",
+       "19,360.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · African Villa · Exclusive use (2–8 pax, private guide, game viewer and chef) · FI (fully inclusive) · Child 12–13 years — per child",
+       "8,800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · African Villa · Exclusive use (2–8 pax, private guide, game viewer and chef) · FI (fully inclusive) · Child 12–13 years — per child",
+       "9,680.00"
+      ]
+     ]
+    },
+    {
+     "title": "Park Levy (nett, non-commissionable) — add to every adult night",
+     "rows": [
+      [
+       "Park Levy / conservation fee (nett, non-commissionable; charged to adults 14 years and over, not children) — per person per night",
+       "385.00"
+      ]
+     ]
+    },
+    {
+     "title": "Activities — optional, per person (nett, no STO: rack rate applies; included activities on FI rates exclude rhino & pangolin tracking)",
+     "rows": [
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Leopard Tracking · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Brown Hyaena Tracking · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Into AfriCat – Behind the Science (launched 01 Jul 2026) · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Adult — per person",
+       "970.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Adult — per person",
+       "1,060.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Child 3–13 years — per person",
+       "485.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Game & Nature Drive · Child 3–13 years — per person",
+       "530.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Adult — per person",
+       "2,900.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Adult — per person",
+       "3,190.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Child 12–13 years — per person",
+       "1,450.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Pangolin Tracking on foot (exclusive to guests staying 2 nights; can be pre-booked, no refund on guest cancellation) · Child 12–13 years — per person",
+       "1,595.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "2,200.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "2,420.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Child 12–13 years — per person",
+       "1,100.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Rhino Tracking on foot (cannot be pre-booked; subject to weather and availability) · Child 12–13 years — per person",
+       "1,210.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "1,600.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Adult — per person",
+       "1,760.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Child 6–13 years — per person",
+       "800.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Night Drive (cannot be pre-booked; subject to weather and availability) · Child 6–13 years — per person",
+       "880.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Adult — per person",
+       "420.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Adult — per person",
+       "460.00"
+      ],
+      [
+       "Low Season (01 Jan – 30 Jun 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Child 8–13 years — per person",
+       "210.00"
+      ],
+      [
+       "High Season (01 Jul – 31 Dec 2027) · Activity (nett, STO printed n/a; rack rate applies) · Guided Nature Trails (cannot be pre-booked; subject to weather and availability; no bush walks for children under 8) · Child 8–13 years — per person",
+       "230.00"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "batonka-guest-lodge": {
+  "2026": {
+   "name": "Batonka Guest Lodge",
+   "region": "Vic Falls",
+   "currency": "US$",
+   "validity": "01 January 2026 – 31 December 2026, as printed",
+   "note": "Batonka Guest Lodge \"2026 STO Rates\", validity 01 January 2026 to 31 December 2026 (no issue date printed); US$. One rate all year, Pool View / Garden View Room. The 2026 sheet itself carries no inclusions text beyond the room/meal basis; the 2027 sheet's T&Cs are assumed to apply (B&B, nett, ZTA levy and VAT included) — unverified for 2026. The 2026 sheet prints Half Board rates; the 2027 sheet prints Bed & Breakfast only. Vic Falls Airport Transfer printed as TBC. Sheet says rates are subject to change; bookings made at these rates are honoured if adjusted upwards. Group Ts & Cs differ — contact Batonka. Rates are nett to Batonka (per the 2027 T&Cs: quoted in US$, inclusive of the Zimbabwe Tourism Authority 2% levy and VAT where applicable; sharing rate is per person sharing per night, single rate is one person in the room per night). Accommodation rates include full English and continental breakfast. Rates exclude all transfers, activities, tips, meals and drinks other than breakfast, porterage, visa fees and items of a personal nature. Child policy (2027 T&Cs): children 0–3 sharing with one adult free of charge; children 4–12 sharing with an adult pay 50% of the adult fee; children 4–12 in their own room pay the full single rate. Check-in from 14:00, check-out by 10:00. Provisional bookings held 14 days (made 60+ days out), 7 days (30–60 days out) or 48 hours (under 30 days out). 3.5% surcharge on credit card payments; full payment before arrival unless credit facilities granted; bank charges for the tour operator's account. No commission percentage is printed on either sheet — the sheet only says the rates are nett and that recommended selling prices are available from Batonka.",
+   "sections": [
+    {
+     "title": "2026 — net STO · All year (01 Jan – 31 Dec 2026)",
+     "rows": [
+      [
+       "All year (01 Jan – 31 Dec 2026) · Pool View / Garden View Room · bed & breakfast — per person sharing",
+       "156"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2026) · Pool View / Garden View Room · half board — per person sharing",
+       "184"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2026) · Pool View / Garden View Room · bed & breakfast — single occupancy",
+       "218"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2026) · Pool View / Garden View Room · half board — single occupancy",
+       "246"
+      ]
+     ]
+    },
+    {
+     "title": "2026 — transfers & activities (not priced)",
+     "rows": [
+      [
+       "Vic Falls Airport Transfer (01 Jan – 31 Dec 2026) — printed TBC on the sheet",
+       "to confirm"
+      ]
+     ]
+    }
+   ]
+  },
+  "2027": {
+   "name": "Batonka Guest Lodge",
+   "region": "Vic Falls",
+   "currency": "US$",
+   "validity": "01 January 2027 – 31 December 2027 (three seasons: 01 Jan – 31 May; 01 Jun – 30 Oct; 01 Nov – 31 Dec 2027), as printed",
+   "note": "Batonka Guest Lodge \"2027 Rates – STO\" (no issue date printed); US$; bed and breakfast. Three seasons printed: January 1st to 31st May, June 1st to 30th October, 1st November to 31st December — note 31 October 2027 falls in no printed season (query with Batonka). The sheet does not state the year on the season lines; 2027 taken from the title. Child rows are printed as 'Child 4 – 11' in the rate table while the child policy text says 4–12 (query with Batonka). Child 4–11 single is printed at the full single rate. Transfers (Victoria Falls Airport, Kazungula Border — printed 'Kazangula' — and Kasane Town, all written to/from 'Pioneers', the sister lodge) and the Guided Tour of the Falls (excl. park fees) are all printed TBC. Rates are nett to Batonka (per the 2027 T&Cs: quoted in US$, inclusive of the Zimbabwe Tourism Authority 2% levy and VAT where applicable; sharing rate is per person sharing per night, single rate is one person in the room per night). Accommodation rates include full English and continental breakfast. Rates exclude all transfers, activities, tips, meals and drinks other than breakfast, porterage, visa fees and items of a personal nature. Child policy (2027 T&Cs): children 0–3 sharing with one adult free of charge; children 4–12 sharing with an adult pay 50% of the adult fee; children 4–12 in their own room pay the full single rate. Check-in from 14:00, check-out by 10:00. Provisional bookings held 14 days (made 60+ days out), 7 days (30–60 days out) or 48 hours (under 30 days out). 3.5% surcharge on credit card payments; full payment before arrival unless credit facilities granted; bank charges for the tour operator's account. No commission percentage is printed on either sheet — the sheet only says the rates are nett and that recommended selling prices are available from Batonka.",
+   "sections": [
+    {
+     "title": "2027 — net STO · 01 Jan – 31 May 2027 season",
+     "rows": [
+      [
+       "01 Jan – 31 May 2027 season · Pool View / Garden View Room · bed & breakfast — per person sharing",
+       "164"
+      ],
+      [
+       "01 Jan – 31 May 2027 season · Pool View / Garden View Room · bed & breakfast — single occupancy",
+       "230"
+      ],
+      [
+       "01 Jan – 31 May 2027 season · child 4–11 sharing with adult · bed & breakfast — per child",
+       "82"
+      ],
+      [
+       "01 Jan – 31 May 2027 season · child 4–11 in own room (single) · bed & breakfast — per child (full single rate)",
+       "230"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · 01 Jun – 30 Oct 2027 season",
+     "rows": [
+      [
+       "01 Jun – 30 Oct 2027 season · Pool View / Garden View Room · bed & breakfast — per person sharing",
+       "184"
+      ],
+      [
+       "01 Jun – 30 Oct 2027 season · Pool View / Garden View Room · bed & breakfast — single occupancy",
+       "258"
+      ],
+      [
+       "01 Jun – 30 Oct 2027 season · child 4–11 sharing with adult · bed & breakfast — per child",
+       "92"
+      ],
+      [
+       "01 Jun – 30 Oct 2027 season · child 4–11 in own room (single) · bed & breakfast — per child (full single rate)",
+       "258"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · 01 Nov – 31 Dec 2027 season",
+     "rows": [
+      [
+       "01 Nov – 31 Dec 2027 season · Pool View / Garden View Room · bed & breakfast — per person sharing",
+       "164"
+      ],
+      [
+       "01 Nov – 31 Dec 2027 season · Pool View / Garden View Room · bed & breakfast — single occupancy",
+       "230"
+      ],
+      [
+       "01 Nov – 31 Dec 2027 season · child 4–11 sharing with adult · bed & breakfast — per child",
+       "82"
+      ],
+      [
+       "01 Nov – 31 Dec 2027 season · child 4–11 in own room (single) · bed & breakfast — per child (full single rate)",
+       "230"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — transfers & activities (not priced)",
+     "rows": [
+      [
+       "Transfer · Victoria Falls Airport to Pioneers (2027) — printed TBC",
+       "to confirm"
+      ],
+      [
+       "Transfer · Pioneers to Victoria Falls Airport (2027) — printed TBC",
+       "to confirm"
+      ],
+      [
+       "Transfer · Pioneers to Kazungula Border (2027) — printed TBC",
+       "to confirm"
+      ],
+      [
+       "Transfer · Kazungula Border to Pioneers (2027) — printed TBC",
+       "to confirm"
+      ],
+      [
+       "Transfer · Pioneers to Kasane Town (2027) — printed TBC",
+       "to confirm"
+      ],
+      [
+       "Transfer · Kasane Town to Pioneers (2027) — printed TBC",
+       "to confirm"
+      ],
+      [
+       "In-house activity · Guided Tour of the Falls, excl. park fees (2027) — printed TBC",
+       "to confirm"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "swakopmund-luxury-suites": {
+  "2026": {
+   "name": "Swakopmund Luxury Suites",
+   "region": "Swakopmund",
+   "currency": "N$",
+   "validity": "01/12/2025 – 30/11/2026, as printed",
+   "note": "\"20% STO RATES 2026\" — Bed & Breakfast (valid 01/12/2025 - 30/11/2026); no issue date printed. Cancellation (2026 sheet): 30–23 days 25%, 22–15 days 50%, 14–7 days 75%, 6–0 days 95%, no-shows/early departures 100%; 10% admin fee retained on refunds. Sheet columns: Rack Rate (incl. VAT & Levy), STO Rate (excl. VAT & Levy), 2% Levy, 15% VAT, STO Rate (incl. VAT & Levy). The STO loaded here is the STO INCLUDING VAT and 2% tourism levy (what the operator pays); rack as printed. Rates in NAD, per night, bed & breakfast, include VAT and 2% Tourism Levy; subject to change without notice. Commission 20% (STO incl. = exactly 80% of rack). Children: under 2 years FOC; 2 till 11 years 50% of rack rate (children only possible in the luxury family rooms). Guide policy: 1st guide 50% of rack rate; additional guides at the STO single room rate. Meals other than breakfast are nett and not included. Portage recommended N$10 per stay per person. Check-in 14h00, check-out 10h00. Credit cards only accepted on rack-rate invoices or pre-payments. Group block bookings: preliminary rooming list 60 days out (or 25% non-refundable deposit), up to 10% of rooms cancellable free up to 45 days out, final rooming list 30 days out.",
+   "sections": [
+    {
+     "title": "2026 — net STO incl. VAT & levy · All year (01 Dec 2025 – 30 Nov 2026)",
+     "rows": [
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · Junior Suite · bed & breakfast — per person sharing (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,429.06, levy N$28.58, VAT N$214.36)",
+       "1,672.00"
+      ],
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · Junior Suite · bed & breakfast — single occupancy (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,955.56, levy N$39.11, VAT N$293.33)",
+       "2,288.00"
+      ],
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · Luxury Room · bed & breakfast — per person sharing (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,128.21, levy N$22.56, VAT N$169.23)",
+       "1,320.00"
+      ],
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · Luxury Room · bed & breakfast — single occupancy (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,504.27, levy N$30.09, VAT N$225.64)",
+       "1,760.00"
+      ]
+     ]
+    },
+    {
+     "title": "2026 — children & guides (policy rows)",
+     "rows": [
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · child 2–11 sharing (luxury family rooms only) · bed & breakfast — half of the adult rack rate (policy as printed; child rack figure = rack ÷ two)",
+       "half of the adult rack rate — see note"
+      ],
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · child under 2 years · bed & breakfast — free of charge",
+       "free"
+      ],
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · 1st guide · bed & breakfast — half of the adult rack rate (guide policy as printed)",
+       "half of the adult rack rate — see note"
+      ],
+      [
+       "All year (01 Dec 2025 – 30 Nov 2026) · additional guides · bed & breakfast — at the STO single room rate (guide policy as printed)",
+       "at the STO single room rate — see note"
+      ]
+     ]
+    }
+   ]
+  },
+  "2027": {
+   "name": "Swakopmund Luxury Suites",
+   "region": "Swakopmund",
+   "currency": "N$",
+   "validity": "01/12/2026 – 30/11/2027, as printed",
+   "note": "\"20% STO RATES 2027\" — Bed & Breakfast (valid 01/12/2026 - 30/11/2027); no issue date printed. Cancellation (2027 sheet): 60–22 days 25%, 21–15 days 50%, 14–8 days 75%, 7–0 days 100%, no-shows/early departures 100% of total booking amount; 10% admin fee on refunds outside the policy period. Sheet columns: Rack Rate (incl. VAT & Levy), STO Rate (excl. VAT & Levy), 2% Levy, 15% VAT, STO Rate (incl. VAT & Levy). The STO loaded here is the STO INCLUDING VAT and 2% tourism levy (what the operator pays); rack as printed. Rates in NAD, per night, bed & breakfast, include VAT and 2% Tourism Levy; subject to change without notice. Commission 20% (STO incl. = exactly 80% of rack). Children: under 2 years FOC; 2 till 11 years 50% of rack rate (children only possible in the luxury family rooms). Guide policy: 1st guide 50% of rack rate; additional guides at the STO single room rate. Meals other than breakfast are nett and not included. Portage recommended N$10 per stay per person. Check-in 14h00, check-out 10h00. Credit cards only accepted on rack-rate invoices or pre-payments. Group block bookings: preliminary rooming list 60 days out (or 25% non-refundable deposit), up to 10% of rooms cancellable free up to 45 days out, final rooming list 30 days out.",
+   "sections": [
+    {
+     "title": "2027 — net STO incl. VAT & levy · All year (01 Dec 2026 – 30 Nov 2027)",
+     "rows": [
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · Junior Suite · bed & breakfast — per person sharing (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,538.46, levy N$30.77, VAT N$230.77)",
+       "1,800.00"
+      ],
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · Junior Suite · bed & breakfast — single occupancy (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$2,051.28, levy N$41.03, VAT N$307.69)",
+       "2,400.00"
+      ],
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · Luxury Room · bed & breakfast — per person sharing (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,230.77, levy N$24.62, VAT N$184.62)",
+       "1,440.00"
+      ],
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · Luxury Room · bed & breakfast — single occupancy (STO incl. 15% VAT & 2% levy; sheet also prints STO excl. VAT & levy N$1,606.84, levy N$32.14, VAT N$241.03)",
+       "1,880.00"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — children & guides (policy rows)",
+     "rows": [
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · child 2–11 sharing (luxury family rooms only) · bed & breakfast — half of the adult rack rate (policy as printed; child rack figure = rack ÷ two)",
+       "half of the adult rack rate — see note"
+      ],
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · child under 2 years · bed & breakfast — free of charge",
+       "free"
+      ],
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · 1st guide · bed & breakfast — half of the adult rack rate (guide policy as printed)",
+       "half of the adult rack rate — see note"
+      ],
+      [
+       "All year (01 Dec 2026 – 30 Nov 2027) · additional guides · bed & breakfast — at the STO single room rate (guide policy as printed)",
+       "at the STO single room rate — see note"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "windhoek-lux-suites": {
+  "2027": {
+   "name": "The Windhoek Lux Suites",
+   "region": "Windhoek",
+   "currency": "N$",
+   "validity": "1 January 2027 – 31 December 2027, as printed",
+   "note": "The Windhoek Luxury Suites \"STO RATE 15%\", valid from 1 January 2027 until 31 December 2027; includes breakfast; no issue date printed. Rack Rate and STO Rate (15%) tables both printed and loaded as printed (nothing derived; STO = exactly 85% of rack on every row). Rates quoted in Namibia Dollars, PER ROOM, include VAT and tourism levies, breakfast, complimentary WiFi and free, safe parking. Children under 3: no charge (cell left blank on the STO Family room 2 adults & 1 child row). Cancellation — individual: free 48 hours+ prior to arrival, 20% under 48 hours, 100% on no-show; group: 20% at 61–89 days, 50% at 31–60 days, 80% at 8–30 days, 100% at 0–7 days or no-show.",
+   "sections": [
+    {
+     "title": "2027 — net STO (15%) · All year (01 Jan – 31 Dec 2027) · per room",
+     "rows": [
+      [
+       "All year (01 Jan – 31 Dec 2027) · Ground room · bed & breakfast — single, per room",
+       "2,167.50"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2027) · Ground room · bed & breakfast — double, per room",
+       "3,272.50"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2027) · Loft room · bed & breakfast — single, per room",
+       "2,167.50"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2027) · Loft room · bed & breakfast — double, per room",
+       "3,272.50"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2027) · Family room · 2 adults & 2 children · bed & breakfast — per room",
+       "4,377.50"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2027) · Family room · 2 adults & 1 child · bed & breakfast — per room",
+       "3,825.00"
+      ],
+      [
+       "All year (01 Jan – 31 Dec 2027) · children under 3 years — no charge",
+       "no charge"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "nambwa-tented-lodge": {
+  "2026": {
+   "name": "Nambwa Tented Lodge",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027); Peak Season (Jul – Nov 2026) (as printed)",
+   "note": "2026 African Monarch Journeys – Lodges STO 20% Rates (Nambwa Tented Lodge pages 1–2); all prices in N$; STO 20% (the sheet prints STO only). Two sheets for Nambwa: '2026 STO 20% RATES – DBB' and '2026 STO 20% RATES – FULLY INCLUSIVE'. DBB includes accommodation, dinner, breakfast, VAT & NTB levy; excludes lunch, beverages, specialty coffees, activities, sustainability levy, special experiences, park fees, transfers, laundry. Fully Inclusive includes accommodation, all meals, activities, local beverages (excluding premier brands), specialty coffees, laundry, park fees, VAT, NTB levy; excludes sustainability levy, transfers, special experiences, gratuities. Child 0–5 = 25% and child 6–11 = 50% of the adult rate. Kids on Safari package includes accommodation sharing with parents, treasure hunt (treasures to the value of N$1,800), private vehicle and guide, bush walk, game drive, boat cruise, fishing, Sijwa Project visit, island camp-out dinner. 4x4 needed from the park gate; 2x4 transfers from The Sijwa Project available. Transfer rows: the sheet does not say per person or per vehicle — labelled per person as a working assumption, to confirm. Rates are subject to change; 30% deposit to confirm, balance 30 days before arrival (bookings within 14 days: full payment). Cancellation: 60–30 days 50%, 29–15 days 75%, 14–0 days 100%. Private game drives or boat cruises are compulsory for guests travelling with children under 12. The sheet does not mark any row as non-commissionable; Sustainability Levy, road/boat transfers, guide/pilot accommodation and lunch are carried here as non-commissionable (rack = net) by portal convention — confirm with African Monarch Journeys. Lodge address printed: Bwabwata National Park, Zambezi Region.",
+   "sections": [
+    {
+     "title": "2026 — net STO · Green Season",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "7200"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "2160"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · child 0–5 sharing (25% of adult rate) — per child per night",
+       "1800"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "3600"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Fully Inclusive · adult — per person sharing per night",
+       "9600"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Fully Inclusive · single supplement — add to the sharing rate",
+       "2880"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Fully Inclusive · child 0–5 sharing (25% of adult rate) — per child per night",
+       "2400"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Fully Inclusive · child 6–11 sharing (50% of adult rate) — per child per night",
+       "4800"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Special Kids on Safari Package (6–12 years, 3-day junior ranger programme, minimum 3-night stay) — per child per night",
+       "6900"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Bush Brunch (surcharge with DBB rate, minimum 6 pax) — per person",
+       "950"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Special Sundowner (surcharge with DBB rate, minimum 6 pax) — per person",
+       "650"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Romantic Picnic in the Bush (maximum 2 pax) — per person",
+       "650"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Private Vehicle 4 seats (by prior arrangement only) — per game drive / boat cruise",
+       "3500"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "7500"
+      ]
+     ]
+    },
+    {
+     "title": "2026 — net STO · Peak Season",
+     "rows": [
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "8560"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "2568"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · child 0–5 sharing (25% of adult rate) — per child per night",
+       "2140"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "4280"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Fully Inclusive · adult — per person sharing per night",
+       "12400"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Fully Inclusive · single supplement — add to the sharing rate",
+       "3720"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Fully Inclusive · child 0–5 sharing (25% of adult rate) — per child per night",
+       "3100"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Fully Inclusive · child 6–11 sharing (50% of adult rate) — per child per night",
+       "6200"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Special Kids on Safari Package (6–12 years, 3-day junior ranger programme, minimum 3-night stay) — per child per night",
+       "6900"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Bush Brunch (surcharge with DBB rate, minimum 6 pax) — per person",
+       "950"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Special Sundowner (surcharge with DBB rate, minimum 6 pax) — per person",
+       "650"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Romantic Picnic in the Bush (maximum 2 pax) — per person",
+       "650"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Private Vehicle 4 seats (by prior arrangement only) — per game drive / boat cruise",
+       "3900"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "9500"
+      ]
+     ]
+    },
+    {
+     "title": "2026 — levy, transfers, guide/pilot & meals (non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Sustainability Levy — per person per night",
+       "390"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Lunch (DBB guests) — per person",
+       "350"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Guide / Pilot · Dinner, Bed & Breakfast — per person per night",
+       "2100"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Road Transfer to or from Immelman Airstrip — per person",
+       "750"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Boat Transfer to or from The Sijwa Project Parking — per person",
+       "410"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Boat Transfer to or from Kazile Boat Station — per person",
+       "495"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Boat Transfer to or from Kapako Boat Station — per person",
+       "395"
+      ]
+     ]
+    }
+   ]
+  },
+  "2027": {
+   "name": "Nambwa Tented Lodge",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028); Peak Season (Jul – Nov 2027) (as printed)",
+   "note": "2027 African Monarch Journeys – Lodges STO 20% Rates (Nambwa Tented Lodge pages 1–2); all prices in N$; STO 20% (the sheet prints STO only). Two sheets for Nambwa: '2027 STO 20% RATES – DBB' and '2027 STO 20% RATES – FULLY INCLUSIVE'. DBB includes accommodation, dinner, breakfast, VAT & NTB levy; excludes lunch, beverages, specialty coffees, activities, sustainability levy, special experiences, park fees, transfers, laundry. Fully Inclusive includes accommodation, all meals, activities, local beverages (excluding premier brands), specialty coffees, laundry, park fees, VAT, NTB levy; excludes sustainability levy, transfers, special experiences, gratuities. Child 0–5 = 25% and child 6–11 = 50% of the adult rate. Kids on Safari package includes accommodation sharing with parents, treasure hunt (treasures to the value of N$1,800), private vehicle and guide, bush walk, game drive, boat cruise, fishing, Sijwa Project visit, island camp-out dinner. 4x4 needed from the park gate; 2x4 transfers from The Sijwa Project available. Transfer rows: the sheet does not say per person or per vehicle — labelled per person as a working assumption, to confirm. Green Season 2027: no single supplement (printed 'No Single Supplement'). The 2027 sheet no longer lists the Kapako Boat Station transfer or the 4-seat private vehicle. Rates are subject to change; 30% deposit to confirm, balance 30 days before arrival (bookings within 14 days: full payment). Cancellation: 60–30 days 50%, 29–15 days 75%, 14–0 days 100%. Private game drives or boat cruises are compulsory for guests travelling with children under 12. The sheet does not mark any row as non-commissionable; Sustainability Levy, road/boat transfers, guide/pilot accommodation and lunch are carried here as non-commissionable (rack = net) by portal convention — confirm with African Monarch Journeys. Lodge address printed: Bwabwata National Park, Zambezi Region.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Green Season",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "7,919"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "no single supplement"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · child 0–5 sharing (25% of adult rate) — per child per night",
+       "1,980"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "3,960"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Fully Inclusive · adult — per person sharing per night",
+       "10,559"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Fully Inclusive · single supplement — add to the sharing rate",
+       "no single supplement"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Fully Inclusive · child 0–5 sharing (25% of adult rate) — per child per night",
+       "2,640"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Fully Inclusive · child 6–11 sharing (50% of adult rate) — per child per night",
+       "5,280"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Special Kids on Safari Package (6–12 years, 3-day junior ranger programme, minimum 3-night stay) — per child per night",
+       "7,550"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Bush Brunch (surcharge with DBB rate, minimum 6 pax) — per person",
+       "950"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Special Sundowner (surcharge with DBB rate, minimum 6 pax) — per person",
+       "650"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Romantic Picnic in the Bush (maximum 2 pax) — per person",
+       "650"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "7,500"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Peak Season",
+     "rows": [
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "9,416"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "2,825"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · child 0–5 sharing (25% of adult rate) — per child per night",
+       "2,354"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "4,708"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Fully Inclusive · adult — per person sharing per night",
+       "13,640"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Fully Inclusive · single supplement — add to the sharing rate",
+       "4,092"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Fully Inclusive · child 0–5 sharing (25% of adult rate) — per child per night",
+       "3,410"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Fully Inclusive · child 6–11 sharing (50% of adult rate) — per child per night",
+       "6,820"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Special Kids on Safari Package (6–12 years, 3-day junior ranger programme, minimum 3-night stay) — per child per night",
+       "7,550"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Bush Brunch (surcharge with DBB rate, minimum 6 pax) — per person",
+       "950"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Special Sundowner (surcharge with DBB rate, minimum 6 pax) — per person",
+       "650"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Romantic Picnic in the Bush (maximum 2 pax) — per person",
+       "650"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "9,500"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — levy, transfers, guide/pilot & meals (non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Sustainability Levy — per person per night",
+       "430"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Lunch (DBB guests) — per person",
+       "390"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Guide / Pilot · Dinner, Bed & Breakfast — per person per night",
+       "2,310"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Road Transfer to or from Immelman Airstrip — per person",
+       "750"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Boat Transfer to or from The Sijwa Project Parking — per person",
+       "410"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Boat Transfer to or from Kazile Boat Station — per person",
+       "495"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "kazile-island-lodge": {
+  "2026": {
+   "name": "Kazile Island Lodge",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027); Peak Season (Jul – Nov 2026) (as printed)",
+   "note": "2026 African Monarch Journeys – Lodges STO 20% Rates (Kazile Island Lodge page 3); all prices in N$; STO 20% (the sheet prints STO only). Sheet '2026 STO 20% RATES – DBB' for Kazile Island Lodge (page 3). DBB includes accommodation, dinner, breakfast, the short boat transfer to the island from Kazile Boat Station, VAT & NTB levy; excludes lunch, beverages, activities, sustainability levy, special experiences, park fees, other transfers, laundry. Children under 12 = 50% of the per person sharing rate (the rate row is headed child 6–11; no 0–5 rate printed). Vehicles can be parked at Kazile Boat Station. Transfer rows: the sheet does not say per person or per vehicle — labelled per person as a working assumption, to confirm. Rates are subject to change; 30% deposit to confirm, balance 30 days before arrival (bookings within 14 days: full payment). Cancellation: 60–30 days 50%, 29–15 days 75%, 14–0 days 100%. Private game drives or boat cruises are compulsory for guests travelling with children under 12. The sheet does not mark any row as non-commissionable; Sustainability Levy, road/boat transfers, guide/pilot accommodation and lunch are carried here as non-commissionable (rack = net) by portal convention — confirm with African Monarch Journeys. Lodge address printed: Bwabwata National Park, Zambezi Region.",
+   "sections": [
+    {
+     "title": "2026 — net STO · Green Season",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "4480"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "1344"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "2240"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Private Vehicle 4 seats (by prior arrangement only) — per game drive / boat cruise",
+       "3500"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "7500"
+      ]
+     ]
+    },
+    {
+     "title": "2026 — net STO · Peak Season",
+     "rows": [
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "5520"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "1656"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "2760"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Private Vehicle 4 seats (by prior arrangement only) — per game drive / boat cruise",
+       "3900"
+      ],
+      [
+       "Peak Season (Jul – Nov 2026) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "9500"
+      ]
+     ]
+    },
+    {
+     "title": "2026 — levy, transfers, guide/pilot & meals (non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Sustainability Levy — per person per night",
+       "390"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Lunch — per person",
+       "290"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Guide / Pilot · Dinner, Bed & Breakfast — per person per night",
+       "2100"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Transfer to or from Immelman Airstrip — per person",
+       "950"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Transfers to or from The Sijwa Project Parking — per person",
+       "395"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2026; Jan – Mar 2027) and Peak Season (Jul – Nov 2026) · Boat Transfer to or from Kapako Boat Station — to confirm (row printed with no price on the sheet)",
+       "to confirm"
+      ]
+     ]
+    }
+   ]
+  },
+  "2027": {
+   "name": "Kazile Island Lodge",
+   "region": "Caprivi",
+   "currency": "N$",
+   "validity": "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028); Peak Season (Jul – Nov 2027) (as printed)",
+   "note": "2027 African Monarch Journeys – Lodges STO 20% Rates (Kazile Island Lodge page 3); all prices in N$; STO 20% (the sheet prints STO only). Sheet '2027 STO 20% RATES – DBB' for Kazile Island Lodge (page 3). DBB includes accommodation, dinner, breakfast, the short boat transfer to the island from Kazile Boat Station, VAT & NTB levy; excludes lunch, beverages, activities, sustainability levy, special experiences, park fees, other transfers, laundry. Children under 12 = 50% of the per person sharing rate (the rate row is headed child 6–11; no 0–5 rate printed). Vehicles can be parked at Kazile Boat Station. Transfer rows: the sheet does not say per person or per vehicle — labelled per person as a working assumption, to confirm. The 2027 sheet no longer lists the Kapako Boat Station transfer or the 4-seat private vehicle. Rates are subject to change; 30% deposit to confirm, balance 30 days before arrival (bookings within 14 days: full payment). Cancellation: 60–30 days 50%, 29–15 days 75%, 14–0 days 100%. Private game drives or boat cruises are compulsory for guests travelling with children under 12. The sheet does not mark any row as non-commissionable; Sustainability Levy, road/boat transfers, guide/pilot accommodation and lunch are carried here as non-commissionable (rack = net) by portal convention — confirm with African Monarch Journeys. Lodge address printed: Bwabwata National Park, Zambezi Region.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Green Season",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "5,242"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "1,572"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "2,621"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "7,500"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · Peak Season",
+     "rows": [
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · adult — per person sharing per night",
+       "6,458"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · single supplement — add to the sharing rate",
+       "1,938"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Dinner, Bed & Breakfast · child 6–11 sharing (50% of adult rate) — per child per night",
+       "3,229"
+      ],
+      [
+       "Peak Season (Jul – Nov 2027) · Private Vehicle 9 seats (by prior arrangement only) — per game drive / boat cruise",
+       "9,500"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — levy, transfers, guide/pilot & meals (non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Sustainability Levy — per person per night",
+       "430"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Lunch — per person",
+       "320"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Guide / Pilot · Dinner, Bed & Breakfast — per person per night",
+       "2,310"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Transfer to or from Immelman Airstrip — per person",
+       "950"
+      ],
+      [
+       "Green Season (Apr, May, Jun, Dec 2027; Jan – Mar 2028) and Peak Season (Jul – Nov 2027) · Transfers to or from The Sijwa Project Parking — per person",
+       "395"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "lapa-lange-game-lodge": {
+  "2027": {
+   "name": "Lapa Lange Game Lodge",
+   "region": "Kalahari",
+   "currency": "N$",
+   "validity": "01 Nov 2026 – 31 Oct 2027 (as printed)",
+   "note": "Lapa Lange Game Lodge 'RACK & STO RATES 2027', valid from 01.11.2026 till 31.10.2027, values in N$. Sheet prints both rack and STO (25%) columns for accommodation — both loaded as printed, nothing derived (STO = rack × 0.75 checks on every row). Guide room/tent, extra bed, camping, meals and activities are printed with STO 'N/A' — carried as non-commissionable, rack = net. All accommodation is B&B; 2% tourism levy included in the B&B rates. Child policy (T&C page 2): 0–3 free; 4–12 sharing with parents 50% of the per person rack rate; children in their own room full adult rate; single parent with one child pays the single rate plus the child rate. Payment: 50% deposit to confirm, balance 30 days before arrival. Cancellation: 31+ days 10% of deposit (admin), 30 days 50% of invoice, 2 weeks 75%, under 2 weeks 100%. Realtime availability via www.gamelodgenamibia.com. Note the mixed basis on the sheet: Luxury Rooms and Superior Suites are per room (double) but per person (single); Luxury Tents are priced per tent by number of pax.",
+   "sections": [
+    {
+     "title": "2027 — net STO (25%) · Accommodation (B&B)",
+     "rows": [
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Luxury Rooms (14 rooms) · B&B · double (max 2 pax) — per room per night",
+       "3,648.75"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Luxury Rooms (14 rooms) · B&B · single — per person per night",
+       "2,351.25"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Superior Suites (4 suites) · B&B · double (max 2 pax) — per room per night",
+       "3,896.25"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Superior Suites (4 suites) · B&B · single — per person per night",
+       "2,711.25"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Premium Waterhole Chalets (6 chalets) · B&B · max 2 pax — per unit per night",
+       "4,368.75"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Premium Luxury Villa (1 villa) · B&B · max 2 pax — per unit per night",
+       "5,486.25"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Executive Villa (1 villa) · B&B · max 2 pax — per unit per night",
+       "6,288.75"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Glamping (2 units) · B&B · max 2 pax — per unit per night",
+       "3,168.75"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Luxury Tents (2 tents) · B&B · 1 pax — per tent per night",
+       "1,241.25"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Luxury Tents (2 tents) · B&B · 2 pax — per tent per night",
+       "1,863.75"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Luxury Tents (2 tents) · B&B · 3 pax — per tent per night",
+       "2,272.50"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Luxury Tents (2 tents) · B&B · 4 pax — per tent per night",
+       "2,478.75"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — guide, extra bed, camping, meals & activities (STO N/A on the sheet, rack = net)",
+     "rows": [
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Guide Room/Tent · B&B — per person per night",
+       "855.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Extra Bed · B&B — per person per night",
+       "970.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Camping · self-catering — per person per day",
+       "360.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Camping · self-catering · child 4–12 — per child per day",
+       "185.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Light Lunch — per person",
+       "235.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Lunch Packs — per person",
+       "215.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Dinner — per person",
+       "485.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Dinner · child 4–12 — per child",
+       "245.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Sundowner Game Drive (incl. drinks & snacks, starts about 2 hours before sunset) — per person",
+       "815.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Morning Game Drive (incl. coffee & tea, starts about 30 min before sunrise) — per person",
+       "815.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Hiking Trail (walking) in the game reserve, without guide — per person",
+       "free"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Bushman Walk — per person",
+       "615.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · Cheetah Feeding — per person",
+       "430.00"
+      ],
+      [
+       "Valid 01 Nov 2026 – 31 Oct 2027 · SPA Treatment — per person",
+       "on request"
+      ]
+     ]
+    }
+   ]
+  }
+ },
+ "okahirongo-elephant-lodge": {
+  "2027": {
+   "name": "Okahirongo Elephant Lodge",
+   "region": "Kaokoland",
+   "currency": "N$",
+   "validity": "03 Jan 2027 – 02 Jan 2028 (closed 1–28 Feb 2027), as printed",
+   "note": "A&K Sanctuary Southern Africa '2027 - Rates - 20%', last updated 17/08/2026; Namibia section pages 16–21, 'Namibia 20% Rates 2027 (Namibian Dollar)'. Rates are the 20% (STO) rates as printed; net of 20% commission per the sheet title. Rates are N$ per person per night (Two-bedroom Suite per unit, max 4) and include VAT. Fully inclusive: all meals, non-alcoholic and alcoholic beverages incl. premium brands, transfers to/from the nearest local airstrip, laundry, emergency medical evacuation, twice-daily activities (scenic drives, Himba village visit, Clay Castle visit, sundowners, stargazing, guided e-bike excursion from 14 years, local village tour). Excludes international and internal flights, road transfers to other camps/lodges, insurance, boutique, gratuities. Night bands (1–3, 4–6, 7+) are long-stay rates counted over the total A&K Sanctuary stay on one itinerary (not necessarily consecutive, any A&K camp in Africa). Closed annually 1–28 Feb 2027. No triples or extra adults in the suites. Children of all ages welcome; 15 and younger share with an adult; private vehicle compulsory for scenic drives with children 5 and younger. Child rates: 6 and younger free; 7–15 sharing with one adult = adult rate, sharing with two adults = child rate; 16+ adult rate. Single occupancy charged at the listed single rates. Internal flights, road transfers, Himba visit and pilot/guide accommodation are printed under 'Additional Services' as net — carried rack = net. Guide rooms: 4 rooms for 8 guides/pilots sharing, meals and non-alcoholic drinks only, subject to availability. Payment: non-refundable 20% deposit within 7 days, balance 60 days before arrival. Cancellation: more than 60 days 20%, 60–31 days 50%, under 31 days 100%. Annual offers printed in the sheet (honeymoon 50% off one guest, stay 5 pay 4, single supplement waiver, children stay free) carry their own terms — check the sheet before applying. Open queries with A&K: the single-occupancy note says no single supplement 01 Jan – 31 May and 01 Sep – 31 Dec 2027, but the rate table charges a higher single rate in Sep, Oct and 21–31 Dec; 2027 flights are dated 06 Jan 2027 – 05 Jan 2028 while road transfers are dated 01 Jan – 31 Dec 2027.",
+   "sections": [
+    {
+     "title": "2027 — net STO · Low season",
+     "rows": [
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 1–3 nights · fully inclusive — per person sharing",
+       "13,200"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 1–3 nights · fully inclusive — single (per person)",
+       "13,200"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 1–3 nights · child 7–15 sharing with two adults — per child",
+       "6,640"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 4–6 nights · fully inclusive — per person sharing",
+       "11,280"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 4–6 nights · fully inclusive — single (per person)",
+       "11,280"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 4–6 nights · child 7–15 sharing with two adults — per child",
+       "5,680"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 7+ nights · fully inclusive — per person sharing",
+       "9,920"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 7+ nights · fully inclusive — single (per person)",
+       "9,920"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Suite · 7+ nights · child 7–15 sharing with two adults — per child",
+       "4,960"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Two-bedroom Suite · 1–3 nights · fully inclusive · max 4 — per suite",
+       "43,600"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Two-bedroom Suite · 1–3 nights · child 7–15 sharing — per child",
+       "7,360"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Two-bedroom Suite · 4–6 nights · fully inclusive · max 4 — per suite",
+       "37,280"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Two-bedroom Suite · 4–6 nights · child 7–15 sharing — per child",
+       "6,320"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Two-bedroom Suite · 7+ nights · fully inclusive · max 4 — per suite",
+       "32,800"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2027) · Two-bedroom Suite · 7+ nights · child 7–15 sharing — per child",
+       "5,520"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — net STO · High season",
+     "rows": [
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 1–3 nights · fully inclusive — per person sharing",
+       "16,080"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 1–3 nights · fully inclusive — single (per person)",
+       "24,160"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 1–3 nights · child 7–15 sharing with two adults — per child",
+       "8,080"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 4–6 nights · fully inclusive — per person sharing",
+       "14,480"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 4–6 nights · fully inclusive — single (per person)",
+       "21,760"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 4–6 nights · child 7–15 sharing with two adults — per child",
+       "7,280"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 7+ nights · fully inclusive — per person sharing",
+       "13,680"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 7+ nights · fully inclusive — single (per person)",
+       "20,560"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Suite · 7+ nights · child 7–15 sharing with two adults — per child",
+       "6,880"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Two-bedroom Suite · 1–3 nights · fully inclusive · max 4 — per suite",
+       "70,800"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Two-bedroom Suite · 1–3 nights · child 7–15 sharing — per child",
+       "8,960"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Two-bedroom Suite · 4–6 nights · fully inclusive · max 4 — per suite",
+       "63,760"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Two-bedroom Suite · 4–6 nights · child 7–15 sharing — per child",
+       "8,080"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Two-bedroom Suite · 7+ nights · fully inclusive · max 4 — per suite",
+       "60,240"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2027; 21 Dec 2027 – 02 Jan 2028) · Two-bedroom Suite · 7+ nights · child 7–15 sharing — per child",
+       "7,600"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — internal flights, shared, incl. domestic airport taxes · valid 06 Jan 2027 – 05 Jan 2028 (net, non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Hosea Kutako International Airport (Windhoek) to Puros Airstrip · shared, min 2 — per person",
+       "25,551"
+      ],
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Puros Airstrip to Hosea Kutako International Airport (Windhoek) · shared, min 2 — per person",
+       "32,447"
+      ],
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Eros Airport to Puros Airstrip · shared, min 2 — per person",
+       "27,411"
+      ],
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Puros Airstrip to Eros Airport · shared, min 2 — per person",
+       "34,307"
+      ],
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Swakopmund Airport to Puros Airstrip · shared, min 2 — per person",
+       "20,900"
+      ],
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Puros Airstrip to Doro Nawas Airstrip · shared, min 2 — per person",
+       "20,045"
+      ],
+      [
+       "Valid 06 Jan 2027 – 05 Jan 2028 · Doro Nawas Airstrip to Swakopmund Airport · private charter, max 4 guests — per flight",
+       "on request"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — road transfers · valid 01 Jan – 31 Dec 2027 (net, non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Eros Airport to Hosea Kutako International Airport (Windhoek) · shared, min 2 — per person",
+       "240"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Hosea Kutako International Airport (Windhoek) to Eros Airport · shared, min 2 — per person",
+       "240"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Walvis Bay International Airport to Swakopmund Airport · shared, min 2 — per person",
+       "529"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Walvis Bay to Swakopmund · shared, min 2 — per person",
+       "506"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Okahirongo Elephant Lodge to Sesfontein (5 hours, departure no later than 09:00) · max 3 — per vehicle",
+       "3,300"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Sesfontein to Okahirongo Elephant Lodge (5 hours, departure no later than 13:00) · max 3 — per vehicle",
+       "3,300"
+      ]
+     ]
+    },
+    {
+     "title": "2027 — activities & pilot/guide accommodation · valid 01 Jan – 31 Dec 2027 (net, non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Himba Village Visit — per person",
+       "voluntary contribution"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2027 · Pilot / Guide in a Guide Room (Jan – Dec 2027; meals & non-alcoholic drinks) — per person per night",
+       "1,750"
+      ],
+      [
+       "Pilot / Guide in a Guest Suite (03 Jan – 30 Jun and 01 Nov – 20 Dec 2027; meals, non-alcoholic drinks & activities) — per person per night",
+       "4,410"
+      ],
+      [
+       "Pilot / Guide in a Guest Suite (01 Jul – 31 Oct 2027 and 21 Dec 2027 – 02 Jan 2028) — per person per night",
+       "5,810"
+      ]
+     ]
+    }
+   ]
+  },
+  "2028": {
+   "name": "Okahirongo Elephant Lodge",
+   "region": "Kaokoland",
+   "currency": "N$",
+   "validity": "03 Jan 2028 – 02 Jan 2029 (closed 1–28 Feb 2028), as printed",
+   "note": "A&K Sanctuary Southern Africa '2028 - Rates - 20%', last updated 17/08/2026; Namibia section pages 16–21, 'Namibia 20% Rates 2028 (Namibian Dollar)'. Rates are the 20% (STO) rates as printed; net of 20% commission per the sheet title. Rates are N$ per person per night (Two-bedroom Suite per unit, max 4) and include VAT. Fully inclusive: all meals, non-alcoholic and alcoholic beverages incl. premium brands, transfers to/from the nearest local airstrip, laundry, emergency medical evacuation, twice-daily activities (scenic drives, Himba village visit, Clay Castle visit, sundowners, stargazing, guided e-bike excursion from 14 years, local village tour). Excludes international and internal flights, road transfers to other camps/lodges, insurance, boutique, gratuities. Night bands (1–3, 4–6, 7+) are long-stay rates counted over the total A&K Sanctuary stay on one itinerary (not necessarily consecutive, any A&K camp in Africa). Closed annually 1–28 Feb 2028. No triples or extra adults in the suites. Children of all ages welcome; 15 and younger share with an adult; private vehicle compulsory for scenic drives with children 5 and younger. Child rates: 6 and younger free; 7–15 sharing with one adult = adult rate, sharing with two adults = child rate; 16+ adult rate. Single occupancy charged at the listed single rates. Internal flights, road transfers, Himba visit and pilot/guide accommodation are printed under 'Additional Services' as net — carried rack = net. Guide rooms: 4 rooms for 8 guides/pilots sharing, meals and non-alcoholic drinks only, subject to availability. Payment: non-refundable 20% deposit within 7 days, balance 60 days before arrival. Cancellation: more than 60 days 20%, 60–31 days 50%, under 31 days 100%. Annual offers printed in the sheet (honeymoon 50% off one guest, stay 5 pay 4, single supplement waiver, children stay free) carry their own terms — check the sheet before applying. Open queries with A&K: the single-occupancy note says no single supplement 01 Jan – 31 May and 01 Sep – 31 Dec 2028, but the rate table charges a higher single rate in Sep, Oct and 21–31 Dec; the 2028 sheet's pilot/guide guest-suite row still reads '21 December to 2 January 2028' (should be 2029) and all 2028 flight and road transfer prices are 'Price on request'.",
+   "sections": [
+    {
+     "title": "2028 — net STO · Low season",
+     "rows": [
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 1–3 nights · fully inclusive — per person sharing",
+       "13,600"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 1–3 nights · fully inclusive — single (per person)",
+       "13,600"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 1–3 nights · child 7–15 sharing with two adults — per child",
+       "6,800"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 4–6 nights · fully inclusive — per person sharing",
+       "11,600"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 4–6 nights · fully inclusive — single (per person)",
+       "11,600"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 4–6 nights · child 7–15 sharing with two adults — per child",
+       "5,840"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 7+ nights · fully inclusive — per person sharing",
+       "10,240"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 7+ nights · fully inclusive — single (per person)",
+       "10,240"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Suite · 7+ nights · child 7–15 sharing with two adults — per child",
+       "5,120"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Two-bedroom Suite · 1–3 nights · fully inclusive · max 4 — per suite",
+       "44,880"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Two-bedroom Suite · 1–3 nights · child 7–15 sharing — per child",
+       "7,520"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Two-bedroom Suite · 4–6 nights · fully inclusive · max 4 — per suite",
+       "38,320"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Two-bedroom Suite · 4–6 nights · child 7–15 sharing — per child",
+       "6,480"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Two-bedroom Suite · 7+ nights · fully inclusive · max 4 — per suite",
+       "33,840"
+      ],
+      [
+       "Low season (03–31 Jan, 01 Mar – 30 Jun, 01 Nov – 20 Dec 2028) · Two-bedroom Suite · 7+ nights · child 7–15 sharing — per child",
+       "5,680"
+      ]
+     ]
+    },
+    {
+     "title": "2028 — net STO · High season",
+     "rows": [
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 1–3 nights · fully inclusive — per person sharing",
+       "16,640"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 1–3 nights · fully inclusive — single (per person)",
+       "24,960"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 1–3 nights · child 7–15 sharing with two adults — per child",
+       "8,320"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 4–6 nights · fully inclusive — per person sharing",
+       "15,040"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 4–6 nights · fully inclusive — single (per person)",
+       "22,560"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 4–6 nights · child 7–15 sharing with two adults — per child",
+       "7,520"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 7+ nights · fully inclusive — per person sharing",
+       "14,160"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 7+ nights · fully inclusive — single (per person)",
+       "21,280"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Suite · 7+ nights · child 7–15 sharing with two adults — per child",
+       "7,120"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Two-bedroom Suite · 1–3 nights · fully inclusive · max 4 — per suite",
+       "73,280"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Two-bedroom Suite · 1–3 nights · child 7–15 sharing — per child",
+       "9,200"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Two-bedroom Suite · 4–6 nights · fully inclusive · max 4 — per suite",
+       "66,240"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Two-bedroom Suite · 4–6 nights · child 7–15 sharing — per child",
+       "8,320"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Two-bedroom Suite · 7+ nights · fully inclusive · max 4 — per suite",
+       "62,320"
+      ],
+      [
+       "High season (01 Jul – 31 Oct 2028; 21 Dec 2028 – 02 Jan 2029) · Two-bedroom Suite · 7+ nights · child 7–15 sharing — per child",
+       "7,840"
+      ]
+     ]
+    },
+    {
+     "title": "2028 — internal flights, shared, incl. domestic airport taxes · valid 01 Jan – 31 Dec 2028 (net, non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Hosea Kutako International Airport (Windhoek) to Puros Airstrip · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Puros Airstrip to Hosea Kutako International Airport (Windhoek) · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Eros Airport to Puros Airstrip · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Puros Airstrip to Eros Airport · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Swakopmund Airport to Puros Airstrip · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Puros Airstrip to Doro Nawas Airstrip · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Doro Nawas Airstrip to Swakopmund Airport · private charter, max 4 guests — per flight",
+       "on request"
+      ]
+     ]
+    },
+    {
+     "title": "2028 — road transfers · valid 01 Jan – 31 Dec 2028 (net, non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Eros Airport to Hosea Kutako International Airport (Windhoek) · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Hosea Kutako International Airport (Windhoek) to Eros Airport · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Walvis Bay International Airport to Swakopmund Airport · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Walvis Bay to Swakopmund · shared, min 2 — per person",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Okahirongo Elephant Lodge to Sesfontein (5 hours, departure no later than 09:00) · max 3 — per vehicle",
+       "on request"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Sesfontein to Okahirongo Elephant Lodge (5 hours, departure no later than 13:00) · max 3 — per vehicle",
+       "on request"
+      ]
+     ]
+    },
+    {
+     "title": "2028 — activities & pilot/guide accommodation · valid 01 Jan – 31 Dec 2028 (net, non-commissionable, rack = net)",
+     "rows": [
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Himba Village Visit — per person",
+       "voluntary contribution"
+      ],
+      [
+       "Valid 01 Jan – 31 Dec 2028 · Pilot / Guide in a Guide Room (Jan – Dec 2028; meals & non-alcoholic drinks) — per person per night",
+       "1,750"
+      ],
+      [
+       "Pilot / Guide in a Guest Suite (03 Jan – 30 Jun and 01 Nov – 20 Dec 2028; meals, non-alcoholic drinks & activities) — per person per night",
+       "4,410"
+      ],
+      [
+       "Pilot / Guide in a Guest Suite (01 Jul – 31 Oct 2028 and 21 Dec 2028 – 02 Jan 2029) — per person per night",
+       "5,810"
+      ]
+     ]
+    }
+   ]
+  }
+ }
+};
+  if (typeof DDS_STO_BY_YEAR === 'undefined') return;
+  var LOWER = [(typeof LEGACY_STO_BY_YEAR === 'undefined' ? null : LEGACY_STO_BY_YEAR), (typeof SHEET_STO_BY_YEAR === 'undefined' ? null : SHEET_STO_BY_YEAR)];
+  Object.keys(V).forEach(function (slug) {
+    var e = DDS_STO_BY_YEAR[slug] || (DDS_STO_BY_YEAR[slug] = {});
+    LOWER.forEach(function (m) { if (m && m[slug]) Object.keys(m[slug]).forEach(function (y) { if (!e[y]) e[y] = m[slug][y]; }); });
+    Object.keys(V[slug]).forEach(function (y) { if (!e[y]) e[y] = V[slug][y]; });
+  });
+})();
