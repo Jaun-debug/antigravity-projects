@@ -12,6 +12,7 @@ var ACTIVITY_PROVIDERS=[
  {region:"Swakopmund",name:"Infinite African Safaris",id:"infinite"},
  {region:"Swakopmund",name:"Living Desert Adventures",id:"livingdesert"},
  {region:"Swakopmund",name:"Sand Waves",id:"sandwaves"},
+ {region:"Swakopmund",name:"Sandy Horizon",id:"sandyhorizon"},
  {region:"Walvis Bay",name:"Mola Mola Safaris",id:"molamola"},
  {region:"L\u00fcderitz",name:"Bogenfels Tours",id:"bogenfels"},
  {region:"Botswana",name:"Wilderness Botswana",id:"wildernessbw"},
