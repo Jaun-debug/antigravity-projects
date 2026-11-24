@@ -52192,3 +52192,13 @@ Object.assign(DDS_STO_BY_YEAR, {
     Object.keys(D[slug]).forEach(function (y) { e[y] = D[slug][y]; });
   });
 })();
+
+
+// OL_CHOBE_CHILD_241126 — Chobe Water Villas child label back to 13–17 (O&L card policy page: no children 12 and
+// under; 13–17 sharing at 75% of the adult rate). Figures unchanged.
+(function olChobeChild241126() {
+  if (typeof DDS_STO_BY_YEAR === "undefined") return;
+  var e = DDS_STO_BY_YEAR["chobe-water-villas-zambezi"]; if (!e) return;
+  Object.keys(e).forEach(function (y) { ((e[y] && e[y].sections) || []).forEach(function (s) {
+    s.title = String(s.title).replace("1 Child 6–12 Yrs Sharing Adult", "1 Child 13–17 Yrs Sharing Adult"); }); });
+})();
