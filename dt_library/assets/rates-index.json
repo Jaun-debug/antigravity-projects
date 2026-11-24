@@ -339,15 +339,15 @@
 "p": 11629
 },
 {
-"n": "Full Inclusive — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Full Inclusive — 1 Child 6–12 Yrs Sharing Adult",
 "p": 13233
 },
 {
-"n": "Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 5534
 },
 {
-"n": "Dinner, Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Dinner, Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 5955
 }
 ],
@@ -377,15 +377,15 @@
 "p": 11629
 },
 {
-"n": "Full Inclusive — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Full Inclusive — 1 Child 6–12 Yrs Sharing Adult",
 "p": 13233
 },
 {
-"n": "Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 5534
 },
 {
-"n": "Dinner, Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Dinner, Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 5955
 }
 ],
@@ -415,15 +415,15 @@
 "p": 14536
 },
 {
-"n": "Full Inclusive — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Full Inclusive — 1 Child 6–12 Yrs Sharing Adult",
 "p": 16541
 },
 {
-"n": "Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 6917
 },
 {
-"n": "Dinner, Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Dinner, Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 7444
 }
 ],
@@ -453,15 +453,15 @@
 "p": 14536
 },
 {
-"n": "Full Inclusive — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Full Inclusive — 1 Child 6–12 Yrs Sharing Adult",
 "p": 16541
 },
 {
-"n": "Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 6917
 },
 {
-"n": "Dinner, Bed & Breakfast — 1 Child 13–17 Yrs Sharing Adult",
+"n": "Dinner, Bed & Breakfast — 1 Child 6–12 Yrs Sharing Adult",
 "p": 7444
 }
 ]
@@ -493,59 +493,71 @@
 },
 {
 "n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
-"p": 1011
+"p": 2140
+},
+{
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
+"p": 3312
+},
+{
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
+"p": 4424
+},
+{
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2015
 }
 ],
 "rates_2027": [
 {
-"n": "Luxury Chalets — Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
 "p": 3312
 },
 {
-"n": "Luxury Chalets — Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
 "p": 4424
 },
 {
-"n": "Luxury Chalets — Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
-"p": 828
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2015
 },
 {
-"n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
-"p": 4044
+"n": "Luxury Chalets — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · DBL/Sharing DBB",
+"p": 4246
 },
 {
-"n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · Single DBB",
-"p": 5280
+"n": "Luxury Chalets — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · Single DBB",
+"p": 5482
 },
 {
-"n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
-"p": 1011
+"n": "Luxury Chalets — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1062
 }
 ],
 "rack_2027": [
 {
-"n": "Luxury Chalets — Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
 "p": 4140
 },
 {
-"n": "Luxury Chalets — Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
 "p": 5530
 },
 {
-"n": "Luxury Chalets — Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
-"p": 1035
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2015
 },
 {
-"n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
-"p": 5055
+"n": "Luxury Chalets — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · DBL/Sharing DBB",
+"p": 5308
 },
 {
-"n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · Single DBB",
-"p": 6600
+"n": "Luxury Chalets — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · Single DBB",
+"p": 6853
 },
 {
-"n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
-"p": 1264
+"n": "Luxury Chalets — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1327
 }
 ],
 "rack_2026": [
@@ -571,7 +583,19 @@
 },
 {
 "n": "Luxury Chalets — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
-"p": 1264
+"p": 2140
+},
+{
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
+"p": 4140
+},
+{
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
+"p": 5530
+},
+{
+"n": "Luxury Chalets — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2015
 }
 ]
 },
@@ -10245,7 +10269,7 @@
 "p": 4046
 },
 {
-"n": "Luxury Room — DBL/Sharing BB",
+"n": "Junior Suite — DBL/Sharing BB",
 "p": 4573
 },
 {
@@ -10261,7 +10285,7 @@
 "p": 4474
 },
 {
-"n": "Luxury Room — DBL/Sharing DBB",
+"n": "Junior Suite — DBL/Sharing DBB",
 "p": 5001
 },
 {
@@ -10277,7 +10301,7 @@
 "p": 6473
 },
 {
-"n": "Luxury Room — Single BB",
+"n": "Junior Suite — Single BB",
 "p": 7317
 },
 {
@@ -10293,7 +10317,7 @@
 "p": 6901
 },
 {
-"n": "Luxury Room — Single DBB",
+"n": "Junior Suite — Single DBB",
 "p": 7745
 },
 {
@@ -10301,35 +10325,35 @@
 "p": 14499
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 879
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 BB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs BB",
 "p": 1011
 },
 {
-"n": "Luxury Room — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 1143
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 2199
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 986
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 DBB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs DBB",
 "p": 1118
 },
 {
-"n": "Luxury Room — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1250
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 2306
 }
 ],
@@ -10343,7 +10367,7 @@
 "p": 4046
 },
 {
-"n": "Luxury Room — DBL/Sharing BB",
+"n": "Junior Suite — DBL/Sharing BB",
 "p": 4573
 },
 {
@@ -10359,7 +10383,7 @@
 "p": 4474
 },
 {
-"n": "Luxury Room — DBL/Sharing DBB",
+"n": "Junior Suite — DBL/Sharing DBB",
 "p": 5001
 },
 {
@@ -10375,7 +10399,7 @@
 "p": 6473
 },
 {
-"n": "Luxury Room — Single BB",
+"n": "Junior Suite — Single BB",
 "p": 7317
 },
 {
@@ -10391,7 +10415,7 @@
 "p": 6901
 },
 {
-"n": "Luxury Room — Single DBB",
+"n": "Junior Suite — Single DBB",
 "p": 7745
 },
 {
@@ -10399,35 +10423,35 @@
 "p": 14499
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 879
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 BB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs BB",
 "p": 1011
 },
 {
-"n": "Luxury Room — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 1143
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 2199
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 986
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 DBB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs DBB",
 "p": 1118
 },
 {
-"n": "Luxury Room — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1250
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 2306
 }
 ],
@@ -10441,7 +10465,7 @@
 "p": 5057
 },
 {
-"n": "Luxury Room — DBL/Sharing BB",
+"n": "Junior Suite — DBL/Sharing BB",
 "p": 5716
 },
 {
@@ -10457,7 +10481,7 @@
 "p": 5592
 },
 {
-"n": "Luxury Room — DBL/Sharing DBB",
+"n": "Junior Suite — DBL/Sharing DBB",
 "p": 6251
 },
 {
@@ -10473,7 +10497,7 @@
 "p": 8091
 },
 {
-"n": "Luxury Room — Single BB",
+"n": "Junior Suite — Single BB",
 "p": 9146
 },
 {
@@ -10489,7 +10513,7 @@
 "p": 8626
 },
 {
-"n": "Luxury Room — Single DBB",
+"n": "Junior Suite — Single DBB",
 "p": 9681
 },
 {
@@ -10497,35 +10521,35 @@
 "p": 18124
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 1099
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 BB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs BB",
 "p": 1264
 },
 {
-"n": "Luxury Room — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 1429
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 2748
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 1233
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 DBB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs DBB",
 "p": 1398
 },
 {
-"n": "Luxury Room — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1563
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 2882
 }
 ],
@@ -10539,7 +10563,7 @@
 "p": 5057
 },
 {
-"n": "Luxury Room — DBL/Sharing BB",
+"n": "Junior Suite — DBL/Sharing BB",
 "p": 5716
 },
 {
@@ -10555,7 +10579,7 @@
 "p": 5592
 },
 {
-"n": "Luxury Room — DBL/Sharing DBB",
+"n": "Junior Suite — DBL/Sharing DBB",
 "p": 6251
 },
 {
@@ -10571,7 +10595,7 @@
 "p": 8091
 },
 {
-"n": "Luxury Room — Single BB",
+"n": "Junior Suite — Single BB",
 "p": 9146
 },
 {
@@ -10587,7 +10611,7 @@
 "p": 8626
 },
 {
-"n": "Luxury Room — Single DBB",
+"n": "Junior Suite — Single DBB",
 "p": 9681
 },
 {
@@ -10595,35 +10619,35 @@
 "p": 18124
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 1099
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 BB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs BB",
 "p": 1264
 },
 {
-"n": "Luxury Room — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 1429
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 2748
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 1233
 },
 {
-"n": "Deluxe Room — 1 Child 7–13 DBB",
+"n": "Deluxe Room — 1 Child 6–12 Yrs DBB",
 "p": 1398
 },
 {
-"n": "Luxury Room — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1563
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 2882
 }
 ]
@@ -21381,11 +21405,11 @@
 "p": 4561
 },
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
+"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
 "p": 774
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
+"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
 "p": 855
 },
 {
@@ -21405,112 +21429,136 @@
 "p": 5540
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 948
+"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2290
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1050
+"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2570
+},
+{
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
+"p": 3096
+},
+{
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
+"p": 3420
+},
+{
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
+"p": 4136
+},
+{
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
+"p": 4561
+},
+{
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1890
+},
+{
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2085
 }
 ],
 "rates_2027": [
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
 "p": 3096
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
 "p": 3420
 },
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
 "p": 4136
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
 "p": 4561
 },
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 774
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1890
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 855
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2085
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
-"p": 3792
+"n": "Camelthorn Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · DBL/Sharing DBB",
+"p": 3982
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
-"p": 4200
+"n": "Oasis Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · DBL/Sharing DBB",
+"p": 4410
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · Single DBB",
-"p": 5012
+"n": "Camelthorn Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · Single DBB",
+"p": 5202
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · Single DBB",
-"p": 5540
+"n": "Oasis Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · Single DBB",
+"p": 5750
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 948
+"n": "Camelthorn Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 995
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1050
+"n": "Oasis Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1103
 }
 ],
 "rack_2027": [
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
 "p": 3870
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · DBL/Sharing DBB",
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
 "p": 4275
 },
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
 "p": 5170
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · Single DBB",
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
 "p": 5701
 },
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 968
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1890
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1069
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2085
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
-"p": 4740
+"n": "Camelthorn Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · DBL/Sharing DBB",
+"p": 4977
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · DBL/Sharing DBB",
-"p": 5250
+"n": "Oasis Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · DBL/Sharing DBB",
+"p": 5513
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · Single DBB",
-"p": 6265
+"n": "Camelthorn Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · Single DBB",
+"p": 6502
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · Single DBB",
-"p": 6925
+"n": "Oasis Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · Single DBB",
+"p": 7188
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1185
+"n": "Camelthorn Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1244
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1313
+"n": "Oasis Room — Jul 2027 – Jun 2028 — 01.07.27 to 30.06.2028 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1378
 }
 ],
 "rack_2026": [
@@ -21531,11 +21579,11 @@
 "p": 5701
 },
 {
-"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
+"n": "Camelthorn Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
 "p": 968
 },
 {
-"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 13–17 Yrs Sharing Adult",
+"n": "Oasis Room — Low Season — 01.01.26 to 30.06.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
 "p": 1069
 },
 {
@@ -21555,12 +21603,36 @@
 "p": 6925
 },
 {
-"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1185
+"n": "Camelthorn Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2290
 },
 {
-"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 13–17 Yrs Sharing Adult",
-"p": 1313
+"n": "Oasis Room — High Season — 01.07.26 to 30.11.2026 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2570
+},
+{
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
+"p": 3870
+},
+{
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · DBL/Sharing DBB",
+"p": 4275
+},
+{
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
+"p": 5170
+},
+{
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · Single DBB",
+"p": 5701
+},
+{
+"n": "Camelthorn Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 1890
+},
+{
+"n": "Oasis Room — Low Season — 01.12.26 to 30.06.2027 · 1 Child 6–12 Yrs DBB Sharing Adult",
+"p": 2085
 }
 ]
 },
@@ -30467,58 +30539,58 @@
 },
 {
 "n": "Luxury Suite — Single BB",
-"p": 9006
+"p": 9005
 },
 {
 "n": "Presidential Suite — Single BB",
 "p": 14071
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 879
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 939
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1055
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1115
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1143
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1407
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 2638
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 2818
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3166
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3346
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3430
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 4222
 }
 ],
@@ -30573,58 +30645,58 @@
 },
 {
 "n": "Luxury Suite — Single BB",
-"p": 9006
+"p": 9005
 },
 {
 "n": "Presidential Suite — Single BB",
 "p": 14071
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 879
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 939
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1055
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1115
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1143
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1407
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 2638
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 2818
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3166
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3346
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3430
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 4222
 }
 ],
@@ -30686,51 +30758,51 @@
 "p": 17589
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1099
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1174
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1319
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1394
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1429
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1759
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3298
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3523
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3958
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 4183
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 4287
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 5277
 }
 ],
@@ -30792,51 +30864,51 @@
 "p": 17589
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1099
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1174
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1319
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1394
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1429
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sharing Adult",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sharing Adult",
 "p": 1759
 },
 {
-"n": "Standard Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3298
 },
 {
-"n": "Standard Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Standard Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3523
 },
 {
-"n": "Luxury Rooms — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Rooms — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 3958
 },
 {
-"n": "Luxury Sea Facing — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Sea Facing — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 4183
 },
 {
-"n": "Junior Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 4287
 },
 {
-"n": "Luxury Suite — 1 Child 7–13 Yrs BB Sgl Interleading",
+"n": "Luxury Suite — 1 Child 6–12 Yrs BB Sgl Interleading",
 "p": 5277
 }
 ]
@@ -34069,35 +34141,35 @@
 "p": 8653
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 618
 },
 {
-"n": "Family Room — 1 Child 7–13 BB",
+"n": "Family Room — 1 Child 6–12 Yrs BB",
 "p": 804
 },
 {
-"n": "Junior Suite — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 951
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 1177
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 771
 },
 {
-"n": "Family Room — 1 Child 7–13 DBB",
+"n": "Family Room — 1 Child 6–12 Yrs DBB",
 "p": 976
 },
 {
-"n": "Junior Suite — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1138
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 1386
 }
 ],
@@ -34167,35 +34239,35 @@
 "p": 8653
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 618
 },
 {
-"n": "Family Room — 1 Child 7–13 BB",
+"n": "Family Room — 1 Child 6–12 Yrs BB",
 "p": 804
 },
 {
-"n": "Junior Suite — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 951
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 1177
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 771
 },
 {
-"n": "Family Room — 1 Child 7–13 DBB",
+"n": "Family Room — 1 Child 6–12 Yrs DBB",
 "p": 976
 },
 {
-"n": "Junior Suite — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1138
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 1386
 }
 ],
@@ -34265,35 +34337,35 @@
 "p": 10816
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 773
 },
 {
-"n": "Family Room — 1 Child 7–13 BB",
+"n": "Family Room — 1 Child 6–12 Yrs BB",
 "p": 1005
 },
 {
-"n": "Junior Suite — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 1189
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 1471
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 964
 },
 {
-"n": "Family Room — 1 Child 7–13 DBB",
+"n": "Family Room — 1 Child 6–12 Yrs DBB",
 "p": 1220
 },
 {
-"n": "Junior Suite — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1422
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 1733
 }
 ],
@@ -34363,35 +34435,35 @@
 "p": 10816
 },
 {
-"n": "Standard Room — 1 Child 7–13 BB",
+"n": "Standard Room — 1 Child 6–12 Yrs BB",
 "p": 773
 },
 {
-"n": "Family Room — 1 Child 7–13 BB",
+"n": "Family Room — 1 Child 6–12 Yrs BB",
 "p": 1005
 },
 {
-"n": "Junior Suite — 1 Child 7–13 BB",
+"n": "Junior Suite — 1 Child 6–12 Yrs BB",
 "p": 1189
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 BB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs BB",
 "p": 1471
 },
 {
-"n": "Standard Room — 1 Child 7–13 DBB",
+"n": "Standard Room — 1 Child 6–12 Yrs DBB",
 "p": 964
 },
 {
-"n": "Family Room — 1 Child 7–13 DBB",
+"n": "Family Room — 1 Child 6–12 Yrs DBB",
 "p": 1220
 },
 {
-"n": "Junior Suite — 1 Child 7–13 DBB",
+"n": "Junior Suite — 1 Child 6–12 Yrs DBB",
 "p": 1422
 },
 {
-"n": "Presidential Suite — 1 Child 7–13 DBB",
+"n": "Presidential Suite — 1 Child 6–12 Yrs DBB",
 "p": 1733
 }
 ]
